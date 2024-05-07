@@ -1900,7 +1900,7 @@ export const docsMenu = {
                             url: '/docs/product-analytics/trends/overview',
                         },
                         {
-                            name: 'Chart types',
+                            name: 'Charts',
                             url: '/docs/product-analytics/trends/charts',
                         },
                         {
@@ -1918,10 +1918,6 @@ export const docsMenu = {
                         {
                             name: 'Formulas',
                             url: '/docs/product-analytics/trends/formulas',
-                        },
-                        {
-                            name: 'Chart types',
-                            url: '/docs/product-analytics/trends/charts',
                         },
                         {
                             name: 'Tips and tricks',

@@ -6,6 +6,8 @@ availability:
   enterprise: full
 ---
 
+import {ProductScreenshot} from 'components/ProductScreenshot'
+import {ProductVideo} from 'components/ProductVideo'
 export const newInsightsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/new-insight-light-mode.png"
 export const newInsightsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/new-insight-dark-mode.png"
 export const selectEventLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/select-event-light-mode.png"
@@ -22,6 +24,18 @@ export const displayOptionsLight = "https://res.cloudinary.com/dmukukwp6/image/u
 export const displayOptionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/display-options-dark-mode.png"
 export const insightsSourceLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/insights-source-light-mode.png"
 export const insightsSourceDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/insights-source-dark-mode.png"
+export const activeViewersLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099320/posthog.com/contents/docs/product-analytics/trends/active-viewers-light.png"
+export const activeViewersDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099316/posthog.com/contents/docs/product-analytics/trends/active-viewers-dark.png"
+export const activeViewersTrendLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099322/posthog.com/contents/docs/product-analytics/trends/active-viewers-trend-light.png"
+export const activeViewersTrendDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099318/posthog.com/contents/docs/product-analytics/trends/active-viewers-trend-dark.png"
+export const countryBreakdownLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099329/posthog.com/contents/docs/product-analytics/trends/country-breakdown-light.png"
+export const countryBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099326/posthog.com/contents/docs/product-analytics/trends/country-breakdown-dark.png"
+export const addtodashboardLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099342/posthog.com/contents/docs/product-analytics/trends/add-to-dashboard-light.png"
+export const addtodashboardDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099333/posthog.com/contents/docs/product-analytics/trends/add-to-dashboard-dark.png"
+export const insightexport = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099324/posthog.com/contents/docs/product-analytics/trends/active-viewers-export.png"
+export const addtonotebookLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1715099347/posthog.com/contents/docs/product-analytics/trends/add-to-notebook-light.mp4"
+export const addtonotebookDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1715099344/posthog.com/contents/docs/product-analytics/trends/add-to-notebook-dark.mp4"
+
 
 export const FilterIcon = () => <svg class="inline-block w-5 h-5 text-gray" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"><path d="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z" fill="currentColor"></path></svg>
 
@@ -53,15 +67,30 @@ You can also visualize the same data points in a variety of ways.
 
 Below is the number of active viewers on Hogflix, an imaginary streaming service for hedgehogs.
 
-[IMAGE HERE]
+<ProductScreenshot
+    imageLight = {activeViewersLight} 
+    imageDark = {activeViewersDark}
+    classes="rounded"
+    alt="Total value"
+/>
 
 This is a number chart, which is useful for seeing the total of all events in a given period, and how it's changed compared to the previous period.
 
-[IMAGE HERE]
+<ProductScreenshot
+    imageLight = {activeViewersTrendLight} 
+    imageDark = {activeViewersTrendDark}
+    classes="rounded"
+    alt="Trend"
+/>
 
 Above is the same metric, active viewers of Hogflix, over the last 90 days and grouped by week.
 
-[IMAGE HERE]
+<ProductScreenshot
+    imageLight = {countryBreakdownLight} 
+    imageDark = {countryBreakdownDark}
+    classes="rounded"
+    alt="Country breakdown"
+/>
 
 And you can break down these users by properties, like in the above bar chart that shows Hogflix viewers broken down by country.
 
@@ -113,7 +142,7 @@ To add a filter to an event series, click on the <FilterIcon /> icon next to the
 
 This will bring up a dropdown where you can search through all event properties and choose the one you would like to filter based on. 
 
-REPLACE THIS WITH VIDEO
+TODO: REPLACE THIS WITH VIDEO
 
 <ProductScreenshot
     imageLight = {basicFilterLight} 
@@ -124,15 +153,15 @@ REPLACE THIS WITH VIDEO
 
 In this example, we've chosen the `Latest Device Type` property, so that we can plot data for `Desktop` users only.
 
-ADD VIDEO HERE
+TODO: ADD VIDEO HERE
 
 If we wanted to include events from `Mobile` users as well, we can create an additional series by clicking the <CopyIcon /> icon to duplicate the existing series, then change the `Latest Device Type` field to `Mobile`.
 
 This generates a line chart with `Pageview` events for `Desktop` and `Mobile` users plotted together for the last 7 days.
 
-VIDEO / OR IMAGE HERE
+TODO: VIDEO / OR IMAGE HERE
 
-Click on **Add graph series** to add more series. 
+Click on 'Add graph series' to add more series. 
 
 Read more about filters in the [filtering docs](/docs/product-analytics/trends/filters).
 
@@ -169,7 +198,12 @@ There are several ways to share your insight:
 
 Insights can belong to multiple dashboards at once, so you don't have to create the same insight over and over again. Just click 'Add to dashboard'. After this you can see all the dashboards an insight belongs to, and navigate to them, by clicking the 'Manage dashboards'.
 
-VIDEO
+<ProductScreenshot
+    imageLight = {addtodashboardLight} 
+    imageDark = {addtodashboardDark}
+    classes="rounded"
+    alt="Add to dashboard"
+/>
 
 #### Add to notebook
 
@@ -177,7 +211,12 @@ Notebooks are a great way to do ad hoc analysis using existing insights, or by c
 
 Click 'Add to notebook' in the top right to do so. Alternatively, click on 'Notebook' in the right sidebar and then drag and drop insights from the product analytics page into a notebook. 
 
-VIDEO
+<ProductScreenshot
+    imageLight = {addtonotebookLight} 
+    imageDark = {addtonotebookDark}
+    classes="rounded"
+    alt="Add to notebook"
+/>
 
 #### Export or embed
 
@@ -189,7 +228,12 @@ Choose 'Share or embed' to share a live version of your insight as an iframe, li
 
 Alternatively, go to 'Export' and choose the PNG option to generate a PNG version of your insight that you can use anywhere, such as the one below.
 
-IMAGE HERE
+<ProductScreenshot
+    imageLight = {insightexport} 
+    imageDark = {insightexport}
+    classes="rounded"
+    alt="Exported insight"
+/>
 
 #### Create a subscription
 

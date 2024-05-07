@@ -6,6 +6,7 @@ availability:
   enterprise: full
 ---
 
+import {ProductScreenshot} from 'components/ProductScreenshot'
 export const linerLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/linear-light-mode.png"
 export const linerDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/linear-dark-mode.png"
 export const cumulativeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/cumulative-light-mode.png"
@@ -20,6 +21,10 @@ export const pieLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710
 export const pieDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/pie-dark-mode.png"
 export const worldMapLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/world-map-light-mode.png"
 export const worldMapDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/world-map-dark-mode.png"
+export const activeViewersLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099320/posthog.com/contents/docs/product-analytics/trends/active-viewers-light.png"
+export const activeViewersDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099316/posthog.com/contents/docs/product-analytics/trends/active-viewers-dark.png"
+export const areaLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099337/posthog.com/contents/docs/product-analytics/trends/area-chart-light.png"
+export const areaDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099340/posthog.com/contents/docs/product-analytics/trends/area-chart-dark.png"
 
 There are nine charts and visualization options in trends. They're split into two categories:
 
@@ -69,17 +74,27 @@ Additional series or breakdowns you add to a bar chart will appear stacked, so y
 
 ### Area chart
 
-[IMAGE HERE]
+<ProductScreenshot
+    imageLight = {activeViewersLight} 
+    imageDark = {activeViewersDark}
+    classes="rounded"
+    alt="Area chart"
+/>
 
-Area charts are a twist on the line chart. When you add a breakdown, or multiple series, area charts behave like a stack bar chart, but render the data in a line chart showing how each data point contributes to the total.
+Area charts are a twist on the line chart. When you add a breakdown, or multiple series, area charts behave like a stacked bar chart, but render the data in a line chart showing how each data point contributes to the total.
 
 ## Total value 
 
 ### Number
 
-[IMAGE HERE]
+<ProductScreenshot
+    imageLight = {activeViewersLight} 
+    imageDark = {activeViewersDark}
+    classes="rounded"
+    alt="Total value"
+/>
 
-This shows the total of events or data points during the given period. Tick the "Compared to previous period" option to add a percentage comparison. 
+Shows the total of events or data points during the given period. Tick the "Compared to previous period" option to add a percentage comparison. 
 
 This option is only available when there's just one series and no breakdowns added to the insight.
 
@@ -92,9 +107,9 @@ This option is only available when there's just one series and no breakdowns add
     alt="Value bar chart"
 />
 
-The **total value** bar chart displays the total value of a series over the _entire date range_. This means that this type of plot has no option for grouping, as it doesn't display data over time.
+Displays the total value of a series over the _entire date range_. This means that this type of plot has no option for grouping, as it doesn't display data over time.
 
-Try using a [breakdown](NEW LINK) in combination with this chart type to see a list of the top property values, or add multiple series to see how they compare.
+Try using a [breakdown](/docs/product-analytics/trends/breakdowns) in combination with this chart type to see a list of the top property values, or add multiple series to see how they compare.
 
 ### Table
 
@@ -105,7 +120,7 @@ Try using a [breakdown](NEW LINK) in combination with this chart type to see a l
     alt="Table chart"
 />
 
-The table chart displays the raw numerical values of a series over the _entire date range_.
+The table view displays the raw numerical values of a series over the _entire date range_.
 
 ### Pie
 

@@ -6,9 +6,19 @@ availability:
   enterprise: full
 ---
 
+import {ProductScreenshot} from 'components/ProductScreenshot'
+export const aggregationsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099342/posthog.com/contents/docs/product-analytics/trends/add-to-dashboard-light.png"
+export const aggregationsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099335/posthog.com/contents/docs/product-analytics/trends/aggregations-dark.png"
+
+
 Trends offer numerous ways to aggregating events and properties, so you can go beyond just tracking the total number of events.
 
-SCREENSHOT HERE
+<ProductScreenshot
+    imageLight = {aggregationsLight} 
+    imageDark = {aggregationsDark}
+    classes="rounded"
+    alt="Aggregation options"
+/>
 
 Aggregations enable you to answer questions like:
 
