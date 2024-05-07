@@ -1259,7 +1259,7 @@
         },
         {
             "source": "/docs/product-analytics/trends",
-            "destination": "/docs/product-analytics/trends/overview"
+            "destination": "/docs/product-analytics/trends/index"
         }
     ]
 }

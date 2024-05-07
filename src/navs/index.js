@@ -1897,7 +1897,7 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/product-analytics/trends/index',
+                            url: '/docs/product-analytics/trends/',
                         },
                         {
                             name: 'Charts',
