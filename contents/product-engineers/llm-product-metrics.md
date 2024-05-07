@@ -22,11 +22,11 @@ LLM-powered apps differ in three key ways when compared to regular SaaS apps:
 2. Request latency spikes and errors are more common.
 3. LLM output is unpredictable and can lead to a negative user experience.
 
-This means that in addition to [regular product metrics](https://posthog.com/product-engineers/product-health-metrics), you need to monitor LLM-specific ones too. To understand which ones to track, we've put together a list of useful metrics to track.
+This means that in addition to [regular product metrics](https://posthog.com/product-engineers/product-health-metrics), you need to monitor LLM-specific ones too. To understand which ones to track, we've put together a list of useful metrics.
 
 The metrics are grouped into three categories: [cost](#cost-related-metrics), [usage](#usage-metrics), and [debugging](#debug-metrics).
 
->  **💡 PostHog tip: Use our [Langfuse](/docs/llm-analytics/langfuse-posthog) and [Helicone](/docs/llm-analytics/helicone-posthog) integrations to bring your LLM data into PostHog. Alternatively, we have tutorials on how to capture events from [OpenAI](/tutorials/chatgpt-analytics), [Anthropic](/tutorials/anthropic-analytics), and [Cohere](/tutorials/cohere-analytics).
+> **💡 PostHog tip**: Use our [Langfuse](/docs/llm-analytics/langfuse-posthog) and [Helicone](/docs/llm-analytics/helicone-posthog) integrations to bring your LLM data into PostHog. Alternatively, we have tutorials on how to capture LLM events from [OpenAI](/tutorials/chatgpt-analytics), [Anthropic](/tutorials/anthropic-analytics), and [Cohere](/tutorials/cohere-analytics).
 
 ## Cost-related metrics
 
@@ -75,6 +75,12 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 - Which specific requests are the most costly, and are there ways to reduce these costs?
 - Are there noticeable spikes in cost per interaction, and what triggers them?
 
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1715070402/posthog.com/contents/blog/cost-per-interaction-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1715070401/posthog.com/contents/blog/cost-per-interaction-dark.png"
+  alt="Line chart showing average LLM cost per interaction over time"
+/>
+
 ## Usage metrics
 
 ### Average usage per user
@@ -105,16 +111,28 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 - Are there specific times of day or days of the week when generation counts spike?
 - How do different app features contribute to the generation count?
 
-### User feedback score
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1715070752/posthog.com/contents/blog/generation-count-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1715070751/posthog.com/contents/blog/generation-count-dark.png"
+  alt="Line chart showing total LLM generation and trace count over time"
+/>
+
+### User feedback
 
 **What is it?** The quality of the LLM's output, as rated by your users.
 
-**Why is it useful:** Strongly correlated with important product-health metrics such as [growth](/product-engineers/b2b-saas-product-metrics), [churn](/product-engineers/churn-rate-vs-retention-rate), and [NPS score](/product-engineers/nps-vs-csat-vs-ces).
+**Why it's useful:** Strongly correlated with important product-health metrics such as [growth](/product-engineers/b2b-saas-product-metrics), [churn](/product-engineers/churn-rate-vs-retention-rate), and [NPS score](/product-engineers/nps-vs-csat-vs-ces).
 
 **Questions to ask**
 - Are there specific user segments that are more satisfied or dissatisfied with the LLM outputs?
 - What are the specific input and output tokens of the best and worst scores?
 - How likely are users to churn from your product following a bad LLM response?
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1715070752/posthog.com/contents/blog/generation-count-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1715070931/posthog.com/contents/blog/user-feedback-dark.png"
+  alt="Line chart showing total LLM generation and trace count over time"
+/>
 
 ## Debug metrics
 
@@ -129,6 +147,12 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 - Are there specific features or types of interactions that typically involve larger or smaller requests?
 - How do variations in request size impact the latency and costs of responses?
 
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1715072339/posthog.com/contents/blog/total-tokens-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1715072338/posthog.com/contents/blog/total-tokens-dark.png"
+  alt="Line chart showing average number of tokens per LLM generation"
+/>
+
 ### Generation latency
 
 **What is it?** The time it takes for the LLM to generate a response.
@@ -141,20 +165,31 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 - Are there latency spikes, and what causes them?
 - How does latency correlate with user satisfaction and retention rates?
 
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1715072494/posthog.com/contents/blog/latency-light.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1715072493/posthog.com/contents/blog/latency-dark.png"
+  alt="Line chart showing generation latency per LLM request"
+/>
+
 ### Error rate
 
 **What is it?** The percentage of requests that result in errors.
 
-**Why is it useful:** Enables you to pinpoint problematic LLM requests and API calls.
+**Why it's useful:** Enables you to pinpoint problematic LLM requests and API calls.
 
 **Questions to ask**
 - What is the overall error rate, and how does it break down into user-facing versus backend errors?
 - What percentage of errors are caused by timeouts?
 - Are there specific features or scenarios that are more prone to errors?
-  
+
+ <ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1715073420/posthog.com/contents/blog/Screenshot_2024-05-07_at_10.16.49_AM.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1715073421/posthog.com/contents/blog/Screenshot_2024-05-07_at_10.16.37_AM.png"
+  alt="Line chart showing total number of LLM errors"
+/> 
 
 ## Further reading
 
-- [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
-- [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics) 
+- [PostHog for LLMs docs](/docs/llm-analytics) 
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+- [The most useful B2B SaaS metrics](/blog/b2b-saas-product-metrics)
