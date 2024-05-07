@@ -92,7 +92,7 @@ export default function Community() {
         >
             {inView && (websiteTheme === 'dark' ? <Stars /> : null)}
             <div className="w-full overflow-hidden md:pt-0 before:bg-gradient-to-b dark:before:from-dark dark:before:to-[#141A26]/0 before:absolute before:left-0 before:h-48 before:w-full before:top-0">
-                <div className="md:absolute w-full top-16 sm:top-12 md:-top-16 md:pt-8 lg:pt-0 xl:top-12 2xl:top-20 px-4 md:px-0 z-40">
+                <div className="md:absolute relative w-full top-8 sm:top-12 md:-top-16 md:pt-8 lg:pt-0 xl:top-12 2xl:top-20 px-4 md:px-0 z-40">
                     <h2 className="m-0 pb-2 px-4 text-4xl md:text-5xl lg:text-7xl text-center leading-0 md:leading-none">
                         Join our <br className="hidden md:block" />
                         <span className="text-red dark:text-yellow">open source</span>{' '}
