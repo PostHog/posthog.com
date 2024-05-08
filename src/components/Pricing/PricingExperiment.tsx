@@ -239,6 +239,24 @@ const allProductsData = graphql`
     }
 `
 
+const TabPA = () => {
+    return (
+        <div>
+            <h2>PA monthly pricing</h2>
+            <p>Table</p>
+        </div>
+    )
+}
+
+const TabSR = () => {
+    return (
+        <div>
+            <h2>SR monthly pricing</h2>
+            <p>Table</p>
+        </div>
+    )
+}
+
 const tabContent = {
     'Product analytics': () => null,
     'Session replay': () => null,
@@ -360,6 +378,11 @@ const PricingExperiment = ({
                 <>
                     <section className={`${section} mb-12 mt-8 md:px-4`}>
                         <ProductTabs />
+                        <div className="text-center">
+                            <span className="text-red dark:text-yellow font-semibold text-sm cursor-pointer">
+                                Show pricing breakdown
+                            </span>
+                        </div>
                     </section>
 
                     <section
