@@ -69,24 +69,24 @@ const openai = new OpenAIApi(configuration);
 ```
 
 ```bash
- curl --request POST \
-     --url https://oai.hconeai.com/v1/chat/completions \
-     --header 'Authorization: Bearer <<YOUR_OPENAI_API_KEY>> \
-     --header 'Content-Type: application/json' \
-     --header 'Helicone-Posthog-Key: Bearer <ph_project_api_key> \
-     --header 'Helicone-Posthog-Host: Bearer <ph_client_api_host> \
-     --header 'Helicone-Auth: Bearer <<YOUR_HELICONE_API_KEY>> \
-     --data '{
-         "model": "gpt-3.5-turbo",
-         "messages": [
-             {
-                 "role": "system",
-                 "content": "Say Hello!"
-             }
-         ],
-         "temperature": 1,
-         "max_tokens": 10
- }'
+curl --request POST \
+	--url https://oai.hconeai.com/v1/chat/completions \
+	--header 'Authorization: Bearer <YOUR_OPENAI_API_KEY>' \
+	--header 'Content-Type: application/json' \
+	--header 'Helicone-Posthog-Key: Bearer <PH_PROJECT_API_KEY>' \
+	--header 'Helicone-Posthog-Host: Bearer <PH_CLIENT_API_HOST>' \
+	--header 'Helicone-Auth: Bearer <YOUR_HELICONE_API_KEY>' \
+	--data '{
+		"model": "gpt-3.5-turbo",
+		"messages": [
+			{
+				"role": "system",
+				"content": "Say Hello!"
+			}
+		],
+		"temperature": 1,
+		"max_tokens": 10
+	}'
 ```
 
 </MultiLanguage>
