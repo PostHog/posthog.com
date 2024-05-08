@@ -523,6 +523,7 @@ For example, to get a count of users in the `Power user` cohort:
 select count()
 from persons
 where id IN COHORT 'Power users'
+```
 
 To get a count of events for users in the `Power user` cohort:
 

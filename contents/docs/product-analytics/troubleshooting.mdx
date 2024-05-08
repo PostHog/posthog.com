@@ -69,7 +69,11 @@ If events are visible in webhook.site, it means that you have configured PostHog
 
 ![Events visible on webhook.site](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/events-in-webhook.site.png)
 
-### 2. An app has been configured incorrectly
+### 2. PostHog is adblocked
+
+PostHog can be adblocked, even locally. This prevents requests from being sent from your app to PostHog. To limit the impact of adblockers, [set up a reverse proxy](/docs/advanced/proxy]. 
+
+### 3. An app has been configured incorrectly
 
 Another common reason for missing events is that an app has been configured to drop certain or all events. To debug if this is the case, follow these steps in order:
 
@@ -77,7 +81,7 @@ Another common reason for missing events is that an app has been configured to d
 2. Try to temporarily disable the Filter Out plugin.
 3. Try to temporarily disable all other enabled plugins.
 
-### 3. There is a bug the PostHog library
+### 4. There is a bug the PostHog library
 
 Sometimes, bugs in the PostHog library may be the cause of missing events. However, this is quite rare.
 
@@ -86,13 +90,13 @@ To debug if this is the issue, most of our SDKs have an option to [enable debug 
 If you're using the [JavaScript web](/docs/libraries/js) library, you can identify failed requests using the network tab in your browser devtools:
 
 1. Open devtools in your browser and switch to the network tab.
-2. Identify the failed requests to `app.posthog.com/e` (or `eu.posthog.com/e` if you're using EU Cloud).
+2. Identify the failed requests to `https://us.i.posthog.com/e` (or `https://eu.i.posthog.com/e` if you're using EU Cloud).
 3. Right click one of those requests and click Copy -> Copy as cURL.
 4. See below on how to [report your issue](#report-your-issue) and attach your cURL command to get further support.
 
 ![network request being sent to posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/network-request-to-posthog.png)
 
-### 4. Events are not ingested after being received by PostHog
+### 5. Events are not ingested after being received by PostHog
 
 If your library is configured correctly and successfully sending events to PostHog, events may get lost in the [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline) – e.g. if there is an ongoing outage.
 
@@ -190,7 +194,7 @@ Body:
 # Library initialization:
 // e.g.
 // from posthog import Posthog
-// posthog = Posthog(phc_yourAPIKey, host='app_or_eu.posthog.com')
+// posthog = Posthog(phc_yourAPIKey, host='us_or_eu.posthog.com')
 
 # What was called:
 // e.g.

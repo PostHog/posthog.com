@@ -48,7 +48,7 @@ headers = {
 body = {
     "personal_api_key": POSTHOG_PERSONAL_API_KEY
 }
-url = f"https://app.posthog.com/api/event/?personal_api_key={POSTHOG_PERSONAL_API_KEY}"
+url = f"<ph_client_api_host>/api/event/?personal_api_key={POSTHOG_PERSONAL_API_KEY}"
 ```
 
 ## Making our first request to get our own information
@@ -65,7 +65,7 @@ POSTHOG_PERSONAL_API_KEY = '<POSTHOG_PERSONAL_API_KEY>'
 headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 
 response = requests.get(
-    "https://app.posthog.com/api/users/@me", headers=headers
+    "<ph_client_api_host>/api/users/@me", headers=headers
 ).json()
 ```
 
@@ -73,7 +73,7 @@ response = requests.get(
 export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 curl \
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-    https://app.posthog.com/api/users/@me/
+    <ph_client_api_host>/api/users/@me/
 ```
 
 </MultiLanguage>
@@ -95,7 +95,7 @@ POSTHOG_PROJECT_ID = "<POSTHOG_PROJECT_ID>"
 headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 
 response = requests.get(
-    f"https://app.posthog.com/api/projects/{POSTHOG_PROJECT_ID}/insights/",
+    f"<ph_client_api_host>/api/projects/{POSTHOG_PROJECT_ID}/insights/",
     headers=headers
 ).json()
 ```
@@ -105,7 +105,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-    https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/insights/
+    <ph_client_api_host>/api/projects/$POSTHOG_PROJECT_ID/insights/
 ```
 
 </MultiLanguage>
@@ -129,7 +129,7 @@ headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 SHORT_ID = "<YOUR_INSIGHT_SHORT_ID>"
 
 response = requests.get(
-	f"https://app.posthog.com/api/projects/{POSTHOG_PROJECT_ID}/insights/?short_id={SHORT_ID}",
+	f"<ph_client_api_host>/api/projects/{POSTHOG_PROJECT_ID}/insights/?short_id={SHORT_ID}",
 	headers=headers
 ).json()
 ```
@@ -139,7 +139,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-    https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/insights/?short_id=<YOUR_INSIGHT_SHORT_ID>
+    <ph_client_api_host>/api/projects/$POSTHOG_PROJECT_ID/insights/?short_id=<YOUR_INSIGHT_SHORT_ID>
 ```
 
 </MultiLanguage>
@@ -159,7 +159,7 @@ headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 INSIGHT_ID = <YOUR_INSIGHT_ID>
 
 response = requests.get(
-	f"https://app.posthog.com/api/projects/{POSTHOG_PROJECT_ID}/insights/{INSIGHT_ID}/",
+	f"<ph_client_api_host>/api/projects/{POSTHOG_PROJECT_ID}/insights/{INSIGHT_ID}/",
 	headers=headers
 ).json()
 ```
@@ -169,7 +169,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-    https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/insights/<INSIGHT_ID>/
+    <ph_client_api_host>/api/projects/$POSTHOG_PROJECT_ID/insights/<INSIGHT_ID>/
 ```
 
 </MultiLanguage>
@@ -184,7 +184,7 @@ POSTHOG_PERSONAL_API_KEY = '<POSTHOG_PERSONAL_API_KEY>'
 headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 
 response = requests.get(
-	"https://app.posthog.com/api/projects/<POSTHOG_PROJECT_ID>/insights/921029",
+	"<ph_client_api_host>/api/projects/<POSTHOG_PROJECT_ID>/insights/921029",
 	headers=headers
 ).json()
 print(response.get('result')[0]['aggregated_value'])
@@ -207,7 +207,7 @@ POSTHOG_PROJECT_ID = "<POSTHOG_PROJECT_ID>"
 headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 
 response = requests.get(
-	f"https://app.posthog.com/api/projects/{POSTHOG_PROJECT_ID}/persons/",
+	f"<ph_client_api_host>/api/projects/{POSTHOG_PROJECT_ID}/persons/",
 	headers=headers
 ).json()
 ```
@@ -217,7 +217,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-    https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/persons/
+    <ph_client_api_host>/api/projects/$POSTHOG_PROJECT_ID/persons/
 ```
 
 </MultiLanguage>
@@ -247,7 +247,7 @@ properties = urllib.parse.quote(
 )
 
 response = requests.get(
-    f"https://app.posthog.com/api/projects/<POSTHOG_PROJECT_ID>/persons/?properties={properties}",
+    f"<ph_client_api_host>/api/projects/<POSTHOG_PROJECT_ID>/persons/?properties={properties}",
     headers=headers
 ).json()
 ```
@@ -257,7 +257,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-    https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/persons/?properties=%5B%7B%22key%22%3A%22%24initial_os%22%2C%22value%22%3A%5B%22Linux%22%5D%2C%22operator%22%3A%22exact%22%2C%22type%22%3A%22person%22%7D%5D
+    <ph_client_api_host>/api/projects/$POSTHOG_PROJECT_ID/persons/?properties=%5B%7B%22key%22%3A%22%24initial_os%22%2C%22value%22%3A%5B%22Linux%22%5D%2C%22operator%22%3A%22exact%22%2C%22type%22%3A%22person%22%7D%5D
 ```
 
 </MultiLanguage>
@@ -277,7 +277,7 @@ headers = { "Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 PERSON_ID = "<YOUR_PERSON_ID>"
 
 response = requests.get(
-	f"https://app.posthog.com/api/projects/{POSTHOG_PROJECT_ID}/persons/{PERSON_ID}",
+	f"<ph_client_api_host>/api/projects/{POSTHOG_PROJECT_ID}/persons/{PERSON_ID}",
 	headers=headers
 ).json()
 ```
@@ -287,7 +287,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-    https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/persons/<PERSON_ID>/
+    <ph_client_api_host>/api/projects/$POSTHOG_PROJECT_ID/persons/<PERSON_ID>/
 ```
 
 </MultiLanguage>

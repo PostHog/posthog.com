@@ -34,6 +34,8 @@ Install `posthog-js` using your package manager:
 yarn add posthog-js
 # or
 npm install --save posthog-js
+# or
+pnpm add posthog-js
 ```
 
 Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in your [project settings](https://app.posthog.com/project/settings).
@@ -60,7 +62,7 @@ import { PostHogProvider } from 'posthog-js/react'
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
     // Enable debug mode in development
     loaded: (posthog) => {
       if (process.env.NODE_ENV === 'development') posthog.debug()

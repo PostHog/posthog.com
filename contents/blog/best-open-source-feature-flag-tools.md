@@ -102,7 +102,7 @@ It's warehouse native with support for most major SQL data sources, and there's 
 
 #### How much does it cost?
 
-Growthbook’s open source self-hosted plan is free forever, with unlimited flags and experiments. GrowthBook also offers a hosted version with pricing based on the number of users.
+Growthbook’s open source self-hosted plan is free forever, with unlimited flags and experiments. [GrowthBook](/blog/best-growthbook-alternatives) also offers a hosted version with pricing based on the number of users.
 
 ### 4. Flagsmith
 

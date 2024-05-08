@@ -195,7 +195,21 @@ const EscalateButton = ({ escalate, escalated }) => {
 export const Question = (props: QuestionProps) => {
     const { id, question, showSlug, buttonText, showActions = true } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
-    const { user } = useUser()
+    const { user, notifications, setNotifications } = useUser()
+
+    useEffect(() => {
+        if (
+            notifications?.length > 0 &&
+            notifications.some(
+                (notification) => notification.question.id === id || notification.question.permalink === id
+            )
+        ) {
+            const newNotifications = notifications.filter(
+                (notification) => notification.question.id !== id && notification.question.permalink !== id
+            )
+            setNotifications(newNotifications)
+        }
+    }, [notifications])
 
     // TODO: Default to question data if passed in
     const {
