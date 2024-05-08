@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1715169275/posthog.com/contents/wowzer-screenshot.png
 featuredImage: >-
-https://res.cloudinary.com/dmukukwp6/image/upload/v1715169275/posthog.com/contents/wowzer-screenshot.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1715169275/posthog.com/contents/wowzer-screenshot.png
 industries:
   - AI
 users:
@@ -50,4 +50,4 @@ Wowzer leverages [surveys](/surveys) to [uncover their users' real problems](/ne
 
 "It was as simple as clicking a few buttons. Within a few days of creating the survey, we saw that many users wanted a way to earn free credits. We used this informatiion to create our referral program, which now accounts for a significant portion of our growth."
 
-"To summarize everything: if we weren't using PostHog, we wouldn't be able to uncover the amount of 'gems' we do!"
+"To summarize, if we weren't using PostHog, we wouldn't be able to uncover the amount of 'gems' we do!"
