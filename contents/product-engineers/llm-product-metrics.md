@@ -26,7 +26,7 @@ This means that in addition to [regular product metrics](/product-engineers/prod
 
 The metrics are grouped into three categories: [cost](#cost-related-metrics), [usage](#usage-metrics), and [debugging](#debug-metrics).
 
-> **💡 PostHog tip**: Use our [Langfuse](docs/product-analytics/llms#langfuse) and [Helicone](https://posthog.com/docs/product-analytics/llms#helicone) integrations to bring your LLM data into PostHog. Alternatively, we have tutorials on how to capture LLM events from [OpenAI](/tutorials/chatgpt-analytics), [Anthropic](/tutorials/anthropic-analytics), and [Cohere](/tutorials/cohere-analytics).
+> **💡 PostHog tip**: Use our [Langfuse](/docs/product-analytics/llms#langfuse) and [Helicone](/docs/product-analytics/llms#helicone) integrations to bring your LLM data into PostHog. Alternatively, we have tutorials on how to capture LLM events from [OpenAI](/tutorials/chatgpt-analytics), [Anthropic](/tutorials/anthropic-analytics), and [Cohere](/tutorials/cohere-analytics).
 
 ## Cost-related metrics
 
