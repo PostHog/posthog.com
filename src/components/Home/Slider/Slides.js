@@ -420,10 +420,7 @@ export const SessionReplay = () => {
             bgColor="[#F2AD46]"
             textColor="primary"
             title="Session replay"
-            description="Watch users interacting with your app or website. Available for web and iOS."
-            additionalText={
-                <p className="text-sm hidden xl:block opacity-60 pt-2 mb-1">(Android support coming soon.)</p>
-            }
+            description="Watch users interacting with your app or website. Available for web, Android and iOS (alpha)."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="md:pl-8 md:col-span-9 lg:col-span-10"
