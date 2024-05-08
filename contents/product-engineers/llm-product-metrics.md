@@ -1,5 +1,5 @@
 ---
-date: 2024-05-03
+date: 2024-05-08
 title: 'Product metrics to track for LLM apps'
 author:
   - lior-neu-ner
