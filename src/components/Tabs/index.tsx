@@ -13,7 +13,7 @@ export default function Tabs({
 }: {
     tabs: []
     onClick: (tab: Tab[], index: number) => void
-    activeTab: number
+    activeTab?: number
 }): JSX.Element {
     return (
         <ul className="m-0 p-0 list-none flex justify-between items-center space-x-2">
@@ -28,7 +28,7 @@ export default function Tabs({
                         }`}
                     >
                         <div className="flex items-start space-x-2">
-                            <div>{tab.icon}</div>
+                            {tab.icon && <div>{tab.icon}</div>}
                             <div className="text-left">
                                 <h3 className="m-0 text-lg leading-tight">{tab.title}</h3>
                                 <p className="m-0 mt-0.5 text-sm">{tab.subtitle}</p>

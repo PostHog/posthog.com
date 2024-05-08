@@ -258,15 +258,15 @@ const TabSR = () => {
 }
 
 const tabContent = {
-    'Product analytics': () => null,
-    'Session replay': () => null,
+    'Product analytics': TabPA,
+    'Session replay': TabSR,
     'Feature flags': () => null,
     'A/B testing': () => null,
     Surveys: () => null,
 }
 
 const ProductTabs = () => {
-    const [activeTab, setActiveTab] = useState(0)
+    const [activeTab, setActiveTab] = useState()
     const products = useProducts()
 
     return (
@@ -287,7 +287,18 @@ const ProductTabs = () => {
                     icon: icon,
                 }))}
             />
-            {tabContent[products[activeTab].name]()}
+            {activeTab !== undefined && <div className="my-8">{tabContent[products[activeTab].name]()}</div>}
+            <div className="text-center mt-4 flex space-x-1 justify-center">
+                {activeTab !== undefined && (
+                    <p className="m-0 text-sm opacity-75">Prices descrease exponentially with scale.</p>
+                )}
+                <button
+                    onClick={() => setActiveTab(activeTab === undefined ? 0 : undefined)}
+                    className="text-red dark:text-yellow font-semibold text-sm cursor-pointer"
+                >
+                    {activeTab === undefined ? 'Show' : 'Hide'} pricing breakdown
+                </button>
+            </div>
         </div>
     )
 }
@@ -378,11 +389,6 @@ const PricingExperiment = ({
                 <>
                     <section className={`${section} mb-12 mt-8 md:px-4`}>
                         <ProductTabs />
-                        <div className="text-center">
-                            <span className="text-red dark:text-yellow font-semibold text-sm cursor-pointer">
-                                Show pricing breakdown
-                            </span>
-                        </div>
                     </section>
 
                     <section
