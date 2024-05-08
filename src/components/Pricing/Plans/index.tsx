@@ -49,7 +49,7 @@ const Title = ({ title, className = '' }: { title: string; className?: string })
     return <h5 className={`m-0 text-[15px] opacity-70 font-medium ${className}`}>{title}</h5>
 }
 
-const InclusionOnlyRow = ({ plans }) => (
+export const InclusionOnlyRow = ({ plans }) => (
     <Row className="!py-1">
         <div className="flex-grow" />
         {plans.map(({ included_if, plan_key }, index) => (
@@ -64,7 +64,7 @@ const InclusionOnlyRow = ({ plans }) => (
 
 const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
 
-const PricingTiers = ({ plans, unit, compact = false, type }) => {
+export const PricingTiers = ({ plans, unit, compact = false, type }) => {
     const posthog = usePostHog()
     const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
 

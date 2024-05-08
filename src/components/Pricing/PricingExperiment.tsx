@@ -239,20 +239,49 @@ const allProductsData = graphql`
     }
 `
 
-const TabPA = () => {
+const Pricing = ({ type, plans, unit, addons, name, inclusion_only }) => {
+    return (
+        <>
+            <h2>Monthly pricing</h2>
+            <div>
+                {inclusion_only ? (
+                    <InclusionOnlyRow plans={plans} />
+                ) : (
+                    <PricingTiers plans={plans} unit={unit} type={type} />
+                )}
+            </div>
+        </>
+    )
+}
+
+const TabPA = (props) => {
     return (
         <div>
-            <h2>PA monthly pricing</h2>
-            <p>Table</p>
+            <Pricing {...props} />
         </div>
     )
 }
 
-const TabSR = () => {
+const TabSR = (props) => {
     return (
         <div>
-            <h2>SR monthly pricing</h2>
-            <p>Table</p>
+            <Pricing {...props} />
+        </div>
+    )
+}
+
+const TabFF = (props) => {
+    return (
+        <div>
+            <Pricing {...props} />
+        </div>
+    )
+}
+
+const TabSurveys = (props) => {
+    return (
+        <div>
+            <Pricing {...props} />
         </div>
     )
 }
@@ -260,14 +289,16 @@ const TabSR = () => {
 const tabContent = {
     'Product analytics': TabPA,
     'Session replay': TabSR,
-    'Feature flags': () => null,
-    'A/B testing': () => null,
-    Surveys: () => null,
+    'Feature flags': TabFF,
+    'A/B testing': TabFF,
+    Surveys: TabSurveys,
 }
 
-const ProductTabs = () => {
+const ProductTabs = ({ billingProducts }) => {
     const [activeTab, setActiveTab] = useState()
     const products = useProducts()
+    const activeProduct = products[activeTab ?? 0]
+    const productData = billingProducts.find(({ type }) => type === activeProduct?.type)
 
     return (
         <div>
@@ -287,7 +318,9 @@ const ProductTabs = () => {
                     icon: icon,
                 }))}
             />
-            {activeTab !== undefined && <div className="my-8">{tabContent[products[activeTab].name]()}</div>}
+            {activeTab !== undefined && (
+                <div className="my-8">{tabContent[activeProduct.name]({ ...productData })}</div>
+            )}
             <div className="text-center mt-4 flex space-x-1 justify-center">
                 {activeTab !== undefined && (
                     <p className="m-0 text-sm opacity-75">Prices descrease exponentially with scale.</p>
@@ -388,7 +421,7 @@ const PricingExperiment = ({
             {!currentProduct && (
                 <>
                     <section className={`${section} mb-12 mt-8 md:px-4`}>
-                        <ProductTabs />
+                        <ProductTabs billingProducts={billingProducts} />
                     </section>
 
                     <section

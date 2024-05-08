@@ -64,6 +64,7 @@ export const useProducts = () => {
         {
             icon: <IconGraph className="w-5 h-6 text-blue" />,
             name: 'Product analytics',
+            type: 'product_analytics',
             slug: 'product-analytics',
             freeLimit: '1,000,000',
             denomination: 'event',
@@ -84,6 +85,7 @@ export const useProducts = () => {
         {
             icon: <IconRewindPlay className="w-5 h-6 text-yellow" />,
             name: 'Session replay',
+            type: 'session_replay',
             slug: 'session-replay',
             freeLimit: '5,000',
             denomination: 'recording',
@@ -104,6 +106,7 @@ export const useProducts = () => {
         {
             icon: <IconToggle className="w-5 h-6 text-green" />,
             name: 'Feature flags',
+            type: 'feature_flags',
             slug: 'feature-flags',
             freeLimit: '1,000,000',
             denomination: 'request',
@@ -124,6 +127,7 @@ export const useProducts = () => {
         {
             icon: <IconFlask className="w-5 h-6 text-purple" />,
             name: 'A/B testing',
+            type: 'feature_flags',
             slug: 'ab-testing',
             freeLimit: '',
             denomination: '',
@@ -136,6 +140,7 @@ export const useProducts = () => {
         {
             icon: <IconMessage className="w-5 h-5 text-red" />,
             name: 'Surveys',
+            type: 'surveys',
             slug: 'surveys',
             freeLimit: '250',
             denomination: 'response',
