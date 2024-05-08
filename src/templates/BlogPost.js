@@ -24,6 +24,7 @@ import qs from 'qs'
 import Breadcrumbs from 'components/Edition/Breadcrumbs'
 import { CallToAction } from 'components/CallToAction'
 import { IconMap, IconOpenSidebar } from '@posthog/icons'
+import { NewsletterForm } from 'components/NewsletterForm'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -140,6 +141,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         ),
         a: A,
         TutorialsSlider,
+        NewsletterForm,
         ...shortcodes,
     }
     const { tableOfContents } = pageContext
