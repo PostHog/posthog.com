@@ -1482,3 +1482,7 @@ li.squeak-left-border {
         display: none;
     }
 }
+
+.click {
+    @apply hover:top-[-1px] hover:scale-[1.005] active:top-[.5px] active:scale-[.99];
+}
