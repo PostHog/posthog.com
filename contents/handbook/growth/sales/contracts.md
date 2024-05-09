@@ -17,7 +17,7 @@ In addition, customers requiring our Enterprise plan are required to sign up for
 
 ## Discounts
 
-We offer a pretty generous 20% discount for annual plans, but some customers may ask for more.  This table outlines what we would require in return (bigger spend/longer commitment) to secure that bigger discount.
+Our standard monthly [pricing](/pricing) has volume discounts built in, and we offer a pretty generous 20% discount for annual paid up-front plans, but some customers may ask for more.  This table outlines what we would require in return (bigger spend/longer commitment) to secure that bigger discount.
 
 | Minimum Spend | 1 Year | 2 Year | 3 Year |
 |---------------|--------|--------|--------|
