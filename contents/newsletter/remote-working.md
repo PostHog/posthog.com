@@ -52,6 +52,8 @@ At **Doist**, four days of each week are [dedicated to deep work](https://async.
 
 When you absolutely have to have meetings, make the most of them. **GitLab** has a set of principles for how notes should be taken in [just about any meeting](https://handbook.gitlab.com/handbook/communication/#smart-note-taking-in-meetings). This starts with the agenda, which is shared in advance. During meetings, everyone is encouraged to help out with note-taking with a focus on capturing key points rather than every single word that’s said.
 
+> This post was first published in our newsletter, [_Product for Engineers_](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. Subscribe [here]([url](https://newsletter.posthog.com/)).
+
 ### 3. They value transparency and trust
 
 The biggest (and stupidest) argument against remote work? It makes people less productive. This is demonstrably untrue. We’re an all-remote company and we ship incredibly fast. Don’t believe us? Believe the [Federal Reserve Bank of San Francisco](https://www.frbsf.org/research-and-insights/publications/economic-letter/2024/01/does-working-from-home-boost-productivity-growth/), whose research shows there’s no meaningful productivity loss from remote work.
