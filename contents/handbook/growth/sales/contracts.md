@@ -15,6 +15,19 @@ or Data Processing Agreement (DPA)
 
 In addition, customers requiring our Enterprise plan are required to sign up for a minimum of $20k of PostHog Cloud Credit for a year, as well as adding the Teams plan to their subscription.
 
+## Discounts
+
+We offer a pretty generous 20% discount for annual plans, but some customers may ask for more.  This table outlines what we would require in return (bigger spend/longer commitment) to secure that bigger discount.
+
+| Minimum Spend | 1 Year | 2 Year | 3 Year |
+|---------------|--------|--------|--------|
+| $20,000 | 20% | 25% | 30% |
+| $60,000 | 25% | 30% | 35% |
+| $100,000 | 30% | 35% | 40% |
+
+Also note that the minimum amounts here are _after_ discounts e.g. they will need to purchase a minimum of $25k of credit to get a discount of 20% and contract for $20k.
+
+
 ## Order Form
 
 An Order Form is a lightweight document that captures the customer details, credit amount, discount, term, and signatures from both 
