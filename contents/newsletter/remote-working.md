@@ -40,7 +40,7 @@ At **Automattic**, Beau Lebens has [shared some great tips](https://beau.blog/20
 
 At **Doist**, and just about any successful remote company, internal email is pretty much banned. As Doist founder and CEO Amir Salihefendic [explains](https://async.twist.com/asynchronous-communication/), email locks information away. This makes referring back to decisions or conversations either confusing or impossible. Default to communicating out in the open – GitHub, Slack, an internal wiki – so anyone can find and reference conversations and decisions at a later date.
 
-[Hype cycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1715266314/posthog.com/contents/blog/hype-cycle-1.png)
+![Hype cycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1715266314/posthog.com/contents/blog/hype-cycle-1.png)
 
 ### 2. They prioritize deep work
 
