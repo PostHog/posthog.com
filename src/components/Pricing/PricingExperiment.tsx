@@ -24,6 +24,7 @@ import {
     IconShield,
     IconArrowRightDown,
 } from '@posthog/icons'
+import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -239,10 +240,10 @@ const allProductsData = graphql`
     }
 `
 
-const Pricing = ({ type, plans, unit, addons, name, inclusion_only }) => {
+const Pricing = ({ type, plans, unit, inclusion_only, className = '' }) => {
     return (
-        <>
-            <h2>Monthly pricing</h2>
+        <div className={`${className} w-full max-w-[500px]`}>
+            <h3 className="text-lg">Monthly pricing</h3>
             <div>
                 {inclusion_only ? (
                     <InclusionOnlyRow plans={plans} />
@@ -250,14 +251,52 @@ const Pricing = ({ type, plans, unit, addons, name, inclusion_only }) => {
                     <PricingTiers plans={plans} unit={unit} type={type} />
                 )}
             </div>
-        </>
+        </div>
+    )
+}
+
+const TabAddons = (props) => {
+    const addons = props.addons.filter(({ inclusion_only }) => !inclusion_only)
+    const [activeTab, setActiveTab] = useState(0)
+    const activeAddon = addons[activeTab]
+    return (
+        <div className={props.className ?? ''}>
+            <h3 className="text-lg">{props.title ?? 'Add-ons'}</h3>
+            <div className="flex space-x-4">
+                <div>
+                    <Tabs
+                        onClick={(_tab, index) => setActiveTab(index)}
+                        activeTab={activeTab}
+                        vertical
+                        size="sm"
+                        tabs={addons.map(({ name, icon_key, description }) => {
+                            const Icon = Icons[icon_key]
+                            return { title: name, icon: <Icon className="w-5" />, tooltip: description }
+                        })}
+                    />
+                </div>
+                <div className="flex-grow">
+                    {activeAddon.inclusion_only ? (
+                        <InclusionOnlyRow plans={activeAddon.plans} />
+                    ) : (
+                        <PricingTiers
+                            plans={activeAddon.plans}
+                            unit={activeAddon.unit}
+                            type={activeAddon.type}
+                            key={activeAddon.type}
+                        />
+                    )}
+                </div>
+            </div>
+        </div>
     )
 }
 
 const TabPA = (props) => {
     return (
-        <div>
-            <Pricing {...props} />
+        <div className="flex space-x-8">
+            <Pricing {...props} className="flex-shrink-0" />
+            <TabAddons addons={props.addons} className="flex-grow" title="Product analytics add-ons" />
         </div>
     )
 }
