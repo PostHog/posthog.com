@@ -47,4 +47,4 @@ PostHog and Langfuse also enable HostAI to reduce their LLM hallucination rate. 
 
 In one instance, their largest client was on the brink of leaving due to a bug that was extremely hard to reproduce. By viewing [session replays](/session-replay), HostAI were able to identify and solve the problem:
 
-"Replays enabled us to understand all the context and actions that happened prior to the bug occuring, and it was especially useful to view the console logs from the session. This gave us all the information we needed to reproduce and fix the issue, ultimately saving us from losing the customer."
+"Replays enabled us to understand all the context and actions that happened prior to the bug occurring, and it was especially useful to view the console logs from the session. This gave us all the information we needed to reproduce and fix the issue, ultimately saving us from losing the customer."
