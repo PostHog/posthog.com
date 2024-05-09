@@ -88,13 +88,13 @@ Unbounce offers a pleasing range of transparently-priced plans. Its entry-level 
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product and engineering teams
 
-[GrowthBook](https://www.growthbook.io/) is a popular open-source feature flagging and experimentation platform. It supports A/B and multivariate tests, and integrates with a range of popular analytics tools, such as Google Analytics (UA), Mixpanel, Matomo, and most popular data warehouses.
+[GrowthBook](/blog/posthog-vs-growthbook) is a popular open-source feature flagging and experimentation platform. It supports A/B and multivariate tests, and integrates with a range of popular analytics tools, such as Google Analytics (UA), Mixpanel, Matomo, and most popular data warehouses.
 
 It offers a basic visual editor so non-technical users can create experiments without writing code. GrowthBook's 'Guardrail' feature monitors for unintended second order effects of your change which you're not actively testing for.
 
 ### How much does GrowthBook cost?
 
-GrowthBook offers unlimited traffic (subject to a fair use policy), feature flags, and experiments. It charges only on the number of user accounts. Its Starter plan includes three GrowthBook users. Its Pro plan adds advanced permissions, custom fields, and its visual A/B test editor, for just $20 per user, per month.
+[GrowthBook](/blog/best-growthbook-alternatives) offers unlimited traffic (subject to a fair use policy), feature flags, and experiments. It charges only on the number of user accounts. Its Starter plan includes three GrowthBook users. Its Pro plan adds advanced permissions, custom fields, and its visual A/B test editor, for just $20 per user, per month.
 
 ### Companies that use GrowthBook
 
@@ -132,7 +132,7 @@ Instapage's self-serve plan costs $299 per month ($199 if billed annually) and i
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Marketing teams
 
-[VWO](https://vwo.com) is a testing platform that primarily targets large enterprises. Its experimentation platform includes support for A/B and multivariate tests, and a visual editor, though some features are locked behind its numerous product tiers. Geo-targeting, for example, is only available on the 'Pro' tier of VWO Testing, while feature flags are only available as part of its VWO FullStack product.
+[VWO](/blog/best-vwo-alternatives) is a testing platform that primarily targets large enterprises. Its experimentation platform includes support for A/B and multivariate tests, and a visual editor, though some features are locked behind its numerous product tiers. Geo-targeting, for example, is only available on the 'Pro' tier of VWO Testing, while feature flags are only available as part of its VWO FullStack product.
 
 ### How much does VWO cost?
 

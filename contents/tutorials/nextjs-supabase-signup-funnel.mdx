@@ -257,7 +257,7 @@ NEXT_PUBLIC_POSTHOG_HOST=your_posthog_host
 
 The value for `NEXT_PUBLIC_POSTHOG_API_KEY` can be found via **Project** in the left-hand menu of your PostHog app, underneath the **Project API Key** heading.
 
-The value for `NEXT_PUBLIC_POSTHOG_HOST` is the public URL for your running PostHog instance. If you're using cloud, this is `https://app.posthog.com`.
+The value for `NEXT_PUBLIC_POSTHOG_HOST` is the public URL for ingesting events into your PostHog instance. If you're using US cloud, this is `https://us.i.posthog.com`.
 
 With the required config in place we can install the PostHog JavaScript SDK:
 
@@ -278,7 +278,7 @@ import { PostHogProvider } from 'posthog-js/react'
 // Check that PostHog is client-side
 if (typeof window !== 'undefined') {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
         // Enable debug mode in development
         loaded: (posthog) => {
         if (process.env.NODE_ENV === 'development') posthog.debug()

@@ -21,10 +21,6 @@ const filters = [
         name: 'Ingestion-filtering',
     },
     {
-        type: 'type',
-        name: 'Other',
-    },
-    {
         type: 'maintainer',
         name: 'Official',
     },

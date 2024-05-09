@@ -12,6 +12,8 @@ const query = (params: any, offset: number) => {
                 populate: ['leadProfiles'],
             },
             likes: true,
+            topic: true,
+            image: true,
         },
         sort: 'updatedAt:desc',
         pagination: {

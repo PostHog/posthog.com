@@ -88,9 +88,9 @@ export const InstallingPostHog = () => {
                 <li>
                     <h5>Hosting or deployment questions?</h5>
                     <p>
-                        Join our{' '}
-                        <Link to="/slack" event="next steps - installing posthog: Slack">
-                            Slack
+                        Checkout our{' '}
+                        <Link to="/questions" event="next steps - installing posthog: Community forum">
+                            community forum
                         </Link>{' '}
                         to ask questions directly to the PostHog team - or search for similar questions from others in
                         the community.
@@ -199,12 +199,12 @@ export const LearnMore = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link event="next steps - Learn more about PostHog: Join our Slack" to="/slack">
-                        Join our Slack
+                    <Link event="next steps - Learn more about PostHog: Join our community forum" to="/questions">
+                        Join our community forum
                     </Link>
                 </li>
                 <li>
-                    <Link event="next steps - Learn more about PostHog: Meet the team" to="/people">
+                    <Link event="next steps - Learn more about PostHog: Meet the team" to="/team">
                         Meet the team
                     </Link>
                 </li>

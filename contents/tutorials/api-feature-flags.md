@@ -29,12 +29,12 @@ Formatting all this correctly looks like this:
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<PH_PROJECT_API_KEY>",
   "distinct_id": "ian@posthog.com"
-}' "https://app.posthog.com/decide/?v=3"
+}' "<ph_client_api_host>/decide/?v=3"
 ```
 
 ```python
 import requests
-url = "https://app.posthog.com/decide/?v=3"
+url = "<ph_client_api_host>/decide/?v=3"
 
 headers = {
   "Content-Type": "application/json",
@@ -83,7 +83,7 @@ You can use this response with whatever language to control access or usage of f
 
 ```python
 import requests
-url = "https://app.posthog.com/decide/?v=3"
+url = "<ph_client_api_host>/decide/?v=3"
 
 headers = {
   "Content-Type": "application/json",
@@ -135,7 +135,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
   -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-  https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/feature_flags/evaluation_reasons/?distinct_id=ian@posthog.com
+  <ph_client_api_host>/api/projects/$POSTHOG_PROJECT_ID/feature_flags/evaluation_reasons/?distinct_id=ian@posthog.com
 ```
 
 ```python
@@ -147,7 +147,7 @@ DISTINCT_ID = ian@posthog.com
 headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 
 response = requests.get(
-    f"https://app.posthog.com/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/evaluation_reasons/?distinct_id={DISTINCT_ID}",
+    f"<ph_client_api_host>/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/evaluation_reasons/?distinct_id={DISTINCT_ID}",
     headers=headers
 ).json()
 ```
@@ -167,7 +167,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
   -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-  https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/feature_flags/
+  <ph_client_api_host>/api/projects/$POSTHOG_PROJECT_ID/feature_flags/
 ```
 
 ```python
@@ -178,7 +178,7 @@ POSTHOG_PERSONAL_API_KEY = <POSTHOG_PERSONAL_API_KEY>
 headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 
 response = requests.get(
-    f"https://app.posthog.com/api/projects/<POSTHOG_PROJECT_ID>/feature_flags",
+    f"<ph_client_api_host>/api/projects/<POSTHOG_PROJECT_ID>/feature_flags",
     headers=headers
 ).json()
 ```
@@ -194,7 +194,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
   -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-  https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/feature_flags/<FLAG_ID>
+  <ph_client_api_host>/api/projects/$POSTHOG_PROJECT_ID/feature_flags/<FLAG_ID>
 ```
 
 ```python
@@ -205,7 +205,7 @@ POSTHOG_PERSONAL_API_KEY = <POSTHOG_PERSONAL_API_KEY>
 headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 
 response = requests.get(
-  f"https://app.posthog.com/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/<FLAG_ID>",
+  f"<ph_client_api_host>/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/<FLAG_ID>",
   headers=headers
 ).json()
 ```
@@ -225,7 +225,7 @@ curl \
   -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"filters":{"groups":[{"properties":[],"rollout_percentage":0}]}}' \
-  -X PATCH https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/feature_flags/<FLAG_ID>
+  -X PATCH <ph_client_api_host>/api/projects/$POSTHOG_PROJECT_ID/feature_flags/<FLAG_ID>
 ```
 
 ```python
@@ -246,7 +246,7 @@ filters = {
 }
 
 response = requests.patch(
-  f"https://app.posthog.com/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/<FLAG_ID>",
+  f"<ph_client_api_host>/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/<FLAG_ID>",
   headers=headers,
   json=filters
 ).json()
@@ -291,7 +291,7 @@ body = {
 }
 
 evaluate = requests.post(
-  'https://app.posthog.com/decide/?v=3',
+  '<ph_client_api_host>/decide/?v=3',
   headers=json_headers, 
   json=body
 )
@@ -305,7 +305,7 @@ Next, we write a `getFlagId` function to figure out the feature flag ID by check
 ```python
 def getFlagId():
   get_all = requests.get(
-    f"https://app.posthog.com/api/projects/{POSTHOG_PROJECT_ID}/feature_flags",
+    f"<ph_client_api_host>/api/projects/{POSTHOG_PROJECT_ID}/feature_flags",
     headers=auth_header
   ).json()
 
@@ -340,7 +340,7 @@ def filterUserFromFlag():
   }
 
   response = requests.patch(
-    f"https://app.posthog.com/api/projects/{POSTHOG_PROJECT_ID}/feature_flags/{FLAG_ID}",
+    f"<ph_client_api_host>/api/projects/{POSTHOG_PROJECT_ID}/feature_flags/{FLAG_ID}",
     headers=auth_header,
     json=filters
   ).json()

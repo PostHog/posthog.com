@@ -35,7 +35,7 @@ It is _a lot_ of fun getting things right, and this motivated me early in the co
 
 * Dealing with customers totally transparently. For example, when we launched, none of our competitors had pricing on their pricing page. It's a lot of fun having a community weigh in on what we build.
 
-Neither [Tim](../people/tim-glaser) (my cofounder) nor I can imagine working anywhere else.
+Neither [Tim](/tim) (my cofounder) nor I can imagine working anywhere else.
 
 ## When we launched – being grateful that anyone cares
 

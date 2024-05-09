@@ -12,7 +12,7 @@ Setting up a reverse proxy means setting up a service to redirect requests from 
 
 > **Note:** PostHog Cloud requires that the proxy sets the `Host` header to the same host it is calling. Check the guides below on how to do that for several proxies.
 
-You then use this subdomain as your instance host in the initialization of PostHog instead of `app.posthog.com` or `eu.posthog.com`.
+You then use this subdomain as your `api_host` in the initialization of PostHog instead of `us.i.posthog.com` or `eu.i.posthog.com`.
 
 > Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js#config) when initializing our browser integration, so that links to the PostHog interface point to the correct host.
 

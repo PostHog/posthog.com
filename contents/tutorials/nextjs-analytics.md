@@ -276,7 +276,7 @@ At this point, you need a PostHog instance ([signup for free](https://app.postho
 
 ```shell file=.env.local
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
-NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
 
 Next, install [posthog-js](https://github.com/posthog/posthog-js):
@@ -296,7 +296,7 @@ import { PostHogProvider } from 'posthog-js/react'
 // Check that PostHog is client-side
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
     // Enable debug mode in development
     loaded: (posthog) => {
       if (process.env.NODE_ENV === 'development') posthog.debug()

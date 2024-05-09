@@ -12,6 +12,53 @@ import Toggle from 'components/Toggle'
 import { IconInfo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 
+function convertCentimetersToInches(centimeters: number): number {
+    return centimeters / 2.54
+}
+
+const UnitButton = ({ unit, onClick, active, className = '' }) => {
+    return (
+        <button
+            type="button"
+            className={`w-12 text-sm ${active ? 'bg-gray-accent-light/50' : ''} ${className}`}
+            onClick={onClick}
+        >
+            {unit}
+        </button>
+    )
+}
+
+const HeightField = ({ values, setFieldValue }) => {
+    const [unit, setUnit] = useState('in')
+    const [height, setHeight] = useState(values.height)
+
+    return (
+        <div className="flex border-gray-accent-light border rounded-md overflow-hidden">
+            <input
+                onChange={(e) => {
+                    const value = Number(e.target.value)
+                    setHeight(value)
+                    setFieldValue('height', unit === 'cm' ? convertCentimetersToInches(value) : value)
+                }}
+                value={height}
+                className="py-2 px-4 text-lg w-full dark:text-primary  m-0 flex-grow border-none"
+                type="number"
+                name="height"
+                placeholder="Height"
+            />
+            <div className="flex-shrink-0 flex">
+                <UnitButton
+                    active={unit === 'in'}
+                    unit="in"
+                    onClick={() => setUnit('in')}
+                    className="border-x border-gray-accent-light"
+                />
+                <UnitButton active={unit === 'cm'} unit="cm" onClick={() => setUnit('cm')} />
+            </div>
+        </div>
+    )
+}
+
 const fields = {
     avatar: {
         label: 'Avatar',
@@ -39,7 +86,12 @@ const fields = {
         modOnly: true,
     },
     country: {
+        label: 'Country (2-char code)',
         modOnly: true,
+    },
+    height: {
+        modOnly: true,
+        component: HeightField,
     },
     biography: {
         component: () => (
@@ -60,20 +112,11 @@ const fields = {
         component: ({ values, setFieldValue }) => {
             return (
                 <div className="flex space-x-2 mb-6">
-                    <label className="flex space-x-1 items-center">
-                        <Tooltip
-                            tooltipClassName="max-w-[200px]"
-                            content="Allows community members to ask you questions directly on your profile page"
-                        >
-                            <span className="relative">
-                                <IconInfo className="w-4 h-4" />
-                            </span>
-                        </Tooltip>
-                        <span>Ask me anything</span>
-                    </label>
                     <Toggle
+                        label="Ask me anything"
                         checked={values.amaEnabled}
                         onChange={() => setFieldValue('amaEnabled', !values.amaEnabled)}
+                        tooltip="Allows community members to ask you questions directly on your profile page"
                     />
                 </div>
             )
@@ -183,6 +226,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
         country,
         pronouns,
         amaEnabled,
+        height,
     } = user?.profile || {}
 
     const avatar = getAvatarURL(user?.profile)
@@ -269,6 +313,7 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                 location,
                 country,
                 pronouns,
+                height,
                 biography,
                 amaEnabled,
             }}

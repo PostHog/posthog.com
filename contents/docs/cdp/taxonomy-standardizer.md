@@ -8,11 +8,15 @@ tags:
   - taxonomy-standardizer
 ---
 
-This app standardizes all your event names into a single pattern, so that data becomes more consistent and marketing teams aren't driven wild.
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
+
+This transformation standardizes all your event names into a single pattern, so that data becomes more consistent and marketing teams aren't driven wild.
 
 ## Supported taxonomies
 
-This app can convert from any of these taxonomies, to any other.
+This transformation can convert from any of these taxonomies, to any other.
 
 -   Camel Case: `helloThereHedgehog`
 -   Pascal Case: `HelloThereHedgehog`
@@ -20,17 +24,13 @@ This app can convert from any of these taxonomies, to any other.
 -   Kebab Case: `hello-there-hedgehog`
 -   Spaces: `hello there hedgehog`
 
-## Requirements
-
-The Taxonomy Standardizer requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'Taxonomy Standardizer' and select the app, press Install.
-3. Follow the on-screen steps to configure the app.
+2. Search for 'Taxonomy Standardizer' and select the transformation, press Install.
+3. Follow the on-screen steps to configure the transformation.
 
 ## Configuration
 
@@ -38,23 +38,14 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 
 ## FAQ
 
-### Is the source code for this app available?
+### Is the source code for this transformation available?
 
-PostHog is open-source and so are all apps on the platform. The [source code for the Taxonomy Standardizer](https://github.com/PostHog/taxonomy-plugin) is available on GitHub.
+PostHog is open-source and so are all transformations on the platform. The [source code for the Taxonomy Standardizer](https://github.com/PostHog/taxonomy-plugin) is available on GitHub.
 
-### Who created this app?
+### Who created this transformation?
 
 We'd like to thank PostHog team member [Yakko Majuri](https://github.com/yakkomajuri) for creating the Taxonomy Standardizer. Thank you, Yakko!
 
-### Who maintains this app?
+<PostHogMaintained />
 
-This app is maintained by PostHog. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this app?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
-
+<FeedbackQuestions />

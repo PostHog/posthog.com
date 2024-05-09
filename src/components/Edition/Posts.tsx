@@ -318,7 +318,7 @@ export default function Posts({
             setTag(undefined)
         }
         if (articleView || pathname === '/posts') {
-            setLayoutMenu(menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] })
+            setLayoutMenu(menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[1] })
         }
     }, [pathname])
 

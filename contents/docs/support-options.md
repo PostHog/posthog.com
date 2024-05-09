@@ -101,7 +101,7 @@ For certain paid customers we support you through a private Slack channel. This 
 
 We will select the right team for you at PostHog. This typically includes the Customer Success and Engineering teams.
 
-[These are the kinds of people](/team) you'd be working with!
+[These are the kinds of people](/people) you'd be working with!
 
 We do *not* have non-technical support people who triage issues. We directly connect you to people who are building PostHog. This has scaled to support thousands of companies very effectively, and we always aim to productize solutions to problems.
 

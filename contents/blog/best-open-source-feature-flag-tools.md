@@ -90,7 +90,7 @@ Unleash is free for two environments when you self-host. A managed version is al
 
 #### What is GrowthBook?
 
-[GrowthBook](https://www.growthbook.io/) is a warehouse native, open-source feature flagging and experimentation platform built to help companies make better data-driven decisions. Its flag tool features advanced targeting, gradual rollouts, and experiments. 
+[GrowthBook](/blog/posthog-vs-growthbook) is a warehouse-native, open-source feature flagging and experimentation platform built to help companies make better data-driven decisions. Its flag tool features advanced targeting, gradual rollouts, and experiments. 
 
 It's warehouse native with support for most major SQL data sources, and there's a code-free visual experiment editor that can used be less technical end users.
 
@@ -102,7 +102,7 @@ It's warehouse native with support for most major SQL data sources, and there's 
 
 #### How much does it cost?
 
-Growthbook’s open source self-hosted plan is free forever, with unlimited flags and experiments. GrowthBook also offers a hosted version with pricing based on the number of users.
+Growthbook’s open source self-hosted plan is free forever, with unlimited flags and experiments. [GrowthBook](/blog/best-growthbook-alternatives) also offers a hosted version with pricing based on the number of users.
 
 ### 4. Flagsmith
 

@@ -1,0 +1,454 @@
+---
+title: 'The best Optimizely alternatives & competitors, compared'
+date: 2024-04-12
+author:
+  - ian-vanagas
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
+featuredImageType: full
+category: General
+tags:
+  - Comparisons
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+
+## 1. PostHog
+
+- **Founded:** 2020
+- **Similar to:** VWO, LaunchDarkly
+- **Typical users:** Engineers and product teams
+- **Typical customers:** Mid-size B2Bs and startups
+
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355555/posthog.com/contents/images/blog/best-optimizely-alternatives/posthog-optimizely.png)
+
+### What is PostHog?
+
+[PostHog](/) (that's us 👋) is an open-source platform that includes A/B testing, feature flags, product analytics, session replay, and user surveys. This means it's also an alternative to tools like [Mixpanel](/blog/posthog-vs-mixpanel) (product analytics) and [Hotjar](/blog/posthog-vs-hotjar) (session replay and surveys).
+
+Typical PostHog users are engineers and product managers at startups and mid-size companies. Customers include [AssemblyAI](/customers/assemblyai), [ElevenLabs](/customers/elevenlabs), [Hasura](/customers/hasura), and Airbus.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of April 2024, 5,610 (0.5%) of the top 1 million websites use PostHog. This is slightly more than Optimizely's 5,353.
+
+#### Key features
+
+- **Feature flags:** Safely rollout features with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+
+- **A/B tests:** Up to 9 test variations, primary and secondary metrics. Automatically calculate test duration, sample size, and statistical significance.
+
+- **Product analytics:** Funnels, user paths, retention analysis, custom trends, and dynamic user cohorts. Also supports [SQL insights](/docs/product-analytics/sql) for power users.
+
+- **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+
+- **Session replays:** Including event timelines, console logs, network activity, and 90-day data retention.
+
+### How does PostHog compare to Optimizely?
+
+The core of feature flags and experimentation are similar between the two. The big difference is that PostHog is free, open-source, and has analytics built in, while Optimizely has a range of enterprise content, commerce, and collaboration tools.
+
+<ComparisonTable column1="PostHog" column2="Optimizely">
+  <ComparisonRow column1={true} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={false} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
+  <ComparisonRow column1={true} column2={true} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={true} column2={true} feature="Advanced targeting" description="Target flags and A/B tests on segments and non-users" />
+  <ComparisonRow column1={false} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
+  <ComparisonRow column1={false} column2={true} feature="CMS" description="Produce and manage content to show on your site" />
+  <ComparisonRow column1={true} column2={false} feature="Built-in analytics" description="First-party analytics with custom events, pageviews, and more" />
+  <ComparisonRow column1={true} column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={false} column2={true} feature="Project management tools" description="Plan better with backlogs, boards, calendars, and more." />
+  <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use PostHog?
+
+According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It replaces multiple tools:** PostHog can replace [Optimizely](/blog/posthog-vs-optimizely) (feature flags and A/B testing), [Mixpanel](/blog/posthog-vs-mixpanel) (analytics), and [Pendo](/blog/best-pendo-alternatives) (feedback and session replays). This simplifies workflows and ensures all your product data is in one place.
+
+2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing) they can use forever. Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
+
+3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
+
+> #### Bottom line
+> Being free, self-serve, and sharing many of the same features, PostHog is a great alternative to Optimizely. This is especially true for startups and scale-ups looking for product and data tools, though marketing teams may prefer Optimizely for experiments due to its visual editor.
+
+<br />
+
+## 2. VWO
+
+- **Founded:** 2009
+- **Similar to:** PostHog, Optimizely
+- **Typical users:** Product managers, engineers, UX designers
+- **Typical customers:** Enterprise B2B and B2C companies optimizing customer experiences
+
+![LaunchDarkly](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355555/posthog.com/contents/images/blog/best-optimizely-alternatives/vwo.png)
+
+### What is VWO?
+
+VWO is a digital experience optimization platform that aims to maximize conversion with tools like A/B testing, personalization, funnels, heatmaps, session replay, and customer analytics.
+
+The VWO platform is home to multiple different products including testing, insights, data, personalize, plan, and web rollouts each with its own feature sets and pricing.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Visual-Website-Optimizer), 9,183 of the top million sites use VWO as of April 2024. This is nearly double Optimizely's 5,353.
+
+#### Key features
+
+- **A/B testing:** Improve and optimize experiences and conversions with web, mobile, and server-side A/B testing.
+
+- **Data platform:** Collect and analyze customer data across your stack using SDKs, third-party integrations, and direct uploads.
+
+- **Insights:** Understand your users with session recordings, heatmaps, analytics, and surveys.
+
+- **Personalization:** Create and tailor user journeys and campaigns for specific audiences, locations, and times.
+
+- **Planning:** Ideate, prioritize and plan optimization campaigns in one location. Connect them directly to data as well.
+
+### How does VWO compare to Optimizely?
+
+Optimizely and VWO are both massive, multi-product platforms with many similarities. They both focus on optimizing user experience and have tools like A/B tests, visual editors, program planners, and personalization to help with this.
+
+The difference is that Optimizely has CMS and content tools while VWO has more product tools like session replays, surveys, and [behavioral analytics](/product-engineers/behavioral-analytics).
+
+<ComparisonTable column1="VWO" column2="Optimizely">
+  <ComparisonRow column1="Trial" column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
+  <ComparisonRow column1={true} column2={true} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={true} column2={true} feature="Advanced targeting" description="Target flags and A/B tests on segments and non-users" />
+  <ComparisonRow column1={true} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
+  <ComparisonRow column1={false} column2={true} feature="CMS" description="Produce and manage content to show on your site" />
+  <ComparisonRow column1={true} column2={false} feature="Built-in analytics" description="First-party analytics with custom events, pageviews, and more" />
+  <ComparisonRow column1="Edit only" column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={true} column2={true} feature="Project management tools" description="Plan better with backlogs, boards, calendars, and more." />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use VWO?
+
+Reviewers on G2 are big fans of VWO for these reasons:
+
+1. **Support:** VWO's support staff are knowledgeable, helpful, and responsive. This helps reviewers get the most out of the platform and leaves them with a positive impression.
+
+2. **Multi-function:** Reviewers like that they can combine A/B tests with surveys, funnels, session replays, and analysis tools to optimize the complete user experience.
+
+3. **Becoming data-driven:** VWO enables technical and non-technical to make more and better data-driven decisions by being the complete source of experience data. 
+
+> #### Bottom line
+> VWO is a solid alternative for enterprise users looking for optimization tools, provided you don't need CMS functionality as well. If you are smaller or product-focused, there are likely less complex and cheaper options.
+
+<br />
+
+## 3. LaunchDarkly
+
+- **Founded:** 2014
+- **Similar to:** PostHog, Kameleoon
+- **Typical users:** Enterprise engineering teams
+- **Typical customers:** Massive engineering-focused enterprises
+
+![LaunchDarkly](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355416/posthog.com/contents/images/blog/best-optimizely-alternatives/launchdarkly.png)
+
+### What is LaunchDarkly?
+
+[LaunchDarkly](/blog/posthog-vs-launchdarkly) is a feature flag and A/B testing platform helping developers de-risk releases, target experiences, and optimize their product. It provides automation and governance features to ensure enterprises are following engineering best practices.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), 1,019 of the top 1 million sites use LaunchDarkly. This is nearly 5x less than Optimizely's 5,353 but may undercount mobile and backend usage. Google Trends confirms that [Optimizely is better known](https://trends.google.com/trends/explore?date=today%205-y&q=optimizely,launchdarkly,launch%20darkly) than LaunchDarkly, but not by a large margin.
+
+#### Key features
+
+- **Feature flags:** Control and target the release of features using multi-variate flags with real-time updates.
+
+- **Experimentations:** Run A/B/n tests against metric groups and release winning variants.
+
+- **Automation:** Automate and schedule progressive rollouts, trigger workflows.
+
+- **Governance:** Audit flag changes. Get visibility into flag state across platforms.
+
+### How does LaunchDarkly compare to Optimizely?
+
+LaunchDarkly focuses more on feature releases and development best practices, while Optimizely focuses on improving digital experiences. This means LaunchDarkly has more robust governance and automation tools but is missing ones for non-developers like a visual editor, CMS, or project management. 
+
+<ComparisonTable column1="LaunchDarkly" column2="Optimizely">
+  <ComparisonRow column1={false} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={false} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
+  <ComparisonRow column1={true} column2={true} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={true} column2={true} feature="Advanced targeting" description="Target flags and A/B tests on segments and non-users" />
+  <ComparisonRow column1={false} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
+  <ComparisonRow column1={false} column2={true} feature="CMS" description="Produce and manage content to show on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Built-in analytics" description="First-party analytics with custom events, pageviews, and more" />
+  <ComparisonRow column1={true} column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={false} column2={true} feature="Project management tools" description="Plan better with backlogs, boards, calendars, and more." />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use LaunchDarkly?
+
+Based on [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#reviews), users appreciate these aspects of LaunchDarkly:
+
+1. **SDKs:** Reviewers appreciate how easy it is to integrate LaunchDarkly into their apps thanks to the range of SDKs they provide like JavaScript, Python, and iOS. 
+
+2. **Automations:** LaunchDarkly provides automations like stale flag cleanup, rollout templates, DevOps pipeline integrations, and scheduled rollouts which reviewers mention as big selling points.
+
+3. **Speed and availability:** High uptime and speed are critical for developers. Reviewers highlight local caching and edge computing integrations as critical ways LaunchDarkly supports these.
+
+> #### Bottom line
+> For companies focused on engineering best practices around releases and experimentation, LaunchDarkly makes a great alternative. Non-technical teams may find it not built for their use case though.
+
+<br />
+
+## 4. Mutiny
+
+- **Founded:** 2018
+- **Similar to:** Optimizely, Dynamic Yield
+- **Typical users:** Growth and marketing teams
+- **Typical customers:** Sales-focused B2B SaaS companies
+
+![Mutiny](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355416/posthog.com/contents/images/blog/best-optimizely-alternatives/mutiny.png)
+
+### What is Mutiny?
+
+Munity (AKA Mutiny HQ) is an AI-powered personalization tool. It uses a no-code experience builder to customize and A/B test websites, landing pages, microsites, and product journeys. This is all connected to the impact it has on revenue analytics like pipeline, conversions, and sales.
+
+According to BuiltWith, [Mutiny](https://trends.builtwith.com/analytics/Mutiny) is much less popular than Optimizely. Only 392 of the top million sites use it, compared to Optimizely's 5,353.
+
+#### Key features
+- **Personalization:** Create personalized experiences for different target audiences such as startups vs enterprises.
+
+- **No-code experience builder:** Quickly customize your website without code.
+
+- **Analytics:** Measure the impact of changes and marketing on your account, pipeline, and revenue.
+
+- **Microsites:** Build fully custom sites for specific accounts tailored to their industry and company details.
+
+- **AI recommendations:** Use AI to craft recommendations on copy and content for your personalized experiences.
+
+### How does Mutiny compare to Optimizely?
+
+Mutiny is entirely focused on personalization, meaning they don't have the breadth of tools Optimizely has. They do include tools important to marketers like the visual editor and conversion analytics though.
+
+<ComparisonTable column1="Mutiny" column2="Optimizely">
+  <ComparisonRow column1={false} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
+  <ComparisonRow column1={false} column2={true} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={true} column2={true} feature="Advanced targeting" description="Target flags and A/B tests on segments and non-users" />
+  <ComparisonRow column1={true} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
+  <ComparisonRow column1={false} column2={true} feature="CMS" description="Produce and manage content to show on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Built-in analytics" description="First-party analytics with custom events, pageviews, and more" />
+  <ComparisonRow column1={false} column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={false} column2={true} feature="Project management tools" description="Plan better with backlogs, boards, calendars, and more." />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Mutiny?
+
+[G2 reviewers](https://www.g2.com/products/mutiny-hq/reviews) appreciate these aspects of Mutiny:
+
+1. **No-code:** Many Mutiny users are marketers and they love how easy it is to make changes to the website experience with the visual editor.
+
+2. **Playbooks:** Mutiny's content about best practices and case studies of other clients helps reviewers ensure they are following best practice. 
+
+3. **AI recommendations:** Reviewers find that the AI recommendations help them create more personalized experiences, faster. 
+
+> #### Bottom line
+> Mutiny is a great choice for B2B companies looking to use personalization to drive conversion and revenue. Developers or B2C companies may find the feature set limited compared to other choices, though.
+
+<br />
+
+## 5. AB Tasty
+
+- **Founded:** 2013
+- **Similar to:** VWO, Optimizely
+- **Typical users:** Marketing and product teams
+- **Typical customers:** Large retail and entertainment companies
+
+![AB Tasty](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355415/posthog.com/contents/images/blog/best-optimizely-alternatives/abtasty.png)
+
+### What is AB Tasty?
+
+A/B Tasty is a suite of tools for optimizing brand and product experiments. This includes experimentation, personalization, and recommendations. It helps teams build better end-to-end digital user experiences, especially focused on retail, entertainment, and ecommerce.
+
+As of April 2024, 2,351 of the top million sites use AB Tasty according to [BuiltWith](https://trends.builtwith.com/analytics/AB-Tasty). This is just under half of Optimizely's 5,353.
+
+#### Key features
+
+- **Web experimentation:** Run A/B and multivariate tests easily with low/no-code tools.
+
+- **Feature experimentation:** Test new features in production for server-side or mobile apps.
+
+- **Personalization:** Create personalized experiences with audience builder and segmentation tools.
+
+- **Rollouts:** Use feature flags to progressively deliver, manage, and rollback new features.
+
+- **Recommendations:** Show the right products at the right time in customers' journey.
+
+### How does AB Tasty compare to Optimizely?
+
+AB Tasty shares many similarities to Optimizely when it comes to digital experience optimization, though it lacks funnel tests and API evaluation. Like many of the other alternatives listed here, it also doesn't include the content or project management tools Optimizely offers.
+
+<ComparisonTable column1="AB Tasty" column2="Optimizely">
+  <ComparisonRow column1={false} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
+  <ComparisonRow column1={false} column2={true} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={true} column2={true} feature="Advanced targeting" description="Target flags and A/B tests on segments and non-users" />
+  <ComparisonRow column1={true} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
+  <ComparisonRow column1={false} column2={true} feature="CMS" description="Produce and manage content to show on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Built-in analytics" description="First-party analytics with custom events, pageviews, and more" />
+  <ComparisonRow column1="Edit only" column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={false} column2={true} feature="Project management tools" description="Plan better with backlogs, boards, calendars, and more." />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use AB Tasty?
+
+According to [G2 reviews](https://www.g2.com/products/ab-tasty/reviews), users choose AB Tasty for the following reasons:
+
+1. **Ease-of-use:** Non-technical users can create and manage simple A/B tests using the visual editor. The reports also praise how simple and intuitive the entire platform is.
+
+2. **Support:** AB Tasty's customer support receives high praise. They even provide an option to help you with recommendations and implementation (for a cost) if you need it.
+
+3. **Widgets:** Reviewers enjoy AB Tasty's collection of pre-built widgets such as alerts, banners, and modals to help personalize experiences.
+
+> #### Bottom line
+> A/B Tasty is a closely matched alternative to Optimizely, that's missing the content and project management tools. For retail and entertainment companies, it makes for a great alternative. 
+
+<br />
+
+## 6. Dynamic Yield
+
+- **Founded:** 2011
+- **Similar to:** AB Tasty, Mutiny
+- **Typical users:** Marketing and product teams
+- **Typical customers:** Enterprise retail and ecommerce companies
+
+![Dynamic Yield](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355573/posthog.com/contents/images/blog/best-optimizely-alternatives/dynamic-yield.png)
+
+### What is Dynamic Yield?
+
+Dynamic Yield is a personalization platform built for enterprises and owned by Mastercard. It provides features like A/B testing, email and SMS engagements, product recommendations, and more.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Dynamic-Yield), Dynamic Yield is only used by 923 out of the top million sites. This is 5x less than Optimizely's 5,353.
+
+#### Key features
+
+- **Personalization:** Tailor pages and products for specific users based on their history, with AI automation available.
+
+- **Engagement:** Send personalized emails, push notifications, and text messages to engage customers at the right moment.
+
+- **A/B testing:** Optimize experiences and journeys with A/B testing that includes custom targeting.
+
+- **Multi-platform:** Personalize experiences across websites, apps, email, or any other medium with the API.
+
+### How does Dynamic Yield compare to Optimizely?
+
+Dynamic Yield focuses more on personalization than optimization but includes many of the same features as Optimizely. For example, feature flags are not a primary feature, but a visual experiment editor is included.
+
+<ComparisonTable column1="Dynamic Yield" column2="Optimizely">
+  <ComparisonRow column1={false} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
+  <ComparisonRow column1={false} column2={true} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={true} column2={true} feature="Advanced targeting" description="Target flags and A/B tests on segments and non-users" />
+  <ComparisonRow column1={true} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
+  <ComparisonRow column1={false} column2={true} feature="CMS" description="Produce and manage content to show on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Built-in analytics" description="First-party analytics with custom events, pageviews, and more" />
+  <ComparisonRow column1="Evaluate only" column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={false} column2={true} feature="Project management tools" description="Plan better with backlogs, boards, calendars, and more." />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Dynamic Yield?
+
+Based on G2 reviews, users are big fans of the following:
+
+1. **Feature depth:** Dynamic Yield's features for personalization and experimentation are world-class and have tons of features to help teams customize experiences exactly how they want.
+
+2. **Ease-of-use:** Reviewers mention how user-friendly Dynamic Yield and its UI is. Non-technical users can use experimentation and targeting features to make an impact.
+
+3. **Support:** Many reviewers mention how impressed they were with Dynamic Yield's support, both for initial implementation and for ongoing strategy.
+
+> #### Bottom line
+> Similar to AB Tasty, if you are a retail or entertainment company looking for personalization tools, Dynamic Yield is a great alternative. Its A/B testing feature set is as good as any, but it focuses less on engineers than other options.
+
+<br />
+
+## 7. Kameleoon
+
+- **Founded:** 2012
+- **Similar to:** AB Tasty, LaunchDarkly
+- **Typical users:** Product managers and developers
+- **Typical customers:** Mid-sized ecommerce, retail, and entertainment companies
+
+![Kameleoon](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355416/posthog.com/contents/images/blog/best-optimizely-alternatives/kameleoon.png)
+
+### What is Kameleoon?
+
+Kameleoon is a developer-focused complete optimization platform with A/B testing, personalization, and feature management. It makes all of this easy with its AI copilot.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Kameleoon), 816 of the top million sites use Kameleoon. This is significantly less than Optimizely which 5,353 sites use. 
+
+#### Key features
+
+- **Web experimentation:** Use their smart graphic editor and widget library to run flicker-free A/B tests on your website.
+
+- **Feature experimentation:** Do targeted rollouts of features and analyze their impact.
+
+- **AI copilot:** Have AI help with targeting, decision-making, and experiment creation.
+
+- **Stats accuracy:** Provides advanced stats like sample mismatch ratio, cross-campaign analysis, CUPED, and multiple test correlation.
+
+### How does Kameleoon compare to Optimizely?
+
+Kameleoon focuses on experimentation and engineering best practices more than Optimizely, but it still includes a no-code experiment editor that product managers can use. It doesn't include the CMS and project management tools that Optimizely has.
+
+<ComparisonTable column1="Kameleoon" column2="Optimizely">
+  <ComparisonRow column1={false} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={true} column2={true} feature="Visual experiment editor" description="Easily create experiments that make changes to your site or app" />
+  <ComparisonRow column1={false} column2={true} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
+  <ComparisonRow column1={true} column2={true} feature="Advanced targeting" description="Target flags and A/B tests on segments and non-users" />
+  <ComparisonRow column1={true} column2={true} feature="Personalization" description="Deliver targeted content and products to users" />
+  <ComparisonRow column1={false} column2={true} feature="CMS" description="Produce and manage content to show on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Built-in analytics" description="First-party analytics with custom events, pageviews, and more" />
+  <ComparisonRow column1={true} column2={true} feature="API" description="Evaluate and edit flags and A/B tests with an API" />
+  <ComparisonRow column1={false} column2={true} feature="Project management tools" description="Plan better with backlogs, boards, calendars, and more." />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use Kameleoon?
+
+Based on [G2 reviews](https://www.g2.com/products/kameleoon/reviews), users are big fans of the following aspects of Kameleoon:
+
+1. **Statistical tools:** Reviewers are more confident about the results of their experiments thanks to Kameleoon's collection of statistical tools.
+
+2. **Editors:** The combination of the graphics and widget editors makes it easy to set up A/B tests and personalizations.
+
+3. **Integrations:** Reviews like how Kameleoon integrates with all the tools they already use like Google Analytics, Adobe, and Mixpanel.
+
+> #### Bottom line
+> The combination of advanced stats, code editor, and AI copilot makes it easier for engineering-focused teams to create successful personalizations and experiments. This makes it a good alternative for mid-sized companies who don't need all the features Optimizely has.
+
+<br />
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think PostHog is the perfect Optimizely replacement if:
+
+- You value transparency (we're open source)
+- You focus more on improving your product than optimizing your content (we have a full suite of product analytics, session replays, and surveys).
+- You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
+
+Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.

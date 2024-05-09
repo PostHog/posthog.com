@@ -222,7 +222,7 @@ export const load = async () => {
   if (browser) {
     posthog.init(
       '<ph_project_api_key>',
-      { api_host: '<ph_instance_address>' }
+      { api_host: '<ph_client_api_host>' }
     )
   }
   return
@@ -267,7 +267,7 @@ export const load = async () => {
     posthog.init(
       '<ph_project_api_key>',
       {
-        api_host:'<ph_instance_address>',
+        api_host:'<ph_client_api_host>',
         capture_pageview: false,
         capture_pageleave: false
       }

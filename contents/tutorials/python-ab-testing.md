@@ -4,6 +4,7 @@ date: 2023-09-12
 author:
   - ian-vanagas
 showTitle: true
+featuredVideo: https://www.youtube-nocookie.com/embed/1QhMvLs27yk
 sidebar: Docs
 tags:
   - experimentation
@@ -92,7 +93,7 @@ import uuid
 
 posthog = Posthog(
   '<ph_project_api_key>', 
-  host='<ph_instance_address>'
+  host='<ph_client_api_host>'
 )
 
 # ... app, hello_world(), blog()

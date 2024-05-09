@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
@@ -15,6 +15,7 @@ import SearchBox from 'components/Search/SearchBox'
 
 const Article = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
     const { compact } = useLayoutData()
+
     return (
         <div className={className}>
             {compact ? (
@@ -45,10 +46,6 @@ const Layout = ({
     const posthog = usePostHog()
 
     useEffect(() => {
-        if (window && posthog?.setPersonProperties) {
-            posthog.setPersonProperties({ preferred_theme: (window as any).__theme })
-        }
-
         posthog?.register_once({
             utm_source: null,
             utm_medium: null,

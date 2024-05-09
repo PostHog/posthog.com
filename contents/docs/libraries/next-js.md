@@ -34,13 +34,15 @@ Install `posthog-js` using your package manager:
 yarn add posthog-js
 # or
 npm install --save posthog-js
+# or
+pnpm add posthog-js
 ```
 
 Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in your [project settings](https://app.posthog.com/project/settings).
 
 ```shell file=.env.local
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
-NEXT_PUBLIC_POSTHOG_HOST=<ph_instance_address>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
 
 These values need to start with `NEXT_PUBLIC_` to be accessible on the client-side.
@@ -60,7 +62,7 @@ import { PostHogProvider } from 'posthog-js/react'
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== 'undefined') {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
     // Enable debug mode in development
     loaded: (posthog) => {
       if (process.env.NODE_ENV === 'development') posthog.debug()
@@ -113,7 +115,7 @@ export function PHProvider({ children }) {
 }
 ```
 
-```ts
+```tsx
 // app/providers.tsx
 'use client'
 import posthog from 'posthog-js'
@@ -173,7 +175,7 @@ export default function PostHogPageView() {
 }
 ```
 
-```ts
+```tsx
 // app/PostHogPageView.tsx
 'use client'
 
@@ -239,7 +241,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-```ts
+```tsx
 // app/layout.tsx
 
 import './globals.css'
@@ -271,6 +273,56 @@ export default function RootLayout({
 </MultiLanguage>
 
 PostHog is now set up and ready to go. Files and components accessing PostHog on the client-side need the `'use client'` directive.
+
+#### Pageleave events (optional)
+
+To send `$pageleave` events after setting `capture_pageview` to false, you can set the `capture_pageleave` option to `true`.
+
+<MultiLanguage>
+
+```js
+// app/providers.js
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false,
+    capture_pageleave: true // Enable automatic pageleave capture
+  })
+}
+
+export function PHProvider({ children }) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+```tsx
+// app/providers.tsx
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+
+if (typeof window !== 'undefined') {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false,
+    capture_pageleave: true // Enable automatic pageleave capture
+  })
+}
+
+export function PHProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+</MultiLanguage>
 
 ### Accessing PostHog using the provider
 
@@ -388,7 +440,7 @@ export default function PostHogClient() {
 }
 ```
 
-> **Note:** Because our server-side `posthog-node` initializations are short-lived, we set `flushAt` to `1` and `flushInterval` to `0`. `flushAt` sets how many how many capture calls we should flush the queue (in one batch). `flushInterval` sets how many milliseconds we should wait before flushing the queue. Setting them to the lowest number ensures events are sent immediately and not batched. We also need to call `await posthog.shutdown()` once done.
+> **Note:** Because our server-side `posthog-node` initializations are short-lived, we set `flushAt` to `1` and `flushInterval` to `0`. `flushAt` sets how many capture calls we should flush the queue (in one batch). `flushInterval` sets how many milliseconds we should wait before flushing the queue. Setting them to the lowest number ensures events are sent immediately and not batched. We also need to call `await posthog.shutdown()` once done.
 
 
 ```js

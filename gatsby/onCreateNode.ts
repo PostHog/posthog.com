@@ -15,6 +15,15 @@ require('dotenv').config({
 
 // exports.onPreBuild = async () => {}
 
+const isValidUrl = (url: string): boolean => {
+    try {
+        const newUrl = new URL(url)
+        return newUrl.protocol === 'http:' || newUrl.protocol === 'https:'
+    } catch (err) {
+        return false
+    }
+}
+
 exports.onPreInit = async function (_, options) {
     const { strapiURL, strapiKey } = options
     if (!strapiURL || !strapiKey) return
@@ -312,6 +321,22 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 name: `html`,
                 value: html,
             })
+        }
+    }
+    if (node.internal.type === 'SlackEmoji') {
+        const { url } = node
+        if (isValidUrl(url)) {
+            const local = await createRemoteFileNode({
+                url,
+                parentNodeId: node.id,
+                createNode,
+                createNodeId,
+                cache,
+                store,
+            })
+            if (local) {
+                createNodeField({ node, name: 'localFile', value: local.id })
+            }
         }
     }
 }

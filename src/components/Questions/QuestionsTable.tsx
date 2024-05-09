@@ -49,8 +49,9 @@ export const Skeleton = () => {
 }
 
 const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor, sortBy, pinned, fetchMore }) => {
-    const { isModerator } = useUser()
+    const { isModerator, notifications } = useUser()
     const {
+        id,
         attributes: { profile, subject, permalink, replies, createdAt, resolved, topics, activeAt, body },
     } = question
 
@@ -67,6 +68,8 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
             fetchMore()
         }
     }, [inView])
+
+    const hasNewReplies = notifications.some((notification) => notification.question?.id === id)
 
     return profile ? (
         <div ref={fetchMore ? ref : null} key={question.id} className="py-2.5">
@@ -130,7 +133,11 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
                             )}
                         </div>
                     </div>
-                    <div className="hidden md:block md:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
+                    <div
+                        className={`hidden md:block md:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60 ${
+                            hasNewReplies ? 'font-bold !text-red dark:!text-yellow' : ''
+                        }`}
+                    >
                         {numReplies}
                     </div>
                     <div className="hidden md:block md:col-span-3 text-sm font-normal text-primary/60 dark:text-primary-dark/60">

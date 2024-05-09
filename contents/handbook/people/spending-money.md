@@ -77,7 +77,9 @@ These are just general guidelines - the most important thing is that you select 
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
-When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on Brex or ask Charles. (Don't do this if you're in the UK though - use your Revolut card.)
+Please purchase an English keyboard (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave. 
+
+If you are in the US only, when buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on Brex or ask Charles. Don't do this if you're in the UK though - use your Revolut card as we claim back the VAT. 
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 

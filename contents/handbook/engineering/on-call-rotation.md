@@ -16,9 +16,11 @@ We're very lucky that we have an almost-follow-the-sun rotation for service aler
 - [Americas East](https://posthog.pagerduty.com/schedules#PW1E9Y4) (16:00 to 00:00 UTC)
 - [Americas West](https://posthog.pagerduty.com/schedules#P3J10CZ) (00:00 to 08:00 UTC)
 
-Because the stability of production systems is critical, on-call involves weekends too (unlike Support Hero). More likely than not, nothing will happen over the weekend – but you never know, so the important thing is to keep your laptop at hand.
+Because the stability of production systems is critical, on-call involves weekends too (unlike Support Hero). More likely than not, nothing will happen over the weekend – but you never know, so the important thing is to keep your laptop at hand.
 
 Before going on call, make sure you have the [PagerDuty mobile app](https://support.pagerduty.com/docs/mobile-app) installed and configured. This way it'll be harder to miss an alert.
+
+To get a calendar with all your on-call shifts from PagerDuty. Go to your profile, select On-Call Shifts, go to Export Calendar and copy the link for the webcal feed. In google calendar, add a new calendar from URL and paste the link in there.
 
 ## What if I'm scheduled for a week when I won't be available?
 
@@ -40,7 +42,7 @@ A chunk of our high-frequency alerts have runbooks attached, which live in our i
 When an alert fires, find if there's a runbook for it. A runbook tells you what to look at and what fixes exist. Every alert also has a link to the Grafana graph that triggered the alert.
 In any case, your first priority will be to understand what's going on, and the right starting point will almost always be Grafana: [🇺🇸 US](http://grafana-prod-us/) / [🇪🇺 EU](http://grafana-prod-eu/).
 
-[If the alert is starting to have any noticeable impact on users, go raise an incident.](https://posthog.com/handbook/engineering/incidents) It's that simple.
+[If the alert is starting to have any noticeable impact on users, go raise an incident.](/handbook/engineering/incidents) It's that simple.
 
 If you're stumped and no resource is of help, get someone from the relevant team to shadow you while you sort the problem out. The idea is that they can help you understand the issue and where to find how to debug it. The idea is _not_ for them to take over at this point, as otherwise you won't be able to learn from this incident.
 

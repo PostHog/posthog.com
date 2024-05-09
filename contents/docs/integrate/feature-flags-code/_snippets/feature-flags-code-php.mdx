@@ -90,7 +90,7 @@ You can configure the `feature_flag_request_timeout_ms` parameter when initializ
 ```php
 PostHog::init("<ph_project_api_key>",
   array(
-    'host' => '<ph_instance_address>',
+    'host' => '<ph_client_api_host>',
     'feature_flag_request_timeout_ms' => 3000 // Time in milliseconds. Default is 3000 (3 seconds).
   ) 
 );

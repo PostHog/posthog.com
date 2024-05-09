@@ -1,5 +1,8 @@
 // https://api.exchangeratesapi.io/2021-01-01?base=USD
 
+// https://posthog.com/handbook/people/compensation#location-factor
+// We don't update the currency conversion rating anymore,
+// we update the location factor (location_factor.ts) instead.
 export const currencyData: Record<string, number> = {
     CAD: 1.264,
     HKD: 7.796,

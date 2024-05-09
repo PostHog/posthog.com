@@ -27,7 +27,7 @@ The answer? A lot.
 
 Let's start with a big one.
 
-You could use [Amplitude](/blog/best-amplitude-alternatives) for product analytics, Hotjar for session recording, Flagsmith for feature control, Segment as your customer data platform, Optimizely for testing, and Redshift for your data warehouse – these are sensible choices.
+You could use [Amplitude](/blog/best-amplitude-alternatives) for product analytics, Hotjar for session recording, Flagsmith for feature control, Segment as your customer data platform, [Optimizely](/blog/best-optimizely-alternatives) for testing, and Redshift for your data warehouse – these are sensible choices.
 
 But you can replace some (or even all) of them with just PostHog.
 
@@ -232,11 +232,5 @@ Want to see where people are clicking on any page on your website or web app, ju
 ![heatmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/docs-heatmap.png)
 
 Try the [PostHog Toolbar](/tutorials/toolbar).
-
-## 22. Track support tickets by connecting Zendesk
-
-The [Zendesk integration for PostHog](/apps/zendesk-connector) is a two-way connector that allows you turn Zendesk tickets into PostHog events and enrich Zendesk tickets with PostHog event data. You can also [add session replays to Zendesk tickets](/tutorials/zendesk-session-replays) to help debug and recreate issues.
-
-Importing support tickets as events allows you to understand support trends, and use Cohorts and Correlation Analysis to breakdown common traits among users who raise tickets frequently.
 
 <ArrayCTA />

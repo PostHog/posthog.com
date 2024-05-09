@@ -209,7 +209,15 @@ const AddonTooltip = ({ children, addon }: { children: React.ReactNode; addon: B
     )
 }
 
-export const CTA = ({ type = 'primary' }: { type?: 'primary' | 'secondary' }): JSX.Element => {
+export const CTA = ({
+    type = 'primary',
+    ctaText,
+    ctaLink,
+}: {
+    type?: 'primary' | 'secondary'
+    ctaText?: string
+    ctaLink?: string
+}): JSX.Element => {
     const posthog = usePostHog()
     return (
         <TrackedCTA
@@ -220,11 +228,15 @@ export const CTA = ({ type = 'primary' }: { type?: 'primary' | 'secondary' }): J
             type={type}
             size="md"
             className="shadow-md !w-auto"
-            to={`https://${
-                posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
-            }.posthog.com/signup`}
+            to={
+                ctaLink
+                    ? ctaLink
+                    : `https://${
+                          posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
+                      }.posthog.com/signup`
+            }
         >
-            Get started - free
+            {ctaText ? ctaText : 'Get started - free'}
         </TrackedCTA>
     )
 }
@@ -422,40 +434,45 @@ export default function Plans({
                                     </Row>
                                 )
                             })}
-                            {addons.map((addon) => {
-                                return (
-                                    <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={addon.type}>
-                                        <div className="flex-grow">
-                                            <AddonTooltip addon={addon} parentProductName={name}>
-                                                <Title
-                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                    title={addon.name}
-                                                />
-                                                <Label className="ml-2" text="Addon" />
-                                            </AddonTooltip>
-                                        </div>
-                                        {plans.map((plan) => {
-                                            return (
-                                                <div
-                                                    className="max-w-[25%] w-full min-w-[105px]"
-                                                    key={`${addon.type}-${plan.plan_key}`}
-                                                >
-                                                    {plan.free_allocation ? (
-                                                        <Close opacity={1} className="text-red w-4" />
-                                                    ) : (
-                                                        <AddonTooltip addon={addon} parentProductName={name}>
-                                                            <Title
-                                                                className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                                title="Available"
-                                                            />
-                                                        </AddonTooltip>
-                                                    )}
-                                                </div>
-                                            )
-                                        })}
-                                    </Row>
-                                )
-                            })}
+                            {addons
+                                .filter((addon: BillingProductV2Type) => !addon.inclusion_only)
+                                .map((addon: BillingProductV2Type) => {
+                                    return (
+                                        <Row
+                                            className="hover:bg-accent/60 dark:hover:bg-accent-dark/70"
+                                            key={addon.type}
+                                        >
+                                            <div className="flex-grow">
+                                                <AddonTooltip addon={addon} parentProductName={name}>
+                                                    <Title
+                                                        className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                        title={addon.name}
+                                                    />
+                                                    <Label className="ml-2" text="Addon" />
+                                                </AddonTooltip>
+                                            </div>
+                                            {plans.map((plan) => {
+                                                return (
+                                                    <div
+                                                        className="max-w-[25%] w-full min-w-[105px]"
+                                                        key={`${addon.type}-${plan.plan_key}`}
+                                                    >
+                                                        {plan.free_allocation ? (
+                                                            <Close opacity={1} className="text-red w-4" />
+                                                        ) : (
+                                                            <AddonTooltip addon={addon} parentProductName={name}>
+                                                                <Title
+                                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                                    title="Available"
+                                                                />
+                                                            </AddonTooltip>
+                                                        )}
+                                                    </div>
+                                                )
+                                            })}
+                                        </Row>
+                                    )
+                                })}
                         </div>
                         <div>
                             <Row className="bg-accent dark:bg-accent-dark my-2">

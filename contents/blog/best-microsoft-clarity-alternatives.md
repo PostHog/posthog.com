@@ -74,8 +74,6 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 >
 > PostHog goes deeper than Clarity by making it easy to debug issues via detailed event timelines, console logs, and network monitoring, while also enabling you to understand user behavior at every level when combined with product analytics and its other tools.
 
-<ArrayCTA />
-
 <br />
 
 ## 2. LogRocket

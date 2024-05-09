@@ -67,7 +67,7 @@ from posthog import Posthog
 
 posthog = Posthog(
   '<ph_project_api_key>', 
-  host='<ph_instance_address>'
+  host='<ph_client_api_host>'
 )
 
 app = Flask(__name__)
