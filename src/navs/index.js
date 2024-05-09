@@ -1495,16 +1495,38 @@ export const docsMenu = {
                             url: '/docs/api',
                         },
                         {
-                            name: 'POST-only public endpoints',
-                            url: '/docs/api/post-only-endpoints',
+                            name: 'Popular',
+                        },
+                        {
+                            name: 'Capture',
+                            url: '/docs/api/capture',
+                        },
+                        {
+                            name: 'Decide',
+                            url: '/docs/api/decide',
+                        },
+                        {
+                            name: 'Query',
+                            url: '/docs/api/query',
+                        },
+                        {
+                            name: 'More endpoints',
                         },
                         {
                             name: 'Actions',
                             url: '/docs/api/actions',
                         },
                         {
+                            name: 'Activity log',
+                            url: '/docs/api/activity-log',
+                        },
+                        {
                             name: 'Annotations',
                             url: '/docs/api/annotations',
+                        },
+                        {
+                            name: 'Batch exports',
+                            url: '/docs/api/batch-exports',
                         },
                         {
                             name: 'Cohorts',
@@ -1513,6 +1535,14 @@ export const docsMenu = {
                         {
                             name: 'Dashboards',
                             url: '/docs/api/dashboards',
+                        },
+                        {
+                            name: 'Dashboard templates',
+                            url: '/docs/api/dashboard-templates',
+                        },
+                        {
+                            name: 'Early access features',
+                            url: '/docs/api/early-access-feature',
                         },
                         {
                             name: 'Event definitions',
@@ -1555,16 +1585,56 @@ export const docsMenu = {
                             url: '/docs/api/members',
                         },
                         {
+                            name: 'Notebooks',
+                            url: '/docs/api/notebooks',
+                        },
+                        {
+                            name: 'Organizations',
+                            url: '/docs/api/organizations',
+                        },
+                        {
                             name: 'Persons',
                             url: '/docs/api/persons',
                         },
                         {
-                            name: 'Plugin configs',
-                            url: '/docs/api/plugin-configs',
+                            name: 'Destinations',
+                            url: '/docs/api/pipeline-destinations',
+                        },
+                        {
+                            name: 'Destination configs',
+                            url: '/docs/api/pipeline-destination-configs',
+                        },
+                        {
+                            name: 'Frontend apps',
+                            url: '/docs/api/pipeline-frontend-apps',
+                        },
+                        {
+                            name: 'Frontend apps configs',
+                            url: '/docs/api/pipeline-frontend-apps-configs',
+                        },
+                        {
+                            name: 'Import apps',
+                            url: '/docs/api/pipeline-import-apps',
+                        },
+                        {
+                            name: 'Import apps configs',
+                            url: '/docs/api/pipeline-import-apps-configs',
+                        },
+                        {
+                            name: 'Transformations',
+                            url: '/docs/api/pipeline-transformations',
+                        },
+                        {
+                            name: 'Transformation configs',
+                            url: '/docs/api/pipeline-transformation-configs',
                         },
                         {
                             name: 'Plugins',
                             url: '/docs/api/plugins',
+                        },
+                        {
+                            name: 'Plugin configs',
+                            url: '/docs/api/plugin-configs',
                         },
                         {
                             name: 'Projects',
@@ -1575,8 +1645,24 @@ export const docsMenu = {
                             url: '/docs/api/property-definitions',
                         },
                         {
+                            name: 'Roles',
+                            url: '/docs/api/roles',
+                        },
+                        {
                             name: 'Session recordings',
                             url: '/docs/api/session-recordings',
+                        },
+                        {
+                            name: 'Session recording playlists',
+                            url: '/docs/api/session-recording-playlists',
+                        },
+                        {
+                            name: 'Sessions',
+                            url: '/docs/api/sessions',
+                        },
+                        {
+                            name: 'Subscriptions',
+                            url: '/docs/api/subscriptions',
                         },
                         {
                             name: 'Surveys',
@@ -1589,10 +1675,6 @@ export const docsMenu = {
                         {
                             name: 'Users',
                             url: '/docs/api/user',
-                        },
-                        {
-                            name: 'Query',
-                            url: '/docs/api/query',
                         },
                         {
                             name: 'Data model',
