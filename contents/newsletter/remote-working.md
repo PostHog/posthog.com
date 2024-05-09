@@ -12,13 +12,17 @@ crosspost:
   - Blog
 ---
 
-Remote work sucks. If you work at Dell, that is. The company [recently announced](https://www.businessinsider.com/dell-remote-workers-promotion-return-office-push-flexible-work-2024-3) that remote employees would not be considered for promotions or be able to change roles. Dell’s rationale, which has something to do with “in-person connections” and “value differentiation,” is as tired as an entry-level Dell Inspiron trying to run _Cyberpunk 2077_.
+Remote work sucks. If you work at Dell, that is.
 
-It doesn’t have to be this way. The best remote teams are brimming with energy, they’re super productive, and do incredible work. So whether you’re part of a remote team, leading one, or want to go remote, here’s how the best of the best make it work, with some tips on how you can up your game, too.
+In March, it [announced](https://www.businessinsider.com/dell-remote-workers-promotion-return-office-push-flexible-work-2024-3) remote employees would not be considered for promotions, or be able to change roles. Dell’s rationale, some waffle about “in-person connections” and “value differentiation,” is as tired as a Dell Inspiron trying to run _Cyberpunk 2077_.
 
-### 1. They write everything down
+It doesn’t have to be this way. The best remote teams are brimming with energy, are super productive, and do incredible work. So whether you’re part of a remote team, leading one, or want to go remote, here’s how the best of the best make it work, with some tips on how you can up your game, too.
 
-Remote work doesn't work without a strong writing culture. Documenting by default – be it information on how to [file expenses](https://posthog.com/handbook/people/spending-money), your [ICP](https://posthog.com/handbook/who-we-are-building-for), or what a specific team is [working on this quarter](https://posthog.com/teams/product-analytics) – gives everyone access to the same information, regardless of seniority or location.
+### **1. They write everything down**
+
+Remote work doesn't work without a strong writing culture.
+
+Documenting by default – be it information on how to [file expenses](https://posthog.com/handbook/people/spending-money), your [ICP](https://posthog.com/handbook/who-we-are-building-for), or what a specific team is [working on this quarter](https://posthog.com/teams/product-analytics) – gives everyone access to the same information, regardless of seniority or location.
 
 Why does this work? Because:
 
@@ -34,7 +38,9 @@ At **PostHog**, it started with [our company handbook](https://posthog.com/handb
 
 At **Automattic**, Beau Lebens has [shared some great tips](https://beau.blog/2020/03/remote-work-at-scale/) on how to communicate effectively as a remote team and explains traps to avoid. One key takeaway: tools are not the answer. Installing a bunch of bots to transcribe meetings and run automated functions in Slack will only help if you do all the hard work first.
 
-At **Doist**, and just about any successful remote company, internal email is pretty much banned. As Doist founder and CEO Amir Salihefendic [explains](https://async.twist.com/asynchronous-communication/), email locks information away. This makes referring back to decisions or conversations either confusing or impossible. Default to communicating out in the open – GitHub, Slack, an internal wiki – so anyone can refer back to conversations and decisions at a later date.
+At **Doist**, and just about any successful remote company, internal email is pretty much banned. As Doist founder and CEO Amir Salihefendic [explains](https://async.twist.com/asynchronous-communication/), email locks information away. This makes referring back to decisions or conversations either confusing or impossible. Default to communicating out in the open – GitHub, Slack, an internal wiki – so anyone can find and reference conversations and decisions at a later date.
+
+[Hype cycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1715266314/posthog.com/contents/blog/hype-cycle-1.png)
 
 ### 2. They prioritize deep work
 
@@ -44,46 +50,48 @@ At **PostHog**, we’re [anti-meeting by default](https://posthog.com/blog/meeti
 
 At **Doist**, four days of each week are [dedicated to deep work](https://async.twist.com/heroes-housekeeping-days/), with Fridays reserved for housekeeping – bug fixes, battling technical debt, reading, research, and other smaller tasks. It’s an extreme version of time blocking – essentially blocking out four days a week for shipping, with one day reserved for everything else.
 
-When you absolutely have to have meetings, make the most of them. **GitLab** has a set of principles for how notes should be taken in [just about any meeting](https://handbook.gitlab.com/handbook/communication/#smart-note-taking-in-meetings). This starts with the agenda, which is shared in advance. During meetings, everyone is encouraged to help out with note-taking with a focus on capturing key points rather than every single word that’s said. 
+When you absolutely have to have meetings, make the most of them. **GitLab** has a set of principles for how notes should be taken in [just about any meeting](https://handbook.gitlab.com/handbook/communication/#smart-note-taking-in-meetings). This starts with the agenda, which is shared in advance. During meetings, everyone is encouraged to help out with note-taking with a focus on capturing key points rather than every single word that’s said.
 
-### 3. They value transparency and trust over process
+### 3. They value transparency and trust
 
-![The Remote Work Hype Cycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1713294203/posthog.com/contents/images/newsletter/remote-work/hype_cycle.png)
+The biggest (and stupidest) argument against remote work? It makes people less productive. This is demonstrably untrue. We’re an all-remote company and we ship incredibly fast. Don’t believe us? Believe the [Federal Reserve Bank of San Francisco](https://www.frbsf.org/research-and-insights/publications/economic-letter/2024/01/does-working-from-home-boost-productivity-growth/), whose research shows there’s no meaningful productivity loss from remote work.
 
-The biggest (and stupidest) argument against remote work? It makes people less productive. But remote work [doesn’t affect productivity, at all](https://www.bloomberg.com/news/articles/2024-01-16/remote-work-doesn-t-seem-to-affect-productivity-fed-study-finds). That’s not according to some random survey, that’s based on detailed research by the Federal Reserve Bank of San Francisco. 
+So, if productivity isn't the problem, what is it? It’s trust. If you trust people to do their very best work, and create a culture that values transparency, they'll deliver. That’s especially true for [engineers and developers](https://www.shakebugs.com/blog/why-let-developers-work-remotely/) – Stack Overflow has a great guide that navigates the [confusing mess of statistics](https://stackoverflow.blog/2023/11/27/are-remote-workers-more-productive-that-s-the-wrong-question/) around productivity and remote work.
 
-But productivity, or lack thereof, isn't the problem. The problem is trust. Trust people to do their very best work on their terms and, with the right culture, they'll deliver and then some. Study after study has shown that remote workers are happier, more diverse, and that they stay at companies for longer and, as a result, do better work. That’s especially true for [engineers and developers](https://www.shakebugs.com/blog/why-let-developers-work-remotely/). Stackoverflow has a great guide that navigates the [confusing mess of statistics](https://stackoverflow.blog/2023/11/27/are-remote-workers-more-productive-that-s-the-wrong-question/) around productivity and remote work.
+How do you build a culture of trust? Here’s a checklist.
 
-Ultimately, teams and companies that really make remote working work have to go big on transparency and trust. The best remote companies are transparent by design, but how do you build trust? Here’s a checklist.
+* **Give people autonomy.** At PostHog, we hire people who work well with high-level direction, and who are comfortable stepping on toes to get things done. We trust people to do their best work and, in return, they deliver.
 
-- Give people autonomy. At **PostHog**, we hire people who work well with high level direction and who are comfortable stepping on toes to get things done. We trust people to do their best work and, in return, they deliver.
+* **Honest feedback.** GitLab has a [policy](https://handbook.gitlab.com/handbook/values/) of “blameless problem solving.” Simply put, when something goes wrong, the investigation of the root cause is, as the company puts it, blameless. This encourages everyone to speak up without fear of punishment. People are trusted to make mistakes and, as a result, problems that do arise are easier to solve.
 
-- Feedback. **GitLab** has a [policy](https://handbook.gitlab.com/handbook/values/) of “blameless problem solving.” Simply put, when something goes wrong, the investigation of the root cause is, as the company puts it, blameless. This encourages everyone to speak up without fear of punishment. People are trusted to make mistakes and, as a result, problems that do arise are easier to solve.
+* **Work in public.** At Zapier, trust and transparency are a big part of the [company’s values](https://zapier.com/jobs/culture-and-values-at-zapier). As co-founder and CEO Wade Foster explains: “Transparency promotes equity and inclusion within our team and customer base. So work in public. Have discussions in the open and document your work.” Successful remote companies build everything out in the open. This gives everyone the context they need, and eliminates the political squabbles that plague less transparent companies.
 
-- Work in public. At **Zapier**, trust and transparency are a big part of the [company’s values](https://zapier.com/jobs/culture-and-values-at-zapier). As co-founder and CEO Wade Foster explains: “Transparency promotes equity and inclusion within our team and customer base. So work in public. Have discussions in the open and document your work.” The most successful remote companies build everything out in the open. This gives everyone the context they need to do their very best work across multiple time zones.
+* **Shared values.** The most successful remote teams have a shared set of values and behaviors – and these are often clearly defined in a public handbook. These values and behaviors are more important than dictatorial processes. As Buffer co-founder and CEO Joel Gascoigne wrote [almost a decade ago](https://buffer.com/resources/why-transparency/), “transparency breeds trust, and trust is is the foundation of great teamwork.” It’s still true today.
 
-- Shared values. The most successful remote teams have a shared set of values and behaviors – and these are often clearly defined in a public handbook. These values and behaviors are more important than dictatorial processes. As **Buffer** co-founder and CEO Joel Gascoigne wrote [almost a decade ago](https://buffer.com/resources/why-transparency/), “transparency breeds trust, and trust is is the foundation of great teamwork.” It’s still true today.
+### 4. They make meeting up easy
 
-### 4. They make time to meet-up
+Pretty much all successful remote teams have one thing in common: they’re not remote all the time.
 
-Pretty much all successful remote teams have one thing in common: they’re not remote all the time. No, that doesn’t mean hybrid working, it means offsites. Great offsites are a lot of fun but also highly intentional and help remote teams come together to work on big, specific problems. They also help build bonds that make asynchronous work more creative and collaborative for the rest of the year.
+That doesn’t mean hybrid working, or mandatory office days, it means both encouraging meeting up and making it easy to do so.
 
-At **PostHog**, we organize an annual offsite. We’re far from alone, but we think we’re pretty good at them. The typical agenda includes a couple of big social events, team dinners, a day-long hackathon, all-hands strategy sessions and workshops, company culture exercises, and time for people to get some downtime and explore. 
+At **PostHog**, we achieve this in a bunch of different ways:
 
-Want to know how we plan great offsites? Look no further than [our handbook](https://posthog.com/handbook/company/offsites) – it even has a comprehensive checklist and some templates you can use to get started. **GitLab** also has some [useful tips]([url](https://handbook.gitlab.com/handbook/leadership/in-person/)) on how to get the most out of offsites. 
+* **$300 monthly co-working budget**.** This makes it easy for people to meet up and work together if they already live in the same city.
 
-The best-functioning remote teams also have budgets for booking co-working spaces – it's a great way of encouraging people to go out and find [their third place]([url](https://www.theatlantic.com/family/archive/2022/04/third-places-meet-new-people-pandemic/629468/)). At PostHog, we also encourage individual teams to get together once a year to dig into specific projects and do in-person onboarding for all our new hires. Everyone at the company also has a quarterly travel budget so they can meet up with colleagues all over the world and solve some of the company’s biggest challenges.
+* **$1,500 quarterly meet-up budget** for ad hoc in-person collaboration with colleagues. This can cover flights, accommodation, and other expenses. At PostHog, Paul and Ben used this recently to meet for a week in Italy and ship our new [heatmap and scroll depth feature](https://posthog.com/changelog/2024#mouse-and-scroll-depth-tracking-launched).
 
-### Good reads for making remote working really work 📖
+* **In-person onboarding.** When new people join the company, we prioritize organizing an in-person onboarding session as soon as possible. This helps people get to know each other and share important context.
 
-**[Building an all-remote company from scratch](https://posthog.com/founders/remote-culture) – James Hawkins**
+* **Annual company offsites.** The typical agenda includes a couple of big social events, team dinners, a hackathon, all-hands strategy sessions, company culture exercises, and downtime to socialize and explore.
 
-This is exactly how we built a fully-remote company from the ground up. This was written in 2020 when we were 12 people. Today, we’re almost 50 and it’s still working.
+* **Frequent small team offsites.** In addition to our all-company offsite, all our [small teams](https://posthog.com/handbook/team-structure) run at least one annual offsite to focus on specific team goals and intense, in-person collaboration. They often include a hackathon, too, but this varies.
 
-**[The manager’s schedule is holding remote work back](https://marker.medium.com/the-managers-schedule-is-holding-remote-work-back-f9c1302ac6f3) – Luke Thomas**
+Our goal with all of this is to make our in-person time as intentional as possible. To work on big, specific problems, build bonds that create trust, and make asynchronous work more creative and collaborative.
 
-Many makers (hello, product engineers!) have been working remotely successfully for years. But managers can often struggle. This is how your company can fix that problem.
+### Good reads 📖
 
-**[Why remote work is so hard – and how it can be fixed](https://www.newyorker.com/culture/annals-of-inquiry/can-remote-work-be-fixed) – Cal Newport**
+**[Building an all-remote company from scratch](https://posthog.com/founders/remote-culture) – James Hawkins** This is exactly how we built a fully-remote company from the ground up. This was written in 2020 when we were 12 people. Today, we’re almost 50 and it’s still working.
 
-This is a great, detailed read on the long-standing problems that have scuppered remote work. And it’s written by Cal Newport, who also coined the term “deep work.”
+**[The manager’s schedule is holding remote work back](https://marker.medium.com/the-managers-schedule-is-holding-remote-work-back-f9c1302ac6f3) – Luke Thomas** Many makers (hello, product engineers!) have been working remotely successfully for years, but managers can often struggle. Luke shares how to fix that problem.
+
+**[Why remote work is so hard – and how it can be fixed](https://www.newyorker.com/culture/annals-of-inquiry/can-remote-work-be-fixed) – Cal Newport** This is a great, detailed read on the long-standing problems that have scuppered remote work. It’s written by Cal Newport, who also coined the term “deep work.”
