@@ -1,4 +1,5 @@
-date: 2023-05-09
+---
+date: 2024-05-09
 title: 'What is user stickiness and how to measure it?'
 author:
   - james-temperton
@@ -14,11 +15,12 @@ crosspost:
   - Founders
   - Blog
 ---
-Can’t stop scrolling on TikTok? Endlessly gawping at Instagram? That’s stickiness. Popularized by Meta when it was still known as Facebook, the notion of stickiness remains a crucial measure of how engaging your product or service is regardless of whether you’re a planet-conquering social media app or a B2B SaaS company.
+
+Can’t stop scrolling on TikTok? Endlessly gawping at Instagram? That’s stickiness. Popularized by Facebook, the notion of stickiness remains a crucial measure of how engaging your product or service is regardless of whether you’re a planet-conquering social media app or a B2B SaaS company.
 
 In this guide we’ll explain what user stickiness is, why it’s so important, how to measure it, and give you some tips on how to increase the stickiness of your product.
 
-### What is user stickiness?
+## What is user stickiness?
 
 Stickiness is a type of insight that lets you see how many people use your product on a regular basis. There are a few different ways to calculate it. DAU/MAU ratio is the most popular, but session frequency, session duration, and individual feature use can also help you understand how sticky your product is.
 
@@ -28,11 +30,11 @@ Customer stickiness is similar but different to customer retention and loyalty. 
 
 * **Customer retention** is a metric that focuses on reducing user churn. You do this by fixing reasons why users might want to leave. \
 
-* **Customer stickiness** is a measure of how well your product keeps users coming back. Achieve that, and you might well have [product-market fit](https://posthog.com/founders/measure-product-market-fit).
+* **Customer stickiness** is a measure of how well your product keeps users coming back. Achieve that, and you might well have [product-market fit](/founders/measure-product-market-fit).
 
 All three of these metrics work in tandem: improving customer retention is likely to give you more loyal customers, who are, in turn, more likely to be sticky. Get this right and you’ll have a growing customer base, growing revenue, and growing profits.
 
-### Why is user stickiness important?
+## Why is user stickiness important?
 
 However you measure it, stickiness is the lifeblood of a successful product. Acquiring new users can be expensive and time-consuming, so once you’ve onboarded someone you want to keep them engaged and loyal. And, if your product is paid, you want to keep them paying.
 
@@ -40,7 +42,7 @@ Improving the stickiness of your product, and individual features within it, wil
 
 For early-stage startups, stickiness will also likely help create brand advocates. Sparking joy for your more loyal users will make them more likely to recommend your product to friends and colleagues, creating priceless word-of-mouth growth.
 
-### How to measure your DAU/MAU ratio
+## How to measure your DAU/MAU ratio
 
 The [DAU/MAU ratio](https://posthog.com/tutorials/dau-mau-ratio) is, simply put, the radio of daily active users over monthly active users. How you define ‘active’ will depend on what your product or service does. If you work for Instacart, for example, you’re probably looking for people who have placed an order. At Spotify, you’re looking for people who have listened to a song or podcast. 
 
@@ -50,7 +52,7 @@ To calculate your DAU/MAU ratio, divide your daily active users by your monthly 
 
 This means that 50% of your monthly active users use your product every day. The higher the number the better. So a DAU/MAU ratio of 70% is better than a DAU/MAU ratio of 60% and so on.
 
-A blunt measure of DAU/MAU can make a great headline figure – but it hides a lot of nuance. And this is where HAU, WAU, MAU, QUA and YAU come in.
+A blunt measure of DAU/MAU can make a great headline figure – but it hides a lot of nuance. And this is where HAU, WAU, MAU, QAU and YAU come in.
 
 ### Are you a HAU, DAU, WAU, MAU, QAU, or YAU?
 
