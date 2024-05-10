@@ -136,6 +136,10 @@ const SectionSidebar = ({ children }) => (
     </div>
 )
 
+const SidebarList = ({ children }) => <ul className="flex flex-col gap-1">{children}</ul>
+
+const SidebarListItem = ({ children }) => <li className="leading-snug">{children}</li>
+
 const Discounts = () => (
     <div className="max-w-sm">
         <h4>Discounts</h4>
@@ -519,17 +523,17 @@ const PricingExperiment = ({
                             <SectionSidebar>
                                 <div>
                                     <h4 className="text-lg mb-2">How it works</h4>
-                                    <ul className="flex flex-col gap-1">
-                                        <li className="leading-snug">Only pay for products you use</li>
-                                        <li className="leading-snug">
+                                    <SidebarList>
+                                        <SidebarListItem>Only pay for products you use</SidebarListItem>
+                                        <SidebarListItem>
                                             <strong className="bg-yellow/50 italic">
                                                 Generous free tier for each product (resets monthly)
                                             </strong>
-                                        </li>
-                                        <li className="leading-snug">
+                                        </SidebarListItem>
+                                        <SidebarListItem>
                                             You can set billing limits per product so you never get a surprise bill
-                                        </li>
-                                        <li className="leading-snug">
+                                        </SidebarListItem>
+                                        <SidebarListItem>
                                             We also offer{' '}
                                             <Tooltip content={() => <Discounts />} placement="top">
                                                 <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
@@ -537,21 +541,21 @@ const PricingExperiment = ({
                                                 </strong>
                                             </Tooltip>{' '}
                                             for startups and non-profits
-                                        </li>
-                                    </ul>
+                                        </SidebarListItem>
+                                    </SidebarList>
                                 </div>
                                 <div>
                                     <h4 className="text-lg mb-2">Estimating usage</h4>
-                                    <ul className="flex flex-col gap-1">
-                                        <li className="leading-snug">
+                                    <SidebarList>
+                                        <SidebarListItem>
                                             Not sure what your volume looks like? Add the tracking code to your site and
                                             check back in a few days – no credit card required.
-                                        </li>
-                                        <li className="leading-snug">
+                                        </SidebarListItem>
+                                        <SidebarListItem>
                                             If something stupid happens, like you get an unexpected bill and you’re
                                             unhappy, we’ll pretty much always refund it.
-                                        </li>
-                                    </ul>
+                                        </SidebarListItem>
+                                    </SidebarList>
                                 </div>
                             </SectionSidebar>
                         </SectionColumns>
