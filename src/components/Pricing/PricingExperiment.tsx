@@ -130,8 +130,10 @@ const SectionColumns = ({ children }) => <div className="grid md:grid-cols-3 py-
 
 const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:pb-0">{children}</div>
 
-const SectionSidebar = ({ children }) => (
-    <div className="col-span-1 flex flex-col gap-4 border-t md:border-t-0 md:border-l border-light dark:border-dark pt-8 md:pt-0 md:pl-8">
+const SectionSidebar = ({ children, className = '' }) => (
+    <div
+        className={`col-span-1 flex flex-col gap-4 border-t md:border-t-0 md:border-l border-light dark:border-dark pt-8 md:pt-0 md:pl-8 ${className}`}
+    >
         {children}
     </div>
 )
@@ -556,6 +558,56 @@ const PricingExperiment = ({
                                             unhappy, we’ll pretty much always refund it.
                                         </SidebarListItem>
                                     </SidebarList>
+                                </div>
+                            </SectionSidebar>
+                        </SectionColumns>
+                    </SectionLayout>
+
+                    <SectionLayout>
+                        <SectionHeader>
+                            <h3>One plan for most customers</h3>
+                        </SectionHeader>
+
+                        <SectionColumns>
+                            <SectionMainCol>
+                                <h4 className="mb-0">The "ridiculously cheap" plan</h4>
+                                <p className="text-[15px] opacity-60">86% of customers use this plan</p>
+
+                                <ul className="columns-2">
+                                    <li>Usage-based pricing</li>
+                                    <li>Generous monthly free tier</li>
+                                    <li>Up to 10 projects</li>
+                                    <li>7-year data retention</li>
+                                    <li>Email and community support</li>
+                                    <li>Unlimited team members</li>
+                                    <li>Unlimited tracked users</li>
+                                </ul>
+                            </SectionMainCol>
+                            <SectionSidebar className="justify-between">
+                                <div>
+                                    <h4 className="text-lg mb-2">Plan FYIs</h4>
+                                    <SidebarList>
+                                        <SidebarListItem>
+                                            Self-serve, no upsells, no need to "talk to sales"
+                                        </SidebarListItem>
+                                        <SidebarListItem>
+                                            We don't do outbound sales. Everyone pays the same rates.
+                                        </SidebarListItem>
+                                        <SidebarListItem>
+                                            You can set billing limits per product so you never get a surprise bill
+                                        </SidebarListItem>
+                                        <SidebarListItem>
+                                            90% of our customers don't pay anything to use PostHog!
+                                            <Tooltip content={() => <Discounts />} placement="top">
+                                                <IconInfo className="size-4 inline-block ml-1" />
+                                            </Tooltip>{' '}
+                                        </SidebarListItem>
+                                    </SidebarList>
+                                </div>
+                                <div>
+                                    <span className="text-red dark:text-yellow font-semibold cursor-pointer">
+                                        Show full plan comparison
+                                    </span>
                                 </div>
                             </SectionSidebar>
                         </SectionColumns>
