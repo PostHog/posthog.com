@@ -244,7 +244,7 @@ const Pricing = ({ type, plans, unit, inclusion_only, className = '' }) => {
     return (
         <div className={`${className} w-full max-w-[500px]`}>
             <h3 className="text-lg">Monthly pricing</h3>
-            <div>
+            <div className="flex flex-col divide-light dark:divide-dark gap-1">
                 {inclusion_only ? (
                     <InclusionOnlyRow plans={plans} />
                 ) : (
@@ -262,13 +262,14 @@ const TabAddons = (props) => {
     return (
         <div className={props.className ?? ''}>
             <h3 className="text-lg">{props.title ?? 'Add-ons'}</h3>
-            <div className="flex space-x-4">
+            <div className="flex flex-col md:flex-row space-x-4">
                 <div>
                     <Tabs
                         onClick={(_tab, index) => setActiveTab(index)}
                         activeTab={activeTab}
                         vertical
                         size="sm"
+                        className=""
                         tabs={addons.map(({ name, icon_key, description }) => {
                             const Icon = Icons[icon_key]
                             return { title: name, icon: <Icon className="w-5" />, tooltip: description }
@@ -294,7 +295,7 @@ const TabAddons = (props) => {
 
 const TabPA = (props) => {
     return (
-        <div className="flex space-x-8">
+        <div className="flex flex-col md:flex-row gap-8 lg:gap-16">
             <Pricing {...props} className="flex-shrink-0" />
             <TabAddons addons={props.addons} className="flex-grow" title="Product analytics add-ons" />
         </div>
@@ -344,6 +345,8 @@ const ProductTabs = ({ billingProducts }) => {
             <Tabs
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
+                size="sm"
+                className="overflow-x-auto"
                 tabs={products.map(({ name, icon, price, denomination, message }) => ({
                     title: name,
                     subtitle: price ? (

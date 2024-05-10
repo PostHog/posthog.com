@@ -22,7 +22,7 @@ const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle
 }
 
 const Row = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
-    return <div className={`flex items-center space-x-4 px-2 lg:px-4 py-1.5 rounded ${className}`}>{children}</div>
+    return <div className={`flex items-center gap-4 py-1.5 rounded ${className}`}>{children}</div>
 }
 
 const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
@@ -101,26 +101,30 @@ export const PricingTiers = ({ plans, unit, compact = false, type }) => {
                 />
                 {!compact && (
                     <Title
-                        className="font-bold max-w-[25%] w-full min-w-[105px]"
+                        className="hidden font-bold max-w-[25%] w-full min-w-[105px]"
                         title={plans[0].free_allocation === up_to ? 'Free' : '-'}
                     />
                 )}
                 <div className="flex max-w-[25%] w-full min-w-[105px]">
                     <Title
-                        className={`font-bold  ${compact ? 'text-sm' : ''}`}
+                        className={`${compact ? 'text-sm' : ''}`}
                         title={
                             plans[0].free_allocation === up_to ? (
-                                'Free'
+                                <strong>Free</strong>
                             ) : type === 'product_analytics' && index === tiers.length - 1 ? (
+                                // last row
                                 <div className="flex items-center">
-                                    $
-                                    {parseFloat(unit_amount_usd).toFixed(
-                                        Math.max(
-                                            ...plans[plans.length - 1].tiers.map(
-                                                (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                    <strong>
+                                        $
+                                        {parseFloat(unit_amount_usd).toFixed(
+                                            Math.max(
+                                                ...plans[plans.length - 1].tiers.map(
+                                                    (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                                )
                                             )
-                                        )
-                                    )}
+                                        )}
+                                    </strong>
+                                    /{unit}
                                     <Tooltip
                                         content={() => (
                                             <div>
@@ -142,13 +146,19 @@ export const PricingTiers = ({ plans, unit, compact = false, type }) => {
                                     </Tooltip>
                                 </div>
                             ) : (
-                                `$${parseFloat(unit_amount_usd).toFixed(
-                                    Math.max(
-                                        ...plans[plans.length - 1].tiers.map(
-                                            (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
-                                        )
-                                    )
-                                )}`
+                                <>
+                                    <strong>
+                                        $
+                                        {parseFloat(unit_amount_usd).toFixed(
+                                            Math.max(
+                                                ...plans[plans.length - 1].tiers.map(
+                                                    (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                                )
+                                            )
+                                        )}
+                                    </strong>
+                                    /{unit}
+                                </>
                             )
                         }
                     />
