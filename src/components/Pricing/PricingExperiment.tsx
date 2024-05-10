@@ -248,7 +248,7 @@ const Pricing = ({ type, plans, unit, inclusion_only, className = '' }) => {
                 {inclusion_only ? (
                     <InclusionOnlyRow plans={plans} />
                 ) : (
-                    <PricingTiers plans={plans} unit={unit} type={type} />
+                    <PricingTiers plans={plans} unit={unit} type={type} test={true} />
                 )}
             </div>
         </div>
@@ -285,6 +285,7 @@ const TabAddons = (props) => {
                             unit={activeAddon.unit}
                             type={activeAddon.type}
                             key={activeAddon.type}
+                            test={true}
                         />
                     )}
                 </div>

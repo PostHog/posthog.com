@@ -64,7 +64,7 @@ export const InclusionOnlyRow = ({ plans }) => (
 
 const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
 
-export const PricingTiers = ({ plans, unit, compact = false, type }) => {
+export const PricingTiers = ({ plans, unit, compact = false, type, test = false }) => {
     const posthog = usePostHog()
     const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
 
@@ -105,7 +105,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type }) => {
                         title={plans[0].free_allocation === up_to ? 'Free' : '-'}
                     />
                 )}
-                <div className="flex max-w-[25%] w-full min-w-[105px]">
+                <div className={`flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'}`}>
                     <Title
                         className={`${compact ? 'text-sm' : ''}`}
                         title={
