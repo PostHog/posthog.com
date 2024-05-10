@@ -120,6 +120,22 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
     </div>
 )
 
+const SectionLayout = ({ children }) => <section className={`${section} mb-12 mt-8 md:px-4`}>{children}</section>
+
+const SectionHeader = ({ children }) => (
+    <header className="border-b pb-1 border-light dark:border-dark">{children}</header>
+)
+
+const SectionColumns = ({ children }) => <div className="grid md:grid-cols-3 py-4">{children}</div>
+
+const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:pb-0">{children}</div>
+
+const SectionSidebar = ({ children }) => (
+    <div className="col-span-1 flex flex-col gap-4 border-t md:border-t-0 md:border-l border-light dark:border-dark pt-8 md:pt-0 md:pl-8">
+        {children}
+    </div>
+)
+
 const Discounts = () => (
     <div className="max-w-sm">
         <h4>Discounts</h4>
@@ -493,14 +509,14 @@ const PricingExperiment = ({
                         <ProductTabs billingProducts={billingProducts} />
                     </section>
 
-                    <section className={`${section} mb-12 mt-8 md:px-4`}>
-                        <header className="border-b pb-1 border-light dark:border-dark">
+                    <SectionLayout>
+                        <SectionHeader>
                             <h3>Pricing calculator</h3>
-                        </header>
+                        </SectionHeader>
 
-                        <div className="grid grid-cols-3 py-4">
-                            <div className="col-span-2">tabs n stuff</div>
-                            <div className="col-span-1 flex flex-col gap-4 border-l border-light dark:border-dark pl-8">
+                        <SectionColumns>
+                            <SectionMainCol>tabs n stuff</SectionMainCol>
+                            <SectionSidebar>
                                 <div>
                                     <h4 className="text-lg mb-2">How it works</h4>
                                     <ul className="flex flex-col gap-1">
@@ -537,9 +553,9 @@ const PricingExperiment = ({
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
-                        </div>
-                    </section>
+                            </SectionSidebar>
+                        </SectionColumns>
+                    </SectionLayout>
 
                     <section
                         className={`${section} ${
