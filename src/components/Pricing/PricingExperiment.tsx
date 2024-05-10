@@ -129,7 +129,7 @@ const SectionHeader = ({ children }) => (
 
 const SectionColumns = ({ children }) => <div className="grid md:grid-cols-3 py-4">{children}</div>
 
-const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:pb-0">{children}</div>
+const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:pb-0 md:pr-8">{children}</div>
 
 const SectionSidebar = ({ children, className = '' }) => (
     <div
@@ -491,7 +491,7 @@ const PlansTabs = () => {
                 <>
                     <h4 className="mb-0">The "ridiculously cheap" plan</h4>
                     <p className="text-[15px] opacity-60">86% of customers use this plan</p>
-                    <ul className="columns-2">
+                    <ul className="md:columns-2">
                         <li>Usage-based pricing</li>
                         <li>Generous monthly free tier</li>
                         <li>Up to 10 projects</li>
@@ -546,7 +546,7 @@ const PlansTabs = () => {
     const activePlan = plans[activeTab]
 
     return (
-        <div className="md:pr-8">
+        <div>
             <Tabs
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
@@ -893,8 +893,8 @@ const PricingExperiment = ({
                                         loss-leader products that will go up in pricing later or get retired.
                                     </li>
                                     <li>
-                                        *We aim to be the cheapest for each product at every scale* compared to every
-                                        major competitor.{' '}
+                                        <strong>We aim to be the cheapest for each product at every scale</strong>{' '}
+                                        compared to every major competitor.{' '}
                                         <Link href="#">
                                             <em>Tell us if we're not!</em>
                                         </Link>{' '}
