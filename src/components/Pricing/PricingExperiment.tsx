@@ -30,6 +30,7 @@ import useProducts from './Products'
 import { graphql, useStaticQuery } from 'gatsby'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import Tabs from 'components/Tabs'
+import { CallToAction } from 'components/CallToAction'
 
 interface PlanData {
     title: string
@@ -427,6 +428,141 @@ const ProductTabs = ({ billingProducts }) => {
     )
 }
 
+const PlansTabs = () => {
+    const plans = [
+        {
+            name: 'Totally free',
+            description: 'No credit card required',
+            html: (
+                <>
+                    <h4>Use PostHog free forever, with some limits</h4>
+                    <div className="grid grid-cols-5 pb-4 text-[15px] [&>*:nth-child(3)]:opacity-60">
+                        <div className="px-2 pb-2 border-b border-light dark:border-dark">&nbsp;</div>
+                        <div className="col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
+                            <strong>Totally free</strong>
+                        </div>
+                        <div className="col-span-2 pl-2 pb-2 border-b border-light dark:border-darkopacity-70">
+                            <strong>Ridiculously cheap</strong>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-5 gap-x-4 gap-y-2 text-[15px] [&>*:nth-child(3n+1)]:opacity-70 [&>*:nth-child(3n+3)]:opacity-70">
+                        <div>Price</div>
+                        <div className="col-span-2">Free forever</div>
+                        <div className="col-span-2">Starts at $0/mo</div>
+
+                        <div>Volume limits</div>
+                        <div className="col-span-2">
+                            Limited to free monthly allowance{' '}
+                            <Tooltip content={() => <Discounts />} placement="top">
+                                <IconInfo className="size-4 inline-block" />
+                            </Tooltip>
+                        </div>
+                        <div className="col-span-2">Unlimited</div>
+
+                        <div>Product features</div>
+                        <div className="col-span-2">
+                            Basic limits{' '}
+                            <Tooltip content={() => <Discounts />} placement="top">
+                                <IconInfo className="size-4 inline-block" />
+                            </Tooltip>
+                        </div>
+                        <div className="col-span-2">All features</div>
+
+                        <div>Support</div>
+                        <div className="col-span-2">Community forums</div>
+                        <div className="col-span-2">Email</div>
+
+                        <div>
+                            Add-ons{' '}
+                            <Tooltip content={() => <Discounts />} placement="top">
+                                <IconInfo className="size-4 inline-block" />
+                            </Tooltip>
+                        </div>
+                        <div className="col-span-2">Not available</div>
+                        <div className="col-span-2">Add-ons</div>
+                    </div>
+                </>
+            ),
+        },
+        {
+            name: 'Ridiculously cheap',
+            description: 'Starts at $0/mo',
+            html: (
+                <>
+                    <h4 className="mb-0">The "ridiculously cheap" plan</h4>
+                    <p className="text-[15px] opacity-60">86% of customers use this plan</p>
+                    <ul className="columns-2">
+                        <li>Usage-based pricing</li>
+                        <li>Generous monthly free tier</li>
+                        <li>Up to 10 projects</li>
+                        <li>7-year data retention</li>
+                        <li>Email and community support</li>
+                        <li>Unlimited team members</li>
+                        <li>Unlimited tracked users</li>
+                    </ul>
+                </>
+            ),
+        },
+        {
+            name: 'Enterprise mode',
+            description: '$20k/yr minimum spend',
+            html: (
+                <>
+                    <div className="grid grid-cols-2 gap-8">
+                        <div>
+                            <div>
+                                <strong>
+                                    Everything in <em>Ridiculously cheap</em> plus:
+                                </strong>
+                            </div>
+                            <ul>
+                                <li>SAML SSO enforcement</li>
+                                <li>Teams add-on included</li>
+                                <li>Custom MSA</li>
+                                <li>Priority training, support</li>
+                                <li>Advanced permissions</li>
+                                <li>Audit logs</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>Starts at $20k/year w/ fixed annual terms</li>
+                                <li>Annual contract with minimum commitment</li>
+                                <li>No upcharge on usage-based prices</li>
+                            </ul>
+                            <div className="pt-4">
+                                <CallToAction href="/contact-sales" size="sm">
+                                    Talk to a customer engineer
+                                </CallToAction>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            ),
+        },
+    ]
+
+    const [activeTab, setActiveTab] = useState(1)
+    const activePlan = plans[activeTab]
+
+    return (
+        <div className="md:pr-8">
+            <Tabs
+                activeTab={activeTab}
+                onClick={(_tab, index) => setActiveTab(index)}
+                size="sm"
+                className="overflow-x-auto"
+                tabs={plans.map(({ name, description, html }) => ({
+                    title: name,
+                    subtitle: description,
+                    html: html,
+                }))}
+            />
+            {activeTab !== undefined && <div className="my-8">{[activePlan.html]}</div>}
+        </div>
+    )
+}
+
 const PricingExperiment = ({
     groupsToShow,
     currentProduct,
@@ -570,18 +706,7 @@ const PricingExperiment = ({
 
                         <SectionColumns>
                             <SectionMainCol>
-                                <h4 className="mb-0">The "ridiculously cheap" plan</h4>
-                                <p className="text-[15px] opacity-60">86% of customers use this plan</p>
-
-                                <ul className="columns-2">
-                                    <li>Usage-based pricing</li>
-                                    <li>Generous monthly free tier</li>
-                                    <li>Up to 10 projects</li>
-                                    <li>7-year data retention</li>
-                                    <li>Email and community support</li>
-                                    <li>Unlimited team members</li>
-                                    <li>Unlimited tracked users</li>
-                                </ul>
+                                <PlansTabs />
                             </SectionMainCol>
                             <SectionSidebar className="justify-between">
                                 <div>
@@ -598,7 +723,21 @@ const PricingExperiment = ({
                                         </SidebarListItem>
                                         <SidebarListItem>
                                             90% of our customers don't pay anything to use PostHog!
-                                            <Tooltip content={() => <Discounts />} placement="top">
+                                            <Tooltip
+                                                content={() => (
+                                                    <div className="max-w-[300px]">
+                                                        <p className="mb-1">
+                                                            <strong>... and we're cool with it!</strong>
+                                                        </p>
+                                                        <p className="text-[15px] mb-0">
+                                                            Use PostHog for free within our generous free tier limits.
+                                                            Exceed the free tier limits and you'll only pay for what you
+                                                            use.
+                                                        </p>
+                                                    </div>
+                                                )}
+                                                placement="bottom"
+                                            >
                                                 <IconInfo className="size-4 inline-block ml-1" />
                                             </Tooltip>{' '}
                                         </SidebarListItem>
