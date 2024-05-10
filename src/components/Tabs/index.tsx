@@ -38,10 +38,12 @@ export default function Tabs({
                         key={`${tab.title}-${index}`}
                         className={`click ${
                             size === 'sm' ? 'py-1 px-2' : 'py-3 px-4'
-                        } rounded-md hover:bg-accent dark:hover:bg-accent-dark border border-transparent hover:border-light dark:hover:border-dark ${
+                        } rounded-md hover:bg-accent dark:hover:bg-accent-dark border hover:border-light dark:hover:border-dark ${
                             vertical ? '' : 'flex-1'
                         } ${
-                            active ? 'bg-accent border-border dark:bg-accent-dark dark:border-dark' : 'border-white/0'
+                            active
+                                ? 'bg-accent border-border dark:bg-accent-dark dark:border-dark'
+                                : 'border-transparent'
                         }`}
                     >
                         <div className="flex items-start space-x-2">

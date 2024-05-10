@@ -1484,5 +1484,5 @@ li.squeak-left-border {
 }
 
 .click {
-    @apply hover:top-[-1px] hover:scale-[1.005] active:top-[.5px] active:scale-[.99];
+    @apply scale-[.99] hover:top-[-2px] hover:scale-[1] active:top-[3px] active:scale-[.99];
 }
