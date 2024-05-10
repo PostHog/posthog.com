@@ -334,7 +334,7 @@ const Pricing = ({
                                             </div>
                                         )}
                                     >
-                                        <span className="border-b border-dashed border-primary/50 dark:primary-dark/50">
+                                        <span className="border-b border-dashed border-primary/50 dark:border-primary-dark/50">
                                             value-based pricing
                                         </span>
                                     </Tooltip>

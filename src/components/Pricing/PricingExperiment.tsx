@@ -120,6 +120,32 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
     </div>
 )
 
+const Discounts = () => (
+    <div className="max-w-sm">
+        <h4>Discounts</h4>
+        <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
+            <li className="relative pl-7">
+                <IconRocket className="size-5 absolute left-0 top-0.5 opacity-50" />
+                <strong>Startups</strong>
+                <p className="text-[15px]">
+                    If your startup has raised less than $5 million and is less than 2 years old, you may be interested
+                    in our startup program.{' '}
+                    <Link href="/startups" className="text-red dark:text-yellow font-semibold">
+                        Learn more
+                    </Link>
+                </p>
+            </li>
+            <li className="relative pl-7 pt-4">
+                <IconHandMoney className="size-5 absolute left-0 top-4.5 opacity-50" />
+                <strong>Non-profits</strong>
+                <p className="text-[15px]">
+                    Most non-profits are eligible for 50% off. Get in touch through the app after signing up.
+                </p>
+            </li>
+        </ul>
+    </div>
+)
+
 export const section = cntl`
     max-w-6xl
     xl:max-w-7xl
@@ -447,7 +473,7 @@ const PricingExperiment = ({
                                     </div>
                                 )}
                             >
-                                <span className="border-b border-dashed border-primary/50 dark:primary-dark/50">
+                                <span className="border-b border-dashed border-primary/50 dark:border-primary-dark/50">
                                     value-based pricing
                                 </span>
                             </Tooltip>
@@ -465,6 +491,54 @@ const PricingExperiment = ({
                 <>
                     <section className={`${section} mb-12 mt-8 md:px-4`}>
                         <ProductTabs billingProducts={billingProducts} />
+                    </section>
+
+                    <section className={`${section} mb-12 mt-8 md:px-4`}>
+                        <header className="border-b pb-1 border-light dark:border-dark">
+                            <h3>Pricing calculator</h3>
+                        </header>
+
+                        <div className="grid grid-cols-3 py-4">
+                            <div className="col-span-2">tabs n stuff</div>
+                            <div className="col-span-1 flex flex-col gap-4 border-l border-light dark:border-dark pl-8">
+                                <div>
+                                    <h4 className="text-lg mb-2">How it works</h4>
+                                    <ul className="flex flex-col gap-1">
+                                        <li className="leading-snug">Only pay for products you use</li>
+                                        <li className="leading-snug">
+                                            <strong className="bg-yellow/50 italic">
+                                                Generous free tier for each product (resets monthly)
+                                            </strong>
+                                        </li>
+                                        <li className="leading-snug">
+                                            You can set billing limits per product so you never get a surprise bill
+                                        </li>
+                                        <li className="leading-snug">
+                                            We also offer{' '}
+                                            <Tooltip content={() => <Discounts />} placement="top">
+                                                <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                    discounts
+                                                </strong>
+                                            </Tooltip>{' '}
+                                            for startups and non-profits
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 className="text-lg mb-2">Estimating usage</h4>
+                                    <ul className="flex flex-col gap-1">
+                                        <li className="leading-snug">
+                                            Not sure what your volume looks like? Add the tracking code to your site and
+                                            check back in a few days – no credit card required.
+                                        </li>
+                                        <li className="leading-snug">
+                                            If something stupid happens, like you get an unexpected bill and you’re
+                                            unhappy, we’ll pretty much always refund it.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </section>
 
                     <section
