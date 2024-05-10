@@ -298,8 +298,8 @@ export const QuestionForm = ({
             slugs: [] as { slug: string }[],
             permalink: '',
             topics: {
-                // 50 is uncategorized topic
-                connect: [topicID || 50],
+                // 346 is uncategorized topic
+                connect: [topicID || 346],
             },
         }
 
