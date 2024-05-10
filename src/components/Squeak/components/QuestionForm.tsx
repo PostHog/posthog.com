@@ -58,7 +58,9 @@ export const Select = ({
     }
 
     useEffect(() => {
-        fetchTopicGroups().then((topicGroups) => setTopicGroups(topicGroups))
+        fetchTopicGroups().then((topicGroups) =>
+            setTopicGroups(topicGroups.filter((group) => group?.attributes?.label !== 'Off-topic'))
+        )
     }, [])
 
     return (

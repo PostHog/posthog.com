@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import { useUser, User } from 'hooks/useUser'
 
-const navSorted = ['Products', 'Data', 'Product OS', 'Self-hosting', 'Other']
+const navSorted = ['Products', 'Data', 'Product OS', 'Self-hosting', 'Off-topic', 'Other']
 
 export default function useTopicsNav() {
     const { topicGroups } = useStaticQuery(graphql`

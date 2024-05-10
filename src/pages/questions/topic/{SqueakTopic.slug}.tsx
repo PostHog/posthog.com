@@ -35,6 +35,9 @@ interface IProps {
 
 export default function Questions({ data, pageContext }: IProps) {
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('activity')
+    const topicLabel = data?.squeakTopic?.label
+    const isQuestionTopic = !topicLabel?.startsWith('#')
+    const title = `${topicLabel}${isQuestionTopic ? ' questions' : ''}`
 
     const { questions, isLoading, refresh, fetchMore, hasMore } = useQuestions({
         limit: 20,
@@ -46,14 +49,13 @@ export default function Questions({ data, pageContext }: IProps) {
                     $null: true,
                 },
             },
-            subject: {
-                $ne: '',
-            },
-            slugs: {
-                slug: {
-                    $notContainsi: '/community/profiles',
-                },
-            },
+            ...(isQuestionTopic
+                ? {
+                      subject: {
+                          $ne: '',
+                      },
+                  }
+                : {}),
         },
     })
 
@@ -91,12 +93,16 @@ export default function Questions({ data, pageContext }: IProps) {
                         <span className="text-primary dark:text-primary-dark text-[15px]">Topics</span>
                     </Link>
                     <div className="ml-auto">
-                        <QuestionForm topicID={data?.squeakTopic?.squeakId} onSubmit={refresh} />
+                        <QuestionForm
+                            label={isQuestionTopic ? 'Ask a question' : 'New post'}
+                            topicID={data?.squeakTopic?.squeakId}
+                            onSubmit={refresh}
+                        />
                     </div>
                 </div>
                 <div className="w-full sm:flex sm:items-center mb-4">
                     <div className="flex space-x-4 items-baseline">
-                        <h1 className="text-4xl m-0">{data?.squeakTopic?.label} questions</h1>
+                        <h1 className="text-4xl m-0">{title}</h1>
                         <SubscribeButton
                             className="text-red font-bold disabled:text-black dark:disabled:text-white disabled:opacity-50"
                             contentType="topic"
@@ -131,6 +137,8 @@ export default function Questions({ data, pageContext }: IProps) {
                 <SidebarSearchBox filter="question" />
                 <div className="mt-8 flex flex-col">
                     <QuestionsTable
+                        showStatus={isQuestionTopic}
+                        showBody={!isQuestionTopic}
                         hasMore={hasMore}
                         className="sm:grid-cols-4"
                         questions={questions}
