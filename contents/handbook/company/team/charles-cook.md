@@ -19,7 +19,7 @@ I'm the exec responsible for the Marketing, Sales & CS, and People & Ops small t
   - I am the manager for Simon, Andy, Fraser, Lottie, and Joe
 - Sales & CS
   - Doing the slightly more out there/weird stuff that no one else is doing yet (e.g. pretending to be an SDR today)
-  - Provide feedback and new ideas for our strategy and playbook to scale to $50m ARR
+  - Provide feedback and new ideas for our strategy and playbook to scale to $50m ARR, including how we think about RevOps
   - Work with Fraser to set targets and individual AE quotas based on our financial model
 - People & Ops
   - Monthly 1-1s with all managers; run monthly management coaching roundtable
