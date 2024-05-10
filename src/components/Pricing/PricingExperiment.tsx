@@ -858,6 +858,99 @@ const PricingExperiment = ({
                             </div>
                         </div>
                     </section>
+
+                    <SectionLayout>
+                        <SectionHeader>
+                            <h3>Add-ons</h3>
+                        </SectionHeader>
+
+                        <SectionColumns>
+                            <SectionMainCol>tabs n stuff</SectionMainCol>
+                            <SectionSidebar>
+                                <h4 className="text-lg mb-2">Why add-ons?</h4>
+                                <SidebarList>
+                                    <SidebarListItem>
+                                        We move additional functionality to add-ons to keep our base prices low. This is
+                                        so you never pay for functionality you don't want or need.
+                                    </SidebarListItem>
+                                    <SidebarListItem>Subscribe to add-ons after signing up.</SidebarListItem>
+                                </SidebarList>
+                            </SectionSidebar>
+                        </SectionColumns>
+                    </SectionLayout>
+
+                    <SectionLayout>
+                        <SectionHeader>
+                            <h3>Our pricing is designed to make you happy</h3>
+                        </SectionHeader>
+
+                        <SectionColumns>
+                            <SectionMainCol>
+                                <p>Here's what you should know about our pricing:</p>
+                                <ul className="space-y-1 mb-4">
+                                    <li>
+                                        <strong>We make a profit with every product.</strong> This means we don’t have
+                                        loss-leader products that will go up in pricing later or get retired.
+                                    </li>
+                                    <li>
+                                        *We aim to be the cheapest for each product at every scale* compared to every
+                                        major competitor.{' '}
+                                        <Link href="#">
+                                            <em>Tell us if we're not!</em>
+                                        </Link>{' '}
+                                        (Note: This doesn't include your buddy's two person startup.)
+                                    </li>
+                                    <li>
+                                        The company in general has significant revenue, over 60,000 customers, runs{' '}
+                                        <Link href="#">default alive</Link>, and aims to IPO rather than sell. This
+                                        means <strong>we don’t rely on investors to grow, and we’re stable.</strong> Of
+                                        course we aren’t perfect, but this goes a long way to avoiding the average dumb
+                                        vc-backed company stuff in general - like running out of money or selling to a
+                                        lame bigger company who just kills off our products.
+                                    </li>
+                                    <li>
+                                        We have an open source product too - so if you must, you can self host. It is
+                                        MIT licensed if you want to use it in a big organization that isn’t ready to
+                                        move to PostHog Cloud yet.
+                                        <Tooltip
+                                            content={() => (
+                                                <div className="max-w-sm">
+                                                    <strong className="block">A disclaimer about self-hosting</strong>
+                                                    <p className="mb-2 text-sm">
+                                                        Being upfront, self-hosting PostHog has limitations and is
+                                                        usually a worse experience (and more expensive) than PostHog
+                                                        Cloud.
+                                                    </p>
+                                                    <p className="mb-0 text-sm">
+                                                        Main benefits of PostHog Cloud include our large, shared
+                                                        infrastructure and lack of separate hosting costs, required
+                                                        maintenance, and upgrades that come with self-hosting.
+                                                    </p>
+                                                </div>
+                                            )}
+                                        >
+                                            <IconInfo className="size-4 inline-block" />
+                                        </Tooltip>
+                                    </li>
+                                </ul>
+                                <p>
+                                    If you need more info, <Link href="#">read our FAQ</Link>,{' '}
+                                    <Link href="#">ask a question</Link>, or <Link href="#">talk to a human</Link>.
+                                </p>
+                            </SectionMainCol>
+                            <SectionSidebar>
+                                <p className="opacity-60 text-[15px] mb-0">A note from our co-founder</p>
+                                <div className="flex gap-2">
+                                    <div>image</div>
+                                    <p>
+                                        <strong>James Hawkins</strong>
+                                        <br />
+                                        <span className="text-sm opacity-70">CEO & Co-founder</span>
+                                    </p>
+                                </div>
+                            </SectionSidebar>
+                        </SectionColumns>
+                    </SectionLayout>
                 </>
             )}
 
