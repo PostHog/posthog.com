@@ -58,7 +58,9 @@ export const Select = ({
     }
 
     useEffect(() => {
-        fetchTopicGroups().then((topicGroups) => setTopicGroups(topicGroups))
+        fetchTopicGroups().then((topicGroups) =>
+            setTopicGroups(topicGroups.filter((group) => group?.attributes?.label !== 'Off-topic'))
+        )
     }, [])
 
     return (
@@ -296,8 +298,8 @@ export const QuestionForm = ({
             slugs: [] as { slug: string }[],
             permalink: '',
             topics: {
-                // 50 is uncategorized topic
-                connect: [topicID || 50],
+                // 346 is uncategorized topic
+                connect: [topicID || 346],
             },
         }
 
