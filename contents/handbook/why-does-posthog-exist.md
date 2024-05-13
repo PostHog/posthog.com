@@ -14,7 +14,7 @@ Equip every developer to build successful products
 
 Building a successful product is hard. It gets harder when you don't understand how your customers are using your product.
 
-PostHog gives you all the tools you need to understand how your users use your product. All with one simple snippet.
+PostHog includes all the tools you need to understand how people use your product. All with one simple snippet.
 
 ### Start from the start
 
