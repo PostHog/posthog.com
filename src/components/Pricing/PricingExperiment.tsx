@@ -17,7 +17,7 @@ import CTA from 'components/Home/CTA.js'
 import {
     IconCalendar,
     IconCheck,
-    IconChevronDown,
+    IconCheckCircle,
     IconHandMoney,
     IconInfo,
     IconRocket,
@@ -491,7 +491,7 @@ const PlansTabs = () => {
                 <>
                     <h4 className="mb-0">The "ridiculously cheap" plan</h4>
                     <p className="text-[15px] opacity-60">86% of customers use this plan</p>
-                    <ul className="md:columns-2">
+                    <ul className="tw-check-bullets md:columns-2">
                         <li>Usage-based pricing</li>
                         <li>Generous monthly free tier</li>
                         <li>Up to 10 projects</li>
@@ -515,7 +515,7 @@ const PlansTabs = () => {
                                     Everything in <em>Ridiculously cheap</em> plus:
                                 </strong>
                             </div>
-                            <ul>
+                            <ul className="tw-check-bullets">
                                 <li>SAML SSO enforcement</li>
                                 <li>Teams add-on included</li>
                                 <li>Custom MSA</li>
@@ -525,7 +525,7 @@ const PlansTabs = () => {
                             </ul>
                         </div>
                         <div>
-                            <ul>
+                            <ul className="tw-check-bullets">
                                 <li>Starts at $20k/year w/ fixed annual terms</li>
                                 <li>Annual contract with minimum commitment</li>
                                 <li>No upcharge on usage-based prices</li>
@@ -547,17 +547,19 @@ const PlansTabs = () => {
 
     return (
         <div>
-            <Tabs
-                activeTab={activeTab}
-                onClick={(_tab, index) => setActiveTab(index)}
-                size="sm"
-                className="overflow-x-auto"
-                tabs={plans.map(({ name, description, html }) => ({
-                    title: name,
-                    subtitle: description,
-                    html: html,
-                }))}
-            />
+            <div className="border border-light/50 hover:border-light/100 dark:border-dark/50 hover:dark:border-dark/100 transition-all rounded px-1 py-2">
+                <Tabs
+                    activeTab={activeTab}
+                    onClick={(_tab, index) => setActiveTab(index)}
+                    size="sm"
+                    className="overflow-x-auto"
+                    tabs={plans.map(({ name, description, html }) => ({
+                        title: name,
+                        subtitle: description,
+                        html: html,
+                    }))}
+                />
+            </div>
             {activeTab !== undefined && <div className="my-8">{[activePlan.html]}</div>}
         </div>
     )
