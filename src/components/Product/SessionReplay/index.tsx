@@ -618,7 +618,7 @@ export const ProductSessionReplay = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicIds={[20]} />
+                    <Questions topicIds={[377]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>
