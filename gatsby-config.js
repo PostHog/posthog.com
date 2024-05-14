@@ -135,7 +135,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
-                name: 'PostHog | How engineers build better products',
+                name: 'PostHog | How developers build successful products',
                 short_name: 'starter',
                 start_url: '/',
                 background_color: '#E5E7E0',
