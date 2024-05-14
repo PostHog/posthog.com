@@ -17,8 +17,7 @@ function DpaGenerator() {
     const [showConfirmation, setShowConfirmation] = useState(false)
     const [mode, setMode] = useState('legalese')
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
+    const handleSubmit = () => {
         setShowConfirmation(true)
     }
 
@@ -54,15 +53,20 @@ function DpaGenerator() {
                     The data processing agreement (DPA) generator designed to spark joy
                 </h2>
 
-                <section className="grid grid-cols-5 reasonable:sticky top-20">
-                    <div className="col-span-2 px-8 py-4 max-h-screen reasonable:max-h-[100vh-56px] overflow-auto">
+                <section className="grid grid-cols-5 relative items-start top-20">
+                    <div className="col-span-2 px-8 py-4 max-h-screen reasonable:max-h-[100vh-56px] overflow-auto reasonable:sticky top-[60px]">
                         <div className="flex justify-between items-center">
                             <h2>Form</h2>
                             <button type="button" onClick={handleReset}>
                                 Reset
                             </button>
                         </div>
-                        <form onSubmit={handleSubmit}>
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault()
+                                handleSubmit()
+                            }}
+                        >
                             <div className="flex flex-col gap-2">
                                 <input
                                     type="text"
@@ -198,12 +202,11 @@ function DpaGenerator() {
                                         href="/book-a-demo"
                                         type="primary"
                                         size="md"
+                                        onClick={handleSubmit}
                                     >
                                         Use this (doesn't work yet)
                                     </TrackedCTA>
                                 </div>
-
-                                <button type="submit">Submit button</button>
                             </div>
                         </form>
 
