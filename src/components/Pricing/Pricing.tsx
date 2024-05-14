@@ -155,7 +155,7 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
-const allProductsData = graphql`
+export const allProductsData = graphql`
     query {
         allProductData {
             nodes {

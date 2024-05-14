@@ -31,6 +31,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import Tabs from 'components/Tabs'
 import { CallToAction } from 'components/CallToAction'
+import Tabbed from './PricingCalculator/Tabbed'
 
 interface PlanData {
     title: string
@@ -659,7 +660,9 @@ const PricingExperiment = ({
                         </SectionHeader>
 
                         <SectionColumns>
-                            <SectionMainCol>tabs n stuff</SectionMainCol>
+                            <SectionMainCol>
+                                <Tabbed />
+                            </SectionMainCol>
                             <SectionSidebar>
                                 <div>
                                     <h4 className="text-lg mb-2">How it works</h4>

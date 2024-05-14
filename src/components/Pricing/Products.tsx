@@ -29,8 +29,16 @@ import {
 } from './pricingLogic'
 
 import { LinearSlider, LogSlider, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
+import { useStaticQuery } from 'gatsby'
+import { allProductsData } from './Pricing'
 
 export const useProducts = () => {
+    const {
+        allProductData: {
+            nodes: [{ products: billingProducts }],
+        },
+    } = useStaticQuery(allProductsData)
+
     const {
         productAnalyticsCost,
         sessionRecordingCost,
@@ -52,6 +60,7 @@ export const useProducts = () => {
         sessionReplayRecordingsMaxed,
         featureFlagsRequestsMaxed,
         surveyResponsesMaxed,
+        productAnalyticsGroupAnalytics,
     } = useValues(pricingSliderLogic)
     const {
         setSessionRecordingSliderValue,
@@ -69,6 +78,7 @@ export const useProducts = () => {
             freeLimit: '1,000,000',
             denomination: 'event',
             price: '0.000248',
+            volume: eventNumber,
             calcVolume: <>{eventNumber.toLocaleString()}</>,
             calcCost: <>{productAnalyticsCost.toLocaleString()}</>,
             slider: (
@@ -81,6 +91,9 @@ export const useProducts = () => {
                     value={productAnalyticsSliderValue}
                 />
             ),
+            addons: billingProducts
+                .find((product) => product.type === 'product_analytics')
+                ?.addons?.filter(({ inclusion_only }) => !inclusion_only),
         },
         {
             icon: <IconRewindPlay className="w-5 h-6 text-yellow" />,
@@ -90,6 +103,7 @@ export const useProducts = () => {
             freeLimit: '5,000',
             denomination: 'recording',
             price: '0.04',
+            volume: sessionRecordingEventNumber,
             calcVolume: <>{sessionRecordingEventNumber.toLocaleString()}</>,
             calcCost: <>{sessionRecordingCost.toLocaleString()}</>,
             slider: (
@@ -102,6 +116,9 @@ export const useProducts = () => {
                     value={sessionRecordingSliderValue}
                 />
             ),
+            addons: billingProducts
+                .find((product) => product.type === 'session_replay')
+                ?.addons?.filter(({ inclusion_only }) => !inclusion_only),
         },
         {
             icon: <IconToggle className="w-5 h-6 text-green" />,
@@ -111,6 +128,7 @@ export const useProducts = () => {
             freeLimit: '1,000,000',
             denomination: 'request',
             price: '0.0001',
+            volume: featureFlagNumber,
             calcVolume: <>{featureFlagNumber.toLocaleString()}</>,
             calcCost: <>{featureFlagCost.toLocaleString()}</>,
             slider: (
@@ -123,6 +141,9 @@ export const useProducts = () => {
                     value={featureFlagSliderValue}
                 />
             ),
+            addons: billingProducts
+                .find((product) => product.type === 'feature_flags')
+                ?.addons?.filter(({ inclusion_only }) => !inclusion_only),
         },
         {
             icon: <IconFlask className="w-5 h-6 text-purple" />,
@@ -132,10 +153,14 @@ export const useProducts = () => {
             freeLimit: '',
             denomination: '',
             price: '',
+            volume: '',
             calcVolume: '',
             calcCost: '',
             message: <em className="font-normal opacity-75">Billed with feature flags</em>,
             slider: '',
+            addons: billingProducts
+                .find((product) => product.type === 'feature_flags')
+                ?.addons?.filter(({ inclusion_only }) => !inclusion_only),
         },
         {
             icon: <IconMessage className="w-5 h-5 text-red" />,
@@ -145,6 +170,7 @@ export const useProducts = () => {
             freeLimit: '250',
             denomination: 'response',
             price: '0.2000',
+            volume: surveyResponseNumber,
             calcVolume: <>{surveyResponseNumber.toLocaleString()}</>,
             calcCost: <>{surveyResponseCost.toLocaleString()}</>,
             slider: (
@@ -157,6 +183,9 @@ export const useProducts = () => {
                     value={surveyResponseSliderValue}
                 />
             ),
+            addons: billingProducts
+                .find((product) => product.type === 'surveys')
+                ?.addons?.filter(({ inclusion_only }) => !inclusion_only),
         },
     ]
 }
