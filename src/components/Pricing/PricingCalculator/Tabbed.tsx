@@ -52,7 +52,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume }) =>
                 />
             </div>
             <div className="flex-shrink-0 col-span-1 text-right">
-                <p className="font-bold text-lg m-0">${checked ? addon?.totalCost : 0}</p>
+                <p className="font-bold text-lg m-0">${checked ? addon?.totalCost.toLocaleString() : 0}</p>
             </div>
         </div>
     )
@@ -75,7 +75,7 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
                 </div>
             </div>
             {activeProduct.addons.length > 0 && (
-                <div className="mt-12">
+                <div className="mt-8">
                     <p className="opacity-70 text-sm m-0 mb-3">Product add-ons</p>
                     <ul className="list-none m-0 p-0 space-y-4">
                         {activeProduct.addons.map((addon) => {
