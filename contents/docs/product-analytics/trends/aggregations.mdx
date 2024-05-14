@@ -7,18 +7,11 @@ availability:
 ---
 
 import {ProductScreenshot} from 'components/ProductScreenshot'
-export const aggregationsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099342/posthog.com/contents/docs/product-analytics/trends/add-to-dashboard-light.png"
+export const aggregationsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099342/posthog.com/contents/docs/product-analytics/trends/aggregations-light.png"
 export const aggregationsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099335/posthog.com/contents/docs/product-analytics/trends/aggregations-dark.png"
 
 
-Trends offer numerous ways to aggregating events and properties, so you can go beyond just tracking the total number of events.
-
-<ProductScreenshot
-    imageLight = {aggregationsLight} 
-    imageDark = {aggregationsDark}
-    classes="rounded"
-    alt="Aggregation options"
-/>
+There are numerous ways to aggregate events and properties in trends, so you can go beyond just tracking the total number of events.
 
 Aggregations enable you to answer questions like:
 
@@ -28,7 +21,14 @@ Aggregations enable you to answer questions like:
 - How often do users perform a specific event or action?
 - What's the difference between a power user and a non-power user?
 
-### Event aggregation
+<ProductScreenshot
+    imageLight = {aggregationsLight} 
+    imageDark = {aggregationsDark}
+    classes="rounded"
+    alt="Aggregation options"
+/>
+
+## Event aggregation
 
 Event aggregation determines how the number of events within a certain period are calculated. In this case, the aggregation is done based on how events are grouped, so if events are grouped by 'Day', then all events on a given day will be aggregated based on the chosen method.
 
@@ -42,7 +42,7 @@ Event aggregation determines how the number of events within a certain period ar
 | Unique sessions            | The total number of unique sessions within the given period where this event was performed.                                                                          |
 | Unique groups              | The total number of unique groups that performed these events within a period. See [this user guide on group analytics](/docs/user-guides/group-analytics) for more. |
 
-### Property value aggregation
+## Property value aggregation
 
 Property aggregation enables you to combine and plot the values of a property. Property aggregation only works on properties with numerical values.
 

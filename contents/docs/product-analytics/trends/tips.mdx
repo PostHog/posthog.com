@@ -7,18 +7,9 @@ export const personsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1
 export const insightsSourceLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/insights-source-light-mode.png"
 export const insightsSourceDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/insights-source-dark-mode.png"
 
+## Using the persons modal
 
-TO ADD:
-- Add units and custom prefixes
-- Show values
-- Toggle series on and off
-- Export options
-- Creating insights in notebooks
-- Watching session replays 
-
-## Viewing individual users and cohorts
-
-Clicking on a data point in a trends insight opens the person modal, which shows you a list of users/organizations that performed that event during the selected time period.
+Clicking on a data point in a trends insight opens the persons modal, which shows you a list of users/organizations that performed that event during the selected time period.
 
 <ProductScreenshot
     imageLight = {personsLight} 
@@ -33,6 +24,24 @@ From this menu, you can:
 - Save the entire list of users as a cohort
 - Export the list of users to a CSV for further analysis
 
+## Creating insights in notebooks
+
+WORDS TO GO HERE
+
+## Add units / custom prefixes and postfixes
+
+You can change the unit of any trends insights, or add custom prefixes/postfixes - e.g. with a prefix of `$`, 123.45 will be displayed as "$123.45".
+
+Units include duration (seconds or miliseconds) and pertentage.
+
+[SCREENSHOT HERE]
+
+To do so, click on 'Options' dropdown next to the chart type and select you want.
+
+[SCREENSHOT]
+
+Also under the 'Options' dropdown is the ability to enable values on trends, and the legend, like in the screenshot above.
+
 ## View source (Beta)
 
 Insight filters follow a declarative format that you can view and edit. Open the insight editor by clicking on the `{}` icon next to the save insight button and you will see the source for the current insight configuration. Using this editor you can copy-and-paste complete or partial insights and understand what is going on under the hood. We admit this is a bit of a power user feature, but if you're so inclined you might even find it easier to edit insights this way.
@@ -44,4 +53,4 @@ Insight filters follow a declarative format that you can view and edit. Open the
     alt="View insight configuration source"
 />
 
-Want more? Check our [full list of PostHog tutorials](/tutorials).
+See our [full list of PostHog tutorials](/tutorials) for more guides and tips.
