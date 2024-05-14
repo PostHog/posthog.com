@@ -1891,13 +1891,13 @@ export const docsMenu = {
                 },
                 {
                     name: 'Trends',
-                    url: '/docs/product-analytics/trends/',
+                    url: '/docs/product-analytics/trends/overview',
                     icon: 'IconGraph',
                     color: 'blue',
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/product-analytics/trends/',
+                            url: '/docs/product-analytics/trends/overview',
                         },
                         {
                             name: 'Charts',

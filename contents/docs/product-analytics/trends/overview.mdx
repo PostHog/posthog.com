@@ -35,6 +35,10 @@ export const addtodashboardDark = "https://res.cloudinary.com/dmukukwp6/image/up
 export const insightexport = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/active-viewers-export.png"
 export const addtonotebookLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/add-to-notebook-light.mp4"
 export const addtonotebookDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/add-to-notebook-dark.mp4"
+export const DeviceFilterLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/adding-device-filter-light.mp4"
+export const DeviceFilterDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/adding-device-filter-dark.mp4"
+export const CopyFilterLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/copy-filter-light.mp4"
+export const CopyFilterDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/copy-filter-dark.mp4"
 
 export const FilterIcon = () => <svg class="inline-block w-5 h-5 text-gray" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"><path d="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z" fill="currentColor"></path></svg>
 
@@ -99,20 +103,11 @@ Read the [chart type docs](/docs/product-analytics/trends/charts) for a summary 
 
 ### 1. Creating a new trend
 
-To create a new trend insight, navigate to the 'Product analytics' tab in the sidebar, where you can also view a list of all your saved insights. 
+To create a new trends insight, navigate to the 'Product analytics' tab in the sidebar, where you can also view a list of all your saved insights. 
 
 Next, click the 'New insight' button in the top right – you can also click the `+` symbol next to 'Product analytics' in the sidebar. 
 
 Trends is the default insight type, so clicking 'New insight' will always create a trends insight.
-
-You should now see a screen that looks like this:
-
-<ProductScreenshot
-    imageLight = {newInsightsLight} 
-    imageDark = {newInsightsDark}
-    classes="rounded"
-    alt="New insight"
-/>
 
 ### 2. Configuring your insight
 
@@ -137,28 +132,30 @@ We aggregate events by the total number (Total count) by default. Click the drop
 
 It's often useful to analyze a subset of events, such as `Pageview` events for a specific URL, or events performed by users in a specific country. To do this, we add a property filters.
 
-To add a filter to an event series, click on the <FilterIcon /> icon next to the event name, and then click the **Add filter** button.
+To add a filter to an event series, click on the <FilterIcon /> icon next to the event name, and then click the 'Add filter' button.
 
 This will bring up a dropdown where you can search through all event properties and choose the one you would like to filter based on. 
 
-TODO: REPLACE THIS WITH VIDEO
-
-<ProductScreenshot
-    imageLight = {basicFilterLight} 
-    imageDark = {basicFilterDark}
+<ProductVideo
+    imageLight = {DeviceFilterLight} 
+    imageDark = {DeviceFilterDark}
     classes="rounded"
-    alt="A filter that only shows events from desktop users"
+    alt="Adding filter to a series"
 />
 
-In this example, we've chosen the `Latest Device Type` property, so that we can plot data for `Desktop` users only.
+In the above example, we've chosen the `Device type` event property, so that we can plot data for `Desktop` users only.
 
-TODO: ADD VIDEO HERE
-
-If we wanted to include events from `Mobile` users as well, we can create an additional series by clicking the <CopyIcon /> icon to duplicate the existing series, then change the `Latest Device Type` field to `Mobile`.
+If we wanted to include events from `Mobile` users as well, we can create an additional series by clicking the <CopyIcon /> icon to duplicate the existing series, then change the `Device type` field to `Mobile`.
 
 This generates a line chart with `Pageview` events for `Desktop` and `Mobile` users plotted together for the last 7 days.
 
-TODO: VIDEO / OR IMAGE HERE
+<ProductVideo
+    imageLight = {CopyFilterLight} 
+    imageDark = {CopyFilterDark}
+    classes="rounded"
+    alt="Adding filter to a series"
+/>
+
 
 Click on 'Add graph series' to add more series. 
 
@@ -210,7 +207,7 @@ Notebooks are a great way to do ad hoc analysis using existing insights, or by c
 
 Click 'Add to notebook' in the top right to do so. Alternatively, click on 'Notebook' in the right sidebar and then drag and drop insights from the product analytics page into a notebook. 
 
-<ProductScreenshot
+<ProductVideo
     imageLight = {addtonotebookLight} 
     imageDark = {addtonotebookDark}
     classes="rounded"
