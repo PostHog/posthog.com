@@ -199,7 +199,6 @@ function DpaGenerator() {
                                 <div className="inline-flex">
                                     <TrackedCTA
                                         event={{ name: `clicked Generate DPA` }}
-                                        href="/book-a-demo"
                                         type="primary"
                                         size="md"
                                         onClick={handleSubmit}
