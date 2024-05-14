@@ -134,7 +134,7 @@ export default function Tabbed() {
             })
         })
         return initialAddons
-    })
+    }, [])
     const [productAddons, setProductAddons] = useState(initialProductAddons)
     const [platformAddons, setPlatformAddons] = useState(initialPlatformAddons)
     const totalPrice = useMemo(
