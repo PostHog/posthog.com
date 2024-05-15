@@ -1,80 +1,14 @@
 import { SEO } from 'components/seo'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from 'components/Layout'
 import { heading, section } from 'components/Home/classes'
 import { CallToAction } from 'components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
+import Lottie from 'react-lottie'
+import animationLottie from '../images/laptophog.json'
 
 const title = `A/B TestHog`
 const description = 'Enter URL to find out what to test on your site.'
-
-const dummyData = [
-    {
-        testTitle: 'Add Clear Call-To-Action (CTA) Button to Hero Section',
-        testExplanationAndReason:
-            'The current hero section does not have a dominant CTA button, which may lead to missed conversion opportunities.',
-        controlVariant: 'Hero section without a primary CTA button.',
-        testVariant:
-            "Hero section with a primary CTA button that says 'Get in Touch' directly below the introductory text along with a contrasting color for visibility.",
-        goalMetric: 'Click-through rate on the CTA button',
-        secondaryMetrics: ['Time on page', 'Bounce rate'],
-        guardrailMetrics: ['Overall page load time', 'Exit rate'],
-    },
-    {
-        testTitle: 'Implement Pain-Agitate-Solution (PAS) Copy Framework',
-        testExplanationAndReason:
-            'The existing copy does not strongly evoke the pain points and the solution offered. Using the PAS framework could increase empathy and drive conversions.',
-        controlVariant: 'Current copy on the landing page.',
-        testVariant:
-            "Revised copy that follows PAS framework: 1. Pain: 'Struggling to find a designer who understands your brand vision?' 2. Agitate: 'Get frustrated with endless revisions and missed deadlines?' 3. Solve: 'I can help you transform your ideas into stunning visuals efficiently and effectively.'",
-        goalMetric: 'Conversion rate',
-        secondaryMetrics: ['Time on page', 'Scroll depth'],
-        guardrailMetrics: ['Bounce rate', 'Exit rate'],
-    },
-    {
-        testTitle: 'Add Testimonials Section Above the Fold',
-        testExplanationAndReason:
-            'The site currently lacks visible social proof, which can reduce trust and lower conversions.',
-        controlVariant: 'No testimonials above the fold.',
-        testVariant:
-            'Add a testimonials section with 2-3 client testimonials, including names, titles, and photos right below the hero section.',
-        goalMetric: 'Conversion rate',
-        secondaryMetrics: ['Time on page', 'Scroll depth'],
-        guardrailMetrics: ['Bounce rate', 'Exit rate'],
-    },
-    {
-        testTitle: 'Simplify Language Across the Page',
-        testExplanationAndReason: 'The language on the page is somewhat complex, which might alienate some visitors.',
-        controlVariant: 'Original page language.',
-        testVariant:
-            "Simplified language: Replace complex terms with plain language. For example, change 'Enhance your digital presence with bespoke designs' to 'Create custom designs to improve your online presence.'",
-        goalMetric: 'Conversion rate',
-        secondaryMetrics: ['Bounce rate', 'Time on page'],
-        guardrailMetrics: ['Exit rate', 'Scroll depth'],
-    },
-    {
-        testTitle: 'Highlight Unique Selling Points (USPs)',
-        testExplanationAndReason:
-            'The current page does not make the unique selling points clear, which may make it hard for visitors to distinguish from competitors.',
-        controlVariant: 'No explicit USP section.',
-        testVariant:
-            "Add a section titled 'Why Choose Me?' with bullet points such as 'Personalized design solutions,' 'Quick turnaround times,' and 'Transparent pricing.'",
-        goalMetric: 'Conversion rate',
-        secondaryMetrics: ['Time on page', 'Scroll depth'],
-        guardrailMetrics: ['Bounce rate', 'Exit rate'],
-    },
-    {
-        testTitle: 'Add Clear Use Cases and Benefits',
-        testExplanationAndReason:
-            'Visitors need to see how the product or service will benefit them with clear examples.',
-        controlVariant: 'No use cases or benefits explicitly stated.',
-        testVariant:
-            "Add a section titled 'How I Can Help You' with specific use cases like 'Brand identity design for startups' and 'Redesigns for established brands,' alongside benefits such as 'Increased brand recognition' and 'Higher engagement rates.'",
-        goalMetric: 'Conversion rate',
-        secondaryMetrics: ['Time on page', 'Scroll depth'],
-        guardrailMetrics: ['Bounce rate', 'Exit rate'],
-    },
-]
 
 const Recommendations = ({ recommendations }) => {
     return (
@@ -133,12 +67,39 @@ const Recommendations = ({ recommendations }) => {
     )
 }
 
+const loadingTexts = [
+    'Yes, this is just a ChatGPT wrapper',
+    "Before the alphabet was invented, A/B testing was just called 'testing'",
+    'Why flip a coin when you can run an A/B test?',
+    'Why choose one bad idea when you can A/B test two?',
+    'A/B testing: when you want to be wrong in the most precise way possible.',
+    'Why flip a coin when you can run an A/B test?',
+    'A/B testing: proving that even data can be indecisive.',
+    "Experiment results not what you wanted? Just say it's a data anomaly and test again.",
+    "When an A/B test fails, just call it a 'learning experience' and try again.",
+]
+
 export default function TestHog() {
     const [url, setUrl] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+    const [loadingTextIndex, setLoadingTextIndex] = useState(0)
+    const [recommendations, setRecommendations] = useState([])
     const handleChange = (event) => {
         setUrl(event.target.value)
     }
+
+    useEffect(() => {
+        let interval
+        if (isLoading) {
+            interval = setInterval(() => {
+                setLoadingTextIndex(Math.floor(Math.random() * loadingTexts.length))
+            }, 3000)
+        } else {
+            setLoadingTextIndex(0)
+        }
+
+        return () => clearInterval(interval)
+    }, [isLoading])
 
     const handleAnalyze = async () => {
         try {
@@ -157,7 +118,9 @@ export default function TestHog() {
             }
             const data = await response.json()
             const suggestions = { data }
-            console.log(data)
+            if (suggestions && suggestions.length > 0) {
+                setRecommendations(suggestions)
+            }
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error)
         } finally {
@@ -183,7 +146,19 @@ export default function TestHog() {
                 <CallToAction className="mt-4" onClick={handleAnalyze} type="primary">
                     {isLoading ? 'Analyzing...' : 'Analyze'}
                 </CallToAction>
-                <Recommendations recommendations={dummyData} />
+                {recommendations.length > 0 && <Recommendations recommendations={recommendations} />}
+                {isLoading && (
+                    <div className="w-[125px] sm:w-[250px]">
+                        <Lottie
+                            options={{
+                                loop: true,
+                                autoplay: true,
+                                animationData: animationLottie,
+                            }}
+                        />
+                    </div>
+                )}
+                {isLoading && <p className="text-center mt-4 text-lg">{loadingTexts[loadingTextIndex]}</p>}
             </div>
         </Layout>
     )
