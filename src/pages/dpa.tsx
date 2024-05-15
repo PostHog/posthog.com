@@ -8,8 +8,9 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { IconInfo, IconRevert } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import Logo from 'components/Logo'
+import subprocessors from '../data/subprocessors.json'
 
-const IconPrint = ({ className }) => (
+const IconPrint = ({ className = '' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24">
         <path
             stroke="#000"
@@ -205,8 +206,8 @@ function DpaGenerator() {
                         <span className="text-red">YAY</span>!
                     </em>
                 </h1>
-                <h2 className={`mt-2 -mb-8 text-xl opacity-75 font-semibold text-balance text-center leading-tight`}>
-                    The data processing agreement (DPA) generator designed to spark joy
+                <h2 className={`mt-2 md:-mb-8 text-xl opacity-75 font-semibold text-balance text-center leading-tight`}>
+                    PostHog's data processing agreement (DPA) generator designed to spark joy
                 </h2>
             </header>
 
@@ -228,7 +229,7 @@ function DpaGenerator() {
                     </div>
                     <p className="text-sm">
                         We'll populate your DPA with this information. Once the form is completed, you can export to
-                        PDF.
+                        PDF. Sign it and send it to fraser@posthog.com for counter-signature.
                     </p>
                     <form>
                         <div className="grid grid-cols-5 gap-1 @sm:gap-2 items-center">
@@ -457,7 +458,7 @@ function DpaGenerator() {
 
                 <div
                     ref={divRef}
-                    className="article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 shadow-xl print:shadow-none rounded overflow-hidden"
+                    className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 shadow-xl print:shadow-none rounded overflow-hidden"
                 >
                     <div className="bg-accent py-2 px-8 text-sm text-center -mx-8 -mt-4 mb-8 flex items-center justify-between print:hidden">
                         <div className="text-lg font-bold">Preview</div>
@@ -483,7 +484,7 @@ function DpaGenerator() {
                                                     </p>
                                                 </li>
                                             </ol>
-                                            <p className="mb-0 text-[15px] border-t border-light pt-4 mt-">
+                                            <p className="mb-0 text-[15px] border-t border-light pt-4 mt-2">
                                                 <strong>Tip:</strong> Disable these options in Chrome's print settings
                                                 to ditch the page title, URL, and highlighted fields from your printed
                                                 copy. 👇
@@ -515,7 +516,7 @@ function DpaGenerator() {
                                     size="sm"
                                     disabled={!isFormComplete}
                                     onClick={handlePrint}
-                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-1 relative left-4"
+                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-1 relative md:left-4"
                                 >
                                     <>
                                         <IconPrint className="size-5" />
@@ -1536,7 +1537,7 @@ function DpaGenerator() {
                         <p>
                             <strong>The data exporter shall be:</strong>
                         </p>
-                        <div className="ml-12">
+                        <div className="ml-12 print:pb-1">
                             <ul>
                                 <li>
                                     the Company at the following address{' '}
@@ -1702,104 +1703,84 @@ function DpaGenerator() {
                         </p>
                     </div>
 
-                    <div
-                        className={`overflow-x-auto -mx-4 md:-mx-8 ${
-                            mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'
-                        }`}
-                    >
-                        <table className="[&_td:first-child]:pl-4 md:[&_td:first-child]:pl-8 [&_td:last-child]:pr-4 md:[&_td:last-child]:pr-8 print:text-xs print:table-fixed">
-                            <tr className="font-bold bg-accent border-t border-light">
-                                <td className="whitespace-nowrap print:whitespace-auto">Name of Subprocessor</td>
-                                <td className="whitespace-nowrap print:whitespace-auto">Contact details</td>
-                                <td className="whitespace-nowrap print:whitespace-auto">
-                                    Subject matter of the processing
-                                </td>
-                                <td className="whitespace-nowrap print:whitespace-auto">Duration of the processing</td>
-                                <td className="whitespace-nowrap print:whitespace-auto">
-                                    Nature and purpose of the processing
-                                </td>
-                                <td className="whitespace-nowrap print:whitespace-auto">
-                                    Geographical location of the processing
-                                </td>
-                                <td className="whitespace-nowrap print:whitespace-auto">
-                                    Type of personal data processed
-                                </td>
-                                <td className="whitespace-nowrap print:whitespace-auto">Categories of data subject</td>
-                                <td className="whitespace-nowrap print:whitespace-auto">
-                                    Details of sub-sub processors
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>Amazon Web Services, Inc.</strong>
-                                </td>
-                                <td>410 Terry Avenue North, Seattle, WA 98109-5210, aws-EU-privacy@amazon.com</td>
-                                <td>Personal data of users of the Controller’s web product(s)</td>
-                                <td>Duration of the agreement</td>
-                                <td>Cloud storage of PostHog Cloud data</td>
-                                <td>USA (PostHog US Cloud) or Germany (PostHog EU Cloud)</td>
-                                <td>
-                                    Identifying – name, username, Computer device – IP address, MAC address, browser
-                                    footprint, Contact – email address, Location – country, territory, city, Behavioral
-                                    – product usage (page views, clicks, browsing behavior).
-                                </td>
-                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                <td>https://aws.amazon.com/compliance/sub-processors/ </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>Cloudflare Inc.</strong>
-                                </td>
-                                <td>101 Townsend Street, San Francisco, CA 94107, USA, legal@cloudflare.com</td>
-                                <td>Personal data of users of the Controller’s web product(s)</td>
-                                <td>Duration of the agreement</td>
-                                <td>Cloud storage of PostHog Cloud data</td>
-                                <td>USA (PostHog US Cloud only, not used for PostHog EU Cloud)</td>
-                                <td>
-                                    Identifying – name, username, Computer device – IP address, MAC address, browser
-                                    footprint, Contact – email address, Location – country, territory, city, Behavioral
-                                    – product usage (page views, clicks, browsing behavior).
-                                </td>
-                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                <td>https://www.cloudflare.com/en-gb/gdpr/subprocessors/</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>Salesforce, Inc. (t/a ‘Heroku’)</strong>
-                                </td>
-                                <td>415 Mission Street, Suite 300,San Francisco, CA 94105, privacy@salesforce.com</td>
-                                <td>Personal data of users of the Controller’s web product(s)</td>
-                                <td>Duration of the agreement</td>
-                                <td>Cloud storage of PostHog Cloud data</td>
-                                <td>USA (PostHog US Cloud only, not used for PostHog EU Cloud)</td>
-                                <td>
-                                    Identifying – name, username, Computer device – IP address, MAC address, browser
-                                    footprint, Contact – email address, Location – country, territory, city, Behavioral
-                                    – product usage (page views, clicks, browsing behavior).
-                                </td>
-                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                <td>
-                                    https://www.salesforce.com/content/dam/web/en_us/www/documents/legal/misc/salesforce-infrastructure-and-subprocessors.pdf
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>Functional Software, Inc., t/a ‘Sentry’</strong>
-                                </td>
-                                <td>45 Fremont Street, 8th Floor, San Francisco, CA 94105. compliance@sentry.io</td>
-                                <td>Personal data of users of the Controller’s web product(s)</td>
-                                <td>Duration of the agreement</td>
-                                <td>Application monitoring and error tracking</td>
-                                <td>USA</td>
-                                <td>
-                                    (Errors only) Identifying – username, Computer device – IP address, MAC address,
-                                    browser footprint, Contact – email address, Behavioral – product usage (page views,
-                                    clicks, browsing behavior).
-                                </td>
-                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                <td>https://sentry.io/legal/dpa/#list-of-subprocessors-1</td>
-                            </tr>
-                        </table>
+                    <div className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'}`}>
+                        <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm [&>div:nth-child(5n+6)]:border-t [&>div:nth-child(5n+6)]:border-light [&>div:nth-child(5n+6)]:pt-8 mb-8">
+                            {subprocessors.map((subprocessor, index) => (
+                                <React.Fragment key={index}>
+                                    <div className="col-span-3 @xl:!-mb-6">
+                                        <h3 className="!my-0 text-xl">
+                                            <strong>{subprocessor.name}</strong>
+                                        </h3>
+                                    </div>
+                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
+                                        <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
+                                        <div className="pt-2">
+                                            <strong>Details</strong>
+                                            <br />
+                                            <Link
+                                                href={subprocessor.details}
+                                                externalNoIcon
+                                                className="[word-break:break-word]"
+                                            >
+                                                {subprocessor.details}
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                        <div>
+                                            <strong className="block">Categories of data subject</strong>
+                                            <div>{subprocessor.categories}</div>
+                                        </div>
+                                        <div>
+                                            <strong className="block">Duration of the processing</strong>
+                                            <div>{subprocessor.duration}</div>
+                                        </div>
+                                        <div>
+                                            <strong className="block">Geographical location of the processing</strong>
+                                            <div>{subprocessor.location}</div>
+                                        </div>
+                                    </div>
+                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                        <div>
+                                            <div>
+                                                <strong>Subject matter of the processing</strong>
+                                            </div>
+                                            <div>{subprocessor.subject}</div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <strong>Nature and purpose of the processing</strong>
+                                            </div>
+                                            <div>{subprocessor.reason}</div>
+                                        </div>
+                                    </div>
+                                    <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
+                                        <strong className="block mb-2 text-base">
+                                            Type of personal data processed
+                                        </strong>
+                                        <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
+                                            {Object.entries(subprocessor.type).map(([typeName, typeValues]) => (
+                                                <React.Fragment key={typeName}>
+                                                    <div>
+                                                        <strong className="block pb-1">{typeName}</strong>
+                                                        <ul className="pl-4 !mb-1">
+                                                            {typeValues.map((typeValue, index) => (
+                                                                <li
+                                                                    key={index}
+                                                                    className="!mb-0 !leading-normal !text-sm"
+                                                                >
+                                                                    {typeValue}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                </React.Fragment>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
