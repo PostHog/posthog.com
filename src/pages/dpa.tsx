@@ -84,19 +84,19 @@ function DpaGenerator() {
                 image={`/images/enterprise.png`}
             />
             <header>
-                <h1 className={`${heading()} overflow-hidden pt-8 pb-1 home-hero-title`}>
+                <h1 className={`${heading()} overflow-hidden pt-8 pb-1`}>
                     DPA? Try DP
                     <em className="dark:text-yellow">
                         <span className="text-red">YAY</span>!
                     </em>
                 </h1>
-                <h2 className={`mt-2 -mb-8 text-lg opacity-75 font-semibold text-center home-hero-subtitle`}>
+                <h2 className={`mt-2 -mb-8 text-lg opacity-75 font-semibold text-balance text-center leading-tight`}>
                     The data processing agreement (DPA) generator designed to spark joy
                 </h2>
             </header>
 
-            <section className="grid grid-cols-5 relative items-start top-20 gap-4">
-                <div className="col-span-2 px-8 py-4 max-h-screen pb-4 reasonable:max-h-[100vh-56px] overflow-auto sticky top-0 reasonable:top-[60px]">
+            <section className="grid md:grid-cols-5 relative items-start mt-12 md:mt-0 md:top-20 gap-4">
+                <div className="md:col-span-2 px-4 md:px-8 md:py-4 md:max-h-screen pb-4 reasonable:max-h-[100vh-56px] md:overflow-auto md:sticky top-0 reasonable:top-[60px]">
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
@@ -117,7 +117,7 @@ function DpaGenerator() {
                     </p>
                     <form>
                         <div className="grid grid-cols-5 gap-2 items-center">
-                            <label className="col-span-2 text-sm" htmlFor="companyName">
+                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="companyName">
                                 Company Name
                             </label>
                             <input
@@ -126,11 +126,11 @@ function DpaGenerator() {
                                 onChange={(e) => setCompanyName(e.target.value)}
                                 placeholder="Company Name"
                                 id="companyName"
-                                className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-2 text-sm" htmlFor="companyAddress">
+                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="companyAddress">
                                 Company Address
                             </label>
                             <input
@@ -139,11 +139,11 @@ function DpaGenerator() {
                                 onChange={(e) => setCompanyAddress(e.target.value)}
                                 placeholder="Company Address"
                                 id="companyAddress"
-                                className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-2 text-sm" htmlFor="yourName">
+                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="yourName">
                                 Representative Name
                             </label>
                             <input
@@ -152,11 +152,11 @@ function DpaGenerator() {
                                 onChange={(e) => setYourName(e.target.value)}
                                 placeholder="Representative Name"
                                 id="yourName"
-                                className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-2 text-sm" htmlFor="email">
+                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="email">
                                 Representative Email
                             </label>
                             <input
@@ -165,11 +165,11 @@ function DpaGenerator() {
                                 onChange={(e) => setRepresentativeEmail(e.target.value)}
                                 placeholder="Contact Email"
                                 id="email"
-                                className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-2 text-sm" htmlFor="yourTitle">
+                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="yourTitle">
                                 Representative Title
                             </label>
                             <input
@@ -178,11 +178,11 @@ function DpaGenerator() {
                                 onChange={(e) => setYourTitle(e.target.value)}
                                 placeholder="Representative Title"
                                 id="yourTitle"
-                                className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-2 text-sm" htmlFor="date">
+                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="date">
                                 Date
                             </label>
                             <input
@@ -191,11 +191,11 @@ function DpaGenerator() {
                                 onChange={(e) => setDate(e.target.value)}
                                 placeholder="Date"
                                 id="date"
-                                className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-2 text-sm" htmlFor="jurisdiction">
+                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="jurisdiction">
                                 Jurisdiction
                             </label>
                             <input
@@ -204,11 +204,11 @@ function DpaGenerator() {
                                 onChange={(e) => setJurisdiction(e.target.value)}
                                 placeholder="Jurisdiction"
                                 id="jurisdiction"
-                                className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-2 text-sm" htmlFor="supervisoryAuthority">
+                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="supervisoryAuthority">
                                 Supervisory Authority
                             </label>
                             <input
@@ -217,13 +217,13 @@ function DpaGenerator() {
                                 onChange={(e) => setSupervisoryAuthority(e.target.value)}
                                 placeholder="Supervisory Authority"
                                 id="supervisoryAuthority"
-                                className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <div className="col-span-2 text-sm self-baseline pt-2">Format</div>
+                            <div className="col-span-5 md:col-span-2 text-sm self-baseline pt-2">Format</div>
 
-                            <ul className="flex flex-col col-span-3 gap-2 list-none pt-2 pl-0">
+                            <ul className="flex flex-col col-span-5 md:col-span-3 gap-2 list-none pt-2 pl-0">
                                 <li>
                                     <input
                                         type="radio"
@@ -338,7 +338,7 @@ function DpaGenerator() {
                     */}
                 <div
                     ref={divRef}
-                    className="article-content col-span-3 bg-white text-primary px-8 py-4 shadow-xl rounded overflow-hidden"
+                    className="article-content md:col-span-3 bg-white text-primary px-4 md:px-8 py-4 shadow-xl rounded overflow-hidden"
                 >
                     <div className="bg-accent py-2 px-8 text-sm text-center -mx-8 -mt-4 mb-8 flex items-center justify-between">
                         <div className="text-lg font-bold">Preview</div>
@@ -574,8 +574,8 @@ function DpaGenerator() {
                     >
                         <h2 className="!text-xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>
-                            This Data Processing Agreement (“Agreement”) forms part of the Contract for Services
-                            (“Principal Agreement”) between{' '}
+                            This Data Processing Agreement (“<strong>Agreement</strong>”) forms part of the Contract for
+                            Services (“<strong>Principal Agreement</strong>”) between{' '}
                             <Tooltip
                                 content={() => (
                                     <>
@@ -595,7 +595,8 @@ function DpaGenerator() {
                                     </button>
                                 </span>
                             </Tooltip>{' '}
-                            (the “Company”) and PostHog Inc. (the “Processor”) (together as the “Parties”).
+                            (the “<strong>Company</strong>”) and PostHog Inc. (the “<strong>Processor</strong>”)
+                            (together as the “<strong>Parties</strong>”).
                         </p>
                         <p>WHEREAS</p>
                         <p>(A) The Company acts as a Data Controller.</p>
@@ -609,7 +610,7 @@ function DpaGenerator() {
                             obligations.
                         </p>
                         <p>IT IS AGREED AS FOLLOWS:</p>
-                        <ol start="1">
+                        <ol>
                             <li>Definitions and Interpretation</li>
                         </ol>
                         <p>
@@ -672,7 +673,7 @@ function DpaGenerator() {
                             Data Breach”, “Processing” and “Supervisory Authority” shall have the same meaning as in the
                             GDPR and UK GDPR, and their cognate terms shall be construed accordingly.
                         </p>
-                        <ol start="2">
+                        <ol>
                             <li>Processing of Company Personal Data</li>
                         </ol>
                         <p>2.1. The Company shall:</p>
@@ -711,7 +712,7 @@ function DpaGenerator() {
                             undertake additional work or screening to determine if the Company’s instructions are
                             compliant.
                         </p>
-                        <ol start="3">
+                        <ol>
                             <li>Processor Personnel</li>
                         </ol>
                         <p>
@@ -720,7 +721,7 @@ function DpaGenerator() {
                             to confidentiality undertakings or professional or statutory obligations of confidentiality
                             with respect to such Company Personal Data.
                         </p>
-                        <ol start="4">
+                        <ol>
                             <li>Security</li>
                         </ol>
                         <p>
@@ -732,7 +733,7 @@ function DpaGenerator() {
                             referred to in Article 32(1) of the GDPR and UK GDPR. These measures include those at Annex
                             II.
                         </p>
-                        <ol start="5">
+                        <ol>
                             <li>Subprocessing</li>
                         </ol>
                         <p>5.1. The Company provides Processor with general authorisation to engage Subprocessors.</p>
@@ -761,7 +762,7 @@ function DpaGenerator() {
                             after Processor’s receipt of the Company’s objection, the Company may terminate the affected
                             Service with reasonable prior written notice.
                         </p>
-                        <ol start="6">
+                        <ol>
                             <li>Data Subject Rights and Cooperation</li>
                         </ol>
                         <p>
@@ -793,7 +794,7 @@ function DpaGenerator() {
                             required directly as a result of the Processor’s own acts or omissions, in which case such
                             assistance will be at the Processor’s expense.
                         </p>
-                        <ol start="7">
+                        <ol>
                             <li>Personal Data Breach</li>
                         </ol>
                         <p>
@@ -808,7 +809,7 @@ function DpaGenerator() {
                             directed by Company to assist in the investigation, mitigation and remediation of each such
                             Personal Data Breach.
                         </p>
-                        <ol start="8">
+                        <ol>
                             <li>Audits</li>
                         </ol>
                         <p>
@@ -817,7 +818,7 @@ function DpaGenerator() {
                             contribute to audits, including inspections by the Company in order to assess compliance
                             with this Agreement.
                         </p>
-                        <ol start="9">
+                        <ol>
                             <li>Deletion or return of Company Personal Data</li>
                         </ol>
                         <p>
@@ -826,7 +827,7 @@ function DpaGenerator() {
                             Company Personal Data , return or delete and procure the deletion of all copies of the
                             Company Personal Data unless applicable laws require storage of such Customer Personal Data.
                         </p>
-                        <ol start="10">
+                        <ol>
                             <li>Data Transfer Outside of the Protected Area</li>
                         </ol>
                         <p>
@@ -914,7 +915,7 @@ function DpaGenerator() {
                             mechanism, and making such further amendments to the application of such replacement
                             mechanism, as the Processor deems reasonably necessary.
                         </p>
-                        <ol start="11">
+                        <ol>
                             <li>General Terms</li>
                         </ol>
                         <p>
