@@ -196,8 +196,8 @@ function DpaGenerator() {
         <Layout>
             <SEO
                 title="DPA generator"
-                description="The data processing agreement (DPA) generator designed to spark joy"
-                image={`/images/enterprise.png`}
+                description="PostHog's thrilling data processing agreement (DPA) generator"
+                image={`/images/dpa.png`}
             />
             <header className="print:hidden">
                 <h1 className={`${heading()} overflow-hidden pt-8 pb-1`}>
@@ -206,8 +206,12 @@ function DpaGenerator() {
                         <span className="text-red">YAY</span>!
                     </em>
                 </h1>
-                <h2 className={`mt-2 md:-mb-8 text-xl opacity-75 font-semibold text-balance text-center leading-tight`}>
-                    PostHog's data processing agreement (DPA) generator designed to spark joy
+                <h2
+                    className={`mt-2 px-2 md:-mb-8 text-xl opacity-75 font-semibold text-balance text-center leading-tight`}
+                >
+                    Welcome to PostHog's data processing agreement (DPA) generator,
+                    <br className="hidden lg:block" /> designed to make even the most{' '}
+                    <span className="line-through">mundane</span> exciting tasks <em>even more fun.</em>
                 </h2>
             </header>
 
@@ -227,9 +231,10 @@ function DpaGenerator() {
                             </span>
                         </Tooltip>
                     </div>
+                    <p className="text-sm mb-2">We'll populate your DPA with this information.</p>
                     <p className="text-sm">
-                        We'll populate your DPA with this information. Once the form is completed, you can export to
-                        PDF. Sign it and send it to fraser@posthog.com for counter-signature.
+                        Once the form is completed, you can export to PDF. Sign it and send it to fraser@posthog.com for
+                        counter-signature.
                     </p>
                     <form>
                         <div className="grid grid-cols-5 gap-1 @sm:gap-2 items-center">
@@ -378,10 +383,9 @@ function DpaGenerator() {
                                         }}
                                         checked={mode === 'pretty'}
                                     />
-                                    <label className="font-semibold leading-tight" htmlFor="pretty">
+                                    <label className="font-semibold leading-tight block pb-1" htmlFor="pretty">
                                         A perfectly legal doc, but with some pizazz
                                     </label>
-                                    <br />
                                     <div className="block text-sm opacity-75">
                                         Holds up in a court of law, but with a nicer font and a pretty logo
                                     </div>
@@ -404,7 +408,9 @@ function DpaGenerator() {
                                         Your lawyer's favorite version
                                     </label>
                                     <br />
-                                    <div className="block text-sm opacity-75">Because lawyers love Times New Roman</div>
+                                    <div className="block text-sm opacity-75">
+                                        Because lawyers hate fun but love Times New Roman
+                                    </div>
                                 </li>
                                 <li className="pl-7 relative">
                                     <input
