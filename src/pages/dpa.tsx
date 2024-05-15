@@ -124,7 +124,7 @@ function DpaGenerator() {
                                 type="text"
                                 value={companyName}
                                 onChange={(e) => setCompanyName(e.target.value)}
-                                placeholder="Company name"
+                                placeholder="Company Name"
                                 id="companyName"
                                 className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
                                 required
@@ -163,7 +163,7 @@ function DpaGenerator() {
                                 type="email"
                                 value={representativeEmail}
                                 onChange={(e) => setRepresentativeEmail(e.target.value)}
-                                placeholder="Contact email"
+                                placeholder="Contact Email"
                                 id="email"
                                 className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
                                 required
@@ -215,7 +215,7 @@ function DpaGenerator() {
                                 type="text"
                                 value={supervisoryAuthority}
                                 onChange={(e) => setSupervisoryAuthority(e.target.value)}
-                                placeholder="Supervisory authority"
+                                placeholder="Supervisory Authority"
                                 id="supervisoryAuthority"
                                 className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
                                 required
