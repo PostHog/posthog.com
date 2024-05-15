@@ -1697,7 +1697,7 @@ function DpaGenerator() {
                         <p className="text-center mt-12 !mb-0 !pb-0 [page-break-before:always]">
                             <strong>ANNEX III</strong>
                         </p>
-                        <p className="text-center">
+                        <p className="text-center print:pb-8">
                             <strong>Subprocessors</strong>
                         </p>
                     </div>
@@ -1707,17 +1707,27 @@ function DpaGenerator() {
                             mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'
                         }`}
                     >
-                        <table className="[&_td:first-child]:pl-4 md:[&_td:first-child]:pl-8 [&_td:last-child]:pr-4 md:[&_td:last-child]:pr-8 print:text-xs">
+                        <table className="[&_td:first-child]:pl-4 md:[&_td:first-child]:pl-8 [&_td:last-child]:pr-4 md:[&_td:last-child]:pr-8 print:text-xs print:table-fixed">
                             <tr className="font-bold bg-accent border-t border-light">
-                                <td className="whitespace-nowrap">Name of Subprocessor</td>
-                                <td className="whitespace-nowrap">Contact details</td>
-                                <td className="whitespace-nowrap">Subject matter of the processing</td>
-                                <td className="whitespace-nowrap">Duration of the processing</td>
-                                <td className="whitespace-nowrap">Nature and purpose of the processing</td>
-                                <td className="whitespace-nowrap">Geographical location of the processing</td>
-                                <td className="whitespace-nowrap">Type of personal data processed</td>
-                                <td className="whitespace-nowrap">Categories of data subject</td>
-                                <td className="whitespace-nowrap">Details of sub-sub processors</td>
+                                <td className="whitespace-nowrap print:whitespace-auto">Name of Subprocessor</td>
+                                <td className="whitespace-nowrap print:whitespace-auto">Contact details</td>
+                                <td className="whitespace-nowrap print:whitespace-auto">
+                                    Subject matter of the processing
+                                </td>
+                                <td className="whitespace-nowrap print:whitespace-auto">Duration of the processing</td>
+                                <td className="whitespace-nowrap print:whitespace-auto">
+                                    Nature and purpose of the processing
+                                </td>
+                                <td className="whitespace-nowrap print:whitespace-auto">
+                                    Geographical location of the processing
+                                </td>
+                                <td className="whitespace-nowrap print:whitespace-auto">
+                                    Type of personal data processed
+                                </td>
+                                <td className="whitespace-nowrap print:whitespace-auto">Categories of data subject</td>
+                                <td className="whitespace-nowrap print:whitespace-auto">
+                                    Details of sub-sub processors
+                                </td>
                             </tr>
                             <tr>
                                 <td>
