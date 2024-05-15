@@ -5,7 +5,7 @@ import { heading, section } from 'components/Home/classes'
 import { TrackedCTA } from 'components/CallToAction'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
-import { IconRevert } from '@posthog/icons'
+import { IconInfo, IconRevert } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 
 const IconPrint = ({ className }) => (
@@ -32,6 +32,120 @@ function DpaGenerator() {
     const [mode, setMode] = useState('legalese')
     const [isFormComplete, setIsFormComplete] = useState(false)
     const divRef = useRef(null)
+
+    const FloatRight = `float-right -mr-2 md:-mr-20 -my-8 mt:-mt-16 w-48 md:w-80`
+    const FloatLeft = `float-left -ml-2 md:-ml-20 -my-8 mt:-mt-16 w-48 md:w-80`
+
+    const SignatureFields = () => (
+        <>
+            <p className="!mb-0">
+                <Tooltip
+                    content={() => (
+                        <>
+                            Fill out the form <span className="md:hidden">at the top</span>
+                            <span className="hidden md:inline-block">to the left</span> populate these fields
+                        </>
+                    )}
+                    placement="top"
+                    className="[&_button]:cursor-auto"
+                >
+                    <span className="relative">
+                        <button type="button">
+                            <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                {companyName ? companyName : '[COMPANY NAME]'}
+                            </label>
+                        </button>
+                    </span>
+                </Tooltip>
+            </p>
+            <div className="grid grid-cols-[minmax(100px,200px)_1fr] items-baseline max-w-xl space-y-4 [&>p]:!mb-0">
+                <p>Signature</p>
+                <p className="border-b border-black w-full">&nbsp;</p>
+
+                <p>Name </p>
+                <p className="border-b border-black w-full">
+                    <Tooltip
+                        content={() => (
+                            <>
+                                Fill out the form <span className="md:hidden">at the top</span>
+                                <span className="hidden md:inline-block">to the left</span> populate these fields
+                            </>
+                        )}
+                        placement="top"
+                        className="[&_button]:cursor-auto"
+                    >
+                        <span className="relative">
+                            <button type="button">
+                                <label htmlFor="yourName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                    {yourName ? yourName : '[REPRESENTATIVE NAME]'}
+                                </label>
+                            </button>
+                        </span>
+                    </Tooltip>
+                </p>
+
+                <p>Title</p>
+                <p className="border-b border-black w-full">
+                    <Tooltip
+                        content={() => (
+                            <>
+                                Fill out the form <span className="md:hidden">at the top</span>
+                                <span className="hidden md:inline-block">to the left</span> populate these fields
+                            </>
+                        )}
+                        placement="top"
+                        className="[&_button]:cursor-auto"
+                    >
+                        <span className="relative">
+                            <button type="button">
+                                <label htmlFor="yourTitle" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                    {yourTitle ? yourTitle : '[REPRESENTATIVE TITLE]'}
+                                </label>
+                            </button>
+                        </span>
+                    </Tooltip>
+                </p>
+
+                <p>Date</p>
+                <p className="border-b border-black w-full">
+                    <Tooltip
+                        content={() => (
+                            <>
+                                Fill out the form <span className="md:hidden">at the top</span>
+                                <span className="hidden md:inline-block">to the left</span> populate these fields
+                            </>
+                        )}
+                        placement="top"
+                        className="[&_button]:cursor-auto"
+                    >
+                        <span className="relative">
+                            <button type="button">
+                                <label htmlFor="date" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                    {date ? date : '[DATE]'}
+                                </label>
+                            </button>
+                        </span>
+                    </Tooltip>
+                </p>
+
+                <p className="col-span-2 !mt-8">
+                    <strong>PostHog, Inc.</strong>
+                </p>
+
+                <p>Signature</p>
+                <p className="border-b border-black w-full">&nbsp;</p>
+
+                <p>Name</p>
+                <p className="border-b border-black w-full">Fraser Hopper</p>
+
+                <p>Title</p>
+                <p className="border-b border-black w-full">Operations & Finance Lead</p>
+
+                <p>Date</p>
+                <p className="border-b border-black w-full">&nbsp;</p>
+            </div>
+        </>
+    )
 
     useEffect(() => {
         if (
@@ -96,7 +210,7 @@ function DpaGenerator() {
             </header>
 
             <section className="grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 md:mt-0 md:top-20 gap-4">
-                <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen reasonable:max-h-[calc(100vh-56px)] md:overflow-auto md:sticky top-0 reasonable:top-[56px]">
+                <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen md:reasonable:max-h-[calc(100vh-56px)] md:overflow-auto md:sticky top-0 reasonable:top-[56px]">
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
@@ -196,7 +310,15 @@ function DpaGenerator() {
                             />
 
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="jurisdiction">
-                                Jurisdiction
+                                <Tooltip
+                                    content={() => <p className="max-w-sm !mb-0">Your country</p>}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="border-b border-dashed border-light dark:border-dark pb-0.5 mb-1 inline-block">
+                                        Jurisdiction
+                                    </span>
+                                </Tooltip>
                             </label>
                             <input
                                 type="text"
@@ -209,7 +331,22 @@ function DpaGenerator() {
                             />
 
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="supervisoryAuthority">
-                                Supervisory Authority
+                                <Tooltip
+                                    content={() => (
+                                        <p className="max-w-sm !mb-0">
+                                            An individual authority established by its member state to supervise the
+                                            compliance with a specific regulation. In regards to GDPR, each country will
+                                            have its own authority, for the UK the Information Commissioner's Office
+                                            (ICO) will be the Supervisory Authority.
+                                        </p>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="border-b border-dashed border-light dark:border-dark pb-0.5 mb-1 inline-block">
+                                        Supervisory Authority
+                                    </span>
+                                </Tooltip>
                             </label>
                             <input
                                 type="text"
@@ -352,7 +489,7 @@ function DpaGenerator() {
                     </div>
 
                     <div className={`${mode === 'fairytale' ? 'block' : 'hidden'}`}>
-                        <div className="bg-accent p-4 text-sm text-center -mx-8 -mt-4 border-t border-light">
+                        <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 -mt-8 border-t border-light">
                             <strong>Notice:</strong> While this version is a great way to understand what the DPA says,
                             we don't recommend sending this version to the lawyers.
                         </div>
@@ -363,55 +500,166 @@ function DpaGenerator() {
                             <StaticImage
                                 src="../../public/images/dpa/map.png"
                                 alt="Map"
-                                width={300}
-                                className="float-right -mr-20 -mt-16"
+                                placeholder="blurred"
+                                className={FloatRight}
                             />
                             <p>
-                                Once upon a time in the enchanted land of Data, a wise and gentle kingdom known as the
-                                Company sought to ensure that all its precious treasures—bits and bytes of
-                                knowledge—were safely guarded. To do this, they reached out to the guardian wizards of
-                                PostHog Inc., a famed group known for their powerful data spells and secure magic
-                                vaults.
+                                Once upon a time in the enchanted land of Data, a wise and gentle kingdom known as{' '}
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>{' '}
+                                sought to ensure that all its precious treasures—bits and bytes of knowledge—were safely
+                                guarded. To do this, they reached out to the guardian wizards of PostHog Inc., a famed
+                                group known for their powerful data spells and secure magic vaults.
                             </p>
 
                             <StaticImage
                                 src="../../public/images/dpa/sword.png"
                                 alt="Sword"
-                                width={300}
-                                className="float-left -ml-20 -mt-16"
+                                placeholder="blurred"
+                                className={FloatLeft}
                             />
                             <p>
-                                The Company and the PostHog wizards agreed to create a magical pact called the "Data
-                                Protection Agreement," ensuring that all the treasures would be handled with care and
-                                respect for the laws of the land, including the ancient scrolls of GDPR and the mystical
-                                tomes of the EEA.
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>{' '}
+                                and the PostHog wizards agreed to create a magical pact called the "Data Protection
+                                Agreement," ensuring that all the treasures would be handled with care and respect for
+                                the laws of the land, including the ancient scrolls of GDPR and the mystical tomes of
+                                the EEA.
                             </p>
 
                             <StaticImage
                                 src="../../public/images/dpa/wizard.png"
                                 alt="Wizard"
-                                width={300}
-                                className="float-right -mr-20"
+                                placeholder="blurred"
+                                className={FloatRight}
                             />
 
                             <p>
-                                The Company, a noble Data Controller, entrusted its treasures to the PostHog wizards.
-                                The wizards promised to safeguard the treasures by using their enchanted tools and
-                                secret spells to process and analyze the data. They vowed never to use the treasures for
-                                evil and always to follow the Company's wise instructions.
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>{' '}
+                                a noble Data Controller, entrusted its treasures to the PostHog wizards. The wizards
+                                promised to safeguard the treasures by using their enchanted tools and secret spells to
+                                process and analyze the data. They vowed never to use the treasures for evil and always
+                                to follow{' '}
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>
+                                's wise instructions.
                             </p>
 
                             <StaticImage
                                 src="../../public/images/dpa/nomes.png"
                                 alt="Nomes"
-                                width={300}
-                                className="float-left -ml-20 -mt-16"
+                                placeholder="blurred"
+                                className={FloatLeft}
                             />
                             <p>
                                 In the depths of their crystal-clear agreement, they outlined the adventures the data
                                 could undertake and specified who could handle the data, ensuring that only the most
                                 trusted apprentice wizards or external guardians could assist in safeguarding it. Each
-                                apprentice was sworn to secrecy with a magical oath to protect the Company's treasures.
+                                apprentice was sworn to secrecy with a magical oath to protect{' '}
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>{' '}
+                                treasures.
                             </p>
 
                             <p>
@@ -423,36 +671,124 @@ function DpaGenerator() {
                             <StaticImage
                                 src="../../public/images/dpa/porridge.png"
                                 alt="Porridge"
-                                width={300}
-                                className="float-right -mr-20"
+                                placeholder="blurred"
+                                className={FloatRight}
                             />
                             <p>
-                                The Company and PostHog celebrated their alliance with a grand feast in the grand hall,
-                                signing their pact with quill and enchanted ink. They agreed that their magical contract
-                                would be overseen by the wise elders of the land—judges from the jurisdiction of England
-                                and Wales.
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>{' '}
+                                and PostHog celebrated their alliance with a grand feast in the grand hall, signing
+                                their pact with quill and enchanted ink. They agreed that their magical contract would
+                                be overseen by the wise elders of the land—judges from the jurisdiction of England and
+                                Wales.
                             </p>
 
                             <p>
-                                As the years passed, their partnership flourished. The Company's treasures were kept
-                                safe and grew in wisdom, bringing joy and prosperity to the land. And they all lived
-                                securely and data-compliantly ever after.
+                                As the years passed, their partnership flourished.{' '}
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>
+                                's treasures were kept safe and grew in wisdom, bringing joy and prosperity to the land.
+                                And they all lived securely and data-compliantly ever after.
                             </p>
+                            <div className="pb-16">
+                                <SignatureFields />
+                            </div>
                         </div>
                     </div>
 
-                    <div className={`${mode === 'rap' ? 'block' : 'hidden'} [&>p]:text-[15px]`}>
+                    <div className={`${mode === 'rap' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4 mx-auto max-w-xl`}>
+                        <h2>Data Dynasty: The PostHog Pact</h2>
                         <p>
                             Alright, check this, we're diving into the realm where data's a treasure,
                             <br />
-                            With PostHog Inc. and the Company, teaming up for the measure.
+                            With PostHog Inc. and{' '}
+                            <Tooltip
+                                content={() => (
+                                    <>
+                                        Fill out the form <span className="md:hidden">at the top</span>
+                                        <span className="hidden md:inline-block">to the left</span> populate these
+                                        fields
+                                    </>
+                                )}
+                                placement="top"
+                                className="[&_button]:cursor-auto"
+                            >
+                                <span className="relative">
+                                    <button type="button">
+                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                            {companyName ? companyName : '[COMPANY NAME]'}
+                                        </label>
+                                    </button>
+                                </span>
+                            </Tooltip>
+                            , teaming up for the measure.
                             <br />
                             It's like a contract forged in the depths of digital dungeons,
                             <br />
                             Securing data flow, yo, this ain't just assumptions.
                         </p>
                         <p>
-                            First up, the Company's the Controller, holding keys to the kingdom,
+                            First up,{' '}
+                            <Tooltip
+                                content={() => (
+                                    <>
+                                        Fill out the form <span className="md:hidden">at the top</span>
+                                        <span className="hidden md:inline-block">to the left</span> populate these
+                                        fields
+                                    </>
+                                )}
+                                placement="top"
+                                className="[&_button]:cursor-auto"
+                            >
+                                <span className="relative">
+                                    <button type="button">
+                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                            {companyName ? companyName : '[COMPANY NAME]'}
+                                        </label>
+                                    </button>
+                                </span>
+                            </Tooltip>
+                            's the Controller, holding keys to the kingdom,
                             <br />
                             Handing tasks to PostHog, who process with wisdom.
                             <br />
@@ -490,7 +826,27 @@ function DpaGenerator() {
                         <p>
                             If there’s a breach, PostHog’s on the line,
                             <br />
-                            To notify the Company in no time.
+                            To notify{' '}
+                            <Tooltip
+                                content={() => (
+                                    <>
+                                        Fill out the form <span className="md:hidden">at the top</span>
+                                        <span className="hidden md:inline-block">to the left</span> populate these
+                                        fields
+                                    </>
+                                )}
+                                placement="top"
+                                className="[&_button]:cursor-auto"
+                            >
+                                <span className="relative">
+                                    <button type="button">
+                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                            {companyName ? companyName : '[COMPANY NAME]'}
+                                        </label>
+                                    </button>
+                                </span>
+                            </Tooltip>{' '}
+                            in no time.
                             <br />
                             Security's tight, with measures that protect,
                             <br />
@@ -501,14 +857,54 @@ function DpaGenerator() {
                             <br />
                             Matching standards set high, reaching the sky.
                             <br />
-                            If the Company objects, yo, there's a route to appeal,
+                            If{' '}
+                            <Tooltip
+                                content={() => (
+                                    <>
+                                        Fill out the form <span className="md:hidden">at the top</span>
+                                        <span className="hidden md:inline-block">to the left</span> populate these
+                                        fields
+                                    </>
+                                )}
+                                placement="top"
+                                className="[&_button]:cursor-auto"
+                            >
+                                <span className="relative">
+                                    <button type="button">
+                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                            {companyName ? companyName : '[COMPANY NAME]'}
+                                        </label>
+                                    </button>
+                                </span>
+                            </Tooltip>{' '}
+                            objects, yo, there's a route to appeal,
                             <br />
                             Ensuring every subcontractor keeps it real.
                         </p>
                         <p>
                             Rights of the data subjects, they're front and center,
                             <br />
-                            PostHog assists the Company to enter,
+                            PostHog assists{' '}
+                            <Tooltip
+                                content={() => (
+                                    <>
+                                        Fill out the form <span className="md:hidden">at the top</span>
+                                        <span className="hidden md:inline-block">to the left</span> populate these
+                                        fields
+                                    </>
+                                )}
+                                placement="top"
+                                className="[&_button]:cursor-auto"
+                            >
+                                <span className="relative">
+                                    <button type="button">
+                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                            {companyName ? companyName : '[COMPANY NAME]'}
+                                        </label>
+                                    </button>
+                                </span>
+                            </Tooltip>{' '}
+                            to enter,
                             <br />
                             Handling requests, ensuring privacy’s respected,
                             <br />
@@ -537,7 +933,27 @@ function DpaGenerator() {
                             <br />
                             But with this Agreement, compliance ain’t no lie.
                             <br />
-                            So here's to the Company and PostHog, leaders of the pact,
+                            So here's to{' '}
+                            <Tooltip
+                                content={() => (
+                                    <>
+                                        Fill out the form <span className="md:hidden">at the top</span>
+                                        <span className="hidden md:inline-block">to the left</span> populate these
+                                        fields
+                                    </>
+                                )}
+                                placement="top"
+                                className="[&_button]:cursor-auto"
+                            >
+                                <span className="relative">
+                                    <button type="button">
+                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                            {companyName ? companyName : '[COMPANY NAME]'}
+                                        </label>
+                                    </button>
+                                </span>
+                            </Tooltip>{' '}
+                            and PostHog, leaders of the pact,
                             <br />
                             Guarding data like treasure, with every detail intact.
                         </p>
@@ -546,6 +962,9 @@ function DpaGenerator() {
                             <br />
                             Securing data pathways, through every byte and line.
                         </p>
+                        <div className="pb-16">
+                            <SignatureFields />
+                        </div>
                     </div>
 
                     <div
@@ -972,116 +1391,9 @@ function DpaGenerator() {
                             IN WITNESS WHEREOF, this Agreement is entered into with effect from the date first set out
                             below.
                         </p>
-                        <p>
-                            <Tooltip
-                                content={() => (
-                                    <>
-                                        Fill out the form <span className="md:hidden">at the top</span>
-                                        <span className="hidden md:inline-block">to the left</span> populate these
-                                        fields
-                                    </>
-                                )}
-                                placement="top"
-                                className="[&_button]:cursor-auto"
-                            >
-                                <span className="relative">
-                                    <button type="button">
-                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                            {companyName ? companyName : '[COMPANY NAME]'}
-                                        </label>
-                                    </button>
-                                </span>
-                            </Tooltip>
-                        </p>
-                        <div className="grid grid-cols-[minmax(100px,200px)_1fr] items-baseline max-w-xl space-y-4 [&>p]:!mb-0">
-                            <p>Signature</p>
-                            <p className="border-b border-black w-full">&nbsp;</p>
 
-                            <p>Name </p>
-                            <p className="border-b border-black w-full">
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
-                                            fields
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="relative">
-                                        <button type="button">
-                                            <label htmlFor="yourName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                                {yourName ? yourName : '[REPRESENTATIVE NAME]'}
-                                            </label>
-                                        </button>
-                                    </span>
-                                </Tooltip>
-                            </p>
+                        <SignatureFields />
 
-                            <p>Title</p>
-                            <p className="border-b border-black w-full">
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
-                                            fields
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="relative">
-                                        <button type="button">
-                                            <label htmlFor="yourTitle" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                                {yourTitle ? yourTitle : '[REPRESENTATIVE TITLE]'}
-                                            </label>
-                                        </button>
-                                    </span>
-                                </Tooltip>
-                            </p>
-
-                            <p>Date</p>
-                            <p className="border-b border-black w-full">
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
-                                            fields
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="relative">
-                                        <button type="button">
-                                            <label htmlFor="date" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                                {date ? date : '[DATE]'}
-                                            </label>
-                                        </button>
-                                    </span>
-                                </Tooltip>
-                            </p>
-
-                            <p className="col-span-2 !mt-8">
-                                <strong>PostHog, Inc.</strong>
-                            </p>
-
-                            <p>Signature</p>
-                            <p className="border-b border-black w-full">&nbsp;</p>
-
-                            <p>Name</p>
-                            <p className="border-b border-black w-full">Fraser Hopper</p>
-
-                            <p>Title</p>
-                            <p className="border-b border-black w-full">Operations & Finance Lead</p>
-
-                            <p>Date</p>
-                            <p className="border-b border-black w-full">&nbsp;</p>
-                        </div>
                         <p className="text-center mt-20">
                             <strong>ANNEX I</strong>
                         </p>
@@ -1403,8 +1715,8 @@ function DpaGenerator() {
                 </div>
             </section>
 
-            <section className="text-center my-24">
-                <h3>Still not convinced?</h3>
+            <section className="text-center mt-40 mb-24">
+                <h3>Need a custom MSA?</h3>
 
                 <TrackedCTA event={{ name: `clicked Get a demo` }} href="/book-a-demo" type="secondary" size="lg">
                     Talk to sales
