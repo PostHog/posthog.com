@@ -334,8 +334,9 @@ export const ProductOS = () => {
                     </h2>
                     <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
                         <p className="mb-5">
-                            Want free stuff? Of course you do. Join our <strong>totally original and unique</strong>{' '}
-                            referral scheme to get sweet merch, platform credits, and good vibes. One referral = 1 vibe.{' '}
+                            Join our <strong>totally original and unique</strong> referral scheme to get sweet merch and
+                            good vibes. One referral = 1 vibe, and $25 of store credit, each. Use it for t-shirts,
+                            stickers, or signed team photos.{' '}
                         </p>
                         <p className="mb-5">
                             Plus, get the tools to build your own ludicrously successful pyramid scheme included for
