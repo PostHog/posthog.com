@@ -95,8 +95,8 @@ function DpaGenerator() {
                 </h2>
             </header>
 
-            <section className="grid md:grid-cols-5 relative items-start mt-12 md:mt-0 md:top-20 gap-4">
-                <div className="@container md:col-span-2 px-4 md:px-8 md:py-4 md:max-h-screen reasonable:max-h-[calc(100vh-56px)] md:overflow-auto md:sticky top-0 reasonable:top-[56px]">
+            <section className="grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 md:mt-0 md:top-20 gap-4">
+                <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen reasonable:max-h-[calc(100vh-56px)] md:overflow-auto md:sticky top-0 reasonable:top-[56px]">
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
@@ -460,7 +460,7 @@ function DpaGenerator() {
                         </div>
                     </div>
 
-                    <div className={mode === 'rap' ? 'block' : 'hidden'}>
+                    <div className={`${mode === 'rap' ? 'block' : 'hidden'} [&>p]:text-[15px]`}>
                         <p>
                             Alright, check this, we're diving into the realm where data's a treasure,
                             <br />
@@ -570,7 +570,7 @@ function DpaGenerator() {
                     <div
                         className={`${mode === 'legalese' || mode === 'lawyer' ? 'block' : 'hidden'} ${
                             mode === 'legalese' && ''
-                        } ${mode === 'lawyer' && 'font-serif'}`}
+                        } ${mode === 'lawyer' && 'font-serif'} [&>p]:text-[15px] max-w-3xl mx-auto`}
                     >
                         <h2 className="!text-xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>
