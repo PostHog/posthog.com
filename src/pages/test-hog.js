@@ -117,7 +117,7 @@ export default function TestHog() {
                 throw new Error('Network response was not ok')
             }
             const data = await response.json()
-            const suggestions = { data }
+            const { suggestions } = data
             if (suggestions && suggestions.length > 0) {
                 setRecommendations(suggestions)
             }
@@ -146,7 +146,7 @@ export default function TestHog() {
                 <CallToAction className="mt-4" onClick={handleAnalyze} type="primary">
                     {isLoading ? 'Analyzing...' : 'Analyze'}
                 </CallToAction>
-                {recommendations.length > 0 && <Recommendations recommendations={recommendations} />}
+                {!isLoading && recommendations.length > 0 && <Recommendations recommendations={recommendations} />}
                 {isLoading && (
                     <div className="w-[125px] sm:w-[250px]">
                         <Lottie
