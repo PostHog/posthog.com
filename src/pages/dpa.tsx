@@ -96,7 +96,7 @@ function DpaGenerator() {
             </header>
 
             <section className="grid md:grid-cols-5 relative items-start mt-12 md:mt-0 md:top-20 gap-4">
-                <div className="md:col-span-2 px-4 md:px-8 md:py-4 md:max-h-screen pb-4 reasonable:max-h-[100vh-56px] md:overflow-auto md:sticky top-0 reasonable:top-[60px]">
+                <div className="@container md:col-span-2 px-4 md:px-8 md:py-4 md:max-h-screen reasonable:max-h-[calc(100vh-56px)] md:overflow-auto md:sticky top-0 reasonable:top-[56px]">
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
@@ -116,8 +116,8 @@ function DpaGenerator() {
                         PDF.
                     </p>
                     <form>
-                        <div className="grid grid-cols-5 gap-2 items-center">
-                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="companyName">
+                        <div className="grid grid-cols-5 gap-1 @sm:gap-2 items-center">
+                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyName">
                                 Company Name
                             </label>
                             <input
@@ -126,11 +126,11 @@ function DpaGenerator() {
                                 onChange={(e) => setCompanyName(e.target.value)}
                                 placeholder="Company Name"
                                 id="companyName"
-                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="companyAddress">
+                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyAddress">
                                 Company Address
                             </label>
                             <input
@@ -139,11 +139,11 @@ function DpaGenerator() {
                                 onChange={(e) => setCompanyAddress(e.target.value)}
                                 placeholder="Company Address"
                                 id="companyAddress"
-                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="yourName">
+                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourName">
                                 Representative Name
                             </label>
                             <input
@@ -152,11 +152,11 @@ function DpaGenerator() {
                                 onChange={(e) => setYourName(e.target.value)}
                                 placeholder="Representative Name"
                                 id="yourName"
-                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="email">
+                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="email">
                                 Representative Email
                             </label>
                             <input
@@ -165,11 +165,11 @@ function DpaGenerator() {
                                 onChange={(e) => setRepresentativeEmail(e.target.value)}
                                 placeholder="Contact Email"
                                 id="email"
-                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="yourTitle">
+                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourTitle">
                                 Representative Title
                             </label>
                             <input
@@ -178,11 +178,11 @@ function DpaGenerator() {
                                 onChange={(e) => setYourTitle(e.target.value)}
                                 placeholder="Representative Title"
                                 id="yourTitle"
-                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="date">
+                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="date">
                                 Date
                             </label>
                             <input
@@ -191,11 +191,11 @@ function DpaGenerator() {
                                 onChange={(e) => setDate(e.target.value)}
                                 placeholder="Date"
                                 id="date"
-                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="jurisdiction">
+                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="jurisdiction">
                                 Jurisdiction
                             </label>
                             <input
@@ -204,11 +204,11 @@ function DpaGenerator() {
                                 onChange={(e) => setJurisdiction(e.target.value)}
                                 placeholder="Jurisdiction"
                                 id="jurisdiction"
-                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <label className="col-span-5 md:col-span-2 text-sm" htmlFor="supervisoryAuthority">
+                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="supervisoryAuthority">
                                 Supervisory Authority
                             </label>
                             <input
@@ -217,13 +217,13 @@ function DpaGenerator() {
                                 onChange={(e) => setSupervisoryAuthority(e.target.value)}
                                 placeholder="Supervisory Authority"
                                 id="supervisoryAuthority"
-                                className="col-span-5 md:col-span-3 mb-2 md:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
-                            <div className="col-span-5 md:col-span-2 text-sm self-baseline pt-2">Format</div>
+                            <div className="col-span-5 @md:col-span-2 text-sm self-baseline pt-2">Format</div>
 
-                            <ul className="flex flex-col col-span-5 md:col-span-3 gap-2 list-none pt-2 pl-0">
+                            <ul className="flex flex-col col-span-5 @md:col-span-3 gap-2 list-none pt-2 pl-0">
                                 <li>
                                     <input
                                         type="radio"
@@ -338,7 +338,7 @@ function DpaGenerator() {
                     */}
                 <div
                     ref={divRef}
-                    className="article-content md:col-span-3 bg-white text-primary px-4 md:px-8 py-4 shadow-xl rounded overflow-hidden"
+                    className="article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 shadow-xl rounded overflow-hidden"
                 >
                     <div className="bg-accent py-2 px-8 text-sm text-center -mx-8 -mt-4 mb-8 flex items-center justify-between">
                         <div className="text-lg font-bold">Preview</div>
@@ -355,7 +355,7 @@ function DpaGenerator() {
                                     <TrackedCTA
                                         event={{ name: `clicked Print DPA` }}
                                         type="primary"
-                                        size="md"
+                                        size="sm"
                                         disabled={!isFormComplete}
                                         onClick={handlePrint}
                                         className="[&>span]:flex [&>span]:items-center [&>span]:gap-1"
@@ -1073,81 +1073,93 @@ function DpaGenerator() {
                         <p>See https://posthog.com/handbook/company/security</p>
                         <p>ANNEX III</p>
                         <p>Subprocessors</p>
-                        <table>
-                            <tr>
-                                <td>Name of Subprocessor</td>
-                                <td>Contact details</td>
-                                <td>Subject matter of the processing</td>
-                                <td>Duration of the processing</td>
-                                <td>Nature and purpose of the processing</td>
-                                <td>Geographical location of the processing</td>
-                                <td>Type of personal data processed</td>
-                                <td>Categories of data subject</td>
-                                <td>Details of sub-sub processors</td>
-                            </tr>
-                            <tr>
-                                <td>Amazon Web Services, Inc.</td>
-                                <td>410 Terry Avenue North, Seattle, WA 98109-5210, aws-EU-privacy@amazon.com</td>
-                                <td>Personal data of users of the Controller’s web product(s)</td>
-                                <td>Duration of the agreement</td>
-                                <td>Cloud storage of PostHog Cloud data</td>
-                                <td>USA (PostHog US Cloud) or Germany (PostHog EU Cloud)</td>
-                                <td>
-                                    Identifying – name, username, Computer device – IP address, MAC address, browser
-                                    footprint, Contact – email address, Location – country, territory, city, Behavioral
-                                    – product usage (page views, clicks, browsing behavior).
-                                </td>
-                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                <td>https://aws.amazon.com/compliance/sub-processors/ </td>
-                            </tr>
-                            <tr>
-                                <td>Cloudflare Inc.</td>
-                                <td>101 Townsend Street, San Francisco, CA 94107, USA, legal@cloudflare.com</td>
-                                <td>Personal data of users of the Controller’s web product(s)</td>
-                                <td>Duration of the agreement</td>
-                                <td>Cloud storage of PostHog Cloud data</td>
-                                <td>USA (PostHog US Cloud only, not used for PostHog EU Cloud)</td>
-                                <td>
-                                    Identifying – name, username, Computer device – IP address, MAC address, browser
-                                    footprint, Contact – email address, Location – country, territory, city, Behavioral
-                                    – product usage (page views, clicks, browsing behavior).
-                                </td>
-                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                <td>https://www.cloudflare.com/en-gb/gdpr/subprocessors/</td>
-                            </tr>
-                            <tr>
-                                <td>Salesforce, Inc. (t/a ‘Heroku’)</td>
-                                <td>415 Mission Street, Suite 300,San Francisco, CA 94105, privacy@salesforce.com</td>
-                                <td>Personal data of users of the Controller’s web product(s)</td>
-                                <td>Duration of the agreement</td>
-                                <td>Cloud storage of PostHog Cloud data</td>
-                                <td>USA (PostHog US Cloud only, not used for PostHog EU Cloud)</td>
-                                <td>
-                                    Identifying – name, username, Computer device – IP address, MAC address, browser
-                                    footprint, Contact – email address, Location – country, territory, city, Behavioral
-                                    – product usage (page views, clicks, browsing behavior).
-                                </td>
-                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                <td>
-                                    https://www.salesforce.com/content/dam/web/en_us/www/documents/legal/misc/salesforce-infrastructure-and-subprocessors.pdf
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Functional Software, Inc., t/a ‘Sentry’</td>
-                                <td>45 Fremont Street, 8th Floor, San Francisco, CA 94105. compliance@sentry.io</td>
-                                <td>Personal data of users of the Controller’s web product(s)</td>
-                                <td>Duration of the agreement</td>
-                                <td>Application monitoring and error tracking</td>
-                                <td>USA</td>
-                                <td>
-                                    (Errors only) Identifying – username, Computer device – IP address, MAC address,
-                                    browser footprint, Contact – email address, Behavioral – product usage (page views,
-                                    clicks, browsing behavior).
-                                </td>
-                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                <td>https://sentry.io/legal/dpa/#list-of-subprocessors-1</td>
-                            </tr>
-                        </table>
+                        <div className="overflow-x-auto -mx-4 md:-mx-8">
+                            <table className="[&_td:first-child]:pl-4 md:[&_td:first-child]:pl-8 [&_td:last-child]:pr-4 md:[&_td:last-child]:pr-8">
+                                <tr className="font-bold bg-accent border-t border-light">
+                                    <td className="whitespace-nowrap">Name of Subprocessor</td>
+                                    <td className="whitespace-nowrap">Contact details</td>
+                                    <td className="whitespace-nowrap">Subject matter of the processing</td>
+                                    <td className="whitespace-nowrap">Duration of the processing</td>
+                                    <td className="whitespace-nowrap">Nature and purpose of the processing</td>
+                                    <td className="whitespace-nowrap">Geographical location of the processing</td>
+                                    <td className="whitespace-nowrap">Type of personal data processed</td>
+                                    <td className="whitespace-nowrap">Categories of data subject</td>
+                                    <td className="whitespace-nowrap">Details of sub-sub processors</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Amazon Web Services, Inc.</strong>
+                                    </td>
+                                    <td>410 Terry Avenue North, Seattle, WA 98109-5210, aws-EU-privacy@amazon.com</td>
+                                    <td>Personal data of users of the Controller’s web product(s)</td>
+                                    <td>Duration of the agreement</td>
+                                    <td>Cloud storage of PostHog Cloud data</td>
+                                    <td>USA (PostHog US Cloud) or Germany (PostHog EU Cloud)</td>
+                                    <td>
+                                        Identifying – name, username, Computer device – IP address, MAC address, browser
+                                        footprint, Contact – email address, Location – country, territory, city,
+                                        Behavioral – product usage (page views, clicks, browsing behavior).
+                                    </td>
+                                    <td>Employees, Customers, Visitors, Prospects, Contractors</td>
+                                    <td>https://aws.amazon.com/compliance/sub-processors/ </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Cloudflare Inc.</strong>
+                                    </td>
+                                    <td>101 Townsend Street, San Francisco, CA 94107, USA, legal@cloudflare.com</td>
+                                    <td>Personal data of users of the Controller’s web product(s)</td>
+                                    <td>Duration of the agreement</td>
+                                    <td>Cloud storage of PostHog Cloud data</td>
+                                    <td>USA (PostHog US Cloud only, not used for PostHog EU Cloud)</td>
+                                    <td>
+                                        Identifying – name, username, Computer device – IP address, MAC address, browser
+                                        footprint, Contact – email address, Location – country, territory, city,
+                                        Behavioral – product usage (page views, clicks, browsing behavior).
+                                    </td>
+                                    <td>Employees, Customers, Visitors, Prospects, Contractors</td>
+                                    <td>https://www.cloudflare.com/en-gb/gdpr/subprocessors/</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Salesforce, Inc. (t/a ‘Heroku’)</strong>
+                                    </td>
+                                    <td>
+                                        415 Mission Street, Suite 300,San Francisco, CA 94105, privacy@salesforce.com
+                                    </td>
+                                    <td>Personal data of users of the Controller’s web product(s)</td>
+                                    <td>Duration of the agreement</td>
+                                    <td>Cloud storage of PostHog Cloud data</td>
+                                    <td>USA (PostHog US Cloud only, not used for PostHog EU Cloud)</td>
+                                    <td>
+                                        Identifying – name, username, Computer device – IP address, MAC address, browser
+                                        footprint, Contact – email address, Location – country, territory, city,
+                                        Behavioral – product usage (page views, clicks, browsing behavior).
+                                    </td>
+                                    <td>Employees, Customers, Visitors, Prospects, Contractors</td>
+                                    <td>
+                                        https://www.salesforce.com/content/dam/web/en_us/www/documents/legal/misc/salesforce-infrastructure-and-subprocessors.pdf
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Functional Software, Inc., t/a ‘Sentry’</strong>
+                                    </td>
+                                    <td>45 Fremont Street, 8th Floor, San Francisco, CA 94105. compliance@sentry.io</td>
+                                    <td>Personal data of users of the Controller’s web product(s)</td>
+                                    <td>Duration of the agreement</td>
+                                    <td>Application monitoring and error tracking</td>
+                                    <td>USA</td>
+                                    <td>
+                                        (Errors only) Identifying – username, Computer device – IP address, MAC address,
+                                        browser footprint, Contact – email address, Behavioral – product usage (page
+                                        views, clicks, browsing behavior).
+                                    </td>
+                                    <td>Employees, Customers, Visitors, Prospects, Contractors</td>
+                                    <td>https://sentry.io/legal/dpa/#list-of-subprocessors-1</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </section>
