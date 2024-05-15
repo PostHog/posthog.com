@@ -107,7 +107,8 @@ module.exports = {
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path fill="%234A4C52" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
             },
             fontFamily: {
-                fairytale: ['Henny Penny', 'cursive', 'sans-serif'],
+                'fairytale-title': ['Fairytale', 'sans-serif'],
+                fairytale: ['Computer Modern', 'sans-serif'],
                 serif: ['Times New Roman', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
                     'MatterVF',
