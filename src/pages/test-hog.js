@@ -9,13 +9,34 @@ const description = 'Enter URL to find out what to test on your site.'
 
 export default function TestHog() {
     const [url, setUrl] = useState('')
-
+    const [isLoading, setIsLoading] = useState(false)
     const handleChange = (event) => {
         setUrl(event.target.value)
     }
 
-    const handleAnalyze = () => {
-        // Add API call here
+    const handleAnalyze = async () => {
+        try {
+            setIsLoading(true)
+            const response = await fetch('/api/abTestHog', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    websiteURL: url,
+                }),
+            })
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            }
+            const data = await response.json()
+            const suggestions = { data }
+            console.log(data)
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -34,7 +55,7 @@ export default function TestHog() {
                     placeholder="Enter URL..."
                 />
                 <CallToAction className="mt-4" onClick={handleAnalyze} type="primary">
-                    Analyze
+                    {isLoading ? 'Analyzing...' : 'Analyze'}
                 </CallToAction>
             </div>
         </Layout>

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 
 const chatGPTSystemPrompt = `Your job is to review website pages and make recommendations on how to improve conversions on the page. Here are guidelines for best practices and common mistakes that are made:
 
@@ -62,11 +62,11 @@ Fix it: Offer templates, how-to guides, and concierge migration
 
 const handler = async (req, res) => {
     const { body } = req
+
     if (!body) return res.status(500).json({ error: 'Missing body' })
-    const { websiteURL } = JSON.parse(body)
+    const { websiteURL } = body
     if (!process.env.OPEN_AI_KEY) return res.status(500).json({ error: 'No Open AI key' })
     if (!websiteURL) return res.status(500).json({ error: 'Missing required fields' })
-
     try {
         const userPrompt = `
         Go to ${websiteURL} and make suggestions for what improvements to make. You MUST make your suggestions as A/B tests to run. You MUST only respond with a JSON array with objects. Here’s the format you must use:
@@ -74,12 +74,17 @@ const handler = async (req, res) => {
             {
                 testTitle: string,
                 testExplanationAndReason: string,
+                controlVariant: string,
+                testVariant: string,
                 goalMetric: string,
                 secondaryMetrics: string[],
                 guardrailMetrics: string[]
             }
         \`\`\`
-        You MUST only respond with this JSON, and not any other text in your response
+
+        Be as specific as possible with what changes should be tested. If you suggest copy changes, you must tell me what the copy should be. If you suggest UI changes, you must tell me exactly what changes to make. Be extremely prescriptive. You must suggest what the control and test variant should be.
+
+        You MUST only respond with this JSON, and not any other text in your response. Only respond with your answer in structured JSON format without using markdown code blocks
         `
 
         const data = {
@@ -99,9 +104,10 @@ const handler = async (req, res) => {
             },
             body: JSON.stringify(data),
         })
-
         const jsonResponse = await response.json()
-        return res.status(200).json({ result: jsonResponse.choices[0].message.content })
+
+        const result = JSON.parse(jsonResponse.choices[0].message.content)
+        return res.status(200).json({ suggestions: result })
     } catch (error) {
         return res.status(500).json(error)
     }
