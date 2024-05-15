@@ -205,7 +205,7 @@ function DpaGenerator() {
                         <span className="text-red">YAY</span>!
                     </em>
                 </h1>
-                <h2 className={`mt-2 -mb-8 text-lg opacity-75 font-semibold text-balance text-center leading-tight`}>
+                <h2 className={`mt-2 -mb-8 text-xl opacity-75 font-semibold text-balance text-center leading-tight`}>
                     The data processing agreement (DPA) generator designed to spark joy
                 </h2>
             </header>
@@ -445,7 +445,7 @@ function DpaGenerator() {
                                     <br />
                                     <div className="block text-sm opacity-75">
                                         Warning: May contain{' '}
-                                        <span className="border border-black rounded-sm px-1 py-0.5 uppercase text-xs">
+                                        <span className="border border-black rounded-sm px-1 py-0.5 uppercase text-xs whitespace-nowrap">
                                             explicit content
                                         </span>
                                     </div>
@@ -466,11 +466,40 @@ function DpaGenerator() {
                                 <div className="max-w-sm print:hidden">
                                     {isFormComplete ? (
                                         <>
-                                            <p className="mb-3 text-[15px]">Use your browser's Export to PDF option</p>
-                                            <p className="mb-0 text-[15px]">
-                                                <strong>Tip:</strong> Disable headers and footers to ditch the page
-                                                title and URL from your printed copy.
+                                            <h4 className="mb-1">Important instructions</h4>
+                                            <ol className="mb-3">
+                                                <li>
+                                                    <p className="text-[15px] mb-0">Open your browser's print dialog</p>
+                                                </li>
+                                                <li>
+                                                    <p className="text-[15px] mb-0">
+                                                        Use the Export to PDF option in your browser or system's print
+                                                        menu
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p className="text-[15px] mb-0">
+                                                        Sign and send to fraser@posthog.com for counter-signature.
+                                                    </p>
+                                                </li>
+                                            </ol>
+                                            <p className="mb-0 text-[15px] border-t border-light pt-4 mt-">
+                                                <strong>Tip:</strong> Disable these options in Chrome's print settings
+                                                to ditch the page title, URL, and highlighted fields from your printed
+                                                copy. 👇
                                             </p>
+
+                                            <div className="my-2 pb-2 border border-light dark:border-dark rounded overflow-hidden">
+                                                <StaticImage
+                                                    src="../../public/images/dpa/print-settings.png"
+                                                    alt="Print settings"
+                                                    placeholder="blurred"
+                                                    className="dark:rounded"
+                                                    objectFit="contain"
+                                                    width={636}
+                                                    height={137}
+                                                />
+                                            </div>
                                         </>
                                     ) : (
                                         'Fill out all the fields to export to PDF'
@@ -636,8 +665,8 @@ function DpaGenerator() {
                             </p>
 
                             <StaticImage
-                                src="../../public/images/dpa/nomes.png"
-                                alt="Nomes"
+                                src="../../public/images/dpa/gnomes.png"
+                                alt="Gnomes"
                                 placeholder="blurred"
                                 className={FloatLeft}
                             />
@@ -751,14 +780,14 @@ function DpaGenerator() {
                             likes rap.
                         </div>
 
-                        <div className="mx-auto max-w-xl">
-                            <h2>Data Dynasty: The PostHog Pact</h2>
+                        <div className="mx-auto max-w-3xl">
+                            <h2 className="pt-8 pb-0">Data Dynasty: The PostHog Pact</h2>
 
                             <StaticImage
                                 src="../../public/images/dpa/slim.png"
                                 alt="Map"
                                 placeholder="blurred"
-                                className="float-right -mr-2 md:-mr-20 -my-8 mt:-mt-16 w-48 md:w-64"
+                                className="float-right -mr-2 -my-8 mt:mt-0 w-48 md:w-64"
                             />
                             <p>
                                 Alright, check this, we're diving into the realm where data's a treasure,
@@ -1015,7 +1044,11 @@ function DpaGenerator() {
                             mode === 'lawyer' && 'font-serif'
                         } print:[&>p]:text-sm print:[&_li]:text-sm max-w-3xl mx-auto`}
                     >
-                        <Logo className={`my-8 print:mt-0 ${mode === 'lawyer' && 'hidden'}`} />
+                        <Logo
+                            className={`my-8 print:mt-0 print:relative print:-top-2 print:mb-12 ${
+                                mode === 'lawyer' && 'hidden'
+                            }`}
+                        />
                         <h2 className="!text-2xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>
                             This Data Processing Agreement (“<strong>Agreement</strong>”) forms part of the Contract for
@@ -1057,13 +1090,13 @@ function DpaGenerator() {
                         <p>
                             <strong>1. Definitions and Interpretation</strong>
                         </p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>
                                 {' '}
                                 1.1. Unless otherwise defined herein, capitalized terms and expressions used in this
                                 Agreement shall have the following meaning:
                             </p>
-                            <div className="pl-8">
+                            <div className="pl-8 pb-2">
                                 <p>1.1.1. “Agreement” means this Data Processing Agreement and all Annexes;</p>
                                 <p>
                                     1.1.2. “Company Personal Data” means any Personal Data provided to or Processed by
@@ -1130,9 +1163,9 @@ function DpaGenerator() {
                         <p>
                             <strong>2. Processing of Company Personal Data</strong>
                         </p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>2.1. The Company shall:</p>
-                            <div className="pl-8">
+                            <div className="pl-8 pb-2">
                                 <p>
                                     2.1.1. ensure that any and all information or data, including without limitation
                                     Company Personal Data, is collected, processed, transferred and used in full
@@ -1147,7 +1180,7 @@ function DpaGenerator() {
                                 <p>2.1.3. instruct the Processor to process Company Personal Data.</p>
                             </div>
                             <p>2.2. Processor shall:</p>
-                            <div className="pl-8">
+                            <div className="pl-8 pb-2">
                                 <p>
                                     2.2.1. comply with all applicable Data Protection Laws in the Processing of Company
                                     Personal Data; and
@@ -1176,7 +1209,7 @@ function DpaGenerator() {
                         <p>
                             <strong>3. Processor Personnel</strong>
                         </p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>
                                 3.1. Processor shall take reasonable steps to ensure the reliability of any personnel
                                 who may have access to the Company Personal Data, ensuring that all such individuals are
@@ -1187,7 +1220,7 @@ function DpaGenerator() {
                         <p>
                             <strong>4. Security</strong>
                         </p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>
                                 4.1. Taking into account the state of the art, the costs of implementation and the
                                 nature, scope, context and purposes of Processing as well as the risk of varying
@@ -1201,7 +1234,7 @@ function DpaGenerator() {
                         <p>
                             <strong>5. Subprocessing</strong>
                         </p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>
                                 5.1. The Company provides Processor with general authorisation to engage Subprocessors.
                             </p>
@@ -1235,7 +1268,7 @@ function DpaGenerator() {
                         <p>
                             <strong>6. Data Subject Rights and Cooperation</strong>
                         </p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>
                                 6.1. Taking into account the nature of the Processing, Processor shall assist the
                                 Company by implementing appropriate technical and organisational measures, insofar as
@@ -1245,7 +1278,7 @@ function DpaGenerator() {
                             </p>
                         </div>
                         <p>6.2. Processor shall:</p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>
                                 6.2.1. notify Company if it receives a request from a Data Subject under any Data
                                 Protection Law in respect of Company Personal Data; and
@@ -1273,7 +1306,7 @@ function DpaGenerator() {
                         <p>
                             <strong>7. Personal Data Breach</strong>
                         </p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>
                                 7.1. Processor shall notify Company without undue delay upon Processor becoming aware of
                                 a Personal Data Breach affecting Company Personal Data, providing Company with
@@ -1290,7 +1323,7 @@ function DpaGenerator() {
                         <p>
                             <strong>8. Audits</strong>
                         </p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>
                                 8.1. The Processor shall make available to the Company all information reasonably
                                 necessary to demonstrate compliance with this Agreement and at the cost of the Company,
@@ -1301,7 +1334,7 @@ function DpaGenerator() {
                         <p>
                             <strong>9. Deletion or return of Company Personal Data</strong>
                         </p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>
                                 9.1. Following a request from the Company, Processor shall promptly and in any event
                                 within 10 business days of the date of cessation of any Services involving the
@@ -1313,7 +1346,7 @@ function DpaGenerator() {
                         <p>
                             <strong>10. Data Transfer Outside of the Protected Area</strong>
                         </p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>
                                 10.1. The Company acknowledges that the Processor will Process the Personal Data outside
                                 of the Protected Area including in the US.
@@ -1335,7 +1368,7 @@ function DpaGenerator() {
                                 this Agreement
                             </p>
                             <p>10.3. In relation to the EU Standard Contractual Clauses, the Parties agree that:</p>
-                            <div className="pl-8">
+                            <div className="pl-8 pb-2">
                                 <p>
                                     10.3.1. for the purposes of clause 9, option 2 (general written authorisation for
                                     subprocessors) shall apply and the Parties agree that the time period for notifying
@@ -1367,7 +1400,7 @@ function DpaGenerator() {
                                 such Addendum, the Parties agree to change the format of the information set out in Part
                                 1 of the Addendum so that:
                             </p>
-                            <div className="pl-8">
+                            <div className="pl-8 pb-2">
                                 <p>
                                     10.4.1. the details of the parties in table 1 shall be as set out in Annex I (with
                                     no requirement for signature);
@@ -1409,14 +1442,14 @@ function DpaGenerator() {
                         <p>
                             <strong>11. General Terms</strong>
                         </p>
-                        <div className="pl-8">
+                        <div className="pl-8 pb-2">
                             <p>
                                 11.1. Confidentiality. Each Party must keep this Agreement and information it receives
                                 about the other Party and its business in connection with this Agreement (“Confidential
                                 Information”) confidential and must not use or disclose that Confidential Information
                                 without the prior written consent of the other Party except to the extent that:
                             </p>
-                            <div className="pl-8">
+                            <div className="pl-8 pb-2">
                                 <p>11.1.1. disclosure is required by law;</p>
                                 <p>11.1.2. the relevant information is already in the public domain.</p>
                             </div>
@@ -1669,7 +1702,11 @@ function DpaGenerator() {
                         </p>
                     </div>
 
-                    <div className="overflow-x-auto -mx-4 md:-mx-8">
+                    <div
+                        className={`overflow-x-auto -mx-4 md:-mx-8 ${
+                            mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'
+                        }`}
+                    >
                         <table className="[&_td:first-child]:pl-4 md:[&_td:first-child]:pl-8 [&_td:last-child]:pr-4 md:[&_td:last-child]:pr-8 print:text-xs">
                             <tr className="font-bold bg-accent border-t border-light">
                                 <td className="whitespace-nowrap">Name of Subprocessor</td>
