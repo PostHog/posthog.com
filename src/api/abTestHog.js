@@ -82,7 +82,7 @@ const handler = async (req, res) => {
             }
         \`\`\`
 
-        Be as specific as possible with what changes should be tested. If you suggest copy changes, you must tell me what the copy should be. If you suggest UI changes, you must tell me exactly what changes to make. Be extremely prescriptive. You must suggest what the control and test variant should be.
+        Be as specific as possible with what changes should be tested, and be as specific as possible with your explanations and reason. You must OVEREXPLAIN your explanation and reasons. You MUST tell me exactly what changes to makes on the website. If you suggest copy changes, you MUST tell me what the copy should be. If you suggest UI changes, you MUST tell me exactly what changes to make. Be extremely prescriptive. You MUST suggest what the control and test variant should be.
 
         You MUST only respond with this JSON, and not any other text in your response. Only respond with your answer in structured JSON format without using markdown code blocks
         `
