@@ -32,6 +32,7 @@ import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 't
 import Tabs from 'components/Tabs'
 import { CallToAction } from 'components/CallToAction'
 import Tabbed from './PricingCalculator/Tabbed'
+import { usePlatform } from './Platform/usePlatform'
 
 interface PlanData {
     title: string
@@ -169,6 +170,88 @@ const Discounts = () => (
         </ul>
     </div>
 )
+
+const getPlanPriceData = (plan) => {
+    const data = {
+        price: undefined,
+        freeTier: undefined,
+    }
+    if (plan.flat_rate) {
+        data.price = plan.unit_amount_usd
+    } else {
+        for (const [index, tier] of plan.tiers.entries()) {
+            if (index === 0) {
+                if (parseFloat(tier.flat_amount_usd) <= 0) {
+                    data.freeTier = `First ${tier.up_to.toLocaleString()} ${plan.unit}s free every month`
+                } else {
+                    data.price = tier.unit_amount_usd
+                    break
+                }
+            }
+            if (index > 0) {
+                data.price = tier.unit_amount_usd
+                break
+            }
+        }
+    }
+    return data
+}
+
+const AddonContent = ({ name, description, plans }) => {
+    const plan = plans[plans.length - 1]
+    const { price, freeTier } = getPlanPriceData(plan)
+    return (
+        <div>
+            <h5 className="m-0">{name}</h5>
+            <p className="my-2">{description}</p>
+            <h6 className="text-base opacity-70 font-bold m-0">Pricing</h6>
+            <p className="m-0">
+                <strong>${price}</strong>
+                <span className="opacity-70">/{plan.unit}</span>
+            </p>
+            {freeTier && <p className="opacity-70 text-sm m-0">{freeTier}</p>}
+        </div>
+    )
+}
+
+const AllAddons = () => {
+    const platform = usePlatform()
+    const products = useProducts()
+    const platformAddons = platform.addons.filter((addon) => !addon.inclusion_only)
+    const productAddons = products.flatMap((product) => product.addons.filter((addon) => !addon.inclusion_only))
+    const allAddons = [...platformAddons, ...productAddons]
+    const [activeTab, setActiveTab] = useState(0)
+    const activeAddon = allAddons[activeTab]
+
+    return (
+        <div className="flex space-x-8">
+            <ul className="list-none m-0 p-0 flex-shrink-0">
+                {allAddons.map(({ name, icon_key, description }, index) => {
+                    const active = activeTab === index
+                    const Icon = Icons[icon_key]
+                    return (
+                        <li key={name}>
+                            <button
+                                onClick={() => setActiveTab(index)}
+                                className={`p-2 rounded-md font-bold flex space-x-2 items-center justify-between w-full click ${
+                                    active ? 'bg-accent' : ''
+                                }`}
+                            >
+                                <div className="flex space-x-2">
+                                    <span>
+                                        <Icon className="w-5" />
+                                    </span>
+                                    <span>{name}</span>
+                                </div>
+                            </button>
+                        </li>
+                    )
+                })}
+            </ul>
+            <AddonContent {...activeAddon} />
+        </div>
+    )
+}
 
 export const section = cntl`
     max-w-6xl
@@ -870,7 +953,9 @@ const PricingExperiment = ({
                         </SectionHeader>
 
                         <SectionColumns>
-                            <SectionMainCol>tabs n stuff</SectionMainCol>
+                            <SectionMainCol>
+                                <AllAddons />
+                            </SectionMainCol>
                             <SectionSidebar>
                                 <h4 className="text-lg mb-2">Why add-ons?</h4>
                                 <SidebarList>
