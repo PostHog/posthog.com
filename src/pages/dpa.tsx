@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { SEO } from 'components/seo'
 import Layout from 'components/Layout'
 import { heading, section } from 'components/Home/classes'
@@ -30,8 +30,8 @@ function DpaGenerator() {
     const [jurisdiction, setJurisdiction] = useState('')
     const [supervisoryAuthority, setSupervisoryAuthority] = useState('')
     const [mode, setMode] = useState('legalese')
-
     const [isFormComplete, setIsFormComplete] = useState(false)
+    const divRef = useRef(null)
 
     useEffect(() => {
         if (
@@ -137,33 +137,46 @@ function DpaGenerator() {
                                 type="text"
                                 value={companyAddress}
                                 onChange={(e) => setCompanyAddress(e.target.value)}
-                                placeholder="Company address"
+                                placeholder="Company Address"
                                 id="companyAddress"
                                 className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
                             <label className="col-span-2 text-sm" htmlFor="yourName">
-                                Your Name
+                                Representative Name
                             </label>
                             <input
                                 type="text"
                                 value={yourName}
                                 onChange={(e) => setYourName(e.target.value)}
-                                placeholder="Your name"
+                                placeholder="Representative Name"
                                 id="yourName"
                                 className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
 
+                            <label className="col-span-2 text-sm" htmlFor="email">
+                                Representative Email
+                            </label>
+                            <input
+                                type="email"
+                                value={representativeEmail}
+                                onChange={(e) => setRepresentativeEmail(e.target.value)}
+                                placeholder="Contact email"
+                                id="email"
+                                className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
+                                required
+                            />
+
                             <label className="col-span-2 text-sm" htmlFor="yourTitle">
-                                Your Title
+                                Representative Title
                             </label>
                             <input
                                 type="text"
                                 value={yourTitle}
                                 onChange={(e) => setYourTitle(e.target.value)}
-                                placeholder="Your title"
+                                placeholder="Representative Title"
                                 id="yourTitle"
                                 className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
                                 required
@@ -178,19 +191,6 @@ function DpaGenerator() {
                                 onChange={(e) => setDate(e.target.value)}
                                 placeholder="Date"
                                 id="date"
-                                className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
-                                required
-                            />
-
-                            <label className="col-span-2 text-sm" htmlFor="email">
-                                Representative Email
-                            </label>
-                            <input
-                                type="email"
-                                value={representativeEmail}
-                                onChange={(e) => setRepresentativeEmail(e.target.value)}
-                                placeholder="Contact email"
-                                id="email"
                                 className="col-span-3 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
@@ -230,7 +230,12 @@ function DpaGenerator() {
                                         id="legalese"
                                         name="mode"
                                         value="legalese"
-                                        onChange={(e) => setMode(e.target.value)}
+                                        onChange={(e) => {
+                                            setMode(e.target.value)
+                                            if (divRef.current) {
+                                                divRef.current.scrollIntoView({ behavior: 'smooth' })
+                                            }
+                                        }}
                                         checked={mode === 'legalese'}
                                     />
                                     <label className="ml-1 font-semibold text-[15px]" htmlFor="legalese">
@@ -247,7 +252,12 @@ function DpaGenerator() {
                                         id="lawyer"
                                         name="mode"
                                         value="lawyer"
-                                        onChange={(e) => setMode(e.target.value)}
+                                        onChange={(e) => {
+                                            setMode(e.target.value)
+                                            if (divRef.current) {
+                                                divRef.current.scrollIntoView({ behavior: 'smooth' })
+                                            }
+                                        }}
                                     />
                                     <label className="ml-1 font-semibold text-[15px]" htmlFor="lawyer">
                                         Lawyer's love language
@@ -263,7 +273,12 @@ function DpaGenerator() {
                                         id="fairytale"
                                         name="mode"
                                         value="fairytale"
-                                        onChange={(e) => setMode(e.target.value)}
+                                        onChange={(e) => {
+                                            setMode(e.target.value)
+                                            if (divRef.current) {
+                                                divRef.current.scrollIntoView({ behavior: 'smooth' })
+                                            }
+                                        }}
                                     />
                                     <label className="ml-1 font-semibold text-[15px]" htmlFor="fairytale">
                                         Fairytale
@@ -279,7 +294,12 @@ function DpaGenerator() {
                                         id="rap"
                                         name="mode"
                                         value="rap"
-                                        onChange={(e) => setMode(e.target.value)}
+                                        onChange={(e) => {
+                                            setMode(e.target.value)
+                                            if (divRef.current) {
+                                                divRef.current.scrollIntoView({ behavior: 'smooth' })
+                                            }
+                                        }}
                                     />
                                     <label className="ml-1 font-semibold text-[15px]" htmlFor="rap">
                                         Eminem edition
@@ -316,7 +336,10 @@ function DpaGenerator() {
                             <span>{supervisoryAuthority}</span>
                         </div>
                     */}
-                <div className="article-content col-span-3 bg-white text-primary px-8 py-4 shadow-xl rounded overflow-hidden">
+                <div
+                    ref={divRef}
+                    className="article-content col-span-3 bg-white text-primary px-8 py-4 shadow-xl rounded overflow-hidden"
+                >
                     <div className="bg-accent py-2 px-8 text-sm text-center -mx-8 -mt-4 mb-8 flex items-center justify-between">
                         <div className="text-lg font-bold">Preview</div>
                         <div>
@@ -565,10 +588,10 @@ function DpaGenerator() {
                                 className="[&_button]:cursor-auto"
                             >
                                 <span className="relative">
-                                    <button type="button" className="" onClick={handleReset}>
-                                        <span className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                    <button type="button">
+                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
                                             {companyName ? companyName : '[COMPANY NAME]'}
-                                        </span>
+                                        </label>
                                     </button>
                                 </span>
                             </Tooltip>{' '}
@@ -981,14 +1004,14 @@ function DpaGenerator() {
                             <li>
                                 the Company at the following address{' '}
                                 <span className="bg-yellow/40 font-bold px-0.5">
-                                    {companyAddress ? companyAddress : '[Company address]'}
+                                    {companyAddress ? companyAddress : '[Company Address]'}
                                 </span>
                                 ;
                             </li>
                             <li>
                                 the contact person for the Company shall be:{' '}
                                 <span className="bg-yellow/40 font-bold px-0.5">
-                                    {representativeEmail ? representativeEmail : '[Representative email]'}
+                                    {representativeEmail ? representativeEmail : '[Representative Email]'}
                                 </span>
                                 ;
                             </li>
