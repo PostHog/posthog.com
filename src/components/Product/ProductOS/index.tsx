@@ -3,6 +3,8 @@ import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
     IconAsterisk,
+    IconGlobe,
+    IconShield,
     IconBolt,
     IconBuilding,
     IconCursorClick,
@@ -286,7 +288,7 @@ export const ProductOS = () => {
                     </div>
                 </section>
 
-                <section className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
+                <section className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-10">
                     <div className="grid md:grid-cols-12 md:gap-8 items-center">
                         <div className="order-2 md:order-1 col-span-5">
                             <h2 className="text-4xl mb-2">Site widgets</h2>
@@ -320,22 +322,58 @@ export const ProductOS = () => {
                     </div>
                 </section>
 
-                <section className="max-w-7xl mx-auto px-5 md:mb-20">
-                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
-                        <div className="flex-1">
-                            <h2 className="text-4xl">
-                                This bit is boring, but <span className="text-red dark:text-yellow">important</span>
-                            </h2>
-                            <p>
-                                We poke fun at a lot of things, but we take security seriously. We're{' '}
-                                <b>SOC 2 Type-1 certified, GDPR ready, HIPAA compliant</b>, and we share our security
-                                reports publicly. Check <a href="/handbook/company/security">our security docs</a> for
-                                more!
-                            </p>
+                <section
+                    id="pricing"
+                    className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-5 pb-20`}
+                >
+                    <div className="text-center">
+                        <StaticImage src="./images/refer.png" alt="referral hog" width={100} className="mb-5" />
+                    </div>
+                    <h2 className="text-3xl md:text-4xl text-center">
+                        Join our pyramid scheme <span className="text-red dark:text-yellow">(or build your own)</span>
+                    </h2>
+                    <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
+                        <p className="mb-5">
+                            Want free stuff? Of course you do. Join our <strong>totally original and unique</strong>{' '}
+                            referral scheme to get sweet merch, platform credits, and good vibes. One referral = 1 vibe.{' '}
+                        </p>
+                        <p className="mb-5">
+                            Plus, get the tools to build your own ludicrously successful pyramid scheme included for
+                            free.
+                        </p>
+                        <div className="text-center">
+                            <CallToAction to="/docs/toolbar" type="secondary" size="sm">
+                                Get free stuff now
+                            </CallToAction>
                         </div>
-                        <aside className="shrink-0 md:basis-[300px] xl:basis-[500px]">
-                            <StaticImage src="./images/alert.png" alt="" className="w-full max-w-[262px]" />
-                        </aside>
+                    </div>
+                </section>
+
+                <section>
+                    <div className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
+                        <div className="flex gap-8 flex-col-reverse md:flex-row">
+                            <div className="flex-1">
+                                <h2 className="text-4xl">
+                                    This bit is boring, <span className="text-red dark:text-yellow">but important</span>
+                                </h2>
+                                <p className="max-w-2xl">
+                                    We take security seriously. Read{' '}
+                                    <a href="/handbook/company/security">our security docs</a> if you don't believe us.
+                                </p>
+                            </div>
+                        </div>
+                        <ul className={`list-none p-0 grid md:grid-cols-2 gap-8`}>
+                            <Subfeature
+                                title="HIPAA & GDPR compliance"
+                                description="We make this easy, with tutorials on how to anonymize PII and the option to host in either the US or UK. Need a BAA? We do those too."
+                                icon={<IconGlobe />}
+                            />
+                            <Subfeature
+                                title="SOC2"
+                                description="We're Type-1 certfied, which isn't super glamourous but is useful for big teams. Need more? We're working on Type-2."
+                                icon={<IconShield />}
+                            />
+                        </ul>
                     </div>
                 </section>
 
