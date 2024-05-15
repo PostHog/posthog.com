@@ -33,8 +33,8 @@ function DpaGenerator() {
     const [isFormComplete, setIsFormComplete] = useState(false)
     const divRef = useRef(null)
 
-    const FloatRight = `float-right -mr-2 md:-mr-20 -my-8 mt:-mt-16 w-48 md:w-80`
-    const FloatLeft = `float-left -ml-2 md:-ml-20 -my-8 mt:-mt-16 w-48 md:w-80`
+    const FloatRight = `float-right -mr-2 md:-mr-20 -my-8 md:-mt-16 w-48 md:w-80`
+    const FloatLeft = `float-left -ml-2 md:-ml-20 -my-8 md:-mt-16 w-48 md:w-80`
 
     const SignatureFields = () => (
         <>
@@ -376,7 +376,7 @@ function DpaGenerator() {
                                         checked={mode === 'legalese'}
                                     />
                                     <label className="ml-1 font-semibold text-[15px]" htmlFor="legalese">
-                                        A legal doc, formatted by a designer
+                                        A perfectly legal doc, but with some pizazz
                                     </label>
                                     <br />
                                     <div className="block ml-5 text-[13px] opacity-75">
@@ -397,11 +397,11 @@ function DpaGenerator() {
                                         }}
                                     />
                                     <label className="ml-1 font-semibold text-[15px]" htmlFor="lawyer">
-                                        Lawyer's love language
+                                        Your lawyer's favorite version
                                     </label>
                                     <br />
                                     <div className="block ml-5 text-[13px] opacity-75">
-                                        The version they dream about
+                                        Because lawyers love Times New Roman
                                     </div>
                                 </li>
                                 <li>
@@ -738,6 +738,13 @@ function DpaGenerator() {
 
                     <div className={`${mode === 'rap' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4 mx-auto max-w-xl`}>
                         <h2>Data Dynasty: The PostHog Pact</h2>
+
+                        <StaticImage
+                            src="../../public/images/dpa/slim.png"
+                            alt="Map"
+                            placeholder="blurred"
+                            className="float-right -mr-2 md:-mr-20 -my-8 mt:-mt-16 w-48 md:w-64"
+                        />
                         <p>
                             Alright, check this, we're diving into the realm where data's a treasure,
                             <br />
