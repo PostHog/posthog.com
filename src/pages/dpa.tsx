@@ -610,176 +610,208 @@ function DpaGenerator() {
                             obligations.
                         </p>
                         <p>IT IS AGREED AS FOLLOWS:</p>
-                        <ol>
-                            <li>Definitions and Interpretation</li>
-                        </ol>
                         <p>
-                            {' '}
-                            1.1. Unless otherwise defined herein, capitalized terms and expressions used in this
-                            Agreement shall have the following meaning:
+                            <strong>1. Definitions and Interpretation</strong>
                         </p>
-                        <p>1.1.1. “Agreement” means this Data Processing Agreement and all Annexes;</p>
+                        <div className="pl-8">
+                            <p>
+                                {' '}
+                                1.1. Unless otherwise defined herein, capitalized terms and expressions used in this
+                                Agreement shall have the following meaning:
+                            </p>
+                            <div className="pl-8">
+                                <p>1.1.1. “Agreement” means this Data Processing Agreement and all Annexes;</p>
+                                <p>
+                                    1.1.2. “Company Personal Data” means any Personal Data provided to or Processed by
+                                    the Processor on behalf of the Company pursuant to or in connection with the
+                                    Principal Agreement;
+                                </p>
+                                <p>
+                                    1.1.3. “Data Protection Laws” means all applicable laws relating to Processing of
+                                    Personal Data and privacy that may exist in any relevant jurisdiction, including
+                                    European Data Protection Laws;
+                                </p>
+                                <p>1.1.4. “EEA” means the European Economic Area;</p>
+                                <p>
+                                    1.1.5. “EU Personal Data” means the Processing of Personal Data to which (i) data
+                                    protection legislation of the European Union, or of a Member State of the European
+                                    Union or EEA, was applicable prior to the Processing by the Processor;
+                                </p>
+                                <p>
+                                    1.1.6. “European Data Protection Laws” means the GDPR, UK Data Protection Act 2018,
+                                    the UK GDPR, ePrivacy Directive 2002/58/EC, FADP, and any associated or additional
+                                    legislation in force in the EU, EEA, Member States and the United Kingdom as
+                                    amended, replaced or superceded from time to time;
+                                </p>
+                                <p>
+                                    1.1.7. “FADP” means the Swiss Federal Act on Data Protection and its Ordinances, as
+                                    amended from time to time;
+                                </p>
+                                <p>
+                                    1.1.8. “FDPIC” means the Swiss Federal Data Protection and Information Commissioner;
+                                </p>
+                                <p>1.1.9. “GDPR” means General Data Protection Regulation EU2016/679;</p>
+                                <p>
+                                    1.1.10. “UK GDPR” means General Data Protection Regulation (EU) 2016/679 as
+                                    applicable as part of UK domestic law by virtue of section 3 of the European Union
+                                    (Withdrawal) Act 2018 and as amended by the Data Protection, Privacy and Electronic
+                                    Communications (Amendments etc) (EU Exit) Regulations 2019 (as amended);
+                                </p>
+                                <p>
+                                    1.1.11. “Protected Area” means (i) in the case of EU Personal Data, the member
+                                    states of the European Union and the EEA and any country, territory, sector or
+                                    international organisation in respect of which an adequacy decision under Art 45
+                                    GDPR is in force or (ii) in the case of UK Personal Data, the United Kingdom and any
+                                    country, territory, sector or international organisation in respect of which an
+                                    adequacy decision under UK adequacy regulations is in force; or (iii) in the case of
+                                    Swiss Personal Data, any country, territory, sector or international organisation
+                                    which is recognised as adequate by the FDPIC or the Swiss Federal Council (as the
+                                    case may be);
+                                </p>
+                                <p>
+                                    1.1.12. “Services” means the product and data analytics services the Processor
+                                    provides.
+                                </p>
+                                <p>
+                                    1.1.13. “Subprocessor” means any person appointed by or on behalf of Processor to
+                                    Process Personal Data on behalf of the Company in connection with the Agreement.
+                                </p>
+                            </div>
+                            <p>
+                                1.2. The terms, “Controller”, “Data Subject”, “Member State”, “Personal Data”, “Personal
+                                Data Breach”, “Processing” and “Supervisory Authority” shall have the same meaning as in
+                                the GDPR and UK GDPR, and their cognate terms shall be construed accordingly.
+                            </p>
+                        </div>
                         <p>
-                            1.1.2. “Company Personal Data” means any Personal Data provided to or Processed by the
-                            Processor on behalf of the Company pursuant to or in connection with the Principal
-                            Agreement;
+                            <strong>2. Processing of Company Personal Data</strong>
                         </p>
+                        <div className="pl-8">
+                            <p>2.1. The Company shall:</p>
+                            <div className="pl-8">
+                                <p>
+                                    2.1.1. ensure that any and all information or data, including without limitation
+                                    Company Personal Data, is collected, processed, transferred and used in full
+                                    compliance with Data Protection Laws;
+                                </p>
+                                <p>
+                                    2.1.2. be solely responsible for ensuring that it has all obtained all necessary
+                                    authorizations and consents from any Data Subjects to Process Company Personal Data
+                                    and in particular any consents needed to meet the cookie requirements in the
+                                    ePrivacy Directive 2002/58/EC and any associated national legislation;
+                                </p>
+                                <p>2.1.3. instruct the Processor to process Company Personal Data.</p>
+                            </div>
+                            <p>2.2. Processor shall:</p>
+                            <div className="pl-8">
+                                <p>
+                                    2.2.1. comply with all applicable Data Protection Laws in the Processing of Company
+                                    Personal Data; and
+                                </p>
+                                <p>
+                                    2.2.2. not Process Company Personal Data other than on the relevant Company’s
+                                    documented instructions including with regard to data transfers outside of the
+                                    Protected Area, unless required to do so by laws to which the Processor is subject;
+                                    in such a case, Processor shall inform the Company of that legal requirement before
+                                    Processing, unless that law prohibits such information on important grounds of
+                                    public interest. The Company acknowledges that as part of the processing
+                                    instructions, Processor may aggregate, anonymise, extract and combine or otherwise
+                                    deidentify information resulting from the Company’s use of the licensed materials
+                                    and services for product improvement, benchmarking, and the development of new
+                                    products; and
+                                </p>
+                                <p>
+                                    2.2.3. notify the Company immediately if, in the Processor’s reasonable opinion, an
+                                    instruction for the Processing of Personal Data given by the Company infringes
+                                    applicable Data Protection Laws , it being acknowledged that the Processor shall not
+                                    be obliged to undertake additional work or screening to determine if the Company’s
+                                    instructions are compliant.
+                                </p>
+                            </div>
+                        </div>
                         <p>
-                            1.1.3. “Data Protection Laws” means all applicable laws relating to Processing of Personal
-                            Data and privacy that may exist in any relevant jurisdiction, including European Data
-                            Protection Laws;
+                            <strong>3. Processor Personnel</strong>
                         </p>
-                        <p>1.1.4. “EEA” means the European Economic Area;</p>
+                        <div className="pl-8">
+                            <p>
+                                3.1. Processor shall take reasonable steps to ensure the reliability of any personnel
+                                who may have access to the Company Personal Data, ensuring that all such individuals are
+                                subject to confidentiality undertakings or professional or statutory obligations of
+                                confidentiality with respect to such Company Personal Data.
+                            </p>
+                        </div>
                         <p>
-                            1.1.5. “EU Personal Data” means the Processing of Personal Data to which (i) data protection
-                            legislation of the European Union, or of a Member State of the European Union or EEA, was
-                            applicable prior to the Processing by the Processor;
+                            <strong>4. Security</strong>
                         </p>
+                        <div className="pl-8">
+                            <p>
+                                4.1. Taking into account the state of the art, the costs of implementation and the
+                                nature, scope, context and purposes of Processing as well as the risk of varying
+                                likelihood and severity for the rights and freedoms of natural persons, Processor shall
+                                in relation to the Company Personal Data implement appropriate technical and
+                                organizational measures to ensure a level of security appropriate to that risk,
+                                including, as appropriate, the measures referred to in Article 32(1) of the GDPR and UK
+                                GDPR. These measures include those at Annex II.
+                            </p>
+                        </div>
                         <p>
-                            1.1.6. “European Data Protection Laws” means the GDPR, UK Data Protection Act 2018, the UK
-                            GDPR, ePrivacy Directive 2002/58/EC, FADP, and any associated or additional legislation in
-                            force in the EU, EEA, Member States and the United Kingdom as amended, replaced or
-                            superceded from time to time;
+                            <strong>5. Subprocessing</strong>
                         </p>
+                        <div className="pl-8">
+                            <p>
+                                5.1. The Company provides Processor with general authorisation to engage Subprocessors.
+                            </p>
+                            <p>
+                                5.2. Processor shall enter into a written contract with any Subprocessor and this
+                                contract shall impose upon the Subprocessor equivalent obligations as imposed by this
+                                Agreement upon the Processor. Where the Subprocessor fails to fulfil its data protection
+                                obligations, Processor shall remain fully liable to the Company for the performance of
+                                the Subprocessors obligations.
+                            </p>
+                            <p>
+                                5.3. The list of Subprocessors engaged by the Processor can be found at Annex III.
+                                Processor may update this list from time to time as applicable, providing the Company
+                                with notice of such update at least fourteen (14) days in advance of such updates.
+                            </p>
+                            <p>
+                                5.4. If the Company objects to a Subprocessor, the Company shall notify Processor
+                                thereof in writing within seven (7) days after receipt of Processor’s updated
+                                Subprocessors list. If the Company objects to the use of the Subprocessor, Processor
+                                shall use efforts to address the objection through one of the following options: (a)
+                                Processor will cancel its plans to use Subprocessor with regard to Company Personal Data
+                                or will offer an alternative to provide the Services without such Subprocessor; or (b)
+                                Processor will take any corrective steps requested by the Company in its objection
+                                (which would therefore remove the Company’s objection) and proceed to use Subprocessor.
+                                If none of the above options are reasonably available and the objection has not been
+                                sufficiently addressed within thirty (30) days after Processor’s receipt of the
+                                Company’s objection, the Company may terminate the affected Service with reasonable
+                                prior written notice.
+                            </p>
+                        </div>
                         <p>
-                            1.1.7. “FADP” means the Swiss Federal Act on Data Protection and its Ordinances, as amended
-                            from time to time;
+                            <strong>6. Data Subject Rights and Cooperation</strong>
                         </p>
-                        <p>1.1.8. “FDPIC” means the Swiss Federal Data Protection and Information Commissioner;</p>
-                        <p>1.1.9. “GDPR” means General Data Protection Regulation EU2016/679;</p>
-                        <p>
-                            1.1.10. “UK GDPR” means General Data Protection Regulation (EU) 2016/679 as applicable as
-                            part of UK domestic law by virtue of section 3 of the European Union (Withdrawal) Act 2018
-                            and as amended by the Data Protection, Privacy and Electronic Communications (Amendments
-                            etc) (EU Exit) Regulations 2019 (as amended);
-                        </p>
-                        <p>
-                            1.1.11. “Protected Area” means (i) in the case of EU Personal Data, the member states of the
-                            European Union and the EEA and any country, territory, sector or international organisation
-                            in respect of which an adequacy decision under Art 45 GDPR is in force or (ii) in the case
-                            of UK Personal Data, the United Kingdom and any country, territory, sector or international
-                            organisation in respect of which an adequacy decision under UK adequacy regulations is in
-                            force; or (iii) in the case of Swiss Personal Data, any country, territory, sector or
-                            international organisation which is recognised as adequate by the FDPIC or the Swiss Federal
-                            Council (as the case may be);
-                        </p>
-                        <p>1.1.12. “Services” means the product and data analytics services the Processor provides.</p>
-                        <p>
-                            1.1.13. “Subprocessor” means any person appointed by or on behalf of Processor to Process
-                            Personal Data on behalf of the Company in connection with the Agreement.
-                        </p>
-                        <p>
-                            1.2. The terms, “Controller”, “Data Subject”, “Member State”, “Personal Data”, “Personal
-                            Data Breach”, “Processing” and “Supervisory Authority” shall have the same meaning as in the
-                            GDPR and UK GDPR, and their cognate terms shall be construed accordingly.
-                        </p>
-                        <ol>
-                            <li>Processing of Company Personal Data</li>
-                        </ol>
-                        <p>2.1. The Company shall:</p>
-                        <p>
-                            2.1.1. ensure that any and all information or data, including without limitation Company
-                            Personal Data, is collected, processed, transferred and used in full compliance with Data
-                            Protection Laws;
-                        </p>
-                        <p>
-                            2.1.2. be solely responsible for ensuring that it has all obtained all necessary
-                            authorizations and consents from any Data Subjects to Process Company Personal Data and in
-                            particular any consents needed to meet the cookie requirements in the ePrivacy Directive
-                            2002/58/EC and any associated national legislation;
-                        </p>
-                        <p>2.1.3. instruct the Processor to process Company Personal Data.</p>
-                        <p>2.2. Processor shall:</p>
-                        <p>
-                            2.2.1. comply with all applicable Data Protection Laws in the Processing of Company Personal
-                            Data; and
-                        </p>
-                        <p>
-                            2.2.2. not Process Company Personal Data other than on the relevant Company’s documented
-                            instructions including with regard to data transfers outside of the Protected Area, unless
-                            required to do so by laws to which the Processor is subject; in such a case, Processor shall
-                            inform the Company of that legal requirement before Processing, unless that law prohibits
-                            such information on important grounds of public interest. The Company acknowledges that as
-                            part of the processing instructions, Processor may aggregate, anonymise, extract and combine
-                            or otherwise deidentify information resulting from the Company’s use of the licensed
-                            materials and services for product improvement, benchmarking, and the development of new
-                            products; and
-                        </p>
-                        <p>
-                            2.2.3. notify the Company immediately if, in the Processor’s reasonable opinion, an
-                            instruction for the Processing of Personal Data given by the Company infringes applicable
-                            Data Protection Laws , it being acknowledged that the Processor shall not be obliged to
-                            undertake additional work or screening to determine if the Company’s instructions are
-                            compliant.
-                        </p>
-                        <ol>
-                            <li>Processor Personnel</li>
-                        </ol>
-                        <p>
-                            3.1. Processor shall take reasonable steps to ensure the reliability of any personnel who
-                            may have access to the Company Personal Data, ensuring that all such individuals are subject
-                            to confidentiality undertakings or professional or statutory obligations of confidentiality
-                            with respect to such Company Personal Data.
-                        </p>
-                        <ol>
-                            <li>Security</li>
-                        </ol>
-                        <p>
-                            4.1. Taking into account the state of the art, the costs of implementation and the nature,
-                            scope, context and purposes of Processing as well as the risk of varying likelihood and
-                            severity for the rights and freedoms of natural persons, Processor shall in relation to the
-                            Company Personal Data implement appropriate technical and organizational measures to ensure
-                            a level of security appropriate to that risk, including, as appropriate, the measures
-                            referred to in Article 32(1) of the GDPR and UK GDPR. These measures include those at Annex
-                            II.
-                        </p>
-                        <ol>
-                            <li>Subprocessing</li>
-                        </ol>
-                        <p>5.1. The Company provides Processor with general authorisation to engage Subprocessors.</p>
-                        <p>
-                            5.2. Processor shall enter into a written contract with any Subprocessor and this contract
-                            shall impose upon the Subprocessor equivalent obligations as imposed by this Agreement upon
-                            the Processor. Where the Subprocessor fails to fulfil its data protection obligations,
-                            Processor shall remain fully liable to the Company for the performance of the Subprocessors
-                            obligations.
-                        </p>
-                        <p>
-                            5.3. The list of Subprocessors engaged by the Processor can be found at Annex III. Processor
-                            may update this list from time to time as applicable, providing the Company with notice of
-                            such update at least fourteen (14) days in advance of such updates.
-                        </p>
-                        <p>
-                            5.4. If the Company objects to a Subprocessor, the Company shall notify Processor thereof in
-                            writing within seven (7) days after receipt of Processor’s updated Subprocessors list. If
-                            the Company objects to the use of the Subprocessor, Processor shall use efforts to address
-                            the objection through one of the following options: (a) Processor will cancel its plans to
-                            use Subprocessor with regard to Company Personal Data or will offer an alternative to
-                            provide the Services without such Subprocessor; or (b) Processor will take any corrective
-                            steps requested by the Company in its objection (which would therefore remove the Company’s
-                            objection) and proceed to use Subprocessor. If none of the above options are reasonably
-                            available and the objection has not been sufficiently addressed within thirty (30) days
-                            after Processor’s receipt of the Company’s objection, the Company may terminate the affected
-                            Service with reasonable prior written notice.
-                        </p>
-                        <ol>
-                            <li>Data Subject Rights and Cooperation</li>
-                        </ol>
-                        <p>
-                            6.1. Taking into account the nature of the Processing, Processor shall assist the Company by
-                            implementing appropriate technical and organisational measures, insofar as this is possible,
-                            for the fulfilment of the Company obligations, as reasonably understood by Company, to
-                            respond to requests to exercise Data Subject rights under applicable Data Protection Laws.
-                        </p>
+                        <div className="pl-8">
+                            <p>
+                                6.1. Taking into account the nature of the Processing, Processor shall assist the
+                                Company by implementing appropriate technical and organisational measures, insofar as
+                                this is possible, for the fulfilment of the Company obligations, as reasonably
+                                understood by Company, to respond to requests to exercise Data Subject rights under
+                                applicable Data Protection Laws.
+                            </p>
+                        </div>
                         <p>6.2. Processor shall:</p>
-                        <p>
-                            6.2.1. notify Company if it receives a request from a Data Subject under any Data Protection
-                            Law in respect of Company Personal Data; and
-                        </p>
-                        <p>
-                            6.2.2. ensure that it does not respond to that request except on the documented instructions
-                            of Company or as required by applicable laws to which the Processor is subject.
-                        </p>
+                        <div className="pl-8">
+                            <p>
+                                6.2.1. notify Company if it receives a request from a Data Subject under any Data
+                                Protection Law in respect of Company Personal Data; and
+                            </p>
+                            <p>
+                                6.2.2. ensure that it does not respond to that request except on the documented
+                                instructions of Company or as required by applicable laws to which the Processor is
+                                subject.
+                            </p>
+                        </div>
                         <p>
                             6.3. To the extent required under Data Protection Laws, Processor shall (taking into account
                             the nature of the processing and the information available to Processor) provide all
@@ -794,148 +826,167 @@ function DpaGenerator() {
                             required directly as a result of the Processor’s own acts or omissions, in which case such
                             assistance will be at the Processor’s expense.
                         </p>
-                        <ol>
-                            <li>Personal Data Breach</li>
-                        </ol>
                         <p>
-                            7.1. Processor shall notify Company without undue delay upon Processor becoming aware of a
-                            Personal Data Breach affecting Company Personal Data, providing Company with sufficient
-                            information to allow the Company to meet any obligations to report or inform Data Subjects
-                            or Supervisory Authorities of the Personal Data Breach under applicable Data Protection
-                            Laws.
+                            <strong>7. Personal Data Breach</strong>
                         </p>
+                        <div className="pl-8">
+                            <p>
+                                7.1. Processor shall notify Company without undue delay upon Processor becoming aware of
+                                a Personal Data Breach affecting Company Personal Data, providing Company with
+                                sufficient information to allow the Company to meet any obligations to report or inform
+                                Data Subjects or Supervisory Authorities of the Personal Data Breach under applicable
+                                Data Protection Laws.
+                            </p>
+                            <p>
+                                7.2. Processor shall cooperate with the Company and take reasonable commercial steps as
+                                are directed by Company to assist in the investigation, mitigation and remediation of
+                                each such Personal Data Breach.
+                            </p>
+                        </div>
                         <p>
-                            7.2. Processor shall cooperate with the Company and take reasonable commercial steps as are
-                            directed by Company to assist in the investigation, mitigation and remediation of each such
-                            Personal Data Breach.
+                            <strong>8. Audits</strong>
                         </p>
-                        <ol>
-                            <li>Audits</li>
-                        </ol>
+                        <div className="pl-8">
+                            <p>
+                                8.1. The Processor shall make available to the Company all information reasonably
+                                necessary to demonstrate compliance with this Agreement and at the cost of the Company,
+                                allow for and contribute to audits, including inspections by the Company in order to
+                                assess compliance with this Agreement.
+                            </p>
+                        </div>
                         <p>
-                            8.1. The Processor shall make available to the Company all information reasonably necessary
-                            to demonstrate compliance with this Agreement and at the cost of the Company, allow for and
-                            contribute to audits, including inspections by the Company in order to assess compliance
-                            with this Agreement.
+                            <strong>9. Deletion or return of Company Personal Data</strong>
                         </p>
-                        <ol>
-                            <li>Deletion or return of Company Personal Data</li>
-                        </ol>
+                        <div className="pl-8">
+                            <p>
+                                9.1. Following a request from the Company, Processor shall promptly and in any event
+                                within 10 business days of the date of cessation of any Services involving the
+                                Processing of Company Personal Data , return or delete and procure the deletion of all
+                                copies of the Company Personal Data unless applicable laws require storage of such
+                                Customer Personal Data.
+                            </p>
+                        </div>
                         <p>
-                            9.1. Following a request from the Company, Processor shall promptly and in any event within
-                            10 business days of the date of cessation of any Services involving the Processing of
-                            Company Personal Data , return or delete and procure the deletion of all copies of the
-                            Company Personal Data unless applicable laws require storage of such Customer Personal Data.
+                            <strong>10. Data Transfer Outside of the Protected Area</strong>
                         </p>
-                        <ol>
-                            <li>Data Transfer Outside of the Protected Area</li>
-                        </ol>
+                        <div className="pl-8">
+                            <p>
+                                10.1. The Company acknowledges that the Processor will Process the Personal Data outside
+                                of the Protected Area including in the US.
+                            </p>
+                            <p>
+                                10.2. As such, the parties agree to comply with the obligations set out in the{' '}
+                                <Link
+                                    href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32021D0914&qid=1694542707177"
+                                    className="!text-red"
+                                    external
+                                >
+                                    EU Standard Contractual Clauses
+                                </Link>{' '}
+                                as though they were set out in full in this Agreement, with the Company as the “data
+                                exporter” and the Processor as the “data importer”, with the parties signatures and
+                                dating of this Agreement being deemed to be the signature and dating of the Standard
+                                Contractual Clauses and with Annexes to EU Standard Contractual Clauses and the
+                                Appendices to the UK Standard Contractual Clauses being as set out in Annex I and II of
+                                this Agreement
+                            </p>
+                            <p>10.3. In relation to the EU Standard Contractual Clauses, the Parties agree that:</p>
+                            <div className="pl-8">
+                                <p>
+                                    10.3.1. for the purposes of clause 9, option 2 (general written authorisation for
+                                    subprocessors) shall apply and the Parties agree that the time period for notifying
+                                    changes to the list shall be in accordance with Clause 5.3 above;
+                                </p>
+                                <p>
+                                    10.3.2. for the purposes of clause 17, the clauses shall be governed by the laws of{' '}
+                                    <span className="bg-yellow/40 font-bold px-0.5">
+                                        {jurisdiction ? jurisdiction : '[Jurisdiction]'}
+                                    </span>
+                                    ;
+                                </p>
+                                <p>
+                                    10.3.3. for the purposes of clause 18, the courts of{' '}
+                                    <span className="bg-yellow/40 font-bold px-0.5">
+                                        {jurisdiction ? jurisdiction : '[Jurisdiction]'}
+                                    </span>{' '}
+                                    shall have jurisdiction;
+                                </p>
+                                <p>
+                                    10.3.4. for the purposes of clause 13 and Annex I.C, the{' '}
+                                    <span className="bg-yellow/40 font-bold px-0.5">
+                                        {supervisoryAuthority ? supervisoryAuthority : '[Supervisory Authority]'}
+                                    </span>
+                                </p>
+                            </div>
+                            <p>
+                                10.4. In relation to the UK Standard Contractual Clauses, as permitted by clause 17 of
+                                such Addendum, the Parties agree to change the format of the information set out in Part
+                                1 of the Addendum so that:
+                            </p>
+                            <div className="pl-8">
+                                <p>
+                                    10.4.1. the details of the parties in table 1 shall be as set out in Annex I (with
+                                    no requirement for signature);
+                                </p>
+                                <p>
+                                    10.4.2. for the purposes of table 2, the Addendum shall be appended to the EU
+                                    Standard Contractual Clauses as defined above (including the selection of modules
+                                    and options and the disapplication of optional clauses as noted above); and
+                                </p>
+                                <p>10.4.3. the appendix information listed in table 3 is set out in Annex I and II.</p>
+                            </div>
+                            <p>
+                                10.5. In relation to Swiss Personal Data that is transferred outside of the Protected
+                                Area, the Parties agree that such transfers shall be subject to the EU Standard
+                                Contractual Clauses as compiled and completed in Sections 10.2 and 10.3 above, with the
+                                following amendments: (a) any references to the GDPR shall be interpreted as references
+                                to the FADP; (b) references to the EU and EU Member States shall be interpreted to mean
+                                Switzerland; (c) the competent supervisory authority according to Clause 13(a) and Part
+                                C of Annex I is the FDPIC insofar as the data transfers are governed by the FADP; (d)
+                                the term EU Member State shall not be interpreted in such a way as to exclude data
+                                subject in Switzerland from the possibility of suing for their rights in their place of
+                                habitual residence in accordance with Clause 18(c) of the EU Standard Contractual
+                                Clauses; and (e) until the entry into force of the revised FADP on 1 September 2023, the
+                                EU Standard Contractual Clauses shall also protect the personal data of legal entities
+                                and legal entities shall receive the same protection under the EU Standard Contractual
+                                Clauses as natural persons.
+                            </p>
+                            <p>
+                                10.6. In the event of any conflict between this Agreement and the Standard Contractual
+                                Clauses, the Standard Contractual Clauses shall prevail.
+                            </p>
+                            <p>
+                                10.7. In the event that the Standard Contractual Clauses are no longer valid for use
+                                under the GDPR or UK GDPR, the Parties agree to promptly implement a replacement
+                                transfer mechanism, and making such further amendments to the application of such
+                                replacement mechanism, as the Processor deems reasonably necessary.
+                            </p>
+                        </div>
                         <p>
-                            10.1. The Company acknowledges that the Processor will Process the Personal Data outside of
-                            the Protected Area including in the US.
+                            <strong>11. General Terms</strong>
                         </p>
-                        <p>
-                            10.2. As such, the parties agree to comply with the obligations set out in the{' '}
-                            <Link
-                                href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32021D0914&qid=1694542707177"
-                                className="!text-red"
-                                external
-                            >
-                                EU Standard Contractual Clauses
-                            </Link>{' '}
-                            as though they were set out in full in this Agreement, with the Company as the “data
-                            exporter” and the Processor as the “data importer”, with the parties signatures and dating
-                            of this Agreement being deemed to be the signature and dating of the Standard Contractual
-                            Clauses and with Annexes to EU Standard Contractual Clauses and the Appendices to the UK
-                            Standard Contractual Clauses being as set out in Annex I and II of this Agreement
-                        </p>
-                        <p>10.3. In relation to the EU Standard Contractual Clauses, the Parties agree that:</p>
-                        <p>
-                            10.3.1. for the purposes of clause 9, option 2 (general written authorisation for
-                            subprocessors) shall apply and the Parties agree that the time period for notifying changes
-                            to the list shall be in accordance with Clause 5.3 above;
-                        </p>
-                        <p>
-                            10.3.2. for the purposes of clause 17, the clauses shall be governed by the laws of{' '}
-                            <span className="bg-yellow/40 font-bold px-0.5">
-                                {jurisdiction ? jurisdiction : '[Jurisdiction]'}
-                            </span>
-                            ;
-                        </p>
-                        <p>
-                            10.3.3. for the purposes of clause 18, the courts of{' '}
-                            <span className="bg-yellow/40 font-bold px-0.5">
-                                {jurisdiction ? jurisdiction : '[Jurisdiction]'}
-                            </span>{' '}
-                            shall have jurisdiction;
-                        </p>
-                        <p>
-                            10.3.4. for the purposes of clause 13 and Annex I.C, the{' '}
-                            <span className="bg-yellow/40 font-bold px-0.5">
-                                {supervisoryAuthority ? supervisoryAuthority : '[Supervisory Authority]'}
-                            </span>
-                        </p>
-                        <p>
-                            10.4. In relation to the UK Standard Contractual Clauses, as permitted by clause 17 of such
-                            Addendum, the Parties agree to change the format of the information set out in Part 1 of the
-                            Addendum so that:
-                        </p>
-                        <p>
-                            10.4.1. the details of the parties in table 1 shall be as set out in Annex I (with no
-                            requirement for signature);
-                        </p>
-                        <p>
-                            10.4.2. for the purposes of table 2, the Addendum shall be appended to the EU Standard
-                            Contractual Clauses as defined above (including the selection of modules and options and the
-                            disapplication of optional clauses as noted above); and
-                        </p>
-                        <p>10.4.3. the appendix information listed in table 3 is set out in Annex I and II.</p>
-                        <p>
-                            10.5. In relation to Swiss Personal Data that is transferred outside of the Protected Area,
-                            the Parties agree that such transfers shall be subject to the EU Standard Contractual
-                            Clauses as compiled and completed in Sections 10.2 and 10.3 above, with the following
-                            amendments: (a) any references to the GDPR shall be interpreted as references to the FADP;
-                            (b) references to the EU and EU Member States shall be interpreted to mean Switzerland; (c)
-                            the competent supervisory authority according to Clause 13(a) and Part C of Annex I is the
-                            FDPIC insofar as the data transfers are governed by the FADP; (d) the term EU Member State
-                            shall not be interpreted in such a way as to exclude data subject in Switzerland from the
-                            possibility of suing for their rights in their place of habitual residence in accordance
-                            with Clause 18(c) of the EU Standard Contractual Clauses; and (e) until the entry into force
-                            of the revised FADP on 1 September 2023, the EU Standard Contractual Clauses shall also
-                            protect the personal data of legal entities and legal entities shall receive the same
-                            protection under the EU Standard Contractual Clauses as natural persons.
-                        </p>
-                        <p>
-                            10.6. In the event of any conflict between this Agreement and the Standard Contractual
-                            Clauses, the Standard Contractual Clauses shall prevail.
-                        </p>
-                        <p>
-                            10.78. In the event that the Standard Contractual Clauses are no longer valid for use under
-                            the GDPR or UK GDPR, the Parties agree to promptly implement a replacement transfer
-                            mechanism, and making such further amendments to the application of such replacement
-                            mechanism, as the Processor deems reasonably necessary.
-                        </p>
-                        <ol>
-                            <li>General Terms</li>
-                        </ol>
-                        <p>
-                            11.1. Confidentiality. Each Party must keep this Agreement and information it receives about
-                            the other Party and its business in connection with this Agreement (“Confidential
-                            Information”) confidential and must not use or disclose that Confidential Information
-                            without the prior written consent of the other Party except to the extent that:
-                        </p>
-                        <p>11.1.1. disclosure is required by law;</p>
-                        <p>11.1.2. the relevant information is already in the public domain.</p>
-                        <p>
-                            11.2. Notices. All notices and communications given under this Agreement must be in writing
-                            and will be delivered personally, sent by post or sent by email to the address or email
-                            address set out in the heading of this Agreement at such other address as notified from time
-                            to time by the Parties changing address,
-                        </p>
-                        <p>
-                            11.3. Governing Law and Jurisdiction. This Agreement is governed by the laws of England and
-                            Wales.
-                        </p>
+                        <div className="pl-8">
+                            <p>
+                                11.1. Confidentiality. Each Party must keep this Agreement and information it receives
+                                about the other Party and its business in connection with this Agreement (“Confidential
+                                Information”) confidential and must not use or disclose that Confidential Information
+                                without the prior written consent of the other Party except to the extent that:
+                            </p>
+                            <div className="pl-8">
+                                <p>11.1.1. disclosure is required by law;</p>
+                                <p>11.1.2. the relevant information is already in the public domain.</p>
+                            </div>
+                            <p>
+                                11.2. Notices. All notices and communications given under this Agreement must be in
+                                writing and will be delivered personally, sent by post or sent by email to the address
+                                or email address set out in the heading of this Agreement at such other address as
+                                notified from time to time by the Parties changing address,
+                            </p>
+                            <p>
+                                11.3. Governing Law and Jurisdiction. This Agreement is governed by the laws of England
+                                and Wales.
+                            </p>
+                        </div>
                         <p>
                             IN WITNESS WHEREOF, this Agreement is entered into with effect from the date first set out
                             below.
