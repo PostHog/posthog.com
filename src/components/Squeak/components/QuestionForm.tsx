@@ -287,9 +287,10 @@ export const QuestionForm = ({
         const topicID =
             topic?.id ||
             other?.topicID ||
-            (await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
-                .then((res) => res.json())
-                .then((topic) => topic?.data && topic?.data[0]?.id))
+            (parentName &&
+                (await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
+                    .then((res) => res.json())
+                    .then((topic) => topic?.data && topic?.data[0]?.id)))
 
         const data = {
             subject,
@@ -311,16 +312,16 @@ export const QuestionForm = ({
             ]
         }
 
-        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                data,
-            }),
-        })
+        // const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         Authorization: `Bearer ${token}`,
+        //     },
+        //     body: JSON.stringify({
+        //         data,
+        //     }),
+        // })
     }
 
     const transformValues = async (values: QuestionFormValues, user: User) => {
