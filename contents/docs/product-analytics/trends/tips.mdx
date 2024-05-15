@@ -2,10 +2,17 @@
 title: Tips
 ---
 import {ProductScreenshot} from 'components/ProductScreenshot'
+import {ProductVideo} from 'components/ProductVideo'
 export const personsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/persons-light-mode.png"
 export const personsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/persons-dark-mode.png"
 export const insightsSourceLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/insights-source-light-mode.png"
 export const insightsSourceDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/insights-source-dark-mode.png"
+export const insightsLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/notebooks/insights-light-mode.mp4"
+export const insightsDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/notebooks/insights-dark-mode.mp4"
+export const prefixLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/prefixes-light.png"
+export const prefixDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/prefixes-dark.png"
+export const legendLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/legend-light.png"
+export const legendDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/legend-dark.png"
 
 ## Using the persons modal
 
@@ -26,7 +33,18 @@ From this menu, you can:
 
 ## Creating insights in notebooks
 
-WORDS TO GO HERE
+You can add all of PostHog's insight types natively in [Notebooks](/docs/notebooks). These include trends, funnels, retention, paths, stickiness, lifecycle, and SQL.
+
+Each of them can be completely customized within notebooks like you would in insights. To do this, click the three-line reverse pyramid icon.
+
+<ProductVideo
+    videoLight={insightsLight} 
+    videoDark={insightsDark}
+    alt="Insight" 
+    classes="rounded"
+/>
+
+You can also add insights from the insights list by clicking, holding, and dragging the title onto the right-side popover.
 
 ## Add units / custom prefixes and postfixes
 
@@ -34,11 +52,21 @@ You can change the unit of any trends insights, or add custom prefixes/postfixes
 
 Units include duration (seconds or miliseconds) and pertentage.
 
-[SCREENSHOT HERE]
+<ProductScreenshot
+    imageLight = {prefixLight} 
+    imageDark = {prefixDark}
+    classes="rounded"
+    alt="Unit and prefix options"
+/>
 
 To do so, click on 'Options' dropdown next to the chart type and select you want.
 
-[SCREENSHOT]
+<ProductScreenshot
+    imageLight = {legendLight} 
+    imageDark = {legendDark}
+    classes="rounded"
+    alt="Series legend"
+/>
 
 Also under the 'Options' dropdown is the ability to enable values on trends, and the legend, like in the screenshot above.
 
