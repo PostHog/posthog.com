@@ -5,6 +5,8 @@ import { heading, section } from 'components/Home/classes'
 import { TrackedCTA } from 'components/CallToAction'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
+import { IconRevert } from '@posthog/icons'
+import Tooltip from 'components/Tooltip'
 
 function DpaGenerator() {
     const [companyName, setCompanyName] = useState('')
@@ -48,85 +50,149 @@ function DpaGenerator() {
             />
             <div className={section('z-10 md:!mb-8')}>
                 <h1 className={`${heading()} overflow-hidden pb-1 home-hero-title`}>
-                    DPA? How about DP<em className="text-red dark:text-yellow">YAY</em>
+                    DPA? How about DP
+                    <em className="dark:text-yellow">
+                        <span className="text-red">YAY</span>!
+                    </em>
                 </h1>
-                <h2 className={`mt-2 mb-6 text-xl font-semibold text-center home-hero-subtitle`}>
+                <h2 className={`mt-2 -mb-8 text-xl font-semibold text-center home-hero-subtitle`}>
                     The data processing agreement (DPA) generator designed to spark joy
                 </h2>
 
                 <section className="grid grid-cols-5 relative items-start top-20">
                     <div className="col-span-2 px-8 py-4 max-h-screen reasonable:max-h-[100vh-56px] overflow-auto reasonable:sticky top-[60px]">
                         <div className="flex justify-between items-center">
-                            <h2>Form</h2>
-                            <button type="button" onClick={handleReset}>
-                                Reset
-                            </button>
+                            <h2 className="mb-1 text-xl">Enter your company details</h2>
+                            <Tooltip content="Reset form" placement="top">
+                                <span className="relative">
+                                    <button
+                                        type="button"
+                                        className="bg-accent dark:bg-accent-dark p-1 rounded"
+                                        onClick={handleReset}
+                                    >
+                                        <IconRevert className="size-6" />
+                                    </button>
+                                </span>
+                            </Tooltip>
                         </div>
+                        <p className="text-sm">
+                            We'll populate your DPA with this information. Once the form is completed, you can export to
+                            PDF.
+                        </p>
                         <form
                             onSubmit={(e) => {
                                 e.preventDefault()
                                 handleSubmit()
                             }}
                         >
-                            <div className="flex flex-col gap-2">
+                            <div className="grid grid-cols-5 gap-2 items-center">
+                                <label className="col-span-2 text-sm" htmlFor="companyName">
+                                    Company Name
+                                </label>
                                 <input
                                     type="text"
                                     value={companyName}
                                     onChange={(e) => setCompanyName(e.target.value)}
                                     placeholder="Company name"
+                                    id="companyName"
+                                    className="col-span-3"
                                     required
                                 />
+
+                                <label className="col-span-2 text-sm" htmlFor="companyAddress">
+                                    Company Address
+                                </label>
                                 <input
                                     type="text"
                                     value={companyAddress}
                                     onChange={(e) => setCompanyAddress(e.target.value)}
                                     placeholder="Company address"
+                                    id="companyAddress"
+                                    className="col-span-3"
                                     required
                                 />
+
+                                <label className="col-span-2 text-sm" htmlFor="yourName">
+                                    Your Name
+                                </label>
                                 <input
                                     type="text"
                                     value={yourName}
                                     onChange={(e) => setYourName(e.target.value)}
                                     placeholder="Your name"
+                                    id="yourName"
+                                    className="col-span-3"
                                     required
                                 />
+
+                                <label className="col-span-2 text-sm" htmlFor="yourTitle">
+                                    Your Title
+                                </label>
                                 <input
                                     type="text"
                                     value={yourTitle}
                                     onChange={(e) => setYourTitle(e.target.value)}
                                     placeholder="Your title"
+                                    id="yourTitle"
+                                    className="col-span-3"
                                     required
                                 />
+
+                                <label className="col-span-2 text-sm" htmlFor="date">
+                                    Date
+                                </label>
                                 <input
                                     type="text"
                                     value={date}
                                     onChange={(e) => setDate(e.target.value)}
                                     placeholder="Date"
+                                    id="date"
+                                    className="col-span-3"
                                     required
                                 />
+
+                                <label className="col-span-2 text-sm" htmlFor="email">
+                                    Representative Email
+                                </label>
                                 <input
                                     type="email"
                                     value={representativeEmail}
                                     onChange={(e) => setRepresentativeEmail(e.target.value)}
                                     placeholder="Contact email"
+                                    id="email"
+                                    className="col-span-3"
                                     required
                                 />
+
+                                <label className="col-span-2 text-sm" htmlFor="jurisdiction">
+                                    Jurisdiction
+                                </label>
                                 <input
                                     type="text"
                                     value={jurisdiction}
                                     onChange={(e) => setJurisdiction(e.target.value)}
                                     placeholder="Jurisdiction"
+                                    id="jurisdiction"
+                                    className="col-span-3"
                                     required
                                 />
+
+                                <label className="col-span-2 text-sm" htmlFor="supervisoryAuthority">
+                                    Supervisory Authority
+                                </label>
                                 <input
                                     type="text"
                                     value={supervisoryAuthority}
                                     onChange={(e) => setSupervisoryAuthority(e.target.value)}
                                     placeholder="Supervisory authority"
+                                    id="supervisoryAuthority"
+                                    className="col-span-3"
                                     required
                                 />
 
-                                <ul className="flex flex-col gap-2 list-none pl-0">
+                                <div className="col-span-2 text-sm self-baseline pt-2">Format</div>
+
+                                <ul className="flex flex-col col-span-3 gap-2 list-none pt-2 pl-0">
                                     <li>
                                         <input
                                             type="radio"
@@ -136,11 +202,11 @@ function DpaGenerator() {
                                             onChange={(e) => setMode(e.target.value)}
                                             checked={mode === 'legalese'}
                                         />
-                                        <label className="ml-1 font-semibold" htmlFor="legalese">
+                                        <label className="ml-1 font-semibold text-[15px]" htmlFor="legalese">
                                             A legal doc, formatted by a designer
                                         </label>
                                         <br />
-                                        <div className="block ml-5 text-sm opacity-75">
+                                        <div className="block ml-5 text-[13px] opacity-75">
                                             Holds up in a court of law, but with a nicer font
                                         </div>
                                     </li>
@@ -152,11 +218,11 @@ function DpaGenerator() {
                                             value="lawyer"
                                             onChange={(e) => setMode(e.target.value)}
                                         />
-                                        <label className="ml-1 font-semibold" htmlFor="lawyer">
+                                        <label className="ml-1 font-semibold text-[15px]" htmlFor="lawyer">
                                             Lawyer's love language
                                         </label>
                                         <br />
-                                        <div className="block ml-5 text-sm opacity-75">
+                                        <div className="block ml-5 text-[13px] opacity-75">
                                             The version they dream about
                                         </div>
                                     </li>
@@ -168,11 +234,11 @@ function DpaGenerator() {
                                             value="fairytale"
                                             onChange={(e) => setMode(e.target.value)}
                                         />
-                                        <label className="ml-1 font-semibold" htmlFor="fairytale">
+                                        <label className="ml-1 font-semibold text-[15px]" htmlFor="fairytale">
                                             Fairytale
                                         </label>
                                         <br />
-                                        <div className="block ml-5 text-sm opacity-75">
+                                        <div className="block ml-5 text-[13px] opacity-75">
                                             "Explain it to me like I'm five"
                                         </div>
                                     </li>
@@ -184,11 +250,11 @@ function DpaGenerator() {
                                             value="rap"
                                             onChange={(e) => setMode(e.target.value)}
                                         />
-                                        <label className="ml-1 font-semibold" htmlFor="rap">
+                                        <label className="ml-1 font-semibold text-[15px]" htmlFor="rap">
                                             Eminem edition
                                         </label>
                                         <br />
-                                        <div className="block ml-5 text-sm opacity-75">
+                                        <div className="block ml-5 text-[13px] opacity-75">
                                             Warning: May contain{' '}
                                             <span className="border border-black rounded-sm px-1 py-0.5 uppercase text-xs">
                                                 explicit content
@@ -196,17 +262,6 @@ function DpaGenerator() {
                                         </div>
                                     </li>
                                 </ul>
-
-                                <div className="inline-flex">
-                                    <TrackedCTA
-                                        event={{ name: `clicked Generate DPA` }}
-                                        type="primary"
-                                        size="md"
-                                        onClick={handleSubmit}
-                                    >
-                                        Use this (doesn't work yet)
-                                    </TrackedCTA>
-                                </div>
                             </div>
                         </form>
 
@@ -227,7 +282,8 @@ function DpaGenerator() {
                             </div>
                         )}
                     </div>
-                    <div className="article-content col-span-3 bg-white text-primary px-8 py-4 shadow-xl rounded">
+                    {/* 
+                    
                         <div>
                             <span>{companyName}</span>
                             <span>{companyAddress}</span>
@@ -238,9 +294,24 @@ function DpaGenerator() {
                             <span>{jurisdiction}</span>
                             <span>{supervisoryAuthority}</span>
                         </div>
+                    */}
+                    <div className="article-content col-span-3 bg-white text-primary px-8 py-4 shadow-xl rounded overflow-hidden">
+                        <div className="bg-accent py-2 px-8 text-sm text-center -mx-8 -mt-4 mb-8 flex items-center justify-between">
+                            <div className="text-lg font-bold">Preview</div>
+                            <div>Print</div>
+
+                            <TrackedCTA
+                                event={{ name: `clicked Print DPA` }}
+                                type="primary"
+                                size="md"
+                                onClick={handleSubmit}
+                            >
+                                Use this (doesn't work yet)
+                            </TrackedCTA>
+                        </div>
 
                         <div className={`${mode === 'fairytale' ? 'block' : 'hidden'}`}>
-                            <div className="bg-accent p-4 text-sm text-center -mx-8 -mt-4 rounded-tl rounded-tr">
+                            <div className="bg-accent p-4 text-sm text-center -mx-8 -mt-4 border-t border-light">
                                 <strong>Notice:</strong> While this version is a great way to understand what the DPA
                                 says, we don't recommend sending this version to the lawyers.
                             </div>
@@ -442,7 +513,7 @@ function DpaGenerator() {
                                 mode === 'legalese' && ''
                             } ${mode === 'lawyer' && 'font-serif'}`}
                         >
-                            <p>Data Processing Agreement — PostHog Inc.</p>
+                            <h2 className="!text-xl">Data Processing Agreement — PostHog Inc.</h2>
                             <p>
                                 This Data Processing Agreement (“Agreement”) forms part of the Contract for Services
                                 (“Principal Agreement”) between{' '}
