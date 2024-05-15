@@ -420,6 +420,15 @@ export function Footer(): JSX.Element {
                         </li>
                         <li>
                             <Link
+                                to="/dpa"
+                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
+                            >
+                                Generate a DPA
+                            </Link>
+                            <span className="text-sm ml-1 italic opacity-75">- it's guaranteed fun!</span>
+                        </li>
+                        <li>
+                            <Link
                                 to="/handbook/company/security#soc-2"
                                 className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
                             >
