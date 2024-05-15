@@ -790,12 +790,18 @@ function DpaGenerator() {
                         <div className="mx-auto max-w-3xl">
                             <h2 className="pt-8 pb-0">Data Dynasty: The PostHog Pact</h2>
 
-                            <StaticImage
-                                src="../../public/images/dpa/slim.png"
-                                alt="Map"
-                                placeholder="blurred"
-                                className="float-right -mr-2 -my-8 mt:mt-0 w-48 md:w-64"
-                            />
+                            <div className="float-right flex flex-col -mr-2 ml-2 md:ml-0 mb-2 mt:mt-0 w-48 md:w-64">
+                                <StaticImage
+                                    src="../../public/images/dpa/slim.png"
+                                    alt="Map"
+                                    placeholder="blurred"
+                                    className="mb-2"
+                                />
+                                <div className="relative ml-4 pl-3 md:pl-4 py-1 before:absolute before:bg-light before:top-0 before:bottom-0 before:w-1 before:left-0 before:rounded mb-0.5">
+                                    <p className="!pb-2 !mb-0 !text-sm">It's the Real Slim Shady*</p>
+                                    <p className="pb-0 !mb-0 !text-sm">*If the Real Slim Shady were a hedgehog</p>
+                                </div>
+                            </div>
                             <p>
                                 Alright, check this, we're diving into the realm where data's a treasure,
                                 <br />
