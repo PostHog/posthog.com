@@ -6,7 +6,7 @@ export const Header = (): JSX.Element => {
         <>
             <header
                 id="header"
-                className="relative z-[999999] reasonable:sticky reasonable:top-0 bg-gradient-to-b from-primary-dark/100 via-primary-dark/100 to-primary-dark/50 dark:from-dark/100 dark:via-dark/100 dark:to-dark/50 backdrop-blur"
+                className="relative z-[999999] reasonable:sticky reasonable:top-0 bg-gradient-to-b from-primary-dark/100 via-primary-dark/100 to-primary-dark/50 dark:from-dark/100 dark:via-dark/100 dark:to-dark/50 backdrop-blur print:hidden"
             >
                 <Main />
             </header>

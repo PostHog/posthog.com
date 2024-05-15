@@ -370,7 +370,7 @@ export function Footer(): JSX.Element {
     ]
 
     return (
-        <footer className="bg-accent dark:bg-accent-dark border-y border-light dark:border-dark">
+        <footer className="bg-accent dark:bg-accent-dark border-y border-light dark:border-dark print:hidden">
             <div className="relative -top-6">
                 <Link
                     to="/"

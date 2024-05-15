@@ -30,7 +30,7 @@ function DpaGenerator() {
     const [representativeEmail, setRepresentativeEmail] = useState('')
     const [jurisdiction, setJurisdiction] = useState('')
     const [supervisoryAuthority, setSupervisoryAuthority] = useState('')
-    const [mode, setMode] = useState('legalese')
+    const [mode, setMode] = useState('pretty')
     const [isFormComplete, setIsFormComplete] = useState(false)
     const divRef = useRef(null)
 
@@ -198,7 +198,7 @@ function DpaGenerator() {
                 description="The data processing agreement (DPA) generator designed to spark joy"
                 image={`/images/enterprise.png`}
             />
-            <header>
+            <header className="print:hidden">
                 <h1 className={`${heading()} overflow-hidden pt-8 pb-1`}>
                     DPA? Try DP
                     <em className="dark:text-yellow">
@@ -211,7 +211,7 @@ function DpaGenerator() {
             </header>
 
             <section className="grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 md:mt-0 md:top-20 gap-4">
-                <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen md:reasonable:max-h-[calc(100vh-56px)] md:overflow-auto md:sticky top-0 reasonable:top-[56px]">
+                <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen md:reasonable:max-h-[calc(100vh-56px)] md:overflow-auto md:sticky top-0 reasonable:top-[56px] print:hidden">
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
@@ -361,35 +361,37 @@ function DpaGenerator() {
 
                             <div className="col-span-5 @md:col-span-2 text-sm self-baseline pt-2">Format</div>
 
-                            <ul className="flex flex-col col-span-5 @md:col-span-3 gap-2 list-none pt-2 pl-0">
-                                <li>
+                            <ul className="flex flex-col col-span-5 @md:col-span-3 gap-3 list-none pt-2 pl-0">
+                                <li className="pl-8 relative">
                                     <input
                                         type="radio"
-                                        id="legalese"
+                                        id="pretty"
                                         name="mode"
-                                        value="legalese"
+                                        value="pretty"
+                                        className="absolute left-1 top-1"
                                         onChange={(e) => {
                                             setMode(e.target.value)
                                             if (divRef.current) {
                                                 divRef.current.scrollIntoView({ behavior: 'smooth' })
                                             }
                                         }}
-                                        checked={mode === 'legalese'}
+                                        checked={mode === 'pretty'}
                                     />
-                                    <label className="ml-1 font-semibold text-[15px]" htmlFor="legalese">
+                                    <label className="font-semibold leading-tight" htmlFor="pretty">
                                         A perfectly legal doc, but with some pizazz
                                     </label>
                                     <br />
-                                    <div className="block ml-5 text-[13px] opacity-75">
+                                    <div className="block text-sm opacity-75">
                                         Holds up in a court of law, but with a nicer font and a pretty logo
                                     </div>
                                 </li>
-                                <li>
+                                <li className="pl-7 relative">
                                     <input
                                         type="radio"
                                         id="lawyer"
                                         name="mode"
                                         value="lawyer"
+                                        className="absolute left-1 top-1"
                                         onChange={(e) => {
                                             setMode(e.target.value)
                                             if (divRef.current) {
@@ -397,19 +399,18 @@ function DpaGenerator() {
                                             }
                                         }}
                                     />
-                                    <label className="ml-1 font-semibold text-[15px]" htmlFor="lawyer">
+                                    <label className="font-semibold" htmlFor="lawyer">
                                         Your lawyer's favorite version
                                     </label>
                                     <br />
-                                    <div className="block ml-5 text-[13px] opacity-75">
-                                        Because lawyers love Times New Roman
-                                    </div>
+                                    <div className="block text-sm opacity-75">Because lawyers love Times New Roman</div>
                                 </li>
-                                <li>
+                                <li className="pl-7 relative">
                                     <input
                                         type="radio"
                                         id="fairytale"
                                         name="mode"
+                                        className="absolute left-1 top-1"
                                         value="fairytale"
                                         onChange={(e) => {
                                             setMode(e.target.value)
@@ -418,20 +419,19 @@ function DpaGenerator() {
                                             }
                                         }}
                                     />
-                                    <label className="ml-1 font-semibold text-[15px]" htmlFor="fairytale">
+                                    <label className="font-semibold" htmlFor="fairytale">
                                         Fairytale
                                     </label>
                                     <br />
-                                    <div className="block ml-5 text-[13px] opacity-75">
-                                        "Explain it to me like I'm five"
-                                    </div>
+                                    <div className="block text-sm opacity-75">"Explain it to me like I'm five"</div>
                                 </li>
-                                <li>
+                                <li className="pl-7 relative">
                                     <input
                                         type="radio"
                                         id="rap"
                                         name="mode"
                                         value="rap"
+                                        className="absolute left-1 top-1"
                                         onChange={(e) => {
                                             setMode(e.target.value)
                                             if (divRef.current) {
@@ -439,11 +439,11 @@ function DpaGenerator() {
                                             }
                                         }}
                                     />
-                                    <label className="ml-1 font-semibold text-[15px]" htmlFor="rap">
+                                    <label className="font-semibold" htmlFor="rap">
                                         Eminem edition
                                     </label>
                                     <br />
-                                    <div className="block ml-5 text-[13px] opacity-75">
+                                    <div className="block text-sm opacity-75">
                                         Warning: May contain{' '}
                                         <span className="border border-black rounded-sm px-1 py-0.5 uppercase text-xs">
                                             explicit content
@@ -457,36 +457,44 @@ function DpaGenerator() {
 
                 <div
                     ref={divRef}
-                    className="article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 shadow-xl rounded overflow-hidden"
+                    className="article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 shadow-xl print:shadow-none rounded overflow-hidden"
                 >
-                    <div className="bg-accent py-2 px-8 text-sm text-center -mx-8 -mt-4 mb-8 flex items-center justify-between">
+                    <div className="bg-accent py-2 px-8 text-sm text-center -mx-8 -mt-4 mb-8 flex items-center justify-between print:hidden">
                         <div className="text-lg font-bold">Preview</div>
-                        <div>
-                            <Tooltip
-                                content={
-                                    isFormComplete
-                                        ? "Use your browser's Export to PDF option"
-                                        : 'Fill out all the fields to export to PDF'
-                                }
-                                placement="top"
-                            >
-                                <span className="relative">
-                                    <TrackedCTA
-                                        event={{ name: `clicked Print DPA` }}
-                                        type="primary"
-                                        size="sm"
-                                        disabled={!isFormComplete}
-                                        onClick={handlePrint}
-                                        className="[&>span]:flex [&>span]:items-center [&>span]:gap-1"
-                                    >
+                        <Tooltip
+                            content={() => (
+                                <div className="max-w-sm print:hidden">
+                                    {isFormComplete ? (
                                         <>
-                                            <IconPrint className="size-5" />
-                                            <span>Export to PDF</span>
+                                            <p className="mb-3 text-[15px]">Use your browser's Export to PDF option</p>
+                                            <p className="mb-0 text-[15px]">
+                                                <strong>Tip:</strong> Disable headers and footers to ditch the page
+                                                title and URL from your printed copy.
+                                            </p>
                                         </>
-                                    </TrackedCTA>
-                                </span>
-                            </Tooltip>
-                        </div>
+                                    ) : (
+                                        'Fill out all the fields to export to PDF'
+                                    )}
+                                </div>
+                            )}
+                            placement="left"
+                        >
+                            <span className="relative">
+                                <TrackedCTA
+                                    event={{ name: `clicked Print DPA` }}
+                                    type="primary"
+                                    size="sm"
+                                    disabled={!isFormComplete}
+                                    onClick={handlePrint}
+                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-1"
+                                >
+                                    <>
+                                        <IconPrint className="size-5" />
+                                        <span>Export to PDF</span>
+                                    </>
+                                </TrackedCTA>
+                            </span>
+                        </Tooltip>
                     </div>
 
                     <div className={`${mode === 'fairytale' ? 'block' : 'hidden'}`}>
@@ -1001,11 +1009,13 @@ function DpaGenerator() {
                     </div>
 
                     <div
-                        className={`${mode === 'legalese' || mode === 'lawyer' ? 'block' : 'hidden'} ${
-                            mode === 'legalese' && ''
-                        } ${mode === 'lawyer' && 'font-serif'} [&>p]:text-[15px] [&_li]:text-[15px] max-w-3xl mx-auto`}
+                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
+                            mode === 'pretty' && ''
+                        } ${
+                            mode === 'lawyer' && 'font-serif'
+                        } print:[&>p]:text-sm print:[&_li]:text-sm max-w-3xl mx-auto`}
                     >
-                        <Logo className={`my-8 ${mode === 'lawyer' && 'hidden'}`} />
+                        <Logo className={`my-8 print:mt-0 ${mode === 'lawyer' && 'hidden'}`} />
                         <h2 className="!text-2xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>
                             This Data Processing Agreement (“<strong>Agreement</strong>”) forms part of the Contract for
@@ -1421,14 +1431,14 @@ function DpaGenerator() {
                                 and Wales.
                             </p>
                         </div>
-                        <p>
+                        <p className="[page-break-before:always] print:pt-12">
                             IN WITNESS WHEREOF, this Agreement is entered into with effect from the date first set out
                             below.
                         </p>
 
                         <SignatureFields />
 
-                        <p className="text-center mt-20">
+                        <p className="text-center mt-20 [page-break-before:always]">
                             <strong>ANNEX I</strong>
                         </p>
                         <div className="ml-12">
@@ -1651,7 +1661,7 @@ function DpaGenerator() {
                             </Link>
                         </p>
 
-                        <p className="text-center mt-12 !mb-0 !pb-0">
+                        <p className="text-center mt-12 !mb-0 !pb-0 [page-break-before:always]">
                             <strong>ANNEX III</strong>
                         </p>
                         <p className="text-center">
@@ -1660,7 +1670,7 @@ function DpaGenerator() {
                     </div>
 
                     <div className="overflow-x-auto -mx-4 md:-mx-8">
-                        <table className="[&_td:first-child]:pl-4 md:[&_td:first-child]:pl-8 [&_td:last-child]:pr-4 md:[&_td:last-child]:pr-8">
+                        <table className="[&_td:first-child]:pl-4 md:[&_td:first-child]:pl-8 [&_td:last-child]:pr-4 md:[&_td:last-child]:pr-8 print:text-xs">
                             <tr className="font-bold bg-accent border-t border-light">
                                 <td className="whitespace-nowrap">Name of Subprocessor</td>
                                 <td className="whitespace-nowrap">Contact details</td>
@@ -1747,7 +1757,7 @@ function DpaGenerator() {
                 </div>
             </section>
 
-            <section className="text-center mt-40 mb-24">
+            <section className="text-center mt-40 mb-24 print:hidden">
                 <h3>Need a custom MSA?</h3>
 
                 <TrackedCTA event={{ name: `clicked Get a demo` }} href="/book-a-demo" type="secondary" size="lg">
