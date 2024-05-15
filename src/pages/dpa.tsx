@@ -7,6 +7,7 @@ import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import { IconInfo, IconRevert } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
+import Logo from 'components/Logo'
 
 const IconPrint = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24">
@@ -380,7 +381,7 @@ function DpaGenerator() {
                                     </label>
                                     <br />
                                     <div className="block ml-5 text-[13px] opacity-75">
-                                        Holds up in a court of law, but with a nicer font
+                                        Holds up in a court of law, but with a nicer font and a pretty logo
                                     </div>
                                 </li>
                                 <li>
@@ -736,241 +737,266 @@ function DpaGenerator() {
                         </div>
                     </div>
 
-                    <div className={`${mode === 'rap' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4 mx-auto max-w-xl`}>
-                        <h2>Data Dynasty: The PostHog Pact</h2>
+                    <div className={`${mode === 'rap' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4`}>
+                        <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 -mt-8 border-t border-light">
+                            <strong>Notice:</strong> We don't recommend this version, unless you know a judge who really
+                            likes rap.
+                        </div>
 
-                        <StaticImage
-                            src="../../public/images/dpa/slim.png"
-                            alt="Map"
-                            placeholder="blurred"
-                            className="float-right -mr-2 md:-mr-20 -my-8 mt:-mt-16 w-48 md:w-64"
-                        />
-                        <p>
-                            Alright, check this, we're diving into the realm where data's a treasure,
-                            <br />
-                            With PostHog Inc. and{' '}
-                            <Tooltip
-                                content={() => (
-                                    <>
-                                        Fill out the form <span className="md:hidden">at the top</span>
-                                        <span className="hidden md:inline-block">to the left</span> populate these
-                                        fields
-                                    </>
-                                )}
-                                placement="top"
-                                className="[&_button]:cursor-auto"
-                            >
-                                <span className="relative">
-                                    <button type="button">
-                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                            {companyName ? companyName : '[COMPANY NAME]'}
-                                        </label>
-                                    </button>
-                                </span>
-                            </Tooltip>
-                            , teaming up for the measure.
-                            <br />
-                            It's like a contract forged in the depths of digital dungeons,
-                            <br />
-                            Securing data flow, yo, this ain't just assumptions.
-                        </p>
-                        <p>
-                            First up,{' '}
-                            <Tooltip
-                                content={() => (
-                                    <>
-                                        Fill out the form <span className="md:hidden">at the top</span>
-                                        <span className="hidden md:inline-block">to the left</span> populate these
-                                        fields
-                                    </>
-                                )}
-                                placement="top"
-                                className="[&_button]:cursor-auto"
-                            >
-                                <span className="relative">
-                                    <button type="button">
-                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                            {companyName ? companyName : '[COMPANY NAME]'}
-                                        </label>
-                                    </button>
-                                </span>
-                            </Tooltip>
-                            's the Controller, holding keys to the kingdom,
-                            <br />
-                            Handing tasks to PostHog, who process with wisdom.
-                            <br />
-                            They're setting up the stage with an Agreement, that's the plan,
-                            <br />
-                            Linking it to the Service Contract, like only true pros can.
-                        </p>
-                        <p>
-                            They call it the DPA—Data Processing Agreement,
-                            <br />
-                            Laying down the law in every single statement.
-                            <br />
-                            From GDPR to EEA, they keep it tight,
-                            <br />
-                            Making sure every byte moves right in the night.
-                        </p>
-                        <p>
-                            Definitions laid out, so everything's clear,
-                            <br />
-                            No misunderstandings or confusion here.
-                            <br />
-                            "Company Personal Data," that's the treasure they guard,
-                            <br />
-                            Processing it right, giving it the highest regard.
-                        </p>
-                        <p>
-                            Now, let's break it down, how PostHog's gonna act,
-                            <br />
-                            With integrity and security, that's a fact.
-                            <br />
-                            Only on instructions, they move the data 'round,
-                            <br />
-                            Bound by laws, where compliance is found.
-                        </p>
-                        <p>
-                            If there’s a breach, PostHog’s on the line,
-                            <br />
-                            To notify{' '}
-                            <Tooltip
-                                content={() => (
-                                    <>
-                                        Fill out the form <span className="md:hidden">at the top</span>
-                                        <span className="hidden md:inline-block">to the left</span> populate these
-                                        fields
-                                    </>
-                                )}
-                                placement="top"
-                                className="[&_button]:cursor-auto"
-                            >
-                                <span className="relative">
-                                    <button type="button">
-                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                            {companyName ? companyName : '[COMPANY NAME]'}
-                                        </label>
-                                    </button>
-                                </span>
-                            </Tooltip>{' '}
-                            in no time.
-                            <br />
-                            Security's tight, with measures that protect,
-                            <br />
-                            Keeping personal data in check, direct.
-                        </p>
-                        <p>
-                            Subprocessors in the mix, they gotta comply,
-                            <br />
-                            Matching standards set high, reaching the sky.
-                            <br />
-                            If{' '}
-                            <Tooltip
-                                content={() => (
-                                    <>
-                                        Fill out the form <span className="md:hidden">at the top</span>
-                                        <span className="hidden md:inline-block">to the left</span> populate these
-                                        fields
-                                    </>
-                                )}
-                                placement="top"
-                                className="[&_button]:cursor-auto"
-                            >
-                                <span className="relative">
-                                    <button type="button">
-                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                            {companyName ? companyName : '[COMPANY NAME]'}
-                                        </label>
-                                    </button>
-                                </span>
-                            </Tooltip>{' '}
-                            objects, yo, there's a route to appeal,
-                            <br />
-                            Ensuring every subcontractor keeps it real.
-                        </p>
-                        <p>
-                            Rights of the data subjects, they're front and center,
-                            <br />
-                            PostHog assists{' '}
-                            <Tooltip
-                                content={() => (
-                                    <>
-                                        Fill out the form <span className="md:hidden">at the top</span>
-                                        <span className="hidden md:inline-block">to the left</span> populate these
-                                        fields
-                                    </>
-                                )}
-                                placement="top"
-                                className="[&_button]:cursor-auto"
-                            >
-                                <span className="relative">
-                                    <button type="button">
-                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                            {companyName ? companyName : '[COMPANY NAME]'}
-                                        </label>
-                                    </button>
-                                </span>
-                            </Tooltip>{' '}
-                            to enter,
-                            <br />
-                            Handling requests, ensuring privacy’s respected,
-                            <br />
-                            Under laws so tight, they're perfectly projected.
-                        </p>
-                        <p>
-                            Audit rights, they got it locked,
-                            <br />
-                            Transparency in actions, securely docked.
-                            <br />
-                            When the service ends, data’s returned or erased,
-                            <br />
-                            No traces left behind, nothing misplaced.
-                        </p>
-                        <p>
-                            Cross-border data flow, yeah, they cover that too,
-                            <br />
-                            With Standard Contractual Clauses in view.
-                            <br />
-                            Legal frameworks ensuring data’s safe transit,
-                            <br />
-                            Over borders, under laws, keeping it legit.
-                        </p>
-                        <p>
-                            In this digital game, the stakes are high,
-                            <br />
-                            But with this Agreement, compliance ain’t no lie.
-                            <br />
-                            So here's to{' '}
-                            <Tooltip
-                                content={() => (
-                                    <>
-                                        Fill out the form <span className="md:hidden">at the top</span>
-                                        <span className="hidden md:inline-block">to the left</span> populate these
-                                        fields
-                                    </>
-                                )}
-                                placement="top"
-                                className="[&_button]:cursor-auto"
-                            >
-                                <span className="relative">
-                                    <button type="button">
-                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                            {companyName ? companyName : '[COMPANY NAME]'}
-                                        </label>
-                                    </button>
-                                </span>
-                            </Tooltip>{' '}
-                            and PostHog, leaders of the pact,
-                            <br />
-                            Guarding data like treasure, with every detail intact.
-                        </p>
-                        <p>
-                            Yo, this ain’t just business, it's a fortress in rhyme,
-                            <br />
-                            Securing data pathways, through every byte and line.
-                        </p>
-                        <div className="pb-16">
-                            <SignatureFields />
+                        <div className="mx-auto max-w-xl">
+                            <h2>Data Dynasty: The PostHog Pact</h2>
+
+                            <StaticImage
+                                src="../../public/images/dpa/slim.png"
+                                alt="Map"
+                                placeholder="blurred"
+                                className="float-right -mr-2 md:-mr-20 -my-8 mt:-mt-16 w-48 md:w-64"
+                            />
+                            <p>
+                                Alright, check this, we're diving into the realm where data's a treasure,
+                                <br />
+                                With PostHog Inc. and{' '}
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>
+                                , teaming up for the measure.
+                                <br />
+                                It's like a contract forged in the depths of digital dungeons,
+                                <br />
+                                Securing data flow, yo, this ain't just assumptions.
+                            </p>
+                            <p>
+                                First up,{' '}
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>
+                                's the Controller, holding keys to the kingdom,
+                                <br />
+                                Handing tasks to PostHog, who process with wisdom.
+                                <br />
+                                They're setting up the stage with an Agreement, that's the plan,
+                                <br />
+                                Linking it to the Service Contract, like only true pros can.
+                            </p>
+                            <p>
+                                They call it the DPA—Data Processing Agreement,
+                                <br />
+                                Laying down the law in every single statement.
+                                <br />
+                                From GDPR to EEA, they keep it tight,
+                                <br />
+                                Making sure every byte moves right in the night.
+                            </p>
+                            <p>
+                                Definitions laid out, so everything's clear,
+                                <br />
+                                No misunderstandings or confusion here.
+                                <br />
+                                "Company Personal Data," that's the treasure they guard,
+                                <br />
+                                Processing it right, giving it the highest regard.
+                            </p>
+                            <p>
+                                Now, let's break it down, how PostHog's gonna act,
+                                <br />
+                                With integrity and security, that's a fact.
+                                <br />
+                                Only on instructions, they move the data 'round,
+                                <br />
+                                Bound by laws, where compliance is found.
+                            </p>
+                            <p>
+                                If there’s a breach, PostHog’s on the line,
+                                <br />
+                                To notify{' '}
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>{' '}
+                                in no time.
+                                <br />
+                                Security's tight, with measures that protect,
+                                <br />
+                                Keeping personal data in check, direct.
+                            </p>
+                            <p>
+                                Subprocessors in the mix, they gotta comply,
+                                <br />
+                                Matching standards set high, reaching the sky.
+                                <br />
+                                If{' '}
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>{' '}
+                                objects, yo, there's a route to appeal,
+                                <br />
+                                Ensuring every subcontractor keeps it real.
+                            </p>
+                            <p>
+                                Rights of the data subjects, they're front and center,
+                                <br />
+                                PostHog assists{' '}
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>{' '}
+                                to enter,
+                                <br />
+                                Handling requests, ensuring privacy’s respected,
+                                <br />
+                                Under laws so tight, they're perfectly projected.
+                            </p>
+                            <p>
+                                Audit rights, they got it locked,
+                                <br />
+                                Transparency in actions, securely docked.
+                                <br />
+                                When the service ends, data’s returned or erased,
+                                <br />
+                                No traces left behind, nothing misplaced.
+                            </p>
+                            <p>
+                                Cross-border data flow, yeah, they cover that too,
+                                <br />
+                                With Standard Contractual Clauses in view.
+                                <br />
+                                Legal frameworks ensuring data’s safe transit,
+                                <br />
+                                Over borders, under laws, keeping it legit.
+                            </p>
+                            <p>
+                                In this digital game, the stakes are high,
+                                <br />
+                                But with this Agreement, compliance ain’t no lie.
+                                <br />
+                                So here's to{' '}
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>{' '}
+                                and PostHog, leaders of the pact,
+                                <br />
+                                Guarding data like treasure, with every detail intact.
+                            </p>
+                            <p>
+                                Yo, this ain’t just business, it's a fortress in rhyme,
+                                <br />
+                                Securing data pathways, through every byte and line.
+                            </p>
+                            <div className="pb-16">
+                                <SignatureFields />
+                            </div>
                         </div>
                     </div>
 
@@ -979,7 +1005,8 @@ function DpaGenerator() {
                             mode === 'legalese' && ''
                         } ${mode === 'lawyer' && 'font-serif'} [&>p]:text-[15px] [&_li]:text-[15px] max-w-3xl mx-auto`}
                     >
-                        <h2 className="!text-xl">Data Processing Agreement — PostHog Inc.</h2>
+                        <Logo className={`my-8 ${mode === 'lawyer' && 'hidden'}`} />
+                        <h2 className="!text-2xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>
                             This Data Processing Agreement (“<strong>Agreement</strong>”) forms part of the Contract for
                             Services (“<strong>Principal Agreement</strong>”) between{' '}
@@ -1630,94 +1657,92 @@ function DpaGenerator() {
                         <p className="text-center">
                             <strong>Subprocessors</strong>
                         </p>
+                    </div>
 
-                        <div className="overflow-x-auto -mx-4 md:-mx-8">
-                            <table className="[&_td:first-child]:pl-4 md:[&_td:first-child]:pl-8 [&_td:last-child]:pr-4 md:[&_td:last-child]:pr-8">
-                                <tr className="font-bold bg-accent border-t border-light">
-                                    <td className="whitespace-nowrap">Name of Subprocessor</td>
-                                    <td className="whitespace-nowrap">Contact details</td>
-                                    <td className="whitespace-nowrap">Subject matter of the processing</td>
-                                    <td className="whitespace-nowrap">Duration of the processing</td>
-                                    <td className="whitespace-nowrap">Nature and purpose of the processing</td>
-                                    <td className="whitespace-nowrap">Geographical location of the processing</td>
-                                    <td className="whitespace-nowrap">Type of personal data processed</td>
-                                    <td className="whitespace-nowrap">Categories of data subject</td>
-                                    <td className="whitespace-nowrap">Details of sub-sub processors</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Amazon Web Services, Inc.</strong>
-                                    </td>
-                                    <td>410 Terry Avenue North, Seattle, WA 98109-5210, aws-EU-privacy@amazon.com</td>
-                                    <td>Personal data of users of the Controller’s web product(s)</td>
-                                    <td>Duration of the agreement</td>
-                                    <td>Cloud storage of PostHog Cloud data</td>
-                                    <td>USA (PostHog US Cloud) or Germany (PostHog EU Cloud)</td>
-                                    <td>
-                                        Identifying – name, username, Computer device – IP address, MAC address, browser
-                                        footprint, Contact – email address, Location – country, territory, city,
-                                        Behavioral – product usage (page views, clicks, browsing behavior).
-                                    </td>
-                                    <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                    <td>https://aws.amazon.com/compliance/sub-processors/ </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Cloudflare Inc.</strong>
-                                    </td>
-                                    <td>101 Townsend Street, San Francisco, CA 94107, USA, legal@cloudflare.com</td>
-                                    <td>Personal data of users of the Controller’s web product(s)</td>
-                                    <td>Duration of the agreement</td>
-                                    <td>Cloud storage of PostHog Cloud data</td>
-                                    <td>USA (PostHog US Cloud only, not used for PostHog EU Cloud)</td>
-                                    <td>
-                                        Identifying – name, username, Computer device – IP address, MAC address, browser
-                                        footprint, Contact – email address, Location – country, territory, city,
-                                        Behavioral – product usage (page views, clicks, browsing behavior).
-                                    </td>
-                                    <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                    <td>https://www.cloudflare.com/en-gb/gdpr/subprocessors/</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Salesforce, Inc. (t/a ‘Heroku’)</strong>
-                                    </td>
-                                    <td>
-                                        415 Mission Street, Suite 300,San Francisco, CA 94105, privacy@salesforce.com
-                                    </td>
-                                    <td>Personal data of users of the Controller’s web product(s)</td>
-                                    <td>Duration of the agreement</td>
-                                    <td>Cloud storage of PostHog Cloud data</td>
-                                    <td>USA (PostHog US Cloud only, not used for PostHog EU Cloud)</td>
-                                    <td>
-                                        Identifying – name, username, Computer device – IP address, MAC address, browser
-                                        footprint, Contact – email address, Location – country, territory, city,
-                                        Behavioral – product usage (page views, clicks, browsing behavior).
-                                    </td>
-                                    <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                    <td>
-                                        https://www.salesforce.com/content/dam/web/en_us/www/documents/legal/misc/salesforce-infrastructure-and-subprocessors.pdf
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Functional Software, Inc., t/a ‘Sentry’</strong>
-                                    </td>
-                                    <td>45 Fremont Street, 8th Floor, San Francisco, CA 94105. compliance@sentry.io</td>
-                                    <td>Personal data of users of the Controller’s web product(s)</td>
-                                    <td>Duration of the agreement</td>
-                                    <td>Application monitoring and error tracking</td>
-                                    <td>USA</td>
-                                    <td>
-                                        (Errors only) Identifying – username, Computer device – IP address, MAC address,
-                                        browser footprint, Contact – email address, Behavioral – product usage (page
-                                        views, clicks, browsing behavior).
-                                    </td>
-                                    <td>Employees, Customers, Visitors, Prospects, Contractors</td>
-                                    <td>https://sentry.io/legal/dpa/#list-of-subprocessors-1</td>
-                                </tr>
-                            </table>
-                        </div>
+                    <div className="overflow-x-auto -mx-4 md:-mx-8">
+                        <table className="[&_td:first-child]:pl-4 md:[&_td:first-child]:pl-8 [&_td:last-child]:pr-4 md:[&_td:last-child]:pr-8">
+                            <tr className="font-bold bg-accent border-t border-light">
+                                <td className="whitespace-nowrap">Name of Subprocessor</td>
+                                <td className="whitespace-nowrap">Contact details</td>
+                                <td className="whitespace-nowrap">Subject matter of the processing</td>
+                                <td className="whitespace-nowrap">Duration of the processing</td>
+                                <td className="whitespace-nowrap">Nature and purpose of the processing</td>
+                                <td className="whitespace-nowrap">Geographical location of the processing</td>
+                                <td className="whitespace-nowrap">Type of personal data processed</td>
+                                <td className="whitespace-nowrap">Categories of data subject</td>
+                                <td className="whitespace-nowrap">Details of sub-sub processors</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Amazon Web Services, Inc.</strong>
+                                </td>
+                                <td>410 Terry Avenue North, Seattle, WA 98109-5210, aws-EU-privacy@amazon.com</td>
+                                <td>Personal data of users of the Controller’s web product(s)</td>
+                                <td>Duration of the agreement</td>
+                                <td>Cloud storage of PostHog Cloud data</td>
+                                <td>USA (PostHog US Cloud) or Germany (PostHog EU Cloud)</td>
+                                <td>
+                                    Identifying – name, username, Computer device – IP address, MAC address, browser
+                                    footprint, Contact – email address, Location – country, territory, city, Behavioral
+                                    – product usage (page views, clicks, browsing behavior).
+                                </td>
+                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
+                                <td>https://aws.amazon.com/compliance/sub-processors/ </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Cloudflare Inc.</strong>
+                                </td>
+                                <td>101 Townsend Street, San Francisco, CA 94107, USA, legal@cloudflare.com</td>
+                                <td>Personal data of users of the Controller’s web product(s)</td>
+                                <td>Duration of the agreement</td>
+                                <td>Cloud storage of PostHog Cloud data</td>
+                                <td>USA (PostHog US Cloud only, not used for PostHog EU Cloud)</td>
+                                <td>
+                                    Identifying – name, username, Computer device – IP address, MAC address, browser
+                                    footprint, Contact – email address, Location – country, territory, city, Behavioral
+                                    – product usage (page views, clicks, browsing behavior).
+                                </td>
+                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
+                                <td>https://www.cloudflare.com/en-gb/gdpr/subprocessors/</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Salesforce, Inc. (t/a ‘Heroku’)</strong>
+                                </td>
+                                <td>415 Mission Street, Suite 300,San Francisco, CA 94105, privacy@salesforce.com</td>
+                                <td>Personal data of users of the Controller’s web product(s)</td>
+                                <td>Duration of the agreement</td>
+                                <td>Cloud storage of PostHog Cloud data</td>
+                                <td>USA (PostHog US Cloud only, not used for PostHog EU Cloud)</td>
+                                <td>
+                                    Identifying – name, username, Computer device – IP address, MAC address, browser
+                                    footprint, Contact – email address, Location – country, territory, city, Behavioral
+                                    – product usage (page views, clicks, browsing behavior).
+                                </td>
+                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
+                                <td>
+                                    https://www.salesforce.com/content/dam/web/en_us/www/documents/legal/misc/salesforce-infrastructure-and-subprocessors.pdf
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Functional Software, Inc., t/a ‘Sentry’</strong>
+                                </td>
+                                <td>45 Fremont Street, 8th Floor, San Francisco, CA 94105. compliance@sentry.io</td>
+                                <td>Personal data of users of the Controller’s web product(s)</td>
+                                <td>Duration of the agreement</td>
+                                <td>Application monitoring and error tracking</td>
+                                <td>USA</td>
+                                <td>
+                                    (Errors only) Identifying – username, Computer device – IP address, MAC address,
+                                    browser footprint, Contact – email address, Behavioral – product usage (page views,
+                                    clicks, browsing behavior).
+                                </td>
+                                <td>Employees, Customers, Visitors, Prospects, Contractors</td>
+                                <td>https://sentry.io/legal/dpa/#list-of-subprocessors-1</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </section>
