@@ -156,15 +156,15 @@ function DpaGenerator() {
                                 required
                             />
 
-                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="email">
+                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="representativeEmail">
                                 Representative Email
                             </label>
                             <input
                                 type="email"
                                 value={representativeEmail}
                                 onChange={(e) => setRepresentativeEmail(e.target.value)}
-                                placeholder="Contact Email"
-                                id="email"
+                                placeholder="Representative Email"
+                                id="representativeEmail"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
                                 required
                             />
@@ -359,7 +359,7 @@ function DpaGenerator() {
                         <h2 className="text-center !text-[2.25rem] text-balance !leading-snug py-8 font-fairytale-title">
                             Weaving a Magical Pact for Data Protection: An Enchanted Alliance
                         </h2>
-                        <div className="[&>p]:text-[19px] [&>p]:leading-relaxed [&>p]:pb-6 max-w-xl mx-auto font-fairytale">
+                        <div className="[&>p]:text-[19px] [&>p]:leading-relaxed [&>p]:pb-6 [&_li]:text-[19px] [&_li]:leading-relaxed max-w-xl mx-auto font-fairytale">
                             <StaticImage
                                 src="../../public/images/dpa/map.png"
                                 alt="Map"
@@ -551,7 +551,7 @@ function DpaGenerator() {
                     <div
                         className={`${mode === 'legalese' || mode === 'lawyer' ? 'block' : 'hidden'} ${
                             mode === 'legalese' && ''
-                        } ${mode === 'lawyer' && 'font-serif'} [&>p]:text-[15px] max-w-3xl mx-auto`}
+                        } ${mode === 'lawyer' && 'font-serif'} [&>p]:text-[15px] [&_li]:text-[15px] max-w-3xl mx-auto`}
                     >
                         <h2 className="!text-xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>
@@ -1082,17 +1082,36 @@ function DpaGenerator() {
                             <p>Date</p>
                             <p className="border-b border-black w-full">&nbsp;</p>
                         </div>
-                        <p className="text-center mt-12">
+                        <p className="text-center mt-20">
                             <strong>ANNEX I</strong>
                         </p>
-                        <p>A. Processing Activities:</p>
-                        <p>Subject matter of the processing</p>
+                        <div className="ml-12">
+                            <p>
+                                <strong>A. Processing Activities:</strong>
+                            </p>
+                            <p>
+                                <strong>Subject matter of the processing</strong>
+                            </p>
+                        </div>
+
                         <p>The personal data shall be processed in order to allow Processor to provide the Services.</p>
-                        <p>Nature and purpose of the processing</p>
+
+                        <div className="ml-12">
+                            <p>
+                                <strong>Nature and purpose of the processing</strong>
+                            </p>
+                        </div>
+
                         <p>Product analytics, including insights, heatmaps, session recording and feature flags.</p>
-                        <p>Duration</p>
+
+                        <p>
+                            <strong className="underline">Duration</strong>
+                        </p>
                         <p>For the duration of the Principal Agreement.</p>
-                        <p>Categories of data subjects</p>
+
+                        <p>
+                            <strong>Categories of data subjects</strong>
+                        </p>
                         <p>The personal data processed relates to the following categories of data subjects:</p>
                         <ul>
                             <li>Employees</li>
@@ -1101,7 +1120,10 @@ function DpaGenerator() {
                             <li>Prospects</li>
                             <li>Contractors</li>
                         </ul>
-                        <p>Categories of personal data processed</p>
+
+                        <p>
+                            <strong>Categories of personal data processed</strong>
+                        </p>
                         <p>The personal data processed comprises the following categories of data:</p>
                         <ul>
                             <li>Identifying – name, username</li>
@@ -1110,83 +1132,186 @@ function DpaGenerator() {
                             <li>Location – country, territory, city</li>
                             <li>Behavioral – product usage (page views, clicks, browsing behavior)</li>
                         </ul>
-                        <p>Sensitive categories of personal data processed (if applicable)</p>
+
+                        <p>
+                            <strong>Sensitive categories of personal data processed (if applicable)</strong>
+                        </p>
                         <p>The personal data transferred concern the following special categories of data:</p>
                         <p>N/A</p>
-                        <p>B. List of Parties:</p>
-                        <p>The data exporter shall be:</p>
-                        <ul>
-                            <li>
-                                the Company at the following address{' '}
-                                <span className="bg-yellow/40 font-bold px-0.5">
-                                    {companyAddress ? companyAddress : '[Company Address]'}
-                                </span>
-                                ;
-                            </li>
-                            <li>
-                                the contact person for the Company shall be:{' '}
-                                <span className="bg-yellow/40 font-bold px-0.5">
-                                    {representativeEmail ? representativeEmail : '[Representative Email]'}
-                                </span>
-                                ;
-                            </li>
-                            <li>
-                                the signature of the data exporter and the date of signature shall be as signed above;
-                            </li>
-                            <li>the role of the exporter is controller; and</li>
-                            <li>the activities relate to the provision of the Services.</li>
-                        </ul>
-                        <p>The data importer shall be:</p>
-                        <ul>
-                            <li>
-                                the Processor at the following address 2261 Market St., #4008, San Francisco, CA 94114,
-                                United States of America
-                            </li>
-                            <li>the contact person for the Processor shall be: privacy@posthog.com;</li>
-                            <li>
-                                the signature of the data importer and the date of signature shall be as signed above;
-                            </li>
-                            <li>the role of the exporter is processor;</li>
-                            <li>the activities relate to the provision of the Services.</li>
-                        </ul>
-                        <p>C. Description of Transfer</p>
-                        <p>Categories of data subjects whose personal data is transferred:</p>
-                        <p>See ‘A. Processing Activities’ above</p>
-                        <p>Categories of personal data transferred:</p>
-                        <p>See ‘A. Processing Activities’ above</p>
-                        <p>Sensitive data transferred (if applicable) and applied restrictions or safeguards:</p>
-                        <p>N/A</p>
+
+                        <div className="ml-12">
+                            <p>
+                                <strong>B. List of Parties:</strong>
+                            </p>
+                        </div>
                         <p>
-                            If sensitive data are transferred, see Annex C, Part B for applicable restrictions and
-                            safeguards
+                            <strong>The data exporter shall be:</strong>
+                        </p>
+                        <div className="ml-12">
+                            <ul>
+                                <li>
+                                    the Company at the following address{' '}
+                                    <Tooltip
+                                        content={() => (
+                                            <>
+                                                Fill out the form <span className="md:hidden">at the top</span>
+                                                <span className="hidden md:inline-block">to the left</span> populate
+                                                these fields
+                                            </>
+                                        )}
+                                        placement="top"
+                                        className="[&_button]:cursor-auto"
+                                    >
+                                        <span className="relative">
+                                            <button type="button">
+                                                <label
+                                                    htmlFor="companyAddress"
+                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                >
+                                                    {companyAddress ? companyAddress : '[COMPANY ADDRESS]'}
+                                                </label>
+                                            </button>
+                                        </span>
+                                    </Tooltip>
+                                    ;
+                                </li>
+                                <li>
+                                    the contact person for the Company shall be:{' '}
+                                    <Tooltip
+                                        content={() => (
+                                            <>
+                                                Fill out the form <span className="md:hidden">at the top</span>
+                                                <span className="hidden md:inline-block">to the left</span> populate
+                                                these fields
+                                            </>
+                                        )}
+                                        placement="top"
+                                        className="[&_button]:cursor-auto"
+                                    >
+                                        <span className="relative">
+                                            <button type="button">
+                                                <label
+                                                    htmlFor="representativeEmail"
+                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                >
+                                                    {representativeEmail
+                                                        ? representativeEmail
+                                                        : '[REPRESENTATIVE EMAIL]'}
+                                                </label>
+                                            </button>
+                                        </span>
+                                    </Tooltip>
+                                    ;
+                                </li>
+                                <li>
+                                    the signature of the data exporter and the date of signature shall be as signed
+                                    above;
+                                </li>
+                                <li>the role of the exporter is controller; and</li>
+                                <li>the activities relate to the provision of the Services.</li>
+                            </ul>
+                        </div>
+
+                        <p>
+                            <strong>The data importer shall be:</strong>
+                        </p>
+                        <div className="ml-12">
+                            <ul>
+                                <li>
+                                    the Processor at the following address 2261 Market St., #4008, San Francisco, CA
+                                    94114, United States of America
+                                </li>
+                                <li>the contact person for the Processor shall be: privacy@posthog.com;</li>
+                                <li>
+                                    the signature of the data importer and the date of signature shall be as signed
+                                    above;
+                                </li>
+                                <li>the role of the exporter is processor;</li>
+                                <li>the activities relate to the provision of the Services.</li>
+                            </ul>
+
+                            <p>
+                                <strong className="underline">C. Description of Transfer</strong>
+                            </p>
+                            <p>
+                                <em>Categories of data subjects whose personal data is transferred:</em>
+                            </p>
+                            <p>See ‘A. Processing Activities’ above</p>
+
+                            <p>
+                                <em>Categories of personal data transferred:</em>
+                            </p>
+                            <p>See ‘A. Processing Activities’ above</p>
+
+                            <p>
+                                <em>
+                                    Sensitive data transferred (if applicable) and applied restrictions or safeguards:
+                                </em>
+                            </p>
+                            <p>N/A</p>
+
+                            <p>
+                                If sensitive data are transferred, see Annex C, Part B for applicable restrictions and
+                                safeguards
+                            </p>
+                            <p>
+                                <em>
+                                    Frequency of transfer (e.g. whether on a one-off or continuous basis) (EU Standard
+                                    Contractual Clauses only):
+                                </em>
+                            </p>
+                            <p>On a continuous basis.</p>
+
+                            <p>
+                                <em>Nature of the processing/ processing operations:</em>
+                            </p>
+                            <p>See ‘A. Processing Activities’ above.</p>
+
+                            <p>
+                                <em>
+                                    Purpose(s) of the data transfer and further processing (EU Standard Contractual
+                                    Clauses only):
+                                </em>
+                            </p>
+                            <p>See ‘A. Processing Activities’ above.</p>
+
+                            <p>
+                                <em>
+                                    Period for which the personal data will be retained, or, if that is not possible,
+                                    the criteria used to determine that period (EU Standard Contractual Clauses only):
+                                </em>
+                            </p>
+                            <p>See ‘A. Processing Activities’ above.</p>
+
+                            <p>
+                                <em>
+                                    The subject matter, nature and duration of the processing (EU Standard Contractual
+                                    Clauses only):
+                                </em>
+                            </p>
+                            <p>See ‘A. Processing Activities’ above.</p>
+                        </div>
+
+                        <p className="text-center mt-12 !mb-0 !pb-0">
+                            <strong>ANNEX II</strong>
+                        </p>
+                        <p className="text-center">
+                            <strong>Technical and Organizational Security Measures</strong>
                         </p>
                         <p>
-                            Frequency of transfer (e.g. whether on a one-off or continuous basis) (EU Standard
-                            Contractual Clauses only):
+                            See{' '}
+                            <Link href="https://posthog.com/handbook/company/security">
+                                https://posthog.com/handbook/company/security
+                            </Link>
                         </p>
-                        <p>On a continuous basis.</p>
-                        <p>Nature of the processing/ processing operations:</p>
-                        <p>See ‘A. Processing Activities’ above.</p>
-                        <p>
-                            Purpose(s) of the data transfer and further processing (EU Standard Contractual Clauses
-                            only):
+
+                        <p className="text-center mt-12 !mb-0 !pb-0">
+                            <strong>ANNEX III</strong>
                         </p>
-                        <p>See ‘A. Processing Activities’ above.</p>
-                        <p>
-                            Period for which the personal data will be retained, or, if that is not possible, the
-                            criteria used to determine that period (EU Standard Contractual Clauses only):
+                        <p className="text-center">
+                            <strong>Subprocessors</strong>
                         </p>
-                        <p>See ‘A. Processing Activities’ above.</p>
-                        <p>
-                            The subject matter, nature and duration of the processing (EU Standard Contractual Clauses
-                            only):
-                        </p>
-                        <p>See ‘A. Processing Activities’ above.</p>
-                        <p>ANNEX II</p>
-                        <p>Technical and Organizational Security Measures</p>
-                        <p>See https://posthog.com/handbook/company/security</p>
-                        <p>ANNEX III</p>
-                        <p>Subprocessors</p>
+
                         <div className="overflow-x-auto -mx-4 md:-mx-8">
                             <table className="[&_td:first-child]:pl-4 md:[&_td:first-child]:pl-8 [&_td:last-child]:pr-4 md:[&_td:last-child]:pr-8">
                                 <tr className="font-bold bg-accent border-t border-light">
