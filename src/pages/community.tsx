@@ -23,6 +23,7 @@ import Changelog from 'components/InsidePostHog/Changelog'
 import FeatureRequests from 'components/InsidePostHog/FeatureRequests'
 import AppStatus from 'components/AppStatus'
 import qs from 'qs'
+import slugify from 'slugify'
 
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -94,7 +95,7 @@ const SlackPosts = () => {
                         attributes: {
                             question: {
                                 data: {
-                                    attributes: { topics, body, profile },
+                                    attributes: { topics, body, profile, subject, permalink },
                                 },
                             },
                         },
@@ -105,8 +106,20 @@ const SlackPosts = () => {
                             .join(' ')
                         return (
                             <li key={id}>
-                                <h5 className="opacity-50 text-sm m-0">{topic}</h5>
-                                <p className="text-sm m-0 my-2">
+                                <Link
+                                    className="text-inherit hover:text-inherit"
+                                    to={`/questions/topic/${slugify(topic, { lower: true })}`}
+                                    state={{ previous: { title: 'Community', url: '/community' } }}
+                                >
+                                    <h5 className="opacity-50 text-sm m-0">{topic}</h5>
+                                </Link>
+                                <Link
+                                    to={`/questions/${permalink}`}
+                                    state={{ previous: { title: 'Community', url: '/community' } }}
+                                >
+                                    <h4 className="m-0 my-1 text-base">{subject}</h4>
+                                </Link>
+                                <p className="text-sm m-0 mb-2">
                                     <span className="opacity-50">Shared by</span>{' '}
                                     <Link to={`/community/profiles/${profile?.data?.id}`}>{name}</Link>
                                 </p>
