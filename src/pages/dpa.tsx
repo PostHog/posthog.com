@@ -553,9 +553,25 @@ function DpaGenerator() {
                         <p>
                             This Data Processing Agreement (“Agreement”) forms part of the Contract for Services
                             (“Principal Agreement”) between{' '}
-                            <span className="bg-yellow/40 font-bold px-0.5">
-                                {companyName ? companyName : '[COMPANY NAME]'}
-                            </span>{' '}
+                            <Tooltip
+                                content={() => (
+                                    <>
+                                        Fill out the form <span className="md:hidden">at the top</span>
+                                        <span className="hidden md:inline-block">to the left</span> populate these
+                                        fields
+                                    </>
+                                )}
+                                placement="top"
+                                className="[&_button]:cursor-auto"
+                            >
+                                <span className="relative">
+                                    <button type="button" className="" onClick={handleReset}>
+                                        <span className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                            {companyName ? companyName : '[COMPANY NAME]'}
+                                        </span>
+                                    </button>
+                                </span>
+                            </Tooltip>{' '}
                             (the “Company”) and PostHog Inc. (the “Processor”) (together as the “Parties”).
                         </p>
                         <p>WHEREAS</p>
@@ -901,9 +917,25 @@ function DpaGenerator() {
                             below.
                         </p>
                         <p>
-                            <span className="bg-yellow/40 font-bold px-0.5">
-                                {companyName ? companyName : '[Company name]'}
-                            </span>
+                            <Tooltip
+                                content={() => (
+                                    <>
+                                        Fill out the form <span className="md:hidden">at the top</span>
+                                        <span className="hidden md:inline-block">to the left</span> populate these
+                                        fields
+                                    </>
+                                )}
+                                placement="top"
+                                className="[&_button]:cursor-auto"
+                            >
+                                <span className="relative">
+                                    <button type="button" className="" onClick={handleReset}>
+                                        <span className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                            {companyName ? companyName : '[COMPANY NAME]'}
+                                        </span>
+                                    </button>
+                                </span>
+                            </Tooltip>
                         </p>
                         <p>Signature ______________________________</p>
                         <p>Name ________________________________</p>
