@@ -515,7 +515,7 @@ function DpaGenerator() {
                                     size="sm"
                                     disabled={!isFormComplete}
                                     onClick={handlePrint}
-                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-1"
+                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-1 relative left-4"
                                 >
                                     <>
                                         <IconPrint className="size-5" />
