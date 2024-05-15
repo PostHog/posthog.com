@@ -44,6 +44,10 @@ const TabButton = ({ active, onClick, children, className = '' }) => {
     )
 }
 
+const Skeleton = () => {
+    return <div className="animate-pulse bg-accent dark:bg-accent-dark h-[250px] w-full rounded-md" />
+}
+
 const PersonSpotlight = ({ title, content, byline, image, cta }) => {
     return (
         <div>
@@ -63,6 +67,7 @@ const PersonSpotlight = ({ title, content, byline, image, cta }) => {
 }
 
 const SlackPosts = () => {
+    const [loading, setLoading] = useState(true)
     const [slackPosts, setSlackPosts] = useState([])
 
     useEffect(() => {
@@ -82,57 +87,64 @@ const SlackPosts = () => {
                 if (data?.data?.length > 0) {
                     setSlackPosts(data.data)
                 }
+                setLoading(false)
             })
     }, [])
 
-    return slackPosts?.length > 0 ? (
+    return (
         <div className="py-4">
-            <h3 className="text-base">From the PostHog Slack</h3>
-            <ul className="list-none m-0 p-0 space-y-4">
-                {slackPosts.map(
-                    ({
-                        id,
-                        attributes: {
-                            question: {
-                                data: {
-                                    attributes: { topics, body, profile, subject, permalink },
+            {loading ? (
+                <Skeleton />
+            ) : slackPosts?.length > 0 ? (
+                <>
+                    <h3 className="text-base">From the PostHog Slack</h3>
+                    <ul className="list-none m-0 p-0 space-y-4">
+                        {slackPosts.map(
+                            ({
+                                id,
+                                attributes: {
+                                    question: {
+                                        data: {
+                                            attributes: { topics, body, profile, subject, permalink },
+                                        },
+                                    },
                                 },
-                            },
-                        },
-                    }) => {
-                        const topic = topics?.data?.[0]?.attributes?.label
-                        const name = [profile?.data?.attributes?.firstName, profile?.data?.attributes?.lastName]
-                            .filter(Boolean)
-                            .join(' ')
-                        return (
-                            <li key={id}>
-                                <Link
-                                    className="text-inherit hover:text-inherit"
-                                    to={`/questions/topic/${slugify(topic, { lower: true })}`}
-                                    state={{ previous: { title: 'Community', url: '/community' } }}
-                                >
-                                    <h5 className="opacity-50 text-sm m-0">{topic}</h5>
-                                </Link>
-                                <Link
-                                    to={`/questions/${permalink}`}
-                                    state={{ previous: { title: 'Community', url: '/community' } }}
-                                >
-                                    <h4 className="m-0 my-1 text-base">{subject}</h4>
-                                </Link>
-                                <p className="text-sm m-0 mb-2">
-                                    <span className="opacity-50">Shared by</span>{' '}
-                                    <Link to={`/community/profiles/${profile?.data?.id}`}>{name}</Link>
-                                </p>
-                                <div className="article-content">
-                                    <Markdown>{body}</Markdown>
-                                </div>
-                            </li>
-                        )
-                    }
-                )}
-            </ul>
+                            }) => {
+                                const topic = topics?.data?.[0]?.attributes?.label
+                                const name = [profile?.data?.attributes?.firstName, profile?.data?.attributes?.lastName]
+                                    .filter(Boolean)
+                                    .join(' ')
+                                return (
+                                    <li key={id}>
+                                        <Link
+                                            className="text-inherit hover:text-inherit"
+                                            to={`/questions/topic/${slugify(topic, { lower: true })}`}
+                                            state={{ previous: { title: 'Community', url: '/community' } }}
+                                        >
+                                            <h5 className="opacity-50 text-sm m-0">{topic}</h5>
+                                        </Link>
+                                        <Link
+                                            to={`/questions/${permalink}`}
+                                            state={{ previous: { title: 'Community', url: '/community' } }}
+                                        >
+                                            <h4 className="m-0 my-1 text-base">{subject}</h4>
+                                        </Link>
+                                        <p className="text-sm m-0 mb-2">
+                                            <span className="opacity-50">Shared by</span>{' '}
+                                            <Link to={`/community/profiles/${profile?.data?.id}`}>{name}</Link>
+                                        </p>
+                                        <div className="article-content">
+                                            <Markdown>{body}</Markdown>
+                                        </div>
+                                    </li>
+                                )
+                            }
+                        )}
+                    </ul>
+                </>
+            ) : null}
         </div>
-    ) : null
+    )
 }
 
 const CommunityNewsLogo = () => {
