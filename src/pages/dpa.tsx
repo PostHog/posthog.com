@@ -464,9 +464,9 @@ function DpaGenerator() {
 
                 <div
                     ref={divRef}
-                    className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 shadow-xl print:shadow-none rounded overflow-hidden"
+                    className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 shadow-xl print:shadow-none rounded relative"
                 >
-                    <div className="bg-accent py-2 px-8 text-sm text-center -mx-8 -mt-4 mb-8 flex items-center justify-between print:hidden">
+                    <div className="bg-accent py-2 px-8 text-sm text-center -mx-8 -mt-4 mb-8 flex items-center justify-between print:hidden sticky top-[56px]">
                         <div className="text-lg font-bold">Preview</div>
                         <Tooltip
                             content={() => (
