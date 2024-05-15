@@ -315,27 +315,8 @@ function DpaGenerator() {
                             </ul>
                         </div>
                     </form>
-
-                    {/* 
-                        modes:
-                        - cute (hedgehogs, nice font) - fairytale story
-                        - professional (nice font) - english
-                        - dry and boring (classic, times new roman) - legalese
-                         */}
                 </div>
-                {/* 
-                    
-                        <div>
-                            <span>{companyName}</span>
-                            <span>{companyAddress}</span>
-                            <span>{yourName}</span>
-                            <span>{yourTitle}</span>
-                            <span>{date}</span>
-                            <span>{representativeEmail}</span>
-                            <span>{jurisdiction}</span>
-                            <span>{supervisoryAuthority}</span>
-                        </div>
-                    */}
+
                 <div
                     ref={divRef}
                     className="article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 shadow-xl rounded overflow-hidden"
@@ -1004,24 +985,106 @@ function DpaGenerator() {
                                 className="[&_button]:cursor-auto"
                             >
                                 <span className="relative">
-                                    <button type="button" className="" onClick={handleReset}>
-                                        <span className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                    <button type="button">
+                                        <label htmlFor="companyName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
                                             {companyName ? companyName : '[COMPANY NAME]'}
-                                        </span>
+                                        </label>
                                     </button>
                                 </span>
                             </Tooltip>
                         </p>
-                        <p>Signature ______________________________</p>
-                        <p>Name ________________________________</p>
-                        <p>Title _________________________________</p>
-                        <p>Date _________________________________</p>
-                        <p>PostHog Inc.</p>
-                        <p>Signature ______________________________</p>
-                        <p>Name Fraser Hopper</p>
-                        <p>Title Operations & Finance Lead</p>
-                        <p>Date __________________________________</p>
-                        <p>ANNEX I</p>
+                        <div className="grid grid-cols-[minmax(100px,200px)_1fr] items-baseline max-w-xl space-y-4 [&>p]:!mb-0">
+                            <p>Signature</p>
+                            <p className="border-b border-black w-full">&nbsp;</p>
+
+                            <p>Name </p>
+                            <p className="border-b border-black w-full">
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label htmlFor="yourName" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                                {yourName ? yourName : '[REPRESENTATIVE NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>
+                            </p>
+
+                            <p>Title</p>
+                            <p className="border-b border-black w-full">
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label htmlFor="yourTitle" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                                {yourTitle ? yourTitle : '[REPRESENTATIVE TITLE]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>
+                            </p>
+
+                            <p>Date</p>
+                            <p className="border-b border-black w-full">
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate these
+                                            fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label htmlFor="date" className="bg-yellow/40 font-bold px-0.5 py-0.5">
+                                                {date ? date : '[DATE]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>
+                            </p>
+
+                            <p className="col-span-2 !mt-8">
+                                <strong>PostHog, Inc.</strong>
+                            </p>
+
+                            <p>Signature</p>
+                            <p className="border-b border-black w-full">&nbsp;</p>
+
+                            <p>Name</p>
+                            <p className="border-b border-black w-full">Fraser Hopper</p>
+
+                            <p>Title</p>
+                            <p className="border-b border-black w-full">Operations & Finance Lead</p>
+
+                            <p>Date</p>
+                            <p className="border-b border-black w-full">&nbsp;</p>
+                        </div>
+                        <p className="text-center mt-12">
+                            <strong>ANNEX I</strong>
+                        </p>
                         <p>A. Processing Activities:</p>
                         <p>Subject matter of the processing</p>
                         <p>The personal data shall be processed in order to allow Processor to provide the Services.</p>
