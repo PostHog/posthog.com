@@ -235,8 +235,17 @@ function Terms() {
                         </Tooltip>
                         :<div className="text-xs mb-4">(Serif font demonstrates how important this disclaimer is)</div>
                         The following is not legal advice. It is a summary of PostHog's terms. Please read{' '}
-                        <Link href="#">the full terms of service</Link> and don't rely on 140 characters of "terms" at a
-                        time.
+                        <SmoothScrollLink
+                            to="full-terms"
+                            spy={true}
+                            smooth={true}
+                            offset={-60}
+                            duration={500}
+                            className="cursor-pointer"
+                        >
+                            the full terms of service
+                        </SmoothScrollLink>{' '}
+                        and don't rely on 140 characters of "terms" at a time.
                     </p>
 
                     <Tweet>
@@ -312,7 +321,7 @@ function Terms() {
                         </Link>
                     </Tweet>
 
-                    <h2 id="tldrgmbpi" className="!text-4xl pt-8 mb-1">
+                    <h2 id="full-terms" className="!text-4xl pt-8 mb-1">
                         The full terms (but still easy to understand)
                     </h2>
                     <p className="text-opacity-75">
@@ -326,6 +335,7 @@ function Terms() {
 
                 <div className="px-4">
                     <ol className="table-of-contents max-w-2xl mx-auto bg-accent dark:bg-accent-dark rounded p-8 list-none flex flex-col gap-2">
+                        <li className="text-sm opacity-70">Table of contents</li>
                         {headers.map((header, index) => (
                             <li key={index}>
                                 <SmoothScrollLink
@@ -813,10 +823,10 @@ function Terms() {
                     </div>
                     <div>
                         <p>
-                            All our prices are without sales tax. Hey, terms and conditions can be pretty boring so,
-                            Well done on reading these thoroughly, &nbsp;as a reward please&nbsp;
+                            All our prices are without sales tax. Hey, terms and conditions can be pretty boring, so
+                            well done on reading these thoroughly! As a reward, please&nbsp;
                             <Link href="/merch">claim a free legalhog sticker</Link>&nbsp;from our&nbsp;
-                            <Link href="/merch">merch store</Link>
+                            <Link href="/merch">merch store</Link>.
                         </p>
                     </div>
                     <div>

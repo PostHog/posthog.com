@@ -233,8 +233,8 @@ function DpaGenerator() {
                     </div>
                     <p className="text-sm mb-2">We'll populate your DPA with this information.</p>
                     <p className="text-sm">
-                        Once the form is completed, you can export to PDF. Sign it and send it to fraser@posthog.com for
-                        counter-signature.
+                        Once the form is completed, you can export to PDF. Sign it and send it to privacy@posthog.com
+                        for counter-signature.
                     </p>
                     <form>
                         <div className="grid grid-cols-5 gap-1 @sm:gap-2 items-center">
@@ -486,7 +486,7 @@ function DpaGenerator() {
                                                 </li>
                                                 <li>
                                                     <p className="text-[15px] mb-0">
-                                                        Sign and send to fraser@posthog.com for counter-signature
+                                                        Sign and send to privacy@posthog.com for counter-signature
                                                     </p>
                                                 </li>
                                             </ol>
