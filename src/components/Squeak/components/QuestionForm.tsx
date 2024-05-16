@@ -312,16 +312,16 @@ export const QuestionForm = ({
             ]
         }
 
-        // const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         Authorization: `Bearer ${token}`,
-        //     },
-        //     body: JSON.stringify({
-        //         data,
-        //     }),
-        // })
+        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                data,
+            }),
+        })
     }
 
     const transformValues = async (values: QuestionFormValues, user: User) => {
