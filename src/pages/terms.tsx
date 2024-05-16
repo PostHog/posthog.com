@@ -71,9 +71,9 @@ function Terms() {
 
     const Tweet = ({ children, lastTweet = false }) => (
         <div
-            className={`max-w-xl bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${
+            className={`max-w-xl mx-auto bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${
                 !lastTweet &&
-                'after:absolute after:w-px after:bg-border dark:after:bg-border-dark after:top-full after:-bottom-4 after:h-12 after:left-9'
+                'after:absolute after:w-px after:bg-border dark:after:bg-border-dark after:top-[calc(100%_+_1px)] after:-bottom-4 after:h-12 after:left-10'
             }`}
         >
             <div className="flex items-center space-x-4">
@@ -189,19 +189,21 @@ function Terms() {
             />
             <div>
                 <div className="max-w-2xl mx-auto py-8">
-                    <h1 className="text-5xl">Terms, PostHog style</h1>
+                    <h1 className="text-5xl text-center">Terms, PostHog style</h1>
 
-                    <p className="mt-2 text-lg font-semibold mb-2">
+                    <p className="mt-2 text-lg font-semibold mb-2 text-center">
                         The internet has wrecked our attention span. <em>(Thanks, Zuck!)</em>
                     </p>
 
-                    <p className="mb-2">Long paragraphs are boring. So we decided to summarize our terms for you.</p>
+                    <p className="mb-2 text-center">
+                        Long paragraphs are boring. So we decided to summarize our terms for you.
+                    </p>
 
-                    <p className="mb-2">
+                    <p className="mb-2 text-center">
                         Here's the gist in a familiar format you can probably skim while driving. (Or 💩.)
                     </p>
 
-                    <h3 className="text-2xl pt-8">Summary of our terms</h3>
+                    <h3 className="text-2xl pt-8 text-center">Summary of our terms</h3>
 
                     <p className="bg-white dark:bg-accent-dark p-8 rounded font-serif mb-8 border-2 border-red dark:border-yellow shadow-xl">
                         <strong className="text-xl">Semi-important legal notice</strong> from our "friends" at
@@ -303,10 +305,10 @@ function Terms() {
                         </Link>
                     </Tweet>
 
-                    <h2 id="full-terms" className="!text-4xl pt-8 mb-1">
+                    <h2 id="full-terms" className="!text-4xl pt-8 mb-1 text-center">
                         The full terms (but still easy to understand)
                     </h2>
-                    <p>
+                    <p className="mb-0 text-center">
                         <span className="opacity-75">
                             Enjoy our simple descriptions of each paragraph, inspired by the geniuses at
                         </span>{' '}
@@ -318,7 +320,7 @@ function Terms() {
                 </div>
 
                 <div className="px-4">
-                    <ol className="table-of-contents max-w-2xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 list-none flex flex-col gap-2">
+                    <ol className="table-of-contents max-w-lg mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 list-none flex flex-col gap-2">
                         <li className="text-sm opacity-70">Table of contents</li>
                         {headers.map((header, index) => (
                             <li key={index}>
