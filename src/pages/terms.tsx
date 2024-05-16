@@ -8,6 +8,7 @@ import Tooltip from 'components/Tooltip'
 import { Twitter } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import { IconArrowRightDown } from '@posthog/icons'
+import { sexyLegalMenu } from '../navs'
 
 const termsClasses = cntl`
   full-terms
@@ -177,7 +178,10 @@ function Terms() {
     )
 
     return (
-        <Layout>
+        <Layout
+            parent={sexyLegalMenu}
+            activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'terms')}
+        >
             <SEO
                 title="DPA generator"
                 description="PostHog's thrilling data processing agreement (DPA) generator"
@@ -191,13 +195,10 @@ function Terms() {
                         The internet has wrecked our attention span. <em>(Thanks, Zuck!)</em>
                     </p>
 
-                    <p className="mb-2">
-                        Long paragraphs are boring. So we decided to summarize our terms in a format you might be more
-                        familiar with.
-                    </p>
+                    <p className="mb-2">Long paragraphs are boring. So we decided to summarize our terms for you.</p>
 
                     <p className="mb-2">
-                        Here's the gist in a series of something that you can probably skim while driving. (Or 💩.)
+                        Here's the gist in a familiar format you can probably skim while driving. (Or 💩.)
                     </p>
 
                     <h3 className="text-2xl pt-8">Summary of our terms</h3>
@@ -239,7 +240,7 @@ function Terms() {
                             to="full-terms"
                             spy={true}
                             smooth={true}
-                            offset={-60}
+                            offset={-108}
                             duration={500}
                             className="cursor-pointer"
                         >
@@ -259,11 +260,6 @@ function Terms() {
                     </Tweet>
 
                     <Tweet>
-                        If you need help, we’re here based on the plan you choose. Follow our advice, and if you don’t,
-                        we might have to stop helping after giving you a heads-up.
-                    </Tweet>
-
-                    <Tweet>
                         Use our special tool properly and follow the rules. No sneaky stuff like hacking or spreading
                         viruses.
                     </Tweet>
@@ -277,7 +273,7 @@ function Terms() {
                                 externalNoIcon
                                 className="font-normal text-xs text-primary/50 dark:text-primary-dark/50"
                             >
-                                Thanks, Giphy
+                                Thanks, Giphy!
                             </Link>
                         </p>
                     </Tweet>
@@ -324,8 +320,10 @@ function Terms() {
                     <h2 id="full-terms" className="!text-4xl pt-8 mb-1">
                         The full terms (but still easy to understand)
                     </h2>
-                    <p className="text-opacity-75">
-                        Enjoy our simple descriptions of each paragraph, inspired by the geniuses at{' '}
+                    <p>
+                        <span className="opacity-75">
+                            Enjoy our simple descriptions of each paragraph, inspired by the geniuses at
+                        </span>{' '}
                         <Link href="https://500px.com/terms" externalNoIcon>
                             500px
                         </Link>
@@ -342,7 +340,7 @@ function Terms() {
                                     to={header.id}
                                     spy={true}
                                     smooth={true}
-                                    offset={-60}
+                                    offset={-108}
                                     className="group cursor-pointer top-16 md:top-24 lg:top-32"
                                 >
                                     {header.innerText}

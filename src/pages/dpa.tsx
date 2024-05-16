@@ -9,6 +9,7 @@ import { IconInfo, IconRevert } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import Logo from 'components/Logo'
 import subprocessors from '../data/subprocessors.json'
+import { sexyLegalMenu } from '../navs'
 
 const IconPrint = ({ className = '' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24">
@@ -194,7 +195,10 @@ function DpaGenerator() {
     }
 
     return (
-        <Layout>
+        <Layout
+            parent={sexyLegalMenu}
+            activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'dpa generator')}
+        >
             <SEO
                 title="DPA generator"
                 description="PostHog's thrilling data processing agreement (DPA) generator"
@@ -217,7 +221,7 @@ function DpaGenerator() {
             </header>
 
             <section className="grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 md:mt-0 md:top-20 gap-4">
-                <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen md:reasonable:max-h-[calc(100vh-56px)] md:overflow-auto md:sticky top-0 reasonable:top-[56px] print:hidden">
+                <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen md:reasonable:max-h-[calc(100vh-108px)] md:overflow-auto md:sticky top-0 reasonable:top-[108px] print:hidden">
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
@@ -523,7 +527,7 @@ function DpaGenerator() {
                     ref={divRef}
                     className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 shadow-xl print:shadow-none rounded relative"
                 >
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center -mx-8 -mt-4 mb-8 flex items-center justify-between print:hidden sticky top-[56px]">
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center -mx-8 -mt-4 mb-8 flex items-center justify-between print:hidden sticky top-[108px]">
                         <div className="text-lg font-bold">Preview</div>
                         <Tooltip
                             content={() => (
