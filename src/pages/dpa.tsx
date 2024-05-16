@@ -498,7 +498,7 @@ function DpaGenerator() {
 
                                             <div className="my-2 pb-2 border border-light dark:border-dark rounded overflow-hidden">
                                                 <StaticImage
-                                                    src="../../public/images/dpa/print-settings.png"
+                                                    src="../images/dpa/print-settings.png"
                                                     alt="Print settings"
                                                     placeholder="blurred"
                                                     className="dark:rounded"
@@ -543,7 +543,7 @@ function DpaGenerator() {
                         </h2>
                         <div className="[&>p]:text-[19px] [&>p]:leading-relaxed [&>p]:pb-6 [&_li]:text-[19px] [&_li]:leading-relaxed max-w-xl mx-auto font-fairytale">
                             <StaticImage
-                                src="../../public/images/dpa/map.png"
+                                src="../images/dpa/map.png"
                                 alt="Map"
                                 placeholder="blurred"
                                 className={FloatRight}
@@ -578,7 +578,7 @@ function DpaGenerator() {
                             </p>
 
                             <StaticImage
-                                src="../../public/images/dpa/sword.png"
+                                src="../images/dpa/sword.png"
                                 alt="Sword"
                                 placeholder="blurred"
                                 className={FloatLeft}
@@ -613,7 +613,7 @@ function DpaGenerator() {
                             </p>
 
                             <StaticImage
-                                src="../../public/images/dpa/wizard.png"
+                                src="../images/dpa/wizard.png"
                                 alt="Wizard"
                                 placeholder="blurred"
                                 className={FloatRight}
@@ -672,7 +672,7 @@ function DpaGenerator() {
                             </p>
 
                             <StaticImage
-                                src="../../public/images/dpa/gnomes.png"
+                                src="../images/dpa/gnomes.png"
                                 alt="Gnomes"
                                 placeholder="blurred"
                                 className={FloatLeft}
@@ -714,7 +714,7 @@ function DpaGenerator() {
                             </p>
 
                             <StaticImage
-                                src="../../public/images/dpa/porridge.png"
+                                src="../images/dpa/porridge.png"
                                 alt="Porridge"
                                 placeholder="blurred"
                                 className={FloatRight}
@@ -792,8 +792,8 @@ function DpaGenerator() {
 
                             <div className="float-right flex flex-col -mr-2 ml-2 md:ml-0 mb-2 mt:mt-0 w-48 md:w-64">
                                 <StaticImage
-                                    src="../../public/images/dpa/slim.png"
-                                    alt="Map"
+                                    src="../images/dpa/slim.png"
+                                    alt="It's the Real Slim Shady"
                                     placeholder="blurred"
                                     className="mb-2"
                                 />
