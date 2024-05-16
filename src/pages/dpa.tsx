@@ -32,6 +32,7 @@ function DpaGenerator() {
     const [jurisdiction, setJurisdiction] = useState('')
     const [supervisoryAuthority, setSupervisoryAuthority] = useState('')
     const [mode, setMode] = useState('pretty')
+    const [region, setRegion] = useState('region-us')
     const [isFormComplete, setIsFormComplete] = useState(false)
     const divRef = useRef(null)
 
@@ -202,7 +203,7 @@ function DpaGenerator() {
             <header className="print:hidden">
                 <h1 className={`${heading()} overflow-hidden pt-8 pb-1`}>
                     DPA? Try DP
-                    <em className="dark:text-yellow">
+                    <em className="dark:text-primary-dark">
                         <span className="text-red">YAY</span>!
                     </em>
                 </h1>
@@ -342,9 +343,9 @@ function DpaGenerator() {
                                     content={() => (
                                         <p className="max-w-sm !mb-0">
                                             An individual authority established by its member state to supervise the
-                                            compliance with a specific regulation. In regards to GDPR, each country will
-                                            have its own authority, for the UK the Information Commissioner's Office
-                                            (ICO) will be the Supervisory Authority.
+                                            compliance with a specific regulation. In regards to the GDPR, each country
+                                            will have its own authority, for the UK the Information Commissioner's
+                                            Office (ICO) will be the Supervisory Authority.
                                         </p>
                                     )}
                                     placement="top"
@@ -365,10 +366,66 @@ function DpaGenerator() {
                                 required
                             />
 
+                            <div className="col-span-5 @md:col-span-2 text-sm self-baseline pt-2">
+                                <Tooltip
+                                    content={() => (
+                                        <>
+                                            <p className="max-w-sm !mb-2">
+                                                PostHog offers hosting in the 🇺🇸 United States and the 🇪🇺 European
+                                                Union.
+                                            </p>
+                                            <p className="max-w-sm !mb-0">
+                                                Select the region you chose when you signed up.
+                                            </p>
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="border-b border-dashed border-light dark:border-dark pb-0.5 mb-1 inline-block">
+                                        Data region
+                                    </span>
+                                </Tooltip>
+                            </div>
+
+                            <ul className="flex col-span-5 @md:col-span-3 gap-3 list-none pl-0">
+                                <li className="pl-7 relative">
+                                    <input
+                                        type="radio"
+                                        id="region-us"
+                                        name="region"
+                                        value="region-us"
+                                        className="absolute left-1 top-1"
+                                        onChange={(e) => {
+                                            setRegion(e.target.value)
+                                        }}
+                                        checked={region === 'region-us'}
+                                    />
+                                    <label className="font-semibold" htmlFor="region-us">
+                                        US <span className="opacity-50 text-[15px]">(Virginia)</span>
+                                    </label>
+                                </li>
+                                <li className="pl-7 relative">
+                                    <input
+                                        type="radio"
+                                        id="region-eu"
+                                        name="region"
+                                        value="region-eu"
+                                        className="absolute left-1 top-1"
+                                        onChange={(e) => {
+                                            setRegion(e.target.value)
+                                        }}
+                                    />
+                                    <label className="font-semibold" htmlFor="region-eu">
+                                        EU <span className="opacity-50 text-[15px]">(Frankfurt)</span>
+                                    </label>
+                                </li>
+                            </ul>
+
                             <div className="col-span-5 @md:col-span-2 text-sm self-baseline pt-2">Format</div>
 
                             <ul className="flex flex-col col-span-5 @md:col-span-3 gap-3 list-none pt-2 pl-0">
-                                <li className="pl-8 relative">
+                                <li className="pl-7 relative">
                                     <input
                                         type="radio"
                                         id="pretty"
@@ -1356,104 +1413,123 @@ function DpaGenerator() {
                                 Customer Personal Data.
                             </p>
                         </div>
+
+                        {region == 'region-us' && (
+                            <>
+                                <p>
+                                    <strong>10. Data Transfer Outside of the Protected Area</strong>
+                                </p>
+                                <div className="pl-8 pb-2">
+                                    <p>
+                                        10.1. The Company acknowledges that the Processor will Process the Personal Data
+                                        outside of the Protected Area including in the US.
+                                    </p>
+                                    <p>
+                                        10.2. As such, the parties agree to comply with the obligations set out in the{' '}
+                                        <Link
+                                            href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32021D0914&qid=1694542707177"
+                                            className="!text-red"
+                                            external
+                                        >
+                                            EU Standard Contractual Clauses
+                                        </Link>{' '}
+                                        as though they were set out in full in this Agreement, with the Company as the
+                                        “data exporter” and the Processor as the “data importer”, with the parties
+                                        signatures and dating of this Agreement being deemed to be the signature and
+                                        dating of the Standard Contractual Clauses and with Annexes to EU Standard
+                                        Contractual Clauses and the Appendices to the UK Standard Contractual Clauses
+                                        being as set out in Annex I and II of this Agreement
+                                    </p>
+                                    <p>
+                                        10.3. In relation to the EU Standard Contractual Clauses, the Parties agree
+                                        that:
+                                    </p>
+                                    <div className="pl-8 pb-2">
+                                        <p>
+                                            10.3.1. for the purposes of clause 9, option 2 (general written
+                                            authorisation for subprocessors) shall apply and the Parties agree that the
+                                            time period for notifying changes to the list shall be in accordance with
+                                            Clause 5.3 above;
+                                        </p>
+                                        <p>
+                                            10.3.2. for the purposes of clause 17, the clauses shall be governed by the
+                                            laws of{' '}
+                                            <span className="bg-yellow/40 font-bold px-0.5">
+                                                {jurisdiction ? jurisdiction : '[Jurisdiction]'}
+                                            </span>
+                                            ;
+                                        </p>
+                                        <p>
+                                            10.3.3. for the purposes of clause 18, the courts of{' '}
+                                            <span className="bg-yellow/40 font-bold px-0.5">
+                                                {jurisdiction ? jurisdiction : '[Jurisdiction]'}
+                                            </span>{' '}
+                                            shall have jurisdiction;
+                                        </p>
+                                        <p>
+                                            10.3.4. for the purposes of clause 13 and Annex I.C, the{' '}
+                                            <span className="bg-yellow/40 font-bold px-0.5">
+                                                {supervisoryAuthority
+                                                    ? supervisoryAuthority
+                                                    : '[Supervisory Authority]'}
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <p>
+                                        10.4. In relation to the UK Standard Contractual Clauses, as permitted by clause
+                                        17 of such Addendum, the Parties agree to change the format of the information
+                                        set out in Part 1 of the Addendum so that:
+                                    </p>
+                                    <div className="pl-8 pb-2">
+                                        <p>
+                                            10.4.1. the details of the parties in table 1 shall be as set out in Annex I
+                                            (with no requirement for signature);
+                                        </p>
+                                        <p>
+                                            10.4.2. for the purposes of table 2, the Addendum shall be appended to the
+                                            EU Standard Contractual Clauses as defined above (including the selection of
+                                            modules and options and the disapplication of optional clauses as noted
+                                            above); and
+                                        </p>
+                                        <p>
+                                            10.4.3. the appendix information listed in table 3 is set out in Annex I and
+                                            II.
+                                        </p>
+                                    </div>
+                                    <p>
+                                        10.5. In relation to Swiss Personal Data that is transferred outside of the
+                                        Protected Area, the Parties agree that such transfers shall be subject to the EU
+                                        Standard Contractual Clauses as compiled and completed in Sections 10.2 and 10.3
+                                        above, with the following amendments: (a) any references to the GDPR shall be
+                                        interpreted as references to the FADP; (b) references to the EU and EU Member
+                                        States shall be interpreted to mean Switzerland; (c) the competent supervisory
+                                        authority according to Clause 13(a) and Part C of Annex I is the FDPIC insofar
+                                        as the data transfers are governed by the FADP; (d) the term EU Member State
+                                        shall not be interpreted in such a way as to exclude data subject in Switzerland
+                                        from the possibility of suing for their rights in their place of habitual
+                                        residence in accordance with Clause 18(c) of the EU Standard Contractual
+                                        Clauses; and (e) until the entry into force of the revised FADP on 1 September
+                                        2023, the EU Standard Contractual Clauses shall also protect the personal data
+                                        of legal entities and legal entities shall receive the same protection under the
+                                        EU Standard Contractual Clauses as natural persons.
+                                    </p>
+                                    <p>
+                                        10.6. In the event of any conflict between this Agreement and the Standard
+                                        Contractual Clauses, the Standard Contractual Clauses shall prevail.
+                                    </p>
+                                    <p>
+                                        10.7. In the event that the Standard Contractual Clauses are no longer valid for
+                                        use under the GDPR or UK GDPR, the Parties agree to promptly implement a
+                                        replacement transfer mechanism, and making such further amendments to the
+                                        application of such replacement mechanism, as the Processor deems reasonably
+                                        necessary.
+                                    </p>
+                                </div>
+                            </>
+                        )}
+
                         <p>
-                            <strong>10. Data Transfer Outside of the Protected Area</strong>
-                        </p>
-                        <div className="pl-8 pb-2">
-                            <p>
-                                10.1. The Company acknowledges that the Processor will Process the Personal Data outside
-                                of the Protected Area including in the US.
-                            </p>
-                            <p>
-                                10.2. As such, the parties agree to comply with the obligations set out in the{' '}
-                                <Link
-                                    href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32021D0914&qid=1694542707177"
-                                    className="!text-red"
-                                    external
-                                >
-                                    EU Standard Contractual Clauses
-                                </Link>{' '}
-                                as though they were set out in full in this Agreement, with the Company as the “data
-                                exporter” and the Processor as the “data importer”, with the parties signatures and
-                                dating of this Agreement being deemed to be the signature and dating of the Standard
-                                Contractual Clauses and with Annexes to EU Standard Contractual Clauses and the
-                                Appendices to the UK Standard Contractual Clauses being as set out in Annex I and II of
-                                this Agreement
-                            </p>
-                            <p>10.3. In relation to the EU Standard Contractual Clauses, the Parties agree that:</p>
-                            <div className="pl-8 pb-2">
-                                <p>
-                                    10.3.1. for the purposes of clause 9, option 2 (general written authorisation for
-                                    subprocessors) shall apply and the Parties agree that the time period for notifying
-                                    changes to the list shall be in accordance with Clause 5.3 above;
-                                </p>
-                                <p>
-                                    10.3.2. for the purposes of clause 17, the clauses shall be governed by the laws of{' '}
-                                    <span className="bg-yellow/40 font-bold px-0.5">
-                                        {jurisdiction ? jurisdiction : '[Jurisdiction]'}
-                                    </span>
-                                    ;
-                                </p>
-                                <p>
-                                    10.3.3. for the purposes of clause 18, the courts of{' '}
-                                    <span className="bg-yellow/40 font-bold px-0.5">
-                                        {jurisdiction ? jurisdiction : '[Jurisdiction]'}
-                                    </span>{' '}
-                                    shall have jurisdiction;
-                                </p>
-                                <p>
-                                    10.3.4. for the purposes of clause 13 and Annex I.C, the{' '}
-                                    <span className="bg-yellow/40 font-bold px-0.5">
-                                        {supervisoryAuthority ? supervisoryAuthority : '[Supervisory Authority]'}
-                                    </span>
-                                </p>
-                            </div>
-                            <p>
-                                10.4. In relation to the UK Standard Contractual Clauses, as permitted by clause 17 of
-                                such Addendum, the Parties agree to change the format of the information set out in Part
-                                1 of the Addendum so that:
-                            </p>
-                            <div className="pl-8 pb-2">
-                                <p>
-                                    10.4.1. the details of the parties in table 1 shall be as set out in Annex I (with
-                                    no requirement for signature);
-                                </p>
-                                <p>
-                                    10.4.2. for the purposes of table 2, the Addendum shall be appended to the EU
-                                    Standard Contractual Clauses as defined above (including the selection of modules
-                                    and options and the disapplication of optional clauses as noted above); and
-                                </p>
-                                <p>10.4.3. the appendix information listed in table 3 is set out in Annex I and II.</p>
-                            </div>
-                            <p>
-                                10.5. In relation to Swiss Personal Data that is transferred outside of the Protected
-                                Area, the Parties agree that such transfers shall be subject to the EU Standard
-                                Contractual Clauses as compiled and completed in Sections 10.2 and 10.3 above, with the
-                                following amendments: (a) any references to the GDPR shall be interpreted as references
-                                to the FADP; (b) references to the EU and EU Member States shall be interpreted to mean
-                                Switzerland; (c) the competent supervisory authority according to Clause 13(a) and Part
-                                C of Annex I is the FDPIC insofar as the data transfers are governed by the FADP; (d)
-                                the term EU Member State shall not be interpreted in such a way as to exclude data
-                                subject in Switzerland from the possibility of suing for their rights in their place of
-                                habitual residence in accordance with Clause 18(c) of the EU Standard Contractual
-                                Clauses; and (e) until the entry into force of the revised FADP on 1 September 2023, the
-                                EU Standard Contractual Clauses shall also protect the personal data of legal entities
-                                and legal entities shall receive the same protection under the EU Standard Contractual
-                                Clauses as natural persons.
-                            </p>
-                            <p>
-                                10.6. In the event of any conflict between this Agreement and the Standard Contractual
-                                Clauses, the Standard Contractual Clauses shall prevail.
-                            </p>
-                            <p>
-                                10.7. In the event that the Standard Contractual Clauses are no longer valid for use
-                                under the GDPR or UK GDPR, the Parties agree to promptly implement a replacement
-                                transfer mechanism, and making such further amendments to the application of such
-                                replacement mechanism, as the Processor deems reasonably necessary.
-                            </p>
-                        </div>
-                        <p>
-                            <strong>11. General Terms</strong>
+                            <strong>{region == 'region-us' ? '11.' : '10.'} General Terms</strong>
                         </p>
                         <div className="pl-8 pb-2">
                             <p>
@@ -1717,81 +1793,85 @@ function DpaGenerator() {
 
                     <div className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'}`}>
                         <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm [&>div:nth-child(5n+6)]:border-t [&>div:nth-child(5n+6)]:border-light [&>div:nth-child(5n+6)]:pt-8 mb-8">
-                            {subprocessors.map((subprocessor, index) => (
-                                <React.Fragment key={index}>
-                                    <div className="col-span-3 @xl:!-mb-6">
-                                        <h3 className="!my-0 text-xl">
-                                            <strong>{subprocessor.name}</strong>
-                                        </h3>
-                                    </div>
-                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
-                                        <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
-                                        <div className="pt-2">
-                                            <strong>Details</strong>
-                                            <br />
-                                            <Link
-                                                href={subprocessor.details}
-                                                externalNoIcon
-                                                className="[word-break:break-word]"
-                                            >
-                                                {subprocessor.details}
-                                            </Link>
+                            {subprocessors
+                                .filter((subprocessor) => subprocessor.region === region)
+                                .map((subprocessor, index) => (
+                                    <React.Fragment key={index}>
+                                        <div className="col-span-3 @xl:!-mb-6">
+                                            <h3 className="!my-0 text-xl">
+                                                <strong>{subprocessor.name}</strong>
+                                            </h3>
                                         </div>
-                                    </div>
-                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
-                                        <div>
-                                            <strong className="block">Categories of data subject</strong>
-                                            <div>{subprocessor.categories}</div>
-                                        </div>
-                                        <div>
-                                            <strong className="block">Duration of the processing</strong>
-                                            <div>{subprocessor.duration}</div>
-                                        </div>
-                                        <div>
-                                            <strong className="block">Geographical location of the processing</strong>
-                                            <div>{subprocessor.location}</div>
-                                        </div>
-                                    </div>
-                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
-                                        <div>
-                                            <div>
-                                                <strong>Subject matter of the processing</strong>
+                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
+                                            <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
+                                            <div className="pt-2">
+                                                <strong>Details</strong>
+                                                <br />
+                                                <Link
+                                                    href={subprocessor.details}
+                                                    externalNoIcon
+                                                    className="[word-break:break-word]"
+                                                >
+                                                    {subprocessor.details}
+                                                </Link>
                                             </div>
-                                            <div>{subprocessor.subject}</div>
                                         </div>
-                                        <div>
+                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
                                             <div>
-                                                <strong>Nature and purpose of the processing</strong>
+                                                <strong className="block">Categories of data subject</strong>
+                                                <div>{subprocessor.categories}</div>
                                             </div>
-                                            <div>{subprocessor.reason}</div>
+                                            <div>
+                                                <strong className="block">Duration of the processing</strong>
+                                                <div>{subprocessor.duration}</div>
+                                            </div>
+                                            <div>
+                                                <strong className="block">
+                                                    Geographical location of the processing
+                                                </strong>
+                                                <div>{subprocessor.location}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
-                                        <strong className="block mb-2 text-base">
-                                            Type of personal data processed
-                                        </strong>
-                                        <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
-                                            {Object.entries(subprocessor.type).map(([typeName, typeValues]) => (
-                                                <React.Fragment key={typeName}>
-                                                    <div>
-                                                        <strong className="block pb-1">{typeName}</strong>
-                                                        <ul className="pl-4 !mb-1">
-                                                            {typeValues.map((typeValue, index) => (
-                                                                <li
-                                                                    key={index}
-                                                                    className="!mb-0 !leading-normal !text-sm"
-                                                                >
-                                                                    {typeValue}
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                </React.Fragment>
-                                            ))}
+                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                            <div>
+                                                <div>
+                                                    <strong>Subject matter of the processing</strong>
+                                                </div>
+                                                <div>{subprocessor.subject}</div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <strong>Nature and purpose of the processing</strong>
+                                                </div>
+                                                <div>{subprocessor.reason}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </React.Fragment>
-                            ))}
+                                        <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
+                                            <strong className="block mb-2 text-base">
+                                                Type of personal data processed
+                                            </strong>
+                                            <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
+                                                {Object.entries(subprocessor.type).map(([typeName, typeValues]) => (
+                                                    <React.Fragment key={typeName}>
+                                                        <div>
+                                                            <strong className="block pb-1">{typeName}</strong>
+                                                            <ul className="pl-4 !mb-1">
+                                                                {typeValues.map((typeValue, index) => (
+                                                                    <li
+                                                                        key={index}
+                                                                        className="!mb-0 !leading-normal !text-sm"
+                                                                    >
+                                                                        {typeValue}
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    </React.Fragment>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
+                                ))}
                         </div>
                     </div>
                 </div>

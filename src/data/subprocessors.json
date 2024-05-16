@@ -1,11 +1,12 @@
 [
     {
+        "region": "region-us",
         "name": "Amazon Web Services, Inc.",
         "contact": "410 Terry Avenue North <br />Seattle, WA 98109-5210, USA<br />aws-EU-privacy@amazon.com",
         "subject": "Personal data of users of the Controller’s web product(s)",
         "duration": "Duration of the agreement",
         "reason": "Cloud storage of PostHog Cloud data",
-        "location": "USA (PostHog US Cloud) or Germany (PostHog EU Cloud)",
+        "location": "USA",
         "type": {
             "Identifying": ["Name", "Username"],
             "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
@@ -17,6 +18,25 @@
         "details": "https://aws.amazon.com/compliance/sub-processors/"
     },
     {
+        "region": "region-eu",
+        "name": "Amazon Web Services, Inc.",
+        "contact": "410 Terry Avenue North <br />Seattle, WA 98109-5210, USA<br />aws-EU-privacy@amazon.com",
+        "subject": "Personal data of users of the Controller’s web product(s)",
+        "duration": "Duration of the agreement",
+        "reason": "Cloud storage of PostHog Cloud data",
+        "location": "Germany",
+        "type": {
+            "Identifying": ["Name", "Username"],
+            "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
+            "Contact": ["Email Address"],
+            "Location": ["Country", "Territory", "City"],
+            "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
+        },
+        "categories": "Employees, Customers, Visitors, Prospects, Contractors",
+        "details": "https://aws.amazon.com/compliance/sub-processors/"
+    },
+    {
+        "region": "region-us",
         "name": "Cloudflare Inc.",
         "contact": "101 Townsend Street<br />San Francisco, CA 94107, USA<br />legal@cloudflare.com",
         "subject": "Personal data of users of the Controller’s web product(s)",
@@ -34,6 +54,7 @@
         "details": "https://www.cloudflare.com/en-gb/gdpr/subprocessors/"
     },
     {
+        "region": "region-us",
         "name": "Salesforce, Inc. (t/a ‘Heroku’)",
         "contact": "415 Mission Street, Suite 300<br />San Francisco, CA 94105<br />privacy@salesforce.com",
         "subject": "Personal data of users of the Controller’s web product(s)",
@@ -51,6 +72,7 @@
         "details": "https://www.salesforce.com/content/dam/web/en_us/www/documents/legal/misc/salesforce-infrastructure-and-subprocessors.pdf"
     },
     {
+        "region": "region-us",
         "name": "Functional Software, Inc., t/a ‘Sentry’",
         "contact": "45 Fremont Street, 8th Floor<br />San Francisco, CA 94105<br />compliance@sentry.io",
         "subject": "Personal data of users of the Controller’s web product(s)",
