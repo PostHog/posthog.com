@@ -22,6 +22,7 @@ import NoHatingAllowed from './NoHatingAllowed'
 import { RenderInClient } from 'components/RenderInClient'
 import BillboardTruck from './BillboardTruck'
 import Spinner from 'components/Spinner'
+import { GlobeScene } from './Globe'
 
 const Home = () => {
     const posthog = usePostHog()
@@ -41,7 +42,6 @@ const Home = () => {
                 <CodeBlocks />
                 <OnePlatform />
                 <NoHatingAllowed />
-
                 <RenderInClient
                     render={() => {
                         return posthog?.getFeatureFlag?.('homepage-billboard-truck') === true ? (
@@ -61,6 +61,7 @@ const Home = () => {
                 <HogQL />
                 <Community />
                 <CustomerData />
+                <GlobeScene />
                 <Timeline />
                 <Roadmap />
                 <Startups />
