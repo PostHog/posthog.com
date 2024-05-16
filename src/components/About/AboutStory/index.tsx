@@ -4,11 +4,21 @@ import GitHubButton from 'react-github-btn'
 import { YCBadge } from './yc-badge'
 import { CallToAction } from 'components/CallToAction'
 import { James, Tim } from 'components/Signatures'
-import jamesAudio1 from '../../Careers/WhyWereHere/james_1.mp3'
+
+import quote1 from '../../Careers/WhyWereHere/quote-1.mp3'
+import quote2 from '../../Careers/WhyWereHere/quote-2.mp3'
+import quote3 from '../../Careers/WhyWereHere/quote-3.mp3'
+import quote4 from '../../Careers/WhyWereHere/quote-4.mp3'
+import quote5 from '../../Careers/WhyWereHere/quote-5.mp3'
+import quote6 from '../../Careers/WhyWereHere/quote-6.mp3'
+import quote7 from '../../Careers/WhyWereHere/quote-7.mp3'
+import quote8 from '../../Careers/WhyWereHere/quote-8.mp3'
+import quote9 from '../../Careers/WhyWereHere/quote-9.mp3'
+import quote10 from '../../Careers/WhyWereHere/quote-10.mp3'
 
 export const AboutStory = () => {
     const audioRef = useRef(null)
-    const mp3Files = [jamesAudio1]
+    const mp3Files = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10]
 
     const playRandomSound = () => {
         try {
