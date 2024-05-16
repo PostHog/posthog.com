@@ -204,7 +204,7 @@ function Terms() {
             activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'terms')}
         >
             <SEO
-                title="DPA generator"
+                title="Terms, PostHog style"
                 description="PostHog's thrilling data processing agreement (DPA) generator"
                 image={`/images/dp.png`}
             />
@@ -232,38 +232,41 @@ function Terms() {
                     <h3 className="text-2xl pt-8 text-center">Summary of our terms</h3>
 
                     <p className="bg-white dark:bg-accent-dark p-8 rounded font-serif mb-8 border-2 border-red dark:border-yellow shadow-xl">
-                        <strong className="text-xl">Semi-important legal notice</strong> from our "friends" at
-                        <OrrickLogo className="h-6 inline-block relative -top-0.5 ml-2 mr-1" />
-                        <Tooltip
-                            content={() => (
-                                <div className="flex gap-3">
-                                    <div className="rounded-full bg-accent w-12 h-12 overflow-hidden">
-                                        <StaticImage
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
-                                            alt='James ("Veg"/"JC") Hawkins'
-                                            className="w-12 h-12"
-                                        />
+                        <span className="text-xl">
+                            <strong>Semi-important legal notice</strong> from our "friends" at
+                            <OrrickLogo className="h-6 inline-block relative -top-0.5 ml-2 mr-1" />
+                            <Tooltip
+                                content={() => (
+                                    <div className="flex gap-3">
+                                        <div className="rounded-full bg-accent w-12 h-12 overflow-hidden">
+                                            <StaticImage
+                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
+                                                alt='James ("Veg"/"JC") Hawkins'
+                                                className="w-12 h-12"
+                                            />
+                                        </div>
+                                        <div>
+                                            <p className="max-w-sm !mb-0 !pb-0">
+                                                <em>"They're expensive, but we haven't gotten sued yet!"</em>
+                                            </p>
+                                            <p className="mb-0 leading-tight">
+                                                <span className="font-semibold">James Hawkins</span>
+                                                <br />
+                                                <span className="text-xs opacity-70">CEO &amp; Co-founder</span>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p className="max-w-sm !mb-0 !pb-0">
-                                            <em>"They're expensive, but we haven't gotten sued yet!"</em>
-                                        </p>
-                                        <p className="mb-0 leading-tight">
-                                            <span className="font-semibold">James Hawkins</span>
-                                            <br />
-                                            <span className="text-xs opacity-70">CEO &amp; Co-founder</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            )}
-                            placement="top"
-                            className="[&_button]:cursor-auto"
-                        >
-                            <span className="border-b border-dashed border-dark/50 dark:border-dark inline-block !leading-tight">
-                                Orrick
-                            </span>
-                        </Tooltip>
-                        :<div className="text-xs mb-4">(Serif font demonstrates how important this disclaimer is)</div>
+                                )}
+                                placement="top"
+                                className="[&_button]:cursor-auto"
+                            >
+                                <span className="border-b border-dashed border-dark/50 dark:border-dark inline-block !leading-tight">
+                                    Orrick
+                                </span>
+                            </Tooltip>
+                            :
+                        </span>
+                        <div className="text-xs mb-4">(Serif font demonstrates how important this disclaimer is)</div>
                         The following is not legal advice. It is a summary of PostHog's terms. Please read{' '}
                         <SmoothScrollLink
                             to="full-terms"
@@ -402,12 +405,14 @@ function Terms() {
                         </p>
                     </div>
                     <div>
-                        <p>
-                            By signing into PostHog, you agree to all these terms. See our&nbsp;
+                        <p className="mb-2">By signing into PostHog, you agree to all these terms.</p>
+                        <p className="!text-base text-opacity-80">
+                            {' '}
+                            (See our&nbsp;
                             <Link href="https://github.com/PostHog/posthog-foss/blob/master/LICENSE" external>
                                 separate terms
                             </Link>
-                            &nbsp;if you’re self-hosting the open source edition.
+                            &nbsp;if you’re self-hosting the open source edition.)
                         </p>
                     </div>
                     <div>
@@ -1046,7 +1051,7 @@ function Terms() {
                             We can sign a DPA if you need one. We make it super easy for you to{' '}
                             <Link href="/dpa">self-serve a completed DPA</Link>.*
                         </p>
-                        <p className="!text-base">
+                        <p className="!text-base opacity-80">
                             *It's the most fun you'll ever have signing a DPA - <em>guaranteed</em>.
                         </p>
                     </div>
