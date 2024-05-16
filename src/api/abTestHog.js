@@ -54,7 +54,7 @@ Mistake 10: Missing CTA
 Explanation: The visitor likes what you do but there’s not CTA nearby when they’re ready to convert
 Fix it: Lock your CTA to your menu (especially on mobile) so it’s ALWAYS available
 
-Mistake 11: Hard to get setup
+Mistake 11: Hard to get set up
 Explanation: The visitor likes your product but worries setup is too complex
 Fix it: Offer templates, how-to guides, and concierge migration
 \`\`\`
@@ -82,7 +82,7 @@ const handler = async (req, res) => {
             }
         \`\`\`
 
-        Be as specific as possible with what changes should be tested, and be as specific as possible with your explanations and reason. You must OVEREXPLAIN your explanation and reasons. You MUST tell me exactly what changes to makes on the website. If you suggest copy changes, you MUST tell me what the copy should be. If you suggest UI changes, you MUST tell me exactly what changes to make. Be extremely prescriptive. You MUST suggest what the control and test variant should be.
+        Be as specific as possible with what changes should be tested, and be as specific as possible with your explanations and reason. You must OVEREXPLAIN your explanation and reasons. You MUST tell me exactly what changes to makes on the website. If you suggest copy changes, you MUST tell me what the copy should be. If you suggest UI changes, you MUST tell me exactly what changes to make. Be extremely prescriptive. You MUST suggest what the control and test variant should be. You MUST return exactly five suggestions.
 
         You MUST only respond with this JSON, and not any other text in your response. Only respond with your answer in structured JSON format without using markdown code blocks
         `
