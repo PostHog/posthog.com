@@ -1,13 +1,73 @@
+import cntl from 'cntl'
 import Layout from 'components/Layout'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
+import { Link as SmoothScrollLink } from 'react-scroll'
 import Tooltip from 'components/Tooltip'
-import { IconX } from '@posthog/icons'
 import { Twitter } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
+import { IconArrowRightDown } from '@posthog/icons'
+
+const termsClasses = cntl`
+  full-terms
+  grid
+  grid-cols-1
+  md:grid-cols-2
+  max-w-6xl
+  px-4
+  lg:px-8
+  mx-auto
+  mt-12
+  [&div]:p-4
+  [&>div:nth-child(even)]:border-l
+  [&>div:nth-child(even)]:border-light
+  dark:[&>div:nth-child(even)]:border-dark
+  [&>div:nth-child(odd)]:pr-8
+  [&>div:nth-child(even)]:pl-8
+  [&>div:nth-child(odd)_p]:text-[15px]
+  [&>div:nth-child(even)_p]:text-lg
+`
+
+const OrrickLogo = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 125 125">
+        <g clipPath="url(#a)">
+            <path
+                fill="url(#b)"
+                d="M75.18 112a50.286 50.286 0 0 1-36.3-15.68 41.995 41.995 0 0 0 43.486 3.032A42 42 0 0 0 105.12 62.17a53.94 53.94 0 0 0-41-52.43 54.69 54.69 0 0 0-13.07-1.65 53.88 53.88 0 0 0-34.07 12.1 62.17 62.17 0 0 1 108 42 49.883 49.883 0 0 1-49.82 49.82"
+            />
+            <path
+                fill="url(#c)"
+                d="M62.83 124.32A62.288 62.288 0 0 1 .66 62.57a3 3 0 0 0 0-.43c.01-.14.01-.28 0-.42a50.35 50.35 0 0 1 50.39-49.66c4.082.014 8.146.531 12.1 1.54a50.13 50.13 0 0 1 25 14.89 41.819 41.819 0 0 0-66.54 29.38c-.1 1.26-.21 2.72-.22 4.33-.01 1.61.12 3 .22 4.19a53.48 53.48 0 0 0 41.61 48.19A54.853 54.853 0 0 0 75.37 116a53.52 53.52 0 0 0 32.83-11.35 62.23 62.23 0 0 1-45.37 19.67Z"
+            />
+        </g>
+        <defs>
+            <linearGradient id="b" x1="70.98" x2="70.98" y1="0" y2="112" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#B9CE94" />
+                <stop offset=".3" stopColor="#ACC37E" />
+                <stop offset=".7" stopColor="#7A9C48" />
+                <stop offset="1" stopColor="#6B813A" />
+            </linearGradient>
+            <linearGradient id="c" x1=".66" x2="108.2" y1="68.23" y2="68.23" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#7A9C48" />
+                <stop offset=".7" stopColor="#4E5B30" />
+            </linearGradient>
+            <clipPath id="a">
+                <path fill="#fff" d="M0 0h125v125H0z" />
+            </clipPath>
+        </defs>
+    </svg>
+)
 
 function Terms() {
+    const [headers, setHeaders] = useState([])
+
+    useEffect(() => {
+        const fullTerms = document.querySelector('.full-terms')
+        const h2s = fullTerms.querySelectorAll(':nth-child(odd) h2')
+        setHeaders(Array.from(h2s))
+    }, [])
+
     const Tweet = ({ children, lastTweet = false }) => (
         <div
             className={`max-w-xl bg-white rounded-md shadow-md p-4 mb-8 relative ${
@@ -16,11 +76,13 @@ function Terms() {
             }`}
         >
             <div className="flex items-center space-x-4">
-                <img
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
-                    alt='James ("Veg"/"JC") Hawkins'
-                    className="w-12 h-12 rounded-full bg-accent"
-                />
+                <div className="rounded-full bg-accent w-12 h-12 overflow-hidden">
+                    <StaticImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
+                        alt='James ("Veg"/"JC") Hawkins'
+                        className="w-12 h-12"
+                    />
+                </div>
                 <div>
                     <div className="text-lg font-semibold leading-tight">James Hawkins</div>
                     <div className="text-gray-500 text-sm">
@@ -96,25 +158,6 @@ function Terms() {
                             <span>Like</span>
                         </button>
                     </DontClickButton>
-                    <DontClickButton>
-                        <button className="dont-click flex items-center space-x-1 hover:text-purple-500">
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 4v16h16V4H4z"
-                                ></path>
-                            </svg>
-                            <span>Share</span>
-                        </button>
-                    </DontClickButton>
                 </div>
             </div>
         </div>
@@ -154,36 +197,45 @@ function Terms() {
                     </p>
 
                     <p className="mb-2">
-                        Here's the gist in a series of something that you can probably skim while driving.
+                        Here's the gist in a series of something that you can probably skim while driving. (Or 💩.)
                     </p>
 
                     <h3 className="text-2xl pt-8">Summary of our terms</h3>
 
-                    <p className="bg-accent dark:bg-accent-dark p-4 rounded font-serif mb-8 border border-light dark:border-dark">
-                        <strong className="text-xl">Important legal notice</strong> from our "friends" at{' '}
+                    <p className="bg-white dark:bg-accent-dark p-8 rounded font-serif mb-8 border-2 border-red dark:border-yellow shadow-xl">
+                        <strong className="text-xl">Semi-important legal notice</strong> from our "friends" at
+                        <OrrickLogo className="h-6 inline-block relative -top-0.5 mx-1" />
                         <Tooltip
                             content={() => (
-                                <>
-                                    <p className="max-w-sm !mb-0 !pb-0">
-                                        "They're expensive, but we haven't gotten sued yet."
-                                    </p>
-                                    <p className="mb-0">- James Hawkins</p>
-                                </>
+                                <div className="flex gap-3">
+                                    <div className="rounded-full bg-accent w-12 h-12 overflow-hidden">
+                                        <StaticImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
+                                            alt='James ("Veg"/"JC") Hawkins'
+                                            className="w-12 h-12"
+                                        />
+                                    </div>
+                                    <div>
+                                        <p className="max-w-sm !mb-0 !pb-0">
+                                            <em>"They're expensive, but we haven't gotten sued yet!"</em>
+                                        </p>
+                                        <p className="mb-0">
+                                            <span className="font-semibold">James Hawkins</span>{' '}
+                                            <span className="text-xs opacity-70">CEO &amp; Co-founder</span>
+                                        </p>
+                                    </div>
+                                </div>
                             )}
                             placement="top"
                             className="[&_button]:cursor-auto"
                         >
-                            <span className="border-b border-dashed border-dark/50 dark:border-dark pb-0.5 mb-1 inline-block">
+                            <span className="border-b border-dashed border-dark/50 dark:border-dark inline-block !leading-tight">
                                 Orrick
                             </span>
                         </Tooltip>
-                        :
-                        <br />
-                        <div className="text-xs mb-4">
-                            (Serif font for emphasis of how important this disclaimer is)
-                        </div>
+                        :<div className="text-xs mb-4">(Serif font demonstrates how important this disclaimer is)</div>
                         The following is not legal advice. It is a summary of PostHog's terms. Please read{' '}
-                        <Link href="#">the full terms of service</Link> and don't rely on 160 characters of "terms" at a
+                        <Link href="#">the full terms of service</Link> and don't rely on 140 characters of "terms" at a
                         time.
                     </p>
 
@@ -260,11 +312,11 @@ function Terms() {
                         </Link>
                     </Tweet>
 
-                    <h2 id="tldrgmbpi" className="!text-4xl pt-8 b-1">
+                    <h2 id="tldrgmbpi" className="!text-4xl pt-8 mb-1">
                         The full terms (but still easy to understand)
                     </h2>
-                    <p className="opacity-75">
-                        Enjoy our simple descriptions of each paragraph, inspired by{' '}
+                    <p className="text-opacity-75">
+                        Enjoy our simple descriptions of each paragraph, inspired by the geniuses at{' '}
                         <Link href="https://500px.com/terms" externalNoIcon>
                             500px
                         </Link>
@@ -272,36 +324,52 @@ function Terms() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 max-w-6xl mx-auto mt-12 divide-x divide-light dark:divide-dark [&div]:p-4  [&_:nth-child(1n+2)]:pr-8 [&_:nth-child(2n+2)]:pl-8">
+                <div className="px-4">
+                    <ol className="table-of-contents max-w-2xl mx-auto bg-accent dark:bg-accent-dark rounded p-8 list-none flex flex-col gap-2">
+                        {headers.map((header, index) => (
+                            <li key={index}>
+                                <SmoothScrollLink
+                                    to={header.id}
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-60}
+                                    className="group cursor-pointer top-16 md:top-24 lg:top-32"
+                                >
+                                    {header.innerText}
+                                    <IconArrowRightDown className="size-4 inline-block ml-1 opacity-30 group-hover:opacity-100 text-primary dark:text-primary-dark" />
+                                </SmoothScrollLink>
+                            </li>
+                        ))}
+                    </ol>
+                </div>
+
+                <div className={termsClasses}>
                     <div>
-                        <h3>The real terms</h3>
+                        <h3>The full terms</h3>
                     </div>
                     <div>
-                        <h3>Simplfied </h3>
+                        <h3>What it means</h3>
                     </div>
                     <div>
                         <p>
                             These terms apply to any Customer on PostHog Cloud. Separate terms for users of PostHog FOSS
                             can be found here:&nbsp;
-                            <a href="https://github.com/PostHog/posthog-foss/blob/master/LICENSE">
+                            <Link href="https://github.com/PostHog/posthog-foss/blob/master/LICENSE" external>
                                 https://github.com/PostHog/posthog-foss/blob/master/LICENSE
-                            </a>
+                            </Link>
                         </p>
-                        <br />
                         <p>
                             By signing up to PostHog Cloud, you and any entity that you represent ("Customer") are
                             unconditionally consenting to be bound by and are becoming a party to these PostHog
                             Subscription Terms ("Agreement") as of the date of Customer's first download of the licensed
                             materials (the "effective date").&nbsp;
                         </p>
-                        <br />
                         <p>
                             Customer's continued use of the software or any licensed materials provided by PostHog,
                             Inc., trading as PostHog ("PostHog") (or one of its affiliates and/or subsidiaries, as
                             specified on an order form or quote), shall also constitute assent to the terms of this
                             agreement.&nbsp;
                         </p>
-                        <br />
                         <p>
                             If these terms are considered an offer, acceptance is expressly limited to these terms. If
                             you are executing this agreement on behalf of an organization, you represent that you have
@@ -311,12 +379,14 @@ function Terms() {
                     <div>
                         <p>
                             By signing into PostHog, you agree to all these terms. See our&nbsp;
-                            <a href="https://github.com/PostHog/posthog-foss/blob/master/LICENSE">separate terms</a>
+                            <Link href="https://github.com/PostHog/posthog-foss/blob/master/LICENSE" external>
+                                separate terms
+                            </Link>
                             &nbsp;if you’re self-hosting the open source edition.
                         </p>
                     </div>
                     <div>
-                        <h2>1. License and support</h2>
+                        <h2 id="license">1. License and support</h2>
                         <p>
                             1.1 Subject to the terms and conditions of this Agreement, PostHog hereby grants to Customer
                             and its Affiliates (as defined below) a limited, non-exclusive, non-transferable,
@@ -336,7 +406,6 @@ function Terms() {
                             compliance with this Agreement, and with a valid PostHog Cloud subscription for the correct
                             level of usage.&nbsp;
                         </p>
-                        <br />
                         <p>
                             The Software and Other PostHog Materials are collectively referred to herein as the
                             “Licensed Materials.” “Affiliate” means any entity(ies) controlling, controlled by, and/or
@@ -346,17 +415,15 @@ function Terms() {
                             agents or consultants thereof) with access to the Licensed Materials hereunder.
                         </p>
                     </div>
-                    <div>
+                    <div className="pt-10">
                         <p>
                             You can use PostHog with the features defined in your chosen plan. You can also use our docs
                             and tutorials to help you.
                         </p>
-                        <br />
                         <p>
                             You can make pull requests on Github to help us make changes, but we own the rights to any
                             modifications.
                         </p>
-                        <br />
                         <p>
                             We will also continue to improve the product and make changes that enhance your experience
                             as a user.&nbsp;
@@ -368,7 +435,6 @@ function Terms() {
                             Licensed Materials as set forth on the 'Pricing' page, for the support plan selected and
                             paid for by Customer.&nbsp;
                         </p>
-                        <br />
                         <p>
                             Notwithstanding anything to the contrary, in the event that Customer does not reasonably
                             comply with written specifications or instructions from PostHog’s service engineers
@@ -380,7 +446,6 @@ function Terms() {
                     </div>
                     <div>
                         <p>We’ll provide support as outlined in your product plan.</p>
-                        <br />
                         <p>
                             We can close a support ticket if you fail to respond to a request from one of our engineers
                             within 15 days.
@@ -399,7 +464,7 @@ function Terms() {
                         </p>
                     </div>
                     <div>
-                        <h2>2. Restrictions and responsibilities</h2>
+                        <h2 id="restrictions">2. Restrictions and responsibilities</h2>
                         <p>
                             2.1 Except as expressly authorized in Section 1.1, Customer will not, and will not permit
                             any third party to: use the Licensed Materials for any purpose other than as specifically
@@ -427,11 +492,11 @@ function Terms() {
                             circumvention programs).
                         </p>
                     </div>
-                    <div>
-                        <p>
+                    <div className="pt-10">
+                        <p className="mb-2">
                             <strong>You can’t:</strong>
                         </p>
-                        <ul className="pb-8">
+                        <ul className="pb-4 [&_p]:mb-0">
                             <li>
                                 <p>Let other companies use your PostHog instance.</p>
                             </li>
@@ -465,7 +530,6 @@ function Terms() {
                             only designated employees of Customer have access to any administrative functions of the
                             Licensed Materials.&nbsp;
                         </p>
-                        <br />
                         <p>
                             Customer shall maintain during the term of this Agreement and through the end of the third
                             year after the date on which the final payment is made under this Agreement, books, records,
@@ -482,15 +546,11 @@ function Terms() {
                     </div>
                     <div>
                         <p>You need to work with us on some things, like creating passwords or answering emails.</p>
-                        <br />
                         <p>
                             If we think you’ve done any of the above naughty things, you need to allow us to check on
                             that.
                         </p>
-                        <br />
                         <p>We reserve the right to check if you’ve underpaid, and ask you to pay if you have.</p>
-                        <br />
-                        <br />
                     </div>
                     <div>
                         <p>
@@ -506,7 +566,7 @@ function Terms() {
                         </p>
                     </div>
                     <div>
-                        <h2>3. Confidentiality</h2>
+                        <h2 id="confidentiality">3. Confidentiality</h2>
                         <p>
                             3.1 Each party (the “Receiving Party”) understands that the other party (the “Disclosing
                             Party”) has disclosed or may disclose information relating to the Disclosing Party’s
@@ -515,7 +575,7 @@ function Terms() {
                             Proprietary Information.
                         </p>
                     </div>
-                    <div>
+                    <div className="pt-10">
                         <p>
                             You might tell us secret stuff you don’t want other people to know, and we might do the same
                             back.&nbsp;
@@ -531,7 +591,6 @@ function Terms() {
                             event will a party apply less than reasonable precautions to protect such Proprietary
                             Information.&nbsp;
                         </p>
-                        <br />
                         <p>
                             The Disclosing Party agrees that the foregoing will not apply with respect to any
                             information that the Receiving Party can document (a) is or becomes generally available to
@@ -540,7 +599,6 @@ function Terms() {
                             disclosed to it without restriction by a third party, or (d) was independently developed
                             without use of any Proprietary Information of the Disclosing Party.&nbsp;
                         </p>
-                        <br />
                         <p>
                             Nothing in this Agreement will prevent the Receiving Party from disclosing Proprietary
                             Information pursuant to any judicial or governmental order, provided that the Receiving
@@ -557,13 +615,11 @@ function Terms() {
                             We both agree not to tell anybody else about these things, unless it was already obvious –
                             we all share some stuff on the internet, right?&nbsp;
                         </p>
-                        <br />
                         <p>
                             We should try hard to make sure we keep the secrets safe and take extra steps to do that. We
                             both agree that if anybody official, like a judge or the government, asks to see anything
                             you want kept secret, that we let the other person know before we share.&nbsp;
                         </p>
-                        <br />
                         <p>
                             Hopefully it’s obvious that Jeff Bezos doesn’t count – well, AWS anyway, Jeff’s too busy on
                             a boat to care.&nbsp;
@@ -601,7 +657,7 @@ function Terms() {
                         </p>
                     </div>
                     <div>
-                        <h2>4. Intellectual property rights</h2>
+                        <h2 id="ip">4. Intellectual property rights</h2>
                         <p>
                             4.1 Except as expressly set forth herein, PostHog alone (and its licensors, where
                             applicable) will retain all intellectual property rights relating to the Licensed Materials
@@ -612,7 +668,7 @@ function Terms() {
                             intellectual property rights.
                         </p>
                     </div>
-                    <div>
+                    <div className="pt-10">
                         <p>Please do not copy PostHog or any of our stuff, pretty please.&nbsp;</p>
                     </div>
                     <div>
@@ -631,11 +687,13 @@ function Terms() {
                     </div>
                     <div>
                         <p>Please respect our copyright and brand.&nbsp;</p>
-                        <br />
                         <p>
-                            Oh, and pleeeeeease don’t copy our website. We love that you like it, but it is an important
-                            part of our brand. If you need help, get in touch and we’ll happily share some advice.
-                            &nbsp;🙏
+                            Oh, and{' '}
+                            <strong className="text-gradient bg-[length:180%_100%]">
+                                pleeeeeease don’t copy our website.
+                            </strong>{' '}
+                            We love that you like it, but it is an important part of our brand. If you need help, get in
+                            touch and we’ll happily share some advice. &nbsp;🙏
                         </p>
                     </div>
                     <div>
@@ -689,7 +747,7 @@ function Terms() {
                         </p>
                     </div>
                     <div>
-                        <h2>5. Payment of fees</h2>
+                        <h2 id="payment">5. Payment of fees</h2>
                         <p>
                             5.1 Customer will pay PostHog the then applicable fees described in the Order Form or Quote
                             for the Licensed Materials in accordance with the terms therein (the “Fees”). If Customer’s
@@ -705,22 +763,19 @@ function Terms() {
                             billed Customer incorrectly, Customer must contact PostHog no later than 60 days after the
                             closing date on the first billing statement in which the error or problem appeared, in order
                             to receive an adjustment or credit. Inquiries should be directed to Company’s customer
-                            support department (support@posthog.com).
+                            success department (sales@posthog.com).
                         </p>
                     </div>
-                    <div>
+                    <div className="pt-10">
                         <p>You will pay for using PostHog on time – usually via credit card.</p>
-                        <br />
                         <p>
                             If we’re going to increase prices, we need to give you 30 days notice, giving you the chance
                             to cancel with us.
                         </p>
-                        <br />
                         <p>
                             If we reduce our prices, which does happen (I know, crazy right!) we can do that
                             immediately, so you feel the benefit asap.
                         </p>
-                        <br />
                         <p>If you think we’ve billed you incorrectly, let us know within 60 days so we can sort it.</p>
                     </div>
                     <div>
@@ -760,8 +815,8 @@ function Terms() {
                         <p>
                             All our prices are without sales tax. Hey, terms and conditions can be pretty boring so,
                             Well done on reading these thoroughly, &nbsp;as a reward please&nbsp;
-                            <a href="http://merch.posthog.com">claim a free legalhog sticker</a>&nbsp;from our&nbsp;
-                            <a href="http://merch.posthog.com">merch store</a>
+                            <Link href="/merch">claim a free legalhog sticker</Link>&nbsp;from our&nbsp;
+                            <Link href="/merch">merch store</Link>
                         </p>
                     </div>
                     <div>
@@ -779,7 +834,7 @@ function Terms() {
                         </p>
                     </div>
                     <div>
-                        <h2>6. Termination</h2>
+                        <h2 id="termination">6. Termination</h2>
                         <p>
                             6.1 This Agreement shall continue until terminated in accordance with this Section 6. Either
                             party may terminate this Agreement upon 30 days’ written notice to the other party hereto in
@@ -787,7 +842,7 @@ function Terms() {
                             Materials.
                         </p>
                     </div>
-                    <div>
+                    <div className="pt-10">
                         <p>
                             Your contract with PostHog runs until either you cancel it, or PostHog does. You can do this
                             in the app, or just email us
@@ -836,7 +891,7 @@ function Terms() {
                         </p>
                     </div>
                     <div>
-                        <h2>7. Warranty; Customer Software Security</h2>
+                        <h2 id="warranty">7. Warranty; Customer Software Security</h2>
                         <p>
                             PostHog represents and warrants that (i) it has all rights and licenses necessary for it to
                             perform its obligations hereunder, and (ii) it will not knowingly include, in any PostHog
@@ -854,14 +909,14 @@ function Terms() {
                             exclusive remedy for such noncompliance.
                         </p>
                     </div>
-                    <div>
+                    <div className="pt-10">
                         <p>
                             PostHog promises we own all the rights to sell you PostHog and using it won’t cause you any
                             damage.&nbsp;
                         </p>
                     </div>
                     <div>
-                        <h2>8. Warranty Disclaimer</h2>
+                        <h2 id="disclaimer">8. Warranty Disclaimer</h2>
                         <p>
                             EXCEPT AS EXPRESSLY STATED HEREIN, THE LICENSED MATERIALS, SOFTWARE AND POSTHOG PROPRIETARY
                             INFORMATION AND ANYTHING PROVIDED IN CONNECTION WITH THIS AGREEMENT ARE PROVIDED “AS-IS,”
@@ -870,11 +925,11 @@ function Terms() {
                             MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
                         </p>
                     </div>
-                    <div>
-                        <p>Woah, if we have to shout then it must be important. You should read this carefully.</p>
+                    <div className="pt-10">
+                        <p>Whoa, if we have to shout then it must be important. You should read this carefully.</p>
                     </div>
                     <div>
-                        <h2>9. Limitation of liability</h2>
+                        <h2 id="liability">9. Limitation of liability</h2>
                         <p>
                             EXCEPT WITH RESPECT TO BREACH(ES) OF SECTION 1.1 AND/OR 2.1, IN NO EVENT WILL EITHER PARTY
                             OR THEIR LICENSORS BE LIABLE FOR ANY INDIRECT, PUNITIVE, INCIDENTAL, SPECIAL, OR
@@ -893,11 +948,11 @@ function Terms() {
                             LIMITED REMEDY.
                         </p>
                     </div>
-                    <div>
+                    <div className="pt-10">
                         <p>ALL CAPS AGAIN, we’ll get out of the way here. 👀</p>
                     </div>
                     <div>
-                        <h2>11. Miscellaneous</h2>
+                        <h2 id="misc">11. Miscellaneous</h2>
                         <p>
                             If any provision of this Agreement is found to be unenforceable or invalid, that provision
                             will be limited or eliminated to the minimum extent necessary so that this Agreement will
@@ -925,20 +980,18 @@ function Terms() {
                             arising from or related to the subject matter of this Agreement.
                         </p>
                     </div>
-                    <div>
+                    <div className="pt-10">
                         <p>
                             If something goes wrong then this is what happens, also some other general legal
                             stuff.&nbsp;
                         </p>
-                        <br />
-                        <br />
                         <p>
                             The agreement will be covered by the laws of California as this is where PostHog is
                             based.&nbsp;
                         </p>
                     </div>
-                    <div>
-                        <h2>12. Data privacy</h2>
+                    <div className="pb-12">
+                        <h2 id="privacy">12. Data privacy</h2>
                         <p>
                             Customer shall ensure that any and all information or data, including without limitation,
                             personal data, used by Customer in connection with the Agreement (“Customer Data”) is
@@ -956,31 +1009,20 @@ function Terms() {
                             Regulation). We may enter into a GDPR Data Processing Agreement with certain Cloud clients,
                             depending on the nature of the installation, how data is being processed, and where it is
                             stored. Our standard form agreement can be viewed&nbsp;
-                            <a href="https://docs.google.com/document/d/1xfpP1SCFoI1qSKM6rEt9VqRLRUEXiKj9_0Tvv2mP928/edit?usp=sharing">
-                                here
-                            </a>
-                            .
+                            <Link href="/dpa">here</Link>.
                         </p>
                     </div>
-                    <div>
+                    <div className="pt-10">
                         <p>
                             PostHog is committed to data privacy and covers all the main data privacy regulations,
                             especially GDPR.
                         </p>
-                        <br />
                         <p>
-                            We can sign a DPA if you need one. We make it super easy for you to self-serve a completed
-                            DPA,&nbsp;<a href="https://posthog.com/privacy">check it out.</a>
+                            We can sign a DPA if you need one. We make it super easy for you to{' '}
+                            <Link href="/dpa">self-serve a completed DPA</Link>.*
                         </p>
-                    </div>
-                    <div>
-                        <br />
-                    </div>
-                    <div>
-                        <p>
-                            Well done on making it to the end of our terms, as a reward please&nbsp;
-                            <a href="http://merch.posthog.com">claim a free legalhog sticker</a>&nbsp;from our&nbsp;
-                            <a href="http://merch.posthog.com">merch store</a>.&nbsp;
+                        <p className="!text-base">
+                            *It's the most fun you'll ever have signing a DPA - <em>guaranteed</em>.
                         </p>
                     </div>
                 </div>
