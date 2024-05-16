@@ -71,9 +71,9 @@ function Terms() {
 
     const Tweet = ({ children, lastTweet = false }) => (
         <div
-            className={`max-w-xl bg-white rounded-md shadow-md p-4 mb-8 relative ${
+            className={`max-w-xl bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${
                 !lastTweet &&
-                'after:absolute after:w-px after:bg-border after:top-full after:-bottom-4 after:h-12 after:left-9'
+                'after:absolute after:w-px after:bg-border dark:after:bg-border-dark after:top-full after:-bottom-4 after:h-12 after:left-9'
             }`}
         >
             <div className="flex items-center space-x-4">
@@ -205,7 +205,7 @@ function Terms() {
 
                     <p className="bg-white dark:bg-accent-dark p-8 rounded font-serif mb-8 border-2 border-red dark:border-yellow shadow-xl">
                         <strong className="text-xl">Semi-important legal notice</strong> from our "friends" at
-                        <OrrickLogo className="h-6 inline-block relative -top-0.5 mx-1" />
+                        <OrrickLogo className="h-6 inline-block relative -top-0.5 ml-2 mr-1" />
                         <Tooltip
                             content={() => (
                                 <div className="flex gap-3">
@@ -220,8 +220,9 @@ function Terms() {
                                         <p className="max-w-sm !mb-0 !pb-0">
                                             <em>"They're expensive, but we haven't gotten sued yet!"</em>
                                         </p>
-                                        <p className="mb-0">
-                                            <span className="font-semibold">James Hawkins</span>{' '}
+                                        <p className="mb-0 leading-tight">
+                                            <span className="font-semibold">James Hawkins</span>
+                                            <br />
                                             <span className="text-xs opacity-70">CEO &amp; Co-founder</span>
                                         </p>
                                     </div>
@@ -250,18 +251,16 @@ function Terms() {
                     </p>
 
                     <Tweet>
-                        When you join PostHog Cloud, you're agreeing to our rules. If you're signing up for your
+                        When you join PostHog Cloud, you’re agreeing to our terms. If you’re signing up for your
                         company, make sure your boss is okay with it.
                     </Tweet>
 
                     <Tweet>
-                        We let you use and change our special tool for your projects, but remember, it still belongs to
-                        us, even if you make changes.
+                        We love it when you contribute to improving PostHog, but any changes you make belong to us.
                     </Tweet>
 
                     <Tweet>
-                        Use our special tool properly and follow the rules. No sneaky stuff like hacking or spreading
-                        viruses.
+                        Use our tool properly and follow the rules. No sneaky stuff like hacking, or spreading viruses.
                     </Tweet>
 
                     <Tweet>
@@ -279,31 +278,18 @@ function Terms() {
                     </Tweet>
 
                     <Tweet>
-                        Both you and we need to keep each other’s secrets safe. We can share general info about how our
-                        tool is used, but we won't say it's you without asking first.
+                        Both of us (you and PostHog) need to keep each other’s secrets safe. We can share general info
+                        about how our tool is used, but we’ll never share secrets without asking you first.
                     </Tweet>
 
                     <Tweet>
-                        We keep all the rights to our special tool and any ideas you give us. Don’t remove any of our
-                        labels or notices from it.
+                        We keep all the rights to our tool and any ideas you give us. Don’t remove any of our labels or
+                        notices from it.
                     </Tweet>
 
                     <Tweet>
-                        Pay the fees based on your Order Form or Quote. If you use more than you paid for, there will be
-                        extra charges. Not paying can stop the service, and you’re responsible for any taxes.
-                    </Tweet>
-
-                    <Tweet>
-                        Either of us can end this agreement with 30 days' notice. It can also end for serious
-                        rule-breaking or financial problems.
-                    </Tweet>
-
-                    <Tweet>Our special tool is provided "as-is," with no extra promises or guarantees.</Tweet>
-
-                    <Tweet>
-                        Neither of us will be responsible for indirect or big damages. The maximum responsibility is
-                        either $1,000 or the amount you paid in the last year, whichever is higher, except for certain
-                        rule-breaking.
+                        If you use more than you paid for, there will be extra charges. Not paying can stop the service,
+                        and you’re responsible for any taxes.
                     </Tweet>
 
                     <Tweet lastTweet={true}>
@@ -332,7 +318,7 @@ function Terms() {
                 </div>
 
                 <div className="px-4">
-                    <ol className="table-of-contents max-w-2xl mx-auto bg-accent dark:bg-accent-dark rounded p-8 list-none flex flex-col gap-2">
+                    <ol className="table-of-contents max-w-2xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 list-none flex flex-col gap-2">
                         <li className="text-sm opacity-70">Table of contents</li>
                         {headers.map((header, index) => (
                             <li key={index}>
@@ -344,7 +330,7 @@ function Terms() {
                                     className="group cursor-pointer top-16 md:top-24 lg:top-32"
                                 >
                                     {header.innerText}
-                                    <IconArrowRightDown className="size-4 inline-block ml-1 opacity-30 group-hover:opacity-100 text-primary dark:text-primary-dark" />
+                                    <IconArrowRightDown className="size-4 inline-block ml-1 opacity-30 group-hover:opacity-100 dark:group-hover:opacity-70 text-primary dark:text-primary-dark" />
                                 </SmoothScrollLink>
                             </li>
                         ))}
@@ -362,7 +348,7 @@ function Terms() {
                         <p>
                             These terms apply to any Customer on PostHog Cloud. Separate terms for users of PostHog FOSS
                             can be found here:&nbsp;
-                            <Link href="https://github.com/PostHog/posthog-foss/blob/master/LICENSE" external>
+                            <Link href="https://github.com/PostHog/posthog-foss/blob/master/LICENSE" externalNoIcon>
                                 https://github.com/PostHog/posthog-foss/blob/master/LICENSE
                             </Link>
                         </p>
