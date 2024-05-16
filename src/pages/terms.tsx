@@ -21,13 +21,34 @@ const termsClasses = cntl`
   mx-auto
   mt-12
   [&div]:p-4
-  [&>div:nth-child(even)]:border-l
-  [&>div:nth-child(even)]:border-light
+  [&>div:nth-child(even)]:relative
+  [&>div:nth-child(even)]:before:relative
+  md:[&>div:nth-child(even)]:before:hidden
+  [&>div:nth-child(even)]:before:text-sm
+  [&>div:nth-child(even)]:before:-top-2
+  [&>div:nth-child(even)]:before:pb-2
+  [&>div:nth-child(even)]:before:opacity-60
+  [&>div:nth-child(even)]:before:uppercase
+  [&>div:nth-child(even)]:before:font-bold
+  [&>div:nth-child(even)]:before:content-['What_it_means']
+  [&>div:nth-child(even)>p]:border-l-4
+  md:[&>div:nth-child(even)>p]:border-l-0
+  [&>div:nth-child(even)>p]:border-light
+  [&>div:nth-child(even)>p]:pl-3
+  [&>div:nth-child(even)>ul]:border-l-4
+  md:[&>div:nth-child(even)>ul]:border-l-0
+  [&>div:nth-child(even)>ul]:border-light
+  [&>div:nth-child(even)>ul]:pl-3
+  [&>div:nth-child(even)_li]:ml-4
   dark:[&>div:nth-child(even)]:border-dark
+  md:[&>div:nth-child(even)]:border-l
   [&>div:nth-child(odd)]:pr-8
-  [&>div:nth-child(even)]:pl-8
+  md:[&>div:nth-child(even)>p]:pl-0
+  md:[&>div:nth-child(even)]:pl-8
+  md:[&>div:nth-child(even)]:border-light
+  dark:md:[&>div:nth-child(even)]:border-dark
   [&>div:nth-child(odd)_p]:text-[15px]
-  [&>div:nth-child(even)_p]:text-lg
+  [&>div:nth-child(even)>p]:text-lg
 `
 
 const OrrickLogo = ({ className }) => (
@@ -188,10 +209,15 @@ function Terms() {
                 image={`/images/dp.png`}
             />
             <div>
-                <div className="max-w-2xl mx-auto py-8">
-                    <h1 className="text-5xl text-center">Terms, PostHog style</h1>
+                <div className="max-w-2xl mx-auto py-8 px-4 md:px-8">
+                    <h1 className="text-5xl text-center">
+                        Terms,{' '}
+                        <span className="whitespace-nowrap text-red dark:text-yellow">
+                            <em>PostHog style</em>
+                        </span>
+                    </h1>
 
-                    <p className="mt-2 text-lg font-semibold mb-2 text-center">
+                    <p className="mt-2 text-lg font-semibold mb-2 text-center text-balance">
                         The internet has wrecked our attention span. <em>(Thanks, Zuck!)</em>
                     </p>
 
@@ -308,7 +334,7 @@ function Terms() {
                     <h2 id="full-terms" className="!text-4xl pt-8 mb-1 text-center">
                         The full terms (but still easy to understand)
                     </h2>
-                    <p className="mb-0 text-center">
+                    <p className="mb-0 text-center text-balance">
                         <span className="opacity-75">
                             Enjoy our simple descriptions of each paragraph, inspired by the geniuses at
                         </span>{' '}
@@ -341,10 +367,13 @@ function Terms() {
 
                 <div className={termsClasses}>
                     <div>
-                        <h3>The full terms</h3>
+                        <h3 className="mb-1">The full terms</h3>
+                        <p className="text-sm opacity-75 md:hidden">
+                            (with handy summaries at the end of each section)
+                        </p>
                     </div>
-                    <div>
-                        <h3>What it means</h3>
+                    <div className="hidden md:block">
+                        <h3 className="hidden md:block">What it means</h3>
                     </div>
                     <div>
                         <p>
@@ -411,7 +440,7 @@ function Terms() {
                             agents or consultants thereof) with access to the Licensed Materials hereunder.
                         </p>
                     </div>
-                    <div className="pt-10">
+                    <div className="md:pt-10">
                         <p>
                             You can use PostHog with the features defined in your chosen plan. You can also use our docs
                             and tutorials to help you.
@@ -488,8 +517,8 @@ function Terms() {
                             circumvention programs).
                         </p>
                     </div>
-                    <div className="pt-10">
-                        <p className="mb-2">
+                    <div className="md:pt-10">
+                        <p className="mb-0 pb-2">
                             <strong>You can’t:</strong>
                         </p>
                         <ul className="pb-4 [&_p]:mb-0">
@@ -571,7 +600,7 @@ function Terms() {
                             Proprietary Information.
                         </p>
                     </div>
-                    <div className="pt-10">
+                    <div className="md:pt-10">
                         <p>
                             You might tell us secret stuff you don’t want other people to know, and we might do the same
                             back.&nbsp;
@@ -664,7 +693,7 @@ function Terms() {
                             intellectual property rights.
                         </p>
                     </div>
-                    <div className="pt-10">
+                    <div className="md:pt-10">
                         <p>Please do not copy PostHog or any of our stuff, pretty please.&nbsp;</p>
                     </div>
                     <div>
@@ -762,7 +791,7 @@ function Terms() {
                             success department (sales@posthog.com).
                         </p>
                     </div>
-                    <div className="pt-10">
+                    <div className="md:pt-10">
                         <p>You will pay for using PostHog on time – usually via credit card.</p>
                         <p>
                             If we’re going to increase prices, we need to give you 30 days notice, giving you the chance
@@ -838,7 +867,7 @@ function Terms() {
                             Materials.
                         </p>
                     </div>
-                    <div className="pt-10">
+                    <div className="md:pt-10">
                         <p>
                             Your contract with PostHog runs until either you cancel it, or PostHog does. You can do this
                             in the app, or just email us
@@ -905,7 +934,7 @@ function Terms() {
                             exclusive remedy for such noncompliance.
                         </p>
                     </div>
-                    <div className="pt-10">
+                    <div className="md:pt-10">
                         <p>
                             PostHog promises we own all the rights to sell you PostHog and using it won’t cause you any
                             damage.&nbsp;
@@ -921,7 +950,7 @@ function Terms() {
                             MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
                         </p>
                     </div>
-                    <div className="pt-10">
+                    <div className="md:pt-10">
                         <p>Whoa, if we have to shout then it must be important. You should read this carefully.</p>
                     </div>
                     <div>
@@ -944,7 +973,7 @@ function Terms() {
                             LIMITED REMEDY.
                         </p>
                     </div>
-                    <div className="pt-10">
+                    <div className="md:pt-10">
                         <p>ALL CAPS AGAIN, we’ll get out of the way here. 👀</p>
                     </div>
                     <div>
@@ -976,7 +1005,7 @@ function Terms() {
                             arising from or related to the subject matter of this Agreement.
                         </p>
                     </div>
-                    <div className="pt-10">
+                    <div className="md:pt-10">
                         <p>
                             If something goes wrong then this is what happens, also some other general legal
                             stuff.&nbsp;
@@ -1008,7 +1037,7 @@ function Terms() {
                             <Link href="/dpa">here</Link>.
                         </p>
                     </div>
-                    <div className="pt-10">
+                    <div className="md:pt-10">
                         <p>
                             PostHog is committed to data privacy and covers all the main data privacy regulations,
                             especially GDPR.
