@@ -486,7 +486,7 @@ function DpaGenerator() {
                                                 </li>
                                                 <li>
                                                     <p className="text-[15px] mb-0">
-                                                        Sign and send to fraser@posthog.com for counter-signature.
+                                                        Sign and send to fraser@posthog.com for counter-signature
                                                     </p>
                                                 </li>
                                             </ol>
@@ -496,15 +496,15 @@ function DpaGenerator() {
                                                 copy. 👇
                                             </p>
 
-                                            <div className="my-2 pb-2 border border-light dark:border-dark rounded overflow-hidden">
+                                            <div className="my-2 border border-light dark:border-dark rounded overflow-hidden">
                                                 <StaticImage
                                                     src="../images/dpa/print-settings.png"
                                                     alt="Print settings"
                                                     placeholder="blurred"
                                                     className="dark:rounded"
                                                     objectFit="contain"
-                                                    width={636}
-                                                    height={137}
+                                                    width={362}
+                                                    height={92}
                                                 />
                                             </div>
                                         </>
