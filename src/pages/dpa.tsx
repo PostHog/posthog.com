@@ -194,20 +194,13 @@ function DpaGenerator() {
         setSupervisoryAuthority('')
     }
 
-    const scrollToElement = (elementId: string) => {
-        const element = document.getElementById(elementId)
-        element.scrollIntoView({ behavior: 'smooth' })
-
-        const offset = 100
-        // if (window.innerWidth <= 640) { // Tailwind's sm breakpoint
-        //     offset = 57; // Tailwind's 4 (1rem) in pixels
-        // } else if (window.innerWidth <= 767) { // Tailwind's md breakpoint
-        //     offset = 57; // Tailwind's 6 (1.5rem) in pixels
-        // } else { // Tailwind's lg and above breakpoints
-        //     offset = 108; // Tailwind's 8 (2rem) in pixels
-        // }
-
-        window.scrollBy(0, -offset)
+    const handleInputChange = (e) => {
+        setMode(e.target.value)
+        const top =
+            window.scrollY +
+            document.querySelector('#page')?.getBoundingClientRect().top -
+            document.querySelector('header')?.getBoundingClientRect().height
+        window.scrollTo({ top })
     }
 
     return (
@@ -462,10 +455,7 @@ function DpaGenerator() {
                                         name="mode"
                                         value="pretty"
                                         className="absolute left-1 top-1"
-                                        onChange={(e) => {
-                                            setMode(e.target.value)
-                                            scrollToElement('page')
-                                        }}
+                                        onChange={handleInputChange}
                                         checked={mode === 'pretty'}
                                     />
                                     <label className="font-semibold leading-tight block pb-1" htmlFor="pretty">
@@ -482,10 +472,7 @@ function DpaGenerator() {
                                         name="mode"
                                         value="lawyer"
                                         className="absolute left-1 top-1"
-                                        onChange={(e) => {
-                                            setMode(e.target.value)
-                                            scrollToElement('page')
-                                        }}
+                                        onChange={handleInputChange}
                                     />
                                     <label className="font-semibold" htmlFor="lawyer">
                                         Your lawyer's favorite version
@@ -502,10 +489,7 @@ function DpaGenerator() {
                                         name="mode"
                                         className="absolute left-1 top-1"
                                         value="fairytale"
-                                        onChange={(e) => {
-                                            setMode(e.target.value)
-                                            scrollToElement('page')
-                                        }}
+                                        onChange={handleInputChange}
                                     />
                                     <label className="font-semibold" htmlFor="fairytale">
                                         Fairytale
@@ -520,10 +504,7 @@ function DpaGenerator() {
                                         name="mode"
                                         value="rap"
                                         className="absolute left-1 top-1"
-                                        onChange={(e) => {
-                                            setMode(e.target.value)
-                                            scrollToElement('page')
-                                        }}
+                                        onChange={handleInputChange}
                                     />
                                     <label className="font-semibold" htmlFor="rap">
                                         Eminem edition
@@ -546,7 +527,7 @@ function DpaGenerator() {
                     id="page"
                     className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 border-y md:border-y-0 border-light dark:border-dark md:shadow-xl print:shadow-none rounded relative"
                 >
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light dark:border-dark -mx-8 -mt-4 mb-8 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light dark:border-dark -mx-8 -mt-4 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
                         <div className="text-lg font-bold">Preview</div>
                         <Tooltip
                             content={() => (
@@ -617,7 +598,7 @@ function DpaGenerator() {
                     </div>
 
                     <div className={`${mode === 'fairytale' ? 'block' : 'hidden'}`}>
-                        <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 -mt-8 border-t border-light">
+                        <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 border-t border-light">
                             <strong>Notice:</strong> While this version is a great way to understand what the DPA says,
                             we don't recommend sending this version to the lawyers.
                         </div>
@@ -865,7 +846,7 @@ function DpaGenerator() {
                     </div>
 
                     <div className={`${mode === 'rap' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4`}>
-                        <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 -mt-8 border-t border-light">
+                        <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 border-t border-light">
                             <strong>Notice:</strong> We don't recommend this version, unless you know a judge who really
                             likes rap.
                         </div>
