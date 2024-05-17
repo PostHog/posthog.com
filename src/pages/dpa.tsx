@@ -37,8 +37,6 @@ function DpaGenerator() {
     const [isFormComplete, setIsFormComplete] = useState(false)
     const divRef = useRef(null)
 
-    const FloatRight = `float-right -mr-2 md:-mr-20 -my-8 md:-mt-16 w-48 md:w-80`
-    const FloatLeft = `float-left -ml-2 md:-ml-20 -my-8 md:-mt-16 w-48 md:w-80`
     const FloatRight = `float-right -mr-2 @2xl:-mr-20 -my-8 @2xl:-mt-16 w-48 @2xl:w-80`
     const FloatLeft = `float-left -ml-2 @2xl:-ml-20 -my-8 @2xl:-mt-16 w-48 @2xl:w-80`
 
@@ -194,6 +192,22 @@ function DpaGenerator() {
         setRepresentativeEmail('')
         setJurisdiction('')
         setSupervisoryAuthority('')
+    }
+
+    const scrollToElement = (elementId: string) => {
+        const element = document.getElementById(elementId)
+        element.scrollIntoView({ behavior: 'smooth' })
+
+        const offset = 108
+        // if (window.innerWidth <= 640) { // Tailwind's sm breakpoint
+        //     offset = 57; // Tailwind's 4 (1rem) in pixels
+        // } else if (window.innerWidth <= 767) { // Tailwind's md breakpoint
+        //     offset = 57; // Tailwind's 6 (1.5rem) in pixels
+        // } else { // Tailwind's lg and above breakpoints
+        //     offset = 108; // Tailwind's 8 (2rem) in pixels
+        // }
+
+        window.scrollBy(0, -offset)
     }
 
     return (
@@ -440,9 +454,7 @@ function DpaGenerator() {
                                         className="absolute left-1 top-1"
                                         onChange={(e) => {
                                             setMode(e.target.value)
-                                            if (divRef.current) {
-                                                divRef.current.scrollIntoView({ behavior: 'smooth' })
-                                            }
+                                            scrollToElement('page')
                                         }}
                                         checked={mode === 'pretty'}
                                     />
@@ -462,9 +474,7 @@ function DpaGenerator() {
                                         className="absolute left-1 top-1"
                                         onChange={(e) => {
                                             setMode(e.target.value)
-                                            if (divRef.current) {
-                                                divRef.current.scrollIntoView({ behavior: 'smooth' })
-                                            }
+                                            scrollToElement('page')
                                         }}
                                     />
                                     <label className="font-semibold" htmlFor="lawyer">
@@ -484,9 +494,7 @@ function DpaGenerator() {
                                         value="fairytale"
                                         onChange={(e) => {
                                             setMode(e.target.value)
-                                            if (divRef.current) {
-                                                divRef.current.scrollIntoView({ behavior: 'smooth' })
-                                            }
+                                            scrollToElement('page')
                                         }}
                                     />
                                     <label className="font-semibold" htmlFor="fairytale">
@@ -504,9 +512,7 @@ function DpaGenerator() {
                                         className="absolute left-1 top-1"
                                         onChange={(e) => {
                                             setMode(e.target.value)
-                                            if (divRef.current) {
-                                                divRef.current.scrollIntoView({ behavior: 'smooth' })
-                                            }
+                                            scrollToElement('page')
                                         }}
                                     />
                                     <label className="font-semibold" htmlFor="rap">
@@ -527,6 +533,7 @@ function DpaGenerator() {
 
                 <div
                     ref={divRef}
+                    id="page"
                     className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 border-y md:border-y-0 border-light dark:border-dark md:shadow-xl print:shadow-none rounded relative"
                 >
                     <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light dark:border-dark -mx-8 -mt-4 mb-8 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
