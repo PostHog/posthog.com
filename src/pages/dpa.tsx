@@ -262,7 +262,7 @@ function DpaGenerator() {
                                 onChange={(e) => setCompanyName(e.target.value)}
                                 placeholder="Company Name"
                                 id="companyName"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
@@ -275,7 +275,7 @@ function DpaGenerator() {
                                 onChange={(e) => setCompanyAddress(e.target.value)}
                                 placeholder="Company Address"
                                 id="companyAddress"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
@@ -288,7 +288,7 @@ function DpaGenerator() {
                                 onChange={(e) => setYourName(e.target.value)}
                                 placeholder="Representative Name"
                                 id="yourName"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
@@ -301,7 +301,7 @@ function DpaGenerator() {
                                 onChange={(e) => setRepresentativeEmail(e.target.value)}
                                 placeholder="Representative Email"
                                 id="representativeEmail"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
@@ -314,7 +314,7 @@ function DpaGenerator() {
                                 onChange={(e) => setYourTitle(e.target.value)}
                                 placeholder="Representative Title"
                                 id="yourTitle"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
@@ -327,7 +327,7 @@ function DpaGenerator() {
                                 onChange={(e) => setDate(e.target.value)}
                                 placeholder="Date"
                                 id="date"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
@@ -348,7 +348,7 @@ function DpaGenerator() {
                                 onChange={(e) => setJurisdiction(e.target.value)}
                                 placeholder="Jurisdiction"
                                 id="jurisdiction"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
@@ -385,7 +385,7 @@ function DpaGenerator() {
                                 onChange={(e) => setSupervisoryAuthority(e.target.value)}
                                 placeholder="Supervisory Authority"
                                 id="supervisoryAuthority"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50"
+                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
