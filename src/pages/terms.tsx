@@ -349,7 +349,7 @@ function Terms() {
                 </div>
 
                 <div className="px-4">
-                    <ol className="table-of-contents max-w-lg mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 list-none flex flex-col gap-2">
+                    <ol className="table-of-contents max-w-lg mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded py-8 px-4 md:px-8 list-none flex flex-col gap-1 md:gap-2">
                         <li className="text-sm opacity-70">Table of contents</li>
                         {headers.map((header, index) => (
                             <li key={index}>
@@ -358,7 +358,7 @@ function Terms() {
                                     spy={true}
                                     smooth={true}
                                     offset={-108}
-                                    className="group cursor-pointer top-16 md:top-24 lg:top-32"
+                                    className="group cursor-pointer top-16 md:top-24 lg:top-32 text-sm md:text-base"
                                 >
                                     {header.innerText}
                                     <IconArrowRightDown className="size-4 inline-block ml-1 opacity-30 group-hover:opacity-100 dark:group-hover:opacity-70 text-primary dark:text-primary-dark" />

@@ -11,7 +11,7 @@ import { IconArrowRightDown } from '@posthog/icons'
 import { sexyLegalMenu } from '../navs'
 
 const privacyClasses = cntl`
-  full-terms
+  full-privacy-policy
   grid
   grid-cols-1
   md:grid-cols-2
@@ -89,8 +89,8 @@ function Privacy() {
     const [headers, setHeaders] = useState([])
 
     useEffect(() => {
-        const fullTerms = document.querySelector('.full-terms')
-        const h2s = fullTerms.querySelectorAll(':nth-child(odd) h2')
+        const fullPrivacyPolicy = document.querySelector('.full-privacy-policy')
+        const h2s = fullPrivacyPolicy.querySelectorAll(':nth-child(odd) h2')
         setHeaders(Array.from(h2s))
     }, [])
 
@@ -222,18 +222,18 @@ function Privacy() {
                     </h1>
 
                     <p className="mt-2 text-lg font-semibold mb-2 text-center text-balance">
-                        The internet has wrecked our attention span. <em>(Thanks, Zuck!)</em>
+                        The internet has wrecked our attention span. <em>(Thanks, Buzzfeed!)</em>
                     </p>
 
                     <p className="mb-2 text-center">
-                        Long paragraphs are boring. So we decided to summarize our terms for you.
+                        Long paragraphs are boring. So summarized our privacy policy for you.
                     </p>
 
                     <p className="mb-2 text-center">
                         Here's the gist in a familiar format you can probably skim while driving. (Or 💩.)
                     </p>
 
-                    <h3 className="text-2xl pt-8 text-center">Summary of our terms</h3>
+                    <h3 className="text-2xl pt-8 text-center">Summary of our privacy policy</h3>
 
                     <p className="bg-white dark:bg-accent-dark p-8 rounded font-serif mb-8 border-2 border-red dark:border-yellow shadow-xl">
                         <span className="text-xl">
@@ -271,31 +271,34 @@ function Privacy() {
                             :
                         </span>
                         <div className="text-xs mb-4">(Serif font demonstrates how important this disclaimer is)</div>
-                        The following is not legal advice. It is a summary of PostHog's terms. Please read{' '}
+                        The following is only a summary of PostHog's privacy policy. Please read{' '}
                         <SmoothScrollLink
-                            to="full-terms"
+                            to="full-privacy-policy"
                             spy={true}
                             smooth={true}
                             offset={-108}
                             duration={500}
                             className="cursor-pointer"
                         >
-                            the full terms of service
+                            the full privacy policy
                         </SmoothScrollLink>{' '}
-                        and don't rely on 140 characters of "terms" at a time.
+                        and don't rely on 140 characters at a time, especially from someone who isn't a lawyer.
                     </p>
 
                     <Tweet>
-                        When you join PostHog Cloud, you’re agreeing to our terms. If you’re signing up for your
-                        company, make sure your boss is okay with it.
+                        Our privacy policy covers it all – from cookies 🍪 to your data protection rights under your
+                        country’s law 🌍. Read it carefully as using our site means you agree to it!
                     </Tweet>
 
                     <Tweet>
-                        We love it when you contribute to improving PostHog, but any changes you make belong to us.
+                        🔓 As an open-source project, some info you share might be public for our awesome community’s
+                        collaboration. But don't worry, we’re committed to collecting and sharing the minimum amount of
+                        personal info. We're the Data Controller for all this!
                     </Tweet>
 
                     <Tweet>
-                        Use our tool properly and follow the rules. No sneaky stuff like hacking, or spreading viruses.
+                        💻 We collect data like your IP address, device info, and pages/content you view to improve your
+                        experience. No third-party cookies here – we don’t do retargeting ads or creepy tracking!
                     </Tweet>
 
                     <Tweet>
@@ -313,18 +316,27 @@ function Privacy() {
                     </Tweet>
 
                     <Tweet>
-                        Both of us (you and PostHog) need to keep each other’s secrets safe. We can share general info
-                        about how our tool is used, but we’ll never share secrets without asking you first.
+                        🛠️ We gather usage data to analyze and improve our site, but you can opt out. If you share your
+                        info, like name and email, it’s only used for necessary stuff. No sensitive info like genetic
+                        data here, and definitely no under-18 data!
                     </Tweet>
 
                     <Tweet>
-                        We keep all the rights to our tool and any ideas you give us. Don’t remove any of our labels or
-                        notices from it.
+                        🌐 We share your info with service providers to run our site and product – but nothing else.
+                        We’re part of the EU-US Data Privacy Framework, ensuring your data is safe. You can opt out if
+                        you like!
                     </Tweet>
 
                     <Tweet>
-                        If you use more than you paid for, there will be extra charges. Not paying can stop the service,
-                        and you’re responsible for any taxes.
+                        📬 PostHog may contact you occasionally via email with updates, but you can unsubscribe anytime.
+                        We promise not to spam you! Our first-party cookies remember you and improve your experience –
+                        totally safe! We don't use any third-party cookies.
+                    </Tweet>
+
+                    <Tweet>
+                        🚀 We respect your rights and keep your info as long as your account is active. You can delete
+                        it anytime by logging in. Contributions to our projects remain public to keep the integrity of
+                        our open-source code.
                     </Tweet>
 
                     <Tweet lastTweet={true}>
@@ -338,7 +350,7 @@ function Privacy() {
                         </Link>
                     </Tweet>
 
-                    <h2 id="full-terms" className="!text-4xl pt-8 mb-1 text-center">
+                    <h2 id="full-privacy-policy" className="!text-4xl pt-8 mb-1 text-center">
                         The full privacy policy
                         <br />
                         (but still easy to understand)
@@ -355,7 +367,7 @@ function Privacy() {
                 </div>
 
                 <div className="px-4">
-                    <ol className="table-of-contents max-w-lg mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 list-none flex flex-col gap-2">
+                    <ol className="table-of-contents max-w-lg mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded py-8 px-4 md:px-8 list-none flex flex-col gap-1 md:gap-2">
                         <li className="text-sm opacity-70">Table of contents</li>
                         {headers.map((header, index) => (
                             <li key={index}>
@@ -364,7 +376,7 @@ function Privacy() {
                                     spy={true}
                                     smooth={true}
                                     offset={-108}
-                                    className="group cursor-pointer top-16 md:top-24 lg:top-32"
+                                    className="group cursor-pointer top-16 md:top-24 lg:top-32 text-sm md:text-base"
                                 >
                                     {header.innerText}
                                     <IconArrowRightDown className="size-4 inline-block ml-1 opacity-30 group-hover:opacity-100 dark:group-hover:opacity-70 text-primary dark:text-primary-dark" />
@@ -430,7 +442,7 @@ function Privacy() {
                             This policy describes how we use your personal information when you use the PostHog app or
                             visit our website. It includes:
                         </p>
-                        <ul className="pb-4 [&_p]:mb-0 [&_p]:text-lg">
+                        <ul className="pb-4 [&_p]:mb-0 [&_li]:text-lg">
                             <li>Use of cookies</li>
                             <li>How you can access your personal info</li>
                             <li>Your data protection rights under your country’s or state’s law.</li>
@@ -654,10 +666,10 @@ function Privacy() {
                                 research and analytics;
                             </li>
                             <li>
-                                to enforce compliance with our terms of use and other policies or otherwise in
-                                connection with legal claims, compliance, regulatory and investigatory purposes as
-                                necessary (including disclosure of such information in connection with legal process or
-                                litigation); and
+                                to enforce compliance with our <Link href="/terms">terms of use</Link> and other
+                                policies or otherwise in connection with legal claims, compliance, regulatory and
+                                investigatory purposes as necessary (including disclosure of such information in
+                                connection with legal process or litigation); and
                             </li>
                         </ul>
                     </div>
@@ -1136,10 +1148,10 @@ function Privacy() {
                             integrity and nonrepudiation. For example, if you provide your information in connection
                             with a blog post, GitHub issue or comment, we may display that information even if you have
                             deleted your account as we do not automatically delete community posts. Also, as described
-                            in our Terms of Use, if you contribute to a PostHog project and provide your personal
-                            information in connection with that contribution, that information (including your name)
-                            will be embedded and publicly displayed with your contribution and we will not be able to
-                            delete or erase it because doing so would break the project code.
+                            in our <Link href="/terms">Terms of Use</Link>, if you contribute to a PostHog project and
+                            provide your personal information in connection with that contribution, that information
+                            (including your name) will be embedded and publicly displayed with your contribution and we
+                            will not be able to delete or erase it because doing so would break the project code.
                         </p>
                     </div>
                     <div>
