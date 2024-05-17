@@ -637,8 +637,9 @@ function DpaGenerator() {
                                     </span>
                                 </Tooltip>{' '}
                                 sought to ensure that all its precious treasures—bits and bytes of knowledge—were safely
-                                guarded. To do this, they reached out to the guardian wizards of PostHog Inc., a famed
-                                group known for their powerful data spells and secure magic vaults.
+                                guarded. To do this, they reached out to the guardian wizards of{' '}
+                                <strong>PostHog, Inc.</strong>, a famed group known for their powerful data spells and
+                                secure magic vaults.
                             </p>
 
                             <StaticImage
@@ -1149,8 +1150,8 @@ function DpaGenerator() {
                                     </button>
                                 </span>
                             </Tooltip>{' '}
-                            (the “<strong>Company</strong>”) and PostHog Inc. (the “<strong>Processor</strong>”)
-                            (together as the “<strong>Parties</strong>”).
+                            (the “<strong>Company</strong>”) and <strong>PostHog, Inc.</strong> (the “
+                            <strong>Processor</strong>”) (together as the “<strong>Parties</strong>”).
                         </p>
                         <p>WHEREAS</p>
                         <p>(A) The Company acts as a Data Controller.</p>
