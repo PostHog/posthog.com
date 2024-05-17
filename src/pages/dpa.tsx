@@ -205,6 +205,7 @@ function DpaGenerator() {
 
     return (
         <Layout
+            headerBlur={false}
             parent={sexyLegalMenu}
             activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'dpa generator')}
         >
