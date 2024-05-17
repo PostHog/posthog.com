@@ -187,7 +187,7 @@ function processEvents(
             scene.add(curveObject)
             setTimeout(() => {
                 scene.remove(curveObject)
-            }, 1500)
+            }, 250)
         }, Math.random() * 1500)
     })
 }
