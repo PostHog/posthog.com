@@ -33,7 +33,7 @@ function DpaGenerator() {
     const [jurisdiction, setJurisdiction] = useState('')
     const [supervisoryAuthority, setSupervisoryAuthority] = useState('')
     const [mode, setMode] = useState('pretty')
-    const [region, setRegion] = useState('region-us')
+    const [region, setRegion] = useState('region-eu')
     const [isFormComplete, setIsFormComplete] = useState(false)
     const divRef = useRef(null)
 
@@ -198,7 +198,7 @@ function DpaGenerator() {
         const element = document.getElementById(elementId)
         element.scrollIntoView({ behavior: 'smooth' })
 
-        const offset = 108
+        const offset = 0
         // if (window.innerWidth <= 640) { // Tailwind's sm breakpoint
         //     offset = 57; // Tailwind's 4 (1rem) in pixels
         // } else if (window.innerWidth <= 767) { // Tailwind's md breakpoint
@@ -412,22 +412,6 @@ function DpaGenerator() {
                                 <li className="pl-7 relative">
                                     <input
                                         type="radio"
-                                        id="region-us"
-                                        name="region"
-                                        value="region-us"
-                                        className="absolute left-1 top-1"
-                                        onChange={(e) => {
-                                            setRegion(e.target.value)
-                                        }}
-                                        checked={region === 'region-us'}
-                                    />
-                                    <label className="font-semibold" htmlFor="region-us">
-                                        US <span className="opacity-50 text-[15px]">(Virginia)</span>
-                                    </label>
-                                </li>
-                                <li className="pl-7 relative">
-                                    <input
-                                        type="radio"
                                         id="region-eu"
                                         name="region"
                                         value="region-eu"
@@ -435,9 +419,25 @@ function DpaGenerator() {
                                         onChange={(e) => {
                                             setRegion(e.target.value)
                                         }}
+                                        checked={region === 'region-eu'}
                                     />
                                     <label className="font-semibold" htmlFor="region-eu">
                                         EU <span className="opacity-50 text-[15px]">(Frankfurt)</span>
+                                    </label>
+                                </li>
+                                <li className="pl-7 relative">
+                                    <input
+                                        type="radio"
+                                        id="region-us"
+                                        name="region"
+                                        value="region-us"
+                                        className="absolute left-1 top-1"
+                                        onChange={(e) => {
+                                            setRegion(e.target.value)
+                                        }}
+                                    />
+                                    <label className="font-semibold" htmlFor="region-us">
+                                        US <span className="opacity-50 text-[15px]">(Virginia)</span>
                                     </label>
                                 </li>
                             </ul>
@@ -1807,7 +1807,11 @@ function DpaGenerator() {
                         </p>
                     </div>
 
-                    <div className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'}`}>
+                    <div
+                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
+                            mode === 'lawyer' && 'font-serif'
+                        }`}
+                    >
                         <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm [&>div:nth-child(5n+6)]:border-t [&>div:nth-child(5n+6)]:border-light [&>div:nth-child(5n+6)]:pt-8 mb-8">
                             {subprocessors
                                 .filter((subprocessor) => subprocessor.region === region)
