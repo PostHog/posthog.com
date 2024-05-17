@@ -209,8 +209,8 @@ function Privacy() {
         >
             <SEO
                 title="Privacy policy, PostHog style"
-                description="PostHog's thrilling data processing agreement (DPA) generator"
-                image={`/images/dp.png`}
+                description="Privacy policy, but PostHog style"
+                image={`/images/og/privacy.png`}
             />
             <div>
                 <div className="max-w-2xl mx-auto py-8 px-4 md:px-8">

@@ -203,11 +203,7 @@ function Terms() {
             parent={sexyLegalMenu}
             activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'terms')}
         >
-            <SEO
-                title="Terms, PostHog style"
-                description="PostHog's thrilling data processing agreement (DPA) generator"
-                image={`/images/dp.png`}
-            />
+            <SEO title="Terms, PostHog style" description="Terms, PostHog style" image={`/images/og/terms.png`} />
             <div>
                 <div className="max-w-2xl mx-auto py-8 px-4 md:px-8">
                     <h1 className="text-5xl text-center">

@@ -217,8 +217,8 @@ function DpaGenerator() {
         >
             <SEO
                 title="DPA generator"
-                description="PostHog's thrilling data processing agreement (DPA) generator"
-                image={`/images/dpa.png`}
+                description="PostHog's cutting-edge data processing agreement (DPA) generator"
+                image={`/images/og/dpa.png`}
             />
             <header className="print:hidden">
                 <h1 className={`${heading()} overflow-hidden pt-8 pb-1`}>
