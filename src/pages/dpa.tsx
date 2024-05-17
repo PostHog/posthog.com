@@ -361,12 +361,21 @@ function DpaGenerator() {
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="supervisoryAuthority">
                                 <Tooltip
                                     content={() => (
-                                        <p className="max-w-sm !mb-0">
-                                            An individual authority established by its member state to supervise the
-                                            compliance with a specific regulation. In regards to the GDPR, each country
-                                            will have its own authority, for the UK the Information Commissioner's
-                                            Office (ICO) will be the Supervisory Authority.
-                                        </p>
+                                        <>
+                                            <p className="max-w-sm !mb-2">
+                                                An individual authority established by its member state to supervise the
+                                                compliance with a specific regulation.
+                                            </p>
+                                            <p className="max-w-sm !mb-2">
+                                                In regards to the GDPR, each country will have its own authority, for
+                                                the UK the Information Commissioner's Office (ICO) will be the
+                                                Supervisory Authority.
+                                            </p>
+                                            <p className="max-w-sm !mb-0">
+                                                In the United States, this may be the state where you operate or are
+                                                incorporated, or the FTC.
+                                            </p>
+                                        </>
                                     )}
                                     placement="top"
                                     className="[&_button]:cursor-auto"
@@ -391,11 +400,12 @@ function DpaGenerator() {
                                     content={() => (
                                         <>
                                             <p className="max-w-sm !mb-2">
-                                                PostHog offers hosting in the 🇺🇸 United States and the 🇪🇺 European
-                                                Union.
+                                                PostHog offers hosting in the 🇪🇺 European Union and the 🇺🇸 United
+                                                States.
                                             </p>
                                             <p className="max-w-sm !mb-0">
-                                                Select the region you chose when you signed up.
+                                                Select the region you chose when you signed up. (You can find the region
+                                                in the URL when signed into PostHog.)
                                             </p>
                                         </>
                                     )}
