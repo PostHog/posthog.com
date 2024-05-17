@@ -528,7 +528,7 @@ function DpaGenerator() {
                     id="page"
                     className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 border-y md:border-y-0 border-light dark:border-dark md:shadow-xl print:shadow-none rounded relative"
                 >
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light dark:border-dark -mx-8 -mt-4 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
                         <div className="text-lg font-bold">Preview</div>
                         <Tooltip
                             content={() => (
