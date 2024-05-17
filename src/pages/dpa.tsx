@@ -198,7 +198,7 @@ function DpaGenerator() {
         const element = document.getElementById(elementId)
         element.scrollIntoView({ behavior: 'smooth' })
 
-        const offset = 0
+        const offset = 100
         // if (window.innerWidth <= 640) { // Tailwind's sm breakpoint
         //     offset = 57; // Tailwind's 4 (1rem) in pixels
         // } else if (window.innerWidth <= 767) { // Tailwind's md breakpoint
