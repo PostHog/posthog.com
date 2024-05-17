@@ -39,6 +39,8 @@ function DpaGenerator() {
 
     const FloatRight = `float-right -mr-2 md:-mr-20 -my-8 md:-mt-16 w-48 md:w-80`
     const FloatLeft = `float-left -ml-2 md:-ml-20 -my-8 md:-mt-16 w-48 md:w-80`
+    const FloatRight = `float-right -mr-2 @2xl:-mr-20 -my-8 @2xl:-mt-16 w-48 @2xl:w-80`
+    const FloatLeft = `float-left -ml-2 @2xl:-ml-20 -my-8 @2xl:-mt-16 w-48 @2xl:w-80`
 
     const SignatureFields = () => (
         <>
