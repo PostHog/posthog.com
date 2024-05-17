@@ -7,7 +7,6 @@ import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import { IconInfo, IconRevert } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
-import Logo from 'components/Logo'
 import subprocessors from '../data/subprocessors.json'
 import { sexyLegalMenu } from '../navs'
 
@@ -1123,11 +1122,13 @@ function DpaGenerator() {
                             mode === 'lawyer' && 'font-serif'
                         } print:[&>p]:text-sm print:[&_li]:text-sm max-w-3xl mx-auto`}
                     >
-                        <Logo
+                        <div
                             className={`my-8 print:mt-0 print:relative print:-top-2 print:mb-12 ${
                                 mode === 'lawyer' && 'hidden'
                             }`}
-                        />
+                        >
+                            <img width={157} src="/brand/posthog-logo.svg" />
+                        </div>
                         <h2 className="!text-2xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>
                             This Data Processing Agreement (“<strong>Agreement</strong>”) forms part of the Contract for
