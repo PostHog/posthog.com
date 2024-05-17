@@ -200,7 +200,7 @@ function DpaGenerator() {
             window.scrollY +
             document.querySelector('#page')?.getBoundingClientRect().top -
             document.querySelector('header')?.getBoundingClientRect().height
-        window.scrollTo({ top })
+        window.scrollTo({ top, behavior: 'smooth' })
     }
 
     return (
