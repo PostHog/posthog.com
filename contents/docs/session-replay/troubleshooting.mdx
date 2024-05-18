@@ -63,6 +63,11 @@ Access to font at 'https://yourwebsite.com/fonts/MyriadPro-Bold.woff2' from orig
 
 If you see errors like this, please add `app.posthog.com` to the list of permitted domains in your webservers CORS configuration.
 
+### Adjust the crossorigin attribute on stylesheets
+If the `crossorigin` attribute is not set on `link` elements a Chrome specific protection will prevent programmatic access to stylesheet rules (e.g. `stylesheet.cssRules` throws an exception). This means that styles on your site render as expected but they cannot be captured by PostHog in order to recreate the session during playback.
+
+Setting `crossorigin="anonymous"` is the safest value you can set for the parameter as [no user credentials are added to the request](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin#anonymous).
+
 ## Filtering can't find my custom events
 
 The most common reason for this is that you're trying to filter by events that weren't sent by the web SDK. For example, from another tool like Segment or one of our backend SDKs.

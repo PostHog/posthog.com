@@ -1299,6 +1299,45 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Reverse proxy',
+                    url: '/docs/advanced/proxy',
+                    icon: 'IconShare',
+                    children: [
+                        {
+                            name: 'AWS CloudFront',
+                            url: '/docs/advanced/proxy/cloudfront',
+                        },
+                        {
+                            name: 'Caddy',
+                            url: '/docs/advanced/proxy/caddy',
+                        },
+                        {
+                            name: 'Cloudflare',
+                            url: '/docs/advanced/proxy/cloudflare',
+                        },
+                        {
+                            name: 'Netlify',
+                            url: '/docs/advanced/proxy/netlify',
+                        },
+                        {
+                            name: 'Next.js',
+                            url: '/docs/advanced/proxy/nextjs',
+                        },
+                        {
+                            name: 'Next.js Middleware',
+                            url: '/docs/advanced/proxy/nextjs-middleware',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/advanced/proxy/nuxt',
+                        },
+                        {
+                            name: 'Vercel',
+                            url: '/docs/advanced/proxy/vercel',
+                        },
+                    ],
+                },
+                {
                     name: 'Advanced',
                     url: '/docs/advanced/cdp',
                     icon: 'IconAdvanced',
@@ -1306,44 +1345,6 @@ export const docsMenu = {
                         {
                             name: 'Using a CDP',
                             url: '/docs/advanced/cdp',
-                        },
-                        {
-                            name: 'Deploying a reverse proxy',
-                            url: '/docs/advanced/proxy',
-                            children: [
-                                {
-                                    name: 'AWS CloudFront',
-                                    url: '/docs/advanced/proxy/cloudfront',
-                                },
-                                {
-                                    name: 'Caddy',
-                                    url: '/docs/advanced/proxy/caddy',
-                                },
-                                {
-                                    name: 'Cloudflare',
-                                    url: '/docs/advanced/proxy/cloudflare',
-                                },
-                                {
-                                    name: 'Netlify',
-                                    url: '/docs/advanced/proxy/netlify',
-                                },
-                                {
-                                    name: 'Next.js',
-                                    url: '/docs/advanced/proxy/nextjs',
-                                },
-                                {
-                                    name: 'Next.js Middleware',
-                                    url: '/docs/advanced/proxy/nextjs-middleware',
-                                },
-                                {
-                                    name: 'Nuxt',
-                                    url: '/docs/advanced/proxy/nuxt',
-                                },
-                                {
-                                    name: 'Vercel',
-                                    url: '/docs/advanced/proxy/vercel',
-                                },
-                            ],
                         },
                         {
                             name: 'Using Content Security Policies',
