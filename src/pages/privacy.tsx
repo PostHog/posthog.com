@@ -9,6 +9,7 @@ import { Twitter } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import { IconArrowRightDown } from '@posthog/icons'
 import { sexyLegalMenu } from '../navs'
+import Lawyers from 'components/Lawyers'
 
 const privacyClasses = cntl`
   full-privacy-policy
@@ -54,36 +55,6 @@ const privacyClasses = cntl`
   [&>div:nth-child(odd)_li]:text-[15px]
   [&>div:nth-child(even)>p]:text-lg
 `
-
-const OrrickLogo = ({ className }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 125 125">
-        <g clipPath="url(#a)">
-            <path
-                fill="url(#b)"
-                d="M75.18 112a50.286 50.286 0 0 1-36.3-15.68 41.995 41.995 0 0 0 43.486 3.032A42 42 0 0 0 105.12 62.17a53.94 53.94 0 0 0-41-52.43 54.69 54.69 0 0 0-13.07-1.65 53.88 53.88 0 0 0-34.07 12.1 62.17 62.17 0 0 1 108 42 49.883 49.883 0 0 1-49.82 49.82"
-            />
-            <path
-                fill="url(#c)"
-                d="M62.83 124.32A62.288 62.288 0 0 1 .66 62.57a3 3 0 0 0 0-.43c.01-.14.01-.28 0-.42a50.35 50.35 0 0 1 50.39-49.66c4.082.014 8.146.531 12.1 1.54a50.13 50.13 0 0 1 25 14.89 41.819 41.819 0 0 0-66.54 29.38c-.1 1.26-.21 2.72-.22 4.33-.01 1.61.12 3 .22 4.19a53.48 53.48 0 0 0 41.61 48.19A54.853 54.853 0 0 0 75.37 116a53.52 53.52 0 0 0 32.83-11.35 62.23 62.23 0 0 1-45.37 19.67Z"
-            />
-        </g>
-        <defs>
-            <linearGradient id="b" x1="70.98" x2="70.98" y1="0" y2="112" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#B9CE94" />
-                <stop offset=".3" stopColor="#ACC37E" />
-                <stop offset=".7" stopColor="#7A9C48" />
-                <stop offset="1" stopColor="#6B813A" />
-            </linearGradient>
-            <linearGradient id="c" x1=".66" x2="108.2" y1="68.23" y2="68.23" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#7A9C48" />
-                <stop offset=".7" stopColor="#4E5B30" />
-            </linearGradient>
-            <clipPath id="a">
-                <path fill="#fff" d="M0 0h125v125H0z" />
-            </clipPath>
-        </defs>
-    </svg>
-)
 
 function Privacy() {
     const [headers, setHeaders] = useState([])
@@ -237,40 +208,17 @@ function Privacy() {
 
                     <p className="bg-white dark:bg-accent-dark p-8 rounded font-serif mb-8 border-2 border-red dark:border-yellow shadow-xl">
                         <span className="text-xl">
-                            <strong>Semi-important legal notice</strong> from our "friends" at
-                            <OrrickLogo className="h-6 inline-block relative -top-0.5 ml-2 mr-1" />
-                            <Tooltip
-                                content={() => (
-                                    <div className="flex gap-3">
-                                        <div className="rounded-full bg-accent w-12 h-12 overflow-hidden">
-                                            <StaticImage
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
-                                                alt='James ("Veg"/"JC") Hawkins'
-                                                className="w-12 h-12"
-                                            />
-                                        </div>
-                                        <div>
-                                            <p className="max-w-sm !mb-0 !pb-0">
-                                                <em>"They're expensive, but we haven't gotten sued yet!"</em>
-                                            </p>
-                                            <p className="mb-0 leading-tight">
-                                                <span className="font-semibold">James Hawkins</span>
-                                                <br />
-                                                <span className="text-xs opacity-70">CEO &amp; Co-founder</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                )}
-                                placement="top"
-                                className="[&_button]:cursor-auto"
-                            >
-                                <span className="border-b border-dashed border-dark/50 dark:border-dark inline-block !leading-tight">
-                                    Orrick
+                            <strong>Semi-important legal notice</strong> from{' '}
+                            <Tooltip content={() => <Lawyers />} placement="bottom" className="[&_button]:cursor-auto">
+                                <span className="border-b border-dashed border-dark/50 dark:border-light/60 dark:hover:border-light/80 inline-block !leading-tight">
+                                    our over-zealous legal team
                                 </span>
                             </Tooltip>
                             :
                         </span>
-                        <div className="text-xs mb-4">(Serif font demonstrates how important this disclaimer is)</div>
+                        <div className="text-xs mt-2 md:mt-0 mb-4">
+                            (Serif font demonstrates how important this disclaimer is)
+                        </div>
                         The following is only a summary of PostHog's privacy policy. Please read{' '}
                         <SmoothScrollLink
                             to="full-privacy-policy"
