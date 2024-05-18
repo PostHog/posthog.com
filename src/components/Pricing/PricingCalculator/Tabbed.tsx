@@ -67,7 +67,7 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
         <div>
             {activeProduct.name == 'A/B testing' ? (
                 <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-4 py-3 mb-2 text-sm">
-                    A/B testing is currently packaged with Feature flags and shares a free tier and volume pricing.
+                    A/B testing is currently bundled with Feature flags and shares a free tier and volume pricing.
                 </div>
             ) : (
                 <div className="grid grid-cols-8">
