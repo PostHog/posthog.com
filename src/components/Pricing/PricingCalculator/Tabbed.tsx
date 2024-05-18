@@ -36,7 +36,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume }) =>
                     </span>
                 </Tooltip>
             </div>
-            <div className="col-span-3 flex justify-end">
+            <div className="col-span-2 md:col-span-3 flex justify-end">
                 <Toggle
                     checked={checked}
                     onChange={(checked) =>
@@ -51,7 +51,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume }) =>
                     }
                 />
             </div>
-            <div className="col-span-2 text-right">
+            <div className="col-span-3 md:col-span-2 text-right">
                 <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
                     ${checked ? addon?.totalCost.toLocaleString() : 0}
                 </p>
@@ -65,23 +65,30 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
 
     return (
         <div>
-            <div className="grid grid-cols-8">
-                <div className="col-span-6">
-                    <p className="mb-2">
-                        <strong>{calcVolume}</strong> <span className="opacity-70 text-sm">{denomination}/month</span>
-                    </p>
+            {activeProduct.name == 'A/B testing' ? (
+                <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-4 py-3 mb-2 text-sm">
+                    A/B testing is currently packaged with Feature flags and shares a free tier and volume pricing.
                 </div>
-                <div className="col-span-2 text-right pr-3">
-                    <p className="font-semibold mb-0">${calcCost}</p>
+            ) : (
+                <div className="grid grid-cols-8">
+                    <div className="col-span-6">
+                        <p className="mb-2">
+                            <strong>{calcVolume}</strong>{' '}
+                            <span className="opacity-70 text-sm">{denomination}/month</span>
+                        </p>
+                    </div>
+                    <div className="col-span-2 text-right pr-3">
+                        <p className="font-semibold mb-0">${calcCost}</p>
+                    </div>
+                    <div className="col-span-full pr-1.5">{slider}</div>
+                    <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
+                        <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
+                        <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
+                            First {activeProduct.freeLimit} {denomination}s free –&nbsp;<em>every month!</em>
+                        </span>
+                    </div>
                 </div>
-                <div className="col-span-full pr-1.5">{slider}</div>
-                <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
-                    <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
-                    <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                        First {activeProduct.freeLimit} {denomination}s free –&nbsp;<em>every month!</em>
-                    </span>
-                </div>
-            </div>
+            )}
             {activeProduct.addons.length > 0 && (
                 <div className="">
                     <p className="opacity-70 text-sm m-0">Product add-ons</p>
@@ -165,17 +172,19 @@ export default function Tabbed() {
                                 <li key={name}>
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full border border-transparent hover:border-light hover:dark:border-dark click ${
-                                            active
-                                                ? 'font-bold bg-accent dark:bg-accent-dark border-light dark:border-dark'
-                                                : ''
+                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                            active ? 'font-bold bg-accent dark:bg-accent-dark' : 'hover:bg-accent'
                                         }`}
                                     >
                                         <div className="flex items-center space-x-2">
                                             <span>{icon}</span>
                                             <span>{name}</span>
                                         </div>
-                                        <div className="opacity-70 pl-5 md:pl-0">${calcCost}</div>
+                                        {name == 'A/B testing' ? (
+                                            <span className="opacity-25">--</span>
+                                        ) : (
+                                            <div className="opacity-70 pl-5 md:pl-0">${calcCost}</div>
+                                        )}
                                     </button>
                                 </li>
                             )
@@ -185,7 +194,9 @@ export default function Tabbed() {
                 <div className="md:col-span-5">
                     <div className="flex space-x-12 justify-between items-center mb-2">
                         <h3 className="m-0 text-lg">Estimate your price</h3>
-                        <p className="m-0 opacity-70 text-sm font-bold pr-3">Subtotal</p>
+                        {!activeProduct.name == 'A/B testing' && (
+                            <p className="m-0 opacity-70 text-sm font-bold pr-3">Subtotal</p>
+                        )}
                     </div>
 
                     <TabContent addons={productAddons} setAddons={setProductAddons} activeProduct={activeProduct} />
@@ -207,7 +218,7 @@ export default function Tabbed() {
                                         </span>
                                     </Tooltip>
                                 </div>
-                                <div className="flex justify-end col-span-3">
+                                <div className="flex justify-end col-span-2 md:col-span-3">
                                     <Toggle
                                         checked={checked}
                                         onChange={(checked) =>
@@ -222,7 +233,7 @@ export default function Tabbed() {
                                         }
                                     />
                                 </div>
-                                <div className="col-span-2 text-right">
+                                <div className="col-span-3 md:col-span-2 text-right">
                                     <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
                                         ${checked ? platformAddon?.price : 0}
                                     </p>
@@ -233,7 +244,10 @@ export default function Tabbed() {
                 </div>
             </div>
             <div className="flex items-center justify-between p-3 bg-accent dark:bg-accent-dark rounded">
-                <h3 className="m-0 text-[15px]">Estimated total for all products & add-ons</h3>
+                <div>
+                    <h3 className="m-0 text-[15px]">Estimated total</h3>
+                    <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
+                </div>
                 <p className="m-0 font-bold">${totalPrice.toLocaleString()}</p>
             </div>
         </div>
