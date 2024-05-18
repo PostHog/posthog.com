@@ -276,8 +276,8 @@ function Privacy() {
                             to="full-privacy-policy"
                             spy={true}
                             smooth={true}
-                            offset={-108}
-                            duration={500}
+                            offset={-128}
+                            duration={1500}
                             className="cursor-pointer"
                         >
                             the full privacy policy
@@ -349,21 +349,45 @@ function Privacy() {
                             <Twitter className="w-5 h-5 box-border fill-current" />
                         </Link>
                     </Tweet>
+                </div>
 
-                    <h2 id="full-privacy-policy" className="!text-4xl pt-8 mb-1 text-center">
-                        The full privacy policy
-                        <br />
-                        (but still easy to understand)
-                    </h2>
-                    <p className="mb-0 text-center text-balance">
-                        <span className="opacity-75">
-                            Enjoy our simple descriptions of each paragraph, inspired by the geniuses at
-                        </span>{' '}
-                        <Link href="https://500px.com/privacy" externalNoIcon>
-                            500px
-                        </Link>
-                        .
-                    </p>
+                <h2 id="full-privacy-policy" className="text-[2.5rem] mb-4 md:mb-8 px-4 md:text-center">
+                    The full <span className="text-red dark:text-yellow">(but still easy to understand)</span> privacy
+                    policy
+                </h2>
+
+                <div className="px-4">
+                    <div className="max-w-lg mx-auto pb-6">
+                        <p className="mb-2">
+                            For your sanity, we've summarized each paragraph of legalese with plain English.
+                        </p>
+                        <p className="mb-2 text-primary/75 dark:text-primary-dark/75">
+                            (This was inspired by{' '}
+                            <Link href="https://500px.com/privacy" externalNoIcon>
+                                500px
+                            </Link>{' '}
+                            who did it first and deserve full credit! We tried to do it better but we couldn't.)
+                        </p>
+                        <p className="mb-2">
+                            You probably realize this, but the summaries{' '}
+                            <span className="md:hidden">
+                                that display below each section in blockquotes (under the <em>"What it means</em>{' '}
+                                subheaders)
+                            </span>
+                            <span className="hidden md:inline-block">in the right-hand column</span> are solely meant
+                            for your entertainment.
+                        </p>
+                        <p className="mb-2">
+                            The <em>actual</em> privacy policy{' '}
+                            <span className="md:hidden">
+                                is everything <em>not in blockquotes</em>
+                            </span>
+                            <span className="hidden md:inline-block">in the left column</span>.
+                        </p>
+                        <p className="mb-2 text-primary/75 dark:text-primary-dark/75">
+                            (Can you believe we actually had to clarify this?)
+                        </p>
+                    </div>
                 </div>
 
                 <div className="px-4">
@@ -375,7 +399,8 @@ function Privacy() {
                                     to={header.id}
                                     spy={true}
                                     smooth={true}
-                                    offset={-108}
+                                    offset={-128}
+                                    duration={1000}
                                     className="group cursor-pointer top-16 md:top-24 lg:top-32 text-sm md:text-base"
                                 >
                                     {header.innerText}
@@ -388,11 +413,11 @@ function Privacy() {
 
                 <div className={privacyClasses}>
                     <div className="">
-                        <h3 className="mb-1 md:hidden">Privacy policy</h3>
+                        <h3 className="mb-1 text-4xl md:hidden">Privacy policy</h3>
                         <p className="text-sm opacity-75 md:hidden">
                             (with handy summaries at the end of each section)
                         </p>
-                        <h2>
+                        <h2 id="introduction">
                             <strong>Introduction</strong>
                         </h2>
                     </div>
@@ -467,7 +492,7 @@ function Privacy() {
                         </p>
                     </div>
                     <div>
-                        <h2>
+                        <h2 id="data-collection">
                             <strong>What information PostHog collects and why</strong>
                         </h2>
                         <h3>
@@ -594,7 +619,7 @@ function Privacy() {
                         <p>We aggregate the info we collect to analyze usage and improve our website.</p>
                     </div>
                     <div>
-                        <h2>
+                        <h2 id="we-dont-collect">
                             <strong>Information PostHog does not collect</strong>
                         </h2>
                     </div>
@@ -621,7 +646,7 @@ function Privacy() {
                     </div>
 
                     <div>
-                        <h2>
+                        <h2 id="personal-info">
                             <strong>Lawful basis and purposes for processing your personal information</strong>
                         </h2>
                     </div>
@@ -703,7 +728,6 @@ function Privacy() {
                     </div>
                     <div>
                         <p>We always rely on your consent.</p>
-
                         <p>
                             You can withdraw consent at any time following the process in the section below about
                             contacting us.
@@ -711,7 +735,7 @@ function Privacy() {
                     </div>
 
                     <div>
-                        <h2>
+                        <h2 id="personal-information">
                             <strong>How PostHog uses and protects your personal information</strong>
                         </h2>
                         <h3>
@@ -951,7 +975,7 @@ function Privacy() {
                     </div>
 
                     <div>
-                        <h2>
+                        <h2 id="cookies">
                             <strong>Cookies, tracking technologies and Do Not Track</strong>
                         </h2>
                         <h3>
@@ -1020,7 +1044,7 @@ function Privacy() {
                     </div>
 
                     <div>
-                        <h2>
+                        <h2 id="privacy-practices">
                             <strong>Global privacy practices and your rights</strong>
                         </h2>
                     </div>
@@ -1117,7 +1141,7 @@ function Privacy() {
                     </div>
 
                     <div>
-                        <h2>
+                        <h2 id="data-retention">
                             <strong>Data retention and deletion</strong>
                         </h2>
                     </div>

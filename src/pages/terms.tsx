@@ -229,8 +229,7 @@ function Terms() {
 
                     <p className="bg-white dark:bg-accent-dark p-8 rounded font-serif mb-8 border-2 border-red dark:border-yellow shadow-xl">
                         <span className="text-xl">
-                            <strong>Semi-important legal notice</strong> from our "friends" at
-                            <OrrickLogo className="h-6 inline-block relative -top-0.5 ml-2 mr-1" />
+                            <strong>Semi-important legal notice</strong> from{' '}
                             <Tooltip
                                 content={() => (
                                     <div className="flex gap-3">
@@ -256,20 +255,20 @@ function Terms() {
                                 placement="top"
                                 className="[&_button]:cursor-auto"
                             >
-                                <span className="border-b border-dashed border-dark/50 dark:border-dark inline-block !leading-tight">
-                                    Orrick
+                                <span className="border-b border-dashed border-dark/50 dark:border-light/60 dark:hover:border-light/80 inline-block !leading-tight">
+                                    our over-zealous legal team
                                 </span>
                             </Tooltip>
                             :
                         </span>
                         <div className="text-xs mb-4">(Serif font demonstrates how important this disclaimer is)</div>
-                        The following is not legal advice. It is a summary of PostHog's terms. Please read{' '}
+                        The following is not legally binding. It is a summary of PostHog's terms. Please read{' '}
                         <SmoothScrollLink
                             to="full-terms"
                             spy={true}
                             smooth={true}
-                            offset={-108}
-                            duration={500}
+                            offset={-128}
+                            duration={1500}
                             className="cursor-pointer"
                         >
                             the full terms of service
@@ -329,23 +328,48 @@ function Terms() {
                             <Twitter className="w-5 h-5 box-border fill-current" />
                         </Link>
                     </Tweet>
+                </div>
 
-                    <h2 id="full-terms" className="!text-4xl pt-8 mb-1 text-center">
-                        The full terms (but still easy to understand)
-                    </h2>
-                    <p className="mb-0 text-center text-balance">
-                        <span className="opacity-75">
-                            Enjoy our simple descriptions of each paragraph, inspired by the geniuses at
-                        </span>{' '}
-                        <Link href="https://500px.com/terms" externalNoIcon>
-                            500px
-                        </Link>
-                        .
-                    </p>
+                <h2 id="full-terms" className="text-[2.5rem] mb-4 md:mb-8 px-4 md:text-center">
+                    The full <span className="text-red dark:text-yellow">(but still easy to understand)</span> terms
+                </h2>
+
+                <div className="px-4">
+                    <div className="max-w-lg mx-auto pb-6">
+                        <p className="mb-2">
+                            For your sanity, we've summarized each paragraph of legalese with plain English.
+                        </p>
+                        <p className="mb-2 text-primary/75 dark:text-primary-dark/75">
+                            (This was inspired by{' '}
+                            <Link href="https://500px.com/terms" externalNoIcon>
+                                500px
+                            </Link>{' '}
+                            who did it first and deserve full credit! We tried to do it better but we couldn't.)
+                        </p>
+                        <p className="mb-2">
+                            You probably realize this, but the summaries{' '}
+                            <span className="md:hidden">
+                                that display below each section in blockquotes (under the <em>"What it means</em>{' '}
+                                subheaders)
+                            </span>
+                            <span className="hidden md:inline-block">in the right-hand column</span> are solely for your
+                            entertainment and not legally binding.
+                        </p>
+                        <p className="mb-2">
+                            Should you wish to be legally bound to us, please stick with the <em>actual</em> terms{' '}
+                            <span className="md:hidden">
+                                which is everything <em>not in blockquotes</em>
+                            </span>
+                            <span className="hidden md:inline-block">in the left column</span>.
+                        </p>
+                        <p className="mb-2 text-primary/75 dark:text-primary-dark/75">
+                            (Can you believe we actually had to clarify this?)
+                        </p>
+                    </div>
                 </div>
 
                 <div className="px-4">
-                    <ol className="table-of-contents max-w-lg mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded py-8 px-4 md:px-8 list-none flex flex-col gap-1 md:gap-2">
+                    <ol className="table-of-contents max-w-lg mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded py-8 list-none flex flex-col gap-1 md:gap-2">
                         <li className="text-sm opacity-70">Table of contents</li>
                         {headers.map((header, index) => (
                             <li key={index}>
@@ -353,7 +377,8 @@ function Terms() {
                                     to={header.id}
                                     spy={true}
                                     smooth={true}
-                                    offset={-108}
+                                    offset={-128}
+                                    duration={1000}
                                     className="group cursor-pointer top-16 md:top-24 lg:top-32 text-sm md:text-base"
                                 >
                                     {header.innerText}
@@ -366,7 +391,9 @@ function Terms() {
 
                 <div className={termsClasses}>
                     <div>
-                        <h3 className="mb-1">The full terms</h3>
+                        <h2 id="intro" className="mb-1 text-4xl">
+                            The full terms
+                        </h2>
                         <p className="text-sm opacity-75 md:hidden">
                             (with handy summaries at the end of each section)
                         </p>
