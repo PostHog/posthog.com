@@ -143,7 +143,7 @@ const SectionSidebar = ({ children, className = '' }) => (
 
 const SidebarList = ({ children }) => <ul className="flex flex-col gap-1">{children}</ul>
 
-const SidebarListItem = ({ children }) => <li className="leading-snug">{children}</li>
+const SidebarListItem = ({ children }) => <li className="leading-snug text-[15px]">{children}</li>
 
 const Discounts = () => (
     <div className="max-w-sm">
@@ -163,7 +163,7 @@ const Discounts = () => (
             <li className="relative pl-7 pt-4">
                 <IconHandMoney className="size-5 absolute left-0 top-4.5 opacity-50" />
                 <strong>Non-profits</strong>
-                <p className="text-[15px]">
+                <p className="text-[15px] mb-2">
                     Most non-profits are eligible for 50% off. Get in touch through the app after signing up.
                 </p>
             </li>
@@ -225,7 +225,7 @@ const AllAddons = () => {
 
     return (
         <div className="flex flex-col md:flex-row gap-8">
-            <ul className="list-none m-0 p-0 flex-shrink-0 flex flex-row md:flex-col gap-px overflow-x-auto min-w-56">
+            <ul className="list-none m-0 p-0 flex-shrink-0 flex flex-row md:flex-col gap-px overflow-x-auto w-screen max-w-full -mx-4 px-4 min-w-56">
                 {allAddons.map(({ name, icon_key, description }, index) => {
                     const active = activeTab === index
                     const Icon = Icons[icon_key]
@@ -480,7 +480,7 @@ const ProductTabs = ({ billingProducts }) => {
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
                 size="sm"
-                className="overflow-x-auto max-w-screen"
+                className="overflow-x-auto w-screen max-w-full -mx-4 px-4"
                 tabs={products.map(({ name, icon, price, denomination, message }) => ({
                     title: name,
                     subtitle: price ? (
@@ -636,7 +636,7 @@ const PlansTabs = () => {
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
                     size="sm"
-                    className="max-w-screen overflow-x-auto"
+                    className="overflow-x-auto w-screen max-w-full -mx-4 px-4"
                     tabs={plans.map(({ name, description, html }) => ({
                         title: name,
                         subtitle: description,
@@ -676,7 +676,7 @@ const PricingExperiment = ({
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
 
-            <section className="w-screen overflow-x-hidden">
+            <section className="w-screen overflow-x-hidden -mx-4 px-4">
                 <div
                     className={`grid md:grid-cols-2 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
                 >
@@ -752,7 +752,7 @@ const PricingExperiment = ({
                                     <SidebarList>
                                         <SidebarListItem>Only pay for products you use</SidebarListItem>
                                         <SidebarListItem>
-                                            <strong className="bg-yellow/50 italic">
+                                            <strong className="bg-yellow/50 italic inline py-0.5">
                                                 Generous free tier for each product (resets monthly)
                                             </strong>
                                         </SidebarListItem>

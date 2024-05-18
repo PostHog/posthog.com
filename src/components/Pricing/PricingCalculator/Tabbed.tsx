@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import useProducts from '../Products'
 import Tooltip from 'components/Tooltip'
-import { IconInfo } from '@posthog/icons'
+import { IconInfo, IconLightBulb, IconPercentage } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { calculatePrice, pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { useStaticQuery } from 'gatsby'
@@ -27,8 +27,8 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume }) =>
     }, [volume, checked])
 
     return (
-        <div className="grid grid-cols-4 items-center">
-            <div className="flex-grow flex space-x-1 items-center col-span-2">
+        <div className="grid grid-cols-12 items-center">
+            <div className="col-span-7 flex space-x-1 items-center">
                 <p className="m-0 text-sm font-bold">{name}</p>
                 <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
                     <span className="relative">
@@ -36,7 +36,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume }) =>
                     </span>
                 </Tooltip>
             </div>
-            <div className="flex justify-end">
+            <div className="col-span-3 flex justify-end">
                 <Toggle
                     checked={checked}
                     onChange={(checked) =>
@@ -51,8 +51,8 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume }) =>
                     }
                 />
             </div>
-            <div className="flex-shrink-0 col-span-1 text-right">
-                <p className={`font-semibold m-0 ${checked ? '' : 'opacity-50'}`}>
+            <div className="col-span-2 text-right">
+                <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
                     ${checked ? addon?.totalCost.toLocaleString() : 0}
                 </p>
             </div>
@@ -66,19 +66,25 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
     return (
         <div>
             <div className="grid grid-cols-8">
-                <div className="flex-grow col-span-6">
+                <div className="col-span-6">
                     <p className="mb-2">
                         <strong>{calcVolume}</strong> <span className="opacity-70 text-sm">{denomination}/month</span>
                     </p>
-                    <div>{slider}</div>
                 </div>
-                <div className="flex-shrink-0 text-right col-span-2">
-                    <p className="font-semibold">${calcCost}</p>
+                <div className="col-span-2 text-right pr-3">
+                    <p className="font-semibold mb-0">${calcCost}</p>
+                </div>
+                <div className="col-span-full pr-1.5">{slider}</div>
+                <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
+                    <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
+                    <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
+                        First {activeProduct.freeLimit} {denomination}s free –&nbsp;<em>every month!</em>
+                    </span>
                 </div>
             </div>
             {activeProduct.addons.length > 0 && (
-                <div className="mt-12 md:mt-10">
-                    <p className="opacity-70 text-sm m-0 mb-1">Product add-ons</p>
+                <div className="">
+                    <p className="opacity-70 text-sm m-0">Product add-ons</p>
                     <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
                         {activeProduct.addons.map((addon) => {
                             return (
@@ -149,23 +155,23 @@ export default function Tabbed() {
 
     return (
         <div>
-            <div className="grid md:grid-cols-8">
-                <div className="md:col-span-3 pr-6">
-                    <h4 className="mb-2 font-normal text-sm opacity-70">Products</h4>
-                    <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto">
+            <div className="grid md:grid-cols-8 mb-1 md:mb-0">
+                <div className="md:col-span-3 md:pr-6 mb-4 md:mb-0">
+                    <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
+                    <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen max-w-full -mx-4 px-4">
                         {products.map(({ name, icon, calcCost }, index) => {
                             const active = activeTab === index
                             return (
                                 <li key={name}>
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`px-2 py-1.5 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full border border-transparent hover:border-light hover:dark:border-dark click ${
+                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full border border-transparent hover:border-light hover:dark:border-dark click ${
                                             active
                                                 ? 'font-bold bg-accent dark:bg-accent-dark border-light dark:border-dark'
                                                 : ''
                                         }`}
                                     >
-                                        <div className="flex space-x-2">
+                                        <div className="flex items-center space-x-2">
                                             <span>{icon}</span>
                                             <span>{name}</span>
                                         </div>
@@ -177,23 +183,23 @@ export default function Tabbed() {
                     </ul>
                 </div>
                 <div className="md:col-span-5">
-                    <div className="flex space-x-12 justify-between items-center  mb-4">
+                    <div className="flex space-x-12 justify-between items-center mb-2">
                         <h3 className="m-0 text-lg">Estimate your price</h3>
-                        <p className="m-0 opacity-70 text-sm font-bold">Subtotal</p>
+                        <p className="m-0 opacity-70 text-sm font-bold pr-3">Subtotal</p>
                     </div>
 
                     <TabContent addons={productAddons} setAddons={setProductAddons} activeProduct={activeProduct} />
                 </div>
-                <div className="md:col-span-3 pt-2 pb-1 md:py-2 border-t md:border-b border-light dark:border-dark pr-6">
+                <div className="md:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 md:pl-3 md:pr-6 border-t border-light dark:border-dark">
                     <h4 className="m-0 font-normal text-sm opacity-70">Platform add-ons</h4>
                 </div>
-                <div className="md:col-span-5 py-2 border-b md:border-y border-light dark:border-dark">
+                <div className="md:col-span-5 py-2 md:border-t border-light dark:border-dark">
                     {platform.addons.map(({ type, name, description, plans }) => {
                         const platformAddon = platformAddons.find((addon) => addon.type === type)
                         const checked = platformAddon?.checked
                         return (
-                            <div key={type} className="grid grid-cols-4 items-center">
-                                <div className="flex-grow flex space-x-1 items-center col-span-2">
+                            <div key={type} className="grid grid-cols-12 items-center">
+                                <div className="flex space-x-1 items-center col-span-7">
                                     <p className="m-0 text-sm font-bold">{name}</p>
                                     <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
                                         <span className="relative">
@@ -201,7 +207,7 @@ export default function Tabbed() {
                                         </span>
                                     </Tooltip>
                                 </div>
-                                <div className="flex justify-end">
+                                <div className="flex justify-end col-span-3">
                                     <Toggle
                                         checked={checked}
                                         onChange={(checked) =>
@@ -216,8 +222,8 @@ export default function Tabbed() {
                                         }
                                     />
                                 </div>
-                                <div className="flex-shrink-0 col-span-1 text-right">
-                                    <p className={`font-semibold m-0 ${checked ? '' : 'opacity-50'}`}>
+                                <div className="col-span-2 text-right">
+                                    <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
                                         ${checked ? platformAddon?.price : 0}
                                     </p>
                                 </div>
@@ -226,8 +232,8 @@ export default function Tabbed() {
                     })}
                 </div>
             </div>
-            <div className="flex justify-between py-3">
-                <h3 className="m-0 text-base">Estimated total for all products & add-ons</h3>
+            <div className="flex items-center justify-between p-3 bg-accent dark:bg-accent-dark rounded">
+                <h3 className="m-0 text-[15px]">Estimated total for all products & add-ons</h3>
                 <p className="m-0 font-bold">${totalPrice.toLocaleString()}</p>
             </div>
         </div>
