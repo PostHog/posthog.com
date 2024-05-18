@@ -165,7 +165,7 @@ export default function Tabbed() {
             <div className="grid md:grid-cols-8 mb-1 md:mb-0">
                 <div className="md:col-span-3 md:pr-6 mb-4 md:mb-0">
                     <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
-                    <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen max-w-full -mx-4 px-4">
+                    <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4">
                         {products.map(({ name, icon, calcCost }, index) => {
                             const active = activeTab === index
                             return (
@@ -191,7 +191,7 @@ export default function Tabbed() {
                         })}
                     </ul>
                 </div>
-                <div className="md:col-span-5">
+                <div className="md:col-span-5 pl-4 md:pl-0">
                     <div className="flex space-x-12 justify-between items-center mb-2">
                         <h3 className="m-0 text-lg">Estimate your price</h3>
                         {!activeProduct.name == 'A/B testing' && (
@@ -201,10 +201,10 @@ export default function Tabbed() {
 
                     <TabContent addons={productAddons} setAddons={setProductAddons} activeProduct={activeProduct} />
                 </div>
-                <div className="md:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 md:pl-3 md:pr-6 border-t border-light dark:border-dark">
+                <div className="md:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark">
                     <h4 className="m-0 font-normal text-sm opacity-70">Platform add-ons</h4>
                 </div>
-                <div className="md:col-span-5 py-2 md:border-t border-light dark:border-dark">
+                <div className="md:col-span-5 py-2 pl-4 md:pl-0 md:border-t border-light dark:border-dark">
                     {platform.addons.map(({ type, name, description, plans }) => {
                         const platformAddon = platformAddons.find((addon) => addon.type === type)
                         const checked = platformAddon?.checked

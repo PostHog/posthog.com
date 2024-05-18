@@ -225,7 +225,7 @@ const AllAddons = () => {
 
     return (
         <div className="flex flex-col md:flex-row gap-8">
-            <ul className="list-none m-0 p-0 flex-shrink-0 flex flex-row md:flex-col gap-px overflow-x-auto w-screen max-w-full -mx-4 px-4 min-w-56">
+            <ul className="list-none m-0 p-0 flex-shrink-0 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 min-w-56">
                 {allAddons.map(({ name, icon_key, description }, index) => {
                     const active = activeTab === index
                     const Icon = Icons[icon_key]
@@ -480,7 +480,7 @@ const ProductTabs = ({ billingProducts }) => {
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
                 size="sm"
-                className="overflow-x-auto w-screen max-w-full -mx-4 px-4"
+                className="overflow-x-auto w-screen md:w-auto -mx-4 px-4"
                 tabs={products.map(({ name, icon, price, denomination, message }) => ({
                     title: name,
                     subtitle: price ? (
@@ -631,12 +631,12 @@ const PlansTabs = () => {
 
     return (
         <div>
-            <div className="border border-light/50 hover:border-light/100 dark:border-dark/50 hover:dark:border-dark/100 transition-all rounded px-1 py-2">
+            <div className="overflow-x-auto w-screen md:w-auto -mx-4 md:mx-0 px-4 md:px-1">
                 <Tabs
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
                     size="sm"
-                    className="overflow-x-auto w-screen max-w-full -mx-4 px-4"
+                    className="border border-light/50 hover:border-light/100 dark:border-dark/50 hover:dark:border-dark/100 transition-all rounded py-2 w-[fit-content] md:w-full"
                     tabs={plans.map(({ name, description, html }) => ({
                         title: name,
                         subtitle: description,
@@ -676,7 +676,7 @@ const PricingExperiment = ({
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
 
-            <section className="w-screen overflow-x-hidden -mx-4 px-4">
+            <section className="w-screen md:w-auto overflow-x-hidden -mx-4 px-4">
                 <div
                     className={`grid md:grid-cols-2 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
                 >
