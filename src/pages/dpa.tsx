@@ -500,22 +500,17 @@ function DpaGenerator() {
                                 <li className="pl-7 relative">
                                     <input
                                         type="radio"
-                                        id="rap"
+                                        id="tswift"
                                         name="mode"
-                                        value="rap"
+                                        value="tswift"
                                         className="absolute left-1 top-1"
                                         onChange={handleInputChange}
                                     />
-                                    <label className="font-semibold" htmlFor="rap">
-                                        Eminem edition
+                                    <label className="font-semibold" htmlFor="tswift">
+                                        Taylor Swift's version
                                     </label>
                                     <br />
-                                    <div className="block text-sm opacity-75">
-                                        Warning: May contain{' '}
-                                        <span className="border border-black rounded-sm px-1 py-0.5 uppercase text-xs whitespace-nowrap">
-                                            explicit content
-                                        </span>
-                                    </div>
+                                    <div className="block text-sm opacity-75">Sing along while staying compliant</div>
                                 </li>
                             </ul>
                         </div>
@@ -846,15 +841,15 @@ function DpaGenerator() {
                         </div>
                     </div>
 
-                    <div className={`${mode === 'rap' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4`}>
+                    <div className={`${mode === 'tswift' ? 'block' : 'hidden'} [&>p]:text-[15px] pb-4`}>
                         <div className="bg-yellow/25 py-4 px-8 text-sm text-center -mx-8 border-t border-light">
-                            <strong>Notice:</strong> We don't recommend this version, unless you know a judge who really
-                            likes rap.
+                            <strong>Notice:</strong> We don't recommend this version, unless you know a judge who's a
+                            Swiftie.
                         </div>
 
                         <div className="mx-auto max-w-3xl">
-                            <h2 className="pt-8 pb-0">Data Dynasty: The PostHog Pact</h2>
-
+                            <h2 className="pt-8 pb-0">Data Dance</h2>
+                            {/* 
                             <div className="float-right flex flex-col -mr-2 ml-2 md:ml-0 mb-2 mt:mt-0 w-48 md:w-64">
                                 <StaticImage
                                     src="../images/dpa/slim.png"
@@ -867,247 +862,60 @@ function DpaGenerator() {
                                     <p className="pb-0 !mb-0 !text-sm">*If the Real Slim Shady were a hedgehog</p>
                                 </div>
                             </div>
+                             */}
                             <p>
-                                Alright, check this, we're diving into the realm where data's a treasure,
+                                We started with a promise, data in our hands,
                                 <br />
-                                With PostHog Inc. and{' '}
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
-                                            fields
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="relative">
-                                        <button type="button">
-                                            <label
-                                                htmlFor="companyName"
-                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                            >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
-                                            </label>
-                                        </button>
-                                    </span>
-                                </Tooltip>
-                                , teaming up for the measure.
+                                You’re the controller, I’m the one who understands,
                                 <br />
-                                It's like a contract forged in the depths of digital dungeons,
+                                You wanna share your secrets, let me hold the key,
                                 <br />
-                                Securing data flow, yo, this ain't just assumptions.
+                                We’ll keep it all secure, like it’s meant to be.
                             </p>
                             <p>
-                                First up,{' '}
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
-                                            fields
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="relative">
-                                        <button type="button">
-                                            <label
-                                                htmlFor="companyName"
-                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                            >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
-                                            </label>
-                                        </button>
-                                    </span>
-                                </Tooltip>
-                                's the Controller, holding keys to the kingdom,
+                                We’ll follow every rule, every law, every line,
                                 <br />
-                                Handing tasks to PostHog, who process with wisdom.
+                                From the EEA to the Swiss, we’ll keep it fine,
                                 <br />
-                                They're setting up the stage with an Agreement, that's the plan,
+                                No breach of trust, no whispers in the dark,
                                 <br />
-                                Linking it to the Service Contract, like only true pros can.
+                                We’ll protect it all, every little spark.
+                            </p>
+                            <p className="font-bold">
+                                This is our data dance, under moonlit skies,
+                                <br />
+                                With the GDPR watching, we’ll never compromise,
+                                <br />
+                                I’ll be your processor, with a duty so true,
+                                <br />
+                                Every byte, every bit, I’ll handle it for you.
                             </p>
                             <p>
-                                They call it the DPA—Data Processing Agreement,
+                                If there’s a breach, I’ll let you know,
                                 <br />
-                                Laying down the law in every single statement.
+                                In the dead of night, or the morning glow,
                                 <br />
-                                From GDPR to EEA, they keep it tight,
+                                We’ll fix it fast, we’ll make it right,
                                 <br />
-                                Making sure every byte moves right in the night.
+                                Together we’ll stand, in this data fight.
+                            </p>
+                            <p className="font-bold">
+                                This is our data dance, under moonlit skies,
+                                <br />
+                                With the GDPR watching, we’ll never compromise,
+                                <br />
+                                I’ll be your processor, with a duty so true,
+                                <br />
+                                Every byte, every bit, I’ll handle it for you.
                             </p>
                             <p>
-                                Definitions laid out, so everything's clear,
+                                In this digital world, where privacy’s the song,
                                 <br />
-                                No misunderstandings or confusion here.
+                                We’ll keep on dancing, where we both belong,
                                 <br />
-                                "Company Personal Data," that's the treasure they guard,
+                                With every step, we’ll take this vow,
                                 <br />
-                                Processing it right, giving it the highest regard.
-                            </p>
-                            <p>
-                                Now, let's break it down, how PostHog's gonna act,
-                                <br />
-                                With integrity and security, that's a fact.
-                                <br />
-                                Only on instructions, they move the data 'round,
-                                <br />
-                                Bound by laws, where compliance is found.
-                            </p>
-                            <p>
-                                If there’s a breach, PostHog’s on the line,
-                                <br />
-                                To notify{' '}
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
-                                            fields
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="relative">
-                                        <button type="button">
-                                            <label
-                                                htmlFor="companyName"
-                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                            >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
-                                            </label>
-                                        </button>
-                                    </span>
-                                </Tooltip>{' '}
-                                in no time.
-                                <br />
-                                Security's tight, with measures that protect,
-                                <br />
-                                Keeping personal data in check, direct.
-                            </p>
-                            <p>
-                                Subprocessors in the mix, they gotta comply,
-                                <br />
-                                Matching standards set high, reaching the sky.
-                                <br />
-                                If{' '}
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
-                                            fields
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="relative">
-                                        <button type="button">
-                                            <label
-                                                htmlFor="companyName"
-                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                            >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
-                                            </label>
-                                        </button>
-                                    </span>
-                                </Tooltip>{' '}
-                                objects, yo, there's a route to appeal,
-                                <br />
-                                Ensuring every subcontractor keeps it real.
-                            </p>
-                            <p>
-                                Rights of the data subjects, they're front and center,
-                                <br />
-                                PostHog assists{' '}
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
-                                            fields
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="relative">
-                                        <button type="button">
-                                            <label
-                                                htmlFor="companyName"
-                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                            >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
-                                            </label>
-                                        </button>
-                                    </span>
-                                </Tooltip>{' '}
-                                to enter,
-                                <br />
-                                Handling requests, ensuring privacy’s respected,
-                                <br />
-                                Under laws so tight, they're perfectly projected.
-                            </p>
-                            <p>
-                                Audit rights, they got it locked,
-                                <br />
-                                Transparency in actions, securely docked.
-                                <br />
-                                When the service ends, data’s returned or erased,
-                                <br />
-                                No traces left behind, nothing misplaced.
-                            </p>
-                            <p>
-                                Cross-border data flow, yeah, they cover that too,
-                                <br />
-                                With Standard Contractual Clauses in view.
-                                <br />
-                                Legal frameworks ensuring data’s safe transit,
-                                <br />
-                                Over borders, under laws, keeping it legit.
-                            </p>
-                            <p>
-                                In this digital game, the stakes are high,
-                                <br />
-                                But with this Agreement, compliance ain’t no lie.
-                                <br />
-                                So here's to{' '}
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            Fill out the form <span className="md:hidden">at the top</span>
-                                            <span className="hidden md:inline-block">to the left</span> populate these
-                                            fields
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="relative">
-                                        <button type="button">
-                                            <label
-                                                htmlFor="companyName"
-                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                            >
-                                                {companyName ? companyName : '[COMPANY NAME]'}
-                                            </label>
-                                        </button>
-                                    </span>
-                                </Tooltip>{' '}
-                                and PostHog, leaders of the pact,
-                                <br />
-                                Guarding data like treasure, with every detail intact.
-                            </p>
-                            <p>
-                                Yo, this ain’t just business, it's a fortress in rhyme,
-                                <br />
-                                Securing data pathways, through every byte and line.
+                                To protect and cherish, here and now.
                             </p>
                             <div className="pb-16">
                                 <SignatureFields />
