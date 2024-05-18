@@ -135,7 +135,7 @@ const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:p
 
 const SectionSidebar = ({ children, className = '' }) => (
     <div
-        className={`col-span-1 flex flex-col gap-4 border-t md:border-t-0 md:border-l border-light dark:border-dark pt-8 md:pt-0 md:pl-8 ${className}`}
+        className={`col-span-1 flex flex-col gap-4 md:border-l border-light dark:border-dark pt-8 md:pt-0 md:pl-8 ${className}`}
     >
         {children}
     </div>
@@ -636,7 +636,7 @@ const PlansTabs = () => {
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
                     size="sm"
-                    className="overflow-x-auto"
+                    className="max-w-screen overflow-x-auto"
                     tabs={plans.map(({ name, description, html }) => ({
                         title: name,
                         subtitle: description,

@@ -29,8 +29,8 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume }) =>
     return (
         <div className="grid grid-cols-4 items-center">
             <div className="flex-grow flex space-x-1 items-center col-span-2">
-                <p className="m-0 text-sm font-semibold">{name}</p>
-                <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="bottom">
+                <p className="m-0 text-sm font-bold">{name}</p>
+                <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
                     <span className="relative">
                         <IconInfo className="size-5 opacity-70" />
                     </span>
@@ -52,7 +52,9 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume }) =>
                 />
             </div>
             <div className="flex-shrink-0 col-span-1 text-right">
-                <p className="font-bold m-0">${checked ? addon?.totalCost.toLocaleString() : 0}</p>
+                <p className={`font-semibold m-0 ${checked ? '' : 'opacity-50'}`}>
+                    ${checked ? addon?.totalCost.toLocaleString() : 0}
+                </p>
             </div>
         </div>
     )
@@ -71,16 +73,16 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
                     <div>{slider}</div>
                 </div>
                 <div className="flex-shrink-0 text-right col-span-2">
-                    <p className="font-bold text-lg">${calcCost}</p>
+                    <p className="font-semibold">${calcCost}</p>
                 </div>
             </div>
             {activeProduct.addons.length > 0 && (
-                <div className="mt-8">
-                    <p className="opacity-70 text-sm m-0 mb-3">Product add-ons</p>
-                    <ul className="list-none m-0 p-0 space-y-2">
+                <div className="mt-12 md:mt-10">
+                    <p className="opacity-70 text-sm m-0 mb-1">Product add-ons</p>
+                    <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
                         {activeProduct.addons.map((addon) => {
                             return (
-                                <li key={addon.type}>
+                                <li key={addon.type} className="py-2">
                                     <Addon
                                         key={addon.type}
                                         addons={addons}
@@ -147,17 +149,17 @@ export default function Tabbed() {
 
     return (
         <div>
-            <div className="flex flex-col md:flex-row gap-8">
-                <div className="flex-shrink-0 col-span-3 min-w-56">
-                    <h4 className="m-0 mb-4 text-base">Products</h4>
-                    <ul className="list-none m-0 p-0 flex flex-row md:flex-col gap-px overflow-x-auto">
+            <div className="grid md:grid-cols-8">
+                <div className="md:col-span-3 pr-6">
+                    <h4 className="mb-2 font-normal text-sm opacity-70">Products</h4>
+                    <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto">
                         {products.map(({ name, icon, calcCost }, index) => {
                             const active = activeTab === index
                             return (
                                 <li key={name}>
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`px-2 py-1.5 rounded-md font-semibold text-sm flex space-x-2 items-center justify-between w-full border border-transparent hover:border-light hover:dark:border-dark click ${
+                                        className={`px-2 py-1.5 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full border border-transparent hover:border-light hover:dark:border-dark click ${
                                             active
                                                 ? 'font-bold bg-accent dark:bg-accent-dark border-light dark:border-dark'
                                                 : ''
@@ -167,14 +169,14 @@ export default function Tabbed() {
                                             <span>{icon}</span>
                                             <span>{name}</span>
                                         </div>
-                                        <div className="opacity-70">${calcCost}</div>
+                                        <div className="opacity-70 pl-5 md:pl-0">${calcCost}</div>
                                     </button>
                                 </li>
                             )
                         })}
                     </ul>
                 </div>
-                <div className="flex-grow col-span-5">
+                <div className="md:col-span-5">
                     <div className="flex space-x-12 justify-between items-center  mb-4">
                         <h3 className="m-0 text-lg">Estimate your price</h3>
                         <p className="m-0 opacity-70 text-sm font-bold">Subtotal</p>
@@ -182,26 +184,24 @@ export default function Tabbed() {
 
                     <TabContent addons={productAddons} setAddons={setProductAddons} activeProduct={activeProduct} />
                 </div>
-            </div>
-            <div className="grid grid-cols-8 gap-x-8 items-center py-2 my-4 border-y border-border dark:border-dark">
-                <div className="flex-shrink-0 col-span-3">
-                    <h4 className="m-0 font-normal text-[15px] opacity-70">Platform add-ons</h4>
+                <div className="md:col-span-3 pt-2 pb-1 md:py-2 border-t md:border-b border-light dark:border-dark pr-6">
+                    <h4 className="m-0 font-normal text-sm opacity-70">Platform add-ons</h4>
                 </div>
-                <div className="flex-grow col-span-5">
+                <div className="md:col-span-5 py-2 border-b md:border-y border-light dark:border-dark">
                     {platform.addons.map(({ type, name, description, plans }) => {
                         const platformAddon = platformAddons.find((addon) => addon.type === type)
                         const checked = platformAddon?.checked
                         return (
                             <div key={type} className="grid grid-cols-4 items-center">
-                                <div className="flex-grow flex space-x-2 items-center col-span-2">
-                                    <p className="m-0 font-bold">{name}</p>
-                                    <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="bottom">
+                                <div className="flex-grow flex space-x-1 items-center col-span-2">
+                                    <p className="m-0 text-sm font-bold">{name}</p>
+                                    <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
                                         <span className="relative">
                                             <IconInfo className="size-5 opacity-70" />
                                         </span>
                                     </Tooltip>
                                 </div>
-                                <div className="text-right">
+                                <div className="flex justify-end">
                                     <Toggle
                                         checked={checked}
                                         onChange={(checked) =>
@@ -217,14 +217,16 @@ export default function Tabbed() {
                                     />
                                 </div>
                                 <div className="flex-shrink-0 col-span-1 text-right">
-                                    <p className="font-bold text-lg m-0">${checked ? platformAddon?.price : 0}</p>
+                                    <p className={`font-semibold m-0 ${checked ? '' : 'opacity-50'}`}>
+                                        ${checked ? platformAddon?.price : 0}
+                                    </p>
                                 </div>
                             </div>
                         )
                     })}
                 </div>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between py-3">
                 <h3 className="m-0 text-base">Estimated total for all products & add-ons</h3>
                 <p className="m-0 font-bold">${totalPrice.toLocaleString()}</p>
             </div>
