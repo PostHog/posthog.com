@@ -224,8 +224,8 @@ const AllAddons = () => {
     const activeAddon = allAddons[activeTab]
 
     return (
-        <div className="flex space-x-8">
-            <ul className="list-none m-0 p-0 flex-shrink-0">
+        <div className="flex flex-col md:flex-row gap-8">
+            <ul className="list-none m-0 p-0 flex-shrink-0 flex flex-row md:flex-col gap-px overflow-x-auto min-w-56">
                 {allAddons.map(({ name, icon_key, description }, index) => {
                     const active = activeTab === index
                     const Icon = Icons[icon_key]
@@ -233,13 +233,13 @@ const AllAddons = () => {
                         <li key={name}>
                             <button
                                 onClick={() => setActiveTab(index)}
-                                className={`p-2 rounded-md font-bold flex space-x-2 items-center justify-between w-full click ${
-                                    active ? 'bg-accent' : ''
+                                className={`w-full p-2 rounded-md font-bold text-[15px] flex space-x-2 items-center justify-between border border-transparent hover:border-light hover:dark:border-dark click ${
+                                    active ? 'bg-accent dark:bg-accent-dark border-light dark:border-dark' : ''
                                 }`}
                             >
-                                <div className="flex space-x-2">
+                                <div className="flex space-x-2 whitespace-nowrap">
                                     <span>
-                                        <Icon className="w-5" />
+                                        <Icon className="w-5 opacity-75" />
                                     </span>
                                     <span>{name}</span>
                                 </div>
@@ -480,7 +480,7 @@ const ProductTabs = ({ billingProducts }) => {
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
                 size="sm"
-                className="overflow-x-auto"
+                className="overflow-x-auto max-w-screen"
                 tabs={products.map(({ name, icon, price, denomination, message }) => ({
                     title: name,
                     subtitle: price ? (

@@ -28,15 +28,15 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume }) =>
 
     return (
         <div className="grid grid-cols-4 items-center">
-            <div className="flex-grow flex space-x-2 items-center col-span-2">
-                <p className="m-0 font-bold">{name}</p>
+            <div className="flex-grow flex space-x-1 items-center col-span-2">
+                <p className="m-0 text-sm font-semibold">{name}</p>
                 <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="bottom">
                     <span className="relative">
                         <IconInfo className="size-5 opacity-70" />
                     </span>
                 </Tooltip>
             </div>
-            <div>
+            <div className="flex justify-end">
                 <Toggle
                     checked={checked}
                     onChange={(checked) =>
@@ -52,7 +52,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume }) =>
                 />
             </div>
             <div className="flex-shrink-0 col-span-1 text-right">
-                <p className="font-bold text-lg m-0">${checked ? addon?.totalCost.toLocaleString() : 0}</p>
+                <p className="font-bold m-0">${checked ? addon?.totalCost.toLocaleString() : 0}</p>
             </div>
         </div>
     )
@@ -77,7 +77,7 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
             {activeProduct.addons.length > 0 && (
                 <div className="mt-8">
                     <p className="opacity-70 text-sm m-0 mb-3">Product add-ons</p>
-                    <ul className="list-none m-0 p-0 space-y-4">
+                    <ul className="list-none m-0 p-0 space-y-2">
                         {activeProduct.addons.map((addon) => {
                             return (
                                 <li key={addon.type}>
@@ -147,18 +147,20 @@ export default function Tabbed() {
 
     return (
         <div>
-            <div className="grid grid-cols-8 gap-x-8">
-                <div className="flex-shrink-0 col-span-3">
+            <div className="flex flex-col md:flex-row gap-8">
+                <div className="flex-shrink-0 col-span-3 min-w-56">
                     <h4 className="m-0 mb-4 text-base">Products</h4>
-                    <ul className="list-none m-0 p-0">
+                    <ul className="list-none m-0 p-0 flex flex-row md:flex-col gap-px overflow-x-auto">
                         {products.map(({ name, icon, calcCost }, index) => {
                             const active = activeTab === index
                             return (
                                 <li key={name}>
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`p-2 rounded-md font-bold flex space-x-2 items-center justify-between w-full click ${
-                                            active ? 'bg-accent' : ''
+                                        className={`px-2 py-1.5 rounded-md font-semibold text-sm flex space-x-2 items-center justify-between w-full border border-transparent hover:border-light hover:dark:border-dark click ${
+                                            active
+                                                ? 'font-bold bg-accent dark:bg-accent-dark border-light dark:border-dark'
+                                                : ''
                                         }`}
                                     >
                                         <div className="flex space-x-2">
@@ -181,9 +183,9 @@ export default function Tabbed() {
                     <TabContent addons={productAddons} setAddons={setProductAddons} activeProduct={activeProduct} />
                 </div>
             </div>
-            <div className="grid grid-cols-8 gap-x-8 py-2 my-4 border-y border-border dark:border-dark">
+            <div className="grid grid-cols-8 gap-x-8 items-center py-2 my-4 border-y border-border dark:border-dark">
                 <div className="flex-shrink-0 col-span-3">
-                    <h4 className="m-0 text-base opacity-70">Platform add-ons</h4>
+                    <h4 className="m-0 font-normal text-[15px] opacity-70">Platform add-ons</h4>
                 </div>
                 <div className="flex-grow col-span-5">
                     {platform.addons.map(({ type, name, description, plans }) => {
@@ -199,7 +201,7 @@ export default function Tabbed() {
                                         </span>
                                     </Tooltip>
                                 </div>
-                                <div>
+                                <div className="text-right">
                                     <Toggle
                                         checked={checked}
                                         onChange={(checked) =>
