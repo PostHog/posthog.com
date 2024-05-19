@@ -233,11 +233,17 @@ module.exports = {
                     '0%, 100%': { transform: 'scale(1)' },
                     '50%': { transform: 'scale(1.05)' },
                 },
+                reveal: {
+                    '0%': { maxHeight: 0, opacity: 0 },
+                    '50%': { opacity: 1 },
+                    '100%': { maxHeight: '1000px', opacity: 1 },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
                 grow: 'grow 2s linear infinite',
                 'grow-sm': 'grow-sm 3s linear infinite',
+                reveal: 'reveal 1s ease-in-out',
             },
             containers: {
                 '2xs': '16rem',

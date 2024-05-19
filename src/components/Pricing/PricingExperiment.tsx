@@ -141,7 +141,7 @@ const SectionSidebar = ({ children, className = '' }) => (
     </div>
 )
 
-const SidebarList = ({ children }) => <ul className="flex flex-col gap-1">{children}</ul>
+const SidebarList = ({ children }) => <ul className="flex flex-col gap-1 pl-4">{children}</ul>
 
 const SidebarListItem = ({ children }) => <li className="leading-snug text-[15px]">{children}</li>
 
@@ -233,8 +233,8 @@ const AllAddons = () => {
                         <li key={name}>
                             <button
                                 onClick={() => setActiveTab(index)}
-                                className={`w-full p-2 rounded-md font-bold text-[15px] flex space-x-2 items-center justify-between border border-transparent hover:border-light hover:dark:border-dark click ${
-                                    active ? 'bg-accent dark:bg-accent-dark border-light dark:border-dark' : ''
+                                className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                    active ? 'font-bold bg-accent dark:bg-accent-dark' : 'hover:bg-accent'
                                 }`}
                             >
                                 <div className="flex space-x-2 whitespace-nowrap">
@@ -429,7 +429,7 @@ const TabAddons = (props) => {
 
 const TabPA = (props) => {
     return (
-        <div className="flex flex-col md:flex-row gap-8 lg:gap-16">
+        <div className="flex flex-col md:flex-row gap-8 lg:gap-16 animate-reveal border border-light dark:border-dark rounded-md p-4">
             <Pricing {...props} className="flex-shrink-0" />
             <TabAddons addons={props.addons} className="flex-grow" title="Product analytics add-ons" />
         </div>
@@ -480,6 +480,7 @@ const ProductTabs = ({ billingProducts }) => {
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
                 size="sm"
+                type="pricingBreakdown"
                 className="overflow-x-auto w-screen md:w-auto -mx-4 px-4"
                 tabs={products.map(({ name, icon, price, denomination, message }) => ({
                     title: name,
@@ -495,7 +496,7 @@ const ProductTabs = ({ billingProducts }) => {
                 }))}
             />
             {activeTab !== undefined && (
-                <div className="my-8">{tabContent[activeProduct.name]({ ...productData })}</div>
+                <div className="-mt-[2px]">{tabContent[activeProduct.name]({ ...productData })}</div>
             )}
             <div className="text-center mt-4 flex space-x-1 justify-center">
                 {activeTab !== undefined && (
@@ -537,7 +538,14 @@ const PlansTabs = () => {
                         <div>Volume limits</div>
                         <div className="col-span-2">
                             Limited to free monthly allowance{' '}
-                            <Tooltip content={() => <Discounts />} placement="top">
+                            <Tooltip
+                                content={() => (
+                                    <div className="max-w-[250px]">
+                                        Usage is capped at the free tier limits for each product and resets monthly.
+                                    </div>
+                                )}
+                                placement="top"
+                            >
                                 <IconInfo className="size-4 inline-block" />
                             </Tooltip>
                         </div>
@@ -644,7 +652,7 @@ const PlansTabs = () => {
                     }))}
                 />
             </div>
-            {activeTab !== undefined && <div className="my-8">{[activePlan.html]}</div>}
+            {activeTab !== undefined && <div className="py-8">{[activePlan.html]}</div>}
         </div>
     )
 }

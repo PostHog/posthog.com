@@ -16,6 +16,7 @@ export default function Tabs({
     className,
     vertical,
     size = 'lg',
+    pricingBreakdown = false,
 }: {
     tabs: []
     onClick: (tab: Tab[], index: number) => void
@@ -23,11 +24,12 @@ export default function Tabs({
     className?: string
     vertical?: boolean
     size?: 'sm' | 'lg'
+    pricingBreakdown?: boolean
 }): JSX.Element {
     return (
         <ul
-            className={`m-0 p-0 list-none flex ${
-                vertical ? 'space-y-2 md:flex-col' : 'space-x-2 justify-between items-center'
+            className={`list-none m-0 flex flex-row gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 py-0 md:px-6 ${
+                vertical ? 'md:flex-col' : 'justify-between items-center'
             } ${className}`}
         >
             {tabs.map((tab, index) => {
@@ -37,13 +39,13 @@ export default function Tabs({
                         onClick={() => onClick?.(tab, index)}
                         key={`${tab.title}-${index}`}
                         className={`click ${
-                            size === 'sm' ? 'py-1 px-2' : 'py-3 px-4'
-                        } rounded-md hover:bg-accent dark:hover:bg-accent-dark border hover:border-light dark:hover:border-dark ${
-                            vertical ? '' : 'flex-1'
-                        } ${
+                            size === 'sm' ? 'p-2 rounded' : 'py-3 px-4 rounded-md'
+                        } font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                            pricingBreakdown ? '' : ''
+                        } ${vertical ? '' : 'flex-1'} ${
                             active
-                                ? 'bg-accent border-border dark:bg-accent-dark dark:border-dark'
-                                : 'border-transparent'
+                                ? 'font-bold bg-tan dark:bg-dark border border-b-tan dark:border-b-dark border-light dark:border-dark rounded-tl rounded-tr'
+                                : 'hover:bg-accent'
                         }`}
                     >
                         <div className="flex items-start space-x-2">
