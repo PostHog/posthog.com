@@ -47,4 +47,9 @@ export const slideButtons = [
         color: '[#8567FF]',
         placeholderIcon: 'IconDatabase',
     },
+    {
+        title: 'AI engineering',
+        color: '[#000]',
+        placeholderIcon: 'IconAI',
+    },
 ]

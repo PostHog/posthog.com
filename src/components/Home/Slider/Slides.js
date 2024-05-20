@@ -1,4 +1,5 @@
 import {
+    IconArrowRight,
     IconBadge,
     IconBrackets,
     IconBrowser,
@@ -129,11 +130,13 @@ const Slide = ({
                             <Title title={title} />
                             {description && <Description description={description} className={descriptionClasses} />}
                             {additionalText && <>{additionalText}</>}
-                            <FeatureList
-                                features={features}
-                                className={featureListClasses}
-                                featureIconBackground={textColor}
-                            />
+                            {features && (
+                                <FeatureList
+                                    features={features}
+                                    className={featureListClasses}
+                                    featureIconBackground={textColor}
+                                />
+                            )}
                             <CallToAction
                                 href={buttonUrl}
                                 type="custom"
@@ -895,6 +898,139 @@ export const DataWarehouse = () => {
             buttonUrl="/docs/data-warehouse"
             buttonClasses="group !border-white/25 !bg-white/10 md:!w-auto !w-full"
             buttonChildClasses="!bg-[#8567FF] border-white !text-white group-hover:text-white"
+        />
+    )
+}
+
+export const AIEngineering = () => {
+    const { enterpriseMode } = useLayoutData()
+
+    const BrainIcon = () => (
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.5">
+                <path
+                    d="M15.8267 15.0772L25.5518 8.99898C26.3106 8.52472 27.2415 8.41395 28.0905 8.69693L35.0513 11.0172C35.6671 11.2225 36.3329 11.2225 36.9487 11.0172L43.9095 8.69693C44.7585 8.41395 45.6894 8.52472 46.4482 8.99898L56.1733 15.0772C57.0505 15.6254 57.5833 16.5868 57.5833 17.6212V22.1668C57.5833 23.111 58.0279 24.0002 58.7833 24.5668L62.55 27.3918C63.3054 27.9583 63.75 28.8475 63.75 29.7918V39.1251C63.75 40.0694 63.3054 40.9585 62.55 41.5251L58.7833 44.3501C58.0279 44.9167 57.5833 45.8058 57.5833 46.7501V54.379C57.5833 55.4134 57.0505 56.3748 56.1733 56.923L46.4482 63.0012C45.6894 63.4755 44.7585 63.5863 43.9095 63.3033L36.9487 60.983C36.3329 60.7777 35.6671 60.7777 35.0513 60.983L28.0905 63.3033C27.2415 63.5863 26.3106 63.4755 25.5518 63.0012L15.8267 56.923C14.9495 56.3748 14.4167 55.4134 14.4167 54.379V46.7501C14.4167 45.8058 13.9721 44.9167 13.2167 44.3501L9.45 41.5251C8.69458 40.9585 8.25 40.0694 8.25 39.1251V29.7918C8.25 28.8475 8.69458 27.9583 9.45 27.3918L13.2167 24.5668C13.9721 24.0002 14.4167 23.111 14.4167 22.1668V17.6212C14.4167 16.5868 14.9495 15.6254 15.8267 15.0772Z"
+                    stroke="white"
+                    strokeWidth="4.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                />
+                <path
+                    d="M36 12V22.7574C36 23.553 36.3161 24.3161 36.8787 24.8787L45 33M36 60V49.2426C36 48.447 35.6839 47.6839 35.1213 47.1213L27 39"
+                    stroke="white"
+                    strokeWidth="4.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                />
+                <circle
+                    cx="27"
+                    cy="39"
+                    r="3"
+                    stroke="white"
+                    strokeWidth="4.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                />
+                <circle
+                    cx="45"
+                    cy="33"
+                    r="3"
+                    stroke="white"
+                    strokeWidth="4.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                />
+            </g>
+        </svg>
+    )
+
+    const ListSparkleIcon = () => (
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.5">
+                <path
+                    d="M11.25 54.75H21.75M11.25 36H27.75M11.25 17.25H60.75M51 31.5L55.5 40.5L64.5 45L55.5 49.5L51 58.5L46.5 49.5L37.5 45L46.5 40.5L51 31.5Z"
+                    stroke="white"
+                    strokeWidth="4.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                />
+            </g>
+        </svg>
+    )
+
+    return (
+        <Slide
+            containerClasses="!pt-8 mdlg:!py-4 xl:!py-10 md:border-b border-tan/50"
+            bgColor="black"
+            textColor="primary-dark"
+            title="AI engineering"
+            flag="Beta"
+            flagColor="yellow"
+            description="Insights for AI and LLM products"
+            additionalText={
+                <>
+                    <p className="pt-2 mb-2">
+                        Find correlations between AI/LLM development and product usage. Use with other PostHog products
+                        for deeper insights.
+                    </p>
+                    <ul className="mb-2">
+                        <li>Qualitative feedback with Surveys</li>
+                        <li>Insights with Session replay</li>
+                        <li>Roll out model improvements A/B testing</li>
+                    </ul>
+                    <p className="mt-2 mb-3 text-sm border-l-2 border-yellow pl-2">
+                        <Link
+                            href="/customers/elevenlabs"
+                            className="text-red hover:text-red md:text-yellow md:hover:text-yellow"
+                        >
+                            Read how ElevenLabs uses the entire PostHog toolset to build their generative voice AI{' '}
+                            <IconArrowRight className="size-4 inline-block" />
+                        </Link>
+                    </p>
+                </>
+            }
+            imageColumn="relative md:col-span-8"
+            imageClasses="flex-col gap-6 px-8 text-center pb-8 md:pb-0"
+            contentColumn="md:col-span-8"
+            Images={() => {
+                return (
+                    <>
+                        {enterpriseMode ? (
+                            <div className="py-2 pl-2">
+                                <StaticImage src="./images/enterprise-mode/shutterstock_343843886.jpg" alt="" />
+                            </div>
+                        ) : (
+                            <>
+                                <div className="absolute -top-6 md:top-0 right-6 md:right-0">
+                                    <BrainIcon />
+                                </div>
+                                <div className="relative text-sm self-start">
+                                    “How does the LLM feature <br />
+                                    impact my conversion rates”
+                                </div>
+                                <div className="relative text-xl font-bold text-balance left-8">
+                                    “Does interacting with the LLM feature relate to higher retention rates?”
+                                </div>
+                                <div className="relative text-sm -left-6 md:-left-12 xl:left-0">
+                                    “Are there generation latency spikes?”
+                                </div>
+                                <div className="relative font-bold self-end left-4 md:left-0 md:pr-4">
+                                    “What are my LLM costs by <br />
+                                    customer, model, and in total?”
+                                </div>
+                                <div className="absolute bottom-2 md:bottom-0 left-2 md:left-12">
+                                    <ListSparkleIcon />
+                                </div>
+                            </>
+                        )}
+                    </>
+                )
+            }}
+            contentOffset=""
+            buttonLabel="Explore the docs"
+            buttonUrl="/docs/product-analytics/llms"
+            buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
+            buttonChildClasses="!bg-[#fff] border-black/50 !text-black group-hover:text-black"
         />
     )
 }

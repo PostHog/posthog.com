@@ -11,6 +11,7 @@ import {
     DataPipeline,
     DataWarehouse,
     WebAnalytics,
+    AIEngineering,
 } from './Slider/Slides'
 import { Chevron } from 'components/Icons'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
@@ -25,6 +26,7 @@ const slideContents = [
     Surveys,
     DataPipeline,
     DataWarehouse,
+    AIEngineering,
 ]
 
 type SlideButton = {
@@ -64,17 +66,19 @@ const SlideButton = ({ lottieSrc, color, title, index, activeIndex, setActiveInd
                 >
                     <span className="flex space-x-4 items-center group-active:top-[0.5px] group-active:scale-[.98] transition-all">
                         <span className={`w-6 h-6 text-${color} flex justify-center items-center`}>
-                            <DotLottiePlayer
-                                style={{ display: lottieReady ? 'inline-block' : 'none' }}
-                                lottieRef={lottieRef}
-                                src={lottieSrc}
-                                autoplay={active}
-                                onEvent={(event) => {
-                                    if (event === PlayerEvents.Ready) {
-                                        setLottieReady(true)
-                                    }
-                                }}
-                            />
+                            {lottieSrc && (
+                                <DotLottiePlayer
+                                    style={{ display: lottieReady ? 'inline-block' : 'none' }}
+                                    lottieRef={lottieRef}
+                                    src={lottieSrc}
+                                    autoplay={active}
+                                    onEvent={(event) => {
+                                        if (event === PlayerEvents.Ready) {
+                                            setLottieReady(true)
+                                        }
+                                    }}
+                                />
+                            )}
                             {!lottieReady && <Icon />}
                         </span>
                         <p className={`leading-tight text-sm m-0 ${active ? 'font-bold' : 'font-medium opacity/75'}`}>

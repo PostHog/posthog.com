@@ -10,6 +10,7 @@ import {
     DataPipeline,
     DataWarehouse,
     WebAnalytics,
+    AIEngineering,
 } from './Slides'
 import { useInView } from 'react-intersection-observer'
 import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
@@ -22,17 +23,19 @@ const Lottie = ({ lottieRef, src, onEvent, placeholderIcon }) => {
 
     return (
         <>
-            <DotLottiePlayer
-                style={{ display: ready ? 'inline-block' : 'none' }}
-                lottieRef={lottieRef}
-                src={src}
-                onEvent={(event) => {
-                    if (event === PlayerEvents.Ready) {
-                        setReady(true)
-                    }
-                    onEvent?.(event)
-                }}
-            />
+            {src && (
+                <DotLottiePlayer
+                    style={{ display: ready ? 'inline-block' : 'none' }}
+                    lottieRef={lottieRef}
+                    src={src}
+                    onEvent={(event) => {
+                        if (event === PlayerEvents.Ready) {
+                            setReady(true)
+                        }
+                        onEvent?.(event)
+                    }}
+                />
+            )}
             {!ready && <Icon />}
         </>
     )
@@ -119,6 +122,7 @@ const slides = [
     Surveys,
     DataPipeline,
     DataWarehouse,
+    AIEngineering,
 ]
 
 const SlideContainer = ({ children, index, setActiveSlide }) => {
@@ -152,7 +156,7 @@ export default function Slider() {
     return (
         <div className="-mt-8 md:mt-0 hidden md:block">
             <div className="hidden md:block px-4 mdlg:px-8 lg:px-4 xl:px-0">
-                <ul className="m-0 grid grid-cols-8 list-none max-w-full lg:max-w-7xl xl:mx-auto p-0">
+                <ul className="m-0 grid grid-cols-9 list-none max-w-full lg:max-w-7xl xl:mx-auto p-0">
                     {slideButtons.map((slide, index) => {
                         return <SlideButton index={index} activeSlide={activeSlide} key={index} {...slide} />
                     })}
