@@ -103,7 +103,7 @@ Read the [chart type docs](/docs/product-analytics/trends/charts) for a summary 
 
 ### 1. Creating a new trend
 
-To create a new trends insight, navigate to the 'Product analytics' tab in the sidebar, where you can also view a list of all your saved insights. 
+To create a new trends insight, navigate to the ['Product analytics' tab](https://us.posthog.com/insights) in the sidebar, where you can also view a list of all your saved insights. 
 
 Next, click the 'New insight' button in the top right – you can also click the `+` symbol next to 'Product analytics' in the sidebar. 
 
@@ -113,7 +113,7 @@ Trends is the default insight type, so clicking 'New insight' will always create
 
 The default event type is `Pageview`. 
 
-To change the event being tracked, click on the dropdown the dropdown to the right of the <div className="inline-flex items-center justify-center rounded-full border-2 font-semibold" style={{ width: '20px', height: '20px', borderColor: 'rgb(29, 74, 255)', color: 'rgb(29, 74, 255)', backgroundColor: 'rgba(29, 74, 255, 0.15)' }}>A</div> icon.
+To change the event being used, click on the dropdown the dropdown to the right of the <div className="inline-flex items-center justify-center rounded-full border-2 font-semibold" style={{ width: '20px', height: '20px', borderColor: 'rgb(29, 74, 255)', color: 'rgb(29, 74, 255)', backgroundColor: 'rgba(29, 74, 255, 0.15)' }}>A</div> icon.
 
 <ProductScreenshot
     imageLight = {selectEventLight} 
@@ -122,9 +122,9 @@ To change the event being tracked, click on the dropdown the dropdown to the rig
     alt="Selecting our event"
 />
 
-This dropdown allows you to search through all your [events](/docs/data/events) and [actions](/docs/data/actions), and pick which one you would like to plot data from.
+This dropdown enables you to search through all your [events](/docs/data/events) and [actions](/docs/data/actions), and pick which one you would like to plot data from.
 
-We aggregate events by the total number (Total count) by default. Click the dropdown to choose a different metric, such as `Unique users` or `Daily active users`. See the [event and property aggregation docs](/docs/product-analytics/trends/aggregations) for a full breakdown of options.
+We aggregate series by the total number (Total count) by default. Click the dropdown to choose a different metric, such as `Unique users` or `Daily active users`. See the [event and property aggregation docs](/docs/product-analytics/trends/aggregations) for a full breakdown of options.
 
 > **Note:** A dotted line indicated the data for that period is still being collected. If you choose a date range of the last 30 days grouped by week, for example, the week you're currently in would be dotted because the week hasn't ended yet. 
 

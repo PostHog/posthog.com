@@ -29,6 +29,9 @@ Filter groups support `AND` and `OR` operators – i.e. events will be included 
 
 Filters are comprised of three elements, a property, an operation, and a value.
 
+> **Note:** You can also fully customize your filter by writing them as a [HogQL expression](/docs/hogql/expressions). See our tutorial on [using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters) for an example.
+
+
 ### 1. The filter property
 
 **Example: _(Current URL, Browser, etc)_**
@@ -37,9 +40,9 @@ This is the property that you want to filter based on. These properties can be:
 
 -   Properties on the event itself
 -   Properties on the person who sent the event
--   Properties on Groups that this event is a member of _(See [Group analytics](/docs/user-guides/group-analytics))_
+-   Properties on groups that this event is a member of _(see [group analytics](/docs/user-guides/group-analytics))_
 -   Properties on sessions
--   Properties on [Cohorts](/docs/user-guides/cohorts) the user is a member of
+-   Properties on [cohorts](/docs/user-guides/cohorts) the user is a member of
 -   Properties on the HTML element if an event was autocaptured
 
 By default, the dropdown will only show properties that have been seen on a specific event before, but if you instead want to filter based on an unseen property, you can scroll all the way to the bottom of the list and click 'Show X properties that haven't been seen with this event'
@@ -65,9 +68,9 @@ This is what PostHog uses to compare the property value to determine whether an 
 
 ### 3. The comparison value
 
-This is the value that PostHog will compare to the property using the operation you specified. If the operation returns true, then the event will be included in the insight, and if it returns false it will be excluded.
+This is the value that PostHog compares to the property using the operation you specified. If the operation returns true, then the event is included in the insight, and if it returns false it is excluded.
 
-Some operations allow you to pass multiple values to compare against, in which case the event will be included if any of these values return true when compared.
+Some operations allow you to pass multiple values to compare against, in which case the event is included if any of these values return true when compared.
 
 ## Types of filters
 
@@ -117,4 +120,4 @@ This option is useful for excluding events sent from local builds of your produc
     alt="Filtering internal and test users turned on"
 />
 
-Click on the settings icon to customize the filters that are used.
+Click on the settings icon to go to [your project settings](https://us.posthog.com/settings/project#internal-user-filtering) to customize the filters that are used.

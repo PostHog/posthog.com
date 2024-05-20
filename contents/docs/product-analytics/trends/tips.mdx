@@ -16,7 +16,7 @@ export const legendDark = "https://res.cloudinary.com/dmukukwp6/image/upload/pos
 
 ## Using the persons modal
 
-Clicking on a data point in a trends insight opens the persons modal, which shows you a list of users/organizations that performed that event during the selected time period.
+Clicking on a data point in a trends insight opens the persons modal, which shows you a list of users/groups that performed it during the selected time period.
 
 <ProductScreenshot
     imageLight = {personsLight} 
@@ -33,7 +33,7 @@ From this menu, you can:
 
 ## Creating insights in notebooks
 
-You can add all of PostHog's insight types natively in [Notebooks](/docs/notebooks). These include trends, funnels, retention, paths, stickiness, lifecycle, and SQL.
+You can create all of PostHog's insight types natively in [Notebooks](/docs/notebooks). These include trends, funnels, retention, paths, stickiness, lifecycle, and SQL.
 
 Each of them can be completely customized within notebooks like you would in insights. To do this, click the three-line reverse pyramid icon.
 
@@ -50,7 +50,7 @@ You can also add insights from the insights list by clicking, holding, and dragg
 
 You can change the unit of any trends insights, or add custom prefixes/postfixes - e.g. with a prefix of `$`, 123.45 will be displayed as "$123.45".
 
-Units include duration (seconds or miliseconds) and pertentage.
+Units include duration (seconds or milliseconds) and percentage.
 
 <ProductScreenshot
     imageLight = {prefixLight} 
@@ -59,7 +59,7 @@ Units include duration (seconds or miliseconds) and pertentage.
     alt="Unit and prefix options"
 />
 
-To do so, click on 'Options' dropdown next to the chart type and select you want.
+To do so, click on 'Options' dropdown next to the chart type and select the one you want.
 
 <ProductScreenshot
     imageLight = {legendLight} 
@@ -72,7 +72,9 @@ Also under the 'Options' dropdown is the ability to enable values on trends, and
 
 ## View source (Beta)
 
-Insight filters follow a declarative format that you can view and edit. Open the insight editor by clicking on the `{}` icon next to the save insight button and you will see the source for the current insight configuration. Using this editor you can copy-and-paste complete or partial insights and understand what is going on under the hood. We admit this is a bit of a power user feature, but if you're so inclined you might even find it easier to edit insights this way.
+Insight filters follow a declarative format that you can view and edit. To do so, open the insight editor by clicking on the `{}` icon next to the save insight button and you will see the source for the current insight configuration. 
+
+Using this editor you can copy-and-paste complete or partial insights and understand what is going on under the hood. We admit this is a bit of a power user feature, but if you're so inclined you might even find it easier to edit insights this way.
 
 <ProductScreenshot
     imageLight = {insightsSourceLight} 
