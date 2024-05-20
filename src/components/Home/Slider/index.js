@@ -50,6 +50,7 @@ const enterpriseModeProductNames = {
     Surveys: 'Qualitative feedback',
     'Data pipelines': 'CDP/ETL',
     'Data warehouse': 'Secure data vault',
+    'AI engineering': 'Artificial intelligence',
 }
 
 const SlideButton = ({ title, lottieSrc, color, colorDark, label, activeSlide, index, placeholderIcon }) => {

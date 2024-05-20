@@ -65,7 +65,7 @@ const Slide = ({
     return (
         <div className="overflow-hidden flex h-full items-end md:mt-3 mb-2 md:mb-6 mdlg:my-0">
             <div
-                className={`bg-${bgColor} text-${textColor} md:rounded-tl-md md:rounded-tr-md mdlg:text-${textColor} flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full ${containerClasses}`}
+                className={`bg-${bgColor} text-${textColor} md:rounded-tl-md md:rounded-tr-md dark:md:rounded-bl-md dark:md:rounded-br-md mdlg:text-${textColor} flex items-center pt-4 mdlg:pt-0 mdlg:mt-4 w-full ${containerClasses}`}
             >
                 <div className="relative mdlg:grid grid-cols-16 mdlg:gap-2 w-full">
                     <ImageContainer className={imageColumn}>
@@ -960,7 +960,7 @@ export const AIEngineering = () => {
 
     return (
         <Slide
-            containerClasses="!pt-8 mdlg:!py-4 xl:!py-10 md:border-b border-tan/50"
+            containerClasses="!pt-8 mdlg:!py-4 xl:!py-10"
             bgColor="gradient-to-tr from-[#f3e8ff] via-[#f5d0fe] to-[#e0f2fe]"
             textColor="primary"
             title="AI engineering"
@@ -996,7 +996,7 @@ export const AIEngineering = () => {
                     <>
                         {enterpriseMode ? (
                             <div className="py-2 pl-2">
-                                <StaticImage src="./images/enterprise-mode/shutterstock_343843886.jpg" alt="" />
+                                <StaticImage src="./images/enterprise-mode/shutterstock_2372110997.jpg" alt="" />
                             </div>
                         ) : (
                             <>
