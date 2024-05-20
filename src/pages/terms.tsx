@@ -189,7 +189,7 @@ function Terms() {
                     </p>
 
                     <p className="mb-2 text-center">
-                        Long paragraphs are boring. So we decided to summarize our terms for you.
+                        Long paragraphs are boring. So we've summarized our terms for you.
                     </p>
 
                     <p className="mb-2 text-center">
@@ -298,11 +298,10 @@ function Terms() {
                         <p className="mb-2">
                             You probably realize this, but the summaries{' '}
                             <span className="md:hidden">
-                                that display below each section in blockquotes (under the <em>"What it means</em>{' '}
-                                subheaders)
+                                below each section in blockquotes (under the <em>"What it means</em> subheaders)
                             </span>
-                            <span className="hidden md:inline-block">in the right-hand column</span> are solely for your
-                            entertainment and not legally binding.
+                            <span className="hidden md:inline-block">in the right-hand column</span> exist solely to aid
+                            your comprehension and alleviate boredom. They're not legally binding.
                         </p>
                         <p className="mb-2">
                             Should you wish to be legally bound to us, please stick with the <em>actual</em> terms{' '}

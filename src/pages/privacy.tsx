@@ -197,7 +197,7 @@ function Privacy() {
                     </p>
 
                     <p className="mb-2 text-center">
-                        Long paragraphs are boring. So summarized our privacy policy for you.
+                        Long paragraphs are boring. So we've summarized our privacy policy for you.
                     </p>
 
                     <p className="mb-2 text-center">
@@ -270,21 +270,21 @@ function Privacy() {
                     </Tweet>
 
                     <Tweet>
-                        🌐 We share your info with service providers to run our site and product – but nothing else.
+                        🌐 We share your info with service providers to run our site and product, but nothing else.
                         We’re part of the EU-US Data Privacy Framework, ensuring your data is safe. You can opt out if
                         you like!
                     </Tweet>
 
                     <Tweet>
-                        📬 PostHog may contact you occasionally via email with updates, but you can unsubscribe anytime.
-                        We promise not to spam you! Our first-party cookies remember you and improve your experience –
-                        totally safe! We don't use any third-party cookies.
+                        📬 We may contact you occasionally via email with updates, but you can unsubscribe anytime. We
+                        promise not to spam you! Our first-party cookies remember you and improve your experience.
+                        Reminder: we don't use any third-party cookies.
                     </Tweet>
 
                     <Tweet>
                         🚀 We respect your rights and keep your info as long as your account is active. You can delete
-                        it anytime by logging in. Contributions to our projects remain public to keep the integrity of
-                        our open-source code.
+                        it anytime. Contributions to our projects remain public to keep the integrity of our open-source
+                        code.
                     </Tweet>
 
                     <Tweet lastTweet={true}>
@@ -319,11 +319,10 @@ function Privacy() {
                         <p className="mb-2">
                             You probably realize this, but the summaries{' '}
                             <span className="md:hidden">
-                                that display below each section in blockquotes (under the <em>"What it means</em>{' '}
-                                subheaders)
+                                below each section in blockquotes (under the <em>"What it means</em> subheaders)
                             </span>
-                            <span className="hidden md:inline-block">in the right-hand column</span> are solely meant
-                            for your entertainment.
+                            <span className="hidden md:inline-block">in the right-hand column</span> exist solely to aid
+                            your comprehension and alleviate boredom. They're not legally binding.
                         </p>
                         <p className="mb-2">
                             The <em>actual</em> privacy policy{' '}
@@ -550,7 +549,8 @@ function Privacy() {
                     </div>
                     <div>
                         <p>
-                            When you use our websites or app, we may generate an anonymous User ID for url tracking etc.
+                            When you use our websites or app, we may generate an anonymous User ID for pageview tracking
+                            etc.
                         </p>
 
                         <p>
@@ -610,14 +610,14 @@ function Privacy() {
                             <li>administer access to your accounts;</li>
                             <li>manage our customer relationships;</li>
                             <li>
-                                process orders, provide our products and services and send you service
-                                relacommunications; and
+                                process orders, provide our products and services and send you service-related
+                                communications; and
                             </li>
                             <li>provide you with customer support.</li>
                         </ul>
                     </div>
                     <div>
-                        <p>This part is quite clear. Well done Mr(s) Lawyer!</p>
+                        <p>This explains how we use your personal information to fulfill our contract(s) with you.</p>
                     </div>
 
                     <div>
