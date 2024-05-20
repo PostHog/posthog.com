@@ -37,7 +37,7 @@ export const Content = ({ quickLinks = false }) => {
             <Intro />
             {(quickLinks || compact) && (
                 <QuickLinks
-                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'PostHog for AI')?.children}
+                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'AI engineering')?.children}
                 />
             )}
             <section className="mb-12">
@@ -95,7 +95,7 @@ export const Content = ({ quickLinks = false }) => {
                     />
                 </ul>
                 <CallToAction
-                    to="/docs/llm-analytics/tutorials"
+                    to="/docs/ai-engineering/tutorials"
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
@@ -126,7 +126,7 @@ export const Content = ({ quickLinks = false }) => {
                                 src="./images/template-product-analytics.png"
                             />
                         }
-                        url="/docs/llm-analytics/llms"
+                        url="/docs/ai-engineering/langfuse-posthog"
                     />
                     <ResourceItem
                         title="Helicone"
@@ -141,7 +141,7 @@ export const Content = ({ quickLinks = false }) => {
                                 src="./images/template-website-traffic.png"
                             />
                         }
-                        url="/docs/llm-analytics/llms"
+                        url="/docs/ai-engineering/helicone-posthog"
                     />
                 </ul>
                 <CallToAction
