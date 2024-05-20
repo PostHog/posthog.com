@@ -288,7 +288,7 @@ export const ProductOS = () => {
                     </div>
                 </section>
 
-                <section className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-10">
+                <section className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-5 md:mb-5">
                     <div className="grid md:grid-cols-12 md:gap-8 items-center">
                         <div className="order-2 md:order-1 col-span-5">
                             <h2 className="text-4xl mb-2">Site widgets</h2>
@@ -322,10 +322,7 @@ export const ProductOS = () => {
                     </div>
                 </section>
 
-                <section
-                    id="pricing"
-                    className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-5 pb-20`}
-                >
+                <section className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-5 pb-20`}>
                     <div className="text-center">
                         <StaticImage src="./images/refer.png" alt="referral hog" width={100} className="mb-5" />
                     </div>
@@ -343,15 +340,15 @@ export const ProductOS = () => {
                             free.
                         </p>
                         <div className="text-center">
-                            <CallToAction to="/docs/toolbar" type="secondary" size="sm">
-                                Get free stuff now
+                            <CallToAction to="/merch" type="secondary" size="sm">
+                                Use your referral credit
                             </CallToAction>
                         </div>
                     </div>
                 </section>
 
                 <section>
-                    <div className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
+                    <div className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-10 mb-10 md:mb-20">
                         <div className="flex gap-8 flex-col-reverse md:flex-row">
                             <div className="flex-1">
                                 <h2 className="text-4xl">
