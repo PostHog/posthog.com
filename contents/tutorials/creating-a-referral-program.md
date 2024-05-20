@@ -84,7 +84,7 @@ Connect Zapier to the correct Customer.io account, and then configure the action
 
 Your completed Customer.io event should look as follow:
 
-<IMAGE>
+![Customer.io referral program](https://res.cloudinary.com/dmukukwp6/image/upload/v1716216219/posthog.com/contents/images/tutorials/referral-program/referral_zap1.png)
 
 Now, when your zap completes it will send an event to Customer.io which contains all of the details you need to correctly inform both users. 
 
@@ -95,7 +95,7 @@ In Customer.io, create a new Campaign for notifying both referrers and redeemers
 
 In your campaign workflow, create two separate Email Message events - one for the referrer and one for the redeemer. Fill them with whatever content reflects your brand and will help your users. Here's what our referrer reward email looks like:
 
-<IMAGE>
+![Customer.io referral email](https://res.cloudinary.com/dmukukwp6/image/upload/v1716216218/posthog.com/contents/images/tutorials/referral-program/referral_email.png)
 
 In the referrer email, you must override the default email address which the email is sent to. Replace it with `{{event.referreremail}}` to instead use the `referreremail` property you created in Zapier. Also make sure to include `{{event.discountreferrer}}` in the body of your email, to give users their $25 Shopify gift code.
 
