@@ -10,9 +10,7 @@ availability:
 
 PostHog includes tools for creating your own referral program, so you can offer users rewards in return for sharing your product. We use it to power our own referral program, the PostHog Pyramid Scheme. 
 
-We built our referral program and the tools you need to create your own during a hackathon at our 2024 company offsite in Mykonos. 
-
-> **Want to refer someone to PostHog?** Share [your referral code](https://us.posthog.com/referrals) with them, and we'll give you both $25 of store credit when they pay their first bill. 
+> **Want to refer someone to PostHog?** Share [your referral code](https://us.posthog.com/referrals) with them, and we'll give you both $25 of store credit when they pay their first bill. Refer as many people as you like!
 
 ## Creating a referral program
 
@@ -25,7 +23,7 @@ TO DO
 - Give info about how to customize the program by changing the incentive
 - Give into about how to change the conversion event you focus on
 
-## Best practices
+## Best practices and further resources
 We originally built our referral program tools during a hackathon at our 2024 company offsite so we could use them to create our own referral program. Here are some of the best practices we decided to implement in our own program and which we recommend: 
 
 - Choose a conversion event which is at least as valuable to you as the reward you offer. Sign-ups are an obvious candidate, but may not be suitable if your product has a free tier. 
