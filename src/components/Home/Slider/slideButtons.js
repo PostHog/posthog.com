@@ -49,7 +49,7 @@ export const slideButtons = [
     },
     {
         title: 'AI engineering',
-        color: '[#000]',
+        color: '[#8B0DC8]',
         placeholderIcon: 'IconAI',
     },
 ]

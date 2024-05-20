@@ -36,6 +36,7 @@ bg-primary/10
 bg-primary-dark/10
 bg-blue
 bg-blue/10
+bg-gradient-to-tr
 bg-green
 bg-green/10
 bg-lime-green
@@ -183,6 +184,7 @@ text-[#36C46F]
 text-[#43B6E7]
 text-[#8567FF]
 text-[#2EA2D3]
+text-[#8B0DC8]
 to-tan/0
 via-tan/85
 w-2/12
