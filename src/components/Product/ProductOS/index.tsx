@@ -336,7 +336,7 @@ export const ProductOS = () => {
                             stickers, or signed team photos.{' '}
                         </p>
                         <p className="mb-5">
-                            Plus, get the tools to build your own ludicrously successful pyramid scheme included for
+                            Plus, get the tools to build your own ludicrously successful referral program included for
                             free.
                         </p>
                         <div className="text-center">
@@ -364,12 +364,12 @@ export const ProductOS = () => {
                         <ul className={`list-none p-0 grid md:grid-cols-2 gap-8`}>
                             <Subfeature
                                 title="HIPAA & GDPR compliance"
-                                description="We make this easy, with tutorials on how to anonymize PII and the option to host in either the US or UK. Need a BAA? We do those too."
+                                description="We make this easy, with tutorials on how to anonymize PII and the option to host in either the US or UK. Need a BAA? Just ask."
                                 icon={<IconGlobe />}
                             />
                             <Subfeature
                                 title="SOC2"
-                                description="We're Type-1 certfied, which isn't super glamourous but is useful for big teams. Need more? We're working on Type-2."
+                                description="We're Type-2 compliant, Type-1 certified, which isn't super glamourous but is useful for big teams. Our security reports are public too."
                                 icon={<IconShield />}
                             />
                         </ul>
@@ -425,13 +425,16 @@ export const ProductOS = () => {
                         <div className="order-2 md:order-1">
                             <h2 className="text-4xl mb-2 relative z-10">Toolbar</h2>
                             <p className="max-w-2xl">
-                                If you use PostHog on a website or web app, the Product OS Toolbar can run on your site,
+                                If you use PostHog on a website or web app, the Product OS Toolbar runs on your site,
                                 letting you:
                             </p>
                             <ul className="mb-6">
-                                <li>Visually define events</li>
+                                <li>Define events visually, with no code</li>
                                 <li>Toggle feature flags on or off</li>
-                                <li>See a click map showing what people are clicking</li>
+                                <li>View a map of user interactions and rageclicks</li>
+                                <li>View a heat map of mouse movements and scrolls</li>
+                                <li>Inspect on-page elements and debug events in real-time</li>
+                                <li>Summon a little hedgehog to walk around your site</li>
                             </ul>
                             <div>
                                 <CallToAction to="/docs/toolbar" type="secondary" size="sm">
