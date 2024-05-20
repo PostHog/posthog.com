@@ -38,8 +38,11 @@ We have a number of policies in place to support SOC 2 compliance. All team memb
 All of these policies are available for viewing upon request:
 
 - Acceptable Use Policy
+- Application Logging & Monitoring Policy
 - Asset Management Policy
 - Backup Policy
+- Breach Notification Policy
+- Business Associate Policy
 - Business Continuity Plan
 - Code of Conduct
 - Data Classification Policy
@@ -51,6 +54,7 @@ All of these policies are available for viewing upon request:
 - Information Security Policy
 - Password Policy
 - Physical Security Policy
+- Privacy, Use, and Disclosure Policy
 - Responsible Disclosure Policy
 - Risk Assessment Policy
 - Software Development Lifecycle Policy
