@@ -1,5 +1,5 @@
 ---
-title: How HostAI uses PostHog and LangFuse to prevent churn
+title: How HostAI increased evaluation score by 50% with PostHog and LangFuse
 customer: HostAI
 logo: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1715246033/posthog.com/contents/host-ai-logo.jpg
