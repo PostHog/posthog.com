@@ -24,3 +24,12 @@ TO DO.
 TO DO
 - Give info about how to customize the program by changing the incentive
 - Give into about how to change the conversion event you focus on
+
+## Best practices
+We originally built our referral program tools during a hackathon at our 2024 company offsite so we could use them to create our own referral program. Here are some of the best practices we decided to implement in our own program and which we recommend: 
+
+- Choose a conversion event which is at least as valuable to you as the reward you offer. Sign-ups are an obvious candidate, but may not be suitable if your product has a free tier. 
+- Choose a reward which users will be genuinely interested in as individuals. This is especially important for B2B products: Platform credit isn't very attractive to individuals in a large organization. 
+- Track the success of your referral program closely using [product analytics](/docs/product-analytics). Keep an eye on who your biggest referrers are and iterate your program based on what makes them successful. 
+
+Learn more about how to create a referral program in our tutorial about how we built the PostHog referral program. 
