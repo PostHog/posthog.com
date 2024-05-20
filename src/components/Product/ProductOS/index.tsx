@@ -340,8 +340,8 @@ export const ProductOS = () => {
                             free.
                         </p>
                         <div className="text-center">
-                            <CallToAction to="/merch" type="secondary" size="sm">
-                                Use your referral credit
+                            <CallToAction to="/docs/referrals" type="secondary" size="sm">
+                                Build a referral program
                             </CallToAction>
                         </div>
                     </div>
@@ -424,10 +424,7 @@ export const ProductOS = () => {
                     <div className="grid md:grid-cols-2 gap-8 items-center">
                         <div className="order-2 md:order-1">
                             <h2 className="text-4xl mb-2 relative z-10">Toolbar</h2>
-                            <p className="max-w-2xl">
-                                If you use PostHog on a website or web app, the Product OS Toolbar runs on your site,
-                                letting you:
-                            </p>
+                            <p className="max-w-2xl">Our toolbar runs on your site or web app, letting you:</p>
                             <ul className="mb-6">
                                 <li>Define events visually, with no code</li>
                                 <li>Toggle feature flags on or off</li>
