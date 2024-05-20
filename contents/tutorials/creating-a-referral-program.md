@@ -44,7 +44,7 @@ Next, switch to Zapier and create a new zap using the PostHog 'Action Performed'
 Now, whenever PostHog detects the `referral redeemed` event it will also trigger `referral redeemed action`, which Zapier can also detect.
 
 ### Create the referrer reward
-Create a new step in the zap using the 'Code by Zapier' action and specify the 'Run Python' event. Use the following code to create a randomly generated eight chracter reward code:
+Create a new step in the zap using the 'Code by Zapier' action and specify the 'Run Python' event. Use the following code to create a randomly generated eight character reward code:
 
 ```Python
 import secrets
