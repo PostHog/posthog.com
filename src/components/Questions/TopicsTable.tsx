@@ -5,6 +5,7 @@ import {
     IconApps,
     IconBox,
     IconBrackets,
+    IconCode,
     IconCursor,
     IconDashboard,
     IconDatabase,
@@ -30,6 +31,10 @@ import {
     IconFunnels,
     IconTrends,
     IconMessage,
+    IconGlobe,
+    IconMapPin,
+    IconHandwave,
+    IconCoffee,
 } from '@posthog/icons'
 
 import { Megaphone, SparksJoy } from 'components/NotProductIcons'
@@ -49,6 +54,7 @@ export const topicIcons = {
     'data pipelines': IconDecisionTree,
     'data warehouse': IconDatabase,
     deployment: IconRocket,
+    '#devrel': IconCoffee,
     'events & actions': IconCursor,
     'feature flags': IconToggle,
     funnels: IconFunnels,
@@ -57,6 +63,7 @@ export const topicIcons = {
     'helm chart': DataWarehouse, // to be replaced or removed
     hogql: IconHogQL,
     'identify users': DataManagement, // to be replaced or removed
+    '#introductions': IconHandwave,
     kubernetes: DataWarehouse, // to be replaced or removed
     'migrating to posthog': DataManagement, // to be replaced or removed
     migration: IconUpload,
@@ -77,6 +84,7 @@ export const topicIcons = {
     'community spotlight': Megaphone, // to be replaced or removed
     surveys: IconMessage,
     survey: IconMessage,
+    '#where-in-the-world': IconGlobe,
     'web analytics': IconPieChart,
 }
 

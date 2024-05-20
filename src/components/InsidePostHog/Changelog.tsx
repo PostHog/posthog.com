@@ -28,7 +28,7 @@ export default function Changelog() {
         <div className="pt-4">
             <h3 className="m-0">Changelog</h3>
             <p className="m-0 opacity-70 mb-4">Here's what we've shipped in the last two weeks.</p>
-            <ul className="list-none p-0 m-0 space-y-8 @lg:space-y-6 mb-4">
+            <ul className="list-none p-0 m-0 space-y-4 @lg:space-y-4 mb-4">
                 {roadmaps.map((roadmap) => {
                     const { title, squeakId, dateCompleted, image, topic, teams } = roadmap?.attributes
                     const topicName = topic?.data?.attributes?.label
@@ -36,7 +36,7 @@ export default function Changelog() {
                     const imageURL = image?.data?.attributes?.formats?.small?.url
 
                     return (
-                        <li key={squeakId}>
+                        <li key={squeakId} className="border-t border-light dark:border-dark first:border-t-0 pt-4">
                             <Link
                                 className="grid md:grid-cols-8 gap-x-4 items-center text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark"
                                 to={`/changelog/${dayjs(dateCompleted).year()}#${slugify(title, { lower: true })}`}

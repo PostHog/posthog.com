@@ -27,30 +27,73 @@ type QuestionsTableProps = {
     showTopic?: boolean
     showBody?: boolean
     sortBy?: 'newest' | 'activity' | 'popular'
+    showStatus?: boolean
 }
 
 export const Skeleton = () => {
     return (
-        <div className="">
-            <div className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 space-y-2">
-                <div className="w-96 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
-                <div className="w-60 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
-                <div className="w-36 h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
+        <div className="grid grid-cols-12 items-center w-full mt-4">
+            <div className="col-span-12 md:col-span-7 2xl:col-span-8 flex items-center space-x-4">
+                <div className="w-5 flex-shrink-0" />
+                <div className="w-full space-y-1">
+                    <div className="animate-pulse bg-accent dark:bg-accent-dark h-[18px] rounded-md w-2/3" />
+                    <div className="animate-pulse bg-accent dark:bg-accent-dark h-[18px] rounded-md" />
+                </div>
             </div>
-
-            <div className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 font-semibold animate-pulse">
-                <div className="w-full h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
+            <div className="hidden md:flex md:col-span-2 2xl:col-span-1 items-start justify-center h-full">
+                <div className="animate-pulse bg-accent dark:bg-accent-dark h-[18px] rounded-md w-[18px]" />
             </div>
-            <div className="whitespace-nowrap p-4 text-sm text-gray-500 text-gray font-semibold animate-pulse">
-                <div className="w-full h-4 bg-gray-accent-light dark:bg-gray-accent-dark rounded-sm animate-pulse"></div>
+            <div className="hidden md:flex md:col-span-2 2xl:col-span-1 items-start justify-center h-full">
+                <div className="animate-pulse bg-accent dark:bg-accent-dark h-[18px] rounded-md w-full" />
             </div>
         </div>
     )
 }
 
-const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor, sortBy, pinned, fetchMore }) => {
-    const { isModerator } = useUser()
+const Status = ({ status }: { status: 'resolved' | 'pending' | 'needs-response' }) => {
+    switch (status) {
+        case 'resolved':
+            return (
+                <Tooltip content="Resolved">
+                    <span className="relative text-green">
+                        <IconCheckCircle />
+                    </span>
+                </Tooltip>
+            )
+        case 'pending':
+            return (
+                <Tooltip content="Pending response">
+                    <span className="relative text-yellow">
+                        <IconClock />
+                    </span>
+                </Tooltip>
+            )
+        case 'needs-response':
+            return (
+                <Tooltip content="Needs response">
+                    <span className="relative text-red">
+                        <IconX />
+                    </span>
+                </Tooltip>
+            )
+    }
+}
+
+const Row = ({
+    question,
+    className,
+    currentPage,
+    showTopic,
+    showBody,
+    showAuthor,
+    sortBy,
+    pinned,
+    fetchMore,
+    showStatus = true,
+}) => {
+    const { isModerator, notifications } = useUser()
     const {
+        id,
         attributes: { profile, subject, permalink, replies, createdAt, resolved, topics, activeAt, body },
     } = question
 
@@ -68,6 +111,15 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
         }
     }, [inView])
 
+    const hasNewReplies = notifications.some((notification) => notification.question?.id === id)
+    const status = resolved
+        ? 'resolved'
+        : isModerator
+        ? latestAuthor?.data?.attributes?.user?.data?.attributes?.role?.data?.attributes?.type === 'moderator'
+            ? 'pending'
+            : 'needs-response'
+        : null
+
     return profile ? (
         <div ref={fetchMore ? ref : null} key={question.id} className="py-2.5">
             <Link
@@ -84,27 +136,8 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
                                         <IconPin />
                                     </span>
                                 </Tooltip>
-                            ) : resolved ? (
-                                <Tooltip content="Resolved">
-                                    <span className="relative text-green">
-                                        <IconCheckCircle />
-                                    </span>
-                                </Tooltip>
-                            ) : isModerator ? (
-                                latestAuthor?.data?.attributes?.user?.data?.attributes?.role?.data?.attributes?.type ===
-                                'moderator' ? (
-                                    <Tooltip content="Pending response">
-                                        <span className="relative text-yellow">
-                                            <IconClock />
-                                        </span>
-                                    </Tooltip>
-                                ) : (
-                                    <Tooltip content="Needs response">
-                                        <span className="relative text-red">
-                                            <IconX />
-                                        </span>
-                                    </Tooltip>
-                                )
+                            ) : showStatus && status ? (
+                                <Status status={status} />
                             ) : null}
                         </div>
 
@@ -130,7 +163,11 @@ const Row = ({ question, className, currentPage, showTopic, showBody, showAuthor
                             )}
                         </div>
                     </div>
-                    <div className="hidden md:block md:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60">
+                    <div
+                        className={`hidden md:block md:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60 ${
+                            hasNewReplies ? 'font-bold !text-red dark:!text-yellow' : ''
+                        }`}
+                    >
                         {numReplies}
                     </div>
                     <div className="hidden md:block md:col-span-3 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
@@ -158,6 +195,7 @@ export const QuestionsTable = ({
     showAuthor = true,
     sortBy,
     pinnedQuestions,
+    showStatus = true,
 }: QuestionsTableProps) => {
     const questionsFiltered = questions.data.length > 0 && questions.data.filter(Boolean)
     return (
@@ -172,6 +210,7 @@ export const QuestionsTable = ({
                     {pinnedQuestions.data.filter(Boolean).map((question) => {
                         return (
                             <Row
+                                showStatus={showStatus}
                                 key={question.id}
                                 className={className}
                                 currentPage={currentPage}
@@ -191,6 +230,7 @@ export const QuestionsTable = ({
                       return (
                           <li key={question.id} className="list-none px-[2px] divide-y divide-light dark:divide-dark">
                               <Row
+                                  showStatus={showStatus}
                                   className={className}
                                   currentPage={currentPage}
                                   showTopic={showTopic}

@@ -149,7 +149,7 @@ export default function Startups() {
                                     follow steps 1-2 above!
                                 </p>
                                 <p className="mb-0">
-                                    In the meantime, why not join <Link to="/slack">our Slack community</Link>?
+                                    In the meantime, why not checkout our <Link to="/questions">community forum</Link>?
                                 </p>
                             </>
                         }

@@ -99,7 +99,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     },
     "timestamp": "2020-08-16 09:03:11.913767",
     "event": "$create_alias"
-}' https://app.posthog.com/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 </MultiLanguage>
@@ -325,7 +325,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "timestamp": "2020-08-16 09:03:11.913767",
     "distinct_id": "distinct_id_of_user_to_merge_into",
     "event": "$merge_dangerously"
-}' https://app.posthog.com/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 </MultiLanguage>

@@ -1030,7 +1030,7 @@ export const ProductProductAnalytics = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicIds={[20]} />
+                    <Questions topicIds={[349]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>

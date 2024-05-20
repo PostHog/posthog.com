@@ -43,9 +43,14 @@ Although your DAU/MAU ratio is a great measurement of engagement and stickiness,
 
 ## How to calculate your DAU/MAU ratio
 
-In PostHog, [create an insight](https://app.posthog.com/insights/new) with two series, one for "all events" aggregated by "unique users" and another for "all events" aggregated by "monthly active users," then use enable formula mode, and use the formula `A/B`. Use a trend or a number chart to visualize with the Y-axis unit set to "Percent (0-1)."
+In PostHog, [create an insight](https://app.posthog.com/insights/new) with two series, one for "pageviews" aggregated by "unique users" and another for "pageviews" aggregated by "monthly active users," then use enable formula mode, and use the formula `A/B`. Use a trend or a number chart to visualize with the Y-axis unit set to "Percent (0-1)."
 
-![DAU/MAU ratio](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/dau-mau-ratio/dau-mau.mp4)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714686352/posthog.com/contents/images/tutorials/dau-mau-ratio/dau-mau-light2.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714686352/posthog.com/contents/images/tutorials/dau-mau-ratio/dau-mau-dark2.png"
+    alt="DAU/MAU ratio in PostHog" 
+    classes="rounded"
+/>
 
 > **How we calculate unique users and monthly active users in PostHog:**
 > - **`dau` aka "unique users":** count of unique users in the interval, which defaults to daily. Despite the name, if you select the `interval` to be weekly or monthly, this will show weekly or monthly active users respectively.

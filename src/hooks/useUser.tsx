@@ -51,6 +51,8 @@ type UserContextValue = {
         title?: string
         user?: User
     }) => Promise<void>
+    notifications: any
+    setNotifications: any
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -71,6 +73,8 @@ export const UserContext = createContext<UserContextValue>({
     setSubscription: async () => undefined,
     likePost: async () => undefined,
     likeRoadmap: async () => undefined,
+    notifications: [],
+    setNotifications: () => undefined,
 })
 
 type UserProviderProps = {
@@ -81,6 +85,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState<User | null>(null)
     const [jwt, setJwt] = useState<string | null>(null)
+    const [notifications, setNotifications] = useState<any>([])
 
     const posthog = usePostHog()
 
@@ -294,6 +299,15 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                             teams: {
                                 fields: ['id'],
                             },
+                            notifications: {
+                                populate: {
+                                    question: {
+                                        populate: {
+                                            replies: true,
+                                        },
+                                    },
+                                },
+                            },
                         },
                     },
                     role: {
@@ -326,6 +340,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         const meData: User = await meRes.json()
 
         setUser(meData)
+
+        const notifications = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/notifications`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((res) => res.json())
+
+        setNotifications(notifications || [])
 
         // We don't want any error thrown here to bubble up to the caller.
         try {
@@ -501,6 +523,22 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         await fetchUser()
     }
 
+    const updateNotifications = async (notifications: any) => {
+        setNotifications(notifications)
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${user?.profile.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwt}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    notifications,
+                },
+            }),
+        })
+    }
+
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(user))
     }, [user])
@@ -519,6 +557,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         setSubscription,
         likePost,
         likeRoadmap,
+        notifications,
+        setNotifications: updateNotifications,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

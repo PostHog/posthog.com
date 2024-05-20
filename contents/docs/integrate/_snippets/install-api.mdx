@@ -20,7 +20,7 @@ There are three options:
     ```
 3. Put the key in query string, like so:
     ```js
-    const url = `https://app.posthog.com/api/event/?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`
+    const url = `<ph_client_api_host>/api/event/?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`
     ```
 
 Any one of these methods works, but only the value encountered first (in the order above) will be used for authentication.
