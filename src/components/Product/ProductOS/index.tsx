@@ -358,8 +358,9 @@ export const ProductOS = () => {
                                     This bit is boring, <span className="text-red dark:text-yellow">but important</span>
                                 </h2>
                                 <p className="max-w-2xl">
-                                    We take security seriously. Read{' '}
-                                    <a href="/handbook/company/security">our security docs</a> if you don't believe us.
+                                    We're serious about security and offer{' '}
+                                    <a href="/docs/privacy/hipaa-compliance">Business Associate Agreements</a> if you
+                                    need one.
                                 </p>
                             </div>
                         </div>
