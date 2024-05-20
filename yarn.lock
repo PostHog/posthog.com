@@ -2787,10 +2787,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
-"@posthog/icons@0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.7.2.tgz#ca5a76c39bab150829b49e5baf46680f1dd9ac78"
-  integrity sha512-pdXmRi0DTAKYMnGLySoTXx/POQ6LlLD++klZKTKHncy3mpJsWozQc+keiF/mcMNke+u50czZX3LusaeqlKJW6w==
+"@posthog/icons@0.7.3":
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.7.3.tgz#a0664f0aaae1003c45f21baed83a7ec52f83847c"
+  integrity sha512-dw8qLS6aSBGGIjo/d24/yuLOgkFAov4C7yOhomMfhce/RwS+u96XXghVolioRHppnAn48pgGnBQIXEELGVEvPA==
 
 "@preact/signals-core@^1.2.3":
   version "1.5.1"

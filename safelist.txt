@@ -84,9 +84,11 @@ border-aqua
 border-[#36C46F]
 border-[#2EA2D3]
 border-[#8567FF]
+border-[#681291]
 col-span-7
 dark:after:bg-[#C170E8]
 dark:text-[#C170E8]
+dark:border-[#C170E8]
 flex
 flex
 flex-row-reverse
@@ -191,6 +193,7 @@ text-[#8567FF]
 text-[#2EA2D3]
 text-[#8B0DC8]
 text-[#C170E8]
+text-[#681291]
 to-tan/0
 via-tan/85
 w-2/12
