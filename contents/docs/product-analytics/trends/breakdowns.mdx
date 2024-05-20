@@ -50,7 +50,13 @@ To just see the total count, switch to a total value bar chart or table like the
     alt="Sample breakdown bar chart"
 />
 
-Breakdowns only support a single property at a time, unless you create a breakdown using HogQL. Read [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns) for more on using HogQL in breakdowns.
+Breakdowns only support a single property at a time, unless you use HogQL. To breakdown by the combination of browser and operating system, for example, you can use the following expression:
+
+```
+concat(properties.$browser, ' - ', properties.$os)
+```
+
+See our [HogQL expression docs](/docs/hogql/expressions) for more information.
 
 ## Cohorts and breakdowns
 
