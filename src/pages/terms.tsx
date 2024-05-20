@@ -814,10 +814,11 @@ function Terms() {
                     </div>
                     <div>
                         <p>
-                            All our prices are without sales tax. Hey, terms and conditions can be pretty boring, so
+                            All our prices are without sales tax.
+                            {/* Hey, terms and conditions can be pretty boring, so
                             well done on reading these thoroughly! As a reward, please&nbsp;
                             <Link href="/merch">claim a free legalhog sticker</Link>&nbsp;from our&nbsp;
-                            <Link href="/merch">merch store</Link>.
+                            <Link href="/merch">merch store</Link>. */}
                         </p>
                     </div>
                     <div>
