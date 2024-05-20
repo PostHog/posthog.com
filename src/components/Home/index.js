@@ -61,7 +61,7 @@ const Home = () => {
                 <HogQL />
                 <Community />
                 <CustomerData />
-                <GlobeScene />
+                {typeof window !== 'undefined' && <GlobeScene />}
                 <Timeline />
                 <Roadmap />
                 <Startups />
