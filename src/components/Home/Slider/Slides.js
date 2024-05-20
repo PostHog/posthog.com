@@ -978,10 +978,10 @@ export const AIEngineering = () => {
                         <li>Insights with Session replay</li>
                         <li>Roll out model improvements A/B testing</li>
                     </ul>
-                    <p className="mt-2 mb-3 text-sm border-l-2 border-[#7A4096]/50 pl-2">
+                    <p className="mt-2 mb-4 text-sm border-l-2 border-[#7A4096]/50 pl-2">
                         ElevenLabs uses the entire PostHog toolset to build their generative voice AI
                         <br />
-                        <Link href="/customers/elevenlabs" className="text-[#681291] hover:text-[#681291]">
+                        <Link href="/customers/elevenlabs" className="!text-[#681291] !hover:text-[#681291]">
                             Read the story
                             <IconArrowRight className="size-4 inline-block" />
                         </Link>

@@ -52,7 +52,7 @@ const enterpriseModeProductNames = {
     'Data warehouse': 'Secure data vault',
 }
 
-const SlideButton = ({ title, lottieSrc, color, label, activeSlide, index, placeholderIcon }) => {
+const SlideButton = ({ title, lottieSrc, color, colorDark, label, activeSlide, index, placeholderIcon }) => {
     const active = activeSlide === index
     const lottieRef = useRef()
     const { enterpriseMode } = useLayoutData()
@@ -77,11 +77,13 @@ const SlideButton = ({ title, lottieSrc, color, label, activeSlide, index, place
                 onMouseEnter={handleMouseEnter}
                 className={`flex flex-col items-center mt-1 p-2 w-full rounded-md transition-opacity transition-colors border border-b-3 border-transparent space-y-1 h-full ${
                     active
-                        ? `after:absolute after:bottom-0 after:h-[3px] after:w-full after:bg-${color} after:rounded-full active after:translate-y-1/2`
+                        ? `after:absolute after:bottom-0 after:h-[3px] after:w-full after:bg-${color} dark:after:bg-${colorDark} after:rounded-full active after:translate-y-1/2`
                         : 'group hover:border-light dark:hover:border-dark hover:translate-y-[-2px] active:translate-y-[1px]'
                 }`}
             >
-                <span className={`w-6 h-6 text-${color} flex justify-center items-center relative`}>
+                <span
+                    className={`w-6 h-6 text-${color} dark:text-${colorDark} flex justify-center items-center relative`}
+                >
                     <Lottie
                         lottieRef={lottieRef}
                         src={lottieSrc}

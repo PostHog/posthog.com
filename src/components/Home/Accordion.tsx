@@ -32,6 +32,7 @@ const slideContents = [
 type SlideButton = {
     lottieSrc: string
     color: string
+    colorDark?: string
     title: string
     index: number
     activeIndex: number | null
@@ -39,7 +40,16 @@ type SlideButton = {
     placeholderIcon: string
 }
 
-const SlideButton = ({ lottieSrc, color, title, index, activeIndex, setActiveIndex, placeholderIcon }: SlideButton) => {
+const SlideButton = ({
+    lottieSrc,
+    color,
+    colorDark,
+    title,
+    index,
+    activeIndex,
+    setActiveIndex,
+    placeholderIcon,
+}: SlideButton) => {
     const lottieRef = useRef<null>()
     const [lottieReady, setLottieReady] = useState(false)
     const Icon = Icons[placeholderIcon]
@@ -65,7 +75,9 @@ const SlideButton = ({ lottieSrc, color, title, index, activeIndex, setActiveInd
                     className="flex justify-between items-center px-4 py-3 w-full group"
                 >
                     <span className="flex space-x-4 items-center group-active:top-[0.5px] group-active:scale-[.98] transition-all">
-                        <span className={`w-6 h-6 text-${color} flex justify-center items-center`}>
+                        <span
+                            className={`w-6 h-6 text-${color} dark:text-${colorDark} flex justify-center items-center`}
+                        >
                             {lottieSrc && (
                                 <DotLottiePlayer
                                     style={{ display: lottieReady ? 'inline-block' : 'none' }}
