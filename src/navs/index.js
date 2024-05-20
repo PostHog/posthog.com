@@ -2034,16 +2034,6 @@ export const docsMenu = {
                     name: 'Tools',
                 },
                 {
-                    name: 'LLM insights',
-                    url: '/docs/product-analytics/llms',
-                    icon: 'IconMagicWand',
-                    color: 'yellow',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Autocapture',
                     url: '/docs/product-analytics/autocapture',
                     icon: 'IconBolt',
@@ -2685,6 +2675,55 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/under-the-hood',
                     icon: 'IconMagicWand',
                     color: 'seagreen',
+                },
+            ],
+        },
+        {
+            name: 'AI engineering',
+            url: '/docs/ai-engineering',
+            color: '[#000]',
+            icon: 'IconAI',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            children: [
+                {
+                    name: 'PostHog for AI',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/ai-engineering',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'LLMs',
+                    url: '/docs/ai-engineering/llms',
+                    icon: 'IconShare',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Integrating with Langfuse',
+                    url: '/docs/ai-engineering/langfuse-posthog',
+                    icon: 'IconShare',
+                    color: 'blue',
+                },
+                {
+                    name: 'Integrating with Helicone',
+                    url: '/docs/ai-engineering/helicone-posthog',
+                    icon: 'IconShare',
+                    color: 'blue',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/ai-engineering/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'red',
                 },
             ],
         },
