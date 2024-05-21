@@ -43,21 +43,25 @@ Whether you have an appointment with your doctor, school run with your kids, or 
 
 ### You are sick
 
-If you are sick, you don't need to work and you will be paid. This is assuming you need a day or two off, then just take them. 
+If you are sick, you don't need to work and you will be paid - the upper limit for paid sick leave for your country will be specified in your contract. This is assuming you need a day or two off, then just take them.
 
-Please let your manager know if you need to take off due to illness as soon as you are able to and add it to PTO by Deel.
+Please let your manager know if you need to take off due to illness as soon as you are able to and add it to PTO by Deel. You shouldn't pre-emptively book a bunch of days off sick, as you can't know how long you will actually be sick for and you may trigger the need for a doctor's note (see below). Just book the day or two off that you are sick then add more if you still feel unwell. 
 
 For extended periods of illness (5+ work days), please speak to Charles so we can work out a plan. In some countries, we may be required to request a doctor's note from you. If you have a medical condition you know will take you away from work regularly, please let Charles know so we can work out accommodations with you and your manager. 
 
 ### Bereavements / Child loss 
 
-We do not define “closeness” and we won't ask about your relationship to the person or what they meant to you. Take as much time as you need, just give us a quick update every now and then. 
+We do not define “closeness” and we won't ask about your relationship to the person or what they meant to you. Please just let us know up front how much time you would like to take. 
 
-We extended our bereavement policy to also cover pregnancy and child loss for both parents, with no questions asked. Please take at least 2 weeks of paid leave. If you need additional time for physical or mental health reasons, we will treat it as extended sick leave.
+Our bereavement policy also covers pregnancy and child loss for both parents, with no questions asked. Please take at least 2 weeks of paid leave. 
+
+If you need extended time for physical or mental health reasons, we will treat it as extended sick leave.
 
 ### Jury duty / voting / childcare disasters, aka 'life stuff'
 
-There are lots of situations where life needs to come first. Please let it - just be communicative with your team and fit your work around it as you need.
+There are lots of situations where life needs to come first. Please let it - just be communicative with your team and fit your work around it as you need. We trust you will do the right thing here. 
+
+If your are summonsed for jury duty, please let us know right away - we can often get an exception granted if we have enough notice. 
 
 ## Parental leave
 
