@@ -58,7 +58,9 @@ export const Select = ({
     }
 
     useEffect(() => {
-        fetchTopicGroups().then((topicGroups) => setTopicGroups(topicGroups))
+        fetchTopicGroups().then((topicGroups) =>
+            setTopicGroups(topicGroups.filter((group) => group?.attributes?.label !== 'Off-topic'))
+        )
     }, [])
 
     return (
@@ -285,9 +287,10 @@ export const QuestionForm = ({
         const topicID =
             topic?.id ||
             other?.topicID ||
-            (await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
-                .then((res) => res.json())
-                .then((topic) => topic?.data && topic?.data[0]?.id))
+            (parentName &&
+                (await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
+                    .then((res) => res.json())
+                    .then((topic) => topic?.data && topic?.data[0]?.id)))
 
         const data = {
             subject,
@@ -296,8 +299,8 @@ export const QuestionForm = ({
             slugs: [] as { slug: string }[],
             permalink: '',
             topics: {
-                // 50 is uncategorized topic
-                connect: [topicID || 50],
+                // 346 is uncategorized topic
+                connect: [topicID || 346],
             },
         }
 

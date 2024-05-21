@@ -63,7 +63,7 @@ Experimentation is free-to-use on PostHog's Scale plan, which is also [free up t
 
 ### Who is GrowthBook for?
 
-GrowthBook is built for data, engineering and product teams who need the power of a customizable platform without having to build it in house.
+[GrowthBook](/blog/best-growthbook-alternatives) is built for data, engineering and product teams who need the power of a customizable platform without having to build it in house.
 
 ### Features and benefits
 

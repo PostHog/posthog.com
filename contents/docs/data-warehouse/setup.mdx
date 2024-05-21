@@ -27,7 +27,8 @@ To link Stripe:
 2. Click "Link Source" and select Stripe
 3. Get your Account ID from your [Stripe user settings](https://dashboard.stripe.com/settings/user) under Accounts then ID
 4. Get your Client Secret from your [Stripe API keys](https://dashboard.stripe.com/apikeys) under Standard keys then Secret key
-5. Add both of these to PostHog (and optionally a table name prefix) and click "Link"
+4. *Optional:* Add a prefix to your table names
+6. Click "Next"
 
 The data warehouse then starts syncing your Stripe data. You can see details and progress in the [data warehouse settings tab](https://us.posthog.com/data-warehouse/settings).
 
@@ -41,8 +42,25 @@ To link Hubspot:
 2. Click "Link Source" and select Hubspot
 3. Select the Hubspot account you want to link and click "Connect app"
 4. *Optional:* Add a prefix to your table names
+5. Click "Next"
 
 The data warehouse then starts syncing your Hubspot data. You can see details and progress in the [data warehouse settings tab](https://us.posthog.com/data-warehouse/settings).
+
+## Zendesk
+
+The Zendesk connector can link brands, groups, organizations, tickets, users, and sla policies.
+
+To link Zendesk:
+
+1. Go to the [data warehouse tab](https://us.posthog.com/data-warehouse) in PostHog
+2. Click "Link Source" and select Zendesk
+3. Provide the subdomain of your zendesk account (https://posthoghelp.zendesk.com/ -> "posthoghelp" is the subdomain)
+4. Provide the [API token](https://support.zendesk.com/hc/en-us/articles/4408889192858-Managing-access-to-the-Zendesk-API#topic_bsw_lfg_mmb) and email associated with it
+5. *Optional:* Add a prefix to your table names
+6. Click "Next"
+
+The data warehouse then starts syncing your Zendesk data. You can see details and progress in the [data warehouse settings tab](https://us.posthog.com/data-warehouse/settings).
+
 
 ## Postgres
 
@@ -62,6 +80,17 @@ To link Postgres:
 4. Click "Link"
 
 The data warehouse then starts syncing your Postgres data. You can see details and progress in the [data warehouse settings tab](https://us.posthog.com/data-warehouse/settings).
+
+#### Inbound IP addresses
+
+We use a set of IP addresses to access your Postgres instance. To ensure this connector works, add these IPs to your inbound security rules to enable the data import:
+
+| US | EU |
+| --- | --- |
+| 44.205.89.55  | 3.75.65.221 |
+| 44.208.188.173 | 18.197.246.42 |
+| 52.4.194.122 | 3.120.223.253 |
+
 
 ## Linking a custom source
 

@@ -347,4 +347,4 @@ We've shown you the basics of creating insights from your product's Claude usage
 
 - [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
-- [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+- [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)

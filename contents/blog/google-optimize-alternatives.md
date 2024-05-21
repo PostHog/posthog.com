@@ -94,7 +94,7 @@ It offers a basic visual editor so non-technical users can create experiments wi
 
 ### How much does GrowthBook cost?
 
-GrowthBook offers unlimited traffic (subject to a fair use policy), feature flags, and experiments. It charges only on the number of user accounts. Its Starter plan includes three GrowthBook users. Its Pro plan adds advanced permissions, custom fields, and its visual A/B test editor, for just $20 per user, per month.
+[GrowthBook](/blog/best-growthbook-alternatives) offers unlimited traffic (subject to a fair use policy), feature flags, and experiments. It charges only on the number of user accounts. Its Starter plan includes three GrowthBook users. Its Pro plan adds advanced permissions, custom fields, and its visual A/B test editor, for just $20 per user, per month.
 
 ### Companies that use GrowthBook
 

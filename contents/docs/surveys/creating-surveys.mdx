@@ -8,7 +8,6 @@ availability:
   enterprise: full
 ---
 
-import {ProductScreenshot} from 'components/ProductScreenshot'
 export const newSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-light-mode.png"
 export const newSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-dark-mode.png"
 
@@ -17,9 +16,16 @@ export const newSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/
     className="rounded shadow-xl"
 />
 
-To create a new survey, go to the [surveys tab](https://us.posthog.com/surveys) in the PostHog app, and click on the "New survey" button in the top right.
+To create a new survey, go to the [surveys tab](https://us.posthog.com/surveys) in the PostHog app, and click on the "New survey" button in the top right. This presents you with a collection of [survey templates](/templates?filter=type&value=survey) or you can click "Create blank survey" in the top right to create your own.
 
-This presents you with a collection of survey templates or you can click "Create blank survey" to create your own. After choosing one, you are brought to a form where you can complete the details of your new survey:
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714691601/posthog.com/contents/images/docs/surveys/survey-template-light.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714691601/posthog.com/contents/images/docs/surveys/survey-template-dark.png"
+    alt="Survey templates" 
+    classes="rounded"
+/>
+
+After choosing one, you are brought to a form where you can complete the details of your new survey:
 
 <ProductScreenshot
     imageLight={newSurveyLight} 
@@ -34,18 +40,17 @@ Here's a breakdown of each field in the form:
 
 There are three options for displaying a survey:
 
-1. **Popover:** Use PostHog's prebuilt user interfaces to show survey's as a popover in the bottom corner of the screen.
+1. **Popover:** Use PostHog's prebuilt user interfaces to show surveys as a popover in the bottom corner of the screen.
 
 2. **API:** Implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
 
-3. **Feedback button (beta)**: Set up a survey to show a prebuilt feedback tab when a custom button is clicked.
-
 ### Steps
 
-Steps is where you set up your questions as well as your confirmation message. You must subscribe to surveys to add multiple questions.
+Steps is where you set up your question(s), label, choice(s), description, button text, and confirmation message. You must [subscribe](https://us.posthog.com/organization/billing) to surveys to add multiple questions.
 
-PostHog supports multiple questions types. All survey types are available for both popover and API display modes.
+> **Tip:** The description supports HTML, so you can do things like add images with an `<img>` tag.
 
+PostHog supports multiple question types which are all available for both popover and API display modes.
 
 | Type                      | Preview                                                                                               |
 |------------------------|-------------------------------------------------------------------------------------------------------|
@@ -56,16 +61,14 @@ PostHog supports multiple questions types. All survey types are available for bo
 | **Single choice select**   | ![Single choice select survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/single-select-survey.png)                      |
 | **Multiple choice select** | ![Multiple choice survey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/surveys/multiple-choice-survey.png)                         |
 
-You can also select from [a variety of pre-built templates](/templates?filter=type&value=survey). 
-
 ### Customization
 
 Customization enables you to change the look of your popover survey: 
 
-- The color of the background, border, buttons.
-- The position of the popover.
-- The visibility of the PostHog branding.
+- The color of the background, border, and buttons.
+- The position of the popover at the bottom of the screen.
 - The placeholder text.
+- The visibility of the PostHog branding.
 
 ### Targeting
 
@@ -73,25 +76,32 @@ This specifies the conditions a user must meet to be shown the survey. A user mu
 
 You can target your survey to specific users based on:
 
-- **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled.
+- **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag)).
 
-- **Page URL contains:** Where the current URL contains a specific string.
+- **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex.
   
-- **Selector matches:** Whether a specific element appears on the page with the specified class name or ID. For example, you can target a survey with `#my-button` or `.my-button` selector.
+- **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can target a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey [after a delay](/tutorials/delayed-survey) or user action.
 
-- **User/group properties:** If you are capturing [person profiles](/docs/data/persons), you can target a survey to users who have a specific [user](/docs/product-analytics/user-properties) or [group property](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`.
+- **Wait period**: Hide surveys from users who have seen a survey in the last X days. Note that a user who completes a survey are never shown the same survey again, even if no wait period is set.
 
-- **Wait period**: Hide surveys from users who have seen a survey in the last X days.
+- **User and group properties:** If you are capturing [person profiles](/docs/data/persons), you can target a survey to users who have specific [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option.
 
-![Survey targeting options](https://res.cloudinary.com/dmukukwp6/image/upload/v1710125843/posthog.com/contents/images/docs/surveys/targeting-options-light-mode.png)
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714693687/posthog.com/contents/images/docs/surveys/target-light.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714693687/posthog.com/contents/images/docs/surveys/target-dark.png"
+    alt="Targeting" 
+    classes="rounded"
+/>
 
-> **Want your survey to show up after a delay?** Use selector matching to match a class, then add logic to add that class to your page after a delay. See the full set up in our on [how to show a survey after a delay](/tutorials/delayed-survey)
+### Completion conditions
+
+This enables you to stop your survey once you receive a specific number of responses. Note that because it takes time for PostHog to process responses, this is a rough guideline. Your survey might receive slightly more responses than you set.
 
 ## Launching your survey
 
 Once you've set up your survey, click "Save as draft" to save your survey. This enables you to review any changes before launching. Then, when you're ready to launch, click the "Launch" button.
 
-If you've created a [popover survey](#presentation), your survey will begin showing immediately.
+If you've created a [popover survey](#presentation), your survey will begin showing immediately to users matching your targeting.
 
 If you've created an [API survey](#presentation), you'll need to add your [custom survey code](/docs/surveys/implementing-custom-surveys) before launching.
 

@@ -13,7 +13,15 @@ import { Mobile as MobileNav } from 'components/MainNav'
 import { useLayoutData } from './hooks'
 import SearchBox from 'components/Search/SearchBox'
 
-const Article = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
+const Article = ({
+    children,
+    className = '',
+    headerBlur = true,
+}: {
+    children: React.ReactNode
+    className?: string
+    headerBlur?: boolean
+}) => {
     const { compact } = useLayoutData()
 
     return (
@@ -23,7 +31,7 @@ const Article = ({ children, className = '' }: { children: React.ReactNode; clas
                     <SearchBox className="!w-full !py-2" location="mobile-header" />
                 </div>
             ) : (
-                <Header />
+                <Header blur={headerBlur} />
             )}
             <main>{children}</main>
             {!compact && (
@@ -42,7 +50,8 @@ const Layout = ({
     parent,
     activeInternalMenu,
     className = '',
-}: IProps & { className?: string }): JSX.Element => {
+    headerBlur = true,
+}: IProps & { className?: string; headerBlur?: boolean }): JSX.Element => {
     const posthog = usePostHog()
 
     useEffect(() => {
@@ -58,7 +67,9 @@ const Layout = ({
     return (
         <SearchProvider>
             <LayoutProvider parent={parent} activeInternalMenu={activeInternalMenu}>
-                <Article className={className}>{children}</Article>
+                <Article className={className} headerBlur={headerBlur}>
+                    {children}
+                </Article>
             </LayoutProvider>
         </SearchProvider>
     )

@@ -66,7 +66,7 @@ Integrating Retool with PostgreSQL directly is rather simple.
     
     <br />
 
-3. On the configuration page, use `https://app.posthog.com/api/` for the 'Base URL' if you're using PostHog Cloud. Otherwise use the address of your PostHog instance, followed by `/api/`. Then, on the 'Headers' section, configure a header called `Authorization` with value `Bearer <YOUR_PERSONAL_API_KEY>`. For more information on API authentication, see our [dedicated page for this](/docs/api/overview#authentication). 
+3. On the configuration page, use `https://us.posthog.com/api/` for the 'Base URL' if you're using PostHog Cloud. Otherwise use the address of your PostHog instance, followed by `/api/`. Then, on the 'Headers' section, configure a header called `Authorization` with value `Bearer <YOUR_PERSONAL_API_KEY>`. For more information on API authentication, see our [dedicated page for this](/docs/api/overview#authentication). 
 4. Click 'Create Resource' and you should now be able to connect to PostHog endpoints through Retool queries. For information on our endpoints, see our [API Documentation](/docs/api/overview).
 5. For some of our endpoints, this configuration is enough. However, endpoints like `/event` and `/person` have pagination, which Retool does not support out of the box. As such, follow the next steps for instructions on how to handle PostHog's pagination with Retool.
 

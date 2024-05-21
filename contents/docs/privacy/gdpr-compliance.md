@@ -86,7 +86,7 @@ We recommend using PostHog Cloud EU for GDPR compliance, though you can use Post
 
 If using PostHog Cloud EU, simply follow the steps in the onboarding process to start sending events. Read our [integration documentation](/docs/integrate) for more information on sending events to PostHog. 
 
-Deploying PostHog onto your own infrastructure is straightforward and we provide support to help with any issues you encounter. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started.
+Deploying PostHog onto your own infrastructure is straightforward but we do not provide support for self-hosted instances. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started. 
 
 ### Step 3: Security configuration
 

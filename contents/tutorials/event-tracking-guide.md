@@ -62,7 +62,7 @@ posthog.project_api_key = '<ph_project_api_key>'
 # Only necessary if you want to use feature flags
 posthog.personal_api_key = '<ph_personal_api_key>'
 
-# You can remove this line if you're using app.posthog.com
+# You can remove this line if you're using us.posthog.com
 posthog.host = '<ph_client_api_host>'
 ```
 

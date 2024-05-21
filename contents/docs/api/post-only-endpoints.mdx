@@ -280,3 +280,4 @@ PostHog **does not return an error** to the client when the following happens:
 These three cases above cause the event to not be ingested, but you still receive a `200: OK` response from PostHog.
 
 This approach enables us to process events asynchronously if necessary, ensuring reliability and low latency for our event ingestion endpoints.
+

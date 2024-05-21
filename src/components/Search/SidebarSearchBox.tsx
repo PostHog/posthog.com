@@ -32,7 +32,7 @@ export const SidebarSearchBox: React.FC<SearchBoxProps> = ({ placeholder, filter
             <div className="flex items-center justify-between pl-10 pr-2 py-2 text-left text-[15px] font-medium text-black/30 dark:text-primary-dark/30 bg-white/50 dark:bg-gray-accent-dark dark:text-white w-full z-10">
                 <span>{placeholder || 'Search...'}</span>
                 {isMac !== undefined && (
-                    <span>
+                    <span className="hidden md:block">
                         {isMac ? (
                             <kbd className="">
                                 <CmdK className={keyboardShortcut} />
