@@ -47,7 +47,9 @@ If you are sick, you don't need to work and you will be paid - the upper limit f
 
 Please let your manager know if you need to take off due to illness as soon as you are able to and add it to PTO by Deel. You shouldn't pre-emptively book a bunch of days off sick, as you can't know how long you will actually be sick for and you may trigger the need for a doctor's note (see below). Just book the day or two off that you are sick then add more if you still feel unwell. 
 
-For extended periods of illness (5+ work days), please speak to Charles so we can work out a plan. In some countries, we may be required to request a doctor's note from you. If you have a medical condition you know will take you away from work regularly, please let Charles know so we can work out accommodations with you and your manager. 
+For extended periods of illness (5+ work days), or if you are going over the limit in your country/state, please speak to Fraser so we can work out a plan. In most countries, we will need a doctor's note from you. 
+
+If you have a medical condition you know will take you away from work regularly, please let Fraser know so we can work out accommodations with you and your manager. 
 
 ### Bereavements / Child loss 
 
