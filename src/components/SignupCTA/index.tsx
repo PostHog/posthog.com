@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { RenderInClient } from 'components/RenderInClient'
 import usePostHog from '../../hooks/usePostHog'
@@ -28,6 +28,10 @@ export const SignupCTA = ({
         type: 'cloud',
     }
 
+    const onCtaClick = useCallback(() => {
+        posthog?.setPersonProperties({})
+    }, [posthog])
+
     return (
         <RenderInClient
             placeholder={
@@ -38,6 +42,7 @@ export const SignupCTA = ({
                     to={`https://app.posthog.com/signup`}
                     event={event}
                     size={size}
+                    onClick={onCtaClick}
                 >
                     {text}
                 </CallToAction>
@@ -50,6 +55,7 @@ export const SignupCTA = ({
                     to={`https://${posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'}.posthog.com/signup`}
                     event={event}
                     size={size}
+                    onClick={onCtaClick}
                 >
                     {text}
                 </CallToAction>
