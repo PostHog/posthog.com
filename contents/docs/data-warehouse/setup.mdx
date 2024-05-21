@@ -81,7 +81,9 @@ To link Postgres:
 
 The data warehouse then starts syncing your Postgres data. You can see details and progress in the [data warehouse settings tab](https://us.posthog.com/data-warehouse/settings).
 
-We use a set of IP addresses to access your Postgres instance. Add the IPs to your inbound security rules to allow the data import:
+#### Inbound IP addresses
+
+We use a set of IP addresses to access your Postgres instance. To ensure this connector works, add these IPs to your inbound security rules to enable the data import:
 
 | US | EU |
 | --- | --- |
