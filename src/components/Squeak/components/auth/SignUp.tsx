@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Field, Form, Formik } from 'formik'
 import { User, useUser } from 'hooks/useUser'
 import { inputClasses, labelClasses } from '../Authentication'
 import Button from '../Button'
+import { usePostHog } from 'posthog-js/react'
 
 type SignUpProps = {
     buttonText?: string
@@ -12,6 +13,13 @@ type SignUpProps = {
 
 export const SignUp: React.FC<SignUpProps> = ({ buttonText = 'Sign up', onSubmit, setMessage }) => {
     const { signUp } = useUser()
+    const postHog = usePostHog()
+
+    useEffect(() => {
+        postHog?.setPersonProperties({
+            'Has visited sign up page': true,
+        })
+    }, [])
 
     const handleSubmit = async (values: any) => {
         const user = await signUp(values)
