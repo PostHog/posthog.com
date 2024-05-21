@@ -308,6 +308,46 @@ print(response)
 
 </MultiLanguage>
 
+## Events without person profiles
+
+By default, PostHog captures events with [person profiles](/docs/data/persons). To remove them, add the `$process_person_profile` property to the event and set it to `false`.
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "event name",
+  "distinct_id": "user distinct id",
+  "properties": {
+    "$process_person_profile": false
+  },
+  "timestamp": "2020-08-16T09:03:11.913767"
+}' <ph_client_api_host>/capture/
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "event name",
+    "distinct_id": "user distinct id",
+    "properties": {
+      "$process_person_profile": False
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+</MultiLanguage>
+
 ## Pageview
 
 Default PostHog events and properties have the `$` prefix. The most common and popular of these is the `$pageview` event.
