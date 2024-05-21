@@ -10,6 +10,7 @@ import {
     IconPeople,
     IconNotification,
     IconRewindPlay,
+    IconAI,
 } from '@posthog/icons'
 import { SQL } from 'components/ProductIcons'
 import { CallToAction } from 'components/CallToAction'
@@ -54,7 +55,7 @@ const product = {
 const team = 'Product Analytics'
 const teamSlug = '/teams/product-analytics'
 
-const subfeaturesItemCount = 5
+const subfeaturesItemCount = 6
 const subfeatures = [
     {
         icon: <IconBolt />,
@@ -81,6 +82,11 @@ const subfeatures = [
         icon: <IconPeople />,
         title: 'Group analytics',
         description: 'Analyze how any group of people (like an organization) use your product',
+    },
+    {
+        icon: <IconAI />,
+        title: 'AI engineering',
+        description: 'Integrate with existing monitoring tools and track latency, cost, and model performance',
     },
 ]
 
