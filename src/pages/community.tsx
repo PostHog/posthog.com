@@ -110,7 +110,7 @@ const SlackPosts = () => {
                             },
                         },
                     }) => {
-                        const topic = topics?.data?.[0]?.attributes?.label
+                        const topic = topics?.data?.[0]?.attributes
                         const name = [profile?.data?.attributes?.firstName, profile?.data?.attributes?.lastName]
                             .filter(Boolean)
                             .join(' ')
@@ -118,20 +118,20 @@ const SlackPosts = () => {
                             <li key={id}>
                                 <Link
                                     className="text-inherit hover:text-inherit leading-tight flex items-center gap-1"
-                                    to={`/questions/topic/${slugify(topic, { lower: true })}`}
+                                    to={`/questions/topic/${slugify(topic.slug)}`}
                                     state={{ previous: { title: 'Community', url: '/community' } }}
                                 >
-                                    {topic === '#where-in-the-world' ? (
+                                    {topic.slug === 'witw' ? (
                                         <IconGlobe className="size-5 opacity-50" />
-                                    ) : topic === '#devrel' ? (
+                                    ) : topic.slug === 'devrel' ? (
                                         <IconCoffee className="size-5 opacity-50" />
-                                    ) : topic === 'introductions' ? (
+                                    ) : topic.slug === 'introductions' ? (
                                         <IconHandwave className="size-5 opacity-50" />
                                     ) : (
                                         <></>
                                     )}
 
-                                    <h5 className="opacity-50 font-semibold text-sm m-0">{topic}</h5>
+                                    <h5 className="opacity-50 font-semibold text-sm m-0">{topic.label}</h5>
                                 </Link>
                                 <Link
                                     to={`/questions/${permalink}`}
