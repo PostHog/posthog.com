@@ -41,7 +41,7 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 ## Person profiles and user properties
 
-By default, PostHog captures events with person profiles. To set [user properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+For backward compatibility, PostHog captures events with person profiles by default. To set [user properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```js-web
 posthog.capture(
