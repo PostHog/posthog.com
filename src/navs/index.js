@@ -520,7 +520,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/marketing/in-app',
                     },
                     {
-                        name: 'PostHog for Startups',
+                        name: 'PostHog for startups',
                         url: '/handbook/growth/marketing/startups',
                     },
                     {
@@ -2076,8 +2076,8 @@ export const docsMenu = {
                 },
                 {
                     name: 'LLM insights',
-                    url: '/docs/product-analytics/llms',
-                    icon: 'IconMagicWand',
+                    url: '/docs/ai-engineering/llms',
+                    icon: 'IconAIText',
                     color: 'yellow',
                     badge: {
                         title: 'Beta',
@@ -2726,6 +2726,59 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/under-the-hood',
                     icon: 'IconMagicWand',
                     color: 'seagreen',
+                },
+            ],
+        },
+        {
+            name: 'AI engineering',
+            url: '/docs/ai-engineering',
+            color: '[#681291]',
+            colorDark: '[#C170E8]',
+            icon: 'IconAI',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            children: [
+                {
+                    name: 'AI engineering',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/ai-engineering',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'LLM insights',
+                    url: '/docs/ai-engineering/llm-insights',
+                    icon: 'IconAIText',
+                    color: 'blue',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/ai-engineering/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Integrations',
+                },
+                {
+                    name: 'Langfuse',
+                    url: '/docs/ai-engineering/langfuse-posthog',
+                    icon: 'IconWrench',
+                    color: 'purple',
+                },
+                {
+                    name: 'Helicone',
+                    url: '/docs/ai-engineering/helicone-posthog',
+                    icon: 'IconWrench',
+                    color: 'green',
                 },
             ],
         },

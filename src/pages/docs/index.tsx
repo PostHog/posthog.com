@@ -67,6 +67,13 @@ const quickLinks = [
         description: 'Easily track the most common web metrics',
         color: 'green',
     },
+    {
+        icon: 'IconAI',
+        name: 'PostHog for AI',
+        to: '/docs/ai-engineering',
+        description: 'Track metrics for AI & LLM products',
+        color: 'black',
+    },
 ]
 
 export const DocsIndex = () => {
