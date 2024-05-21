@@ -1257,6 +1257,10 @@
         {
             "source": "/blog/gdpr-google-analytics-privacy-shield",
             "destination": "/blog/best-gdpr-compliant-analytics-tools"
+        },
+        {
+            "source": "/docs/product-analytics/trends",
+            "destination": "/docs/product-analytics/trends/index"
         }
     ]
 }

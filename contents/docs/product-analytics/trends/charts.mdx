@@ -1,0 +1,145 @@
+---
+title: Charts
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import {ProductScreenshot} from 'components/ProductScreenshot'
+export const linerLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/linear-light-mode.png"
+export const linerDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/linear-dark-mode.png"
+export const cumulativeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/cumulative-light-mode.png"
+export const cumulativeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/cumulative-dark-mode.png"
+export const timeBarchartLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/time-bar-chart-light-mode.png"
+export const timeBarchartDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/time-bar-chart-dark-mode.png"
+export const valueLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/value-light-mode.png"
+export const valueDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/value-dark-mode.png"
+export const tableLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/table-light-mode.png"
+export const tableDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/table-dark-mode.png"
+export const pieLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/pie-light-mode.png"
+export const pieDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/pie-dark-mode.png"
+export const worldMapLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/world-map-light-mode.png"
+export const worldMapDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/world-map-dark-mode.png"
+export const activeViewersLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099320/posthog.com/contents/docs/product-analytics/trends/active-viewers-light.png"
+export const activeViewersDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099316/posthog.com/contents/docs/product-analytics/trends/active-viewers-dark.png"
+export const areaLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099337/posthog.com/contents/docs/product-analytics/trends/area-chart-light.png"
+export const areaDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099340/posthog.com/contents/docs/product-analytics/trends/area-chart-dark.png"
+
+There are nine charts and visualization options in trends. They're split into two categories:
+
+- **Time series**, which show you how tracked events and data points fluctuate over a time period.
+- **Total value**, which show the total number of tracked events or data points in any given time period.
+
+## Time series
+
+### Line chart (linear)
+
+<ProductScreenshot
+    imageLight = {linerLight} 
+    imageDark = {linerDark}
+    classes="rounded"
+    alt="Linear plot"
+/>
+
+The line chart is a simple, linear trend plot with time on the X-axis and each data point corresponding to the grouping value you've chosen.
+
+Additional series or breakdowns you add to a line chart will appear as separate lines on the chart. 
+
+### Line chart (cumulative)
+
+<ProductScreenshot
+    imageLight = {cumulativeLight} 
+    imageDark = {cumulativeDark}
+    classes="rounded"
+    alt="Cumulative plot"
+/>
+
+The cumulative plot displays a running tally of each series over the given time period.
+
+This is useful for understanding how quickly an event or data point is growing, such as whether the number of people signing up for your product is growing exponentially or leveling off.
+
+### Bar chart
+
+<ProductScreenshot
+    imageLight = {timeBarchartLight} 
+    imageDark = {timeBarchartDark}
+    classes="rounded"
+    alt="Time bar chart"
+/>
+
+The **time series** bar chart displays the value of a series over time. This plot shows the exact same information as the [linear chart](#line-chart-linear), but in a slightly different visual manner.
+
+Additional series or breakdowns you add to a bar chart will appear stacked, so you can see how much each property or series contributes to the total number.
+
+### Area chart
+
+<ProductScreenshot
+    imageLight = {areaLight} 
+    imageDark = {areaDark}
+    classes="rounded"
+    alt="Area chart"
+/>
+
+Area charts are a twist on the line chart. When you add a breakdown, or multiple series, area charts behave like a stacked bar chart, but render the data in a line chart showing how each data point contributes to the total.
+
+## Total value 
+
+### Number
+
+<ProductScreenshot
+    imageLight = {activeViewersLight} 
+    imageDark = {activeViewersDark}
+    classes="rounded"
+    alt="Total value"
+/>
+
+Shows the total of events or data points during the given period. Tick the "Compared to previous period" option to add a percentage comparison. 
+
+This option is only available when there's just one series (or [formula](/docs/product-analytics/trends/formulas) and no breakdowns added to the insight.
+
+### Bar Chart
+
+<ProductScreenshot
+    imageLight = {valueLight} 
+    imageDark = {valueDark}
+    classes="rounded"
+    alt="Value bar chart"
+/>
+
+Displays the total value of a series over the _entire date range_. This means that this type of plot has no option for grouping, as it doesn't display data over time.
+
+Try using a [breakdown](/docs/product-analytics/trends/breakdowns) in combination with this chart type to see a list of the top property values, or add multiple series to see how they compare.
+
+### Table
+
+<ProductScreenshot
+    imageLight = {tableLight} 
+    imageDark = {tableDark}
+    classes="rounded"
+    alt="Table chart"
+/>
+
+The table view displays the raw numerical values of a series over the _entire date range_.
+
+### Pie
+
+<ProductScreenshot
+    imageLight = {pieLight} 
+    imageDark = {pieDark}
+    classes="rounded"
+    alt="Pie chart"
+/>
+
+The pie chart shows the relative distribution of the values of different series or breakdowns over the _entire date range_.
+
+### World map
+
+<ProductScreenshot
+    imageLight = {worldMapLight} 
+    imageDark = {worldMapDark}
+    classes="rounded"
+    alt="World map chart"
+/>
+
+The world map chart displays values in an interactive map of the world, broken down by country code. This display option can't be selected if you're already breaking down by a property other than country code.
