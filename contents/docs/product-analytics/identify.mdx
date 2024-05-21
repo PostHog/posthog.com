@@ -190,7 +190,7 @@ You can view whether a user can be merged into another user using `alias` when [
 
 ## Processing person profiles
 
-For user identification to work, you must be capturing person profiles. If set your `person_profile` config option is set to `identified_only`, PostHog only captures person profiles once you call one of the following functions or methods:
+If your `person_profile` config option is set to `identified_only`, PostHog creates a person profile once you call one of the following functions or methods:
 
 - `identify`
 - `alias`
@@ -200,6 +200,8 @@ For user identification to work, you must be capturing person profiles. If set y
 - `setGroupPropertiesForFlags`
 
 Once you create a person profile for a user distinct ID, all events for that distinct ID count as ones with person profiles.
+
+If your `person_profile` config option is set to `always`, PostHog creates a person profile for every user on your site, whether or not they have been officially identified.
 
 ## Troubleshooting and FAQs
 

@@ -16,9 +16,11 @@ export const personProfileDark = "https://res.cloudinary.com/dmukukwp6/image/upl
     className="rounded shadow-xl"
 />
 
-People in PostHog represent users who do events. Every event has a `distinct_id` representing a person attached to it. 
+People in PostHog represent users who do events.
 
-Capturing person profiles and user properties enable:
+Every event has a `distinct_id` representing a person attached to it. However, not every `distinct_id` has an associated person profile.
+
+Capturing person profiles and user properties enables:
 
 - Viewing person profiles in the [People tab](https://us.posthog.com/persons)
 - Filtering on user properties
