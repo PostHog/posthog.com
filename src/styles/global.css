@@ -1482,3 +1482,11 @@ li.squeak-left-border {
         display: none;
     }
 }
+
+.text-gradient {
+    @apply text-transparent bg-clip-text animate-text-gradient 
+         bg-[linear-gradient(90deg,#30ABC6,#F35454,#2F80FA)] 
+    dark:bg-[linear-gradient(90deg,#F54E00,#F7A501,#29DBBB,#EB9D2A,#F54E00)];
+}
+
+/* #2F80FA,#30ABC6,#B62AD9,#29DBBB,#F35454,#2F80FA */

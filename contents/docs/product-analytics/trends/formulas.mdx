@@ -1,0 +1,28 @@
+---
+title: Formulas
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import {ProductScreenshot} from 'components/ProductScreenshot'
+export const formulaLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/formula-light-mode.png"
+export const formulaDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/user-guides/trends/formula-dark-mode.png"
+
+Formulas are custom mathematical expressions that you can use to compare and combine the value of multiple series.
+
+<ProductScreenshot
+    imageLight = {formulaLight} 
+    imageDark = {formulaDark}
+    classes="rounded"
+    alt="Formula map chart"
+/>
+
+To add a formula, click 'Enable formula mode'. Then within the input box, type out the expression you would like to evaluate.
+
+This expression can contain any number of basic mathematical operators (+, -, \*, /) along with variables (`A`, `B`, `C`, ...), which correspond to the series with that letter.
+
+If you have two series A and B, then the formula `A / B` will plot the value of series A divided by the value of series B at each point in time.
+
+When using a formula, only one series will be displayed on the chart, which will show the output of the formula at each point in time.
