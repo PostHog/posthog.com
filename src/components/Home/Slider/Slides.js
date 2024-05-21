@@ -966,19 +966,19 @@ export const AIEngineering = () => {
             title="AI engineering"
             flag="Beta"
             flagColor="yellow"
-            description="Insights for AI and LLM products"
+            description="Tools for AI and LLM products"
             additionalText={
                 <>
                     <p className="pt-2 mb-2">
-                        Find correlations between AI/LLM development and product usage. Use with other PostHog products
-                        for deeper insights.
+                        Find correlations bebtween your AI/LLM features and product usage. Combine with other PostHog
+                        products for deeper insights.
                     </p>
                     <ul className="mb-4">
-                        <li>Qualitative feedback with Surveys</li>
+                        <li>Evaluations with surveys</li>
                         <li>Insights with Session replay</li>
-                        <li>Roll out model improvements A/B testing</li>
+                        <li>Roll out model improvements with A/B testing</li>
                     </ul>
-                    <p className="mt-2 mb-4 text-sm border-l-2 border-[#7A4096]/50 pl-2">
+                    <p className="mt-2 mb-4 text-sm border-l-3 border-[#7A4096]/50 pl-2">
                         ElevenLabs uses the entire PostHog toolset to build their generative voice AI
                         <br />
                         <Link href="/customers/elevenlabs" className="!text-[#681291] !hover:text-[#681291]">
@@ -989,7 +989,7 @@ export const AIEngineering = () => {
                 </>
             }
             imageColumn="relative md:col-span-8"
-            imageClasses="flex-col gap-6 px-8 text-center pb-8 md:pb-0"
+            imageClasses="flex-col gap-6 lg:gap-8 px-8 text-center pb-8 md:pb-0 xl:items-center"
             contentColumn="md:col-span-8"
             Images={() => {
                 return (
@@ -1003,12 +1003,12 @@ export const AIEngineering = () => {
                                 <div className="absolute -top-6 md:top-0 right-6 md:right-0">
                                     <BrainIcon />
                                 </div>
-                                <div className="relative text-sm self-start">
-                                    “How does the LLM feature <br />
-                                    impact my conversion rates”
+                                <div className="relative -ml-32 md:-ml-48">
+                                    “Which traces consume <br />
+                                    the most tokens?”
                                 </div>
-                                <div className="relative text-xl font-bold text-balance left-8">
-                                    “Does interacting with the LLM feature relate to higher retention rates?”
+                                <div className="relative self-end text-2xl font-bold text-balance">
+                                    “Does my LLM feature increase retention rates?”
                                 </div>
                                 <div className="relative text-sm -left-6 md:-left-12 xl:left-0">
                                     “Are there generation latency spikes?”
