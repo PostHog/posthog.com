@@ -51,7 +51,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Replay | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/replay</span> |
 | Retention | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/retention</span> |
 | Saved Insights | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/saved-insights</span> |
-| Security | [@benjackwhite][@benjackwhite] is a good reference person but it is every team's job to consider and react to security issues |  <span class="lemon-tag gh-tag">feature/security</span> |
+| Security | [@benjackwhite][@benjackwhite] is a good reference person but it is every teams job to consider and react to security issues |  <span class="lemon-tag gh-tag">feature/security</span> |
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
 | Session Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
 | Settings (personal & project) | [@liyiy][@liyiy]  |  <span class="lemon-tag gh-tag">feature/settings</span> |
