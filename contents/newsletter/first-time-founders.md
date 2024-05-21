@@ -76,6 +76,8 @@ Initial feedback and orders convinced Taylor he was onto something, but he and h
 
 > "We were very descriptive about the solution we were building and, in the end, it wasn't appreciably better than the email and spreadsheets based workflow they were using. People don't like change, and they won't adopt a new way of doing things unless it is massively better."
 
+<NewsletterForm />
+
 ## More first-time founder mistakes
 
 ### 1) The wrong co-founder(s) 🤗
@@ -126,6 +128,8 @@ He's got one final piece of advice for first-time founders:
 **[Positive friction](https://read.first1000.co/p/positive-friction) – Ali Abouelatta:** Sometimes it pays to add more steps to your onboarding process, what Ali calls positive friction: “They [Rise] realized the more screens they added to the onboarding flow, the more personalized and advanced their product appeared to the end users.”
 
 **[The engineer/manager pendulum](https://charity.wtf/2017/05/11/the-engineer-manager-pendulum/) – Mipsytipsy:** ”The best frontline eng managers in the world are the ones that are never more than 2-3 years removed from hands-on work, full time down in the trenches. The best individual contributors are the ones who have done time in management.”
+
+<NewsletterForm />
 
 *Words by Andy Vandervell, who will accept almond croissants as payment.*
 

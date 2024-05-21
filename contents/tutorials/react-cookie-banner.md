@@ -148,6 +148,8 @@ When we head back to the local site, we’ll see our cookie banner at the bottom
 
 > 💯: For bonus points, you can click each of the buttons and go view the associated events in your PostHog instance.
 
+<NewsletterForm />
+
 ## Step 4: Adding the opt out (or in) logic
 
 Next, we’ll add the logic for accepting or declining the tracking cookies. We’ll head back to our `CookieBanner.js` component, import the PostHog library, and add click handlers for the buttons.
@@ -299,3 +301,5 @@ If you’re interested in going further into tracking, data management, and cook
 1. A tutorial on [setting up cookieless tracking](/tutorials/cookieless-tracking).
 2. A guide to [setting up a reverse proxy](/docs/integrate/proxy) to help your data stay first-party.
 3. Sign up for our [EU Cloud](https://eu.posthog.com/signup).
+
+<NewsletterForm />

@@ -72,6 +72,8 @@ After mapping out their ideas, the team voted on the 1-3 features they wanted to
 
 For example, **mobile replay**, in the top right corner (high impact, high effort), now has an [in-progress mega issue](https://github.com/PostHog/posthog/issues/19037) dedicated to its implementation. **Mobile dashboards**, bottom right (high impact, low effort), will be live shortly.
 
+<NewsletterForm />
+
 ## 4. Make ownership clear
 
 This process creates clear ownership and, in turn, makes deciding what to build much clearer. The owner becomes responsible for validating the idea, implementing the feature, making tweaks and bug fixes, and ensuring ongoing success.
@@ -150,3 +152,5 @@ The Co-founder and Chief Strategy Officer of [Intercom](/tutorials/intercom-sess
 Former CEO of Twitch (and OpenAI 🧐) breaks down his three feature prioritization frameworks: built for me, switch to us, and three numbers matter.
 
 _Words by Ian Vanagas, who wonders what happened to all the “growth hackers.”_
+
+<NewsletterForm />

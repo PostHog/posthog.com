@@ -81,6 +81,8 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 > 
 > PostHog is an ideal Statsig alternative if you're looking for a more powerful analytics tool that can also serve your A/B testing and feature management needs. It also offers a dedicated EU-hosted cloud at no extra cost.
 
+<NewsletterForm />
+
 <br />
 
 ## 2. LaunchDarkly

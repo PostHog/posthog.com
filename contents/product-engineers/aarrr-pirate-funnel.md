@@ -80,6 +80,8 @@ It all starts with how you track user behavior in your product. While you can us
 
 > ☠️ **Try our AARRR dashboard template:** PostHog users can use our [customizable AARRR pirate metrics template](/templates/aarrr-dashboard) to get started. Simply input your events and tweak as you require.
 
+<NewsletterForm />
+
 ### 1. Acquisition
 
 - How many users signed up?
@@ -215,3 +217,5 @@ Dave McClure's original framework suggests you spend 80% of your effort on refin
 [^1]: _[Startup Metrics for Pirates deck](https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-nov-2010) – Dave McClure refined his original deck from its inception in 2007. This version is from 2010._ 
 
 > **Want to build an AARRR funnel in PostHog?** Use our [AARRR dashboard template](/templates/aarrr-dashboard) to set one up quickly and easily.
+
+<NewsletterForm />
