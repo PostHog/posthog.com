@@ -2271,19 +2271,13 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Installation',
-                    url: '/docs/feature-flags/installation',
-                    icon: 'IconBook',
-                    color: 'blue',
-                },
-                {
                     name: 'Creating feature flags',
                     url: '/docs/feature-flags/creating-feature-flags',
                     icon: 'IconFlag',
                     color: 'orange',
                 },
                 {
-                    name: 'Adding your code',
+                    name: 'Implementing a flag',
                     url: '/docs/feature-flags/adding-feature-flag-code',
                     icon: 'IconCode',
                     color: 'salmon',

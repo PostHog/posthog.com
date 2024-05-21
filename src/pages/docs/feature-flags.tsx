@@ -66,7 +66,7 @@ export const Intro = ({ image = true }) => (
             <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                 Toggle features for cohorts or individuals to test the impact before rolling out to everyone.
             </h3>
-            <CallToAction to="/docs/feature-flags/installation">Create your first feature flag</CallToAction>
+            <CallToAction to="/docs/feature-flags/creating-feature-flags">Create your first feature flag</CallToAction>
         </div>
 
         {image && (

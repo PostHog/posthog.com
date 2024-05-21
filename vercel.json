@@ -660,6 +660,7 @@
         },
         { "source": "/docs/feature-flags/libraries", "destination": "/docs/feature-flags/" },
         { "source": "/docs/feature-flags/manual", "destination": "/docs/feature-flags/installation" },
+        { "source": "/docs/feature-flags/installation", "destination": "/docs/feature-flags/adding-feature-flag-code" },
         {
             "source": "/docs/feature-flags/rollout-strategies",
             "destination": "/docs/feature-flags/creating-feature-flags"

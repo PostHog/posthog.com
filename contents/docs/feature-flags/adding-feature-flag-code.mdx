@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-Once you've created your feature flag in PostHog, the next step is to add your code:
+Once you've created your feature flag in PostHog, the next step is to install PostHog (if you haven't already), and then implement the feature flag in your code.
 
 import Tab from "components/Tab"
 import Frameworks from "../integrate/\_snippets/frameworks.mdx"
@@ -24,6 +24,21 @@ import ReactNativeFeatureFlagsCode from '../integrate/feature-flags-code/_snippe
 import AndroidFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-android.mdx'
 import IOSFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-ios.mdx'
 import FlutterFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-flutter.mdx'
+import APIInstall from '../integrate/_snippets/install-api.mdx'
+import WebInstall from '../integrate/_snippets/install-web.mdx'
+import ReactInstall from '../integrate/_snippets/install-react.mdx'
+import NodeInstall from '../integrate/_snippets/install-node.mdx'
+import PythonInstall from '../integrate/_snippets/install-python.mdx'
+import PHPInstall from '../integrate/_snippets/install-php.mdx'
+import RubyInstall from '../integrate/_snippets/install-ruby.mdx'
+import GoInstall from '../integrate/_snippets/install-go.mdx'
+import ReactNativeInstall from '../integrate/_snippets/install-react-native.mdx'
+import AndroidInstall from '../integrate/_snippets/install-android.mdx'
+import IOSInstall from '../integrate/_snippets/install-ios.mdx'
+import JavaInstall from '../integrate/_snippets/install-java.mdx'
+import RustInstall from '../integrate/_snippets/install-rust.mdx'
+import FlutterInstall from '../integrate/_snippets/install-flutter.mdx'
+import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
 
 <!-- prettier-ignore -->
 <Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Flutter', 'Java', 'Rust', 'Elixir', 'api']}>
@@ -46,36 +61,58 @@ import FlutterFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/f
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
+            <WebInstall />
+            <h1>Implementing a feature flag</h1>
             <WebFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
+            <ReactInstall />
+            <h1>Implementing a feature flag</h1>
             <ReactFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
+            <NodeInstall />
+            <h1>Implementing a feature flag</h1>
             <NodeFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
+            <PythonInstall />
+            <h1>Implementing a feature flag</h1>
             <PythonFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
+            <PHPInstall />
+            <h1>Implementing a feature flag</h1>
             <PHPFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
+            <RubyInstall />
+            <h1>Implementing a feature flag</h1>
             <RubyFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
+            <GoInstall />
+            <h1>Implementing a feature flag</h1>
             <GoFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
+            <ReactNativeInstall />
+            <h1>Implementing a feature flag</h1>
             <ReactNativeFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
+            <AndroidInstall />
+            <h1>Implementing a feature flag</h1>
             <AndroidFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
+            <IOSInstall />
+            <h1>Implementing a feature flag</h1>
             <IOSFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
+            <FlutterInstall />
+            <h1>Implementing a feature flag</h1>
            <FlutterFeatureFlagsCode />
         </Tab.Panel>
         <Tab.Panel>
@@ -94,6 +131,11 @@ import FlutterFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/f
             </blockquote>
         </Tab.Panel>
         <Tab.Panel>
+            <APIInstall />
+            <blockquote>
+            For more details, see our <a href="/docs/api">API docs</a>
+            </blockquote>
+            <h1>Implementing a feature flag</h1>
             <APIFeatureFlagsCode />
         </Tab.Panel>
     </Tab.Panels>
