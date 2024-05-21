@@ -22,6 +22,8 @@ import Newsletter from 'components/InsidePostHog/Newsletter'
 import Changelog from 'components/InsidePostHog/Changelog'
 import FeatureRequests from 'components/InsidePostHog/FeatureRequests'
 import AppStatus from 'components/AppStatus'
+import qs from 'qs'
+import slugify from 'slugify'
 
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -40,6 +42,10 @@ const TabButton = ({ active, onClick, children, className = '' }) => {
             {children}
         </button>
     )
+}
+
+const Skeleton = () => {
+    return <div className="animate-pulse bg-accent dark:bg-accent-dark h-[250px] w-full rounded-md" />
 }
 
 const PersonSpotlight = ({ title, content, byline, image, cta }) => {
@@ -61,38 +67,79 @@ const PersonSpotlight = ({ title, content, byline, image, cta }) => {
 }
 
 const SlackPosts = () => {
-    const { questions } = useQuestions({
-        filters: {
-            topics: {
-                label: {
-                    $startsWith: '#',
+    const [loading, setLoading] = useState(true)
+    const [slackPosts, setSlackPosts] = useState([])
+
+    useEffect(() => {
+        const slackPostsQuery = qs.stringify(
+            {
+                populate: {
+                    question: {
+                        populate: ['topics', 'profile'],
+                    },
                 },
             },
-        },
-    })
+            { encodeValuesOnly: true }
+        )
+        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/slack-posts?${slackPostsQuery}`)
+            .then((res) => res.json())
+            .then((data) => {
+                if (data?.data?.length > 0) {
+                    setSlackPosts(data.data)
+                }
+                setLoading(false)
+            })
+    }, [])
 
-    return questions?.data?.length > 0 ? (
+    return loading ? (
+        <div className="py-4">
+            <Skeleton />
+        </div>
+    ) : slackPosts?.length > 0 ? (
         <div className="py-4">
             <h3 className="text-base">From the PostHog Slack</h3>
             <ul className="list-none m-0 p-0 space-y-4">
-                {questions.data.map(({ id, attributes: { topics, body, profile } }) => {
-                    const topic = topics?.data?.[0]?.attributes?.label
-                    const name = [profile?.data?.attributes?.firstName, profile?.data?.attributes?.lastName]
-                        .filter(Boolean)
-                        .join(' ')
-                    return (
-                        <li key={id}>
-                            <h5 className="opacity-50 text-sm m-0">{topic}</h5>
-                            <p className="text-sm m-0 my-2">
-                                <span className="opacity-50">Shared by</span>{' '}
-                                <Link to={`/community/profiles/${profile?.data?.id}`}>{name}</Link>
-                            </p>
-                            <div className="article-content">
-                                <Markdown>{body}</Markdown>
-                            </div>
-                        </li>
-                    )
-                })}
+                {slackPosts.map(
+                    ({
+                        id,
+                        attributes: {
+                            question: {
+                                data: {
+                                    attributes: { topics, body, profile, subject, permalink },
+                                },
+                            },
+                        },
+                    }) => {
+                        const topic = topics?.data?.[0]?.attributes?.label
+                        const name = [profile?.data?.attributes?.firstName, profile?.data?.attributes?.lastName]
+                            .filter(Boolean)
+                            .join(' ')
+                        return (
+                            <li key={id}>
+                                <Link
+                                    className="text-inherit hover:text-inherit"
+                                    to={`/questions/topic/${slugify(topic, { lower: true })}`}
+                                    state={{ previous: { title: 'Community', url: '/community' } }}
+                                >
+                                    <h5 className="opacity-50 text-sm m-0">{topic}</h5>
+                                </Link>
+                                <Link
+                                    to={`/questions/${permalink}`}
+                                    state={{ previous: { title: 'Community', url: '/community' } }}
+                                >
+                                    <h4 className="m-0 my-1 text-base">{subject}</h4>
+                                </Link>
+                                <p className="text-sm m-0 mb-2">
+                                    <span className="opacity-50">Shared by</span>{' '}
+                                    <Link to={`/community/profiles/${profile?.data?.id}`}>{name}</Link>
+                                </p>
+                                <div className="article-content">
+                                    <Markdown>{body}</Markdown>
+                                </div>
+                            </li>
+                        )
+                    }
+                )}
             </ul>
         </div>
     ) : null
