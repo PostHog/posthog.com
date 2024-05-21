@@ -462,7 +462,7 @@ function DpaGenerator() {
                                         A perfectly legal doc, but with some pizazz
                                     </label>
                                     <div className="block text-sm opacity-75">
-                                        Holds up in a court of law, but with a nicer font and a pretty logo
+                                        Holds up in a court of law, but with a nicer font and a color logo
                                     </div>
                                 </li>
                                 <li className="pl-7 relative">
@@ -475,7 +475,7 @@ function DpaGenerator() {
                                         onChange={handleInputChange}
                                     />
                                     <label className="font-semibold" htmlFor="lawyer">
-                                        Your lawyer's favorite version
+                                        Drab and dull - preferred by lawyers
                                     </label>
                                     <br />
                                     <div className="block text-sm opacity-75">
@@ -492,7 +492,7 @@ function DpaGenerator() {
                                         onChange={handleInputChange}
                                     />
                                     <label className="font-semibold" htmlFor="fairytale">
-                                        Fairytale
+                                        A fairy tale story
                                     </label>
                                     <br />
                                     <div className="block text-sm opacity-75">"Explain it to me like I'm five"</div>
