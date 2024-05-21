@@ -2593,37 +2593,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Filtering',
-                    url: '',
-                    children: [
-                        {
-                            url: '/docs/cdp/downsampling',
-                            name: 'Downsampler',
-                        },
-                        {
-                            url: '/docs/cdp/event-sequence-timer',
-                            name: 'Event Sequence Timer',
-                        },
-                        {
-                            url: '/docs/cdp/filter-out',
-                            name: 'Filter Out',
-                        },
-                        {
-                            url: '/docs/cdp/property-filter',
-                            name: 'Property Filter',
-                        },
-                        {
-                            url: '/docs/cdp/schema-enforcer',
-                            name: 'Schema Enforcer',
-                        },
-                        {
-                            url: '/docs/cdp/taxonomy-standardizer',
-                            name: 'Taxonomy Standardizer',
-                        },
-                    ],
-                },
-                {
-                    name: 'Transformation',
+                    name: 'Transformations',
                     url: '',
                     children: [
                         {
@@ -2641,6 +2611,30 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/user-agent-populator',
                             name: 'User Agent Populator',
+                        },
+                        {
+                            url: '/docs/cdp/event-sequence-timer',
+                            name: 'Event Sequence Timer',
+                        },
+                        {
+                            url: '/docs/cdp/property-filter',
+                            name: 'Property Filter',
+                        },
+                        {
+                            url: '/docs/cdp/taxonomy-standardizer',
+                            name: 'Taxonomy Standardizer',
+                        },
+                        {
+                            url: '/docs/cdp/downsampling',
+                            name: 'Downsampler',
+                        },
+                        {
+                            url: '/docs/cdp/filter-out',
+                            name: 'Filter Out',
+                        },
+                        {
+                            url: '/docs/cdp/schema-enforcer',
+                            name: 'Schema Enforcer',
                         },
                     ],
                 },
