@@ -319,7 +319,7 @@ const link = (marginBottom = '1') => cntl`
     leading-tight
     text-primary
     hover:text-primary
-    dark:text-primary-dark
+    dark:text-primary-dark/75
     dark:hover:text-white
     text-base
     font-bold
@@ -370,7 +370,7 @@ export function Footer(): JSX.Element {
     ]
 
     return (
-        <footer className="bg-accent dark:bg-accent-dark border-y border-light dark:border-dark">
+        <footer className="bg-accent dark:bg-accent-dark border-y border-light dark:border-dark print:hidden">
             <div className="relative -top-6">
                 <Link
                     to="/"
@@ -382,7 +382,7 @@ export function Footer(): JSX.Element {
                 </Link>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 w-full max-w-screen-2xl mx-auto">
+            <div className="grid grid-cols-2 mdlg:grid-cols-3 lg:grid-cols-6 w-full max-w-screen-2xl mx-auto">
                 {linklist.map((item) => (
                     <LinkListItem {...item} key={item.url} />
                 ))}
@@ -405,23 +405,36 @@ export function Footer(): JSX.Element {
                 </ul>
             </div>
             <div className="py-5  border-l-0 border-r-0">
-                <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center text-lg px-5">
+                <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-baseline text-lg px-5">
                     <small className="font-semibold dark:text-gray">
                         &copy; {new Date().getFullYear()} PostHog, Inc.
                     </small>
-                    <ul className="m-0 p-0 list-none sm:ml-auto flex sm:space-x-8 space-x-4 mt-2 sm:mt-0">
+                    <ul className="m-0 pl-0 pb-32 mdlg:pb-0 list-none sm:ml-auto flex flex-col mdlg:flex-row items-baseline sm:space-x-8 mdlg:space-x-4 mt-2 sm:mt-0 gap-2 mdlg:gap-0">
                         <li>
                             <Link
                                 to="https://status.posthog.com"
-                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
+                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
                             >
                                 System status
                             </Link>
                         </li>
+                        <li className="-mt-1 mdlg:mt-0">
+                            <span className="hidden mdlg:inline-block pr-1 text-xl relative top-0.5">👉</span>
+                            <Link
+                                to="/dpa"
+                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
+                            >
+                                Generate a DPA
+                            </Link>
+                            <span className="inline-block px-1 text-xl relative top-0.5">👈</span>
+                            <span className="text-gradient bg-[length:700%_100%] text-sm ml-1 font-semibold italic">
+                                (It's guaranteed fun!)
+                            </span>
+                        </li>
                         <li>
                             <Link
                                 to="/handbook/company/security#soc-2"
-                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
+                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
                             >
                                 SOC 2
                             </Link>
@@ -429,7 +442,7 @@ export function Footer(): JSX.Element {
                         <li>
                             <Link
                                 to="/docs/privacy/hipaa-compliance"
-                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
+                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
                             >
                                 HIPAA
                             </Link>
@@ -437,7 +450,7 @@ export function Footer(): JSX.Element {
                         <li>
                             <Link
                                 to="/privacy"
-                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
+                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
                             >
                                 Privacy policy
                             </Link>
@@ -445,7 +458,7 @@ export function Footer(): JSX.Element {
                         <li>
                             <Link
                                 to="/terms"
-                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
+                                className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
                             >
                                 Terms
                             </Link>

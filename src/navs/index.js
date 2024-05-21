@@ -886,6 +886,17 @@ export const communityMenu = {
     ],
 }
 
+export const sexyLegalMenu = {
+    name: 'Terms',
+    url: '/terms',
+    icon: 'IconLogomark',
+    children: [
+        { name: 'Terms', icon: 'IconDocument', url: '/terms', color: 'blue' },
+        { name: 'Privacy', icon: 'IconShield', url: '/privacy', color: 'seagreen' },
+        { name: 'DPA generator', icon: 'IconPencil', url: '/dpa', color: 'red' },
+    ],
+}
+
 export const companyMenu = {
     name: 'Company',
     url: '/about',
