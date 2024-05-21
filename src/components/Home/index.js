@@ -22,7 +22,18 @@ import NoHatingAllowed from './NoHatingAllowed'
 import { RenderInClient } from 'components/RenderInClient'
 import BillboardTruck from './BillboardTruck'
 import Spinner from 'components/Spinner'
-import { GlobeScene } from './Globe'
+
+const GlobeScene = React.lazy(() =>
+    import('./Globe').then((module) => ({
+        default: module.GlobeScene,
+    }))
+)
+
+const GlobeSkeleton = () => (
+    <div className="px-5">
+        <div className="bg-accent dark:bg-accent-dark rounded-md max-w-screen-lg mx-auto h-[50rem] mb-16 mt-12 pt-20 pb-16" />
+    </div>
+)
 
 const Home = () => {
     const posthog = usePostHog()
@@ -61,7 +72,11 @@ const Home = () => {
                 <HogQL />
                 <Community />
                 <CustomerData />
-                {typeof window !== 'undefined' && <GlobeScene />}
+                {typeof window !== 'undefined' && (
+                    <React.Suspense fallback={<GlobeSkeleton />}>
+                        <GlobeScene />
+                    </React.Suspense>
+                )}
                 <Timeline />
                 <Roadmap />
                 <Startups />
