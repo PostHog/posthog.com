@@ -1,7 +1,7 @@
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import { useSearch } from 'components/Search/SearchContext'
-import { useActions, useValues } from 'kea'
+import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import {
     IconApp,
@@ -393,16 +393,11 @@ export const Main = () => {
     } = useLayoutData()
     const { pathname } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)
-    const { setWebsiteTheme } = useActions(layoutLogic)
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const posthog = usePostHog()
 
     useEffect(() => {
         if (window) {
-            setWebsiteTheme(window.__theme)
-            window.__onThemeChange = () => {
-                setWebsiteTheme(window.__theme)
-            }
             const instanceCookie = document.cookie
                 .split('; ')
                 ?.filter((row) => row.startsWith('ph_current_instance='))
