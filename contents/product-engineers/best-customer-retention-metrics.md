@@ -28,7 +28,7 @@ Measuring monthly retention is best if you run a monthly subscriptions business.
 
 ### Why are they useful?
 
-Almost any business that relies on repeat customers should be measuring retention and churn. There are some exceptions. If you run a car dealership, for example, you probably don’t need to be measuring retention and churn as cars are, typically, very rare purchases. Likewise, if you’re running a funeral home, customer retention and churn probably isn’t your most important metric.
+Almost any business that relies on repeat customers should be measuring retention and churn. It's a simple, essential measure of company health. Low churn is good, high churn is bad. Retention is the inverse and shows how sticky new customers are. Do new customers keep coming back for a week? A month? A year? And how often? Drilling down into the data will also help you see which specific features of your product are the most sticky, or the most likely to cause churn.```
 
 ### How to you calculate customer retention and churn
 
@@ -44,11 +44,25 @@ For example, HogTube, a subscription-based, hedgehog-themed YouTube rival, had 1
 
 ((1,300 − 500) /1,000) x 100 = 80%. That gives you a customer retention rate of 80%. Your churn rate is just the inverse, 20%.
 
-### What’s a good customer retention rate?
+You can use a product analytics platform like PostHog to better analyze retention. Cohort retention tables are a great way of visualizing this kind of data.
+
+![Cohort retention table]( https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/retention-vs-churn/retention-table-example-all.png)
+
+In the example above, we're looking at unique users who signed up to a product for the first time in the last eight weeks, and who then came back and triggered a specific event. To read the data, start on the left and work across:
+
+-  **Cohort** shows the week users signed up.
+-  **Size** shows how big the cohort is.
+- **Week 0** shows the percentage of users in that cohort who used your product in the first week. In Week 0, it's always 100%, then it typically declines over time.
+-  **Week 1 to 8** shows how many users who returned in a given week relative to Week 0. The blue boxes show completed period, the white boxes show periods still in progress.
+
+In the example above, you can see that retention levels out at around 20% from Week 4 onwards, a good sign of retention. See our [guide on measuring retention](/product-engineers/churn-rate-vs-retention-rate) for more on this.
+
+
+### What’s a good customer retention rate and customer churn rate?
 
 ![Churn](https://res.cloudinary.com/dmukukwp6/image/upload/v1714661002/posthog.com/contents/blog/churn.png)
 
-A good customer retention rate – or churn rate – really depends on the type of company you are and the type of industry you’re in. For small to medium-sized SaaS companies, which bill monthly, anything between [3% and 7%](https://www.kalungi.com/blog/saas-churn-rate-benchmarks) is a good churn rate. [Data from Fullview](https://www.fullview.io/blog/average-churn-rate-for-saas-companies) shows that a monthly churn of more than 8% makes growing a business really hard work. 
+A good customer retention rate – or churn rate – really depends on the type of company you are and the type of industry you’re in. For small to medium-sized SaaS companies that bill monthly, anything between [3% and 7%](https://www.kalungi.com/blog/saas-churn-rate-benchmarks) is a good churn rate. [Data from Fullview](https://www.fullview.io/blog/average-churn-rate-for-saas-companies) shows that a monthly churn of more than 8% makes growing a business really hard work. 
 
 More established enterprise B2B SaaS companies, which likely sell to larger companies that pay annually and spend big, need to have lower churn. At these bigger companies, monthly churn should be [closer to 1%](https://www.vitally.io/post/saas-churn-benchmarks).
 
@@ -56,9 +70,13 @@ Most companies, for obvious reasons, keep churn rates secret. [Buffer](https://b
 
 Higher churn at early-stage startups is totally normal and fine, so long as you’re able to grow fast and improve your product. If and when churn slows, that’s a good sign you’ve found [product-market fit](/founders/product-market-fit-game). 
 
-One reason why Netflix continues to dominate the streaming industry is its incredibly low monthly churn. In December 2023 it was just 2%, a figure it maintained for pretty much the whole year. Apple TV+, by comparison, had a monthly churn of 8% in December 2023. 
+One reason why Netflix continues to dominate the streaming industry is its incredibly low monthly churn. In December 2023 [it was just 2%](https://www.axios.com/newsletters/axios-media-trends-f6809fe1-3f71-483d-85d7-bbb0f4ed3521.html), a figure it maintained for pretty much the whole year. Apple TV+, by comparison, had a monthly churn of 8% in December 2023. 
 
 This effectively means that Netflix spends a lot less time and money attracting new subscribers to replace people who’ve left. Apple TV+’s 8% monthly churn might not sound that much higher, but churn compounds. Annually, if Apple TV+ did nothing to attract new subscribers, it would lose almost 80% of its customers. Netflix, on the other hand, would lose 22.1%.
+
+![Churn compounds](https://res.cloudinary.com/dmukukwp6/image/upload/v1714754725/posthog.com/contents/blog/churn-compounds.png)
+
+
 
 Read our [in-depth guide to churn analysis](/product-engineers/churn-rate-vs-retention-rate) to go deeper on how use these metrics in your business.
 
@@ -108,9 +126,9 @@ Not all revenue churn comes from customers failing to renew, or cancelling their
 This is really useful for understanding the exact nature of retention and churn in your product. A company, for example, could have a low customer churn rate, but high revenue churn. This would suggest either:
 
 1. Only high-value customers are churning.
-2. Customers are choosing to spend less / downgrade, rather than churn entirely.
+2. Customers are choosing to spend less or downgrade, rather than churn entirely.
 
-Thus, analyzing customer retention and revenue churn together is essential to finding the truth about your business.
+Analyzing customer retention and revenue churn together is essential to finding the truth about your business.
 
 ### How to calculate revenue churn rate
 
@@ -133,6 +151,10 @@ For example, Hogflix had MRR of $100,000 in May. In April, its churned revenue w
 This depends again on how much your customers pay and how often they pay. If your business is based on monthly subscriptions, and your average revenue per account is $10 or less per month, then aim for monthly net revenue churn of around 6% or less. 
 
 The more customers pay, the lower your churn should be. At $250 average revenue per account per month, aim for a net revenue churn [of 1.4% or less](https://techcrunch.com/2022/04/20/study-up-on-churn-rate-basics-to-set-customer-and-revenue-benchmarks/), according to data compiled by analytics platform ChartMogul. This sort of churn rate also assumes that your customers are paying annually and, therefore, churn less often because they can’t ditch their contract.
+
+Somewhat confusingly, it can be a good thing when net revenue retention, or NRR, is negative. This relies on something called net negative churn, which is when the revenue gained from existing customers through upselling and upgrades compensates for revenue lost from churn. Basically, revenue from existing customers is expanding faster than revenue lost from losing customers.
+
+For a lot of SaaS business this can be a sign of high customer satisfaction and strong product-market fit. Making more revenue from existing customers is also cheaper than acquiring new ones, especially if they then churn. Despite this, it's important not to neglect acquiring new customers, and a high churn rate is likely still a sign of issues with your product or your marketing strategy. 
 
 ## 4. Net Promoter Score (NPS)
 
@@ -164,6 +186,21 @@ The NPS score is calculated by subtracting the percentage of Detractors from the
 
 According to [Satmetrix](https://www.satmetrix.com/wp-content/uploads/2023/07/NICE-Net-Promoter-Benchmarks-2023.pdf), the average NPS score for software and apps is 27. But there’s a really wide range – at Dropbox, it’s 27, at Slack it’s 53, and at Square it’s 70. At PostHog, the NPS for our product analytics is 46.7, for our session replay it’s 56.6, and for feature flags it’s 65.9.
 
+Below is a table with a benchmark of NPS scores from well-known SaaS products.
+
+| Product | NPS score |
+|--------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| [Snowflake](https://www.snowflake.com/blog/customer-experience-report-2022/) | 72 |
+| [Square](https://d1g145x70srn7h.cloudfront.net/documents/investor-relations/presentations/05-11-2018-overview.pdf) | 70 |
+| [Zoom](https://blog.zoom.us/zooms-nps-dominates-video-conferencing/) | 69 | 
+| [DocuSign](https://www.docusign.com/why-docusign) | 66 |
+| [Zapier](https://www.comparably.com/brands/zapier) | 64 |
+| [Slack](https://www.comparably.com/brands/slack) | 53 |
+| [Mailchimp](https://www.comparably.com/brands/mailchimp) | 47 |
+| [Netflix](https://www.comparably.com/brands/netflix) | 46 |
+| [Twilio](https://www.comparably.com/brands/twilio) | 34 |
+| [Dropbox](https://www.comparably.com/brands/dropbox) | 27 | 
+
 ## 5. Customer satisfaction score (CSAT)
 
 ### What is a CSAT?
@@ -172,7 +209,7 @@ Your customer satisfaction score, or CSAT, is similar to your NPS, but is specif
 
 ### Why is it useful?
 
-Any businesses that interact in a very direct, tangible way with customers should be measuring their CSAT: think retailers, restaurants, and customer support. On the flipside, businesses that rely on very transactional relationships with customers (gas stations) or high-value, single-purchase businesses (car dealerships) should place higher importance on other metrics.
+Any businesses that interact in a very direct, tangible way with customers on a regular basis should be measuring their CSAT: think customer support, for example. On the flipside, businesses that rely on very transactional relationships with customers, such as online retailers, or high-value, single-purchase businesses should place higher importance on other metrics.
 
 ### How to calculate your CSAT score
 
@@ -220,9 +257,9 @@ The definition of a ‘good’ CES score varies between companies and industries
 
 This is actually a whole group of metrics for all the different features of your product. Feature adoption rates measure the percentage of users who, as the name suggests, use certain features. Let’s say you’ve invested a lot of time and money developing a new product feature. Wouldn’t it suck if nobody used it? This customer retention metric helps you understand the most popular features of your product, and the ones that not many people use.
 
-### How is it useful?
+### Why is it useful?
 
-This is a super retention metric for SaaS companies, both B2C and B2B, and particularly businesses with both free and premium tiers. A good understanding of feature adoption rate will help you see which premium features are most-used, for example. On the flipside, e-commerce services, which broadly speaking have one ‘feature’ should focus on other retention metrics.
+This is a super useful retention metric for SaaS companies, both B2C and B2B, and particularly businesses with both free and premium tiers. A good understanding of feature adoption rate will help you see which premium features are most-used, for example. On the flipside, e-commerce services, which broadly speaking have one ‘feature’, should focus on other retention metrics.
 
 ### How to calculate your feature adoption rate
 
@@ -240,7 +277,7 @@ This one is hard to benchmark as the variation between features and companies is
 
 It’s the ratio of daily active users over monthly active users. This engagement metric measures stickiness and shows the percentage of your users who are using your product every day. If you’ve got a high DAU/MAU ratio, then people are returning to your product often. While these aren’t strictly user retention metrics, proactively addressing unexpected drops in active users or user engagement can give you more evidence of what’s working and what’s not.
 
-### How is it useful?
+### Why is it useful?
 
 This is the big one for social media platforms and online and mobile games. Basically any businesses with products or services that are meant to keep people hooked should be paying very close attention to their DAU/MAU ratio.
 
