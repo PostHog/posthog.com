@@ -125,4 +125,4 @@ It's not currently possible to export person profiles and properties, but it is 
 - [Person data export](https://github.com/PostHog/posthog/issues/20339).
 - Export person properties on events (`event.person_properties`) with [custom schemas](https://github.com/PostHog/posthog/issues/20367).
 
-> **Note:** Our implementation of person IDs on events (`event.person_id`) is eventually consistent. For batch export destinations, this means it requires joining event `distinct_id` with the person data export.
+> **Note:** Our implementation of person IDs on events (`event.person_id`) is eventually consistent, so its not exportable.
