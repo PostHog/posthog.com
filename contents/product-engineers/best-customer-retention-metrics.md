@@ -1,3 +1,4 @@
+---
 date: 2024-05-01
 title: 'The most useful customer retention metrics, ranked'
 author:
@@ -14,6 +15,7 @@ crosspost:
   - Founders
   - Blog
 ---
+
 You put a lot of work into getting people to use your product, but how much work do you put into keeping them? 
 
 In this guide we’ll cover the key customer retention metrics, who they’re useful for, and how to calculate them. We’ve also put together some benchmarks to measure your business against, and tips on how to improve retention. 
