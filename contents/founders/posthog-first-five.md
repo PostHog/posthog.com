@@ -60,6 +60,8 @@ Eric has worn many hats since joining PostHog, building many of our user-facing 
 
 > **What we learned:** Define what you value before you start hiring. Creating the handbook helped James and Tim understand the kind of people who would make PostHog a success, which made choosing Eric easy. It's hard to retrofit a culture when you've already hired a dozen or so people, so don’t delay.
 
+<NewsletterForm />
+
 ## 3. James Greenhill
 
 ![James](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/james.png)
@@ -113,3 +115,5 @@ Once again, he did a paid SuperWeek and proved he had the same characteristics t
 Michael currently works on the product analytics team, and he built a lot of what we call PostHog 3000 – our UI overhaul to make PostHog feel [more like a dev tool](/blog/posthog-as-a-dev-tool).
 
 > **What we learned:** Look for T or M-shaped people. This is especially important for your early hires. You can't afford to hire specialists in every arena, so it's vital to find people who are experts in one or two disciplines, but are capable in others as well. Michael's experience of shipping his own project showed he had that quality.
+
+<NewsletterForm />

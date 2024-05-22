@@ -70,7 +70,9 @@ Accordingly, ClickHouse can scale in all three dimensions (storage, memory, and 
 
 ![Clickhouse_ 3 Dimensions.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-bigquery/clickhouse-3-dimensions.png)
 
-ClickHouse’s magic happens in the way it compresses data, pre-aggregates data, and uses specialized engines accessing a device’s full compute potential. If BigQuery is a commercial airliner, then ClickHouse is a fighter jet. 
+ClickHouse’s magic happens in the way it compresses data, pre-aggregates data, and uses specialized engines accessing a device’s full compute potential. If BigQuery is a commercial airliner, then ClickHouse is a fighter jet.
+
+<NewsletterForm />
 
 ### ClickHouse Cloud’s Architecture
 
@@ -167,3 +169,5 @@ Consider the following resources if you want to learn more about ClickHouse and 
 - [Andy Pavlo - Vectorized Query Execution](https://www.youtube.com/watch?v=FrspnYbFSxQ)
 - [ClickHouse Cloud](https://clickhouse.com/cloud)
 - [Our comparisons of ClickHouse and Druid](/blog/clickhouse-vs-druid)
+
+<NewsletterForm />

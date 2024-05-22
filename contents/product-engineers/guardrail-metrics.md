@@ -50,6 +50,8 @@ When an A/B test triggers a guardrail metric at Airbnb, it's immediately escalat
 
 Out of the thousands of experiments that run at Airbnb each month, guardrails trigger ~25 for review. 80% of these rollout after stakeholder discussion. They decide to pause ~5 experiments per month, which prevents 5 potentially major impacts to critical metrics and product areas.
 
+<NewsletterForm />
+
 ## How to choose your guardrail metrics
 
 As a general guideline, you should pick metrics important to the entire product or company. These are often [north star](/blog/north-star-metrics) or [product health](/blog/product-health-metrics) metrics. Airbnb breaks guardrail metrics into three categories:
@@ -105,3 +107,5 @@ Once you’ve done this, you have everything you need for safer, more effective 
 - [Multivariate testing: Benefits, drawbacks and examples](/product-engineers/what-is-multivariate-testing-examples)
 - [What you can learn from how GitHub and GitLab use feature flags](/blog/github-gitlab-feature-flags)
 - [How YC's biggest startups run A/B tests (with examples)](/blog/ab-testing-examples)
+
+<NewsletterForm />

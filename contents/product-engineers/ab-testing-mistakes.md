@@ -88,6 +88,8 @@ Depending on your app and experiment, here's a list of aggregate metrics you wan
 * Acquisition channel, e.g., organic search, paid ads, or referrals, 
 * User role or job function, e.g., manager, executive, or individual contributor.
 
+<NewsletterForm />
+
 ## 3. Conducting an experiment without a predetermined duration
 
 Starting an experiment without deciding how long it should last can cause issues. You may fall victim to the "[peeking problem](https://gopractice.io/data/peeking-problem/)": when you check the intermediate results for statistical significance, make decisions based on them, and end your experiment too early. Without determining how long your experiment should run, you cannot differentiate between intermediate and final results.
@@ -168,3 +170,5 @@ To read up more on experimentation, check out our guides on:
 - [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
 - [The 9 best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools)
 - [The most useful product health metrics](/blog/product-health-metrics)
+
+<NewsletterForm />

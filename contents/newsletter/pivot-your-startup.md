@@ -48,6 +48,8 @@ The pivot was to take the core technology, recurring bank-to-bank payments, and 
 
 > **Why is this important?** Blomfield’s first idea was focused on a market he knew well (college students), but it was hard to engage and monetize. When he was told to stop coding and focus on finding users, he realized his mistake. The product wasn’t wrong, the market was.
 
+<NewsletterForm />
+
 ## 3. Make sure you’re talking to right people
 
 Finding the right market starts with identifying the right people to talk to.
@@ -124,3 +126,5 @@ Define that timeframe and stick to it.
 **[How startups beat incumbents](https://longform.asmartbear.com/startup-beats-incumbent) – Jason Cohen:** An in-depth guide from the founder of WP Engine.
 
 *Answers. Snowboarding: Shopify. Dating website: YouTube. Online RPG: Flickr. Cell phone towers: Soylent.*
+
+<NewsletterForm />

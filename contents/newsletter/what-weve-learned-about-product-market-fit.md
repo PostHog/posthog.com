@@ -59,6 +59,8 @@ What does this mean?
 
 You’re optimizing for shots on goal. The more you have, the greater your chances.
 
+<NewsletterForm />
+
 ## 5. So is motivation
 
 If your idea doesn’t excite you, pivot.
@@ -157,3 +159,5 @@ When I talk to a startup that's been operating for more than 8 or 9 months, the 
 - [Life After Product-Market Fit: Go-To-Market Fit](https://medium.com/@pearvc/life-after-product-market-fit-go-to-market-fit-fb87bedfd8da) – Pear VC
 - [Where to Go After Product-Market Fit](https://a16z.com/2018/07/20/where-to-go-after-product-market-fit-an-interview-with-marc-andreessen/) – Marc Andreessen and Elad Gil
 - [Why Product Market Fit Isn't Enough](https://brianbalfour.com/essays/product-market-fit-isnt-enough) – Brian Balfour
+
+<NewsletterForm />
