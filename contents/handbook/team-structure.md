@@ -9,24 +9,6 @@ hideAnchor: false
 
 We've organized the team into small teams that are multi-disciplinary and as self-sufficient as possible. [You can read about why we've done it this way](/handbook/company/small-teams), or [browse the small teams](/teams).
 
-Our small teams are:
-
-- ClickHouse (page coming soon!)
-- [Data Warehouse](/teams/data-warehouse)
-- [Exec](/teams/exec)
-- [Feature Success](/teams/feature-success)
-- [Growth](/teams/growth)
-- [Infrastructure](/teams/infrastructure)
-- Internal tools (page coming soon!)
-- [Marketing](/teams/marketing)
-- [People & Ops](/teams/people)
-- [Pipeline](/teams/pipeline)
-- [Product Analytics](/teams/product-analytics)
-- [Replay](/teams/replay)
-- [Sales & Customer Success](/teams/sales-cs)
-- [Web Analytics](/teams/web-analytics)
-- [Website & Docs](/teams/website-docs)
-
 ## Org chart and reporting lines
 
 We maintain our full org chart in Deel, [which you can access here](https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report).
