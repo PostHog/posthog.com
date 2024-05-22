@@ -454,14 +454,16 @@ export default function Plans({
                                                 <Label className="ml-2" text="Add-on" />
                                             </AddonTooltip>
                                         </div>
-                                        {plans.map((plan) => {
+                                        {plans.map((plan, i) => {
                                             return (
                                                 <div
                                                     className="max-w-[25%] w-full min-w-[105px]"
                                                     key={`${addon.type}-${plan.plan_key}`}
                                                 >
-                                                    {plan.free_allocation ? (
+                                                    {plan.free_allocation && !plan.included_if ? (
                                                         <Close opacity={1} className="text-red w-4" />
+                                                    ) : plan.included_if == 'no_active_parent_subscription' ? (
+                                                        <span>Included</span>
                                                     ) : (
                                                         <AddonTooltip addon={addon} parentProductName={name}>
                                                             <Title
