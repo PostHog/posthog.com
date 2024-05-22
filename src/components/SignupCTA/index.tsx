@@ -29,7 +29,7 @@ export const SignupCTA = ({
     }
 
     const onCtaClick = useCallback(() => {
-        posthog?.setPersonProperties({})
+        posthog?.createPersonProfile()
     }, [posthog])
 
     return (

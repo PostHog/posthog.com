@@ -6,7 +6,7 @@ export default function SignupLink() {
     const posthog = usePostHog()
 
     const onLinkClick = useCallback(() => {
-        posthog?.setPersonProperties({})
+        posthog?.createPersonProfile()
     }, [posthog])
 
     return (
