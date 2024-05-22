@@ -30,7 +30,6 @@ const userQuery = qs.stringify(
                 },
             },
         },
-        fields: ['profile'],
         populate: 'profile.avatar',
     },
     { encodeValuesOnly: true }
