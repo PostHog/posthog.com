@@ -1211,11 +1211,8 @@ export const docsMenu = {
                             url: '/docs/libraries/django',
                         },
                         {
-                            name: 'Docusaurus v2',
+                            name: 'Docusaurus',
                             url: '/docs/libraries/docusaurus',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Flask',
