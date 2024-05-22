@@ -11,11 +11,13 @@ We've organized the team into small teams that are multi-disciplinary and as sel
 
 Our small teams are:
 
+- ClickHouse (page coming soon!)
 - [Data Warehouse](/teams/data-warehouse)
 - [Exec](/teams/exec)
 - [Feature Success](/teams/feature-success)
 - [Growth](/teams/growth)
 - [Infrastructure](/teams/infrastructure)
+- Internal tools (page coming soon!)
 - [Marketing](/teams/marketing)
 - [People & Ops](/teams/people)
 - [Pipeline](/teams/pipeline)
@@ -39,7 +41,7 @@ We’re still an early stage company, and so is our product. We strongly value m
 - [ ] Discuss with relevant team member(s).
 - [ ] Open a PR on `posthog.com` documenting the change on the handbook.
     - [ ] Update the relevant Small Team page.
-    - [ ] Update the [Org Chart](https://app.tryroots.io/org-chart) in Deel.
+    - [ ] Update the [Org Chart](https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report) in Deel.
 - [ ] Let everyone else in the company know in the next all hands session.
 - [ ] Add/remove from relevant [Sentry teams](https://sentry.io/settings/posthog/teams/).
 - [ ] Add/remove from relevant [GitHub teams](https://github.com/orgs/PostHog/teams).
