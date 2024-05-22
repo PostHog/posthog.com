@@ -68,6 +68,8 @@ Zapier shows you can create a massive tech company while not raising a lot, not 
 
 We’ve also seen the value of SEO and continue to invest in it. It is a core channel for us, and we’re always looking for opportunities to scale it further, like with [templates](/templates) or [content hubs](/posts).
 
+<NewsletterForm />
+
 ## 4. GitHub: Free to use then forced to buy 🧑‍💻
 
 GitHub defined what it means to be developer-friendly. On top of its open-source support, it gives away its entire core product for free. GitHub is a high-quality product that doesn’t cost anything for hobbyists, small projects, or pre-product-market fit startups.
@@ -148,3 +150,5 @@ Startups are like looking for gold. They have two separate phases: looking for g
 We just released a redesign of PostHog aiming to make us look more like a dev tool and less like a SaaS app. Our lead designer, Cory, details the changes needed to make that happen from updated navigation to increased data density to dark mode.
 
 *Words by Ian Vanagas, who wonders if Santa ever runs A/B tests.*
+
+<NewsletterForm />

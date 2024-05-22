@@ -51,6 +51,8 @@ Talking to users is hard, especially when you’re trying to validate a problem 
 - [10x engineers talk to users](/product-engineers/10x-engineers-do-user-interviews) – Luke Harries
 - [How to turn user interviews into actionable snapshots](/product-engineers/interview-snapshot-guide) – Annika Schmid
 
+<NewsletterForm />
+
 ## 4. Enforcing metric-based OKRs on engineering teams
 
 In 2022, we formalized creating quarterly objectives and key results (OKRs) for all our teams.
@@ -104,3 +106,5 @@ In contrast, potential enterprise deals took months of intense effort, and rarel
 **[Forming Habits To Improve Retention](https://reidtandy.substack.com/p/forming-habits-to-improve-retention?utm_source=posthog-newsletter&utm_medium=email) – Growth Croissant:** Useful tips on improving retention from Substack’s Reid DeRamus inspired by consumer apps like Strava, Duolingo, and Apple Fitness.
 
 *Words by Andy Vandervell, who optimistically believes England will win The Ashes.*
+
+<NewsletterForm />

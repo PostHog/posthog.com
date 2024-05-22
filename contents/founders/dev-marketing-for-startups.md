@@ -53,6 +53,8 @@ We’ve found that hitting the front page results in a giant, ego-boosting traff
 
 Don’t upvote your own content, and don’t ask other people to – post it and pray. There are no secret tricks.
 
+<NewsletterForm />
+
 ### Beware the attribution mirage
 
 You can’t rely on UTM parameters to tell you where a user actually first heard about you. Example: user reads an article about PostHog on Hacker News -> searches 'posthog' -> clicks on a Google Ad. Our analytics will tell us "wow, Google Ads are awesome!" But that’s not the whole picture. 
@@ -98,3 +100,5 @@ We’ve tried a few channels and are seeing promising results on Twitter, but it
 - Have money? Hire someone who can write content and has a deep understanding of SEO. Do not hire an SEO consultant. Don’t have money? Learn how to SEO good with [Ahrefs](https://ahrefs.com/seo) (chapters 6 and 7 are wayyy less important).
 
 - If you want to start doing paid ads, I can personally recommend [the Demand Curve program](https://www.demandcurve.com/growth-program) – it helped get us off the ground and gives you a solid understanding of how to manage your paid ads agency when you hire one.
+
+<NewsletterForm />

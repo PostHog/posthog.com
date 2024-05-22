@@ -82,6 +82,8 @@ Being intentional about when and how you engage with analytics data will ensure 
 
 > **Read more:** [How we build features users love (really fast)](/product-engineers/measuring-feature-success)
 
+<NewsletterForm />
+
 ## 4. “Session replays are for marketers”
 
 Many session replay tools brand themselves as wishy-washy “customer experience” or “digital insight” platforms. Tools built for product managers and marketers.
@@ -136,3 +138,5 @@ Anton and Leo write about how the dynamics between engineers and product manager
 - **[The 14 pains of building your own billing system](https://arnon.dk/the-14-pains-of-billing/) – Arnon Shimoni:** Billing systems are surprisingly complicated, connect to many parts of the company, and are mission critical to… making money. Arnon does a deep dive of patterns and pains you need to know when building one.
 
 *Words by Ian Vanagas, party parrot evangelist.*
+
+<NewsletterForm />

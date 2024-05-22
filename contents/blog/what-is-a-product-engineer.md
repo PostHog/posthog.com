@@ -64,6 +64,8 @@ Shipping fast and being customer-obsessed lets them get feedback on their produc
 
 By being customer-obsessed, product engineers become less principled and dogmatic. They don’t ship features that they believe are “right” but users don’t want. They are less loyal to best practices and don’t do something just because it is commonly done.
 
+<NewsletterForm />
+
 ### Analysts of usage data and the competitive landscape
 
 Because product engineers own their product, they also often own the data and roadmap for that product. This means doing analysis of usage data and the competitive landscape. They combine this analysis with user feedback and figure out what to do next.
@@ -127,3 +129,5 @@ As long as building great products is an important goal for many companies, prod
 - [Product engineer vs software engineer: what's the difference?](/blog/product-engineer-vs-software-engineer)
 - [How to harness the awesome power of growth loops](/product-engineers/growth-loops)
 - [22 ways PostHog makes it easier to build great products](/blog/using-posthog)
+
+<NewsletterForm />

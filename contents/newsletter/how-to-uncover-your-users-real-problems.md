@@ -54,6 +54,8 @@ It makes no sense to ask users about their onboarding experience after they've b
 
 Instead, ask them shortly after they've completed a key onboarding action (e.g. a product tour), or in the early stages of exploration, when the context is still fresh in their minds.
 
+<NewsletterForm />
+
 ## 3. Get below the surface 🧐
 
 Asking surface-level questions like “what do you think of our product?” or “what feature is missing from our product?” might seem valuable, but they have a hidden cost.
@@ -139,3 +141,5 @@ All this discovery work is wasted if it doesn't benefit you and your team. Once 
 - [Stack rank problems](https://www.opinionx.co/blog/customer-problem-stack-ranking) and potential solutions.
 
 - Repeat the process. Ask more questions. Run more surveys and user interviews.
+
+<NewsletterForm />

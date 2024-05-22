@@ -72,6 +72,8 @@ The goal of the stack at this stage is to use data to make better decisions abou
 
 Moving from individual sources to a CDP makes gathering and distributing data faster, but it's also where complexity and maintenance increase rapidly. Data accuracy problems proliferate at this stage, though for now, this isn't a critical issue – engineers just need enough data to know what to prioritize.
 
+<NewsletterForm />
+
 ## The Series A data stack
 
 Series A is where data begins to get serious. By serious, I mean:
@@ -136,3 +138,5 @@ Integrating more of the startup data stack into PostHog enables engineers to con
 - [Our simpler goal: Help engineers to be better at product](/blog/helping-engineers-to-product)
 - [The 80/20 of early-stage startup analytics](/blog/early-stage-analytics)
 - [What is a product engineer (and why they're awesome)](/blog/what-is-a-product-engineer)
+
+<NewsletterForm />
