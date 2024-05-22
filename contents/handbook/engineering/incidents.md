@@ -96,20 +96,10 @@ Don't forget to disable the in-app banner too.
 
 ## What happens after an incident? (Incident analysis)
 
-24-48 hours after an incident, we should have a quick sync meeting with a small group of people involved in the incident, plus Tim. If you raised the incident, you can schedule this. If you don’t want to or can’t, Tim is happy to take over at this point, just let him know.
-
-Before this meeting you should create a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis). You can use Incident.io's automatic analysis as a starting point. In general it is advised to post short point in time summaries of actions taken in the incident Slack channel so that you can more easily fill this out after the fact.
-
-- If a post-mortem had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
-
-During the incident analysis session, we’ll walk through the entire timeline as it happened. While doing that, we want to answer the following types of questions:
-
-- In what ways did our systems surprise us?
-- How did it make sense for someone to do what they did?
-
-We'll collect learnings through this process.
-
-During a process like this, trying to come up with action items means losing focus on the learnings. That's why it’s up to the individuals in the meeting to figure out whether they need to action any of the learnings from the session.
+1. Schedule a half hour incident review, invite engineering@posthog.com
+2. Create a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis) using [this template](https://github.com/PostHog/incidents-analysis/blob/master/yyyy-mm-dd-template.md).
+3. Hold the meeting.
+4. If a post-mortem had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
 
 If an incident was pretty uneventful we can skip this step.
 
