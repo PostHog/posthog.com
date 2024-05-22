@@ -186,6 +186,7 @@ const allProductsData = graphql`
                             unit
                             flat_rate
                             unit_amount_usd
+                            included_if
                             features {
                                 description
                                 key
