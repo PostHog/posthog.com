@@ -175,7 +175,11 @@ Community questions appear in Zendesk but tickets are closed automatically if th
 
 When a question is posted, it'll appear in Zendesk with a direct link to the question. A notification is also sent to the [#community-questions](https://posthog.slack.com/archives/C03B04XGLAZ) channel in Slack. (You can also receive notifications about specific topics in your own small team's Slack channel. Ask the Website & Docs team for help in setting this up if you like.)
 
-You can answer a question directly on the page where it was asked. When a reply is posted, the person who asked the question will receive an email notification. (**Important:** Don't reply to community questions directly from Zendesk.)
+There are only 2 valid answers to community questions:
+1. link do a docs page (if docs don't already answer the question, then update the docs first and then reply with a link to the user.
+2. ask them to use in-app ticket if more information is needed and that's sensitive & archive the question
+
+When a reply is posted, the person who asked the question will receive an email notification. (**Important:** Don't reply to community questions directly from Zendesk.)
 
 The first time you answer a question, you'll need to create a community account. (You'll be prompted to do this after answering a question, as posting/responding requires authentication.)
 
