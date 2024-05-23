@@ -6,7 +6,7 @@ showTitle: true
 
 ## Our mission
 
-To help engineers build better products.
+Equip every developer to build successful products.
 
 ## Our strategy
 
