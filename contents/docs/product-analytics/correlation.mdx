@@ -14,7 +14,7 @@ Correlation analysis is a feature within [funnels](/docs/product-analytics/funne
 
 Funnels have the ability to directly compare conversion rates of users for a specific property via the breakdown feature, but this requires you to know which property to investigate. If you're not certain, correlation analysis highlights significant events or properties for you. 
 
-As an example, the below insight shows that desktop users were `1.3x more likely` to convert than mobile or tablet users. Similarly, we also seee that users who completed the `uploaded_cv_for_review` event were `8.0x more likely` to convert.
+As an example, the below insight shows that desktop users were `1.3x more likely` to convert than mobile or tablet users. We also see that users who completed the `uploaded_cv_for_review` event while active in the funnel were `8.0x more likely` to convert.
 
 <ProductScreenshot
     imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/v1716387676/posthog.com/contents/Screenshot_2024-05-22_at_3.20.17_PM.png"} 
@@ -23,7 +23,7 @@ As an example, the below insight shows that desktop users were `1.3x more likely
     alt= "Example of a correlation analysis insight"
 />
 
-It's important to remember that the accuracy any correlation is dependent on the sample size. If you've only got a handful of users for a specific correlation, then it's likely that it will *not* be useful.
+It's important to remember that the accuracy of any correlation depends on the sample size. If you've only got a handful of users for a specific correlation, then it's likely that it will *not* be accurate.
 
 ## How to create a correlation analysis
 
@@ -33,7 +33,7 @@ Once you've created a correlation, you can also create a [cohort](/docs/data/coh
 
 ## Excluding events or properties
 
-You have better context on your product and what could be relevant signal or not. There will be some events and/or properties that are trivial or don't actually provide an actionable insight. 
+You have better context on your product and what could be relevant signal or not. There will be some events and/or properties that are trivial or don't provide an actionable insight. 
 
 To remove these from your correlation insights, click the **...** (more options) buttons and then **Exclude event from project**.
 
@@ -43,7 +43,3 @@ To remove these from your correlation insights, click the **...** (more options)
     classes="rounded"
     alt= "How to hide correlations"
 />
-
-### Further reading
-
-- [Tutorial: How to correlate Sentry errors with PostHog data](/tutorials/sentry-plugin-tutorial)
