@@ -113,7 +113,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false 
                                 <strong>Free</strong>
                             ) : type === 'product_analytics' && index === tiers.length - 1 ? (
                                 // last row
-                                <div className="flex items-center">
+                                <div className="flex items-center -mr-5">
                                     <strong>
                                         $
                                         {parseFloat(unit_amount_usd).toFixed(

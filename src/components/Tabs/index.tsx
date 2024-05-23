@@ -28,7 +28,7 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
                                     ? activeClass !== undefined
                                         ? activeClass
                                         : 'font-bold bg-tan dark:bg-dark border border-b-tan dark:border-b-dark border-light dark:border-dark rounded-tl rounded-tr'
-                                    : 'hover:bg-accent'
+                                    : 'hover:bg-accent hover:-mt-[2px]'
                             }`}
                         >
                             <div className="flex items-start space-x-2">
@@ -66,7 +66,7 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
 const Vertical = ({ tabs, onClick, activeTab, className = '', activeClass }) => {
     return (
         <ul
-            className={`list-none m-0 p-0 flex-shrink-0 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 min-w-56 ${className}`}
+            className={`list-none m-0 p-0 flex-shrink-0 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 min-w-56 mb-2 md:mb-0 ${className}`}
         >
             {tabs.map((tab, index) => {
                 const { title, icon } = tab

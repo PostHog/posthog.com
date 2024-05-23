@@ -125,7 +125,11 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
     </div>
 )
 
-const SectionLayout = ({ children }) => <section className={`${section} mb-12 mt-8 md:px-4`}>{children}</section>
+const SectionLayout = ({ id = '', children }) => (
+    <section id={id} className={`${section} mb-12 mt-8 md:px-4`}>
+        {children}
+    </section>
+)
 
 const SectionHeader = ({ children }) => (
     <header className="border-b pb-1 border-light dark:border-dark">{children}</header>
@@ -367,8 +371,8 @@ const allProductsData = graphql`
 const Pricing = ({ type, plans, unit, inclusion_only, className = '' }) => {
     return (
         <div className={`${className} w-full max-w-[500px]`}>
-            <h3 className="text-lg">Monthly pricing</h3>
-            <div className="flex flex-col divide-light dark:divide-dark gap-1">
+            <h3 className="text-lg mb-3">Monthly pricing</h3>
+            <div className="flex flex-col divide-y divide-light dark:divide-dark gap-0.5">
                 {inclusion_only ? (
                     <InclusionOnlyRow plans={plans} />
                 ) : (
@@ -385,8 +389,18 @@ const TabAddons = (props) => {
     const activeAddon = addons[activeTab]
     return (
         <div className={props.className ?? ''}>
-            <h3 className="text-lg">{props.title ?? 'Add-ons'}</h3>
-            <div className="flex flex-col md:flex-row space-x-4">
+            <div className="flex flex-col md:flex-row justify-between items-baseline mb-3">
+                <h3 className="text-lg mb-0">{props.title ?? 'Add-ons'}</h3>
+                <aside>
+                    <span
+                        className="text-red dark:text-yellow font-bold text-sm cursor-pointer"
+                        onClick={() => scrollTo('#add-ons')}
+                    >
+                        Learn more about addons
+                    </span>
+                </aside>
+            </div>
+            <div className="flex flex-col md:flex-row md:space-x-4">
                 <div>
                     <Tabs
                         onClick={(_tab, index) => setActiveTab(index)}
@@ -400,7 +414,7 @@ const TabAddons = (props) => {
                         })}
                     />
                 </div>
-                <div className="flex-grow">
+                <div className="flex-grow divide-y divide-light dark:divide-dark gap-0.5">
                     {activeAddon.inclusion_only ? (
                         <InclusionOnlyRow plans={activeAddon.plans} />
                     ) : (
@@ -495,8 +509,10 @@ const ProductTabs = ({ billingProducts }) => {
                 </motion.div>
             )}
             <div className="text-center mt-4 flex space-x-1 justify-center">
-                {activeTab !== undefined && (
-                    <p className="m-0 text-sm opacity-75">Prices descrease exponentially with scale.</p>
+                {activeTab == undefined && (
+                    <p className="m-0 text-sm opacity-75">
+                        Pricing after generous monthly free tier. Descreases exponentially with scale.
+                    </p>
                 )}
                 <button
                     onClick={() => setActiveTab(activeTab === undefined ? 0 : undefined)}
@@ -955,7 +971,7 @@ const PricingExperiment = ({
                         </div>
                     </section>
 
-                    <SectionLayout>
+                    <SectionLayout id="add-ons">
                         <SectionHeader>
                             <h3>Add-ons</h3>
                         </SectionHeader>
@@ -1033,7 +1049,7 @@ const PricingExperiment = ({
                                                 </div>
                                             )}
                                         >
-                                            <IconInfo className="size-4 inline-block" />
+                                            <IconInfo className="size-4 inline-block relative left-0.5 -top-0.5" />
                                         </Tooltip>
                                     </li>
                                 </ul>
@@ -1087,57 +1103,6 @@ const PricingExperiment = ({
 
             {!currentProduct && (
                 <>
-                    <PricingCalculator />
-
-                    <Addons billingProducts={billingProducts} />
-
-                    <section className={`${section} my-12 md:my-24 md:px-4`}>
-                        <h2 className="text-xl m-0 flex gap-2 pl-1 mb-4 items-center border-b border-light dark:border-dark pb-2">
-                            <span>Available discounts</span>
-                        </h2>
-                        <ul className="list-none p-0 grid md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-12 xl:gap-6">
-                            <li>
-                                <div className="flex items-center gap-2">
-                                    <IconCalendar className="w-7 h-7 opacity-75" />
-                                    <strong>Annual payment</strong>
-                                </div>
-                                <p className="pl-9 text-[15px]">
-                                    <b>20% off</b> for customers who pay annually. Available for customers spending over
-                                    $2k/mo. Get in touch through the app after signing up.
-                                </p>
-                            </li>
-                            <li>
-                                <div className="flex items-center gap-2">
-                                    <IconRocket className="w-7 h-7 opacity-75" />
-                                    <strong>Startups</strong>
-                                </div>
-                                <p className="pl-9 text-[15px] mb-3">
-                                    If your startup has raised less than $5 million and is less than 2 years old, you
-                                    may be interested in our startup program. <Link to="/startups">Learn more.</Link>
-                                </p>
-                            </li>
-                            <li>
-                                <div className="flex items-center gap-2">
-                                    <IconHandMoney className="w-7 h-7 opacity-75" />
-                                    <strong>Non-profits</strong>
-                                </div>
-                                <p className="pl-9 text-[15px]">
-                                    50% off in most cases. Get in touch through the app after signing up.
-                                </p>
-                            </li>
-                            <li>
-                                <div className="flex items-center gap-2">
-                                    <IconShield className="w-7 h-7 opacity-75" />
-                                    <strong>Side project insurance</strong>
-                                </div>
-                                <p className="pl-9 text-[15px]">
-                                    Unexpectedly go viral with your side project and get sticker shock? Get in touch and
-                                    we'll help cover your first bill.
-                                </p>
-                            </li>
-                        </ul>
-                    </section>
-
                     <section id="faq" className={`${section} mb-20 mt-12 md:px-4`}>
                         <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Pricing FAQ</h2>
                         <FAQs />
