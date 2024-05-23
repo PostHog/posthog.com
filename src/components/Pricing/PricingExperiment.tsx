@@ -836,9 +836,12 @@ const PricingExperiment = ({
                                     </SidebarList>
                                 </div>
                                 <div>
-                                    <span className="text-red dark:text-yellow font-semibold cursor-pointer">
-                                        Show full plan comparison
-                                    </span>
+                                    <button
+                                        onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
+                                        className="text-red dark:text-yellow font-semibold cursor-pointer"
+                                    >
+                                        {isPlanComparisonVisible ? 'Hide' : 'Show'} full plan comparison
+                                    </button>
                                 </div>
                             </SectionSidebar>
                         </SectionColumns>
