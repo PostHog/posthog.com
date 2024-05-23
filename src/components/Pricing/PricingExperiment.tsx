@@ -34,6 +34,7 @@ import { CallToAction } from 'components/CallToAction'
 import Tabbed from './PricingCalculator/Tabbed'
 import { usePlatform } from './Platform/usePlatform'
 import { motion } from 'framer-motion'
+import scrollTo from 'gatsby-plugin-smoothscroll'
 
 interface PlanData {
     title: string
@@ -1034,8 +1035,10 @@ const PricingExperiment = ({
                                 </ul>
                                 <p>
                                     If you need more info,
-                                    <a href="#faq">read our FAQ</a>,
-                                    <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
+                                    <span onClick={() => scrollTo('#faq')} className="text-red dark:text-yellow">
+                                        read our FAQ
+                                    </span>
+                                    , <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
                                     <Link href="/contact-sales">talk to a human</Link>.
                                 </p>
                             </SectionMainCol>
