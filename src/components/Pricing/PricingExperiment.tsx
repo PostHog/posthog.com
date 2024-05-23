@@ -141,7 +141,7 @@ const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:p
 
 const SectionSidebar = ({ children, className = '' }) => (
     <div
-        className={`col-span-1 flex flex-col gap-4 md:border-l border-light dark:border-dark pt-8 md:pt-0 md:pl-8 ${className}`}
+        className={`col-span-1 flex flex-col gap-4 md:border-l border-light dark:border-dark border-t md:border-t-0 pt-4 md:pt-0 md:pl-8 ${className}`}
     >
         {children}
     </div>
@@ -516,10 +516,11 @@ const ProductTabs = ({ billingProducts }) => {
                     {tabContent[activeProduct.name]({ ...productData })}
                 </motion.div>
             )}
-            <div className="text-center mt-4 flex space-x-1 justify-center">
+            <div className="text-center mt-4 flex flex-col md:flex-row gap-1 justify-center">
                 {activeTab == undefined && (
                     <p className="m-0 text-sm opacity-75">
-                        Pricing descreases exponentially with scale (after generous monthly free tier).
+                        Pricing descreases exponentially with scale{' '}
+                        <span className="whitespace-nowrap">(after generous monthly free tier).</span>
                     </p>
                 )}
                 <button
@@ -643,7 +644,7 @@ const PlansTabs = () => {
             description: '$20k/yr minimum spend',
             html: (
                 <>
-                    <div className="grid grid-cols-2 gap-8">
+                    <div className="grid md:grid-cols-2 gap-8">
                         <div>
                             <div className="mb-2">
                                 <strong>
@@ -659,7 +660,7 @@ const PlansTabs = () => {
                                 <li>Audit logs</li>
                             </ul>
                         </div>
-                        <div className="relative">
+                        <div className="relative pb-20 md:pb-0">
                             <div className="mb-2">
                                 <strong>How it works</strong>
                             </div>
@@ -668,7 +669,7 @@ const PlansTabs = () => {
                                 <li>Annual contract with minimum commitment</li>
                                 <li>No upcharge on usage-based prices</li>
                             </ul>
-                            <div className="pt-4">
+                            <div className="pt-4 relative z-20">
                                 <CallToAction href="/contact-sales" size="md">
                                     Talk to a helpful person
                                 </CallToAction>
@@ -772,7 +773,7 @@ const PlansTabs = () => {
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
                     size="sm"
-                    className="transition-all w-[fit-content] md:w-full md:!px-2"
+                    className="transition-all w-[fit-content] md:w-full md:!px-3"
                     tabs={plans.map(({ name, description, html }) => ({
                         title: name,
                         subtitle: description,

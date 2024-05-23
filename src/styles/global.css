@@ -1484,7 +1484,7 @@ li.squeak-left-border {
 }
 
 .click {
-    @apply scale-[.99] hover:top-[-2px] hover:scale-[1] active:top-[3px] active:scale-[.99];
+    @apply scale-100 hover:top-[-2px] hover:scale-[1] active:top-[3px] active:scale-[.99];
 }
 
 .tw-check-bullets {
