@@ -682,7 +682,7 @@ const PricingExperiment = ({
     return (
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
-            <SEO title="PostHog Pricing" description="Find out how much it costs to use PostHog" />
+            <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
 
             <section className="w-screen md:w-auto overflow-x-hidden -mx-4 px-4">
                 <div
@@ -985,7 +985,7 @@ const PricingExperiment = ({
                         <SectionColumns>
                             <SectionMainCol>
                                 <p>Here's what you should know about our pricing:</p>
-                                <ul className="space-y-1 mb-4">
+                                <ul className="space-y-1 mb-4 [&_li]:leading-7">
                                     <li>
                                         <strong>We make a profit with every product.</strong> This means we don’t have
                                         loss-leader products that will go up in pricing later or get retired.
@@ -993,16 +993,22 @@ const PricingExperiment = ({
                                     <li>
                                         <strong>We aim to be the cheapest for each product at every scale</strong>{' '}
                                         compared to every major competitor.{' '}
-                                        <Link href="#">
+                                        <Link
+                                            href="https://twitter.com/intent/tweet?text=@posthog%20Your%20pricing%20is..."
+                                            external
+                                        >
                                             <em>Tell us if we're not!</em>
                                         </Link>{' '}
                                         (Note: This doesn't include your buddy's two person startup.)
                                     </li>
                                     <li>
                                         The company in general has significant revenue, over 60,000 customers, runs{' '}
-                                        <Link href="#">default alive</Link>, and aims to IPO rather than sell. This
-                                        means <strong>we don’t rely on investors to grow, and we’re stable.</strong> Of
-                                        course we aren’t perfect, but this goes a long way to avoiding the average dumb
+                                        <Link href="/newsletter/the-companies-that-shaped-posthog#our-takeaways-2">
+                                            default alive
+                                        </Link>
+                                        , and aims to IPO rather than sell. This means{' '}
+                                        <strong>we don’t rely on investors to grow, and we’re stable.</strong> Of course
+                                        we aren’t perfect, but this goes a long way to avoiding the average dumb
                                         vc-backed company stuff in general - like running out of money or selling to a
                                         lame bigger company who just kills off our products.
                                     </li>
@@ -1032,20 +1038,39 @@ const PricingExperiment = ({
                                     </li>
                                 </ul>
                                 <p>
-                                    If you need more info, <Link href="#">read our FAQ</Link>,{' '}
-                                    <Link href="#">ask a question</Link>, or <Link href="#">talk to a human</Link>.
+                                    If you need more info,
+                                    <a href="#faq">read our FAQ</a>,
+                                    <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
+                                    <Link href="/contact-sales">talk to a human</Link>.
                                 </p>
                             </SectionMainCol>
                             <SectionSidebar>
                                 <p className="opacity-60 text-[15px] mb-0">A note from our co-founder</p>
-                                <div className="flex gap-2">
-                                    <div>image</div>
-                                    <p>
-                                        <strong>James Hawkins</strong>
-                                        <br />
+                                <div className="flex gap-2 items-center">
+                                    <Link
+                                        href="/community/profiles/27732"
+                                        className="rounded-full overflow-hidden size-12 border border-border hover:border-bg-dark/30 dark:border-dark dark:hover:border-light/50 p-0.5 bg-light dark:bg-dark"
+                                    >
+                                        <StaticImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
+                                            quality={100}
+                                            alt="James Hawkins, CEO, Co-founder"
+                                            placeholder="none"
+                                            objectFit="contain"
+                                            className="bg-yellow rounded-full"
+                                        />
+                                    </Link>
+                                    <p className="leading-tight mb-0">
+                                        <Link href="/community/profiles/27732" className="flex">
+                                            <strong>James Hawkins</strong>
+                                        </Link>
                                         <span className="text-sm opacity-70">CEO & Co-founder</span>
                                     </p>
                                 </div>
+                                <p className="pl-14 text-sm opacity-75 italic -mt-3 max-w-xs">
+                                    When James isn't thinking about how to cut prices (again), you'll likely find him
+                                    changing a diaper.
+                                </p>
                             </SectionSidebar>
                         </SectionColumns>
                     </SectionLayout>
@@ -1110,13 +1135,18 @@ const PricingExperiment = ({
                             </li>
                         </ul>
                     </section>
-                    <section className="relative">
-                        <CTA />
+
+                    <section id="faq" className={`${section} mb-20 mt-12 md:px-4`}>
+                        <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Pricing FAQ</h2>
+                        <FAQs />
+                        <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
+                            Have another pricing-related question?{' '}
+                            <Link href="/questions/topic/pricing">Ask in our community forum</Link>
+                        </p>
                     </section>
 
-                    <section className={`${section} mb-12 mt-12 md:px-4`}>
-                        <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Questions</h2>
-                        <FAQs />
+                    <section className="relative">
+                        <CTA />
                     </section>
                 </>
             )}
