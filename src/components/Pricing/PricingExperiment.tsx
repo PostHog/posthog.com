@@ -636,6 +636,7 @@ const PlansTabs = () => {
         <div>
             <div className="overflow-x-auto w-screen md:w-auto -mx-4 md:mx-0 px-4 md:px-1">
                 <Tabs
+                    activeClass="bg-accent dark:bg-accent-dark"
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
                     size="sm"
