@@ -9,7 +9,7 @@ type Tab = {
     tooltip?: strong
 }
 
-const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg' }) => {
+const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', activeClass }) => {
     return (
         <ul
             className={`list-none m-0 flex flex-row gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 py-0 md:px-6 justify-between items-center ${className}`}
@@ -25,7 +25,9 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg' }) =
                                 size === 'sm' ? 'p-2 rounded' : 'py-3 px-4 rounded-md'
                             } font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
                                 active
-                                    ? 'font-bold bg-tan dark:bg-dark border border-b-tan dark:border-b-dark border-light dark:border-dark rounded-tl rounded-tr'
+                                    ? activeClass !== undefined
+                                        ? activeClass
+                                        : 'font-bold bg-tan dark:bg-dark border border-b-tan dark:border-b-dark border-light dark:border-dark rounded-tl rounded-tr'
                                     : 'hover:bg-accent'
                             }`}
                         >
@@ -61,7 +63,7 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg' }) =
     )
 }
 
-const Vertical = ({ tabs, onClick, activeTab, className = '' }) => {
+const Vertical = ({ tabs, onClick, activeTab, className = '', activeClass }) => {
     return (
         <ul
             className={`list-none m-0 p-0 flex-shrink-0 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 min-w-56 ${className}`}
@@ -74,7 +76,11 @@ const Vertical = ({ tabs, onClick, activeTab, className = '' }) => {
                         <button
                             onClick={() => onClick?.(tab, index)}
                             className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
-                                active ? 'font-bold bg-accent dark:bg-accent-dark' : 'hover:bg-accent'
+                                active
+                                    ? activeClass !== undefined
+                                        ? activeClass
+                                        : 'font-bold bg-accent dark:bg-accent-dark'
+                                    : 'hover:bg-accent'
                             }`}
                         >
                             <div className="flex space-x-2 whitespace-nowrap">
@@ -96,6 +102,7 @@ export default function Tabs(props: {
     className?: string
     vertical?: boolean
     size?: 'sm' | 'lg'
+    activeClass?: string
 }): JSX.Element {
     return props.vertical ? <Vertical {...props} /> : <Horizontal {...props} />
 }

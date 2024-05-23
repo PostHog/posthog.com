@@ -637,6 +637,7 @@ const PlansTabs = () => {
         <div>
             <div className="overflow-x-auto w-screen md:w-auto -mx-4 md:mx-0 px-4 md:px-1">
                 <Tabs
+                    activeClass="bg-accent dark:bg-accent-dark"
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
                     size="sm"
@@ -836,9 +837,12 @@ const PricingExperiment = ({
                                     </SidebarList>
                                 </div>
                                 <div>
-                                    <span className="text-red dark:text-yellow font-semibold cursor-pointer">
-                                        Show full plan comparison
-                                    </span>
+                                    <button
+                                        onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
+                                        className="text-red dark:text-yellow font-semibold cursor-pointer"
+                                    >
+                                        {isPlanComparisonVisible ? 'Hide' : 'Show'} full plan comparison
+                                    </button>
                                 </div>
                             </SectionSidebar>
                         </SectionColumns>
