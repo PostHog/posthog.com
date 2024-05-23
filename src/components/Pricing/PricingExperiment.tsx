@@ -1055,9 +1055,20 @@ const PricingExperiment = ({
                                 </ul>
                                 <p>
                                     If you need more info,
-                                    <span onClick={() => scrollTo('#faq')} className="text-red dark:text-yellow">
+                                    <button
+                                        className="text-red dark:text-yellow font-semibold"
+                                        onClick={() =>
+                                            window.scrollTo({
+                                                top:
+                                                    document.querySelector('#faq')?.getBoundingClientRect().top +
+                                                    window.pageYOffset -
+                                                    108,
+                                                behavior: 'smooth',
+                                            })
+                                        }
+                                    >
                                         read our FAQ
-                                    </span>
+                                    </button>
                                     , <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
                                     <Link href="/contact-sales">talk to a human</Link>.
                                 </p>
