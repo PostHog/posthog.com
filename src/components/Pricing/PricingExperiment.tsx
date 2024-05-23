@@ -33,6 +33,7 @@ import Tabs from 'components/Tabs'
 import { CallToAction } from 'components/CallToAction'
 import Tabbed from './PricingCalculator/Tabbed'
 import { usePlatform } from './Platform/usePlatform'
+import { motion } from 'framer-motion'
 
 interface PlanData {
     title: string
@@ -225,29 +226,18 @@ const AllAddons = () => {
 
     return (
         <div className="flex flex-col md:flex-row gap-8">
-            <ul className="list-none m-0 p-0 flex-shrink-0 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 min-w-56">
-                {allAddons.map(({ name, icon_key, description }, index) => {
-                    const active = activeTab === index
+            <Tabs
+                vertical
+                activeTab={activeTab}
+                onClick={(_tab, index) => setActiveTab(index)}
+                tabs={allAddons.map(({ name, icon_key }) => {
                     const Icon = Icons[icon_key]
-                    return (
-                        <li key={name}>
-                            <button
-                                onClick={() => setActiveTab(index)}
-                                className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
-                                    active ? 'font-bold bg-accent dark:bg-accent-dark' : 'hover:bg-accent'
-                                }`}
-                            >
-                                <div className="flex space-x-2 whitespace-nowrap">
-                                    <span>
-                                        <Icon className="w-5 opacity-75" />
-                                    </span>
-                                    <span>{name}</span>
-                                </div>
-                            </button>
-                        </li>
-                    )
+                    return {
+                        title: name,
+                        icon: <Icon className="w-5 opacity-75" />,
+                    }
                 })}
-            </ul>
+            />
             <AddonContent {...activeAddon} />
         </div>
     )
@@ -429,7 +419,7 @@ const TabAddons = (props) => {
 
 const TabPA = (props) => {
     return (
-        <div className="flex flex-col md:flex-row gap-8 lg:gap-16 animate-reveal border border-light dark:border-dark rounded-md p-4">
+        <div className="flex flex-col md:flex-row gap-8 lg:gap-16">
             <Pricing {...props} className="flex-shrink-0" />
             <TabAddons addons={props.addons} className="flex-grow" title="Product analytics add-ons" />
         </div>
@@ -480,7 +470,6 @@ const ProductTabs = ({ billingProducts }) => {
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
                 size="sm"
-                type="pricingBreakdown"
                 className="overflow-x-auto w-screen md:w-auto -mx-4 px-4"
                 tabs={products.map(({ name, icon, price, denomination, message }) => ({
                     title: name,
@@ -496,7 +485,13 @@ const ProductTabs = ({ billingProducts }) => {
                 }))}
             />
             {activeTab !== undefined && (
-                <div className="-mt-[2px]">{tabContent[activeProduct.name]({ ...productData })}</div>
+                <motion.div
+                    initial={{ height: 0 }}
+                    animate={{ height: 'auto' }}
+                    className="-mt-[2px] border border-light dark:border-dark rounded-md p-4 overflow-hidden"
+                >
+                    {tabContent[activeProduct.name]({ ...productData })}
+                </motion.div>
             )}
             <div className="text-center mt-4 flex space-x-1 justify-center">
                 {activeTab !== undefined && (
