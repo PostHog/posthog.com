@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-For products that have product-market fit and are generating revenue, we are doing monthly **per-product growth reviews**. These are separate from the [growth reviews](https://posthog.com/handbook/growth/growth-engineering/growth-sessions) the [Growth team](https://posthog.com/teams/growth) are doing. We recommend to do the growth reviews at the start of the month, to review the previous month. The growth reviews are attended by James (CEO), Tim (CTO), the Small Team Lead and the Product Manager. Apart from the Small Team Lead, the small team members currently don’t join the growth reviews, but all analysis is public, and they have the chance to participate async before and after the meeting. It’s the job of the Product Manager to schedule, prepare and lead the growth review.
+For products that have product-market fit and are generating revenue, we are doing monthly **per-product growth reviews**. These are separate from the [growth reviews](/handbook/growth/growth-engineering/growth-sessions) the [Growth team](/teams/growth) are doing. We recommend to do the growth reviews at the start of the month, to review the previous month. The growth reviews are attended by James (CEO), Tim (CTO), the Small Team Lead and the Product Manager. Apart from the Small Team Lead, the small team members currently don’t join the growth reviews, but all analysis is public, and they have the chance to participate async before and after the meeting. It’s the job of the Product Manager to schedule, prepare and lead the growth review.
 
 ## Objectives
 
@@ -31,6 +31,7 @@ As mentioned before, we aim to analyse the same set of metrics month over month,
 
 We’ve found that the best way to review what is a quite long list of metrics is to combine all numbers (revenue as well as usage) in one spreadsheet with a new column for each month, and only open individual graphs where required. Below is a screenshot that shows a part of our growth review document. [Here](https://docs.google.com/spreadsheets/d/1Q_hibP9Pv4b8H_9guceKXNrTUP0B_5hWvmiM-EJ2LrU/edit#gid=541742743) is the link to the document for internal users. 
 
+![Growth review template](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/growth-review-template.png)
 
 ### Deep dives
 
@@ -39,7 +40,7 @@ In each growth review, we usually do a couple of deep dives. Topics can be propo
 - Why was churn so high last month? Can we identify any reasons?
 - Where in the onboarding funnel do new users struggle?
 - Can we find leading indicators that predict long-term product usage? (e.g. Facebook’s 7 friends in 10 days)
-- Are there any difference between [high ICP](https://posthog.com/handbook/who-we-are-building-for) and non ICP customers in how they use the product?
+- Are there any difference between [high ICP](/handbook/who-we-are-building-for) and non ICP customers in how they use the product?
 - Are our 10 biggest customers happy users of the product?
 
 ## Structure
