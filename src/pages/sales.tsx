@@ -12,8 +12,8 @@ const Step = ({ who, number, target, title, children }) => {
                 relations={[
                     {
                         targetId: `${who}-${number}b`,
-                        targetAnchor: 'top',
                         sourceAnchor: 'bottom',
+                        targetAnchor: 'left',
                         style: { strokeDasharray: '5,5' },
                     },
                 ]}
@@ -28,6 +28,19 @@ const Step = ({ who, number, target, title, children }) => {
                 id={`${who}-${number}b`}
                 relations={[
                     {
+                        targetId: `${who}-${number}c`,
+                        targetAnchor: 'left',
+                        sourceAnchor: 'right',
+                        style: { strokeDasharray: '5,5' },
+                    },
+                ]}
+            >
+                <span className="b-trigger size-0 absolute left-10 bottom-10"></span>
+            </ArcherElement>
+            <ArcherElement
+                id={`${who}-${number}c`}
+                relations={[
+                    {
                         targetId: target,
                         targetAnchor: 'left',
                         sourceAnchor: 'right',
@@ -35,7 +48,7 @@ const Step = ({ who, number, target, title, children }) => {
                     },
                 ]}
             >
-                <span className="b-trigger size-0 absolute left-0 bottom-0"></span>
+                <span className="b-trigger size-0 absolute left-30 -bottom-10"></span>
             </ArcherElement>
         </div>
     )
