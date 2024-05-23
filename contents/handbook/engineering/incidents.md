@@ -61,10 +61,9 @@ Examples
 ## What happens during an incident?
 
 The person who raised the incident is the incident lead. It’s their responsibility to:
-- Make sure the right people join the call. This includes [the current on call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Marketing if relevant. Marketing can assist on running communication if required.
-- Take notes in the incident channel. This should include time stamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
-- Update the [status banner on app](https://app.posthog.com/feature_flags/984). There are some templates below to make this easier.
-- Update the [status page](https://status.posthog.com/) - this is best done via the incident slack channel via the incident app actions.
+- Make sure the right people join the call. This includes [the current on-call person](https://posthog.pagerduty.com/service-directory/P43Y0E8). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Marketing if relevant. Marketing can assist in running communications if required.
+- Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
+- Update the [status page](https://status.posthog.com/). This is best done in the incident Slack channel using `/incident statuspage` (`/inc sp`).
 
 If the person who raised the incident is the best person to debug the issue, they should hand over the incident lead role to someone else on the call.
 
@@ -72,27 +71,17 @@ If the person who raised the incident is the best person to debug the issue, the
 
 ### Customer communications
 
-Major incidents such as the app being partially or fully unreachable, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers so that they know what is going on and what we are doing to resolve it.
+Significant incidents such as the app being partially or fully non-operational, as well as ingestion delays of 30 minutes or longer should be clearly communicated to our customers. They should get to know what is going on and what we are doing to resolve it.
 
-The main way to communicate an incident to customers is the [status page](https://status.posthog.com/) which is updated via the incident slack channel using `/incident sp`. There you can set granular information on the status of the problem and which components are affected. If the incident is critical and clearly impacting users then it makes sense to also update [the banner feature flag](https://app.posthog.com/feature_flags/984) which will show an announcement at the top of the app. It's the responsibility of the incident lead to enable the banner, and to disable it when the incident is resolved.
+Our [status page](https://status.posthog.com/) is the central hub for all incident communication. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
 
-All in-app banners should link to a resource offering more information, usually the status page. The banner should simply state the user impact and direct users to more detailed information. Keep it simple, and direct.
+When updating the status page, make sure to mark the affected component appropriately (for example during an ingestion delay, setting `US Cloud 🇺🇸` / `Event and Data Ingestion` to `Degraded Performance`). This allows PostHog's UI to gently surface incidents with a "System status" warning on the right. Only users in the affected region will see the warning:
 
-Example flag payloads:
-`Events from the last 5 days may be duplicated due to an error. [More info](https://status.posthog.com/).`
-`Event ingestion is currently delayed by three hours. [More info](https://status.posthog.com/).`
-
-If in doubt, a generic message can suffice:
-
-`We're experiencing technical difficulties. Check [status.posthog.com](https://status.posthog.com) for updates.`
-
-Occasionally it may be desirable to do addditional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Marketing will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact. 
+<img width="223" alt="status" src="https://github.com/PostHog/posthog.com/assets/4550621/55fb053a-83f4-44c5-ac12-0a5409f4033f"> 
 
 ## When does an incident end?
 
-When we’ve identified the root cause of the issue and put a fix in place. End the incident by typing `/inc close` in the incident channel.
-
-Don't forget to disable the in-app banner too. 
+When we’ve identified the root cause of the issue and put a fix in place. End the incident by typing `/inc close` in the incident channel. Make sure to also mark the incident as resolved on the status page.
 
 ## What happens after an incident? (Incident analysis)
 
