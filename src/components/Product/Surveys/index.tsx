@@ -581,7 +581,7 @@ export const ProductSurveys = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicId={64} />
+                    <Questions topicIds={[347]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>

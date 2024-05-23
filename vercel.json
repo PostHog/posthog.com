@@ -160,6 +160,7 @@
         { "source": "/docs/tutorials/actions", "destination": "/docs/tutorials/event-tracking-guide" },
         { "source": "/docs/plugins/overview", "destination": "/docs/apps" },
         { "source": "/docs/api/overview", "destination": "/docs/api" },
+        { "source": "/docs/api/post-only-endpoints", "destination": "/docs/api/capture" },
         { "source": "/docs/contribute/overview", "destination": "/docs/contribute" },
         { "source": "/docs/user-guides/overview", "destination": "/docs/user-guides" },
         { "source": "/docs/user-guides/log-in-with-sso", "destination": "/docs/user-guides/sso" },
@@ -1256,6 +1257,12 @@
         {
             "source": "/blog/gdpr-google-analytics-privacy-shield",
             "destination": "/blog/best-gdpr-compliant-analytics-tools"
+        },
+        { "source": "/docs/product-analytics/llms", "destination": "/docs/ai-engineering" },
+        { "source": "/docs/ai-engineering/llms", "destination": "/docs/ai-engineering/llm-insights" },
+        {
+            "source": "/docs/product-analytics/trends",
+            "destination": "/docs/product-analytics/trends/index"
         }
     ]
 }

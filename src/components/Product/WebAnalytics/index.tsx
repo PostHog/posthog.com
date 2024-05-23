@@ -589,7 +589,7 @@ export const ProductWebAnalytics = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicIds={[65]} />
+                    <Questions topicIds={[348]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>

@@ -25,9 +25,9 @@ Our small teams are:
 - [Web Analytics](/teams/web-analytics)
 - [Website & Docs](/teams/website-docs)
 
-## Reporting lines
+## Org chart and reporting lines
 
-We maintain our full org chart in Deel, [which you can access here](https://app.tryroots.io/org-chart).
+We maintain our full org chart in Deel, [which you can access here](https://app.deel.com/organization-chart/organization/834ac289-7c04-4d93-91f0-8922c5664b77?groupBy=group-by-report).
 
 Team leads do not necessarily = managers - read more about how we think about management [here](/handbook/company/management). 
 

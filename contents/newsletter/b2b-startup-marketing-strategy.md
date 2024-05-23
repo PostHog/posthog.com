@@ -75,6 +75,8 @@ Other options include:
 
 Why do this? FWIW, a single *Product for Engineers* newsletter drives more clicks to our website than a $5,000 newsletter sponsorship we ran recently.
 
+<NewsletterForm />
+
 ## 4. Make your website genuinely different 🙃
 This means:
 
@@ -159,3 +161,5 @@ Once you’ve built this content out, focus on SEO content targeting your rivals
 **[Ten Principles for Growth as an Engineer](https://medium.com/@daniel.heller/ten-principles-for-growth-69015e08c35b) – Dan Heller:** ”Your job isn’t just to write the code and wait for everything else to fall into place; your job is to figure out how to create value with your efforts.”
 
 *Words by Andy Vandervell, who thinks people who use a hyphen instead of en dash are sociopaths.*
+
+<NewsletterForm />

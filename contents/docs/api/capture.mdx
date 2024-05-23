@@ -1,0 +1,442 @@
+---
+title: Capture and batch API endpoints
+sidebar: Docs
+showTitle: true
+---
+
+The `capture` and `batch` endpoints are the main way to send events to PostHog. Beyond user behavior, they are also used to identify users, update person or group properties, migrate from other platforms, and more. [Our SDKs](/docs/libraries) handle the different event types for you, but with the API, you need to send the right type of event (listed below) to trigger the functionality you want. 
+
+Both are POST-only public endpoints that use your [project API key](https://app.posthog.com/project/settings) and do not return any sensitive data from your PostHog instance.
+
+> **Note:** Make sure to send API requests to the correct domain. These are `https://us.i.posthog.com` for US Cloud, `https://eu.i.posthog.com` for EU Cloud, and your self-hosted domain for self-hosted instances. Confirm yours by checking your URL from your PostHog instance.
+
+Here are examples of the types of events you can send:
+
+## Single event
+
+Every event request must contain an `api_key`, `distinct_id`, and `event` field with the name. Both the `properties` and `timestamp` fields are optional. 
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "event name",
+  "distinct_id": "user distinct id",
+  "properties": {
+    "account_type": "pro"
+  },
+  "timestamp": "[optional timestamp in ISO 8601 format]"
+}' <ph_client_api_host>/capture/ 
+```
+
+```python
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "event name",
+    "distinct_id": "user distinct id",
+    "properties": {
+        "account_type": "pro"
+    },
+    "timestamp": "[optional timestamp in ISO 8601 format]"
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+</MultiLanguage>
+
+## Batch events
+
+You can capture multiple events in one request with the `/batch` API route. There is no limit on the number of events you can send in a batch, but the entire request body must be less than 20MB by default.
+
+This example shows how the required `distinct_id` value can also be passed in `properties`.
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "historical_migration": false,
+  "batch": [
+    {
+      "event": "batched_event_name_1",
+      "properties": {
+        "distinct_id": "user distinct id",
+        "account_type": "pro"
+      },
+      "timestamp": "[optional timestamp in ISO 8601 format]" 
+    },
+    {
+      "event": "batched_event_name_2",
+      "properties": {
+        "distinct_id": "user distinct id",
+        "account_type": "pro"
+      }
+    }
+  ]
+}' <ph_client_api_host>/batch/ 
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/batch/"
+headers = {
+  "Content-Type": "application/json"
+}
+payload = {
+  "api_key": "<ph_project_api_key>",
+  "historical_migration": False,
+  "batch": [
+    {
+      "event": "batched_event_name_1",
+      "properties": {
+        "distinct_id": "user distinct id",
+        "account_type": "pro"
+      },
+      "timestamp": "[optional timestamp in ISO 8601 format]" 
+    },
+    {
+      "event": "batched_event_name_2",
+      "properties": {
+        "distinct_id": "user distinct id",
+        "account_type": "pro"
+      }
+    }
+  ]
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.text)
+```
+
+</MultiLanguage>
+
+The `historical_migration` field is optional. For realtime events, it can be left out or set to `false`.
+
+### Historical migrations
+
+When running [migrations](/docs/migrate), the `historical_migration` field must be set to `true`. This ensures that events are processed in order without triggering our spike detection systems.
+
+import ApiMigration from "../migrate/_snippets/api-migration.mdx"
+
+<ApiMigration />
+
+## Alias
+
+This assigns another distinct ID to the same user. Read more in our [identify docs](/docs/product-analytics/identify).
+
+In this example, `123` is merged into `456` and `456` becomes the main `distinct_id` for events associated with `123`.
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "$create_alias",
+  "distinct_id": "123",
+  "properties": {
+    "alias": "456"
+  }
+}' <ph_client_api_host>/capture/
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "$create_alias",
+    "distinct_id": "123",
+    "properties": {
+        "alias": "456"
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+</MultiLanguage>
+
+## Group identify
+
+Updates a group's information or creates one if it does not exist. Read more in our [group analytics docs](/docs/product-analytics/group-analytics).
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "$groupidentify",
+  "distinct_id": "groups_setup_id",
+  "properties": {
+    "$group_type": "<group_type>",
+    "$group_key": "<company_name>",
+    "$group_set": {
+      "name": "<company_name>",
+      "subscription": "premium"
+      "date_joined": "[optional timestamp in ISO 8601 format]"
+    }
+  }
+}' <ph_client_api_host>/capture/
+```
+
+```python
+import json
+import requests
+from datetime import datetime
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "$groupidentify",
+    "distinct_id": "groups_setup_id",
+    "properties": {
+        "$group_type": "<group_type>",
+        "$group_key": "<company_name>",
+        "$group_set": {
+            "name": "<company_name>",
+            "subscription": "premium",
+            "date_joined": datetime.now().isoformat()
+        }
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.text)
+```
+
+</MultiLanguage>
+
+## Groups
+
+Captures event with a group. In this case, `company` is a [group type](/docs/product-analytics/group-analytics#groups-vs-group-types). You can set it to the value you want such as `organization`, `project`, or `channel`. Read more in our [group analytics docs](/docs/product-analytics/group-analytics).
+
+> **Note:** This event will **not** create a new group if a new key being used. To create a group, see the [group identify](#group-identify) event.
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "event name",
+  "distinct_id": "user distinct id",
+  "properties": {
+    "$groups": {"company": "<company_name>"}
+  }
+}' <ph_client_api_host>/capture/
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "event name",
+    "distinct_id": "user distinct id",
+    "properties": {
+        "account_type": "pro",
+        "$groups": {"company": "<company_name>"}
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+</MultiLanguage>
+
+## Identify
+
+Updates person properties. Read more in our [identify docs](/docs/product-analytics/identify).
+
+> **Note:** The `$identify` event works differently from the `identify()` method in the [JavaScript SDK](/docs/libraries/js#identifying-users). This event updates the person properties, while the JavaScript `identify()` method connects an anonymous user and a distinct ID.
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "$identify",
+  "distinct_id": "user distinct id",
+  "properties": {
+    "$set": {
+      "is_cool": "true"
+    }
+  },
+  "timestamp": "2020-08-16T09:03:11.913767"
+}' <ph_client_api_host>/capture/
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "$identify",
+    "distinct_id": "user distinct id",
+    "properties": {
+      "$set": {
+          "is_cool": True
+      }
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+</MultiLanguage>
+
+## Pageview
+
+Default PostHog events and properties have the `$` prefix. The most common and popular of these is the `$pageview` event.
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "$pageview",
+  "distinct_id": "user distinct id",
+  "properties": {
+    "$current_url": "https://posthog.com/docs/api/capture"
+  }
+}' <ph_client_api_host>/capture/
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "$pageview",
+    "distinct_id": "user distinct id",
+    "properties": {
+        "$current_url": "https://posthog.com/docs/api/capture",
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+</MultiLanguage>
+
+## Screen view
+
+The equivalent of a pageview for mobile apps.
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "$screen",
+  "distinct_id": "user distinct id",
+  "properties": {
+    "$screen_name": "TheScreen"
+  }
+}' <ph_client_api_host>/capture/
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "$screen",
+    "distinct_id": "user distinct id",
+    "properties": {
+        "$screen_name": "TheScreen",
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+</MultiLanguage>
+
+## Survey
+
+Although there is a lot of functionality you miss out on if you only use the API, you can capture survey related events. These include `survey sent`, `survey shown`, and `survey dismissed`, each of which requires `$survey_id` as a property. Read our docs on [implementing custom surveys](/docs/surveys/implementing-custom-surveys) for more information.
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "survey sent",
+  "distinct_id": "user distinct id",
+  "properties": {
+    "$survey_id": "survey_id",
+    "$survey_response": "Awesome!"
+  }
+}' <ph_client_api_host>/capture/
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "survey sent",
+    "distinct_id": "user distinct id",
+    "properties": {
+        "$survey_id": "survey_id",
+        "$survey_response": "Awesome!"
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+</MultiLanguage>
+
+## Invalid events
+
+We perform basic validation on the payload and project API key (`api_key`), returning a failure response if an error is encountered.
+
+PostHog **does not return an error** to the client when the following happens:
+
+- An event does not have a name
+- An event does not have the `distinct_id` field set
+- The `distinct_id` field of an event has an empty value
+
+These three cases above cause the event to not be ingested, but you still receive a `200: OK` response from PostHog.
+
+This approach enables us to process events asynchronously if necessary, ensuring reliability and low latency for our event ingestion endpoints.

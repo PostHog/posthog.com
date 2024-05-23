@@ -1,35 +1,56 @@
 There are 3 steps to implement feature flags using the PostHog API:
 
-### Step 1: Evaluate the feature flag value using the `/decide`
+### Step 1: Evaluate the feature flag value using `decide`
 
-`/decide` is the endpoint used to determine if a given flag is enabled for a certain user or not.
+`decide` is the endpoint used to determine if a given flag is enabled for a certain user or not.
 
 #### Request
+
+<MultiLanguage>
 
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
     "api_key": "<ph_project_api_key>",
     "distinct_id": "distinct_id_of_your_user",
-    "groups" : { # Required only for group-based feature flags
-        "group_type": "group_id" # Replace "group_type" with the name of your group type. Replace "group_id" with the id of your group.
-    },
-    "person_properties": {"<personProp1>": "<personVal1>"}, # Optional. Include any properties used to calculate the value of the feature flag.
-    "group_properties": {"group type": {"<groupProp1>":"<groupVal1>"}} # Optional. Include any properties used to calculate the value of the feature flag.
+    "groups" : {
+        "group_type": "group_id"
+    }
 }' <ph_client_api_host>/decide?v=3 
 ```
 
-> **Note:** `person_properties` and `group_properties` are optional. 
-> 
-> By default, flag evaluation uses the user and group properties stored in PostHog. You only need to provide `person_properties` and `group_properties` if you wish to use different values than the ones in PostHog.
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/decide?v=3"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "user distinct id",
+    "groups": {
+        "group_type": "group_id"
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+</MultiLanguage>
+
+> **Note:** The `groups` key is only required for group-based feature flags. If you use it, replace `group_type` and `group_id` with the values for your group such as `company: "Twitter"`.
 
 #### Response
 
-```shell
+When called, `decide` returns the flag values and payloads, along with more information.
+
+```json
 {
   "config": {
     "enable_collect_everything": true
   },
-  "editorParams": {},
+  "toolbarParams": {},
   "errorComputingFlags": false,
   "isAuthenticated": false,
   "supportedCompression": [
@@ -59,16 +80,40 @@ import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-
 
 To do this, include the `$feature/feature_flag_name` property in your event:
 
+<MultiLanguage>
+
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
     "api_key": "<ph_project_api_key>",
+    "event": "your_event_name",
     "distinct_id": "distinct_id_of_your_user",
     "properties": {
-        "$feature/feature-flag-key": "variant-key", # replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
-    },
-    "event": "your_event_name"
+      "$feature/feature-flag-key": "variant-key" # Replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
+    }
 }' <ph_client_api_host>/capture/ 
 ```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>", 
+    "event": "your_event_name",
+    "distinct_id": "distinct_id_of_your_user,
+    "properties": {
+      "$feature/feature-flag-key": "variant-key" # Replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+</MultiLanguage>
 
 ### Step 3: Send a `$feature_flag_called` event
 
@@ -79,17 +124,42 @@ You need to include two properties with this event:
 1. `$feature_flag_response`: This is the name of the variant the user has been assigned to e.g., "control" or "test"
 2. `$feature_flag`: This is the key of the feature flag in your experiment.
 
+<MultiLanguage>
+
 ```shell
 curl -v -L --header "Content-Type: application/json" -d '  {
     "api_key": "<ph_project_api_key>",
+    "event": "$feature_flag_called",
     "distinct_id": "distinct_id_of_your_user",
     "properties": {
-        "$feature_flag": "feature-flag-key",
-        "$feature_flag_response": "variant-name"
-    },
-   "event": "$feature_flag_called"
+      "$feature_flag": "feature-flag-key",
+      "$feature_flag_response": "variant-name"
+    }
 }' <ph_client_api_host>/capture/ 
 ```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>", 
+    "event": "feature_flag_called",
+    "distinct_id": "distinct_id_of_your_user,
+    "properties": {
+      "$feature_flag": "feature-flag-key",
+      "$feature_flag_response": "variant-name"
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+</MultiLanguage>
 
 import APIOverrideServerProperties from './override-server-properties/api.mdx'
 

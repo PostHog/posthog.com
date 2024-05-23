@@ -86,6 +86,8 @@ As Charles Cook, our head of ops and a veteran of multiple startups, [explains](
 
 **Why is this important?** Managers need to properly own hiring. Those that don’t end up hiring average people and blaming their recruiters.
 
+<NewsletterForm />
+
 ## 6. Good people are always in demand
 
 There’s a school of thought that hiring is easier when other, much bigger, companies are cutting people. This hasn’t been our experience. Here’s Charles [again](/blog/early-stage-startup-hiring-strategy#myth-hiring-gets-easier-when-other-companies-are-making-cuts):
@@ -156,3 +158,5 @@ In contrast, someone who’s worked exclusively at FAANG-type companies c.2012-2
 **[What we learned about hiring from our first five employees](https://posthog.com/blog/posthog-first-five) – Andy Vandervell:** “While it's tempting to search for "that hire" who will magically transform your product and company, this is a fool's errand. Successful companies are built on collective strength, which is why talent compounds is one of our core values.”
 
 _Words by Andy Vandervell, who thinks watermelon is pointless._
+
+<NewsletterForm />

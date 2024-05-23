@@ -1490,3 +1490,9 @@ li.squeak-left-border {
 .tw-check-bullets {
     @apply list-none [&>li]:bg-bullet-check-light dark:[&>li]:bg-bullet-check-dark [&>li]:bg-no-repeat [&>li]:pl-9 pl-0 [&>li]:py-1;
 }
+
+.text-gradient {
+    @apply text-transparent bg-clip-text animate-text-gradient 
+         bg-[linear-gradient(90deg,#30ABC6,#F35454,#2F80FA)] 
+    dark:bg-[linear-gradient(90deg,#F54E00,#F7A501,#29DBBB,#EB9D2A,#F54E00)];
+}

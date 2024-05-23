@@ -84,6 +84,8 @@ Because engineers shape the direction of every product, having this trait ensure
 
 > **What to look for:** People who build cool stuff for the sake of it – e.g. side projects, open source contributions – and haven’t job-hopped to optimize title or salary.
 
+<NewsletterForm />
+
 ## 4. Customer obsessed
 
 To uncover the real problems users have (and value), [product engineers](/blog/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
@@ -146,3 +148,5 @@ Because we believe talent compounds, it is worth the extra work to find someone 
 - **[What Distinguishes Great Software Engineers?](https://newsletter.getdx.com/p/great-engineers) – Abi Noda:** Beyond being a component coder, maximizing the current value of work, making good decisions, and learning continuously set great engineers apart.
 
 - **[What startup recruiters actually see when you apply for a job](/founders/what-recruiters-see) - Charles Cook:** We had 9,000 people apply for roles at PostHog in the last 12 months. Charles goes over how we evaluate them and how to set yourself apart.
+
+<NewsletterForm />

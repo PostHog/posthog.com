@@ -51,6 +51,8 @@ Product engineers also spend their time talking to customers, digging into usage
 
 Software engineers focus on writing code, testing it, and maintaining it. They look for ways to optimize code, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether that is databases, data pipelines, backend APIs, or client-side app frameworks. This means researching and reading documentation, updates, and code.
 
+<NewsletterForm />
+
 ## Why is demand for product engineers growing?
 
 There's no single reason, but typically it's motivated by a desire to ship product improvements faster. Product engineers are popular among startups and early-stage companies for this reason, even if they don’t say it. Many engineers behave like product engineers, even if it's not their job title.
@@ -87,3 +89,5 @@ Picking what's right is up to the company and its goals. If you're a small team 
 - [What is a product engineer (and why they matter)](/blog/what-is-a-product-engineer/)
 - [Startups, stop treating engineers like a different species](/blog/stop-treating-engineers-differently)
 - [The really important job interview questions engineers should ask (but don't)](/blog/what-to-ask-in-interviews)
+
+<NewsletterForm />

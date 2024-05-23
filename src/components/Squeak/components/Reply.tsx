@@ -22,7 +22,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
     } = reply
 
     const {
-        question: { resolvedBy, id: questionID, profile: questionProfile, resolved },
+        question: { resolvedBy, id: questionID, profile: questionProfile, resolved, topics },
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
@@ -33,6 +33,10 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
     const isModerator = user?.role?.type === 'moderator'
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
     const isTeamMember = profile?.data?.attributes?.teams?.data?.length > 0
+    const resolvable =
+        !resolved &&
+        (isAuthor || isModerator) &&
+        topics?.data?.every((topic) => !topic.attributes.label.startsWith('#'))
 
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
@@ -97,7 +101,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                 <Markdown>{body}</Markdown>
 
                 <div className="flex space-x-2 mb-4 relative -top-2 empty:hidden">
-                    {!resolved && (isAuthor || isModerator) && (
+                    {resolvable && (
                         <button
                             onClick={() => handleResolve(true, id)}
                             className="text-red dark:text-yellow font-semibold text-sm"

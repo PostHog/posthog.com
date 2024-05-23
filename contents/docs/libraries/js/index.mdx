@@ -45,20 +45,20 @@ To set [user properties](/docs/data/user-properties), include them when capturin
 
 ```js-web
 posthog.capture(
-  'event_name', 
-  { 
+  'event_name',
+  {
     $set: { name: 'Max Hedgehog'  },
     $set_once: { initial_url: '/blog' },
   }
 )
 ```
 
-Typically user properties are set when an event occurs like `user updated email` but there may be occasions where you simply want to set user properties as its own event. 
+Typically user properties are set when an event occurs like `user updated email` but there may be occasions where you want to set user properties as its own event.
 
 ```javascript
 posthog.setPersonProperties(
-    { name: "Max Hedgehog" } // Thes properties are like the `$set` from above 
-    { initial_url: "/blog" } // Thes properties are like the `$set` from above 
+    { name: "Max Hedgehog" }, // Thes properties are like the `$set` from above
+    { initial_url: "/blog" }  // Thes properties are like the `$set_once` from above
 )
 ```
 
@@ -83,7 +83,7 @@ We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assi
 
 ## Reset after logout
 
-If a user logs out, you should call `reset` to unlink any future events made on that device with that user. 
+If a user logs out, you should call `reset` to unlink any future events made on that device with that user.
 
 This is important if your users are sharing a computer, as otherwise all of those users are grouped together into a single user due to shared cookies between sessions. **We strongly recommend you call `reset` on logout even if you don't expect users to share a computer.**
 
@@ -299,7 +299,7 @@ To implement **API** surveys, start by fetching active surveys for a user using 
 
 ```js-web
 // Fetch enabled surveys for the current user
-posthog.getActiveMatchingSurveys(callback, forceReload) 
+posthog.getActiveMatchingSurveys(callback, forceReload)
 
 // Fetch all surveys
 posthog.getSurveys(callback, forceReload)

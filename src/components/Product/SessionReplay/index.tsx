@@ -355,7 +355,7 @@ export const ProductSessionReplay = () => {
         <>
             <SEO
                 title="Session Replay - PostHog"
-                description="Session Replay helps you diagnose issues and understand user behavior in your product or website."
+                description="Session Replay helps you diagnose issues and understand user behavior in your product, mobile app, or website."
                 image={`/images/og/session-replay.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
@@ -618,7 +618,7 @@ export const ProductSessionReplay = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicIds={[20]} />
+                    <Questions topicIds={[377]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>

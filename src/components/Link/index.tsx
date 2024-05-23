@@ -49,7 +49,11 @@ export default function Link({
             return glossaryItem?.slug === url?.replace(/https:\/\/posthog.com/gi, '')
         })
 
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
+    const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
+        if (event && posthog) {
+            posthog.capture(event)
+        }
+        onClick && onClick(e)
         if (compact && url && !internal) {
             e.preventDefault()
             if (/(eu|app)\.posthog\.com/.test(url)) {
@@ -64,10 +68,6 @@ export default function Link({
                 window.open(url, '_blank', 'noopener,noreferrer')
             }
         }
-        if (event && posthog) {
-            posthog.capture(event)
-        }
-        onClick && onClick(e)
     }
 
     return onClick && !url ? (

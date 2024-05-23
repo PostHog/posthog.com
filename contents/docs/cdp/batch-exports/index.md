@@ -117,3 +117,12 @@ sequenceDiagram
 
 - Some features of the old export destinations are still being ported over.
   - This includes logs and error reporting.
+ 
+## How can I export person profiles?
+
+It's not currently possible to export person profiles and properties, but it is on the roadmap:
+
+- [Person data export](https://github.com/PostHog/posthog/issues/20339).
+- Export person properties on events (`event.person_properties`) with [custom schemas](https://github.com/PostHog/posthog/issues/20367).
+
+> **Note:** Our implementation of person IDs on events (`event.person_id`) is eventually consistent, so its not exportable.

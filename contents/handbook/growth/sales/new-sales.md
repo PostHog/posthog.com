@@ -59,7 +59,7 @@ We usually set up the following trials depending on likely contract size:
 - $20-60k - 2 weeks
 - $60k+ - 1 month
 
-Depending on the product they are most interested in, we usually set up the customer set up the following:
+Depending on the product they are most interested in, we usually have the customer set up the following:
 
 - Product/web analytics + session replay: get tracking set up, turn on replay, privacy controls, figure out user ID, get set up insights/dashboards.
 - Feature flags + experiments: snippet, FF in the code, person ID and properties for targeting, deploy flag, run the experiment. 
