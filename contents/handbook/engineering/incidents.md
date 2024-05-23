@@ -77,7 +77,9 @@ Our [status page](https://status.posthog.com/) is the central hub for all incide
 
 When updating the status page, make sure to mark the affected component appropriately (for example during an ingestion delay, setting `US Cloud 🇺🇸` / `Event and Data Ingestion` to `Degraded Performance`). This allows PostHog's UI to gently surface incidents with a "System status" warning on the right. Only users in the affected region will see the warning:
 
-<img width="223" alt="status" src="https://github.com/PostHog/posthog.com/assets/4550621/55fb053a-83f4-44c5-ac12-0a5409f4033f"> 
+<img width="223" alt="status" src="https://github.com/PostHog/posthog.com/assets/4550621/55fb053a-83f4-44c5-ac12-0a5409f4033f">
+
+Occasionally it may be desirable to do addditional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Marketing will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact. 
 
 ## When does an incident end?
 
@@ -90,6 +92,6 @@ When we’ve identified the root cause of the issue and put a fix in place. End 
 3. Hold the meeting.
 4. If a post-mortem had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
 
-If an incident was pretty uneventful we can skip this step.
+All critical incidents should have a PR in the post-mortem repository + a scheduled meeting. All major incidents should have a PR in the post-mortem repository, and optionally a scheduled meeting.
 
 _Thanks to [Incident Review and Postmortem Best Practices](https://blog.pragmaticengineer.com/postmortem-best-practices/) from Pragmatic Engineer_
