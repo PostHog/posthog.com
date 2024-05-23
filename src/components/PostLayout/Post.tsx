@@ -81,11 +81,11 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         !fullWidthContent && sidebar && !hideSidebar ? ' max-w-3xl' : 'max-w-screen-2xl'
                     }`}
                 >
-                    {nextPost && <NextPost />}
                     <div onTransitionEnd={handleArticleTransitionEnd} className={contentContainerClasses}>
                         <div>{children}</div>
-                        {questions}
                     </div>
+                    {nextPost && <NextPost />}
+                    {questions}
                     {!hideSurvey && <Survey />}
                 </article>
                 {!hideSidebar && sidebar && (
