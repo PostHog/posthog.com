@@ -1,5 +1,5 @@
 ---
-title: How Wowzer AI drives growth with A/B tests and product analytics
+title: How Wowzer increased conversion rate by 10% with A/B tests and product analytics
 customer: wowzer
 logo: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1715169275/posthog.com/contents/wowzer-screenshot.png
@@ -17,6 +17,7 @@ toolsUsed:
   - Experimentation
   - Product analytics
   - Surveys
+  - AI engineering
 date: 2024-05-08
 ---
 
@@ -35,7 +36,7 @@ Wowzer is continuously tweaking and [experimenting](/ab-testing) with pricing st
     imageSource="/images/customers/tavana-amin.jpeg"
     size="md"
     name="Amin Tavana"
-    title="SVP of Growth, Wowzer AI"
+    title="SVP of Growth, Wowzer
     quote={`“PostHog enables us to go beyond surface-level metrics and really understand the underlying behaviors and preferences of our users.”`}
 />
 </BorderWrapper>
@@ -46,7 +47,7 @@ These kind of detailed insights enable Wowzer to tailor their product to increas
 
 ## Driving growth with surveys
 
-Wowzer leverages [surveys](/surveys) to [uncover their users' real problems](/newsletter/how-to-uncover-your-users-real-problems) and build what they really need. Amin credits PostHog's intuitive UI for enabling non-technical users like himself to do this.
+Wowzer also uses PostHog surveys to collect feedback and find out what users want. 
 
 "It was as simple as clicking a few buttons. Within a few days of creating a survey, we learned that many users wanted a way to earn free credits. We used this informatiion to create our referral program, which now drives a significant portion of our growth."
 
