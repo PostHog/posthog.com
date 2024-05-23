@@ -147,7 +147,7 @@ const SectionSidebar = ({ children, className = '' }) => (
     </div>
 )
 
-const SidebarList = ({ children }) => <ul className="flex flex-col gap-1 pl-4">{children}</ul>
+const SidebarList = ({ children }) => <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 
 const SidebarListItem = ({ children }) => <li className="leading-snug text-[15px]">{children}</li>
 
@@ -394,7 +394,15 @@ const TabAddons = (props) => {
                 <aside>
                     <span
                         className="text-red dark:text-yellow font-bold text-sm cursor-pointer"
-                        onClick={() => scrollTo('#add-ons')}
+                        onClick={() =>
+                            window.scrollTo({
+                                top:
+                                    document.querySelector('#add-ons')?.getBoundingClientRect().top +
+                                    window.pageYOffset -
+                                    128,
+                                behavior: 'smooth',
+                            })
+                        }
                     >
                         Learn more about addons
                     </span>
@@ -511,7 +519,7 @@ const ProductTabs = ({ billingProducts }) => {
             <div className="text-center mt-4 flex space-x-1 justify-center">
                 {activeTab == undefined && (
                     <p className="m-0 text-sm opacity-75">
-                        Pricing after generous monthly free tier. Descreases exponentially with scale.
+                        Pricing descreases exponentially with scale (after generous monthly free tier).
                     </p>
                 )}
                 <button
@@ -565,8 +573,23 @@ const PlansTabs = () => {
 
                         <div>Product features</div>
                         <div className="col-span-2">
-                            Basic limits{' '}
-                            <Tooltip content={() => <Discounts />} placement="top">
+                            Basic features{' '}
+                            <Tooltip
+                                content={() => (
+                                    <div className="max-w-[320px]">
+                                        <p className="mb-2 text-sm">
+                                            Use each product for free without advanced features. Compare functionality
+                                            limitations on the product page.
+                                        </p>
+                                        <p className="mb-0 text-sm">
+                                            For full functionality, just enter a credit card and you'll be on the{' '}
+                                            <em>Ridiculously cheap</em> plan. PostHog is still free up to the monthly
+                                            free tier limits, and you can set a billing limit as low as $0.
+                                        </p>
+                                    </div>
+                                )}
+                                placement="top"
+                            >
                                 <IconInfo className="size-4 inline-block" />
                             </Tooltip>
                         </div>
@@ -578,12 +601,20 @@ const PlansTabs = () => {
 
                         <div>
                             Add-ons{' '}
-                            <Tooltip content={() => <Discounts />} placement="top">
+                            <Tooltip
+                                content={() => (
+                                    <div className="max-w-[300px]">
+                                        Add-ons extend functionality of products, but all are billed per use and as
+                                        such, not available on the <em>Totally free</em> plan.
+                                    </div>
+                                )}
+                                placement="top"
+                            >
                                 <IconInfo className="size-4 inline-block" />
                             </Tooltip>
                         </div>
                         <div className="col-span-2">Not available</div>
-                        <div className="col-span-2">Add-ons</div>
+                        <div className="col-span-2">Available</div>
                     </div>
                 </>
             ),
@@ -614,7 +645,7 @@ const PlansTabs = () => {
                 <>
                     <div className="grid grid-cols-2 gap-8">
                         <div>
-                            <div>
+                            <div className="mb-2">
                                 <strong>
                                     Everything in <em>Ridiculously cheap</em> plus:
                                 </strong>
@@ -628,16 +659,100 @@ const PlansTabs = () => {
                                 <li>Audit logs</li>
                             </ul>
                         </div>
-                        <div>
-                            <ul className="tw-check-bullets">
+                        <div className="relative">
+                            <div className="mb-2">
+                                <strong>How it works</strong>
+                            </div>
+                            <ul className="tw-chevron-bullets">
                                 <li>Starts at $20k/year w/ fixed annual terms</li>
                                 <li>Annual contract with minimum commitment</li>
                                 <li>No upcharge on usage-based prices</li>
                             </ul>
                             <div className="pt-4">
-                                <CallToAction href="/contact-sales" size="sm">
-                                    Talk to a customer engineer
+                                <CallToAction href="/contact-sales" size="md">
+                                    Talk to a helpful person
                                 </CallToAction>
+                            </div>
+                            <div className="absolute bottom-0 right-0">
+                                <div className="relative flex">
+                                    <Tooltip
+                                        content={() => (
+                                            <div className="max-w-sm">
+                                                <Link
+                                                    href="/community/profiles/28895"
+                                                    className="text-red dark:text-yellow text-[15px]"
+                                                >
+                                                    <strong className="block">Simon Fisher</strong>
+                                                </Link>
+                                                <p className="mb-0 text-sm opacity-75">Customer Success</p>
+                                            </div>
+                                        )}
+                                        placement="top"
+                                    >
+                                        <div className="relative size-20 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
+                                            <StaticImage
+                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575173/simon_bb4af1b047.png"
+                                                quality={100}
+                                                alt="Simon Fisher, Customer Success"
+                                                placeholder="none"
+                                                objectFit="contain"
+                                                className=""
+                                            />
+                                        </div>
+                                    </Tooltip>
+
+                                    <Tooltip
+                                        content={() => (
+                                            <div className="max-w-sm">
+                                                <Link
+                                                    href="/community/profiles/28622"
+                                                    className="text-red dark:text-yellow text-[15px]"
+                                                >
+                                                    <strong className="block">Cameron DeLeone</strong>
+                                                </Link>
+                                                <p className="mb-0 text-sm opacity-75">Customer Success</p>
+                                            </div>
+                                        )}
+                                        placement="top"
+                                    >
+                                        <div className="relative size-[5.5rem] -ml-7 -mr-8 -mt-2 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
+                                            <StaticImage
+                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1685570037/cameron_bc0de38765.png"
+                                                quality={100}
+                                                alt="Cameron DeLeone, Customer Success"
+                                                placeholder="none"
+                                                objectFit="contain"
+                                                className=""
+                                            />
+                                        </div>
+                                    </Tooltip>
+
+                                    <Tooltip
+                                        content={() => (
+                                            <div className="max-w-sm">
+                                                <Link
+                                                    href="/community/profiles/29862"
+                                                    className="text-red dark:text-yellow text-[15px]"
+                                                >
+                                                    <strong className="block">Mine Kansu</strong>
+                                                </Link>
+                                                <p className="mb-0 text-sm opacity-75">Customer Success Manager</p>
+                                            </div>
+                                        )}
+                                        placement="top"
+                                    >
+                                        <div className="relative size-20 top-0 hover:top-[-.2rem] hover:scale-[1.075] transition-all">
+                                            <StaticImage
+                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1704468198/Mine_dc7d915835.png"
+                                                quality={100}
+                                                alt="Mine Kansu, Customer Success Manager"
+                                                placeholder="none"
+                                                objectFit="contain"
+                                                className=""
+                                            />
+                                        </div>
+                                    </Tooltip>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -657,7 +772,7 @@ const PlansTabs = () => {
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
                     size="sm"
-                    className="border border-light/50 hover:border-light/100 dark:border-dark/50 hover:dark:border-dark/100 transition-all rounded py-2 w-[fit-content] md:w-full"
+                    className="transition-all w-[fit-content] md:w-full md:!px-2"
                     tabs={plans.map(({ name, description, html }) => ({
                         title: name,
                         subtitle: description,
@@ -1054,7 +1169,7 @@ const PricingExperiment = ({
                                     </li>
                                 </ul>
                                 <p>
-                                    If you need more info,
+                                    If you need more info,{' '}
                                     <button
                                         className="text-red dark:text-yellow font-semibold"
                                         onClick={() =>
@@ -1062,7 +1177,7 @@ const PricingExperiment = ({
                                                 top:
                                                     document.querySelector('#faq')?.getBoundingClientRect().top +
                                                     window.pageYOffset -
-                                                    108,
+                                                    128,
                                                 behavior: 'smooth',
                                             })
                                         }

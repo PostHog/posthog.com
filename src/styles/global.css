@@ -1488,7 +1488,11 @@ li.squeak-left-border {
 }
 
 .tw-check-bullets {
-    @apply list-none [&>li]:bg-bullet-check-light dark:[&>li]:bg-bullet-check-dark [&>li]:bg-no-repeat [&>li]:pl-9 pl-0 [&>li]:py-1;
+    @apply list-none [&>li]:bg-bullet-check-light dark:[&>li]:bg-bullet-check-dark [&>li]:bg-no-repeat [&>li]:pl-8 pl-0 [&>li]:py-1 [&>li]:bg-[length:1.7rem] [&_li]:bg-[left_center];
+}
+
+.tw-chevron-bullets {
+    @apply list-none [&>li]:bg-bullet-chevron-light dark:[&>li]:bg-bullet-chevron-dark [&>li]:bg-no-repeat [&>li]:bg-[0rem_.4rem] [&_li]:ml-1 [&>li]:pl-5 pl-0 [&>li]:py-1;
 }
 
 .text-gradient {
