@@ -74,8 +74,8 @@ private val client = OkHttpClient.Builder()
 
 * Requires the PostHog Android SDK version >= [3.1.0](https://github.com/PostHog/posthog-android/releases/tag/3.1.0) - use the latest version.
 * Requires Android API >= 26, otherwise it's a NoOp.
-* Not compatible with Jetpack Compose.
-* Custom views are not fully supported.
+* Jetpack Compose is only supported if the `screenshot` option is enabled.
+* Custom views is partly supported, and only fully supported if the `screenshot` option is enabled.
 * WebView is not supported, a placeholder will be shown.
 * Keyboard is not supported, a placeholder will be shown.
 * React Native and Flutter for Android aren't supported.
@@ -94,6 +94,11 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
     sessionReplayConfig.maskAllImages = false
     // capture logs automatically (default is enabled)
     sessionReplayConfig.captureLogcat = true
+    // screenshot is disabled by default
+    // The screenshot may contain sensitive information, use with caution
+    sessionReplayConfig.screenshot = false
+    // debouncerDelayMs is 500ms by default
+    sessionReplayConfig.debouncerDelayMs = 500
 }
 ```
 
