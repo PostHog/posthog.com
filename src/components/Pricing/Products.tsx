@@ -91,9 +91,7 @@ export const useProducts = () => {
                     value={productAnalyticsSliderValue}
                 />
             ),
-            addons: billingProducts
-                .find((product) => product.type === 'product_analytics')
-                ?.addons?.filter(({ inclusion_only }) => !inclusion_only),
+            addons: billingProducts.find((product) => product.type === 'product_analytics')?.addons,
         },
         {
             icon: <IconRewindPlay className="w-5 h-6 text-yellow" />,
@@ -116,9 +114,7 @@ export const useProducts = () => {
                     value={sessionRecordingSliderValue}
                 />
             ),
-            addons: billingProducts
-                .find((product) => product.type === 'session_replay')
-                ?.addons?.filter(({ inclusion_only }) => !inclusion_only),
+            addons: billingProducts.find((product) => product.type === 'session_replay')?.addons,
         },
         {
             icon: <IconToggle className="w-5 h-6 text-green" />,
@@ -141,9 +137,7 @@ export const useProducts = () => {
                     value={featureFlagSliderValue}
                 />
             ),
-            addons: billingProducts
-                .find((product) => product.type === 'feature_flags')
-                ?.addons?.filter(({ inclusion_only }) => !inclusion_only),
+            addons: billingProducts.find((product) => product.type === 'feature_flags')?.addons,
         },
         {
             icon: <IconFlask className="w-5 h-6 text-purple" />,
@@ -158,9 +152,7 @@ export const useProducts = () => {
             calcCost: '',
             message: <em className="font-normal opacity-75">Billed with feature flags</em>,
             slider: '',
-            addons: billingProducts
-                .find((product) => product.type === 'feature_flags')
-                ?.addons?.filter(({ inclusion_only }) => !inclusion_only),
+            addons: billingProducts.find((product) => product.type === 'feature_flags')?.addons,
         },
         {
             icon: <IconMessage className="w-5 h-5 text-red" />,
@@ -183,9 +175,7 @@ export const useProducts = () => {
                     value={surveyResponseSliderValue}
                 />
             ),
-            addons: billingProducts
-                .find((product) => product.type === 'surveys')
-                ?.addons?.filter(({ inclusion_only }) => !inclusion_only),
+            addons: billingProducts.find((product) => product.type === 'surveys')?.addons,
         },
     ]
 }

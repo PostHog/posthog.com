@@ -1500,3 +1500,9 @@ li.squeak-left-border {
          bg-[linear-gradient(90deg,#30ABC6,#F35454,#2F80FA)] 
     dark:bg-[linear-gradient(90deg,#F54E00,#F7A501,#29DBBB,#EB9D2A,#F54E00)];
 }
+
+.hide-number-arrows::-webkit-outer-spin-button,
+.hide-number-arrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

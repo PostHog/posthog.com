@@ -11,7 +11,7 @@ import { PricingCalculator } from './PricingCalculator'
 import { Addons } from './Addons'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
-import Plans, { InclusionOnlyRow, CTA as PlanCTA, PricingTiers } from './Plans'
+import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
 import {
@@ -224,7 +224,7 @@ const AllAddons = () => {
     const platform = usePlatform()
     const products = useProducts()
     const platformAddons = platform.addons.filter((addon) => !addon.inclusion_only)
-    const productAddons = products.flatMap((product) => product.addons.filter((addon) => !addon.inclusion_only))
+    const productAddons = products.flatMap((product) => product.addons)
     const allAddons = [...platformAddons, ...productAddons]
     const [activeTab, setActiveTab] = useState(0)
     const activeAddon = allAddons[activeTab]
@@ -368,23 +368,19 @@ const allProductsData = graphql`
     }
 `
 
-const Pricing = ({ type, plans, unit, inclusion_only, className = '' }) => {
+const Pricing = ({ type, plans, unit, className = '' }) => {
     return (
         <div className={`${className} w-full max-w-[500px]`}>
             <h3 className="text-lg mb-3">Monthly pricing</h3>
             <div className="flex flex-col divide-y divide-light dark:divide-dark gap-0.5">
-                {inclusion_only ? (
-                    <InclusionOnlyRow plans={plans} />
-                ) : (
-                    <PricingTiers plans={plans} unit={unit} type={type} test={true} />
-                )}
+                <PricingTiers plans={plans} unit={unit} type={type} test={true} />
             </div>
         </div>
     )
 }
 
 const TabAddons = (props) => {
-    const addons = props.addons.filter(({ inclusion_only }) => !inclusion_only)
+    const addons = props.addons
     const [activeTab, setActiveTab] = useState(0)
     const activeAddon = addons[activeTab]
     return (
@@ -423,17 +419,13 @@ const TabAddons = (props) => {
                     />
                 </div>
                 <div className="flex-grow divide-y divide-light dark:divide-dark gap-0.5">
-                    {activeAddon.inclusion_only ? (
-                        <InclusionOnlyRow plans={activeAddon.plans} />
-                    ) : (
-                        <PricingTiers
-                            plans={activeAddon.plans}
-                            unit={activeAddon.unit}
-                            type={activeAddon.type}
-                            key={activeAddon.type}
-                            test={true}
-                        />
-                    )}
+                    <PricingTiers
+                        plans={activeAddon.plans}
+                        unit={activeAddon.unit}
+                        type={activeAddon.type}
+                        key={activeAddon.type}
+                        test={true}
+                    />
                 </div>
             </div>
         </div>

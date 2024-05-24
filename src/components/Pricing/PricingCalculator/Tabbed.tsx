@@ -1,55 +1,85 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import useProducts from '../Products'
 import Tooltip from 'components/Tooltip'
-import { IconInfo, IconLightBulb, IconPercentage } from '@posthog/icons'
+import { IconInfo, IconLightBulb } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { calculatePrice, pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { useStaticQuery } from 'gatsby'
 import { allProductsData } from '../Pricing'
 import { useValues } from 'kea'
 
-const Addon = ({ type, name, description, plans, addons, setAddons, volume }) => {
+const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only, unit }) => {
     const addon = addons.find((addon) => addon.type === type)
     const checked = addon?.checked
-
+    const [percentage, setPercentage] = useState(50)
     useEffect(() => {
         setAddons((addons) => {
             return addons.map((addon) => {
                 if (addon.type === type) {
                     return {
                         ...addon,
-                        totalCost: checked ? calculatePrice(volume, plans[plans.length - 1].tiers) : 0,
+                        totalCost: checked
+                            ? calculatePrice(
+                                  inclusion_only ? (percentage / 100) * volume : volume,
+                                  plans[plans.length - 1].tiers
+                              )
+                            : 0,
                     }
                 }
                 return addon
             })
         })
-    }, [volume, checked])
+    }, [volume, checked, percentage])
+
+    const handleToggle = (checked: boolean) => {
+        setAddons((addons) => {
+            return addons.map((addon) => {
+                if (addon.type === type) {
+                    return { ...addon, checked }
+                }
+                return addon
+            })
+        })
+    }
 
     return (
         <div className="grid grid-cols-12 items-center">
-            <div className="col-span-7 flex space-x-1 items-center">
-                <p className="m-0 text-sm font-bold">{name}</p>
-                <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
-                    <span className="relative">
-                        <IconInfo className="size-5 opacity-70" />
-                    </span>
-                </Tooltip>
+            <div className="col-span-7">
+                <div className="flex space-x-1 items-center">
+                    <p className="m-0 text-sm font-bold">{name}</p>
+                    <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
+                        <span className="relative">
+                            <IconInfo className="size-5 opacity-70" />
+                        </span>
+                    </Tooltip>
+                </div>
+                <div>
+                    {inclusion_only && (
+                        <p className="m-0 flex space-x-1 text-sm">
+                            <span>on</span>
+                            <span className="border-b border-black">
+                                <input
+                                    onChange={(e) => {
+                                        if (!checked) {
+                                            handleToggle(true)
+                                        }
+                                        setPercentage(e.target.value)
+                                    }}
+                                    type="number"
+                                    min={1}
+                                    max={99}
+                                    className="p-0 bg-tan border-none hide-number-arrows text-sm font-bold -mr-0.5 focus:ring-0"
+                                    value={percentage}
+                                />
+                                <strong>%</strong>
+                            </span>
+                            <span>of total {unit} volume</span>
+                        </p>
+                    )}
+                </div>
             </div>
             <div className="col-span-2 md:col-span-3 flex justify-end">
-                <Toggle
-                    checked={checked}
-                    onChange={(checked) =>
-                        setAddons(
-                            addons.map((addon) => {
-                                if (addon.type === type) {
-                                    return { ...addon, checked }
-                                }
-                                return addon
-                            })
-                        )
-                    }
-                />
+                <Toggle checked={checked} onChange={handleToggle} />
             </div>
             <div className="col-span-3 md:col-span-2 text-right">
                 <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
