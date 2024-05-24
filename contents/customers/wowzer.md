@@ -21,9 +21,9 @@ toolsUsed:
 date: 2024-05-08
 ---
 
-[Wowzer](https://wowzer.ai/) is an AI image generation app. Their goal is to make it as easy as possible for any person to create beautiful images.
+[Wowzer](https://wowzer.ai/) is an AI image generation app. Their goal is to make it as easy as possible for any person to create beautiful images. In the last three months, they've grown rapidly from 0 to 100,000 active users and generated more than 3 million images.
 
-As a B2C product with huge amounts of data, Wowzer's product and growth teams are incredibly data-led. "PostHog enables us to go beyond surface-level metrics and really understand the behavior of our users," says Amin Tavana, SVP of growth at Wowzer. "It's foundational to how we iterate and build the best product for our users."
+This success is largely because Wowzer's product and growth teams are incredibly data-driven. "We're only able to achieve this because PostHog lets us go beyond basic metrics to deeply understand our users' behavior" says Amin Tavana, SVP of growth at Wowzer.
 
 ## Rapid experimentation and instant insights
 
@@ -52,6 +52,6 @@ Wowzer also uses PostHog [surveys](/surveys) to collect feedback and [find out w
 
 This prompted Wowzer to create a referral program, which is now one of their biggest growth drivers. They also tested giving users 20 free credits daily instead of 100 credits monthly, which had a big effect on the number of returning users in the product.
 
-"We track the number _one-time users_ (users who only use the app once and never come back) using [cohorts](https://posthog.com/docs/data/cohorts). By switching to daily credit refreshes, we saw the percentage of these users drop from 75% to 65% of all users. This is because these users were converting into repeat users, leading to an increase in our overall conversion rate!"
+"We track the number _one-time users_ (users who only use the app once and never come back) using [cohorts](https://posthog.com/docs/data/cohorts). By switching to daily credit refreshes, we saw 15% decrease in these users. This is because they were converting into repeat users, ultimately leading to an increase in our overall conversion rate!"
 
 "To summarize," Amin says, "if we weren't using PostHog, we wouldn't be able to uncover the amount of insights we do!"
