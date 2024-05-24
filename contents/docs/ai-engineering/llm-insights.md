@@ -23,7 +23,7 @@ Currently, we support integrations for the following platforms:
 
 ## Dashboard templates
 
-Once you've installed an integration, [dashboard templates](/docs/product-analytics/dashboards) help you quickly set up relevant insights. Here examples for [Langfuse](https://eu.posthog.com/shared/HPOaK5zNVkP062nQJQJoooXe61l15w) and [Helicone](https://us.posthog.com/shared/NueyVUHeGCGnrQaM-eRO09HzHFwcCw).
+Once you've installed an integration, [dashboard templates](/docs/product-analytics/dashboards) help you quickly set up relevant insights. Here examples for [Langfuse](https://eu.posthog.com/shared/HPOaK5zNVkP062nQJQJoooXe61l15w) and [Helicone](https://us.posthog.com/shared/6_Qa74au0RhxERZ3wW9g87oxWlFxNA).
 
 To create your own dashboard from a template:
 
