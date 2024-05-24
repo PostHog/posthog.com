@@ -18,10 +18,10 @@ toolsUsed:
   - Product analytics
   - Session replay
   - AI engineering
-date: 2024-05-07
+date: 2024-05-24
 ---
 
-[Juicebox](https://juicebox.work/) is an AI recruitment platform enabling companies to find top talent. By integrating AI-powered search across multiple data sources, Juicebox helps recruiters find ideal candidates for specialized roles.
+[Juicebox](https://juicebox.ai/) is an AI recruitment platform enabling companies to find top talent. By integrating AI-powered search across multiple data sources, Juicebox helps recruiters find ideal candidates for specialized roles.
 
 "Our core offering hinges on the seamless execution of complex search queries within our platform. The user experience is paramount, and latency can significantly impact it," explains David Paffenholz, co-founder and CEO of Juicebox.
 
