@@ -17,7 +17,7 @@ toolsUsed:
   - Feature flags
   - Product analytics
   - AI engineering
-date: 2024-05-09
+date: 2024-05-24
 ---
 
 [HostAI](https://hostai.app/) is an AI platform that handles repetitive tasks for vacation home managers, such as maintenance ticketing and phone calls. One of it's most popular features is using LLM models to automate responses to guest inquiries.
