@@ -43,7 +43,7 @@ export const pathDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710
     className="rounded shadow-xl"
 />
 
-Paths are a type of [insight](/docs/user-guides/insights) that enable you to follow users along their journey through your product and determine where the biggest drop-offs are.
+User paths are a type of [insight](/docs/user-guides/insights) that enable you to follow users along their journey through your product and determine where the biggest drop-offs are.
 
 You can learn the following from paths:
 
@@ -85,7 +85,7 @@ Paths can be overwhelming at first, especially if they have many steps. To help 
 
 Each step along the path is a page that the user viewed, and the horizontal bars correspond to a user navigating from one page to another. The numbers next to the paths correspond to how many distinct users passed through this specific step along the way. 
 
-So out of the **268** people who viewed `/homepage`, **70** continued to `/docs/tutorials`, **63** to `/docs/...gramming`, and so on.
+In the above, the first step shows that **268** people viewed the homepage `/homepage`. From the homepage, we can see that people either viewed the `/docs/tutorials` page next, or the `/docs/...gramming` page next, or the `/docs/paths` page, and so on.
 
 ### Exploring a specific step within a path
 
@@ -98,20 +98,18 @@ You can dig deeper into a specific step by hovering your mouse over it:
     alt= "Dropoff"
 />
 
-This will give us the exact conversion rate of this step, as well as the average time it took users to get here from the previous step. In addition to this information, you can also click on the **•••** icon to bring up a menu with a number of actions for this step:
+This gives us the exact conversion rate of this step, as well as the average time it took users to get here from the previous step. In addition to this information, you can also click on the **•••** icon to bring up a menu with a number of actions for this step:
 
-- **Set as path start** - This will set this step as the starting point for your path. This is useful for exploring where your users navigate to after a specific step
-- **Set as path end** - This will set this step as the ending point for your path. This is useful when analyzing the ways in which a user ends up at a specific step or learning why users dropped off.
-- **Exclude path item** - This will add an [exclusion](#exclusions) rule for this specific event
-- **View funnel** - This will open up a new [funnel insight](/docs/product-analytics/funnels) with this event already set as the first step. This is useful when analyzing drop-off of a specific step.
-- **Copy path item name** - Copies the event name to your clipboard
+- **Set as path start** - Sets this step as the starting point for your path. This is useful for exploring where your users navigate to after a specific step.
+- **Set as path end** - Sets this step as the ending point for your path. This is useful when analyzing the ways a user ends up at a specific step or learning why users dropped off.
+- **Exclude path item** - Adds an [exclusion](#exclusions) rule for this specific event.
+- **View funnel** - Opens a new [funnel insight](/docs/product-analytics/funnels) with this event already set as the first step. This is useful when analyzing drop-off of a specific step.
+- **Copy path item name** - Copies the event name to your clipboard.
 
 ### Viewing recordings and creating cohorts from a step
 
-<FeatureAvailability availability={_frontmatter.availability.features.cohorts} />
 
-One of the most powerful features of paths is the ability to see all the users who passed through a specific step.
-To do this, click on the number next to the name of step. This brings up a list of all of these users.
+One of the most powerful features of paths is the ability to see all the users who passed through a specific step. To do this, click on the number next to the name of step. This brings up a list of all of these users.
 
 <ProductScreenshot
     imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/v1716305838/posthog.com/contents/path-users-light.png"} 
@@ -120,7 +118,7 @@ To do this, click on the number next to the name of step. This brings up a list 
     alt= "list of users who reached a step"
 />
 
-You can then create a [cohort](https://posthog.com/docs/data/cohorts) of users who passed through the step by clicking the **Save as cohort**.
+You can then create a [cohort](/docs/data/cohorts) of users who passed through the step by clicking the **Save as cohort**.
 
 If you have enabled [session replays](/docs/session-replay), you can also see recordings of a user sessions for this step by clicking the **View recording** button. This is helpful when diagnosing problems with your funnels.
 
@@ -143,7 +141,7 @@ There are 4 types of events that PostHog can display user paths for. You need to
 
 This options shows paths for the `$pageview` event sent by our web libraries. Each step of the path is broken down by the `Current URL` property.
 
-This also means that you'll be able to see a continuous path of your users even if they navigate across domains.
+This also means that you can see a continuous path of your users even if they navigate across domains.
 
 #### Screen views
 
@@ -159,28 +157,26 @@ You can also write your own custom queries path steps using [HogQL](/docs/hogql)
 
 ### Wildcard groups
 
-<FeatureAvailability availability={_frontmatter.availability.features.wildcardGroups} />
 
-Wildcard groups are an advanced feature that allows you to group multiple events together into a single step based on certain patterns. Wildcard groups work by using the `*` character to match against an event. 
+Wildcard groups are an advanced feature that allows you to group multiple events together into a single step based on certain patterns. They work by using the `*` character to replace a unique pattern in a string. 
 
 Wildcard groups are typically used when you're dealing with URLs that contain unique values or IDs, and you want to combine all of these paths into a single step.
 
-For example, if you have urls with the format `/product/{product-id}`, you can use the pattern `/product/*` to group them together.
+For example, if you have URLs with the format `/product/{product-id}`, you can use the pattern `/product/*` to group them together.
 
 When using wildcards on custom events, the pattern will be matched against the event name itself. For example,`dashboard *` will match the events with names such as `dashboard created` and `dashboard viewed`.
 
 ### Path cleaning rules
 
-<FeatureAvailability availability={_frontmatter.availability.features.advancedOptions} />
 
-Path cleaning rules are an advanced version of [Wildcard groups](#wildcard-groups). They use regex to match instead of the simple `*` wildcard.
+Path cleaning rules are an advanced version of [wildcard groups](#wildcard-groups). They use regex to match instead of the simple `*` wildcard.
 
 Path cleaning rules consist of two parts:
 
 - **Regex** – used to match the various URLs you would like to combine.
 - **Alias** – used to replace the portion that matched the regex.
 
-Path cleaning rules can either be added directly to an insight, or you can configure global path cleaning rules in your [project settings](/settings/project-product-analytics#path-cleaning).
+Path cleaning rules can either be added directly to an insight, or you can configure global path cleaning rules in your [project settings](https://us.posthog.com/settings/project-product-analytics#path-cleaning).
 
 <ProductScreenshot
     imageLight = {pathLight} 
@@ -217,4 +213,4 @@ There is an option right above the graph to select the number of steps to displa
     alt= "Select number of paths"
 />
 
-Increasing the number of steps will show a longer portion of a user's journey through your product,. However, the drawback is that too many steps can often show a cluttered view. To fix this, see above on how to [exclude certain events](#exclusions).
+Increasing the number of steps will show a longer portion of a user's journey through your product. The drawback is that too many steps can often show a cluttered view. To fix this, see above on how to [exclude certain events](#exclusions).
