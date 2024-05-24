@@ -29,7 +29,43 @@ There are three kinds of heatmap in the toolbar:
 
 # Heatmaps
 
+You can enable heatmaps in project settings or as config to posthog-js. The heatmap data shows where on the page users are clicking, rageclicking, or moving their mouse. Unlike the clickmap, the user doesn't have to be clicking on a clickable element, so you can see where users are trying to click but can't.
+
+> **Note:** Heatmap events are sent along with other events, so they don't contribute to your bill. It's best to have autocapture or pageleave events enabled to make sure all heatmap data is gathered.
+
+## Heatmap settings
+
+TKTK image showing the settings
+
+### Aggregation
+
+The heatmap can show a count of events or of unique users. The default is to show the count of events.
+
+> **Note:** The unique users count is based on the user's distinct ID, so if a user is using multiple devices or browsers, they will be counted as multiple users. This is so that the heatmap can be much faster to load. The clickmap can be used when you want exact counts.
+
+### Viewport accuracy
+
+You can set a tolerance for the viewport accuracy. You might be viewing the heatmap on a different sized screen from your users. You can reduce viewport accuracy to include events from different sized screens. 
+
+This means that you'll get more data but the position might not be as accurate. 
+
+TKTK image showing 50% and 100% accuracy
+
+### Color palette
+
+The defaut palette for the heatmap is a gradient from red to green. This won't be visible for all users or against all site color themes. You can change the color palette to a different gradient or to a single color.
+
+### Fixed positioning
+
+Some clicks will be on elements that don't move when the page scrolls. PostHog JS will attempt to detect fixed elements such as headers or modals and will therefore show those heatmap areas, ignoring the scroll value. 
+
+You can change fixed positioning so these clicks move when scrolled or hide them entirely.
+
 # Scrollmaps
+
+The scrollmap uses data from pageview and pageleave events to show how far down the page users are scrolling. 
+
+TKTK image showing the scollmap
 
 # Combining maps from similar pages using wildcards
 
