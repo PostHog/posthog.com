@@ -153,10 +153,15 @@ This contains all events other than the `$pageview` and `$screen` event. When di
 
 #### HogQL expression
 
-You can also write your own custom queries path steps using [HogQL](/docs/hogql).
+You can also write your own custom queries path steps using [HogQL expression](/docs/hogql/expressions).
+
+For example, the following expression will filter to only show pageviews on Chrome:
+
+```
+if(event = '$pageview' and properties.$browser = 'Chrome', properties.$current_url, null)
+```
 
 ### Wildcard groups
-
 
 Wildcard groups are an advanced feature that allows you to group multiple events together into a single step based on certain patterns. They work by using the `*` character to replace a unique pattern in a string. 
 
@@ -167,7 +172,6 @@ For example, if you have URLs with the format `/product/{product-id}`, you can u
 When using wildcards on custom events, the pattern will be matched against the event name itself. For example,`dashboard *` will match the events with names such as `dashboard created` and `dashboard viewed`.
 
 ### Path cleaning rules
-
 
 Path cleaning rules are an advanced version of [wildcard groups](#wildcard-groups). They use regex to match instead of the simple `*` wildcard.
 
@@ -201,6 +205,12 @@ Exclusions enable you to remove events entirely from being displayed in a path.
     classes="rounded"
     alt= "Excluding two events"
 />
+
+### Number of people on each path
+
+This enables you to set the minimum and/or maximum number of people who performed the path in order for it to be displayed. This is especially helpful in reducing the density of the visualization since it removes paths from the insights. 
+
+For example, you can set a minimum of 100 users per path to remove the most uncommon paths users took.
 
 ### Setting the number of steps
 
