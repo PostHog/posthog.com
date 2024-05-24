@@ -74,7 +74,7 @@ Helicone events will now be exported into PostHog as soon as they're available.
 
 ## Using the Helicone dashboard template
 
-Once you've installed the integration, [dashboard templates](/docs/product-analytics/dashboards) help you quickly set up relevant insights. You can see an example [Helicone dashboard here](https://us.posthog.com/shared/NueyVUHeGCGnrQaM-eRO09HzHFwcCw).
+Once you've installed the integration, [dashboard templates](/docs/product-analytics/dashboards) help you quickly set up relevant insights. You can see an example [Helicone dashboard here](https://us.posthog.com/shared/6_Qa74au0RhxERZ3wW9g87oxWlFxNA).
 
 To create your own dashboard from a template:
 
