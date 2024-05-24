@@ -181,8 +181,15 @@ const formatCompactNumber = (number) => {
     return formatter.format(number).toLowerCase()
 }
 
-const AddonTooltipContent = ({ addon }) => {
-    const referencePlan = addon.plans?.[0]
+const AddonTooltipContent = ({ addon }: { addon: BillingProductV2Type }) => {
+    const isInclusionOnly = addon.inclusion_only
+    let referencePlan
+    if (isInclusionOnly) {
+        referencePlan = addon.plans.find((plan) => plan.included_if == 'has_parent_subscription')
+    } else {
+        referencePlan = addon.plans[0]
+    }
+    console.log(addon.name, 'referencePlan', referencePlan)
     const tiers = referencePlan?.tiers
     const isFirstTierFree = parseFloat(tiers?.[0].unit_amount_usd || '') === 0
     const [showDiscounts, setShowDiscounts] = useState(false)
@@ -190,7 +197,7 @@ const AddonTooltipContent = ({ addon }) => {
     return (
         <div className="p-2 max-w-sm">
             <p className="font-bold text-[15px] mb-2">
-                {addon.name} <Label className="ml-2" text="Addon" />
+                {addon.name} <Label className="ml-2" text="Add-on" />
             </p>
             <p className="text-sm mb-3">{addon.description}</p>
             <p className="text-sm opacity-70 mb-3">
@@ -278,6 +285,7 @@ const allProductsData = graphql`
                             plan_key
                             product_key
                             unit
+                            included_if
                             features {
                                 description
                                 key
@@ -444,45 +452,42 @@ export default function Plans({
                                     </Row>
                                 )
                             })}
-                            {addons
-                                .filter((addon: BillingProductV2Type) => !addon.inclusion_only)
-                                .map((addon: BillingProductV2Type) => {
-                                    return (
-                                        <Row
-                                            className="hover:bg-accent/60 dark:hover:bg-accent-dark/70"
-                                            key={addon.type}
-                                        >
-                                            <div className="flex-grow">
-                                                <AddonTooltip addon={addon} parentProductName={name}>
-                                                    <Title
-                                                        className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                        title={addon.name}
-                                                    />
-                                                    <Label className="ml-2" text="Addon" />
-                                                </AddonTooltip>
-                                            </div>
-                                            {plans.map((plan) => {
-                                                return (
-                                                    <div
-                                                        className="max-w-[25%] w-full min-w-[105px]"
-                                                        key={`${addon.type}-${plan.plan_key}`}
-                                                    >
-                                                        {plan.free_allocation ? (
-                                                            <Close opacity={1} className="text-red w-4" />
-                                                        ) : (
-                                                            <AddonTooltip addon={addon} parentProductName={name}>
-                                                                <Title
-                                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                                    title="Available"
-                                                                />
-                                                            </AddonTooltip>
-                                                        )}
-                                                    </div>
-                                                )
-                                            })}
-                                        </Row>
-                                    )
-                                })}
+                            {addons.map((addon: BillingProductV2Type) => {
+                                return (
+                                    <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={addon.type}>
+                                        <div className="flex-grow">
+                                            <AddonTooltip addon={addon} parentProductName={name}>
+                                                <Title
+                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                    title={addon.name}
+                                                />
+                                                <Label className="ml-2" text="Add-on" />
+                                            </AddonTooltip>
+                                        </div>
+                                        {plans.map((plan, i) => {
+                                            return (
+                                                <div
+                                                    className="max-w-[25%] w-full min-w-[105px]"
+                                                    key={`${addon.type}-${plan.plan_key}`}
+                                                >
+                                                    {plan.free_allocation && !plan.included_if ? (
+                                                        <Close opacity={1} className="text-red w-4" />
+                                                    ) : plan.included_if == 'no_active_parent_subscription' ? (
+                                                        <span>Included</span>
+                                                    ) : (
+                                                        <AddonTooltip addon={addon} parentProductName={name}>
+                                                            <Title
+                                                                className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                                title="Available"
+                                                            />
+                                                        </AddonTooltip>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                    </Row>
+                                )
+                            })}
                         </div>
                         <div>
                             <Row className="bg-accent dark:bg-accent-dark my-2">
