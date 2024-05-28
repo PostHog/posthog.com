@@ -36,7 +36,7 @@ On the other hand, there are many use cases that don't require person profiles, 
 - B2C apps where users don't sign up or log in
 - High volume API server events
 
-For backward compatibility and to make sure we don't drop person information accidentally, person profile processing is enabled by default for configs without any option set. Also, if a user distinct ID already has a person profile created, we count events as ones with person profiles.
+For backward compatibility and to make sure we don't drop person information accidentally, person profile processing is enabled by default for configs without any option set. Also, if a user distinct ID already has a person profile created, we count events as ones with person profiles. To reset this, delete the person in the person details UI in PostHog or use the `DELETE` operation of the [person API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id).
 
 > **Note:** Since we changed our data structure to make person profiles optional, any `distinct_id` created before May 2024 will have a person profile created for them. This means all of their events will be counted as events with person properties.
 
