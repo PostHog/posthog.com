@@ -83,9 +83,16 @@ const Vertical = ({ tabs, onClick, activeTab, className = '', activeClass }) => 
                                     : 'hover:bg-accent dark:hover:bg-accent/15'
                             }`}
                         >
-                            <div className="flex space-x-2 whitespace-nowrap">
+                            <div className="flex space-x-2 whitespace-nowrap items-center">
                                 <span>{icon}</span>
                                 <span>{title}</span>
+                                {tab.tooltip && (
+                                    <Tooltip content={tab.tooltip} tooltipClassName="max-w-[300px]" placement="right">
+                                        <span className="relative">
+                                            <IconInfo className="w-5 h-5" />
+                                        </span>
+                                    </Tooltip>
+                                )}
                             </div>
                         </button>
                     </li>

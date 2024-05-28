@@ -235,11 +235,12 @@ const AllAddons = () => {
                 vertical
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
-                tabs={allAddons.map(({ name, icon_key }) => {
+                tabs={allAddons.map(({ name, icon_key, description }) => {
                     const Icon = Icons[icon_key]
                     return {
                         title: name,
                         icon: <Icon className="w-5 opacity-75" />,
+                        tooltip: description,
                     }
                 })}
             />
