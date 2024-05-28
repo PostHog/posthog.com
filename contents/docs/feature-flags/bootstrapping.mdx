@@ -62,7 +62,7 @@ To ensure you are bootstrapping PostHog with the correct flag values, we recomme
 
 You can do this by:
 
-1. When receiving a frontend request, fetch all the feature flags for the user by calling `getAllFlags()`.
+1. When receiving a frontend request, fetch all the feature flags for the user on the backend by calling [`getAllFlags()`](/docs/feature-flags/adding-feature-flag-code#fetching-all-flags-for-a-user).
 2. Return the frontend request with the flags values in the response.
 3. On the frontend, get the flag values from the response and add them to the `bootstrap` key in the PostHog initialization.
 
@@ -74,9 +74,9 @@ The `bootstrap` object has two optional arguments: `distinctID` and `isIdentifie
 
 - `distinctID` enables you to set distinct ID of the user during PostHog's initialization. This is useful when you want to ensure the distinct ID on your frontend is the same as the distinct ID that you called `getAllFlags()` with on your server. It is **strongly recommended** to include it.
 
-> **Note:** The only case where it doesn't make sense to include the distinctID is when you're bootstrapping identified users only, and you call identify for these users right on load. Here, if you pass in the distinctID to bootstrap, identify will not connect your existing anonymous ID, since it's replaced by the bootstrapped ID.
+> **Note:** The only case where it doesn't make sense to include `distinctID` is when your code only runs for [identified users](/docs/product-analytics/identify) **and** you call `identify` immediately on load. 
 
-- `isIdentifiedID` ensures that the `distinctID` is treated as an [identified ID](/docs/product-analytics/identify) in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling identify again.
+- `isIdentifiedID` ensures that the `distinctID` is treated as an [identified ID](/docs/product-analytics/identify) in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling identify again with a different ID. Set this to `true` if you're using a unique ID such as `email` or a database ID. Set this to `false` if you're generating a random anonymous ID.
 
 <MultiLanguage>
 
