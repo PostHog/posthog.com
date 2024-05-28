@@ -78,7 +78,7 @@ const Modal = ({ onClose, isVisible }) => {
                         <details>
                             <summary className="cursor-pointer">
                                 <div className="inline-flex items-center justify-between w-[95%]">
-                                    <strong>"I want to track ALL my users"</strong>
+                                    <strong>"I want to store details about some anonymous users"</strong>
                                     <span>
                                         <div className="border border-green rounded px-1 py-0.5 text-green font-bold uppercase text-sm">
                                             Yes
@@ -86,14 +86,12 @@ const Modal = ({ onClose, isVisible }) => {
                                     </span>
                                 </div>
                                 <p className="text-sm opacity-75 pl-4 mb-0">
-                                    Anonymous website traffic <em>AND</em> signed in users
+                                    Some anonymous website traffic and all signed in users
                                 </p>
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
                                 <p className="mb-0">
-                                    <strong className="text-green">Yes, you should enable this.</strong> It will allow
-                                    you to track visitors from the first time they visit your site and merge them with
-                                    an identified user record once they become a customer.
+                                    <strong className="text-green">Yes, you'll use person profiles any time you provide person information to store.</strong> This will allow you to store things like site preferences (eg. dark mode) and more on non-identified users and still leverage all the benefits of person profiles. 
                                 </p>
                             </div>
                         </details>
