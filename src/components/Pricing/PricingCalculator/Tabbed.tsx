@@ -20,7 +20,7 @@ const Modal = ({ onClose, isVisible }) => {
                 onClick={() => onClose()}
             ></div>
             <div
-                className={`w-[500px] max-w-full h-[calc(100vh_-_123px)] md:h-screen z-[1000001] fixed overflow-y-auto top-0 flex flex-col bg-white transition-all duration-500 ease-out
+                className={`w-[500px] max-w-full h-[calc(100vh_-_123px)] md:h-screen z-[1000001] fixed overflow-y-auto top-0 flex flex-col bg-white dark:bg-accent-dark transition-all duration-500 ease-out
           ${isVisible ? '!opacity-100 right-[0px]' : 'opacity-0 right-[-500px]'}`}
             >
                 <div className="w-full h-fit flex justify-between p-4 md:px-8">
@@ -32,9 +32,9 @@ const Modal = ({ onClose, isVisible }) => {
                 </div>
                 <div className="px-4 pb-4 md:px-8 md:pb-8 [&_p]:text-[15px]">
                     <p className="mb-2">
-                        Person profiles let you store detailed information about a user (like an email address) in a central location and track that user over time.
-                        This enables a deeper level of insights that isn't available when analyzing anonymous traffic
-                        (like in Google Analytics).
+                        Person profiles let you store detailed information about a user (like an email address) in a
+                        central location and track that user over time. This enables a deeper level of insights that
+                        isn't available when analyzing anonymous traffic (like in Google Analytics).
                     </p>
                     <p className="mb-2">
                         It also provides attribution data and lets you track users across devices and sessions.
@@ -91,7 +91,12 @@ const Modal = ({ onClose, isVisible }) => {
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
                                 <p className="mb-0">
-                                    <strong className="text-green">Yes, you'll use person profiles any time you provide person information to store.</strong> This will allow you to store things like site preferences (eg. dark mode) and more on non-identified users and still leverage all the benefits of person profiles. 
+                                    <strong className="text-green">
+                                        Yes, you'll use person profiles any time you provide person information to
+                                        store.
+                                    </strong>{' '}
+                                    This will allow you to store things like site preferences (eg. dark mode) and more
+                                    on non-identified users and still leverage all the benefits of person profiles.
                                 </p>
                             </div>
                         </details>
@@ -110,10 +115,10 @@ const Modal = ({ onClose, isVisible }) => {
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
                                 <p className="mb-0">
-                                    <strong>No, you don't need events with person profiles</strong> to track anonymous users. You'll
-                                    only get basic attribution info (like UTM source) but it can't be used to analyze
-                                    things like top performing marketing channels as there's no way to know who signed
-                                    up.
+                                    <strong>No, you don't need events with person profiles</strong> to track anonymous
+                                    users. You'll only get basic attribution info (like UTM source) but it can't be used
+                                    to analyze things like top performing marketing channels as there's no way to know
+                                    who signed up.
                                 </p>
                             </div>
                         </details>
@@ -132,7 +137,11 @@ const Modal = ({ onClose, isVisible }) => {
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
                                 <p className="mb-0">
-                                    <strong className="text-green">Yes, you will use person profiles with any identified users</strong> so you can store information about the person (like an email address or internal ID).
+                                    <strong className="text-green">
+                                        Yes, you will use person profiles with any identified users
+                                    </strong>{' '}
+                                    so you can store information about the person (like an email address or internal
+                                    ID).
                                 </p>
                             </div>
                         </details>
