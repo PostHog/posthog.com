@@ -400,7 +400,7 @@ const TabAddons = (props) => {
                             })
                         }
                     >
-                        Learn more about addons
+                        Learn more about add-ons
                     </span>
                 </aside>
             </div>

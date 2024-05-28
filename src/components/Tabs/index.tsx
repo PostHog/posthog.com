@@ -80,7 +80,7 @@ const Vertical = ({ tabs, onClick, activeTab, className = '', activeClass }) => 
                                     ? activeClass !== undefined
                                         ? activeClass
                                         : 'font-bold bg-accent dark:bg-accent-dark'
-                                    : 'hover:bg-accent'
+                                    : 'hover:bg-accent dark:hover:bg-accent/15'
                             }`}
                         >
                             <div className="flex space-x-2 whitespace-nowrap">

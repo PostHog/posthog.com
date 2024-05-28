@@ -57,7 +57,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                     {inclusion_only && (
                         <p className="m-0 flex space-x-1 text-sm">
                             <span>on</span>
-                            <span className="border-b border-black">
+                            <span className="border-b border-black dark:border-white/20">
                                 <input
                                     onChange={(e) => {
                                         if (!checked) {
@@ -68,7 +68,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                                     type="number"
                                     min={1}
                                     max={99}
-                                    className="p-0 bg-tan border-none hide-number-arrows text-sm font-bold -mr-0.5 focus:ring-0"
+                                    className="p-0 pr-0.5 bg-tan dark:bg-dark border-none hide-number-arrows text-sm font-bold text-center -mr-0.5 focus:ring-0"
                                     value={percentage}
                                 />
                                 <strong>%</strong>
@@ -203,7 +203,9 @@ export default function Tabbed() {
                                     <button
                                         onClick={() => setActiveTab(index)}
                                         className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
-                                            active ? 'font-bold bg-accent dark:bg-accent-dark' : 'hover:bg-accent'
+                                            active
+                                                ? 'font-bold bg-accent dark:bg-accent-dark'
+                                                : 'hover:bg-accent dark:hover:bg-accent/15'
                                         }`}
                                     >
                                         <div className="flex items-center space-x-2">
@@ -231,10 +233,10 @@ export default function Tabbed() {
 
                     <TabContent addons={productAddons} setAddons={setProductAddons} activeProduct={activeProduct} />
                 </div>
-                <div className="md:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark">
-                    <h4 className="m-0 font-normal text-sm opacity-70">Platform add-ons</h4>
-                </div>
+                <div className="md:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark"></div>
                 <div className="md:col-span-5 py-2 pl-4 md:pl-0 md:border-t border-light dark:border-dark">
+                    <h4 className="mb-0.5 md:mb-1 font-normal text-sm opacity-70">Platform add-ons</h4>
+
                     {platform.addons.map(({ type, name, description, plans }) => {
                         const platformAddon = platformAddons.find((addon) => addon.type === type)
                         const checked = platformAddon?.checked
