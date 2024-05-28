@@ -39,7 +39,7 @@ The parts in square brackets `[]` are called _message tokens_. You can use token
 Group information can be accessed using the [group key](/docs/getting-started/group-analytics#how-to-create-groups) tracked against the event.
 
 - `[groups.<group_key>]`: The name of the associated group or the key if there is no associated `name` property. This token is formatted as a link to the group in PostHog.
-- `[groups.<group_key>.properties.<property_name>]`: Value of group `<property_name>` – e.g., `[group.organization.properties.total_revenue]`
+- `[groups.<group_key>.properties.<property_name>]`: Value of group `<property_name>` – e.g., `[groups.organization.properties.total_revenue]`
 
 
 ### Action tokens
