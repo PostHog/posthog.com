@@ -43,6 +43,7 @@ export default function Link({
     const posthog = usePostHog()
     const url = to || href
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
+    const isPostHogAppUrl = url && /(eu|us|app)\.posthog\.com/.test(url)
     const preview =
         other.preview ||
         glossary?.find((glossaryItem) => {
@@ -50,6 +51,9 @@ export default function Link({
         })
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
+        if (isPostHogAppUrl) {
+            posthog?.createPersonProfile()
+        }
         if (event && posthog) {
             posthog.capture(event)
         }
