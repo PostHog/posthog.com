@@ -370,7 +370,7 @@ const allProductsData = graphql`
 
 const Pricing = ({ type, plans, unit, className = '' }) => {
     return (
-        <div className={`${className} w-full max-w-[500px]`}>
+        <div className={`${className} w-full mx-auto max-w-[500px]`}>
             <h3 className="text-lg mb-3">Monthly pricing</h3>
             <div className="flex flex-col divide-y divide-light dark:divide-dark gap-0.5">
                 <PricingTiers plans={plans} unit={unit} type={type} test={true} />
@@ -597,8 +597,7 @@ const PlansTabs = () => {
                             <Tooltip
                                 content={() => (
                                     <div className="max-w-[300px]">
-                                        Add-ons extend functionality of products, but all are billed per use and as
-                                        such, not available on the <em>Totally free</em> plan.
+                                        Add-ons extend functionality of products and are priced separately.
                                     </div>
                                 )}
                                 placement="top"
@@ -606,7 +605,7 @@ const PlansTabs = () => {
                                 <IconInfo className="size-4 inline-block" />
                             </Tooltip>
                         </div>
-                        <div className="col-span-2">Not available</div>
+                        <div className="col-span-2">Limited</div>
                         <div className="col-span-2">Available</div>
                     </div>
                 </>
@@ -761,7 +760,6 @@ const PlansTabs = () => {
         <div>
             <div className="overflow-x-auto w-screen md:w-auto -mx-4 md:mx-0 px-4 md:px-1">
                 <Tabs
-                    activeClass="bg-accent dark:bg-accent-dark"
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
                     size="sm"
@@ -773,7 +771,15 @@ const PlansTabs = () => {
                     }))}
                 />
             </div>
-            {activeTab !== undefined && <div className="py-8">{[activePlan.html]}</div>}
+            {activeTab !== undefined && (
+                <motion.div
+                    initial={{ height: 0 }}
+                    animate={{ height: 'auto' }}
+                    className="-mt-[2px] border border-light dark:border-dark rounded-md p-4 overflow-hidden"
+                >
+                    {[activePlan.html]}
+                </motion.div>
+            )}
         </div>
     )
 }
