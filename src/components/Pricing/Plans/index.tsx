@@ -22,7 +22,7 @@ const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle
 }
 
 const Row = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
-    return <div className={`flex items-center gap-4 py-1.5 rounded ${className}`}>{children}</div>
+    return <div className={`flex items-center gap-4 py-1.5 px-4 rounded ${className}`}>{children}</div>
 }
 
 const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
