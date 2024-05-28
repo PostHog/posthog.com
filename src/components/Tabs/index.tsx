@@ -27,7 +27,7 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
                                 active
                                     ? activeClass !== undefined
                                         ? activeClass
-                                        : 'font-bold bg-tan dark:bg-dark border border-b-tan dark:border-b-dark border-light dark:border-dark rounded-tl rounded-tr'
+                                        : 'font-bold bg-tan dark:bg-dark border border-b-tan dark:border-b-bg-dark border-light dark:border-dark rounded-tl rounded-tr'
                                     : 'rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all hover:-mt-1'
                             }`}
                         >

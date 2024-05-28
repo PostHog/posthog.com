@@ -135,7 +135,7 @@ const SectionHeader = ({ children }) => (
     <header className="border-b pb-1 border-light dark:border-dark">{children}</header>
 )
 
-const SectionColumns = ({ children }) => <div className="grid md:grid-cols-3 py-4">{children}</div>
+const SectionColumns = ({ children }) => <div className="grid md:grid-cols-3 md:py-4">{children}</div>
 
 const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:pb-0 md:pr-8">{children}</div>
 
@@ -210,10 +210,10 @@ const AddonContent = ({ name, description, plans }) => {
         <div>
             <h5 className="m-0">{name}</h5>
             <p className="my-2">{description}</p>
-            <h6 className="text-base opacity-70 font-bold m-0">Pricing</h6>
+            <h6 className="text-[15px] opacity-70 font-semibold m-0">Pricing</h6>
             <p className="m-0">
                 <strong>${price}</strong>
-                <span className="opacity-70">/{plan.unit}</span>
+                <span className="opacity-70 text-sm">/{plan.unit}</span>
             </p>
             {freeTier && <p className="opacity-70 text-sm m-0">{freeTier}</p>}
         </div>
@@ -539,7 +539,7 @@ const PlansTabs = () => {
                         <div className="@xl:col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
                             <strong>Totally free</strong>
                         </div>
-                        <div className="@xl:col-span-2 pl-2 pb-2 border-b border-light dark:border-darkopacity-70">
+                        <div className="@xl:col-span-2 pl-2 pb-2 border-b border-light dark:border-dark text-opacity-70">
                             <strong>Ridiculously cheap</strong>
                         </div>
                     </div>
@@ -662,7 +662,7 @@ const PlansTabs = () => {
                                 <li>Annual contract with minimum commitment</li>
                                 <li>No upcharge on usage-based prices</li>
                             </ul>
-                            <div className="pt-4 pb-20 xl:pb-0 relative z-20">
+                            <div className="pt-4 md:mb-20 xl:mb-0 relative z-20">
                                 <CallToAction href="/contact-sales" size="md">
                                     Talk to a helpful person
                                 </CallToAction>
@@ -760,7 +760,7 @@ const PlansTabs = () => {
 
     return (
         <div>
-            <div className="overflow-x-auto w-screen md:w-auto -mx-4 md:mx-0 px-4 md:px-1">
+            <div className="overflow-x-auto w-screen md:w-auto -mx-4 md:mx-0 px-4 md:px-1 relative z-10">
                 <Tabs
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
@@ -889,7 +889,7 @@ const PricingExperiment = ({
                                     <SidebarList>
                                         <SidebarListItem>Only pay for products you use</SidebarListItem>
                                         <SidebarListItem>
-                                            <strong className="bg-yellow/50 italic inline py-0.5">
+                                            <strong className="bg-yellow/50 dark:bg-white/20 italic inline py-0.5">
                                                 Generous free tier for each product (resets monthly)
                                             </strong>
                                         </SidebarListItem>
@@ -963,7 +963,7 @@ const PricingExperiment = ({
                                                 )}
                                                 placement="bottom"
                                             >
-                                                <IconInfo className="size-4 inline-block ml-1" />
+                                                <IconInfo className="size-4 inline-block ml-0.5 -mt-0.5" />
                                             </Tooltip>{' '}
                                         </SidebarListItem>
                                     </SidebarList>
@@ -1109,116 +1109,110 @@ const PricingExperiment = ({
                         </SectionColumns>
                     </SectionLayout>
 
-                    <SectionLayout>
+                    <section className="bg-white shadow-xl rounded pt-6 pb-2 md:py-8 px-8 md:px-12 mx-6 md:mx-auto w-[calc(100%_-_3rem)] md:w-full max-w-3xl -rotate-1">
                         <SectionHeader>
+                            <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>
                             <h3>Our pricing is designed to make you happy</h3>
                         </SectionHeader>
 
-                        <SectionColumns>
-                            <SectionMainCol>
-                                <p>Here's what you should know about our pricing:</p>
-                                <ul className="space-y-1 mb-4 [&_li]:leading-7">
-                                    <li>
-                                        <strong>We make a profit with every product.</strong> This means we don’t have
-                                        loss-leader products that will go up in pricing later or get retired.
-                                    </li>
-                                    <li>
-                                        <strong>We aim to be the cheapest for each product at every scale</strong>{' '}
-                                        compared to every major competitor.{' '}
-                                        <Link
-                                            href="https://twitter.com/intent/tweet?text=@posthog%20Your%20pricing%20is..."
-                                            external
-                                        >
-                                            <em>Tell us if we're not!</em>
-                                        </Link>{' '}
-                                        (Note: This doesn't include your buddy's two person startup.)
-                                    </li>
-                                    <li>
-                                        The company in general has significant revenue, over 60,000 customers, runs{' '}
-                                        <Link href="/newsletter/the-companies-that-shaped-posthog#our-takeaways-2">
-                                            default alive
-                                        </Link>
-                                        , and aims to IPO rather than sell. This means{' '}
-                                        <strong>we don’t rely on investors to grow, and we’re stable.</strong> Of course
-                                        we aren’t perfect, but this goes a long way to avoiding the average dumb
-                                        vc-backed company stuff in general - like running out of money or selling to a
-                                        lame bigger company who just kills off our products.
-                                    </li>
-                                    <li>
-                                        We have an open source product too - so if you must, you can self host. It is
-                                        MIT licensed if you want to use it in a big organization that isn’t ready to
-                                        move to PostHog Cloud yet.
-                                        <Tooltip
-                                            content={() => (
-                                                <div className="max-w-sm">
-                                                    <strong className="block">A disclaimer about self-hosting</strong>
-                                                    <p className="mb-2 text-sm">
-                                                        Being upfront, self-hosting PostHog has limitations and is
-                                                        usually a worse experience (and more expensive) than PostHog
-                                                        Cloud.
-                                                    </p>
-                                                    <p className="mb-0 text-sm">
-                                                        Main benefits of PostHog Cloud include our large, shared
-                                                        infrastructure and lack of separate hosting costs, required
-                                                        maintenance, and upgrades that come with self-hosting.
-                                                    </p>
-                                                </div>
-                                            )}
-                                        >
-                                            <IconInfo className="size-4 inline-block relative left-0.5 -top-0.5" />
-                                        </Tooltip>
-                                    </li>
-                                </ul>
-                                <p>
-                                    If you need more info,{' '}
-                                    <button
-                                        className="text-red dark:text-yellow font-semibold"
-                                        onClick={() =>
-                                            window.scrollTo({
-                                                top:
-                                                    document.querySelector('#faq')?.getBoundingClientRect().top +
-                                                    window.pageYOffset -
-                                                    128,
-                                                behavior: 'smooth',
-                                            })
-                                        }
-                                    >
-                                        read our FAQ
-                                    </button>
-                                    , <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
-                                    <Link href="/contact-sales">talk to a human</Link>.
-                                </p>
-                            </SectionMainCol>
-                            <SectionSidebar>
-                                <p className="opacity-60 text-[15px] mb-0">A note from our co-founder</p>
-                                <div className="flex gap-2 items-center">
-                                    <Link
-                                        href="/community/profiles/27732"
-                                        className="rounded-full overflow-hidden size-12 border border-border hover:border-bg-dark/30 dark:border-dark dark:hover:border-light/50 p-0.5 bg-light dark:bg-dark"
-                                    >
-                                        <StaticImage
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
-                                            quality={100}
-                                            alt="James Hawkins, CEO, Co-founder"
-                                            placeholder="none"
-                                            objectFit="contain"
-                                            className="bg-yellow rounded-full"
-                                        />
-                                    </Link>
-                                    <p className="leading-tight mb-0">
-                                        <Link href="/community/profiles/27732" className="flex">
-                                            <strong>James Hawkins</strong>
-                                        </Link>
-                                        <span className="text-sm opacity-70">CEO & Co-founder</span>
-                                    </p>
-                                </div>
-                                <p className="pl-14 text-sm opacity-75 italic -mt-3 max-w-xs">
-                                    When James isn't thinking about how to cut prices (again), you'll likely find him
-                                    changing a diaper.
-                                </p>
-                            </SectionSidebar>
-                        </SectionColumns>
-                    </SectionLayout>
+                        <p className="mt-4">Here's what you should know about our pricing:</p>
+                        <ul className="space-y-1 mb-4 [&_li]:leading-7 pl-4 md:pl-8">
+                            <li>
+                                <strong>We make a profit with every product.</strong> This means we don’t have
+                                loss-leader products that will go up in pricing later or get retired.
+                            </li>
+                            <li>
+                                <strong>We aim to be the cheapest for each product at every scale</strong> compared to
+                                every major competitor.{' '}
+                                <Link
+                                    href="https://twitter.com/intent/tweet?text=@posthog%20Your%20pricing%20is..."
+                                    external
+                                >
+                                    <em>Tell us if we're not!</em>
+                                </Link>{' '}
+                                (Note: This doesn't include your buddy's two person startup.)
+                            </li>
+                            <li>
+                                The company in general has significant revenue, over 60,000 customers, runs{' '}
+                                <Link href="/newsletter/the-companies-that-shaped-posthog#our-takeaways-2">
+                                    default alive
+                                </Link>
+                                , and aims to IPO rather than sell. This means{' '}
+                                <strong>we don’t rely on investors to grow, and we’re stable.</strong> Of course we
+                                aren’t perfect, but this goes a long way to avoiding the average dumb vc-backed company
+                                stuff in general - like running out of money or selling to a lame bigger company who
+                                just kills off our products.
+                            </li>
+                            <li>
+                                We have an open source product too - so if you must, you can self host. It is MIT
+                                licensed if you want to use it in a big organization that isn’t ready to move to PostHog
+                                Cloud yet.
+                                <Tooltip
+                                    content={() => (
+                                        <div className="max-w-sm">
+                                            <strong className="block">A disclaimer about self-hosting</strong>
+                                            <p className="mb-2 text-sm">
+                                                Being upfront, self-hosting PostHog has limitations and is usually a
+                                                worse experience (and more expensive) than PostHog Cloud.
+                                            </p>
+                                            <p className="mb-0 text-sm">
+                                                Main benefits of PostHog Cloud include our large, shared infrastructure
+                                                and lack of separate hosting costs, required maintenance, and upgrades
+                                                that come with self-hosting.
+                                            </p>
+                                        </div>
+                                    )}
+                                >
+                                    <IconInfo className="size-4 inline-block relative left-0.5 -top-0.5" />
+                                </Tooltip>
+                            </li>
+                        </ul>
+                        <p>
+                            If you need more info,{' '}
+                            <button
+                                className="text-red dark:text-yellow font-semibold"
+                                onClick={() =>
+                                    window.scrollTo({
+                                        top:
+                                            document.querySelector('#faq')?.getBoundingClientRect().top +
+                                            window.pageYOffset -
+                                            128,
+                                        behavior: 'smooth',
+                                    })
+                                }
+                            >
+                                read our FAQ
+                            </button>
+                            , <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
+                            <Link href="/contact-sales">talk to a human</Link>.
+                        </p>
+
+                        <div className="flex gap-2 items-center">
+                            <Link
+                                href="/community/profiles/27732"
+                                className="rounded-full overflow-hidden size-12 border border-border hover:border-bg-dark/30 dark:border-dark dark:hover:border-light/50 p-0.5 bg-light dark:bg-dark"
+                            >
+                                <StaticImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
+                                    quality={100}
+                                    alt="James Hawkins, CEO, Co-founder"
+                                    placeholder="none"
+                                    objectFit="contain"
+                                    className="bg-yellow rounded-full"
+                                />
+                            </Link>
+                            <p className="leading-tight mb-0">
+                                <Link href="/community/profiles/27732" className="flex">
+                                    <strong>James Hawkins</strong>
+                                </Link>
+                                <span className="text-sm opacity-70">CEO & Co-founder</span>
+                            </p>
+                        </div>
+                        <p className="pl-14 text-sm opacity-75 italic">
+                            When James isn't thinking about how to cut prices (again), you'll likely find him changing a
+                            diaper.
+                        </p>
+                    </section>
                 </>
             )}
 
