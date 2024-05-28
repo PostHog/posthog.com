@@ -14,6 +14,7 @@ category: Inside PostHog
 tags:
   - Offsites
 ---
+
 Each year, the PostHog team gets together for our all-company offsite. This year, we headed to Mykonos – not to rave, but to code. And to enjoy a cocktail or two in the sun, of course.
 
 We’re a fully-remote company, with 47 misfits spread across ten countries. Our offsites are a really important part of our culture. They’re a great chance to get to know colleagues better and the connections formed at this time bring extra energy and creativity to our asynchronous work throughout the rest of the year.
@@ -22,10 +23,43 @@ Our all-company offsites are a mix of socializing, group activities, strategic s
 
 Here’s what we built in Mykonos.
 
-
 ### The presidential briefing
 
-Charles Cook, Eric Duong, James Hawkins, James Temperton
+<div class="float-right mb-4 ml-4 flex flex-col gap-1 border-l border-light dark:border-dark pl-4 pb-0.5">
+  <span class="text-[13px] md:text-sm opacity-70 flex md:mb-1">Built by:</span>
+  <a href="/charles">
+    <span class="inline-flex items-center gap-1 p-1 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full">
+      <div class="h-6 md:h-8 shrink-0 rounded-full overflow-hidden">
+        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579622/charles_525b6ac4e2.png" alt="" class="w-6 md:w-8 bg-yellow" />
+      </div>
+      <span class="text-sm md:text-base text-red dark:text-yellow font-semibold inline-flex px-1">Charles Cook</span>
+    </span>
+  </a>
+  <a href="/charles">
+    <span class="inline-flex items-center gap-1 p-1 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full">
+      <div class="h-6 md:h-8 shrink-0 rounded-full overflow-hidden">
+        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579622/charles_525b6ac4e2.png" alt="" class="w-6 md:w-8 bg-yellow" />
+      </div>
+      <span class="text-sm md:text-base text-red dark:text-yellow font-semibold inline-flex px-1">Eric Duong</span>
+    </span>
+  </a>
+  <a href="/charles">
+    <span class="inline-flex items-center gap-1 p-1 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full">
+      <div class="h-6 md:h-8 shrink-0 rounded-full overflow-hidden">
+        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579622/charles_525b6ac4e2.png" alt="" class="w-6 md:w-8 bg-yellow" />
+      </div>
+      <span class="text-sm md:text-base text-red dark:text-yellow font-semibold inline-flex px-1">James Hawkins</span>
+    </span>
+  </a>
+  <a href="/charles">
+    <span class="inline-flex items-center gap-1 p-1 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full">
+      <div class="h-6 md:h-8 shrink-0 rounded-full overflow-hidden">
+        <img src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579622/charles_525b6ac4e2.png" alt="" class="w-6 md:w-8 bg-yellow" />
+      </div>
+      <span class="text-sm md:text-base text-red dark:text-yellow font-semibold inline-flex px-1">James Temperton</span>
+    </span>
+  </a>
+</div>
 
 As PostHog grows as a company, keeping track of everything that’s happening will get harder. Yes, we [write everything down](/newsletter/remote-working) but that creates a lot of reading, and a lot of noise. The solution? An AI-generated briefing, tailored to each individual team member and their interests.
 

@@ -89,6 +89,7 @@ col-span-7
 dark:after:bg-[#C170E8]
 dark:text-[#C170E8]
 dark:border-[#C170E8]
+dark:hover:border-bg-light/50
 flex
 flex
 flex-row-reverse
@@ -110,6 +111,7 @@ grid-rows-2
 grid-rows-3
 grid-rows-4
 h-full
+hover:border-bg-dark/50
 justify-start
 justify-start
 left-16
