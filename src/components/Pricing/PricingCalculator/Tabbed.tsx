@@ -54,7 +54,7 @@ const Modal = ({ onClose, isVisible }) => {
                             Merge identities across <code className="text-sm">distinct_id</code> values (i.e. merging an
                             anonymous user with a logged in user)
                         </li>
-                        <li>Cohort creation</li>
+                        <li>Create cohorts</li>
                         <li>Feature flag, experimentation, and survey targeting on user properties</li>
                         <li>Tracking initial UTM values and referrers across anonymous and identified users</li>
                     </ul>
