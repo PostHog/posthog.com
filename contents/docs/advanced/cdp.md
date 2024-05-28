@@ -13,14 +13,14 @@ The most common CDPs are [Segment](/docs/libraries/segment) and [RudderStack](/d
 
 ## Do I need a CDP?
 
-If you don't have a CDP already set up, you might not need one. PostHog has 
+If you don't have a CDP already set up, you might not need one. PostHog has: 
 
 - [SDKs](/docs/libraries) and [API](/docs/api/capture) to capture data from anywhere.
 - [Data warehouse](/docs/data-warehouse) to easily import and query data from Stripe, Hubspot, Zendesk, S3, and more.
 - Pre-built or customizable [transformations and destinations](/docs/cdp) for cleaning and sending data to other tools.
 - Use your data in PostHog's suite of analysis tools. 
 
-PostHog can act as your single source of truth without needing to set up and pay for another tool.
+This means PostHog can act as your single source of truth without needing to set up and pay for another tool.
 
 Here's a decision tree that you might find handy:
 
@@ -33,7 +33,7 @@ C --> |No| E[Option 1<br/>Use PostHog as a CDP]
 
 ## Option 1: Use PostHog as a CDP
 
-In general, we'd recommend starting with PostHog as your CDP using our SDKs, data warehouse, destinations, and transformations as needed. This is the easiest and least expensive way to get started.
+In general, we recommend starting with PostHog as your CDP using our SDKs, data warehouse, destinations, and transformations as needed. This is the easiest and least expensive way to get started.
 
 If you need destinations that we don't currently support, you have several options
 
