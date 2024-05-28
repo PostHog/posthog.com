@@ -62,7 +62,7 @@ To ensure you are bootstrapping PostHog with the correct flag values, we recomme
 
 You can do this by:
 
-1. When receiving a frontend request, fetch all the feature flags for the user on the backend by calling [`getAllFlags()`](/docs/feature-flags/adding-feature-flag-code#fetching-all-flags-for-a-user).
+1. When receiving a frontend request, fetch all the feature flags for the user on the backend by calling [`getAllFlags()`](/docs/feature-flags/adding-feature-flag-code?tab=Node.js#fetching-all-flags-for-a-user).
 2. Return the frontend request with the flags values in the response.
 3. On the frontend, get the flag values from the response and add them to the `bootstrap` key in the PostHog initialization.
 
