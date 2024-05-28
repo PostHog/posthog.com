@@ -33,7 +33,7 @@ This is the usual first round interview with the People & Ops team.
 The [technical interview](/handbook/people/hiring-process#interview-2) round is split into two parts:
 
 - The first part is an hour-long technical interview with one of our engineers. This might be architecture design or diving more into past technical experiences in more of a workshop style. No whiteboarding or brainteasers. 
-- If they pass this stage, we will then schedule a follow up 30-minute interview with [Tim](/community/profiles/108) about your previous experiences and what motivates you. 
+- If they pass this stage, we will then schedule a follow up 30-minute interview with [Tim](/tim) about your previous experiences and what motivates you. 
 
 #### Engineering SuperDay
 
