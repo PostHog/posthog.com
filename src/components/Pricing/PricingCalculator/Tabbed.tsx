@@ -112,7 +112,7 @@ const Modal = ({ onClose, isVisible }) => {
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
                                 <p className="mb-0">
-                                    <strong>No, you don't need person profiles</strong> to track anonymous users. You'll
+                                    <strong>No, you don't need events with person profiles</strong> to track anonymous users. You'll
                                     only get basic attribution info (like UTM source) but it can't be used to analyze
                                     things like top performing marketing channels as there's no way to know who signed
                                     up.
