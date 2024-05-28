@@ -93,9 +93,9 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false 
                         index === 0
                             ? `First ${formatCompactNumber(up_to)} ${unit}s`
                             : !up_to
-                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)}+`
+                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
                             : `${
-                                  formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to).split(/ |k/)[0]
+                                  formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to).split(/ |k/)[0]
                               }-${formatCompactNumber(up_to)}`
                     }
                 />
