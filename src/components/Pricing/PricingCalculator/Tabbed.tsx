@@ -142,7 +142,7 @@ const Modal = ({ onClose, isVisible }) => {
                     <p className="text-[15px] mb-2">
                         If you're already tracking website traffic, the best way to gauge person profile usage is to
                         determine what percentage of event volume is <em>anonymous traffic</em> vs. events being sent by
-                        an identified (authencated) user.
+                        an identified (authenticated) user.
                     </p>
                     <p className="text-[15px]">
                         For example, if 75% of your total event volume is anonymous website traffic when factoring in
