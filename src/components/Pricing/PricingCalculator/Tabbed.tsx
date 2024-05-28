@@ -56,7 +56,7 @@ const Modal = ({ onClose, isVisible }) => {
                         </li>
                         <li>Create cohorts</li>
                         <li>Feature flag, experimentation, and survey targeting on user properties</li>
-                        <li>Tracking initial UTM values and referrers across anonymous and identified users</li>
+                        <li>Track initial UTM values and referrers across anonymous and identified users</li>
                     </ul>
 
                     <p className="text-[15px] mb-0">
