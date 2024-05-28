@@ -27,7 +27,7 @@ I won't offer multiple options here – it's not that kind of guide. Just know t
 
 So, read on if you want to learn how to put together contracts, pay people on time, manage your money and comply with laws you are only just finding out exist.
 
-> [Charles Cook](/community/profiles/254) is VP Marketing & Ops at PostHog, leading operations, marketing, people, finance, and legal. All the fun stuff, basically. As PostHog's first non-product hire, he used these tools to do the work of 5ish people for a long time. 
+> [Charles Cook](/charles) is VP Marketing & Ops at PostHog, leading operations, marketing, people, finance, and legal. All the fun stuff, basically. As PostHog's first non-product hire, he used these tools to do the work of 5ish people for a long time. 
 
 ## 1. Hiring people
 
