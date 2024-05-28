@@ -32,7 +32,7 @@ const Modal = ({ onClose, isVisible }) => {
                 </div>
                 <div className="px-4 pb-4 md:px-8 md:pb-8 [&_p]:text-[15px]">
                     <p className="mb-2">
-                        Person profiles let you track users with personally identifiable info (like an email address).
+                        Person profiles let you store detailed information about a user (like an email address) in a central location and track that user over time.
                         This enables a deeper level of insights that isn't available when analyzing anonymous traffic
                         (like in Google Analytics).
                     </p>
