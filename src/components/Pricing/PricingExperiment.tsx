@@ -530,26 +530,26 @@ const PlansTabs = () => {
     const plans = [
         {
             name: 'Totally free',
-            description: 'No credit card required',
+            description: <span className="font-normal">No credit card required</span>,
             html: (
                 <>
                     <h4>Use PostHog free forever, with some limits</h4>
-                    <div className="grid grid-cols-5 pb-4 text-[15px] [&>*:nth-child(3)]:opacity-60">
+                    <div className="grid grid-cols-3 @xl:grid-cols-5 pb-4 text-[15px] [&>*:nth-child(3)]:opacity-60">
                         <div className="px-2 pb-2 border-b border-light dark:border-dark">&nbsp;</div>
-                        <div className="col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
+                        <div className="@xl:col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
                             <strong>Totally free</strong>
                         </div>
-                        <div className="col-span-2 pl-2 pb-2 border-b border-light dark:border-darkopacity-70">
+                        <div className="@xl:col-span-2 pl-2 pb-2 border-b border-light dark:border-darkopacity-70">
                             <strong>Ridiculously cheap</strong>
                         </div>
                     </div>
-                    <div className="grid grid-cols-5 gap-x-4 gap-y-2 text-[15px] [&>*:nth-child(3n+1)]:opacity-70 [&>*:nth-child(3n+3)]:opacity-70">
+                    <div className="grid grid-cols-3 @xl:grid-cols-5 gap-x-4 gap-y-2 text-[15px] [&>*:nth-child(3n+1)]:opacity-70 [&>*:nth-child(3n+3)]:opacity-70">
                         <div>Price</div>
-                        <div className="col-span-2">Free forever</div>
-                        <div className="col-span-2">Starts at $0/mo</div>
+                        <div className="@xl:col-span-2">Free forever</div>
+                        <div className="@xl:col-span-2">Starts at $0/mo</div>
 
                         <div>Volume limits</div>
-                        <div className="col-span-2">
+                        <div className="@xl:col-span-2">
                             Limited to free monthly allowance{' '}
                             <Tooltip
                                 content={() => (
@@ -562,10 +562,10 @@ const PlansTabs = () => {
                                 <IconInfo className="size-4 inline-block" />
                             </Tooltip>
                         </div>
-                        <div className="col-span-2">Unlimited</div>
+                        <div className="@xl:col-span-2">Unlimited</div>
 
                         <div>Product features</div>
-                        <div className="col-span-2">
+                        <div className="@xl:col-span-2">
                             Basic features{' '}
                             <Tooltip
                                 content={() => (
@@ -586,11 +586,11 @@ const PlansTabs = () => {
                                 <IconInfo className="size-4 inline-block" />
                             </Tooltip>
                         </div>
-                        <div className="col-span-2">All features</div>
+                        <div className="@xl:col-span-2">All features</div>
 
                         <div>Support</div>
-                        <div className="col-span-2">Community forums</div>
-                        <div className="col-span-2">Email</div>
+                        <div className="@xl:col-span-2">Community forums</div>
+                        <div className="@xl:col-span-2">Email</div>
 
                         <div>
                             Add-ons{' '}
@@ -605,20 +605,22 @@ const PlansTabs = () => {
                                 <IconInfo className="size-4 inline-block" />
                             </Tooltip>
                         </div>
-                        <div className="col-span-2">Limited</div>
-                        <div className="col-span-2">Available</div>
+                        <div className="@xl:col-span-2">Limited</div>
+                        <div className="@xl:col-span-2">Available</div>
                     </div>
                 </>
             ),
         },
         {
             name: 'Ridiculously cheap',
-            description: 'Starts at $0/mo',
+            description: <span className="font-normal">Starts at $0/mo</span>,
             html: (
                 <>
                     <h4 className="mb-0">The "ridiculously cheap" plan</h4>
-                    <p className="text-[15px] opacity-60">86% of customers use this plan</p>
-                    <ul className="tw-check-bullets md:columns-2">
+                    <p className="text-sm inline-flex rounded-sm bg-yellow/50 py-0.5 px-1">
+                        86% of customers use this plan
+                    </p>
+                    <ul className="tw-check-bullets @lg:columns-2">
                         <li>Usage-based pricing</li>
                         <li>Generous monthly free tier</li>
                         <li>Up to 10 projects</li>
@@ -632,7 +634,7 @@ const PlansTabs = () => {
         },
         {
             name: 'Enterprise mode',
-            description: '$20k/yr minimum spend',
+            description: <span className="font-normal">$20k/yr minimum spend</span>,
             html: (
                 <>
                     <div className="grid md:grid-cols-2 gap-8">
@@ -655,17 +657,17 @@ const PlansTabs = () => {
                             <div className="mb-2">
                                 <strong>How it works</strong>
                             </div>
-                            <ul className="tw-chevron-bullets">
+                            <ul className="tw-chevron-bullets [&_li]:text-sm">
                                 <li>Starts at $20k/year w/ fixed annual terms</li>
                                 <li>Annual contract with minimum commitment</li>
                                 <li>No upcharge on usage-based prices</li>
                             </ul>
-                            <div className="pt-4 relative z-20">
+                            <div className="pt-4 pb-20 xl:pb-0 relative z-20">
                                 <CallToAction href="/contact-sales" size="md">
                                     Talk to a helpful person
                                 </CallToAction>
                             </div>
-                            <div className="absolute bottom-0 right-0">
+                            <div className="absolute -bottom-4 -right-4">
                                 <div className="relative flex">
                                     <Tooltip
                                         content={() => (
@@ -775,7 +777,7 @@ const PlansTabs = () => {
                 <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
-                    className="-mt-[2px] border border-light dark:border-dark rounded-md p-4 overflow-hidden"
+                    className="@container -mt-[2px] border border-light dark:border-dark rounded-md p-4 overflow-hidden"
                 >
                     {[activePlan.html]}
                 </motion.div>
