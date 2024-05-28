@@ -71,7 +71,7 @@ const Modal = ({ onClose, isVisible }) => {
                     </div>
 
                     <h3 className="text-xl border-b border-light dark:border-dark pb-1 mb-2">
-                        Do you need person profiles?
+                        Do you need events with person profiles?
                     </h3>
 
                     <div className="space-y-2 mb-8">
