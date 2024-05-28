@@ -23,17 +23,18 @@ const Modal = ({ onClose, isVisible }) => {
                 className={`w-[500px] max-w-full h-[calc(100vh_-_123px)] md:h-screen z-[1000001] fixed overflow-y-auto top-0 flex flex-col bg-white transition-all duration-500 ease-out
           ${isVisible ? '!opacity-100 right-[0px]' : 'opacity-0 right-[-500px]'}`}
             >
-                <div className="w-full h-fit flex justify-between p-4">
+                <div className="w-full h-fit flex justify-between p-4 md:px-8">
                     <span className="font-bold text-xl">What are person profiles?</span>
 
                     <button onClick={() => onClose()}>
                         <IconX className="size-5" />
                     </button>
                 </div>
-                <div className="px-4 pb-4 [&_p]:text-[15px]">
+                <div className="px-4 pb-4 md:px-8 md:pb-8 [&_p]:text-[15px]">
                     <p className="mb-2">
                         Person profiles let you track users with personally identifiable info (like an email address).
-                        This unlocks a deeper level of insights that isn't available when analyzing anonymous traffic.
+                        This enables a deeper level of insights that isn't available when analyzing anonymous traffic
+                        (like in Google Analytics).
                     </p>
                     <p className="mb-2">
                         It also provides attribution data and lets you track users across devices and sessions.
