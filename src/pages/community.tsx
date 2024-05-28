@@ -117,7 +117,7 @@ const SlackPosts = () => {
                         return (
                             <li key={id}>
                                 <Link
-                                    className="text-inherit hover:text-inherit leading-tight flex items-center gap-1"
+                                    className="text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark leading-tight flex items-center gap-1"
                                     to={`/questions/topic/${slugify(topic.slug)}`}
                                     state={{ previous: { title: 'Community', url: '/community' } }}
                                 >
