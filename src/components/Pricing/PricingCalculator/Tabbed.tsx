@@ -44,7 +44,7 @@ const Modal = ({ onClose, isVisible }) => {
                     </p>
                     <ul className="[&_li]:text-[15px] pl-4 mb-2">
                         <li>
-                            View person profiles in the{' '}
+                            View detailed person information in the{' '}
                             <Link href="https://us.posthog.com/persons" external>
                                 People tab
                             </Link>
