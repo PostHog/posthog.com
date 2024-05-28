@@ -85,14 +85,20 @@ const Vertical = ({ tabs, onClick, activeTab, className = '', activeClass }) => 
                         >
                             <div className="flex space-x-2 whitespace-nowrap items-center">
                                 <span>{icon}</span>
-                                <span>{title}</span>
-                                {tab.tooltip && (
-                                    <Tooltip content={tab.tooltip} tooltipClassName="max-w-[300px]" placement="right">
-                                        <span className="relative">
-                                            <IconInfo className="w-5 h-5" />
-                                        </span>
-                                    </Tooltip>
-                                )}
+                                <div className="flex space-x-1 items-center">
+                                    <span>{title}</span>
+                                    {tab.tooltip && (
+                                        <Tooltip
+                                            content={tab.tooltip}
+                                            tooltipClassName="max-w-[300px]"
+                                            placement="right"
+                                        >
+                                            <span className="relative opacity-60 hover:opacity-100">
+                                                <IconInfo className="w-5 h-5" />
+                                            </span>
+                                        </Tooltip>
+                                    )}
+                                </div>
                             </div>
                         </button>
                     </li>
