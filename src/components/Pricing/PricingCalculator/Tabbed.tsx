@@ -134,8 +134,7 @@ const Modal = ({ onClose, isVisible }) => {
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
                                 <p className="mb-0">
-                                    <strong className="text-green">Yes, you should enable this</strong> as you'll need
-                                    to identify users with personal info (like an email address or internal ID).
+                                    <strong className="text-green">Yes, you will use person profiles with any identified users</strong> so you can store information about the person (like an email address or internal ID).
                                 </p>
                             </div>
                         </details>
