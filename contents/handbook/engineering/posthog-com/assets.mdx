@@ -2,9 +2,23 @@
 title: Uploading assets with Cloudinary
 ---
 
+export const ImgMediaUpload = "https://res.cloudinary.com/dmukukwp6/image/upload/upload_media_02268a2c54.png"
+export const ImgMediaUploadDialog = "https://res.cloudinary.com/dmukukwp6/image/upload/upload_media_dialog_075c83dd58.png"
+
 We use [Cloudinary](https://cloudinary.com) for asset management (image and video uploads), mainly to reduce website build times (as each image hosted within the repo has to get processed on each build). Offloading assets to Cloudinary saves time and resources.
 
-## Uploading an asset
+## Uploading assets via the PostHog.com uploader (recommended)
+
+1. Sign into your PostHog.com account (via [Questions](/questions))
+1. Click the account menu, then choose 'Upload media'
+  <ProductScreenshot imageLight={ImgMediaUpload}  alt="" classes="rounded" />
+1. Select (or drag) media to upload
+
+  This supports images, gifs, and videos - though you'll want to be sure videos are optimized before uploading
+  <ProductScreenshot imageLight={ImgMediaUploadDialog}  alt="" classes="rounded" />
+1. Copy the file URL and insert wherever you need it
+
+## Uploading assets using the Cloudinary website
 
 1. Go to the [Cloudinary dashboard](https://console.cloudinary.com/console/c-112bd66abc0aa594ac70f206d45dc7/media_library/folders/c715b6391489025283fd69ae547ae8adb9?view_mode=list) and log in. (Find the login in 1Password.)
     
@@ -15,18 +29,3 @@ We use [Cloudinary](https://cloudinary.com) for asset management (image and vide
    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/
    ```
 1. Use the full URL in your docs or handbook update
-
-## Improving this workflow
-
-There are some ways to reduce the effort to upload a new asset:
-
-1. **Add Cloudinary as a desktop-like app on your computer.**
-
-    Rather than visiting the Cloudinary website in your browser, download [WebCatalog](https://webcatalog.io/en/apps/cloudinary/). It allows you to add a Cloudinary icon to your dock, providing one-click access to the media upload page. Drag and drop to upload from there.
-1. **Use a text expander to save the URL of the base asset path** (e.g. `https://res.cloudinary.com/dg3gyk0gu/image/upload/`) so you don't have to type it out each time. You can then use a customizable keyboard shortcut like `cloudurl` to paste the base URL, then you only need to add your filename to the end of the path.
-
-  Here are some text expander options (for Mac):
-
-    - [espanso](https://espanso.org/) - powerful but nerdy, free
-    - [aText](https://www.trankynam.com/atext/) - one time license fee option
-    - [TextExpander](https://textexpander.com/) - subscription fee
