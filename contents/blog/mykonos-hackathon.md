@@ -27,6 +27,9 @@ In some cases, our hackathon projects are ready to ship right away. Some have ev
 
 Here’s what we built in Mykonos.
 
+![PostHog's 2024 offsite in Mykonos](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon1_e2aa8bd928.jpg)
+
+
 ## The presidential briefing
 
 <BuiltBy people={['Charles Cook', 'Eric Duong', 'James Hawkins', 'James Temperton']} />
