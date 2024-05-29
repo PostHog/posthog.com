@@ -34,6 +34,9 @@ Here’s what we built in Mykonos.
 
 <BuiltBy people={['Charles Cook', 'Eric Duong', 'James Hawkins', 'James Temperton']} />
 
+![The presidential briefing](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon_president_73aa5ced1a.png)
+
+
 As PostHog grows as a company, keeping track of everything that’s happening will get harder. Yes, we [write everything down](/newsletter/remote-working) but that creates a lot of reading, and a lot of noise. The solution? An AI-generated briefing, tailored to each individual team member and their interests.
 
 The presidential briefing was built by scraping PRs and issues from GitHub, along with Slack messages, and then training an LLM to understand what’s interesting and important. The bot then produces a pithy briefing that removes the noise and gives people just the information they need. 
