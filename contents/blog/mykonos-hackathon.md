@@ -96,6 +96,9 @@ What’s more, as the referral program product is built right into PostHog, you 
 
 <BuiltBy people={["Ian Vanagas", "Juraj Majerik", "Lior Neu-ner"]} />
 
+
+![A/B TestHog](https://res.cloudinary.com/dmukukwp6/image/upload/abtesthog_e3f93c1afc.png)
+
 Want to know how to improve your website but don’t know where to start? You need A/B TestHog. Enter a website URL, click ‘Analyze’ and an ingenious generative AI system will give you a bunch of recommendations for what A/B tests you might run to take your website to the next level. These are all expertly authored by an AI, and include the goal metrics, secondary metrics, and guardrail metrics and detailed instructions of what to change for your test.
 
 ### 10x terms
