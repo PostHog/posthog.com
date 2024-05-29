@@ -89,7 +89,7 @@ First up, we summarized our [terms](/terms) and [privacy policy](/privacy) in pl
 
 Then we took on our data processing agreement, or DPA, to create a generator that makes this hugely exciting task even more fun. You can quickly populate your own form, select the data region, and, if you want, add some pizazz with fairy tale or Taylor Swift mode. DPA? [Try DPYAY!](/dpa)
 
-### Proxy
+### Managed Reverse Proxy
 
 <BuiltBy people={["Frank Hamand"]} />
 
