@@ -74,7 +74,7 @@ The `bootstrap` object has two optional arguments: `distinctID` and `isIdentifie
 
 - `distinctID` enables you to set distinct ID of the user during PostHog's initialization. This is useful when you want to ensure the distinct ID on your frontend is the same as the distinct ID that you called `getAllFlags()` with on your server. It is **strongly recommended** to include it.
 
-> **Note:** The only case where you don't want to include `distinctID` is when your user has an existing PostHog session and you have not yet called [`identify()`](/docs/product-analytics/identify) at any point in time in order to link the anonymous session ID with their identified ID. In this case, bootstrapping `distinctID` will cause PostHog to drop the anonymous session ID and the two sessions will not be linked.
+> **Note:** The only case where you don't want to include `distinctID` is when your user has an existing PostHog session and you have not yet called [`identify()`](/docs/product-analytics/identify) at any point in time to link the anonymous session ID with their identified ID. In this case, bootstrapping `distinctID` will cause PostHog to drop the anonymous session ID and the two sessions will not be linked.
 
 - `isIdentifiedID` ensures that the `distinctID` is treated as an [identified ID](/docs/product-analytics/identify) in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling identify again with a different ID. Set this to `true` if you're using a unique ID such as `email` or a database ID. Set this to `false` if you're generating a random anonymous ID.
 
