@@ -32,9 +32,8 @@ const Modal = ({ onClose, isVisible }) => {
                 </div>
                 <div className="px-4 pb-4 md:px-8 md:pb-8 [&_p]:text-[15px]">
                     <p className="mb-2">
-                        Person profiles let you store detailed information about a user (like an email address) in a
-                        central location and track that user over time. This enables a deeper level of insights that
-                        isn't available when analyzing anonymous traffic (like in Google Analytics).
+                        Person profiles let you store user details (like email address) centrally and track them over
+                        time. This enables deeper insights when analyzing anonymous traffic (like in Google Analytics).
                     </p>
                     <p className="mb-2">
                         It also provides attribution data and lets you track users across devices and sessions.
@@ -44,19 +43,19 @@ const Modal = ({ onClose, isVisible }) => {
                     </p>
                     <ul className="[&_li]:text-[15px] pl-4 mb-2">
                         <li>
-                            View detailed person information in the{' '}
+                            View detailed person info in the{' '}
                             <Link href="https://us.posthog.com/persons" external>
                                 People tab
                             </Link>
                         </li>
-                        <li>Filter on user properties</li>
                         <li>
-                            Merge identities across <code className="text-sm">distinct_id</code> values (i.e. merging an
-                            anonymous user with a logged in user)
+                            Merge identities across <code className="text-sm">distinct_id</code> values (i.e. merge
+                            anonymous user and logged in users)
                         </li>
+                        <li>Track UTMs and referrers for anonymous and identified users</li>
+                        <li>Target flags, experiments, and surveys by user properties</li>
+                        <li>Filter on user properties</li>
                         <li>Create cohorts</li>
-                        <li>Target feature flags, experiments, and surveys by user properties</li>
-                        <li>Track initial UTM values and referrers across anonymous and identified users</li>
                     </ul>
 
                     <p className="text-[15px] mb-0">
@@ -78,7 +77,7 @@ const Modal = ({ onClose, isVisible }) => {
                         <details>
                             <summary className="cursor-pointer">
                                 <div className="inline-flex items-center justify-between w-[95%]">
-                                    <strong>"I want to store details about some anonymous users"</strong>
+                                    <strong>"I want details about some anonymous users"</strong>
                                     <span>
                                         <div className="border border-green rounded px-1 py-0.5 text-green font-bold uppercase text-sm">
                                             Yes
@@ -86,7 +85,7 @@ const Modal = ({ onClose, isVisible }) => {
                                     </span>
                                 </div>
                                 <p className="text-sm opacity-75 pl-4 mb-0">
-                                    Some anonymous website traffic and all signed in users
+                                    Some anonymous traffic and all signed in users
                                 </p>
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
@@ -104,7 +103,7 @@ const Modal = ({ onClose, isVisible }) => {
                         <details>
                             <summary className="cursor-pointer">
                                 <div className="inline-flex items-center justify-between w-[95%]">
-                                    <strong>"I ONLY want to track website visits"</strong>
+                                    <strong>"I only want to track website visits"</strong>
                                     <span>
                                         <div className="border border-red rounded px-1 py-0.5 text-red font-bold uppercase text-sm">
                                             No
@@ -116,9 +115,9 @@ const Modal = ({ onClose, isVisible }) => {
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
                                 <p className="mb-0">
                                     <strong>No, you don't need events with person profiles</strong> to track anonymous
-                                    users. You'll only get basic attribution info (like UTM source) but it can't be used
-                                    to analyze things like top performing marketing channels as there's no way to know
-                                    who signed up.
+                                    users. You'll get basic attribution info (like UTM source) but it can't be used to
+                                    analyze things like top performing marketing channels as there's no way to know who
+                                    signed up.
                                 </p>
                             </div>
                         </details>
@@ -126,7 +125,7 @@ const Modal = ({ onClose, isVisible }) => {
                         <details>
                             <summary className="cursor-pointer">
                                 <div className="inline-flex items-center justify-between w-[95%]">
-                                    <strong>"I ONLY want to track logged in users"</strong>
+                                    <strong>"I only want to track logged in users"</strong>
                                     <span>
                                         <div className="border border-green rounded px-1 py-0.5 text-green font-bold uppercase text-sm">
                                             Yes
@@ -149,14 +148,12 @@ const Modal = ({ onClose, isVisible }) => {
 
                     <h3 className="text-xl border-b border-light dark:border-dark pb-1 mb-2">Calculating usage</h3>
                     <p className="text-[15px] mb-2">
-                        If you're already tracking website traffic, the best way to gauge person profile usage is to
-                        determine what percentage of event volume is <em>anonymous traffic</em> vs. events being sent by
-                        an identified (authenticated) user.
+                        If you already track website traffic, the best way to gauge person profile usage is to determine
+                        what percentage of event volume is <em>anonymous traffic</em> vs. identified.
                     </p>
                     <p className="text-[15px]">
-                        For example, if 75% of your total event volume is anonymous website traffic when factoring in
-                        all in-product usage from identified users, you'll need person profiles for the remaining 25% of
-                        event volume triggered in-app.
+                        For example, if 75% of your volume is anonymous website traffic when factoring in all in-product
+                        usage from identified users, you'll need person profiles for the remaining 25% of events.
                     </p>
                 </div>
             </div>
