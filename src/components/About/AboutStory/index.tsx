@@ -1,45 +1,11 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import GitHubButton from 'react-github-btn'
 import { YCBadge } from './yc-badge'
 import { CallToAction } from 'components/CallToAction'
 import { James, Tim } from 'components/Signatures'
 
-import quote1 from '../../Careers/WhyWereHere/quote-1.mp3'
-import quote2 from '../../Careers/WhyWereHere/quote-2.mp3'
-import quote3 from '../../Careers/WhyWereHere/quote-3.mp3'
-import quote4 from '../../Careers/WhyWereHere/quote-4.mp3'
-import quote5 from '../../Careers/WhyWereHere/quote-5.mp3'
-import quote6 from '../../Careers/WhyWereHere/quote-6.mp3'
-import quote7 from '../../Careers/WhyWereHere/quote-7.mp3'
-import quote8 from '../../Careers/WhyWereHere/quote-8.mp3'
-import quote9 from '../../Careers/WhyWereHere/quote-9.mp3'
-import quote10 from '../../Careers/WhyWereHere/quote-10.mp3'
-
 export const AboutStory = () => {
-    const audioRef = useRef(null)
-    const mp3Files = [quote1, quote2, quote3, quote4, quote5, quote6, quote7, quote8, quote9, quote10]
-
-    const playRandomSound = () => {
-        try {
-            const randomIndex = Math.floor(Math.random() * mp3Files.length)
-            const randomMp3 = mp3Files[randomIndex]
-            if (audioRef.current) {
-                audioRef.current.src = randomMp3
-                audioRef.current
-                    .play()
-                    .then(() => {
-                        console.log('Audio played successfully')
-                    })
-                    .catch((error) => {
-                        console.error('Error playing audio:', error)
-                    })
-            }
-        } catch (error) {
-            console.error('Error in playRandomSound:', error)
-        }
-    }
-
     return (
         <section id="story" className="flex flex-col md:flex-row max-w-screen-xl mx-auto px-4 md:pl-8 md:pr-6">
             <div className="flex-1 flex flex-col justify-between">
@@ -88,20 +54,17 @@ export const AboutStory = () => {
                     <div className="bg-gradient-to-b from-transparent to-tan dark:to-dark absolute w-full h-[60%] md:h-full md:top-12 lg:top-[initial] lg:h-[60%] bottom-0" />
                 </div>
                 <div className="absolute -bottom-8 lg:-bottom-16 left-4 md:-left-4 lg:-left-4">
-                    <button onClick={playRandomSound}>
-                        <StaticImage
-                            breakpoints={[750, 1080, 1366, 1920]}
-                            src="./images/james.png"
-                            width={385.5}
-                            height={366}
-                            quality={100}
-                            alt="James Hawkins, CEO, Co-founder"
-                            placeholder="none"
-                            objectFit="contain"
-                            className="w-[55vw] md:w-[300px] lg:w-auto"
-                        />
-                    </button>
-                    <audio ref={audioRef}></audio>
+                    <StaticImage
+                        breakpoints={[750, 1080, 1366, 1920]}
+                        src="./images/james.png"
+                        width={385.5}
+                        height={366}
+                        quality={100}
+                        alt="James Hawkins, CEO, Co-founder"
+                        placeholder="none"
+                        objectFit="contain"
+                        className="w-[55vw] md:w-[300px] lg:w-auto"
+                    />
                 </div>
                 <div className="text-primary dark:text-primary-dark absolute bottom-6 md:bottom-12 lg:bottom-6 left-4 md:-left-16 leading-tight">
                     <James />
