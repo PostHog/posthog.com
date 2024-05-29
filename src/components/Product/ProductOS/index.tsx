@@ -324,7 +324,7 @@ export const ProductOS = () => {
 
                 <section className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-5 pb-20`}>
                     <div className="text-center">
-                        <StaticImage src="./images/refer.png" alt="referral hog" width={100} className="mb-5" />
+                        <StaticImage src="./images/pyramid.png" alt="referral hog" width={300} className="mb-5" />
                     </div>
                     <h2 className="text-3xl md:text-4xl text-center">
                         Join our pyramid scheme <span className="text-red dark:text-yellow">(or build your own)</span>
