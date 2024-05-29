@@ -72,6 +72,8 @@ The lack of person data is a fair trade-off, because it doesn’t get more live 
 
 Speaking of data being processed live, perhaps at some point you’ve wondered if PostHog actually scales, or just talks the talk. To dispel any doubts, we developed one extra feature: an anonymized stream of all events being captured globally, with only the geolocation included. Hundreds of thousands of events per minute, and they look great on a 3D globe on PostHog’s website, where each event is an arc from the user’s location to that of the relevant data center. Global scale, visualized for your pleasure.
 
+![PostHog's 2024 hackathon in Mykonos](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon3_0be5647083.png)
+
 ### SupportHog
 
 <BuiltBy people={["Dylan Martin", "Tiina Turban", "Marcus Hof", "Neil Kakkar"]} />
