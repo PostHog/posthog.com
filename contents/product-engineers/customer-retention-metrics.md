@@ -4,7 +4,7 @@ title: 'The most useful customer retention metrics, ranked'
 author:
   - james-temperton
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/lovehog_be749b577f.jpg
 featuredImageType: full
 tags:
   - Product analytics
@@ -74,7 +74,7 @@ One reason why Netflix continues to dominate the streaming industry is its incre
 
 This effectively means that Netflix spends a lot less time and money attracting new subscribers to replace people who’ve left. Apple TV+’s 8% monthly churn might not sound that much higher, but churn compounds. Annually, if Apple TV+ did nothing to attract new subscribers, it would lose almost 80% of its customers. Netflix, on the other hand, would lose 22.1%.
 
-![Churn compounds](https://res.cloudinary.com/dmukukwp6/image/upload/v1714754725/posthog.com/contents/blog/churn-compounds.png)
+![Churn compounds](https://res.cloudinary.com/dmukukwp6/image/upload/churn1_8a6ec70588.png)
 
 Higher churn at early-stage startups is totally normal and fine, so long as you’re able to grow fast and improve your product. If and when churn slows, that’s a good sign you’ve found [product-market fit](/founders/product-market-fit-game). 
 
