@@ -40,6 +40,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                 api_host: "${process.env.GATSBY_POSTHOG_API_HOST}",
                                 ui_host: "${process.env.GATSBY_POSTHOG_UI_HOST}",
                                 capture_pageview: false,
+                                capture_pageleave: true,
                                 persistence: 'localStorage+cookie',
                                 uuid_version:'v7',
                                 session_recording: {
@@ -48,7 +49,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                         password: true,
                                     }
                                 },
-                                person_profiles: 'identified_only',
+                                person_profiles: 'always',
                                 __preview_heatmaps: true,
                             })
                             `,

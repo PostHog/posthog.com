@@ -106,8 +106,14 @@ module.exports = {
                 'bullet-dark':
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path fill="%234A4C52" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
             },
+            backgroundPosition: {
+                0: '0',
+                100: '100%',
+            },
             fontFamily: {
-                serif: ['MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
+                'fairytale-title': ['Fairytale', 'sans-serif'],
+                fairytale: ['Computer Modern', 'sans-serif'],
+                serif: ['Times New Roman', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
                     'MatterVF',
                     '-apple-system',
@@ -228,11 +234,16 @@ module.exports = {
                     '0%, 100%': { transform: 'scale(1)' },
                     '50%': { transform: 'scale(1.05)' },
                 },
+                'text-gradient': {
+                    '0%': { 'background-position-x': '0%' },
+                    '100%': { 'background-position-x': '100%' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
                 grow: 'grow 2s linear infinite',
                 'grow-sm': 'grow-sm 3s linear infinite',
+                'text-gradient': 'text-gradient 2500ms linear infinite',
             },
             containers: {
                 '2xs': '16rem',

@@ -167,6 +167,8 @@ But, as Superhuman proves, the survey is a powerful way to systematize finding p
 | <span className="text-green text-lg">✔</span> Useful for tracking how your product-market fit changes over time          |            |
 | <span className="text-green text-lg">✔</span> Will help you understand _why_ you do or don't have product-market fit     |            |
 
+<NewsletterForm />
+
 ## Indicator #3: User engagement
 
 - **Type:** Leading indicator
@@ -386,6 +388,8 @@ So, what about burn multiple and CLV/CAC?
 They're outliers in that they aren't traditional measures of product-market fit. But they do prove how _strong_ your product-market fit is. They're useful when seeking investment, or if your model dictates heavy expenditure on acquisition.
 
 And, if you find yourself unable to find product-market fit, we share how we found it for PostHog (and a step-by-step process achieving it) in [The Product-Market Fit Game](/blog/product-market-fit-game). The golden rule? If in doubt, pivot. 😅
+
+<NewsletterForm />
 
 #### Footnotes
 

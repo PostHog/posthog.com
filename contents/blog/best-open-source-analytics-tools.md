@@ -80,6 +80,8 @@ PostHog is useful for engineering, data science, and product teams. As an all-in
 
 Subscribing to PostHog Cloud removes the project limit and adds numerous paid-only features, including experimentation, correlation analysis, group analytics for tracking organizations, and advanced cohorts. PostHog Cloud is [free up to 1 million events per month](/pricing).
 
+<NewsletterForm />
+
 ### 2. Matomo
 ![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
@@ -265,7 +267,7 @@ You don't need to import metric data into GrowthBook as it works with your data 
 
 #### Who is GrowthBook for?
 
-GrowthBook is ideal for engineering teams who want flexible, instant control over what users see in their product and already have, or don't require, a broader analytics platform.
+[GrowthBook](/blog/best-growthbook-alternatives) is ideal for engineering teams who want flexible, instant control over what users see in their product and already have, or don't require, a broader analytics platform.
 
 #### Strengths
 - Multivariate feature flags
@@ -390,3 +392,5 @@ OWA suits developers who want self-hosted analytics, but desire more tracking ca
 
 #### Open source license and monetization
 Open Web Analytics is distributed under the GPL-2.0 license. There are no paid features.
+
+<NewsletterForm />

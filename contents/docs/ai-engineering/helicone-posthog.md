@@ -1,37 +1,16 @@
 ---
-title: LLM insights (beta)
+title: Integrating with Helicone
 availability:
     free: full
     selfServe: full
     enterprise: full
 ---
 
-We've teamed up with various LLM platforms to track metrics for LLM apps. This makes it easy to answer questions like:
+> This feature is currently in public beta. This means it's not yet a perfect experience, but we'd love to know your thoughts. Please [share your feedback](http://app.posthog.com/home#supportModal) and [follow our roadmap](https://github.com/PostHog/posthog/issues/18547).
 
-- What are my LLM costs by customer, model, and in total?
-- How many of my users are interacting with my LLM features?
-- Are there generation latency spikes?
-- Does interacting with LLM features correlate with other metrics (retention, usage, revenue, etc.)?
+You can integrate with [Helicone](https://www.helicone.ai/) and bring data into PostHog for analysis. Additionally, we offer a dashboard template to help you quickly get insights into your LLM product. 
 
-Currently, we support integrations for the following platforms:
-
-- [Langfuse](https://langfuse.com)
-- [Helicone](https://www.helicone.ai/)
-
-## How to install
-
-### Langfuse
-
-1. First add [Langfuse Tracing](https://langfuse.com/docs/tracing) to your LLM app ([Quickstart](https://langfuse.com/docs/get-started)).
-2. In your [Langfuse dashboard](https://cloud.langfuse.com/), click on **Settings** and scroll down to the **Integrations** section to find the PostHog integration.
-3. Click **Configure** and paste in your PostHog host and project API key (you can find these in your [PostHog project settings](https://us.posthog.com/settings/project)).
-4. Click **Enabled** and then **Save**.
-
-![How to set up the Langfuse PostHog integration](https://res.cloudinary.com/dmukukwp6/video/upload/v1713785335/posthog.com/contents/languse.mp4)
-
-[Langfuse events](https://langfuse.com/docs/analytics/posthog#events) will now be exported into PostHog once per day.
-
-### Helicone
+## Integrating with Helicone
 
 1. Sign up for [Helicone](https://www.helicone.ai/) and add it to your app.
 2. Similar to how you set `Helicone-Auth` [header](https://docs.helicone.ai/getting-started/integration-method/openai-proxy#openai-v1) when configuring your LLM client, add two new headers `Helicone-Posthog-Key` and `Helicone-Posthog-Host` with your PostHog host and API key (you can find these in your [PostHog project settings](https://us.posthog.com/settings/project)):
@@ -93,9 +72,9 @@ const openai = new OpenAIApi(configuration);
 
 Helicone events will now be exported into PostHog as soon as they're available.
 
-## Dashboard templates
+## Using the Helicone dashboard template
 
-Once you've installed an integration, [dashboard templates](/docs/product-analytics/dashboards) help you quickly set up relevant insights. Here examples for [Langfuse](https://eu.posthog.com/shared/HPOaK5zNVkP062nQJQJoooXe61l15w) and [Helicone](https://us.posthog.com/shared/NueyVUHeGCGnrQaM-eRO09HzHFwcCw).
+Once you've installed the integration, [dashboard templates](/docs/product-analytics/dashboards) help you quickly set up relevant insights. You can see an example [Helicone dashboard here](https://us.posthog.com/shared/6_Qa74au0RhxERZ3wW9g87oxWlFxNA).
 
 To create your own dashboard from a template:
 

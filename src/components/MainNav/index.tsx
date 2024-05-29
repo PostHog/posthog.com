@@ -6,13 +6,13 @@ import { layoutLogic } from '../../logic/layoutLogic'
 import {
     IconApp,
     IconBrightness,
-    IconChat,
     IconMessage,
     IconSearch,
     IconTextWidth,
     IconUser,
     IconChevronDown,
-    IconTie,
+    IconLetter,
+    IconUpload,
 } from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
@@ -32,6 +32,7 @@ import { useInView } from 'react-intersection-observer'
 import { usePopper } from 'react-popper'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { StaticImage } from 'gatsby-plugin-image'
+import MediaUploadModal from 'components/MediaUploadModal'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -289,7 +290,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                 className={`flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x snap-mandatory overflow-x-auto overflow-y-hidden ${className}`}
             >
                 {menu.map((menuItem, index) => {
-                    const { url, color, icon, name, onClick } = menuItem
+                    const { url, color, colorDark, icon, name, onClick } = menuItem
                     const Icon = icons[icon]
                     const active = menu[activeIndex]?.name === menuItem.name
                     return (
@@ -317,7 +318,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                                             : 'border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                                     }`}
                                 >
-                                    <span className={`w-6 h-6 mr-2 text-${color}`}>
+                                    <span className={`w-6 h-6 mr-2 text-${color} dark:text-${colorDark}`}>
                                         <Icon />
                                     </span>
                                     <span
@@ -333,7 +334,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                                         className={`absolute ${
                                             mobile ? 'top-[-4px]' : '-bottom-2'
                                         } left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
-                                            active ? `border-${color}` : `border-transparent`
+                                            active ? `border-${color} dark:border-${colorDark}` : `border-transparent`
                                         }`}
                                     />
                                 </Link>
@@ -368,9 +369,17 @@ const enterpiseModeNames = {
     Company: 'Investor relations',
 }
 
+const Notifications = () => {
+    const { notifications } = useUser()
+    return notifications.length > 0 ? (
+        <span className="size-4 text-xs bg-red text-white flex justify-center items-center rounded-full">
+            {notifications.length}
+        </span>
+    ) : null
+}
+
 export const Main = () => {
     const { user } = useUser()
-
     const { open } = useSearch()
     const {
         menu,
@@ -386,6 +395,7 @@ export const Main = () => {
     const { websiteTheme } = useValues(layoutLogic)
     const { setWebsiteTheme } = useActions(layoutLogic)
     const [posthogInstance, setPosthogInstance] = useState<string>()
+    const [mediaModalOpen, setMediaModalOpen] = useState(false)
     const posthog = usePostHog()
 
     useEffect(() => {
@@ -412,8 +422,11 @@ export const Main = () => {
         }
     }
 
+    const isModerator = user?.role?.type === 'moderator'
+
     return (
         <div>
+            <MediaUploadModal open={mediaModalOpen} setOpen={setMediaModalOpen} />
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
                     className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${
@@ -523,11 +536,14 @@ export const Main = () => {
                                             <>
                                                 <li className="px-1">
                                                     <Link
-                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark"
-                                                        to="/community/dashboard"
+                                                        className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark justify-between"
+                                                        to="/community/notifications"
                                                     >
-                                                        <IconChat className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
-                                                        My discussions
+                                                        <span>
+                                                            <IconLetter className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                            Notifications
+                                                        </span>
+                                                        <Notifications />
                                                     </Link>
                                                 </li>
                                                 <li className="px-1">
@@ -539,6 +555,17 @@ export const Main = () => {
                                                         My profile
                                                     </Link>
                                                 </li>
+                                                {isModerator && (
+                                                    <li className="px-1">
+                                                        <button
+                                                            className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full"
+                                                            onClick={() => setMediaModalOpen(true)}
+                                                        >
+                                                            <IconUpload className="opacity-50 inline-block w-6 group-hover/parent:opacity-75 mr-2" />
+                                                            Upload media
+                                                        </button>
+                                                    </li>
+                                                )}
                                             </>
                                         )}
                                         <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
@@ -559,7 +586,6 @@ export const Main = () => {
                                                 <Toggle checked={fullWidthContent} />
                                             </button>
                                         </li>
-                                        <Orders />
                                         {pathname === '/' && (
                                             <li className="px-1 whitespace-nowrap">
                                                 <button
@@ -609,16 +635,20 @@ export const Main = () => {
                                                 </button>
                                             </li>
                                         )}
+                                        <Orders />
                                     </ul>
                                 )
                             }}
                         >
                             {user?.profile ? (
-                                <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex">
+                                <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex relative">
                                     <Avatar
                                         src={getAvatarURL(user?.profile)}
                                         className="w-9 h-9 inline-block bg-tan rounded-full dark:bg-dark"
                                     />
+                                    <div className="absolute bottom-0 right-0 translate-x-1/2">
+                                        <Notifications />
+                                    </div>
                                 </div>
                             ) : (
                                 <IconUser className="opacity-50 inline-block w-6 group-hover/parent:opacity-75" />
@@ -647,7 +677,7 @@ export const Mobile = () => {
     const { menu, parent, internalMenu, activeInternalMenu, enterpriseMode, setEnterpriseMode } = useLayoutData()
 
     return (
-        <div className="fixed bottom-0 w-full md:hidden z-[9999999]">
+        <div className="fixed bottom-0 w-full md:hidden z-[9999999] print:hidden">
             <InternalMenu
                 mobile
                 className="bg-light dark:bg-dark border-t mb-[-1px]"

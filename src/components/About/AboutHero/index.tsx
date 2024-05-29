@@ -39,7 +39,7 @@ export const AboutHero = () => {
                 <h3 className="text-center opacity-60 font-semibold">
                     <p className="pb-0 mb-0 text-xl">
                         PostHog started as open source product analytics. <br className="hidden md:block" />
-                        We've grown into a product &amp; data toolkit, used by 10,000+ customers.
+                        We've grown into a product &amp; data toolkit, used by 70,000+ teams.
                     </p>
                 </h3>
             </header>

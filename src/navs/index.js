@@ -520,7 +520,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/marketing/in-app',
                     },
                     {
-                        name: 'PostHog for Startups',
+                        name: 'PostHog for startups',
                         url: '/handbook/growth/marketing/startups',
                     },
                     {
@@ -886,6 +886,17 @@ export const communityMenu = {
     ],
 }
 
+export const sexyLegalMenu = {
+    name: 'Terms',
+    url: '/terms',
+    icon: 'IconLogomark',
+    children: [
+        { name: 'Terms', icon: 'IconDocument', url: '/terms', color: 'blue' },
+        { name: 'Privacy', icon: 'IconShield', url: '/privacy', color: 'seagreen' },
+        { name: 'DPA generator', icon: 'IconPencil', url: '/dpa', color: 'red' },
+    ],
+}
+
 export const companyMenu = {
     name: 'Company',
     url: '/about',
@@ -1200,11 +1211,8 @@ export const docsMenu = {
                             url: '/docs/libraries/django',
                         },
                         {
-                            name: 'Docusaurus v2',
+                            name: 'Docusaurus',
                             url: '/docs/libraries/docusaurus',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Flask',
@@ -1288,6 +1296,45 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Reverse proxy',
+                    url: '/docs/advanced/proxy',
+                    icon: 'IconShare',
+                    children: [
+                        {
+                            name: 'AWS CloudFront',
+                            url: '/docs/advanced/proxy/cloudfront',
+                        },
+                        {
+                            name: 'Caddy',
+                            url: '/docs/advanced/proxy/caddy',
+                        },
+                        {
+                            name: 'Cloudflare',
+                            url: '/docs/advanced/proxy/cloudflare',
+                        },
+                        {
+                            name: 'Netlify',
+                            url: '/docs/advanced/proxy/netlify',
+                        },
+                        {
+                            name: 'Next.js',
+                            url: '/docs/advanced/proxy/nextjs',
+                        },
+                        {
+                            name: 'Next.js Middleware',
+                            url: '/docs/advanced/proxy/nextjs-middleware',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/advanced/proxy/nuxt',
+                        },
+                        {
+                            name: 'Vercel',
+                            url: '/docs/advanced/proxy/vercel',
+                        },
+                    ],
+                },
+                {
                     name: 'Advanced',
                     url: '/docs/advanced/cdp',
                     icon: 'IconAdvanced',
@@ -1295,44 +1342,6 @@ export const docsMenu = {
                         {
                             name: 'Using a CDP',
                             url: '/docs/advanced/cdp',
-                        },
-                        {
-                            name: 'Deploying a reverse proxy',
-                            url: '/docs/advanced/proxy',
-                            children: [
-                                {
-                                    name: 'AWS CloudFront',
-                                    url: '/docs/advanced/proxy/cloudfront',
-                                },
-                                {
-                                    name: 'Caddy',
-                                    url: '/docs/advanced/proxy/caddy',
-                                },
-                                {
-                                    name: 'Cloudflare',
-                                    url: '/docs/advanced/proxy/cloudflare',
-                                },
-                                {
-                                    name: 'Netlify',
-                                    url: '/docs/advanced/proxy/netlify',
-                                },
-                                {
-                                    name: 'Next.js',
-                                    url: '/docs/advanced/proxy/nextjs',
-                                },
-                                {
-                                    name: 'Next.js Middleware',
-                                    url: '/docs/advanced/proxy/nextjs-middleware',
-                                },
-                                {
-                                    name: 'Nuxt',
-                                    url: '/docs/advanced/proxy/nuxt',
-                                },
-                                {
-                                    name: 'Vercel',
-                                    url: '/docs/advanced/proxy/vercel',
-                                },
-                            ],
                         },
                         {
                             name: 'Using Content Security Policies',
@@ -1495,16 +1504,38 @@ export const docsMenu = {
                             url: '/docs/api',
                         },
                         {
-                            name: 'POST-only public endpoints',
-                            url: '/docs/api/post-only-endpoints',
+                            name: 'Popular',
+                        },
+                        {
+                            name: 'Capture',
+                            url: '/docs/api/capture',
+                        },
+                        {
+                            name: 'Decide',
+                            url: '/docs/api/decide',
+                        },
+                        {
+                            name: 'Query',
+                            url: '/docs/api/query',
+                        },
+                        {
+                            name: 'More endpoints',
                         },
                         {
                             name: 'Actions',
                             url: '/docs/api/actions',
                         },
                         {
+                            name: 'Activity log',
+                            url: '/docs/api/activity-log',
+                        },
+                        {
                             name: 'Annotations',
                             url: '/docs/api/annotations',
+                        },
+                        {
+                            name: 'Batch exports',
+                            url: '/docs/api/batch-exports',
                         },
                         {
                             name: 'Cohorts',
@@ -1513,6 +1544,14 @@ export const docsMenu = {
                         {
                             name: 'Dashboards',
                             url: '/docs/api/dashboards',
+                        },
+                        {
+                            name: 'Dashboard templates',
+                            url: '/docs/api/dashboard-templates',
+                        },
+                        {
+                            name: 'Early access features',
+                            url: '/docs/api/early-access-feature',
                         },
                         {
                             name: 'Event definitions',
@@ -1555,16 +1594,56 @@ export const docsMenu = {
                             url: '/docs/api/members',
                         },
                         {
+                            name: 'Notebooks',
+                            url: '/docs/api/notebooks',
+                        },
+                        {
+                            name: 'Organizations',
+                            url: '/docs/api/organizations',
+                        },
+                        {
                             name: 'Persons',
                             url: '/docs/api/persons',
                         },
                         {
-                            name: 'Plugin configs',
-                            url: '/docs/api/plugin-configs',
+                            name: 'Destinations',
+                            url: '/docs/api/pipeline-destinations',
+                        },
+                        {
+                            name: 'Destination configs',
+                            url: '/docs/api/pipeline-destination-configs',
+                        },
+                        {
+                            name: 'Frontend apps',
+                            url: '/docs/api/pipeline-frontend-apps',
+                        },
+                        {
+                            name: 'Frontend apps configs',
+                            url: '/docs/api/pipeline-frontend-apps-configs',
+                        },
+                        {
+                            name: 'Import apps',
+                            url: '/docs/api/pipeline-import-apps',
+                        },
+                        {
+                            name: 'Import apps configs',
+                            url: '/docs/api/pipeline-import-apps-configs',
+                        },
+                        {
+                            name: 'Transformations',
+                            url: '/docs/api/pipeline-transformations',
+                        },
+                        {
+                            name: 'Transformation configs',
+                            url: '/docs/api/pipeline-transformation-configs',
                         },
                         {
                             name: 'Plugins',
                             url: '/docs/api/plugins',
+                        },
+                        {
+                            name: 'Plugin configs',
+                            url: '/docs/api/plugin-configs',
                         },
                         {
                             name: 'Projects',
@@ -1575,8 +1654,24 @@ export const docsMenu = {
                             url: '/docs/api/property-definitions',
                         },
                         {
+                            name: 'Roles',
+                            url: '/docs/api/roles',
+                        },
+                        {
                             name: 'Session recordings',
                             url: '/docs/api/session-recordings',
+                        },
+                        {
+                            name: 'Session recording playlists',
+                            url: '/docs/api/session-recording-playlists',
+                        },
+                        {
+                            name: 'Sessions',
+                            url: '/docs/api/sessions',
+                        },
+                        {
+                            name: 'Subscriptions',
+                            url: '/docs/api/subscriptions',
                         },
                         {
                             name: 'Surveys',
@@ -1589,10 +1684,6 @@ export const docsMenu = {
                         {
                             name: 'Users',
                             url: '/docs/api/user',
-                        },
-                        {
-                            name: 'Query',
-                            url: '/docs/api/query',
                         },
                         {
                             name: 'Data model',
@@ -1891,9 +1982,39 @@ export const docsMenu = {
                 },
                 {
                     name: 'Trends',
-                    url: '/docs/product-analytics/trends',
+                    url: '/docs/product-analytics/trends/overview',
                     icon: 'IconGraph',
                     color: 'blue',
+                    children: [
+                        {
+                            name: 'Getting started',
+                            url: '/docs/product-analytics/trends/overview',
+                        },
+                        {
+                            name: 'Charts',
+                            url: '/docs/product-analytics/trends/charts',
+                        },
+                        {
+                            name: 'Filters',
+                            url: '/docs/product-analytics/trends/filters',
+                        },
+                        {
+                            name: 'Aggregations',
+                            url: '/docs/product-analytics/trends/aggregations',
+                        },
+                        {
+                            name: 'Breakdowns',
+                            url: '/docs/product-analytics/trends/breakdowns',
+                        },
+                        {
+                            name: 'Formulas',
+                            url: '/docs/product-analytics/trends/formulas',
+                        },
+                        {
+                            name: 'Tips',
+                            url: '/docs/product-analytics/trends/tips',
+                        },
+                    ],
                 },
                 {
                     name: 'Funnels',
@@ -1952,8 +2073,8 @@ export const docsMenu = {
                 },
                 {
                     name: 'LLM insights',
-                    url: '/docs/product-analytics/llms',
-                    icon: 'IconMagicWand',
+                    url: '/docs/ai-engineering/llms',
+                    icon: 'IconAIText',
                     color: 'yellow',
                     badge: {
                         title: 'Beta',
@@ -2480,37 +2601,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Filtering',
-                    url: '',
-                    children: [
-                        {
-                            url: '/docs/cdp/downsampling',
-                            name: 'Downsampler',
-                        },
-                        {
-                            url: '/docs/cdp/event-sequence-timer',
-                            name: 'Event Sequence Timer',
-                        },
-                        {
-                            url: '/docs/cdp/filter-out',
-                            name: 'Filter Out',
-                        },
-                        {
-                            url: '/docs/cdp/property-filter',
-                            name: 'Property Filter',
-                        },
-                        {
-                            url: '/docs/cdp/schema-enforcer',
-                            name: 'Schema Enforcer',
-                        },
-                        {
-                            url: '/docs/cdp/taxonomy-standardizer',
-                            name: 'Taxonomy Standardizer',
-                        },
-                    ],
-                },
-                {
-                    name: 'Transformation',
+                    name: 'Transformations',
                     url: '',
                     children: [
                         {
@@ -2528,6 +2619,30 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/user-agent-populator',
                             name: 'User Agent Populator',
+                        },
+                        {
+                            url: '/docs/cdp/event-sequence-timer',
+                            name: 'Event Sequence Timer',
+                        },
+                        {
+                            url: '/docs/cdp/property-filter',
+                            name: 'Property Filter',
+                        },
+                        {
+                            url: '/docs/cdp/taxonomy-standardizer',
+                            name: 'Taxonomy Standardizer',
+                        },
+                        {
+                            url: '/docs/cdp/downsampling',
+                            name: 'Downsampler',
+                        },
+                        {
+                            url: '/docs/cdp/filter-out',
+                            name: 'Filter Out',
+                        },
+                        {
+                            url: '/docs/cdp/schema-enforcer',
+                            name: 'Schema Enforcer',
                         },
                     ],
                 },
@@ -2602,6 +2717,59 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/under-the-hood',
                     icon: 'IconMagicWand',
                     color: 'seagreen',
+                },
+            ],
+        },
+        {
+            name: 'AI engineering',
+            url: '/docs/ai-engineering',
+            color: '[#681291]',
+            colorDark: '[#C170E8]',
+            icon: 'IconAI',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            children: [
+                {
+                    name: 'AI engineering',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/ai-engineering',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'LLM insights',
+                    url: '/docs/ai-engineering/llm-insights',
+                    icon: 'IconAIText',
+                    color: 'blue',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/ai-engineering/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Integrations',
+                },
+                {
+                    name: 'Langfuse',
+                    url: '/docs/ai-engineering/langfuse-posthog',
+                    icon: 'IconWrench',
+                    color: 'purple',
+                },
+                {
+                    name: 'Helicone',
+                    url: '/docs/ai-engineering/helicone-posthog',
+                    icon: 'IconWrench',
+                    color: 'green',
                 },
             ],
         },

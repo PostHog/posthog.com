@@ -73,7 +73,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 >
 > PostHog is a broader, more powerful tool than Hotjar. This comes with some extra complexity, but the payoff is all your user data in one place and tightly integrated with powerful analytical tools.
 
-<ArrayCTA />
+<NewsletterForm />
 
 <br />
 
@@ -88,7 +88,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 
 ### What is Mouseflow?
 
-Mouseflow is a behavioral analytics tool that offers session replays, heatmaps, and basic funnel analysis. It's designed mainly for marketing and e-commerce websites. It's very similar to Hotjar, making it a direct rip and replace solution.
+[Mouseflow](/blog/best-mouseflow-alternatives) is a behavioral analytics tool that offers session replays, heatmaps, and basic funnel analysis. It's designed mainly for marketing and e-commerce websites. It's very similar to Hotjar, making it a direct rip and replace solution.
 
 According to data from BuiltWith, 5,555 of the top 1 million websites use Mouseflow (correct as of Feb 2024), considerably less than Hotjar's 72,048.
 

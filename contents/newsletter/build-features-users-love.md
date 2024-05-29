@@ -86,6 +86,8 @@ After a few weeks of iteration, it was rolled out to employees, who loved it. Th
 
 Not all companies can generate as much usable internal test data, but Spotify has the scale to generate lots of reliable usage insights before showing new features to customers.
 
+<NewsletterForm />
+
 ### 4. Limited rollout
 Next, they rolled Discover Weekly out to 1% of users. They gathered qualitative feedback using a Google Form in the description. The responses were overwhelmingly positive. When asked “Did you like the music in your Discover Weekly?” 65% of users gave it a 5/5 rating.
 
@@ -125,4 +127,4 @@ When orgs “become obsessed with correctness over speed” they “insist on ga
 **[CFOs Are Killing My Deals!](https://www.onlycfo.io/p/cfos-are-killing-my-deals) by OnlyCFO.**
 What does a CFO think about your B2B SaaS product? A useful behind-the-scenes perspective on the when, why, and how of product procurement.
 
-> If you enjoyed this, [sign up to Product for Engineers on Substack](https://newsletter.posthog.com/).
+<NewsletterForm />

@@ -56,6 +56,8 @@ You can also evaluate feature flags using PostHog's API from any language that c
 
 There are no limits on feature flag usage in the open-source edition, though A/B testing isn't available. PostHog's Cloud edition includes 1 million API requests per month for free – see the [feature flag pricing page](/pricing?product=feature-flags) for more info.
 
+<NewsletterForm />
+
 ### 2. Unleash
 
 - **License:** Apache
@@ -102,7 +104,7 @@ It's warehouse native with support for most major SQL data sources, and there's 
 
 #### How much does it cost?
 
-Growthbook’s open source self-hosted plan is free forever, with unlimited flags and experiments. GrowthBook also offers a hosted version with pricing based on the number of users.
+Growthbook’s open source self-hosted plan is free forever, with unlimited flags and experiments. [GrowthBook](/blog/best-growthbook-alternatives) also offers a hosted version with pricing based on the number of users.
 
 ### 4. Flagsmith
 

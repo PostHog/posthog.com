@@ -70,6 +70,8 @@ What does this look like? Here’s an excerpt from ours:
 
 Read [PostHog’s pricing principles](https://posthog.com/handbook/engineering/feature-pricing?utm_source=posthog-newsletter&utm_medium=email) in our public handbook for more.
 
+<NewsletterForm />
+
 ## 4. Freemium + free trial can work together
 Freemium models are better for bottom-up user growth; trials are better for driving revenue... and you can have both.
 
@@ -147,4 +149,4 @@ Read [What we've learned about multi-product pricing (so far)](https://posthog.c
 
 *Words by Andy Vandervell, who is enduring a years-long unscheduled disassembly.*
 
-> Originally published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products, and successful companies. Don't miss out... [subscribe here](https://newsletter.posthog.com/subscribe).
+<NewsletterForm />

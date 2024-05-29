@@ -214,7 +214,7 @@ export default function Hero() {
     const { enterpriseMode } = useLayoutData()
     const heroTitle = enterpriseMode
         ? 'The modern digital optimization platform'
-        : 'How engineers build better products'
+        : 'How developers build successful products'
 
     useEffect(() => {
         setShowNPS(enterpriseMode)

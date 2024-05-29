@@ -42,3 +42,18 @@
     font-weight: 300 900;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Fairytale';
+    src: url('/fonts/fairytale_serif-webfont.woff2') format('woff2'),
+        url('/fonts/fairytale_serif-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Computer Modern';
+    src: url('/fonts/cmunti-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

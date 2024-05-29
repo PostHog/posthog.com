@@ -102,6 +102,8 @@ The three major core components of Elasticsearch’s infrastructure are **indice
 ![Elasticsearch effectively creates a cartesian layout of physical and virtual coordinates. ](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-elastic/elasticsearch-structure.png)
 <Caption>Elasticsearch effectively creates a cartesian layout of physical and virtual coordinates.</Caption>
 
+<NewsletterForm />
+
 #### Inverted index
 
 In each shard (or Apache Lucene instance) is an inverted index. An inverted index is like a glossary – it stores a map of string components (such as words, numbers, or prefixes) for all the documents they are located in. 
@@ -228,3 +230,5 @@ Overall, Elasticsearch remains a good solution if data aggregation involves sear
 - Lisa Jung’s [talk](https://www.youtube.com/watch?v=gS_nHTWZEJ8) on Elasticsearch
 - Robert Hodges’s CMU [talk](https://www.youtube.com/watch?v=fGG9dApIhDU) on ClickHouse
 - Our [comparison of between ClickHouse and Postgres](/blog/clickhouse-vs-postgres) which expands on ClickHouse’s optimizations
+
+<NewsletterForm />

@@ -26,7 +26,7 @@ export const quickLinks = [
         to: '/docs/libraries/django',
     },
     {
-        name: 'Docusaurus v2',
+        name: 'Docusaurus',
         to: '/docs/libraries/docusaurus',
     },
     {

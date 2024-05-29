@@ -202,3 +202,5 @@ Needless to say, this is all backend work you will never see, but HouseWatch wil
 Some hackathon projects, such as our new dashboard templates, have already shipped, while we've also revamped how we do support based on the work of Team Arubug. Others are still work-in-progress projects that we expect to ship in future – see our [public roadmap](/roadmap) and [GitHub repo](https://github.com/PostHog/posthog) for updates on what we're working on.
 
 Fancy joining us at our next all-company offsite? We're [always hiring](/careers).
+
+<NewsletterForm />

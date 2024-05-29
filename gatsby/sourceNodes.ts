@@ -37,7 +37,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
             ),
             schema: endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null })),
-            url: '/docs/api/' + endpoint.name.replace('_', '-'),
+            url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
             name: endpoint.name,
         }
         createNode(node)

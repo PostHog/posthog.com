@@ -62,7 +62,7 @@ posthog.project_api_key = '<ph_project_api_key>'
 # Only necessary if you want to use feature flags
 posthog.personal_api_key = '<ph_personal_api_key>'
 
-# You can remove this line if you're using app.posthog.com
+# You can remove this line if you're using us.posthog.com
 posthog.host = '<ph_client_api_host>'
 ```
 
@@ -81,6 +81,8 @@ def movie_played(movie):
 ```
 
 Adding more of these capture calls in the right places in your codebase creates a flow of event tracking data into PostHog. For more information on setting this up, read the **[live data ingestion guide](https://posthog.com/docs/integrate/ingest-live-data).**
+
+<NewsletterForm />
 
 ## Getting custom events right
 
@@ -297,3 +299,5 @@ Now that you have set up autocapture, high-quality custom events, and actions, w
 If you are looking for more options to where to send your events from that aren’t covered by our client- and server-side libraries (or autocapture), you can check out our [API](https://posthog.com/docs/api).
 
 If you are looking to get started with analysis of all the event tracking data you now have, you can look into creating a new [trend](https://posthog.com/manual/trends), [funnel](https://posthog.com/manual/funnels), or [dashboard](https://posthog.com/manual/dashboards).
+
+<NewsletterForm />

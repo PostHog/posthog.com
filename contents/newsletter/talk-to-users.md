@@ -64,6 +64,8 @@ If you struggle to find people, try adding an incentive, like a merch code or gi
 
 ![Feedback for merch code](https://res.cloudinary.com/dmukukwp6/image/upload/v1713470870/posthog.com/contents/images/newsletter/talk-to-users/merch.png)
 
+<NewsletterForm />
+
 ## 4. What to ask during a user interview
 
 Our experience talking to users has revealed two main discussion areas. 
@@ -127,14 +129,10 @@ By getting more feedback from users, we are better able to ship features they ac
 
 ## Good reads for product engineers
 
-**[An engineer's guide to behavioral analytics](/product-engineers/behavioral-analytics) - Ian Vanagas**
+**[An engineer's guide to behavioral analytics](/product-engineers/behavioral-analytics) - Ian Vanagas:** Another source of insights to grow your knowledge is how users are actually using your app. Behavioral analytics help you discover this. 
 
-Another source of insights to grow your knowledge is how users are actually using your app. Behavioral analytics help you discover this. 
+**[How to talk to users](https://youtu.be/z1iF1c8w5Lg) - Gustaf Alströmer:** YC Group Partner gives his (rival) full guide on what users to talk with, how to run an interview, and how to interrupt their feedback. 
 
-**[How to talk to users](https://youtu.be/z1iF1c8w5Lg) - Gustaf Alströmer**
+**[Stripe's payments APIs: The first 10 years](https://stripe.com/blog/payment-api-design) - Michelle Bu:** A success story in iteration and feedback. It takes a lot of work to handle an increasing number of payment methods while keeping an API simple.
 
-YC Group Partner gives his (rival) full guide on what users to talk with, how to run an interview, and how to interrupt their feedback. 
-
-**[Stripe's payments APIs: The first 10 years](https://stripe.com/blog/payment-api-design) - Michelle Bu**
-
-A success story in iteration and feedback. It takes a lot of work to handle an increasing number of payment methods while keeping an API simple.
+<NewsletterForm />

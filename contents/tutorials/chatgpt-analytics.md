@@ -316,6 +316,6 @@ We've shown you the basics of creating insights from your product's ChatGPT API 
 
 ## Further reading
 
-- [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+- [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics) 
 - [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)

@@ -38,7 +38,9 @@ We started experimenting with the website layout until more visitors installed t
 
 In parallel, I'd email every single user who signed up, trying to learn from them. Almost no one spoke to us. You can find a lot out from data, but it's no substitute for the real thing. Developers are much less likely to take a call than salespeople from our previous experience.
 
-We kept up the two meetings a day target, but often missed it. Engineering leaders were harder to get in front of than sales leaders. 
+We kept up the two meetings a day target, but often missed it. Engineering leaders were harder to get in front of than sales leaders.
+
+<NewsletterForm />
 
 The week before, we booked practice sessions with everyone we thought was relevant. This meant friends, family, a VC and two YC alumni who were offering to do this on Twitter.
 
@@ -80,4 +82,4 @@ The weeks that followed were quite stressful. We suddenly had to find a lawyer t
 
 We immediately started doing regular calls with the partners and we chose to send a regular update once a week with our progress. Knowing this was coming up every Friday kept our urgency up.
 
-_Want to know more about what we're up to? [Subscribe to our new newsletter](https://newsletter.posthog.com/subscribe), which we send once every two weeks!_
+<NewsletterForm />

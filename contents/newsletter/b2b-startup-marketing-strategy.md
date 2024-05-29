@@ -24,12 +24,12 @@ We’re product-led. We have [product-market fit](/founders/product-market-fit-g
 
 How nooby? Well, here’s our team and their marketing “credentials”:
 
-- [Charles](/community/profiles/254) – leads marketing and (weirdly) ops and finance. No prior marketing experience.
-- [Andy](/community/profiles/62) – worked in online publishing for 15+ years. No prior marketing experience.
-- [Ian](/community/profiles/269) – software engineering background. No prior marketing experience.
-- [Lior](/community/profiles/684) – spent five years in engineering at Meta before PostHog. No prior marketing experience.
-- [Lottie](/community/profiles/227) – our awesome graphic designer. PostHog is her first proper job.
-- [Joe](/community/profiles/59) – former journalist and, to be fair, has actual marketing experience at previous startups. Way too much experience, probably.
+- [Charles](/charles) – leads marketing and (weirdly) ops and finance. No prior marketing experience.
+- [Andy](/andy) – worked in online publishing for 15+ years. No prior marketing experience.
+- [Ian](/ian) – software engineering background. No prior marketing experience.
+- [Lior](/lior) – spent five years in engineering at Meta before PostHog. No prior marketing experience.
+- [Lottie](/lottie) – our awesome graphic designer. PostHog is her first proper job.
+- [Joe](/joe) – former journalist and, to be fair, has actual marketing experience at previous startups. Way too much experience, probably.
 
 So, yeah. Here’s what we’ve learned about marketing for startups, specifically for a B2B startup for developers. Let us know where we’re wrong!
 
@@ -74,6 +74,8 @@ Other options include:
 - A podcast (good ones take way more effort than you think)
 
 Why do this? FWIW, a single *Product for Engineers* newsletter drives more clicks to our website than a $5,000 newsletter sponsorship we ran recently.
+
+<NewsletterForm />
 
 ## 4. Make your website genuinely different 🙃
 This means:
@@ -159,3 +161,5 @@ Once you’ve built this content out, focus on SEO content targeting your rivals
 **[Ten Principles for Growth as an Engineer](https://medium.com/@daniel.heller/ten-principles-for-growth-69015e08c35b) – Dan Heller:** ”Your job isn’t just to write the code and wait for everything else to fall into place; your job is to figure out how to create value with your efforts.”
 
 *Words by Andy Vandervell, who thinks people who use a hyphen instead of en dash are sociopaths.*
+
+<NewsletterForm />
