@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/groove/logo-dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/groove/featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/groove_4f9d69e0c9.png
 industries:
   - Helpdesk
 users:
