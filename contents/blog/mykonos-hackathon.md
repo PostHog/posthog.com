@@ -139,6 +139,9 @@ As part of the project, we also revamped our system for categorizing and trackin
 
 <BuiltBy people={["Sandy Spicer", "Tim Glaser"]} />
 
+![Data crunching](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon_datacrunch_525d9e362b.png)
+
+
 PostHog crunches a lot of data – and sometimes queries can take a while to load. To help users better understand the hard work we’re doing when they make a query, we built a loading bar that shows statistics on the data we’re crunching, and the CPU we’re throwing at each query. The loading bar is fake right now (sorry!), but the data we show is very much real.
 
 
