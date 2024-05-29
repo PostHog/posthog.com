@@ -21,6 +21,8 @@ As a fully-remote company with 47 misfits spread across ten countries, our offsi
 
 Our all-company offsites are a mix of socializing, group activities, strategic sessions, Post-its, workshops, more Post-its, and, the star of the show, the annual PostHog hackathon. Everyone in the company has to pitch a couple of ideas, then we all vote on our favorites, assemble teams, and have a little over a day to go from pitch to demo. 
 
+![PostHog's 2024 offsite in Mykonos](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon2_3d7257a965.jpg)
+
 In some cases, our hackathon projects are ready to ship right away. Some have even become core parts of our product – [session replay](/session-replay) started as a hackathon project, as did our [data warehouse beta](/docs/data-warehouse).
 
 Here’s what we built in Mykonos.
