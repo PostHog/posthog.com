@@ -41,11 +41,11 @@ Once you know the timeframe you want to measure, get hold of the following data:
 
 * The number of customers at the start of your timeframe (let’s call this S)
 * The number of customers at the end of your timeframe (E)
-* The number of new customers added during the timeframe (A)
+* The number of new customers added during the timeframe (N)
 
-You can then calculate your customer retention rate by doing a simple sum: `((E − A) ÷ S) x 100`.
+You can then calculate your customer retention rate by doing a simple sum: `((E − N) ÷ S) x 100`.
 
-So, if you start a month with 1,000 customers (S), end it with 1,300 (E), and add 500 new customers (A), then you'd end up with `((1,300 − 500) /1,000) x 100`, which equals 80% retention. Your churn rate is just the inverse, 20%.
+So, if you start a month with 1,000 customers (S), end it with 1,300 (E), and add 500 new customers (N), then you'd end up with `((1,300 − 500) /1,000) x 100`, which equals 80% retention. Your churn rate is just the inverse, 20%.
 
 If this sounds a bit too manual, product analytics tool like [PostHog](/product-analytics) to analyze retention using cohort retention tables.
 
@@ -296,8 +296,6 @@ This one is hard to benchmark as the variation between features and companies is
 
 ## Further reading 📖
 
-Engineers understand the products they’re building better than anyone – and speaking to users about problems they’re encountering and then fixing them can save time and really spark joy. Here’s our guide for [how to get the most out of those conversations](/newsletter/talk-to-users).
+- [An engineer’s guide to talking to users](/newsletter/talk-to-users): The best way to fix poor retention is to build a better product, and to do that you need to talk to your users. This guide is for engineers, but the lessons are universal.
 
-Not all engineers are comfortable using analytics day-to-day. It shouldn’t be that way. These are the most common complaints we hear [and how to deal with them](/newsletter/misconceptions-about-analytics).
-
-Our guide to A/B testing for software engineers has loads of great tips [for successfully testing new product features](/product-engineers/ab-testing-guide-for-engineers).
+- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers): Want to test new features to improve retention? Start here.
