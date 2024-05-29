@@ -59,7 +59,7 @@ Things moved fast the week after Mykonos: we split up the existing product analy
 
 ### RealTimeHog 3000
 
-<BuiltBy people={["James Greenhill", "Zach Waterfield", "Michael Matloka"]} />
+<BuiltBy people={["James Greenhill", "Zach Waterfield", "Michael Matloka", "Brett Hoerner"]} />
 
 Seeing people using your product live boosts dopamine levels. Probably. PostHog does that – but right now we keep you waiting a bit. Before a PostHog event is available for querying, it goes through our ingestion pipeline, where users are identified and the events themselves enriched. The process takes seconds, rarely a minute – a delay imperceptible in analytical queries, but a dopamine decrease in the live view.
 
