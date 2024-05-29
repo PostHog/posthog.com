@@ -23,7 +23,7 @@ date: 2024-05-08
 
 [Wowzer](https://wowzer.ai/) is an AI image generation app. Their goal is to make it as easy as possible for any person to create beautiful images. In the last three months, they've grown rapidly from 0 to 100,000 active users and generated more than 3 million images.
 
-This success is largely because Wowzer's product and growth teams are incredibly data-driven. "We're only able to achieve this because PostHog lets us go beyond basic metrics to deeply understand our users' behavior" says Amin Tavana, SVP of growth at Wowzer.
+This success is largely because Wowzer's product and growth teams are incredibly data-driven. "We're only able to achieve this because PostHog lets us go beyond basic metrics to deeply understand our users' behavior" says Amin Tavana, SVP of Growth at Wowzer.
 
 ## Rapid experimentation and instant insights
 
