@@ -17,19 +17,21 @@ tags:
 
 Each year, the PostHog team gets together for our all-company offsite. This year, we headed to Mykonos – not to rave, but to code. And to enjoy a cocktail or two in the sun, of course.
 
-We’re a fully-remote company, with 47 misfits spread across ten countries. Our offsites are a really important part of our culture. They’re a great chance to get to know colleagues better and the connections formed at this time bring extra energy and creativity to our asynchronous work throughout the rest of the year.
+As a fully-remote company with 47 misfits spread across ten countries, our offsites are a vital part of our culture. They’re a great way to get to know colleagues better, and the connections formed during offsites bring extra energy and creativity to our work throughout the rest of the year.
 
-Our all-company offsites are a mix of socializing, group activities, strategic sessions, Post-its, workshops, more Post-its, and, the star of the show, the annual PostHog hackathon. Everyone in the company has to pitch a couple of ideas, then we all vote on our favorites, assemble teams, and have a little over a day to go from pitch to demo. And, in some cases, our hackathon projects are ready to ship right away.
+Our all-company offsites are a mix of socializing, group activities, strategic sessions, Post-its, workshops, more Post-its, and, the star of the show, the annual PostHog hackathon. Everyone in the company has to pitch a couple of ideas, then we all vote on our favorites, assemble teams, and have a little over a day to go from pitch to demo. 
+
+In some cases, our hackathon projects are ready to ship right away. Some have even become core parts of our product – [session replay](/session-replay) started as a hackathon project, as did our [data warehouse beta](/docs/data-warehouse).
 
 Here’s what we built in Mykonos.
 
-### The presidential briefing
+## The presidential briefing
 
 <BuiltBy people={['Charles Cook', 'Eric Duong', 'James Hawkins', 'James Temperton']} />
 
 As PostHog grows as a company, keeping track of everything that’s happening will get harder. Yes, we [write everything down](/newsletter/remote-working) but that creates a lot of reading, and a lot of noise. The solution? An AI-generated briefing, tailored to each individual team member and their interests.
 
-The Presidential Briefing was built by scraping PRs and Issues from GitHub, along with Slack messages, and then training an LLM to understand what’s interesting and important. The bot then produces a pithy briefing that removes the noise and gives people just the information they need. 
+The presidential briefing was built by scraping PRs and issues from GitHub, along with Slack messages, and then training an LLM to understand what’s interesting and important. The bot then produces a pithy briefing that removes the noise and gives people just the information they need. 
 
 In future, we’d want to add more data sources and build it using Llama to avoid the need to send any data to external companies.
 
@@ -39,7 +41,7 @@ In future, we’d want to add more data sources and build it using Llama to avoi
 
 MykoLogs is a logging product that integrates with the existing PostHog SDKs, bringing backend logs straight into a shiny new product on PostHog. The best part? You can link backend logs to session recordings through the user’s session ID – letting you debug what was happening on the backend during your user's API requests. MykoLogs plays nicely with all other PostHog products, meaning logs and session replay are now BFFs. Debugging has never been this breezy!
 
-### Hog
+### Our own programming language
 
 <BuiltBy people={["Marius Andra", "Anirudh Pillai"]} />
 
@@ -53,7 +55,12 @@ Things moved fast the week after Mykonos: we split up the existing product analy
 
 Seeing people using your product live boosts dopamine levels. Probably. PostHog does that – but right now we keep you waiting a bit. Before a PostHog event is available for querying, it goes through our ingestion pipeline, where users are identified and the events themselves enriched. The process takes seconds, rarely a minute – a delay imperceptible in analytical queries, but a dopamine decrease in the live view.
 
-Introducing RealTimeHog 3000, a livestream service powering our first truly real-time view of user activity. The process is simple: 1. Consume the raw events from the same Kafka topic as our ingestion service. 2. Stream them to you ASAP using server-sent events. The lack of person data is a fair trade-off, because it doesn’t get more live than this. User activity appears within milliseconds of happening on the other side of the world.
+Introducing RealTimeHog 3000, a livestream service powering our first truly real-time view of user activity. The process is simple: 
+
+1. Consume the raw events from the same Kafka topic as our ingestion service. 
+2. Stream them to you ASAP using server-sent events. 
+
+The lack of person data is a fair trade-off, because it doesn’t get more live than this. User activity appears within milliseconds of happening on the other side of the world.
 
 Speaking of data being processed live, perhaps at some point you’ve wondered if PostHog actually scales, or just talks the talk. To dispel any doubts, we developed one extra feature: an anonymized stream of all events being captured globally, with only the geolocation included. Hundreds of thousands of events per minute, and they look great on a 3D globe on PostHog’s website, where each event is an arc from the user’s location to that of the relevant data center. Global scale, visualized for your pleasure.
 
@@ -61,15 +68,17 @@ Speaking of data being processed live, perhaps at some point you’ve wondered i
 
 <BuiltBy people={["Dylan Martin", "Tiina Turban", "Marcus Hof", "Neil Kakkar"]} />
 
-Our support flow currently uses Zendesk and that goes through email. This causes three problems: emails sometimes bounce, there are long delays in checking emails, and it’s really clunky to add other team members via Cc. Simply put, it’s not the most optimal flow. Imagine if instead users could instead view and respond to their open support tickets without ever having to leave PostHog – well, that's exactly what we built.
+Our support flow currently uses Zendesk and that goes through email. This causes three problems: emails sometimes bounce, there are long delays in checking emails, and it’s really clunky to add other team members via Cc. Simply put, it’s not the most optimal flow. 
+
+Imagine if instead users could view and respond to their open support tickets without ever having to leave PostHog – well, that's exactly what we built.
 
 But that's not all, if you're using Zendesk then you could, in the future, add this view to your customer-facing website with just a few clicks.
 
-### The pyramid scheme
+### The ~pyramid~ referral scheme
 
 <BuiltBy people={["Ben White", "Raquel Smith", "Joe Martin"]} />
 
-Everyone loves a pyramid scheme, right?! Wait, no, we mean a _referral program. _Ben, Raquel, and Joe worked together to build a referral product right into PostHog. This means we can offer sweet merch, platform credits, good vibes, and other things to loyal PostHog users who lure in their friends and family. 
+Everyone loves a pyramid scheme, right?! Wait, no, we mean a _referral program._ Ben, Raquel, and Joe worked together to build a referral product right into PostHog. This means we can offer sweet merch, platform credits, good vibes, and other things to loyal PostHog users who lure in their friends and family. 
 
 What’s more, as the referral program product is built right into PostHog, you can build your own for your customers. The system is hooked up to Zapier to automate the process for redeeming codes making the whole thing a doddle. It’s not shipped yet, but we’re close.
 
@@ -93,9 +102,9 @@ Then we took on our data processing agreement, or DPA, to create a generator tha
 
 <BuiltBy people={["Frank Hamand"]} />
 
-Everyone loves ad-blockers. But, for a lot of our customers, they stop data from reaching PostHog. You can already deploy a reverse proxy to PostHog Cloud to get around this, but it’s a somewhat convoluted process that requires you to jump through 16 hoops and login to AWS. [Our docs on this are great](/docs/advanced/proxy), but the process is a bit intimidating and far from straightforward.
+Everyone loves ad-blockers. But, for a lot of our customers, they stop data from reaching PostHog. You can already deploy a reverse proxy to PostHog Cloud to get around this, but it’s a somewhat convoluted process that requires you to jump through 16 hoops and login to AWS. [Our docs on this are great](/docs/advanced/proxy), but Frank decided to build a better solution.
 
-So we’ve gone ahead and built the reverse proxy functionality right into PostHog. The option is tucked away in the PostHog settings. Simply add in any domain you control and the system will spit out a CNAME that you then need to set in your DNS provider. Wait a few seconds for the update to happen and voila, the reverse proxy is live.
+During the hackathon, he built the reverse proxy functionality right into PostHog. The option is tucked away in the PostHog settings. Simply add in any domain you control and the system will spit out a CNAME that you then need to set in your DNS provider. Wait a few seconds for the update to happen and voila, the reverse proxy is live.
 
 ### HERMES
 
@@ -115,7 +124,7 @@ As part of the project, we also revamped our system for categorizing and trackin
 
 <BuiltBy people={["Sandy Spicer", "Tim Glaser"]} />
 
-PostHog crunches a lot of data – and sometimes queries can take a while to load. To help users better understand the hard work we’re doing when they make a query, we built a loading bar that shows statistics on the data we’re crunching, and the CPU we’re throwing at each query. The loading bar is fake right now (sorry!) but the data we show is very much real.
+PostHog crunches a lot of data – and sometimes queries can take a while to load. To help users better understand the hard work we’re doing when they make a query, we built a loading bar that shows statistics on the data we’re crunching, and the CPU we’re throwing at each query. The loading bar is fake right now (sorry!), but the data we show is very much real.
 
 
 ### VIP customer lookup
