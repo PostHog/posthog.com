@@ -105,6 +105,8 @@ Want to know how to improve your website but don’t know where to start? You ne
 
 <BuiltBy people={["Cory Watilo", "Andy Vandervell", "Fraser Hopper"]} />
 
+![Terms, PostHog style](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon_dpyay_53b6334a36.png)
+
 Are you fed up with lawyers making everything so hard to understand? Are you fed up with those nerds in Brussels making us sign DPAs for everything? Not anymore! On PostHog.com, we’ve made all the legal stuff fun – and kept the lawyers happy.
 
 First up, we summarized our [terms](/terms) and [privacy policy](/privacy) in plain English. You can still read the long, legal-y version, but it’s now way easier to understand what it actually means. And we didn’t stop there. 
