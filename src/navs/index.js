@@ -1211,11 +1211,8 @@ export const docsMenu = {
                             url: '/docs/libraries/django',
                         },
                         {
-                            name: 'Docusaurus v2',
+                            name: 'Docusaurus',
                             url: '/docs/libraries/docusaurus',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Flask',
@@ -1990,8 +1987,12 @@ export const docsMenu = {
                     color: 'blue',
                     children: [
                         {
-                            name: 'Overview',
+                            name: 'Getting started',
                             url: '/docs/product-analytics/trends/overview',
+                        },
+                        {
+                            name: 'Charts',
+                            url: '/docs/product-analytics/trends/charts',
                         },
                         {
                             name: 'Filters',
@@ -2008,10 +2009,6 @@ export const docsMenu = {
                         {
                             name: 'Formulas',
                             url: '/docs/product-analytics/trends/formulas',
-                        },
-                        {
-                            name: 'Charts',
-                            url: '/docs/product-analytics/trends/charts',
                         },
                         {
                             name: 'Tips',

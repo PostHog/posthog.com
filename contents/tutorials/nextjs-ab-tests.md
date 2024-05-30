@@ -115,6 +115,8 @@ With PostHog installed and our action set up, we're ready to create our experime
 
 Once done, you're ready to go back to your app to start implementing it.
 
+<NewsletterForm />
+
 ## 5. Bootstrapping feature flags
 
 A/B testing in PostHog relies on feature flag data. To ensure that feature flag data is available as soon as possible, we make a server-side request for it and then pass it to the client-side initialization of PostHog (known as [bootstrapping](/docs/feature-flags/bootstrapping)).
@@ -302,3 +304,5 @@ This shows your updated button text immediately on load. This method still uses 
 - [How, when, and where to run your first A/B test](/product-engineers/how-to-do-ab-testing)
 - [10 things we've learned about A/B testing for startups](/newsletter/what-we've-learned-about-ab-testing)
 - [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+
+<NewsletterForm />

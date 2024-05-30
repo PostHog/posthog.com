@@ -70,6 +70,8 @@ As much as possible, we document things, so people can unblock themselves withou
 
 We avoid private group chats, internal email threads, and docs in other locations. These make information harder to find.
 
+<NewsletterForm />
+
 ## 4. Reduce work in progress
 
 Another way we stay autonomous is by reducing [work in progress](/handbook/engineering/development-process#2-sizing-a-task-and-reducing-wip). Async coordination is hard enough, imagine juggling 10 different projects while doing it. We prevent this with a few principles:
@@ -159,3 +161,5 @@ Inspired to become more async? Here are some actions you can take:
 **[Metrics that cannot even be measured in retrospect](https://longform.asmartbear.com/unmeasurable-metrics) – Jason Cohen:** Some things are just really hard to measure. It’s useful to know what they are so you don’t waste time trying to over analyzing.
 
 _Words by Ian Vanagas, who scored 6/8 on [Dictator or Tech Bro](https://dictatorortechbro.com/)_
+
+<NewsletterForm />

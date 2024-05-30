@@ -97,4 +97,4 @@ So, next time you’re considering what bets to take with your startup, consider
 
 - **[Why we use GitHub as our CMS](https://posthog.com/blog/github-cms?utm_source=posthog-newsletter&utm_medium=email) – Ian Vanagas:** GitHub is the ideal CMS for engineers and developers because they already use it, and it encourages non-technical people to be more technical.”
 
-> If you enjoyed this, [sign up to Product for Engineers on Substack](https://newsletter.posthog.com/).
+<NewsletterForm />

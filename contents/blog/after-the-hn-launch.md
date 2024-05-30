@@ -43,6 +43,4 @@ Every Monday, we do a short post mortem of the week before, and set new weekly g
 
 This week, our focus is to build the open source community. That’s where all our business will eventually come from. To start getting pull requests and issues, we need people to be using the product. For that to happen, we need to focus on getting their feedback and incorporating it into what we build as fast as possible – hence doing as much of this as possible is our current goal.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
-
-<ArrayCTA />
+<NewsletterForm />

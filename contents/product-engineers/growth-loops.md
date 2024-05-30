@@ -65,6 +65,8 @@ YC invests in startups. Their advice and network help startups grow and succeed.
 
 YC differentiates itself from other accelerators by being extremely startup-friendly, focused on San Francisco, and having a strong founder network. Each of these is core to the success of their growth loop.
 
+<NewsletterForm />
+
 ## Types of growth loops
 
 There are many types of growth loops, but five of the most important are:
@@ -179,3 +181,5 @@ Growth loops focus on the product or business. They don't necessarily have relat
 - [How to write great product survey questions (with examples)](/product-engineers/product-survey-questions)
 - [How to start a growth team (as an engineer)](/product-engineers/how-to-start-a-growth-team)
 - [The most useful product health metrics](/product-engineers/product-health-metrics)
+
+<NewsletterForm />

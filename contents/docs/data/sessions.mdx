@@ -12,50 +12,80 @@ export const uniqueSessionLight = "https://res.cloudinary.com/dmukukwp6/image/up
 export const uniqueSessionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/sessions/unique-sessions-dark-mode.png"
 export const sessionFormulaLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/sessions/session-formula-light-mode.png"
 export const sessionFormulaDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/sessions/session-formula-dark-mode.png"
-export const durationFilterLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/sessions/duration-filter-light-mode.png"
-export const durationFilterDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/sessions/duration-filter-dark-mode.png"
 export const medianDurationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/sessions/median-duration-light-mode.png"
 export const medianDurationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/sessions/median-duration-dark-mode.png"
-export const durationBreakdownLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/sessions/duration-breakdown-light-mode.png"
-export const durationBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/sessions/duration-breakdown-dark-mode.png"
 
-## What is a session?
+A session is a set of events that try to capture a single use of your product or visit to your website. They are used in multiple areas of PostHog:
 
-A session is a set of events that have been grouped together to try to capture a single "use" of your product.
+- Session replays
+- Web analytics
+- Session aggregations
+- Session properties
 
-Session analysis helps you to understand product usage by uncovering how long users spend on your product, what they do during individual sessions, and how often they return.
-
-This helps you to understand which of your features drive the most engagement.
+Sessions enable you to analyze how exactly users are using your product, their entry and exit points, how long they spend on your site, how active they are, bounce rate, and more.
 
 ## How does PostHog define a session?
 
-We group incoming events from our [JavaScript Web library](/docs/libraries/js) and all mobile SDKs into a single session until there's **no activity for more than 30 minutes**. Subsequent events are grouped into a new session.
+Our [JavaScript Web library](/docs/libraries/js) and mobile SDKs (Android, iOS, React Native, and Flutter) add a `$session_id` property to each event. Events captured from the same user, browser, and device get the same `$session_id` until there's **no activity for more than 30 minutes** (up to a maximum of 24 hours). Subsequent events are grouped into a new session and a new session triggers a new session replay.
 
-### Common questions
+A session can span multiple tabs and windows, but only on the same browser and device. For example, if a user goes from one Chrome tab to another, it counts as a single session. If they go from Chrome to Firefox, a new session is created. You can also create a new session by calling `posthog.reset()` (which also starts a new session replay).
 
-- **Can a session span different devices?** No, sessions are tied to a single device and instance of a PostHog client. This means if a user is using two different browsers (e.g. Chrome and Firefox) they will be treated as two separate sessions.
+Activity is defined as any event sent from the client including autocapture events and replay activity like mouse movement. The inactivity period can be configured using the `session_idle_timeout_seconds` [configuration option](/docs/libraries/js#config).
 
-- **Can a session span browser tabs and windows?:** Yes, as a user moves between different tabs and windows, their events will be grouped into a single session. However, if they open a completely new browser (e.g. move from Chrome to Firefox) then a new session will be created.
+> **Note:** If you are [migrating data](/docs/migrate) or [using a CDP](/docs/advanced/cdp), you may need to manually set the `$session_id` property if you want to query sessions or connect them to session replays. 
+> If you are using the JavaScript Web SDK alongside your CDP, you can get this value by calling `posthog.get_session_id()`.
 
-- **Which clients support sessions?:** `posthog-js` and all mobile SDKs (Android, iOS, React Native and Flutter) support session analytics.
+## Session properties
 
-- **What defines user activity for a session?:** User activity is defined as any event sent from the client (including Autocapture events). Also, if session replays are enabled, then user activity from the recording (like mouse movement) will extend the session.
+Session properties are data about the session that is autocaptured by PostHog and separate from event or person data. They can be queried and used like other properties in aggregations, filters, breakdowns, and more. Session properties include:
 
-- **Is there a limit on session length?:** Yes, the longest allowed session is 24 hours. If a session is longer than that, it will be split.
+| Session property       | Description                                                                 |
+|------------------------|-----------------------------------------------------------------------------|
+| `$session_id`          | Unique identifier for a session, persists across events in the same session |
+| `$start_timestamp`     | Timestamp when the session started                                          |
+| `$end_timestamp`       | Timestamp when the session ended                                            |
+| `$entry_current_url`   | URL of the page where the session started                                   |
+| `$entry_pathname`      | Pathname of the page where the session started                              |
+| `$exit_current_url`    | URL of the page where the session ended                                     |
+| `$exit_pathname`       | Pathname of the page where the session ended                                |
+| `$entry_utm_source`    | UTM source of the session start page                                        |
+| `$entry_utm_campaign`  | UTM campaign of the session start page                                      |
+| `$entry_utm_medium`    | UTM medium of the session start page                                        |
+| `$entry_utm_term`      | UTM term of the session start page                                          |
+| `$entry_utm_content`   | UTM content of the session start page                                       |
+| `$entry_referring_domain` | Referring domain of the session start page                               |
+| `$entry_gclid`         | Google Click ID when the session started                                    |
+| `$entry_gad_source`    | Google Ads source when the session started                                  |
+| `$pageview_count`      | Total number of pageviews during the session                                |
+| `$autocapture_count`   | Total number of autocapture events during the session                       |
+| `$channel_type`        | [Type of channel](/docs/data/channel-type) through which the session was initiated |
+| `$session_duration`    | Total duration of the session                                               |
+| `$is_bounce`           | Indicates if the session was a bounce (single pageview session)             |
 
-- **Is a session the same as a recording?:** Both sessions and recordings are tracked using the same ID. So, if a new session is created, then a new recording is created too.
+You can query all of these from the `sessions` table using [SQL insights](/docs/insights/sql).
 
-## Session analytics
- 
-You can analyze session counts and session duration by creating a trends insight in product analytics.
+## Using session data
 
-### Session counts
+The easiest way to analyze a session is to view a [session replay](/docs/session-replay). This enables you to playback and watch exactly what happened in that session. This includes events, navigation, mouse movement, console logs, and more.
+
+[Web analytics](/docs/web-analytics) also gives you an easily accessible overview. The top section contains sessions, session duration, and bounce rate, while further down provides more details on entry paths, exit paths, top channels, device types, and more.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716841744/posthog.com/contents/images/docs/user-guides/sessions/web-light.png" 
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716841744/posthog.com/contents/images/docs/user-guides/sessions/web-dark.png"
+    alt="Session data in web analytics" 
+    classes="rounded"
+/>
+
+For more detailed analysis, you can use insights to filter, break down, and aggregate session data.
+
+### Session aggregation
 
 You can aggregate trends by `Unique sessions` just as would `Unique users` or `Weekly active users`.
 
 This provides the count of unique sessions where the specified event occurred. This can be helpful to remove the noise if you have specific events that are sent a bunch of times within a single session.
 
-To do this analysis, simply select Unique sessions from the aggregation dropdown.
+To do this, select **Unique sessions** from the aggregation dropdown.
 
 <ProductScreenshot
     imageLight = {uniqueSessionLight} 
@@ -64,15 +94,7 @@ To do this analysis, simply select Unique sessions from the aggregation dropdown
     classes="rounded"
 />
 
-### Using session counts in formulas
-
-Combining session counts with other trends is a very powerful way to understand things like:
-
--   The average number of sessions per user where a specific action occurs
--   The average number of specific events per session
-
-To do this analysis, simply make the series in your trends (e.g. unique sessions where an event occurs), and then use that series in a formula.
-
+This can then be used in a formula to understand things like the average number of sessions per user or the average number of events per session.
 
 <ProductScreenshot
     imageLight = {sessionFormulaLight} 
@@ -81,22 +103,20 @@ To do this analysis, simply make the series in your trends (e.g. unique sessions
     classes="rounded"
 />
 
-### Filtering by session duration
+### Filtering by session properties
 
-Sometimes it can be helpful to filter out sessions that are either too short or too long. This enables you to dig into users who only use your product for a few seconds, or filter those users out, so you can better understand those who stick around longer.
-
-You can use the 'Session duration' property in the property filters to accomplish this.
+You can use any of the session properties to filter your data. For example, to remove sessions that are shorter than 10 seconds, you can filter for sessions where duration is greater than 10 seconds.
 
 <ProductScreenshot
-    imageLight = {durationFilterLight} 
-    imageDark = {durationFilterDark}
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716848579/posthog.com/contents/images/docs/user-guides/sessions/duration-light.png" 
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716848579/posthog.com/contents/images/docs/user-guides/sessions/duration-dark.png"
     alt="Session duration filter" 
     classes="rounded"
 />
 
-### Plotting session duration
+### Plotting session properties
 
-You can plot session durations over time to understand if your users are becoming more or less engaged with your product. To accomplish this, select one of the property aggregators (e.g median, 90th percentile etc.) and then select 'Session duration' as the property to plot.
+You can plot session properties over time like you would with an event count. To do this, select one of the property aggregators (e.g. median, 90th percentile, etc.) and then select the session property to plot. For example, to plot the median session duration, select **Property value median** and then select **Session duration** as the property.
 
 <ProductScreenshot
     imageLight = {medianDurationLight} 
@@ -105,15 +125,15 @@ You can plot session durations over time to understand if your users are becomin
     classes="rounded"
 />
 
-### Distribution of session duration
+### Breaking down by session properties
 
-Breaking down data by the distribution of session durations can be useful when trying to understand why certain users behave a specific way. For example, you might find that users who complete a specific event are always in your product for over 10 minutes.
+You can view the distribution of different session property values by breaking down by that property.
 
-To look at the distribution of session durations, click 'Add breakdown' and then select the 'Session duration' property.
+This is useful for understanding entry URLs or UTMs. For example, to break down sessions by entry URL, click **Property value** and then select **Entry URL**.
 
 <ProductScreenshot
-    imageLight = {durationBreakdownLight} 
-    imageDark = {durationBreakdownDark}
-    alt="Session duration breakdown" 
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716849942/posthog.com/contents/images/docs/user-guides/sessions/entry-light.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1716849942/posthog.com/contents/images/docs/user-guides/sessions/entry-dark.png"
+    alt="Entry URL breakdown" 
     classes="rounded"
 />

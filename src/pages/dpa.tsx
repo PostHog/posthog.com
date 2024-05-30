@@ -847,22 +847,18 @@ function DpaGenerator() {
                             Swiftie.
                         </div>
 
-                        <div className="mx-auto max-w-3xl">
+                        <div className="@container mx-auto max-w-3xl">
                             <h2 className="pt-8 pb-0">Data Dance</h2>
-                            {/* 
-                            <div className="float-right flex flex-col -mr-2 ml-2 md:ml-0 mb-2 mt:mt-0 w-48 md:w-64">
+
+                            <div className="@lg:float-right flex flex-col -mr-2 ml-2 md:ml-0 mb-2 mt:mt-0 w-48 md:w-64">
                                 <StaticImage
-                                    src="../images/dpa/slim.png"
-                                    alt="It's the Real Slim Shady"
+                                    src="../images/dpa/t-swift.png"
+                                    alt="Taylor Swift hog"
                                     placeholder="blurred"
                                     className="mb-2"
                                 />
-                                <div className="relative ml-4 pl-3 md:pl-4 py-1 before:absolute before:bg-light before:top-0 before:bottom-0 before:w-1 before:left-0 before:rounded mb-0.5">
-                                    <p className="!pb-2 !mb-0 !text-sm">It's the Real Slim Shady*</p>
-                                    <p className="pb-0 !mb-0 !text-sm">*If the Real Slim Shady were a hedgehog</p>
-                                </div>
                             </div>
-                             */}
+
                             <p>
                                 We started with a promise, data in our hands,
                                 <br />

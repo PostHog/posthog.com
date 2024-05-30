@@ -55,6 +55,8 @@ At **Doist**, four days of each week are [dedicated to deep work](https://async.
 
 When you absolutely have to have meetings, make the most of them. **GitLab** has a set of principles for how notes should be taken in [just about any meeting](https://handbook.gitlab.com/handbook/communication/#smart-note-taking-in-meetings). This starts with the agenda, which is shared in advance. During meetings, everyone is encouraged to help out with note-taking with a focus on capturing key points rather than every single word that’s said.
 
+<NewsletterForm />
+
 ### 3. They value transparency and trust
 
 The biggest (and stupidest) argument against remote work? It makes people less productive. This is demonstrably untrue. We’re an all-remote company, and we ship incredibly fast. Don’t believe us? Believe the [Federal Reserve Bank of San Francisco](https://www.frbsf.org/research-and-insights/publications/economic-letter/2024/01/does-working-from-home-boost-productivity-growth/), whose research shows there’s no meaningful productivity loss from remote work.
@@ -98,3 +100,5 @@ Our goal with all of this is to make our in-person time as intentional as possib
 **[The manager’s schedule is holding remote work back](https://marker.medium.com/the-managers-schedule-is-holding-remote-work-back-f9c1302ac6f3) – Luke Thomas:** Many makers (hello, product engineers!) have been working remotely successfully for years, but managers can often struggle. Luke shares how to fix that problem.
 
 **[Why remote work is so hard – and how it can be fixed](https://www.newyorker.com/culture/annals-of-inquiry/can-remote-work-be-fixed) – Cal Newport:** This is a great, detailed read on the long-standing problems that have scuppered remote work. It’s written by Cal Newport, who also coined the term “deep work.”
+
+<NewsletterForm />

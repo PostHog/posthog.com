@@ -77,7 +77,9 @@ Druid is built for massive applications with unique data streaming needs. For in
 
 ClickHouse would stumble with this – ClickHouse doesn’t guarantee newly ingested data is included in the next query result. Druid, meanwhile, does – efficiently, too, by storing the newly streamed data temporarily in the data nodes whilst simultaneously packing and shipping it off to deep storage. 
 
-Remember that analogy between the mansion and master-plan community? For Druid, the query nodes are the roads, the data nodes are the houses, and storage is the sprawling, shared lake. 
+Remember that analogy between the mansion and master-plan community? For Druid, the query nodes are the roads, the data nodes are the houses, and storage is the sprawling, shared lake.
+
+<NewsletterForm />
 
 #### Cattle vs Pets
 
@@ -189,3 +191,5 @@ While both offer enormous advantages over traditional databases for columnar dat
 - ClickHouse's CTO, Alexey Milovidov, [2022 talk "Building for Fast"](https://www.youtube.com/watch?v=CAS2otEoerM).
 
 - [How we turned ClickHouse into our event mansion](/blog/how-we-turned-clickhouse-into-our-eventmansion) by our own James Greenhill explores in more depth why we chose ClickHouse for PostHog. We also maintain an internal [ClickHouse manual](/handbook/engineering/clickhouse).
+
+<NewsletterForm />

@@ -36,7 +36,7 @@ PostHog’s co-founders, Tim and James, wrote [our public handbook](/handbook/) 
 
 ## 2. Your early users could be your best hires
 
-In the early days, PostHog’s CEO, [James Hawkins](/community/profiles/71), would check out people who starred the repo and sometimes get in touch to gather feedback. One such call resulted in our third hire, [James Greenhill](/community/profiles/90).
+In the early days, PostHog’s CEO, [James Hawkins](/james), would check out people who starred the repo and sometimes get in touch to gather feedback. One such call resulted in our third hire, [James Greenhill](/jams).
 
 On the call, James G explained Uber (where he worked) had built a bunch of internal tools like PostHog for data control reasons. He found the project interesting and wanted to work on it. He ended up doing a few days of paid work and the rest is history.
 
@@ -85,6 +85,8 @@ As Charles Cook, our head of ops and a veteran of multiple startups, [explains](
 >“If you are struggling to hire for a role, first ask yourself 'am I spending 20% of my time recruiting?' If the answer is yes, then go complain to your recruiter.”
 
 **Why is this important?** Managers need to properly own hiring. Those that don’t end up hiring average people and blaming their recruiters.
+
+<NewsletterForm />
 
 ## 6. Good people are always in demand
 
@@ -156,3 +158,5 @@ In contrast, someone who’s worked exclusively at FAANG-type companies c.2012-2
 **[What we learned about hiring from our first five employees](https://posthog.com/blog/posthog-first-five) – Andy Vandervell:** “While it's tempting to search for "that hire" who will magically transform your product and company, this is a fool's errand. Successful companies are built on collective strength, which is why talent compounds is one of our core values.”
 
 _Words by Andy Vandervell, who thinks watermelon is pointless._
+
+<NewsletterForm />

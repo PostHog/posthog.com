@@ -78,7 +78,9 @@ PostHog offers a BAA on its Teams plan, which starts at $450 and includes [gener
 
 Kameleoon is an A/B testing and personalization platform. It supports A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), and feature flags for managing the rollout of new features and running tests. In addition to testing, it has a real-time personalization engine that's particularly useful for e-commerce. It doesn't have any deeper analytics features, so you'll need to run it alongside another [HIPAA-compliant analytics tool](/blog/best-hipaa-compliant-analytics-tools) to gather deeper user behavior data.
 
-Kameleoon doesn't publish pricing publicly, but conversion optimization consultants BrillMark [reports](https://www.brillmark.com/kameleoon-ab-testing-platform/#:~:text=The%20yearly%20licensing%20pricing%20for,pay%20for%20the%20annual%20license) pricing starts at $35,000 per year and scales based on traffic volume, making it a premium option.  
+Kameleoon doesn't publish pricing publicly, but conversion optimization consultants BrillMark [reports](https://www.brillmark.com/kameleoon-ab-testing-platform/#:~:text=The%20yearly%20licensing%20pricing%20for,pay%20for%20the%20annual%20license) pricing starts at $35,000 per year and scales based on traffic volume, making it a premium option.
+
+<NewsletterForm />
 
 ### 3. VWO
 

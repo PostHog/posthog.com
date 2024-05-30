@@ -120,6 +120,8 @@ Work your way from top to bottom:
 
 * **The problem you want to solve isn't there.** Pivot. Find a new problem to solve.
 
+<NewsletterForm />
+
 ### Level 3 - Validate your MVP by recruiting real users
 
 ![pmf-guide](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-level-3.png)
@@ -244,6 +246,8 @@ Now you're likely at product market fit - it should just feel easy to grow. If n
 * **You can't get all five customers to look like each other** Well done on getting something sold. However, you can't sell a different product to every customer and call that product market fit! Can you repeat one of the sales you made four more times? Then you've completed this level. If not, go back a level.
 
 * **You keep getting stuck on this step.** If you repeatedly get a little traction but cannot convert that to revenue, you perhaps don't have the skills to solve the problem you're tackling properly, even if the problem exists. If you _want_ to keep trying again, I suggest you do, but if this has happened a bunch of times, you'll probably have an easier time if you just choose an easier problem.
+
+<NewsletterForm />
 
 ## The things you need to complete the game
 
@@ -374,4 +378,4 @@ Because the ultimate failure mode is not grasping the big picture. Those hour-lo
 
 You can't complete the product-market fit game without hard work and persistence. But sometimes you need to pause, look at the map, find your bearings, and carefully choose your next objective. So, every week – make time to reflect.
 
-> Thanks for reading. If you found this guide useful, consider [subscribing to our Substack](https://newsletter.posthog.com/) – Product for Engineers. It's all about helping engineers and founders flex their product muscles. We send it every few weeks.
+<NewsletterForm />
