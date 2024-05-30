@@ -537,6 +537,7 @@ The `autocapture` config takes an object providing full control of autocapture's
 | `element_allowlist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined`                                                                                                          | An array of DOM elements, like 'a', 'button', 'form', 'input', 'select', 'textarea', or 'label', to allow autocapture on. An empty array means no elements are enabled for capture, `undefined` means all elements are enabled.                                                                                            |
 | `css_selector_allowlist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined`                                                                                                          | An array of CSS selectors to enable autocapture on. An empty array means no CSS selectors are allowed for capture, `undefined` means all CSS selectors are.                                                                                            |
 | `element_attribute_ignorelist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined` |  An array of element attributes that autocapture will not capture. Both an empty array and `undefined` mean any of the attributes from the element are captured. |
+| `capture_copied_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | When set to true, autocapture will capture the text of any element that is cut or copied. |
 
 ## Debugging
 
