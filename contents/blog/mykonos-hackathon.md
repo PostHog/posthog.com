@@ -1,6 +1,6 @@
 ---
 date: 2024-05-28
-title: What we built at our Mykonos hackathon
+title: What we built at our windswept Mykonos hackathon
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -47,13 +47,13 @@ In future, we’d want to add more data sources and build it using Llama to avoi
 
 <BuiltBy people={["Paul D'Ambra", "Tom Owers", "Ted Kaemming"]} />
 
-MykoLogs is a logging product that integrates with the existing PostHog SDKs, bringing backend logs straight into a shiny new product on PostHog. The best part? You can link backend logs to session recordings through the user’s session ID – letting you debug what was happening on the backend during your user's API requests. MykoLogs plays nicely with all other PostHog products, meaning logs and session replay are now BFFs. Debugging has never been this breezy!
+MykoLogs is a logging product that integrates with the existing PostHog SDKs, bringing backend logs straight into a shiny new product on PostHog. It's internal-only for now, but could one day be made public. The best part? You can link backend logs to session recordings through the user’s session ID – letting you debug what was happening on the backend during your user's API requests. MykoLogs plays nicely with all other PostHog products, meaning logs and session replay are now BFFs. Debugging has never been this breezy!
 
 ### Our own programming language
 
 <BuiltBy people={["Marius Andra", "Anirudh Pillai"]} />
 
-What’s cooler than having your own query language? Having your own general purpose programming language, of course. That’s literally what we built: PostHog’s first ever programming language, Hog. 
+What’s cooler than having your own query language? Having your own general purpose programming language, of course. That’s literally what we built: PostHog’s first ever programming language, Hog. (Earlier versions of this name included Hög and Höge, but turns out we're anti-umlaut.)
 
 Things moved fast the week after Mykonos: we split up the existing product analytics team and built a new team to productize Hog. We plan to use Hog to build our CDP and messaging products, and might even pivot the entire company around it. It was just another PostHog hackathon, no big deal. Stay tuned for the aftermath.
 
@@ -72,7 +72,6 @@ The lack of person data is a fair trade-off, because it doesn’t get more live 
 
 Speaking of data being processed live, perhaps at some point you’ve wondered if PostHog actually scales, or just talks the talk. To dispel any doubts, we developed one extra feature: an anonymized stream of all events being captured globally, with only the geolocation included. Hundreds of thousands of events per minute, and they look great on a 3D globe on PostHog’s website, where each event is an arc from the user’s location to that of the relevant data center. Global scale, visualized for your pleasure.
 
-![PostHog's 2024 hackathon in Mykonos](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon3_0be5647083.png)
 
 ### SupportHog
 
@@ -82,7 +81,7 @@ Our support flow currently uses Zendesk and that goes through email. This causes
 
 Imagine if instead users could view and respond to their open support tickets without ever having to leave PostHog – well, that's exactly what we built.
 
-But that's not all, if you're using Zendesk then you could, in the future, add this view to your customer-facing website with just a few clicks.
+But that's not all, if you're using Zendesk then you could, in the future, add this view to your customer-facing website with just a few clicks. Like the sound of this project? [Check out our roadmap](https://posthog.com/roadmap) and vote for it.
 
 ### The ~pyramid~ referral scheme
 
@@ -145,13 +144,6 @@ As part of the project, we also revamped our system for categorizing and trackin
 PostHog crunches a lot of data – and sometimes queries can take a while to load. To help users better understand the hard work we’re doing when they make a query, we built a loading bar that shows statistics on the data we’re crunching, and the CPU we’re throwing at each query. The loading bar is fake right now (sorry!), but the data we show is very much real.
 
 
-### VIP customer lookup
-
-<BuiltBy people={["Simon Fisher"]} />
-
-When a customer reports a problem, we want our engineers to get it fixed as soon as possible – but right now our engineers lack context on which customers to prioritize. Right now, they ping our customer success team on Slack for details on accounts. This isn’t good practice in an [async company](/newsletter/how-we-work-async), especially when this information is already written down somewhere.
-
-Enter the VIP Customer Lookup bot. Ping this clever little Slackbot with any customer ID and it’ll return key details of any account, including the plan they are on, how much money they spend, and who on customer success looks after the account.
 
 ### CLI
 
