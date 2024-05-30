@@ -41,7 +41,7 @@ As PostHog grows as a company, keeping track of everything that’s happening wi
 
 The presidential briefing was built by scraping PRs and issues from GitHub, along with Slack messages, and then training an LLM to understand what’s interesting and important. The bot then produces a pithy briefing that removes the noise and gives people just the information they need. 
 
-In future, we’d want to add more data sources and build it using Llama to avoid the need to send any data to external companies.
+While just a proof-of-concept for now, if we were to ship it we’d want to add more data sources and build it using Llama to avoid the need to send any data to external services.
 
 ### MykoLogs
 
