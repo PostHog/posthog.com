@@ -44,7 +44,7 @@ Each experiment is backed by a [feature flag](/docs/feature-flags/manual). In yo
 
 The feature flag will be created for you automatically. Therefore, you must add a feature flag key which does not exist yet.
 
-> **Advanced:** It's possible to create experiments without using PostHog's feature flags (for example, if you're using a different third-party library for feature flags). For more info, read our docs on [implementing experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags) 
+> **Advanced:** It's possible to create experiments without using PostHog's feature flags (for example, if you're using a different third-party library for feature flags). For more info, read our docs on [implementing experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
 ## Experiment variants
 
@@ -54,7 +54,7 @@ Participants are automatically split equally between variants. If you want assig
 
 ## Participant type
 
-By default PostHog runs experiments at a user-level. This means that participants are assigned to a variant based on their user properties. However, if you've created [groups](/docs/product-analytics/group-analytics), you can also run [group-targeted experiments](/blog/running-group-targeted-ab-tests). This will test how a change affects your product at a group-level by providing the same variant to every member of a group.
+By default, PostHog runs experiments at a user-level. This means that participants are assigned to a variant based on their user properties. However, if you've created [groups](/docs/product-analytics/group-analytics), you can also run [group-targeted experiments](/blog/running-group-targeted-ab-tests). This will test how a change affects your product at a group-level by providing the same variant to every member of a group.
 
 ## Experiment goal
 
@@ -62,7 +62,7 @@ Setting your goal metric enables PostHog to calculate the impact of your experim
 
 ## Distribution and release conditions
 
-By default, your experiment will target 100% of participants. If you want to target a more specific set of participants, or change the rollout percentage, you need to do this by changing the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) for the feature flag used by your experiment.
+By default, your experiment will target 100% of participants. If you want to target a more specific set of participants or change the rollout percentage, you need to do this by changing the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) for the feature flag used by your experiment.
 
 You can do this by clicking on the **Manage distribution** or **Manage release conditions** button _after_ saving your experiment as a draft.
 
