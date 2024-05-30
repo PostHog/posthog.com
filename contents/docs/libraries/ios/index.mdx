@@ -31,13 +31,19 @@ PostHog supports the Apple platforms: iOS, macOS, tvOS and watchOS.
 
 <IOSSendEvents />
 
-## Identify
+## Identifying users
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
 <IOSIdentify />
 
-### Setting user properties via an event
+## Alias
+
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
+
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+
+## Setting user properties
 
 To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `userProperties` and `userPropertiesSetOnce`.
 
@@ -65,6 +71,34 @@ PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++"], userProper
 
 `userPropertiesSetOnce` works just like `userProperties`, except that it will **only set the property if the user doesn't already have that property set**.
 
+## Super Properties
+
+Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $screen, or anything else.
+
+They are set using `PostHogSDK.shared.register`, which takes a properties object as a parameter, and they persist across sessions.
+
+For example, take a look at the following call:
+
+```swift
+PostHogSDK.shared.register(["team_id": 22])
+```
+
+The call above ensures that every event sent by the user will include `"team_id": 22`. This way, if you filtered events by property using `team_id = 22`, it would display all events captured on that user after the `PostHogSDK.shared.register` call, since they all include the specified Super Property.
+
+However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `PostHogSDK.shared.identify`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+
+### Removing stored Super Properties
+
+Super Properties are persisted across sessions so you have to explicitly remove them if they are no longer relevant. In order to stop sending a Super Property with events, you can use `PostHogSDK.shared.unregister`, like so:
+
+```swift
+PostHogSDK.shared.unregister("team_id")
+```
+
+This will remove the Super Property and subsequent events will not include it.
+
+If you are doing this as part of a user logging out you can instead simply use `PostHogSDK.shared.reset` which takes care of clearing all stored Super Properties and more.
+
 ## Flush
 
 You can set the number of events in the configuration that should queue before flushing.
@@ -81,7 +115,7 @@ PostHogSDK.shared.capture("logged_out")
 PostHogSDK.shared.flush()
 ```
 
-## Reset
+## Reset after logout
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 

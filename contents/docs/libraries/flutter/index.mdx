@@ -76,11 +76,49 @@ import FlutterSendEvents from '../../integrate/send-events/_snippets/send-events
 
 <FlutterSendEvents />
 
-## Identify
+## Identifying users
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
 <FlutterIdentify />
+
+## Alias
+
+Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
+
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+
+## Super Properties
+
+Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $screen, or anything else.
+
+They are set using `Posthog().register`, which takes a key and value, and they persist across sessions.
+
+For example, take a look at the following call:
+
+```dart
+import 'package:posthog_flutter/posthog_flutter.dart';
+
+await Posthog().register("team_id", 22)
+```
+
+The call above ensures that every event sent by the user will include `"team_id": 22`. This way, if you filtered events by property using `team_id = 22`, it would display all events captured on that user after the `Posthog().register` call, since they all include the specified Super Property.
+
+However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `Posthog().identify`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+
+### Removing stored Super Properties
+
+Super Properties are persisted across sessions so you have to explicitly remove them if they are no longer relevant. In order to stop sending a Super Property with events, you can use `Posthog().unregister`, like so:
+
+```dart
+import 'package:posthog_flutter/posthog_flutter.dart';
+
+await Posthog().unregister("team_id")
+```
+
+This will remove the Super Property and subsequent events will not include it.
+
+If you are doing this as part of a user logging out you can instead simply use `Posthog().reset` which takes care of clearing all stored Super Properties and more.
 
 ## Group analytics
 
