@@ -29,13 +29,11 @@ Here’s what we built in Mykonos.
 
 ![PostHog's 2024 offsite in Mykonos](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon1_e2aa8bd928.jpg)
 
-
 ## The presidential briefing
 
 <BuiltBy people={['Charles Cook', 'Eric Duong', 'James Hawkins', 'James Temperton']} />
 
 ![The presidential briefing](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon_president_73aa5ced1a.png)
-
 
 As PostHog grows as a company, keeping track of everything that’s happening will get harder. Yes, we [write everything down](/newsletter/remote-working) but that creates a lot of reading, and a lot of noise. The solution? An AI-generated briefing, tailored to each individual team member and their interests.
 
@@ -84,14 +82,13 @@ Speaking of data being processed live, perhaps at some point you’ve wondered i
 
 Hundreds of thousands of events per minute, and they look great on a 3D globe on PostHog’s website, where each event is an arc from the user’s location to that of the relevant data center. Global scale, visualized for your pleasure.
 
-
 ### SupportHog
 
 <BuiltBy people={["Dylan Martin", "Tiina Turban", "Marcus Hof", "Neil Kakkar"]} />
 
 Our support flow currently uses Zendesk and that goes through email. This causes three problems: emails sometimes bounce, there are long delays in checking emails, and it’s really clunky to add other team members via Cc. Simply put, it’s not the most optimal flow. 
 
-[SCREENSHOT HERE]
+![SupportHog](https://res.cloudinary.com/dmukukwp6/image/upload/supporthog_9bf5751e2a.gif)
 
 Imagine if instead users could view and respond to their open support tickets without ever having to leave PostHog – well, that's exactly what we built.
 
@@ -103,7 +100,7 @@ But that's not all, if you're using Zendesk then you could, in the future, add t
 
 Everyone loves a pyramid scheme, right?! Wait, no, we mean a _referral program._ Ben, Raquel, and Joe worked together to build a referral product right into PostHog. This means we can offer sweet merch, platform credits, good vibes, and other things to loyal PostHog users who lure in their friends and family. 
 
-[SCREENSHOT]
+![Referral scheme](https://res.cloudinary.com/dmukukwp6/image/upload/referralscheme_d3c3622d48.png)
 
 What’s more, as the referral program product is built right into PostHog, you can build your own for your customers. The system is hooked up to Zapier to automate the process for redeeming codes making the whole thing a doddle. It’s not shipped yet, but we’re close.
 
@@ -111,8 +108,7 @@ What’s more, as the referral program product is built right into PostHog, you 
 
 <BuiltBy people={["Ian Vanagas", "Juraj Majerik", "Lior Neu-ner"]} />
 
-
-![A/B TestHog](https://res.cloudinary.com/dmukukwp6/image/upload/abtesthog_e3f93c1afc.png)
+![A/B TestHog](https://res.cloudinary.com/dmukukwp6/image/upload/abtesthog1_eef0030d9b.png)
 
 Want to know how to improve your website but don’t know where to start? You need A/B TestHog. Enter a website URL, click ‘Analyze’ and an ingenious generative AI system will give you a bunch of recommendations for what A/B tests you might run to take your website to the next level. These are all expertly authored by an AI, and include the goal metrics, secondary metrics, and guardrail metrics and detailed instructions of what to change for your test.
 
@@ -146,7 +142,7 @@ At PostHog, we love speaking to our users. Maybe a bit too much. Right now, our 
 
 This is effectively a database of user interviews, showing who was interviewed, who they work for, what they do, how much they pay for PostHog, the products they talked to us about, and an AI-generated summary of our user interview notes. The database is searchable and you can easily add new interviews in a couple of clicks.
 
-[SCREENSHOT HERE]
+![HERMES](https://res.cloudinary.com/dmukukwp6/image/upload/hermes1_275dc08370.jpg)
 
 The database is linked right into PostHog, making it easy to see associated user and organization profiles. It’s also hooked into Vitaly, our customer success tool, to automatically pull in more customer and business information.
 
@@ -160,10 +156,7 @@ As part of the project, we also revamped our system for categorizing and trackin
 
 ![Data crunching](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon_datacrunch_525d9e362b.png)
 
-
 PostHog crunches a lot of data – and sometimes queries can take a while to load. To help users better understand the hard work we’re doing when they make a query, we built a loading bar that shows statistics on the data we’re crunching, and the CPU we’re throwing at each query. The loading bar is fake right now (sorry!), but the data we show is very much real.
-
-
 
 ### CLI
 
