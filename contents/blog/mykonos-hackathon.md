@@ -47,7 +47,13 @@ While just a proof-of-concept for now, if we were to ship it we’d want to add 
 
 <BuiltBy people={["Paul D'Ambra", "Tom Owers", "Ted Kaemming"]} />
 
-MykoLogs is a logging product that integrates with the existing PostHog SDKs, bringing backend logs straight into a shiny new product on PostHog. It's internal-only for now, but could one day be made public. The best part? You can link backend logs to session recordings through the user’s session ID – letting you debug what was happening on the backend during your user's API requests. MykoLogs plays nicely with all other PostHog products, meaning logs and session replay are now BFFs. Debugging has never been this breezy!
+MykoLogs is a logging product that integrates with the existing PostHog SDKs, bringing backend logs straight into a shiny new product on PostHog. 
+
+[IMAGE HERE OR GIF HERE]
+
+The best part? You can link backend logs to session recordings through the user’s session ID – letting you debug what was happening on the backend during your user's API requests. MykoLogs plays nicely with all other PostHog products, meaning logs and session replay are now BFFs. Debugging has never been this breezy!
+
+It's internal-only for now, but could one day be made public. 
 
 ### Our own programming language
 
