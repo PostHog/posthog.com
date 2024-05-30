@@ -67,16 +67,22 @@ Things moved fast the week after Mykonos: we split up the existing product analy
 
 <BuiltBy people={["James Greenhill", "Zach Waterfield", "Michael Matloka", "Brett Hoerner"]} />
 
-Seeing people using your product live boosts dopamine levels. Probably. PostHog does that – but right now we keep you waiting a bit. Before a PostHog event is available for querying, it goes through our ingestion pipeline, where users are identified and the events themselves enriched. The process takes seconds, rarely a minute – a delay imperceptible in analytical queries, but a dopamine decrease in the live view.
+Seeing people using your product live boosts dopamine levels. Probably. PostHog does that, but right now we keep you waiting a bit. Before a PostHog event is available for querying, it goes through our ingestion pipeline, where users are identified and the events themselves enriched. The process takes seconds, rarely a minute – a delay imperceptible in analytical queries, but a dopamine decrease in the live view.
 
 Introducing RealTimeHog 3000, a [livestream](https://github.com/PostHog/livestream) service powering our first truly real-time view of user activity. The process is simple: 
 
 1. Consume the raw events from the same Kafka topic as our ingestion service. 
 2. Stream them to you ASAP using server-sent events. 
 
+[GIF / VIDEO CLIP HERE]
+
 The lack of person data is a fair trade-off, because it doesn’t get more live than this. User activity appears within milliseconds of happening on the other side of the world.
 
-Speaking of data being processed live, perhaps at some point you’ve wondered if PostHog actually scales, or just talks the talk. To dispel any doubts, we developed one extra feature: an anonymized stream of all events being captured globally, with only the geolocation included. Hundreds of thousands of events per minute, and they look great on a 3D globe on PostHog’s website, where each event is an arc from the user’s location to that of the relevant data center. Global scale, visualized for your pleasure.
+Speaking of data being processed live, perhaps at some point you’ve wondered if PostHog actually scales, or just talks the talk. To dispel any doubts, we developed one extra feature: an anonymized stream of all events being captured globally, with only the geolocation included. 
+
+[IMAGE / CLIP HERE]
+
+Hundreds of thousands of events per minute, and they look great on a 3D globe on PostHog’s website, where each event is an arc from the user’s location to that of the relevant data center. Global scale, visualized for your pleasure.
 
 
 ### SupportHog
@@ -84,6 +90,8 @@ Speaking of data being processed live, perhaps at some point you’ve wondered i
 <BuiltBy people={["Dylan Martin", "Tiina Turban", "Marcus Hof", "Neil Kakkar"]} />
 
 Our support flow currently uses Zendesk and that goes through email. This causes three problems: emails sometimes bounce, there are long delays in checking emails, and it’s really clunky to add other team members via Cc. Simply put, it’s not the most optimal flow. 
+
+[SCREENSHOT HERE]
 
 Imagine if instead users could view and respond to their open support tickets without ever having to leave PostHog – well, that's exactly what we built.
 
@@ -94,6 +102,8 @@ But that's not all, if you're using Zendesk then you could, in the future, add t
 <BuiltBy people={["Ben White", "Raquel Smith", "Joe Martin"]} />
 
 Everyone loves a pyramid scheme, right?! Wait, no, we mean a _referral program._ Ben, Raquel, and Joe worked together to build a referral product right into PostHog. This means we can offer sweet merch, platform credits, good vibes, and other things to loyal PostHog users who lure in their friends and family. 
+
+[SCREENSHOT]
 
 What’s more, as the referral program product is built right into PostHog, you can build your own for your customers. The system is hooked up to Zapier to automate the process for redeeming codes making the whole thing a doddle. It’s not shipped yet, but we’re close.
 
@@ -124,6 +134,8 @@ Then we took on our data processing agreement, or DPA, to create a generator tha
 
 Everyone loves ad-blockers. But, for a lot of our customers, they stop data from reaching PostHog. You can already deploy a reverse proxy to PostHog Cloud to get around this, but it’s a somewhat convoluted process that requires you to jump through 16 hoops and login to AWS. [Our docs on this are great](/docs/advanced/proxy), but Frank decided to build a better solution.
 
+[SCREENSHOT HERE]
+
 During the hackathon, he built the reverse proxy functionality right into PostHog. The option is tucked away in the PostHog settings. Simply add in any domain you control and the system will spit out a CNAME that you then need to set in your DNS provider. Wait a few seconds for the update to happen and voila, the reverse proxy is live.
 
 ### HERMES
@@ -133,6 +145,8 @@ During the hackathon, he built the reverse proxy functionality right into PostHo
 At PostHog, we love speaking to our users. Maybe a bit too much. Right now, our master customer interviews doc is 382 pages long and contains almost 200 user interviews. It’s a great resource, but it’s getting a bit unwieldy. But now we’ve entered a bold new era of feedback management at PostHog thanks to HERMES, or, snappily, Holistic Evaluation Repository for Managing Enhancements and Suggestions.
 
 This is effectively a database of user interviews, showing who was interviewed, who they work for, what they do, how much they pay for PostHog, the products they talked to us about, and an AI-generated summary of our user interview notes. The database is searchable and you can easily add new interviews in a couple of clicks.
+
+[SCREENSHOT HERE]
 
 The database is linked right into PostHog, making it easy to see associated user and organization profiles. It’s also hooked into Vitaly, our customer success tool, to automatically pull in more customer and business information.
 
@@ -173,6 +187,6 @@ This year, Marius, Eric, James G, Lottie, Charles, and Michael all celebrate fou
 
 <BuiltBy people={["Lior Neu-ner", "Annika Schmid", "Mine Kansu"]} />
 
-If a spinning globe of PostHog events doesn’t convince you we can sell to big enterprises, then our top-secret hackathon project absolutely will. If we ever ship it. Lior, Annika, and Mine use some generative AI magic to create some inspirational quotes from our fearless leader, James Hawkins. 
+We have a Slack channel called #do-more-weird for odd, fun ideas, and this hackathon project belongs there.
 
-Soon, when you click on James’ face on our [careers page](https://posthog.com/careers) he’ll deliver some inspirational zingers that he may or may not have never actually said: “Success isn’t just about getting it right, it’s about crushing every misstep. Embrace the grind, celebrate the wins, and conquer the challenges. Challenges are just opportunities in disguise. Turn setbacks into comebacks and keep pushing forward.” Quick, someone get this on LinkedIn.
+Head to the [careers page](https://posthog.com/careers) and click on James Hawkins' face for an inspirational surprise...
