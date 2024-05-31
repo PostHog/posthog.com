@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - james-temperton
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/aruba/beach-hog.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/mykonoshackathon_979cf7bec6.jpeg
 featuredImageType: full
 category: Inside PostHog
 tags:
