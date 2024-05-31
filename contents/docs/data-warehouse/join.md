@@ -28,7 +28,7 @@ Once you've selected a data warehouse table to visualize, you can filter on the 
 
 ### Joining
 
-External data can be joined on existing PostHog schemas and other external data tables. These joins will be saved and interpreted anytime they're accessed on the origin table. For example, if you import your stripe data and get a table `stripe_customers` and define a join between `events` and `stripe_customers`, you will then be able to query `SELECT stripe_customers.id FROM events`. 
+You can join external data on existing PostHog schemas and other external data tables. These joins are saved and interpreted anytime they're accessed on the origin table. For example, if you import your Stripe data and get a table `stripe_customers` and define a join between `events` and `stripe_customers`, you can then query `SELECT stripe_customers.id FROM events`. 
 
 #### Special Joins
 
