@@ -17,7 +17,7 @@ I’m going to share some of the things we’ve learned that will hopefully help
 
 > Charles is the exec who oversees sales at PostHog, among other things. He is doing his best to try and save you money. 
 
-# Play the sales cycle
+## Play the sales cycle
 
 Many software contract amounts are set by a salesperson trying to hit quota. If you know the end of their quarter, you can wait until that point to get a juicy discount.
 
