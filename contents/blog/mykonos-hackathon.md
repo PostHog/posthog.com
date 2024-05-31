@@ -54,9 +54,9 @@ Before a PostHog event is available for querying, it goes through our ingestion 
 The solution? Introducing RealTimeHog 3000, a [livestream](https://github.com/PostHog/livestream) service powering our first truly real-time view of user activity. The process is simple: 
 
 1. Consume the raw events from the same Kafka topic as our ingestion service. 
-2. Stream them to you ASAP using server-sent events. 
+2. Stream them to you ASAP using server-sent events.
 
-[GIF / VIDEO CLIP HERE]
+![RealTimeHog 3000](https://res.cloudinary.com/dmukukwp6/image/upload/realtime1_f40652b636.gif)
 
 The lack of person data is a fair trade-off, because it doesn’t get more live than this. User activity appears within milliseconds of happening on the other side of the world.
 
@@ -75,7 +75,6 @@ MykoLogs is a logging product that integrates with the existing PostHog SDKs, br
 The best part? You can link backend logs to session recordings through the user’s session ID – letting you debug what was happening on the backend during your user's API requests. MykoLogs plays nicely with all other PostHog products, meaning logs and session replay are now BFFs. Debugging has never been this breezy!
 
 ![MykoLogs](https://res.cloudinary.com/dmukukwp6/image/upload/mykologs_5699a50b6c.gif)
-
 
 It's internal-only for now, but could one day be made public. 
 
