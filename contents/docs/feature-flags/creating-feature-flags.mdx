@@ -83,7 +83,13 @@ They enable you to configure functionality related to your flag inside PostHog, 
 
 This specifies the conditions a user must meet to access the feature flag and receive a value.
 
-You can create conditions based on [user properties](/docs/product-analytics/user-properties), [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties), or [cohorts](/docs/data/cohorts).
+Percentage rollouts are available for all flags. More options depend on your PostHog setup:
+
+- If GeoIP is enabled, you can target based on geographic location.
+
+- If you capture [person profiles](/docs/data/persons), you can target based on [user properties](/docs/product-analytics/user-properties) and [cohorts](/docs/data/cohorts).
+
+- If you enabled group analytics, you can target based on [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties).
 
 <ProductScreenshot
     imageLight={ReleaseConditionLight} 

@@ -34,6 +34,20 @@ Getting started is a simple three-step process.
 
 Follow the [installation instructions](/docs/product-analytics/installation) to setup either the JavaScript snippet or the JavaScript Web SDK for the website you want to track.
 
+Web analytics works without capturing [person profiles](/docs/data/persons). This means if you are primarily using PostHog for web analytics, it can be significantly cheaper for you. 
+
+To do this, set your [JavaScript Web](/docs/libraries/js) `person_profiles` config option to `identified_only` like this:
+
+```js-web
+posthog.init(
+    '<ph_project_api_key>',
+    {
+        api_host: '<ph_instance_address>',
+        person_profiles: 'identified_only'
+    }
+)
+```
+
 > [Single page apps](/tutorials/single-page-app-pageviews) might require you to manually implement `$pageview` and `$pageleave` event capture for every navigation change. See our tutorials on how to do this in [React](/tutorials/single-page-app-pageviews), [Next.js](/docs/libraries/next-js#client-side-setup), [Vue](/docs/libraries/vue-js#capturing-page-views), and [Svelte](/tutorials/svelte-analytics#capturing-pageviews-and-pageleaves).
 
 ### 2. Enable the web analytics beta

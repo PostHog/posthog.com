@@ -57,7 +57,7 @@ After launching your survey and having users interact with it, you can view resu
 - How many users have dismissed the survey.
 - Responses.
 
-You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
+If you capture events with person profiles, you can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 <ProductScreenshot
   imageLight={ImgSurveyResultsLight} 

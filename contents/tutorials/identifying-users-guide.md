@@ -23,7 +23,7 @@ If you haven’t set up any identification and are using the PostHog snippet or 
 
 ![Anonymous ID](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/identifying-users-guide/anon-id.png)
 
-Anonymous IDs are a basic way to understand the user behind events. They lack preciseness because there is no way of ensuring consistency between sessions (it depends on cookies, which users often block) and lack the depth of custom user properties or groups. Explicitly identifying users using the other methods detailed below creates more accurate user data.
+Anonymous IDs are a basic way to understand the user behind events. They lack preciseness because there is no way of ensuring consistency between sessions (it depends on cookies, which users often block) and lack the depth of custom user properties or groups. Capturing [person profiles](/docs/data/persons) and explicitly identifying users using the other methods detailed below creates more accurate user data.
 
 ## JavaScript identify
 

@@ -22,11 +22,10 @@ The parameters are appended to a URL using query parameters, for example:
 `https://www.example.com/page?utm_source=twitter&utm_medium=social&utm_campaign=twitter-campaign`
 
 ### Capturing UTM parameters
-
-PostHog automatically captures any UTM parameters that are present when a user visits your website. These parameters will then be set as properties in three places in PostHog.
+PostHog automatically captures any UTM parameters that are present when a user visits your website. These parameters are then set as properties in three places in PostHog.
 
 1. As properties on the event
-2. As **latest** and **initial** properties on the person
+2. As **latest** and **initial** properties on the person profile when it is created
 3. As **entry** session properties
 
 PostHog supports all 5 parameters:

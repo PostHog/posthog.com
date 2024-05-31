@@ -27,7 +27,7 @@ In our example project, we have a Dropbox-like product that allows users to uplo
 
 We’ve already set up PostHog ([on a paid plan](/pricing), to get access to experiments), and have custom events set up for both `signed_up` and `uploaded_file`. Both have a significant amount of events coming in. 
 
-We’ll also need a `joined_at` user property. Autocapture does not capture this detail so we’ll need to set it up somewhere in our code. We can use `$set_once` in the event capture for `signed_up` to make this happen (find more details on setting [user properties here](/docs/integrate/client/js#set_once))
+We’ll also need a `joined_at` user property. Autocapture does not capture this detail so we’ll need to set it up somewhere in our code. Make sure you are capturing [person profiles](/docs/data/persons) and then use `$set_once` in the event capture for `signed_up` to make this happen (find more details on setting [user properties here](/docs/integrate/client/js#set_once)).
 
 This is all we need to start setting up our experiment.
 

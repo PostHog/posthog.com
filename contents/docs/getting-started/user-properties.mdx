@@ -1,6 +1,6 @@
 ---
-title: User properties
-sidebarTitle: User properties
+title: Person profiles and user properties
+sidebarTitle: Person profiles and user properties
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/getting-started/images/docs-properties.png
 nextPage: ./actions-and-insights.mdx
@@ -11,7 +11,11 @@ showTitle: true
 import UserPropertiesHowToSet from "./\_snippets/user-properties-how-to-set.mdx"
 import UserPropertiesSetVsSetOnce from "./\_snippets/user-properties-set-vs-set-once.mdx"
 
-User properties are a powerful feature in PostHog which enable you to better manage, analyze, and control data. You can create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts) based on user properties, which can then be used to [create insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more. 
+[Person profiles](/docs/data/persons) are collections of properties about the users behind the events. You can use these user properties to better manage, analyze, and control data. 
+
+For example, you can create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts) based on user properties, which can then be used to [create insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more. 
+
+For backward compatibility, PostHog captures events with person profiles by default. You can change this by setting your JavaScript initialization's `person_profiles` to `identified_only` or an event's `$process_person_profile` property to `false`.
 
 ## How to set user properties
 
@@ -23,4 +27,4 @@ User properties are a powerful feature in PostHog which enable you to better man
 
 ## Further reading
 
-For detailed information on how to use user properties in PostHog, check out our full [user properties docs]( /docs/data/user-properties).
+See our full documentation on [persons](/docs/data/persons) and [user properties](/docs/data/user-properties) for more details.
