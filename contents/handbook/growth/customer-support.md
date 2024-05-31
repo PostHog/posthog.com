@@ -36,7 +36,7 @@ We have a high volume of tickets and we're a small team so we're not able to res
 
 Note that tickets are automatically prioritized in Zendesk and users are updated with information about response targets to set appropriate expectations. In all cases, tickets are routed to the appropriate team and that team is responsible for meeting the response target.
 
-The response targets listed below are our minimums, and we often respond far faster. Please note that we do not offer any level of weekend customer support.
+The response targets listed below are our minimums for an initial response, and we often respond far faster. Please note that we do not offer any level of weekend customer support.
 
 #### High priority
 **Response target: 12 hours**
@@ -69,6 +69,10 @@ This ensures that most paying users get appropriately rapid support and that all
 Tickets are considered low priority if they fulfill none of the conditions for High or Normal priority. This includes tickets raised in the PostHog community, and is mostly users who are on a free plan and who have not entered a card.
 
 We always aim to respond to low priority tickets and will often read and consider them, but we do not set a response target or promise to respond due to the high volume and our need to focus on paying users. 
+
+#### Follow-up / next reply response targets
+
+After our initial response, our follow-up response targets are double those of our initial response targets. For example, if a user replies to our initial response on a high priority ticket (12 hours), our follow-up / next reply response target is within 24 hours.
 
 ### Support Engineers
 
