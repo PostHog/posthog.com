@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-Your external data can be used alongside the rest of the PostHog system.
+Your external data can be used alongside the rest of the PostHog.
 
 ### Visualizing
 
