@@ -4,9 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> **Have something you want to announce?** Drop a message in the #team-marketing Slack channel so marketing can assist and prevent overlapping comms. If it's an iterative update, you can also demo it in the all-hands, or post in the #tell-posthog-anything Slack channel. 
+> **Have something you want to announce?** Drop a message in the #team-comms Slack channel so comms can assist and prevent overlapping comms. If it's an iterative update, you can also demo it in the all-hands, or post in the #tell-posthog-anything Slack channel. 
 
-Marketing takes responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/incidents) and [maintenance announcements](/handbook/growth/marketing/product-announcements#announcing-scheduled-maintenance), if needed. 
+Comms takes responsibility for coordinating and publicizing news about PostHog, including product announcements. We also help with [incident](/handbook/engineering/incidents) and [maintenance announcements](/handbook/comms/product-announcements#announcing-scheduled-maintenance), if needed. 
 
 ## Types of announcement
 
@@ -41,7 +41,7 @@ We might do anything and everything for a major announcement.
 Examples of major announcements include [the surveys beta](/changelog/2023#user-surveys-beta) or [the analytics pricing change](/changelog/2023#reduced-pricing-for-product-analytics).
 
 ### New product announcements
-New product launches are major announcements. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Marketing should always create a launch plan for new product announcements. 
+New product launches are major announcements. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Comms should always create a launch plan for new product announcements. 
 
 For new product announcements we generally apply the following best practices:
 
@@ -51,18 +51,18 @@ For new product announcements we generally apply the following best practices:
 - Ensure launch activities (such as changelog) link clearly to the docs.
 - Ensure the product is added to email and in-app onboarding flows.
 
-Marketing should also be aware of [the engineering best practices for product launches](/handbook/engineering/development-process#best-practices-for-full-releases), so we can be sure that features launch well.
+Comms should also be aware of [the engineering best practices for product launches](/handbook/engineering/development-process#best-practices-for-full-releases), so we can be sure that features launch well.
 
 ### PR announcements
-We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/growth/marketing/press). 
+We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/growth/comms/press). 
 
 ## Maintenance communications
 
 Occasionally, we have to conduct scheduled maintenance. When this happens, it's important that we tell users about it in advance if they would experience any disruption. 
 
-> If you're aware of any upcoming maintenance which would cause disruption, please inform the Marketing and Customer Success teams as soon as possible. Marketing will ensure that users are notified as the work is planned and completed. Customer Success may wish to inform specific users at the time. 
+> If you're aware of any upcoming maintenance which would cause disruption, please inform the Comms and Customer Success teams as soon as possible. Comms will ensure that users are notified as the work is planned and completed. Customer Success may wish to inform specific users at the time. 
 
-Typically, Marketing takes responsibility for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels. 
+Typically, Comms takes responsibility for informing users about maintenance work beforehand by telling users who will be impacted through email and other channels. 
 
 When informing users about maintenance, it is important to answer all of the following points:
 
@@ -77,9 +77,9 @@ When informing users about maintenance, it is important to answer all of the fol
 
 While maintenance is being carried out, we typically use the Notification Bar app within PostHog to tell users that work is ongoing and direct them firstly to `/service-message` where we will provide further information. Once the maintenance is finished, the `service-message` page is updated to reflect that no maintenance is underway, and the banner is removed. 
 
-> The marketing team tries to ensure good, regular communication with other teams across PostHog, but mainly relies on [highlighted PRs](https://github.com/PostHog/posthog/pulls?q=is%3Apr+label%3A%22highlight+%3Astar%3A%22+is%3Aclosed) to find what has shipped in order to avoid burdening engineers with more meetings. ***If you have a shipped feature you want to see included in PostHog announcements, please add a highlight tag and a reasonable description to the PR.** Here's [an example of a good PR description](https://github.com/PostHog/posthog/pull/13414). Alternatively, you can cover it in the all-hands meeting, or post in the #tell-posthog-anything Slack channel.
+> The Comms team tries to ensure good, regular communication with other teams across PostHog, but mainly relies on [highlighted PRs](https://github.com/PostHog/posthog/pulls?q=is%3Apr+label%3A%22highlight+%3Astar%3A%22+is%3Aclosed) to find what has shipped in order to avoid burdening engineers with more meetings. ***If you have a shipped feature you want to see included in PostHog announcements, please add a highlight tag and a reasonable description to the PR.** Here's [an example of a good PR description](https://github.com/PostHog/posthog/pull/13414). Alternatively, you can cover it in the all-hands meeting, or post in the #tell-posthog-anything Slack channel.
 
 ## Incidents communications
 
-When an [incident is declared](/handbook/engineering/incidents) the Marketing team should join the incident channel as observers, and monitor to make sure that customer comms are handled correctly. 
+When an [incident is declared](/handbook/engineering/incidents) the Comms team should join the incident channel as observers, and monitor to make sure that customer comms are handled correctly. 
 

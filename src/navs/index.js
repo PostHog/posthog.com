@@ -504,7 +504,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/marketing/content',
                     },
                     {
-                        name: 'Email & newsletter',
+                        name: 'Newsletter',
                         url: '/handbook/growth/marketing/newsletter',
                     },
                     {
@@ -514,18 +514,6 @@ export const handbookSidebar = [
                     {
                         name: 'Sponsorships',
                         url: '/handbook/growth/marketing/open-source-sponsorship',
-                    },
-                    {
-                        name: 'In-app',
-                        url: '/handbook/growth/marketing/in-app',
-                    },
-                    {
-                        name: 'PostHog for startups',
-                        url: '/handbook/growth/marketing/startups',
-                    },
-                    {
-                        name: 'Press',
-                        url: '/handbook/growth/marketing/press',
                     },
                     {
                         name: 'YouTube',
@@ -558,10 +546,6 @@ export const handbookSidebar = [
                         url: '/handbook/growth/marketing/components',
                     },
                 ],
-            },
-            {
-                name: 'Product announcements',
-                url: '/handbook/growth/marketing/product-announcements',
             },
             {
                 name: 'Testimonials',
@@ -618,6 +602,44 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'Customer comms',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/comms/comms-team',
+            },
+            {
+                name: 'Press',
+                url: '/handbook/comms/press',
+            },
+            {
+                name: 'Email comms',
+                url: '/handbook/comms/email-comms',
+            },
+            {
+                name: 'In-app comms',
+                url: '/handbook/comms/in-app',
+            },
+            {
+                name: 'Customer support',
+                url: '/handbook/comms/customer-support',
+            },
+            {
+                name: 'Startups & Y Combinator',
+                url: '/handbook/comms/startups',
+            },
+            {
+                name: 'Product announcements',
+                url: '/handbook/comms/product-announcements',
+            },
+            {
+                name: 'Incident & maintenance comms',
+                url: '/handbook/engineering/incidents#customer-communications',
+            },
+        ],
+    },
+    {
         name: 'Sales & CS',
         url: '',
         children: [
@@ -636,10 +658,6 @@ export const handbookSidebar = [
             {
                 name: 'How we work',
                 url: '/handbook/growth/sales/how-we-work',
-            },
-            {
-                name: 'Customer support',
-                url: '/handbook/growth/customer-support',
             },
             {
                 name: 'RevOps',

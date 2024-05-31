@@ -7,6 +7,14 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/handbook/growth/customer-support", "destination": "/handbook/comms/customer-support" },
+        { "source": "/handbook/growth/marketing/in-app", "destination": "/handbook/comms/in-app" },
+        { "source": "/handbook/growth/marketing/startups", "destination": "/handbook/comms/startups" },
+        { "source": "/handbook/growth/marketing/press", "destination": "/handbook/comms/press" },
+        {
+            "source": "/handbook/growth/marketing/product-announcements",
+            "destination": "/handbook/comms/product-announcements"
+        },
         { "source": "/tutorials/nps-survey", "destination": "/templates/nps-survey" },
         { "source": "/questions/topics/:path*", "destination": "/questions/topic/:path*" },
         { "source": "/docs/sdks/:path*", "destination": "/docs/libraries/:path*" },
