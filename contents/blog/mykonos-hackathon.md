@@ -74,7 +74,8 @@ MykoLogs is a logging product that integrates with the existing PostHog SDKs, br
 
 The best part? You can link backend logs to session recordings through the user’s session ID – letting you debug what was happening on the backend during your user's API requests. MykoLogs plays nicely with all other PostHog products, meaning logs and session replay are now BFFs. Debugging has never been this breezy!
 
-[IMAGE HERE OR GIF HERE]
+![MykoLogs](https://res.cloudinary.com/dmukukwp6/image/upload/mykologs_5699a50b6c.gif)
+
 
 It's internal-only for now, but could one day be made public. 
 
