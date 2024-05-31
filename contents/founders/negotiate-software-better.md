@@ -19,7 +19,7 @@ I’m going to share some of the things we’ve learned that will hopefully help
 
 ## Play the sales cycle
 
-Many software contract amounts are set by a salesperson trying to hit quota. If you know the end of their quarter, you can wait until that point to get a juicy discount.
+Many software contract prices and terms are set by a salesperson trying to hit quota. If you know the end of their quarter, you can wait until that point to get a juicy discount.
 
 There are a couple of reasons why this happens:
 
