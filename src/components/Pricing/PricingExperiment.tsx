@@ -993,8 +993,11 @@ const PricingExperiment = ({
                                 <div className="col-span-4 px-3 py-1">&nbsp;</div>
                                 {platformAndSupportProduct?.plans
                                     ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                    ?.map((plan: BillingV2PlanType) => (
-                                        <div className="col-span-4 px-3 py-1" key={plan.key}>
+                                    ?.map((plan: BillingV2PlanType, index) => (
+                                        <div
+                                            className="col-span-4 px-3 py-1"
+                                            key={`comparison-${plan.product_key}-${index}`}
+                                        >
                                             <strong className="text-sm opacity-75">{plan.name}</strong>
                                         </div>
                                     ))}
@@ -1006,11 +1009,11 @@ const PricingExperiment = ({
                                 </div>
                                 {platformAndSupportProduct?.plans
                                     ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                    ?.map((plan: BillingV2PlanType) => {
+                                    ?.map((plan: BillingV2PlanType, index) => {
                                         return (
                                             <div
                                                 className="col-span-4 px-3 py-2 text-sm"
-                                                key={`${plan.key}-base-price`}
+                                                key={`${plan.product_key}-base-price-${index}`}
                                             >
                                                 {plan.included_if === 'no_active_subscription' ? (
                                                     <span>Free forever</span>
@@ -1054,14 +1057,14 @@ const PricingExperiment = ({
                                             </div>
                                             {platformAndSupportProduct?.plans
                                                 ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                                ?.map((plan: BillingV2PlanType) => {
+                                                ?.map((plan: BillingV2PlanType, index) => {
                                                     const planFeature = plan?.features?.find(
                                                         (f) => f.key === feature.key
                                                     )
                                                     return (
                                                         <div
                                                             className="col-span-4 px-3 py-2 text-sm"
-                                                            key={`${plan.key}-${feature.key}`}
+                                                            key={`${plan.product_key}-${feature.key}-${index}`}
                                                         >
                                                             {planFeature ? (
                                                                 <div className="flex gap-x-2">
