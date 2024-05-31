@@ -78,7 +78,7 @@ The lack of person data is a fair trade-off, because it doesn’t get more live 
 
 Speaking of data being processed live, perhaps at some point you’ve wondered if PostHog actually scales, or just talks the talk. To dispel any doubts, we developed one extra feature: an anonymized stream of all events being captured globally, with only the geolocation included. 
 
-[IMAGE / CLIP HERE]
+![The PostHog globe](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_05_31_at_9_53_45_AM_86d275de54.png)
 
 Hundreds of thousands of events per minute, and they look great on a 3D globe on PostHog’s website, where each event is an arc from the user’s location to that of the relevant data center. Global scale, visualized for your pleasure.
 
@@ -124,13 +124,13 @@ First up, we summarized our [terms](/terms) and [privacy policy](/privacy) in pl
 
 Then we took on our data processing agreement, or DPA, to create a generator that makes this hugely exciting task even more fun. You can quickly populate your own form, select the data region, and, if you want, add some pizazz with fairy tale or Taylor Swift mode. DPA? [Try DPYAY!](/dpa)
 
-### Managed Reverse Proxy
+### Managed reverse proxy
 
 <BuiltBy people={["Frank Hamand"]} />
 
 Everyone loves ad-blockers. But, for a lot of our customers, they stop data from reaching PostHog. You can already deploy a reverse proxy to PostHog Cloud to get around this, but it’s a somewhat convoluted process that requires you to jump through 16 hoops and login to AWS. [Our docs on this are great](/docs/advanced/proxy), but Frank decided to build a better solution.
 
-[SCREENSHOT HERE]
+![Managed reverse proxy](https://res.cloudinary.com/dmukukwp6/image/upload/reverseproxies_36abec68b3.png)
 
 During the hackathon, he built the reverse proxy functionality right into PostHog. The option is tucked away in the PostHog settings. Simply add in any domain you control and the system will spit out a CNAME that you then need to set in your DNS provider. Wait a few seconds for the update to happen and voila, the reverse proxy is live.
 
@@ -163,6 +163,8 @@ PostHog crunches a lot of data – and sometimes queries can take a while to loa
 <BuiltBy people={["Manoel Aranda Neto", "Daniel Esneider"]} />
 
 We build products for engineers, so there’s nothing better than bringing PostHog closer to their natural environment: the terminal.
+
+![CLI](https://res.cloudinary.com/dmukukwp6/image/upload/cli_fb71d1730d.png)
 
 The PostHog CLI is a command line that allows users to do a few things that are normally tucked away in the PostHog app: creating, reading, updating, deleting, and enabling or disabling feature flags, for example. The PostHog CLI authentication flow is also seamless as it spins up a new browser and allows you to log in with your SSO instead of copying and pasting tokens manually.
 
