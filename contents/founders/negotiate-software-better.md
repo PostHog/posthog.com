@@ -1,5 +1,5 @@
 ---
-date: 2024-06-04
+date: 2024-05-31
 title: How software salespeople will try to screw you (and how to fight back)
 author:
   - charles-cook
