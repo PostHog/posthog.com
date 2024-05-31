@@ -1,5 +1,5 @@
 ---
-title: Filtering, Visualizing, and Joining Data
+title: Filtering, visualizing, and joining data
 sidebar: Docs
 showTitle: true
 availability:
