@@ -301,7 +301,7 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
                         <div className="col-span-full pr-1.5">{slider}</div>
                         <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
                             <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
-                            <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
+                            <span className="text-sm tex`t-[#4f9032] dark:text-green font-semibold">
                                 First {activeProduct.freeLimit} {denomination}s free –&nbsp;<em>every month!</em>
                             </span>
                         </div>
@@ -318,7 +318,7 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
                                             key={addon.type}
                                             addons={addons}
                                             setAddons={setAddons}
-                                            volume={volume}
+                                            volume={volume + parseInt(activeProduct.freeLimit.replace(/,/g, ''))}
                                             {...addon}
                                         />
                                     </li>
