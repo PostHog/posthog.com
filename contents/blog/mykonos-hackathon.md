@@ -59,7 +59,11 @@ It's internal-only for now, but could one day be made public.
 
 What’s cooler than having your own query language? Having your own general purpose programming language, of course. That’s literally what we built: PostHog’s first ever programming language, Hog. (Earlier versions of this name included Hög and Höge, but turns out we're anti-umlaut.)
 
-Things moved fast the week after Mykonos: we split up the existing product analytics team and built a new team to productize Hog. We plan to use Hog to build our CDP and messaging products, and might even pivot the entire company around it. It was just another PostHog hackathon, no big deal. Stay tuned for the aftermath.
+Things moved fast the week after Mykonos: we split up the existing product analytics team and built a new team to productize Hog. We plan to use Hog to build our CDP and messaging products, and might even pivot the entire company around it. 
+
+Why are we building this? In the past, we’ve sometimes struggled to build UI fast enough for users to take advantage of new products that are ready to ship. Hog will mean anyone can drop down into hacker mode and get things done. We move fast. You move fast. Everyone is happy.
+
+It was just another PostHog hackathon, no big deal. Stay tuned for the aftermath.
 
 ### RealTimeHog 3000
 
@@ -156,7 +160,7 @@ As part of the project, we also revamped our system for categorizing and trackin
 
 ![Data crunching](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon_datacrunch_525d9e362b.png)
 
-PostHog crunches a lot of data – and sometimes queries can take a while to load. To help users better understand the hard work we’re doing when they make a query, we built a loading bar that shows statistics on the data we’re crunching, and the CPU we’re throwing at each query. The loading bar is fake right now (sorry!), but the data we show is very much real.
+PostHog crunches a lot of data – and sometimes queries can take a while to load. To help users better understand the hard work we’re doing when they make a query, we built a loading bar to give you a better idea of how long your query is going to take a load. If you feel the need for a quick distraction, you could also check out [Hedgehog mode 2.0](https://posthog.com/changelog/2024#hedgehog-mode-2.0-launched), which also recently shipped.
 
 ### CLI
 
