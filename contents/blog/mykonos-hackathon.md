@@ -64,7 +64,7 @@ Speaking of data being processed live, perhaps at some point you’ve wondered i
 
 ![The PostHog globe](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_05_31_at_9_53_45_AM_86d275de54.png)
 
-Hundreds of thousands of events per minute, and they look great on a 3D globe on PostHog’s website, where each event is an arc from the user’s location to that of the relevant data center. Global scale, visualized for your pleasure.
+Millions of events per minute, and they look great on a 3D globe on PostHog’s website, where each event is an arc from the user’s location to that of the relevant data center. Global scale, visualized for your pleasure.
 
 ## MykoLogs
 
