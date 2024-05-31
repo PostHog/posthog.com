@@ -47,7 +47,7 @@ This commitment can be time-based (e.g. 1 year contract) or usage-based (e.g. X 
 
 If your contract is usage-based, ensure that any overages have a discount applied as well, rather than the ‘list’ price. This protects you if you get your usage calculations wrong in the first place (which is often).
 
-In terms of the discount itself, you should ask people you know what discount they got (easier), or provide a quote from a competitor (more work). 
+In terms of the discount itself, you should ask people you know what discount they got (easier), or provide a quote from a competitor (more work).  We have literally seen people we know mention discounts of 90%+ here.
 
 > The PostHog way: Our sales team can’t make up the discounts - they’re literally written [in our handbook](/handbook/growth/sales/contracts#discounts). If you ask them if a discount is available, they’ll just send you this link - how disappointing! 
 
