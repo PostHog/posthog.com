@@ -420,7 +420,12 @@ export default function Tabbed() {
                         )}
                     </div>
 
-                    <TabContent addons={productAddons} setAddons={setProductAddons} activeProduct={activeProduct} />
+                    <TabContent
+                        key={activeProduct.type}
+                        addons={productAddons}
+                        setAddons={setProductAddons}
+                        activeProduct={activeProduct}
+                    />
                 </div>
                 <div className="md:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark"></div>
                 <div className="md:col-span-5 py-2 pl-4 md:pl-0 md:border-t border-light dark:border-dark">
