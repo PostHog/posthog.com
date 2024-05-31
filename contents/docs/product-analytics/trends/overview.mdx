@@ -1,0 +1,237 @@
+---
+title: Trends
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import {ProductScreenshot} from 'components/ProductScreenshot'
+import {ProductVideo} from 'components/ProductVideo'
+export const newInsightsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/new-insight-light-mode.png"
+export const newInsightsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/new-insight-dark-mode.png"
+export const selectEventLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/select-event-light-mode.png"
+export const selectEventDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/select-event-dark-mode.png"
+export const basicFilterLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/basic-filter-light-mode.png"
+export const basicFilterDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/basic-filter-dark-mode.png"
+export const longerDateLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/longer-date-range-light-mode.png"
+export const longerDateDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/longer-date-range-dark-mode.png"
+export const personsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/persons-light-mode.png"
+export const personsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/persons-dark-mode.png"
+export const multipleSeriesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/multiple-series-light-mode.png"
+export const multipleSeriesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/multiple-series-dark-mode.png"
+export const displayOptionsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/display-options-light-mode.png"
+export const displayOptionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/display-options-dark-mode.png"
+export const insightsSourceLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/insights-source-light-mode.png"
+export const insightsSourceDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/trends/insights-source-dark-mode.png"
+export const activeViewersLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/active-viewers-light.png"
+export const activeViewersDark = "https://res.cloudinary.com/dmukukwp6/image/upload//posthog.com/contents/docs/product-analytics/trends/active-viewers-dark.png"
+export const activeViewersTrendLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/active-viewers-trend-light.png"
+export const activeViewersTrendDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/active-viewers-trend-dark.png"
+export const countryBreakdownLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/country-breakdown-light.png"
+export const countryBreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/country-breakdown-dark.png"
+export const addtodashboardLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/add-to-dashboard-light.png"
+export const addtodashboardDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/add-to-dashboard-dark.png"
+export const insightexport = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/product-analytics/trends/active-viewers-export.png"
+export const addtonotebookLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/add-to-notebook-light.mp4"
+export const addtonotebookDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/add-to-notebook-dark.mp4"
+export const DeviceFilterLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/adding-device-filter-light.mp4"
+export const DeviceFilterDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/adding-device-filter-dark.mp4"
+export const CopyFilterLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/copy-filter-light.mp4"
+export const CopyFilterDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/docs/product-analytics/trends/copy-filter-dark.mp4"
+
+export const FilterIcon = () => <svg class="inline-block w-5 h-5 text-gray" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"><path d="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z" fill="currentColor"></path></svg>
+
+export const CopyIcon = () => <svg class="inline-block w-5 h-5 text-gray" fill="none" width="1em" height="1em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m15.4545 3h-9.81814c-.9 0-1.63636.73636-1.63636 1.63636v11.45454h1.63636v-11.45454h9.81814zm2.4546 3.27273h-9.00001c-.9 0-1.63636.73636-1.63636 1.63636v11.45451c0 .9.73636 1.6364 1.63636 1.6364h9.00001c.9 0 1.6364-.7364 1.6364-1.6364v-11.45451c0-.9-.7364-1.63636-1.6364-1.63636zm0 13.09087h-9.00001v-11.45451h9.00001z" fill="currentColor"></path></svg>
+
+<iframe
+    src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=493"
+    className="rounded shadow-xl"
+/>
+
+Trends insights enable you to plot data from people, events, and properties however you want.
+
+They're useful for finding patterns in your data, as well as monitoring your product to ensure everything is running smoothly.
+
+Trends is the default insight type in PostHog.
+
+## What can you learn from trends?
+
+Using trends, you can analyze:
+
+- How your most important metrics change over time.
+- Long-term patterns, or cycles in your usage.
+- How a specific change affects usage.
+- The usage of different features side-by-side.
+- How the _properties of events_ vary using aggregation (sum, average, etc).
+
+You can also visualize the same data points in a variety of ways. 
+
+Below is the number of active viewers on Hogflix, an imaginary streaming service for hedgehogs.
+
+<ProductScreenshot
+    imageLight = {activeViewersLight} 
+    imageDark = {activeViewersDark}
+    classes="rounded"
+    alt="Total value"
+/>
+
+This is a number chart, which is useful for seeing the total of all events in a given period, and how it's changed compared to the previous period.
+
+<ProductScreenshot
+    imageLight = {activeViewersTrendLight} 
+    imageDark = {activeViewersTrendDark}
+    classes="rounded"
+    alt="Trend"
+/>
+
+Above is the same metric, active viewers of Hogflix, over the last 90 days and grouped by week.
+
+<ProductScreenshot
+    imageLight = {countryBreakdownLight} 
+    imageDark = {countryBreakdownDark}
+    classes="rounded"
+    alt="Country breakdown"
+/>
+
+And you can break down these users by properties, like in the above bar chart that shows Hogflix viewers broken down by country.
+
+Read the [chart type docs](/docs/product-analytics/trends/charts) for a summary of all supported visualizations.
+
+## Getting started
+
+### 1. Creating a new trend
+
+To create a new trends insight, navigate to the ['Product analytics' tab](https://us.posthog.com/insights) in the sidebar, where you can also view a list of all your saved insights. 
+
+Next, click the 'New insight' button in the top right – you can also click the `+` symbol next to 'Product analytics' in the sidebar. 
+
+Trends is the default insight type, so clicking 'New insight' will always create a trends insight.
+
+### 2. Configuring your insight
+
+The default event type is `Pageview`. 
+
+To change the event being used, click on the dropdown the dropdown to the right of the <div className="inline-flex items-center justify-center rounded-full border-2 font-semibold" style={{ width: '20px', height: '20px', borderColor: 'rgb(29, 74, 255)', color: 'rgb(29, 74, 255)', backgroundColor: 'rgba(29, 74, 255, 0.15)' }}>A</div> icon.
+
+<ProductScreenshot
+    imageLight = {selectEventLight} 
+    imageDark = {selectEventDark}
+    classes="rounded"
+    alt="Selecting our event"
+/>
+
+This dropdown enables you to search through all your [events](/docs/data/events) and [actions](/docs/data/actions), and pick which one you would like to plot data from.
+
+We aggregate series by the total number (Total count) by default. Click the dropdown to choose a different metric, such as `Unique users` or `Daily active users`. See the [event and property aggregation docs](/docs/product-analytics/trends/aggregations) for a full breakdown of options.
+
+> **Note:** A dotted line indicated the data for that period is still being collected. If you choose a date range of the last 30 days grouped by week, for example, the week you're currently in would be dotted because the week hasn't ended yet. 
+
+### 3. Adding filters based on properties
+
+It's often useful to analyze a subset of events, such as `Pageview` events for a specific URL, or events performed by users in a specific country. To do this, we add a property filters.
+
+To add a filter to an event series, click on the <FilterIcon /> icon next to the event name, and then click the 'Add filter' button.
+
+This will bring up a dropdown where you can search through all event properties and choose the one you would like to filter based on. 
+
+<ProductVideo
+    videoLight = {DeviceFilterLight} 
+    videoDark = {DeviceFilterDark}
+    classes="rounded"
+    alt="Adding filter to a series"
+/>
+
+In the above example, we've chosen the `Device type` event property, so that we can plot data for `Desktop` users only.
+
+If we wanted to include events from `Mobile` users as well, we can create an additional series by clicking the <CopyIcon /> icon to duplicate the existing series, then change the `Device type` field to `Mobile`.
+
+This generates a line chart with `Pageview` events for `Desktop` and `Mobile` users plotted together for the last 7 days.
+
+<ProductVideo
+    videoLight = {CopyFilterLight} 
+    videoDark = {CopyFilterDark}
+    classes="rounded"
+    alt="Adding filter to a series"
+/>
+
+
+Click on 'Add graph series' to add more series. 
+
+Read more about filters in the [filtering docs](/docs/product-analytics/trends/filters).
+
+### 4. Changing the time range
+
+The default time range is the last 7 days.
+
+To change this, click on the drop down where it says 'Last 7 days' and select your desired date range. 
+
+You can also select how events are grouped – e.g. by hour, day, week, or month.
+
+<ProductScreenshot
+    imageLight = {longerDateLight} 
+    imageDark = {longerDateDark}
+    classes="rounded"
+    alt="Showing a chart over a longer date range (90 days)"
+/>
+
+Smoothing, where we apply a 7-day or 28-day rolling average, is available when data is grouped by day. This is useful for eliminating excess variability in data, and identifying long-term patterns in very noisy data.
+
+> **Note** Setting a very long time range can severely impact query performance, especially for high-volume events. If you find it's taking too long to load, consider reducing your date range, or [enabling sampling](/docs/product-analytics/sampling).
+
+### 5. Saving and sharing your insight
+
+We generate an insight name automatically based on your events and filters. Click the pencil icon next to the name to create your own.
+
+You can add a description, too. Descriptions support Markdown, so you can add links, bullet points, and text formatting to add more context for other users.
+
+Click 'Save' in the top right at any time to save your insight. Once saved, an 'Edit' button replaces it.
+
+There are several ways to share your insight:
+
+#### Add to dashboard 
+
+Insights can belong to multiple dashboards at once, so you don't have to create the same insight over and over again. Just click 'Add to dashboard'. After this you can see all the dashboards an insight belongs to, and navigate to them, by clicking the 'Manage dashboards'.
+
+<ProductScreenshot
+    imageLight = {addtodashboardLight} 
+    imageDark = {addtodashboardDark}
+    classes="rounded"
+    alt="Add to dashboard"
+/>
+
+#### Add to notebook
+
+Notebooks are a great way to do ad hoc analysis using existing insights, or by creating new insights inside a notebook.
+
+Click 'Add to notebook' in the top right to do so. Alternatively, click on 'Notebook' in the right sidebar and then drag and drop insights from the product analytics page into a notebook. 
+
+<ProductVideo
+    videoLight = {addtonotebookLight} 
+    videoDark = {addtonotebookDark}
+    classes="rounded"
+    alt="Add to notebook"
+/>
+
+#### Export or embed
+
+Click the '...' menu on any insight to view the export and embed options. 
+
+Choose 'Share or embed' to share a live version of your insight as an iframe.
+
+Alternatively, go to 'Export' and choose the PNG option to generate a PNG version of your insight that you can use anywhere, such as the one below.
+
+<ProductScreenshot
+    imageLight = {insightexport} 
+    imageDark = {insightexport}
+    classes="rounded"
+    alt="Exported insight"
+/>
+
+#### Create a subscription
+
+You can also create a subscription to an insight, which you can send to an email, or list of emails, or to a Slack channel.
+
+Go to 'Subscribe' and 'New subscription' and choose the type of subscription you want, and the frequency.
+
+See the [subscriptions docs](/docs/product-analytics/subscriptions) for a complete guide.

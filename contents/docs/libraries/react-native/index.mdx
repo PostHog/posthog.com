@@ -31,7 +31,7 @@ import RNSendEvents from '../../integrate/send-events/_snippets/send-events-reac
 
 <RNSendEvents />
 
-## Identify
+## Identifying users
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
@@ -45,7 +45,7 @@ Sometimes, you may want to assign multiple distinct IDs to a single user. This i
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-## Setting user properties via an event
+## Setting user properties
 
 When capturing an event, you can pass a property called `$set` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
@@ -118,7 +118,7 @@ You can also manually flush the queue. If a flush is already in progress it retu
 await posthog.flush()
 ```
 
-## Reset
+## Reset after logout
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 

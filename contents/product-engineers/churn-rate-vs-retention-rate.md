@@ -73,6 +73,8 @@ I've collated the better sources [in the appendix](#more-on-churn-rate-benchmark
 
 Good retention rates are the same, but inverted – 5% churn equals 95% retention, and so on.
 
+<NewsletterForm />
+
 ## Retention rate formula explained 📈
 
 So that's churn rate, but what about retention rate? The basic formula is very similar:
@@ -274,3 +276,5 @@ You can also [sign up to our newsletter](https://newsletter.posthog.com/subscrib
 > - [Recurly's 19-month study](https://recurly.com/research/churn-rate-benchmarks/) of 1,900 subscription products that use its platform. It breaks down churn for B2B and B2C products across multiple cohorts, including average revenue per customer (ARPC).
 >
 > - [Lenny Rachitksy's Q&A](https://www.lennysnewsletter.com/p/monthly-churn-benchmarks) on monthly churn, in which he polls several experts, including the CEO of subscriptions platform ProfitWell.
+
+<NewsletterForm />

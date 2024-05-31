@@ -6,7 +6,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
-import { IconCake, IconConfetti } from '@posthog/icons'
+import { IconCake, IconCoffee, IconConfetti, IconGlobe, IconHandwave } from '@posthog/icons'
 import { Twitter } from 'components/Icons/Icons'
 import { usePosts } from 'components/Edition/hooks/usePosts'
 import Questions from 'components/InsidePostHog/Questions'
@@ -110,30 +110,40 @@ const SlackPosts = () => {
                             },
                         },
                     }) => {
-                        const topic = topics?.data?.[0]?.attributes?.label
+                        const topic = topics?.data?.[0]?.attributes
                         const name = [profile?.data?.attributes?.firstName, profile?.data?.attributes?.lastName]
                             .filter(Boolean)
                             .join(' ')
                         return (
                             <li key={id}>
                                 <Link
-                                    className="text-inherit hover:text-inherit"
-                                    to={`/questions/topic/${slugify(topic, { lower: true })}`}
+                                    className="text-inherit hover:text-inherit leading-tight flex items-center gap-1"
+                                    to={`/questions/topic/${slugify(topic.slug)}`}
                                     state={{ previous: { title: 'Community', url: '/community' } }}
                                 >
-                                    <h5 className="opacity-50 text-sm m-0">{topic}</h5>
+                                    {topic.slug === 'witw' ? (
+                                        <IconGlobe className="size-5 opacity-50" />
+                                    ) : topic.slug === 'devrel' ? (
+                                        <IconCoffee className="size-5 opacity-50" />
+                                    ) : topic.slug === 'introductions' ? (
+                                        <IconHandwave className="size-5 opacity-50" />
+                                    ) : (
+                                        <></>
+                                    )}
+
+                                    <h5 className="opacity-50 font-semibold text-sm m-0">{topic.label}</h5>
                                 </Link>
                                 <Link
                                     to={`/questions/${permalink}`}
                                     state={{ previous: { title: 'Community', url: '/community' } }}
                                 >
-                                    <h4 className="m-0 my-1 text-base">{subject}</h4>
+                                    <h4 className="mt-1 mb-2 text-base leading-tight ml-6">{subject}</h4>
                                 </Link>
-                                <p className="text-sm m-0 mb-2">
+                                {/* <p className="text-sm m-0 mb-2">
                                     <span className="opacity-50">Shared by</span>{' '}
                                     <Link to={`/community/profiles/${profile?.data?.id}`}>{name}</Link>
-                                </p>
-                                <div className="article-content">
+                                </p> */}
+                                <div className="article-content ml-6 [&_p]:leading-normal [&_p]:text-sm [&_img]:rounded">
                                     <Markdown>{body}</Markdown>
                                 </div>
                             </li>

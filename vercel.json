@@ -1257,6 +1257,12 @@
         {
             "source": "/blog/gdpr-google-analytics-privacy-shield",
             "destination": "/blog/best-gdpr-compliant-analytics-tools"
+        },
+        { "source": "/docs/product-analytics/llms", "destination": "/docs/ai-engineering" },
+        { "source": "/docs/ai-engineering/llms", "destination": "/docs/ai-engineering/llm-insights" },
+        {
+            "source": "/docs/product-analytics/trends",
+            "destination": "/docs/product-analytics/trends/index"
         }
     ]
 }

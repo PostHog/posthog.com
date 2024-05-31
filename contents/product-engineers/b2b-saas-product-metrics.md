@@ -75,6 +75,8 @@ Your adoption rate is `(new active users / signups) x 100`, so 40 new active use
 
 **Is it useful?** We'd argue not. There are better, more specific measures for product health, like [new user activation](#new-user-activation).
 
+<NewsletterForm />
+
 ### Customer retention rate
 
 **What is it?** Customer retention rate is a classic metric that calculates the proportion of customers you retain from one period to the next. 
@@ -198,6 +200,8 @@ What makes this a good product metric for us? Let's break it down:
 - **Is it actionable?** Yes. If this metric drops, it immediately gives us several avenues of investigation to understand the cause.
 
 Not all useful product metrics follow this trend – active users is a notable exception – but it's a good acid test to apply to any metric you're considering.
+
+<NewsletterForm />
 
 ### Recommended B2B product metrics
 

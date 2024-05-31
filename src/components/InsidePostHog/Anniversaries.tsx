@@ -12,6 +12,9 @@ export default function Anniversaries() {
     useEffect(() => {
         const query = qs.stringify(
             {
+                pagination: {
+                    limit: -1,
+                },
                 populate: {
                     avatar: true,
                 },

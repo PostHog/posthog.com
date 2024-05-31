@@ -41,7 +41,9 @@ We split our budget 50-50 between the two. This is not a 'rule' – just don't s
 
 Everyone who works at a tech company basically thinks they are immune to ads because they are super good at internetting, and have never seen an ad for a new product, clicked on it, and then signed up. Your _quantitative_ attribution data in PostHog, or whatever analytics tool you are using, will seem to back this up. 
 
-This is why we ask all users where they heard about PostHog whenever they sign up or book a demo – it's a simple (optional) free text field. Enough of our users say 'ad on Google' or similar that we know paid ads do actually reach a large chunk of them. Especially ones with money to spend on behalf of their company. However, you need to take the time to collect and digest this _qualitative_ attribution data in the first place. 
+This is why we ask all users where they heard about PostHog whenever they sign up or book a demo – it's a simple (optional) free text field. Enough of our users say 'ad on Google' or similar that we know paid ads do actually reach a large chunk of them. Especially ones with money to spend on behalf of their company. However, you need to take the time to collect and digest this _qualitative_ attribution data in the first place.
+
+<NewsletterForm />
 
 ### An agency will solve all your problems
 
@@ -152,3 +154,5 @@ Then you can branch out into other channels. For reference, at PostHog we got Go
 - Check out [PostHog’s Marketing Handbook](/handbook/growth/marketing) – and copy it if you want to!
 
 > **Hello, Hacker News.** If you liked this article, why not [subscribe to our newsletter](https://newsletter.posthog.com/), Product for Engineers? We share more articles like this every two weeks or so.
+
+<NewsletterForm />

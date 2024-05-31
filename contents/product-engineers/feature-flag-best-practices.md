@@ -50,6 +50,8 @@ Having a “sticky” ID (like a cookie, which is the default in PostHog) ensure
 
 If you use group analytics or person properties in your flag rollout, accurate identification includes setting them up properly. Users must be a part of groups or have a property for PostHog to evaluate flags relying on these.
 
+<NewsletterForm />
+
 ## 4. Use local evaluation for faster flags
 
 An underrated feature of PostHog’s feature flag functionality is the ability to evaluate flags locally. By polling the PostHog server and/or using cached feature flag data, your app can evaluate flags without waiting for another response from PostHog.
@@ -207,3 +209,5 @@ Whatever you choose, it should be clear to your team when to remove a feature fl
 - [What you can learn from how GitHub and GitLab use feature flags](/product-engineers/github-gitlab-feature-flags)
 - [How we build features users love (really fast)](/product-engineers/measuring-feature-success)
 - [Why we test in production (and you should too)](/product-engineers/testing-in-production)
+
+<NewsletterForm />

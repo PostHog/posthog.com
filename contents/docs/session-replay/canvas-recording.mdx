@@ -1,5 +1,5 @@
 ---
-title: Console logs recording
+title: Canvas recording
 availability:
   free: full
   selfServe: full
@@ -10,11 +10,9 @@ export const ImgReplayCanvasLight = "https://res.cloudinary.com/dmukukwp6/image/
 
 PostHog can capture canvas elements from your application. It works in both 2D and WebGL environments. 
 
-As canvas elements can contain sensitive information, we do not capture these automatically. You can enable this feature globally from your [replay settings](https://us.posthog.com/settings/project-replay#replay).
+As canvas elements can contain sensitive information and there is **no way to mask canvas elements right now**, we do not capture these automatically. Once you are sure they are free of PII, you can enable this feature globally from your [replay settings](https://us.posthog.com/settings/project-replay#replay).
 
 Canvas elements are recorded at a rate of **4 frames per second** which may lead to some perceptual differences during playback.
-
-> **Important:** There is no way to mask canvas elements right now so please ensure that they are are free of PII before enabling this feature.
 
 <ProductScreenshot
     imageLight={ImgReplayCanvasLight} 

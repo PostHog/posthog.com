@@ -6,40 +6,40 @@ tags:
   - community
 ---
 
-> This is a community integration that is not maintained by the PostHog core team.
+To easily track your Docusaurus site, you can install the [PostHog plugin](https://github.com/PostHog/posthog-docusaurus). This enables you to autocapture pageviews, clicks, session replays, as well as use the other features of PostHog such as [surveys](/docs/surveys). 
 
 ## Install
 
-```bash
-yarn add posthog-docusaurus
-```
-
-or
+Once you have your Docusaurus site set up, install the PostHog plugin:
 
 ```bash
 npm install --save posthog-docusaurus
 ```
 
-## How to use
+or 
+
+```bash
+yarn add posthog-docusaurus
+```
+
+Next, add it to your Docusaurus config with your project API key and instance address, both of which you can find in [your project settings](https://us.posthog.com/settings/project).
 
 ```js
-// in docusaurus.config.js
+// docusaurus.config.js
 module.exports = {
   plugins: [
     [
       "posthog-docusaurus",
       {
         apiKey: "<ph_project_api_key>",
-        appUrl: "<ph_client_api_host>", // optional
+        appUrl: "<ph_client_api_host>", // optional, defaults to "https://us.i.posthog.com"
         enableInDevelopment: false, // optional
-        // other options are passed to posthog-js init as is
-        // NOTE: options are passed through JSON.stringify(), so functions (such as `sanitize_properties`) are not supported.
       },
     ],
   ],
 };
 ```
 
-This will automatically start tracking pageviews, clicks and more.
+Run your site again to see events autocaptured by PostHog.
 
-For more instructions, see the [browser JS library](/docs/integrate/client/js).
+> **Note:**You can pass additional PostHog [config options](/docs/libraries/js#config) to the plugin, but they are passed through `JSON.stringify()`, so functions (such as `sanitize_properties`) are not supported.

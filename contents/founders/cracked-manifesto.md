@@ -37,6 +37,8 @@ No! The following are definitely not prerequisites to being cracked:
 
 Adopting this mentality has noticeably increased the diversity of people applying to work with us at PostHog, as it ignores some of the traditional markers of status when it comes to job applications.
 
+<NewsletterForm />
+
 ## How to manage a cracked team
 
 A lot of traditional management behavior doesn’t apply here, and can actively slow down or demotivate your team.
@@ -75,7 +77,7 @@ Here is some subjective math:
 
 Asking thoughtful questions and rigorously testing ideas is cracked. Long approval processes that exist for the sake of having someone senior sign off on something in order to kick accountability up the chain is very un-cracked. If you find yourself approving stuff for your team because of your position as their manager, remove yourself from the process. 
 
-### 6.Hiring and setting context are your two most important jobs
+### 6. Hiring and setting context are your two most important jobs
 
 The number one thing you can do to motivate cracked people? Find them more cracked people to work with! 
 
@@ -88,3 +90,5 @@ A close number two is setting the right context for them to do their best work. 
 - Got the interview? [Here are the questions](/founders/what-to-ask-in-interviews) you should be asking. 
 - [Literally everything](/newsletter/hiring-at-posthog-lessons) we've learned about hiring at PostHog
 - A bunch of [myths and truths](/founders/early-stage-startup-hiring-strategy) I've learned about startup hiring in the last 10 years
+
+<NewsletterForm />

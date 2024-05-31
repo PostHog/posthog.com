@@ -50,6 +50,8 @@ We didn’t enjoy the sales process, and we didn’t enjoy debugging other peopl
 
 > **Takeaway:** The easiest way to fail is to simply lose interest. When we made that decision, we optimized for what would keep us and our team motivated in the long term. We optimized for (meaningful) fun.
 
+<NewsletterForm />
+
 ## 3. When artificial deadlines do (and don’t) work
 
 Elon is famous for creating urgency by setting unrealistic artificial deadlines – e.g. moving the 500k unit target for the Model 3 forward by two years.
@@ -125,3 +127,5 @@ Many VCs will tell you to hire like crazy when you have [product-market fit](/fo
 - **[My Sixth Year as a Bootstrapped Founder](https://mtlynch.io/solo-developer-year-6/) – Michael Lynch:** Lessons from Lynch in his sixth year bootstrapping, where he finally reached $1 million in revenue.
 
 - **[How to fix broken teams](https://blog.staysaasy.com/p/how-to-fix-broken-teams) – Stay SaaSy:** StaySaaSy shares some actionable tips on how to fix to failing teams.
+
+<NewsletterForm />

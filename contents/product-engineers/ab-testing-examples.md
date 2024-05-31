@@ -87,6 +87,8 @@ With this, Instacart was confident the new algorithm led to improvements in deli
 > 📖 **Further reading:**
 > - [It All Depends](https://tech.instacart.com/it-all-depends-4bb7b22e854b) on the Tech at Instacart blog
 
+<NewsletterForm />
+
 ## 3. Coinbase – Scaling tests by separating experiment and functional code
 
 Coinbase had a different challenge from Monzo and Instacart. To improve their machine learning algorithms, Coinbase needed to run a high volume of tests. Because tests impact each other, they needed separation. This created a bottleneck: **there weren’t enough separate user samples to run all the tests they wanted.**
@@ -191,3 +193,5 @@ The Bayesian approach focuses more on the average magnitude of wrong decisions o
 - [Annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
 - [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
 - [Guides to running A/B tests in PostHog](/tutorials/categories/experimentation)
+
+<NewsletterForm />

@@ -79,3 +79,5 @@ The analytics become a part of your business processes. PostHog helps this happe
 ## The balance of early-stage startup analytics
 
 Analytics at early-stage startups is a balance. You need just enough information to know what to build next, without getting bogged down in overanalysis. Follow these steps and you'll have built an efficient flashlight to find your way to product-market fit. If this sounds helpful, [sign up for PostHog for free](https://app.posthog.com/signup).
+
+<NewsletterForm />

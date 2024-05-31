@@ -63,6 +63,8 @@ PostHog Cloud is free up to 1 million captured events and 5,000 recordings per m
 
 You can also self-host PostHog Open Source (available under an MIT license) using Docker Compose, though PostHog Cloud is recommended for event volumes exceeding 100k per month.
 
+<NewsletterForm />
+
 ## 2. OpenReplay
 ![OpenReplay - open source session replay](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/img2_OpenReplay.png)
 

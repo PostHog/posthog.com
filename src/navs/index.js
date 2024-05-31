@@ -520,7 +520,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/marketing/in-app',
                     },
                     {
-                        name: 'PostHog for Startups',
+                        name: 'PostHog for startups',
                         url: '/handbook/growth/marketing/startups',
                     },
                     {
@@ -886,6 +886,17 @@ export const communityMenu = {
     ],
 }
 
+export const sexyLegalMenu = {
+    name: 'Terms',
+    url: '/terms',
+    icon: 'IconLogomark',
+    children: [
+        { name: 'Terms', icon: 'IconDocument', url: '/terms', color: 'blue' },
+        { name: 'Privacy', icon: 'IconShield', url: '/privacy', color: 'seagreen' },
+        { name: 'DPA generator', icon: 'IconPencil', url: '/dpa', color: 'red' },
+    ],
+}
+
 export const companyMenu = {
     name: 'Company',
     url: '/about',
@@ -1200,11 +1211,8 @@ export const docsMenu = {
                             url: '/docs/libraries/django',
                         },
                         {
-                            name: 'Docusaurus v2',
+                            name: 'Docusaurus',
                             url: '/docs/libraries/docusaurus',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Flask',
@@ -1974,9 +1982,39 @@ export const docsMenu = {
                 },
                 {
                     name: 'Trends',
-                    url: '/docs/product-analytics/trends',
+                    url: '/docs/product-analytics/trends/overview',
                     icon: 'IconGraph',
                     color: 'blue',
+                    children: [
+                        {
+                            name: 'Getting started',
+                            url: '/docs/product-analytics/trends/overview',
+                        },
+                        {
+                            name: 'Charts',
+                            url: '/docs/product-analytics/trends/charts',
+                        },
+                        {
+                            name: 'Filters',
+                            url: '/docs/product-analytics/trends/filters',
+                        },
+                        {
+                            name: 'Aggregations',
+                            url: '/docs/product-analytics/trends/aggregations',
+                        },
+                        {
+                            name: 'Breakdowns',
+                            url: '/docs/product-analytics/trends/breakdowns',
+                        },
+                        {
+                            name: 'Formulas',
+                            url: '/docs/product-analytics/trends/formulas',
+                        },
+                        {
+                            name: 'Tips',
+                            url: '/docs/product-analytics/trends/tips',
+                        },
+                    ],
                 },
                 {
                     name: 'Funnels',
@@ -2035,8 +2073,8 @@ export const docsMenu = {
                 },
                 {
                     name: 'LLM insights',
-                    url: '/docs/product-analytics/llms',
-                    icon: 'IconMagicWand',
+                    url: '/docs/ai-engineering/llms',
+                    icon: 'IconAIText',
                     color: 'yellow',
                     badge: {
                         title: 'Beta',
@@ -2563,37 +2601,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Filtering',
-                    url: '',
-                    children: [
-                        {
-                            url: '/docs/cdp/downsampling',
-                            name: 'Downsampler',
-                        },
-                        {
-                            url: '/docs/cdp/event-sequence-timer',
-                            name: 'Event Sequence Timer',
-                        },
-                        {
-                            url: '/docs/cdp/filter-out',
-                            name: 'Filter Out',
-                        },
-                        {
-                            url: '/docs/cdp/property-filter',
-                            name: 'Property Filter',
-                        },
-                        {
-                            url: '/docs/cdp/schema-enforcer',
-                            name: 'Schema Enforcer',
-                        },
-                        {
-                            url: '/docs/cdp/taxonomy-standardizer',
-                            name: 'Taxonomy Standardizer',
-                        },
-                    ],
-                },
-                {
-                    name: 'Transformation',
+                    name: 'Transformations',
                     url: '',
                     children: [
                         {
@@ -2611,6 +2619,30 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/user-agent-populator',
                             name: 'User Agent Populator',
+                        },
+                        {
+                            url: '/docs/cdp/event-sequence-timer',
+                            name: 'Event Sequence Timer',
+                        },
+                        {
+                            url: '/docs/cdp/property-filter',
+                            name: 'Property Filter',
+                        },
+                        {
+                            url: '/docs/cdp/taxonomy-standardizer',
+                            name: 'Taxonomy Standardizer',
+                        },
+                        {
+                            url: '/docs/cdp/downsampling',
+                            name: 'Downsampler',
+                        },
+                        {
+                            url: '/docs/cdp/filter-out',
+                            name: 'Filter Out',
+                        },
+                        {
+                            url: '/docs/cdp/schema-enforcer',
+                            name: 'Schema Enforcer',
                         },
                     ],
                 },
@@ -2685,6 +2717,59 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/under-the-hood',
                     icon: 'IconMagicWand',
                     color: 'seagreen',
+                },
+            ],
+        },
+        {
+            name: 'AI engineering',
+            url: '/docs/ai-engineering',
+            color: '[#681291]',
+            colorDark: '[#C170E8]',
+            icon: 'IconAI',
+            badge: {
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+            },
+            children: [
+                {
+                    name: 'AI engineering',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/ai-engineering',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'LLM insights',
+                    url: '/docs/ai-engineering/llm-insights',
+                    icon: 'IconAIText',
+                    color: 'blue',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/ai-engineering/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Integrations',
+                },
+                {
+                    name: 'Langfuse',
+                    url: '/docs/ai-engineering/langfuse-posthog',
+                    icon: 'IconWrench',
+                    color: 'purple',
+                },
+                {
+                    name: 'Helicone',
+                    url: '/docs/ai-engineering/helicone-posthog',
+                    icon: 'IconWrench',
+                    color: 'green',
                 },
             ],
         },
