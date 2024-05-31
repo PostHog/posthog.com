@@ -77,7 +77,7 @@ export const useProducts = () => {
             slug: 'product-analytics',
             freeLimit: '1,000,000',
             denomination: 'event',
-            price: '0.000248',
+            price: '0.00005',
             volume: eventNumber,
             calcVolume: <>{eventNumber.toLocaleString()}</>,
             calcCost: <>{productAnalyticsCost.toLocaleString()}</>,
