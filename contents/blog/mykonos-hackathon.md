@@ -118,7 +118,7 @@ It’s not the most optimal flow. So, imagine if instead users could view and re
 
 But that's not all, if you're using Zendesk then you could, in the future, add this view to your customer-facing website with just a few clicks. Like the sound of this project? [Got to our public roadmap](https://posthog.com/roadmap), search for 'Customer support product', and vote for it.
 
-## The ~pyramid~ referral scheme
+## The referral scheme
 
 <BuiltBy people={["Ben White", "Raquel Smith", "Joe Martin"]} />
 
