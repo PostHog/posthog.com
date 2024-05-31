@@ -14,6 +14,13 @@ Your external data can be used alongside the rest of the PostHog.
 
 Data synced to the data warehouse is available for use in insights, just as events and actions are. You can select your data warehouse data as a series in the dropdown when creating an insight.
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/data_light_a4b621d2dc.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/data_dark_bd8533060b.png"
+    alt="Selecting data warehouse data" 
+    classes="rounded"
+/>
+
 The main difference from events is that you must identify 3 fields from the data warehouse data to visualize it:
 
  -  ID: A field that corresponds to the ID of the element. 
