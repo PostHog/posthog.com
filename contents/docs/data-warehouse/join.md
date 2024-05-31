@@ -12,7 +12,7 @@ Your external data can be used alongside the rest of the PostHog.
 
 ### Visualizing
 
-Data synced to the data warehouse will be available for use in an insight just as events and actions are. You can select your data warehouse data as a category besides events and actions in the event dropdown when analyzing insights.
+Data synced to the data warehouse is available for use in insights, just as events and actions are. You can select your data warehouse data as a series in the dropdown when creating an insight.
 
 The main difference from PostHog events to note is that you must identify 3 fields from the data warehouse data (id, distinct id, and timestamp) for the data to be graphable. It's infeasible for us to map and assume which fields represent the time and id from a given data source so we do a best guess prefill but allow you to edit it. ID should be a field that corresponds to the id of the element. Distinct id should correspond to an id that represents the user associated with the element (if none, can match Id). Timestamp field should be a timestamp field representing when the element was created
 
