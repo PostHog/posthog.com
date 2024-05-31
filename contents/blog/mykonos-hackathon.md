@@ -1,5 +1,5 @@
 ---
-date: 2024-05-28
+date: 2024-05-31
 title: What we built at our windswept Mykonos hackathon
 rootPage: /blog
 sidebar: Blog
