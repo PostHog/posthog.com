@@ -1110,7 +1110,7 @@ const PricingExperiment = ({
                         </SectionColumns>
                     </SectionLayout>
 
-                    <section className="bg-white shadow-xl rounded pt-6 pb-2 md:py-8 px-8 md:px-12 mx-6 md:mx-auto w-[calc(100%_-_3rem)] md:w-full max-w-3xl -rotate-1">
+                    <section className="bg-white text-dark shadow-xl rounded pt-6 pb-2 md:py-8 px-8 md:px-12 mx-6 md:mx-auto w-[calc(100%_-_3rem)] md:w-full max-w-3xl -rotate-1">
                         <SectionHeader>
                             <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>
                             <h3>Our pricing is designed to make you happy</h3>
@@ -1126,6 +1126,7 @@ const PricingExperiment = ({
                                 <strong>We aim to be the cheapest for each product at every scale</strong> compared to
                                 every major competitor.{' '}
                                 <Link
+                                    iconClasses="!text-dark"
                                     href="https://twitter.com/intent/tweet?text=@posthog%20Your%20pricing%20is..."
                                     external
                                 >
