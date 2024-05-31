@@ -155,7 +155,7 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
-const allProductsData = graphql`
+export const allProductsData = graphql`
     query {
         allProductData {
             nodes {
@@ -186,6 +186,7 @@ const allProductsData = graphql`
                             unit
                             flat_rate
                             unit_amount_usd
+                            included_if
                             features {
                                 description
                                 key
@@ -334,7 +335,7 @@ const Pricing = ({
                                             </div>
                                         )}
                                     >
-                                        <span className="border-b border-dashed border-primary/50 dark:primary-dark/50">
+                                        <span className="border-b border-dashed border-primary/50 dark:border-primary-dark/50">
                                             value-based pricing
                                         </span>
                                     </Tooltip>
