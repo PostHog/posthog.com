@@ -32,8 +32,9 @@ const Modal = ({ onClose, isVisible }) => {
                 </div>
                 <div className="px-4 pb-4 md:px-8 md:pb-8 [&_p]:text-[15px]">
                     <p className="mb-2">
-                        Person profiles let you store user details (like email address) centrally and track them over
-                        time. This enables deeper insights when analyzing anonymous traffic (like in Google Analytics).
+                        Person profiles let you store detailed information about a user (like an email address, plan
+                        name, or custom properties). This enables a deeper level of insights that isn't available when
+                        analyzing anonymous traffic (like in Google Analytics).
                     </p>
                     <p className="mb-2">
                         It also provides attribution data and lets you track users across devices and sessions.
@@ -85,17 +86,21 @@ const Modal = ({ onClose, isVisible }) => {
                                     </span>
                                 </div>
                                 <p className="text-sm opacity-75 pl-4 mb-0">
-                                    Some anonymous traffic and all signed in users
+                                    Some anonymous (website) traffic and all signed in users
                                 </p>
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
-                                <p className="mb-0">
+                                <p className="mb-2">
                                     <strong className="text-green">
                                         Yes, you'll use person profiles any time you provide person information to
                                         store.
                                     </strong>{' '}
                                     This will allow you to store things like site preferences (eg. dark mode) and more
                                     on non-identified users and still leverage all the benefits of person profiles.
+                                </p>
+                                <p className="mb-0">
+                                    It also allows you to merge anonymous and identified users, so you can track the
+                                    same user from the first time they visit your site through to when they sign up.
                                 </p>
                             </div>
                         </details>
@@ -110,7 +115,9 @@ const Modal = ({ onClose, isVisible }) => {
                                         </div>
                                     </span>
                                 </div>
-                                <p className="text-sm opacity-75 pl-4 mb-0">Anonymous website traffic only</p>
+                                <p className="text-sm opacity-75 pl-4 mb-0">
+                                    Anonymous website traffic only (like Google Analytics)
+                                </p>
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
                                 <p className="mb-0">
