@@ -78,15 +78,18 @@ const Modal = ({ onClose, isVisible }) => {
                         <details>
                             <summary className="cursor-pointer">
                                 <div className="inline-flex items-center justify-between w-[95%]">
-                                    <strong>"I want details about some anonymous users"</strong>
+                                    <strong>"I want to store properties on anonymous users"</strong>
                                     <span>
                                         <div className="border border-green rounded px-1 py-0.5 text-green font-bold uppercase text-sm">
                                             Yes
                                         </div>
                                     </span>
                                 </div>
-                                <p className="text-sm opacity-75 pl-4 mb-0">
-                                    Some anonymous (website) traffic and all signed in users
+                                <p className="text-sm text-primary/75 dark:text-primary-dark/75 pl-4 mb-0">
+                                    <span className="border border-red dark:border-yellow text-xs text-red dark:text-yellow font-semibold uppercase px-1 py-0.5 rounded-sm">
+                                        Most common
+                                    </span>{' '}
+                                    Read how to calculate this below
                                 </p>
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
@@ -108,7 +111,7 @@ const Modal = ({ onClose, isVisible }) => {
                         <details>
                             <summary className="cursor-pointer">
                                 <div className="inline-flex items-center justify-between w-[95%]">
-                                    <strong>"I only want to track website visits"</strong>
+                                    <strong>"I only want to track website visits (like Google Analytics)"</strong>
                                     <span>
                                         <div className="border border-red rounded px-1 py-0.5 text-red font-bold uppercase text-sm">
                                             No
@@ -116,7 +119,7 @@ const Modal = ({ onClose, isVisible }) => {
                                     </span>
                                 </div>
                                 <p className="text-sm opacity-75 pl-4 mb-0">
-                                    Anonymous website traffic only (like Google Analytics)
+                                    Set <em>Enhanced persons</em> to <strong>0%</strong>
                                 </p>
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
@@ -139,7 +142,9 @@ const Modal = ({ onClose, isVisible }) => {
                                         </div>
                                     </span>
                                 </div>
-                                <p className="text-sm opacity-75 pl-4 mb-0">Authenticated, identified users only</p>
+                                <p className="text-sm opacity-75 pl-4 mb-0">
+                                    Set <em>Enhanced persons</em> to <strong>100%</strong>
+                                </p>
                             </summary>
                             <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
                                 <p className="mb-0">
@@ -155,12 +160,21 @@ const Modal = ({ onClose, isVisible }) => {
 
                     <h3 className="text-xl border-b border-light dark:border-dark pb-1 mb-2">Calculating usage</h3>
                     <p className="text-[15px] mb-2">
-                        If you already track website traffic, the best way to gauge person profile usage is to determine
-                        what percentage of event volume is <em>anonymous traffic</em> vs. identified.
+                        If you already track website visits, the best way to gauge person profile usage is to determine
+                        what percentage of event volume is <em>anonymous traffic</em> vs. identified product users.
+                    </p>
+                    <p className="text-[15px] mb-2">
+                        If you currently use Google Analytics in conjunction with a product analytics tool, you can
+                        compare the traffic volume (page views) in Google Analytics and the event volume in your product
+                        anaytics solution to find what percentage of your event volume is anonymous.
+                    </p>
+                    <p className="text-[15px] mb-2">
+                        For example, if 75% of your total event volume (between website and product) is anonymous
+                        website traffic, you'll need person profiles for the remaining 25% of events.
                     </p>
                     <p className="text-[15px]">
-                        For example, if 75% of your volume is anonymous website traffic when factoring in all in-product
-                        usage from identified users, you'll need person profiles for the remaining 25% of events.
+                        Note that you'll need to adjust this ratio if you want to store custom properties on anonymous
+                        users, as these require person profiles even if you don't know their email address yet.
                     </p>
                 </div>
             </div>
