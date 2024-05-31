@@ -56,11 +56,13 @@ The solution? Introducing RealTimeHog 3000, a [livestream](https://github.com/Po
 1. Consume the raw events from the same Kafka topic as our ingestion service. 
 2. Stream them to you ASAP using server-sent events.
 
-![RealTimeHog 3000](https://res.cloudinary.com/dmukukwp6/image/upload/realtime1_f40652b636.gif)
-
 The lack of person data is a fair trade-off, because it doesn’t get more live than this. User activity appears within milliseconds of happening on the other side of the world.
 
-Speaking of data being processed live, perhaps at some point you’ve wondered if PostHog actually scales, or just talks the talk. To dispel any doubts, we developed one extra feature: an anonymized stream of all events being captured globally, with only the geolocation included. 
+![RealTimeHog 3000](https://res.cloudinary.com/dmukukwp6/image/upload/realtime1_f40652b636.gif)
+
+Speaking of data being processed live, perhaps at some point you’ve wondered if PostHog actually scales, or just talks the talk. 
+
+To dispel any doubts, we developed one extra feature: an anonymized stream of all events being captured globally, with only the geolocation included. 
 
 ![The PostHog globe](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_05_31_at_9_53_45_AM_86d275de54.png)
 
@@ -73,8 +75,6 @@ Millions of events per minute, and they look great on a 3D globe on PostHog’s 
 MykoLogs is a logging product that integrates with the existing PostHog SDKs, bringing backend logs straight into a shiny new product on PostHog. 
 
 The best part? You can link backend logs to session recordings through the user’s session ID – letting you debug what was happening on the backend during your user's API requests. MykoLogs plays nicely with all other PostHog products, meaning logs and session replay are now BFFs. Debugging has never been this breezy!
-
-![MykoLogs](https://res.cloudinary.com/dmukukwp6/image/upload/mykologs_5699a50b6c.gif)
 
 It's internal-only for now, but could one day be made public. 
 
@@ -94,11 +94,11 @@ While just a proof-of-concept for now, if we were to ship it we’d want to add 
 
 <BuiltBy people={["Cory Watilo", "Andy Vandervell", "Fraser Hopper"]} />
 
-![Terms, PostHog style](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon_dpyay_53b6334a36.png)
-
 Are you fed up with lawyers making everything so hard to understand? Are you fed up with those nerds in Brussels making us sign DPAs for everything? Not anymore! On PostHog.com, we’ve made all the legal stuff fun – and kept the lawyers happy.
 
 First up, we summarized our [terms](/terms) and [privacy policy](/privacy) in plain English. You can still read the long, legal-y version, but it’s now way easier to understand what it actually means. And we didn’t stop there. 
+
+![Terms, PostHog style](https://res.cloudinary.com/dmukukwp6/image/upload/hackathon_dpyay_53b6334a36.png)
 
 Then we took on our data processing agreement, or DPA, to create a generator that makes this hugely exciting task even more fun. You can quickly populate your own form, select the data region, and, if you want, add some pizazz with fairy tale or Taylor Swift mode. DPA? [Try DPYAY!](/dpa)
 
@@ -150,9 +150,11 @@ Simply add in any domain you control and the system will spit out a CNAME that y
 
 <BuiltBy people={["Ian Vanagas", "Juraj Majerik", "Lior Neu-ner"]} />
 
+Want to know how to improve your website but don’t know where to start? You need A/B TestHog. Enter a website URL, click ‘Analyze’ and an ingenious generative AI system will give you a bunch of recommendations for what A/B tests you might run to take your website to the next level. 
+
 ![A/B TestHog](https://res.cloudinary.com/dmukukwp6/image/upload/abtesthog1_eef0030d9b.png)
 
-Want to know how to improve your website but don’t know where to start? You need A/B TestHog. Enter a website URL, click ‘Analyze’ and an ingenious generative AI system will give you a bunch of recommendations for what A/B tests you might run to take your website to the next level. These are all expertly authored by an AI, and include the goal metrics, secondary metrics, and guardrail metrics and detailed instructions of what to change for your test.
+These are all expertly authored by an AI, and include the goal metrics, secondary metrics, and guardrail metrics and detailed instructions of what to change for your test.
 
 ## HERMES
 
@@ -176,11 +178,11 @@ As part of the project, we also revamped our system for categorizing and trackin
 
 <BuiltBy people={["Sandy Spicer", "Tim Glaser"]} />
 
-![Data crunching](https://res.cloudinary.com/dmukukwp6/image/upload/datacrunch1_7ab73f5ab4.jpg)
-
 PostHog crunches a lot of data, especially on very complext queries. To help users better understand the hard work we’re doing when they make a query, we built a loading bar that includes live data on how much data we're crunching (database rows and data volume) and CPU usage we're deploying to generate an answer for you.
 
-If you feel the need for a quick distraction while you wait, you could also check out [Hedgehog mode 2.0](https://posthog.com/changelog/2024#hedgehog-mode-2.0-launched), which also shipped recently..
+![Data crunching](https://res.cloudinary.com/dmukukwp6/image/upload/datacrunch1_7ab73f5ab4.jpg)
+
+If you feel the need for a quick distraction while you wait, you could also check out [Hedgehog mode 2.0](https://posthog.com/changelog/2024#hedgehog-mode-2.0-launched), which also shipped recently.
 
 ## CLI
 
@@ -188,9 +190,9 @@ If you feel the need for a quick distraction while you wait, you could also chec
 
 We build products for engineers, so there’s nothing better than bringing PostHog closer to their natural environment: the terminal.
 
-![CLI](https://res.cloudinary.com/dmukukwp6/image/upload/cli_fb71d1730d.png)
-
 The PostHog CLI is a command line that allows users to do a few things that are normally tucked away in the PostHog app: creating, reading, updating, deleting, and enabling or disabling feature flags, for example. The PostHog CLI authentication flow is also seamless as it spins up a new browser and allows you to log in with your SSO instead of copying and pasting tokens manually.
+
+![CLI](https://res.cloudinary.com/dmukukwp6/image/upload/cli_fb71d1730d.png)
 
 In the future, the CLI could be expanded with more features such as creating surveys, and events, installing SDKs automatically, uploading debug symbols, using the CLI as a package, or even as a GitHub action. And, even better, you could do all of that with natural language, no need to memorize all commands by heart.
 
