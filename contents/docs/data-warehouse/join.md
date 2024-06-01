@@ -51,8 +51,8 @@ To define a join, go to the data warehouse tab, select the origin table of the j
 Joining data warehouse data against the PostHog `persons` schema enables the data to be used as person filters within the insight scene. 
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_01_at_4_12_28_PM_b7edaac039.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_01_at_4_12_12_PM_5792f7efac.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_01_at_4_43_58_PM_e35e915229.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_01_at_4_43_10_PM_c7af61a58f.png"
     alt="Filter on joined person properties" 
     classes="rounded"
 />
