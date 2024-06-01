@@ -37,8 +37,25 @@ Once you've selected a data warehouse table to visualize, you can filter on the 
 
 You can join external data on existing PostHog schemas and other external data tables. These joins are saved and interpreted anytime they're accessed on the origin table. For example, if you import your Stripe data and get a table `stripe_customers` and define a join between `events` and `stripe_customers`, you can then query `SELECT stripe_customers.id FROM events`. 
 
+To define a join, go to the data warehouse tab, select the origin table of the join, click "Add join", and define the join parameters.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_01_at_4_13_52_PM_c676e12a91.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_01_at_4_14_04_PM_74fd0ef4dc.png"
+    alt="Create a join" 
+    classes="rounded"
+/>
+
 #### Special Joins
 
 Joining data warehouse data against the PostHog `persons` schema enables the data to be used as person filters within the insight scene. 
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_01_at_4_12_28_PM_b7edaac039.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_01_at_4_12_12_PM_5792f7efac.png"
+    alt="Filter on joined person properties" 
+    classes="rounded"
+/>
+
 
 
