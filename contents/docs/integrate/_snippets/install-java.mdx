@@ -34,11 +34,16 @@ See the [com.posthog.java](https://search.maven.org/artifact/com.posthog.java/po
 import com.posthog.java.PostHog;
 
 class Sample {
-  private static final String POSTHOG_API_KEY = "<ph_project_api_key>";
+  private static final String POSTHOG_PROJECT_API_KEY = "<ph_project_api_key>";
   private static final String POSTHOG_HOST = "<ph_client_api_host>";
+  // Optional, but required for feature flags
+  private static final String POSTHOG_PERSONAL_API_KEY = "<ph_personal_api_key>";
 
   public static void main(String args[]) {
-    PostHog posthog = new PostHog.Builder(POSTHOG_API_KEY).host(POSTHOG_HOST).build();
+    PostHog posthog = new PostHog.Builder(POSTHOG_PROJECT_API_KEY)
+      .host(POSTHOG_HOST)
+      .personalApiKey(POSTHOG_PERSONAL_API_KEY) // Required for feature flags
+      .build();
 
     // run commands
 

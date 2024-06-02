@@ -79,4 +79,30 @@ import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 
 <FeatureFlagsLibsIntro />
 
-Feature flags are not supported yet in our Java SDK. However, you can integrate them into your project by using the [PostHog API](/docs/feature-flags/adding-feature-flag-code?tab=api).
+import JavaFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-java.mdx'
+
+<JavaFeatureFlagsCode />
+
+import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
+
+### Local Evaluation
+
+<LocalEvaluationIntro />
+
+For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
+
+## Experiments (A/B tests)
+
+Since [experiments](/docs/experiments/manual) use feature flags, the code for running an experiment is very similar to the feature flags code:
+
+
+```java
+Optional<String> variant = posthog.getFeatureFlagVariant("experimentfeature-flag-name", "user_distinct_id");
+
+if (variant.isPresent() && variant.get().equals("variant-key")) {
+    // Do something differently for this user
+}
+```
+
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+

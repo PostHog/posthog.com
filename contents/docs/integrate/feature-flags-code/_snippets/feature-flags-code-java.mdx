@@ -1,0 +1,41 @@
+There are 2 steps to implement feature flags in Go:
+
+### Step 1: Evaluate the feature flag value
+
+#### Boolean feature flags
+
+```java
+boolean isMyFlagEnabled = posthog.isFeatureFlagEnabled("flag-key", "distinct_id_of_your_user");
+
+if isMyFlagEnabled == true {
+    // Do something differently for this user
+}
+```
+
+#### Multivariate feature flags
+
+```java
+Optional<String> variant = posthog.getFeatureFlagVariant("flag-key", "distinct_id_of_your_user");
+
+if (variant.isPresent() && variant.get().equals("variant-key")) { // replace 'variant-key' with the key of your variant
+    // Do something differently for this user
+}
+```
+
+import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx" 
+
+<IncludePropertyInEvents />
+
+There are two methods you can use to include feature flag information in your events:
+
+#### Include the `$feature/feature_flag_name` property
+
+ In the event properties, include `$feature/feature_flag_name: variant_key`:
+
+```java
+posthog.capture("distinct_id_of_your_user", "event_name", new HashMap<String, Object>() {
+  {
+    put("$feature/feature-flag-key", "variant-key"); // replace feature-flag-key with your flag key. Replace 'variant-key' with the key of your variant
+  }
+});
+```
