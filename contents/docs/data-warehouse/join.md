@@ -27,7 +27,7 @@ The main difference from events is that you must identify 3 fields from the data
  - Distinct ID: A field that corresponds to an ID representing the user associated with the element. If none, can match ID.
  - Timestamp:  A timestamp field representing when the element was created
  
-It's infeasible for us to map these fields, so we do pre-fill with a best guess, but allow you to edit it.
+It's infeasible for us to map these fields. We pre-fill with a best guess, but allow you to edit it.
 
 ### Filtering
 
