@@ -9,7 +9,7 @@ const cards = [
         top: 'You enjoy "jumping on a quick call" with sales',
         bottom: (
             <>
-                Sorry, we don't have a sales team. But you can{' '}
+                Sorry, we don't force you to talk to anyone. But you can{' '}
                 <Link to="/book-a-demo" className="!text-red">
                     watch a recorded demo
                 </Link>{' '}
