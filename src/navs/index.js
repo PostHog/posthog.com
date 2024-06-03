@@ -2725,6 +2725,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Joining data',
+                    url: '/docs/data-warehouse/join',
+                    icon: 'IconList',
+                    color: 'purple',
+                },
+                {
                     name: 'Save views',
                     url: '/docs/data-warehouse/views',
                     icon: 'IconCalculator',
