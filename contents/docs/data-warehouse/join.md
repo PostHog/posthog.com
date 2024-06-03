@@ -23,7 +23,7 @@ Data synced to the data warehouse is available for use in insights, just as even
 
 The main difference from events is that you must identify 3 fields from the data warehouse data to visualize it:
 
- -  ID: A field that corresponds to the ID of the element. 
+ - ID: A field that corresponds to the ID of the element. 
  - Distinct ID: A field that corresponds to an ID representing the user associated with the element. If none, can match ID.
  - Timestamp:  A timestamp field representing when the element was created
  
