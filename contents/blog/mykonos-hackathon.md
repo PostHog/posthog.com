@@ -134,7 +134,7 @@ It’s not shipped yet, but we’re close.
 
 ## Managed reverse proxy
 
-<BuiltBy people={["Frank Hamand"]} />
+<BuiltBy people={["Frank Hamand", "David Newell", "Steven Shults"]} />
 
 Everyone loves ad-blockers. But, for a lot of our customers, they stop data from reaching PostHog. 
 
