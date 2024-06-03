@@ -31,7 +31,7 @@ It's infeasible for us to map these fields. We pre-fill with a best guess, but a
 
 ### Filtering
 
-Once you've selected a data warehouse table to visualize, you can filter on the related data in the schema under the insight specific filter dropdown.
+Once you select a data warehouse table to visualize, you can filter on the related data in the schema under the insight specific filter dropdown.
 
 ### Joining
 
