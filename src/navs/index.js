@@ -2707,7 +2707,7 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Filtering, Visualizing, and Joining Data',
+                    name: 'Joining data',
                     url: '/docs/data-warehouse/join',
                     icon: 'IconList',
                     color: 'purple',
