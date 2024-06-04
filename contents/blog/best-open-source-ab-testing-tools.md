@@ -154,5 +154,3 @@ VWO's free tier is useful for non-technical users who need an easy-to-use (and f
 ### How much does VWO cost?
 
 VWO's Starter plan is free up to 50k visitors per month, and $199 per month up to 100k visitors per month.
-
-<NewsletterForm />

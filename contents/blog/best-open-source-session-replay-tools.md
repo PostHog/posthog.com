@@ -165,5 +165,3 @@ Matomo is mainly built with marketing and content teams in mind, offering insigh
 ### How much does Matomo cost?
 
 The session recording add-on for a self-hosted Matomo solution has a 30-day free trial, after which the cost ranges from $199 to $599 per year depending on the number of users in your team. Session recording is also included in Matomo’s cloud Business plan. Pricing is calculated depending on the volume of your site traffic.
-
-<NewsletterForm />

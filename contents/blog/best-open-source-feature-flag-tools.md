@@ -221,5 +221,3 @@ FeatureHub offers a hosted option in addition to its open-source edition, though
 - [Feature flag best practices and tips (with examples)](/product-engineers/feature-flag-best-practices)
 - [Should you build or buy? Feature flags as a service, explained](/blog/feature-flags-as-a-service)
 - [Feature flags vs configuration: Which should you choose?](/product-engineers/feature-flags-vs-configuration)
-
-<NewsletterForm />
