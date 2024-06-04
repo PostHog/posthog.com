@@ -16,7 +16,17 @@ Startups ship [more](https://medium.com/the-year-of-the-looking-glass/start-ups-
 
 This allows us to scale without falling into an organizational trap of having lots of big, separate functions that slow down communication, stifle innovation, and stop people from seeing the impact of their work.
 
-This is how small teams work, and why they’re important.
+Yes, there are tradeoffs and the small teams structure won't work for everyone. But, right now, it's working really well for us. And maybe it could work for you and your company, too.
+
+### How small teams work at PostHog
+
+First, a crash course in how PostHog is structured. Right, now, we're 47 people spread across ten countries working asynchronously and [shipping fast](changelog/2024). We're split into 12 small teams, most of which cover individual products such as data warehouse, replay, pipeline, or product analytics. But we also have small teams covering non-engineering areas, like people and operations and marketing. 
+
+When we launch a new product, or a project on an existing team becomes too hot to handle, we often spin out a new small team. We're in the process of creating two new small teams right now – one focussed on Hog, PostHog's first ever programming language, and another focussed on customer communications and community. This allows us to push forward with new ideas and keep shipping without sacrificing quality.
+
+Creating small teams allows us to move fast. Our [surveys product](/surveys), which aims to have similar functionality to competitors with hundreds of employees, shipped from a small team. Our [web analytics product](https://posthog.com/teams/web-analytics), which goes up against Google Analytics, is run by a small team with one person, the brilliant Robbie Coomber.
+
+The small teams structure is core to how we've [designed our company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed). Here are the golden rules of small teams – and some pitfalls to be wary of.
 
 ### Small teams are actually small
 
