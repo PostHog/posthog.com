@@ -6,7 +6,7 @@ title: Common questions about billing
 
 PostHog is usage-based and you can use it for free for as long as you want, no trial needed. See [our pricing page](/pricing) for free usage allowances.
 
-If you have special circumstances where this doesn't work for you, contact our [sales team](/contact-sales). 
+If you have special circumstances where this doesn't work for you, contact our [sales team](/talk-to-a-human). 
 
 ### How do I estimate how much PostHog will cost?
 
@@ -28,7 +28,7 @@ Yes, PostHog drops data after you go over your billing limit. To capture more du
 
 Yes, early-stage startups can get $50,000 in credits, merch, and exclusive events. Find out more and apply on our [startup program page](/startups).
 
-Non-profits can contact our [sales team](/contact-sales) for 50% off in most cases.
+Non-profits can contact our [sales team](/talk-to-a-human) for 50% off in most cases.
 
 ### Can I change the email invoices or billing alerts are sent to?
 

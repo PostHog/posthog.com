@@ -12,7 +12,7 @@ This is an overview for what you should actually be doing with a customer at eac
 
 **1. People contact us**
 
-Most people fill in the [contact sales](/contact-sales) form via the website. Some email sales@posthog.com or raise a Zendesk ticket.
+Most people fill in the [form](/talk-to-a-human) via the website. Some email sales@posthog.com or open a Zendesk ticket.
 
 **2. We assign and qualify**
 
