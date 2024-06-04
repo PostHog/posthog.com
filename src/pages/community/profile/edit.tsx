@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, ChangeEvent, ChangeEventHandler } from 'react'
-import { Field, useFormik } from 'formik'
+import React, { useState, useEffect, useRef, ChangeEventHandler } from 'react'
+import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import TextareaAutosize from 'react-textarea-autosize'
 import { useUser } from 'hooks/useUser'
@@ -7,21 +7,13 @@ import usePostHog from 'hooks/usePostHog'
 import { Avatar as DefaultAvatar } from 'components/Community/Sidebar'
 import Layout from 'components/Layout'
 import { communityMenu } from '../../../navs'
+import Link from 'components/Link'
+import Switch from 'components/Toggle'
+import { CallToAction } from 'components/CallToAction'
+import { useToast } from 'hooks/toast'
 
 function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
-}
-
-const UnitButton = ({ unit, onClick, active, className = '' }) => {
-    return (
-        <button
-            type="button"
-            className={`w-12 text-sm ${active ? 'bg-gray-accent-light/50' : ''} ${className}`}
-            onClick={onClick}
-        >
-            {unit}
-        </button>
-    )
 }
 
 const HeightField = ({ values, setFieldValue }) => {
@@ -29,27 +21,27 @@ const HeightField = ({ values, setFieldValue }) => {
     const [height, setHeight] = useState(values.height)
 
     return (
-        <div className="flex border-gray-accent-light border rounded-md overflow-hidden">
-            <input
-                onChange={(e) => {
-                    const value = Number(e.target.value)
-                    setHeight(value)
-                    setFieldValue('height', unit === 'cm' ? convertCentimetersToInches(value) : value)
-                }}
-                value={height}
-                className="py-2 px-4 text-base w-full dark:text-primary  m-0 flex-grow border-none"
-                type="number"
-                name="height"
-                placeholder="Height"
-            />
-            <div className="flex-shrink-0 flex">
-                <UnitButton
-                    active={unit === 'in'}
-                    unit="in"
-                    onClick={() => setUnit('in')}
-                    className="border-x border-gray-accent-light"
+        <div className="max-w-[165px]">
+            <div className="flex space-x-2 items-end">
+                <Input
+                    onChange={(e) => {
+                        const value = Number(e.target.value)
+                        setHeight(value)
+                        setFieldValue('height', unit === 'cm' ? convertCentimetersToInches(value) : value)
+                    }}
+                    value={height}
+                    type="number"
+                    name="height"
+                    placeholder="Height"
+                    label="Height"
                 />
-                <UnitButton active={unit === 'cm'} unit="cm" onClick={() => setUnit('cm')} />
+                <div className="flex-grow flex-shrink-0 w-[85px]">
+                    <Toggle
+                        checked={unit === 'in'}
+                        onChange={(checked) => setUnit(checked ? 'in' : 'cm')}
+                        options={['in', 'cm']}
+                    />
+                </div>
             </div>
         </div>
     )
@@ -66,14 +58,16 @@ const ToggleButton = ({ onClick, active, label }) => {
 const Toggle = ({ name, label, checked, onChange, options }) => {
     return (
         <div>
-            <label htmlFor={name} className="font-bold">
-                <span>{label}</span>
-                <div className="grid grid-cols-2 rounded-md bg-accent dark:bg-accent-dark relative text-center overflow-hidden mt-1 text-base border border-border dark:border-dark">
-                    <span className={`bg-red w-1/2 h-full absolute ${checked ? 'left-0' : 'right-0'}`} />
-                    <ToggleButton onClick={() => onChange(true)} active={checked} label={options[0]} />
-                    <ToggleButton onClick={() => onChange(false)} active={!checked} label={options[1]} />
-                </div>
-            </label>
+            {label && (
+                <label htmlFor={name} className="font-bold">
+                    <span>{label}</span>
+                </label>
+            )}
+            <div className="grid grid-cols-2 rounded-md bg-accent dark:bg-accent-dark relative text-center overflow-hidden mt-1 text-base border border-border dark:border-dark">
+                <span className={`bg-red dark:bg-yellow w-1/2 h-full absolute ${checked ? 'left-0' : 'right-0'}`} />
+                <ToggleButton onClick={() => onChange(true)} active={checked} label={options[0]} />
+                <ToggleButton onClick={() => onChange(false)} active={!checked} label={options[1]} />
+            </div>
         </div>
     )
 }
@@ -118,9 +112,19 @@ const formSections = [
                 component: ({ values, setFieldValue }) => {
                     const [enabled, setEnabled] = useState(!!values.pronouns)
                     return enabled ? (
-                        <Input name="pronouns" placeholder="Pronouns" type="text" label="Pronouns" />
+                        <Input
+                            name="pronouns"
+                            placeholder="Pronouns"
+                            type="text"
+                            label="Pronouns"
+                            onChange={(e) => setFieldValue('pronouns', e.target.value)}
+                            value={values['pronouns']}
+                        />
                     ) : (
-                        <button className="text-red font-bold" onClick={() => setEnabled(true)}>
+                        <button
+                            className="text-red dark:text-yellow font-bold text-sm"
+                            onClick={() => setEnabled(true)}
+                        >
                             Add pronouns
                         </button>
                     )
@@ -132,17 +136,19 @@ const formSections = [
         title: 'About you',
         fields: {
             biography: {
-                component: () => (
+                component: ({ values, setFieldValue }) => (
                     <>
                         <div className="flex justify-between items-center">
                             <label className="font-bold">Bio</label>
                             <p className="m-0 opacity-60 text-sm">Supports Markdown</p>
                         </div>
                         <TextareaAutosize
+                            value={values.biography}
+                            onChange={(e) => setFieldValue('biography', e.target.value)}
                             minRows={6}
                             rows={6}
                             name="biography"
-                            placeholder="280 characters or less..."
+                            placeholder="Write something interesting but don't try to use us for our SEO, we're on to you..."
                             className="py-2 px-4 text-base rounded-md w-full bg-accent dark:bg-accent-dark mt-1 border border-border dark:border-dark"
                         />
                     </>
@@ -151,60 +157,85 @@ const formSections = [
             },
         },
     },
-]
-
-const fields = {
-    github: {
-        label: 'GitHub',
-    },
-    linkedin: {
-        label: 'LinkedIn',
-    },
-    location: {
-        modOnly: true,
-    },
-    country: {
-        label: 'Country (2-char code)',
-        modOnly: true,
-    },
-    height: {
-        modOnly: true,
-        component: HeightField,
-    },
-    biography: {
-        component: () => (
-            <Field
-                minRows={6}
-                rows={6}
-                as={TextareaAutosize}
-                type="text"
-                name="biography"
-                placeholder="280 characters or less..."
-                className="py-2 px-4 text-base rounded-md w-full dark:text-primary border-gray-accent-light border mb-2"
-            />
-        ),
-        className: 'w-full',
-    },
-    amaEnabled: {
-        hideLabel: true,
-        component: ({ values, setFieldValue }) => {
-            return (
-                <div className="flex space-x-2 mb-6">
-                    <Toggle
-                        label="Ask me anything"
-                        checked={values.amaEnabled}
-                        onChange={() => setFieldValue('amaEnabled', !values.amaEnabled)}
-                        tooltip="Allows community members to ask you questions directly on your profile page"
-                    />
-                </div>
-            )
+    {
+        title: 'Links',
+        fields: {
+            website: {
+                label: 'Website',
+                placeholder: 'https://',
+            },
+            github: {
+                label: 'GitHub',
+                placeholder: 'https://github.com',
+            },
+            linkedin: {
+                label: 'LinkedIn',
+                placeholder: 'https://linkedin.com',
+            },
+            twitter: {
+                label: 'X',
+                placeholder: 'https://x.com',
+            },
         },
     },
-}
-
-function capitalizeFirstLetter(str: string) {
-    return str.charAt(0).toUpperCase() + str.slice(1)
-}
+    {
+        modOnly: true,
+        title: 'Special moderator things!',
+        subtitle: 'We use these fields for different things.',
+        fields: {
+            companyRole: {
+                label: 'Role',
+                placeholder: 'Software engineer',
+                className: 'w-full',
+            },
+            country: {
+                className: 'w-full',
+                component: ({ values, setFieldValue }) => {
+                    return (
+                        <div className="flex justify-between">
+                            <Input
+                                label="Country code (2 digit ISO)"
+                                name="country"
+                                onChange={(e) => setFieldValue('country', e.target.value)}
+                                placeholder="US"
+                                type="text"
+                                value={values['country']}
+                                className="max-w-[72px]"
+                            />
+                            <Link to="https://countrycode.org/" externalNoIcon className="font-bold text-sm">
+                                Look up your country code
+                            </Link>
+                        </div>
+                    )
+                },
+            },
+            height: {
+                label: 'Height',
+                className: 'w-full',
+                component: HeightField,
+            },
+            amaEnabled: {
+                className: 'w-full',
+                component: ({ values, setFieldValue }) => {
+                    return (
+                        <div className="flex space-x-2 space-between w-full">
+                            <div className="flex-grow">
+                                <p className="font-bold m-0">Show an AMA</p>
+                                <p className="m-0">
+                                    Let vistors ask you questions. You'll get question notfications via email.
+                                </p>
+                            </div>
+                            <Switch
+                                checked={values.amaEnabled}
+                                onChange={() => setFieldValue('amaEnabled', !values.amaEnabled)}
+                            />
+                        </div>
+                    )
+                },
+            },
+        },
+    },
+]
 
 const ValidationSchema = Yup.object().shape({
     firstName: Yup.string().required('Required'),
@@ -214,13 +245,7 @@ const ValidationSchema = Yup.object().shape({
     linkedin: Yup.string().url('Invalid URL').nullable(),
     twitter: Yup.string().url('Invalid URL').nullable(),
     biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
-    country: Yup.string().nullable(),
-    location: Yup.string().nullable(),
 })
-
-type EditProfileProps = {
-    onSubmit?: (() => void) | (() => Promise<void>)
-}
 
 function Avatar({ values, setFieldValue }) {
     const inputRef = useRef<HTMLInputElement>(null)
@@ -250,7 +275,7 @@ function Avatar({ values, setFieldValue }) {
             {imageURL ? (
                 <img className="w-full absolute inset-0 object-cover" src={imageURL} />
             ) : (
-                <DefaultAvatar className="w-[60px] h-[60px] absolute bottom-0" />
+                <DefaultAvatar className="size-full absolute bottom-0" />
             )}
             <div
                 className={`grid ${
@@ -284,31 +309,32 @@ function Avatar({ values, setFieldValue }) {
     )
 }
 
-const Input = ({ type, name, placeholder, label }) => {
+const Input = ({ type, name, placeholder, label, value, onChange, className = '' }) => {
     return (
-        <label className="font-bold">
-            <span>{label}</span>
+        <div>
+            <label className="font-bold block">{label}</label>
             <input
-                className="py-2 px-4 text-base rounded-md w-full dark:text-primary m-0 mt-1 bg-accent dark:bg-accent-dark border border-border dark:border-dark"
+                className={`py-2 px-4 text-base rounded-md w-full m-0 mt-1 bg-accent dark:bg-accent-dark border border-border dark:border-dark ${className}`}
                 type={type || 'text'}
                 name={name}
-                placeholder={placeholder}
+                placeholder={placeholder || label}
+                value={value}
+                onChange={onChange}
             />
-        </label>
+        </div>
     )
 }
 
-export default function EditProfile({ onSubmit }) {
-    const { user, fetchUser, isLoading, getJwt } = useUser()
+function EditProfile() {
+    const { addToast } = useToast()
+    const { user, fetchUser, getJwt } = useUser()
     const posthog = usePostHog()
-
-    if (!user) return null
 
     // TODO: Need to grab these from `attributes`
     const { id } = user?.profile || {}
 
     // TODO: Move this logic into the useUser hook
-    const handleSubmit = async ({ avatar, ...values }, { setSubmitting }) => {
+    const onSubmit = async ({ avatar, ...values }, { setSubmitting }) => {
         setSubmitting(true)
 
         try {
@@ -340,11 +366,11 @@ export default function EditProfile({ onSubmit }) {
             const body = {
                 data: {
                     ...values,
-                    ...(newAvatar ? { avatar: image?.id ?? null } : {}),
+                    ...(newAvatar || avatar === null ? { avatar: image?.id ?? null } : {}),
                 },
             }
 
-            const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?populate=avatar`, {
+            const { data } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify(body),
                 headers: {
@@ -355,7 +381,6 @@ export default function EditProfile({ onSubmit }) {
 
             if (data) {
                 await fetchUser(JWT)
-                onSubmit?.()
             }
 
             posthog?.capture('squeak profile update', {
@@ -373,11 +398,13 @@ export default function EditProfile({ onSubmit }) {
             throw error
         } finally {
             setSubmitting(false)
+            addToast({ message: 'Profile updated!' })
         }
     }
 
-    const { values, setFieldValue } = useFormik({
-        onSubmit: handleSubmit,
+    const { values, setFieldValue, handleChange, submitForm, handleSubmit, isSubmitting } = useFormik({
+        validationSchema: ValidationSchema,
+        onSubmit,
         initialValues: formSections.reduce((acc, section) => {
             Object.keys(section.fields).forEach((key) => {
                 acc[key] = user?.profile[key]
@@ -388,32 +415,46 @@ export default function EditProfile({ onSubmit }) {
 
     return (
         <Layout parent={communityMenu}>
-            <section className="max-w-4xl mx-auto py-12 space-y-6">
-                {formSections.map((section, index) => {
-                    return (
-                        <div key={index}>
-                            <h2>{section.title}</h2>
-                            <div className="flex flex-wrap items-center">
-                                {Object.keys(section.fields).map((key) => {
-                                    const field = section.fields[key]
-                                    return (
-                                        <div key={key} className={`${field.className ?? 'w-1/2'} p-2`}>
-                                            {(field.component && field.component({ values, setFieldValue })) || (
-                                                <Input
-                                                    type={field.type}
-                                                    name={key}
-                                                    placeholder={field.placeholder}
-                                                    label={field.label}
-                                                />
-                                            )}
-                                        </div>
-                                    )
-                                })}
+            <section className="max-w-2xl mx-auto py-12">
+                <form className="m-0 space-y-6" onSubmit={handleSubmit}>
+                    {formSections.map((section, index) => {
+                        if (section.modOnly && user?.role?.type !== 'moderator') return null
+                        return (
+                            <div key={index}>
+                                <h2>{section.title}</h2>
+                                {section.subtitle && <p className="opacity-70 -mt-4 mb-4">{section.subtitle}</p>}
+                                <div className="flex flex-wrap items-center">
+                                    {Object.keys(section.fields).map((key) => {
+                                        const field = section.fields[key]
+                                        return (
+                                            <div key={key} className={`${field.className ?? 'w-1/2'} p-2`}>
+                                                {(field.component && field.component({ values, setFieldValue })) || (
+                                                    <Input
+                                                        type={field.type}
+                                                        name={key}
+                                                        placeholder={field.placeholder}
+                                                        label={field.label}
+                                                        value={values[key]}
+                                                        onChange={handleChange}
+                                                    />
+                                                )}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                    <CallToAction onClick={submitForm} className="mt-6" disabled={isSubmitting}>
+                        Update
+                    </CallToAction>
+                </form>
             </section>
         </Layout>
     )
+}
+
+export default function EditProfilePage() {
+    const { user } = useUser()
+    return user ? <EditProfile /> : null
 }
