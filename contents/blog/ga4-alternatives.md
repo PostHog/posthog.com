@@ -862,3 +862,5 @@ Counter's creators can offer it for free because it only collects aggregated dat
 > #### Verdict
 >
 > Counter is a great choice if you have basic needs. It does most of the things the popular privacy-first analytics tools offer, but does so for free. The simple interface is easy to understand, though it doesn't allow you to drill down deeply into individual page performance like Fathom or Plausible.
+
+<NewsletterForm />

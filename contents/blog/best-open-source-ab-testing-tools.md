@@ -55,8 +55,6 @@ Experimentation is free-to-use on PostHog's Scale plan, which is also [free up t
 
 > **Further reading:** New to A/B testing? Read [A software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes).
 
-<NewsletterForm />
-
 ## 2. GrowthBook
 
 ![GrowthBook - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/growthbook.png)
@@ -156,3 +154,5 @@ VWO's free tier is useful for non-technical users who need an easy-to-use (and f
 ### How much does VWO cost?
 
 VWO's Starter plan is free up to 50k visitors per month, and $199 per month up to 100k visitors per month.
+
+<NewsletterForm />

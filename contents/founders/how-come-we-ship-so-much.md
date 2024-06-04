@@ -154,3 +154,5 @@ Likewise, if you're building a small software product that has better UX than an
 The most important thing is to figure out if you value speed and autonomy over polish and control. Which path will help you achieve your company's mission better?
 
 Once you've done that, optimize how your company works around that, and accept there are trade-offs! Just make them consciously.
+
+<NewsletterForm />

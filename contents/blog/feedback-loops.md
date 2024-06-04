@@ -77,5 +77,5 @@ I go through all these examples to serve as an intuition pump: feedback loops do
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
-<ArrayCTA />
+<NewsletterForm />
 

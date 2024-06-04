@@ -75,8 +75,6 @@ Your adoption rate is `(new active users / signups) x 100`, so 40 new active use
 
 **Is it useful?** We'd argue not. There are better, more specific measures for product health, like [new user activation](#new-user-activation).
 
-<NewsletterForm />
-
 ### Customer retention rate
 
 **What is it?** Customer retention rate is a classic metric that calculates the proportion of customers you retain from one period to the next. 
@@ -98,6 +96,8 @@ The retention rate formula is `((customers at end of period - new customers) / c
 What constitutes a good ratio depends on the sector, but a [2017 report by Mixpanel](https://discover.mixpanel.com/rs/461-OYV-624/images/2017-Mixpanel-Product-Benchmarks-Report.pdf) suggests SaaS products average 13%, and that a good ratio is 20% or more.
 
 **Is it useful?** Yes, but you need to be careful as a large increase in monthly users can skew your ratio. It's best used by late-stage companies with predictable monthly growth, which is probably why it's popular at Facebook.
+
+<NewsletterForm />
 
 ### Feature usage
 
@@ -201,8 +201,6 @@ What makes this a good product metric for us? Let's break it down:
 
 Not all useful product metrics follow this trend – active users is a notable exception – but it's a good acid test to apply to any metric you're considering.
 
-<NewsletterForm />
-
 ### Recommended B2B product metrics
 
 To help get you started, we've chosen five metrics that are useful for any B2B product. You will want to augment and adapt these for your specific needs, but 
@@ -232,3 +230,5 @@ You may also find the following guides useful:
 - [Finding your north star metric](/blog/north-star-metrics): All SaaS products can benefit from a north star metric and this guide will help you find one
 
 - [How to measure product-market fit](/blog/measure-product-market-fit): Product-market fit isn't just an ephemeral gut feeling. You can measure it, and it moves as your customer's needs change. 
+
+<NewsletterForm />

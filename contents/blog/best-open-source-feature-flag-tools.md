@@ -56,8 +56,6 @@ You can also evaluate feature flags using PostHog's API from any language that c
 
 There are no limits on feature flag usage in the open-source edition, though A/B testing isn't available. PostHog's Cloud edition includes 1 million API requests per month for free – see the [feature flag pricing page](/pricing?product=feature-flags) for more info.
 
-<NewsletterForm />
-
 ### 2. Unleash
 
 - **License:** Apache
@@ -223,3 +221,5 @@ FeatureHub offers a hosted option in addition to its open-source edition, though
 - [Feature flag best practices and tips (with examples)](/product-engineers/feature-flag-best-practices)
 - [Should you build or buy? Feature flags as a service, explained](/blog/feature-flags-as-a-service)
 - [Feature flags vs configuration: Which should you choose?](/product-engineers/feature-flags-vs-configuration)
+
+<NewsletterForm />

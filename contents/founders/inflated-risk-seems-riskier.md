@@ -77,4 +77,6 @@ Five months later, we got into YC and received the standard $120k check for 7%, 
 
 Applying to YC was a challenging time, and we’d like to help you have the best shot getting in. James [recently did an AMA on applying to YC that you can watch here](https://www.youtube.com/watch?v=t8ym94dOkYs).
 
-Future posts in this series will cover our fast-follow seed and series A rounds in detail. Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) and follow us on [Twitter](https://twitter.com/PostHog) to not miss anything.
+<NewsletterForm />
+
+

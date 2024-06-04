@@ -149,6 +149,8 @@ As of March 2023 Facebook had a DAU/MAU ratio of around 68%. That’s very good.
 
 Want to go in-depth on DAU/MAU ratio? [Check out our guide](/tutorials/dau-mau-ratio).
 
+<NewsletterForm />
+
 ## 4. Net Promoter Score (NPS)
 
 ### What is NPS? 
@@ -299,3 +301,5 @@ This one is hard to benchmark as the variation between features and companies is
 - [An engineer’s guide to talking to users](/newsletter/talk-to-users): The best way to fix poor retention is to build a better product, and to do that you need to talk to your users. This guide is for engineers, but the lessons are universal.
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers): Want to test new features to improve retention? Start here.
+
+<NewsletterForm />

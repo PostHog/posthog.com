@@ -238,3 +238,5 @@ PostHog has all the tools you need to build a great product, and they are integr
 - [Master Feature Flags: Best practice, tips and examples](/blog/feature-flag-best-practices)
 - [How to do a canary release with feature flags](/tutorials/canary-release)
 - [Running experiments on new users](/tutorials/new-user-experiments)
+
+<NewsletterForm />

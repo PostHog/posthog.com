@@ -136,3 +136,5 @@ You can find more comparisons on [our feature flag comparisons page](/feature-fl
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [How to do a canary release with feature flags in PostHog](/tutorials/canary-release)
+
+<NewsletterForm />
