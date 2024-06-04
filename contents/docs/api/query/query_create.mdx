@@ -1,6 +1,6 @@
-This is the main endpoint for querying data from PostHog. It is used for many kinds of queries including `TrendsQuery`, `FunnelsQuery`, `ActorsQuery`, `EventsQuery`, and more.
+This is the main endpoint for querying data from PostHog. It is used for many kinds of queries including `TrendsQuery`, `FunnelsQuery`, `ActorsQuery`, `EventsQuery`, and [more](https://github.com/PostHog/posthog/blob/0834410018bc2b7299d8169f828144c5e94b9f9e/frontend/src/queries/schema.ts#L50).
 
-The most useful for you is likely `HogQLQuery`. This enables you to query PostHog using HogQL, our version of SQL. For example, to get events where the `$current_url` contains blog:
+The most useful for you is likely `HogQLQuery`. This enables you to query PostHog using [HogQL](/docs/hogql). For example, to get events where the `$current_url` contains blog:
 
 <MultiLanguage>
 
