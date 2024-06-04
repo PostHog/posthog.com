@@ -110,6 +110,10 @@ export const handbookSidebar = [
                         url: '/handbook/company/communication',
                     },
                     {
+                        name: 'Fuzzy ownership',
+                        url: '/handbook/company/fuzzy-ownership',
+                    },
+                    {
                         name: 'Kudos',
                         url: '/handbook/company/kudos',
                     },
