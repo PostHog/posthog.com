@@ -48,3 +48,21 @@ In PostHog, you'll now have `$exception` events, which have a "Sentry URL" link 
 From Sentry you will now be able to go directly to the affected person in PostHog and watch the session recording for when the exception happened, see what else the user has done, and find their details. Don't forget to click the little icon to the side of the URL, not the URL itself.
 
 ![PostHog user profile URL in Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/sentry_exception.png)
+
+
+### Sentry SDK v6 and below
+
+If you are using a lower version of the Sentry SDK you may need to use the "class based" integration as below
+
+```js-web
+Sentry.init({
+    dsn: '<your Sentry DSN>',
+    integrations: [new posthog.SentryIntegration(
+        posthog,
+        'your organization',
+        project-id,
+        undefined, // optional: but necessary if you want to set a severity allowlist
+        ['error', 'info'] // optional: here is set to handle captureMessage (info) and captureException (error)
+    )],
+})
+```
