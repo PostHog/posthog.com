@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Important:** PostHog only offers Business Associate Agreements (BAAs) for PostHog Cloud to users on [an Enterprise plan](/pricing). To enquire about BAAs, HIPAA compliance, or an Enterprise plan, please [contact us directly](/contact-sales). 
+> **Important:** PostHog only offers Business Associate Agreements (BAAs) for PostHog Cloud to users on [an Enterprise plan](/pricing). To enquire about BAAs, HIPAA compliance, or an Enterprise plan, please [contact us directly](/talk-to-a-human). 
 
 HIPAA is the Health Insurance Portability and Accountability Act. It’s a piece of legislation that applies to certain [covered entities](https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html) operating in the United States of America (e.g. healthcare providers).
 
@@ -39,7 +39,7 @@ PostHog offers a third approach without either of these downsides: hosting the p
 
 ## Does PostHog offer a BAA for PostHog Cloud?
 
-Yes. If you're interested in a BAA for HIPAA compliance, please [contact us with information about your requirements](/contact-sales).  
+Yes. If you're interested in a BAA for HIPAA compliance, please [contact us with information about your requirements](/talk-to-a-human).  
 
 ## How to set PostHog up for HIPAA compliance
 

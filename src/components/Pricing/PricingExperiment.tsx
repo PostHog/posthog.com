@@ -86,7 +86,7 @@ const planSummary = [
             'Advanced permissions & audit logs',
         ],
         CTAText: 'Get in touch',
-        CTALink: '/contact-sales',
+        CTALink: '/talk-to-a-human',
     },
 ]
 
@@ -664,7 +664,7 @@ const PlansTabs = () => {
                                 <li>No upcharge on usage-based prices</li>
                             </ul>
                             <div className="pt-4 md:mb-20 xl:mb-0 relative z-20">
-                                <CallToAction href="/contact-sales" size="md">
+                                <CallToAction href="/talk-to-a-human" size="md">
                                     Talk to a helpful person
                                 </CallToAction>
                             </div>
@@ -1186,7 +1186,7 @@ const PricingExperiment = ({
                                 read our FAQ
                             </button>
                             , <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
-                            <Link href="/contact-sales">talk to a human</Link>.
+                            <Link href="/talk-to-a-human">talk to a human</Link>.
                         </p>
 
                         <div className="flex gap-2 items-center">

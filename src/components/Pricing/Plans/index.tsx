@@ -129,7 +129,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false 
                                         content={() => (
                                             <div>
                                                 Custom pricing available for large volumes.
-                                                <Link to="/contact-sales">
+                                                <Link to="/talk-to-a-human">
                                                     <Label
                                                         className="!m-0 !p-0 !text-sm !font-bold"
                                                         text="Get in touch"
@@ -163,7 +163,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false 
                         }
                     />
                     {!up_to && enterprise_flag_enabled && (
-                        <Link to="/contact-sales">
+                        <Link to="/talk-to-a-human">
                             <Label className="ml-2 !font-bold" text="Volume discounts available" style="orangeNoBg" />
                         </Link>
                     )}

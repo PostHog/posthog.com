@@ -14,7 +14,7 @@ const cards = [
                     watch a recorded demo
                 </Link>{' '}
                 (at your own pace) or{' '}
-                <Link to="/contact-sales" className="!text-red">
+                <Link to="/talk-to-a-human" className="!text-red">
                     request a personalized demo
                 </Link>{' '}
                 if you like.
@@ -78,7 +78,7 @@ const cards = [
         bottom: (
             <>
                 Sadly, we don't offer annual contracts (unless you{' '}
-                <Link to="/contact-sales" className="!text-red">
+                <Link to="/talk-to-a-human" className="!text-red">
                     ask for one
                 </Link>
                 ).
