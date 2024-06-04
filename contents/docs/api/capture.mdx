@@ -48,6 +48,37 @@ response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response)
 ```
 
+```node
+import fetch from "node-fetch";
+
+async function sendPosthogEvent() {
+  const url = "<ph_client_api_host>/capture/";
+  const headers = {
+      "Content-Type": "application/json",
+  };
+  const payload = {
+    api_key: "<ph_project_api_key>",
+    event: "event name",
+    distinct_id: "user distinct id",
+    properties: {
+      account_type: "pro",
+    },
+    timestamp: "[optional timestamp in ISO 8601 format]",
+  };
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+sendPosthogEvent()
+```
+
 </MultiLanguage>
 
 ## Batch events
