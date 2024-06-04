@@ -115,3 +115,5 @@ Applying this in practice means reducing the scope of your changes *while still*
 - [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
 - [What is a growth engineer? (And why they're awesome)](/blog/what-is-a-growth-engineer)
 - [The most useful product health metrics](/blog/product-health-metrics)
+
+<NewsletterForm />

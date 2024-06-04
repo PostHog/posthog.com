@@ -197,3 +197,5 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 - [PostHog LLM docs](/docs/product-analytics/llms) 
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
 - [The most useful B2B SaaS metrics](/blog/b2b-saas-product-metrics)
+
+<NewsletterForm />

@@ -112,3 +112,5 @@ Now that you know all about multivariate testing, here's how you implement one i
 - [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes)
 - [Guardrail metrics for A/B tests, explained](/product-engineers/guardrail-metrics)
 - [How YC's biggest startups run A/B tests (with examples)](/product-engineers/ab-testing-examples)
+
+<NewsletterForm />

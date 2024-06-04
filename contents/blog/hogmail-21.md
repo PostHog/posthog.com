@@ -73,4 +73,4 @@ Balfour makes three final points:
 
 * [How to Measure “Hard-to-Measure” Marketing Channels](https://sparktoro.com/blog/how-to-measure-hard-to-measure-marketing-channels/) – Rand Fishkin on how to stop avoiding hard-to-measure marketing channels (e.g. native social, PR, events etc.) by learning how to measure them.
 
-> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
+<NewsletterForm />

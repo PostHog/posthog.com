@@ -92,3 +92,5 @@ You can use my **Two-Step Low Effort Negotiation Framework for Busy People** ins
 Sometimes you’ll get a decent chunk knocked off or some goodies thrown in - and you didn’t even care!
 
 > **The PostHog way:** The answer is always ‘yes’ because it’s all in our handbook already, but we are very generous with [swanky merch](/merch) if you're nice to us. 
+
+<NewsletterForm />

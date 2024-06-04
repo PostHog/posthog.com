@@ -127,4 +127,4 @@ Needless to say, a product analytics platform like PostHog is essential for trac
 
 - [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
-<ArrayCTA />
+<NewsletterForm />

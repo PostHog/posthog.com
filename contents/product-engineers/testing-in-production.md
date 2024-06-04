@@ -120,3 +120,5 @@ By testing in production, we uncover issues and get feedback fast. This is its m
 - [What is real user monitoring (and how to set it up)](/blog/real-user-monitoring)
 - [How to do a canary release with feature flags in PostHog](/tutorials/canary-release)
 - [How we build features users love (really fast)](/blog/measuring-feature-success)
+
+<NewsletterForm />

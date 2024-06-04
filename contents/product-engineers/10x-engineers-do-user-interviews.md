@@ -132,3 +132,5 @@ I have a couple of book recommendations if you want to go even deeper into this 
 - **"The Mom Test" by Rob Fitzpatrick:** Generally considered the bible of "talking to users". It's a fantastic primer on problem exploration.
 
 - **[Don’t Make Me Think](https://www.amazon.co.uk/Dont-Make-Me-Think-Usability/dp/0321344758) by Steven Krug:** A foundational text on usability testing.
+
+<NewsletterForm />

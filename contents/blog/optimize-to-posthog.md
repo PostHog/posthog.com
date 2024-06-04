@@ -179,3 +179,5 @@ To learn how to set up bootstrapping, check out these tutorials:
 - [An intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog)
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
+
+<NewsletterForm />
