@@ -22,7 +22,7 @@ Yes, there are tradeoffs and the small teams structure won't work for everyone. 
 
 First, a crash course in how PostHog is structured. Right, now, we're 47 people spread across ten countries working asynchronously and [shipping fast](changelog/2024). We're split into 12 small teams, most of which cover individual products such as data warehouse, replay, pipeline, or product analytics. But we also have small teams covering non-engineering areas, like people and operations and marketing. 
 
-When we launch a new product, or a project on an existing team becomes too hot to handle, we often spin out a new small team. We're in the process of creating two new small teams right now – one focussed on Hog, PostHog's first ever programming language, and another focussed on customer communications and community. This allows us to push forward with new ideas and keep shipping without sacrificing quality.
+When we launch a new product, or a project on an existing team becomes too hot to handle, we often spin out a new small team. We're in the process of creating two new small teams right now – one focused on Hog, PostHog's first ever programming language, and another focused on customer communications and community. This allows us to push forward with new ideas and keep shipping without sacrificing quality.
 
 Creating small teams allows us to move fast. Our [surveys product](/surveys), which aims to have similar functionality to competitors with hundreds of employees, shipped from a small team. Our [web analytics product](https://posthog.com/teams/web-analytics), which goes up against Google Analytics, is run by a small team with one person, the brilliant Robbie Coomber.
 
