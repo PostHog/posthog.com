@@ -49,7 +49,7 @@ Flagsmith and PostHog are similar in their feature flag offering, but differ on 
 
 PostHog offers product analytics as well as a fully-integrated A/B testing tool. Since Flagsmith doesn't have analytics, to run an A/B test you need to manually implement feature flag logging with a third-party analytics tool.
 
-Both tools are open source. However, Flagsmith offers self-hosting and while it's technically possible to self-host PostHog, it's advise only for hobbyist projects.
+Both tools are open source. However, Flagsmith offers self-hosting while PostHog recommends self-hosting for hobbyist projects only.
 
 <ComparisonTable column1="PostHog" column2="Flagsmith">
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
@@ -110,7 +110,7 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/LaunchDarkly), a
 
 ### How does LaunchDarkly compare to Flagsmith?
 
-LaunchDarkly and Statsig offer similar feature management and governance features. However, LaunchDarkly has a more comprehensive A/B testing offering.
+LaunchDarkly and Flagsmith offer similar feature management and governance features. However, LaunchDarkly has a more comprehensive A/B testing offering.
 
 <ComparisonTable column1="LanchDarkly" column2="Flagsmith">
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
@@ -198,11 +198,65 @@ According to G2, users are big fans of Statsig because:
 3. **Documentation:** Thanks to the solid documentation of SDKs and features, in combination with a simple UX, reviewers find Statsig easy to set up and use.
 
 > #### Bottom line
-> For software teams looking to run more experiments and ship faster, Statsig is a solid alternative to Flagsmith. This is only helped by the ease of setup, documentation, and self-serve availability.
+> For software teams looking to run more experiments and ship faster, Statsig is a solid alternative to Flagsmith. However, if you're looking for a comprehensive feature flag offering, it's best to look elsewhere.
 
 <br />
 
-## 4. Split
+## 4. Unleash
+
+- **Founded:** 2015
+- **Similar to:** Growthbook, DevCycle
+- **Typical users:** Regulatory and security conscious developers in large enterprises
+
+![Unleash](https://res.cloudinary.com/dmukukwp6/image/upload/v1714148743/posthog.com/contents/images/blog/best-split-alternatives/unleash-mega.jpg)
+
+### What is Unleash?
+
+Unleash is a feature management platform that provides an overview of all features across your applications and services. The platform empowers engineering teams to implement A/B tests via feature toggles and offers accurate user targeting.
+
+### Key features
+
+- ⛳ **Feature flags:** A developer-focused feature flag tool that streamlines the software release process.
+
+- ✅ **Approvals:** Require approvals to make changes to feature flags to ensure compliance.
+
+- 🙋 **Self-hostable:** Choose either fully managed or self-hosted to fit with your needs.
+
+- 🌴 **Environments:** Configure flags, targeting, and approvals differently for dev, staging, prod.
+
+### How does Unleash compare to GrowthBook?
+
+Unleash is the most similar alternative to Flagsmith. Both focus on a comprehensive feature flag offering, governance tools, and self-hosting.
+
+<ComparisonTable column1="Unleash" column2="Flagsmith">
+  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
+  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />
+  <ComparisonRow column1={true} column2={true} feature="Remote config" description="Easily change feature properties without deploying new code." />
+  <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flag updates and rollouts" />
+  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Gradually release features to specific groups" />
+  <ComparisonRow column1="Requires 3rd-party analytics" column2="Requires 3rd-party analytics" feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
+  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
+  <ComparisonRow column1={true} column2={true} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+  <ComparisonRow column1={true} column2={true} feature="EU hosting option" description="Choose where your data is stored" />
+  <ComparisonRow column1={true} column2={true} feature="Self-hosting" description="Host on your own server" />
+  <ComparisonRow column1={true} column2={true} feature="Governance" description="Audit log, roles-based access, permissions" />
+</ComparisonTable>
+
+### Why do companies use Unleash?
+
+According to G2, these are the 
+
+1. **Self-hostable:** Many users mention they are using the open source version of Unleash and self-hosting. This means teams with compliance concerns can integrate it into their existing infrastructure.
+
+2. **Developer-focused:** Unleash focuses on developers. Its tooling and SDKs make it relatively simple for them to implement feature management.
+
+2. **Simple UI:** Even though Unleash is developer-focused, its UI is still praised for making it easy to create and manage toggles. Developers mentioned non-developers are able to set up and manage toggles without help.
+
+> #### Bottom line
+> Unleash is very focused on feature flags, and if that is what you are looking for, it makes a good alternative to Flagsmith. If you're searching for A/B testing or other types of optimization and analysis tools, it's best to look elsewhere.
+
+## 5. Split
 
 - **Founded:** 2015
 - **Similar to:** DevCycle, LaunchDarkly
@@ -226,7 +280,7 @@ According to G2, users are big fans of Statsig because:
 
 ### How does Split compare to LaunchDarkly?
 
-By focusing on feature flags and A/B testing, Split and Flagsmith have similar feature sets. Split provides more observability and testing tools, like alerts, while Split focuses more on self-hosting. Split does not offer A/B testing.
+By focusing on feature flags, Split and Flagsmith have similar feature sets. Split provides more observability and testing tools, like alerts, while Flagsmith focuses more on self-hosting. Split does not offer A/B testing.
 
 <ComparisonTable column1="Split" column2="Flagsmith">
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
@@ -263,7 +317,7 @@ According to G2, reviewers are big fans of Split because:
 <br />
 
 
-## 5. GrowthBook
+## 6. GrowthBook
 
 - **Founded:** 2020
 - **Similar to:** LaunchDarkly, Statsig
@@ -291,7 +345,7 @@ It's a popular choice for companies in strict regulatory environments because it
 
 ### How does GrowthBook compare to Flagsmith?
 
-GrowthBook supports almost all of the features that Flagsmith does except for local evaluation of flags .
+GrowthBook supports almost all of the features that Flagsmith does except for local evaluation of feature flags.
 
 <ComparisonTable column1="Growthbook" column2="Flagsmith">
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
@@ -323,7 +377,7 @@ According to G2, reviewers choose GrowthBook for the following.
 
 <br />
 
-## 6. DevCycle
+## 7. DevCycle
 
 - **Founded:** 2022
 - **Similar to:** Split
@@ -345,9 +399,9 @@ DevCycle is a startup launched out of Taplytics, another A/B testing platform. I
 
 - 🧑‍💻 **Developer-focused:** Features like a server-less architecture, edge decisioning support, and a wide API help developers make full use of DevCycle.
 
-### How does DevCycle compare to LaunchDarkly?
+### How does DevCycle compare to Flagsmith?
 
-DevCycle has many of the core A/B testing and feature flagging features but is not open source.
+DevCycle has many of the core feature flag features that Flagsmith has but is not open source. DevCycle used to support A/B testing, but it has since removed that functionality.
 
 <ComparisonTable column1="DevCycle" column2="Flagsmith">
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
@@ -356,7 +410,7 @@ DevCycle has many of the core A/B testing and feature flagging features but is n
   <ComparisonRow column1={true} column2={true} feature="Remote config" description="Easily change feature properties without deploying new code." />
   <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flag updates and rollouts" />
   <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Gradually release features to specific groups" />
-  <ComparisonRow column1={true} column2="Requires 3rd-party analytics" feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
+  <ComparisonRow column1={false} column2="Requires 3rd-party analytics" feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
   <ComparisonRow column1={false} column2={true} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
   <ComparisonRow column1={false} column2={true} feature="EU hosting option" description="Choose where your data is stored" />
@@ -378,59 +432,6 @@ According to G2, reviewers appreciate DevCycle's:
 > Because DevCycle is very similar to Flagsmith, it makes for a good alternative. If you have a strict regulatory environment and could benefit from open source or self-hosting, other options are better.
 
 <br />
-
-## 7. Unleash
-
-- **Founded:** 2015
-- **Similar to:** Growthbook, DevCycle
-- **Typical users:** Regulatory and security conscious developers in large enterprises
-
-![Unleash](https://res.cloudinary.com/dmukukwp6/image/upload/v1714148743/posthog.com/contents/images/blog/best-split-alternatives/unleash-mega.jpg)
-
-### What is Unleash?
-
-Unleash is a feature management platform that provides an overview of all features across your applications and services. The platform empowers engineering teams to implement A/B tests via feature toggles and offers accurate user targeting.
-
-### Key features
-
-- ⛳ **Feature flags:** A developer-focused feature flag tool that streamlines the software release process.
-
-- ✅ **Approvals:** Require approvals to make changes to feature flags to ensure compliance.
-
-- 🙋 **Self-hostable:** Choose either fully managed or self-hosted to fit with your needs.
-
-- 🌴 **Environments:** Configure flags, targeting, and approvals differently for dev, staging, prod.
-
-### How does Unleash compare to GrowthBook?
-
-Unleash is very similar to Flagsmith. Both offer comprehensive feature flag tools and self-hosting. However, Unleash does not offer flexibility with regards to where your data can be hosted if you're using their Cloud hosting.
-
-<ComparisonTable column1="Unleash" column2="Flagsmith">
-  <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />
-  <ComparisonRow column1={true} column2={true} feature="Remote config" description="Easily change feature properties without deploying new code." />
-  <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flag updates and rollouts" />
-  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Gradually release features to specific groups" />
-  <ComparisonRow column1="Requires 3rd-party analytics" column2="Requires 3rd-party analytics" feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={true} column2={true} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-  <ComparisonRow column1={false} column2={true} feature="EU hosting option" description="Choose where your data is stored" />
-  <ComparisonRow column1={true} column2={true} feature="Self-hosting" description="Host on your own server" />
-  <ComparisonRow column1={true} column2={true} feature="Governance" description="Audit log, roles-based access, permissions" />
-</ComparisonTable>
-### Why do companies use Unleash?
-
-According to G2, these are the 
-
-1. **Self-hostable:** Many users mention they are using the open source version of Unleash and self-hosting. This means teams with compliance concerns can integrate it into their existing infrastructure.
-
-2. **Developer-focused:** Unleash focuses on developers. Its tooling and SDKs make it relatively simple for them to implement feature management.
-
-2. **Simple UI:** Even though Unleash is developer-focused, its UI is still praised for making it easy to create and manage toggles. Developers mentioned non-developers are able to set up and manage toggles without help.
-
-> #### Bottom line
-> Unleash is very focused on feature flags, and if that is what you are looking for, it makes a good alternative to Flagsmith. If you're searching for A/B testing or other types of optimization and analysis tools, it's best to look elsewhere.
 
 ## Is PostHog right for you?
 
