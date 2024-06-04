@@ -737,4 +737,4 @@ Users consistently praise LogRocket's session replay tools, but other features a
     />
 </BorderWrapper>
 
-Still not sure? [Request a call](/book-a-demo) from our customer success team.
+Still not sure? [Request a call](/demo) from our customer success team.

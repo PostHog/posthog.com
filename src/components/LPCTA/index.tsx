@@ -8,7 +8,7 @@ export const LPCTA = () => {
             <br />
             <div className="flex flex-col md:flex-row justify-center items-center gap-2 xl:gap-4">
                 <SignupCTA width="56" text="Try PostHog today" />
-                <CallToAction type="outline" width="56" to="/book-a-demo">
+                <CallToAction type="outline" width="56" to="/demo">
                     Schedule a demo
                 </CallToAction>
             </div>
