@@ -11,6 +11,7 @@ import { IconArrowRightDown, IconRedo } from '@posthog/icons'
 import { sexyLegalMenu } from '../navs'
 import Lawyers from 'components/Lawyers'
 import { CSSTransition } from 'react-transition-group'
+import SalesSlider from 'components/SalesSlider'
 
 function Sales() {
     const companies = [
@@ -104,34 +105,7 @@ function Sales() {
                         </span>{' '}
                     </h2>
 
-                    <div className="grid grid-cols-4">
-                        <div>
-                            <ul className="m-0 p-0 list-none">
-                                <li className="trigger-1 font-bold">
-                                    <span>Item 1</span>
-                                </li>
-                                <li className="trigger-2">
-                                    <span>Item 2</span>
-                                </li>
-                                <li className="trigger-3">
-                                    <span>Item 3</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="col-span-3">
-                            <div className="slide-1 bg-accent dark:bg-accent-dark rounded p-4">
-                                Hello world! Slide 1.
-                                <span className="next-button">Next slide</span>
-                            </div>
-                            <div className="hidden slide-2 bg-accent dark:bg-accent-dark rounded p-4">
-                                Hello world! Slide 2.
-                                <span className="next-button">Next slide</span>
-                            </div>
-                            <div className="hidden slide-3 bg-accent dark:bg-accent-dark rounded p-4">
-                                Hello world! Slide 3.
-                            </div>
-                        </div>
-                    </div>
+                    <SalesSlider />
                 </div>
             </div>
         </Layout>

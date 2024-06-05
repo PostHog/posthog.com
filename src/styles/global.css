@@ -1525,3 +1525,18 @@ li.squeak-left-border {
     transform: translateY(-100%);
     transition: opacity 500ms, transform 500ms;
 }
+
+.slide-1,
+.slide-2,
+.slide-3 {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transform: translateY(40%) scale(0.9);
+    opacity: 0;
+}
+
+.slide-1.opacity-100,
+.slide-2.opacity-100,
+.slide-3.opacity-100 {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+}
