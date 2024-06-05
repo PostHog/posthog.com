@@ -742,7 +742,7 @@
         { "source": "/docs/self-host/deploy/digital-ocean", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/gcp", "destination": "/docs/self-host" },
         { "source": "/docs/self-host/deploy/other", "destination": "/docs/self-host" },
-        { "source": "/signup/cloud/enterprise", "destination": "/contact-sales?edition=enterprise" },
+        { "source": "/signup/cloud/enterprise", "destination": "/contact-sales" },
         {
             "source": "/docs/feature-flags/bootstrapping-and-local-evaluation",
             "destination": "/docs/feature-flags/bootstrapping"
