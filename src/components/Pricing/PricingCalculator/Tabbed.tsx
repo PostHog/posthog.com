@@ -318,7 +318,7 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
                                             key={addon.type}
                                             addons={addons}
                                             setAddons={setAddons}
-                                            volume={volume + parseInt(activeProduct.freeLimit.replace(/,/g, ''))}
+                                            volume={volume}
                                             {...addon}
                                         />
                                     </li>
