@@ -12,6 +12,7 @@ import Switch from 'components/Toggle'
 import { CallToAction } from 'components/CallToAction'
 import { useToast } from 'hooks/toast'
 import { navigate } from 'gatsby'
+import SEO from 'components/seo'
 
 function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
@@ -432,6 +433,7 @@ function EditProfile() {
 
     return (
         <Layout parent={communityMenu}>
+            <SEO noindex title="Edit Profile - PostHog" />
             <section className="max-w-2xl mx-auto py-12 px-4">
                 <form className="m-0 space-y-6" onSubmit={handleSubmit}>
                     {formSections.map((section, index) => {
