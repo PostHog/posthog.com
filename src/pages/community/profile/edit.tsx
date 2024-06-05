@@ -11,6 +11,7 @@ import Link from 'components/Link'
 import Switch from 'components/Toggle'
 import { CallToAction } from 'components/CallToAction'
 import { useToast } from 'hooks/toast'
+import { navigate } from 'gatsby'
 
 function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
@@ -21,7 +22,7 @@ const HeightField = ({ values, setFieldValue }) => {
     const [height, setHeight] = useState(values.height)
 
     return (
-        <div className="max-w-[165px]">
+        <div className="max-w-[170px]">
             <div className="flex space-x-2 items-end">
                 <Input
                     onChange={(e) => {
@@ -49,7 +50,11 @@ const HeightField = ({ values, setFieldValue }) => {
 
 const ToggleButton = ({ onClick, active, label }) => {
     return (
-        <button onClick={onClick} className={`py-2 z-10 ${active ? 'font-bold text-white' : 'opacity-60'}`}>
+        <button
+            type="button"
+            onClick={onClick}
+            className={`py-2 z-10 ${active ? 'font-bold text-white' : 'opacity-60'}`}
+        >
             {label}
         </button>
     )
@@ -68,6 +73,86 @@ const Toggle = ({ name, label, checked, onChange, options }) => {
                 <ToggleButton onClick={() => onChange(true)} active={checked} label={options[0]} />
                 <ToggleButton onClick={() => onChange(false)} active={!checked} label={options[1]} />
             </div>
+        </div>
+    )
+}
+
+function Avatar({ values, setFieldValue }) {
+    const inputRef = useRef<HTMLInputElement>(null)
+    const [imageURL, setImageURL] = useState(values?.avatar?.url)
+
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        const file = e.target.files[0]
+        setFieldValue('avatar', file)
+        const reader = new FileReader()
+        reader.onloadend = () => {
+            reader?.result && setImageURL(reader.result)
+        }
+
+        reader.readAsDataURL(file)
+    }
+
+    useEffect(() => {
+        if (!values.avatar && inputRef?.current) {
+            inputRef.current.value = null
+        }
+
+        setImageURL(values.avatar?.url)
+    }, [values.avatar])
+
+    return (
+        <div className="relative w-full aspect-square rounded-full flex justify-center items-center border border-gray-accent-light dark:border-gray-accent-dark text-black/50 dark:text-white/50 overflow-hidden group -mb-2">
+            {imageURL ? (
+                <img className="w-full absolute inset-0 object-cover" src={imageURL} />
+            ) : (
+                <DefaultAvatar className="size-full absolute bottom-0" />
+            )}
+            <div
+                className={`grid ${
+                    imageURL ? 'grid-cols-2' : 'grid-cols-1'
+                } items-center w-full h-full z-10 bg-white/90 dark:bg-black/80 divide divide-x divide-dashed divide-gray-accent-light opacity-0 group-hover:opacity-100 transition-opacity`}
+            >
+                {imageURL && (
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault()
+                            setFieldValue('avatar', null)
+                        }}
+                        className="w-full h-full flex items-center justify-center text-4xl group"
+                    >
+                        &#215;
+                    </button>
+                )}
+                <div className="relative w-full h-full flex items-center justify-center group">
+                    <span className="text-3xl">&#8593;</span>
+                    <input
+                        ref={inputRef}
+                        onChange={handleChange}
+                        accept=".jpg, .png, .gif, .jpeg"
+                        className="opacity-0 absolute w-full h-full top-0 left-0 cursor-pointer"
+                        name="avatar"
+                        type="file"
+                    />
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const Input = ({ type, name, placeholder, label, value, onChange, error, className = '' }) => {
+    return (
+        <div>
+            <label className="font-bold block">{label}</label>
+            <input
+                className={`py-2 px-4 text-base rounded-md w-full m-0 mt-1 bg-accent dark:bg-accent-dark border ${
+                    error ? 'border-red' : 'border-border dark:border-dark'
+                } ${className}`}
+                type={type || 'text'}
+                name={name}
+                placeholder={placeholder || label}
+                value={value}
+                onChange={onChange}
+            />
         </div>
     )
 }
@@ -136,7 +221,7 @@ const formSections = [
         title: 'About you',
         fields: {
             biography: {
-                component: ({ values, setFieldValue }) => (
+                component: ({ values, setFieldValue, error }) => (
                     <>
                         <div className="flex justify-between items-center">
                             <label className="font-bold">Bio</label>
@@ -149,7 +234,9 @@ const formSections = [
                             rows={6}
                             name="biography"
                             placeholder="Write something interesting but don't try to use us for our SEO, we're on to you..."
-                            className="py-2 px-4 text-base rounded-md w-full bg-accent dark:bg-accent-dark mt-1 border border-border dark:border-dark"
+                            className={`py-2 px-4 text-base rounded-md w-full bg-accent dark:bg-accent-dark mt-1 border ${
+                                error ? 'border-red' : 'border-border dark:border-dark'
+                            }`}
                         />
                     </>
                 ),
@@ -163,18 +250,22 @@ const formSections = [
             website: {
                 label: 'Website',
                 placeholder: 'https://',
+                type: 'url',
             },
             github: {
                 label: 'GitHub',
                 placeholder: 'https://github.com',
+                type: 'url',
             },
             linkedin: {
                 label: 'LinkedIn',
                 placeholder: 'https://linkedin.com',
+                type: 'url',
             },
             twitter: {
                 label: 'X',
                 placeholder: 'https://x.com',
+                type: 'url',
             },
         },
     },
@@ -247,94 +338,13 @@ const ValidationSchema = Yup.object().shape({
     biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
 })
 
-function Avatar({ values, setFieldValue }) {
-    const inputRef = useRef<HTMLInputElement>(null)
-    const [imageURL, setImageURL] = useState(values?.avatar?.url)
-
-    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        const file = e.target.files[0]
-        setFieldValue('avatar', file)
-        const reader = new FileReader()
-        reader.onloadend = () => {
-            reader?.result && setImageURL(reader.result)
-        }
-
-        reader.readAsDataURL(file)
-    }
-
-    useEffect(() => {
-        if (!values.avatar && inputRef?.current) {
-            inputRef.current.value = null
-        }
-
-        setImageURL(values.avatar?.url)
-    }, [values.avatar])
-
-    return (
-        <div className="relative w-full aspect-square rounded-full flex justify-center items-center border border-gray-accent-light dark:border-gray-accent-dark text-black/50 dark:text-white/50 overflow-hidden group">
-            {imageURL ? (
-                <img className="w-full absolute inset-0 object-cover" src={imageURL} />
-            ) : (
-                <DefaultAvatar className="size-full absolute bottom-0" />
-            )}
-            <div
-                className={`grid ${
-                    imageURL ? 'grid-cols-2' : 'grid-cols-1'
-                } items-center w-full h-full z-10 bg-white/90 dark:bg-black/80 divide divide-x divide-dashed divide-gray-accent-light opacity-0 group-hover:opacity-100 transition-opacity`}
-            >
-                {imageURL && (
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault()
-                            setFieldValue('avatar', null)
-                        }}
-                        className="w-full h-full flex items-center justify-center text-4xl group"
-                    >
-                        &#215;
-                    </button>
-                )}
-                <div className="relative w-full h-full flex items-center justify-center group">
-                    <span className="text-3xl">&#8593;</span>
-                    <input
-                        ref={inputRef}
-                        onChange={handleChange}
-                        accept=".jpg, .png, .gif, .jpeg"
-                        className="opacity-0 absolute w-full h-full top-0 left-0 cursor-pointer"
-                        name="avatar"
-                        type="file"
-                    />
-                </div>
-            </div>
-        </div>
-    )
-}
-
-const Input = ({ type, name, placeholder, label, value, onChange, className = '' }) => {
-    return (
-        <div>
-            <label className="font-bold block">{label}</label>
-            <input
-                className={`py-2 px-4 text-base rounded-md w-full m-0 mt-1 bg-accent dark:bg-accent-dark border border-border dark:border-dark ${className}`}
-                type={type || 'text'}
-                name={name}
-                placeholder={placeholder || label}
-                value={value}
-                onChange={onChange}
-            />
-        </div>
-    )
-}
-
 function EditProfile() {
     const { addToast } = useToast()
     const { user, fetchUser, getJwt } = useUser()
     const posthog = usePostHog()
 
-    // TODO: Need to grab these from `attributes`
-    const { id } = user?.profile || {}
-
-    // TODO: Move this logic into the useUser hook
     const onSubmit = async ({ avatar, ...values }, { setSubmitting }) => {
+        const id = user?.profile?.id
         setSubmitting(true)
 
         try {
@@ -402,7 +412,7 @@ function EditProfile() {
         }
     }
 
-    const { values, setFieldValue, handleChange, submitForm, handleSubmit, isSubmitting } = useFormik({
+    const { values, setFieldValue, handleChange, submitForm, handleSubmit, isSubmitting, errors } = useFormik({
         validationSchema: ValidationSchema,
         onSubmit,
         initialValues: formSections.reduce((acc, section) => {
@@ -426,9 +436,11 @@ function EditProfile() {
                                 <div className="flex flex-wrap items-center">
                                     {Object.keys(section.fields).map((key) => {
                                         const field = section.fields[key]
+                                        const error = errors[key]
                                         return (
-                                            <div key={key} className={`${field.className ?? 'w-1/2'} p-2`}>
-                                                {(field.component && field.component({ values, setFieldValue })) || (
+                                            <div key={key} className={`${field.className ?? 'w-1/2'} p-2 relative`}>
+                                                {(field.component &&
+                                                    field.component({ values, setFieldValue, error })) || (
                                                     <Input
                                                         type={field.type}
                                                         name={key}
@@ -436,7 +448,13 @@ function EditProfile() {
                                                         label={field.label}
                                                         value={values[key]}
                                                         onChange={handleChange}
+                                                        error={!!error}
                                                     />
+                                                )}
+                                                {error && (
+                                                    <p className="absolute text-red bottom-1.5 text-xs m-0 translate-y-full left-2 font-bold">
+                                                        {error}
+                                                    </p>
                                                 )}
                                             </div>
                                         )
@@ -455,6 +473,17 @@ function EditProfile() {
 }
 
 export default function EditProfilePage() {
-    const { user } = useUser()
-    return user ? <EditProfile /> : null
+    const [ready, setReady] = useState(false)
+    const { fetchUser } = useUser()
+    useEffect(() => {
+        fetchUser().then((user) => {
+            if (user) {
+                setReady(true)
+            } else {
+                navigate('/community')
+            }
+        })
+    }, [])
+
+    return ready ? <EditProfile /> : null
 }

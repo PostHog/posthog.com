@@ -74,7 +74,6 @@ const LikedPosts = ({ profileID }) => {
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const [view, setView] = useState('discussions')
-    const [editModalOpen, setEditModalOpen] = React.useState(false)
     const posthog = usePostHog()
     const nav = useTopicsNav()
     const { user } = useUser()
@@ -155,11 +154,6 @@ export default function ProfilePage({ params }: PageProps) {
     const name = [firstName, lastName].filter(Boolean).join(' ')
     const isTeamMember = profile?.teams?.data?.length > 0
 
-    const handleEditProfile = () => {
-        mutate()
-        setEditModalOpen(false)
-    }
-
     useEffect(() => {
         if (!profile?.amaEnabled) setView('discussions')
     }, [profile])
@@ -172,31 +166,11 @@ export default function ProfilePage({ params }: PageProps) {
         <>
             <SEO title={`Community Profile - PostHog`} />
             <Layout parent={communityMenu}>
-                <Modal setOpen={setEditModalOpen} open={editModalOpen}>
-                    <div
-                        onClick={() => setEditModalOpen(false)}
-                        className="flex flex-start justify-center absolute w-full p-4"
-                    >
-                        <div
-                            className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <EditProfile onSubmit={handleEditProfile} />
-                        </div>
-                    </div>
-                </Modal>
                 <PostLayout
                     title="Profile"
                     breadcrumb={[{ name: 'Community', url: '/questions' }]}
                     menu={nav}
-                    sidebar={
-                        <ProfileSidebar
-                            handleEditProfile={handleEditProfile}
-                            setEditModalOpen={setEditModalOpen}
-                            profile={{ ...profile, id }}
-                            mutate={mutate}
-                        />
-                    }
+                    sidebar={<ProfileSidebar profile={{ ...profile, id }} mutate={mutate} />}
                     hideSurvey
                 >
                     {profile ? (
@@ -318,8 +292,6 @@ export default function ProfilePage({ params }: PageProps) {
 
 type ProfileSidebarProps = {
     profile: ProfileData
-    setEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-    handleEditProfile: () => void
     mutate: () => void
 }
 
@@ -395,163 +367,139 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
     )
 }
 
-const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen, handleEditProfile, mutate }) => {
-    const [editProfile, setEditProfile] = useState(false)
+const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
     const { user } = useUser()
-    const breakpoints = useBreakpoint()
 
-    return profile && !editProfile ? (
-        <>
-            {profile.github || profile.twitter || profile.linkedin || profile.website ? (
-                <SidebarSection title="Links">
-                    <ul className="p-0 flex space-x-2 items-center list-none m-0">
-                        {profile.website && (
-                            <li>
-                                <Link to={profile.website}>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth={1.5}
-                                        stroke="currentColor"
-                                        className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
-                                        />
-                                    </svg>
-                                </Link>
-                            </li>
-                        )}
+    return (
+        profile && (
+            <>
+                {profile.github || profile.twitter || profile.linkedin || profile.website ? (
+                    <SidebarSection title="Links">
+                        <ul className="p-0 flex space-x-2 items-center list-none m-0">
+                            {profile.website && (
+                                <li>
+                                    <Link to={profile.website}>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+                                            />
+                                        </svg>
+                                    </Link>
+                                </li>
+                            )}
 
-                        {profile.github && (
-                            <li>
-                                <Link to={profile.github}>
-                                    <GitHub className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
-                                </Link>
-                            </li>
-                        )}
+                            {profile.github && (
+                                <li>
+                                    <Link to={profile.github}>
+                                        <GitHub className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
+                                    </Link>
+                                </li>
+                            )}
 
-                        {profile.twitter && (
-                            <li>
-                                <Link to={profile.twitter}>
-                                    <Twitter className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
-                                </Link>
-                            </li>
-                        )}
+                            {profile.twitter && (
+                                <li>
+                                    <Link to={profile.twitter}>
+                                        <Twitter className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
+                                    </Link>
+                                </li>
+                            )}
 
-                        {profile.linkedin && (
-                            <li>
-                                <Link to={profile.linkedin}>
-                                    <LinkedIn className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
-                                </Link>
-                            </li>
-                        )}
-                    </ul>
-                </SidebarSection>
-            ) : null}
+                            {profile.linkedin && (
+                                <li>
+                                    <Link to={profile.linkedin}>
+                                        <LinkedIn className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
+                                    </Link>
+                                </li>
+                            )}
+                        </ul>
+                    </SidebarSection>
+                ) : null}
 
-            {profile.achievements?.length > 0 && (
-                <SidebarSection title="Achievements">
-                    <ul className="list-none m-0 p-0 grid grid-cols-5 gap-2">
-                        {profile.achievements
-                            .sort((a, b) => a.id - b.id)
-                            .map(({ achievement, hidden, id }) => {
-                                return (
-                                    <li key={id}>
-                                        <Achievement
-                                            {...achievement.data.attributes}
-                                            id={id}
-                                            hidden={hidden}
-                                            profile={profile}
-                                            mutate={mutate}
-                                        />
-                                    </li>
-                                )
-                            })}
-                    </ul>
-                </SidebarSection>
-            )}
+                {profile.achievements?.length > 0 && (
+                    <SidebarSection title="Achievements">
+                        <ul className="list-none m-0 p-0 grid grid-cols-5 gap-2">
+                            {profile.achievements
+                                .sort((a, b) => a.id - b.id)
+                                .map(({ achievement, hidden, id }) => {
+                                    return (
+                                        <li key={id}>
+                                            <Achievement
+                                                {...achievement.data.attributes}
+                                                id={id}
+                                                hidden={hidden}
+                                                profile={profile}
+                                                mutate={mutate}
+                                            />
+                                        </li>
+                                    )
+                                })}
+                        </ul>
+                    </SidebarSection>
+                )}
 
-            {profile.teams
-                ? profile.teams?.data?.map(({ attributes: { name, profiles } }) => {
-                      return (
-                          <>
-                              <SidebarSection title="Team">
-                                  <span className="text-xl font-bold">{name}</span>
-                              </SidebarSection>
-
-                              {profiles?.data?.length > 0 ? (
-                                  <SidebarSection title="Teammates">
-                                      <ul className="p-0 grid gap-y-2">
-                                          {profiles.data
-                                              .filter(({ id }) => id !== profile.id)
-                                              .map((profile) => {
-                                                  return (
-                                                      <li key={profile.id} className="flex items-center space-x-2">
-                                                          <Avatar className="w-8 h-8" src={getAvatarURL(profile)} />
-                                                          <a href={`/community/profiles/${profile.id}`}>
-                                                              {profile.attributes?.firstName}{' '}
-                                                              {profile.attributes?.lastName}
-                                                          </a>
-                                                      </li>
-                                                  )
-                                              })}
-                                      </ul>
+                {profile.teams
+                    ? profile.teams?.data?.map(({ attributes: { name, profiles } }) => {
+                          return (
+                              <>
+                                  <SidebarSection title="Team">
+                                      <span className="text-xl font-bold">{name}</span>
                                   </SidebarSection>
-                              ) : null}
-                          </>
-                      )
-                  })
-                : null}
 
-            {user?.profile?.id === profile.id && (
-                <SidebarSection>
-                    <button
-                        onClick={() => {
-                            if (breakpoints.md) {
-                                setEditProfile(true)
-                            } else {
-                                setEditModalOpen(true)
-                            }
-                        }}
-                        className="text-base text-red dark:text-yellow font-semibold"
-                    >
-                        Edit profile
-                    </button>
-                </SidebarSection>
-            )}
-            {user?.role?.type === 'moderator' && (
-                <SidebarSection>
-                    <Link
-                        external
-                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::profile.profile/${profile.id}`}
-                        className="text-base text-red dark:text-yellow font-semibold"
-                    >
-                        View in Strapi
-                    </Link>
-                </SidebarSection>
-            )}
-        </>
-    ) : (
-        <div className="pb-6">
-            <div className="mb-4 flex flex-start items-center relative">
-                <button
-                    onClick={() => setEditProfile(false)}
-                    className="inline-block font-bold bg-gray-accent-light dark:bg-gray-accent-dark mr-2 rounded-sm p-1"
-                >
-                    <RightArrow className="w-6 rotate-180" />
-                </button>
-                <h5 className="m-0 text-base font-bold">Back</h5>
-            </div>
-            <EditProfile
-                onSubmit={() => {
-                    handleEditProfile()
-                    setEditProfile(false)
-                }}
-            />
-        </div>
+                                  {profiles?.data?.length > 0 ? (
+                                      <SidebarSection title="Teammates">
+                                          <ul className="p-0 grid gap-y-2">
+                                              {profiles.data
+                                                  .filter(({ id }) => id !== profile.id)
+                                                  .map((profile) => {
+                                                      return (
+                                                          <li key={profile.id} className="flex items-center space-x-2">
+                                                              <Avatar className="w-8 h-8" src={getAvatarURL(profile)} />
+                                                              <a href={`/community/profiles/${profile.id}`}>
+                                                                  {profile.attributes?.firstName}{' '}
+                                                                  {profile.attributes?.lastName}
+                                                              </a>
+                                                          </li>
+                                                      )
+                                                  })}
+                                          </ul>
+                                      </SidebarSection>
+                                  ) : null}
+                              </>
+                          )
+                      })
+                    : null}
+
+                {user?.profile?.id === profile.id && (
+                    <SidebarSection>
+                        <Link
+                            to="/community/profile/edit"
+                            className="text-base text-red dark:text-yellow font-semibold"
+                        >
+                            Edit profile
+                        </Link>
+                    </SidebarSection>
+                )}
+                {user?.role?.type === 'moderator' && (
+                    <SidebarSection>
+                        <Link
+                            external
+                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::profile.profile/${profile.id}`}
+                            className="text-base text-red dark:text-yellow font-semibold"
+                        >
+                            View in Strapi
+                        </Link>
+                    </SidebarSection>
+                )}
+            </>
+        )
     )
 }
