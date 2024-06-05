@@ -52,7 +52,7 @@ export default function Link({
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (isPostHogAppUrl) {
-            posthog?.createPersonProfile()
+            posthog?.createPersonProfile?.()
         }
         if (event && posthog) {
             posthog.capture(event)

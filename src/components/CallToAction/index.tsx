@@ -244,7 +244,7 @@ export const CallToAction = ({
 
     const posthog = usePostHog()
     const wrappedOnClick = () => {
-        posthog?.createPersonProfile()
+        posthog?.createPersonProfile?.()
         onClick && onClick()
     }
     return (
