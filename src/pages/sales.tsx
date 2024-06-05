@@ -10,6 +10,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { IconArrowRightDown, IconRedo } from '@posthog/icons'
 import { sexyLegalMenu } from '../navs'
 import Lawyers from 'components/Lawyers'
+import { CSSTransition } from 'react-transition-group'
 
 function Sales() {
     const companies = [
@@ -26,10 +27,19 @@ function Sales() {
     ]
 
     const [companyName, setCompanyName] = useState('')
+    const [show, setShow] = useState(false)
 
     const updateCompanyName = () => {
-        const randomIndex = Math.floor(Math.random() * companies.length)
-        setCompanyName(companies[randomIndex])
+        setShow(false)
+        setTimeout(() => {
+            let newCompanyName
+            do {
+                const randomIndex = Math.floor(Math.random() * companies.length)
+                newCompanyName = companies[randomIndex]
+            } while (newCompanyName === companyName)
+            setCompanyName(newCompanyName)
+            setShow(true)
+        }, 100)
     }
 
     useEffect(() => {
@@ -78,11 +88,13 @@ function Sales() {
                     </div>
                 </div>
 
-                <div className="max-w-4xl text-center mx-auto py-8 px-4 md:px-8">
-                    <h2 className="pb-4">
+                <div className="max-w-4xl mx-auto py-8 px-4 md:px-8">
+                    <h2 className="pb-4 text-center">
                         The sales process at
-                        <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mx-1 min-w-[24rem] inline-flex gap-2 justify-between relative after:absolute after:-bottom-6 after:left-0 after:content-['[Typical,_stuffy_enterprise_SaaS_sales_company]'] after:text-sm after:text-primary/75 dark:after:text-primary-dark/75 after:font-normal after:tracking-normal">
-                            <span>{companyName}</span>
+                        <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mx-1 min-w-[24rem] inline-flex gap-2 justify-between relative overflow-hidden after:absolute after:-bottom-6 after:left-0 after:content-['[Typical,_stuffy_enterprise_SaaS_sales_company]'] after:text-sm after:text-primary/75 dark:after:text-primary-dark/75 after:font-normal after:tracking-normal">
+                            <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
+                                <span>{companyName}</span>
+                            </CSSTransition>
                             <span
                                 onClick={updateCompanyName}
                                 className="relative -top-0.5 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30"
@@ -92,11 +104,34 @@ function Sales() {
                         </span>{' '}
                     </h2>
 
-                    <p>test</p>
-                    <p>test</p>
-                    <p>test</p>
-                    <p>test</p>
-                    <p>test</p>
+                    <div className="grid grid-cols-4">
+                        <div>
+                            <ul className="m-0 p-0 list-none">
+                                <li className="trigger-1 font-bold">
+                                    <span>Item 1</span>
+                                </li>
+                                <li className="trigger-2">
+                                    <span>Item 2</span>
+                                </li>
+                                <li className="trigger-3">
+                                    <span>Item 3</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="col-span-3">
+                            <div className="slide-1 bg-accent dark:bg-accent-dark rounded p-4">
+                                Hello world! Slide 1.
+                                <span className="next-button">Next slide</span>
+                            </div>
+                            <div className="hidden slide-2 bg-accent dark:bg-accent-dark rounded p-4">
+                                Hello world! Slide 2.
+                                <span className="next-button">Next slide</span>
+                            </div>
+                            <div className="hidden slide-3 bg-accent dark:bg-accent-dark rounded p-4">
+                                Hello world! Slide 3.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </Layout>

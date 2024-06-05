@@ -1506,3 +1506,22 @@ li.squeak-left-border {
     -webkit-appearance: none;
     margin: 0;
 }
+
+.company-name-enter {
+    opacity: 0;
+    transform: translateY(100%);
+}
+.company-name-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 100ms, transform 250ms;
+}
+.company-name-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+.company-name-exit-active {
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 500ms, transform 500ms;
+}
