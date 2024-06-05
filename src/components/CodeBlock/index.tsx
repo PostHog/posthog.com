@@ -165,13 +165,10 @@ export const CodeBlock = ({
     }, [])
 
     const replaceProjectInfo = (code: string) => {
-        if (!projectName || !projectToken) {
-            return code
-        }
-
         return code
-            .replace('<ph_project_api_key>', projectToken)
-            .replace('<ph_project_name>', projectName)
+            .replace('<ph_project_api_key>', projectToken || '<ph_project_api_key>')
+            .replace('<ph_project_name>', projectName || '<ph_project_name>')
+            .replace('<ph_app_host>', appHost || '<ph_app_host>')
             .replace('<ph_client_api_host>', clientApiHost || 'https://us.i.posthog.com')
     }
 
@@ -377,14 +374,7 @@ export const CodeBlock = ({
                                                                 className={`${className} text-shadow-none`}
                                                                 {...props}
                                                             >
-                                                                {children === "'<ph_project_api_key>'" && projectToken
-                                                                    ? `'${projectToken}'`
-                                                                    : children === "'<ph_client_api_host>'" &&
-                                                                      clientApiHost
-                                                                    ? clientApiHost
-                                                                    : children === "'<ph_app_host>'" && appHost
-                                                                    ? appHost
-                                                                    : children}
+                                                                {replaceProjectInfo(children)}
                                                             </span>
                                                         </span>
                                                     )
