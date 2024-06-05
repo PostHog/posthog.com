@@ -179,8 +179,10 @@ const formSections = [
             },
             location: {
                 label: 'Location',
+                className: 'w-full sm:w-1/2',
             },
             pineappleOnPizza: {
+                className: 'w-full sm:w-1/2',
                 component: ({ values, setFieldValue }) => {
                     return (
                         <Toggle
@@ -194,6 +196,7 @@ const formSections = [
                 },
             },
             pronouns: {
+                className: 'w-full sm:w-1/2',
                 component: ({ values, setFieldValue }) => {
                     const [enabled, setEnabled] = useState(!!values.pronouns)
                     return enabled ? (
@@ -283,7 +286,7 @@ const formSections = [
                 className: 'w-full',
                 component: ({ values, setFieldValue }) => {
                     return (
-                        <div className="flex justify-between">
+                        <div className="grid sm:flex justify-between">
                             <Input
                                 label="Country code (2 digit ISO)"
                                 name="country"
@@ -293,7 +296,11 @@ const formSections = [
                                 value={values['country']}
                                 className="max-w-[72px]"
                             />
-                            <Link to="https://countrycode.org/" externalNoIcon className="font-bold text-sm">
+                            <Link
+                                to="https://countrycode.org/"
+                                externalNoIcon
+                                className="font-bold text-sm sm:mt-0 mt-1"
+                            >
                                 Look up your country code
                             </Link>
                         </div>
@@ -425,7 +432,7 @@ function EditProfile() {
 
     return (
         <Layout parent={communityMenu}>
-            <section className="max-w-2xl mx-auto py-12">
+            <section className="max-w-2xl mx-auto py-12 px-4">
                 <form className="m-0 space-y-6" onSubmit={handleSubmit}>
                     {formSections.map((section, index) => {
                         if (section.modOnly && user?.role?.type !== 'moderator') return null
