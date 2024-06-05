@@ -131,3 +131,5 @@ SQL is a powerful tool for analyzing analytics. Although it can be intimidating 
 - [Adventures in null handling: Null money, null problems](/blog/null-handling-hogql)
 - [Using HogQL for advanced breakdowns](/tutorials/hogql-breakdowns)
 - [In-depth: ClickHouse vs PostgreSQL](/blog/clickhouse-vs-postgres)
+
+<NewsletterForm />

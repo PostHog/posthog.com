@@ -60,8 +60,6 @@ Eric has worn many hats since joining PostHog, building many of our user-facing 
 
 > **What we learned:** Define what you value before you start hiring. Creating the handbook helped James and Tim understand the kind of people who would make PostHog a success, which made choosing Eric easy. It's hard to retrofit a culture when you've already hired a dozen or so people, so don’t delay.
 
-<NewsletterForm />
-
 ## 3. James Greenhill
 
 ![James](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/james.png)
@@ -75,6 +73,8 @@ James on Jams: “It was obvious. We were learning tons from him around how to m
 Jams masterminded our [migration from Postgres to Clickhouse](/blog/how-we-turned-clickhouse-into-our-eventmansion), and scaling PostHog, so it can handle billions of events. He remains one of our infrastructure gurus while he works on building our data warehouse with Eric.
 
 > **What we learned:** Don’t just rely on job ads, especially early on. Your first users could be your best hires because they likely understand the problem you’re trying to solve. Many of our best hires have come from recommendations, communities, and serendipitous connections.
+
+<NewsletterForm />
 
 ## 4. Lottie Coxon
 

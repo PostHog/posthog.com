@@ -42,7 +42,7 @@ const sections: ISection[] = [
         icon: <IconShield className="w-7 h-7" />,
         description: <EnterpriseDescription />,
         cta: {
-            url: '/contact-sales?edition=enterprise',
+            url: '/talk-to-a-human?edition=enterprise',
             label: 'Get in touch',
             type: 'primary',
         },

@@ -147,3 +147,5 @@ The SaaS Playbook isn’t your normal startup how-to guide, according to Lior. I
 **Lior's review:** “It’s a very alternative guide to building a startup. While most books center around hyper growth and fundraising, the SaaS Playbook teaches you how to achieve financial independence to build a sustainable and bootstrapped business.”
 
 > **Putting it into practice:** Product launches are a perpetual activity at PostHog, so our marketing team is always working in bootstrap mode — with help from [their favourite tool](/blog/posthog-marketing).
+
+<NewsletterForm />

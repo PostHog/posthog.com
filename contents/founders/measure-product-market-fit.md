@@ -167,8 +167,6 @@ But, as Superhuman proves, the survey is a powerful way to systematize finding p
 | <span className="text-green text-lg">✔</span> Useful for tracking how your product-market fit changes over time          |            |
 | <span className="text-green text-lg">✔</span> Will help you understand _why_ you do or don't have product-market fit     |            |
 
-<NewsletterForm />
-
 ## Indicator #3: User engagement
 
 - **Type:** Leading indicator
@@ -211,6 +209,8 @@ Everyone. It's basically impossible to measure product-market fit without it. Th
 | <span className="text-green text-lg">✔</span> Easy to understand for all teams                                           | <span className="text-red text-lg">✖</span> Requires user feedback or session replays to understand behavior             |
 | <span className="text-green text-lg">✔</span> Can be broken down by user cohorts for comparison                          |           |
 | <span className="text-green text-lg">✔</span> You can A/B test ways to improve user engagement                           |           |
+
+<NewsletterForm />
 
 ## Indicator #4: Paying ICP customers
 
@@ -389,8 +389,6 @@ They're outliers in that they aren't traditional measures of product-market fit.
 
 And, if you find yourself unable to find product-market fit, we share how we found it for PostHog (and a step-by-step process achieving it) in [The Product-Market Fit Game](/blog/product-market-fit-game). The golden rule? If in doubt, pivot. 😅
 
-<NewsletterForm />
-
 #### Footnotes
 
 [^1]: [The Never Ending Road To Product Market Fit](https://brianbalfour.com/essays/product-market-fit) – Brian Balfour – Dec 11, 2013
@@ -406,3 +404,5 @@ And, if you find yourself unable to find product-market fit, we share how we fou
 [^6]: CLV attempts to quantify how much customers are worth over their entire lifetime. This means you need to understand your average deal size, average deal length, gross margin, and you CAC payback period – i.e. how long it takes a customer to pay back the cost of acquiring them. TL;DR: it's a lot of work.
 
 [^7]: [Growth at All Costs is Perilous](https://review.firstround.com/growth-at-all-costs-is-perilous-this-is-how-to-scale-sales-sustainably) – Karen Rhorer – Sep 25, 2018
+
+<NewsletterForm />

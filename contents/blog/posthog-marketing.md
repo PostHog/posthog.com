@@ -122,6 +122,8 @@ This insight also helps identify when traffic to our SEO content is dropping off
 
 As much as possible, we like to measure outcomes, not activity. That's why we don't track bounce rate, for example – it's not a useful metric! Neither, to a lesser extent, are popular web metrics like 'time on page' or 'session duration'. Unless you're a social network or publisher, what does the time someone spends on your website actually tell you? Nothing, so we don't measure it. Instead, we measure outcomes, which is what our next dashboard is all about.
 
+<NewsletterForm />
+
 ## Content marketing effectiveness
 
 This dashboard dives deeper into the impact of specific pages. It's built around a metric we call 'Showed Intent', though you could rename this 'Engaged Users' or something you prefer. 
@@ -224,3 +226,5 @@ We hope this look at how we use PostHog will inspire you (and your marketing tea
 - [Using the PostHog Toolbar to visualize behavior and create actions](/tutorials/toolbar): The PostHog Toolbar is a useful way to understand how users interact with your website. You can also use it to create actions.
 
 - [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/guide-to-funnels): An in-depth guide to building, analyzing and improving your conversion funnel.
+
+<NewsletterForm />

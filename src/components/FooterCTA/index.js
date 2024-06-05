@@ -13,7 +13,7 @@ export default function FooterCTA() {
                 <p className="w-">It takes less than 5 minutes.</p>
                 <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 items-center">
                     <SignupCTA className="w-full sm:w-48" size="md" />
-                    <CallToAction to="/book-a-demo" type="secondary" size="md">
+                    <CallToAction to="/demo" type="secondary" size="md">
                         Schedule a demo
                     </CallToAction>
                 </div>

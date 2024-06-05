@@ -115,6 +115,8 @@ With those principles in mind, here are some example product survey questions as
 
 This shows the diversity of questions, companies, and use cases for product surveys. Each of them utilized surveys to prioritize future development, monitor user satisfaction, and ultimately, make data-informed decisions to improve their product.
 
+<NewsletterForm />
+
 ## Using surveys to find product-market fit
 
 The companies above are tech giants with product-market fit, but surveys are also a critical tool for startups still searching for it.
@@ -167,3 +169,5 @@ As an all-in-one platform, PostHog is uniquely placed to do all of the above. In
 - [In-depth: How to measure product-market fit](/blog/measure-product-market-fit)
 - [10x engineers talk to users](/blog/10x-engineers-do-user-interviews)
 - [An engineer’s guide to talking to users](/newsletter/talk-to-users)
+
+<NewsletterForm />

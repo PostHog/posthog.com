@@ -151,4 +151,6 @@ You may feel cleverer than users – you built the thing, right?
 
 Wrong! You need them, not the other way around. 
 
-Check your ego and listen to users, stay fast and you'll learn the most by doing. That's how you build something people want.
+Check your ego and listen to users, stay fast, and you'll learn the most by doing. That's how you build something people want.
+
+<NewsletterForm />

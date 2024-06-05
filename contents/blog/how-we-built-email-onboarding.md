@@ -77,7 +77,9 @@ How this works is simple: when a user signs up, they can optionally tell us what
 
 This email performed very well, with a 68% open rate and a 16% CTR. Two emails into the flow and developers were already opting in to _more_ emails! 
 
-Best of all, though, because it was personalized and came from me directly, it also earned a steady trickle of replies. I responded in kind and was able to feed in further improvements, including adding another option for `role_at_organization` = `founder`. 
+Best of all, though, because it was personalized and came from me directly, it also earned a steady trickle of replies. I responded in kind and was able to feed in further improvements, including adding another option for `role_at_organization` = `founder`.
+
+<NewsletterForm />
 
 ## Onboarding 3.3: The one where we added experiments
 
@@ -159,3 +161,5 @@ At the time of writing, Onboarding 5.0 has been live just one week – it’s to
 One way we’re already experimenting with this is by bringing back checks to see if users are ingesting events or not. We’re testing this with the session replay product by running the flow you can see above for the first email after the welcome email. 
 
 Hopefully we’ll see this test prove successful and we’ll be able to replicate these secondary checks across all products soon – in Onboarding 6.0!
+
+<NewsletterForm />

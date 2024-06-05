@@ -6,20 +6,20 @@ showTitle: true
 
 ## Overview
 
-We use [HubSpot](https://www.hubspot.com/) as our customer relationship management ('CRM') platform. If you need access, you can ask Cameron or Simon and they will send you an invite to create an account. 
+We use [HubSpot](https://www.hubspot.com/) as our customer relationship management ('CRM') platform. If you need access, you can ask Cameron or Simon and they will send you an invite to create an account. 
 
-As a first step, it is _really important_ that you [connect your personal PostHog Gmail account](https://app.hubspot.com/crm-settings-email/6958578/email/connectedEmails), so that if you start a conversation in HubSpot but continue it in Gmail, we'll have a complete record. This will also make it generally easier for you to sync contacts with HubSpot. 
+As a first step, it is _really important_ that you [connect your personal PostHog Gmail account](https://app.hubspot.com/crm-settings-email/6958578/email/connectedEmails), so that if you start a conversation in HubSpot but continue it in Gmail, we'll have a complete record. This will also make it generally easier for you to sync contacts with HubSpot. 
 
-You might also find it useful to install HubSpot's [Chrome extension](https://chrome.google.com/webstore/detail/hubspot-sales/oiiaigjnkhngdbnoookogelabohpglmd?hl=en), as it means you can manage most things directly in Gmail. 
+You might also find it useful to install HubSpot's [Chrome extension](https://chrome.google.com/webstore/detail/hubspot-sales/oiiaigjnkhngdbnoookogelabohpglmd?hl=en), as it means you can manage most things directly in Gmail. 
 
 As a general principle, we try to ensure as much customer communication as possible is captured in HubSpot, rather than in individual email inboxes, so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!). You should use the channel that suits the user, not us. Just make sure you keep HubSpot up to date with your interactions. We've seen much higher response rates on Slack than email. You can copy paste from there into Hubspot until we have a way to integrate the two.
 
 You are most likely to use the following regularly:
 
 - _Contacts_ - pretty straightforward, under 'Contacts'. You can create contacts manually, or sync with your Gmail. 
-- _Companies_ - also under 'Contacts'. You will also want to create a company record to associate with any contact (and you can associate multiple contacts with a single company). If you enter the company's domain name, HubSpot is pretty good at pulling in additional data to fill out the record. 
-- _Deals_ - under 'Sales'. This is where we manage our customers through their buying cycle. 
-- _Tasks_ - also under 'Sales'. This is a useful place to see a summary of all the tasks that you have created or that have been assigned to you. 
+- _Companies_ - also under 'Contacts'. You will also want to create a company record to associate with any contact (and you can associate multiple contacts with a single company). If you enter the company's domain name, HubSpot is pretty good at pulling in additional data to fill out the record. 
+- _Deals_ - under 'Sales'. This is where we manage our customers through their buying cycle. 
+- _Tasks_ - also under 'Sales'. This is a useful place to see a summary of all the tasks that you have created or that have been assigned to you. 
 
 If you'd like to dig deeper, HubSpot have a ton of [documentation](https://knowledge.hubspot.com/) and resources that you can refer to as well.
 
@@ -58,7 +58,7 @@ a day and reach out to the people who've not been contacted yet.  We also have a
 
 ### Completed HubSpot forms
 
-We have a [contact us form](/contact-sales) on posthog.com where we ask users can get in touch with us.  The sales@ alias gets an email notification and a notification is also sent to [#website-contact-sales](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted - respond to them in the same way as the email section above.
+We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users can get in touch with us.  The sales@ alias gets an email notification and a notification is also sent to [#website-contact-sales](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted - respond to them in the same way as the email section above.
 
 ### New Slack signups
 
@@ -66,7 +66,7 @@ When a user signs up to Slack, we use Zapier to automatically create a contact i
 
 ### Manually adding new users
 
-You can also just manually add a user to HubSpot under 'Contacts'. When creating a new contact, try to add as much useful information as possible, especially about the type of company they work for and what their needs are. This enables us to provide them with the best possible experience. 
+You can also just manually add a user to HubSpot under 'Contacts'. When creating a new contact, try to add as much useful information as possible, especially about the type of company they work for and what their needs are. This enables us to provide them with the best possible experience. 
 
 ## Deals
 
@@ -122,7 +122,7 @@ The process is fairly straightforward. A couple of points to note:
 - It is really important that you add our standard payment terms to the quote, so it is clear when the customer should expect to pay.
 - You can use 'Snippets' when building a quote to insert frequently used text (like payment terms). 
 - Ensure you select the correct term (Annually/Monthly)
-- Do not use the Stripe billing integration as it is very basic and does not enable you to have different types of line item (e.g. 1 month free trial and then an ongoing monthly subscription). 
+- Do not use the Stripe billing integration as it is very basic and does not enable you to have different types of line item (e.g. 1 month free trial and then an ongoing monthly subscription). 
 
 
 ### Inbound Self-serve pipeline

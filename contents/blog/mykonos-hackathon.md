@@ -118,6 +118,8 @@ It’s not the most optimal flow. So, imagine if instead users could view and re
 
 But that's not all, if you're using Zendesk then you could, in the future, add this view to your customer-facing website with just a few clicks. Like the sound of this project? [Got to our public roadmap](https://posthog.com/roadmap), search for 'Customer support product', and vote for it.
 
+<NewsletterForm />
+
 ## The referral scheme
 
 <BuiltBy people={["Ben White", "Raquel Smith", "Joe Martin"]} />
@@ -213,3 +215,5 @@ This year, Marius, Eric, James G, Lottie, Charles, and Michael all celebrate fou
 We have a Slack channel called #do-more-weird for odd, fun ideas, and this hackathon project belongs there.
 
 Head to the [careers page](https://posthog.com/careers) and click on James Hawkins' face for an inspirational surprise...
+
+<NewsletterForm />

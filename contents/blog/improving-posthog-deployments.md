@@ -131,5 +131,5 @@ If you enjoyed reading this look at improving PostHog deployments, we recommend 
 
 > Interested on chatting about those topics? [Get in touch with our teams!](https://app.posthog.com/home#supportModal)
 
-_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+<NewsletterForm />
 
