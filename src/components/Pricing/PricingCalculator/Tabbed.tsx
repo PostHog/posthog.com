@@ -292,7 +292,7 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
                         <div className="col-span-6">
                             <p className="mb-2">
                                 <strong>{calcVolume}</strong>{' '}
-                                <span className="opacity-70 text-sm">{denomination}/month</span>
+                                <span className="opacity-70 text-sm">{denomination}s/month</span>
                             </p>
                         </div>
                         <div className="col-span-2 text-right pr-3">
@@ -318,7 +318,7 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
                                             key={addon.type}
                                             addons={addons}
                                             setAddons={setAddons}
-                                            volume={volume + parseInt(activeProduct.freeLimit.replace(/,/g, ''))}
+                                            volume={volume}
                                             {...addon}
                                         />
                                     </li>
@@ -420,7 +420,12 @@ export default function Tabbed() {
                         )}
                     </div>
 
-                    <TabContent addons={productAddons} setAddons={setProductAddons} activeProduct={activeProduct} />
+                    <TabContent
+                        key={activeProduct.type}
+                        addons={productAddons}
+                        setAddons={setProductAddons}
+                        activeProduct={activeProduct}
+                    />
                 </div>
                 <div className="md:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark"></div>
                 <div className="md:col-span-5 py-2 pl-4 md:pl-0 md:border-t border-light dark:border-dark">
