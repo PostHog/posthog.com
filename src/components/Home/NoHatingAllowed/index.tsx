@@ -212,7 +212,7 @@ export default function NoHatingAllowed() {
     return (
         <div className="relative pt-8 mb-12 overflow-hidden">
             <h2 className="text-4xl lg:text-6xl text-center mb-5">
-                {!enterpriseMode && <span className="text-red uppercase block md:inline">Warning</span>} You'll{' '}
+                {!enterpriseMode && <span className="text-red uppercase block md:inline">Warning:</span>} You'll{' '}
                 {enterpriseMode ? <span className="text-red">LOVE</span> : 'hate'} PostHog if...
             </h2>
             <div className="absolute z-10 -left-10 top-64 bottom-32 w-48 bg-gradient-radial from-light/30 via-light/0 to-light/0 dark:from-dark/30 dark:via-dark/0 dark:to-dark/0" />
