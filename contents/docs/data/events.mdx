@@ -17,13 +17,13 @@ At its most basic, an event is:
 
 2. A `distinct_id` which is a unique identifier for [person](/docs/data/person), commonly a `uuidv7` value like `018daf23-89b3-7cf8-a4f1-94064c96df90`
 
-3. A `timestamp` in ISO 8601 format which is the time the event occurred like `2024-05-22T17:09:29.220Z`. This is most commonly now, but can also be in the past. 
+3. A `timestamp` in ISO 8601 format which is the time the event occurred like `2024-05-22T17:09:29.220Z`. This is most commonly `now()`, but can also be in the past. 
 
 4. `properties` which are additional data like `color` or `$current_url`. Properties starting with `$` are PostHog defaults.
 
 You can capture custom events using any of [our SDKs](/docs/libraries) or [our API](/docs/api/capture). PostHog's client-side SDKs, like [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native), can also [autocapture](/docs/data/autocapture) events for you.
 
-You can view recent events in your [activity tab](https://us.posthog.com/events), which can be set to automatically update every 30 seconds for a live view of activity in your app.
+You can view recent events in your [activity tab](https://us.posthog.com/events), which automatically updates every 30 seconds for a live view of activity in your app.
 
 ## How events power PostHog
 
