@@ -37,7 +37,7 @@ export default function Enterprise() {
                 </h2>
                 <div className="flex justify-center items-center gap-2 home-hero-cta mb-16">
                     <SignupCTA />
-                    <TrackedCTA event={{ name: `clicked Get a demo` }} href="/book-a-demo" type="secondary" size="lg">
+                    <TrackedCTA event={{ name: `clicked Get a demo` }} href="/demo" type="secondary" size="lg">
                         Get a demo
                     </TrackedCTA>
                 </div>
@@ -511,7 +511,7 @@ export default function Enterprise() {
                 <section className="text-center mb-24">
                     <h3>Still not convinced?</h3>
 
-                    <TrackedCTA event={{ name: `clicked Get a demo` }} href="/book-a-demo" type="secondary" size="lg">
+                    <TrackedCTA event={{ name: `clicked Get a demo` }} href="/demo" type="secondary" size="lg">
                         Talk to sales
                     </TrackedCTA>
                 </section>

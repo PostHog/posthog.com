@@ -15,6 +15,8 @@ import CommunityQuestions from 'components/CommunityQuestions'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { shortcodes } from '../mdxGlobalComponents'
+import { MdxCodeBlock } from 'components/CodeBlock'
+import { InlineCode } from 'components/InlineCode'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -485,11 +487,17 @@ const pathDescription = (item) => {
 
 export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, breadcrumbBase, tableOfContents } }) {
     const {
-        components: { components },
+        apiComponents: { components: apiComponents },
         allMdx,
     } = data
     const name = humanReadableName(data.data.name)
     const paths = {}
+    const components = {
+        inlineCode: InlineCode,
+        pre: MdxCodeBlock,
+        MultiLanguage: MdxCodeBlock,
+        ...shortcodes,
+    }
     // Filter PUT as it's basically the same as PATCH
     const items = JSON.parse(data.data.items).filter((item) => item.httpVerb !== 'put')
     items.map((item) => {
@@ -498,7 +506,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
         }
         paths[item.path][item.httpVerb] = item.operationSpec
     })
-    const objects = JSON.parse(components)
+    const objects = JSON.parse(apiComponents)
 
     const [exampleLanguage, setExampleLanguageState] = useState()
 
@@ -553,7 +561,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                     <h2>{generateName(item)}</h2>
                                     {mdxNode?.body && (
                                         <div className="article-content">
-                                            <MDXProvider components={shortcodes}>
+                                            <MDXProvider components={components}>
                                                 <MDXRenderer>{mdxNode.body}</MDXRenderer>
                                             </MDXProvider>
                                         </div>
@@ -638,7 +646,7 @@ export const query = graphql`
             name
             url
         }
-        components: apiComponents {
+        apiComponents: apiComponents {
             components
         }
     }

@@ -49,7 +49,7 @@ A unique persons query for pageviews now results in `1` unique user.
 
 This section covers how PostHog filters out events based on person properties.
 
-> **Note:** Currently, we use the latest person properties and join them during queries. In the future (or if you have person on events enabled) this works as follows.
+> **Note:** If you signed up before June 2024, you can configure in [settings](https://us.posthog.com/settings/project-product-analytics#persons-on-events) to use the faster queries mode instead of joining with the person table for current properties. This is the default for users signed up after June 2024.
 
 Since all the properties for a person are stored on each event, the process is straightforward.
 
@@ -79,7 +79,7 @@ To achieve this, we filter based on the `Subscription plan` person property, whi
 
 You may have noticed that user `3` actually upgraded from the `free` plan to the `enterprise` plan over this period. Despite this, the event they sent for when they viewed the docs still reflects that they were on the `free` plan at the time, and is thus filtered out.
 
-In most cases, this is exactly what we want, as it means that we can update the properties for a person without worrying about messing up our past data points. However, if instead you do want to filter based on a person's current properties, you can do so by creating a [cohort](/manual/cohorts).
+In most cases, this is exactly what we want, as it means that we can update the properties for a person without worrying about messing up our past data points. However, if instead you do want to filter based on a person's current properties, you can do so by using `person.current_properties.<property>` in HogQL or creating a [cohort](/manual/cohorts).
 
 ### Filtering with cohorts
 

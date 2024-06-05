@@ -131,3 +131,5 @@ To sum up, VC funding is less stressful for me because:
 * What we enjoy doing and what we're building is well suited to a VC model
 
 Ultimately, running any company is usually a marathon – I believe that looking after yourself let's you in turn look after users better. That often means raising money.
+
+<NewsletterForm />

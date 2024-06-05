@@ -481,7 +481,7 @@ export const Main = () => {
                                 Dashboard
                             </CallToAction>
                         ) : enterpriseMode ? (
-                            <CallToAction size="sm" type="outline" className="hidden sm:flex mr-2" to="/book-a-demo">
+                            <CallToAction size="sm" type="outline" className="hidden sm:flex mr-2" to="/demo">
                                 Talk to sales
                             </CallToAction>
                         ) : (

@@ -33,7 +33,7 @@ export default function BookADemo() {
                             video. If you have needs that aren't covered here, she's happy to chat!
                         </p>
 
-                        <CallToAction type="secondary" to="/contact-sales" className="whitespace-nowrap">
+                        <CallToAction type="secondary" to="/talk-to-a-human" className="whitespace-nowrap">
                             Request a call
                         </CallToAction>
                     </div>

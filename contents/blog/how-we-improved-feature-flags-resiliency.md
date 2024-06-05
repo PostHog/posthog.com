@@ -154,3 +154,5 @@ As you can imagine, the p90 is so low because these requests don't touch the dat
 When we are in incident mode, i.e. the app is down completely, feature flag p99 latency drops down to ~80ms as well, because we start skipping all database related flags where these properties weren't sent.
 
 You can see a similar story on [our status page](https://status.posthog.com/uptime/1t4b8gf5psbc?page=3), where feature flags related incidents went down.
+
+<NewsletterForm />

@@ -47,8 +47,6 @@ Once product managers complete their analysis and plans, they manage a team of "
 
 Product engineers, on the other hand, ship on their own. They figure out requirements, designs, infrastructure needs, and implementation details. They rely on their broad set of technical skills for this. They may need help in design, DevOps, or infrastructure, but mostly act like a pack of wolves in search of [product-market fit](/blog/product-market-fit-game).
 
-<NewsletterForm />
-
 ### Step 3: Launching and beyond
 
 Launching a product is a big deal for product managers. They again work with their stakeholders to make sure it goes smoothly. Product engineers are shipping so often that a single launch doesn’t matter as much to them. They continuously deploy and use feature flags to ensure their launches go smoothly. Product managers are hands-on with launches, while product engineers automate them as much as possible.

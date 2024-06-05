@@ -110,6 +110,10 @@ export const handbookSidebar = [
                         url: '/handbook/company/communication',
                     },
                     {
+                        name: 'Fuzzy ownership',
+                        url: '/handbook/company/fuzzy-ownership',
+                    },
+                    {
                         name: 'Kudos',
                         url: '/handbook/company/kudos',
                     },
@@ -2722,6 +2726,12 @@ export const docsMenu = {
                     name: 'Query your sources',
                     url: '/docs/data-warehouse/query',
                     icon: 'IconHogQL',
+                    color: 'purple',
+                },
+                {
+                    name: 'Joining data',
+                    url: '/docs/data-warehouse/join',
+                    icon: 'IconList',
                     color: 'purple',
                 },
                 {

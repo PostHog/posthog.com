@@ -80,6 +80,4 @@ If you have a system that would only have interactions with non-technical users 
 
 However, even though the points presented here may not apply to your business, there are still various other benefits to being open source, so maybe don't drop the idea just yet.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
-
-<ArrayCTA />
+<NewsletterForm />

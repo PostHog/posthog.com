@@ -104,3 +104,5 @@ To conclude, there are three key points to remember when running experiments on 
 3. Running smaller, user-level tests first is a good way to reduce the unique risks of group-targeted experiments.
 
 Read our [A/B testing product manual](/docs/experiments) and [what we've learned about running A/B tests](/blog/experiments) at PostHog for more A/B testing tips.
+
+<NewsletterForm />

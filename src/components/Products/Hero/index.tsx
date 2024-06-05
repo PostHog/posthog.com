@@ -33,7 +33,7 @@ export const Hero = ({ color, icon, beta, product, title, description }: HeroPro
                 <CallToAction href="https://app.posthog.com/signup" type="primary">
                     Get started - free
                 </CallToAction>
-                <CallToAction href="/contact-sales" type="secondary">
+                <CallToAction href="/demo" type="secondary">
                     Book a demo
                 </CallToAction>
             </div>

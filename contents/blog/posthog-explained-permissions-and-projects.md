@@ -67,3 +67,5 @@ Each organization can only have one owner, and new users are added as members by
 Whether someone has left your (actual) organization or joined your (PostHog) organization, sometimes you’ll undoubtedly need to change access rights — or remove a user entirely. In such cases, just head to the _Project settings_ page of your PostHog instance, via the main menu. 
 
 It’s worth noting that users with member-level access cannot make changes to other users and can only choose to leave an organization themselves. Deleting users entirely can only be done by those with administrator privileges, or above. 
+
+<NewsletterForm />

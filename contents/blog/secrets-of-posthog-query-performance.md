@@ -180,4 +180,4 @@ Some projects currently in the pipeline are:
 
 > Interested in chatting about ClickHouse performance or working on similar problems? Send me an email: [karl+perf@posthog.com](mailto:karl+perf@posthog.com) or join [our community page](/posts).
 
-<ArrayCTA />
+<NewsletterForm />

@@ -1698,7 +1698,7 @@ function DpaGenerator() {
             <section className="text-center mt-20 md:mt-40 mb-20 md:mb-24 print:hidden">
                 <h3>Need a custom MSA?</h3>
 
-                <TrackedCTA event={{ name: `clicked Get a demo` }} href="/book-a-demo" type="secondary" size="lg">
+                <TrackedCTA event={{ name: `clicked Get a demo` }} href="/demo" type="secondary" size="lg">
                     Talk to sales
                 </TrackedCTA>
             </section>

@@ -61,3 +61,5 @@ If you’re on board and want to move ahead with tracking your marketing site wi
 ```
 
 It’s worth noting that you’ll need to add this snippet to all pages you want to track, and that the snippet above uses Javascript. Don’t want to use Javascript? [There are plenty of other options](/docs/integrate)!
+
+<NewsletterForm />

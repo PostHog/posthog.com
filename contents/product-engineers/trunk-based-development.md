@@ -127,3 +127,5 @@ The combination of a philosophy shift and the implementation of the right tools 
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
 - [Why we test in production (and you should too)](/product-engineers/testing-in-production)
+
+<NewsletterForm />

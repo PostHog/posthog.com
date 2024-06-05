@@ -112,3 +112,5 @@ We aspire for HouseWatch to be like [pganalyze](https://pganalyze.com/) for Clic
 - Automatic surfacing of known system issues 
 
 > You can see our full to-do list, suggest a feature, find installation details, or contribute by going to the [HouseWatch repo](https://github.com/PostHog/HouseWatch).
+
+<NewsletterForm />

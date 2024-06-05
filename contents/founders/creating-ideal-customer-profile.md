@@ -75,8 +75,6 @@ These were _needs_ and _haves_ that our customers had in common. Things like:
 
 Note, we didn't include things like industry, or revenue. We felt these are proxies and somewhat vague. For example, healthcare companies usually need to control their data, but it's the need to control data that is important.
 
-<NewsletterForm />
-
 ## Track bad customers that don't buy too
 
 We then looked at _every_ customer and how they got on. Tracking customers that never bought anything was jut as useful as tracking those that did.

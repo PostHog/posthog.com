@@ -79,7 +79,7 @@ const planSummary = [
             'Advanced permissions & audit logs',
         ],
         CTAText: 'Get in touch',
-        CTALink: '/contact-sales',
+        CTALink: '/talk-to-a-human',
     },
 ]
 

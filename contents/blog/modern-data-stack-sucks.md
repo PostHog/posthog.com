@@ -72,8 +72,6 @@ The goal of the stack at this stage is to use data to make better decisions abou
 
 Moving from individual sources to a CDP makes gathering and distributing data faster, but it's also where complexity and maintenance increase rapidly. Data accuracy problems proliferate at this stage, though for now, this isn't a critical issue – engineers just need enough data to know what to prioritize.
 
-<NewsletterForm />
-
 ## The Series A data stack
 
 Series A is where data begins to get serious. By serious, I mean:
