@@ -12,25 +12,34 @@ crosspost:
   - Founders
   - Blog
 ---
-Startups ship [more](https://medium.com/the-year-of-the-looking-glass/start-ups-versus-big-companies-f275800e78e5) [stuff](https://www.quora.com/Why-are-startups-and-small-companies-better-at-anything-compared-to-large-firms-if-large-firms-have-so-much-more-resources) per person than big companies. At PostHog, we ship fast even for a startup. How? The magic of small teams. Basically, we’re growing as a company by creating a bunch of internal startups to keep us speedy, autonomous, and innovative. 
+Startups ship more per person than big companies – everyone knows this. But how do you retain that advantage as you scale?
 
-This allows us to scale without falling into an organizational trap of having lots of big, separate functions that slow down communication, stifle innovation, and stop people from seeing the impact of their work.
+Our answer is small teams – speedy, innovative, and autonomous teams where individuals can still have an outsized impact. They enable us to scale, while retaining the culture and speed of an early-stage startup. 
 
-Yes, there are tradeoffs and the small teams structure won't work for everyone. But, right now, it's working really well for us. And maybe it could work for you and your company, too.
+This week we're sharing how they work, why we chose this structure, and the tradeoffs we accept to enjoy the benefits of small teams.
 
-### How small teams work at PostHog
+## How small teams work at PostHog
 
-First, a crash course in how PostHog is structured. Right, now, we're 47 people spread across ten countries working asynchronously and [shipping fast](changelog/2024). We're split into 12 small teams, most of which cover individual products such as data warehouse, replay, pipeline, or product analytics. But we also have small teams covering non-engineering areas, like people and operations and marketing. 
+Right now we're 47 people spread across ten countries working asynchronously and [shipping fast](changelog/2024). They're organized into 15 small teams. 
 
-When we launch a new product, or a project on an existing team becomes too hot to handle, we often spin out a new small team. We're in the process of creating two new small teams right now – one focused on Hog, PostHog's first ever programming language, and another focused on customer communications and community. This allows us to push forward with new ideas and keep shipping without sacrificing quality.
+Most teams cover individual products, such as data warehouse, replay, pipeline, or product analytics, but we also have small teams covering people and operations, marketing, and growth.
 
-Creating small teams allows us to move fast. Our [surveys product](/surveys), which aims to have similar functionality to competitors with hundreds of employees, shipped from a small team. Our [web analytics product](https://posthog.com/teams/web-analytics), which goes up against Google Analytics, is run by a small team with one person, the brilliant Robbie Coomber.
+When we launch a new product, or a project on an existing team becomes too large for the current team, we often spin out a new small team. This allows us to push forward with new ideas and keep shipping without sacrificing quality.
 
-The small teams structure is core to how we've [designed our company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed). Here are the golden rules of small teams – and some pitfalls to be wary of.
+Right now, for example, we're in the process of scaling support by moving our support engineers out of the Customer Success team and into a new team focused on customer communications and community. [link to team page]. We're recruiting support engineers for that team [link to job], btw.
 
-### Small teams are actually small
+We're also creating a new team with the mission of making our customer data platform (CDP) a first-class product [link to team page] – a project spun out from a Hackathon project at our recent all-company offsite in Mykonos. [link]
 
-The first rule of small teams? They’ve got to be small. Really small. That means between two and six people. More than this and you have a department, which is exactly what the small teams structure is designed to avoid. Less than two people and, well, you don’t have a team.
+
+## The golden rules of small teams
+
+The small teams structure is core to how we've [designed our company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed), but they only work if you follow these rules. 
+
+### 1. They need to be genuinely small
+
+The first rule of small teams? They’ve got to be small – two to six people. More than this and you have a department, which is what we're trying to avoid. Less than two people and, well, you don’t have a team. 
+
+Small teams are effectively one pizza teams, as opposed to the [two-pizza teams](https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/two-pizza-teams.html) idea popularized by Amazon. 
 
 The overall goal of small teams is to own an area of the product or company and be structured like an early-stage startup. Sure, these small teams don't have all the functions of a startup, but their spirit and approach to work is exactly the same. 
 
