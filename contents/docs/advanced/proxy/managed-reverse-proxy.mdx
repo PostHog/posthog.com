@@ -20,7 +20,7 @@ Before setting up the Managed Reverse Proxy, ensure you have the following:
 4. Go to your DNS provider and create a new CNAME record for this subdomain
   - You will be shown a domain to set as the CNAME record, it will look something like `4854cf84789d8596ad01.proxy-us.posthog.com.`
 5. Wait for the proxy to be created. It will go from "Waiting", to "Issuing" and finally "Live" once everything is set up. There is no further action required after creating the DNS record.
-6. Update your PostHog snippet or SDK to use your new subdomain as the `api_host`.
+6. Update your PostHog snippet or SDK to use the subdomain chosen in step 3 as the `api_host`.
 
 ### Setting DNS Records In Cloudflare
 
