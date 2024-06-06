@@ -50,9 +50,7 @@ const MyComponent = () => {
     const posthog = usePostHog()
 
     useEffect(() => {
-        if (posthog) {
-            posthog.capture("event_name")
-        }
+        posthog.capture("event_name")
     }, [posthog])
 }
 ```
@@ -77,11 +75,19 @@ import { posthog } from './posthog'
 
 export function MyApp1() {
     useEffect(async () => {
-        if (posthog) {
-            posthog.capture('event_name')
-        }
-    }, [])
+        posthog.capture('event_name')
+    }, [posthog])
 
     return <View>Your app code</View>
+}
+```
+
+You can even use this instance with the PostHogProvider:
+
+```
+import { posthog } from './posthog'
+
+export function MyApp() {
+  return <PostHogProvider client={posthog}>{/* Your app code */}</PostHogProvider>
 }
 ```
