@@ -24,3 +24,4 @@ This means PostHog gives you the best practices and the industry standard tools 
 
 ### Be the source of truth for customer and product data
 
+Traditionally, as companies scale, their data warehouse becomes the source of truth, and non-warehouse native tools (like product analytics) become less relevant as people lose trust in the data in them. By providing the data and data-intense tools in one place, we can enhance the power of our products (like product analytics), provide increased trust, and enable companies to build on top of the warehouse itself as they see fit, all without them having to set up a complex stack.
