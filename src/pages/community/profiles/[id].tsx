@@ -71,6 +71,49 @@ const LikedPosts = ({ profileID }) => {
     )
 }
 
+const Bio = ({ biography, readme }) => {
+    const [activeTab, setActiveTab] = useState('biography')
+    const tabbable = biography && readme
+    const Container = tabbable ? 'button' : 'span'
+    return (
+        <section className="article-content">
+            {biography && (
+                <>
+                    <div className="flex items-end space-x-4 border-b border-border dark:border-dark pb-4 mb-4">
+                        {biography && (
+                            <Container {...(tabbable ? { onClick: () => setActiveTab('biography') } : null)}>
+                                <h3
+                                    className={`m-0 ${
+                                        activeTab === 'biography'
+                                            ? ''
+                                            : 'opacity-40 text-base hover:opacity-70 transition-opacity'
+                                    }`}
+                                >
+                                    Biography
+                                </h3>
+                            </Container>
+                        )}
+                        {readme && (
+                            <Container {...(tabbable ? { onClick: () => setActiveTab('readme') } : null)}>
+                                <h3
+                                    className={`m-0 ${
+                                        activeTab === 'readme'
+                                            ? ''
+                                            : 'opacity-40 text-base hover:opacity-70 transition-opacity'
+                                    }`}
+                                >
+                                    README
+                                </h3>
+                            </Container>
+                        )}
+                    </div>
+                    <Markdown>{activeTab === 'biography' ? biography : readme}</Markdown>
+                </>
+            )}
+        </section>
+    )
+}
+
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const [view, setView] = useState('discussions')
@@ -91,6 +134,7 @@ export default function ProfilePage({ params }: PageProps) {
         },
     })
     const isCurrentUser = user?.profile?.id === id
+    const isModerator = user?.role?.type === 'moderator'
 
     const profileQuery = qs.stringify(
         {
@@ -202,13 +246,8 @@ export default function ProfilePage({ params }: PageProps) {
                                             </p>
                                         )}
                                     </div>
-
-                                    {profile?.biography && (
-                                        <section className="article-content">
-                                            <h3>Biography</h3>
-
-                                            <Markdown>{profile.biography}</Markdown>
-                                        </section>
+                                    {(profile?.biography || (profile?.readme && isModerator)) && (
+                                        <Bio biography={profile.biography} readme={isModerator && profile.readme} />
                                     )}
                                 </section>
                             </div>

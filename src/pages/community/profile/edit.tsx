@@ -70,7 +70,11 @@ const Toggle = ({ name, label, checked, onChange, options }) => {
                 </label>
             )}
             <div className="grid grid-cols-2 rounded-md bg-accent dark:bg-accent-dark relative text-center overflow-hidden mt-1 text-base border border-border dark:border-dark">
-                <span className={`bg-red dark:bg-yellow w-1/2 h-full absolute ${checked ? 'left-0' : 'right-0'}`} />
+                <span
+                    className={`bg-red dark:bg-yellow w-1/2 h-full absolute transition-all left-0 ${
+                        checked ? '' : 'translate-x-full'
+                    }`}
+                />
                 <ToggleButton onClick={() => onChange(true)} active={checked} label={options[0]} />
                 <ToggleButton onClick={() => onChange(false)} active={!checked} label={options[1]} />
             </div>
@@ -331,6 +335,34 @@ const formSections = [
                         </div>
                     )
                 },
+            },
+        },
+    },
+    {
+        modOnly: true,
+        title: 'README',
+        fields: {
+            readme: {
+                component: ({ values, setFieldValue, error }) => (
+                    <>
+                        <div className="flex justify-between items-center">
+                            <label className="font-bold">How can we best work with you?</label>
+                            <p className="m-0 opacity-60 text-sm">Supports Markdown</p>
+                        </div>
+                        <TextareaAutosize
+                            value={values.readme}
+                            onChange={(e) => setFieldValue('readme', e.target.value)}
+                            minRows={6}
+                            rows={6}
+                            name="readme"
+                            placeholder="I typically work best when..."
+                            className={`py-2 px-4 text-base rounded-md w-full bg-accent dark:bg-accent-dark mt-1 border ${
+                                error ? 'border-red' : 'border-border dark:border-dark'
+                            }`}
+                        />
+                    </>
+                ),
+                className: 'w-full',
             },
         },
     },
