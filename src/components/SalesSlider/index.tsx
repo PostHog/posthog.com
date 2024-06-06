@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
 
-const slides = [
-    { title: 'Item 1', children: 'Hello world! Slide 1.' },
-    { title: 'Item 2', children: 'Hello world! Slide 2.' },
-    { title: 'Item 3', children: 'Hello world! Slide 3.' },
-]
-
-function SalesSlider() {
+function SalesSlider({ slides }) {
     const [currentSlide, setCurrentSlide] = useState(0)
 
     const handleClick = (index) => {

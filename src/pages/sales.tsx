@@ -13,6 +13,26 @@ import Lawyers from 'components/Lawyers'
 import { CSSTransition } from 'react-transition-group'
 import SalesSlider from 'components/SalesSlider'
 
+const them = [
+    { title: '"I have a question about the product."', children: 'Hello world! Slide 1.' },
+    { title: 'The discovery call', children: 'Hello world! Slide 2.' },
+    { title: 'Finally, a demo!', children: '' },
+    { title: 'The follow-up meeting', children: '' },
+    { title: 'Sticker shock', children: '' },
+    { title: '"We don\'t usually do this, but..."', children: '' },
+    { title: 'The dreaded contract', children: '' },
+    { title: 'Finally, implementation time!', children: '' },
+    { title: '"Who\'s my point of contact now??"', children: '' },
+]
+
+const us = [
+    { title: '"I have a question about the product."', children: 'Hello world! Slide 1.' },
+    { title: 'Personalized demo with technical account exec', children: '' },
+    { title: 'Next steps & follow-up questions', children: '' },
+    { title: 'Choose your own discount', children: '' },
+    { title: 'Besties', children: '' },
+]
+
 function Sales() {
     const companies = [
         'BureaucraticSoft Inc.',
@@ -89,7 +109,7 @@ function Sales() {
                     </div>
                 </div>
 
-                <div className="max-w-4xl mx-auto py-8 px-4 md:px-8">
+                <div className="max-w-7xl mx-auto py-8 px-4 md:px-8">
                     <h2 className="pb-4 text-center">
                         The sales process at
                         <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mx-1 min-w-[24rem] inline-flex gap-2 justify-between relative overflow-hidden after:absolute after:-bottom-6 after:left-0 after:content-['[Typical,_stuffy_enterprise_SaaS_sales_company]'] after:text-sm after:text-primary/75 dark:after:text-primary-dark/75 after:font-normal after:tracking-normal">
@@ -105,7 +125,10 @@ function Sales() {
                         </span>{' '}
                     </h2>
 
-                    <SalesSlider />
+                    <SalesSlider slides={them} />
+                    <br />
+                    <br />
+                    <SalesSlider slides={us} />
                 </div>
             </div>
         </Layout>
