@@ -74,7 +74,7 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
     )
 }
 
-export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOpen: (open: boolean) => void }) => {
+export const Profile = ({ user }: { user: User }) => {
     const { profile, email } = user
     const { id } = profile
     const name = [profile.firstName, profile.lastName].filter(Boolean).join(' ')
@@ -94,13 +94,7 @@ export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOp
                 </div>
             </Link>
 
-            <CallToAction
-                onClick={() => setEditModalOpen(true)}
-                width="full"
-                size="sm"
-                type="secondary"
-                className="mt-2"
-            >
+            <CallToAction to="/community/profile/edit" width="full" size="sm" type="secondary" className="mt-2">
                 Edit profile
             </CallToAction>
         </div>
@@ -109,24 +103,10 @@ export const Profile = ({ user, setEditModalOpen }: { user: User; setEditModalOp
 
 export default function Sidebar() {
     const { user, logout } = useUser()
-    const [editModalOpen, setEditModalOpen] = useState(false)
     const topicSubscriptions = user?.profile?.topicSubscriptions
 
     return (
         <>
-            <Modal setOpen={setEditModalOpen} open={editModalOpen}>
-                <div
-                    onClick={() => setEditModalOpen(false)}
-                    className="flex flex-start justify-center absolute w-full p-4"
-                >
-                    <div
-                        className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <EditProfile onSubmit={() => setEditModalOpen(false)} />
-                    </div>
-                </div>
-            </Modal>
             <SidebarSection>
                 <div className="mb-2 flex items-baseline justify-between">
                     <h4 className="m-0">My profile</h4>
@@ -136,7 +116,7 @@ export default function Sidebar() {
                         </button>
                     )}
                 </div>
-                {user?.profile ? <Profile setEditModalOpen={setEditModalOpen} user={user} /> : <Login />}
+                {user?.profile ? <Profile user={user} /> : <Login />}
             </SidebarSection>
 
             {user?.profile && (
