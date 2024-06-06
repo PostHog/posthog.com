@@ -21,7 +21,7 @@ posthog.capture('user_signed_up', {
 
 ### Capturing screen views
 
-#### Tracking Screen views and touches with `@react-navigation/native`:
+#### With `@react-navigation/native` and autocapture:
 
 When using [@react-navigation/native](https://reactnavigation.org/docs/getting-started/), screen tracking is automatically captured if the [`autocapture`](/docs/libraries/react-native#autocapture) property is used in the `PostHogProvider`:
 
@@ -44,7 +44,7 @@ export function App() {
 }
 ```
 
-#### Tracking Screen views and touches with `react-native-navigation`:
+#### With `react-native-navigation` and autocapture:
 
 First, simplify the wrapping of your Screens with a shared PostHogProvider:
 
@@ -93,9 +93,9 @@ Navigation.events().registerAppLaunchedListener(async () => {
 });
 ```
 
-#### Manually captuing screen capture events
+#### Manually capturing screen capture events
 
-If you want to manually send a new screen capture event, use the `screen` function. This function requires a `name`. You may also pass in an optional `properties` object.
+If you prefer not to use autocapture, you can manually capture screen views by calling `posthog.screen()`. This function requires a `name`. You may also pass in an optional `properties` object.
 
 ```javascript
 posthog.screen('dashboard', {

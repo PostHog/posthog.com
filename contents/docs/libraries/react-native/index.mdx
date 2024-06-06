@@ -131,7 +131,7 @@ We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assi
 
 User properties enable you to capture, manage, and analyze specific data about a user. You can use them to create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts), which can then be used in [insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more.
 
-To set a user's properties, include a property called `$set` when capturing any event:
+To set a user's properties, include the `$set` or `$set_once` property when capturing any event:
 
 ### $set
 
@@ -155,7 +155,7 @@ Super Properties are properties associated with events that are set once and the
 
 They are set using `posthog.register`, which takes a properties object as a parameter, and they persist across sessions.
 
-For example, take a look at the following call:
+For example:
 
 ```js
 posthog.register({
@@ -166,7 +166,7 @@ posthog.register({
 
 The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified Super Property.
 
-Note that this does **not** set the user's properties. This only sets the properties for their events. To store user properties, see the [setting user properties section](#setting-user-properties) section.
+Note that this does **not** set the user's properties. This only sets the properties for their events. To store user properties, see the [setting user properties section](#setting-user-properties).
 
 ### Removing stored Super Properties
 
@@ -178,7 +178,7 @@ posthog.unregister('icecream pref'),
 
 This will remove the Super Property and subsequent events will not include it.
 
-If you are doing this as part of a user logging out you can instead simply use `posthog.reset` which takes care of clearing all stored Super Properties and more.
+If you are doing this as part of a user logging out you can instead simply [`posthog.reset()`](#reset-after-logout) which takes care of clearing all stored Super Properties and more.
 
 ## Flush
 
