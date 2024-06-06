@@ -1,5 +1,5 @@
 ---
-title: Managed Reverse Proxy
+title: Managed reverse proxy
 sidebar: Docs
 showTitle: true
 ---
@@ -12,7 +12,7 @@ Before setting up the Managed Reverse Proxy, ensure you have the following:
 - A PostHog Cloud account with the [Teams add-on](https://posthog.com/pricing#addons)
 - Access to your domain's DNS settings.
 
-## Creating A Managed Reverse Proxy
+## Creating a managed reverse proxy
 
 1. Navigate to [organization proxy](https://us.posthog.com/settings/organization-proxy) settings
 2. Click "New Managed Proxy"
@@ -23,6 +23,6 @@ Before setting up the Managed Reverse Proxy, ensure you have the following:
 5. Wait for the proxy to be created. It will go from "Waiting", to "Issuing" and finally "Live" once everything is set up. There is no further action required after creating the DNS record.
 6. Update your PostHog snippet or SDK to use the subdomain chosen in step 3 as the `api_host`.
 
-### Setting DNS Records In Cloudflare
+### Setting DNS records in Cloudflare
 
 If you are using Cloudflare as your DNS provider, please ensure you have disabled proxying on the CNAME record (DNS Only)
