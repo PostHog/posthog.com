@@ -1323,6 +1323,10 @@ export const docsMenu = {
                     icon: 'IconShare',
                     children: [
                         {
+                            name: 'Managed Reverse Proxy',
+                            url: '/docs/advanced/proxy/managed-reverse-proxy',
+                        },
+                        {
                             name: 'AWS CloudFront',
                             url: '/docs/advanced/proxy/cloudfront',
                         },
