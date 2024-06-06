@@ -7,7 +7,7 @@ showTitle: true
 
 ## How to delete data from PostHog
 
-One can remove unwanted data from PostHog by:
+You can remove unwanted data from PostHog by:
 
 1. Deleting teams/organizations
 2. Deleting persons
