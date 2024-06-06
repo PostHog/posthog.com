@@ -125,3 +125,17 @@ Rather than the team lead making the call, it’s always the manager who decides
 If someone feels the need to be in more than one small team, that likely means we need to hire. That can mean we’re ‘overstaffed’ at times, but ultimately good people will do good work to push our product forward. And it’s better to have slightly overstaffed small teams than to be perpetually understaffed and for your product to suffer as a result.
 
 Small teams are also able to work with other small teams on multidisciplinary projects and members of one small team can and should attend meetings on other small teams to help with collaboration if needed.
+
+### 
+
+### The tradeoffs of small teams
+
+Our small teams structure is a success because we work hard on making it one. There are tradeoffs. 
+
+Working as a series of startups within a startup risks creating silos and there could be whole teams or individual team members who drift away from our mission or feel disconnected from the company. 
+
+To help alleviate this, all of our small teams have annual off-sites in addition to our big company get-together. Everyone also has a generous quarterly travel budget and people are encouraged to go work with colleagues either on the same small team as them or in another part of the company. We mix things up and spend time together IRL to work on problems and get things shipped.
+
+Small teams also require that everyone is very good at written communication, be it a Slack message, or a Github pull request or issue. This helps everyone at the company to both see and understand what's being worked on and why.
+
+You also need to hire the right people to work on small teams. Not everyone will embrace this way of working. It requires people who take extreme ownership of ideas, are self-starting, authentic, and low-ego. We call them cracked engineers. And we have some [strong thoughts](https://newsletter.posthog.com/p/hiring-and-managing-cracked-engineers) on what makes an engineer cracked.
