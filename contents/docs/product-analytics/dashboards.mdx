@@ -38,57 +38,78 @@ availability:
     className="rounded shadow-xl"
 />
 
-You can create dashboard panels to display information you are collecting with PostHog. It will be the first thing you see when you log on so that you can easily access the most important performance metrics in your product.
+Dashboards are the easiest way to track all your most important product and performance metrics.
 
-Dashboard panels can be created from any tab in 'Insights', and they can be tables, line charts, funnels, and pie charts.
+Unlike [notebooks](/docs/notebooks), which are ideal of adhoc and one-off analysis, dashboards are designed for tracking common metrics over time. 
 
-## Creating a dashboard
+You can create a new dashboard from scratch, but we also offer numerous [pre-made dashboard templates](/templates) for tracking things like [common website metrics](/templates/website-dashboard), [product health metrics](/templates/health-dashboard), and important [metrics for large language models](/docs/ai-engineering/llm-insights).
 
-<FeatureAvailability availability={_frontmatter.availability.features.creating} />
+## Creating a new dashboard
 
-1. Click on 'Dashboards' in the left hand navigation and then 'New Dashboard'
-1. You can create a dashboard from a list of [available templates](/templates), or select **Blank Dashboard** to start from scratch
-1. Name your dashboard, add some optional details if desired
-1. Your dashboard will be empty - click **+ New insight** to create an insight to add
+1. Click on 'Dashboards' in the left hand navigation and then 'New Dashboard'.
+1. You can create a dashboard from a list of [available templates](/templates), or select 'Blank Dashboard' to start from scratch.
+1. Name your dashboard, add some optional details if desired.
+1. Your dashboard will be empty – click '+New insight' to create an insight to add.
 1. There are several types of Insight you can now create - [Trends](/docs/user-guides/trends), [Funnels](/docs/user-guides/funnels), [Retention](/docs/user-guides/retention), [Paths](/docs/user-guides/paths), and [Lifecycle](/docs/user-guides/lifecycle)
-1. Click 'Save & add to dashboard' when you've created your insight
+1. Click 'Save & add to dashboard' when you've created your insight.
 
-If you already have some insights set up, an alternative approach is to click 'Add to dashboard' in any insight. Insights can appear on multiple Dashboards at the same time.
+If you already have some insights set up, an alternative approach is to click 'Add to dashboard' in any insight. 
 
-## Editing a dashboard
+> **Important:** Insights can appear on multiple dashboards at the same time, so you don't have to create multiple copies of the same insight. Chnages to the insight will be reflected in all the dashboards it's used in.
 
-<FeatureAvailability availability={_frontmatter.availability.features.editing} />
+## Dates and filters
 
-With your dashboard created, you can now view and edit it. In the main dashboard view, you can:
+### Date range overides
 
--   Change the name and add a description
--   Add tags
--   Set a refresh interval
+New dashboards are set to 'No date range overide' by default. This means all insights will use the date range applied in their configuration. 
 
-Click '...' to bring up additional options:
+Changing the date range on a dashboard forces all the insights to use the same date range, but this doesn't impact the date range that's shown when viewing an individual insights.
 
--   Select 'Edit layout' to drag and resize panels and click 'Done editing' when finished
--   'Go full screen' is great for presenting your dashboard
--   You can also pin, duplicate or delete your dashboard
+### Dashboard filters
 
-## Adding text and media to dashboards
+Dashboards also support most of the same filters as individual insights, including:
 
-<FeatureAvailability availability={_frontmatter.availability.features.text_and_media_cards} />
+- **Event properties:** Properties stored on event, such as the `Current URL` when the event was triggered.
+- **Person properties:** Properties of individual users, such as `company_name`.
+- **Feature flags:** Filtering for users with a specific feature flag enabled.
+- **Group properties:** Account-level properties, like `organization_id`, which are only avilable if you have the [group analytics](/docs/product-analytics/group-analytics) add-on.
+- **Cohorts:** Filtering by [cohorts](/docs/data/cohorts) of users you've already created.
 
-On paid plans, text cards can be added to dashboards alongside insights. These allow you to add text and external images to add context to your dashboards. With [object storage](/docs/runbook/services/minio) enabled you can drag and drop images onto the cards to upload images and gifs to your text cards.
+Using filters on dashboards is a useful way to compare usage between different types of users without recreating insights over and over.
 
-## Tagging a dashboard
+You can, for example, duplicate a dashboard – click on the '...' menu and click 'Duplicate' – and apply different filters to each version of the dashboard.
 
-<FeatureAvailability availability={_frontmatter.availability.features.tagging} />
+## Dashboard options
 
-On paid plans, tags can be added to dashboards to help better organize them. These tags can be added or removed by any member within a project.
+### Editing the layout
 
-## Sharing a dashboard
+You can move and resize all the insights on a dashboard by entering the 'Edit layout' mode. 
 
-Click 'Share' in the top right corner. You can:
+You can do this in three ways:
 
--   With the [Teams add-on](/pricing), you can configure sharing to only give edit access to certain members within a project. Dashboards can be shared either by members with administrator privileges or by the dashboard creator.
--   Create a link to share your dashboard publicly or embed your dashboard on a website. Read more about this in our [sharing and embedding docs](/docs/product-analytics/sharing).
+- Tap 'E' on your keyboard
+- Click on the '...' icon at the top of the dashboard and click 'Edit layout'
+- Click on the '...' icon on any insight card and click 'Edit layout'
+
+Tapping 'F' enabled fullscreen mode.
+
+### Sharing a dashboard
+
+By clicking 'Share' in the top right corner you can:
+
+-   Restrict edit access to certain members within a project. Dashboards can be shared either by members with administrator privileges, or by the dashboard creator. ([Teams add-on](/pricing) required).
+
+-   Create a link to share your dashboard publicly, or embed your dashboard on a website. Read more about this in our [sharing and embedding docs](/docs/product-analytics/sharing).
+
+### Auto refresh
+
+You can manually refresh a dashboard at any time, but you can also set it to automatically refresh.
+
+To do so, click the dropdown arrow next to refresh button, turn on auto refresh and choose your refresh interval.
+
+This is useful if you have a PostHog dashboard on a TV screen for others to see.
+
+> Note: Auto refresh only works when the tab is active
 
 ## Further reading
 
