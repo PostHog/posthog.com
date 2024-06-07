@@ -31,7 +31,7 @@ import PHPSendEvents from '../../integrate/send-events/_snippets/send-events-php
 
 ## Person profiles and user properties
 
-For backward compatibility, PostHog captures events with person profiles by default. To set [user properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+For backward compatibility, PostHog captures events with [person profiles](/docs/data/people) by default. To set [user properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```php
 PostHog::capture(array(
