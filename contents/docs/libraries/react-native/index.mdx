@@ -80,9 +80,9 @@ You can tweak how autocapture works by passing custom options.
 
 ```react-native
 <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
-    captureTouches: true, // If you don't want to capture touch events, set this to false
-    captureLifecycleEvents: true, // If you don't want to capture the lifecycle events (e.g. Application Opened), set this to false
-    captureScreens: true, // If you don't want to capture screen events, set this to false
+    captureTouches: true,
+    captureLifecycleEvents: true,
+    captureScreens: true, 
     ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
     customLabelProp: "ph-label",
     noCaptureProp: "ph-no-capture",

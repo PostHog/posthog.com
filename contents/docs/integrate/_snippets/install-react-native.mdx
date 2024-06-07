@@ -1,14 +1,16 @@
-In your React Native or Expo project add the `posthog-react-native` package to your project as well as the required peer dependencies.
+Our React Native enables you to integrate PostHog with your React Native project. For React Native projects built with Expo, there are no mobile native dependencies outside of supported Expo packages.
+
+To install, add the `posthog-react-native` package to your project as well as the required peer dependencies.
 
 #### Expo apps
 
-```sh
+```bash
 npx expo install posthog-react-native expo-file-system expo-application expo-device expo-localization
 ```
 
 #### React Native apps
 
-```sh
+```bash
 yarn add posthog-react-native @react-native-async-storage/async-storage react-native-device-info
 # or
 npm i -s posthog-react-native @react-native-async-storage/async-storage react-native-device-info
