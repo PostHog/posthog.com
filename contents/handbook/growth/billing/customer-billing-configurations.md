@@ -17,7 +17,7 @@ Below are the main 5 configurations we support right now. Each outlines how the 
    - Startup plan where users receive credits (e.g., $50,000).
    - Credits apply to all charges until the credits run out.
    - Credit usage needs to be tracked.
-   - Metadata added to Stripe acccount (`is_startup_plan_customer`, `credit_expires_at`, etc.).
+   - Metadata added to Stripe account (`is_startup_plan_customer`, `credit_expires_at`, etc.).
      - [There is an RFC](https://github.com/PostHog/product-internal/pull/610) in the works to update this metadata for better tracking.
      - We are going to revisit this process.
    - Revenue is not earned until credits are depleted or expired.
