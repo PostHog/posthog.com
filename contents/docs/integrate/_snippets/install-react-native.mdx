@@ -57,7 +57,7 @@ const MyComponent = () => {
 
 #### Without the PosthogProvider
 
-If you prefer not to use the provider, you can initialize PostHog in it's own file and import the instance from there:
+If you prefer not to use the provider, you can initialize PostHog in its own file and import the instance from there:
 
 ```react-native file=posthog.ts
 import PostHog from 'posthog-react-native'
@@ -84,7 +84,7 @@ export function MyApp1() {
 
 You can even use this instance with the PostHogProvider:
 
-```
+```react-native
 import { posthog } from './posthog'
 
 export function MyApp() {

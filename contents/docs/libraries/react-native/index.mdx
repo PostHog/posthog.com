@@ -27,26 +27,26 @@ You can further customize how PostHog works through its configuration on initial
 
 | Attribute                                                                                                                                                                             | Description                                                                                                                                                                                                                                                                                               |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `host`<br/><br/>**Type:** String<br/>**Default:** `'https://us.i.posthog.com'`                                                                                                         | PostHog API host (usually 'https://us.i.posthog.com' by default or 'https://eu.i.posthog.com'). Host is optional if you use 'https://us.i.posthog.com'.                                                                                                                                                     |
+| `host`<br/><br/>**Type:** String<br/>**Default:** `https://us.i.posthog.com`                                                                                                         | PostHog API host (usually `https://us.i.posthog.com` by default or `https://eu.i.posthog.com`). Host is optional if you use `https://us.i.posthog.com`.                                                                                                                                                     |
 | `flushAt`<br/><br/>**Type:** Number<br/>**Default:** `20`                                                                                                                              | The number of events to queue before sending to PostHog (flushing).                                                                                                                                                                                                                                       |
 | `flushInterval`<br/><br/>**Type:** Number<br/>**Default:** `10000`                                                                                                                     | The interval in milliseconds between periodic flushes.                                                                                                                                                                                                                                                   |
-| `maxBatchSize`<br/><br/>**Type:** Number<br/>**Default:** `100`                                                                                                                        | The maximum number of queued messages to be flushed as part of a single batch (must be higher than 'flushAt').                                                                                                                                                                                            |
-| `maxQueueSize`<br/><br/>**Type:** Number<br/>**Default:** `1000`                                                                                                                       | The maximum number of cached messages either in memory or on the local storage (must be higher than 'flushAt').                                                                                                                                                                                           |
+| `maxBatchSize`<br/><br/>**Type:** Number<br/>**Default:** `100`                                                                                                                        | The maximum number of queued messages to be flushed as part of a single batch (must be higher than `flushAt`).                                                                                                                                                                                            |
+| `maxQueueSize`<br/><br/>**Type:** Number<br/>**Default:** `1000`                                                                                                                       | The maximum number of cached messages either in memory or on the local storage (must be higher than `flushAt`).                                                                                                                                                                                           |
 | `disabled`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                         | If set to true, the SDK is essentially disabled (useful for local environments where you don't want to track anything).                                                                                                                                                                                   |
-| `defaultOptIn`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                      | If set to false, the SDK will not track until the 'optIn' function is called.                                                                                                                                                                                                                             |
-| `sendFeatureFlagEvent`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                              | Whether to track that 'getFeatureFlag' was called (used by Experiments).                                                                                                                                                                                                                                  |
+| `defaultOptIn`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                      | If set to false, the SDK will not track until the `optIn()` function is called.                                                                                                                                                                                                                             |
+| `sendFeatureFlagEvent`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                              | Whether to track that `getFeatureFlag` was called (used by experiments).                                                                                                                                                                                                                                  |
 | `preloadFeatureFlags`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                               | Whether to load feature flags when initialized or not.                                                                                                                                                                                                                                                    |
-| `bootstrap`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                                                                                                            | An object containing the `distinctId`, `isIdentifiedId`, `featureFlags`, and `featureFlagPayloads` keys. `distinctId` is a string, and `featureFlags` and `featureFlagPayloads` are objects of key-value pairs.                                                                                          |
+| `bootstrap`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                                                                                                            | An object containing the `distinctId`, `isIdentifiedId`, `featureFlags`, and `featureFlagPayloads` keys. `distinctId` is a string, and `featureFlags` and `featureFlagPayloads` are objects of key-value pairs. Used to ensure data is available as soon as the SDK loads.                                                                                          |
 | `fetchRetryCount`<br/><br/>**Type:** Number<br/>**Default:** `3`                                                                                                                       | How many times HTTP requests will be retried.                                                                                                                                                                                                                                                             |
 | `fetchRetryDelay`<br/><br/>**Type:** Number<br/>**Default:** `3000`                                                                                                                    | The delay between HTTP request retries.                                                                                                                                                                                                                                                                   |
 | `requestTimeout`<br/><br/>**Type:** Number<br/>**Default:** `10000`                                                                                                                    | Timeout in milliseconds for any calls.                                                                                                                                                                                                                                                                    |
 | `featureFlagsRequestTimeoutMs`<br/><br/>**Type:** Number<br/>**Default:** `10000`                                                                                                      | Timeout in milliseconds for feature flag calls.                                                                                                                                                                                                                                                           |
-| `sessionExpirationTimeSeconds`<br/><br/>**Type:** Number<br/>**Default:** `1800`                                                                                                       | For Session Analysis, how long before a session expires (defaults to 30 minutes).                                                                                                                                                                                                                         |
-| `captureMode`<br/><br/>**Type:** String<br/>**Default:** `'form'`                                                                                                                       | Whether to post events to PostHog in JSON or compressed format.                                                                                                                                                                                                                                           |
-| `persistence`<br/><br/>**Type:** String<br/>**Default:** `'file'`                                                                                                                      | Allows you to provide the storage type. 'file' will try to load the best available storage, the provided 'customStorage', 'customAsyncStorage' or in-memory storage.                                                                                                                                        |
+| `sessionExpirationTimeSeconds`<br/><br/>**Type:** Number<br/>**Default:** `1800`                                                                                                       | For session analysis, how long before a session expires (defaults to 30 minutes).                                                                                                                                                                                                                         |
+| `captureMode`<br/><br/>**Type:** String<br/>**Default:** `form`                                                                                                                       | Whether to post events to PostHog in JSON or compressed format.                                                                                                                                                                                                                                           |
+| `persistence`<br/><br/>**Type:** String<br/>**Default:** `file`                                                                                                                      | Allows you to provide the storage type. `file` will try to load the best available storage, the provided `customStorage`, `customAsyncStorage`, or in-memory storage.                                                                                                                                        |
 | `customAppProperties`<br/><br/>**Type:** Object or Function<br/>**Default:** `null`                                                                                                    | Allows you to provide your own implementation of the common information about your App or a function to modify the default App properties generated.                                                                                                                                                       |
-| `customStorage`<br/><br/>**Type:** Object<br/>**Default:** `null`                                                                                                                      | Allows you to provide a custom asynchronous storage such as async-storage, expo-file-system, or a synchronous storage such as mmkv. If not provided, PostHog will attempt to use the best available storage via optional peer dependencies. If 'persistence' is set to 'memory', this option will be ignored. |
-| `captureNativeAppLifecycleEvents`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                  | Captures native app lifecycle events such as Application Installed, Application Updated, Application Opened, Application Became Active, and Application Backgrounded. By default, this is false. If you're already using the 'captureLifecycleEvents' options with 'initReactNativeNavigation' or 'PostHogProvider', you should not set this to true, otherwise you may see duplicated events.                   |
+| `customStorage`<br/><br/>**Type:** Object<br/>**Default:** `null`                                                                                                                      | Allows you to provide a custom asynchronous storage such as `async-storage`, `expo-file-system`, or a synchronous storage such as `mmkv`. If not provided, PostHog will attempt to use the best available storage via optional peer dependencies. If `persistence` is set to `memory`, this option is ignored. |
+| `captureNativeAppLifecycleEvents`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                  | Captures native app lifecycle events such as Application Installed, Application Updated, Application Opened, Application Became Active, and Application Backgrounded. By default, this is false. If you're already using the `captureLifecycleEvents` options with `initReactNativeNavigation` or `PostHogProvider'` you should keep this as false, otherwise you may see duplicated events.                   |
 | `disableGeoip`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                                     | When true, disables automatic GeoIP resolution for events and feature flags.                                                                                                                                                                                                                              |
 ## Capturing events
 
@@ -56,7 +56,7 @@ import RNSendEvents from '../../integrate/send-events/_snippets/send-events-reac
 
 ## Autocapture 
 
-PostHog autocapture automatically tracks the following events for you:
+PostHog autocapture can automatically track the following events for you:
 
 -   **Application Opened** - when the app is opened from a closed state
 -   **Application Became Active** - when the app comes to the foreground (e.g. from the app switcher)
@@ -80,17 +80,17 @@ You can tweak how autocapture works by passing custom options.
 
 ```react-native
 <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
-    captureTouches: true, // If you don't want to capture touch events set this to false
-    captureLifecycleEvents: true, // If you don't want to capture the Lifecycle Events (e.g. Application Opened) set this to false
-    captureScreens: true, // If you don't want to capture screen events set this to false
+    captureTouches: true, // If you don't want to capture touch events, set this to false
+    captureLifecycleEvents: true, // If you don't want to capture the lifecycle events (e.g. Application Opened), set this to false
+    captureScreens: true, // If you don't want to capture screen events, set this to false
     ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
     customLabelProp: "ph-label",
     noCaptureProp: "ph-no-capture",
     propsToCapture = ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
 
     navigation: {
-        // By default only the Screen name is tracked but it is possible to track the
-        // params or modify the name by intercepting theautocapture like so
+        // By default, only the screen name is tracked but it is possible to track the
+        // params or modify the name by intercepting the autocapture like so
         routeToName: (name, params) => {
             if (params.id) return `${name}/${params.id}`
             return name
@@ -141,7 +141,7 @@ posthog.capture('some_event', { $set: { userProperty: 'value' } })
 
 ### $set_once
 
-`$set_once` works just like `$set`, except that it will **only set the property if the user doesn't already have that property set**.
+`$set_once` works just like `$set`, except it **only sets the property if the user doesn't already have that property set**.
 
 ```js
 posthog.capture('some_event', { $set_once: { userProperty: 'value' } })
@@ -149,9 +149,9 @@ posthog.capture('some_event', { $set_once: { userProperty: 'value' } })
 
 
 
-## Super Properties
+## Super properties
 
-Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $screen, an autocaptured touch, or anything else.
+Super properties are properties associated with events that are set once and then sent with every `capture` call, be it a $screen, an autocaptured touch, or anything else.
 
 They are set using `posthog.register`, which takes a properties object as a parameter, and they persist across sessions.
 
@@ -166,9 +166,9 @@ posthog.register({
 
 The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified Super Property.
 
-Note that this does **not** set the user's properties. This only sets the properties for their events. To store user properties, see the [setting user properties section](#setting-user-properties).
+This does **not** set the user's properties. This only sets the properties for their events. To store user properties, see the [setting user properties section](#setting-user-properties).
 
-### Removing stored Super Properties
+### Removing stored super properties
 
 Super Properties are persisted across sessions so you have to explicitly remove them if they are no longer relevant. In order to stop sending a Super Property with events, you can use `posthog.unregister`, like so:
 
@@ -176,7 +176,7 @@ Super Properties are persisted across sessions so you have to explicitly remove 
 posthog.unregister('icecream pref'),
 ```
 
-This will remove the Super Property and subsequent events will not include it.
+This will remove the super property and subsequent events will not include it.
 
 If you are doing this as part of a user logging out you can instead simply [`posthog.reset()`](#reset-after-logout) which takes care of clearing all stored Super Properties and more.
 
