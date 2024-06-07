@@ -1,6 +1,6 @@
 ---
-date: 2024-04-17
-title: Hiring cracked engineers
+date: 2024-05-23
+title: Hiring (and managing) cracked engineers
 author:
   - charles-cook
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/v1713344206/posthog.com/contents/blog/cracked_engineer_blog.jpg
@@ -8,82 +8,115 @@ tags:
   - Culture
   - People
 crosspost:
-  - Blog      
+  - Blog
+  - Newsletter      
 ---
 
-We’ve become a bit obsessed with the notion of hiring cracked engineers at PostHog. When we say cracked, we mean things like:
+We’ve become a bit obsessed with the notion of hiring cracked engineers at PostHog.
 
-- **Taking extreme ownership of ideas** and driving them to completion, even if others disagree with you. Some people call this founder mentality. Better still, you bring others on the journey with you.
- 
-- **Unwavering optimism** in the face of change or new ideas. This doesn’t mean you have to agree with the change, but adopting a ‘yes and’ mentality helps new ideas get off the ground that might otherwise die in a committee somewhere. This is especially true for ideas that come from non-senior or new people.
- 
-- **You make people feel more excited and energized** after a meeting or conversation with you. You build people and their ideas up, and are generally perceived as a very helpful person.
- 
-- **Behaving in a completely authentic way**. You don’t play politics – your work does the talking. For example, if you do marketing, talk like an actual human being. This doesn’t work in most large organizations, sadly.
+When we say cracked, we mean people who:
 
-- **You apply yourself to the craft** of your discipline with a quasi-religious fervor. The joy comes from the craft itself, not creating shareholder value.  
+🙋‍♀️ Take extreme ownership of ideas. This means driving ideas to completion, even when others need convincing. And, yes, there’s a fine line between extreme ownership and being an asshole. Truly cracked engineers can tread it.
 
-Hmm, sounds pretty ripe for a toxic monoculture of tech bros doing whatever they want while the founders arbitrarily pick new pet projects based on what they last saw DHH tweet, right?
+😄 Stay optimistic at all times. Cracked engineers aren’t intimidated by change, or new ideas. This doesn’t mean you have to agree with every change, but adopting a ‘yes and’ mentality helps new ideas get off the ground that might otherwise die in a committee somewhere, especially when they come from non-senior or new people.
 
-No! The following are definitely not prerequisites to being cracked:
+🤩 Make people feel excited and energized. Every conversation with a cracked engineer should generate enthusiasm. Cracked engineers build people and their ideas up, and are generally perceived as very helpful.
 
-- **Fancy companies on your resume.** You don’t need to have worked at a FAANG/MAMAA/shit-hot SV-based company. We welcome cracked engineers who held together failing companies – we like their paranoia.
- 
-- **Being an asshole.** People need to want to work with you – saying ‘screw you, I’m doing this anyway’ is uncracked behavior if you can’t back it up. 
+😎 Behave in a completely authentic way. Cracked engineers don’t play politics – their work does the talking. For example, if you do marketing, talk like an actual human being. This doesn’t work in most large organizations, sadly.
 
-- **How experienced you are.** There is no number of years of experience that correlates with crackedness, in either direction. 
+👷‍♂️ Apply themselves to the craft. Joy comes from the craft itself, not creating shareholder value. Cracked engineers apply themselves to the craft of building products with a quasi-religious fervor, and love what they do.
 
-- **You built a side project used by one million people.** Side projects are often great signs of crackedness/ownership, but they don’t have to be commercially successful – they just have to be interesting. 
+## What’s not cracked?
 
-Adopting this mentality has noticeably increased the diversity of people applying to work with us at PostHog, as it ignores some of the traditional markers of status when it comes to job applications.
+This sounds pretty ripe for a toxic monoculture of tech bros doing whatever they want while the founders arbitrarily pick new pet projects, right?
 
-<NewsletterForm />
+No! You need some anti-goals as well. For example, the following are definitely not prerequisites to being cracked:
 
-## How to manage a cracked team
+🏢 Fancy companies on your resume. You don’t need to have worked at a FAANG/MAMAA/shit-hot SV-based company. We welcome cracked engineers who held together failing companies – we like their paranoia.
 
-A lot of traditional management behavior doesn’t apply here, and can actively slow down or demotivate your team.
+😏 Being an asshole. People need to want to work with you – saying “screw you, I’m doing this anyway” is uncracked behavior if you can’t back it up.
 
-### 1. Be cracked yourself
+🐣 How experienced you are. There is no number of years of experience that correlates with crackedness, in either direction. See also: using rank / experience to get your way.
 
-You need to demonstrate the behavior you want to see. Cracked people are extremely attuned to ‘do as I do’ not ‘do as I say’. This means spending a significant amount of time doing IC work. Do the stuff that arrogant senior people would find ‘boring’. Write tests. Respond to customer support queries. Go weirdly deep into some piece of analysis. Do something badly that’s not your job, so you at least understand it better. 
+📈 A popular side project. To be clear, side projects are great signs of crackedness, but success is less important. An interesting project no one knows is about is just as valid. Remember: loving the craft of building something is cracked.
 
-### 2. Spend most of your time generating enthusiasm
+Adopting this mentality has noticeably increased the diversity of people applying to work with us at PostHog.
 
-It is unbelievably easy to find reasons not to do stuff at any kind of organization, including startups. Inertia is the default state of most businesses. Overcoming this inertia is mainly reliant on the enthusiasm of people to make new and cool things happen, and is far more important than their raw intelligence or competence. 
+It ignores many of the traditional markers of status when it comes to job applications, helping us unearth great people who might otherwise miss out.
 
-This is why you should spend more time motivating people than trying to teach them new skills or making them do training. If they are cracked and motivated, they will train themselves. I don’t think I’ve yet read a blog post by someone I admire and learned from that says ‘I got good because I attended blah blah special leadership course on being great.’
+And we apply the same criteria to all our roles, including non-engineering ones.
 
-### 3. Get out of the way
+## Managing cracked engineers
 
-Cracked people are deeply intrinsically motivated. This means that extrinsic motivation, while still present in some form (we’ve all got to pay bills yeah), is way less important. 
+This mentality also forces us to think about how to manage cracked engineers.
 
-Help cracked engineers take ownership of their own projects by encouraging them to make the decisions about what to do next. If they ask for help – i.e. they actively want you to get in the way – ask questions about what they think should happen next, rather than giving them the answers. 
+A lot of traditional management behavior doesn’t apply here, and can actively slow down or demotivate them.
 
-Setting deadlines, creating arbitrary reporting obligations, or saying ‘if you ship X, you will get to Y title’ are examples of trying to use extrinsic motivation that you should avoid. 
+For us, managing cracked engineers means:
 
-### 4. Prioritize making cracked people more cracked, not making mediocre people good
+### 1. Being cracked yourself
+
+You need to demonstrate the behavior you want to see. Cracked people are extremely attuned to ‘do as I do’ not ‘do as I say’. This means spending a significant amount of time doing individual contributor work.
+
+Do the stuff that arrogant senior people would find ‘boring’. Write tests. Respond to customer support queries. Go weirdly deep into some piece of analysis. Do something badly that’s not your job, so you at least understand it better.
+
+### 2. Spending most of your time generating enthusiasm
+
+It is unbelievably easy to find reasons not to do stuff at any kind of organization, including startups.
+
+Inertia is the default state of most businesses. Overcoming it is mainly reliant on the enthusiasm of people to make new and cool things happen, and is far more important than their raw intelligence or competence.
+
+This is why you should spend more time motivating people than trying to teach them new skills, or making them do training. If they are cracked and motivated, they will train themselves.
+
+I don’t think I’ve yet read a blog post by someone I admire and learned from that says ‘I got good because I attended blah blah special leadership course on being great.’
+
+### 3. Getting out of the way
+
+Cracked people are deeply intrinsically motivated. This means that extrinsic motivation, while still present in some form (we’ve all got to pay bills yeah), is way less important.
+
+Help cracked engineers take ownership of their own projects by encouraging them to make the decisions about what to do next. If they ask for help – i.e. they actively want you to get in the way – ask questions about what they think should happen next, rather than giving them the answers.
+
+Setting deadlines, creating arbitrary reporting obligations, or saying ‘if you ship X, you will get to Y title’ are examples of trying to use extrinsic motivation. This is un-cracked.
+
+### 4. Prioritizing making cracked people more cracked
 
 Here is some subjective math:
 
-- The 20% of your team who are underperforming will take up 80% of your effort.
- 
-- You may be able to get an underperformer’s output from 4/10 to 6/10 if you work hard with them.
+The 20% of your team who are underperforming will take up 80% of your effort.
 
-- Doubling down on a cracked person’s performance can improve their output from 8/10 to 9/10.
+You may be able to get an underperformer’s output from 4/10 to 6/10 if you work hard with them.
 
-- It’s the 9/10 quality output that will delight your users, so you should focus on that, even if the absolute increase in performance is less. 
+Doubling down on a cracked person’s performance can improve their output from 8/10 to 9/10.
 
-### 5. If you find yourself approving stuff for your team, fire yourself
+It’s the 9/10 quality output that will delight your users, so you should focus on that, even if the absolute increase in performance is less.
 
-Asking thoughtful questions and rigorously testing ideas is cracked. Long approval processes that exist for the sake of having someone senior sign off on something in order to kick accountability up the chain is very un-cracked. If you find yourself approving stuff for your team because of your position as their manager, remove yourself from the process. 
+### 5. Eliminating pointless approval processes
 
-### 6. Hiring and setting context are your two most important jobs
+Asking thoughtful questions and rigorously testing ideas? Cracked.
 
-The number one thing you can do to motivate cracked people? Find them more cracked people to work with! 
+Long approval processes that exist for the sake of having someone senior sign off on something in order to kick accountability up the chain? Very un-cracked.
 
-Conversely, the number one thing you can do to demotivate them is to make them work with uncracked people. (Yes, there are many other very obvious ways you can demotivate, like creating a shitty culture, making people burnout with unrealistic demands, pivoting aggressively every week for no reason, but I’m going to assume you at least have some semblance of managerial logic if you’ve read this far.) 
+If you find yourself approving stuff for your team because of your position as their manager, remove yourself from the process.
 
-A close number two is setting the right context for them to do their best work. This means making sure that your company or team's vision is super clearly articulated and understood by everyone in the first place, and then helping them pick between competing priorities when they are not sure what to do, or if the answer isn't obvious. You need to try really hard to make sure that you don't use 'setting context' as a euphemism for 'work on the stuff I care about as a manager' – they are not the same thing!
+### 6. Nailing hiring and context
+
+The number one thing you can do to motivate cracked people? Find them more cracked people to work with!
+
+(Yes, there are many other very obvious ways you can demotivate, like creating a shitty culture, making people burnout with unrealistic demands, pivoting aggressively every week for no reason, but I’m going to assume you at least have some semblance of managerial logic if you’ve read this far.)
+
+Conversely, the number one thing you can do to demotivate them is to make them work with un-cracked people.
+
+A close number two is setting the right context for them to do their best work. This means:
+
+Clearly articulating your company and/or team’s vision.
+
+Ensuring everyone understands it and their role in it.
+
+Helping them pick between competing priorities when needed.
+
+Above all, never use “setting context” as a euphemism for “work on the stuff I care about as a manager”. They are not the same thing.
+
+Nailing these two things is the 80/20 of managing cracked engineers.
 
 ## Moar reading
 
