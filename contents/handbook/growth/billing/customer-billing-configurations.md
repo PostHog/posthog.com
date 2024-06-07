@@ -1,4 +1,11 @@
+---
+title: Customer billing configurations
+sidebar: Handbook
+showTitle: true
+---
+
 This document outlines all possible billing configurations for customers at PostHog. The goal is to ensure the team is on the same page with the different configurations we support to ensure things move smoothly as we scale. We want to ensure they support the billing repo, dashboard, usage reports, revenue reporting, etc.
+
 
 Below are the main 5 configurations we support right now. Each outlines how the Stripe accounts are setup and billing and how we account for revenue on them. 
 
