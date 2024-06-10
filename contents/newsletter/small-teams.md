@@ -26,7 +26,7 @@ Most teams cover individual products, such as data warehouse, replay, pipeline, 
 
 When we launch a new product, or a project on an existing team becomes too large for the current team, we often spin out a new small team. This allows us to push forward with new ideas and keep shipping without sacrificing quality.
 
-Right now, for example, we're in the process of scaling support by moving our support engineers out of the Customer Success team and into a new [Customer Comms Team](/teams/customer-comms). We're [recruiting support engineers](/careers/support-engineer for that team, btw.
+Right now, for example, we're in the process of scaling support by moving our support engineers out of the Customer Success team and into a new [Customer Comms Team](/teams/customer-comms). We're [recruiting support engineers](/careers/support-engineer) for that team, btw.
 
 We're also creating a new team with the mission of making our customer data platform (CDP) a first-class product – a project spun out from a Hackathon project at our recent all-company [offsite in Mykonos](/blog/mykonos-hackathon).
 
@@ -43,7 +43,7 @@ Small teams are effectively one-pizza teams, as opposed to the [two-pizza teams]
 
 The overall goal of small teams is to own an area of the product or company, and behave like an early-stage startup. They don't have all the functions of a startup, but their spirit and approach to work should be exactly the same. 
 
-A lot of the people on our small teams are [product engineers](/blog/what-is-a-product-engineer – i.e. engineers who also talk to users, and own product decisions. And small teams aren't just for product – our Marketing Team is a small team, as are Customer Success, and People & Operations. 
+A lot of the people on our small teams are [product engineers](/blog/what-is-a-product-engineer) – i.e. engineers who also talk to users, and own product decisions. And small teams aren't just for product – our Marketing Team is a small team, as are Customer Success, and People & Operations. 
 
 This startup-made-of-startups structure minimizes the number of centralized processes and the need for lots of layers of management. It biases to [the maker’s schedule](https://www.paulgraham.com/makersschedule.html) – and makers get shit done.
 
