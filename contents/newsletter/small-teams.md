@@ -73,9 +73,6 @@ At PostHog, we’ve got an engineering-led culture. And that means that our smal
 
 Team leaders do not automatically equal managers. Team leads are responsible for making sure that teams perform well and for giving direct feedback. Managers have a different remit and are focused on the happiness of direct reports and setting the right context for people to do their jobs, onboarding new hires, and discussing performance issues with the executive team. A team lead’s remit is deliberately more product-focused.
 
-
-
-
 ### They have their own mission
 
 Regardless of size or scope, each team has its own mission that feeds into our overall company mission of equipping every developer to build successful products.
@@ -102,8 +99,6 @@ Rather than the team lead making the call, it’s always the manager who decides
 If someone feels the need to be in more than one small team, that likely means we need to hire. That can mean we’re ‘overstaffed’ at times, but ultimately good people will do good work to push our product forward. And it’s better to have slightly overstaffed small teams than to be perpetually understaffed and for your product to suffer as a result.
 
 Small teams are also able to work with other small teams on multidisciplinary projects and members of one small team can and should attend meetings on other small teams to help with collaboration if needed.
-
-### 
 
 ### The tradeoffs of small teams
 
