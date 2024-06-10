@@ -37,13 +37,13 @@ The small teams structure is core to how we've [designed our company for speed](
 
 ### 1. They need to be genuinely small
 
-The first rule of small teams? They’ve got to be small – two to six people. More than this and you have a department, which is what we're trying to avoid. Less than two people and, well, you don’t have a team. 
+Two to six people is ideal. More than this and you have a department, which is what we're trying to avoid. Less than two people and, well, you don’t have a team. 
 
-Small teams are effectively one pizza teams, as opposed to the [two-pizza teams](https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/two-pizza-teams.html) idea popularized by Amazon. 
+Small teams are effectively one-pizza teams, as opposed to the [two-pizza teams](https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/two-pizza-teams.html) idea popularized by Amazon. 
 
-The overall goal of small teams is to own an area of the product or company and be structured like an early-stage startup. Sure, these small teams don't have all the functions of a startup, but their spirit and approach to work is exactly the same. 
+The overall goal of small teams is to own an area of the product or company, and behave like an early-stage startup. They don't have all the functions of a startup, but their spirit and approach to work should be exactly the same. 
 
-A lot of the people on our small teams are product engineers – i.e. engineers who also talk to users, and own product decisions. And small teams aren't just for product – our marketing team is a small team, as are customer success, and people and operations. 
+A lot of the people on our small teams are [product engineers](/blog/what-is-a-product-engineer – i.e. engineers who also talk to users, and own product decisions. And small teams aren't just for product – our Marketing Team is a small team, as are Customer Success, and People & Operations. 
 
 This startup-made-of-startups structure minimizes the number of centralized processes and the need for lots of layers of management. It biases to [the maker’s schedule](https://www.paulgraham.com/makersschedule.html) – and makers get shit done.
 
@@ -53,10 +53,11 @@ Each small team runs its own retrospective and sprint each week, with notes take
 
 Small teams also make the final call on which features get into production, with no need for external quality assurance or control. And they can [merge whenever](https://posthog.com/handbook/engineering/development-process#merging).
 
-Each quarter, every small team at PostHog creates objectives and key results, or OKRs. Our executive team will give feedback on this to keep everyone on track. Beyond that, during each quarter each small team is tasked with maintaining a prioritized roadmap to help them achieve their objectives. Each small team is also tasked with speaking to customers. 
+Each quarter, every small team at PostHog outline their goals and projects for that quarter. We prefer goals orientated around what teams will ship, rather than more abstract goals like "increase conversions by 10%". Our executive team will give feedback on this to keep everyone on track. 
 
 And, as each one is like a startup in its own right, they’ve got to cover everything. That means:
 
+* Prioritizing their roadmap and talking to customers
 * Monitoring relevant metrics, including those covering usage, quality, and revenue
 * Triage and fix bugs related to the products or areas they’re responsible for
 * Assist the support hero in answering related questions
@@ -96,20 +97,20 @@ We’d rather hire new people than keep moving people around to fill gaps. That 
 
 Rather than the team lead making the call, it’s always the manager who decides if one of their direct reports should move between teams. But, once in a small team, you’re only in one team. Someone being in multiple small teams at once defeats the purpose of ownership.
 
-If someone feels the need to be in more than one small team, that likely means we need to hire. That can mean we’re ‘overstaffed’ at times, but ultimately good people will do good work to push our product forward. And it’s better to have slightly overstaffed small teams than to be perpetually understaffed and for your product to suffer as a result.
+If someone feels the need to be in more than one small team, that likely means we need to hire. That can mean we’re ‘overstaffed’ at times, but ultimately good people will do good work to push our product forward. And it’s better to have slightly overstaffed small teams than to be perpetually understaffed, and for your product to suffer as a result.
 
-Small teams are also able to work with other small teams on multidisciplinary projects and members of one small team can and should attend meetings on other small teams to help with collaboration if needed.
+Small teams are also able to work with other small teams on multidisciplinary projects, and members of one small team can and should attend meetings on other small teams to help with collaboration if needed.
 
 ### The tradeoffs of small teams
 
 Small teams aren’t perfect. And sometimes, to make them work, we’ve had to create workarounds and accept some tradeoffs.
 
-- **They clash.** Our small teams do sometimes clash, especially when more than one team is working on the same product. We mitigate this by being aggressively transparent. We also have a list of everything we do [and who owns it](/handbook/engineering/feature-ownership). This helps avoid clashes by clearly establishing feature ownership.  
+- **They overlap.** Some overlap is inevitable, especially when teams work on features that are used across multiple products. We mitigate this by being [aggressively transparent](/founders/how-to-run-a-transparent-company). We also have a list of everything we do [and who owns it](/handbook/engineering/feature-ownership), so it's easy to see who someone should talk to about a shared problem.
 
-- **Fuzzy ownership.** This isn’t unique to small teams, but we still mitigate against it. If a product or project doesn't have a clear owner, our [fuzzy ownership process](/handbook/company/fuzzy-ownership) encourages people to create a PR and find a solution. We also [actively encourage that](https://posthog.com/handbook/values) people to step on toes in a low-ego way. 
+- **Fuzzy ownership.** This isn’t unique to small teams, but we still mitigate against it. If a product or project doesn't have a clear owner, our [fuzzy ownership process](/handbook/company/fuzzy-ownership) encourages people to create a PR and find a solution. If a problem is big enough and it doesn't have owner, we sometimes form a temporary team just to solve that problem. We also [actively encourage](https://posthog.com/handbook/values) people to step on toes in a low-ego way. 
 
 - **Speed over seamlessness.** Small teams allow us to ship fast. But the tradeoff here is that we tolerate some level of not-so-great integration in exchange for speed. This isn't a problem unique to PostHog. AWS is a great example of a very, very big company that favours speed over integration.
 
 - **Add more small teams!** We want to avoid having big, slow teams. In doing so, we’ve kept adding more small teams. This is a hypothetical concern, but creating too many small teams could bottleneck each other. 
 
-- **You’ve got to hire right.** Not everyone will embrace this way of working. It requires people who take extreme ownership of ideas, are self-starting, authentic, and low-ego. We call them cracked engineers. And we have some [strong thoughts](https://newsletter.posthog.com/p/hiring-and-managing-cracked-engineers) on what makes an engineer cracked.
+- **You’ve got to hire right.** Not everyone will embrace this way of working. It requires people who take extreme ownership of ideas, are self-starting, authentic, and low-ego. We've developed some [strong opinions](https://newsletter.posthog.com/p/hiring-and-managing-cracked-engineers) about the kind of people who work in this culture, and those that don't.
