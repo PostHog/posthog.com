@@ -24,13 +24,15 @@ People have [user properties](/docs/product-analytics/user-properties), which en
 - Create [cohorts](/docs/data/cohorts)
 - Use user properties for targeting feature flags, A/B tests, and surveys.
 - Track initial UTM values and referrers across anonymous and [identified](/docs/product-analytics/identify) users.
+- Query the `persons` table using [SQL insights](/docs/product-analytics/sql)
 
 ## People and person profiles
 
 Using people in PostHog requires capturing events with **person profiles**. Person profiles are how PostHog attributes events and properties to specific users. Examples of scenarios where you want to capture events with person profiles are:
 
 - Tracking logged-in users in B2B and B2C SaaS apps
-- Low volume API server events
+- Doing user segmented product analysis
+- Growth and marketing teams wanting to analyze the _complete_ conversion lifecycle
 
 On the other hand, there are many use cases that don't require person profiles, such as:
 
@@ -71,7 +73,6 @@ Below is good information to know when working with distinct IDs and person prof
 
 - If a distinct ID already has a person profile created, any events captured with this distinct ID are considered events with a person profile. 
     - To opt out of this behavior, [delete the person](#deleting-person-data) in the person details UI in PostHog or use the `DELETE` operation of the [person API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id).
-
 
 - Any `distinct_id` created before May 2024 will have a person profile created for them. This means all of their events will be counted as events with person properties.
 
