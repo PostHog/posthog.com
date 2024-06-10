@@ -19,7 +19,7 @@ When we say cracked, we mean people who:
 - 🙋‍♀️ **Take extreme ownership of ideas.** This means driving ideas to completion, even when others need convincing. And, yes, there’s a fine line between extreme ownership and being an asshole. Truly cracked engineers can tread it.
 
 - 😄 **Stay optimistic at all times.** Cracked engineers aren’t intimidated by change, or new ideas. This doesn’t mean you have to agree with every change, but adopting a ‘yes and’ mentality helps new ideas get off the ground that might otherwise die in a committee somewhere, especially when they come from non-senior or new people.
-*
+
 - 🤩 **Make people feel excited and energized.** Every conversation with a cracked engineer should generate enthusiasm. Cracked engineers build people and their ideas up, and are generally perceived as very helpful.
 
 - 😎 **Behave in a completely authentic way.** Cracked engineers don’t play politics – their work does the talking. For example, if you do marketing, talk like an actual human being. This doesn’t work in most large organizations, sadly.
