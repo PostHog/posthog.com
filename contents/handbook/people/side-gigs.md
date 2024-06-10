@@ -14,7 +14,7 @@ We have deliberately called them "side gigs", as we are ok with you earning mone
 
 The key distinction to something being a side gig, and thus it being appropriate, is its impact on your work and the amount of time involved.
 
-A few hours a month on a paid side gig is acceptable. Over 10 hours a week on a paid or open source side gig is a significant amount of extra work which we would expect to start impacting your performance. In any case, side gigs should by default be something you work on in your personal time. 
+A few hours a month on a paid side gig is acceptable. In any case, side gigs should by default be something you work on in your personal time, and they should not impact the work you do at PostHog.
 
 If you are doing paid speaking, the exception based on time does not apply so long as you make it clear that you work for us - we view this as a great way to get PostHog's name out there.
 
