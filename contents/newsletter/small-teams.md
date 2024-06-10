@@ -26,9 +26,9 @@ Most teams cover individual products, such as data warehouse, replay, pipeline, 
 
 When we launch a new product, or a project on an existing team becomes too large for the current team, we often spin out a new small team. This allows us to push forward with new ideas and keep shipping without sacrificing quality.
 
-Right now, for example, we're in the process of scaling support by moving our support engineers out of the Customer Success team and into a new team focused on customer communications and community. [link to team page]. We're recruiting support engineers for that team [link to job], btw.
+Right now, for example, we're in the process of scaling support by moving our support engineers out of the Customer Success team and into a new [Customer Comms Team](/teams/customer-comms). We're [recruiting support engineers](/careers/support-engineer for that team, btw.
 
-We're also creating a new team with the mission of making our customer data platform (CDP) a first-class product [link to team page] – a project spun out from a Hackathon project at our recent all-company offsite in Mykonos. [link]
+We're also creating a new team with the mission of making our customer data platform (CDP) a first-class product – a project spun out from a Hackathon project at our recent all-company [offsite in Mykonos](/blog/mykonos-hackathon.
 
 
 ## The golden rules of small teams
@@ -47,7 +47,7 @@ A lot of the people on our small teams are product engineers – i.e. engineers 
 
 This startup-made-of-startups structure minimizes the number of centralized processes and the need for lots of layers of management. It biases to [the maker’s schedule](https://www.paulgraham.com/makersschedule.html) – and makers get shit done.
 
-### They run themselves
+### 2. They run themselves
 
 Each small team runs its own retrospective and sprint each week, with notes taken and shared in GitHub for the entire company to see.
 
@@ -63,7 +63,7 @@ And, as each one is like a startup in its own right, they’ve got to cover ever
 * Collaborate with other Small Teams such as marketing
 * Become power users of their area of PostHog and use PostHog in their processes
 
-### They have one leader
+### 3. They have one leader
 
 One of the purposes of the small team structure is to keep a startup’s structure flat even as it scales. That means [minimal layers of management](https://posthog.com/handbook/company/management) and lots of autonomy. 
 
@@ -73,7 +73,7 @@ At PostHog, we’ve got an engineering-led culture. And that means that our smal
 
 Team leaders do not automatically equal managers. Team leads are responsible for making sure that teams perform well and for giving direct feedback. Managers have a different remit and are focused on the happiness of direct reports and setting the right context for people to do their jobs, onboarding new hires, and discussing performance issues with the executive team. A team lead’s remit is deliberately more product-focused.
 
-### They have their own mission
+### 4. They have their own mission
 
 Regardless of size or scope, each team has its own mission that feeds into our overall company mission of equipping every developer to build successful products.
 
@@ -87,7 +87,7 @@ On the [marketing team](https://posthog.com/teams/marketing), the mission is to 
 
 All of this information is in our [handbook](https://posthog.com/handbook) and updated when changes are made and confirmed each quarter. This keeps everyone on the same page and makes it easy for anyone within the company to quickly find out what other teams are working on and why.
 
-### They’re flexible
+### 5. They’re flexible
 
 We’d rather hire new people than keep moving people around to fill gaps. That said, we’re happy for people to move between teams when needed, ideally no more often than every three to nine months. There are two scenarios that could trigger a move:
 
