@@ -16,7 +16,6 @@ The key distinction to something being a side gig, and thus it being appropriate
 
 A few hours a month on a paid side gig is acceptable. In any case, side gigs should by default be something you work on in your personal time, and they should not impact the work you do at PostHog.
 
-If you are doing paid speaking, the exception based on time does not apply so long as you make it clear that you work for us - we view this as a great way to get PostHog's name out there.
 
 In a few cases, you may want your side gig to become your full time work one day. That is ok - please just let us know, so we can create a plan. We know the key to motivated people is to help you achieve your long term goals, and to align this with what PostHog needs, whether or not you eventually achieve them with us.
 
