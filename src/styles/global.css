@@ -1290,6 +1290,12 @@ iframe[src*='youtube-nocookie.com'] {
         summary {
             @apply select-none;
         }
+
+        a {
+            u {
+                @apply no-underline;
+            }
+        }
     }
     section {
         @apply mt-8 mb-8;
