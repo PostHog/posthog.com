@@ -8,29 +8,6 @@ availability:
     free: partial
     selfServe: partial
     enterprise: full
-
-    features:
-        creating:
-            free: true
-            selfServe: true
-            enterprise: true
-        editing:
-            free: true
-            selfServe: true
-            enterprise: true
-        tagging:
-            free: false
-            selfServe: true
-            enterprise: true
-        text_and_media_cards:
-            free: false
-            selfServe: true
-            enterprise: true
-        advancedSharing:
-            free: false
-            selfServe: false
-            enterprise: true
-
 ---
 
 <iframe
@@ -40,22 +17,22 @@ availability:
 
 Dashboards are the easiest way to track all your most important product and performance metrics.
 
-Unlike [notebooks](/docs/notebooks), which are ideal of adhoc and one-off analysis, dashboards are designed for tracking common metrics over time. 
+Unlike [notebooks](/docs/notebooks), which are ideal of adhoc analysis of specific issues, dashboards are designed for tracking common metrics over time. 
 
-You can create a new dashboard from scratch, but we also offer numerous [pre-made dashboard templates](/templates) for tracking things like [common website metrics](/templates/website-dashboard), [product health metrics](/templates/health-dashboard), and important [metrics for large language models](/docs/ai-engineering/llm-insights).
+You can create a new dashboard from scratch, but we also offer numerous [dashboard templates](/templates) for tracking things like [website metrics](/templates/website-dashboard), [product health metrics](/templates/health-dashboard), and [metrics for large language models](/docs/ai-engineering/llm-insights).
 
 ## Creating a new dashboard
 
-1. Click on 'Dashboards' in the left hand navigation and then 'New Dashboard'.
-1. You can create a dashboard from a list of [available templates](/templates), or select 'Blank Dashboard' to start from scratch.
+1. Click on 'Dashboards' in the left hand navigation and then **New Dashboard**.
+1. You can create a dashboard from a list of [available templates](/templates), or select **Blank Dashboard** to start from scratch.
 1. Name your dashboard, add some optional details if desired.
-1. Your dashboard will be empty – click '+New insight' to create an insight to add.
-1. There are several types of Insight you can now create - [Trends](/docs/user-guides/trends), [Funnels](/docs/user-guides/funnels), [Retention](/docs/user-guides/retention), [Paths](/docs/user-guides/paths), and [Lifecycle](/docs/user-guides/lifecycle)
-1. Click 'Save & add to dashboard' when you've created your insight.
+1. Your dashboard will be empty – click **+New insight** to create an insight to add.
+1. Dashboards support all the core [product analyists insights](/docs/product-analytics/insights).
+1. Click **Save & add to dashboard** when you've created your insight.
 
 If you already have some insights set up, an alternative approach is to click 'Add to dashboard' in any insight. 
 
-> **Important:** Insights can appear on multiple dashboards at the same time, so you don't have to create multiple copies of the same insight. Changes to the insight will be reflected in all the dashboards it's used in.
+> **Important:** Insights can appear on multiple dashboards at the same time, so you don't have to create multiple copies of the same insight.
 
 ## Dates and filters
 
@@ -77,7 +54,7 @@ Dashboards also support most of the same filters as individual insights, includi
 
 Using filters on dashboards is a useful way to compare usage between different types of users without recreating insights over and over.
 
-You can, for example, duplicate a dashboard – click on the '...' menu and click 'Duplicate' – and apply different filters to each version of the dashboard.
+You could, for example, duplicate a dashboard – click on the '...' menu and click 'Duplicate' – and apply different filters to each version of the dashboard.
 
 ## Dashboard options
 
@@ -109,7 +86,7 @@ To do so, click the dropdown arrow next to refresh button, turn on auto refresh 
 
 This is useful if you have a PostHog dashboard on a TV screen for others to see.
 
-> Note: Auto refresh only works when the tab is active
+**Important:** Auto refresh only works when the browser tab is active.
 
 ## Further reading
 
