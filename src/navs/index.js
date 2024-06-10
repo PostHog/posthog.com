@@ -766,6 +766,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/jobs',
                     },
                     {
+                        name: 'Managing small teams',
+                        url: '/handbook/engineering/posthog-com/small-teams',
+                    },
+                    {
                         name: 'Managing the company roadmap',
                         url: '/handbook/engineering/posthog-com/roadmap',
                     },
