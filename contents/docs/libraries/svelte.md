@@ -29,7 +29,7 @@ export const load = async () => {
   if (browser) {
     posthog.init(
       '<ph_project_api_key>',
-      { api_host: '<ph_client_api_host>' }
+      { api_host: '<ph_client_api_host>', person_profiles: 'identified_only' }
     )
   }
   return
@@ -72,6 +72,7 @@ export const load = async () => {
       '<ph_project_api_key>',
       {
         api_host:'<ph_client_api_host>',
+        person_profiles: 'identified_only',
         capture_pageview: false,
         capture_pageleave: false
       }
