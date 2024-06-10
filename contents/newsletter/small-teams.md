@@ -43,12 +43,6 @@ Small teams are effectively one pizza teams, as opposed to the [two-pizza teams]
 
 The overall goal of small teams is to own an area of the product or company and be structured like an early-stage startup. Sure, these small teams don't have all the functions of a startup, but their spirit and approach to work is exactly the same. 
 
-At PostHog, we’ve got [14 small teams](https://posthog.com/teams) ranging in size from one person (we’re working on that) to six people. These teams cover everything from product analytics, to session replay, data warehouse, pipeline, and so on. What does owning an area of the product mean? Simply put, everything related to that product. But with a particular focus on:
-
-1. Usage
-2. Quality
-3. Revenue
-
 A lot of the people on our small teams are product engineers – i.e. engineers who also talk to users, and own product decisions. And small teams aren't just for product – our marketing team is a small team, as are customer success, and people and operations. 
 
 This startup-made-of-startups structure minimizes the number of centralized processes and the need for lots of layers of management. It biases to [the maker’s schedule](https://www.paulgraham.com/makersschedule.html) – and makers get shit done.
@@ -80,18 +74,6 @@ At PostHog, we’ve got an engineering-led culture. And that means that our smal
 Team leaders do not automatically equal managers. Team leads are responsible for making sure that teams perform well and for giving direct feedback. Managers have a different remit and are focused on the happiness of direct reports and setting the right context for people to do their jobs, onboarding new hires, and discussing performance issues with the executive team. A team lead’s remit is deliberately more product-focused.
 
 
-### They don’t clash
-
-Creating a startup full of startups sounds like a recipe for people duplicating work or stepping on toes, right? Wrong. If you combine a small team structure with a transparent culture where everything is as public as possible and, ideally, written down, then everyone should have more than enough context of what others are working on and why. 
-
-At PostHog, we have a list of everything we do [and who owns it](/handbook/engineering/feature-ownership). This helps avoid clashes by clearly establishing feature ownership. If a product or project doesn't have a clear owner, our [fuzzy ownership process](/handbook/company/fuzzy-ownership) encourages people to create a PR and find a solution.
-
-
-Giving clear ownership over products and projects to individuals or individual teams also lessens the risk of overlap.
-
-We’ve got a small number of product managers who help small teams prioritize, create and update dashboards, conduct competitor analysis, and speak to customers. But we also expect product engineers to be true experts of the product they’re building and understand our customers. Product managers also ensure cross-team alignment, an important task in a completely remote, asynchronous company.
-
-So what about stepping on toes? Well, we [actively encourage that](https://posthog.com/handbook/values). Everyone at PostHog should be raising pull requests in GitHub or proposing changes to stuff that doesn't have anything to do with your small team. Why? Because it shows they really care and they really understand the product.
 
 
 ### They have their own mission
@@ -108,11 +90,6 @@ On the [marketing team](https://posthog.com/teams/marketing), the mission is to 
 
 All of this information is in our [handbook](https://posthog.com/handbook) and updated when changes are made and confirmed each quarter. This keeps everyone on the same page and makes it easy for anyone within the company to quickly find out what other teams are working on and why.
 
-### They're not just engineers
-
-Yes, the vast majority of our small teams are stuffed full of engineers shipping new features. Right now, 70% of our team is engineers. But everyone at PostHog is on a small team. That means we run our marketing team like a mini startup, and our people and operations team. 
-
-What does this mean in practice? It means adopting a startup mentality, regardless of what role you do. Our [marketing team](/marketing) has a mission, just like our [growth team](/growth). And all of our small teams, engineering-focused and non-engineering focused, regularly ship new products and features. Structuring all functions of a company as small teams has helped us maintain speed, autonomy, and innovation across the board.
 ### They’re flexible
 
 We’d rather hire new people than keep moving people around to fill gaps. That said, we’re happy for people to move between teams when needed, ideally no more often than every three to nine months. There are two scenarios that could trigger a move:
@@ -130,12 +107,14 @@ Small teams are also able to work with other small teams on multidisciplinary pr
 
 ### The tradeoffs of small teams
 
-Our small teams structure is a success because we work hard on making it one. There are tradeoffs. 
+Small teams aren’t perfect. And sometimes, to make them work, we’ve had to create workarounds and accept some tradeoffs.
 
-Working as a series of startups within a startup risks creating silos and there could be whole teams or individual team members who drift away from our mission or feel disconnected from the company. 
+- **They clash.** Our small teams do sometimes clash, especially when more than one team is working on the same product. We mitigate this by being aggressively transparent. We also have a list of everything we do [and who owns it](/handbook/engineering/feature-ownership). This helps avoid clashes by clearly establishing feature ownership.  
 
-To help alleviate this, all of our small teams have annual off-sites in addition to our big company get-together. Everyone also has a generous quarterly travel budget and people are encouraged to go work with colleagues either on the same small team as them or in another part of the company. We mix things up and spend time together IRL to work on problems and get things shipped.
+- **Fuzzy ownership.** This isn’t unique to small teams, but we still mitigate against it. If a product or project doesn't have a clear owner, our [fuzzy ownership process](/handbook/company/fuzzy-ownership) encourages people to create a PR and find a solution. We also [actively encourage that](https://posthog.com/handbook/values) people to step on toes in a low-ego way. 
 
-Small teams also require that everyone is very good at written communication, be it a Slack message, or a Github pull request or issue. This helps everyone at the company to both see and understand what's being worked on and why.
+- **Speed over seamlessness.** Small teams allow us to ship fast. But the tradeoff here is that we tolerate some level of not-so-great integration in exchange for speed. This isn't a problem unique to PostHog. AWS is a great example of a very, very big company that favours speed over integration.
 
-You also need to hire the right people to work on small teams. Not everyone will embrace this way of working. It requires people who take extreme ownership of ideas, are self-starting, authentic, and low-ego. We call them cracked engineers. And we have some [strong thoughts](https://newsletter.posthog.com/p/hiring-and-managing-cracked-engineers) on what makes an engineer cracked.
+- **Add more small teams!** We want to avoid having big, slow teams. In doing so, we’ve kept adding more small teams. This is a hypothetical concern, but creating too many small teams could bottleneck each other. 
+
+- **You’ve got to hire right.** Not everyone will embrace this way of working. It requires people who take extreme ownership of ideas, are self-starting, authentic, and low-ego. We call them cracked engineers. And we have some [strong thoughts](https://newsletter.posthog.com/p/hiring-and-managing-cracked-engineers) on what makes an engineer cracked.
