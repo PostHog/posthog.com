@@ -15,11 +15,14 @@ We understand organizing travel can be a challenge when you have personal/family
 
 ## All-company offsites
 
+> Curious about our all-company offsites? Check out these links:
+> - **2021** [We shot this video at our Portugal offsite](https://www.youtube.com/watch?v=WOBH1Qy0xhA)
+> - **2023** [What we built at our sun-kissed Aruba hackathon](https://posthog.com/blog/aruba-hackathon)
+> - **2024** [What we built at our windswept Mykonos hackathon](https://posthog.com/blog/mykonos-hackathon)
+
 Once a year, the entire company will get together somewhere in the world for a week. Usually we'll all fly on Sunday, have an opening dinner, spend the week doing a mix of hard work, strategy, culture and fun activities and we then all fly back home on Friday. Our past offsites have been in Italy, Portugal and Iceland.
 
 These are organized by the Ops & People team, and we budget up to $3,000 per person in total for these. 
-
-We filmed a video in [Porto in August 2021](https://youtu.be/WOBH1Qy0xhA) which should give you a taste for how these run!
 
 Typical agenda:
 - A couple of structured social events

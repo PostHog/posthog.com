@@ -99,7 +99,7 @@ export const benefits = [
     },
     {
         title: 'Company offsites',
-        details: `Each year we organize fully paid company offsites - this year it's Aruba! Sometimes it’s good to speak face to face.`,
+        details: `We organize an annual all-hands offsite - this year it was Mykonos! Sometimes it’s good to speak face to face.`,
         image: companyOffsitesImg,
     },
 ]
