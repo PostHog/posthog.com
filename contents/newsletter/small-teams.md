@@ -28,7 +28,7 @@ When we launch a new product, or a project on an existing team becomes too large
 
 Right now, for example, we're in the process of scaling support by moving our support engineers out of the Customer Success team and into a new [Customer Comms Team](/teams/customer-comms). We're [recruiting support engineers](/careers/support-engineer for that team, btw.
 
-We're also creating a new team with the mission of making our customer data platform (CDP) a first-class product – a project spun out from a Hackathon project at our recent all-company [offsite in Mykonos](/blog/mykonos-hackathon.
+We're also creating a new team with the mission of making our customer data platform (CDP) a first-class product – a project spun out from a Hackathon project at our recent all-company [offsite in Mykonos](/blog/mykonos-hackathon).
 
 
 ## The golden rules of small teams
