@@ -52,7 +52,7 @@ By default, the email forwarding feature only accepts emails from your PostHog a
 - You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Fraser to purchase it for you on theirs in the first instance. 
 - If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Fraser to get reimbursed manually.  
 
-Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! Again, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
+Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! If you used your brex card you can login to Brex, find the charge and use the repay function - more details [here](https://www.brex.com/support/employee-repayments). If it was on Revolut, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
 
 ## Making larger purchases
 
