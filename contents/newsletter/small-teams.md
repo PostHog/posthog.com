@@ -78,7 +78,7 @@ Team leaders do not automatically equal managers. Team leads are responsible for
 
 Regardless of size or scope, each team has its own mission that feeds into our overall company mission of equipping every developer to build successful products.
 
-On the [marketing team](https://posthog.com/teams/marketing), the mission is to make PostHog a place for product engineers to learn and collaborate. The [infrastructure team’s mission](https://posthog.com/teams/infrastructure) is to make deploying, scaling, and managing PostHog easy, fast, and reliable. But a charter is more than a mission. Small team charters also need to include:
+On the [growth team](https://posthog.com/teams/growth), the mission is to maximize the number of people who get value out of PostHog, and help them realize and leverage all the value we offer. The [infrastructure team’s mission](https://posthog.com/teams/infrastructure) is to make deploying, scaling, and managing PostHog easy, fast, and reliable. As well as a main mission, each small team also sets:
 
 * Long-term goals
 * A description of what the team does
@@ -111,6 +111,6 @@ Small teams aren’t perfect. And sometimes, to make them work, we’ve had to c
 
 - **Speed over seamlessness.** Small teams allow us to ship fast. But the tradeoff here is that we tolerate some level of not-so-great integration in exchange for speed. This isn't a problem unique to PostHog. AWS is a great example of a very, very big company that favours speed over integration.
 
-- **Add more small teams!** We want to avoid having big, slow teams. In doing so, we’ve kept adding more small teams. This is a hypothetical concern, but creating too many small teams could bottleneck each other. 
+- **Bottlenecks** We want to avoid having big, slow teams. In doing so, we’ve kept adding more small teams. This is a hypothetical concern, but creating too many small teams could bottleneck each other. 
 
 - **You’ve got to hire right.** Not everyone will embrace this way of working. It requires people who take extreme ownership of ideas, are self-starting, authentic, and low-ego. We've developed some [strong opinions](https://newsletter.posthog.com/p/hiring-and-managing-cracked-engineers) about the kind of people who work in this culture, and those that don't.
