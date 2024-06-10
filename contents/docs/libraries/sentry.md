@@ -31,12 +31,10 @@ posthog.init('<ph_project_api_key>')
 
 Sentry.init({
     dsn: '<your Sentry DSN>',
-    integrations: [new posthog.SentryIntegration(
-        posthog,
-        'your organization',
-        project-id,
-        undefined, // optional: but necessary if you want to set a severity allowlist
-        ['error', 'info'] // optional: here is set to handle captureMessage (info) and captureException (error)
+    integrations: [posthog.sentryIntegration({
+        organization: 'your organization',
+        projectId: 'project-id',
+        severityAllowList: ['error', 'info'] // optional: here is set to handle captureMessage (info) and captureException (error)
     )],
 })
 ```
@@ -51,3 +49,20 @@ From Sentry you will now be able to go directly to the affected person in PostHo
 
 ![PostHog user profile URL in Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/sentry_exception.png)
 
+
+### Sentry SDK v6 and below
+
+If you are using a lower version of the Sentry SDK you may need to use the "class based" integration as below
+
+```js-web
+Sentry.init({
+    dsn: '<your Sentry DSN>',
+    integrations: [new posthog.SentryIntegration(
+        posthog,
+        'your organization',
+        project-id,
+        undefined, // optional: but necessary if you want to set a severity allowlist
+        ['error', 'info'] // optional: here is set to handle captureMessage (info) and captureException (error)
+    )],
+})
+```
