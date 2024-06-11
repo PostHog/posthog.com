@@ -80,6 +80,9 @@ If this is a new contract for an existing customer, you will need to add their e
 - **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve completed verifying subscription and invoice details, and click the "Apply credit - monthly" button.
 - **If customer wishes to begin using credits in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
 
+#### Payment Details For Bank Transfers
+
+If a customer is paying us by bank transfer, the default is to receive these through Stripe. Each customer will receive individual virtual account information to send these payments for Stripe to reconcile. If you open a new customer profile on Stripe, this virtual account information will change so it's important to update the customer. If a customer is requesting to send us a transfer outside of Stripe, eg directly to us, please post in #team-people-ops to request the correct banking info to share with the customer. 
 
 ### Stripe Products & Prices
 
