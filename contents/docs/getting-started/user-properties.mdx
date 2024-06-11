@@ -17,6 +17,8 @@ For example, you can create [filters](/docs/product-analytics/trends#filtering-e
 
 For backward compatibility, PostHog captures events with [person profiles](/docs/data/people) by default. You can change this by setting your JavaScript initialization's `person_profiles` to `identified_only` or an event's `$process_person_profile` property to `false`.
 
+> **Note:** Setting user properties creates a profile for the person you are tracking. Under our current [pricing](/pricing), events _without_ person profiles can be up to 4x cheaper than events _with_ them (due to computer cost of processing them), so it's recommended to only capture person profiles (via `identify()` or `$set`) when needed.
+
 ## How to set user properties
 
 <UserPropertiesHowToSet/>
