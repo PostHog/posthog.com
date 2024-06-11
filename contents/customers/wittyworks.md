@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/wittyworks/logo_dark.svg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/wittyworks/featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/wittyworks_posthog_7efa8c904e.png
 industries:
   - SaaS
   - Browser extension
