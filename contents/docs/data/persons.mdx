@@ -72,7 +72,7 @@ Below is good information to know when working with distinct IDs and person prof
 - Every event has a `distinct_id` representing a user attached to it. However, not every `distinct_id` has an associated person profile.
 
 - If a distinct ID already has a person profile created, any events captured with this distinct ID are considered events with a person profile. 
-    - To opt out of this behavior, [delete the person](#deleting-person-data) in the person details UI in PostHog or use the `DELETE` operation of the [person API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id).
+    - To opt out of this behavior, contact file a support ticket via the [in-app modal](https://app.posthog.com/home#supportModal).
 
 - Any `distinct_id` created before May 2024 will have a person profile created for them. This means all of their events will be counted as events with person properties.
 
