@@ -117,5 +117,3 @@ import IdentifyFrontendCode from "../../_snippets/identify-frontend-code.mdx"
 User property values can be strings, booleans, numbers, objects, or arrays.  For objects and arrays, you can use [HogQL](/docs/hogql) to access nested properties in the PostHog app.
 
 > **Note:** User properties are set in the order the events are ingested, and not according to event timestamps. Since we typically ingest events as soon as we receive them, you only need to take this into consideration when you're [importing historical data](/docs/migrate).
-
-> **Note:** Setting user properties creates a profile for the person you are tracking. Under our current [pricing](/pricing), events _without_ person profiles can be up to 4x cheaper than events _with_ them (due to computer cost of processing them), so it's recommended to only capture person profiles (via `identify()` or `$set`) when needed.
