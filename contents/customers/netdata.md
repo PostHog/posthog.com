@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/netdata/netdata_logo_dark.svg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/netdata/netdata_featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/netdata_posthog_1ea718b951.png
 industries:
   - SaaS
   - Developer tool
