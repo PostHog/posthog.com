@@ -42,6 +42,7 @@ export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: runtimeConfig.public.posthogHost || '<ph_client_api_host>',
+    person_profiles: 'identified_only',
     capture_pageview: false, // we add manual pageview capturing below
     loaded: (posthog) => {
       if (import.meta.env.MODE === 'development') posthog.debug();
@@ -174,6 +175,7 @@ export default function({ app: { router } }, inject) {
   // Init PostHog
   posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
+    person_profiles: 'identified_only',
     capture_pageview: false,
     loaded: () => posthog.identify('unique_id') // If you can already identify your user
   })

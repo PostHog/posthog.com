@@ -98,7 +98,8 @@ With our app set up, the next step is to add PostHog to it. To start, create a n
   posthog.init(
     '<ph_project_api_key>',
     {
-      api_host:'<ph_client_api_host>'
+      api_host:'<ph_client_api_host>',
+			person_profiles: 'identified_only'
     }
   )
 </script>
@@ -336,6 +337,7 @@ Finally, in `posthog.astro`, we add logic to get the distinct ID, check if it’
     '<ph_project_api_key>',
     {
       api_host:'<ph_client_api_host>',
+			person_profiles: 'identified_only',
       loaded: function(posthog) {
         const distinctId = document.querySelector('.did').innerHTML;
         if (posthog.get_distinct_id() && posthog.get_distinct_id() !== distinctId) {

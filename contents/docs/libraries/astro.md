@@ -30,6 +30,7 @@ In this file, add your `Web snippet` which you can find in [your project setting
     '<ph_project_api_key>',
     {
       api_host:'<ph_client_api_host>',
+      person_profiles: 'identified_only'
     }
   )
 </script>
