@@ -430,14 +430,14 @@ DevCycle is a startup launched out of Taplytics, another A/B testing platform. I
 
 ### How does DevCycle compare to LaunchDarkly?
 
-DevCycle has many of the core A/B testing and feature flagging features but misses out on some of the more advanced features of LaunchDarkly.
+DevCycle has many of the feature flagging features but misses out A/B testing.
 
 <ComparisonTable column1="DevCycle" column2="LaunchDarkly">
   <ComparisonRow column1={true} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
   <ComparisonRow column1={"Segments"} column2={true} feature="Advanced targeting" description="Target flags and A/B tests on segments and non-users" />
   <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
-  <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
+  <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
   <ComparisonRow column1={false} column2={true} feature="Funnel tests" description="Use conversion funnels as goals for your A/B test" />
   <ComparisonRow column1={false} column2={false} feature="Advanced analytics" description="Custom SQL, paths, and retention analysis with flag data and beyond." />
   <ComparisonRow column1={true} column2={true} feature="Major SDKs" description="Pre-built SDKs for JavaScript, Python, iOS, Android, Go, and more" />
