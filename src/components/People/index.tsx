@@ -17,14 +17,14 @@ export const TeamMember = (teamMember) => {
     const name = [firstName, lastName].filter(Boolean).join(' ')
 
     return (
-        <li className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded h-40 relative @container group click">
+        <li className="h-40 relative @container group click [perspective:1000px]">
             <Link
                 to={`/community/profiles/${squeakId}`}
                 className={`flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark w-full transition-transform preserve-3d ${
-                    biography ? 'group-hover:[transform:rotateY(180deg)]' : ''
+                    biography ? 'group-hover:[transform:rotateY(-180deg)]' : ''
                 }`}
             >
-                <div className="flex flex-col justify-between px-6 py-4 w-full mr-32 xl:mr-40 absolute h-full [backface-visibility:hidden]">
+                <div className="flex flex-col justify-between px-6 py-4 w-full mr-32 xl:mr-40 absolute h-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
                     <div>
                         <h3
                             className="mb-0 text-[15px] @sm:text-base @md:text-[17px] leading-tight"
@@ -53,9 +53,20 @@ export const TeamMember = (teamMember) => {
                         />
                     </figure>
                 </div>
-                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] overflow-hidden p-4">
-                    <ReactMarkdown>{biography}</ReactMarkdown>
-                    <div className="bg-gradient-to-t from-tan to-transparent absolute inset-0 w-full h-full" />
+                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(-180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                    <figure className="m-0 -mt-8 p-0 absolute left-0 bottom-0 [transform:rotateY(-180deg)]">
+                        <img
+                            src={
+                                avatar?.url ||
+                                'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
+                            }
+                            className="w-[200px] grayscale brightness-0 opacity-20"
+                        />
+                    </figure>
+                    <div className="overflow-hidden absolute h-full w-full inset-0 p-4 bg-accent dark:bg-accent-dark">
+                        <ReactMarkdown>{biography}</ReactMarkdown>
+                        <div className="bg-gradient-to-t from-accent dark:from-accent-dark to-transparent absolute inset-0 w-full h-full" />
+                    </div>
                 </div>
             </Link>
         </li>
