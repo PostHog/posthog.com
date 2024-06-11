@@ -93,3 +93,11 @@ and check that the output matches this
 ```
 
 If your table doesn't match exactly (including casing), then the recommended approach is delete the table and let PostHog create it for you (alternatively you can copy the DDL exactly).
+
+### Export shows a "no active warehouse selected" error
+
+This error indicates the warehouse provided is not active (likely `SUSPENDED`). Batch exports do not activate, suspend, or manipulate warehouses in any capacity, which can be enforced by not giving permissions required to do so to the user provided to batch exports. The reason for this is that a running warehouse consumes Snowflake credits, and deciding on Snowflake credit spending is out of scope for batch exports. That being said, batch exports do require a running Snowflake warehouse to be able to export events to. So, if you see this error, you will have to inspect your Snowflake configuration to discover why it is `SUSPENDED`. One potential explanation is that Snowflake's auto-suspend feature suspended the warehouse after some time of inactivity, which could be the case if the warehouse is used only for batch exports on slow frequencies (like daily).
+
+Here are some useful links on the subject:
+* [Snowflake documentation][https://docs.snowflake.com/en/user-guide/warehouses-tasks] on managing warehouses.
+* [Snowflake documentation][https://docs.snowflake.com/en/user-guide/cost-controlling#label-cost-control-auto-suspend] on auto-suspend feature for cost management.
