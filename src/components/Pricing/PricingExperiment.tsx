@@ -624,7 +624,7 @@ const PlansTabs = () => {
                     <ul className="tw-check-bullets @lg:columns-2">
                         <li>Usage-based pricing</li>
                         <li>Generous monthly free tier</li>
-                        <li>Up to 10 projects</li>
+                        <li>Up to 6 projects</li>
                         <li>7-year data retention</li>
                         <li>Email and community support</li>
                         <li>Unlimited team members</li>
