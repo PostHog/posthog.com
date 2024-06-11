@@ -35,6 +35,7 @@ Sentry.init({
         organization: 'your organization',
         projectId: 'project-id',
         severityAllowList: ['error', 'info'] // optional: here is set to handle captureMessage (info) and captureException (error)
+      }
     )],
 })
 ```
