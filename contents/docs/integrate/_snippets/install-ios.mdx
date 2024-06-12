@@ -20,7 +20,7 @@ dependencies: [
 
 and then as a dependency for the Package target utilizing PostHog:
 
-```swift
+```swift file=Package.swift
   .target(
     name: "myApp",
     dependencies: [.product(name: "PostHog", package: "posthog-ios")]),

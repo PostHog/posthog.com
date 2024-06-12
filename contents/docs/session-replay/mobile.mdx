@@ -2,12 +2,12 @@
 title: Mobile Recording
 ---
 
-> 🚧 **NOTE:** Mobile recording is currently **only available on Android** and is considered `beta`. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
+> 🚧 **NOTE:** Mobile recording is currently **only available on Android and iOS** and is considered `beta`. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
 
 
 # Overview
 
-Mobile Session Recording allows you to record user sessions on mobile devices. This includes screen recordings, network requests, logs and touches. This data can then be used to understand how users are interacting with your app and to identify bugs and issues.
+Mobile Session Recording allows you to record user sessions on mobile devices. This includes screen recordings, network requests, logs, and touches. This data can then be used to understand how users are interacting with your app and to identify bugs and issues.
 
 ## How it works
 
@@ -17,49 +17,25 @@ We have taken our time to make sure we provide a useful and detailed recording e
 
 Mobile recording is primarily done using native APIs to grab the view hierarchy state when the screen is drawn. This is done carefully so as not to affect performance in any way a user may notice.
 
-The view hierarchy is transformed to a JSON data structure and later rendered as a HTML [wireframe](https://www.figma.com/resource-library/what-is-wireframing/). Since it is a wireframe, the UI won't have the original look and feel but it should be close enough to understand the user's behaviour.
+The view hierarchy is transformed to a JSON data structure and later rendered as an HTML [wireframe](https://www.figma.com/resource-library/what-is-wireframing/). Since it is a wireframe, the UI won't have the original look and feel but it should be close enough to understand the user's behavior.
+
+#### Screenshot mode
+
+If the `screenshot` (Android) or `screenshotMode` (iOS) option is enabled, the SDK will take a screenshot of the screen instead of making a representation of the user's screen. The screenshot may contain sensitive information, use it with caution. We'll be working on masking the screenshot option next.
 
 #### Network recording
 
-Network requests are recorded using the `PostHogOkHttpInterceptor` interceptor ([OkHttp only](https://github.com/square/okhttp/)). Only metric-like data is currently gathered to give a picture of speed, size and response code. No data is captured from the request or response body.
+If the `captureNetworkTelemetry` option is enabled, the SDK will record Network requests. Only metric-like data is currently gathered to give a picture of speed, size, and response code. No data is captured from the request or response body.
 
 # Installation
 
-Add the dependency.
+## Android
 
-```gradle_kotlin file=app/build.gradle.kts
-implementation("com.posthog:posthog-android:$latestVersion")
-```
+Add the dependency, check out the [installation docs](/docs/libraries/android#installation).
 
-Initialize the SDK in the `Application` class.
+Initialize the SDK, check out the [configuration docs](/docs/libraries/android#configuration).
 
-```android_kotlin
-import android.app.Application
-import com.posthog.android.PostHogAndroid
-import com.posthog.android.PostHogAndroidConfig
-
-class SampleApp : Application() {
-
-    companion object {
-        const val POSTHOG_API_KEY = "<ph_project_api_key>"
-        // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-        const val POSTHOG_HOST = "<ph_client_api_host>"
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-
-        val config = PostHogAndroidConfig(
-            apiKey = POSTHOG_API_KEY,
-            host = POSTHOG_HOST // TIP: host is optional if you use https://us.i.posthog.com
-        )
-        config.sessionReplay = true
-        PostHogAndroid.setup(this, config)
-    }
-}
-```
-
-Add the OkHttp Interceptor.
+Add the OkHttp Interceptor for enabling the `captureNetworkTelemetry` option.
 
 ```android_kotlin
 import com.posthog.PostHogOkHttpInterceptor
@@ -70,17 +46,7 @@ private val client = OkHttpClient.Builder()
     .build()
 ```
 
-# Limitations
-
-* Requires the PostHog Android SDK version >= [3.1.0](https://github.com/PostHog/posthog-android/releases/tag/3.1.0) - use the latest version.
-* Requires Android API >= 26, otherwise it's a NoOp.
-* Jetpack Compose is only supported if the `screenshot` option is enabled.
-* Custom views is partly supported, and only fully supported if the `screenshot` option is enabled.
-* WebView is not supported, a placeholder will be shown.
-* Keyboard is not supported, a placeholder will be shown.
-* React Native and Flutter for Android aren't supported.
-
-# Recording specific configuration
+### Recording specific configuration
 
 SDK configurations during the SDK initialization.
 
@@ -112,3 +78,47 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
     android:tag="ph-no-capture"
 />
 ```
+
+### Limitations
+
+* Requires the PostHog Android SDK version >= [3.3.1](https://github.com/PostHog/posthog-android/releases) - use the latest version.
+* Requires Android API >= 26, otherwise it's a NoOp.
+* Jetpack Compose is only supported if the `screenshot` option is enabled.
+* Custom views is partly supported, and only fully supported if the `screenshot` option is enabled.
+* WebView is not supported, a placeholder will be shown.
+* Keyboard is not supported, a placeholder will be shown.
+* React Native and Flutter for Android aren't supported.
+
+## iOS
+
+Add the dependency, check out the [installation docs](/docs/libraries/ios#installation).
+
+Initialize the SDK, check out the [configuration docs](/docs/libraries/ios#configuration).
+
+### Recording specific configuration
+
+SDK configurations during the SDK initialization.
+
+```swift
+let config = PostHogConfig(apiKey: apiKey)
+// sessionReplay is disabled by default
+config.sessionReplay = true
+// sessionReplayConfig is optional, they are enabled by default
+config.sessionReplayConfig.maskAllTextInputs = true
+config.sessionReplayConfig.maskAllImages = true
+config.sessionReplayConfig.captureNetworkTelemetry = true
+// screenshotMode is disabled by default
+// The screenshot may contain sensitive information, use with caution
+config.sessionReplayConfig.screenshotMode = true
+```
+
+If you don't want to mask everything, you can disable the mask config above and mask specific views using the `ph-no-capture` [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier).
+
+### Limitations
+
+- [SwiftUI](https://developer.apple.com/xcode/swiftui/) is only supported if the `screenshotMode` option is enabled.
+- It's a representation of the user's screen, not a video recording nor a screenshot.
+  - Custom views are not fully supported.
+  - If the option `screenshotMode` is enabled, the SDK will take a screenshot of the screen instead of making a representation of the user's screen.
+- WebView is not supported, a placeholder will be shown.
+- React Native and Flutter for iOS aren't supported.
