@@ -8,7 +8,7 @@ import { flattenMenu, replacePath } from './utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
-export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
+export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage, createRedirect }, graphql }) => {
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.tsx`)
@@ -445,11 +445,39 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             }`
                     : ''
             }
+            ${
+                process.env.STRAPI_TOKEN
+                    ? `
+            allSqueakProfile {
+                nodes {
+                  squeakId
+                  user {
+                    data {
+                      attributes {
+                        email
+                      }
+                    }
+                  }
+                }
+              }
+            `
+                    : ''
+            }
         }
     `)) as GatsbyContentResponse
 
     if (result.error) {
         return Promise.reject(result.error)
+    }
+
+    if (process.env.STRAPI_TOKEN) {
+        result.data.allSqueakProfile.nodes.forEach((node) => {
+            const slug = `/${node.user.data.attributes.email.split('@')[0].replaceAll('.', '')}`
+            createRedirect({
+                fromPath: slug,
+                toPath: `/community/profiles/${node.squeakId}`,
+            })
+        })
     }
 
     /**
