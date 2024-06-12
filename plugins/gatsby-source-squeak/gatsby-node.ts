@@ -25,16 +25,14 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     page,
                     pageSize: 100,
                 },
-                populate: ['avatar', 'teams', 'leadTeams', 'user'],
+                populate: ['avatar', 'teams', 'leadTeams'],
             },
             {
                 encodeValuesOnly: true, // prettify URL
             }
         )
 
-        const profiles = await fetch(`${apiHost}/api/profiles?${profileQuery}`, {
-            ...(process.env.STRAPI_TOKEN ? { headers: { Authorization: `Bearer ${process.env.STRAPI_TOKEN}` } } : {}),
-        }).then((res) => res.json())
+        const profiles = await fetch(`${apiHost}/api/profiles?${profileQuery}`).then((res) => res.json())
 
         for (const profile of profiles.data) {
             const { avatar, ...profileData } = profile.attributes
