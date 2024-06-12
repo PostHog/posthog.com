@@ -146,7 +146,7 @@ Based on reviews from G2.com, customers use Mouseflow because:
 
 ### What is Sprig?
 
-Sprig is a user insights tool that combines surveys and session replays with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user event. It doesn't do funnel analysis or other basic analytics, focusing solely on in-product user research.
+[Sprig](/blog/best-sprig-alternatives) is a user insights tool that combines surveys and session replays with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user event. It doesn't do funnel analysis or other basic analytics, focusing solely on in-product user research.
 
 According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig) (Mar 2024), Sprig is used on 521 of the top 1 million websites, though this figure likely doesn't include apps that aren't accessible via the open web. It's used large, B2C companies such as PayPal, Coinbase, and Robinhood.
 
