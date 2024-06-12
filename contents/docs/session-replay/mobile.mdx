@@ -81,13 +81,13 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
 
 ### Limitations
 
-* Requires the PostHog Android SDK version >= [3.3.1](https://github.com/PostHog/posthog-android/releases) - use the latest version.
-* Requires Android API >= 26, otherwise it's a NoOp.
-* Jetpack Compose is only supported if the `screenshot` option is enabled.
-* Custom views is partly supported, and only fully supported if the `screenshot` option is enabled.
-* WebView is not supported, a placeholder will be shown.
-* Keyboard is not supported, a placeholder will be shown.
-* React Native and Flutter for Android aren't supported.
+- Requires the PostHog Android SDK version >= [3.3.1](https://github.com/PostHog/posthog-android/releases) - use the latest version.
+- Requires Android API >= 26, otherwise it's a NoOp.
+- Jetpack Compose is only supported if the `screenshot` option is enabled.
+- Custom views is partly supported, and only fully supported if the `screenshot` option is enabled.
+- WebView is not supported, a placeholder will be shown.
+- Keyboard is not supported, a placeholder will be shown.
+- React Native and Flutter for Android aren't supported.
 
 ## iOS
 
@@ -116,6 +116,7 @@ If you don't want to mask everything, you can disable the mask config above and 
 
 ### Limitations
 
+- Requires the PostHog iOS SDK version >= [3.5.1](https://github.com/PostHog/posthog-ios/releases) - use the latest version.
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/) is only supported if the `screenshotMode` option is enabled.
 - It's a representation of the user's screen, not a video recording nor a screenshot.
   - Custom views are not fully supported.
