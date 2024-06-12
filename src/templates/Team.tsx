@@ -162,7 +162,7 @@ const Stickers = ({ country, pineappleOnPizza, isTeamLead, isModerator, id, hand
     )
 }
 
-const Profile = (profile) => {
+export const Profile = (profile) => {
     const { firstName, lastName, country, companyRole, pineappleOnPizza, biography, isTeamLead, id } = profile
     const name = [firstName, lastName].filter(Boolean).join(' ')
     return (

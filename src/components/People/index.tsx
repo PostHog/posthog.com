@@ -2,7 +2,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { kebabCase } from 'lib/utils'
-import React from 'react'
+import React, { useState } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
@@ -11,16 +11,18 @@ import { SEO } from '../seo'
 import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
 import { StaticImage } from 'gatsby-plugin-image'
 import ReactMarkdown from 'react-markdown'
+import SideModal from 'components/Modal/SideModal'
+import { Profile } from '../../templates/Team'
 
-export const TeamMember = (teamMember) => {
-    const { avatar, lastName, firstName, companyRole, country, squeakId, location, biography } = teamMember
+export const TeamMember = (props) => {
+    const { avatar, lastName, firstName, companyRole, country, squeakId, location, biography, setActiveProfile } = props
     const name = [firstName, lastName].filter(Boolean).join(' ')
 
     return (
         <li className="h-40 relative @container group click [perspective:1000px]">
-            <Link
-                to={`/community/profiles/${squeakId}`}
-                className={`flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark w-full transition-transform preserve-3d ${
+            <button
+                onClick={() => setActiveProfile({ ...props, id: squeakId })}
+                className={`flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark w-full transition-transform preserve-3d text-left ${
                     biography ? 'group-hover:[transform:rotateY(-180deg)]' : ''
                 }`}
             >
@@ -68,7 +70,7 @@ export const TeamMember = (teamMember) => {
                         <div className="bg-gradient-to-t from-accent dark:from-accent-dark to-transparent absolute inset-0 w-full h-full" />
                     </div>
                 </div>
-            </Link>
+            </button>
         </li>
     )
 }
@@ -77,6 +79,8 @@ export default function People() {
     const {
         team: { teamMembers },
     } = useStaticQuery(teamQuery)
+
+    const [activeProfile, setActiveProfile] = useState(false)
 
     const teamSize = teamMembers.length - 1
 
@@ -107,7 +111,9 @@ export default function People() {
     return (
         <Layout>
             <SEO title="Team - PostHog" />
-
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                <Profile {...activeProfile} />
+            </SideModal>
             <div className="flex flex-col xl:flex-row gap-8 pt-10 md:pb-3 px-8 2xl:px-4 3xl:p-0 max-w-screen-2xl mx-auto">
                 <div className="flex-1">
                     <h2 className="text-4xl">People</h2>
@@ -168,7 +174,7 @@ export default function People() {
             </div>
             <ul className="list-none pt-16 pb-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl mx-auto px-8 2xl:px-4 3xl:p-0">
                 {teamMembers.map((teamMember, index) => {
-                    return <TeamMember key={index} {...teamMember} />
+                    return <TeamMember key={index} {...teamMember} setActiveProfile={setActiveProfile} />
                 })}
             </ul>
         </Layout>
