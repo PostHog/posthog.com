@@ -10,7 +10,7 @@ As Support Hero, your job is to investigate and resolve issues reported by custo
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-[Marcus](/community/profiles/1036), our Support Engineer, triages tickets for the Product Analytics and Pipeline team, due to the high volume of tickets those teams get. He will resolve tickets if possible, and escalate to the engineering team responsible if he needs further help.
+<TeamMember name="Marcus Hof" />, our Support Engineer, triages tickets for the Product Analytics and Pipeline team, due to the high volume of tickets those teams get. He will resolve tickets if possible, and escalate to the engineering team responsible if he needs further help.
 
 ## When is my turn?
 
