@@ -15,7 +15,7 @@ tags:
 ## tl;dr
 
 * It is now possible to use PostHog's product and web analytics for up to ~12x less, depending on your volumes
-* This change applies to all existing and new customers for any events that have no person properties set
+* This change applies to all existing and new customers for any events where we don't do person property processing
 * The average customer can save X%
 * We are intending on more price cuts, this is the start!
 
