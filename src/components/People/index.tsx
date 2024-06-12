@@ -26,15 +26,15 @@ export const TeamMember = (props) => {
                     biography ? 'group-hover:[transform:rotateY(-180deg)]' : ''
                 }`}
             >
-                <div className="flex flex-col justify-between px-6 py-4 w-full mr-32 xl:mr-40 absolute h-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
-                    <div>
+                <div className="flex flex-col justify-between px-4 md:px-6 py-4 w-full absolute h-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                    <div className="mr-32 xl:mr-40">
                         <h3
-                            className="mb-0 text-[15px] @sm:text-base @md:text-[17px] leading-tight"
+                            className="mb-0.5 text-[15px] @sm:text-base @md:text-[17px] leading-tight"
                             id={kebabCase(name) + '-' + kebabCase(companyRole)}
                         >
                             {name}
                         </h3>
-                        <p className="text-primary/50 text-sm @md:text-[15px] @lg:text-base dark:text-primary-dark/50">
+                        <p className="text-primary/50 text-sm @md:text-[15px] @lg:text-base dark:text-primary-dark/50 leading-tight">
                             {companyRole}
                         </p>
                     </div>
@@ -66,7 +66,7 @@ export const TeamMember = (props) => {
                         />
                     </figure>
                     <div className="overflow-hidden absolute h-full w-full inset-0 p-4 bg-accent dark:bg-accent-dark">
-                        <ReactMarkdown>{biography}</ReactMarkdown>
+                        <ReactMarkdown className="text-sm [&_p]:text-sm [&_p]:mb-2">{biography}</ReactMarkdown>
                         <div className="bg-gradient-to-t from-accent dark:from-accent-dark to-transparent absolute inset-0 w-full h-full" />
                     </div>
                 </div>
@@ -114,7 +114,7 @@ export default function People() {
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 <Profile {...activeProfile} />
             </SideModal>
-            <div className="flex flex-col xl:flex-row gap-8 pt-10 md:pb-3 px-8 2xl:px-4 3xl:p-0 max-w-screen-2xl mx-auto">
+            <div className="flex flex-col xl:flex-row gap-8 pt-10 md:pb-3 px-4 md:px-8 2xl:px-4 3xl:p-0 max-w-screen-2xl mx-auto">
                 <div className="flex-1">
                     <h2 className="text-4xl">People</h2>
 
@@ -172,7 +172,7 @@ export default function People() {
                     </div>
                 </aside>
             </div>
-            <ul className="list-none pt-16 pb-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl mx-auto px-8 2xl:px-4 3xl:p-0">
+            <ul className="list-none pt-16 pb-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl mx-auto px-4 md:px-8 2xl:px-4 3xl:p-0">
                 {teamMembers.map((teamMember, index) => {
                     return <TeamMember key={index} {...teamMember} setActiveProfile={setActiveProfile} />
                 })}

@@ -189,11 +189,20 @@ export const Profile = (profile) => {
             {biography ? (
                 <Markdown>{biography}</Markdown>
             ) : (
-                <p>{firstName} has been too busy writing code to fill out a bio!</p>
+                <p className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-4 text-sm">
+                    {firstName} has been too busy writing code to fill out a bio!
+                </p>
             )}
-            <CallToAction to={`/community/profiles/${id}`} type="secondary" size="sm">
-                View full profile
-            </CallToAction>
+            <div className="mt-4">
+                <CallToAction
+                    to={`/community/profiles/${id}`}
+                    type="secondary"
+                    size="sm"
+                    width="full [&_span]:w-[calc(100%_+_3px)]"
+                >
+                    Visit full profile
+                </CallToAction>
+            </div>
         </div>
     )
 }
