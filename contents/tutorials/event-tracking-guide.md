@@ -8,9 +8,9 @@ featuredVideo: https://www.youtube-nocookie.com/embed/LIJ_TuyMq74
 tags: ['actions', 'events', 'product os', 'product analytics']
 ---
 
-Event tracking is the first step in improving your product (after building it). It is the process of capturing user interaction and behavioral data to understand product usage and make improvements. Beyond usage, event tracking is used by growth teams to do experimentation, marketers to track attribution, engineers to understand performance, and more.  
+Event tracking is the first step in improving your product. It enables you to understand how users are interacting with your app by capturing interaction and behavioral data. This helps you figure out how best to improve it.
 
-At PostHog, we offer two ways to track events: [autocapture](/docs/product-analytics/autocapture) and custom events. This tutorial addresses both, starting by walking through autocapture setup, diving deeper into custom events, and finally refining those custom events to capture the right data you need.
+At PostHog, we offer two ways to track events: [autocapture](/docs/product-analytics/autocapture) and [custom events](/docs/product-analytics/capture-events). This tutorial addresses both, starting by walking through autocapture setup, then diving deeper into custom events, and finally refining those custom events to capture the data you need.
 
 ## Setting up autocapture
 
@@ -29,11 +29,11 @@ The fastest way to set up autocapture is to copy the snippet below and paste it 
 
 Once setup, this autocaptures events like clicks, change of inputs, or submission of **`a`**, **`button`**, **`form`**, **`input`**, **`select`**, **`textarea`**, and **`label`** tags. Those events flow automatically into PostHog for you to see and analyze.
 
-> Autocapture can also capture non-event data like session duration, mouse movement, bounce rate, performance, and more. You can learn more about this in the [autocapture docs](/docs/product-analytics/autocapture).
+Autocapture can also capture non-event data like session duration, mouse movement, bounce rate, performance, and more. You can learn more about this in the [autocapture docs](/docs/product-analytics/autocapture).
 
 ## Autocapture’s limitations
 
-Although autocapture is a great way to get started, we realized it isn't enough for advanced event tracking. This is for three reasons:
+Although autocapture is a great way to get started, it can be limiting for more advanced event tracking. This is for three reasons:
 
 1. **Lack of signal**. Since autocapture captures everything, it can be difficult to know what events matter, especially for high-traffic sites and apps. You need to have an idea of what you care about and then use filters, [actions](/docs/data/actions), and [insights](/docs/product-analytics/insights) to focus on it. The web analytics dashboard does this well.
 
@@ -43,9 +43,9 @@ Although autocapture is a great way to get started, we realized it isn't enough 
 
 ## Setting up custom events
 
-On top of autocapture, PostHog enables you to set up custom events in your product. This enables you to capture whatever data you want wherever in your codebase. This ensures correct and comprehensive event tracking.
+In addition to autocapture, PostHog enables you to set up custom events in your product. This enables you to capture whatever data you want wherever in your codebase. This ensures correct and comprehensive event tracking.
 
-To set up custom events, first, you need to install the SDK for the language you are using. We have built SDKs for a range of languages and frameworks including [Node](/docs/libraries/node), [Python](/docs/libraries/python), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and more. You can even use our [capture API](/docs/api/capture) directly.
+To set up custom events, first you need to install the SDK for the language you are using. We have built SDKs for a range of languages and frameworks including [Node](/docs/libraries/node), [Python](/docs/libraries/python), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and more. You can even use our [capture API](/docs/api/capture) directly.
 
 For example, with Python (and frameworks like [Django](/docs/libraries/django) or [Flask](/docs/libraries/flask)), setting up custom events starts with installing the PostHog with `pip` (or your package manager of choice). 
 
@@ -83,7 +83,7 @@ Adding more of these capture calls in the right places in your codebase creates 
 
 ## Getting custom events right
 
-Once you send some custom events, it is time to refine those events to capture the data you want. Getting this right requires multiple steps:
+Once you send some custom events, it's time to refine those events to capture the data you want. Getting this right requires multiple steps:
 
 1. Start with your product goals, which inform what data is needed about users and their behavior.
  
@@ -99,7 +99,7 @@ To best capture data about users, you must understand who they are.
 
 Every event you capture must have a user distinct ID. Autocapture handles this for you, while custom events require you to do this yourself. Examples of identifiers for users include `UUID` values and emails.
 
-To connect an anonymous user distinct ID created by autocapture with a user distinct ID you created, you can use the `identify` method:
+To connect an anonymous user distinct ID created by autocapture with a user distinct ID you created, you can use the [`identify`])(/docs/product-analytics/identify)  method:
 
 ```js
 function loginRequest(user) {
@@ -110,7 +110,7 @@ function loginRequest(user) {
 }
 ```
 
-[Identifying users](/docs/product-analytics/identify) enables you to track users across sessions and devices as well as use [person profiles and properties](/docs/getting-started/user-properties) in your analysis. 
+Identifying users enables you to track users across sessions and devices as well as use [person profiles and properties](/docs/getting-started/user-properties) in your analysis. 
 
 ### 2. Properties
 
