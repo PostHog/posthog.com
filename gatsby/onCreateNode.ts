@@ -294,6 +294,8 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             await getAshbyLocationName(node.locationIds.primaryLocationId),
             ...(await Promise.all(node.locationIds.secondaryLocationIds.map((id) => getAshbyLocationName(id)))),
         ]
+            .map((location) => location.replace(/\(|\)|remote/gi, '').trim())
+            .filter(Boolean)
         createNodeField({
             node,
             name: 'locations',

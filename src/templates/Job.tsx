@@ -143,7 +143,11 @@ export default function Job({
                                 {departmentName?.toLowerCase() !== 'speculative' && (
                                     <Detail title="Department" value={departmentName} icon={<Department />} />
                                 )}
-                                <Detail title="Location" value={locations.join(', ')} icon={<Location />} />
+                                <Detail
+                                    title="Location"
+                                    value={`Remote${locations?.length > 0 ? ` (${locations.join(', ')})` : ''}`}
+                                    icon={<Location />}
+                                />
                                 {timezone && <Detail title="Timezone(s)" value={timezone} icon={<Timezone />} />}
                             </ul>
                             <div className="job-content mt-12 w-full flex-shrink-0 transition-all">
