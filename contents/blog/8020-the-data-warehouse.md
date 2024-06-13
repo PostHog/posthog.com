@@ -4,7 +4,7 @@ date: 2024-06-13
 author: 
  - james-greenhill
  - ian-vanagas
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/warehog_f318a079bf.png
 featuredImageType: full
 tags:
   - Engineering
