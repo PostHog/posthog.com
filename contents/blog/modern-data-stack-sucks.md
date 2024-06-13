@@ -81,7 +81,7 @@ Series A is where data begins to get serious. By serious, I mean:
 
 Whoever gets the thankless responsibility of maintaining the data stack sees their goal as empowering engineers with data to evaluate the success of what they build. To do this, they implement the so-called "modern data stack" which contains:
 
-1. A data warehouse to store all the data and act as a single source of truth. Options include Snowflake, BigQuery, and RedShift.
+1. A [data warehouse](/blog/8020-the-data-warehouse) to store all the data and act as a single source of truth. Options include Snowflake, BigQuery, and RedShift.
 
 2. An ETL pipeline to extract data from different sources, transform it, and load it into the warehouse. Options include Fivetran, Integrate.io, and Airbyte.
 
