@@ -23,7 +23,9 @@ PostHog provides options to capture fewer events and limit the number of unwante
 
 ## Configuring autocapture
 
-Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. 
+Autocapture is one of the most powerful event-capturing tools we offer. It automatically captures a number of interactions that happen on your site - without you having to manually se them up for capture. Instead of wondering how something is used, setting up manual events, and waiting a week for results - you can simply use the autocaptured events to get you the data you need right now. 
+
+However, because so many interactions are tracked, it can lead to large numbers of events. 
 
 To counteract this, autocapture is configurable. For example, you can use the frontend JavaScript library without enabling autocapture. Just set `autocapture` to `false` when initializing the library (this still captures `pageview` and `pageleave`).
 
