@@ -1604,7 +1604,7 @@ export const docsMenu = {
                             url: '/docs/api/funnel',
                         },
                         {
-                            name: 'Group analytics',
+                            name: 'Groups',
                             url: '/docs/api/groups',
                         },
                         {
