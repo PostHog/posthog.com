@@ -1107,8 +1107,8 @@ export const docsMenu = {
                             url: '/docs/getting-started/identify-users',
                         },
                         {
-                            name: 'User properties',
-                            url: '/docs/getting-started/user-properties',
+                            name: 'Person properties',
+                            url: '/docs/getting-started/person-properties',
                         },
                         {
                             name: 'Actions & insights',
@@ -1437,7 +1437,7 @@ export const docsMenu = {
                             url: '/docs/data/timestamps',
                         },
                         {
-                            name: 'User properties',
+                            name: 'Person properties',
                             url: '/docs/data/user-properties',
                         },
                         {
@@ -1984,8 +1984,8 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Setting user properties',
-                    url: '/docs/product-analytics/user-properties',
+                    name: 'Setting person properties',
+                    url: '/docs/product-analytics/person-properties',
                     icon: 'IconProfile',
                     color: 'seagreen',
                 },

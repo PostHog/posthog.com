@@ -79,7 +79,7 @@ const features = [
     {
         title: 'Developer-friendly automation',
         description:
-            'Automated usage reports, IP address resolution (for location-based targeting), and recall user properties to avoid passing them manually every time',
+            'Automated usage reports, IP address resolution (for location-based targeting), and recall person properties to avoid passing them manually every time',
         image: <StaticImage src="./images/reports.png" width={420} />,
         border: true,
     },
@@ -210,7 +210,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Target by user properties',
+        feature: 'Target by person properties',
         companies: {
             LaunchDarkly: true,
             Optimizely: true,
@@ -310,7 +310,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Recall user properties by default',
+        feature: 'Recall person properties by default',
         companies: {
             LaunchDarkly: false,
             Optimizely: false,
