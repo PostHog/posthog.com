@@ -563,6 +563,8 @@ const PlansTabs = () => {
                         <div className="px-2 pb-2 border-b border-light dark:border-dark">&nbsp;</div>
                         <div className="@xl:col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
                             <strong>Totally free</strong>
+                            <br />
+                            <span className="text-green font-semibold text-sm">(This plan)</span>
                         </div>
                         <div className="@xl:col-span-2 pl-2 pb-2 border-b border-light dark:border-dark text-opacity-70">
                             <strong>Ridiculously cheap</strong>
@@ -630,7 +632,13 @@ const PlansTabs = () => {
                                 <IconInfo className="size-4 inline-block" />
                             </Tooltip>
                         </div>
-                        <div className="@xl:col-span-2">Limited</div>
+                        <div className="@xl:col-span-2">
+                            Limited
+                            <br />
+                            <div className="pt-2">
+                                <PlanCTA />
+                            </div>
+                        </div>
                         <div className="@xl:col-span-2">Available</div>
                     </div>
                 </>
@@ -645,7 +653,7 @@ const PlansTabs = () => {
                     <p className="text-sm inline-flex rounded-sm bg-yellow/50 py-0.5 px-1">
                         86% of customers use this plan
                     </p>
-                    <ul className="tw-check-bullets @lg:columns-2">
+                    <ul className="tw-check-bullets @lg:columns-2 pb-2">
                         <li>Usage-based pricing</li>
                         <li>Generous monthly free tier</li>
                         <li>Up to 6 projects</li>
@@ -654,6 +662,7 @@ const PlansTabs = () => {
                         <li>Unlimited team members</li>
                         <li>Unlimited tracked users</li>
                     </ul>
+                    <PlanCTA />
                 </>
             ),
         },
@@ -963,12 +972,27 @@ const PricingExperiment = ({
                                         </SidebarListItem>
                                         <SidebarListItem>
                                             If something stupid happens, like you get an unexpected bill and you’re
-                                            unhappy, we’ll pretty much always refund it.
+                                            unhappy, we’ll pretty much always refund it!
                                         </SidebarListItem>
                                     </SidebarList>
                                 </div>
                             </SectionSidebar>
                         </SectionColumns>
+                    </SectionLayout>
+
+                    <SectionLayout>
+                        <div className="bg-accent dark:bg-accent-dark p-4 pb-6 md:pb-4 rounded border border-light dark:border-dark flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
+                            <div>
+                                <h3 className="mb-1 text-xl">Give PostHog a try</h3>
+                                <p className="mb-0 text-[15px]">
+                                    No need to pick a plan - try our free version and decide if you want advanced
+                                    features later!
+                                </p>
+                            </div>
+                            <div>
+                                <PlanCTA />
+                            </div>
+                        </div>
                     </SectionLayout>
 
                     <SectionLayout>
@@ -1131,6 +1155,18 @@ const PricingExperiment = ({
                                         </>
                                     ))}
                             </div>
+                            <div className="grid grid-cols-16 min-w-[1000px]">
+                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">&nbsp;</div>
+                                <div className="col-span-4 px-3 py-2">
+                                    <PlanCTA />
+                                </div>
+                                <div className="col-span-4 px-3 py-2">
+                                    <PlanCTA />
+                                </div>
+                                <div className="col-span-4 px-3 py-2">
+                                    <PlanCTA ctaText="Get in touch" ctaLink="/talk-to-a-human" />
+                                </div>
+                            </div>
                         </div>
                     </section>
 
@@ -1215,6 +1251,12 @@ const PricingExperiment = ({
                                 </Tooltip>
                             </li>
                         </ul>
+                        <p className="mb-4">
+                            If this all sounds good, give it a try for yourself – <em>no credit card required</em>.
+                        </p>
+                        <p>
+                            <PlanCTA />
+                        </p>
                         <p>
                             If you need more info,{' '}
                             <button
