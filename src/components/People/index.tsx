@@ -2,7 +2,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { kebabCase } from 'lib/utils'
-import React from 'react'
+import React, { useState } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
@@ -10,26 +10,31 @@ import Layout from 'components/Layout'
 import { SEO } from '../seo'
 import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
 import { StaticImage } from 'gatsby-plugin-image'
+import ReactMarkdown from 'react-markdown'
+import SideModal from 'components/Modal/SideModal'
+import { Profile } from '../../templates/Team'
 
-export const TeamMember = (teamMember) => {
-    const { avatar, lastName, firstName, companyRole, country, squeakId, location, compact } = teamMember
+export const TeamMember = (props) => {
+    const { avatar, lastName, firstName, companyRole, country, squeakId, location, biography, setActiveProfile } = props
     const name = [firstName, lastName].filter(Boolean).join(' ')
 
     return (
-        <li className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded h-40 relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] @container">
-            <Link
-                to={`/community/profiles/${squeakId}`}
-                className="flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
+        <li className="h-40 relative @container group click [perspective:1000px]">
+            <button
+                onClick={() => setActiveProfile({ ...props, id: squeakId })}
+                className={`flex justify-between h-full relative text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark w-full transition-transform preserve-3d text-left ${
+                    biography ? 'group-hover:[transform:rotateY(-180deg)]' : ''
+                }`}
             >
-                <div className="flex flex-col justify-between px-6 py-4 w-full mr-32 xl:mr-40">
-                    <div>
+                <div className="flex flex-col justify-between px-4 md:px-6 py-4 w-full absolute h-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                    <div className="mr-32 xl:mr-40">
                         <h3
-                            className="mb-0 text-[15px] @sm:text-base @md:text-[17px] leading-tight"
+                            className="mb-0.5 text-[15px] @sm:text-base @md:text-[17px] leading-tight"
                             id={kebabCase(name) + '-' + kebabCase(companyRole)}
                         >
                             {name}
                         </h3>
-                        <p className="text-primary/50 text-sm @md:text-[15px] @lg:text-base dark:text-primary-dark/50">
+                        <p className="text-primary/50 text-sm @md:text-[15px] @lg:text-base dark:text-primary-dark/50 leading-tight">
                             {companyRole}
                         </p>
                     </div>
@@ -40,18 +45,32 @@ export const TeamMember = (teamMember) => {
                             {country === 'world' ? 'Planet Earth' : location || country}
                         </span>
                     </span>
+                    <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0">
+                        <img
+                            src={
+                                avatar?.url ||
+                                'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
+                            }
+                            className="w-[200px]"
+                        />
+                    </figure>
                 </div>
-
-                <figure className="m-0 -mt-8 p-0 absolute right-0 bottom-0">
-                    <img
-                        src={
-                            avatar?.url ||
-                            'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-                        }
-                        className="w-[200px]"
-                    />
-                </figure>
-            </Link>
+                <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(-180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                    <figure className="m-0 -mt-8 p-0 absolute left-0 bottom-0 [transform:rotateY(-180deg)]">
+                        <img
+                            src={
+                                avatar?.url ||
+                                'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
+                            }
+                            className="w-[200px] grayscale brightness-0 opacity-20"
+                        />
+                    </figure>
+                    <div className="overflow-hidden absolute h-full w-full inset-0 p-4 bg-accent dark:bg-accent-dark">
+                        <ReactMarkdown className="text-sm [&_p]:text-sm [&_p]:mb-2">{biography}</ReactMarkdown>
+                        <div className="bg-gradient-to-t from-accent dark:from-accent-dark to-transparent absolute inset-0 w-full h-full" />
+                    </div>
+                </div>
+            </button>
         </li>
     )
 }
@@ -60,6 +79,8 @@ export default function People() {
     const {
         team: { teamMembers },
     } = useStaticQuery(teamQuery)
+
+    const [activeProfile, setActiveProfile] = useState(false)
 
     const teamSize = teamMembers.length - 1
 
@@ -90,8 +111,10 @@ export default function People() {
     return (
         <Layout>
             <SEO title="Team - PostHog" />
-
-            <div className="flex flex-col xl:flex-row gap-8 pt-10 md:pb-3 px-8 2xl:px-4 3xl:p-0 max-w-screen-2xl mx-auto">
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                <Profile {...activeProfile} />
+            </SideModal>
+            <div className="flex flex-col xl:flex-row gap-8 pt-10 md:pb-3 px-4 md:px-8 2xl:px-4 3xl:p-0 max-w-screen-2xl mx-auto">
                 <div className="flex-1">
                     <h2 className="text-4xl">People</h2>
 
@@ -149,9 +172,9 @@ export default function People() {
                     </div>
                 </aside>
             </div>
-            <ul className="list-none pt-16 pb-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl mx-auto px-8 2xl:px-4 3xl:p-0">
+            <ul className="list-none pt-16 pb-8 m-0 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl mx-auto px-4 md:px-8 2xl:px-4 3xl:p-0">
                 {teamMembers.map((teamMember, index) => {
-                    return <TeamMember key={index} {...teamMember} />
+                    return <TeamMember key={index} {...teamMember} setActiveProfile={setActiveProfile} />
                 })}
             </ul>
         </Layout>
@@ -169,6 +192,7 @@ export const teamQuery = graphql`
                 avatar {
                     url
                 }
+                biography
                 lastName
                 firstName
                 companyRole

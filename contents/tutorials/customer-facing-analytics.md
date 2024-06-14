@@ -294,7 +294,7 @@ const trendsParams = new URLSearchParams();
       ]
     }
   ));
-  const trendsUrl = `<ph_client_api_host>/api/projects/<project_id>/insights/trend?${trendsParams}`;
+  const trendsUrl = `<ph_app_host>/api/projects/<project_id>/insights/trend?${trendsParams}`;
   
   const trendsRequest = await fetch(trendsUrl, {
     method: 'GET',

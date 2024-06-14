@@ -76,7 +76,7 @@ For example, to get a count of the most common `event` values, you can make a re
 <MultiLanguage>
 
 ```bash
-curl -X POST "https://us.posthog.com/api/projects/:project_id/query" \
+curl -X POST "<ph_app_host>/api/projects/:project_id/query" \
      -H "Content-Type: application/json" \
      -H "Authorization: Bearer <personal_api_key>" \
      -d '{
@@ -103,7 +103,7 @@ data = {
 }
 
 response = requests.post(
-    '<ph_client_api_host>/api/projects/:project_id/query', 
+    '<ph_app_host>/api/projects/:project_id/query', 
     headers=headers, 
     json=data
 )

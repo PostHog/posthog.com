@@ -1512,3 +1512,7 @@ li.squeak-left-border {
     -webkit-appearance: none;
     margin: 0;
 }
+
+.preserve-3d {
+    transform-style: preserve-3d;
+}
