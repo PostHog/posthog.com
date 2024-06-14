@@ -81,7 +81,7 @@ With this knowledge in mind, we started looking into why we were receiving mutat
 
 Presumably, if the mutations were being sent up, the snapshot code must've already run. The mutations depend entirely on the snapshot existing in memory, so it didn't make sense that there was no full snapshot.
 
-After a day or so of pounding our heads on the keyboard, we realized that most of the missing recording cases were on single page applications. With this clue in mind, and knowing that RRWeb takes a full-snapshot on page load, it didn't take long to realize the cause. 
+After a day or so of pounding our heads on the keyboard, we realized that most of the missing recording cases were on single-page applications. With this clue in mind, and knowing that RRWeb takes a full-snapshot on page load, it didn't take long to realize the cause. 
 
 We were splitting recordings when a user was inactive for 30 minutes (so users don't see a 10-hour long recording). But when the split happened, we were not taking a new full snapshot.
 

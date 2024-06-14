@@ -28,7 +28,7 @@ Product OS comprises things like:
 
 - Collaboration features like [Notebooks](/docs/notebooks), which enable you to analyze data from all PostHog products in a single document you can share and collaborate on with teammates
 
-- Built-in [data management tools](/docs/data), where you can define and organize events, user properties, data tables, and audit changes made by colleagues
+- Built-in [data management tools](/docs/data), where you can define and organize events, person properties, data tables, and audit changes made by colleagues
 
 - [Data pipelines](/docs/cdp), which enable you to enrich your PostHog data from other sources, and integrate PostHog with other tools for marketing automation, sales, and support
 
