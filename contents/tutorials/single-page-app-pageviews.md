@@ -1,11 +1,11 @@
 ---
-title: Tracking pageviews in single page apps (SPA)
+title: Tracking pageviews in single-page apps (SPA)
 sidebar: Docs
 showTitle: true
 author:
   - ian-vanagas
   - yakko-majuri
-date: 2022-10-17
+date: 2024-06-11
 featuredVideo: 'https://www.youtube-nocookie.com/embed/I_WJc8T5lL8'
 tags:
   - configuration
@@ -13,296 +13,255 @@ tags:
   - product analytics
 ---
 
-_Estimated reading time: 12 minutes_ ☕☕
+A single-page application (or SPA) dynamically loads content for new pages using JavaScript instead of loading new pages from the server. Ideally, this enables users to navigate around the app without waiting for new pages to load, providing a seamless user experience.
 
-A single page application (or SPA) is an app that lives on a single page. Users can navigate around the app and change the content without having to load new pages. Single page apps rely heavily on caching and components like loading screens compared to other types of apps like progressive web apps.
+PostHog's JavaScript Web SDK automatically captures pageview events on page load. The problem with SPAs is that **page loads don't happen beyond the initial one**. This means user navigation in your SPA isn't tracked.
 
-Single page apps come with some unique challenges. A big one is that since pages don’t need to be reloaded to change, pageviews are often not captured properly. Developers of single page apps need to set up custom events to trigger pageviews at the right time.
+To fix this, you can implement pageview capture manually using custom events. This tutorial shows you how to do this for the most popular SPA frameworks like [Next.js](#tracking-pageviews-in-nextjs-app-router), [Vue](#tracking-pageviews-in-vue), [Svelte](#tracking-pageviews-in-svelte), and [Angular](#tracking-pageviews-in-angular). 
 
-In this tutorial, we’ll be creating a single page app, setting up PostHog, then providing multiple ways to capture pageviews. This includes triggering events on page renders, using the router, and watching for component visibility on scroll.
+> **Prerequisite:** Each of these requires you to have an app created and PostHog installed. To install the [PostHog JavaScript Web SDK](/docs/libraries/js), run the following command for the package manager of your choice:
+>
+> ```bash
+> yarn add posthog-js
+> # or
+> npm install --save posthog-js
+> # or
+> pnpm add posthog-js
+> ```
 
-> **Note:** although we’ll be using React for this tutorial, it is relevant to other web SPA frameworks (like Vue, Svelte, or Meteor), mobile apps (Android, iOS), and apps with non-standard navigation. You can find our full list of [client libraries here](/docs/integrate#client-libraries).
-> 
+## Tracking pageviews in Next.js (app router)
 
-## Setting up a single page app in React
-
-We’ll start by setting up a basic React app with a router and a couple of pages. To start, go to the command line (or terminal), create a folder for our project, then create the react app (named `spa_client`), and start the app. 
-
-```bash
-mkdir spa_pageview_app
-cd spa_pageview_app
-npx create-react-app spa_client
-cd spa_client
-npm start
-```
-
-If successful, going to `localhost:3000` should show you the React logo.
-
-Next, we’ll install the packages we need for the router and PostHog. Back in your terminal install `posthog-js` and `react-router-dom`
-
-```bash
-npm install --save posthog-js
-npm install --save react-router-dom
-```
-
-Once we’ve done this, we can start to work on the content of the application, and routing between each of the pages.
-
-### Setting up the router and pages
-
-First, in `src/index.js` we’ll import `BrowerRouter` and then wrap our app in it. The `BrowserRouter` will turn our component into a single page app so we can add multiple pages. Your `index.js` file should look like this (we’ve removed some unnecessary code like `css` and `webVitals` for now):
+To add PostHog to your [Next.js app](/docs/libraries/next-js), we start by creating the `PostHogProvider` component in the `app` folder. We set `capture_pageview: false` because we will manually capture pageviews.
 
 ```js
-// src/index.js
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import { BrowserRouter } from 'react-router-dom'; // new
+// app/providers.js
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter> {/* new */}
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
-);
+if (typeof window !== 'undefined') {
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    person_profiles: 'identified_only',
+    capture_pageview: false
+  })
+}
+
+export function PHProvider({ children }) {
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
 ```
 
-Next, we’ll create a couple of basic pages as functions. Create `Home.js`, `About.js`, and `Benefits.js` all with a basic format like this (replace Home with the other names):
+To capture pageviews, we create another `pageview.js` component in the app folder.
 
 ```js
-// src/Home.js
-export function Home() {
+// app/pageview.js
+'use client'
+
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { usePostHog } from 'posthog-js/react';
+
+export default function PostHogPageView() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const posthog = usePostHog();
+  // Track pageviews
+  useEffect(() => {
+    if (pathname && posthog) {
+      let url = window.origin + pathname
+      if (searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`
+      }
+      posthog.capture(
+        '$pageview',
+        {
+          '$current_url': url,
+        }
+      )
+    }
+  }, [pathname, searchParams, posthog])
+  
+  return null
+}
+```
+
+Finally, we import both and put them together in the `app/layout.js` file.
+
+```js
+// app/layout.js
+import "./globals.css";
+import { PHProvider } from './providers'
+import dynamic from 'next/dynamic'
+
+const PostHogPageView = dynamic(() => import('./pageview'), {
+  ssr: false,
+})
+
+export default function RootLayout({ children }) {
   return (
-    <>
-      <h1>Home</h1>
-      <p>Welcome to the Home page</p>
-    </>
+    <html lang="en">
+      <PHProvider>
+        <body>
+          {children}
+          <PostHogPageView />
+        </body>
+      </PHProvider>
+    </html>
   );
 }
 ```
 
-Once you’ve done this, go to `App.js` and get rid of the boilerplate. We are going to add our routes and navigation to each of the routes here. You’ll need to import each of the pages we’ve created as well as `Routes`, `Route`, and `Link` from `react-router-dom`. We’ll add each of the pages as a route and a link in our nav. Once you’ve done all of this, your `App.js` file should look like this:
+Make sure to dynamically import the `PostHogPageView` component or the `useSearchParams` hook will deopt the entire app into client-side rendering. 
+
+## Tracking pageviews in Vue
+
+After creating a [Vue app](/docs/libraries/vue-js) and setting up the `vue-router`, create a new folder in the `src/components` named `plugins`. In this folder, create a file named `posthog.js`. This is where we initialize PostHog.
+
 
 ```js
-// src/App.js
-import { Route, Routes, Link } from 'react-router-dom';
-import { Home } from './Home';
-import { About } from './About';
-import { Benefits } from './Benefits'
+// src/plugins/posthog.js
+import posthog from "posthog-js";
 
-function App() {
-  return (
-    <>
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/benefits">Benefits</Link></li>
-        </ul>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/benefits" element={<Benefits />} />
-      </Routes>
-    </>
-  );
-}
-
-export default App;
+export default {
+  install(app) {
+    app.config.globalProperties.$posthog = posthog.init(
+      "<ph_project_api_key>",
+      {
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
+        capture_pageview: false
+      }
+    );
+  },
+};
 ```
 
-Once done, checking our local site again should give us a single page app with a few pages. Although basic, it’ll help us illustrate what you need to do to set up tracking and pageview events correctly.
-
-### Setting up PostHog
-
-Our last step before setting up correct pageview tracking in this SPA is setting up PostHog. To do this, go back to `index.js`, import PostHog (we installed it earlier), and initialize it using your project key and host.
+After this, you can add the plugin to the `main.js` file and use it along with the router to capture pageviews `afterEach` route change.
 
 ```js
-// index.js
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import { BrowserRouter } from 'react-router-dom';
-import posthog from 'posthog-js'; // new
+// src/main.js
+import { createApp, nextTick } from 'vue'
+import App from './App.vue'
+import router from './router'
+import posthogPlugin from '../plugins/posthog';
 
-posthog.init( // new
-	'<ph_project_api_key>', { api_host: '<ph_client_api_host>' }
-)
+const app = createApp(App);
+app.use(posthogPlugin).use(router).mount('#app');
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
-);
+router.afterEach((to, from, failure) => {
+  if (!failure) {
+    nextTick(() => {
+      app.config.globalProperties.$posthog.capture(
+        '$pageview', 
+        { path: to.fullPath }
+      );
+    });
+  }
+});
 ```
 
-Once we’ve initialized PostHog, autocaptured events should start flowing into our instance. We’ll also see that we have some `pageview` events, but clicking our nav links doesn’t trigger `pageview` events.
+## Tracking pageviews in Svelte
 
-![Missing pageviews](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/spa/no-tracking.png)
-
-Because this is a single page app, navigation does not trigger new `pageview` events. You see we clicked the button to go to the Benefits and About pages, but didn’t get `pageview` events for either of them. We will have to set up custom events to trigger them. In the next step, we’ll go over some ways to do this. 
-
-## Capturing pageviews
-
-Although autocapture does a lot we’ll have to write more code to capture pageviews in our single page app. We’ll go over a few ways of triggering the pageview events: the router, page render, and on visibility change. 
-
-### Method 1: router
-
-The first method is using the router. The router allows us to add functions that run every time the page changes. With `react-router-dom`, we can use `useLocation` for this. We’ll add a location variable we get from the router, and run a `useEffect` to trigger a pageview every time it changes.
-
-This is what it looks like in `App.js`
+If you haven't already, start by creating a `+layout.js` file for [your Svelte app](/docs/libraries/svelte) in your `src/routes` folder. In it, add the code to initialize PostHog.
 
 ```js
-// src/App.js
-import { Route, Routes, Link, useLocation } from 'react-router-dom'; // new
-import { Home } from './Home';
-import { About } from './About';
-import { Benefits } from './Benefits'
-import * as React from 'react'; // new
-import posthog from 'posthog-js'; // new
+// src/routes/+layout.js
+import posthog from 'posthog-js'
+import { browser } from '$app/environment';
 
-function App() {
-  let location = useLocation(); // new
+export const load = async () => {
 
-  React.useEffect(() => { // new
-    posthog.capture('$pageview')
-  }, [location]);
-
-  return (
-    <>
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/benefits">Benefits</Link></li>
-        </ul>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/benefits" element={<Benefits />} />
-      </Routes>
-    </>
-  );
-}
-
-export default App;
+  if (browser) {
+    posthog.init(
+      '<ph_project_api_key>',
+      {
+        api_host: '<ph_client_api_host>',
+        person_profiles: 'identified_only',
+        capture_pageview: false
+      }
+    )
+  }
+  return
+};
 ```
 
-Now when we move between pages, we’ll trigger pageviews on each.
+After that, create a `+layout.svelte` file in `src/routes`. In it, use the `afterNavigate` interceptor to capture pageviews.
 
-![Triggering pageviews](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/spa/tracking.png)
+```svelte
+<!-- src/routes/+layout.svelte -->
+<script>
+  import posthog from 'posthog-js'
+  import { browser } from '$app/environment';
+  import { beforeNavigate, afterNavigate } from '$app/navigation';
 
-> **Note:** other frameworks or languages have ways to “listen” for the changes in the router that we use to trigger a pageview event. For example, in Vue, you can set up a `watcher` and in Svelte, you can use the `navigating` store.
-> 
+  if (browser) {
+    afterNavigate(() => posthog.capture('$pageview'));
+  }
+</script>
 
-### Method 2: page render
+<slot></slot>
+```
 
-A more manual way to trigger pageview events is by setting them up to trigger every time a page is rendered. You may want to do this if you have a smaller number of pages and only want some of them to trigger pageview events. 
+## Tracking pageviews in Angular
 
-To set this up, add a `useEffect` hook to the page we want to capture. It should look like this:
+To start tracking pageviews in [Angular](/docs/libraries/angular), begin by initializing PostHog in `src/main.ts`.
 
 ```js
-// src/Benefits.js
-import posthog from 'posthog-js'; // new
-import React from "react"; // new
-
-export function Benefits() {
-  React.useEffect(() => { 
-    posthog.capture('$pageview') // new
-  }, [])
-  return (
-    <>
-      <h1>Benefits</h1>
-      <p>Welcome to the Benefits page</p>
-    </>
-  );
-}
-```
-
-Once this is done on each of the pages you want to trigger events, rendering that page will create a `pageview` event.
-
-### Method 3: visibility
-
-Many single page apps navigate through scrolling. As users scroll through the app new content, sections, and components are shown to them. This isn’t automatically captured with PostHog, but we can set up a way to capture it. We’ll do this by checking if the component is visible and triggering a pageview event if so.
-
-There are a few ways to trigger pageview events based on visibility, but we are just going to pick a simple one for this tutorial. We could use  [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) or set up [JQuery](https://stackoverflow.com/questions/123999/how-can-i-tell-if-a-dom-element-is-visible-in-the-current-viewport) to track when elements are in the viewport, but we will just install a [react-visibility-sensor](https://github.com/joshwnj/react-visibility-sensor) component. To start, we’ll install the module.
-
-```bash
-npm install react-visibility-sensor
-```
-
-Next, we’ll modify our `App.js` page a bit, so it is one long, scrollable page. We’ll add some tall `divs` to split up the page.
-
-```js
-// src/App.js
-import { Home } from './Home';
-import { About } from './About';
-import { Benefits } from './Benefits'
-
-function App() {
-  return (
-    <>
-      <Home />
-      <div style={{height: '50rem'}} />
-      <About />
-      <div style={{height: '50rem'}} />
-      <Benefits />
-    </>
-  );
-}
-
-export default App;
-```
-
-Finally, we’ll wrap each of the components in a `VisibilitySensor` and have the change trigger a pageview event.
-
-> **Note:** you can trigger whatever event you want, such as `screenview`, if you didn’t want to combine it with the autocaptured pageview events.
-> 
-
-```js
-// src/App.js
-import { Home } from './Home';
-import { About } from './About';
-import { Benefits } from './Benefits'
-import VisibilitySensor from 'react-visibility-sensor'; // new
+import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app/app.config';
+import { AppComponent } from './app/app.component';
 import posthog from 'posthog-js';
 
-function App() {
-	function onChange (isVisible) { // new
-    if (isVisible) posthog.capture('$pageview');
+posthog.init('<ph_project_api_key>',
+  {
+    api_host: '<ph_client_api_host>',
+    person_profiles: 'identified_only',
+    capture_pageview: false
   }
-  return (
-    <>
-      <VisibilitySensor onChange={onChange}>
-        <Home />
-      </VisibilitySensor>
-      <div style={{height: '50rem'}} />
-      <VisibilitySensor onChange={onChange}>
-        <About />
-      </VisibilitySensor>
-      <div style={{height: '50rem'}} />
-      <VisibilitySensor onChange={onChange}>
-        <Benefits />
-      </VisibilitySensor>
-    </>
-  );
-}
+);
 
-export default App;
+bootstrapApplication(AppComponent, appConfig)
+  .catch((err) => console.error(err));
 ```
 
-Scrolling the app will now trigger a pageview every time one of the components is visible. 
+After setting up your routes and router, you can capture pageviews by subscribing to `navigationEnd` events in `app.component.ts`.
 
-## Next steps
+```js
+import { Component } from '@angular/core';
+import { RouterOutlet, Router, Event, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import posthog from 'posthog-js';
 
-Now that we are capturing pageviews, we can figure out how users move around our app. For example, we could analyze and optimize our conversion funnel. [See a tutorial on how here](https://posthog.com/tutorials/funnels).
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  title = 'angular-spa';
 
-We can also track more events than just pageviews. The [event tracking guide](https://posthog.com/tutorials/event-tracking-guide) will provide you with all the details on how.
+  navigationEnd: Observable<NavigationEnd>;
 
-For more advanced PostHog users, you can use all of your new pageview data to help you build [an AARRR dashboard](https://posthog.com/blog/aarrr-pirate-funnel).
+  constructor(public router: Router) {
+    this.navigationEnd = router.events.pipe(
+      filter((event: Event) => event instanceof NavigationEnd)
+    ) as Observable<NavigationEnd>;
+  }
+
+  ngOnInit() {
+    this.navigationEnd.subscribe((event: NavigationEnd) => {
+      posthog.capture('$pageview');
+    });
+  }
+}
+```
+
+## Further reading
+
+- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+- [What engineers get wrong about analytics](/newsletter/misconceptions-about-analytics)
+- [Complete guide to event tracking](/tutorials/event-tracking-guide)
