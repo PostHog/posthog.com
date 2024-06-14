@@ -73,7 +73,7 @@ We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkom
 
 We use the Maxmind GeoIP2 City database, in which latitude and longitude are set to the detected city's geographical center. The data is not more precise than the city name field.
 
-If having city precision is too much, then you can use use the [property filter transformation](https://posthog.com/docs/cdp/property-filter). Note that this transformation adds event and person properties (`$set` and `$set_once`), so you'll want to add for example `$geoip_latitude`, `$set.$geoip_latitude` and `$set_once.$geoip_latitude` to the configuration.
+If having city precision is too much, then you can use use the [property filter transformation](/docs/cdp/property-filter). The GeoIP transformation adds event and person properties (`$set` and `$set_once`), so you'll want to filter those out as well. For example, if you are trying to filter `$geoip_latitude`, make sure to include `$set.$geoip_latitude` and `$set_once.$geoip_latitude` to the property filter configuration.
 
 <PostHogMaintained />
 
