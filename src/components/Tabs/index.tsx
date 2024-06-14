@@ -12,7 +12,7 @@ type Tab = {
 const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', activeClass }) => {
     return (
         <ul
-            className={`list-none m-0 flex flex-row gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 py-0 pt-2 md:px-4 xl:px-6 justify-between items-center ${className}`}
+            className={`list-none m-0 flex flex-row gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 py-0 pt-2 md:px-6 justify-between items-center ${className}`}
         >
             {tabs.map((tab, index) => {
                 const active = activeTab === index
@@ -27,7 +27,7 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
                                 active
                                     ? activeClass !== undefined
                                         ? activeClass
-                                        : 'font-bold bg-tan dark:bg-dark border border-b-tan dark:border-b-bg-dark border-light dark:border-dark rounded-tl rounded-tr'
+                                        : 'font-bold z-10 relative bg-tan dark:bg-dark border border-b-tan dark:border-b-bg-dark border-light dark:border-dark rounded-br-none rounded-bl-none'
                                     : 'rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all hover:-mt-1'
                             }`}
                         >
