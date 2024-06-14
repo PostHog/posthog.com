@@ -65,7 +65,7 @@ set property `$geoip_disable` to `true` on that event.
 
 We use the Maxmind GeoIP2 City database, in which latitude and longitude are set to the detected city's geographical center. The data is not more precise than the city name field.
 
-If having city precision is too much, then you can use use the [property filter transformation](/docs/cdp/property-filter). The GeoIP transformation adds event and person properties (`$set` and `$set_once`), so you'll want to filter those out as well. For example, if you are trying to filter `$geoip_latitude`, make sure to include `$set.$geoip_latitude` and `$set_once.$geoip_latitude` to the property filter configuration.
+If having city precision is too much, then you can use use the [property filter transformation](/docs/cdp/property-filter). The GeoIP transformation adds event and person properties (`$set` and `$set_once`), so you'll want to filter those out as well. For example, if you are trying to filter `$geoip_latitude`, make sure to include `$geoip_latitude` for the event property as well as`$set.$geoip_latitude` and `$set_once.$geoip_latitude` for the person properties to the property filter configuration.
 
 ### Is the source code for this transformation available?
 
