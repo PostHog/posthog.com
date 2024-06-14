@@ -1,5 +1,5 @@
 ---
-title: How to do cookieless tracking in PostHog
+title: How to do cookieless tracking with PostHog
 sidebar: Docs
 showTitle: true
 featuredImage: >-
