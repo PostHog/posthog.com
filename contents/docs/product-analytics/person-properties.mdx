@@ -30,7 +30,7 @@ Person properties are stored on [person profiles](/docs/data/persons#people-and-
 
 ### How to remove person properties
 
-Similarly to how you set properties, you can use `$unset` to remove properties from person profiles with any event and including an array of properties keys:
+Similarly to how you set properties, you can use `$unset` to remove properties from person profiles with any event and including an array of property keys:
 
 <MultiLanguage selector="tabs">
 
@@ -109,7 +109,7 @@ posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
 
 To view the person profile and properties for a particular person, go to [Persons & Groups](https://app.posthog.com/persons) in the PostHog app. Then, click on any person in the list to view their properties. 
 
-On a person's property list, you can add properties to them by clicking the "New property" button, then adding a key, type, and value. You can also delete a custom property for a user by clicking the red garbage bin icon on the right side of property listing.
+On a person's property list, you can add properties to them by clicking the "New property" button, and then adding a key, type, and value. You can also delete a custom property for a user by clicking the red garbage bin icon on the right side of the property listing.
 
 <ProductVideo
     videoLight = {viewUserPropertiesLight} 
@@ -140,13 +140,13 @@ PostHog attempts to set the following properties for all users when using the `p
 | `utm_medium` | UTM Medium | UTM medium tag (last-touch). | Social, Organic, Paid, Email |
 | `utm_source` | UTM Source | UTM source tag (last-touch). | Google, Bing, Twitter, Facebook |
 | `$browser` | Browser | Name of the browser the user has used. | Chrome, Firefox |
-| `$browser_version` | Browser Version | The version of the browser that was used. Used in combination with Browser. | 70, 79 |
+| `$browser_version` | Browser Version | The browser version used. Used in combination with Browser. | 70, 79 |
 | `$initial_browser` | Initial Browser | Name of the browser the user first used (first-touch). | Chrome, Firefox |
-| `$initial_browser_version` | Initial Browser Version | The version of the browser that the user first used (first-touch). Used in combination with Browser. | 70, 79 |
-| `$initial_current_url` | Initial Current URL | The first URL the user visited, including all the trimings. | https://example.com/interesting-article?parameter=true |
+| `$initial_browser_version` | Initial Browser Version | The browser version theuser first used (first-touch). Used in combination with Browser. | 70, 79 |
+| `$initial_current_url` | Initial Current URL | The first URL the user visited, including all the trimmings. | https://example.com/interesting-article?parameter=true |
 | `$initial_device_type` | Initial Device Type | The initial type of device that was used (first-touch). | Mobile, Tablet, Desktop |
 | `$initial_os` | Initial OS | The operating system that the user first used (first-touch). | Windows, Mac OS X |
-| `$initial_pathname` | Initial Path Name | The path of the Current URL, which means everything in the url after the domain. Data from the first time this user was seen. | /pricing, /about-us/team |
+| `$initial_pathname` | Initial Path Name | The path of the Current URL, which means everything in the URL after the domain. Data from the first time this user was seen. | /pricing, /about-us/team |
 | `$initial_referrer` | Initial Referrer URL | URL of where the user came from most recently (first-touch). Data from the first time this user was seen. | https://google.com/search?q=posthog&rlz=1C... |
 | `$initial_referring_domain` | Initial Referring Domain | Domain of where the user came from most recently (first-touch). Data from the first time this user was seen. | google.com, facebook.com |
 | `$initial_utm_campaign` | Initial UTM Campaign | UTM campaign tag (first-touch). | feature launch, discount |
