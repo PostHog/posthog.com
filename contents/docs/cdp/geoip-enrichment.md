@@ -69,6 +69,12 @@ PostHog is open-source and so are all transformations on the platform. The [sour
 
 We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Tim Glaser](https://github.com/timgl), [Michael Matloka](https://github.com/Twixes) and former team member [Paolo D'Amico](https://github.com/paolodamico) for creating the GeoIP Enricher. We miss you, Paolo!
 
+### How can I still get some geo data, but with less precision?
+
+We use the Maxmind GeoIP2 City database, in which lattitude and longitude are set to the detected city's geographical center. The data is not more precise than the city name field.
+
+If having city precision is too much, then you can use use the [property filter transformation](https://posthog.com/docs/cdp/property-filter). Note that this transformation adds event and person properties (`$set` and `$set_once`), so you'll want to add for example `$geoip_latitude`, `$set.$geoip_latitude` and `$set_once.$geoip_latitude` to the configuration.
+
 <PostHogMaintained />
 
 <FeedbackQuestions />
