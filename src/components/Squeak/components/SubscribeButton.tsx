@@ -82,11 +82,23 @@ export default function SubscribeButton({
 
                 <Authentication onAuth={onAuth} initialView="sign-in" showBanner={false} showProfile={false} />
             </SideModal>
-            <Button
-                subscribed={subscribed}
-                handleSubscribe={handleSubscribe}
-                className={`${className} p-0 relative font-bold`}
-            />
+            <Tooltip
+                content={() => (
+                    <div style={{ maxWidth: 320 }}>
+                        {user
+                            ? `Email notifications: ${subscribed ? 'ON (Press to disable)' : 'OFF (Press to enable)'}`
+                            : 'Sign in to subscribe'}
+                    </div>
+                )}
+            >
+                <span className="relative">
+                    <Button
+                        subscribed={subscribed}
+                        handleSubscribe={handleSubscribe}
+                        className={`${className} p-0 relative font-bold`}
+                    />
+                </span>
+            </Tooltip>
         </>
     ) : null
 }
