@@ -1068,7 +1068,7 @@ const PricingExperiment = ({
                     >
                         <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                             <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
-                                <div className="col-span-4 px-3 py-1">&nbsp;</div>
+                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-1">&nbsp;</div>
                                 {platformAndSupportProduct?.plans
                                     ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
                                     ?.map((plan: BillingV2PlanType) => (
@@ -1079,7 +1079,7 @@ const PricingExperiment = ({
                             </div>
 
                             <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
-                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                                <div className="col-span-4 px-3 py-2 text-sm">
                                     <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
                                 </div>
                                 {platformAndSupportProduct?.plans
@@ -1164,15 +1164,15 @@ const PricingExperiment = ({
                                     ))}
                             </div>
                             <div className="grid grid-cols-16 min-w-[1000px]">
-                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">&nbsp;</div>
+                                <div className="col-span-4 px-3 py-2 text-sm">&nbsp;</div>
                                 <div className="col-span-4 px-3 py-2">
-                                    <PlanCTA />
+                                    <PlanCTA intent="free" />
                                 </div>
                                 <div className="col-span-4 px-3 py-2">
-                                    <PlanCTA />
+                                    <PlanCTA intent="paid" />
                                 </div>
                                 <div className="col-span-4 px-3 py-2">
-                                    <PlanCTA ctaText="Get in touch" ctaLink="/talk-to-a-human" />
+                                    <PlanCTA intent="enterprise" ctaText="Get in touch" ctaLink="/talk-to-a-human" />
                                 </div>
                             </div>
                         </div>
