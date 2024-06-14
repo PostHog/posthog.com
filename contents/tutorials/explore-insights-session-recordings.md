@@ -59,7 +59,7 @@ There are multiple ways to visualize outliers and extreme usage of your product 
 
 - 90th, 95th, 99th percentile, max, or min count per user
 - 90th, 95th, 99th percentile, max, or min property value
-- extreme filters on events or user properties
+- extreme filters on events or person properties
 
 After creating one of these in insights, you can click the graph to view a list of users and their related session replays. Viewing the related recordings can help you understand their extreme usage.
 

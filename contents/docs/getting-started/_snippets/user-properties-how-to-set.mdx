@@ -1,4 +1,4 @@
-The recommended way to set user properties in person profiles is to send a $set:
+The recommended way to set properties in person profiles is to use `$set`:
 
 <MultiLanguage selector="tabs">
 
@@ -108,12 +108,12 @@ curl -v -L --header "Content-Type: application/json" -d '{
 
 </MultiLanguage>
 
-You can also set user properties when you call the [`identify`](/docs/data/identify) method:
+You can also set person properties when you call the [`identify`](/docs/data/identify) method:
 
 import IdentifyFrontendCode from "../../_snippets/identify-frontend-code.mdx"
 
 <IdentifyFrontendCode />
 
-User property values can be strings, booleans, numbers, objects, or arrays.  For objects and arrays, you can use [HogQL](/docs/hogql) to access nested properties in the PostHog app.
+Person property values can be strings, booleans, numbers, objects, or arrays.  For objects and arrays, you can use [HogQL](/docs/hogql) to access nested properties in the PostHog app.
 
-> **Note:** User properties are set in the order the events are ingested, and not according to event timestamps. Since we typically ingest events as soon as we receive them, you only need to take this into consideration when you're [importing historical data](/docs/migrate).
+> **Note:** Person properties are set in the order the events are ingested, and not according to event timestamps. Since we typically ingest events as soon as we receive them, you only need to take this into consideration when you're [importing historical data](/docs/migrate).
