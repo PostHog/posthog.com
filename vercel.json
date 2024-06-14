@@ -667,6 +667,11 @@
         { "source": "/docs/integrate/user-properties", "destination": "/docs/product-analytics/user-properties" },
         { "source": "/docs/data/user-properties", "destination": "/docs/product-analytics/user-properties" },
         {
+            "source": "/docs/product-analytics/user-properties",
+            "destination": "/docs/product-analytics/person-properties"
+        },
+        { "source": "/docs/getting-started/user-properties", "destination": "/docs/getting-started/person-properties" },
+        {
             "source": "/docs/feature-flags/multivariate-flags",
             "destination": "/docs/feature-flags/creating-feature-flags"
         },

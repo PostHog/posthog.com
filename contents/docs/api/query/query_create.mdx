@@ -9,7 +9,7 @@ The most useful for you is likely `HogQLQuery`. This enables you to query PostHo
 curl \
   -H 'Content-Type: application/json' \
   -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-  https://us.posthog.com/api/projects/:project_id/query/ \
+  <ph_app_host>/api/projects/:project_id/query/ \
   -d '{
         "query": {
           "kind": "HogQLQuery",
@@ -22,7 +22,7 @@ curl \
 import requests
 import json
 
-url = "https://us.posthog.com/api/projects/{project_id}/query/"
+url = "<ph_app_host>/api/projects/{project_id}/query/"
 headers = {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'
@@ -47,7 +47,7 @@ It is also useful for querying non-event data like persons, data warehouse, sess
 curl \
   -H 'Content-Type: application/json' \
   -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-  https://us.posthog.com/api/projects/:project_id/query/ \
+  <ph_app_host>/api/projects/:project_id/query/ \
   -d '{
         "query": {
           "kind": "HogQLQuery",
@@ -60,7 +60,7 @@ curl \
 import requests
 import json
 
-url = "https://us.posthog.com/api/projects/{project_id}/query/"
+url = "<ph_app_host>/api/projects/{project_id}/query/"
 headers = {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'

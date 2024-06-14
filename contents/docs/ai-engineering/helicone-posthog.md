@@ -13,7 +13,7 @@ You can integrate with [Helicone](https://www.helicone.ai/) and bring data into 
 ## Integrating with Helicone
 
 1. Sign up for [Helicone](https://www.helicone.ai/) and add it to your app.
-2. Similar to how you set `Helicone-Auth` [header](https://docs.helicone.ai/getting-started/integration-method/openai-proxy#openai-v1) when configuring your LLM client, add two new headers `Helicone-Posthog-Key` and `Helicone-Posthog-Host` with your PostHog host and API key (you can find these in your [PostHog project settings](https://us.posthog.com/settings/project)):
+2. Similar to how you set `Helicone-Auth` [header](https://docs.helicone.ai/helicone-headers/header-directory#supported-headers) when configuring your LLM client, add two new headers `Helicone-Posthog-Key` and `Helicone-Posthog-Host` with your PostHog host and API key (you can find these in your [PostHog project settings](https://us.posthog.com/settings/project)):
 
 <MultiLanguage>
 

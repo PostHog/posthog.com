@@ -9,13 +9,13 @@ Add the following to `composer.json`:
 And then install the dependencies with the command:
 
 ```bash
-php composer.phar install
+composer install
 ```
 
 In your app, set your project API key before making any calls.
 
 ```php
-PostHog::init("<ph_project_api_key>",
+PostHog\PostHog::init("<ph_project_api_key>",
   array('host' => '<ph_client_api_host>') // TIP: You can remove this line if you're using us.i.posthog.com
 );
 ```

@@ -66,7 +66,7 @@ const subfeatures = [
     {
         icon: <IconPieChart />,
         title: 'Data visualization',
-        description: 'Filter data by user property, group data, and use formulas in queries',
+        description: 'Filter data by person property, group data, and use formulas in queries',
     },
     {
         icon: <SQL />,
@@ -381,7 +381,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Filter by user property',
+        feature: 'Filter by person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -391,7 +391,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Breakdown by user property',
+        feature: 'Breakdown by person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -521,7 +521,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Filter by events or user property',
+        feature: 'Filter by events or person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,

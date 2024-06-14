@@ -33,7 +33,7 @@ In this guide, we're looking at the best free and open-source A/B testing tools.
 
 [PostHog](https://posthog.com) is an [open-source analytics platform](/blog/best-open-source-analytics-tools) that integrates a comprehensive A/B testing suite with numerous other tools, such as product analytics, feature flags, and session recording. It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 
-[PostHog’s experimentation suite](/product/experimentation-suite) supports multivariate experiments, and targeting by geography, user cohorts, and user properties – all of which is built atop PostHog's multivariate feature flags. PostHog uses a Bayesian approach to calculate the probability of each variant being the best, and whether the results are statistically significant or not.
+[PostHog’s experimentation suite](/product/experimentation-suite) supports multivariate experiments, and targeting by geography, user cohorts, and person properties – all of which is built atop PostHog's multivariate feature flags. PostHog uses a Bayesian approach to calculate the probability of each variant being the best, and whether the results are statistically significant or not.
 
 ### Who is PostHog for?
 
