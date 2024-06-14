@@ -1,5 +1,5 @@
 import Tooltip from 'components/Tooltip'
-import { useUser } from 'hooks/useUser'
+import { User, useUser } from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
 import { useQuestion } from '../hooks/useQuestion'
 import { IconBell } from '@posthog/icons'
@@ -56,7 +56,13 @@ export default function SubscribeButton({
             return setAuthModalOpen(true)
         }
         setSubscribed(!subscribed)
-        await setSubscription(contentType, id, !subscribed)
+        await setSubscription({ contentType, id, subscribe: !subscribed })
+    }
+
+    const onAuth = (user: User) => {
+        setSubscribed(true)
+        setSubscription({ contentType, id, subscribe: true, user })
+        setAuthModalOpen(false)
     }
 
     return show || subscribed ? (
@@ -74,7 +80,7 @@ export default function SubscribeButton({
                     </p>
                 </div>
 
-                <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
+                <Authentication onAuth={onAuth} initialView="sign-in" showBanner={false} showProfile={false} />
             </SideModal>
             <Button
                 subscribed={subscribed}
