@@ -1079,7 +1079,7 @@ const PricingExperiment = ({
                             </div>
 
                             <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
-                                <div className="col-span-4 px-3 py-2 text-sm">
+                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
                                     <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
                                 </div>
                                 {platformAndSupportProduct?.plans
