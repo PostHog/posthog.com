@@ -230,10 +230,12 @@ export const CTA = ({
     type = 'primary',
     ctaText,
     ctaLink,
+    intent = '',
 }: {
     type?: 'primary' | 'secondary'
     ctaText?: string
     ctaLink?: string
+    intent?: string
 }): JSX.Element => {
     const posthog = usePostHog()
     return (
@@ -241,6 +243,7 @@ export const CTA = ({
             event={{
                 name: `clicked Get started - free`,
                 type: 'cloud',
+                intent,
             }}
             type={type}
             size="md"

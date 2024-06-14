@@ -636,7 +636,7 @@ const PlansTabs = () => {
                             Limited
                             <br />
                             <div className="pt-2">
-                                <PlanCTA />
+                                <PlanCTA intent="free" />
                             </div>
                         </div>
                         <div className="@xl:col-span-2">Available</div>
@@ -662,7 +662,7 @@ const PlansTabs = () => {
                         <li>Unlimited team members</li>
                         <li>Unlimited tracked users</li>
                     </ul>
-                    <PlanCTA />
+                    <PlanCTA intent="paid" />
                 </>
             ),
         },
@@ -697,7 +697,15 @@ const PlansTabs = () => {
                                 <li>No upcharge on usage-based prices</li>
                             </ul>
                             <div className="pt-4 md:mb-20 xl:mb-0 relative z-20">
-                                <CallToAction href="/talk-to-a-human" size="md">
+                                <CallToAction
+                                    href="/talk-to-a-human"
+                                    size="md"
+                                    event={{
+                                        name: `clicked Talk to a helpful person`,
+                                        type: 'cloud',
+                                        intent: 'enterprise',
+                                    }}
+                                >
                                     Talk to a helpful person
                                 </CallToAction>
                             </div>
@@ -911,7 +919,7 @@ const PricingExperiment = ({
                                             <li>1-year data retention</li>
                                             <li>Community support</li>
                                         </ul>
-                                        <PlanCTA />
+                                        <PlanCTA intent="free" />
                                     </div>
                                 )}
                                 placement="right"
