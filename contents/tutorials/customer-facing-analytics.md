@@ -94,7 +94,7 @@ NEXT_POSTHOG_PERSONAL_KEY=<ph_personal_api_key>
 
 In the `pages` folder, create a new file named `insights.js` and add a `getServerSideProps` function at the bottom of the file that:
 
-1. gets group or user property to filter from the URL (context)
+1. gets group or person property to filter from the URL (context)
 2. sets our `events`, `display`, and `properties` params 
 3. formats the `fetch` `GET` request to `<ph_app_host>/api/projects/<project_id>/insights/trend?${params}`
 4. passes the response data as a prop to our component
