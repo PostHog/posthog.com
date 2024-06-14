@@ -75,5 +75,5 @@ Once created, click any of the days in the graph, and you get a list of people w
 
 ## Further reading
 
-- [How to build, analyze and optimize conversion funnels](https://posthog.com/tutorials/funnels)
+- [The complete guide to event tracking](/tutorials/event-tracking-guide)
 - [How to find relevant session replays quickly](https://posthog.com/tutorials/filter-session-recordings)
