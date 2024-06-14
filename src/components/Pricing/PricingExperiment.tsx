@@ -1295,7 +1295,7 @@ const PricingExperiment = ({
                                 <Link href="/community/profiles/27732" className="flex">
                                     <strong>James Hawkins</strong>
                                 </Link>
-                                <span className="text-sm opacity-70">CEO & Co-founder</span>
+                                <span className="text-sm opacity-70">Co-founder</span>
                             </p>
                         </div>
                         <p className="pl-14 text-sm opacity-75 italic">
