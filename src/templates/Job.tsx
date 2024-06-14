@@ -238,9 +238,11 @@ export default function Job({
                                 {!multipleTeams && showObjectives && objectives && (
                                     <Accordion title="Your team's mission and objectives" id="mission-objectives">
                                         <div className="mb-6">
-                                            <MDXProvider components={{ HideFromJobPosting: () => null }}>
-                                                <MDXRenderer>{mission.body}</MDXRenderer>
-                                            </MDXProvider>
+                                            {mission?.body && (
+                                                <MDXProvider components={{ HideFromJobPosting: () => null }}>
+                                                    <MDXRenderer>{mission.body}</MDXRenderer>
+                                                </MDXProvider>
+                                            )}
                                             <MDXProvider components={{ HideFromJobPosting: () => null }}>
                                                 <MDXRenderer>{objectives.body}</MDXRenderer>
                                             </MDXProvider>
