@@ -12,7 +12,7 @@ type Tab = {
 const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', activeClass }) => {
     return (
         <ul
-            className={`list-none m-0 flex flex-row gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 py-0 pt-2 md:px-6 justify-between items-center ${className}`}
+            className={`list-none m-0 flex flex-row gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 py-0 pt-2 md:px-4 xl:px-6 justify-between items-center ${className}`}
         >
             {tabs.map((tab, index) => {
                 const active = activeTab === index
@@ -52,7 +52,9 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
                                             </Tooltip>
                                         )}
                                     </h3>
-                                    <p className="m-0 mt-0.5 text-sm whitespace-nowrap opacity-70">{tab.subtitle}</p>
+                                    <p className="m-0 mt-0.5 text-sm whitespace-nowrap text-primary/70 dark:text-primary-dark/70">
+                                        {tab.subtitle}
+                                    </p>
                                 </div>
                             </div>
                         </button>

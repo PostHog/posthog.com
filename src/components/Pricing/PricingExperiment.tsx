@@ -482,16 +482,27 @@ const ProductTabs = ({ billingProducts }) => {
 
     return (
         <div>
+            <div className="text-center font-semibold text-[15px] border-t border-light dark:border-dark">
+                <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3 text-primary/75 dark:text-primary-dark/75">
+                    Starts at $0<span className="font-normal opacity-75">/mo</span> with a{' '}
+                    <span className="text-green">generous free tier*</span>
+                </div>
+            </div>
             <Tabs
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
                 size="sm"
                 className="overflow-x-auto w-screen md:w-auto -mx-4 px-4"
-                tabs={products.map(({ name, icon, price, denomination, message }) => ({
+                tabs={products.map(({ name, icon, price, denomination, freeLimit, message }) => ({
                     title: name,
                     subtitle: price ? (
                         <>
-                            <strong>${price}</strong>
+                            First{' '}
+                            <span className="text-green">
+                                {freeLimit} {denomination}s free,
+                            </span>{' '}
+                            <br />
+                            then <strong>${price}</strong>
                             <span className="opacity-75 text-sm">/{denomination}</span>
                         </>
                     ) : (
@@ -509,19 +520,23 @@ const ProductTabs = ({ billingProducts }) => {
                     {tabContent[activeProduct.name]({ ...productData })}
                 </motion.div>
             )}
-            <div className="text-center mt-4 flex flex-col md:flex-row gap-1 justify-center">
+            <div className="text-center mt-4 flex flex-col gap-1 justify-center">
                 {activeTab == undefined && (
-                    <p className="m-0 text-sm opacity-75">
-                        Pricing descreases exponentially with scale{' '}
-                        <span className="whitespace-nowrap">(after generous monthly free tier).</span>
+                    <p className="m-0 text-sm opacity-60">
+                        *Free tier resets monthly. Prices descrease exponentially with volume.
                     </p>
                 )}
-                <button
-                    onClick={() => setActiveTab(activeTab === undefined ? 0 : undefined)}
-                    className="text-red dark:text-yellow font-semibold text-sm cursor-pointer"
-                >
-                    {activeTab === undefined ? 'Show' : 'Hide'} pricing breakdown
-                </button>
+
+                <div className="text-center font-semibold text-[15px] mt-4 border-t border-light dark:border-dark">
+                    <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3">
+                        <button
+                            onClick={() => setActiveTab(activeTab === undefined ? 0 : undefined)}
+                            className="text-red dark:text-yellow font-semibold text-sm cursor-pointer"
+                        >
+                            {activeTab === undefined ? 'Show' : 'Hide'} pricing breakdown
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     )
@@ -854,6 +869,7 @@ const PricingExperiment = ({
                                         </p>
                                     </div>
                                 )}
+                                placement="right"
                             >
                                 <span className="border-b border-dashed border-primary/50 dark:border-primary-dark/50">
                                     value-based pricing
@@ -862,7 +878,28 @@ const PricingExperiment = ({
                             .
                         </p>
                         <p className="text-base font-medium opacity-60 leading-tight">
-                            Starts at $0/mo with a generous free tier.
+                            You can also use PostHog without a credit card.
+                            <Tooltip
+                                content={() => (
+                                    <div className="max-w-[300px] pb-2">
+                                        <p className="mb-1">
+                                            <strong>Totally free</strong>{' '}
+                                            <span className="opacity-70 text-sm italic">- no credit card required</span>
+                                        </p>
+                                        <ul className="pl-0 pb-2 list-none [&_li]:text-[15px] opacity-70">
+                                            <li>Usage capped at free tier limits</li>
+                                            <li>Basic product features</li>
+                                            <li>1 project</li>
+                                            <li>1-year data retention</li>
+                                            <li>Community support</li>
+                                        </ul>
+                                        <PlanCTA />
+                                    </div>
+                                )}
+                                placement="right"
+                            >
+                                <IconInfo className="size-5 inline-block ml-0.5 -mt-0.5" />
+                            </Tooltip>{' '}
                         </p>
                         <PlanCTA />
                     </div>
