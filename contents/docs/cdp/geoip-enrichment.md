@@ -61,6 +61,12 @@ set property `$geoip_disable` to `true` on that event.
 
 ## FAQ
 
+### How can I still get some geo data, but with less precision?
+
+We use the Maxmind GeoIP2 City database, in which latitude and longitude are set to the detected city's geographical center. The data is not more precise than the city name field.
+
+If having city precision is too much, then you can use use the [property filter transformation](/docs/cdp/property-filter). The GeoIP transformation adds event and person properties (`$set` and `$set_once`), so you'll want to filter those out as well. For example, if you are trying to filter `$geoip_latitude`, make sure to include `$set.$geoip_latitude` and `$set_once.$geoip_latitude` to the property filter configuration.
+
 ### Is the source code for this transformation available?
 
 PostHog is open-source and so are all transformations on the platform. The [source code for the GeoIP Enricher](https://github.com/PostHog/posthog-plugin-geoip) is available on GitHub.
@@ -68,12 +74,6 @@ PostHog is open-source and so are all transformations on the platform. The [sour
 ### Who created this transformation?
 
 We'd like to thank PostHog team members [Yakko Majuri](https://github.com/yakkomajuri), [Tim Glaser](https://github.com/timgl), [Michael Matloka](https://github.com/Twixes) and former team member [Paolo D'Amico](https://github.com/paolodamico) for creating the GeoIP Enricher. We miss you, Paolo!
-
-### How can I still get some geo data, but with less precision?
-
-We use the Maxmind GeoIP2 City database, in which latitude and longitude are set to the detected city's geographical center. The data is not more precise than the city name field.
-
-If having city precision is too much, then you can use use the [property filter transformation](/docs/cdp/property-filter). The GeoIP transformation adds event and person properties (`$set` and `$set_once`), so you'll want to filter those out as well. For example, if you are trying to filter `$geoip_latitude`, make sure to include `$set.$geoip_latitude` and `$set_once.$geoip_latitude` to the property filter configuration.
 
 <PostHogMaintained />
 
