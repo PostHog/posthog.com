@@ -1180,7 +1180,7 @@ const PricingExperiment = ({
                                 <AllAddons />
                             </SectionMainCol>
                             <SectionSidebar>
-                                <h4 className="text-lg mb-2">Why add-ons?</h4>
+                                <h4 className="text-lg mb-0">Why add-ons?</h4>
                                 <SidebarList>
                                     <SidebarListItem>
                                         We move additional functionality to add-ons to keep our base prices low. This is
