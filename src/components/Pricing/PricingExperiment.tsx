@@ -435,9 +435,13 @@ const TabAddons = (props) => {
 
 const TabPA = (props) => {
     return (
-        <div className="flex flex-col md:flex-row gap-8 lg:gap-16">
+        <div className="flex flex-col @5xl:flex-row gap-8 lg:gap-16">
             <Pricing {...props} className="flex-shrink-0" />
-            <TabAddons addons={props.addons} className="flex-grow" title="Product analytics add-ons" />
+            <TabAddons
+                addons={props.addons}
+                className="flex-grow max-w-3xl mx-auto"
+                title="Product analytics add-ons"
+            />
         </div>
     )
 }
@@ -484,7 +488,8 @@ const ProductTabs = ({ billingProducts }) => {
         <div>
             <div className="text-center font-semibold text-[15px] border-t border-light dark:border-dark">
                 <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3 text-primary/75 dark:text-primary-dark/75">
-                    Starts at $0<span className="font-normal opacity-75">/mo</span> with a{' '}
+                    Starts at <strong>$0</strong>
+                    <span className="font-normal opacity-75">/mo</span> with a{' '}
                     <span className="text-green">generous free tier*</span>
                 </div>
             </div>
@@ -515,7 +520,7 @@ const ProductTabs = ({ billingProducts }) => {
                 <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
-                    className="-mt-[2px] border border-light dark:border-dark rounded-md p-4 overflow-hidden"
+                    className="@container -mt-[2px] border border-light dark:border-dark rounded-md p-4 overflow-hidden"
                 >
                     {tabContent[activeProduct.name]({ ...productData })}
                 </motion.div>
@@ -527,7 +532,11 @@ const ProductTabs = ({ billingProducts }) => {
                     </p>
                 )}
 
-                <div className="text-center font-semibold text-[15px] mt-4 border-t border-light dark:border-dark">
+                <div
+                    className={`text-center font-semibold text-[15px] mt-4 ${
+                        activeTab === undefined && 'border-t'
+                    } border-light dark:border-dark`}
+                >
                     <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3">
                         <button
                             onClick={() => setActiveTab(activeTab === undefined ? 0 : undefined)}
