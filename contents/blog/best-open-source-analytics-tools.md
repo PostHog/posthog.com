@@ -259,7 +259,7 @@ OpenReplay is available under the ELv2 license. An Enterprise version adds addit
 
 [GrowthBook](/blog/posthog-vs-growthbook) is an [open source A/B testing](/blog/best-open-source-ab-testing-tools) and feature flag tool for teams who want granular control over rolling out new features, and the ability to validate those changes through experiments. 
 
-It supports multiple development environments, each with a unique API endpoint, and its comprehensive feature flag functionality allows for targeting based on user properties.
+It supports multiple development environments, each with a unique API endpoint, and its comprehensive feature flag functionality allows for targeting based on person properties.
 
 You don't need to import metric data into GrowthBook as it works with your data wherever it lives, be that a data warehouse or an analytics tool like Mixpanel, but it lacks any additional analytical features.
 

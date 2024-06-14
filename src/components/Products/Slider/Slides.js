@@ -95,7 +95,7 @@ export const Funnels = () => {
         {
             name: 'Filtering',
             description:
-                'Set filters for individual steps – or the entire funnel – by user property, group or cohort, or event property',
+                'Set filters for individual steps – or the entire funnel – by person property, group or cohort, or event property',
         },
         {
             name: 'Graph types',
@@ -388,7 +388,7 @@ export const Dashboards = () => {
         {
             name: 'Dashboard filtering',
             description:
-                'Filter saved insights on a dashboard by anything - event properties, user properties, cohorts - even if a feature flag was active during a user’s session.',
+                'Filter saved insights on a dashboard by anything - event properties, person properties, cohorts - even if a feature flag was active during a user’s session.',
         },
         {
             name: 'Embeddable dashboards with auto-refresh',
