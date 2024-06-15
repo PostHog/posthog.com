@@ -490,7 +490,7 @@ const ProductTabs = ({ billingProducts }) => {
                 <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3 text-primary/75 dark:text-primary-dark/75">
                     Starts at <strong>$0</strong>
                     <span className="font-normal opacity-75">/mo</span> with a{' '}
-                    <span className="text-green">generous free tier*</span>
+                    <span className="text-green">generous monthly free tier*</span>
                 </div>
             </div>
             <Tabs
@@ -502,13 +502,12 @@ const ProductTabs = ({ billingProducts }) => {
                     title: name,
                     subtitle: price ? (
                         <>
-                            First{' '}
-                            <span className="text-green">
+                            <span className="text-green font-semibold">
                                 {freeLimit} {denomination}s free,
                             </span>{' '}
                             <br />
                             then <strong>${price}</strong>
-                            <span className="opacity-75 text-sm">/{denomination}</span>
+                            <span className="opacity-75 text-sm font-semibold">/{denomination}</span>
                         </>
                     ) : (
                         message
@@ -520,7 +519,7 @@ const ProductTabs = ({ billingProducts }) => {
                 <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
-                    className="@container -mt-[2px] border border-light dark:border-dark rounded-md p-4 overflow-hidden"
+                    className="@container -mt-[2px] bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 overflow-hidden"
                 >
                     {tabContent[activeProduct.name]({ ...productData })}
                 </motion.div>
@@ -650,7 +649,7 @@ const PlansTabs = () => {
             html: (
                 <>
                     <h4 className="mb-0">The "ridiculously cheap" plan</h4>
-                    <p className="text-sm inline-flex rounded-sm bg-yellow/50 py-0.5 px-1">
+                    <p className="text-sm inline-flex rounded-sm bg-yellow/25 py-0.5 px-1">
                         86% of customers use this plan
                     </p>
                     <ul className="tw-check-bullets @lg:columns-2 pb-2">
@@ -802,7 +801,7 @@ const PlansTabs = () => {
 
     return (
         <div>
-            <div className="overflow-x-auto w-screen md:w-auto -mx-4 md:mx-0 px-4 md:px-1 relative z-10">
+            <div className="overflow-x-auto w-screen md:w-auto -mx-4 md:mx-0 px-4 md:px-3 relative z-10">
                 <Tabs
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
@@ -819,7 +818,7 @@ const PlansTabs = () => {
                 <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
-                    className="@container -mt-[2px] border border-light dark:border-dark rounded-md p-4 overflow-hidden"
+                    className="@container -mt-[2px] bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 overflow-hidden"
                 >
                     {[activePlan.html]}
                 </motion.div>
@@ -1267,7 +1266,7 @@ const PricingExperiment = ({
                             </div>
                         </p>
                         <p>
-                            If you need more info,{' '}
+                            Or if you need more info,{' '}
                             <button
                                 className="text-red dark:text-yellow font-semibold"
                                 onClick={() =>
