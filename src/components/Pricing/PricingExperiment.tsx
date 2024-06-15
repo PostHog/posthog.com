@@ -1259,11 +1259,12 @@ const PricingExperiment = ({
                                 </Tooltip>
                             </li>
                         </ul>
-                        <p className="mb-4">
-                            If this all sounds good, give it a try for yourself – <em>no credit card required</em>.
-                        </p>
+                        <p className="mb-4">If this makes you happy – like most people - just start here:</p>
                         <p>
-                            <PlanCTA />
+                            <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
+                                <PlanCTA />
+                                <em className="opacity-75 text-sm">No credit card required</em>
+                            </div>
                         </p>
                         <p>
                             If you need more info,{' '}
