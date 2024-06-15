@@ -592,13 +592,13 @@ const PlansTabs = () => {
 
                         <div>Product features</div>
                         <div className="@xl:col-span-2">
-                            Basic features{' '}
+                            Almost all the features{' '}
                             <Tooltip
                                 content={() => (
                                     <div className="max-w-[320px]">
                                         <p className="mb-2 text-sm">
                                             Use each product for free without advanced features. Compare functionality
-                                            limitations on the product page.
+                                            limitations on each product page.
                                         </p>
                                         <p className="mb-0 text-sm">
                                             For full functionality, just enter a credit card and you'll be on the{' '}
@@ -615,8 +615,8 @@ const PlansTabs = () => {
                         <div className="@xl:col-span-2">All features</div>
 
                         <div>Support</div>
-                        <div className="@xl:col-span-2">Community forums</div>
-                        <div className="@xl:col-span-2">Email</div>
+                        <div className="@xl:col-span-2">Standard support</div>
+                        <div className="@xl:col-span-2">Priority support</div>
 
                         <div>
                             Add-ons{' '}
@@ -883,14 +883,14 @@ const PricingExperiment = ({
                             <Tooltip
                                 content={() => (
                                     <div className="max-w-sm">
-                                        <strong className="block">Why not value-based pricing?</strong>
+                                        <strong className="block text-lg mb-1">What is value-based pricing?</strong>
                                         <p className="mb-2 text-sm">
-                                            Value-based pricing is geared around testing how much money you're willing
-                                            to pay.
+                                            <em>Value-based pricing</em> is geared around testing how much money you're
+                                            willing to pay.
                                         </p>
                                         <p className="mb-0 text-sm">
-                                            Usage-based pricing is like a utility - where we continually seek to lower
-                                            costs and make money through volume.
+                                            <em>Usage-based pricing</em> is like a utility - where we continually seek
+                                            to lower costs and make money through volume.
                                         </p>
                                     </div>
                                 )}
@@ -903,30 +903,39 @@ const PricingExperiment = ({
                             .
                         </p>
                         <p className="text-base font-medium opacity-60 leading-tight">
-                            You can also use PostHog without a credit card.
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-[300px] pb-2">
-                                        <p className="mb-1">
-                                            <strong>Totally free</strong>{' '}
-                                            <span className="opacity-70 text-sm italic">- no credit card required</span>
-                                        </p>
-                                        <ul className="pl-0 pb-2 list-none [&_li]:text-[15px] opacity-70">
-                                            <li>Usage capped at free tier limits</li>
-                                            <li>Basic product features</li>
-                                            <li>1 project</li>
-                                            <li>1-year data retention</li>
-                                            <li>Community support</li>
-                                        </ul>
-                                        <PlanCTA intent="free" />
-                                    </div>
-                                )}
-                                placement="right"
-                            >
-                                <IconInfo className="size-5 inline-block ml-0.5 -mt-0.5" />
-                            </Tooltip>{' '}
+                            Enjoy a generous free tier every month.
                         </p>
-                        <PlanCTA />
+                        <div className="flex gap-4 items-center">
+                            <div>
+                                <PlanCTA />
+                            </div>
+                            <div>
+                                <span className="text-sm opacity-70">No credit card required</span>
+                                <Tooltip
+                                    content={() => (
+                                        <div className="max-w-[300px] pb-2">
+                                            <p className="mb-1">
+                                                <strong>Totally free</strong>{' '}
+                                                <span className="opacity-70 text-sm italic">
+                                                    - no credit card required
+                                                </span>
+                                            </p>
+                                            <ul className="pl-0 pb-2 list-none [&_li]:text-[15px] opacity-70">
+                                                <li>Usage capped at free tier limits</li>
+                                                <li>Basic product features</li>
+                                                <li>1 project</li>
+                                                <li>1-year data retention</li>
+                                                <li>Community support</li>
+                                            </ul>
+                                            <PlanCTA intent="free" />
+                                        </div>
+                                    )}
+                                    placement="right"
+                                >
+                                    <IconInfo className="size-5 inline-block opacity-60 hover:opacity-75 ml-0.5 -mt-0.5" />
+                                </Tooltip>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
