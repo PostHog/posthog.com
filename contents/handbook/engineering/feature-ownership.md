@@ -37,6 +37,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Funnels | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/funnels</span>  |
 | Group Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
 | HogQL | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
+| Heatmaps | [Team Replay][Team Replay] | <span class="lemon-tag gh-tag">feature/heatmaps</span> |
 | Ingestion | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Lifecycle | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/lifecycle</span>  |
 | Live Events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
