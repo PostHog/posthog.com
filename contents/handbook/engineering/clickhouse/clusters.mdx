@@ -19,6 +19,47 @@ All clusters have these features in common:
 - monitoring
 - alerting
 
+
+### ZooKeeper
+
+We use ZooKeeper for ClickHouse replicated MergeTree tables. It is responsible for managing the replication of data between replicas and ensuring consistency.
+
+Eventually we want to migrate to ClickHouseKeeper.
+
+#### US
+
+- 3 ZooKeeper nodes
+- `m7g.2xlarge`
+- 8 vCPUs
+- Graviton2 CPU
+- 32 GiB RAM
+- Max Network 15 Gbps
+- Max EBS Throughput 1250 MB/s
+- 1 x 200 GiB GP3 EBS Data volume
+
+#### EU 
+
+- 3 ZooKeeper nodes
+- `m6g.2xlarge`
+- 8 vCPUs
+- Graviton2 CPU
+- 32 GiB RAM
+- Max Network 10 Gbps
+- Max EBS Throughput 593.75 MB/s
+- 1 x 200 GiB GP3 EBS Data volume
+
+#### Dev
+
+- 3 ZooKeeper nodes
+- `t4g.small`
+- 2 vCPUs
+- Graviton2 CPU
+- 2 GiB RAM
+- Max Network 5 Gbps
+- Max EBS Throughput 260 MB/s
+- 1 x 100 GiB GP3 EBS Data volume
+
+
 ### Backup Policy
 
 We backup all production tables every day. Once a week we take a full backup and then incremental backups for the rest of the week. We keep backups for 8 days.
@@ -160,6 +201,7 @@ We currently do this using tiered storage configured simply by setting the `stor
 
 https://altinity.com/blog/2019-11-29-amplifying-clickhouse-capacity-with-multi-volume-storage-part-2
 
+
 ### Monitoring
 
 https://grafana.prod-us.posthog.dev/d/vm-clickhouse-cluster-overview/clickhouse-cluster-overview?from=now-3h&to=now&timezone=utc&refresh=30s
@@ -219,6 +261,24 @@ We will also want to create new coodinators for multi-tenant workloads in the fu
 ### Monitoring
 
 https://grafana.prod-eu.posthog.dev/d/vm-clickhouse-cluster-overview/clickhouse-cluster-overview
+
+
+## Dev
+
+Dev is a relatively basic setup for development and testing.
+
+- 1 shard
+- 2 replicas
+- 'm6id.4xlarge`
+- 16 vCPUs
+- Intel Xeon 8375C CPU
+- 64 GiB RAM
+- Max Network 12.5 Gbps
+- Max EBS Throughput 1250 MB/s
+- 1 x 950 GiB NVMe ephemeral disk
+
+We have a single shard with 2 replicas. This is to mimic the production setup as closely as possible. We have a single shard because we don't have the same volume of data as production. We have 2 replicas because we want to test failover scenarios.
+
 
 
 ## Problems
