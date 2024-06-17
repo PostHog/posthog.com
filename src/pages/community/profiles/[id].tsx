@@ -79,14 +79,16 @@ const Bio = ({ biography, readme }) => {
         <section className="article-content">
             {biography && (
                 <>
-                    <div className="flex items-end space-x-4 border-b border-border dark:border-dark pb-4 mb-4">
+                    <div className="flex items-end space-x-4 border-b border-border dark:border-dark mb-4">
                         {biography && (
                             <Container {...(tabbable ? { onClick: () => setActiveTab('biography') } : null)}>
                                 <h3
-                                    className={`m-0 ${
+                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${
                                         activeTab === 'biography'
-                                            ? ''
-                                            : 'opacity-40 text-base hover:opacity-70 transition-opacity'
+                                            ? readme
+                                                ? 'border-red'
+                                                : 'border-transparent pl-0'
+                                            : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
                                     }`}
                                 >
                                     Biography
@@ -96,10 +98,10 @@ const Bio = ({ biography, readme }) => {
                         {readme && (
                             <Container {...(tabbable ? { onClick: () => setActiveTab('readme') } : null)}>
                                 <h3
-                                    className={`m-0 ${
+                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${
                                         activeTab === 'readme'
-                                            ? ''
-                                            : 'opacity-40 text-base hover:opacity-70 transition-opacity'
+                                            ? 'border-red'
+                                            : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
                                     }`}
                                 >
                                     README
@@ -108,6 +110,16 @@ const Bio = ({ biography, readme }) => {
                         )}
                     </div>
                     <Markdown>{activeTab === 'biography' ? biography : readme}</Markdown>
+                    {activeTab === 'biography' && readme && (
+                        <>
+                            <button
+                                className="text-red dark:text-yellow font-semibold cursor-pointer"
+                                onClick={() => setActiveTab('readme')}
+                            >
+                                See my README for tips on how to work with me
+                            </button>
+                        </>
+                    )}
                 </>
             )}
         </section>
@@ -134,7 +146,6 @@ export default function ProfilePage({ params }: PageProps) {
         },
     })
     const isCurrentUser = user?.profile?.id === id
-    const isModerator = user?.role?.type === 'moderator'
 
     const profileQuery = qs.stringify(
         {
@@ -246,17 +257,19 @@ export default function ProfilePage({ params }: PageProps) {
                                             </p>
                                         )}
                                     </div>
-                                    {(profile?.biography || (profile?.readme && isModerator)) && (
-                                        <Bio biography={profile.biography} readme={isModerator && profile.readme} />
+                                    {(profile?.biography || profile?.readme) && (
+                                        <Bio biography={profile.biography} readme={profile.readme} />
                                     )}
                                 </section>
                             </div>
 
                             <div className="mt-12">
-                                <div className="flex items-center relative mb-6 font-semibold border-b border-border dark:border-dark text-base whitespace-nowrap">
+                                <div className="flex items-center relative mb-4 font-semibold border-b border-border dark:border-dark text-base whitespace-nowrap">
                                     <button
-                                        className={`${
-                                            view !== 'discussions' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                        className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                            view !== 'discussions'
+                                                ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                : 'border-red'
                                         } p-4 transition-opacity`}
                                         onClick={() => setView('discussions')}
                                     >
@@ -264,8 +277,10 @@ export default function ProfilePage({ params }: PageProps) {
                                     </button>
                                     {profile?.amaEnabled && (
                                         <button
-                                            className={`${
-                                                view !== 'ama' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                                view !== 'ama'
+                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                    : 'border-red'
                                             } p-4 transition-opacity`}
                                             onClick={() => setView('ama')}
                                         >
@@ -274,8 +289,10 @@ export default function ProfilePage({ params }: PageProps) {
                                     )}
                                     {user?.profile?.id === id && (
                                         <button
-                                            className={`${
-                                                view !== 'liked-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                                view !== 'liked-posts'
+                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                    : 'border-red'
                                             } p-4 transition-opacity`}
                                             onClick={() => setView('liked-posts')}
                                         >
@@ -284,8 +301,10 @@ export default function ProfilePage({ params }: PageProps) {
                                     )}
                                     <div className="flex items-center">
                                         <button
-                                            className={`${
-                                                view !== 'user-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                                view !== 'user-posts'
+                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                    : 'border-red pr-12'
                                             } p-4 transition-opacity`}
                                             onClick={() => setView('user-posts')}
                                         >
@@ -297,9 +316,13 @@ export default function ProfilePage({ params }: PageProps) {
                                                     initial={{ opacity: 0, translateY: '100%' }}
                                                     animate={{ opacity: 1, translateY: 0 }}
                                                     exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                                                    className={`-ml-4 z-[50]`}
+                                                    className={`relative -left-12 top-1 z-[50]`}
                                                 >
-                                                    <SortDropdown sort={sort} setSort={setSort} />
+                                                    <SortDropdown
+                                                        sort={sort}
+                                                        setSort={setSort}
+                                                        className="hover:!border-transparent hover:!bg-transparent"
+                                                    />
                                                 </motion.div>
                                             )}
                                         </AnimatePresence>
@@ -417,7 +440,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
                         <ul className="p-0 flex space-x-2 items-center list-none m-0">
                             {profile.website && (
                                 <li>
-                                    <Link to={profile.website}>
+                                    <Link to={profile.website} externalNoIcon>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
@@ -438,7 +461,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
 
                             {profile.github && (
                                 <li>
-                                    <Link to={profile.github}>
+                                    <Link to={profile.github} externalNoIcon>
                                         <GitHub className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
                                     </Link>
                                 </li>
@@ -446,7 +469,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
 
                             {profile.twitter && (
                                 <li>
-                                    <Link to={profile.twitter}>
+                                    <Link to={profile.twitter} externalNoIcon>
                                         <Twitter className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
                                     </Link>
                                 </li>
@@ -454,7 +477,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
 
                             {profile.linkedin && (
                                 <li>
-                                    <Link to={profile.linkedin}>
+                                    <Link to={profile.linkedin} externalNoIcon>
                                         <LinkedIn className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
                                     </Link>
                                 </li>
