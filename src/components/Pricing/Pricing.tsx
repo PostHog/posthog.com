@@ -36,6 +36,7 @@ interface PlanData {
     features: React.ReactNode[]
     CTAText?: string
     CTALink?: string
+    intent: string
 }
 
 const planSummary = [
@@ -50,6 +51,7 @@ const planSummary = [
             '1 year data retention',
             'Community support',
         ],
+        intent: 'free',
     },
     {
         title: 'Ridiculously cheap',
@@ -65,6 +67,7 @@ const planSummary = [
                 <span className="opacity-60 text-sm">* Included with any product subscription</span>
             </>,
         ],
+        intent: 'paid',
     },
     {
         title: 'Enterprise',
@@ -80,6 +83,7 @@ const planSummary = [
         ],
         CTAText: 'Get in touch',
         CTALink: '/talk-to-a-human',
+        intent: 'enterprise',
     },
 ]
 
@@ -111,6 +115,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
                         type={planData.title === 'Ridiculously cheap' ? 'primary' : 'secondary'}
                         ctaText={planData.CTAText}
                         ctaLink={planData.CTALink}
+                        intent={planData.intent}
                     />
                 </div>
             </div>
