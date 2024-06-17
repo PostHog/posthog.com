@@ -1750,6 +1750,11 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Hog',
+                    url: '/docs/hog',
+                    icon: 'IconCode',
+                },
+                {
                     name: 'Resources',
                 },
                 {
