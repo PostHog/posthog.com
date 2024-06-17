@@ -85,7 +85,9 @@ const Bio = ({ biography, readme }) => {
                                 <h3
                                     className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${
                                         activeTab === 'biography'
-                                            ? 'border-red'
+                                            ? readme
+                                                ? 'border-red'
+                                                : 'border-transparent pl-0'
                                             : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
                                     }`}
                                 >
@@ -253,10 +255,12 @@ export default function ProfilePage({ params }: PageProps) {
                             </div>
 
                             <div className="mt-12">
-                                <div className="flex items-center relative mb-6 font-semibold border-b border-border dark:border-dark text-base whitespace-nowrap">
+                                <div className="flex items-center relative mb-4 font-semibold border-b border-border dark:border-dark text-base whitespace-nowrap">
                                     <button
-                                        className={`${
-                                            view !== 'discussions' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                        className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                            view !== 'discussions'
+                                                ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                : 'border-red'
                                         } p-4 transition-opacity`}
                                         onClick={() => setView('discussions')}
                                     >
@@ -264,8 +268,10 @@ export default function ProfilePage({ params }: PageProps) {
                                     </button>
                                     {profile?.amaEnabled && (
                                         <button
-                                            className={`${
-                                                view !== 'ama' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                                view !== 'ama'
+                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                    : 'border-red'
                                             } p-4 transition-opacity`}
                                             onClick={() => setView('ama')}
                                         >
@@ -274,8 +280,10 @@ export default function ProfilePage({ params }: PageProps) {
                                     )}
                                     {user?.profile?.id === id && (
                                         <button
-                                            className={`${
-                                                view !== 'liked-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                                view !== 'liked-posts'
+                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                    : 'border-red'
                                             } p-4 transition-opacity`}
                                             onClick={() => setView('liked-posts')}
                                         >
@@ -284,8 +292,10 @@ export default function ProfilePage({ params }: PageProps) {
                                     )}
                                     <div className="flex items-center">
                                         <button
-                                            className={`${
-                                                view !== 'user-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                                view !== 'user-posts'
+                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                    : 'border-red pr-12'
                                             } p-4 transition-opacity`}
                                             onClick={() => setView('user-posts')}
                                         >
@@ -297,9 +307,13 @@ export default function ProfilePage({ params }: PageProps) {
                                                     initial={{ opacity: 0, translateY: '100%' }}
                                                     animate={{ opacity: 1, translateY: 0 }}
                                                     exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                                                    className={`-ml-4 z-[50]`}
+                                                    className={`relative -left-12 top-1 z-[50]`}
                                                 >
-                                                    <SortDropdown sort={sort} setSort={setSort} />
+                                                    <SortDropdown
+                                                        sort={sort}
+                                                        setSort={setSort}
+                                                        className="hover:!border-transparent hover:!bg-transparent"
+                                                    />
                                                 </motion.div>
                                             )}
                                         </AnimatePresence>
