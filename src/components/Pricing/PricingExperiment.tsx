@@ -35,6 +35,7 @@ import Tabbed from './PricingCalculator/Tabbed'
 import { usePlatform } from './Platform/usePlatform'
 import { motion } from 'framer-motion'
 import scrollTo from 'gatsby-plugin-smoothscroll'
+import { PlanColumns } from './Pricing'
 
 interface PlanData {
     title: string
@@ -830,9 +831,11 @@ const PlansTabs = () => {
 const PricingExperiment = ({
     groupsToShow,
     currentProduct,
+    variant,
 }: {
     groupsToShow: undefined | string[]
     currentProduct?: string | null
+    variant: 'test' | 'test_with_plans'
 }): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const products = useProducts()
@@ -946,6 +949,8 @@ const PricingExperiment = ({
                         <ProductTabs billingProducts={billingProducts} />
                     </section>
 
+                    {variant === 'test_with_plans' && <PlanColumns billingProducts={billingProducts} />}
+
                     <SectionLayout>
                         <SectionHeader>
                             <h3>Pricing calculator</h3>
@@ -1011,61 +1016,63 @@ const PricingExperiment = ({
                         </div>
                     </SectionLayout>
 
-                    <SectionLayout>
-                        <SectionHeader>
-                            <h3>One plan for most customers</h3>
-                        </SectionHeader>
+                    {variant === 'test' && (
+                        <SectionLayout>
+                            <SectionHeader>
+                                <h3>One plan for most customers</h3>
+                            </SectionHeader>
 
-                        <SectionColumns>
-                            <SectionMainCol>
-                                <PlansTabs />
-                            </SectionMainCol>
-                            <SectionSidebar className="justify-between">
-                                <div>
-                                    <h4 className="text-lg mb-2">Plan FYIs</h4>
-                                    <SidebarList>
-                                        <SidebarListItem>
-                                            Self-serve, no upsells, no need to "talk to sales"
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            We don't do outbound sales. Everyone pays the same rates.
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            You can set billing limits per product so you never get a surprise bill
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            90% of our customers don't pay anything to use PostHog!
-                                            <Tooltip
-                                                content={() => (
-                                                    <div className="max-w-[300px]">
-                                                        <p className="mb-1">
-                                                            <strong>... and we're cool with it!</strong>
-                                                        </p>
-                                                        <p className="text-[15px] mb-0">
-                                                            Use PostHog for free within our generous free tier limits.
-                                                            Exceed the free tier limits and you'll only pay for what you
-                                                            use.
-                                                        </p>
-                                                    </div>
-                                                )}
-                                                placement="bottom"
-                                            >
-                                                <IconInfo className="size-4 inline-block ml-0.5 -mt-0.5" />
-                                            </Tooltip>{' '}
-                                        </SidebarListItem>
-                                    </SidebarList>
-                                </div>
-                                <div>
-                                    <button
-                                        onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
-                                        className="text-red dark:text-yellow font-semibold cursor-pointer"
-                                    >
-                                        {isPlanComparisonVisible ? 'Hide' : 'Show'} full plan comparison
-                                    </button>
-                                </div>
-                            </SectionSidebar>
-                        </SectionColumns>
-                    </SectionLayout>
+                            <SectionColumns>
+                                <SectionMainCol>
+                                    <PlansTabs />
+                                </SectionMainCol>
+                                <SectionSidebar className="justify-between">
+                                    <div>
+                                        <h4 className="text-lg mb-2">Plan FYIs</h4>
+                                        <SidebarList>
+                                            <SidebarListItem>
+                                                Self-serve, no upsells, no need to "talk to sales"
+                                            </SidebarListItem>
+                                            <SidebarListItem>
+                                                We don't do outbound sales. Everyone pays the same rates.
+                                            </SidebarListItem>
+                                            <SidebarListItem>
+                                                You can set billing limits per product so you never get a surprise bill
+                                            </SidebarListItem>
+                                            <SidebarListItem>
+                                                90% of our customers don't pay anything to use PostHog!
+                                                <Tooltip
+                                                    content={() => (
+                                                        <div className="max-w-[300px]">
+                                                            <p className="mb-1">
+                                                                <strong>... and we're cool with it!</strong>
+                                                            </p>
+                                                            <p className="text-[15px] mb-0">
+                                                                Use PostHog for free within our generous free tier
+                                                                limits. Exceed the free tier limits and you'll only pay
+                                                                for what you use.
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                    placement="bottom"
+                                                >
+                                                    <IconInfo className="size-4 inline-block ml-0.5 -mt-0.5" />
+                                                </Tooltip>{' '}
+                                            </SidebarListItem>
+                                        </SidebarList>
+                                    </div>
+                                    <div>
+                                        <button
+                                            onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
+                                            className="text-red dark:text-yellow font-semibold cursor-pointer"
+                                        >
+                                            {isPlanComparisonVisible ? 'Hide' : 'Show'} full plan comparison
+                                        </button>
+                                    </div>
+                                </SectionSidebar>
+                            </SectionColumns>
+                        </SectionLayout>
+                    )}
 
                     <section
                         className={`${section} ${
