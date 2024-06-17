@@ -146,7 +146,6 @@ export default function ProfilePage({ params }: PageProps) {
         },
     })
     const isCurrentUser = user?.profile?.id === id
-    const isModerator = user?.role?.type === 'moderator'
 
     const profileQuery = qs.stringify(
         {
@@ -258,8 +257,8 @@ export default function ProfilePage({ params }: PageProps) {
                                             </p>
                                         )}
                                     </div>
-                                    {(profile?.biography || (profile?.readme && isModerator)) && (
-                                        <Bio biography={profile.biography} readme={isModerator && profile.readme} />
+                                    {(profile?.biography || profile?.readme) && (
+                                        <Bio biography={profile.biography} readme={profile.readme} />
                                     )}
                                 </section>
                             </div>
