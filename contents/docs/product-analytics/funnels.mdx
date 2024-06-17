@@ -48,13 +48,13 @@ export const converstionOverTimeDark = "https://res.cloudinary.com/dmukukwp6/ima
     className="rounded shadow-xl"
 />
 
-For every flow throughout your product, more people will start it than complete it successfully. Funnels enable you to inspect your flows and understand where the friction points are so that you can improve them.
+For every flow in your product, more people will start it than complete it successfully. Funnels enable you to visualize your flows and understand where the friction points are so that you can improve them.
 
 You can learn the following from funnels:
 
 - [Where people are getting stuck during your flow](#understand-where-people-are-getting-stuck-during-your-flow)
 - [Who successful and unsuccessul users are](#identify-unsuccessful-users)
-- [The steps which have the highest friction and time to convert](#graph-type)
+- [The steps with the highest friction and time to convert](#graph-type)
 - [The paths users take in a funnel](#explore-user-paths)
 - [If product changes are improving your funnel over time](#graph-type)
 - [How seasonality affects your conversion rates](#understand-seasonality-in-your-conversion-rates)
@@ -74,7 +74,7 @@ You can learn the following from funnels:
 
 ### Adding steps
 
-Select the steps you wish to include in your funnel, ideally starting with the first event/action a user will trigger in the flow. Next, add intermediate events you believe users need to go through to be successful and finish with the event you consider to be the success for this flow. It's best to start with the simplest flow and avoid using optional steps to ensure you don't filter out or skew valuable results.
+Select the steps to include in your funnel, ideally starting with the first event or action a user will trigger in the flow. Next, add intermediate events users need to go through to be successful and finish with the event you consider to be the success for this flow. It's best to start with the simplest flow and avoid using optional steps to ensure you don't filter out or skew results.
 
 <ProductScreenshot
     imageLight = {funnelStepsLight} 
@@ -85,7 +85,7 @@ Select the steps you wish to include in your funnel, ideally starting with the f
 
 ### Filtering steps
 
-To refine your steps, you can filter out certain types of users or event properties. To do this, click the **filter icon**  next to the step you wish to refine further and select the filter you would like to add, or set a global filter in the **Filters** section in the bottom.
+To refine your steps, you can filter out events using event, person, or group properties, autocapture elements, or HogQL. To do this, click the **filter icon**  next to the step, choose your property, and fill in the details. You can also set a global filter in the **Filters** section in the bottom.
 
 <ProductScreenshot
     imageLight = {globalFiltersLight} 
@@ -98,9 +98,9 @@ To refine your steps, you can filter out certain types of users or event propert
 
 ### Excluding steps
 
-You can also exclude exclude peoples who completed certain events between two specific steps. To do this, add the step you'd like excluded in the **Exclusion steps** section.
+You can also exclude people who completed certain events between two specific steps. To do this, add the step in the **Exclusion steps** section.
 
-Note that these people will be completely excluded from the entire funnel.
+These people are completely excluded from the entire funnel.
 
 ### Conversion rate calcuation
 
@@ -112,8 +112,8 @@ There are two options for showing conversion rates in a funnel:
 **Overall conversion** is helpful for understanding the entire funnel, whereas **relative conversion** shows you which steps have biggest opportunity for improvement.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1718354250/posthog.com/contents/funnel_conversion_types_light.png"
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1718354250/posthog.com/contents/converesion-funnels-dark_2.png"
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/funnel_conversion_types_light_bcc79c205d.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/converesion_funnels_dark_2_793a67ada4.png"
     classes="rounded"
     alt="Overall vs relative conversion"
 />
@@ -121,7 +121,7 @@ There are two options for showing conversion rates in a funnel:
 
 ### Breakdowns
 
-To understand how different types of users interact with your funnel, it's helpful to breakdown results. You can breakdown events by event and person properties. To do this, click on the **+ Add breakdown** button and select the property you want to break down by.
+To understand how different types of user interact with your funnel, it's helpful to breakdown results. You can breakdown steps by event and person properties. To do this, click on the **+ Add breakdown** button and select the property you want to break down by.
 
 The example below shows a breakdown by operating system:
 
@@ -141,11 +141,11 @@ The example below shows a breakdown by operating system:
 
 #### Attribution types
 
-When breaking down funnels by, it's possible that the same properties don't exist on every event. For example, if you want to break down by `browser` on a funnel that's contains both of frontend and backend events.
+When breaking down funnels, it's possible that the same properties don't exist on every event. For example, if you want to break down by `browser` on a funnel that contains both of frontend and backend events.
 
 In this case, you can choose from which step the properties should be selected from by modifying the attribution type. There are four modes to choose from:
 
-##### First touchpoint
+##### 1. First touchpoint
 
 In this case, the first property value seen in any of the steps is chosen.
 
@@ -156,9 +156,9 @@ Consider this example sequence of events:
 
 The first touchpoint means that `Chrome` will be the breakdown value.
 
-With the first touchpoint mode, one person will always only have one value.
+In the first touchpoint mode, one person will always only have one value.
 
-##### Last touchpoint
+##### 2. Last touchpoint
 
 In this case, the last property value seen from all steps is chosen.
 
@@ -169,13 +169,13 @@ Consider the same example as above:
 
 The last touchpoint means that `Firefox` will be the breakdown value.
 
-With the last touchpoint mode, one person will always only have one value.
+In the last touchpoint mode, one person will always only have one value.
 
-##### All steps
+##### 3. All steps
 
 In this case, the property value must be seen in all steps to be considered in the funnel.
 
-##### Specific step
+##### 4. Specific step
 
 In this case, only the property value seen at the selected step is chosen.
 
@@ -208,7 +208,7 @@ The graph type dropdown let's you choose between conversion steps, time to conve
 
 Each type serves a unique purpose:
 
-- **Conversion steps** – shows you where users are dropping off in your funnel
+- **Conversion steps** – shows you where users are dropping off in your funnel and number of people converting between steps.
 
 - **Time to convert** – shows you steps with the highest friction. Steps with a long time to convert are likely much harder than steps with a short time.
 
@@ -238,7 +238,7 @@ Usually the steps with the lowest relative conversion rate are where the largest
 
 Once you have a funnel drop-off you'd like to explore further, the first step is to find out why users are struggling. There are many ways to get this information, from [talking to users directly](/newsletter/talk-to-users) to [replaying their sessions](/docs/session-replay).
 
-Click on the bars in the chart or the linked numbers in the column values of table below the funnel to view the individual people who **COMPLETED** or **DROPPED** that step of your funnel.
+Click on the chart or the linked column values below the funnel to view the individual people who **COMPLETED** or **DROPPED** that step of your funnel.
  
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1718365074/posthog.com/contents/Screenshot_2024-06-14_at_12.36.24_PM.png" 
@@ -247,7 +247,6 @@ Click on the bars in the chart or the linked numbers in the column values of tab
     alt="View users in a funnel"
 />
 
-From here, you can explore the individual people further by viewing session recordings to see exactly what they were doing when they dropped off. You can also use this feature to watch a successful user go through your funnel.
 
 You can also save this list of users as a [cohort](/docs/data/cohorts) for further analysis.
 
@@ -276,9 +275,9 @@ Selecting any option creates a new insight showing the paths users took. This is
 
 It's unlikely that your conversion rate will remain stable every day or every week. This is normal, but it's important to understand the external factors that can cause these fluctuations so you don't jump to conclusions too quickly when analyzing a big change or drop-off.
 
-To look at the seasonality of your conversion rates, set the [graph type](#graph=type) to historical trends and set the time period to when you may expect seasonal variations.
+To look at the seasonality of your conversion rates, set the [graph type](#graph-type) to historical trends and set the time period to when you may expect seasonal variations.
 
-A common seasonality to watch out for is weekends, particularly if your product is B2B. Perhaps you have a yearly sale such as "Black Friday", which increases the number of people visiting your site and increases the expectation of discounts.
+A common seasonality to watch out for is weekends, particularly if your product is B2B. Another one is a yearly sale such as "Black Friday", which increases the number of people visiting your site and increases the expectation of discounts, making it difficult to compare against the rest of the year.
 
 In this view, you can adjust the date ranges to observe key seasonal trends. You can then look at your funnel to determine if it's just a seasonal trend or whether something else has affected the experiece of your product (like a product change).
 
@@ -298,4 +297,4 @@ Want to know more about what's possible with Funnels in PostHog? Try these tutor
 -   [Building an AARRR 'Pirate' Funnel](/tutorials/aarrr-how-to-build-pirate-funnel-posthog-with-posthog)
 -   [Building and measuring a sign up funnel with Next.js, Supabase and PostHog](/tutorials/nextjs-supabase-signup-funnel)
 
-Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials).
+Want more? Check our [full list of PostHog tutorials](/tutorials).
