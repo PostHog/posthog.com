@@ -65,7 +65,50 @@ PostHog only captures pageview events when a [page load](https://developer.mozil
 
 If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
 
-To do this, import `posthog` into `app-routing.module.ts`, subscribe to router events and then capture `$pageview` events on `NavigationEnd` events:
+To track pageviews in Angular, we import:
+
+1. `posthog`
+2. `Router`, `Event`, and `NavigationEnd` from `@angular/router`
+3. `Observable` from `rxjs` and `filter` from `rxjs/operators`
+
+With these, we set up a subscription to the router events that captures a `$pageview` event on every `NavigationEnd` event:
+
+```ts file=app.component.ts
+import { Component } from '@angular/core';
+import { RouterOutlet, Router, Event, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import posthog from 'posthog-js';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  title = 'angular-spa';
+
+  navigationEnd: Observable<NavigationEnd>;
+
+  constructor(public router: Router) {
+    this.navigationEnd = router.events.pipe(
+      filter((event: Event) => event instanceof NavigationEnd)
+    ) as Observable<NavigationEnd>;
+  }
+
+  ngOnInit() {
+    this.navigationEnd.subscribe((event: NavigationEnd) => {
+      posthog.capture('$pageview');
+    });
+  }
+}
+```
+
+### Angular v16 and below
+
+To track pageviews in Angular v16 and below, import `posthog` into `app-routing.module.ts`, subscribe to router events and then capture `$pageview` events on `NavigationEnd` events:
 
 ```js
 // other imports...
@@ -85,7 +128,54 @@ export class AppRoutingModule {
  }
 ```
 
-Now, every time a user moves between pages, PostHog captures a `$pageview` event, not just on the first page load. 
+Now, every time a user moves between pages, PostHog captures a `$pageview` event, not just on the first page load.
+
+## Capturing pageleaves
+
+PostHog captures `$pageleave` events on page unload, but this is also affected by Angular acting as a single-page app. PostHog doesn't capture pageleave events when moving between pages, so we need to manually implement them.
+
+To do this, we can subscribe to the `NavigationStart` event and then capture a `$pageleave` event:
+
+```ts
+import { Component } from '@angular/core';
+import { RouterOutlet, Router, Event, NavigationEnd, NavigationStart } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import posthog from 'posthog-js';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  title = 'angular-spa';
+
+  navigationEnd: Observable<NavigationEnd>;
+  navigationStart: Observable<NavigationStart>;
+
+  constructor(public router: Router) {
+    this.navigationEnd = router.events.pipe(
+      filter((event: Event) => event instanceof NavigationEnd)
+    ) as Observable<NavigationEnd>;
+    this.navigationStart = router.events.pipe(
+      filter((event: Event) => event instanceof NavigationStart)
+    ) as Observable<NavigationStart>;
+  }
+
+  ngOnInit() {
+    this.navigationEnd.subscribe((event: NavigationEnd) => {
+      posthog.capture('$pageview');
+    });
+    this.navigationStart.subscribe((event: NavigationStart) => {
+      posthog.capture('$pageleave');
+    });
+  }
+}
+```
+
 
 ## Next steps
 
