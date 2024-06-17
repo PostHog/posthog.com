@@ -213,7 +213,7 @@ All non-sharded tables are replicated so that they are local to the coordinator.
 
 We should probably consider moving this to a `m7g.metal` if we hit any memory constraints with this, but so far we have not because of the dedicated nature of this node.
 
-- Setup Coordinators for multi-tenant workloads
+We will also want to create new coodinators for multi-tenant workloads in the future. This will allow us to scale up and down easily over time, and even potentially throughout the day as the workload rises and falls.
 
 
 ### Monitoring
