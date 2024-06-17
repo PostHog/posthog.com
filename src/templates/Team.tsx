@@ -560,7 +560,7 @@ export default function Team({
                                 {isModerator && (
                                     <div className="mb-8 pb-8 border-b border-border dark:border-dark">
                                         <SidebarSection title="Post an update">
-                                            <TeamUpdate teamName={name} />
+                                            <TeamUpdate teamName={name} hideTeamSelect />
                                         </SidebarSection>
                                     </div>
                                 )}
