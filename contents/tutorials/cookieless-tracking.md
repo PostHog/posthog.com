@@ -24,7 +24,7 @@ There are some situations where you don't want to use cookies and do cookieless 
 
 - You hate cookie banners.
 
-This tutorial shows how to configure PostHog's JavaScript Web SDK to do cookieless tracking by using page memory to store user data.
+This tutorial shows how to configure PostHog's [JavaScript Web SDK](/docs/libraries/js) to do cookieless tracking by using page memory to store user data.
 
 > **Note:** When using cookies, PostHog stores data as a first-party cookie. We don't track users across different sites (like largely blocked [third-party cookies](https://en.wikipedia.org/wiki/Third-party_cookies) do). It also means the same cookie works across subdomains like `posthog.com` and `eu.posthog.com`.
 
@@ -41,7 +41,7 @@ It is helpful first to know what data is being stored and why. Specifically, Pos
 - [Super properties](/docs/integrate/client/js#super-properties)
 - Configuration options (e.g., whether [session recording](/docs/user-guides/recordings) is enabled)
 
-If you want to use PostHog without cookies, you must store some of this data elsewhere. Although PostHog has [multiple persistence options](/docs/libraries/js#persistence), the most straightforward is to store it in page memory. This is done by setting `persistance` to `memory`.
+If you want to use PostHog without cookies, you must store some of this data elsewhere. Although PostHog has [multiple persistence options](/docs/libraries/js#persistence), the most straightforward is to store it in page memory. We show you how to do this in the next step.
 
 Storing in memory avoids cookies, but once the user leaves the page, the data isn't saved. Returning users get new IDs, flags must be re-fetched, and configuration options are reset.
 
