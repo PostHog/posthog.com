@@ -76,11 +76,12 @@ After our initial response, our follow-up response targets are double those of o
 
 ### Support Engineers
 
-We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, Marcus is our only support engineer, and he covers:
+We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, support engineers sit in the Comms team and cover: 
+
 - Product Analytics
 - Pipeline
 
-He responds to as many queries as he can for these products, and escalates others to those teams as needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
+They respond to as many queries as he can for these products, and escalates others to those teams as needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
 
 ### Engineers are Support Heroes
 
