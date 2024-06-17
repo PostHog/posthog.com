@@ -20,10 +20,12 @@ export default function TeamUpdate({
     teamName,
     onSubmit,
     roadmapID,
+    hideTeamSelect,
 }: {
     teamName?: string
     onSubmit?: () => void
     roadmapID?: number
+    hideTeamSelect?: boolean
 }) {
     const { getJwt, user } = useUser()
     const [updateCount, setUpdateCount] = useState(0)
@@ -135,7 +137,7 @@ export default function TeamUpdate({
             <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
             <div className="ml-[50px]">
                 <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
-                    {!teamName && (
+                    {!hideTeamSelect && (
                         <div className="border-b border-border dark:border-dark">
                             <TeamSelect value={values.team} onChange={(team) => setFieldValue('team', team)} />
                         </div>
