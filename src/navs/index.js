@@ -390,6 +390,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/clickhouse',
                     },
                     {
+                        name: 'Our Cluster Topologies',
+                        url: '/handbook/engineering/clickhouse/clusters',
+                    },
+                    {
                         name: 'Data storage or what is a MergeTree',
                         url: '/handbook/engineering/clickhouse/data-storage',
                     },
