@@ -243,7 +243,6 @@ import posthog from 'posthog-js';
 })
 export class AppComponent {
   title = 'angular-spa';
-
   navigationEnd: Observable<NavigationEnd>;
 
   constructor(public router: Router) {
