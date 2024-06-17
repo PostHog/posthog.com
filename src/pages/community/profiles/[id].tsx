@@ -79,14 +79,14 @@ const Bio = ({ biography, readme }) => {
         <section className="article-content">
             {biography && (
                 <>
-                    <div className="flex items-end space-x-4 border-b border-border dark:border-dark pb-4 mb-4">
+                    <div className="flex items-end space-x-4 border-b border-border dark:border-dark mb-4">
                         {biography && (
                             <Container {...(tabbable ? { onClick: () => setActiveTab('biography') } : null)}>
                                 <h3
-                                    className={`m-0 ${
+                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${
                                         activeTab === 'biography'
-                                            ? ''
-                                            : 'opacity-40 text-base hover:opacity-70 transition-opacity'
+                                            ? 'border-red'
+                                            : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
                                     }`}
                                 >
                                     Biography
@@ -96,10 +96,10 @@ const Bio = ({ biography, readme }) => {
                         {readme && (
                             <Container {...(tabbable ? { onClick: () => setActiveTab('readme') } : null)}>
                                 <h3
-                                    className={`m-0 ${
+                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${
                                         activeTab === 'readme'
-                                            ? ''
-                                            : 'opacity-40 text-base hover:opacity-70 transition-opacity'
+                                            ? 'border-red'
+                                            : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
                                     }`}
                                 >
                                     README
@@ -417,7 +417,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
                         <ul className="p-0 flex space-x-2 items-center list-none m-0">
                             {profile.website && (
                                 <li>
-                                    <Link to={profile.website}>
+                                    <Link to={profile.website} externalNoIcon>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
@@ -438,7 +438,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
 
                             {profile.github && (
                                 <li>
-                                    <Link to={profile.github}>
+                                    <Link to={profile.github} externalNoIcon>
                                         <GitHub className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
                                     </Link>
                                 </li>
@@ -446,7 +446,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
 
                             {profile.twitter && (
                                 <li>
-                                    <Link to={profile.twitter}>
+                                    <Link to={profile.twitter} externalNoIcon>
                                         <Twitter className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
                                     </Link>
                                 </li>
@@ -454,7 +454,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
 
                             {profile.linkedin && (
                                 <li>
-                                    <Link to={profile.linkedin}>
+                                    <Link to={profile.linkedin} externalNoIcon>
                                         <LinkedIn className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
                                     </Link>
                                 </li>
