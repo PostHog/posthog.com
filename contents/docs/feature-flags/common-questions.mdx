@@ -92,10 +92,9 @@ The drawback of this approach is that whenever you make an update to a feature f
 
 ## I have very few `$feature_flag_called` events when I look at a flag, but my bill is still very high, why is this?
 
-The usage you see for feature flags is for auditing and debugging how your flags are being used (and as a result, can be easily switched off). By default, these events are sent whenever you call `getFeatureFlag()` or `isFeatureEnabled()`. Further, they're not sent every time, just when the flag value changes for a given person. 
+$feature_flag_called` events are captured whenever you call `getFeatureFlag()` or `isFeatureEnabled()`. Also, they're not sent every time and are only sent when the flag value changes for a given person. 
 
-This is different from requests made to our servers to compute flags, which is what feature flag billable requests are. Thus, generally, there will be no relation between the no. of feature flag called events and the number you see in billing.
-
+This is different from requests made to our servers to compute flags, which is what feature flag billable requests are. Thus, generally, there will be no relation between the number of `$feature_flag_called` events and the usage you see in your billing.
 ## Why do feature flags sometimes cause my app to flicker?
 
 By default, fetching flags from our servers takes about 100-500ms. During this time, the flag is disabled. When the request is complete, the flag is updated. This may be the cause of the flickering.
