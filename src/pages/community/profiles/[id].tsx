@@ -110,6 +110,16 @@ const Bio = ({ biography, readme }) => {
                         )}
                     </div>
                     <Markdown>{activeTab === 'biography' ? biography : readme}</Markdown>
+                    {activeTab === 'biography' && readme && (
+                        <>
+                            <button
+                                className="text-red dark:text-yellow font-semibold cursor-pointer"
+                                onClick={() => setActiveTab('readme')}
+                            >
+                                See my README for tips on how to work with me
+                            </button>
+                        </>
+                    )}
                 </>
             )}
         </section>
