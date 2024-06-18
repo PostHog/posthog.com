@@ -758,7 +758,7 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/mdx-setup',
                     },
                     {
-                        name: 'Markdown',
+                        name: 'MDX components',
                         url: '/handbook/engineering/posthog-com/markdown',
                     },
                     {
