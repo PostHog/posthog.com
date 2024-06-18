@@ -1942,10 +1942,6 @@ export const docsMenu = {
                     name: 'Glossary',
                     url: '/docs/glossary',
                 },
-                {
-                    name: 'Partners',
-                    url: '/partners',
-                },
             ],
         },
         {
