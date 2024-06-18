@@ -797,7 +797,7 @@ const PlansTabs = () => {
         },
     ]
 
-    const [activeTab, setActiveTab] = useState(1)
+    const [activeTab, setActiveTab] = useState(0)
     const activePlan = plans[activeTab]
 
     return (
@@ -949,7 +949,9 @@ const PricingExperiment = ({
                         <ProductTabs billingProducts={billingProducts} />
                     </section>
 
-                    {variant === 'test_with_plans' && <PlanColumns billingProducts={billingProducts} />}
+                    {variant === 'test_with_plans' && (
+                        <PlanColumns billingProducts={billingProducts} highlight="free" />
+                    )}
 
                     <SectionLayout>
                         <SectionHeader>
