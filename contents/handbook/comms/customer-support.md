@@ -70,18 +70,27 @@ Tickets are considered low priority if they fulfill none of the conditions for H
 
 We always aim to respond to low priority tickets and will often read and consider them, but we do not set a response target or promise to respond due to the high volume and our need to focus on paying users. 
 
-#### Follow-up / next reply response targets
+### Follow-up / next reply response targets
 
 After our initial response, our follow-up response targets are double those of our initial response targets. For example, if a user replies to our initial response on a high priority ticket (12 hours), our follow-up / next reply response target is within 24 hours.
 
+### Escalated ticket response targets
+
+When support engineers need to escalate issues to other engineering teams for deeper investigation, the investigations can take longer. For escalated tickets, our response targets are as follows: 
+- High priority escalated ticket response target: 2 business days
+- Normal priority escalated ticket response target: 4 business days
+- Low priority escalated ticket response target: N/A
+
 ### Support Engineers
 
-We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, support engineers sit in the Comms team and cover: 
+We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, support engineers sit in [the Comms team](/teams/customer-comms) and cover: 
 
 - Product Analytics
 - Pipeline
+- Session Reply
+- Feature Success
 
-They respond to as many queries as he can for these products, and escalates others to those teams as needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
+Support engineers respond to as many tickets as they can for these products, and escalate other tickets to the appropriate teams as needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
 
 ### Engineers are Support Heroes
 
