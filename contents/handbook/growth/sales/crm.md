@@ -10,7 +10,9 @@ We use [Salesforce](https://posthog.lightning.force.com/lightning/page/home) as 
 
 As a first step, you might find it useful to install Salesforce's [Chrome extension](https://chromewebstore.google.com/detail/Salesforce/jjghhkepijgakdammjldcbnjehfkfmha?hl=en-US), as it means you can manage most things directly in Gmail. 
 
-As a general principle, we try to ensure as much customer communication as possible is captured in Salesforce, rather than in individual email inboxes, so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!). You should use the channel that suits the user, not us. Just make sure you keep Salesforce up to date with your interactions. We've seen much higher response rates on Slack than email. All slack messages sync to corresponding account in Salesforce.
+As a general principle, we try to ensure as much customer communication as possible is captured in Salesforce, rather than in individual email inboxes, so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!). You should use the channel that suits the user, not us. Just make sure you keep Salesforce up to date with your interactions. We've seen much higher response rates on Slack than email. 
+
+All Slack messages sync up with the corresponding account in Salesforce. We use [Pylon](https://app.usepylon.com) for this sync, so make sure Pylon is added to the customer Slack channel integrations and the channel is [linked to the Salesforce account](https://app.usepylon.com/integrations/salesforce?tab=account-mapping) properly for the sync to work smoothly.
 
 You are most likely to use the following regularly:
 - _Leads_ - A lead is a potential customer who has shown interest but hasn't yet been qualified. We create leads for every new user emailing sales@posthog.com or filling out contact sales form on our website. You can also create them manually if you are introduced through other sources (e.g. events, referrals). 
@@ -59,8 +61,8 @@ You can also just manually add a user to Salesforce under 'Contacts'. When creat
 ## How we do lead assessment
 Any user who submits a “contact sales” form on our website shows up as a lead in Salesforce and gets assigned to an Account Executive (AE). This is how we do lead assignment within our sales team:
 - Based on Territory: Leads are assigned based on their geographical location.
-  - Territory 1: Users based in the US, Canada, Central and Latin America, Australia are assigned to this territory.
-  - Territory 2: Users based in Europe, the Middle East, and Africa are assigned to this territory.
+  - Territory 1: Users based in the US, Canada, Central and Latin America are assigned to this territory.
+  - Territory 2: Users based in Europe, the Middle East, Australia, and Africa are assigned to this territory.
   - Territory 3: All other geographies, or if the country information is missing, assigned to this territory.
 
 - Round Robin Within Territory: Leads are assigned in a round-robin fashion to the AEs who own that territory, ensuring equal distribution among them.
