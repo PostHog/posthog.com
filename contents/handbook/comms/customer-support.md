@@ -81,6 +81,8 @@ When support engineers need to escalate issues to other engineering teams for de
 - Normal priority escalated ticket response target: 4 business days
 - Low priority escalated ticket response target: N/A
 
+> **_NOTE:_** The targets are for a reply to the user. If the escalation turns out to be a bug or feature request, it doesn't have to be solved by the response target date, we just need to reply to the user.  That reply may be to let them know it won't be fixed right away, but that we have opened a bug report or feature request.
+
 ### Support Engineers
 
 We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, support engineers sit in [the Comms team](/teams/customer-comms) and cover: 
