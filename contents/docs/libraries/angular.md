@@ -65,7 +65,28 @@ PostHog only captures pageview events when a [page load](https://developer.mozil
 
 If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
 
-To track pageviews in Angular, we import:
+To start, we need to add `capture_pageviews: false` to the PostHog initialization to avoid double capturing the first pageview.
+
+```ts file=main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app/app.config';
+import { AppComponent } from './app/app.component';
+import posthog from 'posthog-js'
+
+posthog.init(
+  '<ph_project_api_key>',
+  {
+    api_host:'<ph_client_api_host>',
+    person_profiles: 'identified_only',
+    capture_pageviews: false
+  }
+)
+
+bootstrapApplication(AppComponent, appConfig)
+  .catch((err) => console.error(err));
+```
+
+Next, to track pageviews in Angular, we import the following in `app.component.ts`:
 
 1. `posthog`
 2. `Router`, `Event`, and `NavigationEnd` from `@angular/router`
@@ -106,7 +127,7 @@ export class AppComponent {
 }
 ```
 
-### Angular v16 and below
+### Tracking pageviews in Angular v16 and below
 
 To track pageviews in Angular v16 and below, import `posthog` into `app-routing.module.ts`, subscribe to router events and then capture `$pageview` events on `NavigationEnd` events:
 
@@ -132,50 +153,27 @@ Now, every time a user moves between pages, PostHog captures a `$pageview` event
 
 ## Capturing pageleaves
 
-PostHog captures `$pageleave` events on page unload, but this is also affected by Angular acting as a single-page app. PostHog doesn't capture pageleave events when moving between pages, so we need to manually implement them.
+Setting `capture_pageview: false` also disables automatic pageleave capture. To re-enable this, add `capture_pageleave: true` to your PostHog initialization.
 
-To do this, we can subscribe to the `NavigationStart` event and then capture a `$pageleave` event:
+```ts file=main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app/app.config';
+import { AppComponent } from './app/app.component';
+import posthog from 'posthog-js'
 
-```ts
-import { Component } from '@angular/core';
-import { RouterOutlet, Router, Event, NavigationEnd, NavigationStart } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import posthog from 'posthog-js';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
-})
-export class AppComponent {
-  title = 'angular-spa';
-
-  navigationEnd: Observable<NavigationEnd>;
-  navigationStart: Observable<NavigationStart>;
-
-  constructor(public router: Router) {
-    this.navigationEnd = router.events.pipe(
-      filter((event: Event) => event instanceof NavigationEnd)
-    ) as Observable<NavigationEnd>;
-    this.navigationStart = router.events.pipe(
-      filter((event: Event) => event instanceof NavigationStart)
-    ) as Observable<NavigationStart>;
+posthog.init(
+  '<ph_project_api_key>',
+  {
+    api_host:'<ph_client_api_host>',
+    person_profiles: 'identified_only',
+    capture_pageviews: false,
+    capture_pageleave: true
   }
+)
 
-  ngOnInit() {
-    this.navigationEnd.subscribe((event: NavigationEnd) => {
-      posthog.capture('$pageview');
-    });
-    this.navigationStart.subscribe((event: NavigationStart) => {
-      posthog.capture('$pageleave');
-    });
-  }
-}
+bootstrapApplication(AppComponent, appConfig)
+  .catch((err) => console.error(err));
 ```
-
 
 ## Next steps
 
