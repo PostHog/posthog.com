@@ -117,7 +117,7 @@ export function PHProvider({ children }) {
 }
 ```
 
-```ts
+```tsx
 // app/providers.tsx
 'use client'
 import posthog from 'posthog-js'
@@ -245,7 +245,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-```ts
+```tsx
 // app/layout.tsx
 
 import './globals.css'
@@ -280,7 +280,7 @@ PostHog is now set up and ready to go. Files and components accessing PostHog on
 
 #### Pageleave events (optional)
 
-To capture pageleave events, first, we need to set `capture_pageleave: true` in the initialization because setting `capture_pageview: false` disables it.
+To capture pageleave events, we need to set `capture_pageleave: true` in the initialization because setting `capture_pageview: false` disables it.
 
 <MultiLanguage>
 
@@ -304,7 +304,7 @@ export function PHProvider({ children }) {
 }
 ```
 
-```ts
+```tsx
 // app/providers.tsx
 'use client'
 import posthog from 'posthog-js'
@@ -325,66 +325,6 @@ export function PHProvider({
   children: React.ReactNode
 }) {
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
-```
-
-</MultiLanguage>
-
-Second, PostHog's `$pageleave` autocapture is relies on the page unload event. This doesn't trigger on navigation, so we must manually capture most of our `$pageleave` events. 
-
-We can get all the data [web analytics](/docs/web-analytics) needs to calculate scroll depth and bounce rate by calling `posthog.pageViewManager.doPageLeave()` in our `PostHogPageView` component.
-
-<MultiLanguage>
-
-```js
-// app/PostHogPageView.jsx
-'use client'
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { usePostHog } from 'posthog-js/react';
-
-export default function PostHogPageView() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const posthog = usePostHog();
-  useEffect(() => {
-    // Track pageleaves
-    const pageleaveData = posthog.pageViewManager.doPageLeave();
-    if (pageleaveData && Object.keys(pageleaveData).length > 0) {
-      pageleaveData.$current_url = window.origin + pageleaveData.$prev_pageview_pathname;
-      posthog.capture('$pageleave', pageleaveData);
-    }
-    // Track pageviews
-    // ...
-  }, [pathname, searchParams, posthog])
-  
-  return null
-}
-```
-
-```ts
-// app/PostHogPageView.tsx
-'use client'
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { usePostHog } from 'posthog-js/react';
-
-export default function PostHogPageView() : null {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const posthog = usePostHog();
-  useEffect(() => {
-    // Track pageleaves
-    const pageleaveData = posthog.pageViewManager.doPageLeave();
-    if (pageleaveData && Object.keys(pageleaveData).length > 0) {
-      pageleaveData.$current_url = window.origin + pageleaveData.$prev_pageview_pathname;
-      posthog.capture('$pageleave', pageleaveData);
-    }
-    // Track pageviews
-    // ...
-  }, [pathname, searchParams, posthog])
-  
-  return null
 }
 ```
 
