@@ -87,7 +87,7 @@ const planSummary = [
     },
 ]
 
-const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
+const Plan: React.FC<{ planData: PlanData } & { highlight?: boolean }> = ({ planData, highlight }) => (
     <div>
         <h4 className="text-lg mb-2">{planData.title}</h4>
         <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded">
@@ -112,10 +112,10 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
                 </ul>
                 <div className="mt-auto">
                     <PlanCTA
-                        type={planData.title === 'Ridiculously cheap' ? 'primary' : 'secondary'}
                         ctaText={planData.CTAText}
                         ctaLink={planData.CTALink}
                         intent={planData.intent}
+                        type={highlight ? 'primary' : 'secondary'}
                     />
                 </div>
             </div>
@@ -267,7 +267,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                         }`}
                     >
                         {planSummary.map((plan, index) => (
-                            <Plan key={index} planData={plan} />
+                            <Plan key={index} planData={plan} highlight={plan.intent === highlight} />
                         ))}
                     </div>
                 </div>
