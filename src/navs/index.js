@@ -966,6 +966,14 @@ export const companyMenu = {
                     name: 'Engineering',
                 },
                 {
+                    name: 'CDP',
+                    url: '/teams/cdp',
+                },
+                {
+                    name: 'ClickHouse',
+                    url: '/teams/clickhouse',
+                },
+                {
                     name: 'Data Warehouse',
                     url: '/teams/data-warehouse',
                 },
@@ -978,16 +986,16 @@ export const companyMenu = {
                     url: '/teams/infrastructure',
                 },
                 {
-                    name: 'Replay',
-                    url: '/teams/replay',
-                },
-                {
                     name: 'Pipeline',
                     url: '/teams/pipeline',
                 },
                 {
                     name: 'Product Analytics',
                     url: '/teams/product-analytics',
+                },
+                {
+                    name: 'Replay',
+                    url: '/teams/replay',
                 },
                 {
                     name: 'Web Analytics',
@@ -997,8 +1005,8 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Sales & CS',
-                    url: '/teams/sales-cs',
+                    name: 'Customer Comms',
+                    url: '/teams/customer-comms',
                 },
                 {
                     name: 'Exec',
@@ -1015,6 +1023,10 @@ export const companyMenu = {
                 {
                     name: 'People & Ops',
                     url: '/teams/people',
+                },
+                {
+                    name: 'Sales & CS',
+                    url: '/teams/sales-cs',
                 },
                 {
                     name: 'Website & Docs',
