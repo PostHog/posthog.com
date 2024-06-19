@@ -26,7 +26,30 @@ const Logo = ({ src, alt, className = '' }) => (
 
 const Customer = ({ image, alt, className = '', url }) => {
     const { websiteTheme } = useValues(layoutLogic)
-    return (
+    return url ? (
+        <Link
+            to={url}
+            className="flex items-center justify-center 
+            w-full 
+            h-24
+            py-6 
+            lg:px-2
+            lg:h-40
+            bg-accent-dark
+            rounded
+            text-primary
+            dark:text-primary-dark
+            relative
+        "
+        >
+            <Logo className={className} src={image} alt={alt} />
+            <span className="absolute bottom-4 left-0 w-full text-center text-red  ">
+                <span className="inline-flex border border-dark hover:border-light/40 rounded-full px-2 py-0.5 text-xs">
+                    Read case study
+                </span>
+            </span>
+        </Link>
+    ) : (
         <li
             className="flex items-center justify-center 
             w-full 
@@ -40,13 +63,7 @@ const Customer = ({ image, alt, className = '', url }) => {
             dark:text-primary-dark
         "
         >
-            {url ? (
-                <Link to={url}>
-                    <Logo className={className} src={image} alt={alt} />
-                </Link>
-            ) : (
-                <Logo className={className} src={image} alt={alt} />
-            )}
+            <Logo className={className} src={image} alt={alt} />
         </li>
     )
 }
