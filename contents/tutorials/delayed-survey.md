@@ -29,7 +29,7 @@ Finally, click "Save as draft" and then "Launch." You don’t have to worry abou
 
 Once installed in your app, PostHog automatically shows your surveys to users when the `.delayed-survey` class is present. All we need to do is set up the logic to add this class to the page after a delay.
 
-As an example, we do this in a basic Next.js app with PostHog already installed, but you can use any app or site that can run client-side JavaScript, including no-code site builders like [Webflow](/tutorials/webflow) and [Framer](/tutorials/framer-analytics).
+As an example, we do this in a basic Next.js app with PostHog already installed, but you can use any app or site that can run client-side JavaScript, including no-code site builders like [Webflow](/tutorials/webflow), [Framer](/tutorials/framer-analytics), and [Carrd](/tutorials/carrd-analytics).
 
 > Need help installing and setting up PostHog for Next.js? Check out our tutorial on [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics).
 
