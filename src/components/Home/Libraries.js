@@ -10,22 +10,22 @@ const librariesData = {
             {
                 name: 'JavaScript',
                 url: '/docs/libraries/js',
-                icon: "<Image src='../../../contents/images/docs/integrate/nodejs.svg' alt='Node.js' />",
+                icon: <StaticImage src="../../../contents/images/docs/integrate/js.svg" alt="JavaScript" />,
             },
             {
                 name: 'React',
                 url: '/docs/libraries/react',
-                icon: '<IconReact />',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/react.svg" alt="React" />,
             },
             {
                 name: 'Node.js',
                 url: '/docs/libraries/node',
-                icon: "<Image src='https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg' alt='Node.js' />",
+                icon: <StaticImage src="../../../contents/images/docs/integrate/nodejs.svg" alt="Node.js" />,
             },
             {
                 name: 'Next.js',
                 url: '/docs/libraries/next',
-                icon: '<IconNext />',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/frameworks/nextjs.svg" alt="Next.js" />,
             },
         ],
     },
@@ -91,10 +91,9 @@ export default function Libraries() {
                                 {category.items.map((item) => (
                                     <li key={item.name}>
                                         <Link href={item.url} className="flex flex-col gap-2 items-center p-0">
-                                            <figure
-                                                className="size-16 bg-accent dark:bg-accent-dark p-4 rounded-md text-center flex items-center justify-center"
-                                                dangerouslySetInnerHTML={{ __html: item.icon }}
-                                            ></figure>
+                                            <figure className="size-16 bg-accent dark:bg-accent-dark p-4 rounded-md text-center flex items-center justify-center">
+                                                {item.icon}
+                                            </figure>
                                             <span className="text-red dark:text-yellow font-semibold text-[15px]">
                                                 {item.name}
                                             </span>
