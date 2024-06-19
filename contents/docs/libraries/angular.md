@@ -86,7 +86,11 @@ bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
 ```
 
-Next, to track pageviews in Angular, we import the following in `app.component.ts`:
+Next, depending on your Angular version, add the following code to track pageviews:
+
+### Tracking pageviews in Angular v17 and above
+
+Import the following in `app.component.ts`:
 
 1. `posthog`
 2. `Router`, `Event`, and `NavigationEnd` from `@angular/router`
