@@ -32,7 +32,7 @@ const Customer = ({ image, alt, className = '', url }) => {
             className="flex items-center justify-center 
             w-full 
             h-24
-            py-6 
+            py-6 pb-8 md:pb-6
             lg:px-2
             lg:h-40
             bg-accent-dark
@@ -40,14 +40,23 @@ const Customer = ({ image, alt, className = '', url }) => {
             text-primary
             dark:text-primary-dark
             relative
+            overflow-hidden
         "
         >
             <Logo className={className} src={image} alt={alt} />
-            <span className="absolute bottom-1 right-1 text-yellow/75 hover:text-yellow">
-                <span className="inline-flex bg-dark border border-dark/50 hover:border-dark rounded px-3 py-1 text-[13px]">
-                    Customer story &rarr;
+            <div
+                className={`hidden md:flex group absolute top-2 hover:right-2 transition-all border border-transparent hover:border-light/40 rounded-full px-2 py-0.5 items-center gap-1 ${
+                    image === posthog ? '[right:_-8.5rem]' : 'right-[-6.5rem]'
+                }`}
+            >
+                <span className="inline-flex w-3 h-3 rounded-full bg-red opacity-75"></span>
+                <span className="transition-all text-white/0 group-hover:text-white/80 text-[13px] whitespace-nowrap ">
+                    {image === posthog ? 'How we use PostHog' : 'Customer story'} &rarr;
                 </span>
-            </span>
+            </div>
+            <div className="md:hidden absolute bottom-0 left-0 w-full border-t border-dark/50 text-white/40 text-center py-1 text-xs">
+                {image === posthog ? 'How we use PostHog' : 'Customer story'} &rarr;
+            </div>
         </Link>
     ) : (
         <li
@@ -76,14 +85,17 @@ export default function Customers() {
                 <h2 className="m-0 text-center text-4xl lg:text-5xl 2xl:text-6xl text-primary-dark max-w-screen-2xl mx-auto">
                     {enterpriseMode ? (
                         <>
-                            These customers <span className="text-yellow">increase shareholder value</span> with PostHog
+                            These customers <span className="text-yellow">increase shareholder value</span>
                         </>
                     ) : (
                         <>
-                            These folks <span className="text-yellow">build products users want</span> with
+                            These folks <span className="text-yellow">build products users want</span>
                         </>
-                    )}
-                    <Logomark className="inline-flex ml-4 -mt-2 h-8 lg:h-10 xl:h-12 2xl:h-14 fill-current" />
+                    )}{' '}
+                    <span className="whitespace-nowrap">
+                        with
+                        <Logomark className="inline-flex ml-4 -mt-2 h-8 lg:h-10 xl:h-12 2xl:h-14 fill-current" />
+                    </span>
                 </h2>
             </div>
             <div className="md:mt-4 pb-8 md:pb-0 max-w-screen-2xl mx-auto px-4 2xl:px-0 flex items-center sm:items-end flex-col sm:flex-row">
