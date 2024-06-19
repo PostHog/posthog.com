@@ -135,6 +135,8 @@ We also spent ~$1,000 promoting the repo on Twitter which, combined with the suc
 
 After the massive bump on launch day, our growth settled to a level that was noticeably higher than before.
 
+<NewsletterForm />
+
 ## 📈 Reaching 1,000 users in three months 
 
 Our Hacker News launch gave us a steady trickle of word-of-mouth growth. The next few months were about understanding why people liked PostHog, and what to build next. (We also made some of our first hires.)
@@ -196,35 +198,35 @@ We reached 1,000 users in May 2020, a few weeks after the launch of PostHog Clou
 
 ## 🎓 Things I learned from reaching 1,000 users 
 
-#### 1. Deadlines are motivating
+### 1. Deadlines are motivating
 
 Our one-month plan had a hard deadline built-in. It forced us to make decisions about what we did and didn’t care about, and gave us a reason to push hard. It’s easy to drift without one.
 
-#### 2. Have a plan for finding your first users before you start building
+### 2. Have a plan for finding your first users before you start building
 
 It doesn’t need to be a detailed plan, but you should know who your users will be and how to reach them. We had a clearer plan for PostHog than our previous ideas.
 
-#### 3. Optimize for learning, not revenue (at the start)
+### 3. Optimize for learning, not revenue (at the start)
 
 Going self-serve too soon will reduce your opportunities to learn. The time we spent onboarding users by hand was incredibly valuable. We still do this with new PostHog products, like [our data warehouse](https://posthog.com/docs/data-warehouse) that’s now in open beta.
 
-#### 4. Repeat users are more important than volume. 
+### 4. Repeat users are more important than volume. 
 
 If people are using what you’ve built over and over again, chances are you’re solving a real problem. You don’t need hundreds of users to validate an idea. Don’t invest in a big launch until you’re certain users will stick.
 
-#### 5. Be concise when you ask for meetings 
+### 5. Be concise when you ask for meetings 
 
 Write two or three sentences, not a wall of text. Be direct. If you want feedback, state that. If you want to sell to them, be transparent about it. You can always come back to a prospect to sell to them after you've validated they have your problem.
 
-#### 6. Be ultra-responsive to users
+### 6. Be ultra-responsive to users
 
 You should aim to respond within 30 seconds if someone messages you back – yes, it's that extreme. Startups win on speed. Be glued to your messages.
 
-#### 7. New users are more likely to pay than existing ones
+### 7. New users are more likely to pay than existing ones
 
 If you launch as a free product, you may find it harder to monetize existing users than fresh prospects. This isn’t an argument against launching a free product, just a reality. Factor this in when evaluating the success of your monetization efforts.
 
-#### 8. Transparent pricing increases confidence in your product
+### 8. Transparent pricing increases confidence in your product
 
 Launching without pricing was good for us, but usage and growth increased when we introduced pricing – a pattern that repeated when we started charging for [session replay](https://posthog.com/session-replay), [feature flags](https://posthog.com/feature-flags), and [surveys](https://posthog.com/surveys). People take your product more seriously if it’s obvious you’re taking it seriously, too.
 
