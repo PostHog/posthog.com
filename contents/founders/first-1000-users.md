@@ -229,20 +229,3 @@ If you launch as a free product, you may find it harder to monetize existing use
 Launching without pricing was good for us, but usage and growth increased when we introduced pricing – a pattern that repeated when we started charging for [session replay](https://posthog.com/session-replay), [feature flags](https://posthog.com/feature-flags), and [surveys](https://posthog.com/surveys). People take your product more seriously if it’s obvious you’re taking it seriously, too.
 
 <NewsletterForm />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
