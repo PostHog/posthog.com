@@ -58,13 +58,11 @@ We optimized how we worked together to ship is fast as possible. It was a crazy 
 
 ### Important decisions we made
 
-All our established competitors were focused on product managers and selling to execs, so we figured being developer-focused was the best choice.
-
 On the product side, we decided to:
 
 #### 1. Build a product for developers
 
-We chose developers because (i) existing products weren’t developer-friendly, and (ii) it was an audience we understood and enjoyed working with.
+We chose developers because (i) established competitors were focused on product managers and selling to execs, and (ii) it was an audience we understood and enjoyed working with.
 
 #### 2. Focus on self-hosting
 
