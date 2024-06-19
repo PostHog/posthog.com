@@ -1137,15 +1137,16 @@ function Privacy() {
                             contribution to one of our projects.
                         </p>
                     </div>
-                                          <h2 id="contact-us">
+                    <div>
+                        <h2 id="contact-us">
                             <strong>Contacting PostHog about your privacy</strong>
                         </h2>
                     </div>
                     <div></div>
                     <div className="pb-12">
-                        <p>
-                            If you need to contact us about your privacy, please email privacy@posthog.com. 
-                        </p>
+                        <p>If you need to contact us about your privacy, please email privacy@posthog.com.</p>
+                    </div>
+                    <div className="invisible md:visible">&nbsp;</div>
                 </div>
             </div>
         </Layout>
