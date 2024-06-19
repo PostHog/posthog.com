@@ -43,9 +43,9 @@ const Customer = ({ image, alt, className = '', url }) => {
         "
         >
             <Logo className={className} src={image} alt={alt} />
-            <span className="absolute bottom-4 left-0 w-full text-center text-red  ">
-                <span className="inline-flex border border-dark hover:border-light/40 rounded-full px-2 py-0.5 text-xs">
-                    Read case study
+            <span className="absolute bottom-1 right-1 text-yellow/75 hover:text-yellow">
+                <span className="inline-flex bg-dark border border-dark/50 hover:border-dark rounded px-3 py-1 text-[13px]">
+                    Customer story &rarr;
                 </span>
             </span>
         </Link>
