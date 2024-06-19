@@ -31,7 +31,7 @@ In your Carrd site, go to your site editor, click the **+** in the top right too
 
 ![Carrd site editor](https://res.cloudinary.com/dmukukwp6/image/upload/carrd_ce2ed93b25.png)
 
-Click the floppy disk icon to save and publish the site. Now, when you go to your published site and click around, you will see pageviews, clicks, and more autocaptured in PostHog's activity tab. If you enabled [session replay](https://us.posthog.com/settings/project-replay) and [heatmaps](https://us.posthog.com/settings/project-autocapture#heatmaps) in your project settings, these are also captured. 
+Click the save icon and publish the site. Now, when you go to your published site and click around, you will see pageviews, clicks, and more autocaptured in PostHog's [activity tab](https://us.posthog.com/project/events). If you enabled [session replay](https://us.posthog.com/settings/project-replay) and [heatmaps](https://us.posthog.com/settings/project-autocapture#heatmaps) in your project settings, these are also captured. 
 
 ![Analytics](https://res.cloudinary.com/dmukukwp6/image/upload/analytics_da9daded1b.png)
 
