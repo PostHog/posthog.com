@@ -74,7 +74,13 @@ const librariesData = {
             {
                 name: 'iOS',
                 url: '/docs/libraries/ios',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/ios.svg" alt="Node.js" />,
+                icon: (
+                    <StaticImage
+                        src="../../../contents/images/docs/integrate/ios.svg"
+                        className="dark:invert"
+                        alt="Node.js"
+                    />
+                ),
             },
         ],
     },
