@@ -13,17 +13,15 @@ Mobile Session Recording allows you to record user sessions on mobile devices. T
 
 We have taken our time to make sure we provide a useful and detailed recording experience whilst keeping the performance and security of your app as a top priority. By default, the configuration is restrictive with automatic masking.
 
-#### Screen recording
+#### Wireframe mode (Default)
 
 Mobile recording is primarily done using native APIs to grab the view hierarchy state when the screen is drawn. This is done carefully so as not to affect performance in any way a user may notice.
 
 The view hierarchy is transformed to a JSON data structure and later rendered as an HTML [wireframe](https://www.figma.com/resource-library/what-is-wireframing/). Since it is a wireframe, the UI won't have the original look and feel but it should be close enough to understand the user's behavior.
 
-Alternatively, you can enable the `screenshot` (Android) or `screenshotMode` (iOS) which will take a screenshot of the screen instead of making a representation of the user's screen.
-
 #### Screenshot mode
 
-If the `screenshot` (Android) or `screenshotMode` (iOS) option is enabled, the SDK will take a screenshot of the screen instead of making a representation of the user's screen. The screenshot may contain sensitive information, use it with caution. The automatic masking for the screenshot mode already works on Android and we'll be working on the iOS next.
+If the `screenshot` (Android) or `screenshotMode` (iOS) option is enabled, the SDK will take a screenshot of the screen instead of making a representation of the user's screen (A.k.a. Wireframe mode). The screenshot may contain sensitive information, use it with caution. The automatic masking for the screenshot mode already works on Android and we'll be working on the iOS next.
 
 #### Network recording
 
