@@ -2,6 +2,7 @@
 date: 2024-06-19
 title: 'How we got our first 1,000 users'
 author:
+  - james-hawkins
   - andy-vandervell
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/math_meme_8b0013533e.jpg
@@ -108,15 +109,12 @@ Once we were confident friends could use the product and found it useful, we foc
 
 ![meetings](https://res.cloudinary.com/dmukukwp6/image/upload/meetings_a65d6cf7dd.png)
 
-Once we were confident in self-serve, I started reaching out to more people I knew, and expanded into some cold outreach via groups I was in, getting introductions, and messaging via LinkedIn.
+Once we were confident in self-serve, I started reaching out to more people I knew, and expanded into some cold outreach via groups I was in, getting introductions, and messaging via LinkedIn. This got us to a couple dozen users within a few weeks. 
 
-This got us to a couple dozen users within a few weeks, but the most critical part was figuring out if people we didn’t know would use the product, and keep coming back.
-
-This is where we failed on several previous ideas. If people sign up but don’t come back over and over, you’ve probably found a valid problem, but not solved it. That's either because your product needs reimagining, or it's painful or confusing to use.
+The most critical part of this stage was figuring out if people we didn’t know would use the product, and keep coming back. This is where we failed on several previous ideas. If people sign up but don’t come back over and over, you’ve probably found a valid problem, but not solved it. That's either because your product needs reimagining, or it's painful or confusing to use.
 
 Watch people using it, ask them about it, look for repeat usage, analyze why some users come back and others don't, and so on, until you figure this out. If you can't, then start over with a new idea. 
 
-Don't become a [solution looking for a problem](https://en.wikipedia.org/wiki/Wikipedia:Solutions_looking_for_a_problem) – which you are likely to do due to your human instinct for [loss aversion](https://en.wikipedia.org/wiki/Loss_aversion). 
 
 ### The public launch
 
@@ -137,7 +135,7 @@ After the massive bump on launch day, our growth settled to a level that was not
 
 ## 📈 Reaching 1,000 users in three months 
 
-Our Hacker News launch gave us a steady trickle of word-of-mouth growth. The next few months were about understanding why people liked PostHog, and what to build next. (We also made some of our first hires.)
+Our Hacker News launch gave us a steady trickle of word-of-mouth growth. We made some of [our first hires](https://newsletter.posthog.com/p/what-we-learned-about-hiring-from), and the next few months were about understanding why people liked PostHog, and what to build next. 
 
 To figure that out, we asked people:
 
@@ -145,9 +143,9 @@ To figure that out, we asked people:
 2. Why they signed up.
 3. Why they had been recommended our product (if it applied).
 
-And we kept talking to all our existing users about what they did and didn’t like about the product, and the problems they wanted to solve.
+And we kept [talking to all our existing users](https://newsletter.posthog.com/p/talk-to-users) about what they did and didn’t like about the product, and the problems they wanted to solve.
 
-Over the course of a few weeks we gathered all this intel and mapped out what users loved, how to scale it, and anti-goals we should avoid. This lead us to focus on shipping more features engineers wanted, such as feature flags, that they also wanted to self-host.
+Over the course of a few weeks, we gathered all this intel and mapped out what users loved, how to scale it, and anti-goals we should avoid. This lead us to focus on shipping more features engineers wanted, such as feature flags, that they also wanted to self-host.
 
 Here’s an example of what this looks like for PostHog today. Notice that the anti-goals are all standard things that most companies follow, which is exactly why bigger companies often become unpopular at scale.
 
@@ -155,17 +153,17 @@ Here’s an example of what this looks like for PostHog today. Notice that the a
 
 At this stage, I also started experimented with content as a marketing channel. I'm not good at coding, so figured I could help out this way.
 
-I knew from these conversations that developers wouldn't appreciate being sold to, but I guessed they would find following our journey interesting. So, I wrote about what my co-founder and I were up to – how we pivoted lots of times, or what it was like moving to San Francisco for YC.
+I knew from these conversations that developers wouldn't appreciate being sold to, but I guessed they would find following our journey interesting. So, I wrote about what my co-founder and I were up to – [how we pivoted lots of times](https://newsletter.posthog.com/p/read-this-before-you-pivot), or what it was like moving to San Francisco for YC.
 
 This got us a couple more hits on the front page of Hacker News, which proved it worked, so we kept doing it. That’s why, four years and 60,000 customers later, I'm writing this blog post, as the CEO, at half midnight.
 
 ### Getting our first sales
 
-Our successful HackerNews launch also gave us the confidence to start thinking about pricing.
+Our successful Hacker News launch also gave us the confidence to start thinking about pricing.
 
 I did two things to get our very first sales:
 
-1. I talked to users that were already using our product and in our Slack community about our paid offering and gauging interest.
+1. I gauged interest about our paid offering with users that were already using our product and in our Slack community.
 
 2. I created a pricing page on our website, listing our paid extra features and embedding my calendar into it, gradually making this self-serve over time. When someone booked a call, I'd see which extra features they really cared about, and if they wanted to buy.
 
@@ -188,7 +186,7 @@ Once we’d nailed pricing, we launched PostHog Cloud in April 2020, two months 
 
 We launched with a limited free tier (much less than the 1 million events we offer today) and a 30-day free trial. We also made it “no card required” at signup, which massively increased conversions.
 
-Adding a cloud product with proper pricing massively improved our growth. It made self-serving even easier, and increased confidence in the product. 
+Adding a cloud product with proper pricing massively improved our growth. It made self-serving even easier and increased confidence in the product. 
 
 Keeping it low friction was important, though. Had we demanded people put in a card from the start, I’m certain people would have been put off.
 
