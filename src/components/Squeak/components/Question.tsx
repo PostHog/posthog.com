@@ -10,7 +10,7 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import { IconArchive, IconPin, IconUndo } from '@posthog/icons'
+import { IconArchive, IconPin, IconTrash, IconUndo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
@@ -19,6 +19,7 @@ import Modal from 'components/Modal'
 import Checkbox from 'components/Checkbox'
 import { CallToAction } from 'components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
+import { navigate } from 'gatsby'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -192,6 +193,35 @@ const EscalateButton = ({ escalate, escalated }) => {
     )
 }
 
+const DeleteButton = ({ questionID }: { questionID: number }) => {
+    const { getJwt } = useUser()
+    const handleClick = async () => {
+        if (confirm('Are you sure you want to delete this thread?')) {
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+                body: JSON.stringify({ data: { publishedAt: null } }),
+            })
+            await navigate('/questions')
+        }
+    }
+    return (
+        <button
+            onClick={handleClick}
+            className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"
+        >
+            <Tooltip content={() => <div style={{ maxWidth: 320 }}>Delete thread</div>}>
+                <span className="flex w-6 h-6">
+                    <IconTrash />
+                </span>
+            </Tooltip>
+        </button>
+    )
+}
+
 export const Question = (props: QuestionProps) => {
     const { id, question, showSlug, buttonText, showActions = true } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
@@ -298,6 +328,7 @@ export const Question = (props: QuestionProps) => {
                                             </Tooltip>
                                         )}
                                     </button>
+                                    <DeleteButton questionID={questionData.id} />
                                 </>
                             )}
                             {!archived && (

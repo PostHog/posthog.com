@@ -29,11 +29,11 @@ You can then use this cohort of new users for further analysis.
 
 > **Note:** since this is a behavioral cohort (based on events), this cohort won’t work with feature flags.
 
-### Manually set user property
+### Manually set person property
 
-If neither of these works for you, you can set up a user property manually in a custom event. 
+If neither of these works for you, you can set up a person property manually in a custom event. 
 
-For example, when a user first uses your API, set their creation date in their user properties. To do this, you can capture an event at the same time, and use the `$set_once` property like this:
+For example, when a user first uses your API, set their creation date in their person properties. To do this, you can capture an event at the same time, and use the `$set_once` property like this:
 
 ```python
 posthog.capture(
@@ -51,7 +51,7 @@ Calculating returning users is done by identifying users who aren’t new and ha
 
 ![Returning users](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/track-new-returning-users/returning.png)
 
-Alternatively, if you created a `created_at` user property, you can also filter for users who weren’t created recently but completed the event. 
+Alternatively, if you created a `created_at` person property, you can also filter for users who weren’t created recently but completed the event. 
 
 ### Using a retention insight
 

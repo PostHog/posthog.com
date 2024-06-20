@@ -110,7 +110,7 @@ function loginRequest(user) {
 }
 ```
 
-Identifying users enables you to track users across sessions and devices as well as use [person profiles and properties](/docs/getting-started/user-properties) in your analysis. 
+Identifying users enables you to track users across sessions and devices as well as use [person profiles and properties](/docs/getting-started/person-properties) in your analysis. 
 
 ### 2. Properties
 
@@ -161,7 +161,7 @@ client.Enqueue(posthog.Capture{
 ```
 </MultiLanguage>
 
-Properties can also be set for individual users using the `$set` and `$set_once` properties. [Person properties](/docs/product-analytics/user-properties) enable you to connect data to the person rather than the event. It also enables permanent user data to be stored across events, and not have to be recreated in each event capture call. Once a user property is `$set_once` it can’t be changed by calling `$set_once` again. For example:
+Properties can also be set for individual users using the `$set` and `$set_once` properties. [Person properties](/docs/product-analytics/person-properties) enable you to connect data to the person rather than the event. It also enables permanent user data to be stored across events, and not have to be recreated in each event capture call. Once a person property is `$set_once` it can’t be changed by calling `$set_once` again. For example:
 
 <MultiLanguage>
 

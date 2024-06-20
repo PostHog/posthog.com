@@ -146,7 +146,7 @@ Based on reviews from G2.com, customers use Mouseflow because:
 
 ### What is Sprig?
 
-Sprig is a user insights tool that combines surveys and session replays with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user event. It doesn't do funnel analysis, heatmaps, or other basic analytics, focusing solely on in-product user research.
+[Sprig](/blog/best-sprig-alternatives) is a user insights tool that combines surveys and session replays with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user event. It doesn't do funnel analysis or other basic analytics, focusing solely on in-product user research.
 
 According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig) (Mar 2024), Sprig is used on 521 of the top 1 million websites, though this figure likely doesn't include apps that aren't accessible via the open web. It's used large, B2C companies such as PayPal, Coinbase, and Robinhood.
 
@@ -158,15 +158,15 @@ According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig)
 
 ### How does Sprig compare to Hotjar?
 
-Sprig isn't a like-for-like replacement for Hotjar – it lacks heatmaps and scroll maps, for example – but it is a strong option if you find Hotjar's survey tools lacking.
+Sprig is a decent replacement for Hotjar, especially if you find Hotjar's survey tools lacking. It's support for mobile apps is another key differentiator.
 
 <ComparisonTable column1="Sprig" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={false} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={false} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={false} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
   <ComparisonRow column1={false} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />

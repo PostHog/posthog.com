@@ -26,6 +26,7 @@ import { CallToAction } from 'components/CallToAction'
 import { IconMap, IconOpenSidebar } from '@posthog/icons'
 import { NewsletterForm } from 'components/NewsletterForm'
 import BuiltBy from '../components/BuiltBy'
+import TeamMember from 'components/TeamMember'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -144,6 +145,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         TutorialsSlider,
         NewsletterForm,
         BuiltBy,
+        TeamMember,
         ...shortcodes,
     }
     const { tableOfContents } = pageContext

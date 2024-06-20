@@ -103,12 +103,14 @@ export const Skeleton = () => {
     ))
 }
 
-export const SortDropdown = ({ sort, setSort }) => {
+export const SortDropdown = ({ sort, setSort, className = '' }) => {
     return (
         <div className={`flex items-center`}>
             <div className="relative">
                 <Menu>
-                    <Menu.Button className="flex items-center text-sm justify-between relative pl-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
+                    <Menu.Button
+                        className={`flex items-center text-sm justify-between relative pl-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all ${className}`}
+                    >
                         <Tooltip content={() => <>Sorting by: {sort}</>}>
                             <span className="relative">
                                 <IconSort className="w-5 h-5" />

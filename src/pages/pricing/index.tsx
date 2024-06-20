@@ -77,8 +77,9 @@ const PricingPage = (): JSX.Element => {
         >
             <RenderInClient
                 render={() => {
-                    return posthog?.getFeatureFlag?.('tabbed-pricing-page') === 'test' ? (
-                        <PricingExperiment currentProduct={currentProduct} groupsToShow={groupsToShow} />
+                    const ff = posthog?.getFeatureFlag?.('tabbed-pricing-page-v2')
+                    return ff === 'test' || ff == 'test_with_plans' ? (
+                        <PricingExperiment currentProduct={currentProduct} groupsToShow={groupsToShow} variant={ff} />
                     ) : (
                         <Pricing currentProduct={currentProduct} groupsToShow={groupsToShow} />
                     )

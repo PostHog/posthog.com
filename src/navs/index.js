@@ -390,6 +390,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/clickhouse',
                     },
                     {
+                        name: 'Our Cluster Topologies',
+                        url: '/handbook/engineering/clickhouse/clusters',
+                    },
+                    {
                         name: 'Data storage or what is a MergeTree',
                         url: '/handbook/engineering/clickhouse/data-storage',
                     },
@@ -754,7 +758,7 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/mdx-setup',
                     },
                     {
-                        name: 'Markdown',
+                        name: 'MDX components',
                         url: '/handbook/engineering/posthog-com/markdown',
                     },
                     {
@@ -962,6 +966,14 @@ export const companyMenu = {
                     name: 'Engineering',
                 },
                 {
+                    name: 'CDP',
+                    url: '/teams/cdp',
+                },
+                {
+                    name: 'ClickHouse',
+                    url: '/teams/clickhouse',
+                },
+                {
                     name: 'Data Warehouse',
                     url: '/teams/data-warehouse',
                 },
@@ -974,16 +986,16 @@ export const companyMenu = {
                     url: '/teams/infrastructure',
                 },
                 {
-                    name: 'Replay',
-                    url: '/teams/replay',
-                },
-                {
                     name: 'Pipeline',
                     url: '/teams/pipeline',
                 },
                 {
                     name: 'Product Analytics',
                     url: '/teams/product-analytics',
+                },
+                {
+                    name: 'Replay',
+                    url: '/teams/replay',
                 },
                 {
                     name: 'Web Analytics',
@@ -993,8 +1005,8 @@ export const companyMenu = {
                     name: 'Not engineering',
                 },
                 {
-                    name: 'Sales & CS',
-                    url: '/teams/sales-cs',
+                    name: 'Customer Comms',
+                    url: '/teams/customer-comms',
                 },
                 {
                     name: 'Exec',
@@ -1011,6 +1023,10 @@ export const companyMenu = {
                 {
                     name: 'People & Ops',
                     url: '/teams/people',
+                },
+                {
+                    name: 'Sales & CS',
+                    url: '/teams/sales-cs',
                 },
                 {
                     name: 'Website & Docs',
@@ -1107,8 +1123,8 @@ export const docsMenu = {
                             url: '/docs/getting-started/identify-users',
                         },
                         {
-                            name: 'User properties',
-                            url: '/docs/getting-started/user-properties',
+                            name: 'Person properties',
+                            url: '/docs/getting-started/person-properties',
                         },
                         {
                             name: 'Actions & insights',
@@ -1437,7 +1453,7 @@ export const docsMenu = {
                             url: '/docs/data/timestamps',
                         },
                         {
-                            name: 'User properties',
+                            name: 'Person properties',
                             url: '/docs/data/user-properties',
                         },
                         {
@@ -1604,7 +1620,7 @@ export const docsMenu = {
                             url: '/docs/api/funnel',
                         },
                         {
-                            name: 'Group analytics',
+                            name: 'Groups',
                             url: '/docs/api/groups',
                         },
                         {
@@ -1748,6 +1764,11 @@ export const docsMenu = {
                             url: '/docs/webhooks/discord',
                         },
                     ],
+                },
+                {
+                    name: 'Hog',
+                    url: '/docs/hog',
+                    icon: 'IconCode',
                 },
                 {
                     name: 'Resources',
@@ -1938,10 +1959,6 @@ export const docsMenu = {
                     name: 'Glossary',
                     url: '/docs/glossary',
                 },
-                {
-                    name: 'Partners',
-                    url: '/partners',
-                },
             ],
         },
         {
@@ -1984,8 +2001,8 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Setting user properties',
-                    url: '/docs/product-analytics/user-properties',
+                    name: 'Setting person properties',
+                    url: '/docs/product-analytics/person-properties',
                     icon: 'IconProfile',
                     color: 'seagreen',
                 },

@@ -10,7 +10,7 @@ As Support Hero, your job is to investigate and resolve issues reported by custo
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-[Marcus](/community/profiles/1036) and [Steven](/community/profiles/28949), our Support Engineers, triage tickets for the Product Analytics, Pipeline, Session Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+<TeamMember name="Marcus Hof" /> and <TeamMember name="Steven Shults" />, our Support Engineers, triage tickets for the Product Analytics, Pipeline, Session Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -195,3 +195,16 @@ The first time you answer a question, you'll need to create a community account.
 Ask in [#team-website-and-docs](https://posthog.slack.com/archives/C01V9AT7DK4) to be upgraded to a moderator. This will also give you access to moderator controls available for each question.
 
 _Note: The PostHog.com community currently uses a separate authentication system from PostHog Cloud. There are [plans](https://github.com/PostHog/posthog.com/issues/5847) to support other types of authentication so a visitor doesn't have to create a separate account for asking questions._
+
+## How do I handle user requests to delete groups/organizations?
+
+> **_WARNING:_**  Do NOT click the `DELETE` button! That will delete the entire project!
+> Just use the `Save` button after clicking the `delete` checkbox for the group.
+
+1. Visit the Django Admin page for the project at `https://us.posthog.com/admin/posthog/team/:project_id/change/` (Make sure you use the project ID for the project where the group/org is found)
+2. In the lower part of the page, find `GROUP TYPE MAPPINGS` and click on `SHOW`
+3. In the righthand column, check the box for the group(s) to be deleted
+4. Click the **`SAVE`** button. (**Do NOT use the `DELETE` button!**)
+5. Reply to the user to confirm
+
+
