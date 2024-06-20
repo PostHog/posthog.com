@@ -68,7 +68,9 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
 }
 ```
 
-[View](https://developer.android.com/reference/android/view/View) configuration, if setting the [View#tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`, the image will be a placeholder or redacted, this setting applies to any type of `View`.
+#### Masking and Redaction
+
+[View](https://developer.android.com/reference/android/view/View) configuration, if setting the [View#tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`, the view will be a placeholder or redacted, this setting applies to any type of `View`.
 
 ```xml
 <ImageView
@@ -114,7 +116,14 @@ config.sessionReplayConfig.captureNetworkTelemetry = true
 config.sessionReplayConfig.screenshotMode = true
 ```
 
-If you don't want to mask everything, you can disable the mask config above and mask specific views using the `ph-no-capture` [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier).
+#### Masking and Redaction
+
+[UIView](https://developer.apple.com/documentation/uikit/uiview) configuration, if setting the [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier) to `ph-no-capture`, the view will be a placeholder or redacted, this setting applies to any type of `UIView`.
+
+```swift
+let imvProfilePhoto = UIImageView(frame: CGRect(x: 50, y: 50, width: 100, height: 100))
+imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
+```
 
 ### Limitations
 
