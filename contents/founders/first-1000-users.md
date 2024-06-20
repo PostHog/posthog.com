@@ -51,7 +51,7 @@ Tim, my co-founder, and I wound up [pivoting five times](https://posthog.com/fou
 
 When we pivoted to PostHog, we created a one-month plan. 
 
-The goal? Find out if anyone cared about the problem (self-hosted product analytics) as quickly as possible.
+The goal? Find out if people disliked existing product analytics tools enough to try ours instead, and do so as quickly as possible.
 
 ![one month plan](https://res.cloudinary.com/dmukukwp6/image/upload/one_month_plan_1097da6295.png)
 
