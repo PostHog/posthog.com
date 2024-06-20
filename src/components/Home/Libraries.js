@@ -1,11 +1,13 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
+import { IconEllipsis } from '@posthog/icons'
+import { CallToAction } from 'components/CallToAction'
 
 const librariesData = {
     web: {
         name: 'Web (front end)',
-        description: 'Our front-end libraries support all PostHog features',
+        description: 'Use autocapture to collect client-side events without any special instrumentation.',
         items: [
             {
                 name: 'JavaScript',
@@ -36,38 +38,43 @@ const librariesData = {
             {
                 name: 'Java',
                 url: '/docs/libraries/java',
-                icon: '<IconJava />',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/java.svg" alt="Node.js" />,
             },
             {
                 name: 'PHP',
                 url: '/docs/libraries/php',
-                icon: '<IconPhp />',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/php.svg" alt="Node.js" />,
             },
             {
                 name: 'Ruby',
                 url: '/docs/libraries/ruby',
-                icon: '<IconRuby />',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/ruby.svg" alt="Node.js" />,
             },
             {
                 name: 'Python',
                 url: '/docs/libraries/python',
-                icon: '<IconEllipsis />',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/python.svg" alt="Node.js" />,
+            },
+            {
+                name: 'More',
+                url: '/docs/libraries',
+                icon: <IconEllipsis />,
             },
         ],
     },
     mobile: {
         name: 'Mobile libraries',
-        description: 'Capture events and identify users. Record mobile sessions and use feature flags.',
+        description: 'Send custom events and identify users. Record mobile sessions and use feature flags.',
         items: [
             {
                 name: 'Android',
                 url: '/docs/libraries/android',
-                icon: '<IconAndroid />',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/android.svg" alt="Node.js" />,
             },
             {
                 name: 'iOS',
                 url: '/docs/libraries/ios',
-                icon: '<IconIos />',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/ios.svg" alt="Node.js" />,
             },
         ],
     },
@@ -75,36 +82,49 @@ const librariesData = {
 
 export default function Libraries() {
     return (
-        <section className="max-w-7xl mx-auto px-5 pb-8 md:pb-16">
-            <div className="md:grid grid-cols-3 gap-12">
-                <div className="col-span-2">
+        <section className="max-w-7xl mx-auto px-5 -mb-24">
+            <div className="md:grid grid-cols-12">
+                <div className="col-span-5">
+                    <div className="rotate-3 md:rotate-0">
+                        <StaticImage src="./images/hogflix-mobile.png" alt="Hogflix mobile" placeholder="blurred" />
+                    </div>
+                </div>
+
+                <div className="col-span-7 -mt-48 md:mt-0 relative z-10 after:absolute after:left-0 after:w-full after:-top-20 after:h-20 after:bg-gradient-to-b after:from-red after:to-tan overflow-hidden bg-tan dark:bg-dark">
                     <h3 className="text-5xl xl:text-6xl">
                         SDKs for <span className="text-blue">web</span> and{' '}
                         <span className="text-red dark:text-yellow">mobile</span>
                     </h3>
 
-                    {Object.values(librariesData).map((category) => (
-                        <div key={category.name} className="mb-8">
-                            <h4 className="mb-0">{category.name}</h4>
-                            <p className="opacity-70 mb-4">{category.description}</p>
-                            <ul className="inline-grid grid-cols-4 gap-4 list-none p-0 pb-2 m-0">
-                                {category.items.map((item) => (
-                                    <li key={item.name}>
-                                        <Link href={item.url} className="flex flex-col gap-2 items-center p-0">
-                                            <figure className="size-16 bg-accent dark:bg-accent-dark p-4 rounded-md text-center flex items-center justify-center">
-                                                {item.icon}
-                                            </figure>
-                                            <span className="text-red dark:text-yellow font-semibold text-[15px]">
-                                                {item.name}
-                                            </span>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
+                    <div className="flex flex-col gap-4 mb-4">
+                        {Object.values(librariesData).map((category) => (
+                            <div key={category.name}>
+                                <h4 className="mb-0">{category.name}</h4>
+                                <p className="opacity-70 mb-4">{category.description}</p>
+                                <ul className="flex gap-4 list-none p-0 pb-2 m-0">
+                                    {category.items.map((item) => (
+                                        <li key={item.name}>
+                                            <Link
+                                                href={item.url}
+                                                className="flex flex-col gap-2 items-center p-0 relative transition-all hover:scale-[1.02] hover:top-[-.5px] active:scale-[.98] active:top-[.5px]"
+                                            >
+                                                <figure className="size-14 bg-accent dark:bg-accent-dark p-3 rounded-md text-center flex items-center justify-center text-primary/50 dark:text-primary-dark/50">
+                                                    {item.icon}
+                                                </figure>
+                                                <span className="text-red dark:text-yellow font-semibold text-sm">
+                                                    {item.name}
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                    <CallToAction href="/docs/libraries" size="sm" type="secondary">
+                        Browse all libraries
+                    </CallToAction>
                 </div>
-                <div>image</div>
             </div>
         </section>
     )
