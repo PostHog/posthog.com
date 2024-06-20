@@ -82,7 +82,7 @@ const librariesData = {
 
 export default function Libraries() {
     return (
-        <section className="max-w-7xl mx-auto px-5 -mb-24">
+        <section className="max-w-7xl mx-auto px-5 mb-12 md:-mb-24">
             <div className="md:grid grid-cols-12">
                 <div className="col-span-5">
                     <div className="rotate-3 md:rotate-0">
@@ -90,8 +90,8 @@ export default function Libraries() {
                     </div>
                 </div>
 
-                <div className="col-span-7 -mt-48 md:mt-0 relative z-10 after:absolute after:left-0 after:w-full after:-top-20 after:h-20 after:bg-gradient-to-b after:from-red after:to-tan overflow-hidden bg-tan dark:bg-dark">
-                    <h3 className="text-5xl xl:text-6xl">
+                <div className="col-span-7 -mt-48 md:mt-0 relative z-10 after:absolute after:left-0 after:w-full after:-top-60 after:h-60 after:bg-gradient-to-b after:from-tan/0 after:via-tan/75 after:to-tan md:overflow-hidden bg-tan dark:bg-dark">
+                    <h3 className="text-5xl xl:text-6xl text-center md:text-left mb-8">
                         SDKs for <span className="text-blue">web</span> and{' '}
                         <span className="text-red dark:text-yellow">mobile</span>
                     </h3>
@@ -101,7 +101,7 @@ export default function Libraries() {
                             <div key={category.name}>
                                 <h4 className="mb-0">{category.name}</h4>
                                 <p className="opacity-70 mb-4">{category.description}</p>
-                                <ul className="flex gap-4 list-none p-0 pb-2 m-0">
+                                <ul className="flex gap-3 md:gap-4 list-none p-0 pb-2 m-0">
                                     {category.items.map((item) => (
                                         <li key={item.name}>
                                             <Link
