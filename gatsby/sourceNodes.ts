@@ -389,4 +389,23 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     if (process.env.SLACK_API_KEY) {
         await fetchSlackEmojis()
     }
+
+    const fetchSignupCount = async () => {
+        const data = await fetch(`https://app.posthog.com/shared/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q.json`).then((res) =>
+            res.json()
+        )
+
+        const count = data?.insight?.result?.[0]?.aggregated_value
+        const node = {
+            id: createNodeId(`signup-count`),
+            internal: {
+                type: 'SignupCount',
+                contentDigest: createContentDigest(data),
+            },
+            count,
+        }
+        createNode(node)
+    }
+
+    await fetchSignupCount()
 }

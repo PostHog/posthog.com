@@ -8,6 +8,7 @@ import usePostHog from 'hooks/usePostHog'
 import Modal from 'components/Modal'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
+import { graphql, useStaticQuery } from 'gatsby'
 
 const ProductDetails = () => (
     <>
@@ -23,21 +24,17 @@ const ProductDetails = () => (
 )
 
 export default function CTA() {
-    const posthog = usePostHog()
     const [version, setVersion] = useState('us')
-    const [signupCountToday, setSignupCountToday] = useState(0)
     const [modalOpen, setModalOpen] = useState(false)
     const [ref, inView] = useInView({ threshold: 0.5, triggerOnce: true })
 
-    useEffect(() => {
-        if (posthog?.isFeatureEnabled('direct-to-eu-cloud')) {
-            setVersion('eu')
+    const data = useStaticQuery(graphql`
+        {
+            signupCount {
+                count
+            }
         }
-        fetch(`/api/signup-count`)
-            .then((res) => res.json())
-            .then((count) => setSignupCountToday(count))
-            .catch((err) => console.error(err))
-    }, [])
+    `)
 
     return (
         <>
@@ -183,7 +180,7 @@ export default function CTA() {
                                 <TrendUp className="opacity-75" />
                             </span>
                             <p className="text-sm text-primary/50 dark:text-primary-dark/50 leading-tight mb-0">
-                                <strong>Hurry:</strong> {signupCountToday || 'Tons of '} companies signed up{' '}
+                                <strong>Hurry:</strong> {data?.signupCount?.count || 'Tons of '} companies signed up{' '}
                                 <button
                                     onClick={() => setModalOpen(true)}
                                     className="font-bold dark:text-yellow text-red"
