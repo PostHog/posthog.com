@@ -19,9 +19,11 @@ Mobile recording is primarily done using native APIs to grab the view hierarchy 
 
 The view hierarchy is transformed to a JSON data structure and later rendered as an HTML [wireframe](https://www.figma.com/resource-library/what-is-wireframing/). Since it is a wireframe, the UI won't have the original look and feel but it should be close enough to understand the user's behavior.
 
+Alternatively, you can enable the `screenshot` (Android) or `screenshotMode` (iOS) which will take a screenshot of the screen instead of making a representation of the user's screen.
+
 #### Screenshot mode
 
-If the `screenshot` (Android) or `screenshotMode` (iOS) option is enabled, the SDK will take a screenshot of the screen instead of making a representation of the user's screen. The screenshot may contain sensitive information, use it with caution. We'll be working on masking the screenshot option next.
+If the `screenshot` (Android) or `screenshotMode` (iOS) option is enabled, the SDK will take a screenshot of the screen instead of making a representation of the user's screen. The screenshot may contain sensitive information, use it with caution. The automatic masking for the screenshot mode already works on Android and we'll be working on the iOS next.
 
 #### Network recording
 
@@ -54,9 +56,9 @@ SDK configurations during the SDK initialization.
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
     // enable session recording, requires enabling on the project configuration as well.
     sessionReplay = true
-    // all texts are masked (default is enabled)
+    // all texts are masked or redacted (default is enabled)
     sessionReplayConfig.maskAllTextInputs = false
-    // all images are placeholders (default is enabled)
+    // all images are placeholders or redacted (default is enabled)
     sessionReplayConfig.maskAllImages = false
     // capture logs automatically (default is enabled)
     sessionReplayConfig.captureLogcat = true
@@ -68,7 +70,7 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
 }
 ```
 
-[View](https://developer.android.com/reference/android/view/View) configuration, if setting the [View#tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`, the image will be a placeholder.
+[View](https://developer.android.com/reference/android/view/View) configuration, if setting the [View#tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`, the image will be a placeholder or redacted, this setting applies to any type of `View`.
 
 ```xml
 <ImageView
@@ -81,7 +83,7 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
 
 ### Limitations
 
-- Requires the PostHog Android SDK version >= [3.3.1](https://github.com/PostHog/posthog-android/releases) - use the latest version.
+- Requires the PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases) - use the latest version.
 - Requires Android API >= 26, otherwise it's a NoOp.
 - Jetpack Compose is only supported if the `screenshot` option is enabled.
 - Custom views is partly supported, and only fully supported if the `screenshot` option is enabled.
@@ -107,8 +109,10 @@ config.sessionReplay = true
 config.sessionReplayConfig.maskAllTextInputs = true
 config.sessionReplayConfig.maskAllImages = true
 config.sessionReplayConfig.captureNetworkTelemetry = true
-// screenshotMode is disabled by default
+// screenshotMode is disabled by default.
 // The screenshot may contain sensitive information, use with caution
+// If screenshotMode is enabled, the maskAllTextInputs and maskAllImages options are ignored, for now
+// We'll be working on the iOS screenshot masking next
 config.sessionReplayConfig.screenshotMode = true
 ```
 
