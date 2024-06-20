@@ -37,7 +37,7 @@ This is what we'll be using in the guide below.
 > It is also technically possible to run PostHog in Docker completely, but syncing changes is then much slower, and for development you need PostHog dependencies installed on the host anyway (such as formatting or typechecking tools).
 > The other way around – everything on the host, is not practical due to significant complexities involved in instantiating Kafka or ClickHouse from scratch.
 
-The instructions here assume you're running macOS or the current Ubuntu Linux LTS (22.04).
+The instructions here assume you're running macOS or the current Ubuntu Linux LTS (24.04).
 
 For other Linux distros, adjust the steps as needed (e.g. use `dnf` or `pacman` in place of `apt`).
 
@@ -69,7 +69,7 @@ This is a faster alternative to get up and running. If you don't want to or can'
     <code>$PATH</code>. Otherwise the command line will not know about packages installed with <code>brew</code>.
 </blockquote>
 
-3. Install [OrbStack](https://orbstack.dev/) – a more performant Docker Desktop alternative – with `brew install orbstack`. Go to OrbStack settings and set the memory usage limit to **at least 4 GB** (or 8 GB if you can afford it) + the CPU usage limit to at least 4 cores (i.e. 400%).
+3. Install [OrbStack](https://orbstack.dev/) – a more performant Docker Desktop alternative – with `brew install orbstack`. Go to OrbStack settings and set the memory usage limit to **at least 4 GB** (or 8 GB if you can afford it) + the CPU usage limit to at least 4 cores (i.e. 400%). You'll want to use Brex for the license if you work at PostHog.
 
 ## Ubuntu prerequisites
 
@@ -230,7 +230,7 @@ pnpm i --dir plugin-server
    
     - On Debian-based Linux:
         ```bash
-        sudo apt install -y libxml2 libxmlsec1-dev pkg-config
+        sudo apt install -y libxml2 libxmlsec1-dev libffi-dev pkg-config
         ```
 
 1. Install Python 3.10.

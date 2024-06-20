@@ -35,6 +35,7 @@ import Tabbed from './PricingCalculator/Tabbed'
 import { usePlatform } from './Platform/usePlatform'
 import { motion } from 'framer-motion'
 import scrollTo from 'gatsby-plugin-smoothscroll'
+import { PlanColumns } from './Pricing'
 
 interface PlanData {
     title: string
@@ -435,9 +436,13 @@ const TabAddons = (props) => {
 
 const TabPA = (props) => {
     return (
-        <div className="flex flex-col md:flex-row gap-8 lg:gap-16">
+        <div className="flex flex-col @5xl:flex-row gap-8 lg:gap-16">
             <Pricing {...props} className="flex-shrink-0" />
-            <TabAddons addons={props.addons} className="flex-grow" title="Product analytics add-ons" />
+            <TabAddons
+                addons={props.addons}
+                className="flex-grow max-w-3xl mx-auto"
+                title="Product analytics add-ons"
+            />
         </div>
     )
 }
@@ -482,17 +487,28 @@ const ProductTabs = ({ billingProducts }) => {
 
     return (
         <div>
+            <div className="text-center font-semibold text-[15px] border-t border-light dark:border-dark">
+                <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3 text-primary/75 dark:text-primary-dark/75">
+                    Starts at <strong>$0</strong>
+                    <span className="font-normal opacity-75">/mo</span> with a{' '}
+                    <span className="text-green">generous monthly free tier*</span>
+                </div>
+            </div>
             <Tabs
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
                 size="sm"
                 className="overflow-x-auto w-screen md:w-auto -mx-4 px-4"
-                tabs={products.map(({ name, icon, price, denomination, message }) => ({
+                tabs={products.map(({ name, icon, price, denomination, freeLimit, message }) => ({
                     title: name,
                     subtitle: price ? (
                         <>
-                            <strong>${price}</strong>
-                            <span className="opacity-75 text-sm">/{denomination}</span>
+                            <span className="text-green font-semibold">
+                                {freeLimit} {denomination}s free,
+                            </span>{' '}
+                            <br />
+                            then <strong>${price}</strong>
+                            <span className="opacity-75 text-sm font-semibold">/{denomination}</span>
                         </>
                     ) : (
                         message
@@ -504,24 +520,32 @@ const ProductTabs = ({ billingProducts }) => {
                 <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
-                    className="-mt-[2px] border border-light dark:border-dark rounded-md p-4 overflow-hidden"
+                    className="@container -mt-[2px] bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 overflow-hidden"
                 >
                     {tabContent[activeProduct.name]({ ...productData })}
                 </motion.div>
             )}
-            <div className="text-center mt-4 flex flex-col md:flex-row gap-1 justify-center">
+            <div className="text-center mt-4 flex flex-col gap-1 justify-center">
                 {activeTab == undefined && (
-                    <p className="m-0 text-sm opacity-75">
-                        Pricing descreases exponentially with scale{' '}
-                        <span className="whitespace-nowrap">(after generous monthly free tier).</span>
+                    <p className="m-0 text-sm opacity-60">
+                        *Free tier resets monthly. Prices descrease exponentially with volume.
                     </p>
                 )}
-                <button
-                    onClick={() => setActiveTab(activeTab === undefined ? 0 : undefined)}
-                    className="text-red dark:text-yellow font-semibold text-sm cursor-pointer"
+
+                <div
+                    className={`text-center font-semibold text-[15px] mt-4 ${
+                        activeTab === undefined && 'border-t'
+                    } border-light dark:border-dark`}
                 >
-                    {activeTab === undefined ? 'Show' : 'Hide'} pricing breakdown
-                </button>
+                    <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3">
+                        <button
+                            onClick={() => setActiveTab(activeTab === undefined ? 0 : undefined)}
+                            className="text-red dark:text-yellow font-semibold text-sm cursor-pointer"
+                        >
+                            {activeTab === undefined ? 'Show' : 'Hide'} pricing breakdown
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     )
@@ -539,6 +563,8 @@ const PlansTabs = () => {
                         <div className="px-2 pb-2 border-b border-light dark:border-dark">&nbsp;</div>
                         <div className="@xl:col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
                             <strong>Totally free</strong>
+                            <br />
+                            <span className="text-green font-semibold text-sm">(This plan)</span>
                         </div>
                         <div className="@xl:col-span-2 pl-2 pb-2 border-b border-light dark:border-dark text-opacity-70">
                             <strong>Ridiculously cheap</strong>
@@ -567,13 +593,13 @@ const PlansTabs = () => {
 
                         <div>Product features</div>
                         <div className="@xl:col-span-2">
-                            Basic features{' '}
+                            Almost all the features{' '}
                             <Tooltip
                                 content={() => (
                                     <div className="max-w-[320px]">
                                         <p className="mb-2 text-sm">
                                             Use each product for free without advanced features. Compare functionality
-                                            limitations on the product page.
+                                            limitations on each product page.
                                         </p>
                                         <p className="mb-0 text-sm">
                                             For full functionality, just enter a credit card and you'll be on the{' '}
@@ -590,8 +616,8 @@ const PlansTabs = () => {
                         <div className="@xl:col-span-2">All features</div>
 
                         <div>Support</div>
-                        <div className="@xl:col-span-2">Community forums</div>
-                        <div className="@xl:col-span-2">Email</div>
+                        <div className="@xl:col-span-2">Standard support</div>
+                        <div className="@xl:col-span-2">Priority support</div>
 
                         <div>
                             Add-ons{' '}
@@ -606,7 +632,13 @@ const PlansTabs = () => {
                                 <IconInfo className="size-4 inline-block" />
                             </Tooltip>
                         </div>
-                        <div className="@xl:col-span-2">Limited</div>
+                        <div className="@xl:col-span-2">
+                            Limited
+                            <br />
+                            <div className="pt-2">
+                                <PlanCTA intent="free" />
+                            </div>
+                        </div>
                         <div className="@xl:col-span-2">Available</div>
                     </div>
                 </>
@@ -618,10 +650,10 @@ const PlansTabs = () => {
             html: (
                 <>
                     <h4 className="mb-0">The "ridiculously cheap" plan</h4>
-                    <p className="text-sm inline-flex rounded-sm bg-yellow/50 py-0.5 px-1">
+                    <p className="text-sm inline-flex rounded-sm bg-yellow/25 py-0.5 px-1">
                         86% of customers use this plan
                     </p>
-                    <ul className="tw-check-bullets @lg:columns-2">
+                    <ul className="tw-check-bullets @lg:columns-2 pb-2">
                         <li>Usage-based pricing</li>
                         <li>Generous monthly free tier</li>
                         <li>Up to 6 projects</li>
@@ -630,6 +662,7 @@ const PlansTabs = () => {
                         <li>Unlimited team members</li>
                         <li>Unlimited tracked users</li>
                     </ul>
+                    <PlanCTA intent="paid" />
                 </>
             ),
         },
@@ -664,7 +697,15 @@ const PlansTabs = () => {
                                 <li>No upcharge on usage-based prices</li>
                             </ul>
                             <div className="pt-4 md:mb-20 xl:mb-0 relative z-20">
-                                <CallToAction href="/talk-to-a-human" size="md">
+                                <CallToAction
+                                    href="/talk-to-a-human"
+                                    size="md"
+                                    event={{
+                                        name: `clicked Talk to a helpful person`,
+                                        type: 'cloud',
+                                        intent: 'enterprise',
+                                    }}
+                                >
                                     Talk to a helpful person
                                 </CallToAction>
                             </div>
@@ -756,12 +797,12 @@ const PlansTabs = () => {
         },
     ]
 
-    const [activeTab, setActiveTab] = useState(1)
+    const [activeTab, setActiveTab] = useState(0)
     const activePlan = plans[activeTab]
 
     return (
         <div>
-            <div className="overflow-x-auto w-screen md:w-auto -mx-4 md:mx-0 px-4 md:px-1 relative z-10">
+            <div className="overflow-x-auto w-screen md:w-auto -mx-4 md:mx-0 px-4 md:px-3 relative z-10">
                 <Tabs
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
@@ -778,7 +819,7 @@ const PlansTabs = () => {
                 <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
-                    className="@container -mt-[2px] border border-light dark:border-dark rounded-md p-4 overflow-hidden"
+                    className="@container -mt-[2px] bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 overflow-hidden"
                 >
                     {[activePlan.html]}
                 </motion.div>
@@ -790,9 +831,11 @@ const PlansTabs = () => {
 const PricingExperiment = ({
     groupsToShow,
     currentProduct,
+    variant,
 }: {
     groupsToShow: undefined | string[]
     currentProduct?: string | null
+    variant: 'test' | 'test_with_plans'
 }): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const products = useProducts()
@@ -843,17 +886,18 @@ const PricingExperiment = ({
                             <Tooltip
                                 content={() => (
                                     <div className="max-w-sm">
-                                        <strong className="block">Why not value-based pricing?</strong>
+                                        <strong className="block text-lg mb-1">What is value-based pricing?</strong>
                                         <p className="mb-2 text-sm">
-                                            Value-based pricing is geared around testing how much money you're willing
-                                            to pay.
+                                            <em>Value-based pricing</em> is geared around testing how much money you're
+                                            willing to pay.
                                         </p>
                                         <p className="mb-0 text-sm">
-                                            Usage-based pricing is like a utility - where we continually seek to lower
-                                            costs and make money through volume.
+                                            <em>Usage-based pricing</em> is like a utility - where we continually seek
+                                            to lower costs and make money through volume.
                                         </p>
                                     </div>
                                 )}
+                                placement="right"
                             >
                                 <span className="border-b border-dashed border-primary/50 dark:border-primary-dark/50">
                                     value-based pricing
@@ -862,9 +906,39 @@ const PricingExperiment = ({
                             .
                         </p>
                         <p className="text-base font-medium opacity-60 leading-tight">
-                            Starts at $0/mo with a generous free tier.
+                            Enjoy a generous free tier every month.
                         </p>
-                        <PlanCTA />
+                        <div className="flex gap-4 items-center">
+                            <div>
+                                <PlanCTA />
+                            </div>
+                            <div>
+                                <span className="text-sm opacity-70">No credit card required</span>
+                                <Tooltip
+                                    content={() => (
+                                        <div className="max-w-[300px] pb-2">
+                                            <p className="mb-1">
+                                                <strong>Totally free</strong>{' '}
+                                                <span className="opacity-70 text-sm italic">
+                                                    - no credit card required
+                                                </span>
+                                            </p>
+                                            <ul className="pl-0 pb-2 list-none [&_li]:text-[15px] opacity-70">
+                                                <li>Usage capped at free tier limits</li>
+                                                <li>Basic product features</li>
+                                                <li>1 project</li>
+                                                <li>1-year data retention</li>
+                                                <li>Community support</li>
+                                            </ul>
+                                            <PlanCTA intent="free" />
+                                        </div>
+                                    )}
+                                    placement="right"
+                                >
+                                    <IconInfo className="size-5 inline-block opacity-60 hover:opacity-75 ml-0.5 -mt-0.5" />
+                                </Tooltip>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -874,6 +948,10 @@ const PricingExperiment = ({
                     <section className={`${section} mb-12 mt-8 md:px-4`}>
                         <ProductTabs billingProducts={billingProducts} />
                     </section>
+
+                    {variant === 'test_with_plans' && (
+                        <PlanColumns billingProducts={billingProducts} highlight="free" />
+                    )}
 
                     <SectionLayout>
                         <SectionHeader>
@@ -917,7 +995,7 @@ const PricingExperiment = ({
                                         </SidebarListItem>
                                         <SidebarListItem>
                                             If something stupid happens, like you get an unexpected bill and you’re
-                                            unhappy, we’ll pretty much always refund it.
+                                            unhappy, we’ll pretty much always refund it!
                                         </SidebarListItem>
                                     </SidebarList>
                                 </div>
@@ -926,60 +1004,77 @@ const PricingExperiment = ({
                     </SectionLayout>
 
                     <SectionLayout>
-                        <SectionHeader>
-                            <h3>One plan for most customers</h3>
-                        </SectionHeader>
-
-                        <SectionColumns>
-                            <SectionMainCol>
-                                <PlansTabs />
-                            </SectionMainCol>
-                            <SectionSidebar className="justify-between">
-                                <div>
-                                    <h4 className="text-lg mb-2">Plan FYIs</h4>
-                                    <SidebarList>
-                                        <SidebarListItem>
-                                            Self-serve, no upsells, no need to "talk to sales"
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            We don't do outbound sales. Everyone pays the same rates.
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            You can set billing limits per product so you never get a surprise bill
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            90% of our customers don't pay anything to use PostHog!
-                                            <Tooltip
-                                                content={() => (
-                                                    <div className="max-w-[300px]">
-                                                        <p className="mb-1">
-                                                            <strong>... and we're cool with it!</strong>
-                                                        </p>
-                                                        <p className="text-[15px] mb-0">
-                                                            Use PostHog for free within our generous free tier limits.
-                                                            Exceed the free tier limits and you'll only pay for what you
-                                                            use.
-                                                        </p>
-                                                    </div>
-                                                )}
-                                                placement="bottom"
-                                            >
-                                                <IconInfo className="size-4 inline-block ml-0.5 -mt-0.5" />
-                                            </Tooltip>{' '}
-                                        </SidebarListItem>
-                                    </SidebarList>
-                                </div>
-                                <div>
-                                    <button
-                                        onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
-                                        className="text-red dark:text-yellow font-semibold cursor-pointer"
-                                    >
-                                        {isPlanComparisonVisible ? 'Hide' : 'Show'} full plan comparison
-                                    </button>
-                                </div>
-                            </SectionSidebar>
-                        </SectionColumns>
+                        <div className="bg-accent dark:bg-accent-dark p-4 pb-6 md:pb-4 rounded border border-light dark:border-dark flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
+                            <div>
+                                <h3 className="mb-1 text-xl">Give PostHog a try</h3>
+                                <p className="mb-0 text-[15px]">
+                                    No need to pick a plan - try our free version and decide if you want advanced
+                                    features later!
+                                </p>
+                            </div>
+                            <div>
+                                <PlanCTA />
+                            </div>
+                        </div>
                     </SectionLayout>
+
+                    {variant === 'test' && (
+                        <SectionLayout>
+                            <SectionHeader>
+                                <h3>One plan for most customers</h3>
+                            </SectionHeader>
+
+                            <SectionColumns>
+                                <SectionMainCol>
+                                    <PlansTabs />
+                                </SectionMainCol>
+                                <SectionSidebar className="justify-between">
+                                    <div>
+                                        <h4 className="text-lg mb-2">Plan FYIs</h4>
+                                        <SidebarList>
+                                            <SidebarListItem>
+                                                Self-serve, no upsells, no need to "talk to sales"
+                                            </SidebarListItem>
+                                            <SidebarListItem>
+                                                We don't do outbound sales. Everyone pays the same rates.
+                                            </SidebarListItem>
+                                            <SidebarListItem>
+                                                You can set billing limits per product so you never get a surprise bill
+                                            </SidebarListItem>
+                                            <SidebarListItem>
+                                                90% of our customers don't pay anything to use PostHog!
+                                                <Tooltip
+                                                    content={() => (
+                                                        <div className="max-w-[300px]">
+                                                            <p className="mb-1">
+                                                                <strong>... and we're cool with it!</strong>
+                                                            </p>
+                                                            <p className="text-[15px] mb-0">
+                                                                Use PostHog for free within our generous free tier
+                                                                limits. Exceed the free tier limits and you'll only pay
+                                                                for what you use.
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                    placement="bottom"
+                                                >
+                                                    <IconInfo className="size-4 inline-block ml-0.5 -mt-0.5" />
+                                                </Tooltip>{' '}
+                                            </SidebarListItem>
+                                        </SidebarList>
+                                    </div>
+                                    <div>
+                                        <button
+                                            onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
+                                            className="text-red dark:text-yellow font-semibold cursor-pointer"
+                                        >
+                                            {isPlanComparisonVisible ? 'Hide' : 'Show'} full plan comparison
+                                        </button>
+                                    </div>
+                                </SectionSidebar>
+                            </SectionColumns>
+                        </SectionLayout>
+                    )}
 
                     <section
                         className={`${section} ${
@@ -990,7 +1085,7 @@ const PricingExperiment = ({
                     >
                         <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                             <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
-                                <div className="col-span-4 px-3 py-1">&nbsp;</div>
+                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-1">&nbsp;</div>
                                 {platformAndSupportProduct?.plans
                                     ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
                                     ?.map((plan: BillingV2PlanType) => (
@@ -1085,6 +1180,18 @@ const PricingExperiment = ({
                                         </>
                                     ))}
                             </div>
+                            <div className="grid grid-cols-16 min-w-[1000px]">
+                                <div className="col-span-4 px-3 py-2 text-sm">&nbsp;</div>
+                                <div className="col-span-4 px-3 py-2">
+                                    <PlanCTA intent="free" />
+                                </div>
+                                <div className="col-span-4 px-3 py-2">
+                                    <PlanCTA intent="paid" />
+                                </div>
+                                <div className="col-span-4 px-3 py-2">
+                                    <PlanCTA intent="enterprise" ctaText="Get in touch" ctaLink="/talk-to-a-human" />
+                                </div>
+                            </div>
                         </div>
                     </section>
 
@@ -1098,7 +1205,7 @@ const PricingExperiment = ({
                                 <AllAddons />
                             </SectionMainCol>
                             <SectionSidebar>
-                                <h4 className="text-lg mb-2">Why add-ons?</h4>
+                                <h4 className="text-lg mb-0">Why add-ons?</h4>
                                 <SidebarList>
                                     <SidebarListItem>
                                         We move additional functionality to add-ons to keep our base prices low. This is
@@ -1169,8 +1276,15 @@ const PricingExperiment = ({
                                 </Tooltip>
                             </li>
                         </ul>
+                        <p className="mb-4">If this makes you happy – like most people - just start here:</p>
                         <p>
-                            If you need more info,{' '}
+                            <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
+                                <PlanCTA />
+                                <em className="opacity-75 text-sm">No credit card required</em>
+                            </div>
+                        </p>
+                        <p>
+                            Or if you need more info,{' '}
                             <button
                                 className="text-red dark:text-yellow font-semibold"
                                 onClick={() =>
@@ -1207,7 +1321,7 @@ const PricingExperiment = ({
                                 <Link href="/community/profiles/27732" className="flex">
                                     <strong>James Hawkins</strong>
                                 </Link>
-                                <span className="text-sm opacity-70">CEO & Co-founder</span>
+                                <span className="text-sm opacity-70">Co-founder</span>
                             </p>
                         </div>
                         <p className="pl-14 text-sm opacity-75 italic">

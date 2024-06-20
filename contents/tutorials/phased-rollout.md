@@ -22,7 +22,7 @@ To get accurate feature flag targeting and user cohorts, we must set up user ide
 
 Feature flags check the distinct ID of the user to decide if they should return `true` or `false`. This distinct ID connects to person and group properties, which you can set to whatever you like.
 
-The [snippet](/docs/getting-started/install?tab=snippet) or [JavaScript Web SDK](/docs/libraries/js) automatically generates a distinct ID, and PostHog automatically generates some properties like [GeoIP](/docs/product-analytics/user-properties#geoip-properties). You can modify the distinct ID or add properties by [identifying users](/docs/getting-started/identify-users). You can also add users to a group using [the `group()` function](/docs/getting-started/group-analytics). 
+The [snippet](/docs/getting-started/install?tab=snippet) or [JavaScript Web SDK](/docs/libraries/js) automatically generates a distinct ID, and PostHog automatically generates some properties like [GeoIP](/docs/product-analytics/person-properties#geoip-properties). You can modify the distinct ID or add properties by [identifying users](/docs/getting-started/identify-users). You can also add users to a group using [the `group()` function](/docs/getting-started/group-analytics). 
 
 ## Phased rollout with feature flags
 

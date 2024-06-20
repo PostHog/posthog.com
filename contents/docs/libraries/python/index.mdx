@@ -29,9 +29,9 @@ import PythonSendEvents from '../../integrate/send-events/_snippets/send-events-
 
 <PythonSendEvents />
 
-## Person profiles and user properties
+## Person profiles and properties
 
-For backward compatibility, PostHog captures events with [person profiles](/docs/data/people) by default. To set [user properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+For backward compatibility, PostHog captures events with [person profiles](/docs/data/persons) by default. To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```python
 posthog.capture(
@@ -44,7 +44,7 @@ posthog.capture(
 )
 ```
 
-For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
 To capture events without person profiles, set the event's `$process_person_profile` property to `false`:
 

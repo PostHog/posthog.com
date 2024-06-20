@@ -55,7 +55,7 @@ Your data needs start to spiral once you reach Seed stage – as does the comple
 
 - What features should we prioritize developing?
 - How do we best serve our [ideal customer](/newsletter/ideal-customer-profile-framework)?
-- How do we optimize our [conversion funnel](/tutorials/funnels)?
+- How do we optimize our [conversion funnel](/docs/product-analytics/funnels)?
 - What channels should we [be advertising on](/blog/dev-marketing-for-startups)?
 
 To answer these questions, you need to pull data from a growing number of sources - product analytics, CRM, help desk, ad platform, payment processors, and more. You also begin to utilize more of the features of these sources, such as customer engagement and session recordings, generating even more data.

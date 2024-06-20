@@ -37,6 +37,7 @@ import { TutorialTags } from 'components/Tutorials/constants/tags'
 import { Emoji } from 'components/Emoji'
 import TeamUpdate from 'components/TeamUpdate'
 import CopyCode from 'components/CopyCode'
+import TeamMember from 'components/TeamMember'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -253,6 +254,7 @@ export default function Handbook({
         Emoji,
         TeamUpdate: (props) => TeamUpdate({ teamName: title?.replace(/team/gi, '').trim(), ...props }),
         CopyCode,
+        TeamMember,
         ...shortcodes,
     }
 

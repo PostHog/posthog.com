@@ -72,7 +72,7 @@ Numbers can vary wildly depending on location, accommodations, activities, team 
 - Food & drinks = $50/day/person
 - Contingency = 10% of total budget
 
-As a reference, we budget $1,500 per person for a small team offsite and $3,000-5,000 for an all-company offsite, depending on location.
+As a reference, we budget $2,000 per person for a small team offsite and $3,000-5,000 for an all-company offsite, depending on location.
 
 ## Final thoughts
 
