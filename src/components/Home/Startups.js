@@ -44,7 +44,7 @@ export default function Startups() {
                     <Benefit title="Exclusive founder merch" description="Now you can look as lit as our engineers" />
                     <Benefit
                         title="Pre-product/market fit guides"
-                        description="We literally wrote a book on how to get product market fit"
+                        description="We literally wrote a book on how to get product-market fit"
                     />
                     <li className="list-none relative pl-10 flex flex-col md:flex-row md:justify-start gap-2">
                         <Check3 className="w-4 h-4 inline-block absolute left-2 top-0" />
