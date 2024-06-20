@@ -75,7 +75,7 @@ We figured our target audience would appreciate the transparency, and the abilit
 
 #### 4. Make it easy to deploy
 
-We created a one-click Heroku deploy for this. We knew this wouldn’t scale, but it was the fastest way to get started. We also built event autocapture into our SDKs, so user’s didn’t have to manually instrument events to get started.
+We created a one-click Heroku deploy for this. We knew this wouldn’t scale, but it was the fastest way to get started. We also built event autocapture into our SDKs, so users didn’t have to manually instrument events to get started.
 
 #### 5. Not to monetize at launch
 
@@ -92,7 +92,7 @@ This worked for *us*, but it isn't universally good advice.
 
 We were entering a crowded market with multiple competitors with around $100m in revenue, so we were confident we’d find a way to monetize eventually. 
 
-Had we been building into a new market with less validation from competitors, or bootstrapping, then monetizing sooner would have been important.
+Had we been building into a new market with less validation from competitors, a worse fundraising environment (like right now), or bootstrapping, then monetizing sooner would have been important.
 
 ### Finding and onboarding our first users
 
@@ -127,7 +127,7 @@ We knew we were ready for our Hacker News launch once:
 
 ![hackernews](https://res.cloudinary.com/dmukukwp6/image/upload/Hackernews_967c1eeb08.png)
 
-We also spent ~$1,000 promoting the repo on Twitter which, combined with the successful launch on Hacker News, got our repo trending on GitHub.
+We also spent ~$2,000 promoting the repo on Twitter which, combined with the successful launch on Hacker News, got our repo trending on GitHub.
 
 After the massive bump on launch day, our growth settled to a level that was noticeably higher than before.
 
@@ -188,7 +188,9 @@ We launched with a limited free tier (much less than the 1 million events we off
 
 Adding a cloud product with proper pricing massively improved our growth. It made self-serving even easier and increased confidence in the product. Keeping it low friction was important, though. Had we demanded people put in a card from the start, I’m certain people would have been put off.
 
-We reached 1,000 users in May 2020, a few weeks after the launch of PostHog Cloud and four months from when we started building. We had our first ever 
+We reached 1,000 users in May 2020, a few weeks after the launch of PostHog Cloud and four months from when we started building. In June, we organized our first ever company offsite in Italy, where we shipped early versions of our feature flag and heatmap features.
+
+That's where this part of the story ends. We went from idea to a real product with thousands of users in around five months. In the next part of this series, I'll cover how we went from 1,000 to 10,000 users, which took around a year and a half.
 
 ## 🎓 Things I learned from reaching 1,000 users 
 
@@ -206,7 +208,7 @@ Going self-serve too soon will reduce your opportunities to learn. The time we s
 
 ### 4. Repeat users are more important than volume. 
 
-If people are using what you’ve built over and over again, chances are you’re solving a real problem. You don’t need hundreds of users to validate an idea. Don’t invest in a big launch until you’re certain users will stick.
+If people are using what you’ve built over and over again, chances are you’re solving a real problem. You don’t need hundreds of users to validate an idea. Don’t invest in a big launch until you’re certain users will stick. In fact, you may find you never need a big launch if you do this well because you'll just start getting lots of word-of-mouth growth.
 
 ### 5. Be concise when you ask for meetings 
 
