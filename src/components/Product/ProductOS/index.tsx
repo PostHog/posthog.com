@@ -337,12 +337,13 @@ export const ProductOS = () => {
                                 We take security seriously, but that doesn't mean we can't have fun with it. If you need
                                 a data processing agreement then{' '}
                                 <a href="https://posthog.com/dpa">try our DPA generator</a>. It's the only DPA generator
-                                in the world inspired by Taylor Swift.
+                                in the world inspired by Taylor Swift. Probably.
                                 <br></br>
                                 <br></br>
                                 Need more serious assurances? We're{' '}
                                 <b>SOC 2 Type-1 certified, GDPR ready, HIPAA compliant</b>, and we share
-                                <a href="/handbook/company/security"> our security reports</a> publicly.
+                                <a href="/handbook/company/security"> our security reports</a> publicly. You can rest
+                                easy.
                             </p>
                         </div>
                         <aside className="shrink-0 md:basis-[300px] xl:basis-[500px]">
