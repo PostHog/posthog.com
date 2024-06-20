@@ -1,6 +1,6 @@
 ---
 date: 2024-03-21
-title: 'PostHog is now up to 12x cheaper'
+title: 'PostHog is now up to 80% cheaper'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -14,51 +14,58 @@ tags:
 
 ## tl;dr
 
-* It is now possible to use PostHog's product and web analytics for up to ~12x less, depending on your volumes
-* This change applies to all existing and new customers for any events where we don't do person property processing
-* The average customer can save X%
-* We are intending on more price cuts, this is the start!
+* It is now possible to use PostHog's product and web analytics for up to 80% less, depending on your volumes. We can be used more cheaply than any popular competitive product.
+* We have a new event processing option that allows you to capture events without person information.
+* Previously we processed every event with person information.
+* This allows us to reduce our costs for events that do not need person information. We can pass this saving to our customers.
+* This means, if you use this option, we are by far the cheapest way for you to track your product compared to any major analytics competitor of ours
 
 ## Pricing before and after
 
-| Tier (up to) | Personless Price (per event) | Previous pricing / our new pricing for events with person propertie |
+| Tier (up to) | New event price without person information | Previous pricing / our new pricing for events with person information |
 | ---- | ----- | ----- | ----- |
 | 1M | $0 | $0 | $0 |
-| 2M | $0.00002 |  $0.000248 |
-| 15M | $0.00002 |  $0.000104 |
-| 50M | $0.00002 |  $0.0000655 |
-| 100M | $0.00002 |  $0.0000364 |
-| 250M | $0.000009 *price changes here | $0.0000187 |
+| 2M | $0.0000198 |  $0.000248 |
+| 15M | $0.0000343 |  $0.000104 |
+| 50M | $0.0000295 |  $0.0000655 |
+| 100M | $0.0000218 |  $0.0000364 |
+| 250M | $0.0000150 | $0.0000187 |
 | ∞ | $0.000009 | $0.00001 |
 
 (we can offer further discounts if you are beyond 250M events/month regardless - at that scale, we suggest you talk to us)
 
-## Why we're excited to be the cheapest
+## Who this is for
 
-* We think this makes us the best value product analytics software by a long way
-* Everyone else has far fewer features available in their free or lower priced tiers - we only limit team-oriented features (like advanced permissioning). Instead of this, by changing slightly the data we capture, we can pass these savings along to customers directly.
-* We have lots of other products, we think we're better off long term making a little money from a lot of products.
+- If you are not tracking any existing event type because it is high volume and thus would have been prohibitively expensive before
+  - If you have a marketing or content website with lots of anonymous traffic, you can now track this much less expensively than before
+  - If you are tracking API or server events (especially at high volumes), you can now track this much less expensively than before
+- If you are a price-sensitive customer and are willing to lose some functionality for a lower spend with us
+
+## How we compare to our comeptitors
+
+* This makes us the best value popular (>$10M in revenue) product analytics software by a long way
+* Apart from being more expensive, everyone else _also_ has far fewer features available in their free or lower priced tiers - we only limit team-oriented features (like advanced permissioning).
 
 <INSERT GRAPH COMPARING US TO COMPETITORS>
 
 ## What's the downside of sending this type of event?
 
-If you are a price sensitive customer, we'd recommend you make this change for anonymous traffic.
+There are some limitations with the new event type - you cannot do the following:
 
-The reason we don't recommend this for _all_ anonymous traffic if you are less price sensitive is that if you send persons without properties, there are some downsides of this tradeoff:
+- Filtering on persons
+- Cohorts filtered on person properties
+- Target by person properties for feature flags, a/b tests and surveys
+- Receive initial UTM values for tracking marketing campaign performance
+- View a person’s profile in the app or query the persons table in our SQL insights
+- Groups functionality on standard events (without person profiles)
 
-* users' profiles won't have any properties set (such as email addresses), so you won't be able to identify specific users
-* you can't filter your visualizations based on user properties, or adjust targeting of cohorts based on them
-* you won't be able to track users across multiple visits, multiple sites or across different devices - they will show up as separate users
-* you won't be able to use our "transformer" plugins - such as geoip
-
-All of our functionality, with the above limitations, will still work even at this dramatically lower price.
+If you need the above functionality, just continue to send person information with your events (no need to change anything), for events where the specific functionality is needed.
 
 ## FAQs
 
 * Is this change sustainable?
   * Yes!
-    * out of all the major competitors we have, we believe we are by far the most efficient - we are 100% inbound and grow through word of mouth
+    * out of all the major competitors we have, we believe we are by far the most efficient - we are 100% inbound (so we don't need to pay for an outbound sales team) and grow through word of mouth
     * this pricing still reflects us making a positive margin on every event sold
     * we suspect this will increase our word of mouth growth and increase our retention, so we are likely to make more revenue with this change, but at a lower margin
     * the majority of our customers use multiple products that we offer, so we wind up making a little money off a lot of products - our competitors are not as wide, so we believe long term we can undercut.
