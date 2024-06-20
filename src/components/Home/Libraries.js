@@ -82,7 +82,7 @@ const librariesData = {
 
 export default function Libraries() {
     return (
-        <section className="max-w-7xl mx-auto px-5 mb-12 md:-mb-24">
+        <section className="max-w-7xl mx-auto px-5 md:pt-8 mb-12 md:-mb-24">
             <div className="md:grid grid-cols-12">
                 <div className="col-span-5">
                     <div className="rotate-3 md:rotate-0">
