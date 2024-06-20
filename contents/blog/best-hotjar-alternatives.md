@@ -293,7 +293,7 @@ Crazy Egg is very similar to Hotjar. It includes many of the same features and i
 
 According to reviews on G2, people use Crazy Egg because:
 
-1. **It's easy to setup:** Crazy Egg makes it easy integrate with numerous services and content management systems, like Shopify, Wix, and Wordpress. This is especially useful for website owners and agencies who run multiple websites.
+1. **It's easy to setup:** Crazy Egg makes it easy integrate with numerous services and content management systems, like Shopify, [Wix](/tutorials/wix-analytics), and Wordpress. This is especially useful for website owners and agencies who run multiple websites.
 
 2. **They want to improve content and conversions:** Crazy Egg's heatmaps and session replay features enable them to gather valuable insights for optimizing their content, increasing conversions, and understanding how users navigate their websites.
 

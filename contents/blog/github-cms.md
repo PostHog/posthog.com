@@ -14,7 +14,7 @@ featuredVideo: 'https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y'
 category: Inside PostHog
 ---
 
-As you publish more content, inevitably you need a way to manage it. A content management system, or CMS, is the go-to software solution for this. Examples include WordPress, Drupal, Wix, Ghost, and many more. 
+As you publish more content, inevitably you need a way to manage it. A content management system, or CMS, is the go-to software solution for this. Examples include WordPress, Drupal, [Wix](/tutorials/wix-analytics), Ghost, and many more. 
 
 But there's another left-field option: GitHub. In this post, I'll explain the three reasons we use GitHub as a CMS (and why we love doing so). 
 
