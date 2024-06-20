@@ -1,5 +1,5 @@
 ---
-date: 2024-06-19
+date: 2024-06-20
 title: 'How we got our first 1,000 users'
 author:
   - james-hawkins
@@ -186,9 +186,7 @@ Once we’d nailed pricing, we launched PostHog Cloud in April 2020, two months 
 
 We launched with a limited free tier (much less than the 1 million events we offer today) and a 30-day free trial. We also made it “no card required” at signup, which massively increased conversions.
 
-Adding a cloud product with proper pricing massively improved our growth. It made self-serving even easier and increased confidence in the product. 
-
-Keeping it low friction was important, though. Had we demanded people put in a card from the start, I’m certain people would have been put off.
+Adding a cloud product with proper pricing massively improved our growth. It made self-serving even easier and increased confidence in the product. Keeping it low friction was important, though. Had we demanded people put in a card from the start, I’m certain people would have been put off.
 
 We reached 1,000 users in May 2020, a few weeks after the launch of PostHog Cloud and four months from when we started building. We had our first ever 
 
