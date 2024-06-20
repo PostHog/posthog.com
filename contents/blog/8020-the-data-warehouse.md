@@ -1,6 +1,6 @@
 ---
 title: "How we 80/20'ed the data warehouse"
-date: 2024-06-13
+date: 2024-06-20
 author: 
  - james-greenhill
  - ian-vanagas
