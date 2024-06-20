@@ -115,6 +115,8 @@ New Business: Select this type when engaging with a new customer for the first t
 
 Existing Business (Expansion Opportunity): Choose this type when selling additional products or services to a customer with whom we already have a business relationship.
 
+Existing - Convert to Annual: Choose this when discussing an annual contract with a pay-as-you-go customer.
+
 Self Serve: Represents opportunities where the customer does not fit our hands-on Ideal Customer Profile (ICP) and is better suited for a self-service approach. Select this type when the customer is likely to benefit more from our self-serve offerings rather than direct sales engagement. This will move these opportunities to the self-serve pipeline.
 
 Renewal: Choose this type when an existing customer is renewing their contract or subscription for our products or services. We automatically create a renewal opportunity if an 'Annual Plan' opportunity is Closed (more on these later).
