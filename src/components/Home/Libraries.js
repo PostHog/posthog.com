@@ -38,7 +38,7 @@ const librariesData = {
             {
                 name: 'Java',
                 url: '/docs/libraries/java',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/java.svg" alt="Node.js" />,
+                icon: <StaticImage src="../../../contents/images/docs/integrate/java.svg" alt="Node.js" height={32} />,
             },
             {
                 name: 'PHP',
