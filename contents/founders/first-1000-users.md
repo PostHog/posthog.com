@@ -26,7 +26,7 @@ We chose Aruba because the team deserved to celebrate. We’d grown massively, s
 
 But I felt a little guilty when we arrived. 
 
-The lobby had a boat in it. There was a private beach. You could drink infinite piña coladas. I knew we were spending $100k more than we needed to and, as a founder, a core part of my job is making sure we don't run out of money!
+The lobby had a *boat* in it. There was a *private beach*. You could drink *infinite piña coladas*. I knew we were spending $100k more than we *needed* to and a core part of my job is making sure we don't run out of money!
 
 As any founder should, though, I:
 
@@ -37,7 +37,7 @@ As any founder should, though, I:
 
 It worked. Within two days, our annual recurring revenue (ARR) had grown enough to pay for the entire trip. Suddenly, I didn't feel guilty at all.
 
-This clearly demonstrated to me the efficiency of our business model – a model that’s propelled us from 10 users to 100,000 in just over four years. Today, around 1,200 companies – ranging from hobbyists to Fortune 500s – sign up every week. 
+This clearly demonstrated to me the efficiency of our business model – a model that’s propelled us from 10 users to more than 100,000 in just over four years. Today, around 1,500 companies – ranging from hobbyists to Fortune 500s – sign up every week. 
 
 This series is about sharing how we reached this point. It’s also about personal reflection – writing is thinking, after all. I’ll share the lessons I learned, and things I wish we’d done differently. 
 
@@ -55,7 +55,9 @@ The goal? Find out if people disliked existing product analytics tools enough to
 
 ![one month plan](https://res.cloudinary.com/dmukukwp6/image/upload/one_month_plan_1097da6295.png)
 
-We optimized how we worked together to ship is fast as possible. It was a crazy time. We worked flat out. If we failed to complete all four in a month, we would pivot.
+We optimized how we worked to ship as fast as possible, working from 9am to anywhere between midnight and 3am, 7 days a week. Our only break each day was a 10-minute walk to the local sandwich shop, and an episode of Parks and Recreation. 
+
+If we failed to complete all four in a month, we would pivot again.
 
 ### Important decisions we made
 
@@ -75,7 +77,7 @@ We figured our target audience would appreciate the transparency, and the abilit
 
 #### 4. Make it easy to deploy
 
-We created a one-click Heroku deploy for this. We knew this wouldn’t scale, but it was the fastest way to get started. We also built event autocapture into our SDKs, so users didn’t have to manually instrument events to get started.
+We also built event autocapture into our SDKs, so users didn’t have to manually instrument events to get started – something we found annoying when we used competing product.
 
 #### 5. Not to monetize at launch
 
@@ -109,12 +111,11 @@ Once we were confident friends could use the product and found it useful, we foc
 
 ![meetings](https://res.cloudinary.com/dmukukwp6/image/upload/meetings_a65d6cf7dd.png)
 
-Once we were confident in self-serve, I started reaching out to more people I knew, and expanded into some cold outreach via groups I was in, getting introductions, and messaging via LinkedIn. This got us to a couple dozen users within a few weeks. 
+Next, I started reaching out to more people I knew, and expanded into some cold outreach via groups I was in, getting introductions, and messaging via LinkedIn. This got us to a couple dozen users within a few weeks. 
 
-The most critical part of this stage was figuring out if people we didn’t know would use the product, and keep coming back. This is where we failed on several previous ideas. If people sign up but don’t come back over and over, you’ve probably found a valid problem, but not solved it. That's either because your product needs reimagining, or it's painful or confusing to use.
+This stage was about figuring out if people we didn’t know would use the product, and keep coming back. This is where we failed on previously. If people sign up but don’t come back over and over, you’ve probably found a valid problem, but not solved it. That's either because your product needs reimagining, or it's painful or confusing to use.
 
 Watch people using it, ask them about it, look for repeat usage, analyze why some users come back and others don't, and so on, until you figure this out. If you can't, then start over with a new idea. 
-
 
 ### The public launch
 
