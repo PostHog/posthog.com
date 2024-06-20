@@ -41,10 +41,7 @@ export default function Startups() {
                         title="Huuuuge free tier"
                         description="30M events tracked + 50K recordings free, per month"
                     />
-                    <Benefit
-                        title="Y Combinator application review"
-                        description="Get direct feedback from a team that got in"
-                    />
+                    <Benefit title="Exclusive founder merch" description="Now you can look as lit as our engineers" />
                     <Benefit
                         title="Pre-product/market fit guides"
                         description="We literally wrote a book on how to get product market fit."
