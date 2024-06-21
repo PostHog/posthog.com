@@ -8,11 +8,11 @@ tags:
  - heatmaps
 ---
 
-To create the best possible Wix site, you need to know how use your site. PostHog provides tools like [analytics](/web-analytics), [heatmaps](/docs/toolbar/heatmaps), and [session replays](/session-replay) to help you do this. Best of all, PostHog has a generous always free tier (unlike other Wix analytics tools)
+To create the best possible Wix site, you need to know how users interact your site. PostHog provides tools like [analytics](/web-analytics), [heatmaps](/docs/toolbar/heatmaps), and [session replays](/session-replay) to help you do this. Best of all, PostHog has a generous always free tier (unlike other Wix analytics tools)
 
 This tutorial shows you how to set up PostHog to your Wix site to capture analytics for you to analyze as well as how to set up and view heatmaps.
 
-> **Note:** Adding PostHog to Wix requires their premium plan.
+> **Note:** Adding custom code, which we do in this tutorial, requires Wix's premium plan.
 
 ## How to add PostHog to your Wix site
 
