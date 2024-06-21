@@ -102,23 +102,19 @@ This will track anonymous traffic without person profiles, and start collecting 
 
 You can get instructions for this and other use cases in our [persons documentation](/docs/data/persons).
 
-## FAQs
+## Is this change sustainable?
 
-### Is this change sustainable?
+Yes! Here's why:
 
-Yes! 
+* We're far efficient than any of our major competitors – we are 100% inbound, so we don't need to pay for an outbound sales team, and grow through word of mouth.
 
-Here's why:
+* This pricing still reflects us making a positive margin on every event sold. We don't believe in loss leaders.
 
-* Out of all the major competitors we have, we believe we are by far the most efficient – we are 100% inbound, so we don't need to pay for an outbound sales team, and grow through word of mouth.
-
-* This pricing still reflects us making a positive margin on every event sold.
-
-* We suspect this will increase our word-of-mouth growth and increase our retention, so we are likely to make more revenue with this change, but at a lower margin.
+* We believe this will increase our word-of-mouth growth and improve our retention, so we'll likely to make more revenue with this change, but at a lower margin.
 
 * The majority of our customers use multiple products that we offer, so we wind up making a little money off a lot of products - our competitors are not as wide, so we believe long term we can undercut.
 
-### Will my bill go up if I continue to use person profiles?
+## Will my bill go up if I continue to use person profiles?
 
 * No. We've split the historical pricing between the base event cost and the person profiles cost. 
   
@@ -126,8 +122,10 @@ Here's why:
   
 * You can only save money with this new option.
 
-### Why aren't you making the events with person profiles cheaper too?
+## Why aren't you making the events with person profiles cheaper?
 
-* Events with person properties cost a lot more for us to ingest and query. Allowing customers to choose to not send person properties for certain event types means we can cut our own costs of providing our product to our customers. 
+* Because events with person profiles cost a lot more for us to ingest and query.
+
+* Allowing customers to choose to not send person profiles for certain event types means we can cut our own costs of providing our product to our customers, and pass that saving onto them. 
 
 * This aligns our interests with our customers, and means we can make a positive margin on all events ingested (beyond our free tier), so it is sustainable but not greedy!
