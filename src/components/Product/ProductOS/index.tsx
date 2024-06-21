@@ -285,7 +285,7 @@ export const ProductOS = () => {
                             />
                             <Subfeature
                                 title="A built-in, fully managed reverse proxy"
-                                description="Tired of losing data to ad blockers? Route traffic through our infrastructure for free and manage your proxy more easily."
+                                description="Tired of losing data to ad blockers? Route traffic through our infrastructure for free and manage your reverse proxy more easily."
                                 icon={<IconGlobe />}
                             />
                         </ul>
