@@ -13,6 +13,7 @@ import {
     IconChevronDown,
     IconLetter,
     IconUpload,
+    IconLeave,
 } from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
@@ -33,6 +34,8 @@ import { usePopper } from 'react-popper'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { StaticImage } from 'gatsby-plugin-image'
 import MediaUploadModal from 'components/MediaUploadModal'
+import SideModal from 'components/Modal/SideModal'
+import { Authentication } from 'components/Squeak'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -379,7 +382,7 @@ const Notifications = () => {
 }
 
 export const Main = () => {
-    const { user } = useUser()
+    const { user, logout } = useUser()
     const { open } = useSearch()
     const {
         menu,
@@ -395,6 +398,7 @@ export const Main = () => {
     const { websiteTheme } = useValues(layoutLogic)
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const [mediaModalOpen, setMediaModalOpen] = useState(false)
+    const [authModalOpen, setAuthModalOpen] = useState(false)
     const posthog = usePostHog()
 
     useEffect(() => {
@@ -421,6 +425,26 @@ export const Main = () => {
 
     return (
         <div>
+            <SideModal open={authModalOpen} setOpen={setAuthModalOpen}>
+                <h4 className="mb-4">Sign into PostHog.com</h4>
+                <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                    <p className="text-sm mb-2">
+                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                    </p>
+
+                    <p className="text-sm mb-0">
+                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                        account.
+                    </p>
+                </div>
+
+                <Authentication
+                    onAuth={() => setAuthModalOpen(false)}
+                    initialView="sign-in"
+                    showBanner={false}
+                    showProfile={false}
+                />
+            </SideModal>
             <MediaUploadModal open={mediaModalOpen} setOpen={setMediaModalOpen} />
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
@@ -563,6 +587,27 @@ export const Main = () => {
                                                 )}
                                             </>
                                         )}
+
+                                        <li className="px-1">
+                                            {user?.profile ? (
+                                                <button
+                                                    onClick={() => logout()}
+                                                    className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block w-full text-left"
+                                                >
+                                                    <IconLeave className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                    Logout
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={() => setAuthModalOpen(true)}
+                                                    className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block w-full text-left"
+                                                >
+                                                    <IconUser className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
+                                                    Login
+                                                </button>
+                                            )}
+                                        </li>
+
                                         <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
                                             Site settings
                                         </li>
