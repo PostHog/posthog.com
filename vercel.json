@@ -945,6 +945,7 @@
         { "source": "/tutorials/tracking-teams", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/tutorials/revenue", "destination": "/tutorials" },
         { "source": "/tutorials/how-to-segment-users", "destination": "/tutorials/power-users" },
+        { "source": "/tutorials/stripe-payment-data", "destination": "/tutorials/stripe-reports" },
         { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" },
 
         { "source": "/james", "destination": "/community/profiles/27732" },
