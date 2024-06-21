@@ -26,7 +26,7 @@ const librariesData = {
             },
             {
                 name: 'Next.js',
-                url: '/docs/libraries/next',
+                url: '/docs/libraries/next-js',
                 icon: <StaticImage src="../../../contents/images/docs/integrate/frameworks/nextjs.svg" alt="Next.js" />,
             },
         ],
