@@ -17,15 +17,15 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 ## tl;dr
 
-* It is now possible to use PostHog's product and web analytics for up to 80% less, depending on your volumes, making us cheaper than any popular competitive product.
+* You can now use PostHog's product and web analytics for up to 80% less, making us cheaper than any popular competitive product.
 
-* We have a new event processing option that allows you to capture events without person information.
+* This is possible because we've introduced new event processing option that allows you to capture events without person information. Previously we processed every event with person information.
 
-* Previously we processed every event with person information.
-
-* This allows us to reduce our costs for events that do not need person information. We can pass this saving to our customers.
+* This allows us to reduce our costs for events that do not need person information. We're passing this saving to our customers.
 
 * If you use this option, we are by far the cheapest way to track your product compared to any major analytics competitor.
+
+<br />
 
 <ProductScreenshot
   imageLight={Pricing} 
@@ -46,7 +46,7 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 | 250M | $0.0000150 | $0.0000187 |
 | ∞ | $0.000009 | $0.00001 |
 
-Note: We can offer further discounts if you are beyond 250M events/month regardless. At that scale, we suggest you talk to us.
+Note: We can offer further discounts if you are beyond 250M events/month regardless. At that scale, we suggest you [talk to us](/talk-to-a-human).
 
 ## Who is this for?
 
@@ -92,16 +92,20 @@ If you need the above functionality, just continue to send person information wi
 
 ### Is this change sustainable?
 
-Yes! Here's why:
+Yes! 
 
-  * Out of all the major competitors we have, we believe we are by far the most efficient – we are 100% inbound, so we don't need to pay for an outbound sales team, and grow through word of mouth.
+Here's why:
 
-  * This pricing still reflects us making a positive margin on every event sold.
+* Out of all the major competitors we have, we believe we are by far the most efficient – we are 100% inbound, so we don't need to pay for an outbound sales team, and grow through word of mouth.
 
-  * We suspect this will increase our word-of-mouth growth and increase our retention, so we are likely to make more revenue with this change, but at a lower margin.
+* This pricing still reflects us making a positive margin on every event sold.
 
-  * The majority of our customers use multiple products that we offer, so we wind up making a little money off a lot of products - our competitors are not as wide, so we believe long term we can undercut.
+* We suspect this will increase our word-of-mouth growth and increase our retention, so we are likely to make more revenue with this change, but at a lower margin.
+
+* The majority of our customers use multiple products that we offer, so we wind up making a little money off a lot of products - our competitors are not as wide, so we believe long term we can undercut.
 
 ### Why aren't you making the events with person properties cheaper too?
 
-  * Events with person properties cost a lot more for us to ingest and query. Allowing customers to choose to not send person properties for certain event types means we can cut our own costs of providing our product to our customers. This aligns our interests with our customers, and means we can make a positive margin on all events ingested (beyond our free tier), so it is sustainable but not greedy!
+* Events with person properties cost a lot more for us to ingest and query. Allowing customers to choose to not send person properties for certain event types means we can cut our own costs of providing our product to our customers. 
+
+* This aligns our interests with our customers, and means we can make a positive margin on all events ingested (beyond our free tier), so it is sustainable but not greedy!
