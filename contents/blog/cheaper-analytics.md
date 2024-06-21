@@ -36,7 +36,7 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 ## Pricing before and after
 
-| Tier (up to) | New event price without person information | Previous pricing / our new pricing for events with person information |
+| Tier (up to) | New base event price (without person information) | Price for base events + person information (equal to old pricing)  |
 | ---- | ----- | ----- | ----- |
 | 1M | $0 | $0 | $0 |
 | 2M | $0.0000198 |  $0.000248 |
@@ -86,7 +86,17 @@ There are some limitations with the new event type. You cannot:
 - View a person’s profile in the app, or query the persons table in our SQL insights.
 - Use [groups functionality](/docs/product-analytics/group-analytics) on standard events (without person profiles).
 
-If you need the above functionality, just continue to send person information with your events (no need to change anything), for events where the specific functionality is needed.
+If you need the above functionality, just continue to send person information with your events (no need to change anything), for events where the specific functionality is needed. 
+
+Person profiles are not an all-or-nothing thing; you can use them on any traffic where you need more detailed information, and skip them when you don't need that detail.
+
+## How do I start using this new processing option?
+
+For most people, it only requires a simple config change to include `process_persons: "identified_only"`. 
+
+This will track anonymous traffic without person profiles, and start collecting person information any time an identifying action is taken (i.e. using `identify()`, `group()`, setting person properties with `$set`, etc).
+
+You can get instructions for this and other use cases in our [persons documentation](/docs/data/persons).
 
 ## FAQs
 
