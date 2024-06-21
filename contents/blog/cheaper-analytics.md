@@ -19,11 +19,13 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 * You can now use PostHog's product and web analytics for up to 80% less, making us cheaper than any popular competitive product.
 
-* This is possible because we've introduced new event processing option that allows you to capture events without person information. Previously we processed every event with person information.
+* This is possible because we've introduced new event processing option that allows you to capture events without person information. 
 
-* This allows us to reduce our costs for events that do not need person information. We're passing this saving to our customers.
+* Previously we processed every event with person information. Now, you can choose when you need this level of detail for a person you are tracking.
 
-* If you use this option, we are by far the cheapest way to track your product compared to any major analytics competitor.
+* This allows us to reduce our costs for events that do not need person information. We're passing this saving onto our customers.
+
+* We've split the prices for existing customers, so you'll see an extra line item called "Person profiles" on your invoice. **Your overall price has not gone up**, it's simply split between the new base event price and the person profile add-on.
 
 <br />
 
@@ -52,13 +54,15 @@ Note: We can offer further discounts if you are beyond 250M events/month regardl
 
 Anyone who:
 
-- Isn't tracking an existing event type because it is high volume and thus would have been prohibitively expensive.
+- Isn't tracking an existing high-volume event because it would be prohibitively expensive.
 
-- Has a marketing or content website with lots of anonymous traffic – you can now track this much less expensively than before.
+- Has a marketing or content website with lots of anonymous traffic.
 
-- Is tracking API or server events (especially at high volumes) – you can now track this much less expensively than before.
+- Is tracking API or server events, especially at high volumes.
 
-- Is a price-sensitive customer and is willing to lose some functionality for a lower spend with us.
+- Is price-sensitive and is willing to lose some functionality for lower bills.
+
+- Would like to use [autocapture](/docs/product-analytics/autocapture) to track events, but has turned it off to save money.
 
 ## How we compare to our competitors
 
@@ -114,7 +118,15 @@ Here's why:
 
 * The majority of our customers use multiple products that we offer, so we wind up making a little money off a lot of products - our competitors are not as wide, so we believe long term we can undercut.
 
-### Why aren't you making the events with person properties cheaper too?
+### Will my bill go up if I continue to use person profiles?
+
+* No. We've split the historical pricing between the base event cost and the person profiles cost. 
+  
+* You'll see a new line item on your invoice, but your overall event price won't go up even if you continue to use person profiles on every event. 
+  
+* You can only save money with this new option.
+
+### Why aren't you making the events with person profiles cheaper too?
 
 * Events with person properties cost a lot more for us to ingest and query. Allowing customers to choose to not send person properties for certain event types means we can cut our own costs of providing our product to our customers. 
 
