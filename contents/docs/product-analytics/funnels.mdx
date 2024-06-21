@@ -192,6 +192,17 @@ With the specific step mode, one person can have more than one property value. F
 
 Then the person would have both `Chrome` and `Firefox` as their breakdown values.
 
+Another common use for `Specific step` is to display only a single URL for pageview steps in the funnel columns. The default, `First touchpoint` uses the first property value seen from all steps, which will include the subdirectory URLs in the breakdown if they appeared in later steps.  
+
+For example, if you've 
+- set your first query step as `Pageview` where `Current URL` `= equals` `https://foo.com/bar`, 
+- and `/bar` has subdirectories (e.g. `https://foo.com/bar/foo1` `https://foo.com/bar/foo2` etc.), 
+- and `Breakdown by` is set to `Current URL`
+
+but you don't want pages under the subdirectories of `https://foo.com/bar` to appear in the funnel chart.  
+
+In this case, set the `Attribution type` to `Specific step` / `Step 1` to see only `https://foo.com/bar` in the pageview column of the chart.
+
 > For an unordered funnel, the specific step is meaningless, as the first step can be the last step, and vice versa. So, it's referred to as "any step" in the UI. It has the same semantics as a specific step in an ordered funnel, but it looks at property values from all steps.
 
 ### Graph type
