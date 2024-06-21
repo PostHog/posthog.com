@@ -1,9 +1,8 @@
 ---
-date: 2024-06-20
+date: 2024-06-21
 title: 'How we got our first 1,000 users'
 author:
   - james-hawkins
-  - andy-vandervell
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/math_meme_8b0013533e.jpg
 featuredImageType: full
@@ -20,7 +19,7 @@ crosspost:
 > - **Part 2:** How we grew from 1,000 to 10,000 users (coming soon)
 > - **Part 3:** How we scaled to 100,000 users (coming soon)
 
-One of my favorite weeks as CEO of PostHog was an [offsite in Aruba](https://posthog.com/blog/aruba-hackathon), but it wasn't for the reason you expect. 
+One of my favorite weeks as CEO of PostHog was an [offsite in Aruba](/blog/aruba-hackathon), but it wasn't for the reason you expect. 
 
 We chose Aruba because the team deserved to celebrate. We’d grown massively, so we increased the offsite budget and opted for a fancy hotel in the Caribbean as a reward for everyone’s hard work.
 
@@ -47,7 +46,7 @@ If you have a question, please leave a comment – I’ll try and answer them al
 
 Getting our first 10 users was the hardest part.
 
-Tim, my co-founder, and I wound up [pivoting five times](https://posthog.com/founders/story-about-pivots) before we landed on PostHog. We found it very hard to get 10 companies to use our products, even when we thought we were solving a real problem!
+Tim, my co-founder, and I wound up [pivoting five times](/founders/story-about-pivots) before we landed on PostHog. We found it very hard to get 10 companies to use our products, even when we thought we were solving a real problem!
 
 When we pivoted to PostHog, we created a one-month plan. 
 
@@ -73,7 +72,7 @@ We believed developers cared more about controlling their own data, so we focuse
 
 #### 3. Be open source and transparent
 
-We figured our target audience would appreciate the transparency, and the ability to inspect our code before self-hosting it. We chose a permissive MIT license to see if enterprises would use it – we felt they'd have rules around using non-permissive open-source licenses. We also [wrote a public company handbook](https://posthog.com/handbook).
+We figured our target audience would appreciate the transparency, and the ability to inspect our code before self-hosting it. We chose a permissive MIT license to see if enterprises would use it – we felt they'd have rules around using non-permissive open-source licenses. We also [wrote a public company handbook](/handbook).
 
 #### 4. Make it easy to deploy
 
@@ -136,7 +135,7 @@ After the massive bump on launch day, our growth settled to a level that was not
 
 ## 📈 Reaching 1,000 users in three months 
 
-Our Hacker News launch gave us a steady trickle of word-of-mouth growth. We made some of [our first hires](https://newsletter.posthog.com/p/what-we-learned-about-hiring-from), and the next few months were about understanding why people liked PostHog, and what to build next. 
+Our Hacker News launch gave us a steady trickle of word-of-mouth growth. We made some of [our first hires](/founders/posthog-first-five), and the next few months were about understanding why people liked PostHog, and what to build next. 
 
 To figure that out, we asked people:
 
@@ -144,7 +143,7 @@ To figure that out, we asked people:
 2. Why they signed up.
 3. Why they had been recommended our product (if it applied).
 
-And we kept [talking to all our existing users](https://newsletter.posthog.com/p/talk-to-users) about what they did and didn’t like about the product, and the problems they wanted to solve.
+And we kept [talking to all our existing users](/newsletter/talk-to-users) about what they did and didn’t like about the product, and the problems they wanted to solve.
 
 Over the course of a few weeks, we gathered all this intel and mapped out what users loved, how to scale it, and anti-goals we should avoid. This lead us to focus on shipping more features engineers wanted, such as feature flags, that they also wanted to self-host.
 
@@ -154,7 +153,7 @@ Here’s an example of what this looks like for PostHog today. Notice that the a
 
 At this stage, I also started experimented with content as a marketing channel. I'm not good at coding, so figured I could help out this way.
 
-I knew from these conversations that developers wouldn't appreciate being sold to, but I guessed they would find following our journey interesting. So, I wrote about what my co-founder and I were up to – [how we pivoted lots of times](https://newsletter.posthog.com/p/read-this-before-you-pivot), or what it was like moving to San Francisco for YC.
+I knew from these conversations that developers wouldn't appreciate being sold to, but I guessed they would find following our journey interesting. So, I wrote about what my co-founder and I were up to – [how we pivoted lots of times](/newsletter/pivot-your-startup), or what it was like moving to San Francisco for YC.
 
 This got us a couple more hits on the front page of Hacker News, which proved it worked, so we kept doing it. That’s why, four years and 60,000 customers later, I'm writing this blog post, as the CEO, at half midnight.
 
@@ -205,11 +204,11 @@ It doesn’t need to be a detailed plan, but you should know who your users will
 
 ### 3. Optimize for learning, not revenue (at the start)
 
-Going self-serve too soon will reduce your opportunities to learn. The time we spent onboarding users by hand was incredibly valuable. We still do this with new PostHog products, like [our data warehouse](https://posthog.com/docs/data-warehouse) that’s now in open beta.
+Going self-serve too soon will reduce your opportunities to learn. The time we spent onboarding users by hand was incredibly valuable. We still do this with new PostHog products, like [our data warehouse](/docs/data-warehouse) that’s now in open beta.
 
 ### 4. Repeat users are more important than volume. 
 
-If people are using what you’ve built over and over again, chances are you’re solving a real problem. You don’t need hundreds of users to validate an idea. Don’t invest in a big launch until you’re certain users will stick. In fact, you may find you never need a big launch if you do this well because you'll just start getting lots of word-of-mouth growth.
+You don’t need hundreds of users to validate an idea – a dozen or so who use your product over and over again is enough. Don’t invest in a big launch until you’re certain users will stick. In fact, you may find you never need a big launch if you do this well because you'll start getting lots of word-of-mouth growth.
 
 ### 5. Be concise when you ask for meetings 
 
@@ -225,6 +224,15 @@ If you launch as a free product, you may find it harder to monetize existing use
 
 ### 8. Transparent pricing increases confidence in your product
 
-Launching without pricing was good for us, but usage and growth increased when we introduced pricing – a pattern that repeated when we started charging for [session replay](https://posthog.com/session-replay), [feature flags](https://posthog.com/feature-flags), and [surveys](https://posthog.com/surveys). People take your product more seriously if it’s obvious you’re taking it seriously, too.
+Launching without pricing was good for us, but usage and growth increased when we introduced pricing – a pattern that repeated when we started charging for [session replay](/session-replay), [feature flags](/feature-flags), and [surveys](/surveys). People take your product more seriously if it’s obvious you’re taking it seriously, too.
+
+## More good reads 📖
+Normally we share interesting things by other people, but for this issue I’m sharing a few older pieces I’ve written that cover the early days of PostHog:
+
+- [The time before YC](/blog/before-yc)
+- [The YC interview](/blog/the-yc-interview)
+- [Pivot to PostHog](/blog/pivot-to-posthog)
+- [After the Hacker News launch](/blog/after-the-hn-launch)_
+- [How we justified quitting our jobs and financing PostHog early on](/founders/inflated-risk-seems-riskier)
 
 <NewsletterForm />
