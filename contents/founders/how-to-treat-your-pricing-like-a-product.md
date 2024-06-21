@@ -117,3 +117,5 @@ After all, when customer needs are met, this kind of mutually beneficial magic i
 - [Counterintuitive lessons about our pricing](/blog/pricing-lessons): Imagine being able to grow twice as fast with just a few hours of work. Changing your pricing has a real chance to get you there. PostHog CEO, James Hawkins, shares what he's learned.
 
 - [10x engineers talk to users](/blog/10x-engineers-do-user-interviews): PostHog's Head of Product, Luke Harries, on why "best way to become a 10x engineer is to zoom out and solve for user impact."
+
+<NewsletterForm />

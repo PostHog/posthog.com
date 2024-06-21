@@ -79,6 +79,8 @@ If all this sounds like a unicorn, you aren’t wrong. This is again why we find
 
 > **Growth engineers vs product engineers:** Both build new features, are opinionated, experiment, and take ownership. The difference is their focus. [Product engineers](/blog/what-is-a-product-engineer) focus on building products for specific users. Growth engineers focus on projects that drive growth. This could be a feature enabling product teams, a service supporting marketing, or an optimization to a cross-product flow. They are less constrained to a specific product.
 
+<NewsletterForm />
+
 ## What do growth engineers actually work on?
 
 So what do growth engineers apply their skills to? We already covered that they work to increase signups, subscriptions, and revenue by working across the product, but what does this look like?
@@ -135,3 +137,5 @@ Still curious about our growth team? Check out [their small team page](/teams/gr
 - [What is a product engineer (and why they're awesome)](/blog/what-is-a-product-engineer)
 - [What we've learned about multi-product pricing (so far)](/blog/multi-product-pricing)
 - [Why 'Product Engineer' is the most fun role I've had in tech](/blog/why-product-engineering-is-so-fun)
+
+<NewsletterForm />

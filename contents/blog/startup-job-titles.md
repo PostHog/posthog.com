@@ -18,7 +18,7 @@ tags:
 One huge mistake some startups make is using titles to establish and reinforce hierarchy. This is dangerous for two reasons:
 
 1. Iteration and speed largely determine the growth trajectory of most product-led startups. Because of this, it's important to eschew managers in favor of 'anti-managers' - superbly strong individual contributors with a bias towards action, not control.
-2. Titles can make it harder to [give and receive feedback](https://posthog.com/handbook/people/feedback) - from both colleagues and customers. Without clear feedback, it's harder for individuals to improve, which can limit the whole team.
+2. Titles can make it harder to [give and receive feedback](/handbook/people/feedback) - from both colleagues and customers. Without clear feedback, it's harder for individuals to improve, which can limit the whole team.
 
 At PostHog, we started off completely flat, with everyone reporting to our founders, James and Tim - and everyone getting individual contributor titles such as Software Engineer or Designer. If we’d had Senior Engineer and Junior Engineer titles, for example, that would've indicated that we care about hierarchy, thus discouraging peer-to-peer feedback and capping individual performance at the level of whoever was designated as Senior.
 
@@ -30,8 +30,8 @@ Towards the end of 2020, we were shipping lots of code but nothing moved the nee
 
 So we solved this problem in two ways:
 
-1. We introduced [Small Teams](https://posthog.com/handbook/company/small-teams): small groups of people who owned specific tasks within the company. We have small teams for marketing, growth, design, product, and more.
-2. We introduced light [management](https://posthog.com/handbook/company/management) and tweaked our titles to reflect this.
+1. We introduced [Small Teams](/handbook/company/small-teams): small groups of people who owned specific tasks within the company. We have small teams for marketing, growth, design, product, and more.
+2. We introduced light [management](/handbook/company/management) and tweaked our titles to reflect this.
 
 These changes have resulted in a huge lift to our product and design competencies - and much happier end users.
 
@@ -45,7 +45,7 @@ Ideally, the best team members are willing to start by themselves, set a world-c
 
 We sometimes have a candidate apply for a certain role then suggest a slightly different title upon hiring them. This happens mostly for roles that we’ve never hired for before.
 
-In engineering, we advertise for “Senior Engineers” mainly because we get so many unqualified or under-experienced applicants - but everyone is referred to as a Software Engineer on our [team page](https://posthog.com/people). We pay people more if they have more experience - per our [transparent salary calculator](https://posthog.com/handbook/people/compensation) - but we don’t use these titles internally.
+In engineering, we advertise for “Senior Engineers” mainly because we get so many unqualified or under-experienced applicants - but everyone is referred to as a Software Engineer on our [team page](/people). We pay people more if they have more experience - per our [transparent salary calculator](/handbook/people/compensation) - but we don’t use these titles internally.
 
 ## Should you set requirements for your job titles?
 
@@ -65,7 +65,7 @@ It took lots of iteration in our hiring process to get this right. We ended up h
 
 > _"Great designers iterate. They don’t magically come up with something brilliant on the first try."_ - [Malthe Sigurdsson](https://www.linkedin.com/in/malthe/), former Chief Design Officer at Stripe.
 
-Ex-founders or early employees make for brilliant generalists. They’re less likely to be as deeply skilled in any given area, but if you need a quick uplift in a certain area, they’ll get you there faster and more flexibly. As your company grows and your requirements change, you can specialize your roles and titles. For example, as of writing, we're hiring for a Technical Content Marketing Manager and Developer Educator to bolster our content and developer relations efforts. (Check out our [Career](https://posthog.com/careers) page for more open roles.)
+Ex-founders or early employees make for brilliant generalists. They’re less likely to be as deeply skilled in any given area, but if you need a quick uplift in a certain area, they’ll get you there faster and more flexibly. As your company grows and your requirements change, you can specialize your roles and titles. For example, as of writing, we're hiring for a Technical Content Marketing Manager and Developer Educator to bolster our content and developer relations efforts. (Check out our [Career](/careers) page for more open roles.)
 
 ## Even the CEO's job changes over time
 
@@ -73,6 +73,6 @@ Ex-founders or early employees make for brilliant generalists. They’re less li
 
 Before PostHog started, James had to sell to get Tim to join. After the company launched, he had to get early users on board, which meant a mix of selling and building our website. His role then cycled through getting investors to take part in our funding rounds (from seed to [Series B](https://twitter.com/posthog/status/1402988140332154888)), hiring people, and talking to customers.
 
-On the ops and product side, it involves thinking about how the company and our business model should work - including our [product](https://posthog.com/handbook/strategy/roadmap), financing, [deployment](https://posthog.com/docs/self-host), [team structure](https://posthog.com/handbook/team-structure), and [pricing](https://posthog.com/pricing) strategies.
+On the ops and product side, it involves thinking about how the company and our business model should work - including our [product](/handbook/strategy/roadmap), financing, [deployment](/docs/self-host), [team structure](/handbook/team-structure), and [pricing](/pricing) strategies.
 
-_Enjoyed this? Subscribe to our [newsletter](https://posthog.com/newsletter) to hear more from us twice a month!_
+<NewsletterForm />

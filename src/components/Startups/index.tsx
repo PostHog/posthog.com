@@ -22,7 +22,9 @@ const validationSchema = Yup.object().shape({
     lastname: Yup.string().required('Please enter your last name'),
     email: Yup.string().email('Please enter a valid email address').required('Please enter a valid email address'),
     name: Yup.string().required('Please enter your company name'),
-    domain: Yup.string().url('Please enter your company domain').required('Please enter your company domain'),
+    domain: Yup.string()
+        .url('Please enter your company domain, beginning with https://')
+        .required('Please enter your company domain, beginning with https://'),
     self_registration_organization_name: Yup.string().required('Please enter your PostHog organization name'),
     self_registration_raised: Yup.number().required('Please select a value'),
     self_registration_company_founded: Yup.string().required('Please enter a date'),
@@ -149,7 +151,7 @@ export default function Startups() {
                                     follow steps 1-2 above!
                                 </p>
                                 <p className="mb-0">
-                                    In the meantime, why not join <Link to="/slack">our Slack community</Link>?
+                                    In the meantime, why not checkout our <Link to="/questions">community forum</Link>?
                                 </p>
                             </>
                         }

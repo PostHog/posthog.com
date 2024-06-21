@@ -33,8 +33,11 @@ interface IProps {
     }
 }
 
-export default function Questions({ data, pageContext }: IProps) {
+export default function Questions({ data, pageContext, location }: IProps) {
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('activity')
+    const topicLabel = data?.squeakTopic?.label
+    const isQuestionTopic = !topicLabel?.startsWith('#')
+    const title = `${topicLabel}${isQuestionTopic ? ' questions' : ''}`
 
     const { questions, isLoading, refresh, fetchMore, hasMore } = useQuestions({
         limit: 20,
@@ -46,14 +49,13 @@ export default function Questions({ data, pageContext }: IProps) {
                     $null: true,
                 },
             },
-            subject: {
-                $ne: '',
-            },
-            slugs: {
-                slug: {
-                    $notContainsi: '/community/profiles',
-                },
-            },
+            ...(isQuestionTopic
+                ? {
+                      subject: {
+                          $ne: '',
+                      },
+                  }
+                : {}),
         },
     })
 
@@ -78,25 +80,32 @@ export default function Questions({ data, pageContext }: IProps) {
     })
 
     const topicsNav = useTopicsNav()
+    const backTo = location?.state?.previous
 
     return (
         <CommunityLayout menu={topicsNav} title={data.squeakTopic.label}>
             <section className="max-w-screen-4xl space-y-8 pb-12 -mx-3 lg:-mx-4 xl:-mx-10">
                 <div className="w-full flex items-center mb-8">
                     <Link
-                        to={'/questions'}
+                        to={backTo?.url || '/questions'}
                         className="inline-flex space-x-1 items-center relative px-2 pt-1.5 pb-1 mb-1 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                     >
                         <RightArrow className="-scale-x-100 w-6" />
-                        <span className="text-primary dark:text-primary-dark text-[15px]">Topics</span>
+                        <span className="text-primary dark:text-primary-dark text-[15px]">
+                            Back to {backTo?.title || 'questions'}
+                        </span>
                     </Link>
                     <div className="ml-auto">
-                        <QuestionForm topicID={data?.squeakTopic?.squeakId} onSubmit={refresh} />
+                        <QuestionForm
+                            label={isQuestionTopic ? 'Ask a question' : 'New post'}
+                            topicID={data?.squeakTopic?.squeakId}
+                            onSubmit={refresh}
+                        />
                     </div>
                 </div>
                 <div className="w-full sm:flex sm:items-center mb-4">
                     <div className="flex space-x-4 items-baseline">
-                        <h1 className="text-4xl m-0">{data?.squeakTopic?.label} questions</h1>
+                        <h1 className="text-4xl m-0">{title}</h1>
                         <SubscribeButton
                             className="text-red font-bold disabled:text-black dark:disabled:text-white disabled:opacity-50"
                             contentType="topic"
@@ -131,6 +140,8 @@ export default function Questions({ data, pageContext }: IProps) {
                 <SidebarSearchBox filter="question" />
                 <div className="mt-8 flex flex-col">
                     <QuestionsTable
+                        showStatus={isQuestionTopic}
+                        showBody={!isQuestionTopic}
                         hasMore={hasMore}
                         className="sm:grid-cols-4"
                         questions={questions}

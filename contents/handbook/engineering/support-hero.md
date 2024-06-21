@@ -10,7 +10,7 @@ As Support Hero, your job is to investigate and resolve issues reported by custo
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-[Marcus](https://posthog.com/community/profiles/1036), our Support Engineer, triages tickets for the Product Analytics and Pipeline team, due to the high volume of tickets those teams get. He will resolve tickets if possible, and escalate to the engineering team responsible if he needs further help.
+<TeamMember name="Marcus Hof" /> and <TeamMember name="Steven Shults" />, our Support Engineers, triage tickets for the Product Analytics, Pipeline, Session Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -45,11 +45,11 @@ Your job is simple: resolve ticket after ticket from your team's list.
 
 There are three sources of tickets:
 
-1. In-app bug reports/feedback/support tickets sent from the [Support panel](https://us.posthog.com/home#panel=support). They include a bunch of useful links, e.g. to the admin panel and to the relevant session recording.
+1. In-app bug reports/feedback/support tickets sent from the [Support panel](https://us.posthog.com/home#panel=support) (The `Help` tab in the righthand sidebar.) They include a bunch of useful links, e.g. to the admin panel and to the relevant session recording.
 1. Community questions asked on PostHog.com.
 1. Slack threads that have been marked with the 🎫 reaction in customer support channels.
 
-Some of them will ask for new features. If the feature would be widely useful for users matching [our ICP](/handbook/who-we-are-building-for), it might be a good idea to build it. Otherwise, feel free to just create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](https://posthog.com/teams/customer-success) know, since they will track feature requests for paying customers.
+Some of them will ask for new features. If the feature would be widely useful for users matching [our ICP](/handbook/who-we-are-building-for), it might be a good idea to build it. Otherwise, feel free to just create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](/teams/customer-success) know, since they will track feature requests for paying customers.
 
 Others will report bugs or suspected bugs. Get to the bottom of each one - you never know what you'll find. If the issue decidedly affects only that one user under one-in-a-million circumstances, it might not be worth fixing. But if it's far-reaching, a proper fix is in order. And then there are "bugs" which turn out to be pure cases of confusing UX. Try to improve these too.
 
@@ -65,8 +65,10 @@ As an engineer, when a question comes in your first instinct is to give them an 
   - If you're ready to look into the issue and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
+  - If they expressed frustration, acknowledging it ("Sorry for the confusion", "Apologies for the trouble" etc.) can earn goodwill quickly.
+  - Be sure to thank them for reporting problems, giving feedback, creating issues, PRs, etc.
 - Follow up!
-- Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) to make it easy to identify outstanding conversations.
+- Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 
 ## How do I prioritize?
 
@@ -107,7 +109,7 @@ Best,
 [your name]
 ```
 
-2. After the user responded and confirmed the change, delete their [TOTP device](https://app.posthog.com/admin/otp_totp/totpdevice/) ([EU link](https://eu.posthog.com/admin/otp_totp/totpdevice/)).
+2. After the user responded and confirmed the change, delete their [TOTP device](https://us.posthog.com/admin/otp_totp/totpdevice/) ([EU link](https://eu.posthog.com/admin/otp_totp/totpdevice/)).
 
 ## How do I use Zendesk?
 
@@ -115,13 +117,15 @@ We use [Zendesk Support](https://zendesk.com/) as our internal platform to manag
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 
-Zendesk will get populated with new issues from people outside the PostHog organization on the `posthog` and `posthog.com` repos, and also community questions. These tickets will come with links to the issue or the question posted in the community so you can answer them in the appropriate platform, rather than on Zendesk itself.
+Zendesk is populated with new tickets when issues are sent via the in-app [Support panel](https://us.posthog.com/home#panel=support) (the `Help` tab in the righthand sidebar), from people outside the PostHog GitHub organization adding issues to the `posthog` and `posthog.com` repos, and new [community questions](/questions).  High priority customers also have Slack channels they can post support questions in. We can [create ZenDesk tickets from Slack questions via Pylon.](#pylon-to-create-zendesk-tickets-from-slack-posts)
+ 
+The ZenDesk tickets will include links to the GitHub issue, Slack thread, or the community question so we can answer in the appropriate platform.  After replying to a community question, make an `internal note` on the ZenDesk ticket confirming that you've replied outside of ZenDesk, and set the [ticket status](#ticket-status) accordingly when submitting the internal note.
 
 ### Accessing Zendesk
 
 You can access the app via [posthoghelp.zendesk.com](https://posthoghelp.zendesk.com).
 
-The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/people) so our users know who they are chatting with!
+The first time you sign into Zendesk, please make sure you include your name and [profile picture](/people) so our users know who they are chatting with!
 
 ### Using Zendesk
 
@@ -130,7 +134,18 @@ You’ll spend most of your time in the Views pane, where you’ll find all tick
 Tips:
 
 * Err on the side of Solving tickets (see below) if you expect no further input from the customer, as a lot of them don't reply to confirm that the problem has been solved.
-* Provide actionable information as _Note_ (e.g. links to internal slack threads, partial investigation, ...)
+* Provide actionable information as an _Internal Note_ on the ZenDesk ticket (e.g. links to internal slack threads, partial investigation, ...)
+
+#### Avoiding duplication of effort in ZenDesk
+
+To avoid having more than one person working on the same ticket at the same time, assign a ticket to yourself before you start working on it:
+
+1. Click on the ticket to open it
+2. In the left column, click the `take it` link, above the `Assignee menu`
+3. Above the compose field, change `Public reply` to `Internal note` (prevents spamming Slack channels)
+4. In the lower-right, open the `Submit as` menu and select `Open`
+
+Also, avoid cherry-picking tickets. Pick the ticket that is closest to breaching our [response targets](/handbook/comms/customer-support#response-targets).
 
 #### Ticket Status
 
@@ -144,6 +159,8 @@ When responding to a ticket you should also choose an appropriate status accordi
 
 Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. 
 
+
+
 #### Content Warnings
 
 We have a clear definition of [who we do business with](/handbook/growth/sales/who-we-do-business-with) which means that customers who track adult or other potentially offensive content aren't automatically excluded.  To avoid team members inadvertently seeing anything offensive when impersonating a customer we will automatically tag tickets from Organizations known to have this type of content with a `content_warning` tag.
@@ -153,9 +170,13 @@ This looks at the Content Warning field on the Zendesk Organization, and adds th
 If you do discover any potentially offensive content in a customer account then please update this field on the Zendesk Organization so that other team members are aware of the content.
 
 
-### Pylon
+### Pylon to create ZenDesk tickets from Slack posts
 
-Our Customer Success team uses [Pylon](https://usepylon.com) to turn Slack threads into Zendesk tickets. When creating a ticket by adding the :ticket: emoji, the customer or CS team can assign the thread to a team which will route the Zendesk ticket to the correct place. These will normally be marked as high priority and you can respond to them either in Zendesk or Slack, as there is a two-way sync.
+We use [Pylon](https://usepylon.com/) to create Zendesk tickets from Slack posts. To do so, add the `:ticket:` (🎫) emoji reaction to the post that you want to create a ZenDesk ticket from.  
+
+Adding the `:ticket:` emoji reaction will cause Pylon to add a couple of replies in a thread under the post. The last of those replies includes options for the ZenDesk ticket you're creating: Use the `Group` menu to send the ticket to the appropriate team, and the `Severity` menu to set the severity flag on the ZenDesk ticket, then hit the `Submit` button.
+
+ZenDesk tickets created this way will normally be marked as high priority tickets. You can respond to them either in Zendesk or Slack, as there is a two-way sync.
 
 ### Community questions
 
@@ -174,3 +195,16 @@ The first time you answer a question, you'll need to create a community account.
 Ask in [#team-website-and-docs](https://posthog.slack.com/archives/C01V9AT7DK4) to be upgraded to a moderator. This will also give you access to moderator controls available for each question.
 
 _Note: The PostHog.com community currently uses a separate authentication system from PostHog Cloud. There are [plans](https://github.com/PostHog/posthog.com/issues/5847) to support other types of authentication so a visitor doesn't have to create a separate account for asking questions._
+
+## How do I handle user requests to delete groups/organizations?
+
+> **_WARNING:_**  Do NOT click the `DELETE` button! That will delete the entire project!
+> Just use the `Save` button after clicking the `delete` checkbox for the group.
+
+1. Visit the Django Admin page for the project at `https://us.posthog.com/admin/posthog/team/:project_id/change/` (Make sure you use the project ID for the project where the group/org is found)
+2. In the lower part of the page, find `GROUP TYPE MAPPINGS` and click on `SHOW`
+3. In the righthand column, check the box for the group(s) to be deleted
+4. Click the **`SAVE`** button. (**Do NOT use the `DELETE` button!**)
+5. Reply to the user to confirm
+
+

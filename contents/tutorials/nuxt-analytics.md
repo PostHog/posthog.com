@@ -96,7 +96,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_instance_address>'
+      posthogHost: '<ph_client_api_host>'
     }
   }
 })
@@ -120,6 +120,7 @@ export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: runtimeConfig.public.posthogHost,
+    person_profiles: 'identified_only',
   })
   
   return {
@@ -155,6 +156,7 @@ export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: runtimeConfig.public.posthogHost,
+    person_profiles: 'identified_only'
     capture_pageview: false // set this to false since we manually capture pageviews in router.afterEach
   })
 

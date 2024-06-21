@@ -17,6 +17,7 @@ import ApiExamples from './ApiExamples'
 import HogQL from './HogQL'
 import CustomerData from './CustomerData'
 import CodeBlocks from './CodeBlocks'
+import Libraries from './Libraries'
 import OnePlatform from './OnePlatform'
 import NoHatingAllowed from './NoHatingAllowed'
 import { RenderInClient } from 'components/RenderInClient'
@@ -31,15 +32,15 @@ const Home = () => {
             <StarUsBanner />
             <Layout>
                 <SEO
-                    title="PostHog - The open source Product OS"
-                    description="PostHog is the all-in-one platform for building better products - with product analytics, feature flags, session recordings, a/b testing, heatmaps, and more."
+                    title="PostHog - How developers build successful products"
+                    description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, A/B testing, and surveys that's built for developers."
                     image="/images/home.png"
                 />
                 <Hero />
                 <Customers />
                 <AllInOne />
+                <Libraries />
                 <CodeBlocks />
-                <OnePlatform />
                 <NoHatingAllowed />
 
                 <RenderInClient
@@ -60,6 +61,7 @@ const Home = () => {
                 <ApiExamples />
                 <HogQL />
                 <Community />
+                <OnePlatform />
                 <CustomerData />
                 <Timeline />
                 <Roadmap />

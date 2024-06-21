@@ -425,6 +425,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             squeakId: Int!
             name: String!
             roadmaps: [SqueakRoadmap!] @link(by: "id", from: "roadmaps.id")
+            emojis: [SlackEmoji] @link(by: "name", from: "emojis")
         }
 
         type SqueakRoadmap implements Node {

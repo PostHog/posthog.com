@@ -16,33 +16,35 @@ images:
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/mentat_analytics_logo.jpg
   - >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/marketing_engineers_logo.jpg
+  - >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/wintactix_logo.png
 ---
 
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
 <Hero
-    title="Partners of PostHog"
-    subtitle="We offer dedicated and community support, but you may want to team up with an external partner to get help on an on-going or project-basis. That's where our partners can help!"
+    title="Partners"
+    subtitle="We offer dedicated and community support, but you may want to team up with an external partner to get help on an on-going or project-basis. That's where our partners can help."
 />
 
-<section class="my-24 px-5">
+<section class="mt-24 mb-12 px-5">
   <div class="max-w-screen-2xl mx-auto">
     <div class="flex justify-center">
       <ul class="m-0 p-0 list-none inline-grid sm:grid-cols-3 lg:grid-cols-3 justify-evenly relative text-center sm:text-left">
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[1])} alt="Implementation support" objectFit="contain" style={{ maxHeight: 150 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Implementation support</h5>
-          <p class="m-0 text-[15px]">Struggling to get started? Partners can help you get the most out of your data by creating bespoke queries, dashboards, and more.</p>
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4 text-center">Implementation support</h5>
+          <p class="m-0 text-[15px] text-center">Struggling to get started? Partners can help you get the most out of your data by creating bespoke queries, dashboards, and more.</p>
         </li>
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[2])} alt="App creation" objectFit="contain" style={{ maxHeight: 150 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Apps and integrations</h5>
-          <p class="m-0 text-[15px]">Need to build a connection to another tool? We have plenty of ready-made integrations, but partners can help make more.</p>
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4 text-center">Apps and integrations</h5>
+          <p class="m-0 text-[15px] text-center">Need to build a connection to another tool? We have plenty of ready-made integrations, but partners can help make more.</p>
         </li>
         <li class="relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8">
           <GatsbyImage image={getImage(props?.images[0])} alt="Self-hosted deployments" objectFit="contain" style={{ maxHeight: 150 }} />
-          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4">Self-hosted deployments</h5>
-          <p class="m-0 text-[15px]">Need to self-host? We no longer support Kubernetes deployments, but a partner may be able to help fill the gap instead.</p>
+          <h5 class="text-xl font-extrabold m-0 pb-1 pr-4 text-center">Self-hosted deployments</h5>
+          <p class="m-0 text-[15px] text-center">Need to self-host? We no longer support Kubernetes deployments, but a partner may be able to help fill the gap instead.</p>
         </li>
       </ul>
     </div>
@@ -50,42 +52,60 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 </section>
 
 <Section title="Our partners" className="@container">
-                    <div className="flex flex-col @3xl:grid md:grid-cols-3 gap-4 mb-8">
+                    <div className="flex flex-col @3xl:grid md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
                         <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                         <GatsbyImage image={getImage(props?.images[3])} alt="Taleno Digital" objectFit="contain" style={{ maxHeight: 100 }} />
+                        <div className="max-h-24">
+                         <GatsbyImage image={getImage(props?.images[3])} alt="Taleno Digital" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
+                         </div>
                             <h3 className="text-xl mb-2">Taleno Digital</h3>
                             <p className="text-[15px]">
                                 Joey Taleno can help you deploy PostHog projects, create visualizations, and setup suitable data architectures. 
                             </p>
-                            <CallToAction to="https://taleno.digital/" type="outline" size="md" className="!w-full sm:!w-auto">
-                                Contact
+                            <CallToAction to="https://taleno.digital/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
+                                Visit website
                             </CallToAction>
                         </div>
                         <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                         <GatsbyImage image={getImage(props?.images[4])} alt="Mentat Analytics" objectFit="contain" style={{ maxHeight: 100 }} />
+                        <div className="max-h-24">
+                         <GatsbyImage image={getImage(props?.images[4])} alt="Mentat Analytics" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
+                         </div>
                             <h3 className="text-xl mb-2">Mentat Analytics</h3>
                             <p className="text-[15px]">
                                 Specializing in helping tech startups, Mentat can help you build your data stack, implement PostHog, and scale your data.
                             </p>
                             <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
-                                <CallToAction to="https://www.mentatanalytics.co/" type="outline" size="md" className="!w-full sm:!w-auto">
-                                    Contact
+                                <CallToAction to="https://www.mentatanalytics.co/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
+                                    Visit website
                                 </CallToAction>
                             </div>
                         </div>
                         <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                         <GatsbyImage image={getImage(props?.images[5])} alt="Marketing Engineers" objectFit="contain" style={{ maxHeight: 100 }} />
+                        <div className="max-h-24">
+                         <GatsbyImage image={getImage(props?.images[5])} alt="Marketing Engineers" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
+                         </div>
                             <h3 className="text-xl mb-2">Marketing Engineers</h3>
                             <p className="text-[15px]">
                                 An international team of engineers that can help you with deployment and configuring PostHog for marketing purpose. 
                             </p>
-                            <CallToAction to="https://marketingengineers.nl/" type="outline" size="md" className="!w-full sm:!w-auto">
-                                Contact
+                            <CallToAction to="https://marketingengineers.nl/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
+                                Visit website
+                            </CallToAction>
+                        </div>
+                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                        <div className="max-h-24">
+                            <GatsbyImage image={getImage(props?.images[6])} alt="WintactiX" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
+                            </div>
+                            <h3 className="text-xl mb-2">WintactiX</h3>
+                            <p className="text-[15px]">
+                                WintactiX specializes in Rev Ops and software implementation. Available to consult on best practices and to integrate Posthog with your other sales and marketing SaaS without draining your in-house development resources.
+                            </p>
+                            <CallToAction to="https://www.wintactix.com/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
+                                Visit website
                             </CallToAction>
                         </div>
                     </div>
   <div className="max-w-[849px] mx-auto text-center">
-  <CallToAction href="/contact-sales">Become a partner</CallToAction>
+  <CallToAction href="/talk-to-a-human">Become a partner</CallToAction>
   </div>
 </Section>
 
@@ -93,7 +113,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 <div class="max-w-screen-md mx-auto space-y-1">
 <details>
 <summary>How do I add myself as a partner?</summary>
-<p>If you'd like to become a partner, simply <a href="/contact-sales">get in touch</a> and let us know how you intend to work with us. We'll get back to you.</p>
+<p>If you'd like to become a partner, simply <a href="/talk-to-a-human">get in touch</a> and let us know how you intend to work with us. We'll get back to you.</p>
 </details>
 
 <details> 

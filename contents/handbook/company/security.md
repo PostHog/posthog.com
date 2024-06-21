@@ -19,7 +19,9 @@ We enforce the use of hardware security keys wherever we can. Every team members
 - One [YubiKey 5C Nano](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nano/) for use with the work computer (can be left plugged in most of the time)
 - One [YubiKey 5C NFC](https://www.yubico.com/gb/product/yubikey-5-series/yubikey-5c-nfc/) for use with mobile devices, and as backup
 
-Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or whatever password manager you use) & GitHub at the very least. You can also use the Yubikeys to protect personal accounts. If you are new, please do this within your first month so you don't get locked out. 
+Please enable security keys for Google Workspace, MacOS, AWS, 1Password (or whatever password manager you use) and GitHub at the very least. You can also use the Yubikeys to protect personal accounts. If you are new, please do this within your first month so you don't get locked out.
+
+Google recently changed its settings for 2FA and Yubikeys and you may struggle to link your Yubikeys to your Google account. Go [here to find out about the change](https://joshua.hu/enrolling-hardware-keys-2fa-google-workspace) or use this direct link to head [straight to this page where](https://myaccount.google.com/signinoptions/two-step-verification?flow=sk&opendialog=addsk) you can register your Yubikeys. 
 
 ## SOC 2
 
@@ -36,8 +38,11 @@ We have a number of policies in place to support SOC 2 compliance. All team memb
 All of these policies are available for viewing upon request:
 
 - Acceptable Use Policy
+- Application Logging & Monitoring Policy
 - Asset Management Policy
 - Backup Policy
+- Breach Notification Policy
+- Business Associate Policy
 - Business Continuity Plan
 - Code of Conduct
 - Data Classification Policy
@@ -49,6 +54,7 @@ All of these policies are available for viewing upon request:
 - Information Security Policy
 - Password Policy
 - Physical Security Policy
+- Privacy, Use, and Disclosure Policy
 - Responsible Disclosure Policy
 - Risk Assessment Policy
 - Software Development Lifecycle Policy
@@ -79,7 +85,7 @@ PostHog does not require personally identifiable information or personal data to
 
 - We maintain an extensive security policies to ensure we are managing data responsibly - [see above](/handbook/company/security#policies).  
 - We enter into Data Processing Agreements ('DPAs') with PostHog Cloud customers when requested - [our standard agreement is here](https://docs.google.com/document/d/1xfpP1SCFoI1qSKM6rEt9VqRLRUEXiKj9_0Tvv2mP928/edit?usp=sharing). We maintain a register of all DPAs we have entered into. 
-- Customers can shoose whether to host data on our AWS server in the EU (Germany) or US. If data transfer is required from the United Kingdom, EU or EEA to our US-West based AWS environment, we rely on [EU Standard Contractual Clauses](https://docs.google.com/document/d/1reTUk6VTsTLo1ErNYn-Tdmj_ETo8QYNH6tNCaebDwpE/edit?usp=sharing) (SCCs). 
+- Customers can choose whether to host data on our AWS server in the EU (Germany) or US. If data transfer is required from the United Kingdom, EU or EEA to our US-West based AWS environment, we rely on [EU Standard Contractual Clauses](https://docs.google.com/document/d/1reTUk6VTsTLo1ErNYn-Tdmj_ETo8QYNH6tNCaebDwpE/edit?usp=sharing) (SCCs). 
 - We are registered with the Information Commissioner's Office in the United Kingdom as Hiberly Ltd., which is the legal name for our UK entity. 
 - A list of sub-Processors is maintained as part of our [DPA](https://docs.google.com/document/d/1xfpP1SCFoI1qSKM6rEt9VqRLRUEXiKj9_0Tvv2mP928/edit?usp=sharing) - we keep this to a strict minimum.
 - Our [Data Processing Register](https://docs.google.com/spreadsheets/d/1HRBhfYINn8jAgwzggVfVH0ttaCfUC18SFAWHU1cjejg/edit#gid=1554885211) is available for viewing by any interested party upon request. 

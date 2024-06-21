@@ -87,7 +87,9 @@ According to AWS, AQUA boosts performance by 10x on average by precomputing quer
 
 ![AQUA.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-redshift/AQUA.png)
 
-AQUA shifts Amazon’s shared-nothing model to something similar to a shared storage model. Because AQUA precomputes data, it encourages developers to use a single Redshift managed storage layer that multiple Redshift clusters can interact with. 
+AQUA shifts Amazon’s shared-nothing model to something similar to a shared storage model. Because AQUA precomputes data, it encourages developers to use a single Redshift managed storage layer that multiple Redshift clusters can interact with.
+
+<NewsletterForm />
 
 ### ClickHouse’s (traditional) architecture
 
@@ -150,3 +152,5 @@ Consider the following resources if you want to learn more about the differences
 - [ClickHouse guide to migrating data from Redshift to ClickHouse](https://clickhouse.com/docs/en/integrations/redshift)
 - [Optimizing Analytical Workloads: Comparing Redshift vs ClickHouse](https://clickhouse.com/blog/redshift-vs-clickhouse-comparison)
 - [Altinity's ClickHouse vs Redshift benchmarking](https://altinity.com/blog/2017/6/20/clickhouse-vs-redshift)
+
+<NewsletterForm />

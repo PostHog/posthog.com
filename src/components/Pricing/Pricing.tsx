@@ -8,12 +8,22 @@ import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import { PricingCalculator } from './PricingCalculator'
+import { Addons } from './Addons'
 import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
-import { IconCheck, IconChevronDown, IconInfo, IconShield, IconArrowRightDown } from '@posthog/icons'
+import {
+    IconCalendar,
+    IconCheck,
+    IconChevronDown,
+    IconHandMoney,
+    IconInfo,
+    IconRocket,
+    IconShield,
+    IconArrowRightDown,
+} from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -26,9 +36,10 @@ interface PlanData {
     features: React.ReactNode[]
     CTAText?: string
     CTALink?: string
+    intent: string
 }
 
-const planSummary: PlanData[] = [
+const planSummary = [
     {
         title: 'Totally free',
         price: 'Free',
@@ -40,6 +51,7 @@ const planSummary: PlanData[] = [
             '1 year data retention',
             'Community support',
         ],
+        intent: 'free',
     },
     {
         title: 'Ridiculously cheap',
@@ -47,7 +59,7 @@ const planSummary: PlanData[] = [
         features: [
             'Generous free tier on all products',
             'Advanced product features',
-            '2 projects',
+            '6 projects',
             '7 year data retention',
             'Email support',
             'Pay only for what you use',
@@ -55,40 +67,7 @@ const planSummary: PlanData[] = [
                 <span className="opacity-60 text-sm">* Included with any product subscription</span>
             </>,
         ],
-    },
-    {
-        title: 'Teams',
-        price: '$450',
-        features: [
-            'Generous free tier on all products',
-            <>
-                <span className="relative">
-                    Includes team features{' '}
-                    <Tooltip
-                        content={() => (
-                            <>
-                                <h3 className="mb-1 text-base">Team features</h3>
-                                <ul className="list-none p-0 divide-y divide-light dark:divide-dark">
-                                    <li className="py-1.5 text-sm">Verified events</li>
-                                    <li className="py-1.5 text-sm">Comments on dashboards and insights</li>
-                                    <li className="py-1.5 text-sm">Data taxonomy (tags and descriptions)</li>
-                                </ul>
-                            </>
-                        )}
-                        tooltipClassName="max-w-sm"
-                    >
-                        <span className="relative -top-px">
-                            <IconInfo className="inline-block w-4 h-4" />
-                        </span>
-                    </Tooltip>
-                </span>
-            </>,
-            'Unlimited projects',
-            '7 year data retention',
-            'Priority support',
-            'Pay only for what you use',
-        ],
-        CTAText: 'Get started',
+        intent: 'paid',
     },
     {
         title: 'Enterprise',
@@ -103,11 +82,12 @@ const planSummary: PlanData[] = [
             'Advanced permissions & audit logs',
         ],
         CTAText: 'Get in touch',
-        CTALink: '/contact-sales',
+        CTALink: '/talk-to-a-human',
+        intent: 'enterprise',
     },
 ]
 
-const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
+const Plan: React.FC<{ planData: PlanData } & { highlight?: boolean }> = ({ planData, highlight }) => (
     <div>
         <h4 className="text-lg mb-2">{planData.title}</h4>
         <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded">
@@ -132,9 +112,10 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
                 </ul>
                 <div className="mt-auto">
                     <PlanCTA
-                        type={planData.title === 'Ridiculously cheap' ? 'primary' : 'secondary'}
                         ctaText={planData.CTAText}
                         ctaLink={planData.CTALink}
+                        intent={planData.intent}
+                        type={highlight ? 'primary' : 'secondary'}
                     />
                 </div>
             </div>
@@ -179,7 +160,7 @@ export const gridCellBottom = cntl`
     rounded-b-md
 `
 
-const allProductsData = graphql`
+export const allProductsData = graphql`
     query {
         allProductData {
             nodes {
@@ -187,6 +168,7 @@ const allProductsData = graphql`
                     description
                     docs_url
                     image_url
+                    icon_key
                     inclusion_only
                     contact_support
                     addons {
@@ -194,6 +176,7 @@ const allProductsData = graphql`
                         description
                         docs_url
                         image_url
+                        icon_key
                         inclusion_only
                         name
                         type
@@ -206,6 +189,9 @@ const allProductsData = graphql`
                             plan_key
                             product_key
                             unit
+                            flat_rate
+                            unit_amount_usd
+                            included_if
                             features {
                                 description
                                 key
@@ -258,6 +244,154 @@ const allProductsData = graphql`
     }
 `
 
+export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
+    const platformAndSupportProduct = billingProducts.find(
+        (product: BillingProductV2Type) => product.type === 'platform_and_support'
+    )
+    const highestSupportPlan = platformAndSupportProduct?.plans?.slice(-1)[0]
+
+    const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
+    return (
+        <>
+            <section className={`${section} mb-12 mt-8 md:px-4`}>
+                <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Platform plans</h3>
+                <p className="text-[15px] text-primary/75 dark:text-primary-dark/75">
+                    All plans include unlimited team members and no limits on tracked users.
+                </p>
+                <div className="col-span-4 -mx-4 lg:mx-0 mb-4 px-4 lg:px-0 overflow-x-auto">
+                    <div
+                        className={`grid grid-cols-[repeat(3,_minmax(260px,_1fr))] xl:max-w-4xl xl:mx-auto gap-4 mb-12 ${
+                            highlight === 'free'
+                                ? '[&>*:nth-child(1)_>div]:border-red [&>*:nth-child(1)_>div]:border-3'
+                                : '[&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3'
+                        }`}
+                    >
+                        {planSummary.map((plan, index) => (
+                            <Plan key={index} planData={plan} highlight={plan.intent === highlight} />
+                        ))}
+                    </div>
+                </div>
+                <p
+                    className="text-center text-red dark:text-yellow font-bold cursor-pointer flex items-center justify-center"
+                    onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
+                >
+                    {isPlanComparisonVisible ? (
+                        <>
+                            Hide full plan comparison <IconChevronDown className="w-8 rotate-180" />
+                        </>
+                    ) : (
+                        <>
+                            Show full plan comparison <IconChevronDown className="w-8" />
+                        </>
+                    )}
+                </p>
+            </section>
+
+            <section
+                className={`${section} ${
+                    isPlanComparisonVisible
+                        ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
+                        : 'overflow-y-hidden invisible max-h-0 opacity-0'
+                } transition duration-500 ease-in-out transform`}
+            >
+                <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+                    <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
+                        <div className="col-span-4 px-3 py-1">&nbsp;</div>
+                        {platformAndSupportProduct?.plans
+                            ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                            ?.map((plan: BillingV2PlanType) => (
+                                <div className="col-span-4 px-3 py-1" key={plan.key}>
+                                    <strong className="text-sm opacity-75">{plan.name}</strong>
+                                </div>
+                            ))}
+                    </div>
+
+                    <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
+                        <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                            <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
+                        </div>
+                        {platformAndSupportProduct?.plans
+                            ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                            ?.map((plan: BillingV2PlanType) => {
+                                return (
+                                    <div className="col-span-4 px-3 py-2 text-sm" key={`${plan.key}-base-price`}>
+                                        {plan.included_if === 'no_active_subscription' ? (
+                                            <span>Free forever</span>
+                                        ) : plan.included_if === 'has_subscription' ? (
+                                            <span>$0</span>
+                                        ) : plan.unit_amount_usd ? (
+                                            `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
+                                        ) : plan.contact_support ? (
+                                            'Contact us'
+                                        ) : (
+                                            'Contact us'
+                                        )}
+                                    </div>
+                                )
+                            })}
+                        {highestSupportPlan?.features
+                            ?.filter(
+                                (f: BillingV2FeatureType) =>
+                                    ![
+                                        // TODO: this shouldn't be necessary, update billing products api to include entitlement_only info
+                                        'role_based_access',
+                                        'project_based_permissioning',
+                                        'ingestion_taxonomy',
+                                        'tagging',
+                                    ].includes(f.key)
+                            )
+                            .map((feature: BillingV2FeatureType) => (
+                                <>
+                                    <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                                        {feature.description ? (
+                                            <Tooltip content={feature.description}>
+                                                <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                    {feature.name}
+                                                </strong>
+                                            </Tooltip>
+                                        ) : (
+                                            <strong className="text-primary/75 dark:text-primary-dark/75">
+                                                {feature.name}
+                                            </strong>
+                                        )}
+                                    </div>
+                                    {platformAndSupportProduct?.plans
+                                        ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                                        ?.map((plan: BillingV2PlanType) => {
+                                            const planFeature = plan?.features?.find((f) => f.key === feature.key)
+                                            return (
+                                                <div
+                                                    className="col-span-4 px-3 py-2 text-sm"
+                                                    key={`${plan.key}-${feature.key}`}
+                                                >
+                                                    {planFeature ? (
+                                                        <div className="flex gap-x-2">
+                                                            {planFeature.note ?? (
+                                                                <IconCheck className="w-5 h-5 text-green" />
+                                                            )}
+                                                            {planFeature.limit && (
+                                                                <span className="opacity-75">
+                                                                    <>
+                                                                        {planFeature.limit} {planFeature.unit}
+                                                                    </>
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                </>
+                            ))}
+                    </div>
+                </div>
+            </section>
+        </>
+    )
+}
+
 const Pricing = ({
     groupsToShow,
     currentProduct,
@@ -272,15 +406,6 @@ const Pricing = ({
             nodes: [{ products: billingProducts }],
         },
     } = useStaticQuery(allProductsData)
-
-    const platformAndSuppportProduct = billingProducts.find(
-        (product: BillingProductV2Type) => product.type === 'platform_and_support'
-    )
-    const highestSupportPlan = platformAndSuppportProduct?.plans?.slice(-1)[0]
-
-    console.log('platformAndSuppportProduct', platformAndSuppportProduct)
-
-    const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
     return (
         <>
@@ -356,7 +481,7 @@ const Pricing = ({
                                             </div>
                                         )}
                                     >
-                                        <span className="border-b border-dashed border-primary/50 dark:primary-dark/50">
+                                        <span className="border-b border-dashed border-primary/50 dark:border-primary-dark/50">
                                             value-based pricing
                                         </span>
                                     </Tooltip>
@@ -484,132 +609,7 @@ const Pricing = ({
                 </>
             )}
 
-            {!currentProduct && (
-                <>
-                    <section className={`${section} mb-12 mt-8 md:px-4`}>
-                        <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Platform plans</h3>
-                        <p className="text-[15px] text-primary/75 dark:text-primary-dark/75">
-                            All plans include unlimited team members and no limits on tracked users.
-                        </p>
-                        <div className="col-span-4 -mx-4 lg:mx-0 mb-4 px-4 lg:px-0 overflow-x-auto">
-                            <div className="grid grid-cols-[repeat(4,_minmax(260px,_1fr))] lg:grid-cols-4 gap-4 mb-12 [&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3">
-                                {planSummary.map((plan, index) => (
-                                    <Plan key={index} planData={plan} />
-                                ))}
-                            </div>
-                        </div>
-                        <p
-                            className="text-center text-red dark:text-yellow font-bold cursor-pointer flex items-center justify-center"
-                            onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
-                        >
-                            {isPlanComparisonVisible ? (
-                                <>
-                                    Hide full plan comparison <IconChevronDown className="w-8 rotate-180" />
-                                </>
-                            ) : (
-                                <>
-                                    Show full plan comparison <IconChevronDown className="w-8" />
-                                </>
-                            )}
-                        </p>
-                    </section>
-
-                    <section
-                        className={`${section} ${
-                            isPlanComparisonVisible
-                                ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
-                                : 'overflow-y-hidden invisible max-h-0 opacity-0'
-                        } transition duration-500 ease-in-out transform`}
-                    >
-                        <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
-                            <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
-                                <div className="col-span-4 px-3 py-1">&nbsp;</div>
-                                {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => (
-                                    <div className="col-span-3 px-3 py-1" key={plan.key}>
-                                        <strong className="text-sm opacity-75">{plan.name}</strong>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
-                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                    <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
-                                </div>
-                                {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => {
-                                    return (
-                                        <div className="col-span-3 px-3 py-2 text-sm" key={`${plan.key}-base-price`}>
-                                            {plan.included_if === 'no_active_subscription' ? (
-                                                <span>Free forever</span>
-                                            ) : plan.included_if === 'has_subscription' ? (
-                                                <span>$0</span>
-                                            ) : plan.unit_amount_usd ? (
-                                                `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
-                                            ) : plan.contact_support ? (
-                                                'Contact us'
-                                            ) : (
-                                                'Contact us'
-                                            )}
-                                        </div>
-                                    )
-                                })}
-                                {highestSupportPlan?.features
-                                    ?.filter(
-                                        (f: BillingV2FeatureType) =>
-                                            ![
-                                                // TODO: this shouldn't be necessary, update billing products api to include entitlement_only info
-                                                'role_based_access',
-                                                'project_based_permissioning',
-                                                'ingestion_taxonomy',
-                                                'tagging',
-                                            ].includes(f.key)
-                                    )
-                                    .map((feature: BillingV2FeatureType) => (
-                                        <>
-                                            <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                                {feature.description ? (
-                                                    <Tooltip content={feature.description}>
-                                                        <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
-                                                            {feature.name}
-                                                        </strong>
-                                                    </Tooltip>
-                                                ) : (
-                                                    <strong className="text-primary/75 dark:text-primary-dark/75">
-                                                        {feature.name}
-                                                    </strong>
-                                                )}
-                                            </div>
-                                            {platformAndSuppportProduct?.plans?.map((plan: BillingV2PlanType) => {
-                                                const planFeature = plan?.features?.find((f) => f.key === feature.key)
-
-                                                return (
-                                                    <div
-                                                        className="col-span-3 px-3 py-2 text-sm"
-                                                        key={`${plan.key}-${feature.key}`}
-                                                    >
-                                                        {planFeature ? (
-                                                            <div className="flex gap-x-2">
-                                                                {planFeature.note ?? (
-                                                                    <IconCheck className="w-5 h-5 text-green" />
-                                                                )}
-                                                                {planFeature.limit && (
-                                                                    <span className="opacity-75">
-                                                                        {planFeature.limit} {planFeature.unit}
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                        ) : (
-                                                            <></>
-                                                        )}
-                                                    </div>
-                                                )
-                                            })}
-                                        </>
-                                    ))}
-                            </div>
-                        </div>
-                    </section>
-                </>
-            )}
+            {!currentProduct && <PlanColumns billingProducts={billingProducts} />}
 
             {currentProduct && (
                 <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
@@ -621,14 +621,16 @@ const Pricing = ({
                 <>
                     <PricingCalculator />
 
+                    <Addons billingProducts={billingProducts} />
+
                     <section className={`${section} my-12 md:my-24 md:px-4`}>
                         <h2 className="text-xl m-0 flex gap-2 pl-1 mb-4 items-center border-b border-light dark:border-dark pb-2">
                             <span>Available discounts</span>
                         </h2>
-                        <ul className="list-none p-0 grid md:grid-cols-3 gap-6 md:gap-12">
+                        <ul className="list-none p-0 grid md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-12 xl:gap-6">
                             <li>
                                 <div className="flex items-center gap-2">
-                                    <IconShield className="w-7 h-7 opacity-75" />
+                                    <IconCalendar className="w-7 h-7 opacity-75" />
                                     <strong>Annual payment</strong>
                                 </div>
                                 <p className="pl-9 text-[15px]">
@@ -638,7 +640,7 @@ const Pricing = ({
                             </li>
                             <li>
                                 <div className="flex items-center gap-2">
-                                    <IconShield className="w-7 h-7 opacity-75" />
+                                    <IconRocket className="w-7 h-7 opacity-75" />
                                     <strong>Startups</strong>
                                 </div>
                                 <p className="pl-9 text-[15px] mb-3">
@@ -648,11 +650,21 @@ const Pricing = ({
                             </li>
                             <li>
                                 <div className="flex items-center gap-2">
-                                    <IconShield className="w-7 h-7 opacity-75" />
+                                    <IconHandMoney className="w-7 h-7 opacity-75" />
                                     <strong>Non-profits</strong>
                                 </div>
                                 <p className="pl-9 text-[15px]">
                                     50% off in most cases. Get in touch through the app after signing up.
+                                </p>
+                            </li>
+                            <li>
+                                <div className="flex items-center gap-2">
+                                    <IconShield className="w-7 h-7 opacity-75" />
+                                    <strong>Side project insurance</strong>
+                                </div>
+                                <p className="pl-9 text-[15px]">
+                                    Unexpectedly go viral with your side project and get sticker shock? Get in touch and
+                                    we'll help cover your first bill.
                                 </p>
                             </li>
                         </ul>

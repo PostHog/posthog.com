@@ -68,6 +68,8 @@ Being an all-in-one platform has two further benefits:
 
 A BAA is available on PostHog's [Teams plan](/pricing), which also includes priority support and generous free usage limits for all tools – e.g. 1 million free analytics events every month. You can also self-host the open-source edition of PostHog, but this isn't recommended as it's provided without guarantee or support.
 
+<NewsletterForm />
+
 ### 2. Mixpanel
 
 ![Mixpanel - hipaa analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/mixpanel.png)
@@ -183,7 +185,7 @@ PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by s
 - **Surveys:** <span className="text-red text-lg">✖</span>
 - **Customer data platform:** <span className="text-green text-lg">✔</span>
 
-[Amplitude](https://amplitude.com) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but it also offers extras such as session replay, feature flags, and A/B testing. It also offers anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days".   
+[Amplitude](/blog/posthog-vs-amplitude) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but also has extra features such as session replay, feature flags, and A/B testing. It also has anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days."   
 
 #### Amplitude and HIPAA compliance
 

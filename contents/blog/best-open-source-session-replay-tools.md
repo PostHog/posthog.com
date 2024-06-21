@@ -38,7 +38,7 @@ Hotjar and [Fullstory](/blog/best-fullstory-alternatives) are popular session re
 
 [PostHog](https://posthog.com/) is an all-in-one, Product OS that offers all the tools required to build better products, including but not limited to [session replay](/product/session-recording).
 
-PostHog's session replay tool includes console logs and network activity, so you can identify the causes of bugs or performance problems. There's also a playlist feature, allowing you to save similar replays based on specific events or user properties into one list, and you can save recordings offline for safe keeping.
+PostHog's session replay tool includes console logs and network activity, so you can identify the causes of bugs or performance problems. There's also a playlist feature, allowing you to save similar replays based on specific events or person properties into one list, and you can save recordings offline for safe keeping.
 
 Other features include product analytics, [feature flags](/product/feature-flags), [funnels](/product/funnels), [heatmaps](/product/heatmaps), [experimentation](/product/experimentation-suite), [trends](/product/trends) and [much more](/product). 
 
@@ -147,7 +147,7 @@ UXlens is a good choice for UX designers and product teams who want to study the
 
 The cloud version starts at just $6 per month for 6,000 recordings. Lifetime self-host licenses start at $200.
 
-## 6. [Matomo](https://matomo.org/)
+## 6. [Matomo](/blog/posthog-vs-matomo)
 ![Matomo - open source GA alternative](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-hotjar-alternatives/Matomo-session-recording.png)
 
 Matomo is an open web analytics platform. Touted as an alternative to Google Analytics, Matomo is largely focused on understanding marketing website analytics. Session recording is available as an add-on via the [on-premise marketplace](https://plugins.matomo.org/HeatmapSessionRecording).
@@ -165,4 +165,3 @@ Matomo is mainly built with marketing and content teams in mind, offering insigh
 ### How much does Matomo cost?
 
 The session recording add-on for a self-hosted Matomo solution has a 30-day free trial, after which the cost ranges from $199 to $599 per year depending on the number of users in your team. Session recording is also included in Matomo’s cloud Business plan. Pricing is calculated depending on the volume of your site traffic.
-

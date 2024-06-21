@@ -54,7 +54,7 @@ from posthog import Posthog
 
 posthog = Posthog(
   '<ph_project_api_key>', 
-  host='<ph_instance_address>'
+  host='<ph_client_api_host>'
 )
 user_id = 'ian@posthog.com'
 
@@ -81,7 +81,7 @@ If the results are statistically significant, something is wrong. Here are some 
 
 - **Flag implementation:** use the overrides (like `posthog.featureFlags.override({'aa-homepage': 'test'})` for each of the variants and check that the same code runs. Try accessing the code with different states (logged in vs out), browsers, and parameters.
 
-- **Consistently identify, set properties, and group users:** if your experiment or goals depends on a user, property, or group filter, check that you are setting these values correctly before calling the flag. For example, you might not be setting a user property a flag relies on before flag evaluation.
+- **Consistently identify, set properties, and group users:** if your experiment or goals depends on a user, property, or group filter, check that you are setting these values correctly before calling the flag. For example, you might not be setting a person property a flag relies on before flag evaluation.
 
 - If none of these work, raise a [support ticket in-app](https://app.posthog.com/home#supportModal=bug%3Aexperiments).
 

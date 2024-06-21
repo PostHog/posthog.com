@@ -121,3 +121,5 @@ For us, I think we probably will fundraise again. However, our goals may be diff
 Venture Capital is a tool, not a religion. Don't blindly follow what you hear others are doing on TechCrunch.
 
 Instead, have a clear fundraising purpose. If it's to accelerate growth, great. Just ask yourself if it will _actually_ help achieve that based on how _your company_ is growing.
+
+<NewsletterForm />

@@ -34,7 +34,7 @@ You find your project ID by clicking “Project settings” in the sidebar, then
 
 ### 3. An insight short ID
 
-Next, you need the data you want to show in the new tab. Browse to your insights or dashboards for a metric you want to display. When you find it, click on the insight details (the link from insights or “view” from a dashboard). Once on that screen, copy the unique value in the URL after `<ph_instance_address>/insights/`.
+Next, you need the data you want to show in the new tab. Browse to your insights or dashboards for a metric you want to display. When you find it, click on the insight details (the link from insights or “view” from a dashboard). Once on that screen, copy the unique value in the URL after `<ph_client_api_host>/insights/`.
 
 ![Insight short ID](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/product-data-in-new-tab/short-id.png)
 
@@ -43,13 +43,13 @@ Next, you need the data you want to show in the new tab. Browse to your insights
 Once you have all three pieces of information, we are going to use them to format an API request for the data Momentum Dash uses to display it. The API format is:
 
 ```bash
-https://<ph_instance_address>/api/projects/<project_id>/insights/?personal_api_key=<personal_key>&short_id=<insight_short_id>
+<ph_app_host>/api/projects/<project_id>/insights/?personal_api_key=<personal_key>&short_id=<insight_short_id>
 ```
 
-So, if our instance address was `app.posthog.com`, project ID was `12345`, our personal API key was `phx_abcde`, and our insight short ID was `aAbBcC`, our API request would look like:
+So, if our instance address was `us.posthog.com`, project ID was `12345`, our personal API key was `phx_abcde`, and our insight short ID was `aAbBcC`, our API request would look like:
 
 ```bash
-https://app.posthog.com/api/projects/12345/insights/?personal_api_key=phx_abcde&short_id=aAbBcC
+<ph_app_host>/api/projects/12345/insights/?personal_api_key=phx_abcde&short_id=aAbBcC
 ```
 
 Copy your formatted code and open up a new tab (assuming you have Momentum Dash set up) to move on to the next step.

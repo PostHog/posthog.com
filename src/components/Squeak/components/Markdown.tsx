@@ -21,7 +21,7 @@ export const Markdown = ({
             remarkPlugins={[remarkGfm]}
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
-            className="question-content flex-1 !text-sm overflow-hidden text-ellipsis community-post-markdown !pb-0 text-primary/75 dark:text-primary-dark/75 font-normal"
+            className="question-content flex-1 !text-sm overflow-hidden text-ellipsis community-post-markdown mr-1 !pb-0 text-primary/75 dark:text-primary-dark/75 font-normal"
             components={{
                 pre: ({ children }) => {
                     return (

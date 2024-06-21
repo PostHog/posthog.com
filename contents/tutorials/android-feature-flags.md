@@ -142,14 +142,14 @@ import com.posthog.android.PostHogAndroidConfig
 class MyFeatureFlagsApplication : Application() {
     companion object {
         private const val POSTHOG_API_KEY = "<ph_project_api_key>"
-        private const val POSTHOG_HOST = "<ph_instance_address>" // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+        private const val POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     }
 
     override fun onCreate() {
         super.onCreate()
         val config = PostHogAndroidConfig(
             apiKey = POSTHOG_API_KEY,
-            host = POSTHOG_HOST // TIP: host is optional if you use https://app.posthog.com
+            host = POSTHOG_HOST // TIP: host is optional if you use https://us.i.posthog.com
         )
         PostHogAndroid.setup(this, config)
     }
@@ -192,7 +192,7 @@ With PostHog set up, your app is ready for feature flags. To create one, go to t
   classes="rounded"
 />
 
-You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
+You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
 
 ## 4. Implement the flag code
 

@@ -7,7 +7,7 @@
 <p align="center">
   <a href='http://makeapullrequest.com'><img alt='PRs Welcome' src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields'/></a>
   <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/posthog/posthog.com"/>
-  <a href='https://posthog.com/slack'><img alt="Join Slack Community" src="https://img.shields.io/badge/slack%20community-join-blue"/></a>
+  <a href='https://posthog.com/community'><img alt="Join Community" src="https://img.shields.io/badge/community-join-blue"/></a>
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/posthog/posthog.com"/>
   <img alt="GitHub closed pull requests" src="https://img.shields.io/github/issues-pr-closed/posthog/posthog.com"/>
 </p>
@@ -58,19 +58,6 @@ This is the repository for the PostHog website. It contains:
 See full instructions on [developing PostHog.com locally in our manual](https://posthog.com/handbook/engineering/posthog-com/developing-the-website).
 
 ## Advanced setup
-
-### Docker
-
-It is also possible to use Docker to run posthog.com locally with this command:
-
-```bash
-docker run -it --rm \
-    -w /app -v "$PWD":/app \
-    -p 8000-8001:8000-8001 \
-    -e INTERNAL_STATUS_PORT=8001 \
-    node:14-slim \
-    sh -c 'yarn && yarn start'
-```
 
 ### Debugging errors on start
 1. Pull the latest changes from `master`

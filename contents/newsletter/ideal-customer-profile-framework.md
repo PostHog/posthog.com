@@ -91,6 +91,8 @@ This lacks a few important details you need for a complete ICP, such as company 
 
 **Why is this important?** Your first attempt will be wrong, so don’t overthink it. [Lenny Rachitsky notes](https://www.lennysnewsletter.com/p/how-to-identify-your-ideal-customer) that most companies he spoke to had just three attributes in their initial ICP.
 
+<NewsletterForm />
+
 ## 4. Gather intel every way you can
 
 It should go without saying that defining your ICP requires talking to users a lot. Write everything down. You never know what detail will become important later.
@@ -182,3 +184,5 @@ Daniel Hsu, founder of Retool, believes outbound is very useful for early-stage 
 - **[How to create actionable developer personas](https://www.developermarkepear.com/blog/developer-personas) – Jakub Czakon:** Want to go deeper on personas? Jakub’s guide is a comprehensive look at creating developer personas and Jobs To Be Done (JTBD).
 
 - **[Metrics that cannot even be measured in retrospect](https://longform.asmartbear.com/unmeasurable-metrics) – Jason Cohen:** Some product choices, such as small design changes, are impossible to measure. Jason shares some great examples of things you shouldn’t try to measure.
+
+<NewsletterForm />

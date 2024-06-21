@@ -29,9 +29,9 @@ import PythonSendEvents from '../../integrate/send-events/_snippets/send-events-
 
 <PythonSendEvents />
 
-## Setting user properties
+## Person profiles and properties
 
-To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
+For backward compatibility, PostHog captures events with [person profiles](/docs/data/persons) by default. To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```python
 posthog.capture(
@@ -44,7 +44,19 @@ posthog.capture(
 )
 ```
 
-For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+
+To capture events without person profiles, set the event's `$process_person_profile` property to `false`:
+
+```python
+posthog.capture(
+    'distinct_id',
+    event='event_name',
+    properties={
+        '$process_person_profile': False
+    }
+)
+```
 
 ## Alias
 
@@ -134,6 +146,14 @@ You can also explicitly chose to enable or disable GeoIP for a single capture re
 posthog.capture('test_id', 'test_event', disable_geoip=True|False)
 ```
 
+## Historical migrations
+
+You can use the Python SDK to run [historical migrations](/docs/migrate) of data into PostHog. To do so, set the `historical_migration` option to `true` when initializing the client.
+
+import PythonMigration from "../../migrate/_snippets/python-migration.mdx"
+
+<PythonMigration />
+
 ## Serverless environments (Render/Lambda/...)
 
 By default, the library buffers events before sending them to the capture endpoint, for better performance. This can
@@ -147,9 +167,7 @@ is fully flushed. To avoid this, you can either:
 
 See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django.
 
-# Integrations
-
-## Sentry
+## Sentry integration
 
 When using [Sentry in Python](https://docs.sentry.io/platforms/python/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles.
 
@@ -176,7 +194,7 @@ with configure_scope() as scope:
     scope.set_tag('posthog_distinct_id', 'some distinct id')
 ```
 
-### Example implementation with Django
+#### Example implementation with Django
 
 This can be made automatic in Django, by adding the following middleware and settings to `settings.py`:
 

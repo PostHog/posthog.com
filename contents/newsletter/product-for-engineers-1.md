@@ -95,3 +95,5 @@ Dan Wolchonok outlines why it’s [important to seek out hard to find users](htt
 - [How Acquirers See Your Company](https://staysaasy.com/product/2023/02/22/how-acquirers-see-your-company.html) by StaySaasy: “Getting acquired is like meeting the world’s worst in-laws.” This post discusses the questions acquirers ask themselves beyond “do we like the team”. 
 
 - [The myth of exponential hypergrowth](https://longform.asmartbear.com/exponential-growth/index.html) by Jason Cohen: “Hypergrowth” companies don’t grow exponentially. Jason Cohen goes in-depth on how fast-growing companies actually grow using real data. Essential reading.
+
+<NewsletterForm />

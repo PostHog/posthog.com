@@ -23,13 +23,15 @@ PostHog provides options to capture fewer events and limit the number of unwante
 
 ## Configuring autocapture
 
-Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. 
+[Autocapture](/docs/product-analytics/autocapture) is a powerful way to capture user behavior and interactions without needing to manually set up events. It captures data you didn't know you need before you realize you need it. This helps you do analysis without waiting days or weeks for manually instrumented events to show up.
+
+The potential challenge for high-traffic apps and sites is too many events being captured.
 
 To counteract this, autocapture is configurable. For example, you can use the frontend JavaScript library without enabling autocapture. Just set `autocapture` to `false` when initializing the library (this still captures `pageview` and `pageleave`).
 
 ```js
 posthog.init('<ph_project_api_key>', {
-  api_host: '<ph_instance_address>',
+  api_host: '<ph_client_api_host>',
   autocapture: false,
   // ... more options
 })
@@ -49,7 +51,7 @@ First, you can turn off autocapture with a feature flag when the PostHog library
 posthog.init(
   '<ph_project_api_key>',
   { 
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     loaded: function (posthog) {
       posthog.onFeatureFlags((_flags) => {
         if (posthog.isFeatureEnabled('disable-autocapture')) {
@@ -134,5 +136,5 @@ On top of this, you must guess what percentage you need. A percentage of a large
 Hopefully, these options helped you get your event data ingestion and costs in control. From that, you can increase the amount you are capturing again. Here are some recommendations to help you out:
 
 - Not getting enough events? Check out our [event tracking guide](/tutorials/event-tracking-guide).
-- Trouble with pageview captures on your single page app? Check out our [tutorial on how to set it up](/tutorials/spa).
+- Trouble with pageview captures on your single-page app? Check out our [tutorial on how to set it up](/tutorials/spa).
 - Want to avoid using cookies in your tracking? Follow our [cookieless tracking tutorial](/tutorials/cookieless-tracking).

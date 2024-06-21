@@ -102,3 +102,5 @@ As we sold some deals, and failed to sell others, we started [modifying pricing]
 ## How we're evolving this
 
 So far, we've identified ICPs at a _company_ level. As we're getting more sophisticated, we're doing it at an _individual_ level. We want to have a set list of stakeholders we aim to delight, so we are clearer on those _within_ our ICP we're shipping for.
+
+<NewsletterForm />

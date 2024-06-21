@@ -60,7 +60,7 @@ There are no limits on feature flag usage in the open-source edition, though A/B
 
 - **License:** Apache
 - **GitHub stars:** 9k
-- [Flagsmith on GitHub](https://github.com/Unleash/unleash)
+- [Unleash on GitHub](https://github.com/Unleash/unleash)
 
 ![unleash](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/unleash.png)
 
@@ -90,7 +90,7 @@ Unleash is free for two environments when you self-host. A managed version is al
 
 #### What is GrowthBook?
 
-[GrowthBook](https://www.growthbook.io/) is a warehouse native, open-source feature flagging and experimentation platform built to help companies make better data-driven decisions. Its flag tool features advanced targeting, gradual rollouts, and experiments. 
+[GrowthBook](/blog/posthog-vs-growthbook) is a warehouse-native, open-source feature flagging and experimentation platform built to help companies make better data-driven decisions. Its flag tool features advanced targeting, gradual rollouts, and experiments. 
 
 It's warehouse native with support for most major SQL data sources, and there's a code-free visual experiment editor that can used be less technical end users.
 
@@ -102,7 +102,7 @@ It's warehouse native with support for most major SQL data sources, and there's 
 
 #### How much does it cost?
 
-Growthbook’s open source self-hosted plan is free forever, with unlimited flags and experiments. GrowthBook also offers a hosted version with pricing based on the number of users.
+Growthbook’s open source self-hosted plan is free forever, with unlimited flags and experiments. [GrowthBook](/blog/best-growthbook-alternatives) also offers a hosted version with pricing based on the number of users.
 
 ### 4. Flagsmith
 
@@ -114,7 +114,7 @@ Growthbook’s open source self-hosted plan is free forever, with unlimited flag
 
 #### What is Flagsmith?
 
-[Flagsmith](https://flagsmith.com/) is a feature flag tool that makes it easy to test and deploy new functional and visual changes to users without pushing updates to code. 
+[Flagsmith](/blog/best-flagsmith-alternatives) is a feature flag tool that makes it easy to test and deploy new functional and visual changes to users without pushing updates to code. 
 
 All flags in Flagsmith are capable of being configured for cross-platform remote configuration, so you can alter an app in real-time without having to wait for app store approval.
 

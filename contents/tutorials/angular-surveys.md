@@ -5,6 +5,7 @@ author:
   - lior-neu-ner
 showTitle: true
 sidebar: Docs
+featuredVideo: https://www.youtube-nocookie.com/embed/KSzLc80FIx4 
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
 tags:
@@ -42,9 +43,9 @@ Next, Replace the code in `src/app/app.component.html` with a simple heading:
 </div>
 ```
 
-Run `ng serve` and navigate to http://localhost:4200 to see your app in action.
+Run `ng serve` and navigate to `http://localhost:4200` to see your app in action.
 
-![Basic Angular app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-ab-tests/basic-app.png)
+![Basic Angular app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/angular-surveys/basic-app.png)
 
 ## 2. Add PostHog
 
@@ -67,7 +68,7 @@ import posthog from 'posthog-js'
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<ph_instance_address>'
+    api_host:'<ph_client_api_host>'
   }
 )
 
@@ -298,8 +299,11 @@ To fetch the active surveys, we use `posthog.getActiveMatchingSurveys()`. This r
 To fetch this array and integrate it with your survey UI, update your code in `app.component.ts`:
 
 ```typescript file=app.component.ts
-// your existing imports...
-import { Component, ChangeDetectorRef } from '@angular/core';
+// Import OnInit and ChangeDetectorRef
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { CustomSurveyComponent } from './components/custom-survey/custom-survey.component';
 import posthog from 'posthog-js'
 
 @Component({
@@ -513,7 +517,7 @@ After interacting with your survey, you can view results by selecting the survey
 - How many users have dismissed the survey.
 - Responses.
 
-You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
+If you capture events with [person profiles](/docs/data/persons), you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 <ProductScreenshot
   imageLight={ImgSurveyResultsLight} 

@@ -126,7 +126,7 @@ To bootstrap your flags, add the relevant distinct ID and feature flag data when
 
 ```js
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     bootstrap: {
         distinctID: 'your-anonymous-id',
         featureFlags: {
@@ -143,6 +143,8 @@ You can get values for the bootstrap object by using a server-side library. Call
 Bootstrapping also ensures events have accurate feature flag data. If you capture events before receiving feature flags data, data can be missing.
 
 > You can read more about bootstrapping in [our docs](/docs/feature-flags/bootstrapping) or tutorials for [Next.js](/tutorials/nextjs-bootstrap-flags) or [React and Express](/tutorials/bootstrap-feature-flags-react).
+
+<NewsletterForm />
 
 ## 6. Name your feature flags well
 
@@ -207,3 +209,5 @@ Whatever you choose, it should be clear to your team when to remove a feature fl
 - [What you can learn from how GitHub and GitLab use feature flags](/product-engineers/github-gitlab-feature-flags)
 - [How we build features users love (really fast)](/product-engineers/measuring-feature-success)
 - [Why we test in production (and you should too)](/product-engineers/testing-in-production)
+
+<NewsletterForm />

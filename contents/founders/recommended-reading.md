@@ -30,7 +30,7 @@ Former games journalist Joe has repeatedly recommended this collection of essays
 
 "I don’t agree about the importance of a dress code, though.”
 
-> **Putting it into practice:** We encourage everyone at PostHog to [write a personal README](/team) about their style of work and how they like to collaborate and be communicated with. 
+> **Putting it into practice:** We encourage everyone at PostHog to [write a personal README](/people) about their style of work and how they like to collaborate and be communicated with. 
 
 
 ![From Switzerland](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/from-switzerland.jpg)
@@ -48,7 +48,7 @@ Lottie claims she doesn’t read very much, but when pressed for recommendations
 
 ![Secrets of Sand Hill Road](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/sand-hill-road.jpg)
 ## [Secrets of Sand Hill Road by Scott Kupor](https://www.goodreads.com/book/show/42348376-secrets-of-sand-hill-road)
-**Recommended by [James Hawkins, CEO & Co-founder](/community/profiles/71)**
+**Recommended by [James Hawkins, CEO & Co-founder](/james)**
 
 James reads a lot and could likely recommend enough books to fill an article all on his own but, when we asked for recommendations for first-time founders, this was one of the first books that came to mind. It focuses on explaining how startups operate from a VC’s perspective.
 
@@ -61,7 +61,7 @@ James reads a lot and could likely recommend enough books to fill an article all
 ![messy middle](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/messy-middle.jpg)
 
 ## [The Messy Middle by Scott Belsky](https://www.goodreads.com/book/show/40179007-the-messy-middle)
-**Recommended by [Charles Cook, Operations & Marketing](/community/profiles/254)**
+**Recommended by [Charles Cook, Operations & Marketing](/charles)**
 
 If there’s one person whose book recommendations are really worth listening to, then it’s Charles. Not only is he the leader of both our Operations and Marketing teams — he’s _also_ the founder of our internal book club.
 
@@ -72,7 +72,7 @@ If there’s one person whose book recommendations are really worth listening to
 
 ![high output management](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/high-growth.jpg)
 ## [High Output Management by Andrew Grove](https://www.goodreads.com/book/show/324750.High_Output_Management)
-**Recommended by [Grace McKenzie, Finance & Operations Lead](/community/profiles/718)**
+**Recommended by Grace McKenzie, Finance & Operations Lead**
 
 Andrew Grove was Intel’s third employee, third CEO, and the man who led the company to the world’s largest producer of semiconductors. He also somehow found time to write this book about organizational theory which is beloved by our chief organizer, Grace.
 
@@ -83,7 +83,7 @@ Andrew Grove was Intel’s third employee, third CEO, and the man who led the co
 
 ![no rules rules](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/no-rules-rules.jpg)
 ## [No Rules Rules by Reed Hastings](https://www.goodreads.com/book/show/49099937-no-rules-rules) 
-**Recommended by [James Hawkins, CEO & Co-founder](/community/profiles/71)**
+**Recommended by [James Hawkins, CEO & Co-founder](/james)**
 
 When it came to envisioning the sort of culture he wanted to build at PostHog, no was more influential for James as this exploration of Netflix’s company culture. PostHog doesn’t copy Netflix’s approach completely, but we definitely share some of the underlying philosophies. 
 
@@ -116,7 +116,7 @@ In addition to the The Mom Test, Annika recommends this book for its practical a
 
 ![the mom test](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tracks/mom-test.jpg)
 ## [The Mom Test by Rob Fitzpatrick](https://www.goodreads.com/book/show/52283963-the-mom-test)
-**Recommended by [basically everyone](/team)**
+**Recommended by [basically everyone](/people)**
 
 One of the most universally popular books among the team (shortly followed by The Design of Everyday Things by Dan Norman), The Mom Test has helped shape the way we think about product design and user feedback at a fundamental level. 
 
@@ -147,3 +147,5 @@ The SaaS Playbook isn’t your normal startup how-to guide, according to Lior. I
 **Lior's review:** “It’s a very alternative guide to building a startup. While most books center around hyper growth and fundraising, the SaaS Playbook teaches you how to achieve financial independence to build a sustainable and bootstrapped business.”
 
 > **Putting it into practice:** Product launches are a perpetual activity at PostHog, so our marketing team is always working in bootstrap mode — with help from [their favourite tool](/blog/posthog-marketing).
+
+<NewsletterForm />

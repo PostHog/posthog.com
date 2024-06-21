@@ -37,6 +37,8 @@ Transparency works particularly well in an all remote company. Like ours. That's
 
 We didn't expect this, but transparency makes hiring great talent much easier. Since we share most of the below publicly, potential hires can trust us much more easily, and it makes us stand apart from the thousands of other startups. Transparency makes the whole company a joint project, between our team and the community around it too.
 
+<NewsletterForm />
+
 ## How we avoid context overload
 
 There will be so much context available, that you need to be more mindful of making it easy to find stuff.
@@ -130,4 +132,6 @@ These are a fun one - team members write out how they can help others, what thei
 ## You don't have to do this all at once
 
 Some of this list may require you to improve your company's general processes and management to even be able to share them properly. That's fine. Ultimately, doing the things here will create deep trust between your team, and it'll make you think through your decisions more carefully. That has to be worth it.
+
+<NewsletterForm />
 

@@ -58,7 +58,7 @@ As a company, we feel that this structure strikes a fair balance between incenti
 
 ### How do share options turn you into a millionaire? 
 
-When you are granted your options on the first day of employment, the price you will pay to exercise them will stay static at whatever the Fair Market Value (FMV) per share is on your first day, irrespective of what the value is when you sell your purchased shares. 
+When you are granted your options, the price you will pay to exercise them will stay static at whatever the exercise price is on the date you were granted them, irrespective of what the value is when you sell your purchased shares.
 
 The FMV is decided through an external, very complicated process known as a 409A, and the initial sale price of the share is usually set when the company "goes public" or "IPOs" by being listed on a public stock exchange like the NYSE. This is known as a “liquidation event” and in the simplest terms, the difference between your exercise price and the price of the share you sell in the public market is cash in your pocket. 
 
@@ -66,16 +66,16 @@ The reality of this is much more complicated, as there can be a number of [tax i
 
 Making matters more complicated, the majority of standard terms in stock option plans limit your freedom in when and how you can exercise your options.
 
-In the UK, stock options are offered under the tax-advantged [EMI scheme](https://theaccountancycloud.com/blogs/everything-you-need-to-know-about-the-emi-scheme), which has a different (and usually much lower) strike price than the FMV.
+In the UK, stock options are offered under the tax-advantaged [EMI scheme](https://theaccountancycloud.com/blogs/everything-you-need-to-know-about-the-emi-scheme), which usually results in a different strike price because of the way valuation works in the UK vs. US
 
 ## How PostHog does things differently
 
-|                           | **PostHog**                 | **Most startups**           |
-|---------------------------|-----------------------------|------------------------------|
-| **Vesting start**        | On your first day           | After a "probationary period"|
-| **Exercise window**      | 10 _years_ after departure  | 90 _days_ after departure    |
-| **Merger or acquisition** | Double-Trigger acceleration | No acceleration              |
-| **Good leavers**         | Includes performance lay-off| Doesn't include performance  |
+| &nbsp;                    | **PostHog**                  | **Most startups**             |
+|---------------------------|------------------------------|-------------------------------|
+| **Vesting start**         | On your first day            | After a "probationary period" |
+| **Exercise window**       | 10 _years_ from grant        | 90 _days_ after departure     |
+| **Merger or acquisition** | Double-Trigger acceleration  | No acceleration               |
+| **Good leavers**          | Includes performance lay-off | Doesn't include performance   |
 
 ### Vesting Start
 
@@ -83,7 +83,7 @@ At PostHog, we recognize that you start contributing to the company on day one, 
 
 ### Exercise Window
 
-Regardless of whether you resign, or are let go for performance reasons, you will have 10 years from the day you were hired to exercise your options. In most companies, you have only three months to exercise your options before you lose them entirely, which can make tax optimization and planning a stressful and difficult process. We also believe that this window allows you the opportunity to watch the company's growth before deciding to exercise your options. One thing to note is that based on IRS law, tax advantaged [Incentive Stock Options (ISOs)](https://www.investopedia.com/terms/i/iso.asp) convert into less favourable [Non-Qualified Stock Options (NSOs)](https://www.investopedia.com/terms/n/nso.asp) after 3 months, so there may still be an incentive to exercise sooner.
+Regardless of whether you resign, or are let go for performance reasons, you will have 10 years from the day your options were granted to exercise your options. In most companies, you have only three months to exercise your options before you lose them entirely, which can make tax optimization and planning a stressful and difficult process. We also believe that this window allows you the opportunity to watch the company's growth before deciding to exercise your options. One thing to note is that based on IRS law, tax advantaged [Incentive Stock Options (ISOs)](https://www.investopedia.com/terms/i/iso.asp) convert into less favourable [Non-Qualified Stock Options (NSOs)](https://www.investopedia.com/terms/n/nso.asp) after 3 months, so there may still be an incentive to exercise sooner.
 
 In the unlikely event that you are let go “with cause” (i.e. for gross misconduct, like embezzlement or discrimination), you will forfeit your options, which we feel is only fair.
 
@@ -104,3 +104,5 @@ In many other companies, only people who voluntarily resign are considered "good
 As an open-source company, we are transparent about compensation including equity, because we believe that everyone who contributes to our success should reap the benefits. 
 
 For more information about how PostHog thinks about equity, check out our [compensation page](/handbook/people/compensation) and [equity FAQ](/handbook/people/share-options) in our handbook.
+
+<NewsletterForm />

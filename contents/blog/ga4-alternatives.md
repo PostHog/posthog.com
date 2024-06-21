@@ -161,7 +161,7 @@ Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an 
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-green text-lg">✔</span>
 
-[Matomo](https://matomo.org/) is one of the most popular Google Analytics alternatives around. Like UA, it's based on a session-based tracking model, and it even allows new users to import data from an existing Google Analytics account.
+[Matomo](/blog/posthog-vs-matomo) is one of the most popular Google Analytics alternatives around. Like UA, it's based on a session-based tracking model, and it even allows new users to import data from an existing Google Analytics account.
 
 It also shares some weaknesses inherent in Universal Analytics. While Matomo has added more advanced analytics features, it's better suited to traditional website analytics than tracking desktop and mobile apps. Like PostHog, it's open source, so can be self-hosted if you prefer.
 

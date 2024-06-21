@@ -28,6 +28,8 @@ after:bg-[#36C46F]
 after:bg-[#43B6E7]
 after:bg-[#8567FF]
 after:bg-[#2EA2D3]
+after:bg-[#8B0DC8]
+after:bg-[#C170E8]
 after:border-yellow
 after:border-seagreen
 before:border-yellow
@@ -36,6 +38,7 @@ bg-primary/10
 bg-primary-dark/10
 bg-blue
 bg-blue/10
+bg-gradient-to-tr
 bg-green
 bg-green/10
 bg-lime-green
@@ -64,6 +67,7 @@ bg-[#43B6E7]
 bg-[#D42F18]
 bg-[#FCC779]
 bg-[#8567FF]
+bg-[#2EA2D3]
 border-blue
 border-green
 border-opacity-100
@@ -80,7 +84,12 @@ border-aqua
 border-[#36C46F]
 border-[#2EA2D3]
 border-[#8567FF]
+border-[#681291]
 col-span-7
+dark:after:bg-[#C170E8]
+dark:text-[#C170E8]
+dark:border-[#C170E8]
+dark:hover:border-bg-light/50
 flex
 flex
 flex-row-reverse
@@ -102,6 +111,7 @@ grid-rows-2
 grid-rows-3
 grid-rows-4
 h-full
+hover:border-bg-dark/50
 justify-start
 justify-start
 left-16
@@ -183,6 +193,9 @@ text-[#36C46F]
 text-[#43B6E7]
 text-[#8567FF]
 text-[#2EA2D3]
+text-[#8B0DC8]
+text-[#C170E8]
+text-[#681291]
 to-tan/0
 via-tan/85
 w-2/12

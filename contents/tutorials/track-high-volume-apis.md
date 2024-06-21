@@ -74,7 +74,7 @@ npm i posthog-node
 
 We set up the PostHog client with our project API key, instance address, and personal API key. The first two you can get from your [project settings](https://app.posthog.com/project/settings). The personal API key can be created in your [account settings](https://app.posthog.com/me/settings).
 
- We add a `client.capture()` call to our `/big` route. The capture call includes the route distinct ID and an event name. We also include a `firstRouteCalled` user property to use for a filter later. 
+ We add a `client.capture()` call to our `/big` route. The capture call includes the route distinct ID and an event name. We also include a `firstRouteCalled` person property to use for a filter later. 
 
 ```node
 const express = require('express');
@@ -85,7 +85,7 @@ const port = 3000
 const client = new PostHog(
   '<ph_project_api_key>',
   { 
-    host: '<ph_instance_address>',
+    host: '<ph_client_api_host>',
     personalApiKey: '<ph_personal_api_key>'
   }
 )

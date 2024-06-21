@@ -92,6 +92,8 @@ Because ClickHouse doesn’t expect mutation requests, it can depend on merges b
 
 > 📖 **Further reader:** ClickHouse is just one of many column-based databases, others include Google's BigQuery, and Snowflake. Read our comparisons between [ClickHouse and BigQuery](/blog/clickhouse-vs-bigquery), and [ClickHouse vs Snowflake](/blog/clickhouse-vs-snowflake) to learn more about different OLAP database solutions.
 
+<NewsletterForm />
+
 ## Comparing ClickHouse and Postgres
 
 Because ClickHouse is the more opinionated solution, comparisons between Postgres and ClickHouse tend to go: 
@@ -191,3 +193,5 @@ Sharding can be done prematurely to optimize performance. When multiple ClickHou
 ClickHouse was made to handle lots and lots of aggregate data. While starting with Postgres may be acceptable for the early days of a data-heavy business, platforms like ClickHouse are the better investment when aggregate fetches come into play. 
 
 ClickHouse optimizes data aggregating at every layer — inception, storage, caching, and returning — and will boast 1000x advancements over tools like Postgres. However, ClickHouse can rarely be used in isolation, as many day-to-day needs of an application are too update / single-line-read heavy to utilize a columnar database.
+
+<NewsletterForm />

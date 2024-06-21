@@ -5,7 +5,7 @@ import Link from 'components/Link'
 import { Contributor } from 'components/PostLayout/Contributors'
 import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
-import { graphql } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React, { useEffect, useState } from 'react'
@@ -24,6 +24,9 @@ import qs from 'qs'
 import Breadcrumbs from 'components/Edition/Breadcrumbs'
 import { CallToAction } from 'components/CallToAction'
 import { IconMap, IconOpenSidebar } from '@posthog/icons'
+import { NewsletterForm } from 'components/NewsletterForm'
+import BuiltBy from '../components/BuiltBy'
+import TeamMember from 'components/TeamMember'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -140,6 +143,9 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         ),
         a: A,
         TutorialsSlider,
+        NewsletterForm,
+        BuiltBy,
+        TeamMember,
         ...shortcodes,
     }
     const { tableOfContents } = pageContext

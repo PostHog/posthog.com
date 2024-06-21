@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Link } from 'gatsby'
 import usePostHog from '../../hooks/usePostHog'
 

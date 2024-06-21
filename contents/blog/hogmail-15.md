@@ -25,7 +25,7 @@ category: General
 
 ## #tutorials-and-guides
 
-🔎 [Tracking pageviews in single page apps](https://posthog.com/tutorials/spa): All the ways to track pageviews in single page apps (SPA) using PostHog.
+🔎 [Tracking pageviews in single-page apps](https://posthog.com/tutorials/spa): All the ways to track pageviews in single-page apps (SPA) using PostHog.
 
 📉 [How to calculate and lower churn rate with PostHog](https://posthog.com/tutorials/churn-rate): Master using session recordings, cohorts, and actions to lower churn.
 
@@ -69,4 +69,4 @@ category: General
 
 * [How Do You Prove a Secret?](https://www.quantamagazine.org/how-to-prove-you-know-a-secret-without-giving-it-away-20221011/)
 
-> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
+<NewsletterForm />

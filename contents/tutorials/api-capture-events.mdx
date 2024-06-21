@@ -17,7 +17,7 @@ export const apiEventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/
 
 PostHog provides [libraries](/docs/integrate?tab=sdks) that make it easy to capture events in popular languages. These libraries are basically wrappers around the API. They handle and automate common tasks like capturing pageviews.
 
-Using the API directly allows for any language that can send requests to capture events, or completely customize your implementation. Using the API to capture events directly also gives you a better understanding of PostHog’s event-based data structures which is abstracted if you use a library. 
+Using the API directly allows for any language that can send requests to capture events, or completely customize your implementation. Using the API to capture events directly also gives you a better understanding of [PostHog’s event-based data structures](/docs/how-posthog-works/data-model) which is abstracted if you use a library. 
 
 ## Authenticating with the project API key
 
@@ -27,7 +27,7 @@ The project API key is a write-only key, which works perfectly for the POST-only
 
 ## Basic event capture request
 
-To capture events, all we need is a project API key, the data we want to send, and a way to send a request. To capture a new event, you need to send a `POST` request to [`<ph_instance_address>/capture/`](<ph_instance_address>/capture/)  (or the `/capture` endpoint for your instance) with the project API key, event name, and distinct ID.
+To capture events, all we need is a project API key, the data we want to send, and a way to send a request. To capture a new event, you need to send a `POST` request to [`<ph_client_api_host>/capture/`](<ph_client_api_host>/capture/)  (or the `/capture` endpoint for your instance) with the project API key, event name, and distinct ID.
 
 <MultiLanguage>
 
@@ -37,7 +37,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "event": "request",
     "distinct_id": "ian@posthog.com"
-}' <ph_instance_address>/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 ```python
@@ -54,7 +54,7 @@ body = {
     }
 }
 
-url = "<ph_instance_address>/capture/"
+url = "<ph_client_api_host>/capture/"
 
 response = requests.post(url, headers=headers, json=body)
 
@@ -88,7 +88,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "timestamp": "2022-09-21 09:03:11.913767",
     "distinct_id": "ian@posthog.com",
     "event": "big_request"
-}' <ph_instance_address>/capture/
+}' <ph_client_api_host>/capture/
 ```
     
 ```python
@@ -108,7 +108,7 @@ body = {
     }
 }
 
-url = "<ph_instance_address>/capture/"
+url = "<ph_client_api_host>/capture/"
 
 response = requests.post(url, headers=headers, json=body)
 
@@ -140,12 +140,12 @@ curl -v -L --header "Content-Type: application/json" -d '{
             }
         }
     ]
-}' <ph_instance_address>/batch/
+}' <ph_client_api_host>/batch/
 ```
 
 ```python
 import requests
-url = "<ph_instance_address>/batch/"
+url = "<ph_client_api_host>/batch/"
 
 headers = {
     "Content-Type": "application/json",
@@ -182,7 +182,7 @@ print(response.json())
 
 You can also `POST` `$identify` events to add more details about those users. The API has no concept of state so the user information is not added as properties unless you send it in a request. It is not automatically created or included in the request like it is in the [JavaScript](/docs/integrate/client/js) library.
 
-You still send identify events to the `/capture/` endpoint. Use `$set` to set the user properties you want.
+You still send identify events to the `/capture/` endpoint. Use `$set` to set the person properties you want.
 
 <MultiLanguage>
 
@@ -195,11 +195,11 @@ curl -v -L --header "Content-Type: application/json" -d '{
 			"is_cool": true
 		},
     "event": "$identify"
-}' <ph_instance_address>/capture/
+}' <ph_client_api_host>/capture/
 ```
 ```python
 import requests
-url = '<ph_instance_address>/capture/'
+url = '<ph_client_api_host>/capture/'
 
 headers = {
     "Content-Type": "application/json",
@@ -236,12 +236,12 @@ curl -v -L --header "Content-Type: application/json" -d '{
         "alias": "ian2@posthog.com"
     },
     "event": "$create_alias"
-}' <ph_instance_address>/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 ```python
 import requests
-url = '<ph_instance_address>/capture/'
+url = '<ph_client_api_host>/capture/'
 
 headers = {
     "Content-Type": "application/json",
@@ -266,5 +266,5 @@ print(response.json())
 ## Further reading
 
 - [How to use the PostHog API to get insights and persons](/tutorials/api-get-insights-persons)
-- [Documentation on POST-only public endpoints](/docs/api/post-only-endpoints)
+- [Documentation on our `capture` endpoint](/docs/api/capture)
 - [How to evaluate and update feature flags with the PostHog API](/tutorials/api-feature-flags)

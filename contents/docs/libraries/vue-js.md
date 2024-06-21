@@ -61,7 +61,8 @@ export default {
     app.config.globalProperties.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>",
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
       }
     );
   },
@@ -79,7 +80,8 @@ export default {
     Vue.prototype.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>"
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
       }
     );
   }
@@ -160,7 +162,8 @@ import posthog from "posthog-js";
 
 const app = createApp(App);
 posthog.init("<ph_project_api_key>", {
-  api_host: "<ph_instance_addressT>",
+  api_host: "<ph_client_api_host>",
+  person_profiles: 'identified_only',
 });
 app.provide("posthog", posthog);
 ```
@@ -220,7 +223,8 @@ First, make sure to set `capture_pageview` in the PostHog initialization config 
 posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>",
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
         capture_pageview: false
       }
 );

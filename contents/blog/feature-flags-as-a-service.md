@@ -78,7 +78,7 @@ Feature flags as a service integrate with your app like other external services.
 ```python
 from posthog import Posthog
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
+posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
 
 is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user')
 ```
@@ -122,3 +122,5 @@ In more complex situations, the costs of building and maintaining your own featu
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
 - [What you can learn from how GitHub and GitLab use feature flags](/blog/github-gitlab-feature-flags)
+
+<NewsletterForm />

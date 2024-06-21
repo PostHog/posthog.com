@@ -12,23 +12,23 @@ import Requirements from "./_snippets/requirements.mdx"
 import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
 import CommunityMaintained from "./_snippets/community-maintained.mdx"
 
-This connector enables you to create filters which prevent PostHog from ingesting data from your product unless it passes those filters. Any events which do not match the filter requirements are skipped over and are not ingested. 
+This transformation enables you to create filters which prevent PostHog from ingesting data from your product unless it passes those filters. Any events which do not match the filter requirements are skipped over and are not ingested. 
 
 <Requirements />
 
 ## Installation
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
-2. Search for 'Filter Out' and select the connector, press Install.
-3. Follow the on-screen steps to configure the connector.
+2. Search for 'Filter Out' and select the transformation, press Install.
+3. Follow the on-screen steps to configure the transformation.
 
-This connector will only work on events ingested _after_ the connector was enabled.
+This transformation will only work on events ingested _after_ the transformation was enabled.
 
 ## Configuration
 
-The connector can be configured via a JSON file which specifies the properties you would like to filter.
+The transformation can be configured via a JSON file which specifies the properties you would like to filter.
 
-In the example config below, the connector will only keep events where all of the following conditions are met:
+In the example config below, the transformation will only keep events where all of the following conditions are met:
 
 - Email does not contain yourcompany.com
 - Host is not localhost:8000

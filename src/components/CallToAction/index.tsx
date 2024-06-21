@@ -241,13 +241,19 @@ export const CallToAction = ({
     color = true,
 }: CTAPropsType): JSX.Element => {
     const url = to || href
+
+    const posthog = usePostHog()
+    const wrappedOnClick = () => {
+        posthog?.createPersonProfile?.()
+        onClick && onClick()
+    }
     return (
         <Link
             disabled={disabled}
             state={state}
             external={external}
             externalNoIcon={externalNoIcon}
-            onClick={onClick}
+            onClick={wrappedOnClick}
             to={url}
             event={event}
             className={`${container(type, size, width)} ${className}`}

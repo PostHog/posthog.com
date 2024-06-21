@@ -9,12 +9,12 @@ const cards = [
         top: 'You enjoy "jumping on a quick call" with sales',
         bottom: (
             <>
-                Sorry, we don't have a sales team. But you can{' '}
-                <Link to="/book-a-demo" className="!text-red">
+                Sorry, we don't force you to talk to anyone. But you can{' '}
+                <Link to="/demo" className="!text-red">
                     watch a recorded demo
                 </Link>{' '}
                 (at your own pace) or{' '}
-                <Link to="/contact-sales" className="!text-red">
+                <Link to="/talk-to-a-human" className="!text-red">
                     request a personalized demo
                 </Link>{' '}
                 if you like.
@@ -78,7 +78,7 @@ const cards = [
         bottom: (
             <>
                 Sadly, we don't offer annual contracts (unless you{' '}
-                <Link to="/contact-sales" className="!text-red">
+                <Link to="/talk-to-a-human" className="!text-red">
                     ask for one
                 </Link>
                 ).

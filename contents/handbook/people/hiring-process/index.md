@@ -25,7 +25,19 @@ This has resulted in the highest number of qualified and motivated candidates re
 ## Hiring Process
 
 ### Summary of process for current live roles
-Please check [our careers page](/careers) for any live roles. 
+
+<OverflowXSection>
+
+| Position                     | Team                     | Reporting lead | Interview process                                                                                                                                                                                                                       |
+| ---------------------------- | ------------------------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Account Executive       | Sales & Customer Success | Simon   | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Charles (45mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay - task assessment, peer team interview and culture and motivation interview w/ Tim (8-10hrs)</li></ol>         |
+| Product Engineers          | Multiple teams                  | Tech Lead  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ an engineer (60mins)</li><li>Small team screen w/ James (30mins)</li><li>SuperDay - task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>           |
+| Mobile Engineer              | Replay                   | Paul   | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Paul (60mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
+| Product Manager            | Multiple teams                   | James H.  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Annika (45mins)</li><li>Small team screen w/ James (45mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
+| Support Engineer             | Comms                 | Joe  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Joe (30mins)</li><li>Small team screen w/ James (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
+| Site Relaibility Engineer              | Infrastructure                  | Ben  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Ben (60mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
+
+</OverflowXSection>
 
 ### External recruiters
 
@@ -33,7 +45,7 @@ All of our recruiting is done in-house, and we do not work with external agencie
 
 ### Deciding to hire
 
-[‘Talent Compounds’](https://posthog.com/handbook/company/values#talent-compounds) is one of our values here at PostHog. We think carefully about each new role and the complexity it introduces to the organization. We also have an extremely high bar for the people we do hire! 
+[‘Talent Compounds’](/handbook/company/values#talent-compounds) is one of our values here at PostHog. We think carefully about each new role and the complexity it introduces to the organization. We also have an extremely high bar for the people we do hire! 
 
 We use Pry to plan our hiring. We use the hiring forecast as a guide, but iterate on this pretty much every month, so we can stay super responsive to changes PostHog's needs. Typically we know:
 
@@ -70,7 +82,7 @@ Once the hiring manager has signed off on the spec, we will publish it on Ashby 
 
 #### Job boards
 
-Ashby will automatically add the role on our [careers page](https://posthog.com/careers). It will also 'helpfully' publish it on a bunch of other free but irrelevant job boards - you should manually remove all of those except for Ashby and LinkedIn. [AngelList](https://angel.co/company/posthoghq/jobs) will need to be posted manually. 
+Ashby will automatically add the role on our [careers page](/careers). It will also 'helpfully' publish it on a bunch of other free but irrelevant job boards - you should manually remove all of those except for Ashby and LinkedIn. [AngelList](https://angel.co/company/posthoghq/jobs) will need to be posted manually. 
 
 As a Y Combinator company, we can post [jobs ads on the HackerNews front page](https://news.ycombinator.com/jobguide.html) for free at [https://news.ycombinator.com/submitjob](https://news.ycombinator.com/submitjob). This requires a founder's HackerNews account to do so. 
 
@@ -163,7 +175,7 @@ When we book a meeting, we have the option of selecting a Google Meet or Zoom ca
 
 The People & Ops team reviews applications and resumes/portfolios carefully and leaves their feedback as a comment on the candidate's record in Ashby if relevant.
 
-If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in [our community forum](https://posthog.com/questions)?
+If a candidate hasn't customized the application or resume to the role, it is a flag they aren't that excited about working at PostHog. Cover letters are definitely _not_ mandatory, but at an interview stage, it's important to note how passionate they seem about the company. Did they try out the software already? Did they read the handbook? Are they in [our community forum](/questions)?
 
 Candidates who are unsuccessful at this stage will receive an automated rejection email. Due to the volume of applications we receive, we usually don't provide personalized feedback.
 
@@ -204,7 +216,7 @@ The final stage of our interview process is what we call a PostHog SuperDay. Thi
 
 The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of their potential direct team members, and if they haven’t already, our founders. This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate. It is a demanding day of work.
 
-We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it. If the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice from our [Project list](https://posthog.com/handbook/growth/marketing/open-source-sponsorship) of sponsorships.
+We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it. If the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice from our [Project list](/handbook/growth/marketing/open-source-sponsorship) of sponsorships.
 
 This day will be _the same_ task each time for a given role, to be shared with the candidate at the start of the day. The task is generally designed to be _too much_ work for one person to complete in a day, in order to get a sense of the person's ability to prioritize and get things done. 
 
@@ -248,7 +260,7 @@ During the offer call, James or Tim will share feedback from the interview proce
 
 The People & Ops team will then follow up with an offer email, outlining all details. 
 
-Once the candidate accepts, the People & Ops team will kick off the [onboarding process](https://posthog.com/handbook/people/onboarding) and take the role offline, after rejecting all remaining candidates. 
+Once the candidate accepts, the People & Ops team will kick off the [onboarding process](/handbook/people/onboarding) and take the role offline, after rejecting all remaining candidates. 
 
 ## Visa sponsorship
 
@@ -264,3 +276,11 @@ If a candidate needs visa sponsorship, please keep in mind that the process is l
 ## E-Verify
 
 We participate in [E-verify](https://www.e-verify.gov/about-e-verify) for all US new hires which allows us to verify employment eligibility remotely and continue hiring in multiple states. E-Verify is not used as a tool to pre-screen candidates.
+
+## Location - April 2024 update
+
+For some teams, it's important to have a wide range of timezones covered by the small team - this allows us to have closer to 24 hour coverage in case of incidents, and is particularly relevant for infrastructure or pipeline teams.
+
+For teams working on a pre-product market fit product with no users, it is preferable to hire people within a few timezones of each other so it's easier to get together in person and to do synchronous meetings if people wish to work that way.
+
+Currently, we are hiring a lot - aiming to go from ~45 people to ~70 by the end of 2024. Our pace of hiring is the biggest blocker to shipping all the tools in one and driving our growth, so we need to go fast while keeping the bar high. Therefore we should _not_ restrict hires to certain timezones, even if in the short run a small team would prefer to have everyone closer together. This is because over the next six months, we'll have enough new people, that we can later re-org our teams to group people back together by timezone if needed as we have higher density of talent everywhere in the timezones we cover. 

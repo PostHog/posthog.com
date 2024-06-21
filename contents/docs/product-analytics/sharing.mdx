@@ -1,5 +1,5 @@
 ---
-title: Sharing or embedding insights
+title: Sharing and embedding insights and dashboards
 ---
 export const shareOrEmbedLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/share-or-embed-light-mode.png"
 export const shareOrEmbedDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/share-or-embed-dark-mode.png"
@@ -8,20 +8,22 @@ export const sharePubliclyDark = "https://res.cloudinary.com/dmukukwp6/image/upl
 export const embedInsightLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/embed-insight-light-mode.png"
 export const embedInsightDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/product-analytics/embed-insight-dark-mode.png"
 
-You can share a public link to a specific insight or embed an insight in a web page or application (where the insight will be displayed in an iframe).
+For any dashboard or insight, you can share a public link and/or embed it using an iframe. This is useful if you want to share your data with customers or partners, but don't want to share your entire account.
 
-## Share an insight's public link
+> **Note:** When you share an insight or dashboard, anyone with the link can view it. To better control this data, consider setting up [customer-facing analytics](/tutorials/customer-facing-analytics).
 
-1. Choose _Share or embed_ from the `...` (more options) menu located at the top right corner of the page.
+## Sharing an insight
 
-<ProductScreenshot
+To share an insight, click the `...` (more options) menu next to its name and choose **Share or embed**.
+
+<ProductScreenshot 
     imageLight = {shareOrEmbedLight} 
     imageDark = {shareOrEmbedDark}
     classes="rounded"
     alt="Sharing an insight via the PostHog app"
 />
 
-1. Toggle ON the option to share the insight publicly.
+Next, toggle ON the option to share the insight publicly.
 
 <ProductScreenshot
     imageLight = {sharePubliclyLight} 
@@ -31,7 +33,7 @@ You can share a public link to a specific insight or embed an insight in a web p
 />
 
 
-1. Click _Copy public link_ to copy the link to your clipboard. This insight won't require authentication to view.
+Adjust the details such as PostHog branding or legend. Once done, click **Copy public link** to share it with anyone. This link and insight won't require authentication to view.
 
 <ProductScreenshot
     imageLight = {embedInsightLight} 
@@ -40,18 +42,92 @@ You can share a public link to a specific insight or embed an insight in a web p
     alt="Sharing an insight via the PostHog app"
 />
 
-## Embed an insight
+The insight is displayed exactly how it is set up. External users can't change the visualization or date range.
+
+### Embedding an insight
 
 In the same panel as above, copy the HTML code to embed the insight on a webpage.
 
-### Refreshing
-
-If your insight needs to be refreshed frequently, add `?refresh=true` to the end of the insight ID in the iframe code. Example:
-
+```html
+<iframe 
+    width="100%" 
+    height="400" 
+    frameborder="0" 
+    allowfullscreen 
+    src="https://us.posthog.com/embedded/qLsGKZMMkpgibHcDcPcQUY0gUZzcRA"
+></iframe>
 ```
-<iframe width="100%" height="400" frameborder="0" allowfullscreen src="https://us.posthog.com/embedded/123456?refresh=true"></iframe>
+
+You can adjust the width, height, and other attributes of the iframe to customize its appearance.
+
+### Refreshing shared insights
+
+If your insight needs to be refreshed on each load, add `?refresh=true` to the end of the insight ID in the iframe code. Example:
+
+```html
+<iframe 
+    width="100%" 
+    height="400" 
+    frameborder="0" 
+    allowfullscreen 
+    src="https://us.posthog.com/embedded/123456?refresh=true"
+></iframe>
 ```
 
-### API
+## Sharing a dashboard
 
-You can also embed an insight using the [insights API](/docs/api/insights).
+To share an entire dashboard, start by clicking the **Share** button in the top right of the dashboard. 
+
+<ProductScreenshot
+    imageLight = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1715335397/posthog.com/contents/images/docs/product-analytics/embed-dash-light.png'
+    imageDark = 'https://res.cloudinary.com/dmukukwp6/image/upload/v1715335397/posthog.com/contents/images/docs/product-analytics/embed-dash-dark.png'
+    classes="rounded"
+    alt="Sharing a dashboard via the PostHog app"
+/>
+
+Next, toggle ON the option to share the dashboard publicly.
+
+Finally, copy the public link and share with anyone. This link and dashboard won't require authentication to view. 
+
+### Embedding a dashboard
+
+In the same panel as above, copy the HTML code to embed the dashboard on a webpage.
+
+```html
+<iframe 
+    width="100%" 
+    height="400" 
+    frameborder="0" 
+    allowfullscreen 
+    src="https://us.posthog.com/embedded/2lMtXLAWsgsUDlPZaUSqQrQJZbOrFw"
+></iframe>
+```
+
+Again, you can adjust the width, height, and other attributes of the iframe to customize its appearance. 
+
+The dashboard fires a `posthog:dimensions` event when it loads and you can use the height value from it to adjust the iframe like this:
+
+```html
+<html>
+    <iframe
+        id="my-posthog-iframe"
+        name="MyPostHogIframe"
+        width="100%"
+        height="400"
+        src="https://us.posthog.com/embedded/2lMtXLAWsgsUDlPZaUSqQrQJZbOrFw"
+    ></iframe>
+
+    <script type="text/javascript">
+        window.addEventListener('message', (e) => {
+            if (e.data.event === 'posthog:dimensions' && e.data.name === 'MyPostHogIframe') {
+                document.getElementById('my-posthog-iframe').height = e.data.height
+            }
+        })
+    </script>
+</html>
+```
+
+### Refreshing shared dashboards
+
+Dashboards are only refreshable by *internal* users, not external viewers. This functionality is on our roadmap. To support and follow progress, see this [issue on GitHub](https://github.com/PostHog/posthog/issues/10563).
+

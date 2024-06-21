@@ -71,7 +71,7 @@ Session replays capture a visual of exactly how users are interacting with your 
 
 ![Recordings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/recordings.png)
 
-To capture errors, query speed, and other events relevant to the real usage of your product, you need a way to know when those events happen in your code. This could be an error boundary, web vital report, or a server profiler. Many frameworks, like React and [Next.js](/tutorials/nextjs-monitoring), have functions for these built-in, others you must build them yourself. Once set up, when an event happens, capture it with one of our [SDKs](/docs/libraries/js) or with our [API](/docs/api/post-only-endpoints).
+To capture errors, query speed, and other events relevant to the real usage of your product, you need a way to know when those events happen in your code. This could be an error boundary, web vital report, or a server profiler. Many frameworks, like React and [Next.js](/tutorials/nextjs-monitoring), have functions for these built-in, others you must build them yourself. Once set up, when an event happens, capture it with one of our [SDKs](/docs/libraries/js) or with our [API](/docs/api/capture).
 
 Alternatively, for error capture, you can use our [Sentry integration](/docs/libraries/sentry). 
 
@@ -114,3 +114,5 @@ At PostHog, we do this with a [broken link checker](/tutorials/broken-link-check
 - [The most useful product health metrics](/blog/product-health-metrics)
 - [Retention rate vs churn rate: An intro to churn analysis](/blog/churn-rate-vs-retention-rate)
 - [How to improve web app performance using PostHog session replays](/tutorials/performance-metrics)
+
+<NewsletterForm />

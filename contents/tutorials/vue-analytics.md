@@ -1,6 +1,7 @@
 ---
 title: How to set up analytics in Vue
 date: 2024-01-18
+featuredVideo: https://www.youtube-nocookie.com/embed/Z-1W21kNwi4
 author:
   - lior-neu-ner
 tags:
@@ -165,14 +166,15 @@ export default {
     app.config.globalProperties.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>",
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
       }
     );
   },
 };
 ```
 
-Replace `<ph_project_api_key>` and `<ph_instance_address>` with your your PostHog API key and host. You can find these in your [project settings](https://app.posthog.com/settings/project).
+Replace `<ph_project_api_key>` and `<ph_client_api_host>` with your your PostHog API key and host. You can find these in your [project settings](https://app.posthog.com/settings/project).
 
 Finally, activate your plugin in `main.js`:
 
@@ -237,8 +239,9 @@ export default {
     app.config.globalProperties.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>",
-        capture_pageview: false
+        api_host: "<ph_client_api_host>",
+        capture_pageview: false,
+        person_profiles: 'identified_only',
       }
     );
   },

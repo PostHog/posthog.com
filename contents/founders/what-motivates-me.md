@@ -35,7 +35,7 @@ It is _a lot_ of fun getting things right, and this motivated me early in the co
 
 * Dealing with customers totally transparently. For example, when we launched, none of our competitors had pricing on their pricing page. It's a lot of fun having a community weigh in on what we build.
 
-Neither [Tim](../people/tim-glaser) (my cofounder) nor I can imagine working anywhere else.
+Neither [Tim](/tim) (my cofounder) nor I can imagine working anywhere else.
 
 ## When we launched – being grateful that anyone cares
 
@@ -89,3 +89,5 @@ The people I want to beat represent the opposite of what we want to do. They:
 I want to show to the world that you can beat the biggest companies, specifically _by_ doing right by our users and our team.
 
 Doing a good job by _not_ doing the list above has led to a strong brand and has made us realize we should keep being ourselves. It has often meant short term pain for long term gain. And we're going to keep it that way.
+
+<NewsletterForm />

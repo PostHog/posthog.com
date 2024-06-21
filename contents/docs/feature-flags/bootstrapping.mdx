@@ -20,7 +20,7 @@ To bootstrap PostHog with feature flags, use the `bootstrap` key in the initiali
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     bootstrap: {
         featureFlags: {
             'flag-1': true,
@@ -38,8 +38,8 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 export function MyApp() {
     return (
         <PostHogProvider apiKey="<ph_project_api_key>" options={{
-            // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
-            host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
+            // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+            host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
             bootstrap: {
                 featureFlags: {
                     'flag-1': true,
@@ -62,7 +62,7 @@ To ensure you are bootstrapping PostHog with the correct flag values, we recomme
 
 You can do this by:
 
-1. When receiving a frontend request, fetch all the feature flags for the user by calling `getAllFlags()`.
+1. When receiving a frontend request, fetch all the feature flags for the user on the backend by calling [`getAllFlags()`](/docs/feature-flags/adding-feature-flag-code?tab=Node.js#fetching-all-flags-for-a-user).
 2. Return the frontend request with the flags values in the response.
 3. On the frontend, get the flag values from the response and add them to the `bootstrap` key in the PostHog initialization.
 
@@ -74,13 +74,15 @@ The `bootstrap` object has two optional arguments: `distinctID` and `isIdentifie
 
 - `distinctID` enables you to set distinct ID of the user during PostHog's initialization. This is useful when you want to ensure the distinct ID on your frontend is the same as the distinct ID that you called `getAllFlags()` with on your server. It is **strongly recommended** to include it.
 
-- `isIdentifiedID` ensures that the `distinctID` is treated as an [identified ID](/docs/product-analytics/identify) in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling identify again.
+> **Note:** The only case where you don't want to include `distinctID` is when your user has an existing PostHog session and you have not yet called [`identify()`](/docs/product-analytics/identify) at any point in time to link the anonymous session ID with their identified ID. In this case, bootstrapping `distinctID` will cause PostHog to drop the anonymous session ID and the two sessions will not be linked.
+
+- `isIdentifiedID` ensures that the `distinctID` is treated as an [identified ID](/docs/product-analytics/identify) in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling identify again with a different ID. Set this to `true` if you're using a unique ID such as `email` or a database ID. Set this to `false` if you're generating a random anonymous ID.
 
 <MultiLanguage>
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     bootstrap: {
         distinctID: 'distinct_id_of_your_user',
         isIdentifiedID: true,
@@ -100,8 +102,8 @@ import { usePostHog, PostHogProvider } from 'posthog-react-native'
 export function MyApp() {
     return (
         <PostHogProvider apiKey="<ph_project_api_key>" options={{
-            // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
-            host: '<ph_instance_address>', // TIP: host is optional if you use https://app.posthog.com
+            // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+            host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
             bootstrap: {
                 distinctID: 'distinct_id_of_your_user',
                 isIdentifiedID: true,
@@ -124,3 +126,4 @@ export function MyApp() {
 
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [How to use Next.js middleware to bootstrap feature flags](/tutorials/nextjs-bootstrap-flags)
+- [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)

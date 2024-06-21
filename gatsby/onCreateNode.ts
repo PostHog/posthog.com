@@ -15,6 +15,15 @@ require('dotenv').config({
 
 // exports.onPreBuild = async () => {}
 
+const isValidUrl = (url: string): boolean => {
+    try {
+        const newUrl = new URL(url)
+        return newUrl.protocol === 'http:' || newUrl.protocol === 'https:'
+    } catch (err) {
+        return false
+    }
+}
+
 exports.onPreInit = async function (_, options) {
     const { strapiURL, strapiKey } = options
     if (!strapiURL || !strapiKey) return
@@ -76,6 +85,11 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
     await fetchCloudinaryImages()
 }
 
+function getPublicID(image: string) {
+    const imagePath = image.split('/upload/')[1]
+    return imagePath.substring(0, imagePath.lastIndexOf('.'))
+}
+
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     node,
     getNode,
@@ -98,9 +112,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         const imageFields = ['featuredImage', 'thumbnail', 'logo', 'logoDark', 'icon']
         imageFields.forEach((field) => {
             if (node.frontmatter?.[field] && node.frontmatter?.[field].includes('res.cloudinary.com')) {
-                const publicId = `posthog.com/contents${
-                    node.frontmatter?.[field].split('posthog.com/contents')[1].split('.')[0]
-                }`
+                const publicId = getPublicID(node.frontmatter?.[field])
                 const cloudinaryData = cloudinaryCache[publicId]
                 if (!cloudinaryData) {
                     console.warn(`Cloudinary data not found for ${publicId}`)
@@ -121,7 +133,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         const images = node.frontmatter?.images
         if (images?.length > 0) {
             node.frontmatter.images = images.map((image) => {
-                const publicId = `posthog.com/contents${image.split('posthog.com/contents')[1].split('.')[0]}`
+                const publicId = getPublicID(image)
                 const cloudinaryData = cloudinaryCache[publicId]
                 if (!cloudinaryData) {
                     console.warn(`Cloudinary data not found for ${publicId}`)
@@ -312,6 +324,22 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 name: `html`,
                 value: html,
             })
+        }
+    }
+    if (node.internal.type === 'SlackEmoji') {
+        const { url } = node
+        if (isValidUrl(url)) {
+            const local = await createRemoteFileNode({
+                url,
+                parentNodeId: node.id,
+                createNode,
+                createNodeId,
+                cache,
+                store,
+            })
+            if (local) {
+                createNodeField({ node, name: 'localFile', value: local.id })
+            }
         }
     }
 }

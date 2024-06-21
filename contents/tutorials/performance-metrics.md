@@ -32,7 +32,7 @@ Next, we'll go through what each one of these three metrics mean and how to impr
 ## 1. First Contentful Paint
 [First Contentful Paint](https://developer.mozilla.org/en-US/docs/Glossary/First_contentful_paint) (FCP) measures the time from when the page starts loading to when any element of the page's content is rendered on the screen. Note that it does not measure the time it takes the entire page to load.
 
-![FCP happens in the second frame, as that's when the first text and image elements are rendered to the screen.](https://web-dev.imgix.net/image/admin/3UhlOxRc0j8Vc4DGd4dt.png?auto=format&w=1600)
+![FCP happens in the second frame, as that's when the first text and image elements are rendered to the screen.](https://res.cloudinary.com/dmukukwp6/image/upload/v1713253350/posthog.com/contents/blog/fcp-timeline.png)
 <Caption>FCP happens in the second frame, as that's when the first text and image elements are rendered to the screen. [Source](https://web.dev/fcp)</Caption>
 
 
@@ -65,7 +65,7 @@ Factors affecting DOM Interactive are:
 ## 3. Page Loaded
 The whole page has [loaded](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) and is ready for the user to interact with it, including all dependent resources such as stylesheets and images. 
 
-While there is no benchmark for what is a good time for Page Loaded, a [good time for Time to Interactive (TTI)]((https://developer.chrome.com/docs/lighthouse/performance/interactive/#how-lighthouse-determines-your-tti-score)), a closely related but more comprehensive metric, is under 3.8 seconds while over 7.3 seconds is considered slow.
+While there is no benchmark for what is a good time for Page Loaded, a [good time for Time to Interactive (TTI)](https://developer.chrome.com/docs/lighthouse/performance/interactive/#how-lighthouse-determines-your-tti-score), a closely related but more comprehensive metric, is under 3.8 seconds while over 7.3 seconds is considered slow.
 
 ## So what's more important? FCP, Dom Interactive, or Page Loaded?
 All of them are important for a good user experience! However, you may decide to focus on a specific metric depending on your goal. For example:

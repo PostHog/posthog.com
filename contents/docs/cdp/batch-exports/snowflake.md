@@ -59,7 +59,7 @@ COMMENT = 'PostHog events table'
 
 Batch exports use Snowflake's [internal table stages](https://docs.snowflake.com/en/user-guide/data-load-local-file-system-create-stage#table-stages) to stage the files copied into your Snowflake tables. We recommend using separate tables to export data from PostHog to avoid conflicting with other workflows that use internal table stages.
 
-> **Note:** This differs from the old PostHog Snowflake export connector which required extra configuration and used S3 or GCS as an external stage.
+> **Note:** This differs from the old PostHog Snowflake export destination which required extra configuration and used S3 or GCS as an external stage.
 
 ## FAQ
 
@@ -93,3 +93,13 @@ and check that the output matches this
 ```
 
 If your table doesn't match exactly (including casing), then the recommended approach is delete the table and let PostHog create it for you (alternatively you can copy the DDL exactly).
+
+### Export shows a "no active warehouse selected" error
+
+This error indicates the warehouse provided is not active (likely `SUSPENDED`). You will have to inspect your Snowflake configuration to discover why. One potential explanation is that Snowflake's auto-suspend feature suspended the warehouse after some time of inactivity, which could be the case if the warehouse is used only for batch exports on slow frequencies (like daily). 
+
+Batch exports require a `RUNNING` Snowflake warehouse to be able to export events to. It does not activate, suspend, or manipulate warehouses in any capacity, which can be enforced by not giving permissions required to do so to the user provided to batch exports. The reason for this is that a running warehouse consumes Snowflake credits, and deciding on Snowflake credit spending is out of scope for batch exports.
+
+Once the cause has been identified and the configuration amended, a warehouse can be started with the query `ALTER WAREHOUSE <name> RESUME` or via the Snowflake console.
+
+See Snowflake's documentation on [managing warehouses](https://docs.snowflake.com/en/user-guide/warehouses-tasks) and [the cost management auto-suspend feature](https://docs.snowflake.com/en/user-guide/cost-controlling#label-cost-control-auto-suspend) for more details. 

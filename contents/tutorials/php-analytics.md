@@ -153,7 +153,7 @@ use PostHog\PostHog;
 
 PostHog::init(
   '<ph_project_api_key>',
-  ['host' => '<ph_instance_address>']
+  ['host' => '<ph_client_api_host>']
 );
 ```
 
@@ -171,7 +171,7 @@ use PostHog\PostHog;
 
 PostHog::init(
   '<ph_project_api_key>',
-  ['host' => '<ph_instance_address>']
+  ['host' => '<ph_client_api_host>']
 );
 
 session_start();

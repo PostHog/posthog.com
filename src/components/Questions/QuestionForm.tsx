@@ -10,6 +10,7 @@ type QuestionFormProps = {
     onSubmit: () => void
     topicID?: number
     showTopicSelector?: boolean
+    label?: string
 }
 
 export default function Questions(props: QuestionFormProps): JSX.Element {
@@ -20,6 +21,8 @@ export default function Questions(props: QuestionFormProps): JSX.Element {
         setShowModal(false)
     }
 
+    const label = props.label ?? 'Ask a question'
+
     return (
         <>
             <Dialog open={showModal} onClose={(isOpen) => setShowModal(isOpen)}>
@@ -28,7 +31,7 @@ export default function Questions(props: QuestionFormProps): JSX.Element {
                 <div className="fixed inset-0 flex items-center justify-center z-[50]">
                     <Dialog.Panel className="p-4 shadow dark:shadow-none w-full max-w-2xl bg-tan dark:bg-gray-accent-dark rounded">
                         <div className="flex justify-between items-center mb-3">
-                            <Dialog.Title className="text-2xl font-bold m-0">Ask a question</Dialog.Title>
+                            <Dialog.Title className="text-2xl font-bold m-0">{label}</Dialog.Title>
                             <button className="p-2" onClick={() => setShowModal(false)}>
                                 <Close className="w-3 h-3" />
                             </button>
@@ -45,7 +48,7 @@ export default function Questions(props: QuestionFormProps): JSX.Element {
                 </div>
             </Dialog>
             <CallToAction size="md" onClick={() => setShowModal(true)}>
-                Ask a question
+                {label}
             </CallToAction>
         </>
     )

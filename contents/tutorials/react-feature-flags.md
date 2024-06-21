@@ -1,6 +1,7 @@
 ---
 title: How to set up React feature flags
 date: 2023-09-14
+featuredVideo: https://www.youtube-nocookie.com/embed/OgwnhinI9xI
 author:
   - ian-vanagas
 showTitle: true
@@ -60,7 +61,7 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 
 posthog.init('<ph_project_api_key>', {
-  api_host: '<ph_instance_address>',
+  api_host: '<ph_client_api_host>',
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

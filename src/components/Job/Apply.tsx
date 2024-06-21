@@ -345,7 +345,7 @@ export default function Apply({ id, info }) {
                         <div className="mx-6 md:mx-12 py-6 ">
                             <h4 className="mb-0">Join our mailing list</h4>
                             <p className="text-sm mb-0">The best of PostHog. Delivered twice a month.</p>
-                            <NewsletterForm subcompact className="px-0" />
+                            <NewsletterForm className="!py-0 !pt-6" />
                         </div>
 
                         <div className="mx-6 md:mx-12 py-6 ">

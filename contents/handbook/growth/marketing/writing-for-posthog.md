@@ -38,7 +38,7 @@ Ask other team members for feedback on the idea. We rarely say no unless there's
 
 All articles should be submitted as Markdown files (*.md) in a pull request (PR) on the [posthog.com repo](https://github.com/PostHog/posthog.com). 
 
-You'll need to download GitHub Desktop and Visual Studio Code for this. See [Developing the website](https://posthog.com/handbook/engineering/posthog-com/developing-the-website) for how to clone the repo. You don't need a local version of posthog.com as well, but it can be useful.
+You'll need to download GitHub Desktop and Visual Studio Code for this. See [Developing the website](/handbook/engineering/posthog-com/developing-the-website) for how to clone the repo. You don't need a local version of posthog.com as well, but it can be useful.
 
 New posts should be:
 
@@ -90,7 +90,7 @@ tags:
 
 ### Folders and URLs
 
-The URL is defined by the `folder` it's placed in and the `filename.md` of the markdown file – e.g. a post in the `founders` folder with the filename `i-love-hedgehogs.md` would have the URL `https://posthog.com/founders/i-love-hedgehogs`.
+The URL is defined by the `folder` it's placed in and the `filename.md` of the markdown file – e.g. a post in the `founders` folder with the filename `i-love-hedgehogs.md` would have the URL `/founders/i-love-hedgehogs`.
 
 Folders also decide _where_ on the website articles appear.
 

@@ -17,6 +17,8 @@ Angular is one of the original JavaScript web app frameworks and remains a popul
 
 This tutorial shows you how to set up the tools PostHog provides by creating a basic Angular app, adding PostHog, and then using it to capture events and manage feature flags.
 
+> **Note:** This tutorial uses Angular v16. To learn how to set up PostHog for v18, see our [Angular docs](/docs/libraries/angular).
+
 ## Creating our Angular app
 
 Angular has a powerful CLI we rely on for this tutorial. Install it by running `npm install -g @angular/cli` in your terminal.
@@ -24,7 +26,7 @@ Angular has a powerful CLI we rely on for this tutorial. Install it by running `
 Once installed, create a new Angular app (with routing) and go into its folder. 
 
 ```bash
-ng new angular-ph --routing
+npx -p @angular/cli@16 ng new angular-ph --routing
 cd angular-ph
 ```
 
@@ -108,7 +110,8 @@ import posthog from 'posthog-js'
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<ph_instance_address>' // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+    api_host:'<ph_client_api_host>',
+    person_profiles: 'identified_only',
   }
 )
 
@@ -155,7 +158,8 @@ Lastly, go back to `main.ts` and make sure to set `capture_pageview` in the Post
 posthog.init(
   '<ph_project_api_key>',
   {
-    api_host:'<instance_address>',
+    api_host:'<ph_client_api_host>',
+    person_profiles: 'identified_only',
     capture_pageview: false
   }
 )
@@ -267,4 +271,3 @@ Now when you go to your app, a PostHog feature flag controls the button text.
 - [How to set up A/B tests in Angular](/tutorials/angular-ab-tests)
 - [How to set up surveys in Angular](/tutorials/angular-surveys)
 - [How to set up A/B/n testing](/tutorials/abn-testing)
-- [How to create custom surveys](/tutorials/survey)

@@ -65,7 +65,7 @@ When we breakdown by `person_id`, this gives us a list of users with the highest
 
 ![Score](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/hogql-sum-aggregation/score.png)
 
-> **Note:** [Person properties](/docs/getting-started/user-properties) can’t be used with HogQL expression series, only event properties.
+> **Note:** [Person properties](/docs/getting-started/person-properties) can’t be used with HogQL expression series, only event properties.
 
 ## Sum with percentages
 

@@ -33,7 +33,7 @@ In this guide, we're looking at the best free and open-source A/B testing tools.
 
 [PostHog](https://posthog.com) is an [open-source analytics platform](/blog/best-open-source-analytics-tools) that integrates a comprehensive A/B testing suite with numerous other tools, such as product analytics, feature flags, and session recording. It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 
-[PostHog’s experimentation suite](/product/experimentation-suite) supports multivariate experiments, and targeting by geography, user cohorts, and user properties – all of which is built atop PostHog's multivariate feature flags. PostHog uses a Bayesian approach to calculate the probability of each variant being the best, and whether the results are statistically significant or not.
+[PostHog’s experimentation suite](/product/experimentation-suite) supports multivariate experiments, and targeting by geography, user cohorts, and person properties – all of which is built atop PostHog's multivariate feature flags. PostHog uses a Bayesian approach to calculate the probability of each variant being the best, and whether the results are statistically significant or not.
 
 ### Who is PostHog for?
 
@@ -59,11 +59,11 @@ Experimentation is free-to-use on PostHog's Scale plan, which is also [free up t
 
 ![GrowthBook - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/growthbook.png)
 
-[GrowthBook](https://www.growthbook.io/) is an [open-source platform for feature flags](/blog/best-open-source-feature-flag-tools) and A/B tests that helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better insights on new releases, it is a modular solution that promotes feature flagging as an essential step in the development process and can be used as a full-stack platform, a plugin feature flagging tool, or an analysis engine.
+[GrowthBook](/blog/posthog-vs-growthbook) is an [open-source platform for feature flags](/blog/best-open-source-feature-flag-tools) and A/B tests that helps teams to deploy code efficiently and analyze experiments. Built by engineers who wanted better insights on new releases, it is a modular solution that promotes feature flagging as an essential step in the development process. This means it can be used as a full-stack platform, a plugin feature flagging tool, or an analysis engine.
 
 ### Who is GrowthBook for?
 
-GrowthBook is built for data, engineering and product teams who need the power of a customizable platform without having to build it in house.
+[GrowthBook](/blog/best-growthbook-alternatives) is built for data, engineering and product teams who need the power of a customizable platform without having to build it in house.
 
 ### Features and benefits
 
@@ -124,7 +124,7 @@ Mojito is completely free and open source, and you don’t need an account to ge
 
 ![Flagsmith - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/img4_Flagsmith.png)
 
-[Flagsmith](https://flagsmith.com) is an open-source feature flag and remote configuration service that lets you manage features across mobile, web and server-side applications. You can use Flagsmith’s multivariate flags as a bucketing engine to place users into testing buckets and control the specific user experience that is being tested. Flagsmith doesn’t provide analytics for multivariate tests, however, so you’ll need to use a third-party provider to receive the stream of event data derived from the behavior of the user.
+[Flagsmith](/blog/best-flagsmith-alternatives) is an open-source feature flag and remote configuration service that lets you manage features across mobile, web and server-side applications. You can use Flagsmith’s multivariate flags as a bucketing engine to place users into testing buckets and control the specific user experience that is being tested. Flagsmith doesn’t provide analytics for multivariate tests, however, so you’ll need to use a third-party provider to receive the stream of event data derived from the behavior of the user.
 
 ### Who is Flagsmith for?
 
@@ -145,7 +145,7 @@ Flagsmith is open source and available on a BSD 3-clause license. For teams look
 
 ![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/vwo-testing.png)
 
-[VWO](https://vwo.com/)'s testing platform caters mainly to large enterprises, but it recently introduced a free tier to entice companies leaving the [soon-to-be-closed Google Optimize](/blog/google-optimize-alternatives). Its experimentation platform offers A/B and multivariate tests, as well as a visual editor. However, many useful features are only available in its paid tiers – the free tier only supports A/B tests using split URLs and doesn't support multiple variations or geo-targeting.
+[VWO](/blog/best-vwo-alternatives)'s testing platform caters mainly to large enterprises, but it recently introduced a free tier to entice companies leaving the [soon-to-be-closed Google Optimize](/blog/google-optimize-alternatives). Its experimentation platform has A/B and multivariate tests, as well as a visual editor. However, many useful features are only available in its paid tiers – the free tier only supports A/B tests using split URLs and doesn't support multiple variations or geo-targeting.
 
 ### Who is VWO for?
 

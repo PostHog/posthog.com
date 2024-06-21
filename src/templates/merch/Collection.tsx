@@ -31,11 +31,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
 
     return (
         <>
-            <Layout
-                className="[&_main]:pb-[80px]"
-                parent={communityMenu}
-                activeInternalMenu={communityMenu.children[5]}
-            >
+            <Layout className="[&_main]:pb-[80px]">
                 <SEO title="Merch - PostHog" image="/images/merch.png" />
                 <Nav currentCollectionHandle={pageContext.handle} items={pageContext.merchNav} />
                 <div className="w-full px-4 mx-auto max-w-7xl">

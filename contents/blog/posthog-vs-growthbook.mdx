@@ -21,7 +21,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 PostHog and GrowthBook both provide open source, self-serve feature flags and experimentation, but they're different in two important ways:
 
-- GrowthBook is a warehouse-native feature flag and experiments platform. It focuses on integrating with the product and data tools you already use.
+- [GrowthBook](/blog/best-growthbook-alternatives) is a warehouse-native feature flag and experiments platform. It focuses on integrating with the product and data tools you already use.
 
 - PostHog is an all-in-one product and data platform. Beyond [feature flags](/docs/feature-flags) and [experiments](/docs/experiments), it includes [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [surveys](/docs/surveys), [CDP](/docs/cdp), and more.
 
@@ -86,13 +86,13 @@ Both PostHog and GrowthBook offer all the functionality you expect from feature 
   <ComparisonRow column1={true} column2={true} feature="Percentage rollouts" description="Target percentages of a group" />
   <ComparisonRow column1={true} column2={true} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
   <ComparisonRow column1={true} column2={true} feature="JSON payloads" description="Flags return JSON" />
-  <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, stage, prod" />
-  <ComparisonRow column1={false} column2={true} feature="Scheduling" description="Schedule flags to turn on or off" />
+  <ComparisonRow column1="Partial" column2={true} feature="Environments" description="Manage flags for dev, staging, prod" />
+  <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flags to turn on or off" />
   <ComparisonRow column1={true} column2={false} feature="Early access management" description="Manage betas, test features" />
   <ComparisonRow column1={true} column2={false} feature="Bootstrapping" description="Flags available on frontend application load" />
 </ComparisonTable>
 
-- **Targeting:** GrowthBook's custom targeting using attributes must be set every session and defined in-app before use. It's also only available on the paid Pro plan. PostHog automatically sets its equivalent ([properties](/docs/getting-started/user-properties)) on users. You don’t need to pre-define them and unlimited custom values are free.
+- **Targeting:** GrowthBook's custom targeting using attributes must be set every session and defined in-app before use. It's also only available on the paid Pro plan. PostHog automatically sets its equivalent ([properties](/docs/getting-started/person-properties)) on users. You don’t need to pre-define them and unlimited custom values are free.
 
 - **[Bootstrapping](/docs/feature-flags/bootstrapping):** PostHog’s JavaScript web SDK enables you to pass flags directly from the backend before the app loads. This ensures they're available immediately and prevents flickering. GrowthBook instead recommends moving the A/B test or flag logic earlier in the page load (server-side) to prevent this.
 
@@ -225,7 +225,7 @@ GrowthBook has integrations with data warehouses and analytics tools they rely o
   <ComparisonRow column1={false} column2={true} feature="Datadog" description="Capture flag data in Datadog" />
 </ComparisonTable>
 
-PostHog’s event-based structure enables you to import data from anywhere for use with flags and experiments. The free API enables you to connect, edit, and capture from anywhere too. For example, you can import data from [warehouses](/docs/data-warehouse), [no-code site builders](/tutorials/webflow-ab-tests), [Segment](/docs/cdp/segment), and more.
+[PostHog’s event-based structure](/docs/how-posthog-works/data-model) enables you to import data from anywhere for use with flags and experiments. The free API enables you to connect, edit, and capture from anywhere too. For example, you can import data from [warehouses](/docs/data-warehouse), [no-code site builders](/tutorials/webflow-ab-tests), [Segment](/docs/cdp/segment), and more.
 
 ### Security and compliance
 

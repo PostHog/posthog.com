@@ -12,64 +12,67 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 export const ImgClipboardAuocaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/autocapture/clipboard-activity-light.png"
 export const ImgClipboardAuocaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/autocapture/clipboard-activity-dark.png"
 
-> **Note:** Autocapture is available for our [JavaScript Web](/docs/libraries/js), [React](/docs/libraries/react), and [React Native](/docs/libraries/react-native) SDKs.
+PostHog can capture frontend events automatically using autocapture. This captures events like `pageview`, `screen`, `click`, `change of input`, or submission associated with a `button`, `form`, `input`, `select`, or `textarea`.
 
-PostHog can capture frontend events automatically using autocapture, such as any `click`, `change of input`, or submission associated with a `button`, `form`, `input`, `select`, or `textarea`.
+This means you don't need to manually add tracking for individual components, links, buttons, divs, spans, or other parts of your product. Autocapture also provides data for [heatmaps](/docs/toolbar/heatmaps).
 
-This means you don't need to manually instrument tracking for individual components, links, buttons, or other parts of your product.
-
-Autocapture is **enabled by default**. 
-
-## Disabling autocapture
-
-You can also disable autocapture in your [project settings](https://us.posthog.com/project/settings), or by setting `autocapture: false` in the [config](/docs/libraries/js#config). If _one_ of these is disabled, autocapture is disabled.
-
-> Disabling autocapture **does not disable [session recording](/docs/session-replay/manual)**. You can disable session recording by turning it off in your [project settings](https://app.posthog.com/project/settings), or using `disable_session_recording`.
+Autocapture is available for our [JavaScript Web](/docs/libraries/js), [React](/docs/libraries/react), and [React Native](/docs/libraries/react-native) SDKs and is **enabled by default**.
 
 ## Configuring autocapture
 
-> This section covers configuring autocapture in the JavaScript and React SDKs. For the React Native SDK, see our [React Native docs](/docs/libraries/react-native#autocapture).
+> This covers configuring autocapture in the JavaScript and React SDKs. For the React Native SDK, see our [React Native docs](/docs/libraries/react-native#autocapture).
 
-### Reducing events with an allowlist
+### Reducing events with an allow and ignorelist
 
-Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using allowlists. Allowlists are an array of allowed events – any events for elements not matching an item in the array are dropped.
+Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using `allowlists` and `ignorelists`. 
 
-For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture`, you can do the following:
+These are an array of events, URLs, elements, and CSS selectors that you want autocapture to allow or ignore.
+
+For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture` and don't contain the data attribute `data-attr-pii="email"`, you can do the following:
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     autocapture: {
         dom_event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
         url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
         element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
         css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
+        element_attribute_ignorelist:['data-attr-pii="email"'], // List of element attributes to ignore
     },
 })
 ```
-Allowlists only filter autocapture events – they don't affect the data collected by session recordings or custom events.
+Allow and ignorelists only filter autocapture events. They don't affect the data collected by session recordings or custom events.
 
 ### Preventing sensitive data capture
 
-For security reasons and to prevent sensitive data being captured, PostHog is conservative regarding `input` tags. We specifically only collect the `name`, `id`, and `class` attributes from `input` tags. If you need to collect more data from inputs, you should use [custom events](/docs/product-analytics/capture-events).
+For security reasons and to prevent sensitive data capture, PostHog is conservative about capturing `input` tags. We specifically only collect the `name`, `id`, and `class` attributes from `input` tags. If you need to collect more data from inputs, you should use [custom events](/docs/product-analytics/capture-events).
 
-If there are specific elements you _don't_ want captured, add the `ph-no-capture` class name.
+If there are specific elements you _don't_ want to capture, add the `ph-no-capture` class name.
 
 ```html
 <button class='ph-no-capture'>Sensitive information here</button>
 ```
 
+## Disabling autocapture
+
+You can disable autocapture in your [project settings](https://us.posthog.com/project/settings) or by setting `autocapture: false` in the [config](/docs/libraries/js#config). If _one_ of these is disabled, autocapture is disabled.
+
+You can disable pageviews and pageleaves by setting `capture_pageview: false`. To just disable pageleaves, keep `capture_pageview: true` and set `capture_pageleave: false`.
+
+Disabling autocapture **does not disable [session recording](/docs/session-replay/manual)**. You can disable session recording by turning it off in your [project settings](https://app.posthog.com/project/settings) or using `disable_session_recording: true` in the config.
+
 ## Capturing additional properties in autocapture events
 
 If you add a data attribute onto an element in the format `data-ph-capture-attribute-some-key={someValue}`, then any autocapture event from that element or one of its children will have the property `some-key: 'someValue'` added to it. This can be useful when you want to add additional information to autocapture events. 
 
-### Example 1: Get the value of an element on the page
+### Get the value of an element
 
-For example, with a notification bell:
+As an example, say you have a notification bell with a value like this:
 
 ![a notification bell showing 1 unread notification](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/data/autocapture/notification-bell.png)
 
-You can include the unread count in the autocapture event by adding the `data-ph-capture-attribute` class like this: 
+You can include the unread count in the autocapture event by adding the `data-ph-capture-attribute` class like this:
 
 ```HTML
 <div
@@ -78,13 +81,13 @@ You can include the unread count in the autocapture event by adding the `data-ph
 >
 ```
 
-The autocapture event for clicks on the bell will include the unread count.
+The autocapture event for clicks on the bell will include the unread count as an `unread-notifications-count` property.
 
-### Example 2: Tracking ecommerce metadata
+### Tracking metadata
 
-You can also track metadata when a customer performs a transaction (such as adding an item to a cart or completing a purchase). Going beyond just knowing _User clicked 'Add to cart'_ is valuable in understanding _what_ users are interested in, even if they don't complete a transaction. It can also shed light onto which products users are interested in, when correlated with other information like marketing campaigns, regionality, or device type.
+You can also attach metadata to autocapture events by adding data attributes to the element that triggers the event. This helps you track something like a customer performing a transaction (adding an item to a cart or completing a purchase).
 
-You can attach metadata to autocapture events by adding data attributes to the element that triggers the event. Below we'll record some metadata when a user adds an item to their cart, based on content available in the DOM.
+The below ecommerce example helps you understand _what_ users are interested in, even if they don't complete a transaction. It can also reveal which products users are interested in when correlated with information like marketing campaigns, regionality, or device type.
 
 ```HTML
 <button
@@ -100,69 +103,89 @@ Replace the `{productXx}` values with the relevant information available on the 
 
 ```json
 properties: {
-    "product-id": "12345678"
-    "product-name": "Red t-shirt"
-    "product-price": "30"
+    "product-id": "12345678",
+    "product-name": "Red t-shirt",
+    "product-price": "30",
     "product-quantity": "1"
 }
 ```
 
+## Autocaptured events
+
+Autocaptured events include:
+
+- `$autocapture`: Clicks, inputs, typing, form submissions, and more.
+- `$pageview`: Triggers on page load. You might need to manually capture these in single-page apps like [React](/docs/libraries/react), [Next.js](/docs/libraries/next-js#pages-router) or [Vue](/docs/libraries/vue-js#capturing-page-views).
+- `$pageleave`: Triggers on `onpagehide` when a user navigates away from a page.
+- `$rageclick`: A second click within 1000ms within 30px of the first click.
+- `$screen`: When a user navigates on a mobile app.
+
+You can learn more about what events are autocaptured in the [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native#autocapture) docs. 
+
 ## Autocaptured properties
 
-Autocaptured events (and client-side custom events) have a number of default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo in the [data management tab](https://app.posthog.com/data-management/properties). These properties can be hidden in activity by checking the "Hide PostHog properties" box.
+Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo.
 
-Autocaptured properties include:
+You can see a full list in [PostHog](https://us.posthog.com/data-management/properties) or in [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/event-utils.ts), but the most important ones include:
 
-- Timestamp (`$timestamp`)
-- OS (`$os`)
-- Browser (`$browser`)
-- Browser Version (`$browser_version`)
-- Device Type (`$device_type`)
-- Current URL (`$current_url`)
-- Host (`$host`)
-- Path Name (`$pathname`)
-- Screen Height (`$screen_height`)
-- Screen Width (`$screen_width`)
-- Viewport Height (`$viewport_height`)
-- Viewport Width (`$viewport_width`)
-- Library (`$lib`)
-- Library Version (`$lib_version`)
-- Search Engine (`$search_engine`)
-- Referrer URL (`$referrer`)
-- Referring Domain (`$referring_domain`)
-- UTM Source (`$utm_source`)
-- UTM Medium (`$utm_medium`)
-- UTM Campaign (`$utm_campaign`)
-- UTM Term (`$utm_term`)
-- UTM Content (`$utm_content`)
-- Google Click ID (`$gclid`)
-- Google Ads Source (`$gad_source`)
-- Google Search Ads 360 Click Source (`$gclsrc`)
-- Google DoubleClick Click ID (`$dclid`)
-- Google Web-to-app Measurement ID (`$wbraid`)
-- Google App-to-web Measurement ID (`$gbraid`)
-- Facebook Click ID (`$fbclid`)
-- Microsoft Click ID (`$msclkid`)
-- Twitter Click ID (`$twclid`)
-- LinkedIn First-Party Ad Tracking ID (`$la_fat_id`)
-- Mailchimp Campaign ID (`$mc_cid`)
-- Instagram Share Id (`$igshid`)
-- TikTok Click ID (`$ttclid`)
-- Active Feature Flags (`$active_feature_flags`)
-- Plugins Succeeded (`$plugins_succeeded`)
-- Plugins Failed (`$plugins_failed`)
-- Plugins Deferred (`$plugins_deferred`)
-- IP Address (`$ip`)
+| Name                        | Key                      | Example value                  |
+|-----------------------------|--------------------------|--------------------------------|
+| Timestamp                   | `$timestamp`             | `2024-05-29T17:32:07.202Z`     |
+| OS                          | `$os`                    | `Mac OS X`                     |
+| OS Version                  | `$os_version`            | `10.15.7`                      |
+| Browser                     | `$browser`               | `Chrome`                       |
+| Browser Version             | `$browser_version`       | `125`                          |
+| Device Type                 | `$device_type`           | `Desktop`                      |
+| Current URL                 | `$current_url`           | `https://example.com/page`     |
+| Host                        | `$host`                  | `example.com`                  |
+| Path Name                   | `$pathname`              | `/page`                        |
+| Screen Height               | `$screen_height`         | `1080`                         |
+| Screen Width                | `$screen_width`          | `1920`                         |
+| Viewport Height             | `$viewport_height`       | `950`                          |
+| Viewport Width              | `$viewport_width`        | `1903`                         |
+| Library                     | `$lib`                   | `web`                          |
+| Library Version             | `$lib_version`           | `1.31.0`                       |
+| Search Engine               | `$search_engine`         | `google`                       |
+| Referrer URL                | `$referrer`              | `https://google.com`           |
+| Referring Domain            | `$referring_domain`      | `www.google.com`               |
+| Active Feature Flags        | `$active_feature_flags`  | `['beta_feature']`             |
+| Event Type                  | `$event_type`            | `click`                        |
+| UTM Source                  | `$utm_source`            | `newsletter`                   |
+| UTM Medium                  | `$utm_medium`            | `email`                        |
+| UTM Campaign                | `$utm_campaign`          | `product_launch`               |
+| UTM Term                    | `$utm_term`              | `new+product`                  |
+| UTM Content                 | `$utm_content`           | `logolink`                     |
+| Google Click ID             | `$gclid`                 | `TeSter-123`                   |
+| Google Ads Source           | `$gad_source`            | `google_ads`                   |
+| Google Search Ads 360 Click | `$gclsrc`                | `dsa`                          |
+| Google DoubleClick Click ID | `$dclid`                 | `testDclid123`                 |
+| Google Web-to-app Measure   | `$wbraid`                | `testWbraid123`                |
+| Google App-to-web Measure   | `$gbraid`                | `testGbraid123`                |
+| Facebook Click ID           | `$fbclid`                | `testFbclid123`                |
+| Microsoft Click ID          | `$msclkid`               | `testMsclkid123`               |
+| Twitter Click ID            | `$twclid`                | `testTwclid123`                |
+| LinkedIn Ad Tracking ID     | `$la_fat_id`             | `testLaFatId123`               |
+| Mailchimp Campaign ID       | `$mc_cid`                | `testMcCid123`                 |
+| Instagram Share Id          | `$igshid`                | `testIgshid123`                |
+| TikTok Click ID             | `$ttclid`                | `testTtclid123`                |
+| Plugins Succeeded           | `$plugins_succeeded`     | `['GeoIP (56578)']`            |
+| Plugins Failed              | `$plugins_failed`        | `['plugin3']`                  |
+| Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
+| IP Address                  | `$ip`                    | `192.168.1.1`                  |
 
-If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties. 
+> **Notes:**
+> - If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties.
+> - Many of these are also captured as [session properties](/docs/data/sessions).
+> - Mobile libraries capture additional properties like `$app_build`, `$app_name`, `$app_namespace`, and `$app_version`.
+> - These properties can be hidden in activity by checking the "Hide PostHog properties" box.
 
-## Autocapture for copied/cut data
+## Clipboard autocapture
 
-Since v1.111.0 you can configure posthog-js to autocapture information that users copy or cut when on your page. 
+You can configure `posthog-js` to autocapture information that users copy or cut on your page with the `capture_copied_text` config option.
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     autocapture: {
         capture_copied_text: true,
         // any other autocapture config
@@ -170,7 +193,7 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-We then report the copied or cut text as a "Clipboard autocapture" event. You can use the `$selected_content` property in analysis. Or use the Activity page to view the copied content in context.
+We then report the copied or cut text as a "Clipboard autocapture" event. You can use the `$selected_content` property in analysis or use the Activity page to view the copied content in context.
 
 <ProductScreenshot
   imageLight={ImgClipboardAuocaptureLight} 
@@ -179,7 +202,16 @@ We then report the copied or cut text as a "Clipboard autocapture" event. You ca
   classes="rounded"
 />
 
-Clipboard autocapture respects other privacy settings. So, for example, won't capture content from a password field.
+Clipboard autocapture respects other privacy settings. For example, won't capture content from a password field.
 
-> **Note:** browsers don't directly allow access to copied data for privacy reasons. So, when posthog-js sees a clipboard event we capture any text currently selected in the browser.
+> **Note:** Browsers don't directly allow access to copied data for privacy reasons so when `posthog-js` sees a clipboard event, we capture any text currently selected in the browser.
 
+## More notes on autocapture
+
+- Autocapture events can be organized and renamed using [actions](/docs/data/actions).
+
+- You can query autocapture `elements_chain` using [HogQL](/tutorials/hogql-autocapture).
+
+- Since pageview autocapture relies on the browser page load events, it captures the initial pageview but not subsequent ones. You might need to implement your own pageview capture using custom events. See our guides for doing this in [Next.js](/docs/libraries/next-js#client-side-setup), [React](/tutorials/single-page-app-pageviews), [Vue](/docs/libraries/vue-js#capturing-pageviews), and [Angular](/docs/libraries/angular#tracking-pageviews).
+
+- You can update your config at runtime (e.g. to update an allowlist or disable autocapture) using the `posthog.set_config` method.

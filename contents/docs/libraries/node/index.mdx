@@ -27,14 +27,14 @@ import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 
 | Variable                      | Description                                                                                                           | Default value              |
 | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------- | :------------------------- |
-| `host`                        | Your PostHog host                                                                                                     | `https://app.posthog.com/` |
+| `host`                        | Your PostHog host                                                                                                     | `https://us.i.posthog.com/`|
 | `flushAt`                     | After how many capture calls we should flush the queue (in one batch)                                                 | `20`                       |
 | `flushInterval`               | After how many ms we should flush the queue                                                                           | `10000`                    |
 | `personalApiKey`              | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally | `null`                     |
 | `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API                    | `300000`                   |
 | `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
-| `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                         | `true`                    |
+| `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                          | `true`                     |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdown()` at the end to flush and send all pending events.
 
@@ -45,9 +45,9 @@ import NodeSendEvents from '../../integrate/send-events/_snippets/send-events-no
 
 <NodeSendEvents />
 
-## Setting user properties
+## Person profiles and properties
 
-To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
+For backward compatibility, PostHog captures events with [person profiles](/docs/data/persons) by default. To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```node
 client.capture({
@@ -60,7 +60,19 @@ client.capture({
 })
 ```
 
-For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+
+To capture events without person profiles, set the event's `$process_person_profile` property to `false`:
+
+```node
+client.capture({
+    distinctId: 'distinct_id_of_the_user',
+    event: 'movie_played',
+    properties: {
+        $process_person_profile: false,
+    },
+})
+```
 
 ## Alias
 

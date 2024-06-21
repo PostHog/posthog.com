@@ -119,4 +119,4 @@ Once a team member approves your pull request, you (or they) can publish the cha
 
 ## Next steps
 
-This was a primer on using GitHub for communication at PostHog. If you’re interested in making more substantial changes to the website, you can follow our instructions on [how to develop the website.](https://posthog.com/handbook/engineering/posthog-com/developing-the-website) It can take a little work to get your computer set up to run the site from your computer, so don't hesitate to reach out for help if you get stuck – or don't even know where to begin. That's what we're here for!
+This was a primer on using GitHub for communication at PostHog. If you’re interested in making more substantial changes to the website, you can follow our instructions on [how to develop the website.](/handbook/engineering/posthog-com/developing-the-website) It can take a little work to get your computer set up to run the site from your computer, so don't hesitate to reach out for help if you get stuck – or don't even know where to begin. That's what we're here for!

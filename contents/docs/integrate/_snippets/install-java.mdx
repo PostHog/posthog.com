@@ -35,7 +35,7 @@ import com.posthog.java.PostHog;
 
 class Sample {
   private static final String POSTHOG_API_KEY = "<ph_project_api_key>";
-  private static final String POSTHOG_HOST = "<ph_instance_address>";
+  private static final String POSTHOG_HOST = "<ph_client_api_host>";
 
   public static void main(String args[]) {
     PostHog posthog = new PostHog.Builder(POSTHOG_API_KEY).host(POSTHOG_HOST).build();
