@@ -2,9 +2,9 @@
 title: How to set up feature flags in Flutter
 date: 2024-03-05
 author:
-  - lior-neu-ner
+    - lior-neu-ner
 tags:
-  - experimentation
+    - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -13,7 +13,7 @@ export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/u
 export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-feature-flags/create-flag-light.png"
 export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-feature-flags/create-flag-dark.png"
 
-[Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them into your Flutter app using PostHog. 
+[Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them into your Flutter app using PostHog.
 
 We'll create a basic Flutter app, add PostHog, create a feature flag, and then implement the flag to control content in our app.
 
@@ -24,7 +24,7 @@ Our app will have two screens:
 1. The first screen will have a button which takes you to a second screen.
 2. The second screen will either have a `red` or `green` background color, depending on whether our feature flag is enabled or not.
 
-To set this up, first ensure the [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) is installed. Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`. 
+To set this up, first ensure the [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) is installed. Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`.
 
 Select `Empty Application` and name your app `flutter_feature_flags`. Then, replace your code in `lib/main.dart` with the following:
 
@@ -108,10 +108,9 @@ To start, install [PostHog’s Flutter SDK](/docs/libraries/flutter) by adding `
 # rest of your code
 
 dependencies:
-  flutter:
-    sdk: flutter
-  posthog_flutter: ^4.0.1
-
+    flutter:
+        sdk: flutter
+    posthog_flutter: ^4.0.1
 # rest of your code
 ```
 
@@ -172,7 +171,6 @@ Then you need to set the minimum platform version to iOS 13.0 in your Podfile:
 
 ```yaml file=ios/Podfile
 platform :ios, '13.0'
-
 # rest of your config
 ```
 
@@ -183,23 +181,58 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 ```html file=web/index.html
 <!DOCTYPE html>
 <html>
+    <head>
+        <!-- ... other head elements ... -->
 
-<head>
-  <!-- ... other head elements ... -->
+        <script>
+            !(function (t, e) {
+                var o, n, p, r
+                e.__SV ||
+                    ((window.posthog = e),
+                    (e._i = []),
+                    (e.init = function (i, s, a) {
+                        function g(t, e) {
+                            var o = e.split('.')
+                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                                (t[e] = function () {
+                                    t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                                })
+                        }
+                        ;((p = t.createElement('script')).type = 'text/javascript'),
+                            (p.async = !0),
+                            (p.src = s.api_host + '/static/array.js'),
+                            (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
+                        var u = e
+                        for (
+                            void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                                u.people = u.people || [],
+                                u.toString = function (t) {
+                                    var e = 'posthog'
+                                    return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                                },
+                                u.people.toString = function () {
+                                    return u.toString(1) + '.people (stub)'
+                                },
+                                o =
+                                    'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId'.split(
+                                        ' '
+                                    ),
+                                n = 0;
+                            n < o.length;
+                            n++
+                        )
+                            g(u, o[n])
+                        e._i.push([i, s, a])
+                    }),
+                    (e.__SV = 1))
+            })(document, window.posthog || [])
+            posthog.init('<ph_project_api_key>', {
+                api_host: '<ph_client_api_host>',
+            })
+        </script>
+    </head>
 
-  <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init(
-      '<ph_project_api_key>',
-      {
-        api_host:'<ph_client_api_host>',
-      }
-    )
-  </script>
-</head>
-
-<!-- ... other elements ... -->
-
+    <!-- ... other elements ... -->
 </html>
 ```
 
@@ -218,7 +251,7 @@ You can customize your [release conditions](/docs/feature-flags/creating-feature
 
 ## 4. Implement the flag code
 
-To implement the feature flag, we: 
+To implement the feature flag, we:
 
 1. Fetch the `my-cool-flag` flag using [`await Posthog().isFeatureEnabled('my-cool-flag')`](/docs/libraries/flutter#feature-flags).
 2. Change the background color of `FeatureScreenView` based on the value of the flag.
@@ -259,15 +292,15 @@ class MainScreen extends StatelessWidget {
             const Text('Hello, world!'),
             ElevatedButton(
               child: const Text('Go to Next Screen'),
-              onPressed: () async { 
-                bool isFlagEnabled =  await Posthog().isFeatureEnabled('my-cool-flag'); 
+              onPressed: () async {
+                bool isFlagEnabled =  await Posthog().isFeatureEnabled('my-cool-flag');
                 if (context.mounted) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => FeatureScreenView(isFlagEnabled: isFlagEnabled)),
                   );
                 }
-              }            
+              }
             ),
           ],
         ),
@@ -277,10 +310,10 @@ class MainScreen extends StatelessWidget {
 }
 ```
 
-That's it! When you restart your app and click the button, you should see the green background color on the second screen. 
+That's it! When you restart your app and click the button, you should see the green background color on the second screen.
 
 ## Further reading
 
-- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [How to run A/B tests in Flutter](/tutorials/flutter-ab-tests)
-- [How to set up analytics in Flutter](/tutorials/flutter-analytics)
+-   [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+-   [How to run A/B tests in Flutter](/tutorials/flutter-ab-tests)
+-   [How to set up analytics in Flutter](/tutorials/flutter-analytics)

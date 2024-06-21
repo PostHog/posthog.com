@@ -1,16 +1,16 @@
 ---
 title: >-
-  How to setup PostHog for multiple environments (development, staging,
-  production)
+    How to setup PostHog for multiple environments (development, staging,
+    production)
 sidebar: Docs
 showTitle: true
 author:
-  - ian-vanagas
+    - ian-vanagas
 date: 2024-05-30
 featuredTutorial: false
 tags:
-  - configuration
-  - product os
+    - configuration
+    - product os
 ---
 
 import {ProductScreenshot} from 'components/ProductScreenshot'
@@ -32,7 +32,6 @@ To create a new project, in your [PostHog instance](https://us.posthog.com/), cl
     classes="rounded"
     alt= "Creating a new project in PostHog"
 />
-
 
 This takes you through the project setup flow again and gives you a new project API key. You can keep your old key for production, and add the new one in the relevant environment. You'll likely need [environment variables](https://medium.com/chingu/an-introduction-to-environment-variables-and-how-to-use-them-f602f66d15fa) for this (like a `.env` file) if you haven't set those up. Initializing PostHog with a different key in each environment connects them to a different project.
 
@@ -64,18 +63,15 @@ To copy or update a flag in another project:
 Another way to split up projects is by changing how you initialize PostHog based on the environment. For example, if you didn’t want to track your staging environment at all, initialize PostHog without a token and opt out of capturing immediately. This is what we do in our development environment.
 
 ```js
-posthog.init(
-    'fake token',
-    {
-      autocapture: false,
-      loaded: function (ph) {
-          if (process.env.ENVIRONMENT == 'development') {
-              ph.opt_out_capturing(); // opts a user out of event capture
-              ph.set_config({ disable_session_recording: true });
-          }
-      }, 
-    }
-  )
+posthog.init('fake token', {
+    autocapture: false,
+    loaded: function (ph) {
+        if (process.env.ENVIRONMENT == 'development') {
+            ph.opt_out_capturing() // opts a user out of event capture
+            ph.set_config({ disable_session_recording: true })
+        }
+    },
+})
 ```
 
 The `loaded` method enables you to run code after PostHog has loaded. This makes it useful for changing PostHog's behavior between environments by using methods like `set_config`.
@@ -88,11 +84,51 @@ Another popular option is checking if the URL includes `localhost` or `127.0.0.1
 
 ```html
 <script>
-	  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-	  posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>'})
-	  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-	    posthog.opt_out_capturing()
-	  }
+    !(function (t, e) {
+        var o, n, p, r
+        e.__SV ||
+            ((window.posthog = e),
+            (e._i = []),
+            (e.init = function (i, s, a) {
+                function g(t, e) {
+                    var o = e.split('.')
+                    2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                        (t[e] = function () {
+                            t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                        })
+                }
+                ;((p = t.createElement('script')).type = 'text/javascript'),
+                    (p.async = !0),
+                    (p.src = s.api_host + '/static/array.js'),
+                    (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
+                var u = e
+                for (
+                    void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                        u.people = u.people || [],
+                        u.toString = function (t) {
+                            var e = 'posthog'
+                            return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                        },
+                        u.people.toString = function () {
+                            return u.toString(1) + '.people (stub)'
+                        },
+                        o =
+                            'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep'.split(
+                                ' '
+                            ),
+                        n = 0;
+                    n < o.length;
+                    n++
+                )
+                    g(u, o[n])
+                e._i.push([i, s, a])
+            }),
+            (e.__SV = 1))
+    })(document, window.posthog || [])
+    posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>' })
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        posthog.opt_out_capturing()
+    }
 </script>
 ```
 
@@ -102,11 +138,11 @@ Setting this up correctly prevents capturing non-production event data. It enabl
 
 The previous options capture data to separate projects or don’t capture data at all, but there is another option. This is to capture data normally and filter internal users from your analysis.
 
-PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set this up, go to [Project Settings](https://us.posthog.com/settings/project#internal-user-filtering) and scroll down to **Filter out internal and test users**. Here you can add filters to identify your internal users and events so that they can be removed from insights. This could include filters like: 
+PostHog provides a toggle to filter internal users (as defined by you) from your analysis and visualization. To set this up, go to [Project Settings](https://us.posthog.com/settings/project#internal-user-filtering) and scroll down to **Filter out internal and test users**. Here you can add filters to identify your internal users and events so that they can be removed from insights. This could include filters like:
 
-- `distinct ID does not contain your domain`
-- `host is not localhost`
-- `environment is not development`
+-   `distinct ID does not contain your domain`
+-   `host is not localhost`
+-   `environment is not development`
 
 As an example, here’s what our internal filters look like at PostHog:
 
@@ -123,6 +159,6 @@ You can automatically enable filtering in all new [insights](/docs/product-analy
 
 ## Further reading
 
-- [How to capture fewer unwanted events](/tutorials/fewer-unwanted-events)
-- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
-- [Setting up Django analytics, feature flags, and more](/tutorials/django-analytics)
+-   [How to capture fewer unwanted events](/tutorials/fewer-unwanted-events)
+-   [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+-   [Setting up Django analytics, feature flags, and more](/tutorials/django-analytics)

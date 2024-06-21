@@ -2,27 +2,27 @@
 title: An intro to PostHog for Google Analytics users
 date: 2023-07-04
 author:
-  - ian-vanagas
-  - andy-vandervell
+    - ian-vanagas
+    - andy-vandervell
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
 featuredImageType: full
 category: Using PostHog
 tags:
-  - Guides
+    - Guides
 ---
 
-With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/blog/ga4-alternatives). 
+With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/blog/ga4-alternatives).
 
 We’re biased, but PostHog is a great one. When compared with Google Analytics, it is:
 
-- Easier to set up and capture data about traffic and usage.
-- Provides all the same reports, views, and filters.
-- Adds functionality like custom event capture, group analytics, session replays, A/B tests, and more.
+-   Easier to set up and capture data about traffic and usage.
+-   Provides all the same reports, views, and filters.
+-   Adds functionality like custom event capture, group analytics, session replays, A/B tests, and more.
 
 This post will go over the basics you must know to make the transition from Google Analytics to PostHog.
 
@@ -35,21 +35,63 @@ If you’ve set up Google Analytics, PostHog’s setup won’t look too differen
 ```html
 <!-- PostHog snippet -->
 <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', person_profiles: 'identified_only'})
+    !(function (t, e) {
+        var o, n, p, r
+        e.__SV ||
+            ((window.posthog = e),
+            (e._i = []),
+            (e.init = function (i, s, a) {
+                function g(t, e) {
+                    var o = e.split('.')
+                    2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                        (t[e] = function () {
+                            t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                        })
+                }
+                ;((p = t.createElement('script')).type = 'text/javascript'),
+                    (p.async = !0),
+                    (p.src = s.api_host + '/static/array.js'),
+                    (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
+                var u = e
+                for (
+                    void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                        u.people = u.people || [],
+                        u.toString = function (t) {
+                            var e = 'posthog'
+                            return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                        },
+                        u.people.toString = function () {
+                            return u.toString(1) + '.people (stub)'
+                        },
+                        o =
+                            'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep'.split(
+                                ' '
+                            ),
+                        n = 0;
+                    n < o.length;
+                    n++
+                )
+                    g(u, o[n])
+                e._i.push([i, s, a])
+            }),
+            (e.__SV = 1))
+    })(document, window.posthog || [])
+    posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', person_profiles: 'identified_only' })
 </script>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QCX3G7KSPC"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-QCX3G7KSPC');
+    window.dataLayer = window.dataLayer || []
+    function gtag() {
+        dataLayer.push(arguments)
+    }
+    gtag('js', new Date())
+    gtag('config', 'G-QCX3G7KSPC')
 </script>
 ```
 
-This works wherever code you can add code to your `<head>` tag, for example, site builders like [WordPress](/docs/libraries/wordpress) and [Webflow](/tutorials/webflow). Alternatively, you can add the PostHog snippet through [Google Tag Manager](/docs/libraries/google-tag-manager) or install the [JavaScript library](/docs/libraries/js) in your app. 
+This works wherever code you can add code to your `<head>` tag, for example, site builders like [WordPress](/docs/libraries/wordpress) and [Webflow](/tutorials/webflow). Alternatively, you can add the PostHog snippet through [Google Tag Manager](/docs/libraries/google-tag-manager) or install the [JavaScript library](/docs/libraries/js) in your app.
 
 When you set up the snippet or JS library, it autocaptures events (similar to GA4’s [enhanced measurement](https://support.google.com/analytics/answer/9216061)) and they start showing up in your PostHog instance. Pageviews, clicks, inputs, and sessions are all captured without needing to create "properties," "streams," or instrument events yourself.
 
@@ -113,7 +155,7 @@ PostHog has much of the same functionality as Google Analytics, but much of it i
 
 ## Creating your first dashboard
 
-PostHog has the same functionality as Google Analytics reports and views. For us, they are [insights](/docs/product-analytics/insights) and [dashboards](/docs/product-analytics/dashboards). 
+PostHog has the same functionality as Google Analytics reports and views. For us, they are [insights](/docs/product-analytics/insights) and [dashboards](/docs/product-analytics/dashboards).
 
 When you first get into your PostHog instance, you see the default dashboard with a collection of insights like daily active users, growth accounting, and retention. If these insights don’t seem relevant to you, like if you are focusing on web traffic, you can customize your dashboards and insights to your needs.
 
@@ -121,15 +163,15 @@ When you first get into your PostHog instance, you see the default dashboard wit
 
 Tailoring PostHog to your needs is done by creating a new dashboard with new insights. To help you with this, we built [dashboard templates](/templates) similar to the default views Google Analytics provides:
 
-- GA’s **acquisition overview** is similar to PostHog’s [landing page report](/templates/landing-dashboard) template. It contains insights on the most popular pages, referring domains, unique sessions, and session duration. This dashboard relies heavily on UTMs, so the [campaign URL builder](https://ga-dev-tools.google/campaign-url-builder/) is still important here.
+-   GA’s **acquisition overview** is similar to PostHog’s [landing page report](/templates/landing-dashboard) template. It contains insights on the most popular pages, referring domains, unique sessions, and session duration. This dashboard relies heavily on UTMs, so the [campaign URL builder](https://ga-dev-tools.google/campaign-url-builder/) is still important here.
 
-- GA’s **realtime overview** is similar to PostHog’s [real time analytics](/templates/real-time-dashboard) template. It contains insights on unique users, pageviews, locations, and browsers, all filtered for occurrences within the last 5 minutes.
+-   GA’s **realtime overview** is similar to PostHog’s [real time analytics](/templates/real-time-dashboard) template. It contains insights on unique users, pageviews, locations, and browsers, all filtered for occurrences within the last 5 minutes.
 
-- GA’s **engagement overview** is similar to PostHog’s [website traffic](/templates/website-dashboard) template. It contains insights on SEO performance, user behavior, web traffic, and content performance.
+-   GA’s **engagement overview** is similar to PostHog’s [website traffic](/templates/website-dashboard) template. It contains insights on SEO performance, user behavior, web traffic, and content performance.
 
-- GA’s **retention overview** is similar to PostHog’s [user retention](/templates/retention-dashboard) template. It contains insights on overall retention, feature retention, and retention broken down by geography and device.
+-   GA’s **retention overview** is similar to PostHog’s [user retention](/templates/retention-dashboard) template. It contains insights on overall retention, feature retention, and retention broken down by geography and device.
 
-You can use these by going to [the dashboards tab](https://app.posthog.com/dashboard), clicking the "New dashboard" button, and selecting the template you want. 
+You can use these by going to [the dashboards tab](https://app.posthog.com/dashboard), clicking the "New dashboard" button, and selecting the template you want.
 
 ### Creating an insight
 
@@ -150,28 +192,28 @@ Each type has unique functionality such as direct SQL aggregations in trends, at
 
 ## Working with persons, groups, and cohorts
 
-Although [PostHog is event-based](/docs/how-posthog-works/data-model), it still gathers details about users. To do an analysis similar to Google Analytics’ audiences or segments, we rely on [person](/docs/data/persons) and [group](/docs/product-analytics/group-analytics) data. 
+Although [PostHog is event-based](/docs/how-posthog-works/data-model), it still gathers details about users. To do an analysis similar to Google Analytics’ audiences or segments, we rely on [person](/docs/data/persons) and [group](/docs/product-analytics/group-analytics) data.
 
-- Every event contains a distinct ID for a person.
-- With the snippet, every person gets an anonymous distinct ID. This gets stored in a cookie and automatically added to the events they trigger.
-- You can use the [identify](/docs/data/identify) function to connect a person with a distinct ID like email or username.
-- You can use the [group](/docs/product-analytics/group-analytics) function to connect a person with a group like an organization or company.
+-   Every event contains a distinct ID for a person.
+-   With the snippet, every person gets an anonymous distinct ID. This gets stored in a cookie and automatically added to the events they trigger.
+-   You can use the [identify](/docs/data/identify) function to connect a person with a distinct ID like email or username.
+-   You can use the [group](/docs/product-analytics/group-analytics) function to connect a person with a group like an organization or company.
 
 ![Event structure](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-analytics-to-posthog/event.png)
 
-You can then use all of this data in your insights. For example, you can aggregate an event series by unique users, monthly active users, unique groups, and more. 
+You can then use all of this data in your insights. For example, you can aggregate an event series by unique users, monthly active users, unique groups, and more.
 
 ## Filtering with properties
 
-Like Google Analytics, each of the event series, insights, and dashboards is filterable. Filters are largely created with our version of "dimensions," named [properties](/docs/data/events#event-properties). 
+Like Google Analytics, each of the event series, insights, and dashboards is filterable. Filters are largely created with our version of "dimensions," named [properties](/docs/data/events#event-properties).
 
 Properties are keys and values set on events, persons, and groups adding more details about them. For example, the pageview event contains properties for the timestamp, OS, browser, current URL, referring domain, geographic data, and more. PostHog automatically adds some properties, but if you capture [custom events](/docs/libraries/js#send-custom-events-with-posthogcapture), you can also send as many custom properties as you want.
 
 ```js
-posthog.capture('signed up', {email: 'ian@posthog.com', paid: true});
+posthog.capture('signed up', { email: 'ian@posthog.com', paid: true })
 ```
 
-You can also use properties to create [cohorts](/docs/data/cohorts). These are lists of users meeting behavior or property criteria, such as completing an event for the first time or being a paid user. You can then use cohorts as filters throughout PostHog. 
+You can also use properties to create [cohorts](/docs/data/cohorts). These are lists of users meeting behavior or property criteria, such as completing an event for the first time or being a paid user. You can then use cohorts as filters throughout PostHog.
 
 ## Measuring target user behavior with actions
 
@@ -219,32 +261,32 @@ Just want to see the top pages on your website? Create a Trends insight, click `
 
 The Lifecycle insight breaks down unique users who complete your desired event by:
 
-- **New** – Users who did the event or action during the interval and were also created during that period.
+-   **New** – Users who did the event or action during the interval and were also created during that period.
 
-- **Returning** – Someone who was active in the previous interval, and is also active in the current interval.
+-   **Returning** – Someone who was active in the previous interval, and is also active in the current interval.
 
-- **Resurrecting** - Someone who was not active in the previous interval, and became active once again.
+-   **Resurrecting** - Someone who was not active in the previous interval, and became active once again.
 
-- **Dormant** - Users who are not active in the current interval, but were active in the previous interval.
+-   **Dormant** - Users who are not active in the current interval, but were active in the previous interval.
 
 This makes it an easy way to track new and returning visitors to your website, and you can toggle each user cohort on and off as you please.
 
 ## Added benefits of PostHog
 
-- Easy [custom event capture](/docs/libraries/js#send-custom-events-with-posthogcapture) with nearly limitless custom properties.
+-   Easy [custom event capture](/docs/libraries/js#send-custom-events-with-posthogcapture) with nearly limitless custom properties.
 
-- [Session replays](/docs/session-replay) with visuals of actual user behavior on your site and performance stats.
+-   [Session replays](/docs/session-replay) with visuals of actual user behavior on your site and performance stats.
 
-- [Data connections](/docs/cdp) to import events from sources [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
+-   [Data connections](/docs/cdp) to import events from sources [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
 
-- Direct SQL querying and customization with [HogQL](/docs/product-analytics/hogql).
+-   Direct SQL querying and customization with [HogQL](/docs/product-analytics/hogql).
 
-- Free for 1 million events and 5,000 session recordings per month, see [pricing for more](/pricing).
+-   Free for 1 million events and 5,000 session recordings per month, see [pricing for more](/pricing).
 
 ## Further reading
 
-- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
-- [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
+-   [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+-   [Complete guide to event tracking](/tutorials/event-tracking-guide)
+-   [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
 
 <NewsletterForm />

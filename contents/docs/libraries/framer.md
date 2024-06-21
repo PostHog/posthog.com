@@ -1,7 +1,7 @@
 ---
 title: Framer
 icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/framer.svg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/framer.svg
 ---
 
 PostHog makes it easy to get data about traffic and usage of your [Framer](https://www.framer.com/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
@@ -14,7 +14,7 @@ Go to your [project settings](https://us.posthog.com/settings/project#snippet) a
 
 ```js
 <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('<ph_api_key>',{api_host:'<ph_client_api_host>', person_profiles: 'identified_only'})
 </script>
 ```
@@ -38,7 +38,7 @@ In the new code file, delete the existing code and replace it with the following
 ```js
 export default function CaptureButton() {
     const handleClick = () => {
-        window.posthog.capture("clicked_button", {
+        window.posthog.capture('clicked_button', {
             $set_once: { clicked_homepage_button: true },
         })
     }
@@ -63,6 +63,6 @@ For any technical questions for how to integrate specific PostHog features into 
 
 Alternatively, the following tutorials can help you get started:
 
-- [How to set up Framer analytics and session recordings](/tutorials/framer-analytics)
-- [How to run A/B tests in Framer](/tutorials/framer-ab-tests)
-- [How to create surveys in Framer](/tutorials/framer-surveys)
+-   [How to set up Framer analytics and session recordings](/tutorials/framer-analytics)
+-   [How to run A/B tests in Framer](/tutorials/framer-ab-tests)
+-   [How to create surveys in Framer](/tutorials/framer-surveys)

@@ -2,9 +2,9 @@
 title: How to set up A/B tests in Flutter
 date: 2024-03-05
 author:
-  - lior-neu-ner
+    - lior-neu-ner
 tags:
-  - experimentation
+    - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -22,7 +22,7 @@ Our app will have two screens:
 1. The first screen will have a button which takes you to a second screen.
 2. The second screen will either have a `red` or `green` background color, depending on whether the user is in the `control` or `test` variant of our A/B test. This screen will also have a button which captures an event when it's pressed. We'll use this event as our goal metric for our test.
 
-To set this up, install the [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter). Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`. 
+To set this up, install the [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter). Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`.
 
 Select `Empty Application` and name your app `flutter_ab_tests`. Then, replace your code in `lib/main.dart` with the following:
 
@@ -114,10 +114,9 @@ To start, install [PostHog’s Flutter SDK](/libraries/flutter) by adding `posth
 # rest of your code
 
 dependencies:
-  flutter:
-    sdk: flutter
-  posthog_flutter: ^4.0.1
-
+    flutter:
+        sdk: flutter
+    posthog_flutter: ^4.0.1
 # rest of your code
 ```
 
@@ -178,7 +177,6 @@ Then you need to set the minimum platform version to iOS 13.0 in your Podfile:
 
 ```yaml file=ios/Podfile
 platform :ios, '13.0'
-
 # rest of your config
 ```
 
@@ -189,25 +187,59 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 ```html file=web/index.html
 <!DOCTYPE html>
 <html>
+    <head>
+        <!-- ... other head elements ... -->
 
-<head>
-  <!-- ... other head elements ... -->
+        <script>
+            !(function (t, e) {
+                var o, n, p, r
+                e.__SV ||
+                    ((window.posthog = e),
+                    (e._i = []),
+                    (e.init = function (i, s, a) {
+                        function g(t, e) {
+                            var o = e.split('.')
+                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                                (t[e] = function () {
+                                    t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                                })
+                        }
+                        ;((p = t.createElement('script')).type = 'text/javascript'),
+                            (p.async = !0),
+                            (p.src = s.api_host + '/static/array.js'),
+                            (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
+                        var u = e
+                        for (
+                            void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                                u.people = u.people || [],
+                                u.toString = function (t) {
+                                    var e = 'posthog'
+                                    return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                                },
+                                u.people.toString = function () {
+                                    return u.toString(1) + '.people (stub)'
+                                },
+                                o =
+                                    'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId'.split(
+                                        ' '
+                                    ),
+                                n = 0;
+                            n < o.length;
+                            n++
+                        )
+                            g(u, o[n])
+                        e._i.push([i, s, a])
+                    }),
+                    (e.__SV = 1))
+            })(document, window.posthog || [])
+            posthog.init('<ph_project_api_key>', {
+                api_host: '<ph_client_api_host>',
+            })
+        </script>
+    </head>
 
-  <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init(
-      '<ph_project_api_key>',
-      {
-        api_host:'<ph_client_api_host>',
-      }
-    )
-  </script>
-</head>
-
-<!-- ... other elements ... -->
-
+    <!-- ... other elements ... -->
 </html>
-
 ```
 
 ## 3. Capture a custom event
@@ -316,7 +348,7 @@ class MainScreen extends StatelessWidget {
             const Text('Hello, world!'),
             ElevatedButton(
               child: const Text('Go to Next Screen'),
-              onPressed: () async { 
+              onPressed: () async {
                 final featureFlagValue = await Posthog().getFeatureFlag('my-cool-experiment');
                 bool isTestVariant = featureFlagValue == 'test';
                 if (context.mounted) {
@@ -341,6 +373,6 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 
 ## Further reading
 
-- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [How to set up analytics in Flutter](/tutorials/flutter-analytics)
-- [How to set up feature flags in Flutter](/tutorials/flutter-feature-flags)
+-   [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+-   [How to set up analytics in Flutter](/tutorials/flutter-analytics)
+-   [How to set up feature flags in Flutter](/tutorials/flutter-feature-flags)

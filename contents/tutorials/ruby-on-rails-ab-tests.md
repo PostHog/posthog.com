@@ -2,9 +2,9 @@
 title: How to set up A/B tests in Ruby on Rails
 date: 2024-02-14
 author:
-  - lior-neu-ner
+    - lior-neu-ner
 tags:
-  - experimentation
+    - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -15,7 +15,7 @@ export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/
 export const IdentifyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/identify-light.png"
 export const IdentifyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/identify-dark.png"
 
-A/B tests help you improve your Ruby on Rails app by enabling you to compare the impact of changes on key metrics. 
+A/B tests help you improve your Ruby on Rails app by enabling you to compare the impact of changes on key metrics.
 
 To show you how to set one up on both the client and server side, we create a basic Rails app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -38,8 +38,8 @@ Then replace the code in `app/views/pages/home.html.erb` with the following:
 
 ```html file=app/views/pages/home.html.erb
 <main>
-  <h1>Rails A/B Tests</h1>
-  <button id="main-cta">Click me</button>
+    <h1>Rails A/B Tests</h1>
+    <button id="main-cta">Click me</button>
 </main>
 ```
 
@@ -64,25 +64,22 @@ To start, we install the [PostHog Web SDK](/docs/libraries/js) on the client sid
 ```html app/views/layouts/application.html.erb
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RubyAbTests</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <head>
+        <title>RubyAbTests</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <%= csrf_meta_tags %> <%= csp_meta_tag %> <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+        <%= javascript_importmap_tags %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-    
-    <!-- PostHog Snippet --> 
-    <script>
-      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-      posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>})
-    </script>
-  </head>
+        <!-- PostHog Snippet -->
+        <script>
+            !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+            posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>})
+        </script>
+    </head>
 
-  <body>
-    <%= yield %>
-  </body>
+    <body>
+        <%= yield %>
+    </body>
 </html>
 ```
 
@@ -103,14 +100,14 @@ To measure this, we [capture a custom event](/docs/product-analytics/capture-eve
 
 ```html file=app/views/pages/home.html.erb
 <script>
-  function handleClick() {
-    posthog.capture('home_button_clicked');
-  }
+    function handleClick() {
+        posthog.capture('home_button_clicked')
+    }
 </script>
 
 <main>
-  <h1>Rails A/B Tests</h1>
-  <button id="main-cta" onclick="handleClick()">Click me</button>
+    <h1>Rails A/B Tests</h1>
+    <button id="main-cta" onclick="handleClick()">Click me</button>
 </main>
 ```
 
@@ -151,31 +148,31 @@ To implement the A/B test, we fetch the `my-cool-experiment` flag using [`postho
 
 ```html file=app/views/pages/home.html.erb
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    posthog.onFeatureFlags(function() {
-      var buttonText = 'No variant';
-      if (posthog.getFeatureFlag('my-cool-experiment') === 'control') {
-        buttonText = 'Control variant';
-      } else if (posthog.getFeatureFlag('my-cool-experiment') === 'test') {
-        buttonText = 'Test variant';
-      }
-      document.getElementById('main-cta').textContent = buttonText;
-    });
-  });
+    document.addEventListener('DOMContentLoaded', function () {
+        posthog.onFeatureFlags(function () {
+            var buttonText = 'No variant'
+            if (posthog.getFeatureFlag('my-cool-experiment') === 'control') {
+                buttonText = 'Control variant'
+            } else if (posthog.getFeatureFlag('my-cool-experiment') === 'test') {
+                buttonText = 'Test variant'
+            }
+            document.getElementById('main-cta').textContent = buttonText
+        })
+    })
 
-  function handleClick() {
-    console.log(posthog)
-    posthog.capture('home_button_clicked');
-  }
+    function handleClick() {
+        console.log(posthog)
+        posthog.capture('home_button_clicked')
+    }
 </script>
 
 <main>
-  <h1>Rails A/B Tests</h1>
-  <button id="main-cta" onclick="handleClick()">Click me</button>
+    <h1>Rails A/B Tests</h1>
+    <button id="main-cta" onclick="handleClick()">Click me</button>
 </main>
 ```
 
-Now if you refresh your app, you should see the button text updated to either `Control variant` or `Test variant`. 
+Now if you refresh your app, you should see the button text updated to either `Control variant` or `Test variant`.
 
 ### Server-side rendering
 
@@ -227,23 +224,23 @@ Lastly, update our view to use the `@button_text` variable from the controller:
 
 ```html file=app/views/pages/home.html.erb
 <script>
-  function handleClick() {
-    console.log(posthog)
-    posthog.capture('home_button_clicked');
-  }
+    function handleClick() {
+        console.log(posthog)
+        posthog.capture('home_button_clicked')
+    }
 </script>
 
 <main>
-  <h1>Rails A/B Test</h1>
-  <button id="main-cta" onclick="handleClick()"><%= @button_text %></button>
+    <h1>Rails A/B Test</h1>
+    <button id="main-cta" onclick="handleClick()"><%= @button_text %></button>
 </main>
 ```
 
-Now, when you refresh the page, the button text is already set when the page loads. 
+Now, when you refresh the page, the button text is already set when the page loads.
 
 #### Setting the correct `distinctId`
 
-You may notice that we set `distinctId = 'placeholder-user-id'` in our flag call above. In production apps, to ensure you fetch the correct flag value for your user, `distinctId` should be set to their unique ID. 
+You may notice that we set `distinctId = 'placeholder-user-id'` in our flag call above. In production apps, to ensure you fetch the correct flag value for your user, `distinctId` should be set to their unique ID.
 
 For logged-in users, you typically use their email as their `distinctId`. However, for logged-out users, you can use the `distinct_id` property from their PostHog cookie:
 
@@ -251,7 +248,7 @@ For logged-in users, you typically use their email as their `distinctId`. Howeve
 class PagesController < ApplicationController
   def home
     @button_text = 'No variant'
-    
+
     project_api_key = '<ph_project_api_key>'
     cookie_key = "ph_#{project_api_key}_posthog"
 
@@ -303,22 +300,21 @@ Then update the client side code to `identify` the user using the `distinct_id`:
 
 ```html file=app/views/pages/home.html.erb
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const distinctId = '<%= @distinct_id %>'
+        if (distinctId) {
+            posthog.identify(distinctId)
+        }
+    })
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const distinctId = "<%= @distinct_id %>";
-    if (distinctId) {
-      posthog.identify(distinctId);
+    function handleClick() {
+        posthog.capture('home_button_clicked')
     }
-  });
-
-  function handleClick() {
-    posthog.capture('home_button_clicked');
-  }
 </script>
 
 <main>
-  <h1>Rails A/B Test</h1>
-  <button id="main-cta" onclick="handleClick()"><%= @button_text %></button>
+    <h1>Rails A/B Test</h1>
+    <button id="main-cta" onclick="handleClick()"><%= @button_text %></button>
 </main>
 ```
 
@@ -333,6 +329,6 @@ To verify you've done this correctly, you should see an `Identify` event in your
 
 ## Further reading
 
-- [How to set up Ruby on Rails analytics, feature flags and more](/tutorials/ruby-on-rails-analytics)
-- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)
+-   [How to set up Ruby on Rails analytics, feature flags and more](/tutorials/ruby-on-rails-analytics)
+-   [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+-   [8 annoying A/B testing mistakes every engineer should know](/blog/ab-testing-mistakes)

@@ -2,11 +2,11 @@
 title: 'How to set up Astro analytics, feature flags, and more'
 date: 2023-11-28
 author:
-  - ian-vanagas
+    - ian-vanagas
 tags:
-  - configuration
-  - feature flags
-  - events
+    - configuration
+    - feature flags
+    - events
 ---
 
 [Astro](https://astro.build/) is a frontend JavaScript framework focused on performance and simplifying the creation of content-based sites. It has seen a rapid increase in interest and usage since its release in 2022.
@@ -38,7 +38,7 @@ Once created, go to the `src` folder and create a `layouts` folder. In this fold
 	<body>
 		<a href="/">Home</a>
 		<a href="/posts/">Posts</a>
-		<slot /> 
+		<slot />
 	</body>
 </html>
 ```
@@ -62,7 +62,9 @@ In the `posts` folder, we also create a `first-post.md` file where we write a bi
 ---
 layout: ../../layouts/Layout.astro
 ---
+
 <!-- src/pages/posts/first-post.md -->
+
 # First post
 
 PostHog is awesome
@@ -88,13 +90,12 @@ Finally, we can run our app with `npm run dev` to see our full Astro app running
 
 With our app set up, the next step is to add PostHog to it. To start, create a new `components` folder in the `src` folder. In this folder, create a `posthog.astro` file. In this file, add your Javascript Web snippet which you can find in [your project settings](https://app.posthog.com/settings/project#snippet). Be sure to include the `is:inline` directive [to prevent Astro from processing it](https://docs.astro.build/en/guides/client-side-scripts/#opting-out-of-processing), or you will get Typescript and build errors that property 'posthog' does not exist on type 'Window & typeof globalThis'.
 
-
 ```js
 ---
 // src/components/posthog.astro
 ---
 <script is:inline>
-  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
   posthog.init(
     '<ph_project_api_key>',
     {
@@ -124,7 +125,7 @@ import PostHog from '../components/posthog.astro'
 	<body>
 		<a href="/">Home</a>
 		<a href="/posts/">Posts</a>
-		<slot /> 
+		<slot />
 	</body>
 </html>
 ```
@@ -216,17 +217,17 @@ In the `src` folder, create a `posthog.js` file. This is where we set up the cod
 
 ```js
 // src/posthog.js
-import { PostHog } from 'posthog-node';
+import { PostHog } from 'posthog-node'
 
-let posthogClient = null;
+let posthogClient = null
 
 export default function PostHogClient() {
-  if (!posthogClient) {
-    posthogClient = new PostHog('<ph_project_api_key>', {
-      host: '<ph_client_api_host>',
-    });
-  }
-  return posthogClient;
+    if (!posthogClient) {
+        posthogClient = new PostHog('<ph_project_api_key>', {
+            host: '<ph_client_api_host>',
+        })
+    }
+    return posthogClient
 }
 ```
 
@@ -241,7 +242,7 @@ import PostHogClient from '../posthog.js';
 const phClient = PostHogClient();
 phClient.capture(
 	{
-		event: 'server_side_event', 
+		event: 'server_side_event',
 		distinctId: 'ian@posthog.com'
 	}
 );
@@ -262,12 +263,12 @@ We can start by changing the output mode in `astro.config.mjs` to `hybrid` so we
 
 ```js
 // astro.config.mjs
-import { defineConfig } from 'astro/config';
+import { defineConfig } from 'astro/config'
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'hybrid'
-});
+    output: 'hybrid',
+})
 ```
 
 Next, we use the `Astro.cookies` utility to get the cookie using our project API key.
@@ -301,7 +302,7 @@ if (!distinctId) {
 const phClient = PostHogClient();
 phClient.capture(
 	{
-		event: 'server_side_event', 
+		event: 'server_side_event',
 		distinctId: distinctId
 	}
 );
@@ -309,7 +310,7 @@ phClient.capture(
 <!-- The rest of the component -->
 ```
 
-This solves our problem partially, but the server and client distinct IDs end up disconnected. Your analysis will show events from two different users when they came from one. 
+This solves our problem partially, but the server and client distinct IDs end up disconnected. Your analysis will show events from two different users when they came from one.
 
 To prevent this, we add the distinct ID in a hidden component so we can access it when PostHog loads.
 
@@ -332,7 +333,7 @@ Finally, in `posthog.astro`, we add logic to get the distinct ID, check if it’
 // src/components/posthog.astro
 ---
 <script>
-  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
   posthog.init(
     '<ph_project_api_key>',
     {
@@ -353,7 +354,7 @@ Now, we will have accurate, combined user IDs on both the client and server.
 
 ## Setting up server side feature flags
 
-When setting up feature flags, you might have noticed that they flicker on the initial load. The delay between the page and PostHog loading causes this. To prevent it, we can evaluate flags on the server side. 
+When setting up feature flags, you might have noticed that they flicker on the initial load. The delay between the page and PostHog loading causes this. To prevent it, we can evaluate flags on the server side.
 
 To do this, call `isFeatureEnabled` for the `new-button` key and `distinctID` with the Node `phClient`. Replace the button text with a server variable that depends on the flag and remove the client side flag logic.
 
@@ -388,6 +389,6 @@ Now when you refresh your page, your flag won’t flicker because the content is
 
 ## Further reading
 
-- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
-- [How to set up A/B tests in Astro](/tutorials/astro-ab-tests)
-- [How to set up surveys in Astro](/tutorials/astro-surveys)
+-   [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+-   [How to set up A/B tests in Astro](/tutorials/astro-ab-tests)
+-   [How to set up surveys in Astro](/tutorials/astro-surveys)

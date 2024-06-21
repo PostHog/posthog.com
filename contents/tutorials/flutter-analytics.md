@@ -2,9 +2,9 @@
 title: How to set up analytics in Flutter
 date: 2024-03-06
 author:
-  - lior-neu-ner
+    - lior-neu-ner
 tags:
-  - feature flags
+    - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -21,10 +21,10 @@ export const InsightsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/p
 
 Our app will have two screens:
 
-- a `login` screen with a form to enter in your name, email, and company name.
-- a `home` screen with submit button, toggle, and logout button.
+-   a `login` screen with a form to enter in your name, email, and company name.
+-   a `home` screen with submit button, toggle, and logout button.
 
-To set this up, install the [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter). Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`. 
+To set this up, install the [Flutter extension for VS Code](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter). Then, create a new app by opening the Command Palette in VS Code (`Ctrl/Cmd + Shift + P`), typing `flutter` and selecting `Flutter: New Project`.
 
 Select `Empty Application` and name your app `flutter_analytics`. Then, replace your code in `lib/main.dart` with the following:
 
@@ -99,7 +99,7 @@ class LoginPage extends StatelessWidget {
                 final prefs = await SharedPreferences.getInstance();
                 await prefs.setBool('isLoggedIn', true);
                 await prefs.setString('name', nameController.text);
-                await prefs.setString('email', emailController.text); 
+                await prefs.setString('email', emailController.text);
                 await prefs.setString('companyName', companyNameController.text);
                 if (context.mounted) {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomePage()));
@@ -131,7 +131,7 @@ class UserDetails extends StatelessWidget {
         return Center(
           child: Text(
             'Hello $name from $companyName! Your email is $email.',
-            textAlign: TextAlign.center, 
+            textAlign: TextAlign.center,
           ),
         );
 
@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const UserDetails(), 
+            const UserDetails(),
             Switch(
               value: isSwitchEnabled,
               onChanged: (value) {
@@ -208,9 +208,9 @@ Next, we need to add `shared_preferences` as a dependency in our `pubspec.yaml` 
 
 ```yaml file=pubspec.yaml
 dependencies:
-  flutter:
-    sdk: flutter
-  shared_preferences: ^2.2.2
+    flutter:
+        sdk: flutter
+    shared_preferences: ^2.2.2
 ```
 
 Our basic set up is now complete. Build and run your app to see it in action.
@@ -227,11 +227,10 @@ To start, install [PostHog’s Flutter SDK](/libraries/flutter) by adding `posth
 # rest of your code
 
 dependencies:
-  flutter:
-    sdk: flutter
-  shared_preferences: ^2.2.2
-  posthog_flutter: ^4.0.1
-
+    flutter:
+        sdk: flutter
+    shared_preferences: ^2.2.2
+    posthog_flutter: ^4.0.1
 # rest of your code
 ```
 
@@ -292,7 +291,6 @@ Then you need to set the minimum platform version to iOS 13.0 in your Podfile:
 
 ```yaml file=ios/Podfile
 platform :ios, '13.0'
-
 # rest of your config
 ```
 
@@ -303,25 +301,59 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
 ```html file=web/index.html
 <!DOCTYPE html>
 <html>
+    <head>
+        <!-- ... other head elements ... -->
 
-<head>
-  <!-- ... other head elements ... -->
+        <script>
+            !(function (t, e) {
+                var o, n, p, r
+                e.__SV ||
+                    ((window.posthog = e),
+                    (e._i = []),
+                    (e.init = function (i, s, a) {
+                        function g(t, e) {
+                            var o = e.split('.')
+                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                                (t[e] = function () {
+                                    t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                                })
+                        }
+                        ;((p = t.createElement('script')).type = 'text/javascript'),
+                            (p.async = !0),
+                            (p.src = s.api_host + '/static/array.js'),
+                            (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
+                        var u = e
+                        for (
+                            void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                                u.people = u.people || [],
+                                u.toString = function (t) {
+                                    var e = 'posthog'
+                                    return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                                },
+                                u.people.toString = function () {
+                                    return u.toString(1) + '.people (stub)'
+                                },
+                                o =
+                                    'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId'.split(
+                                        ' '
+                                    ),
+                                n = 0;
+                            n < o.length;
+                            n++
+                        )
+                            g(u, o[n])
+                        e._i.push([i, s, a])
+                    }),
+                    (e.__SV = 1))
+            })(document, window.posthog || [])
+            posthog.init('<ph_project_api_key>', {
+                api_host: '<ph_client_api_host>',
+            })
+        </script>
+    </head>
 
-  <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init(
-      '<ph_project_api_key>',
-      {
-        api_host:'<ph_client_api_host>',
-      }
-    )
-  </script>
-</head>
-
-<!-- ... other elements ... -->
-
+    <!-- ... other elements ... -->
 </html>
-
 ```
 
 ## 3. Implement the event capture code
@@ -392,7 +424,7 @@ class LoginPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () async {
                 await Posthog().identify(userId: emailController.text);
-                // ... rest of your code                
+                // ... rest of your code
               },
               child: const Text('Login'),
             ),
@@ -400,9 +432,9 @@ class LoginPage extends StatelessWidget {
             // ...
 ```
 
-Any past or future events captured after calling `identify` will now be associated with the email you provided. 
+Any past or future events captured after calling `identify` will now be associated with the email you provided.
 
-To test this, press logout, fill the form in and press login. Then, in the home page, press the submit button to capture the `home_button_clicked` event. You should now see the email in the **Person** column in your [activity tab]((https://us.posthog.com/events)).
+To test this, press logout, fill the form in and press login. Then, in the home page, press the submit button to capture the `home_button_clicked` event. You should now see the email in the **Person** column in your [activity tab](<(https://us.posthog.com/events)>).
 
 <ProductScreenshot
   imageLight={IdentifyLight} 
@@ -412,6 +444,7 @@ To test this, press logout, fill the form in and press login. Then, in the home 
 />
 
 Lastly, when the user logs out, you should call [`Posthog().reset()`](https://posthog.com/docs/libraries/flutter#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
+
 ```dart file=main.dart
 class _HomePageState extends State<HomePage> {
     // ...
@@ -438,7 +471,7 @@ class LoginPage extends StatelessWidget {
               onPressed: () async {
                 await Posthog().identify(userId: emailController.text);
                 await Posthog().group(groupType: "company", groupKey: companyNameController.text);
-                // ... rest of your code                
+                // ... rest of your code
               },
               child: const Text('Login'),
             ),
@@ -457,8 +490,8 @@ Next, go to the [Product analytics](https://us.posthog.com/insights) tab in Post
 In this tutorial, we create a simple trend insight:
 
 1. Select the **Trends** tab.
-2. Under the **Series** header select the `home_button_clicked` event. 
-3. Click the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
+2. Under the **Series** header select the `home_button_clicked` event.
+3. Click the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties.
 
 For example, in the image below we set our insight to show number of unique users that captured the `home_button_clicked` event where the toggled is enabed:
 
@@ -473,6 +506,6 @@ That's it! Feel free to play around in your dashboard and explore the different 
 
 ## Further reading
 
-- [How to run A/B tests in Flutter](/tutorials/flutter-ab-tests)
-- [How to set up feature flags in Flutter](/tutorials/flutter-feature-flags)
-- [How to run A/B tests in Android](/tutorials/android-ab-tests)
+-   [How to run A/B tests in Flutter](/tutorials/flutter-ab-tests)
+-   [How to set up feature flags in Flutter](/tutorials/flutter-feature-flags)
+-   [How to run A/B tests in Android](/tutorials/android-ab-tests)

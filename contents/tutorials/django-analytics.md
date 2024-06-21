@@ -3,15 +3,15 @@ title: 'Setting up Django analytics, feature flags, and more'
 sidebar: Docs
 showTitle: true
 author:
-  - ian-vanagas
+    - ian-vanagas
 date: 2022-12-15
 featuredTutorial: false
 featuredVideo: 'https://www.youtube-nocookie.com/embed/QB-PI_ZXkwo'
 tags:
-  - configuration
-  - feature flags
-  - persons
-  - events
+    - configuration
+    - feature flags
+    - persons
+    - events
 ---
 
 Django is a popular Python web framework. It’s used by thousands of teams and developers around the world, including PostHog, to build apps, websites, APIs, and more.
@@ -36,7 +36,7 @@ Activate the environment (this keeps the details on all the libraries you instal
 . env/bin/activate
 ```
 
-Install Django. 
+Install Django.
 
 ```bash
 python -m pip install Django
@@ -66,7 +66,7 @@ python manage.py migrate
 
 ## 2. Adding basic functionality to the Django app
 
-With a site up, it is time to customize it to what we need. We won’t do anything fancy for this tutorial. Our app will be a blog with basic user authentication to show off all the features of PostHog. 
+With a site up, it is time to customize it to what we need. We won’t do anything fancy for this tutorial. Our app will be a blog with basic user authentication to show off all the features of PostHog.
 
 The first step in doing this is creating a Django app with the name `blog`.
 
@@ -153,12 +153,11 @@ The `home.html` file loops through our posts and show the `title`, `created_at` 
     <body>
         <h1>My cool blog</h1>
         {% for post in posts %}
-            <h2>{{ post.title }}</h2>
-            <p>Created: {{ post.created_at }}</p>
-            <p>Author: {{ post.author }}</p>
-            <p>{{ post.content }}</p>
-        {% endfor %}
-        Logged in as: <b>{{user}}</b>
+        <h2>{{ post.title }}</h2>
+        <p>Created: {{ post.created_at }}</p>
+        <p>Author: {{ post.author }}</p>
+        <p>{{ post.content }}</p>
+        {% endfor %} Logged in as: <b>{{user}}</b>
     </body>
 </html>
 ```
@@ -215,11 +214,11 @@ With a basic Django app all setup, we can add PostHog to track user behavior. We
 
 ### Adding the snippet
 
-PostHog makes it easy to get started fast with autocapture. This captures events like pageviews, button and link clicks, field inputs, allows for session recordings, and more. 
+PostHog makes it easy to get started fast with autocapture. This captures events like pageviews, button and link clicks, field inputs, allows for session recordings, and more.
 
-> To enable session recordings, toggle on “Record user sessions”  in project settings under “Recordings”
+> To enable session recordings, toggle on “Record user sessions” in project settings under “Recordings”
 
-In a new project’s getting started flow or your project settings, copy the HTML snippet and add it into the `<head>` tag of your `base.html` page. 
+In a new project’s getting started flow or your project settings, copy the HTML snippet and add it into the `<head>` tag of your `base.html` page.
 
 ![Snippet](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/snippet.png)
 
@@ -228,29 +227,68 @@ In a new project’s getting started flow or your project settings, copy the HTM
 <head>
     <title>My cool blog</title>
     <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', person_profiles: 'identified_only'})
+        !(function (t, e) {
+            var o, n, p, r
+            e.__SV ||
+                ((window.posthog = e),
+                (e._i = []),
+                (e.init = function (i, s, a) {
+                    function g(t, e) {
+                        var o = e.split('.')
+                        2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                            (t[e] = function () {
+                                t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                            })
+                    }
+                    ;((p = t.createElement('script')).type = 'text/javascript'),
+                        (p.async = !0),
+                        (p.src = s.api_host + '/static/array.js'),
+                        (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
+                    var u = e
+                    for (
+                        void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                            u.people = u.people || [],
+                            u.toString = function (t) {
+                                var e = 'posthog'
+                                return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                            },
+                            u.people.toString = function () {
+                                return u.toString(1) + '.people (stub)'
+                            },
+                            o =
+                                'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep'.split(
+                                    ' '
+                                ),
+                            n = 0;
+                        n < o.length;
+                        n++
+                    )
+                        g(u, o[n])
+                    e._i.push([i, s, a])
+                }),
+                (e.__SV = 1))
+        })(document, window.posthog || [])
+        posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', person_profiles: 'identified_only' })
     </script>
 </head>
 <html>
     <body>
         <h1>My cool blog</h1>
         {% for post in posts %}
-            <h2>{{ post.title }}</h2>
-            <p>Created: {{ post.created_at }}</p>
-            <p>Author: {{ post.author }}</p>
-            <p>{{ post.content }}</p>
-        {% endfor %}
-        Logged in as: <b>{{user.email}}</b>
+        <h2>{{ post.title }}</h2>
+        <p>Created: {{ post.created_at }}</p>
+        <p>Author: {{ post.author }}</p>
+        <p>{{ post.content }}</p>
+        {% endfor %} Logged in as: <b>{{user.email}}</b>
     </body>
 </html>
 ```
 
-Once you save and reload, autocapture immediately starts working. Refreshing the page gives you a `pageview` event, and you’ll be all setup to capture more events as you add more functionality. To verify that your `pageview` events are captured correctly, login to PostHog and check the Live Events feed via the sidebar. 
+Once you save and reload, autocapture immediately starts working. Refreshing the page gives you a `pageview` event, and you’ll be all setup to capture more events as you add more functionality. To verify that your `pageview` events are captured correctly, login to PostHog and check the Live Events feed via the sidebar.
 
 ### Installing and using the library
 
-The snippet is great for getting started fast, but it doesn’t provide customizability or access to many PostHog features like custom events, feature flags, user identification, experiments, and group analytics. 
+The snippet is great for getting started fast, but it doesn’t provide customizability or access to many PostHog features like custom events, feature flags, user identification, experiments, and group analytics.
 
 We can add all this functionality with the PostHog Python library, and this starts with installing it.
 
@@ -296,8 +334,8 @@ class PostListView(ListView):
         if self.request.user.is_authenticated:
             for post in context['posts']:
                 posthog.capture(
-                    self.request.user.email, 
-                    'blog_view', 
+                    self.request.user.email,
+                    'blog_view',
                     {'blog': post.title}
                 )
         return context
@@ -337,7 +375,7 @@ class PostListView(ListView):
             cookie_dict = json.loads(unquote(posthog_cookie))
             if cookie_dict['distinct_id'] and self.request.user.is_authenticated:
                 posthog.alias(
-                    cookie_dict['distinct_id'], 
+                    cookie_dict['distinct_id'],
                     self.request.user.email
                 )
 
@@ -357,23 +395,61 @@ To show off feature flags, add an optional call to action at the bottom of our b
 <head>
     <title>My cool blog</title>
     <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', person_profiles: 'identified_only'})
+        !(function (t, e) {
+            var o, n, p, r
+            e.__SV ||
+                ((window.posthog = e),
+                (e._i = []),
+                (e.init = function (i, s, a) {
+                    function g(t, e) {
+                        var o = e.split('.')
+                        2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                            (t[e] = function () {
+                                t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                            })
+                    }
+                    ;((p = t.createElement('script')).type = 'text/javascript'),
+                        (p.async = !0),
+                        (p.src = s.api_host + '/static/array.js'),
+                        (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
+                    var u = e
+                    for (
+                        void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                            u.people = u.people || [],
+                            u.toString = function (t) {
+                                var e = 'posthog'
+                                return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                            },
+                            u.people.toString = function () {
+                                return u.toString(1) + '.people (stub)'
+                            },
+                            o =
+                                'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep'.split(
+                                    ' '
+                                ),
+                            n = 0;
+                        n < o.length;
+                        n++
+                    )
+                        g(u, o[n])
+                    e._i.push([i, s, a])
+                }),
+                (e.__SV = 1))
+        })(document, window.posthog || [])
+        posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', person_profiles: 'identified_only' })
     </script>
 </head>
 <html>
     <body>
         <h1>My cool blog</h1>
         {% for post in posts %}
-            <h2>{{ post.title }}</h2>
-            <p>Created: {{ post.created_at }}</p>
-            <p>Author: {{ post.author }}</p>
-            <p>{{ post.content }}</p>
-            {% if cta %}
-             <p><a href="/">Go to PostHog</a></p>
-            {% endif %}
-        {% endfor %}
-        Logged in as: <b>{{user.email}}</b>
+        <h2>{{ post.title }}</h2>
+        <p>Created: {{ post.created_at }}</p>
+        <p>Author: {{ post.author }}</p>
+        <p>{{ post.content }}</p>
+        {% if cta %}
+        <p><a href="/">Go to PostHog</a></p>
+        {% endif %} {% endfor %} Logged in as: <b>{{user.email}}</b>
     </body>
 </html>
 ```
@@ -417,6 +493,6 @@ With autocapture, session recordings, feature flags, identification, and custom 
 
 ## Further reading
 
-- [How to set up A/B tests in Django](/tutorials/django-ab-tests)
-- [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics)
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
+-   [How to set up A/B tests in Django](/tutorials/django-ab-tests)
+-   [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics)
+-   [Complete guide to event tracking](/tutorials/event-tracking-guide)

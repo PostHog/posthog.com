@@ -3,15 +3,15 @@ title: 'How to set up Node.js (Express) analytics, feature flags, and more'
 sidebar: Docs
 showTitle: true
 author:
-  - ian-vanagas
+    - ian-vanagas
 date: 2023-01-05
 featuredTutorial: false
 featuredVideo: 'https://www.youtube-nocookie.com/embed/aYRzmDP-Mwc'
 tags:
-  - configuration
-  - feature flags
-  - persons
-  - events
+    - configuration
+    - feature flags
+    - persons
+    - events
 ---
 
 Node.js is a JavaScript runtime and server environment. Express.js is a web application framework for Node.js. Express is the most popular backend JavaScript framework and one of the most popular web frameworks across all languages.
@@ -56,11 +56,11 @@ In that `index.ejs` file, we create a basic HTML page with only a head and body 
 Back in `server.js`, add the basic parts of an Express app needed to get a basic homepage up.
 
 ```js
-const express = require('express');
-const app = express();
-const port = 3000;
+const express = require('express')
+const app = express()
+const port = 3000
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
     res.render('index')
@@ -75,34 +75,33 @@ This is enough for a basic HTML page. After this, you can run `node server.js` i
 
 ![Basic page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-analytics/basic.png)
 
-This is a great start, but we want something with *pizazz.*
+This is a great start, but we want something with _pizazz._
 
 ## 2. Building out our Express app
 
 We want this blog to show some posts. To mimic a database connection, add a couple of posts as a constant to our code. We then pass them as an argument while rendering our `index.ejs` file and handle them there.
 
 ```js
-const express = require('express');
-const app = express();
-const port = 3000;
+const express = require('express')
+const app = express()
+const port = 3000
 
 const posts = [
     {
         title: 'PostHog is the coolest',
-        content: 'This is a blog about why PostHog is the coolest'
-
+        content: 'This is a blog about why PostHog is the coolest',
     },
     {
         title: 'Hedgehogs are the best animals',
-        content: 'Here is a blog about hedgehogs being the best'
-    }
+        content: 'Here is a blog about hedgehogs being the best',
+    },
 ]
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
     res.render('index', {
-        posts: posts // new
+        posts: posts, // new
     })
 })
 
@@ -164,23 +163,23 @@ In `server.js`, we need to set up the `/email` route. This requires setting the 
 //
 // ...
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false })) // new
 
 app.get('/', (req, res) => {
     res.render('index', {
-        posts: posts
+        posts: posts,
     })
 })
 
-app.post('/email', (req, res) => { // new
+app.post('/email', (req, res) => {
+    // new
     console.log(req.body.email)
 })
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
-
 ```
 
 Now, you have a basic blog that enables us to setup the features of PostHog in Node and Express.
@@ -191,29 +190,69 @@ With our Express app all setup, we can add PostHog. There are two ways to do thi
 
 ### Install the PostHog script snippet
 
-The snippet is a quick way to set up PostHog and begin capturing data. It automatically captures events like pageviews, clicks, inputs, and more. It also records sessions (if you turn that on in your Project settings). 
+The snippet is a quick way to set up PostHog and begin capturing data. It automatically captures events like pageviews, clicks, inputs, and more. It also records sessions (if you turn that on in your Project settings).
 
-You can find your snippet when you start a new project or in your project settings. Copy it and add it to the header of your `index.ejs` file. 
+You can find your snippet when you start a new project or in your project settings. Copy it and add it to the header of your `index.ejs` file.
 
 ```html
 <head>
     <title>My blog</title>
     <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', person_profiles: 'identified_only'})
+        !(function (t, e) {
+            var o, n, p, r
+            e.__SV ||
+                ((window.posthog = e),
+                (e._i = []),
+                (e.init = function (i, s, a) {
+                    function g(t, e) {
+                        var o = e.split('.')
+                        2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                            (t[e] = function () {
+                                t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                            })
+                    }
+                    ;((p = t.createElement('script')).type = 'text/javascript'),
+                        (p.async = !0),
+                        (p.src = s.api_host + '/static/array.js'),
+                        (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
+                    var u = e
+                    for (
+                        void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                            u.people = u.people || [],
+                            u.toString = function (t) {
+                                var e = 'posthog'
+                                return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                            },
+                            u.people.toString = function () {
+                                return u.toString(1) + '.people (stub)'
+                            },
+                            o =
+                                'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep'.split(
+                                    ' '
+                                ),
+                            n = 0;
+                        n < o.length;
+                        n++
+                    )
+                        g(u, o[n])
+                    e._i.push([i, s, a])
+                }),
+                (e.__SV = 1))
+        })(document, window.posthog || [])
+        posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', person_profiles: 'identified_only' })
     </script>
 </head>
 <html>
     <body>
         <h1>My cool blog</h1>
         <% for (var i = 0; i < posts.length; i++) { %>
-            <h2><%= posts[i].title %></h2>
-            <p><%= posts[i].content %></p>
+        <h2><%= posts[i].title %></h2>
+        <p><%= posts[i].content %></p>
         <% } %>
         <form method="post" action="/email/">
             <label for="email">Email</label>
-            <input type="text" name="email" id="email" placeholder="Email">
-            <input type="submit" value="Submit">
+            <input type="text" name="email" id="email" placeholder="Email" />
+            <input type="submit" value="Submit" />
         </form>
     </body>
 </html>
@@ -223,7 +262,7 @@ Reload the page, click around, and you should start to see some events in your P
 
 ![Autocapture events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-analytics/autocapture.png)
 
-> If you have multiple pages (others besides `index.ejs`), use partials or `include`. This adds the header on every page so that the PostHog snippet loads everywhere. 
+> If you have multiple pages (others besides `index.ejs`), use partials or `include`. This adds the header on every page so that the PostHog snippet loads everywhere.
 
 ### Installing the PostHog Node.js library
 
@@ -240,17 +279,14 @@ Next, add PostHog to the `server.js` file.
 
 const { PostHog } = require('posthog-node') // new
 const ph_project_api_key = '<ph_project_api_key>'
-const client = new PostHog(
-    ph_project_api_key,
-    { host: '<ph_client_api_host>'}
-)
+const client = new PostHog(ph_project_api_key, { host: '<ph_client_api_host>' })
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
     res.render('index', {
-        posts: posts
+        posts: posts,
     })
 })
 
@@ -281,8 +317,8 @@ app.post('/email', (req, res) => {
         distinctId: req.body.email,
         event: 'signed_up',
         properties: {
-            email: req.body.email
-        }
+            email: req.body.email,
+        },
     })
 })
 ```
@@ -309,9 +345,9 @@ Next, add it to our code and activate it.
 // ...
 const cookieParser = require('cookie-parser')
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser());
+app.use(cookieParser())
 // ...
 ```
 
@@ -323,14 +359,14 @@ app.post('/email', (req, res) => {
         distinctId: req.body.email,
         event: 'signed_up',
         properties: {
-            email: req.body.email
-        }
+            email: req.body.email,
+        },
     })
-    
+
     const anonId = JSON.parse(req.cookies[`ph_${ph_project_api_key}_posthog`])['distinct_id']
     client.alias({
         distinctId: req.body.email,
-        alias: anonId
+        alias: anonId,
     })
 })
 ```
@@ -347,7 +383,7 @@ client.identify({
     properties: {
         beta_user: true,
         billing: 'free',
-    }
+    },
 })
 ```
 
@@ -360,19 +396,20 @@ The final tool to implement is feature flags. This feature flag shows a call-to-
 Once done, we can copy the Node code PostHog provides and add it to our `app.get` route. In `server.js`, get the distinct ID from cookies again to evaluate the flag. Make the route `async` so we can `await` the feature flag evaluation. Finally, enable the CTA if the feature flag evaluates to `true`. With these changes, the `app.get` route looks like this:
 
 ```js
-app.get('/', async (req, res) => { // new
+app.get('/', async (req, res) => {
+    // new
 
     let enableCta = false
-    let cookies = req.cookies[`ph_${ph_project_api_key}_posthog`];
+    let cookies = req.cookies[`ph_${ph_project_api_key}_posthog`]
 
     if (cookies) {
-        const distinctId = JSON.parse(cookies)['distinct_id'];
-        enableCta = await client.isFeatureEnabled('blog-cta', distinctId);
+        const distinctId = JSON.parse(cookies)['distinct_id']
+        enableCta = await client.isFeatureEnabled('blog-cta', distinctId)
     }
 
     res.render('index', {
         posts: posts,
-        enableCta: enableCta // new
+        enableCta: enableCta, // new
     })
 })
 ```
@@ -403,12 +440,12 @@ Once saved, reload the server and webpage. You see an extra CTA pointing to the 
 
 ![CTA](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/node-express-analytics/cta.png)
 
-The CTA should disappear if you turn the feature flag off or clear your cookies (but the site will still work). 
+The CTA should disappear if you turn the feature flag off or clear your cookies (but the site will still work).
 
 Once confirming this works, you’ve got a basic Express app working with the key tools of PostHog set up. You can add more functionality and dive deeper into PostHog.
 
 ## Further reading
 
-- [PostHog Node.js docs](/docs/integrate/server/node)
-- [How to set up A/B tests in Node.js (Express)](/tutorials/frontend-vs-backend-group-analytics)
-- [What to do after installing PostHog](/tutorials/next-steps-after-installing)
+-   [PostHog Node.js docs](/docs/integrate/server/node)
+-   [How to set up A/B tests in Node.js (Express)](/tutorials/frontend-vs-backend-group-analytics)
+-   [What to do after installing PostHog](/tutorials/next-steps-after-installing)

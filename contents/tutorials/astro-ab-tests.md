@@ -2,9 +2,9 @@
 title: How to set up A/B tests in Astro
 date: 2024-01-29
 author:
-  - lior-neu-ner
+    - lior-neu-ner
 tags:
-  - experimentation
+    - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -24,7 +24,6 @@ npm create astro@latest
 ```
 
 When prompted in the command line, name your new project directory (we chose `astro-ab-test`), start your new project `Empty`, choose `No` for TypeScript, install dependencies, and `No` for git repository.
-
 
 Next, replace the code in `src/pages/index.astro` with a simple heading and button:
 
@@ -71,7 +70,7 @@ In this file, add your `Web snippet` which you can find in [your project setting
 
 ---
 <script>
-  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
   posthog.init(
     '<ph_project_api_key>',
     {
@@ -155,7 +154,7 @@ import Layout from '../layouts/Layout.astro';
 				button.addEventListener('click', () => {
 					window.posthog.capture('home_button_clicked')
 				});
-			</script>	
+			</script>
 		</body>
 	</html>
 </Layout>
@@ -235,13 +234,13 @@ import Layout from '../layouts/Layout.astro';
 						button.innerText = 'Test variant';
 					}
 				});
-    	</script>	
+    	</script>
 		</body>
 	</html>
 </Layout>
 ```
 
-Now if you refresh your app, you should see the button text updated to either `Control variant` or `Test variant`.  Users are automatically split between the two, PostHog continues to track button clicks, and you can view the results of the A/B test in PostHog.
+Now if you refresh your app, you should see the button text updated to either `Control variant` or `Test variant`. Users are automatically split between the two, PostHog continues to track button clicks, and you can view the results of the A/B test in PostHog.
 
 ### Server-side rendering
 
@@ -258,17 +257,17 @@ npm install posthog-node
 In the `src` folder, create a `posthog-node.js` file. This is where we set up the code to create the PostHog Node client. You can find both your API key and instance address in your [project settings](https://us.posthog.com/project/settings).
 
 ```js file=src/posthog-node.js
-import { PostHog } from 'posthog-node';
+import { PostHog } from 'posthog-node'
 
-let posthogClient = null;
+let posthogClient = null
 
 export default function PostHogNode() {
-  if (!posthogClient) {
-    posthogClient = new PostHog('<ph_project_api_key>', {
-      host: '<ph_client_api_host>',
-    });
-  }
-  return posthogClient;
+    if (!posthogClient) {
+        posthogClient = new PostHog('<ph_project_api_key>', {
+            host: '<ph_client_api_host>',
+        })
+    }
+    return posthogClient
 }
 ```
 
@@ -310,17 +309,17 @@ try {
 				button.addEventListener('click', () => {
 					window.posthog.capture('home_button_clicked')
 				});
-    	</script>	
+    	</script>
 		</body>
 	</html>
 </Layout>
 ```
 
-Now, when you refresh the page, the button text is already set when the page loads. 
+Now, when you refresh the page, the button text is already set when the page loads.
 
 #### Setting the correct `distinctId`
 
-You may notice that we set `distinctId = 'placeholder-user-id'` in our flag call above. In production apps, to ensure you fetch the correct flag value for your user, `distinctId` should be set to their unique ID. 
+You may notice that we set `distinctId = 'placeholder-user-id'` in our flag call above. In production apps, to ensure you fetch the correct flag value for your user, `distinctId` should be set to their unique ID.
 
 For logged-in users, you typically use their email as their `distinctId`. However, for logged-out users, you can use the `distinct_id` property from their PostHog cookie:
 
@@ -353,16 +352,16 @@ if (cookie && cookie.json().distinct_id) {
 Note that `Astro.request.headers` is not available for static sites. If you want to access the request cookies, you need to set your `output` to `server` or `hybrid` in `astro.config.mjs`:
 
 ```js file=astro.config.mjs
-import { defineConfig } from 'astro/config';
+import { defineConfig } from 'astro/config'
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
-});
+    output: 'server',
+})
 ```
 
 ## Further reading
 
-- [How to set up Astro analytics, feature flags, and more](/tutorials/astro-analytics)
-- [How to set up surveys in Astro](/tutorials/astro-surveys)
-- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+-   [How to set up Astro analytics, feature flags, and more](/tutorials/astro-analytics)
+-   [How to set up surveys in Astro](/tutorials/astro-surveys)
+-   [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)

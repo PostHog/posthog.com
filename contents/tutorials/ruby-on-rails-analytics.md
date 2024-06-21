@@ -2,14 +2,14 @@
 title: 'How to set up Ruby on Rails analytics, feature flags and more'
 date: 2023-02-02
 author:
-  - ian-vanagas
+    - ian-vanagas
 showTitle: true
 sidebar: Docs
 tags:
-  - configuration
-  - feature flags
-  - persons
-  - events
+    - configuration
+    - feature flags
+    - persons
+    - events
 ---
 
 Ruby on Rails is a popular fullstack web framework used by companies like Shopify, GitHub, Twitch, and more.
@@ -101,11 +101,9 @@ Next, add the code to show them all, go to the details about them, and create a 
 <h1>Articles</h1>
 
 <ul>
-  <% @articles.each do |article| %>
-    <li>
-      <%= link_to article.title, article %>
-    </li>
-  <% end %>
+    <% @articles.each do |article| %>
+    <li><%= link_to article.title, article %></li>
+    <% end %>
 </ul>
 
 <%= link_to "New Article", new_article_path %>
@@ -138,7 +136,7 @@ def new
       render :new, status: :unprocessable_entity
     end
   end
-	
+
 private
     def article_params
       params.require(:article).permit(:title, :body, :author)
@@ -179,7 +177,7 @@ You should now have a nice Ruby on Rails app with a home page, article pages, an
 
 ## 2. Integrating the PostHog snippet and Ruby library
 
-Now our Ruby on Rails app is ready to integrate with PostHog. There are two ways to do this; with the snippet, or the library. The first method enables you to quickly get started with most PostHog features, such as analytics and session recording. If also want to use advanced tools, such as feature flags and experiments, you need to use the library. 
+Now our Ruby on Rails app is ready to integrate with PostHog. There are two ways to do this; with the snippet, or the library. The first method enables you to quickly get started with most PostHog features, such as analytics and session recording. If also want to use advanced tools, such as feature flags and experiments, you need to use the library.
 
 ### Adding the JavaScript snippet
 
@@ -190,23 +188,60 @@ To set it up, [copy the code snippet from the PostHog docs](/docs/integrate) and
 ```html
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Blog</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <head>
+        <title>Blog</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <%= csrf_meta_tags %> <%= csp_meta_tag %> <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+        <script>
+            !(function (t, e) {
+                var o, n, p, r
+                e.__SV ||
+                    ((window.posthog = e),
+                    (e._i = []),
+                    (e.init = function (i, s, a) {
+                        function g(t, e) {
+                            var o = e.split('.')
+                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                                (t[e] = function () {
+                                    t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                                })
+                        }
+                        ;((p = t.createElement('script')).type = 'text/javascript'),
+                            (p.async = !0),
+                            (p.src = s.api_host + '/static/array.js'),
+                            (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r)
+                        var u = e
+                        for (
+                            void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                                u.people = u.people || [],
+                                u.toString = function (t) {
+                                    var e = 'posthog'
+                                    return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                                },
+                                u.people.toString = function () {
+                                    return u.toString(1) + '.people (stub)'
+                                },
+                                o =
+                                    'capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep'.split(
+                                        ' '
+                                    ),
+                                n = 0;
+                            n < o.length;
+                            n++
+                        )
+                            g(u, o[n])
+                        e._i.push([i, s, a])
+                    }),
+                    (e.__SV = 1))
+            })(document, window.posthog || [])
+            posthog.init('<ph_project_api_key>', { api_host: 'ph_client_api_host', person_profiles: 'identified_only' })
+        </script>
+        <%= javascript_importmap_tags %>
+    </head>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('<ph_project_api_key>',{api_host:'ph_client_api_host', person_profiles: 'identified_only'})
-    </script>
-    <%= javascript_importmap_tags %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+    <body>
+        <%= yield %>
+    </body>
 </html>
 ```
 
@@ -216,7 +251,7 @@ Once you've set this up and clicked around on the server, you should see events 
 
 ### Adding the Ruby library
 
-If you want access to all the features of PostHog, including custom event capture, user identification, and feature flags, you need the Ruby library. 
+If you want access to all the features of PostHog, including custom event capture, user identification, and feature flags, you need the Ruby library.
 
 To set this up, first, add PostHog to the `Gemfile`:
 
@@ -271,7 +306,7 @@ This creates an `Article created` event with a source from `posthog-ruby`.
 
 ### Aliasing identified users
 
-In your PostHog instance, you see that events are coming from two different people, one with an anonymous ID and another with an email. Even though both these "people" are you, they are treated as two separate people in PostHog, but we can combine them with an `alias` call. 
+In your PostHog instance, you see that events are coming from two different people, one with an anonymous ID and another with an email. Even though both these "people" are you, they are treated as two separate people in PostHog, but we can combine them with an `alias` call.
 
 To do this, you need both the anonymous ID and the new distinct ID (email). We can get the distinct ID when we save the article (like we did for custom event capture) and the anonymous ID via the cookies in the request. We also need our project API to get the right cookie.
 
@@ -315,7 +350,7 @@ The last feature to set up is feature flags. We will set up a feature flag to re
 
 First, create the flag in PostHog. You can do so in "Feature Flags." Click "New feature flag," add a key (I chose `home-redirect`), set the release condition to 100% of users, and click save.
 
-Once done, we can check for this flag in our Ruby code and redirect to the home page if it is active. Again, we need the distinct ID to call `is_feature_enabled()`, so use the author string. 
+Once done, we can check for this flag in our Ruby code and redirect to the home page if it is active. Again, we need the distinct ID to call `is_feature_enabled()`, so use the author string.
 
 ```ruby
 # ...
@@ -344,6 +379,6 @@ Once done, you have a basic Ruby on Rails app with many of the key features of P
 
 ## Further reading
 
-- [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
-- [How to set up A/B tests in Ruby on Rails](/tutorials/ruby-ab-tests)
-- [Complete guide to event tracking](/tutorials/event-tracking-guide)
+-   [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
+-   [How to set up A/B tests in Ruby on Rails](/tutorials/ruby-ab-tests)
+-   [Complete guide to event tracking](/tutorials/event-tracking-guide)

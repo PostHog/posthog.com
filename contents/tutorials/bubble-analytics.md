@@ -2,14 +2,14 @@
 title: 'How to set up Bubble analytics, session replays, and more'
 date: 2024-01-10
 author:
-  - lior-neu-ner
+    - lior-neu-ner
 showTitle: true
 featuredVideo: https://www.youtube-nocookie.com/embed/bGCraI7BSqU
 sidebar: Docs
 tags:
-  - session replay
-  - feature flags
-  - product analytics
+    - session replay
+    - feature flags
+    - product analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -26,7 +26,7 @@ First, [sign up to PostHog](https://us.posthog.com/signup). Then, go to your [pr
 
 ```js
 <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', person_profiles: 'identified_only'})
 </script>
 ```
@@ -48,7 +48,7 @@ PostHog will now begin [automatically capturing](/docs/product-analytics/autocap
 
 ## How to capture custom events
 
-To capture custom events, we create a [Bubble action](https://manual.bubble.io/help-guides/logic/workflows/actions) to run JavaScript code. 
+To capture custom events, we create a [Bubble action](https://manual.bubble.io/help-guides/logic/workflows/actions) to run JavaScript code.
 
 To do so, you first need to install the [Toolbox plugin](https://bubble.io/plugin/toolbox-1488796042609x768734193128308700). Once installed, create a new action by going to the [Workflow tab](https://manual.bubble.io/help-guides/getting-started/navigating-the-bubble-editor/tabs-and-sections/workflow-tab) in Bubble and selecting an event. Then click on **add an action**.
 
@@ -59,7 +59,7 @@ In the menu that appears, click on **Plugins** and then **Run javascript**. This
 To capture PostHog events, add the following code under the **Script** heading:
 
 ```js
-window.posthog.capture("your_event_name")
+window.posthog.capture('your_event_name')
 ```
 
 Optionally, you can also include additional information in the event by including parameters as properties:
@@ -78,9 +78,9 @@ Finally, deploy your changes to live to begin capturing your custom event.
 
 ## How to enable session replays
 
-[Session replays](/docs/session-replay) enable you to record and playback user interactions on your site. 
+[Session replays](/docs/session-replay) enable you to record and playback user interactions on your site.
 
-To enable it, go the [Session replay tab](https://us.posthog.com/replay) in PostHog. Then, click on the **Configure** button in the top right and toggle on **Record user sessions** in the menu that opens up. 
+To enable it, go the [Session replay tab](https://us.posthog.com/replay) in PostHog. Then, click on the **Configure** button in the top right and toggle on **Record user sessions** in the menu that opens up.
 
 Once enabled, user sessions will begin to appear in the [Recent recordings tab](https://us.posthog.com/replay/recent).
 
@@ -96,13 +96,13 @@ Then go back to Bubble. Create a new **Page is loaded** workflow event with an a
 
 ```js
 // Find the button with the text "Sign Up"
-var signUpButton = Array.from(document.querySelectorAll('button')).find(el => el.textContent === 'Sign Up');
+var signUpButton = Array.from(document.querySelectorAll('button')).find((el) => el.textContent === 'Sign Up')
 
 // Hide the button based on the feature flag value
 if (signUpButton) {
     posthog.onFeatureFlags(function () {
         if (posthog.isFeatureEnabled('show-signup-button')) {
-            signUpButton.style.display = 'none';
+            signUpButton.style.display = 'none'
         }
     })
 }
@@ -114,6 +114,6 @@ When we save this and publish the site again, the button is still there. When we
 
 ## Further reading
 
-- [How to run A/B tests in Bubble](/tutorials/bubble-ab-tests)
-- [How to create surveys in Bubble](/tutorials/bubble-surveys)
-- [How to analyze first and last touch attribution](/tutorials/first-last-touch-attribution)
+-   [How to run A/B tests in Bubble](/tutorials/bubble-ab-tests)
+-   [How to create surveys in Bubble](/tutorials/bubble-surveys)
+-   [How to analyze first and last touch attribution](/tutorials/first-last-touch-attribution)
