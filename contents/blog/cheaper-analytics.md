@@ -14,6 +14,9 @@ tags:
   - Product updates
 ---
 
+export const Pricing = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_pricing_ba910c9535.jpg"
+export const PricingDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_pricing_dark_6b11387d6c.jpg"
+
 ## tl;dr
 
 * It is now possible to use PostHog's product and web analytics for up to 80% less, depending on your volumes. We can be used more cheaply than any popular competitive product.
@@ -21,6 +24,13 @@ tags:
 * Previously we processed every event with person information.
 * This allows us to reduce our costs for events that do not need person information. We can pass this saving to our customers.
 * This means, if you use this option, we are by far the cheapest way for you to track your product compared to any major analytics competitor of ours
+
+<ProductScreenshot
+  imageLight={Pricing} 
+  imageDark={PricingDark} 
+  alt="New PostHog Pricing" 
+  classes="rounded"
+/>
 
 ## Pricing before and after
 
