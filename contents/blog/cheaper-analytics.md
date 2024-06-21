@@ -2,6 +2,8 @@
 date: 2024-03-21
 title: 'PostHog is now up to 80% cheaper'
 rootPage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_is_the_cheapest_e77c4ea4a5.jpg
 sidebar: Blog
 showTitle: true
 hideAnchor: true
