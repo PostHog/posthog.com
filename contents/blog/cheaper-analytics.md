@@ -16,6 +16,8 @@ tags:
 
 export const Pricing = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_pricing_ba910c9535.jpg"
 export const PricingDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_pricing_dark_6b11387d6c.jpg"
+export const PricingComparison = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_pricing_comparison_f0c9e11f40.jpg"
+export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_pricing_comparison_dark_ecf7d726c0.jpg"
 
 ## tl;dr
 
@@ -28,7 +30,7 @@ export const PricingDark = "https://res.cloudinary.com/dmukukwp6/image/upload/po
 <ProductScreenshot
   imageLight={Pricing} 
   imageDark={PricingDark} 
-  alt="New PostHog Pricing" 
+  alt="New PostHog pricing" 
   classes="rounded"
 />
 
@@ -53,12 +55,18 @@ export const PricingDark = "https://res.cloudinary.com/dmukukwp6/image/upload/po
   - If you are tracking API or server events (especially at high volumes), you can now track this much less expensively than before
 - If you are a price-sensitive customer and are willing to lose some functionality for a lower spend with us
 
-## How we compare to our comeptitors
+## How we compare to our competitors
 
 * This makes us the best value popular (>$10M in revenue) product analytics software by a long way
 * Apart from being more expensive, everyone else _also_ has far fewer features available in their free or lower priced tiers - we only limit team-oriented features (like advanced permissioning).
+* Direct comparisons are tricky because most alternatives [don't publish their full pricing](/blog/transparent-enterprise-pricing), but below you can see how the new pricing options [compare to Mixpanel](/blog/posthog-vs-mixpanel)
 
-<INSERT GRAPH COMPARING US TO COMPETITORS>
+<ProductScreenshot
+  imageLight={PricingComparison} 
+  imageDark={PricingComparisonDark} 
+  alt="New PostHog pricing compared to Mixpanel" 
+  classes="rounded"
+/>
 
 ## What's the downside of sending this type of event?
 
