@@ -25,7 +25,7 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 * Events with person profiles enabled cost the same as our old event pricing. Existing customers will see a new line item labelled "Person profiles" on their invoice. Your price has not gone up.
 
-* You have total control over when you do or don't include person information on an event. LINK TO STUFF HERE
+* You decide when you do or don't include person information on an event.
 
 ## How much cheaper are the new base events?
 
@@ -73,7 +73,7 @@ The table below is a side-by-side comparison of our new base event pricing, and 
 
 We use it in places where we're only interested in aggregate data, such as for logged-out users on our website.
 
-It could also be useful if:
+It could also be useful when:
 
 - You're willing to lose some functionality for lower bills.
 - You want to track API or server events, especially at high volumes. 
@@ -126,8 +126,8 @@ We think this is better for everyone than trying to squeeze you for every cent y
 >
 > #### Why aren't you making the events with person profiles cheaper?
 >
-> Because events with person profiles cost a lot more for us to ingest and query.
->
-> Giving you the option not send person profiles for certain events, however, saves us money, and so it's only fair you save money too.
+> Because events with person profiles cost a lot more for us to ingest and query. Not sending person information for certain events, however, saves us money, so we're passing that on.
 >
 > This aligns our interests with our customers, and means we can make a positive margin on all events ingested (beyond our free tier), so it is sustainable but not greedy!
+>
+> We're also working on reducing costs for events with person profiles enabled. When we do, we'll pass this saving on, too.
