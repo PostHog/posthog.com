@@ -1543,5 +1543,5 @@ li.squeak-left-border {
 }
 
 .active + .inactive {
-    @apply border-t-transparent;
+    @apply !border-t-transparent;
 }
