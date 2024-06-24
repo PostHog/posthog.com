@@ -45,6 +45,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       metaTitle: String
       metaDescription: String
     }
+    type AuthorsJson implements Node {
+      profile: SqueakProfile @link(by: "squeakId", from: "profile_id")
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
