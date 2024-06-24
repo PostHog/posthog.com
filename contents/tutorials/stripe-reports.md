@@ -7,7 +7,7 @@ tags:
  - data warehouse
 ---
 
-For your startup to become a real business, it needs to make money. Stripe is the most popular choice for helping you do this. Creating and analyzing reports for your Stripe data helps you understand how you are making money and how you can improve.
+Creating and analyzing reports for your Stripe data helps you understand how you are making money and how you can improve. 
 
 This tutorial shows you how to sync your Stripe data to PostHog and then create a report of insights like customer count, gross revenue, recurring revenue, revenue churn, and more.
 
@@ -47,7 +47,7 @@ This can also be done for any of the other Stripe data like charges, subscriptio
 
 Next, we can get our gross revenue by doing a similar process and selecting `stripe_charge`. For aggregation, we want **Property value sum** and then choose `amount`. We also want to filter out failed charges by clicking the filter button, selecting the `status` property, and making sure it doesn't equal `failed`.
 
-Finally, to clean up the visualization, we can use formula mode to divide by 100 (the `amount` value is in cents) and click **Options** on the chart to add `$` as a prefix.
+Finally, to clean up the visualization, click **enable formula mode** to divide by 100 (the `amount` value is in cents) and click **Options** on the chart to add `$` as a prefix.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/revenue_light_bf87a357f2.png"
