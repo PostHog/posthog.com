@@ -1,6 +1,6 @@
 import cntl from 'cntl'
 import Layout from 'components/Layout'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import { Link as SmoothScrollLink } from 'react-scroll'
@@ -8,10 +8,8 @@ import Tooltip from 'components/Tooltip'
 import { Twitter } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import { IconArrowRightDown, IconRedo } from '@posthog/icons'
-import { sexyLegalMenu } from '../navs'
-import Lawyers from 'components/Lawyers'
+import { pricingMenu } from '../navs'
 import { CSSTransition } from 'react-transition-group'
-import SalesSlider from 'components/SalesSlider'
 
 const them = [
     { title: '"I have a question about the product."', children: 'Hello world! Slide 1.' },
@@ -32,6 +30,52 @@ const us = [
     { title: 'Choose your own discount', children: '' },
     { title: 'Besties', children: '' },
 ]
+const AccordionItem = ({ number, title, children, isOpen, onClick }) => {
+    const contentRef = useRef(null);
+    const [contentHeight, setContentHeight] = useState('0px');
+
+    useEffect(() => {
+        // Update the content height when isOpen changes
+        setContentHeight(isOpen ? `${contentRef.current.scrollHeight}px` : '0px');
+    }, [isOpen]);
+
+    return (
+        <div>
+            <button onClick={onClick} className={`px-4 py-2 cursor-pointer w-full text-left ${isOpen ? 'bg-accent' : 'bg-transparent hover:bg-accent/80'}`}>{number} {title}</button>
+            <div
+                ref={contentRef}
+                style={{ height: contentHeight, overflow: 'hidden', transition: 'height 0.3s ease' }}
+            >
+                <div className="bg-white p-4">
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const Accordion = ({ items }) => {
+    const [openIndex, setOpenIndex] = useState(0);
+
+    const handleClick = index => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
+
+    return (
+        <div>
+            {items.map((item, index) => (
+                <AccordionItem
+                    key={index}
+                    number={index + 1}
+                    title={item.title}
+                    children={item.children}
+                    isOpen={openIndex === index}
+                    onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                />
+            ))}
+        </div>
+    );
+};
 
 function Sales() {
     const companies = [
@@ -125,10 +169,10 @@ function Sales() {
                         </span>{' '}
                     </h2>
 
-                    <SalesSlider slides={them} />
-                    <br />
-                    <br />
-                    <SalesSlider slides={us} />
+                    <h2>Them</h2>
+                    <Accordion items={them} />
+                    <h2>Us</h2>
+                    <Accordion items={us} />
                 </div>
             </div>
         </Layout>

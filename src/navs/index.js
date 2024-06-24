@@ -2845,6 +2845,12 @@ export const pricingMenu = {
             color: 'red',
             url: '/pricing?product=surveys',
         },
+        {
+            name: 'How we do "sales"',
+            icon: 'IconPercentage',
+            color: 'green',
+            url: '/sales',
+        },
     ],
 }
 
