@@ -1,18 +1,41 @@
-import cntl from 'cntl'
 import Layout from 'components/Layout'
 import React, { useEffect, useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import { Link as SmoothScrollLink } from 'react-scroll'
 import Tooltip from 'components/Tooltip'
-import { Twitter } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
-import { IconArrowRightDown, IconMinus, IconPlus, IconRedo } from '@posthog/icons'
-import { pricingMenu } from '../navs'
+import { IconMinus, IconPlus, IconRedo } from '@posthog/icons'
 import { CSSTransition } from 'react-transition-group'
+import { CallToAction } from 'components/CallToAction'
+
+const Slide1 = () => (
+    <div className="flex gap-8 article-content">
+        <div>
+            <p>
+                You click ‘contact us’ and type in a bunch of personal information that has nothing to do with your use of the product.</p>
+            <p>Often times, there's no place to even ask your question.</p>
+            <p>Your phone number is required, even though they’ll respond by email.
+            </p>
+
+            <CallToAction to="#" className="" size="sm" type="secondary">
+                Next
+            </CallToAction>
+        </div>
+
+        <div className="rotate-2">
+            <StaticImage
+                quality={90}
+                placeholder="blurred"
+                src="../images/sales/demo-form.png"
+                width={294}
+            />
+        </div>
+    </div>
+)
 
 const them = [
-    { title: '"I have a question about the product."', children: 'Hello world! Slide 1.' },
+    { title: '"I have a question about the product."', children: <Slide1 /> },
     { title: 'The discovery call', children: 'Hello world! Slide 2.' },
     { title: 'Finally, a demo!', children: '' },
     { title: 'The follow-up meeting', children: '' },
