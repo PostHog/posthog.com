@@ -1541,3 +1541,7 @@ li.squeak-left-border {
     transform: translateY(0%) scale(1);
     opacity: 1;
 }
+
+.active + .inactive {
+    @apply border-t-transparent;
+}

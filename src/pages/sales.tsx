@@ -7,7 +7,7 @@ import { Link as SmoothScrollLink } from 'react-scroll'
 import Tooltip from 'components/Tooltip'
 import { Twitter } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
-import { IconArrowRightDown, IconRedo } from '@posthog/icons'
+import { IconArrowRightDown, IconMinus, IconPlus, IconRedo } from '@posthog/icons'
 import { pricingMenu } from '../navs'
 import { CSSTransition } from 'react-transition-group'
 
@@ -40,13 +40,20 @@ const AccordionItem = ({ number, title, children, isOpen, onClick }) => {
     }, [isOpen]);
 
     return (
-        <div>
-            <button onClick={onClick} className={`px-4 py-2 cursor-pointer w-full text-left ${isOpen ? 'bg-accent' : 'bg-transparent hover:bg-accent/80'}`}>{number} {title}</button>
+        <div className={`border-t ${isOpen ? 'active border-transparent' : 'inactive border-light'}`}>
+            <button onClick={onClick} className={`pl-3 pr-4 py-2 cursor-pointer w-full flex justify-between items-center rounded-tl rounded-tr ${isOpen ? 'bg-white' : 'bg-transparent hover:bg-accent/80 rounded-bl rounded-br'}`}>
+                <span className="flex gap-2 items-center">
+                    <span className="inline-flex w-8 h-8 justify-center items-center p-1 font-semibold rounded-full bg-accent dark:bg-accent-dark">{number}</span>
+                    <span className={`font-bold transition-all ${isOpen ? 'text-xl' : 'text-[17px]'}`}>{title}</span></span>
+                <span>
+                    {isOpen ? <IconMinus className="size-4 inline-block transform rotate-180" /> : <IconPlus className="size-4 inline-block transform rotate-0" />}
+                </span>
+            </button>
             <div
                 ref={contentRef}
                 style={{ height: contentHeight, overflow: 'hidden', transition: 'height 0.3s ease' }}
             >
-                <div className="bg-white p-4">
+                <div className="bg-white shadow-lg rounded-bl rounded-br p-4">
                     {children}
                 </div>
             </div>
@@ -62,7 +69,7 @@ const Accordion = ({ items }) => {
     };
 
     return (
-        <div>
+        <div className="space-y-px">
             {items.map((item, index) => (
                 <AccordionItem
                     key={index}
@@ -154,7 +161,7 @@ function Sales() {
                 </div>
 
                 <div className="max-w-7xl mx-auto py-8 px-4 md:px-8">
-                    <h2 className="pb-4 text-center">
+                    <h2 className="pb-4">
                         The sales process at
                         <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mx-1 min-w-[24rem] inline-flex gap-2 justify-between relative overflow-hidden after:absolute after:-bottom-6 after:left-0 after:content-['[Typical,_stuffy_enterprise_SaaS_sales_company]'] after:text-sm after:text-primary/75 dark:after:text-primary-dark/75 after:font-normal after:tracking-normal">
                             <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
@@ -169,7 +176,6 @@ function Sales() {
                         </span>{' '}
                     </h2>
 
-                    <h2>Them</h2>
                     <Accordion items={them} />
                     <h2>Us</h2>
                     <Accordion items={us} />
