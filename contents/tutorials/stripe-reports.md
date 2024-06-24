@@ -14,7 +14,7 @@ This tutorial shows you how to sync your Stripe data to PostHog and then create 
 ## Linking Stripe data to PostHog
 
 To start, you need both a Stripe and PostHog account. Once have those, head to PostHog's [data warehouse tab](https://us.posthog.com/data-warehouse) and:
-1. Click **Link source**. 
+1. Click **Link source**
 2. Choose the Stripe option by clicking **Link**
 3. Enter [your account ID](https://dashboard.stripe.com/settings/user) and a [restricted API key](https://dashboard.stripe.com/apikeys/create) that can read the resources you want to query
 4. Press **Next**, keep all tables selected and click **Import**
@@ -29,6 +29,7 @@ To start, you need both a Stripe and PostHog account. Once have those, head to P
 Once done, PostHog will automatically pull and format your Stripe data for querying. You can adjust the sync frequency, see the last successful run, and more in [data warehouse settings](https://us.posthog.com/data-warehouse/settings/managed).
 
 > **Note:** If you are missing a table, check your [data warehouse settings](https://us.posthog.com/data-warehouse/settings/managed) to make sure it synced correctly.
+
 ## Creating insights for your Stripe report
 
 Now that your Stripe data is synced into PostHog, you can use it to create insights for your report. Each of these requires you to create a [new insight in the product analytics tab](https://us.posthog.com/project/insights/new).
@@ -61,7 +62,7 @@ Finally, to clean up the visualization, click **enable formula mode** to divide 
   classes="rounded"
 />
 
-### Monthly recurring revenue
+### Monthly recurring revenue (average revenue per customer)
 
 There are many ways to calculate monthly recurring revenue, but the easiest and most common is multiplying the number of customers by the average revenue per customer per month.
 
@@ -77,6 +78,45 @@ Finally, we use formula mode to divide the amount by 100 and then multiply by th
   alt="Monthly Recurring Revenue Insights"
   classes="rounded"
 />
+
+### Monthly recurring revenue (the Stripe way)
+
+[Stripe calculates MRR](https://support.stripe.com/questions/calculating-monthly-recurring-revenue-(mrr)-in-billing) by "summing the monthly-normalized amounts of all active subscriptions at that time." 
+
+To mimic this calculation in PostHog, we need to write an [SQL query](/docs/product-analytics/sql) that gets all the subscription items, normalizes the subscription amount, and then sums them up for each month. Because a lot of this data is in `JSON`, we need to extract the values.
+
+```sql
+WITH subscription_items AS (
+    SELECT
+        id,
+        current_period_start,
+        JSONExtractArrayRaw(items, 'data') AS data_items
+    FROM stripe_subscription
+),
+flattened_items AS (
+    SELECT
+        id,
+        current_period_start,
+        arrayJoin(data_items) AS item
+    FROM subscription_items
+)
+SELECT
+    toStartOfMonth(current_period_start) AS month,
+    sum(
+        case
+            when JSONExtractString(JSONExtractRaw(item, 'plan'), 'interval') = 'month' 
+                then JSONExtractFloat(JSONExtractRaw(item, 'plan'), 'amount')
+            when JSONExtractString(JSONExtractRaw(item, 'plan'), 'interval') = 'year' 
+                then JSONExtractFloat(JSONExtractRaw(item, 'plan'), 'amount') / 12
+            else 0
+        end
+    ) / 100 AS MRR
+FROM flattened_items
+WHERE 
+    JSONExtractBool(JSONExtractRaw(item, 'plan'), 'active') = true
+GROUP BY month
+ORDER BY month DESC
+```
 
 ### Revenue churn
 
@@ -103,7 +143,7 @@ where empty(subscribed_customers.customer_id)
 
 ### Revenue growth rate
 
-Querying revenue growth rates gets more complicated than this. We still query `stripe_invoice` to get the monthly amount paid sum, but then we use window functions to calculate growth. These smooth out the month-over-month changes to give us a 3-month average to use in our growth rate calculation.
+To get revenue growth rate, query `stripe_invoice` to get the monthly amount paid sum, but then we use window functions to calculate growth. These smooth out the month-over-month changes to give us a 3-month average to use in our growth rate calculation.
 
 ```sql
 WITH monthly_mrr AS (
@@ -177,8 +217,8 @@ order by total_paid desc
 
 You can further break this down by filtering for specific events like `home_api_called`.
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/top_light2_bd42a8c5d9.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/top_dark2_d9f38d23a0.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/top_light2_c7e1feff7f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/top_dark2_44770c94b4.png"
   alt="Top customers usage graph"
   classes="rounded"
 />
