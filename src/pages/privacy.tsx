@@ -1179,7 +1179,56 @@ function Privacy() {
                     </div>
                     <div></div>
                     <div className="pb-12">
-                        full content
+                        <p>This section sets out how we collect, store, and process personal information as part of our recruitment process. It only applies to users of our website who submit an application for one of our open roles and is supplemental to the above Privacy Policy.</p>
+                        <p>We use <Link href="https://www.ashbyhq.com/" external>Ashby</Link>, an online application provided by Ashby Inc., to assist with our recruitment process. We use Ashby to process personal information as a data processor on our behalf. Ashby is only entitled to process your personal data in accordance with our instructions.</p>
+                        <p>Where you apply for a job opening posted by us, these provisions will apply to our processing of your personal information. When you apply for a job opening via the application function on a job site like LinkedIn or similar online service provider (referred to below as a “Partner”), you should note that the relevant Partner may retain your personal data and may also collect data from us in respect of the progress of your application. Any use by the Partner of your data will be in accordance with the Partner’s privacy policy.</p>
+                        <h3 id="information-we-collect-from-applicants">Information we collect from applicants</h3>
+                        <h4 id="information-we-collect-from-you">Information we collect from you</h4>
+                        <p className="mb-2">We collect and process some or all of the following types of information from you:</p>
+                        <ul>
+                            <li>Information you provide when you apply for a role, including contact details such as name, email address, physical address, telephone number</li>
+                            <li>Information relating to your employment history such as resumé/CV, employment history, qualifications and skills</li>
+                            <li>If you contact us, we may keep a record of that correspondence</li>
+                            <li>A record of your progress through any hiring process that we may conduct</li>
+                            <li>Details of your visits to Ashby’s Website including, but not limited to, traffic data, location data, weblogs and other communication data, the site that referred you to Ashby’s Website and the resources that you access.</li>
+                        </ul>
+                        <h4 id="information-we-collect-from-other-sources">Information we collect from other sources</h4>
+                        <ul>
+                            <li>Ashby provides PostHog with the ability to link the data you provide to us, with other publicly available information about you that you have published online, such as on LinkedIn, GitHub or other public social media profiles.</li>
+                            <li>Ashby allows PostHog to search various databases which may include your personal data (including your CV or Résumé), to find possible candidates to fill our job openings. Where we find you in this way, we will obtain your personal data from these sources.</li>
+                            <li>We may receive your personal data from a third party who recommends you as a candidate for a specific job opening or for our business more generally.</li>
+                        </ul>
+                        <h3 id="how-we-use-applicant-information">How we use applicant information</h3>
+                        <p className="mb-2">We <em>only</em> collect and use your personal information for the following purposes:</p>
+                        <ul>
+                            <li>To communicate with you about the role you have applied for and to manage the recruitment process</li>
+                            <li>To consider your application for potential future job opportunities</li>
+                        </ul>
+                        <p>We will never use a candidate's personal information for marketing purposes. </p>
+                        <h3 id="lawful-basis-and-purposes-for-processing-applicant-personal-information">Lawful basis and purposes for processing applicant personal information</h3>
+                        <p>If you are a national of countries in the European Economic Area (EEA), United Kingdom, or Switzerland, we collect and process your personal information on the following legal bases set out by applicable law:</p>
+                        <p><strong>Consent:</strong> We may ask you for your consent to process your personal information. You can withdraw your consent at any time, which will not affect the lawfulness of the processing before your consent was withdrawn.</p>
+                        <p><strong>Legitimate Interest:</strong> We process certain personal information for our legitimate interests. These legitimate interests include, for example, running our recruitment process and managing applicants.</p>
+                        <p><strong>Compliance with Legal Obligations</strong>: In some cases, we may have a legal obligation to process your personal information, such as to meet our legal requirements or in response to a court or regulatory order. We also may need to process your personal information to protect vital interests, or to exercise, establish, or defend legal claims.</p>
+                        <h3 id="international-data-transfer-of-applicant-data">International data transfer of applicant data</h3>
+                        <p>Your personal information may be processed in the United States, the country where you have applied for a job, or any other country where PostHog has team members or operations.</p>
+                        <p>PostHog may transfer, store, or process your personal information in a country outside your jurisdiction, including countries outside the European Economic Area (“EEA”), Switzerland, and the United Kingdom. If we transfer personal information from the EEA, Switzerland, or United Kingdom to a country outside it, such as the United States, we will enter into Standard Contractual Clauses (“SCCs”) approved by the EU Commission or by the UK Government,  with the data importer, or take other measures to provide an adequate level of data protection.</p>
+                        <h3 id="how-long-we-keep-applicant-personal-data">How long we keep applicant personal data</h3>
+                        <p>We will hold all the data for 24 months. Prior to that, your personal information will be deleted if:</p>
+                        <ul>
+                            <li>You delete your personal information; or</li>
+                            <li>You write to us asking us to delete your personal information.</li>
+                        </ul>
+                        <h3 id="your-rights-and-choices-as-an-applicant">Your rights and choices as an applicant</h3>
+
+                        <p>Please see the section on <SmoothScrollLink
+                            to="privacy-practices"
+                            spy={true}
+                            smooth={true}
+                            offset={-128}
+                            duration={1500}
+                            className="cursor-pointer"
+                        >Global Privacy Practices and Your Rights</SmoothScrollLink> above.</p>
                     </div>
                     <div className="">
                         summary
