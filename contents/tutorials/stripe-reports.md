@@ -13,7 +13,11 @@ This tutorial shows you how to sync your Stripe data to PostHog and then create 
 
 ## Linking Stripe data to PostHog
 
-To start, you need both a Stripe and PostHog account. Once have those, head to PostHog's [data warehouse tab](https://us.posthog.com/data-warehouse) and click **Link source**. Choose the Stripe option by clicking **Link**, and then enter your account ID and client secret, and press **Next**. Keep all tables selected and click **Import**. 
+To start, you need both a Stripe and PostHog account. Once have those, head to PostHog's [data warehouse tab](https://us.posthog.com/data-warehouse) and:
+1. Click **Link source**. 
+2. Choose the Stripe option by clicking **Link**
+3. Enter [your account ID](https://dashboard.stripe.com/settings/user) and a [restricted API key](https://dashboard.stripe.com/apikeys/create) that can read the resources you want to query
+4. Press **Next**, keep all tables selected and click **Import**
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/link_light_d827d9f83f.png"
@@ -24,6 +28,7 @@ To start, you need both a Stripe and PostHog account. Once have those, head to P
 
 Once done, PostHog will automatically pull and format your Stripe data for querying. You can adjust the sync frequency, see the last successful run, and more in [data warehouse settings](https://us.posthog.com/data-warehouse/settings/managed).
 
+> **Note:** If you are missing a table, check your [data warehouse settings](https://us.posthog.com/data-warehouse/settings/managed) to make sure it synced correctly.
 ## Creating insights for your Stripe report
 
 Now that your Stripe data is synced into PostHog, you can use it to create insights for your report. Each of these requires you to create a [new insight in the product analytics tab](https://us.posthog.com/project/insights/new).
