@@ -405,11 +405,11 @@ function Sales() {
         // parent={sexyLegalMenu}
         // activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'privacy')}
         >
-            <SEO title='How we do "sales"' description="Sales, PostHog style" image={`/images/og/sales.png`} />
+            <SEO title='Sales, PostHog style' description="We actually don't make you get on a call to find out our pricing." image={`/images/og/sales.png`} />
             <div>
-                <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-8 pt-12 pb-12">
-                    <div>
-                        <h1 className="text-5xl mb-2">Sales, <em className="text-red dark:text-yellow">PostHog-style</em></h1>
+                <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 py-6 md:py-12">
+                    <div className="order-2 md:order-1 px-4 md:px-8">
+                        <h1 className="text-[2.25rem] md:text-5xl mb-2">Sales, <em className="text-red dark:text-yellow">PostHog-style</em></h1>
 
                         <p className="mt-2 text-lg font-semibold mb-2 opacity-60">
                             Because nobody loves pricing pages that don't contain any actual pricing...
@@ -425,13 +425,13 @@ function Sales() {
                             <Tooltip content="Discounts available to early-stage startups, non-profits, and customers who pay annually." className="border-b-2 pb-0.5 border-dashed border-border dark:border-dark"><span className="relative cursor-help">discount</span></Tooltip>
                         </p>
                     </div>
-                    <div className="relative">
-                        <div className="absolute top-0 left-0 bottom-0">
+                    <div className="relative order-1 md:order-2">
+                        <div className="md:absolute md:top-0 md:left-0 md:bottom-0">
                             <StaticImage
                                 quality={100}
                                 placeholder="none"
                                 src="../images/sales/phone-hog-light.png"
-                                className="h-72"
+                                className="h-48 md:h-72"
                                 loading="eager"
                                 objectPosition="left top"
                                 objectFit="cover"
@@ -451,24 +451,24 @@ function Sales() {
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto py-8 px-4 md:px-8">
+                <div className="max-w-7xl mx-auto md:py-8 px-4 md:px-8">
                     <div className="flex justify-center">
                         <div className="inline-flex flex-col items-center mb-6 mx-auto">
-                            <h2 className="mb-1">
+                            <h2 className="mb-1 text-center relative">
                                 How the sales process works at
-                                <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mx-1 min-w-[24rem] inline-flex gap-2 justify-between relative overflow-hidden after:absolute after:-bottom-6 after:left-0 after:content-['[Typical,_stuffy_enterprise_SaaS_sales_company]'] after:text-sm after:text-primary/75 dark:after:text-primary-dark/75 after:font-normal after:tracking-normal">
+                                <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mx-1 w-[calc(100vw_-_2rem)] md:w-auto md:min-w-[24rem] inline-flex gap-2 justify-center md:justify-between relative overflow-hidden after:absolute after:-bottom-6 after:left-0 after:content-['[Typical,_stuffy_enterprise_SaaS_sales_company]'] after:text-sm after:text-primary/75 dark:after:text-primary-dark/75 after:font-normal after:tracking-normal">
                                     <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
                                         <span>{companyName}</span>
                                     </CSSTransition>
                                     <span
                                         onClick={updateCompanyName}
-                                        className="relative -top-0.5 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30"
+                                        className="absolute right-0 md:relative md:right-initial -top-0.5 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30"
                                     >
                                         <IconRedo className="size-5 inline-block text-red/90 hover:text-red/100 dark:text-white/70 dark:group-hover:text-white/100" />
                                     </span>
                                 </span>{' '}
                             </h2>
-                            <div className="min-w-[24rem] text-xs opacity-60 self-end">
+                            <div className="text-center md:text-left w-full md:w-auto md:min-w-[24rem] text-xs opacity-60 md:self-end">
                                 [Insert your least favorite enterprise SaaS company here]
                             </div>
                         </div>
