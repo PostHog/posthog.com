@@ -85,20 +85,10 @@ const CommunityBar = () => {
 }
 
 export const Skeleton = () => {
-    const [count, setCount] = useState(1)
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCount(count + 1)
-        }, 1000)
-
-        return () => clearInterval(interval)
-    }, [count])
-
-    return Array.from(Array(count)).map((_, i) => (
-        <div key={`skeleton-${i}`} className="flex items-center space-x-2 w-full my-2 px-6">
-            <div className="w-4/5 bg-accent dark:bg-accent-dark animate-pulse h-[20px] rounded-md" />
-            <div className="w-2/5 bg-accent dark:bg-accent-dark animate-pulse h-[20px] rounded-md" />
+    return Array.from(Array(30)).map((_, i) => (
+        <div key={`skeleton-${i}`} className="flex items-center space-x-2 w-full my-3 px-6">
+            <div className="w-4/5 bg-accent dark:bg-accent-dark animate-pulse h-[30px] rounded-md" />
+            <div className="w-2/5 bg-accent dark:bg-accent-dark animate-pulse h-[30px] rounded-md" />
         </div>
     ))
 }
