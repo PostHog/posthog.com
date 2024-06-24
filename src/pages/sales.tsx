@@ -8,6 +8,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { IconArrowRight, IconMinus, IconPlus, IconRedo } from '@posthog/icons'
 import { CSSTransition } from 'react-transition-group'
 import { CallToAction } from 'components/CallToAction'
+import Logo from 'components/Logo'
 
 const them = [
     {
@@ -24,6 +25,7 @@ const them = [
                 <StaticImage
                     quality={90}
                     placeholder="blurred"
+                    loading="eager"
                     src="../images/sales/demo-form.png"
                     width={294}
                 />
@@ -51,7 +53,7 @@ const them = [
     },
     {
         title: 'Finally, a demo!',
-        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
             <p>
                 Deemed worthy? They will book you into a further call for a demo with a different person, five minutes of which will cover what you are specifically interested in.</p>
             <p>
@@ -59,12 +61,12 @@ const them = [
             </p>
         </div>
 
-            <div className="col-span-3 -mt-4 pb-6 rotate-2">
+            <div className="col-span-4 -mt-4 pb-6 rotate-2">
                 <StaticImage
                     quality={90}
                     placeholder="blurred"
                     src="../images/sales/sdr-on-zoom.png"
-                    width={326}
+                    width={505.5}
                 />
             </div>
         </>
@@ -82,7 +84,7 @@ const them = [
     },
     {
         title: 'Sticker shock',
-        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+        children: <><div className="col-span-3 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
             <p>
                 There will be a long period of commercial wrangling because they massively inflated the price so they can then discount it heavily.
             </p>
@@ -91,12 +93,12 @@ const them = [
             </p>
         </div>
 
-            <div className="col-span-4 text-center -mt-12">
+            <div className="col-span-5 text-center -mt-12">
                 <StaticImage
                     quality={90}
                     placeholder="blurred"
                     src="../images/sales/receipt.png"
-                    width={472}
+                    width={613}
                 />
             </div>
         </>
@@ -226,21 +228,25 @@ const AccordionItem = ({ number, title, children, isOpen, onClick }) => {
                         {children}
 
                         <div className="absolute left-9 bottom-6">
-
-                            <CallToAction to="#" className="" size="sm" type="secondary">
-                                Next step
-                                <IconArrowRight className="size-4 inline-block ml-1" />
-                            </CallToAction>
+                            {number < 9 ? (
+                                <CallToAction to="#" className="" size="sm" type="secondary">
+                                    <span className="mr-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark px-1.5 rounded border-b-2 inline-flex text-sm font-medium font-code">N</span>
+                                    Next step
+                                    <IconArrowRight className="size-4 inline-block ml-1" />
+                                </CallToAction>
+                            ) : (
+                                <>
+                                    <CallToAction href="https://app.posthog.com/signup">Get started - free</CallToAction>&nbsp;&nbsp;
+                                    <CallToAction href="/demo" type="outline">
+                                        Schedule a demo (but not like this one!)
+                                    </CallToAction>
+                                </>
+                            )}
                         </div>
                     </div>
-
-
-
-
-
                 </div>
             </div>
-        </li>
+        </li >
     );
 };
 
@@ -310,7 +316,7 @@ function Sales() {
             <div>
                 <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-8 pt-12 pb-12">
                     <div>
-                        <h1 className="text-5xl mb-2">How we do "sales"</h1>
+                        <h1 className="text-5xl mb-2">Sales, <em className="text-red dark:text-yellow">PostHog-style</em></h1>
 
                         <p className="mt-2 text-lg font-semibold mb-2 opacity-60">
                             Because nobody loves pricing pages that don't contain any actual pricing...
@@ -321,7 +327,10 @@ function Sales() {
                         <p className="mb-2">
                             We’re more like a utility where you pay for what you use. No extra markup - everyone pays the same rates*.
                         </p>
-                        <p className="opacity-60 text-sm">*Unless you qualify for a discount</p>
+                        <p className="opacity-60 text-sm">
+                            *Unless you qualify for a{' '}
+                            <Tooltip content="Discounts available to early-stage startups, non-profits, and customers who pay annually." className="border-b-2 pb-0.5 border-dashed border-border dark:border-dark"><span className="relative cursor-help">discount</span></Tooltip>
+                        </p>
                     </div>
                     <div className="relative">
                         <div className="absolute top-0 left-0 bottom-0">
@@ -350,27 +359,34 @@ function Sales() {
                 </div>
 
                 <div className="max-w-7xl mx-auto py-8 px-4 md:px-8">
-                    <h2 className="pb-4">
-                        The sales process at
-                        <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mx-1 min-w-[24rem] inline-flex gap-2 justify-between relative overflow-hidden after:absolute after:-bottom-6 after:left-0 after:content-['[Typical,_stuffy_enterprise_SaaS_sales_company]'] after:text-sm after:text-primary/75 dark:after:text-primary-dark/75 after:font-normal after:tracking-normal">
-                            <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
-                                <span>{companyName}</span>
-                            </CSSTransition>
-                            <span
-                                onClick={updateCompanyName}
-                                className="relative -top-0.5 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30"
-                            >
-                                <IconRedo className="size-5 inline-block text-red/90 hover:text-red/100 dark:text-white/70 dark:group-hover:text-white/100" />
-                            </span>
-                        </span>{' '}
-                    </h2>
+                    <div className="flex justify-center">
+                        <div className="inline-flex flex-col items-center mb-6 mx-auto">
+                            <h2 className="mb-1">
+                                How the sales process works at
+                                <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mx-1 min-w-[24rem] inline-flex gap-2 justify-between relative overflow-hidden after:absolute after:-bottom-6 after:left-0 after:content-['[Typical,_stuffy_enterprise_SaaS_sales_company]'] after:text-sm after:text-primary/75 dark:after:text-primary-dark/75 after:font-normal after:tracking-normal">
+                                    <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
+                                        <span>{companyName}</span>
+                                    </CSSTransition>
+                                    <span
+                                        onClick={updateCompanyName}
+                                        className="relative -top-0.5 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30"
+                                    >
+                                        <IconRedo className="size-5 inline-block text-red/90 hover:text-red/100 dark:text-white/70 dark:group-hover:text-white/100" />
+                                    </span>
+                                </span>{' '}
+                            </h2>
+                            <div className="min-w-[24rem] text-xs opacity-60 self-end">
+                                [Insert your least favorite enterprise SaaS company here]
+                            </div>
+                        </div>
+                    </div>
 
                     <Accordion items={them} />
 
                     <br />
                     <br />
                     <br />
-                    <h2>How PostHog does sales</h2>
+                    <h2 className="flex items-center">How <Logo className="inline-block mt-[-2px] ml-2 mr-1.5" /> does sales</h2>
                     <Accordion items={us} />
                 </div>
             </div>
