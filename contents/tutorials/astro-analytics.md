@@ -175,7 +175,7 @@ When you go back to your app and click the button, you then see a `praise_receiv
 
 To use a feature flag in your app, first, you must create it in PostHog. Go to the [feature flags tab](https://app.posthog.com/feature_flags), click "New feature flag," add a key (we chose `new-button`), set the release condition to 100% of users, and click "Save."
 
-With the feature flag, go back to your home page at `components/posthog.astro`. Add the `loaded:` argument to your snippet and implement the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback to update the button text depending on the flag value. If enabled, change the `innerHTML` of your button.
+With the feature flag, go back to your home page at `components/posthog.astro`. Add the `loaded:` argument to your snippet and implement the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback to update the button text depending on the flag value. If enabled, change the `innerText` of your button.
 
 ```js
 ---
