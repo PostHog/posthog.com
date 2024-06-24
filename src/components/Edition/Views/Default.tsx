@@ -289,7 +289,7 @@ function PostsListing() {
                 transition-all 
                 ${
                     articleView
-                        ? 'flex flex-col h-auto sticky top-0 z-10 reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
+                        ? 'hidden md:flex flex-col h-auto sticky top-0 z-10 reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
                         : 'flex-grow md:px-8 2xl:px-12'
                 }
             `}
