@@ -680,7 +680,6 @@ const PlansTabs = () => {
                             </div>
                             <ul className="tw-check-bullets">
                                 <li>SAML SSO enforcement</li>
-                                <li>Teams add-on included</li>
                                 <li>Custom MSA</li>
                                 <li>Priority training, support</li>
                                 <li>Advanced permissions</li>
