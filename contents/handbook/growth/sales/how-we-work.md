@@ -84,3 +84,35 @@ Other metrics we care about:
 ## Travel to see customers
 
 You are likely to need to travel a lot more than the typical PostHog team member in order to meet customers. Please make sure that you follow our company [travel policy](/handbook/people/spending-money) and act in PostHog's best interests. We trust you to do the right thing here and won't pre-approve your travel plans, but we do keep track of what people are spending and the Ops team will follow up with you if it looks like you are wasting money here. We are not a giant company that pays for fancy flights, accommodation, and meals so please be sensible. 
+
+## Sales team guidelines
+
+### Key Principles
+- Understand our [ICP](https://posthog.com/handbook/who-we-are-building-for): Focus on understanding our users' needs and providing solutions that genuinely help them.
+- Build Credibility: Use PostHog to gain insights into user behavior and demonstrate how our products can solve their problems. Building trust and credibility through helpfulness and relevant information is essential.
+
+### Approach to Existing Accounts
+- Assess Account Activity: Monitor account activity to gauge interest. If an account shows high engagement (e.g., frequent usage, many active users), prioritize a more assertive approach.
+- Personalization: Tailor your outreach to the specific needs and usage patterns of the account. Highlight how our features address their needs.
+- Value-Driven Communication: Focus on providing value rather than just making a sale. Share insights and best practices relevant to their use case/industry.
+- Frequency: Regular but not intrusive. Aim for touchpoints every 2-3 weeks, adjusting based on account responses and activity.
+
+### Introducing Additional Products
+- Initial Onboarding: During the onboarding phase, mention additional products as part of the broader ecosystem but don't push for immediate adoption.
+- Usage Milestones: When an account reaches certain usage milestones or expresses satisfaction with the current product, introduce complementary products that can enhance their experience. Some of the milestones are:
+  - User Activation and Engagement (sign ups, active user %, turning on new features)
+  - Changes in Data Volume or Usage
+  - High CSAT scores on support tickets
+- Quarterly Business Reviews (QBRs): Bring up the idea of scheduling QBRs as part of the contract discussion. If a client shows interest, schedule it right after contract signing to have regular touchpoints to discuss their needs and how additional products can provide further value.
+- Customer Feedback: If customers express specific needs or pain points that other products can address, position those products as solutions.
+
+### Knowing When to Step Back
+- Non-Responsive Accounts: If an account is unresponsive after 3-4 attempts, reduce the frequency of outreach and pivot to a more passive approach.
+- Explicit Declines: Respect explicit requests to not be contacted or to slow down outreach. Note these preferences in Salesforce.
+- Negative Feedback: If an account provides negative feedback about our approach, apologize and adjust the strategy accordingly. Prioritize maintaining a positive relationship over immediate sales.
+- Internal Benchmarks: If an account hasn't shown interest after 6 months of targeted efforts, reduce direct sales efforts and focus on automated nurturing.
+
+### Enterprise plans
+- Transparency: Clearly communicate the value of our enterprise pricing. Provide detailed breakdowns of features, support levels, and customization options included at this tier.
+- Negotiation: Be prepared for negotiations. Have a clear bottom line but be willing to offer incentives such as extended trial periods or future discounts for long-term commitments.
+- Consistent Follow-Up: After presenting enterprise pricing, follow up consistently but respect the decision-making process of larger organizations, which can take longer.
