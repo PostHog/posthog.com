@@ -40,7 +40,7 @@ Each should be ~3-4 items long - that's it. You will know when you see a great r
 
 This is nice for the candidate, but more importantly it forces _you_ to figure out how you are going to decide whether a candidate is great or not. A series of random chats with the team is not going to give you the signal you need. 
 
-Even if you are a tiny team, you can still take 15min to figure this out and save yourself a lot of pain improvising the next step and getting stressed you haven't got back to a candidate. 
+Even if you are a tiny team, you can still take 15 minutes to figure this out and save yourself a lot of pain improvising the next step and getting stressed you haven't got back to a candidate. 
 
 **Time zones**
 
