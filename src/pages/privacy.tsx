@@ -370,7 +370,7 @@ function Privacy() {
                     <div className="hidden md:block">
                         <h3 className="hidden md:block">What it means</h3>
                     </div>
-                    <div>
+                    <div className="md:pb-12">
                         <p>
                             This privacy policy ("Privacy Policy") applies to all visitors and customers of the
                             PostHog.com hosted services and websites (collectively, the "Website" or "Websites") and
@@ -571,7 +571,7 @@ function Privacy() {
                         </h2>
                     </div>
                     <div></div>
-                    <div>
+                    <div className="md:pb-12">
                         <p>
                             PostHog does not intentionally collect sensitive or special category personal information,
                             such as genetic data, biometric data for the purposes of uniquely identifying a natural
@@ -649,7 +649,7 @@ function Privacy() {
                         <p>We only use your information for stuff we actually need.</p>
                     </div>
 
-                    <div>
+                    <div className="md:pb-12">
                         <p className="mb-2">
                             <strong>Consent</strong>
                             <br />
@@ -755,7 +755,7 @@ function Privacy() {
                         <p>PostHog is a US business, but we also have a UK company.</p>
                     </div>
 
-                    <div>
+                    <div className="md:pb-12">
                         <p>
                             <strong>Legal Requirements.</strong> We may disclose personal information to government
                             authorities or other third-parties if required to do so by law or in the good faith belief
@@ -897,7 +897,7 @@ function Privacy() {
                         </h3>
                     </div>
                     <div></div>
-                    <div>
+                    <div className="md:pb-12">
                         <p>
                             If you are a registered user of the Websites and have supplied your email address, PostHog
                             may occasionally send you an email to tell you about security, system information, new
@@ -971,7 +971,7 @@ function Privacy() {
                         </h3>
                     </div>
                     <div></div>
-                    <div>
+                    <div className="md:pb-12">
                         <p>
                             "Do Not Track" is a privacy preference you can set in your browser if you do not want online
                             services to collect and share certain kinds of information about your online activity from
@@ -996,7 +996,7 @@ function Privacy() {
                         </h2>
                     </div>
                     <div></div>
-                    <div>
+                    <div className="md:pb-12">
                         <p>
                             Information we collect may be stored and processed in the United States in accordance with
                             this Privacy Policy but we understand that users from other countries may have different
@@ -1093,7 +1093,7 @@ function Privacy() {
                         </h2>
                     </div>
                     <div></div>
-                    <div className="pb-12">
+                    <div className="md:pb-12">
                         <p>
                             If you already have an account on the Websites, you may access, update, alter, or delete
                             your basic customer profile information by logging into your account and updating profile
@@ -1143,7 +1143,7 @@ function Privacy() {
                         </h2>
                     </div>
                     <div></div>
-                    <div className="pb-12">
+                    <div className="md:pb-12">
                         <h3>Introduction</h3>
                         <p>This Addendum (“Addendum”) forms part of the Privacy Policy, and of any superseding written agreement, entered by and between you, the Customer (as defined in the Agreement) (“Customer”), and PostHog Inc. (“PostHog”; and collectively – the “Agreement”).</p>
                         <p>This Addendum reflects the parties’ desire and intent to modify and amend the Agreement, in accordance with the terms and conditions hereinafter set forth, with regard to the processing of Customer Personal Information (as defined below) by PostHog on behalf of the Customer.</p>
@@ -1169,7 +1169,10 @@ function Privacy() {
                         <p>In the event of any conflict or inconsistency between the terms of this Addendum and the terms of the Agreement with respect to the subject matter hereof and solely where U.S. Data Protection Laws apply, the terms of this Addendum shall control.</p>
                     </div>
                     <div>
-                        <p>ccpa addendum summary</p>
+                        <p>This section is specific to California residents.</p>
+                        <p>PostHog acts as a "Service Provider" and processes your personal information only to provide services, not selling it.</p>
+                        <p>We cannot use or disclose your personal information for other purposes and must comply with U.S. Data Protection Laws. We'll help you with data access, erasure, or opt-out requests.</p>
+                        <p>In case of any conflict between this Addendum and the main agreement regarding U.S. Data Protection Laws, this Addendum prevails.</p>
                     </div>
 
                     <div>
@@ -1178,7 +1181,7 @@ function Privacy() {
                         </h2>
                     </div>
                     <div></div>
-                    <div className="pb-12">
+                    <div>
                         <p>This section sets out how we collect, store, and process personal information as part of our recruitment process. It only applies to users of our website who submit an application for one of our open roles and is supplemental to the above Privacy Policy.</p>
                         <p>We use <Link href="https://www.ashbyhq.com/" external>Ashby</Link>, an online application provided by Ashby Inc., to assist with our recruitment process. We use Ashby to process personal information as a data processor on our behalf. Ashby is only entitled to process your personal data in accordance with our instructions.</p>
                         <p>Where you apply for a job opening posted by us, these provisions will apply to our processing of your personal information. When you apply for a job opening via the application function on a job site like LinkedIn or similar online service provider (referred to below as a “Partner”), you should note that the relevant Partner may retain your personal data and may also collect data from us in respect of the progress of your application. Any use by the Partner of your data will be in accordance with the Partner’s privacy policy.</p>
@@ -1198,7 +1201,15 @@ function Privacy() {
                             <li>Ashby allows PostHog to search various databases which may include your personal data (including your CV or Résumé), to find possible candidates to fill our job openings. Where we find you in this way, we will obtain your personal data from these sources.</li>
                             <li>We may receive your personal data from a third party who recommends you as a candidate for a specific job opening or for our business more generally.</li>
                         </ul>
+                    </div>
+                    <div>
+                        <p>When you apply for a job with us, we collect and process your personal information using Ashby, our applicant tracking system. We may also get information from public sources like LinkedIn.</p>
+                    </div>
+                    <div>
                         <h3 id="how-we-use-applicant-information">How we use applicant information</h3>
+                    </div>
+                    <div></div>
+                    <div>
                         <p className="mb-2">We <em>only</em> collect and use your personal information for the following purposes:</p>
                         <ul>
                             <li>To communicate with you about the role you have applied for and to manage the recruitment process</li>
@@ -1210,7 +1221,15 @@ function Privacy() {
                         <p><strong>Consent:</strong> We may ask you for your consent to process your personal information. You can withdraw your consent at any time, which will not affect the lawfulness of the processing before your consent was withdrawn.</p>
                         <p><strong>Legitimate Interest:</strong> We process certain personal information for our legitimate interests. These legitimate interests include, for example, running our recruitment process and managing applicants.</p>
                         <p><strong>Compliance with Legal Obligations</strong>: In some cases, we may have a legal obligation to process your personal information, such as to meet our legal requirements or in response to a court or regulatory order. We also may need to process your personal information to protect vital interests, or to exercise, establish, or defend legal claims.</p>
+                    </div>
+                    <div>
+                        <p>We use your data to manage the hiring process and for future job opportunities, but never for marketing.</p>
+                    </div>
+                    <div>
                         <h3 id="international-data-transfer-of-applicant-data">International data transfer of applicant data</h3>
+                    </div>
+                    <div></div>
+                    <div className="md:pb-12">
                         <p>Your personal information may be processed in the United States, the country where you have applied for a job, or any other country where PostHog has team members or operations.</p>
                         <p>PostHog may transfer, store, or process your personal information in a country outside your jurisdiction, including countries outside the European Economic Area (“EEA”), Switzerland, and the United Kingdom. If we transfer personal information from the EEA, Switzerland, or United Kingdom to a country outside it, such as the United States, we will enter into Standard Contractual Clauses (“SCCs”) approved by the EU Commission or by the UK Government,  with the data importer, or take other measures to provide an adequate level of data protection.</p>
                         <h3 id="how-long-we-keep-applicant-personal-data">How long we keep applicant personal data</h3>
@@ -1231,7 +1250,7 @@ function Privacy() {
                         >Global Privacy Practices and Your Rights</SmoothScrollLink> above.</p>
                     </div>
                     <div>
-                        <p>job applications summary</p>
+                        <p>If you're from the EEA, UK, or Switzerland, we handle your data based on consent, legitimate interest, or legal obligations. Your data may be processed outside your country, and we keep it for 24 months unless you ask us to delete it.</p>
                     </div>
 
                     <div>
@@ -1240,12 +1259,12 @@ function Privacy() {
                         </h2>
                     </div>
                     <div></div>
-                    <div className="pb-12">
+                    <div className="md:pb-12">
                         <p>If you need to enter into a Data Processing Agreement with us, the version you need will depend on whether you have signed up for PostHog Cloud in the US or EU. Please visit our <Link href="/dpa">world-class DPA generator</Link> and follow the instructions to have it counter-signed by PostHog.</p>
                         <p>For the avoidance of doubt, if you use PostHog Cloud EU, no PII data is transferred to the US.</p>
                     </div>
                     <div>
-                        <p>dpa summary</p>
+                        <p>We'll counter-sign a data processing agreement after you generate one in our DPA generator and send it to us.</p>
                     </div>
 
                     <div>
@@ -1254,11 +1273,11 @@ function Privacy() {
                         </h2>
                     </div>
                     <div></div>
-                    <div className="pb-12">
+                    <div className="md:pb-12">
                         <p>You can <Link href="/handbook/company/security">view our complete set of security measures</Link> for SOC 2, GDPR, and CCPA.</p>
                     </div>
                     <div>
-                        <p>security measures summary</p>
+                        <p>Our internal security practices are available in our public handbook.</p>
                     </div>
 
                     <div>
@@ -1267,7 +1286,7 @@ function Privacy() {
                         </h2>
                     </div>
                     <div></div>
-                    <div className="pb-12">
+                    <div className="md:pb-12">
 
                         <p>The relevant data controller for any personal information processed in connection with our Websites or self-managed installations is PostHog Inc, 2261 Market Street #4008, San Francisco, CA 94114. If you apply for a job with us, the relevant data controller is the country-specific PostHog entity which will be your employer.</p>
 
@@ -1280,16 +1299,22 @@ function Privacy() {
                         <p>If you have questions or concerns about the way we are handling your personal information, or would like to exercise your privacy rights, please email us with the subject line "Privacy Concern" at <a href="mailto:privacy@posthog.com">privacy@posthog.com</a>.</p>
 
                         <p>In most cases, we will respond within 30 days of receiving your message but please note for promptest response, we recommend emailing us.</p>
-
+                    </div>
+                    <div>
+                        <p>If you have questions or concerns about your privacy or want to file a complaint, email us at privacy@posthog.com.</p>
+                        <p>For job applications, email careers@posthog.com.</p>
+                    </div>
+                    <div>
                         <h3>Privacy policy changes</h3>
-
+                    </div>
+                    <div>&nbsp;</div>
+                    <div className="md:pb-12">
                         <p>Although most changes are likely to be minor, PostHog may change its privacy policy from time to time, and in PostHog's sole discretion.</p>
 
                         <p>We may also provide notification to customers who have provided us email addresses of material changes to this Privacy Policy through our Website. PostHog encourages visitors to frequently check this page for any minor changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.</p>
-
                     </div>
                     <div>
-                        <p>contacting posthog summary</p>
+                        <p>We might change our privacy policy, so check our website often. Your use of our site means you accept any changes.</p>
                     </div>
                 </div>
             </div>
