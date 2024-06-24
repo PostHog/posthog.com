@@ -339,9 +339,9 @@ Finally, in `posthog.astro`, we add logic to get the distinct ID, check if it’
       api_host:'<ph_client_api_host>',
 			person_profiles: 'identified_only',
       loaded: function(posthog) {
-				const button = document.querySelector('.main');
+        const button = document.querySelector('.main');
         if (posthog.isFeatureEnabled('new-button')) {
-        	button.innerText = 'The best site ever!';
+            button.innerText = 'The best site ever!';
       	}
 
 				// add this code:
