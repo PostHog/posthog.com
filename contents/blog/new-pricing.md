@@ -29,7 +29,11 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 ## How much cheaper are the new base events?
 
-At lower volumes, our new event pricing is 80% cheaper than before – it's ideal for tracking the behavior of logged-out users, such as users on your marketing website.
+At lower volumes, our new event pricing is 80% cheaper than before. In real terms this means:
+
+1. Someone sending us 10 million events a month would **save $9,060 a year** if they disabled person profiles for all events.
+
+2. They would still **save $4,404 a year** if they enabled person profiles on 50% of their events.  
 
 We expect people to use a combination of events with and without person profiles, which you can see visualized below.
 
@@ -42,7 +46,7 @@ We expect people to use a combination of events with and without person profiles
   classes="rounded"
 />
 
-This pricing makes us better value than any popular (>$10M in revenue) product analytics tool. 
+This makes us better value than any popular (>$10M in revenue) product analytics tool. 
 
 Below you can see how our new pricing compares to Mixpanel's up to 20 million events – the limit of its "transparent" pricing. 
 
@@ -53,9 +57,11 @@ Below you can see how our new pricing compares to Mixpanel's up to 20 million ev
   classes="rounded"
 />
 
-And we continue to offer the most generous, feature complete free tier of any analytics tool.
+And we continue to offer the most generous, feature-complete free tier of any analytics tool.
 
-The table below is a side-by-side comparison of our new base event pricing, and pricing for events with person profiles enabled. 
+The table below is a side-by-side comparison of our new base event pricing, and pricing for events with person profiles enabled.
+
+Base events and person profiles combined cost the same as our previous per event pricing.
 
 | **Monthly events** | **New base event price** | **Base events + person profiles** | **Percentage diff.** |
 |--------------------|--------------------------|-----------------------------------|----------------|
@@ -67,18 +73,16 @@ The table below is a side-by-side comparison of our new base event pricing, and 
 | **100-250**        | $0.0000150 / event       | $0.0000187 / event                | -20%           |
 | **∞**              | $0.0000090 / event       | $0.0000100 / event                | -10%           |
 
-> **Remember:** Base events and person profiles combined cost the same as our previous per event pricing.
+## When should I use the new option?
 
-## When should I use the new processing option?
-
-We use it in places where we're only interested in aggregate data, such as for logged-out users on our website.
+We use it for events where we're only interested in aggregate data, such as for logged-out users on our website.
 
 It could also be useful when:
 
 - You're willing to lose some functionality for lower bills.
 - You want to track API or server events, especially at high volumes. 
 - You run a large e-commerce or content website with millions of users.
-- You're not tracking an existing high-volume event because it would be prohibitively expensive.
+- You're not tracking a high-volume event because it would be prohibitively expensive.
 - You want to use [autocapture](/docs/product-analytics/autocapture) to track events, but have turned it off to save money.
 
 ## How do I start using it?
@@ -114,9 +118,11 @@ Most of our competitors are inefficient. They employ huge outbound sales teams t
 
 In contrast, we're 100% inbound. We grow mostly through word of mouth, and we charge based on actual usage. 
 
-We make a modest positive margin on each event sold, but we grow our revenue through helping you grow and (hopefully) onboarding you onto other tools, like session replay, feature flags, and surveys as well.
+We don't believe in loss-leaders, so we make a modest positive margin on each event sold, but what we charge is directly connected to what it costs us, not what we think we get away with charging.
 
-We think this is better for everyone than trying to squeeze you for every cent you have.
+We grow our revenue through helping you grow, and onboarding you onto other tools, like session replay, feature flags, and surveys as well.
+
+We think this is better for everyone than trying to squeeze you for every cent you have. You have a great experience, and we'll enjoy better retention and word of mouth for doing the right thing.
 
 > ## FAQ
 >
@@ -131,3 +137,9 @@ We think this is better for everyone than trying to squeeze you for every cent y
 > This aligns our interests with our customers, and means we can make a positive margin on all events ingested (beyond our free tier), so it is sustainable but not greedy!
 >
 > We're also working on reducing costs for events with person profiles enabled. When we do, we'll pass this saving on, too.
+>
+> #### I've got a question you haven't answered...
+>
+> You can leave a comment on this post, or ask a question in [our community forum](/questions).
+>
+> If it's an account specific question, get in touch with your account manager or raise a ticket in the app.
