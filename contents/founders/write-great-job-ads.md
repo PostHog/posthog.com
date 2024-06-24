@@ -34,7 +34,7 @@ Keep your list of requirements as short as possible. I like to do:
 
 - Nice to have
 
-Each should be ~3-4 items long - that's it. You will know when you see a great resume anyway. Candidates don't read this stuff super carefully anyway, or will ignore the stuff they can't do (especially if they are a dude). Fun fact - you do not need to write out literally every single thing the person will be doing. 
+Each should be ~3-4 items long - that's it. You will know when you see a great resume. Candidates don't read this stuff super carefully anyway, or will ignore the stuff they can't do (especially if they are a dude). Fun fact - you do not need to write out literally every single thing the person will be doing. 
 
 **What the actual hiring process is**
 
