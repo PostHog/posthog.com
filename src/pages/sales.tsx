@@ -218,7 +218,7 @@ const us = [
                 </p>
             </div>
 
-            <div className="col-span-3 -mt-12 text-center">
+            <div className="col-span-3 text-center">
                 <StaticImage
                     quality={90}
                     placeholder="blurred"
@@ -457,7 +457,7 @@ function Sales() {
                         <div className="inline-flex flex-col items-center mb-6 mx-auto">
                             <h2 className="mb-1 text-center relative">
                                 How the sales process works at
-                                <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mx-1 w-[calc(100vw_-_2rem)] md:w-auto md:min-w-[24rem] inline-flex gap-2 justify-center md:justify-between relative overflow-hidden after:absolute after:-bottom-6 after:left-0 after:content-['[Typical,_stuffy_enterprise_SaaS_sales_company]'] after:text-sm after:text-primary/75 dark:after:text-primary-dark/75 after:font-normal after:tracking-normal">
+                                <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mx-1 w-[calc(100vw_-_2rem)] md:w-auto md:min-w-[24rem] inline-flex gap-2 justify-center md:justify-between relative overflow-hidden">
                                     <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
                                         <span>{companyName}</span>
                                     </CSSTransition>
