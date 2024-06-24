@@ -99,7 +99,7 @@ With our app set up, the next step is to add PostHog to it. To start, create a n
     '<ph_project_api_key>',
     {
       api_host:'<ph_client_api_host>',
-			person_profiles: 'identified_only'
+      person_profiles: 'identified_only'
     }
   )
 </script>
@@ -175,31 +175,31 @@ When you go back to your app and click the button, you then see a `praise_receiv
 
 To use a feature flag in your app, first, you must create it in PostHog. Go to the [feature flags tab](https://app.posthog.com/feature_flags), click "New feature flag," add a key (we chose `new-button`), set the release condition to 100% of users, and click "Save."
 
-With the feature flag, go back to your home page at `pages/index.astro`. Add to your script the `onFeatureFlags()` function with an `isFeatureEnabled()` for your `new-button` flag. If enabled, change the `innerHTML` of your button.
+With the feature flag, go back to your home page at `components/posthog.astro`. Add the `loaded:` argument to your snippet and implement the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback to update the button text depending on the flag value. If enabled, change the `innerHTML` of your button.
 
 ```js
 ---
-// src/pages/index.astro
-import Layout from '../layouts/Layout.astro';
+// src/components/posthog.astro
 ---
-<Layout>
-	<h1>Home</h1>
-	<button class="main">Great site!</button>
-	<script>
-		const button = document.querySelector('.main');
-		button.addEventListener('click', () => {
-			window.posthog.capture('praise_received')
-		});
-
-		window.posthog.onFeatureFlags(() => {
-			if (window.posthog.isFeatureEnabled('new-button')) {
-				button.innerText = 'The best site ever!';
-			}
-		});
-	</script>
-</Layout>
+<script is:inline>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init(
+    '<ph_project_api_key>',
+    {
+      api_host:'<ph_client_api_host>',
+      person_profiles: 'identified_only',
+			loaded: (posthog) => {
+        posthog.onFeatureFlags(() => {
+          const button = document.querySelector('.main');
+          if (posthog.isFeatureEnabled('new-button')) {
+            button.innerText = 'The best site ever!';
+          }
+        });
+      }
+    }
+  )
+</script>
 ```
-
 When you reload your page, it shows different button text controlled by the PostHog feature flag.
 
 ![Flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/astro-analytics/flag.png)
@@ -339,6 +339,12 @@ Finally, in `posthog.astro`, we add logic to get the distinct ID, check if it’
       api_host:'<ph_client_api_host>',
 			person_profiles: 'identified_only',
       loaded: function(posthog) {
+				const button = document.querySelector('.main');
+        if (posthog.isFeatureEnabled('new-button')) {
+        	button.innerText = 'The best site ever!';
+      	}
+
+				// add this code:
         const distinctId = document.querySelector('.did').innerHTML;
         if (posthog.get_distinct_id() && posthog.get_distinct_id() !== distinctId) {
           posthog.identify(distinctId);
@@ -382,6 +388,32 @@ if(await phClient.isFeatureEnabled('new-button', distinctId)) {
 	<button class="main">{buttonText}</button>
 	<p style="display:none" class="did">{distinctId}</p>
 </Layout>
+```
+
+Lastly, remove the `posthog.onFeatureFlags()` code we added in `posthog.astro`:
+
+```js
+---
+// src/components/posthog.astro
+---
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init(
+    '<ph_project_api_key>',
+    {
+      api_host:'<ph_client_api_host>',
+			person_profiles: 'identified_only',
+      loaded: function(posthog) {
+				// posthog.onFeatureFlags has been removed
+
+        const distinctId = document.querySelector('.did').innerHTML;
+        if (posthog.get_distinct_id() && posthog.get_distinct_id() !== distinctId) {
+          posthog.identify(distinctId);
+        }
+      }
+    }
+  )
+</script>
 ```
 
 Now when you refresh your page, your flag won’t flicker because the content is sent from the server. This is especially useful for ensuring good user experiences in A/B tests.
