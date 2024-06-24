@@ -44,7 +44,6 @@ const query = (id: string | number, isModerator: boolean) =>
                     },
                 },
                 replies: {
-                    publicationState: 'preview',
                     sort: ['createdAt:asc'],
                     populate: {
                         profile: {
