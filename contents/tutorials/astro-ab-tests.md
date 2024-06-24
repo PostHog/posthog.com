@@ -201,7 +201,7 @@ We'll show you how to implement both.
 
 ### Client-side rendering
 
-To implement the A/B test, we implement the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback. Then, we update the button text based on whether the user is in the `control` or `test` variant of the experiment.
+To implement the A/B test, we add the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback. Then, we update the button text based on whether the user is in the `control` or `test` variant of the experiment.
 
 Update the code in `/components/posthog.astro` to implement `posthog.onFeatureFlags` in PostHog's `loaded` callback:
 
