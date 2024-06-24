@@ -29,7 +29,9 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 ## How much cheaper are the new base events?
 
-At lower volumes, our new event pricing is 80% cheaper than before. In real terms this means:
+At lower volumes, our new event pricing is 80% cheaper than before. This makes us better value than any popular (>$10M in revenue) product analytics tool. 
+
+In real terms this means:
 
 1. Someone sending us 10 million events a month would **save $9,060 a year** if they disabled person profiles for all events.
 
@@ -46,8 +48,6 @@ We expect people to use a combination of events with and without person profiles
   classes="rounded"
 />
 
-This makes us better value than any popular (>$10M in revenue) product analytics tool. 
-
 Below you can see how our new pricing compares to Mixpanel's up to 20 million events – the limit of its "transparent" pricing. 
 
 <ProductScreenshot
@@ -56,8 +56,6 @@ Below you can see how our new pricing compares to Mixpanel's up to 20 million ev
   alt="New PostHog pricing compared to Mixpanel" 
   classes="rounded"
 />
-
-And we continue to offer the most generous, feature-complete free tier of any analytics tool.
 
 The table below is a side-by-side comparison of our new base event pricing, and pricing for events with person profiles enabled.
 
