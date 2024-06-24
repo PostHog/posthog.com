@@ -53,7 +53,7 @@ const them = [
     },
     {
         title: 'Finally, a demo!',
-        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-20">
             <p>
                 Deemed worthy? They will book you into a further call for a demo with a different person, five minutes of which will cover what you are specifically interested in.</p>
             <p>
@@ -73,7 +73,7 @@ const them = [
     },
     {
         title: 'The follow-up meeting',
-        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-20">
             <p>It's now time to talk about your usage so they can put together a commercial proposal.</p>
             <p>A quote will be provided at a later date because they need to "circle back with the team" to "see what they can do for you."</p>
         </div>
@@ -84,7 +84,7 @@ const them = [
     },
     {
         title: 'Sticker shock',
-        children: <><div className="col-span-3 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+        children: <><div className="col-span-3 pl-9 [&_p]:mb-2 max-w-2xl pb-20">
             <p>
                 There will be a long period of commercial wrangling because they massively inflated the price so they can then discount it heavily.
             </p>
@@ -105,7 +105,7 @@ const them = [
     },
     {
         title: '"We don\'t usually do this, but..."',
-        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-20">
             <p>
                 Any legal questions require a ton of time seeking ‘approval’ and coming back with amazing special exceptions they made that were ‘really painful’ when you know it’s all BS.
             </p>
@@ -123,7 +123,7 @@ const them = [
     },
     {
         title: 'The dreaded contract',
-        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-20">
             <p>
                 Eventually sign the contract - hopefully you saw the auto-renewal and mandatory price increases in there!
             </p>
@@ -141,7 +141,7 @@ const them = [
     },
     {
         title: 'Finally, implementation time!',
-        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-20">
             <p>
                 Spend <strong>a few months (!!)</strong> on implementation with yet another person on their team, because the person who demoed isn’t technical but has to be the person through whom all comms must flow.
             </p>
@@ -159,7 +159,7 @@ const them = [
     },
     {
         title: '"Wait, who\'s my point of contact now??"',
-        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-20">
             <p>
                 All the sales people who got you on board immediately disappear and you are passed onto yet another team who ask you the same questions again…
             </p>
@@ -178,26 +178,119 @@ const them = [
 ]
 
 const us = [
-    { title: '"I have a question about the product."', children: 'Hello world! Slide 1.' },
-    { title: 'Personalized demo with technical account exec', children: '' },
     {
+        title:
+            '"I have a question about the product.',
+
+        children: <>
+            <div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-20">
+                <p className="leading-relaxed">
+                    <em>“How much does it cost?”</em> <Link href="/pricing">It’s on our website.</Link><br />
+                    <em>”How does it work?”</em> <Link href="https://app.posthog.com/signup">Just sign up and try it - no credit card required.</Link><br />
+                    <em>”Do you do discounts?”</em> <Link href="/handbook/growth/sales/contracts">It’s in our handbook.</Link><br />
+                    <em>”Can I get a quick demo?”</em> <Link href="/demo">Watch a pre-recorded demo on our website.</Link>
+                </p>
+                <p>
+                    Still need a personalized demo after all that? <Link href="/talk-to-a-human">Book a call with a technical account exec</Link> - no SDRs, no qualifying calls, no BS.
+                </p>
+            </div>
+
+            <div className="col-span-3 -mt-6 pb-8 text-center">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    loading="eager"
+                    src="../images/sales/drake-hog-yes.png"
+                    width={234}
+                />
+            </div>
+        </>
+    },
+    {
+        title:
+            'Personalized demo with technical account exec',
+
+        children: <>
+            <div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-24">
+                <p>
+                    Get booked on a demo call with a technical person who will spend 90% of the call in the PostHog app, not chatting about our vision. They will use the info you’ve shared to customize the demo.</p>
+                <p>Yes, we’ll even talk to you about how to manage your costs! If it turns out we can help you over a couple of emails, we’ll do that instead - less time in meetings for you, means more time building.
+                </p>
+            </div>
+
+            <div className="col-span-3 -mt-12 text-center">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/posthog-ae.png"
+                    width={436}
+                />
+            </div>
+        </>
+    },
+    {
+
         title: 'Next steps & follow-up questions',
-        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-20">
             <p>
                 After the call, the same person will quickly follow up with targeted, useful information about your specific use case.</p>
-            <p>If you’re looking at at spending $20k+ annually with us, we’ll get you into a shared Slack channel with our team. The aim is to get you into a short trial period where you’re implementing and seeing value from PostHog within a week - still free!</p>
+            <p>If you’re looking at at spending $20k+ annually with us, we’ll get you into a shared Slack channel with our team. <strong>The goal is to get you into a short trial period</strong> where you’re implementing and seeing value from PostHog <em><strong>within a week</strong></em> - still free!</p>
             <p>If PostHog isn’t the right fit for you, we’ll let you know our honest opinion!
             </p>
         </div>
 
-            <div className="col-span-3">
-
+            <div className="col-span-4">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/posthog-follow-up.png"
+                    width={600}
+                />
             </div>
         </>
     },
-    { title: 'Choose your own discount', children: '' },
-    { title: 'Besties', children: '' },
+    {
+        title:
+            'Choose your own discount',
+
+        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-20">
+            <p>
+                Want to negotiate a discount for longer commitment? Sure thing - take your pick <Link href="/handbook/growth/sales/contracts">from our website</Link>! We believe this should be transparent too.</p>
+            <p>P.S. If you ask for free <Link href="/merch">merch</Link>, our team is legally obliged to say yes.
+            </p>
+        </div>
+
+            <div className="col-span-4">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/discounts.png"
+                    width={321}
+                />
+            </div>
+        </>
+    },
+    {
+        title:
+            'Besties forever?',
+        children: <>
+            <div className="col-span-12 pl-9 [&_p]:mb-2 max-w-2xl pb-20">
+                <p>
+                    Contract signed - now you get passed onto… wait is that still the same person who did the initial demo and knows everything about me? And they will be my main point of contact for anything support-related?!</p>
+                <p>We’re going to be best friends!
+                </p>
+
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/celebration.png"
+                    width={771}
+                />
+            </div>
+        </>
+    },
 ]
+
 const AccordionItem = ({ number, title, children, isOpen, onClick }) => {
     const contentRef = useRef(null);
     const [contentHeight, setContentHeight] = useState('0px');
@@ -209,7 +302,7 @@ const AccordionItem = ({ number, title, children, isOpen, onClick }) => {
 
     return (
         <li className={`border-t relative ${isOpen ? 'active border-transparent bg-white rounded shadow-lg z-10 overflow-hidden' : 'inactive border-light first:border-transparent'}`}>
-            <button onClick={onClick} className={`pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all relative ${isOpen ? 'pt-4 pb-2 z-20' : 'py-2 hover:bg-accent/80  hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'}`}>
+            <button onClick={onClick} className={`pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all relative ${isOpen ? 'pt-4 pb-2 z-20' : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80  hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'}`}>
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 justify-center items-center p-1 font-semibold rounded-full bg-accent dark:bg-accent-dark">{number}</span>
                     <span className={`font-bold transition-all ${isOpen ? 'text-2xl' : 'text-[17px]'}`}>{title}</span></span>
