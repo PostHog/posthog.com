@@ -2757,7 +2757,7 @@ export const docsMenu = {
                     name: 'Joining data',
                     url: '/docs/data-warehouse/join',
                     icon: 'IconList',
-                    color: 'purple',
+                    color: 'orange',
                 },
                 {
                     name: 'Save views',
@@ -2770,6 +2770,12 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/under-the-hood',
                     icon: 'IconMagicWand',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/data-warehouse/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
                 },
             ],
         },
