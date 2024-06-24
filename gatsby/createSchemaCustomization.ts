@@ -40,6 +40,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       url: String
       username: String
       teamData: TeamData
+      profile: SqueakProfile @link(by: "github", from: "url")
     }
     type FrontmatterSEO {
       metaTitle: String
