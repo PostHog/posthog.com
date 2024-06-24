@@ -11,13 +11,13 @@ showTitle: true
 import UserPropertiesHowToSet from "./\_snippets/user-properties-how-to-set.mdx"
 import UserPropertiesSetVsSetOnce from "./\_snippets/user-properties-set-vs-set-once.mdx"
 
-[Person profiles](/docs/data/persons) are collections of properties about the users behind the events. You can use these person properties to better manage, analyze, and control data. 
+[Person profiles](/docs/data/persons) are collections of properties about the users behind the events. You can use these person properties to better capture, analyze, and utilize user data.
 
 For example, you can create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts) based on person properties, which can then be used to [create insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more. 
 
-For backward compatibility, PostHog captures events with [person profiles](/docs/data/people) by default. You can change this by setting your JavaScript initialization's `person_profiles` to `identified_only` or an event's `$process_person_profile` property to `false`.
+For backward compatibility, PostHog captures events with [person profiles](/docs/data/persons) by default. You can change this by setting your JavaScript initialization's `person_profiles` value to `identified_only` or an event's `$process_person_profile` property to `false`.
 
-> **Note:** Setting person properties creates a profile for the person you are tracking. Under our current [pricing](/pricing), events _without_ person profiles can be up to 4x cheaper than events _with_ them (due to computer cost of processing them), so it's recommended to only capture person profiles (via `identify()` or `$set`) when needed.
+> **Note:** Setting person properties creates a profile for the person you are tracking. Under our current [pricing](/pricing), events _without_ person profiles can be up to 4x cheaper than events _with_ them (due to the cost of processing them), so it's recommended only to capture person profiles (via `identify()` or `$set`) when needed.
 
 ## How to set person properties
 

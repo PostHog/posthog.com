@@ -12,7 +12,7 @@ type Tab = {
 const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', activeClass }) => {
     return (
         <ul
-            className={`list-none m-0 flex flex-row gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4 py-0 pt-2 md:px-6 justify-between items-center ${className}`}
+            className={`list-none m-0 flex flex-row gap-px overflow-x-auto overflow-y-hidden w-screen md:w-auto -mx-4 px-4 py-0 pt-2 md:px-6 justify-between ${className}`}
         >
             {tabs.map((tab, index) => {
                 const active = activeTab === index
@@ -21,17 +21,17 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
                         <button
                             onClick={() => onClick?.(tab, index)}
                             key={`${tab.title}-${index}`}
-                            className={`click ${
-                                size === 'sm' ? 'p-2 rounded' : 'py-3 px-4 rounded-md'
-                            } font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                            className={`${
+                                size === 'sm' ? 'py-2 px-3 rounded' : 'py-3 px-4 rounded-md'
+                            } h-full font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full ${
                                 active
                                     ? activeClass !== undefined
                                         ? activeClass
-                                        : 'font-bold bg-tan dark:bg-dark border border-b-tan dark:border-b-bg-dark border-light dark:border-dark rounded-tl rounded-tr'
-                                    : 'rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all hover:-mt-1'
+                                        : 'font-bold z-10 relative bg-white dark:bg-accent-dark border border-b-2 border-b-white dark:border-b-[#232429] border-light dark:border-dark rounded-br-none rounded-bl-none'
+                                    : 'rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                             }`}
                         >
-                            <div className="flex items-start space-x-2">
+                            <div className="flex items-start mb-auto space-x-2">
                                 {tab.icon && <div>{tab.icon}</div>}
                                 <div className="text-left">
                                     <h3
@@ -52,7 +52,9 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
                                             </Tooltip>
                                         )}
                                     </h3>
-                                    <p className="m-0 mt-0.5 text-sm whitespace-nowrap opacity-70">{tab.subtitle}</p>
+                                    <p className="m-0 mt-0.5 text-sm whitespace-nowrap text-primary/70 dark:text-primary-dark/70">
+                                        {tab.subtitle}
+                                    </p>
                                 </div>
                             </div>
                         </button>
@@ -79,7 +81,7 @@ const Vertical = ({ tabs, onClick, activeTab, className = '', activeClass }) => 
                                 active
                                     ? activeClass !== undefined
                                         ? activeClass
-                                        : 'font-bold bg-accent dark:bg-accent-dark'
+                                        : 'font-bold bg-accent dark:bg-accent/10'
                                     : 'hover:bg-accent dark:hover:bg-accent/15'
                             }`}
                         >

@@ -3,7 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 export default function OnePlatform() {
     return (
-        <section className="max-w-7xl mx-auto px-5 pb-8 md:pb-16">
+        <section className="max-w-7xl mx-auto px-5 pt-8 md:pt-16 pb-8 md:pb-16">
             <h2 className="text-center text-5xl lg:text-6xl xl:text-6xl">
                 One platform, <span className="text-blue dark:text-yellow">thousands of use cases</span>
             </h2>
@@ -15,7 +15,7 @@ export default function OnePlatform() {
                     <StaticImage src="./images/mds.png" alt="Drake Hog" className="max-w-[179px] h-[200px]" />
                     <h3 className="text-xl pt-4 mb-2 text-red">Replaces the modern data stack</h3>
                     <p>
-                        With 7+ products on one platform, you'll spend less time engineering your data integrations and
+                        With 8+ products on one platform, you'll spend less time engineering your data integrations and
                         more time building your product.
                     </p>
                 </li>

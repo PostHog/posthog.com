@@ -47,8 +47,8 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         type="Guide"
-                        title="Conversion funnels"
-                        description="Build, analyze, and optimize funnels"
+                        title="The complete guide to event tracking"
+                        description="Set up your analytics foundation"
                         Image={
                             <StaticImage
                                 alt=""
@@ -59,7 +59,7 @@ export const Content = ({ quickLinks = false }) => {
                                 src="../../components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
-                        url="/tutorials/guide-to-funnels"
+                        url="/tutorials/event-tracking-guide"
                     />
                     <ResourceItem
                         type="Guide"

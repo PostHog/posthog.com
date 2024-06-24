@@ -1279,6 +1279,7 @@
         { "source": "/self-host", "destination": "/docs/self-host" },
         { "source": "/using-posthog", "destination": "/docs" },
         { "source": "/handbook/company/values", "destination": "/handbook/values" },
+        { "source": "/tutorials/guide-to-funnels", "destination": "/docs/product-analytics/funnels" },
         { "source": "/max", "destination": "/community/profiles/28378" },
         {
             "source": "/blog/gdpr-google-analytics-privacy-shield",
@@ -1288,7 +1289,7 @@
         { "source": "/docs/ai-engineering/llms", "destination": "/docs/ai-engineering/llm-insights" },
         {
             "source": "/docs/product-analytics/trends",
-            "destination": "/docs/product-analytics/trends/index"
+            "destination": "/docs/product-analytics/trends/overview"
         },
         { "source": "/book-a-demo", "destination": "/demo" },
         { "source": "/contact-sales", "destination": "/talk-to-a-human" }

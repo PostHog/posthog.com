@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/vendasta/logo_dark.svg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/vendasta/featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/vendasta_posthog_792f5dff6f.png
 industries:
   - SaaS
 users:

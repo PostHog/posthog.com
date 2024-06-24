@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1715246033/posthog.com/contents/host-ai-logo.jpg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1715246033/posthog.com/contents/hostai-screenshot.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/hostai_posthog_9aa09a3382.png
 industries:
   - AI
 users:

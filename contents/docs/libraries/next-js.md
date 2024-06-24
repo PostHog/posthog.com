@@ -142,7 +142,9 @@ export function PHProvider({
 
 </MultiLanguage>
 
-Then, to capture pageviews, we set up a `PostHogPageView` component to listen to URL path changes:
+PostHog's `$pageview` autocapture relies on page load events. Since Next.js acts as a single-page app, this event doesn't trigger on navigation and we need to capture `$pageview` events manually. 
+
+To do this, we set up a `PostHogPageView` component to listen to URL path changes:
 
 <MultiLanguage>
 
@@ -158,8 +160,8 @@ export default function PostHogPageView() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const posthog = usePostHog();
-  // Track pageviews
   useEffect(() => {
+    // Track pageviews
     if (pathname && posthog) {
       let url = window.origin + pathname
       if (searchParams.toString()) {
@@ -178,7 +180,7 @@ export default function PostHogPageView() {
 }
 ```
 
-```tsx
+```ts
 // app/PostHogPageView.tsx
 'use client'
 
@@ -190,8 +192,8 @@ export default function PostHogPageView() : null {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const posthog = usePostHog();
-  // Track pageviews
   useEffect(() => {
+    // Track pageviews
     if (pathname && posthog) {
       let url = window.origin + pathname
       if (searchParams.toString()) {
@@ -211,7 +213,6 @@ export default function PostHogPageView() : null {
 ```
 
 </MultiLanguage>
-
 
 Then, import the `PHProvider` component into your `app/layout` file and wrap your app with it. We also dynamically import the `PostHogPageView` component and include it as a child of `PHProvider`.
 
@@ -279,7 +280,7 @@ PostHog is now set up and ready to go. Files and components accessing PostHog on
 
 #### Pageleave events (optional)
 
-To send `$pageleave` events after setting `capture_pageview` to false, you can set the `capture_pageleave` option to `true`.
+To capture pageleave events, we need to set `capture_pageleave: true` in the initialization because setting `capture_pageview: false` disables it.
 
 <MultiLanguage>
 
@@ -294,7 +295,7 @@ if (typeof window !== 'undefined') {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
     person_profiles: 'identified_only',
     capture_pageview: false,
-    capture_pageleave: true // Enable automatic pageleave capture
+    capture_pageleave: true // Enable pageleave capture
   })
 }
 
@@ -314,7 +315,7 @@ if (typeof window !== 'undefined') {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
     person_profiles: 'identified_only',
     capture_pageview: false,
-    capture_pageleave: true // Enable automatic pageleave capture
+    capture_pageleave: true // Enable pageleave capture
   })
 }
 
@@ -333,7 +334,7 @@ export function PHProvider({
 
 PostHog can then be accessed throughout your Next.js app by using the `usePostHog` hook. See the [React SDK docs](/docs/libraries/react) for examples of how to use:
 
-- [posthog-js functions like custom event capture, user identification, and more.](/docs/libraries/react#using-posthog-js-functions)
+- [`posthog-js` functions like custom event capture, user identification, and more.](/docs/libraries/react#using-posthog-js-functions)
 - [Feature flags including variants and payloads.](/docs/libraries/react#feature-flags)
 
 You can also read [the full posthog-js documentation](/docs/libraries/js) for all the usable functions.
