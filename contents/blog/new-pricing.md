@@ -67,7 +67,7 @@ The table below is a side-by-side comparison of our new base event pricing, and 
 | **100-250**        | $0.0000150 / event       | $0.0000187 / event                | -20%           |
 | **∞**              | $0.0000090 / event       | $0.0000100 / event                | -10%           |
 
-> **Important:** Base events + person profiles combined cost the same as our previous per event pricing.
+> **Remember:** Base events and person profiles combined cost the same as our previous per event pricing.
 
 ## When should I use the new processing option?
 
@@ -80,6 +80,14 @@ It could also be useful if:
 - You run a large e-commerce or content website with millions of users.
 - You're not tracking an existing high-volume event because it would be prohibitively expensive.
 - You want to use [autocapture](/docs/product-analytics/autocapture) to track events, but have turned it off to save money.
+
+## How do I start using it?
+
+For most people, it only requires a simple config change to include `process_persons: "identified_only"`. 
+
+This will track anonymous traffic without person profiles, and start collecting person information any time an identifying action is taken (i.e. using `identify()`, `group()`, setting person properties with `$set`, etc).
+
+You can get instructions for this and other use cases in our [persons documentation](/docs/data/persons).
 
 ## What's the downside?
 
@@ -95,14 +103,6 @@ When sending events without person information, you cannot:
 If you need the above functionality, just continue to send person information with your events (no need to change anything), for events where the specific functionality is needed. 
 
 Person profiles are not an all-or-nothing thing. You can use them on any traffic where you need more detailed information, and skip them when you don't need that detail.
-
-## How do I start using this new processing option?
-
-For most people, it only requires a simple config change to include `process_persons: "identified_only"`. 
-
-This will track anonymous traffic without person profiles, and start collecting person information any time an identifying action is taken (i.e. using `identify()`, `group()`, setting person properties with `$set`, etc).
-
-You can get instructions for this and other use cases in our [persons documentation](/docs/data/persons).
 
 ## Why are we doing this?
 
