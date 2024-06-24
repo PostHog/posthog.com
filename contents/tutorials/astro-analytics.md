@@ -402,7 +402,7 @@ Lastly, remove the `posthog.onFeatureFlags()` code we added in `posthog.astro`:
     '<ph_project_api_key>',
     {
       api_host:'<ph_client_api_host>',
-			person_profiles: 'identified_only',
+      person_profiles: 'identified_only',
       loaded: function(posthog) {
 				// posthog.onFeatureFlags has been removed
 
