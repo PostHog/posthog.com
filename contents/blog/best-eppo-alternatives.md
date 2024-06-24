@@ -25,11 +25,9 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 ### What is PostHog?
 
-PostHog is an open-source, all-in-one platform for feature flagging, A/B testing, product analytics, session replay, and user surveys. It's also building a [data warehouse for startups](/docs/data-warehouse) and a customer data platform (CDP), though both are currently in closed beta.
+[PostHog](/) (that's us 👋) is an open-source platform combining feature flags, A/B testing, product analytics, session replay, and surveys into one product. This means it's not only an alternative to Eppo, but also tools like [Amplitude](/blog/posthog-vs-launchdarkly) and [Hotjar](/blog/posthog-vs-hotjar).
 
-Need to rework this paragraph 
-
-By combining all these tools into one platform, it eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [carVertical](/feature-flags), which use PostHog for both feature flags and analytics.
+Typical PostHog users are engineers and product managers at startups and mid-size companies, particularly B2B companies. Customers include [AssemblyAI](/customers/assemblyai), [Hasura](/customers/hasura), [Vendasta](/customers/vendasta), and Airbus.
 
 #### Key features
 
@@ -45,13 +43,13 @@ By combining all these tools into one platform, it eliminates the need for stitc
 
 ### How does PostHog compare to Eppo?
 
-Both Eppo and PostHog tools support core feature flag and A/B testing Components. The biggest difference is their approach to data warehouses:
+Both Eppo and PostHog tools support core feature flag and A/B testing components. The biggest difference is their approach to data warehouses:
 
-- Eppo is warehouse-native, meaning that it integrates seamlessly with your existing data tools like Snowflake or Postgres. 
+- Eppo is warehouse-native, meaning that it integrates with your existing data tools like Snowflake or Postgres. 
 
 - PostHog is not warehouse-native, but instead aims to replace your existing data stack by combining product analytics, [pipelines](/docs/cdp), and warehousing into one platform. This eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. 
 
-Besides this, PostHog offers product analytics, session replays, and surveys, whereas Eppo does not. On the other hand, Eppo offers features that PostHog doesn't, like multi-armed bandit testing (called "contextual bandits" in Eppo), [CUPED analysis](https://matteocourthoud.github.io/post/cuped/), and the ability to choose between Bayesian and frequentist engines.
+Besides this, PostHog offers product analytics, session replays, and surveys, whereas Eppo does not. On the other hand, Eppo offers multi-armed bandit testing (called "contextual bandits" in Eppo) and [CUPED analysis](https://matteocourthoud.github.io/post/cuped/), whereas PostHog does not.
 
 
 <ComparisonTable column1="PostHog" column2="Eppo">
@@ -83,7 +81,7 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 
 > #### Bottom line
 > 
-> PostHog is an ideal Eppo alternative if you're looking for a more powerful analytics tool that can also serve your A/B testing and feature management needs. It also offers a dedicated EU-hosted cloud at no extra cost.
+> PostHog is an ideal Eppo alternative if you're looking for a powerful all-in-one tool that can also serve your A/B testing and feature flag needs. It also offers a dedicated EU-hosted cloud at no extra cost.
 
 <br />
 
@@ -138,7 +136,7 @@ GrowthBook is the most similar alternative to Eppo on this list. It matches almo
 
 According to G2, reviewers choose GrowthBook for the following.
 
-1. **Warehouse-native:** GrowthBook's integrations with the warehouses people are already using is a standout feature. It enables them to extract and make use of the data they already have.
+1. **Warehouse-native:** GrowthBook's integrations with the warehouses people are already using is a standout feature. It enables them to extract and make use of existing data.
 
 2. **Visual editor:** The visual A/B test editor and experiment preview enable non-technical users to make full use of GrowthBook.
 
@@ -146,7 +144,7 @@ According to G2, reviewers choose GrowthBook for the following.
 
 > #### Bottom line
 > 
-> Being open source, free, and self-hostable, GrowthBook makes for a good alternative to Flagsmith, especially for companies in tricky regulatory situations.
+> Being open source, free, and self-hostable, GrowthBook makes for a good alternative to Eppo, especially for companies in tricky regulatory situations.
 
 ## 3. Statsig
 
@@ -158,9 +156,7 @@ According to G2, reviewers choose GrowthBook for the following.
 
 ### What is Statsig?
 
-[Statsig](/blog/best-statsig-alternatives) provides tools like feature flags, experimentation, and analytics to help companies build better products. Teams use Statsig to take the risk out of releases, experiment with new features, and monitor changes.
-
-It also includes a warehouse-native mode to connect directly and utilize your data warehouse, such as Snowflake.
+[Statsig](/blog/posthog-vs-statsig) provides tools like feature flags, experimentation, and analytics to help companies build better products. Teams use Statsig to take the risk out of releases, experiment with new features, and monitor changes. It also includes a warehouse-native mode to connect directly and utilize your data warehouse.
 
 ### Key features
 
@@ -211,7 +207,7 @@ According to G2, users are big fans of Statsig because:
 ## 4. LaunchDarkly
 
 - **Founded:** 2014
-- **Similar to:** Statsig, Kameleoon
+- **Similar to:** Statsig, Flagsmith
 - **Typical users:** Enterprise engineering and DevOps teams
 
 ![LaunchDarkly](https://res.cloudinary.com/dmukukwp6/image/upload/v1712355416/posthog.com/contents/images/blog/best-optimizely-alternatives/launchdarkly.png)
@@ -245,10 +241,11 @@ LaunchDarkly and Eppo offer similar feature management and A/B testing features,
   <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
   <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
   <ComparisonRow column1={false} column2={true} feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
-  <ComparisonRow column1="Bayesian, Frequentist" column2="Bayesian" feature="Statistics engine" description="How the results of an experiment are calculated" />
+  <ComparisonRow column1="Bayesian, Frequentist" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the results of an experiment are calculated" />
   <ComparisonRow column1={true} column2={true} feature="AI/LLM support" description="Compare models with experiments, view performance, cost, and latency" />
   <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
   <ComparisonRow column1={true} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />
+</ComparisonTable>
 
 ### Why do companies use LaunchDarkly?
 
@@ -290,9 +287,9 @@ They offer lots of flexibility when it comes to hosting. You can choose from dat
 
 ### How does Flagsmith compare to Eppo?
 
-Flagsmith offers comprehensive feature flag capabilities, similar to Eppo. However, while Eppo is warehouse-native and integrates deeply with data tools like Snowflake and Postgres, Flagsmith emphasizes its open-source nature and flexibility in deployment options. 
+Flagsmith offers comprehensive feature flag capabilities similar to Eppo. However, while Eppo is warehouse-native and integrates deeply with data tools, Flagsmith emphasizes its open-source nature and flexibility in deployment options. 
 
-Flagsmith also call out remote config as a core feature, but behind the scenes these are really just feature flags with JSON payloads. Thus Eppo supports this too.
+Flagsmith also calls out "remote config" as a core feature, but behind the scenes these are really just feature flags with JSON payloads. Thus Eppo and any alternative that supports JSON payloads support this too.
 
 <ComparisonTable column1="Flagsmith" column2="Eppo">
   <ComparisonRow column1={true} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
@@ -408,7 +405,7 @@ According to G2 reviews, people are fans of Optimizely because:
 
 ### How does Amplitude compare to Eppo?
 
-Like a few alternatives on this list, Amplitude doesn't support multi-armed bandit experiments. It makes up for this with powerful built-in product analytics.
+Like a few alternatives on this list, Amplitude doesn't support multi-armed bandit experiments. It makes up for this with powerful built-in product analytics, though.
 
 <ComparisonTable column1="Amplitude" column2="Eppo">
   <ComparisonRow column1={true} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
@@ -438,7 +435,7 @@ According to [G2 reviews](https://www.g2.com/products/amplitude-analytics/review
 
 > #### Bottom line
 >
-> Like PostHog, Amplitude is a good alternative if you value powerful analytics and experimentation in one, though it's less geared to engineers Eppo or PostHog.
+> Like PostHog, Amplitude is a good alternative if you value powerful analytics and experimentation in one, though it's less geared to engineers than Eppo or PostHog.
 
 <br />
 
