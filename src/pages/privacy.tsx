@@ -67,10 +67,9 @@ function Privacy() {
 
     const Tweet = ({ children, lastTweet = false }) => (
         <div
-            className={`max-w-xl mx-auto bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${
-                !lastTweet &&
+            className={`max-w-xl mx-auto bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${!lastTweet &&
                 'after:absolute after:w-px after:bg-border dark:after:bg-border-dark after:top-[calc(100%_+_1px)] after:-bottom-4 after:h-12 after:left-10'
-            }`}
+                }`}
         >
             <div className="flex items-center space-x-4">
                 <div className="rounded-full bg-accent w-12 h-12 overflow-hidden">
@@ -329,7 +328,7 @@ function Privacy() {
                             <span className="md:hidden">
                                 is everything <em>not in blockquotes</em>
                             </span>
-                            <span className="hidden md:inline-block">in the left column</span>.
+                            <span className="hidden md:inline-block">is in the left column below</span>.
                         </p>
                         <p className="mb-2 text-primary/75 dark:text-primary-dark/75">
                             (Can you believe we actually had to clarify this?)
@@ -1137,6 +1136,81 @@ function Privacy() {
                             contribution to one of our projects.
                         </p>
                     </div>
+
+                    <div>
+                        <h2 id="ccpa">
+                            <strong>CCPA addendum</strong>
+                        </h2>
+                    </div>
+                    <div></div>
+                    <div className="pb-12">
+                        <h3>Introduction</h3>
+                        <p>This Addendum (“Addendum”) forms part of the Privacy Policy, and of any superseding written agreement, entered by and between you, the Customer (as defined in the Agreement) (“Customer”), and PostHog Inc. (“PostHog”; and collectively – the “Agreement”).</p>
+                        <p>This Addendum reflects the parties’ desire and intent to modify and amend the Agreement, in accordance with the terms and conditions hereinafter set forth, with regard to the processing of Customer Personal Information (as defined below) by PostHog on behalf of the Customer.</p>
+                        <p>Capitalized terms not defined herein shall have the meanings assigned to such terms in the Agreement.</p>
+                        <p>You represent and warrant that you have full authority to bind the Customer to this Addendum. If you cannot, or do not agree to, comply with and be bound by this Addendum, or do not have authority to bind the Customer or any other entity, please do not provide any Customer Personal Information to us.</p>
+                        <p>This Addendum shall become effective as of the commencement of processing of Customer Personal Information under the Agreement (“Addendum Effective Date”).</p>
+                        <p>If you need a signed copy of this Addendum you can download a <Link href="https://docs.google.com/document/d/17VawApHNJzXNkxYiDidw7UTQBJr347FfL6nVDxEYgsg/edit?usp=sharing" external>template</Link>, enter your details, send a request to <a rel="noopener noreferrer" href="mailto:privacy@posthog.com">privacy@posthog.com</a> and we’ll provide you a countersigned copy.</p>
+                        <h3>Definitions</h3>
+                        <p>“<strong>CCPA</strong>” means the California Consumer Privacy Act of 2018, Cal. Civ. Code §1798.100 et. seq., and its implementing regulations. </p>
+                        <p>“<strong>Customer Personal Information</strong>” means any Customer Data maintained by Customer and processed by PostHog solely on Customer’s behalf, that identifies, relates to, describes, is capable of being associated with, or could reasonably be linked, directly or indirectly, with a particular consumer or household, to the extent that such information is protected as “personal information” (or an analogous variation of such term) under applicable U.S. Data Protection Laws. </p>
+                        <p>“<strong>U.S. Data Protection Laws</strong>” means all laws and regulations of the United States of America, including the CCPA, applicable to the processing of personal information (or an analogous variation of such term).</p>
+                        <p>“<strong>Service Provider</strong>” has the meaning set forth in Section 1798.140(v) of the CCPA.</p>
+                        <h3>Amendments</h3>
+                        <h4>Roles</h4>
+                        <p>The parties acknowledge and agree that with regard to the processing of Customer Personal Information performed solely on behalf of Customer, PostHog is a Service Provider and receives Customer Personal Information pursuant to the business purpose of providing the Services to Customer in accordance with the Agreement.</p>
+                        <h4>No Sale of Customer Personal Information to PostHog</h4>
+                        <p>Customer and PostHog hereby acknowledge and agree that in no event shall the transfer of Customer Personal Information from Customer to PostHog pursuant to the Agreement constitute a sale of information to PostHog, and that nothing in the Agreement shall be construed as providing for the sale of Customer Personal Information to PostHog.</p>
+                        <h4>Limitations on Use and Disclosure</h4>
+                        <p>PostHog is prohibited from using or disclosing Customer Personal Information for any purpose other than the specific purpose of performing the Services specified in the Agreement, the permitted business purposes set under applicable law, and as required under applicable law. PostHog hereby certifies that it understands the foregoing restriction and will comply with it in accordance with the requirements of applicable U.S. Data Protection Laws.</p>
+                        <h4>Data Subject Access Requests</h4>
+                        <p>PostHog will reasonably assist Customer with any data subject access, erasure or opt-out requests and objections. If PostHog receives any request from data subjects, authorities, or others relating to its data processing, PostHog will without undue delay inform Customer and reasonably assist Customer with developing a response (but PostHog will not itself respond other than to confirm receipt of the request, to inform the data subject, authority or other third party that their request has been forwarded to Customer, and/or to refer them to Customer, except per reasonable instructions from Customer). PostHog will also reasonably assist Customer with the resolution of any request or inquiries that Customer receives from data protection authorities relating to PostHog, unless PostHog elects to object such requests directly with such authorities.</p>
+                        <h4>Effect of this Addendum</h4>
+                        <p>In the event of any conflict or inconsistency between the terms of this Addendum and the terms of the Agreement with respect to the subject matter hereof and solely where U.S. Data Protection Laws apply, the terms of this Addendum shall control.</p>
+                    </div>
+                    <div className="">
+                        summary
+                    </div>
+
+                    <div>
+                        <h2 id="job-applications">
+                            <strong>Job applications</strong>
+                        </h2>
+                    </div>
+                    <div></div>
+                    <div className="pb-12">
+                        full content
+                    </div>
+                    <div className="">
+                        summary
+                    </div>
+
+                    <div>
+                        <h2 id="dpa">
+                            <strong>Data processing agreements</strong>
+                        </h2>
+                    </div>
+                    <div></div>
+                    <div className="pb-12">
+                        full content
+                    </div>
+                    <div className="">
+                        summary
+                    </div>
+
+                    <div>
+                        <h2 id="security">
+                            <strong>Security measures</strong>
+                        </h2>
+                    </div>
+                    <div></div>
+                    <div className="pb-12">
+                        full content
+                    </div>
+                    <div className="">
+                        summary
+                    </div>
+
                     <div>
                         <h2 id="contact-us">
                             <strong>Contacting PostHog about your privacy</strong>
@@ -1144,7 +1218,25 @@ function Privacy() {
                     </div>
                     <div></div>
                     <div className="pb-12">
-                        <p>If you need to contact us about your privacy, please email privacy@posthog.com.</p>
+
+                        <p>The relevant data controller for any personal information processed in connection with our Websites or self-managed installations is PostHog Inc, 2261 Market Street #4008, San Francisco, CA 94114. If you apply for a job with us, the relevant data controller is the country-specific PostHog entity which will be your employer.</p>
+
+                        <p>If you have any questions about this Privacy Policy or our privacy and security practices or you wish to make a complaint about our compliance with applicable privacy laws, please feel free to contact us at <a href="mailto:privacy@posthog.com">privacy@posthog.com</a>.</p>
+
+                        <p>If your query is in connection with a job application, please email us at <a href="mailto:careers@posthog.com">careers@posthog.com</a>.</p>
+
+                        <p>We have appointed an EU and UK representative who can also be contacted at <a href="mailto:privacy@posthog.com">privacy@posthog.com</a>.</p>
+
+                        <p>If you have questions or concerns about the way we are handling your personal information, or would like to exercise your privacy rights, please email us with the subject line "Privacy Concern" at <a href="mailto:privacy@posthog.com">privacy@posthog.com</a>.</p>
+
+                        <p>In most cases, we will respond within 30 days of receiving your message but please note for promptest response, we recommend emailing us.</p>
+
+                        <h3>Privacy policy changes</h3>
+
+                        <p>Although most changes are likely to be minor, PostHog may change its privacy policy from time to time, and in PostHog's sole discretion.</p>
+
+                        <p>We may also provide notification to customers who have provided us email addresses of material changes to this Privacy Policy through our Website. PostHog encourages visitors to frequently check this page for any minor changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.</p>
+
                     </div>
                     <div className="invisible md:visible">&nbsp;</div>
                 </div>
