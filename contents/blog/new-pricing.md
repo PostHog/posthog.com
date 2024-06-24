@@ -19,13 +19,13 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 * You can now use PostHog's product and web analytics for up to 80% less, making us cheaper than any popular competitive product.
 
-* This is possible because we've introduced a new event processing option that enables you to capture events without person information. 
+* This is possible because we've introduced a new event processing option that enables you to capture events without person data, what we call _person profiles_. 
 
-* Events _without_ person information cost less for us to ingest and query. We're passing this saving onto you by introducing cheaper base event pricing and a new "Person profiles" add-on.
+* Events _without_ person profiles cost less for us to ingest and query. We're passing this saving onto you by introducing cheaper base event pricing and a new person profiles event option, which is charged separately.
 
-* Events with person profiles enabled cost the same as our old event pricing. Existing customers will see a new line item labelled "Person profiles" on their invoice. Your price has not gone up.
+* Events with person profiles enabled cost the same as our old event pricing. Existing customers will see a new line item labeled "Person profiles" on their invoice, but pricing has not gone up.
 
-* You decide when you do or don't include person information on an event.
+* You decide when you capture person profile on an event. By default, events are captured with person profiles, but you can change this with a configuration option.
 
 ## How much cheaper are the new base events?
 
@@ -33,9 +33,9 @@ At lower volumes, our new event pricing is 80% cheaper than before. This makes u
 
 In real terms this means:
 
-1. Someone sending us 10 million events a month would **save $9,060 a year** if they disabled person profiles for all events.
+1. Someone sending us 10 million events per month would **save $9,060 a year** if they disabled person profiles for all events.
 
-2. They would still **save $4,404 a year** if they enabled person profiles on 50% of their events.  
+2. They would still **save $4,404 a year** if they used person profiles on 50% of their events.  
 
 We expect people to use a combination of events with and without person profiles, which you can see visualized below.
 
@@ -57,9 +57,9 @@ Below you can see how our new pricing compares to Mixpanel's up to 20 million ev
   classes="rounded"
 />
 
-The table below is a side-by-side comparison of our new base event pricing, and pricing for events with person profiles enabled.
+The table below is a side-by-side comparison of our new base event pricing, and pricing for events with person profiles enabled. The math is:
 
-Base events and person profiles combined cost the same as our previous per event pricing.
+`New base events + person profiles = Our previous per event pricing`
 
 | **Monthly events** | **New base event price** | **Base events + person profiles** | **Percentage diff.** |
 |--------------------|--------------------------|-----------------------------------|----------------|
@@ -77,6 +77,7 @@ We use it for events where we're only interested in aggregate data, such as for 
 
 It could also be useful when:
 
+- You want to track your marketing website and your product, but you don't need detailed information about visitors to your marketing website.
 - You're willing to lose some functionality for lower bills.
 - You want to track API or server events, especially at high volumes. 
 - You run a large e-commerce or content website with millions of users.
@@ -85,11 +86,11 @@ It could also be useful when:
 
 ## How do I start using it?
 
-For most people, it only requires a simple config change to include `process_persons: "identified_only"`. 
+For most people, it only requires a simple config change to include `process_persons: "identified_only"` in the initialization of your JavaScript Web SDK or snippet.
 
 This will track anonymous traffic without person profiles, and start collecting person information any time an identifying action is taken (i.e. using `identify()`, `group()`, setting person properties with `$set`, etc).
 
-You can get instructions for this and other use cases in our [persons documentation](/docs/data/persons).
+You can get more details on this and other use cases, like server-side events, in our [persons documentation](/docs/data/persons).
 
 ## What's the downside?
 
@@ -97,14 +98,14 @@ When sending events without person information, you cannot:
 
 - Filter on persons (e.g. an individual user)
 - Create cohorts filtered on person properties (e.g. paying vs non-paying users)
-- Target by person properties for feature flags, A/B tests and surveys.
+- Target by person properties for feature flags, A/B tests, and surveys.
 - Receive initial UTM values for tracking marketing campaign performance (only the most recent).
 - View a person’s profile in the app, or query the persons table in our SQL insights.
 - Use [groups functionality](/docs/product-analytics/group-analytics) on standard events (without person profiles).
 
-If you need the above functionality, just continue to send person information with your events (no need to change anything), for events where the specific functionality is needed. 
+If you need the above functionality for all your traffic, you don't need to change anything. Continue to send person information with your events.
 
-Person profiles are not an all-or-nothing thing. You can use them on any traffic where you need more detailed information, and skip them when you don't need that detail.
+Person profiles are not all-or-nothing. You can use them on any traffic where you need more detailed information, and skip them when you don't need that detail. Read more about this in our [persons documentation](/docs/data/persons).
 
 ## Why are we doing this?
 
@@ -112,15 +113,15 @@ The short answer? Because we can.
 
 The slightly longer answer? Because it's the right thing to do for both our users and our business.
 
-Most of our competitors are inefficient. They employ huge outbound sales teams to grow revenue. Their salaries and commissions for closing deals are passed onto their customers through higher prices.
+Most of our competitors are inefficient. They employ huge [outbound sales teams](/founders/negotiate-software-better) to grow revenue. Their salaries and commissions for closing deals are passed onto their customers through higher prices.
 
-In contrast, we're 100% inbound. We grow mostly through word of mouth, and we charge based on actual usage. 
+In contrast, we're 100% inbound, we grow mostly through word of mouth, and we charge based on actual usage. 
 
 We don't believe in loss-leaders, so we make a modest positive margin on each event sold, but what we charge is directly connected to what it costs us, not what we think we get away with charging.
 
 We grow our revenue through helping you grow, and onboarding you onto other tools, like session replay, feature flags, and surveys as well.
 
-We think this is better for everyone than trying to squeeze you for every cent you have. You have a great experience, and we'll enjoy better retention and word of mouth for doing the right thing.
+We think this is better than trying to squeeze you for every cent you have. You have a great experience and we'll enjoy better retention and word of mouth for doing the right thing.
 
 > ## FAQ
 >
@@ -138,6 +139,6 @@ We think this is better for everyone than trying to squeeze you for every cent y
 >
 > #### I've got a question you haven't answered...
 >
-> You can leave a comment on this post, or ask a question in [our community forum](/questions).
+> First, check out our [person](/docs/data/persons) and [person properties](/docs/product-analytics/person-properties) docs. If those don't answer your question, you can leave a comment on this post, or ask a question in [our community forum](/questions).
 >
 > If it's an account specific question, get in touch with your account manager or raise a ticket in the app.
