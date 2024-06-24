@@ -6,7 +6,7 @@ import { CallToAction } from 'components/CallToAction'
 
 const librariesData = {
     web: {
-        name: 'Web (front end)',
+        name: 'Web (frontend)',
         description: 'Use autocapture to collect client-side events without any special instrumentation.',
         items: [
             {
@@ -20,40 +20,45 @@ const librariesData = {
                 icon: <StaticImage src="../../../contents/images/docs/integrate/react.svg" alt="React" />,
             },
             {
-                name: 'Node.js',
-                url: '/docs/libraries/node',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/nodejs.svg" alt="Node.js" />,
-            },
-            {
                 name: 'Next.js',
                 url: '/docs/libraries/next-js',
                 icon: <StaticImage src="../../../contents/images/docs/integrate/frameworks/nextjs.svg" alt="Next.js" />,
+            },
+            {
+                name: 'Vue',
+                url: '/docs/libraries/vue',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/frameworks/vue.svg" alt="Vue" />,
             },
         ],
     },
     'server-side': {
         name: 'Server-side libraries',
-        description: 'Capture server-side events - best used in conjunction with a front end web library',
+        description: 'Capture server-side events - best used in conjunction with a frontend web library',
         items: [
             {
-                name: 'Java',
-                url: '/docs/libraries/java',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/java.svg" alt="Node.js" height={32} />,
-            },
-            {
-                name: 'PHP',
-                url: '/docs/libraries/php',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/php.svg" alt="Node.js" />,
-            },
-            {
-                name: 'Ruby',
-                url: '/docs/libraries/ruby',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/ruby.svg" alt="Node.js" />,
+                name: 'Node.js',
+                url: '/docs/libraries/node',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/nodejs.svg" alt="Node.js" />,
             },
             {
                 name: 'Python',
                 url: '/docs/libraries/python',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/python.svg" alt="Node.js" />,
+                icon: <StaticImage src="../../../contents/images/docs/integrate/python.svg" alt="Python" />,
+            },
+            {
+                name: 'Java',
+                url: '/docs/libraries/java',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/java.svg" alt="Java" height={32} />,
+            },
+            {
+                name: 'PHP',
+                url: '/docs/libraries/php',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/php.svg" alt="PHP" />,
+            },
+            {
+                name: 'Ruby',
+                url: '/docs/libraries/ruby',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/ruby.svg" alt="Ruby" />,
             },
             {
                 name: 'More',
@@ -69,7 +74,7 @@ const librariesData = {
             {
                 name: 'Android',
                 url: '/docs/libraries/android',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/android.svg" alt="Node.js" />,
+                icon: <StaticImage src="../../../contents/images/docs/integrate/android.svg" alt="Android" />,
             },
             {
                 name: 'iOS',
@@ -78,9 +83,14 @@ const librariesData = {
                     <StaticImage
                         src="../../../contents/images/docs/integrate/ios.svg"
                         className="dark:invert"
-                        alt="Node.js"
+                        alt="iOS"
                     />
                 ),
+            },
+            {
+                name: 'React Native',
+                url: '/docs/libraries/react-native',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/react.svg" alt="React Native" />,
             },
         ],
     },
