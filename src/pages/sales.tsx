@@ -5,25 +5,28 @@ import Link from 'components/Link'
 import { Link as SmoothScrollLink } from 'react-scroll'
 import Tooltip from 'components/Tooltip'
 import { StaticImage } from 'gatsby-plugin-image'
-import { IconMinus, IconPlus, IconRedo } from '@posthog/icons'
+import { IconArrowRight, IconMinus, IconPlus, IconRedo } from '@posthog/icons'
 import { CSSTransition } from 'react-transition-group'
 import { CallToAction } from 'components/CallToAction'
 
 const Slide1 = () => (
-    <div className="flex gap-8 article-content">
-        <div>
+    <div className="grid grid-cols-8 gap-8 justify-between">
+        <div className="col-span-5 pl-10 [&_p]:mb-2 max-w-2xl relative pb-10">
             <p>
                 You click ‘contact us’ and type in a bunch of personal information that has nothing to do with your use of the product.</p>
             <p>Often times, there's no place to even ask your question.</p>
             <p>Your phone number is required, even though they’ll respond by email.
             </p>
 
-            <CallToAction to="#" className="" size="sm" type="secondary">
-                Next
-            </CallToAction>
+            <div className="absolute left-10 bottom-0">
+                <CallToAction to="#" className="" size="sm" type="secondary">
+                    Next step
+                    <IconArrowRight className="size-4 inline-block ml-1" />
+                </CallToAction>
+            </div>
         </div>
 
-        <div className="rotate-2">
+        <div className="col-span-3 rotate-2 -mb-6">
             <StaticImage
                 quality={90}
                 placeholder="blurred"
@@ -35,7 +38,10 @@ const Slide1 = () => (
 )
 
 const them = [
-    { title: '"I have a question about the product."', children: <Slide1 /> },
+    {
+        title: '"I have a question about the product."',
+        children: <Slide1 />
+    },
     { title: 'The discovery call', children: 'Hello world! Slide 2.' },
     { title: 'Finally, a demo!', children: '' },
     { title: 'The follow-up meeting', children: '' },
@@ -63,20 +69,21 @@ const AccordionItem = ({ number, title, children, isOpen, onClick }) => {
     }, [isOpen]);
 
     return (
-        <li className={`border-t relative ${isOpen ? 'active border-transparent bg-white rounded shadow-lg z-10' : 'inactive border-light first:border-transparent'}`}>
-            <button onClick={onClick} className={`pl-3 pr-4 py-2 cursor-pointer w-full flex justify-between items-center transition-all ${isOpen ? '' : 'hover:bg-accent/80  hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'}`}>
+        <li className={`border-t relative ${isOpen ? 'active border-transparent bg-white rounded shadow-lg z-10 overflow-hidden' : 'inactive border-light first:border-transparent'}`}>
+            <button onClick={onClick} className={`pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all ${isOpen ? 'pt-4 pb-2' : 'py-2 hover:bg-accent/80  hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'}`}>
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 justify-center items-center p-1 font-semibold rounded-full bg-accent dark:bg-accent-dark">{number}</span>
-                    <span className={`font-bold transition-all ${isOpen ? 'text-xl' : 'text-[17px]'}`}>{title}</span></span>
+                    <span className={`font-bold transition-all ${isOpen ? 'text-2xl' : 'text-[17px]'}`}>{title}</span></span>
                 <span>
                     {isOpen ? <IconMinus className="size-4 inline-block transform rotate-180" /> : <IconPlus className="size-4 inline-block transform rotate-0" />}
                 </span>
             </button>
             <div
                 ref={contentRef}
-                style={{ height: contentHeight, overflow: 'hidden', transition: 'height 0.3s ease' }}
+                style={{ height: contentHeight, transition: 'height 0.3s ease' }}
+                className={isOpen ? '' : 'overflow-hidden'}
             >
-                <div className="p-4">
+                <div className="px-4">
                     {children}
                 </div>
             </div>
