@@ -9,53 +9,190 @@ import { IconArrowRight, IconMinus, IconPlus, IconRedo } from '@posthog/icons'
 import { CSSTransition } from 'react-transition-group'
 import { CallToAction } from 'components/CallToAction'
 
-const Slide1 = () => (
-    <div className="grid grid-cols-8 gap-8 justify-between">
-        <div className="col-span-5 pl-10 [&_p]:mb-2 max-w-2xl relative pb-10">
+const them = [
+    {
+        title: '"I have a question about the product."',
+        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-10">
             <p>
                 You click ‘contact us’ and type in a bunch of personal information that has nothing to do with your use of the product.</p>
             <p>Often times, there's no place to even ask your question.</p>
             <p>Your phone number is required, even though they’ll respond by email.
             </p>
+        </div>
 
-            <div className="absolute left-10 bottom-0">
-                <CallToAction to="#" className="" size="sm" type="secondary">
-                    Next step
-                    <IconArrowRight className="size-4 inline-block ml-1" />
-                </CallToAction>
+            <div className="col-span-3 rotate-2 -mt-6 mb-6">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/demo-form.png"
+                    width={294}
+                />
             </div>
-        </div>
-
-        <div className="col-span-3 rotate-2 -mb-6">
-            <StaticImage
-                quality={90}
-                placeholder="blurred"
-                src="../images/sales/demo-form.png"
-                width={294}
-            />
-        </div>
-    </div>
-)
-
-const them = [
-    {
-        title: '"I have a question about the product."',
-        children: <Slide1 />
+        </>
     },
-    { title: 'The discovery call', children: 'Hello world! Slide 2.' },
-    { title: 'Finally, a demo!', children: '' },
-    { title: 'The follow-up meeting', children: '' },
-    { title: 'Sticker shock', children: '' },
-    { title: '"We don\'t usually do this, but..."', children: '' },
-    { title: 'The dreaded contract', children: '' },
-    { title: 'Finally, implementation time!', children: '' },
-    { title: '"Who\'s my point of contact now??"', children: '' },
+    {
+        title: 'The discovery call',
+        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-10">
+            <p>
+                Get booked with a junior rep who decides if you are a worthy human being.</p>
+            <p>They will ask you the same questions you already filled out on the form.
+            </p>
+        </div>
+
+            <div className="col-span-3 -mt-12">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/sdr.png"
+                    width={338}
+                />
+            </div>
+        </>
+    },
+    {
+        title: 'Finally, a demo!',
+        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+            <p>
+                Deemed worthy? They will book you into a further call for a demo with a different person, five minutes of which will cover what you are specifically interested in.</p>
+            <p>
+                No pricing will be revealed. You will be asked the same questions for a third time.
+            </p>
+        </div>
+
+            <div className="col-span-3 -mt-4 pb-6 rotate-2">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/sdr-on-zoom.png"
+                    width={326}
+                />
+            </div>
+        </>
+    },
+    {
+        title: 'The follow-up meeting',
+        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+            <p>It's now time to talk about your usage so they can put together a commercial proposal.</p>
+            <p>A quote will be provided at a later date because they need to "circle back with the team" to "see what they can do for you."</p>
+        </div>
+
+            <div className="col-span-3 -mt-8 pb-6">
+            </div>
+        </>
+    },
+    {
+        title: 'Sticker shock',
+        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+            <p>
+                There will be a long period of commercial wrangling because they massively inflated the price so they can then discount it heavily.
+            </p>
+            <p>
+                They will bundle a bunch of value add-stuff you don’t need. 3 year contract is standard.
+            </p>
+        </div>
+
+            <div className="col-span-4 text-center -mt-12">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/receipt.png"
+                    width={472}
+                />
+            </div>
+        </>
+    },
+    {
+        title: '"We don\'t usually do this, but..."',
+        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+            <p>
+                Any legal questions require a ton of time seeking ‘approval’ and coming back with amazing special exceptions they made that were ‘really painful’ when you know it’s all BS.
+            </p>
+        </div>
+
+            <div className="col-span-4 -mt-12 pb-4 text-center">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/decision-makers.png"
+                    width={286}
+                />
+            </div>
+        </>
+    },
+    {
+        title: 'The dreaded contract',
+        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+            <p>
+                Eventually sign the contract - hopefully you saw the auto-renewal and mandatory price increases in there!
+            </p>
+        </div>
+
+            <div className="col-span-3 -mt-12">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/ribbon-cutting.png"
+                    width={326}
+                />
+            </div>
+        </>
+    },
+    {
+        title: 'Finally, implementation time!',
+        children: <><div className="col-span-4 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+            <p>
+                Spend <strong>a few months (!!)</strong> on implementation with yet another person on their team, because the person who demoed isn’t technical but has to be the person through whom all comms must flow.
+            </p>
+        </div>
+
+            <div className="col-span-4 -mt-8 pb-8">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/gantt-chart.png"
+                    width={554.5}
+                />
+            </div>
+        </>
+    },
+    {
+        title: '"Wait, who\'s my point of contact now??"',
+        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+            <p>
+                All the sales people who got you on board immediately disappear and you are passed onto yet another team who ask you the same questions again…
+            </p>
+        </div>
+
+            <div className="col-span-3 -mt-12 text-center">
+                <StaticImage
+                    quality={90}
+                    placeholder="blurred"
+                    src="../images/sales/confused-hog.png"
+                    width={202}
+                />
+            </div>
+        </>
+    },
 ]
 
 const us = [
     { title: '"I have a question about the product."', children: 'Hello world! Slide 1.' },
     { title: 'Personalized demo with technical account exec', children: '' },
-    { title: 'Next steps & follow-up questions', children: '' },
+    {
+        title: 'Next steps & follow-up questions',
+        children: <><div className="col-span-5 pl-9 [&_p]:mb-2 max-w-2xl pb-16">
+            <p>
+                After the call, the same person will quickly follow up with targeted, useful information about your specific use case.</p>
+            <p>If you’re looking at at spending $20k+ annually with us, we’ll get you into a shared Slack channel with our team. The aim is to get you into a short trial period where you’re implementing and seeing value from PostHog within a week - still free!</p>
+            <p>If PostHog isn’t the right fit for you, we’ll let you know our honest opinion!
+            </p>
+        </div>
+
+            <div className="col-span-3">
+
+            </div>
+        </>
+    },
     { title: 'Choose your own discount', children: '' },
     { title: 'Besties', children: '' },
 ]
@@ -70,7 +207,7 @@ const AccordionItem = ({ number, title, children, isOpen, onClick }) => {
 
     return (
         <li className={`border-t relative ${isOpen ? 'active border-transparent bg-white rounded shadow-lg z-10 overflow-hidden' : 'inactive border-light first:border-transparent'}`}>
-            <button onClick={onClick} className={`pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all ${isOpen ? 'pt-4 pb-2' : 'py-2 hover:bg-accent/80  hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'}`}>
+            <button onClick={onClick} className={`pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all relative ${isOpen ? 'pt-4 pb-2 z-20' : 'py-2 hover:bg-accent/80  hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'}`}>
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 justify-center items-center p-1 font-semibold rounded-full bg-accent dark:bg-accent-dark">{number}</span>
                     <span className={`font-bold transition-all ${isOpen ? 'text-2xl' : 'text-[17px]'}`}>{title}</span></span>
@@ -84,7 +221,23 @@ const AccordionItem = ({ number, title, children, isOpen, onClick }) => {
                 className={isOpen ? '' : 'overflow-hidden'}
             >
                 <div className="px-4">
-                    {children}
+
+                    <div className="grid grid-cols-8 gap-8 justify-between relative">
+                        {children}
+
+                        <div className="absolute left-9 bottom-6">
+
+                            <CallToAction to="#" className="" size="sm" type="secondary">
+                                Next step
+                                <IconArrowRight className="size-4 inline-block ml-1" />
+                            </CallToAction>
+                        </div>
+                    </div>
+
+
+
+
+
                 </div>
             </div>
         </li>
