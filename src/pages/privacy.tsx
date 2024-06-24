@@ -1168,8 +1168,8 @@ function Privacy() {
                         <h4>Effect of this Addendum</h4>
                         <p>In the event of any conflict or inconsistency between the terms of this Addendum and the terms of the Agreement with respect to the subject matter hereof and solely where U.S. Data Protection Laws apply, the terms of this Addendum shall control.</p>
                     </div>
-                    <div className="">
-                        summary
+                    <div>
+                        <p>ccpa addendum summary</p>
                     </div>
 
                     <div>
@@ -1230,8 +1230,8 @@ function Privacy() {
                             className="cursor-pointer"
                         >Global Privacy Practices and Your Rights</SmoothScrollLink> above.</p>
                     </div>
-                    <div className="">
-                        summary
+                    <div>
+                        <p>job applications summary</p>
                     </div>
 
                     <div>
@@ -1241,10 +1241,11 @@ function Privacy() {
                     </div>
                     <div></div>
                     <div className="pb-12">
-                        full content
+                        <p>If you need to enter into a Data Processing Agreement with us, the version you need will depend on whether you have signed up for PostHog Cloud in the US or EU. Please visit our <Link href="/dpa">world-class DPA generator</Link> and follow the instructions to have it counter-signed by PostHog.</p>
+                        <p>For the avoidance of doubt, if you use PostHog Cloud EU, no PII data is transferred to the US.</p>
                     </div>
-                    <div className="">
-                        summary
+                    <div>
+                        <p>dpa summary</p>
                     </div>
 
                     <div>
@@ -1254,10 +1255,10 @@ function Privacy() {
                     </div>
                     <div></div>
                     <div className="pb-12">
-                        full content
+                        <p>You can <Link href="/handbook/company/security">view our complete set of security measures</Link> for SOC 2, GDPR, and CCPA.</p>
                     </div>
-                    <div className="">
-                        summary
+                    <div>
+                        <p>security measures summary</p>
                     </div>
 
                     <div>
@@ -1287,7 +1288,9 @@ function Privacy() {
                         <p>We may also provide notification to customers who have provided us email addresses of material changes to this Privacy Policy through our Website. PostHog encourages visitors to frequently check this page for any minor changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.</p>
 
                     </div>
-                    <div className="invisible md:visible">&nbsp;</div>
+                    <div>
+                        <p>contacting posthog summary</p>
+                    </div>
                 </div>
             </div>
         </Layout>
