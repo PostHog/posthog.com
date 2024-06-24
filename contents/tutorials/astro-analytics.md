@@ -404,7 +404,7 @@ Lastly, remove the `posthog.onFeatureFlags()` code we added in `posthog.astro`:
       api_host:'<ph_client_api_host>',
       person_profiles: 'identified_only',
       loaded: function(posthog) {
-				// posthog.onFeatureFlags has been removed
+        // posthog.onFeatureFlags has been removed
 
         const distinctId = document.querySelector('.did').innerHTML;
         if (posthog.get_distinct_id() && posthog.get_distinct_id() !== distinctId) {
