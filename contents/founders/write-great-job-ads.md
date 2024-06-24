@@ -24,7 +24,7 @@ Given the number of people I've interviewed recently who have said 'I loved your
 
 ## Obvious ways
 
-These are table stakes. If you're not doing these, it's probably not even worth looking at the non-obvious stuff. Yes I am going to mention salary again, like every other nano-influencer on LinkedIn.
+These are table stakes. If you're not doing these, it's probably not even worth looking at the non-obvious stuff. Yes I am going to mention salary transparency again, like every other nano-influencer on LinkedIn.
 
 **Really tight requirements**
 
