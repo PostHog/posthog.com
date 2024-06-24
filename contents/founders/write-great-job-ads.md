@@ -14,7 +14,7 @@ crosspost:
   - Newsletter      
 ---
 
-At PostHog, we've written job ads that have seen 9,000 applicants in the last 12 months. One thing we've noticed in 2024 is that the quality of the average applicant has gone way, way up. We think this is due to a couple of things:
+At PostHog, we've written job ads that have received 9,000 applicants in the last 12 months. One thing we've noticed in 2024 is that the quality of the average applicant has gone way, way up. We think this is due to a couple of things:
 
 - We've started putting a lot more effort into making our job ads more interesting and differentiated
  
