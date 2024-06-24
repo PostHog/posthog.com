@@ -49,7 +49,7 @@ export const Markdown = ({
                     )
                 },
                 code: ({ node, ...props }) => {
-                    return <code {...props} className="break-all" />
+                    return <code {...props} className="break-all inline-block" />
                 },
                 a: ({ node, ...props }) => {
                     return <a rel="nofollow" {...props} />
