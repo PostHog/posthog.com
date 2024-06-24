@@ -317,7 +317,7 @@ Lastly, you can remove the code in `posthog.astro` which we added for the client
     '<ph_project_api_key>',
     {
       api_host:'<ph_client_api_host>'
-			// the "loaded" argument has been removed
+      // the "loaded" argument has been removed
     }
   )
 </script>
