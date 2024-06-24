@@ -125,37 +125,43 @@ function Sales() {
         >
             <SEO title='How we do "sales"' description="Sales, PostHog style" image={`/images/og/sales.png`} />
             <div>
-                <div className="max-w-2xl mx-auto py-8 px-4 md:px-8">
-                    <h1 className="text-5xl text-center">How we do "sales"</h1>
+                <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-8 pt-12 pb-12">
+                    <div>
+                        <h1 className="text-5xl mb-2">How we do "sales"</h1>
 
-                    <p className="mt-2 text-lg font-semibold mb-2 text-center text-balance">
-                        There’s a big difference between PostHog and literally everybody else
-                    </p>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8">
+                        <p className="mt-2 text-lg font-semibold mb-2 opacity-60">
+                            Because nobody loves pricing pages that don't contain any actual pricing...
+                        </p>
+                        <p className="mb-2">
+                            Most SaaS companies want to feel out how much money they can squeeze out of you. PostHog operates differently.
+                        </p>
+                        <p className="mb-2">
+                            We’re more like a utility where you pay for what you use. No extra markup - everyone pays the same rates*.
+                        </p>
+                        <p className="opacity-60 text-sm">*Unless you qualify for a discount</p>
+                    </div>
                     <div className="relative">
-                        <div className="absolute top-0 right-0 bottom-0 border border-light">
+                        <div className="absolute top-0 left-0 bottom-0">
                             <StaticImage
                                 quality={100}
                                 placeholder="none"
-                                src="../images/sales/phone-hog.png"
-                                className="h-full"
+                                src="../images/sales/phone-hog-light.png"
+                                className="h-72"
+                                loading="eager"
+                                objectPosition="left top"
+                                objectFit="cover"
                             />
                         </div>
-                    </div>
-
-                    <div>
-                        <div className="max-w-md">
-                            <p>
-                                Ever been to a pricing page that contains no actual pricing? And to find out what you’d
-                                pay, you have to “jump on a quick call” with sales?
-                            </p>
-                            <p>
-                                Most SaaS companies want to feel out how much money they can squeeze out of you. PostHog
-                                operates differently.
-                            </p>
-                            <p>Here’s how.</p>
+                        <div className="hidden lg:block absolute left-full -bottom-7 w-screen">
+                            <StaticImage
+                                quality={100}
+                                placeholder="none"
+                                src="../images/sales/phone-cord.png"
+                                className="h-[15px] -ml-1"
+                                loading="eager"
+                                width={754}
+                                height={15}
+                            />
                         </div>
                     </div>
                 </div>
