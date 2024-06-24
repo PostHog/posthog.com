@@ -56,7 +56,7 @@ You are not that great a negotiator, and you might as well screen out the people
 
 **Get the hiring manager to write it, and then a good writer to edit it**
 
-Classic process is hiring manager comes up with a list of bullets -> passes to recruiter to write the ad -> publish. This is a great way to ensure that you have a weird frankenstein ad written by two people, neither of whom are professional writers. 
+Classic process is hiring manager comes up with a list of bullets -> passes to recruiter to write the ad -> publish. This is a great way to ensure that you have a weird Frankenstein's monster of an ad written by two people, neither of whom are professional writers. 
 
 I'm a big believer that a well-written job ad is just as important to your company as a great blog post or homepage copy. Especially if you advertise on LinkedIn, your ad will be seen by _thousands_ of people - potentially more than visit your website every week. 
 
