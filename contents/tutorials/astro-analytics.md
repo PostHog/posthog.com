@@ -188,7 +188,7 @@ With the feature flag, go back to your home page at `components/posthog.astro`. 
     {
       api_host:'<ph_client_api_host>',
       person_profiles: 'identified_only',
-			loaded: (posthog) => {
+      loaded: (posthog) => {
         posthog.onFeatureFlags(() => {
           const button = document.querySelector('.main');
           if (posthog.isFeatureEnabled('new-button')) {
