@@ -40,8 +40,8 @@ const AccordionItem = ({ number, title, children, isOpen, onClick }) => {
     }, [isOpen]);
 
     return (
-        <div className={`border-t ${isOpen ? 'active border-transparent' : 'inactive border-light'}`}>
-            <button onClick={onClick} className={`pl-3 pr-4 py-2 cursor-pointer w-full flex justify-between items-center rounded-tl rounded-tr ${isOpen ? 'bg-white' : 'bg-transparent hover:bg-accent/80 rounded-bl rounded-br'}`}>
+        <li className={`border-t relative ${isOpen ? 'active border-transparent bg-white rounded shadow-lg z-10' : 'inactive border-light first:border-transparent'}`}>
+            <button onClick={onClick} className={`pl-3 pr-4 py-2 cursor-pointer w-full flex justify-between items-center transition-all ${isOpen ? '' : 'hover:bg-accent/80  hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'}`}>
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 justify-center items-center p-1 font-semibold rounded-full bg-accent dark:bg-accent-dark">{number}</span>
                     <span className={`font-bold transition-all ${isOpen ? 'text-xl' : 'text-[17px]'}`}>{title}</span></span>
@@ -53,11 +53,11 @@ const AccordionItem = ({ number, title, children, isOpen, onClick }) => {
                 ref={contentRef}
                 style={{ height: contentHeight, overflow: 'hidden', transition: 'height 0.3s ease' }}
             >
-                <div className="bg-white shadow-lg rounded-bl rounded-br p-4">
+                <div className="p-4">
                     {children}
                 </div>
             </div>
-        </div>
+        </li>
     );
 };
 
@@ -69,7 +69,7 @@ const Accordion = ({ items }) => {
     };
 
     return (
-        <div className="space-y-px">
+        <ol className="space-y-px p-0 list-none">
             {items.map((item, index) => (
                 <AccordionItem
                     key={index}
@@ -80,7 +80,7 @@ const Accordion = ({ items }) => {
                     onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 />
             ))}
-        </div>
+        </ol>
     );
 };
 
@@ -177,7 +177,11 @@ function Sales() {
                     </h2>
 
                     <Accordion items={them} />
-                    <h2>Us</h2>
+
+                    <br />
+                    <br />
+                    <br />
+                    <h2>How PostHog does sales</h2>
                     <Accordion items={us} />
                 </div>
             </div>
