@@ -9,7 +9,8 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_posthog_7a5a2cf3ac.png
 featuredCustomer: false
 industries:
-  - 'Science', 'Social network'
+  - Science
+  - Social network
 users:
   - Growth
   - Engineering
