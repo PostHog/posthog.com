@@ -366,28 +366,25 @@ const AccordionItem = ({ index, number, title, children, isOpen, onClick, onNext
 
     return (
         <li
-            className={`border-t relative ${
-                isOpen
+            className={`border-t relative ${isOpen
                     ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
                     : 'inactive border-light dark:border-dark first:border-transparent'
-            }`}
+                }`}
         >
             <button
                 onClick={onClick}
-                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all relative ${
-                    isOpen
+                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all relative ${isOpen
                         ? 'pt-4 pb-2 z-20'
                         : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
-                }`}
+                    }`}
             >
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 [flex:0_0_2rem] justify-center items-center p-1 font-semibold rounded-full bg-accent dark:bg-accent/10">
                         {number}
                     </span>
                     <span
-                        className={`font-bold transition-all leading-tight ${
-                            isOpen ? 'text-lg md:text-2xl' : 'text-[17px]'
-                        }`}
+                        className={`font-bold transition-all leading-tight ${isOpen ? 'text-lg md:text-2xl' : 'text-[17px]'
+                            }`}
                     >
                         {title}
                     </span>
