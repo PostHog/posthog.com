@@ -1516,3 +1516,11 @@ li.squeak-left-border {
 .preserve-3d {
     transform-style: preserve-3d;
 }
+
+.tw-tweet + .tw-tweet {
+    @apply before:absolute before:w-px before:bg-border dark:before:bg-border-dark before:bottom-[calc(100%_+_1px)] before:-top-8 before:left-10;
+}
+
+.tw-tweet + *:not(.tw-tweet) {
+    @apply before:hidden;
+}

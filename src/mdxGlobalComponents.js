@@ -54,6 +54,7 @@ import { StarRepoButton } from './components/StarRepoButton'
 import { Startups } from './components/Startups'
 import { TracksCTA } from './components/TracksCTA'
 import { ZendeskTicket } from './components/ZendeskTicket'
+import { Tweet } from './components/Tweet'
 
 export const shortcodes = {
     ArrayCTA,
@@ -110,4 +111,5 @@ export const shortcodes = {
     Startups,
     TracksCTA,
     ZendeskTicket,
+    Tweet,
 }

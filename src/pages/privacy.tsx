@@ -6,10 +6,10 @@ import Link from 'components/Link'
 import { Link as SmoothScrollLink } from 'react-scroll'
 import Tooltip from 'components/Tooltip'
 import { Twitter } from 'components/Icons'
-import { StaticImage } from 'gatsby-plugin-image'
 import { IconArrowRightDown } from '@posthog/icons'
 import { sexyLegalMenu } from '../navs'
 import Lawyers from 'components/Lawyers'
+import { Tweet } from 'components/Tweet'
 
 const privacyClasses = cntl`
   full-privacy-policy
@@ -64,114 +64,6 @@ function Privacy() {
         const h2s = fullPrivacyPolicy.querySelectorAll(':nth-child(odd) h2')
         setHeaders(Array.from(h2s))
     }, [])
-
-    const Tweet = ({ children, lastTweet = false }) => (
-        <div
-            className={`max-w-xl mx-auto bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${
-                !lastTweet &&
-                'after:absolute after:w-px after:bg-border dark:after:bg-border-dark after:top-[calc(100%_+_1px)] after:-bottom-4 after:h-12 after:left-10'
-            }`}
-        >
-            <div className="flex items-center space-x-4">
-                <div className="rounded-full bg-accent w-12 h-12 overflow-hidden">
-                    <StaticImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
-                        alt='James ("Veg"/"JC") Hawkins'
-                        className="w-12 h-12"
-                    />
-                </div>
-                <div>
-                    <div className="text-lg font-semibold leading-tight">James Hawkins</div>
-                    <div className="text-gray-500 text-sm">
-                        <Link
-                            href="https://x.com/james406"
-                            externalNoIcon
-                            className="text-primary/70 dark:text-primary-dark/70 hover:text-red dark:hover:text-yellow"
-                        >
-                            @james406
-                        </Link>
-                    </div>
-                </div>
-            </div>
-            <div className="mt-4">
-                <p className="text-gray-700">{children}</p>
-            </div>
-            <div className="mt-4 flex justify-between items-center text-gray-500">
-                <div className="flex space-x-4">
-                    <DontClickButton>
-                        <button className="dont-click flex items-center space-x-1 hover:text-blue-500">
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M14 9l-5 5m0 0l5 5m-5-5h12"
-                                ></path>
-                            </svg>
-                            <span>Reply</span>
-                        </button>
-                    </DontClickButton>
-                    <DontClickButton>
-                        <button className="dont-click flex items-center space-x-1 hover:text-green-500">
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M5 15l7-7 7 7"
-                                ></path>
-                            </svg>
-                            <span>Retweet</span>
-                        </button>
-                    </DontClickButton>
-                    <DontClickButton>
-                        <button className="dont-click flex items-center space-x-1 hover:text-red-500">
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M12 4v16m8-8H4"
-                                ></path>
-                            </svg>
-                            <span>Like</span>
-                        </button>
-                    </DontClickButton>
-                </div>
-            </div>
-        </div>
-    )
-
-    const DontClickButton = ({ children, ...props }) => (
-        <button
-            className="dont-click flex items-center space-x-1 hover:text-blue-500"
-            onClick={(e) => {
-                e.preventDefault()
-                alert("Gen Z? Don't get distracted. You're here to read our thrilling terms.")
-            }}
-            {...props}
-        >
-            {children}
-        </button>
-    )
 
     return (
         <Layout
@@ -233,23 +125,23 @@ function Privacy() {
                         and don't rely on 140 characters at a time, especially from someone who isn't a lawyer.
                     </p>
 
-                    <Tweet>
+                    <Tweet className="mx-auto" alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy.">
                         Our privacy policy covers it all – from cookies 🍪 to your data protection rights under your
                         country’s law 🌍. Read it carefully as using our site means you agree to it!
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet className="mx-auto" alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy.">
                         🔓 As an open-source project, some info you share might be public for our awesome community’s
                         collaboration. But don't worry, we’re committed to collecting and sharing the minimum amount of
                         personal info. We're the Data Controller for all this!
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet className="mx-auto" alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy.">
                         💻 We collect data like your IP address, device info, and pages/content you view to improve your
                         experience. No third-party cookies here – we don’t do retargeting ads or creepy tracking!
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet className="mx-auto" alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy.">
                         Here's a cat gif to keep you engaged (and to keep the algos intrigued). Please like/RT.
                         <img src="/images/pizza-cat.gif" alt="Cat gif" className="w-full mt-2" />
                         <p className="text-right !-mb-4">
@@ -263,31 +155,31 @@ function Privacy() {
                         </p>
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet className="mx-auto" alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy.">
                         🛠️ We gather usage data to analyze and improve our site, but you can opt out. If you share your
                         info, like name and email, it’s only used for necessary stuff. No sensitive info like genetic
                         data here, and definitely no under-18 data!
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet className="mx-auto" alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy.">
                         🌐 We share your info with service providers to run our site and product, but nothing else.
                         We’re part of the EU-US Data Privacy Framework, ensuring your data is safe. You can opt out if
                         you like!
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet className="mx-auto" alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy.">
                         📬 We may contact you occasionally via email with updates, but you can unsubscribe anytime. We
                         promise not to spam you! Our first-party cookies remember you and improve your experience.
                         Reminder: we don't use any third-party cookies.
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet className="mx-auto" alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy.">
                         🚀 We respect your rights and keep your info as long as your account is active. You can delete
                         it anytime. Contributions to our projects remain public to keep the integrity of our open-source
                         code.
                     </Tweet>
 
-                    <Tweet lastTweet={true}>
+                    <Tweet className="mx-auto" alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy.">
                         If you liked this summary, you'll love following me on{' '}
                         <Link
                             href="https://twitter.com/james406"

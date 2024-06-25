@@ -15,6 +15,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
+import { Tweet } from 'components/Tweet'
 
 const articleWidth = {
     lg: 'max-w-screen-2xl',
