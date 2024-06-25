@@ -582,17 +582,17 @@ function Sales() {
 
                 <div className="max-w-7xl mx-auto md:py-8 px-4 md:px-8">
                     <div className="flex justify-center">
-                        <div className="inline-flex flex-col items-center mb-6 mx-auto">
+                        <div className="inline-flex flex-col items-center mb-10 mx-auto">
                             <h2 className="mb-1 text-center relative">
                                 How the sales process works at{' '}
                                 <div className="inline-block relative after:absolute after:-bottom-5 after:left-0 after:right-0 after:content-['[Insert_your_least_favaorite_enterprise_SaaS_company_here]'] after:text-xs after:text-primary/60 dark:after:text-primary-dark/60 after:font-normal after:tracking-normal">
                                     <span
                                         onClick={updateCompanyName}
-                                        className="absolute right-0.5 top-[-2px] z-10 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30 hover:top-[-3px] active:top-[-1px] hover:scale-[1.03] active:scale-[.97] transition-transform"
+                                        className="absolute right-0.5 bottom-[.15rem] hover:bottom-[0.2rem] active:bottom-[.1rem] z-10 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30 hover:scale-[1.02] active:scale-[.99] transition-transform"
                                     >
                                         <IconRedo className="size-5 inline-block text-red/90 hover:text-red/100 dark:text-white/70 dark:group-hover:text-white/100" />
                                     </span>
-                                    <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow pl-0.5 pr-4 mx-1 w-[calc(100vw_-_6rem)] xs:max-w-sm md:mx-auto  inline-flex gap-2 justify-center relative overflow-hidden">
+                                    <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mr-8 w-[calc(100vw_-_6rem)] xs:max-w-sm inline-flex gap-2 justify-center relative overflow-hidden">
                                         <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
                                             <span>{companyName}</span>
                                         </CSSTransition>
@@ -607,7 +607,7 @@ function Sales() {
                     </div>
 
                     <div className="py-12">
-                        <h2 className="flex justify-center items-center">
+                        <h2 className="flex justify-center items-center mb-6">
                             How <Logo className="inline-block mt-[-2px] ml-2 mr-1.5" /> does sales
                         </h2>
                         <div ref={usRef}>
