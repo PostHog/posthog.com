@@ -75,7 +75,7 @@ The table below is a side-by-side comparison of our new base event pricing, and 
 
 We use it for events where we're only interested in aggregate data, such as for logged-out users on our website.
 
-It could also be useful when:
+Some examples of this include:
 
 - You want to track your marketing website and your product, but you don't need detailed information about visitors to your marketing website.
 - You're willing to lose some functionality for lower bills.
