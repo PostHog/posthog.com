@@ -24,6 +24,18 @@ import { RenderInClient } from 'components/RenderInClient'
 import BillboardTruck from './BillboardTruck'
 import Spinner from 'components/Spinner'
 
+const GlobeScene = React.lazy(() =>
+    import('./Globe').then((module) => ({
+        default: module.GlobeScene,
+    }))
+)
+
+const GlobeSkeleton = () => (
+    <div className="px-5">
+        <div className="bg-accent dark:bg-accent-dark rounded-md max-w-screen-lg mx-auto h-[50rem] mb-16 mt-12 pt-20 pb-16" />
+    </div>
+)
+
 const Home = () => {
     const posthog = usePostHog()
 
@@ -42,7 +54,6 @@ const Home = () => {
                 <Libraries />
                 <CodeBlocks />
                 <NoHatingAllowed />
-
                 <RenderInClient
                     render={() => {
                         return posthog?.getFeatureFlag?.('homepage-billboard-truck') === true ? (
@@ -63,6 +74,11 @@ const Home = () => {
                 <Community />
                 <OnePlatform />
                 <CustomerData />
+                {typeof window !== 'undefined' && (
+                    <React.Suspense fallback={<GlobeSkeleton />}>
+                        <GlobeScene />
+                    </React.Suspense>
+                )}
                 <Timeline />
                 <Roadmap />
                 <Startups />

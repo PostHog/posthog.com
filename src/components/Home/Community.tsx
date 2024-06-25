@@ -54,7 +54,7 @@ const CommunityStat = ({ count, label, className }) => {
     )
 }
 
-const Stars = () => {
+export const Stars = () => {
     const breakpoints = useBreakpoint()
     const particlesInit = useCallback(async (engine) => {
         await loadStarsPreset(engine)
@@ -90,7 +90,6 @@ export default function Community() {
             ref={ref}
             className="relative after:bg-gradient-to-b dark:after:from-[#141A26]/0 dark:after:to-dark after:h-20 after:left-0 after:w-full after:absolute after:bottom-0"
         >
-            {inView && (websiteTheme === 'dark' ? <Stars /> : null)}
             <div className="w-full overflow-hidden md:pt-0 before:bg-gradient-to-b dark:before:from-dark dark:before:to-[#141A26]/0 before:absolute before:left-0 before:h-48 before:w-full before:top-0">
                 <div className="md:absolute relative w-full top-8 sm:top-12 md:-top-16 md:pt-8 lg:pt-0 xl:top-12 2xl:top-20 px-4 md:px-0 z-40">
                     <h2 className="m-0 pb-2 px-4 text-4xl md:text-5xl lg:text-7xl text-center leading-0 md:leading-none">

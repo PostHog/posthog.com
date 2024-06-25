@@ -33,7 +33,7 @@ const features = [
 
 export default function CustomerData() {
     return (
-        <section className="mt-12 mb-24 px-5">
+        <section className="mt-12 px-5">
             <div className="max-w-screen-2xl mx-auto">
                 <h2 className="text-4xl sm:text-5xl lg:text-6xl m-0 text-center mb-6 sm:mb-10">
                     <span className="text-red">Full control</span> of your customer data
