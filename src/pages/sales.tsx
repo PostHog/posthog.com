@@ -649,15 +649,15 @@ function Sales() {
                             <h2 className="mb-1 text-center relative">
                                 How the sales process works at{' '}
                                 <div className="inline-block relative after:absolute after:-bottom-5 after:left-0 after:right-0 after:content-['[Insert_your_least_favaorite_enterprise_SaaS_company_here]'] after:text-xs after:text-primary/60 dark:after:text-primary-dark/60 after:font-normal after:tracking-normal">
-                                    <span
+                                    <button
                                         onClick={updateCompanyName}
                                         className="absolute right-0.5 bottom-[.15rem] hover:bottom-[0.2rem] active:bottom-[.1rem] z-10 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30 hover:scale-[1.02] active:scale-[.99] transition-transform"
                                     >
                                         <IconRedo className="size-5 inline-block text-red/90 hover:text-red/100 dark:text-white/70 dark:group-hover:text-white/100" />
-                                    </span>
+                                    </button>
                                     <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mr-8 w-[calc(100vw_-_6rem)] xs:max-w-sm inline-flex gap-2 justify-center relative overflow-hidden">
                                         <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
-                                            <span>{companyName}</span>
+                                            <span className="cursor-default">{companyName}</span>
                                         </CSSTransition>
                                     </span>
                                 </div>
