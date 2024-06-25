@@ -23,7 +23,7 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 * Events without person data are cheaper for us to ingest and query. We're passing this saving onto you by introducing cheaper base event pricing and a new 'person profiles' event option, which is charged separately.
 
-* Events with person profiles enabled cost the same as our old event pricing. If you're an existing customer, you'll see a new 'person profiles' line item on your invoice, but your pricing has not increased.
+* Events with person profiles enabled cost the same as our old event pricing – i.e. base events + person profiles = our previous per event pricing. If you're an existing customer, you'll see a new 'person profiles' line item on your invoice, but your pricing has not increased.
 
 * By default, events are captured with person profiles, but you can change this with a simple [configuration option](#how-do-i-start-using-it) whenever you like.
 
@@ -50,7 +50,7 @@ We expect teams to use a combination of events with and without person profiles 
 
 This makes us better value than any popular (>$10M in revenue) product analytics tool.
 
-Below you can see how our new pricing compares to Mixpanel's up to 20 million events – the limit of its "transparent" pricing. 
+Here's how our new pricing compares to Mixpanel's:
 
 <ProductScreenshot
   imageLight={PricingComparison} 
@@ -59,9 +59,7 @@ Below you can see how our new pricing compares to Mixpanel's up to 20 million ev
   classes="rounded"
 />
 
-The table below is a side-by-side comparison of our new base event pricing, and pricing for events with person profiles enabled. 
-
-The math is: new base events + person profiles = our previous per event pricing.
+And here's a more detailed breakdown of the difference at each pricing tier:
 
 | **Monthly events** | **New base event price** | **Base events + person profiles** | **Percentage diff.** |
 |--------------------|--------------------------|-----------------------------------|----------------|
@@ -75,7 +73,7 @@ The math is: new base events + person profiles = our previous per event pricing.
 
 ## Who is this for?
 
-The new event option is useful if:
+Tracking events without person data is useful if:
 
 - You want to track your marketing website and your product, but you don't need detailed information about visitors to your marketing website.
 - You're willing to [lose some functionality](#whats-the-downside) for lower bills.
@@ -86,7 +84,7 @@ The new event option is useful if:
 
 We recommend you enable person profiles for logged-in users of your product and website, but disable them for unidentified users where aggregate data is sufficient. 
 
-This is how we've configured our own product and website.
+This is how we've configured our own product and website tracking.
 
 ## What's the downside?
 
@@ -113,7 +111,7 @@ Most of our competitors are inefficient. They employ huge [outbound sales teams]
 
 In contrast, we're 100% inbound, we [grow mostly through word of mouth](/handbook/how-we-get-users), and we charge based on actual usage. 
 
-We don't believe in loss leaders, so we make a modest positive margin on each event sold, but what we charge is directly connected to what it costs us, not what we think we get away with charging.
+We don't believe in loss leaders, so we make a modest positive margin on each event sold, but what we charge is directly connected to what it costs us, not what we think we can get away with charging.
 
 We grow our revenue through helping you grow, and onboarding you onto other tools, like session replay, feature flags, and surveys as well.
 
