@@ -406,7 +406,7 @@ const AccordionItem = ({ index, number, title, children, isOpen, onClick, onNext
                         {number}
                     </span>
                     <span
-                        className={`font-bold transition-all leading-tight ${isOpen ? 'text-lg md:text-2xl' : 'text-[17px]'
+                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg md:text-2xl' : 'font-semibold text-[17px]'
                             }`}
                     >
                         {title}
