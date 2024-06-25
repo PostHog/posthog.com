@@ -377,37 +377,48 @@ const us = [
                 </div>
             </>
         ),
-        cta: (
-            <>
-            </>
-        ),
+        cta: <></>,
     },
 ]
 
-const AccordionItem = ({ index, number, title, children, isOpen, onClick, onNext, hasNext, cta }) => {
+const AccordionItem = ({
+    index,
+    number,
+    title,
+    children,
+    isOpen,
+    onClick,
+    onNext,
+    hasNext,
+    cta,
+    onAnimationComplete,
+}) => {
     const contentRef = useRef(null)
 
     return (
         <li
-            className={`border-t relative ${isOpen
-                ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
-                : 'inactive border-light dark:border-dark first:border-transparent'
-                }`}
+            className={`border-t relative ${
+                isOpen
+                    ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
+                    : 'inactive border-light dark:border-dark first:border-transparent'
+            }`}
         >
             <button
                 onClick={onClick}
-                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all relative ${isOpen
-                    ? 'pt-4 pb-2 z-20'
-                    : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
-                    }`}
+                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all relative ${
+                    isOpen
+                        ? 'pt-4 pb-2 z-20'
+                        : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                }`}
             >
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 [flex:0_0_2rem] justify-center items-center p-1 font-semibold rounded-full bg-accent dark:bg-accent/10">
                         {number}
                     </span>
                     <span
-                        className={`font-bold transition-all leading-tight ${isOpen ? 'text-lg md:text-2xl' : 'text-[17px]'
-                            }`}
+                        className={`font-bold transition-all leading-tight ${
+                            isOpen ? 'text-lg md:text-2xl' : 'text-[17px]'
+                        }`}
                     >
                         {title}
                     </span>
@@ -421,6 +432,7 @@ const AccordionItem = ({ index, number, title, children, isOpen, onClick, onNext
                 </span>
             </button>
             <motion.div
+                onAnimationComplete={onAnimationComplete}
                 ref={contentRef}
                 animate={{ height: isOpen ? 'auto' : 0, transition: { duration: 0.3, type: 'tween' } }}
                 className={isOpen ? '' : 'overflow-hidden'}
@@ -450,7 +462,7 @@ const AccordionItem = ({ index, number, title, children, isOpen, onClick, onNext
 }
 
 const Accordion = ({ items, type, keyboardContainerRef }) => {
-    const ref = useRef(null)
+    const ref = useRef<HTMLOListElement>(null)
     const [openIndex, setOpenIndex] = useState(0)
 
     const openNext = () => setOpenIndex((index) => (index === items.length - 1 || index === null ? 0 : index + 1))
@@ -477,15 +489,32 @@ const Accordion = ({ items, type, keyboardContainerRef }) => {
         }
     }, [])
 
+    const scrollToIndex = (index) => {
+        if (ref.current && window.innerWidth <= 639) {
+            const element = ref.current.children[index]
+            const y = element.getBoundingClientRect().top + window.scrollY - 56
+            window.scrollTo({ top: y, behavior: 'smooth' })
+        }
+    }
+
     return (
         <ol ref={ref} className="space-y-px p-0 list-none">
             {items.map((item, index) => (
                 <AccordionItem
+                    onAnimationComplete={({ height }) => {
+                        if (height === 'auto') {
+                            scrollToIndex(index)
+                        }
+                    }}
                     key={index}
                     number={index + 1}
                     title={item.title}
                     isOpen={openIndex === index}
-                    onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                    onClick={() => {
+                        if (openIndex !== index) {
+                            setOpenIndex(openIndex === index ? null : index)
+                        }
+                    }}
                     onNext={openNext}
                     hasNext={index < items.length - 1}
                     cta={item.cta}
@@ -610,9 +639,7 @@ function Sales() {
                                 />
                             </div>
                         </div>
-                        <div className="hidden xl:block absolute left-full -bottom-10 w-screen bg-[url('../images/sales/phone-cord.png')] h-[15px] -ml-1 bg-contain bg-repeat-x">
-
-                        </div>
+                        <div className="hidden xl:block absolute left-full -bottom-10 w-screen bg-[url('../images/sales/phone-cord.png')] h-[15px] -ml-1 bg-contain bg-repeat-x"></div>
                     </div>
                 </div>
 
@@ -632,7 +659,6 @@ function Sales() {
                                         <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
                                             <span>{companyName}</span>
                                         </CSSTransition>
-
                                     </span>
                                 </div>
                             </h2>
