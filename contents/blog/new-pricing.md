@@ -21,7 +21,7 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 * This is possible because we've introduced a new event processing option that enables you to capture events without person data. 
 
-* Events without person data costs less for us to ingest and query. We're passing this saving onto you by introducing cheaper base event pricing and a new 'person profiles' event option, which is charged separately.
+* Events without person data are cheaper for us to ingest and query. We're passing this saving onto you by introducing cheaper base event pricing and a new 'person profiles' event option, which is charged separately.
 
 * Events with person profiles enabled cost the same as our old event pricing. If you're an existing customer, you'll see a new 'person profiles' line item on your invoice, but your pricing has not increased.
 
