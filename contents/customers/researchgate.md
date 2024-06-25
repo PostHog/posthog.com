@@ -36,7 +36,7 @@ Over the years ResearchGate’s team has built everything from internal experime
 
 <BorderWrapper>
 <Quote
-    imageSource="/images/customers/paul-mccloud.jpg"
+    imageSource="/images/customers/paul_mccloud.jpg"
     size="md"
     name="Paul McCloud"
     title="Head of Product Engineering, ResearchGate"
