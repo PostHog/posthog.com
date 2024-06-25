@@ -52,7 +52,7 @@ The scale of ResearchGate’s community meant that the decision to switch wasn�
 
 In addition to offering lower and more transparent pricing, PostHog also worked closely with Paul’s team to provide proactive support — including in an on-site visit earlier this year. 
 
-“If I email my Cloudflare support engineer, it’ll be a few days before I get a reply and it’ll be a subpar response,” says Paul. “With PostHog though I particularly like that I get to deal with the relevant engineering expert on a topic. [Simon](/community/profiles/28895) will loop in [Neil](/community/profiles/28695), or [Marius](/community/profiles/30202), or [whoever](/people), and I don’t waste time playing the telephone game.”
+“If I email the support engineer for other providers we use it’ll be a few days before I get a reply and it’ll be a subpar response,” says Paul. “With PostHog I particularly like that I get to deal with the relevant engineering expert on a topic. [Simon](/community/profiles/28895) will loop in [Neil](/community/profiles/28695), or [Marius](/community/profiles/30202), or [whoever](/people), and I don’t waste time playing the telephone game.”
 
 ### Testing algorithmic models to boost discovery with 25M users
 
