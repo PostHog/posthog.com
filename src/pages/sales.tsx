@@ -187,7 +187,7 @@ const them = [
                     </p>
                 </div>
 
-                <div className="col-span-3 -mt-12 text-center">
+                <div className="col-span-3 -mt-4 md:-mt-12 text-center">
                     <StaticImage
                         quality={90}
                         placeholder="blurred"
@@ -198,13 +198,12 @@ const them = [
             </>
         ),
         cta: (
-            <>
+            <div className="flex flex-col md:flex-row gap-3 my-4">
                 <CallToAction href="https://app.posthog.com/signup">Get started - free</CallToAction>
-                &nbsp;&nbsp;
                 <CallToAction href="/demo" type="outline">
-                    Schedule a demo (but not like this one!)
+                    Get a demo (but not like this one!)
                 </CallToAction>
-            </>
+            </div>
         ),
     },
 ]
@@ -315,13 +314,13 @@ const us = [
                         <Link href="/handbook/growth/sales/contracts">from our website</Link>! We believe this should be
                         transparent too.
                     </p>
-                    <p>
+                    <p className="text-xs text-primary/75 dark:text-primary-dark/75">
                         P.S. If you ask for free <Link href="/merch">merch</Link>, our team is legally obliged to say
                         yes.
                     </p>
                 </div>
 
-                <div className="col-span-4">
+                <div className="col-span-4 -mt-4 text-center">
                     <StaticImage quality={90} placeholder="blurred" src="../images/sales/discounts.png" width={321} />
                 </div>
             </>
@@ -331,7 +330,7 @@ const us = [
         title: 'Besties forever?',
         children: (
             <>
-                <div className="col-span-12 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-4 md:pb-20">
+                <div className="col-span-8 pl-1 md:pl-9 [&_p]:mb-2">
                     <p>
                         Contract signed - now you get passed onto… wait is that still the same person who did the
                         initial demo and knows everything about me? And they will be my main point of contact for
@@ -339,23 +338,26 @@ const us = [
                     </p>
                     <p>We’re going to be best friends!</p>
 
-                    <StaticImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="../images/sales/celebration.png"
-                        width={771}
-                        layout="fullWidth"
-                    />
+                    <div className="flex flex-col md:flex-row gap-3 my-4">
+                        <CallToAction href="https://app.posthog.com/signup">Get started</CallToAction>
+                        <CallToAction href="/demo" type="outline">
+                            Get a demo (just like this one!)
+                        </CallToAction>
+                    </div>
+
+                    <div className="-mx-4 md:ml-[-3.25rem] md:-mr-4">
+                        <StaticImage
+                            quality={90}
+                            placeholder="blurred"
+                            src="../images/sales/celebration.png"
+                            layout="fullWidth"
+                        />
+                    </div>
                 </div>
             </>
         ),
         cta: (
             <>
-                <CallToAction href="https://app.posthog.com/signup">Get started DAWWWWWG</CallToAction>
-                &nbsp;&nbsp;
-                <CallToAction href="/demo" type="outline">
-                    Schedule a demo (but not like this one!)
-                </CallToAction>
             </>
         ),
     },
