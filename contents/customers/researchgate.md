@@ -30,7 +30,7 @@ ResearchGate, the world’s largest professional network for scientists, helps m
 
 Over the years ResearchGate’s team has built everything from internal experimentation frameworks and feature flagging systems to traffic experimentation systems and GraphQL clients. Many of these tools functioned to a high standard, but eventually the maintenance burden became too much. 
 
-“We built these tools well, but there comes a time when we can’t iterate of them as fast and we need to focus elsewhere,” says Paul. “This eventually became a strategic focus: How are we going to migrate more of our stack to third-party services so we can focus on our core competencies?”
+“We built these tools well, but there comes a time when we can’t iterate on them as fast and we need to focus elsewhere,” says Paul. “This eventually became a strategic focus: How are we going to migrate more of our stack to third-party services so we can focus on our core competencies?”
 
 “And that’s what led us to PostHog.”
 
