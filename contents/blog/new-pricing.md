@@ -82,7 +82,7 @@ Tracking events without person data is useful if:
 - You're not tracking a high-volume event because it would be prohibitively expensive.
 - You want to use [autocapture](/docs/product-analytics/autocapture) to track events, but have turned it off to save money.
 
-We recommend you enable person profiles for logged-in users of your product and website, but disable them for unidentified users where aggregate data is sufficient. 
+We recommend most people use the `identified_only` [configuration option](#how-do-i-start-using-it) for person profiles. This automatically captures person profiles for logged-in users of your product and website, but doesn't capture them for unidentified users where aggregate data is sufficient. 
 
 This is how we've configured our own product and website tracking.
 
