@@ -39,6 +39,26 @@ The scale of ResearchGate’s community meant that the decision to switch wasn�
 
 “We have hundreds of millions of pageviews per month,” explains Paul. “So, based just on our volume, we’re always in that custom enterprise package and have to ‘Talk to Sales’. I had explicit conversations with [LaunchDarkly](/blog/posthog-vs-launchdarkly), [Optimizely](/blog/posthog-vs-optimizely), and others, but they were way out of our price range.”
 
+In addition to offering lower and more transparent pricing, PostHog also worked closely with Paul’s team to provide proactive support — including in an on-site visit earlier this year. 
+
+<BorderWrapper>
+<Quote
+    imageSource="/images/customers/simon.png"
+    size="md"
+    name="Simon Fisher"
+    title="Customer Success Team Lead, PostHog"
+    quote={`“It was really valuable to spend time with the ResearchGate team. Time in person helped us understand their roadmap and how we can support it. It also helps shape our roadmap now that we understand how visible and integral PostHog is in letting them make business-critical decisions!”`}
+/>
+</BorderWrapper>
+
+“If I email my Cloudflare support engineer it’ll be a few days before I get a reply and it’ll be a subpar response,” says Paul. “With PostHog though I particularly like that I get to deal with the relevant engineering expert on a topic. [Simon](/community/profiles/28895) will loop in [Neil](/community/profiles/28695), or [Marius](/community/profiles/30202), or [whoever](/people), and I don’t waste time playing the telephone game.”
+
+### Testing algorithmic models to boost discovery with 25M users
+
+Now that Paul’s team have replaced their internal tools with PostHog they’ve started running progressively bigger and more ambitious experiments. The biggest so far is focused on the user home feed, where the team is testing multiple algorithms against each other to drive more content discovery.
+
+“Our home feed was very old and only surfaced content chronologically, like a subscription,” says Paul. “We’ve switched to an algorithmic model and PostHog has enabled us to test different algorithms so we can give users the right content at the right time. We’ve been testing these models for a year now, across hundreds of millions of sessions.”
+
 <BorderWrapper>
 <Quote
     imageSource="/images/customers/paul-mccloud.jpg"
@@ -48,16 +68,6 @@ The scale of ResearchGate’s community meant that the decision to switch wasn�
     quote={`“Something I didn't get at the start was the clip at which PostHog adds new products. What you don't really understand until you've experienced it is that, because all these tools are built on the same fundamental architecture, the value of PostHog becomes exponential as new tools get connected!”`}
 />
 </BorderWrapper>
-
-In addition to offering lower and more transparent pricing, PostHog also worked closely with Paul’s team to provide proactive support — including in an on-site visit earlier this year. 
-
-“If I email my Cloudflare support engineer it’ll be a few days before I get a reply and it’ll be a subpar response,” says Paul. “With PostHog though I particularly like that I get to deal with the relevant engineering expert on a topic. [Simon](/community/profiles/28895) will loop in [Neil](/community/profiles/28695), or [Marius](/community/profiles/30202), or [whoever](/people), and I don’t waste time playing the telephone game.”
-
-### Testing algorithmic models to boost discovery with 25M users
-
-Now that Paul’s team have replaced their internal tools with PostHog they’ve started running progressively bigger and more ambitious experiments. The biggest so far is focused on the user home feed, where the team is testing multiple algorithms against each other to drive more content discovery.
-
-“Our home feed was very old and only surfaced content chronologically, like a subscription,” says Paul. “We’ve switched to an algorithmic model and PostHog has enabled us to test different algorithms so we can give users the right content at the right time. We’ve been testing these models for a year now, across hundreds of millions of sessions.”
 
 Although they’ve been running for a year, these tests don’t have an endpoint or fixed decision in mind. Instead, ResearchGate is constantly tweaking and optimizing the models to perform better, armed in part by the fact that they can analyze experiment results alongside other data. 
 
