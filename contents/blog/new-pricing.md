@@ -103,7 +103,7 @@ When sending events without person data, you cannot:
 - View a person’s profile in the app, or query the persons table in our SQL insights.
 - Use [groups functionality](/docs/product-analytics/group-analytics) on standard events (without person profiles).
 
-If you need the above functionality for all your traffic, you don't need to change anything. Continue to send person information with your events.
+If you need the above functionality for all your traffic, you don't need to change anything. Continue to send person data with your events.
 
 Person profiles are not all-or-nothing. You can use them on any traffic where you need more detailed information, and skip them when you don't need that detail. Read more about this in our [persons documentation](/docs/data/persons).
 
