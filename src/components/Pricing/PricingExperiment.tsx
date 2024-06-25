@@ -522,7 +522,7 @@ const ProductTabs = ({ billingProducts }) => {
                     animate={{ height: 'auto' }}
                     className="@container -mt-[2px] bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 overflow-hidden"
                 >
-                    {tabContent[activeProduct.name]({ ...productData })}
+                    <div key={activeProduct.name}>{tabContent[activeProduct.name]({ ...productData })}</div>
                 </motion.div>
             )}
             <div className="text-center mt-4 flex flex-col gap-1 justify-center">
