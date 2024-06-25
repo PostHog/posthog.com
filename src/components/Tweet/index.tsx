@@ -4,7 +4,7 @@ import Link from 'components/Link'
 
 const DontClickButton = ({ alertMessage, children, ...props }) => (
   <button
-    className="dont-click flex items-center space-x-1 hover:text-blue-500"
+    className="dont-click flex items-center space-x-1 opacity-60"
     onClick={(e) => {
       e.preventDefault()
       alert(alertMessage)
@@ -19,13 +19,19 @@ export const Tweet = ({ children, className = '', alertMessage }) => {
     <div
       className={`tw-tweet max-w-xl bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${className}`}
     >
-      <div className="flex items-center space-x-4">
-        <div className="rounded-full bg-accent w-12 h-12 overflow-hidden">
-          <StaticImage
-            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
-            alt='James ("Veg"/"JC") Hawkins'
-            className="w-12 h-12"
-          />
+      <div className="flex items-center space-x-3">
+        <div className="rounded-full border border-light dark:border-dark hover:border-red dark:hover:border-yellow bg-white dark:bg-dark">
+          <Link
+            href="https://x.com/james406"
+            externalNoIcon
+            className="bg-accent rounded-full overflow-hidden block aspect-square m-px"
+          >
+            <StaticImage
+              src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
+              alt='James ("Veg"/"JC") Hawkins'
+              className="size-12"
+            />
+          </Link>
         </div>
         <div>
           <div className="text-lg font-semibold leading-tight">James Hawkins</div>
@@ -40,67 +46,61 @@ export const Tweet = ({ children, className = '', alertMessage }) => {
           </div>
         </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-3">
         <p className="!leading-normal">{children}</p>
       </div>
-      <div className="mt-4 flex justify-between items-center text-gray-500">
+      <div className="mt-3 flex justify-between items-center text-gray-500">
         <div className="flex space-x-4">
           <DontClickButton alertMessage={alertMessage}>
-            <button className="dont-click flex items-center space-x-1 hover:text-blue-500">
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M14 9l-5 5m0 0l5 5m-5-5h12"
-                ></path>
-              </svg>
-              <span>Reply</span>
-            </button>
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M14 9l-5 5m0 0l5 5m-5-5h12"
+              ></path>
+            </svg>
+            <span>Reply</span>
           </DontClickButton>
           <DontClickButton alertMessage={alertMessage}>
-            <button className="dont-click flex items-center space-x-1 hover:text-green-500">
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 15l7-7 7 7"
-                ></path>
-              </svg>
-              <span>Repost</span>
-            </button>
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 15l7-7 7 7"
+              ></path>
+            </svg>
+            <span>Repost</span>
           </DontClickButton>
           <DontClickButton alertMessage={alertMessage}>
-            <button className="dont-click flex items-center space-x-1 hover:text-red-500">
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 4v16m8-8H4"
-                ></path>
-              </svg>
-              <span>Like</span>
-            </button>
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 4v16m8-8H4"
+              ></path>
+            </svg>
+            <span>Like</span>
           </DontClickButton>
         </div>
       </div>
