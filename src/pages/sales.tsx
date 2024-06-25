@@ -26,13 +26,24 @@ const them = [
                 </div>
 
                 <div className="col-span-3 rotate-2 -mt-6 mb-6 relative left-3 md:left-0">
-                    <StaticImage
-                        quality={90}
-                        placeholder="blurred"
-                        loading="eager"
-                        src="../images/sales/demo-form.png"
-                        width={294}
-                    />
+                    <div className="dark:hidden">
+                        <StaticImage
+                            quality={90}
+                            placeholder="blurred"
+                            loading="eager"
+                            src="../images/sales/demo-form-light.png"
+                            width={294}
+                        />
+                    </div>
+                    <div className="hidden dark:block">
+                        <StaticImage
+                            quality={90}
+                            placeholder="blurred"
+                            loading="eager"
+                            src="../images/sales/demo-form-dark.png"
+                            width={294}
+                        />
+                    </div>
                 </div>
             </>
         ),
@@ -166,12 +177,22 @@ const them = [
                 </div>
 
                 <div className="col-span-4 -mt-8 pb-8 -mx-2 md:mx-0">
-                    <StaticImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="../images/sales/gantt-chart.png"
-                        width={554.5}
-                    />
+                    <div className="dark:hidden">
+                        <StaticImage
+                            quality={90}
+                            placeholder="blurred"
+                            src="../images/sales/gantt-chart-light.png"
+                            width={554.5}
+                        />
+                    </div>
+                    <div className="hidden dark:block">
+                        <StaticImage
+                            quality={90}
+                            placeholder="blurred"
+                            src="../images/sales/gantt-chart-dark.png"
+                            width={554.5}
+                        />
+                    </div>
                 </div>
             </>
         ),
@@ -554,7 +575,7 @@ function Sales() {
                             We’re more like a utility where you pay for what you use. No extra markup - everyone pays
                             the same rates*.
                         </p>
-                        <p className="opacity-60 text-sm">
+                        <p className="opacity-60 text-sm mb-0">
                             *Unless you qualify for a{' '}
                             <Tooltip
                                 content="Discounts available to early-stage startups, non-profits, and customers who pay annually."
@@ -566,15 +587,28 @@ function Sales() {
                     </div>
                     <div className="relative order-1 md:order-2">
                         <div className="md:absolute md:top-0 md:left-0 md:bottom-0">
-                            <StaticImage
-                                quality={100}
-                                placeholder="none"
-                                src="../images/sales/phone-hog-light.png"
-                                className="h-48 xs:h-[17rem] md:h-72"
-                                loading="eager"
-                                objectPosition="left top"
-                                objectFit="cover"
-                            />
+                            <div className="dark:hidden">
+                                <StaticImage
+                                    quality={100}
+                                    placeholder="none"
+                                    src="../images/sales/phone-hog-light.png"
+                                    className="h-48 xs:h-[17rem] md:h-72"
+                                    loading="eager"
+                                    objectPosition="left top"
+                                    objectFit="cover"
+                                />
+                            </div>
+                            <div className="hidden dark:block">
+                                <StaticImage
+                                    quality={100}
+                                    placeholder="none"
+                                    src="../images/sales/phone-hog-dark.png"
+                                    className="h-48 xs:h-[17rem] md:h-72"
+                                    loading="eager"
+                                    objectPosition="left top"
+                                    objectFit="cover"
+                                />
+                            </div>
                         </div>
                         <div className="hidden xl:block absolute left-full -bottom-4 w-screen bg-[url('../images/sales/phone-cord.png')] h-[15px] -ml-1 bg-contain bg-repeat-x">
 
