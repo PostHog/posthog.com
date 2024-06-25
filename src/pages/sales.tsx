@@ -367,15 +367,15 @@ const AccordionItem = ({ index, number, title, children, isOpen, onClick, onNext
     return (
         <li
             className={`border-t relative ${isOpen
-                    ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
-                    : 'inactive border-light dark:border-dark first:border-transparent'
+                ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
+                : 'inactive border-light dark:border-dark first:border-transparent'
                 }`}
         >
             <button
                 onClick={onClick}
                 className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all relative ${isOpen
-                        ? 'pt-4 pb-2 z-20'
-                        : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                    ? 'pt-4 pb-2 z-20'
+                    : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
                     }`}
             >
                 <span className="flex gap-2 items-center">
@@ -534,9 +534,9 @@ function Sales() {
                 description="We actually don't make you get on a call to find out our pricing."
                 image={`/images/og/sales.png`}
             />
-            <div>
-                <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 py-6 md:py-12">
-                    <div className="order-2 md:order-1 px-4 md:px-8">
+            <div className="w-screen overflow-x-hidden">
+                <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-4 md:gap-0 lg:gap-8 py-6 md:py-12">
+                    <div className="order-2 md:order-1 px-4 md:pl-8">
                         <h1 className="text-[2.25rem] md:text-5xl mb-2">
                             Sales, <em className="text-red dark:text-yellow">PostHog-style</em>
                         </h1>
@@ -568,22 +568,14 @@ function Sales() {
                                 quality={100}
                                 placeholder="none"
                                 src="../images/sales/phone-hog-light.png"
-                                className="h-48 md:h-72"
+                                className="h-48 xs:h-[17rem] md:h-72"
                                 loading="eager"
                                 objectPosition="left top"
                                 objectFit="cover"
                             />
                         </div>
-                        <div className="hidden lg:block absolute left-full -bottom-7 w-screen">
-                            <StaticImage
-                                quality={100}
-                                placeholder="none"
-                                src="../images/sales/phone-cord.png"
-                                className="h-[15px] -ml-1"
-                                loading="eager"
-                                width={754}
-                                height={15}
-                            />
+                        <div className="hidden xl:block absolute left-full -bottom-4 w-screen bg-[url('../images/sales/phone-cord.png')] h-[15px] -ml-1 bg-contain bg-repeat-x">
+
                         </div>
                     </div>
                 </div>
