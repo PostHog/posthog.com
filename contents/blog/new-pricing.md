@@ -21,9 +21,9 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 * This is possible because we've introduced a new event processing option that enables you to capture events without person data, what we call _person profiles_. 
 
-* Events _without_ person profiles cost less for us to ingest and query. We're passing this saving onto you by introducing cheaper base event pricing and a new person profiles event option, which is charged separately.
+* Events without person profiles cost less for us to ingest and query. We're passing this saving onto you by introducing cheaper base event pricing and a new person profiles event option, which is charged separately.
 
-* Events with person profiles enabled cost the same as our old event pricing. Existing customers will see a new line item labeled "Person profiles" on their invoice, but pricing has not gone up.
+* Events with person profiles enabled cost the same as our old event pricing. If you're an existing customer, you'll see a new person profiles line item on your invoice, but your pricing has not increased.
 
 * You decide when you capture person profile on an event. By default, events are captured with person profiles, but you can change this with a configuration option.
 
@@ -37,7 +37,7 @@ In real terms this means:
 
 2. They would still **save $4,404 a year** if they used person profiles on 50% of their events.  
 
-We expect people to use a combination of events with and without person profiles, which you can see visualized below.
+We expect teams to use a combination of events with and without person profiles, which you can see visualized below.
 
 <br />
 
@@ -88,13 +88,13 @@ Some examples of this include:
 
 For most people, it only requires a simple config change to include `process_persons: "identified_only"` in the initialization of your JavaScript Web SDK or snippet.
 
-This will track anonymous traffic without person profiles, and start collecting person information any time an identifying action is taken (i.e. using `identify()`, `group()`, setting person properties with `$set`, etc).
+This will track anonymous traffic without person profiles, and start collecting person data any time an identifying action is taken (i.e. using `identify()`, `group()`, setting person properties with `$set`, etc).
 
 You can get more details on this and other use cases, like server-side events, in our [persons documentation](/docs/data/persons).
 
 ## What's the downside?
 
-When sending events without person information, you cannot:
+When sending events without person data, you cannot:
 
 - Filter on persons (e.g. an individual user)
 - Create cohorts filtered on person properties (e.g. paying vs non-paying users)
@@ -117,7 +117,7 @@ Most of our competitors are inefficient. They employ huge [outbound sales teams]
 
 In contrast, we're 100% inbound, we grow mostly through word of mouth, and we charge based on actual usage. 
 
-We don't believe in loss-leaders, so we make a modest positive margin on each event sold, but what we charge is directly connected to what it costs us, not what we think we get away with charging.
+We don't believe in loss leaders, so we make a modest positive margin on each event sold, but what we charge is directly connected to what it costs us, not what we think we get away with charging.
 
 We grow our revenue through helping you grow, and onboarding you onto other tools, like session replay, feature flags, and surveys as well.
 
@@ -131,7 +131,7 @@ We think this is better than trying to squeeze you for every cent you have. You 
 >
 > #### Why aren't you making the events with person profiles cheaper?
 >
-> Because events with person profiles cost a lot more for us to ingest and query. Not sending person information for certain events, however, saves us money, so we're passing that on.
+> Because events with person profiles cost a lot more for us to ingest and query. Not sending person data for certain events, however, saves us money, so we're passing that on.
 >
 > This aligns our interests with our customers, and means we can make a positive margin on all events ingested (beyond our free tier), so it is sustainable but not greedy!
 >
