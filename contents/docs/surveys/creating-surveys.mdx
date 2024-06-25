@@ -10,6 +10,8 @@ availability:
 
 export const newSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-light-mode.png"
 export const newSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-dark-mode.png"
+export const delaySurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_57_AM_fb3b007108.png"
+export const delaySurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_41_AM_52fd4a8e34.png"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
@@ -63,12 +65,21 @@ PostHog supports multiple question types which are all available for both popove
 
 ### Customization
 
-Customization enables you to change the look of your popover survey: 
+Customization enables you to change the look, feel, and timing of your popover survey: 
 
 - The color of the background, border, and buttons.
 - The position of the popover at the bottom of the screen.
 - The placeholder text.
 - The visibility of the PostHog branding.
+- Whether to shuffle the order of the choices and questions.
+- The delay (in seconds) before the survey appears on the page.
+
+<ProductScreenshot
+    imageLight={delaySurveyLight} 
+    imageDark={delaySurveyDark}
+    alt="Delay survey customization" 
+    classes="rounded"
+/>
 
 ### Targeting
 
@@ -80,7 +91,7 @@ You can target your survey to specific users based on:
 
 - **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex.
   
-- **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can target a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey [after a delay](/tutorials/delayed-survey) or user action.
+- **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can target a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
 
 - **Wait period**: Hide surveys from users who have seen a survey in the last X days. Note that a user who completes a survey are never shown the same survey again, even if no wait period is set.
 
