@@ -1261,7 +1261,6 @@ function Privacy() {
                     <div></div>
                     <div className="md:pb-12">
                         <p>If you need to enter into a Data Processing Agreement with us, the version you need will depend on whether you have signed up for PostHog Cloud in the US or EU. Please visit our <Link href="/dpa">world-class DPA generator</Link> and follow the instructions to have it counter-signed by PostHog.</p>
-                        <p>For the avoidance of doubt, if you use PostHog Cloud EU, no PII data is transferred to the US.</p>
                     </div>
                     <div>
                         <p>We'll counter-sign a data processing agreement after you generate one in our DPA generator and send it to us.</p>
