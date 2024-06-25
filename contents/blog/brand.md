@@ -1,5 +1,5 @@
 ---
-date: 2023-02-01
+date: 2023-06-25
 title: How to brand your startup
 rootPage: /blog
 sidebar: Blog
@@ -12,7 +12,7 @@ category: CEO diaries
 
 The world would be a lot more fun if most startups didn't seem to have experienced a personality vasectomy.
 
-Alas, I think we've evolved to conform - you used to take part in the tribe to survive, after all.
+I believe humans have evolved to conform - when we all lived in the wilderness, staying alive required you to fit in with a tribe, after all. Fast forward that background to today and, amongst other things (!), the majority of the world's software companies feel the same as each other.
 
 ## There are good reasons for this, you idiot
 
@@ -30,40 +30,44 @@ When we knew that PostHog was something we wanted to launch, we questioned how w
 
 The product on launch day was going to be free, but we still asked ourselves: "what would stop me from using this thing?"
 
-A crappy website that looks like a startup that could disappear at any moment, felt like the most likely princ
+Despite being free, users would be wary of wasting their time trying to deploy a badly supported, broken piece of open source software, or worse - it not handling their data securely. These are both things you'd associate with the software produced by a 2 person startup.
 
-Why?
+Before a user even gets into the software or glances at the code first, the majority will turn away _at_ the website, the docs and the readme.
 
-* It signals the product may not be secure - a lack of competence in the website shows a lack of attention to detail
-* It signals the team behind the product isn't very strong - and won't improve quickly over time, or become a "must use" tool
-* It signals the product may not exist in a few more weeks time, which would be a waste of time - when it's obvious the website was thrown together in a day
+As a counter example, an obviously templated or one-pager style website:
+
+* signals the product may not be secure, a lack of demonstrated competence in the website shows a lack of attention to detail - if a startup doesn't care about having their own design, will they care about security?
+* signals the team behind the product isn't very strong, and won't improve quickly over time, or become a "must use" tool - those startup launches that everyone hears about? They've put energy into their appearance.
+* signals the product may not exist in a few more weeks, which would be a waste of time - when it's obvious the website was thrown together in a day - if the team don't look invested in their company, why would you put your own time in?
+
+I admit this is frustrating - it is extra time and effort into something "superficial" - just remember, you are providing your product to human beings, take advantage of their pattern recognition (it also helped them survive in the wild).
 
 ## Your company needs to stand for something
 
 Take two examples:
 
 * Open source product analytics
-* We help engineers build better products
+* We equip every developer to build successful products
 
 There is a tradeoff between the two.
 
 The first is very clear. We started with it when this is what we had.
 
-As we became more well known, we shifted to the latter. This is a better reflection of _why_ our company exists - it is more than just a piece of software. We introduced it because the company was getting larger, and the scope of what we were setting out to achieve had increased. We now have 8+ products, and we produce a ton of content to help engineers build better products. The need for total clarity wasn't as important later on, relative to the need for us standing for something.
+As we became more well known, and as we added lots of products into our platform, we shifted to the latter. This is a better reflection of _why_ our company exists - it is more than just a piece of software. We introduced it because the company was getting larger, and the scope of what we were setting out to achieve had increased. We now have 8+ products, and we produce a ton of content to help engineers build better products. The need for total clarity wasn't as important later on, relative to the need for us standing for something. It was necessary to start small then widen.
 
 ## Create your brand for someone
 
 One of the most important things we did was to create an Ideal Customer Profile. When we launched, we weren't sure quite how focused we'd need to be on engineers "vs" product managers.
 
-We realized, after launching, that we could go all in on engineers (and technical founders) - they make up around 80% of our users. Our brand has become more oriented for these users as a result.
+We realized, after launching, that we could go all in on engineers (and technical founders) - they make up around 80% of our users. Our brand (and product) has become more oriented for these users as a result.
 
 Here are some specific ways we got more specific for this audience after we clarified it:
 
 * We added API examples to our website
-* We added a "you'll hate PostHog if" section to our homepage, which calls out many pet hates that engineers have when trying to buy, install and use more traditionally-targeted software
-* We have pricing that is more complex (ie we moved to a pricing by product, on a usage basis, model - away from an all in one price) but better value - we felt more technical people would be happy coping with more complexity to get a better deal
-* In the product, we worked on SQL access so technical people could get to the underlying data better
-* We redesigned our entire UX to have higher information density, dark mode and more flexibility
+* We added a "you'll hate PostHog if" section to our homepage, which calls out many pet hates that engineers have when trying to buy, install and use more traditionally-targeted software that they are made to implement
+* We chose a more flexible pricing model - it's far more complex, but it's much better value. We felt more technical people would be happier than non technical people coping with more complexity to get a better deal. We want developers to be able to manage their spend with us across our eight products, not a "single price".
+* In the product, we worked on SQL access so technical people could get to the underlying data to debug things.
+* We redesigned our entire UX to have higher information density, dark mode and more flexibility.
 
 ## ... but your brand must be a reflection of _you_
 
@@ -73,26 +77,28 @@ Quoting Cory, our lead designer: "We aren't the best in the world at being polis
 
 We sometimes make business decisions based on who we are, and what we want to do - not always what may, for example, generate the most revenue growth.
 
-For example, we set out initially expecting to have an open core model. We'd offer open source software, and some people in big enterprises, would self host and pay for the party for everyone else. We felt this would work as there was no real competition, whereas in cloud, we had lots of unicorn competitors. However, we just love shipping new features, and after our first hackathon, we wound up with session replay (ie a new feature, big enough to be its own product), which took off and this resulted in a multi-product approach. As a result, we could compete in cloud by being way wider than everyone else. Eventually, we removed our paid self hosted offering entirely, went all in on multi product in cloud, focused on "getting in first" with earlier stage companies instead of the largest enterprises, and our motivation, ambition and growth all took off as a result.
+For example, we set out initially expecting to have an open core model. We'd offer open source software, and some people in big enterprises, would self host and pay for the party for everyone else. We felt this would work as there was no real competition, whereas in cloud, we had lots of competitors with over $100M in annual revenue. However, we simply love shipping new features, and after our first hackathon, we wound up with session replay (ie a new feature, big enough to be its own product), which took off and this resulted in a multi-product approach. As a result, we could compete in cloud by being way wider than everyone else. Eventually, we removed our paid self hosted offering entirely, went all in on multi product in cloud, focused on "getting in first" with earlier stage companies instead of the largest enterprises, and our motivation, ambition and growth all took off as a result. And yes we kept the open source product - it's more expensive though than cloud for the majority of users because you have to host it and we have big free tiers.
 
 ## Brand isn't just your website...
 
-... it is instead how your company is experienced by others.
+... it is instead how your company is experienced by others - consider your _company_ your product.
 
 Here is a non-exhaustive list, there are dozens more examples than this though:
 
 * it's how much you invest in each function in your company relative to each other
 * it's what you look for when you hire people, and it's the process you use to hire with
 * how you decide what to build - do you ship features early, or do you focus on meeting the needs of your largest customer with every new thing
-* how much you are design vs engineering vs product led
-* how you email your customers
+* how much you are design vs engineering vs product vs sales vs marketing led - how many people are in each function but also your processes for deciding what to work done
+* the frequency and style with which you email your customers, for marketing, product updates or your activation flow
 * the kind of people you hire into Customer Success or Sales
+* the background experience of those in your marketing team
 * the tone of voice on your website
 * who is on your board
 * how your pricing works
-* how frequently you email customers in your activation flow
 * how your social media works
+* how helpful you are to random founders that message you
 * the marketing channels you pick
+* it's what you talk about in your blog - I'm writing this piece for brand reasons (transparency / equipping developers (with knowledge) to build successful products), nothing else - I don't care or try to generate conversions from this post, I just want to leave an impression on people. And it's who I am - I'm writing this to pass the time on a long plane journey.
 
 ## You can't 80:20 everything
 
@@ -106,13 +112,17 @@ To give you an example, we built a merch store:
 * then we set up a store on shopify, I just threw our logo onto an amusingly wide selection of items (PostHog shower curtain, anyone?) - it was cool to just have merch for sale and a way of giving it
 * then created custom components and built it into our website directly so it's perfectly integrated
 * then we booked a photo shoot, got a bunch of our team to it, and took custom photos of our team wearing everything
+* now we're working on limited editions of certain items to create collectible series of t shirts
 * who knows what happens next!
 
-To give a second example:
+It's not the fact we did the above with our merch store (I know people reading may be tempted to copy) - this is one activity of hundreds that builds brand.
 
-* a founder I know has a product with 300,000 users
-* he has redone his website and is _very_ pleased with, that he should launch. It is way clearer than what he has now.
-* however, I pushed him for how to make it less _boring_. Something most people do not ask.
-* he talked about how his product helps people explore data, so an exploration theme could give it more personality.
-* he can now get a graphic designer to work with him
-* and so on - just don't stop pushing the things that matter to you
+## Doesn't this imply doing everything to a really high standard and a ridiculous workload?
+
+Yes. You can be iterative with it though - not everything was amazing on day one, but we'll keep improving and tweaking everything over time.
+
+## So get out there, and be bold
+
+If your brand isn't going to turn off some people that _might_ have bought your product, then it isn't strong enough to stand out.
+
+Engage your _best_ customers with your brand, and put off your _worst_ ones.
