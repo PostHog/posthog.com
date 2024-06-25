@@ -1,0 +1,99 @@
+---
+date: 2024-06-25
+title: What employees really think about PostHog
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+  - james-temperton
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/mykonoshackathon_979cf7bec6.jpeg
+featuredImageType: full
+category: Inside PostHog
+tags:
+  - Culture
+---
+
+At PostHog, we want to build the [most transparent company in the world](/handbook/people/overview) – and the best place for people to work in general. To find out how we’re doing, we run bi-annual team surveys. And to be totally transparent, we’re going to publish them here for anyone to see.
+
+We had a 79% response rate, or 33 out of 42 eligible respondents. For our last survey, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures.
+
+We asked 14 questions based on the ones used by [Culture Amp](https://www.cultureamp.com/). Questions cover categories such as company, confidence, culture, and growth. 12 of the questions we asked required a response ranging from 1, meaning strongly disagree, to 5, meaning strongly agree:
+
+* PostHog is in a position to really succeed over the next three years.
+* I understand PostHog's goals and can see how my work contributes to them.
+* At PostHog, we have open and honest two-way communication.
+* I receive appropriate recognition for my work at PostHog.
+* I believe that my total compensation (salary + equity + benefits) is fair, relative to similar roles at other companies.
+* My manager and team around me genuinely care about my wellbeing.
+* The leaders at PostHog keep people informed about what is happening.
+* I feel like I am learning and growing at PostHog.
+* Generally, I believe my workload is reasonable for my role and I am able to arrange time out from work when I need it.
+* The support I am receiving and processes we have in place allow me to do my best possible work.
+* I would recommend PostHog as a great place to work.
+* I see myself still working at PostHog in two years' time.
+
+And two of which were open text fields:
+
+* What motivates you right now?
+* If you were to leave PostHog, what would the reason be?
+
+We took the scores we received and compared them to Culture Amp’s benchmark for ‘new tech’ companies with less than 200 people. We then took the average score out of 5 and multiplied it by 20 to get a percentage. It’s a bit rough, but is useful for comparing our scores against the industry benchmark.
+
+We ran this survey using the Pulse Surveys app in Slack. Our previous three surveys were quarterly, but this time we waited six months. We’ll stick with bi-annual surveys moving forward.
+
+### Highest scores
+
+* **97% positive:** I understand PostHog’s goals and can see how my work contributes to them.
+* **97% positive:** PostHog is in a position to really succeed over the next three years.
+* **97% positive:** My manager and team around me genuinely care about my wellbeing. 
+
+### Lowest scores
+
+* **82% positive:** The support I am receiving and processes we have in place allow me to do my best possible work.
+* **79% positive:** I believe that my total compensation (salary + equity + benefits) is fair, relative to similar roles at other companies. 
+* **79% positive:** I see myself still working at PostHog in two years' time. 
+
+### Qualitative questions
+
+**What motivates you right now?** The most common themes people highlighted this time were the same as last.
+
+* **Team.** People used phrases such as: the team, great colleagues, helping the team, the great folks at PostHog at all levels, and improving things for teammates.
+
+* **Growth.** People used phrases such as: growing the company, seeing revenue going up, business growing, and numbers going in the right direction.
+
+* **Opportunities.** People used phrases such as: many learning opportunities, ability to be heard and try new things, so many opportunities lie ahead of us, and building a great product.
+
+**If you were to leave PostHog, what would be the reason?** There were a variety of answers to this question, all of them hypothetical, but all to be taken seriously.
+
+* **Career growth.** People used phrases such as: start my own company, getting back into management, a better opportunity for my career, a career growth move, and starting my own startup.
+
+* **The work.** People used phrases such as: not feeling like I'm making an impact, getting overwhelmed with non-fun work, stuck too long on challenging, repeating things, and burnout.
+
+* **Company stops growing.** People used phrases such as: business growth stalling, growth stalling or the company failing, and the company isn't growing anymore.
+
+### Highlights from comments
+
+These specific but anonymous quotes are broadly reflective of responses from multiple people. We’ve split them into two categories, positive and constructive, as they cover a wide range of topics.
+
+Positive:
+
+* Bouncing wacky ideas off of peeps, then building them at warp speed
+* Everyone's motivation to grow and see the company succeed.
+* Shipping a product people love and use
+* I feel bad for people who don't get to work somewhere like PostHog
+* I would say PostHog is a place where people who can work independently and without much process and support do best, but for me this 'light-touch' process works
+* All-hands is great!
+* I really love the weekly context bomb at the all hands
+
+Constructive:
+
+* I think the lack of general process and over-engineered ownership that is typically a big plus has gotten in the way of some products actually making the strides forward that they could have.
+* For the company as a whole, I think things are pretty good, but I do think that satisfaction is heavily dependent on the team you're on.
+* Our setup means we are always on the edge of exhaustion because we purposefully keep things lean and tight on numbers.
+* All ingredients are there but growing pains are apparent specifically around team management
+
+### What we’ll do next
+
+Our exec team has already gone through all the results and we’ve decided on a bunch of actions that are already in progress with a plan and owner to address them. We’ll run the next survey at the start of Q4 2024 using the same format.
