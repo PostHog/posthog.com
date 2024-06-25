@@ -57,9 +57,9 @@ Below you can see how our new pricing compares to Mixpanel's up to 20 million ev
   classes="rounded"
 />
 
-The table below is a side-by-side comparison of our new base event pricing, and pricing for events with person profiles enabled. The math is:
+The table below is a side-by-side comparison of our new base event pricing, and pricing for events with person profiles enabled. 
 
-`New base events + person profiles = Our previous per event pricing`
+The math is: new base events + person profiles = our previous per event pricing.
 
 | **Monthly events** | **New base event price** | **Base events + person profiles** | **Percentage diff.** |
 |--------------------|--------------------------|-----------------------------------|----------------|
@@ -68,7 +68,7 @@ The table below is a side-by-side comparison of our new base event pricing, and 
 | **2-15m**          | $0.0000343 / event       | $0.0001040 / event                | -67%           |
 | **15-50m**         | $0.0000295 / event       | $0.0000655 / event                | -55%           |
 | **50-100m**        | $0.0000218 / event       | $0.0000364 / event                | -40%           |
-| **100-250**        | $0.0000150 / event       | $0.0000187 / event                | -20%           |
+| **100-250m**        | $0.0000150 / event       | $0.0000187 / event                | -20%           |
 | **∞**              | $0.0000090 / event       | $0.0000100 / event                | -10%           |
 
 ## When should I use the new option?
