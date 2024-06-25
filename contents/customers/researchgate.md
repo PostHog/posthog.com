@@ -24,9 +24,9 @@ toolsUsed:
 date: 2024-27-06
 ---
 
-ResearchGate, the world’s largest professional network for scientists, helps millions of professionals discover and disseminate groundbreaking research annually. The company is driven by a mission to promote access to science — but, with over 160 million publications, the scale of the community starts to present significant challenges.
+ResearchGate, the world’s largest professional network for scientists, helps millions of professionals discover and disseminate groundbreaking research annually. The company is driven by a mission to promote access to science — but, with over 160 million publications, the scale of the community can present significant challenges.
 
-“We grew up in a time when there weren’t a lot of third party services to solve the sorts of problems that arise from having so many publications and users,” says Paul McCloud, ResearchGate’s Head of Product Engineering. “Thankfully we’ve built a strong engineering team over the last 15 years and we’ve been able to build what we needed in-house.”
+“We grew up in a time when there weren’t a lot of third party services to solve the sorts of problems that arise from having so many publications and users,” says Paul McCloud, ResearchGate’s Head of Product Engineering. “Thankfully, we’ve built a strong engineering team over the last 15 years and we’ve been able to build what we needed in-house.”
 
 Over the years ResearchGate’s team has built everything from internal experimentation frameworks and feature flagging systems to traffic experimentation systems and GraphQL clients. Many of these tools functioned to a high standard, but eventually the maintenance burden became too much. 
 
@@ -34,7 +34,7 @@ Over the years ResearchGate’s team has built everything from internal experime
 
 “And that’s what led us to PostHog.”
 
-### Scalability, support and on-site trips to say hello
+### Scalability, support, and on-site trips to say hello
 
 The scale of ResearchGate’s community meant that the decision to switch wasn’t made lightly, or quickly. Paul spoke with multiple providers before making a decision, with many conversations ending due to pricing and scalability issues. 
 
@@ -52,11 +52,11 @@ The scale of ResearchGate’s community meant that the decision to switch wasn�
 
 In addition to offering lower and more transparent pricing, PostHog also worked closely with Paul’s team to provide proactive support — including in an on-site visit earlier this year. 
 
-“If I email my Cloudflare support engineer it’ll be a few days before I get a reply and it’ll be a subpar response,” says Paul. “With PostHog though I particularly like that I get to deal with the relevant engineering expert on a topic. [Simon](/community/profiles/28895) will loop in [Neil](/community/profiles/28695), or [Marius](/community/profiles/30202), or [whoever](/people), and I don’t waste time playing the telephone game.”
+“If I email my Cloudflare support engineer, it’ll be a few days before I get a reply and it’ll be a subpar response,” says Paul. “With PostHog though I particularly like that I get to deal with the relevant engineering expert on a topic. [Simon](/community/profiles/28895) will loop in [Neil](/community/profiles/28695), or [Marius](/community/profiles/30202), or [whoever](/people), and I don’t waste time playing the telephone game.”
 
 ### Testing algorithmic models to boost discovery with 25M users
 
-Now that Paul’s team have replaced their internal tools with PostHog they’ve started running progressively bigger and more ambitious experiments. The biggest so far is focused on the user home feed, where the team is testing multiple algorithms against each other to drive more content discovery.
+Now that Paul’s team have replaced their internal tools with PostHog, they’ve started running progressively bigger and more ambitious experiments. The biggest so far is focused on the user home feed, where the team is testing multiple algorithms against each other to drive more content discovery.
 
 “Our home feed was very old and only surfaced content chronologically, like a subscription,” says Paul. “We’ve switched to an algorithmic model and PostHog has enabled us to test different algorithms so we can give users the right content at the right time. We’ve been testing these models for a year now, across hundreds of millions of sessions.”
 
