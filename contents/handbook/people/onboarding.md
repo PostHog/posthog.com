@@ -122,7 +122,7 @@ We use a number of different tools to organise our work and communicate at PostH
 - HubSpot - customer CRM
 - Zendesk - our support platform
 - Pry - financial modelling
-- LTSE Equity - cap table management
+- Carta - cap table management
 - Fondo - US accounting
 - Calendly - external meeting scheduling (e.g. demos, sales)
 - Gusto - US payroll and benefits management

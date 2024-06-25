@@ -503,7 +503,13 @@ export function InProgress(
                             </CallToAction>
                         )}
                     </div>
-                    {isModerator && addingUpdate && <TeamUpdate roadmapID={squeakId} onSubmit={fetchUpdates} />}
+                    {isModerator && addingUpdate && (
+                        <TeamUpdate
+                            teamName={props?.teams?.data?.[0]?.attributes?.name}
+                            roadmapID={squeakId}
+                            onSubmit={fetchUpdates}
+                        />
+                    )}
                 </div>
             </li>
         </>

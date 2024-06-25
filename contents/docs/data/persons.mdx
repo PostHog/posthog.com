@@ -16,18 +16,23 @@ export const personProfileDark = "https://res.cloudinary.com/dmukukwp6/image/upl
     className="rounded shadow-xl"
 />
 
-People in PostHog represent users who do events.
+People in PostHog represent the users behind your events. You can view them in the [People tab](https://us.posthog.com/persons).
 
-Every event has a `distinct_id` representing a person attached to it. However, not every `distinct_id` has an associated person profile.
+People have [person properties](/docs/product-analytics/person-properties), which enables you do things like:
 
-Capturing person profiles and user properties enables:
+- Filter on person properties
+- Create [cohorts](/docs/data/cohorts)
+- Use person properties for targeting feature flags, A/B tests, and surveys.
+- Track initial UTM values and referrers across anonymous and [identified](/docs/product-analytics/identify) users.
+- Query the `persons` table using [SQL insights](/docs/product-analytics/sql)
 
-- Viewing person profiles in the [People tab](https://us.posthog.com/persons)
-- Filtering on user properties
-- Merging identities across `distinct_id` values (i.e. merging an anonymous user with a logged in user)
-- Cohort creation
-- Feature flag, experimentation, and survey targeting on user properties
-- Tracking initial UTM values and referrers across anonymous and identified users
+## People and person profiles
+
+Using people in PostHog requires capturing events with **person profiles**. Person profiles are how PostHog attributes events and properties to specific users. Examples of scenarios where you want to capture events with person profiles are:
+
+- Tracking logged-in users in B2B and B2C SaaS apps
+- Doing user segmented product analysis
+- Growth and marketing teams wanting to analyze the _complete_ conversion lifecycle
 
 On the other hand, there are many use cases that don't require person profiles, such as:
 
@@ -36,19 +41,19 @@ On the other hand, there are many use cases that don't require person profiles, 
 - B2C apps where users don't sign up or log in
 - High volume API server events
 
-For backward compatibility and to make sure we don't drop person information accidentally, person profile processing is enabled by default for configs without any option set. Also, if a user distinct ID already has a person profile created, we count events as ones with person profiles. To reset this, delete the person in the person details UI in PostHog or use the `DELETE` operation of the [person API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id).
+Under our current [pricing](/pricing), events _without_ person profiles can be up to 4x cheaper than events _with_ them (due to computer cost of processing them), so it's recommended to only capture events _with_  person profiles when needed.
 
-> **Note:** Since we changed our data structure to make person profiles optional, any `distinct_id` created before May 2024 will have a person profile created for them. This means all of their events will be counted as events with person properties.
+### Capturing person profiles
 
-## Capturing person profiles
-
-For backward compatibility, PostHog captures events with person profiles by default. To change this in the JavaScript Web configuration, change the `person_profiles` config option:
+For backward compatibility, PostHog captures events with person profiles by default. To change this in the [JavaScript Web SDK](/docs/libraries/js), change the `person_profiles` [config](/docs/libraries/js#config) option:
 
 import PersonProfilesJSConfig from '../../docs/libraries/js/_snippets/person-profiles-config.mdx'
 
 <PersonProfilesJSConfig />
 
-Other SDKs and the API can pass the `$process_person_profile` property on events. Again, person profiles are enabled by default, but you can disable this by setting the property to `false`.
+Other SDKs and the [API](/docs/api) can pass the `$process_person_profile` property in events. Again, person profiles are enabled by default, but you can disable this by setting the property to `false`.
+
+Below is an example in Node, but the same applies to other SDKs:
 
 ```node
 client.capture({
@@ -60,9 +65,20 @@ client.capture({
 })
 ```
 
+### Person profiles and distinct IDs
+
+Below is good information to know when working with distinct IDs and person profiles:
+
+- Every event has a `distinct_id` representing a user attached to it. However, not every `distinct_id` has an associated person profile.
+
+- If a distinct ID already has a person profile created, any events captured with this distinct ID are considered events with a person profile. 
+    - To opt out of this behavior, contact file a support ticket via the [in-app modal](https://app.posthog.com/home#supportModal).
+
+- Any `distinct_id` created before May 2024 will have a person profile created for them. This means all of their events will be counted as events with person properties.
+
 ## Viewing person profiles
 
-Clicking on a person opens their profile and shows all their properties.
+Clicking on a person in the [People tab](https://us.posthog.com/persons) opens their profile and shows all their properties.
 
 <ProductScreenshot
     imageLight={personProfileLight}
@@ -73,23 +89,24 @@ Clicking on a person opens their profile and shows all their properties.
 
 - **Events** shows all the events a person has triggered, which you can search and filter to find specific events.
 
-- **Recordings** shows all session replays a person has generated. Note this is subject to the retention policy of your plan, so people who haven't been active recently may have none.
+- **Recordings** shows all of the session replays a person has generated. Note this is subject to the retention policy of your plan, so people who haven't been active recently may have none.
 
-- **Cohorts** shows all the cohorts a person belongs to.
+- **Cohorts** shows all the [cohorts](/docs/data/cohorts) a person belongs to.
 
-- **Related groups:** shows groups (e.g. organizations, projects, and instances) a person belongs to.
+- **Related groups:** shows [groups](/docs/product-analytics/group-analytics) (e.g. organizations, projects, and instances) a person belongs to.
 
-- **Feature flags:** shows all feature flags that are enabled for a person.
+- **Feature flags:** shows all [feature flags](/docs/feature-flags) that are enabled for the person.
 
 - **History:** shows any manual changes that have been made to the person's profile.
 
 ## Deleting person data
 
-- Select 'Persons' from the left-hand menu
-- Search for the person via their unique ID. For example, their email
-- Click on the person's ID
-- Click 'Delete person' to remove them and all their associated data from the PostHog instance. You will be prompted to confirm this action.
+### In the PostHog app
 
-## Deleting person data with the API
+- Search for the person via their unique ID. For example, their email.
+- Click on the person's ID
+- Click **Delete person** to remove them and all their associated data. You will be prompted to confirm this action.
+
+### Via the API
 
 You can also delete persons data via the API. See the [Data Deletion docs](/docs/privacy/data-deletion) for more information.

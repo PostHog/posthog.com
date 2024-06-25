@@ -1,5 +1,5 @@
 ---
-date: 2024-05-31
+date: 2024-06-07
 title: How software salespeople will try to screw you (and how to fight back)
 author:
   - charles-cook
@@ -8,7 +8,8 @@ tags:
   - Culture
   - People
 crosspost:
-  - Blog      
+  - Blog
+  - Newsletter      
 ---
 
 At PostHog, we sell software. We also buy a lot of it – $320k in 2023 and that’s not including AWS or Stripe fees. This means we’ve spent a lot of time negotiating software contracts.
@@ -84,10 +85,9 @@ You’ve negotiated hard and agreed on a price you’re happy with - hooray! Wai
 
 Maybe you’re already happy with the price, or don’t really care to spend a bunch of time negotiating – that’s fine!
 
-You can use my **Two-Step Low Effort Negotiation Framework for Busy People** instead:
+You can use my **Low Effort Negotiation Framework for Busy People** instead:
 
-- Ask ‘is this the best price you can offer?’
-- Stay completely silent (this is the hard part). 
+![framework](https://res.cloudinary.com/dmukukwp6/image/upload/negotiation_framework_6b45bb0f46.png)
 
 Sometimes you’ll get a decent chunk knocked off or some goodies thrown in - and you didn’t even care!
 

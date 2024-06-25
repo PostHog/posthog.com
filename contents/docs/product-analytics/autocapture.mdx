@@ -16,7 +16,6 @@ PostHog can capture frontend events automatically using autocapture. This captur
 
 This means you don't need to manually add tracking for individual components, links, buttons, divs, spans, or other parts of your product. Autocapture also provides data for [heatmaps](/docs/toolbar/heatmaps).
 
-
 Autocapture is available for our [JavaScript Web](/docs/libraries/js), [React](/docs/libraries/react), and [React Native](/docs/libraries/react-native) SDKs and is **enabled by default**.
 
 ## Configuring autocapture
@@ -58,6 +57,8 @@ If there are specific elements you _don't_ want to capture, add the `ph-no-captu
 ## Disabling autocapture
 
 You can disable autocapture in your [project settings](https://us.posthog.com/project/settings) or by setting `autocapture: false` in the [config](/docs/libraries/js#config). If _one_ of these is disabled, autocapture is disabled.
+
+You can disable pageviews and pageleaves by setting `capture_pageview: false`. To just disable pageleaves, keep `capture_pageview: true` and set `capture_pageleave: false`.
 
 Disabling autocapture **does not disable [session recording](/docs/session-replay/manual)**. You can disable session recording by turning it off in your [project settings](https://app.posthog.com/project/settings) or using `disable_session_recording: true` in the config.
 
@@ -108,6 +109,18 @@ properties: {
     "product-quantity": "1"
 }
 ```
+
+## Autocaptured events
+
+Autocaptured events include:
+
+- `$autocapture`: Clicks, inputs, typing, form submissions, and more.
+- `$pageview`: Triggers on page load. You might need to manually capture these in single-page apps like [React](/docs/libraries/react), [Next.js](/docs/libraries/next-js#pages-router) or [Vue](/docs/libraries/vue-js#capturing-page-views).
+- `$pageleave`: Triggers on `onpagehide` when a user navigates away from a page.
+- `$rageclick`: A second click within 1000ms within 30px of the first click.
+- `$screen`: When a user navigates on a mobile app.
+
+You can learn more about what events are autocaptured in the [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native#autocapture) docs. 
 
 ## Autocaptured properties
 

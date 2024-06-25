@@ -10,7 +10,7 @@ As Support Hero, your job is to investigate and resolve issues reported by custo
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-[Marcus](/community/profiles/1036), our Support Engineer, triages tickets for the Product Analytics and Pipeline team, due to the high volume of tickets those teams get. He will resolve tickets if possible, and escalate to the engineering team responsible if he needs further help.
+<TeamMember name="Marcus Hof" /> and <TeamMember name="Steven Shults" />, our Support Engineers, triage tickets for the Product Analytics, Pipeline, Session Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -134,7 +134,18 @@ You’ll spend most of your time in the Views pane, where you’ll find all tick
 Tips:
 
 * Err on the side of Solving tickets (see below) if you expect no further input from the customer, as a lot of them don't reply to confirm that the problem has been solved.
-* Provide actionable information as _Note_ (e.g. links to internal slack threads, partial investigation, ...)
+* Provide actionable information as an _Internal Note_ on the ZenDesk ticket (e.g. links to internal slack threads, partial investigation, ...)
+
+#### Avoiding duplication of effort in ZenDesk
+
+To avoid having more than one person working on the same ticket at the same time, assign a ticket to yourself before you start working on it:
+
+1. Click on the ticket to open it
+2. In the left column, click the `take it` link, above the `Assignee menu`
+3. Above the compose field, change `Public reply` to `Internal note` (prevents spamming Slack channels)
+4. In the lower-right, open the `Submit as` menu and select `Open`
+
+Also, avoid cherry-picking tickets. Pick the ticket that is closest to breaching our [response targets](/handbook/comms/customer-support#response-targets).
 
 #### Ticket Status
 
@@ -147,6 +158,8 @@ When responding to a ticket you should also choose an appropriate status accordi
 * **Solved** - You've provided a solution and don't expect to do any further work on the ticket.  If it's related to a feature request then you should provide the customer a link to GitHub so that they can follow along with development.
 
 Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. 
+
+
 
 #### Content Warnings
 
@@ -182,3 +195,16 @@ The first time you answer a question, you'll need to create a community account.
 Ask in [#team-website-and-docs](https://posthog.slack.com/archives/C01V9AT7DK4) to be upgraded to a moderator. This will also give you access to moderator controls available for each question.
 
 _Note: The PostHog.com community currently uses a separate authentication system from PostHog Cloud. There are [plans](https://github.com/PostHog/posthog.com/issues/5847) to support other types of authentication so a visitor doesn't have to create a separate account for asking questions._
+
+## How do I handle user requests to delete groups/organizations?
+
+> **_WARNING:_**  Do NOT click the `DELETE` button! That will delete the entire project!
+> Just use the `Save` button after clicking the `delete` checkbox for the group.
+
+1. Visit the Django Admin page for the project at `https://us.posthog.com/admin/posthog/team/:project_id/change/` (Make sure you use the project ID for the project where the group/org is found)
+2. In the lower part of the page, find `GROUP TYPE MAPPINGS` and click on `SHOW`
+3. In the righthand column, check the box for the group(s) to be deleted
+4. Click the **`SAVE`** button. (**Do NOT use the `DELETE` button!**)
+5. Reply to the user to confirm
+
+

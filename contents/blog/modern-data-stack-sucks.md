@@ -55,12 +55,12 @@ Your data needs start to spiral once you reach Seed stage – as does the comple
 
 - What features should we prioritize developing?
 - How do we best serve our [ideal customer](/newsletter/ideal-customer-profile-framework)?
-- How do we optimize our [conversion funnel](/tutorials/funnels)?
+- How do we optimize our [conversion funnel](/docs/product-analytics/funnels)?
 - What channels should we [be advertising on](/blog/dev-marketing-for-startups)?
 
 To answer these questions, you need to pull data from a growing number of sources - product analytics, CRM, help desk, ad platform, payment processors, and more. You also begin to utilize more of the features of these sources, such as customer engagement and session recordings, generating even more data.
 
-This is where customer data platforms (CDPs) like Segment or RudderStack come in. CDPs make it easier to bring data together by collecting it from different sources and sending it to various destinations. For example, a CDP might collect product data from PostHog, advertising data from Google, and revenue data from Stripe, and send it back to those same tools or a warehouse for use with a business intelligence tool like Hex.
+This is where customer data platforms (CDPs) like Segment or RudderStack come in. CDPs make it easier to bring data together by collecting it from different sources and sending it to various destinations. For example, a CDP might collect product data from PostHog, advertising data from Google, and [revenue data from Stripe](/tutorials/stripe-reports), and send it back to those same tools or a warehouse for use with a business intelligence tool like Hex.
 
 ![Seed](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/modern-data-stack-sucks/seed.png)
 
