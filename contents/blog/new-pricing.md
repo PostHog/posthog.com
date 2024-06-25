@@ -27,7 +27,7 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 * You decide when you capture person profile on an event. By default, events are captured with person profiles, but you can change this with a configuration option.
 
-## How much cheaper are the new base events?
+## How much can I save?
 
 At lower volumes, our new event pricing is 80% cheaper than before. This makes us better value than any popular (>$10M in revenue) product analytics tool. 
 
