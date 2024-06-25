@@ -398,15 +398,15 @@ const AccordionItem = ({
     return (
         <li
             className={`border-t relative ${isOpen
-                    ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
-                    : 'inactive border-light dark:border-dark first:border-transparent'
+                ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
+                : 'inactive border-light dark:border-dark first:border-transparent'
                 }`}
         >
             <button
                 onClick={onClick}
-                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all relative ${isOpen
-                        ? 'pt-4 pb-2 z-20'
-                        : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
+                    ? 'pt-4 pb-2 z-20'
+                    : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
                     }`}
             >
                 <span className="flex gap-2 items-center">
