@@ -65,13 +65,13 @@ The math is: new base events + person profiles = our previous per event pricing.
 
 | **Monthly events** | **New base event price** | **Base events + person profiles** | **Percentage diff.** |
 |--------------------|--------------------------|-----------------------------------|----------------|
-| **Up to 1m**       | Free                     | Free                              | -              |
-| **1-2m**           | $0.0000500 / event       | $0.0002480 / event                | -80%           |
-| **2-15m**          | $0.0000343 / event       | $0.0001040 / event                | -67%           |
-| **15-50m**         | $0.0000295 / event       | $0.0000655 / event                | -55%           |
-| **50-100m**        | $0.0000218 / event       | $0.0000364 / event                | -40%           |
-| **100-250m**       | $0.0000150 / event      | $0.0000187 / event               | -20%           |
-| **∞**              | $0.0000090 / event       | $0.0000100 / event                | -10%           |
+| <strong class="text-15px">Up to 1 million</strong>       | <strong class="text-green">Free</strong>                     | <strong class="text-green">Free</strong>                              | -              |
+| <strong class="text-15px">1-2 million</strong>           | <span class="text-[15px] font-semibold">$0.0000500</span><span class="text-sm opacity-70">/event</span>       | <span class="text-[15px] font-semibold">$0.0002480</span><span class="text-sm opacity-70">/event</span>                | <strong class="text-green">-80%</strong>           |
+| <strong class="text-15px">2-15 million</strong>          | <span class="text-[15px] font-semibold">$0.0000343</span><span class="text-sm opacity-70">/event</span>       | <span class="text-[15px] font-semibold">$0.0001040</span><span class="text-sm opacity-70">/event</span>                | <strong class="text-green">-67%</strong>           |
+| <strong class="text-15px">15-50 million</strong>         | <span class="text-[15px] font-semibold">$0.0000295</span><span class="text-sm opacity-70">/event</span>       | <span class="text-[15px] font-semibold">$0.0000655</span><span class="text-sm opacity-70">/event</span>                | <strong class="text-green">-55%</strong>           |
+| <strong class="text-15px">50-100 million</strong>        | <span class="text-[15px] font-semibold">$0.0000218</span><span class="text-sm opacity-70">/event</span>       | <span class="text-[15px] font-semibold">$0.0000364</span><span class="text-sm opacity-70">/event</span>                | <strong class="text-green">-40%</strong>           |
+| <strong class="text-15px">100-250 million</strong>       | <span class="text-[15px] font-semibold">$0.0000150</span><span class="text-sm opacity-70">/event</span>      | <span class="text-[15px] font-semibold">$0.0000187</span><span class="text-sm opacity-70">/event</span>               | <strong class="text-green">-20%</strong>           |
+| <strong class="text-15px">250+ million</strong>              | <span class="text-[15px] font-semibold">$0.0000090</span><span class="text-sm opacity-70">/event</span>       | <span class="text-[15px] font-semibold">$0.0000100</span><span class="text-sm opacity-70">/event</span>                | <strong class="text-green">-10%</strong>           |
 
 ## Who is this for?
 
