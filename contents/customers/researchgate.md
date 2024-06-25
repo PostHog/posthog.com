@@ -21,7 +21,7 @@ toolsUsed:
   - Feature Flags
   - PostHog Cloud
   - Insights
-date: 2024-25-06
+date: 2024-06-25
 ---
 
 ResearchGate, the world’s largest professional network for scientists, helps millions of professionals discover and disseminate groundbreaking research annually. The company is driven by a mission to promote access to science — but, with over 160 million publications, the scale of the community can present significant challenges.
@@ -36,7 +36,7 @@ Over the years ResearchGate’s team has built everything from internal experime
 
 <BorderWrapper>
 <Quote
-    imageSource="/images/customers/paul-mccloud.jpg"
+    imageSource="/images/customers/paul_mccloud.jpg"
     size="md"
     name="Paul McCloud"
     title="Head of Product Engineering, ResearchGate"
