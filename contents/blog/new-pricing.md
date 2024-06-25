@@ -8,7 +8,6 @@ author:
 tags:
   - PostHog news
 ---
-import {ProductScreenshot} from 'components/ProductScreenshot'
 
 export const Pricing = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_pricing_ba910c9535.jpg"
 export const PricingDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_pricing_dark_6b11387d6c.jpg"
@@ -17,15 +16,21 @@ export const PricingComparisonDark = "https://res.cloudinary.com/dmukukwp6/image
 
 ## TL;DR
 
-* You can now use our product and web analytics for up to 80% less, making us cheaper than any popular competitive product.
-
-* This is possible because we've introduced a new event processing option that enables you to capture events without person data. 
-
-* Events without person data are cheaper for us to ingest and query. We're passing this saving onto you by introducing cheaper base event pricing and a new 'person profiles' event option, which is charged separately.
-
-* Events with person profiles enabled cost the same as our old event pricing – i.e. base events + person profiles = our previous per event pricing. If you're an existing customer, you'll see a new 'person profiles' line item on your invoice, but your pricing has not increased.
-
-* By default, events are captured with person profiles, but you can change this with a simple [configuration option](#how-do-i-start-using-it) whenever you like.
+<Tweet alertMessage="Gen Z? Don't get distracted. You're here to read about our thrilling new pricing!">
+    You can now use our product and web analytics for up to 80% less, making us cheaper than any popular competitive product.
+</Tweet>
+<Tweet alertMessage="Gen Z? Don't get distracted. You're here to read about our thrilling new pricing!">
+    This is possible because we've introduced a new event processing option that enables you to capture events without person data. 
+</Tweet>
+<Tweet alertMessage="Gen Z? Don't get distracted. You're here to read about our thrilling new pricing!">
+    Events without person data are cheaper for us to ingest and query. We're passing this saving onto you by introducing cheaper base event pricing and a new 'person profiles' event option, which is charged separately.
+</Tweet>
+<Tweet alertMessage="Gen Z? Don't get distracted. You're here to read about our thrilling new pricing!">
+    Events with person profiles enabled cost the same as our old event pricing – i.e. base events + person profiles = our previous per event pricing. If you're an existing customer, you'll see a new 'person profiles' line item on your invoice, but your pricing has not increased.
+</Tweet>
+<Tweet alertMessage="Gen Z? Don't get distracted. You're here to read about our thrilling new pricing!">
+    By default, events are captured with person profiles, but you can change this with a simple <a href="#how-do-i-start-using-it">configuration option</a> whenever you like.
+</Tweet>
 
 ## How much can I save?
 
