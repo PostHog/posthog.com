@@ -41,7 +41,7 @@ export const Tweet = ({ children, className = '', alertMessage }) => {
         </div>
       </div>
       <div className="mt-4">
-        <p className="text-gray-700">{children}</p>
+        <p className="!leading-normal">{children}</p>
       </div>
       <div className="mt-4 flex justify-between items-center text-gray-500">
         <div className="flex space-x-4">
