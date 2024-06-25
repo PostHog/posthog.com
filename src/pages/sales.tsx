@@ -559,7 +559,7 @@ function Sales() {
             />
             <div className="w-screen overflow-x-hidden">
                 <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-4 md:gap-0 lg:gap-8 py-6 md:py-12">
-                    <div className="order-2 md:order-1 px-4 md:pl-8">
+                    <div className="order-2 md:order-1 pl-8">
                         <h1 className="text-[2.25rem] md:text-5xl mb-2">
                             Sales, <em className="text-red dark:text-yellow">PostHog-style</em>
                         </h1>
@@ -585,7 +585,7 @@ function Sales() {
                             </Tooltip>
                         </p>
                     </div>
-                    <div className="relative order-1 md:order-2">
+                    <div className="relative order-1 md:order-2 pl-8 md:pl-0">
                         <div className="md:absolute md:top-0 md:left-0 md:bottom-0">
                             <div className="dark:hidden">
                                 <StaticImage
@@ -610,7 +610,7 @@ function Sales() {
                                 />
                             </div>
                         </div>
-                        <div className="hidden xl:block absolute left-full -bottom-4 w-screen bg-[url('../images/sales/phone-cord.png')] h-[15px] -ml-1 bg-contain bg-repeat-x">
+                        <div className="hidden xl:block absolute left-full -bottom-10 w-screen bg-[url('../images/sales/phone-cord.png')] h-[15px] -ml-1 bg-contain bg-repeat-x">
 
                         </div>
                     </div>
