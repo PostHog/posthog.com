@@ -284,7 +284,9 @@ const TabContent = ({ activeProduct, addons, setAddons, totalPrice }) => {
     const { slider, calcVolume, denomination, calcCost, volume } = activeProduct
 
     useEffect(() => {
-        setShowMessage(totalPrice >= 100)
+        if (!showMessage) {
+            setShowMessage(totalPrice >= 100)
+        }
     }, [totalPrice])
 
     return (
