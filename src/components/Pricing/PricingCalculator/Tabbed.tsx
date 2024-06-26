@@ -9,6 +9,7 @@ import { allProductsData } from '../Pricing'
 import { useValues } from 'kea'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
+import SideModal from 'components/Modal/SideModal'
 
 const Modal = ({ onClose, isVisible }) => {
     return (
@@ -277,11 +278,20 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
     )
 }
 
-const TabContent = ({ activeProduct, addons, setAddons }) => {
+const TabContent = ({ activeProduct, addons, setAddons, totalPrice }) => {
+    const [showMessage, setShowMessage] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false)
     const { slider, calcVolume, denomination, calcCost, volume } = activeProduct
+
+    useEffect(() => {
+        setShowMessage(totalPrice >= 100)
+    }, [totalPrice])
 
     return (
         <>
+            <SideModal open={modalOpen} setOpen={setModalOpen}>
+                <p>Word magic here</p>
+            </SideModal>
             <div>
                 {activeProduct.name == 'A/B testing' ? (
                     <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-4 py-3 mb-2 text-sm">
@@ -305,6 +315,20 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
                                 First {activeProduct.freeLimit} {denomination}s free –&nbsp;<em>every month!</em>
                             </span>
                         </div>
+                        {showMessage && (
+                            <div className="border border-light dark:border-dark p-4 rounded bg-accent dark:bg-accent-dark mb-4 text-sm col-span-full pr-1.5 flex gap-1 items-center">
+                                <p className="m-0">
+                                    Looking for{' '}
+                                    <button
+                                        className="text-red dark:text-yellow font-bold"
+                                        onClick={() => setModalOpen(true)}
+                                    >
+                                        cheaper analytics
+                                    </button>
+                                    ?
+                                </p>
+                            </div>
+                        )}
                     </div>
                 )}
                 {activeProduct.addons.length > 0 && (
@@ -431,6 +455,7 @@ export default function Tabbed() {
                         addons={productAddons}
                         setAddons={setProductAddons}
                         activeProduct={activeProduct}
+                        totalPrice={totalPrice}
                     />
                 </div>
                 <div className="md:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark"></div>
