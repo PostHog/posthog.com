@@ -81,7 +81,7 @@ As a business we need to ensure we are focusing support on our paying customers,
 
 ### What if I need to confirm priority by checking a customer's MRR?
 
-You've got options.  By order of quickness:
+You've got a couple of options.  By order of quickness:
 
 1. Use the VIP Lookup Bot:
  
@@ -91,12 +91,6 @@ You've got options.  By order of quickness:
 
    Click the org name near the upper-left of the ticket. The left sidebar opens. 
    There you'll see which plan they're on. If they've already paid some bills, you'll also see MRR there.
-3. You can also check their payment history in Stripe:
-    1. Log in as the user.
-    2. Click the user's name in the lower-left corner.
-    3. In the resulting menu, select `Billing`.
-    4. Near the top of the page hit the button that says `Manage card details and view past invoices`.
-    5. Wait for the Stripe page to load (pretty slow), and scroll to the bottom.
 
 ## How should I handle self-hosted setups?
 
