@@ -92,6 +92,11 @@ const librariesData = {
                 url: '/docs/libraries/react-native',
                 icon: <StaticImage src="../../../contents/images/docs/integrate/react.svg" alt="React Native" />,
             },
+            {
+                name: 'Flutter',
+                url: '/docs/libraries/flutter',
+                icon: <StaticImage src="../../../contents/images/docs/integrate/flutter.svg" alt="Flutter" />,
+            },
         ],
     },
 }
