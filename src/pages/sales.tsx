@@ -586,20 +586,17 @@ function Sales() {
             <div className="w-screen overflow-x-hidden">
                 <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-4 md:gap-0 lg:gap-8 py-6 md:py-12">
                     <div className="order-2 md:order-1 pl-8">
-                        <h1 className="text-[2.25rem] md:text-5xl mb-2">
-                            Sales, <em className="text-red dark:text-yellow">PostHog-style</em>
+                        <div className="text-3xl md:text-4xl font-bold mb-0 opacity-90 uppercase">Sales:</div>
+                        <h1 className="text-[2.25rem] md:text-5xl mb-2 text-red dark:text-yellow">
+                            [Everyone else] vs. PostHog
                         </h1>
 
-                        <p className="mt-2 text-lg font-semibold mb-2 opacity-60">
+                        <p className="mt-2 text-lg font-semibold mb-2 opacity-60 leading-tight">
                             Call us unhinged, but we believe pricing pages should have actual, um, <em>pricing?</em>
                         </p>
                         <p className="mb-2">
-                            Most SaaS companies want to feel out how much money they can squeeze out of you. PostHog
-                            operates differently.
-                        </p>
-                        <p className="mb-2">
-                            We’re more like a utility where you pay for what you use. No extra markup - everyone pays
-                            the same rates*.
+                            Most SaaS companies want to feel out how much money they can squeeze out of you. <strong>PostHog
+                                operates differently.</strong> We’re more like a utility where you pay for what you use. No extra markup - everyone pays the same rates*.
                         </p>
                         <p className="opacity-60 text-sm mb-0">
                             *Unless you qualify for a{' '}
