@@ -579,7 +579,7 @@ function Sales() {
         // activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'privacy')}
         >
             <SEO
-                title="Sales, PostHog style"
+                title="Sales: [Everyone else] vs. PostHog"
                 description="We actually don't make you get on a call to find out our pricing."
                 image={`/images/og/sales.png`}
             />
