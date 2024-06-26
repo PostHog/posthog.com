@@ -220,7 +220,7 @@ const them = [
         ),
         cta: (
             <div className="flex flex-col md:flex-row gap-3 my-4">
-                <CallToAction href="https://app.posthog.com/signup">Get started - free</CallToAction>
+                <CallToAction href="https://app.posthog.com/signup">Ew, take me to PostHog, please!</CallToAction>
                 <CallToAction href="/demo" type="outline">
                     Get a demo (but not like this one!)
                 </CallToAction>
@@ -360,7 +360,7 @@ const us = [
                     <p>We’re going to be best friends!</p>
 
                     <div className="flex flex-col md:flex-row gap-3 my-4">
-                        <CallToAction href="https://app.posthog.com/signup">Get started</CallToAction>
+                        <CallToAction href="https://app.posthog.com/signup">Get started - free</CallToAction>
                         <CallToAction href="/demo" type="outline">
                             Get a demo (just like this one!)
                         </CallToAction>
@@ -591,7 +591,7 @@ function Sales() {
                         </h1>
 
                         <p className="mt-2 text-lg font-semibold mb-2 opacity-60">
-                            Because nobody loves pricing pages that don't contain any actual pricing...
+                            Call us unhinged, but we believe pricing pages should have actual, um, <em>pricing?</em>
                         </p>
                         <p className="mb-2">
                             Most SaaS companies want to feel out how much money they can squeeze out of you. PostHog
@@ -645,7 +645,7 @@ function Sales() {
                         <div className="inline-flex flex-col items-center mb-10 mx-auto">
                             <h2 className="mb-1 text-center relative">
                                 How the sales process works at{' '}
-                                <div className="inline-block relative after:absolute after:-bottom-5 after:left-0 after:right-0 after:content-['[Insert_your_least_favaorite_enterprise_SaaS_company_here]'] after:text-xs after:text-primary/60 dark:after:text-primary-dark/60 after:font-normal after:tracking-normal">
+                                <div className="inline-block relative after:absolute after:-bottom-5 after:left-0 after:right-0 after:content-['[Typical_bland_enterprise_SaaS_company]'] after:text-xs after:text-primary/60 dark:after:text-primary-dark/60 after:font-normal after:tracking-normal">
                                     <button
                                         onClick={updateCompanyName}
                                         className="absolute right-0.5 bottom-[.15rem] hover:bottom-[0.2rem] active:bottom-[.1rem] z-10 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30 hover:scale-[1.02] active:scale-[.99] transition-transform"
