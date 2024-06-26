@@ -1,6 +1,6 @@
 ---
 title: 'The best Eppo alternatives & competitors, compared'
-date: 2024-06-21
+date: 2024-06-26
 author:
   - lior-neu-ner
 rootpage: /blog
@@ -60,8 +60,6 @@ Besides this, PostHog offers product analytics, session replays, and surveys, wh
   <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flag updates and rollouts" />
   <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />
   <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
   <ComparisonRow column1={false} column2={true} feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1="Bayesian" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the results of an experiment are calculated" />
   <ComparisonRow column1={true} column2={true} feature="AI/LLM support" description="Compare models with experiments, view performance, cost, and latency" />
@@ -123,8 +121,6 @@ GrowthBook is the most similar alternative to Eppo on this list. It matches almo
   <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flag updates and rollouts" />
   <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />
   <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
   <ComparisonRow column1={false} column2={true} feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1="Bayesian, Frequentist" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the results of an experiment are calculated" />
   <ComparisonRow column1={false} column2={true} feature="AI/LLM support" description="Compare models with experiments, view performance, cost, and latency" />
@@ -182,8 +178,6 @@ Statsig is another similar alternative to Eppo. It includes feature flags, wareh
   <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flag updates and rollouts" />
   <ComparisonRow column1={false} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />
   <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
   <ComparisonRow column1={true} column2={true} feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1="Bayesian, Frequentist" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the results of an experiment are calculated" />
   <ComparisonRow column1={false} column2={true} feature="AI/LLM support" description="Compare models with experiments, view performance, cost, and latency" />
@@ -240,8 +234,6 @@ LaunchDarkly and Eppo offer similar feature management and A/B testing features,
   <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flag updates and rollouts" />
   <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />
   <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
   <ComparisonRow column1={false} column2={true} feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1="Bayesian, Frequentist" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the results of an experiment are calculated" />
   <ComparisonRow column1={true} column2={true} feature="AI/LLM support" description="Compare models with experiments, view performance, cost, and latency" />
@@ -301,8 +293,6 @@ Flagsmith also calls out "remote config" as a core feature, but behind the scene
   <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flag updates and rollouts" />
   <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />
   <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
   <ComparisonRow column1={false} column2={true} feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1="Bayesian" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the results of an experiment are calculated" />
   <ComparisonRow column1={false} column2={true} feature="AI/LLM support" description="Compare models with experiments, view performance, cost, and latency" />
@@ -360,8 +350,6 @@ According to [G2 reviews](https://www.g2.com/products/flagsmith/reviews), users 
   <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flag updates and rollouts" />
   <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />
   <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
   <ComparisonRow column1={true} column2={true} feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1="Sequential" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the results of an experiment are calculated" />
   <ComparisonRow column1={false} column2={true} feature="AI/LLM support" description="Compare models with experiments, view performance, cost, and latency" />
@@ -419,8 +407,6 @@ Like a few alternatives on this list, Amplitude doesn't support multi-armed band
   <ComparisonRow column1={true} column2={true} feature="Scheduling" description="Schedule flag updates and rollouts" />
   <ComparisonRow column1={true} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />
   <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run tests and see the impact of changes with custom goals and reports" />
-  <ComparisonRow column1={true} column2={true} feature="Multivariate (A/B/n) testing" description="Test multiple variants of a change" />
-  <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
   <ComparisonRow column1={false} column2={true} feature="Multi-armed bandit" description="Optimize tests automatically by allocating traffic to the best performing variant." /> 
   <ComparisonRow column1="Bayesian" column2="Bayesian, Frequentist" feature="Statistics engine" description="How the results of an experiment are calculated" />
   <ComparisonRow column1={false} column2={true} feature="AI/LLM support" description="Compare models with experiments, view performance, cost, and latency" />
