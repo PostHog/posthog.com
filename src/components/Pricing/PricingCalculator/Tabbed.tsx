@@ -15,9 +15,8 @@ const Modal = ({ onClose, isVisible }) => {
     return (
         <>
             <div
-                className={`bg-accent-dark/50 fixed left-0 w-screen h-screen top-0 bg-opacity-40 flex justify-center items-center ${
-                    !isVisible ? 'hidden' : 'z-[1000000]'
-                }`}
+                className={`bg-accent-dark/50 fixed left-0 w-screen h-screen top-0 bg-opacity-40 flex justify-center items-center ${!isVisible ? 'hidden' : 'z-[1000000]'
+                    }`}
                 onClick={() => onClose()}
             ></div>
             <div
@@ -195,9 +194,9 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                         ...addon,
                         totalCost: checked
                             ? calculatePrice(
-                                  inclusion_only ? (percentage / 100) * volume : volume,
-                                  plans[plans.length - 1].tiers
-                              )
+                                inclusion_only ? (percentage / 100) * volume : volume,
+                                plans[plans.length - 1].tiers
+                            )
                             : 0,
                     }
                 }
@@ -251,7 +250,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                                     />
                                     <strong>%</strong>
                                 </span>
-                                <span>of total {unit} volume</span>
+                                <span>of {unit} volume</span>
                             </p>
                             <div>
                                 <button
@@ -292,7 +291,46 @@ const TabContent = ({ activeProduct, addons, setAddons, totalPrice }) => {
     return (
         <>
             <SideModal open={modalOpen} setOpen={setModalOpen}>
-                <p>Word magic here</p>
+                <h3 className="mb-2">Save money if you don't need PII</h3>
+                <p className="font-semibold opacity-70 text-[15px]">(Personally-identifiable information is more expensive to process)</p>
+                <p>The more data we store about users, the higher the cost. So the less data you need, the more you can save.</p>
+                <p>You can track users in two ways:</p>
+                <ul className="mt-2 mb-4">
+                    <li className="mb-2">
+                        <strong>Anonymized</strong><br />
+                        <span className="text-sm">Can track:  UTMs, location, referrer, pageviews<br />
+                            Can't track: Conversions</span>
+                    </li>
+                    <li>
+                        <strong>Identified</strong><br />
+                        <span className="text-sm">Can track: Conversions, custom user properties</span>
+                    </li>
+                </ul>
+                <p className="mb-4">
+                    With <strong>anonymized</strong> events, you can produce insights like in Google Analytics.
+                </p>
+                <p className="mb-2">
+                    With <strong>identified</strong> events, you can:
+                </p>
+                <ul className="mb-8">
+                    <li>store custom properties (like email, plan name, or internal ID)</li>
+                    <li>associate their previous anonymous source (before signup) which enables conversion tracking</li>
+                    <li>target flags, experiments, and surveys by user properties</li>
+                    <li>create graphs based on user properties, or create cohorts</li>
+                </ul>
+
+                <p>You can have a mix of both, so you can identify certain users and anonymize others. (It's determined by the code on the page where you're sending the event, so it's completely customizable).</p>
+
+                <p className="font-semibold opacity-60 mb-2 pt-4 border-t border-light dark:border-dark">In summary...</p>
+
+                <h4>Looking for a <span className="text-red dark:text-yellow">Google Analytics replacement</span>?</h4>
+                <p>Disable <em>person profiles</em> and you can save up to 80% – depends on traffic volume.</p>
+
+                <h4>Looking for <span className="text-red dark:text-yellow">product analytics</span>?</h4>
+                <p>You'll need to use <em>person profiles</em>, though you can disable them selectively (like on certain pages) with a code change.</p>
+
+                <h4>Want to use PostHog for BOTH <span className="text-red dark:text-yellow">web analytics</span> and <span className="text-red dark:text-yellow">product analytics</span>?</h4>
+                <p>Your cost on PostHog will be a mixture between anonymized traffic and identified traffic, depending on your configuration. For example, if your traffic is split 80% anonymous website visitors and 20% logged in users, you'll only need <em>person profiles</em> enabled for 20% of your events.</p>
             </SideModal>
             <div>
                 {activeProduct.name == 'A/B testing' ? (
@@ -318,11 +356,11 @@ const TabContent = ({ activeProduct, addons, setAddons, totalPrice }) => {
                             </span>
                         </div>
                         {showMessage && (
-                            <div className="border border-light dark:border-dark p-4 rounded bg-accent dark:bg-accent-dark mb-4 text-sm col-span-full pr-1.5 flex gap-1 items-center">
-                                <p className="m-0">
+                            <div className="border border-light dark:border-dark px-4 py-3 rounded bg-accent dark:bg-accent-dark mb-4 text-sm col-span-full pr-1.5 flex gap-1 items-center">
+                                <p className="m-0 text-sm">
                                     Looking for{' '}
                                     <button
-                                        className="text-red dark:text-yellow font-bold"
+                                        className="text-red dark:text-yellow font-semibold"
                                         onClick={() => setModalOpen(true)}
                                     >
                                         cheaper analytics
@@ -423,11 +461,10 @@ export default function Tabbed() {
                                 <li key={name}>
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
-                                            active
-                                                ? 'font-bold bg-accent dark:bg-accent-dark'
-                                                : 'hover:bg-accent dark:hover:bg-accent/15'
-                                        }`}
+                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${active
+                                            ? 'font-bold bg-accent dark:bg-accent-dark'
+                                            : 'hover:bg-accent dark:hover:bg-accent/15'
+                                            }`}
                                     >
                                         <div className="flex items-center space-x-2">
                                             <span>{icon}</span>
