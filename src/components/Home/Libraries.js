@@ -29,6 +29,11 @@ const librariesData = {
                 url: '/docs/libraries/vue',
                 icon: <StaticImage src="../../../contents/images/docs/integrate/frameworks/vue.svg" alt="Vue" />,
             },
+            {
+                name: 'More',
+                url: '/docs/frameworks',
+                icon: <IconEllipsis />,
+            },
         ],
     },
     'server-side': {
