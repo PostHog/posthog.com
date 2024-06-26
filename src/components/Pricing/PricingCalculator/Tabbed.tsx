@@ -186,7 +186,7 @@ const Modal = ({ onClose, isVisible }) => {
 const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only, unit }) => {
     const addon = addons.find((addon) => addon.type === type)
     const checked = addon?.checked
-    const [percentage, setPercentage] = useState(50)
+    const [percentage, setPercentage] = useState(100)
     useEffect(() => {
         setAddons((addons) => {
             return addons.map((addon) => {
@@ -245,7 +245,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                                         }}
                                         type="number"
                                         min={1}
-                                        max={99}
+                                        max={100}
                                         className="p-0 pr-0.5 bg-tan dark:bg-dark border-none hide-number-arrows text-sm font-bold text-center -mr-0.5 focus:ring-0"
                                         value={percentage}
                                     />
