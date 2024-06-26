@@ -79,6 +79,25 @@ As a business we need to ensure we are focusing support on our paying customers,
 1. Open Zendesk tickets for your team that have `normal` priority.
 1. Open Zendesk tickets for your team that have `low` priority.
 
+### What if I need to confirm priority by checking a customer's MRR?
+
+You've got options.  By order of quickness:
+
+1. Use the VIP Lookup Bot:
+ 
+    In any Slack channel, type `@VIP Lookup Bot [Customer]` (without the brackets.) 
+    'Customer' can be the organization name (case-sensitive), or their organization ID.
+2. In ZenDesk: 
+
+   Click the org name near the upper-left of the ticket. The left sidebar opens. 
+   There you'll see which plan they're on. If they've already paid some bills, you'll also see MRR there.
+3. You can also check their payment history in Stripe:
+    1. Log in as the user.
+    2. Click the user's name in the lower-left corner.
+    3. In the resulting menu, select `Billing`.
+    4. Near the top of the page hit the button that says `Manage card details and view past invoices`.
+    5. Wait for the Stripe page to load (pretty slow), and scroll to the bottom.
+
 ## How should I handle self-hosted setups?
 
 It's fine to politely direct users to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a GitHub issue if they believe something is broken in the docs or deployment setup. We do not otherwise provide support for self-hosted PostHog.
