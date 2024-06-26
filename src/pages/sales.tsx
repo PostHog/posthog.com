@@ -13,7 +13,7 @@ import { motion } from 'framer-motion'
 
 const them = [
     {
-        title: '"I have a question about the product."',
+        title: 'Extract more info than a stalker',
         children: (
             <>
                 <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
@@ -49,7 +49,7 @@ const them = [
         ),
     },
     {
-        title: 'The discovery call',
+        title: 'The discovery call of shame',
         children: (
             <>
                 <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
@@ -64,7 +64,7 @@ const them = [
         ),
     },
     {
-        title: 'Finally, a demo!',
+        title: 'Finally, a generic demo!',
         children: (
             <>
                 <div className="col-span-4 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-4 md:pb-20">
@@ -87,7 +87,7 @@ const them = [
         ),
     },
     {
-        title: 'The follow-up meeting',
+        title: 'The follow up meeting of no hope',
         children: (
             <>
                 <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-4 md:pb-20">
@@ -143,7 +143,7 @@ const them = [
         ),
     },
     {
-        title: 'The dreaded contract',
+        title: 'SaaS contract or War and Peace?',
         children: (
             <>
                 <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-8 md:pb-20">
@@ -165,7 +165,7 @@ const them = [
         ),
     },
     {
-        title: 'Finally, implementation time!',
+        title: 'The implementation phase of regret',
         children: (
             <>
                 <div className="col-span-4 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-12 md:pb-20">
@@ -231,7 +231,7 @@ const them = [
 
 const us = [
     {
-        title: '"I have a question about the product.',
+        title: '"I have a question about the product."',
 
         children: (
             <>
@@ -270,7 +270,7 @@ const us = [
         ),
     },
     {
-        title: 'Personalized demo with technical account exec',
+        title: 'Personalized demo with technical person',
 
         children: (
             <>
@@ -293,7 +293,7 @@ const us = [
         ),
     },
     {
-        title: 'Next steps & follow-up questions',
+        title: 'Zero to implementation in a week',
         children: (
             <>
                 <div className="col-span-4 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-4 md:pb-20">
@@ -672,6 +672,19 @@ function Sales() {
                         <div ref={usRef}>
                             <Accordion items={us} keyboardContainerRef={keyboardContainerRef} />
                         </div>
+                    </div>
+                </div>
+
+                <div className="max-w-7xl mx-auto">
+                    <div className="p-4 md:p-8 mb-12 mx-4 md:mx-8 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
+                        <h3 className="mb-1 text-center md:text-left">Craving more unhinged rants like this?</h3>
+                        <div className="flex flex-col md:flex-row md:gap-2 md:items-baseline mb-4">
+                            <CallToAction href="/newsletter" type="outline" size="sm" className="mt-4" width="[calc(100%+4px)] md:w-auto">Check out our newsletter</CallToAction>
+                            <span className="inline-flex mt-2 -mb-1 mt:my-0 self-center">or</span>
+                            <CallToAction href="/blog" type="outline" size="sm" className="mt-4" width="[calc(100%+4px)] full md:w-auto">Visit the blog</CallToAction>
+                        </div>
+
+                        <p className="mb-0 text-sm text-primary/75 dark:text-primary-dark/75 text-balance text-center md:text-left"><em>Brought to you by the team who thought making <Link href="/terms">terms and conditions fun</Link> was a good idea</em></p>
                     </div>
                 </div>
             </div>
