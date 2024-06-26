@@ -18,7 +18,7 @@ To start, you need both Hubspot and PostHog accounts. Once you have those, head 
 1. Click **Link source**
 2. Choose the Hubspot option by clicking **Link**
 3. Choose the Hubspot account you want to link
-4. Add a table prefix like `prod_` if you want and press **Next**
+4. Add a table prefix like `prod_` (optional) and press **Next**
 5. Select all the tables, choose your sync method, and press **Import**
 
 Once done, PostHog will automatically pull and format your Hubspot data for querying. You can adjust the sync frequency, see the last successful run, and more in [data warehouse settings](https://us.posthog.com/data-warehouse/settings/managed).
