@@ -1,12 +1,10 @@
 ---
 title: How to send survey responses to Slack
-date: 2025-06-26
+date: 2024-06-26
 author:
   - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
 tags:
   - surveys
 ---
@@ -15,15 +13,14 @@ It's useful to send survey responses from your users to Slack. This way you're n
 
 ## Step 1: Create your survey
 
-The first step is to create a survey. Our [docs](/docs/surveys/creating-surveys) cover how to do this in, so we won't go into detail here. We also have [framework-specific tutorials](/docs/surveys/tutorials#framework-guides).
+The first step is to create a survey. Our [docs](/docs/surveys/creating-surveys) cover how to do this, so we won't go into detail here. We also have [framework-specific tutorials](/docs/surveys/tutorials#framework-guides).
 
-Going forward in this tutorial, we'll assume you've created a survey.
 
 ## Step 2: Create an app in Slack
 
 The next step is configure an app in Slack that will send messages with the survey responses.
 
-Go to the [Slack developer dashboard](https://api.slack.com/apps?new_app=1) and click **Create New App**. Then click **From scratch**. Name your app "PostHog", connect it to the workspace of your choice, and click **Create App**
+Go to the [Slack developer dashboard](https://api.slack.com/apps?new_app=1), click **Create New App**, and then click **From scratch**. Name your app "PostHog", connect it to the workspace of your choice, and click **Create App**.
 
 Optional: Feel free to use an image from [here](/media) as the app's logo.
 
@@ -39,7 +36,7 @@ Once created, copy the URL for your new webhook.
 
 ## Step 4: Connect your webhook to PostHog
 
-Go to **Webhook integration** section in your [PostHog project settings](https://us.posthog.com/settings/project#integration-webhooks) and paste in the URL from the previous step.
+Go to **Integration** section in your [PostHog project settings](https://us.posthog.com/settings/project#integration-webhooks) and paste the URL from the previous step in the **Webhook integration** field.
 
 Click **Test & Save** and you should receive a message in Slack from your app.
 
@@ -50,7 +47,7 @@ Click **Test & Save** and you should receive a message in Slack from your app.
     classes="rounded"
 />
 
-> **Note:** In your project settings, you'll also see a "Slack integration" section. You can ignore this as this is not required for setting up the Slack webhook. It's only required for setting up [Subscriptions](/docs/data/subscriptions) to receive regular reports for any insight or dashboard.
+> **Note:** In your project settings, you'll also see a "Slack integration" section. You can ignore this as it is not required for setting up the Slack webhook. It's only required for setting up [subscriptions](/docs/data/subscriptions) to receive regular reports for any insight or dashboard.
 > 
 > ![Screenshot of Slack integration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/webhooks/slack-integration-for-subscriptions.png) 
 
@@ -71,7 +68,7 @@ Altogether it should look like this:
     classes="rounded"
 />
 
-And we're done! Now whenever a user responds to your surveys, you'll receive a message in slack
+And we're done! Now whenever a user responds to your surveys, you'll receive a message in Slack
 
 ![Survey response in Slack](https://res.cloudinary.com/dmukukwp6/image/upload/v1719301538/posthog.com/contents/Screenshot_2024-06-25_at_9.43.26_AM.png)
 
