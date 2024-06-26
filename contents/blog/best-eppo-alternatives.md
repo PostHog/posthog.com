@@ -43,7 +43,7 @@ Typical PostHog users are engineers and product managers at startups and mid-siz
 
 ### How does PostHog compare to Eppo?
 
-Both Eppo and PostHog tools support core feature flag and A/B testing components. The biggest difference is their approach to data warehouses:
+Both Eppo and PostHog support core feature flag and A/B testing components. The biggest difference is their approach to data warehouses:
 
 - Eppo is warehouse-native, meaning that it integrates with your existing data tools like Snowflake or Postgres. 
 
@@ -146,6 +146,8 @@ According to G2, reviewers choose GrowthBook for the following.
 > 
 > Being open source, free, and self-hostable, GrowthBook makes for a good alternative to Eppo, especially for companies in tricky regulatory situations.
 
+<br />
+
 ## 3. Statsig
 
 - **Founded:** 2021
@@ -158,7 +160,7 @@ According to G2, reviewers choose GrowthBook for the following.
 
 [Statsig](/blog/posthog-vs-statsig) provides tools like feature flags, experimentation, and analytics to help companies build better products. Teams use Statsig to take the risk out of releases, experiment with new features, and monitor changes. It also includes a warehouse-native mode to connect directly and utilize your data warehouse.
 
-### Key features
+#### Key features
 
 - 🚩 **Feature flags:** Take the risk out of releases with targeted feature flag rollouts.
 
@@ -170,7 +172,7 @@ According to G2, reviewers choose GrowthBook for the following.
 
 ### How does Statsig compare to Eppo?
 
-Statsig is another similar alternative to Eppo. It includes feature flags, warehouse-native mode, and advanced A/B testing techniques such as multi-armed bandit testing. However, it's lack of JSON payloads in feature flags is sorely missed.
+Statsig is another similar alternative to Eppo. It includes feature flags, warehouse-native mode, and advanced A/B testing techniques such as multi-armed bandit testing. However, its feature flags are limited to booleans only and don't support string, number, or JSON values.
 
 <ComparisonTable column1="Statsig" column2="Eppo">
   <ComparisonRow column1={true} column2={false} feature="Self-serve" description="Free to try, no mandatory sales calls" />
@@ -200,7 +202,7 @@ According to G2, users are big fans of Statsig because:
 
 > #### Bottom line
 > 
-> Statsig's feature parity with Eppo combined with transparent pricing and self-serve almost make it a no-brainer. However, its boolean-only feature flags are restricting.
+> Statsig's feature parity with Eppo combined with transparent pricing and self-serve almost make it a no-brainer. However, developers will find their boolean-only feature flags restricting.
 
 <br />
 
@@ -275,9 +277,9 @@ According to [G2 reviews](https://www.g2.com/products/launchdarkly/reviews#revie
 
 [Flagsmith](https://www.flagsmith.com) is an open-source tool designed to help teams manage feature releases and configurations across web, mobile, and server-side apps. Flagsmith enables teams to ship new features safely and iterate on their products more effectively.
 
-They offer lots of flexibility when it comes to hosting. You can choose from data centers around the world to host your data, or you can self-host.
+It offers lots of flexibility when it comes to hosting. You can choose from data centers around the world to host your data, or you can self-host.
 
-### Key features
+#### Key features
 
 - 🚩 **Feature flags:** Control and target the release of features using multi-variate flags with real-time updates and local evaluation.
 
@@ -321,6 +323,8 @@ According to [G2 reviews](https://www.g2.com/products/flagsmith/reviews), users 
 > #### Bottom line
 > 
 > Flagsmith is an excellent Eppo alternative if you are looking for an open-source solution with flexible deployment options and comprehensive feature management capabilities.
+
+<br />
 
 ## 6. Optimizely
 
