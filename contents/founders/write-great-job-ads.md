@@ -28,7 +28,7 @@ Here is a job ad from Apple, a reasonably well-known tech company. At first glan
 
 However, there are a bunch of things that are actually kinda annoying and unhelpful about this job at which could put great candidates off applying. See if any stick out to you, we'll come back to this at the end!
 
-![Apple](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/apple-job-ad.png)
+![Apple](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_26_at_13_51_37_e9eb79f3e7.png)
 
 I'm not saying 'PostHog is better at job ads than Apple' – the point is that startups do not have the incredible brand recognition that Apple does, so you need to put in extra effort to stand out.
 
