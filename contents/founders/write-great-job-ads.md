@@ -120,7 +120,7 @@ You can also do a version of this list under a 'what you'll be doing' type secti
 
 **If you are open source, link to your repo**
 
-Ok this is more niche, but if your product is open source then linking to good examples of recent PRs/Issues is a great way to give candidates an insight into exactly the kind of thing they will be working on. Instead of promising them 'hey you'll work on something really cool, trust me bro' you can actually point them to real code. Neat!
+This is more niche, but if your product is open source then linking to good examples of recent PRs/Issues is a great way to give candidates an insight into exactly the kind of thing they will be working on. Instead of promising them, 'Hey you'll work on something really cool, trust me bro' you can actually point them to real code. Neat!
 
 ## Pulling it all together
 
