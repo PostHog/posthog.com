@@ -1,6 +1,6 @@
 ---
-date: 2024-06-25
-title: What employees really think about PostHog
+date: 2024-06-27
+title: What our team really thinks about working at PostHog
 author:
   - james-temperton
 featuredImage: >-
