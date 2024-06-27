@@ -20,7 +20,7 @@ At PostHog, we've written job ads that have received 9,000 applicants in the las
  
 - We've stopped advertising anywhere except on our own website (of course we still pop up on a few scraper sites)
 
-Given the number of people I've interviewed recently who have said 'I loved your job ad', we figure some of this stuff must be working! Here is a super-quick tactical guide which will hopefully help. 
+Given the number of people I've interviewed recently who have said 'I loved your job ad', we figure some of this stuff must be working! Here is a super-quick tactical guide which will hopefully help you get more applicants. 
 
 ## But first, an example
 
