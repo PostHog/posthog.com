@@ -82,7 +82,7 @@ export const Content = ({ quickLinks = false }) => {
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                             />
                         }
-                        url="https://posthog.com/tutorials/hubspot-reports"
+                        url="/tutorials/hubspot-reports"
                     />
                     <ResourceItem
                         type="Guide"
