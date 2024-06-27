@@ -29,7 +29,7 @@ We asked 16 questions that required a mix of qualatative and quantative response
 * **97% positive:** PostHog is in a position to really succeed over the next three years.
 * **97% positive:** My manager and team around me genuinely care about my wellbeing.
 
-* ![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_1_036769c290.png)
+![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_1_036769c290.png)
 
 ### Lowest scores
 
@@ -58,7 +58,7 @@ We took the scores we received and compared them to Culture Amp’s benchmark fo
 | I would recommend PostHog as a great place to work. | Engagement | 95% | 86% | +9% |
 | I see myself still working at PostHog in two years' time. | Engagement | 85% | 62% | +23% |
 
-* ![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_3_97997dceb9.png)
+![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_3_97997dceb9.png)
 
 ### Qualitative questions
 
@@ -91,7 +91,7 @@ These specific but anonymous quotes are broadly reflective of responses from mul
 * I would say PostHog is a place where people who can work independently and without much process and support do best, but for me this 'light-touch' process works
 * I really love the weekly context bomb at the all hands
 
-* ![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_2_b73232d570.png)
+![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_2_b73232d570.png)
 
 #### Constructive:
 
@@ -111,7 +111,7 @@ We also asked two questions which were mandatory and had open text fields:
 
 We ran this survey using the [Deel Pulse Surveys app in Slack](https://www.deel.com/plugins/pulse-surveys/). Our previous three surveys were quarterly, but this time we waited six months. We’ll stick with bi-annual surveys moving forward.
 
-* * ![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_4_f0bec1d01e.png)
+![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_4_f0bec1d01e.png)
 
 ### What we’ll do next
 
