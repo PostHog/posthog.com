@@ -76,7 +76,7 @@ I get it - you want to make this list look as long as possible.
 
 Perhaps a bit unorthodox, but I think that if you don't have great benefits to offer (which is totally ok, especially if you are super early stage), then it is much better to just not include anything beyond salary at all rather than making something up. The following are not actually benefits, they are basically your legal obligations or incredibly generic:
 
-- Competitive salary - ooh let's pay money in exchange for work, how brave
+- Competitive salary. Ooh let's pay money in exchange for work, how brave.
 
 - The legal minimum number of days holiday or pension contributions
 
