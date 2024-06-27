@@ -17,31 +17,9 @@ tags:
 
 At PostHog, we want to build the [most transparent company in the world](/handbook/people/overview) – and the best place for people to work in general. To find out how we’re doing, we run bi-annual team surveys. And to be totally transparent, we’re going to publish them here for anyone to see.
 
-We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. For our last survey, which covered Q4 2023, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures.
+### H1 2024 PostHog company survey results
 
-We asked 14 questions covering categories such as company, confidence, culture, and growth. 12 of the questions we asked required a response ranging from 1, meaning strongly disagree, to 5, meaning strongly agree. These questions also had an optional text field for people to add comments:
-
-* PostHog is in a position to really succeed over the next three years.
-* I understand PostHog's goals and can see how my work contributes to them.
-* At PostHog, we have open and honest two-way communication.
-* I receive appropriate recognition for my work at PostHog.
-* I believe that my total compensation (salary + equity + benefits) is fair, relative to similar roles at other companies.
-* My manager and team around me genuinely care about my wellbeing.
-* The leaders at PostHog keep people informed about what is happening.
-* I feel like I am learning and growing at PostHog.
-* Generally, I believe my workload is reasonable for my role and I am able to arrange time out from work when I need it.
-* The support I am receiving and processes we have in place allow me to do my best possible work.
-* I would recommend PostHog as a great place to work.
-* I see myself still working at PostHog in two years' time.
-
-And two of which were mandatory and had open text fields:
-
-* What motivates you right now?
-* If you were to leave PostHog, what would the reason be?
-
-We took the scores we received and compared them to Culture Amp’s benchmark for ‘new tech’ companies with less than 200 people. We then took the average score out of 5 and multiplied it by 20 to get a percentage. It’s a bit rough, but is useful for comparing our scores against the industry benchmark.
-
-We ran this survey using the [Deel Pulse Surveys app in Slack](https://www.deel.com/plugins/pulse-surveys/). Our previous three surveys were quarterly, but this time we waited six months. We’ll stick with bi-annual surveys moving forward.
+We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. For our last survey, which covered Q4 2023, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures. Here's what our team members said.
 
 ### Highest scores
 
@@ -55,6 +33,7 @@ We ran this survey using the [Deel Pulse Surveys app in Slack](https://www.deel.
 * **79% positive:** I believe that my total compensation (salary + equity + benefits) is fair, relative to similar roles at other companies. 
 * **79% positive:** I see myself still working at PostHog in two years' time. 
 We don't use AI to summarize these results at our scale as we think it's worth a human reading and synthesizing this information properly.
+
 ### Qualitative questions
 
 **What motivates you right now?** The most common themes people highlighted this time were the same as last.
@@ -92,6 +71,32 @@ These specific but anonymous quotes are broadly reflective of responses from mul
 * For the company as a whole, I think things are pretty good, but I do think that satisfaction is heavily dependent on the team you're on.
 * Our setup means we are always on the edge of exhaustion because we purposefully keep things lean and tight on numbers.
 * All ingredients are there but growing pains are apparent specifically around team management
+
+* ### How we run our company survey
+
+* We asked 14 questions covering categories such as company, confidence, culture, and growth. 12 of the questions we asked required a response ranging from 1, meaning strongly disagree, to 5, meaning strongly agree. These questions also had an optional text field for people to add comments:
+
+* PostHog is in a position to really succeed over the next three years.
+* I understand PostHog's goals and can see how my work contributes to them.
+* At PostHog, we have open and honest two-way communication.
+* I receive appropriate recognition for my work at PostHog.
+* I believe that my total compensation (salary + equity + benefits) is fair, relative to similar roles at other companies.
+* My manager and team around me genuinely care about my wellbeing.
+* The leaders at PostHog keep people informed about what is happening.
+* I feel like I am learning and growing at PostHog.
+* Generally, I believe my workload is reasonable for my role and I am able to arrange time out from work when I need it.
+* The support I am receiving and processes we have in place allow me to do my best possible work.
+* I would recommend PostHog as a great place to work.
+* I see myself still working at PostHog in two years' time.
+
+And two of which were mandatory and had open text fields:
+
+* What motivates you right now?
+* If you were to leave PostHog, what would the reason be?
+
+We took the scores we received and compared them to Culture Amp’s benchmark for ‘new tech’ companies with less than 200 people. We then took the average score out of 5 and multiplied it by 20 to get a percentage. It’s a bit rough, but is useful for comparing our scores against the industry benchmark.
+
+We ran this survey using the [Deel Pulse Surveys app in Slack](https://www.deel.com/plugins/pulse-surveys/). Our previous three surveys were quarterly, but this time we waited six months. We’ll stick with bi-annual surveys moving forward.
 
 ### What we’ll do next
 
