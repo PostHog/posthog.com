@@ -1,18 +1,13 @@
 ---
 date: 2024-06-25
 title: What employees really think about PostHog
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
 author:
   - james-temperton
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/survey_hog_bafed58598.jpg
-featuredImageType: full
-category: Inside PostHog
 tags:
   - Culture
+  - Inside PostHog
 ---
 
 We want to build the [most transparent company in the world](/handbook/people/overview) – and the best place for people to work in general. To find out how we’re doing, we run bi-annual team surveys. And to be totally transparent, we’re publishing them here for anyone to see. This page will always feature the results of our more recent survey.
