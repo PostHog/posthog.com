@@ -98,7 +98,7 @@ I'm a big believer that a well-written job ad is just as important to your compa
 
 Instead, do this:
 
-- Hiring manager write the _entire_ job spec. They can copy previous ads. It is ok if they are not a great writer - they just need to write down as much as possible.
+- Hiring manager write the _entire_ job spec. They can copy previous ads. It's ok if they are not a great writer, they just need to write down as much as possible.
 - Get a good writer to edit the ad and make it a _good piece of written content._ If your hiring manager is already a good writer, you can skip this step.
 - Recruiter does a hygiene check for dumb stuff or anything obviously missing.
 
