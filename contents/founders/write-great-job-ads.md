@@ -24,7 +24,7 @@ Given the number of people I've interviewed recently who have said 'I loved your
 
 ## But first, an example
 
-Here is a job ad from Apple. They are pretty good at hiring good people, and at a first glance this job ad seems totally fine. Ok. Meh, even. 
+Here is a job ad from Apple, a reasonably well-known tech company. At first glance this seems totally fine. Ok. Meh, even. 
 
 However, there are a bunch of things that are actually kinda annoying and unhelpful about this job at which could put great candidates off applying. See if any stick out to you, we'll come back to this at the end!
 
