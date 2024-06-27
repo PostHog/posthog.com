@@ -26,7 +26,7 @@ Given the number of people I've interviewed recently who have said 'I loved your
 
 Here is a job ad from Apple. They are pretty good at hiring good people, and at a first glance this job ad seems totally fine. Ok. Meh, even. 
 
-However, there are a bunch of things that are actually kinda annoying and unhelpful about it which could put great candidates off applying - see if any stick out to you. We'll come back to this at the end!
+However, there are a bunch of things that are actually kinda annoying and unhelpful about this job at which could put great candidates off applying. See if any stick out to you, we'll come back to this at the end!
 
 ![Apple](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/apple-job-ad.png)
 
