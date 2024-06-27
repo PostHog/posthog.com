@@ -70,6 +70,8 @@ You are not that great a negotiator, and you might as well screen out the people
 
 If you want to go the extra mile, feel free to copy our compensation calculator. 
 
+<CompensationCalculator />
+
 **Benefits**
 
 I get it - you want to make this list look as long as possible.
