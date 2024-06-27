@@ -21,13 +21,11 @@ We also ask two questions which are mandatory and have open text fields:
 * What motivates you right now?
 * If you were to leave PostHog, what would the reason be?
 
-We run this survey using the [Deel Pulse Surveys app in Slack](https://www.deel.com/plugins/pulse-surveys/). 
+We run this survey using the [Deel Pulse Surveys app in Slack](https://www.deel.com/plugins/pulse-surveys/). We used to run surveys quarterly, but we now do them every six months.
 
-Our use to run surveys quarterly, but we do them every six months.
 ## H1 2024 survey results
 
 We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. For our last survey, which covered Q4 2023, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures.
-
 
 ### Highest scores
 
@@ -42,7 +40,6 @@ We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 202
 * **82% positive:** The support I am receiving and processes we have in place allow me to do my best possible work.
 * **79% positive:** I believe that my total compensation (salary + equity + benefits) is fair, relative to similar roles at other companies. 
 * **79% positive:** I see myself still working at PostHog in two years' time.
-* 
 We don't use AI to summarize these results at our scale as we think it's worth a human reading and synthesizing this information properly.
 
 ### Benchmarks
@@ -105,7 +102,6 @@ These specific but anonymous quotes are broadly reflective of responses from mul
 * For the company as a whole, I think things are pretty good, but I do think that satisfaction is heavily dependent on the team you're on.
 * Our setup means we are always on the edge of exhaustion because we purposefully keep things lean and tight on numbers.
 * All ingredients are there but growing pains are apparent specifically around team management.
-
 
 ![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_4_f0bec1d01e.png)
 
