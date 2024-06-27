@@ -60,7 +60,7 @@ It's also worth noting that a big advantage startups have over bigger companies 
 
 **Time zones**
 
-All-remote doesn't necessarily mean hiring from literally anywhere. Please specify time zones before people waste a bunch of time, only to find out you don't hire in Australia. This also forces you to clarify your own thinking.
+All-remote doesn't necessarily mean hiring from literally anywhere. Please specify time zones before people waste a bunch of time only to find out you don't hire in Australia. This also forces you to clarify your own thinking.
 
 **Salary**
 
