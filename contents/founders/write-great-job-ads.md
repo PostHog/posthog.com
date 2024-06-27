@@ -114,7 +114,7 @@ I think it's actually ok to write quite a lot here. 'Best practice' is to make j
 
 This has been incredibly helpful for us. We basically outline the kind of person we are not looking for. The point here is to screen out people who on paper might look like a great fit, but because of some specific reason, this particular role wouldn't be good for them. 
 
-This isn't where you put 'we are not looking for lazy people who are bad at their jobs', more 'This role isn't a great fit if you are looking to eventually manage a large team' (or whatever). 
+This isn't where you put, 'We are not looking for lazy people who are bad at their jobs.' More like  'This role isn't a great fit if you are looking to eventually manage a large team.' 
 
 You can also do a version of this list under a 'what you'll be doing' type section - it's super helpful to make explicit what the candidate won't be doing. Again, this helps candidates to screen themselves out. If you hire someone and force them to do something they don't want to do, they will quit in six months and you'll have to repeat this all again. 
 
