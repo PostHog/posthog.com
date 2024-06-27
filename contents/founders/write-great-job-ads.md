@@ -78,7 +78,7 @@ Perhaps a bit unorthodox, but I think that if you don't have great benefits to o
 
 - Competitive salary. Ooh let's pay money in exchange for work, how brave.
 
-- The legal minimum number of days holiday or pension contributions
+- The legal minimum number of days holiday or pension contributions.
 
 - A fast-paced/dynamic/exciting environment with potential for growth/learning/flexibility.
 
