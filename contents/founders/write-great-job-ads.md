@@ -82,7 +82,7 @@ Perhaps a bit unorthodox, but I think that if you don't have great benefits to o
 
 - A fast-paced/dynamic/exciting environment with potential for growth/learning/flexibility.
 
-- An opportunity to work with great people (please find me the company offering an opportunity to work with extremely average people)
+- An opportunity to work with great people. Please find me the company offering an opportunity to work with extremely average people.
 
 - Describing any kind of policy as 'generous' without specifying how
 
