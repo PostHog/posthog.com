@@ -19,7 +19,7 @@ At PostHog, we want to build the [most transparent company in the world](/handbo
 
 ### H1 2024 PostHog company survey results
 
-We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. For our last survey, which covered Q4 2023, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures. 
+We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. For our last survey, which covered Q4 2023, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures.
 
 We asked 16 questions that required a mix of qualatative and quantative responses. For transparency, we've included details on how we run the survey below. Here's what our team members said.
 
@@ -27,7 +27,9 @@ We asked 16 questions that required a mix of qualatative and quantative response
 
 * **97% positive:** I understand PostHog’s goals and can see how my work contributes to them.
 * **97% positive:** PostHog is in a position to really succeed over the next three years.
-* **97% positive:** My manager and team around me genuinely care about my wellbeing. 
+* **97% positive:** My manager and team around me genuinely care about my wellbeing.
+
+* ![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_1_036769c290.png)
 
 ### Lowest scores
 
@@ -55,6 +57,8 @@ We took the scores we received and compared them to Culture Amp’s benchmark fo
 | The support I am receiving and processes we have in place allow me to do my best possible work. | Enablement | 85% | 85% | 0% |
 | I would recommend PostHog as a great place to work. | Engagement | 95% | 86% | +9% |
 | I see myself still working at PostHog in two years' time. | Engagement | 85% | 62% | +23% |
+
+* ![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_3_97997dceb9.png)
 
 ### Qualitative questions
 
@@ -87,6 +91,8 @@ These specific but anonymous quotes are broadly reflective of responses from mul
 * I would say PostHog is a place where people who can work independently and without much process and support do best, but for me this 'light-touch' process works
 * I really love the weekly context bomb at the all hands
 
+* ![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_2_b73232d570.png)
+
 #### Constructive:
 
 * I think the lack of general process and over-engineered ownership that is typically a big plus has gotten in the way of some products actually making the strides forward that they could have.
@@ -104,6 +110,8 @@ We also asked two questions which were mandatory and had open text fields:
 * If you were to leave PostHog, what would the reason be?
 
 We ran this survey using the [Deel Pulse Surveys app in Slack](https://www.deel.com/plugins/pulse-surveys/). Our previous three surveys were quarterly, but this time we waited six months. We’ll stick with bi-annual surveys moving forward.
+
+* * ![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_4_f0bec1d01e.png)
 
 ### What we’ll do next
 
