@@ -1,5 +1,5 @@
 ---
-date: 2024-06-13
+date: 2024-06-28
 title: Obvious and non-obvious ways to write great job ads
 author:
   - charles-cook
