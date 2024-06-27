@@ -59,6 +59,10 @@ const linklist: IProps[] = [
                 title: 'Pricing',
                 url: '/pricing',
             },
+            {
+                title: 'How we do "sales"',
+                url: '/sales',
+            },
         ],
     },
     {
