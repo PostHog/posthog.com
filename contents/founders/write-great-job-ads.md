@@ -129,7 +129,7 @@ Let's come back to our Apple job ad. If this was a role I was hiring for at Post
 - Be a lot more genuine and weird in the Summary - my generic corporate bingo card is off the charts here (talented! passion x2! lively! dedication!)
 - Way too many qualifications needed
 - Basic information totally missing - I have no idea what the hiring process looks like, how much you will pay
-- This general feels like it was written by a recruiter - I don't get any sense of the personality of the team I'd be working with
+- This feels like it was written by a recruiter - I don't get any sense of the personality of the team I'd be working with
 - Not all SREs are the same - who should _not_ apply for this role?
 
 And just to reiterate - Apple can get away with this because they are one of the best-known companies in the entire world. The rest of us can't - well, not yet at least...
