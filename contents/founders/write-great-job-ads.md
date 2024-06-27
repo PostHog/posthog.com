@@ -86,7 +86,7 @@ Perhaps a bit unorthodox, but I think that if you don't have great benefits to o
 
 - Describing any kind of policy as 'generous' without specifying how.
 
-Instead, be specific for the standard stuff, or be unusual. It is better to have a list of 5 cool things than 10 generic ones. 
+Instead, be specific for the standard stuff, or be unusual. It is better to have a list of five cool things than ten generic ones. 
 
 ## Non-obvious ways to write a great job ad
 
