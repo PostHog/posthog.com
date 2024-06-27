@@ -68,7 +68,7 @@ Stick a range in there if you really don't know. You may be based somewhere that
 
 You are not that great a negotiator, and you might as well screen out the people who reeeeally care about the money first and foremost. If your excuse is that you don't know how you should be benchmarking a particular role, look at other comparable ads in your area or use a tool like [Pave](https://www.pave.com/). There is a lot of compensation out there these days. 
 
-If you want to go the extra mile, feel free to copy our compensation calculator. 
+If you want to go the extra mile, feel free to copy [our compensation calculator](https://posthog.com/handbook/people/compensation). 
 
 <CompensationCalculator />
 
