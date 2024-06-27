@@ -1,6 +1,7 @@
 ---
 date: 2024-06-27
 title: What our team really thinks about working at PostHog
+rootpage: /blog
 author:
   - james-temperton
 featuredImage: >-
