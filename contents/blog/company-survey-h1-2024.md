@@ -8,7 +8,7 @@ hideAnchor: true
 author:
   - james-temperton
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/mykonoshackathon_979cf7bec6.jpeg
+  https://res.cloudinary.com/dmukukwp6/image/upload/survey_hog_bafed58598.jpg
 featuredImageType: full
 category: Inside PostHog
 tags:
