@@ -13,7 +13,7 @@ This tutorial shows you how to sync your Stripe data to PostHog and then create 
 
 ## Linking Stripe data to PostHog
 
-To start, you need both a Stripe and PostHog account. Once have those, head to PostHog's [data warehouse tab](https://us.posthog.com/data-warehouse) and:
+To start, you need both a Stripe and PostHog account. Once you have those, head to PostHog's [data warehouse tab](https://us.posthog.com/data-warehouse) and:
 1. Click **Link source**
 2. Choose the Stripe option by clicking **Link**
 3. Enter [your account ID](https://dashboard.stripe.com/settings/user) and a [restricted API key](https://dashboard.stripe.com/apikeys/create) that can read the resources you want to query

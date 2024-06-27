@@ -5,7 +5,6 @@ import usePostHog from 'hooks/usePostHog'
 import { useLocation } from '@reach/router'
 import { pricingMenu } from '../../navs'
 import Layout from 'components/Layout'
-import PricingExperiment from 'components/Pricing/PricingExperiment'
 
 const internalProductNames: {
     [key: string]: string
@@ -75,17 +74,7 @@ const PricingPage = (): JSX.Element => {
                 ]
             }
         >
-            <RenderInClient
-                render={() => {
-                    const ff = posthog?.getFeatureFlag?.('tabbed-pricing-page-v2')
-                    return ff === 'test' || ff == 'test_with_plans' ? (
-                        <PricingExperiment currentProduct={currentProduct} groupsToShow={groupsToShow} variant={ff} />
-                    ) : (
-                        <Pricing currentProduct={currentProduct} groupsToShow={groupsToShow} />
-                    )
-                }}
-                placeholder={<Skeleton />}
-            />
+            <Pricing currentProduct={currentProduct} groupsToShow={groupsToShow} />
         </Layout>
     )
 }
