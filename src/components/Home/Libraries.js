@@ -26,7 +26,7 @@ const librariesData = {
             },
             {
                 name: 'Vue',
-                url: '/docs/libraries/vue',
+                url: '/docs/libraries/vue-js',
                 icon: <StaticImage src="../../../contents/images/docs/integrate/frameworks/vue.svg" alt="Vue" />,
             },
             {
