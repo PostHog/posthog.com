@@ -19,7 +19,7 @@ At PostHog, we want to build the [most transparent company in the world](/handbo
 
 ### H1 2024 PostHog company survey results
 
-We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. For our last survey, which covered Q4 2023, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures. Here's what our team members said.
+We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. For our last survey, which covered Q4 2023, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures. We asked 16 questions that required a mix of qualatative and quantative responses. We've included details on how we ran the survey below to be totally transparent. Here's what our team members said.
 
 ### Highest scores
 
