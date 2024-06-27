@@ -15,11 +15,13 @@ tags:
   - Culture
 ---
 
-At PostHog, we want to build the [most transparent company in the world](/handbook/people/overview) – and the best place for people to work in general. To find out how we’re doing, we run bi-annual team surveys. And to be totally transparent, we’re going to publish them here for anyone to see.
+At PostHog, we want to build the [most transparent company in the world](/handbook/people/overview) – and the best place for people to work in general. To find out how we’re doing, we run bi-annual team surveys. And to be totally transparent, we’re going to publish them here for anyone to see. This page will always feature the results of our more recent survey.
 
 ### H1 2024 PostHog company survey results
 
-We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. For our last survey, which covered Q4 2023, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures. We asked 16 questions that required a mix of qualatative and quantative responses. For transparency, we've included details on how we run the survey below. Here's what our team members said.
+We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. For our last survey, which covered Q4 2023, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures. 
+
+We asked 16 questions that required a mix of qualatative and quantative responses. For transparency, we've included details on how we run the survey below. Here's what our team members said.
 
 ### Highest scores
 
@@ -31,12 +33,32 @@ We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 202
 
 * **82% positive:** The support I am receiving and processes we have in place allow me to do my best possible work.
 * **79% positive:** I believe that my total compensation (salary + equity + benefits) is fair, relative to similar roles at other companies. 
-* **79% positive:** I see myself still working at PostHog in two years' time. 
+* **79% positive:** I see myself still working at PostHog in two years' time.
+* 
 We don't use AI to summarize these results at our scale as we think it's worth a human reading and synthesizing this information properly.
+
+## Benchmarks
+
+We took the scores we received and compared them to Culture Amp’s benchmark for ‘new tech’ companies with less than 200 people. We then took the average score out of 5 and multiplied it by 20 to get a percentage. It’s a bit rough, but is useful for comparing our scores against the industry benchmark. Here's how we compare.
+
+|  | Category | Avg. PostHog score | Benchmark score | Difference |
+|---|---|---|---|---|
+| PostHog is in a position to really succeed over the next three years. | Company Confidence | 90% | 77% | +13% |
+| I understand PostHog's goals and can see how my work contributes to them. | Alignment & Involvement | 95% | 90% | +5% |
+| At PostHog, we have open and honest two-way communication. | Collaboration & Communication | 90% | 81% | +9% |
+| I receive appropriate recognition for my work at PostHog. | Feedback & Recognition | 88% | 85% | +3% |
+| I believe that my total compensation (salary + equity + benefits) is fair, relative to similar roles at other companies. | Feedback & Recognition | 82% | 55% | +27% |
+| My manager and team around me genuinely care about my wellbeing. | Inclusion | 94% | 88% | +6% |
+| The leaders at PostHog keep people informed about what is happening. | Collaboration & Communication | 92% | 71% | +21% |
+| I feel like I am learning and growing at PostHog. | Learning & Development | 85% | 79% | +6% |
+| Generally, I believe my workload is reasonable for my role and I am able to arrange time out from work when I need it. | Enablement | 89% | 74% | +15% |
+| The support I am receiving and processes we have in place allow me to do my best possible work. | Enablement | 85% | 85% | 0% |
+| I would recommend PostHog as a great place to work. | Engagement | 95% | 86% | +9% |
+| I see myself still working at PostHog in two years' time. | Engagement | 85% | 62% | +23% |
 
 ### Qualitative questions
 
-**What motivates you right now?** The most common themes people highlighted this time were the same as last.
+**What motivates you right now?** The most common themes people highlighted this time were the same as last time.
 
 * **Team.** People used phrases such as: the team, great colleagues, helping the team, the great folks at PostHog at all levels, and improving things for teammates.
 
@@ -74,27 +96,12 @@ These specific but anonymous quotes are broadly reflective of responses from mul
 
 * ### How we run our company survey
 
-* We asked 14 questions covering categories such as company, confidence, culture, and growth. 12 of the questions we asked required a response ranging from 1, meaning strongly disagree, to 5, meaning strongly agree. These questions also had an optional text field for people to add comments:
+* We asked 14 questions covering categories such as company, confidence, culture, and growth. 12 of the questions we asked required a response ranging from 1, meaning strongly disagree, to 5, meaning strongly agree. These questions also had an optional text field for people to add comments. These questions are listed above in the Benchmarks section. 
 
-* PostHog is in a position to really succeed over the next three years.
-* I understand PostHog's goals and can see how my work contributes to them.
-* At PostHog, we have open and honest two-way communication.
-* I receive appropriate recognition for my work at PostHog.
-* I believe that my total compensation (salary + equity + benefits) is fair, relative to similar roles at other companies.
-* My manager and team around me genuinely care about my wellbeing.
-* The leaders at PostHog keep people informed about what is happening.
-* I feel like I am learning and growing at PostHog.
-* Generally, I believe my workload is reasonable for my role and I am able to arrange time out from work when I need it.
-* The support I am receiving and processes we have in place allow me to do my best possible work.
-* I would recommend PostHog as a great place to work.
-* I see myself still working at PostHog in two years' time.
-
-And two of which were mandatory and had open text fields:
+We also asked two questions which were mandatory and had open text fields:
 
 * What motivates you right now?
 * If you were to leave PostHog, what would the reason be?
-
-We took the scores we received and compared them to Culture Amp’s benchmark for ‘new tech’ companies with less than 200 people. We then took the average score out of 5 and multiplied it by 20 to get a percentage. It’s a bit rough, but is useful for comparing our scores against the industry benchmark.
 
 We ran this survey using the [Deel Pulse Surveys app in Slack](https://www.deel.com/plugins/pulse-surveys/). Our previous three surveys were quarterly, but this time we waited six months. We’ll stick with bi-annual surveys moving forward.
 
