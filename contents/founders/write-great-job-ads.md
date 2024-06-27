@@ -106,7 +106,7 @@ Instead, do this:
 
 Job applicants are sometimes reading dozens of ads in the course of their search, so cutting through the noise is really important. This is assuming you don't already have some incredibly well-known brand like Google. 
 
-Ideally, write in the tone of voice of your company. Tell a story. Your ads don't have to follow the exact same structure every time - engineers care about different things to designers. Sometimes you will want to get super specific about exactly what you want the person to do. Other times you may have a vague sense, but you need help figuring out the role - both of these are ok, but the ads should be written differently. 
+Ideally, write in the tone of voice of your company. Tell a story. Your ads don't have to follow the exact same structure every time – engineers care about different things to designers. Sometimes you will want to get super specific about exactly what you want the person to do. Other times you may have a vague sense, but you need help figuring out the role – both of these are ok, but the ads should be written differently. 
 
 I think it's actually ok to write quite a lot here. 'Best practice' is to make job specs as short as possible because the internet has wrecked our attention spans, but I think that just optimizes for total application volume over quality. The right candidate will spend lots of time reading and re-reading your spec because it's full of all the things they care about, and in turn you'll probably get fewer, but higher quality, applications. 
 
