@@ -54,7 +54,7 @@ This is nice for the candidate, but more importantly it forces _you_ to figure o
 
 Even if you are a tiny team, you can still take 15 minutes to figure this out and save yourself a lot of pain improvising the next step and getting stressed you haven't got back to a candidate. 
 
-It's also worth noting that a big advantage startups have over bigger companies is speed - you can potentially go from initial interview to offer in the time it takes a much larger company to even schedule in the first call. Being able to do this gives you a huge advantage, but it's impossible unless you nail down your process first.
+It's also worth noting that a big advantage startups have over bigger companies is speed – you can potentially go from initial interview to offer in the time it takes a much larger company to even schedule in the first call. Being able to do this gives you a huge advantage, but it's impossible unless you nail down your process first.
 
 (And by the way, if you follow your process and are still not sure if you have enough signal about whether a candidate is great, it probably means that you want to say 'no'!)
 
