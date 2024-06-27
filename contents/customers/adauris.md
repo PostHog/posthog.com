@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/logo-dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/adauris/featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/adauris_62af5ac994.png
 featuredCustomer: false
 industries:
   - 'SaaS, Publishing'

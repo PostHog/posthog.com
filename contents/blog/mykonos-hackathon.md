@@ -35,7 +35,7 @@ Here’s what we built in Mykonos.
 
 <BuiltBy people={["Marius Andra", "Anirudh Pillai"]} />
 
-What’s cooler than having your [own query language](/docs/hogql)? Having your own general purpose programming language, of course! That’s literally what we built: PostHog’s first ever programming language, Hog. (Earlier versions of this name included Hög and Höge, but turns out we're anti-umlaut.)
+What’s cooler than having your [own query language](/docs/hogql)? Having your own general purpose programming language, of course! That’s literally what we built: PostHog’s first ever programming language, [Hog](/docs/hog). (Earlier versions of this name included Hög and Höge, but turns out we're anti-umlaut.)
 
 Things moved fast the week after Mykonos: we split up the existing product analytics team and built a new team to productize Hog. We plan to use Hog to build our CDP and messaging products, and might even pivot the entire company around it. 
 

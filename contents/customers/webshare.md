@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/webshare/webshare-logo-dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/webshare/featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/webshare_4841e6543a.png
 industries:
   - Devtool
 users:

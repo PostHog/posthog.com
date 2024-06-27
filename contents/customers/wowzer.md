@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1715169275/posthog.com/contents/wowzer-screenshot.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1715169275/posthog.com/contents/wowzer-screenshot.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/wowzer_posthog_ee9cb61596.png
 industries:
   - AI
 users:

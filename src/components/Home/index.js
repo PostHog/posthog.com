@@ -17,6 +17,7 @@ import ApiExamples from './ApiExamples'
 import HogQL from './HogQL'
 import CustomerData from './CustomerData'
 import CodeBlocks from './CodeBlocks'
+import Libraries from './Libraries'
 import OnePlatform from './OnePlatform'
 import NoHatingAllowed from './NoHatingAllowed'
 import { RenderInClient } from 'components/RenderInClient'
@@ -38,8 +39,8 @@ const Home = () => {
                 <Hero />
                 <Customers />
                 <AllInOne />
+                <Libraries />
                 <CodeBlocks />
-                <OnePlatform />
                 <NoHatingAllowed />
 
                 <RenderInClient
@@ -60,6 +61,7 @@ const Home = () => {
                 <ApiExamples />
                 <HogQL />
                 <Community />
+                <OnePlatform />
                 <CustomerData />
                 <Timeline />
                 <Roadmap />

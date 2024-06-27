@@ -13,7 +13,7 @@ export const webAnalyticsDark = "https://res.cloudinary.com/dmukukwp6/image/uplo
 export const webAnalyticsVideoLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/web-analytics/web-analytics-light-mode.mp4"
 export const webAnalyticsVideoDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/web-analytics/web-analytics-dark-mode.mp4"
 
-> Web analytics is currently an [opt-in public beta](/docs/getting-started/enable-betas). This means it's not yet a perfect experience, but we'd love to know your thoughts. Please [share your feedback](http://app.posthog.com/home#supportModal) and [follow our roadmap](https://github.com/PostHog/posthog/issues/18547).
+> Web analytics is currently an open beta. This means it's not yet a perfect experience, but we'd love to know your thoughts. Please [share your feedback](http://app.posthog.com/home#supportModal) and [follow our roadmap](https://github.com/PostHog/posthog/issues/18547).
 
 Web analytics enables you to easily track and monitor many of the most important metrics for your website. 
 
@@ -42,25 +42,15 @@ To do this, set your [JavaScript Web](/docs/libraries/js) `person_profiles` conf
 posthog.init(
     '<ph_project_api_key>',
     {
-        api_host: '<ph_instance_address>',
+        api_host: '<ph_client_api_host>',
         person_profiles: 'identified_only'
     }
 )
 ```
 
-> [Single page apps](/tutorials/single-page-app-pageviews) might require you to manually implement `$pageview` and `$pageleave` event capture for every navigation change. See our tutorials on how to do this in [React](/tutorials/single-page-app-pageviews), [Next.js](/docs/libraries/next-js#client-side-setup), [Vue](/docs/libraries/vue-js#capturing-page-views), and [Svelte](/tutorials/svelte-analytics#capturing-pageviews-and-pageleaves).
+> [Single-page apps](/tutorials/single-page-app-pageviews) might require you to manually implement `$pageview` and `$pageleave` event capture for every navigation change. See our tutorials on how to do this in [React](/tutorials/single-page-app-pageviews), [Next.js](/docs/libraries/next-js#client-side-setup), [Vue](/docs/libraries/vue-js#capturing-page-views), and [Svelte](/tutorials/svelte-analytics#capturing-pageviews-and-pageleaves).
 
-### 2. Enable the web analytics beta
 
-In PostHog, click your profile icon in the top right and then click "Feature preview." In the [feature preview modal](https://app.posthog.com/home#panel=feature-previews), enable "Web Analytics Dashboard"
-
-<ProductVideo
-    videoLight = {webAnalyticsVideoLight}
-    videoDark = {webAnalyticsVideoDark}
-    alt = "Enable web Analytics video"
-    classes = "rounded"
-/>
-
-### 3. Go to the web analytics dashboard
+### 2. Go to the web analytics dashboard
 
 Now, you can click the newly added [web analytics tab](https://app.posthog.com/web) to go to the [dashboard](/docs/web-analytics/dashboard).

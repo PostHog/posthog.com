@@ -69,7 +69,7 @@ If your are summonsed for jury duty, please let us know right away - we can ofte
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of whether you've become a parent through childbirth or adoption. 
 
-If you have been at PostHog for over 1 year, you can take up to 12 weeks off on full pay. You can take a further 4 weeks unpaid leave if you need more time. After this, if you need to stagger your return to work, you can come back at 50% capacity on 50% pay afterwards. If you live in a country where a statutory parental leave benefit is available, you will be required to claim statutory parental leave pay (if you are eligible) and PostHog will supplement any gaps.
+If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 12 weeks off on full pay. You can take a further 4 weeks unpaid leave if you need more time. After this, if you need to stagger your return to work, you can come back at 50% capacity on 50% pay afterwards. If you live in a country where a statutory parental leave benefit is available, you will be required to claim statutory parental leave pay (if you are eligible) and PostHog will supplement any gaps.
 
 If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements.
 

@@ -3,6 +3,8 @@ import menu, { docsMenu } from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
+import { useActions } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 export const Context = createContext<any>(undefined)
 
@@ -33,6 +35,7 @@ export interface IProps {
 
 export const LayoutProvider = ({ children, ...other }: IProps) => {
     const { pathname, search } = useLocation()
+    const { setWebsiteTheme } = useActions(layoutLogic)
     const compact = typeof window !== 'undefined' && window !== window.parent
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
@@ -83,6 +86,12 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     }, [activeInternalMenu])
 
     useEffect(() => {
+        if (window) {
+            setWebsiteTheme(window.__theme)
+            window.__onThemeChange = () => {
+                setWebsiteTheme(window.__theme)
+            }
+        }
         if (compact) {
             window.parent.postMessage(
                 {

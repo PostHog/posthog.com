@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/ycombinator/logo_dark.svg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/ycombinator/featured.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_YC_68ed8fa1bb.png
 featuredCustomer: true
 industries:
   - 'SaaS, Education'

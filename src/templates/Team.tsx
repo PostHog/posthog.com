@@ -162,7 +162,7 @@ const Stickers = ({ country, pineappleOnPizza, isTeamLead, isModerator, id, hand
     )
 }
 
-const Profile = (profile) => {
+export const Profile = (profile) => {
     const { firstName, lastName, country, companyRole, pineappleOnPizza, biography, isTeamLead, id } = profile
     const name = [firstName, lastName].filter(Boolean).join(' ')
     return (
@@ -189,11 +189,20 @@ const Profile = (profile) => {
             {biography ? (
                 <Markdown>{biography}</Markdown>
             ) : (
-                <p>{firstName} has been too busy writing code to fill out a bio!</p>
+                <p className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-4 text-sm">
+                    {firstName} has been too busy writing code to fill out a bio!
+                </p>
             )}
-            <CallToAction to={`/community/profiles/${id}`} type="secondary" size="sm">
-                View full profile
-            </CallToAction>
+            <div className="mt-4">
+                <CallToAction
+                    to={`/community/profiles/${id}`}
+                    type="secondary"
+                    size="sm"
+                    width="full [&_span]:w-[calc(100%_+_3px)]"
+                >
+                    Visit full profile
+                </CallToAction>
+            </div>
         </div>
     )
 }
@@ -551,7 +560,7 @@ export default function Team({
                                 {isModerator && (
                                     <div className="mb-8 pb-8 border-b border-border dark:border-dark">
                                         <SidebarSection title="Post an update">
-                                            <TeamUpdate teamName={name} />
+                                            <TeamUpdate teamName={name} hideTeamSelect />
                                         </SidebarSection>
                                     </div>
                                 )}
