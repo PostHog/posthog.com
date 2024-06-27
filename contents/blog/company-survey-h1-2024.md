@@ -17,9 +17,9 @@ tags:
 
 At PostHog, we want to build the [most transparent company in the world](/handbook/people/overview) – and the best place for people to work in general. To find out how we’re doing, we run bi-annual team surveys. And to be totally transparent, we’re going to publish them here for anyone to see.
 
-We had a 79% response rate, or 33 out of 42 eligible respondents. For our last survey, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures.
+We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. For our last survey, which covered Q4 2023, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures.
 
-We asked 14 questions based on the ones used by [Culture Amp](https://www.cultureamp.com/). Questions cover categories such as company, confidence, culture, and growth. 12 of the questions we asked required a response ranging from 1, meaning strongly disagree, to 5, meaning strongly agree:
+We asked 14 questions covering categories such as company, confidence, culture, and growth. 12 of the questions we asked required a response ranging from 1, meaning strongly disagree, to 5, meaning strongly agree. These questions also had an optional text field for people to add comments:
 
 * PostHog is in a position to really succeed over the next three years.
 * I understand PostHog's goals and can see how my work contributes to them.
@@ -34,14 +34,14 @@ We asked 14 questions based on the ones used by [Culture Amp](https://www.cultur
 * I would recommend PostHog as a great place to work.
 * I see myself still working at PostHog in two years' time.
 
-And two of which were open text fields:
+And two of which were mandatory and had open text fields:
 
 * What motivates you right now?
 * If you were to leave PostHog, what would the reason be?
 
 We took the scores we received and compared them to Culture Amp’s benchmark for ‘new tech’ companies with less than 200 people. We then took the average score out of 5 and multiplied it by 20 to get a percentage. It’s a bit rough, but is useful for comparing our scores against the industry benchmark.
 
-We ran this survey using the Pulse Surveys app in Slack. Our previous three surveys were quarterly, but this time we waited six months. We’ll stick with bi-annual surveys moving forward.
+We ran this survey using the [Deel Pulse Surveys app in Slack](https://www.deel.com/plugins/pulse-surveys/). Our previous three surveys were quarterly, but this time we waited six months. We’ll stick with bi-annual surveys moving forward.
 
 ### Highest scores
 
@@ -54,7 +54,7 @@ We ran this survey using the Pulse Surveys app in Slack. Our previous three surv
 * **82% positive:** The support I am receiving and processes we have in place allow me to do my best possible work.
 * **79% positive:** I believe that my total compensation (salary + equity + benefits) is fair, relative to similar roles at other companies. 
 * **79% positive:** I see myself still working at PostHog in two years' time. 
-
+We don't use AI to summarize these results at our scale as we think it's worth a human reading and synthesizing this information properly.
 ### Qualitative questions
 
 **What motivates you right now?** The most common themes people highlighted this time were the same as last.
@@ -77,17 +77,16 @@ We ran this survey using the Pulse Surveys app in Slack. Our previous three surv
 
 These specific but anonymous quotes are broadly reflective of responses from multiple people. We’ve split them into two categories, positive and constructive, as they cover a wide range of topics.
 
-Positive:
+#### Positive:
 
 * Bouncing wacky ideas off of peeps, then building them at warp speed
 * Everyone's motivation to grow and see the company succeed.
 * Shipping a product people love and use
 * I feel bad for people who don't get to work somewhere like PostHog
 * I would say PostHog is a place where people who can work independently and without much process and support do best, but for me this 'light-touch' process works
-* All-hands is great!
 * I really love the weekly context bomb at the all hands
 
-Constructive:
+#### Constructive:
 
 * I think the lack of general process and over-engineered ownership that is typically a big plus has gotten in the way of some products actually making the strides forward that they could have.
 * For the company as a whole, I think things are pretty good, but I do think that satisfaction is heavily dependent on the team you're on.
@@ -96,4 +95,6 @@ Constructive:
 
 ### What we’ll do next
 
-Our exec team has already gone through all the results and we’ve decided on a bunch of actions that are already in progress with a plan and owner to address them. We’ll run the next survey at the start of Q4 2024 using the same format.
+Our executive team reads all the responses in full and has already gone through all the results. [Charles](https://posthog.com/community/profiles/28625) is responsible for making sure we identify any actions that might be needed. Where action is needed, it is usually the relevant exec team member who follows up.
+
+That said, not every comment needs a follow up. The priority here is to collect information and get a sense of overall trends. The survey becomes a failure if it is used as the primary way for people to share feedback with PostHog, something which we encourage them to do through more transparent channels. This is partly why we only do it every six months.
