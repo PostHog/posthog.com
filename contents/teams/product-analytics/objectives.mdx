@@ -1,6 +1,6 @@
 ### Q3 2024 objectives
 
-1.  Rock-solid analytics (<TeamMember name="Thomas Obermüller" /> + <TeamMember name="Julian Bez" /> + <TeamMember name="Sandy Spicer" /> + <TeamMember name="Anirudh Pillai" />)
+1.  Rock-solid analytics (Thomas + Julian + Sandy + Anirudh)
     
     1.  Legacy Minus – removing legacy insights code so that we can move fast
         -  FilterType gone from the frontend.
@@ -14,14 +14,20 @@
         -  Analytics experience dashboard in PostHog (time till data available, result freshness across insights and subscriptions, refreshes initiated manually vs. automatically, etc.)
         -  Alerts on major Product Analytics errors from Sentry, and us acting on every alert. (Bonus: checking up the Sentry routing rules for the #product-analytics team.)
         -  Cohorts dashboard in Grafana (successful vs. failed calculations per day, recalculation backlog). Alerts here too.
-    4.  Support Plus – sparking joy for users when they’re led to report a bug
+    4. Performance Plus - eliminating UX pain via maximum query performance/reliability, based on Metrics Plus data
+        - Partial calculation of multi-day time series results
+        - …and more – work with Team Query Performance to find the lowest-hanging fruit, similarly to [Tim's performance mega issue](https://github.com/PostHog/posthog/issues/22413)
+    5.  Support Plus – sparking joy for users when they’re led to report a bug
         -  1 hero + 1 sidekick
         -  Goal: 90% of tickets fulfill the SLA
-2.  Answering more product questions, deeper (<TeamMember name="Thomas Obermüller" /> + <TeamMember name="Julian Bez" /> + <TeamMember name="Sandy Spicer" /> + <TeamMember name="Anirudh Pillai" />)
-    1.  Run growth reviews with our product manager to get a grip on how Product Analytics is doing commercially, also dogfooding in the process. Use the learnings from both analysis and dogfooding to improve the product.
-    2.  Build new features to empower users in answering product questions and digging into data, using the [list of requested features](https://github.com/PostHog/posthog/issues?q=is:issue+is:open+label:team/product-analytics+sort:reactions-+1-desc) as inspiration:
+2.  Answering more product questions, deeper (Thomas + Julian + Sandy + Anirudh)
+    1.  Growth Plus - increasing ease of onboarding, and subsequent retention
+        - Identify growth opportunities working with Anna, our product manager – implement growth optimizations and track their impact whenever possible.
+        - Work with Team Growth on optimizing the onboarding experience of Product Analytics.
+    2. Analysis Plus - answering more product questions, more deeply
         -  Analytics alerts are out to users (implemented with the contributor)
         -  “Done for the first time” in Trends, to kill the janky First Time Event Plugin
+        -  Query in new insight URL for instant insight sharing
         -  Optional funnel steps
-        - ...and more, to be prioritized based on user feedback
-3.  ArtificialHog (<TeamMember name="Michael Matloka" /> + <TeamMember name="Georgiy Tarasov" />) – an LLM-based chat-like interface for answering product questions.
+        - ...and more, based on user feedback - see the [most requested features in GitHub](https://github.com/PostHog/posthog/issues?q=is:issue+is:open+label:team/product-analytics+sort:reactions-+1-desc)
+3.  ArtificialHog (Michael + Georgiy) – an LLM-based chat-like interface for answering product questions.
