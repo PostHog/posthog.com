@@ -30,7 +30,7 @@ However, there are a bunch of things that are actually kinda annoying and unhelp
 
 ![Apple](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/apple-job-ad.png)
 
-My aim here by the way isn't to say 'PostHog is better at job ads than Apple' - the point is that startups do not have the incredible brand recognition that Apple does, so you need to put in extra effort to stand out!
+I'm not saying 'PostHog is better at job ads than Apple' – the point is that startups do not have the incredible brand recognition that Apple does, so you need to put in extra effort to stand out.
 
 ## Obvious ways to write a good job ad
 
