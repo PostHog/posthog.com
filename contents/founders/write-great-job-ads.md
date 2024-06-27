@@ -64,7 +64,7 @@ All-remote doesn't necessarily mean hiring from literally anywhere. Please speci
 
 **Salary**
 
-Stick a range in there if you really don't know. You may live somewhere this is legally mandated anyway. The point here is to avoid wasting a ton of your _own_ time getting someone through your process, only to find you are miles apart here. 
+Stick a range in there if you really don't know. You may be based somewhere that this is legally mandated anyway. The point here is to avoid wasting a ton of your _own_ time getting someone through your process, only to find you are miles apart on how much the role pays. 
 
 You are not that great a negotiator, and you might as well screen out the people who reeeeally care about the money first and foremost. If your excuse is that you don't know how you should be benchmarking a particular role, look at other comparable ads in your area or use a tool like [Pave](https://www.pave.com/). There is a lot of compensation out there these days. 
 
