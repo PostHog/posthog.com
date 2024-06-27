@@ -603,8 +603,8 @@ const PlansTabs = () => {
                         <div className="@xl:col-span-2">All features</div>
 
                         <div>Support</div>
+                        <div className="@xl:col-span-2">Community support</div>
                         <div className="@xl:col-span-2">Standard support</div>
-                        <div className="@xl:col-span-2">Priority support</div>
 
                         <div>
                             Add-ons{' '}
