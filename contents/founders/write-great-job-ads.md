@@ -116,7 +116,7 @@ This has been incredibly helpful for us. We basically outline the kind of person
 
 This isn't where you put 'we are not looking for lazy people who are bad at their jobs', more 'This role isn't a great fit if you are looking to eventually manage a large team' (or whatever). 
 
-You can also do a version of this list under a 'what you'll be doing' type section - it's super helpful to make explicit what the candidate won't be doing. Again, this helps candidates to screen themselves out. As I said before, you are not that great a negotiator - if you hire someone and force them to do something they don't want to do, they will quite in 6 months anyway and you'll have to repeat this all again. 
+You can also do a version of this list under a 'what you'll be doing' type section - it's super helpful to make explicit what the candidate won't be doing. Again, this helps candidates to screen themselves out. If you hire someone and force them to do something they don't want to do, they will quit in six months and you'll have to repeat this all again. 
 
 **If you are open source, link to your repo**
 
