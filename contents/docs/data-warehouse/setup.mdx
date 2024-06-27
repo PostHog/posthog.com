@@ -17,27 +17,26 @@ You can link a source to PostHog by either using one of our pre-built connectors
 
 > The data warehouse is currently in beta. To access it, enable the [feature preview](https://us.posthog.com#panel=feature-previews) in your instance. It is free to use during the beta period.
 
-## Incremental vs Full table
+## Incremental vs full table
 
-On some sources and tables, you'll be given the option to choose the sync method for that table. The options are incremental replication or full table replication. 
+On some sources and tables, you can choose the sync method. The options are incremental replication or full table replication. 
 
 ### Incremental
 
-With incremental replication, you only sync new or updated data, this reduces the total amount of rows synced and reduces how long it takes to sync. When choosing incremental replication, you'll have to select a field to identify new or updated data, this is often something like a `updated_at` or `created_at` timestamp, or an autoincrementing id.
+With incremental replication, you only sync new or updated data. This reduces the total number of rows synced and how long it takes to sync. 
 
-Not all fields are suitable to be used to identify new and updated data, and so we only support the following types to be used as replication key:
+When choosing incremental replication, you must select a field to identify new or updated data. This is often something like a `updated_at` or `created_at` timestamp, or an autoincrementing ID. Not all fields are suitable to be used to identify new and updated data, and so we only support the following types as replication keys:
 - `integer` (including `bigint` and `smallint`)
 - `datetime`
 - `date`
 - `timestamp`
 - `numeric` (for Snowflake)
 
-The one downside to incremental syncing is that deletions of data won't be synced to your PostHog data warehouse - you'll need to use full table refreshes for this
+The one downside to incremental syncing is that deletions of data won't be synced to your PostHog data warehouse. You need to use full table refreshes for this.
 
 ### Full table
 
-This will reload the whole table on every sync. This option is great for tables with common data deletions, and for tables without an incrementing field (such as a `updated_at` timestamp).
-
+This reloads the whole table on every sync. This is great for tables with common data deletions or ones without an incrementing field (such as a `updated_at` timestamp).
 
 ## Stripe
 
