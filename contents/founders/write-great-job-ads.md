@@ -84,7 +84,7 @@ Perhaps a bit unorthodox, but I think that if you don't have great benefits to o
 
 - An opportunity to work with great people. Please find me the company offering an opportunity to work with extremely average people.
 
-- Describing any kind of policy as 'generous' without specifying how
+- Describing any kind of policy as 'generous' without specifying how.
 
 Instead, be specific for the standard stuff, or be unusual. It is better to have a list of 5 cool things than 10 generic ones. 
 
