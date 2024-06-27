@@ -302,9 +302,9 @@ const us = [
                         your specific use case.
                     </p>
                     <p>
-                        If you’re looking at at spending $20k+ annually with us, we’ll get you into a shared Slack
-                        channel with our team. <strong>The goal is to get you into a short trial period</strong> where
-                        you’re implementing and seeing value from PostHog{' '}
+                        If you’re looking at spending $20k+ annually with us, we’ll get you into a shared Slack channel
+                        with our team. <strong>The goal is to get you into a short trial period</strong> where you’re
+                        implementing and seeing value from PostHog{' '}
                         <em>
                             <strong>within a week</strong>
                         </em>{' '}
@@ -397,25 +397,28 @@ const AccordionItem = ({
 
     return (
         <li
-            className={`border-t relative ${isOpen
-                ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
-                : 'inactive border-light dark:border-dark first:border-transparent'
-                }`}
+            className={`border-t relative ${
+                isOpen
+                    ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
+                    : 'inactive border-light dark:border-dark first:border-transparent'
+            }`}
         >
             <button
                 onClick={onClick}
-                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
-                    ? 'pt-4 pb-2 z-20'
-                    : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
-                    }`}
+                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${
+                    isOpen
+                        ? 'pt-4 pb-2 z-20'
+                        : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                }`}
             >
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 [flex:0_0_2rem] justify-center items-center p-1 font-semibold rounded-full bg-accent dark:bg-accent/10">
                         {number}
                     </span>
                     <span
-                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg md:text-2xl' : 'font-semibold text-[17px]'
-                            }`}
+                        className={`transition-all leading-tight ${
+                            isOpen ? 'font-bold text-lg md:text-2xl' : 'font-semibold text-[17px]'
+                        }`}
                     >
                         {title}
                     </span>
@@ -595,8 +598,9 @@ function Sales() {
                             Call us unhinged, but we believe pricing pages should have actual, um, <em>pricing?</em>
                         </p>
                         <p className="mb-2">
-                            Most SaaS companies want to feel out how much money they can squeeze out of you. <strong>PostHog
-                                operates differently.</strong> We’re more like a utility where you pay for what you use. No extra markup - everyone pays the same rates*.
+                            Most SaaS companies want to feel out how much money they can squeeze out of you.{' '}
+                            <strong>PostHog operates differently.</strong> We’re more like a utility where you pay for
+                            what you use. No extra markup - everyone pays the same rates*.
                         </p>
                         <p className="opacity-60 text-sm mb-0">
                             *Unless you qualify for a{' '}
@@ -676,12 +680,33 @@ function Sales() {
                     <div className="p-4 md:p-8 mb-12 mx-4 md:mx-8 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
                         <h3 className="mb-1 text-center md:text-left">Craving more unhinged rants like this?</h3>
                         <div className="flex flex-col md:flex-row md:gap-2 md:items-baseline mb-4">
-                            <CallToAction href="/newsletter" type="outline" size="sm" className="mt-4" width="[calc(100%+4px)] md:w-auto">Check out our newsletter</CallToAction>
+                            <CallToAction
+                                href="/newsletter"
+                                type="outline"
+                                size="sm"
+                                className="mt-4"
+                                width="[calc(100%+4px)] md:w-auto"
+                            >
+                                Check out our newsletter
+                            </CallToAction>
                             <span className="inline-flex mt-2 -mb-1 mt:my-0 self-center">or</span>
-                            <CallToAction href="/blog" type="outline" size="sm" className="mt-4" width="[calc(100%+4px)] full md:w-auto">Visit the blog</CallToAction>
+                            <CallToAction
+                                href="/blog"
+                                type="outline"
+                                size="sm"
+                                className="mt-4"
+                                width="[calc(100%+4px)] full md:w-auto"
+                            >
+                                Visit the blog
+                            </CallToAction>
                         </div>
 
-                        <p className="mb-0 text-sm text-primary/75 dark:text-primary-dark/75 text-balance text-center md:text-left"><em>Brought to you by the team who thought making <Link href="/terms">terms and conditions fun</Link> was a good idea</em></p>
+                        <p className="mb-0 text-sm text-primary/75 dark:text-primary-dark/75 text-balance text-center md:text-left">
+                            <em>
+                                Brought to you by the team who thought making{' '}
+                                <Link href="/terms">terms and conditions fun</Link> was a good idea
+                            </em>
+                        </p>
                     </div>
                 </div>
             </div>
