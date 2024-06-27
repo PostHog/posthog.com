@@ -29,7 +29,7 @@ PostHog is certified as SOC 2 Type II compliant, following an external audit.
 
 Our latest [security report](https://drive.google.com/file/d/1hSW8roswMjVn0HReVOs1lQFo3O9ToqXh/view?usp=share_link) is publicly available (covering controls as of February 28th, 2023). 
 
-We are currently in the process of obtaining our Type II certification, and anticipate our report will be available in July. If a customer requires a bridge letter in the meantime, they should email privacy@posthog.com. 
+We are currently in the process of obtaining our Type II certification, and anticipate our report will be available in July. If a customer requires a bridge letter in the meantime, you can find one [here](https://drive.google.com/file/d/1SaUr47ZBIspWCaTBHmCB0jdHR3bkD1HS/view?usp=sharing). 
 
 ### Policies
 
