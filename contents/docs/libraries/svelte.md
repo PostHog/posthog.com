@@ -36,6 +36,9 @@ export const load = async () => {
 };
 ```
 
+> ❗️ If you intend on using Session Replay with a server side rendered Svelte app
+> ensure that your [asset URLs are configured to be relative](https://posthog.com/docs/session-replay/troubleshooting#ensure-assets-are-imported-from-the-base-URL-in-Svelte).
+
 ### Tracking pageviews and pageleaves
 
 PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Svelte creates a single-page app, this only happens once, and the router handles subsequent page changes.
