@@ -54,6 +54,14 @@ Some ad/tracking blockers will block PostHog from fetching `posthog-js`. If you'
 
 If you're having issues with recordings not looking correct, there are a few things you can:
 
+### Message too large warning
+
+When we capture data from your page we compress it and allow very large messages to be sent to our servers for storage. But even then sometimes we receive data from your page that is too large to be ingested.
+
+This almost always means that playback won't be accurate. For example: you might notice missing styles or page navigation not being reflected in the playback.
+
+The only way to fix this is to reduce the amount of data that you send to our service. [Learn how to restrict what you capture in our privacy docs](https://posthog.com/docs/session-replay/privacy)
+
 ### Ensure your website permits PostHog CORS
 
 Most assets rendered on your website or app are captured **inline** – meaning we keep a copy of the icon, css etc. to use when replaying. For some assets however, this is either too difficult or too costly to do, so instead we load them directly from the original webserver (just like your website does). This can lead to CORS issues where the webserver does not permit **us.posthog.com** (or **eu.posthog.com**) to load the required asset. Unfortunately we cannot easily detect when this happens, but the browsers's developer tools `(Option + ⌘ + J, or Shift + CTRL + J)` will log when these errors occur saying something like:
