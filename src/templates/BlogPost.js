@@ -63,16 +63,18 @@ export const Contributors = ({ contributors }) => {
         <>
             <div className="text-sm opacity-50 px-4 mb-2">Posted by</div>
             <div className={`mb-4 flex flex-col gap-4`}>
-                {contributors.map(({ profile_id, image, name, role }) => (
-                    <Contributor
-                        url={profile_id && `/community/profiles/${profile_id}`}
-                        image={image}
-                        name={name}
-                        key={name}
-                        role={role}
-                        text
-                    />
-                ))}
+                {contributors.map(({ profile_id, image, name, role, profile }) => {
+                    return (
+                        <Contributor
+                            url={profile_id && `/community/profiles/${profile_id}`}
+                            image={profile?.avatar?.url || image}
+                            name={profile ? [profile.firstName, profile.lastName].filter(Boolean).join(' ') : name}
+                            key={name}
+                            role={profile?.companyRole || role}
+                            text
+                        />
+                    )
+                })}
             </div>
         </>
     ) : null
@@ -85,7 +87,8 @@ const ContributorsSmall = ({ contributors }) => {
 
             <div>
                 <ul className="flex list-none !m-0 !p-0 space-x-2">
-                    {contributors.map(({ profile_id, image, name, role }) => {
+                    {contributors.map(({ profile_id, name, profile, ...other }) => {
+                        const image = profile?.avatar?.url || other?.image
                         const url = profile_id && `/community/profiles/${profile_id}`
                         const Container = url ? Link : 'div'
                         const gatsbyImage = image && getImage(image)
@@ -94,7 +97,10 @@ const ContributorsSmall = ({ contributors }) => {
                                 <Container className="flex space-x-2 items-center" {...(url ? { to: url } : {})}>
                                     <span>
                                         {typeof image === 'string' ? (
-                                            <img src={image} />
+                                            <img
+                                                className="w-6 h-6 border-border border dark:border-dark rounded-full"
+                                                src={image}
+                                            />
                                         ) : gatsbyImage ? (
                                             <GatsbyImage
                                                 image={gatsbyImage}
@@ -305,6 +311,14 @@ export const query = graphql`
                     name
                     profile_id
                     role
+                    profile {
+                        firstName
+                        lastName
+                        companyRole
+                        avatar {
+                            url
+                        }
+                    }
                 }
                 seo {
                     ...SEOFragment
