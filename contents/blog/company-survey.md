@@ -1,11 +1,11 @@
 ---
 date: 2024-06-27
 title: What our team really thinks about working at PostHog
-rootpage: /blog
 author:
   - james-temperton
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/survey_hog_bafed58598.jpg
+  featuredImageType: full
 tags:
   - Culture
   - Inside PostHog
@@ -15,9 +15,9 @@ We want to build the [most transparent company in the world](/handbook/people/ov
 
 ## How we run our company survey
 
-* We ask 14 questions covering categories such as company, confidence, culture, and growth. 12 of the questions we ask require a response ranging from 1, meaning strongly disagree, to 5, meaning strongly agree. These questions also have an optional text field for people to add comments. These questions are listed in the [Benchmarks](#benchmarks) section below. 
+* We ask 14 questions covering categories such as company, confidence, culture, and growth. 12 of the questions we ask require a response ranging from 1, meaning strongly disagree, to 5, meaning strongly agree. These questions also have an optional text field for people to add comments. These questions are listed in the [Benchmarks section](#benchmarks) below. 
 
-We also ask two questions which are mandatory and have open text fields:
+We also ask two questions that are mandatory and have open text fields:
 
 * What motivates you right now?
 * If you were to leave PostHog, what would the reason be?
@@ -26,7 +26,7 @@ We run this survey using the [Deel Pulse Surveys app in Slack](https://www.deel.
 
 ## H1 2024 survey results
 
-We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. For our last survey, which covered Q4 2023, we had a 74% response rate. Since then, we’ve added 14 new team members and lost three. Ideally we’d get a response rate of 90% or higher, though we did have a good cross section of teams and tenures.
+We had a 79% response rate, or 33 out of 42 eligible respondents, for our H1 2024 survey. Our previous survey, which covered Q4 2023, had a 74% response rate. We’ve since added 14 new team members and three have departed. Ideally we’d get a response rate of 90% or higher, though we did have a good cross-section of teams and tenures.
 
 ### Highest scores
 
@@ -102,7 +102,7 @@ These specific but anonymous quotes are broadly reflective of responses from mul
 * I think the lack of general process and over-engineered ownership that is typically a big plus has gotten in the way of some products actually making the strides forward that they could have.
 * For the company as a whole, I think things are pretty good, but I do think that satisfaction is heavily dependent on the team you're on.
 * Our setup means we are always on the edge of exhaustion because we purposefully keep things lean and tight on numbers.
-* All ingredients are there but growing pains are apparent specifically around team management.
+* All ingredients are there, but growing pains are apparent specifically around team management.
 
 ![PostHog company survey](https://res.cloudinary.com/dmukukwp6/image/upload/company_survey_4_f0bec1d01e.png)
 
@@ -110,4 +110,4 @@ These specific but anonymous quotes are broadly reflective of responses from mul
 
 Our executive team reads all the responses in full and has already gone through all the results. [Charles](https://posthog.com/community/profiles/28625) is responsible for making sure we identify any actions that might be needed. Where action is needed, it is usually the relevant exec team member who follows up.
 
-That said, not every comment needs a follow up. The priority here is to collect information and get a sense of overall trends. The survey becomes a failure if it is used as the primary way for people to share feedback with PostHog, something which we encourage people to do through more transparent channels. This is partly why we only do it every six months.
+That said, not every comment needs a followup. The priority here is to collect information and get a sense of overall trends. The survey becomes a failure if it is used as the primary way for people to share feedback with PostHog, something which we encourage people to do through more transparent channels. This is partly why we only do it every six months.
