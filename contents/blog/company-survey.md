@@ -1,5 +1,5 @@
 ---
-date: 2024-06-27
+date: 2024-06-28
 title: What our team really thinks about working at PostHog
 author:
   - james-temperton
