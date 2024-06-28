@@ -1,5 +1,5 @@
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -835,6 +835,26 @@ const PricingExperiment = ({
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
+    const [activePlan, setActivePlan] = useState('free');
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const plan = params.get('plan');
+        if (plan === 'free' || plan === 'paid') {
+            setActivePlan(plan);
+        }
+    }, []);
+
+    const handleFreePlanClick = () => {
+        setActivePlan('free');
+        window.history.pushState(null, '', '?plan=free');
+    };
+
+    const handlePaidPlanClick = () => {
+        setActivePlan('paid');
+        window.history.pushState(null, '', '?plan=paid');
+    };
+
     const ProductHeader = () => {
         return (
             <>
@@ -868,12 +888,112 @@ const PricingExperiment = ({
         )
     }
 
+    const FreePlanContent = () => {
+        return (
+            <>
+                <div>
+                    <h4 className="text-xl mb-0">Free</h4>
+                    <p className="text-sm opacity-75">No credit card required</p>
+
+                    <ul className="list-none p-0 mb-4 space-y-1">
+                        <li className="flex items-center gap-2 text-[15px]">
+                            <IconCheck className="text-green inline-block size-5" />
+                            <span>Generous <button className="text-red dark:text-yellow font-semibold">monthly free tier</button></span>
+                        </li>
+                        <li className="flex items-center gap-2 text-[15px]">
+                            <IconCheck className="text-green inline-block size-5" />
+                            Community support
+                        </li>
+                        <li className="flex items-center gap-2 text-[15px]">
+                            <IconCheck className="text-green inline-block size-5" />
+                            1 project, 1-year data retention
+                        </li>
+                        <li className="flex items-center gap-2 text-[15px]">
+                            <IconCheck className="text-green inline-block size-5" />
+                            Unlimited team members
+                        </li>
+                    </ul>
+                </div>
+                <div className="mt-auto">
+                    <div className="mb-4">
+                        <label className="block opacity-75 text-[15px] mb-1">Cloud region</label>
+                        <div className="flex gap-2">
+                            <button className="flex-1 flex flex-col items-center py-1.5 px-2 text-sm rounded border border-yellow bg-yellow/25 dark:bg-white/5 font-bold">
+                                US (Virginia)
+                            </button>
+                            <button className="flex-1 flex flex-col items-center py-1.5 px-2 text-sm rounded border border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent">
+                                EU (Frankfurt)
+                            </button>
+                        </div>
+                    </div>
+                    <PlanCTA intent="free" size="lg" width="full" />
+                    <p className="text-sm text-center mt-4 mb-0 opacity-75"><strong>128 companies</strong> signed up today</p>
+                </div>
+            </>
+        )
+    }
+
+    const PaidPlanContent = () => {
+        return (
+            <>
+                <div>
+                    <span className="text-70 text-[15px]">From</span>
+                    <div className="flex items-baseline">
+                        <h4 className="text-xl mb-0">$0</h4>
+                        <span className="opacity-70 text-sm">/mo</span>
+                    </div>
+                    <p className="text-sm mt-2">
+                        <button className="text-red dark:text-yellow font-semibold text-[15px]">Estimate your price</button>
+                    </p>
+
+                    <ul className="list-none p-0 mb-4 space-y-1">
+                        <li className="flex items-center gap-2 text-[15px]">
+                            <IconCheck className="text-green inline-block size-5" />
+                            <span>Generous <button className="text-red dark:text-yellow font-semibold">monthly free tier</button></span>
+                        </li>
+                        <li className="flex items-center gap-2 text-[15px]">
+                            <IconCheck className="text-green inline-block size-5" />
+                            <span>
+                                <strong className="bg-yellow/50 dark:bg-white/50 p-0.5 font-semibold">Usage-based pricing</strong> after monthly free tier
+                            </span>
+                        </li>
+                        <li className="flex items-center gap-2 text-[15px]">
+                            <IconCheck className="text-green inline-block size-5" />
+                            <span>
+                                <strong className="bg-yellow/50 dark:bg-white/50 p-0.5 font-semibold">Email</strong> support
+                            </span>
+                        </li>
+                        <li className="flex items-center gap-2 text-[15px]">
+                            <IconCheck className="text-green inline-block size-5" />
+                            Unlimited team members
+                        </li>
+                    </ul>
+                </div>
+                <div className="mt-auto">
+                    <div className="mb-4">
+                        <label className="block opacity-75 text-[15px] mb-1">Cloud region</label>
+                        <div className="flex gap-2">
+                            <button className="flex-1 flex flex-col items-center py-1.5 px-2 text-sm rounded border border-yellow bg-yellow/25 dark:bg-white/5 font-bold">
+                                US (Virginia)
+                            </button>
+                            <button className="flex-1 flex flex-col items-center py-1.5 px-2 text-sm rounded border border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent">
+                                EU (Frankfurt)
+                            </button>
+                        </div>
+                    </div>
+                    <PlanCTA intent="free" size="lg" width="full" />
+                    <p className="text-sm text-center mt-4 mb-0 opacity-75"><strong>128 companies</strong> signed up today</p>
+                </div>
+            </>
+        )
+    }
+
     return (
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
 
-            <div className="md:grid grid-cols-12 mt-8 px-4">
+            <div className="md:grid grid-cols-12 my-8 px-4">
                 <div className="col-span-3 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
                     <div className="md:hidden mb-2">
                         <ProductHeader />
@@ -899,13 +1019,13 @@ const PricingExperiment = ({
 
                     <ul className="list-none flex gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 mb-6 overflow-x-auto">
                         <li>
-                            <button className="flex flex-col py-2 px-4 rounded-md border-2 border-yellow bg-white dark:bg-white/5">
+                            <button onClick={handleFreePlanClick} className={`flex flex-col py-2 px-4 rounded-md border-2 ${activePlan === 'free' ? 'border-yellow bg-white dark:bg-white/5' : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'}`}>
                                 <strong className="whitespace-nowrap">Totally free</strong>
                                 <span className="text-sm opacity-75 whitespace-nowrap">Free - no credit card required</span>
                             </button>
                         </li>
                         <li>
-                            <button className="flex flex-col py-2 px-4 rounded-md border-2 border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent">
+                            <button onClick={handlePaidPlanClick} className={`flex flex-col py-2 px-4 rounded-md border-2 ${activePlan === 'free' ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent' : 'border-yellow bg-white dark:bg-white/5'}`}>
                                 <strong className="whitespace-nowrap">Ridiculously cheap</strong>
                                 <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
                             </button>
@@ -930,47 +1050,42 @@ const PricingExperiment = ({
                 </div>
 
                 <aside className="col-span-3">
-                    <div className="bg-white dark:bg-white/5 h-full rounded-md border border-light dark:border-dark py-4 px-6 flex flex-col justify-between">
-                        <div>
-                            <h4 className="text-xl mb-0">Free</h4>
-                            <p className="text-sm opacity-75">No credit card required</p>
-
-                            <ul className="list-none p-0 mb-4 space-y-1">
-                                <li className="flex items-center gap-2 text-[15px]">
-                                    <IconCheck className="text-green inline-block size-5" />
-                                    <span>Generous <button className="text-red dark:text-yellow font-semibold">monthly free tier</button></span>
-                                </li>
-                                <li className="flex items-center gap-2 text-[15px]">
-                                    <IconCheck className="text-green inline-block size-5" />
-                                    Community support
-                                </li>
-                                <li className="flex items-center gap-2 text-[15px]">
-                                    <IconCheck className="text-green inline-block size-5" />
-                                    1 project, 1-year data retention
-                                </li>
-                                <li className="flex items-center gap-2 text-[15px]">
-                                    <IconCheck className="text-green inline-block size-5" />
-                                    Unlimited team members
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="mt-auto">
-                            <div className="mb-4">
-                                <label className="block opacity-75 text-[15px] mb-1">Cloud region</label>
-                                <div className="flex gap-2">
-                                    <button className="flex-1 flex flex-col items-center py-1.5 px-2 text-sm rounded border border-yellow bg-white dark:bg-white/5 font-bold">
-                                        US (Virginia)
-                                    </button>
-                                    <button className="flex-1 flex flex-col items-center py-1.5 px-2 text-sm rounded border border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent">
-                                        EU (Frankfurt)
-                                    </button>
-                                </div>
-                            </div>
-                            <PlanCTA intent="free" size="lg" width="full" />
-                            <p className="text-sm text-center mt-4 mb-0 opacity-75"><strong>128 companies</strong> signed up today</p>
+                    <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6">
+                        <div className="flex flex-col justify-between h-full">
+                            {activePlan === 'free' ? <FreePlanContent /> : <PaidPlanContent />}
                         </div>
                     </div>
                 </aside>
+            </div>
+
+            <div className="grid grid-cols-2 gap-12 px-4">
+                <div>
+                    <div className="max-w-lg">
+                        <h4>Usage-based pricing</h4>
+                        <p>If your usage goes beyond the free tier limits, we offer <strong>usage-based pricing.</strong> You can set a billing limit for each product so you never get an unexpected bill.</p>
+
+                        <p>Add a credit card and also get:</p>
+
+                        <ul>
+                            <li>
+
+                                7 projects
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div className="flex justify-between">
+                        <div>
+                            <h4 className="mb-0">Rates (after the monthly free tier)</h4>
+                            <p className="text-sm opacity-60">Prices reduce with scale</p>
+                        </div>
+                        <div>
+                            <button>Expand all</button>
+                        </div>
+                    </div>
+                    accordion here
+                </div>
             </div>
 
 
