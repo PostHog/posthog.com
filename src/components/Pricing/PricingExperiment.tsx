@@ -1,5 +1,5 @@
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -12,7 +12,7 @@ import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
-import { IconCheck, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar } from '@posthog/icons'
+import { IconCheck, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar, IconMinus, IconPlus } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
@@ -23,6 +23,34 @@ import { CallToAction } from 'components/CallToAction'
 import Tabbed from './PricingCalculator/Tabbed'
 import { usePlatform } from './Platform/usePlatform'
 import { motion } from 'framer-motion'
+
+const tiers = [
+    {
+        title: 'Product analytics',
+        children: (
+            <>
+                content
+            </>
+        )
+    },
+    {
+        title: 'Session replay',
+        children: (
+            <>
+                content
+            </>
+        )
+    },
+    {
+        title: 'Feature flags',
+        children: (
+            <>
+                content
+            </>
+        )
+    }
+
+]
 
 interface PlanData {
     title: string
@@ -988,6 +1016,95 @@ const PricingExperiment = ({
         )
     }
 
+    const AccordionItem = ({
+        index,
+        title,
+        children,
+        isOpen,
+        onClick,
+        onAnimationComplete,
+    }) => {
+        const contentRef = useRef(null)
+
+        return (
+            <li
+                className={`border-t relative ${isOpen
+                    ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
+                    : 'inactive border-light dark:border-dark first:border-transparent'
+                    }`}
+            >
+                <button
+                    onClick={onClick}
+                    className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
+                        ? 'pt-4 pb-2 z-20'
+                        : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                        }`}
+                >
+                    <span
+                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg md:text-xl' : 'font-semibold text-[17px]'
+                            }`}
+                    >
+                        {title}
+                    </span>
+                    <span>
+                        {isOpen ? (
+                            <IconMinus className="size-4 inline-block transform rotate-180" />
+                        ) : (
+                            <IconPlus className="size-4 inline-block transform rotate-0" />
+                        )}
+                    </span>
+                </button>
+                <motion.div
+                    onAnimationComplete={onAnimationComplete}
+                    ref={contentRef}
+                    animate={{ height: isOpen ? 'auto' : 0, transition: { duration: 0.3, type: 'tween' } }}
+                    className={isOpen ? '' : 'overflow-hidden'}
+                >
+                    <div className="px-4 pb-4">
+                        {children}
+                    </div>
+                </motion.div>
+            </li>
+        )
+    }
+
+    const Accordion = ({ items }) => {
+        const ref = useRef<HTMLOListElement>(null)
+        const [openIndex, setOpenIndex] = useState(null)
+
+        const scrollToIndex = (index) => {
+            if (ref.current && window.innerWidth <= 639) {
+                const element = ref.current.children[index]
+                const y = element.getBoundingClientRect().top + window.scrollY - 56
+                window.scrollTo({ top: y, behavior: 'smooth' })
+            }
+        }
+
+        return (
+            <ol ref={ref} className="space-y-px p-0 list-none">
+                {items.map((item, index) => (
+                    <AccordionItem
+                        onAnimationComplete={({ height }) => {
+                            if (height === 'auto') {
+                                scrollToIndex(index)
+                            }
+                        }}
+                        key={index}
+                        title={item.title}
+                        isOpen={openIndex === index}
+                        onClick={() => {
+                            setOpenIndex(openIndex === index ? null : index)
+                        }}
+                    >
+                        {item.children}
+                    </AccordionItem>
+                ))}
+            </ol>
+        )
+    }
+
+
+
     return (
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
@@ -1084,7 +1201,8 @@ const PricingExperiment = ({
                             <button>Expand all</button>
                         </div>
                     </div>
-                    accordion here
+
+                    <Accordion items={tiers} />
                 </div>
             </div>
 
