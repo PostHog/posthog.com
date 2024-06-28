@@ -39,13 +39,11 @@ export const ContributorImage = ({ image, name, compact, rounded }) => {
     const gatsbyImage = image && getImage(image)
     return (
         <figure
-            className={`${compact ? 'flex-shrink-0 w-12 relative' : 'm-0 -mt-8 p-0 absolute right-0 bottom-0'} ${
-                rounded
-                    ? `rounded-full overflow-hidden border-2 border-tan dark:border-primary ${
-                          compact ? 'h-9 w-9 mr-2' : ''
-                      }`
-                    : ''
-            } `}
+            className={`${compact ? 'flex-shrink-0 relative' : 'm-0 -mt-8 p-0 absolute right-0 bottom-0'} ${rounded
+                ? `rounded-full overflow-hidden border-2 border-tan dark:border-primary ${compact ? 'h-12 w-12 mr-1' : ''
+                }`
+                : ''
+                } `}
         >
             {typeof image === 'string' ? (
                 <img className={compact ? 'absolute w-full h-full object-cover' : 'w-24 h-24'} src={image} />
@@ -96,22 +94,19 @@ export const Contributor = ({
     return (
         <Container
             {...(url ? { to: url, state } : {})}
-            className={`${
-                compact ? 'overflow-hidden' : ''
-            } flex bg-accent dark:bg-accent-dark border border-light dark:border-dark md:mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark ${
-                roundedImage ? 'items-center' : ''
-            }`}
+            className={`${compact ? 'overflow-hidden' : ''
+                } flex bg-accent dark:bg-accent-dark border border-light dark:border-dark md:mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark ${roundedImage ? 'items-center' : ''
+                }`}
         >
             <div className={compact ? '' : 'pr-20'}>
                 <div className="flex flex-col justify-between px-4 py-2 w-full gap-0.5">
-                    <h3 className={`mb-0 leading-tight ${compact ? 'text-sm' : 'text-base'}`}>
+                    <h3 className={`mb-0 leading-tight ${compact ? 'text-[15px]' : 'text-base'}`}>
                         {text && <span>{name}</span>}
                     </h3>
                     {role && (
                         <p
-                            className={`text-primary/50  dark:text-primary-dark/50 m-0 leading-tight ${
-                                compact ? 'line-clamp-1 text-xs' : 'text-sm'
-                            }`}
+                            className={`text-primary/50 dark:text-primary-dark/50 m-0 leading-tight text-sm ${compact ? 'text-[13px]' : 'text-sm'
+                                }`}
                         >
                             {role}
                         </p>
@@ -138,9 +133,8 @@ export default function Contributors({
                 <h3 className="text-black dark:text-white font-semibold opacity-25 m-0 text-sm flex space-x-1 items-center">
                     <span>Contributors</span>
                     <span
-                        className={`w-[24px] h-[24px] bg-black/40 dark:bg-white/40 flex items-center justify-center ${
-                            contributors.length > maxContributorsToShow ? 'text-xs' : ''
-                        }`}
+                        className={`w-[24px] h-[24px] bg-black/40 dark:bg-white/40 flex items-center justify-center ${contributors.length > maxContributorsToShow ? 'text-xs' : ''
+                            }`}
                     >
                         {contributors.length > maxContributorsToShow
                             ? `${maxContributorsToShow}+`
