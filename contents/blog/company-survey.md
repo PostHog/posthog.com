@@ -5,7 +5,7 @@ author:
   - james-temperton
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/survey_hog_bafed58598.jpg
-  featuredImageType: full
+featuredImageType: full
 tags:
   - Culture
   - Inside PostHog
@@ -111,3 +111,5 @@ These specific but anonymous quotes are broadly reflective of responses from mul
 Our executive team reads all the responses in full and has already gone through all the results. [Charles](https://posthog.com/community/profiles/28625) is responsible for making sure we identify any actions that might be needed. Where action is needed, it is usually the relevant exec team member who follows up.
 
 That said, not every comment needs a followup. The priority here is to collect information and get a sense of overall trends. The survey becomes a failure if it is used as the primary way for people to share feedback with PostHog, something which we encourage people to do through more transparent channels. This is partly why we only do it every six months.
+
+<NewsletterForm />
