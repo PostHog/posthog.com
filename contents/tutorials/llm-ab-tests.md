@@ -296,7 +296,7 @@ export async function POST(request) {
 
 ```
 
-And we're done setting up our A/B test! Open your app, log in with a few diferent emails, and click the **Yes** and **No** buttons a few times. You should now see results in your experiment page.
+And we're done setting up our A/B test! Open your app, log in with a few different emails, and click the **Yes** and **No** buttons a few times. You should now see results in your experiment page.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1719581678/posthog.com/contents/Screenshot_2024-06-28_at_2.34.04_PM.png" 
