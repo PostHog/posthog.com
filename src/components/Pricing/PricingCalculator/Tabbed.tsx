@@ -332,6 +332,12 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
     )
 }
 
+const addonDefaults = {
+    enhanced_persons: {
+        checked: true,
+    },
+}
+
 export default function Tabbed() {
     const {
         allProductData: {
@@ -350,7 +356,7 @@ export default function Tabbed() {
                 product.addons.forEach((addon) => {
                     initialAddons.push({
                         type: addon.type,
-                        checked: false,
+                        checked: addonDefaults[addon.type]?.checked || false,
                         totalCost: 0,
                     })
                 })

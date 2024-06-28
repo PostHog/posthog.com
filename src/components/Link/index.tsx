@@ -81,6 +81,7 @@ export default function Link({
     ) : internal ? (
         preview ? (
             <Tooltip
+                tooltipClassName={compact ? 'hidden' : ''}
                 offset={[0, 0]}
                 placement="left-start"
                 content={(setOpen) => (
