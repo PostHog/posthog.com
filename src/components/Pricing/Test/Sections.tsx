@@ -2,11 +2,10 @@ import React from 'react'
 import cntl from 'cntl'
 
 export const section = cntl`
-    max-w-6xl
-    xl:max-w-7xl
     mx-auto
     mb-20
     px-4
+    2xl:px-12
 `
 
 export const SectionLayout = ({ id = '', children }) => (

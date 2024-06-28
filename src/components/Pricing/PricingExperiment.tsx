@@ -786,7 +786,7 @@ const PricingExperiment = ({
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
 
-            <div className="md:grid grid-cols-12 my-8 px-4">
+            <div className="md:grid grid-cols-12 my-8 px-4 2xl:px-12">
                 <div className="col-span-3 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
                     <div className="md:hidden mb-2">
                         <ProductHeader />

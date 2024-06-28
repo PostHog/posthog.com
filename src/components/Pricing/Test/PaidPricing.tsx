@@ -39,7 +39,7 @@ export const PaidPricing = () => {
               <p className="text-sm opacity-60">Prices reduce with scale</p>
             </div>
             <div className="hidden md:block">
-              <button>Expand all</button>
+              <button className="text-sm text-red dark:text-order font-bold">Expand all</button>
             </div>
           </div>
 

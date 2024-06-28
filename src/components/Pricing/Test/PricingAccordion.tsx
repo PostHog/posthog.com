@@ -70,15 +70,15 @@ const AccordionItem = ({
   return (
     <li
       className={`border-t relative ${isOpen
-        ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden -mx-2'
+        ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden -mx-1'
         : 'inactive border-light dark:border-dark first:border-transparent'
         }`}
     >
       <button
         onClick={onClick}
         className={`text-left cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
-          ? 'pt-2 pl-2 pr-2 pb-2 z-20'
-          : 'text-primary/90 hover:text-primary/100 dark:text-primary-dark/90 dark:hover:text-primary-dark/100 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+          ? 'pt-2 pl-2 pr-3 pb-2 z-20'
+          : 'px-2 text-primary/90 hover:text-primary/100 dark:text-primary-dark/90 dark:hover:text-primary-dark/100 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
           }`}
       >
         <div className="grid grid-cols-12 w-full gap-1 items-center">
@@ -98,7 +98,7 @@ const AccordionItem = ({
               {startsAt}
             </span>
           </div>
-          <span>
+          <span className="text-right">
             {isOpen ? (
               <IconMinus className="size-4 inline-block transform rotate-180" />
             ) : (
@@ -114,7 +114,7 @@ const AccordionItem = ({
         animate={{ height: isOpen ? 'auto' : 0, transition: { duration: 0.3, type: 'tween' } }}
         className={isOpen ? '' : 'overflow-hidden'}
       >
-        <div className="px-4 pb-4">
+        <div className="px-3 pb-4">
           {children}
         </div>
       </motion.div>
