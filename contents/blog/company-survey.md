@@ -15,7 +15,9 @@ We want to build the [most transparent company in the world](/handbook/people/ov
 
 ## How we run our company survey
 
-* We ask 14 questions covering categories such as company, confidence, culture, and growth. 12 of the questions we ask require a response ranging from 1, meaning strongly disagree, to 5, meaning strongly agree. These questions also have an optional text field for people to add comments. These questions are listed in the [Benchmarks section](#benchmarks) below. 
+We ask 14 questions covering categories such as company, confidence, culture, and growth. 12 of the questions we ask require a response ranging from 1, meaning strongly disagree, to 5, meaning strongly agree. 
+
+These questions also have an optional text field for people to add comments. They're are listed in the [Benchmarks section](#benchmarks) below. 
 
 We also ask two questions that are mandatory and have open text fields:
 
