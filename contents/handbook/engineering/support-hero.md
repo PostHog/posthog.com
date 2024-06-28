@@ -12,6 +12,31 @@ You'll see some teams using a term of endearment for Support Hero, examples bein
 
 <TeamMember name="Marcus Hof" /> and <TeamMember name="Steven Shults" />, our Support Engineers, triage tickets for the Product Analytics, Pipeline, Session Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
+---- 
+
+## Table o' contents
+- [When is my turn?](#when-is-my-turn)
+- [What if I'm scheduled for a week when I won't be available?](#what-if-im-scheduled-for-a-week-when-i-wont-be-available)
+- [What do I do as Support Hero?](#what-do-i-do-as-support-hero)
+- 
+- [How do I communicate?](#how-do-i-communicate)
+- [How do I prioritize?](#how-do-i-prioritize)
+- 
+- [What if I need to confirm priority by checking a customer's MRR?](#what-if-i-need-to-confirm-priority-by-checking-a-customers-mrr)
+- [How should I handle self-hosted setups?](#how-should-i-handle-self-hosted-setups)
+- [How should I handle organization ownership transfers?](#how-should-i-handle-organization-ownership-transfers)
+- [How should I handle 2FA removal?](#how-should-i-handle-2fa-removal)
+- 
+- [How do I use Zendesk?](#how-do-i-use-zendesk)
+- [Accessing Zendesk](#accessing-zendesk)
+- [Using Zendesk](#using-zendesk)
+- 
+- [How do I answer community questions?](#how-do-i-answer-community-questions)
+- [How do I handle a bug report or feature request?](#how-do-i-handle-a-bug-report-or-feature-request)
+- [How do I handle user requests to delete groups/organizations?](#how-do-i-handle-user-requests-to-delete-groupsorganizations)
+
+----
+
 ## When is my turn?
 
 Most engineering teams run a PagerDuty schedule:
