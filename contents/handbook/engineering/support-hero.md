@@ -209,6 +209,24 @@ Ask in [#team-website-and-docs](https://posthog.slack.com/archives/C01V9AT7DK4) 
 
 _Note: The PostHog.com community currently uses a separate authentication system from PostHog Cloud. There are [plans](https://github.com/PostHog/posthog.com/issues/5847) to support other types of authentication so a visitor doesn't have to create a separate account for asking questions._
 
+## How do I handle a bug report or feature request?
+
+For feature requests from low priority users, [give them this link](https://github.com/PostHog/posthog/issues/new/choose) and suggest they open a feature request.
+
+For bug reports from normal and high priority users (assuming you've confirmed it's a bug, and that there's not already an open bug report):
+
+1. [Open a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml) on our GitHub repo
+2. Be sure to include a link to the insight (or other), below the repo steps
+3. Include "From: `https://URL_for_ZenDesk_ticket`" in the `additional info` section of the bug comment (where the URL is for the ZenDesk ticket where the customer reported the bug)
+4. Reply to the user to thank* them for alerting us to the bug. Let them know you've opened a bug report and provide a link to it.
+5. Let them know they can follow the bug report on GitHub for updates.
+6. When sending the reply, change the ticket from `Open` to `Pending`
+7. In Slack, go to the team channel for the team that handles the feature that the bug report applies to (e.g. `#team-product-analytics`) and alert them with a post like "New bug report from a high priority customer: `https://github.com/PostHog/posthog/issues/nnnnnn`"
+
+`*` consider sparking additional joy with a [credit for merch](/handbook/company/merch-store#how-do-we-give-away-merch-for-free)
+
+Steps for feature requests from normal and high priority users are pretty much the same, but [use this form](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml) instead. If you find that there's already a matching feature request open, reply with a link to the feature request, and let them know they can upvote it by adding a "`+1`" comment.
+
 ## How do I handle user requests to delete groups/organizations?
 
 > **_WARNING:_**  Do NOT click the `DELETE` button! That will delete the entire project!
