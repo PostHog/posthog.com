@@ -38,7 +38,7 @@ If you're using React or Next.js, checkout our [React SDK](/docs/libraries/react
 
 #### Advanced option - bundle all required extensions
 
-By default, the PostHog JS library will only load the core functionality, lazy-loading extensions such as Surveys or Replay when needed. This can cause issues if you have a Content Security Policy (CSP) that blocks inline scripts or if you want to optimize your bundle.
+By default, the PostHog JS library will only load the core functionality, lazy-loading extensions such as Surveys or the Session Replay 'recorder' when needed. This can cause issues if you have a Content Security Policy (CSP) that blocks inline scripts or if you want to optimize your bundle at build time to ensure all dependencies are ready immediately.
 You can include all extensions in your bundle by importing them directly before initializing PostHog. In addition you can configure the SKD to never load extensions lazily.
 
 ```js-web
