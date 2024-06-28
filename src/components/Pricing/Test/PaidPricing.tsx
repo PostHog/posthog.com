@@ -9,7 +9,7 @@ import { Accordion, tiers } from './PricingAccordion';
 export const PaidPricing = () => {
   return (
     <section className={`${section} `}>
-      <div className="grid grid-cols-2 gap-12">
+      <div className="grid md:grid-cols-2 gap-12">
         <div>
           <div className="max-w-lg">
             <h4 className="text-2xl">Usage-based pricing</h4>
@@ -33,12 +33,12 @@ export const PaidPricing = () => {
           </div>
         </div>
         <div>
-          <div className="flex justify-between">
+          <div className="flex flex-col md:flex-row justify-between">
             <div>
               <h4 className="mb-0 tracking-tight">Rates (after the monthly free tier)</h4>
               <p className="text-sm opacity-60">Prices reduce with scale</p>
             </div>
-            <div>
+            <div className="hidden md:block">
               <button>Expand all</button>
             </div>
           </div>

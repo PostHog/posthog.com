@@ -232,6 +232,9 @@ module.exports = {
                 'fluid-video': '56.25%',
                 '1/2': '50%',
             },
+            maxWidth: {
+                '2xs': '16rem',
+            },
             keyframes: {
                 wiggle: {
                     '0%, 100%': { transform: 'rotate(6deg)' },

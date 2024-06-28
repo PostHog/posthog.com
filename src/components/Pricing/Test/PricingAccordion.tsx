@@ -6,7 +6,7 @@ export const tiers = [
   {
     icon: <IconGraph className="text-blue" />,
     title: 'Analytics',
-    startsAt: <><strong className="text-sm">$0.00031</strong><span className="opacity-60 text-[13px]">/event (or cheaper)</span></>,
+    startsAt: <><strong className="text-sm">$0.00031</strong><span className="opacity-60 text-[13px]">/event</span></>,
     children: (
       <>
         content
@@ -26,7 +26,7 @@ export const tiers = [
   {
     icon: <IconToggle className="text-seagreen" />,
     title: 'Feature flags',
-    startsAt: <><strong className="text-sm">$0.0001</strong><span className="opacity-60 text-[13px]">/recording</span></>,
+    startsAt: <><strong className="text-sm">$0.0001</strong><span className="opacity-60 text-[13px]">/request</span></>,
     children: (
       <>
         content
@@ -70,19 +70,19 @@ const AccordionItem = ({
   return (
     <li
       className={`border-t relative ${isOpen
-        ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
+        ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden -mx-2'
         : 'inactive border-light dark:border-dark first:border-transparent'
         }`}
     >
       <button
         onClick={onClick}
-        className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
-          ? 'pt-4 pb-2 z-20'
+        className={`text-left cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
+          ? 'pt-2 pl-2 pr-2 pb-2 z-20'
           : 'text-primary/90 hover:text-primary/100 dark:text-primary-dark/90 dark:hover:text-primary-dark/100 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
           }`}
       >
         <div className="grid grid-cols-12 w-full gap-1 items-center">
-          <div className="col-span-5">
+          <div className="col-span-6 md:col-span-5">
             <div className="flex gap-1 items-center">
               <div className={isOpen ? 'size-6' : 'size-5'}>{icon}</div>
               <span
@@ -93,7 +93,7 @@ const AccordionItem = ({
               </span>
             </div>
           </div>
-          <div className="col-span-6">
+          <div className="col-span-5 md:col-span-6">
             <span>
               {startsAt}
             </span>
