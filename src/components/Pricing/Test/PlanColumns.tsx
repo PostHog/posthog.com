@@ -6,25 +6,39 @@ import Plans, { CTA as PlanCTA, PricingTiers } from '../Plans'
 
 interface PlanData {
   title: string
+  subtitle: string
+  pricePreface?: string
   price: string
   priceSubtitle?: string | JSX.Element
   features: React.ReactNode[]
+  projects: number
+  dataRetention: string
   CTAText?: string
   CTALink?: string
 }
 
 const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
-  <div>
-    <h4 className="text-lg mb-2">{planData.title}</h4>
-    <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded">
+  <>
+    <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded-md relative">
+      {planData.title === 'Totally free' && (
+        <div className="absolute -top-6 right-2 border-2 border-yellow bg-white dark:bg-white/5 rounded-sm text-center py-1 px-2">
+          <strong className="block text-yellow text-sm">Just pick this one!</strong>
+          <p className="text-xs mb-0 text-opacity-75">You can upgrade later.</p>
+        </div>
+      )
+      }
       <div className="flex flex-col h-full gap-4 pt-3 px-4 xl:px-4 pb-6">
         <div>
+          <h4 className="text-lg mb-0"><em>{planData.title}</em></h4>
+          <p className="text-[15px] mb-0 opacity-70">{planData.subtitle}</p>
+        </div>
+        <div>
           <h4 className="inline text-lg">
-            {planData.price != 'Free' && planData.price != 'Custom pricing' && (
-              <span className="text-sm opacity-60 font-normal">Starts at</span>
+            {planData.price != 'Free' && (
+              <span className="text-sm opacity-60 font-normal">{planData.pricePreface}</span>
             )}{' '}
             {planData.price}
-            {planData.price != 'Free' && planData.price != 'Custom pricing' && (
+            {planData.price != 'Free' && (
               <span className="text-sm opacity-60 font-normal">/mo</span>
             )}
           </h4>
@@ -33,62 +47,105 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
         </div>
         <ul className="p-0 list-none flex flex-col gap-2 [&_li]:text-sm xl:[&_li]:text-[15px]">
           {planData.features.map((feature, index) => (
-            <li key={index}>{feature}</li>
+            <li key={index} className="flex flex-col relative pl-7">
+              <IconCheck className="size-5 text-green absolute top-0 left-0" />
+              <strong>{feature.name}</strong>
+              {feature.description && (
+                <p className="mb-0 opacity-70 text-sm">{feature.description}</p>
+              )}
+            </li>
           ))}
         </ul>
+
         <div className="mt-auto">
+          <div className="space-y-2 mb-4">
+            <p className="mb-0 font-bold text-sm">{planData.projects} project{planData.projects > 1 && 's'}</p>
+            <p className="mb-0 font-bold text-sm">{planData.dataRetention} data retention</p>
+          </div>
           <PlanCTA
-            type={planData.title === 'Ridiculously cheap' ? 'primary' : 'secondary'}
+            type={planData.title === 'Totally free' ? 'primary' : 'secondary'}
             ctaText={planData.CTAText}
             ctaLink={planData.CTALink}
+            width="full"
           />
         </div>
       </div>
     </div>
-  </div>
+  </>
 )
 
 const planSummary = [
   {
     title: 'Totally free',
+    subtitle: 'No credit card required',
     price: 'Free',
-    priceSubtitle: '- no credit card required',
     features: [
-      'Generous free monthly tier',
-      'Basic product features',
-      '1 project',
-      '1 year data retention',
-      'Community support',
+      {
+        name: 'Generous free monthly tier',
+        description: 'Usage capped at free tier limits'
+      },
+      {
+        name: 'Like, totally free',
+        description: 'Almost product features, no credit card required'
+      },
+      {
+        name: 'Standard support',
+        description: 'Community, email support'
+      },
     ],
+    projects: 1,
+    dataRetention: '1-year',
   },
   {
     title: 'Ridiculously cheap',
+    subtitle: 'Usage-based pricing after free tier',
+    pricePreface: 'Starts at',
     price: '$0',
     features: [
-      'Generous free tier on all products',
-      'Advanced product features',
-      '6 projects',
-      '7 year data retention',
-      'Email support',
-      'Pay only for what you use',
-      <>
-        <span className="opacity-60 text-sm">* Included with any product subscription</span>
-      </>,
+      {
+        name: 'Generous free monthly tier',
+        description: 'Pay nothing if below free tier limits'
+      },
+      {
+        name: 'Usage-based pricing',
+        description: 'Set billing limits per product so you never pay more than expected.'
+      },
+      {
+        name: 'Priority support',
+        description: 'Community, priority email support, Slack-based over $2k/mo'
+      },
     ],
+    projects: '7',
+    dataRetention: '7-year',
   },
   {
-    title: 'Enterprise',
-    price: 'Custom pricing',
-    priceSubtitle: 'w/ fixed terms',
+    title: 'Starship enterprise',
+    subtitle: 'Usage-based pricing after free tier',
+    pricePreface: 'From',
+    price: '$2,000',
     features: [
-      'Unlimited everything',
-      'SAML SSO',
-      'Custom MSA',
-      'Dedicated support',
-      'Personalized onboarding & training',
-      'Advanced permissions & audit logs',
+      {
+        name: 'SAML SSO',
+      },
+      {
+        name: 'Custom MSA',
+      },
+      {
+        name: 'Dedicated support',
+      },
+      {
+        name: 'Training & onboarding',
+      },
+      {
+        name: 'Advanced permissions',
+      },
+      {
+        name: 'Audit logs',
+      }
     ],
-    CTAText: 'Get in touch',
+    projects: 'Unlimited',
+    dataRetention: 'Custom',
+    CTAText: 'Talk to a human',
     CTALink: '/talk-to-a-human',
   },
 ]
@@ -110,37 +167,65 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
   return (
     <>
       <section className={`${section} mb-12 mt-8 md:px-4`}>
-        <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Platform plans</h3>
-        <p className="text-[15px] text-primary/75 dark:text-primary-dark/75">
-          All plans include unlimited team members and no limits on tracked users.
-        </p>
-        <div className="col-span-4 -mx-4 lg:mx-0 mb-4 px-4 lg:px-0 overflow-x-auto">
-          <div
-            className={`grid grid-cols-[repeat(3,_minmax(260px,_1fr))] xl:max-w-4xl xl:mx-auto gap-4 mb-12 ${highlight === 'free'
-              ? '[&>*:nth-child(1)_>div]:border-red [&>*:nth-child(1)_>div]:border-3'
-              : '[&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3'
-              }`}
-          >
-            {planSummary.map((plan, index) => (
-              <Plan key={index} planData={plan} highlight={plan.intent === highlight} />
-            ))}
+        <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Compare plans</h3>
+        <div className="-mx-4 lg:mx-0 px-4 lg:px-0 overflow-x-auto">
+          <div className="pt-6 pb-2">
+            <div
+              className={`grid grid-cols-[repeat(3,_minmax(300px,_1fr))_1fr] gap-4 mb-4 ${highlight === 'free'
+                ? '[&>*:nth-child(1)_>div]:border-yellow [&>*:nth-child(1)_>div]:border-3'
+                : '[&>*:nth-child(2)_>div]:border-yellow [&>*:nth-child(2)_>div]:border-3'
+                }`}
+            >
+              {planSummary.map((plan, index) => (
+                <Plan key={index} planData={plan} highlight={plan.intent === highlight} />
+              ))}
+              <div className="flex justify-center">
+
+                <div className="inline-flex flex-col">
+
+                  <p className="font-bold text-[15px] mt-4 mb-2">
+                    All plans include:
+                  </p>
+                  <ul className="list-none pl-2 space-y-1">
+                    <li className="flex gap-1 items-center text-[15px]">
+                      <IconCheck className="w-5 h-5 text-green" />
+                      Unlimited team members
+                    </li>
+                    <li className="flex gap-1 items-center text-[15px]">
+                      <IconCheck className="w-5 h-5 text-green" />
+                      No limits on tracked users
+                    </li>
+                    <li className="flex gap-1 items-center text-[15px]">
+                      <IconCheck className="w-5 h-5 text-green" />
+                      API access
+                    </li>
+                    <li className="flex gap-1 items-center text-[15px]">
+                      <IconCheck className="w-5 h-5 text-green" />
+                      Google, Github, and Gitlab SSO
+                    </li>
+
+
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </div >
         <p
-          className="text-center text-red dark:text-yellow font-bold cursor-pointer flex items-center justify-center"
+          className="text-red dark:text-yellow font-bold cursor-pointer flex items-center mb-0"
           onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
         >
           {isPlanComparisonVisible ? (
             <>
-              Hide full plan comparison <IconChevronDown className="w-8 rotate-180" />
+              <IconChevronDown className="w-8 rotate-0 transition-all" />Hide full plan comparison
             </>
           ) : (
             <>
-              Show full plan comparison <IconChevronDown className="w-8" />
+              <IconChevronDown className="w-8 -rotate-90 transition-all" />Show full plan comparison
             </>
           )}
         </p>
-      </section>
+      </section >
 
       <section
         className={`${section} ${isPlanComparisonVisible

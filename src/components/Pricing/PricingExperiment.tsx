@@ -12,7 +12,7 @@ import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
-import { IconCheck, IconGraph, IconRewindPlay, IconToggle, IconFlask, IconMessage, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar } from '@posthog/icons'
+import { IconCheck, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
@@ -25,29 +25,9 @@ import { usePlatform } from './Platform/usePlatform'
 import { motion } from 'framer-motion'
 import { PlanColumns } from './Test/PlanColumns';
 import { FreePlanContent, PaidPlanContent } from './Test/PlanContent'
-import { Accordion, tiers } from './Test/PricingAccordion';
+import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, SectionSidebar } from './Test/Sections'
+import { PaidPricing } from './Test/PaidPricing'
 
-const SectionLayout = ({ id = '', children }) => (
-    <section id={id} className={`${section} mb-12 mt-8 md:px-4`}>
-        {children}
-    </section>
-)
-
-const SectionHeader = ({ children }) => (
-    <header className="border-b pb-1 border-light dark:border-dark">{children}</header>
-)
-
-const SectionColumns = ({ children }) => <div className="grid md:grid-cols-3 md:py-4">{children}</div>
-
-const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:pb-0 md:pr-8">{children}</div>
-
-const SectionSidebar = ({ children, className = '' }) => (
-    <div
-        className={`col-span-1 flex flex-col gap-4 md:border-l border-light dark:border-dark border-t md:border-t-0 pt-4 md:pt-0 md:pl-8 ${className}`}
-    >
-        {children}
-    </div>
-)
 
 const SidebarList = ({ children }) => <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 
@@ -150,13 +130,6 @@ const AllAddons = () => {
         </div>
     )
 }
-
-export const section = cntl`
-    max-w-6xl
-    xl:max-w-7xl
-    mx-auto
-    px-4
-`
 
 export const gridCell = cntl`
     bg-white
@@ -870,7 +843,7 @@ const PricingExperiment = ({
                 </div>
 
                 <aside className="col-span-3">
-                    <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6">
+                    <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6 h-full">
                         <div className="flex flex-col justify-between h-full">
                             {activePlan === 'free' ? <FreePlanContent /> : <PaidPlanContent />}
                         </div>
@@ -878,49 +851,10 @@ const PricingExperiment = ({
                 </aside>
             </div>
 
-            <div className="grid grid-cols-2 gap-12 px-4">
-                <div>
-                    <div className="max-w-lg">
-                        <h4>Usage-based pricing</h4>
-                        <p>If your usage goes beyond the free tier limits, we offer <strong>usage-based pricing.</strong> You can set a billing limit for each product so you never get an unexpected bill.</p>
+            <PaidPricing />
 
-                        <p className="mb-3"><strong>Add a <Icons.IconCreditCard className="size-6 inline-block -rotate-6 relative -top-0.5" /> credit card and also get:</strong></p>
 
-                        <ul className="mb-4 pl-6">
-                            <li>
-                                <s>1 project</s> <span className="bg-highlight p-0.5 font-bold text-[15px]">7 projects</span>
-                            </li>
-                            <li>
-                                <s>1-year data retention</s> <span className="bg-highlight p-0.5 font-bold text-[15px]">7-year data retention</span>
-                            </li>
-                            <li>
-                                <s>Community support</s> <span className="bg-highlight p-0.5 font-bold text-[15px]">Priority support</span>
-                            </li>
-                        </ul>
-
-                        <CallToAction size="sm" type="secondary">Pricing calculator</CallToAction>
-                    </div>
-                </div>
-                <div>
-                    <div className="flex justify-between">
-                        <div>
-                            <h4 className="mb-0">Rates (after the monthly free tier)</h4>
-                            <p className="text-sm opacity-60">Prices reduce with scale</p>
-                        </div>
-                        <div>
-                            <button>Expand all</button>
-                        </div>
-                    </div>
-
-                    <Accordion items={tiers} />
-                </div>
-            </div>
-
-            <div className="px-4">
-                <h3>Compare plans</h3>
-                <PlanColumns billingProducts={billingProducts} highlight="free" />
-            </div>
-
+            <PlanColumns billingProducts={billingProducts} highlight="free" />
 
 
 
