@@ -79,6 +79,12 @@ const Status = ({ status }: { status: 'resolved' | 'pending' | 'needs-response' 
     }
 }
 
+const extractFirstImageURL = (markdown: string): string | null => {
+    const regex = /!\[.*?\]\((.*?)\)/
+    const match = markdown.match(regex)
+    return match ? match[1] : null
+}
+
 const Row = ({
     question,
     className,
@@ -120,6 +126,8 @@ const Row = ({
             : 'needs-response'
         : null
 
+    const featuredImage = topics.data?.[0]?.attributes.label.startsWith('#') && extractFirstImageURL(body)
+
     return profile ? (
         <div ref={fetchMore ? ref : null} key={question.id} className="py-2.5">
             <Link
@@ -138,7 +146,22 @@ const Row = ({
                                 </Tooltip>
                             ) : showStatus && status ? (
                                 <Status status={status} />
-                            ) : null}
+                            ) : (
+                                featuredImage && (
+                                    <Tooltip
+                                        placement="left"
+                                        content={() => <img className="max-w-72" src={featuredImage} alt="" />}
+                                    >
+                                        <div className="relative size-8 -ml-1">
+                                            <img
+                                                src={featuredImage}
+                                                className="object-cover absolute inset-0 size-full"
+                                                alt=""
+                                            />
+                                        </div>
+                                    </Tooltip>
+                                )
+                            )}
                         </div>
 
                         <div className="w-full">
