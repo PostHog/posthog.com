@@ -22,7 +22,7 @@ import HubSpotForm from 'components/HubSpotForm'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const features = [
-    'B2C discounts',
+    'Volume discounts',
     'SAML SSO',
     'Custom MSA',
     'Dedicated support',
