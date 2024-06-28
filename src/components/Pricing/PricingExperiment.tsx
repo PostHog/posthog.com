@@ -12,7 +12,7 @@ import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
-import { IconCheck, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar, IconMinus, IconPlus } from '@posthog/icons'
+import { IconCheck, IconGraph, IconRewindPlay, IconToggle, IconFlask, IconMessage, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar, IconMinus, IconPlus } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
@@ -26,7 +26,9 @@ import { motion } from 'framer-motion'
 
 const tiers = [
     {
-        title: 'Product analytics',
+        icon: <IconGraph className="text-blue" />,
+        title: 'Analytics',
+        startsAt: <><strong className="text-sm">$0.00031</strong><span className="opacity-60 text-[13px]">/event (or cheaper)</span></>,
         children: (
             <>
                 content
@@ -34,7 +36,9 @@ const tiers = [
         )
     },
     {
+        icon: <IconRewindPlay className="text-yellow" />,
         title: 'Session replay',
+        startsAt: <><strong className="text-sm">$0.0050</strong><span className="opacity-60 text-[13px]">/recording</span></>,
         children: (
             <>
                 content
@@ -42,7 +46,28 @@ const tiers = [
         )
     },
     {
+        icon: <IconToggle className="text-seagreen" />,
         title: 'Feature flags',
+        startsAt: <><strong className="text-sm">$0.0001</strong><span className="opacity-60 text-[13px]">/recording</span></>,
+        children: (
+            <>
+                content
+            </>
+        )
+    },
+    {
+        icon: <IconFlask className="text-purple" />,
+        title: 'A/B testing',
+        children: (
+            <>
+                content
+            </>
+        )
+    },
+    {
+        icon: <IconMessage className="text-salmon" />,
+        title: 'Surveys',
+        startsAt: <><strong className="text-sm">$0.2000</strong><span className="opacity-60 text-[13px]">/response</span></>,
         children: (
             <>
                 content
@@ -535,7 +560,7 @@ const ProductTabs = ({ billingProducts }) => {
                 <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
-                    className="@container -mt-[2px] bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 overflow-hidden"
+                    className="@container -mt-[2px] bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 overflow-hidden h-0"
                 >
                     <div key={activeProduct.name}>{tabContent[activeProduct.name]({ ...productData })}</div>
                 </motion.div>
@@ -1017,8 +1042,10 @@ const PricingExperiment = ({
     }
 
     const AccordionItem = ({
-        index,
+        icon,
         title,
+        startsAt = '',
+        description,
         children,
         isOpen,
         onClick,
@@ -1037,15 +1064,21 @@ const PricingExperiment = ({
                     onClick={onClick}
                     className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
                         ? 'pt-4 pb-2 z-20'
-                        : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                        : 'text-primary/90 hover:text-primary/100 dark:text-primary-dark/90 dark:hover:text-primary-dark/100 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
                         }`}
                 >
-                    <span
-                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg md:text-xl' : 'font-semibold text-[17px]'
-                            }`}
-                    >
-                        {title}
-                    </span>
+                    <div className="flex gap-1 items-center">
+                        <div className={isOpen ? 'size-6' : 'size-5'}>{icon}</div>
+                        <span
+                            className={`transition-all leading-tight font-bold ${isOpen ? 'text-base md:text-[17px]' : 'text-[15px] md:text-base'
+                                }`}
+                        >
+                            {title}
+                        </span>
+                        <span>
+                            {startsAt}
+                        </span>
+                    </div>
                     <span>
                         {isOpen ? (
                             <IconMinus className="size-4 inline-block transform rotate-180" />
@@ -1090,7 +1123,9 @@ const PricingExperiment = ({
                             }
                         }}
                         key={index}
+                        icon={item.icon}
                         title={item.title}
+                        startsAt={item.startsAt}
                         isOpen={openIndex === index}
                         onClick={() => {
                             setOpenIndex(openIndex === index ? null : index)
