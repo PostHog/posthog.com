@@ -12,7 +12,7 @@ import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
-import { IconCheck, IconGraph, IconRewindPlay, IconToggle, IconFlask, IconMessage, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar, IconMinus, IconPlus } from '@posthog/icons'
+import { IconCheck, IconGraph, IconRewindPlay, IconToggle, IconFlask, IconMessage, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar, IconMinus, IconPlus, IconChevronDown } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
@@ -23,6 +23,152 @@ import { CallToAction } from 'components/CallToAction'
 import Tabbed from './PricingCalculator/Tabbed'
 import { usePlatform } from './Platform/usePlatform'
 import { motion } from 'framer-motion'
+
+const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
+    const platformAndSupportProduct = billingProducts.find(
+        (product: BillingProductV2Type) => product.type === 'platform_and_support'
+    )
+    const highestSupportPlan = platformAndSupportProduct?.plans?.slice(-1)[0]
+
+    const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
+    return (
+        <>
+            <section className={`${section} mb-12 mt-8 md:px-4`}>
+                <h3 className="border-b border-light dark:border-dark pb-2 mb-6">Platform plans</h3>
+                <p className="text-[15px] text-primary/75 dark:text-primary-dark/75">
+                    All plans include unlimited team members and no limits on tracked users.
+                </p>
+                <div className="col-span-4 -mx-4 lg:mx-0 mb-4 px-4 lg:px-0 overflow-x-auto">
+                    <div
+                        className={`grid grid-cols-[repeat(3,_minmax(260px,_1fr))] xl:max-w-4xl xl:mx-auto gap-4 mb-12 ${highlight === 'free'
+                            ? '[&>*:nth-child(1)_>div]:border-red [&>*:nth-child(1)_>div]:border-3'
+                            : '[&>*:nth-child(2)_>div]:border-red [&>*:nth-child(2)_>div]:border-3'
+                            }`}
+                    >
+                        {planSummary.map((plan, index) => (
+                            <Plan key={index} planData={plan} highlight={plan.intent === highlight} />
+                        ))}
+                    </div>
+                </div>
+                <p
+                    className="text-center text-red dark:text-yellow font-bold cursor-pointer flex items-center justify-center"
+                    onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
+                >
+                    {isPlanComparisonVisible ? (
+                        <>
+                            Hide full plan comparison <IconChevronDown className="w-8 rotate-180" />
+                        </>
+                    ) : (
+                        <>
+                            Show full plan comparison <IconChevronDown className="w-8" />
+                        </>
+                    )}
+                </p>
+            </section>
+
+            <section
+                className={`${section} ${isPlanComparisonVisible
+                    ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
+                    : 'overflow-y-hidden invisible max-h-0 opacity-0'
+                    } transition duration-500 ease-in-out transform`}
+            >
+                <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+                    <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
+                        <div className="col-span-4 px-3 py-1">&nbsp;</div>
+                        {platformAndSupportProduct?.plans
+                            ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                            ?.map((plan: BillingV2PlanType) => (
+                                <div className="col-span-4 px-3 py-1" key={plan.key}>
+                                    <strong className="text-sm opacity-75">{plan.name}</strong>
+                                </div>
+                            ))}
+                    </div>
+
+                    <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
+                        <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                            <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
+                        </div>
+                        {platformAndSupportProduct?.plans
+                            ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                            ?.map((plan: BillingV2PlanType) => {
+                                return (
+                                    <div className="col-span-4 px-3 py-2 text-sm" key={`${plan.key}-base-price`}>
+                                        {plan.included_if === 'no_active_subscription' ? (
+                                            <span>Free forever</span>
+                                        ) : plan.included_if === 'has_subscription' ? (
+                                            <span>$0</span>
+                                        ) : plan.unit_amount_usd ? (
+                                            `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
+                                        ) : plan.contact_support ? (
+                                            'Contact us'
+                                        ) : (
+                                            'Contact us'
+                                        )}
+                                    </div>
+                                )
+                            })}
+                        {highestSupportPlan?.features
+                            ?.filter(
+                                (f: BillingV2FeatureType) =>
+                                    ![
+                                        // TODO: this shouldn't be necessary, update billing products api to include entitlement_only info
+                                        'role_based_access',
+                                        'project_based_permissioning',
+                                        'ingestion_taxonomy',
+                                        'tagging',
+                                    ].includes(f.key)
+                            )
+                            .map((feature: BillingV2FeatureType) => (
+                                <>
+                                    <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                                        {feature.description ? (
+                                            <Tooltip content={feature.description}>
+                                                <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                    {feature.name}
+                                                </strong>
+                                            </Tooltip>
+                                        ) : (
+                                            <strong className="text-primary/75 dark:text-primary-dark/75">
+                                                {feature.name}
+                                            </strong>
+                                        )}
+                                    </div>
+                                    {platformAndSupportProduct?.plans
+                                        ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                                        ?.map((plan: BillingV2PlanType) => {
+                                            const planFeature = plan?.features?.find((f) => f.key === feature.key)
+                                            return (
+                                                <div
+                                                    className="col-span-4 px-3 py-2 text-sm"
+                                                    key={`${plan.key}-${feature.key}`}
+                                                >
+                                                    {planFeature ? (
+                                                        <div className="flex gap-x-2">
+                                                            {planFeature.note ?? (
+                                                                <IconCheck className="w-5 h-5 text-green" />
+                                                            )}
+                                                            {planFeature.limit && (
+                                                                <span className="opacity-75">
+                                                                    <>
+                                                                        {planFeature.limit} {planFeature.unit}
+                                                                    </>
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                </>
+                            ))}
+                    </div>
+                </div>
+            </section>
+        </>
+    )
+}
 
 const tiers = [
     {
@@ -92,7 +238,7 @@ const planSummary = [
         price: 'Free',
         priceSubtitle: '- no credit card required',
         features: [
-            'Generous usage limits on all products',
+            'Generous free monthly tier',
             'Basic product features',
             '1 project',
             '1 year data retention',
@@ -949,19 +1095,19 @@ const PricingExperiment = ({
                     <p className="text-sm opacity-75">No credit card required</p>
 
                     <ul className="list-none p-0 mb-4 space-y-1">
-                        <li className="flex items-center gap-2 text-[15px]">
+                        <li className="flex items-start gap-2 text-sm">
                             <IconCheck className="text-green inline-block size-5" />
                             <span>Generous <button className="text-red dark:text-yellow font-semibold">monthly free tier</button></span>
                         </li>
-                        <li className="flex items-center gap-2 text-[15px]">
+                        <li className="flex items-start gap-2 text-sm">
                             <IconCheck className="text-green inline-block size-5" />
                             Community support
                         </li>
-                        <li className="flex items-center gap-2 text-[15px]">
+                        <li className="flex items-start gap-2 text-sm">
                             <IconCheck className="text-green inline-block size-5" />
                             1 project, 1-year data retention
                         </li>
-                        <li className="flex items-center gap-2 text-[15px]">
+                        <li className="flex items-start gap-2 text-sm">
                             <IconCheck className="text-green inline-block size-5" />
                             Unlimited team members
                         </li>
@@ -1000,23 +1146,23 @@ const PricingExperiment = ({
                     </p>
 
                     <ul className="list-none p-0 mb-4 space-y-1">
-                        <li className="flex items-center gap-2 text-[15px]">
+                        <li className="flex items-start gap-2 text-sm">
                             <IconCheck className="text-green inline-block size-5" />
                             <span>Generous <button className="text-red dark:text-yellow font-semibold">monthly free tier</button></span>
                         </li>
-                        <li className="flex items-center gap-2 text-[15px]">
+                        <li className="flex items-start gap-2 text-sm">
                             <IconCheck className="text-green inline-block size-5" />
                             <span>
-                                <strong className="bg-yellow/50 dark:bg-white/50 p-0.5 font-semibold">Usage-based pricing</strong> after monthly free tier
+                                Then, <strong className="bg-yellow/50 dark:bg-white/50 p-0.5 font-semibold">usage-based pricing</strong>
                             </span>
                         </li>
-                        <li className="flex items-center gap-2 text-[15px]">
+                        <li className="flex items-start gap-2 text-sm">
                             <IconCheck className="text-green inline-block size-5" />
                             <span>
                                 <strong className="bg-yellow/50 dark:bg-white/50 p-0.5 font-semibold">Email</strong> support
                             </span>
                         </li>
-                        <li className="flex items-center gap-2 text-[15px]">
+                        <li className="flex items-start gap-2 text-sm">
                             <IconCheck className="text-green inline-block size-5" />
                             Unlimited team members
                         </li>
@@ -1067,25 +1213,32 @@ const PricingExperiment = ({
                         : 'text-primary/90 hover:text-primary/100 dark:text-primary-dark/90 dark:hover:text-primary-dark/100 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
                         }`}
                 >
-                    <div className="flex gap-1 items-center">
-                        <div className={isOpen ? 'size-6' : 'size-5'}>{icon}</div>
-                        <span
-                            className={`transition-all leading-tight font-bold ${isOpen ? 'text-base md:text-[17px]' : 'text-[15px] md:text-base'
-                                }`}
-                        >
-                            {title}
-                        </span>
+                    <div className="grid grid-cols-12 w-full gap-1 items-center">
+                        <div className="col-span-5">
+                            <div className="flex gap-1 items-center">
+                                <div className={isOpen ? 'size-6' : 'size-5'}>{icon}</div>
+                                <span
+                                    className={`transition-all leading-tight font-bold ${isOpen ? 'text-base md:text-[17px]' : 'text-[15px] md:text-base'
+                                        }`}
+                                >
+                                    {title}
+                                </span>
+                            </div>
+                        </div>
+                        <div className="col-span-6">
+                            <span>
+                                {startsAt}
+                            </span>
+                        </div>
                         <span>
-                            {startsAt}
+                            {isOpen ? (
+                                <IconMinus className="size-4 inline-block transform rotate-180" />
+                            ) : (
+                                <IconPlus className="size-4 inline-block transform rotate-0" />
+                            )}
                         </span>
                     </div>
-                    <span>
-                        {isOpen ? (
-                            <IconMinus className="size-4 inline-block transform rotate-180" />
-                        ) : (
-                            <IconPlus className="size-4 inline-block transform rotate-0" />
-                        )}
-                    </span>
+
                 </button>
                 <motion.div
                     onAnimationComplete={onAnimationComplete}
@@ -1216,14 +1369,21 @@ const PricingExperiment = ({
                         <h4>Usage-based pricing</h4>
                         <p>If your usage goes beyond the free tier limits, we offer <strong>usage-based pricing.</strong> You can set a billing limit for each product so you never get an unexpected bill.</p>
 
-                        <p>Add a credit card and also get:</p>
+                        <p className="mb-3"><strong>Add a <Icons.IconCreditCard className="size-6 inline-block -rotate-6 relative -top-0.5" /> credit card and also get:</strong></p>
 
-                        <ul>
+                        <ul className="mb-4 pl-6">
                             <li>
-
-                                7 projects
+                                <s>1 project</s> <span className="bg-highlight p-0.5 font-bold text-[15px]">7 projects</span>
+                            </li>
+                            <li>
+                                <s>1-year data retention</s> <span className="bg-highlight p-0.5 font-bold text-[15px]">7-year data retention</span>
+                            </li>
+                            <li>
+                                <s>Community support</s> <span className="bg-highlight p-0.5 font-bold text-[15px]">Priority support</span>
                             </li>
                         </ul>
+
+                        <CallToAction size="sm" type="secondary">Pricing calculator</CallToAction>
                     </div>
                 </div>
                 <div>
@@ -1239,6 +1399,11 @@ const PricingExperiment = ({
 
                     <Accordion items={tiers} />
                 </div>
+            </div>
+
+            <div className="px-4">
+                <h3>Compare plans</h3>
+                <PlanColumns billingProducts={billingProducts} highlight="free" />
             </div>
 
 
