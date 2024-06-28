@@ -93,10 +93,9 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false 
                         index === 0
                             ? `First ${formatCompactNumber(up_to)} ${unit}s`
                             : !up_to
-                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
-                            : `${
-                                  formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to).split(/ |k/)[0]
-                              }-${formatCompactNumber(up_to)}`
+                                ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
+                                : `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to).split(/ |k/)[0]
+                                }-${formatCompactNumber(up_to)}`
                     }
                 />
                 {!compact && (
@@ -231,11 +230,15 @@ export const CTA = ({
     ctaText,
     ctaLink,
     intent = '',
+    size = 'md',
+    width = 'auto',
 }: {
     type?: 'primary' | 'secondary'
     ctaText?: string
     ctaLink?: string
     intent?: string
+    size?: string
+    width?: string
 }): JSX.Element => {
     const posthog = usePostHog()
     return (
@@ -246,14 +249,14 @@ export const CTA = ({
                 intent,
             }}
             type={type}
-            size="md"
+            size={size}
+            width={width}
             className="shadow-md !w-auto"
             to={
                 ctaLink
                     ? ctaLink
-                    : `https://${
-                          posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
-                      }.posthog.com/signup`
+                    : `https://${posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
+                    }.posthog.com/signup`
             }
         >
             {ctaText ? ctaText : 'Get started - free'}

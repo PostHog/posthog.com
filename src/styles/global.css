@@ -1554,3 +1554,12 @@ li.squeak-left-border {
 .preserve-3d {
     transform-style: preserve-3d;
 }
+
+button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.panel div:not(.active) {
+    display: none; /* Hide all panels by default */
+}

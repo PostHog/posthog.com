@@ -12,7 +12,7 @@ import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
-import { IconCheck, IconHandMoney, IconInfo, IconRocket } from '@posthog/icons'
+import { IconCheck, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import useProducts from './Products'
@@ -520,9 +520,8 @@ const ProductTabs = ({ billingProducts }) => {
                 )}
 
                 <div
-                    className={`text-center font-semibold text-[15px] mt-4 ${
-                        activeTab === undefined && 'border-t'
-                    } border-light dark:border-dark`}
+                    className={`text-center font-semibold text-[15px] mt-4 ${activeTab === undefined && 'border-t'
+                        } border-light dark:border-dark`}
                 >
                     <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3">
                         <button
@@ -836,12 +835,154 @@ const PricingExperiment = ({
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
+    const ProductHeader = () => {
+        return (
+            <>
+                <h1 className="mb-2">PostHog Cloud</h1>
+                <div className="flex items-center gap-2 mb-4">
+                    <div className="inline-grid grid-cols-5">
+                        <IconStarFilled className="size-5 text-yellow" />
+                        <IconStarFilled className="size-5 text-yellow" />
+                        <IconStarFilled className="size-5 text-yellow" />
+                        <IconStarFilled className="size-5 text-yellow" />
+                        <div className="relative">
+                            <IconStar className="size-5 text-yellow" />
+                            <div className="absolute left-0 top-0 w-2 overflow-hidden">
+                                <IconStarFilled className="size-5 text-yellow" />
+                            </div>
+                        </div>
+                    </div>
+                    <button className="text-red dark:text-yellow text-[15px] font-semibold">507 reviews</button>
+                </div>
+            </>
+        )
+    }
+
+    const FreeTierItem = ({ icon, name, allocation, description }) => {
+        return (
+            <div className="flex flex-col items-center" >
+                {icon}
+                <strong className="text-[15px]">{name}</strong>
+                <div className={`text-sm text-center text-balance leading-none ${description ? 'opacity-75' : 'text-green'}`}>{description ? description : allocation}</div>
+            </div>
+        )
+    }
+
     return (
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
 
-            <section className="w-screen md:w-auto overflow-x-hidden -mx-4 px-4">
+            <div className="md:grid grid-cols-12 mt-8 px-4">
+                <div className="col-span-3 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
+                    <div className="md:hidden mb-2">
+                        <ProductHeader />
+                    </div>
+
+                    <div className="aspect-square bg-accent dark:bg-accent-dark w-full flex items-center justify-center">
+                        image
+                    </div>
+                </div>
+
+                <div className="col-span-6 md:border-b border-light dark:border-dark md:pl-8 md:mr-8">
+
+                    <div className="hidden md:block">
+                        <ProductHeader />
+                    </div>
+
+                    <p className="mb-4">PostHog is designed to grow with you. With 8 products (and counting), go from idea to product/market fit to IPO and beyond. 🚀</p>
+
+                    <p className="mb-4">Our generous free tier means <strong><em>98% of companies use PostHog for free.</em></strong> Only add a card if you need more than the free tier limits or want more projects.</p>
+
+                    <h3 className="mb-0 text-xl">Free</h3>
+                    <p className="text-sm mb-4">No credit card required</p>
+
+                    <ul className="list-none flex gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 mb-6 overflow-x-auto">
+                        <li>
+                            <button className="flex flex-col py-2 px-4 rounded-md border-2 border-yellow bg-white dark:bg-white/5">
+                                <strong className="whitespace-nowrap">Totally free</strong>
+                                <span className="text-sm opacity-75 whitespace-nowrap">Free - no credit card required</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button className="flex flex-col py-2 px-4 rounded-md border-2 border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent">
+                                <strong className="whitespace-nowrap">Ridiculously cheap</strong>
+                                <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div className="border-t border-light dark:border-dark mt-4 py-4">
+                        <div className="flex items-baseline gap-1 mb-3">
+                            <h4 className="mb-0 text-lg">Free tier on all plans</h4>
+                            <span className="opacity-75 text-sm">(resets monthly)</span>
+                        </div>
+
+                        <div className="grid grid-cols-3 md:grid-cols-5 mb-2 gap-4 md:gap-2">
+                            <FreeTierItem name="Analytics" allocation="1M events" icon={<Icons.IconGraph className="text-blue size-5" />} />
+                            <FreeTierItem name="Session replay" allocation="5K recordings" icon={<Icons.IconRewindPlay className="text-yellow size-5" />} />
+                            <FreeTierItem name="Feature flags" allocation="1M requests" icon={<Icons.IconToggle className="text-seagreen size-5" />} />
+                            <FreeTierItem name="A/B testing" description="Billed with feature flags" icon={<Icons.IconFlask className="text-purple size-5" />} />
+                            <FreeTierItem name="Surveys" allocation="250 responses" icon={<Icons.IconMessage className="text-red size-5" />} />
+                        </div>
+                    </div>
+
+                </div>
+
+                <aside className="col-span-3">
+                    <div className="bg-white dark:bg-white/5 h-full rounded-md border border-light dark:border-dark py-4 px-6 flex flex-col justify-between">
+                        <div>
+                            <h4 className="text-xl mb-0">Free</h4>
+                            <p className="text-sm opacity-75">No credit card required</p>
+
+                            <ul className="list-none p-0 mb-4 space-y-1">
+                                <li className="flex items-center gap-2 text-[15px]">
+                                    <IconCheck className="text-green inline-block size-5" />
+                                    <span>Generous <button className="text-red dark:text-yellow font-semibold">monthly free tier</button></span>
+                                </li>
+                                <li className="flex items-center gap-2 text-[15px]">
+                                    <IconCheck className="text-green inline-block size-5" />
+                                    Community support
+                                </li>
+                                <li className="flex items-center gap-2 text-[15px]">
+                                    <IconCheck className="text-green inline-block size-5" />
+                                    1 project, 1-year data retention
+                                </li>
+                                <li className="flex items-center gap-2 text-[15px]">
+                                    <IconCheck className="text-green inline-block size-5" />
+                                    Unlimited team members
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="mt-auto">
+                            <div className="mb-4">
+                                <label className="block opacity-75 text-[15px] mb-1">Cloud region</label>
+                                <div className="flex gap-2">
+                                    <button className="flex-1 flex flex-col items-center py-1.5 px-2 text-sm rounded border border-yellow bg-white dark:bg-white/5 font-bold">
+                                        US (Virginia)
+                                    </button>
+                                    <button className="flex-1 flex flex-col items-center py-1.5 px-2 text-sm rounded border border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent">
+                                        EU (Frankfurt)
+                                    </button>
+                                </div>
+                            </div>
+                            <PlanCTA intent="free" size="lg" width="full" />
+                            <p className="text-sm text-center mt-4 mb-0 opacity-75"><strong>128 companies</strong> signed up today</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <section className="w-screen md:w-auto overflow-x-hidden mt-96 px-4">
                 <div
                     className={`grid md:grid-cols-2 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
                 >
@@ -860,8 +1001,8 @@ const PricingExperiment = ({
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">
                             {currentProduct
                                 ? billingProducts.find((p: BillingProductV2Type) => p.type === currentProduct)?.name ||
-                                  (currentProduct == 'ab_testing' && 'A/B testing') ||
-                                  'Product'
+                                (currentProduct == 'ab_testing' && 'A/B testing') ||
+                                'Product'
                                 : 'Usage-based'}{' '}
                             pricing
                         </h1>
@@ -1055,11 +1196,10 @@ const PricingExperiment = ({
                     </SectionLayout>
 
                     <section
-                        className={`${section} ${
-                            isPlanComparisonVisible
-                                ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
-                                : 'overflow-y-hidden invisible max-h-0 opacity-0'
-                        } transition duration-500 ease-in-out transform`}
+                        className={`${section} ${isPlanComparisonVisible
+                            ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
+                            : 'overflow-y-hidden invisible max-h-0 opacity-0'
+                            } transition duration-500 ease-in-out transform`}
                     >
                         <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                             <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
