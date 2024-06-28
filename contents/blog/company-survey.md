@@ -49,7 +49,7 @@ We don't use AI to summarize these results at our scale as we think it's worth a
 
 We took the scores we received and compared them to Culture Amp’s benchmark for ‘new tech’ companies with less than 200 people. We then took the average score out of 5 and multiplied it by 20 to get a percentage. It’s a bit rough, but is useful for comparing our scores against the industry benchmark. Here's how we compare.
 
-|  | Category | Avg. PostHog score | Benchmark score | Difference |
+| Question | Category | Avg. PostHog score | Benchmark score | Difference |
 |---|---|---|---|---|
 | PostHog is in a position to really succeed over the next three years. | Company Confidence | 90% | 77% | +13% |
 | I understand PostHog's goals and can see how my work contributes to them. | Alignment & Involvement | 95% | 90% | +5% |
