@@ -791,7 +791,7 @@ const PricingExperiment = ({
 
             {!currentProduct && (
                 <>
-                    <div className="md:grid grid-cols-16 my-8 px-4 2xl:px-12">
+                    <div className="md:flex md:flex-wrap md:w-full mdlg:grid grid-cols-16 my-8 px-4 2xl:px-12">
                         <div className="col-span-3 lg:col-span-4 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
                             <div className="md:hidden mb-2">
                                 <ProductHeader />
@@ -802,7 +802,7 @@ const PricingExperiment = ({
                             </div>
                         </div>
 
-                        <div className="@container col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 md:mr-8">
+                        <div className="@container md:flex-1 col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 md:mr-8">
 
                             <div className="hidden md:block">
                                 <ProductHeader />
