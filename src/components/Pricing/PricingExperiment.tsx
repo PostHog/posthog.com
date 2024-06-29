@@ -771,7 +771,7 @@ const PricingExperiment = ({
         return (
             <div className="flex flex-col items-center" >
                 {icon}
-                <strong className="text-[15px]">{name}</strong>
+                <strong className="text-[15px] text-center leading-none mt-2 mb-1">{name}</strong>
                 <div className={`text-sm text-center text-balance leading-none ${description ? 'opacity-75' : 'text-green'}`}>{description ? description : allocation}</div>
             </div>
         )
@@ -791,8 +791,8 @@ const PricingExperiment = ({
 
             {!currentProduct && (
                 <>
-                    <div className="md:grid grid-cols-12 my-8 px-4 2xl:px-12">
-                        <div className="col-span-3 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
+                    <div className="md:grid grid-cols-16 my-8 px-4 2xl:px-12">
+                        <div className="col-span-3 lg:col-span-4 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
                             <div className="md:hidden mb-2">
                                 <ProductHeader />
                             </div>
@@ -802,7 +802,7 @@ const PricingExperiment = ({
                             </div>
                         </div>
 
-                        <div className="col-span-6 md:border-b border-light dark:border-dark md:pl-8 md:mr-8">
+                        <div className="@container col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 md:mr-8">
 
                             <div className="hidden md:block">
                                 <ProductHeader />
@@ -815,28 +815,28 @@ const PricingExperiment = ({
                             <h3 className="mb-0 text-xl">Free</h3>
                             <p className="text-sm mb-4">No credit card required</p>
 
-                            <ul className="list-none flex gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 mb-6 overflow-x-auto">
+                            <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 mb-6 overflow-x-auto">
                                 <li>
-                                    <button onClick={handleFreePlanClick} className={`flex flex-col py-2 px-4 rounded-md border-2 ${activePlan === 'free' ? 'border-yellow bg-white dark:bg-white/5' : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'}`}>
+                                    <button onClick={handleFreePlanClick} className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${activePlan === 'free' ? 'border-yellow bg-white dark:bg-white/5' : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'}`}>
                                         <strong className="whitespace-nowrap">Totally free</strong>
                                         <span className="text-sm opacity-75 whitespace-nowrap">Free - no credit card required</span>
                                     </button>
                                 </li>
                                 <li>
-                                    <button onClick={handlePaidPlanClick} className={`flex flex-col py-2 px-4 rounded-md border-2 ${activePlan === 'free' ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent' : 'border-yellow bg-white dark:bg-white/5'}`}>
+                                    <button onClick={handlePaidPlanClick} className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${activePlan === 'free' ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent' : 'border-yellow bg-white dark:bg-white/5'}`}>
                                         <strong className="whitespace-nowrap">Ridiculously cheap</strong>
                                         <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
                                     </button>
                                 </li>
                             </ul>
 
-                            <div className="border-t border-light dark:border-dark mt-4 py-4">
+                            <div className="@container border-t border-light dark:border-dark mt-4 py-4">
                                 <div className="flex items-baseline gap-1 mb-3">
                                     <h4 className="mb-0 text-lg">Free tier on all plans</h4>
                                     <span className="opacity-75 text-sm">(resets monthly)</span>
                                 </div>
 
-                                <div className="grid grid-cols-3 md:grid-cols-5 mb-2 gap-4 md:gap-2">
+                                <div className="grid grid-cols-3 @lg:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-4">
                                     <FreeTierItem name="Analytics" allocation="1M events" icon={<Icons.IconGraph className="text-blue size-5" />} />
                                     <FreeTierItem name="Session replay" allocation="5K recordings" icon={<Icons.IconRewindPlay className="text-yellow size-5" />} />
                                     <FreeTierItem name="Feature flags" allocation="1M requests" icon={<Icons.IconToggle className="text-seagreen size-5" />} />
@@ -847,7 +847,7 @@ const PricingExperiment = ({
 
                         </div>
 
-                        <aside className="col-span-3">
+                        <aside className="col-span-5 lgxl:col-span-4">
                             <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6 h-full">
                                 <div className="flex flex-col justify-between h-full">
                                     {activePlan === 'free' ? <FreePlanContent /> : <PaidPlanContent />}

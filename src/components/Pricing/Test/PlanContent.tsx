@@ -68,13 +68,13 @@ export const PaidPlanContent = () => {
           <li className="flex items-start gap-2 text-sm">
             <IconCheck className="text-green inline-block size-5" />
             <span>
-              Then, <strong className="bg-yellow/50 dark:bg-white/50 p-0.5 font-semibold">usage-based pricing</strong>
+              Then, <strong className="bg-yellow/50 dark:bg-white/10 p-0.5 font-semibold">usage-based pricing</strong>
             </span>
           </li>
           <li className="flex items-start gap-2 text-sm">
             <IconCheck className="text-green inline-block size-5" />
             <span>
-              <strong className="bg-yellow/50 dark:bg-white/50 p-0.5 font-semibold">Email</strong> support
+              <strong className="bg-yellow/50 dark:bg-white/10 p-0.5 font-semibold">Email</strong> support
             </span>
           </li>
           <li className="flex items-start gap-2 text-sm">
