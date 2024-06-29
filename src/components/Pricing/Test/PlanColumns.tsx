@@ -153,25 +153,25 @@ const planSummary = [
 
 const AllPlansInclude = () => {
   return (
-    <div className="inline-flex flex-col">
-      <p className="font-bold text-[15px] mt-4 mb-2">
+    <div className="inline-flex xl:inline-flex w-full flex-col md:flex-row xl:flex-col md:gap-12 lg:gap-6 xl:gap-2">
+      <p className="font-bold text-[15px] xl:mt-4 mb-2 lg:mb-0">
         All plans include:
       </p>
-      <ul className="list-none pl-2 space-y-1">
-        <li className="flex gap-1 items-center text-[15px]">
-          <IconCheck className="w-5 h-5 text-green" />
+      <ul className="flex-1 list-none pl-0 xs:grid grid-cols-2 lg:flex gap-x-4 xs:gap-x-2 md:gap-x-6 xl:gap-x-4 gap-y-2 xl:gap-1 xl:flex-col">
+        <li className="flex gap-1 items-start text-[15px]">
+          <IconCheck className="w-5 h-5 text-green relative top-0.5" />
           Unlimited team members
         </li>
-        <li className="flex gap-1 items-center text-[15px]">
-          <IconCheck className="w-5 h-5 text-green" />
+        <li className="flex gap-1 items-start text-[15px]">
+          <IconCheck className="w-5 h-5 text-green relative top-0.5" />
           No limits on tracked users
         </li>
-        <li className="flex gap-1 items-center text-[15px]">
-          <IconCheck className="w-5 h-5 text-green" />
+        <li className="flex gap-1 items-start text-[15px]">
+          <IconCheck className="w-5 h-5 text-green relative top-0.5" />
           API access
         </li>
-        <li className="flex gap-1 items-center text-[15px]">
-          <IconCheck className="w-5 h-5 text-green" />
+        <li className="flex gap-1 items-start text-[15px]">
+          <IconCheck className="w-5 h-5 text-green relative top-0.5" />
           Google, Github, and Gitlab SSO
         </li>
       </ul>
@@ -192,7 +192,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
         <SectionHeader>
           <h3>Compare plans</h3>
         </SectionHeader>
-        <div className="mt-4 -mx-4 lg:mx-0 px-4 lg:px-0 overflow-x-auto">
+        <div className="mt-4 -mx-4 lg:mx-0 px-4 lg:px-0 mb-4 lg:mb-0 overflow-x-auto">
           <div className="pt-6 pb-2">
             <div
               className={`grid grid-cols-[repeat(3,_minmax(300px,_1fr))] md:grid-cols-[repeat(3,_minmax(300px,_1fr))_1fr] gap-4 mb-4 ${highlight === 'free'
@@ -203,13 +203,13 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
               {planSummary.map((plan, index) => (
                 <Plan key={index} planData={plan} highlight={plan.intent === highlight} />
               ))}
-              <div className="hidden md:flex justify-center col-span-3 md:col-span-1">
+              <div className="hidden xl:flex justify-center col-span-3 md:col-span-1">
                 <AllPlansInclude />
               </div>
             </div>
           </div>
         </div >
-        <div className="md:hidden mb-8">
+        <div className="xl:hidden mb-8">
           <AllPlansInclude />
         </div>
         <p

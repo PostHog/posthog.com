@@ -19,7 +19,7 @@ export const Addons = (props) => {
         <h3 className="mb-2">Add-ons</h3>
         <p>We've moved specialized functionality into add-ons so you never pay for things you don't need.</p>
       </SectionHeader>
-      <div className="mt-4 -mx-4 lg:mx-0 px-4 lg:px-0 overflow-x-auto">
+      <div className="mt-4 -mx-4 px-4 overflow-x-auto">
 
 
         <div className="grid grid-flow-col auto-cols-max gap-4 mb-4">
@@ -27,7 +27,7 @@ export const Addons = (props) => {
             // Assuming Icons object is available and contains all necessary icons
             const Icon = Icons[icon_key];
             return (
-              <div key={name} className="bg-white dark:bg-white/5 border border-light dark:border-dark p-4 rounded max-w-2xs md:max-w-xs flex flex-col">
+              <div key={name} className="bg-white dark:bg-white/5 border border-light dark:border-dark p-4 rounded max-w-2xs lg:max-w-xs flex flex-col">
                 <div className="flex gap-1 items-center mb-2">
                   <Icon className="w-6 h-6 opacity-75" />
                   <div className="font-bold">{name}</div>
