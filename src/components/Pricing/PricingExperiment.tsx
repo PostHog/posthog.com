@@ -788,177 +788,90 @@ const PricingExperiment = ({
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
 
-            <div className="md:grid grid-cols-12 my-8 px-4 2xl:px-12">
-                <div className="col-span-3 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
-                    <div className="md:hidden mb-2">
-                        <ProductHeader />
-                    </div>
-
-                    <div className="aspect-square bg-accent dark:bg-accent-dark w-full flex items-center justify-center">
-                        image
-                    </div>
-                </div>
-
-                <div className="col-span-6 md:border-b border-light dark:border-dark md:pl-8 md:mr-8">
-
-                    <div className="hidden md:block">
-                        <ProductHeader />
-                    </div>
-
-                    <p className="mb-4">PostHog is designed to grow with you. With 8 products (and counting), go from idea to product/market fit to IPO and beyond. 🚀</p>
-
-                    <p className="mb-4">Our generous free tier means <strong><em>98% of companies use PostHog for free.</em></strong> Only add a card if you need more than the free tier limits or want more projects.</p>
-
-                    <h3 className="mb-0 text-xl">Free</h3>
-                    <p className="text-sm mb-4">No credit card required</p>
-
-                    <ul className="list-none flex gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 mb-6 overflow-x-auto">
-                        <li>
-                            <button onClick={handleFreePlanClick} className={`flex flex-col py-2 px-4 rounded-md border-2 ${activePlan === 'free' ? 'border-yellow bg-white dark:bg-white/5' : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'}`}>
-                                <strong className="whitespace-nowrap">Totally free</strong>
-                                <span className="text-sm opacity-75 whitespace-nowrap">Free - no credit card required</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button onClick={handlePaidPlanClick} className={`flex flex-col py-2 px-4 rounded-md border-2 ${activePlan === 'free' ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent' : 'border-yellow bg-white dark:bg-white/5'}`}>
-                                <strong className="whitespace-nowrap">Ridiculously cheap</strong>
-                                <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
-                            </button>
-                        </li>
-                    </ul>
-
-                    <div className="border-t border-light dark:border-dark mt-4 py-4">
-                        <div className="flex items-baseline gap-1 mb-3">
-                            <h4 className="mb-0 text-lg">Free tier on all plans</h4>
-                            <span className="opacity-75 text-sm">(resets monthly)</span>
-                        </div>
-
-                        <div className="grid grid-cols-3 md:grid-cols-5 mb-2 gap-4 md:gap-2">
-                            <FreeTierItem name="Analytics" allocation="1M events" icon={<Icons.IconGraph className="text-blue size-5" />} />
-                            <FreeTierItem name="Session replay" allocation="5K recordings" icon={<Icons.IconRewindPlay className="text-yellow size-5" />} />
-                            <FreeTierItem name="Feature flags" allocation="1M requests" icon={<Icons.IconToggle className="text-seagreen size-5" />} />
-                            <FreeTierItem name="A/B testing" description="Billed with feature flags" icon={<Icons.IconFlask className="text-purple size-5" />} />
-                            <FreeTierItem name="Surveys" allocation="250 responses" icon={<Icons.IconMessage className="text-red size-5" />} />
-                        </div>
-                    </div>
-
-                </div>
-
-                <aside className="col-span-3">
-                    <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6 h-full">
-                        <div className="flex flex-col justify-between h-full">
-                            {activePlan === 'free' ? <FreePlanContent /> : <PaidPlanContent />}
-                        </div>
-                    </div>
-                </aside>
-            </div>
-
-            <PaidPricing />
-
-
-            <PlanColumns billingProducts={billingProducts} highlight="free" />
-
-            <Addons />
-            <SimilarProducts />
-            <Reviews />
-
-
-
-
-
-
-
-            <section className="w-screen md:w-auto overflow-x-hidden mt-96 px-4">
-                <div
-                    className={`grid md:grid-cols-2 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
-                >
-                    <div className="md:order-2">
-                        <div className="scale-[1.75] sm:scale-[1.4] md:scale-[1.1] lg:scale-[1.1] py-8 pl-20 sm:pl-28 md:p-0 md:scale-110 -mr-0 md:-mr-56 lg:-mr-64 xl:-mr-80 ">
-                            <Lottie
-                                options={{
-                                    loop: false,
-                                    autoplay: true,
-                                    animationData: tractorHog,
-                                }}
-                            />
-                        </div>
-                    </div>
-                    <div className="md:order-1">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">
-                            {currentProduct
-                                ? billingProducts.find((p: BillingProductV2Type) => p.type === currentProduct)?.name ||
-                                (currentProduct == 'ab_testing' && 'A/B testing') ||
-                                'Product'
-                                : 'Usage-based'}{' '}
-                            pricing
-                        </h1>
-                        <p className="text-base font-medium opacity-60 leading-tight mb-4">
-                            PostHog offers usage-based pricing, not{' '}
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-sm">
-                                        <strong className="block text-lg mb-1">What is value-based pricing?</strong>
-                                        <p className="mb-2 text-sm">
-                                            <em>Value-based pricing</em> is geared around testing how much money you're
-                                            willing to pay.
-                                        </p>
-                                        <p className="mb-0 text-sm">
-                                            <em>Usage-based pricing</em> is like a utility - where we continually seek
-                                            to lower costs and make money through volume.
-                                        </p>
-                                    </div>
-                                )}
-                                placement="right"
-                            >
-                                <span className="border-b border-dashed border-primary/50 dark:border-primary-dark/50">
-                                    value-based pricing
-                                </span>
-                            </Tooltip>
-                            .
-                        </p>
-                        <p className="text-base font-medium opacity-60 leading-tight">
-                            Enjoy a generous free tier every month.
-                        </p>
-                        <div className="flex gap-4 items-center">
-                            <div>
-                                <PlanCTA />
-                            </div>
-                            <div>
-                                <span className="text-sm opacity-70">No credit card required</span>
-                                <Tooltip
-                                    content={() => (
-                                        <div className="max-w-[300px] pb-2">
-                                            <p className="mb-1">
-                                                <strong>Totally free</strong>{' '}
-                                                <span className="opacity-70 text-sm italic">
-                                                    - no credit card required
-                                                </span>
-                                            </p>
-                                            <ul className="pl-0 pb-2 list-none [&_li]:text-[15px] opacity-70">
-                                                <li>Usage capped at free tier limits</li>
-                                                <li>Basic product features</li>
-                                                <li>1 project</li>
-                                                <li>1-year data retention</li>
-                                                <li>Community support</li>
-                                            </ul>
-                                            <PlanCTA intent="free" />
-                                        </div>
-                                    )}
-                                    placement="right"
-                                >
-                                    <IconInfo className="size-5 inline-block opacity-60 hover:opacity-75 ml-0.5 -mt-0.5" />
-                                </Tooltip>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {!currentProduct && (
                 <>
-                    <section className={`${section} mb-12 mt-8 md:px-4`}>
-                        <ProductTabs billingProducts={billingProducts} />
-                    </section>
+                    <div className="md:grid grid-cols-12 my-8 px-4 2xl:px-12">
+                        <div className="col-span-3 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
+                            <div className="md:hidden mb-2">
+                                <ProductHeader />
+                            </div>
+
+                            <div className="aspect-square bg-accent dark:bg-accent-dark w-full flex items-center justify-center">
+                                image
+                            </div>
+                        </div>
+
+                        <div className="col-span-6 md:border-b border-light dark:border-dark md:pl-8 md:mr-8">
+
+                            <div className="hidden md:block">
+                                <ProductHeader />
+                            </div>
+
+                            <p className="mb-4">PostHog is designed to grow with you. With 8 products (and counting), go from idea to product/market fit to IPO and beyond. 🚀</p>
+
+                            <p className="mb-4">Our generous free tier means <strong><em>98% of companies use PostHog for free.</em></strong> Only add a card if you need more than the free tier limits or want more projects.</p>
+
+                            <h3 className="mb-0 text-xl">Free</h3>
+                            <p className="text-sm mb-4">No credit card required</p>
+
+                            <ul className="list-none flex gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 mb-6 overflow-x-auto">
+                                <li>
+                                    <button onClick={handleFreePlanClick} className={`flex flex-col py-2 px-4 rounded-md border-2 ${activePlan === 'free' ? 'border-yellow bg-white dark:bg-white/5' : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'}`}>
+                                        <strong className="whitespace-nowrap">Totally free</strong>
+                                        <span className="text-sm opacity-75 whitespace-nowrap">Free - no credit card required</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button onClick={handlePaidPlanClick} className={`flex flex-col py-2 px-4 rounded-md border-2 ${activePlan === 'free' ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent' : 'border-yellow bg-white dark:bg-white/5'}`}>
+                                        <strong className="whitespace-nowrap">Ridiculously cheap</strong>
+                                        <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <div className="border-t border-light dark:border-dark mt-4 py-4">
+                                <div className="flex items-baseline gap-1 mb-3">
+                                    <h4 className="mb-0 text-lg">Free tier on all plans</h4>
+                                    <span className="opacity-75 text-sm">(resets monthly)</span>
+                                </div>
+
+                                <div className="grid grid-cols-3 md:grid-cols-5 mb-2 gap-4 md:gap-2">
+                                    <FreeTierItem name="Analytics" allocation="1M events" icon={<Icons.IconGraph className="text-blue size-5" />} />
+                                    <FreeTierItem name="Session replay" allocation="5K recordings" icon={<Icons.IconRewindPlay className="text-yellow size-5" />} />
+                                    <FreeTierItem name="Feature flags" allocation="1M requests" icon={<Icons.IconToggle className="text-seagreen size-5" />} />
+                                    <FreeTierItem name="A/B testing" description="Billed with feature flags" icon={<Icons.IconFlask className="text-purple size-5" />} />
+                                    <FreeTierItem name="Surveys" allocation="250 responses" icon={<Icons.IconMessage className="text-red size-5" />} />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <aside className="col-span-3">
+                            <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6 h-full">
+                                <div className="flex flex-col justify-between h-full">
+                                    {activePlan === 'free' ? <FreePlanContent /> : <PaidPlanContent />}
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+
+                    <PaidPricing />
+
+
+                    <PlanColumns billingProducts={billingProducts} highlight="free" />
+
+                    <Addons />
+                    <SimilarProducts />
+                    <Reviews />
+
+
+
+
+
+
+
+
 
                     <SectionLayout>
                         <SectionHeader>
@@ -1023,202 +936,6 @@ const PricingExperiment = ({
                                 <PlanCTA />
                             </div>
                         </div>
-                    </SectionLayout>
-
-                    <SectionLayout>
-                        <SectionHeader>
-                            <h3>One plan for most customers</h3>
-                        </SectionHeader>
-
-                        <SectionColumns>
-                            <SectionMainCol>
-                                <PlansTabs />
-                            </SectionMainCol>
-                            <SectionSidebar className="justify-between">
-                                <div>
-                                    <h4 className="text-lg mb-2">Plan FYIs</h4>
-                                    <SidebarList>
-                                        <SidebarListItem>
-                                            Self-serve, no upsells, no need to "talk to sales"
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            We don't do outbound sales. Everyone pays the same rates.
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            You can set billing limits per product so you never get a surprise bill
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            90% of our customers don't pay anything to use PostHog!
-                                            <Tooltip
-                                                content={() => (
-                                                    <div className="max-w-[300px]">
-                                                        <p className="mb-1">
-                                                            <strong>... and we're cool with it!</strong>
-                                                        </p>
-                                                        <p className="text-[15px] mb-0">
-                                                            Use PostHog for free within our generous free tier limits.
-                                                            Exceed the free tier limits and you'll only pay for what you
-                                                            use.
-                                                        </p>
-                                                    </div>
-                                                )}
-                                                placement="bottom"
-                                            >
-                                                <IconInfo className="size-4 inline-block ml-0.5 -mt-0.5" />
-                                            </Tooltip>{' '}
-                                        </SidebarListItem>
-                                    </SidebarList>
-                                </div>
-                                <div>
-                                    <button
-                                        onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
-                                        className="text-red dark:text-yellow font-semibold cursor-pointer"
-                                    >
-                                        {isPlanComparisonVisible ? 'Hide' : 'Show'} full plan comparison
-                                    </button>
-                                </div>
-                            </SectionSidebar>
-                        </SectionColumns>
-                    </SectionLayout>
-
-                    <section
-                        className={`${section} ${isPlanComparisonVisible
-                            ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
-                            : 'overflow-y-hidden invisible max-h-0 opacity-0'
-                            } transition duration-500 ease-in-out transform`}
-                    >
-                        <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
-                            <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
-                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-1">&nbsp;</div>
-                                {platformAndSupportProduct?.plans
-                                    ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                    ?.map((plan: BillingV2PlanType) => (
-                                        <div className="col-span-4 px-3 py-1" key={plan.key}>
-                                            <strong className="text-sm opacity-75">{plan.name}</strong>
-                                        </div>
-                                    ))}
-                            </div>
-
-                            <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
-                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                    <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
-                                </div>
-                                {platformAndSupportProduct?.plans
-                                    ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                    ?.map((plan: BillingV2PlanType) => {
-                                        return (
-                                            <div
-                                                className="col-span-4 px-3 py-2 text-sm"
-                                                key={`${plan.key}-base-price`}
-                                            >
-                                                {plan.included_if === 'no_active_subscription' ? (
-                                                    <span>Free forever</span>
-                                                ) : plan.included_if === 'has_subscription' ? (
-                                                    <span>$0</span>
-                                                ) : plan.unit_amount_usd ? (
-                                                    `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
-                                                ) : plan.contact_support ? (
-                                                    'Contact us'
-                                                ) : (
-                                                    'Contact us'
-                                                )}
-                                            </div>
-                                        )
-                                    })}
-                                {highestSupportPlan?.features
-                                    ?.filter(
-                                        (f: BillingV2FeatureType) =>
-                                            ![
-                                                // TODO: this shouldn't be necessary, update billing products api to include entitlement_only info
-                                                'role_based_access',
-                                                'project_based_permissioning',
-                                                'ingestion_taxonomy',
-                                                'tagging',
-                                            ].includes(f.key)
-                                    )
-                                    .map((feature: BillingV2FeatureType) => (
-                                        <>
-                                            <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                                {feature.description ? (
-                                                    <Tooltip content={feature.description}>
-                                                        <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
-                                                            {feature.name}
-                                                        </strong>
-                                                    </Tooltip>
-                                                ) : (
-                                                    <strong className="text-primary/75 dark:text-primary-dark/75">
-                                                        {feature.name}
-                                                    </strong>
-                                                )}
-                                            </div>
-                                            {platformAndSupportProduct?.plans
-                                                ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                                ?.map((plan: BillingV2PlanType) => {
-                                                    const planFeature = plan?.features?.find(
-                                                        (f) => f.key === feature.key
-                                                    )
-                                                    return (
-                                                        <div
-                                                            className="col-span-4 px-3 py-2 text-sm"
-                                                            key={`${plan.key}-${feature.key}`}
-                                                        >
-                                                            {planFeature ? (
-                                                                <div className="flex gap-x-2">
-                                                                    {planFeature.note ?? (
-                                                                        <IconCheck className="w-5 h-5 text-green" />
-                                                                    )}
-                                                                    {planFeature.limit && (
-                                                                        <span className="opacity-75">
-                                                                            <>
-                                                                                {planFeature.limit} {planFeature.unit}
-                                                                            </>
-                                                                        </span>
-                                                                    )}
-                                                                </div>
-                                                            ) : (
-                                                                <></>
-                                                            )}
-                                                        </div>
-                                                    )
-                                                })}
-                                        </>
-                                    ))}
-                            </div>
-                            <div className="grid grid-cols-16 min-w-[1000px]">
-                                <div className="col-span-4 px-3 py-2 text-sm">&nbsp;</div>
-                                <div className="col-span-4 px-3 py-2">
-                                    <PlanCTA intent="free" />
-                                </div>
-                                <div className="col-span-4 px-3 py-2">
-                                    <PlanCTA intent="paid" />
-                                </div>
-                                <div className="col-span-4 px-3 py-2">
-                                    <PlanCTA intent="enterprise" ctaText="Get in touch" ctaLink="/talk-to-a-human" />
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <SectionLayout id="add-ons">
-                        <SectionHeader>
-                            <h3>Add-ons</h3>
-                        </SectionHeader>
-
-                        <SectionColumns>
-                            <SectionMainCol>
-                                <AllAddons />
-                            </SectionMainCol>
-                            <SectionSidebar>
-                                <h4 className="text-lg mb-0">Why add-ons?</h4>
-                                <SidebarList>
-                                    <SidebarListItem>
-                                        We move additional functionality to add-ons to keep our base prices low. This is
-                                        so you never pay for functionality you don't want or need.
-                                    </SidebarListItem>
-                                    <SidebarListItem>Subscribe to add-ons after signing up.</SidebarListItem>
-                                </SidebarList>
-                            </SectionSidebar>
-                        </SectionColumns>
                     </SectionLayout>
 
                     <section className="bg-white text-dark shadow-xl rounded pt-6 pb-2 md:py-8 px-8 md:px-12 mx-6 md:mx-auto w-[calc(100%_-_3rem)] md:w-full max-w-3xl -rotate-1">
