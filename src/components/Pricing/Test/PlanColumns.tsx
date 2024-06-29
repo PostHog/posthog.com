@@ -153,7 +153,7 @@ const planSummary = [
 
 const AllPlansInclude = () => {
   return (
-    <div className="inline-flex xl:inline-flex w-full flex-col md:flex-row xl:flex-col md:gap-12 lg:gap-6 xl:gap-2">
+    <div className="inline-flex xl:inline-flex w-full flex-col md:flex-row xl:flex-col md:gap-12 lg:gap-6 xl:gap-2 xl:pl-6">
       <p className="font-bold text-[15px] xl:mt-4 mb-2 lg:mb-0">
         All plans include:
       </p>
