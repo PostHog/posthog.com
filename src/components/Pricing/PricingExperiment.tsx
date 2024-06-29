@@ -28,6 +28,7 @@ import { FreePlanContent, PaidPlanContent } from './Test/PlanContent'
 import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, SectionSidebar } from './Test/Sections'
 import { PaidPricing } from './Test/PaidPricing'
 import { Addons } from './Test/Addons'
+import { SimilarProducts } from './Test/SimilarProducts'
 
 const SidebarList = ({ children }) => <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 
@@ -857,6 +858,7 @@ const PricingExperiment = ({
             <PlanColumns billingProducts={billingProducts} highlight="free" />
 
             <Addons />
+            <SimilarProducts />
 
 
 
