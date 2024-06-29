@@ -29,6 +29,7 @@ import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, 
 import { PaidPricing } from './Test/PaidPricing'
 import { Addons } from './Test/Addons'
 import { SimilarProducts } from './Test/SimilarProducts'
+import { Reviews } from './Test/Reviews'
 
 const SidebarList = ({ children }) => <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 
@@ -859,6 +860,7 @@ const PricingExperiment = ({
 
             <Addons />
             <SimilarProducts />
+            <Reviews />
 
 
 
