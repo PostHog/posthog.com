@@ -1,6 +1,6 @@
 ---
 title: How to A/B test LLM models and prompts
-date: 2024-02-06
+date: 2024-07-01
 author:
   - lior-neu-ner
 tags:
@@ -217,8 +217,6 @@ Restart your app and test everything is working by clicking the **Yes** and **No
 />
 
 ## 4. Create an A/B test in PostHog
-
-> If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
 
 We're going to create a [multivariate experiment](/product-engineers/what-is-multivariate-testing-examples) that tests both the model and prompt. It will have the following variants:
 
