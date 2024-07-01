@@ -7,15 +7,19 @@ tags:
   - experimentation
 ---
 
-A/B tests enable you to compare how changes to LLM models and prompts affect your app. In this tutorial we'll show you how to set one up to effectively evaluate your LLM improvements.
+A/B tests enable you to compare how changes to LLM models and prompts affect your app. In this tutorial, we'll show you how to set one up to effectively evaluate your LLM improvements.
 
 We set up a basic Next.js app, add PostHog, create A/B tests, and implement the code for them.
 
-> While this tutorial focuses on [Next.js](/docs/libraries/next-js) and [Node](/docs/libraries/node), PostHog supports many different [SDKs](/docs/libraries) and [frameworks](/docs/frameworks). The concepts in this tutorial similarly apply to all our supported SDKs and frameworks. 
+> While this tutorial focuses on [Next.js](/docs/libraries/next-js) and [Node](/docs/libraries/node), PostHog supports many different [SDKs](/docs/libraries) and [frameworks](/docs/frameworks). The concepts in this tutorial apply to all our supported SDKs and frameworks. 
 
 ## 1. Download the sample app
 
 We've created a basic recipe builder app for this tutorial. You can download it from [Github](https://github.com/PostHog/llm-ab-tests-sample-app). 
+
+```bash
+git clone https://github.com/PostHog/llm-ab-tests-sample-app
+/```
 
 To set your app up, first ensure [Node](https://nodejs.dev/en/learn/how-to-install-nodejs/) is install. Then run `npm install` to install all dependencies. 
 
@@ -37,15 +41,15 @@ Run `npm run dev` and go to `http://localhost:3000` to everything in action. The
 
 - Once they've received the recipe, they can rate the response.
 
-- API calls to the LLM are made in `src/app/api/generate-recipe/route.js`. We're using chatGPT for this tutorial, but you can use any LLM you like.
+- API calls to the LLM are made in `src/app/api/generate-recipe/route.js`. We're using ChatGPT for this tutorial, but you can use any LLM you like.
 
 ![Recipe builder LLM app](https://res.cloudinary.com/dmukukwp6/video/upload/v1719491832/posthog.com/contents/smaple-app.mp4)
 
 ## 2. Add PostHog to your app
 
-With our app set up, it’s time to install and set up PostHog. We install both the [JavaScript web SDK](/docs/libraries/js) and the [Node SDK](/docs/libraries/node):
+With our app set up, it’s time to install and set up PostHog. We install both the [JavaScript Web](/docs/libraries/js) and [Node](/docs/libraries/node) SDKs:
 
-- The **JavaScript web SDK** runs client-side. We use this to capture user evaluations for the helpfulness of the recipes.
+- The **JavaScript Web SDK** runs client-side. We use this to capture user evaluations for the helpfulness of the recipes.
 - The **Node SDK** runs server-side. We use this to implement our A/B test code since our LLM requests run in the backend.
 
 Run the following commands in your root directory:
@@ -75,9 +79,9 @@ export function PHProvider({ children }) {
 }
 ```
 
-Add your PostHog API key and host to the above code. You can find them in your [project settings](https://app.posthog.com/settings/project).
+Add your PostHog API key and host to the above code. You can find them in your [project settings](https://us.posthog.com/settings/project).
 
-Next we import the `PHProvider` component into our `app/layout.js` and wrap our app with it:
+Next, we import the `PHProvider` component into our `app/layout.js` and wrap our app with it:
 
 ```js file=app/layout.js
 import "./globals.css";
@@ -109,9 +113,6 @@ Lastly, to set PostHog up in our server-side API route, import `posthog-node` an
 import OpenAI from 'openai';
 import { PostHog } from 'posthog-node'
 
-import OpenAI from 'openai';
-import { PostHog } from 'posthog-node'
-
 const openai = new OpenAI({
   apiKey: "YOUR_API_KEY",
 });
@@ -136,7 +137,7 @@ Update the code in `recipe-builder/page.js` to import the [`usePostHog()`](/docs
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { usePostHog } from 'posthog-js/react';
 
 export default function RecipeBuilder() {
@@ -163,7 +164,9 @@ export default function RecipeBuilder() {
   // rest of your existing code
 ```
 
-Next, we want to make sure we attribute these events to the user who submitted them. This ensures our A/B test results are accurate. To do this, we call [`posthog.identify()`](https://posthog.com/docs/product-analytics/identify) with the user's email. This links any captured events to them.
+Next, we want to make sure we attribute these events to the user who submitted them. This ensures our A/B test results are accurate. 
+
+To do this, we call [`posthog.identify()`](/docs/product-analytics/identify) with the user's email. This links any captured events to the user.
 
 Update the code `src/app/page.js` to import the `usePostHog` hook and call `identify` inside the `handleLogin` function:
 
