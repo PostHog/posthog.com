@@ -139,6 +139,7 @@
         "react-fast-marquee": "^1.5.2",
         "react-github-btn": "^1.2.1",
         "react-helmet": "^5.2.1",
+        "react-instantsearch": "^7.7.2",
         "react-instantsearch-hooks-web": "^6.38.1",
         "react-intersection-observer": "^8.32.1",
         "react-lottie": "^1.2.3",

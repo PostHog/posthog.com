@@ -6,16 +6,18 @@ import Authentication from './Authentication'
 import Avatar from './Avatar'
 import RichText from './RichText'
 import getAvatarURL from '../util/getAvatar'
-import { usePost } from 'components/PostLayout/hooks'
 import qs from 'qs'
 import Button from './Button'
 import uploadImage from '../util/uploadImage'
 import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
-import Spinner from 'components/Spinner'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
+import SearchResults from './SearchResults'
+import { IconBook } from '@posthog/icons'
+import Tooltip from 'components/Tooltip'
+import { motion } from 'framer-motion'
 
 type QuestionFormValues = {
     subject: string
@@ -75,7 +77,7 @@ export const Select = ({
                     <Chevron className="w-2.5" />
                 </Listbox.Button>
                 {topicGroups?.length > 0 && (
-                    <Listbox.Options className="list-none p-0 m-0 absolute z-20 bg-white dark:bg-gray-accent-dark-hover w-full max-h-[247px] overflow-auto shadow-md rounded-br-md rounded-bl-md border-t divide-y border-black/30 dark:border-primary-dark/30 divide-black/30 dark:divide-primary-dark/30">
+                    <Listbox.Options className="list-none p-0 m-0 absolute z-40 bg-white dark:bg-gray-accent-dark-hover w-full max-h-[247px] overflow-auto shadow-md rounded-br-md rounded-bl-md border-t divide-y border-black/30 dark:border-primary-dark/30 divide-black/30 dark:divide-primary-dark/30 ">
                         {topicGroups
                             .sort(
                                 (a, b) =>
@@ -113,6 +115,16 @@ export const Select = ({
     )
 }
 
+const ArticleIcon = ({ active }) => {
+    return (
+        <Tooltip content={`Article suggestions: ${active ? 'ON' : 'OFF'}`} placement="top">
+            <span className="relative">
+                <IconBook />
+            </span>
+        </Tooltip>
+    )
+}
+
 function QuestionFormMain({
     title,
     onSubmit,
@@ -123,6 +135,7 @@ function QuestionFormMain({
     disclaimer = true,
 }: QuestionFormMainProps) {
     const posthog = usePostHog()
+    const [showArticleSuggestions, setShowArticleSuggestions] = useState(true)
     const { user, logout } = useUser()
 
     return (
@@ -169,16 +182,43 @@ function QuestionFormMain({
                                 {showTopicSelector && <Select value={values.topic} setFieldValue={setFieldValue} />}
                                 {subject && (
                                     <>
-                                        <Field
-                                            autoFocus
-                                            className="font-semibold text-black dark:text-primary-dark dark:bg-accent-dark border-b border-light dark:border-dark text-base w-full py-3 px-4 outline-none rounded-none"
-                                            onBlur={(e) => e.preventDefault()}
-                                            required
-                                            id="subject"
-                                            name="subject"
-                                            placeholder="Title"
-                                            maxLength="140"
-                                        />
+                                        <div className="relative">
+                                            <Field
+                                                autoFocus
+                                                className="font-semibold text-black dark:text-primary-dark dark:bg-accent-dark border-b border-light dark:border-dark text-base w-full py-3 px-4 outline-none rounded-none"
+                                                onBlur={(e) => e.preventDefault()}
+                                                required
+                                                id="subject"
+                                                name="subject"
+                                                placeholder="Title"
+                                                maxLength="140"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={(e) => {
+                                                    e.stopPropagation()
+                                                    setShowArticleSuggestions(!showArticleSuggestions)
+                                                }}
+                                                className={`absolute top-1/2 right-2 transform -translate-y-1/2 w-5 p-1 box-content border border-white/0 flex justify-center items-center z-30 ${
+                                                    showArticleSuggestions ? '' : 'opacity-60'
+                                                }`}
+                                            >
+                                                <ArticleIcon active={showArticleSuggestions} />
+                                            </button>
+                                        </div>
+
+                                        <motion.div
+                                            initial={{ height: 0 }}
+                                            animate={{
+                                                transition: { type: 'tween', duration: 0.2 },
+                                                height: values.subject.trim() && showArticleSuggestions ? 'auto' : 0,
+                                                opacity: values.subject.trim() && showArticleSuggestions ? 1 : 0,
+                                            }}
+                                            className="border-b border-border dark:border-dark"
+                                        >
+                                            <SearchResults query={values.subject} />
+                                        </motion.div>
+
                                         <hr />
                                     </>
                                 )}
