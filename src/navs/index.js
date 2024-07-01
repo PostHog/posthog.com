@@ -2746,6 +2746,32 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/setup',
                     icon: 'IconBook',
                     color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/setup',
+                        },
+                        {
+                            name: 'Stripe',
+                            url: '/docs/data-warehouse/setup/stripe',
+                        },
+                        {
+                            name: 'Hubspot',
+                            url: '/docs/data-warehouse/setup/hubspot',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/data-warehouse/setup/zendesk',
+                        },
+                        {
+                            name: 'Postgres',
+                            url: '/docs/data-warehouse/setup/postgres',
+                        },
+                        {
+                            name: 'S3',
+                            url: '/docs/data-warehouse/setup/s3',
+                        },
+                    ],
                 },
                 {
                     name: 'Query your sources',
