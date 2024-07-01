@@ -291,10 +291,10 @@ const TabContent = ({ activeProduct, addons, setAddons, totalPrice }) => {
     return (
         <>
             <SideModal open={modalOpen} setOpen={setModalOpen}>
-                <h3 className="mb-2">Save money if you don't need PII</h3>
-                <p className="font-semibold opacity-70 text-[15px]">(Personally-identifiable information is more expensive to process)</p>
-                <p>The more data we store about users, the higher the cost. So the less data you need, the more you can save.</p>
-                <p>You can track users in two ways:</p>
+                <h3 className="mb-2">Save money if you don't need user properties</h3>
+                <p className="font-semibold opacity-70 text-[15px]">(Custom user properties more expensive to process)</p>
+                <p className="mb-2">The more data we store about users, the higher the cost. So the less data you need, the more you can save.</p>
+                <p className="mb-2">You can track users in two ways:</p>
                 <ul className="mt-2 mb-4">
                     <li className="mb-2">
                         <strong>Anonymized</strong><br />
