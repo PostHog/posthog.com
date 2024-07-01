@@ -274,9 +274,33 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         }
     }
 
+    const getAshbyLocationName = async (id) =>
+        fetch(`https://api.ashbyhq.com/location.info`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Basic ${Buffer.from(`${process.env.ASHBY_API_KEY}:`).toString('base64')}`,
+            },
+            body: JSON.stringify({ locationId: id }),
+        })
+            .then((res) => res.json())
+            .then((data) => data.results.name)
+
     if (node.internal.type === 'AshbyJobPosting') {
         const title = node.title.replace(' (Remote)', '')
         const slug = `/careers/${slugify(title, { lower: true })}`
+        const locations = [
+            await getAshbyLocationName(node.locationIds.primaryLocationId),
+            ...(await Promise.all(node.locationIds.secondaryLocationIds.map((id) => getAshbyLocationName(id)))),
+        ]
+            .map((location) => location.replace(/\(|\)|remote/gi, '').trim())
+            .filter(Boolean)
+        createNodeField({
+            node,
+            name: 'locations',
+            value: locations,
+        })
         createNodeField({
             node,
             name: `title`,
