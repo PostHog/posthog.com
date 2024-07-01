@@ -7,9 +7,9 @@ tags:
  - data warehouse
 ---
 
-Creating and analyzing reports of Zendesk data along with product data helps you understand support performance, identify problem areas, and provide a better customer experience.
+Combining Zendesk data and product data helps you understand support performance, identify problem areas, and provide a better customer experience.
 
-In this tutorial, we show how you can create Zendesk reports in PostHog by connecting it as a data source and then creating insights like the number of tickets.
+In this tutorial, we show how you can create Zendesk reports in PostHog by connecting it as a data source. 
 
 ## **Linking Zendesk data to PostHog**
 
