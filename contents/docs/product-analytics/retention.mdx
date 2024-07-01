@@ -41,17 +41,17 @@ It often, but not always, makes sense to use the same event or action for both.
     classes="rounded"
 />
 
-In the example above, we've used an action called 'Product Interactions' for both. We've grouped users by 'Unique users' and we've chosen users who did the 'Product Interactions' action for the first time during a six-week period.
+In the example above, we used an action called 'Product Interactions' for both. We grouped users by 'Unique users' and chosen users who did the 'Product Interactions' action for the first time during a six-week period.
 
 You can also:
 
-- Analyze retention for groups of users, such as all users in the same organization, company, or account. This [requires group analytics](/docs/product-analytics/group-analytics) and it's useful if your customers are companies where there are many users, but not all of them are active.
+- Analyze retention for groups of users, such as all users in the same organization, company, or account. This is useful if your customers are companies with many users, but not all of them are active. This [requires group analytics](/docs/product-analytics/group-analytics).
 
 - Define the retention period by any number of hours, days, weeks, or months. To analyze retention across a whole year, for example, you should configure your insight to say "in the last 12 months".
 
 - Filter your retention insights using filter groups, such as event properties (country, device, etc.), person properties (job title, company name, etc.), feature flags (users who have a flag enabled), and existing [cohorts](/data/cohorts) (pre-defined groups of users).
 
-- Choose between **first time retention** and **recurring retention**. Recurring retention counts a user as part of a cohort if they performed the cohort event during that time period, irrespective of it was their first time or not. First time retention does the opposite.
+- Choose between **first time retention** and **recurring retention**. Recurring retention counts a user as part of a cohort if they performed the cohort event during that time period, irrespective of it was their first time or not. First time retention only counts a user as part of the cohort if it was their first time performing the cohort event.
 
 ## Understanding retention insights
 
@@ -92,4 +92,4 @@ When analyzing retention insights, remember that:
 -   **Retention** measures the percentage of users who came back and performed an event within a given period **at least once**
 -   **Stickiness** measures **how many** times within a period a user performed an event
 
-Retention is good for seeing how well you're doing at keeping users engaged overall. Stickiness is useful for seeing deeply users are engaging with your product, and helps you identify the most engaged users.
+Retention is good for seeing how well you're doing at keeping users engaged overall. Stickiness is useful for seeing deeply users are engaging with your product and helps you identify the most engaged users.
