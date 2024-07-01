@@ -30,7 +30,7 @@ When you create a retention insight, you're defining two things:
 1. A cohort event – an event or action that determines if the user is a part of a cohort.
 2. A retention event – an event or action that determines whether a users has been retained.
 
-If often, but not always, makes sense to use the same event or action for both.
+It often, but not always, makes sense to use the same event or action for both.
 
 <ProductScreenshot
     imageLight = {"https://res.cloudinary.com/dmukukwp6/image/upload/config_light_11286adf1f.png"} 
@@ -39,13 +39,13 @@ If often, but not always, makes sense to use the same event or action for both.
     classes="rounded"
 />
 
-In the example above, we've used an action called 'Product Interactions' for both. We've grouped users by `Unique users` and we've chosen users who did the `Product Interactions` action for the first time during a six-week period.
+In the example above, we've used an action called 'Product Interactions' for both. We've grouped users by 'Unique users' and we've chosen users who did the 'Product Interactions' action for the first time during a six-week period.
 
 You can also:
 
-- Analyze retention for groups of users, such as all users in the same organization, company, or account. This [requires group analytics](/docs/product-analytics/group-analytics). This is useful if your customers are companies where there are many users, but not all of them are active.
+- Analyze retention for groups of users, such as all users in the same organization, company, or account. This [requires group analytics](/docs/product-analytics/group-analytics) and it's useful if your customers are companies where there are many users, but not all of them are active.
 
-- Define the retention period by any number of hours, days, weeks, or months. To analyze annual retention, for example, you should configure your insight to say "in the last 12 months".
+- Define the retention period by any number of hours, days, weeks, or months. To analyze retention across a whole year, for example, you should configure your insight to say "in the last 12 months".
 
 - Choose between **first time retention** and **recurring retention**. Recurring retention counts a user as part of a cohort if they performed the cohort event during that time period, irrespective of it was their first time or not. First time retention does the opposite.
 
@@ -69,15 +69,15 @@ By default, both show the percentage of users who retained in each cohort relati
 
 - **Column B** shows the size of each individual cohort. As noted earlier, retention insights default to unique users, but they can also be grouped by unique organizations, companies, etc.
 
-- **Column C** is the 'Week 0' – i.e. the week in which the cohort event or action first took place. This always 100% because all users in that cohort must perform the event to be included. This would be 'Hour 0', 'Day 0', or 'Month 0' if you choose a different time period.
+- **Column C** is 'Week 0' – i.e. the week in which the cohort event or action first took place. This is always 100% because all users in that cohort must perform the event to be included. This would be 'Hour 0', 'Day 0', or 'Month 0' if you choose a different time period.
 
-- **Column D** is Week 2 – i.e. the second week after the cohort was created. In this example, the 27.4% of the 'May 20 to May 26' cohort retained, or 372 users.
+- **Column D** is Week 2 – i.e. the second week after the cohort was created. In this example, 27.4% of the 'May 20 to May 26' cohort retained, or 372 users.
 
 When analyzing a retention insights, remember that:
 
-- Users cannot exist in more than one cohort – i.e. a user in the 'May 20 to May 26' can't be included in the 'Jun 3 to Jun 9 cohort'.
+- Users cannot exist in more than one cohort – i.e. a user in the 'May 20 to May 26' won't also appear in the 'Jun 3 to Jun 9' cohort.
 
-- Users can appear in more than one retention period – i.e. they could be counted in both 'Week 1' and 'Week 3', or all six weeks. This means, for example, that it's possible for a later period to have higher retention than an earlier period. This would suggest that users tend to return in a regular pattern – i.e. every few weeks or days – to perform a specific task.
+- Users can appear in more than one retention period – i.e. they could be counted in both 'Week 1' and 'Week 3', or all six weeks. This means, for example, that it's possible for a later period to have higher retention than an earlier period. This could suggest that users tend to return in a regular pattern – i.e. every few weeks or days – to perform a specific task.
 
 - Retention insights only show you whether users performed an action or event, not how often. For that, create a [stickiness insight](/docs/product-analytics/stickiness).
 
