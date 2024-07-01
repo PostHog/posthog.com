@@ -766,6 +766,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/assets',
                     },
                     {
+                        name: 'Merch store',
+                        url: '/handbook/engineering/posthog-com/merch-store',
+                    },
+                    {
                         name: 'Posting a new job',
                         url: '/handbook/engineering/posthog-com/jobs',
                     },
