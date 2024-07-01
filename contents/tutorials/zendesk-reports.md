@@ -1,6 +1,6 @@
 ---
 title: How to set up Zendesk reports
-date: 2024-06-28
+date: 2024-07-01
 author:
  - ian-vanagas
 tags:
@@ -11,7 +11,7 @@ Combining Zendesk data and product data helps you understand support performance
 
 In this tutorial, we show how you can create Zendesk reports in PostHog by connecting it as a data source. 
 
-## **Linking Zendesk data to PostHog**
+## Linking Zendesk data to PostHog
 
 To start, you need both Zendesk and PostHog accounts. Once you have those, head to PostHog's [data warehouse tab](https://us.posthog.com/data-warehouse) and:
 
