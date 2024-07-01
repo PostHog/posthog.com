@@ -1,28 +1,27 @@
 import StarUsBanner from 'components/StarUsBanner'
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import Layout from '../Layout'
 import { SEO } from '../seo'
-import Community from './Community'
-import CTA from './CTA'
 import Customers from './Customers'
 import Hero from './Hero'
-import Pipelines from './Pipelines'
-import Timeline from './Timeline'
-import Roadmap from './Roadmap'
-import Startups from './Startups'
-import Tutorials from './Tutorials'
-import usePostHog from '../../hooks/usePostHog'
-import AllInOne from './AllInOne'
-import ApiExamples from './ApiExamples'
-import HogQL from './HogQL'
-import CustomerData from './CustomerData'
-import CodeBlocks from './CodeBlocks'
-import Libraries from './Libraries'
-import OnePlatform from './OnePlatform'
-import NoHatingAllowed from './NoHatingAllowed'
 import { RenderInClient } from 'components/RenderInClient'
-import BillboardTruck from './BillboardTruck'
 import Spinner from 'components/Spinner'
+import usePostHog from '../../hooks/usePostHog'
+import BillboardTruck from './BillboardTruck'
+
+const Community = lazy(() => import('./Community'))
+const CTA = lazy(() => import('./CTA'))
+const Timeline = lazy(() => import('./Timeline'))
+const Roadmap = lazy(() => import('./Roadmap'))
+const Startups = lazy(() => import('./Startups'))
+const AllInOne = lazy(() => import('./AllInOne'))
+const ApiExamples = lazy(() => import('./ApiExamples'))
+const HogQL = lazy(() => import('./HogQL'))
+const CustomerData = lazy(() => import('./CustomerData'))
+const CodeBlocks = lazy(() => import('./CodeBlocks'))
+const Libraries = lazy(() => import('./Libraries'))
+const OnePlatform = lazy(() => import('./OnePlatform'))
+const NoHatingAllowed = lazy(() => import('./NoHatingAllowed'))
 
 const Home = () => {
     const posthog = usePostHog()
@@ -38,10 +37,12 @@ const Home = () => {
                 />
                 <Hero />
                 <Customers />
-                <AllInOne />
-                <Libraries />
-                <CodeBlocks />
-                <NoHatingAllowed />
+                <Suspense fallback={<Spinner className="w-7 h-7 mx-auto my-12" />}>
+                    <AllInOne />
+                    <Libraries />
+                    <CodeBlocks />
+                    <NoHatingAllowed />
+                </Suspense>
 
                 <RenderInClient
                     render={() => {
@@ -58,22 +59,17 @@ const Home = () => {
                     }
                 />
 
-                <ApiExamples />
-                <HogQL />
-                <Community />
-                <OnePlatform />
-                <CustomerData />
-                <Timeline />
-                <Roadmap />
-                <Startups />
-                {/*<Tutorials
-                    title="Latest tutorials"
-                    subtitle="Fresh from our keyboards"
-                    cta={{ url: '/tutorials', title: 'Explore all tutorials' }}
-                />*/}
-                <div className="relative">
+                <Suspense fallback={<Spinner className="w-7 h-7 mx-auto my-12" />}>
+                    <ApiExamples />
+                    <HogQL />
+                    <Community />
+                    <OnePlatform />
+                    <CustomerData />
+                    <Timeline />
+                    <Roadmap />
+                    <Startups />
                     <CTA />
-                </div>
+                </Suspense>
             </Layout>
         </>
     )
