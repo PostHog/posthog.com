@@ -138,154 +138,6 @@ const faqs = [
     },
 ]
 
-const comparisonColumnCount = 5
-const comparison = [
-    {
-        feature: 'Customizable pop-ups',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Live previews',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Multi-step surveys',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'API access',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Single choice questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Multiple choice questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Open text questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Numerical rating questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Emoji rating questions',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Third-party link support',
-        companies: {
-            Pendo: true,
-            Hotjar: false,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Target by property',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Target by URL',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Target by feature flag',
-        companies: {
-            Pendo: false,
-            Hotjar: false,
-            Sprig: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Survey scheduling',
-        companies: {
-            Pendo: true,
-            Hotjar: false,
-            Sprig: false,
-            PostHog: false,
-        },
-    },
-    {
-        feature: 'Export responses',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Slack integration',
-        companies: {
-            Pendo: true,
-            Hotjar: true,
-            Sprig: true,
-            PostHog: true,
-        },
-    },
-]
-
 const pairsWithItemCount = 3
 const PairsWithArray = [
     {
@@ -431,76 +283,37 @@ export const ProductSurveys = () => {
                 </div>
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
-                <div id="posthog-vs">
-                    <section>
-                        <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                        <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
-                    </section>
+            <section id="tutorials">
+                <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                <p className="mt-0 text-opacity-75 text-center mb-6">
+                    Visit the <Link to="/tutorials">tutorials</Link> section for more.
+                </p>
 
-                    <section className="mb-20">
-                        <h3 className="text-center mb-8">So, what's best for you?</h3>
-                        <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
-                            <VsCompetitor
-                                title="Reasons a competitor may be best for you (for now...)"
-                                image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-surveys.png"
-                                        className="max-w-[159px]"
-                                        placeholder="none"
-                                    />
-                                }
-                            >
-                                <ul>
-                                    <li>Easy integrations with Stripe, Hubspot, and Zendesk</li>
-                                </ul>
-                            </VsCompetitor>
-                            <VsPostHog>
-                                <ul>
-                                    <li>Easy integrations with Stripe, Hubspot, and Zendesk</li>
-                                </ul>
-                            </VsPostHog>
-                        </div>
+                <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
+                    <TutorialCard
+                        title="How to set up Stripe reports"
+                        description="Analyze gross revenue, customer counts, MRR, churn, and more"
+                        url="/tutorials/stripe-reports"
+                    />
+                    <TutorialCard
+                        title="How to set up Hubspot reports"
+                        description="Monitor deal counts, lead ratings, and identify leads by pageview behaviours."
+                        url="/tutorials/hubspot-reports"
+                    />
+                    <TutorialCard
+                        title="How to set up Zendesk reports"
+                        description="Track ticket counts, power users, SLA metrics, and more."
+                        url="/tutorials/zendesk-reports"
+                    />
+                    <TutorialCard
+                        title="How to set up Google Adwords reports"
+                        description="Report on advertising performance, CAC, and channel distribution."
+                        url="/tutorials/adwords-reports"
+                    />
+                </ul>
+            </section>
 
-                        <p className="text-center text-sm font-medium">
-                            Have questions about PostHog? <br className="md:hidden" />
-                            <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                            <Link to="/talk-to-a-human">book a demo</Link>.
-                        </p>
-                    </section>
-                </div>
-
-                <section id="tutorials">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
-                    <p className="mt-0 text-opacity-75 text-center mb-6">
-                        Visit the <Link to="/tutorials">tutorials</Link> section for more.
-                    </p>
-
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
-                        <TutorialCard
-                            title="How to set up Stripe reports"
-                            description="Analyze gross revenue, customer counts, MRR, churn, and more"
-                            url="/tutorials/stripe-reports"
-                        />
-                        <TutorialCard
-                            title="How to set up Hubspot reports"
-                            description="Monitor deal counts, lead ratings, and identify leads by pageview behaviours."
-                            url="/tutorials/hubspot-reports"
-                        />
-                        <TutorialCard
-                            title="How to set up Zendesk reports"
-                            description="Track ticket counts, power users, SLA metrics, and more."
-                            url="/tutorials/zendesk-reports"
-                        />
-                        <TutorialCard
-                            title="How to set up Google Adwords reports"
-                            description="Report on advertising performance, CAC, and channel distribution."
-                            url="/tutorials/adwords-reports"
-                        />
-                    </ul>
-                </section>
-
-                {/*
+            {/*
         <section id="installation" className="mb-20 px-5 md:px-0">
           <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
           <p className="mt-0 opacity-50 text-center mb-12">
@@ -511,61 +324,61 @@ export const ProductSurveys = () => {
         </section>
         */}
 
-                <section id="docs" className="mb-20 px-5 md:px-0">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
-                    <p className="mt-0 text-opacity-70 text-center">
-                        Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
-                    </p>
-                    <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'surveys').children} />
-                </section>
+            <section id="docs" className="mb-20 px-5 md:px-0">
+                <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
+                <p className="mt-0 text-opacity-70 text-center">
+                    Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
+                </p>
+                <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'surveys').children} />
+            </section>
 
-                <section id="team" className="mb-20 px-5">
-                    <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
+            <section id="team" className="mb-20 px-5">
+                <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
-                    <p className="text-center mb-2">
-                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
-                        building the {product.lowercase}.
-                    </p>
-                    <TeamMembers teamName={team} />
-                </section>
+                <p className="text-center mb-2">
+                    PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for building
+                    the {product.lowercase}.
+                </p>
+                <TeamMembers teamName={team} />
+            </section>
 
-                <section id="roadmap" className="mb-20 px-5">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
+            <section id="roadmap" className="mb-20 px-5">
+                <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
 
-                    <p className="text-center mb-8">Here’s what the team is up to.</p>
+                <p className="text-center mb-8">Here’s what the team is up to.</p>
 
-                    <div className="grid md:grid-cols-2 gap-12">
-                        <div>
-                            <RecentChange team={team} />
-                        </div>
-
-                        <div>
-                            <h4 className="opacity-60 text-base">Up next</h4>
-                            <TeamRoadmap team={team} />
-                        </div>
-                    </div>
-                </section>
-
-                <section id="questions" className="mb-20 px-5">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
-
-                    <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
-
-                    <div className="text-center mb-8">
-                        <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
-                            View {product.lowercase} questions
-                        </CallToAction>
+                <div className="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <RecentChange team={team} />
                     </div>
 
-                    <Questions topicIds={[382]} />
-                </section>
+                    <div>
+                        <h4 className="opacity-60 text-base">Up next</h4>
+                        <TeamRoadmap team={team} />
+                    </div>
+                </div>
+            </section>
 
-                <PairsWith items={pairsWithItemCount}>
-                    {PairsWithArray.map((card, index) => {
-                        return <PairsWithItem {...card} key={index} />
-                    })}
-                </PairsWith>
-            </div>
+            <section id="questions" className="mb-20 px-5">
+                <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
+
+                <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
+
+                <div className="text-center mb-8">
+                    <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
+                        View {product.lowercase} questions
+                    </CallToAction>
+                </div>
+
+                <Questions topicIds={[382]} />
+            </section>
+
+            <PairsWith items={pairsWithItemCount}>
+                {PairsWithArray.map((card, index) => {
+                    return <PairsWithItem {...card} key={index} />
+                })}
+            </PairsWith>
+
             <div className="max-w-7xl mx-auto relative">
                 <section className="mb-20">
                     <CTA />
