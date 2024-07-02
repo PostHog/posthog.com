@@ -442,7 +442,7 @@ export const ProductSurveys = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
                                         src="../../../images/products/competitors-surveys.png"
@@ -452,25 +452,12 @@ export const ProductSurveys = () => {
                                 }
                             >
                                 <ul>
-                                    <li>
-                                        Forms
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                PostHog offers multi-step surveys, but they won't be full-page forms
-                                                such as Typeform or Google Forms
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>AI-powered analysis or recommendations based on results</li>
-                                    <li>Limited formatting options</li>
+                                    <li>Easy integrations with Stripe, Hubspot, and Zendesk</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
-                                    <li>No-code surveys with customizable colors and removable branding</li>
-                                    <li>Automatic NPS score calculations</li>
-                                    <li>Robust targeting &amp; integration with feature flags</li>
-                                    <li>Tight integration with analytics, experiments, and session replay</li>
+                                    <li>Easy integrations with Stripe, Hubspot, and Zendesk</li>
                                 </ul>
                             </VsPostHog>
                         </div>
@@ -537,7 +524,7 @@ export const ProductSurveys = () => {
 
                     <p className="text-center mb-2">
                         PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
-                        building {product.lowercase}.
+                        building the {product.lowercase}.
                     </p>
                     <TeamMembers teamName={team} />
                 </section>
