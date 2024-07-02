@@ -18,7 +18,7 @@ All wallpapers are hand drawn by the peerless [Lottie Coxon](https://x.com/Lotti
 
 ## Bug catcher
 
-![bug catcher wallpaper](https://res.cloudinary.com/dmukukwp6/image/upload/14x9_d665cd3df9.png) (MacBook Pro 14 and 16)
+![bug catcher wallpaper](https://res.cloudinary.com/dmukukwp6/image/upload/14x9_d665cd3df9.png)
 
 - [14:9](https://res.cloudinary.com/dmukukwp6/image/upload/14x9_d665cd3df9.png) (MacBook Pro 14 and 16)
 - [16:10](https://res.cloudinary.com/dmukukwp6/image/upload/16x10_9abdbd934c.png) (Most MacBooks)
@@ -29,7 +29,7 @@ All wallpapers are hand drawn by the peerless [Lottie Coxon](https://x.com/Lotti
 
 ## This is fine
 
-![this is fine wallpaper](https://res.cloudinary.com/dmukukwp6/image/upload/14x9_833f0bb10b.png) (MacBook Pro 14 and 16)
+![this is fine wallpaper](https://res.cloudinary.com/dmukukwp6/image/upload/14x9_833f0bb10b.png)
 
 - [14:9](https://res.cloudinary.com/dmukukwp6/image/upload/14x9_833f0bb10b.png) (MacBook Pro 14 and 16)
 - [16:10](https://res.cloudinary.com/dmukukwp6/image/upload/16x10_825e499f8c.png) (Most MacBooks)
@@ -40,7 +40,7 @@ All wallpapers are hand drawn by the peerless [Lottie Coxon](https://x.com/Lotti
 
 ## Spiderhog meme
 
-![spiderhog meme](https://res.cloudinary.com/dmukukwp6/image/upload/14x9_81ef8336df.png) (MacBook Pro 14 and 16)
+![spiderhog meme](https://res.cloudinary.com/dmukukwp6/image/upload/14x9_81ef8336df.png)
 
 - [14:9](https://res.cloudinary.com/dmukukwp6/image/upload/14x9_81ef8336df.png) (MacBook Pro 14 and 16)
 - [16:10](https://res.cloudinary.com/dmukukwp6/image/upload/16x10_a0d10544a3.png) (Most MacBooks)
