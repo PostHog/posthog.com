@@ -31,7 +31,7 @@ Once done, PostHog will automatically pull and format your Zendesk data for quer
 
 > **Note:** If you are missing a table, make sure you have data for that table in Zendesk and check your data warehouse settings to make sure it synced correctly.
 
-## **Creating insights for your Zendesk report**
+## Creating insights for your Zendesk report
 
 Now that your Zendesk data is synced into PostHog, you can use it to create insights for your report. Each requires you to create a [new insight in the product analytics tab](https://us.posthog.com/project/insights/new).
 
@@ -159,6 +159,34 @@ left join zendesk_users u on bp.distinct_id = u.email
 where u.url != ''
 order by bp.billing_view_count desc
 ```
+
+### First reply time
+
+We can query `zendesk_ticket_metric_events` table for the `reply_time` metric then compare for the `measure` and `fulfill` times to get the average first reply time. 
+
+```sql
+WITH first_reply_times AS (
+  SELECT 
+    ticket_id,
+    toStartOfMonth(MIN(time)) AS month,
+    MIN(multiIf(type = 'measure', time, NULL)) AS measure_time,
+    MIN(multiIf(type = 'fulfill', time, NULL)) AS fulfill_time
+  FROM zendesk_ticket_metric_events
+  WHERE metric = 'reply_time'
+  GROUP BY ticket_id
+  HAVING fulfill_time IS NOT NULL
+)
+SELECT 
+  month,
+  AVG(dateDiff('hour', measure_time, fulfill_time)) AS avg_first_reply_time_hours,
+  COUNT(*) AS ticket_count
+FROM first_reply_times
+WHERE measure_time IS NOT NULL AND fulfill_time IS NOT NULL
+GROUP BY month
+ORDER BY month
+```
+
+The `zendesk_ticket_metric_events` also contains data you can use to calculate metrics like average reply time, average resolution time, and more.
 
 ## Furthering reading
 
