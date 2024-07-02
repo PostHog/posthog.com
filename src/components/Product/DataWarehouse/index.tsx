@@ -196,15 +196,15 @@ export const ProductDataWarehouse = () => {
                     color="[#8567FF]"
                     icon={<IconDatabase />}
                     product={product.capitalized}
-                    title='Ask anything with <span class="text-red dark:text-yellow">no-code surveys</span>'
-                    description="Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control."
+                    title='All your data <span class="text-red dark:text-yellow">in one place</span>'
+                    description="Unify and query data from any source and analyze it with PostHog usage data."
                 />
 
                 <div className="text-center">
                     <StaticImage
-                        src="../../../images/products/screenshot-surveys.png"
-                        alt="Screenshot of survey results in PostHog"
-                        className="w-full max-w-[1360px]"
+                        src="../../../images/products/screenshot-data-warehouse.png"
+                        alt="Screenshot of the PostHog data warehouse"
+                        className="w-full max-w-[1440px]"
                         placeholder="none"
                     />
                 </div>
