@@ -4,7 +4,7 @@ title: What our team really thinks about working at PostHog
 author:
   - james-temperton
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/survey_hog_bafed58598.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_survey_v1_be1f1494d7.jpg
 featuredImageType: full
 tags:
   - Culture
