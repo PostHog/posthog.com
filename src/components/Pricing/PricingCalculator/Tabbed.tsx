@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import useProducts from '../Products'
 import Tooltip from 'components/Tooltip'
 import { IconInfo, IconLightBulb, IconX } from '@posthog/icons'
 import Toggle from 'components/Toggle'
@@ -9,6 +8,8 @@ import { allProductsData } from '../Pricing'
 import { useValues } from 'kea'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
+import useProducts from 'hooks/useProducts'
+import { LogSlider, sliderCurve } from '../PricingSlider/Slider'
 
 const Modal = ({ onClose, isVisible }) => {
     return (
@@ -277,8 +278,8 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
     )
 }
 
-const TabContent = ({ activeProduct, addons, setAddons }) => {
-    const { slider, calcVolume, denomination, calcCost, volume } = activeProduct
+const TabContent = ({ activeProduct, addons, setVolume, setAddons }) => {
+    const { type, cost, volume, billingData, slider } = activeProduct
 
     return (
         <>
@@ -291,34 +292,48 @@ const TabContent = ({ activeProduct, addons, setAddons }) => {
                     <div className="grid grid-cols-8">
                         <div className="col-span-6">
                             <p className="mb-2">
-                                <strong>{calcVolume}</strong>{' '}
-                                <span className="opacity-70 text-sm">{denomination}s/month</span>
+                                <strong>
+                                    {Math.round(volume ? sliderCurve(volume) : slider.min).toLocaleString()}
+                                </strong>{' '}
+                                <span className="opacity-70 text-sm">{billingData.unit}s/month</span>
                             </p>
                         </div>
                         <div className="col-span-2 text-right pr-3">
-                            <p className="font-semibold mb-0">${calcCost}</p>
+                            <p className="font-semibold mb-0">${cost.toLocaleString()}</p>
                         </div>
-                        <div className="col-span-full pr-1.5">{slider}</div>
+                        {slider && (
+                            <div className="col-span-full pr-1.5">
+                                <LogSlider
+                                    stepsInRange={100}
+                                    marks={slider.marks}
+                                    min={slider.min}
+                                    max={slider.max}
+                                    onChange={(value) => setVolume(type, value)}
+                                    value={volume}
+                                />
+                            </div>
+                        )}
                         <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
                             <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
                             <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                                First {activeProduct.freeLimit} {denomination}s free –&nbsp;<em>every month!</em>
+                                First {Math.round(slider.min).toLocaleString()} {billingData.unit}s free –&nbsp;
+                                <em>every month!</em>
                             </span>
                         </div>
                     </div>
                 )}
-                {activeProduct.addons.length > 0 && (
+                {activeProduct.billingData.addons.length > 0 && (
                     <div className="">
                         <p className="opacity-70 text-sm m-0">Product add-ons</p>
                         <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
-                            {activeProduct.addons.map((addon) => {
+                            {activeProduct.billingData.addons.map((addon) => {
                                 return (
                                     <li key={addon.type} className="py-2">
                                         <Addon
                                             key={addon.type}
                                             addons={addons}
                                             setAddons={setAddons}
-                                            volume={volume}
+                                            volume={volume ? sliderCurve(volume) : slider.min}
                                             {...addon}
                                         />
                                     </li>
@@ -347,13 +362,13 @@ export default function Tabbed() {
     const { monthlyTotal } = useValues(pricingSliderLogic)
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
     const [activeTab, setActiveTab] = useState(0)
-    const products = useProducts()
+    const { products, setVolume } = useProducts()
     const activeProduct = products[activeTab]
     const initialProductAddons = useMemo(() => {
         const initialAddons = []
         for (const product of products) {
-            if (product.addons.length > 0) {
-                product.addons.forEach((addon) => {
+            if (product.billingData.addons.length > 0) {
+                product.billingData.addons.forEach((addon) => {
                     initialAddons.push({
                         type: addon.type,
                         checked: addonDefaults[addon.type]?.checked || false,
@@ -391,7 +406,7 @@ export default function Tabbed() {
                 <div className="md:col-span-3 md:pr-6 mb-4 md:mb-0">
                     <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4">
-                        {products.map(({ name, icon, calcCost }, index) => {
+                        {products.map(({ name, Icon, cost, color }, index) => {
                             const active = activeTab === index
                             return (
                                 <li key={name}>
@@ -404,13 +419,15 @@ export default function Tabbed() {
                                         }`}
                                     >
                                         <div className="flex items-center space-x-2">
-                                            <span>{icon}</span>
+                                            <span>
+                                                <Icon className={`w-5 h-6 text-${color}`} />
+                                            </span>
                                             <span>{name}</span>
                                         </div>
                                         {name == 'A/B testing' ? (
                                             <span className="opacity-25">--</span>
                                         ) : (
-                                            <div className="opacity-70 pl-5 md:pl-0">${calcCost}</div>
+                                            <div className="opacity-70 pl-5 md:pl-0">${cost.toLocaleString()}</div>
                                         )}
                                     </button>
                                 </li>
@@ -431,6 +448,7 @@ export default function Tabbed() {
                         addons={productAddons}
                         setAddons={setProductAddons}
                         activeProduct={activeProduct}
+                        setVolume={setVolume}
                     />
                 </div>
                 <div className="md:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark"></div>
