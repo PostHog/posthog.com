@@ -1,5 +1,5 @@
 ---
-title: Query your sources
+title: Creating insights from sources
 sidebar: Docs
 showTitle: true
 availability:
@@ -9,58 +9,78 @@ availability:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-export const DataWarehouseLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/dw-light.png"
-export const DataWarehouseDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/dw-dark.png"
 export const QueryLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/query-light.png"
 export const QueryDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/query-dark.png"
 
-To see all of the sources available to query, go to the [data warehouse tab](https://us.posthog.com/data-warehouse). This page shows all the external and PostHog tables you can query through [SQL insights](/docs/product-analytics/sql) along with saved views. Click on any of the tables, and then click "Query" to open an SQL insight.
+The data warehouse enables you to visualize and query data from external sources with PostHog's tools.
+
+## Visualizing source data with trends
+
+After [linking your source](/docs/data-warehouse/setup), you can use its data in a [trend](/docs/product-analytics/trends) like you would event or person data. 
+
+To do this, create a [new insight](https://us.posthog.com/insights/new), click the series, go to the **Data warehouse tables** tab, hover over the table you want, and click **Select**.
 
 <ProductScreenshot
-  imageLight={DataWarehouseLight} 
-  imageDark={DataWarehouseDark} 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/trend_light_9b29b1c254.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/trend_dark_77178b53cb.png"
+  alt="Selecting a data warehouse table in a trend" 
+  classes="rounded"
+/>
+
+The main difference from events is that you must identify 3 fields from the data warehouse data to visualize it:
+
+- ID: A field that corresponds to the ID of the element. 
+- Distinct ID: A field that corresponds to an ID representing the user associated with the element. If none, can match ID.
+- Timestamp: A timestamp field representing when the element was created.
+ 
+It's infeasible for us to map these fields. We pre-fill with a best guess, but allow you to edit it.
+
+### Filters and breakdowns
+
+When using data warehouse tables in insights, you can use properties from those tables filter and breakdown as you would with any other insight. For example, you could filter `zendesk_tickets` for ones where the `status` is `open` or `hubspot_companies` where `lifecyclestage` is `lead`.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/bd_light_989c851f4b.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/bd_dark_ef8b5baf43.png"
+  alt="Filtering and breaking down data warehouse data" 
+  classes="rounded"
+/>
+
+> **Want to create insights with a combination of PostHog and external data?** Check out our docs on [joining tables and persons](/docs/data-warehouse/join).
+
+## Querying sources with SQL
+
+For more complicated queries, you can use [SQL insights](/docs/product-analytics/sql). 
+
+To start, either create a [new SQL insight](https://us.posthog.com/insights/new) or go to the [data warehouse tab](https://us.posthog.com/data-warehouse). Here you can see the schemas all available external and PostHog tables as well as saved views
+
+To see available sources, go to the [data warehouse tab](https://us.posthog.com/data-warehouse). This page shows the external and PostHog tables as well as [saved views](/docs/data-warehouse/views) you can visualize with trends or query through [SQL insights](/docs/product-analytics/sql).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/d_light_3c5561008b.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/d_dark_767067055d.png"
   alt="Data warehouse tab in PostHog app" 
   classes="rounded"
 />
 
-## Querying sources
+Here you can:
 
-To start with querying your sources:
-
-1. Choose a table and click "Query" or create a [new SQL insight](https://us.posthog.com/insights/new).
-2. If you didn't already, choose a table to query `FROM` like `stripe_charge` or `hubspot_contacts`
-3. Write your SQL query using your table like `SELECT * FROM hubspot_contacts`
-4. Click "Update and run" to see the results.
-5. Modify your query using [SQL commands](/docs/product-analytics/sql) as needed to get the data you want like `SELECT email FROM hubspot_contacts WHERE city = 'Brisbane'`.
-6. Save your query.
+1. Write your SQL query using your table like `SELECT * FROM hubspot_contacts`
+2. Click **Update and run** to see the results.
+3. Modify your query using [SQL commands](/docs/product-analytics/sql) as needed to get the data you want like `SELECT email FROM hubspot_contacts WHERE city = 'Brisbane'`.
+4. Save your query.
 
 <ProductScreenshot
-    imageLight={QueryLight} 
-    imageDark={QueryDark} 
-    alt="Querying a source in PostHog" 
-    classes="rounded"
-  />
+  imageLight={QueryLight} 
+  imageDark={QueryDark} 
+  alt="Querying a source in PostHog" 
+  classes="rounded"
+/>
 
-## Combining data sources
+### Querying multiple sources together
 
-Much of the power of the data warehouse comes from combining multiple sources, like your Stripe or Hubspot data with your product analytics data. Two of the easiest ways of doing this are `WHERE IN` and `JOIN` SQL commands.
+Much of the power of the data warehouse comes from combining multiple sources, like your Stripe or Hubspot data with your product analytics data. Two of the easiest ways of doing this are `WHERE IN` and `JOIN` SQL commands. 
 
-For example, to get a count of events for your Hubspot contacts you can filter `events.distinct_id` by `email FROM hubspot_contacts` like this:
+import QueryJoinExample from './snippets/query-join-example.mdx'
 
-```sql
-SELECT COUNT() AS event_count, distinct_id
-FROM events
-WHERE distinct_id IN (SELECT email FROM hubspot_contacts)
-GROUP BY distinct_id
-ORDER BY event_count DESC
-```
-
-You can also use a `JOIN` such as `INNER JOIN` or `LEFT JOIN` to combine data. For example, to get a count of events for your Stripe customers you can `INNER JOIN` on `distinct_id` and `email` like this:
-
-```SQL
-SELECT events.distinct_id, COUNT() AS event_count
-FROM events
-INNER JOIN prod_stripe_customer ON events.distinct_id = prod_stripe_customer.email
-GROUP BY events.distinct_id
-ORDER BY event_count DESC
-```
+<QueryJoinExample />

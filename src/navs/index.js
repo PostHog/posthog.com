@@ -2778,7 +2778,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Query your sources',
+                    name: 'Creating insights from sources',
                     url: '/docs/data-warehouse/query',
                     icon: 'IconHogQL',
                     color: 'purple',
