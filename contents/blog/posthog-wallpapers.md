@@ -4,8 +4,10 @@ title: This is fine (and other awesome PostHog wallpapers)
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/survey_hog_bafed58598.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/16x9_005147d175.png
 featuredImageType: full
+tags:
+- General
 ---
 
 Love PostHog?
