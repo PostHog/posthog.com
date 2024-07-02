@@ -2958,6 +2958,12 @@ const menu = [
                 url: '/surveys',
             },
             {
+                name: 'Data warehouse',
+                icon: 'IconDatabase',
+                color: 'black',
+                url: '/data-warehouse',
+            },
+            {
                 name: 'Product OS',
                 icon: 'IconStack',
                 color: 'blue',
