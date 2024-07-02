@@ -491,24 +491,24 @@ export const ProductSurveys = () => {
 
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
                         <TutorialCard
-                            title="How to run a fake door test"
-                            description='A fake door test is when you create a "fake" UI or experience for a product or feature you are thinking of building.'
-                            url="/tutorials/fake-door-test"
+                            title="How to set up Stripe reports"
+                            description="Analyze gross revenue, customer counts, MRR, churn, and more"
+                            url="/tutorials/stripe-reports"
                         />
                         <TutorialCard
-                            title="Get feedback and book user interviews with surveys"
-                            description="PostHog's surveys help automate the process of getting feedback and booking interviews. In this tutorial, we show how to set up surveys to do both."
-                            url="/tutorials/feedback-interviews-site-apps"
+                            title="How to set up Hubspot reports"
+                            description="Monitor deal counts, lead ratings, and identify leads by pageview behaviours."
+                            url="/tutorials/hubspot-reports"
                         />
                         <TutorialCard
-                            title="How to measure your NPS score in PostHog"
-                            description="Asking NPS asking users how likely they are to recommend your product or service, so you can gauge product-market fit."
-                            url="/tutorials/nps-survey"
+                            title="How to set up Zendesk reports"
+                            description="Track ticket counts, power users, SLA metrics, and more."
+                            url="/tutorials/zendesk-reports"
                         />
                         <TutorialCard
-                            title="How to create custom surveys"
-                            description="Use the API to create a completely custom experience."
-                            url="/tutorials/survey"
+                            title="How to set up Google Adwords reports"
+                            description="Report on advertising performance, CAC, and channel distribution."
+                            url="/tutorials/adwords-reports"
                         />
                     </ul>
                 </section>
