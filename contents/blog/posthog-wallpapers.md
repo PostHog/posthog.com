@@ -14,9 +14,9 @@ Love PostHog?
 
 Love our mascot, Max?
 
-Then you'll love these wallpapers. Got a request? Leave a comment, or [let us know on X](https://x.com/posthog).
+Then you'll love these wallpapers. 
 
-All wallpapers are hand drawn by the peerless [Lottie Coxon](https://x.com/LottieCoxon).
+Got a request? Leave a comment, or [let us know on X](https://x.com/posthog). All wallpapers are hand drawn by the peerless [Lottie Coxon](https://x.com/LottieCoxon).
 
 ## Bug catcher
 
