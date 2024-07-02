@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
-    IconMessage,
+    IconDatabase,
     IconClock,
     IconGraph,
     IconHogQL,
@@ -11,7 +11,6 @@ import {
     IconNotification,
     IconRewindPlay,
     IconColumns,
-    IconDatabase,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -160,7 +159,7 @@ const PairsWithArray = [
     },
 ]
 
-export const ProductSurveys = () => {
+export const ProductDataWarehouse = () => {
     const { purplewave, elevenlabs } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
@@ -194,8 +193,8 @@ export const ProductSurveys = () => {
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
-                    color="salmon"
-                    icon={<IconMessage />}
+                    color="[#8567FF]"
+                    icon={<IconDatabase />}
                     product={product.capitalized}
                     title='Ask anything with <span class="text-red dark:text-yellow">no-code surveys</span>'
                     description="Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control."
@@ -209,7 +208,7 @@ export const ProductSurveys = () => {
                         placeholder="none"
                     />
                 </div>
-                <section id="customers" className="-mt-36 pt-36">
+                {/* <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="reached a 25% response rate with surveys"
@@ -222,7 +221,7 @@ export const ProductSurveys = () => {
                             customer={elevenlabs}
                         />
                     </ul>
-                </section>
+                </section> */}
             </div>
 
             <SmoothScroll exclude={['Installation']} />

@@ -2960,7 +2960,7 @@ const menu = [
             {
                 name: 'Data warehouse',
                 icon: 'IconDatabase',
-                color: 'black',
+                color: '[#8567FF]',
                 url: '/data-warehouse',
             },
             {
