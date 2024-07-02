@@ -1,6 +1,6 @@
 ---
 title: How we do dogfooding at PostHog (with examples)
-date: 2024-06-28
+date: 2024-07-02
 author:
  - ian-vanagas
 featuredImage: >-
@@ -50,27 +50,37 @@ The development of HogQL was largely driven by dogfooding for two reasons:
 
 For example, HogQL was missing `OFFSET` support until Michael discovered that limitation when wanting to calculate the average number of times a dashboard is viewed. 
 
-![Michael dogfooding](https://res.cloudinary.com/dmukukwp6/image/upload/dogfood_2b527fee65.png)
+![Michael dogfooding](https://res.cloudinary.com/dmukukwp6/image/upload/michael_0e8e2df547.png)
 
 ### Everyone needs to query external sources
 
-Like any startup, we rely on payment processes and CRMs to sell our product and communicate with users. These create and capture useful data, but don't provide good ways to combine and query that data. We needed to rely on a mixture of native, monitoring, and business intelligence tools to accomplish our goals. 
+An important part of dogfooding is noticing areas you aren't doing it, but should be. In our case, a key part of [our strategy](/handbook/why-does-posthog-exist) is being the source of truth for product and customer data, but we often needed to rely on non-PostHog tools to do this, not dogfooding our own.
 
-Improving this is the inspiration behind the data warehouse. We realized if we wanted to be the source of truth for customer data, we needed to get this data into PostHog. Now, we provide the ability to [link](/docs/data-warehouse/setup) and [query](/docs/data-warehouse/query) data from sources like Stripe, Hubspot, and S3. 
+This was the inspiration behind the [data warehouse](/docs/data-warehouse) which provides the ability to link and query data from external sources like Stripe, Hubspot, Zendesk. This enables to dogfood our own solution instead of relying on an external one. 
 
-Beyond inspiration, dogfooding also guides the development of the data warehouse:
-
-- The first connectors were for the tools we use (Stripe, Hubspot, Zendesk).
-- Functionality is guided by the queries our engineering, sales, and product teams want to write (and write elsewhere)
-- A majority of feedback about issues and usability came from internal teams during alpha.
+Dogfooding has been critical for its development. Functionality has been guided by the queries our sales and product teams and a majority of feedback about issues and usability came from internal teams during alpha.
 
 ![Data warehouse feedback](https://res.cloudinary.com/dmukukwp6/image/upload/me_7c76189301.png)
+
+## The benefits of dogfooding
+
+We dogfood a lot, but what do we actually get out of it?
+
+- **Fast feedback.** Getting feedback from your teammates is a lot easier and faster than getting it from users. This guides product development and helps you iterate rapidly.
+
+- **Reveals issues and bugs.** When we dogfood, we almost always discover usability issues or bugs that we can fix before they impact user experience. This helps you ship a polished product.
+
+- **Increases product knowledge.** Our whole team uses PostHog. This helps us fix cross-functional issues, discover use cases, and promote PostHog better.
+
+- **Spirit.** If your product is good, it helps your team become confident in it. If your product is bad, it motivates the team to make it better. As a dramatic example of this, Apple banned typewriters. They were either going to manifest the future of computing or die trying.
+
+![Apple](https://res.cloudinary.com/dmukukwp6/image/upload/apple_fd647f303d.png)
 
 ## How to dogfood well
 
 From our experiences with dogfooding, we've learned a bit about how to do it well. Importantly, we've created a culture where dogfooding is expected and encouraged. We've also put into place the tools and processes that help us get good feedback and act on it, improving our product.
 
-To do this yourself is a two step process:
+Doing this yourself is a two step process:
 
 ### 1. Create a culture of dogfooding
 
@@ -102,29 +112,13 @@ We've found three details are key to getting the most out of dogfooding:
 
 3. **Separate deployment from release.** Doing this enables you to dogfood a change without releasing it to all your users. Using [feature flags](/feature-flags), you can [test in production](/product-engineers/testing-in-production), fix issues, and ship a polished product to users. 
 
-## The benefits of dogfooding
+## The pitfalls of dogfooding
 
-So after all of this work to get dogfooding right, what do you actually get out of it?
+Dogfooding too much can cause you to think you are building what users want, but really only build what you want. To ensure this doesn't happen, here are some pitfalls to avoid: 
 
-- **Fast feedback.** Getting feedback from your teammates is a lot easier and faster than getting it from users. This guides product development and helps you iterate rapidly.
+- **Dogfooding as a silver bullet.** Dogfooding shouldn't be the only strategy you use to develop your product. Your goal should be to build something your users want, not just yourself. To do this, [talk to users](/newsletter/talk-to-users), research your industry and competitors, build, get feedback, and iterate.
 
-- **Reveals issues and bugs.** When we dogfood, we almost always discover usability issues or bugs that we can fix before they impact user experience. This helps you ship a polished product.
-
-- **Increases product knowledge.** Our whole team uses PostHog. This helps us fix cross-functional issues, discover use cases, and promote PostHog better.
-
-- **Spirit.** If your product is good, it helps your team become confident in it. If your product is bad, it motivates the team to make it better. As a dramatic example of this, Apple banned typewriters. They were either going to manifest the future of computing or die trying.
-
-![Apple](https://res.cloudinary.com/dmukukwp6/image/upload/apple_fd647f303d.png)
-
-## Avoid falling into the dog bowl (aka the pitfalls of dogfooding)
-
-If you dogfood too much, you might forget what the taste of real food is like. You think you are building what users want, but in reality, are only building you want. To ensure this doesn't happen, here are some pitfalls to avoid: 
-
-- **Dogfooding as a silver bullet.** Dogfooding shouldn't be the only strategy you use to develop your product. Your goal should be to build something your users want, not just yourself. To do this, talk to users, research your industry and competitors, build, get feedback, and iterate.
-
-- **Overly dogfooding.** Dogfooding too much can slow you down. You must be comfortable with shipping features before they are fully ready. Real-world feedback is the most valuable.
-
-- **Maintain a view for the bigger picture.** Because dogfooding makes giving feedback easy, there ends up being a lot of it, whether it is valuable or not. This can cause teams to focus on small, easy fixes rather than big important ones.
+- **Overly dogfooding.** Dogfooding too much can slow you down and cause you to focus on small fixes. You must be comfortable with shipping big features before they are fully ready because real-world feedback is what really matters.
 
 - **Biases.** Your team is (hopefully) a tiny portion of users representing a small portion of use cases. Relying on dogfooding can bias you towards these use cases and limit the full potential of your product. Not everyone is an engineer building in B2B SaaS.
 
