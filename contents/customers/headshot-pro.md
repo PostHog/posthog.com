@@ -14,7 +14,7 @@ users:
   - Engineering
   - Product
 toolsUsed:
-  - Data Warehouse
+  - Data warehouse
   - Product analytics
 date: 2024-06-02
 ---
