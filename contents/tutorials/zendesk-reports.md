@@ -160,7 +160,7 @@ where u.url != ''
 order by bp.billing_view_count desc
 ```
 
-### First reply time
+### Average first reply time
 
 We can query `zendesk_ticket_metric_events` table for the `reply_time` metric then compare for the `measure` and `fulfill` times to get the average first reply time. 
 
