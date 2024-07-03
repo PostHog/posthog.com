@@ -514,6 +514,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     const menuFlattened = flattenMenu(menu)
 
+    const findNext = (menu, currentURL) => {
+        for (let i = 0; i < menu.length; i++) {
+            if (menu[i].url !== currentURL) {
+                return menu[i]
+            }
+        }
+    }
+
     function createPosts(data, menu, template, breadcrumbBase, context) {
         data.forEach((node) => {
             const links =
@@ -527,7 +535,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             const tableOfContents = node.headings && formatToc(node.headings)
             menuFlattened.some((item, index) => {
                 if (item.url === slug) {
-                    next = menuFlattened[index + 1]
+                    next = findNext(menuFlattened.slice(index), slug)
                     nextURL = next && next.url ? next.url : ''
                     previous = menuFlattened[index - 1]
                     breadcrumb = [...item.breadcrumb]
@@ -672,7 +680,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
-    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
+    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
+        regex: `$${node.url}/`,
+    }))
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
     result.data.tutorials.nodes.forEach((node) => {

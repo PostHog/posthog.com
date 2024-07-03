@@ -31,17 +31,15 @@ class InsightViewSet(TaggedItemViewSetMixin, StructuredViewSetMixin, viewsets.Mo
     """
 ```
 
-You can do the same thing for specific endpoints.
-
-```python
-@action(methods=["GET", "POST"], detail=False)
-def trend(self, request: request.Request, *args: Any, **kwargs: Any) -> Response:
-    """
-    Test comment, which [even supports markdown](https://example.com)
-    """
-```
-
 To check what any changes will roughly look like locally, you can go to http://127.0.0.1:8000/api/schema/redoc/.
+
+To add a description to a specific endpoint, add an MDX file (named after the endpoint ID's name) to the corresponding folder its page would belong to. Then, the content in the MDX file will only appear under the specified endpoint. This is like our MDX setup, except the file name will determine which endpoint the MDX contents appear on.
+
+For example, to add a description to the "list annotations" endpoint, you'd create a new file: `contents/docs/api/annotations/annotations_list.mdx`
+
+Whatever you add to that file will appear under that endpoint only.
+
+![API endpoint description](https://res.cloudinary.com/dmukukwp6/image/upload/335062290_38fe314f_e620_4076_b739_0bcbb96c21e8_6bee2c1ae3.png)
 
 ### Insights serializer
 

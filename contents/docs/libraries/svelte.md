@@ -29,12 +29,15 @@ export const load = async () => {
   if (browser) {
     posthog.init(
       '<ph_project_api_key>',
-      { api_host: '<ph_client_api_host>' }
+      { api_host: '<ph_client_api_host>', person_profiles: 'identified_only' }
     )
   }
   return
 };
 ```
+
+> ❗️ If you intend on using Session Replay with a server side rendered Svelte app
+> ensure that your [asset URLs are configured to be relative](https://posthog.com/docs/session-replay/troubleshooting#ensure-assets-are-imported-from-the-base-URL-in-Svelte).
 
 ### Tracking pageviews and pageleaves
 
@@ -72,6 +75,7 @@ export const load = async () => {
       '<ph_project_api_key>',
       {
         api_host:'<ph_client_api_host>',
+        person_profiles: 'identified_only',
         capture_pageview: false,
         capture_pageleave: false
       }

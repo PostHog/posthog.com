@@ -14,9 +14,9 @@ export const definitionCardDark = "https://res.cloudinary.com/dmukukwp6/image/up
 export const warningsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-management/warnings-light-mode.png"
 export const warningsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-management/warnings-dark-mode.png"
 
-> Looking to get third-party data in/out of PostHog? Check out the [data pipelines docs](/docs/cdp).
+> Looking to get third-party data in or out of PostHog? Check out the [data pipelines docs](/docs/cdp).
 
-You can manage all your PostHog data in the [data management](https://us.posthog.com/data-management/events) and [people](https://us.posthog.com/persons) tabs.
+PostHog has many tools to manage all your data. These tools can be found in the [data management](https://us.posthog.com/data-management/events) and [people](https://us.posthog.com/persons) tabs.
 
 <ProductScreenshot
     imageLight = {dataManagementLight} 
@@ -25,9 +25,9 @@ You can manage all your PostHog data in the [data management](https://us.posthog
     classes="rounded"
 />
 
-## Data management
+## Events
 
-The [Events tab](https://app.posthog.com/data-management/events) contains a list of all the events captured into your PostHog instance. They are sortable by name, last seen, and type (custom vs default).
+The [Events tab](https://app.posthog.com/data-management/events) contains a list of all the different events captured into your PostHog instance. They are sortable by name, last seen, and type (custom vs default).
 
 Each event also contains the top custom properties for that event including their type, tags, and an example.
 
@@ -41,7 +41,7 @@ Clicking on an event from this list shows more details about it, such as:
 - Top custom properties
 - Matching events
 
-Clicking the edit button enables you to edit the description along with the event's tags and verification status. You can see and edit the description, tags, and verification status wherever you use this in PostHog, such as insights. 
+Clicking the **Edit** button in the top right enables you to edit the description, tags, and verification status. You can see and edit the description, tags, and verification status wherever you use this in PostHog, such as insights. 
 
 This is useful for keeping track of what data is up-to-date and relevant.
 
@@ -54,9 +54,9 @@ This is useful for keeping track of what data is up-to-date and relevant.
 
 ## Actions
 
-The [actions tab](https://app.posthog.com/data-management/actions) contains a list of all the [actions](/docs/data/actions) created. They are sortable by name, who created them, creation date, and whether they post to a webhook. 
+The [actions tab](https://app.posthog.com/data-management/actions) contains a list of all created [actions](/docs/data/actions). They are sortable by name, who created them, creation date, and whether they post to a [webhook](/docs/webhooks). 
 
-The actions list also contains the type of action such as an event, autocapture, or pageview URL along with a description and tags. Clicking on an action takes you to that action's details page where you can edit it. 
+The list also contains the action type, description, and tags. Clicking on an action takes you to that action's details page where you can edit it. 
 
 ## Properties 
 
@@ -70,7 +70,7 @@ You can also sort by date and time, scope (project), creator, and creation date.
 
 ## History
 
-The [history tab](https://app.posthog.com/data-management/history) contains a log of all the changes to event and property descriptions and tags along with deletion and verification of events.
+The [history tab](https://app.posthog.com/data-management/history) contains a log of all the changes to events description, property descriptions, tags, verifications, and deletions.
 
 ## Ingestion warnings
 

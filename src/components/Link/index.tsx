@@ -52,7 +52,7 @@ export default function Link({
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (isPostHogAppUrl) {
-            posthog?.createPersonProfile()
+            posthog?.createPersonProfile?.()
         }
         if (event && posthog) {
             posthog.capture(event)
@@ -81,6 +81,7 @@ export default function Link({
     ) : internal ? (
         preview ? (
             <Tooltip
+                tooltipClassName={compact ? 'hidden' : ''}
                 offset={[0, 0]}
                 placement="left-start"
                 content={(setOpen) => (

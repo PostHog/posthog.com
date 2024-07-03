@@ -120,6 +120,7 @@ import { PostHogProvider } from 'posthog-js/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
+  person_profiles: 'identified_only',
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -198,6 +199,7 @@ Lastly, go back to `src/index.js` and make sure to set `capture_pageview` in the
 
 posthog.init("<ph_project_api_key>", {
   api_host: "<ph_client_api_host>",
+  person_profiles: 'identified_only',
   capture_pageview: false
 })
 

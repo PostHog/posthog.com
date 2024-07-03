@@ -56,13 +56,11 @@ You can also evaluate feature flags using PostHog's API from any language that c
 
 There are no limits on feature flag usage in the open-source edition, though A/B testing isn't available. PostHog's Cloud edition includes 1 million API requests per month for free – see the [feature flag pricing page](/pricing?product=feature-flags) for more info.
 
-<NewsletterForm />
-
 ### 2. Unleash
 
 - **License:** Apache
 - **GitHub stars:** 9k
-- [Flagsmith on GitHub](https://github.com/Unleash/unleash)
+- [Unleash on GitHub](https://github.com/Unleash/unleash)
 
 ![unleash](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-feature-flags/unleash.png)
 
@@ -116,7 +114,7 @@ Growthbook’s open source self-hosted plan is free forever, with unlimited flag
 
 #### What is Flagsmith?
 
-[Flagsmith](https://flagsmith.com/) is a feature flag tool that makes it easy to test and deploy new functional and visual changes to users without pushing updates to code. 
+[Flagsmith](/blog/best-flagsmith-alternatives) is a feature flag tool that makes it easy to test and deploy new functional and visual changes to users without pushing updates to code. 
 
 All flags in Flagsmith are capable of being configured for cross-platform remote configuration, so you can alter an app in real-time without having to wait for app store approval.
 

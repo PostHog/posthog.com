@@ -97,3 +97,5 @@ Decoupling deployment from release is an ever-moving goal post. What it means is
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [What you can learn from how GitHub and GitLab use feature flags](/blog/github-gitlab-feature-flags)
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
+
+<NewsletterForm />

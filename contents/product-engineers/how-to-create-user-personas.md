@@ -189,3 +189,5 @@ Here the key benefits of having user personas:
 - [10x engineers talk to users](/product-engineers/10x-engineers-do-user-interviews)
 - [How to turn user interviews into actionable snapshots](/product-engineers/interview-snapshot-guide)
 - [How to write great product survey questions (with examples)](/product-engineers/product-survey-questions)
+
+<NewsletterForm />

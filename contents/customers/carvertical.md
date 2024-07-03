@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/carvertical/carvertical_logo_dark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/carvertical/featured.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/carvertical_528ae93e37.png
 industries:
   - Recruitment
 users:

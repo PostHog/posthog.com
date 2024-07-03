@@ -136,3 +136,5 @@ This has many benefits, like knowledge sharing across teams and diversifying ski
 - [Alexey's growth engineering newsletter](https://alexeymk.com/growth-eng/)
 - [What is a growth engineer? (And why they're awesome)](/blog/what-is-a-growth-engineer)
 - [How to start a growth team (as an engineer)](/blog/how-to-start-a-growth-team)
+
+<NewsletterForm />

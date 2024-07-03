@@ -64,13 +64,13 @@ posthog.getFeatureFlagPayload('key-for-your-multivariate-flag')
 
 PostHog loads feature flags when instantiated and refreshes whenever methods are called that affect the flag. 
 
-If you have the need to forcefully trigger the refresh however you can use `reloadFeatureFlagsAsync()`:
+If want to manually trigger a refresh, you can call `reloadFeatureFlagsAsync()`:
 
 ```react-native
 posthog.reloadFeatureFlagsAsync().then((refreshedFlags) => console.log(refreshedFlags))
 ```
 
-Or when you want to trigger the reload but you don't care about the result:
+Or when you want to trigger the reload, but don't care about the result:
 
 ```react-native
 posthog.reloadFeatureFlags()
@@ -83,7 +83,7 @@ You can configure the `featureFlagsRequestTimeoutMs` parameter when initializing
 ```react-native
 export const posthog = new PostHog('<ph_project_api_key>', {
   // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'  
-  host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
+  host: '<ph_client_api_host>',
   featureFlagsRequestTimeoutMs: 10000 // Time in milliseconds. Default is 10000 (10 seconds).
 })
 ```
@@ -110,7 +110,7 @@ At any point, you can reset these properties by calling `resetPersonPropertiesFo
 posthog.resetPersonPropertiesForFlags()
 ```
 
-The same holds for [group](/manual/group-analytics) properties:
+The same holds for [group](/docs/product-analytics/group-analytics) properties:
 
 ```react-native
 // set properties for a group

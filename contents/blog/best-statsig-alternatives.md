@@ -41,7 +41,7 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), PostHo
 
 - 📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
 
-- 💬 **Surveys:** Target surveys by event or user properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
+- 💬 **Surveys:** Target surveys by event or person properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
 
 ### How does PostHog compare to Statsig?
 
@@ -80,8 +80,6 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 > #### Bottom line
 > 
 > PostHog is an ideal Statsig alternative if you're looking for a more powerful analytics tool that can also serve your A/B testing and feature management needs. It also offers a dedicated EU-hosted cloud at no extra cost.
-
-<NewsletterForm />
 
 <br />
 

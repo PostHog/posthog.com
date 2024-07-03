@@ -80,6 +80,11 @@ If this is a new contract for an existing customer, you will need to add their e
 - **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve completed verifying subscription and invoice details, and click the "Apply credit - monthly" button.
 - **If customer wishes to begin using credits in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
 
+###### Step 6: Update Django Admin
+- Navigate to the billing admin detail page for the customer (should add a column for this in the zap table?)
+- Create a new Customer to stripe customer
+  - Copy and paste the new stripe customer id and new stripe subscription id
+  - Save!
 
 ### Stripe Products & Prices
 

@@ -102,3 +102,4 @@ A 5x speed up with very little change to the existing workflow, just one line if
 
 The improvement here is deceptively huge. A 16-minute build that is run 20 times a day can account for over 5 hours of build time, slowing down progress. Faster builds mean less time waiting, fewer interruptions, and faster feedback and deploys. By switching to [Depot](https://depot.dev), PostHog can get more done, iterate faster and fix bugs without interruptions.
 
+<NewsletterForm />

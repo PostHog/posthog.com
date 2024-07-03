@@ -4,6 +4,7 @@ import FeaturedPost from '../FeaturedPost'
 import PostsGrid from '../PostsGrid'
 import LandingPageNotice from '../LandingPageNotice'
 import SEO from 'components/seo'
+import { NewsletterForm } from 'components/NewsletterForm'
 
 export default function Blog({ title = 'Blog' }) {
     const { posts } = useContext(PostsContext)
@@ -14,6 +15,7 @@ export default function Blog({ title = 'Blog' }) {
             <SEO title={`${title} - PostHog`} />
             <LandingPageNotice title={title} />
             <FeaturedPost {...featuredPost?.attributes} />
+            <NewsletterForm className="-mb-12" />
             <PostsGrid posts={rest} />
         </div>
     )

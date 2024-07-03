@@ -12,8 +12,8 @@ const features = [
     '$50,000 in PostHog credit for 12 months<sup>1</sup>',
     'Exclusive PostHog merch for founders<sup>2</sup>',
     'Access to our YC founder Slack community',
-    'Onboarding session to get you started',
-    'Our CEO on WhatsApp or SMS',
+    'Monthly newsletter of advice for founders',
+    'Priority support (if needed)',
 ]
 
 export const YCOnboarding = () => {

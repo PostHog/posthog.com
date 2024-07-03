@@ -39,9 +39,9 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 <WebSendEvents />
 
-## Setting user properties
+## Person profiles and properties
 
-To set [user properties](/docs/data/user-properties), include them when capturing an event:
+For backward compatibility, PostHog captures events with [person profiles](/docs/data/persons) by default. To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```js-web
 posthog.capture(
@@ -53,7 +53,7 @@ posthog.capture(
 )
 ```
 
-Typically user properties are set when an event occurs like `user updated email` but there may be occasions where you want to set user properties as its own event.
+Typically, person properties are set when an event occurs like `user updated email` but there may be occasions where you want to set person properties as its own event. 
 
 ```javascript
 posthog.setPersonProperties(
@@ -62,9 +62,13 @@ posthog.setPersonProperties(
 )
 ```
 
-This creates a special `$set` event that is sent to PostHog.
+This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+To control whether you capture person profiles, update the `person_profiles` config option:
+
+import PersonProfilesConfig from './_snippets/person-profiles-config.mdx'
+
+<PersonProfilesConfig />
 
 ## Identifying users
 
@@ -73,7 +77,6 @@ For more details on the difference between `$set` and `$set_once`, see our [user
 import JSIdentify from './\_snippets/identify.mdx'
 
 <JSIdentify />
-
 
 ## Alias
 
@@ -116,7 +119,7 @@ posthog.register({
 
 The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified Super Property.
 
-However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `posthog.setPersonProperties`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+This does **not** set the user's properties. It only sets the properties for their events. To store person properties, see the [setting person properties docs](/docs/product-analytics/person-properties).
 
 Furthermore, if you register the same property multiple times, the next event will use the new value of that property. If you want to register a property only once (e.g. for ad campaign properties) you can use `register_once`, like so:
 
@@ -471,8 +474,10 @@ Some of the most relevant options are:
 | `opt_out_persistence_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                      | Determines if users should be opted out of browser data storage by this PostHog instance by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
 | `persistence`<br/><br/>**Type:** `localStorage` or `sessionStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                            | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
 | `property_denylist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                        | A list of properties that should never be sent with `capture` calls.                                                           |
+| `person_profiles`<br /><br />**Type:** Enum: `always`, `identified_only`<br/>**Default:** `always`                                                                                | Set whether events should have person profiles processed |
 | `sanitize_properties`<br/><br/>**Type:** Function<br/>**Default:** `null`                                                                                                                 | A function that allows you to sanitize or modify the properties that get sent. Example: `sanitize_properties: function(properties, event) { if(properties['$ip']) { properties['$ip'] = null } return properties }` |
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual)         |
+| `session_idle_timeout_seconds`<br/><br/>**Type:** Integer<br/>**Default:** `1800`                                                                                                         | The maximum amount of time a session can be inactive before it is split into a new session.                                    |
 | `xhr_headers`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                                                                                                             | Any additional headers you wish to pass with the XHR requests to the PostHog API.                                              |
 
 
@@ -536,6 +541,7 @@ The `autocapture` config takes an object providing full control of autocapture's
 | `element_allowlist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined`                                                                                                          | An array of DOM elements, like 'a', 'button', 'form', 'input', 'select', 'textarea', or 'label', to allow autocapture on. An empty array means no elements are enabled for capture, `undefined` means all elements are enabled.                                                                                            |
 | `css_selector_allowlist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined`                                                                                                          | An array of CSS selectors to enable autocapture on. An empty array means no CSS selectors are allowed for capture, `undefined` means all CSS selectors are.                                                                                            |
 | `element_attribute_ignorelist`<br/><br/>**Type:** Array of Strings <br/>**Default:** `undefined` |  An array of element attributes that autocapture will not capture. Both an empty array and `undefined` mean any of the attributes from the element are captured. |
+| `capture_copied_text`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | When set to true, autocapture will capture the text of any element that is cut or copied. |
 
 ## Debugging
 

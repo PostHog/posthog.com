@@ -21,12 +21,19 @@ Our standard monthly [pricing](/pricing) has volume discounts built in, and we o
 
 | Minimum Spend | 1 Year | 2 Year | 3 Year |
 |---------------|--------|--------|--------|
-| $20,000 | 20% | 25% | 30% |
-| $60,000 | 25% | 30% | 35% |
-| $100,000 | 30% | 35% | 40% |
+| $20,000 | 20%    | 25%    | 30%    |
+| $60,000 | 25%    | 30%    | 35%    |
+| $100,000 | 35%    | 40%    | 45%    |
 
 Also note that the minimum amounts here are _after_ discounts e.g. they will need to purchase a minimum of $25k of credit to get a discount of 20% and contract for $20k.
 
+If a customer has an annual plan but doesn't _pay_ the whole year up front, we usually halve the discount. Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. 
+
+## Payment method
+
+Our strong preference is for customers to pay by credit card, as this is easier to manage in Stripe and has a lower risk of the customer forgetting to make the payment (which means we have to spend more time chasing). 
+
+If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers. 
 
 ## Order Form
 

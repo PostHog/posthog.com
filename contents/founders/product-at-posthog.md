@@ -93,4 +93,6 @@ Finally, I’d like to share some mistakes we’ve made in our iterative journey
 
 - **Strongly linked dependencies:** This can happen when you have processes that rely on different people (e.g. design having to review every view that goes into the app) or heavily defined scopes (e.g. if you’re a frontend engineer that can’t touch the backend). When this is present, it’s quite hard to be autonomous and effective because you constantly get blocked by other people. Blurring scopes and removing dependencies makes it easier and faster to ship things. Remember, you have a capable team with good judgement, so no need to encumber the creative process.
 
+<NewsletterForm />
+
 

@@ -10,7 +10,7 @@ As Support Hero, your job is to investigate and resolve issues reported by custo
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-[Marcus](/community/profiles/1036), our Support Engineer, triages tickets for the Product Analytics and Pipeline team, due to the high volume of tickets those teams get. He will resolve tickets if possible, and escalate to the engineering team responsible if he needs further help.
+<TeamMember name="Marcus Hof" /> and <TeamMember name="Steven Shults" />, our Support Engineers, triage tickets for the Product Analytics, Pipeline, Session Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -61,7 +61,7 @@ It's going to be an intense week, but you're also going to solve so many real pr
 
 As an engineer, when a question comes in your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. Hence the following guidelines:
 
-- Always respond to a question within a reasonable timeframe during your working day (<15 minutes is great, <1 hour is okay, anything over a day is too late)
+- Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/comms/customer-support), but you should always try to respond to tickets quickly. 
   - If you're ready to look into the issue and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
@@ -69,6 +69,9 @@ As an engineer, when a question comes in your first instinct is to give them an 
   - Be sure to thank them for reporting problems, giving feedback, creating issues, PRs, etc.
 - Follow up!
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
+- If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
+
+If you have any questions about how or when to communicate with users, you can always ask [the Comms team](/handbook/comms/overview) for help. 
 
 ## How do I prioritize?
 
@@ -78,6 +81,19 @@ As a business we need to ensure we are focusing support on our paying customers,
 1. Open Zendesk tickets for your team that have `high` priority.
 1. Open Zendesk tickets for your team that have `normal` priority.
 1. Open Zendesk tickets for your team that have `low` priority.
+
+### What if I need to confirm priority by checking a customer's MRR?
+
+You've got a couple of options.  By order of quickness:
+
+1. Use the VIP Lookup Bot:
+ 
+    In any Slack channel, type `@VIP Lookup Bot [Customer]` (without the brackets.) 
+    'Customer' can be the organization name (case-sensitive), or their organization ID.
+2. In ZenDesk: 
+
+   Click the org name near the upper-left of the ticket. The left sidebar opens. 
+   There you'll see which plan they're on. If they've already paid some bills, you'll also see MRR there.
 
 ## How should I handle self-hosted setups?
 
@@ -134,7 +150,18 @@ You’ll spend most of your time in the Views pane, where you’ll find all tick
 Tips:
 
 * Err on the side of Solving tickets (see below) if you expect no further input from the customer, as a lot of them don't reply to confirm that the problem has been solved.
-* Provide actionable information as _Note_ (e.g. links to internal slack threads, partial investigation, ...)
+* Provide actionable information as an _Internal Note_ on the ZenDesk ticket (e.g. links to internal slack threads, partial investigation, ...)
+
+#### Avoiding duplication of effort in ZenDesk
+
+To avoid having more than one person working on the same ticket at the same time, assign a ticket to yourself before you start working on it:
+
+1. Click on the ticket to open it
+2. In the left column, click the `take it` link, above the `Assignee menu`
+3. Above the compose field, change `Public reply` to `Internal note` (prevents spamming Slack channels)
+4. In the lower-right, open the `Submit as` menu and select `Open`
+
+Also, avoid cherry-picking tickets. Pick the ticket that is closest to breaching our [response targets](/handbook/comms/customer-support#response-targets).
 
 #### Ticket Status
 
@@ -147,6 +174,8 @@ When responding to a ticket you should also choose an appropriate status accordi
 * **Solved** - You've provided a solution and don't expect to do any further work on the ticket.  If it's related to a feature request then you should provide the customer a link to GitHub so that they can follow along with development.
 
 Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. 
+
+
 
 #### Content Warnings
 
@@ -182,3 +211,34 @@ The first time you answer a question, you'll need to create a community account.
 Ask in [#team-website-and-docs](https://posthog.slack.com/archives/C01V9AT7DK4) to be upgraded to a moderator. This will also give you access to moderator controls available for each question.
 
 _Note: The PostHog.com community currently uses a separate authentication system from PostHog Cloud. There are [plans](https://github.com/PostHog/posthog.com/issues/5847) to support other types of authentication so a visitor doesn't have to create a separate account for asking questions._
+
+## How do I handle a bug report or feature request?
+
+For feature requests from low priority users, [give them this link](https://github.com/PostHog/posthog/issues/new/choose) and suggest they open a feature request.
+
+For bug reports from normal and high priority users (assuming you've confirmed it's a bug, and that there's not already an open bug report):
+
+1. [Open a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml) on our GitHub repo
+2. Be sure to include a link to the insight (or other), below the repo steps
+3. Include "From: `https://URL_for_ZenDesk_ticket`" in the `additional info` section of the bug comment (where the URL is for the ZenDesk ticket where the customer reported the bug)
+4. Reply to the user to thank* them for alerting us to the bug. Let them know you've opened a bug report and provide a link to it.
+5. Let them know they can follow the bug report on GitHub for updates.
+6. When sending the reply, change the ticket from `Open` to `Pending`
+7. In Slack, go to the team channel for the team that handles the feature that the bug report applies to (e.g. `#team-product-analytics`) and alert them with a post like "New bug report from a high priority customer: `https://github.com/PostHog/posthog/issues/nnnnnn`"
+
+`*` consider sparking additional joy with a [credit for merch](/handbook/company/merch-store#how-do-we-give-away-merch-for-free)
+
+Steps for feature requests from normal and high priority users are pretty much the same, but [use this form](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml) instead. If you find that there's already a matching feature request open, reply with a link to the feature request, and let them know they can upvote it by adding a "`+1`" comment.
+
+## How do I handle user requests to delete groups/organizations?
+
+> **_WARNING:_**  Do NOT click the `DELETE` button! That will delete the entire project!
+> Just use the `Save` button after clicking the `delete` checkbox for the group.
+
+1. Visit the Django Admin page for the project at `https://us.posthog.com/admin/posthog/team/:project_id/change/` (Make sure you use the project ID for the project where the group/org is found)
+2. In the lower part of the page, find `GROUP TYPE MAPPINGS` and click on `SHOW`
+3. In the righthand column, check the box for the group(s) to be deleted
+4. Click the **`SAVE`** button. (**Do NOT use the `DELETE` button!**)
+5. Reply to the user to confirm
+
+

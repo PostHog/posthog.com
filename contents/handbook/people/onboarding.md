@@ -48,7 +48,8 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 - Once we have decided which team a new joiner will join, the People & Ops team will reach out to the team to find an onboarding buddy. _Please make sure if don't have any leave booked in the week before and the two weeks after the new starter joins_
 - We will intro the new joiner and the onboarding buddy via email - please say hi and decide together where and when the in person onboarding will happen. 
  > If any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let us team know, just use your Brex/Revolut card._
-- Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue. 
+- Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue.
+    - Make sure to add the details of the in-person onboarding to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) so that other PostHog team members can join, if possible.
 - You will remain the new joiner's main point of contact for the first few weeks, so please continue to check in with them at least once a week for the first month or so. 
 
 ## In-person onboarding
@@ -121,7 +122,7 @@ We use a number of different tools to organise our work and communicate at PostH
 - HubSpot - customer CRM
 - Zendesk - our support platform
 - Pry - financial modelling
-- LTSE Equity - cap table management
+- Carta - cap table management
 - Fondo - US accounting
 - Calendly - external meeting scheduling (e.g. demos, sales)
 - Gusto - US payroll and benefits management
@@ -163,7 +164,7 @@ Each Small Team has its own Project for tracking their Issues - [full list here]
 
 Employees are occasionally called upon to act as [support heroes](/handbook/engineering/support-hero), or need to deal with support tickets that are escalated to them. This most often applies to engineers, but can include any employee regardless of their team. For this reason, we need everyone to have a broad idea of our support processes and know how we deal with customers.
 
-All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/sales-cs) within their first three weeks at PostHog. 
+All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/customer-comms) within their first three weeks at PostHog. 
 
 In this call the support engineer will be able to answer any questions, as well as demonstrate how we deal with support at PostHog. In particular, the support engineer should cover:
 

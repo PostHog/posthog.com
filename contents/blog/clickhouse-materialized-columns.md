@@ -155,5 +155,5 @@ As a product, we're only scratching the surface of what ClickHouse can do to pow
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
-<ArrayCTA />
+<NewsletterForm />
 

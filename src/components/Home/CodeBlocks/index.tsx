@@ -21,7 +21,7 @@ export default function CodeBlocks() {
     const [activeName, setActiveName] = useState(Object.keys(content)[0])
     const menu = docsMenu?.children.filter(({ name }) => !!content[name.toLowerCase()])
     return (
-        <div className="max-w-screen-2xl mx-auto relative pb-12">
+        <div className="max-w-screen-2xl mx-auto relative pb-12 z-10">
             <h2 className="text-4xl px-4 md:px-0 lg:text-6xl text-center mb-1">Mmmm, code examples</h2>
             <p className="text-center leading-tight px-4 md:px-0 text-lg font-medium opacity-75 mb-2">
                 Here's what you can do with the PostHog JS code snippet and your product.

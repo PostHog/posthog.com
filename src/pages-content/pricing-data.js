@@ -55,10 +55,10 @@ const faqs = [
         a: "The easiest way is to sign up for the Free plan. You'll get an accurate volume projection after just a few days.",
         author: {
             q: {
-                image: <StaticImage alt="" width={40} src="./images/hog.png" />,
+                image: <StaticImage alt="" width={40} src="./images/hog.png" placeholder="blurred" />,
             },
             a: {
-                image: <StaticImage alt="" width={25} src="./images/team.png" />,
+                image: <StaticImage alt="" width={25} src="./images/team.png" placeholder="blurred" />,
                 name: 'Tim Glaser',
             },
         },
@@ -68,10 +68,10 @@ const faqs = [
         a: 'No, you only pay the fee per captured event in a given month (i.e. you only pay when each event is first received). There are no additional costs or fees.',
         author: {
             q: {
-                image: <StaticImage alt="" width={40} src="./images/hog-3.png" />,
+                image: <StaticImage alt="" width={40} src="./images/hog-3.png" placeholder="blurred" />,
             },
             a: {
-                image: <StaticImage alt="" width={25} src="./images/team-3.png" />,
+                image: <StaticImage alt="" width={25} src="./images/team-3.png" placeholder="blurred" />,
                 name: 'Simon Fisher',
             },
         },
@@ -81,10 +81,10 @@ const faqs = [
         a: 'Data (except recordings, see below) is guaranteed to be retained for 7 years on any paid plan and 1 year on a free plan. After 1 year, data may be moved into cold storage so queries may run more slowly.',
         author: {
             q: {
-                image: <StaticImage alt="" width={40} src="./images/hog-5.png" />,
+                image: <StaticImage alt="" width={40} src="./images/hog-5.png" placeholder="blurred" />,
             },
             a: {
-                image: <StaticImage alt="" width={25} src="./images/team-5.png" />,
+                image: <StaticImage alt="" width={25} src="./images/team-5.png" placeholder="blurred" />,
                 name: 'Tiina Turban',
             },
         },
@@ -94,10 +94,10 @@ const faqs = [
         a: 'Recordings are kept on Clickhouse-based installations for 1 month. For paid customers on PostHog cloud, recordings are kept for 3 months.',
         author: {
             q: {
-                image: <StaticImage alt="" width={40} src="./images/hog-6.png" />,
+                image: <StaticImage alt="" width={40} src="./images/hog-6.png" placeholder="blurred" />,
             },
             a: {
-                image: <StaticImage alt="" width={25} src="./images/team-6.png" />,
+                image: <StaticImage alt="" width={25} src="./images/team-6.png" placeholder="blurred" />,
                 name: 'Rick Marron',
             },
         },
@@ -107,10 +107,10 @@ const faqs = [
         a: 'Any event or user data stored for more than the retention period may be permanently deleted from our systems.',
         author: {
             q: {
-                image: <StaticImage alt="" width={40} src="./images/hog-7.png" />,
+                image: <StaticImage alt="" width={40} src="./images/hog-7.png" placeholder="blurred" />,
             },
             a: {
-                image: <StaticImage alt="" width={25} src="./images/team-7.png" />,
+                image: <StaticImage alt="" width={25} src="./images/team-7.png" placeholder="blurred" />,
                 name: 'Marius Andra',
             },
         },
@@ -120,10 +120,10 @@ const faqs = [
         a: 'We have a generous free tier on every paid plan so you can try out the features before paying any money (though you will need to enter your credit card info). If you have additional needs, such as enterprise features, please get in touch.',
         author: {
             q: {
-                image: <StaticImage alt="" width={40} src="./images/hog-8.png" />,
+                image: <StaticImage alt="" width={40} src="./images/hog-8.png" placeholder="blurred" />,
             },
             a: {
-                image: <StaticImage alt="" width={25} src="./images/team-8.png" />,
+                image: <StaticImage alt="" width={25} src="./images/team-8.png" placeholder="blurred" />,
                 name: 'Michael Matloka',
             },
         },
@@ -133,10 +133,10 @@ const faqs = [
         a: 'All prices are in US Dollars (USD), excluding taxes.',
         author: {
             q: {
-                image: <StaticImage alt="" width={40} src="./images/hog-9.png" />,
+                image: <StaticImage alt="" width={40} src="./images/hog-9.png" placeholder="blurred" />,
             },
             a: {
-                image: <StaticImage alt="" width={25} src="./images/team-9.png" />,
+                image: <StaticImage alt="" width={25} src="./images/team-9.png" placeholder="blurred" />,
                 name: 'James Hawkins',
             },
         },
@@ -146,10 +146,10 @@ const faqs = [
         a: 'Yes in most cases - 50% off any plan. Create your account, then email sales@posthog.com from the same email address with some basic details on your organization. We will then apply a discount.',
         author: {
             q: {
-                image: <StaticImage alt="" width={40} src="./images/hog-10.png" />,
+                image: <StaticImage alt="" width={40} src="./images/hog-10.png" placeholder="blurred" />,
             },
             a: {
-                image: <StaticImage alt="" width={25} src="./images/team-10.png" />,
+                image: <StaticImage alt="" width={25} src="./images/team-10.png" placeholder="blurred" />,
                 name: 'Eric Duong',
             },
         },
@@ -159,10 +159,10 @@ const faqs = [
         a: 'Nope. We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of an enterprise agreement.',
         author: {
             q: {
-                image: <StaticImage alt="" width={40} src="./images/hog-11.png" />,
+                image: <StaticImage alt="" width={40} src="./images/hog-11.png" placeholder="blurred" />,
             },
             a: {
-                image: <StaticImage alt="" width={25} src="./images/team-11.png" />,
+                image: <StaticImage alt="" width={25} src="./images/team-11.png" placeholder="blurred" />,
                 name: 'Cameron DeLeone',
             },
         },

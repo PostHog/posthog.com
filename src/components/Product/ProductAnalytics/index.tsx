@@ -66,7 +66,7 @@ const subfeatures = [
     {
         icon: <IconPieChart />,
         title: 'Data visualization',
-        description: 'Filter data by user property, group data, and use formulas in queries',
+        description: 'Filter data by person property, group data, and use formulas in queries',
     },
     {
         icon: <SQL />,
@@ -91,14 +91,6 @@ const subfeatures = [
 ]
 
 const questions = [
-    {
-        question: 'Where are people getting stuck in my flow?',
-        url: '/tutorials/guide-to-funnels',
-    },
-    {
-        question: 'Where are users dropping off?',
-        url: '/tutorials/guide-to-funnels#step-3-explore-user-paths-between-steps-in-the-funnel',
-    },
     {
         question: 'How do I calculate new vs returning users?',
         url: '/tutorials/track-new-returning-users',
@@ -147,10 +139,6 @@ const questions = [
         question: 'What long-term patterns are we seeing?',
     },
     {
-        question: 'What are possible causes of success or failure?',
-        url: '/tutorials/funnels#step-2-evaluate-correlated-events',
-    },
-    {
         question: 'Which cohorts can we find from usage patterns?',
     },
     {
@@ -191,14 +179,6 @@ const questions = [
         question: 'What properties correlate to success in my product?',
     },
     {
-        question: 'What events mean users are less likely to complete a funnel?',
-        url: '/tutorials/guide-to-funnels#step-2-evaluate-correlated-events',
-    },
-    {
-        question: 'What properties mean users are less likely to complete a funnel?',
-        url: '/tutorials/guide-to-funnels#step-2-evaluate-correlated-events',
-    },
-    {
         question: 'How many users return to use my product each day?',
         url: '/tutorials/track-new-returning-users#calculating-returning-users',
     },
@@ -230,7 +210,7 @@ const faqs = [
     {
         question: 'Is there a free trial on paid plans?',
         children:
-            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch</a>.',
+            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/talk-to-a-human">get in touch</a>.',
     },
     {
         question: 'What currency are your prices in?',
@@ -381,7 +361,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Filter by user property',
+        feature: 'Filter by person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -391,7 +371,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Breakdown by user property',
+        feature: 'Breakdown by person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -521,7 +501,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Filter by events or user property',
+        feature: 'Filter by events or person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -934,7 +914,7 @@ export const ProductProductAnalytics = () => {
                         <p className="text-center text-sm font-medium">
                             Have questions about PostHog? <br className="md:hidden" />
                             <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                            <Link to="/contact-sales">book a demo</Link>.
+                            <Link to="/talk-to-a-human">book a demo</Link>.
                         </p>
                     </section>
                 </div>

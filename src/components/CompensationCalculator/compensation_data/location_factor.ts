@@ -210,7 +210,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'United States',
         area: 'Minneapolis, Minnesota',
-        locationFactor: 0.75,
+        locationFactor: 0.8,
         currency: 'USD',
     },
     {

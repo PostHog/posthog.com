@@ -22,7 +22,7 @@ const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle
 }
 
 const Row = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
-    return <div className={`flex items-center space-x-4 px-2 lg:px-4 py-1.5 rounded ${className}`}>{children}</div>
+    return <div className={`flex items-center gap-4 py-1.5 px-4 rounded ${className}`}>{children}</div>
 }
 
 const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
@@ -49,7 +49,7 @@ const Title = ({ title, className = '' }: { title: string; className?: string })
     return <h5 className={`m-0 text-[15px] opacity-70 font-medium ${className}`}>{title}</h5>
 }
 
-const InclusionOnlyRow = ({ plans }) => (
+export const InclusionOnlyRow = ({ plans }) => (
     <Row className="!py-1">
         <div className="flex-grow" />
         {plans.map(({ included_if, plan_key }, index) => (
@@ -64,7 +64,7 @@ const InclusionOnlyRow = ({ plans }) => (
 
 const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
 
-const PricingTiers = ({ plans, unit, compact = false, type }) => {
+export const PricingTiers = ({ plans, unit, compact = false, type, test = false }) => {
     const posthog = usePostHog()
     const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
 
@@ -93,39 +93,43 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                         index === 0
                             ? `First ${formatCompactNumber(up_to)} ${unit}s`
                             : !up_to
-                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to)}+`
+                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
                             : `${
-                                  formatCompactNumber(plans[plans.length - 1].tiers[index - 1].up_to).split(/ |k/)[0]
+                                  formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to).split(/ |k/)[0]
                               }-${formatCompactNumber(up_to)}`
                     }
                 />
                 {!compact && (
                     <Title
-                        className="font-bold max-w-[25%] w-full min-w-[105px]"
+                        className="hidden font-bold max-w-[25%] w-full min-w-[105px]"
                         title={plans[0].free_allocation === up_to ? 'Free' : '-'}
                     />
                 )}
-                <div className="flex max-w-[25%] w-full min-w-[105px]">
+                <div className={`flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'}`}>
                     <Title
-                        className={`font-bold  ${compact ? 'text-sm' : ''}`}
+                        className={`${compact ? 'text-sm' : ''}`}
                         title={
                             plans[0].free_allocation === up_to ? (
-                                'Free'
+                                <strong>Free</strong>
                             ) : type === 'product_analytics' && index === tiers.length - 1 ? (
-                                <div className="flex items-center">
-                                    $
-                                    {parseFloat(unit_amount_usd).toFixed(
-                                        Math.max(
-                                            ...plans[plans.length - 1].tiers.map(
-                                                (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                // last row
+                                <div className="flex items-center -mr-5">
+                                    <strong>
+                                        $
+                                        {parseFloat(unit_amount_usd).toFixed(
+                                            Math.max(
+                                                ...plans[plans.length - 1].tiers.map(
+                                                    (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                                )
                                             )
-                                        )
-                                    )}
+                                        )}
+                                    </strong>
+                                    /{unit}
                                     <Tooltip
                                         content={() => (
                                             <div>
                                                 Custom pricing available for large volumes.
-                                                <Link to="/contact-sales">
+                                                <Link to="/talk-to-a-human">
                                                     <Label
                                                         className="!m-0 !p-0 !text-sm !font-bold"
                                                         text="Get in touch"
@@ -142,18 +146,24 @@ const PricingTiers = ({ plans, unit, compact = false, type }) => {
                                     </Tooltip>
                                 </div>
                             ) : (
-                                `$${parseFloat(unit_amount_usd).toFixed(
-                                    Math.max(
-                                        ...plans[plans.length - 1].tiers.map(
-                                            (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
-                                        )
-                                    )
-                                )}`
+                                <>
+                                    <strong>
+                                        $
+                                        {parseFloat(unit_amount_usd).toFixed(
+                                            Math.max(
+                                                ...plans[plans.length - 1].tiers.map(
+                                                    (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                                )
+                                            )
+                                        )}
+                                    </strong>
+                                    /{unit}
+                                </>
                             )
                         }
                     />
                     {!up_to && enterprise_flag_enabled && (
-                        <Link to="/contact-sales">
+                        <Link to="/talk-to-a-human">
                             <Label className="ml-2 !font-bold" text="Volume discounts available" style="orangeNoBg" />
                         </Link>
                     )}
@@ -171,8 +181,15 @@ const formatCompactNumber = (number) => {
     return formatter.format(number).toLowerCase()
 }
 
-const AddonTooltipContent = ({ addon }) => {
-    const referencePlan = addon.plans?.[0]
+const AddonTooltipContent = ({ addon }: { addon: BillingProductV2Type }) => {
+    const isInclusionOnly = addon.inclusion_only
+    let referencePlan
+    if (isInclusionOnly) {
+        referencePlan = addon.plans.find((plan) => plan.included_if == 'has_parent_subscription')
+    } else {
+        referencePlan = addon.plans[0]
+    }
+    console.log(addon.name, 'referencePlan', referencePlan)
     const tiers = referencePlan?.tiers
     const isFirstTierFree = parseFloat(tiers?.[0].unit_amount_usd || '') === 0
     const [showDiscounts, setShowDiscounts] = useState(false)
@@ -180,7 +197,7 @@ const AddonTooltipContent = ({ addon }) => {
     return (
         <div className="p-2 max-w-sm">
             <p className="font-bold text-[15px] mb-2">
-                {addon.name} <Label className="ml-2" text="Addon" />
+                {addon.name} <Label className="ml-2" text="Add-on" />
             </p>
             <p className="text-sm mb-3">{addon.description}</p>
             <p className="text-sm opacity-70 mb-3">
@@ -213,10 +230,12 @@ export const CTA = ({
     type = 'primary',
     ctaText,
     ctaLink,
+    intent = '',
 }: {
     type?: 'primary' | 'secondary'
     ctaText?: string
     ctaLink?: string
+    intent?: string
 }): JSX.Element => {
     const posthog = usePostHog()
     return (
@@ -224,6 +243,7 @@ export const CTA = ({
             event={{
                 name: `clicked Get started - free`,
                 type: 'cloud',
+                intent,
             }}
             type={type}
             size="md"
@@ -268,6 +288,7 @@ const allProductsData = graphql`
                             plan_key
                             product_key
                             unit
+                            included_if
                             features {
                                 description
                                 key
@@ -434,45 +455,42 @@ export default function Plans({
                                     </Row>
                                 )
                             })}
-                            {addons
-                                .filter((addon: BillingProductV2Type) => !addon.inclusion_only)
-                                .map((addon: BillingProductV2Type) => {
-                                    return (
-                                        <Row
-                                            className="hover:bg-accent/60 dark:hover:bg-accent-dark/70"
-                                            key={addon.type}
-                                        >
-                                            <div className="flex-grow">
-                                                <AddonTooltip addon={addon} parentProductName={name}>
-                                                    <Title
-                                                        className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                        title={addon.name}
-                                                    />
-                                                    <Label className="ml-2" text="Addon" />
-                                                </AddonTooltip>
-                                            </div>
-                                            {plans.map((plan) => {
-                                                return (
-                                                    <div
-                                                        className="max-w-[25%] w-full min-w-[105px]"
-                                                        key={`${addon.type}-${plan.plan_key}`}
-                                                    >
-                                                        {plan.free_allocation ? (
-                                                            <Close opacity={1} className="text-red w-4" />
-                                                        ) : (
-                                                            <AddonTooltip addon={addon} parentProductName={name}>
-                                                                <Title
-                                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
-                                                                    title="Available"
-                                                                />
-                                                            </AddonTooltip>
-                                                        )}
-                                                    </div>
-                                                )
-                                            })}
-                                        </Row>
-                                    )
-                                })}
+                            {addons.map((addon: BillingProductV2Type) => {
+                                return (
+                                    <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={addon.type}>
+                                        <div className="flex-grow">
+                                            <AddonTooltip addon={addon} parentProductName={name}>
+                                                <Title
+                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                    title={addon.name}
+                                                />
+                                                <Label className="ml-2" text="Add-on" />
+                                            </AddonTooltip>
+                                        </div>
+                                        {plans.map((plan, i) => {
+                                            return (
+                                                <div
+                                                    className="max-w-[25%] w-full min-w-[105px]"
+                                                    key={`${addon.type}-${plan.plan_key}`}
+                                                >
+                                                    {plan.free_allocation && !plan.included_if ? (
+                                                        <Close opacity={1} className="text-red w-4" />
+                                                    ) : plan.included_if == 'no_active_parent_subscription' ? (
+                                                        <span>Included</span>
+                                                    ) : (
+                                                        <AddonTooltip addon={addon} parentProductName={name}>
+                                                            <Title
+                                                                className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                                title="Available"
+                                                            />
+                                                        </AddonTooltip>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                    </Row>
+                                )
+                            })}
                         </div>
                         <div>
                             <Row className="bg-accent dark:bg-accent-dark my-2">

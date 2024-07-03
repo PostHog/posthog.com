@@ -11,13 +11,16 @@ import {
 
 import type { pricingSliderLogicType } from './pricingSliderLogicType'
 
-const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) => {
-    let finalCost = 0
-    let alreadyCountedEvents = 0
-
+const getTiers = (pricingOption) => {
     const tiers = pricingSliderLogic.values.availableProducts
         .find((product) => product.type === pricingOption)
         ?.plans.find((plan) => plan.tiers)?.tiers
+    return tiers
+}
+
+export const calculatePrice = (eventNumber: number, tiers) => {
+    let finalCost = 0
+    let alreadyCountedEvents = 0
 
     if (!tiers) {
         return 0
@@ -186,31 +189,31 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
         finalCost: [
             (s) => [s.eventNumber, s.pricingOption],
             (eventNumber: number, pricingOption: PricingOptionType) => {
-                return calculatePrice(eventNumber, pricingOption)
+                return calculatePrice(eventNumber, getTiers(pricingOption))
             },
         ],
         sessionRecordingCost: [
             (s) => [s.sessionRecordingEventNumber],
             (sessionRecordingEventNumber: number) => {
-                return calculatePrice(sessionRecordingEventNumber, 'session_replay')
+                return calculatePrice(sessionRecordingEventNumber, getTiers('session_replay'))
             },
         ],
         productAnalyticsCost: [
             (s) => [s.eventNumber],
             (eventNumber: number) => {
-                return calculatePrice(eventNumber, 'product_analytics')
+                return calculatePrice(eventNumber, getTiers('product_analytics'))
             },
         ],
         featureFlagCost: [
             (s) => [s.featureFlagNumber],
             (featureFlagNumber: number) => {
-                return calculatePrice(featureFlagNumber, 'feature_flags')
+                return calculatePrice(featureFlagNumber, getTiers('feature_flags'))
             },
         ],
         surveyResponseCost: [
             (s) => [s.surveyResponseNumber],
             (surveyResponseNumber: number) => {
-                return calculatePrice(surveyResponseNumber, 'surveys')
+                return calculatePrice(surveyResponseNumber, getTiers('surveys'))
             },
         ],
         monthlyTotal: [
@@ -222,10 +225,10 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
                 surveyResponseNumber: number
             ) => {
                 return (
-                    calculatePrice(eventNumber, 'product_analytics') +
-                    calculatePrice(sessionRecordingEventNumber, 'session_replay') +
-                    calculatePrice(featureFlagNumber, 'feature_flags') +
-                    calculatePrice(surveyResponseNumber, 'surveys')
+                    calculatePrice(eventNumber, getTiers('product_analytics')) +
+                    calculatePrice(sessionRecordingEventNumber, getTiers('session_replay')) +
+                    calculatePrice(featureFlagNumber, getTiers('feature_flags')) +
+                    calculatePrice(surveyResponseNumber, getTiers('surveys'))
                 )
             },
         ],

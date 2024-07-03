@@ -48,6 +48,37 @@ response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response)
 ```
 
+```node
+import fetch from "node-fetch";
+
+async function sendPosthogEvent() {
+  const url = "<ph_client_api_host>/capture/";
+  const headers = {
+      "Content-Type": "application/json",
+  };
+  const payload = {
+    api_key: "<ph_project_api_key>",
+    event: "event name",
+    distinct_id: "user distinct id",
+    properties: {
+      account_type: "pro",
+    },
+    timestamp: "[optional timestamp in ISO 8601 format]",
+  };
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+sendPosthogEvent()
+```
+
 </MultiLanguage>
 
 ## Batch events
@@ -300,6 +331,46 @@ payload = {
       "$set": {
           "is_cool": True
       }
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response)
+```
+
+</MultiLanguage>
+
+## Events without person profiles
+
+For backward compatibility, PostHog captures events with [person profiles](/docs/data/persons) by default. To capture events without them, add the `$process_person_profile` property to the event and set it to `false`.
+
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "event name",
+  "distinct_id": "user distinct id",
+  "properties": {
+    "$process_person_profile": false
+  },
+  "timestamp": "2020-08-16T09:03:11.913767"
+}' <ph_client_api_host>/capture/
+```
+
+```python
+import requests
+import json
+
+url = "<ph_client_api_host>/capture/"
+headers = {
+    "Content-Type": "application/json"
+}
+payload = {
+    "api_key": "<ph_project_api_key>",
+    "event": "event name",
+    "distinct_id": "user distinct id",
+    "properties": {
+      "$process_person_profile": False
     }
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))

@@ -970,7 +970,7 @@ export const AIEngineering = () => {
             additionalText={
                 <>
                     <p className="pt-2 mb-2">
-                        Find correlations bebtween your AI/LLM features and product usage. Combine with other PostHog
+                        Find correlations between your AI/LLM features and product usage. Combine with other PostHog
                         products for deeper insights.
                     </p>
                     <ul className="mb-4">

@@ -16,7 +16,7 @@ PostHog automatically computes timestamps for captured events, but you can also 
 
 - Finally, as a fallback when no `timestamp` or `offset` are included in the payload, the capture time recorded by the server is used as the event timestamp.
 
-To ensure maximum compatibility with PostHog, `timestamp` and `sent_at` fields should be in `ISO-8601` format like `2023-12-13T15:45:30.123Z` or `YYYY-MM-DDTHH:MM:SSZ`.
+To ensure maximum compatibility with PostHog, `timestamp` and `sent_at` fields should be in `ISO 8601` format like `2023-12-13T15:45:30.123Z` or `YYYY-MM-DDTHH:MM:SSZ`.
 
 > **Note:** `posthog-js` also sends `$time` property, but this isn't used anywhere in the ingestion pipeline.
 
@@ -40,3 +40,18 @@ graph TD
     K -->|No| I
     I --> M      
 ```
+
+## Recognized formats
+
+Although we recommend using the `ISO 8601` format, PostHog can also detect several other formats of string as dates and times:
+
+- YYYY-MM-DD,
+- YYYY-MM-DD HH:mm:SS,
+- DD-MM-YYYY HH:mm:SS,
+- DD/MM/YYYY HH:mm:SS,
+- YYYY/MM/DD HH:mm:SS
+- [the RFC 822 standard](https://datatracker.ietf.org/doc/html/rfc822)
+
+In detection, day and month are interchangeable so MM-DD-YYYY would be detected as a date.
+
+Ten and thirteen digit numbers are detected as [timestamps](https://en.wikipedia.org/wiki/Unix_time) if the property name includes "time" or "timestamp."

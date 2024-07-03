@@ -65,8 +65,6 @@ YC invests in startups. Their advice and network help startups grow and succeed.
 
 YC differentiates itself from other accelerators by being extremely startup-friendly, focused on San Francisco, and having a strong founder network. Each of these is core to the success of their growth loop.
 
-<NewsletterForm />
-
 ## Types of growth loops
 
 There are many types of growth loops, but five of the most important are:

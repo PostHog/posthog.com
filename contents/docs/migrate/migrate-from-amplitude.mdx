@@ -20,7 +20,7 @@ According to Amplitude's [Export API documentation](https://www.docs.developers.
 
 ```
 {
-  "event_time": UTC ISO-8601 formatted timestamp,
+  "event_time": UTC ISO 8601 formatted timestamp,
   "event_name": string,
   "device_id": string,
   "user_id": string | null,
@@ -55,7 +55,7 @@ In short:
 
 - We track the event with the same name and timestamp
 - For the distinct ID, we either use the User ID if present, or the Device ID (a UUID string) if not
-- We track user properties using `properties: {$set}`
+- We track person (AKA user) properties using `properties: {$set}`
 - We track event properties using `properties`
 
 ### Aliasing device IDs to user IDs

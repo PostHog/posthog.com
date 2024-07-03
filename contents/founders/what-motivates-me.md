@@ -89,3 +89,5 @@ The people I want to beat represent the opposite of what we want to do. They:
 I want to show to the world that you can beat the biggest companies, specifically _by_ doing right by our users and our team.
 
 Doing a good job by _not_ doing the list above has led to a strong brand and has made us realize we should keep being ourselves. It has often meant short term pain for long term gain. And we're going to keep it that way.
+
+<NewsletterForm />

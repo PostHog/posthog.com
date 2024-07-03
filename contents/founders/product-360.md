@@ -128,4 +128,4 @@ However, we were wrong that once we had product market fit for our open-source p
 
 >PostHog is an open-source product analytics tool which enables teams to build better products faster without sharing their user data with third parties.
 
-<ArrayCTA />
+<NewsletterForm />

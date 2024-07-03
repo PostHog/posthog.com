@@ -36,7 +36,7 @@ Hero.args = {
         <CallToAction key={0} href="https://app.posthog.com/signup">
             Get started - free
         </CallToAction>,
-        <CallToAction key={1} href="/book-a-demo" type="outline">
+        <CallToAction key={1} href="/demo" type="outline">
             Schedule a demo
         </CallToAction>,
     ],

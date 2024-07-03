@@ -50,7 +50,7 @@ We also offer [PostHog Cloud EU](https://eu.posthog.com/signup) – a managed ve
 
 ### Can I use PostHog Cloud under HIPAA?
 
-Yes, we can provide a Business Associate Agreement (BAA) to enable HIPAA-compliant usage of PostHog Cloud. Please [contact us to arrange a BAA and discuss your requirements](/contact-sales). 
+Yes, we can provide a Business Associate Agreement (BAA) to enable HIPAA-compliant usage of PostHog Cloud. Please [contact us to arrange a BAA and discuss your requirements](/talk-to-a-human). 
 
 ### Is Google Analytics HIPAA compliant?
 

@@ -29,7 +29,7 @@
         "handle": "james-temperton",
         "name": "James Temperton",
         "role": "Content Marketer",
-        "image": "../../static/images/authors/contributor-posthog.png",
+        "image": "../../static/images/authors/james-temperton-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/jtemperton",
         "profile_id": 29278
@@ -86,7 +86,7 @@
         "image": "../../static/images/authors/cory-watilo-posthog.png",
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/corywatilo/",
-        "profile_id": 21981
+        "profile_id": 30200
     },
     {
         "handle": "leggetter",

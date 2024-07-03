@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1711025316/posthog.com/contents/images/customers/significa/wordmark.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1711020079/posthog.com/contents/images/customers/significa/significa-feat.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/significa_ef952b52a3.png
 industries:
   - Agency
 users:

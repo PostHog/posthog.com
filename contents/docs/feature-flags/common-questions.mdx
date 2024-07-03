@@ -27,6 +27,7 @@ Check the **feature flags tab** on [the persons page](https://app.posthog.com/pe
 
 - If the flag is shown as disabled here, check the "match evaluation" column to know the understand why.
 - If the flag is shown as enabled here, there may be a problem in your code. Double-check the steps to [add feature flag code](/docs/feature-flags/adding-feature-flag-code).
+- Ensure you are capturing [person profiles](/docs/data/persons).
 
 ### 2. Check you're calling `identify()` before evaluating the flag
 
@@ -89,6 +90,11 @@ The drawback of this approach is that whenever you make an update to a feature f
 
 > **Note:** Do not use local evaluation in an edge / lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
 
+## I have very few `$feature_flag_called` events when I look at a flag, but my bill is still very high, why is this?
+
+$feature_flag_called` events are captured whenever you call `getFeatureFlag()` or `isFeatureEnabled()`. Also, they're not sent every time and are only sent when the flag value changes for a given person. 
+
+This is different from requests made to our servers to compute flags, which is what feature flag billable requests are. Thus, generally, there will be no relation between the number of `$feature_flag_called` events and the usage you see in your billing.
 ## Why do feature flags sometimes cause my app to flicker?
 
 By default, fetching flags from our servers takes about 100-500ms. During this time, the flag is disabled. When the request is complete, the flag is updated. This may be the cause of the flickering.
