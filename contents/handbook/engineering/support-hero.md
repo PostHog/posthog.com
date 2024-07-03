@@ -61,7 +61,7 @@ It's going to be an intense week, but you're also going to solve so many real pr
 
 As an engineer, when a question comes in your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. Hence the following guidelines:
 
-- Always respond to a question within a reasonable timeframe during your working day (<15 minutes is great, <1 hour is okay, anything over a day is too late)
+- Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/comms/customer-support), but you should always try to respond to tickets quickly. 
   - If you're ready to look into the issue and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
@@ -69,6 +69,9 @@ As an engineer, when a question comes in your first instinct is to give them an 
   - Be sure to thank them for reporting problems, giving feedback, creating issues, PRs, etc.
 - Follow up!
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
+- If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
+
+If you have any questions about how or when to communicate with users, you can always ask [the Comms team](/handbook/comms/overview) for help. 
 
 ## How do I prioritize?
 
