@@ -9,7 +9,8 @@ import { useValues } from 'kea'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import useProducts from 'hooks/useProducts'
-import { LogSlider, sliderCurve } from '../PricingSlider/Slider'
+import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
+import Checkbox from 'components/Checkbox'
 
 const Modal = ({ onClose, isVisible }) => {
     return (
@@ -271,74 +272,174 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
             </div>
             <div className="col-span-3 md:col-span-2 text-right">
                 <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
-                    ${checked ? addon?.totalCost.toLocaleString() : 0}
+                    {checked ? formatUSD(addon?.totalCost) : 0}
                 </p>
             </div>
         </div>
     )
 }
 
-const TabContent = ({ activeProduct, addons, setVolume, setAddons }) => {
-    const { type, cost, volume, billingData, slider } = activeProduct
+const SliderToggle = ({ label = '', children, onChange, ...other }) => {
+    const [checked, setChecked] = useState(other.checked || false)
+    return (
+        <div className={`mt-2 ${checked ? 'mb-10' : 'mb-2'}`}>
+            <div className="space-y-3">
+                <Checkbox
+                    className="!text-base"
+                    checked={checked}
+                    onChange={() => {
+                        const newChecked = !checked
+                        setChecked(!checked)
+                        onChange(newChecked)
+                    }}
+                    value={label}
+                />
+                {checked && children}
+            </div>
+        </div>
+    )
+}
 
+const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value }) => {
+    return (
+        <div className={`${className} ml-6`}>
+            {label && <p className="m-0 text-sm mb-2">{label}</p>}
+            <LogSlider
+                stepsInRange={100}
+                marks={marks}
+                min={min}
+                max={max}
+                onChange={(value) => onChange(sliderCurve(value))}
+                value={inverseCurve(value)}
+            />
+        </div>
+    )
+}
+
+const analyticsSliders = [
+    {
+        label: 'Website analytics',
+        types: [{ type: 'websiteAnalyticsEvents' }],
+    },
+    {
+        label: 'Product analytics',
+        types: [{ type: 'productAnalyticsEvents' }],
+    },
+    {
+        label: 'Mobile app',
+        types: [
+            { type: 'mobileAppAnonymousEvents', label: 'Anonymous events' },
+            { type: 'mobileAppAuthenticatedEvents', label: 'Events from authenticated users' },
+        ],
+    },
+]
+
+const ProductAnalyticsTab = ({ activeProduct, analyticsData, setAnalyticsVolume }) => {
+    const { slider } = activeProduct
+
+    return (
+        <div className="mb-4">
+            <h3 className="m-0 text-base">Event types</h3>
+            {analyticsSliders.map(({ label, types }) => (
+                <SliderToggle
+                    key={label}
+                    label={label}
+                    onChange={(checked) =>
+                        types.forEach(({ type }) => setAnalyticsVolume(type, checked ? slider.min : 0))
+                    }
+                    checked={types.some(({ type }) => analyticsData[type].volume > 0)}
+                >
+                    <div className="space-y-8">
+                        {types.map(({ type, label }) => (
+                            <div key={type}>
+                                <div className="grid grid-cols-5">
+                                    <AnalyticsSlider
+                                        {...slider}
+                                        onChange={(value) => setAnalyticsVolume(type, value)}
+                                        value={analyticsData[type].volume}
+                                        className="col-span-3"
+                                        label={label}
+                                    />
+                                    <p className="text-right font-bold m-0">
+                                        {analyticsData[type].volume.toLocaleString()}
+                                    </p>
+                                    <p className="text-right font-bold m-0">{formatUSD(analyticsData[type].cost)}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </SliderToggle>
+            ))}
+        </div>
+    )
+}
+
+const productTabs = {
+    product_analytics: ProductAnalyticsTab,
+}
+
+const TabContent = ({ activeProduct, addons, setVolume, setAddons, setAnalyticsVolume, analyticsData }) => {
+    const { type, cost, volume, billingData, slider } = activeProduct
     return (
         <>
             <div>
-                {activeProduct.name == 'A/B testing' ? (
-                    <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-4 py-3 mb-2 text-sm">
-                        A/B testing is currently bundled with Feature flags and shares a free tier and volume pricing.
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-8">
-                        <div className="col-span-6">
-                            <p className="mb-2">
-                                <strong>
-                                    {Math.round(volume ? sliderCurve(volume) : slider.min).toLocaleString()}
-                                </strong>{' '}
-                                <span className="opacity-70 text-sm">{billingData.unit}s/month</span>
-                            </p>
+                {productTabs[activeProduct.type]?.({ activeProduct, setVolume, setAnalyticsVolume, analyticsData }) ||
+                    (activeProduct.name == 'A/B testing' ? (
+                        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-4 py-3 mb-2 text-sm">
+                            A/B testing is currently bundled with Feature flags and shares a free tier and volume
+                            pricing.
                         </div>
-                        <div className="col-span-2 text-right pr-3">
-                            <p className="font-semibold mb-0">${cost.toLocaleString()}</p>
-                        </div>
-                        {slider && (
-                            <div className="col-span-full pr-1.5">
-                                <LogSlider
-                                    stepsInRange={100}
-                                    marks={slider.marks}
-                                    min={slider.min}
-                                    max={slider.max}
-                                    onChange={(value) => setVolume(type, value)}
-                                    value={volume}
-                                />
+                    ) : (
+                        <div className="grid grid-cols-8">
+                            <div className="col-span-6">
+                                <p className="mb-2">
+                                    <strong>{Math.round(volume).toLocaleString()}</strong>{' '}
+                                    <span className="opacity-70 text-sm">{billingData.unit}s/month</span>
+                                </p>
                             </div>
-                        )}
-                        <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
-                            <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
-                            <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                                First {Math.round(slider.min).toLocaleString()} {billingData.unit}s free –&nbsp;
-                                <em>every month!</em>
-                            </span>
+                            <div className="col-span-2 text-right pr-3">
+                                <p className="font-semibold mb-0">{formatUSD(cost)}</p>
+                            </div>
+                            {slider && (
+                                <div className="col-span-full pr-1.5">
+                                    <LogSlider
+                                        stepsInRange={100}
+                                        marks={slider.marks}
+                                        min={slider.min}
+                                        max={slider.max}
+                                        onChange={(value) => setVolume(type, sliderCurve(value))}
+                                        value={inverseCurve(volume)}
+                                    />
+                                </div>
+                            )}
+                            <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
+                                <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
+                                <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
+                                    First {Math.round(slider.min).toLocaleString()} {billingData.unit}s free –&nbsp;
+                                    <em>every month!</em>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    ))}
                 {activeProduct.billingData.addons.length > 0 && (
                     <div className="">
                         <p className="opacity-70 text-sm m-0">Product add-ons</p>
                         <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
-                            {activeProduct.billingData.addons.map((addon) => {
-                                return (
-                                    <li key={addon.type} className="py-2">
-                                        <Addon
-                                            key={addon.type}
-                                            addons={addons}
-                                            setAddons={setAddons}
-                                            volume={volume ? sliderCurve(volume) : slider.min}
-                                            {...addon}
-                                        />
-                                    </li>
-                                )
-                            })}
+                            {activeProduct.billingData.addons
+                                .filter((addon) => !addon.inclusion_only)
+                                .map((addon) => {
+                                    return (
+                                        <li key={addon.type} className="py-2">
+                                            <Addon
+                                                key={addon.type}
+                                                addons={addons}
+                                                setAddons={setAddons}
+                                                volume={volume || slider.min}
+                                                {...addon}
+                                            />
+                                        </li>
+                                    )
+                                })}
                         </ul>
                     </div>
                 )}
@@ -353,16 +454,23 @@ const addonDefaults = {
     },
 }
 
+const formatUSD = (number) => {
+    const usd = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    })
+    return usd.format(number).replace('.00', '')
+}
+
 export default function Tabbed() {
     const {
         allProductData: {
             nodes: [{ products: billingProducts }],
         },
     } = useStaticQuery(allProductsData)
-    const { monthlyTotal } = useValues(pricingSliderLogic)
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
     const [activeTab, setActiveTab] = useState(0)
-    const { products, setVolume } = useProducts()
+    const { products, setVolume, setAnalyticsVolume, analyticsData, monthlyTotal } = useProducts()
     const activeProduct = products[activeTab]
     const initialProductAddons = useMemo(() => {
         const initialAddons = []
@@ -406,8 +514,15 @@ export default function Tabbed() {
                 <div className="md:col-span-3 md:pr-6 mb-4 md:mb-0">
                     <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4">
-                        {products.map(({ name, Icon, cost, color }, index) => {
+                        {products.map(({ name, Icon, cost, color, billingData }, index) => {
                             const active = activeTab === index
+                            const addonsPrice = productAddons
+                                .filter(
+                                    (addon) =>
+                                        addon.checked &&
+                                        billingData.addons.some((billingAddon) => addon.type === billingAddon.type)
+                                )
+                                .reduce((acc, addon) => acc + addon.totalCost, 0)
                             return (
                                 <li key={name}>
                                     <button
@@ -427,7 +542,9 @@ export default function Tabbed() {
                                         {name == 'A/B testing' ? (
                                             <span className="opacity-25">--</span>
                                         ) : (
-                                            <div className="opacity-70 pl-5 md:pl-0">${cost.toLocaleString()}</div>
+                                            <div className="opacity-70 pl-5 md:pl-0">
+                                                {formatUSD(cost + addonsPrice)}
+                                            </div>
                                         )}
                                     </button>
                                 </li>
@@ -449,6 +566,8 @@ export default function Tabbed() {
                         setAddons={setProductAddons}
                         activeProduct={activeProduct}
                         setVolume={setVolume}
+                        setAnalyticsVolume={setAnalyticsVolume}
+                        analyticsData={analyticsData}
                     />
                 </div>
                 <div className="md:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark"></div>
