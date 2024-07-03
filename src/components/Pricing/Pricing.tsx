@@ -125,7 +125,7 @@ const SectionHeader = ({ children }) => (
 
 const SectionColumns = ({ children }) => <div className="grid md:grid-cols-3 md:py-4">{children}</div>
 
-const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:pb-0 md:pr-8">{children}</div>
+const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:pb-0">{children}</div>
 
 const SectionSidebar = ({ children, className = '' }) => (
     <div

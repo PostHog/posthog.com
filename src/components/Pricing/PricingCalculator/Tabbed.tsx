@@ -272,7 +272,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
             </div>
             <div className="col-span-3 md:col-span-2 text-right">
                 <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
-                    {checked ? formatUSD(addon?.totalCost) : 0}
+                    {formatUSD(checked ? addon?.totalCost : 0)}
                 </p>
             </div>
         </div>
@@ -282,8 +282,8 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
 const SliderToggle = ({ label = '', children, onChange, ...other }) => {
     const [checked, setChecked] = useState(other.checked || false)
     return (
-        <div className={`mt-2 ${checked ? 'mb-10' : 'mb-2'}`}>
-            <div className="space-y-3">
+        <div className={`mt-2 grid ${checked ? 'mb-10' : 'mb-2 grid-cols-5'}`}>
+            <div className="space-y-3 col-span-3">
                 <Checkbox
                     className="!text-base"
                     checked={checked}
@@ -296,14 +296,20 @@ const SliderToggle = ({ label = '', children, onChange, ...other }) => {
                 />
                 {checked && children}
             </div>
+            {!checked && (
+                <>
+                    <span className="opacity-25 text-right">--</span>
+                    <span className="opacity-25 text-right">--</span>
+                </>
+            )}
         </div>
     )
 }
 
 const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value }) => {
     return (
-        <div className={`${className} ml-6`}>
-            {label && <p className="m-0 text-sm mb-2">{label}</p>}
+        <div className={`${className} ml-6 relative ${label ? 'pt-7' : ''}`}>
+            {label && <p className="m-0 text-sm absolute left-0 top-0">{label}</p>}
             <LogSlider
                 stepsInRange={100}
                 marks={marks}
@@ -338,8 +344,13 @@ const ProductAnalyticsTab = ({ activeProduct, analyticsData, setAnalyticsVolume 
     const { slider } = activeProduct
 
     return (
-        <div className="mb-4">
-            <h3 className="m-0 text-base">Event types</h3>
+        <div className="mb-4 pr-3">
+            <div className="grid grid-cols-5 items-end mb-2">
+                <h3 className="m-0 text-base col-span-3">Event types</h3>
+                <p className="m-0 text-right opacity-70 text-sm">Events/month</p>
+                <p className="m-0 text-right opacity-70 text-sm">Subtotal</p>
+            </div>
+
             {analyticsSliders.map(({ label, types }) => (
                 <SliderToggle
                     key={label}
@@ -360,10 +371,12 @@ const ProductAnalyticsTab = ({ activeProduct, analyticsData, setAnalyticsVolume 
                                         className="col-span-3"
                                         label={label}
                                     />
-                                    <p className="text-right font-bold m-0">
+                                    <p className="text-right font-bold m-0 self-end -mb-1.5">
                                         {analyticsData[type].volume.toLocaleString()}
                                     </p>
-                                    <p className="text-right font-bold m-0">{formatUSD(analyticsData[type].cost)}</p>
+                                    <p className="text-right font-bold m-0 self-end -mb-1.5">
+                                        {formatUSD(analyticsData[type].cost)}
+                                    </p>
                                 </div>
                             </div>
                         ))}
