@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
-import { IconDatabase, IconGraph, IconHogQL, IconToggle, IconDecisionTree } from '@posthog/icons'
+import { IconDatabase, IconGraph, IconHogQL, IconClock, IconToggle, IconDecisionTree } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { TutorialCard } from 'components/Products/TutorialCard'
@@ -41,28 +41,26 @@ const features = [
     {
         title: 'Sync from Stripe',
         description: 'Combine financial and product data to see how usage turns into growth.',
-        image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
+        image: <StaticImage src="./images/stripe.png" width={428} placeholder="none" />,
     },
     {
         title: 'Sync from Hubspot',
         description: 'Bring your CRM into the mix and track your sales funnel directly in PostHog.',
-        image: <StaticImage src="./images/templates.png" width={428} placeholder="none" />,
-        background: true,
-        fade: true,
+        image: <StaticImage src="./images/hubspot.png" width={428} height={312} placeholder="none" />,
     },
     {
         title: 'Sync from Zendesk',
         description: 'See how ticket volumes and SLA breaches impact sign-ups and churn.',
-        image: <StaticImage src="./images/targeting.png" width={428} placeholder="none" />,
+        image: <StaticImage src="./images/zendesk.png" width={428} placeholder="none" />,
     },
     {
         title: 'Sync from anywhere',
         description: 'Adwords? Salesforce? Grab anything you want using custom sources.',
-        image: <StaticImage src="./images/steps.png" width={428} placeholder="none" />,
+        image: <StaticImage src="./images/custom.png" width={428} height={312} placeholder="none" />,
     },
 ]
 
-const subfeaturesItemCount = 3
+const subfeaturesItemCount = 4
 const subfeatures = [
     {
         title: 'Link multiple sources',
@@ -78,6 +76,11 @@ const subfeatures = [
         title: 'Save queries as views',
         description: 'Save time by saving visualized data as tables, graphcs, and more',
         icon: <IconGraph />,
+    },
+    {
+        title: 'Custom sync periods',
+        description: 'Decide whether to sync data sources daily, weekly, or monthly',
+        icon: <IconClock />,
     },
 ]
 
