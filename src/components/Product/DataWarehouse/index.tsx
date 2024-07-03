@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
-import { IconDatabase, IconGraph, IconHogQL, IconToggle, IconPieChart } from '@posthog/icons'
+import { IconDatabase, IconGraph, IconHogQL, IconToggle, IconDecisionTree } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { TutorialCard } from 'components/Products/TutorialCard'
@@ -66,17 +66,17 @@ const subfeaturesItemCount = 3
 const subfeatures = [
     {
         title: 'Link multiple sources',
-        description: 'See feedback summarized and broken down per response',
-        icon: <IconPieChart />,
+        description: 'Add joins to link tables together and connect run advanced queries',
+        icon: <IconDecisionTree />,
     },
     {
         title: 'Query with HogQL',
-        description: 'Send realtime survey responses to a Slack channel',
+        description: 'Use our take on SQL to interrogate data and build custom queries',
         icon: <IconHogQL />,
     },
     {
         title: 'Save queries as views',
-        description: 'Set a delay before a survey opens',
+        description: 'Save time by saving visualized data as tables, graphcs, and more',
         icon: <IconGraph />,
     },
 ]
