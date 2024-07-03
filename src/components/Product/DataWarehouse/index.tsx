@@ -330,7 +330,9 @@ export const ProductDataWarehouse = () => {
                 <p className="mt-0 text-opacity-70 text-center">
                     Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                 </p>
-                <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'surveys').children} />
+                <DocLinks
+                    menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'data warehouse').children}
+                />
             </section>
 
             <section id="team" className="mb-20 px-5">
