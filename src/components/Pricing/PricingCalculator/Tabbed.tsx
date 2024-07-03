@@ -523,7 +523,7 @@ export default function Tabbed() {
 
     return (
         <div>
-            <div className="grid md:grid-cols-8 mb-1 md:mb-0">
+            <div className="grid md:grid-cols-8 mb-1 md:mb-0 pt-2">
                 <div className="md:col-span-3 md:pr-6 mb-4 md:mb-0">
                     <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4">
