@@ -96,17 +96,32 @@ const subfeatures = [
 
 const questions = [
     {
-        question: 'Would you like to book a user interview?',
-        url: '/tutorials/feedback-interviews-site-apps',
+        question: 'How do specific user behaviours correlate to MRR?',
+        url: '/tutorials/stripe-reports',
     },
     {
-        question: 'Would you like to be interviewed by our product team?',
+        question: 'How is user retention affected by SLA breaches in Zendesk?',
+        url: '/tutorials/zendesk-reports',
     },
     {
-        question: 'How would you feel if you could no longer use this product?',
+        question: 'How are inbound leads using my product?',
+        url: '/tutorials/hubspot-reports#usage-by-lead',
     },
     {
-        question: "How satisfied are you with the support you've received?",
+        question: 'How does predicted revenue compare to my actual revenue?',
+        url: '/tutorials/hubspot-reports#getting-revenue-from-closed-deals-by-joining-with-stripe',
+    },
+    {
+        question: 'How does predicted revenue compare to my actual revenue?',
+        url: '/tutorials/hubspot-reports#getting-revenue-from-closed-deals-by-joining-with-stripe',
+    },
+    {
+        question: 'How much revenue am I churning each month?',
+        url: '/tutorials/stripe-reports#revenue-churn',
+    },
+    {
+        question: 'Who are my power users, and how do they use my product??',
+        url: '/tutorials/stripe-reports#usage-by-top-customers',
     },
 ]
 
