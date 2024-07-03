@@ -21,7 +21,7 @@ We'll explain how they work, why we chose this structure, and the tradeoffs we a
 
 ## How small teams work at PostHog
 
-Right now we're 47 people spread across ten countries working asynchronously and [shipping fast](https://github.com/PostHog/posthog.com/blob/small-teams-ship-fast/contents/newsletter/changelog/2024). And we’re organized into 15 small teams.
+Right now we're 47 people spread across ten countries working asynchronously and [shipping fast](/changelog/2024). And we’re organized into 15 small teams.
 
 Most teams cover individual products, such as data warehouse, replay, pipeline, or product analytics, but we also have small teams covering people and operations, marketing, and growth.
 
@@ -29,9 +29,9 @@ When we launch a new product, or a project on an existing team becomes too large
 
 ![Small teams](https://res.cloudinary.com/dmukukwp6/image/upload/small_team_1_cdceda04ab.png)
 
-Right now, for example, we're in the process of scaling support by moving our support engineers out of the customer success team and into a new [customer comms team](https://github.com/PostHog/posthog.com/blob/small-teams-ship-fast/teams/customer-comms). We're [recruiting support engineers](/careers/support-engineer) for that team, by the way.
+Right now, for example, we're in the process of scaling support by moving our support engineers out of the customer success team and into a new [customer comms team](/teams/customer-comms). We're [recruiting support engineers](/careers/support-engineer) for that team, by the way.
 
-We've also created a new team with the mission of making our customer data platform (CDP) a first-class product – a project spun out from a hackathon project at our recent all-company [offsite in Mykonos](https://github.com/PostHog/posthog.com/blob/small-teams-ship-fast/blog/mykonos-hackathon).
+We've also created a new team with the mission of making our customer data platform (CDP) a first-class product – a project spun out from a hackathon project at our recent all-company [offsite in Mykonos](/blog/mykonos-hackathon).
 
 ## The golden rules of small teams
 
@@ -114,11 +114,11 @@ Small teams aren’t perfect. And sometimes, to make them work, we’ve had to c
 
 ### Overlap
 
-Some overlap is inevitable, especially when teams work on features that are used across multiple products. We mitigate this by being [aggressively transparent](https://github.com/PostHog/posthog.com/blob/small-teams-ship-fast/founders/how-to-run-a-transparent-company). We also have a list of everything we do [and who owns it](https://github.com/PostHog/posthog.com/blob/small-teams-ship-fast/handbook/engineering/feature-ownership), so it's easy to see who someone should talk to about a shared problem.
+Some overlap is inevitable, especially when teams work on features that are used across multiple products. We mitigate this by being [aggressively transparent](/founders/how-to-run-a-transparent-company). We also have a list of everything we do [and who owns it](/handbook/engineering/feature-ownership), so it's easy to see who someone should talk to about a shared problem.
 
 ### Fuzzy ownership
 
-This isn’t unique to small teams, but we still mitigate against it. If a product or project doesn't have a clear owner, our [fuzzy ownership process](https://github.com/PostHog/posthog.com/blob/small-teams-ship-fast/handbook/company/fuzzy-ownership) encourages people to create a PR and find a solution. If a problem is big enough and it doesn't have an owner, we sometimes form a temporary team just to solve that problem. We also [actively encourage](/handbook/values) people to step on toes in a low-ego way.
+This isn’t unique to small teams, but we still mitigate against it. If a product or project doesn't have a clear owner, our [fuzzy ownership process](/handbook/company/fuzzy-ownership) encourages people to create a PR and find a solution. If a problem is big enough and it doesn't have an owner, we sometimes form a temporary team just to solve that problem. We also [actively encourage](/handbook/values) people to step on toes in a low-ego way.
 
 ### Speed over seamlessness
 
