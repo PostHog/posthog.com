@@ -1,17 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
-import {
-    IconDatabase,
-    IconClock,
-    IconGraph,
-    IconHogQL,
-    IconToggle,
-    IconPieChart,
-    IconNotification,
-    IconRewindPlay,
-    IconColumns,
-} from '@posthog/icons'
+import { IconDatabase, IconGraph, IconHogQL, IconToggle, IconPieChart } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { TutorialCard } from 'components/Products/TutorialCard'
@@ -26,12 +16,9 @@ import RecentChange from '../RecentChange'
 import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
-import Comparison from '../Comparison'
 import { PairsWith } from 'components/Products/PairsWith'
 import { PairsWithItem } from 'components/Products/PairsWith/item'
 import { Question } from 'components/Products/Question'
-import { VsCompetitor } from 'components/Products/Competitor'
-import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { FAQ } from 'components/Products/FAQ'
@@ -53,24 +40,24 @@ const featuresPerRow = 4
 const features = [
     {
         title: 'Sync from Stripe',
-        description: 'Multiple choice, multi-select, numerical rating, emoji reaction, embedded links',
+        description: 'Combine financial and product data to see how usage turns into growth.',
         image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
     },
     {
         title: 'Sync from Hubspot',
-        description: 'Choose from the library or start from scratch',
+        description: 'Bring your CRM into the mix and track your sales funnel directly in PostHog.',
         image: <StaticImage src="./images/templates.png" width={428} placeholder="none" />,
         background: true,
         fade: true,
     },
     {
         title: 'Sync from Zendesk',
-        description: 'Target by URL, person property, or feature flag when used with Feature Flags',
+        description: 'See how ticket volumes and SLA breaches impact sign-ups and churn.',
         image: <StaticImage src="./images/targeting.png" width={428} placeholder="none" />,
     },
     {
         title: 'Sync from anywhere',
-        description: 'Up to 10 questions',
+        description: 'Adwords? Salesforce? Grab anything you want using custom sources.',
         image: <StaticImage src="./images/steps.png" width={428} placeholder="none" />,
     },
 ]
@@ -78,19 +65,19 @@ const features = [
 const subfeaturesItemCount = 3
 const subfeatures = [
     {
-        title: 'Aggregated results',
+        title: 'Link multiple sources',
         description: 'See feedback summarized and broken down per response',
         icon: <IconPieChart />,
     },
     {
-        title: 'Slack notifications',
+        title: 'Query with HogQL',
         description: 'Send realtime survey responses to a Slack channel',
-        icon: <IconNotification />,
+        icon: <IconHogQL />,
     },
     {
-        title: 'Customizable wait periods',
+        title: 'Save queries as views',
         description: 'Set a delay before a survey opens',
-        icon: <IconClock />,
+        icon: <IconGraph />,
     },
 ]
 
@@ -112,15 +99,11 @@ const questions = [
         url: '/tutorials/hubspot-reports#getting-revenue-from-closed-deals-by-joining-with-stripe',
     },
     {
-        question: 'How does predicted revenue compare to my actual revenue?',
-        url: '/tutorials/hubspot-reports#getting-revenue-from-closed-deals-by-joining-with-stripe',
-    },
-    {
         question: 'How much revenue am I churning each month?',
         url: '/tutorials/stripe-reports#revenue-churn',
     },
     {
-        question: 'Who are my power users, and how do they use my product??',
+        question: 'Who are my power users, and how do they use my product?',
         url: '/tutorials/stripe-reports#usage-by-top-customers',
     },
 ]
