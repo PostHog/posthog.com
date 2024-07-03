@@ -52,24 +52,24 @@ const teamSlug = '/teams/data-warehouse'
 const featuresPerRow = 4
 const features = [
     {
-        title: 'STRIPE',
+        title: 'Sync from Stripe',
         description: 'Multiple choice, multi-select, numerical rating, emoji reaction, embedded links',
         image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
     },
     {
-        title: 'HUBSPOT',
+        title: 'Sync from Hubspot',
         description: 'Choose from the library or start from scratch',
         image: <StaticImage src="./images/templates.png" width={428} placeholder="none" />,
         background: true,
         fade: true,
     },
     {
-        title: 'ZENDESK',
+        title: 'Sync from Zendesk',
         description: 'Target by URL, person property, or feature flag when used with Feature Flags',
         image: <StaticImage src="./images/targeting.png" width={428} placeholder="none" />,
     },
     {
-        title: 'CUSTOM SOURCE',
+        title: 'Sync from anywhere',
         description: 'Up to 10 questions',
         image: <StaticImage src="./images/steps.png" width={428} placeholder="none" />,
     },
@@ -148,7 +148,7 @@ const PairsWithArray = [
     {
         icon: <IconToggle />,
         product: 'Feature flags',
-        description: 'Use data to toggle flags, trigger experiments, and more.',
+        description: 'Use synced data to toggle feature flags, trigger A/B experiments, and more.',
         url: '/feature-flags',
     },
     {
@@ -187,8 +187,8 @@ export const ProductDataWarehouse = () => {
     return (
         <>
             <SEO
-                title="Surveys - PostHog"
-                description="Ask anything with no-code surveys – or use the API for complete control."
+                title="Data Warehouse - PostHog"
+                description="Unify and query data from any source and analyze it alongside your product data."
                 image={`/images/og/surveys.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
@@ -197,7 +197,7 @@ export const ProductDataWarehouse = () => {
                     icon={<IconDatabase />}
                     product={product.capitalized}
                     title='All your data <span class="text-red dark:text-yellow">in one place</span>'
-                    description="Unify and query data from any source and analyze it with PostHog usage data."
+                    description="Unify and query data from any source and analyze it alongside your product data."
                 />
 
                 <div className="text-center">
@@ -283,33 +283,35 @@ export const ProductDataWarehouse = () => {
             </section>
 
             <section id="tutorials">
-                <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
-                <p className="mt-0 text-opacity-75 text-center mb-6">
-                    Visit the <Link to="/tutorials">tutorials</Link> section for more.
-                </p>
+                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                    <p className="mt-0 text-opacity-75 text-center mb-6">
+                        Visit the <Link to="/tutorials">tutorials</Link> section for more.
+                    </p>
 
-                <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
-                    <TutorialCard
-                        title="How to set up Stripe reports"
-                        description="Analyze gross revenue, customer counts, MRR, churn, and more"
-                        url="/tutorials/stripe-reports"
-                    />
-                    <TutorialCard
-                        title="How to set up Hubspot reports"
-                        description="Monitor deal counts, lead ratings, and identify leads by pageview behaviours."
-                        url="/tutorials/hubspot-reports"
-                    />
-                    <TutorialCard
-                        title="How to set up Zendesk reports"
-                        description="Track ticket counts, power users, SLA metrics, and more."
-                        url="/tutorials/zendesk-reports"
-                    />
-                    <TutorialCard
-                        title="How to set up Google Adwords reports"
-                        description="Report on advertising performance, CAC, and channel distribution."
-                        url="/tutorials/adwords-reports"
-                    />
-                </ul>
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
+                        <TutorialCard
+                            title="How to set up Stripe reports"
+                            description="Analyze gross revenue, customer counts, MRR, churn, and more"
+                            url="/tutorials/stripe-reports"
+                        />
+                        <TutorialCard
+                            title="How to set up Hubspot reports"
+                            description="Monitor deal counts, lead ratings, and identify leads by pageview behaviours."
+                            url="/tutorials/hubspot-reports"
+                        />
+                        <TutorialCard
+                            title="How to set up Zendesk reports"
+                            description="Track ticket counts, power users, SLA metrics, and more."
+                            url="/tutorials/zendesk-reports"
+                        />
+                        <TutorialCard
+                            title="How to set up Google Adwords reports"
+                            description="Report on advertising performance, CAC, and channel distribution."
+                            url="/tutorials/adwords-reports"
+                        />
+                    </ul>
+                </div>
             </section>
 
             {/*
@@ -332,41 +334,47 @@ export const ProductDataWarehouse = () => {
             </section>
 
             <section id="team" className="mb-20 px-5">
-                <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
+                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
+                    <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
-                <p className="text-center mb-2">
-                    PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for building
-                    the {product.lowercase}.
-                </p>
-                <TeamMembers teamName={team} />
+                    <p className="text-center mb-2">
+                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
+                        building the {product.lowercase}.
+                    </p>
+                    <TeamMembers teamName={team} />
+                </div>
             </section>
 
             <section id="roadmap" className="mb-20 px-5">
-                <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
+                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
 
-                <p className="text-center mb-8">Here’s what the team is up to.</p>
+                    <p className="text-center mb-8">Here’s what the team is up to.</p>
 
-                <div className="grid md:grid-cols-2 gap-12">
-                    <div>
-                        <RecentChange team={team} />
-                    </div>
+                    <div className="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <RecentChange team={team} />
+                        </div>
 
-                    <div>
-                        <h4 className="opacity-60 text-base">Up next</h4>
-                        <TeamRoadmap team={team} />
+                        <div>
+                            <h4 className="opacity-60 text-base">Up next</h4>
+                            <TeamRoadmap team={team} />
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section id="questions" className="mb-20 px-5">
-                <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
+                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
 
-                <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
+                    <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
 
-                <div className="text-center mb-8">
-                    <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
-                        View {product.lowercase} questions
-                    </CallToAction>
+                    <div className="text-center mb-8">
+                        <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
+                            View {product.lowercase} questions
+                        </CallToAction>
+                    </div>
                 </div>
 
                 <Questions topicIds={[382]} />
