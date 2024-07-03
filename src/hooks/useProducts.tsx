@@ -62,7 +62,7 @@ const initialProducts = [
         name: 'A/B testing',
         type: 'feature_flags',
         color: 'purple',
-        volume: 1000000,
+        billedWith: 'feature_flags',
     },
     {
         Icon: IconMessage,
@@ -131,7 +131,7 @@ export default function useProducts() {
     const setProduct = (type, data) => {
         setProducts((products) =>
             products.map((product) => {
-                if (product.type === type) {
+                if (product.type === type && !product.billedWith) {
                     return {
                         ...product,
                         ...data,
