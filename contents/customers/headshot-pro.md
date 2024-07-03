@@ -55,6 +55,6 @@ Even in situations where it was already possible to analyze data in the original
 
 “We’ve gone as far as just pulling in our bank data too,” says Danny. “Before, if I wanted to analyze business data I may have to wait two months for my accountant to come up with it. Now, I see it day-by-day on a dashboard.”
 
-“Honestly, my advice to new users would be: pull in everything you can. Avoid the clutter and the platform switching. Get it all into PostHog and it make it so much easier to work with.”
+“Honestly, my advice to new users would be: pull in everything you can. Avoid the clutter and the platform switching. Get it all into PostHog and it makes it so much easier to work with.”
 
 

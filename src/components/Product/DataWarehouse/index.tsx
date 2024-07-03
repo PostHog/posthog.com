@@ -151,7 +151,7 @@ const PairsWithArray = [
 ]
 
 export const ProductDataWarehouse = () => {
-    const { purplewave, elevenlabs } = useStaticQuery(graphql`
+    const { headshotpro } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -166,7 +166,7 @@ export const ProductDataWarehouse = () => {
             }
         }
         {
-            purplewave: mdx(slug: { eq: "customers/purplewave" }) {
+            headshotpro: mdx(slug: { eq: "customers/headshotpro" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -199,9 +199,9 @@ export const ProductDataWarehouse = () => {
                 <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="reached a 25% response rate with surveys"
-                            quote="I hate having to switch software. With PostHog, all our data and survey responses were centralized in one platform."
-                            customer={purplewave}
+                            outcome="analyzes Google Adwords data in PostHog"
+                            quote="I needed one source of truth for both marketing and developers to share."
+                            customer={headshotpro}
                         />
                     </ul>
                 </section>
