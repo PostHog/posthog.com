@@ -21,9 +21,9 @@ Our standard monthly [pricing](/pricing) has volume discounts built in, and we o
 
 | Minimum Spend | 1 Year | 2 Year | 3 Year |
 |---------------|--------|--------|--------|
-| $20,000 | 20% | 25% | 30% |
-| $60,000 | 25% | 30% | 35% |
-| $100,000 | 30% | 35% | 40% |
+| $20,000 | 20%    | 25%    | 30%    |
+| $60,000 | 25%    | 30%    | 35%    |
+| $100,000 | 35%    | 40%    | 45%    |
 
 Also note that the minimum amounts here are _after_ discounts e.g. they will need to purchase a minimum of $25k of credit to get a discount of 20% and contract for $20k.
 
