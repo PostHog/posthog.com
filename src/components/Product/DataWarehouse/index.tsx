@@ -113,16 +113,6 @@ const questions = [
 
 const faqs = [
     {
-        question: 'How long do you retain survey data?',
-        children:
-            'Data is guaranteed to be retained for 7 years on any paid plan and 1 year on a free plan. After 1 year, data may be moved into cold storage so queries may run more slowly.',
-    },
-    {
-        question: 'Is there a free trial on paid plans?',
-        children:
-            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/talk-to-a-human">get in touch</a>.',
-    },
-    {
         question: 'What currency are your prices in?',
         children: 'All prices are in US Dollars (USD), excluding taxes.',
     },
@@ -179,9 +169,6 @@ export const ProductDataWarehouse = () => {
             purplewave: mdx(slug: { eq: "customers/purplewave" }) {
                 ...ProductCustomerFragment
             }
-            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
-                ...ProductCustomerFragment
-            }
         }
     `)
     const { fullWidthContent } = useLayoutData()
@@ -190,7 +177,7 @@ export const ProductDataWarehouse = () => {
             <SEO
                 title="Data Warehouse - PostHog"
                 description="Unify and query data from any source and analyze it alongside your product data."
-                image={`/images/og/surveys.jpg`}
+                image={`/images/og/data-warehouse.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
@@ -209,23 +196,18 @@ export const ProductDataWarehouse = () => {
                         placeholder="none"
                     />
                 </div>
-                {/* <section id="customers" className="-mt-36 pt-36">
+                <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="reached a 25% response rate with surveys"
                             quote="I hate having to switch software. With PostHog, all our data and survey responses were centralized in one platform."
                             customer={purplewave}
                         />
-                        <CustomerCard
-                            outcome="uses surveys to organize interviews and more"
-                            quote="We even use surveys to send a little pop-up to our most active users and ask them to review us on G2."
-                            customer={elevenlabs}
-                        />
                     </ul>
-                </section> */}
+                </section>
             </div>
 
-            <SmoothScroll exclude={['Installation']} />
+            <SmoothScroll exclude={['PostHog vs...', 'Installation']} />
 
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
@@ -244,7 +226,7 @@ export const ProductDataWarehouse = () => {
                 </section>
 
                 <section className="bg-accent dark:bg-accent-dark">
-                    <Marquee product={product.capitalized} shortFade={true}>
+                    <Marquee product={product.capitalized} shortFade>
                         {questions.map((question, index) => {
                             return <Question {...question} key={index} />
                         })}
@@ -259,19 +241,50 @@ export const ProductDataWarehouse = () => {
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
                         <p className="">
-                            Use {product.lowercase} free. Or enter a credit card for advanced features.{' '}
-                            <br className="hidden lg:block" />
-                            Either way, your first {product.freeTier} are free – every month.
+                            Use {product.lowercase} free up to 30 million rows/mo.
                         </p>
                     </div>
-                    <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/surveys-hog.png" alt="" />
+                    <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-8">
+
+                        <StaticImage
+                            alt="Just another hedgehog"
+                            placeholder="blurred"
+                            quality={100}
+                            className="w-full max-w-[140px]"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
+                        />
                     </div>
                 </div>
 
                 <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
-                    <div className="flex-grow overflow-auto px-5 md:px-0">
-                        <Plans showHeaders={false} showCTA={false} groupsToShow={['surveys']} />
+                    <div className="flex-grow overflow-auto px-5 md:px-0 mb-8 md:mb-0">
+                        <div className="grid grid-cols-2 [&>div]:p-1 rounded">
+                            <div className="bg-accent dark:bg-accent-dark font-bold">
+                                Synced rows
+                            </div>
+                            <div className="bg-accent dark:bg-accent-dark font-bold">
+                                Cost per row
+                            </div>
+                            <div>
+                                0-30 million
+                            </div>
+                            <div>
+                                Free
+                            </div>
+                            <div>
+                                30-100 million
+                            </div>
+                            <div>
+                                $0.000010
+                            </div>
+                            <div>
+                                100+ million
+                            </div>
+                            <div>
+                                $0.000008
+                            </div>
+                        </div>
+                        {/* <Plans showHeaders={false} showCTA={false} groupsToShow={['data-warehouse']} /> */}
                     </div>
 
                     <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
