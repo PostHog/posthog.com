@@ -2531,6 +2531,12 @@ export const docsMenu = {
                     icon: 'IconLaptop',
                     color: 'orange',
                 },
+                {
+                    name: 'Branching logic',
+                    url: '/docs/surveys/branching-logic',
+                    icon: 'IconUserPaths',
+                    color: 'blue',
+                },
             ],
         },
         {
