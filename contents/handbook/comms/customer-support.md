@@ -91,10 +91,12 @@ We send out CSAT surveys after a ticket has been closed for at least 3 days usin
 
 We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, support engineers sit in [the Comms team](/teams/customer-comms) and cover: 
 
-- Product Analytics
-- Pipeline
-- Session Reply
-- Feature Success
+- Product Analytics (<TeamMember name="Marcus Hof" /> & <TeamMember name="Steven Shults" />)
+- Pipeline (<TeamMember name="Marcus Hof" />)
+- Session Reply (<TeamMember name="Steven Shults" />)
+- Feature Success (<TeamMember name="Steven Shults" />)
+- Comms (<TeamMember name="Marcus Hof" />)
+- Data Warehouse (<TeamMember name="Marcus Hof" />)
 
 Support engineers respond to as many tickets as they can for these products, and escalate other tickets to the appropriate teams as needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
 
