@@ -37,4 +37,4 @@ Ultimately, this is why we’ve poured so much attention into building our data 
 
 As always, we want to make sure [our pricing](/pricing) is fair, margin-positive, and usage-based. So, our new pricing is based on the number of rows that get synced each month — after a generous free allowance which should offer more than enough to support smaller teams and side projects. If you're ready to get started, [sync your first data source now](https://us.posthog.com/data-warehouse)!
 
-> As a **thank you to our beta users** we’re offering an increased free allowance for teams which synced any data during the data warehouse beta. Check your email for details!
+> As a **thank you to our beta users** we’re offering an increased free allowance for teams that synced any data during the data warehouse beta. Check your email for details!
