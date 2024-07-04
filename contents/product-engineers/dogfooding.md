@@ -1,6 +1,6 @@
 ---
 title: How we do dogfooding at PostHog (with examples)
-date: 2024-07-02
+date: 2024-07-04
 author:
  - ian-vanagas
 featuredImage: >-
