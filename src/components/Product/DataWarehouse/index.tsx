@@ -151,7 +151,7 @@ const PairsWithArray = [
 ]
 
 export const ProductDataWarehouse = () => {
-    const { headshotpro } = useStaticQuery(graphql`
+    const { headshotpro, webshare } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -167,6 +167,9 @@ export const ProductDataWarehouse = () => {
         }
         {
             headshotpro: mdx(slug: { eq: "customers/headshot-pro" }) {
+                ...ProductCustomerFragment
+            }
+            webshare: mdx(slug: { eq: "customers/webshare" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -202,6 +205,11 @@ export const ProductDataWarehouse = () => {
                             outcome="analyzes Google Adwords data in PostHog"
                             quote="I needed one source of truth for both marketing and developers to share."
                             customer={headshotpro}
+                        />
+                        <CustomerCard
+                            outcome="syncs Intercom messages and customer contacts"
+                            quote="PostHog is the single source of truth for us. We've put everything in one place."
+                            customer={webshare}
                         />
                     </ul>
                 </section>
