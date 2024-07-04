@@ -2,9 +2,9 @@
 title: How Headshot Pro analyzes Google Adwords data in PostHog
 customer: Headshot Pro
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/headshot_light_d8d518234a.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/headshot_dark_b36935a453.png
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/headshot_dark_289908a734.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/headshot_dark_b36935a453.png
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/headshot_pro_posthog_56e4ed68be.png
 industries:
