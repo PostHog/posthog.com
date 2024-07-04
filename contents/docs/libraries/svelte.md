@@ -113,6 +113,20 @@ export async function load() {
 
 > **Note:** Make sure to always call `posthog.shutdown()` after capturing events from the server-side. PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
+## Configuring session replay for server-side rendered apps
+
+By default, [Svelte uses relative asset paths](https://kit.svelte.dev/docs/configuration) during server-side rending. This causes issues with PostHog's ability to record sessions.
+
+To fix this, set the config to not use relative paths in `svelte.config.js`:
+
+```js
+ kit: {
+     paths: {
+         relative: false,
+     },
+ },
+```
+
 ## Next steps
 
 For any technical questions for how to integrate specific PostHog features into Svelte (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) and [Node]((/docs/libraries/node)) SDK docs.
