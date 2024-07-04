@@ -50,11 +50,13 @@ Users who [opt out](/docs/libraries/js#opt-users-out) of event capturing will no
 
 You may want to hide sensitive text or elements in your replays. See our [privacy controls](/docs/session-replay/privacy) docs for how to do this.
 
-## Recording sessions across different domains
+## How to record sessions across different domains
 
-PostHog **automatically captures sessions across subdomains** (e.g. `posthog.com` and `us.posthog.com`), but recording sessions across different domains (e.g. `posthog.com` and `hogflix.com`) requires a bit more setup.
+PostHog automatically captures sessions across subdomains (e.g. `posthog.com` and `us.posthog.com`), but recording sessions across different domains (e.g. `posthog.com` and `hogflix.com`) requires a bit more setup.
 
-When the user goes from the first domain, call `posthog.get_session_id()` and pass it along to the second domain (in the URL). In Next.js, this looks like this:
+To do this, you need to pass the `session_id` from the first domain to the second domain (for example, as a URL parameter). You can get this value by calling `posthog.get_session_id()`.
+
+Below is an example of how this looks like in Next.js:
 
 ```js
 // first domain
@@ -76,7 +78,7 @@ export default function FirstDomain() {
 }
 ```
 
-On the second domain, bootstrap the PostHog initialization using that session ID value. 
+On the second domain, bootstrap the PostHog initialization using the session ID. 
 
 ```js
 // second domain
