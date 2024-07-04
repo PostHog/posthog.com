@@ -21,7 +21,7 @@ tags:
 - We're introducing usage-based pricing, with your first 1M synced rows for free every month
 - As a thanks, beta users will get an increased free allowance and 30 days of free usage
 
-After a three-month public beta, our data warehouse is ready for primetime. We’re releasing it into general availability so teams can start syncing data from other sources and working with it in PostHog. 
+After a month-long public beta, our data warehouse is ready for primetime. We’re releasing it into general availability so teams can start syncing data from other sources and working with it in PostHog. 
 
 Why would you want to get non-product data into PostHog? So you can do things like...
 
