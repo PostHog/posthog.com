@@ -18,9 +18,7 @@ Dogfood is not on PostHog's roadmap, but it sure does shape it.
 
 Dogfooding is the process of using your product internally. This helps you to get fast feedback, ship a higher-quality product, and maintain customer empathy.
 
-At PostHog, we dogfood a lot and find it works well because we're our [own ideal customer](/newsletter/ideal-customer-profile-framework). We  build tools for companies that look like ours. Not all companies are in this situation though, meaning dogfooding can lead you in the wrong direction if you aren't careful.
-
-To help you figure out if dogfooding is right for your company and how to do it well, this post covers our experiences, how we implement dogfooding, and pitfalls to avoid.
+At PostHog, we dogfood a lot and find it works well because we're our [own ideal customer](/newsletter/ideal-customer-profile-framework). We build tools for companies that look like ours. Not all companies are in this situation though, meaning dogfooding can lead you in the wrong direction if you aren't careful.
 
 ## What does dogfooding look like at PostHog?
 
@@ -56,9 +54,9 @@ For example, HogQL was missing `OFFSET` support until <TeamMember name="Michael 
 
 An important part of dogfooding is noticing areas you aren't doing it, but should be. In our case, a key part of [our strategy](/handbook/why-does-posthog-exist) is being the source of truth for product and customer data, but we often needed to rely on non-PostHog tools to do this, not dogfooding our own.
 
-This was the inspiration behind the [data warehouse](/docs/data-warehouse) which provides the ability to link and query data from external sources like Stripe, Hubspot, Zendesk. This enables to dogfood our own solution instead of relying on an external one. 
+This was the inspiration behind the [data warehouse](/docs/data-warehouse), which provides the ability to link and query data from external sources like Stripe, Hubspot, Zendesk. This enables to dogfood our own solution instead of relying on an external one. 
 
-Dogfooding has been critical for its development. Functionality has been guided by the queries our sales and product teams and a majority of feedback about issues and usability came from internal teams during alpha.
+Dogfooding has been critical for its development. Functionality has been guided by the queries of our sales and product teams, and a majority of feedback about issues and usability came from internal teams during alpha.
 
 ![Data warehouse feedback](https://res.cloudinary.com/dmukukwp6/image/upload/me_7c76189301.png)
 
@@ -80,7 +78,7 @@ We dogfood a lot, but what do we actually get out of it?
 
 From our experiences with dogfooding, we've learned a bit about how to do it well. Importantly, we've created a culture where dogfooding is expected and encouraged. We've also put into place the tools and processes that help us get good feedback and act on it, improving our product.
 
-Doing this yourself is a two step process:
+Doing this yourself is a two-step process:
 
 ### 1. Create a culture of dogfooding
 
@@ -98,7 +96,7 @@ Everyone at PostHog, from the cofounders to the marketing team, uses PostHog and
 
 ![Tim dogfooding](https://res.cloudinary.com/dmukukwp6/image/upload/cofounder_ec648e21d3.png)
 
-For feedback is critical to the dogfooding process and to make people comfortable with giving feedback, you need trust.  Your team must trust each other to give and [receive feedback](/handbook/people/feedback). Assume positive intent, acknowledge it, and do with it what you want. This might be uncomfortable, but dogfooding doesn't work without it.
+Feedback is critical to the dogfooding process and to make people comfortable with giving feedback, you need trust.  Your team must trust each other to give and [receive feedback](/handbook/people/feedback). Assume positive intent, acknowledge it, and do with it what you want. This might be uncomfortable, but dogfooding doesn't work without it.
 
 ### 2. Implement dogfooding into product development
 
