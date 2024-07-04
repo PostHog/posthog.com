@@ -338,6 +338,27 @@ const analyticsSliders = [
             { type: 'mobileAppAuthenticatedEvents', label: 'Events from authenticated users' },
         ],
     },
+    {
+        label: 'LLM events',
+        types: [
+            { type: 'llmAnonymousEvents', label: 'Anonymous events' },
+            { type: 'llmAuthenticatedEvents', label: 'Events from authenticated users' },
+        ],
+    },
+    {
+        label: 'API events',
+        types: [
+            { type: 'apiAnonymousEvents', label: 'Anonymous events' },
+            { type: 'apiAuthenticatedEvents', label: 'Events from authenticated users' },
+        ],
+    },
+    {
+        label: 'Other events',
+        types: [
+            { type: 'otherAnonymousEvents', label: 'Anonymous events' },
+            { type: 'otherAuthenticatedEvents', label: 'Events from authenticated users' },
+        ],
+    },
 ]
 
 const ProductAnalyticsTab = ({ activeProduct, analyticsData, setAnalyticsVolume }) => {

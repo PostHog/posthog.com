@@ -104,6 +104,33 @@ export default function useProducts() {
             enhanced: true,
             cost: 0,
         },
+        llmAnonymousEvents: {
+            volume: 0,
+            cost: 0,
+        },
+        llmAuthenticatedEvents: {
+            volume: 0,
+            enhanced: true,
+            cost: 0,
+        },
+        apiAnonymousEvents: {
+            volume: 0,
+            cost: 0,
+        },
+        apiAuthenticatedEvents: {
+            volume: 0,
+            enhanced: true,
+            cost: 0,
+        },
+        otherAnonymousEvents: {
+            volume: 0,
+            cost: 0,
+        },
+        otherAuthenticatedEvents: {
+            volume: 0,
+            enhanced: true,
+            cost: 0,
+        },
     })
 
     const [products, setProducts] = useState(
