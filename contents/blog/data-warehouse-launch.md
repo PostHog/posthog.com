@@ -1,17 +1,13 @@
 ---
 date: 2024-06-08
 title: You can now sync data from external sources into PostHog
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_92b43aa9de.jpg
 author:
   - joe-martin
-category: PostHog news
+featuredImageType: full
 tags:
-  - Data warehouse
+  - PostHog news
 ---
 
 ## Tl;dr
