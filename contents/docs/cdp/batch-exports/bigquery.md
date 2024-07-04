@@ -35,6 +35,7 @@ Here's how to set these up so that the destination has access only to the datase
    * `bigquery.tables.get`
    * `bigquery.tables.list`
    * `bigquery.tables.updateData`
+   * (Optional, for mutable models) `bigquery.tables.delete`
 
 ![Create custom role for batch exports](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/bigquery/create-role.png)
 
@@ -60,24 +61,57 @@ Navigate to IAM and click on Grant Access to arrive at this screen:
 
 8. All done! After completing these steps you can create a BigQuery [batch export in PostHog](https://app.posthog.com/project/apps?tab=batch_exports) and your data will start flowing from PostHog to BigQuery.
 
-## Event schema
+## Models
 
-This is the schema of all the fields that are exported to BigQuery.
+This section describes the models supported by this destination.
 
-| Field                 | Type        | Description                                                               |
-|-----------------------|-------------|---------------------------------------------------------------------------|
-| uuid                  | `STRING`    | The unique ID of the event within PostHog                                 |
-| event                 | `STRING`    | The name of the event that was sent                                       |
-| properties            | `STRING`    | A JSON object with all the properties sent along with an event            |
-| elements              | `STRING`    | This field is present for backwards compatibility but has been deprecated |
-| set                   | `STRING`    | A JSON object with any person properties sent with the `$set` field       |
-| set_once              | `STRING`    | A JSON object with any person properties sent with the `$set_once` field  |
-| distinct_id           | `STRING`    | The `distinct_id` of the user who sent the event                          |
-| team_id               | `INT64`     | The `team_id` for the event                                               |
-| ip                    | `STRING`    | The IP address that was sent with the event                               |
-| site_url              | `STRING`    | This field is present for backwards compatibility but has been deprecated |
-| timestamp             | `TIMESTAMP` | The timestamp associated with an event                                    |
-| bq_ingested_timestamp | `TIMESTAMP` | The timestamp when the event was sent to BigQuery                         |
+### Events model
+
+This is the default model for BigQuery batch exports. The schema of the model as created in BigQuery is:
+
+| Field                 | Type               | Description                                                               |
+|-----------------------|--------------------|---------------------------------------------------------------------------|
+| uuid                  | `STRING`           | The unique ID of the event within PostHog                                 |
+| event                 | `STRING`           | The name of the event that was sent                                       |
+| properties            | `STRING` or `JSON` | A JSON object with all the properties sent along with an event            |
+| elements              | `STRING`           | This field is present for backwards compatibility but has been deprecated |
+| set                   | `STRING` or `JSON` | A JSON object with any person properties sent with the `$set` field       |
+| set_once              | `STRING` or `JSON` | A JSON object with any person properties sent with the `$set_once` field  |
+| distinct_id           | `STRING`           | The `distinct_id` of the user who sent the event                          |
+| team_id               | `INT64`            | The `team_id` for the event                                               |
+| ip                    | `STRING`           | The IP address that was sent with the event                               |
+| site_url              | `STRING`           | This field is present for backwards compatibility but has been deprecated |
+| timestamp             | `TIMESTAMP`        | The timestamp associated with an event                                    |
+| bq_ingested_timestamp | `TIMESTAMP`        | The timestamp when the event was sent to BigQuery                         |
+
+In particular, some of the fields can be either `STRING` or `JSON` type depending on whether the corresponding checkbox is marked or not when creating the batch export.
+
+### Persons model
+
+The schema of the model as created in BigQuery is:
+
+| Field       | Type               | Description                                                                 |
+|-------------|--------------------|-----------------------------------------------------------------------------|
+| team_id     | `INT64`            | The id of the project (team) the person belongs to                          |
+| distinct_id | `STRING`           | A `distinct_id` associated with the person                                  |
+| person_id   | `STRING`           | The id of the person associated to this (`team_id`, `distinct_id`) pair     |
+| properties  | `STRING` or `JSON` | A JSON object with all the latest properties of the person                  |
+| version     | `INT64`            | The version of the person associated with a (`team_id`, `distinct_id`) pair |
+
+The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`. The `properties` field can be either `STRING` or `JSON`, depending on whether the corresponding checkbox is marked or not when creating the batch export.
+
+#### How is a merge executed?
+
+Exporting mutable data (like the persons model) requires executing a merge operation to apply new updates to existing rows. Executing a merge in BigQuery involves the following steps:
+
+1. Creating a stage table.
+2. Inserting new data into stage table.
+3. Execute a merge operation between existing table and stage table.
+  a. Any rows that match in the final table and for which the stage table's version is higher are updated.
+  b. Any new rows not found in the final table are inserted.
+4. Drop the stage table.
+
+Besides the permissions required for exporting the events model, and since we need to clean-up a stage table, exporting the persons model requires also `bigquery.tables.delete` permissions.
 
 ## Creating the batch export
 
@@ -95,3 +129,35 @@ Configuring a batch export targeting BigQuery requires the following BigQuery-sp
 * **Table ID:** The ID of the destination BigQuery table. This is not the fully-qualified name of a table, so omit the dataset and project IDs. For example for the fully-qualified table name `project-123:dataset:MyExportTable`, use only `MyExportTable` as the table ID.
 * **Dataset ID:** The ID of the BigQuery dataset which contains the destination table. Only the dataset ID is required, so omit the project ID if present. For example for the fully-qualified dataset `project-123:my-dataset`, use only `my-dataset` as the dataset ID.
 * **Google Cloud JSON key file:** The JSON key file for your BigQuery Service Account to access your instance. Generated on Service Account creation. See [here](#setting-up-bigquery-access) for more information.
+
+## Examples
+
+These examples illustrate how to use the data from batch exports in BigQuery.
+
+### Requirements
+
+Two batch exports need to be created:
+* An events model batch export.
+* A persons model batch export.
+
+For the purposes of these examples, assume that these two batch exports have already been created and have exported some data to BigQuery in tables `example.events` and `example.persons`.
+
+### Example: Count unique persons that have triggered an event
+
+The following query can be used to count the number of unique persons that have triggered events:
+
+```sql
+SELECT
+  event,
+  COUNT(persons.person_id) AS unique_persons_count
+FROM
+  example.events AS events
+LEFT JOIN
+  example.persons AS persons ON events.distinct_id = persons.distinct_id AND events.team_id = persons.team_id
+WHERE
+  persons.person_id IS NOT NULL
+GROUP BY
+  event
+ORDER BY
+unique_persons_count DESC
+```
