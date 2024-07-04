@@ -19,7 +19,7 @@ toolsUsed:
 date: 2024-06-02
 ---
 
-Founded by serial AI entrepreneur Danny Postma, [Headshot Pro](https://www.headshotpro.com/) has rapidly grown to become one of the most popular AI photo generation tools on the internet. Despite only launching earlier this year, the platform has already gathered over 80,000 users and generated more than 13 million images. 
+Founded by serial AI entrepreneur Danny Postma, [Headshot Pro](https://www.headshotpro.com/) has rapidly grown to become one of the most popular AI photo generation tools. Despite only launching earlier this year, the platform has already gathered over 80,000 users and generated more than 13 million images. 
 
 “I used to have a whole bunch of side projects,” says Danny, “But Headshot Pro was so successful it’s become my main focus. I’ve started to build a team around it and that’s where our need for product analytics came from — I needed one source of truth for both marketing and developers to share.”
 
@@ -29,7 +29,7 @@ After asking for recommendations from other founders, Danny narrowed his list to
 
 ### From beta warehouse to data warehouse
 
-During the beta we were naturally curious for feedback, so it wasn’t long before the relevant teams reached out to speak with Danny about what they needed.
+During the beta [our Data Warehouse team](/teams/data-warehouse) were naturally curious for feedback, so it wasn’t long before they reached out to speak with Danny about what he needed.
 
 “Headshot Pro wasn’t using a data warehouse before PostHog,” says [Eric](/community/profiles/30209), our data warehouse team lead. “Instead, they were analyzing data in the respective platforms — and they really wanted to analyze their marketing data alongside product data. So, we helped them [get data from Google Adwords into PostHog](TKTKTKTKT).”
 
@@ -39,7 +39,7 @@ During the beta we were naturally curious for feedback, so it wasn’t long befo
     size="md"
     name="Eric Duong"
     title="Software Engineer & Data Warehouse Team Lead, PostHog"
-    quote={`“Many teams could benefit from following Danny’s lead and bringing advertising data into PostHog and starting to track advertising performance alongside product usage!”`}
+    quote={`“Many teams could benefit from following Danny’s lead and bringing advertising data into PostHog and starting to track advertising performance alongside product usage.”`}
 />
 </BorderWrapper>
 
@@ -47,13 +47,13 @@ The process for getting Adwords data into PostHog is simple: three times a day G
 
 ### Creating a single source of truth in PostHog 
 
-“It’s been amazing having everything in one place finally,” says Danny. “For example, we had previously decided to scale down one of our distribution channels because we couldn’t analyze data properly in the native platform and we didn’t believe it was working.” 
+“It’s been amazing having everything in one place,” says Danny. “We had previously decided to scale down one of our distribution channels because we couldn’t analyze data properly in the native platform and we didn’t believe it was working.” 
 
-“However, once we had the data in PostHog we realized it was actually a very profitable channel for us and we quickly started it back up. Now, we make sure to put everything in PostHog.”
+“However, once we had the data in PostHog, we realized it was actually a very profitable channel for us and we quickly started it back up. Now, we make sure to put everything in PostHog.”
 
 Even in situations where it was already possible to analyze data in the original platforms, it’s still often been faster and more valuable to have the data in PostHog. 
 
-“We’ve gone as far as just pulling in our bank data too,” says Danny. “Before, if I wanted to analyze business data I may have to wait two months for my accountant to come up with it. Now, I see it day-by-day on a dashboard.”
+“We’ve gone as far as just pulling in our bank data too,” says Danny. “Before, if I wanted to analyze business data, I may have to wait two months for my accountant to come up with it. Now, I see it day-by-day on a dashboard.”
 
 “Honestly, my advice to new users would be: pull in everything you can. Avoid the clutter and the platform switching. Get it all into PostHog and it makes it so much easier to work with.”
 
