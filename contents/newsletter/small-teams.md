@@ -8,8 +8,9 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Culture
+  - People
 crosspost:
-  - Engineering
+  - Founders
   - Blog
 ---
 
@@ -118,20 +119,22 @@ Some overlap is inevitable, especially when teams work on features that are used
 
 ### Fuzzy ownership
 
-This isn’t unique to small teams, but we still mitigate against it. If a product or project doesn't have a clear owner, our [fuzzy ownership process](/handbook/company/fuzzy-ownership) encourages people to create a PR and find a solution. If a problem is big enough and it doesn't have an owner, we sometimes form a temporary team just to solve that problem. We also [actively encourage](/handbook/values) people to step on toes in a low-ego way.
+This isn’t unique to small teams, but we still mitigate against it. If a product or project doesn't have a clear owner, our [fuzzy ownership process](/handbook/company/fuzzy-ownership) encourages people to create a PR and find a solution. If a problem is big enough, and it doesn't have an owner, we sometimes form a temporary team just to solve that problem. We also [actively encourage](/handbook/values) people to step on toes in a low-ego way.
 
 ### Speed over seamlessness
 
-Small teams allow us to ship fast. But the tradeoff here is that we tolerate some level of not-so-great integration in exchange for speed. This isn't a problem unique to PostHog. AWS is a great example of a very, very big company that favours speed over integration.
+Small teams allow us to ship fast. But the tradeoff here is that we tolerate some level of not-so-great integration in exchange for speed. This isn't a problem unique to PostHog. AWS is a great example of a very, very big company that favors speed over integration.
 
 ### You’ve got to hire right
 
 Not everyone will embrace this way of working. It requires people who take extreme ownership of ideas, are self-starting, authentic, and low-ego. We've developed some [strong opinions](https://newsletter.posthog.com/p/hiring-and-managing-cracked-engineers) about the kind of people who work in this culture, and those that don't.
 
-### Good reads 📖
+## Good reads 📖
 
 * [What our team really thinks about working at PostHog](/blog/company-survey) – Do small teams really work? We conduct a company survey every six months and share the results.
+
 * [How I give the right amount of context (in any situation)](https://newsletter.weskao.com/p/how-i-give-the-right-amount-of-context) – [Wes Kao](https://open.substack.com/users/4005715-wes-kao?utm_source=mentions) on why most people suck at managing up, and how to give the right amount of context to your manager, and colleagues.
-* [Managing My Motivation, as a Solo Dev](https://mbuffett.com/posts/maintaining-motivation) Useful for tips for solo devs that are are also useful for any developer.
+
+* [Managing My Motivation, as a Solo Dev](https://mbuffett.com/posts/maintaining-motivation) Useful for tips for solo devs that are also useful for any developer.
 
 <NewsletterForm />
