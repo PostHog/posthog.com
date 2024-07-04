@@ -2533,7 +2533,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Conditional questions',
-                    url: '/docs/surveys/branching-logic',
+                    url: '/docs/surveys/conditional-questions',
                     icon: 'IconUserPaths',
                     color: 'blue',
                 },
