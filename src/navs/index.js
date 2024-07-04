@@ -2531,6 +2531,12 @@ export const docsMenu = {
                     icon: 'IconLaptop',
                     color: 'orange',
                 },
+                {
+                    name: 'Conditional questions',
+                    url: '/docs/surveys/conditional-questions',
+                    icon: 'IconUserPaths',
+                    color: 'blue',
+                },
             ],
         },
         {
