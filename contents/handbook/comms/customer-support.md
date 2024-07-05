@@ -95,7 +95,7 @@ We hire Support Engineers once a product reaches a significant level of scale an
 - Pipeline (<TeamMember name="Marcus Hof" />)
 - Session Reply (<TeamMember name="Steven Shults" />)
 - Feature Success (<TeamMember name="Steven Shults" />)
-- Comms (<TeamMember name="Marcus Hof" />)
+- Comms (<TeamMember name="Marcus Hof" /> & <TeamMember name="Steven Shults" />)
 - Data Warehouse (<TeamMember name="Marcus Hof" />)
 
 Support engineers respond to as many tickets as they can for these products, and escalate other tickets to the appropriate teams as needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
