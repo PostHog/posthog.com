@@ -61,7 +61,7 @@ It's going to be an intense week, but you're also going to solve so many real pr
 
 As an engineer, when a question comes in your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. Hence the following guidelines:
 
-- Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/comms/customer-support), but you should always try to respond to tickets quickly. 
+- Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/comms/customer-support#response-targets), but you should always try to respond to tickets quickly. 
   - If you're ready to look into the issue and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
@@ -71,7 +71,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 - If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
 
-If you have any questions about how or when to communicate with users, you can always ask [the Comms team](/handbook/comms/overview) for help. 
+If you have any questions about how or when to communicate with users, you can always ask [the Comms team](/handbook/comms/comms-team) for help. 
 
 ## How do I prioritize?
 
@@ -129,7 +129,7 @@ Best,
 
 ## How do I use Zendesk?
 
-We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
+We use [Zendesk Support]([https://zendesk.com/](https://posthoghelp.zendesk.com)) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 
