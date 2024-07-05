@@ -15,61 +15,7 @@ tags:
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-## 1. SurveyMonkey
-
-- **Founded:** 2017
-- **Most similar to:** Hotjar
-- **Typical users:** Product teams and UX researchers
-
-![SurveyMonkey](https://res.cloudinary.com/dmukukwp6/image/upload/v1718775451/posthog.com/contents/surveymonkey.webp)
-
-### What is SurveyMonkey?
-
-Like Survicate, SurveyMonkey is a tool which solely focuses on surveys. It has every feature you could ever need when it comes to sending surveys and collecting feedback, but it doesn't provide any of the other features that other alternatives on this list to do.
-
-According to [BuiltWith](https://trends.builtwith.com/analytics/Survey-Monkey), 450 of the top million websites deploy SurveyMonkey as of June 2024. This is about half of the 978 that use Survicate.
-
-#### Key features
-
-- 📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
-
-- 📱 **Multi-platform:** Send surveys in mobile apps, email, share-able links, and even in text messages.
-  
-- 🔌 **Integrations:** Connects with analytics tools and other tools you already using for your workflow, like Slack, Teams, and Hubspot.
-
-### How does SurveyMonkey compare to Survicate?
-
-SurveyMonkey is the most similar alternative to Survicate on this list. They have almost all the same features and support all the same platforms.
-
-<ComparisonTable column1="SurveyMonkey" column2="Survicate">
-  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF"/>
-  <ComparisonRow column1={true} column2={true} feature="Multi-channel surveys" description="Send surveys in mobile apps, email, links" />
-  <ComparisonRow column1={true} column2={true} feature="Targeting" description="Control who sees your survey and when" />
-  <ComparisonRow column1={true} column2={true} feature="Survey logic" description="Customize survey flows based on previous responses" />
-  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
-  <ComparisonRow column1={false} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
-  <ComparisonRow column1={false} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
-  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
-</ComparisonTable>
-
-### Why do companies use SurveyMonkey?
-
-According to [reviews on G2](https://www.g2.com/products/surveymonkey/reviews), customers choose SurveyMonkey because:
-
-1. **It's easy to use:** Reviewers note how easy SurveyMonkey is to set up and use. This means they can go from idea to actionable learnings quickly.
-
-1. **It supports many integrations:** Reviewers value how easy it is to integrate survey answers into existing workflows and apps.
-
-3. **It has pre-built reporting tools:** Reviewers appreciate that they can easily interpret results and gain actionable insights from the collected data.
-
-> #### Bottom line
-> 
-> SurveyMonkey is a solid option if all you're looking for is surveys. SurveyMonkey charges per team seat while Survicate charges per survey response, so it's best to compare their pricing to see which will be cheaper for you.
-
-## 2. Sprig
+## 1. Sprig
 
 - **Founded:** 2017
 - **Most similar to:** Hotjar
@@ -103,9 +49,6 @@ Sprig is a great replacement for Survicate, especially if you want to dive deepe
   <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
   <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
   <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
   <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
 </ComparisonTable>
 
@@ -125,7 +68,7 @@ According to [reviews on G2](https://www.g2.com/products/sprig/reviews), custome
 
 <br />
 
-## 3. PostHog
+## 2. PostHog
 
 - **Founded:** 2020
 - **Similar to:** Hotjar, Pendo
@@ -155,7 +98,7 @@ According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), as of 
 
 The main differences are that Survicate supports sending surveys on more platforms and have 1-click integrations for sending survey data to other tools. PostHog doesn't yet offer surveys on mobile apps and although it supports integrations, these require basic technical setup using [webhooks](/docs/webhooks).
 
-On the other hand, PostHog includes entire features Survicate doesn't have, like product analytics, A/B testing, and session replays.
+On the other hand, PostHog includes entire features Survicate doesn't have, like [product analytics](/product-analytics), [A/B testing](/ab-testing), and [session replays](/session-replay).
 
 <ComparisonTable column1="PostHog" column2="Survicate">
   <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF"/>
@@ -165,9 +108,6 @@ On the other hand, PostHog includes entire features Survicate doesn't have, like
   <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
   <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
   <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
   <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
 </ComparisonTable>
 
@@ -186,6 +126,57 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 > For teams looking for all the tools they need to improve their products, PostHog makes for a great alternative. This is especially true for startups and scaleups thanks to it having a generous free tier.
 
 <br />
+
+## 3. SurveyMonkey
+
+- **Founded:** 2017
+- **Most similar to:** Hotjar
+- **Typical users:** Product teams and UX researchers
+
+![SurveyMonkey](https://res.cloudinary.com/dmukukwp6/image/upload/v1718775451/posthog.com/contents/surveymonkey.webp)
+
+### What is SurveyMonkey?
+
+Like Survicate, SurveyMonkey is a tool which solely focuses on surveys. It has every feature you could ever need when it comes to sending surveys and collecting feedback, but it doesn't provide any of the other features that other alternatives on this list to do.
+
+According to [BuiltWith](https://trends.builtwith.com/analytics/Survey-Monkey), 450 of the top million websites deploy SurveyMonkey as of June 2024. This is about half of the 978 that use Survicate.
+
+#### Key features
+
+- 📝 **Surveys:** Ask users questions to hear their opinions on features, flows, and what you should build next.
+
+- 📱 **Multi-platform:** Send surveys in mobile apps, email, share-able links, and even in text messages.
+  
+- 🔌 **Integrations:** Connects with analytics tools and other tools you already using for your workflow, like Slack, Teams, and Hubspot.
+
+### How does SurveyMonkey compare to Survicate?
+
+SurveyMonkey is the most similar alternative to Survicate on this list. They have almost all the same features and support all the same platforms.
+
+<ComparisonTable column1="SurveyMonkey" column2="Survicate">
+  <ComparisonRow column1={true} column2={true} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF"/>
+  <ComparisonRow column1={true} column2={true} feature="Multi-channel surveys" description="Send surveys in mobile apps, email, links" />
+  <ComparisonRow column1={true} column2={true} feature="Targeting" description="Control who sees your survey and when" />
+  <ComparisonRow column1={true} column2={true} feature="Survey logic" description="Customize survey flows based on previous responses" />
+  <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
+  <ComparisonRow column1={false} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={false} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
+  <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
+</ComparisonTable>
+
+### Why do companies use SurveyMonkey?
+
+According to [reviews on G2](https://www.g2.com/products/surveymonkey/reviews), customers choose SurveyMonkey because:
+
+1. **It's easy to use:** Reviewers note how easy SurveyMonkey is to set up and use. This means they can go from idea to actionable learnings quickly.
+
+1. **It supports many integrations:** Reviewers value how easy it is to integrate survey answers into existing workflows and apps.
+
+3. **It has pre-built reporting tools:** Reviewers appreciate that they can easily interpret results and gain actionable insights from the collected data.
+
+> #### Bottom line
+> 
+> SurveyMonkey is a solid option if all you're looking for is surveys. SurveyMonkey charges per team seat while Survicate charges per survey response, so it's best to compare their pricing to see which will be cheaper for you.
 
 ## 4. Hotjar
 
@@ -225,9 +216,6 @@ Hotjar and Survicate have comparable features when it comes to surveys. Hotjar i
   <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
   <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
   <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
   <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
 </ComparisonTable>
 
@@ -287,9 +275,6 @@ Pendo includes all of the key survey features that Survicate does and, unlike mo
   <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
   <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
   <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
   <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
 </ComparisonTable>
 
@@ -348,9 +333,6 @@ When it comes to surveys, Lucky Orange does many of the same things as Survicate
   <ComparisonRow column1={true} column2={true} feature="Integrations" description="Send survey data to all your tools" />
   <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
   <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1="Basic web analytics only" column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={false} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
   <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
 </ComparisonTable>
 
@@ -411,9 +393,6 @@ Crazy Egg has a few features Survicate doesn't, including basic analytics and A/
   <ComparisonRow column1={false} column2={true} feature="Integrations" description="Send survey data to all your tools" />
   <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
   <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click and interact on your site" />
-  <ComparisonRow column1="Basic web analytics only" column2={false} feature="Product analytics" description="Track trends, funnels, user paths, and retention" />
-  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
-  <ComparisonRow column1={false} column2={false} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
   <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
 </ComparisonTable>
 
