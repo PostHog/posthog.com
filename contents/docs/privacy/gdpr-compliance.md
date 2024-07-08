@@ -63,7 +63,7 @@ If you are self-hosting PostHog on a server outside the EU and are collecting EU
 
 If you are using PostHog Cloud US, we also recommend you anonymize any EU user data. 
 
-The PostHog [Property Filter app](https://posthog.com/apps/property-filter) allows you to anonymize user data to ensure you stay compliant with GDPR in both cases. 
+The PostHog [Property Filter app](https://posthog.com/pipeline/property-filter) allows you to anonymize user data to ensure you stay compliant with GDPR in both cases. 
 
 ## How to set PostHog up for GDPR compliance
 

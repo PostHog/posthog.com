@@ -20,7 +20,7 @@ By default, the URL Normalizer converts all URLs to lowercase and strips trailin
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'URL Normalizer' and select the transformation, press Install.
 
 ## Configuration
