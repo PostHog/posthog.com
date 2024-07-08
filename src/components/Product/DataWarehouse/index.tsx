@@ -248,7 +248,7 @@ export const ProductDataWarehouse = () => {
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">
                         <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
-                        <p className="">Use {product.lowercase} free up to 30 million rows/mo.</p>
+                        <p className="">Use the {product.lowercase} for free up to 1 million rows/mo.</p>
                     </div>
                     <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-8">
                         <StaticImage
@@ -266,9 +266,11 @@ export const ProductDataWarehouse = () => {
                         <div className="grid grid-cols-2 [&>div]:p-1 rounded">
                             <div className="bg-accent dark:bg-accent-dark font-bold">Synced rows</div>
                             <div className="bg-accent dark:bg-accent-dark font-bold">Cost per row</div>
-                            <div>0-30 million</div>
+                            <div>0-1 million</div>
                             <div>Free</div>
-                            <div>30-100 million</div>
+                            <div>1-10 million</div>
+                            <div>$0.000015</div>
+                            <div>10-100 million</div>
                             <div>$0.000010</div>
                             <div>100+ million</div>
                             <div>$0.000008</div>
