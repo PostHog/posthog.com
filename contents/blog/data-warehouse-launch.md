@@ -27,7 +27,7 @@ Why would you want to get non-product data into PostHog? So you can do things li
 
 All that is just using our pre-built connectors. You can also bring data into PostHog from almost anywhere using [Snowflake, Cloudflare R2, Amazon S3, Google Cloud Storage](/docs/data-warehouse/setup), or [custom sources](/docs/data-warehouse/setup#linking-a-custom-source) — and we’re fascinated to see what further use-cases teams will come up with. 
 
-Over the beta we’ve already seen teams sync everything from their bank data (for analyzing P&L without an accountant) to CRMs (for monitoring sales team performance). Teams like [Headshot Pro, for example, have even synced Google Adwords](/customers/headshot-pro) so they can analyze marketing data in detail. 
+Over the beta we’ve already seen teams sync everything from their bank data (for analyzing P&L without an accountant) to CRMs (for monitoring sales team performance). Teams like [Headshot Pro, for example, have even synced Google Adwords](/customers/headshot-pro) so they can analyze marketing data in detail and attribute it to sign-ups and usage.
 
 Ultimately, this is why we’ve poured so much attention into building our data warehouse recently — so we can give developers the tools they need to [build more successful products](/handbook/why-does-posthog-exist). If that means working with external data, then that’s what the data warehouse (along with [HogQL](/docs/hogql) and [insights](/product-analytics)) is for. 
 
