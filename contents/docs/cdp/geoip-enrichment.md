@@ -25,7 +25,7 @@ This way the transformation can, in most cases, infer the IP address without any
 ## Installation
 
 1. Log in to your PostHog instance
-2. Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
+2. Click "[Data pipeline](https://us.posthog.com/pipeline)" in the left sidebar
 3. Search for 'GeoIP'
 4. Select the GeoIP transformation, press 'Install' and follow the on-screen instructions
 

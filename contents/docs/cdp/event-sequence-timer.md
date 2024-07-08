@@ -53,7 +53,7 @@ This transformation measures the time it takes for a user to perform one event (
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'Event Sequence Timer' and select the transformation, press Install.
 3. Follow the on-screen steps to configure the transformation.
 

@@ -42,7 +42,7 @@ No other information can currently be sent to PostHog using this destination. If
 ### How do I install the Hubspot destination on PostHog?
 
 1. Log in to your PostHog instance
-2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
+2.  Click "[Data pipeline](https://us.posthog.com/pipeline)" in the left sidebar
 3. Search for 'Hubspot'
 4. Select the destination, press 'Install' and follow the on-screen instructions
 

@@ -22,7 +22,7 @@ You'll also need access to the relevant Customer.io account.
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'Customer.io' and select the destination, press Install.
 3. Add your Customer.io site ID and token at the configuration step.
 4. Enable the destination and watch your 'People' list get populated in Customer.io!

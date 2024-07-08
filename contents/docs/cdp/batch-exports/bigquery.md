@@ -82,7 +82,7 @@ This is the schema of all the fields that are exported to BigQuery.
 ## Creating the batch export
 
 1. Subscribe to data pipelines add-on in [your billing settings](https://us.posthog.com/organization/billing) if you haven't already.
-2. Click [Data pipelines](https://app.posthog.com/apps) in the navigation and go to the exports tab in your PostHog instance.
+2. Click [Data pipelines](https://app.posthog.com/pipeline) in the navigation and go to the exports tab in your PostHog instance.
 3. Click "Create export workflow".
 4. Select **BigQuery** as the batch export destination.
 5. Fill in the necessary [configuration details](#bigquery-configuration).
