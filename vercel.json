@@ -671,6 +671,10 @@
             "source": "/docs/product-analytics/user-properties",
             "destination": "/docs/product-analytics/person-properties"
         },
+        {
+            "source": "/docs/product-analytics/start",
+            "destination": "/docs/getting-started/send-events"
+        },
         { "source": "/docs/getting-started/user-properties", "destination": "/docs/getting-started/person-properties" },
         {
             "source": "/docs/feature-flags/multivariate-flags",
