@@ -17,6 +17,7 @@ import {
     sliderCurve,
 } from '../PricingSlider/Slider'
 import Checkbox from 'components/Checkbox'
+import { NumericFormat } from 'react-number-format'
 
 const Modal = ({ onClose, isVisible }) => {
     return (
@@ -400,9 +401,14 @@ const ProductAnalyticsTab = ({ activeProduct, analyticsData, setAnalyticsVolume 
                                         className="col-span-3"
                                         label={label}
                                     />
-                                    <p className="text-right font-bold m-0 self-end -mb-1.5">
-                                        {analyticsData[type].volume.toLocaleString()}
-                                    </p>
+                                    <div className="text-right font-bold m-0 self-end -mb-1.5 flex justify-end">
+                                        <NumericFormat
+                                            className="bg-transparent text-right p-0 focus:ring-0 max-w-[103px] border-t-0 border-x-0 border-dashed border-border dark:border-dark"
+                                            value={analyticsData[type].volume}
+                                            thousandSeparator=","
+                                            onValueChange={({ floatValue }) => setAnalyticsVolume(type, floatValue)}
+                                        />
+                                    </div>
                                     <p className="text-right font-bold m-0 self-end -mb-1.5">
                                         {formatUSD(analyticsData[type].cost)}
                                     </p>
