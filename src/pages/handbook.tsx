@@ -110,8 +110,8 @@ export const Handbook: React.FC = () => {
                             <h1 className="font-bold text-5xl mb-6">Company handbook</h1>
                             <h3 className="text-xl">👋 Welcome!</h3>
                             <h5 className="opacity-60 font-semibold leading-tight mb-8 max-w-lg">
-                                This handbook simply explains how we work. It has been one of the most important things
-                                we've ever made.
+                                This handbook simply explains how we work. It is one of the most important things we've
+                                ever made.
                             </h5>
                         </div>
                     </div>
