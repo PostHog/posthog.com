@@ -5,11 +5,17 @@ import Toggle from 'components/Toggle'
 import { calculatePrice, pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { useStaticQuery } from 'gatsby'
 import { allProductsData } from '../Pricing'
-import { useValues } from 'kea'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import useProducts from 'hooks/useProducts'
-import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
+import {
+    LogSlider,
+    NonLinearSlider,
+    inverseCurve,
+    nonLinearCurve,
+    reverseNonLinearCurve,
+    sliderCurve,
+} from '../PricingSlider/Slider'
 import Checkbox from 'components/Checkbox'
 
 const Modal = ({ onClose, isVisible }) => {
@@ -310,13 +316,13 @@ const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, val
     return (
         <div className={`${className} ml-6 relative ${label ? 'pt-7' : ''}`}>
             {label && <p className="m-0 text-sm absolute left-0 top-0">{label}</p>}
-            <LogSlider
+            <NonLinearSlider
                 stepsInRange={100}
                 marks={marks}
                 min={min}
                 max={max}
-                onChange={(value) => onChange(sliderCurve(value))}
-                value={inverseCurve(value)}
+                onChange={(value) => onChange(reverseNonLinearCurve(value))}
+                value={nonLinearCurve(value)}
             />
         </div>
     )
@@ -326,10 +332,12 @@ const analyticsSliders = [
     {
         label: 'Website analytics',
         types: [{ type: 'websiteAnalyticsEvents' }],
+        checked: true,
     },
     {
         label: 'Product analytics',
         types: [{ type: 'productAnalyticsEvents' }],
+        checked: true,
     },
     {
         label: 'Mobile app',
@@ -372,14 +380,14 @@ const ProductAnalyticsTab = ({ activeProduct, analyticsData, setAnalyticsVolume 
                 <p className="m-0 text-right opacity-70 text-sm">Subtotal</p>
             </div>
 
-            {analyticsSliders.map(({ label, types }) => (
+            {analyticsSliders.map(({ label, types, checked }) => (
                 <SliderToggle
                     key={label}
                     label={label}
                     onChange={(checked) =>
                         types.forEach(({ type }) => setAnalyticsVolume(type, checked ? slider.min : 0))
                     }
-                    checked={types.some(({ type }) => analyticsData[type].volume > 0)}
+                    checked={checked}
                 >
                     <div className="space-y-8">
                         {types.map(({ type, label }) => (

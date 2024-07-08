@@ -27,11 +27,10 @@ const initialProducts = [
         type: 'product_analytics',
         color: 'blue',
         slider: {
-            marks: [MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
-            min: MILLION,
+            marks: [0, MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
+            min: 0,
             max: MAX_PRODUCT_ANALYTICS,
         },
-        volume: MILLION,
     },
     {
         Icon: IconRewindPlay,
@@ -87,7 +86,7 @@ export default function useProducts() {
 
     const [analyticsData, setAnalyticsData] = useState({
         websiteAnalyticsEvents: {
-            volume: 0,
+            volume: MILLION,
             cost: 0,
         },
         productAnalyticsEvents: {
@@ -211,6 +210,10 @@ export default function useProducts() {
         const totalAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)
         setProduct('product_analytics', { cost: totalAnalyticsCost, volume: totalAnalyticsVolume })
     }, [analyticsData])
+
+    useEffect(() => {
+        Object.keys(analyticsData).forEach((key) => setAnalyticsVolume(key, analyticsData[key].volume))
+    }, [])
 
     return { products, setVolume, analyticsData, setAnalyticsVolume, monthlyTotal }
 }
