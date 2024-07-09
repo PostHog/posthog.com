@@ -2970,6 +2970,12 @@ const menu = [
                 url: '/surveys',
             },
             {
+                name: 'Data warehouse',
+                icon: 'IconDatabase',
+                color: '[#8567FF]',
+                url: '/data-warehouse',
+            },
+            {
                 name: 'Product OS',
                 icon: 'IconStack',
                 color: 'blue',
