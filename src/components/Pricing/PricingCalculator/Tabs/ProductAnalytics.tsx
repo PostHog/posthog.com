@@ -100,8 +100,8 @@ const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, an
     }
 
     return (
-        <div className={`mt-2 grid grid-cols-6 ${checked ? 'mb-10' : 'mb-2'}`}>
-            <div className={`space-y-3 ${checked ? 'col-span-6' : 'col-span-4'}`}>
+        <div className={`mt-2 grid grid-cols-6 gap-8 ${checked ? 'mb-10' : 'mb-2'}`}>
+            <div className={`space-y-3 ${checked ? 'col-span-6' : 'col-span-5'}`}>
                 <Checkbox className="!text-base" checked={checked} onChange={handleCheck} value={label} />
                 {checked && (
                     <div className="space-y-12">
@@ -112,7 +112,7 @@ const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, an
                                         {...activeProduct.slider}
                                         onChange={(value) => setAnalyticsVolume(type, value)}
                                         value={analyticsData[type].volume}
-                                        className="col-span-4 pl-8"
+                                        className="col-span-5 pl-8"
                                         label={label}
                                         enhanced={analyticsData[type].enhanced}
                                     />
@@ -123,10 +123,8 @@ const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, an
                                             thousandSeparator=","
                                             onValueChange={({ floatValue }) => setAnalyticsVolume(type, floatValue)}
                                         />
+                                        {/* {formatUSD(analyticsData[type].cost)} */}
                                     </div>
-                                    <p className="text-right font-bold m-0 self-end -mb-1.5">
-                                        {formatUSD(analyticsData[type].cost)}
-                                    </p>
                                 </div>
                             </div>
                         ))}
@@ -136,7 +134,6 @@ const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, an
             {!checked && (
                 <>
                     <span className="opacity-25 text-center">--</span>
-                    <span className="opacity-25 text-right">--</span>
                 </>
             )}
         </div>
@@ -209,9 +206,8 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                 First 1,000,000 events free – every month!
             </div>
             <div className="grid grid-cols-6 gap-8 items-end mb-2">
-                <h3 className="m-0 text-base col-span-4">Event usage</h3>
+                <h3 className="m-0 text-base col-span-5">Event usage</h3>
                 <p className="m-0 text-center opacity-70 text-sm">Events/mo</p>
-                <p className="m-0 text-right opacity-70 text-sm">Subtotal</p>
             </div>
 
             {analyticsSliders.map((slider) => (
@@ -223,109 +219,114 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                     {...slider}
                 />
             ))}
-            {!showBreakdown && (
-                <div className="grid grid-cols-6 gap-8 mt-4 py-2 border-y border-light dark:border-dark">
-                    <div className="col-span-4 flex justify-between">
-                        <div>
-                            <h3 className="m-0 text-base">Event cost subtotal</h3>
+            <div className="grid grid-cols-6 gap-x-8 mt-4 py-2 border-y border-light dark:border-dark">
+                <div className="col-span-4 flex justify-between">
+                    <div>
+                        <h3 className="m-0 text-base">Event cost subtotal</h3>
+                        {showBreakdown ? (
+                            <button onClick={() => setShowBreakdown(false)} className="text-red dark:text-yellow font-semibold text-sm">
+                                Hide how we calculate this
+                            </button>
+                        ) : (
+
                             <button onClick={() => setShowBreakdown(true)} className="text-red dark:text-yellow font-semibold text-sm">
                                 See how we calculate this
                             </button>
-                        </div>
-                        <div>
-                            Anonymous events<br />
-                            Identified events
-                        </div>
-                    </div>
-                    <div></div>
-                    <div className="text-right">
-                        hi
+                        )
+                        }
                     </div>
                 </div>
-            )}
-            {showBreakdown && (
-                <div className="p-4 mt-4 rounded border border-light dark:border-dark bg-white dark:bg-accent-dark relative">
-                    <div className="absolute top-4 right-4">
-                        <button onClick={() => setShowBreakdown(false)} className="text-primary/50 hover:text-primary/100 dark:text-primary-dark/50 dark:hover:text-primary-dark/100">
-                            <IconX className="size-5 inline-block" />
-                        </button>
-                    </div>
-                    <h4 className="mb-1">How event pricing is calculated</h4>
-                    <p className="text-sm font-normal">Events are billed at different rates based on volume and if you choose to attach a <Link href="#">person profile</Link> to the event. (This allows you to send custom properties like email address or plan name.)</p>
-                    <div className="my-4 grid grid-cols-2 gap-8 border border-light dark:border-dark p-4 bg-tan dark:bg-accent-dark rounded">
-                        <div>
-                            <h4 className="m-0 text-base mb-0">Anonymous events</h4>
-                            <p className="m-0 text-sm opacity-70 italic mb-2">Base event price</p>
-
-                            <p className="m-0 text-sm opacity-70">Starts at </p>
-                            <p className="m-0">
-                                <strong>
-                                    $
-                                    {
-                                        activeProduct.costByTier.find((tier) => tier.unit_amount_usd !== '0')
-                                            .unit_amount_usd
-                                    }
-                                </strong>
-                                <span className="opacity-70 text-sm">/event</span>
-                            </p>
-                            <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
-                        </div>
-                        <div>
-                            <h4 className="m-0 text-base mb-0">Identified events</h4>
-                            <p className="m-0 text-sm opacity-70 italic mb-2">Base event price + person profile add-on</p>
-                            <p className="m-0 text-sm opacity-70">Starts at </p>
-                            <p className="m-0">
-
-
-                                <strong>
-                                    $
-                                    {
-                                        activeProduct.costByTier.find((tier) => tier.unit_amount_usd !== '0')
-                                            .unit_amount_usd
-                                    }
-                                </strong>
-                                <span className="opacity-70 text-sm">/event +{' '}</span>
-                                <strong>
-                                    $
-                                    {
-                                        enhancedPersonsCost.costByTier.find((tier) => tier.unit_amount_usd !== '0')
-                                            .unit_amount_usd
-                                    }
-                                </strong>
-                                <span className="opacity-70 text-sm">/event</span>
-                            </p>
-                            <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
-                        </div>
-                    </div>
-                    <p className="my-4 font-bold">Here's how your estimate breaks down:</p>
-                    <div className="space-y-8">
-                        <div>
-                            <h4 className="text-lg m-0">Anonymous events</h4>
-                            <p className="opacity-70 m-0"><strong>Used for:</strong> Website analytics, Anonymous mobile events</p>
-                            <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
-                                <PricingTiers
-                                    plans={[{ tiers: activeProduct.costByTier }]}
-                                    unit={activeProduct.billingData.unit}
-                                    type={'product_analytics'}
-                                    showSubtotal
-                                />
-                            </div>
-                        </div>
-                        <div>
-                            <h4 className="text-lg m-0">Identified events (with person profiles)</h4>
-                            <p className="opacity-70 m-0"><strong>Used for:</strong> authenticated users</p>
-                            <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
-                                <PricingTiers
-                                    plans={[{ tiers: enhancedPersonsCost.costByTier }]}
-                                    unit={activeProduct.billingData.unit}
-                                    type={'product_analytics'}
-                                    showSubtotal
-                                />
-                            </div>
-                        </div>
-                    </div>
+                <div className="col-span-2 grid grid-cols-2">
+                    <span className="flex flex-col opacity-70 text-sm">Anonymous events</span>
+                    <strong className="text-right">$@todo</strong>
+                    <span className="flex flex-col opacity-70 text-sm">Identified events</span>
+                    <strong className="text-right">$@todo</strong>
                 </div>
-            )}
+
+                {showBreakdown && (
+                    <div className="col-span-full p-4 mt-4 rounded border border-light dark:border-dark bg-white dark:bg-accent-dark relative">
+                        <div className="absolute top-4 right-4">
+                            <button onClick={() => setShowBreakdown(false)} className="text-primary/50 hover:text-primary/100 dark:text-primary-dark/50 dark:hover:text-primary-dark/100">
+                                <IconX className="size-5 inline-block" />
+                            </button>
+                        </div>
+                        <h4 className="mb-1">How event pricing is calculated</h4>
+                        <p className="text-sm font-normal">Events are billed at different rates based on volume and if you choose to attach a <Link href="#">person profile</Link> to the event. (This allows you to send custom properties like email address or plan name.)</p>
+                        <div className="my-4 grid grid-cols-2 gap-8 border border-light dark:border-dark p-4 bg-tan dark:bg-accent-dark rounded">
+                            <div>
+                                <h4 className="m-0 text-base mb-0">Anonymous events</h4>
+                                <p className="m-0 text-sm opacity-70 italic mb-2">Base event price</p>
+
+                                <p className="m-0 text-sm opacity-70">Starts at </p>
+                                <p className="m-0">
+                                    <strong>
+                                        $
+                                        {
+                                            activeProduct.costByTier.find((tier) => tier.unit_amount_usd !== '0')
+                                                .unit_amount_usd
+                                        }
+                                    </strong>
+                                    <span className="opacity-70 text-sm">/event</span>
+                                </p>
+                                <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
+                            </div>
+                            <div>
+                                <h4 className="m-0 text-base mb-0">Identified events</h4>
+                                <p className="m-0 text-sm opacity-70 italic mb-2">Base event price + person profile add-on</p>
+                                <p className="m-0 text-sm opacity-70">Starts at </p>
+                                <p className="m-0">
+
+
+                                    <strong>
+                                        $
+                                        {
+                                            activeProduct.costByTier.find((tier) => tier.unit_amount_usd !== '0')
+                                                .unit_amount_usd
+                                        }
+                                    </strong>
+                                    <span className="opacity-70 text-sm">/event +{' '}</span>
+                                    <strong>
+                                        $
+                                        {
+                                            enhancedPersonsCost.costByTier.find((tier) => tier.unit_amount_usd !== '0')
+                                                .unit_amount_usd
+                                        }
+                                    </strong>
+                                    <span className="opacity-70 text-sm">/event</span>
+                                </p>
+                                <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
+                            </div>
+                        </div>
+                        <p className="my-4 font-bold">Here's how your estimate breaks down:</p>
+                        <div className="space-y-8">
+                            <div>
+                                <h4 className="text-lg m-0">Anonymous events</h4>
+                                <p className="opacity-70 m-0"><strong>Used for:</strong> Website analytics, Anonymous mobile events</p>
+                                <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
+                                    <PricingTiers
+                                        plans={[{ tiers: activeProduct.costByTier }]}
+                                        unit={activeProduct.billingData.unit}
+                                        type={'product_analytics'}
+                                        showSubtotal
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <h4 className="text-lg m-0">Identified events (with person profiles)</h4>
+                                <p className="opacity-70 m-0"><strong>Used for:</strong> authenticated users</p>
+                                <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
+                                    <PricingTiers
+                                        plans={[{ tiers: enhancedPersonsCost.costByTier }]}
+                                        unit={activeProduct.billingData.unit}
+                                        type={'product_analytics'}
+                                        showSubtotal
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
