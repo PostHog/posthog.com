@@ -130,7 +130,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                 className={`${compact ? 'text-sm' : ''}`}
                                 title={
                                     plans[0].free_allocation === up_to ? (
-                                        <strong className="text-green">Free</strong>
+                                        <strong>Free</strong>
                                     ) : type === 'product_analytics' && index === tiers.length - 1 ? (
                                         // last row
                                         <div className="flex items-center -mr-5">
