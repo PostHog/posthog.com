@@ -16,8 +16,9 @@ const Modal = ({ onClose, isVisible }) => {
     return (
         <>
             <div
-                className={`bg-accent-dark/50 fixed left-0 w-screen h-screen top-0 bg-opacity-40 flex justify-center items-center ${!isVisible ? 'hidden' : 'z-[1000000]'
-                    }`}
+                className={`bg-accent-dark/50 fixed left-0 w-screen h-screen top-0 bg-opacity-40 flex justify-center items-center ${
+                    !isVisible ? 'hidden' : 'z-[1000000]'
+                }`}
                 onClick={() => onClose()}
             ></div>
             <div
@@ -183,7 +184,7 @@ const Modal = ({ onClose, isVisible }) => {
     )
 }
 
-const Addon = ({ type, name, description, plans, addons, setAddons, volume, unit }) => {
+const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
     const addon = addons.find((addon) => addon.type === type)
     const checked = addon?.checked
     const [percentage, setPercentage] = useState(50)
@@ -195,9 +196,9 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, unit
                         ...addon,
                         totalCost: checked
                             ? calculatePrice(
-                                inclusion_only ? (percentage / 100) * volume : volume,
-                                plans[plans.length - 1].tiers
-                            ).total
+                                  inclusion_only ? (percentage / 100) * volume : volume,
+                                  plans[plans.length - 1].tiers
+                              ).total
                             : 0,
                     }
                 }
@@ -217,8 +218,6 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, unit
         })
     }
 
-    const [isVisible, updateVisible] = useState(false)
-
     return (
         <div className="grid grid-cols-6 gap-8 items-center">
             <div className="col-span-3 md:col-span-4 flex justify-between items-center">
@@ -234,7 +233,10 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, unit
             </div>
             <div className="col-span-2 md:col-span-1">
                 <p className="m-0 text-sm opacity-70">Starts at</p>
-                <strong>$@todo</strong><span className="text-sm opacity-70">/event</span>
+                <strong>
+                    {plans[plans.length - 1].tiers.find((tier) => tier.unit_amount_usd !== '0').unit_amount_usd}
+                </strong>
+                <span className="text-sm opacity-70">/event</span>
             </div>
             <div className="text-right">
                 <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
@@ -416,10 +418,11 @@ export default function Tabbed() {
                                 <li key={name} className="flex-1">
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${active
-                                            ? 'font-bold bg-accent dark:bg-accent-dark'
-                                            : 'hover:bg-accent dark:hover:bg-accent/15'
-                                            }`}
+                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                            active
+                                                ? 'font-bold bg-accent dark:bg-accent-dark'
+                                                : 'hover:bg-accent dark:hover:bg-accent/15'
+                                        }`}
                                     >
                                         <div className="flex items-center space-x-2">
                                             <span>
@@ -490,7 +493,8 @@ export default function Tabbed() {
                                     />
                                 </div>
                                 <div className="col-span-2 md:col-span-1">
-                                    <strong>$450</strong><span className="text-sm opacity-70">/mo</span>
+                                    <strong>$450</strong>
+                                    <span className="text-sm opacity-70">/mo</span>
                                 </div>
                                 <div className="text-right">
                                     <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>

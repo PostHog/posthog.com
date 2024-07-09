@@ -66,7 +66,19 @@ const analyticsSliders = [
 const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value, enhanced = '' }) => {
     return (
         <div className={`${className} relative ${label ? 'pt-7' : ''}`}>
-            {label && <p className="m-0 text-sm absolute left-8 top-0">{label} {enhanced && <span className="text-primary/70 dark:text-primary-dark/70">– uses <Link href="#" className="text-red dark:text-yellow font-semibold">person profiles</Link></span>}</p>}
+            {label && (
+                <p className="m-0 text-sm absolute left-8 top-0">
+                    {label}{' '}
+                    {enhanced && (
+                        <span className="text-primary/70 dark:text-primary-dark/70">
+                            – uses{' '}
+                            <Link href="#" className="text-red dark:text-yellow font-semibold">
+                                person profiles
+                            </Link>
+                        </span>
+                    )}
+                </p>
+            )}
             <NonLinearSlider
                 stepsInRange={100}
                 marks={marks}
@@ -159,6 +171,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                 .plans.find((plan) => plan.tiers).tiers,
         []
     )
+    const totalProductAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)
     const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(analyticsData)
     const enhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers)
 
@@ -224,34 +237,45 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                     <div>
                         <h3 className="m-0 text-base">Event cost subtotal</h3>
                         {showBreakdown ? (
-                            <button onClick={() => setShowBreakdown(false)} className="text-red dark:text-yellow font-semibold text-sm">
+                            <button
+                                onClick={() => setShowBreakdown(false)}
+                                className="text-red dark:text-yellow font-semibold text-sm"
+                            >
                                 Hide how we calculate this
                             </button>
                         ) : (
-
-                            <button onClick={() => setShowBreakdown(true)} className="text-red dark:text-yellow font-semibold text-sm">
+                            <button
+                                onClick={() => setShowBreakdown(true)}
+                                className="text-red dark:text-yellow font-semibold text-sm"
+                            >
                                 See how we calculate this
                             </button>
-                        )
-                        }
+                        )}
                     </div>
                 </div>
                 <div className="col-span-3 grid md:grid-cols-2">
                     <span className="flex flex-col opacity-70 text-sm text-right">Anonymous events</span>
-                    <strong className="text-right">$@todo</strong>
+                    <strong className="text-right">{totalProductAnalyticsVolume.toLocaleString()}</strong>
                     <span className="flex flex-col opacity-70 text-sm text-right mt-1 md:mt-0">Identified events</span>
-                    <strong className="text-right">$@todo</strong>
+                    <strong className="text-right">{totalEnhancedPersonsVolume.toLocaleString()}</strong>
                 </div>
 
                 {showBreakdown && (
                     <div className="col-span-full p-4 mt-4 rounded border border-light dark:border-dark bg-white dark:bg-accent-dark relative">
                         <div className="absolute top-4 right-4">
-                            <button onClick={() => setShowBreakdown(false)} className="text-primary/50 hover:text-primary/100 dark:text-primary-dark/50 dark:hover:text-primary-dark/100">
+                            <button
+                                onClick={() => setShowBreakdown(false)}
+                                className="text-primary/50 hover:text-primary/100 dark:text-primary-dark/50 dark:hover:text-primary-dark/100"
+                            >
                                 <IconX className="size-5 inline-block" />
                             </button>
                         </div>
                         <h4 className="mb-1">How event pricing is calculated</h4>
-                        <p className="text-sm font-normal">Events are billed at different rates based on volume and if you choose to attach a <Link href="#">person profile</Link> to the event. (This allows you to send custom properties like email address or plan name.)</p>
+                        <p className="text-sm font-normal">
+                            Events are billed at different rates based on volume and if you choose to attach a{' '}
+                            <Link href="#">person profile</Link> to the event. (This allows you to send custom
+                            properties like email address or plan name.)
+                        </p>
                         <div className="my-4 grid grid-cols-2 gap-8 border border-light dark:border-dark p-4 bg-tan dark:bg-accent-dark rounded">
                             <div>
                                 <h4 className="m-0 text-base mb-0">Anonymous events</h4>
@@ -272,11 +296,11 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                             </div>
                             <div>
                                 <h4 className="m-0 text-base mb-0">Identified events</h4>
-                                <p className="m-0 text-sm opacity-70 italic mb-2">Base event price + person profile add-on</p>
+                                <p className="m-0 text-sm opacity-70 italic mb-2">
+                                    Base event price + person profile add-on
+                                </p>
                                 <p className="m-0 text-sm opacity-70">Starts at </p>
                                 <p className="m-0">
-
-
                                     <strong>
                                         $
                                         {
@@ -284,7 +308,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                                                 .unit_amount_usd
                                         }
                                     </strong>
-                                    <span className="opacity-70 text-sm">/event +{' '}</span>
+                                    <span className="opacity-70 text-sm">/event + </span>
                                     <strong>
                                         $
                                         {
@@ -301,7 +325,9 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                         <div className="space-y-8">
                             <div>
                                 <h4 className="text-lg m-0">Anonymous events</h4>
-                                <p className="opacity-70 m-0"><strong>Used for:</strong> Website analytics, Anonymous mobile events</p>
+                                <p className="opacity-70 m-0">
+                                    <strong>Used for:</strong> Website analytics, Anonymous mobile events
+                                </p>
                                 <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
                                     <PricingTiers
                                         plans={[{ tiers: activeProduct.costByTier }]}
@@ -313,7 +339,9 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                             </div>
                             <div>
                                 <h4 className="text-lg m-0">Identified events (with person profiles)</h4>
-                                <p className="opacity-70 m-0"><strong>Used for:</strong> authenticated users</p>
+                                <p className="opacity-70 m-0">
+                                    <strong>Used for:</strong> authenticated users
+                                </p>
                                 <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
                                     <PricingTiers
                                         plans={[{ tiers: enhancedPersonsCost.costByTier }]}
