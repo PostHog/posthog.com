@@ -220,8 +220,8 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
     const [isVisible, updateVisible] = useState(false)
 
     return (
-        <div className="grid grid-cols-12 items-center">
-            <div className="col-span-7">
+        <div className="grid grid-cols-6 gap-8 items-center">
+            <div className="col-span-4 flex justify-between items-center">
                 <div className="flex space-x-1 items-center">
                     <p className="m-0 text-sm font-bold">{name}</p>
                     <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
@@ -230,46 +230,46 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                         </span>
                     </Tooltip>
                 </div>
-                <div>
-                    {inclusion_only && (
-                        <>
-                            <p className="m-0 flex space-x-1 text-sm">
-                                <span>on</span>
-                                <span className="border-b border-black dark:border-white/20">
-                                    <input
-                                        onChange={(e) => {
-                                            if (!checked) {
-                                                handleToggle(true)
-                                            }
-                                            setPercentage(e.target.value)
-                                        }}
-                                        type="number"
-                                        min={1}
-                                        max={99}
-                                        className="p-0 pr-0.5 bg-tan dark:bg-dark border-none hide-number-arrows text-sm font-bold text-center -mr-0.5 focus:ring-0"
-                                        value={percentage}
-                                    />
-                                    <strong>%</strong>
-                                </span>
-                                <span>of total {unit} volume</span>
-                            </p>
-                            <div>
-                                <button
-                                    onClick={() => updateVisible(!isVisible)}
-                                    className="text-red dark:text-yellow font-semibold text-sm"
-                                >
-                                    {isVisible ? 'Help me calculate this' : 'Help me calculate this'}
-                                </button>
-                            </div>
-                            <Modal onClose={() => updateVisible(false)} isVisible={isVisible} />
-                        </>
-                    )}
-                </div>
-            </div>
-            <div className="col-span-2 md:col-span-3 flex justify-end">
+                {inclusion_only && (
+                    <div>
+                        <p className="m-0 flex space-x-1 text-sm">
+                            <span>on</span>
+                            <span className="border-b border-black dark:border-white/20">
+                                <input
+                                    onChange={(e) => {
+                                        if (!checked) {
+                                            handleToggle(true)
+                                        }
+                                        setPercentage(e.target.value)
+                                    }}
+                                    type="number"
+                                    min={1}
+                                    max={99}
+                                    className="p-0 pr-0.5 bg-tan dark:bg-dark border-none hide-number-arrows text-sm font-bold text-center -mr-0.5 focus:ring-0"
+                                    value={percentage}
+                                />
+                                <strong>%</strong>
+                            </span>
+                            <span>of total {unit} volume</span>
+                        </p>
+                        <div>
+                            <button
+                                onClick={() => updateVisible(!isVisible)}
+                                className="text-red dark:text-yellow font-semibold text-sm"
+                            >
+                                {isVisible ? 'Help me calculate this' : 'Help me calculate this'}
+                            </button>
+                        </div>
+                        <Modal onClose={() => updateVisible(false)} isVisible={isVisible} />
+                    </div>
+                )}
                 <Toggle checked={checked} onChange={handleToggle} />
             </div>
-            <div className="col-span-3 md:col-span-2 text-right">
+            <div>
+                <p className="m-0 text-sm opacity-70">Starts at</p>
+                <strong>$@todo</strong><span className="text-sm opacity-70">/event</span>
+            </div>
+            <div className="text-right">
                 <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
                     {formatUSD(checked ? addon?.totalCost : 0)}
                 </p>
@@ -498,16 +498,16 @@ export default function Tabbed() {
                         const platformAddon = platformAddons.find((addon) => addon.type === type)
                         const checked = platformAddon?.checked
                         return (
-                            <div key={type} className="grid grid-cols-12 items-center">
-                                <div className="flex space-x-1 items-center col-span-7">
-                                    <p className="m-0 text-sm font-bold">{name}</p>
-                                    <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
-                                        <span className="relative">
-                                            <IconInfo className="size-5 opacity-70" />
-                                        </span>
-                                    </Tooltip>
-                                </div>
-                                <div className="flex justify-end col-span-2 md:col-span-3">
+                            <div key={type} className="grid grid-cols-6 gap-8 items-center">
+                                <div className="col-span-4 flex items-center justify-between">
+                                    <div className="flex space-x-1 items-center">
+                                        <p className="m-0 text-sm font-bold">{name}</p>
+                                        <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
+                                            <span className="relative">
+                                                <IconInfo className="size-5 opacity-70" />
+                                            </span>
+                                        </Tooltip>
+                                    </div>
                                     <Toggle
                                         checked={checked}
                                         onChange={(checked) =>
@@ -522,7 +522,10 @@ export default function Tabbed() {
                                         }
                                     />
                                 </div>
-                                <div className="col-span-3 md:col-span-2 text-right">
+                                <div className="">
+                                    <strong>$450</strong><span className="text-sm opacity-70">/mo</span>
+                                </div>
+                                <div className="text-right">
                                     <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
                                         ${checked ? platformAddon?.price : 0}
                                     </p>

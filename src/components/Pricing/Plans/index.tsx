@@ -47,7 +47,7 @@ const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
 }
 
 const Title = ({ title, className = '' }: { title: string; className?: string }) => {
-    return <h5 className={`m-0 text-[15px] opacity-70 font-medium ${className}`}>{title}</h5>
+    return <h5 className={`m-0 text-[15px] opacity-70 font-normal ${className}`}>{title}</h5>
 }
 
 export const InclusionOnlyRow = ({ plans }) => (
@@ -130,7 +130,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                 className={`${compact ? 'text-sm' : ''}`}
                                 title={
                                     plans[0].free_allocation === up_to ? (
-                                        <strong>Free</strong>
+                                        <strong className="text-green">Free</strong>
                                     ) : type === 'product_analytics' && index === tiers.length - 1 ? (
                                         // last row
                                         <div className="flex items-center -mr-5">
