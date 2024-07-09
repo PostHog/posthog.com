@@ -112,11 +112,11 @@ const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, an
                                         {...activeProduct.slider}
                                         onChange={(value) => setAnalyticsVolume(type, value)}
                                         value={analyticsData[type].volume}
-                                        className="col-span-5 pl-8"
+                                        className="col-span-4 md:col-span-5 pl-8"
                                         label={label}
                                         enhanced={analyticsData[type].enhanced}
                                     />
-                                    <div className="text-right font-bold m-0 self-end -mb-1.5 flex justify-center">
+                                    <div className="col-span-2 md:col-span-1 text-right font-bold m-0 self-end -mb-1.5 flex justify-center">
                                         <NumericFormat
                                             className="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0"
                                             value={analyticsData[type].volume}
@@ -206,8 +206,8 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                 First 1,000,000 events free – every month!
             </div>
             <div className="grid grid-cols-6 gap-8 items-end mb-2">
-                <h3 className="m-0 text-base col-span-5">Event usage</h3>
-                <p className="m-0 text-center opacity-70 text-sm">Events/mo</p>
+                <h3 className="col-span-4 md:col-span-5 m-0 text-base">Event usage</h3>
+                <p className="col-span-2 md:col-span-1 m-0 text-center opacity-70 text-sm">Events/mo</p>
             </div>
 
             {analyticsSliders.map((slider) => (
@@ -220,7 +220,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                 />
             ))}
             <div className="grid grid-cols-6 gap-x-8 mt-4 py-2 border-y border-light dark:border-dark">
-                <div className="col-span-4 flex justify-between">
+                <div className="col-span-3 flex justify-between">
                     <div>
                         <h3 className="m-0 text-base">Event cost subtotal</h3>
                         {showBreakdown ? (
@@ -236,10 +236,10 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                         }
                     </div>
                 </div>
-                <div className="col-span-2 grid grid-cols-2">
-                    <span className="flex flex-col opacity-70 text-sm">Anonymous events</span>
+                <div className="col-span-3 grid md:grid-cols-2">
+                    <span className="flex flex-col opacity-70 text-sm text-right">Anonymous events</span>
                     <strong className="text-right">$@todo</strong>
-                    <span className="flex flex-col opacity-70 text-sm">Identified events</span>
+                    <span className="flex flex-col opacity-70 text-sm text-right mt-1 md:mt-0">Identified events</span>
                     <strong className="text-right">$@todo</strong>
                 </div>
 

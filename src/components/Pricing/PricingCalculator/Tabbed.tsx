@@ -221,7 +221,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
 
     return (
         <div className="grid grid-cols-6 gap-8 items-center">
-            <div className="col-span-4 flex justify-between items-center">
+            <div className="col-span-3 md:col-span-4 flex justify-between items-center">
                 <div className="flex space-x-1 items-center">
                     <p className="m-0 text-sm font-bold">{name}</p>
                     <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
@@ -265,7 +265,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                 )}
                 <Toggle checked={checked} onChange={handleToggle} />
             </div>
-            <div>
+            <div className="col-span-2 md:col-span-1">
                 <p className="m-0 text-sm opacity-70">Starts at</p>
                 <strong>$@todo</strong><span className="text-sm opacity-70">/event</span>
             </div>
@@ -473,7 +473,7 @@ export default function Tabbed() {
                         })}
                     </ul>
                 </div>
-                <div className="md:col-span-8 lg:col-span-9 pl-4 md:pl-0">
+                <div className="md:col-span-8 lg:col-span-9 md:pl-0">
                     <div className="flex space-x-12 justify-between items-center mb-2">
                         <h3 className="m-0 text-lg">Estimate your price</h3>
                         {!activeProduct.name == 'A/B testing' && (
@@ -491,7 +491,7 @@ export default function Tabbed() {
                     />
                 </div>
                 <div className="md:col-span-4 lg:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark"></div>
-                <div className="md:col-span-8 lg:col-span-9 py-2 pl-4 md:pl-0 md:border-t border-light dark:border-dark">
+                <div className="md:col-span-8 lg:col-span-9 py-2 md:border-t border-light dark:border-dark">
                     <h4 className="mb-0.5 md:mb-1 font-normal text-sm opacity-70">Platform add-ons</h4>
 
                     {platform.addons.map(({ type, name, description, plans }) => {
@@ -499,7 +499,7 @@ export default function Tabbed() {
                         const checked = platformAddon?.checked
                         return (
                             <div key={type} className="grid grid-cols-6 gap-8 items-center">
-                                <div className="col-span-4 flex items-center justify-between">
+                                <div className="col-span-3 md:col-span-4 flex items-center justify-between">
                                     <div className="flex space-x-1 items-center">
                                         <p className="m-0 text-sm font-bold">{name}</p>
                                         <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
@@ -522,7 +522,7 @@ export default function Tabbed() {
                                         }
                                     />
                                 </div>
-                                <div className="">
+                                <div className="col-span-2 md:col-span-1">
                                     <strong>$450</strong><span className="text-sm opacity-70">/mo</span>
                                 </div>
                                 <div className="text-right">
