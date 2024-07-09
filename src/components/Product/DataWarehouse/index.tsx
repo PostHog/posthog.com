@@ -294,7 +294,7 @@ export const ProductDataWarehouse = () => {
                         Visit the <Link to="/tutorials">tutorials</Link> section for more.
                     </p>
 
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
+                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
                         <TutorialCard
                             title="How to set up Stripe reports"
                             description="Analyze gross revenue, customer counts, MRR, churn, and more"
@@ -309,11 +309,6 @@ export const ProductDataWarehouse = () => {
                             title="How to set up Zendesk reports"
                             description="Track ticket counts, power users, SLA metrics, and more."
                             url="/tutorials/zendesk-reports"
-                        />
-                        <TutorialCard
-                            title="How to set up Google Adwords reports"
-                            description="Report on advertising performance, CAC, and channel distribution."
-                            url="/tutorials/adwords-reports"
                         />
                     </ul>
                 </div>
