@@ -1,3 +1,4 @@
+import { IconX } from '@posthog/icons'
 import Checkbox from 'components/Checkbox'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'components/Pricing/PricingSlider/Slider'
@@ -63,7 +64,7 @@ const analyticsSliders = [
 
 const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value }) => {
     return (
-        <div className={`${className} ml-6 relative ${label ? 'pt-7' : ''}`}>
+        <div className={`${className} relative ${label ? 'pt-7' : ''}`}>
             {label && <p className="m-0 text-sm absolute left-0 top-0">{label}</p>}
             <NonLinearSlider
                 stepsInRange={100}
@@ -98,19 +99,19 @@ const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, an
     }
 
     return (
-        <div className={`mt-2 grid ${checked ? 'mb-10' : 'mb-2 grid-cols-5'}`}>
-            <div className="space-y-3 col-span-3">
+        <div className={`mt-2 grid grid-cols-6 ${checked ? 'mb-10' : 'mb-2'}`}>
+            <div className={`space-y-3 ${checked ? 'col-span-6' : 'col-span-4'}`}>
                 <Checkbox className="!text-base" checked={checked} onChange={handleCheck} value={label} />
                 {checked && (
                     <div className="space-y-12">
                         {types.map(({ type, label }) => (
                             <div key={type}>
-                                <div className="grid grid-cols-5">
+                                <div className="grid grid-cols-6 gap-8">
                                     <AnalyticsSlider
                                         {...activeProduct.slider}
                                         onChange={(value) => setAnalyticsVolume(type, value)}
                                         value={analyticsData[type].volume}
-                                        className="col-span-3"
+                                        className="col-span-4"
                                         label={label}
                                     />
                                     <div className="text-right font-bold m-0 self-end -mb-1.5 flex justify-center">
@@ -132,7 +133,7 @@ const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, an
             </div>
             {!checked && (
                 <>
-                    <span className="opacity-25 text-right">--</span>
+                    <span className="opacity-25 text-center">--</span>
                     <span className="opacity-25 text-right">--</span>
                 </>
             )}
@@ -205,8 +206,8 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
             <div className="border border-green bg-green/25 px-3 py-2 rounded italic mb-4 text-sm">
                 First 1,000,000 events free – every month!
             </div>
-            <div className="grid grid-cols-5 items-end mb-2">
-                <h3 className="m-0 text-base col-span-3">Event types</h3>
+            <div className="grid grid-cols-6 items-end mb-2">
+                <h3 className="m-0 text-base col-span-4">Event types</h3>
                 <p className="m-0 text-center opacity-70 text-sm">Events/mo</p>
                 <p className="m-0 text-right opacity-70 text-sm">Subtotal</p>
             </div>
@@ -228,7 +229,12 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                 </div>
             )}
             {showBreakdown && (
-                <div className="pt-4 mt-4 border-t border-border dark:border-dark">
+                <div className="p-4 mt-4 rounded border border-light dark:border-dark bg-white dark:bg-accent-dark relative">
+                    <div className="absolute top-4 right-4">
+                        <button onClick={() => setShowBreakdown(false)} className="text-primary/50 hover:text-primary/100 dark:text-primary-dark/50 dark:hover:text-primary-dark/100">
+                            <IconX className="size-5 inline-block" />
+                        </button>
+                    </div>
                     <h5 className="m-0 text-base font-normal">There are two types of events:</h5>
                     <div className="my-4 grid grid-cols-2">
                         <div>

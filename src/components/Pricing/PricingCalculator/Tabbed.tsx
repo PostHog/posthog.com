@@ -16,9 +16,8 @@ const Modal = ({ onClose, isVisible }) => {
     return (
         <>
             <div
-                className={`bg-accent-dark/50 fixed left-0 w-screen h-screen top-0 bg-opacity-40 flex justify-center items-center ${
-                    !isVisible ? 'hidden' : 'z-[1000000]'
-                }`}
+                className={`bg-accent-dark/50 fixed left-0 w-screen h-screen top-0 bg-opacity-40 flex justify-center items-center ${!isVisible ? 'hidden' : 'z-[1000000]'
+                    }`}
                 onClick={() => onClose()}
             ></div>
             <div
@@ -196,9 +195,9 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                         ...addon,
                         totalCost: checked
                             ? calculatePrice(
-                                  inclusion_only ? (percentage / 100) * volume : volume,
-                                  plans[plans.length - 1].tiers
-                              ).total
+                                inclusion_only ? (percentage / 100) * volume : volume,
+                                plans[plans.length - 1].tiers
+                            ).total
                             : 0,
                     }
                 }
@@ -433,8 +432,8 @@ export default function Tabbed() {
 
     return (
         <div>
-            <div className="grid md:grid-cols-8 mb-1 md:mb-0 pt-2">
-                <div className="md:col-span-3 md:pr-6 mb-4 md:mb-0">
+            <div className="grid md:grid-cols-12 mb-1 md:mb-0 pt-2">
+                <div className="md:col-span-4 lg:col-span-3 md:pr-6 mb-4 md:mb-0">
                     <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4">
                         {products.map(({ name, Icon, cost, color, billingData }, index) => {
@@ -447,14 +446,13 @@ export default function Tabbed() {
                                 )
                                 .reduce((acc, addon) => acc + addon.totalCost, 0)
                             return (
-                                <li key={name}>
+                                <li key={name} className="flex-1">
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
-                                            active
-                                                ? 'font-bold bg-accent dark:bg-accent-dark'
-                                                : 'hover:bg-accent dark:hover:bg-accent/15'
-                                        }`}
+                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${active
+                                            ? 'font-bold bg-accent dark:bg-accent-dark'
+                                            : 'hover:bg-accent dark:hover:bg-accent/15'
+                                            }`}
                                     >
                                         <div className="flex items-center space-x-2">
                                             <span>
@@ -475,7 +473,7 @@ export default function Tabbed() {
                         })}
                     </ul>
                 </div>
-                <div className="md:col-span-5 pl-4 md:pl-0">
+                <div className="md:col-span-8 lg:col-span-9 pl-4 md:pl-0">
                     <div className="flex space-x-12 justify-between items-center mb-2">
                         <h3 className="m-0 text-lg">Estimate your price</h3>
                         {!activeProduct.name == 'A/B testing' && (
@@ -492,8 +490,8 @@ export default function Tabbed() {
                         setProduct={setProduct}
                     />
                 </div>
-                <div className="md:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark"></div>
-                <div className="md:col-span-5 py-2 pl-4 md:pl-0 md:border-t border-light dark:border-dark">
+                <div className="md:col-span-4 lg:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark"></div>
+                <div className="md:col-span-8 lg:col-span-9 py-2 pl-4 md:pl-0 md:border-t border-light dark:border-dark">
                     <h4 className="mb-0.5 md:mb-1 font-normal text-sm opacity-70">Platform add-ons</h4>
 
                     {platform.addons.map(({ type, name, description, plans }) => {
