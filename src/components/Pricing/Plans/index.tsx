@@ -95,16 +95,15 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                 <Row className="grid grid-cols-12">
                     <h4 className="m-0 col-span-4 text-base">Allocation</h4>
                     <h4 className="m-0 col-span-4 text-base">Price</h4>
-                    <h4 className="m-0 col-span-2 text-base text-right">Your usage</h4>
+                    <h4 className="m-0 col-span-2 text-base text-right">Your selection</h4>
                     <h4 className="m-0 col-span-2 text-base text-right">Subtotal</h4>
                 </Row>
             )}
             {tiers.map(({ up_to, unit_amount_usd, eventsInThisTier, tierCost }, index) => {
                 return compact && parseFloat(unit_amount_usd) <= 0 ? null : (
                     <Row
-                        className={`!py-1 ${compact ? '!px-0 !space-x-0' : ''} ${
-                            showSubtotal ? 'grid grid-cols-12' : ''
-                        }`}
+                        className={`!py-1 ${compact ? '!px-0 !space-x-0' : ''} ${showSubtotal ? 'grid grid-cols-12' : ''
+                            }`}
                         key={`type-${index}`}
                     >
                         <Title
@@ -113,12 +112,11 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                 index === 0
                                     ? `First ${formatCompactNumber(up_to)} ${unit}s`
                                     : !up_to
-                                    ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
-                                    : `${
-                                          formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to).split(
-                                              / |k/
-                                          )[0]
-                                      }-${formatCompactNumber(up_to)}`
+                                        ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
+                                        : `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to).split(
+                                            / |k/
+                                        )[0]
+                                        }-${formatCompactNumber(up_to)}`
                             }
                         />
                         <div
@@ -196,7 +194,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                         </div>
                         {showSubtotal && (
                             <>
-                                <div className={`col-span-2 text-right`}>{eventsInThisTier.toLocaleString()}</div>
+                                <div className={`col-span-2 text-right font-code text-[15px]`}>{eventsInThisTier.toLocaleString()}</div>
                                 <div className={`col-span-2 text-right`}>{formatUSD(tierCost)}</div>
                             </>
                         )}
@@ -285,9 +283,8 @@ export const CTA = ({
             to={
                 ctaLink
                     ? ctaLink
-                    : `https://${
-                          posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
-                      }.posthog.com/signup`
+                    : `https://${posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
+                    }.posthog.com/signup`
             }
         >
             {ctaText ? ctaText : 'Get started - free'}

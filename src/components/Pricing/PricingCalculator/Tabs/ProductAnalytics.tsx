@@ -5,6 +5,7 @@ import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'componen
 import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import React, { useEffect, useMemo, useState } from 'react'
 import { NumericFormat } from 'react-number-format'
+import Link from 'components/Link'
 
 const getTotalAnalyticsVolume = (analyticsData: any) => {
     return Object.keys(analyticsData).reduce((acc, key) => acc + analyticsData[key].volume, 0)
@@ -207,7 +208,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                 First 1,000,000 events free – every month!
             </div>
             <div className="grid grid-cols-6 gap-8 items-end mb-2">
-                <h3 className="m-0 text-base col-span-4">Event types</h3>
+                <h3 className="m-0 text-base col-span-4">Event usage</h3>
                 <p className="m-0 text-center opacity-70 text-sm">Events/mo</p>
                 <p className="m-0 text-right opacity-70 text-sm">Subtotal</p>
             </div>
@@ -222,9 +223,9 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                 />
             ))}
             {!showBreakdown && (
-                <div className="text-center">
-                    <button onClick={() => setShowBreakdown(true)} className="text-red dark:text-yellow font-bold mt-2 text-sm">
-                        Show price breakdown
+                <div className="text-right">
+                    <button onClick={() => setShowBreakdown(true)} className="text-red dark:text-yellow font-semibold text-sm">
+                        See how we calculate this
                     </button>
                 </div>
             )}
@@ -235,10 +236,13 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                             <IconX className="size-5 inline-block" />
                         </button>
                     </div>
-                    <h5 className="m-0 text-base font-normal">There are two types of events:</h5>
-                    <div className="my-4 grid grid-cols-2">
+                    <h4 className="mb-1">How event pricing is calculated</h4>
+                    <p className="text-sm font-normal">Events are billed at different rates based on volume and if you choose to attach a <Link href="#">person profile</Link> to the event. (This allows you to send custom properties like email address or plan name.)</p>
+                    <div className="my-4 grid grid-cols-2 gap-8 border border-light dark:border-dark p-4 bg-tan dark:bg-accent-dark rounded">
                         <div>
-                            <h4 className="m-0 text-lg mb-1">Anonymous</h4>
+                            <h4 className="m-0 text-base mb-0">Anonymous events</h4>
+                            <p className="m-0 text-sm opacity-70 italic mb-2">Base event price</p>
+
                             <p className="m-0 text-sm opacity-70">Starts at </p>
                             <p className="m-0">
                                 <strong>
@@ -250,10 +254,11 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                                 </strong>
                                 <span className="opacity-70 text-sm">/event</span>
                             </p>
-                            <p className="text-green m-0">First 1 million events/mo free</p>
+                            <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
                         </div>
                         <div>
-                            <h4 className="m-0 text-lg mb-1">Identified</h4>
+                            <h4 className="m-0 text-base mb-0">Identified events</h4>
+                            <p className="m-0 text-sm opacity-70 italic mb-2">Base event price + person profile add-on</p>
                             <p className="m-0 text-sm opacity-70">Starts at </p>
                             <p className="m-0">
                                 <strong>
@@ -265,14 +270,14 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                                 </strong>
                                 <span className="opacity-70 text-sm">/event</span>
                             </p>
-                            <p className="text-green m-0">First 1 million events/mo free</p>
+                            <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
                         </div>
                     </div>
-                    <p className="my-4">Here's how your estimate breaks down:</p>
-                    <div className="space-y-4">
+                    <p className="my-4 font-bold">Here's how your estimate breaks down:</p>
+                    <div className="space-y-8">
                         <div>
                             <h4 className="text-lg m-0">Anonymous events</h4>
-                            <p className="opacity-70 m-0">Used for Website analytics, Anonymous mobile events</p>
+                            <p className="opacity-70 m-0"><strong>Used for:</strong> Website analytics, Anonymous mobile events</p>
                             <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
                                 <PricingTiers
                                     plans={[{ tiers: activeProduct.costByTier }]}
@@ -283,8 +288,8 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                             </div>
                         </div>
                         <div>
-                            <h4 className="text-lg m-0">Identified events</h4>
-                            <p className="opacity-70 m-0">Used for authenticated users</p>
+                            <h4 className="text-lg m-0">Identified events (with person profiles)</h4>
+                            <p className="opacity-70 m-0"><strong>Used for:</strong> authenticated users</p>
                             <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
                                 <PricingTiers
                                     plans={[{ tiers: enhancedPersonsCost.costByTier }]}
