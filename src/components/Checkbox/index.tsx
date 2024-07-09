@@ -16,7 +16,7 @@ export default function Checkbox({
     id?: string
 }): JSX.Element {
     return (
-        <div {...other} className={`relative flex items-center space-x-2 text-lg font-semibold ${className}`}>
+        <div {...other} className={`relative flex items-center space-x-2 !text-[15px] ${checked ? 'font-bold' : 'font-medium'} ${className}`}>
             <span>
                 <input
                     checked={checked}
@@ -26,11 +26,11 @@ export default function Checkbox({
                     id={value || id}
                     aria-describedby={`${value}-description`}
                     name={value}
-                    className="focus:ring-primary h-4 w-4 text-primary border-2 border-gray-accent-light bg-white dark:bg-gray-accent-dark rounded-[2px] checkbox appearance-none absolute transition-all"
+                    className="focus:ring-primary size-5 text-green border-2 border-gray-accent-light bg-white dark:bg-green rounded-[2px] checkbox appearance-none absolute transition-all cursor-pointer"
                 />
-                <Check className="w-4 h-4 relative invisible text-primary dark:text-white pointer-events-none" />
+                <Check className="size-5 relative invisible text-white dark:text-white pointer-events-none" />
             </span>
-            <label className="flex" htmlFor={value || id}>
+            <label className="flex cursor-pointer" htmlFor={value || id}>
                 <span>{value.charAt(0).toUpperCase() + value.slice(1)}</span>
             </label>
         </div>

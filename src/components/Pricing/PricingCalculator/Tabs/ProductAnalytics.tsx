@@ -102,7 +102,7 @@ const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, an
             <div className="space-y-3 col-span-3">
                 <Checkbox className="!text-base" checked={checked} onChange={handleCheck} value={label} />
                 {checked && (
-                    <div className="space-y-8">
+                    <div className="space-y-12">
                         {types.map(({ type, label }) => (
                             <div key={type}>
                                 <div className="grid grid-cols-5">
@@ -113,9 +113,9 @@ const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, an
                                         className="col-span-3"
                                         label={label}
                                     />
-                                    <div className="text-right font-bold m-0 self-end -mb-1.5 flex justify-end">
+                                    <div className="text-right font-bold m-0 self-end -mb-1.5 flex justify-center">
                                         <NumericFormat
-                                            className="bg-transparent text-right p-0 focus:ring-0 max-w-[103px] border-t-0 border-x-0 border-dashed border-border dark:border-dark"
+                                            className="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0"
                                             value={analyticsData[type].volume}
                                             thousandSeparator=","
                                             onValueChange={({ floatValue }) => setAnalyticsVolume(type, floatValue)}
@@ -202,9 +202,12 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
 
     return (
         <div className="mb-4 pr-3">
+            <div className="border border-green bg-green/25 px-3 py-2 rounded italic mb-4 text-sm">
+                First 1,000,000 events free – every month!
+            </div>
             <div className="grid grid-cols-5 items-end mb-2">
                 <h3 className="m-0 text-base col-span-3">Event types</h3>
-                <p className="m-0 text-right opacity-70 text-sm">Events/month</p>
+                <p className="m-0 text-center opacity-70 text-sm">Events/mo</p>
                 <p className="m-0 text-right opacity-70 text-sm">Subtotal</p>
             </div>
 
@@ -218,9 +221,11 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                 />
             ))}
             {!showBreakdown && (
-                <button onClick={() => setShowBreakdown(true)} className="text-red dark:text-yellow font-bold mt-2">
-                    Show breakdown
-                </button>
+                <div className="text-center">
+                    <button onClick={() => setShowBreakdown(true)} className="text-red dark:text-yellow font-bold mt-2 text-sm">
+                        Show price breakdown
+                    </button>
+                </div>
             )}
             {showBreakdown && (
                 <div className="pt-4 mt-4 border-t border-border dark:border-dark">
