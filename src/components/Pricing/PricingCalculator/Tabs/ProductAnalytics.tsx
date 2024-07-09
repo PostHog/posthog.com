@@ -224,10 +224,23 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                 />
             ))}
             {!showBreakdown && (
-                <div className="text-right">
-                    <button onClick={() => setShowBreakdown(true)} className="text-red dark:text-yellow font-semibold text-sm">
-                        See how we calculate this
-                    </button>
+                <div className="grid grid-cols-6 gap-8 mt-4 py-2 border-y border-light dark:border-dark">
+                    <div className="col-span-4 flex justify-between">
+                        <div>
+                            <h3 className="m-0 text-base">Event cost subtotal</h3>
+                            <button onClick={() => setShowBreakdown(true)} className="text-red dark:text-yellow font-semibold text-sm">
+                                See how we calculate this
+                            </button>
+                        </div>
+                        <div>
+                            Anonymous events<br />
+                            Identified events
+                        </div>
+                    </div>
+                    <div></div>
+                    <div className="text-right">
+                        hi
+                    </div>
                 </div>
             )}
             {showBreakdown && (
