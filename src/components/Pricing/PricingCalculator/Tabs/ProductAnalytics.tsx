@@ -63,6 +63,12 @@ const analyticsSliders = [
     },
 ]
 
+const getLabelByType = (key) => {
+    const slider = analyticsSliders.find((slider) => slider.types.some((type) => type.type === key))
+    const type = slider?.types.find((type) => type.type === key)
+    return slider?.types.length > 1 ? `${type.enhanced ? 'Identified' : 'Anonymous'} ${slider.label}` : slider.label
+}
+
 const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value, enhanced = '' }) => {
     return (
         <div className={`${className} relative ${label ? 'pt-7' : ''}`}>
@@ -174,6 +180,13 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
     const totalProductAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)
     const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(analyticsData)
     const enhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers)
+
+    const anonymousUsed = Object.keys(analyticsData).filter(
+        (key) => !analyticsData[key].enhanced && analyticsData[key].volume > 0
+    )
+    const identifiedUsed = Object.keys(analyticsData).filter(
+        (key) => analyticsData[key].enhanced && analyticsData[key].volume > 0
+    )
 
     const setAnalyticsVolume = (type: string, volume: number) => {
         setAnalyticsData((data) => {
@@ -325,9 +338,12 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                         <div className="space-y-8">
                             <div>
                                 <h4 className="text-lg m-0">Anonymous events</h4>
-                                <p className="opacity-70 m-0">
-                                    <strong>Used for:</strong> Website analytics, Anonymous mobile events
-                                </p>
+                                {anonymousUsed.length > 0 && (
+                                    <p className="opacity-70 m-0">
+                                        <strong>Used for:</strong>{' '}
+                                        {anonymousUsed.map((type) => getLabelByType(type)).join(', ')}
+                                    </p>
+                                )}
                                 <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
                                     <PricingTiers
                                         plans={[{ tiers: activeProduct.costByTier }]}
@@ -339,9 +355,12 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                             </div>
                             <div>
                                 <h4 className="text-lg m-0">Identified events (with person profiles)</h4>
-                                <p className="opacity-70 m-0">
-                                    <strong>Used for:</strong> authenticated users
-                                </p>
+                                {identifiedUsed.length > 0 && (
+                                    <p className="opacity-70 m-0">
+                                        <strong>Used for:</strong>{' '}
+                                        {identifiedUsed.map((type) => getLabelByType(type)).join(', ')}
+                                    </p>
+                                )}
                                 <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
                                     <PricingTiers
                                         plans={[{ tiers: enhancedPersonsCost.costByTier }]}
