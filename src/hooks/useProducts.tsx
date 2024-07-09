@@ -3,22 +3,7 @@ import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { useStaticQuery } from 'gatsby'
-import { useEffect, useMemo, useState } from 'react'
-
-const getTotalAnalyticsVolume = (analyticsData: any) => {
-    return Object.keys(analyticsData).reduce((acc, key) => acc + analyticsData[key].volume, 0)
-}
-
-const getTotalAnalyticsCost = (analyticsData: any) => {
-    return Object.keys(analyticsData).reduce((acc, key) => acc + analyticsData[key].cost, 0)
-}
-
-const getTotalEnhancedPersonsVolume = (analyticsData: any) => {
-    return Object.keys(analyticsData).reduce(
-        (acc, key) => acc + (analyticsData[key].enhanced ? analyticsData[key].volume : 0),
-        0
-    )
-}
+import { useMemo, useState } from 'react'
 
 const initialProducts = [
     {
@@ -84,54 +69,6 @@ export default function useProducts() {
         },
     } = useStaticQuery(allProductsData)
 
-    const [analyticsData, setAnalyticsData] = useState({
-        websiteAnalyticsEvents: {
-            volume: MILLION,
-            cost: 0,
-        },
-        productAnalyticsEvents: {
-            volume: 0,
-            enhanced: true,
-            cost: 0,
-        },
-        mobileAppAnonymousEvents: {
-            volume: 0,
-            cost: 0,
-        },
-        mobileAppAuthenticatedEvents: {
-            volume: 0,
-            enhanced: true,
-            cost: 0,
-        },
-        llmAnonymousEvents: {
-            volume: 0,
-            cost: 0,
-        },
-        llmAuthenticatedEvents: {
-            volume: 0,
-            enhanced: true,
-            cost: 0,
-        },
-        apiAnonymousEvents: {
-            volume: 0,
-            cost: 0,
-        },
-        apiAuthenticatedEvents: {
-            volume: 0,
-            enhanced: true,
-            cost: 0,
-        },
-        otherAnonymousEvents: {
-            volume: 0,
-            cost: 0,
-        },
-        otherAuthenticatedEvents: {
-            volume: 0,
-            enhanced: true,
-            cost: 0,
-        },
-    })
-
     const [products, setProducts] = useState(
         initialProducts.map((product) => ({
             ...product,
@@ -140,18 +77,6 @@ export default function useProducts() {
         }))
     )
 
-    const productAnalyticsProduct = useMemo(() => products.find((product) => product.type === 'product_analytics'), [])
-    const productAnalyticsTiers = useMemo(
-        () => productAnalyticsProduct?.billingData.plans.find((plan) => plan.tiers).tiers,
-        []
-    )
-    const enhancedPersonsAddonTiers = useMemo(
-        () =>
-            productAnalyticsProduct?.billingData.addons
-                .find((addon) => addon.type === 'enhanced_persons')
-                .plans.find((plan) => plan.tiers).tiers,
-        []
-    )
     const monthlyTotal = useMemo(() => products.reduce((acc, product) => acc + product.cost, 0), [products])
 
     const setProduct = (type, data) => {
@@ -182,44 +107,5 @@ export default function useProducts() {
         })
     }
 
-    const setAnalyticsVolume = (type: string, volume: number) => {
-        setAnalyticsData((data) => {
-            const newAnalyticsData = {
-                ...data,
-                [type]: {
-                    ...data[type],
-                    volume: Math.round(volume),
-                },
-            }
-            const totalProductAnalyticsVolume = getTotalAnalyticsVolume(newAnalyticsData)
-            const totalCost = calculatePrice(totalProductAnalyticsVolume, productAnalyticsTiers).total
-            const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(newAnalyticsData)
-            const totalEnhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers).total
-            Object.keys(newAnalyticsData).forEach((key) => {
-                const volume = newAnalyticsData[key].volume
-                const percentageOfTotalVolume = (volume / totalProductAnalyticsVolume) * 100
-                let cost = (percentageOfTotalVolume / 100) * totalCost
-                if (newAnalyticsData[key].enhanced) {
-                    const percentageOfEnhancedPersonsVolume = (volume / totalEnhancedPersonsVolume) * 100
-                    const enhancedPersonsCost = (percentageOfEnhancedPersonsVolume / 100) * totalEnhancedPersonsCost
-                    cost += enhancedPersonsCost
-                }
-                newAnalyticsData[key].cost = cost || 0
-            })
-            return newAnalyticsData
-        })
-    }
-
-    useEffect(() => {
-        const totalAnalyticsCost = getTotalAnalyticsCost(analyticsData)
-        const totalAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)
-        const { costByTier } = calculatePrice(totalAnalyticsVolume, productAnalyticsTiers)
-        setProduct('product_analytics', { cost: totalAnalyticsCost, volume: totalAnalyticsVolume, costByTier })
-    }, [analyticsData])
-
-    useEffect(() => {
-        Object.keys(analyticsData).forEach((key) => setAnalyticsVolume(key, analyticsData[key].volume))
-    }, [])
-
-    return { products, setVolume, analyticsData, setAnalyticsVolume, monthlyTotal }
+    return { products, setVolume, setProduct, monthlyTotal }
 }
