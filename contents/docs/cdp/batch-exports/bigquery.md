@@ -84,7 +84,7 @@ This is the default model for BigQuery batch exports. The schema of the model as
 | timestamp             | `TIMESTAMP`        | The timestamp associated with an event                                    |
 | bq_ingested_timestamp | `TIMESTAMP`        | The timestamp when the event was sent to BigQuery                         |
 
-In particular, some of the fields can be either `STRING` or `JSON` type depending on whether the corresponding checkbox is marked or not when creating the batch export.
+Some fields can be either `STRING` or `JSON` type depending on whether the corresponding checkbox is marked or not when creating the batch export.
 
 ### Persons model
 
