@@ -94,7 +94,7 @@ The schema of the model as created in BigQuery is:
 |-------------|--------------------|-----------------------------------------------------------------------------|
 | team_id     | `INT64`            | The ID of the project (team) the person belongs to                          |
 | distinct_id | `STRING`           | A `distinct_id` associated with the person                                  |
-| person_id   | `STRING`           | The id of the person associated to this (`team_id`, `distinct_id`) pair     |
+| person_id   | `STRING`           | The ID of the person associated to this (`team_id`, `distinct_id`) pair     |
 | properties  | `STRING` or `JSON` | A JSON object with all the latest properties of the person                  |
 | version     | `INT64`            | The version of the person associated with a (`team_id`, `distinct_id`) pair |
 
