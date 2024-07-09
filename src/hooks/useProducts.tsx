@@ -70,11 +70,18 @@ export default function useProducts() {
     } = useStaticQuery(allProductsData)
 
     const [products, setProducts] = useState(
-        initialProducts.map((product) => ({
-            ...product,
-            cost: 0,
-            billingData: billingProducts.find((billingProduct: any) => billingProduct.type === product.type),
-        }))
+        initialProducts.map((product) => {
+            const billingData = billingProducts.find((billingProduct: any) => billingProduct.type === product.type)
+            return {
+                ...product,
+                cost: 0,
+                billingData,
+                costByTier: calculatePrice(
+                    product.volume || 0,
+                    billingData?.plans.find((plan: any) => plan.tiers)?.tiers
+                ).costByTier,
+            }
+        })
     )
 
     const monthlyTotal = useMemo(() => products.reduce((acc, product) => acc + product.cost, 0), [products])

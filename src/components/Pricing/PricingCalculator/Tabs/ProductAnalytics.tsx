@@ -1,4 +1,5 @@
 import Checkbox from 'components/Checkbox'
+import { PricingTiers } from 'components/Pricing/Plans'
 import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'components/Pricing/PricingSlider/Slider'
 import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -148,6 +149,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
             return acc
         }, [])
     )
+    const [showBreakdown, setShowBreakdown] = useState(false)
 
     const productAnalyticsTiers = useMemo(() => activeProduct?.billingData.plans.find((plan) => plan.tiers).tiers, [])
     const enhancedPersonsAddonTiers = useMemo(
@@ -157,6 +159,8 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                 .plans.find((plan) => plan.tiers).tiers,
         []
     )
+    const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(analyticsData)
+    const enhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers)
 
     const setAnalyticsVolume = (type: string, volume: number) => {
         setAnalyticsData((data) => {
@@ -169,8 +173,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
             }
             const totalProductAnalyticsVolume = getTotalAnalyticsVolume(newAnalyticsData)
             const totalCost = calculatePrice(totalProductAnalyticsVolume, productAnalyticsTiers).total
-            const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(newAnalyticsData)
-            const totalEnhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers).total
+            const totalEnhancedPersonsCost = enhancedPersonsCost.total
             Object.keys(newAnalyticsData).forEach((key) => {
                 const volume = newAnalyticsData[key].volume
                 const percentageOfTotalVolume = (volume / totalProductAnalyticsVolume) * 100
@@ -214,6 +217,75 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                     {...slider}
                 />
             ))}
+            {!showBreakdown && (
+                <button onClick={() => setShowBreakdown(true)} className="text-red dark:text-yellow font-bold mt-2">
+                    Show breakdown
+                </button>
+            )}
+            {showBreakdown && (
+                <div className="pt-4 mt-4 border-t border-border dark:border-dark">
+                    <h5 className="m-0 text-base font-normal">There are two types of events:</h5>
+                    <div className="my-4 grid grid-cols-2">
+                        <div>
+                            <h4 className="m-0 text-lg mb-1">Anonymous</h4>
+                            <p className="m-0 text-sm opacity-70">Starts at </p>
+                            <p className="m-0">
+                                <strong>
+                                    $
+                                    {
+                                        activeProduct.costByTier.find((tier) => tier.unit_amount_usd !== '0')
+                                            .unit_amount_usd
+                                    }
+                                </strong>
+                                <span className="opacity-70 text-sm">/event</span>
+                            </p>
+                            <p className="text-green m-0">First 1 million events/mo free</p>
+                        </div>
+                        <div>
+                            <h4 className="m-0 text-lg mb-1">Identified</h4>
+                            <p className="m-0 text-sm opacity-70">Starts at </p>
+                            <p className="m-0">
+                                <strong>
+                                    $
+                                    {
+                                        enhancedPersonsCost.costByTier.find((tier) => tier.unit_amount_usd !== '0')
+                                            .unit_amount_usd
+                                    }
+                                </strong>
+                                <span className="opacity-70 text-sm">/event</span>
+                            </p>
+                            <p className="text-green m-0">First 1 million events/mo free</p>
+                        </div>
+                    </div>
+                    <p className="my-4">Here's how your estimate breaks down:</p>
+                    <div className="space-y-4">
+                        <div>
+                            <h4 className="text-lg m-0">Anonymous events</h4>
+                            <p className="opacity-70 m-0">Used for Website analytics, Anonymous mobile events</p>
+                            <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
+                                <PricingTiers
+                                    plans={[{ tiers: activeProduct.costByTier }]}
+                                    unit={activeProduct.billingData.unit}
+                                    type={'product_analytics'}
+                                    showSubtotal
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <h4 className="text-lg m-0">Identified events</h4>
+                            <p className="opacity-70 m-0">Used for authenticated users</p>
+                            <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
+                                <PricingTiers
+                                    plans={[{ tiers: enhancedPersonsCost.costByTier }]}
+                                    unit={activeProduct.billingData.unit}
+                                    type={'product_analytics'}
+                                    showSubtotal
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

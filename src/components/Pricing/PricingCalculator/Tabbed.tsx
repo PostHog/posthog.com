@@ -285,6 +285,7 @@ const productTabs = {
 
 const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct }) => {
     const { type, cost, volume, billingData, slider, costByTier } = activeProduct
+    const [showBreakdown, setShowBreakdown] = useState(false)
 
     return (
         <>
@@ -296,45 +297,61 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct })
                             pricing.
                         </div>
                     ) : (
-                        <div className="grid grid-cols-8">
-                            <div className="col-span-6">
-                                <p className="mb-2">
-                                    <strong>{Math.round(volume).toLocaleString()}</strong>{' '}
-                                    <span className="opacity-70 text-sm">{billingData.unit}s/month</span>
-                                </p>
-                            </div>
-                            <div className="col-span-2 text-right pr-3">
-                                <p className="font-semibold mb-0">{formatUSD(cost)}</p>
-                            </div>
-                            {slider && (
-                                <div className="col-span-full pr-1.5">
-                                    <LogSlider
-                                        stepsInRange={100}
-                                        marks={slider.marks}
-                                        min={slider.min}
-                                        max={slider.max}
-                                        onChange={(value) => setVolume(type, sliderCurve(value))}
-                                        value={inverseCurve(volume)}
-                                    />
+                        <>
+                            <div className="grid grid-cols-8">
+                                <div className="col-span-6">
+                                    <p className="mb-2">
+                                        <strong>{Math.round(volume).toLocaleString()}</strong>{' '}
+                                        <span className="opacity-70 text-sm">{billingData.unit}s/month</span>
+                                    </p>
                                 </div>
-                            )}
-                            <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
-                                <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
-                                <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                                    First {Math.round(slider.min).toLocaleString()} {billingData.unit}s free –&nbsp;
-                                    <em>every month!</em>
-                                </span>
+                                <div className="col-span-2 text-right pr-3">
+                                    <p className="font-semibold mb-0">{formatUSD(cost)}</p>
+                                </div>
+                                {slider && (
+                                    <div className="col-span-full pr-1.5">
+                                        <LogSlider
+                                            stepsInRange={100}
+                                            marks={slider.marks}
+                                            min={slider.min}
+                                            max={slider.max}
+                                            onChange={(value) => setVolume(type, sliderCurve(value))}
+                                            value={inverseCurve(volume)}
+                                        />
+                                    </div>
+                                )}
+                                <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
+                                    <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
+                                    <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
+                                        First {Math.round(slider.min).toLocaleString()} {billingData.unit}s free –&nbsp;
+                                        <em>every month!</em>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                            {costByTier && (
+                                <>
+                                    {!showBreakdown && (
+                                        <button
+                                            onClick={() => setShowBreakdown(true)}
+                                            className="text-red dark:text-yellow font-bold"
+                                        >
+                                            Show breakdown
+                                        </button>
+                                    )}
+                                    {showBreakdown && (
+                                        <div className="mb-4 p-1 border border-border dark:border-dark rounded-md">
+                                            <PricingTiers
+                                                plans={[{ tiers: costByTier }]}
+                                                unit={billingData.unit}
+                                                type={type}
+                                                showSubtotal
+                                            />
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                        </>
                     ))}
-                {costByTier && (
-                    <PricingTiers
-                        plans={[{ tiers: costByTier }]}
-                        unit={billingData.unit}
-                        type="product_analytics"
-                        showSubtotal
-                    />
-                )}
                 {activeProduct.billingData.addons.length > 0 && (
                     <div className="">
                         <p className="opacity-70 text-sm m-0">Product add-ons</p>
