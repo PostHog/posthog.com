@@ -65,7 +65,7 @@ const analyticsSliders = [
 const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value }) => {
     return (
         <div className={`${className} relative ${label ? 'pt-7' : ''}`}>
-            {label && <p className="m-0 text-sm absolute left-0 top-0">{label}</p>}
+            {label && <p className="m-0 text-sm absolute left-8 top-0">{label}</p>}
             <NonLinearSlider
                 stepsInRange={100}
                 marks={marks}
@@ -111,7 +111,7 @@ const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, an
                                         {...activeProduct.slider}
                                         onChange={(value) => setAnalyticsVolume(type, value)}
                                         value={analyticsData[type].volume}
-                                        className="col-span-4"
+                                        className="col-span-4 pl-8"
                                         label={label}
                                     />
                                     <div className="text-right font-bold m-0 self-end -mb-1.5 flex justify-center">
@@ -206,7 +206,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
             <div className="border border-green bg-green/25 px-3 py-2 rounded italic mb-4 text-sm">
                 First 1,000,000 events free – every month!
             </div>
-            <div className="grid grid-cols-6 items-end mb-2">
+            <div className="grid grid-cols-6 gap-8 items-end mb-2">
                 <h3 className="m-0 text-base col-span-4">Event types</h3>
                 <p className="m-0 text-center opacity-70 text-sm">Events/mo</p>
                 <p className="m-0 text-right opacity-70 text-sm">Subtotal</p>
