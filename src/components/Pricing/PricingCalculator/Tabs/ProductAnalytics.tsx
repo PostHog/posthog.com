@@ -63,10 +63,10 @@ const analyticsSliders = [
     },
 ]
 
-const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value }) => {
+const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value, enhanced = '' }) => {
     return (
         <div className={`${className} relative ${label ? 'pt-7' : ''}`}>
-            {label && <p className="m-0 text-sm absolute left-8 top-0">{label}</p>}
+            {label && <p className="m-0 text-sm absolute left-8 top-0">{label} {enhanced && <span className="text-primary/70 dark:text-primary-dark/70">– uses <Link href="#" className="text-red dark:text-yellow font-semibold">person profiles</Link></span>}</p>}
             <NonLinearSlider
                 stepsInRange={100}
                 marks={marks}
@@ -114,6 +114,7 @@ const SliderToggle = ({ label = '', types, activeProduct, setAnalyticsVolume, an
                                         value={analyticsData[type].volume}
                                         className="col-span-4 pl-8"
                                         label={label}
+                                        enhanced={analyticsData[type].enhanced}
                                     />
                                     <div className="text-right font-bold m-0 self-end -mb-1.5 flex justify-center">
                                         <NumericFormat
@@ -261,6 +262,16 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                             <p className="m-0 text-sm opacity-70 italic mb-2">Base event price + person profile add-on</p>
                             <p className="m-0 text-sm opacity-70">Starts at </p>
                             <p className="m-0">
+
+
+                                <strong>
+                                    $
+                                    {
+                                        activeProduct.costByTier.find((tier) => tier.unit_amount_usd !== '0')
+                                            .unit_amount_usd
+                                    }
+                                </strong>
+                                <span className="opacity-70 text-sm">/event +{' '}</span>
                                 <strong>
                                     $
                                     {
