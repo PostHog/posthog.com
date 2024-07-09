@@ -234,7 +234,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
             <div className="col-span-2 md:col-span-1">
                 <p className="m-0 text-sm opacity-70">Starts at</p>
                 <strong>
-                    {plans[plans.length - 1].tiers.find((tier) => tier.unit_amount_usd !== '0').unit_amount_usd}
+                    ${plans[plans.length - 1].tiers.find((tier) => tier.unit_amount_usd !== '0').unit_amount_usd}
                 </strong>
                 <span className="text-sm opacity-70">/event</span>
             </div>
