@@ -18,8 +18,6 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 
 | Feature |  Owner  |  Label  |
 |---|---|---|
-| Apps (except processEvent) with scheduler, jobs, onEvent & webhook plugin-server consumers | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/cdp</span> |
-| ProcessEvent apps | [Team Pipeline][Team Pipeline] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
 | Actions | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/actions</span> |
 | Actors Modal | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/actors-modal</span>  |
 | Annotations | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/annotations</span> |
@@ -48,6 +46,8 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Paths | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/paths</span> |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
+| Pipeline Transformations | [Team Pipeline][Team Pipeline] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
+| Pipeline Destinations | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/cdp</span> |
 | Platform (US + EU) | [Team Infrastructure][Team Infrastructure] | <span class="lemon-tag gh-tag">feature/platform</span>  |
 | Project Home Page | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property Filters | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
