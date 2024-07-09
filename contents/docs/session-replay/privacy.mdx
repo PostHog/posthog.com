@@ -95,6 +95,9 @@ posthog.init('<ph_project_api_key>', {
         // This does not apply to input elements.
         maskTextSelector: "*", 
         maskTextFn: (text) => {
+            // this fn can receive whitespace only text, you might not want to mask that
+            if (text.trim().length === 0) { return text }
+
             // A simple email regex - you may want to use something more advanced
             const emailRegex = /(\S+)@(\S+\.\S+)/g
 
@@ -156,7 +159,7 @@ For passwords, it is important to note that "click to show password" buttons typ
         // A simple email regex - you may want to use something more advanced
         const emailRegex = /(\S+)@(\S+\.\S+)/g
 
-        return text.replace(emailRegex, (match, g1, g2) => {
+        return text.trim().replace(emailRegex, (match, g1, g2) => {
             // Replace each email with asterisks - ben@posthog.com becomes ***@***********
             return '*'.repeat(g1.length) + '@' + '*'.repeat(g2.length)
         })
@@ -178,7 +181,7 @@ This assumes you are adding a data attribute to every "safe" element like `<p da
         if (element?.dataset['record'] === 'true') {
             return text
         }
-        return '*'.repeat(text.length)
+        return '*'.repeat(text.trim().length)
     },
 }
 ```
