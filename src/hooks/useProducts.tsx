@@ -171,9 +171,14 @@ export default function useProducts() {
     const setVolume = (type: string, volume: number) => {
         const rounded = Math.round(volume)
         const product = products.find((product) => product.type === type)
+        const { total, costByTier } = calculatePrice(
+            rounded,
+            product.billingData.plans.find((plan: any) => plan.tiers)?.tiers
+        )
         setProduct(type, {
             volume: rounded,
-            cost: calculatePrice(rounded, product.billingData.plans.find((plan: any) => plan.tiers)?.tiers),
+            cost: total,
+            costByTier,
         })
     }
 
@@ -187,9 +192,9 @@ export default function useProducts() {
                 },
             }
             const totalProductAnalyticsVolume = getTotalAnalyticsVolume(newAnalyticsData)
-            const totalCost = calculatePrice(totalProductAnalyticsVolume, productAnalyticsTiers)
+            const totalCost = calculatePrice(totalProductAnalyticsVolume, productAnalyticsTiers).total
             const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(newAnalyticsData)
-            const totalEnhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers)
+            const totalEnhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers).total
             Object.keys(newAnalyticsData).forEach((key) => {
                 const volume = newAnalyticsData[key].volume
                 const percentageOfTotalVolume = (volume / totalProductAnalyticsVolume) * 100
@@ -208,7 +213,8 @@ export default function useProducts() {
     useEffect(() => {
         const totalAnalyticsCost = getTotalAnalyticsCost(analyticsData)
         const totalAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)
-        setProduct('product_analytics', { cost: totalAnalyticsCost, volume: totalAnalyticsVolume })
+        const { costByTier } = calculatePrice(totalAnalyticsVolume, productAnalyticsTiers)
+        setProduct('product_analytics', { cost: totalAnalyticsCost, volume: totalAnalyticsVolume, costByTier })
     }, [analyticsData])
 
     useEffect(() => {

@@ -18,14 +18,23 @@ const getTiers = (pricingOption) => {
     return tiers
 }
 
-export const calculatePrice = (eventNumber: number, tiers) => {
+export const formatUSD = (number) => {
+    const usd = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    })
+    return usd.format(number).replace('.00', '')
+}
+
+export const calculatePrice = (eventNumber: number, tiers): { total: number; costByTier: any } => {
     let finalCost = 0
     let alreadyCountedEvents = 0
 
     if (!tiers) {
         return 0
     }
-    for (const { up_to, unit_amount_usd } of tiers) {
+    const costByTier = []
+    for (const { up_to, unit_amount_usd, ...rest } of tiers) {
         const remainingEvents = Math.max(eventNumber - alreadyCountedEvents, 0)
         const eventsInThisTier = up_to
             ? remainingEvents < up_to - alreadyCountedEvents
@@ -36,9 +45,11 @@ export const calculatePrice = (eventNumber: number, tiers) => {
         finalCost = finalCost + tierCost
         // the last tier has null up_to so we set it to an arbitrarily high number
         alreadyCountedEvents = up_to ?? 10000000000
+
+        costByTier.push({ ...rest, up_to, unit_amount_usd, tierCost, eventsInThisTier })
     }
 
-    return Math.round(finalCost)
+    return { total: Math.round(finalCost), costByTier }
 }
 
 export type PricingOptionType = 'product_analytics' | 'session_replay' | 'feature_flags' | 'surveys'

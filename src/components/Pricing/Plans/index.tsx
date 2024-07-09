@@ -11,6 +11,7 @@ import { product_type_to_max_events } from '../pricingLogic'
 import { Discount } from 'components/NotProductIcons'
 import Link from 'components/Link'
 import { IconInfo } from '@posthog/icons'
+import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -22,7 +23,7 @@ const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle
 }
 
 const Row = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
-    return <div className={`flex items-center gap-4 py-1.5 px-4 rounded ${className}`}>{children}</div>
+    return <div className={`flex items-center gap-4 py-1.5 px-4 ${className}`}>{children}</div>
 }
 
 const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
@@ -64,7 +65,7 @@ export const InclusionOnlyRow = ({ plans }) => (
 
 const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
 
-export const PricingTiers = ({ plans, unit, compact = false, type, test = false }) => {
+export const PricingTiers = ({ plans, unit, compact = false, type, test = false, showSubtotal = false }) => {
     const posthog = usePostHog()
     const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
 
@@ -84,7 +85,11 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false 
         })
     }, [posthog])
 
-    return tiers.map(({ up_to, unit_amount_usd }, index) => {
+    useEffect(() => {
+        set_tiers(plans[plans.length - 1]?.tiers)
+    }, [plans])
+
+    return tiers.map(({ up_to, unit_amount_usd, eventsInThisTier, tierCost }, index) => {
         return compact && parseFloat(unit_amount_usd) <= 0 ? null : (
             <Row className={`!py-1 ${compact ? '!px-0 !space-x-0' : ''}`} key={`type-${index}`}>
                 <Title
@@ -105,7 +110,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false 
                         title={plans[0].free_allocation === up_to ? 'Free' : '-'}
                     />
                 )}
-                <div className={`flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'}`}>
+                <div className={`flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'} justify-end`}>
                     <Title
                         className={`${compact ? 'text-sm' : ''}`}
                         title={
@@ -168,6 +173,14 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false 
                         </Link>
                     )}
                 </div>
+                {showSubtotal && (
+                    <>
+                        <div className={`flex max-w-[25%] w-full min-w-[105px] justify-end`}>
+                            {eventsInThisTier.toLocaleString()}
+                        </div>
+                        <div className={`flex max-w-[25%] w-full min-w-[105px] justify-end`}>{formatUSD(tierCost)}</div>
+                    </>
+                )}
             </Row>
         )
     })

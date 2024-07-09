@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import Tooltip from 'components/Tooltip'
 import { IconInfo, IconLightBulb, IconX } from '@posthog/icons'
 import Toggle from 'components/Toggle'
-import { calculatePrice, pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
+import { calculatePrice, formatUSD, pricingSliderLogic } from '../PricingSlider/pricingSliderLogic'
 import { useStaticQuery } from 'gatsby'
 import { allProductsData } from '../Pricing'
 import { CallToAction } from 'components/CallToAction'
@@ -18,6 +18,7 @@ import {
 } from '../PricingSlider/Slider'
 import Checkbox from 'components/Checkbox'
 import { NumericFormat } from 'react-number-format'
+import { PricingTiers } from '../Plans'
 
 const Modal = ({ onClose, isVisible }) => {
     return (
@@ -205,7 +206,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                             ? calculatePrice(
                                   inclusion_only ? (percentage / 100) * volume : volume,
                                   plans[plans.length - 1].tiers
-                              )
+                              ).total
                             : 0,
                     }
                 }
@@ -433,7 +434,8 @@ const productTabs = {
 }
 
 const TabContent = ({ activeProduct, addons, setVolume, setAddons, setAnalyticsVolume, analyticsData }) => {
-    const { type, cost, volume, billingData, slider } = activeProduct
+    const { type, cost, volume, billingData, slider, costByTier } = activeProduct
+
     return (
         <>
             <div>
@@ -475,6 +477,14 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setAnalyticsV
                             </div>
                         </div>
                     ))}
+                {costByTier && (
+                    <PricingTiers
+                        plans={[{ tiers: costByTier }]}
+                        unit={billingData.unit}
+                        type="product_analytics"
+                        showSubtotal
+                    />
+                )}
                 {activeProduct.billingData.addons.length > 0 && (
                     <div className="">
                         <p className="opacity-70 text-sm m-0">Product add-ons</p>
@@ -506,14 +516,6 @@ const addonDefaults = {
     enhanced_persons: {
         checked: true,
     },
-}
-
-const formatUSD = (number) => {
-    const usd = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-    })
-    return usd.format(number).replace('.00', '')
 }
 
 export default function Tabbed() {
