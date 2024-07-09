@@ -183,7 +183,7 @@ const Modal = ({ onClose, isVisible }) => {
     )
 }
 
-const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only, unit }) => {
+const Addon = ({ type, name, description, plans, addons, setAddons, volume, unit }) => {
     const addon = addons.find((addon) => addon.type === type)
     const checked = addon?.checked
     const [percentage, setPercentage] = useState(50)
@@ -230,39 +230,6 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                         </span>
                     </Tooltip>
                 </div>
-                {inclusion_only && (
-                    <div>
-                        <p className="m-0 flex space-x-1 text-sm">
-                            <span>on</span>
-                            <span className="border-b border-black dark:border-white/20">
-                                <input
-                                    onChange={(e) => {
-                                        if (!checked) {
-                                            handleToggle(true)
-                                        }
-                                        setPercentage(e.target.value)
-                                    }}
-                                    type="number"
-                                    min={1}
-                                    max={99}
-                                    className="p-0 pr-0.5 bg-tan dark:bg-dark border-none hide-number-arrows text-sm font-bold text-center -mr-0.5 focus:ring-0"
-                                    value={percentage}
-                                />
-                                <strong>%</strong>
-                            </span>
-                            <span>of total {unit} volume</span>
-                        </p>
-                        <div>
-                            <button
-                                onClick={() => updateVisible(!isVisible)}
-                                className="text-red dark:text-yellow font-semibold text-sm"
-                            >
-                                {isVisible ? 'Help me calculate this' : 'Help me calculate this'}
-                            </button>
-                        </div>
-                        <Modal onClose={() => updateVisible(false)} isVisible={isVisible} />
-                    </div>
-                )}
                 <Toggle checked={checked} onChange={handleToggle} />
             </div>
             <div className="col-span-2 md:col-span-1">
