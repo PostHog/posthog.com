@@ -68,7 +68,9 @@ const analyticsSliders = [
 const getLabelByType = (key) => {
     const slider = analyticsSliders.find((slider) => slider.types.some((type) => type.type === key))
     const type = slider?.types.find((type) => type.type === key)
-    return slider?.types.length > 1 ? `${type.enhanced ? 'Identified' : 'Anonymous'} ${slider.label}` : slider.label
+    return slider?.types.length > 1
+        ? `${slider.label.replace('events', '')} ${type.enhanced ? 'identified' : 'anonymous'} events`
+        : slider.label
 }
 
 const Modal = ({ onClose, isVisible }) => {
