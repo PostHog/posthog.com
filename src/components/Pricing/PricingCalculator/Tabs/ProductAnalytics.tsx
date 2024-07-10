@@ -368,6 +368,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
         []
     )
     const totalProductAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)
+    const totalProductAnalyticsPrice = calculatePrice(totalProductAnalyticsVolume, productAnalyticsTiers).total
     const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(analyticsData)
     const enhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers)
 
@@ -461,11 +462,11 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
                     </div>
                     <div className="col-span-3 grid md:grid-cols-2">
                         <span className="flex flex-col opacity-70 text-sm text-right">Anonymous events</span>
-                        <strong className="text-right">{totalProductAnalyticsVolume.toLocaleString()}</strong>
+                        <strong className="text-right">{formatUSD(totalProductAnalyticsPrice)}</strong>
                         <span className="flex flex-col opacity-70 text-sm text-right mt-1 md:mt-0">
                             Identified events
                         </span>
-                        <strong className="text-right">{totalEnhancedPersonsVolume.toLocaleString()}</strong>
+                        <strong className="text-right">{formatUSD(enhancedPersonsCost.total)}</strong>
                     </div>
 
                     {showBreakdown && (
