@@ -121,7 +121,7 @@ This tutorial will cover how to implement both options:
 
 ### Option 1: Use PostHog's prebuilt survey UI
 
-This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, and handles all the display logic and response capture for you. You can also customize the questions, branding, and targeting as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
+This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, and handles all the display logic and response capture for you. You can also customize the questions, branding, and display conditions as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
  
 To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey". 
 
@@ -135,7 +135,7 @@ To create a survey with a prebuilt UI, go to the [surveys tab](https://us.postho
 Select any template, or you can create your own by clicking "Create blank survey". Then, configure your survey with the following details:
 
 1. Ensure `Presentation` is set to **Popover**.
-2. Set the targeting to `All users`.
+2. Set the display conditions to `All users`.
 3. Use the default values for everything else.
 
 Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it in your app. After submitting responses, you can [view results in PostHog](#4-view-results).
@@ -262,7 +262,7 @@ This shows a survey popup every time you visit your app's homepage.
 
 #### 2. Fetch the survey from PostHog
 
-PostHog keeps track of all active surveys for a user (this is especially helpful if you set up [custom targeting options](/docs/surveys/creating-surveys#targeting)). 
+PostHog keeps track of all active surveys for a user (this is especially helpful if you set up [custom display conditions](/docs/surveys/creating-surveys#display-conditions)). 
 
 To fetch the active surveys when the app is mounted, we call `$posthog().getActiveMatchingSurveys()`. This returns a surveys object that looks like this:
 
