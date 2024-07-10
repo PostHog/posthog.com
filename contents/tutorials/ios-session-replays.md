@@ -13,7 +13,10 @@ To show how you to set it up with PostHog, in this tutorial we create a basic Sw
 
 ## 1. Create a basic iOS app
 
-Our sample app will have two screens. The first screen will be a `login` screen with email and password textfields. The second screen will have a simple welcome text.
+Our sample app will have two screens:
+
+- The first screen is be a `login` screen with email and password textfields.
+- The second screen is a simple screen with welcome text and logout button.
 
 The first step is to create a new app. Open XCode and click **Create new project**. Select iOS as your platform, then **App** and press **next**. Give your app a name, select `SwiftUI` as the interface, and the defaults for everything else. Click next and then **Create**.
 
@@ -26,11 +29,11 @@ struct ContentView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isLoggedIn: Bool = false
-    
+
     var body: some View {
         NavigationView {
             if isLoggedIn {
-                WelcomeView()
+                WelcomeView(isLoggedIn: $isLoggedIn)
             } else {
                 VStack {
                     TextField("Email", text: $email)
@@ -49,7 +52,7 @@ struct ContentView: View {
                             isLoggedIn = true
                         }
                     }) {
-                        Text("Log in")
+                        Text("Login")
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color.blue)
@@ -66,29 +69,33 @@ struct ContentView: View {
 }
 
 struct WelcomeView: View {
+    @Binding var isLoggedIn: Bool
+    
     var body: some View {
-        Text("Welcome!")
-            .font(.largeTitle)
-            .padding()
-
-          Button(action: {
-              isLoggedIn = false
-          }) {
-              Text("Logout")
-                  .frame(maxWidth: .infinity)
-                  .padding()
-                  .background(Color.red)
-                  .foregroundColor(.white)
-                  .cornerRadius(10)
-          }
-          .padding(.top, 20)
+        VStack {
+            Text("Welcome!")
+                .accessibilityIdentifier("ph-no-capture")
+                .font(.largeTitle)
+                .padding()
+            
+            Button(action: {
+                isLoggedIn = false
+            }) {
+                Text("Logout")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.red)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .padding(.top, 20)
+        }
+        .padding()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }
 ```
 
@@ -133,7 +140,7 @@ struct posthog_session_replayApp: App {
 }
 ```
 
-To check your setup, build and run your app. Enter in any values in the textfields and click the **Log in** button. You should start session replays in the [Session replay tab](https://us.posthog.com/replay/recent) in PostHog 🎉
+To check your setup, build and run your app a few times. Enter in any values in the textfields and click **Log in**. You should start session replays in the [Session replay tab](https://us.posthog.com/replay/recent) in PostHog 🎉
 
 <ProductScreenshot
   imageLight={""} 
