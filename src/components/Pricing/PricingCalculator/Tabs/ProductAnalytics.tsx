@@ -78,9 +78,8 @@ const Modal = ({ onClose, isVisible }) => {
     return (
         <>
             <div
-                className={`bg-accent-dark/50 fixed left-0 w-screen h-screen top-0 bg-opacity-40 flex justify-center items-center ${
-                    !isVisible ? 'hidden' : 'z-[1000000]'
-                }`}
+                className={`bg-accent-dark/50 fixed left-0 w-screen h-screen top-0 bg-opacity-40 flex justify-center items-center ${!isVisible ? 'hidden' : 'z-[1000000]'
+                    }`}
                 onClick={() => onClose()}
             ></div>
             <div
@@ -441,8 +440,8 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                     />
                 ))}
                 <div className="grid grid-cols-6 gap-x-8 mt-4 py-2 border-y border-light dark:border-dark">
-                    <div className="col-span-3 flex justify-between">
-                        <div>
+                    <div className="col-span-full md:col-span-3 flex justify-between">
+                        <div className="flex justify-between w-full md:block">
                             <h3 className="m-0 text-base">Event cost subtotal</h3>
                             {showBreakdown ? (
                                 <button
@@ -461,13 +460,25 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                             )}
                         </div>
                     </div>
-                    <div className="col-span-3 grid md:grid-cols-2">
-                        <span className="flex flex-col opacity-70 text-sm text-right">Anonymous events</span>
-                        <strong className="text-right">{formatUSD(totalProductAnalyticsPrice)}</strong>
-                        <span className="flex flex-col opacity-70 text-sm text-right mt-1 md:mt-0">
-                            Identified events
-                        </span>
-                        <strong className="text-right">{formatUSD(enhancedPersonsCost.total)}</strong>
+                    <div className="col-span-full w-full md:col-span-3 md:w-max justify-self-end">
+                        <table className="mb-0">
+                            <tr>
+                                <td className="pr-2 text-sm md:text-[15px]">
+                                    Anonymous events
+                                </td>
+                                <td className="text-right min-w-16">
+                                    <strong>{formatUSD(totalProductAnalyticsPrice)}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="pr-2 text-sm md:text-[15px]">
+                                    Identified events
+                                </td>
+                                <td className="text-right min-w-16">
+                                    <strong>{formatUSD(enhancedPersonsCost.total)}</strong>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
 
                     {showBreakdown && (

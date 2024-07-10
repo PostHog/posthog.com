@@ -24,9 +24,9 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                         ...addon,
                         totalCost: checked
                             ? calculatePrice(
-                                  inclusion_only ? (percentage / 100) * volume : volume,
-                                  plans[plans.length - 1].tiers
-                              ).total
+                                inclusion_only ? (percentage / 100) * volume : volume,
+                                plans[plans.length - 1].tiers
+                            ).total
                             : 0,
                     }
                 }
@@ -59,17 +59,19 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                 </div>
                 <Toggle checked={checked} onChange={handleToggle} />
             </div>
-            <div className="col-span-2 md:col-span-1">
-                <p className="m-0 text-sm opacity-70">Starts at</p>
-                <strong>
-                    ${plans[plans.length - 1].tiers.find((tier) => tier.unit_amount_usd !== '0').unit_amount_usd}
-                </strong>
-                <span className="text-sm opacity-70">/event</span>
-            </div>
-            <div className="text-right">
-                <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
-                    {formatUSD(checked ? addon?.totalCost : 0)}
-                </p>
+            <div className="col-span-3 md:col-span-2 flex justify-between">
+                <div>
+                    <p className="m-0 text-sm opacity-70">Starts at</p>
+                    <strong className="text-[15px] md:text-base">
+                        ${plans[plans.length - 1].tiers.find((tier) => tier.unit_amount_usd !== '0').unit_amount_usd}
+                    </strong>
+                    <span className="text-sm opacity-70">/event</span>
+                </div>
+                <div className="text-right">
+                    <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
+                        {formatUSD(checked ? addon?.totalCost : 0)}
+                    </p>
+                </div>
             </div>
         </div>
     )
@@ -307,11 +309,10 @@ export default function Tabbed() {
                                 <li key={name} className="flex-1">
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
-                                            active
-                                                ? 'font-bold bg-accent dark:bg-accent-dark'
-                                                : 'hover:bg-accent dark:hover:bg-accent/15'
-                                        }`}
+                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${active
+                                            ? 'font-bold bg-accent dark:bg-accent-dark'
+                                            : 'hover:bg-accent dark:hover:bg-accent/15'
+                                            }`}
                                     >
                                         <div className="flex items-center space-x-2">
                                             <span>
@@ -383,14 +384,16 @@ export default function Tabbed() {
                                         }
                                     />
                                 </div>
-                                <div className="col-span-2 md:col-span-1">
-                                    <strong>$450</strong>
-                                    <span className="text-sm opacity-70">/mo</span>
-                                </div>
-                                <div className="text-right">
-                                    <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
-                                        ${checked ? platformAddon?.price : 0}
-                                    </p>
+                                <div className="col-span-3 md:col-span-2 flex justify-between">
+                                    <div>
+                                        <strong className="text-[15px] md:text-base">$450</strong>
+                                        <span className="text-sm opacity-70">/mo</span>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
+                                            ${checked ? platformAddon?.price : 0}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         )
