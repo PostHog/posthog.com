@@ -26,7 +26,7 @@ export default function Checkbox({
                     id={value || id}
                     aria-describedby={`${value}-description`}
                     name={value}
-                    className="focus:ring-primary size-5 text-green border-2 border-gray-accent-light bg-white dark:bg-green rounded-[2px] checkbox appearance-none absolute transition-all cursor-pointer"
+                    className="checkbox focus:ring-primary hover:border-dark/50 dark:hover:border-dark size-5 text-green dark:text-green border-2 border-light dark:border-dark bg-white dark:bg-accent-dark rounded-[2px] appearance-none absolute transition-all cursor-pointer"
                 />
                 <Check className="size-5 relative invisible text-white dark:text-white pointer-events-none" />
             </span>
