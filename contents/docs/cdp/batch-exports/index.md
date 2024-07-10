@@ -52,7 +52,9 @@ However, there are some properties of the model that apply to all destinations:
 
 ### Persons model
 
-The persons model represents a view into how PostHog identifies unique persons assigned to each event. Since each event sent to PostHog comes only with a `distinct_id` property for identification purposes, PostHog groups events from different `distinct_id`s together under the same entity when it is determined they are the same, usually after a call to `identify`. This entity is called a person, and you can get access these groupings by exporting the persons model.
+The persons model represents a view into how PostHog identifies unique [persons](/docs/data/persons) assigned to each event. 
+
+Since the `distinct_id` property sent with each event is only used for identification purposes, you can group events from different `distinct_id` values together under the same entity, usually by calling `identify`. This entity is called a person, and you can get access these groupings by exporting the persons model.
 
 In contrast to the events model the persons model is **mutable**: As users of PostHog may `identify` and merge new and old persons all the time, the persons model has to change with every operation. This rate of change will depend on how frequently you call `identify` or merge persons together.
 
