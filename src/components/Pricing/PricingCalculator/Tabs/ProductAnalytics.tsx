@@ -247,7 +247,7 @@ const Modal = ({ onClose, isVisible }) => {
 
 const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, value, enhanced = '', setModalOpen }) => {
     return (
-        <div className={`${className} relative ${label ? 'pt-7' : ''}`}>
+        <div className={`${className} relative ${label ? (enhanced ? 'pt-12 md:pt-7' : 'pt-7') : ''}`}>
             {label && (
                 <p className="m-0 text-sm absolute left-8 top-0">
                     {label}{' '}
