@@ -513,7 +513,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                     </div>
                     <div className="mt-1 md:mt-0 col-span-full w-full md:col-span-3 grid grid-cols-3 justify-self-end items-center gap-1">
                         <div className="text-right min-w-16 text-xl col-span-3">
-                            <strong>{formatUSD(totalProductAnalyticsPrice)}</strong>
+                            <strong>{formatUSD(totalProductAnalyticsPrice + enhancedPersonsCost.total)}</strong>
                         </div>
                     </div>
 
