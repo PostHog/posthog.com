@@ -5,7 +5,6 @@ import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'componen
 import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import React, { useEffect, useMemo, useState } from 'react'
 import { NumericFormat } from 'react-number-format'
-import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import AutosizeInput from 'react-input-autosize'
 import qs from 'qs'
@@ -20,7 +19,7 @@ const getTotalAnalyticsCost = (analyticsData: any) => {
     return Object.keys(analyticsData).reduce((acc, key) => acc + analyticsData[key].cost, 0)
 }
 
-const getTotalEnhancedPersonsVolume = (analyticsData: any) => {
+export const getTotalEnhancedPersonsVolume = (analyticsData: any) => {
     return Object.keys(analyticsData).reduce(
         (acc, key) => acc + (analyticsData[key].enhanced ? analyticsData[key].volume : 0),
         0
