@@ -68,7 +68,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                     <span className="text-sm opacity-70">/event</span>
                 </div>
                 <div className="text-right">
-                    <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
+                    <p className={`font-semibold m-0 ${checked ? '' : 'opacity-50'}`}>
                         {formatUSD(checked ? addon?.totalCost : 0)}
                     </p>
                 </div>

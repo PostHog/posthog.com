@@ -498,7 +498,7 @@ export default function ProductAnalyticsTab({
                         volume={totalProductAnalyticsVolume || 0}
                     />
                 </div>
-                <div className="grid grid-cols-6 gap-x-8 py-2 border-y border-light dark:border-dark">
+                <div className="grid grid-cols-6 gap-x-8 pt-2 border-t border-light dark:border-dark">
                     <div className="col-span-full md:col-span-3 flex justify-between">
                         <div className="flex justify-between w-full md:block">
                             <h3 className="m-0 text-base">Event cost subtotal</h3>
@@ -519,15 +519,8 @@ export default function ProductAnalyticsTab({
                             )}
                         </div>
                     </div>
-                    <div className="mt-1 md:mt-0 col-span-full w-full md:col-span-3 grid grid-cols-3 justify-self-end items-center gap-1">
-                        <div className="col-span-2 text-sm md:text-[15px] md:text-right">Anonymous events</div>
-                        <div className="text-right min-w-16">
-                            <strong>{formatUSD(totalProductAnalyticsPrice)}</strong>
-                        </div>
-                        <div className="col-span-2 text-sm md:text-[15px] md:text-right">Identified events</div>
-                        <div className="text-right min-w-16">
-                            <strong>{formatUSD(enhancedPersonsCost.total)}</strong>
-                        </div>
+                    <div className="mt-1 md:mt-0 col-span-3 text-right self-center">
+                        <strong>{formatUSD(totalProductAnalyticsPrice + enhancedPersonsCost.total)}</strong>
                     </div>
 
                     {showBreakdown && (
