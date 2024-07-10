@@ -5,11 +5,11 @@ import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'componen
 import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import React, { useEffect, useMemo, useState } from 'react'
 import { NumericFormat } from 'react-number-format'
-import { CallToAction } from 'components/CallToAction'
 import AutosizeInput from 'react-input-autosize'
 import qs from 'qs'
 import Tooltip from 'components/Tooltip'
 import { StaticImage } from 'gatsby-plugin-image'
+import Link from 'components/Link'
 
 const getTotalAnalyticsVolume = (analyticsData: any) => {
     return Object.keys(analyticsData).reduce((acc, key) => acc + analyticsData[key].volume, 0)
@@ -183,7 +183,11 @@ const Modal = ({ onClose, isVisible }) => {
                         <div className="col-span-1 md:col-span-3 max-w-xl">
                             <h3 className="hidden md:block mb-1">Identified events</h3>
                             <p className="opacity-70 mb-3">
-                                Track usage of specific, logged in users by using person profiles.
+                                Track usage of specific, logged in users by using{' '}
+                                <Link to="/docs/data/persons" external>
+                                    person profiles
+                                </Link>
+                                .
                             </p>
                             <p className="mb-2">
                                 Indentify users by their email address or other unique identifier, and attach custom
@@ -237,18 +241,10 @@ const Modal = ({ onClose, isVisible }) => {
                             </ul>
 
                             <div className="flex gap-8">
-                                <div>
-                                    <p className="m-0 text-sm opacity-70">Pricing starts at </p>
-                                    <p className="m-0">
-                                        <strong>$0.00005</strong>
-                                        <span className="opacity-70 text-sm">/event</span>
-                                    </p>
-                                </div>
-                                <div className="text-2xl font-bold pt-3">+</div>
                                 <div className="flex-1">
-                                    <p className="m-0 text-sm opacity-70">Person profile add-on</p>
+                                    <p className="m-0 text-sm opacity-70">Pricing starts at</p>
                                     <p className="m-0">
-                                        <strong>$0.000198</strong>
+                                        <strong>$0.000248</strong>
                                         <span className="opacity-70 text-sm">/event</span>
                                     </p>
                                     <p className="text-green m-0 text-sm font-semibold">
@@ -256,13 +252,6 @@ const Modal = ({ onClose, isVisible }) => {
                                     </p>
                                 </div>
                             </div>
-
-                            <h4 className="mt-4 pt-4 border-t border-light dark:border-dark mb-0">Further reading</h4>
-                            <p className="mb-0">Learn more about configuring person profiles in the docs.</p>
-
-                            <CallToAction href="/docs/data/persons" size="sm" className="mt-4" external>
-                                Read the docs
-                            </CallToAction>
                         </div>
                     </section>
                 </div>
