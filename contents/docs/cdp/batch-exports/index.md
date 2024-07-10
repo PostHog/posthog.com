@@ -56,7 +56,7 @@ The persons model represents a view into how PostHog identifies unique [persons]
 
 Since the `distinct_id` property sent with each event is only used for identification purposes, you can group events from different `distinct_id` values together under the same entity, usually by calling `identify`. This entity is called a person, and you can get access these groupings by exporting the persons model.
 
-In contrast to the events model the persons model is **mutable**: As users of PostHog may `identify` and merge new and old persons all the time, the persons model has to change with every operation. This rate of change will depend on how frequently you call `identify` or merge persons together.
+In contrast to the events model, the persons model is **mutable**: As users of PostHog may `identify` and merge new and old persons all the time, the persons model has to change with every operation. This rate of change depends on how frequently you call `identify` or merge persons together.
 
 Being a mutable model has implications for the export process: PostHog must merge incoming data with existing data to find any rows that need updating, as incoming data could be both completely new persons and updates to old persons. This merging process is different depending on each destination, but it is likely to require a higher level of access to your destination in comparison to exporting the immutable events model.
 
