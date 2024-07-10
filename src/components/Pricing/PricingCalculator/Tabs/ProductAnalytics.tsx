@@ -21,10 +21,12 @@ const getTotalAnalyticsCost = (analyticsData: any) => {
 }
 
 export const getTotalEnhancedPersonsVolume = (analyticsData: any) => {
-    return Object.keys(analyticsData).reduce(
-        (acc, key) => acc + (analyticsData[key].enhanced ? analyticsData[key].volume : 0),
-        0
-    )
+    return analyticsData
+        ? Object.keys(analyticsData).reduce(
+              (acc, key) => acc + (analyticsData[key].enhanced ? analyticsData[key].volume : 0),
+              0
+          )
+        : null
 }
 
 export const analyticsSliders = [
@@ -492,6 +494,7 @@ export default function ProductAnalyticsTab({
                         addons={addons}
                         setAddons={setAddons}
                         volume={totalProductAnalyticsVolume || 0}
+                        analyticsData={analyticsData}
                     />
                 </div>
                 <div className="grid grid-cols-6 gap-x-8 pt-2 border-t border-light dark:border-dark">
