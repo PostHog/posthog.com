@@ -56,7 +56,7 @@ When choosing incremental append replication, you must select a field to identif
 
 Duplicate data can exist if you use a replication field that gets updated when the row gets updated, such as an `updated_at` field. Updated data will be appened to the table as if it's a new row and any deduplication logic would need to be written in HogQL when you query the data.
 
-Another downside to incremental append syncing is that deletions of data won't be synced to your PostHog data warehouse. You need to use full table refreshes for this.
+Another downside to incremental append syncing is that data deletions won't be synced to your PostHog data warehouse. You need to use full table refreshes for this.
 
 ### Full table
 
