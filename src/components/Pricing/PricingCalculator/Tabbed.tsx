@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Tooltip from 'components/Tooltip'
-import { IconInfo, IconLightBulb } from '@posthog/icons'
+import { IconCopy, IconInfo, IconLightBulb } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { calculatePrice, formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { useStaticQuery } from 'gatsby'
@@ -414,9 +414,12 @@ export default function Tabbed() {
                 </div>
 
                 <div className="text-right">
-                    <p className="m-0 font-bold leading-none">${totalPrice.toLocaleString()}</p>
-                    {user?.role.type === 'moderator' && <CopyURLButton onClick={generateURL} />}
+                    <p className="m-0 font-bold text-lg leading-none">${totalPrice.toLocaleString()}</p>
                 </div>
+            </div>
+            <div className="flex justify-end gap-0.5 mt-2 pr-2 md:pr-0">
+                <IconCopy className="size-5 inline-block text-primary/50 dark:text-primary-dark/50 relative -top-px" />
+                {user?.role.type === 'moderator' && <CopyURLButton onClick={generateURL} />}
             </div>
         </div>
     )
