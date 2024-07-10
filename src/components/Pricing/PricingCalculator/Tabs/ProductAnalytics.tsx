@@ -566,7 +566,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                                     </div>
                                 </div>
                                 <div>
-                                    <h4 className="text-lg m-0">Person profiles</h4>
+                                    <h4 className="text-lg m-0">Person profiles (charged on identified events)</h4>
                                     <p className="text-sm mb-1">
                                         Person profiles are charged for events that are associated with identified
                                         users. Your first 1 million person profile events are free.
