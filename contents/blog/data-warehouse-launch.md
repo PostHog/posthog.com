@@ -1,5 +1,5 @@
 ---
-date: 2024-06-10
+date: 2024-07-10
 title: You can now sync data from external sources into PostHog
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/data_warehouse_92b43aa9de.jpg
