@@ -68,7 +68,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                     <span className="text-sm opacity-70">/event</span>
                 </div>
                 <div className="text-right">
-                    <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
+                    <p className={`font-semibold m-0 ${checked ? '' : 'opacity-50'}`}>
                         {formatUSD(checked ? addon?.totalCost : 0)}
                     </p>
                 </div>
@@ -79,6 +79,36 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
 
 const productTabs = {
     product_analytics: ProductAnalyticsTab,
+}
+
+export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData }) => {
+    console.log(analyticsData, 'THE ANALYTICS DATA')
+    return activeProduct.billingData.addons.length > 0 ? (
+        <div>
+            <p className="opacity-70 text-sm m-0">Product add-ons</p>
+            <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
+                {activeProduct.billingData.addons
+                    .filter((addon) => !addon.inclusion_only)
+                    .map((addon) => {
+                        return (
+                            <li key={addon.type} className="py-2">
+                                <Addon
+                                    key={addon.type}
+                                    addons={addons}
+                                    setAddons={setAddons}
+                                    volume={
+                                        addon.type != 'group_analytics'
+                                            ? volume
+                                            : getTotalEnhancedPersonsVolume(analyticsData)
+                                    }
+                                    {...addon}
+                                />
+                            </li>
+                        )
+                    })}
+            </ul>
+        </div>
+    ) : null
 }
 
 const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, analyticsData, setAnalyticsData }) => {
@@ -94,6 +124,8 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                     setProduct,
                     analyticsData,
                     setAnalyticsData,
+                    setAddons,
+                    addons,
                 }) ||
                     (activeProduct.name == 'A/B testing' ? (
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-4 py-3 mb-2 text-sm">
@@ -159,36 +191,17 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                                             />
                                         </div>
                                     )}
+                                    <Addons
+                                        activeProduct={activeProduct}
+                                        addons={addons}
+                                        setAddons={setAddons}
+                                        volume={volume || slider.min}
+                                        analyticsData={analyticsData}
+                                    />
                                 </>
                             )}
                         </>
                     ))}
-                {activeProduct.billingData.addons.length > 0 && (
-                    <div className="">
-                        <p className="opacity-70 text-sm m-0">Product add-ons</p>
-                        <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
-                            {activeProduct.billingData.addons
-                                .filter((addon) => !addon.inclusion_only)
-                                .map((addon) => {
-                                    return (
-                                        <li key={addon.type} className="py-2">
-                                            <Addon
-                                                key={addon.type}
-                                                addons={addons}
-                                                setAddons={setAddons}
-                                                volume={
-                                                    addon.type != 'group_analytics'
-                                                        ? volume || slider.min
-                                                        : getTotalEnhancedPersonsVolume(analyticsData)
-                                                }
-                                                {...addon}
-                                            />
-                                        </li>
-                                    )
-                                })}
-                        </ul>
-                    </div>
-                )}
             </div>
         </>
     )
