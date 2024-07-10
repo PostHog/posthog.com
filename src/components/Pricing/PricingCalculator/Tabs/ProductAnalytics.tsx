@@ -109,11 +109,13 @@ const Modal = ({ onClose, isVisible }) => {
                     <p className="mb-8 text-[15px]">Events are billed at different rates based on volume and if you choose to send custom user properties with the event.</p>
 
                     <section className="grid md:grid-cols-5 gap-6 md:gap-12 pb-12">
-                        <div className="col-span-1 md:col-span-2">
+                        <div className="col-span-1 md:col-span-2 md:flex justify-center">
                             <h3 className="mb-4 md:hidden">Anonymous events</h3>
-                            <StaticImage src="./event-anonymous.png" alt="Anonymous event example" className="max-w-[824px]" placeholder="blurred" />
+                            <div className="max-w-md">
+                                <StaticImage src="./event-anonymous.png" alt="Anonymous event example" className="" placeholder="blurred" />
+                            </div>
                         </div>
-                        <div className="col-span-1 md:col-span-3">
+                        <div className="col-span-1 md:col-span-3 max-w-xl">
                             <h3 className="hidden md:block mb-1">Anonymous events</h3>
                             <p className="opacity-70 mb-3">No individually-identifiable info, analyzed in aggregate</p>
                             <p className="mb-2">By default, events are anonymous, meaning they don't have any personally-identifiable information attached to them.</p>
@@ -153,11 +155,13 @@ const Modal = ({ onClose, isVisible }) => {
                     </section>
 
                     <section className="grid md:grid-cols-5 gap-6 md:gap-12 pb-4">
-                        <div className="col-span-1 md:col-span-2">
+                        <div className="col-span-1 md:col-span-2 md:flex justify-center">
                             <h3 className="mb-4 md:hidden">Identified events</h3>
-                            <StaticImage src="./event-identified.png" alt="Identified event example" className="max-w-[824px]" placeholder="blurred" />
+                            <div className="max-w-md">
+                                <StaticImage src="./event-identified.png" alt="Identified event example" placeholder="blurred" />
+                            </div>
                         </div>
-                        <div className="col-span-1 md:col-span-3">
+                        <div className="col-span-1 md:col-span-3 max-w-xl">
                             <h3 className="hidden md:block mb-1">Identified events</h3>
                             <p className="opacity-70 mb-3">Track usage of specific, logged in users</p>
                             <p className="mb-2">With a configuration change where you're sending an event, you can identify a user. This allows you to attach custom properties to each events.</p>
