@@ -13,11 +13,11 @@ tags:
 > ## TL;DR
 >
 > - Data warehouse is now out of beta, with pre-built connectors for Stripe, Hubspot, Zendesk, and more.
-
+>
 > - You can use synced data across most PostHog tools, such as analyzing data with insights and HogQL.
-
+>
 > - We're introducing usage-based pricing, with your first 1M synced rows for free every month.
-
+>
 > - As thanks, beta users will get an increased free allowance and 30 days of free usage.
 
 After a month-long public beta, our data warehouse is ready for prime time. We’re releasing it into general availability, so teams can start syncing data from other sources and working with it in PostHog. 
