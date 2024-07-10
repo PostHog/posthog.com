@@ -11,6 +11,7 @@ import AutosizeInput from 'react-input-autosize'
 import qs from 'qs'
 import Tooltip from 'components/Tooltip'
 import { StaticImage } from 'gatsby-plugin-image'
+import { Addons } from '../Tabbed'
 
 const getTotalAnalyticsVolume = (analyticsData: any) => {
     return Object.keys(analyticsData).reduce((acc, key) => acc + analyticsData[key].volume, 0)
@@ -80,8 +81,9 @@ const Modal = ({ onClose, isVisible }) => {
     return (
         <>
             <div
-                className={`bg-accent-dark/50 fixed h-screen left-0 right-0 top-0 bg-opacity-40 flex justify-center items-center ${!isVisible ? 'hidden' : 'z-[1000000]'
-                    }`}
+                className={`bg-accent-dark/50 fixed h-screen left-0 right-0 top-0 bg-opacity-40 flex justify-center items-center ${
+                    !isVisible ? 'hidden' : 'z-[1000000]'
+                }`}
                 onClick={() => onClose()}
             ></div>
             <div
@@ -97,29 +99,38 @@ const Modal = ({ onClose, isVisible }) => {
                 </div>
 
                 <div className="max-h-[calc(100vh_-_1rem_-_60px_-_122px)] md:max-h-[calc(100vh_-_1rem_-_60px)] overflow-y-auto px-4 py-4 md:pb-8">
-
-
-
-
                     {/* <h3 className="mb-2 text-lg">Save money if you don't need user properties</h3>
                     <p className="font-semibold opacity-70 text-[15px]">(Custom user properties more expensive to process)</p>
                     <p className="mb-2">The more data we store about users, the higher the cost. So the less data you need, the more you can save.</p> */}
 
-
-                    <p className="mb-8 text-[15px]">Events are billed at different rates based on volume and if you choose to send custom user properties with the event.</p>
+                    <p className="mb-8 text-[15px]">
+                        Events are billed at different rates based on volume and if you choose to send custom user
+                        properties with the event.
+                    </p>
 
                     <section className="grid md:grid-cols-5 gap-6 md:gap-12 pb-12">
                         <div className="col-span-1 md:col-span-2 md:flex justify-center">
                             <h3 className="mb-4 md:hidden">Anonymous events</h3>
                             <div className="max-w-md">
-                                <StaticImage src="./event-anonymous.png" alt="Anonymous event example" className="" placeholder="blurred" />
+                                <StaticImage
+                                    src="./event-anonymous.png"
+                                    alt="Anonymous event example"
+                                    className=""
+                                    placeholder="blurred"
+                                />
                             </div>
                         </div>
                         <div className="col-span-1 md:col-span-3 max-w-xl">
                             <h3 className="hidden md:block mb-1">Anonymous events</h3>
                             <p className="opacity-70 mb-3">No individually-identifiable info, analyzed in aggregate</p>
-                            <p className="mb-2">By default, events are anonymous, meaning they don't have any personally-identifiable information attached to them.</p>
-                            <p className="mb-2">They come with info about the browser and device, visitor's location, and any UTM parameters.</p>
+                            <p className="mb-2">
+                                By default, events are anonymous, meaning they don't have any personally-identifiable
+                                information attached to them.
+                            </p>
+                            <p className="mb-2">
+                                They come with info about the browser and device, visitor's location, and any UTM
+                                parameters.
+                            </p>
 
                             <h4 className="text-base">With anonymous events, you can:</h4>
                             <ul className="list-none pl-0 mb-6 space-y-1">
@@ -133,7 +144,13 @@ const Modal = ({ onClose, isVisible }) => {
                                 </li>
                                 <li className="relative pl-8">
                                     <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    <p className="mb-0">Create <strong><em>aggregate</em></strong> insights in <strong>Product analytics</strong></p>
+                                    <p className="mb-0">
+                                        Create{' '}
+                                        <strong>
+                                            <em>aggregate</em>
+                                        </strong>{' '}
+                                        insights in <strong>Product analytics</strong>
+                                    </p>
                                     <ul className="[&_li]:text-sm opacity-70 pl-4 pt-1">
                                         <li>How many times users click an element on a page</li>
                                         <li>Group visitors by device type or location</li>
@@ -145,9 +162,7 @@ const Modal = ({ onClose, isVisible }) => {
 
                             <p className="m-0 text-sm opacity-70">Pricing starts at </p>
                             <p className="m-0">
-                                <strong>
-                                    $0.00005
-                                </strong>
+                                <strong>$0.00005</strong>
                                 <span className="opacity-70 text-sm">/event</span>
                             </p>
                             <p className="text-green m-0 text-sm font-semibold">First 1 million events/mo free</p>
@@ -158,13 +173,20 @@ const Modal = ({ onClose, isVisible }) => {
                         <div className="col-span-1 md:col-span-2 md:flex justify-center">
                             <h3 className="mb-4 md:hidden">Identified events</h3>
                             <div className="max-w-md">
-                                <StaticImage src="./event-identified.png" alt="Identified event example" placeholder="blurred" />
+                                <StaticImage
+                                    src="./event-identified.png"
+                                    alt="Identified event example"
+                                    placeholder="blurred"
+                                />
                             </div>
                         </div>
                         <div className="col-span-1 md:col-span-3 max-w-xl">
                             <h3 className="hidden md:block mb-1">Identified events</h3>
                             <p className="opacity-70 mb-3">Track usage of specific, logged in users</p>
-                            <p className="mb-2">With a configuration change where you're sending an event, you can identify a user. This allows you to attach custom properties to each events.</p>
+                            <p className="mb-2">
+                                With a configuration change where you're sending an event, you can identify a user. This
+                                allows you to attach custom properties to each events.
+                            </p>
 
                             <h4 className="text-base">In addition to anonymous event capabilities, you can:</h4>
                             <ul className="list-none pl-0 mb-6 space-y-1">
@@ -172,7 +194,9 @@ const Modal = ({ onClose, isVisible }) => {
                                     <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
                                     <p className="mb-0">Merge an anonymous and identified user</p>
                                     <ul className="[&_li]:text-sm opacity-70 pl-2 pt-1 list-none">
-                                        <li>Like when they sign up for your product - enables analyzing the user's path</li>
+                                        <li>
+                                            Like when they sign up for your product - enables analyzing the user's path
+                                        </li>
                                     </ul>
                                 </li>
                                 <li className="relative pl-8">
@@ -182,12 +206,26 @@ const Modal = ({ onClose, isVisible }) => {
 
                                 <li className="relative pl-8">
                                     <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    <p className="mb-0">Create <strong><em>user-specific</em></strong> insights in <strong>Product analytics</strong></p>
+                                    <p className="mb-0">
+                                        Create{' '}
+                                        <strong>
+                                            <em>user-specific</em>
+                                        </strong>{' '}
+                                        insights in <strong>Product analytics</strong>
+                                    </p>
                                     <ul className="[&_li]:text-sm opacity-70 pl-4 pt-1">
-                                        <li>How many times <em>specific users</em> click an element on a page</li>
-                                        <li>Group <em>cohorts of users</em> by device type or location</li>
-                                        <li>Filter to interactions on a specific page <em>by specific users</em></li>
-                                        <li>Track <em>identified</em> users across sessions</li>
+                                        <li>
+                                            How many times <em>specific users</em> click an element on a page
+                                        </li>
+                                        <li>
+                                            Group <em>cohorts of users</em> by device type or location
+                                        </li>
+                                        <li>
+                                            Filter to interactions on a specific page <em>by specific users</em>
+                                        </li>
+                                        <li>
+                                            Track <em>identified</em> users across sessions
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -196,9 +234,7 @@ const Modal = ({ onClose, isVisible }) => {
                                 <div>
                                     <p className="m-0 text-sm opacity-70">Pricing starts at </p>
                                     <p className="m-0">
-                                        <strong>
-                                            $0.00005
-                                        </strong>
+                                        <strong>$0.00005</strong>
                                         <span className="opacity-70 text-sm">/event</span>
                                     </p>
                                 </div>
@@ -206,12 +242,12 @@ const Modal = ({ onClose, isVisible }) => {
                                 <div className="flex-1">
                                     <p className="m-0 text-sm opacity-70">Person profile add-on</p>
                                     <p className="m-0">
-                                        <strong>
-                                            $0.000198
-                                        </strong>
+                                        <strong>$0.000198</strong>
                                         <span className="opacity-70 text-sm">/event</span>
                                     </p>
-                                    <p className="text-green m-0 text-sm font-semibold">First 1 million events/mo free</p>
+                                    <p className="text-green m-0 text-sm font-semibold">
+                                        First 1 million events/mo free
+                                    </p>
                                 </div>
                             </div>
 
@@ -235,18 +271,16 @@ const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, val
             {label && (
                 <p className="m-0 text-sm absolute left-8 top-0">
                     {label}{' '}
-                    {enhanced ?
+                    {enhanced ? (
                         <span className="text-primary/70 dark:text-primary-dark/70">
-
-
                             <Tooltip
                                 content={() => (
                                     <div className="max-w-[250px]">
                                         <p className="text-sm mb-2">
-                                            Typically used for authenticated users where you know their email address or want to send custom properties
+                                            Typically used for authenticated users where you know their email address or
+                                            want to send custom properties
                                         </p>
                                         <p className="text-sm mb-0">
-
                                             <button
                                                 onClick={() => setModalOpen(true)}
                                                 className="text-red dark:text-yellow font-semibold text-sm"
@@ -261,7 +295,9 @@ const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, val
                                 <IconInfo className="size-4 inline-block relative -top-0.5" />
                             </Tooltip>
                         </span>
-                        : <span className="text-primary/70 dark:text-primary-dark/70"></span>}
+                    ) : (
+                        <span className="text-primary/70 dark:text-primary-dark/70"></span>
+                    )}
                 </p>
             )}
             <NonLinearSlider
@@ -347,7 +383,14 @@ const SliderToggle = ({
     )
 }
 
-export default function ProductAnalyticsTab({ activeProduct, setProduct, analyticsData, setAnalyticsData }) {
+export default function ProductAnalyticsTab({
+    activeProduct,
+    setProduct,
+    analyticsData,
+    setAnalyticsData,
+    setAddons,
+    addons,
+}) {
     const [showBreakdown, setShowBreakdown] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
 
@@ -447,7 +490,15 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                         {...slider}
                     />
                 ))}
-                <div className="grid grid-cols-6 gap-x-8 mt-4 py-2 border-y border-light dark:border-dark">
+                <div className="mt-4">
+                    <Addons
+                        activeProduct={activeProduct}
+                        addons={addons}
+                        setAddons={setAddons}
+                        volume={totalProductAnalyticsVolume || 0}
+                    />
+                </div>
+                <div className="grid grid-cols-6 gap-x-8 py-2 border-y border-light dark:border-dark">
                     <div className="col-span-full md:col-span-3 flex justify-between">
                         <div className="flex justify-between w-full md:block">
                             <h3 className="m-0 text-base">Event cost subtotal</h3>
@@ -469,15 +520,11 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                         </div>
                     </div>
                     <div className="mt-1 md:mt-0 col-span-full w-full md:col-span-3 grid grid-cols-3 justify-self-end items-center gap-1">
-                        <div className="col-span-2 text-sm md:text-[15px] md:text-right">
-                            Anonymous events
-                        </div>
+                        <div className="col-span-2 text-sm md:text-[15px] md:text-right">Anonymous events</div>
                         <div className="text-right min-w-16">
                             <strong>{formatUSD(totalProductAnalyticsPrice)}</strong>
                         </div>
-                        <div className="col-span-2 text-sm md:text-[15px] md:text-right">
-                            Identified events
-                        </div>
+                        <div className="col-span-2 text-sm md:text-[15px] md:text-right">Identified events</div>
                         <div className="text-right min-w-16">
                             <strong>{formatUSD(enhancedPersonsCost.total)}</strong>
                         </div>
@@ -495,10 +542,12 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                             </div>
                             <h4 className="mb-1">How event pricing is calculated</h4>
                             <p className="text-sm font-normal mb-2">
-                                Events are billed at different rates based on volume and if you choose to send <em>anonymous events</em> or <em>identified events</em>*.
+                                Events are billed at different rates based on volume and if you choose to send{' '}
+                                <em>anonymous events</em> or <em>identified events</em>*.
                             </p>
                             <p className="text-sm font-normal mb-2">
-                                *<em>Identified events</em> allow you to send custom properties like email address or plan name.
+                                *<em>Identified events</em> allow you to send custom properties like email address or
+                                plan name.
                             </p>
                             <p className="text-sm">
                                 <button
@@ -509,7 +558,9 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                                 </button>
                             </p>
 
-                            <p className="my-4 font-bold border-t border-light dark:border-dark pt-4">Here's how your estimate breaks down:</p>
+                            <p className="my-4 font-bold border-t border-light dark:border-dark pt-4">
+                                Here's how your estimate breaks down:
+                            </p>
                             <div className="space-y-8">
                                 <div>
                                     <h4 className="text-lg m-0">Anonymous events</h4>
@@ -532,7 +583,11 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                                 </div>
                                 <div>
                                     <h4 className="text-lg m-0">Identified events (with person profiles)</h4>
-                                    <p className="text-sm mb-1">Identified events share the monthly free tier with anonymous events, and also receive a separate free tier for <em>person profiles</em> which is what converts anonymous events into identified events.</p>
+                                    <p className="text-sm mb-1">
+                                        Identified events share the monthly free tier with anonymous events, and also
+                                        receive a separate free tier for <em>person profiles</em> which is what converts
+                                        anonymous events into identified events.
+                                    </p>
                                     {identifiedUsed.length > 0 && (
                                         <p className="opacity-70 m-0 text-sm">
                                             <strong>Used for:</strong>{' '}

@@ -24,9 +24,9 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                         ...addon,
                         totalCost: checked
                             ? calculatePrice(
-                                inclusion_only ? (percentage / 100) * volume : volume,
-                                plans[plans.length - 1].tiers
-                            ).total
+                                  inclusion_only ? (percentage / 100) * volume : volume,
+                                  plans[plans.length - 1].tiers
+                              ).total
                             : 0,
                     }
                 }
@@ -81,6 +81,31 @@ const productTabs = {
     product_analytics: ProductAnalyticsTab,
 }
 
+export const Addons = ({ addons, setAddons, volume, activeProduct }) => {
+    return activeProduct.billingData.addons.length > 0 ? (
+        <div>
+            <p className="opacity-70 text-sm m-0">Product add-ons</p>
+            <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
+                {activeProduct.billingData.addons
+                    .filter((addon) => !addon.inclusion_only)
+                    .map((addon) => {
+                        return (
+                            <li key={addon.type} className="py-2">
+                                <Addon
+                                    key={addon.type}
+                                    addons={addons}
+                                    setAddons={setAddons}
+                                    volume={volume}
+                                    {...addon}
+                                />
+                            </li>
+                        )
+                    })}
+            </ul>
+        </div>
+    ) : null
+}
+
 const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, analyticsData, setAnalyticsData }) => {
     const { type, cost, volume, billingData, slider, costByTier } = activeProduct
     const [showBreakdown, setShowBreakdown] = useState(false)
@@ -94,6 +119,8 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                     setProduct,
                     analyticsData,
                     setAnalyticsData,
+                    setAddons,
+                    addons,
                 }) ||
                     (activeProduct.name == 'A/B testing' ? (
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-4 py-3 mb-2 text-sm">
@@ -159,32 +186,16 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                                             />
                                         </div>
                                     )}
+                                    <Addons
+                                        activeProduct={activeProduct}
+                                        addons={addons}
+                                        setAddons={setAddons}
+                                        volume={volume || slider.min}
+                                    />
                                 </>
                             )}
                         </>
                     ))}
-                {activeProduct.billingData.addons.length > 0 && (
-                    <div className="">
-                        <p className="opacity-70 text-sm m-0">Product add-ons</p>
-                        <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
-                            {activeProduct.billingData.addons
-                                .filter((addon) => !addon.inclusion_only)
-                                .map((addon) => {
-                                    return (
-                                        <li key={addon.type} className="py-2">
-                                            <Addon
-                                                key={addon.type}
-                                                addons={addons}
-                                                setAddons={setAddons}
-                                                volume={volume || slider.min}
-                                                {...addon}
-                                            />
-                                        </li>
-                                    )
-                                })}
-                        </ul>
-                    </div>
-                )}
             </div>
         </>
     )
@@ -316,10 +327,11 @@ export default function Tabbed() {
                                 <li key={name} className="flex-1">
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${active
-                                            ? 'font-bold bg-accent dark:bg-accent-dark'
-                                            : 'hover:bg-accent dark:hover:bg-accent/15'
-                                            }`}
+                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                            active
+                                                ? 'font-bold bg-accent dark:bg-accent-dark'
+                                                : 'hover:bg-accent dark:hover:bg-accent/15'
+                                        }`}
                                     >
                                         <div className="flex items-center space-x-2">
                                             <span>
