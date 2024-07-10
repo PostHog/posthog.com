@@ -1,4 +1,4 @@
-import { IconX } from '@posthog/icons'
+import { IconInfo, IconX } from '@posthog/icons'
 import Checkbox from 'components/Checkbox'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'components/Pricing/PricingSlider/Slider'
@@ -9,6 +9,7 @@ import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import AutosizeInput from 'react-input-autosize'
 import qs from 'qs'
+import Tooltip from 'components/Tooltip'
 
 const getTotalAnalyticsVolume = (analyticsData: any) => {
     return Object.keys(analyticsData).reduce((acc, key) => acc + analyticsData[key].volume, 0)
@@ -28,40 +29,40 @@ const getTotalEnhancedPersonsVolume = (analyticsData: any) => {
 export const analyticsSliders = [
     {
         label: 'Website analytics',
-        types: [{ type: 'websiteAnalyticsEvents' }],
+        types: [{ type: 'websiteAnalyticsEvents', label: 'Anonymous events' }],
         checked: true,
     },
     {
         label: 'Product analytics',
-        types: [{ type: 'productAnalyticsEvents', enhanced: true }],
+        types: [{ type: 'productAnalyticsEvents', label: 'Identified events', enhanced: true }],
         checked: true,
     },
     {
         label: 'Mobile app',
         types: [
             { type: 'mobileAppAnonymousEvents', label: 'Anonymous events' },
-            { type: 'mobileAppAuthenticatedEvents', label: 'Events from authenticated users', enhanced: true },
+            { type: 'mobileAppAuthenticatedEvents', label: 'Identified events', enhanced: true },
         ],
     },
     {
         label: 'LLM events',
         types: [
             { type: 'llmAnonymousEvents', label: 'Anonymous events' },
-            { type: 'llmAuthenticatedEvents', label: 'Events from authenticated users', enhanced: true },
+            { type: 'llmAuthenticatedEvents', label: 'Identified events', enhanced: true },
         ],
     },
     {
         label: 'API events',
         types: [
             { type: 'apiAnonymousEvents', label: 'Anonymous events' },
-            { type: 'apiAuthenticatedEvents', label: 'Events from authenticated users', enhanced: true },
+            { type: 'apiAuthenticatedEvents', label: 'Identified events', enhanced: true },
         ],
     },
     {
         label: 'Other events',
         types: [
             { type: 'otherAnonymousEvents', label: 'Anonymous events' },
-            { type: 'otherAuthenticatedEvents', label: 'Events from authenticated users', enhanced: true },
+            { type: 'otherAuthenticatedEvents', label: 'Identified events', enhanced: true },
         ],
     },
 ]
@@ -78,22 +79,107 @@ const Modal = ({ onClose, isVisible }) => {
     return (
         <>
             <div
-                className={`bg-accent-dark/50 fixed left-0 w-screen h-screen top-0 bg-opacity-40 flex justify-center items-center ${!isVisible ? 'hidden' : 'z-[1000000]'
+                className={`bg-accent-dark/50 fixed h-screen left-0 right-0 top-0 bg-opacity-40 flex justify-center items-center ${!isVisible ? 'hidden' : 'z-[1000000]'
                     }`}
                 onClick={() => onClose()}
             ></div>
             <div
-                className={`w-[500px] max-w-full h-[calc(100vh_-_123px)] md:h-screen z-[1000001] fixed overflow-y-auto top-0 flex flex-col bg-white dark:bg-accent-dark transition-all duration-500 ease-out
-          ${isVisible ? '!opacity-100 right-[0px]' : 'opacity-0 right-[-500px]'}`}
+                className={`max-w-full z-[1000001] fixed overflow-y-auto left-8 right-8 rounded-tl-lg rounded-tr-lg flex flex-col bg-white dark:bg-accent-dark transition-all duration-300 ease-out
+          ${isVisible ? '!opacity-100 top-4' : 'opacity-0 top-[100vh]'}`}
             >
                 <div className="w-full h-fit flex justify-between p-4 md:px-8">
-                    <span className="font-bold text-xl">What are person profiles?</span>
+                    <span className="font-bold text-xl">Event types, explained</span>
 
                     <button onClick={() => onClose()}>
                         <IconX className="size-5" />
                     </button>
                 </div>
-                <div className="px-4 pb-4 md:px-8 md:pb-8 [&_p]:text-[15px]">
+
+                <div className="px-4 pb-4 md:pb-8">
+
+
+
+
+                    {/* <h3 className="mb-2 text-lg">Save money if you don't need user properties</h3>
+                    <p className="font-semibold opacity-70 text-[15px]">(Custom user properties more expensive to process)</p>
+                    <p className="mb-2">The more data we store about users, the higher the cost. So the less data you need, the more you can save.</p> */}
+
+
+                    <p className="mb-2 text-[15px]">Events are billed at different rates based on volume and if you choose to send custom user properties with the event.</p>
+
+                    <div className="grid grid-cols-2">
+                        <div className="pb-2 mb-2 bg-light dark:bg-dark border-b border-light dark:border-dark">
+                            <h4 className="m-0 text-base mb-0">Anonymous events</h4>
+                            <p className="text-[13px] opacity-70 mb-0">Get insights like Google Analytics</p>
+                        </div>
+                        <div className="pb-2 mb-2 bg-light dark:bg-dark border-b border-light dark:border-dark">
+                            <h4 className="m-0 text-base mb-0">Identified events</h4>
+                            <p className="text-[13px] opacity-70 mb-0">Include custom properties (like a user's email, plan name)</p>
+                        </div>
+                        <div>
+                            <p className="m-0 text-sm opacity-70 italic mb-2">Base event price</p>
+
+                            <p className="m-0 text-sm opacity-70">Starts at </p>
+                            <p className="m-0">
+                                <strong>
+                                    $0.00005
+                                </strong>
+                                <span className="opacity-70 text-sm">/event</span>
+                            </p>
+                            <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
+                        </div>
+                        <div className="">
+
+                            <p className="m-0 text-sm opacity-70 italic mb-2">
+                                Base event price + person profile add-on
+                            </p>
+                            <p className="m-0 text-sm opacity-70">Starts at </p>
+                            <p className="m-0">
+                                <strong>
+                                    $0.00005
+                                </strong>
+                                <span className="opacity-70 text-sm">/event + </span>
+                                <strong>
+                                    $0.000198
+                                </strong>
+                                <span className="opacity-70 text-sm">/event</span>
+                            </p>
+                            <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
+                        </div>
+                    </div>
+
+
+                    <ul className="mt-2 mb-4">
+                        <li className="mb-2">
+                            <strong>Anonymous events</strong><br />
+                            <span className="text-sm">Can track:  UTMs, location, referrer, pageviews<br />
+                                Can't track: Conversions</span>
+                        </li>
+                        <li>
+                            <strong>Identified events</strong><br />
+                            <span className="text-sm">Can track: Conversions, custom user properties</span>
+                        </li>
+                    </ul>
+                    <p className="mb-4">
+                        With <strong>anonymized</strong> events, you can produce insights like in Google Analytics.
+                    </p>
+                    <p className="mb-2">
+                        With <strong>identified</strong> events, you can:
+                    </p>
+                    <ul className="mb-8">
+                        <li>store custom properties (like email, plan name, or internal ID)</li>
+                        <li>associate their previous anonymous source (before signup) which enables conversion tracking</li>
+                        <li>target flags, experiments, and surveys by user properties</li>
+                        <li>create graphs based on user properties, or create cohorts</li>
+                    </ul>
+
+                    <p>You can have a mix of both, so you can identify certain users and anonymize others. (It's determined by the code on the page where you're sending the event, so it's completely customizable).</p>
+
+
+
+
+
+
                     <p className="mb-2">
                         Person profiles let you store detailed information about a user (like an email address, plan
                         name, or custom properties). This enables a deeper level of insights that isn't available when
@@ -251,17 +337,33 @@ const AnalyticsSlider = ({ marks, min, max, className = '', label, onChange, val
             {label && (
                 <p className="m-0 text-sm absolute left-8 top-0">
                     {label}{' '}
-                    {enhanced && (
+                    {enhanced ?
                         <span className="text-primary/70 dark:text-primary-dark/70">
-                            – uses{' '}
-                            <button
-                                onClick={() => setModalOpen(true)}
-                                className="text-red dark:text-yellow font-semibold"
+
+
+                            <Tooltip
+                                content={() => (
+                                    <div className="max-w-[250px]">
+                                        <p className="text-sm mb-2">
+                                            Typically used for authenticated users where you know their email address or want to send custom properties
+                                        </p>
+                                        <p className="text-sm mb-0">
+
+                                            <button
+                                                onClick={() => setModalOpen(true)}
+                                                className="text-red dark:text-yellow font-semibold text-sm"
+                                            >
+                                                Explain event types
+                                            </button>
+                                        </p>
+                                    </div>
+                                )}
+                                placement="right"
                             >
-                                person profiles
-                            </button>
+                                <IconInfo className="size-4 inline-block relative -top-0.5" />
+                            </Tooltip>
                         </span>
-                    )}
+                        : <span className="text-primary/70 dark:text-primary-dark/70"></span>}
                 </p>
             )}
             <NonLinearSlider
@@ -425,7 +527,15 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                     First 1,000,000 events free – every month!
                 </div>
                 <div className="grid grid-cols-6 gap-8 items-end mb-2">
-                    <h3 className="col-span-4 lg:col-span-5 m-0 text-base">Event usage</h3>
+                    <h3 className="col-span-4 lg:col-span-5 m-0 text-base">
+                        Event usage{' '}
+                        <button
+                            onClick={() => setModalOpen(true)}
+                            className="text-red dark:text-yellow font-semibold text-sm"
+                        >
+                            explain event types
+                        </button>
+                    </h3>
                     <p className="col-span-2 lg:col-span-1 m-0 text-right opacity-70 text-sm">Events/mo</p>
                 </div>
 
@@ -486,58 +596,22 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                                 </button>
                             </div>
                             <h4 className="mb-1">How event pricing is calculated</h4>
-                            <p className="text-sm font-normal">
-                                Events are billed at different rates based on volume and if you choose to attach a{' '}
-                                <Link href="#">person profile</Link> to the event. (This allows you to send custom
-                                properties like email address or plan name.)
+                            <p className="text-sm font-normal mb-2">
+                                Events are billed at different rates based on volume and if you choose to send <em>anonymous events</em> or <em>identified events</em>*.
                             </p>
-                            <div className="my-4 grid divide-y md:divide-y-0 divide-border dark:divide-border-dark md:grid-cols-2 gap-4 md:gap-8 border border-light dark:border-dark p-4 bg-tan dark:bg-accent-dark rounded">
-                                <div>
-                                    <h4 className="m-0 text-base mb-0">Anonymous events</h4>
-                                    <p className="m-0 text-sm opacity-70 italic mb-2">Base event price</p>
+                            <p className="text-sm font-normal mb-2">
+                                *<em>Identified events</em> allow you to send custom properties like email address or plan name.
+                            </p>
+                            <p className="text-sm">
+                                <button
+                                    onClick={() => setModalOpen(true)}
+                                    className="text-red dark:text-yellow font-semibold"
+                                >
+                                    Learn more about event types
+                                </button>
+                            </p>
 
-                                    <p className="m-0 text-sm opacity-70">Starts at </p>
-                                    <p className="m-0">
-                                        <strong>
-                                            $
-                                            {
-                                                activeProduct.costByTier.find((tier) => tier.unit_amount_usd !== '0')
-                                                    .unit_amount_usd
-                                            }
-                                        </strong>
-                                        <span className="opacity-70 text-sm">/event</span>
-                                    </p>
-                                    <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
-                                </div>
-                                <div className="pt-4 md:pt-0">
-                                    <h4 className="m-0 text-base mb-0">Identified events</h4>
-                                    <p className="m-0 text-sm opacity-70 italic mb-2">
-                                        Base event price + person profile add-on
-                                    </p>
-                                    <p className="m-0 text-sm opacity-70">Starts at </p>
-                                    <p className="m-0">
-                                        <strong>
-                                            $
-                                            {
-                                                activeProduct.costByTier.find((tier) => tier.unit_amount_usd !== '0')
-                                                    .unit_amount_usd
-                                            }
-                                        </strong>
-                                        <span className="opacity-70 text-sm">/event + </span>
-                                        <strong>
-                                            $
-                                            {
-                                                enhancedPersonsCost.costByTier.find(
-                                                    (tier) => tier.unit_amount_usd !== '0'
-                                                ).unit_amount_usd
-                                            }
-                                        </strong>
-                                        <span className="opacity-70 text-sm">/event</span>
-                                    </p>
-                                    <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
-                                </div>
-                            </div>
-                            <p className="my-4 font-bold">Here's how your estimate breaks down:</p>
+                            <p className="my-4 font-bold border-t border-light dark:border-dark pt-4">Here's how your estimate breaks down:</p>
                             <div className="space-y-8">
                                 <div>
                                     <h4 className="text-lg m-0">Anonymous events</h4>
