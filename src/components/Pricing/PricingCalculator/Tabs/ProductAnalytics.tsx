@@ -460,25 +460,19 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                             )}
                         </div>
                     </div>
-                    <div className="col-span-full w-full md:col-span-3 md:w-max justify-self-end">
-                        <table className="mb-0">
-                            <tr>
-                                <td className="pr-2 text-sm md:text-[15px]">
-                                    Anonymous events
-                                </td>
-                                <td className="text-right min-w-16">
-                                    <strong>{formatUSD(totalProductAnalyticsPrice)}</strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="pr-2 text-sm md:text-[15px]">
-                                    Identified events
-                                </td>
-                                <td className="text-right min-w-16">
-                                    <strong>{formatUSD(enhancedPersonsCost.total)}</strong>
-                                </td>
-                            </tr>
-                        </table>
+                    <div className="mt-1 md:mt-0 col-span-full w-full md:col-span-3 grid grid-cols-3 justify-self-end items-center gap-1">
+                        <div className="col-span-2 text-sm md:text-[15px] md:text-right">
+                            Anonymous events
+                        </div>
+                        <div className="text-right min-w-16">
+                            <strong>{formatUSD(totalProductAnalyticsPrice)}</strong>
+                        </div>
+                        <div className="col-span-2 text-sm md:text-[15px] md:text-right">
+                            Identified events
+                        </div>
+                        <div className="text-right min-w-16">
+                            <strong>{formatUSD(enhancedPersonsCost.total)}</strong>
+                        </div>
                     </div>
 
                     {showBreakdown && (
