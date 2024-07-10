@@ -533,15 +533,6 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                                 or have custom properties stored on them are charged an additional rate called Person
                                 profiles.
                             </p>
-                            <p className="text-sm">
-                                <button
-                                    onClick={() => setModalOpen(true)}
-                                    className="text-red dark:text-yellow font-semibold"
-                                >
-                                    Learn more about event types
-                                </button>
-                            </p>
-
                             <p className="my-4 font-bold border-t border-light dark:border-dark pt-4">
                                 Here's how your estimate breaks down:
                             </p>
