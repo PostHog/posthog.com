@@ -82,7 +82,6 @@ const productTabs = {
 }
 
 export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData }) => {
-    console.log(analyticsData, 'THE ANALYTICS DATA')
     return activeProduct.billingData.addons.length > 0 ? (
         <div>
             <p className="opacity-70 text-sm m-0">Product add-ons</p>
