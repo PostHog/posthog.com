@@ -8,7 +8,7 @@ import { allProductsData } from '../Pricing'
 import useProducts from 'hooks/useProducts'
 import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
 import { PricingTiers } from '../Plans'
-import ProductAnalyticsTab, { analyticsSliders } from './Tabs/ProductAnalytics'
+import ProductAnalyticsTab, { analyticsSliders, getTotalEnhancedPersonsVolume } from './Tabs/ProductAnalytics'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
 
@@ -81,7 +81,8 @@ const productTabs = {
     product_analytics: ProductAnalyticsTab,
 }
 
-export const Addons = ({ addons, setAddons, volume, activeProduct }) => {
+export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData }) => {
+    console.log(analyticsData, 'THE ANALYTICS DATA')
     return activeProduct.billingData.addons.length > 0 ? (
         <div>
             <p className="opacity-70 text-sm m-0">Product add-ons</p>
@@ -95,7 +96,11 @@ export const Addons = ({ addons, setAddons, volume, activeProduct }) => {
                                     key={addon.type}
                                     addons={addons}
                                     setAddons={setAddons}
-                                    volume={volume}
+                                    volume={
+                                        addon.type != 'group_analytics'
+                                            ? volume
+                                            : getTotalEnhancedPersonsVolume(analyticsData)
+                                    }
                                     {...addon}
                                 />
                             </li>
@@ -191,6 +196,7 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                                         addons={addons}
                                         setAddons={setAddons}
                                         volume={volume || slider.min}
+                                        analyticsData={analyticsData}
                                     />
                                 </>
                             )}

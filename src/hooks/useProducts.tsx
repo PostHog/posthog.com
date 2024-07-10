@@ -105,7 +105,7 @@ export default function useProducts() {
         const product = products.find((product) => product.type === type)
         const { total, costByTier } = calculatePrice(
             rounded,
-            product.billingData.plans.find((plan: any) => plan.tiers)?.tiers
+            product?.billingData.plans.find((plan: any) => plan.tiers)?.tiers
         )
         setProduct(type, {
             volume: rounded,
