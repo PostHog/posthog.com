@@ -11,13 +11,13 @@ assignees:
 
 > _Write a short paragraph on what this article is about. If applicable, what's the opinion or point we want to make in this article?_
 
-## What (if any) keywords are we targeting?
-
-> _list any that apply_
-
 ## Headline options
 
 > _suggest a few angles_
+
+## What (if any) keywords are we targeting?
+
+> _list any that apply_
 
 ## Will it need custom art?
 
