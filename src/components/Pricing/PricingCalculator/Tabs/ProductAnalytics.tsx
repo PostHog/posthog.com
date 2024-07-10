@@ -528,6 +528,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                                 </div>
                                 <div>
                                     <h4 className="text-lg m-0">Identified events (with person profiles)</h4>
+                                    <p className="text-sm mb-1">Identified events share the monthly free tier with anonymous events, and also receive a separate free tier for <em>person profiles</em> which is what converts anonymous events into identified events.</p>
                                     {identifiedUsed.length > 0 && (
                                         <p className="opacity-70 m-0 text-sm">
                                             <strong>Used for:</strong>{' '}
