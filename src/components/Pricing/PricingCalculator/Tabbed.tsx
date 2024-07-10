@@ -134,12 +134,19 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                             </div>
                             {costByTier && (
                                 <>
-                                    {!showBreakdown && (
+                                    {showBreakdown ? (
+                                        <button
+                                            onClick={() => setShowBreakdown(false)}
+                                            className="text-red dark:text-yellow font-semibold text-sm"
+                                        >
+                                            Hide how we calculate this
+                                        </button>
+                                    ) : (
                                         <button
                                             onClick={() => setShowBreakdown(true)}
-                                            className="text-red dark:text-yellow font-bold"
+                                            className="text-red dark:text-yellow font-semibold text-sm"
                                         >
-                                            Show breakdown
+                                            See how we calculate this
                                         </button>
                                     )}
                                     {showBreakdown && (

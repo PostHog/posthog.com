@@ -322,7 +322,7 @@ const SliderToggle = ({
                                         enhanced={analyticsData[type].enhanced}
                                         setModalOpen={setModalOpen}
                                     />
-                                    <div className="col-span-2 lg:col-span-1 text-right font-bold m-0 self-end -mb-1.5 flex justify-center">
+                                    <div className="col-span-2 lg:col-span-1 text-right font-bold m-0 self-end -mb-1.5 flex justify-end">
                                         <NumericFormat
                                             inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
                                             value={analyticsData[type].volume}
@@ -340,7 +340,7 @@ const SliderToggle = ({
             </div>
             {!checked && (
                 <>
-                    <span className="opacity-25 text-center">--</span>
+                    <span className="opacity-25 text-right">--&nbsp;</span>
                 </>
             )}
         </div>
@@ -426,7 +426,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                 </div>
                 <div className="grid grid-cols-6 gap-8 items-end mb-2">
                     <h3 className="col-span-4 lg:col-span-5 m-0 text-base">Event usage</h3>
-                    <p className="col-span-2 lg:col-span-1 m-0 text-center opacity-70 text-sm">Events/mo</p>
+                    <p className="col-span-2 lg:col-span-1 m-0 text-right opacity-70 text-sm">Events/mo</p>
                 </div>
 
                 {analyticsSliders.map((slider) => (
