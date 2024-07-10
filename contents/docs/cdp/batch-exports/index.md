@@ -60,7 +60,7 @@ In contrast to the events model, the persons model is **mutable**: As users of P
 
 Being a mutable model has implications for the export process: PostHog must merge incoming data with existing data to find any rows that need updating, as incoming data could be both completely new persons and updates to old persons. This merging process is different depending on each destination, but it is likely to require a higher level of access to your destination in comparison to exporting the immutable events model.
 
-The intended use-case for this model is to be exported alongside the events model, creating one batch export for each. Then, the persons model can be joined together with the events model to assign events to their unique persons.
+The intended use-case for this model is to be exported alongside the events model, creating one batch export for each. The persons model can then be joined together with the events model to assign events to their unique persons.
 
 More information, including any additional necessary permissions, schema information, and examples, can be found in each of the destinations documentation:
 
