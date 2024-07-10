@@ -372,9 +372,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
     const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(analyticsData)
     const enhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers)
 
-    const anonymousUsed = Object.keys(analyticsData).filter(
-        (key) => !analyticsData[key].enhanced && analyticsData[key].volume > 0
-    )
+    const anonymousUsed = Object.keys(analyticsData).filter((key) => analyticsData[key].volume > 0)
     const identifiedUsed = Object.keys(analyticsData).filter(
         (key) => analyticsData[key].enhanced && analyticsData[key].volume > 0
     )
