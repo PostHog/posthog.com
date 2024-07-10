@@ -1,4 +1,4 @@
-import { IconInfo, IconX } from '@posthog/icons'
+import { IconCheck, IconInfo, IconX } from '@posthog/icons'
 import Checkbox from 'components/Checkbox'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'components/Pricing/PricingSlider/Slider'
@@ -10,6 +10,7 @@ import { CallToAction } from 'components/CallToAction'
 import AutosizeInput from 'react-input-autosize'
 import qs from 'qs'
 import Tooltip from 'components/Tooltip'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const getTotalAnalyticsVolume = (analyticsData: any) => {
     return Object.keys(analyticsData).reduce((acc, key) => acc + analyticsData[key].volume, 0)
@@ -84,10 +85,10 @@ const Modal = ({ onClose, isVisible }) => {
                 onClick={() => onClose()}
             ></div>
             <div
-                className={`max-w-full z-[1000001] fixed overflow-y-auto left-8 right-8 rounded-tl-lg rounded-tr-lg flex flex-col bg-white dark:bg-accent-dark transition-all duration-300 ease-out
+                className={`max-w-full z-[1000001] fixed left-4 md:left-8 right-4 md:right-8 rounded-tl md:rounded-tl-lg rounded-tr md:rounded-tr-lg flex flex-col bg-white dark:bg-accent-dark transition-all duration-300 ease-out
           ${isVisible ? '!opacity-100 top-4' : 'opacity-0 top-[100vh]'}`}
             >
-                <div className="w-full h-fit flex justify-between p-4 md:px-8">
+                <div className="w-full h-fit flex justify-between p-4 border-b border-light dark:border-dark">
                     <span className="font-bold text-xl">Event types, explained</span>
 
                     <button onClick={() => onClose()}>
@@ -95,7 +96,7 @@ const Modal = ({ onClose, isVisible }) => {
                     </button>
                 </div>
 
-                <div className="px-4 pb-4 md:pb-8">
+                <div className="max-h-[calc(100vh_-_1rem_-_60px_-_122px)] md:max-h-[calc(100vh_-_1rem_-_60px)] overflow-y-auto px-4 py-4 md:pb-8">
 
 
 
@@ -105,226 +106,119 @@ const Modal = ({ onClose, isVisible }) => {
                     <p className="mb-2">The more data we store about users, the higher the cost. So the less data you need, the more you can save.</p> */}
 
 
-                    <p className="mb-2 text-[15px]">Events are billed at different rates based on volume and if you choose to send custom user properties with the event.</p>
+                    <p className="mb-8 text-[15px]">Events are billed at different rates based on volume and if you choose to send custom user properties with the event.</p>
 
-                    <div className="grid grid-cols-2">
-                        <div className="pb-2 mb-2 bg-light dark:bg-dark border-b border-light dark:border-dark">
-                            <h4 className="m-0 text-base mb-0">Anonymous events</h4>
-                            <p className="text-[13px] opacity-70 mb-0">Get insights like Google Analytics</p>
+                    <section className="grid md:grid-cols-5 gap-6 md:gap-12 pb-12">
+                        <div className="col-span-1 md:col-span-2">
+                            <h3 className="mb-4 md:hidden">Anonymous events</h3>
+                            <StaticImage src="./event-anonymous.png" alt="Anonymous event example" className="max-w-[824px]" placeholder="blurred" />
                         </div>
-                        <div className="pb-2 mb-2 bg-light dark:bg-dark border-b border-light dark:border-dark">
-                            <h4 className="m-0 text-base mb-0">Identified events</h4>
-                            <p className="text-[13px] opacity-70 mb-0">Include custom properties (like a user's email, plan name)</p>
-                        </div>
-                        <div>
-                            <p className="m-0 text-sm opacity-70 italic mb-2">Base event price</p>
+                        <div className="col-span-1 md:col-span-3">
+                            <h3 className="hidden md:block mb-1">Anonymous events</h3>
+                            <p className="opacity-70 mb-3">No individually-identifiable info, analyzed in aggregate</p>
+                            <p className="mb-2">By default, events are anonymous, meaning they don't have any personally-identifiable information attached to them.</p>
+                            <p className="mb-2">They come with info about the browser and device, visitor's location, and any UTM parameters.</p>
 
-                            <p className="m-0 text-sm opacity-70">Starts at </p>
+                            <h4 className="text-base">With anonymous events, you can:</h4>
+                            <ul className="list-none pl-0 mb-6 space-y-1">
+                                <li className="relative pl-8">
+                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                    See a Google Analytics-style dashboard
+                                </li>
+                                <li className="relative pl-8">
+                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                    Access properties like UTMs, location, referrer, page views
+                                </li>
+                                <li className="relative pl-8">
+                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                    <p className="mb-0">Create <strong><em>aggregate</em></strong> insights in <strong>Product analytics</strong></p>
+                                    <ul className="[&_li]:text-sm opacity-70 pl-4 pt-1">
+                                        <li>How many times users click an element on a page</li>
+                                        <li>Group visitors by device type or location</li>
+                                        <li>Filter to interactions on a specific page</li>
+                                        <li>Track anonymous users across sessions</li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <p className="m-0 text-sm opacity-70">Pricing starts at </p>
                             <p className="m-0">
                                 <strong>
                                     $0.00005
                                 </strong>
                                 <span className="opacity-70 text-sm">/event</span>
                             </p>
-                            <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
+                            <p className="text-green m-0 text-sm font-semibold">First 1 million events/mo free</p>
                         </div>
-                        <div className="">
+                    </section>
 
-                            <p className="m-0 text-sm opacity-70 italic mb-2">
-                                Base event price + person profile add-on
-                            </p>
-                            <p className="m-0 text-sm opacity-70">Starts at </p>
-                            <p className="m-0">
-                                <strong>
-                                    $0.00005
-                                </strong>
-                                <span className="opacity-70 text-sm">/event + </span>
-                                <strong>
-                                    $0.000198
-                                </strong>
-                                <span className="opacity-70 text-sm">/event</span>
-                            </p>
-                            <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
+                    <section className="grid md:grid-cols-5 gap-6 md:gap-12 pb-4">
+                        <div className="col-span-1 md:col-span-2">
+                            <h3 className="mb-4 md:hidden">Identified events</h3>
+                            <StaticImage src="./event-identified.png" alt="Identified event example" className="max-w-[824px]" placeholder="blurred" />
                         </div>
-                    </div>
+                        <div className="col-span-1 md:col-span-3">
+                            <h3 className="hidden md:block mb-1">Identified events</h3>
+                            <p className="opacity-70 mb-3">Track usage of specific, logged in users</p>
+                            <p className="mb-2">With a configuration change where you're sending an event, you can identify a user. This allows you to attach custom properties to each events.</p>
 
+                            <h4 className="text-base">In addition to anonymous event capabilities, you can:</h4>
+                            <ul className="list-none pl-0 mb-6 space-y-1">
+                                <li className="relative pl-8">
+                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                    <p className="mb-0">Merge an anonymous and identified user</p>
+                                    <ul className="[&_li]:text-sm opacity-70 pl-2 pt-1 list-none">
+                                        <li>Like when they sign up for your product - enables analyzing the user's path</li>
+                                    </ul>
+                                </li>
+                                <li className="relative pl-8">
+                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                    Merge user sessions between devices (like web and mobile)
+                                </li>
 
-                    <ul className="mt-2 mb-4">
-                        <li className="mb-2">
-                            <strong>Anonymous events</strong><br />
-                            <span className="text-sm">Can track:  UTMs, location, referrer, pageviews<br />
-                                Can't track: Conversions</span>
-                        </li>
-                        <li>
-                            <strong>Identified events</strong><br />
-                            <span className="text-sm">Can track: Conversions, custom user properties</span>
-                        </li>
-                    </ul>
-                    <p className="mb-4">
-                        With <strong>anonymized</strong> events, you can produce insights like in Google Analytics.
-                    </p>
-                    <p className="mb-2">
-                        With <strong>identified</strong> events, you can:
-                    </p>
-                    <ul className="mb-8">
-                        <li>store custom properties (like email, plan name, or internal ID)</li>
-                        <li>associate their previous anonymous source (before signup) which enables conversion tracking</li>
-                        <li>target flags, experiments, and surveys by user properties</li>
-                        <li>create graphs based on user properties, or create cohorts</li>
-                    </ul>
+                                <li className="relative pl-8">
+                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                    <p className="mb-0">Create <strong><em>user-specific</em></strong> insights in <strong>Product analytics</strong></p>
+                                    <ul className="[&_li]:text-sm opacity-70 pl-4 pt-1">
+                                        <li>How many times <em>specific users</em> click an element on a page</li>
+                                        <li>Group <em>cohorts of users</em> by device type or location</li>
+                                        <li>Filter to interactions on a specific page <em>by specific users</em></li>
+                                        <li>Track <em>identified</em> users across sessions</li>
+                                    </ul>
+                                </li>
+                            </ul>
 
-                    <p>You can have a mix of both, so you can identify certain users and anonymize others. (It's determined by the code on the page where you're sending the event, so it's completely customizable).</p>
-
-
-
-
-
-
-                    <p className="mb-2">
-                        Person profiles let you store detailed information about a user (like an email address, plan
-                        name, or custom properties). This enables a deeper level of insights that isn't available when
-                        analyzing anonymous traffic (like in Google Analytics).
-                    </p>
-                    <p className="mb-2">
-                        It also provides attribution data and lets you track users across devices and sessions.
-                    </p>
-                    <p className="mb-2">
-                        <strong>With person profiles, you can:</strong>
-                    </p>
-                    <ul className="[&_li]:text-[15px] pl-4 mb-2">
-                        <li>
-                            View detailed person info in the{' '}
-                            <Link href="https://us.posthog.com/persons" external>
-                                People tab
-                            </Link>
-                        </li>
-                        <li>
-                            Merge identities across <code className="text-sm">distinct_id</code> values (i.e. merge
-                            anonymous user and logged in users)
-                        </li>
-                        <li>Track UTMs and referrers for anonymous and identified users</li>
-                        <li>Target flags, experiments, and surveys by user properties</li>
-                        <li>Filter on user properties</li>
-                        <li>Create cohorts</li>
-                    </ul>
-
-                    <p className="text-[15px] mb-0">
-                        Person profiles are split out from standard event prices so you don't have to pay for them if
-                        you don't need them.
-                    </p>
-
-                    <div className="mb-8">
-                        <CallToAction href="/docs/data/persons" size="sm" className="mt-4" external>
-                            Read the docs
-                        </CallToAction>
-                    </div>
-
-                    <h3 className="text-xl border-b border-light dark:border-dark pb-1 mb-2">
-                        Do you need events with person profiles?
-                    </h3>
-
-                    <div className="space-y-2 mb-8">
-                        <details>
-                            <summary className="cursor-pointer">
-                                <div className="inline-flex items-center justify-between w-[95%]">
-                                    <strong>"I want to store properties on anonymous users"</strong>
-                                    <span>
-                                        <div className="border border-green rounded px-1 py-0.5 text-green font-bold uppercase text-sm">
-                                            Yes
-                                        </div>
-                                    </span>
+                            <div className="flex gap-8">
+                                <div>
+                                    <p className="m-0 text-sm opacity-70">Pricing starts at </p>
+                                    <p className="m-0">
+                                        <strong>
+                                            $0.00005
+                                        </strong>
+                                        <span className="opacity-70 text-sm">/event</span>
+                                    </p>
                                 </div>
-                                <p className="text-sm text-primary/75 dark:text-primary-dark/75 pl-4 mb-0">
-                                    <span className="border border-red dark:border-yellow text-xs text-red dark:text-yellow font-semibold uppercase px-1 py-0.5 rounded-sm">
-                                        Most common
-                                    </span>{' '}
-                                    Read how to calculate this below
-                                </p>
-                            </summary>
-                            <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
-                                <p className="mb-2">
-                                    <strong className="text-green">
-                                        Yes, you'll use person profiles any time you provide person information to
-                                        store.
-                                    </strong>{' '}
-                                    This will allow you to store things like site preferences (eg. dark mode) and more
-                                    on non-identified users and still leverage all the benefits of person profiles.
-                                </p>
-                                <p className="mb-0">
-                                    It also allows you to merge anonymous and identified users, so you can track the
-                                    same user from the first time they visit your site through to when they sign up.
-                                </p>
-                            </div>
-                        </details>
-
-                        <details>
-                            <summary className="cursor-pointer">
-                                <div className="inline-flex items-center justify-between w-[95%]">
-                                    <strong>"I only want to track website visits (like Google Analytics)"</strong>
-                                    <span>
-                                        <div className="border border-red rounded px-1 py-0.5 text-red font-bold uppercase text-sm">
-                                            No
-                                        </div>
-                                    </span>
+                                <div className="text-2xl font-bold pt-3">+</div>
+                                <div className="flex-1">
+                                    <p className="m-0 text-sm opacity-70">Person profile add-on</p>
+                                    <p className="m-0">
+                                        <strong>
+                                            $0.000198
+                                        </strong>
+                                        <span className="opacity-70 text-sm">/event</span>
+                                    </p>
+                                    <p className="text-green m-0 text-sm font-semibold">First 1 million events/mo free</p>
                                 </div>
-                                <p className="text-sm opacity-75 pl-4 mb-0">
-                                    Set <em>Enhanced persons</em> to <strong>0%</strong>
-                                </p>
-                            </summary>
-                            <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
-                                <p className="mb-0">
-                                    <strong>No, you don't need events with person profiles</strong> to track anonymous
-                                    users. You'll get basic attribution info (like UTM source) but it can't be used to
-                                    analyze things like top performing marketing channels as there's no way to know who
-                                    signed up.
-                                </p>
                             </div>
-                        </details>
 
-                        <details>
-                            <summary className="cursor-pointer">
-                                <div className="inline-flex items-center justify-between w-[95%]">
-                                    <strong>"I only want to track logged in users"</strong>
-                                    <span>
-                                        <div className="border border-green rounded px-1 py-0.5 text-green font-bold uppercase text-sm">
-                                            Yes
-                                        </div>
-                                    </span>
-                                </div>
-                                <p className="text-sm opacity-75 pl-4 mb-0">
-                                    Set <em>Enhanced persons</em> to <strong>100%</strong>
-                                </p>
-                            </summary>
-                            <div className="ml-4 my-2 border border-light dark:border-dark bg-accent dark:bg-accent-dark p-2 rounded [&_p]:text-sm">
-                                <p className="mb-0">
-                                    <strong className="text-green">
-                                        Yes, you will use person profiles with any identified users
-                                    </strong>{' '}
-                                    so you can store information about the person (like an email address or internal
-                                    ID).
-                                </p>
-                            </div>
-                        </details>
-                    </div>
+                            <h4 className="mt-4 pt-4 border-t border-light dark:border-dark mb-0">Further reading</h4>
+                            <p className="mb-0">Learn more about configuring person profiles in the docs.</p>
 
-                    <h3 className="text-xl border-b border-light dark:border-dark pb-1 mb-2">Calculating usage</h3>
-                    <p className="text-[15px] mb-2">
-                        If you already track website visits, the best way to gauge person profile usage is to determine
-                        what percentage of event volume is <em>anonymous traffic</em> vs. identified product users.
-                    </p>
-                    <p className="text-[15px] mb-2">
-                        If you currently use Google Analytics in conjunction with a product analytics tool, you can
-                        compare the traffic volume (page views) in Google Analytics and the event volume in your product
-                        anaytics solution to find what percentage of your event volume is anonymous.
-                    </p>
-                    <p className="text-[15px] mb-2">
-                        For example, if 75% of your total event volume (between website and product) is anonymous
-                        website traffic, you'll need person profiles for the remaining 25% of events.
-                    </p>
-                    <p className="text-[15px]">
-                        Note that you'll need to adjust this ratio if you want to store custom properties on anonymous
-                        users, as these require person profiles even if you don't know their email address yet.
-                    </p>
+                            <CallToAction href="/docs/data/persons" size="sm" className="mt-4" external>
+                                Read the docs
+                            </CallToAction>
+                        </div>
+                    </section>
                 </div>
             </div>
         </>
