@@ -137,7 +137,7 @@ Make sure to add `implementation("androidx.navigation:navigation-compose:2.4.0")
 
 Our basic set up is now complete. Build and run your app to see it in action.
 
-![Basic setup of the Android app]()
+![Basic setup of the Android app](https://res.cloudinary.com/dmukukwp6/video/upload/v1720610940/posthog.com/contents/android-smaple-app.mp4)
 
 ## 2. Add PostHog to your app
 
@@ -247,6 +247,7 @@ fun WelcomeScreen(navController: NavController, modifier: Modifier = Modifier) {
 
 Now the welcome messages shows up like this in replays:
 
+// TODO add this
 <ProductScreenshot
   imageLight={""} 
   imageDark={""} 
