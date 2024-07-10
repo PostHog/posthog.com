@@ -11,7 +11,7 @@ tags:
   - product os
 ---
 
-If you’ve spent any time online, you’ve seen a cookie consent banner. Because of GDPR and other worldwide internet privacy regulations, some sites need to get consent to track users and use cookies. Along with this is the need to provide, visitors an easy way to opt in or out.
+If you’ve spent any time online, you’ve seen a cookie consent banner. Because of GDPR and other worldwide internet privacy regulations, some sites need to get consent to track users and use cookies. Along with this is the need to provide, visitors with an easy way to opt in or out.
 
 PostHog uses first-party cookies to identify and track users as well as manage user and application information across sessions. They enable us to more accurately track users and help you build better experiences for your users.
 
@@ -23,7 +23,7 @@ To complete this tutorial, you’ll need to a [PostHog instance](https://us.post
 
 This tutorial is for React, but this works for other JavaScript frameworks as well (we have specific tutorials for [Next.js](/tutorials/nextjs-cookie-banner) and [Vue](/tutorials/vue-cookie-banner)).
 
-We'll set up our React app with [Vite](https://vitejs.dev/guide/). To do this, head into command line, then create and install the app (we name ours `react-cookie-banner`).
+We'll set up our React app with [Vite](https://vitejs.dev/guide/). To do this, head into the command line, then create and install the app (we name ours `react-cookie-banner`).
 
 ```bash
 npm create vite@latest react-cookie-consent -- --template react
@@ -152,7 +152,7 @@ Next, we’ll add the logic for setting and storing the user's consent. Back in 
 
 1. Add `handleAcceptCookies` and `handleDeclineCookies` to our buttons that set the consent state and store it in local storage.
 2. Add a `cookieConsentGiven()` function to check if the user has made a consent decision.
-3. Conditionally show our banner depending on that decision being made.
+3. Conditionally show our banner depending whether that decision has been made.
 
 Together, this looks like this:
 
@@ -210,7 +210,7 @@ Back on our site, clicking accept or decline now stores the decision in local st
 So far, our cookie banner is just for show. We want it to control whether PostHog uses cookies or not. This means we either set persistence to `localStorage+cookie` or `memory` depending on the user's consent. We need to do this in two places:
 
 1. Change PostHog's persistence at runtime when a user makes a consent decision in `Banner.jsx`.
-2. Use the consent decision to decide what persistence PostHog should be initialized with in `main.jsx`.
+2. Use the consent decision to decide PostHog's initial persistence in `main.jsx`.
 
 In `Banner.jsx`, we import PostHog and use a `useEffect` hook to change PostHog's persistence at runtime.
 
@@ -304,7 +304,7 @@ To make sure everything works, try the following steps:
 - Go to the site.
 - Delete your PostHog key in local storage and cookies (found in the Application tab after inspecting).
 - Reload the site then click accept or decline on the banner.
-- Check the banner disappears and cookies either are set or not.
+- Check the banner disappears and whether cookiess are set or not.
 - Reload the page and check that the banner doesn’t load.
 
 If all that works, you’ve set up a basic tracking cookies consent banner in React. From here, you can customize it to your needs (such as adding other cookies) and the rest of your site’s design.
