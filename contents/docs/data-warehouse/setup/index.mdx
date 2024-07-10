@@ -45,7 +45,7 @@ On some sources and tables, you can choose the sync method. The options are incr
 
 ### Incremental append
 
-With incremental append replication, you only sync new data. This reduces the total number of rows synced and how long it takes to sync. 
+With incremental append replication, you only sync new data. This reduces the total number of rows synced and how long it takes to sync. This is useful for data that is immutable such as invoices.
 
 When choosing incremental append replication, you must select a field to identify new data. This is often something like a `created_at` timestamp, or an autoincrementing ID. Not all fields are suitable to be used to identify new data, and so we only support the following types as replication keys:
 - `integer` (including `bigint` and `smallint`)
