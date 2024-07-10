@@ -491,7 +491,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                                 <Link href="#">person profile</Link> to the event. (This allows you to send custom
                                 properties like email address or plan name.)
                             </p>
-                            <div className="my-4 grid divide-y divide-border dark:divide-border-dark md:grid-cols-2 gap-4 md:gap-8 border border-light dark:border-dark p-4 bg-tan dark:bg-accent-dark rounded">
+                            <div className="my-4 grid divide-y md:divide-y-0 divide-border dark:divide-border-dark md:grid-cols-2 gap-4 md:gap-8 border border-light dark:border-dark p-4 bg-tan dark:bg-accent-dark rounded">
                                 <div>
                                     <h4 className="m-0 text-base mb-0">Anonymous events</h4>
                                     <p className="m-0 text-sm opacity-70 italic mb-2">Base event price</p>
