@@ -519,7 +519,13 @@ export default function ProductAnalyticsTab({
                         </div>
                     </div>
                     <div className="mt-1 md:mt-0 col-span-3 text-right self-center">
-                        <strong>{formatUSD(totalProductAnalyticsPrice + enhancedPersonsCost.total)}</strong>
+                        <strong>
+                            {formatUSD(
+                                totalProductAnalyticsPrice +
+                                    enhancedPersonsCost.total +
+                                    addons.reduce((acc, addon) => acc + addon.totalCost, 0)
+                            )}
+                        </strong>
                     </div>
 
                     {showBreakdown && (
