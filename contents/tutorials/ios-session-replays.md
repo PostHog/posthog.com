@@ -70,6 +70,18 @@ struct WelcomeView: View {
         Text("Welcome!")
             .font(.largeTitle)
             .padding()
+
+          Button(action: {
+              isLoggedIn = false
+          }) {
+              Text("Logout")
+                  .frame(maxWidth: .infinity)
+                  .padding()
+                  .background(Color.red)
+                  .foregroundColor(.white)
+                  .cornerRadius(10)
+          }
+          .padding(.top, 20)
     }
 }
 
