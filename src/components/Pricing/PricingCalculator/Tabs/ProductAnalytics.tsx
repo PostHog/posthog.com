@@ -8,6 +8,7 @@ import { NumericFormat } from 'react-number-format'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import AutosizeInput from 'react-input-autosize'
+import qs from 'qs'
 
 const getTotalAnalyticsVolume = (analyticsData: any) => {
     return Object.keys(analyticsData).reduce((acc, key) => acc + analyticsData[key].volume, 0)
@@ -24,7 +25,7 @@ const getTotalEnhancedPersonsVolume = (analyticsData: any) => {
     )
 }
 
-const analyticsSliders = [
+export const analyticsSliders = [
     {
         label: 'Website analytics',
         types: [{ type: 'websiteAnalyticsEvents' }],
@@ -347,15 +348,7 @@ const SliderToggle = ({
     )
 }
 
-export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
-    const [analyticsData, setAnalyticsData] = useState(
-        analyticsSliders.reduce((acc, slider) => {
-            slider.types.forEach(({ type, enhanced }) => {
-                acc[type] = { volume: 0, cost: 0, enhanced: enhanced || false }
-            })
-            return acc
-        }, [])
-    )
+export default function ProductAnalyticsTab({ activeProduct, setProduct, analyticsData, setAnalyticsData }) {
     const [showBreakdown, setShowBreakdown] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
 
@@ -413,6 +406,16 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct }) {
 
     useEffect(() => {
         Object.keys(analyticsData).forEach((key) => setAnalyticsVolume(key, analyticsData[key].volume))
+        const urlParams = new URLSearchParams(window.location.search)
+        const volumes = qs.parse(urlParams.toString())
+        if (volumes['product_analytics']?.types) {
+            Object.keys(volumes['product_analytics'].types).forEach((subtype) => {
+                const volume = volumes['product_analytics'].types[subtype]?.volume
+                if (volume) {
+                    setAnalyticsVolume(subtype, Number(volume))
+                }
+            })
+        }
     }, [])
 
     return (

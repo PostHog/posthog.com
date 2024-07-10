@@ -8,7 +8,9 @@ import { allProductsData } from '../Pricing'
 import useProducts from 'hooks/useProducts'
 import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
 import { PricingTiers } from '../Plans'
-import ProductAnalyticsTab from './Tabs/ProductAnalytics'
+import ProductAnalyticsTab, { analyticsSliders } from './Tabs/ProductAnalytics'
+import qs from 'qs'
+import { useUser } from 'hooks/useUser'
 
 const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
     const addon = addons.find((addon) => addon.type === type)
@@ -77,14 +79,20 @@ const productTabs = {
     product_analytics: ProductAnalyticsTab,
 }
 
-const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct }) => {
+const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, analyticsData, setAnalyticsData }) => {
     const { type, cost, volume, billingData, slider, costByTier } = activeProduct
     const [showBreakdown, setShowBreakdown] = useState(false)
 
     return (
         <>
             <div>
-                {productTabs[activeProduct.type]?.({ activeProduct, setVolume, setProduct }) ||
+                {productTabs[activeProduct.type]?.({
+                    activeProduct,
+                    setVolume,
+                    setProduct,
+                    analyticsData,
+                    setAnalyticsData,
+                }) ||
                     (activeProduct.name == 'A/B testing' ? (
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-4 py-3 mb-2 text-sm">
                             A/B testing is currently bundled with Feature flags and shares a free tier and volume
@@ -179,12 +187,36 @@ const addonDefaults = {
     },
 }
 
+const CopyURLButton = ({ onClick }) => {
+    const [copied, setCopied] = useState(false)
+    const copyURL = () => {
+        onClick()
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+    }
+
+    return (
+        <button className="text-sm font-bold text-red dark:text-yellow" onClick={copyURL}>
+            {copied ? 'Copied!' : 'Generate calculator URL'}
+        </button>
+    )
+}
+
 export default function Tabbed() {
     const {
         allProductData: {
             nodes: [{ products: billingProducts }],
         },
     } = useStaticQuery(allProductsData)
+    const { user } = useUser()
+    const [analyticsData, setAnalyticsData] = useState(
+        analyticsSliders.reduce((acc, slider) => {
+            slider.types.forEach(({ type, enhanced }) => {
+                acc[type] = { volume: 0, cost: 0, enhanced: enhanced || false }
+            })
+            return acc
+        }, [])
+    )
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
     const [activeTab, setActiveTab] = useState(0)
     const { products, setVolume, setProduct, monthlyTotal } = useProducts()
@@ -224,6 +256,37 @@ export default function Tabbed() {
             platformAddons.reduce((acc, addon) => acc + (addon.checked ? addon.price : 0), 0),
         [monthlyTotal, productAddons, platformAddons]
     )
+
+    const generateURL = () => {
+        const volumes = {}
+        products.forEach((product) => {
+            if (product.volume) {
+                volumes[product.type] = { volume: product.volume }
+                if (product.type === 'product_analytics') {
+                    const types = {}
+                    Object.keys(analyticsData).forEach((type) => {
+                        const volume = analyticsData[type].volume
+                        if (volume) {
+                            types[type] = { volume: analyticsData[type].volume }
+                        }
+                    })
+                    volumes['product_analytics'].types = types
+                }
+            }
+        })
+        const URL = `${window.location.origin}${window.location.pathname}?${qs.stringify(volumes, {
+            encodeValuesOnly: true,
+        })}`
+        navigator.clipboard.writeText(URL)
+    }
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search)
+        const volumes = qs.parse(urlParams.toString())
+        Object.keys(volumes).forEach((type) => {
+            setVolume(type, volumes[type].volume)
+        })
+    }, [])
 
     return (
         <div>
@@ -284,6 +347,8 @@ export default function Tabbed() {
                         activeProduct={activeProduct}
                         setVolume={setVolume}
                         setProduct={setProduct}
+                        analyticsData={analyticsData}
+                        setAnalyticsData={setAnalyticsData}
                     />
                 </div>
                 <div className="md:col-span-4 lg:col-span-3 pt-2 pb-0 md:pt-2.5 md:pb-2 pl-4 md:pl-3 md:pr-6 border-t border-light dark:border-dark"></div>
@@ -332,12 +397,16 @@ export default function Tabbed() {
                     })}
                 </div>
             </div>
-            <div className="flex items-center justify-between p-3 bg-accent dark:bg-accent-dark rounded">
+            <div className="flex items-center justify-between p-3 bg-accent dark:bg-accent-dark rounded relative">
                 <div>
                     <h3 className="m-0 text-[15px]">Estimated total</h3>
                     <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
                 </div>
-                <p className="m-0 font-bold">${totalPrice.toLocaleString()}</p>
+
+                <div className="text-right">
+                    <p className="m-0 font-bold leading-none">${totalPrice.toLocaleString()}</p>
+                    {user?.role.type === 'moderator' && <CopyURLButton onClick={generateURL} />}
+                </div>
             </div>
         </div>
     )
