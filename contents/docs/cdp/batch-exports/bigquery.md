@@ -63,7 +63,7 @@ Navigate to IAM and click on Grant Access to arrive at this screen:
 
 ## Models
 
-This section describes the models supported by this destination.
+This section describes the models that can be exported to BigQuery.
 
 ### Events model
 
@@ -90,17 +90,18 @@ Some fields can be either `STRING` or `JSON` type depending on whether the corre
 
 The schema of the model as created in BigQuery is:
 
-| Field       | Type               | Description                                                                 |
-|-------------|--------------------|-----------------------------------------------------------------------------|
-| team_id     | `INT64`            | The ID of the project (team) the person belongs to                          |
-| distinct_id | `STRING`           | A `distinct_id` associated with the person                                  |
-| person_id   | `STRING`           | The ID of the person associated to this (`team_id`, `distinct_id`) pair     |
-| properties  | `STRING` or `JSON` | A JSON object with all the latest properties of the person                  |
-| version     | `INT64`            | The version of the person associated with a (`team_id`, `distinct_id`) pair |
+| Field                      | Type               | Description                                                                                          |
+|----------------------------|--------------------|------------------------------------------------------------------------------------------------------|
+| team_id                    | `INT64`            | The id of the project (team) the person belongs to                                                   |
+| distinct_id                | `STRING`           | A `distinct_id` associated with the person                                                           |
+| person_id                  | `STRING`           | The id of the person associated to this (`team_id`, `distinct_id`) pair                              |
+| properties                 | `STRING` or `JSON` | A JSON object with all the latest properties of the person                                           |
+| person_version             | `INT64`            | The version of the person properties associated with a (`team_id`, `distinct_id`) pair               |
+| person_distinct_id_version | `INT64`            | The version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair |
 
 The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`. The `properties` field can be either `STRING` or `JSON`, depending on whether the corresponding checkbox is marked or not when creating the batch export.
 
-#### How is a merge executed?
+#### How is the persons model kept up to date?
 
 Exporting mutable data (like the persons model) requires executing a merge operation to apply new updates to existing rows. Executing a merge in BigQuery involves the following steps:
 
@@ -159,5 +160,5 @@ WHERE
 GROUP BY
   event
 ORDER BY
-unique_persons_count DESC
+  unique_persons_count DESC
 ```
