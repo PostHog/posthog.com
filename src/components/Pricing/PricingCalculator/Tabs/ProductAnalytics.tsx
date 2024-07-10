@@ -491,7 +491,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                                 <Link href="#">person profile</Link> to the event. (This allows you to send custom
                                 properties like email address or plan name.)
                             </p>
-                            <div className="my-4 grid grid-cols-2 gap-8 border border-light dark:border-dark p-4 bg-tan dark:bg-accent-dark rounded">
+                            <div className="my-4 grid divide-y divide-border dark:divide-border-dark md:grid-cols-2 gap-4 md:gap-8 border border-light dark:border-dark p-4 bg-tan dark:bg-accent-dark rounded">
                                 <div>
                                     <h4 className="m-0 text-base mb-0">Anonymous events</h4>
                                     <p className="m-0 text-sm opacity-70 italic mb-2">Base event price</p>
@@ -509,7 +509,7 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                                     </p>
                                     <p className="text-green m-0 text-sm font-bold">First 1 million events/mo free</p>
                                 </div>
-                                <div>
+                                <div className="pt-4 md:pt-0">
                                     <h4 className="m-0 text-base mb-0">Identified events</h4>
                                     <p className="m-0 text-sm opacity-70 italic mb-2">
                                         Base event price + person profile add-on
@@ -542,35 +542,39 @@ export default function ProductAnalyticsTab({ activeProduct, setProduct, analyti
                                 <div>
                                     <h4 className="text-lg m-0">Anonymous events</h4>
                                     {anonymousUsed.length > 0 && (
-                                        <p className="opacity-70 m-0">
+                                        <p className="opacity-70 m-0 text-sm">
                                             <strong>Used for:</strong>{' '}
                                             {anonymousUsed.map((type) => getLabelByType(type)).join(', ')}
                                         </p>
                                     )}
-                                    <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
-                                        <PricingTiers
-                                            plans={[{ tiers: activeProduct.costByTier }]}
-                                            unit={activeProduct.billingData.unit}
-                                            type={'product_analytics'}
-                                            showSubtotal
-                                        />
+                                    <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
+                                        <div className="p-1 min-w-[500px] md:min-w-auto border border-border dark:border-dark rounded-md mt-2">
+                                            <PricingTiers
+                                                plans={[{ tiers: activeProduct.costByTier }]}
+                                                unit={activeProduct.billingData.unit}
+                                                type={'product_analytics'}
+                                                showSubtotal
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <div>
                                     <h4 className="text-lg m-0">Identified events (with person profiles)</h4>
                                     {identifiedUsed.length > 0 && (
-                                        <p className="opacity-70 m-0">
+                                        <p className="opacity-70 m-0 text-sm">
                                             <strong>Used for:</strong>{' '}
                                             {identifiedUsed.map((type) => getLabelByType(type)).join(', ')}
                                         </p>
                                     )}
-                                    <div className="p-1 border border-border dark:border-dark rounded-md mt-2">
-                                        <PricingTiers
-                                            plans={[{ tiers: enhancedPersonsCost.costByTier }]}
-                                            unit={activeProduct.billingData.unit}
-                                            type={'product_analytics'}
-                                            showSubtotal
-                                        />
+                                    <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
+                                        <div className="p-1 min-w-[500px] md:min-w-auto border border-border dark:border-dark rounded-md mt-2">
+                                            <PricingTiers
+                                                plans={[{ tiers: enhancedPersonsCost.costByTier }]}
+                                                unit={activeProduct.billingData.unit}
+                                                type={'product_analytics'}
+                                                showSubtotal
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

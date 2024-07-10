@@ -23,7 +23,7 @@ const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle
 }
 
 const Row = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
-    return <div className={`flex items-center gap-4 py-1.5 px-4 ${className}`}>{children}</div>
+    return <div className={`flex items-center gap-2 lg:gap-4 px-2 lg:px-4 py-1.5 ${className}`}>{children}</div>
 }
 
 const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
@@ -47,7 +47,7 @@ const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
 }
 
 const Title = ({ title, className = '' }: { title: string; className?: string }) => {
-    return <h5 className={`m-0 text-[15px] opacity-70 font-normal ${className}`}>{title}</h5>
+    return <h5 className={`m-0 text-sm lg:text-[15px] opacity-70 font-normal ${className}`}>{title}</h5>
 }
 
 export const InclusionOnlyRow = ({ plans }) => (
@@ -93,9 +93,9 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
         <>
             {showSubtotal && (
                 <Row className="grid grid-cols-12">
-                    <h4 className="m-0 col-span-4 text-base">Allocation</h4>
+                    <h4 className="m-0 col-span-3 text-base">Allocation</h4>
                     <h4 className="m-0 col-span-4 text-base">Price</h4>
-                    <h4 className="m-0 col-span-2 text-base text-right">Your selection</h4>
+                    <h4 className="m-0 col-span-3 text-base text-right">Your selection</h4>
                     <h4 className="m-0 col-span-2 text-base text-right">Subtotal</h4>
                 </Row>
             )}
@@ -107,7 +107,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                         key={`type-${index}`}
                     >
                         <Title
-                            className={`${compact ? 'text-sm' : ''} ${showSubtotal ? 'col-span-4' : 'flex-grow'}`}
+                            className={`${compact ? 'text-sm' : ''} ${showSubtotal ? 'col-span-3' : 'flex-grow'}`}
                             title={
                                 index === 0
                                     ? `First ${formatCompactNumber(up_to)} ${unit}s`
@@ -194,8 +194,8 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                         </div>
                         {showSubtotal && (
                             <>
-                                <div className={`col-span-2 text-right font-code text-[15px]`}>{eventsInThisTier.toLocaleString()}</div>
-                                <div className={`col-span-2 text-right`}>{formatUSD(tierCost)}</div>
+                                <div className={`col-span-3 text-right font-code text-sm`}>{eventsInThisTier.toLocaleString()}</div>
+                                <div className={`col-span-2 text-right text-sm font-bold`}>{formatUSD(tierCost)}</div>
                             </>
                         )}
                     </Row>
