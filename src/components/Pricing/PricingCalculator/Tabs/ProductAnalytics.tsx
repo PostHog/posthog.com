@@ -31,13 +31,13 @@ export const getTotalEnhancedPersonsVolume = (analyticsData: any) => {
 
 export const analyticsSliders = [
     {
-        label: 'Website analytics',
-        types: [{ type: 'websiteAnalyticsEvents', label: 'Anonymous events' }],
+        label: 'Product analytics',
+        types: [{ type: 'productAnalyticsEvents', label: 'Identified events', enhanced: true }],
         checked: true,
     },
     {
-        label: 'Product analytics',
-        types: [{ type: 'productAnalyticsEvents', label: 'Identified events', enhanced: true }],
+        label: 'Website analytics',
+        types: [{ type: 'websiteAnalyticsEvents', label: 'Anonymous events' }],
         checked: true,
     },
     {
