@@ -36,6 +36,8 @@ Once done, PostHog will automatically pull and format your Hubspot data for quer
 
 Now that your Hubspot data is synced into PostHog, you can use it to create insights for your report. Each requires you to create a [new insight in the product analytics tab](https://us.posthog.com/project/insights/new).
 
+> **Want to get started fast?** Check out our [Hubspot starter report template](/templates/hubspot-report-dashboard).
+
 ### Deal count
 
 To start, we create a trend of deal count over time.

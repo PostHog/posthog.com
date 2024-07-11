@@ -61,7 +61,7 @@ It's going to be an intense week, but you're also going to solve so many real pr
 
 As an engineer, when a question comes in your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. Hence the following guidelines:
 
-- Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/comms/customer-support), but you should always try to respond to tickets quickly. 
+- Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/comms/customer-support#response-targets), but you should always try to respond to tickets quickly. 
   - If you're ready to look into the issue and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
@@ -71,7 +71,7 @@ As an engineer, when a question comes in your first instinct is to give them an 
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 - If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
 
-If you have any questions about how or when to communicate with users, you can always ask [the Comms team](/handbook/comms/overview) for help. 
+If you have any questions about how or when to communicate with users, you can always ask [the Comms team](/handbook/comms/comms-team) for help. 
 
 ## How do I prioritize?
 
@@ -129,7 +129,7 @@ Best,
 
 ## How do I use Zendesk?
 
-We use [Zendesk Support](https://zendesk.com/) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
+We use [Zendesk Support]([https://zendesk.com/](https://posthoghelp.zendesk.com)) as our internal platform to manage support tickets. This ensures that we don't miss anyone, especially when their request is passed from one person to another at PostHog, or if they message us over the weekend.
 
 Zendesk allows us to manage all our customer conversations in one place and reply through Slack or email.
 
@@ -154,12 +154,9 @@ Tips:
 
 #### Avoiding duplication of effort in ZenDesk
 
-To avoid having more than one person working on the same ticket at the same time, assign a ticket to yourself before you start working on it:
+Each team handles ZenDesk queues (views) in slightly different ways.  Check in with your team about whether or not to assign tickets to yourself, or keep them assigned to the team/group level. Comms team folks, who work on tickets from multiple queues, often assign tickets to themselves, (and when escalating, will assign the ticket back to the team/group.) 
 
-1. Click on the ticket to open it
-2. In the left column, click the `take it` link, above the `Assignee menu`
-3. Above the compose field, change `Public reply` to `Internal note` (prevents spamming Slack channels)
-4. In the lower-right, open the `Submit as` menu and select `Open`
+For unassigned tickets, keep an eye out for whether someone else is already viewing a ticket (will appear in the upper-left of a ticket you're viewing, with their name, avatar and `also viewing`.)  Use those as clues to avoid working on a ticket that someone is already working on (and communicate with each other when in doubt.  Err on the side of making sure the ticket gets responded to within SLA/response target times.)
 
 Also, avoid cherry-picking tickets. Pick the ticket that is closest to breaching our [response targets](/handbook/comms/customer-support#response-targets).
 
@@ -167,15 +164,28 @@ Also, avoid cherry-picking tickets. Pick the ticket that is closest to breaching
 
 When responding to a ticket you should also choose an appropriate status according to the following:
 
-* **New** - A newly created ticket, you shouldn't need to use this when responding
-* **Open** - The ticket is still awaiting a response/further investigation from someone in PostHog (if it's not you make sure the other person/team knows about it).
-* **On-Hold** - We have enough information from the customer but a resolution is blocked by something internal to PostHog (e.g. query performance, PoE).  You should let them know that this is the case.
-* **Pending** - The problem isn't solved and you have asked for further information from the customer.
-* **Solved** - You've provided a solution and don't expect to do any further work on the ticket.  If it's related to a feature request then you should provide the customer a link to GitHub so that they can follow along with development.
+* **New** - A newly created ticket, you shouldn't need to use this when responding (Note: Some tickets, such as tickets created via Slack, are changed from `New` to `Open` by automated internal notes added just after the ticket is created.)
+* **Open** - The ticket is still awaiting a response/further investigation from someone in PostHog (if you've worked on the ticket and expect someone else to work on it next, make sure the other person/team knows about it by leaving an internal note on the ticket.)
+* **On-Hold** - (*pauses the SLA timer*) Use this one sparingly, GitHub is better for tracking open bugs, feature requests, and technical debt, and `On-Hold` tickets are too easily overlooked.  If you do need to put a ticket `On-Hold`, reply to the ticket to let the customer know.  (If you've opened a bug ticket or feature request, `On-Hold` isn't needed, see `Solved` below.)
+* **Pending** - (*pauses the SLA timer*) Use this for most replies to customers. Even if you think the issue is solved, the user may disagree, so `Solved` may not spark joy. When a user doesn't reply to a `Pending` ticket within 7 days, the ticket is auto-solved.
+* **Solved** - (*stops the SLA timer*) The user has replied to confirm that the ticket is resolved, or you've created a bug report or feature request and shared the link with the user so they can follow it for updates. 
 
-Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. 
+#### Temp orgs for free email users
 
+To reduce some unintended consequences of ZenDesk's unavoidable use of email address domain names to associate users with organizations, we have ZenDesk orgs for common free email providers.  
 
+An example of these orgs: `Gmail user - please assign to correct org`
+
+When we get a ticket from a user with an `@gmail.com` address who has not already been manually assigned to an existing ZenDesk org, that user will be assigned to the `Gmail user - ...` org (unless their PostHog org doesn't exist in ZenDesk yet, in which case the correct org will be created in ZenDesk.)
+
+When you see a user assigned to a free email org on a ticket, and it is not a 'community question' ticket, please assign the user to their correct org, which is found on the `Admin` info line in the body of the ticket:
+
+1. Click on the user's name, to the right of the org name
+2. Click in the `Org.` field to change the org name
+3. Click anywhere outside the field to save the change
+Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. After 20 days, responses will create a follow-up ticket with a link to the original ticket.
+
+Tickets that have been `Solved` will receive a CSAT survey after 3 days.
 
 #### Content Warnings
 

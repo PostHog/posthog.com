@@ -18,6 +18,7 @@ import {
     IconServer,
     IconStack,
     IconToggle,
+    IconGlobe,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
@@ -216,7 +217,7 @@ export const ProductOS = () => {
                                     One platform, <span className="text-red dark:text-yellow">loads of products</span>
                                 </h2>
                                 <p className="max-w-2xl">
-                                    PostHog offers 7+ products in one (and counting).{' '}
+                                    PostHog offers 8+ products in one (and counting).{' '}
                                     <strong>Use only what you want. But...</strong> if you want to try a new PostHog
                                     product, there are benefits of using Product OS as your platform for all your
                                     product data.
@@ -253,16 +254,21 @@ export const ProductOS = () => {
                                 <ProductIcon name="Browse apps" url="/apps" color="blue" icon={<IconPlus />} />
                             </div>
                         </div>
-                        <ul className={`list-none p-0 grid md:grid-cols-2 gap-8`}>
+                        <ul className={`list-none p-0 grid md:grid-cols-3 gap-8`}>
                             <Subfeature
                                 title="Retroactive data with autocapture"
-                                description="If you’re running a web app with <a href='/docs/product-analytics/autocapture'>autocapture</a> enabled, some PostHog products can backfill historical data, meaning you can get value from a new product without waiting for data to trickle in."
+                                description="If you’ve enabled <a href='/docs/product-analytics/autocapture'>autocapture</a>, some products can backfill historical data, meaning you don't have to wait for data to trickle in."
                                 icon={<IconRevert />}
                             />
                             <Subfeature
-                                title="One-click setup with no new account provisioning"
-                                description="Trying a new PostHog product doesn't require new code to be deployed. You don't need to invite your team since they already have PostHog accounts."
+                                title="1-click setup, no new account provisioning"
+                                description="Trying a new PostHog product doesn't require new code. You don't need to invite your team since they already have PostHog accounts."
                                 icon={<IconCursorClick />}
+                            />
+                            <Subfeature
+                                title="A built-in, fully managed reverse proxy"
+                                description="Tired of losing data to ad blockers? Route traffic through our infrastructure for free and manage your reverse proxy more easily."
+                                icon={<IconGlobe />}
                             />
                         </ul>
                     </div>
@@ -306,17 +312,24 @@ export const ProductOS = () => {
                     <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
                         <div className="flex-1">
                             <h2 className="text-4xl">
-                                This bit is boring, but <span className="text-red dark:text-yellow">important</span>
+                                Security is usually boring,{' '}
+                                <span className="text-red dark:text-yellow">but not on PostHog</span>
                             </h2>
                             <p>
-                                We poke fun at a lot of things, but we take security seriously. We're{' '}
-                                <b>SOC 2 Type-1 certified, GDPR ready, HIPAA compliant</b>, and we share our security
-                                reports publicly. Check <a href="/handbook/company/security">our security docs</a> for
-                                more!
+                                We take security seriously, but that doesn't mean we can't have fun with it. If you need
+                                a data processing agreement then{' '}
+                                <a href="https://posthog.com/dpa">try our DPA generator</a>. It's the only DPA generator
+                                in the world inspired by Taylor Swift. Probably.
+                                <br></br>
+                                <br></br>
+                                Need more serious assurances? We're{' '}
+                                <b>SOC 2 Type-1 certified, GDPR ready, HIPAA compliant</b>, and we share
+                                <a href="/handbook/company/security"> our security reports</a> publicly. You can rest
+                                easy.
                             </p>
                         </div>
                         <aside className="shrink-0 md:basis-[300px] xl:basis-[500px]">
-                            <StaticImage src="./images/alert.png" alt="" className="w-full max-w-[262px]" />
+                            <StaticImage src="./images/swift.png" alt="" className="w-full max-w-[262px]" />
                         </aside>
                     </div>
                 </section>
@@ -400,10 +413,10 @@ export const ProductOS = () => {
                         Here are a few more features of Product OS. For more details about how it works,{' '}
                         <Link to="/docs">visit the docs</Link>.
                     </p>
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
                         <TextCard
                             title="Autocapture"
-                            description="Add PostHog.js to your website or web app to track all event data and retroactively define events."
+                            description="Add PostHog.js to your website or web app to track all event data easily and retroactively define events."
                         />
                         <TextCard
                             title="Webhooks"
@@ -411,11 +424,7 @@ export const ProductOS = () => {
                         />
                         <TextCard
                             title="Warehouse sync"
-                            description="Sync data with Segment or Rudderstack – or use PostHog's built in warehouse."
-                        />
-                        <TextCard
-                            title="Reverse proxy"
-                            description="Send events to PostHog Cloud using your own domain."
+                            description="Sync data with Segment or Rudderstack – or use our built-in data warehouse to bring all your business data into PostHog for analysis."
                         />
                     </ul>
                 </section>
