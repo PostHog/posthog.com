@@ -163,7 +163,7 @@ Tickets which have been set to **Pending** will auto-solve after 7 days.  Custom
 
 To reduce some unintended consequences of ZenDesk's unavoidable use of email address domain names to associate users with organizations, we have ZenDesk orgs for common free email providers.  
 
-An example of these orgs: `Gmail user - pelase assign to correct org`
+An example of these orgs: `Gmail user - please assign to correct org`
 
 When we get a ticket from a user with an `@gmail.com` address who has not already been manually assigned to an existing ZenDesk org, that user will be assigned to the `Gmail user - ...` org (unless their PostHog org doesn't exist in ZenDesk yet, in which case the correct org will be created in ZenDesk.)
 
