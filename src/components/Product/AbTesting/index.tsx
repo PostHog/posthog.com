@@ -54,7 +54,7 @@ const features = [
     },
     {
         title: 'Targeting & exclusion rules',
-        description: 'Set criteria for user location, user property, cohort, or group',
+        description: 'Set criteria for user location, person property, cohort, or group',
         image: <StaticImage src="./images/targeting-ab.png" width={428} />,
         border: true,
     },
@@ -90,7 +90,7 @@ const subfeatures = [
     },
     {
         title: 'Dynamic cohort support',
-        description: 'Add new users to an experiment automatically by setting a user property',
+        description: 'Add new users to an experiment automatically by setting a person property',
         icon: <IconPeople />,
     },
 ]
@@ -218,7 +218,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Target by user property',
+        feature: 'Target by person property',
         companies: {
             Pendo: true,
             Optimizely: true,
@@ -397,7 +397,7 @@ export const ProductAbTesting = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
                                         src="../../../images/products/competitors-ab.png"

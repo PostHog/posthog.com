@@ -24,6 +24,7 @@ import FeatureRequests from 'components/InsidePostHog/FeatureRequests'
 import AppStatus from 'components/AppStatus'
 import qs from 'qs'
 import slugify from 'slugify'
+import uniqBy from 'lodash/uniqBy'
 
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -73,6 +74,7 @@ const SlackPosts = () => {
     useEffect(() => {
         const slackPostsQuery = qs.stringify(
             {
+                sort: ['createdAt:desc'],
                 populate: {
                     question: {
                         populate: ['topics', 'profile'],
@@ -99,7 +101,7 @@ const SlackPosts = () => {
         <div className="py-4">
             <h3 className="text-base">From the PostHog Slack</h3>
             <ul className="list-none m-0 p-0 space-y-4">
-                {slackPosts.map(
+                {uniqBy(slackPosts, 'attributes.question.data.attributes.topics.data[0].id').map(
                     ({
                         id,
                         attributes: {

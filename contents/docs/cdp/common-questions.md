@@ -4,7 +4,7 @@ title: Troubleshooting and FAQs
 
 ## My transformation or destination isn't working, what do I do?
 
-1. Checking that the transformation or destination is enabled with the correct configuration options in the [data pipeline tab](https://app.posthog.com/apps). You can find the correct configuration options in the [transformation or destination's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.
+1. Checking that the transformation or destination is enabled with the correct configuration options in the [data pipeline tab](https://app.posthog.com/pipeline). You can find the correct configuration options in the [transformation or destination's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.
 
 2. Click "Logs & metrics" and go to the `Metrics` tab to check that the transformation or destination is processing events without errors.
 
@@ -29,7 +29,7 @@ There are two options for recreating this functionality:
 There are a few ways to capture a user doing an event for the first time. We cover a few of these in our tutorials on [tracking new and returning users](/tutorials/track-new-returning-users) and [first touch attribution](/tutorials/first-last-touch-attribution).
 
 - Create a [cohort](/docs/data/cohorts) matching users who have done an event for the first time recently.
-- Use a custom event to set a [person](/docs/getting-started/user-properties) or [event property](/docs/data/events). For example, you can set a `first_seen` property with the `$set_once` option.
+- Use a custom event to set a [person](/docs/getting-started/person-properties) or [event property](/docs/data/events). For example, you can set a `first_seen` property with the `$set_once` option.
 - Use [HogQL](/docs/product-analytics/sql) to query for the `min(timestamp)` of an event.
 
 ## How do I migrate events or rows into PostHog?

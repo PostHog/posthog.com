@@ -79,7 +79,7 @@ const features = [
     {
         title: 'Developer-friendly automation',
         description:
-            'Automated usage reports, IP address resolution (for location-based targeting), and recall user properties to avoid passing them manually every time',
+            'Automated usage reports, IP address resolution (for location-based targeting), and recall person properties to avoid passing them manually every time',
         image: <StaticImage src="./images/reports.png" width={420} />,
         border: true,
     },
@@ -210,7 +210,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Target by user properties',
+        feature: 'Target by person properties',
         companies: {
             LaunchDarkly: true,
             Optimizely: true,
@@ -310,7 +310,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Recall user properties by default',
+        feature: 'Recall person properties by default',
         companies: {
             LaunchDarkly: false,
             Optimizely: false,
@@ -498,7 +498,7 @@ export const ProductFeatureFlags = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
                                         src="../../../images/products/competitors-ff.png"

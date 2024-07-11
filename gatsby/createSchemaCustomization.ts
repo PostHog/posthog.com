@@ -40,10 +40,14 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       url: String
       username: String
       teamData: TeamData
+      profile: SqueakProfile @link(by: "github", from: "url")
     }
     type FrontmatterSEO {
       metaTitle: String
       metaDescription: String
+    }
+    type AuthorsJson implements Node {
+      profile: SqueakProfile @link(by: "squeakId", from: "profile_id")
     }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")

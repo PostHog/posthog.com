@@ -29,12 +29,13 @@ export default function BookADemo() {
 
                     <div className="md:flex items-center md:space-x-4">
                         <p className="mb-2 md:mb-0 text-[15px]">
-                            <Link to="/community/profiles/1727">Mine Kansu</Link>, from Customer Success, made this demo
-                            video. If you have needs that aren't covered here, she's happy to chat!
+                            <Link to="/community/profiles/1727">Mine Kansu</Link>, from our Sales team, made this demo
+                            video. If you're exploring a paid plan and have questions after checking it out, our team
+                            are happy to chat!
                         </p>
 
                         <CallToAction type="secondary" to="/talk-to-a-human" className="whitespace-nowrap">
-                            Request a call
+                            Talk to a helpful person
                         </CallToAction>
                     </div>
                 </div>

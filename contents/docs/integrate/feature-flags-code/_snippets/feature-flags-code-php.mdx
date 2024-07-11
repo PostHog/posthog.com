@@ -75,7 +75,7 @@ To disable it, set the `sendFeatureFlagEvents` argument in your function call, l
 $isMyFlagEnabledForUser = PostHog::isFeatureEnabled(
     key: 'flag-key',
     distinctId: 'distinct_id_of_your_user',
-    sendFeatureFlagEvents: true
+    sendFeatureFlagEvents: false
 )
 ```
 

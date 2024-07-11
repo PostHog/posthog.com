@@ -1,17 +1,36 @@
-James as a Service -> Clickhouse as a Service
+**Decide on the future of where we store our data and work towards that**
 
-* **Key Results:**
-    * Better visibility
-        * Regularly testing backups
-        * Monitoring/alerting
-        * Mutations
-        * Moves
-    * Management
-        * Managing/killing mutations
-    * Self serve
-        * Schema design feedback (Jams non blocking)
-        * Schema management
-    * Automation
-        * Replace/Upgrade replicas
-            * Upgrading to 24.04
-            * Disk configs
+ByConity is an interesting alternative to CH that incorporates a few features that we require:
+- Rules and cost based query optimizer
+- Separation of Storage and Compute
+- Virtual Warehouses
+
+A major goal for us this quarter is to evaluate the feasibility of this migration.
+
+
+**List of all goals**
+
+- Support P0 tasks such as 
+    - Deletes
+    - Keeping clusters happy
+    - provisioning more disks
+    - Schema Reviews
+    - Debugging
+    - Performance
+    - Backups/Restores
+- Decide whether ByConity is the way forward
+    - Load it with data, set up 
+    - Test performance, test the functionality/compatibility gaps
+- Branch in goals depending on ByConity feasibility
+    - If ByConity works, migrate over to it
+        - Enumerate all functionality that doesn’t work and update the functions/contribute to ByConity
+            - Syntax
+        - If it works on metal, put it in k8s with Karpenter
+        - Evaluate which nodes we should use
+    - If ByConity doesn’t work, reshard US to look like EU cluster
+        - All clusters (Dev, US, EU) should be consistent in shape and topology. This will make it easier to manage and maintain the clusters and apply learnings from one cluster to another.
+        - We want all cluster operations to be automated and managed through some form of infra as code that is available in source control.
+        - Schema management on ClickHouse should be entirely automated and managed through source control with no exceptions. This includes Coordinator schemas.
+        - We should be able to spin up and down replicas of any cluster with no manual intervention.
+        - We should be able to upgrade ClickHouse versions with no manual intervention.
+        - We should have tooling / runbooks for resharding (if we continue down the current coordinator path)

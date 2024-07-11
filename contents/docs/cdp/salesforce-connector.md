@@ -21,7 +21,7 @@ You'll also need a Salesforce account to connect to, as well as the relevant lev
 ## Installation
 
 1. Log in to your PostHog instance
-2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
+2.  Click "[Data pipeline](https://us.posthog.com/pipeline)" in the left sidebar
 3. Search for 'Salesforce'
 4. Select the destination, press 'Install' and follow the on-screen instructions
 

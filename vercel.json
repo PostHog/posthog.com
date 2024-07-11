@@ -372,6 +372,7 @@
             "source": "/youraveragetechbro",
             "destination": "/?utm_source=youraveragetechbro&utm_campaign=youraveragetechbro"
         },
+        { "source": "/simongrimm", "destination": "/?utm_source=simongrimm&utm_campaign=simongrimm" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
@@ -667,6 +668,15 @@
         { "source": "/docs/integrate/user-properties", "destination": "/docs/product-analytics/user-properties" },
         { "source": "/docs/data/user-properties", "destination": "/docs/product-analytics/user-properties" },
         {
+            "source": "/docs/product-analytics/user-properties",
+            "destination": "/docs/product-analytics/person-properties"
+        },
+        {
+            "source": "/docs/product-analytics/start",
+            "destination": "/docs/getting-started/send-events"
+        },
+        { "source": "/docs/getting-started/user-properties", "destination": "/docs/getting-started/person-properties" },
+        {
             "source": "/docs/feature-flags/multivariate-flags",
             "destination": "/docs/feature-flags/creating-feature-flags"
         },
@@ -940,6 +950,8 @@
         { "source": "/tutorials/tracking-teams", "destination": "/docs/product-analytics/group-analytics" },
         { "source": "/tutorials/revenue", "destination": "/tutorials" },
         { "source": "/tutorials/how-to-segment-users", "destination": "/tutorials/power-users" },
+        { "source": "/tutorials/stripe-payment-data", "destination": "/tutorials/stripe-reports" },
+        { "source": "/tutorials/delayed-survey", "destination": "/docs/surveys/creating-surveys#customization" },
         { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" },
 
         { "source": "/james", "destination": "/community/profiles/27732" },
@@ -1168,7 +1180,6 @@
         { "source": "/handbook/small-teams/website-docs/community", "destination": "/handbook/community" },
         { "source": "/logo", "destination": "/handbook/company/brand-assets" },
         { "source": "/docs/getting-started/next-steps", "destination": "/tutorials/next-steps-after-installing" },
-        { "source": "/data-warehouse", "destination": "/docs/data-warehouse" },
         { "source": "/blog/tags/product-engineer", "destination": "/product-engineers/all" },
         { "source": "/blog/categories/company-and-culture", "destination": "/founders/culture" },
         { "source": "/docs/self-host/deploy/configuration", "destination": "/docs/self-host" },
@@ -1274,6 +1285,7 @@
         { "source": "/self-host", "destination": "/docs/self-host" },
         { "source": "/using-posthog", "destination": "/docs" },
         { "source": "/handbook/company/values", "destination": "/handbook/values" },
+        { "source": "/tutorials/guide-to-funnels", "destination": "/docs/product-analytics/funnels" },
         { "source": "/max", "destination": "/community/profiles/28378" },
         {
             "source": "/blog/gdpr-google-analytics-privacy-shield",
@@ -1283,7 +1295,7 @@
         { "source": "/docs/ai-engineering/llms", "destination": "/docs/ai-engineering/llm-insights" },
         {
             "source": "/docs/product-analytics/trends",
-            "destination": "/docs/product-analytics/trends/index"
+            "destination": "/docs/product-analytics/trends/overview"
         },
         { "source": "/book-a-demo", "destination": "/demo" },
         { "source": "/contact-sales", "destination": "/talk-to-a-human" }

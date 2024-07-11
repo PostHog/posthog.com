@@ -92,7 +92,7 @@ Both PostHog and GrowthBook offer all the functionality you expect from feature 
   <ComparisonRow column1={true} column2={false} feature="Bootstrapping" description="Flags available on frontend application load" />
 </ComparisonTable>
 
-- **Targeting:** GrowthBook's custom targeting using attributes must be set every session and defined in-app before use. It's also only available on the paid Pro plan. PostHog automatically sets its equivalent ([properties](/docs/getting-started/user-properties)) on users. You don’t need to pre-define them and unlimited custom values are free.
+- **Targeting:** GrowthBook's custom targeting using attributes must be set every session and defined in-app before use. It's also only available on the paid Pro plan. PostHog automatically sets its equivalent ([properties](/docs/getting-started/person-properties)) on users. You don’t need to pre-define them and unlimited custom values are free.
 
 - **[Bootstrapping](/docs/feature-flags/bootstrapping):** PostHog’s JavaScript web SDK enables you to pass flags directly from the backend before the app loads. This ensures they're available immediately and prevents flickering. GrowthBook instead recommends moving the A/B test or flag logic earlier in the page load (server-side) to prevent this.
 

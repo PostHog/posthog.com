@@ -20,7 +20,7 @@ The fastest way to set up autocapture is to copy the snippet below and paste it 
 
 ```html
 <script>
-  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
   posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>',})
 </script>
 ```
@@ -110,7 +110,7 @@ function loginRequest(user) {
 }
 ```
 
-Identifying users enables you to track users across sessions and devices as well as use [person profiles and properties](/docs/getting-started/user-properties) in your analysis. 
+Identifying users enables you to track users across sessions and devices as well as use [person profiles and properties](/docs/getting-started/person-properties) in your analysis. 
 
 ### 2. Properties
 
@@ -161,7 +161,7 @@ client.Enqueue(posthog.Capture{
 ```
 </MultiLanguage>
 
-Properties can also be set for individual users using the `$set` and `$set_once` properties. [Person properties](/docs/product-analytics/user-properties) enable you to connect data to the person rather than the event. It also enables permanent user data to be stored across events, and not have to be recreated in each event capture call. Once a user property is `$set_once` it can’t be changed by calling `$set_once` again. For example:
+Properties can also be set for individual users using the `$set` and `$set_once` properties. [Person properties](/docs/product-analytics/person-properties) enable you to connect data to the person rather than the event. It also enables permanent user data to be stored across events, and not have to be recreated in each event capture call. Once a person property is `$set_once` it can’t be changed by calling `$set_once` again. For example:
 
 <MultiLanguage>
 

@@ -93,7 +93,7 @@ This allows you to tweak it and see that everything works fine.
 
 Transformations or destinations can make use of the JavaScript `console` for logging and debugging. 
 
-These logs can be seen on the 'Logs' page, which can be accessed on the [Data Pipelines](https://app.posthog.com/apps) tab of the PostHog UI.
+These logs can be seen on the 'Logs' page, which can be accessed on the [Data Pipelines](https://app.posthog.com/pipeline) tab of the PostHog UI.
 
 ## Submitting your transformation or destination
 
