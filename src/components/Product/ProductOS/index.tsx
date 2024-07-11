@@ -299,7 +299,7 @@ export const ProductOS = () => {
                                 users or groups using feature flags.
                             </p>
                         </div>
-                        <div className="order-1 md:order-2 col-span-7 max-w-screen overflow-hidden">
+                        <div className="order-1 md:order-2 col-span-7 max-w-screen overflow-hidden md:overflow-visible">
                             <StaticImage
                                 src="./images/site-widget.png"
                                 alt=""
@@ -398,7 +398,7 @@ export const ProductOS = () => {
                                 </CallToAction>
                             </div>
                         </div>
-                        <div className="order-1 mb-10 md:mb-0 md:order-2 text-center max-w-screen overflow-hidden">
+                        <div className="order-1 mb-10 md:mb-0 md:order-2 text-center max-w-screen overflow-hidden md:overflow-visible">
                             <StaticImage
                                 src="./images/toolbar.png"
                                 alt=""
