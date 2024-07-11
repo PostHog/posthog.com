@@ -170,6 +170,19 @@ When responding to a ticket you should also choose an appropriate status accordi
 * **Pending** - (*pauses the SLA timer*) Use this for most replies to customers. Even if you think the issue is solved, the user may disagree, so `Solved` may not spark joy. When a user doesn't reply to a `Pending` ticket within 7 days, the ticket is auto-solved.
 * **Solved** - (*stops the SLA timer*) The user has replied to confirm that the ticket is resolved, or you've created a bug report or feature request and shared the link with the user so they can follow it for updates. 
 
+#### Temp orgs for free email users
+
+To reduce some unintended consequences of ZenDesk's unavoidable use of email address domain names to associate users with organizations, we have ZenDesk orgs for common free email providers.  
+
+An example of these orgs: `Gmail user - please assign to correct org`
+
+When we get a ticket from a user with an `@gmail.com` address who has not already been manually assigned to an existing ZenDesk org, that user will be assigned to the `Gmail user - ...` org (unless their PostHog org doesn't exist in ZenDesk yet, in which case the correct org will be created in ZenDesk.)
+
+When you see a user assigned to a free email org on a ticket, and it is not a 'community question' ticket, please assign the user to their correct org, which is found on the `Admin` info line in the body of the ticket:
+
+1. Click on the user's name, to the right of the org name
+2. Click in the `Org.` field to change the org name
+3. Click anywhere outside the field to save the change
 Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. After 20 days, responses will create a follow-up ticket with a link to the original ticket.
 
 Tickets that have been `Solved` will receive a CSAT survey after 3 days.
