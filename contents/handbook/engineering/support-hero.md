@@ -172,7 +172,7 @@ When responding to a ticket you should also choose an appropriate status accordi
 
 Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. After 20 days, responses will create a follow-up ticket with a link to the original ticket.
 
-Tickets which have been `Solved` will send the CSAT link 3 days later.
+Tickets that have been `Solved` will receive a CSAT survey after 3 days.
 
 #### Content Warnings
 
