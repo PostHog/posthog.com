@@ -173,6 +173,7 @@ export const ProductOS = () => {
                     </div>
 
                     <section id="customers" className="-mt-36 pt-36">
+                        <h3 className="text-3xl text-center my-4 md:my-8">Customer stories</h3>
                         <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
                             <CustomerCard
                                 outcome="tracks over 25M users accessing more than 160M publications"
@@ -223,7 +224,7 @@ export const ProductOS = () => {
                                     product data.
                                 </p>
                             </div>
-                            <div className="shrink-0 flex gap-2">
+                            <div className="shrink-0 flex flex-wrap gap-2">
                                 <ProductIcon
                                     name="Product analytics"
                                     url="/product-analytics"
@@ -298,7 +299,7 @@ export const ProductOS = () => {
                                 users or groups using feature flags.
                             </p>
                         </div>
-                        <div className="order-1 md:order-2 col-span-7">
+                        <div className="order-1 md:order-2 col-span-7 max-w-screen overflow-hidden">
                             <StaticImage
                                 src="./images/site-widget.png"
                                 alt=""
@@ -397,7 +398,7 @@ export const ProductOS = () => {
                                 </CallToAction>
                             </div>
                         </div>
-                        <div className="order-1 mb-10 md:mb-0 md:order-2 text-center">
+                        <div className="order-1 mb-10 md:mb-0 md:order-2 text-center max-w-screen overflow-hidden">
                             <StaticImage
                                 src="./images/toolbar.png"
                                 alt=""
