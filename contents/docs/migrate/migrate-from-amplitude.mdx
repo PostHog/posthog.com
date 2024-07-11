@@ -10,57 +10,208 @@ import MigrationWarning from "./_snippets/migration-warning.mdx"
 
 Migrating from Amplitude is a two step process:
 
-1. Export your data from Amplitude using the [Amplitude Export API](https://www.docs.developers.amplitude.com/analytics/apis/export-api/i).
+1. Export your data from Amplitude using the [Amplitude Export API](https://amplitude.com/docs/apis/analytics/export).
 
 2. [Import data into PostHog](/docs/migrate) using PostHog's Python SDK or `batch` API with the `historical_migration` option set to `true`.
 
-### Capture the event
+## Exporting data from Amplitude
 
-According to Amplitude's [Export API documentation](https://www.docs.developers.amplitude.com/analytics/apis/export-api/#response-schema), their event structure is:
+There are three ways to export data from Amplitude.
 
+### 1. Organization settings export
+
+The simplest way is to go to your project in your organization settings and click the **Export Data** button.
+
+![Export button](https://res.cloudinary.com/dmukukwp6/image/upload/export_dd6bd0881e.png)
+
+### 2. Export API
+
+To export data using Amplitude's Export API, start by getting your API and secret key for your project from your organization settings.
+
+![API keys](https://res.cloudinary.com/dmukukwp6/image/upload/keys_6055e723a5.png)
+
+You can then use these in a request to get the data like this:
+
+<MultiLanguage>
+
+```bash
+curl --location --request GET 'https://amplitude.com/api/2/export?start=<starttime>&end=<endtime>' \
+-u '{api_key}:{secret_key}'
 ```
-{
-  "event_time": UTC ISO 8601 formatted timestamp,
-  "event_name": string,
-  "device_id": string,
-  "user_id": string | null,
-  "event_properties": dict,
-  "group_properties": dict,
-  "user_properties": dict,
-  
-  // A bunch of other fields that include things like
-  // device_carrier, city, etc.
-  ...other_fields
-}
-```
-
-When capturing events into PostHog, we need to convert this schema to PostHog's:
 
 ```python
-distinct_id = user_id if user_id else device_id
-event_message = {
-  "properties": {
-    **event_properties,
-    **other_fields,
-    "$set": {**user_properties},
-    "$geoip_disable": True,
-  },
-  "event": event_type,
-  "distinct_id": distinct_id,
-  "timestamp": event_time,
-}
+import requests
+from requests.auth import HTTPBasicAuth
+
+amplitude_api_key = '<api_key>'
+amplitude_secret_key = '<secret_key>'
+
+start_time = '20240706T00'
+end_time = '20240708T23'
+
+url = f'https://amplitude.com/api/2/export?start={start_time}&end={end_time}'
+
+response = requests.get(url, auth=HTTPBasicAuth(amplitude_api_key, amplitude_secret_key))
+
+if response.status_code == 200:
+  print(response)
+  if response.headers.get('Content-Type') == 'application/zip':
+    with open('data.zip', 'wb') as f:
+      f.write(response.content)
+    print('Data successfully downloaded and saved as data.zip')
+  else:
+    print('Unexpected content type:', response.headers.get('Content-Type'))
+elif response.status_code == 404:
+  print('No data available for the requested time range.')
+else:
+  print(f'Failed to retrieve data. Status code: {response.status_code}')
 ```
 
-In short:
+</MultiLanguage>
 
-- We track the event with the same name and timestamp
-- For the distinct ID, we either use the User ID if present, or the Device ID (a UUID string) if not
-- We track person (AKA user) properties using `properties: {$set}`
-- We track event properties using `properties`
+### 3. S3 export
+
+If your data exceeds Amplitude's export size limitation, you can use [their S3 export](https://amplitude.com/docs/data/destination-catalog/amazon-s3).
+
+## Importing Amplitude data into PostHog
+
+Amplitude exports data in zipped archive of JSON files. To get this data into PostHog, you need to:
+
+1. Unzip and read the data
+2. Convert the events from Amplitude's schema to PostHog's
+3. Capture the events into PostHog using the `historical_migration` option
+4. Alias device IDs to user IDs
+
+Steps 1, 3, and 4 are relatively straightforward, but step 2 requires more explanation.
+
+### Converting Amplitude events
+
+Although Amplitude events have a similar structure, you need to convert them to PostHog's schema. Many events and properties have different keys. For example, autocaptured events and properties in PostHog often start with `$`.
+
+You can see Amplitude's event structure in their [Export API documentation](https://www.docs.developers.amplitude.com/analytics/apis/export-api/#response-schema) and PostHog's autocapture event structure in our [autocapture docs](/docs/product-analytics/autocapture#autocaptured-events). 
+
+Some conversions needed include:
+
+- Changing event names like `[Amplitude] Page Viewed` to `$pageview`
+- Changing event property keys like `[Amplitude] Page Location` to `$current_url`
+- Translating `EMPTY` values in `user_properties` to `null`
+- Changing `event_time` to an ISO 8601 formatted `timestamp`
+- Using `$set` and `$set_once` for person properties
+
+### Example Amplitude migration script
+
+Below is a script that gets Amplitude data from the export folder, unzips it, converts the data to PostHog's schema, and then captures it in PostHog. It gives you a start, but likely needs to be modified to fit your infrastucture and data structure.
+
+```python
+from posthog import Posthog
+from datetime import datetime
+import json
+import os
+import gzip
+
+# PostHog Python Client
+posthog = Posthog(
+  <ph_project_api_key>, 
+  host='<ph_client_api_host>',
+  debug=True,
+  historical_migration=True
+)
+
+# Convert and capture Amplitude data
+def capture_entry(entry):
+  distinct_id = entry.get("user_id") or entry.get("device_id")
+  event_name = entry["event_type"]
+
+  if event_name == "session_start":
+    return
+  if event_name == "[Amplitude] Page Viewed":
+    event_name = "$pageview"
+  if event_name in ["[Amplitude] Element Clicked", "[Amplitude] Element Changed"]:
+    event_name = "$autocapture"
+  
+  timestamp = datetime.strptime(entry.get("event_time"), "%Y-%m-%d %H:%M:%S.%f")
+
+  device_type = entry.get("device_type")
+  if device_type == "Windows" or device_type == "Linux":
+    device_type = "Desktop"
+  elif device_type == "iOS" or device_type == "Android":
+    device_type = "Mobile"
+  else:
+    device_type = None
+
+  payload = {
+    "event": event_name,
+    "distinct_id": distinct_id,
+    "properties": {
+      "$os": entry.get("device_type"),
+      "$browser": entry.get("os_name"),
+      "$browser_version": int(entry.get("os_version")),
+      "$device_type": device_type,
+      "$current_url": entry.get("event_properties").get("[Amplitude] Page URL"),
+      "$host": entry.get("event_properties").get("[Amplitude] Page Domain"),
+      "$pathname": entry.get("event_properties").get("[Amplitude] Page Path"),
+      "$viewport_height": entry.get("event_properties").get("[Amplitude] Viewport Height"),
+      "$viewport_width": entry.get("event_properties").get("[Amplitude] Viewport Width"),
+      "$referrer": entry.get("event_properties").get("referrer"),
+      "$referring_domain": entry.get("event_properties").get("referring_domain"),
+      "$device_id": entry.get("device_id"),
+      "$ip": entry.get("ip_address"),
+      "$geoip_city_name": entry.get("city"),
+      "$geoip_subdivision_1_name": entry.get("region"),
+      "$geoip_country_name": entry.get("country"),
+      "$set_once": {
+        "$initial_referrer": None if entry.get("user_properties").get("initial_referrer") == "EMPTY" else entry.get("user_properties").get("initial_referrer"),
+        "$initial_referring_domain": None if entry.get("user_properties").get("initial_referring_domain") == "EMPTY" else entry.get("user_properties").get("initial_referring_domain"),
+        "$initial_utm_source": None if entry.get("user_properties").get("initial_utm_source") == "EMPTY" else entry.get("user_properties").get("initial_utm_source"),
+        "$initial_utm_medium": None if entry.get("user_properties").get("initial_utm_medium") == "EMPTY" else entry.get("user_properties").get("initial_utm_medium"),
+        "$initial_utm_campaign": None if entry.get("user_properties").get("initial_utm_campaign") == "EMPTY" else entry.get("user_properties").get("initial_utm_campaign"),
+        "$initial_utm_content": None if entry.get("user_properties").get("initial_utm_content") == "EMPTY" else entry.get("user_properties").get("initial_utm_content"),
+      },
+      "$set": {
+        "$os": entry.get("device_type"),
+        "$browser": entry.get("os_name"),
+        "$device_type": device_type,
+        "$current_url": entry.get("event_properties").get("[Amplitude] Page URL"),
+        "$pathname": entry.get("event_properties").get("[Amplitude] Page Path"),
+        "$browser_version":  entry.get("os_version"),
+        "$referrer": entry.get("event_properties").get("referrer"),
+        "$referring_domain": entry.get("event_properties").get("referring_domain"),
+        "$geoip_city_name": entry.get("city"),
+        "$geoip_subdivision_1_name": entry.get("region"),
+        "$geoip_country_name": entry.get("country"),
+      }
+    },
+    "timestamp": timestamp
+  }
+
+  posthog.capture(
+    event=payload["event"],
+    distinct_id=payload["distinct_id"],
+    properties=payload["properties"], 
+    timestamp=payload["timestamp"],
+  )
+
+# Get Amplitude data from folder, unzip it, and use the capture function 
+def get_entries_from_folder_and_capture(folder_name):
+  count = 0
+  for filename in os.listdir(folder_name):
+    if filename.endswith('.json.gz'):
+      file_path = os.path.join(folder_name, filename)
+      with gzip.open(file_path, 'rt', encoding='utf-8') as f:
+        for line in f:
+          entry = json.loads(line)
+          capture_entry(entry)
+      count += 1
+      if count >= 6:
+        break
+
+folder_name = '609539'
+get_entries_from_folder_and_capture(folder_name)
+```
 
 ### Aliasing device IDs to user IDs
 
-In addition to tracking the events, we want to tie users' both before and after login. For Amplitude, events before and after login look a bit like this:
+In addition to capturing the events, we want to tie users' both before and after login. For Amplitude, events before and after login look a bit like this:
 
 | Event | User ID | Device ID |
 |-------|---------|-----------|
