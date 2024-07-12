@@ -35,6 +35,8 @@ Once done, PostHog will automatically pull and format your Zendesk data for quer
 
 Now that your Zendesk data is synced into PostHog, you can use it to create insights for your report. Each requires you to create a [new insight in the product analytics tab](https://us.posthog.com/project/insights/new).
 
+> **Want to get started fast?** Check out our [Zendesk starter report template](/templates/zendesk-report-dashboard).
+
 ### Ticket count
 
 To start, we create a trend of ticket count over time.
