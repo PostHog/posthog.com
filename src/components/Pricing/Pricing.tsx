@@ -125,11 +125,11 @@ const SectionHeader = ({ children }) => (
 
 const SectionColumns = ({ children }) => <div className="grid md:grid-cols-3 md:py-4">{children}</div>
 
-const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:pb-0 md:pr-8">{children}</div>
+const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:pb-0">{children}</div>
 
 const SectionSidebar = ({ children, className = '' }) => (
     <div
-        className={`col-span-1 flex flex-col gap-4 md:border-l border-light dark:border-dark border-t md:border-t-0 pt-4 md:pt-0 md:pl-8 ${className}`}
+        className={`col-span-1 flex flex-col gap-4 md:border-l border-light dark:border-dark border-t md:border-t-0 pt-4 md:pt-0 md:pl-8 md:ml-8 ${className}`}
     >
         {children}
     </div>
@@ -520,9 +520,8 @@ const ProductTabs = ({ billingProducts }) => {
                 )}
 
                 <div
-                    className={`text-center font-semibold text-[15px] mt-4 ${
-                        activeTab === undefined && 'border-t'
-                    } border-light dark:border-dark`}
+                    className={`text-center font-semibold text-[15px] mt-4 ${activeTab === undefined && 'border-t'
+                        } border-light dark:border-dark`}
                 >
                     <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3">
                         <button
@@ -860,8 +859,8 @@ const PricingExperiment = ({
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">
                             {currentProduct
                                 ? billingProducts.find((p: BillingProductV2Type) => p.type === currentProduct)?.name ||
-                                  (currentProduct == 'ab_testing' && 'A/B testing') ||
-                                  'Product'
+                                (currentProduct == 'ab_testing' && 'A/B testing') ||
+                                'Product'
                                 : 'Usage-based'}{' '}
                             pricing
                         </h1>
@@ -938,49 +937,9 @@ const PricingExperiment = ({
                             <h3>Pricing calculator</h3>
                         </SectionHeader>
 
-                        <SectionColumns>
-                            <SectionMainCol>
-                                <Tabbed />
-                            </SectionMainCol>
-                            <SectionSidebar>
-                                <div>
-                                    <h4 className="text-lg mb-2">How it works</h4>
-                                    <SidebarList>
-                                        <SidebarListItem>Only pay for products you use</SidebarListItem>
-                                        <SidebarListItem>
-                                            <strong className="bg-yellow/50 dark:bg-white/20 italic inline py-0.5">
-                                                Generous free tier for each product (resets monthly)
-                                            </strong>
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            You can set billing limits per product so you never get a surprise bill
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            We also offer{' '}
-                                            <Tooltip content={() => <Discounts />} placement="top">
-                                                <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
-                                                    discounts
-                                                </strong>
-                                            </Tooltip>{' '}
-                                            for startups and non-profits
-                                        </SidebarListItem>
-                                    </SidebarList>
-                                </div>
-                                <div>
-                                    <h4 className="text-lg mb-2">Estimating usage</h4>
-                                    <SidebarList>
-                                        <SidebarListItem>
-                                            Not sure what your volume looks like? Add the tracking code to your site and
-                                            check back in a few days – no credit card required.
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            If something stupid happens, like you get an unexpected bill and you’re
-                                            unhappy, we’ll pretty much always refund it!
-                                        </SidebarListItem>
-                                    </SidebarList>
-                                </div>
-                            </SectionSidebar>
-                        </SectionColumns>
+                        <SectionMainCol>
+                            <Tabbed />
+                        </SectionMainCol>
                     </SectionLayout>
 
                     <SectionLayout>
@@ -1055,11 +1014,10 @@ const PricingExperiment = ({
                     </SectionLayout>
 
                     <section
-                        className={`${section} ${
-                            isPlanComparisonVisible
+                        className={`${section} ${isPlanComparisonVisible
                                 ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
                                 : 'overflow-y-hidden invisible max-h-0 opacity-0'
-                        } transition duration-500 ease-in-out transform`}
+                            } transition duration-500 ease-in-out transform`}
                     >
                         <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                             <div className="grid grid-cols-16 mb-1 min-w-[1000px]">

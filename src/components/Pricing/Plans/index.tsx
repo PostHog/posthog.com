@@ -11,6 +11,7 @@ import { product_type_to_max_events } from '../pricingLogic'
 import { Discount } from 'components/NotProductIcons'
 import Link from 'components/Link'
 import { IconInfo } from '@posthog/icons'
+import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -22,7 +23,7 @@ const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle
 }
 
 const Row = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
-    return <div className={`flex items-center gap-4 py-1.5 px-4 rounded ${className}`}>{children}</div>
+    return <div className={`flex items-center gap-2 lg:gap-4 px-2 lg:px-4 py-1.5 ${className}`}>{children}</div>
 }
 
 const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
@@ -46,7 +47,7 @@ const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
 }
 
 const Title = ({ title, className = '' }: { title: string; className?: string }) => {
-    return <h5 className={`m-0 text-[15px] opacity-70 font-medium ${className}`}>{title}</h5>
+    return <h5 className={`m-0 text-sm lg:text-[15px] opacity-70 font-normal ${className}`}>{title}</h5>
 }
 
 export const InclusionOnlyRow = ({ plans }) => (
@@ -64,7 +65,7 @@ export const InclusionOnlyRow = ({ plans }) => (
 
 const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
 
-export const PricingTiers = ({ plans, unit, compact = false, type, test = false }) => {
+export const PricingTiers = ({ plans, unit, compact = false, type, test = false, showSubtotal = false }) => {
     const posthog = usePostHog()
     const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
 
@@ -84,93 +85,133 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false 
         })
     }, [posthog])
 
-    return tiers.map(({ up_to, unit_amount_usd }, index) => {
-        return compact && parseFloat(unit_amount_usd) <= 0 ? null : (
-            <Row className={`!py-1 ${compact ? '!px-0 !space-x-0' : ''}`} key={`type-${index}`}>
-                <Title
-                    className={`flex-grow ${compact ? 'text-sm' : ''}`}
-                    title={
-                        index === 0
-                            ? `First ${formatCompactNumber(up_to)} ${unit}s`
-                            : !up_to
-                            ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
-                            : `${
-                                  formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to).split(/ |k/)[0]
-                              }-${formatCompactNumber(up_to)}`
-                    }
-                />
-                {!compact && (
-                    <Title
-                        className="hidden font-bold max-w-[25%] w-full min-w-[105px]"
-                        title={plans[0].free_allocation === up_to ? 'Free' : '-'}
-                    />
-                )}
-                <div className={`flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'}`}>
-                    <Title
-                        className={`${compact ? 'text-sm' : ''}`}
-                        title={
-                            plans[0].free_allocation === up_to ? (
-                                <strong>Free</strong>
-                            ) : type === 'product_analytics' && index === tiers.length - 1 ? (
-                                // last row
-                                <div className="flex items-center -mr-5">
-                                    <strong>
-                                        $
-                                        {parseFloat(unit_amount_usd).toFixed(
-                                            Math.max(
-                                                ...plans[plans.length - 1].tiers.map(
-                                                    (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
-                                                )
-                                            )
-                                        )}
-                                    </strong>
-                                    /{unit}
-                                    <Tooltip
-                                        content={() => (
-                                            <div>
-                                                Custom pricing available for large volumes.
-                                                <Link to="/talk-to-a-human">
-                                                    <Label
-                                                        className="!m-0 !p-0 !text-sm !font-bold"
-                                                        text="Get in touch"
-                                                        style="orangeNoBg"
-                                                    />
-                                                </Link>
-                                            </div>
-                                        )}
-                                        contentContainerClassName="max-w-xs"
-                                    >
-                                        <div>
-                                            <IconInfo className="w-4 h-4 ml-1 opacity-50" />
+    useEffect(() => {
+        set_tiers(plans[plans.length - 1]?.tiers)
+    }, [plans])
+
+    return (
+        <>
+            {showSubtotal && (
+                <Row className="grid grid-cols-12">
+                    <h4 className="m-0 col-span-3 text-base">Allocation</h4>
+                    <h4 className="m-0 col-span-4 text-base">Price</h4>
+                    <h4 className="m-0 col-span-3 text-base text-right">Your selection</h4>
+                    <h4 className="m-0 col-span-2 text-base text-right">Subtotal</h4>
+                </Row>
+            )}
+            {tiers.map(({ up_to, unit_amount_usd, eventsInThisTier, tierCost }, index) => {
+                return compact && parseFloat(unit_amount_usd) <= 0 ? null : (
+                    <Row
+                        className={`!py-1 ${compact ? '!px-0 !space-x-0' : ''} ${
+                            showSubtotal ? 'grid grid-cols-12' : ''
+                        }`}
+                        key={`type-${index}`}
+                    >
+                        <Title
+                            className={`${compact ? 'text-sm' : ''} ${showSubtotal ? 'col-span-3' : 'flex-grow'}`}
+                            title={
+                                index === 0
+                                    ? `First ${formatCompactNumber(up_to)} ${unit}s`
+                                    : !up_to
+                                    ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
+                                    : `${
+                                          formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to).split(
+                                              / |k/
+                                          )[0]
+                                      }-${formatCompactNumber(up_to)}`
+                            }
+                        />
+                        <div
+                            className={
+                                showSubtotal
+                                    ? `col-span-4`
+                                    : `flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'} justify-end`
+                            }
+                        >
+                            <Title
+                                className={`${compact ? 'text-sm' : ''}`}
+                                title={
+                                    plans[0].free_allocation === up_to ? (
+                                        <strong>Free</strong>
+                                    ) : type === 'product_analytics' && index === tiers.length - 1 ? (
+                                        // last row
+                                        <div className="flex items-center -mr-5">
+                                            <strong>
+                                                $
+                                                {parseFloat(unit_amount_usd).toFixed(
+                                                    Math.max(
+                                                        ...plans[plans.length - 1].tiers.map(
+                                                            (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                                        )
+                                                    )
+                                                )}
+                                            </strong>
+                                            /{unit}
+                                            <Tooltip
+                                                content={() => (
+                                                    <div>
+                                                        Custom pricing available for large volumes.
+                                                        <Link to="/talk-to-a-human">
+                                                            <Label
+                                                                className="!m-0 !p-0 !text-sm !font-bold"
+                                                                text="Get in touch"
+                                                                style="orangeNoBg"
+                                                            />
+                                                        </Link>
+                                                    </div>
+                                                )}
+                                                contentContainerClassName="max-w-xs"
+                                            >
+                                                <div>
+                                                    <IconInfo className="w-4 h-4 ml-1 opacity-50" />
+                                                </div>
+                                            </Tooltip>
                                         </div>
-                                    </Tooltip>
+                                    ) : (
+                                        <>
+                                            <strong>
+                                                $
+                                                {parseFloat(unit_amount_usd).toFixed(
+                                                    Math.max(
+                                                        ...plans[plans.length - 1].tiers.map(
+                                                            (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
+                                                        )
+                                                    )
+                                                )}
+                                            </strong>
+                                            /{unit}
+                                        </>
+                                    )
+                                }
+                            />
+                            {!up_to && enterprise_flag_enabled && (
+                                <Link to="/talk-to-a-human">
+                                    <Label
+                                        className="ml-2 !font-bold"
+                                        text="Volume discounts available"
+                                        style="orangeNoBg"
+                                    />
+                                </Link>
+                            )}
+                        </div>
+                        {showSubtotal && (
+                            <>
+                                <div className={`col-span-3 text-right font-code text-sm`}>
+                                    {eventsInThisTier.toLocaleString()}
                                 </div>
-                            ) : (
-                                <>
-                                    <strong>
-                                        $
-                                        {parseFloat(unit_amount_usd).toFixed(
-                                            Math.max(
-                                                ...plans[plans.length - 1].tiers.map(
-                                                    (tier) => tier.unit_amount_usd.split('.')[1]?.length ?? 0
-                                                )
-                                            )
-                                        )}
-                                    </strong>
-                                    /{unit}
-                                </>
-                            )
-                        }
-                    />
-                    {!up_to && enterprise_flag_enabled && (
-                        <Link to="/talk-to-a-human">
-                            <Label className="ml-2 !font-bold" text="Volume discounts available" style="orangeNoBg" />
-                        </Link>
-                    )}
-                </div>
-            </Row>
-        )
-    })
+                                <div className={`col-span-2 text-right text-sm font-bold`}>
+                                    {formatUSD(
+                                        tierCost,
+                                        tiers.some((tier) => tier.tierCost % 1 !== 0)
+                                    )}
+                                </div>
+                            </>
+                        )}
+                    </Row>
+                )
+            })}
+        </>
+    )
 }
 
 const formatCompactNumber = (number) => {

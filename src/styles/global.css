@@ -455,6 +455,14 @@ h4 {
     }
 }
 
+.rc-slider-handle {
+    @apply !cursor-grab;
+
+    &:focus {
+        @apply !cursor-grabbing;
+    }
+}
+
 /* timeline key */
 
 .timeline-entry li[data-type='feature']:before {
