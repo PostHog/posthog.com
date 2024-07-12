@@ -68,11 +68,11 @@ If you are the interviewer for this call (though it's not an _interview_, really
 - Send this file to the candidate in their Superday slack channel **30 minutes before the kick-off call**.
    - You can use this language: "Hey {name}! Here's the task for the day. Feel free to read through it before we chat in 30 minutes so I can answer any questions you have. See you soon!"
 - During the call, make sure to hit on the following points:
-   - Everything necessary complete tasks is in the zip
+   - Everything necessary to complete the task is in the zip.
       - We've provided some stubbed code for convenience, but it's not required to use this. Use what you are most comfortable with.
    - We're looking to see reasonable code, but don't feel the need to test every function. Demonstrating familiarity is enough.
    - Focus on making a useful product. It can be helpful to draw up some persona/use case that you want to build for.
-   - Raquel's note: sometimes leave this out, as I think seeing how they prioritize their time is interesting
+      - Raquel's note: sometimes leave this out, as I think seeing how they prioritize their time is interesting.
    - The time cut-off for the day is flexible, just commit to whatever is a reasonable day's worth of work for you.
    - Don't forget to send us a Loom video at the end of the day to show us what you've built and walk us through anything you feel is worth discussing.
    - Communicate consistently and don’t get blocked by us. Just use best judgement to keep making progress/decisions. No need for an update every X minutes but good to have some engagement and check in periodically.
