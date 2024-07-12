@@ -421,6 +421,8 @@ export default function ProductAnalyticsTab({
             }
             const totalProductAnalyticsVolume = getTotalAnalyticsVolume(newAnalyticsData)
             const totalCost = calculatePrice(totalProductAnalyticsVolume, productAnalyticsTiers).total
+            const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(newAnalyticsData)
+            const enhancedPersonsCost = calculatePrice(totalEnhancedPersonsVolume, enhancedPersonsAddonTiers)
             const totalEnhancedPersonsCost = enhancedPersonsCost.total
             Object.keys(newAnalyticsData).forEach((key) => {
                 const volume = newAnalyticsData[key].volume
