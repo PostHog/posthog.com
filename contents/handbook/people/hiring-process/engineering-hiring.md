@@ -63,8 +63,9 @@ Each superday starts with a short kick-off call between the candidate and a Post
 
 If you are the interviewer for this call (though it's not an _interview_, really), here's what you need to do:
 
+- In the candidate's Superday slack channel, **turn on notifications for all messages**. As the Superday lead, you're the primary one responsible for answering any questions they have and responding to their comms if needed.
 - Follow the steps in the [`interview-test` repository](https://github.com/PostHog/interview-test) to generate the Superday work file for the candidate.
-- Send this file to the candidate in their Superday slack channel 30 minutes before the kick-off call.
+- Send this file to the candidate in their Superday slack channel **30 minutes before the kick-off call**.
    - You can use this language: "Hey {name}! Here's the task for the day. Feel free to read through it before we chat in 30 minutes so I can answer any questions you have. See you soon!"
 - During the call, make sure to hit on the following points:
    - Everything necessary complete tasks is in the zip
