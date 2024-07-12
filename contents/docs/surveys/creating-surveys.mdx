@@ -99,9 +99,13 @@ You can target your survey to specific users based on:
 
 - **User and group properties:** If you are capturing [person profiles](/docs/data/persons), you can target a survey to users who have specific [user](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option.
 
+- **Events:** If you are emitting [custom events](https://posthog.com/docs/getting-started/send-events) from your application, you can target a survey to users who cause the event to be captured on the client. This feature only works for Surveys of type "Popover".
+
+- **Actions:** If you have any [actions created](https://posthog.com/docs/data/actions) in your project, you can target a survey to users whose activity can be classified by the action. This feature only works for Surveys of type "Popover".
+
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714693687/posthog.com/contents/images/docs/surveys/target-light.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714693687/posthog.com/contents/images/docs/surveys/target-dark.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/survey_conditions_light_7497613100.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/survey_conditions_dark_9a3b1950e5.png"
     alt="Targeting" 
     classes="rounded"
 />
