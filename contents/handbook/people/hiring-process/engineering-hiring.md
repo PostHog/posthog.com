@@ -59,7 +59,7 @@ Overall, you should spend at least 80% of your time and energy on the task and l
 
 ##### SuperDay kick-off call
 
-Each superday starts wih a short kick-off call between the candidate and a PostHog engineer. The purpose of this call is to 1) personalize the start of the day, 2) reiterate some context, and 3) give the candidate an opportunity to ask any questions before they dig in.
+Each superday starts with a short kick-off call between the candidate and a PostHog engineer. The purpose of this call is to 1) personalize the start of the day, 2) reiterate some context, and 3) give the candidate an opportunity to ask any questions before they dig in.
 
 If you are the interviewer for this call (though it's not an _interview_, really), here's what you need to do:
 
