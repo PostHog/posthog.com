@@ -108,7 +108,7 @@ export default function Job({
     const [jobTitle] = title.split(' - ')
 
     return (
-        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[6]}>
+        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children.find(({ name }) => name === 'Careers')}>
             <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
             <div className="">
                 <PostLayout
