@@ -18,12 +18,12 @@ const getTiers = (pricingOption) => {
     return tiers
 }
 
-export const formatUSD = (number) => {
+export const formatUSD = (number, trailingZeros = false) => {
     const usd = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
     })
-    return usd.format(number).replace('.00', '')
+    return usd.format(number).replace('.00', trailingZeros ? '.00' : '')
 }
 
 export const calculatePrice = (eventNumber: number, tiers): { total: number; costByTier: any } => {

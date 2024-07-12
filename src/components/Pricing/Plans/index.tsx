@@ -200,7 +200,10 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                     {eventsInThisTier.toLocaleString()}
                                 </div>
                                 <div className={`col-span-2 text-right text-sm font-bold`}>
-                                    ${tiers.some((tier) => tier.tierCost % 1 !== 0) ? tierCost.toFixed(2) : tierCost}
+                                    {formatUSD(
+                                        tierCost,
+                                        tiers.some((tier) => tier.tierCost % 1 !== 0)
+                                    )}
                                 </div>
                             </>
                         )}
