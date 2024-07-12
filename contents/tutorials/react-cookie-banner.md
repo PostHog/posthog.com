@@ -11,9 +11,8 @@ tags:
   - product os
 ---
 
-If you’ve spent any time online, you’ve seen a cookie consent banner. Because of GDPR and other worldwide internet privacy regulations, some sites need to get consent to track users and use cookies. Along with this is the need to provide, visitors with an easy way to opt in or out.
+If you’ve spent any time online, you’ve seen a cookie consent banner. Because of GDPR and other worldwide internet privacy regulations, most sites need to get consent to track users and use cookies. 
 
-PostHog uses first-party cookies to identify and track users as well as manage user and application information across sessions. They enable us to more accurately track users and help you build better experiences for your users.
 
 To help you stay compliant, PostHog enables you to track users either with or without cookies. In this tutorial, we are going to build a simple banner with React, JavaScript, and HTML for users to opt in or out of PostHog’s cookies.
 
@@ -21,7 +20,7 @@ To complete this tutorial, you’ll need to a [PostHog instance](https://us.post
 
 ## Step 1: Setting up React
 
-This tutorial is for React, but this works for other JavaScript frameworks as well (we have specific tutorials for [Next.js](/tutorials/nextjs-cookie-banner) and [Vue](/tutorials/vue-cookie-banner)).
+This tutorial is for React, but it works for other JavaScript frameworks as well (we have specific tutorials for [Next.js](/tutorials/nextjs-cookie-banner) and [Vue](/tutorials/vue-cookie-banner)).
 
 We'll set up our React app with [Vite](https://vitejs.dev/guide/). To do this, head into the command line, then create and install the app (we name ours `react-cookie-banner`).
 
@@ -44,7 +43,7 @@ Next, we want to set up PostHog to track activity on our site. To do this, first
 npm install --save posthog-js
 ```
 
-Next, we’ll go to `src/main.jsx` to get PostHog initialized. We’ll import PostHog and the `PostHogProvider` component from `posthog-js/react` and run `posthog.init` with our project key and instance address (which you can get in your project settings)
+Next, we’ll go to `src/main.jsx` to initialize PostHog. We’ll import PostHog and the `PostHogProvider` component from `posthog-js/react` and run `posthog.init` with our project key and instance address (which you can get in your [project settings](https://us.posthog.com/settings/project))
 
 ```js
 import React from 'react'
@@ -69,7 +68,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 ```
 
-Once done, visit your site running locally, click the button, and you start to see events in your PostHog instance. For now, the captured events are only the [autocaptured](/docs/data/autocapture) ones, but you can use custom events more.
+Once done, visit your site running locally, click the button, and you should start seeing events in your [PostHog activity tab](https://us.posthog.com/activity/explore).
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_10_at_14_54_53_2x_de2d28eea9.png" 
