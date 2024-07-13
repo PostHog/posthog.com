@@ -30,7 +30,7 @@ A manager at PostHog is _not_ responsible for:
 
 ### Part-time managers
 
-Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job. That means everyone, including the founders, still spend the majority of their time on practising what they do best - for most manager, this isn't actually management!
+Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job. That means everyone, including the founders, still spend the majority of their time on practicing what they do best - for most managers, this isn't actually management!
 
 As an engineer, you wouldn't respect the opinion of someone who can't code on a coding-specific question.
 As a designer, you really want your manager to have an eye for design.
