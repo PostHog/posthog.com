@@ -165,8 +165,8 @@ import { hydrateRoot } from 'react-dom/client';
 import posthog from 'posthog-js';
 
 function hydrate() {
-  posthog.init('token', {
-    api_host: 'https://us.i.posthog.com',
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
     person_profiles: 'identified_only',
   });
 
