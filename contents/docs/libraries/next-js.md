@@ -136,7 +136,7 @@ export function PHProvider({
 
 </MultiLanguage>
 
-Then, to capture pageviews, we set up a `PostHogPageView` component to listen to url path changes:
+Then, to capture pageviews, we set up a `PostHogPageView` component to listen to URL path changes:
 
 <MultiLanguage>
 
@@ -172,7 +172,7 @@ export default function PostHogPageView() {
 }
 ```
 
-```tsx
+```ts
 // app/PostHogPageView.tsx
 'use client'
 
@@ -180,7 +180,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { usePostHog } from 'posthog-js/react';
 
-export default function PostHogPageView() {
+export default function PostHogPageView() : null {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const posthog = usePostHog();
@@ -238,12 +238,11 @@ export default function RootLayout({ children }) {
 }
 ```
 
-```tsx
+```ts
 // app/layout.tsx
 
 import './globals.css'
 import { PHProvider } from './providers'
-
 import dynamic from 'next/dynamic'
 
 const PostHogPageView = dynamic(() => import('./PostHogPageView'), {
@@ -351,7 +350,7 @@ export async function getServerSideProps(ctx) {
       },
     });
 
-    await client.shutdownAsync()
+    await client.shutdown()
   }
 
   const { posts } = await import('../../blog.json')
@@ -365,7 +364,7 @@ export async function getServerSideProps(ctx) {
 }
 ```
 
-> **Note**: Make sure to _always_ call `client.shutdownAsync()` after sending events from the server-side.
+> **Note**: Make sure to _always_ call `await client.shutdown()` after sending events from the server-side.
 > PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
 ### App router
@@ -388,7 +387,7 @@ export default function PostHogClient() {
 }
 ```
 
-> **Note:** Because our server-side `posthog-node` initializations are short-lived, we set `flushAt` to `1` and `flushInterval` to `0`. `flushAt` sets how many how many capture calls we should flush the queue (in one batch). `flushInterval` sets how many milliseconds we should wait before flushing the queue. Setting them to the lowest number ensures events are sent immediately and not batched. We also need to call `await posthog.shutdownAsync()` once done.
+> **Note:** Because our server-side `posthog-node` initializations are short-lived, we set `flushAt` to `1` and `flushInterval` to `0`. `flushAt` sets how many how many capture calls we should flush the queue (in one batch). `flushInterval` sets how many milliseconds we should wait before flushing the queue. Setting them to the lowest number ensures events are sent immediately and not batched. We also need to call `await posthog.shutdown()` once done.
 
 
 ```js
@@ -401,7 +400,7 @@ export default async function About() {
   const flags = await posthog.getAllFlags(
     'user_distinct_id' // replace with a user's distinct ID
   );
-  await posthog.shutdownAsync()
+  await posthog.shutdown()
 
   return (
     <main>

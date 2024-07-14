@@ -21,7 +21,7 @@ export default function Tooltip({
     placement?: Placement
     title?: string
     contentContainerClassName?: string
-}) {
+}): JSX.Element {
     const [open, setOpen] = useState(false)
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
@@ -48,18 +48,64 @@ export default function Tooltip({
                         style={{ ...styles.popper, paddingTop: offset[1], paddingBottom: offset[1] }}
                         {...attributes.popper}
                     >
-                        <div className={`rounded-sm overflow-hidden ${tooltipClassName}`}>
-                            {title && (
-                                <h5
-                                    className={`bg-white text-sm dark:bg-[#484848] text-black dark:text-white px-4 py-2 z-20 m-0 font-semibold`}
-                                >
-                                    {title}
-                                </h5>
-                            )}
+                        <div className="tooltip">
                             <div
-                                className={`bg-accent dark:bg-accent-dark border border-border dark:border-dark text-primary dark:text-primary-dark px-2 py-2 text-sm z-20 ${contentContainerClassName}`}
+                                className={`
+                            bg-accent dark:bg-accent-dark border border-border dark:border-dark
+                            relative
+                            shadow-lg
+                            rounded-sm 
+                            placement-${placement} 
+                            relative
+                            p-2
+
+                            ${
+                                placement === 'top' ||
+                                placement === 'right' ||
+                                placement === 'bottom' ||
+                                placement === 'left'
+                                    ? 'before:bg-accent dark:before:bg-accent-dark before:border-light dark:before:border-dark before:block before:h-3 before:w-3 before:absolute before:rotate-45'
+                                    : ''
+                            }
+
+                            ${
+                                placement === 'top'
+                                    ? 'before:rounded-br-sm before:-bottom-1.5 before:left-[calc(50%_-_5.5px)] before:border-b before:border-r'
+                                    : ''
+                            }
+                            ${
+                                placement === 'right'
+                                    ? 'before:rounded-bl-sm before:top-[calc(50%_-_4px)] before:-left-1.5 before:border-b before:border-l ml-2'
+                                    : ''
+                            }
+                            ${
+                                placement === 'bottom'
+                                    ? 'before:rounded-tl-sm before:-top-1.5 before:left-[calc(50%_-_5.5px)] before:border-t before:border-l'
+                                    : ''
+                            }
+                            ${
+                                placement === 'left'
+                                    ? 'before:rounded-tr-sm before:top-[calc(50%_-_4px)] before:-right-1.5 before:border-t before:border-r mr-2'
+                                    : ''
+                            }
+                                    
+                            ${tooltipClassName}
+                        `}
                             >
-                                {content && (typeof content === 'string' ? content : content(setOpen))}
+                                <div className="bg-white dark:bg-dark border border-light dark:border-dark rounded px-2 py-1">
+                                    {title && (
+                                        <h5
+                                            className={`bg-white text-sm dark:bg-[#484848] text-black dark:text-white px-4 py-2 z-20 m-0 font-semibold`}
+                                        >
+                                            {title}
+                                        </h5>
+                                    )}
+                                    <div
+                                        className={`text-primary dark:text-primary-dark px-2 py-2 text-sm z-20 ${contentContainerClassName}`}
+                                    >
+                                        {content && (typeof content === 'string' ? content : content(setOpen))}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>,

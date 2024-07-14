@@ -9,6 +9,8 @@ tags:
   - Founders
   - Ops & finance
   - People
+crosspost:
+  - Blog  
 ---
 
 If you’ve ever worked for a startup, or read about a Unicorn tech company turning employees into multi-millionaires overnight, chances are you've heard of equity.

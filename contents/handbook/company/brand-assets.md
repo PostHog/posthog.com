@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 hideAnchor: false
 ---
-> <em>This page currently refers only to this website (posthog.com). It will later be updated to also include information about app.posthog.com.</em>
+> Want to add the [PostHog badge](/docs/contribute/badge) to your website? (Did we mention free merch?)
 
 ## Logo
 
@@ -29,7 +29,7 @@ The @2x version of PNGs are designed for [hi-dpi (or "Retina") screens](https://
 
 ![Logo usage examples](/brand/logo-usage.png)
 
-If you have any questions or need clarification about which version to use, ask Cory, or reach out in the [PostHog Users Slack](/slack) and we'll be happy to help.
+If you have any questions or need clarification about which version to use, ask Cory, or reach out in [our community page](/posts) and we'll be happy to help.
 
 ## Typography
 

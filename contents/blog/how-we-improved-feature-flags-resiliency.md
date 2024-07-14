@@ -19,7 +19,7 @@ Contrast it with the PostHog interface not loading, where the problem is constra
 
 Further, flags are very sensitive to latency. If it takes 5 seconds for your flags to evaluate, that holds up your customer's application for 5 seconds. You can't wait to load them asynchronously, either, as you need this result to determine what to show. Your business logic depends on the flag.
 
-This is why the [Feature Success team](/handbook/small-teams/feature-success) has spent the last few months making PostHog's feature flags fast and resilient. Our goal was to ensure that:
+This is why the [Feature Success team](/teams/feature-success) has spent the last few months making PostHog's feature flags fast and resilient. Our goal was to ensure that:
 
 1. Neither the SDKs that query flags, nor the API interface, should go down if the PostHog interface does
 2. Latency-sensitive flags resolve in 50ms or less. 

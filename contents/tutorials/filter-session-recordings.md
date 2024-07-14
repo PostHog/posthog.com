@@ -19,17 +19,17 @@ A typical use case for session replays is to filter based on an event or action,
 
 You'll need an appropriate event or action set up to do this – see [our complete guide to event tracking](/tutorials/event-tracking-guide) for help there. 
 
-To start filtering, simply select ‘Filter recordings’ at the top of the page. 
+To start filtering, click ‘Filter.’ 
 
 ![search for recording events](../images/tutorials/session-recordings/filter-events-session-recording.png)
 
-Searching for actions or events in PostHog is similar to building a query in insights — use the filter builder on the left of the screen to define what sort of actions or events you’re looking for. 
+Next, click "Show advanced filters," and then "Filter for events or actions." Here you can search for actions or events similar to how you would build an insights — use the filter builder on the left of the screen to define what sort of actions or events you’re looking for. 
 
 Once you have filtered the recordings to a smaller, more relevant list then you can search within individual recordings to find the specific moment when an event occurs. In fact, there are a few ways to find the specific event you’re looking for!
 
 ![global filter off](../images/tutorials/session-recordings/recording-filter-off.png)
 
-The easiest way to focus on a particular action is to use the toggle labeled ‘Only show matching events’. This removes all events which don’t match your global filter from both the timeline and the event list, changing the view from the above, to the below. 
+The easiest way to focus on a particular action is to use the toggle labeled ‘Only events matching filters’. This removes all events which don’t match your global filter from both the timeline and the event list, changing the view from the above, to the below. 
 
 ![global filter on](../images/tutorials/session-recordings/recording-filter-on.png)
 
@@ -49,7 +49,7 @@ As before, you can then search within a specific recording to find the event you
 
 Another use case for filtering recordings is to see how certain types of users behave so you can, for example, determine if users in different countries or demographics interact with your product differently.
 
-Filtering recordings based on person properties is fundamentally the same as filtering based on actions or events, except that it is done using the ‘Filter by persons or cohorts’ filter instead. 
+Filtering recordings based on person properties is similar to actions or events, except that it is done using the ‘Filter by persons or cohorts’ filter instead. 
 
 ![filter persons recordings](../images/tutorials/session-recordings/filter-persons-recordings.png)
 
@@ -67,11 +67,9 @@ In such instances you may want to build filters based on device, OS, location or
 
 The final way to filter recordings is chronologically, based on the time or date that an recording was captured. This can be especially powerful for products where user behavior is influenced by the time of year, such as a B2C marketplace that runs seasonal sales.
 
-PostHog also enables you to filter recordings based on the overall duration of a session. This is useful if you need to find recordings based where users are highly engaged and interact with your app for extended periods — or where engagements are brief, perhaps due to UX issues. 
-
 ![filter recording by time](../images/tutorials/session-recordings/filter-recordings-time.png)
 
-In either case, you can filter recordings using the date and time controls at the top right of the recordings page. 
+Next to the date picker, you can filter recordings based on the overall duration of a session. This is useful if you need to find recordings based where users are highly engaged and interact with your app for extended periods — or where engagements are brief, perhaps due to UX issues. 
 
 ## Further reading
 

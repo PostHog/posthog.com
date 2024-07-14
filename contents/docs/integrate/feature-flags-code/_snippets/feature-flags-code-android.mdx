@@ -1,23 +1,65 @@
 ### Boolean feature flags
 
 ```kotlin
-if (PostHog.isFeatureEnabled("flag-key") ) {
-    // do something
+import com.posthog.PostHog
+
+if (PostHog.isFeatureEnabled("flag-key")) {
+    // Do something differently for this user
+
+    // Optional: fetch the payload
+    val matchedFlagPayload = PostHog.getFeatureFlagPayload("flag-key")
 }
 ```
 
 ### Multivariate feature flags
 
 ```kotlin
-if (PostHog.getFeatureFlag("flag-key")  == "variant-key") { // replace 'variant-key' with the key of your variant
-    // do something
+import com.posthog.PostHog
+
+if (PostHog.getFeatureFlag("flag-key") == "variant-key") { // replace 'variant-key' with the key of your variant
+    // Do something differently for this user
+
+    // Optional: fetch the payload
+    val matchedFlagPayload = PostHog.getFeatureFlagPayload("flag-key")
+}
+```
+
+### Ensuring flags are loaded before usage
+
+Every time a user loads a screen, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.
+
+This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
+
+To handle this, you can use the `onFeatureFlags` callback to wait for the feature flag request to finish:
+
+```kotlin
+import com.posthog.PostHog
+import com.posthog.android.PostHogAndroidConfig
+import com.posthog.PostHogOnFeatureFlags
+
+// During SDK initialization
+val config = PostHogAndroidConfig(apiKey).apply {
+    onFeatureFlags = PostHogOnFeatureFlags {
+        if (PostHog.isFeatureEnabled("flag-key")) {
+            // do something
+        }
+    }
+}
+
+// And/Or manually the SDK is initialized
+PostHog.reloadFeatureFlags {
+    if (PostHog.isFeatureEnabled("flag-key")) {
+        // do something
+    }
 }
 ```
 
 ### Reloading feature flags
 
-Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call the `reloadFeatureFlags` method.
+Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call:
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.reloadFeatureFlags()
 ```

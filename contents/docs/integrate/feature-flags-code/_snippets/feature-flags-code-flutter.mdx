@@ -1,19 +1,35 @@
 ### Boolean feature flags
 
 ```dart
-Posthog().isFeatureEnabled('flag-key');
+if (await Posthog().isFeatureEnabled('flag-key')) {
+    // Do something differently for this user
+
+    // Optional: fetch the payload
+    final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
+}
 ```
 
 ### Multivariate feature flags
 
-Available from version [4.0.0-alpha.1](https://github.com/PostHog/posthog-flutter/releases/tag/4.0.0-alpha.1) and above.
-
 ```dart
 if (await Posthog().getFeatureFlag('flag-key') == 'variant-key') { // replace 'variant-key' with the key of your variant
-    // do something
+    // Do something differently for this user
+
+    // Optional: fetch the payload
+    final matchedFlagPayload = await Posthog().getFeatureFlagPayload('flag-key');
 }
 ```
 
+### Ensuring flags are loaded before usage
+
+Every time a user loads a screen, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in the storage.
+
+This means that for most screens, the feature flags are available immediately – **except for the first time a user visits**.
+
 ### Reloading feature flags
 
-Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call `Posthog().reloadFeatureFlags()`.
+Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call:
+
+```dart
+await Posthog().reloadFeatureFlags();
+```

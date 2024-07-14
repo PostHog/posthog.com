@@ -192,7 +192,7 @@ We're currently reviewing our objectives for Q4, but we're also looking to make 
 
 We're currently working on a process for "quality scoring" signups. 
 
-Our favored solution is based on an Ideal Customer Profile (ICP) score created by our customer success team. Once we've got the process nailed, it'll give us a much better picture of which channels are most valuable to us. 
+Our favored solution is based on [an Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) (ICP) score created by our customer success team. Once we've got the process nailed, it'll give us a much better picture of which channels are most valuable to us. 
 
 We're also considering several other supporting signals, such as new users who ingest events or invite colleagues. We're still debating the best approach here.
 

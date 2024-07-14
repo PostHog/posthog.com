@@ -34,7 +34,7 @@ Once the app has been configured, you can enable it by flipping the toggle and i
 > The User Agent Populator requires a PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
 > Not running 1.30.0? Find out [how to update](https://posthog.com/docs/runbook/upgrading-posthog)!
 
-1. Visit the 'Apps' page in your instance of PostHog.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
 2. Search for 'User Agent Populator'.
 3. [Configure](#configure) the app by clicking on the settings icon.
 4. Click the toggle to enable the app.

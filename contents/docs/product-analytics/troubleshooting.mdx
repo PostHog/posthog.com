@@ -7,9 +7,7 @@ There are a few common reasons that you may not see events appear in your projec
 
 ### 1. Your library is configured incorrectly
 
-This is the most common reason events may be missing. To debug if this issue, you can try send events to `https://webhook.site/`:
-
-> Warning: Make sure to not use sensitive data while debugging using third-party tools.
+This is the most common reason events don't appear. To debug this, you can try sending events to `https://webhook.site/`. Make sure to not use sensitive data while debugging using third-party tools.
 
 1. Visit [webhook.site](https://webhook.site/) and copy “Your unique URL”.
 2. In your PostHog [initialization code](https://posthog.com/docs/product-analytics/installation), replace "https://app.posthog.com" or "https://eu.posthog.com" if using the EU Cloud) with the URL you copied from webhook.site. For example:
@@ -65,44 +63,44 @@ posthog = PostHog::Client.new({
 
 3. Send a few events from your app.
 
-If events are *not* visible in webhook.site, that means you have misconfigured your PostHog library, or incorrectly formatted your events. Consult our [installation guide](/docs/product-analytics/installation) for how to initialize PostHog.
+If events are *not* visible in webhook.site, that means you have misconfigured your PostHog library, or incorrectly formatted your events. Consult our [guide for how to initialize PostHog](/docs/product-analytics/installation).
 
-If events are indeed visible in webhook.site, these means that you have configured your PostHog correctly.
+If events are visible in webhook.site, it means that you have configured PostHog correctly.
 
 ![Events visible on webhook.site](../../images/docs/product-analytics/events-in-webhook.site.png)
 
 ### 2. An app has been configured incorrectly
 
-Another common reason for missing events is that certain plugins have been configured to drop certain or all events. To debug if this is the case, follow the below steps in order:
+Another common reason for missing events is that an app has been configured to drop certain or all events. To debug if this is the case, follow these steps in order:
 
-1. If you're using the [Filter Out](/cdp/filter-out) plugin, ensure that it is configured correctly.
+1. If you're using the [Filter Out](/cdp/filter-out) app, ensure that it is configured correctly.
 2. Try to temporarily disable the Filter Out plugin.
 3. Try to temporarily disable all other enabled plugins.
 
 ### 3. There is a bug the PostHog library
 
-Sometimes, bugs in the PostHog library may be the cause of missing events. However, this is quite uncommon.
+Sometimes, bugs in the PostHog library may be the cause of missing events. However, this is quite rare.
 
-To debug if this is the issue, most of our SDKs have an option to enable debug logging. Consult the relevant [SDK docs](/docs/libraries) for how to do this.
+To debug if this is the issue, most of our SDKs have an option to [enable debug logging](/docs/libraries).
 
 If you're using the [JavaScript web](/docs/libraries/js) library, you can identify failed requests using the network tab in your browser devtools:
 
 1. Open devtools in your browser and switch to the network tab.
-2. Identify the failed requests to app.posthog.com/e (or eu.posthog.com/e if you're using EU Cloud).
-3. Right click one of those request and click Copy -> Copy as cURL.
+2. Identify the failed requests to `app.posthog.com/e` (or `eu.posthog.com/e` if you're using EU Cloud).
+3. Right click one of those requests and click Copy -> Copy as cURL.
 4. See below on how to [report your issue](#report-your-issue) and attach your cURL command to get further support.
 
 ![network request being sent to posthog](../../images/docs/product-analytics/network-request-to-posthog.png)
 
 ### 4. Events are not ingested after being received by PostHog
 
-If your library is configured correctly and successfully sending events to PostHog, events may get lost in the ingestion pipeline – e.g. if there is an [active incident](https://status.posthog.com).
+If your library is configured correctly and successfully sending events to PostHog, events may get lost in the ingestion pipeline – e.g. if there is an ongoing outage.
 
 To confirm if this is the issue, use the following steps:
 
-1. Ensure that PostHog is not [experiencing an incident](https://status.posthog.com), as this may cause ingestion lags.
+1. Ensure PostHog is not experiencing an incident by checking [the status page]](https://status.posthog.com), as this may cause ingestion lags.
 
-2. Check your PostHog app for any [ingestion warnings](https://app.posthog.com/data-management/ingestion-warnings).
+2. Check PostHog for any [ingestion warnings](https://app.posthog.com/data-management/ingestion-warnings).
 
 3. Send your event as a cURL request directly
     - i) Copy your cURL request.
@@ -115,7 +113,7 @@ Once you have confirmed there is an issue with event ingestion, you can [report 
 
 ## Does PostHog block bots by default?
 
-Yes, PostHog blocks most known bots by default. Bots we block are listed below:
+Yes, PostHog blocks most known bots by default, including:
 
 | **Google bots**        | **Non-Google bots** |
 |------------------------|---------------------|
@@ -145,7 +143,7 @@ Yes, PostHog blocks most known bots by default. Bots we block are listed below:
 |                        | 'yahoo! slurp',     |
 |                        | 'yandexbot',        |
 
-Want a bot added to this list? Request it via the in-app feedback form, or raise an issue in the [posthog-js GitHub repo](https://github.com/PostHog/posthog-js/issues).
+Want a bot added to this list? Request it via [the in-app feedback form](http://us.posthog.com/home#supportModal), or raise an issue in the [posthog-js GitHub repo](https://github.com/PostHog/posthog-js/issues).
 
 ## Report your issue
 
@@ -183,7 +181,7 @@ Body:
 
 ### Step 2: Submit a support ticket
 
-1. [Submit a support ticket via the app](https://app.posthog.com/home#supportModal=bug%3Aingestion) (or contact the [EU-Cloud support](https://eu.posthog.com/home#supportModal=bug%3Aingestion)). Submit your issue in the below format, and also include the decoded request from step 1.
+1. [Submit a support ticket via the app](https://app.posthog.com/home#supportModal=bug%3Aingestion). Submit your issue in the below format, and also include the decoded request from step 1.
 ```
 # Library:
 // e.g.

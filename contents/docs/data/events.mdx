@@ -9,25 +9,17 @@ availability:
 
 ---
 
-The most important thing that PostHog does is to capture events from your website or application. An event is any action a user takes on your website or in your application - if they click a button or visits a page, that's an event.
+## What is an event?
 
-## Live events
+An event is any recordable interaction a user has in your application or website. Clicking a button, or visiting a page, is an event. Moving a mouse cursor isn't.
 
-![Events table](../../images/features/events/live-events.png)
+You can create custom events, but PostHog also autocaptures many basic events (e.g. pageviews) for you. See our [autocapture docs](/docs/data/autocapture) for more on what it does and doesn't capture.
 
-To see your live events table, click [Events](https://app.posthog.com/events) on the left sidebar. Here you will see a live feed of Events as they are happening.
-
-## Event properties
-
-You can view the properties of each event by clicking on the items in the ‘Event’ column:
-
-![Events table](../../images/features/events/event-properties.png)
-
-You can also click each user to view a their entire event history.
+You can view recent events from the [Activity page](https://us.posthog.com/events) in PostHog, which can be set to automatically update every 30 seconds for a live view of activity in your app.
 
 ## Default events and properties
 
-You may notice that some events or properties are prefixed with `$` e.g., `$pageview`, `$feature_flag_called`, `$current_url`, or `$os_version`. This indicates that these are default PostHog events or properties.
+You may notice that some events or properties are prefixed with `$` and show a PostHog icon next to them – e.g., `$pageview`, `$feature_flag_called`, `$current_url`, or `$os_version`. This indicates that these are default PostHog events or properties.
 
 ### Pageview events
 
@@ -43,9 +35,7 @@ Similar to pageview, `$pageleave` events are automatically sent. You can disable
 
 You can filter events by [properties](/docs/integrate/client/js#sending-user-information) and [cohorts](/docs/user-guides/cohorts) to focus on specific events that are occurring in your project.
 
-While ingesting events in the plugin server PostHog detects some type information for properties to allow more intelligent filtering.
-
-PostHog detects:
+While ingesting events, PostHog detects some type information for properties to allow more intelligent filtering, such as:
 
 -   Boolean
 -   Dates and Timestamps
@@ -53,7 +43,7 @@ PostHog detects:
 -   Strings
 -   Everything else
 
-If you feel something has been detected incorrectly, you can manually change the type by going to `Data management -> Properties -> Choose event -> Edit`, and then changing the property type manually.
+If you feel something has been detected incorrectly, you can manually change the type by going to `Data management -> Properties` selecting an event, clicking on `Edit`, and then changing the property type manually.
 
 ### Boolean (true or false)
 
@@ -63,8 +53,6 @@ PostHog detects boolean values and allows filtering by only:
 -   doesn't equal
 -   is set
 -   is not set
-
-![query list for a boolean property lists only equals, doesn't equal, is set, and is not set](../../images/features/events/boolean-type-operators.png)
 
 ### Dates and Timestamps
 
@@ -78,7 +66,7 @@ PostHog detects several formats of string as dates and times:
 -   YYYY/MM/DD HH:mm:SS
 -   [the RFC 822 standard](https://datatracker.ietf.org/doc/html/rfc822)
 
-In detection day and month are interchangeable so MM-DD-YYYY would be detected as a date.
+In detection, day and month are interchangeable so MM-DD-YYYY would be detected as a date.
 
 Ten and Thirteen digit numbers are detected as [timestamps](https://en.wikipedia.org/wiki/Unix_time) if the property name includes "time" or "timestamp"
 
@@ -90,9 +78,7 @@ Filtering against that property will then show a date picker and allows filterin
 -   is set
 -   is not set
 
-![query list for a date time property lists only equals, before, after, is set, is not set](../../images/features/events/datetime-type-operators.png)
-
-> Read more about [how PostHog calculates timestamps](/docs/data/timestamps).
+**See also:** [How PostHog calculates timestamps](/docs/data/timestamps).
 
 ### Numeric
 
@@ -107,8 +93,6 @@ PostHog detects numeric properties and allow filtering by only:
 -   is set
 -   is not set
 
-![query list for a numeric property lists equals, doesn't equal, matches regex, doesn't match regex, greater than, lower than, is set, and is not set](../../images/features/events/numeric-type-operators.png)
-
 ### Strings (text)
 
 PostHog detects text content. If it is not true/false, numeric, or a date time. You can filter by:
@@ -122,18 +106,6 @@ PostHog detects text content. If it is not true/false, numeric, or a date time. 
 -   is set
 -   is not set
 
-![query list for a string property lists equals, doesn't equal, contains, doesn't contain, matches regex, doesn't match regex, is set, and is not set](../../images/features/events/string-type-operators.png)
-
-### Everything else
-
-If PostHog does not detect a type for an event property. You can choose any of the possible filters.
-
-## Autocapture event tracking
-
-PostHog can capture all frontend events automatically. This means you do not need to manually add tracking to individual buttons or other parts of your product to start analyzing user behavior.
-
-To get started, see our [autocapture docs](/docs/data/autocapture).
-
 ## Push-based event tracking
 
 Most users of PostHog will want to combine their back-end data, such as user information, with the front end actions of those users in their UI. There are three ways of passing data to PostHog:
@@ -144,10 +116,8 @@ Most users of PostHog will want to combine their back-end data, such as user inf
 
 ### Further reading
 
-Want to know more about what's possible with Events in PostHog? Try these tutorials:
-
 -   [How to trigger Discord notifications when an action is detected in PostHog](/tutorials/how-to-connect-discord-to-posthog-with-zapier)
 -   [How to automatically organize PostHog actions in Notion](/tutorials/how-to-connect-posthog-and-notion-with-zapier)
 -   [The complete guide to event tracking](/tutorials/event-tracking-guide)
 
-Want more? Check our [full list of PostHog tutorials](https://posthog.com/tutorials).
+Want more? Check our [full list of PostHog tutorials](/tutorials).

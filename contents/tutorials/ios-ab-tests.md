@@ -3,6 +3,7 @@ title: "How to run A/B tests in iOS"
 date: 2023-11-16
 author: ["lior-neu-ner"]
 tags: ['experimentation']
+featuredVideo: https://www.youtube-nocookie.com/embed/BtHeP8lORJY
 ---
 
 [A/B tests](/ab-testing) help you make your iOS app better by comparing the impact of changes on key metrics. 
@@ -82,7 +83,7 @@ Our basic set up is now complete. Build and run your app to test that it's worki
 
 First, add [posthog-ios](https://github.com/PostHog/posthog-ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios#cocoapods) or [Carthage](/docs/libraries/ios#carthage)). To add the package dependency to your Xcode project, select File > Add Package Dependency and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
 
-Note that for this tutorial we use version `2.1.0` of the SDK.
+Note that for this tutorial we use version `3.1.0` of the SDK.
 
 ![Add PostHog from Swift Package Manager](../images/tutorials/ios-ab-tests/swift-npm.png)
 
@@ -96,10 +97,10 @@ import PostHog
 @main
 struct App: App {
     init() {
-        let configuration = PHGPostHogConfiguration(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
-        configuration.captureApplicationLifecycleEvents = true
-        configuration.recordScreenViews = true
-        PHGPostHog.setup(with: configuration)
+        let POSTHOG_API_KEY = "<ph_project_api_key>"
+        let POSTHOG_HOST = "<ph_instance_address>" // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+        let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) 
+        PostHogSDK.shared.setup(configuration)
     }
     
     var body: some Scene {
@@ -121,13 +122,13 @@ import PostHog
 // ...rest of code
 
 Button("Click Me!") {
-    PHGPostHog.shared()?.capture("feature_button_clicked")
+    PostHogSDK.shared.capture("feature_button_clicked")
 }
 
 // ...rest of code
 ```
 
-To check your setup, build and run your app. Click your button a few times. You should start seeing events in the [PostHog event explorer](https://app.posthog.com/events).
+To check your setup, build and run your app. Click your button a few times. You should start seeing events in the [activity tab](https://app.posthog.com/events).
 
 ![iOS events captured](../images/tutorials/ios-ab-tests/event-captured.png)
 
@@ -175,7 +176,7 @@ import PostHog
 
                Button("Go to Next Screen") {
                     // Fetch feature flag here
-                    let flagValue = PHGPostHog.shared()?.getFeatureFlag("ios-background-color-experiment") as? String
+                    let flagValue = PostHogSDK.shared.getFeatureFlag("ios-background-color-experiment") as? String
                     if flagValue == "test" {
                         isTestVariant = true
                     }
@@ -201,5 +202,5 @@ Lastly, you can [view your test results](/docs/experiments/testing-and-launching
 ## Further reading
 
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
-- [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes)
-- [How to run A/B tests in Android](/tutorials/android-ab-tests)
+- [How to set up analytics in iOS](/tutorials/ios-analytics)
+- [How to set up feature flags in iOS](/tutorials/ios-feature-flags)

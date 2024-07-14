@@ -9,6 +9,8 @@ tags:
   - Founders
   - People
   - Culture
+crosspost:
+  - Blog  
 ---
 
 Our CEO and co-founder, James Hawkins, [recently joined Y Combinator](https://www.youtube.com/watch?v=gF1NGUsjxLU) to talk about the first five hires PostHog ever made, how we made them, and why. This is the story behind each hire, and the lessons we learned along the way.

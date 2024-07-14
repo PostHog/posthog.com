@@ -56,10 +56,6 @@
         "url": "/product/feature-flags"
     },
     {
-        "name": "First Time Event Tracker",
-        "url": "/cdp/first-time-event-tracker"
-    },
-    {
         "name": "GeoIP Enricher",
         "url": "/cdp/geoip-enrichment"
     },
@@ -106,10 +102,6 @@
     {
         "name": "Property Filter",
         "url": "/cdp/property-filter"
-    },
-    {
-        "name": "Redshift (Export)",
-        "url": "/cdp/redshift-export"
     },
     {
         "name": "Replicator",

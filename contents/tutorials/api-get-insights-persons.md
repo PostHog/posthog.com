@@ -15,11 +15,11 @@ This tutorial shows you the basics of the PostHog API. We focus on `GET` request
 
 Like most APIs, we must authenticate ourselves before we can access our data in PostHog. To do this, you need a personal API key. 
 
-To create a personal API key in PostHog, click your avatar icon in the top right corner of your PostHog instance, then click the gear icon to go to "My settings." 
+To create a personal API key in PostHog, click your avatar icon in the bottom left corner of your PostHog instance, then click the gear icon to go to "My settings." 
 
 ![Profile](../images/tutorials/api-get-insights-persons/profile.png)
 
-In "My settings," scroll down to "Personal API Keys," click "Create personal API key," add a name, and click "Create key." This creates a key and value in the table below. Make sure to save the value as it is only shown once, and you must create a new key if you lose it. The value looks like this:
+In "My settings," go to the ["Personal API Keys" tab](https://us.posthog.com/settings/user-api-keys) click "Create personal API key," add a name, and click "Create key." This creates a key and value in the table below. Make sure to save the value as it is only shown once, and you must create a new key if you lose it. The value looks like this:
 
 ```
 phx_IFdqdH62fKoax8x17bwu8gujE0tsTBZRvNmlMJ7eZxz

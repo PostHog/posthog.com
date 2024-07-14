@@ -12,9 +12,11 @@ import { User } from '../../hooks/useUser'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
-        <div className={`overflow-hidden rounded-full ${props.className}`}>
+        <div
+            className={`overflow-hidden p-px border border-light dark:border-dark rounded-full bg-accent dark:bg-accent-dark ${props.className}`}
+        >
             {props.src ? (
-                <img className="w-full h-full" alt="" src={props.src} />
+                <img className="inline-flex w-full aspect-cover rounded-full" alt="" src={props.src} />
             ) : (
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -154,7 +156,7 @@ export default function Sidebar() {
                                     <li key={label} className="mt-1 pt-1 first:mt-0">
                                         <Link
                                             to={`/questions/topic/${slug}`}
-                                            className="block text-sm p-1  rounded-sm hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] top-[.5px] "
+                                            className="block text-sm p-1 rounded-sm hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] top-[.5px] "
                                         >
                                             {label}
                                         </Link>

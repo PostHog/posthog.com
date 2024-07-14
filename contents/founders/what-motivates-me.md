@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - Being a founder
+crosspost:
+  - Blog  
 ---
 
 PostHog got pretty far (17k customers across all our products, went through Y Combinator, seed, series A and B raised, $MM revenue) before I really figured out what motivates me.
@@ -32,7 +34,7 @@ It is _a lot_ of fun getting things right, and this motivated me early in the co
 
 * Dealing with customers totally transparently. For example, when we launched, none of our competitors had pricing on their pricing page. It's a lot of fun having a community weigh in on what we build.
 
-Neither [Tim](../handbook/company/team/tim-glaser) (my cofounder) nor I can imagine working anywhere else.
+Neither [Tim](../people/tim-glaser) (my cofounder) nor I can imagine working anywhere else.
 
 ## When we launched – being grateful that anyone cares
 

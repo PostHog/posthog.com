@@ -25,16 +25,6 @@ You can then use this cohort of new users for further analysis.
 
 > **Note:** since this is a behavioral cohort (based on events), this cohort won’t work with feature flags.
 
-### First time event tracker
-
-You can set up and use the [first time event tracker app](/docs/apps/first-time-event-tracker) to add a property to events that indicates if it was the first time it happened.
-
-To set it up, search for "First Time Event Tracker" in your PostHog instance, set the event you want to track in the configuration (like `$pageview`) and enable the app. 
-
-![First time event tracker](../images/tutorials/track-new-returning-users/first.png)
-
-You can then filter for events where `is_first_event_user` is `true` recently to get new users for analysis. This method is useful if you don't want to set up or use cohorts in your analysis. 
-
 ### Manually set user property
 
 If neither of these works for you, you can set up a user property manually in a custom event. 

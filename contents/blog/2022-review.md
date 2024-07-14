@@ -73,7 +73,7 @@ My (then) one-year-old daughter got diagnosed with bilateral retinoblastoma (a t
 
 We made too many improvements to list on user-facing functionality, and infra / ingestion-based functionality. It feels like we can make new things appear, although Q1 will be a big test – it'll be one of our most ambitious quarters.
 
-Other teams also get their work out the door quickly, unimpeded by bureaucracy / excessive planning. We've had a ton of marketing content appearing, a smooth time with our [People and Ops team](../handbook/small-teams/people), and a [Growth Team](../handbook/small-teams/growth) that can't stop producing winning variants!
+Other teams also get their work out the door quickly, unimpeded by bureaucracy / excessive planning. We've had a ton of marketing content appearing, a smooth time with our [People and Ops team](../teams/people), and a [Growth Team](../teams/growth) that can't stop producing winning variants!
 
 ### I'm really glad we're not doing outbound / went for a growth team instead
 

@@ -38,6 +38,7 @@ There is no limit on the number of events you can send in a batch, but the entir
 ```bash
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<ph_project_api_key>",
+  "historical_migration": false,
   "batch": [
     {
       "event": "batched_event_name_1",
@@ -51,6 +52,8 @@ curl -v -L --header "Content-Type: application/json" -d '{
   ]
 }' https://app.posthog.com/batch/ 
 ```
+
+The `historical_migration` field is optional and must be set to `true` when running imports from other systems: this will ensure that events are processed in order without triggering our spike detection systems. For realtime events, it can be left out or set to `false`.
 
 ### Alias
 

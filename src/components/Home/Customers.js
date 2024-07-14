@@ -1,37 +1,30 @@
 import React from 'react'
 import { useInView } from 'react-intersection-observer'
-import airbus from './images/airbus.svg'
-import airbusDark from './images/airbus_dark.svg'
-import clickhouse from './images/clickhouse.svg'
-import clickhouseDark from './images/clickhouse_dark.svg'
-import hasura from './images/hasura.svg'
-import hasuraDark from './images/hasura_dark.svg'
-import assemblyai from './images/assemblyai.svg'
-import assemblyaiDark from './images/assemblyai_dark.svg'
-import joybird from './images/joybird.svg'
-import joybirdDark from './images/joybird_dark.svg'
-import landmark from './images/landmark.svg'
-import landmarkDark from './images/landmark_dark.svg'
 import Logomark from './images/Logomark'
-import outbrain from './images/outbrain.svg'
-import outbrainDark from './images/outbrain_dark.svg'
-import phantom from './images/phantom.svg'
-import phantomDark from './images/phantom_dark.svg'
-import staples from './images/staples.svg'
-import staplesDark from './images/staples_dark.svg'
-import dhl from './images/dhl.svg'
-import dhlDark from './images/dhl_dark.svg'
-import yCombinator from './images/y-combinator.svg'
-import yCombinatorDark from './images/y-combinator_dark.svg'
+
+import airbus from './images/customers/airbus.svg'
+import assemblyai from './images/customers/assemblyai.svg'
+import dhl from './images/customers/dhl.svg'
+import hasura from './images/customers/hasura.svg'
+import joybird from './images/customers/joybird.svg'
+import mux from './images/customers/mux.svg'
+import outbrain from './images/customers/outbrain.svg'
+import phantom from './images/customers/phantom.svg'
+import posthog from './images/customers/posthog.svg'
+import staples from './images/customers/staples.svg'
+import trustwallet from './images/customers/trustwallet.svg'
+import yCombinator from './images/customers/y-combinator.svg'
+
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Link from 'components/Link'
 
-const Logo = ({ src, className = '' }) => <img className={`icon px-4 md:px-6 lg:px-4 w-full ${className}`} src={src} />
+const Logo = ({ src, alt, className = '' }) => (
+    <img className={`icon px-4 md:px-6 lg:px-4 w-full ${className}`} src={src} alt={alt} />
+)
 
-const Customer = ({ image, imageDark, className = '', url }) => {
+const Customer = ({ image, alt, className = '', url }) => {
     const { websiteTheme } = useValues(layoutLogic)
-    const logo = websiteTheme === 'dark' ? imageDark || image : imageDark
     return (
         <li
             className="flex items-center justify-center 
@@ -42,14 +35,16 @@ const Customer = ({ image, imageDark, className = '', url }) => {
             lg:h-40
             bg-accent-dark
             rounded
+            text-primary
+            dark:text-primary-dark
         "
         >
             {url ? (
                 <Link to={url}>
-                    <Logo className={className} src={logo} />
+                    <Logo className={className} src={image} alt={alt} />
                 </Link>
             ) : (
-                <Logo className={className} src={logo} />
+                <Logo className={className} src={image} alt={alt} />
             )}
         </li>
     )
@@ -68,31 +63,36 @@ export default function Customers() {
                 <ul className="list-none m-0 p-0 pb-4 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 flex-grow w-full text-primary-dark gap-4 z-10 relative">
                     <Customer
                         url="/customers/ycombinator"
-                        className="max-h-[44px]"
+                        className="max-h-[48px]"
                         image={yCombinator}
-                        imageDark={yCombinatorDark}
+                        alt="Y Combinator"
                     />
-                    <Customer className="max-h-[36px]" image={staples} imageDark={staplesDark} />
-                    <Customer className="max-h-[36px]" image={airbus} imageDark={airbusDark} />
-                    <Customer className="max-h-[35px]" image={dhl} imageDark={dhlDark} />
-                    <Customer className="max-h-[50px]" image={landmark} imageDark={landmarkDark} />
-                    <Customer className="max-h-[40px]" image={outbrain} imageDark={outbrainDark} />
-                    <Customer className="max-h-[35px]" image={clickhouse} imageDark={clickhouseDark} />
-                    <Customer url="/customers/hasura" className="max-h-[51px]" image={hasura} imageDark={hasuraDark} />
+                    <Customer className="max-h-[40px]" image={staples} alt="Staples" />
+                    <Customer className="max-h-[36px]" image={airbus} alt="Airbus" />
+                    <Customer className="max-h-[35px]" image={dhl} alt="DHL" />
+                    <Customer className="max-h-[50px]" image={outbrain} alt="Outbrain" />
+                    <Customer className="max-h-[40px]" image={mux} alt="Mux.com" />
                     <Customer
-                        url="/customers/phantom"
-                        className="max-h-[46px]"
-                        image={phantom}
-                        imageDark={phantomDark}
+                        url="/customers/hasura"
+                        className="max-h-[60px] relative -top-1"
+                        image={hasura}
+                        alt="Hasura"
                     />
-                    <Customer className="max-h-[50px]" image={joybird} imageDark={joybirdDark} />
+                    <Customer url="/customers/phantom" className="max-h-[50px]" image={phantom} alt="Phantom.app" />
+                    <Customer className="max-h-[55px]" image={joybird} alt="Joybird" />
                     <Customer
                         url="/customers/assemblyai"
-                        className="max-h-[50px]"
+                        className="max-h-[55px]"
                         image={assemblyai}
-                        imageDark={assemblyaiDark}
+                        alt="AssemblyAI"
                     />
-                    <Customer url="/blog/posthog-marketing" imageDark="/brand/posthog-logo-white.svg" />
+                    <Customer className="max-h-[50px]" image={trustwallet} alt="Trust Wallet" />
+                    <Customer
+                        url="/blog/posthog-marketing"
+                        className="max-h-[45px]"
+                        image={posthog}
+                        alt="PostHog - so meta!"
+                    />
                 </ul>
             </div>
         </section>

@@ -9,6 +9,8 @@ tags:
  - Marketing
  - Sales & CS
  - Founders
+crosspost:
+  - Blog 
 ---
 
 Features tell, benefits sell. Well, they used to.

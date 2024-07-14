@@ -9,6 +9,8 @@ tags:
   - Founders
   - Revenue
   - Sales & CS
+crosspost:
+  - Blog  
 ---
 
 Imagine being able to grow twice as fast with just a few hours of work. Changing your pricing has a real chance to get you there. 

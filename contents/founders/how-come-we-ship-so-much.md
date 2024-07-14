@@ -12,6 +12,7 @@ tags:
   - Culture
 crosspost:
   - Product engineers
+  - Blog
 ---
 
 Clearly there are exceptions, but we ship a lot faster than the average company.
@@ -101,7 +102,7 @@ At the time of writing, [we are 37 people](/team), only 11 of whom are in Go To 
 
 ![company composition](../images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
 
-We don't do outbound sales, our [marketing team](/handbook/small-teams/marketing) is very small, we only have one product manager, and our [exec team](/handbook/small-teams/exec) is only 3 people. These things are all by design. 
+We don't do outbound sales, our [marketing team](/teams/marketing) is very small, we only have one product manager, and our [exec team](/teams/exec) is only 3 people. These things are all by design. 
 
 We're product-led because our ideal users, engineers, want to try something rather than sit on a call.
 

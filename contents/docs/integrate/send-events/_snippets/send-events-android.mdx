@@ -5,6 +5,8 @@ import Intro from "./intro.mdx"
 <Intro />
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.capture(event = "user_signed_up")
 ```
 
@@ -13,6 +15,8 @@ PostHog.capture(event = "user_signed_up")
 <SettingProperties />
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.capture(
     event = "user_signed_up",
     properties = mapOf(
@@ -42,6 +46,8 @@ If you want to manually send a new screen capture event, use the `screen` functi
 This function requires a `screenTitle`. You may also pass in an optional `properties` object.
 
 ```kotlin
+import com.posthog.PostHog
+
 PostHog.screen(
     screenTitle = "Dashboard",
     properties = mapOf(

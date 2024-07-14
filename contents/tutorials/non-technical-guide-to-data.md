@@ -46,7 +46,7 @@ Understanding the events, actions, and properties in PostHog, and what your team
 
 Another way to understand the data in PostHog is to see the captured events from your usage. This helps you connect data in PostHog with product usage in the real world. You’ll be able to relive your usage of the product through the data inside PostHog
 
-To do this, click the “Live Events” tab, then click “Add filter.” Search “Person properties” for an identifier for your company uses like username or email. Enter your email or username and you should see all the events your product has captured from you (if identifying users is set up).
+To do this, click the “Activity” tab, then click “Add filter.” Search “Person properties” for an identifier for your company uses like username or email. Enter your email or username and you should see all the events your product has captured from you (if identifying users is set up).
 
 ![Live events](../images/tutorials/non-technical-guide-to-data/live-events.png)
 

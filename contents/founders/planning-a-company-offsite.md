@@ -8,6 +8,8 @@ author:
 tags:
   - Founders
   - Ops & finance
+crosspost:
+  - Blog  
 ---
 
 As a company born at the beginning of the pandemic, PostHog has been fully-remote from its inception. Our team is 35+ people distributed across 11 countries; we have no central office, but [we still value getting together](/blog/asynchronous-remote-companies) in person. 

@@ -2,6 +2,14 @@
 title: Troubleshooting and FAQs
 ---
 
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import PersonsFeatureFlagLight from '../../images/docs/feature-flags/persons-feature-flag-tab-light-mode.png'
+import PersonsFeatureFlagDark from '../../images/docs/feature-flags/persons-feature-flag-tab-dark-mode.png'
+import BehavioralCohortsLight from '../../images/docs/feature-flags/behavioral-cohorts-light-mode.png'
+import BehavioralCohortsDark from '../../images/docs/feature-flags/behavioral-cohorts-dark-mode.png'
+import DeuplicateAsStaticCohortLight from '../../images/docs/feature-flags/duplicate-as-static-cohort-light-mode.png'
+import DeuplicateAsStaticCohortDark from '../../images/docs/feature-flags/duplicate-as-static-cohort-dark-mode.png'
+
 ## Why is my feature flag not working as expected?
 
 Here's a list of suggestions to troubleshoot your flag:
@@ -10,7 +18,12 @@ Here's a list of suggestions to troubleshoot your flag:
 
 Check the **feature flags tab** on [the persons page](https://app.posthog.com/persons) for your specific person.
 
-![Persons feature flag tab](../../images/docs/feature-flags/persons-feature-flag-tab.png)
+<ProductScreenshot
+    imageLight={PersonsFeatureFlagLight} 
+    imageDark={PersonsFeatureFlagDark}
+    alt="Persons feature flag tab" 
+    classes="rounded"
+/>
 
 - If the flag is shown as disabled here, check the "match evaluation" column to know the understand why.
 - If the flag is shown as enabled here, there may be a problem in your code. Double-check the steps to [add feature flag code](/docs/feature-flags/adding-feature-flag-code).
@@ -20,6 +33,8 @@ Check the **feature flags tab** on [the persons page](https://app.posthog.com/pe
 If you're [identifying](/docs/product-analytics/identify) users, they may see a different value for a feature flag before and after you call `identify()`. 
 
 To ensure they experience consistent behavior, check that you call `identify()` before evaluating the feature flag.
+
+> *Note*: This does not apply to server-side SDKs, because you're explicitly telling us which distinct ID to use to evaluate flags, rather than depending on the identify() event to tell us which distinct ID to use.
 
 ### 3. An ad-blocker may be blocking calls
 
@@ -109,7 +124,13 @@ To fix this, you can [bootstrap feature flags](/docs/feature-flags/bootstrapping
 
 Behavioral cohorts are [dynamic cohorts](/docs/data/cohorts#dynamic-cohorts) created using an event or action filter (i.e., the options under the "behavioral" subheading)
 
-![Behavioral cohorts](../../images/docs/feature-flags/behavioral-cohorts.png)
+<ProductScreenshot
+    imageLight={BehavioralCohortsLight} 
+    imageDark={BehavioralCohortsDark}
+    alt="Behavioral cohorts" 
+    classes="rounded"
+/>
+
 <Caption>
 Behavioral cohorts are dynamic cohorts created using the options under the "behavioral" subheading.
 </Caption>
@@ -118,5 +139,10 @@ Feature flags require fast evaluation and behavioral queries are relatively slow
 
 A workaround is to create a dynamic behavioral cohort and then duplicate it as a static cohort (using the button on the top right of the cohort page).
 
-![How to duplicate as static cohort](../../images/docs/feature-flags/duplicate-as-static-cohort.png)
 
+<ProductScreenshot
+    imageLight={DeuplicateAsStaticCohortLight} 
+    imageDark={DeuplicateAsStaticCohortDark}
+    alt="How to duplicate as static cohort" 
+    classes="rounded"
+/>

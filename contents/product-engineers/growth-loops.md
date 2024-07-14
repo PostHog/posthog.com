@@ -12,6 +12,7 @@ tags:
   - Founders
 crosspost:
   - Founders
+  - Blog
 ---
 
 ## What are growth loops?

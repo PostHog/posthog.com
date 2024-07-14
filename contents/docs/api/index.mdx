@@ -31,6 +31,8 @@ There are separate limits for different kinds of resources.
 
 - The [HogQL query](/docs/hogql#api-access) endpoint (`/api/project/:id/query`) has a rate limit of `120/hour`.
 
+- For [feature flag local evaluation](/docs/feature-flags/local-evaluation) (which is enabled in SDKs when you input a personal API key), the rate limit is `600/minute`.
+
 - For the rest of the create, read, update, and delete endpoints, the rate limits are `480/minute` and `4800/hour`.
 
 - For Public POST-only endpoints like event capture (`/capture`) and feature flag evaluation (`/decide`), there are no rate limits.

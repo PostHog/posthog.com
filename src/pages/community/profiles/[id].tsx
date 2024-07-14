@@ -31,10 +31,10 @@ import Tooltip from 'components/Tooltip'
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
         <div
-            className={`overflow-hidden rounded-full p-[1px] bg-white border border-light dark:border-dark ${props.className}`}
+            className={`overflow-hidden aspect-square rounded-full bg-white border border-light dark:border-dark ${props.className}`}
         >
             {props.src ? (
-                <img className="w-full h-full rounded-full bg-white border-white border-[2px]" alt="" src={props.src} />
+                <img className="w-full object-fill" alt="" src={props.src} />
             ) : (
                 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

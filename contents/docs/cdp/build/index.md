@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Build an app
 sidebar: Docs
 showTitle: true
 ---
@@ -91,4 +91,4 @@ That's all for the crash course. There's a lot you can do with apps, such as run
 
 1. For in-depth information on all the special functions, check out [the developer reference docs](/docs/apps/build/reference).
 2. For building your own app from start to finish, check out [our tutorial](/docs/apps/build/tutorial).
-3. To ask questions or collaborate with others in the community, join [the #Contributing channel in our community Slack group](/slack).
+3. To ask questions or collaborate with others in the community, join [our community page](/posts).

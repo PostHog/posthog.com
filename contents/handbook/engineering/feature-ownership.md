@@ -9,7 +9,7 @@ Each feature at PostHog has an Engineering owner. This owner is responsible for 
 When a bug or feature request comes in, we tag it with the relevant label (see labels below). The owner is responsible for then prioritizing any bug/request that comes in for each feature. This does not mean working on every bug/request, an owner can make the deliberate decision that working on something is not the best thing to work on, but every request should be looked at.
 
 
-> 💡 The Team Platform works a bit differently. Each subteam owns certain parts of PostHog. Among other things, this helps reduce any lead time when critical fixes are needed. Please review the [Team Platform](/handbook/small-teams/infrastructure) page for further details.
+> 💡 The Team Platform works a bit differently. Each subteam owns certain parts of PostHog. Among other things, this helps reduce any lead time when critical fixes are needed. Please review the [Team Platform](/teams/infrastructure) page for further details.
 
 
 ## Feature list
@@ -28,7 +28,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Billing | [Team Growth][Team Growth]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Client libraries | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Cohorts | [Team Feature Success][Team Feature Success]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
-| Correlation Analysis | [Team Feature Success][Team Feature Success]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
+| Correlation Analysis | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
 | Dashboards | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Data Management | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
 | Events | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
@@ -80,11 +80,11 @@ Some of the features we are building may exist in other products already. It is 
 [@Twixes]: https://github.com/Twixes
 [@yakkomajuri]: https://github.com/yakkomajuri
 [@timgl]: https://github.com/timgl
-[Team Product Analytics]: /handbook/small-teams/product-analytics
-[Team Web Analytics]: /handbook/small-teams/web-analytics
-[Team Replay]: /handbook/small-teams/replay
-[Team Pipeline]: /handbook/small-teams/pipeline
-[Team Infrastructure]: /handbook/small-teams/infrastructure
-[Team Feature Success]: /handbook/small-teams/feature-success
-[Team Infrastructure]: /handbook/small-teams/infrastructure
-[Team Growth]: /handbook/small-teams/growth
+[Team Product Analytics]: /teams/product-analytics
+[Team Web Analytics]: /teams/web-analytics
+[Team Replay]: /teams/replay
+[Team Pipeline]: /teams/pipeline
+[Team Infrastructure]: /teams/infrastructure
+[Team Feature Success]: /teams/feature-success
+[Team Infrastructure]: /teams/infrastructure
+[Team Growth]: /teams/growth

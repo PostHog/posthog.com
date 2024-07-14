@@ -12,19 +12,23 @@ const linklist: IProps[] = [
         url: '/products/product-analytics',
         items: [
             {
-                title: 'Product Analytics',
+                title: 'Product analytics',
                 url: '/product-analytics',
             },
             {
-                title: 'Session Replay',
+                title: 'Web analytics',
+                url: '/web-analytics',
+            },
+            {
+                title: 'Session replay',
                 url: '/session-replay',
             },
             {
-                title: 'Feature Flags',
+                title: 'Feature flags',
                 url: '/feature-flags',
             },
             {
-                title: 'A/B Testing',
+                title: 'A/B testing',
                 url: '/ab-testing',
             },
             {
@@ -100,19 +104,19 @@ const linklist: IProps[] = [
         url: '/docs',
         items: [
             {
-                title: 'Product Analytics',
+                title: 'Product analytics',
                 url: '/docs/product-analytics/',
             },
             {
-                title: 'Session Recording',
+                title: 'Session recording',
                 url: '/docs/session-replay',
             },
             {
-                title: 'Feature Flags',
+                title: 'Feature flags',
                 url: '/docs/feature-flags',
             },
             {
-                title: 'A/B Testing',
+                title: 'A/B testing',
                 url: '/docs/experiments',
             },
             {
@@ -124,7 +128,7 @@ const linklist: IProps[] = [
                 url: '/docs/cdp',
             },
             {
-                title: 'Data Warehouse',
+                title: 'Data warehouse',
                 url: '/docs/data-warehouse',
             },
             {
@@ -212,8 +216,8 @@ const linklist: IProps[] = [
                 url: '/handbook/help',
             },
             {
-                title: 'Small teams',
-                url: '/handbook/small-teams/team-structure',
+                title: 'Team structure',
+                url: '/handbook/team-structure',
             },
             {
                 title: 'People & Ops',
@@ -250,8 +254,12 @@ const linklist: IProps[] = [
                 url: '/changelog',
             },
             {
-                title: 'Team',
-                url: '/team',
+                title: 'People',
+                url: '/people',
+            },
+            {
+                title: 'Small teams',
+                url: '/teams',
             },
             {
                 title: 'Blog',
@@ -333,7 +341,7 @@ export function Footer(): JSX.Element {
     const social: Social[] = [
         {
             Icon: <Twitter className="w-5 h-5 box-border fill-current" />,
-            url: 'https://twitter.com/posthog',
+            url: 'https://x.com/posthog',
         },
         {
             Icon: (
@@ -416,6 +424,14 @@ export function Footer(): JSX.Element {
                                 className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
                             >
                                 SOC 2
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/docs/privacy/hipaa-compliance"
+                                className="font-bold text-sm text-primary/70 hover:text-primary/90 dark:text-primary-dark dark:hover:text-primary-dark"
+                            >
+                                HIPAA
                             </Link>
                         </li>
                         <li>

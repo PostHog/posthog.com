@@ -10,6 +10,7 @@ tags:
   - Product-market fit
 crosspost:
   - Founders
+  - Blog
 ---
 
 Focus is important, right? Building a single great product and monetizing it is the path to startup success. Everyone knows this. It _feels_ intuitively correct. 

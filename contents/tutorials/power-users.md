@@ -17,7 +17,7 @@ In this tutorial, we’ll cover how to **identify** and **analyze power users** 
 
 ## Defining your power users
 
-There is no one-size-fits-all definition for power users – every company and product has its own. Defining what they do is key to identifying and analyzing them. Ideally, your power users should align with your ideal customer profile and your [key product metrics](/blog/b2b-saas-product-metrics).
+There is no one-size-fits-all definition for power users – every company and product has its own. Defining what they do is key to identifying and analyzing them. Ideally, your power users should align with [your ideal customer profile](/newsletter/ideal-customer-profile-framework) and your [key product metrics](/blog/b2b-saas-product-metrics).
 
 One common aspect between definitions of power users is high usage, whether that is visiting every day, using feature lots, or long session times. A power user relies on the product, it is core to their workflow. They also use advanced features more than average.
 

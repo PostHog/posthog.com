@@ -16,7 +16,7 @@ const client = new PostHog(
     { host: '<ph_instance_address>' } // TIP: You can omit this line if using PostHog Cloud
 )
 
-await client.shutdownAsync() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
+await client.shutdown() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
 ```
 
 You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.

@@ -22,7 +22,7 @@ This guide explains why we price by event and offers some tips for estimating yo
 
 ## Why we price based on events
 
-Pricing software is hard. It's a delicate balance between being affordable for your ideal customer profile, competitive in the marketplace, while still allowing you to grow and fund further development in the product.
+Pricing software is hard. It's a delicate balance between being affordable for your [ideal customer profile](/newsletter/ideal-customer-profile-framework), competitive in the marketplace, while still allowing you to grow and fund further development in the product.
 
 We settled on event-based pricing for two main reasons:
 

@@ -9,6 +9,8 @@ tags:
   - Founders
   - Finance & ops
   - Being a founder
+crosspost:
+  - Blog  
 ---
 
 We run finance at PostHog without a dedicated finance person. This is a comprehensive, step-by-step guide to do just that. If you implement _everything_ below, it should take one person a week to complete. 

@@ -14,7 +14,7 @@ tags:
   - Offsites
 ---
 
-As an all-remote team, we know how important getting together in person is (we’ve [written about this before](/blog/asynchronous-remote-companies)). Our [product analytics team](/handbook/small-teams/product-analytics) (plus Luke, Annika, Cory, and Lottie) recently got back from an offsite in Rome – see also [how we plan a killer offsite in 8 weeks](/blog/planning-a-company-offsite). 
+As an all-remote team, we know how important getting together in person is (we’ve [written about this before](/blog/asynchronous-remote-companies)). Our [product analytics team](/teams/product-analytics) (plus Luke, Annika, Cory, and Lottie) recently got back from an offsite in Rome – see also [how we plan a killer offsite in 8 weeks](/blog/planning-a-company-offsite). 
 
 The team ate a lot of pizza and gelato, refocused and aligned current work, ran 360 feedback sessions, and more (see our engineer Paul's [summary thread here](https://twitter.com/pauldambra/status/1576257069766037506)). On top of all of this, they had a hackathon and built a bunch of new things.
 
@@ -74,12 +74,12 @@ Some day the hedgehog might help you identify popular areas and potential areas 
 
 ## Takeaways
 
-One outcome of the offsite was a new focus on [nailing data exploration](/handbook/small-teams/product-analytics#objective-1-nail-data-exploration). The team felt they had good data visualization tools, but not enough for data exploration. For example, it is difficult to move quickly between different types of data (events, persons, groups), often requiring recreating the same filters for multiple queries.
+One outcome of the offsite was a new focus on [nailing data exploration](/teams/product-analytics#objective-1-nail-data-exploration). The team felt they had good data visualization tools, but not enough for data exploration. For example, it is difficult to move quickly between different types of data (events, persons, groups), often requiring recreating the same filters for multiple queries.
 
 Many of the projects related to this objective (on top of being fun and sparking joy).
 
 ![Rome offsite team](../images/blog/rome-hackathon/rome-hackathon.jpeg)
 
-We like to be transparent with what we build. The details are found in the linked PRs as well as more expansively on the teams page in [our handbook](/handbook/small-teams/team-structure). We do this because we value feedback a lot. For example, users have been asking for better data exploration tools, which helped it become a priority. 
+We like to be transparent with what we build. The details are found in the linked PRs as well as more expansively on the teams page in [our handbook](/handbook/team-structure). We do this because we value feedback a lot. For example, users have been asking for better data exploration tools, which helped it become a priority. 
 
 If you have more feedback about your use cases or what we're planning to build, let us know on [get in touch](https://app.posthog.com/home#supportModal) or [raise an issue](https://github.com/PostHog/posthog/issues) on our repo. 

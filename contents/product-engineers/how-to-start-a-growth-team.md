@@ -9,6 +9,8 @@ tags:
   - Growth engineering
   - Product engineers
   - AB testing
+crosspost:
+  - Blog  
 ---
 [Thomas Owers](https://www.linkedin.com/in/thomasowers/) knew nothing about [growth engineering](/blog/what-is-a-growth-engineer) when he started the first growth team at [Let's Do This](https://www.letsdothis.com/) – a Y Combinator startup with $80M in funding.
 

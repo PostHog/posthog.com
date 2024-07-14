@@ -9,6 +9,8 @@ tags:
   - Founders
   - Fundraising
   - Being a founder
+crosspost:
+  - Blog  
 ---
 
 We raised over $27,000,000 then realized we should be growing out of our own revenue instead.
@@ -78,7 +80,7 @@ There were three surprising lessons we had during this phase:
 
 1. Charging customers for a product led to more usage. Early paying customers were more demanding of quality. When we fixed quality issues, our free _and_ paid products both accelerated.
 
-2. How important it is to track your anti-Ideal Customer Profile. Don't just monitor deals that close, but track those that are dragging on – what do they have in common?
+2. How important it is to track your anti-[Ideal Customer Profile](/newsletter/ideal-customer-profile-framework). Don't just monitor deals that close, but track those that are dragging on – what do they have in common?
 
 3. How quickly we went from getting the first 5 paying customers, to 100.
 

@@ -369,8 +369,8 @@ export const WebAnalytics = () => {
                 />
             )}
             contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
-            buttonLabel="Read the docs"
-            buttonUrl="/docs/web-analytics"
+            buttonLabel="Explore"
+            buttonUrl="/web-analytics"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
             buttonChildClasses="!bg-lime-green border-primary !text-primary group-hover:text-black"
         />
@@ -647,8 +647,8 @@ export const ABTesting = () => {
                 />
             )}
             contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
-            buttonLabel="Read the docs"
-            buttonUrl="/docs/web-analytics"
+            buttonLabel="Explore"
+            buttonUrl="/ab-testing"
             buttonClasses="md:!w-auto !w-full"
             buttonChildClasses="!bg-[#9C19BD]"
         />

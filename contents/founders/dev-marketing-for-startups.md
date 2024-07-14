@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - Marketing
+crosspost:
+  - Blog  
 ---
 
 Since starting PostHog in 2020, we’ve learned a bunch about what does and doesn’t work when it comes to marketing to engineers. There are plenty of articles about ‘developer marketing’ out there, but most of them are either generic or focused on late-stage companies. 

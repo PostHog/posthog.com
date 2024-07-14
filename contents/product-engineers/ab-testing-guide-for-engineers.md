@@ -7,6 +7,8 @@ featuredImageType: full
 tags: 
   - AB testing
   - Product engineers
+crosspost:
+  - Blog   
 ---
 
 As a software engineer, you have two options:

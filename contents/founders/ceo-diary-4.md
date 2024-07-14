@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - Marketing
+crosspost:
+  - Blog  
 ---
 
 I've been asked this three times today, so I thought I'd explain it from a founder's perspective. This is what I've learned so far.

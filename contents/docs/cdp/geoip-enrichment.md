@@ -24,7 +24,7 @@ Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment]
 ## Installation
 
 1. Log in to your PostHog instance
-2. Click 'Apps' on the left-hand tool bar
+2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 3. Search for 'GeoIP'
 4. Select the GeoIP app, press 'Install' and follow the on-screen instructions
 

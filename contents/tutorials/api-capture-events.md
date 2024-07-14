@@ -46,9 +46,11 @@ body = {
     }
 }
 
+url = "<ph_instance_address>/capture/"
+
 response = requests.post(url, headers=headers, json=body)
 
-print(response.json()
+print(response.json())
 ```
 
 </MultiLanguage>
@@ -93,9 +95,11 @@ body = {
     }
 }
 
+url = "<ph_instance_address>/capture/"
+
 response = requests.post(url, headers=headers, json=body)
 
-print(response.json()
+print(response.json())
 ```
 
 </MultiLanguage>

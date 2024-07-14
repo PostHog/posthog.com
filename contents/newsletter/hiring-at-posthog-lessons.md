@@ -9,6 +9,7 @@ tags:
   - Culture
 crosspost:
   - Founders
+  - Blog
 ---
 
 Hiring isn’t just important, it might be the most important thing for a startup.

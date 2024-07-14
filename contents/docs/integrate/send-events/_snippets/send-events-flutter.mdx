@@ -5,9 +5,7 @@ import Intro from "./intro.mdx"
 <Intro />
 
 ```dart
-import 'package:posthog_flutter/posthog_flutter.dart';
-
-Posthog().capture(
+await Posthog().capture(
   eventName: 'user_signed_up',
 );
 ```
@@ -17,7 +15,7 @@ Posthog().capture(
 <SettingProperties />
 
 ```dart
-Posthog().capture(
+await Posthog().capture(
   eventName: 'user_signed_up',
   properties: {
     'login_type': 'email',

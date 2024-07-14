@@ -8,6 +8,7 @@ tags:
   - Culture
 crosspost:
   - Founders
+  - Blog
 ---
 
 PostHog is a team of 38 people across 11 different countries. We’re entirely remote, and as we covered in our last issue, designed for speed. What’s fuelling this intercontinental race car? A little thing called asynchronous work.

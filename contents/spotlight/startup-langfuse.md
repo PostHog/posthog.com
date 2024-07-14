@@ -27,7 +27,7 @@ Like [PostHog](/handbook/story), Langfuse originally entered Y Combinator with a
 
 While searching for ideas the team started building new prototypes with LLMs and it was only through this process that they started to notice how hard it was to scale LLM products and arrived at the idea for Langfuse. 
 
-> **Putting it into practice:** Pivoting successfully depends on [finding a problem](/founders/product-market-fit-game#level-1---find-a-significant-problem-to-work-on) that is both solvable and _worth_ solving. We know. [We did it six times](founders/story-about-pivots). 
+> **Putting it into practice:** Pivoting successfully depends on [finding a problem](/founders/product-market-fit-game#level-1---find-a-significant-problem-to-work-on) that is both solvable and _worth_ solving. We know. [We did it six times](/founders/story-about-pivots). 
 
 ### Take advantage of the Y Combinator community
 

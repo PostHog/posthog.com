@@ -45,9 +45,7 @@ const Accordion = ({ title, children, id }: { title: string; children: React.Rea
 
 export default function Job({
     data: {
-        team,
-        teamLead,
-        teamInfo,
+        teams,
         objectives,
         mission,
         allJobPostings,
@@ -60,22 +58,24 @@ export default function Job({
             fields: { tableOfContents, html, title, slug },
         },
     },
-    pageContext: { teamName, gitHubIssues },
+    pageContext: { gitHubIssues },
 }) {
     const timezone = parent?.customFields?.find(({ title }) => title === 'Timezone(s)')?.value
     const salaryRole = parent?.customFields?.find(({ title }) => title === 'Salary')?.value || title
     const missionAndObjectives = parent?.customFields?.find(({ title }) => title === 'Mission & objectives')?.value
     const showObjectives = missionAndObjectives !== 'false'
     const availableTeams = groupBy(allJobPostings.nodes, ({ parent }) => {
-        const team = parent?.customFields?.find(({ title }) => title === 'Team')?.value
-        return !team ? 'TBD' : team
+        const teams = JSON.parse(parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]')
+        return teams.length > 1 ? 'Multiple teams' : `Team ${teams[0]}`
     })
+    const multipleTeams = teams?.nodes?.length > 1
+    const teamName = multipleTeams ? 'Multiple teams' : `Team ${teams?.nodes?.[0]?.name}`
 
     const openRolesMenu = []
     Object.keys(availableTeams)
         .sort()
         .forEach((team) => {
-            openRolesMenu.push({ name: `Team ${team}` })
+            openRolesMenu.push({ name: team })
             availableTeams[team]?.forEach(({ fields: { title, slug } }) => {
                 openRolesMenu.push({
                     name: title.split(' - ')[0],
@@ -123,7 +123,7 @@ export default function Job({
                                 : {}),
                         },
                         {
-                            ...(showObjectives && objectives
+                            ...(!multipleTeams && showObjectives && objectives
                                 ? { value: "Your team's mission and objectives", url: 'mission-objectives', depth: 0 }
                                 : {}),
                         },
@@ -132,20 +132,13 @@ export default function Job({
                     ]}
                     hideSearch
                     hideSurvey
-                    sidebar={
-                        <Sidebar
-                            teamSlug={teamInfo?.fields?.slug}
-                            teamName={teamName}
-                            team={team?.nodes}
-                            teamLead={teamLead?.nodes[0]}
-                        />
-                    }
+                    sidebar={<Sidebar teams={teams?.nodes} />}
                     title="Careers"
                     menu={menu}
                 >
                     <div className="relative">
                         <div>
-                            {teamName && <p className="m-0 opacity-60 pb-2">Team {teamName}</p>}
+                            <p className="m-0 opacity-60 pb-2">{teamName}</p>
                             <h1 className="m-0 text-5xl">{jobTitle}</h1>
                             <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                                 {departmentName?.toLowerCase() !== 'speculative' && (
@@ -242,7 +235,7 @@ export default function Job({
                                         </div>
                                     </Accordion>
                                 )}
-                                {showObjectives && objectives && (
+                                {!multipleTeams && showObjectives && objectives && (
                                     <Accordion title="Your team's mission and objectives" id="mission-objectives">
                                         <div className="mb-6">
                                             <MDXProvider components={{ HideFromJobPosting: () => null }}>
@@ -274,39 +267,7 @@ export default function Job({
 }
 
 export const query = graphql`
-    query JobQuery($id: String!, $teamName: String!, $teamNameInfo: String!, $objectives: String!, $mission: String!) {
-        teamLead: allSqueakProfile(
-            filter: {
-                teams: { data: { elemMatch: { attributes: { name: { in: [$teamName] } } } } }
-                leadTeams: { data: { elemMatch: { attributes: { name: { in: [$teamName] } } } } }
-            }
-        ) {
-            nodes {
-                squeakId
-                firstName
-                lastName
-                country
-                companyRole
-                avatar {
-                    url
-                }
-            }
-        }
-        team: allSqueakProfile(
-            filter: { teams: { data: { elemMatch: { attributes: { name: { in: [$teamName] } } } } } }
-        ) {
-            nodes {
-                squeakId
-                firstName
-                lastName
-                country
-                companyRole
-                pineappleOnPizza
-                avatar {
-                    url
-                }
-            }
-        }
+    query JobQuery($id: String!, $objectives: String!, $mission: String!, $teams: [String]) {
         ashbyJobPosting(id: { eq: $id }) {
             id
             departmentName
@@ -367,16 +328,47 @@ export const query = graphql`
                 }
             }
         }
-        teamInfo: mdx(frontmatter: { title: { eq: $teamNameInfo } }) {
-            fields {
-                slug
-            }
-        }
         objectives: mdx(fields: { slug: { eq: $objectives } }) {
             body
         }
         mission: mdx(fields: { slug: { eq: $mission } }) {
             body
+        }
+        teams: allSqueakTeam(filter: { name: { in: $teams } }) {
+            nodes {
+                id
+                name
+                leadProfiles {
+                    data {
+                        id
+                    }
+                }
+                profiles {
+                    data {
+                        id
+                        attributes {
+                            country
+                            firstName
+                            lastName
+                            pineappleOnPizza
+                            leadTeams {
+                                data {
+                                    attributes {
+                                        name
+                                    }
+                                }
+                            }
+                            avatar {
+                                data {
+                                    attributes {
+                                        url
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 `

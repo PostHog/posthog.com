@@ -304,7 +304,7 @@ Since launch, we've seen companies and solo devs create many useful, clever apps
 
 - "Data-out" apps for exporting PostHog data to [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export), [Rudderstack](/apps/rudderstack-export) (community built), and [Intercom](/apps/intercom).
 
-- Ingestion-filtering apps like [Property Filter](/apps/property-filter) (community built) and [First Time Event Tracker](/apps/first-time-event-tracker) that give users, even more, control over events and properties sent to PostHog.
+- Ingestion-filtering apps like [Property Filter](/apps/property-filter) (community built) and First Time Event Tracker that give users, even more, control over events and properties sent to PostHog.
 
 Our vision for apps is to continue to enable more customizability for data flows. We want users to have access to the data they need to create better products, and apps are key to doing this. 
 

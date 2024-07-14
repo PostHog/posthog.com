@@ -22,7 +22,7 @@ For this reason Witty Works created the [Property Filter app](/apps/property-fil
 First, install the [Property Filter](/apps/property-filter) to your PostHog instance. You can find it in the Apps Library by following these steps:
 
 - Log in to your PostHog instance
-- Click 'Apps' on the left-hand tool bar
+-  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
 - Search for 'Property Filter' press 'Install'
 
 It's important to note that this app effectively removes information from PostHog events by setting properties to null. Apps on PostHog run in sequence, so it usually makes sense to place this app at the end of a sequence. If you are filtering `$ip`, `event.ip` will also be set to `null`.

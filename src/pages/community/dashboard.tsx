@@ -10,6 +10,9 @@ export default function CommunityPage() {
     const { user, fetchUser } = useUser()
     const { questions, isLoading, fetchMore } = useQuestions({
         filters: {
+            subject: {
+                $ne: '',
+            },
             resolved: {
                 $ne: true,
             },
@@ -20,7 +23,19 @@ export default function CommunityPage() {
             },
         },
     })
-    const { questions: recentQuestions } = useQuestions({ limit: 1 })
+    const { questions: recentQuestions } = useQuestions({
+        limit: 1,
+        filters: {
+            subject: {
+                $ne: '',
+            },
+            slugs: {
+                slug: {
+                    $notContainsi: '/community/profiles',
+                },
+            },
+        },
+    })
     const topicSubscriptions = user?.profile?.topicSubscriptions
 
     useEffect(() => {

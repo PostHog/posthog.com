@@ -1,10 +1,6 @@
 ---
-date: 2023-05-10
+date: 2024-02-13
 title: "Product engineer vs software engineer: How are they different?"
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
 author:
   - ian-vanagas
 featuredImage: ../images/blog/product-engineer.jpg
@@ -13,15 +9,17 @@ category: Engineering
 tags:
   - Explainers
   - Product engineers
+crosspost:
+  - Product engineers
 ---
 
-Software companies are changing. Where once product managers and software engineers dominated, now a new role is emerging: the [product engineer](/blog/what-is-a-product-engineer).
+Software companies were once dominated by two types of roles: product managers and software engineers, but this is changing. A new role is emerging: the [product engineer](/blog/what-is-a-product-engineer).
 
 Want proof? Look at this graph:
 
 ![product-engineer-trends](../images/blog/product-engineer-trend.png)
 
-Online searches for product engineers have grown over 80% in the last year and are 3x greater now than just two years ago.
+Online searches for product engineers have grown by 80% since 2021 as startups like [ourselves](https://newsletter.posthog.com/p/beyond-the-10x-engineer), [incident.io](http://incident.io/), and [Ghost](https://ghost.org/), prioritize engineers who are customer obsessed, talk to them directly, and comfortable working autonomously. 
 
 Product engineers are changing the way companies think about engineering. To help explain why, we’ll compare the role of product engineer with the traditional (and still very necessary) role of full-stack software engineer.
 
@@ -48,9 +46,7 @@ Software engineers are more idealistic. They look for the best solution to the p
 
 Product engineers still spend the majority of their time coding, but they have responsibilities outside of coding that software engineers don't.
 
-Product engineers also spend their time talking to customers, digging into usage data, and researching the competitive landscape. They test other products, build prototypes, and brainstorm experiments to make their product better.
-
-They spend time communicating with users, their team, and other members of the company. They communicate what they learned in research, why their work relates to that research, and how to prioritize what to work on next. They own the product roadmap, and this comes with a responsibility to communicate it.
+Product engineers also spend their time talking to customers, digging into usage data, and researching the competitive landscape. They test other products, build prototypes, and brainstorm experiments to make their product better. They use this research to prioritize a roadmap that they own, and take responsibility for explaining the roadmap and gathering feedback from users and the company.
 
 Software engineers focus on writing code, testing it, and maintaining it. They look for ways to optimize code, improve scalability, and solve bugs. They are deeply focused on specific areas of technology, whether that is databases, data pipelines, backend APIs, or client-side app frameworks. This means researching and reading documentation, updates, and code.
 
@@ -60,9 +56,9 @@ There's no single reason, but typically it's motivated by a desire to ship produ
 
 At larger companies, product engineers are seen as a way to drive innovation, sometimes through the creation of smaller teams that have the freedom to ideate and execute product ideas. Software engineers and multidiscipline teams are still important, but product engineers can inject urgency where it's needed.
 
-[Elon Musk](/blog/learnings-from-elon)'s Twitter is a good example of company that could benefit from product engineers, whether he's aware of it or not. Elon wants to make dramatic changes to the product, but in his opinion, the organization he inherited was too large and unwieldy to achieve this. 
+[Elon Musk](/blog/learnings-from-elon)'s takeover of Twitter is a good example of company that could have benefitted from product engineers. He wanted to make dramatic changes to the product, but in his opinion, the organization he inherited was too large and unwieldy to achieve this.
 
-In other words, he doesn't need software engineers to maintain or optimize the existing codebase; he needs product engineers who can identify problems and opportunities, and execute solutions quickly and independently. 
+In other words, he didn't need software engineers to maintain or optimize the existing codebase; he needed product engineers who can identify problems and opportunities, and execute solutions quickly and independently, even if they aren't polished. The evidence of him trying this were features like limiting the amount of tweets people could view or changing how verification works, dramatic departures from the existing functionality.
 
 ## Is product engineering right for you?
 

@@ -22,7 +22,7 @@ if (posthog.getFeatureFlag('flag-key')  == 'variant-key') { // replace 'variant-
 
 ### Ensuring flags are loaded before usage
 
-Every time a user loads a page, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in a cookie.
+Every time a user loads a page, we send a request in the background to fetch the feature flags that apply to that user. We store those flags in your chosen persistence option (local storage by default).
 
 This means that for most pages, the feature flags are available immediately – **except for the first time a user visits**.
 
@@ -39,6 +39,20 @@ posthog.onFeatureFlags(function () {
 
 ### Reloading feature flags
 
-Feature flag values are cached. If something changed with your user and you want to refetch their flag values, call `posthog.reloadFeatureFlags()`.
+Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call:
 
+```js-web
+posthog.reloadFeatureFlags()
+```
 
+### Request timeout
+
+You can configure the `feature_flag_request_timeout_ms` parameter when initializing your PostHog client to set a flag request timeout. This helps prevent your code from being blocked in the case when PostHog's servers are too slow to respond. By default, this is set at 3 seconds.
+
+```js
+posthog.init('<ph_project_api_key>', { 
+        api_host: '<ph_instance_address>',
+        feature_flag_request_timeout_ms: 3000 // Time in milliseconds. Default is 3000 (3 seconds).
+    }
+)
+```

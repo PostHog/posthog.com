@@ -11,6 +11,7 @@ tags:
  - Product analytics
 crosspost:
  - Product engineers
+ - Blog
 ---
 
 Building a startup is like trying to find the exit of a dark cave. Sometimes you hear sounds leading you somewhere, but it's mostly dark and hard to understand. In this cave, analytics is like a flashlight. It doesn’t automatically point you to the exit, but it shows you where you're going. You stumble less and spend less time moving in the wrong direction.
@@ -43,7 +44,7 @@ As much as we value analytics, we believe the best way to create a successful st
 
 Session recordings are the most useful analytical tool for early-stage startups. They help you learn exactly how early users are using your product, uncovering usage patterns, obvious failure modes, and unexpected behaviors. In other words, big problems.
 
-PostHog includes 15k monthly recordings for free – more than enough for any early-stage product. Just include the [snippet or library](/docs/integrate) in your app and turn them on in project settings. Once done, you get a steady stream of session recordings (if you have users) in your PostHog instance. 
+PostHog includes 5k monthly recordings for free – more than enough for any early-stage product. Just include the [snippet or library](/docs/integrate) in your app and turn them on in project settings. Once done, you get a steady stream of session recordings (if you have users) in your PostHog instance. 
 
 To maximize your problem-solving potential, add [Sentry](/docs/libraries/sentry) and connect it to PostHog to monitor errors. When Sentry captures an error, the PostHog connection links the session recording. The recording becomes the re-creation steps that make squashing bugs and fixing issues easier.
 

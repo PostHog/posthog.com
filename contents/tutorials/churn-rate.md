@@ -67,7 +67,7 @@ On top of making improvements to problem areas, we can monitor users at high ris
 
 The first is creating the cohort from the list of users in our chart. As mentioned earlier, clicking on the dormant part of the chart gives us a list of users who churned during this period. Clicking "Save as cohort" in the bottom right corner will turn them into a cohort we can monitor and analyze.
 
-The second way to create a cohort is by going to the cohort page and filtering to match the high churn risk users. In our example, the filters are not completing a key event (uploading a file) in the last 30 days and stopping downloading files in the last 15 days (but having done so before).
+The second way to create a cohort is by going to the cohort page and filtering to match the high churn risk users. In our example, the filters are stopping uploading and downloading files in the last 15 days (but having done so in the last 30).
 
 ![Churn risk cohort](../images/tutorials/churn-rate/churn-risk-cohort.png)
 

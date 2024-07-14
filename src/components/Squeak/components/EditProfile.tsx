@@ -127,7 +127,7 @@ function Avatar({ values, setFieldValue }) {
     return (
         <div className="relative w-full aspect-square rounded-full flex justify-center items-center border border-gray-accent-light dark:border-gray-accent-dark text-black/50 dark:text-white/50 overflow-hidden group">
             {imageURL ? (
-                <img className="w-full h-full absolute inset-0 object-cover" src={imageURL} />
+                <img className="w-full absolute inset-0 object-cover" src={imageURL} />
             ) : (
                 <DefaultAvatar className="w-[60px] h-[60px] absolute bottom-0" />
             )}

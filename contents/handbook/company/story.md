@@ -30,7 +30,7 @@ Since then, we've realized that the same reasons that PostHog was appealing to u
 
 After we finished Y Combinator, [we raised a $3.025M seed round](../../blog/raising-3m-for-os). This was from Y Combinator's Continuity Fund, 1984 Ventures. You can learn more about how we raised the money.
 
-As we started raising, we started hiring. We brought on board [Marius, Eric and James G](../../handbook/company/team).
+As we started raising, we started hiring. We brought on board [Marius, Eric and James G](../../people).
 
 ## May 2020: First 1,000 users
 
@@ -60,7 +60,7 @@ Everyone takes a mandatory two weeks off over Christmas to relax.
 
 We raised a $15M Series B [a little ahead of schedule](../../blog/why-we-raised-a-15m-series-b-ahead-of-schedule), led by existing investors Y Combinator. 
 
-We're now focused on achieving strong product/market fit with our [target segment](../../handbook/strategy/overview#target-audience-for-2021) in 2021. 
+We're now focused on achieving strong product/market fit with our [target segment](../../handbook/overview#target-audience-for-2021) in 2021. 
 
 Our team has now grown to 25 people in 10 countries. 
 

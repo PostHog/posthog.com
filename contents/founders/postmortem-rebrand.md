@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Marketing
   - Founders
+crosspost:
+  - Blog  
 ---
 We recently completed an entire rebrand of our website. From start to finish, it took less than a month. This sounds like an incredible feat of discipline - and in a way, it was. But the path to success wasn't linear; it took us more than six months to get to this point, with plenty of diversions along the way.
 

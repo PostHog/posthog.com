@@ -14,6 +14,8 @@ import { Listbox } from '@headlessui/react'
 import { Chevron } from 'components/Icons'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
 import Spinner from 'components/Spinner'
+import usePostHog from 'hooks/usePostHog'
+import { navigate } from 'gatsby'
 
 type QuestionFormValues = {
     subject: string
@@ -118,6 +120,7 @@ function QuestionFormMain({
     showTopicSelector,
     disclaimer = true,
 }: QuestionFormMainProps) {
+    const posthog = usePostHog()
     const { user, logout } = useUser()
 
     return (
@@ -129,6 +132,7 @@ function QuestionFormMain({
                     body: '',
                     images: [],
                     topic: undefined,
+                    url: undefined,
                     ...initialValues,
                 }}
                 validate={(values) => {
@@ -144,12 +148,20 @@ function QuestionFormMain({
                     }
                     return errors
                 }}
-                onSubmit={(values) => onSubmit(values, user)}
+                onSubmit={(values) => {
+                    if (values.url) {
+                        posthog?.capture('community honeypot rejection')
+                        return navigate('/')
+                    }
+                    onSubmit(values, user)
+                }}
             >
                 {({ setFieldValue, isValid, values, submitForm }) => {
                     return (
                         <Form className="mb-0">
-                            <Avatar className="w-[40px] mr-[10px]" image={getAvatarURL(user?.profile)} />
+                            <div className="w-[40px] h-[40px] mr-[10px] float-left rounded-full overflow-hidden">
+                                <Avatar className="w-[40px] aspect-fill" image={getAvatarURL(user?.profile)} />
+                            </div>
 
                             <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
                                 {showTopicSelector && <Select value={values.topic} setFieldValue={setFieldValue} />}
@@ -177,6 +189,14 @@ function QuestionFormMain({
                                         values={values}
                                     />
                                 </div>
+                                <Field
+                                    className="opacity-0 absolute left-0 top-0 h-0 w-0 -z-50 border-0 p-0"
+                                    name="url"
+                                    id="url"
+                                    type="text"
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                />
                             </div>
                             <span className="ml-[50px]">
                                 <Button
@@ -244,9 +264,7 @@ export const QuestionForm = ({
         (formType === 'question' ? (
             <span className="font-bold">Ask a question</span>
         ) : (
-            <span className="squeak-reply-label">
-                <strong className="underline">Reply</strong> to question
-            </span>
+            <span className="squeak-reply-label">Reply</span>
         ))
 
     const createQuestion = async ({ subject, body, topic }: QuestionFormValues) => {
@@ -395,7 +413,9 @@ export const QuestionForm = ({
                 }[view]
             ) : (
                 <div className="flex flex-1 space-x-2">
-                    <Avatar className="w-[40px]" image={getAvatarURL(user?.profile)} />
+                    <div className="rounded-full overflow-hidden w-[40px] h-[40px]">
+                        <Avatar className="w-[40px]" image={getAvatarURL(user?.profile)} />
+                    </div>
                     <Button
                         disabled={archived}
                         onClick={() => setView('question-form')}

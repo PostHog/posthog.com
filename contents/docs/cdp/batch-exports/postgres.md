@@ -47,12 +47,13 @@ This is the schema of all the fields that are exported to Postgres.
 
 ## Creating the batch export
 
-1. Navigate to the exports page in your PostHog instance (Quick links if you use [PostHog Cloud US](https://app.posthog.com/project/apps?tab=batch_exports) or [PostHog Cloud EU](https://eu.posthog.com/project/apps?tab=batch_exports)).
-2. Click "Create export workflow".
-3. Select **Postgres** as the batch export destination.
-4. Fill in the necessary [configuration details](#postgres-configuration).
-5. Finalize the creation by clicking on "Create".
-6. Done! The batch export will schedule its first run on the start of the next period.
+1. Subscribe to data pipelines add-on in [your billing settings](https://us.posthog.com/organization/billing) if you haven't already.
+2. Click on [data pipeline](https://us.posthog.com/apps) in the sidebar and go to the exports tab in your PostHog instance.
+3. Click "Create export workflow".
+4. Select **Postgres** as the batch export destination.
+5. Fill in the necessary [configuration details](#postgres-configuration).
+6. Finalize the creation by clicking on "Create".
+7. Done! The batch export will schedule its first run on the start of the next period.
 
 ## Postgres configuration
 

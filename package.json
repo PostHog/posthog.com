@@ -34,7 +34,7 @@
         "@heroicons/react": "^1.0.6",
         "@hubspot/api-client": "^7.1.2",
         "@popperjs/core": "^2.11.2",
-        "@posthog/icons": "0.4.16",
+        "@posthog/icons": "0.6.8",
         "@slack/bolt": "^3.8.1",
         "@supabase/supabase-js": "^1.29.4",
         "@tailwindcss/container-queries": "^0.1.1",
@@ -49,6 +49,7 @@
         "busboy": "^1.6.0",
         "chart.js": "^4.3.3",
         "chrome-aws-lambda": "^10.1.0",
+        "cloudinary-react": "^1.8.1",
         "clsx": "^2.0.0",
         "cntl": "^1.0.0",
         "core-js": "^3.21.1",
@@ -82,9 +83,10 @@
         "gatsby-remark-katex": "^6.20.0",
         "gatsby-remark-prismjs": "^6.0.0",
         "gatsby-remark-static-images": "^1.2.1",
-        "gatsby-source-ashby": "^1.0.3",
+        "gatsby-source-ashby": "^1.0.4",
         "gatsby-source-filesystem": "^4.20.0",
         "gatsby-source-shopify": "^8.12.3",
+        "gatsby-transformer-cloudinary": "^4.5.0",
         "gatsby-transformer-json": "^4.20.0",
         "gatsby-transformer-remark": "^5.25.1",
         "gatsby-transformer-sharp": "^4.20.0",
@@ -215,12 +217,12 @@
         "storybook-addon-gatsby": "0.0.2",
         "storybook-dark-mode": "^1.0.8",
         "style-loader": "^3.3.0",
-        "tailwindcss": "^3.3.5",
+        "tailwindcss": "3.4.1",
         "webpack": "5"
     },
     "husky": {
         "hooks": {
-            "pre-commit": "node ./scripts/mdxImportGen && git add src/mdxGlobalComponents.js && lint-staged"
+            "pre-commit": "lint-staged"
         }
     },
     "workspaces": [

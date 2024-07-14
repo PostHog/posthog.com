@@ -738,7 +738,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Canada',
         area: 'Toronto, Ontario',
-        locationFactor: 0.6,
+        locationFactor: 0.7,
         currency: 'CAD',
     },
     {

@@ -12,6 +12,8 @@ category: Product growth
 tags:
  - Guides
  - Product metrics
+crosspost:
+  - Blog 
 ---
 
 ## What is a product health metric?

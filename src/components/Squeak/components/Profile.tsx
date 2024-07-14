@@ -12,10 +12,12 @@ type ProfileProps = {
 export const Profile = ({ className, profile }: ProfileProps) => {
     return profile?.attributes ? (
         <Link
-            className={`flex items-center !text-black dark:!text-white ${className}`}
+            className={`flex items-center !text-black dark:!text-white relative ${className}`}
             to={`/community/profiles/${profile.id}`}
         >
-            <Avatar className="w[40px] h-[40px] mr-[10px]" image={getAvatarURL(profile?.attributes)} />
+            <div className="w-[40px] h-[40px] rounded-full mr-[10px] overflow-hidden">
+                <Avatar className="w-[40px] object-fill" image={getAvatarURL(profile?.attributes)} />
+            </div>
             <strong>{profile.attributes.firstName || 'Anonymous'}</strong>
         </Link>
     ) : null

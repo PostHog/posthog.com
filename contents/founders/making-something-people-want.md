@@ -9,6 +9,8 @@ tags:
   - Founders
   - Product
   - Product-market fit
+crosspost:
+  - Blog  
 ---
 
 It's one thing to build _something_, it's another to build something that _people want_.
@@ -130,7 +132,7 @@ There are some issues with using Slack like this:
 
 ## Enter the Ideal Customer Profile (ICP) – focus on specific types of user
 
-We spent the first 18 months focused on the open source project. We made a mistake though – we didn't get specific about who we were building for. We'd have said "developers are all the same, aren't they?" We were blind to our need of an Ideal Customer Profile (ICP).
+We spent the first 18 months focused on the open source project. We made a mistake though – we didn't get specific about who we were building for. We'd have said "developers are all the same, aren't they?" We were blind to our need of an [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) (ICP).
 
 Bluntly, defining an ICP felt bureaucratic and like something a Fortune 500 would do. I put it in my mental bucket of things I don't care about, alongside words such as "synergy", "resources" and "alignment".
 

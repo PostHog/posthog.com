@@ -29,12 +29,6 @@ export const OpenRoles = () => {
                             </a>
                             .
                         </p>
-                        <p>
-                            <em>
-                                When you click through some of these jobs might say 'San Francisco' or 'London', but
-                                we're hiring all over the world.
-                            </em>
-                        </p>
                     </div>
                     <div className="flex-1 max-w-md mx-auto">
                         <AshbyOpenRoles />

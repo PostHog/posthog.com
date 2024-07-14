@@ -5,6 +5,7 @@ import { button } from 'components/CallToAction'
 import { useLocation } from '@reach/router'
 import Confetti from 'react-confetti'
 import usePostHog from 'hooks/usePostHog'
+import * as Yup from 'yup'
 
 interface CustomFieldOption {
     label: string
@@ -31,6 +32,7 @@ interface IProps {
     formOptions?: {
         className?: string
     }
+    autoValidate?: boolean
 }
 
 export interface Form {
@@ -320,10 +322,11 @@ export default function HubSpotForm({
     formID,
     customFields,
     customMessage,
-    validationSchema,
     onSubmit,
     buttonOptions,
     formOptions,
+    autoValidate,
+    ...other
 }: IProps) {
     const posthog = usePostHog()
     const { href } = useLocation()
@@ -335,6 +338,7 @@ export default function HubSpotForm({
     })
     const [submitted, setSubmitted] = useState(false)
     const [confetti, setConfetti] = useState(true)
+    const [validationSchema, setValidationSchema] = useState(other.validationSchema)
 
     const handleSubmit = async (values) => {
         const distinctId = posthog?.get_distinct_id?.()
@@ -388,6 +392,19 @@ export default function HubSpotForm({
                     message: form.inlineMessage,
                     name: form.name,
                 })
+                if (autoValidate) {
+                    const validationSchema = Yup.object().shape(
+                        Object.fromEntries(
+                            fields.map((field) => [
+                                field.name,
+                                field.required
+                                    ? Yup.string().required(`${field.label} is a required field`)
+                                    : Yup.string(),
+                            ])
+                        )
+                    )
+                    setValidationSchema(validationSchema)
+                }
             })
     }, [])
 

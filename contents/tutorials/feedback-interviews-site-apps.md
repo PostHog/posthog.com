@@ -28,13 +28,13 @@ To add surveys, you need either [the snippet or the JavaScript library](/docs/in
 </script>
 ```
 
-Next, go to the [surveys page](https://app.posthog.com/surveys) and enable survey popups if you haven't already.
+Next, go to the [settings page](https://us.posthog.com/settings/project-surveys) and enable survey popups if you haven't already.
 
-![Enable surveys video](../images/tutorials/feedback-interviews-site-apps/enable.mp4)
+![Enable surveys](../images/tutorials/feedback-interviews-site-apps/enable.png)https://studio.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA/editing
 
 ## Creating your first feedback survey
 
-Once you’ve set up your app to use surveys, you can create your first one to gather feedback. To do this, go to the [surveys tab](https://app.posthog.com/surveys) in your PostHog instance and click "New survey." On this page, add a name and question. In this example, we ask for feedback on an upload feature, so our question reflects this. We also want to target the `/upload` URL so we include that under "Targeting."
+Once you’ve set up your app to use surveys, you can create your first one to gather feedback. To do this, go to the [surveys tab](https://app.posthog.com/surveys) in your PostHog instance and click "New survey." Choose the [open feedback template](/templates/in-app-feedback-survey). In this example, we ask for feedback on an upload feature, so our question reflects this. We also want to target the `/upload` URL so we include that under "Targeting."
 
 ![Creating the feedback survey](../images/tutorials/feedback-interviews-site-apps/feedback.mp4)
 
@@ -48,7 +48,7 @@ You can also use the surveys feature to show a prompt to users to book interview
 
 To control who sees the prompt, we can use a feature flag. To create one, go to the [feature flags tab](https://app.posthog.com/feature_flags) and click "New feature flag." Add a key (like `user-interview`), release conditions like 100% of users where the country code is `GB`, and press save.
 
-Next, go to the [surveys tab](https://app.posthog.com/surveys) and click "New survey." Add a name like "User interview," link the `user-interview` feature flag you just created, change the type from "Open text" to "Link," add your question, booking link, and change the "Submit button text." Altogether, this might look like this:
+Next, go to the [surveys tab](https://app.posthog.com/surveys) and click "New survey." Use the user interview template. Add your booking link to the first question, and then under "Targeting," link your `user-interview` feature flag. Altogether, this might look like this:
 
 ![Interview survey](../images/tutorials/feedback-interviews-site-apps/interview.mp4)
 

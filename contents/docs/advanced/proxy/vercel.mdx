@@ -4,14 +4,22 @@ sidebar: Docs
 showTitle: true
 ---
 
-Vercel supports [rewrites](https://vercel.com/docs/concepts/projects/project-configuration#rewrites) which we can use as a reverse proxy. Create a `vercel.json` file and add a `rewrites` object from the `/ingest` route to `https://app.posthog.com` or `https://eu.posthog.com`.
+import RegionWarning from "../_snippets/region-warning.mdx"
+
+<RegionWarning />
+
+Vercel supports [rewrites](https://vercel.com/docs/concepts/projects/project-configuration#rewrites) which we can use as a reverse proxy. Create a `vercel.json` file and add a `rewrites` object from the `/ingest` route.
 
 ```json
 {
   "rewrites": [
     {
+      "source": "/ingest/static/:path*",
+      "destination": "https://us-assets.i.posthog.com/static/:path*"
+    },
+    {
       "source": "/ingest/:path*",
-      "destination": "https://app.posthog.com/:path*"
+      "destination": "https://us.i.posthog.com/:path*"
     }
   ]
 }
@@ -23,8 +31,12 @@ Some frameworks, like **SvelteKit** and [Astro](/tutorials/astro-analytics), req
 {
   "rewrites": [
     {
+      "source": "/ingest/static/:path(.*)",
+      "destination": "https://us-assets.i.posthog.com/static/:path*"
+    },
+    {
       "source": "/ingest/:path(.*)",
-      "destination": "https://app.posthog.com/:path*"
+      "destination": "https://us.i.posthog.com/:path*"
     }
   ]
 }

@@ -17,7 +17,7 @@ In this tutorial, we will:
 2. add PostHog to it
 3. set up the features of PostHog like custom event capture, user identification, and feature flags
 
-> For a more detailed implementation tutorial for Next.js using the **app** router, check out our [Next.js app router analytics tutorial](/tutorials/nextjs-app-directory-analytics).
+> If you use Next.js with the **app** router, check out our other [Next.js app router analytics tutorial](/tutorials/nextjs-app-directory-analytics).
 
 ## Creating our Next.js app
 
@@ -419,7 +419,7 @@ export default function Home({ posts }) {
 
   const router = useRouter()
   const newLoginState = router.query.loginState
-  if (newloginState == 'signedIn' && session) {
+  if (newLoginState == 'signedIn' && session) {
     posthog.identify(session.user.email);
     router.replace('/', undefined, { shallow: true });
   }

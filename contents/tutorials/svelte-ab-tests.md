@@ -1,6 +1,6 @@
 ---
 title: How to set up A/B tests in Svelte
-date: 2023-01-24
+date: 2024-01-24
 author: ["lior-neu-ner"]
 tags: ['experimentation']
 ---

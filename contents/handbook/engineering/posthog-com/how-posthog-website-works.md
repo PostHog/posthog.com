@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-PostHog.com is built and maintained in-house by the [Website & Docs team](/handbook/small-teams/website-docs).
+PostHog.com is built and maintained in-house by the [Website & Docs team](/teams/website-docs).
 
 | Service 	| Purpose 	|
 |---	|---	|

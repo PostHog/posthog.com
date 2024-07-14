@@ -50,7 +50,7 @@ const product = {
 }
 
 const team = 'Replay'
-const teamSlug = '/handbook/small-teams/replay'
+const teamSlug = '/teams/replay'
 
 const featuresPerRow = 3
 const features = [
@@ -459,7 +459,7 @@ export const ProductSessionReplay = () => {
                 </div>
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
@@ -575,7 +575,9 @@ export const ProductSessionReplay = () => {
                     <p className="mt-0 text-opacity-70 text-center">
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
-                    <DocLinks menu={docsMenu.children[2].children} />
+                    <DocLinks
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'session replay').children}
+                    />
                 </section>
 
                 <section id="team" className="mb-20 px-5">

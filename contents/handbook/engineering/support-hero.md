@@ -49,7 +49,7 @@ There are three sources of tickets:
 1. Community questions asked on PostHog.com.
 1. Slack threads that have been marked with the 🎫 reaction in customer support channels.
 
-Some of them will ask for new features. If the feature would be widely useful for users matching [our ICP](/handbook/who-we-are-building-for), it might be a good idea to build it. Otherwise, feel free to just create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](https://posthog.com/handbook/small-teams/customer-success) know, since they will track feature requests for paying customers.
+Some of them will ask for new features. If the feature would be widely useful for users matching [our ICP](/handbook/who-we-are-building-for), it might be a good idea to build it. Otherwise, feel free to just create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](https://posthog.com/teams/customer-success) know, since they will track feature requests for paying customers.
 
 Others will report bugs or suspected bugs. Get to the bottom of each one - you never know what you'll find. If the issue decidedly affects only that one user under one-in-a-million circumstances, it might not be worth fixing. But if it's far-reaching, a proper fix is in order. And then there are "bugs" which turn out to be pure cases of confusing UX. Try to improve these too.
 
@@ -121,7 +121,7 @@ Zendesk will get populated with new issues from people outside the PostHog organ
 
 You can access the app via [posthoghelp.zendesk.com](https://posthoghelp.zendesk.com).
 
-The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/handbook/company/team) so our users know who they are chatting with!
+The first time you sign into Zendesk, please make sure you include your name and [profile picture](https://posthog.com/people) so our users know who they are chatting with!
 
 ### Using Zendesk
 
@@ -129,10 +129,20 @@ You’ll spend most of your time in the Views pane, where you’ll find all tick
 
 Tips:
 
-* If need more information from the customer to solve the issue, respond and mark as pending. 
-* If you think you solved the issue mark as solved (if they reply it will re-open and it's easier for everyone if there's less open tickets around).
+* Err on the side of Solving tickets (see below) if you expect no further input from the customer, as a lot of them don't reply to confirm that the problem has been solved.
 * Provide actionable information as _Note_ (e.g. links to internal slack threads, partial investigation, ...)
-* Low priority tickets don't send emails to the requester and can be viewed in aggregation and closed without a public reply. High and normal priority tickets send an email about a helpdesk ticket being created, so we should respond publicly there.
+
+#### Ticket Status
+
+When responding to a ticket you should also choose an appropriate status according to the following:
+
+* **New** - A newly created ticket, you shouldn't need to use this when responding
+* **Open** - The ticket is still awaiting a response/further investigation from someone in PostHog (if it's not you make sure the other person/team knows about it).
+* **On-Hold** - We have enough information from the customer but a resolution is blocked by something internal to PostHog (e.g. query performance, PoE).  You should let them know that this is the case.
+* **Pending** - The problem isn't solved and you have asked for further information from the customer.
+* **Solved** - You've provided a solution and don't expect to do any further work on the ticket.  If it's related to a feature request then you should provide the customer a link to GitHub so that they can follow along with development.
+
+Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. 
 
 #### Content Warnings
 

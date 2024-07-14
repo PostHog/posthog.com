@@ -5,6 +5,7 @@ import React from 'react'
 type Option = {
     label?: string
     value: any
+    subtext?: string
 }
 
 type Props = {
@@ -16,8 +17,9 @@ type Props = {
 
 export default function Select({ value, onChange, options, placeholder = '' }: Props): JSX.Element {
     const activeOption = options.find((option) => option.value === value)
+
     return (
-        <div className="relative border-b border-border dark:border-dark">
+        <div className="relative">
             <Listbox value={value} onChange={onChange}>
                 <Listbox.Button
                     className={`font-semibold text-black dark:text-primary-dark text-base w-full py-3 px-4 outline-none rounded-none text-left flex items-center justify-between ${
@@ -40,7 +42,12 @@ export default function Select({ value, onChange, options, placeholder = '' }: P
                                                     : 'bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-gray-accent-dark/30 dark:text-primary-dark'
                                             } py-2 px-4 cursor-pointer transition-all`}
                                         >
-                                            {option.label || option.value}
+                                            <div>{option.label || option.value}</div>
+                                            {option?.subtext && (
+                                                <div className="text-sm opacity-70 leading-none mb-1">
+                                                    {option.subtext}
+                                                </div>
+                                            )}
                                         </div>
                                     )}
                                 </Listbox.Option>

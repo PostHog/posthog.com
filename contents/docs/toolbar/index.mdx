@@ -7,6 +7,8 @@ availability:
     selfServe: full
     enterprise: full
 ---
+import setupLight from '../../images/tutorials/toolbar/setup-toolbar-light-mode.mp4'
+import setupDark from '../../images/tutorials/toolbar/setup-toolbar-dark-mode.mp4'
 
 > **Note:** The PostHog toolbar is only available for the [JavaScript web SDK](/docs/libraries/js).
 
@@ -19,7 +21,12 @@ The toolbar is like "Inspect Element" for PostHog features and data. When enable
 3. Click Save and then Launch.    
 4. A new window will open with toolbar on your website. Click on the toolbar to interact with it.
 
-![How to setup the PostHog toolbar](./setup-toolbar.mp4)
+<ProductVideo
+    videoLight = {setupLight}
+    videoDark = {setupDark}
+    alt="How to setup the PostHog toolbar" 
+    classes = {"rounded"}
+/>
 
 ## Troubleshooting and FAQ
 

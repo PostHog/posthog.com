@@ -10,7 +10,8 @@ tags:
   - Product engineers
   - Product
 crosspost: 
-  - Founders  
+  - Founders 
+  - Blog 
 ---
 
 Product surveys help you understand what users are thinking and feeling, but they're useless if you don't ask the right questions. In this guide, we'll cover:

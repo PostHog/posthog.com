@@ -31,7 +31,7 @@ Beyond a distinct ID, users also need properties or groups if you want to use th
 
 Once you set up PostHog and user identification, you can create the feature flags for the canary release. Go to the [feature flags tab](https://app.posthog.com/feature_flags) in your PostHog instance, add a key, a release condition (like only yourself), and any other details you want.
 
-![Feature flags](../images/tutorials/canary-release/feature-flag.png)
+![Feature flags](../images/tutorials/canary-release/feature-flag.mp4)
 
 Add this flag to your code around the feature you want to canary release. Test that it works for you, and that turning it off works as well. Once this goes well, you can expand the release to your users.
 

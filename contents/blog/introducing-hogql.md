@@ -34,7 +34,7 @@ You can also use subqueries, joins, table expressions, arrays, lambdas, and a wh
 
 See our [HogQL documentation](/docs/product-analytics/hogql) for a full [list of supported ClickHouse SQL functions](/docs/product-analytics/hogql#supported-clickhouse-functions).
 
-> **Not a PostHog user?** [Get started for free](https://app.posthog.com/signup?utm_source=hogql-blog-top) – all users get 1 million events and 15k recordings free every month, **no card required.**
+> **Not a PostHog user?** [Get started for free](https://app.posthog.com/signup?utm_source=hogql-blog-top) – all users get 1 million events and 5k recordings free every month, **no card required.**
 
 ## What can you do with HogQL?
 
@@ -107,7 +107,7 @@ As part of our work on HogQL, we've reworked all our insights as JSON objects, w
 
 ![view source](../images/blog/array/view-source.mp4)
 
-You can also create custom table insights directly from the Events Explorer (previously "Live Events") and Person & Groups tabs. 
+You can also create custom table insights directly from Activity (previously "Live Events") and Person & Groups tabs. 
 
 ![custom insights](../images/blog/array/custom_insights.mp4)
 
@@ -123,7 +123,7 @@ It started with a small idea and just got bigger.
 
 We originally started thinking about HogQL back in January, while thinking about [a concept for universal search within PostHog](https://github.com/PostHog/posthog/issues/7963). 
 
-Over time, that plan evolved into creating [new ways for users to explore data](https://github.com/PostHog/meta/issues/86) via direct queries. We wanted to enable to run formulas in what was then called the Live Events view, but is now the Event Explorer. 
+Over time, that plan evolved into creating [new ways for users to explore data](https://github.com/PostHog/meta/issues/86) via direct queries. We wanted to enable to run formulas in what was then called the Live Events view, but is now "Activity." 
 
 However, while this work was underway we realized we could potentially take it a step further and build full SQL support directly into PostHog as a new insight type... so we did! It was a short conversation. 
 
@@ -131,6 +131,6 @@ We're still actively developing all these ideas, as well as the implementation o
 
 Got an opinion on what we should do next? Share it via the [feedback modal in PostHog](https://app.posthog.com/home#supportModal=feedback%3A), or let us know [on Twitter](https://twitter.com/posthog).
 
-> **Not a PostHog user?** [Get started for free](https://app.posthog.com/signup?utm_source=hogql-blog-bottom) – all users get 1 million events and 15k recordings free every month, **no card required.**
+> **Not a PostHog user?** [Get started for free](https://app.posthog.com/signup?utm_source=hogql-blog-bottom) – all users get 1 million events and 5k recordings free every month, **no card required.**
 
 [^1]: 68.5% of 🇺🇸 residents think 🍍 belongs on 🍕. People in 🇪🇸 are the greatest 🍍 deniers at 10%. One person in Aruba 🇦🇼 voted, but we're pretty sure that was one of us during our [2023 all-company offsite](/blog/aruba-hackathon). We built some cool hackathon projects there, like our [dashboard template library](/templates), and an open-source tool for [monitoring and managing ClickHouse clusters](https://github.com/PostHog/HouseWatch). You could say it was openly... sourcey. "_Hello, HR? Are bad puns a firing offense?_"

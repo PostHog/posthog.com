@@ -4,6 +4,10 @@ sidebar: Docs
 showTitle: true
 ---
 
+import RegionWarning from "../_snippets/region-warning.mdx"
+
+<RegionWarning />
+
 CloudFront can be used as a reverse proxy. Although [there are multiple other options if you're using AWS](https://aws.amazon.com/blogs/architecture/serving-content-using-fully-managed-reverse-proxy-architecture/).
 
 By default, CloudFront doesn't forward headers, cookies, or query parameters received from the origin that PostHog uses. To set these up, you need an "origin request policy" as in the instructions below.
@@ -11,7 +15,7 @@ By default, CloudFront doesn't forward headers, cookies, or query parameters rec
 ## Create a distribution
 
 1. On the AWS dashboard, search for CloudFront, then create a new CloudFront distribution
-2. Set the origin domain to your PostHog instance `app.posthog.com` or `eu.posthog.com` for PostHog Cloud).
+2. Set the origin domain to your PostHog instance `us.i.posthog.com` or `eu.i.posthog.com` for PostHog Cloud).
 3. Select HTTPS only.
 4. Under Default cache behavior, go to Viewer. “Under Allowed HTTP methods,” select “GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE,” and check OPTIONS under “Cache HTTP methods.” This allows all HTTP methods.
 5. Under [Cache policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy), click “Create policy.” On the “Create cache policy” page:
@@ -29,6 +33,12 @@ import diagram from '../../../images/docs/cloud/cloudfront-proxy/cache-policy.pn
 8. Under “Response headers policy,” choose “CORS-with-preflight-and-SecurityHeadersPolicy.”
 9. Do not enable AWS Web Application Firewall (WAF).
 10. Click “Create distribution” at bottom of the page.
+11. Edit the Cloudfront Distribution and add the assets origin `us-assets.i.posthog.com` or `eu-assets.i.posthog.com`.
+14. Add another behavior the path will be `/static/*`.
+15. Under "Origin,", choose the one created above.
+17. Under “cache policy,” choose “origin-cors”
+18. Under “Origin request policy,” choose “CORS-CustomOrigin.”
+19. Under “Response headers policy,” choose “CORS-with-preflight-and-SecurityHeadersPolicy.”
 
 Once created, copy the distribution domain name, and set it as your API host in your PostHog initialization like this:
 

@@ -1,5 +1,5 @@
 ---
-title: Setting up Django analytics, feature flags, and more with PostHog
+title: Setting up Django analytics, feature flags, and more
 sidebar: Docs
 showTitle: true
 author: ['ian-vanagas']
@@ -412,6 +412,6 @@ With autocapture, session recordings, feature flags, identification, and custom 
 
 ## Further reading
 
+- [How to set up A/B tests in Django](/tutorials/django-ab-tests)
 - [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics)
-- [Running experiments on new users](/tutorials/new-user-experiments)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)

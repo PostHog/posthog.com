@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## Marketing hiring at PostHog
 
-Our [Marketing](/handbook/small-teams/marketing) team is small and we don't hire into this team very often. Please check our [careers page](https://posthog.com/careers) for our open roles. 
+Our [Marketing](/teams/marketing) team is small and we don't hire into this team very often. Please check our [careers page](https://posthog.com/careers) for our open roles. 
 
 ### What we are looking for in Marketing hires
 

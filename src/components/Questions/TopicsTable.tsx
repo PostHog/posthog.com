@@ -12,6 +12,7 @@ import {
     IconGraph,
     IconHogQL,
     IconPeople,
+    IconPieChart,
     IconPrivacy,
     IconPulse,
     IconRewindPlay,
@@ -70,6 +71,7 @@ export const topicIcons = {
     'community spotlight': Megaphone, // to be replaced or removed
     surveys: IconMessage,
     survey: IconMessage,
+    'web analytics': IconPieChart,
 }
 
 export const TopicsTable = ({ topics, topicGroup, className = '' }) => {

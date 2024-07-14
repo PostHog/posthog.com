@@ -8,6 +8,8 @@ featuredImageType: full
 tags:
   - Founders
   - People
+crosspost:
+  - Blog  
 ---
 
 Since we started PostHog, our team has interviewed 725 people.

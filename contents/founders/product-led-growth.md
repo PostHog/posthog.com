@@ -10,6 +10,8 @@ tags:
   - Sales & CS
   - Growth
   - Revenue
+crosspost:
+  - Blog  
 ---
 
 You will need sales, but do you need a sales team to achieve revenue?

@@ -423,4 +423,4 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 
 ## Extra: Developing paid features (PostHog employees only)
 
-If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. Learn how to do so [here](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
+If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).

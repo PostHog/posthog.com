@@ -10,9 +10,11 @@ tags:
   - Product
   - Sales & CS
   - Marketing
+crosspost:
+  - Blog  
 ---
 
-Creating an Ideal Customer Profile is one of the most important things we've ever done at PostHog.
+[Creating an Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) is one of the most important things we've ever done at PostHog.
 
 You can see it in our revenue growth:
 

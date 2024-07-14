@@ -52,7 +52,7 @@ At this stage, startups usually go with the most popular tools because they are 
 Your data needs start to spiral once you reach Seed stage – as does the complexity and number of tools you need. Why? Because it's less obvious how to spend your time and resources. Typical questions at this stage include:
 
 - What features should we prioritize developing?
-- How do we best serve our [ideal customer](/blog/creating-ideal-customer-profile)?
+- How do we best serve our [ideal customer](/newsletter/ideal-customer-profile-framework)?
 - How do we optimize our [conversion funnel](/tutorials/funnels)?
 - What channels should we [be advertising on](/blog/dev-marketing-for-startups)?
 

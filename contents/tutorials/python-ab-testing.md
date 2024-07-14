@@ -212,6 +212,7 @@ This is a basic implementation of Python A/B testing in Flask set up. From here,
 
 ## Further reading
 
-- [How YC's biggest startups run A/B tests (with examples)](/blog/ab-testing-examples)
 - [A software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers)
-- [When and how to run group-targeted A/B tests](/blog/running-group-targeted-ab-tests)
+- [How to set up analytics in Python and Flask](/tutorials/python-analytics)
+- [How to set up feature flags in Python and Flask](/tutorials/python-feature-flags)
+

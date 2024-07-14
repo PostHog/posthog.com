@@ -47,7 +47,7 @@ You can even use groups with [feature flags](/docs/user-guides/feature-flags) to
 
 Group Analytics has been released as a [premium feature](/pricing) and is available now for both PostHog Scale, PostHog Enterprise, and PostHog Cloud users. If you’re on PostHog Cloud you can get started with groups immediately, while self-hosted instances will first need to be updated to the latest version. We’ve prepared some [documentation to help you get started with the new group types](/docs/user-guides/group-analytics) and illustrate some popular use-cases. 
 
-As always, we welcome any feedback you have as an issue in [the GitHub repo](https://github.com/PostHog), or in the [PostHog Slack group](/slack).  
+As always, we welcome any feedback you have as an issue in [the GitHub repo](https://github.com/PostHog), or in [our community page](/posts).  
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 

@@ -144,11 +144,19 @@ if variant == "variant-name" {
 
 > Since feature flags are not supported yet in our Java, Rust, and Elixir SDKs, to run an experiment using these SDKs see our docs on [how to run experiments without feature flags](/docs/experiments/running-experiments-without-feature-flags). This also applies to running experiments using our API.
 
-## Step 2 (server-side only): Add the feature flag property to your events 
+## Step 2 (server-side only): Add the feature flag to your events 
 
-For any server-side events that are also goal metrics for your experiment, you need to include a property `$feature/experiment_feature_flag_name: variant_name` when capturing those events. This ensures that the event is attributed to the correct experiment variant (e.g., test or control).
+> This step is not required for events that are submitted via our client-side SDKs (e.g., JavaScript web, iOS, Android, React, React Native).
 
-This step is not required for events that are submitted via our client-side SDKs (e.g., JavaScript web, iOS, Android, React, React Native).
+> For our backend SDKs, with the exception of the Go library, this step is not required if the server has [local evaluation](/docs/feature-flags/local-evaluation) enabled and the flag in question has no property filters. In these cases, flag information is automatically appended to every event sent to PostHog.
+
+For any server-side events that are also goal metrics for your experiment, you need to include feature flag information when capturing those events. This ensures that the event is attributed to the correct experiment variant (e.g., test or control).
+
+There are two methods to do this:
+
+### Method 1 (recommended): Set the `$feature` property on events 
+
+Include the property `$feature/experiment_feature_flag_name: variant_name` when capturing events:
 
 <MultiLanguage>
 
@@ -214,3 +222,39 @@ posthog.capture(
 ```
 
 </MultiLanguage>
+
+import Tab from "components/Tab"
+import RubyMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-ruby-set-send-feature-flags-to-true.mdx"
+import NodeMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-node-set-send-feature-flags-to-true.mdx"
+import GoMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-go-set-send-feature-flags-to-true.mdx"
+import PythonMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-python-set-send-feature-flags-to-true.mdx"
+import PHPMethod2 from "../integrate/feature-flags-code/_snippets/feature-flags-code-php-set-send-feature-flags-to-true.mdx"
+
+### Method 2: Set `send_feature_flags` to `true`
+
+<Tab.Group tabs={['Node.js', 'Python', 'PHP', 'Ruby', 'Go']}>
+    <Tab.List>
+        <Tab>Node.js</Tab>
+        <Tab>Python</Tab>
+        <Tab>PHP</Tab>
+        <Tab>Ruby</Tab>
+        <Tab>Go</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <NodeMethod2 />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PythonMethod2 />
+        </Tab.Panel>
+        <Tab.Panel>
+            <PHPMethod2 />
+        </Tab.Panel>
+        <Tab.Panel>
+            <RubyMethod2 />
+        </Tab.Panel>
+        <Tab.Panel>
+            <GoMethod2 />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>

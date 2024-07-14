@@ -30,7 +30,7 @@ Beyond the specific skills listed in the job description, we generally look for:
 
 #### 1. Culture interview 
 
-The [culture interview](https://posthog.com/handbook/people/hiring-process#interview-1---culture-with-eltje) usually lasts around 30 minutes and will be with someone from our [People and Culture team](https://posthog.com/handbook/small-teams/people). This round is loosely structured into 4 different sections:
+The [culture interview](https://posthog.com/handbook/people/hiring-process#interview-1---culture-with-eltje) usually lasts around 30 minutes and will be with someone from our [People and Culture team](https://posthog.com/teams/people). This round is loosely structured into 4 different sections:
 
 1. PostHog - mission, vision, team, way of working etc. If it was cold outreach, we provide a little more context up front.
 2. Candidate background and mindset.
