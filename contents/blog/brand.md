@@ -16,7 +16,7 @@ I believe humans have evolved to conform - when we all lived in the wilderness, 
 
 ## There are good reasons for this, you idiot
 
-I bet there are. You want to get the Minimum Viable Product Built and validated.
+I bet there are. You want to get the Minimum Viable Product built and validated.
 
 You need to make money, you're going to fail without it.
 
