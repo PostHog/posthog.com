@@ -20,6 +20,9 @@ export default function Questions({ topicIds = [] }) {
                     $notContainsi: '/community/profiles',
                 },
             },
+            resolved: {
+                $eq: true,
+            },
         },
     })
     return (
