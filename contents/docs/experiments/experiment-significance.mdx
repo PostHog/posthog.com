@@ -93,7 +93,7 @@ Even with a large sample size (e.g., approximately 10,000 participants), results
 
 PostHog computes this statistical significance for you automatically. We notify you when your experiment has reached statistically significant results, making it safe to draw conclusions and terminate the experiment.
 
-However, in the early stages of an experiment, data can vary widely, and one variant might initially appear overwhelmingly better. In such cases, our significance calculations might incorrectly indicate significance due to limited data.
+In the early days of an experiment, data can vary wildly, and sometimes one variant can seem overwhelmingly better. In this case, our significance calculations might say that the results are significant, but this shouldn't be the case, since we need more data.
 
 Therefore, we have additional criteria to determine what we call **final significance**. Before each variant in an experiment reaches 100 unique users, we default to considering the results as not significant. Additionally, if the combined probability of all test variants being the best is less than 90%, we also default to considering the results as not significant.
 
