@@ -2449,19 +2449,28 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Features',
+                    name: 'Methodology',
                 },
                 {
-                    name: 'Statistical significance',
-                    url: '/docs/experiments/significance',
-                    icon: 'IconTestTube',
+                    name: 'Traffic allocation',
+                    url: '/docs/experiments/traffic-allocation',
+                    icon: 'IconPeople',
                     color: 'orange',
                 },
                 {
-                    name: 'Under the hood',
-                    url: '/docs/experiments/under-the-hood',
+                    name: 'Sample size and running time',
+                    url: '/docs/experiments/sample-size-running-time',
+                    icon: 'IconDashboard',
+                    color: 'blue',
+                },
+                {
+                    name: 'Experiment significance',
+                    url: '/docs/experiments/experiment-significance',
                     icon: 'IconMagicWand',
-                    color: 'purple',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Features',
                 },
                 {
                     name: 'Experiments without feature flags',
