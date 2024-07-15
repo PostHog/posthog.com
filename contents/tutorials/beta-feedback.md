@@ -125,7 +125,7 @@ Now, when users opt into the "new beta page" feature, a button shows on the home
 
 Lastly, we want to get feedback on our new beta page from the users in our beta. We can add this without adding code using [surveys](/docs/surveys).
 
-To create a survey, go to the [surveys tab](https://app.posthog.com/surveys) in PostHog and click "New survey." Choose the [open feedback template](/templates/in-app-feedback-survey), fill out any details, and open the targeting section. In this section, we target the `new-beta-page` feature flag and the `/beta` URL. This prevents non-beta users from getting the survey. Once done, click save and launch.
+To create a survey, go to the [surveys tab](https://app.posthog.com/surveys) in PostHog and click "New survey." Choose the [open feedback template](/templates/in-app-feedback-survey), fill out any details, and open the display conditions section. In this section, we target the `new-beta-page` feature flag and the `/beta` URL. This prevents non-beta users from getting the survey. Once done, click save and launch.
 
 ![Creating survey video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/beta-feedback/survey.mp4)
 
