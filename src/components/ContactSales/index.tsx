@@ -18,8 +18,8 @@ import landmark from './images/landmark.svg'
 import landmarkDark from './images/landmark_dark.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
-import HubSpotForm from 'components/HubSpotForm'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import SalesforceForm from 'components/SalesforceForm'
 
 const features = [
     'Volume discounts',
@@ -93,11 +93,7 @@ export default function ContactSales({ location }) {
                             <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the
                             form at a breakneck pace!
                         </p>
-                        <HubSpotForm
-                            autoValidate
-                            formID="32d0b55f-9de6-4c40-a6ec-ddfd2c39578b"
-                            formOptions={{ cols: 1 }}
-                        />
+                        <SalesforceForm />
                     </div>
                 </section>
             </div>
