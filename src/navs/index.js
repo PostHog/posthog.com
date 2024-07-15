@@ -612,6 +612,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-as-beta',
             },
             {
+                name: 'Per-product growth reviews',
+                url: '/handbook/product/per-product-growth-reviews',
+            },
+            {
                 name: 'In-app prompts',
                 url: '/handbook/product/in-app-prompts',
             },
