@@ -35,7 +35,7 @@ Find the newly created file via the storage browser menu item. Once found, open 
 
 ![copy blob file](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_15_at_17_59_09_2f888aaa2f.png)
 
-1. On PostHog, open your Data Warehouse tab and hit "Link source" in the top right corner
+1. In PostHog, open your [Data Warehouse tab](https://us.posthog.com/data-warehouse) and hit **Link source** in the top right corner
 2. Select Azure from the self managed section
 3. Enter a name for your dataset and paste the copied URL into the "Files URL pattern" box
 4. Select the correct format for your data
