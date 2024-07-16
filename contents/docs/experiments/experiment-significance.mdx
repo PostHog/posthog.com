@@ -83,7 +83,7 @@ The probability of a variant being the best is given by:
 >
 >Trend experiments compare counts of events. Since count data can refer to the total count of events or the number of unique users, we use a proxy metric to measure exposure. The number of times the `feature_flag_called` event returns control or test is used as the respective exposure for the variant. This event is sent automatically when you call `posthog.getFeatureFlag()`.
 >
->It's important to note that a variant showing fewer count data can still have a higher probability of being the best if its exposure is much smaller. This is because the relative exposure is taken into account when calculating probabilities.
+>Note that a variant showing fewer count data can still have a higher probability of being the best if its exposure is much smaller. This is because the relative exposure is taken into account when calculating probabilities.
 
 ### 2. Statistical significance
 
