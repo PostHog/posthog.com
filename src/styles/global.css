@@ -1435,6 +1435,10 @@ li.squeak-left-border {
         }
     }
 
+    blockquote {
+        @apply border-l-4 border-light dark:border-dark pl-2;
+    }
+
     pre {
         @apply text-base my-3 overflow-scroll p-4 text-[15px];
     }
