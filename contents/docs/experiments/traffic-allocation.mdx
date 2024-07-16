@@ -2,7 +2,7 @@
 title: Traffic allocation
 ---
 
-By default, we use PostHog's multivariate [feature flags](/docs/feature-flags) to assign people to variations (unless you choose to [run an experiment without feature flags](/docs/experiments/running-experiments-without-feature-flags)). The experiment feature flag is initialized automatically when you create your experiment.
+By default, we use PostHog's multivariate [feature flags](/docs/feature-flags) to evenly assign people to variations (unless you choose to [run an experiment without feature flags](/docs/experiments/running-experiments-without-feature-flags)). The experiment feature flag is initialized automatically when you create your experiment.
 
 In any experiment, there is one control group and up to nine test groups. Each user is randomly assigned to one of these groups based on their `distinctId`. This assignment is stable, meaning the same user will remain in the same group even when they revisit your page.
 
