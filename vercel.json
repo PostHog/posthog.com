@@ -700,6 +700,8 @@
         { "source": "/manual/feature-flags", "destination": "/docs/feature-flags/manual" },
         { "source": "/manual/experimentation", "destination": "/docs/experiments/manual" },
         { "source": "/docs/experiments/manual", "destination": "/docs/experiments/installation" },
+        { "source": "/docs/experiments/under-the-hood", "destination": "/docs/experiments/experiment-significance" },
+        { "source": "/docs/experiments/significance", "destination": "/docs/experiments/experiment-significance" },
         { "source": "/docs/session-replay/manual", "destination": "/docs/session-replay/installation" },
         { "source": "/docs/user-guides/feature-flags", "destination": "/docs/feature-flags/manual" },
         { "source": "/manual/", "destination": "/docs/product-analytics/" },
