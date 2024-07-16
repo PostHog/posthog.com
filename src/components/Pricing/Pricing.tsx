@@ -644,6 +644,7 @@ const PlansTabs = () => {
                         <li>Generous monthly free tier</li>
                         <li>Up to 6 projects</li>
                         <li>7-year data retention</li>
+                        <li>All product features</li>
                         <li>Email and community support</li>
                         <li>Unlimited team members</li>
                         <li>Unlimited tracked users</li>
@@ -1015,13 +1016,17 @@ const PricingExperiment = ({
 
                     <section
                         className={`${section} ${isPlanComparisonVisible
-                                ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
-                                : 'overflow-y-hidden invisible max-h-0 opacity-0'
+                            ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
+                            : 'overflow-y-hidden invisible max-h-0 opacity-0'
                             } transition duration-500 ease-in-out transform`}
                     >
+                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark px-4 py-3 mb-4 rounded">
+                            <p className="mb-2 text-[15px]">The table below compares <span className="bg-yellow/25 p-0.5">platform features</span> between plans.</p>
+                            <p className="mb-0 text-[15px]"><strong>Looking to compare <span className="bg-yellow/25 p-0.5">product features</span> availability?</strong> Visit the product comparison pages: <Link to="/pricing?product=product-analytics">Product analytics</Link> | <Link to="/pricing?product=session-replay">Session replay</Link> | <Link to="/pricing?product=feature-flags">Feature flags</Link> | <Link to="/pricing?product=ab-testing">A/B testing</Link> | <Link to="/pricing?product=surveys">Surveys</Link></p>
+                        </div>
                         <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                             <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
-                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-1">&nbsp;</div>
+                                <div className="col-span-4 px-3 py-1">&nbsp;</div>
                                 {platformAndSupportProduct?.plans
                                     ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
                                     ?.map((plan: BillingV2PlanType) => (
