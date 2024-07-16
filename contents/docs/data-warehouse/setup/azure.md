@@ -16,7 +16,7 @@ The data warehouse can link to data in your Azure storage accounts.
 
 ## Step 1: Create an Azure storage account
 
-Firstly, log into Azure and go to Storage Accounts, then create a storage account by following [this Azure guide](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal#create-a-storage-account). In the "Advanced" section, ensure to check "Allow enabling anonymous access on individual containers"
+Firstly, log into Azure and go to Storage Accounts, then create a storage account by following [this Azure guide](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal#create-a-storage-account). In the "Advanced" section, ensure to check "Allow enabling anonymous access on individual containers."
 
 ![enabling anonymous access](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_15_at_17_48_56_e83877dec0.png)
 
