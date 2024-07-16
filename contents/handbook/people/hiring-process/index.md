@@ -127,9 +127,9 @@ Unfortunately people who actively work on recruitment in the People & Ops team a
 
 #### Social referral
 
-The [Getting started for interviewers page](https://www.notion.so/Getting-Started-for-Interviewers-4b6bd7cc94834e1ebe8d63345030696f) makes it super easy to share referrals and track their applications as a social referral throughout the interview process. 
+Refer someone you know on the <PrivateLink url="https://app.ashbyhq.com/referrals/direct/">Ashby referral page</PrivateLink> by clicking the _Refer_ button. You'll need their resume to submit them.
 
-If you have other referrals in your network (e.g. 2nd degree connections), who have either applied or might be relevant for us to reach  out to, this also counts as a social referral. 
+If you have other referrals in your network (e.g. 2nd degree connections), who have either applied or might be relevant for us to reach out to, this also counts as a social referral.
 
 The referral bonus for social referrals is $500, and we again match any amount you choose to give this to charity.  
 
