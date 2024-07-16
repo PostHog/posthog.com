@@ -1845,6 +1845,10 @@ export const docsMenu = {
                             name: 'Migrate from Amplitude',
                             url: '/docs/migrate/migrate-from-amplitude',
                         },
+                        {
+                            name: 'Migrate from Mixpanel',
+                            url: '/docs/migrate/mixpanel',
+                        },
                     ],
                 },
                 {
