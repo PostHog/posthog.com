@@ -2790,6 +2790,10 @@ export const docsMenu = {
                             name: 'S3',
                             url: '/docs/data-warehouse/setup/s3',
                         },
+                        {
+                            name: 'Azure',
+                            url: '/docs/data-warehouse/setup/azure',
+                        },
                     ],
                 },
                 {
