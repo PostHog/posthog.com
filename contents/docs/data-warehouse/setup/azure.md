@@ -40,7 +40,7 @@ Find the newly created file via the storage browser menu item. Once found, open 
 3. Enter a name for your dataset and paste the copied URL into the "Files URL pattern" box
 4. Select the correct format for your data
 5. Enter the storage account name (this is name of the storage account you created in step 1)
-6. Find and paste your storage account key next - you can use [this Azure doc](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to view your access keys
+6. Find and paste your storage account key - you can use [this Azure doc](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to view your access keys
 
 ![linking your data in posthog](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_15_at_18_10_06_f93fadf82b.png)
 
