@@ -28,7 +28,8 @@ When creating the container, ensure you set the "anonymous access level" to Blob
 
 ![container anonymous access level](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_15_at_17_54_36_2bb9d63ebd.png)
 
-### Step 3: Upload data and link to PostHog
+## Step 3: Upload data and link to PostHog
+
 [Upload your data to the newly created container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal#upload-a-block-blob), Parquet files are the recommended format, but PostHog also work with JSON and CSVs too. 
 
 Find the newly created file via the storage browser menu item. Once found, open the details and find the URL property - copy this to your clipboard, we'll need it when linking to the file in PostHog.
