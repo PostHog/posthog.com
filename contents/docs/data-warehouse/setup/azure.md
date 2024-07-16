@@ -24,7 +24,7 @@ Firstly, log into Azure and go to Storage Accounts, then create a storage accoun
 
 Once the storage account has been created, follow [this guide to create a blob container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container).
 
-When creating the container, ensure you set the "anonymous access level" to Blob (anonymous read access)
+When creating the container, ensure you set the "anonymous access level" to Blob (anonymous read access).
 
 ![container anonymous access level](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_15_at_17_54_36_2bb9d63ebd.png)
 
