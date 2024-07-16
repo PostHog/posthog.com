@@ -30,7 +30,7 @@ Our Bayesian experimentation method focuses on two key parameters during experim
 
 Funnel experiments compare conversion rates. For example, if you want to measure the change in the conversion rate for subscribing to your site, you would use this type of experiment.
 
-#### 1. Probability of being the best
+### 1. Probability of being the best
 
 We use Monte Carlo simulations to determine the probability of each variant being the best. Each variant can be modeled as a beta distribution, with the alpha parameter equal to the number of conversions and the beta parameter equal to the number of failures for that variant. For each variant, we sample from their respective distributions to get a conversion rate. We perform 100,000 simulation runs in our calculations.
 
