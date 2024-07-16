@@ -202,6 +202,10 @@ Hog's standard library includes the following functions and will expand. To see 
 - `lower(arg: string): string`
 - `upper(arg: string): string`
 - `reverse(arg: string): string`
+- `trim(arg: string, char?: string): string`
+- `trimLeft(arg: string, char?: string): string`
+- `trimRight(arg: string, char?: string): string`
+- `splitByString(separator: string, str: string, maxParts?: int): string[]`
 - `jsonParse(arg: string): any`
 - `jsonStringify(arg: object): string`
 - `base64Encode(arg: string): string`
@@ -219,7 +223,14 @@ Hog's standard library includes the following functions and will expand. To see 
 - `notEmpty(arg: any[] | object): boolean`
 - `keys(arg: any[] | object): string[]`
 - `vaues(arg: any[] | object): string[]`
-
+- `arrayPushBack(arr: any[], value: any): any[]`
+- `arrayPushFront(arr: any[], value: any): any[]`
+- `arrayPopBack(arr: any[]): any[]`
+- `arrayPopFront(arr: any[]): any[]`
+- `arraySort(arr: any[]): any[]`
+- `arrayReverse(arr: any[]): any[]`
+- `arrayReverseSort(arr: any[]): any[]`
+- `arrayStringConcat(arr: any[], separator?: string): string`
 
 ### Date functions
 - `now(): DateTime`
@@ -235,6 +246,12 @@ Hog's standard library includes the following functions and will expand. To see 
 - `toFloat(arg: any): float` - Converts `arg` to a 64-bit float. Converts `Date`s into days from epoch, and `DateTime`s into seconds from epoch
 - `toDate(arg: string | int): Date` - `arg` must be a string `YYYY-MM-DD` or a Unix timestamp in seconds
 - `toDateTime(arg: string | int): DateTime` - `arg` must be an ISO timestamp string or a Unix timestamp in seconds
+
+### Cryptographic functions
+
+- `md5Hex(arg: string): string`
+- `sha256Hex(arg: string): string`
+- `sha256HmacChainHex(arg: string[]): string`
 
 ## Running Hog locally
 
