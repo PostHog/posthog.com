@@ -66,7 +66,9 @@ Trend experiments capture count data. For example, if you want to measure the ch
 
 ### 1. Probability of being the best
 
-We use Monte Carlo simulations to determine the probability of each variant being the best. Each variant can be modeled as a gamma distribution, with the shape parameter equal to the trend count and the exposure parameter equal to the relative exposure for that variant. For each variant, we sample from their respective distributions to get a count value. We perform 100,000 simulation runs in our calculations.
+We use Monte Carlo simulations to determine the probability of each variant being the best. 
+
+Each variant can be modeled as a gamma distribution, with the shape parameter equal to the trend count and the exposure parameter equal to the relative exposure for that variant. For each variant, we sample from their respective distributions to get a count value. We perform 100,000 simulation runs in our calculations.
 
 The probability of a variant being the best is given by:
 
