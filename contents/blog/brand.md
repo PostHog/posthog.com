@@ -1,6 +1,6 @@
 ---
 date: 2023-06-25
-title: How to brand your startup
+title: How to brand your startup so it isn't boring
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -32,13 +32,13 @@ The product on launch day was going to be free, but we still asked ourselves: "w
 
 Despite being free, users would be wary of wasting their time trying to deploy a badly supported, broken piece of open source software, or worse - it not handling their data securely. These are both things you'd associate with the software produced by a two-person startup.
 
-Before a user even gets into the software or glances at the code first, the majority will turn away _at_ the website, the docs and the readme.
+Before a user even gets into the software or glances at the code, the majority will turn away _at_ the website, the docs and the readme.
 
 As a counter example, an obviously templated or one-pager style website:
 
-* signals the product may not be secure, a lack of demonstrated competence in the website shows a lack of attention to detail - if a startup doesn't care about having their own design, will they care about security?
-* signals the team behind the product isn't very strong, and won't improve quickly over time, or become a "must use" tool - those startup launches that everyone hears about? They've put energy into their appearance.
-* signals the product may not exist in a few more weeks, which would be a waste of time - when it's obvious the website was thrown together in a day - if the team don't look invested in their company, why would you put your own time in?
+* Signals the product may not be secure, a lack of demonstrated competence in the website shows a lack of attention to detail. If a startup doesn't care about having their own design, will they care about security?
+* Signals the team behind the product isn't very strong, and won't improve quickly over time, or become a "must use" tool. Those startup launches that everyone hears about? They've put energy into their appearance.
+* Signals the product may not exist in a few more weeks, which would be a waste of time. When it's obvious the website was thrown together in a day, if the team don't look invested in their company, why would you put your own time in?
 
 I admit this is frustrating - it is extra time and effort into something "superficial" - just remember, you are providing your product to human beings, take advantage of their pattern recognition (it also helped them survive in the wild).
 
@@ -59,7 +59,7 @@ As we became more well known, and as we added lots of products into our platform
 
 One of the most important things we did was to create an Ideal Customer Profile. When we launched, we weren't sure quite how focused we'd need to be on engineers "vs" product managers.
 
-We realized, after launching, that we could go all in on engineers (and technical founders) - they make up around 80% of our users. Our brand (and product) has become more oriented for these users as a result.
+We realized, after launching, that we could go all in on engineers (and technical founders) - they make up around 80% of our users. Our brand (and product) has become more oriented towards these users as a result.
 
 Here are some specific ways we got more specific for this audience after we clarified it:
 
@@ -81,7 +81,7 @@ For example, we set out initially expecting to have an open core model. We'd off
 
 ## Brand isn't just your website...
 
-... it is instead how your company is experienced by others - consider your _company_ your product.
+... it is instead how your company is experienced by others. Your _company_ is your product.
 
 Here is a non-exhaustive list, there are dozens more examples than this though:
 
@@ -98,11 +98,11 @@ Here is a non-exhaustive list, there are dozens more examples than this though:
 * how your social media works
 * how helpful you are to random founders that message you
 * the marketing channels you pick
-* it's what you talk about in your blog - I'm writing this piece for brand reasons (transparency / equipping developers (with knowledge) to build successful products), nothing else - I don't care or try to generate conversions from this post, I just want to leave an impression on people. And it's who I am - I'm writing this to pass the time on a long plane journey.
+* It's what you talk about in your blog. I'm writing this piece for brand reasons (transparency / equipping developers with knowledge to build successful products), nothing else. I don't care or try to generate conversions from this post, I just want to leave an impression on people. And it's who I am - I'm writing this to pass the time on a long plane journey.
 
 ## You can't 80:20 everything
 
-A lot of design / brand work has an _increasing_ marginal return. This is because a great brand's purpose is that you stand out. You do _not_ stand out by being average!
+A lot of design or brand work has an _increasing_ marginal return. This is because a great brand's purpose is that you stand out. You do _not_ stand out by being average!
 
 So, if you're serious, go nuts on your brand. Go weirdly hard.
 
@@ -119,7 +119,7 @@ It's not the fact we did the above with our merch store (I know people reading m
 
 ## Doesn't this imply doing everything to a really high standard and a ridiculous workload?
 
-Yes. You can be iterative with it though - not everything was amazing on day one, but we'll keep improving and tweaking everything over time.
+Yes. You can be iterative with it, though. Not everything was amazing on day one, but we'll keep improving and tweaking everything over time.
 
 ## So get out there, and be bold
 
