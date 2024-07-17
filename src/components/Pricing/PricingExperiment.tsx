@@ -1,5 +1,5 @@
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -23,13 +23,14 @@ import { CallToAction } from 'components/CallToAction'
 import Tabbed from './PricingCalculator/Tabbed'
 import { usePlatform } from './Platform/usePlatform'
 import { motion } from 'framer-motion'
-import { PlanColumns } from './Test/PlanColumns';
+import { PlanColumns } from './Test/PlanColumns'
 import { FreePlanContent, PaidPlanContent } from './Test/PlanContent'
 import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, SectionSidebar } from './Test/Sections'
 import { PaidPricing } from './Test/PaidPricing'
 import { Addons } from './Test/Addons'
 import { SimilarProducts } from './Test/SimilarProducts'
 import { Reviews } from './Test/Reviews'
+import ImageSlider from './Test/ImageSlider'
 
 const SidebarList = ({ children }) => <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 
@@ -409,8 +410,9 @@ const ProductTabs = ({ billingProducts }) => {
                 )}
 
                 <div
-                    className={`text-center font-semibold text-[15px] mt-4 ${activeTab === undefined && 'border-t'
-                        } border-light dark:border-dark`}
+                    className={`text-center font-semibold text-[15px] mt-4 ${
+                        activeTab === undefined && 'border-t'
+                    } border-light dark:border-dark`}
                 >
                     <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3">
                         <button
@@ -702,6 +704,43 @@ const PlansTabs = () => {
     )
 }
 
+const ProductHeader = () => {
+    return (
+        <>
+            <h1 className="mb-2">PostHog Cloud</h1>
+            <div className="flex items-center gap-2 mb-4">
+                <div className="inline-grid grid-cols-5">
+                    <IconStarFilled className="size-5 text-yellow" />
+                    <IconStarFilled className="size-5 text-yellow" />
+                    <IconStarFilled className="size-5 text-yellow" />
+                    <IconStarFilled className="size-5 text-yellow" />
+                    <div className="relative">
+                        <IconStar className="size-5 text-yellow" />
+                        <div className="absolute left-0 top-0 w-2 overflow-hidden">
+                            <IconStarFilled className="size-5 text-yellow" />
+                        </div>
+                    </div>
+                </div>
+                <button className="text-red dark:text-yellow text-[15px] font-semibold">507 reviews</button>
+            </div>
+        </>
+    )
+}
+
+const FreeTierItem = ({ icon, name, allocation, description }) => {
+    return (
+        <div className="flex flex-col items-center">
+            {icon}
+            <strong className="text-[15px] text-center leading-none mt-2 mb-1">{name}</strong>
+            <div
+                className={`text-sm text-center text-balance leading-none ${description ? 'opacity-75' : 'text-green'}`}
+            >
+                {description ? description : allocation}
+            </div>
+        </div>
+    )
+}
+
 const PricingExperiment = ({
     groupsToShow,
     currentProduct,
@@ -724,70 +763,30 @@ const PricingExperiment = ({
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
-    const [activePlan, setActivePlan] = useState('free');
+    const [activePlan, setActivePlan] = useState('free')
 
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const plan = params.get('plan');
+        const params = new URLSearchParams(window.location.search)
+        const plan = params.get('plan')
         if (plan === 'free' || plan === 'paid') {
-            setActivePlan(plan);
+            setActivePlan(plan)
         }
-    }, []);
+    }, [])
 
     const handleFreePlanClick = () => {
-        setActivePlan('free');
-        window.history.pushState(null, '', '?plan=free');
-    };
+        setActivePlan('free')
+        window.history.pushState(null, '', '?plan=free')
+    }
 
     const handlePaidPlanClick = () => {
-        setActivePlan('paid');
-        window.history.pushState(null, '', '?plan=paid');
-    };
-
-    const ProductHeader = () => {
-        return (
-            <>
-                <h1 className="mb-2">PostHog Cloud</h1>
-                <div className="flex items-center gap-2 mb-4">
-                    <div className="inline-grid grid-cols-5">
-                        <IconStarFilled className="size-5 text-yellow" />
-                        <IconStarFilled className="size-5 text-yellow" />
-                        <IconStarFilled className="size-5 text-yellow" />
-                        <IconStarFilled className="size-5 text-yellow" />
-                        <div className="relative">
-                            <IconStar className="size-5 text-yellow" />
-                            <div className="absolute left-0 top-0 w-2 overflow-hidden">
-                                <IconStarFilled className="size-5 text-yellow" />
-                            </div>
-                        </div>
-                    </div>
-                    <button className="text-red dark:text-yellow text-[15px] font-semibold">507 reviews</button>
-                </div>
-            </>
-        )
+        setActivePlan('paid')
+        window.history.pushState(null, '', '?plan=paid')
     }
-
-    const FreeTierItem = ({ icon, name, allocation, description }) => {
-        return (
-            <div className="flex flex-col items-center" >
-                {icon}
-                <strong className="text-[15px] text-center leading-none mt-2 mb-1">{name}</strong>
-                <div className={`text-sm text-center text-balance leading-none ${description ? 'opacity-75' : 'text-green'}`}>{description ? description : allocation}</div>
-            </div>
-        )
-    }
-
-
-
-
-
-
 
     return (
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
-
 
             {!currentProduct && (
                 <>
@@ -797,35 +796,62 @@ const PricingExperiment = ({
                                 <ProductHeader />
                             </div>
 
-                            <div className="aspect-square bg-accent dark:bg-accent-dark w-full flex items-center justify-center">
+                            {/* <div className="aspect-square bg-accent dark:bg-accent-dark w-full flex items-center justify-center">
                                 image
-                            </div>
+                            </div> */}
+                            <ImageSlider />
                         </div>
 
                         <div className="@container md:flex-1 col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 md:mr-8">
-
                             <div className="hidden md:block">
                                 <ProductHeader />
                             </div>
 
-                            <p className="mb-4">PostHog is designed to grow with you. With 8 products (and counting), go from idea to product/market fit to IPO and beyond. 🚀</p>
+                            <p className="mb-4">
+                                PostHog is designed to grow with you. With 8 products (and counting), go from idea to
+                                product/market fit to IPO and beyond. 🚀
+                            </p>
 
-                            <p className="mb-4">Our generous free tier means <strong><em>98% of companies use PostHog for free.</em></strong> Only add a card if you need more than the free tier limits or want more projects.</p>
+                            <p className="mb-4">
+                                Our generous free tier means{' '}
+                                <strong>
+                                    <em>98% of companies use PostHog for free.</em>
+                                </strong>{' '}
+                                Only add a card if you need more than the free tier limits or want more projects.
+                            </p>
 
                             <h3 className="mb-0 text-xl">Free</h3>
                             <p className="text-sm mb-4">No credit card required</p>
 
                             <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 mb-6 overflow-x-auto">
                                 <li>
-                                    <button onClick={handleFreePlanClick} className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${activePlan === 'free' ? 'border-yellow bg-white dark:bg-white/5' : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'}`}>
+                                    <button
+                                        onClick={handleFreePlanClick}
+                                        className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
+                                            activePlan === 'free'
+                                                ? 'border-yellow bg-white dark:bg-white/5'
+                                                : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                                        }`}
+                                    >
                                         <strong className="whitespace-nowrap">Totally free</strong>
-                                        <span className="text-sm opacity-75 whitespace-nowrap">Free - no credit card required</span>
+                                        <span className="text-sm opacity-75 whitespace-nowrap">
+                                            Free - no credit card required
+                                        </span>
                                     </button>
                                 </li>
                                 <li>
-                                    <button onClick={handlePaidPlanClick} className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${activePlan === 'free' ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent' : 'border-yellow bg-white dark:bg-white/5'}`}>
+                                    <button
+                                        onClick={handlePaidPlanClick}
+                                        className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
+                                            activePlan === 'free'
+                                                ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                                                : 'border-yellow bg-white dark:bg-white/5'
+                                        }`}
+                                    >
                                         <strong className="whitespace-nowrap">Ridiculously cheap</strong>
-                                        <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
+                                        <span className="text-sm opacity-75 whitespace-nowrap">
+                                            Usage-based pricing
+                                        </span>
                                     </button>
                                 </li>
                             </ul>
@@ -837,14 +863,33 @@ const PricingExperiment = ({
                                 </div>
 
                                 <div className="grid grid-cols-3 @lg:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-4">
-                                    <FreeTierItem name="Analytics" allocation="1M events" icon={<Icons.IconGraph className="text-blue size-5" />} />
-                                    <FreeTierItem name="Session replay" allocation="5K recordings" icon={<Icons.IconRewindPlay className="text-yellow size-5" />} />
-                                    <FreeTierItem name="Feature flags" allocation="1M requests" icon={<Icons.IconToggle className="text-seagreen size-5" />} />
-                                    <FreeTierItem name="A/B testing" description="Billed with feature flags" icon={<Icons.IconFlask className="text-purple size-5" />} />
-                                    <FreeTierItem name="Surveys" allocation="250 responses" icon={<Icons.IconMessage className="text-red size-5" />} />
+                                    <FreeTierItem
+                                        name="Analytics"
+                                        allocation="1M events"
+                                        icon={<Icons.IconGraph className="text-blue size-5" />}
+                                    />
+                                    <FreeTierItem
+                                        name="Session replay"
+                                        allocation="5K recordings"
+                                        icon={<Icons.IconRewindPlay className="text-yellow size-5" />}
+                                    />
+                                    <FreeTierItem
+                                        name="Feature flags"
+                                        allocation="1M requests"
+                                        icon={<Icons.IconToggle className="text-seagreen size-5" />}
+                                    />
+                                    <FreeTierItem
+                                        name="A/B testing"
+                                        description="Billed with feature flags"
+                                        icon={<Icons.IconFlask className="text-purple size-5" />}
+                                    />
+                                    <FreeTierItem
+                                        name="Surveys"
+                                        allocation="250 responses"
+                                        icon={<Icons.IconMessage className="text-red size-5" />}
+                                    />
                                 </div>
                             </div>
-
                         </div>
 
                         <aside className="col-span-5 lgxl:col-span-4">
@@ -858,20 +903,11 @@ const PricingExperiment = ({
 
                     <PaidPricing />
 
-
                     <PlanColumns billingProducts={billingProducts} highlight="free" />
 
                     <Addons />
                     <SimilarProducts />
                     <Reviews />
-
-
-
-
-
-
-
-
 
                     <SectionLayout>
                         <SectionHeader>
