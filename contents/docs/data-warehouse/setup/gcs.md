@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-Google Cloud Storage (GCS) is awesome.
+You can sync and query files and folders from Google Cloud Storage (GCS) in PostHog by setting up a link.
 
 ## Step 1: Creating a bucket in GCS
 
