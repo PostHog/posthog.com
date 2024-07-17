@@ -46,7 +46,7 @@ const initialProducts = [
         name: 'A/B testing',
         type: 'feature_flags',
         color: 'purple',
-        billedWith: 'feature_flags',
+        billedWith: 'Feature flags',
     },
     {
         Icon: IconMessage,
