@@ -30,7 +30,7 @@ When we knew that PostHog was something we wanted to launch, we questioned how w
 
 The product on launch day was going to be free, but we still asked ourselves: "what would stop me from using this thing?"
 
-Despite being free, users would be wary of wasting their time trying to deploy a badly supported, broken piece of open source software, or worse - it not handling their data securely. These are both things you'd associate with the software produced by a 2 person startup.
+Despite being free, users would be wary of wasting their time trying to deploy a badly supported, broken piece of open source software, or worse - it not handling their data securely. These are both things you'd associate with the software produced by a two-person startup.
 
 Before a user even gets into the software or glances at the code first, the majority will turn away _at_ the website, the docs and the readme.
 
