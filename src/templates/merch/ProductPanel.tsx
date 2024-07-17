@@ -64,7 +64,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 <ProductCarousel product={product} />
             </div>
             <div className="space-y-0.5">
-                <h3 className="text-xl [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug">
+                <h3 className="text-xl [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug mb-0">
                     {product.title}
                 </h3>
                 <p className="leading-tight">{subtitle}</p>

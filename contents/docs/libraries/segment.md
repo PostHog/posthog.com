@@ -21,9 +21,9 @@ Make sure you have a [Segment account](https://segment.com/docs/#getting-started
 
 ### Enabling all features via Segment with your website
 
-The simple Segment destination only supports tracking of **pageviews**, **custom events** and **identifying users**.
+The simple Segment destination only supports tracking of **pageviews**, **custom events**, and **identifying users**.
 
-In order to use the full feature set of PostHog (**autocapture**, **session recording**, **feature flags**, **heatmaps**, **surveys** or the **toolbar**) we need to load our own Javascript snippet directly.
+In order to use the full feature set of PostHog (**autocapture**, **session recording**, **feature flags**, **heatmaps**, **surveys**, or the **toolbar**) we need to load our own Javascript snippet directly.
 
 1. In addition to Segment, install your [PostHog JS snippet](/docs/integrate/client/js#installation)
 2. Modify the initialization as documented below to pass the segment `analytics` through for PostHog JS to sync with:

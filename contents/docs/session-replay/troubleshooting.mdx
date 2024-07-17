@@ -78,6 +78,11 @@ If the `crossorigin` attribute is not set on `link` elements a Chrome specific p
 
 Setting `crossorigin="anonymous"` is the safest value you can set for the parameter as [no user credentials are added to the request](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin#anonymous).
 
+### Ensure assets are imported from the base URL in Svelte
+By default, `base` and `assets` imported from `$app/paths` in Svelte use relative asset paths during server-side rendering.
+
+For apps with SSR enabled you should set `relative` to `false` in the [`paths` object of your config](https://kit.svelte.dev/docs/configuration#paths). This ensures all asset URLs will correctly be resolved against the base URL rather than the current page.
+
 ## Filtering can't find my custom events
 
 The most common reason for this is that you're trying to filter by events that weren't sent by the web SDK. For example, from another tool like Segment or one of our backend SDKs.

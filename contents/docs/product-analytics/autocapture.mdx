@@ -24,7 +24,7 @@ Autocapture is available for our [JavaScript Web](/docs/libraries/js), [React](/
 
 ### Reducing events with an allow and ignorelist
 
-Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using `allowlists` and `ignorelists`. 
+Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using `allowlists` and `ignorelists` (NB some options use allow behavior and some use ignore behavior. 
 
 These are an array of events, URLs, elements, and CSS selectors that you want autocapture to allow or ignore.
 
@@ -36,6 +36,8 @@ posthog.init('<ph_project_api_key>', {
     autocapture: {
         dom_event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
         url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
+        // url_ignorelist can be used on its own, or combined with url_allowlist to further filter which URLs are captured
+        url_ignorelist: ['posthog.com./docs/.*/secret-section/.*'], // strings or RegExps
         element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
         css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
         element_attribute_ignorelist:['data-attr-pii="email"'], // List of element attributes to ignore
@@ -61,6 +63,13 @@ You can disable autocapture in your [project settings](https://us.posthog.com/pr
 You can disable pageviews and pageleaves by setting `capture_pageview: false`. To just disable pageleaves, keep `capture_pageview: true` and set `capture_pageleave: false`.
 
 Disabling autocapture **does not disable [session recording](/docs/session-replay/manual)**. You can disable session recording by turning it off in your [project settings](https://app.posthog.com/project/settings) or using `disable_session_recording: true` in the config.
+
+> **Note:** You can update your config at runtime (e.g. to update an allowlist or disable autocapture) using the `posthog.set_config()` method. 
+>
+> For example, to update the `capture_pageview` config:
+> ```js-web
+> posthog.set_config({ capture_pageview: false })
+> ```
 
 ## Capturing additional properties in autocapture events
 
@@ -120,7 +129,10 @@ Autocaptured events include:
 - `$rageclick`: A second click within 1000ms within 30px of the first click.
 - `$screen`: When a user navigates on a mobile app.
 
-You can learn more about what events are autocaptured in the [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native#autocapture) docs. 
+You can learn more about what events are autocaptured in the [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native#autocapture) docs.
+
+> **Note:** Since pageview autocapture relies on the browser page load events, it captures the initial pageview but not subsequent ones. You might need to implement your own pageview capture using custom events. See our guides for doing this in [Next.js](/docs/libraries/next-js#client-side-setup), [React](/tutorials/single-page-app-pageviews), [Vue](/docs/libraries/vue-js#capturing-pageviews), and [Angular](/docs/libraries/angular#tracking-pageviews).
+
 
 ## Autocaptured properties
 
@@ -179,6 +191,24 @@ You can see a full list in [PostHog](https://us.posthog.com/data-management/prop
 > - Mobile libraries capture additional properties like `$app_build`, `$app_name`, `$app_namespace`, and `$app_version`.
 > - These properties can be hidden in activity by checking the "Hide PostHog properties" box.
 
+## Analyzing autocaptured events and properties
+
+Autocapture events and properties can be used like any other [event type](/docs/data/events). You can use them in trends, funnels, cohorts, surveys, and more. Beyond this, they come with some special features:
+
+- When using the autocapture event series, you can filter by the autocaptured element's tag name, text, `href` target, and/or CSS selector.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/auto_light_b669bff067.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/auto_dark_c52206511f.png"
+  alt="Trends using autocapture properties" 
+  classes="rounded"
+/>
+
+- Autocapture events can be organized and renamed using [actions](/docs/data/actions).
+
+- You can query autocapture `elements_chain` using [HogQL](/tutorials/hogql-autocapture).
+
+
 ## Clipboard autocapture
 
 You can configure `posthog-js` to autocapture information that users copy or cut on your page with the `capture_copied_text` config option.
@@ -204,14 +234,5 @@ We then report the copied or cut text as a "Clipboard autocapture" event. You ca
 
 Clipboard autocapture respects other privacy settings. For example, won't capture content from a password field.
 
-> **Note:** Browsers don't directly allow access to copied data for privacy reasons so when `posthog-js` sees a clipboard event, we capture any text currently selected in the browser.
+> **Note:** Browsers don't directly allow access to copied data for privacy reasons so when `posthog-js` sees a clipboard event, we capture any text currently selected in the browser.import { useSelector } from 'react-redux'
 
-## More notes on autocapture
-
-- Autocapture events can be organized and renamed using [actions](/docs/data/actions).
-
-- You can query autocapture `elements_chain` using [HogQL](/tutorials/hogql-autocapture).
-
-- Since pageview autocapture relies on the browser page load events, it captures the initial pageview but not subsequent ones. You might need to implement your own pageview capture using custom events. See our guides for doing this in [Next.js](/docs/libraries/next-js#client-side-setup), [React](/tutorials/single-page-app-pageviews), [Vue](/docs/libraries/vue-js#capturing-pageviews), and [Angular](/docs/libraries/angular#tracking-pageviews).
-
-- You can update your config at runtime (e.g. to update an allowlist or disable autocapture) using the `posthog.set_config` method.

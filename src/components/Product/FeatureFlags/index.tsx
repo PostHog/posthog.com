@@ -498,7 +498,7 @@ export const ProductFeatureFlags = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
                                         src="../../../images/products/competitors-ff.png"

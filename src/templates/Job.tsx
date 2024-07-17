@@ -19,7 +19,7 @@ import groupBy from 'lodash.groupby'
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
         <li className="flex space-x-2">
-            <span className="w-6 h-6 text-black dark:text-white">{icon}</span>
+            <span className="w-6 h-6 text-black dark:text-white flex-shrink-0">{icon}</span>
             <span className="grid">
                 <h4 className="text-sm m-0 font-normal leading-none pt-1">
                     <span>{title}</span>
@@ -53,9 +53,8 @@ export default function Job({
             departmentName,
             info,
             id,
-            locationName,
             parent,
-            fields: { tableOfContents, html, title, slug },
+            fields: { tableOfContents, html, title, slug, locations },
         },
     },
     pageContext: { gitHubIssues },
@@ -144,7 +143,11 @@ export default function Job({
                                 {departmentName?.toLowerCase() !== 'speculative' && (
                                     <Detail title="Department" value={departmentName} icon={<Department />} />
                                 )}
-                                <Detail title="Location" value={locationName} icon={<Location />} />
+                                <Detail
+                                    title="Location"
+                                    value={`Remote${locations?.length > 0 ? ` (${locations.join(', ')})` : ''}`}
+                                    icon={<Location />}
+                                />
                                 {timezone && <Detail title="Timezone(s)" value={timezone} icon={<Timezone />} />}
                             </ul>
                             <div className="job-content mt-12 w-full flex-shrink-0 transition-all">
@@ -273,7 +276,6 @@ export const query = graphql`
         ashbyJobPosting(id: { eq: $id }) {
             id
             departmentName
-            locationName
             fields {
                 tableOfContents {
                     value
@@ -283,6 +285,7 @@ export const query = graphql`
                 html
                 title
                 slug
+                locations
             }
             parent {
                 ... on AshbyJob {

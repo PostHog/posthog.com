@@ -1,0 +1,19 @@
+For example, to get a count of events for your Hubspot contacts you can filter `events.distinct_id` by `email FROM hubspot_contacts` like this:
+
+```sql
+SELECT COUNT() AS event_count, distinct_id
+FROM events
+WHERE distinct_id IN (SELECT email FROM hubspot_contacts)
+GROUP BY distinct_id
+ORDER BY event_count DESC
+```
+
+You can also use a `JOIN` such as `INNER JOIN` or `LEFT JOIN` to combine data. For example, to get a count of events for your Stripe customers you can `INNER JOIN` on `distinct_id` and `email` like this:
+
+```SQL
+SELECT events.distinct_id, COUNT() AS event_count
+FROM events
+INNER JOIN prod_stripe_customer ON events.distinct_id = prod_stripe_customer.email
+GROUP BY events.distinct_id
+ORDER BY event_count DESC
+```

@@ -20,7 +20,7 @@ You'll also need Sendgrid access, obviously.
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'Sendgrid' and select the destination, press Install.
 3. Add your Sendgrid API key at the configuration step.
 4. Enable the destination and watch your contacts list get populated in Sendgrid!

@@ -455,6 +455,14 @@ h4 {
     }
 }
 
+.rc-slider-handle {
+    @apply !cursor-grab;
+
+    &:focus {
+        @apply !cursor-grabbing;
+    }
+}
+
 /* timeline key */
 
 .timeline-entry li[data-type='feature']:before {
@@ -1425,6 +1433,10 @@ li.squeak-left-border {
         li {
             @apply text-[15px];
         }
+    }
+
+    blockquote {
+        @apply border-l-4 border-light dark:border-dark pl-2;
     }
 
     pre {

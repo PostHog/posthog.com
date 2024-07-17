@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The Ops team's primary goal is to make PostHog an incredible place to work by removing distractions from other small teams. We keep PosHog running smoothly without implementing lots of unnecessary processes. 
+The Ops team's primary goal is to make PostHog an incredible place to work by removing distractions from other small teams. We keep PostHog running smoothly without implementing lots of unnecessary processes. 
 
 We are also responsible for growing the team by adding in world class talent to new and existing [small teams](/teams). We want to do this while retaining our world-class team by making PostHog the most transparent company in the world, and the best place for people to work in general. 
 

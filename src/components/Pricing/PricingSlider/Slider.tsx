@@ -26,6 +26,8 @@ export const prettyInt = (x: number): string => {
 export const sliderCurve = Math.exp
 export const inverseCurve = Math.log
 export const identityCurve = (x: number): number => x
+export const nonLinearCurve = (x: number): number => Math.pow(x, 0.4)
+export const reverseNonLinearCurve = (y: number): number => Math.pow(y, 1 / 0.4)
 
 const SI_SYMBOL = ['', 'k', 'M', 'B']
 
@@ -52,6 +54,13 @@ const makeLinearMarks = (marks: number[]): Record<number, string> => {
     }, {} as Record<number, string>)
 }
 
+const makeNonLinearMarks = (marks: number[], max): Record<number, string> => {
+    return marks.reduce((acc, cur) => {
+        acc[nonLinearCurve(cur)] = abbreviateNumber(cur)
+        return acc
+    }, {} as Record<number, string>)
+}
+
 export const LogSlider = ({ min, max, marks, stepsInRange, onChange, value }: SliderProps): JSX.Element => {
     return (
         <MySlider
@@ -74,6 +83,21 @@ export const LinearSlider = ({ min, max, marks, stepsInRange, onChange, value }:
             max={max}
             marks={makeLinearMarks(marks)}
             step={(max - min) / stepsInRange}
+            onChange={onChange}
+            className="slider center"
+            value={value}
+        />
+    )
+}
+
+export const NonLinearSlider = ({ min, max, marks, stepsInRange, onChange, value }: SliderProps): JSX.Element => {
+    return (
+        <MySlider
+            min={nonLinearCurve(min)}
+            max={nonLinearCurve(max)}
+            marks={makeNonLinearMarks(marks, max)}
+            step={(nonLinearCurve(max) - nonLinearCurve(min)) / stepsInRange}
+            tipFormatter={(value) => prettyInt(reverseNonLinearCurve(value))}
             onChange={onChange}
             className="slider center"
             value={value}

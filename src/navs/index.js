@@ -766,6 +766,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/assets',
                     },
                     {
+                        name: 'Merch store',
+                        url: '/handbook/engineering/posthog-com/merch-store',
+                    },
+                    {
                         name: 'Posting a new job',
                         url: '/handbook/engineering/posthog-com/jobs',
                     },
@@ -2445,19 +2449,28 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Features',
+                    name: 'Methodology',
                 },
                 {
-                    name: 'Statistical significance',
-                    url: '/docs/experiments/significance',
-                    icon: 'IconTestTube',
+                    name: 'Traffic allocation',
+                    url: '/docs/experiments/traffic-allocation',
+                    icon: 'IconPeople',
                     color: 'orange',
                 },
                 {
-                    name: 'Under the hood',
-                    url: '/docs/experiments/under-the-hood',
+                    name: 'Sample size and running time',
+                    url: '/docs/experiments/sample-size-running-time',
+                    icon: 'IconDashboard',
+                    color: 'blue',
+                },
+                {
+                    name: 'Experiment significance',
+                    url: '/docs/experiments/experiment-significance',
                     icon: 'IconMagicWand',
-                    color: 'purple',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Features',
                 },
                 {
                     name: 'Experiments without feature flags',
@@ -2526,6 +2539,12 @@ export const docsMenu = {
                     url: '/docs/surveys/webhook',
                     icon: 'IconLaptop',
                     color: 'orange',
+                },
+                {
+                    name: 'Conditional questions',
+                    url: '/docs/surveys/conditional-questions',
+                    icon: 'IconUserPaths',
+                    color: 'blue',
                 },
             ],
         },
@@ -2746,9 +2765,39 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/setup',
                     icon: 'IconBook',
                     color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/setup',
+                        },
+                        {
+                            name: 'Stripe',
+                            url: '/docs/data-warehouse/setup/stripe',
+                        },
+                        {
+                            name: 'Hubspot',
+                            url: '/docs/data-warehouse/setup/hubspot',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/data-warehouse/setup/zendesk',
+                        },
+                        {
+                            name: 'Postgres',
+                            url: '/docs/data-warehouse/setup/postgres',
+                        },
+                        {
+                            name: 'S3',
+                            url: '/docs/data-warehouse/setup/s3',
+                        },
+                        {
+                            name: 'Azure',
+                            url: '/docs/data-warehouse/setup/azure',
+                        },
+                    ],
                 },
                 {
-                    name: 'Query your sources',
+                    name: 'Creating insights from sources',
                     url: '/docs/data-warehouse/query',
                     icon: 'IconHogQL',
                     color: 'purple',
@@ -2822,13 +2871,19 @@ export const docsMenu = {
                     name: 'Langfuse',
                     url: '/docs/ai-engineering/langfuse-posthog',
                     icon: 'IconWrench',
-                    color: 'purple',
+                    color: 'red',
                 },
                 {
                     name: 'Helicone',
                     url: '/docs/ai-engineering/helicone-posthog',
                     icon: 'IconWrench',
                     color: 'green',
+                },
+                {
+                    name: 'Traceloop',
+                    url: '/docs/ai-engineering/traceloop-posthog',
+                    icon: 'IconWrench',
+                    color: 'purple',
                 },
             ],
         },
@@ -2926,6 +2981,12 @@ const menu = [
                 icon: 'IconMessage',
                 color: 'salmon',
                 url: '/surveys',
+            },
+            {
+                name: 'Data warehouse',
+                icon: 'IconDatabase',
+                color: '[#8567FF]',
+                url: '/data-warehouse',
             },
             {
                 name: 'Product OS',
