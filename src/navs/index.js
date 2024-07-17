@@ -2794,6 +2794,10 @@ export const docsMenu = {
                             name: 'Azure',
                             url: '/docs/data-warehouse/setup/azure',
                         },
+                        {
+                            name: 'Cloudflare R2',
+                            url: '/docs/data-warehouse/setup/r2',
+                        },
                     ],
                 },
                 {
