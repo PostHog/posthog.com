@@ -748,6 +748,7 @@ const PricingExperiment = ({
     groupsToShow: undefined | string[]
     currentProduct?: string | null
 }): JSX.Element => {
+    const [animateFreeTiers, setAnimateFreeTiers] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const products = useProducts()
     const {
@@ -862,7 +863,12 @@ const PricingExperiment = ({
                                     <span className="opacity-75 text-sm">(resets monthly)</span>
                                 </div>
 
-                                <div className="grid grid-cols-3 @lg:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-4">
+                                <div
+                                    className={`grid grid-cols-3 @lg:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-4 ${
+                                        animateFreeTiers ? 'animate-flash' : ''
+                                    }`}
+                                    onAnimationEnd={() => setAnimateFreeTiers(false)}
+                                >
                                     <FreeTierItem
                                         name="Analytics"
                                         allocation="1M events"
@@ -895,7 +901,19 @@ const PricingExperiment = ({
                         <aside className="col-span-5 lgxl:col-span-4">
                             <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6 h-full">
                                 <div className="flex flex-col justify-between h-full">
-                                    {activePlan === 'free' ? <FreePlanContent /> : <PaidPlanContent />}
+                                    {activePlan === 'free' ? (
+                                        <FreePlanContent
+                                            onFreeTierClick={() => {
+                                                setAnimateFreeTiers(true)
+                                            }}
+                                        />
+                                    ) : (
+                                        <PaidPlanContent
+                                            onFreeTierClick={() => {
+                                                setAnimateFreeTiers(true)
+                                            }}
+                                        />
+                                    )}
                                 </div>
                             </div>
                         </aside>

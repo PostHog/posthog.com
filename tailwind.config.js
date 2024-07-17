@@ -251,6 +251,10 @@ module.exports = {
                     '0%, 100%': { transform: 'scale(1)' },
                     '50%': { transform: 'scale(1.05)' },
                 },
+                flash: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(1.05)' },
+                },
                 reveal: {
                     '0%': { maxHeight: 0, opacity: 0 },
                     '50%': { opacity: 1 },
@@ -265,6 +269,7 @@ module.exports = {
                 wiggle: 'wiggle .2s ease-in-out 3',
                 grow: 'grow 2s linear infinite',
                 'grow-sm': 'grow-sm 3s linear infinite',
+                flash: 'flash 1s ease-in-out 3',
                 reveal: 'reveal 1s ease-in-out',
                 'text-gradient': 'text-gradient 2500ms linear infinite',
             },
