@@ -2798,6 +2798,10 @@ export const docsMenu = {
                             name: 'Cloudflare R2',
                             url: '/docs/data-warehouse/setup/r2',
                         },
+                        {
+                            name: 'Google Cloud Storage',
+                            url: '/docs/data-warehouse/setup/gcs',
+                        },
                     ],
                 },
                 {
