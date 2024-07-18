@@ -346,6 +346,7 @@ export default function SalesforceForm({
         })
         posthog?.capture?.('form submission', {
             form_name: form.name,
+            form_data: JSON.stringify(values),
         })
         await fetch('https://hooks.zapier.com/hooks/catch/8898847/222z130/', {
             method: 'POST',
@@ -422,7 +423,7 @@ export default function SalesforceForm({
                             )}
                             type="submit"
                         >
-                            {form.buttonText}
+                            {form.buttonText ?? 'Submit'}
                         </button>
                     </Form>
                 </Formik>
