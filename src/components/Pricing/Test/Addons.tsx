@@ -6,10 +6,11 @@ import * as Icons from '@posthog/icons'
 import { PricingTiers } from '../Plans'
 import { AnimatePresence, motion } from 'framer-motion'
 
-const Addon = ({ name, icon_key, description, plans, unit, type }) => {
+const Addon = ({ name, icon_key, description, plans, unit, type, ...other }) => {
     const [showBreakdown, setShowBreakdown] = useState(false)
     const Icon = Icons[icon_key]
     const plan = plans[plans.length - 1]
+    const freeAllocation = plan?.tiers?.find((tier) => tier.unit_amount_usd === '0')?.up_to
     return (
         <div
             key={name}
@@ -37,7 +38,9 @@ const Addon = ({ name, icon_key, description, plans, unit, type }) => {
                         </>
                     )}
                 </p>
-
+                <p className={`m-0 opacity-70 ${!freeAllocation ? 'invisible' : ''}`}>
+                    First <strong>{freeAllocation?.toLocaleString()}</strong> {unit}s/mo free
+                </p>
                 <button
                     onClick={() => setShowBreakdown(true)}
                     className={`text-red dark:text-yellow font-bold text-sm ${plan?.flat_rate ? 'invisible' : ''}`}
@@ -50,7 +53,7 @@ const Addon = ({ name, icon_key, description, plans, unit, type }) => {
                             initial={{ opacity: 0, translateY: '100%' }}
                             animate={{ opacity: 1, translateY: 0, transition: { type: 'tween', duration: 0.2 } }}
                             exit={{ opacity: 0, translateY: '100%' }}
-                            className="absolute inset-0 bg-white dark:bg-accent-dark pt-2 rounded"
+                            className="absolute inset-0 bg-white dark:bg-accent-dark pt-4 rounded"
                         >
                             <PricingTiers plans={plans} type={type} unit={unit} />
                             <button
