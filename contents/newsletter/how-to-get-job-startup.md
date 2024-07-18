@@ -43,11 +43,11 @@ We did the math and, on average, we spend less than one minute reviewing each ap
 
 ### Spend time on a short cover letter
 
-And we mean short. Five to ten sentences is fine. Don’t rewrite your resume. And remember, the applicant tracking system will break all your formatting, so keep it simple.
+And we mean short. Five to ten sentences is fine. Don’t rewrite your resume. Keep it is simple, remember, the applicant tracking system will break all your formatting.
 
 Match the company’s tone – if the job ad is informal, don’t start your cover letter with ‘Dear Sir/Madam.’ And never, ever, use ChatGPT. Not even to help you with a draft. We’ll know, it’s always obvious.
 
-Particularly strong and succinct cover letters we’ve received recently all include the following:
+Particularly strong cover letters we’ve received recently include the following:
 
 * An explanation of exactly why you want to join a company – and why the company should want to hire you.
 
@@ -62,7 +62,7 @@ Particularly strong and succinct cover letters we’ve received recently all inc
 
 Get ready to groan, but there’s one thing that will really help: get a proper, warm referral. We trust our team’s judgment, so a referral can really help us pre-filter applicants. 
 
-This does not mean you should randomly spam people on LinkedIn for an intro, but it does mean you should work hard wherever you go and leave a good impression. People talk to each other. And, who knows, one day maybe they’ll talk about you and be really nice.
+This does not mean you should randomly spam people on LinkedIn for an intro (this never works), but it does mean you should work hard wherever you go and leave a good impression. People talk to each other. And, who knows, one day maybe they’ll talk about you and be really nice.
 
 ## Ask the right questions
 
