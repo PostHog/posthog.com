@@ -31,6 +31,21 @@ interface IProps {
         cols?: 1 | 2
     }
     autoValidate?: boolean
+    form: {
+        fields: {
+            label: string
+            type: 'string' | 'enumeration'
+            name: string
+            required?: boolean
+            options?: CustomFieldOption[]
+            fieldType?: string
+            cols?: 1 | 2
+        }[]
+        buttonText?: string
+        message?: string
+        name: string
+    }
+    type: 'lead' | 'contact'
 }
 
 export interface Field {
@@ -311,185 +326,16 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
 }
 
 export default function SalesforceForm({
-    formID,
     customFields,
     customMessage,
     onSubmit,
     buttonOptions,
     formOptions,
-    autoValidate,
-    ...other
+    form,
+    type = 'lead',
 }: IProps) {
     const posthog = usePostHog()
     const [openOptions, setOpenOptions] = useState<string[]>([])
-    const form = {
-        fields: [
-            {
-                label: 'Email',
-                type: 'string',
-                name: 'email',
-                required: true,
-            },
-            {
-                label: 'Company',
-                type: 'string',
-                name: 'company',
-                required: true,
-            },
-            {
-                label: 'Role',
-                name: 'role',
-                type: 'enumeration',
-                options: [
-                    {
-                        label: 'Engineering',
-                        value: 'Engineering',
-                    },
-                    {
-                        label: 'Founder',
-                        value: 'Founder',
-                    },
-                    {
-                        label: 'Leadership',
-                        value: 'Leadership',
-                    },
-                    {
-                        label: 'Marketing',
-                        value: 'Marketing',
-                    },
-                    {
-                        label: 'Other',
-                        value: 'Other',
-                    },
-                    {
-                        label: 'Product',
-                        value: 'Product',
-                    },
-                    {
-                        label: 'Sales',
-                        value: 'Sales',
-                    },
-                ],
-            },
-            {
-                label: 'Which products are you interested in?',
-                name: 'products',
-                type: 'enumeration',
-                fieldType: 'checkbox',
-                cols: 1,
-                options: [
-                    {
-                        label: 'Product Analytics',
-                        value: 'Product Analytics',
-                    },
-                    {
-                        label: 'A/B Testing (Feature Flags)',
-                        value: 'A/B Testing (Feature Flags)',
-                    },
-                    {
-                        label: 'Session Replay',
-                        value: 'Session Replay',
-                    },
-                    {
-                        label: 'Other (CDP, Data Warehouse, Surveys)',
-                        value: 'Other (CDP, Data Warehouse, Surveys)',
-                    },
-                ],
-            },
-            {
-                label: 'I want to implement tracking on:',
-                name: 'tracking_on',
-                type: 'enumeration',
-                fieldType: 'checkbox',
-                cols: 1,
-                options: [
-                    {
-                        label: 'Marketing page',
-                        value: 'Marketing page',
-                    },
-                    {
-                        label: 'Web app',
-                        value: 'Web app',
-                    },
-                    {
-                        label: 'Mobile app',
-                        value: 'Mobile app',
-                    },
-                    {
-                        label: 'Server',
-                        value: 'Server',
-                    },
-                    {
-                        label: 'Other (e.g., extension, wearable)',
-                        value: 'Other (e.g., extension, wearable)',
-                    },
-                ],
-            },
-            {
-                label: 'Which data warehouse do you use?',
-                name: 'data_warehouse',
-                type: 'enumeration',
-                fieldType: 'checkbox',
-                options: [
-                    {
-                        label: 'Snowflake',
-                        value: 'Snowflake',
-                    },
-                    {
-                        label: 'BigQuery',
-                        value: 'BigQuery',
-                    },
-                    {
-                        label: 'Redshift',
-                        value: 'Redshift',
-                    },
-                    {
-                        label: 'Azure',
-                        value: 'Azure',
-                    },
-                    {
-                        label: 'Other',
-                        value: 'Other',
-                    },
-                    {
-                        label: 'None',
-                        value: 'None',
-                    },
-                ],
-            },
-            {
-                label: 'Monthly active users',
-                name: 'monthly_active_users',
-                type: 'string',
-                fieldType: 'number',
-                required: true,
-            },
-            {
-                label: 'Do you need any of the following:',
-                name: 'needs',
-                type: 'enumeration',
-                fieldType: 'checkbox',
-                options: [
-                    {
-                        label: 'Legal/security review',
-                        value: 'Legal/security review',
-                    },
-                    {
-                        label: 'BAA for HIPAA',
-                        value: 'BAA for HIPAA',
-                    },
-                ],
-            },
-            {
-                label: 'What do you want to talk about on the call?',
-                name: 'talk_about',
-                type: 'string',
-            },
-        ],
-        buttonText: 'Submit',
-        message: "Message received. We'll be in touch!",
-        name: '',
-    }
     const [submitted, setSubmitted] = useState(false)
     const [confetti, setConfetti] = useState(true)
 
@@ -501,13 +347,9 @@ export default function SalesforceForm({
         posthog?.capture?.('form submission', {
             form_name: form.name,
         })
-        const body = {
-            oid: '00DHp000004Arkc',
-            ...values,
-        }
         await fetch('https://hooks.zapier.com/hooks/catch/8898847/222z130/', {
             method: 'POST',
-            body: JSON.stringify(body),
+            body: JSON.stringify({ ...values, type }),
         })
         setSubmitted(true)
     }
