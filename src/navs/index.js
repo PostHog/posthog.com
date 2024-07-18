@@ -2794,6 +2794,10 @@ export const docsMenu = {
                             name: 'Azure',
                             url: '/docs/data-warehouse/setup/azure',
                         },
+                        {
+                            name: 'Google Cloud Storage',
+                            url: '/docs/data-warehouse/setup/gcs',
+                        },
                     ],
                 },
                 {
