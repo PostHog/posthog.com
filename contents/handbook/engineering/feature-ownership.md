@@ -23,7 +23,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Annotations | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/annotations</span> |
 | API Structure | Security + core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team | <span class="lemon-tag gh-tag">feature/api-structure</span> |
 | Async migrations | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
-| Batch exports | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/cdp</span> |
+| Batch exports | [Team Data Warehouse](teams/data-warehouse)  | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
 | BI | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Billing | [Team Growth][Team Growth]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Client libraries | Core updates owned by [Team Pipeline][Team Pipeline]. Features owned by the relevant small team  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
@@ -31,6 +31,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Correlation Analysis | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/correlation-analysis</span> |
 | Dashboards | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Data Management | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
+| Data Warehouse | [Team Data Warehouse](teams/data-warehouse)  | <span class="lemon-tag gh-tag">feature/data-warehouse</span> |
 | Events | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
 | Experimentation | [Team Feature Success][Team Feature Success] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
 | Feature Flags | [Team Feature Success][Team Feature Success]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
