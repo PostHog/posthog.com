@@ -27,7 +27,7 @@ PostHog automatically captures UTMs via our JavaScript library (and snippet). Th
 - `utm_campaign`: related campaign, like `brand_awareness` or `holiday_sale`
 - `utm_content`: content location, like a specific post, button, image
 - `utm_term`: search term, like "analytics" or "product analytics"
-- `gclid`: Google click ID for tracking data related to Google Ads
+- `gclid`: Google click ID for tracking data related to [Google Ads](/tutorials/google-ads-reports)
 - `fbclid`: Facebook click ID for tracking data related to Facebook Ads
 - `msclkid`: Microsoft click ID for tracking data related to Microsoft (Bing) Ads
 
