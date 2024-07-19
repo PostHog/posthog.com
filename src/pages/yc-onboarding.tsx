@@ -90,6 +90,7 @@ export const YCOnboarding = () => {
                         </ol>
                         <SalesforceForm
                             type="contact"
+                            source="YC"
                             form={{
                                 fields: [
                                     {

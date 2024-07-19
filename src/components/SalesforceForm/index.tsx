@@ -46,6 +46,7 @@ interface IProps {
         name: string
     }
     type: 'lead' | 'contact'
+    source?: string
 }
 
 export interface Field {
@@ -298,7 +299,7 @@ const inputContainerClasses = `p-4 bg-accent dark:bg-accent-dark group active:bg
 const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     const { name, placeholder } = props
     if (!name) return null
-    const [type, setType] = useState('text')
+    const type = props.type
     const { errors, validateField, setFieldValue } = useFormikContext()
     const error = errors[name]
     return (
@@ -307,14 +308,12 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
                 onChange={(e) => setFieldValue(name, e.target.value)}
                 onBlur={() => {
                     validateField(name)
-                    setType('text')
                 }}
                 className={`bg-transparent w-full outline-none absolute left-0 px-4 ${
                     error ? 'bottom-6 placeholder-shown:bottom-8' : 'bottom-2 placeholder-shown:bottom-4'
                 } peer placeholder-shown:placeholder-transparent transition-all border-0 py-0 shadow-none ring-0 focus:ring-0`}
                 {...props}
                 {...(props.type === 'number' ? { min: 0 } : {})}
-                onFocus={() => setType(props.type ?? 'text')}
                 type={props.type === 'date' ? 'date' : type}
             />
             <span className="relative -top-3 peer-placeholder-shown:top-0 text-xs peer-placeholder-shown:text-base peer-placeholder-shown:opacity-50 transition-all">
@@ -333,6 +332,7 @@ export default function SalesforceForm({
     formOptions,
     form,
     type = 'lead',
+    source,
 }: IProps) {
     const posthog = usePostHog()
     const [openOptions, setOpenOptions] = useState<string[]>([])
@@ -350,7 +350,7 @@ export default function SalesforceForm({
         })
         await fetch('https://hooks.zapier.com/hooks/catch/8898847/222z130/', {
             method: 'POST',
-            body: JSON.stringify({ ...values, type }),
+            body: JSON.stringify({ ...values, type, source }),
         })
         setSubmitted(true)
     }
