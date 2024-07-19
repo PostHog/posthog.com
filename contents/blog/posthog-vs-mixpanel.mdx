@@ -164,7 +164,7 @@ PostHog and Mixpanel diverge here:
 
 1. PostHog has a built-in data warehouse, so you can import and query data directly from our other sources like Stripe and Zendesk, or from an existing warehouse. 
 
-2. Mixpanel relies on data warehouse connectors to combine customer and product data. This means you don't import data directly from third-party tools, but get them into a third-party warehouse and then import that data into Mixpanel for analysis.
+2. Mixpanel relies on data warehouse connectors to combine customer and product data. This means you don't import data directly from third-party tools. You need to get them into a third-party warehouse and then import that data into Mixpanel for analysis.
 
 <ComparisonTable column1="PostHog" column2="Mixpanel">
    <ComparisonRow column1={true} column2={false} feature="Data warehouse" description="Query customer and product data together" />
@@ -231,7 +231,7 @@ Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
 
 We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. 
 
-We make this super easy by offering a [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) – a no code solution that takes minutes to setup. We also have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
+We make this super easy by offering a [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) – a no code solution that takes minutes to setup. We also have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more in our docs.
 
 ### How do PostHog and Mixpanel compare to Amplitude?
 
