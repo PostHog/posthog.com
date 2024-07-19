@@ -406,7 +406,7 @@ export default function SalesforceForm({
                                 return (
                                     <Input
                                         key={`${name}-${index}`}
-                                        type={type === 'string' ? 'text' : type}
+                                        type={fieldType}
                                         name={name}
                                         placeholder={label}
                                         required={required}

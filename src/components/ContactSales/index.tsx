@@ -102,6 +102,7 @@ export default function ContactSales({ location }) {
                                         type: 'string',
                                         name: 'email',
                                         required: true,
+                                        fieldType: 'email',
                                     },
                                     {
                                         label: 'Company',
@@ -143,6 +144,7 @@ export default function ContactSales({ location }) {
                                                 value: 'Sales',
                                             },
                                         ],
+                                        required: true,
                                     },
                                     {
                                         label: 'Which products are you interested in?',
@@ -168,6 +170,7 @@ export default function ContactSales({ location }) {
                                                 value: 'Other (CDP, Data Warehouse, Surveys)',
                                             },
                                         ],
+                                        required: true,
                                     },
                                     {
                                         label: 'I want to implement tracking on:',
@@ -197,6 +200,7 @@ export default function ContactSales({ location }) {
                                                 value: 'Other (e.g., extension, wearable)',
                                             },
                                         ],
+                                        required: true,
                                     },
                                     {
                                         label: 'Which data warehouse do you use?',
@@ -229,6 +233,7 @@ export default function ContactSales({ location }) {
                                                 value: 'None',
                                             },
                                         ],
+                                        required: true,
                                     },
                                     {
                                         label: 'Monthly active users',
@@ -252,11 +257,13 @@ export default function ContactSales({ location }) {
                                                 value: 'BAA for HIPAA',
                                             },
                                         ],
+                                        required: true,
                                     },
                                     {
                                         label: 'What do you want to talk about on the call?',
                                         name: 'talk_about',
                                         type: 'string',
+                                        required: true,
                                     },
                                 ],
                                 buttonText: 'Submit',
