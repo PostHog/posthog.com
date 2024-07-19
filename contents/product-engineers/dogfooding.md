@@ -4,7 +4,7 @@ date: 2024-07-04
 author:
  - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/dogfood_0015adbb54.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/dogfood_531145ada2.jpg
 featuredImageType: full
 tags:
   - Product engineers
