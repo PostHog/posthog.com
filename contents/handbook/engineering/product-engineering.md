@@ -125,4 +125,4 @@ Look for evidence that users have _actually done anything_ about the problems th
 * How important is this issue compared to other things you have to work on?
 * Has your company spent money trying to solve this before?
 
-Write down every interview. This helps us come back as the rest of the team, or you, consider other products or features in future.
+[Write down every interview](https://docs.google.com/document/d/1762fbEbFOVZUr24jQ3pFFj91ViY72TWrTgD-JxRJ5Tc/edit). This helps us come back as the rest of the team, or you, consider other products or features in future.
