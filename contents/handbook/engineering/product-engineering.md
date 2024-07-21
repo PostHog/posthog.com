@@ -61,7 +61,7 @@ Products at PostHog generically go through three phases, and considering your ph
 
 There are plenty of other techniques, that you can do in parallel to get a signal on a new idea:
 
-* Use the public roadmap - if you have a rough idea, create a GitHub issue and create an item on posthog.com/roadmap - this will guage demand
+* Use the public roadmap - if you have a rough idea, create a GitHub issue and create an item on posthog.com/roadmap - this will gauge demand
 * Ask internally for help. There are lots of people that can help you - the CS team talk to users all the time, the support team have a strong sense of pain points, other product engineers have all talked to users, James and Tim have a broader view of how PostHog is doing, the marketing team can help you get usage or validate demand.
 * Interviews - our Product Managers regularly run interviews, ask to be included and give a heads up what you're trying to learn about. Or just message users directly! You can even embed your calendar in our surveys product to get ou will need lots of existing potentially relevant customers for this to make sense.
 * Listen to the internet - we have a #brand-mentions channel in Slack that monitors for social mentions by customers, or get us to post a question here if you need.
