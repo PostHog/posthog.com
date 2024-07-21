@@ -291,6 +291,10 @@ export const handbookSidebar = [
                         name: 'How we review PRs',
                         url: '/handbook/engineering/how-we-review',
                     },
+                    {
+                        name: 'Good product engineer, bad product engineer',
+                        url: '/handbook/engineering/product-engineering',
+                    },
                 ],
             },
             {
