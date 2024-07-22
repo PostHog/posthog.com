@@ -34,7 +34,7 @@ And, unlike Hotjar, we support [session replays on mobile](/docs/session-replay/
 
 ![posthog-vs-hotjar](https://res.cloudinary.com/dmukukwp6/image/upload/hotjar_ace01c5cb7.jpg)
 
-Sadly, many tools don’t publish pricing. That’s their choice, but we’re pretty confident it’s not because they’re secretly great value. How else are they going to justify those huge outbound sales teams, eh?
+Of course, many tools don’t publish pricing. That’s their choice, but we’re pretty confident it’s not because they’re secretly great value. How else are they going to justify those huge outbound sales teams, eh?
 
 You can [calculate your new price](/pricing) on the pricing page, but here’s a breakdown of the changes at different volumes:
 
