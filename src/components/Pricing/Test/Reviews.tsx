@@ -1,79 +1,135 @@
-import React from "react"
-import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, SectionSidebar } from './Sections'
-import { IconCheck, IconGraph, IconRewindPlay, IconToggle, IconFlask, IconMessage, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar } from '@posthog/icons'
-import Link from "components/Link"
+import React from 'react'
+import { section, SectionHeader } from './Sections'
+import { IconStarFilled, IconStar } from '@posthog/icons'
+import Link from 'components/Link'
+import { graphql, useStaticQuery } from 'gatsby'
 
-const Review = () => {
-  return (
-    <div className="space-y-4 border-t first:border-t-0 border-light dark:border-dark pt-8 first:pt-0 mb-8">
-      <div>
-        <p className="text-lg mb-1"><strong>"A great insights tool!"</strong></p>
+export const Stars = ({ rating }) => {
+    return (
         <div className="inline-grid grid-cols-5">
-          <IconStarFilled className="size-5 text-yellow" />
-          <IconStarFilled className="size-5 text-yellow" />
-          <IconStarFilled className="size-5 text-yellow" />
-          <IconStarFilled className="size-5 text-yellow" />
-          <div className="relative">
-            <IconStar className="size-5 text-yellow" />
-            <div className="absolute left-0 top-0 w-2 overflow-hidden">
-              <IconStarFilled className="size-5 text-yellow" />
-            </div>
-          </div>
+            {Array.from({ length: 5 }, (_, i) => {
+                const filled = i + 1 <= rating
+                const Icon = filled ? IconStarFilled : IconStar
+                const diffPercentage = i + 1 <= Math.ceil(rating) ? (rating % 1) * 100 : 0
+                return (
+                    <div key={i} className="relative">
+                        <Icon className={`size-5 text-yellow`} />
+                        {!filled && (
+                            <div style={{ width: `${diffPercentage}%` }} className="absolute inset-0 overflow-hidden">
+                                <IconStarFilled className="size-5 text-yellow" />
+                            </div>
+                        )}
+                    </div>
+                )
+            })}
         </div>
-      </div>
+    )
+}
 
-      <div>
-        <strong>What do you like best about PostHog?</strong>
-        <p>It was easy to install and add to my Wordpress installation. I started getting insights immediately. It's been more helpful in tracking users and their behavior than Google Analytics.</p>
-      </div>
+const Review = ({
+    title,
+    star_rating,
+    comment_answers: {
+        love: { value: love },
+        hate: { value: hate },
+        benefits: { value: benefits },
+    },
+}) => {
+    return (
+        <div className="space-y-4 border-t first:border-t-0 border-light dark:border-dark pt-8 first:pt-0 mb-8">
+            <div>
+                <p className="text-lg mb-1">
+                    <strong>{title}</strong>
+                </p>
+                <Stars rating={star_rating} />
+            </div>
 
-      <div>
-        <strong>What do you dislike about PostHog?</strong>
-        <p>I had to perform so "manual" work to add this to Wordpress. Having a plugin to automatically install the tracking scripts to my Wordpress instance would have been more helpful.</p>
-        <p>This adds initial loading time to my site, having a way to ideally defer loading of the scripts until later would help as well.</p>
-      </div>
+            <div>
+                <strong>What do you like best about PostHog?</strong>
+                <p>{love}</p>
+            </div>
 
-      <div>
-        <strong>What problems is PostHog solving and how is that benefiting you?</strong>
-        <p>Getting the best insights from my website</p>
-      </div>
-    </div>
-  )
+            <div>
+                <strong>What do you dislike about PostHog?</strong>
+                <p>{hate}</p>
+            </div>
+
+            <div>
+                <strong>What problems is PostHog solving and how is that benefiting you?</strong>
+                <p>{benefits}</p>
+            </div>
+        </div>
+    )
 }
 
 export const Reviews = () => {
-  return (
-    <section className={`${section} `}>
+    const { recentReviews, allReviews } = useStaticQuery(graphql`
+        query G2Query {
+            recentReviews: allG2Review(
+                sort: { fields: attributes___submitted_at, order: DESC }
+                filter: { attributes: { star_rating: { gte: 4.5 } } }
+                limit: 3
+            ) {
+                nodes {
+                    id
+                    attributes {
+                        title
+                        star_rating
+                        submitted_at
+                        comment_answers {
+                            love {
+                                value
+                            }
+                            hate {
+                                value
+                            }
+                            benefits {
+                                value
+                            }
+                        }
+                    }
+                }
+            }
+            allReviews: allG2Review {
+                nodes {
+                    attributes {
+                        star_rating
+                    }
+                }
+            }
+        }
+    `)
 
-      <SectionHeader>
-        <h3 className="mb-2">Reviews</h3>
-      </SectionHeader>
-      <div className="grid md:grid-cols-12 gap-12 my-6">
-        <div className="col-span-3">
-          <label className="block font-semibold opacity-70">Overall rating</label>
-          <h3 className="mb-1">4.6</h3>
-          <div className="inline-grid grid-cols-5">
-            <IconStarFilled className="size-5 text-yellow" />
-            <IconStarFilled className="size-5 text-yellow" />
-            <IconStarFilled className="size-5 text-yellow" />
-            <IconStarFilled className="size-5 text-yellow" />
-            <div className="relative">
-              <IconStar className="size-5 text-yellow" />
-              <div className="absolute left-0 top-0 w-2 overflow-hidden">
-                <IconStarFilled className="size-5 text-yellow" />
-              </div>
+    const totalRating = parseFloat(
+        (
+            allReviews.nodes.reduce((acc, { attributes: { star_rating } }) => acc + star_rating, 0) /
+            allReviews.nodes.length
+        ).toFixed(1)
+    )
+
+    return (
+        <section id="g2-reviews" className={`${section} `}>
+            <SectionHeader>
+                <h3 className="mb-2">Reviews</h3>
+            </SectionHeader>
+            <div className="grid md:grid-cols-12 gap-12 my-6">
+                <div className="col-span-3">
+                    <label className="block font-semibold opacity-70">Overall rating</label>
+                    <h3 className="mb-1">{totalRating}</h3>
+                    <Stars rating={totalRating} />
+                    <p className="text-sm mt-2 text-opacity-75">
+                        Reviews collected by{' '}
+                        <Link href="https://www.g2.com/products/posthog/reviews" externalNoIcon>
+                            G2
+                        </Link>
+                    </p>
+                </div>
+                <div className="col-span-9">
+                    {recentReviews.nodes.map((review) => (
+                        <Review key={review.id} {...review.attributes} />
+                    ))}
+                </div>
             </div>
-          </div>
-          <p className="text-sm mt-2 text-opacity-75">Reviews collected by <Link href="https://www.g2.com/products/posthog/reviews" externalNoIcon>G2</Link></p>
-        </div>
-        <div className="col-span-9">
-
-          <Review />
-          <Review />
-          <Review />
-
-        </div>
-      </div>
-    </section>
-  )
+        </section>
+    )
 }

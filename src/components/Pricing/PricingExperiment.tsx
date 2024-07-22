@@ -31,6 +31,7 @@ import { Addons } from './Test/Addons'
 import { SimilarProducts } from './Test/SimilarProducts'
 import { Reviews } from './Test/Reviews'
 import ImageSlider from './Test/ImageSlider'
+import Header from './Test/Header'
 
 const SidebarList = ({ children }) => <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 
@@ -704,29 +705,6 @@ const PlansTabs = () => {
     )
 }
 
-const ProductHeader = () => {
-    return (
-        <>
-            <h1 className="mb-2">PostHog Cloud</h1>
-            <div className="flex items-center gap-2 mb-4">
-                <div className="inline-grid grid-cols-5">
-                    <IconStarFilled className="size-5 text-yellow" />
-                    <IconStarFilled className="size-5 text-yellow" />
-                    <IconStarFilled className="size-5 text-yellow" />
-                    <IconStarFilled className="size-5 text-yellow" />
-                    <div className="relative">
-                        <IconStar className="size-5 text-yellow" />
-                        <div className="absolute left-0 top-0 w-2 overflow-hidden">
-                            <IconStarFilled className="size-5 text-yellow" />
-                        </div>
-                    </div>
-                </div>
-                <button className="text-red dark:text-yellow text-[15px] font-semibold">507 reviews</button>
-            </div>
-        </>
-    )
-}
-
 const FreeTierItem = ({ icon, name, allocation, description }) => {
     return (
         <div className="flex flex-col items-center">
@@ -794,7 +772,7 @@ const PricingExperiment = ({
                     <div className="md:flex md:flex-wrap md:w-full mdlg:grid grid-cols-16 my-8 px-4 2xl:px-12">
                         <div className="col-span-3 lg:col-span-4 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
                             <div className="md:hidden mb-2">
-                                <ProductHeader />
+                                <Header />
                             </div>
 
                             {/* <div className="aspect-square bg-accent dark:bg-accent-dark w-full flex items-center justify-center">
@@ -805,7 +783,7 @@ const PricingExperiment = ({
 
                         <div className="@container md:flex-1 col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 md:mr-8">
                             <div className="hidden md:block">
-                                <ProductHeader />
+                                <Header />
                             </div>
 
                             <p className="mb-4">
