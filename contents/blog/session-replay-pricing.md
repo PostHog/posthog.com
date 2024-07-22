@@ -22,9 +22,9 @@ And this is just Part 1...
 
 ## How will this impact me?
 
-It depends on usage, but a customer generating 25k recorded sessions a month will now pay $85 a month, down from $430 a month. That's a huge $4,140 annual saving.
+It depends on your usage, but as an example: if you capture 25k session recordings per month your bill will now be $85 a month, down from $430 a month. That's a huge $4,140 annual saving.
 
-This makes using PostHog cheaper than any competing tool with similar features that publishes its pricing.
+This makes PostHog cheaper than any competing tool with similar features that publishes its pricing.
 
 ![new pricing](https://res.cloudinary.com/dmukukwp6/image/upload/new_pricing_7e0af9ddc4.jpg)
 
@@ -46,9 +46,9 @@ You can [calculate your new price](/pricing) on the pricing page, but here’s a
 | **100,000 recordings** | $640          | $273          | 2.3x cheaper |
 | **250,000 recordings** | $1,025        | $543          | 1.9x cheaper |
 
-As before, every user gets 5,000 free recordings every month, too. Free stuff isn’t limited to the free tier.
+As before, everyone also gets 5,000 free recordings every month, too. Free stuff isn’t limited to the free tier.
 
-## Why are you doing this?
+## Why are we doing this?
 
 Because our [pricing principles](/handbook/engineering/feature-pricing) dictate:
 
