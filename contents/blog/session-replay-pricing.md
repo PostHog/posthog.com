@@ -22,13 +22,14 @@ And this is just Part 1...
 
 ## How will this impact me?
 
-It will vary on usage, but a customer generating 25k recorded sessions a month will now pay $85 a month, down from $430 a month. That's a huge $4,140 annual saving. 
+It will vary on usage, but a customer generating 25k recorded sessions a month will now pay $85 a month, down from $430 a month. That's a huge $4,140 annual saving.
 
-You can [calculate your new price](/pricing) on the pricing page.
+This makes using PostHog cheaper than any competing tool with similar features that publishes its pricing.
 
 ![new pricing](https://res.cloudinary.com/dmukukwp6/image/upload/new_pricing_7e0af9ddc4.jpg)
 
-This makes using PostHog cheaper than any competing tool with similar features that publishes its pricing. Here’s a breakdown of costs at different tiers:
+
+You can [calculate your new price](/pricing) on the pricing page, but here’s a breakdown of the changes at different volumes:
 
 | &nbsp;                 | **Old price** | **New price** | **Change**   |
 |------------------------|---------------|---------------|--------------|
