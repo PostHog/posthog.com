@@ -22,12 +22,19 @@ And this is just Part 1...
 
 ## How will this impact me?
 
-It will vary on usage, but a customer generating 25k recorded sessions a month will now pay $85 a month, down from $430 a month. That's a huge $4,140 annual saving.
+It depends on usage, but a customer generating 25k recorded sessions a month will now pay $85 a month, down from $430 a month. That's a huge $4,140 annual saving.
 
 This makes using PostHog cheaper than any competing tool with similar features that publishes its pricing.
 
 ![new pricing](https://res.cloudinary.com/dmukukwp6/image/upload/new_pricing_7e0af9ddc4.jpg)
 
+We’re not just cheaper than replay tools designed for developers, either. Anyone using Hotjar for their website or web app can also save by switching to PostHog.
+
+![posthog-vs-hotjar](https://res.cloudinary.com/dmukukwp6/image/upload/hotjar_ace01c5cb7.jpg)
+
+And, unlike Hotjar, we support [session replays on mobile](/docs/session-replay/mobile) with our open beta for [iOS](/docs/libraries/ios) and [Android](/docs/libraries/android) SDKs – yes, [we are working on React Native](https://github.com/PostHog/posthog/issues/13269), folks, but feel free to vote for it on [our public roadmap](/roadmap) anyway.
+
+Sadly, many tools don’t publish pricing. That’s their choice, but we’re pretty confident it’s not because they’re secretly great value. How else are they going to justify those huge outbound sales teams, eh?
 
 You can [calculate your new price](/pricing) on the pricing page, but here’s a breakdown of the changes at different volumes:
 
@@ -38,14 +45,6 @@ You can [calculate your new price](/pricing) on the pricing page, but here’s a
 | **50,000 recordings**  | $505          | $173          | 2.1x cheaper |
 | **100,000 recordings** | $640          | $273          | 2.3x cheaper |
 | **250,000 recordings** | $1,025        | $543          | 1.9x cheaper |
-
-Sadly, many tools don’t publish pricing. That’s their choice, but we’re pretty confident it’s not because they’re secretly great value. How else are they going to justify those huge outbound sales teams, eh?
-
-We’re not just cheaper than replay tools designed for developers, either. Anyone using Hotjar for their website or web app can also save by switching to PostHog.
-
-![posthog-vs-hotjar](https://res.cloudinary.com/dmukukwp6/image/upload/hotjar_ace01c5cb7.jpg)
-
-And, unlike Hotjar, we support [session replays on mobile](/docs/session-replay/mobile) with our open beta for [iOS](/docs/libraries/ios) and [Android](/docs/libraries/android) SDKs – yes, [we are working on React Native](https://github.com/PostHog/posthog/issues/13269), folks, but feel free to vote for it on [our public roadmap](/roadmap) anyway.
 
 As before, every user gets 5,000 free recordings every month, too. Free stuff isn’t limited to the free tier.
 
