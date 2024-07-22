@@ -136,7 +136,9 @@ Use a lot of open ended questions. Ask things like:
 * What do you want to know about how a feature is used?
 * If I could build one thing for you right now, what would it be?
 
-Look for evidence that users have _actually done anything_ about the problems they say they have. People want to be likeable, so they'll often say they want what you're working on, even if they don't. Lots of features or products are nice-to-have versus must have. When something is a nice-to-have, people will act interested but won't get around to actually using it. 
+Look for evidence that users have _actually done anything_ about the problems they say they have. 
+
+People want to be likeable, so they'll often say they want what you're working on, even if they don't. Lots of features or products are nice-to-have versus must have. When something is a nice-to-have, people will act interested but won't get around to actually using it. 
 
 Ask things like:
 
