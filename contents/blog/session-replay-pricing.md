@@ -68,7 +68,7 @@ Nope. Existing customers have been migrated to the new pricing. You should have 
 
 Not using PostHog yet? You can [sign up here](/pricing). 
 
-## You’re just getting started?
+## And this is just Part 1?
 
 Yes.
 
