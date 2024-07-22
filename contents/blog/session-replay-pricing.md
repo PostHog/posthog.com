@@ -52,7 +52,7 @@ As before, every user gets 5,000 free recordings every month, too. Free stuff is
 
 Because our [pricing principles](/handbook/engineering/feature-pricing) dictate:
 
-1. We should charge as little as possible while remaining margin positive. We don’t believe in loss-leaders, or squeezing the maximum out of people who are willing to pay for our product.
+1. We should charge as little as possible while remaining margin positive. We don’t believe in loss-leaders, or squeezing customers for the maximum they're willing to pay – aka "pricing to value". 
 
 2. The true value of PostHog comes from using all our products together. We make money by onboarding customers onto more of them, not maximizing the profitability of individual tools.
 
