@@ -292,7 +292,7 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/how-we-review',
                     },
                     {
-                        name: 'Good product engineer, bad product engineer',
+                        name: 'How to do product, as an engineer',
                         url: '/handbook/engineering/product-engineering',
                     },
                 ],
