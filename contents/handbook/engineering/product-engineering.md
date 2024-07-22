@@ -36,7 +36,7 @@ showTitle: true
 
 Despite what the industry tells you, it's debatable how well you can validate ideas up front (see: the number of startups that think they'll succeed based on user interviews then find they can't get any users). Just shipping is often the best way to validate an idea. When we built PostHog, Tim and James had to pivot 5 times – despite getting positive feedback on new ideas almost _every time_. Talking to users upfront can probably help remove totally stupid ideas fast, but for the majority of ideas "this could work", it only has a limited amount of benefit in our experience.
 
-This gives you the best evidence (do people _actually_ use it, and what do they think), but _potentially_ at the highest cost as you have to build it! The challenge with this approach is making sure you descope the first version of the product or feature enough that users will at least try to use it, so you get enough signal that they care, without damaging our brand because the experience is so poor.
+This gives you the best evidence (do people _actually_ use it, and what do they think), but _potentially_ at the highest cost as you have to build it! The challenge with this approach is making sure you de-scope the first version of the product or feature enough that users will at least try to use it, so you get enough signal that they care, without damaging our brand because the experience is so poor.
 
 So, when you ship something:
 
@@ -100,23 +100,23 @@ A note on attitude first - any kind of feedback, bug report, complaint or usage 
 Handling users well is really important. If we do a good job responding to feedback:
 
 1. The product improves because we do a better job at building what users want.
-2. We get marketing benefit because the user will be impressed and will tell their friends.
+2. We get marketing benefits because the user will be impressed and will tell their friends.
 3. We get more feedback because it teaches people that we listen and that we care.
 
 Tone matters a lot. Whenever you are messaging a user, please consider:
 
 * They're on the internet, so you are competing with cat videos. It better be compelling.
-* They receive a loads of outreach from people. If you send something generic, it will get auto filtered out by their brain.
+* They receive loads of outreach from people. If you send something generic, it will get auto filtered out by their brain.
 
 So, how do you make yourself compelling to engage with?
 
-The tone is your starting point. Send something informal and human. You are explicitly trying to avoid sounding like a mega corporate that treats users like numbers. You are a human, your users are human. Be friendly, light hearted and fun. Make it clear the message isn't automated if you can.
+The tone is your starting point. Send something informal and human. You are explicitly trying to avoid sounding like a mega corporation that treats users like numbers. You are a human, your users are human. Be friendly, light hearted and fun. Make it clear the message isn't automated if you can.
 
 If you _must_ automate messages for whatever reason, make them quirky and informal and human. "Yo I'm Manoel, my job at PostHog is making sure mobile users are happy. It looks like this includes you! I build X, Y, Z here – is there any chance we could talk about X new thing? Here's my calendar or respond and we'll find time!" sort of vibe. Don't make messages long if you want people to do something – one or two sentences.
 
 The medium matters. The easier something is to spam, the harder it is to get hold of people. For example, email gets ignored far more than Slack or X.
 
-Response times are very important. If you can catch someone _whilst_ you're top of mind, you are likely to get 20x the response rate. That means within a minute or two of receiving a message. There is a huge drop off if you don't respond for 30 minutes+. Obviously this isn't always possible, but take opportunities if you happen to be online at the same time as someone you need feedback from. I once ran a call center – if we phoned someone who made an enquiry within 5 minutes, it was 9x more likely we'd get hold of them.
+Response times are very important. If you can catch someone _whilst_ you're top of mind, you are likely to get 20x the response rate. That means within a minute or two of receiving a message. There is a huge drop off if you don't respond for 30+ minutes. Obviously this isn't always possible, but take opportunities if you happen to be online at the same time as someone you need feedback from. I once ran a call center – if we phoned someone who made an enquiry within 5 minutes, it was 9x more likely we'd get hold of them.
 
 Closing the loop is the final point. If a user gives feedback or asks for something, you should ultimately respond with:
 
@@ -138,7 +138,7 @@ Use a lot of open ended questions. Ask things like:
 
 Look for evidence that users have _actually done anything_ about the problems they say they have. 
 
-People want to be likeable, so they'll often say they want what you're working on, even if they don't. Lots of features or products are nice-to-have versus must have. When something is a nice-to-have, people will act interested but won't get around to actually using it. 
+People want to be likable, so they'll often say they want what you're working on, even if they don't. Lots of features or products are nice-to-have versus must have. When something is a nice-to-have, people will act interested but won't get around to actually using it. 
 
 Ask things like:
 
