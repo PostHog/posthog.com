@@ -10,32 +10,35 @@ tags:
   - PostHog news
 ---
 
-> ## TL;DR
-> 
-> - We’ve optimized our session replay pipeline and infrastructure.
-> - We’re passing the savings onto you by making session replay _drastically cheaper_, especially at lower volumes.
-> - We’re now the cheapest session replay tool among competitive products.
+## TL;DR
+ 
+- We’ve optimized our session replay pipeline and infrastructure.
+
+- We’re passing the savings onto you by making session replay _drastically cheaper_, especially at lower volumes.
+
+- We’re now the cheapest session replay tool among competitive products.
 
 And this is just Part 1...
 
 ## How will this impact me?
 
-It will vary on usage, but a customer generating 25k recorded sessions a month will now pay $85 a month, down from $430 a month. That's a huge $4,140 annual saving. You can [calculate your new price](/pricing) on the pricing page.
+It will vary on usage, but a customer generating 25k recorded sessions a month will now pay $85 a month, down from $430 a month. That's a huge $4,140 annual saving. 
+
+You can [calculate your new price](/pricing) on the pricing page.
 
 ![new pricing](https://res.cloudinary.com/dmukukwp6/image/upload/new_pricing_7e0af9ddc4.jpg)
 
 This makes using PostHog cheaper than any competing tool with similar features that publishes its pricing. Here’s a breakdown of costs at different tiers:
 
-| &nbsp;                   | **Old price** | **New price** | **Change**   |
+| &nbsp;                 | **Old price** | **New price** | **Change**   |
 |------------------------|---------------|---------------|--------------|
 | **5,000 recordings**   | $0            | $0            | No change    |
 | **25,000 recordings**  | $430          | $85           | 5.1x cheaper |
 | **50,000 recordings**  | $505          | $173          | 2.1x cheaper |
 | **100,000 recordings** | $640          | $273          | 2.3x cheaper |
 | **250,000 recordings** | $1,025        | $543          | 1.9x cheaper |
-| **500,000 recordings** | $1,650        | $968          | 1.7x cheaper |
 
-Sadly, many tools don’t publish pricing. That’s their choice, but we’re pretty confident it’s not because they’re secretly really good value. How else are they going to justify those huge outbound sales teams, eh?
+Sadly, many tools don’t publish pricing. That’s their choice, but we’re pretty confident it’s not because they’re secretly great value. How else are they going to justify those huge outbound sales teams, eh?
 
 We’re not just cheaper than replay tools designed for developers, either. Anyone using Hotjar for their website or web app can also save by switching to PostHog.
 
