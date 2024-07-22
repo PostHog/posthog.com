@@ -18,7 +18,7 @@ Good product engineers:
 
 Bad product engineers
 * Consider research something that takes two weeks rather than two hours
-* Can't explain our compay strategy
+* Can't explain our company strategy
 * Can't explain who their product is built for
 * Don't know their product's competitors
 * Only work on things they've been told to work on
