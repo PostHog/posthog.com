@@ -7,7 +7,7 @@ tags:
  - data warehouse
 ---
 
-Understanding your ad spend and return on that spend is core to creating a successful business. Two important sources of data for this are Google Ads and PostHog. With our data warehouse, you can link and analyze them together.
+Understanding your ad spend and return on that spend is core to creating successful marketing campaigns. Two important sources of data for this are Google Ads and PostHog. With our [data warehouse](/docs/data-warehouse), you can link and analyze them together.
 
 In this tutorial, we get data from Google Ads, sync it into PostHog through S3, and use it to create insights like cost per click, cost per conversion, and more. 
 
