@@ -56,9 +56,7 @@ Because our [pricing principles](/handbook/engineering/feature-pricing) dictate:
 
 2. The true value of PostHog comes from using all our products together. We make money by onboarding customers onto more of them, not maximizing the profitability of individual tools.
 
-The whole “loss-leader” thing is important, btw. Loss-leaders are bad for customers and companies. 
-
-No one enjoys surprise price increases when a company decides it wants to make money now, or seeing products sunsetted because they’re not sustainable anymore.
+The whole “loss-leader” thing is important, btw. Loss-leaders are bad for customers and companies. No one enjoys surprise price increases when a company decides it wants to make money now, or seeing products sunsetted because they’re not sustainable anymore.
 
 We believe in products that are both cheap and sustainable.
 
@@ -89,6 +87,6 @@ Figure out how to spend the money you’ve saved? Some suggestions:
 
 - Buy something from our [merch store](/merch), like this [stylish Carhartt cap](/merch?product=posthog-carhartt-cap), this [awesome data warehouse t-shirt](/merch?product=data-warehouse-t-shirt), or the [world’s most adorable sticker pack](/merch?product=posthog-meme-sticker-pack).
 
-- Buy a billboard on the 101
+- Buy a billboard on the 101.
 
 Alternatively, if you haven’t already, you can try one of our other products, like product analytics, feature flags, surveys, or our recently released data warehouse. They all have [generous free tiers](/pricing), too.
