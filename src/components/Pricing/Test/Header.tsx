@@ -27,7 +27,7 @@ export default function Header() {
     return (
         <>
             <h1 className="mb-2">PostHog Cloud</h1>
-            <ScrollLink to="g2-reviews" offset={-108} smooth className="flex items-center gap-2 mb-4 cursor-pointer">
+            <ScrollLink to="g2-reviews" offset={-120} smooth className="flex items-center gap-2 mb-4 cursor-pointer">
                 <Stars rating={totalRating} />
                 <span className="text-red dark:text-yellow text-[15px] font-semibold">
                     {allReviews.totalCount} reviews

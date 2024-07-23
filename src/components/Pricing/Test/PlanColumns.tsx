@@ -194,7 +194,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
     return (
         <>
-            <section className={`${section} mt-8 !mb-12 md:px-4`}>
+            <section id="plans" className={`${section} mt-8 !mb-12 md:px-4`}>
                 <SectionHeader>
                     <h3>Compare plans</h3>
                 </SectionHeader>
