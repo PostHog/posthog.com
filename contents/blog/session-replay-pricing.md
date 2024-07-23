@@ -26,7 +26,7 @@ It depends on your usage, but as an example: if you capture 25k session recordin
 
 This makes PostHog cheaper than any competing tool with similar features that publishes its pricing.
 
-![new pricing](https://res.cloudinary.com/dmukukwp6/image/upload/new_pricing_7e0af9ddc4.jpg)
+![new pricing](https://res.cloudinary.com/dmukukwp6/image/upload/new_replay_pricing_dce01fc509.jpg)
 
 Of course, many tools don’t publish pricing. That’s their choice, but we’re pretty confident it’s not because they’re secretly great value. How else are they going to justify those huge outbound sales teams, eh?
 
