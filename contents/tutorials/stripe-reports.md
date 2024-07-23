@@ -92,7 +92,7 @@ WITH subscription_items AS (
     SELECT
         id,
         current_period_start,
-        JSONExtractArrayRaw(items, 'data') AS data_items
+        JSONExtractArrayRaw(items ?? '[]', 'data') AS data_items
     FROM stripe_subscription
 ),
 flattened_items AS (
