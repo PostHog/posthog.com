@@ -119,7 +119,7 @@ export const Reviews = () => {
                     <Stars rating={totalRating} />
                     <p className="text-sm mt-2 text-opacity-75">
                         Reviews collected by{' '}
-                        <Link href="https://www.g2.com/products/posthog/reviews" externalNoIcon>
+                        <Link href="https://www.g2.com/products/posthog/reviews" external>
                             G2
                         </Link>
                     </p>

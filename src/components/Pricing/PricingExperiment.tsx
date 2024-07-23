@@ -929,50 +929,46 @@ const PricingExperiment = ({
                         <SectionHeader>
                             <h3 id="calculator">Pricing calculator</h3>
                         </SectionHeader>
+                        <Tabbed />
 
-                        <SectionColumns>
-                            <SectionMainCol>
-                                <Tabbed />
-                            </SectionMainCol>
-                            <SectionSidebar>
-                                <div>
-                                    <h4 className="text-lg mb-2">How it works</h4>
-                                    <SidebarList>
-                                        <SidebarListItem>Only pay for products you use</SidebarListItem>
-                                        <SidebarListItem>
-                                            <strong className="bg-yellow/50 dark:bg-white/20 italic inline py-0.5">
-                                                Generous free tier for each product (resets monthly)
+                        <div className="grid md:grid-cols-2 gap-8 mt-12 max-w-7xl mx-auto">
+                            <div>
+                                <h4 className="text-lg mb-2">How our pricing works</h4>
+                                <SidebarList>
+                                    <SidebarListItem>Only pay for products you use</SidebarListItem>
+                                    <SidebarListItem>
+                                        <strong className="bg-yellow/50 dark:bg-white/20 italic inline py-0.5">
+                                            Generous free tier for each product (resets monthly)
+                                        </strong>
+                                    </SidebarListItem>
+                                    <SidebarListItem>
+                                        You can set billing limits per product so you never get a surprise bill
+                                    </SidebarListItem>
+                                    <SidebarListItem>
+                                        We also offer{' '}
+                                        <Tooltip content={() => <Discounts />} placement="top">
+                                            <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                discounts
                                             </strong>
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            You can set billing limits per product so you never get a surprise bill
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            We also offer{' '}
-                                            <Tooltip content={() => <Discounts />} placement="top">
-                                                <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
-                                                    discounts
-                                                </strong>
-                                            </Tooltip>{' '}
-                                            for startups and non-profits
-                                        </SidebarListItem>
-                                    </SidebarList>
-                                </div>
-                                <div>
-                                    <h4 className="text-lg mb-2">Estimating usage</h4>
-                                    <SidebarList>
-                                        <SidebarListItem>
-                                            Not sure what your volume looks like? Add the tracking code to your site and
-                                            check back in a few days – no credit card required.
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            If something stupid happens, like you get an unexpected bill and you’re
-                                            unhappy, we’ll pretty much always refund it!
-                                        </SidebarListItem>
-                                    </SidebarList>
-                                </div>
-                            </SectionSidebar>
-                        </SectionColumns>
+                                        </Tooltip>{' '}
+                                        for startups and non-profits
+                                    </SidebarListItem>
+                                </SidebarList>
+                            </div>
+                            <div>
+                                <h4 className="text-lg mb-2">Estimating usage</h4>
+                                <SidebarList>
+                                    <SidebarListItem>
+                                        Not sure what your volume looks like? Add the tracking code to your site and
+                                        check back in a few days – no credit card required.
+                                    </SidebarListItem>
+                                    <SidebarListItem>
+                                        If something stupid happens, like you get an unexpected bill and you’re unhappy,
+                                        we’ll pretty much always refund it!
+                                    </SidebarListItem>
+                                </SidebarList>
+                            </div>
+                        </div>
                     </SectionLayout>
 
                     <SectionLayout>
