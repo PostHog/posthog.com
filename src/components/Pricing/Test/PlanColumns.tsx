@@ -72,6 +72,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
                             ctaLink={planData.CTALink}
                             width="full"
                             intent={planData.intent}
+                            className="!block"
                         />
                     </div>
                 </div>

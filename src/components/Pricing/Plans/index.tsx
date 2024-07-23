@@ -274,6 +274,7 @@ export const CTA = ({
     intent = '',
     size = 'md',
     width = 'auto',
+    className = '',
 }: {
     type?: 'primary' | 'secondary'
     ctaText?: string
@@ -281,6 +282,7 @@ export const CTA = ({
     intent?: string
     size?: string
     width?: string
+    className?: string
 }): JSX.Element => {
     const posthog = usePostHog()
     return (
@@ -293,7 +295,7 @@ export const CTA = ({
             type={type}
             size={size}
             width={width}
-            className="shadow-md !w-auto"
+            className={`shadow-md !w-auto ${className}`}
             to={
                 ctaLink
                     ? ctaLink
