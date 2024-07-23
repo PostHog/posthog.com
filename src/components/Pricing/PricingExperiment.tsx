@@ -799,8 +799,19 @@ const PricingExperiment = ({
                                 Only add a card if you need more than the free tier limits or want more projects.
                             </p>
 
-                            <h3 className="mb-0 text-xl">Free</h3>
-                            <p className="text-sm mb-4">No credit card required</p>
+                            {activePlan === 'free' ? (
+                                <>
+                                    <h3 className="mb-0 text-xl">Free</h3>
+                                    <p className="text-sm mb-4">No credit card required</p>
+                                </>
+                            ) : (
+                                <>
+                                    <p className="text-sm mb-0">From</p>
+                                    <h3 className="mb-4 text-xl">
+                                        $0<span className="opacity-70 font-normal text-base">/mo</span>
+                                    </h3>
+                                </>
+                            )}
 
                             <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 mb-6 overflow-x-auto">
                                 <li>
@@ -907,7 +918,7 @@ const PricingExperiment = ({
 
                     <SectionLayout>
                         <SectionHeader>
-                            <h3>Pricing calculator</h3>
+                            <h3 id="calculator">Pricing calculator</h3>
                         </SectionHeader>
 
                         <SectionColumns>

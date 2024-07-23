@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconCheck } from '@posthog/icons'
 import Plans, { CTA as PlanCTA, PricingTiers } from '../Plans'
+import { Link as ScrollLink } from 'react-scroll'
 
 export const FreePlanContent = ({ onFreeTierClick }) => {
     return (
@@ -63,7 +64,14 @@ export const PaidPlanContent = ({ onFreeTierClick }) => {
                     <span className="opacity-70 text-sm">/mo</span>
                 </div>
                 <p className="text-sm mt-2">
-                    <button className="text-red dark:text-yellow font-semibold text-[15px]">Estimate your price</button>
+                    <ScrollLink
+                        to="calculator"
+                        offset={-108}
+                        smooth
+                        className="text-red dark:text-yellow font-semibold text-[15px] cursor-pointer"
+                    >
+                        Estimate your price
+                    </ScrollLink>
                 </p>
 
                 <ul className="list-none p-0 mb-4 space-y-1">
