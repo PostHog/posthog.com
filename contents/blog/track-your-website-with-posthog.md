@@ -17,7 +17,7 @@ tags:
 
 PostHog may have been built for product analytics, but that doesn’t mean you can only deploy it on your core product — you can also use it to gather analytics from your marketing website too. Internally at PostHog this is exactly what we do, tracking analytics from both the product and this very website within a single project. 
 
-Using PostHog to gather analytics in this way isn’t just an excuse for us to ‘dogfood’ our own product. It’s also a best practice that we strongly recommend to other organizations for several reasons...
+Using PostHog to gather analytics in this way isn’t just an excuse for us to [‘dogfood’ our own product](/product-engineers/dogfooding). It’s also a best practice that we strongly recommend to other organizations for several reasons...
 
 > Already want to track your marketing website with PostHog? Find out [how to install our JavaScript snippet](/docs/integrate/client/js) in just a few minutes!
 

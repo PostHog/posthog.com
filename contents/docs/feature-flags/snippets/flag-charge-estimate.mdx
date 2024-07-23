@@ -1,4 +1,4 @@
-### Frontend SDKs
+#### Frontend SDKs
 
 We make a request to fetch feature flags (using the [`/decide` endpoint](/docs/api/decide)) when:
 
@@ -15,13 +15,13 @@ For the [JavaScript web SDK](/docs/libraries/js), you can estimate how many feat
 
 For example, if on refresh, you see 2 `/decide` requests per pageview and you have ~150,000 pageviews, your monthly feature flag requests should be around ~300,000.
 
-### Backend SDKS
+#### Backend SDKS
 
-#### Without local evaluation 
+##### Without local evaluation 
 
 If you're not using [local evaluation](/docs/feature-flags/local-evaluation), a request to get feature flags is made every time you call `posthog.get_feature_flag()` on your backend. Your estimated usage will be however many times you are calling this code.
 
-#### With local evaluation
+##### With local evaluation
 
 If you're using [local evaluation](/docs/feature-flags/local-evaluation), each local evaluation request charges 10 credits and by default are made every 30 seconds. Assuming your server is constantly running and making 2 requests per minute, you will be charged `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
 

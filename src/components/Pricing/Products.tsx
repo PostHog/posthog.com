@@ -100,7 +100,7 @@ export const useProducts = () => {
             slug: 'session-replay',
             freeLimit: '5,000',
             denomination: 'recording',
-            price: '0.04',
+            price: '0.005',
             volume: sessionRecordingEventNumber,
             calcVolume: <>{sessionRecordingEventNumber.toLocaleString()}</>,
             calcCost: <>{sessionRecordingCost.toLocaleString()}</>,

@@ -22,7 +22,7 @@ Send events from PostHog to Outfunnel as they are ingested. Outfunnel is a platf
 > This destination is in private beta. To join the beta, please [request access](https://app.posthog.com/feature_flags#supportModal=support%3Aapps).
 
 1. Log in to your PostHog instance
-2. Click "[Data pipelines](https://us.posthog.com/apps)" in the sidebar
+2. Click "[Data pipelines](https://us.posthog.com/pipeline)" in the sidebar
 3. Search for 'Outfunnel'
 4. Select the destination, press 'Install'
 5. Configure the plugin by entering your Outfunnel User ID

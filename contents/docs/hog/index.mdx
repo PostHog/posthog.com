@@ -14,7 +14,250 @@ It is being used to build our CDP product, which you can follow along with in [G
 
 > **Note:** Hog shouldn't be confused with [HogQL](/docs/hogql), our SQL-like query language used inside PostHog. If you're looking to query data in PostHog, see those docs.
 
-## How to run Hog
+## Syntax
+
+### Comments
+
+Hog comments start with `//`. You can also use SQL style comments with `--` or C++ style multi line blocks with `/*`.
+
+```
+// Hog comments start with //
+-- You can also use SQL style comments with --
+/* or C++ style multi line
+blocks */
+```
+
+### Variables
+
+Use `:=` to assign a value to a variable because `=` is just equals in SQL and HogQL.
+
+```rust
+// assign 12 to myVar
+let myVar := 12
+myVar := 13
+myVar := myVar + 1
+```
+
+### Comparisons
+
+On top of standard comparisons, `like`, `ilike`, `not like`, and `not ilike` work.
+
+```rust
+let myVar := 12
+print(myVar = 12 or myVar < 10) // prints true
+print(myVar < 12 and myVar > 12) // prints false
+
+let string := 'mystring'
+print(string ilike '%str%') // prints true
+```
+
+### Regex
+
+Compares strings against regex patterns. `=~` matches exactly, `=~*` matches case insensitively, `!~` does not match, and `!~*` does not match case insensitively.
+
+```rust
+print('string' =~ 'i.g$') // true
+print('string' !~ 'i.g$') // false
+print('string' =~* 'I.G$') // true, case insensitive
+print('string' !~* 'I.G$') // false, case insensitive
+```
+
+### Arrays
+
+Supports both dot notation and bracket notation.
+
+Arrays in Hog (and HogQL) are **1-indexed**!
+
+```rust
+let myArray := [1,2,3]
+print(myArray.2) // prints 2
+print(myArray[2]) // prints 2
+```
+
+### Tuples
+
+Supports both dot notation and bracket notation.
+
+Tuples in Hog (and HogQL) are **1-indexed**!
+
+```rust
+let myTuple := (1,2,3)
+print(myTuple.2) // prints 2
+print(myTuple[2]) // prints 2
+```
+
+### Objects
+
+You must use single quotes for object keys and values.
+
+```rust
+let myObject := {'key': 'value'}
+print(myObject.key) // prints 'value'
+print(myObject['key']) // prints 'value'
+
+print(myObject?.this?.is?.not?.found) // prints 'null'
+print(myObject?.['this']?.['is']?.not?.found) // prints 'null'
+```
+
+### Strings
+
+Strings must always start end end with a single quote. Includes f-string support.
+
+```rust
+let str := 'string'
+print(str || ' world') // prints 'string world', SQL concat
+print(f'hello {str}') // prints 'hello string'
+print(f'hello {f'{str} world'}') // prints 'hello string world'
+```
+
+### Functions
+
+Can only be defined at the top scope. See [Hog's standard library](#hogs-standard-library) for a list of built-in functions.
+
+```rust
+fn addNumbers(num1, num2) { 
+    let newNum := num1 + num2
+    return newNum
+}
+print(addNumbers(1, 2))
+```
+
+### Logic
+
+```rust
+let a := 3
+if (a > 0) {
+    print('yes')
+}
+```
+
+### Ternary operations
+
+```rust
+print(a < 2 ? 'small' : 'big')
+```
+
+### Nulls
+
+```rust
+let a := null
+print(a ?? 'is null') // prints 'is null'
+```
+
+### While loop
+
+```rust
+let i := 0
+while(i < 3) {
+    print(i) // prints 0, 1, 2
+    i := i + 1
+}
+```
+
+### For loop
+
+```rust
+for(let i := 0; i < 3; i := i + 1) {
+    print(i) // prints 0, 1, 2
+}
+```
+
+### For-in loop
+
+```rust
+let arr = ['banana', 'tomato', 'potato']
+for (let food in arr) {
+    print(food)
+}
+
+let obj = {'banana': 3, 'tomato': 5, 'potato': 6}
+for (let food, value in arr) {
+    print(food, value)
+}
+```
+
+
+## Hog's standard library
+
+Hog's standard library includes the following functions and will expand. To see the the most update-to-date list, check the [Python VM's `stl/__init__.py` file](https://github.com/PostHog/posthog/blob/master/hogvm/python/stl/__init__.py).
+
+### Type conversion
+
+- `toString(arg: any): string`
+- `toUUID(arg: any): UUID`
+- `toInt(arg: any): int`
+- `toFloat(arg: any): float`
+- `toDate(arg: string | int): Date`
+- `toDateTime(arg: string | int): DateTime`
+- `tuple(...args: any[]): tuple`
+
+### Comparisons
+
+- `ifNull(value: any, alternative: any)`
+
+### String functions
+
+- `print(...args: any[])`
+- `concat(...args: string[]): string`
+- `match(arg: string, regex: string): boolean`
+- `length(arg: string): int`
+- `empty(arg: string): boolean`
+- `notEmpty(arg: string): boolean`
+- `lower(arg: string): string`
+- `upper(arg: string): string`
+- `reverse(arg: string): string`
+- `trim(arg: string, char?: string): string`
+- `trimLeft(arg: string, char?: string): string`
+- `trimRight(arg: string, char?: string): string`
+- `splitByString(separator: string, str: string, maxParts?: int): string[]`
+- `jsonParse(arg: string): any`
+- `jsonStringify(arg: object): string`
+- `base64Encode(arg: string): string`
+- `base64Decode(arg: string): string`
+- `tryBase64Decode(arg: string): string`
+- `encodeURLComponent(arg: string): string`
+- `decodeURLComponent(arg: string): string`
+- `replaceOne(arg: string, needle: string, replacement: string): string`
+- `replaceAll(arg: string, needle: string, replacement: string): string`
+- `generateUUIDv4(): string`
+
+### Objects and arrays
+- `length(arg: any[] | object): int`
+- `empty(arg: any[] | object): boolean`
+- `notEmpty(arg: any[] | object): boolean`
+- `keys(arg: any[] | object): string[]`
+- `vaues(arg: any[] | object): string[]`
+- `arrayPushBack(arr: any[], value: any): any[]`
+- `arrayPushFront(arr: any[], value: any): any[]`
+- `arrayPopBack(arr: any[]): any[]`
+- `arrayPopFront(arr: any[]): any[]`
+- `arraySort(arr: any[]): any[]`
+- `arrayReverse(arr: any[]): any[]`
+- `arrayReverseSort(arr: any[]): any[]`
+- `arrayStringConcat(arr: any[], separator?: string): string`
+
+### Date functions
+- `now(): DateTime`
+- `toUnixTimestamp(input: DateTime | Date | string, zone?: string): float`
+- `fromUnixTimestamp(input: number): DateTime`
+- `toUnixTimestampMilli(input: DateTime | Date | string, zone?: string): float`
+- `fromUnixTimestampMilli(input: int | float): DateTime`
+- `toTimeZone(input: DateTime, zone: string): DateTime | Date`
+- `toDate(input: string | int | float): Date`
+- `toDateTime(input: string | int | float, zone?: string): DateTime`
+- `formatDateTime(input: DateTime, format: string, zone?: string): string` - we use use the [ClickHouse formatDateTime syntax](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#formatdatetime).
+- `toInt(arg: any): int` - Converts `arg` to a 64-bit integer. Converts `Date`s into days from epoch, and `DateTime`s into seconds from epoch
+- `toFloat(arg: any): float` - Converts `arg` to a 64-bit float. Converts `Date`s into days from epoch, and `DateTime`s into seconds from epoch
+- `toDate(arg: string | int): Date` - `arg` must be a string `YYYY-MM-DD` or a Unix timestamp in seconds
+- `toDateTime(arg: string | int): DateTime` - `arg` must be an ISO timestamp string or a Unix timestamp in seconds
+
+### Cryptographic functions
+
+- `md5Hex(arg: string): string`
+- `sha256Hex(arg: string): string`
+- `sha256HmacChainHex(arg: string[]): string`
+
+## Running Hog locally
 
 To run Hog, first, you need to [clone and set up PostHog locally](/handbook/engineering/developing-locally). The repo has VMs to run the source code and complied bytecode as well as example files. The [default VM](https://github.com/PostHog/posthog/blob/master/hogvm/python) relies on PostHog's Python dependencies, but we also have a [Typescript VM](https://github.com/PostHog/posthog/blob/master/hogvm/typescript) that relies on those dependencies.
 
@@ -41,158 +284,4 @@ You can then run the complied `.hoge` file automatically with `bin/hog`.
 bin/hog hogvm/__tests__/mandelbrot.hoge
 ```
 
-## Syntax
 
-### Comments
-
-Hog comments start with `//`. You can also use SQL style comments with `--` or C++ style multi line blocks with `/*`.
-
-```
-// Hog comments start with //
--- You can also use SQL style comments with --
-/* or C++ style multi line
-blocks */
-```
-
-### Variables
-
-Use `:=` to assign a value to a variable because `=` is just equals in SQL and HogQL.
-
-```
-// assign 12 to myVar
-let myVar := 12
-myVar := 13
-myVar := myVar + 1
-```
-
-### Comparisons
-
-On top of standard comparisons, `like`, `ilike`, `not like`, and `not ilike` work.
-
-```
-let myVar := 12
-print(myVar = 12 or myVar < 10) // prints true
-print(myVar < 12 and myVar > 12) // prints false
-
-let string := 'mystring'
-print(string ilike '%str%') // prints true
-```
-
-### Regex
-
-Compares strings against regex patterns. `=~` matches exactly, `=~*` matches case insensitively, `!~` does not match, and `!~*` does not match case insensitively.
-
-```
-print('string' =~ 'i.g$') // true
-print('string' !~ 'i.g$') // false
-print('string' =~* 'I.G$') // true, case insensitive
-print('string' !~* 'I.G$') // false, case insensitive
-```
-
-### Arrays
-
-Supports both dot notation and bracket notation.
-
-```
-let myArray := [1,2,3]
-print(myArray.1) // prints 2
-print(myArray[1]) // prints 2
-```
-
-### Tuples
-
-Supports both dot notation and bracket notation.
-
-```
-let myTuple := (1,2,3)
-print(myTuple.1) // prints 2
-print(myTuple[1]) // prints 2
-```
-
-### Objects
-
-You must use single quotes for object keys and values.
-
-```
-let myObject := {'key': 'value'}
-print(myObject.key) // prints 'value'
-print(myObject['key']) // prints 'value'
-```
-
-### Strings
-
-Strings must always start end end with a single quote. Includes f-string support.
-
-```
-let str := 'string'
-print(str || ' world') // prints 'string world', SQL concat
-print(f'hello {str}') // prints 'hello string'
-print(f'hello {f'{str} world'}') // prints 'hello string world'
-```
-
-### Functions
-
-Can only be defined at the top scope. See [Hog's standard library](#hogs-standard-library) for a list of built-in functions.
-
-```
-fn addNumbers(num1, num2) { 
-    let newNum := num1 + num2
-    return newNum
-}
-print(addNumbers(1, 2))
-```
-
-### Logic
-
-```
-let a := 3
-if (a > 0) {
-    print('yes')
-}
-```
-
-### Nulls
-
-```
-let a := null
-print(a ?? 'is null') // prints 'is null'
-```
-
-### While loop
-
-```
-let i := 0
-while(i < 3) {
-    print(i) // prints 0, 1, 2
-    i := i + 1
-}
-```
-
-## Hog's standard library
-
-Hog's standard library includes the following functions and will expand. To see the the most update-to-date list, check the [Python VM's `stl/__init__.py` file](https://github.com/PostHog/posthog/blob/master/hogvm/python/stl/__init__.py).
-
-- `concat(...args)`
-- `match(string, regex)`
-- `toString(arg)`
-- `toUUID(arg)`
-- `toInt(arg)`
-- `toFloat(arg)`
-- `ifNull(value, alternative)`
-- `length(stringOrArray)`
-- `empty(arg)`
-- `notEmpty(arg)`
-- `tuple(...args)`
-- `lower(str)`
-- `upper(str)`
-- `reverse(str)`
-- `print(...args)`
-- `jsonParse(str)`
-- `jsonStringify(obj)`
-- `base64Encode(str)`
-- `base64Decode(str)`
-- `tryBase64Decode(str)`
-- `encodeURLComponent(str)`
-- `decodeURLComponent(str)`
-- `replaceOne(string, needle, replacement)`
-- `replaceAll(string, needle, replacement)`
