@@ -26,27 +26,31 @@ const Addon = ({ name, icon_key, description, plans, unit, type, ...other }) => 
                     {plan?.flat_rate ? (
                         <span>
                             <strong>${plan.unit_amount_usd}</strong>
-                            <span className="opacity-70">/month</span>
+                            <span className="opacity-70 text-sm">/month</span>
                         </span>
                     ) : (
                         <>
-                            <span className="opacity-70">Pricing starts at</span>{' '}
+                            <span className="opacity-70 text-sm">Pricing starts at</span>{' '}
                             <strong>
                                 ${plan?.tiers?.find((tier) => tier.unit_amount_usd !== '0')?.unit_amount_usd}
                             </strong>
-                            <span className="opacity-70">/{unit}</span>
+                            <span className="opacity-70 text-sm">/{unit}</span>
                         </>
                     )}
                 </p>
-                <p className={`m-0 opacity-70 ${!freeAllocation ? 'invisible' : ''}`}>
-                    First <strong>{freeAllocation?.toLocaleString()}</strong> {unit}s/mo free
-                </p>
-                <button
-                    onClick={() => setShowBreakdown(true)}
-                    className={`text-red dark:text-yellow font-bold text-sm ${plan?.flat_rate ? 'invisible' : ''}`}
-                >
-                    Show breakdown
-                </button>
+                {freeAllocation && (
+                    <p className="m-0 text-green text-sm">
+                        First <strong>{freeAllocation?.toLocaleString()}</strong> {unit}s/mo free
+                    </p>
+                )}
+                {!plan?.flat_rate && (
+                    <button
+                        onClick={() => setShowBreakdown(true)}
+                        className="text-red dark:text-yellow font-bold text-sm"
+                    >
+                        Show breakdown
+                    </button>
+                )}
                 <AnimatePresence>
                     {showBreakdown && (
                         <motion.div
