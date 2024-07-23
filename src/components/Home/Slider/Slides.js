@@ -841,9 +841,7 @@ export const DataWarehouse = () => {
             bgColor="[#8567FF]"
             textColor="primary-dark"
             title="Data warehouse"
-            flag="Beta"
-            flagColor="yellow"
-            description="Full data warehouse product coming soon"
+            description="Sync data from Stripe, Hubspot, Zendesk, or custom sources."
             additionalText={
                 <p className="text-sm opacity-75 pt-2 mb-1">
                     Also syncs with Amazon S3, BigQuery, and Amazon Redshift using our API.
@@ -895,7 +893,7 @@ export const DataWarehouse = () => {
             )}
             contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
             buttonLabel="Learn more"
-            buttonUrl="/docs/data-warehouse"
+            buttonUrl="/data-warehouse"
             buttonClasses="group !border-white/25 !bg-white/10 md:!w-auto !w-full"
             buttonChildClasses="!bg-[#8567FF] border-white !text-white group-hover:text-white"
         />
@@ -970,7 +968,7 @@ export const AIEngineering = () => {
             additionalText={
                 <>
                     <p className="pt-2 mb-2">
-                        Find correlations bebtween your AI/LLM features and product usage. Combine with other PostHog
+                        Find correlations between your AI/LLM features and product usage. Combine with other PostHog
                         products for deeper insights.
                     </p>
                     <ul className="mb-4">

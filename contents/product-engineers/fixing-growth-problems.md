@@ -113,7 +113,7 @@ In the context of growth teams, there are a few ways to do this:
 
 - Monitor critical metrics and set up alerts. Ensure you can quickly roll back changes using [feature flags](/blog/feature-flags-vs-configuration).
 
-- Set up [review apps](https://seanconnolly.dev/review-applications) so your team can easily test and dogfood your experiments.
+- Set up [review apps](https://seanconnolly.dev/review-applications) so your team can easily test and [dogfood your experiments](/product-engineers/dogfooding).
 
 - To test releases in production, set up [conditional overrides](/docs/experiments/testing-and-launching) so you can quickly test each experiment variant.
 
@@ -136,3 +136,5 @@ This has many benefits, like knowledge sharing across teams and diversifying ski
 - [Alexey's growth engineering newsletter](https://alexeymk.com/growth-eng/)
 - [What is a growth engineer? (And why they're awesome)](/blog/what-is-a-growth-engineer)
 - [How to start a growth team (as an engineer)](/blog/how-to-start-a-growth-team)
+
+<NewsletterForm />

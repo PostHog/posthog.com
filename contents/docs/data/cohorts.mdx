@@ -36,21 +36,24 @@ export const createCohortDark = "https://res.cloudinary.com/dmukukwp6/video/uplo
     className="rounded shadow-xl"
 />
 
-Cohorts enable you to easily create a list of users who have something in common, such as completing an action or having the same property.
+Cohorts enable you to easily create a list of users who have something in common, such as completing an [action](/docs/data/actions) or having the same [property](/docs/product-analytics/person-properties).
 
 Here are a few examples of the cohorts you can create:
 
 - Users who work at the same company.
 - Users who used your app in the last week.
-- Users who have churned from your product.
+- Users who churned from your product.
 - Users who signed up recently.
 - Users who viewed the signup page, but didn't convert.
 
-You list of cohorts are accessible from the [People](https://us.posthog.com/persons) page.
+Your cohorts are available in the [People](https://us.posthog.com/persons) page under the [Cohorts](https://us.posthog.com/cohorts) tab.
+
+> **Note:** Cohorts rely on [person properties](/docs/product-analytics/person-properties), so you need to capture events with [person profiles](/docs/data/persons/#people-and-person-profiles) to create and use them. 
 
 ## Where can you use cohorts?
 
 You can use cohorts in many different ways, such as:
+
 - In [trends](/docs/product-analytics/trends), funnels, retention, user paths, stickiness, and lifecycle insights
 - As a filter on any product analytics dashboard
 - To target feature flags, experiments, and user surveys
@@ -62,7 +65,7 @@ You can use cohorts to answer questions like:
 
 - "Are people at company X using our app frequently?"
 - "What percentage of the users who signed up last week are still using our app?"
-- "Which features are power users using?"
+- "Which features are power users using the most?"
 
 ## How are cohorts different from groups?
 
@@ -70,7 +73,7 @@ Cohorts are sometimes confused with [groups](/docs/product-analytics/group-analy
 
 - **Cohorts** represent a specific set of users – e.g., a list of users who's email contains a certain string (like a company's domain).
 
-- **Groups** aggregate events based on entities, such as organizations or companies, but do not necessarily connect to a user. They enable you to analyze trends, insights, and dashboards at an entity-level, as opposed to a user-level.
+- **Groups** aggregate events based on entities, such as organizations or companies, but do not necessarily connect to a user. They enable you to analyze trends, insights, and dashboards at an entity-level (like a company or organization), as opposed to a user-level.
  
 Groups require additional code in your app to set up, while cohorts are created in PostHog and don't require additional code. This makes cohorts easier to use and quicker to get started. 
 
@@ -78,15 +81,17 @@ If your only goal is to create a **list of users** with something in common, we 
 
 ## How to create a cohort
 
-There are two methods to create a new cohort:
+Once you've captured [events with person profiles](/docs/data/persons#capturing-person-profiles), there are two ways to create a new cohort:
 
 ### Method 1: Create a new cohort directly from an insight
 
 You can create cohorts using data from insights such as trends, [funnels](/docs/product-analytics/funnels), [user paths](/docs/product-analytics/paths) and [lifecycles](/docs/product-analytics/lifecycle).
 
-1. Go to [insights](https://us.posthog.com/insights) and open any insight that's aggregated by users – i.e. `unique users`, `weekly active user`, etc. Click a data point on the visualization to view the [persons](/docs/data/persons) represented in the underlying data.
+1. Go to [insights](https://us.posthog.com/insights) and open any insight that's aggregated at a user-level, like `unique users` or `weekly active user`. 
 
-2. In the modal popup, click 'Save as cohort' at the bottom.
+2. Click a data point in the visualization to view the [persons](/docs/data/persons) represented in the underlying data.
+
+3. In the modal popup, click **Save as cohort** at the bottom.
 
 The video below shows how to create a new cohort from a trend, although you can similarly create a cohort from a funnel, user path, or any other insight.
 
@@ -101,7 +106,7 @@ The video below shows how to create a new cohort from a trend, although you can 
 
 1. Navigate to the [People](https://us.posthog.com/persons) page within the sidebar, then click on the [Cohorts tab](https://us.posthog.com/cohorts).
 
-2. Click '+ New Cohort' on the top right.
+2. Click **+ New Cohort** on the top right.
 
 <ProductScreenshot
     imageLight={cohortsPageLight} 
@@ -114,11 +119,12 @@ The video below shows how to create a new cohort from a trend, although you can 
 
 You have two options when creating a cohort:
 
-1. **Static cohorts**, lists of users that don't change over time (e.g. all the users who signed up to your app in January 2024) or you update manually.
+1. **Static cohorts**, lists of users that don't change over time (unless you update them manually). For example, all the users who signed up to your app in January 2024.
 
 2. **Dynamic cohorts**, which are automatically updated based on a specific condition – e.g. all users who have performed a specific event or action in your app.
 
 ### Static cohorts
+
 Static cohorts are created from insights, by uploading a CSV of users, or by duplicating a dynamic cohort.
 
 The CSV file only requires a single column with the user's distinct ID. The very first row (the header) will be skipped during import.
@@ -140,7 +146,6 @@ Dynamic cohorts can be based on existing cohorts, and support the following crit
 | **Did not complete a sequence of events or actions** | Did not complete `user signed up` in the last 5 days followed by `watched video` within 1 day of the initial event |
 
 You can select `days`, `weeks`, `months` or `years` time ranges here.
-> **Can use a dynamic behavioral cohort as a feature flag target?** No. To use a cohort based on their behaviors as a target for a feature flag, A/B test, or survey, you must duplicate the dynamic cohort to a static one and use it.
 
 #### Person properties
 
@@ -168,6 +173,20 @@ Has or doesn't have a person property with the following operators:
 
 You can select `days`, `weeks`, `months` or `years` time ranges here.
 
+## FAQ
+
+### How often are dynamic cohorts updated?
+
+Dynamic cohorts are updated once every 24 hours.
+
+### Can you use a dynamic behavioral cohort as a feature flag target?
+
+ No. To target a dynamic cohort for a feature flag, A/B test, or survey, you must first duplicate it to a static cohort.
+ 
+ ### Can you use groups in cohorts?
+ 
+ Not yet, but we are working on [rewriting cohort calculations in HogQL](/teams/product-analytics#goals) which will unlock your ability to do this. 
+ 
 ### Further reading
 
 - [How to track new and returning users in PostHog](/tutorials/track-new-returning-users)

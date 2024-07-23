@@ -39,12 +39,17 @@ export const Addons = ({ billingProducts }: AddonsProps) => {
                 return product.addons
             })
             .flat()
-            .filter((addon: any) => !addon.inclusion_only)
     }, [billingProducts])
 
     const getAddonPrice = (addon: any): number | null => {
-        const tiers = addon.plans[0]?.tiers
-        if (tiers.length > 0) {
+        const isInclusionOnly = addon.inclusion_only
+        let tiers
+        if (isInclusionOnly) {
+            tiers = addon.plans.find((plan) => plan.included_if == 'has_parent_subscription')?.tiers
+        } else {
+            tiers = addon.plans[0]?.tiers
+        }
+        if (tiers?.length > 0) {
             // If the first tier is free, return the second tier price
             if (+tiers[0].flat_amount_usd === 0) {
                 return tiers[1]?.unit_amount_usd
@@ -56,8 +61,14 @@ export const Addons = ({ billingProducts }: AddonsProps) => {
     }
 
     const getAddonFreeAllocation = (addon: any): number | null => {
-        const tiers = addon.plans[0]?.tiers
-        if (tiers.length > 0) {
+        const isInclusionOnly = addon.inclusion_only
+        let tiers
+        if (isInclusionOnly) {
+            tiers = addon.plans.find((plan) => plan.included_if == 'has_parent_subscription')?.tiers
+        } else {
+            tiers = addon.plans[0]?.tiers
+        }
+        if (tiers?.length > 0) {
             // If the first tier is free, return the it's allocation
             if (+tiers[0].flat_amount_usd === 0) {
                 return tiers[0]?.up_to
@@ -86,7 +97,7 @@ export const Addons = ({ billingProducts }: AddonsProps) => {
                         <div className="col-span-8 md:col-span-5 lg:col-span-4 md:border-t-0 h-full border-light dark:border-dark pt-4 md:pb-4 flex items-center px-2">
                             <p className="mb-0">
                                 <span className="space-x-0.5">
-                                    <strong>${getAddonPrice(addon).toLocaleString()}</strong>
+                                    <strong>${getAddonPrice(addon)?.toLocaleString()}</strong>
                                     <span className="opacity-50 font-medium text-[13px]">/</span>
                                     <span className="opacity-50 font-medium text-[13px]">
                                         {addon.unit || addon.plans[0].unit}
@@ -95,7 +106,7 @@ export const Addons = ({ billingProducts }: AddonsProps) => {
                                 {!addon?.plans[0].flat_rate && (
                                     <p className="mt-0.5 opacity-70 leading-tight font-medium text-[13px] mb-0">
                                         <em>
-                                            First {getAddonFreeAllocation(addon).toLocaleString()} {addon.unit}s free
+                                            First {getAddonFreeAllocation(addon)?.toLocaleString()} {addon.unit}s free
                                             every month
                                         </em>
                                     </p>

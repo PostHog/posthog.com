@@ -1,18 +1,18 @@
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import { useSearch } from 'components/Search/SearchContext'
-import { useActions, useValues } from 'kea'
+import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import {
     IconApp,
     IconBrightness,
-    IconChat,
     IconMessage,
     IconSearch,
     IconTextWidth,
     IconUser,
     IconChevronDown,
     IconLetter,
+    IconUpload,
 } from '@posthog/icons'
 
 import { Placement } from '@popperjs/core'
@@ -32,6 +32,7 @@ import { useInView } from 'react-intersection-observer'
 import { usePopper } from 'react-popper'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { StaticImage } from 'gatsby-plugin-image'
+import MediaUploadModal from 'components/MediaUploadModal'
 
 export const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -379,7 +380,6 @@ const Notifications = () => {
 
 export const Main = () => {
     const { user } = useUser()
-
     const { open } = useSearch()
     const {
         menu,
@@ -393,16 +393,12 @@ export const Main = () => {
     } = useLayoutData()
     const { pathname } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)
-    const { setWebsiteTheme } = useActions(layoutLogic)
     const [posthogInstance, setPosthogInstance] = useState<string>()
+    const [mediaModalOpen, setMediaModalOpen] = useState(false)
     const posthog = usePostHog()
 
     useEffect(() => {
         if (window) {
-            setWebsiteTheme(window.__theme)
-            window.__onThemeChange = () => {
-                setWebsiteTheme(window.__theme)
-            }
             const instanceCookie = document.cookie
                 .split('; ')
                 ?.filter((row) => row.startsWith('ph_current_instance='))
@@ -421,8 +417,11 @@ export const Main = () => {
         }
     }
 
+    const isModerator = user?.role?.type === 'moderator'
+
     return (
         <div>
+            <MediaUploadModal open={mediaModalOpen} setOpen={setMediaModalOpen} />
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
                     className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${
@@ -477,7 +476,7 @@ export const Main = () => {
                                 Dashboard
                             </CallToAction>
                         ) : enterpriseMode ? (
-                            <CallToAction size="sm" type="outline" className="hidden sm:flex mr-2" to="/book-a-demo">
+                            <CallToAction size="sm" type="outline" className="hidden sm:flex mr-2" to="/demo">
                                 Talk to sales
                             </CallToAction>
                         ) : (
@@ -551,6 +550,17 @@ export const Main = () => {
                                                         My profile
                                                     </Link>
                                                 </li>
+                                                {isModerator && (
+                                                    <li className="px-1">
+                                                        <button
+                                                            className="group/item flex items-center text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark w-full"
+                                                            onClick={() => setMediaModalOpen(true)}
+                                                        >
+                                                            <IconUpload className="opacity-50 inline-block w-6 group-hover/parent:opacity-75 mr-2" />
+                                                            Upload media
+                                                        </button>
+                                                    </li>
+                                                )}
                                             </>
                                         )}
                                         <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
@@ -571,7 +581,6 @@ export const Main = () => {
                                                 <Toggle checked={fullWidthContent} />
                                             </button>
                                         </li>
-                                        <Orders />
                                         {pathname === '/' && (
                                             <li className="px-1 whitespace-nowrap">
                                                 <button
@@ -621,6 +630,7 @@ export const Main = () => {
                                                 </button>
                                             </li>
                                         )}
+                                        <Orders />
                                     </ul>
                                 )
                             }}

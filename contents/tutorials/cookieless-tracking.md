@@ -1,12 +1,12 @@
 ---
-title: How to use PostHog without cookie banners
+title: How to do cookieless tracking with PostHog
 sidebar: Docs
 showTitle: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/cookieless-tracking.png
 featuredVideo: 'https://www.youtube-nocookie.com/embed/3V3fbz6sgPk'
 featuredTutorial: false
-date: 2022-08-03
+date: 2024-06-14
 author:
   - joe-martin
 tags:
@@ -14,80 +14,100 @@ tags:
   - product os
 ---
 
-- **Level:** Medium 🦔🦔
-- **Estimated reading time:** 5 minutes ☕️
+Normally, PostHog stores some information about the user in their browser using a cookie. This approach is typical for analytics tools and enables user tracking across sessions, caching feature flag data, and more. 
 
-Normally, PostHog collects information about your users and stores it in a cookie in the users’ browser. This approach is fairly typical and enables you to track users across sessions, but there are some situations where cookie-less tracking is preferable. 
+There are some situations where you don't want to use cookies and do cookieless tracking instead. These include when:
 
-These include:
+- You have concerns about user privacy or regulation such as [GDPR](/docs/integrate/gdpr) or [HIPAA](/docs/privacy/hipaa-compliance).
 
-- If you have concerns about user privacy or regulation such as [GDPR](/docs/integrate/gdpr) or [HIPPA](/docs/privacy/hipaa-compliance).
-- If you have your own system for identifying users across multiple sessions, or if you don’t need to track user identities at all.
+- You have your own system for identifying users across multiple sessions, rely on server-side tracking, or don’t need to track user identities at all.
 
-If you’re interested in trying cookie-less tracking, then this tutorial will explain how to do this by configuring posthog-js to use page memory instead.
+- You hate cookie banners.
+
+This tutorial shows how to configure PostHog's [JavaScript Web SDK](/docs/libraries/js) to do cookieless tracking by using page memory to store user data.
+
+> **Note:** When using cookies, PostHog stores data as a first-party cookie. We don't track users across different sites (like largely blocked [third-party cookies](https://en.wikipedia.org/wiki/Third-party_cookies) do). It also means the same cookie works across subdomains like `posthog.com` and `eu.posthog.com`.
 
 <GDPRForm />
 
 ## Step 1: Decide where to store the data
 
-It can be helpful first to know what data is being stored and why. Specifically, PostHog will usually store the following information in the user’s browser via a cookie:
+It is helpful first to know what data is being stored and why. Specifically, PostHog stores the following information in the user’s browser:
 
-- User ID
+- User `distinct_id`
 - Session ID
-- Device ID 
+- Device ID
 - Active [feature flags](/docs/user-guides/feature-flags)
 - [Super properties](/docs/integrate/client/js#super-properties)
 - Configuration options (e.g., whether [session recording](/docs/user-guides/recordings) is enabled)
 
-As for _why_, this information is tracked only so that PostHog can work optimally and deliver a consistent experience to users.
+If you want to use PostHog without cookies, you must store some of this data elsewhere. Although PostHog has [multiple persistence options](/docs/libraries/js#persistence), the most straightforward is to store it in page memory. We show you how to do this in the next step.
 
-If you don’t want to store data in a cookie, you can store this data temporarily during the page view by setting `persistance` to `memory`. This stores all events within the page’s short-term memory. This is great for avoiding cookies, but data only persists for the duration of the page view. Returning users will be viewed as _new_ users. 
+Storing in memory avoids cookies, but once the user leaves the page, the data isn't saved. Returning users get new IDs, flags must be re-fetched, and configuration options are reset.
 
 ## Step 2: Configure persistence
 
-If you’ve not set up the Javascript client yet, you’ll need to do that first. The quickest way to install the JS client is to include it using NPM, though [other options are available](/docs/integrate/client/js#installation). If you’re already using the Javascript client, you can skip this step. 
+Managing cookies only matters if you use the [JavaScript Web SDK](/docs/libraries/js). Other SDKs don't use cookies.
 
+If you haven't set up the JavaScript Web SDK yet, you can install the `posthog-js` library using a package manager or copy the snippet below and paste it into your `<head>` tag:
+
+```html
+<script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('<ph_project_api_key>',
+      {
+        api_host:'<ph_client_api_host>', 
+      }
+    )
+</script>
 ```
-yarn add posthog-js
-```
 
-To finish installation, include it in your files:
-
-```js
-import posthog from 'posthog-js'
-posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>' })
-```
-
-With installation complete, it’s time to configure how you want data to persist. There are various configuration options you can use (a full list is available [here](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L933)), which are passed as an object to `posthog.init`.
+For cookieless tracking, the important part is the initialization. To change from the default `localStorage+cookie` persistence, to `memory`, add the `persistence` config option to your initialization. You can also [bootstrap](/docs/feature-flags/bootstrapping) the `distinctId` and `featureFlags` from the server to avoid regenerating and re-requesting them.
 
 Here’s how to do that if you want to store data in page memory:
 
 ```js
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
+posthog.init('<ph_project_api_key>',
+  {
+    api_host:'<ph_client_api_host>', 
     persistence: 'memory',
-    bootstrap: {
-        distinctID: '[user unique id]', // (If you have it)
+    bootstrap: { // optional
+      distinctID: 'user distinct id',
+      featureFlags: {
+        'feature-flag-1': true,
+        'feature-flag-2': false,
+      },
     },
-    // ... more options
-})
+  }
+)
 ```
 
-## Step 3: Remove your cookies acceptance banner
+> **Tip:** If you want to change your persistence settings after initializing PostHog, you can use `posthog.set_config()`. This is helpful if you are setting up a cookie banner:
+> ```js
+> const handleCookieConsent = (consent) => {
+>    posthog.set_config({ persistence: consent === 'yes' ? 'localStorage+cookie' : 'memory' });
+>    localStorage.setItem('cookie_consent', consent);
+> };
+> ```
 
-Now that your PostHog deployment isn’t using cookies you can, optionally and if you’re not using cookies for any other services, completely remove your GDPR-required cookies acceptance banner. Good for you — they only annoy most users anyway. 
+## Step 3: Remove your cookie banner
+
+Now that PostHog isn’t using cookies you can, optionally and if you’re not using cookies for any other services, completely remove your cookie banner. [Ursula von der Leyen](/blog/is-google-analytics-illegal-microsite) would be proud!
 
 ## Limitations
 
-Nothing comes for free and limiting what `posthog` can track between page loads does of course affect how the product works. Below are some of the likely consequences of cookie-less tracking:
+Nothing comes for free and limiting what PostHog can store between page loads does affect how the product works. Below are some of the likely consequences of cookieless tracking:
 
-* **Higher anonymous user count** - each pageload that is not ["bootstrapped"](/docs/libraries/js#bootstrapping-flags) with a known `distinctId` will count as a new user, and not a returning one
-* **Session Recording count** - as we can't track a "session" (multiple pageloads over time), Session Recordings will only be as long as the in-memory session and will reset (i.e. start a new recording) whenever the browser reloads. In addition, multiple window tracking is not possible.
-* **Cache optimizations** - we store some information in browser storage in order to load faster, for example using the last loaded values for Feature Flags. Without this optimization there will be an increased average delay between the page loading and things like Feature Flags being available to query. 
+* **Higher anonymous user count** - each pageload that is not [bootstrapped](/docs/feature-flags/bootstrapping) with a known `distinctId` counts as a new user and not a returning one.
 
+* **Session replay count** - as we can't track a "session" (multiple pageloads over time), session recordings are only as long as the in-memory session and resets (i.e. start a new recording) whenever the browser reloads. In addition, multiple window tracking is not possible.
+
+* **Cache optimizations** - PostHog stores some information in browser storage to load faster, for example, the last loaded values for feature flags. Without this, there can be a delay between the page loading and things like feature flags being available to query (unless flags are bootstrapped).
+
+* **Flag consistency** - Because setting peristence to `memory` resets the user `distinct_id`, if you don't implement bootstrapping or another identification method, the same user might see multiple flag variants across sessions. This can lead to an inconsistent experience if you are doing a percentage rollout or running an A/B test.
 
 ## Further reading
 
-- [Building a tracking cookies opt out banner in React](/tutorials/react-cookie-banner)
-
-<NewsletterForm />
+- [Building a tracking cookies consent banner in React](/tutorials/react-cookie-banner)
+- [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)
+- [Building a Next.js cookie consent banner](/tutorials/nextjs-cookie-banner)

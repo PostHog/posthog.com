@@ -15,11 +15,14 @@ We understand organizing travel can be a challenge when you have personal/family
 
 ## All-company offsites
 
+> Curious about our all-company offsites? Check out these links:
+> - **2021** [We shot this video at our Portugal offsite](https://www.youtube.com/watch?v=WOBH1Qy0xhA)
+> - **2023** [What we built at our sun-kissed Aruba hackathon](https://posthog.com/blog/aruba-hackathon)
+> - **2024** [What we built at our windswept Mykonos hackathon](https://posthog.com/blog/mykonos-hackathon)
+
 Once a year, the entire company will get together somewhere in the world for a week. Usually we'll all fly on Sunday, have an opening dinner, spend the week doing a mix of hard work, strategy, culture and fun activities and we then all fly back home on Friday. Our past offsites have been in Italy, Portugal and Iceland.
 
 These are organized by the Ops & People team, and we budget up to $3,000 per person in total for these. 
-
-We filmed a video in [Porto in August 2021](https://youtu.be/WOBH1Qy0xhA) which should give you a taste for how these run!
 
 Typical agenda:
 - A couple of structured social events
@@ -46,10 +49,10 @@ Ideas for the agenda:
 - Planning session. What does the team want to achieve in the next month/quarter/year?
 - Look at the [team page](/handbook/team-structure#small-teams) - what needs to be updated?
 - [360 degree feedback session](/handbook/people/feedback#ground-rules) - these are more effective at small team offsites
-    - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant. Particularly for people who might be anxious about the format or the feedback.
+    - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant, particularly for people who might be anxious about the format or the feedback.
 - Hackathon - try to leave 2 days for this
 
-The budget for these trips is up to $1,500 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. 
+The budget for these trips is up to $2,000 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. Generally it's easier to hit budget if you have people travel in on a Monday and out on a Friday - they don't need to be as long as a whole team offsite. 
 
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
 
@@ -58,6 +61,8 @@ You should assign someone on the small team to be responsible for planning the o
 PostHog runs the Hedge House, in Cambridge, UK. It's a place designed for small teams to run their offsites and for in-person onboarding. We'd recommend using the Hedge House for small team offsites for cost and convenience reasons if you are in Europe. 
 
 Anyone at PostHog is welcome to use it as much as they like. See the [full Hedge House docs](https://docs.google.com/document/d/1HS1LPT5fNzAus6TZr_KjZfbQkMfjaGlUYOEZe3fNn_c/edit).
+
+If you'd like to book it, please message Kendal in the #team-people-and-ops channel to check availability. 
 
 ## Travel insurance
 

@@ -54,7 +54,7 @@ const features = [
     },
     {
         title: 'Targeting & exclusion rules',
-        description: 'Set criteria for user location, user property, cohort, or group',
+        description: 'Set criteria for user location, person property, cohort, or group',
         image: <StaticImage src="./images/targeting-ab.png" width={428} />,
         border: true,
     },
@@ -90,7 +90,7 @@ const subfeatures = [
     },
     {
         title: 'Dynamic cohort support',
-        description: 'Add new users to an experiment automatically by setting a user property',
+        description: 'Add new users to an experiment automatically by setting a person property',
         icon: <IconPeople />,
     },
 ]
@@ -116,7 +116,7 @@ const faqs = [
     {
         question: 'Is there a free trial on paid plans?',
         children:
-            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch</a>.',
+            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/talk-to-a-human">get in touch</a>.',
     },
     {
         question: 'What currency are your prices in?',
@@ -218,7 +218,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Target by user property',
+        feature: 'Target by person property',
         companies: {
             Pendo: true,
             Optimizely: true,
@@ -397,7 +397,7 @@ export const ProductAbTesting = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
                                         src="../../../images/products/competitors-ab.png"
@@ -456,7 +456,7 @@ export const ProductAbTesting = () => {
                         <p className="text-center text-sm font-medium">
                             Have questions about PostHog? <br className="md:hidden" />
                             <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                            <Link to="/contact-sales">book a demo</Link>.
+                            <Link to="/talk-to-a-human">book a demo</Link>.
                         </p>
                     </section>
                 </div>

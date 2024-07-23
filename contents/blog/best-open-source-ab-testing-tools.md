@@ -33,7 +33,7 @@ In this guide, we're looking at the best free and open-source A/B testing tools.
 
 [PostHog](https://posthog.com) is an [open-source analytics platform](/blog/best-open-source-analytics-tools) that integrates a comprehensive A/B testing suite with numerous other tools, such as product analytics, feature flags, and session recording. It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 
-[PostHog’s experimentation suite](/product/experimentation-suite) supports multivariate experiments, and targeting by geography, user cohorts, and user properties – all of which is built atop PostHog's multivariate feature flags. PostHog uses a Bayesian approach to calculate the probability of each variant being the best, and whether the results are statistically significant or not.
+[PostHog’s experimentation suite](/product/experimentation-suite) supports multivariate experiments, and targeting by geography, user cohorts, and person properties – all of which is built atop PostHog's multivariate feature flags. PostHog uses a Bayesian approach to calculate the probability of each variant being the best, and whether the results are statistically significant or not.
 
 ### Who is PostHog for?
 
@@ -54,8 +54,6 @@ PostHog is ideal for product teams, particularly those who don't want to assembl
 Experimentation is free-to-use on PostHog's Scale plan, which is also [free up to 1 million events](/pricing) and 5,000 recordings per month – you can set billing limits to ensure you don't get surprise bills. While PostHog is open source, its A/B testing features aren't included in the open source release.
 
 > **Further reading:** New to A/B testing? Read [A software engineer's guide to A/B testing](/blog/ab-testing-guide-for-engineers) and our guide to [common A/B testing mistakes](/blog/ab-testing-mistakes).
-
-<NewsletterForm />
 
 ## 2. GrowthBook
 
@@ -126,7 +124,7 @@ Mojito is completely free and open source, and you don’t need an account to ge
 
 ![Flagsmith - best open source ab testing tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/img4_Flagsmith.png)
 
-[Flagsmith](https://flagsmith.com) is an open-source feature flag and remote configuration service that lets you manage features across mobile, web and server-side applications. You can use Flagsmith’s multivariate flags as a bucketing engine to place users into testing buckets and control the specific user experience that is being tested. Flagsmith doesn’t provide analytics for multivariate tests, however, so you’ll need to use a third-party provider to receive the stream of event data derived from the behavior of the user.
+[Flagsmith](/blog/best-flagsmith-alternatives) is an open-source feature flag and remote configuration service that lets you manage features across mobile, web and server-side applications. You can use Flagsmith’s multivariate flags as a bucketing engine to place users into testing buckets and control the specific user experience that is being tested. Flagsmith doesn’t provide analytics for multivariate tests, however, so you’ll need to use a third-party provider to receive the stream of event data derived from the behavior of the user.
 
 ### Who is Flagsmith for?
 

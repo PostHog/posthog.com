@@ -62,6 +62,7 @@ export default {
       "<ph_project_api_key>",
       {
         api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
       }
     );
   },
@@ -79,7 +80,8 @@ export default {
     Vue.prototype.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_client_api_host>"
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
       }
     );
   }
@@ -160,7 +162,8 @@ import posthog from "posthog-js";
 
 const app = createApp(App);
 posthog.init("<ph_project_api_key>", {
-  api_host: "<ph_client_api_hostT>",
+  api_host: "<ph_client_api_host>",
+  person_profiles: 'identified_only',
 });
 app.provide("posthog", posthog);
 ```
@@ -221,6 +224,7 @@ posthog.init(
       "<ph_project_api_key>",
       {
         api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
         capture_pageview: false
       }
 );

@@ -29,8 +29,16 @@ import {
 } from './pricingLogic'
 
 import { LinearSlider, LogSlider, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
+import { useStaticQuery } from 'gatsby'
+import { allProductsData } from './Pricing'
 
 export const useProducts = () => {
+    const {
+        allProductData: {
+            nodes: [{ products: billingProducts }],
+        },
+    } = useStaticQuery(allProductsData)
+
     const {
         productAnalyticsCost,
         sessionRecordingCost,
@@ -52,6 +60,7 @@ export const useProducts = () => {
         sessionReplayRecordingsMaxed,
         featureFlagsRequestsMaxed,
         surveyResponsesMaxed,
+        productAnalyticsGroupAnalytics,
     } = useValues(pricingSliderLogic)
     const {
         setSessionRecordingSliderValue,
@@ -64,10 +73,12 @@ export const useProducts = () => {
         {
             icon: <IconGraph className="w-5 h-6 text-blue" />,
             name: 'Product analytics',
+            type: 'product_analytics',
             slug: 'product-analytics',
             freeLimit: '1,000,000',
             denomination: 'event',
-            price: '0.000248',
+            price: '0.00005',
+            volume: eventNumber,
             calcVolume: <>{eventNumber.toLocaleString()}</>,
             calcCost: <>{productAnalyticsCost.toLocaleString()}</>,
             slider: (
@@ -80,14 +91,17 @@ export const useProducts = () => {
                     value={productAnalyticsSliderValue}
                 />
             ),
+            addons: billingProducts.find((product) => product.type === 'product_analytics')?.addons,
         },
         {
             icon: <IconRewindPlay className="w-5 h-6 text-yellow" />,
             name: 'Session replay',
+            type: 'session_replay',
             slug: 'session-replay',
             freeLimit: '5,000',
             denomination: 'recording',
-            price: '0.04',
+            price: '0.005',
+            volume: sessionRecordingEventNumber,
             calcVolume: <>{sessionRecordingEventNumber.toLocaleString()}</>,
             calcCost: <>{sessionRecordingCost.toLocaleString()}</>,
             slider: (
@@ -100,14 +114,17 @@ export const useProducts = () => {
                     value={sessionRecordingSliderValue}
                 />
             ),
+            addons: billingProducts.find((product) => product.type === 'session_replay')?.addons,
         },
         {
             icon: <IconToggle className="w-5 h-6 text-green" />,
             name: 'Feature flags',
+            type: 'feature_flags',
             slug: 'feature-flags',
             freeLimit: '1,000,000',
             denomination: 'request',
             price: '0.0001',
+            volume: featureFlagNumber,
             calcVolume: <>{featureFlagNumber.toLocaleString()}</>,
             calcCost: <>{featureFlagCost.toLocaleString()}</>,
             slider: (
@@ -120,26 +137,32 @@ export const useProducts = () => {
                     value={featureFlagSliderValue}
                 />
             ),
+            addons: billingProducts.find((product) => product.type === 'feature_flags')?.addons,
         },
         {
             icon: <IconFlask className="w-5 h-6 text-purple" />,
             name: 'A/B testing',
+            type: 'feature_flags',
             slug: 'ab-testing',
             freeLimit: '',
             denomination: '',
             price: '',
+            volume: '',
             calcVolume: '',
             calcCost: '',
             message: <em className="font-normal opacity-75">Billed with feature flags</em>,
             slider: '',
+            addons: billingProducts.find((product) => product.type === 'feature_flags')?.addons,
         },
         {
             icon: <IconMessage className="w-5 h-5 text-red" />,
             name: 'Surveys',
+            type: 'surveys',
             slug: 'surveys',
             freeLimit: '250',
             denomination: 'response',
             price: '0.2000',
+            volume: surveyResponseNumber,
             calcVolume: <>{surveyResponseNumber.toLocaleString()}</>,
             calcCost: <>{surveyResponseCost.toLocaleString()}</>,
             slider: (
@@ -152,6 +175,7 @@ export const useProducts = () => {
                     value={surveyResponseSliderValue}
                 />
             ),
+            addons: billingProducts.find((product) => product.type === 'surveys')?.addons,
         },
     ]
 }

@@ -11,18 +11,30 @@ import {
 
 import type { pricingSliderLogicType } from './pricingSliderLogicType'
 
-const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) => {
-    let finalCost = 0
-    let alreadyCountedEvents = 0
-
+const getTiers = (pricingOption) => {
     const tiers = pricingSliderLogic.values.availableProducts
         .find((product) => product.type === pricingOption)
         ?.plans.find((plan) => plan.tiers)?.tiers
+    return tiers
+}
+
+export const formatUSD = (number, trailingZeros = false) => {
+    const usd = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    })
+    return usd.format(number).replace('.00', trailingZeros ? '.00' : '')
+}
+
+export const calculatePrice = (eventNumber: number, tiers): { total: number; costByTier: any } => {
+    let finalCost = 0
+    let alreadyCountedEvents = 0
 
     if (!tiers) {
         return 0
     }
-    for (const { up_to, unit_amount_usd } of tiers) {
+    const costByTier = []
+    for (const { up_to, unit_amount_usd, ...rest } of tiers) {
         const remainingEvents = Math.max(eventNumber - alreadyCountedEvents, 0)
         const eventsInThisTier = up_to
             ? remainingEvents < up_to - alreadyCountedEvents
@@ -33,9 +45,11 @@ const calculatePrice = (eventNumber: number, pricingOption: PricingOptionType) =
         finalCost = finalCost + tierCost
         // the last tier has null up_to so we set it to an arbitrarily high number
         alreadyCountedEvents = up_to ?? 10000000000
+
+        costByTier.push({ ...rest, up_to, unit_amount_usd, tierCost, eventsInThisTier })
     }
 
-    return Math.round(finalCost)
+    return { total: Math.round(finalCost), costByTier }
 }
 
 export type PricingOptionType = 'product_analytics' | 'session_replay' | 'feature_flags' | 'surveys'
@@ -186,31 +200,31 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
         finalCost: [
             (s) => [s.eventNumber, s.pricingOption],
             (eventNumber: number, pricingOption: PricingOptionType) => {
-                return calculatePrice(eventNumber, pricingOption)
+                return calculatePrice(eventNumber, getTiers(pricingOption))
             },
         ],
         sessionRecordingCost: [
             (s) => [s.sessionRecordingEventNumber],
             (sessionRecordingEventNumber: number) => {
-                return calculatePrice(sessionRecordingEventNumber, 'session_replay')
+                return calculatePrice(sessionRecordingEventNumber, getTiers('session_replay'))
             },
         ],
         productAnalyticsCost: [
             (s) => [s.eventNumber],
             (eventNumber: number) => {
-                return calculatePrice(eventNumber, 'product_analytics')
+                return calculatePrice(eventNumber, getTiers('product_analytics'))
             },
         ],
         featureFlagCost: [
             (s) => [s.featureFlagNumber],
             (featureFlagNumber: number) => {
-                return calculatePrice(featureFlagNumber, 'feature_flags')
+                return calculatePrice(featureFlagNumber, getTiers('feature_flags'))
             },
         ],
         surveyResponseCost: [
             (s) => [s.surveyResponseNumber],
             (surveyResponseNumber: number) => {
-                return calculatePrice(surveyResponseNumber, 'surveys')
+                return calculatePrice(surveyResponseNumber, getTiers('surveys'))
             },
         ],
         monthlyTotal: [
@@ -222,10 +236,10 @@ export const pricingSliderLogic = kea<pricingSliderLogicType>({
                 surveyResponseNumber: number
             ) => {
                 return (
-                    calculatePrice(eventNumber, 'product_analytics') +
-                    calculatePrice(sessionRecordingEventNumber, 'session_replay') +
-                    calculatePrice(featureFlagNumber, 'feature_flags') +
-                    calculatePrice(surveyResponseNumber, 'surveys')
+                    calculatePrice(eventNumber, getTiers('product_analytics')) +
+                    calculatePrice(sessionRecordingEventNumber, getTiers('session_replay')) +
+                    calculatePrice(featureFlagNumber, getTiers('feature_flags')) +
+                    calculatePrice(surveyResponseNumber, getTiers('surveys'))
                 )
             },
         ],

@@ -159,30 +159,32 @@ With these, go to `entry.client.tsx` and initialize PostHog using a component. T
 
 ```tsx
 // app/entry.client.tsx
-import { RemixBrowser } from "@remix-run/react";
-import { startTransition, StrictMode, useEffect } from "react";
-import { hydrateRoot } from "react-dom/client";
-import posthog from "posthog-js";
+import * as React from 'react';
+import { RemixBrowser } from '@remix-run/react';
+import { hydrateRoot } from 'react-dom/client';
+import posthog from 'posthog-js';
 
-function PosthogInit() {
-  useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
-      api_host: '<ph_client_api_host>',
-    });
-  }, []);
+function hydrate() {
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    person_profiles: 'identified_only',
+  });
 
-  return null;
+  React.startTransition(() => {
+    hydrateRoot(
+      document,
+      <React.StrictMode>
+        <RemixBrowser />
+      </React.StrictMode>,
+    );
+  });
 }
 
-startTransition(() => {
-  hydrateRoot(
-    document,
-    <StrictMode>
-        <RemixBrowser />
-        <PosthogInit/>
-    </StrictMode>
-  );
-});
+if (window.requestIdleCallback) {
+  window.requestIdleCallback(hydrate);
+} else {
+  window.setTimeout(hydrate, 1);
+}
 ```
 
 After relaunching your app, PostHog begins autocapturing initial pageviews, clicks, [session replays](/docs/session-replay) (if [you enable them](https://app.posthog.com/settings/project#replay)), and more.

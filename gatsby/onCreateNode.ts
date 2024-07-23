@@ -85,6 +85,11 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
     await fetchCloudinaryImages()
 }
 
+function getPublicID(image: string) {
+    const imagePath = image.split('/upload/')[1]
+    return imagePath.substring(0, imagePath.lastIndexOf('.'))
+}
+
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     node,
     getNode,
@@ -107,9 +112,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         const imageFields = ['featuredImage', 'thumbnail', 'logo', 'logoDark', 'icon']
         imageFields.forEach((field) => {
             if (node.frontmatter?.[field] && node.frontmatter?.[field].includes('res.cloudinary.com')) {
-                const publicId = `posthog.com/contents${
-                    node.frontmatter?.[field].split('posthog.com/contents')[1].split('.')[0]
-                }`
+                const publicId = getPublicID(node.frontmatter?.[field])
                 const cloudinaryData = cloudinaryCache[publicId]
                 if (!cloudinaryData) {
                     console.warn(`Cloudinary data not found for ${publicId}`)
@@ -130,7 +133,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         const images = node.frontmatter?.images
         if (images?.length > 0) {
             node.frontmatter.images = images.map((image) => {
-                const publicId = `posthog.com/contents${image.split('posthog.com/contents')[1].split('.')[0]}`
+                const publicId = getPublicID(image)
                 const cloudinaryData = cloudinaryCache[publicId]
                 if (!cloudinaryData) {
                     console.warn(`Cloudinary data not found for ${publicId}`)
@@ -271,9 +274,33 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         }
     }
 
+    const getAshbyLocationName = async (id) =>
+        fetch(`https://api.ashbyhq.com/location.info`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Basic ${Buffer.from(`${process.env.ASHBY_API_KEY}:`).toString('base64')}`,
+            },
+            body: JSON.stringify({ locationId: id }),
+        })
+            .then((res) => res.json())
+            .then((data) => data.results.name)
+
     if (node.internal.type === 'AshbyJobPosting') {
         const title = node.title.replace(' (Remote)', '')
         const slug = `/careers/${slugify(title, { lower: true })}`
+        const locations = [
+            await getAshbyLocationName(node.locationIds.primaryLocationId),
+            ...(await Promise.all(node.locationIds.secondaryLocationIds.map((id) => getAshbyLocationName(id)))),
+        ]
+            .map((location) => location.replace(/\(|\)|remote/gi, '').trim())
+            .filter(Boolean)
+        createNodeField({
+            node,
+            name: 'locations',
+            value: locations,
+        })
         createNodeField({
             node,
             name: `title`,

@@ -455,6 +455,14 @@ h4 {
     }
 }
 
+.rc-slider-handle {
+    @apply !cursor-grab;
+
+    &:focus {
+        @apply !cursor-grabbing;
+    }
+}
+
 /* timeline key */
 
 .timeline-entry li[data-type='feature']:before {
@@ -1290,6 +1298,12 @@ iframe[src*='youtube-nocookie.com'] {
         summary {
             @apply select-none;
         }
+
+        a {
+            u {
+                @apply no-underline;
+            }
+        }
     }
     section {
         @apply mt-8 mb-8;
@@ -1421,6 +1435,10 @@ li.squeak-left-border {
         }
     }
 
+    blockquote {
+        @apply border-l-4 border-light dark:border-dark pl-2;
+    }
+
     pre {
         @apply text-base my-3 overflow-scroll p-4 text-[15px];
     }
@@ -1483,10 +1501,68 @@ li.squeak-left-border {
     }
 }
 
+.click {
+    @apply scale-100 hover:top-[-2px] hover:scale-[1] active:top-[3px] active:scale-[.99];
+}
+
+.tw-check-bullets {
+    @apply list-none [&>li]:bg-bullet-check-light dark:[&>li]:bg-bullet-check-dark [&>li]:bg-no-repeat [&>li]:pl-8 pl-0 [&>li]:py-1 [&>li]:bg-[length:1.7rem] [&_li]:bg-[left_center];
+}
+
+.tw-chevron-bullets {
+    @apply list-none [&>li]:bg-bullet-chevron-light dark:[&>li]:bg-bullet-chevron-dark [&>li]:bg-no-repeat [&>li]:bg-[0rem_.4rem] [&_li]:ml-1 [&>li]:pl-5 pl-0 [&>li]:py-1;
+}
+
 .text-gradient {
     @apply text-transparent bg-clip-text animate-text-gradient 
          bg-[linear-gradient(90deg,#30ABC6,#F35454,#2F80FA)] 
     dark:bg-[linear-gradient(90deg,#F54E00,#F7A501,#29DBBB,#EB9D2A,#F54E00)];
 }
 
-/* #2F80FA,#30ABC6,#B62AD9,#29DBBB,#F35454,#2F80FA */
+.hide-number-arrows::-webkit-outer-spin-button,
+.hide-number-arrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.company-name-enter {
+    opacity: 0;
+    transform: translateY(100%);
+}
+.company-name-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 100ms, transform 250ms;
+}
+.company-name-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+.company-name-exit-active {
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 500ms, transform 500ms;
+}
+
+.slide-1,
+.slide-2,
+.slide-3 {
+    transition: transform 0.75s ease-in-out, opacity 0.75s ease-in-out;
+    transform: translateY(20%) scale(0.9);
+    opacity: 0;
+}
+
+.slide-1.opacity-100,
+.slide-2.opacity-100,
+.slide-3.opacity-100 {
+    transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+}
+
+.active + .inactive {
+    @apply !border-t-transparent;
+}
+.preserve-3d {
+    transform-style: preserve-3d;
+}

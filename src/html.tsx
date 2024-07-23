@@ -49,7 +49,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                         password: true,
                                     }
                                 },
-                                person_profiles: 'always',
+                                person_profiles: 'identified_only',
                                 __preview_heatmaps: true,
                             })
                             `,

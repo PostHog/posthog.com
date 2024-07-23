@@ -27,6 +27,7 @@ Check the **feature flags tab** on [the persons page](https://app.posthog.com/pe
 
 - If the flag is shown as disabled here, check the "match evaluation" column to know the understand why.
 - If the flag is shown as enabled here, there may be a problem in your code. Double-check the steps to [add feature flag code](/docs/feature-flags/adding-feature-flag-code).
+- Ensure you are capturing [person profiles](/docs/data/persons).
 
 ### 2. Check you're calling `identify()` before evaluating the flag
 
@@ -57,37 +58,6 @@ import FAQFalseOrNoneEvents from "./snippets/faq-false-or-none-events.mdx"
 ## How can I reduce the latency of feature flag requests on my server?
 
 Evaluating feature flags requires making a request to PostHog. However, you can [evaluate feature flags locally](/docs/feature-flags/bootstrapping-and-local-evaluation#server-side-local-evaluation) instead – without having to make a request to PostHog.
-
-
-## How can I estimate the number of feature flag requests I'll be charged for?
-
-import FlagChargeEstimate from "./snippets/flag-charge-estimate.mdx"
-
-<FlagChargeEstimate />
-
-## How can I reduce the cost of feature flags?
-
-If your feature flag usage or costs are too high, there a few methods to reduce them:
-
-### 1. Reduce client-side feature flag requests
-
-In our [JavaScript web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs, you can reduce the cost of feature flags by reducing the number of requests your client makes to fetch feature flag values for your users.
-
-1. Using the the [advanced configuration](/docs/libraries/js#advanced-configuration), set `advanced_disable_feature_flags_on_first_load` to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
-
-2. Using the the [advanced configuration](/docs/libraries/js#advanced-configuration), set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
-
-### 2. Reduce local evaluation costs
-
-If you're using [local evaluation](/docs/feature-flags/local-evaluation), your bill may be high because of too many requests to fetch feature flag definitions. By default, PostHog fetches these every 30 seconds.
-
-Each request charges 10 credits, so assuming your server is constantly running and making 2 requests per minute, this will charge `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
-
-You can reduce this by increasing the [feature flag polling interval](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-personal-api-key) when initializing PostHog. For example, every 5 minutes instead of every 30 seconds.
-
-The drawback of this approach is that whenever you make an update to a feature flag using the PostHog UI, it takes 5 minutes (instead of 30 seconds) for that change to roll to your server.
-
-> **Note:** Do not use local evaluation in an edge / lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
 
 ## Why do feature flags sometimes cause my app to flicker?
 
@@ -121,3 +91,46 @@ A workaround is to create a dynamic behavioral cohort and then duplicate it as a
     alt="How to duplicate as static cohort" 
     classes="rounded"
 />
+
+## Billing & usage
+
+Feature flags are charged based requests made to our `/decide` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
+
+### How can I estimate the number of feature flag requests I'll be charged for?
+
+import FlagChargeEstimate from "./snippets/flag-charge-estimate.mdx"
+
+<FlagChargeEstimate />
+
+### I have very few `$feature_flag_called` events when I look at a flag, but my bill is still very high, why is this?
+
+`$feature_flag_called` events are captured whenever you call `getFeatureFlag()` or `isFeatureEnabled()`. Also, they're not sent every time and are only sent when the flag value changes for a given person. 
+
+This is different from requests made to our servers to compute flags, which is what feature flag billable requests are. Thus, generally, there will be no relation between the number of `$feature_flag_called` events and the usage you see in your billing.
+
+### How can I reduce the cost of feature flags?
+
+If your feature flag usage or costs are too high, there a few methods to reduce them:
+
+#### 1. Reduce client-side feature flag requests
+
+In our [JavaScript web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs, you can reduce the cost of feature flags by reducing the number of requests your client makes to fetch feature flag values for your users.
+
+1. Using the the [advanced configuration](/docs/libraries/js#advanced-configuration), set `advanced_disable_feature_flags_on_first_load` to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
+
+2. Using the the [advanced configuration](/docs/libraries/js#advanced-configuration), set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
+
+#### 2. Reduce local evaluation costs
+
+If you're using [local evaluation](/docs/feature-flags/local-evaluation), your bill may be high because of too many requests to fetch feature flag definitions. By default, PostHog fetches these every 30 seconds.
+
+Each request charges 10 credits, so assuming your server is constantly running and making 2 requests per minute, this will charge `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
+
+You can reduce this by increasing the [feature flag polling interval](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-personal-api-key) when initializing PostHog. For example, every 5 minutes instead of every 30 seconds.
+
+The drawback of this approach is that whenever you make an update to a feature flag using the PostHog UI, it takes 5 minutes (instead of 30 seconds) for that change to roll to your server.
+
+> **Note:** Do not use local evaluation in an edge / lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
+
+
+

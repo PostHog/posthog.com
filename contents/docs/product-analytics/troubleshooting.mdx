@@ -73,7 +73,7 @@ If events are visible in webhook.site, it means that you have configured PostHog
 
 PostHog can be adblocked, even locally. This prevents requests from being sent from your app to PostHog. If you're just testing your setup in development, disable your browser ad blocker and make sure you can see PostHog requests succeeding in the network tab of your browser's developer tools. 
 
-For production, the best way to limit the impact of ad blockers is to [set up a reverse proxy](/docs/advanced/proxy]. 
+For production, the best way to limit the impact of ad blockers is to [set up a reverse proxy](/docs/advanced/proxy). 
 
 ### 3. An app has been configured incorrectly
 
@@ -121,33 +121,33 @@ Once you have confirmed there is an issue with event ingestion, you can [report 
 
 Yes, PostHog blocks most known bots by default, including:
 
-| **Google bots**        | **Non-Google bots** |
-|------------------------|---------------------|
-| 'adsbot-google'        | 'ahrefsbot'         |
-| 'apis-google'          | 'applebot'          |
-| 'duplexweb-google'     | 'baiduspider'       |
-| 'feedfetcher-google'   | 'bingbot'           |
-| 'google favicon'       | 'bingpreview'       |
-| 'google web preview'   | 'bot.htm'           |
-| 'google-read-aloud'    | 'bot.php'           |
-| 'googlebot'            | 'crawler'           |
-| 'googleweblight'       | 'duckduckbot'       |
-| 'mediapartners-google' | 'facebookexternal'  |
-| 'storebot-google'      | 'facebookcatalog'   |
-|                        | 'gptbot'            |
-|                        | 'hubspot'           |
-|                        | 'linkedinbot'       |
-|                        | 'mj12bot'           |
-|                        | 'petalbot'          |
-|                        | 'pinterest'         |
-|                        | 'prerender'         |
-|                        | 'rogerbot'          |
-|                        | 'screaming frog',   |
-|                        | 'semrushbot',       |
-|                        | 'sitebulb',         |
-|                        | 'twitterbot',       |
-|                        | 'yahoo! slurp',     |
-|                        | 'yandexbot',        |
+| **Google bots**           | **Non-Google bots** |
+|---------------------------|---------------------|
+| 'adsbot-google'           | 'ahrefsbot'         |
+| 'apis-google'             | 'applebot'          |
+| 'duplexweb-google'        | 'baiduspider'       |
+| 'feedfetcher-google'      | 'bingbot'           |
+| 'google favicon'          | 'bingpreview'       |
+| 'google web preview'      | 'bot.htm'           |
+| 'google-read-aloud'       | 'bot.php'           |
+| 'googlebot'               | 'crawler'           |
+| 'googleweblight'          | 'duckduckbot'       |
+| 'mediapartners-google'    | 'facebookexternal'  |
+| 'storebot-google'         | 'facebookcatalog'   |
+| 'Google-HotelAdsVerifier' | 'gptbot'            |
+|                           | 'hubspot'           |
+|                           | 'linkedinbot'       |
+|                           | 'mj12bot'           |
+|                           | 'petalbot'          |
+|                           | 'pinterest'         |
+|                           | 'prerender'         |
+|                           | 'rogerbot'          |
+|                           | 'screaming frog',   |
+|                           | 'semrushbot',       |
+|                           | 'sitebulb',         |
+|                           | 'twitterbot',       |
+|                           | 'yahoo! slurp',     |
+|                           | 'yandexbot',        |
 
 Want a bot added to this list? Request it via [the in-app feedback form](http://us.posthog.com/home#supportModal), or raise an issue in the [posthog-js GitHub repo](https://github.com/PostHog/posthog-js/issues).
 

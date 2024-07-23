@@ -115,7 +115,7 @@ export default function RichText({
         noClick: true,
         noKeyboard: true,
         multiple: false,
-        accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'] },
+        accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'], 'image/gif': ['.gif'] },
     })
 
     const replaceSelection = (selectionStart?: number, selectionEnd?: number, text = '') => {

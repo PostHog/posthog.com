@@ -59,19 +59,6 @@ See full instructions on [developing PostHog.com locally in our manual](https://
 
 ## Advanced setup
 
-### Docker
-
-It is also possible to use Docker to run posthog.com locally with this command:
-
-```bash
-docker run -it --rm \
-    -w /app -v "$PWD":/app \
-    -p 8000-8001:8000-8001 \
-    -e INTERNAL_STATUS_PORT=8001 \
-    node:14-slim \
-    sh -c 'yarn && yarn start'
-```
-
 ### Debugging errors on start
 1. Pull the latest changes from `master`
 2. Run `gatsby clean && yarn start` or delete `node_modules` and `.cache`

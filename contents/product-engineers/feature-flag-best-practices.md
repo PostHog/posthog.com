@@ -50,8 +50,6 @@ Having a “sticky” ID (like a cookie, which is the default in PostHog) ensure
 
 If you use group analytics or person properties in your flag rollout, accurate identification includes setting them up properly. Users must be a part of groups or have a property for PostHog to evaluate flags relying on these.
 
-<NewsletterForm />
-
 ## 4. Use local evaluation for faster flags
 
 An underrated feature of PostHog’s feature flag functionality is the ability to evaluate flags locally. By polling the PostHog server and/or using cached feature flag data, your app can evaluate flags without waiting for another response from PostHog.
@@ -145,6 +143,8 @@ You can get values for the bootstrap object by using a server-side library. Call
 Bootstrapping also ensures events have accurate feature flag data. If you capture events before receiving feature flags data, data can be missing.
 
 > You can read more about bootstrapping in [our docs](/docs/feature-flags/bootstrapping) or tutorials for [Next.js](/tutorials/nextjs-bootstrap-flags) or [React and Express](/tutorials/bootstrap-feature-flags-react).
+
+<NewsletterForm />
 
 ## 6. Name your feature flags well
 

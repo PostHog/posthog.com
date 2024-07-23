@@ -27,7 +27,7 @@ For this reason Witty Works created the [Property Filter app](/apps/property-fil
 First, install the [Property Filter](/apps/property-filter) to your PostHog instance. You can find it in the Apps Library by following these steps:
 
 - Log in to your PostHog instance
--  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
+-  Click "[Data pipeline](https://us.posthog.com/pipeline)" in the left sidebar
 - Search for 'Property Filter' press 'Install'
 
 It's important to note that this app effectively removes information from PostHog events by setting properties to null. Apps on PostHog run in sequence, so it usually makes sense to place this app at the end of a sequence. If you are filtering `$ip`, `event.ip` will also be set to `null`.
@@ -44,9 +44,11 @@ You can reorder the app chain simply by selecting 'Edit Order' and dragging the 
 
 This app sets all specified properties on ingested events to `null`, effectively preventing PostHog from collecting information you do not want it to use.
 
-To configure the app to remove selected properties, simply select the blue gear icon and enter the properties you wish to remove. 
+To configure the app to remove selected properties, simply select the blue gear icon and enter the properties you wish to remove.
 
 ![PostHog Property Filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/property-filter/property-filter-tutorial-2.png)
+
+> **Note:** The GeoIP transformation adds event and person properties (`$set` and `$set_once`), so you'll want to filter those out as well. [See below](#event-and-person-properties).
 
 ## The full list of GeoIP properties
 

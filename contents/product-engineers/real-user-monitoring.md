@@ -114,3 +114,5 @@ At PostHog, we do this with a [broken link checker](/tutorials/broken-link-check
 - [The most useful product health metrics](/blog/product-health-metrics)
 - [Retention rate vs churn rate: An intro to churn analysis](/blog/churn-rate-vs-retention-rate)
 - [How to improve web app performance using PostHog session replays](/tutorials/performance-metrics)
+
+<NewsletterForm />

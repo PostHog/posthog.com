@@ -43,8 +43,6 @@ Everyone who works at a tech company basically thinks they are immune to ads bec
 
 This is why we ask all users where they heard about PostHog whenever they sign up or book a demo – it's a simple (optional) free text field. Enough of our users say 'ad on Google' or similar that we know paid ads do actually reach a large chunk of them. Especially ones with money to spend on behalf of their company. However, you need to take the time to collect and digest this _qualitative_ attribution data in the first place.
 
-<NewsletterForm />
-
 ### An agency will solve all your problems
 
 I'm a big fan of hiring an agency if you're a startup – paying $5-10k/mo for a small, outsourced team is way more efficient at this stage than hiring one paid ads specialist. Look in Europe – US agencies can be 2-3x more expensive. We use [Hey](https://www.heydigital.co/) and like them. 
@@ -52,6 +50,8 @@ I'm a big fan of hiring an agency if you're a startup – paying $5-10k/mo for a
 _However,_ I really recommend you get personally familiar with each of the main channels I've listed below first. Working with an agency isn't just set and forget – you need to constantly give feedback, ask questions, and suggest new ideas if you want to get the most out of them. 
 
 I personally like [the Demand Curve course](https://www.demandcurve.com/growth-program), which will give you a great grounding in all the major paid ad channels – it helped get us off the ground and means we're much better equipped to give our agency feedback. Outsource the legwork, not your critical thinking. 
+
+<NewsletterForm />
 
 ## Channel-by-channel tips
 

@@ -1,14 +1,54 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { Structure } from '../../Structure'
 import { StaticImage } from 'gatsby-plugin-image'
 import { AnchorScrollNavbarTop } from './AnchorScrollNavbarTop'
 import { James, Plus, Tim } from 'components/Signatures'
+
+import jamesQuote1 from './Audio/quote-1.mp3'
+import jamesQuote2 from './Audio/quote-2.mp3'
+import jamesQuote3 from './Audio/quote-3.mp3'
+import jamesQuote4 from './Audio/quote-4.mp3'
+import jamesQuote5 from './Audio/quote-5.mp3'
+import jamesQuote6 from './Audio/quote-6.mp3'
+import jamesQuote7 from './Audio/quote-7.mp3'
+import jamesQuote8 from './Audio/quote-8.mp3'
+import jamesQuote9 from './Audio/quote-9.mp3'
+import jamesQuote10 from './Audio/quote-10.mp3'
 
 const P = ({ children }) => {
     return <p className="text-justify text-[15px] md:text-[17px] leading-relaxed">{children}</p>
 }
 
 export const WhyWereHere = () => {
+    const audioRef = useRef<HTMLAudioElement>(null)
+    const mp3Files = [
+        jamesQuote1,
+        jamesQuote2,
+        jamesQuote3,
+        jamesQuote4,
+        jamesQuote5,
+        jamesQuote6,
+        jamesQuote7,
+        jamesQuote8,
+        jamesQuote9,
+        jamesQuote10,
+    ]
+
+    const playRandomJamesAudo = () => {
+        try {
+            const randomIndex = Math.floor(Math.random() * mp3Files.length)
+            const randomMp3 = mp3Files[randomIndex]
+            if (audioRef.current) {
+                audioRef.current.src = randomMp3
+                audioRef.current.play().then(() => {
+                    console.log('Audio played successfully')
+                })
+            }
+        } catch (error) {
+            console.error('Error in playRandomSound:', error)
+        }
+    }
+
     return (
         <div id="introduction" className="mb-16">
             <div className="text-left">
@@ -23,12 +63,14 @@ export const WhyWereHere = () => {
                                         </p>
                                     </div>
                                     <figure className="mb-0">
-                                        <StaticImage
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/team/james.png"
-                                            alt="James Hawkins"
-                                            className="w-14 h-14 rounded-full bg-yellow border-2 border-solid border-white"
-                                            placeholder="blurred"
-                                        />
+                                        <button onClick={playRandomJamesAudo}>
+                                            <StaticImage
+                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/team/james.png"
+                                                alt="James Hawkins"
+                                                className="w-14 h-14 rounded-full bg-yellow border-2 border-solid border-white cursor-pointer"
+                                                placeholder="blurred"
+                                            />
+                                        </button>
                                         <StaticImage
                                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/team/tim.png"
                                             alt="Tim Glaser"
@@ -111,6 +153,7 @@ export const WhyWereHere = () => {
                     </div>
                 </Structure.Section>
             </div>
+            <audio ref={audioRef}></audio>
         </div>
     )
 }

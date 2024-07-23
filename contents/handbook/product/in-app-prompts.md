@@ -28,13 +28,13 @@ In-app prompts are powered by JSON feature flags.
    }
    ```
 
-3. Add the cohort or user properties that you want to show the prompt to.
+3. Add the cohort or person properties that you want to show the prompt to.
    - If you want to show a prompt based on events, you should create a dynamic cohort based on the event, then export the cohort and use it to create a static feature flag.
-4. **Important** Add the release condition that the user property `${feature_flag_name}` **is not set**. This ensures that the prompt is only shown once.
+4. **Important** Add the release condition that the person property `${feature_flag_name}` **is not set**. This ensures that the prompt is only shown once.
 
 It will only show one prompt a day, no matter how many prompt feature flags are enabled.
 
-It's recommended to run the prompt for yourself first to make sure it works as expected. You can keep changing the text and refreshing. When you click one of the buttons, it won't show you the popup again. The easiest way to retest it is to change the feature flag name (make sure to keep the user property `${feature_flag_name}` up to date) and run this in your [javascript console](https://developer.chrome.com/docs/devtools/console/javascript/) `localStorage.removeItem("prompt-last-seen")`.
+It's recommended to run the prompt for yourself first to make sure it works as expected. You can keep changing the text and refreshing. When you click one of the buttons, it won't show you the popup again. The easiest way to retest it is to change the feature flag name (make sure to keep the person property `${feature_flag_name}` up to date) and run this in your [javascript console](https://developer.chrome.com/docs/devtools/console/javascript/) `localStorage.removeItem("prompt-last-seen")`.
 
 ## Examples
 

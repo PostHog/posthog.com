@@ -57,7 +57,7 @@ This is exactly what Yakko did with sampling. He picked one insight (lifecycle w
 
 ![Lifecycle](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/measuring-feature-success/lifecycle.png)
 
-A feature is successful at this stage if it solves the issue, isn’t broken, and can scale to millions of events and users. Since we use PostHog at PostHog, this often means using it ourselves (aka dogfooding). Feature flags let us roll out or roll back quickly if needed.
+A feature is successful at this stage if it solves the issue, isn’t broken, and can scale to millions of events and users. Since we use PostHog at PostHog, this often means using it ourselves (aka [dogfooding](/product-engineers/dogfooding)). Feature flags let us roll out or roll back quickly if needed.
 
 ## Step 3: Beta testing and gathering feedback
 
@@ -136,3 +136,5 @@ We know that every team, inside and outside of PostHog, has different ways of ev
 - [The 80/20 of early-stage startup analytics](/blog/early-stage-analytics)
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
 - [Master Feature Flags: Best practice, tips and examples](/blog/feature-flag-best-practices)
+
+<NewsletterForm />

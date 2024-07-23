@@ -37,12 +37,13 @@ HogQL expressions enable you to directly access, modify, and aggregate data in m
 HogQL expressions can access data like:
 
 - event properties (`properties`)
-- [person properties](/docs/product-analytics/user-properties) (`person.properties`)
+- [person properties](/docs/product-analytics/person-properties) (`person.properties`)
 - `event`
 - `elements_chain` (from [autocapture](/tutorials/hogql-autocapture))
 - `timestamp`
 - `distinct_id`
 - `person_id`
+- When [joined](/docs/data-warehouse/join), data warehouse source properties
 
 Properties can be accessed with dot notation like `person.properties.$initial_browser` which also works for nested or JSON properties. They can also be accessed with bracket notation like `properties['$feature/cool-flag']`.
 
@@ -56,7 +57,7 @@ Types (and names) for the accessible data can be found in the [database](https:/
 
 - `STRING` (default)
 - `JSON` (accessible with dot or bracket notation)
-- `DATETIME`(in `ISO-8601`, [read more in our data docs](/docs/data/timestamps))
+- `DATETIME`(in `ISO 8601`, [read more in our data docs](/docs/data/timestamps))
 - `INTEGER`
 - `NUMERIC`(AKA float)
 - `BOOLEAN`

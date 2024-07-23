@@ -63,5 +63,5 @@ When I wanted to get Tim to join me on the PostHog adventure, my personal goal w
 
 This happens when you focus on building a successful company, not on bargaining with each other.
 
-_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+<NewsletterForm />
 

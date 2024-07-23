@@ -25,7 +25,7 @@ This way the transformation can, in most cases, infer the IP address without any
 ## Installation
 
 1. Log in to your PostHog instance
-2. Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
+2. Click "[Data pipeline](https://us.posthog.com/pipeline)" in the left sidebar
 3. Search for 'GeoIP'
 4. Select the GeoIP transformation, press 'Install' and follow the on-screen instructions
 
@@ -60,6 +60,12 @@ If you'd like this transformation to skip over an event and not add the above pr
 set property `$geoip_disable` to `true` on that event.
 
 ## FAQ
+
+### How can I still get some geo data, but with less precision?
+
+We use the Maxmind GeoIP2 City database, in which latitude and longitude are set to the detected city's geographical center. The data is not more precise than the city name field.
+
+If having city precision is too much, then you can use use the [property filter transformation](/docs/cdp/property-filter). The GeoIP transformation adds event and person properties (`$set` and `$set_once`), so you'll want to filter those out as well. For example, if you are trying to filter `$geoip_latitude`, make sure to include `$geoip_latitude` for the event property as well as`$set.$geoip_latitude` and `$set_once.$geoip_latitude` for the person properties to the property filter configuration.
 
 ### Is the source code for this transformation available?
 

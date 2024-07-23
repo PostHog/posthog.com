@@ -30,6 +30,45 @@ Every batch export exports data to a destination using the configuration paramet
 
 Support for new destinations will be added based on demand. You can follow development of new destinations [here](https://github.com/PostHog/posthog/issues/15997).
 
+## Models
+
+Batch exports can export different data models, like the events and persons model. Each data model represents a different view into the PostHog database, complete with their own schemas and semantic meanings.
+
+### Events model
+
+The events model is the default model for all batch exports, and it represents a view into the events received by PostHog.
+
+For historical reasons, this model can vary depending on the destination, so we suggest checking each destinations documentation for the precise composition of the model's schema:
+
+* [BigQuery](/docs/cdp/batch-exports/bigquery)
+* [S3](/docs/cdp/batch-exports/s3)
+* [Snowflake](/docs/cdp/batch-exports/snowflake)
+* [Postgres](/docs/cdp/batch-exports/postgres)
+* [Redshift](/docs/cdp/batch-exports/redshift)
+
+However, there are some properties of the model that apply to all destinations:
+* This model is **immutable** with all fields set once the event is ingested.
+* Each event is **uniquely** identified by a UUID that can be used for de-duplication.
+
+### Persons model
+
+The persons model represents a view into how PostHog identifies unique [persons](/docs/data/persons) assigned to each event.
+
+Initially, PostHog events include an unidentified or anonymous `distinct_id` with each event, as we don't know who the user is until they go through your log-in steps. After a user logs in and you call `identify` with their corresponding `distinct_id`, PostHog has to group all previous events that had an anonymous `distinct_id` with the new events coming after the call to `identify`. This grouping is done under the an entity known as a person, and you can get access these groupings by exporting the persons model. In a few words, the persons model is a mapping of all `distinct_id`s in events, both anonymous and identified, to a single ID per unique user as determined by your calls to `identify`.
+
+In contrast to the events model, the persons model is **mutable**: As users of PostHog may `identify` and merge new and old persons all the time, the persons model has to change with every operation. This rate of change depends on how frequently you call `identify` or merge persons together.
+
+Being a mutable model has implications for the export process: PostHog must merge incoming data with existing data to find any rows that need updating, as incoming data could be both completely new persons and updates to old persons. This merging process is different depending on each destination, but it is likely to require a higher level of access to your destination in comparison to exporting the immutable events model, which only executes append operations.
+
+The intended use-case for this model is to be exported alongside the events model, creating one batch export for each. The persons model can then be joined together with the events model to assign events to their unique persons.
+
+More information, including any additional necessary permissions, schema information, and examples, can be found in each of the destinations documentation:
+
+* [BigQuery](/docs/cdp/batch-exports/bigquery)
+* [Snowflake](/docs/cdp/batch-exports/snowflake)
+* [Postgres](/docs/cdp/batch-exports/postgres)
+* [Redshift](/docs/cdp/batch-exports/redshift)
+
 ## Batch runs
 
 A batch export is executed in batch runs depending on the configured frequency. For example, an hourly batch export starts a run on every hour. The data processed by every run has an **upper bound** given by the time in which the run is scheduled to start, and a **lower bound** that results from subtracting the frequency to the batch run's scheduled start time.
@@ -49,7 +88,6 @@ Each run has:
 2. The exported data start and end intervals.
 3. When the run actually started.
 4. The option of retrying a specific run.
-
 
 ## Exporting historical data
 
@@ -117,12 +155,3 @@ sequenceDiagram
 
 - Some features of the old export destinations are still being ported over.
   - This includes logs and error reporting.
- 
-## How can I export person profiles?
-
-It's not currently possible to export person profiles and properties, but it is on the roadmap:
-
-- [Person data export](https://github.com/PostHog/posthog/issues/20339).
-- Export person properties on events (`event.person_properties`) with [custom schemas](https://github.com/PostHog/posthog/issues/20367).
-
-> **Note:** Our implementation of person IDs on events (`event.person_id`) is eventually consistent, so its not exportable.

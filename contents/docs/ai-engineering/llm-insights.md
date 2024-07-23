@@ -19,11 +19,11 @@ Currently, we support integrations for the following platforms:
 
 - [Langfuse](https://langfuse.com) ([instructions](/docs/ai-engineering/langfuse-posthog))
 - [Helicone](https://www.helicone.ai/) ([instructions](/docs/ai-engineering/helicone-posthog))
-
+- [Traceloop](https://www.traceloop.com/) ([instructions](/docs/ai-engineering/traceloop-posthog))
 
 ## Dashboard templates
 
-Once you've installed an integration, [dashboard templates](/docs/product-analytics/dashboards) help you quickly set up relevant insights. Here examples for [Langfuse](https://eu.posthog.com/shared/HPOaK5zNVkP062nQJQJoooXe61l15w) and [Helicone](https://us.posthog.com/shared/NueyVUHeGCGnrQaM-eRO09HzHFwcCw).
+Once you've installed an integration, [dashboard templates](/docs/product-analytics/dashboards) help you quickly set up relevant insights. Here are examples for [Langfuse](https://eu.posthog.com/shared/HPOaK5zNVkP062nQJQJoooXe61l15w), [Helicone](https://us.posthog.com/shared/6_Qa74au0RhxERZ3wW9g87oxWlFxNA), and [Traceloop](https://us.posthog.com/shared/tpX9kUd5BbGkdjxQE8YhCskNuYA7Jw).
 
 To create your own dashboard from a template:
 

@@ -13,35 +13,83 @@ availability:
     className="rounded shadow-xl"
 />
 
-> **Note:** To use heatmaps, [autocapture](/docs/data/autocapture) must be enabled.
+Heatmaps shows you how users are interacting with elements on your website or app. 
 
-Heatmaps is a feature in the toolbar that shows you how users are interacting with elements on your website or app. 
+To start, ensure you enable the capturing of heatmap data in [your project settings](https://us.posthog.com/settings/project-autocapture#heatmaps) or with the `enable_heatmaps` key in the [JavaScript Web SDK initialization config](/docs/libraries/js#config). Heatmap data is captured along with other events, so it doesn't contribute to your bill, but the clickmap requires autocapture and the scrollmap requires pageleave events. 
 
 To view your heatmaps, click the heatmap icon on the toolbar.
 
 ![Launch toolbar heatmaps](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/toolbar/toolbar-heatmap.png)
 
-With the heatmap on, clickable elements on your website will have a red overlay with numbers on them. Here's an example of our website with the heatmap enabled:
+There are three kinds of heatmaps in the toolbar:
 
-![An example from the PostHog website showing the heatmap highlighting a number of page elements. Some showing a count of clicks and one also showing a rage-click](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/toolbar/posthog-heatmap-example.png)
+1. **Heatmap:** which captures mouse movements, clicks, and rageclicks and shows you a heatmap of these interactions.
 
-Each number in the top right box of each element represents the total number of clicks in the last 7 days. The number in the top left of the element is the number of rage-clicks.
+2. **Scrollmap:** which shows you how far users are scrolling down your page.
+
+3. **Clickmap:** AKA the OG heatmap. It uses autocapture to show you the elements users are clicking on your website.
+
+## Heatmaps
+
+The heatmap shows where on the page users are clicking, rageclicking, or moving their mouse. Unlike the clickmap, the user doesn't need to click on a clickable element, so you can see where users are trying to click but can't. 
+
+There are multiple options to configure your heatmap.
+
+![Heatmap settings](https://res.cloudinary.com/dmukukwp6/image/upload/v1716592885/posthog.com/contents/docs/toolbar/settings.png)
+
+### Aggregation
+
+The heatmap can show a count of events or of unique users. The default is to show the count of events.
+
+> **Note:** The unique users count is based on the user's distinct ID, so if a user is using multiple devices or browsers, they are counted as multiple users. This is so that the heatmap can be much faster to load. The clickmap can be used when you want exact counts.
+
+### Viewport accuracy
+
+You can set a tolerance for the viewport accuracy. This enables you to view the heatmap on a different sized screen from your users. You can reduce viewport accuracy to include events from different sized screens. 
+
+This means that you get more data but the position might not be as accurate. 
+
+![Viewport accuracy](https://res.cloudinary.com/dmukukwp6/image/upload/v1716592899/posthog.com/contents/docs/toolbar/accuracy.png)
+
+### Color palette
+
+The default palette for the heatmap is a gradient from red to green. This won't be visible for all users or against all site color themes. You can change the color palette to a different gradient or to a single color.
+
+### Fixed positioning
+
+Some clicks are on elements that don't move when the page scrolls. Our JavaScript SDK attempts to detect fixed elements, such as headers or modals, and show those heatmap areas, ignoring the scroll value. 
+
+You can change fixed positioning so these clicks move when scrolled or hide them entirely.
+
+## Scrollmaps
+
+The scrollmap uses data from pageview and pageleave events to show how far down the page users are scrolling. 
+
+![Scrollmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1716593249/posthog.com/contents/docs/toolbar/scrollmap.png)
+
+## Clickmaps
+
+With the clickmap, clickable elements on your website will have a red overlay with numbers on them. Here's an example of our website with the heatmap enabled:
+
+![An example from the PostHog website showing the click map highlighting a number of page elements. Some showing a count of clicks and one also showing a rageclick](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/toolbar/posthog-heatmap-example.png)
+
+Each number in the top right box of each element represents the total number of clicks in the last 7 days. The number in the top left of the element is the number of rageclicks.
 
 Numbers at the bottom or top of the screen indicate that there are more elements that are not currently being displayed on the page.
 
-## How to create an action from a heatmap
+### How to create an action from the clickmap
 
-Once you have enabled the heatmap, click on any element. You will then be able to create an [action](/docs/data/actions) from it.
+With the clickmap enabled, click on any element. This opens a menu where you can then create an [action](/docs/data/actions) from it.
 
-![How to create an action using heatmaps](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-create-action.mp4)
+![How to create an action using the clickmap](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-create-action.mp4)
 
-## Loading more data
+### Loading more data
 
-If you have many events, you may need to load more data to see everything on the heatmap. To do this, click on the load more button in the heatmap menu.
+If you have many events, you may need to load more data to see everything on the clickmap. To do this, click on the load more button in the clickmap menu.
 
-![How to load more data in the heatmap menu](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-load-more.png)
+![How to load more data in the clickmap menu](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-load-more.png)
 
-## Matching links by their target URL
+### Matching links by their target URL
 
 By default, the toolbar matches clicks using the elements on the page, and not by their target URLs (i.e., `href` attribute). This is fine for most scenarios where you have static elements with the same target URL. However, this may not be ideal for dynamic lists that have different target URLs depending on the underlying data.
 
@@ -49,19 +97,19 @@ For example, consider the following screenshot of a list of elements for "Newly 
 
 ![the list of recent insights showing several clicks](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-target-url-off.png)
 
-The "Newly seen persons" shows the most recent list of persons using the app and is constantly being updated as new users use the app. In the heatmap, we see 106 clicks for the **first element**. This doesn't mean that the this specific person in the list received 106 clicks, but rather that the first element in the list received 106 elements, regardless of which person was shown.
+The "Newly seen persons" shows the most recent list of persons using the app and is constantly being updated as new users use the app. In the clickmap, we see 106 clicks for the **first element**. This doesn't mean that the this specific person in the list received 106 clicks, but rather that the first element in the list received 106 clicks, regardless of which person was shown.
 
-If we were more interested in the number of clicks each specific person in the list received (regardless of which position they appeared in), then we can turn on "Match links by their target URL" in the heatmap menu. This matches clicks to elements based on their target URLs.
+If we were interested in the number of clicks each specific person in the list received (regardless of which position they appeared in), then we can turn on "Match links by their target URL" in the clickmap menu. This matches clicks to elements based on their target URLs.
 
-![How to enable link matching in the heatmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-match-link.png)
+![How to enable link matching in the clickmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-match-link.png)
 
 For example, if we enable this for our previous example, we see much fewer clicks. This is because we are now seeing clicks on each specific user:
 
-![How to enable link matching in the heatmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-target-url-on.png)
+![How to enable link matching in the clickmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/heatmaps-target-url-on.png)
 
-## Combining heatmaps from similar pages using wildcards
+## Combining maps from similar pages using wildcards
 
-If you have similar pages that are mostly the same but have dynamic content based on an identifier in the URL (e.g., product pages on an ecommerce site), you can search and display their combined heatmap using wildcards `*` in the heatmap menu.
+If you have similar pages that have dynamic content based on an identifier in the URL (e.g., product pages on an ecommerce site), you can combine their heatmap data using wildcards `*` in the heatmap menu.
 
 For example, if the product pages on an ecommerce site use a URL format of `https://yourwebsite.com/products/product-id`, you can use the wildcard URL `https://yourwebsite.com/products/*` to display a combined heatmap from all the product pages.
 

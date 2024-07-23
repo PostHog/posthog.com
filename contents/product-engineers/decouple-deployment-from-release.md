@@ -54,7 +54,7 @@ We deploy many changes behind [feature flags](/feature-flags) and release them a
 
 ![PostHog's flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/decouple-deployment-from-release/flags.png)
 
-These flags help us dogfood features, roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed 5 new features without releasing them.
+These flags help us [dogfood features](/product-engineers/dogfooding), roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed 5 new features without releasing them.
 
 We also dark launch features using feature flags. This means they are available in production but hidden from users. For example, they might only be accessible through the API, don’t have navigation links, or only have limited options shown to users.
 
@@ -97,3 +97,5 @@ Decoupling deployment from release is an ever-moving goal post. What it means is
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [What you can learn from how GitHub and GitLab use feature flags](/blog/github-gitlab-feature-flags)
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
+
+<NewsletterForm />

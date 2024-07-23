@@ -89,8 +89,6 @@ There are lots of self-service product analytics platforms, but naturally we thi
 
 PostHog is also unique in that it can be self-hosted on your organization’s existing infrastructure — which means user data stays on your system so that it is safer and more compliant with privacy regulations. This isn’t possible with other self-service analytics platforms, such as Mixpanel or Amplitude, which can be competitive but require you to share data with their systems. 
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
-
-<ArrayCTA />
+<NewsletterForm />
 
 

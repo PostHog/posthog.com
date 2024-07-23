@@ -12,7 +12,7 @@ This is an overview for what you should actually be doing with a customer at eac
 
 **1. People contact us**
 
-Most people fill in the [contact sales](/contact-sales) form via the website. Some email sales@posthog.com or raise a Zendesk ticket.
+Most people fill in the [form](/talk-to-a-human) via the website. Some email sales@posthog.com or open a Zendesk ticket.
 
 **2. We assign and qualify**
 
@@ -70,7 +70,9 @@ Set yourself a reminder for halfway through their evaluation period to look at t
 
 **5. Security review**
 
-Most customers don't need this beyond sharing our existing documentation. This step often occurs in parallel with product evaluation.  
+Most customers don't need this beyond sharing our existing documentation. This step often occurs in parallel with product evaluation.
+
+If the customer requires a vendor questionnaire or security questionnaire then it's best for the AE involved to try and fill it out. If a company reaches out initially with this request, it's often best to try and understand if the customer has an intenton to pay or at least grow into a paying customer before investing a lot of time filling it out. If there are any questions that are unclear post the specific question in #team-people-and-ops channel.  
 
 If you need help with anything data privacy or [MSA-related](/handbook/growth/sales/contracts), ping Fraser for help. 
 

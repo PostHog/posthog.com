@@ -38,7 +38,7 @@ export const splitUsersDark = "https://res.cloudinary.com/dmukukwp6/video/upload
 
 <JSIdentifyReset/>
 
-### 4. Setting user properties
+### 4. Person profiles and properties
 
 <JSIdentifySetUserProperties/>
 
@@ -187,6 +187,21 @@ You can view whether a user can be merged into another user using `alias` when [
 />
 
 > Note that when calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they will be merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
+
+## Processing person profiles
+
+If your `person_profile` config option is set to `identified_only`, PostHog creates a person profile once you call one of the following functions or methods:
+
+- `identify`
+- `alias`
+- `setPersonProperties`
+- `setPersonPropertiesForFlags`
+- `group`
+- `setGroupPropertiesForFlags`
+
+Once you create a person profile for a user distinct ID, all events for that distinct ID count as ones with person profiles.
+
+If your `person_profile` config option is set to `always`, PostHog creates a person profile for every user on your site, whether or not they have been officially identified.
 
 ## Troubleshooting and FAQs
 

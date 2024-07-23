@@ -12,6 +12,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import PostLayout from 'components/PostLayout'
 import CommunityQuestions from 'components/CommunityQuestions'
+import { MDXProvider } from '@mdx-js/react'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { shortcodes } from '../mdxGlobalComponents'
+import { MdxCodeBlock } from 'components/CodeBlock'
+import { InlineCode } from 'components/InlineCode'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -482,10 +487,17 @@ const pathDescription = (item) => {
 
 export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, breadcrumbBase, tableOfContents } }) {
     const {
-        components: { components },
+        apiComponents: { components: apiComponents },
+        allMdx,
     } = data
     const name = humanReadableName(data.data.name)
     const paths = {}
+    const components = {
+        inlineCode: InlineCode,
+        pre: MdxCodeBlock,
+        MultiLanguage: MdxCodeBlock,
+        ...shortcodes,
+    }
     // Filter PUT as it's basically the same as PATCH
     const items = JSON.parse(data.data.items).filter((item) => item.httpVerb !== 'put')
     items.map((item) => {
@@ -494,7 +506,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
         }
         paths[item.path][item.httpVerb] = item.operationSpec
     })
-    const objects = JSON.parse(components)
+    const objects = JSON.parse(apiComponents)
 
     const [exampleLanguage, setExampleLanguageState] = useState()
 
@@ -537,6 +549,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
 
                 {items.map((item) => {
                     item = item.operationSpec
+                    const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
 
                     return (
                         <div className="mt-8" key={item.operationId}>
@@ -546,6 +559,13 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                             >
                                 <div className="space-y-6">
                                     <h2>{generateName(item)}</h2>
+                                    {mdxNode?.body && (
+                                        <div className="article-content">
+                                            <MDXProvider components={components}>
+                                                <MDXRenderer>{mdxNode.body}</MDXRenderer>
+                                            </MDXProvider>
+                                        </div>
+                                    )}
                                     <ReactMarkdown>
                                         {!item.description || item.description === items[0].operationSpec?.description
                                             ? pathDescription(item)
@@ -558,7 +578,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
 
                                     <ResponseBody item={item} objects={objects} />
                                 </div>
-                                <div className="lg:sticky top-0">
+                                <div className="lg:sticky top-[108px]">
                                     <h4>Request</h4>
                                     <RequestExample
                                         name={name}
@@ -607,7 +627,13 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
 }
 
 export const query = graphql`
-    query ApiEndpoint($id: String!) {
+    query ApiEndpoint($id: String!, $regex: String!) {
+        allMdx(filter: { fields: { slug: { regex: $regex } } }) {
+            nodes {
+                slug
+                body
+            }
+        }
         data: apiEndpoint(id: { eq: $id }) {
             id
             internal {
@@ -620,7 +646,7 @@ export const query = graphql`
             name
             url
         }
-        components: apiComponents {
+        apiComponents: apiComponents {
             components
         }
     }

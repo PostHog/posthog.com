@@ -69,4 +69,4 @@ Dissent fuels innovation, but a "challenge everything" culture can "quickly meta
 
 **Read:** [Challenging the status quo at work](https://workweek.com/2022/11/28/challenging-the-status-quo-at-work/) by Hebba Youseff
 
-> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
+<NewsletterForm />

@@ -29,12 +29,15 @@ export const load = async () => {
   if (browser) {
     posthog.init(
       '<ph_project_api_key>',
-      { api_host: '<ph_client_api_host>' }
+      { api_host: '<ph_client_api_host>', person_profiles: 'identified_only' }
     )
   }
   return
 };
 ```
+
+> ❗️ If you intend on using Session Replay with a server side rendered Svelte app
+> ensure that your [asset URLs are configured to be relative](https://posthog.com/docs/session-replay/troubleshooting#ensure-assets-are-imported-from-the-base-URL-in-Svelte).
 
 ### Tracking pageviews and pageleaves
 
@@ -72,6 +75,7 @@ export const load = async () => {
       '<ph_project_api_key>',
       {
         api_host:'<ph_client_api_host>',
+        person_profiles: 'identified_only',
         capture_pageview: false,
         capture_pageleave: false
       }
@@ -108,6 +112,20 @@ export async function load() {
 ```
 
 > **Note:** Make sure to always call `posthog.shutdown()` after capturing events from the server-side. PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
+
+## Configuring session replay for server-side rendered apps
+
+By default, [Svelte uses relative asset paths](https://kit.svelte.dev/docs/configuration) during server-side rending. This causes issues with PostHog's ability to record sessions.
+
+To fix this, set the config to not use relative paths in `svelte.config.js`:
+
+```js
+ kit: {
+     paths: {
+         relative: false,
+     },
+ },
+```
 
 ## Next steps
 

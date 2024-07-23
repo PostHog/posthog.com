@@ -29,7 +29,7 @@ This transformation extracts the following properties from the provided `$userag
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'User Agent Populator'.
 3. [Configure](#configure) the transformation by clicking on the settings icon.
 4. Click the toggle to enable the transformation.

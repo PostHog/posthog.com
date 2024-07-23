@@ -37,8 +37,6 @@ To start, it is useful to understand who growth engineers are as people. When co
 
 At PostHog, we find these characteristics often arise in former technical founders, and that means our growth team has always been entirely made up of them. Founders understand what it takes to build a product, have a combination of engineering and business skills, and are willing to figure out anything to drive growth.
 
-<NewsletterForm />
-
 ## What skills does a growth engineer need?
 
 Growth engineers are responsible for three key tasks:
@@ -80,6 +78,8 @@ If all this sounds like a unicorn, you aren’t wrong. This is again why we find
 ![Growth engineers' power](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/what-is-a-growth-engineer/thanos.png)
 
 > **Growth engineers vs product engineers:** Both build new features, are opinionated, experiment, and take ownership. The difference is their focus. [Product engineers](/blog/what-is-a-product-engineer) focus on building products for specific users. Growth engineers focus on projects that drive growth. This could be a feature enabling product teams, a service supporting marketing, or an optimization to a cross-product flow. They are less constrained to a specific product.
+
+<NewsletterForm />
 
 ## What do growth engineers actually work on?
 
