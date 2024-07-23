@@ -135,7 +135,7 @@ Individual software is down to your personal preference, and we encourage you to
 
 There are other tools some team members choose to use individually. In those cases, as they become more widely adopted in the company, it makes sense to have a company account.
 
-* Loom - ask for access in <PrivateLink url="[https://path/to/private/link](https://posthog.slack.com/archives/C017WDX3BFZ)">#team-people-and-ops</PrivateLink> and someone will add you as a Creator Lite which allows you to record up to 25 videos/mo at 5 minutes in length. Should you need a full Creator account (unlimited videos, advanced features), ask <TeamMember name="Simon Fisher" />.
+* Loom - ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink> and someone will add you as a Creator Lite which allows you to record up to 25 videos/mo at 5 minutes in length. Should you need a full Creator account (unlimited videos, advanced features), ask <TeamMember name="Simon Fisher" />.
 
 ### IDEs
 
