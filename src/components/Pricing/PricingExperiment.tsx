@@ -24,7 +24,7 @@ import Tabbed from './PricingCalculator/Tabbed'
 import { usePlatform } from './Platform/usePlatform'
 import { motion } from 'framer-motion'
 import { PlanColumns } from './Test/PlanColumns'
-import { FreePlanContent, PaidPlanContent } from './Test/PlanContent'
+import PlanContent from './Test/PlanContent'
 import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, SectionSidebar } from './Test/Sections'
 import { PaidPricing } from './Test/PaidPricing'
 import { Addons } from './Test/Addons'
@@ -890,19 +890,10 @@ const PricingExperiment = ({
                         <aside className="col-span-5 lgxl:col-span-4">
                             <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6 h-full">
                                 <div className="flex flex-col justify-between h-full">
-                                    {activePlan === 'free' ? (
-                                        <FreePlanContent
-                                            onFreeTierClick={() => {
-                                                setAnimateFreeTiers(true)
-                                            }}
-                                        />
-                                    ) : (
-                                        <PaidPlanContent
-                                            onFreeTierClick={() => {
-                                                setAnimateFreeTiers(true)
-                                            }}
-                                        />
-                                    )}
+                                    <PlanContent
+                                        activePlan={activePlan}
+                                        onFreeTierClick={() => setAnimateFreeTiers(true)}
+                                    />
                                 </div>
                             </div>
                         </aside>
