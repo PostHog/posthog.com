@@ -11,6 +11,7 @@ import Tooltip from 'components/Tooltip'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import { Addons } from '../Tabbed'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const getTotalAnalyticsVolume = (analyticsData: any) => {
     return Object.keys(analyticsData).reduce((acc, key) => acc + analyticsData[key].volume, 0)
@@ -87,178 +88,190 @@ const Modal = ({ onClose, isVisible }) => {
                 }`}
                 onClick={() => onClose()}
             ></div>
-            <div
-                className={`max-w-full z-[1000001] fixed left-4 md:left-8 right-4 md:right-8 rounded-tl md:rounded-tl-lg rounded-tr md:rounded-tr-lg flex flex-col bg-white dark:bg-accent-dark transition-all duration-300 ease-out
-          ${isVisible ? '!opacity-100 top-4' : 'opacity-0 top-[100vh]'}`}
-            >
-                <div className="w-full h-fit flex justify-between p-4 border-b border-light dark:border-dark">
-                    <span className="font-bold text-xl">Event types, explained</span>
+            <AnimatePresence>
+                {isVisible && (
+                    <motion.div
+                        initial={{ translateY: '100%', opacity: 0 }}
+                        animate={{ translateY: '0%', opacity: 1, transition: { type: 'tween', duration: 0.1 } }}
+                        exit={{ translateY: '100%', opacity: 0, transition: { type: 'tween', duration: 0.1 } }}
+                        className={`max-w-full z-[1000001] fixed left-4 md:left-8 right-4 md:right-8 rounded-tl md:rounded-tl-lg rounded-tr md:rounded-tr-lg flex flex-col bg-white dark:bg-accent-dark transition-all duration-300 ease-out bottom-0 border border-border dark:border-dark`}
+                    >
+                        <div className="w-full h-fit flex justify-between p-4 border-b border-light dark:border-dark">
+                            <span className="font-bold text-xl">Event types, explained</span>
 
-                    <button onClick={() => onClose()}>
-                        <IconX className="size-5" />
-                    </button>
-                </div>
+                            <button onClick={() => onClose()}>
+                                <IconX className="size-5" />
+                            </button>
+                        </div>
 
-                <div className="max-h-[calc(100vh_-_1rem_-_60px_-_122px)] md:max-h-[calc(100vh_-_1rem_-_60px)] overflow-y-auto px-4 py-4 md:pb-8">
-                    {/* <h3 className="mb-2 text-lg">Save money if you don't need user properties</h3>
+                        <div className="max-h-[calc(100vh_-_1rem_-_60px_-_122px)] md:max-h-[calc(100vh_-_1rem_-_60px)] overflow-y-auto px-4 py-4 md:pb-8">
+                            {/* <h3 className="mb-2 text-lg">Save money if you don't need user properties</h3>
                     <p className="font-semibold opacity-70 text-[15px]">(Custom user properties more expensive to process)</p>
                     <p className="mb-2">The more data we store about users, the higher the cost. So the less data you need, the more you can save.</p> */}
 
-                    <p className="mb-8 text-[15px]">
-                        Events are billed at different rates based on volume and if you choose to send custom user
-                        properties with the event.
-                    </p>
-
-                    <section className="grid md:grid-cols-5 gap-6 md:gap-12 pb-12">
-                        <div className="col-span-1 md:col-span-2 md:flex justify-center">
-                            <h3 className="mb-4 md:hidden">Anonymous events</h3>
-                            <div className="max-w-md">
-                                <StaticImage
-                                    src="./event-anonymous.png"
-                                    alt="Anonymous event example"
-                                    className=""
-                                    placeholder="blurred"
-                                />
-                            </div>
-                        </div>
-                        <div className="col-span-1 md:col-span-3 max-w-xl">
-                            <h3 className="hidden md:block mb-1">Anonymous events</h3>
-                            <p className="opacity-70 mb-3">
-                                No individually-identifiable info, analyzed in aggregate, don't use person profiles
-                            </p>
-                            <p className="mb-2">
-                                By default, events are anonymous, meaning they don't have any personally-identifiable
-                                information attached to them.
-                            </p>
-                            <p className="mb-2">
-                                They come with info about the browser and device, visitor's location, and any UTM
-                                parameters.
+                            <p className="mb-8 text-[15px]">
+                                Events are billed at different rates based on volume and if you choose to send custom
+                                user properties with the event.
                             </p>
 
-                            <h4 className="text-base">With anonymous events, you can:</h4>
-                            <ul className="list-none pl-0 mb-6 space-y-1">
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    See a Google Analytics-style dashboard
-                                </li>
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    Access properties like UTMs, location, referrer, page views
-                                </li>
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    <p className="mb-0">
-                                        Create{' '}
-                                        <strong>
-                                            <em>aggregate</em>
-                                        </strong>{' '}
-                                        insights in <strong>Product analytics</strong>
+                            <section className="grid md:grid-cols-5 gap-6 md:gap-12 pb-12">
+                                <div className="col-span-1 md:col-span-2 md:flex justify-center">
+                                    <h3 className="mb-4 md:hidden">Anonymous events</h3>
+                                    <div className="max-w-md">
+                                        <StaticImage
+                                            src="./event-anonymous.png"
+                                            alt="Anonymous event example"
+                                            className=""
+                                            placeholder="blurred"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-span-1 md:col-span-3 max-w-xl">
+                                    <h3 className="hidden md:block mb-1">Anonymous events</h3>
+                                    <p className="opacity-70 mb-3">
+                                        No individually-identifiable info, analyzed in aggregate, don't use person
+                                        profiles
                                     </p>
-                                    <ul className="[&_li]:text-sm opacity-70 pl-4 pt-1">
-                                        <li>How many times users click an element on a page</li>
-                                        <li>Group visitors by device type or location</li>
-                                        <li>Filter to interactions on a specific page</li>
-                                        <li>Track anonymous users across sessions</li>
-                                    </ul>
-                                </li>
-                            </ul>
-
-                            <p className="m-0 text-sm opacity-70">Pricing starts at </p>
-                            <p className="m-0">
-                                <strong>$0.00005</strong>
-                                <span className="opacity-70 text-sm">/event</span>
-                            </p>
-                            <p className="text-green m-0 text-sm font-semibold">First 1 million events/mo free</p>
-                        </div>
-                    </section>
-
-                    <section className="grid md:grid-cols-5 gap-6 md:gap-12 pb-4">
-                        <div className="col-span-1 md:col-span-2 md:flex justify-center">
-                            <h3 className="mb-4 md:hidden">Identified events</h3>
-                            <div className="max-w-md">
-                                <StaticImage
-                                    src="./event-identified.png"
-                                    alt="Identified event example"
-                                    placeholder="blurred"
-                                />
-                            </div>
-                        </div>
-                        <div className="col-span-1 md:col-span-3 max-w-xl">
-                            <h3 className="hidden md:block mb-1">Identified events</h3>
-                            <p className="opacity-70 mb-3">
-                                Track usage of specific, logged in users by using{' '}
-                                <Link to="/docs/data/persons" external>
-                                    person profiles
-                                </Link>
-                                .
-                            </p>
-                            <p className="mb-2">
-                                Indentify users by their email address or other unique identifier, and attach custom
-                                properties to their person profiles.
-                            </p>
-
-                            <h4 className="text-base">In addition to anonymous event capabilities, you can:</h4>
-                            <ul className="list-none pl-0 mb-6 space-y-1">
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    <p className="mb-0">Merge anonymous users with their eventual identified user</p>
-                                    <ul className="[&_li]:text-sm opacity-70 pl-2 pt-1 list-none">
-                                        <li>
-                                            Like when they sign up for your product or use different devices - enables
-                                            analyzing the user's path
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    <p className="mb-0">Store custom properties on users</p>
-                                    <ul className="[&_li]:text-sm opacity-70 pl-2 pt-1 list-none">
-                                        <li>
-                                            Use these properties in cohorts, session replay, experiments, and feature
-                                            flags
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li className="relative pl-8">
-                                    <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
-                                    <p className="mb-0">
-                                        Create{' '}
-                                        <strong>
-                                            <em>user-specific</em>
-                                        </strong>{' '}
-                                        insights in <strong>Product analytics</strong>
+                                    <p className="mb-2">
+                                        By default, events are anonymous, meaning they don't have any
+                                        personally-identifiable information attached to them.
                                     </p>
-                                    <ul className="[&_li]:text-sm opacity-70 pl-4 pt-1">
-                                        <li>
-                                            How many times <em>specific users</em> click an element on a page
+                                    <p className="mb-2">
+                                        They come with info about the browser and device, visitor's location, and any
+                                        UTM parameters.
+                                    </p>
+
+                                    <h4 className="text-base">With anonymous events, you can:</h4>
+                                    <ul className="list-none pl-0 mb-6 space-y-1">
+                                        <li className="relative pl-8">
+                                            <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                            See a Google Analytics-style dashboard
                                         </li>
-                                        <li>
-                                            Group <em>cohorts of users</em> by device type, location, or property
+                                        <li className="relative pl-8">
+                                            <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                            Access properties like UTMs, location, referrer, page views
                                         </li>
-                                        <li>
-                                            Filter to interactions on a specific page <em>by specific users</em>
+                                        <li className="relative pl-8">
+                                            <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                            <p className="mb-0">
+                                                Create{' '}
+                                                <strong>
+                                                    <em>aggregate</em>
+                                                </strong>{' '}
+                                                insights in <strong>Product analytics</strong>
+                                            </p>
+                                            <ul className="[&_li]:text-sm opacity-70 pl-4 pt-1">
+                                                <li>How many times users click an element on a page</li>
+                                                <li>Group visitors by device type or location</li>
+                                                <li>Filter to interactions on a specific page</li>
+                                                <li>Track anonymous users across sessions</li>
+                                            </ul>
                                         </li>
                                     </ul>
-                                </li>
-                            </ul>
 
-                            <div className="flex gap-8">
-                                <div className="flex-1">
-                                    <p className="m-0 text-sm opacity-70">Pricing starts at</p>
+                                    <p className="m-0 text-sm opacity-70">Pricing starts at </p>
                                     <p className="m-0">
-                                        <strong>$0.000248</strong>
+                                        <strong>$0.00005</strong>
                                         <span className="opacity-70 text-sm">/event</span>
                                     </p>
                                     <p className="text-green m-0 text-sm font-semibold">
                                         First 1 million events/mo free
                                     </p>
                                 </div>
-                            </div>
+                            </section>
+
+                            <section className="grid md:grid-cols-5 gap-6 md:gap-12 pb-4">
+                                <div className="col-span-1 md:col-span-2 md:flex justify-center">
+                                    <h3 className="mb-4 md:hidden">Identified events</h3>
+                                    <div className="max-w-md">
+                                        <StaticImage
+                                            src="./event-identified.png"
+                                            alt="Identified event example"
+                                            placeholder="blurred"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-span-1 md:col-span-3 max-w-xl">
+                                    <h3 className="hidden md:block mb-1">Identified events</h3>
+                                    <p className="opacity-70 mb-3">
+                                        Track usage of specific, logged in users by using{' '}
+                                        <Link to="/docs/data/persons" external>
+                                            person profiles
+                                        </Link>
+                                        .
+                                    </p>
+                                    <p className="mb-2">
+                                        Indentify users by their email address or other unique identifier, and attach
+                                        custom properties to their person profiles.
+                                    </p>
+
+                                    <h4 className="text-base">In addition to anonymous event capabilities, you can:</h4>
+                                    <ul className="list-none pl-0 mb-6 space-y-1">
+                                        <li className="relative pl-8">
+                                            <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                            <p className="mb-0">
+                                                Merge anonymous users with their eventual identified user
+                                            </p>
+                                            <ul className="[&_li]:text-sm opacity-70 pl-2 pt-1 list-none">
+                                                <li>
+                                                    Like when they sign up for your product or use different devices -
+                                                    enables analyzing the user's path
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li className="relative pl-8">
+                                            <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                            <p className="mb-0">Store custom properties on users</p>
+                                            <ul className="[&_li]:text-sm opacity-70 pl-2 pt-1 list-none">
+                                                <li>
+                                                    Use these properties in cohorts, session replay, experiments, and
+                                                    feature flags
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li className="relative pl-8">
+                                            <IconCheck className="size-5 inline-block text-green absolute top-1 left-1" />
+                                            <p className="mb-0">
+                                                Create{' '}
+                                                <strong>
+                                                    <em>user-specific</em>
+                                                </strong>{' '}
+                                                insights in <strong>Product analytics</strong>
+                                            </p>
+                                            <ul className="[&_li]:text-sm opacity-70 pl-4 pt-1">
+                                                <li>
+                                                    How many times <em>specific users</em> click an element on a page
+                                                </li>
+                                                <li>
+                                                    Group <em>cohorts of users</em> by device type, location, or
+                                                    property
+                                                </li>
+                                                <li>
+                                                    Filter to interactions on a specific page <em>by specific users</em>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+                                    <div className="flex gap-8">
+                                        <div className="flex-1">
+                                            <p className="m-0 text-sm opacity-70">Pricing starts at</p>
+                                            <p className="m-0">
+                                                <strong>$0.000248</strong>
+                                                <span className="opacity-70 text-sm">/event</span>
+                                            </p>
+                                            <p className="text-green m-0 text-sm font-semibold">
+                                                First 1 million events/mo free
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
-                    </section>
-                </div>
-            </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     )
 }
@@ -450,6 +463,7 @@ export default function ProductAnalyticsTab({
         Object.keys(analyticsData).forEach((key) => setAnalyticsVolume(key, analyticsData[key].volume))
         const urlParams = new URLSearchParams(window.location.search)
         const volumes = qs.parse(urlParams.toString())
+        const explainEventTypes = urlParams.get('explain_event_types')
         if (volumes['product_analytics']?.types) {
             Object.keys(volumes['product_analytics'].types).forEach((subtype) => {
                 const volume = volumes['product_analytics'].types[subtype]?.volume
@@ -458,6 +472,7 @@ export default function ProductAnalyticsTab({
                 }
             })
         }
+        setModalOpen(explainEventTypes === 'true')
     }, [])
 
     return (
