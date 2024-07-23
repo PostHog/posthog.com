@@ -3,6 +3,7 @@ import { section } from './Sections'
 import * as Icons from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Accordion } from './PricingAccordion'
+import { Link as ScrollLink } from 'react-scroll'
 
 export const PaidPricing = () => {
     const [expanded, setExpanded] = useState(false)
@@ -42,9 +43,11 @@ export const PaidPricing = () => {
                             </li>
                         </ul>
 
-                        <CallToAction size="sm" type="secondary">
-                            Pricing calculator
-                        </CallToAction>
+                        <ScrollLink to="calculator" offset={-120} smooth className="inline-block mb-4">
+                            <CallToAction size="sm" type="secondary">
+                                Pricing calculator
+                            </CallToAction>
+                        </ScrollLink>
                     </div>
                 </div>
                 <div>

@@ -46,7 +46,7 @@ export const PaidPlanContent = ({ onFreeTierClick }) => {
             <p className="text-sm mt-2">
                 <ScrollLink
                     to="calculator"
-                    offset={-108}
+                    offset={-120}
                     smooth
                     className="text-red dark:text-yellow font-semibold text-[15px] cursor-pointer"
                 >

@@ -85,7 +85,7 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
                             <div className={isOpen ? 'size-6' : 'size-5'}>{<Icon className={`text-${color}`} />}</div>
                             <span
                                 className={`transition-all leading-tight font-bold ${
-                                    isOpen ? 'text-base md:text-[17px]' : 'text-[15px] md:text-base'
+                                    isOpen ? 'text-base md:text-base' : 'text-sm md:text-base'
                                 }`}
                             >
                                 {name}
@@ -94,7 +94,9 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
                     </div>
                     <div className="col-span-5 md:col-span-6">
                         {billedWith ? (
-                            <em className="font-normal opacity-75">Billed with {billedWith}</em>
+                            <em className="font-normal opacity-75 text-sm">
+                                Billed with <span className="lowercase">{billedWith}</span>
+                            </em>
                         ) : (
                             startsAt && (
                                 <span>

@@ -32,6 +32,7 @@ import { SimilarProducts } from './Test/SimilarProducts'
 import { Reviews } from './Test/Reviews'
 import ImageSlider from './Test/ImageSlider'
 import Header from './Test/Header'
+import { Link as ScrollLink } from 'react-scroll'
 
 const SidebarList = ({ children }) => <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 
@@ -705,10 +706,13 @@ const PlansTabs = () => {
     )
 }
 
-const FreeTierItem = ({ icon, name, allocation, description }) => {
+const FreeTierItem = ({ icon, icon2, name, allocation, description }) => {
     return (
         <div className="flex flex-col items-center">
-            {icon}
+            <div className="flex gap-1 items-center leading-none">
+                {icon}
+                {icon2 && <>+ {icon2}</>}
+            </div>
             <strong className="text-[15px] text-center leading-none mt-2 mb-1">{name}</strong>
             <div
                 className={`text-sm text-center text-balance leading-none ${description ? 'opacity-75' : 'text-green'}`}
@@ -799,69 +803,87 @@ const PricingExperiment = ({
                                 Only add a card if you need more than the free tier limits or want more projects.
                             </p>
 
-                            {activePlan === 'free' ? (
-                                <>
-                                    <h3 className="mb-0 text-xl">Free</h3>
-                                    <p className="text-sm mb-4">No credit card required</p>
-                                </>
-                            ) : (
-                                <>
-                                    <p className="text-sm mb-0">From</p>
-                                    <h3 className="mb-4 text-xl">
-                                        $0<span className="opacity-70 font-normal text-base">/mo</span>
-                                    </h3>
-                                </>
-                            )}
+                            <div className="inline-block">
+                                <div className="flex justify-between items-end gap-4">
+                                    <div>
+                                        {activePlan === 'free' ? (
+                                            <>
+                                                <h3 className="mb-0 text-xl">Free</h3>
+                                                <p className="text-sm mb-4">No credit card required</p>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <p className="text-sm mb-0">From</p>
+                                                <h3 className="mb-4 text-xl">
+                                                    $0<span className="opacity-70 font-normal text-base">/mo</span>
+                                                </h3>
+                                            </>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <ScrollLink to="plans" offset={-120} smooth className="inline-block mb-4">
+                                            <button className="text-red dark:text-yellow font-semibold cursor-pointer text-sm">
+                                                Compare plans
+                                            </button>
+                                        </ScrollLink>
+                                    </div>
+                                </div>
 
-                            <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 mb-6 overflow-x-auto">
-                                <li>
-                                    <button
-                                        onClick={handleFreePlanClick}
-                                        className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
-                                            activePlan === 'free'
-                                                ? 'border-yellow bg-white dark:bg-white/5'
-                                                : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
-                                        }`}
-                                    >
-                                        <strong className="whitespace-nowrap">Totally free</strong>
-                                        <span className="text-sm opacity-75 whitespace-nowrap">
-                                            Free - no credit card required
-                                        </span>
-                                    </button>
-                                </li>
-                                <li>
-                                    <button
-                                        onClick={handlePaidPlanClick}
-                                        className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
-                                            activePlan === 'free'
-                                                ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
-                                                : 'border-yellow bg-white dark:bg-white/5'
-                                        }`}
-                                    >
-                                        <strong className="whitespace-nowrap">Ridiculously cheap</strong>
-                                        <span className="text-sm opacity-75 whitespace-nowrap">
-                                            Usage-based pricing
-                                        </span>
-                                    </button>
-                                </li>
-                            </ul>
+                                <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 mb-6 overflow-x-auto">
+                                    <li>
+                                        <button
+                                            onClick={handleFreePlanClick}
+                                            className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
+                                                activePlan === 'free'
+                                                    ? 'border-yellow bg-white dark:bg-white/5'
+                                                    : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                                            }`}
+                                        >
+                                            <strong className="whitespace-nowrap">Totally free</strong>
+                                            <span className="text-sm opacity-75 whitespace-nowrap">
+                                                Free - no credit card required
+                                            </span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            onClick={handlePaidPlanClick}
+                                            className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
+                                                activePlan === 'free'
+                                                    ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                                                    : 'border-yellow bg-white dark:bg-white/5'
+                                            }`}
+                                        >
+                                            <strong className="whitespace-nowrap">Ridiculously cheap</strong>
+                                            <span className="text-sm opacity-75 whitespace-nowrap">
+                                                Usage-based pricing
+                                            </span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
 
-                            <div className="@container border-t border-light dark:border-dark mt-4 py-4">
+                            <div className="border-t border-light dark:border-dark mt-4 pt-4 h-px"></div>
+
+                            <div
+                                className={`@container transition-all rounded-md border ${
+                                    animateFreeTiers
+                                        ? 'animate-flash bg-[#FAE9CE] dark:bg-[#463B2A] border-yellow -mx-2 -mt-1 px-2 pt-1'
+                                        : 'bg-transparent border-transparent'
+                                }`}
+                                onAnimationEnd={() => setAnimateFreeTiers(false)}
+                            >
                                 <div className="flex items-baseline gap-1 mb-3">
                                     <h4 className="mb-0 text-lg">Free tier on all plans</h4>
                                     <span className="opacity-75 text-sm">(resets monthly)</span>
                                 </div>
 
-                                <div
-                                    className={`grid grid-cols-3 @lg:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-4 ${
-                                        animateFreeTiers ? 'animate-flash' : ''
-                                    }`}
-                                    onAnimationEnd={() => setAnimateFreeTiers(false)}
-                                >
+                                <div className="grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2 pb-4">
                                     <FreeTierItem
                                         name="Analytics"
                                         allocation="1M events"
                                         icon={<Icons.IconGraph className="text-blue size-5" />}
+                                        icon2={<Icons.IconPieChart className="text-green size-5" />}
                                     />
                                     <FreeTierItem
                                         name="Session replay"
@@ -882,6 +904,11 @@ const PricingExperiment = ({
                                         name="Surveys"
                                         allocation="250 responses"
                                         icon={<Icons.IconMessage className="text-red size-5" />}
+                                    />
+                                    <FreeTierItem
+                                        name="Data warehouse"
+                                        allocation="1M rows"
+                                        icon={<Icons.IconDatabase className="text-purple size-5" />}
                                     />
                                 </div>
                             </div>
@@ -911,50 +938,46 @@ const PricingExperiment = ({
                         <SectionHeader>
                             <h3 id="calculator">Pricing calculator</h3>
                         </SectionHeader>
+                        <Tabbed />
 
-                        <SectionColumns>
-                            <SectionMainCol>
-                                <Tabbed />
-                            </SectionMainCol>
-                            <SectionSidebar>
-                                <div>
-                                    <h4 className="text-lg mb-2">How it works</h4>
-                                    <SidebarList>
-                                        <SidebarListItem>Only pay for products you use</SidebarListItem>
-                                        <SidebarListItem>
-                                            <strong className="bg-yellow/50 dark:bg-white/20 italic inline py-0.5">
-                                                Generous free tier for each product (resets monthly)
+                        <div className="grid md:grid-cols-2 gap-8 mt-12 max-w-7xl mx-auto">
+                            <div>
+                                <h4 className="text-lg mb-2">How our pricing works</h4>
+                                <SidebarList>
+                                    <SidebarListItem>Only pay for products you use</SidebarListItem>
+                                    <SidebarListItem>
+                                        <strong className="bg-yellow/50 dark:bg-white/20 italic inline py-0.5">
+                                            Generous free tier for each product (resets monthly)
+                                        </strong>
+                                    </SidebarListItem>
+                                    <SidebarListItem>
+                                        You can set billing limits per product so you never get a surprise bill
+                                    </SidebarListItem>
+                                    <SidebarListItem>
+                                        We also offer{' '}
+                                        <Tooltip content={() => <Discounts />} placement="top">
+                                            <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                discounts
                                             </strong>
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            You can set billing limits per product so you never get a surprise bill
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            We also offer{' '}
-                                            <Tooltip content={() => <Discounts />} placement="top">
-                                                <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
-                                                    discounts
-                                                </strong>
-                                            </Tooltip>{' '}
-                                            for startups and non-profits
-                                        </SidebarListItem>
-                                    </SidebarList>
-                                </div>
-                                <div>
-                                    <h4 className="text-lg mb-2">Estimating usage</h4>
-                                    <SidebarList>
-                                        <SidebarListItem>
-                                            Not sure what your volume looks like? Add the tracking code to your site and
-                                            check back in a few days – no credit card required.
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            If something stupid happens, like you get an unexpected bill and you’re
-                                            unhappy, we’ll pretty much always refund it!
-                                        </SidebarListItem>
-                                    </SidebarList>
-                                </div>
-                            </SectionSidebar>
-                        </SectionColumns>
+                                        </Tooltip>{' '}
+                                        for startups and non-profits
+                                    </SidebarListItem>
+                                </SidebarList>
+                            </div>
+                            <div>
+                                <h4 className="text-lg mb-2">Estimating usage</h4>
+                                <SidebarList>
+                                    <SidebarListItem>
+                                        Not sure what your volume looks like? Add the tracking code to your site and
+                                        check back in a few days – no credit card required.
+                                    </SidebarListItem>
+                                    <SidebarListItem>
+                                        If something stupid happens, like you get an unexpected bill and you’re unhappy,
+                                        we’ll pretty much always refund it!
+                                    </SidebarListItem>
+                                </SidebarList>
+                            </div>
+                        </div>
                     </SectionLayout>
 
                     <SectionLayout>
