@@ -89,6 +89,6 @@ Figure out how to spend the money you’ve saved? Some suggestions:
 
 - Buy a billboard on the 101.
 
-Alternatively, if you haven’t already, you can try one of our other products, like product analytics, feature flags, surveys, or our [recently released data warehouse](/blog/data-warehouse-launch. They all have [generous free tiers](/pricing), too.
+Alternatively, if you haven’t already, you can try one of our other products, like product analytics, feature flags, surveys, or our [recently released data warehouse](/blog/data-warehouse-launch). They all have [generous free tiers](/pricing), too.
 
 <NewsletterForm />
