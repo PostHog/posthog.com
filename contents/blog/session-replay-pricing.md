@@ -1,5 +1,5 @@
 ---
-date: 2024-07-22
+date: 2024-07-23
 title: "We’ve decided to make less money [Part 1]"
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/take_my_money_11433edb48.png
