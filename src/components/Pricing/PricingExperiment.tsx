@@ -863,18 +863,22 @@ const PricingExperiment = ({
                                 </ul>
                             </div>
 
-                            <div className="@container border-t border-light dark:border-dark mt-4 py-4">
+                            <div className="border-t border-light dark:border-dark mt-4 pt-4 h-px"></div>
+
+                            <div
+                                className={`@container transition-all rounded-md border ${
+                                    animateFreeTiers
+                                        ? 'animate-flash bg-[#FAE9CE] dark:bg-[#463B2A] border-yellow -mx-2 -mt-1 px-2 pt-1'
+                                        : 'bg-transparent border-transparent'
+                                }`}
+                                onAnimationEnd={() => setAnimateFreeTiers(false)}
+                            >
                                 <div className="flex items-baseline gap-1 mb-3">
                                     <h4 className="mb-0 text-lg">Free tier on all plans</h4>
                                     <span className="opacity-75 text-sm">(resets monthly)</span>
                                 </div>
 
-                                <div
-                                    className={`grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2 ${
-                                        animateFreeTiers ? 'animate-flash' : ''
-                                    }`}
-                                    onAnimationEnd={() => setAnimateFreeTiers(false)}
-                                >
+                                <div className="grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2 pb-4">
                                     <FreeTierItem
                                         name="Analytics"
                                         allocation="1M events"
