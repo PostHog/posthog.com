@@ -2779,6 +2779,9 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup',
                         },
                         {
+                            name: 'Managed',
+                        },
+                        {
                             name: 'Stripe',
                             url: '/docs/data-warehouse/setup/stripe',
                         },
@@ -2793,6 +2796,13 @@ export const docsMenu = {
                         {
                             name: 'Postgres',
                             url: '/docs/data-warehouse/setup/postgres',
+                        },
+                        {
+                            name: 'Snowflake',
+                            url: '/docs/data-warehouse/setup/snowflake',
+                        },
+                        {
+                            name: 'Self-managed',
                         },
                         {
                             name: 'S3',
