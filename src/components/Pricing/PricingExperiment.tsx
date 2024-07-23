@@ -705,10 +705,13 @@ const PlansTabs = () => {
     )
 }
 
-const FreeTierItem = ({ icon, name, allocation, description }) => {
+const FreeTierItem = ({ icon, icon2, name, allocation, description }) => {
     return (
         <div className="flex flex-col items-center">
-            {icon}
+            <div className="flex gap-1 items-center leading-none">
+                {icon}
+                {icon2 && <>+ {icon2}</>}
+            </div>
             <strong className="text-[15px] text-center leading-none mt-2 mb-1">{name}</strong>
             <div
                 className={`text-sm text-center text-balance leading-none ${description ? 'opacity-75' : 'text-green'}`}
@@ -853,7 +856,7 @@ const PricingExperiment = ({
                                 </div>
 
                                 <div
-                                    className={`grid grid-cols-3 @lg:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-4 ${
+                                    className={`grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2 ${
                                         animateFreeTiers ? 'animate-flash' : ''
                                     }`}
                                     onAnimationEnd={() => setAnimateFreeTiers(false)}
@@ -862,6 +865,7 @@ const PricingExperiment = ({
                                         name="Analytics"
                                         allocation="1M events"
                                         icon={<Icons.IconGraph className="text-blue size-5" />}
+                                        icon2={<Icons.IconPieChart className="text-green size-5" />}
                                     />
                                     <FreeTierItem
                                         name="Session replay"
@@ -882,6 +886,11 @@ const PricingExperiment = ({
                                         name="Surveys"
                                         allocation="250 responses"
                                         icon={<Icons.IconMessage className="text-red size-5" />}
+                                    />
+                                    <FreeTierItem
+                                        name="Data warehouse"
+                                        allocation="1M rows"
+                                        icon={<Icons.IconDatabase className="text-purple size-5" />}
                                     />
                                 </div>
                             </div>
