@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IconCheck } from '@posthog/icons'
 import { Link as ScrollLink } from 'react-scroll'
 import { TrackedCTA } from 'components/CallToAction'
+import usePostHog from 'hooks/usePostHog'
+import Modal from 'components/Modal'
 
 export const FreePlanContent = ({ onFreeTierClick }) => {
     return (
@@ -104,10 +106,42 @@ const RegionButton = ({ active, onClick, children }) => {
 }
 
 export default function PlanContent({ activePlan, onFreeTierClick }) {
+    const posthog = usePostHog()
     const [region, setRegion] = useState('us')
+    const [signupCountToday, setSignupCountToday] = useState(0)
+    const [signupCoundLoading, setSignupCountLoading] = useState(true)
+    const [modalOpen, setModalOpen] = useState(false)
+
+    useEffect(() => {
+        if (posthog?.isFeatureEnabled('direct-to-eu-cloud')) {
+            setRegion('eu')
+        }
+        fetch(`/api/signup-count`)
+            .then((res) => res.json())
+            .then((count) => {
+                setSignupCountToday(count)
+                setSignupCountLoading(false)
+            })
+            .catch((err) => {
+                console.error(err)
+                setSignupCountLoading(false)
+            })
+    }, [])
 
     return (
         <>
+            <Modal open={modalOpen} setOpen={setModalOpen}>
+                <div className="px-5">
+                    <div className="max-w-4xl mx-auto mt-12 relative rounded-md overflow-hidden">
+                        <iframe
+                            className="m-0"
+                            width="100%"
+                            height="400"
+                            src="https://app.posthog.com/embedded/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q?refresh=true"
+                        />
+                    </div>
+                </div>
+            </Modal>
             {activePlan === 'free' ? (
                 <FreePlanContent onFreeTierClick={onFreeTierClick} />
             ) : (
@@ -138,8 +172,15 @@ export default function PlanContent({ activePlan, onFreeTierClick }) {
                 >
                     Get started - free
                 </TrackedCTA>
-                <p className="text-sm text-center mt-4 mb-0 opacity-75">
-                    <strong>128 companies</strong> signed up today
+                <p
+                    className={`text-sm text-center mt-4 mb-0 transition-opacity ${
+                        signupCoundLoading ? 'opacity-0' : 'opacity-75'
+                    }`}
+                >
+                    <button className="font-bold" onClick={() => setModalOpen(true)}>
+                        {signupCountToday || 'Tons of '} companies
+                    </button>{' '}
+                    signed up today
                 </p>
             </div>
         </>
