@@ -773,7 +773,7 @@ const PricingExperiment = ({
 
             {!currentProduct && (
                 <>
-                    <div className="md:flex md:flex-wrap md:w-full mdlg:grid grid-cols-16 my-8 px-4 2xl:px-12">
+                    <div className="md:flex md:flex-wrap md:w-full mdlg:grid grid-cols-16 my-8 px-4 xl:px-8 2xl:px-12">
                         <div className="col-span-3 lg:col-span-4 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
                             <div className="md:hidden mb-2">
                                 <Header />
@@ -785,7 +785,7 @@ const PricingExperiment = ({
                             <ImageSlider />
                         </div>
 
-                        <div className="@container md:flex-1 col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 md:mr-8 pb-4">
+                        <div className="@container md:flex-1 col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 lg:pl-10 md:mr-8 lg:mr-10 pb-4">
                             <div className="hidden md:block">
                                 <Header />
                             </div>
@@ -829,7 +829,7 @@ const PricingExperiment = ({
                                     </div>
                                 </div>
 
-                                <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 mb-6 overflow-x-auto">
+                                <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 md:mb-6 overflow-x-auto">
                                     <li>
                                         <button
                                             onClick={handleFreePlanClick}

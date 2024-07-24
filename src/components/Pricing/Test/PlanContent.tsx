@@ -177,10 +177,14 @@ export default function PlanContent({ activePlan, onFreeTierClick }) {
                         signupCoundLoading ? 'opacity-0' : 'opacity-75'
                     }`}
                 >
-                    <button className="font-bold" onClick={() => setModalOpen(true)}>
-                        {signupCountToday || 'Tons of '} companies
-                    </button>{' '}
-                    signed up today
+                    {signupCountToday ? <strong>{signupCountToday}</strong> : 'Tons of'} companies signed up{' '}
+                    {signupCountToday ? (
+                        <button className="font-bold text-red dark:text-yellow" onClick={() => setModalOpen(true)}>
+                            today
+                        </button>
+                    ) : (
+                        <>today</>
+                    )}
                 </p>
             </div>
         </>

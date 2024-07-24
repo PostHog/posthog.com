@@ -3,6 +3,11 @@ import { useInView } from 'react-intersection-observer'
 
 const images = [
     {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_os_df65018ac1.png',
+        thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_os_thumb_8a0a4b86c7.png',
+        alt: 'PostHog 3000',
+    },
+    {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_091434830d.png',
         thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_thumb_0e75317413.png',
         alt: 'Product analytics',
@@ -86,26 +91,50 @@ export default function ImageSlider(): JSX.Element {
         el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
     }
 
+    const textOptions = [
+        'Artist depiction only. PostHog is cloud-based software and not installed by CD.',
+        "You can’t put us in a box. (No really, you can’t actually buy PostHog on CD. It's web-based cloud software.)",
+        'PostHog doesn’t really come on a physical CD. (If you don’t know what a CD is, please ask your parents.)',
+        'Obviously this is cloud software, not an actual CD, silly goose.',
+        'Picture of CD is for illustrative purposes only, not for medical consumption.',
+        'Certified 100% organic bytes. May contain heavy metals. Do not eat. (Also not really installed by CD.)',
+        'Not really installed by CD. But does comes with free docs.',
+    ]
+
+    const [disclaimer, setDisclaimer] = useState('')
+
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * textOptions.length)
+        setDisclaimer(textOptions[randomIndex])
+    }, []) // Empty dependency array means this effect runs once on mount
+
     return (
         <>
-            <div className="flex flex-nowrap snap-x snap-mandatory overflow-y-hidden overflow-x-auto rounded">
+            <div className="relative flex flex-nowrap snap-x snap-mandatory overflow-y-hidden overflow-x-auto rounded border border-light dark:border-dark">
                 {images.map((image, index) => (
-                    <Slide
-                        key={index}
-                        className="w-full cursor-auto"
-                        id={`pricing-slider-slide-${index}`}
-                        src={image.src}
-                        alt={image.alt}
-                        index={index}
-                        setActiveIndex={setActiveIndex}
-                    />
+                    <>
+                        <Slide
+                            key={index}
+                            className="w-full cursor-auto"
+                            id={`pricing-slider-slide-${index}`}
+                            src={image.src}
+                            alt={image.alt}
+                            index={index}
+                            setActiveIndex={setActiveIndex}
+                        />
+                        {index === 0 && (
+                            <div className="absolute bottom-1 left-2 right-2 text-xs leading-tight opacity-60">
+                                *{disclaimer}
+                            </div>
+                        )}
+                    </>
                 ))}
             </div>
-            <div className="grid grid-cols-5 snap-x snap-mandatory my-2 gap-1.5">
+            <div className="flex flex-nowrap md:grid grid-cols-5 overflow-x-auto md:overflow-auto -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory my-2 gap-2">
                 {images.map((_, index) => (
                     <Slide
                         key={index}
-                        className={`p-1 border border-light hover:border-border dark:border-dark dark:hover:border-border-dark rounded relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${
+                        className={`w-1/5 md:w-auto p-1 border border-light hover:border-border dark:border-dark dark:hover:border-border-dark rounded relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${
                             index === activeIndex ? 'active' : 'opacity-70 hover:opacity-100'
                         }`}
                         id={`pricing-slider-nav-${index}`}
