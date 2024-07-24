@@ -12,7 +12,7 @@ export const TeamMemberLink = (person) => {
                 {photo && (
                     <>
                         <span
-                            className={`invisible inline-flex items-center ${
+                            className={`invisible max-h-4 inline-flex items-center ${
                                 photo
                                     ? 'gap-1.5 p-0.5 pr-1.5 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full'
                                     : 'border-b border-light dark:border-dark border-dashed hover:border-bg-dark/50 dark:hover:border-bg-light/50'
@@ -92,7 +92,7 @@ export const TeamMemberLink = (person) => {
                 <span
                     className={`inline-flex items-center ${
                         photo
-                            ? 'absolute top-1 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full'
+                            ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full'
                             : 'border-b border-light dark:border-dark border-dashed hover:border-bg-dark/50 dark:hover:border-bg-light/50'
                     }`}
                 >
