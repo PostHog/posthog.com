@@ -78,7 +78,11 @@ const PricingPage = (): JSX.Element => {
             <RenderInClient
                 render={() => {
                     const ff = posthog?.getFeatureFlag?.('pricing-test')
-                    return <PricingExperiment currentProduct={currentProduct} groupsToShow={groupsToShow} />
+                    return ff === 'test' ? (
+                        <PricingExperiment currentProduct={currentProduct} groupsToShow={groupsToShow} />
+                    ) : (
+                        <Pricing currentProduct={currentProduct} groupsToShow={groupsToShow} />
+                    )
                 }}
                 placeholder={<Skeleton />}
             />
