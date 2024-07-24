@@ -1853,6 +1853,10 @@ export const docsMenu = {
                             name: 'Migrate from Mixpanel',
                             url: '/docs/migrate/mixpanel',
                         },
+                        {
+                            name: 'Migrate from Heap',
+                            url: '/docs/migrate/heap',
+                        },
                     ],
                 },
                 {
