@@ -123,7 +123,7 @@ export default function ImageSlider(): JSX.Element {
                             setActiveIndex={setActiveIndex}
                         />
                         {index === 0 && (
-                            <div className="absolute bottom-1 left-2 right-2 text-xs leading-tight opacity-60">
+                            <div className="absolute bottom-1 xl:bottom-2 left-2 right-2 text-xs leading-tight opacity-60">
                                 *{disclaimer}
                             </div>
                         )}
