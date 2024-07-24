@@ -34,7 +34,10 @@ export default function PurchasedWith() {
                 {purchasedWith.map((product, index) => {
                     const { name, description, logo } = product
                     return (
-                        <li key={index} className="bg-white border border-border dark:border-dark rounded-md w-80 p-4">
+                        <li
+                            key={index}
+                            className="bg-white dark:bg-white/5 border border-light dark:border-dark p-4 rounded w-80"
+                        >
                             <div className="flex items-center space-x-2 mb-2">
                                 <div className="size-8 relative">
                                     <img className="inset-0 absolute object-contain" src={logo} />
