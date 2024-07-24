@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
+import React, { useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 const images = [
     {
@@ -45,24 +45,35 @@ const Slide = ({
     id,
     src,
     alt,
+    index,
+    setActiveIndex,
 }: {
     className?: string
     onClick?: () => void
     id: string
     src: string
     alt: string
+    index?: number
+    setActiveIndex?: (index: number) => void
 }) => {
     const handleClick = () => onClick?.()
+    const [ref, inView] = useInView({ threshold: 0.9 })
+
+    useEffect(() => {
+        if (!setActiveIndex || index === undefined) return
+        if (inView) {
+            setActiveIndex(index)
+        }
+    }, [inView])
+
     return (
         <button
+            ref={ref}
             id={id}
             onClick={handleClick}
-            className={`aspect-square bg-accent dark:bg-accent-dark flex items-center justify-center flex-grow flex-shrink-0 snap-start ${className}`}
+            className={`aspect-square bg-accent dark:bg-accent-dark flex items-center justify-center flex-grow flex-shrink-0 snap-center ${className}`}
         >
             <img src={src} alt={alt} />
-            {/* <StaticImage src={src} alt={alt} /> */}
-            {/* <StaticImage key="cloud" src="./images/product-analytics.png" alt="PostHog Cloud" /> */}
-            {/* <StaticImage key="cloud" src="../../Home/images/cloud-cd.jpg" alt="PostHog Cloud" /> */}
         </button>
     )
 }
@@ -71,13 +82,13 @@ export default function ImageSlider(): JSX.Element {
     const [activeIndex, setActiveIndex] = useState<number>(0) // Step 1
 
     const handleClick = (id: number) => {
-        setActiveIndex(id)
         const el = document.getElementById(`pricing-slider-slide-${id}`)
         el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
     }
+
     return (
         <>
-            <div className="flex flex-nowrap snap-x overflow-y-hidden overflow-x-auto rounded">
+            <div className="flex flex-nowrap snap-x snap-mandatory overflow-y-hidden overflow-x-auto rounded">
                 {images.map((image, index) => (
                     <Slide
                         key={index}
@@ -85,10 +96,12 @@ export default function ImageSlider(): JSX.Element {
                         id={`pricing-slider-slide-${index}`}
                         src={image.src}
                         alt={image.alt}
+                        index={index}
+                        setActiveIndex={setActiveIndex}
                     />
                 ))}
             </div>
-            <div className="grid grid-cols-5 snap-x my-2 gap-1.5">
+            <div className="grid grid-cols-5 snap-x snap-mandatory my-2 gap-1.5">
                 {images.map((_, index) => (
                     <Slide
                         key={index}
