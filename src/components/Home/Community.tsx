@@ -116,8 +116,16 @@ export default function Community() {
                     </p>
                 </div>
                 <section className="relative sm:scale-100 scale-[1.2] sm:origin-center origin-bottom">
-                    <img src="/images/campfire-light.png" alt="campfire-light" className="dark:hidden block w-full" />
-                    <img src="/images/campfire-dark.png" alt="campfire-dark" className="hidden dark:block w-full" />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1718854771/posthog.com/campfire-light.png"
+                        alt="campfire-light"
+                        className="dark:hidden block w-full"
+                    />
+                    <img
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1718854772/posthog.com/campfire-dark.png"
+                        alt="campfire-dark"
+                        className="hidden dark:block w-full"
+                    />
 
                     <CommunityHogs name="campfire-light" className="dark:hidden block" />
                     <CommunityHogs name="campfire-dark" className="hidden dark:block" />

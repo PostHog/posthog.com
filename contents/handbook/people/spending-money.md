@@ -127,9 +127,15 @@ Our entire stack for collaborative software is pleasingly simple. All we use is:
 * GitHub - documents, code, discussion
 * Slack (premium) - chat (although we encourage you to default into discussion of features/strategy etc into GitHub)
 * PostHog - product analytics
-* Figma - graphic design
+* Figma - design
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
+
+### Optional software
+
+There are other tools some team members choose to use individually. In those cases, as they become more widely adopted in the company, it makes sense to have a company account.
+
+* Loom - ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink> and someone will add you as a Creator Lite which allows you to record up to 25 videos/mo at 5 minutes in length. Should you need a full Creator account (unlimited videos, advanced features), ask <TeamMember name="Simon Fisher" />.
 
 ### IDEs
 
@@ -161,20 +167,6 @@ We have a company WeWork All Access account that allows you to book desks in any
 ## Travel
 
 If you need to travel on PostHog’s behalf (e.g. in person onboarding, meeting customers, working on a specific project), again please spend money in the best interests of the company. 
-
-We now use Brex Travel to help with planning and booking travel. If you are booking an individual trip, you can use the ‘Travel’ function to search and book flights directly through Brex.
-- First, click the trips icon and go to ‘Manage Profile’. Here you can enter all of your travel details, including loyalty program and known traveler numbers, so you won't have to enter them manually with an airline, hotel, or car hire service in the future.
-- Go back to the trips section and go into ‘Book a new trip’
-  - Here you can book flights (indexed from Google Flights), hotels, and rental cars
-  - You can also book for a guest, if someone is coming with you pre- or post-offsite
-- Name your trip and assign it to a budget. For example:
-  - To your meeting up stipend
-  - To your offsite budget
-  - To your in-person onboarding budget
-  - To your generic budget for other travel
-- Search for flights, accommodation, rental cars, or train tickets
-  - Your receipts and memos are automatically added to the expense, and you will receive emails with all of the confirmations (as well as be able to access them via the Brex app)
-  - You can also manage your trips if you need to change something or cancel
 
 We do not pre-approve your travel expenses, and trust team members to make the right decisions here. Some guidance:
 - We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 

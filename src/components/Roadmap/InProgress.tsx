@@ -17,6 +17,7 @@ import { CallToAction } from 'components/CallToAction'
 import RichText from 'components/Squeak/components/RichText'
 import { useFormik } from 'formik'
 import transformValues from 'components/Squeak/util/transformValues'
+import Markdown from 'components/Squeak/components/Markdown'
 
 type RoadmapSubscriptions = {
     data: {
@@ -369,11 +370,11 @@ export function InProgress(
                 <div className="flex sm:flex-row sm:space-x-4 flex-col-reverse space-y-reverse sm:space-y-0 space-y-4 p-4 bg-accent dark:bg-accent-dark rounded-t-md">
                     <div className="sm:flex-grow">
                         <h4 className="text-lg flex space-x-1 items-center !m-0">{title}</h4>
-                        <p className="m-0 !text-[15px] !leading-none opacity-80 inline">
+                        <Markdown>
                             {more
                                 ? description
                                 : description.substring(0, 300) + (description?.length > 300 ? '...' : '')}
-                        </p>
+                        </Markdown>
                         {!more && (description?.length > 300 || githubPages?.length > 0) && (
                             <button
                                 onClick={() => setMore(true)}
@@ -503,7 +504,13 @@ export function InProgress(
                             </CallToAction>
                         )}
                     </div>
-                    {isModerator && addingUpdate && <TeamUpdate roadmapID={squeakId} onSubmit={fetchUpdates} />}
+                    {isModerator && addingUpdate && (
+                        <TeamUpdate
+                            teamName={props?.teams?.data?.[0]?.attributes?.name}
+                            roadmapID={squeakId}
+                            onSubmit={fetchUpdates}
+                        />
+                    )}
                 </div>
             </li>
         </>

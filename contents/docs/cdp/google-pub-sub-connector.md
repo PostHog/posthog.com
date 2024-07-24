@@ -22,7 +22,7 @@ You'll also need a Google Cloud Pub/Sub account to connect to.
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'Pub/Sub' and select the destination, press Install.
 3. Upload your Google Cloud key .json file. ([How to get the file.](https://cloud.google.com/pubsub/docs/reference/libraries))
 4. Enter your Topic ID.

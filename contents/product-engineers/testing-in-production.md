@@ -75,7 +75,7 @@ In production, we learn how new code and features interact with production data 
 
 ### 2. Dogfooding and collaboration
 
-We are our own best customers at PostHog. Many of the features we develop are the ones most useful to us. Testing in production enables us to use the features we develop before releasing them, also known as dogfooding.
+We are our own best customers at PostHog. Many of the features we develop are the ones most useful to us. Testing in production enables us to use the features we develop before releasing them, also known as [dogfooding](/product-engineers/dogfooding).
 
 For example, we used the [early access management feature](/docs/feature-flags/early-access-feature-management) to manage the beta of early access management (very meta). This enabled us to both test the feature and have the structure in place to roll it out to users. By solving issues that arose in beta, we released a more polished final feature to users.
 

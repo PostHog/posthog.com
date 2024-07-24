@@ -1,0 +1,82 @@
+---
+title: Link a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+import { ProductScreenshot } from 'components/ProductScreenshot'
+export const SettingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/settings-light.png"
+export const SettingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/data-warehouse/settings-dark.png"
+
+The PostHog data warehouse enables you to link your most important data into PostHog from sources like your CRM, payment processor, or database. Once linked, you can combine this data with the product analytics data already in PostHog and query across all of it.
+
+> The data warehouse is currently in beta. To access it, enable the [feature preview](https://us.posthog.com#panel=feature-previews) in your instance. It is free to use during the beta period.
+
+To link a source, go to the data warehouse tab, and click **Link source** in the top right. On the new source page, you have an option to choose a pre-built connector or create a custom source. These include:
+ 
+- [Stripe](/docs/data-warehouse/setup/stripe)
+- [Hubspot](/docs/data-warehouse/setup/hubspot)
+- [Zendesk](/docs/data-warehouse/setup/zendesk)
+- [Postgres](/docs/data-warehouse/setup/postgres)
+- [S3](/docs/data-warehouse/setup/s3)
+- Snowflake
+- [R2](/docs/data-warehouse/setup/r2)
+- [Google Cloud Storage](/docs/data-warehouse/setup/gcs)
+- [Azure](/docs/data-warehouse/setup/azure)
+
+You can find the set up instructions in-app or in the source specific docs.
+
+## Linking a custom source
+
+The data warehouse can link to data in your object storage system. To do this, you'll need to:
+
+1. Create a bucket in your object storage system like S3, GCS, or Cloudflare R2
+2. Set up an access key and secret
+3. Add data to the bucket (potentially using a tool like Airbyte, Fivetran, Stitch, or others)
+4. Link the table in PostHog
+
+See an example in our [S3 setup docs](/docs/data-warehouse/setup/s3).
+
+## Incremental vs full table
+
+On some sources and tables, you can choose the sync method. The options are incremental append replication or full table replication. 
+
+### Incremental append
+
+With incremental append replication, you only sync new data. This reduces the total number of rows synced and how long it takes to sync. This is useful for data that is immutable such as invoices.
+
+When choosing incremental append replication, you must select a field to identify new data. This is often something like a `created_at` timestamp, or an autoincrementing ID. Not all fields are suitable to be used to identify new data, and so we only support the following types as replication keys:
+- `integer` (including `bigint` and `smallint`)
+- `datetime`
+- `date`
+- `timestamp`
+- `numeric` (for Snowflake)
+
+Duplicate data can exist if you use a replication field that gets updated when the row gets updated, such as an `updated_at` field. Updated data will be appened to the table as if it's a new row and any deduplication logic would need to be written in HogQL when you query the data.
+
+Another downside to incremental append syncing is that data deletions won't be synced to your PostHog data warehouse. You need to use full table refreshes for this.
+
+### Full table
+
+This reloads the whole table on every sync. This is great for tables with common data deletions or ones without an incrementing field (such as a `updated_at` timestamp).
+
+## Syncing
+
+Once you add a source, you can see its status, sync frequency, and last successful run in the [data warehouse settings page](https://us.posthog.com/data-warehouse/settings). You can also reload or delete sources here.
+
+When you expand each source, you can see:
+
+- Schema name
+- Enable or disable syncing for that table
+- Synced table name in PostHog
+- Time the table was last synced
+
+<ProductScreenshot
+    imageLight={SettingsLight} 
+    imageDark={SettingsDark} 
+    alt="Data warehouse settings in PostHog" 
+    classes="rounded"
+  />

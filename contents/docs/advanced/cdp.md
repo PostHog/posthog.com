@@ -16,7 +16,7 @@ The most common CDPs are [Segment](/docs/libraries/segment) and [RudderStack](/d
 If you don't have a CDP already set up, you might not need one. PostHog has: 
 
 - [SDKs](/docs/libraries) and [API](/docs/api/capture) to capture data from anywhere.
-- [Data warehouse](/docs/data-warehouse) to easily import and query data from Stripe, Hubspot, Zendesk, S3, and more.
+- [Data warehouse](/docs/data-warehouse) to easily import and query data from Stripe, Hubspot, [Zendesk](/tutorials/zendesk-reports), S3, and more.
 - Pre-built or customizable [transformations and destinations](/docs/cdp) for cleaning and sending data to other tools.
 - Use your data in PostHog's suite of analysis tools. 
 

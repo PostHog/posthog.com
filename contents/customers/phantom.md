@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/phantom/phantom_logo_dark.svg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/phantom/featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/phantom_posthog_1316dbb231.png
 industries:
   - Cryptocurrency & blockchain
 users:

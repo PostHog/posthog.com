@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/assemblyai/logo_dark.svg
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/assemblyai/featured.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_assembly_AI_ef178ab0da.png
 industries:
   - API Platform
 users:

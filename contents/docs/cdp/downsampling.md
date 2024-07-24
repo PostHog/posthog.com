@@ -20,7 +20,7 @@ This transformation enables you to reduce how many events a deployment of PostHo
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'Downsampling' and select the transformation, press Install.
 3. Follow the on-screen steps to configure the transformation.
 

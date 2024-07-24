@@ -18,7 +18,7 @@ This transformation enables you to create filters which prevent PostHog from ing
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'Filter Out' and select the transformation, press Install.
 3. Follow the on-screen steps to configure the transformation.
 

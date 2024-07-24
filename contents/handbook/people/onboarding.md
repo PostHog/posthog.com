@@ -122,7 +122,7 @@ We use a number of different tools to organise our work and communicate at PostH
 - HubSpot - customer CRM
 - Zendesk - our support platform
 - Pry - financial modelling
-- LTSE Equity - cap table management
+- Carta - cap table management
 - Fondo - US accounting
 - Calendly - external meeting scheduling (e.g. demos, sales)
 - Gusto - US payroll and benefits management
@@ -164,7 +164,7 @@ Each Small Team has its own Project for tracking their Issues - [full list here]
 
 Employees are occasionally called upon to act as [support heroes](/handbook/engineering/support-hero), or need to deal with support tickets that are escalated to them. This most often applies to engineers, but can include any employee regardless of their team. For this reason, we need everyone to have a broad idea of our support processes and know how we deal with customers.
 
-All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/sales-cs) within their first three weeks at PostHog. 
+All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/customer-comms) within their first three weeks at PostHog. 
 
 In this call the support engineer will be able to answer any questions, as well as demonstrate how we deal with support at PostHog. In particular, the support engineer should cover:
 
@@ -191,3 +191,11 @@ As part of the onboarding checklist, the Ops team will schedule reminders for a 
 - Feedback is a really important part of the onboarding process and as a manager it's a good idea to ensure the new team member receives feedback from their peers - either from you collecting it or them receiving it directly from their peers. It won't always be possible or necessary to do a 360 feedback session within the first 3 months, so it's up to you as a manager how best to approach that. As a manager you can also have blind spots on performance, so checking in with their peers can be helpful and can be done during your normal 1-1s.
 
 These check-ins are designed to ensure every new starter is set up for success. Every manager will deal with these slightly differently, but it will hopefully be clear to everybody by around the 60 day mark how things are going and what needs to be worked on, if anything. 
+
+## Team intros
+
+PostHog has lots of small teams and each team has it's own unique history and culture. Throughout your first and second month, you can join 15 minute intro calls to learn more about each team as these are led by the respective team lead. 
+
+All you need to do is add the [onboarding intros calendar](https://calendar.google.com/calendar/u/0?cid=Y18yNWNlYjI4MTI5YjQ0ZDNlOWM1NThjMzYxY2M1NjVmZGU3NWM5NWNjZjgyOTg4NTdjNGM1OWY5YzFmMTUzOWY4QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) to your google calendar and then you will see these on Mondays and Wednesdays throughout the month. Just add yourself to these during your first week and if you can't make one, just add yourself to the next month. 
+
+If you have any issues or any feedback on how to improve a specific intro just post in the #team-people-and-ops slack channel and tag the relevant people

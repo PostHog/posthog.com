@@ -76,7 +76,7 @@ For example, to get a count of the most common `event` values, you can make a re
 <MultiLanguage>
 
 ```bash
-curl -X POST "https://us.posthog.com/api/projects/:project_id/query" \
+curl -X POST "<ph_app_host>/api/projects/:project_id/query" \
      -H "Content-Type: application/json" \
      -H "Authorization: Bearer <personal_api_key>" \
      -d '{
@@ -103,7 +103,7 @@ data = {
 }
 
 response = requests.post(
-    '<ph_client_api_host>/api/projects/:project_id/query', 
+    '<ph_app_host>/api/projects/:project_id/query', 
     headers=headers, 
     json=data
 )
@@ -145,4 +145,4 @@ To get a list of all the sources you can query with HogQL, enable the [data ware
   alt="Data warehouse example"
 />
 
-The data warehouse also enables you to add external sources, like Stripe and Hubspot, and query them alongside your PostHog data.
+The data warehouse also enables you to add external sources, like [Stripe](/tutorials/stripe-reports) and Hubspot, and query them alongside your PostHog data.

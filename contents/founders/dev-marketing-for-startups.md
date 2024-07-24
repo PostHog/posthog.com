@@ -55,7 +55,7 @@ Don’t upvote your own content, and don’t ask other people to – post it and
 
 ### Beware the attribution mirage
 
-You can’t rely on UTM parameters to tell you where a user actually first heard about you. Example: user reads an article about PostHog on Hacker News -> searches 'posthog' -> clicks on a Google Ad. Our analytics will tell us "wow, Google Ads are awesome!" But that’s not the whole picture. 
+You can’t rely on UTM parameters to tell you where a user actually first heard about you. Example: user reads an article about PostHog on Hacker News -> searches 'posthog' -> clicks on a Google Ad. Our analytics will tell us "wow, [Google Ads](/tutorials/google-ads-reports) are awesome!" But that’s not the whole picture. 
 
 In your product signup flow, include an optional free text box asking people where they first heard about you. About 10% of signups usually fill this in. Read the data and report on it every week. It’s manual but vitally important info.
 

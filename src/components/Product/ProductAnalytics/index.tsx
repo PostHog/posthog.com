@@ -66,7 +66,7 @@ const subfeatures = [
     {
         icon: <IconPieChart />,
         title: 'Data visualization',
-        description: 'Filter data by user property, group data, and use formulas in queries',
+        description: 'Filter data by person property, group data, and use formulas in queries',
     },
     {
         icon: <SQL />,
@@ -91,14 +91,6 @@ const subfeatures = [
 ]
 
 const questions = [
-    {
-        question: 'Where are people getting stuck in my flow?',
-        url: '/tutorials/guide-to-funnels',
-    },
-    {
-        question: 'Where are users dropping off?',
-        url: '/tutorials/guide-to-funnels#step-3-explore-user-paths-between-steps-in-the-funnel',
-    },
     {
         question: 'How do I calculate new vs returning users?',
         url: '/tutorials/track-new-returning-users',
@@ -147,10 +139,6 @@ const questions = [
         question: 'What long-term patterns are we seeing?',
     },
     {
-        question: 'What are possible causes of success or failure?',
-        url: '/tutorials/funnels#step-2-evaluate-correlated-events',
-    },
-    {
         question: 'Which cohorts can we find from usage patterns?',
     },
     {
@@ -189,14 +177,6 @@ const questions = [
     },
     {
         question: 'What properties correlate to success in my product?',
-    },
-    {
-        question: 'What events mean users are less likely to complete a funnel?',
-        url: '/tutorials/guide-to-funnels#step-2-evaluate-correlated-events',
-    },
-    {
-        question: 'What properties mean users are less likely to complete a funnel?',
-        url: '/tutorials/guide-to-funnels#step-2-evaluate-correlated-events',
     },
     {
         question: 'How many users return to use my product each day?',
@@ -381,7 +361,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Filter by user property',
+        feature: 'Filter by person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -391,7 +371,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Breakdown by user property',
+        feature: 'Breakdown by person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -521,7 +501,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Filter by events or user property',
+        feature: 'Filter by events or person property',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -895,7 +875,7 @@ export const ProductProductAnalytics = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
                                         src="../../../images/products/competitors-pa.png"

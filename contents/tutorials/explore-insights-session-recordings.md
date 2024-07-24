@@ -59,7 +59,7 @@ There are multiple ways to visualize outliers and extreme usage of your product 
 
 - 90th, 95th, 99th percentile, max, or min count per user
 - 90th, 95th, 99th percentile, max, or min property value
-- extreme filters on events or user properties
+- extreme filters on events or person properties
 
 After creating one of these in insights, you can click the graph to view a list of users and their related session replays. Viewing the related recordings can help you understand their extreme usage.
 
@@ -75,5 +75,5 @@ Once created, click any of the days in the graph, and you get a list of people w
 
 ## Further reading
 
-- [How to build, analyze and optimize conversion funnels](https://posthog.com/tutorials/funnels)
+- [The complete guide to event tracking](/tutorials/event-tracking-guide)
 - [How to find relevant session replays quickly](https://posthog.com/tutorials/filter-session-recordings)

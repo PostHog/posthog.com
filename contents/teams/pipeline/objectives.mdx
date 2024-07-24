@@ -1,19 +1,6 @@
-## Goals: Q2 2024
+## Goals: Q3 2024
 
-1. [Batch exports UX improvements, e.g. error notifications and UI rewamp](https://github.com/PostHog/posthog/issues/21139)
-   - why: helps reduce confusion around how batch exports work reducing support, also cost savings
-1. [Person data batch export](https://github.com/PostHog/posthog/issues/20339)
-   - why: Its currently only possible to have event data but person data is needed for full analysis downstream
-1. [Support adding new products](https://github.com/PostHog/posthog/issues/21665)
-   - why: helping other teams ship faster while ensuring the stability of existing products
-1. [Iterate on person processing to make it faster and cheaper](https://github.com/PostHog/posthog/issues/21048)
-   - why: This is our biggest bottleneck and the main source of the strict ordering constraints in events ingestion
-1. [Visibility into what's in the ingestion queues and past performance](https://github.com/PostHog/posthog/issues/20985)
-   - why: To help reduce time to incident resolution and help find bottlenecks
-1. [Fast configuration options to speed up incident recovery, e.g. by token send to overflow or drop](https://github.com/PostHog/posthog/issues/21662)
-   - why: To help reduce time to incident resolution
-1. [Deprecate `posthog-events` by moving to `capture-rs` fully](https://github.com/PostHog/posthog/issues/21659)
-   - why: the new capture-rs service is improving reliability and efficiency and all events should benefit from it
-   - ingestion of session replays is out of scope for this quarter
-1. [Deprecate scheduler & jobs deployments, `runEveryX` plugins and kafkajs consumers](https://github.com/PostHog/posthog/issues/21656)
-   - why: Reduce operational and support load and costs
+1. Test Warpstream as PoC and decide whether to do it or not
+2. Pipeline scalability Improving pipeline throughput
+3. Help other teams ship fast
+4. Stretch: better e2e monitoring
