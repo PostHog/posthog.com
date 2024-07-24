@@ -785,7 +785,7 @@ const PricingExperiment = ({
                             <ImageSlider />
                         </div>
 
-                        <div className="@container md:flex-1 col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 md:mr-8">
+                        <div className="@container md:flex-1 col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 md:mr-8 pb-4">
                             <div className="hidden md:block">
                                 <Header />
                             </div>
@@ -878,7 +878,7 @@ const PricingExperiment = ({
                                     <span className="opacity-75 text-sm">(resets monthly)</span>
                                 </div>
 
-                                <div className="grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2 pb-4">
+                                <div className="grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2">
                                     <FreeTierItem
                                         name="Analytics"
                                         allocation="1M events"
