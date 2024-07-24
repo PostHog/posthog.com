@@ -51,7 +51,13 @@ This is basically a combo of discovery and demo call - your objectives here are 
 - Find out as much as you reasonably can about them
 - Have a solid plan for next steps in place
 
-We have a simple deck (seriously, it's like 5 slides) - ask someone on the Sales team for an invite to our Pitch account so you can create customized versions. You should prepare a customized demo for each customer - the PostHog platform is super broad, so it's really easy to spend a bunch of time talking about something our ICP doesn't care about (which will really annoy them). 
+We have a simple deck (seriously, it's like 5 slides) - ask someone on the Sales team for an invite to our Pitch account so you can create customized versions with your name etc. 
+
+You should give a relevant and pointed demo - don't just throw everything in, as the customer will get overwhelmed. If you don't show what's important first, typically more senior people on the call will become distracted.
+
+For example, a customer may say "we need to see how our customers our using our platform". In this case, a good approach is to go straight to Session Replay, then tie Replay into Analytics, then go from there.
+
+> Start with what their biggest problem/request is, stay there until they are happy, then move on to point two. We don't want to fall into the trap of doing the same demo for each customer regardless of what they say at the beginning.
 
 Make sure you cover:
 
