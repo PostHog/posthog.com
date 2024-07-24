@@ -107,7 +107,9 @@ Immediately afterwards, the historical export runs that fall within the bounds s
 
 > **Note:** A batch export may optionally be created with an end date: Batch exports will never export data past this end date, even if requesting a historical export which exceeds this upper bound.
 
-## How do batch exports work?
+## FAQ
+
+### How do batch exports work?
 
 As previously mentioned, batch exports are implemented on [Temporal](https://www.temporal.io/). More in detail, each supported destination is defined as a [Temporal Workflow](https://docs.temporal.io/workflows), with a [Workflow Type](https://docs.temporal.io/workflows#workflow-type) that indicates which destination is implemented in it.
 
@@ -147,7 +149,7 @@ sequenceDiagram
     PostHog->>User: Inform batch export status
 ```
 
-## How does this differ from the old export destinations, formerly known as apps?
+### How does this differ from the old export destinations, formerly known as apps?
 
 - The data is exported on batches at a fixed frequency, like hourly or daily.
   - This allows us to optimize uploads and insertions which generally perform better with larger sizes.
@@ -155,3 +157,9 @@ sequenceDiagram
 
 - Some features of the old export destinations are still being ported over.
   - This includes logs and error reporting.
+
+### How do batch exports handle periods with no data?
+
+If no data is found for a particular batch period, then the batch export run will immediately succeed. No data to export is not considered a failure, as it is expected that there may be times of low or no volume of events coming into PostHog, and it is particularly relevant when filtering the batch export to only export very low volume events.
+
+> **Note:** This could mean that underlying configuration issues are not surfaced early, as we do not attempt to connect to a destination if there is nothing to export. It is recommended to confirm there is data to export to ensure a batch export has been configured correctly. This can be done by checking batch export debug logs as they will display how many rows are exported. So, if no debug logs appear, it means there is no data to export, so we haven't had a chance to validate the batch export configuration.
