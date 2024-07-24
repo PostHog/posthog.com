@@ -100,7 +100,9 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
                         ) : (
                             startsAt && (
                                 <span>
-                                    <strong className="text-sm">${startsAt}</strong>
+                                    <strong className="text-sm">
+                                        ${startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt}
+                                    </strong>
                                     <span className="opacity-60 text-[13px]">/{unit}</span>
                                 </span>
                             )
