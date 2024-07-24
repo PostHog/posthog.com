@@ -221,7 +221,43 @@ cert-manager:
     enabled: true
 ```
 
-## Private links
+## Links
+
+### Linking internally
+
+Use Markdown's standard syntax for linking internally.
+
+```
+[Link text](/absolute-path/to/url)
+```
+
+Be sure to use relative links.
+
+| | |
+|-----------	|------------------------------------------	|
+| **Correct syntax**   	| `/absolute-path/to/url`                  	|
+| **Incorrect syntax** 	| `https://posthog.com/absolute-path/to/url` 	|
+
+
+### Linking externally
+
+The `<Link />` component is used throughout the site, and is accessible within Markdown. (When used _internally_, it takes advantage of <Link to="https://nextjs.org/docs/pages/api-reference/components/link" external>Next.js `<Link />` features</Link> like prefetching and client-side navigation between routes).
+
+While that doesn't apply here, using it comes with some handy parameters that you can see in action via the link above:
+
+- Add `external` to a) open the link in a new tab, and b) add the _external link_ icon (for UX best practices if forcing a link to open in a new window)
+- If, for some reason, you need to hide the icon, use `externalNoIcon` instead
+
+Example:
+
+```
+<Link to="#" external>
+  click here
+</Link>
+
+```
+
+### Private links
 
 Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL. Use the `<PrivateLink />` component for this. ([Here's an example.](/handbook/people/share-options#what-are-my-share-options-actually-worth))
 
