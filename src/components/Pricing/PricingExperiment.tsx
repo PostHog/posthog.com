@@ -773,8 +773,8 @@ const PricingExperiment = ({
 
             {!currentProduct && (
                 <>
-                    <div className="md:flex md:flex-wrap md:w-full mdlg:grid grid-cols-16 my-8 px-4 xl:px-8 2xl:px-12">
-                        <div className="col-span-3 lg:col-span-4 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
+                    <div className="md:grid grid-cols-16 my-8 px-4 xl:px-8 2xl:px-12">
+                        <div className="col-span-8 lg:col-span-4 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
                             <div className="md:hidden mb-2">
                                 <Header />
                             </div>
@@ -785,7 +785,7 @@ const PricingExperiment = ({
                             <ImageSlider />
                         </div>
 
-                        <div className="@container md:flex-1 col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 lg:pl-10 md:mr-8 lg:mr-10 pb-4">
+                        <div className="@container col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 lg:pl-6 xl:pl-10 md:mr-8 lg:mr-6 xl:mr-10 pb-4">
                             <div className="hidden md:block">
                                 <Header />
                             </div>
@@ -914,9 +914,9 @@ const PricingExperiment = ({
                             </div>
                         </div>
 
-                        <aside className="col-span-5 lgxl:col-span-4">
+                        <aside className="md:col-span-16 lg:col-span-5 lgxl:col-span-4">
                             <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6 h-full">
-                                <div className="flex flex-col justify-between h-full">
+                                <div className="flex flex-col md:grid grid-cols-2 lg:flex justify-between h-full">
                                     <PlanContent
                                         activePlan={activePlan}
                                         onFreeTierClick={() => setAnimateFreeTiers(true)}
