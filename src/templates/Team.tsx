@@ -625,7 +625,7 @@ export default function Team({
             {hasBody && (
                 <Section title="Handbook" id="handbook">
                     <div className="article-content max-w-2xl team-page-content">
-                        <MDXProvider components={{}}>
+                        <MDXProvider components={{ PrivateLink }}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </div>
