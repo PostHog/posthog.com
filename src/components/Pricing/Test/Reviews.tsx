@@ -112,8 +112,8 @@ export const Reviews = () => {
             <SectionHeader>
                 <h3 className="mb-2">Reviews</h3>
             </SectionHeader>
-            <div className="grid md:grid-cols-12 gap-12 my-6">
-                <div className="col-span-3">
+            <div className="grid md:grid-cols-12 gap-4 md:gap-12 my-6">
+                <div className="col-span-full md:col-span-3">
                     <label className="block font-semibold opacity-70">Overall rating</label>
                     <h3 className="mb-1">{totalRating}</h3>
                     <Stars rating={totalRating} />
@@ -124,7 +124,7 @@ export const Reviews = () => {
                         </Link>
                     </p>
                 </div>
-                <div className="col-span-9">
+                <div className="col-span-full md:col-span-9">
                     {recentReviews.nodes.map((review) => (
                         <Review key={review.id} {...review.attributes} />
                     ))}

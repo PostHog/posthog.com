@@ -15,7 +15,7 @@ const purchasedWith = [
     {
         name: 'Ashby',
         description: 'All-in-one recruiting software for ambitious teams.',
-        logo: '',
+        logo: 'https://res.cloudinary.com/dmukukwp6/image/upload/ashby_e4a768e087.svg',
     },
     {
         name: 'Algolia',
@@ -30,18 +30,21 @@ export default function PurchasedWith() {
             <SectionHeader>
                 <h3 className="mb-2">Frequently purchased with...</h3>
             </SectionHeader>
-            <ul className="mt-4 list-none m-0 p-0 gap-4 grid grid-flow-col auto-cols-max overflow-x-auto">
+            <ul className="mt-4 list-none -mx-4 px-4 md:mx-0 md:px-0 gap-4 grid grid-flow-col auto-cols-max overflow-x-auto">
                 {purchasedWith.map((product, index) => {
                     const { name, description, logo } = product
                     return (
-                        <li key={index} className="bg-white border border-border dark:border-dark rounded-md w-80 p-4">
+                        <li
+                            key={index}
+                            className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md w-80 p-4"
+                        >
                             <div className="flex items-center space-x-2 mb-2">
                                 <div className="size-8 relative">
                                     <img className="inset-0 absolute object-contain" src={logo} />
                                 </div>
                                 <h5 className="m-0">{name}</h5>
                             </div>
-                            <p className="m-0">{description}</p>
+                            <p className="m-0 text-[15px] opacity-75 leading-tight">{description}</p>
                         </li>
                     )
                 })}

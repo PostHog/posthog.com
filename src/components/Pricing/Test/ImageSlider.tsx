@@ -96,7 +96,7 @@ export default function ImageSlider(): JSX.Element {
         "You can’t put us in a box. (No really, you can’t actually buy PostHog on CD. It's web-based cloud software.)",
         'PostHog doesn’t really come on a physical CD. (If you don’t know what a CD is, please ask your parents.)',
         'Obviously this is cloud software, not an actual CD, silly goose.',
-        'Picture of CD is for illustrative purposes only, not for medical consumption.',
+        'Picture of CD is for illustrative purposes only, not for medicinal consumption.',
         'Certified 100% organic bytes. May contain heavy metals. Do not eat. (Also not really installed by CD.)',
         'Not really installed by CD. But does comes with free docs.',
     ]
