@@ -43,7 +43,7 @@ export default function Banner() {
         <>
             {!compact && (
                 <div className={`${!isCookieSet ? '!max-h-96' : ''} max-h-0 transition-all overflow-hidden relative`}>
-                    <div className="border-b border-light dark:border-dark bg-yellow/75 dark:bg-yellow/90 md:text-center text-sm dark:text-primary pl-4 pr-10 md:px-10 py-2">
+                    <div className="bg-yellow/75 dark:bg-yellow/90 md:text-center text-sm dark:text-primary pl-4 pr-10 md:px-10 py-2">
                         <strong>We've decided to make less money:</strong> We've slashed our pricing for session replay.
                         They're now{' '}
                         <Link
