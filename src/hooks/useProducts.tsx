@@ -1,4 +1,4 @@
-import { IconFlask, IconGraph, IconMessage, IconRewindPlay, IconToggle } from '@posthog/icons'
+import { IconDatabase, IconFlask, IconGraph, IconMessage, IconRewindPlay, IconToggle } from '@posthog/icons'
 import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
@@ -46,7 +46,7 @@ const initialProducts = [
         name: 'A/B testing',
         type: 'feature_flags',
         color: 'purple',
-        billedWith: 'feature_flags',
+        billedWith: 'Feature flags',
     },
     {
         Icon: IconMessage,
@@ -60,6 +60,18 @@ const initialProducts = [
         },
         volume: 250,
     },
+    {
+        Icon: IconDatabase,
+        name: 'Data warehouse',
+        type: 'data_warehouse',
+        color: 'purple',
+        slider: {
+            marks: [1000000, 10000000, 100000000, 1000000000],
+            min: 1000000,
+            max: 1000000000,
+        },
+        volume: 1000000,
+    },
 ]
 
 export default function useProducts() {
@@ -72,14 +84,16 @@ export default function useProducts() {
     const [products, setProducts] = useState(
         initialProducts.map((product) => {
             const billingData = billingProducts.find((billingProduct: any) => billingProduct.type === product.type)
+            const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
+            const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
+            const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
             return {
                 ...product,
                 cost: 0,
                 billingData,
-                costByTier: calculatePrice(
-                    product.volume || 0,
-                    billingData?.plans.find((plan: any) => plan.tiers)?.tiers
-                ).costByTier,
+                costByTier: calculatePrice(product.volume || 0, paidPlan?.tiers).costByTier,
+                freeLimit,
+                startsAt: startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
             }
         })
     )

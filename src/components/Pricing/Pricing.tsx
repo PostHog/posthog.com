@@ -15,7 +15,7 @@ import CTA from 'components/Home/CTA.js'
 import { IconCheck, IconHandMoney, IconInfo, IconRocket } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
-import useProducts from './Products'
+import useProducts from 'hooks/useProducts'
 import { graphql, useStaticQuery } from 'gatsby'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import Tabs from 'components/Tabs'
@@ -210,9 +210,9 @@ const AddonContent = ({ name, description, plans }) => {
 
 const AllAddons = () => {
     const platform = usePlatform()
-    const products = useProducts()
+    const { products } = useProducts()
     const platformAddons = platform.addons.filter((addon) => !addon.inclusion_only)
-    const productAddons = products.flatMap((product) => product.addons)
+    const productAddons = products.flatMap((product) => product.billingData.addons)
     const allAddons = [...platformAddons, ...productAddons]
     const [activeTab, setActiveTab] = useState(0)
     const activeAddon = allAddons[activeTab]
@@ -458,19 +458,28 @@ const TabSurveys = (props) => {
     )
 }
 
+const TabDW = (props) => {
+    return (
+        <div>
+            <Pricing {...props} />
+        </div>
+    )
+}
+
 const tabContent = {
-    'Product analytics': TabPA,
+    Analytics: TabPA,
     'Session replay': TabSR,
     'Feature flags': TabFF,
     'A/B testing': TabFF,
     Surveys: TabSurveys,
+    'Data warehouse': TabDW,
 }
 
-const ProductTabs = ({ billingProducts }) => {
+const ProductTabs = () => {
     const [activeTab, setActiveTab] = useState()
-    const products = useProducts()
+    const { products } = useProducts()
     const activeProduct = products[activeTab ?? 0]
-    const productData = billingProducts.find(({ type }) => type === activeProduct?.type)
+    const productData = activeProduct.billingData
 
     return (
         <div>
@@ -485,22 +494,21 @@ const ProductTabs = ({ billingProducts }) => {
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
                 size="sm"
-                className="overflow-x-auto w-screen md:w-auto -mx-4 px-4"
-                tabs={products.map(({ name, icon, price, denomination, freeLimit, message }) => ({
+                tabs={products.map(({ name, Icon, color, billedWith, freeLimit, startsAt, billingData: { unit } }) => ({
                     title: name,
-                    subtitle: price ? (
+                    subtitle: !billedWith ? (
                         <>
                             <span className="text-green font-semibold">
-                                {freeLimit} {denomination}s free,
+                                {freeLimit} {unit}s free,
                             </span>{' '}
                             <br />
-                            then <strong>${price}</strong>
-                            <span className="opacity-75 text-sm font-semibold">/{denomination}</span>
+                            then <strong>${startsAt}</strong>
+                            <span className="opacity-75 text-sm font-semibold">/{unit}</span>
                         </>
                     ) : (
-                        message
+                        <em className="font-normal opacity-75">Billed with {billedWith}</em>
                     ),
-                    icon: icon,
+                    icon: <Icon className={`w-5 text-${color}`} />,
                 }))}
             />
             {activeTab !== undefined && (
@@ -538,251 +546,251 @@ const ProductTabs = ({ billingProducts }) => {
     )
 }
 
-const PlansTabs = () => {
-    const plans = [
-        {
-            name: 'Totally free',
-            description: <span className="font-normal">No credit card required</span>,
-            html: (
-                <>
-                    <h4>Use PostHog free forever, with some limits</h4>
-                    <div className="grid grid-cols-3 @xl:grid-cols-5 pb-4 text-[15px] [&>*:nth-child(3)]:opacity-60">
-                        <div className="px-2 pb-2 border-b border-light dark:border-dark">&nbsp;</div>
-                        <div className="@xl:col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
-                            <strong>Totally free</strong>
-                            <br />
-                            <span className="text-green font-semibold text-sm">(This plan)</span>
-                        </div>
-                        <div className="@xl:col-span-2 pl-2 pb-2 border-b border-light dark:border-dark text-opacity-70">
-                            <strong>Ridiculously cheap</strong>
-                        </div>
+const plans = [
+    {
+        name: 'Totally free',
+        description: <span className="font-normal">No credit card required</span>,
+        html: (
+            <>
+                <h4>Use PostHog free forever, with some limits</h4>
+                <div className="grid grid-cols-3 @xl:grid-cols-5 pb-4 text-[15px] [&>*:nth-child(3)]:opacity-60">
+                    <div className="px-2 pb-2 border-b border-light dark:border-dark">&nbsp;</div>
+                    <div className="@xl:col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
+                        <strong>Totally free</strong>
+                        <br />
+                        <span className="text-green font-semibold text-sm">(This plan)</span>
                     </div>
-                    <div className="grid grid-cols-3 @xl:grid-cols-5 gap-x-4 gap-y-2 text-[15px] [&>*:nth-child(3n+1)]:opacity-70 [&>*:nth-child(3n+3)]:opacity-70">
-                        <div>Price</div>
-                        <div className="@xl:col-span-2">Free forever</div>
-                        <div className="@xl:col-span-2">Starts at $0/mo</div>
-
-                        <div>Volume limits</div>
-                        <div className="@xl:col-span-2">
-                            Limited to free monthly allowance{' '}
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-[250px]">
-                                        Usage is capped at the free tier limits for each product and resets monthly.
-                                    </div>
-                                )}
-                                placement="top"
-                            >
-                                <IconInfo className="size-4 inline-block" />
-                            </Tooltip>
-                        </div>
-                        <div className="@xl:col-span-2">Unlimited</div>
-
-                        <div>Product features</div>
-                        <div className="@xl:col-span-2">
-                            Almost all the features{' '}
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-[320px]">
-                                        <p className="mb-2 text-sm">
-                                            Use each product for free without advanced features. Compare functionality
-                                            limitations on each product page.
-                                        </p>
-                                        <p className="mb-0 text-sm">
-                                            For full functionality, just enter a credit card and you'll be on the{' '}
-                                            <em>Ridiculously cheap</em> plan. PostHog is still free up to the monthly
-                                            free tier limits, and you can set a billing limit as low as $0.
-                                        </p>
-                                    </div>
-                                )}
-                                placement="top"
-                            >
-                                <IconInfo className="size-4 inline-block" />
-                            </Tooltip>
-                        </div>
-                        <div className="@xl:col-span-2">All features</div>
-
-                        <div>Support</div>
-                        <div className="@xl:col-span-2">Community support</div>
-                        <div className="@xl:col-span-2">Standard support</div>
-
-                        <div>
-                            Add-ons{' '}
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-[300px]">
-                                        Add-ons extend functionality of products and are priced separately.
-                                    </div>
-                                )}
-                                placement="top"
-                            >
-                                <IconInfo className="size-4 inline-block" />
-                            </Tooltip>
-                        </div>
-                        <div className="@xl:col-span-2">
-                            Limited
-                            <br />
-                            <div className="pt-2">
-                                <PlanCTA intent="free" />
-                            </div>
-                        </div>
-                        <div className="@xl:col-span-2">Available</div>
+                    <div className="@xl:col-span-2 pl-2 pb-2 border-b border-light dark:border-dark text-opacity-70">
+                        <strong>Ridiculously cheap</strong>
                     </div>
-                </>
-            ),
-        },
-        {
-            name: 'Ridiculously cheap',
-            description: <span className="font-normal">Starts at $0/mo</span>,
-            html: (
-                <>
-                    <h4 className="mb-0">The "ridiculously cheap" plan</h4>
-                    <p className="text-sm inline-flex rounded-sm bg-yellow/25 py-0.5 px-1">
-                        86% of customers use this plan
-                    </p>
-                    <ul className="tw-check-bullets @lg:columns-2 pb-2">
-                        <li>Usage-based pricing</li>
-                        <li>Generous monthly free tier</li>
-                        <li>Up to 6 projects</li>
-                        <li>7-year data retention</li>
-                        <li>Email and community support</li>
-                        <li>Unlimited team members</li>
-                        <li>Unlimited tracked users</li>
-                    </ul>
-                    <PlanCTA intent="paid" />
-                </>
-            ),
-        },
-        {
-            name: 'Enterprise mode',
-            description: <span className="font-normal">$20k/yr minimum spend</span>,
-            html: (
-                <>
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <div className="mb-2">
-                                <strong>
-                                    Everything in <em>Ridiculously cheap</em> plus:
-                                </strong>
-                            </div>
-                            <ul className="tw-check-bullets">
-                                <li>SAML SSO enforcement</li>
-                                <li>Custom MSA</li>
-                                <li>Priority training, support</li>
-                                <li>Advanced permissions</li>
-                                <li>Audit logs</li>
-                            </ul>
-                        </div>
-                        <div className="relative pb-20 md:pb-0">
-                            <div className="mb-2">
-                                <strong>How it works</strong>
-                            </div>
-                            <ul className="tw-chevron-bullets [&_li]:text-sm">
-                                <li>Starts at $20k/year w/ fixed annual terms</li>
-                                <li>Annual contract with minimum commitment</li>
-                                <li>No upcharge on usage-based prices</li>
-                            </ul>
-                            <div className="pt-4 md:mb-20 xl:mb-0 relative z-20">
-                                <CallToAction
-                                    href="/talk-to-a-human"
-                                    size="md"
-                                    event={{
-                                        name: `clicked Talk to a helpful person`,
-                                        type: 'cloud',
-                                        intent: 'enterprise',
-                                    }}
-                                >
-                                    Talk to a helpful person
-                                </CallToAction>
-                            </div>
-                            <div className="absolute -bottom-4 -right-4">
-                                <div className="relative flex">
-                                    <Tooltip
-                                        content={() => (
-                                            <div className="max-w-sm">
-                                                <Link
-                                                    href="/community/profiles/28895"
-                                                    className="text-red dark:text-yellow text-[15px]"
-                                                >
-                                                    <strong className="block">Simon Fisher</strong>
-                                                </Link>
-                                                <p className="mb-0 text-sm opacity-75">Customer Success</p>
-                                            </div>
-                                        )}
-                                        placement="top"
-                                    >
-                                        <div className="relative size-20 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
-                                            <StaticImage
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575173/simon_bb4af1b047.png"
-                                                quality={100}
-                                                alt="Simon Fisher, Customer Success"
-                                                placeholder="none"
-                                                objectFit="contain"
-                                                className=""
-                                            />
-                                        </div>
-                                    </Tooltip>
+                </div>
+                <div className="grid grid-cols-3 @xl:grid-cols-5 gap-x-4 gap-y-2 text-[15px] [&>*:nth-child(3n+1)]:opacity-70 [&>*:nth-child(3n+3)]:opacity-70">
+                    <div>Price</div>
+                    <div className="@xl:col-span-2">Free forever</div>
+                    <div className="@xl:col-span-2">Starts at $0/mo</div>
 
-                                    <Tooltip
-                                        content={() => (
-                                            <div className="max-w-sm">
-                                                <Link
-                                                    href="/community/profiles/28622"
-                                                    className="text-red dark:text-yellow text-[15px]"
-                                                >
-                                                    <strong className="block">Cameron DeLeone</strong>
-                                                </Link>
-                                                <p className="mb-0 text-sm opacity-75">Customer Success</p>
-                                            </div>
-                                        )}
-                                        placement="top"
-                                    >
-                                        <div className="relative size-[5.5rem] -ml-7 -mr-8 -mt-2 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
-                                            <StaticImage
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1685570037/cameron_bc0de38765.png"
-                                                quality={100}
-                                                alt="Cameron DeLeone, Customer Success"
-                                                placeholder="none"
-                                                objectFit="contain"
-                                                className=""
-                                            />
-                                        </div>
-                                    </Tooltip>
-
-                                    <Tooltip
-                                        content={() => (
-                                            <div className="max-w-sm">
-                                                <Link
-                                                    href="/community/profiles/29862"
-                                                    className="text-red dark:text-yellow text-[15px]"
-                                                >
-                                                    <strong className="block">Mine Kansu</strong>
-                                                </Link>
-                                                <p className="mb-0 text-sm opacity-75">Customer Success Manager</p>
-                                            </div>
-                                        )}
-                                        placement="top"
-                                    >
-                                        <div className="relative size-20 top-0 hover:top-[-.2rem] hover:scale-[1.075] transition-all">
-                                            <StaticImage
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1704468198/Mine_dc7d915835.png"
-                                                quality={100}
-                                                alt="Mine Kansu, Customer Success Manager"
-                                                placeholder="none"
-                                                objectFit="contain"
-                                                className=""
-                                            />
-                                        </div>
-                                    </Tooltip>
+                    <div>Volume limits</div>
+                    <div className="@xl:col-span-2">
+                        Limited to free monthly allowance{' '}
+                        <Tooltip
+                            content={() => (
+                                <div className="max-w-[250px]">
+                                    Usage is capped at the free tier limits for each product and resets monthly.
                                 </div>
+                            )}
+                            placement="top"
+                        >
+                            <IconInfo className="size-4 inline-block" />
+                        </Tooltip>
+                    </div>
+                    <div className="@xl:col-span-2">Unlimited</div>
+
+                    <div>Product features</div>
+                    <div className="@xl:col-span-2">
+                        Almost all the features{' '}
+                        <Tooltip
+                            content={() => (
+                                <div className="max-w-[320px]">
+                                    <p className="mb-2 text-sm">
+                                        Use each product for free without advanced features. Compare functionality
+                                        limitations on each product page.
+                                    </p>
+                                    <p className="mb-0 text-sm">
+                                        For full functionality, just enter a credit card and you'll be on the{' '}
+                                        <em>Ridiculously cheap</em> plan. PostHog is still free up to the monthly free
+                                        tier limits, and you can set a billing limit as low as $0.
+                                    </p>
+                                </div>
+                            )}
+                            placement="top"
+                        >
+                            <IconInfo className="size-4 inline-block" />
+                        </Tooltip>
+                    </div>
+                    <div className="@xl:col-span-2">All features</div>
+
+                    <div>Support</div>
+                    <div className="@xl:col-span-2">Community support</div>
+                    <div className="@xl:col-span-2">Standard support</div>
+
+                    <div>
+                        Add-ons{' '}
+                        <Tooltip
+                            content={() => (
+                                <div className="max-w-[300px]">
+                                    Add-ons extend functionality of products and are priced separately.
+                                </div>
+                            )}
+                            placement="top"
+                        >
+                            <IconInfo className="size-4 inline-block" />
+                        </Tooltip>
+                    </div>
+                    <div className="@xl:col-span-2">
+                        Limited
+                        <br />
+                        <div className="pt-2">
+                            <PlanCTA intent="free" />
+                        </div>
+                    </div>
+                    <div className="@xl:col-span-2">Available</div>
+                </div>
+            </>
+        ),
+    },
+    {
+        name: 'Ridiculously cheap',
+        description: <span className="font-normal">Starts at $0/mo</span>,
+        html: (
+            <>
+                <h4 className="mb-0">The "ridiculously cheap" plan</h4>
+                <p className="text-sm inline-flex rounded-sm bg-yellow/25 py-0.5 px-1">
+                    86% of customers use this plan
+                </p>
+                <ul className="tw-check-bullets @lg:columns-2 pb-2">
+                    <li>Usage-based pricing</li>
+                    <li>Generous monthly free tier</li>
+                    <li>Up to 6 projects</li>
+                    <li>7-year data retention</li>
+                    <li>Email and community support</li>
+                    <li>Unlimited team members</li>
+                    <li>Unlimited tracked users</li>
+                </ul>
+                <PlanCTA intent="paid" />
+            </>
+        ),
+    },
+    {
+        name: 'Enterprise mode',
+        description: <span className="font-normal">$20k/yr minimum spend</span>,
+        html: (
+            <>
+                <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div className="mb-2">
+                            <strong>
+                                Everything in <em>Ridiculously cheap</em> plus:
+                            </strong>
+                        </div>
+                        <ul className="tw-check-bullets">
+                            <li>SAML SSO enforcement</li>
+                            <li>Custom MSA</li>
+                            <li>Priority training, support</li>
+                            <li>Advanced permissions</li>
+                            <li>Audit logs</li>
+                        </ul>
+                    </div>
+                    <div className="relative pb-20 md:pb-0">
+                        <div className="mb-2">
+                            <strong>How it works</strong>
+                        </div>
+                        <ul className="tw-chevron-bullets [&_li]:text-sm">
+                            <li>Starts at $20k/year w/ fixed annual terms</li>
+                            <li>Annual contract with minimum commitment</li>
+                            <li>No upcharge on usage-based prices</li>
+                        </ul>
+                        <div className="pt-4 md:mb-20 xl:mb-0 relative z-20">
+                            <CallToAction
+                                href="/talk-to-a-human"
+                                size="md"
+                                event={{
+                                    name: `clicked Talk to a helpful person`,
+                                    type: 'cloud',
+                                    intent: 'enterprise',
+                                }}
+                            >
+                                Talk to a helpful person
+                            </CallToAction>
+                        </div>
+                        <div className="absolute -bottom-4 -right-4">
+                            <div className="relative flex">
+                                <Tooltip
+                                    content={() => (
+                                        <div className="max-w-sm">
+                                            <Link
+                                                href="/community/profiles/28895"
+                                                className="text-red dark:text-yellow text-[15px]"
+                                            >
+                                                <strong className="block">Simon Fisher</strong>
+                                            </Link>
+                                            <p className="mb-0 text-sm opacity-75">Customer Success</p>
+                                        </div>
+                                    )}
+                                    placement="top"
+                                >
+                                    <div className="relative size-20 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
+                                        <StaticImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575173/simon_bb4af1b047.png"
+                                            quality={100}
+                                            alt="Simon Fisher, Customer Success"
+                                            placeholder="none"
+                                            objectFit="contain"
+                                            className=""
+                                        />
+                                    </div>
+                                </Tooltip>
+
+                                <Tooltip
+                                    content={() => (
+                                        <div className="max-w-sm">
+                                            <Link
+                                                href="/community/profiles/28622"
+                                                className="text-red dark:text-yellow text-[15px]"
+                                            >
+                                                <strong className="block">Cameron DeLeone</strong>
+                                            </Link>
+                                            <p className="mb-0 text-sm opacity-75">Customer Success</p>
+                                        </div>
+                                    )}
+                                    placement="top"
+                                >
+                                    <div className="relative size-[5.5rem] -ml-7 -mr-8 -mt-2 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
+                                        <StaticImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1685570037/cameron_bc0de38765.png"
+                                            quality={100}
+                                            alt="Cameron DeLeone, Customer Success"
+                                            placeholder="none"
+                                            objectFit="contain"
+                                            className=""
+                                        />
+                                    </div>
+                                </Tooltip>
+
+                                <Tooltip
+                                    content={() => (
+                                        <div className="max-w-sm">
+                                            <Link
+                                                href="/community/profiles/29862"
+                                                className="text-red dark:text-yellow text-[15px]"
+                                            >
+                                                <strong className="block">Mine Kansu</strong>
+                                            </Link>
+                                            <p className="mb-0 text-sm opacity-75">Customer Success Manager</p>
+                                        </div>
+                                    )}
+                                    placement="top"
+                                >
+                                    <div className="relative size-20 top-0 hover:top-[-.2rem] hover:scale-[1.075] transition-all">
+                                        <StaticImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1704468198/Mine_dc7d915835.png"
+                                            quality={100}
+                                            alt="Mine Kansu, Customer Success Manager"
+                                            placeholder="none"
+                                            objectFit="contain"
+                                            className=""
+                                        />
+                                    </div>
+                                </Tooltip>
                             </div>
                         </div>
                     </div>
-                </>
-            ),
-        },
-    ]
+                </div>
+            </>
+        ),
+    },
+]
 
+const PlansTabs = () => {
     const [activeTab, setActiveTab] = useState(0)
     const activePlan = plans[activeTab]
 
@@ -793,11 +801,10 @@ const PlansTabs = () => {
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
                     size="sm"
-                    className="transition-all w-[fit-content] md:w-full md:!px-3"
                     tabs={plans.map(({ name, description, html }) => ({
                         title: name,
                         subtitle: description,
-                        html: html,
+                        html,
                     }))}
                 />
             </div>
@@ -822,7 +829,6 @@ const PricingExperiment = ({
     currentProduct?: string | null
 }): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const products = useProducts()
     const {
         allProductData: {
             nodes: [{ products: billingProducts }],
@@ -930,7 +936,7 @@ const PricingExperiment = ({
             {!currentProduct && (
                 <>
                     <section className={`${section} mb-12 mt-8 md:px-4`}>
-                        <ProductTabs billingProducts={billingProducts} />
+                        <ProductTabs />
                     </section>
 
                     <SectionLayout>
