@@ -123,14 +123,14 @@ export default function ImageSlider(): JSX.Element {
                             setActiveIndex={setActiveIndex}
                         />
                         {index === 0 && (
-                            <div className="absolute bottom-1 xl:bottom-2 left-2 right-2 text-xs leading-tight opacity-60">
+                            <div className="absolute bottom-2 md:bottom-1 xl:bottom-2 left-2 right-2 text-xs leading-tight opacity-60">
                                 *{disclaimer}
                             </div>
                         )}
                     </>
                 ))}
             </div>
-            <div className="flex flex-nowrap md:grid grid-cols-5 overflow-x-auto md:overflow-auto -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory my-2 gap-2">
+            <div className="flex flex-nowrap md:grid grid-cols-5 lg:grid-cols-4 xl:grid-cols-5 overflow-x-auto md:[overflow:unset] -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory my-2 gap-2">
                 {images.map((_, index) => (
                     <Slide
                         key={index}
