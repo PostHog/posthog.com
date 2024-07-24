@@ -43,7 +43,7 @@ export default function Banner() {
         <>
             {!compact && (
                 <div
-                    className={`${isCookieSet ? '' : 'transition-all !max-h-96'} overflow-hidden relative`}
+                    className={`${isCookieSet ? 'h-0' : '!max-h-96'} transition-all overflow-hidden relative`}
                     style={{ maxHeight: '0px' }}
                 >
                     <div className="bg-yellow/75 dark:bg-yellow/90 md:text-center text-sm dark:text-primary pl-4 pr-10 md:px-10 py-2">
