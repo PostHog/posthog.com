@@ -41,6 +41,8 @@ Most companies add friction here by making customers jump on a call first to qua
 
 If you're pretty sure that they should be qualified out, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.)
 
+You can also redirect them to use the In-app support modal if they have a product-related question - this will then be routed to the right team, as well as showing them CTAs to upgrade for high priority support.
+
 ### 3. Initial demo
 
 This is basically a combo of discovery and demo call - your objectives here are to:
