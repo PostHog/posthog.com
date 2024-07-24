@@ -64,6 +64,16 @@ Anyone at PostHog is welcome to use it as much as they like. See the [full Hedge
 
 If you'd like to book it, please message Kendal in the #team-people-and-ops channel to check availability. 
 
+## London hotel recommendations
+
+For offsites and onboardings in London, below is a list of hotels recommended in our [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) by folks who have stayed at these hotels.  These are all relatively near our [Work.Life coworking space in Farringdon](https://work.life/office-space/london/city/farringdon/): 
+
+- [citizenM Tower of London hotel](https://www.citizenm.com/hotels/europe/london/tower-of-london-hotel)
+- [Clayton Hotel - City of London](https://www.claytonhotels.com/city-of-london/)
+- [Hampton by Hilton  - London Old Street](https://www.hilton.com/en/hotels/lhroshx-hampton-london-old-street/)
+- [hub by Premier Inn London Clerkenwell hotel](https://www.premierinn.com/gb/en/hotels/england/greater-london/london/hub-london-clerkenwell.html)
+- [Yotel London City](https://www.yotel.com/en/hotels/yotel-london-city)
+
 ## Travel insurance
 
 Many of our company offsites involve team members traveling abroad, and although we hope that these trips are uneventful and safe for all, in the event of an accident or medical emergency, we carry travel insurance through as well as general & auto liability policies through our partner [Embroker](https://www.embroker.com). 
