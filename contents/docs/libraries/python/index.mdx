@@ -66,9 +66,6 @@ In this case, you can use `alias` to assign another distinct ID to the same user
 
 ```python
 posthog.alias(previous_id='distinct_id', distinct_id='alias_id')
-# Yes, this is confusing. It is a artifact of the old alias API.
-# These get renamed when the $create_alias event is sent.
-# See the code for more: https://github.com/PostHog/posthog-python/blob/5fdd6177ee4efbae04ca597ba548e0da3d6d792a/posthog/client.py#L295
 ```
 
 We strongly recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.

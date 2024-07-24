@@ -63,9 +63,6 @@ posthog.alias('alias_id', 'distinct_id');
 
 ```python
 posthog.alias(previous_id='distinct_id', distinct_id='alias_id')
-# Yes, this is confusing. It is a artifact of the old alias API.
-# These get renamed when the $create_alias event is sent.
-# See the code for more: https://github.com/PostHog/posthog-python/blob/5fdd6177ee4efbae04ca597ba548e0da3d6d792a/posthog/client.py#L295
 ```
 
 ```php
