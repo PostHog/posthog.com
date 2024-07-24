@@ -70,7 +70,7 @@ export const TeamMemberLink = (person) => {
                         )}
                         placement="top"
                     >
-                        <span className="!text-sm text-red dark:text-yellow font-semibold inline-flex">
+                        <span className=" text-red dark:text-yellow font-semibold inline-flex">
                             {person ? [firstName, lastName].filter(Boolean).join(' ') : name}
                         </span>
                     </Tooltip>
