@@ -2645,6 +2645,10 @@ export const docsMenu = {
                             name: 'Intercom',
                         },
                         {
+                            url: '/docs/cdp/laudspeaker-connector',
+                            name: 'Laudspeaker',
+                        },
+                        {
                             url: '/docs/cdp/rudderstack-export',
                             name: 'RudderStack',
                         },
