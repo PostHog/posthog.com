@@ -1,4 +1,4 @@
-import { IconFlask, IconGraph, IconMessage, IconRewindPlay, IconToggle } from '@posthog/icons'
+import { IconDatabase, IconFlask, IconGraph, IconMessage, IconRewindPlay, IconToggle } from '@posthog/icons'
 import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
@@ -59,6 +59,18 @@ const initialProducts = [
             max: 100000,
         },
         volume: 250,
+    },
+    {
+        Icon: IconDatabase,
+        name: 'Data warehouse',
+        type: 'data_warehouse',
+        color: 'purple',
+        slider: {
+            marks: [1000000, 10000000, 100000000, 1000000000],
+            min: 1000000,
+            max: 1000000000,
+        },
+        volume: 1000000,
     },
 ]
 
