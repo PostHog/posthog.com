@@ -41,7 +41,7 @@ We have two repos to centralize and document private internal communication. The
 ### Company Internal
 Repository can be found in https://github.com/PostHog/company-internal
 
-Documents any company-wide information that can't be share publicly within People, Ops, Legal, Finance or Strategy.
+Documents any company-wide information that can't be shared publicly within People, Ops, Legal, Finance or Strategy.
 
 **Examples of information that should go here:**
 - ✅ Hiring plans and discussions _before_ we post a job ad
