@@ -33,6 +33,7 @@ import { Reviews } from './Test/Reviews'
 import ImageSlider from './Test/ImageSlider'
 import Header from './Test/Header'
 import { Link as ScrollLink } from 'react-scroll'
+import PurchasedWith from './Test/PurchasedWith'
 
 const SidebarList = ({ children }) => <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 
@@ -932,6 +933,7 @@ const PricingExperiment = ({
 
                     <Addons />
                     <SimilarProducts />
+                    <PurchasedWith />
                     <Reviews />
 
                     <SectionLayout>
