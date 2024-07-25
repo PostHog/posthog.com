@@ -604,6 +604,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-as-beta',
             },
             {
+                name: 'Per-product growth reviews',
+                url: '/handbook/product/per-product-growth-reviews',
+            },
+            {
                 name: 'In-app prompts',
                 url: '/handbook/product/in-app-prompts',
             },
@@ -1845,6 +1849,14 @@ export const docsMenu = {
                             name: 'Migrate from Amplitude',
                             url: '/docs/migrate/migrate-from-amplitude',
                         },
+                        {
+                            name: 'Migrate from Mixpanel',
+                            url: '/docs/migrate/mixpanel',
+                        },
+                        {
+                            name: 'Migrate from Heap',
+                            url: '/docs/migrate/heap',
+                        },
                     ],
                 },
                 {
@@ -2771,6 +2783,9 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup',
                         },
                         {
+                            name: 'Managed',
+                        },
+                        {
                             name: 'Stripe',
                             url: '/docs/data-warehouse/setup/stripe',
                         },
@@ -2787,12 +2802,27 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/postgres',
                         },
                         {
+                            name: 'Snowflake',
+                            url: '/docs/data-warehouse/setup/snowflake',
+                        },
+                        {
+                            name: 'Self-managed',
+                        },
+                        {
                             name: 'S3',
                             url: '/docs/data-warehouse/setup/s3',
                         },
                         {
                             name: 'Azure',
                             url: '/docs/data-warehouse/setup/azure',
+                        },
+                        {
+                            name: 'Cloudflare R2',
+                            url: '/docs/data-warehouse/setup/r2',
+                        },
+                        {
+                            name: 'Google Cloud Storage',
+                            url: '/docs/data-warehouse/setup/gcs',
                         },
                     ],
                 },

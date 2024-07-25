@@ -21,6 +21,7 @@ import {
     StickerFlagFI,
     StickerFlagFR,
     StickerFlagGB,
+    StickerFlagHU,
     StickerFlagNL,
     StickerFlagPL,
     StickerFlagUnknown,
@@ -49,6 +50,7 @@ import TeamUpdate from 'components/TeamUpdate'
 import { RenderInClient } from 'components/RenderInClient'
 import usePostHog from '../hooks/usePostHog'
 import { companyMenu } from '../navs'
+import { PrivateLink } from 'components/PrivateLink'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -120,6 +122,8 @@ const Stickers = ({ country, pineappleOnPizza, isTeamLead, isModerator, id, hand
                     <StickerFlagES className="w-8 h-8" />
                 ) : country === 'FI' ? (
                     <StickerFlagFI className="w-8 h-8" />
+                ) : country === 'HU' ? (
+                    <StickerFlagHU className="w-8 h-8" />
                 ) : country === 'IE' ? (
                     <StickerFlagIE className="w-8 h-8" />
                 ) : country === 'FR' ? (
@@ -621,7 +625,7 @@ export default function Team({
             {hasBody && (
                 <Section title="Handbook" id="handbook">
                     <div className="article-content max-w-2xl team-page-content">
-                        <MDXProvider components={{}}>
+                        <MDXProvider components={{ PrivateLink }}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </div>

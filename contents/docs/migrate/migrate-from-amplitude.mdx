@@ -10,7 +10,7 @@ import MigrationWarning from "./_snippets/migration-warning.mdx"
 
 Migrating from Amplitude is a two step process:
 
-1. Export your data from Amplitude using the [Amplitude Export API](https://amplitude.com/docs/apis/analytics/export).
+1. Export your data from Amplitude using the organizations settings export, [Amplitude Export API](https://amplitude.com/docs/apis/analytics/export), or the S3 export.
 
 2. [Import data into PostHog](/docs/migrate) using PostHog's [Python SDK](/docs/libraries/python) or [`batch` API](/docs/api/capture) with the `historical_migration` option set to `true`. Other libraries don't support historical migrations yet.
 

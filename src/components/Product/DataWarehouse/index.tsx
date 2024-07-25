@@ -263,19 +263,7 @@ export const ProductDataWarehouse = () => {
 
                 <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
                     <div className="flex-grow overflow-auto px-5 md:px-0 mb-8 md:mb-0">
-                        <div className="grid grid-cols-2 [&>div]:p-1 rounded">
-                            <div className="bg-accent dark:bg-accent-dark font-bold">Synced rows</div>
-                            <div className="bg-accent dark:bg-accent-dark font-bold">Cost per row</div>
-                            <div>0-1 million</div>
-                            <div>Free</div>
-                            <div>1-10 million</div>
-                            <div>$0.000015</div>
-                            <div>10-100 million</div>
-                            <div>$0.000010</div>
-                            <div>100+ million</div>
-                            <div>$0.000008</div>
-                        </div>
-                        {/* <Plans showHeaders={false} showCTA={false} groupsToShow={['data-warehouse']} /> */}
+                        <Plans showHeaders={false} showCTA={false} groupsToShow={['data_warehouse']} />
                     </div>
 
                     <div className="px-5 md:px-0 lg:w-96 lg:mt-4">

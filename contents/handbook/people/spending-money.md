@@ -127,9 +127,23 @@ Our entire stack for collaborative software is pleasingly simple. All we use is:
 * GitHub - documents, code, discussion
 * Slack (premium) - chat (although we encourage you to default into discussion of features/strategy etc into GitHub)
 * PostHog - product analytics
-* Figma - graphic design
+* Figma - design
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
+
+### Optional software
+
+There are other tools some team members choose to use individually. In those cases, as they become more widely adopted in the company, it makes sense to have a company account.
+
+Ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink> and someone will grant your request if you ask nicely.
+
+- <Link to="https://www.loom.com" external>Loom</Link>
+
+  You'll be added as a _Creator Lite_ which allows you to record 25 videos/mo at up to 5 minutes in length. Should you need a full Creator account (unlimited videos, advanced features), ask <TeamMember name="Simon Fisher" photo />.
+
+- <Link to="https://www.zoom.us" external>Zoom</Link>
+  
+  We use Google Meet by default, but you can use Zoom for free (up to 40-minute calls). Should you need longer meetings, ask <TeamMember name="Simon Fisher" photo />. (But does anyone _really_ need longer meetings?)
 
 ### IDEs
 

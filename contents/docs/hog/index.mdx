@@ -66,20 +66,24 @@ print('string' !~* 'I.G$') // false, case insensitive
 
 Supports both dot notation and bracket notation.
 
+Arrays in Hog (and HogQL) are **1-indexed**!
+
 ```rust
 let myArray := [1,2,3]
-print(myArray.1) // prints 2
-print(myArray[1]) // prints 2
+print(myArray.2) // prints 2
+print(myArray[2]) // prints 2
 ```
 
 ### Tuples
 
 Supports both dot notation and bracket notation.
 
+Tuples in Hog (and HogQL) are **1-indexed**!
+
 ```rust
 let myTuple := (1,2,3)
-print(myTuple.1) // prints 2
-print(myTuple[1]) // prints 2
+print(myTuple.2) // prints 2
+print(myTuple[2]) // prints 2
 ```
 
 ### Objects
