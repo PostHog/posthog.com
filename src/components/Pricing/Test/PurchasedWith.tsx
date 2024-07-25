@@ -30,8 +30,8 @@ export default function PurchasedWith() {
             <SectionHeader>
                 <h3 className="mb-2">Frequently purchased with...</h3>
                 <p>
-                    These are some products that pair well with posthog to help you find PMF and maybe even get to an
-                    IPO. (In fact, we use them ourselves!)
+                    These are some products that pair well with PostHog to help you find product-market fit and maybe
+                    even get to an IPO. (In fact, we use them ourselves!)
                 </p>
             </SectionHeader>
             <ul className="mt-4 list-none -mx-4 px-4 md:mx-0 md:px-0 xl:-mx-8 xl:px-8 2xl:-mx-12 2xl:px-12 pb-2 gap-4 grid grid-flow-col auto-cols-max overflow-x-auto">

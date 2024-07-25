@@ -793,7 +793,7 @@ const PricingExperiment = ({
 
                             <p className="mb-4">
                                 PostHog is designed to grow with you. Our 8 products (and counting) will take you from
-                                idea to product/market fit to IPO and beyond. 🚀
+                                idea to product-market fit to IPO and beyond. 🚀
                             </p>
 
                             <p className="mb-4">
@@ -978,6 +978,11 @@ const PricingExperiment = ({
                                         If something stupid happens, like you get an unexpected bill and you’re unhappy,
                                         we’ll pretty much always refund it!
                                     </SidebarListItem>
+                                    <SidebarListItem>
+                                        We've also written{' '}
+                                        <Link href="/docs/billing/estimating-usage-costs">this handy guide</Link> to
+                                        help!
+                                    </SidebarListItem>
                                 </SidebarList>
                             </div>
                         </div>
@@ -1020,7 +1025,7 @@ const PricingExperiment = ({
                                 >
                                     <em>Tell us if we're not!</em>
                                 </Link>{' '}
-                                (Note: This doesn't include your buddy's two person startup.)
+                                (Note: This doesn't include your buddy's two-person startup.)
                             </li>
                             <li>
                                 The company in general has significant revenue, over 60,000 customers, runs{' '}
