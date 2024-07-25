@@ -127,7 +127,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       tableOfContents: [AshbyJobTableOfContents],
       html: String,
       title: String,
-      slug: String
+      slug: String,
+      locations: [String],
     }
     type AshbyJobPostingFormDefFieldsSectionsFieldsField {
       type: String,
