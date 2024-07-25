@@ -41,7 +41,7 @@ A startup recruiter will, if you’re lucky, spend more than a few seconds readi
 
 We did the math and, on average, we spend less than one minute reviewing each application we receive. Automated or junk applications (hello, ChatGPT) will be discarded in less than five seconds. Truly great applications will be read for up to five minutes.
 
-### Spend time on a short cover letter
+### Write a (short) cover letter that doesn't suck
 
 And we mean short. Five to ten sentences is fine. Don’t rewrite your resume. Keep it is simple.
 
@@ -66,7 +66,7 @@ How do you get a warm referral? Bombshell: be a great human and a great engineer
 
 This does not mean you should randomly spam people on LinkedIn for an intro (this never works), but it does mean you should work hard wherever you go and leave a great impression. People talk to each other. And, who knows, one day maybe they’ll talk about you and be really nice.
 
-## Ask the right questions
+## Be genuinely curious
 
 One way we’re able to recognize [10x engineers](https://newsletter.posthog.com/p/beyond-the-10x-engineer) at the interview stage is by the questions they ask. It’s not rude to ask very specific questions, it shows you’re genuinely curious about what we’re doing. These are the questions you should be asking when interviewing with a startup founder.
 
@@ -95,6 +95,7 @@ Easier said than done! But job ads are actually littered with clues.
 We’ve received 9,000 applications for roles in the last 12 months. One thing we hear a lot? People like our job ads. That’s nice! But writing great job descriptions isn’t just important for recruiting, it’s also a great way for you to scope out a potential employer. This is what you should be looking out for in a job description for an engineering role at a startup.
 
 * **Really tight requirements.** A list of must-haves and a list of nice-to-haves. Each should be around four items long, that’s it.
+
 * **A clear and simple hiring process.** How many interviews are there? Is there a work trial? If so, what is it? And is it paid? If you know exactly what the hiring process is – and how long it takes – that’s a good sign.
 
 * **Total salary transparency.** This could be a range or it could be a tool that allows you to see an estimate of your potential salary. Either way, salary transparency is a must-have.
