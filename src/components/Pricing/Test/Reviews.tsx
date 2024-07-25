@@ -96,6 +96,7 @@ export const Reviews = () => {
                         star_rating
                     }
                 }
+                totalCount
             }
         }
     `)
@@ -110,12 +111,15 @@ export const Reviews = () => {
     return (
         <section id="g2-reviews" className={`${section} `}>
             <SectionHeader>
-                <h3 className="mb-2">Reviews</h3>
+                <h3 className="mb-2">Latest reviews</h3>
             </SectionHeader>
             <div className="grid md:grid-cols-12 gap-4 md:gap-12 my-6">
                 <div className="col-span-full md:col-span-3">
                     <label className="block font-semibold opacity-70">Overall rating</label>
-                    <h3 className="mb-1">{totalRating}</h3>
+                    <div className="flex items-baseline gap-1.5">
+                        <h3 className="mb-1">{totalRating}</h3>
+                        <span className="opacity-60 text-sm font-semibold">{allReviews.totalCount} reviews</span>
+                    </div>
                     <Stars rating={totalRating} />
                     <p className="text-sm mt-2 text-opacity-75">
                         Reviews collected by{' '}
