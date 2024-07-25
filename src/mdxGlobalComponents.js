@@ -23,6 +23,7 @@ import { Label } from './components/Label'
 import { List } from './components/List'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
+import Link from './components/Link'
 import { PrivateLink } from './components/PrivateLink'
 import { AbTesting } from './components/Product/AbTesting'
 import { FeatureFlags } from './components/Product/FeatureFlags'
@@ -79,6 +80,7 @@ export const shortcodes = {
     List,
     OverflowXSection,
     Quote,
+    Link,
     PrivateLink,
     AbTesting,
     FeatureFlags,
