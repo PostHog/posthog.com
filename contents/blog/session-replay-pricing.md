@@ -13,9 +13,7 @@ tags:
 ## TL;DR
  
 - We’ve optimized our session replay pipeline and infrastructure.
-
 - We’re passing the savings onto you by making session replay _drastically cheaper_, especially at lower volumes.
-
 - We’re now the cheapest session replay tool among competitive products.
 
 And this is just Part 1...
@@ -26,7 +24,7 @@ It depends on your usage, but as an example: if you capture 25k session recordin
 
 This makes PostHog cheaper than any competing tool with similar features that publishes its pricing.
 
-![new pricing](https://res.cloudinary.com/dmukukwp6/image/upload/new_replay_pricing_dce01fc509.jpg)
+![new pricing](https://res.cloudinary.com/dmukukwp6/image/upload/25k_replays_9103dd270a.png)
 
 Of course, many tools don’t publish pricing. That’s their choice, but we’re pretty confident it’s not because they’re secretly great value. How else are they going to justify those huge outbound sales teams, eh?
 
@@ -84,9 +82,7 @@ Next week.
 Figure out how to spend the money you’ve saved? Some suggestions:
 
 - Donate to [Herts & Middlesex Wildlife Trust](https://www.hertswildlifetrust.org.uk/) in the UK, where the hedgehog population has sadly fallen by 50% over the last 20 years. Max, our Hedgehog in Residence, would appreciate it. They’re so cute and round, and [lactose intolerant](https://www.wwf.org.uk/learn/fascinating-facts/hedgehogs).
-
 - Buy something from our [merch store](/merch), like this [stylish Carhartt cap](/merch?product=posthog-carhartt-cap), this [awesome data warehouse t-shirt](/merch?product=data-warehouse-t-shirt), or the [world’s most adorable sticker pack](/merch?product=posthog-meme-sticker-pack).
-
 - Buy a billboard on the 101.
 
 Alternatively, if you haven’t already, you can try one of our other products, like product analytics, feature flags, surveys, or our [recently released data warehouse](/blog/data-warehouse-launch). They all have [generous free tiers](/pricing), too.
