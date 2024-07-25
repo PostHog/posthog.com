@@ -102,6 +102,8 @@ We’ve received 9,000 applications for roles in the last 12 months. One thing w
 
 * **The job description is fun to read.** No startup should be writing stodgy, corporate-esque job descriptions. They should be stylish, interesting, and entertaining. This helps you better understand the company culture before you (hopefully) receive an offer.
 
+![bad job ad, good job ad](https://res.cloudinary.com/dmukukwp6/image/upload/good_job_bad_job_6c915824a2.png)
+
 Beyond that, research the company on social media. Are they attracting lots of (good) attention? Check [Google Trends]([url](https://trends.google.com/trends/)) to see if there's growing interest in the company. Use [Crunchbase]([url](https://www.crunchbase.com/)) to dig into the company's investors and their track record. And do the same for the founder or founders. Are they first-timers, or have they got previous exits? If so, have they ever had success?
 
 ## Be cracked
