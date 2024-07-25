@@ -60,9 +60,11 @@ Particularly strong cover letters we’ve received recently include the followin
 
 ### One simple, annoying trick
 
-Get ready to groan, but there’s one thing that will really help: get a proper, warm referral. We trust our team’s judgment, so a referral can really help us pre-filter applicants. 
+Get ready to groan, but there’s one thing that will really help: get a proper, warm referral. We trust our team’s judgment, so a referral can really help us pre-filter applicants.
 
-This does not mean you should randomly spam people on LinkedIn for an intro (this never works), but it does mean you should work hard wherever you go and leave a good impression. People talk to each other. And, who knows, one day maybe they’ll talk about you and be really nice.
+How do you get a warm referral? Bombshell: be a great human and a great engineer. So good, in fact, that other human beings will attest to your greatness. 
+
+This does not mean you should randomly spam people on LinkedIn for an intro (this never works), but it does mean you should work hard wherever you go and leave a great impression. People talk to each other. And, who knows, one day maybe they’ll talk about you and be really nice.
 
 ## Ask the right questions
 
