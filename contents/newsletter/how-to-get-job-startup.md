@@ -43,7 +43,7 @@ We did the math and, on average, we spend less than one minute reviewing each ap
 
 ### Spend time on a short cover letter
 
-And we mean short. Five to ten sentences is fine. Don’t rewrite your resume. Keep it is simple, remember, the applicant tracking system will break all your formatting.
+And we mean short. Five to ten sentences is fine. Don’t rewrite your resume. Keep it is simple.
 
 Match the company’s tone – if the job ad is informal, don’t start your cover letter with ‘Dear Sir/Madam.’ And never, ever, use ChatGPT. Not even to help you with a draft. We’ll know, it’s always obvious.
 
