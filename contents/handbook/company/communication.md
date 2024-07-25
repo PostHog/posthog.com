@@ -195,7 +195,7 @@ Here are the steps for an RFC:
 2. They create an RFC as a pull request (normally into PostHog/posthog or PostHog/posthog.com unless in the rare case it's confidential where we use PostHog/product-internal) with the title `RFC: ...`. The RFC should include:
    1. The decision to be made
    2. Who will make the decision
-      - By default this should be the person who will own the project and do the work. In the rare case that it's a non-reversible decision it might be more appropriate have the team lead be the decision maker.
+      - By default this should be the person who will own the project and do the work. In the rare case that it's a non-reversible decision it might be more appropriate to have the team lead be the decision maker.
    3. When the decision will be made by (normally less than 1 week). You don't need to wait for this date if you've already received input from the key people you need.
    4. The specific people that you want feedback from (as GitHub assignees)
       - It can be useful to say which people are required vs which are welcome but optional so others know if they need to respond
