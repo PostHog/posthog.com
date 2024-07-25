@@ -160,7 +160,7 @@ Post-onboarding, you'll want to move the customer into our Expansion or Retentio
 - Expansion: multi-product potential, multi-team potential, _or_ same team and product but massively ramping usage next year
 - Retention: everyone else, steady state only
 
-**8. Closed - lost**
+### 7. Closed - lost
 
 Oh no! It's ok - the most important thing here is that we learn. You should capture the reason in HubSpot - this could be:
 
