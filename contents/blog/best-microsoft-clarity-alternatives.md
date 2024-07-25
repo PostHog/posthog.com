@@ -206,7 +206,7 @@ According to reviews on G2, companies use FullStory for:
 
 ### What is UXCam?
 
-UXCam is designed specifically for mobile apps rather than websites. It combines basic product analytics with session replay and heatmap tools to help its users understand how people use their apps, and optimize conversions. It offers SDKs for iOS (Swift and Objective C) and Android (Kotlin and Java), but also supports popular cross-platform frameworks, such as React Native and Flutter.
+[UXCam](/blog/best-uxcam-alternatives) is designed specifically for mobile apps rather than websites. It combines basic product analytics with session replay and heatmap tools to help its users understand how people use their apps, and optimize conversions. It offers SDKs for iOS (Swift and Objective C) and Android (Kotlin and Java), but also supports popular cross-platform frameworks, such as React Native and Flutter.
 
 #### Key features
 
