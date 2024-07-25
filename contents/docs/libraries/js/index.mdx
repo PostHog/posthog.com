@@ -41,7 +41,7 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 ## Person profiles and properties
 
-For backward compatibility, PostHog captures events with [person profiles](/docs/data/persons) by default. To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+For backward compatibility, PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```js-web
 posthog.capture(
@@ -64,7 +64,7 @@ posthog.setPersonProperties(
 
 This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To control whether you capture person profiles, update the `person_profiles` config option:
+To control whether you capture identified events and person profiles, update the `person_profiles` config option:
 
 import PersonProfilesConfig from './_snippets/person-profiles-config.mdx'
 
@@ -474,7 +474,7 @@ Some of the most relevant options are:
 | `opt_out_persistence_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                      | Determines if users should be opted out of browser data storage by this PostHog instance by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
 | `persistence`<br/><br/>**Type:** `localStorage` or `sessionStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                            | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
 | `property_denylist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                        | A list of properties that should never be sent with `capture` calls.                                                           |
-| `person_profiles`<br /><br />**Type:** Enum: `always`, `identified_only`<br/>**Default:** `always`                                                                                | Set whether events should have person profiles processed |
+| `person_profiles`<br /><br />**Type:** Enum: `always`, `identified_only`<br/>**Default:** `always`                                                                                | Set whether events should have capture identified events and process person profiles |
 | `sanitize_properties`<br/><br/>**Type:** Function<br/>**Default:** `null`                                                                                                                 | A function that allows you to sanitize or modify the properties that get sent. Example: `sanitize_properties: function(properties, event) { if(properties['$ip']) { properties['$ip'] = null } return properties }` |
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual)         |
 | `session_idle_timeout_seconds`<br/><br/>**Type:** Integer<br/>**Default:** `1800`                                                                                                         | The maximum amount of time a session can be inactive before it is split into a new session.                                    |
