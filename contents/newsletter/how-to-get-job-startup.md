@@ -88,9 +88,11 @@ Superstar engineers are laser-focused on working out where a company is struggli
 
 If you get the role, you need to be proactive in speaking to users, understanding problems big and small, taking ownership of them, and fixing them.
 
-## Know the signs of a great engineering role
+## Pick a winning company
 
-We’ve received 9,000 applications for roles in the last 12 months. One thing we hear a lot? People like our job ads. That’s nice! But writing great job descriptions isn’t just important for recruiting, it’s also an important clue when hunting for a new job. This is what you should be looking out for in a job description for an engineering role at a startup.
+Easier said than done! But job ads are actually littered with clues.
+
+We’ve received 9,000 applications for roles in the last 12 months. One thing we hear a lot? People like our job ads. That’s nice! But writing great job descriptions isn’t just important for recruiting, it’s also a great way for you to scope out a potential employer. This is what you should be looking out for in a job description for an engineering role at a startup.
 
 * **Really tight requirements.** A list of must-haves and a list of nice-to-haves. Each should be around four items long, that’s it.
 * **A clear and simple hiring process.** How many interviews are there? Is there a work trial? If so, what is it? And is it paid? If you know exactly what the hiring process is – and how long it takes – that’s a good sign.
@@ -98,6 +100,8 @@ We’ve received 9,000 applications for roles in the last 12 months. One thing w
 * **Total salary transparency.** This could be a range or it could be a tool that allows you to see an estimate of your potential salary. Either way, salary transparency is a must-have.
 
 * **The job description is fun to read.** No startup should be writing stodgy, corporate-esque job descriptions. They should be stylish, interesting, and entertaining. This helps you better understand the company culture before you (hopefully) receive an offer.
+
+Beyond that, research the company on social media. Are they attracting lots of (good) attention? Check [Google Trends]([url](https://trends.google.com/trends/)) to see if there's growing interest in the company. Use [Crunchbase]([url](https://www.crunchbase.com/)) to dig into the company's investors and their track record. And do the same for the founder or founders. Are they first-timers, or have they got previous exits? If so, have they ever had success?
 
 ## Be cracked
 
