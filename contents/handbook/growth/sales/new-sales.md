@@ -43,6 +43,19 @@ If you're pretty sure that they should be qualified out, you should still be hel
 
 You can also redirect them to use the In-app support modal if they have a product-related question - this will then be routed to the right team, as well as showing them CTAs to upgrade for high priority support.
 
+> Examples of good discovery questions - this is not a script, just ideas! </br>
+> </br> - What is the problem? What is this problem affecting?
+> </br> - What metric is impacted as a result of this? What metric would be improved as a result of PostHog?
+> </br> - How important is this problem to the wider team?
+> </br> - What attempts have been made to fix this so far? Why has no attempt been made to fix this?
+> </br> - Why fix this now? Why fix this ahead of the other important things happening at your company?
+> </br> - Are you looking at {product} as a point solution that would slot into the rest of your stack, or are you looking to consolidate multiple tools and have a single source of truth?
+> </br> - What does the rest of your stack look like? What other tools or data would you want PostHog data to connect to?
+> </br> - Who owns that data stack? Do you have a data team or data engineers?
+> </br> - Who will be the consumers of PostHog data? How are they currently answering their questions, and how easy is it for them to do so with existing tooling?
+
+(We will flesh this out into something more structured by product eventually). 
+
 ### 3. Initial demo
 
 This is basically a combo of discovery and demo call - your objectives here are to:
