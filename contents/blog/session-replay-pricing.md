@@ -32,7 +32,7 @@ We’re not just cheaper than replay tools designed for developers, either. Anyo
 
 And, unlike Hotjar, we support [session replays on mobile](/docs/session-replay/mobile) with our open beta for [iOS](/docs/libraries/ios) and [Android](/docs/libraries/android) SDKs – yes, [we are working on React Native](https://github.com/PostHog/posthog/issues/13269), folks, but feel free to vote for it on [our public roadmap](/roadmap) anyway.
 
-![posthog-vs-hotjar](https://res.cloudinary.com/dmukukwp6/image/upload/25k_replays_9103dd270a.png)
+![posthog-vs-hotjar](https://res.cloudinary.com/dmukukwp6/image/upload/hotjar_vs_posthog_1e7afaea71.png)
 
 You can [calculate your new price](/pricing) on the pricing page, but here’s a breakdown of the changes at different volumes:
 
