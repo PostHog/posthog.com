@@ -792,16 +792,17 @@ const PricingExperiment = ({
                             </div>
 
                             <p className="mb-4">
-                                PostHog is designed to grow with you. With 8 products (and counting), go from idea to
-                                product/market fit to IPO and beyond. 🚀
+                                PostHog is designed to grow with you. Our 8 products (and counting) will take you from
+                                idea to product/market fit to IPO and beyond. 🚀
                             </p>
 
                             <p className="mb-4">
                                 Our generous free tier means{' '}
                                 <strong>
-                                    <em>98% of companies use PostHog for free.</em>
+                                    <em>more than 90% of companies use PostHog for free.</em>
                                 </strong>{' '}
-                                Only add a card if you need more than the free tier limits or want more projects.
+                                Only add a card if you need more than the free tier limits, advanced features, or want
+                                more projects. You still keep the same monthly free volume, even after upgrading.
                             </p>
 
                             <div className="inline-block">

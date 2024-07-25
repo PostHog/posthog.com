@@ -89,7 +89,7 @@ export const Addons = (props) => {
                 <h3 className="mb-2">Add-ons</h3>
                 <p>We've moved specialized functionality into add-ons so you never pay for things you don't need.</p>
             </SectionHeader>
-            <div className="mt-4 -mx-4 px-4 overflow-x-auto">
+            <div className="mt-4 -mx-4 px-4 xl:-mx-8 xl:px-8 2xl:-mx-12 2xl:px-12 overflow-x-auto">
                 <div className="grid grid-flow-col auto-cols-max gap-4 mb-4">
                     {allAddons.map((addon) => (
                         <Addon key={addon.type} {...addon} />

@@ -4,6 +4,7 @@ import cntl from 'cntl'
 import Tooltip from 'components/Tooltip'
 import Plans, { CTA as PlanCTA, PricingTiers } from '../Plans'
 import { section, SectionHeader } from './Sections'
+import Link from 'components/Link'
 
 interface PlanData {
     title: string
@@ -24,7 +25,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
         <>
             <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded-md relative">
                 {planData.title === 'Totally free' && (
-                    <div className="absolute -top-6 right-4 border-2 border-yellow bg-white dark:bg-dark rounded-sm text-center py-1 px-2">
+                    <div className="absolute -top-6 right-4 !border-2 border-yellow bg-white dark:bg-dark rounded-sm text-center py-1 px-2">
                         <strong className="block text-yellow text-sm">Just pick this one!</strong>
                         <p className="text-xs mb-0 text-opacity-75">You can upgrade later.</p>
                     </div>
@@ -93,7 +94,7 @@ const planSummary = [
             },
             {
                 name: 'Like, totally free',
-                description: 'Almost product features, no credit card required',
+                description: 'Almost all product features, no credit card required',
             },
             {
                 name: 'Standard support',
@@ -244,6 +245,24 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                             : 'overflow-y-hidden invisible max-h-0 opacity-0'
                     } transition duration-500 ease-in-out transform`}
                 >
+                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark px-4 py-3 mb-4 rounded">
+                        <p className="mb-2 text-[15px]">
+                            The table below compares <span className="bg-yellow/25 p-0.5">platform features</span>{' '}
+                            between plans.
+                        </p>
+                        <p className="mb-0 text-[15px]">
+                            <strong>
+                                Looking to compare <span className="bg-yellow/25 p-0.5">product features</span>{' '}
+                                availability?
+                            </strong>{' '}
+                            Visit the product comparison pages:{' '}
+                            <Link to="/pricing?product=product-analytics">Product analytics</Link> |{' '}
+                            <Link to="/pricing?product=session-replay">Session replay</Link> |{' '}
+                            <Link to="/pricing?product=feature-flags">Feature flags</Link> |{' '}
+                            <Link to="/pricing?product=ab-testing">A/B testing</Link> |{' '}
+                            <Link to="/pricing?product=surveys">Surveys</Link>
+                        </p>
+                    </div>
                     <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                         <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
                             <div className="col-span-4 px-3 py-1">&nbsp;</div>

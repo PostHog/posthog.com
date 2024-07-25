@@ -31,15 +31,21 @@ export const PaidPricing = () => {
                         <ul className="mb-4 pl-6">
                             <li>
                                 <s>1 project</s>{' '}
-                                <span className="bg-highlight p-0.5 font-bold text-[15px]">7 projects</span>
+                                <span className="bg-highlight p-0.5 font-bold text-[15px] italic text-red dark:text-yellow">
+                                    6 projects
+                                </span>
                             </li>
                             <li>
                                 <s>1-year data retention</s>{' '}
-                                <span className="bg-highlight p-0.5 font-bold text-[15px]">7-year data retention</span>
+                                <span className="bg-highlight p-0.5 font-bold text-[15px] italic text-red dark:text-yellow">
+                                    7-year data retention
+                                </span>
                             </li>
                             <li>
                                 <s>Community support</s>{' '}
-                                <span className="bg-highlight p-0.5 font-bold text-[15px]">Priority support</span>
+                                <span className="bg-highlight p-0.5 font-bold text-[15px] italic text-red dark:text-yellow">
+                                    Priority support
+                                </span>
                             </li>
                         </ul>
 
@@ -54,7 +60,7 @@ export const PaidPricing = () => {
                     <div className="flex flex-col md:flex-row justify-between">
                         <div>
                             <h4 className="mb-0 tracking-tight">Rates (after the monthly free tier)</h4>
-                            <p className="text-sm opacity-60">Prices reduce with scale</p>
+                            <p className="text-sm opacity-60 mb-2">Prices reduce with scale</p>
                         </div>
                         <div className="hidden md:block">
                             <button
