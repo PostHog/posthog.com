@@ -8,7 +8,6 @@ tags:
 ---
 
 [Session replays](/session-replay) are a useful support tool for understanding how users are interacting with your Android app. It also helps you debug and recreate issues. 
-**
 To show how you to set it up with PostHog, in this tutorial we create a basic Kotlin app, add PostHog, and [enable session recordings](/docs/session-replay/mobile#android).
 
 ## 1. Create a basic Android app
@@ -233,7 +232,7 @@ fun WelcomeScreen(navController: NavController, modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = "Welcome!",
-                modifier = Modifier.testTag("ph-no-capture") // Add this modifier to blur the text in replays
+                modifier = Modifier.testTag("ph-no-capture") // Add this modifier to redact the text in replays
             )
             Button(onClick = { navController.navigate("login_screen") }) {
                 Text("Logout")
