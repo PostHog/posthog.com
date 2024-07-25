@@ -72,7 +72,7 @@ See [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) 
 
 #### PostHog vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -144,7 +144,7 @@ See [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) 
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an in-depth look at the differences
 
@@ -167,7 +167,7 @@ It also shares some weaknesses inherent in Universal Analytics. While Matomo has
 
 #### Matomo vs Google Analytics 4  
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -234,7 +234,7 @@ It also shares some weaknesses inherent in Universal Analytics. While Matomo has
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 > 
@@ -255,7 +255,7 @@ One of its key features is the Populations report, which groups users into key c
 
 #### Kissmetrics vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -327,7 +327,7 @@ One of its key features is the Populations report, which groups users into key c
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 > 
@@ -348,7 +348,7 @@ TelemetryDeck makes it easy for app developers to track things like active users
 
 #### TelemetryDeck vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -415,7 +415,7 @@ TelemetryDeck makes it easy for app developers to track things like active users
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 > 
@@ -438,7 +438,7 @@ But, if you just want basic website analytics, it gets the job done, and won't a
 
 #### Plausible vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -505,7 +505,7 @@ But, if you just want basic website analytics, it gets the job done, and won't a
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -528,7 +528,7 @@ Vercel acquired another popular analytics tool, Splitbee, in 2022. Splitbee's te
 
 #### Vercel vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -595,7 +595,7 @@ Vercel acquired another popular analytics tool, Splitbee, in 2022. Splitbee's te
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -616,7 +616,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 #### Piwik PRO vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -683,7 +683,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -702,7 +702,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 #### Fathom vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -769,7 +769,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -790,7 +790,7 @@ Counter's creators can offer it for free because it only collects aggregated dat
 
 #### Counter vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -857,7 +857,7 @@ Counter's creators can offer it for free because it only collects aggregated dat
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >

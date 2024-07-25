@@ -72,7 +72,7 @@ A problem both face is testing, as both require different testing strategies tha
 
 Like many tech choices, you should think about what is the simplest solution for your objective. This table summarizes the differences between the two:
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
   <thead>
     <tr>
@@ -119,7 +119,7 @@ Like many tech choices, you should think about what is the simplest solution for
     </tr>
   </tbody>
 </table>
-</div>
+</OverflowXSection>
 
 Another key part of the decision is figuring out what works well with the stack you have now:
 
