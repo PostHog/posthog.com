@@ -2563,7 +2563,7 @@ export const docsMenu = {
         {
             name: 'Data pipelines',
             url: '/docs/cdp',
-            color: '[#2EA2D3]',
+            color: 'sky-blue',
             icon: 'IconDecisionTree',
             children: [
                 {
@@ -2756,7 +2756,7 @@ export const docsMenu = {
         {
             name: 'Data warehouse',
             url: '/docs/data-warehouse',
-            color: '[#8567FF]',
+            color: 'lilac',
             icon: 'IconDatabase',
             children: [
                 {
@@ -2962,6 +2962,12 @@ export const pricingMenu = {
             url: '/pricing?product=surveys',
         },
         {
+            name: 'Data warehouse',
+            icon: 'IconDatabase',
+            color: 'lilac',
+            url: '/pricing?product=data-warehouse',
+        },
+        {
             name: 'How we do "sales"',
             icon: 'IconPercentage',
             color: 'green',
@@ -3015,7 +3021,7 @@ const menu = [
             {
                 name: 'Data warehouse',
                 icon: 'IconDatabase',
-                color: '[#8567FF]',
+                color: 'lilac',
                 url: '/data-warehouse',
             },
             {

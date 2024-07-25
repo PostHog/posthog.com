@@ -14,6 +14,7 @@ const internalProductNames: {
     'feature-flags': 'feature_flags',
     'ab-testing': 'ab_testing',
     surveys: 'surveys',
+    'data-warehouse': 'data_warehouse',
 }
 
 const pricingGroupsToShowOverride: {
