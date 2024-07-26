@@ -43,9 +43,11 @@ On the other hand, there are many use cases that don't require person profiles a
 
 Under our current [pricing](/pricing), anonymous events can be up to 4x cheaper than identified events (due to the cost of processing them), so it's recommended to only capture identified events when needed.
 
-### Capturing identified events
+### Capturing anonymous events
 
-For backward compatibility, PostHog captures identified events by default. To change this in the [JavaScript Web SDK](/docs/libraries/js), change the `person_profiles` [config](/docs/libraries/js#config) option:
+PostHog captures identified events with person profiles by default. 
+
+To change this and capture anonymous events in the [JavaScript Web SDK](/docs/libraries/js), change the `person_profiles` [config](/docs/libraries/js#config) option:
 
 import PersonProfilesJSConfig from '../../docs/libraries/js/_snippets/person-profiles-config.mdx'
 
