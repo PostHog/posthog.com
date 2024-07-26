@@ -40,7 +40,7 @@ We'll need them to be able to demo their product to us, as well as attend two or
 
 Ideally we will also have them in Slack Connect channel so that we can provide responsive support and expose them to the wider PostHog team.
 
-Some customers may wish to use MS Teams rather than Slack. With Pylon we can support this, first you will need an MS Teams licence, ask Simon for one. Then, follow the instructions on the link here to get set up - https://docs.usepylon.com/bridges/microsoft-teams/setup.
+Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, follow the instructions on [the link here](https://docs.usepylon.com/bridges/microsoft-teams/setup) to get set up.
 Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
 
 ## Day 0 - Session: Kick off
