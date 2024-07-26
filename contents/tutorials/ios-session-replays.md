@@ -128,6 +128,7 @@ struct posthog_session_replayApp: App {
         let POSTHOG_HOST = "<ph_client_api_host>"  // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
         let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
         configuration.sessionReplay = true
+        configuration.sessionReplayConfig.maskAllTextInputs = false
         configuration.sessionReplayConfig.screenshotMode = true // required for SwiftUI session replays
         PostHogSDK.shared.setup(configuration)
     }
