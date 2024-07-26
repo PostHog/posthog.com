@@ -73,7 +73,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     const { getJwt, fetchUser, user, isModerator } = useUser()
     const posthog = usePostHog()
 
-    const key = options?.data ? null : `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
+    const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
 
     const {
         data: question,
