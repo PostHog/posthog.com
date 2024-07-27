@@ -6,6 +6,7 @@ import usePostHog from 'hooks/usePostHog'
 
 type UseQuestionOptions = {
     data?: StrapiRecord<QuestionData>
+    mutate?: () => void
 }
 
 const query = (id: string | number, isModerator: boolean) =>
@@ -73,13 +74,13 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     const { getJwt, fetchUser, user, isModerator } = useUser()
     const posthog = usePostHog()
 
-    const key = `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
+    const key = options?.data ? null : `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
 
     const {
         data: question,
         error,
         isLoading,
-        mutate,
+        mutate: swrMutate,
     } = useSWR<StrapiRecord<QuestionData>>(key, async (url) => {
         const jwt = user && (await getJwt())
         const res = await fetch(
@@ -107,6 +108,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
     const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
     const questionID = typeof id !== 'string' ? id : question?.id
+    const mutate = options?.mutate || swrMutate
 
     const reply = async (body: string) => {
         try {

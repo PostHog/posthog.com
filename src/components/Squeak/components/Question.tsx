@@ -29,6 +29,7 @@ type QuestionProps = {
     showSlug?: boolean
     buttonText?: string
     showActions?: boolean
+    mutate?: () => void
 }
 
 export const CurrentQuestionContext = createContext<any>({})
@@ -223,7 +224,7 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
 }
 
 export const Question = (props: QuestionProps) => {
-    const { id, question, showSlug, buttonText, showActions = true } = props
+    const { id, question, showSlug, buttonText, showActions = true, mutate } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const { user, notifications, setNotifications } = useUser()
 
@@ -254,7 +255,7 @@ export const Question = (props: QuestionProps) => {
         archive,
         pinTopics,
         escalate,
-    } = useQuestion(id, { data: question })
+    } = useQuestion(id, { data: question, mutate })
 
     if (isLoading) {
         return <QuestionSkeleton />
