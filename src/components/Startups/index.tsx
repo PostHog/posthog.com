@@ -7,6 +7,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import HubSpotForm from 'components/HubSpotForm'
+import SalesforceForm from 'components/SalesforceForm'
 
 const benefits = [
     '$50k in PostHog credit',
@@ -137,9 +138,9 @@ export default function Startups() {
                 <div className="flex-shrink-0">
                     <h3 className="mb-0">Finish your application</h3>
                     <p>Remember to complete the steps listed above!</p>
-                    <HubSpotForm
-                        validationSchema={validationSchema}
-                        formID="aa91765b-e790-4e90-847e-46c7ebf43705"
+                    <SalesforceForm
+                        type="contact"
+                        source="startup"
                         customMessage={
                             <>
                                 <h4>
@@ -155,18 +156,74 @@ export default function Startups() {
                                 </p>
                             </>
                         }
-                        customFields={{
-                            self_registration_raised: {
-                                type: 'radioGroup',
-                                options: [
-                                    { label: 'Boostrapped', value: 0 },
-                                    { label: 'Under $100k', value: 100_000 },
-                                    { label: '$100k - $500k', value: 500_000 },
-                                    { label: '$500k - $1m', value: 1_000_000 },
-                                    { label: '$1m - $5m', value: 5_000_000 },
-                                    { label: 'More than $5m', value: 100_000_000_000 },
-                                ],
-                            },
+                        form={{
+                            fields: [
+                                {
+                                    label: 'Email',
+                                    name: 'email',
+                                    type: 'string',
+                                    fieldType: 'email',
+                                    required: true,
+                                },
+                                {
+                                    label: 'First name',
+                                    name: 'first_name',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'Last name',
+                                    name: 'last_name',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'Company name',
+                                    name: 'company',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'Company domain',
+                                    name: 'startup_domain',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'PostHog organization name',
+                                    name: 'posthog_organization_name',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'How much in total funding have you raised (USD)',
+                                    name: 'raised',
+                                    type: 'enumeration',
+                                    options: [
+                                        { label: 'Boostrapped', value: 0 },
+                                        { label: 'Under $100k', value: 100_000 },
+                                        { label: '$100k - $500k', value: 500_000 },
+                                        { label: '$500k - $1m', value: 1_000_000 },
+                                        { label: '$1m - $5m', value: 5_000_000 },
+                                        { label: 'More than $5m', value: 100_000_000_000 },
+                                    ],
+                                    required: true,
+                                },
+                                {
+                                    label: 'The date that your company was incorportated',
+                                    name: 'incorpation_date',
+                                    type: 'string',
+                                    fieldType: 'date',
+                                    required: true,
+                                },
+                                {
+                                    label: 'The company that referred you',
+                                    name: 'referrer',
+                                    type: 'string',
+                                    required: true,
+                                },
+                            ],
+                            name: 'Startup application',
                         }}
                     />
                 </div>
