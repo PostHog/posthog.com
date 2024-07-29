@@ -33,9 +33,13 @@ export default function CTA() {
         if (posthog?.isFeatureEnabled('direct-to-eu-cloud')) {
             setVersion('eu')
         }
-        fetch(`/api/signup-count`)
+        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/signup-count`)
             .then((res) => res.json())
-            .then((count) => setSignupCountToday(count))
+            .then((count) => {
+                if (count && !count?.error) {
+                    setSignupCountToday(count)
+                }
+            })
             .catch((err) => console.error(err))
     }, [])
 
