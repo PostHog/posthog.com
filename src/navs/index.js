@@ -1857,6 +1857,10 @@ export const docsMenu = {
                             name: 'Migrate from Heap',
                             url: '/docs/migrate/heap',
                         },
+                        {
+                            name: 'Migrate from Pendo',
+                            url: '/docs/migrate/pendo',
+                        },
                     ],
                 },
                 {
