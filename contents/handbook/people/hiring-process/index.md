@@ -183,7 +183,7 @@ We also review every single speculative application weekly and if there is a pos
 
 ### Interviews
 
-As a rule, all interviews at PostHog are conducted in English. Whilst this might seem obvious to some, we are lucky to have people from mutliple differect countries, that speak multiple languages. We are hiring for people to be successful at PostHog, and at PostHog we conduct our business in English so it is important the hiring process is also conducted in English. So if you are paired with an interviewee who speaks your native language, just politely acknowledge this and let them know all interviews are conducted in English.
+As a rule, all interviews at PostHog are conducted in English. Whilst this might seem obvious to some, we are lucky to have people from multiple different countries, that speak multiple languages. We are hiring for people to be successful at PostHog, and at PostHog we conduct our business in English so it is important the hiring process is also conducted in English. So if you are paired with an interviewee who speaks your native language, just politely acknowledge this and let them know all interviews are conducted in English.
 
 ### 1. Culture interview with People & Ops 
 
