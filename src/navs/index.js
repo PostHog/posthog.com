@@ -1861,6 +1861,10 @@ export const docsMenu = {
                             name: 'Migrate from Pendo',
                             url: '/docs/migrate/pendo',
                         },
+                        {
+                            name: 'Migrate from Matomo',
+                            url: '/docs/migrate/matomo',
+                        },
                     ],
                 },
                 {
