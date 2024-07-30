@@ -5,6 +5,7 @@ import { button } from 'components/CallToAction'
 import Confetti from 'react-confetti'
 import usePostHog from 'hooks/usePostHog'
 import { IconCheck } from '@posthog/icons'
+import * as Yup from 'yup'
 
 interface CustomFieldOption {
     label: string
@@ -370,6 +371,23 @@ export default function SalesforceForm({
         ) : (
             <FormContext.Provider value={{ fields: form.fields, openOptions, setOpenOptions }}>
                 <Formik
+                    validationSchema={Yup.object().shape(
+                        Object.fromEntries(
+                            form.fields.map((field) => [
+                                field.name,
+                                field.required
+                                    ? field.fieldType === 'checkbox'
+                                        ? Yup.array()
+                                              .of(Yup.string())
+                                              .min(1, `${field.label} is a required field`)
+                                              .required(`${field.label} is a required field`)
+                                        : Yup.string().required(`${field.label} is a required field`)
+                                    : field.fieldType === 'checkbox'
+                                    ? Yup.array().of(Yup.string())
+                                    : Yup.string(),
+                            ])
+                        )
+                    )}
                     validateOnChange={false}
                     initialValues={Object.fromEntries(
                         form.fields.map(({ name, fieldType }) => [name, fieldType === 'checkbox' ? [] : ''])
