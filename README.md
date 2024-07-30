@@ -32,10 +32,7 @@ This is the repository for the PostHog website. It contains:
 
 1. **Pre-installation**
 
-    Install [Node](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/en/). (If you're on a Mac with Apple Silicon and get an error with `-86` in it, you may need to [install Rosetta](https://osxdaily.com/2020/12/04/how-install-rosetta-2-apple-silicon-mac/).)
-    ```bash
-    npm install --global yarn
-    ```
+    Install [Node](https://nodejs.org/en/download/) and [pnpm](https://pnpm.io/installation). (If you're on a Mac with Apple Silicon and get an error with `-86` in it, you may need to [install Rosetta](https://osxdaily.com/2020/12/04/how-install-rosetta-2-apple-silicon-mac/).)
 
 1.  **Start developing**
 
@@ -43,8 +40,8 @@ This is the repository for the PostHog website. It contains:
 
     ```bash
     cd posthog.com/
-    yarn
-    yarn start
+    pnpm i
+    pnpm start
     ```
 
     > **Tip:** Seeing a discrepancy between local development and staging/production? Preview the production build locally by running `gatsby build && gatsby serve`
@@ -61,7 +58,7 @@ See full instructions on [developing PostHog.com locally in our manual](https://
 
 ### Debugging errors on start
 1. Pull the latest changes from `master`
-2. Run `gatsby clean && yarn start` or delete `node_modules` and `.cache`
+2. Run `gatsby clean && pnpm start` or delete `node_modules` and `.cache`
 3. Check builds are passing in [deployment to Vercel](https://github.com/PostHog/posthog.com/deployments)
 
 ### Working on `/docs/api`?
@@ -69,7 +66,7 @@ See full instructions on [developing PostHog.com locally in our manual](https://
 The site will load the API schema from US Cloud by default. You can override this to use your local PostHog instance with an env var:
 
 ```
-POSTHOG_OPEN_API_SPEC_URL="http://127.0.0.1:8000/api/schema/" yarn start
+POSTHOG_OPEN_API_SPEC_URL="http://127.0.0.1:8000/api/schema/" pnpm start
 ```
 
 

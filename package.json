@@ -70,6 +70,7 @@
         "gatsby-plugin-manifest": "^4.20.0",
         "gatsby-plugin-mdx": "^3.20.0",
         "gatsby-plugin-offline": "^5.20.0",
+        "gatsby-plugin-pnpm": "^1.2.10",
         "gatsby-plugin-postcss": "^5.20.0",
         "gatsby-plugin-react-helmet": "^5.20.0",
         "gatsby-plugin-react-svg": "^3.1.0",
@@ -231,12 +232,9 @@
             "pre-commit": "lint-staged"
         }
     },
-    "workspaces": [
-        "plugins/*"
-    ],
     "lint-staged": {
         "*.{html,js,ts,tsx,json,yml,css,scss}": "prettier --write",
         "*.{js,ts,tsx}": "eslint"
     },
-    "packageManager": "yarn@1.22.19"
+    "packageManager": "pnpm@8.15.3"
 }
