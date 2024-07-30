@@ -38,6 +38,9 @@ module.exports = {
             lg: '1024px',
             // => @media (min-width: 1024px) { ... }
 
+            lgxl: '1160px',
+            // => @media (min-width: 1024px) { ... }
+
             xl: '1280px',
             // => @media (min-width: 1280px) { ... }
 
@@ -202,7 +205,7 @@ module.exports = {
                 'gray-accent-dark': '#2C2C2C',
                 'gray-accent-light': '#BFBFBC',
                 red: '#F54E00',
-                green: '#6AA84F',
+                green: '#449c1e',
             },
             minHeight: {
                 md: '780px',
@@ -232,6 +235,9 @@ module.exports = {
                 'fluid-video': '56.25%',
                 '1/2': '50%',
             },
+            maxWidth: {
+                '2xs': '16rem',
+            },
             keyframes: {
                 wiggle: {
                     '0%, 100%': { transform: 'rotate(6deg)' },
@@ -244,6 +250,10 @@ module.exports = {
                 'grow-sm': {
                     '0%, 100%': { transform: 'scale(1)' },
                     '50%': { transform: 'scale(1.05)' },
+                },
+                flash: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(1.02)' },
                 },
                 reveal: {
                     '0%': { maxHeight: 0, opacity: 0 },
@@ -259,6 +269,7 @@ module.exports = {
                 wiggle: 'wiggle .2s ease-in-out 3',
                 grow: 'grow 2s linear infinite',
                 'grow-sm': 'grow-sm 3s linear infinite',
+                flash: 'flash 1s ease-in-out 2',
                 reveal: 'reveal 1s ease-in-out',
                 'text-gradient': 'text-gradient 2500ms linear infinite',
             },

@@ -20,7 +20,6 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
 
     return (
         <div className={classes} key={product.shopifyId} onClick={onClick}>
-
             <div className="cursor-pointer image-wrapper relative aspect-[.75]">
                 {isNew && (
                     <div className="z-10 rotate-12 uppercase text-xs flex text-primary items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
@@ -43,7 +42,6 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                 <p className="text-[15px] leading-tight mb-1">{subtitle}</p>
                 <p className="text-base font-bold mb-0">${product.priceRangeV2.minVariantPrice.amount}</p>
             </div>
-
         </div>
     )
 }
