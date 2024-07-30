@@ -16,8 +16,6 @@ tags:
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-When it comes to mobile apps, there are a bunch of different session replay tools to choose from, but each is built with a specific target audience in mind. In this guide, we’ll explore the options so that you can decide which is best for you.
-
 ## 1. LogRocket
 **Typical users:** Product managers, engineers, support teams
 
@@ -25,11 +23,11 @@ When it comes to mobile apps, there are a bunch of different session replay tool
 
 ### What is LogRocket?
 
-[LogRocket](/blog/posthog-vs-logrocket) is a product experience platform with product analytics, error tracking, session replay, and performance monitoring. It focuses on helping product managers, engineers, and support teams identify and fix issues.
+[LogRocket](/blog/posthog-vs-logrocket) is a product experience platform that focuses on helping product managers, engineers, and support teams fix issues. In addition to session replay, it provides tools to identify the most impactful issues – such as crash reports, stack traces, performance monitoring, and product analytics.
 
-### Supported features
+#### Supported features
 
-<ComparisonTable column1="">
+<ComparisonTable column1="LogRocket">
   <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
   <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
   <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
@@ -37,8 +35,15 @@ When it comes to mobile apps, there are a bunch of different session replay tool
   <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
   <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
   <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
+  <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
   <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
+
+### How much does LogRocket cost?
+
+Their **Team** plan starts at $199/month for up to 10k sessions and includes most session replay features, but excludes other features such as product analytics and some error tracking features.
+
+Their **Professional** plan starts at $420/month for up to 10k sessions and includes all their features, but requires an annual commitment.
 
 ### Why do companies use LogRocket?
 
@@ -63,11 +68,13 @@ The reviewers of [G2](https://www.g2.com/products/logrocket/reviews) use LogRock
 
 ### What is Microsoft Clarity?
 
-[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports most replay features and heatmaps. It integrates with [Google Analytics 4](/blog/posthog-vs-ga4), so you can view your GA data in Clarity.
+[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports most replay features and heatmaps. It integrates with [Google Analytics 4](/blog/posthog-vs-ga4), so you can view your GA data in Clarity. 
 
-### Supported features
+It includes most of the session replay features you would expect, but doesn't support any additional features that some of the other choices on this list do, like crash reports or debug logs.
 
-<ComparisonTable column1="">
+#### Supported features
+
+<ComparisonTable column1="Microsoft Clarity">
   <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
   <ComparisonRow column1={false} feature="Debug logs" description="View console logs, network logs, performance data" />
   <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
@@ -75,8 +82,13 @@ The reviewers of [G2](https://www.g2.com/products/logrocket/reviews) use LogRock
   <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
   <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
   <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
+  <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
   <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
+
+### How much does Microsoft Clarity cost?
+
+Clarity is completely free.
 
 ### Why do companies use Microsoft Clarity?
 
@@ -94,20 +106,66 @@ According to [reviews on G2](https://www.g2.com/products/microsoft-microsoft-cla
 
 <br />
 
-## 3. UXCam
+## 3. PostHog
+
+**Typical users** Engineering and product teams
+  
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/ab-testing.png)
+
+### What is PostHog?
+
+[PostHog](https://posthog.com) (that's us 👋) is an all-in-one platform built to help engineers create better products. It includes [session replays](/session-replay) **and** a whole bunch more, such as [product analytics](/analytics), [A/B testing](/ab-testing), and [feature flags](/feature-flags).
+
+It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
+
+#### Supported features
+
+<ComparisonTable column1="PostHog">
+  <ComparisonRow column1="iOS and Android only" feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
+  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
+  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
+  <ComparisonRow column1={true} feature="Heatmaps" description="See where users tap and interact" />
+  <ComparisonRow column1={false} feature="Scroll maps" description="See how far users scroll and where they dwell" />
+  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
+  <ComparisonRow column1={false} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
+  <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
+  <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
+</ComparisonTable>
+
+### How much does PostHog cost?
+
+PostHog has [transparent pricing](/pricing?product=session-replay) based on usage. It’s free to get started and completely free for the first 5,000 recordings. After this free monthly allowance, pricing starts at $0.0050/recording (or $50 for 10k recordings), and recordings cost progressively less the more you use. This makes PostHog significantly cheaper than all the other companies on this list (apart from [Microsoft Clarity](#2-microsoft-clarity)).
+
+### Why do companies use PostHog?
+
+According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It's many tools in one:** PostHog can replace tools like [Mixpanel](/blog/posthog-vs-mixpanel) (analytics), [UXCam](/blog/best-uxcam-alternatives) (session replay), and [Statsig](/blog/posthog-vs-statsig) (A/B testing and feature flags). This simplifies workflows and ensures all product data is in one place.
+
+2. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and build better products. This means creating funnels to track conversion, watching replays to see where users get stuck, and testing solutions with A/B tests.
+
+3. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
+
+> #### Bottom line
+> 
+> For teams looking for all the tools they need to improve their products, PostHog makes for a great choice. This is especially true for startups and scaleups thanks to it having a generous free tier.
+
+<br />
+
+## 4. UXCam
 **Typical users:** Product managers in enterprise companies
   
 ![UXCam](https://res.cloudinary.com/dmukukwp6/image/upload/v1720771924/posthog.com/contents/Funnel_analytics.png)
 
 ### What is UXCam?
 
-[UXCam](/blog/best-uxcam-alternatives) is a platform built solely for mobile apps. It includes a full-suite of analytics features as well as session replays and heatmaps.
+[UXCam](/blog/best-uxcam-alternatives) is a platform built solely for mobile apps. It includes a full-suite of analytics features as well as session replays, heatmaps, and crash analytics.
 
 It's designed to provide deep insights into user behavior, helping product managers understand how users interact with their apps.
 
-### Supported features
+#### Supported features
 
-<ComparisonTable column1="">
+<ComparisonTable column1="UXCam">
   <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
   <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
   <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
@@ -115,8 +173,13 @@ It's designed to provide deep insights into user behavior, helping product manag
   <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
   <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
   <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
+  <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
   <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
+
+### How much does UXCam cost?
+
+UXCam's pricing is sales-driven and completely opaque, so it's not clear how much it costs. The company's sales team will give you a quote after you've spoken to them.
 
 ### Why do companies use UXCam?
  
@@ -134,45 +197,6 @@ Looking at [G2 reviews](https://www.g2.com/products/uxcam/reviews), companies ch
 
 <br/>
 
-## 4. FullStory
-
-**Typical users:** Product managers, customer success, and support
-
-![FullStory](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/fullstory.png)
-
-### What is FullStory?
-
-[FullStory](/blog/best-fullstory-alternatives) describes itself as behavioral data analytics platform, which is code for session replay and mobile app analytics, with a side of product analytics. 
-
-### Supported features
-
-<ComparisonTable column1="">
-  <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
-  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="See where users tap and interact" />
-  <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-  <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
-  <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
-
-### Why do companies use FullStory?
-
-According to reviews on G2, companies use FullStory for:
-
-1. **Easier collaboration:** As an accessible tool for non-technical users, FullStory facilitates collaboration between product, UX, and engineering teams by allowing all teams to access useful, reliable data.
-
-2. **Viewing user issues:** Support teams use FullStory to replay sessions to understand user hard-to-replicate problems, and identify bugs that need fixing.
-
-3. **Improving conversion:** FullStory users like to combine funnel insights with replays of user sessions to understand pain points and improve conversion.
-
-> #### Bottom line
->
-> For a complete behavioral analytics suite, FullStory is a solid choice. Users wanting more features, like error tracking or a/b testing should switch to other choices. 
-
-<br />
-
 ## 5. Smartlook
 **Typical users:** Engineers, business analysts, product managers
 
@@ -182,9 +206,9 @@ According to reviews on G2, companies use FullStory for:
  
 Smartlook combines session replays, product analytics, visualizations, and crash reports to generate an overall understanding of user experience. It focuses on mobile apps with specific tools like native rendering and wireframe mode.
 
-### Supported features
+#### Supported features
 
-<ComparisonTable column1="">
+<ComparisonTable column1="Smartlook">
   <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
   <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
   <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
@@ -192,12 +216,17 @@ Smartlook combines session replays, product analytics, visualizations, and crash
   <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
   <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
   <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
+  <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
   <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
 
+### How much does Smartlook cost?
+
+Smartlook's free plan records up to 3k sessions and includes most of their replay features. Their pro plan includes all of their replay features and starts at $69/month for 5k sessions or $99 for 10k sessions. Their pricing becomes progressively cheaper with more monthly sessions.
+
 ### Why do companies use Smartlook?
 
-According to G2 reviewers, Smartlook users benefit from:
+According to [G2](https://www.g2.com/products/smartlook/reviews) reviewers, Smartlook users benefit from:
 
 1. **The integration between replays and events:** Smartlook connects event-based analytics and sessions. This enables users to dive deeper into user behavior than a single tool provides.
 
@@ -211,8 +240,51 @@ According to G2 reviewers, Smartlook users benefit from:
 
 <br />
 
+## 6. FullStory
 
-## 6. Contentsquare
+**Typical users:** Product managers, customer success, and support
+
+![FullStory](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/fullstory.png)
+
+### What is FullStory?
+
+[FullStory](/blog/best-fullstory-alternatives) describes itself as behavioral data analytics platform, which is code for session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools), with a side of product analytics. 
+
+#### Supported features
+
+<ComparisonTable column1="FullStory">
+  <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
+  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
+  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
+  <ComparisonRow column1={true} feature="Heatmaps" description="See where users tap and interact" />
+  <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
+  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
+  <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
+  <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
+  <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
+</ComparisonTable>
+
+### How much does FullStory cost?
+
+FullStory doesn't publish pricing publicly. However, according to [Failory](https://www.failory.com/blog/fullstory-pricing), Fullstory will cost you between $250 - $1,000 per month.
+
+### Why do companies use FullStory?
+
+According to reviews on [G2](https://www.g2.com/products/fullstory/reviews), companies use FullStory for:
+
+1. **Easier collaboration:** As an accessible tool for non-technical users, FullStory facilitates collaboration between product, UX, and engineering teams by allowing all teams to access useful, reliable data.
+
+2. **Viewing user issues:** Support teams use FullStory to replay sessions to understand user hard-to-replicate problems, and identify bugs that need fixing.
+
+3. **Improving conversion:** FullStory users like to combine funnel insights with replays of user sessions to understand pain points and improve conversion.
+
+> #### Bottom line
+>
+> For a complete behavioral analytics suite, FullStory is a solid choice. Users wanting more features, like error tracking or a/b testing should switch to other choices. 
+
+<br />
+
+## 7. Contentsquare
 
 **Typical users:** Product managers, ecommerce teams, and marketers
 
@@ -220,9 +292,9 @@ According to G2 reviewers, Smartlook users benefit from:
 
 Contentsquare is an analytics platform that combines heatmaps, customer journey analysis, and frustration scoring to help find and fix issues and friction points.
 
-### Supported features
+#### Supported features
 
-<ComparisonTable column1="">
+<ComparisonTable column1="Contentsquare">
   <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
   <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
   <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
@@ -230,12 +302,17 @@ Contentsquare is an analytics platform that combines heatmaps, customer journey 
   <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
   <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
   <ComparisonRow column1={false} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
+  <ComparisonRow column1={true} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
   <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
 </ComparisonTable>
 
+### How much does Contentsqaure cost?
+
+Since Contentsquare caters mostly to enterprise companies, their pricing is not available publicly and you need to speak to their sales team to get a quote. According to [Capterra](https://www.capterra.co.uk/software/161591/contentsquare), pricing starts at $10,000/month, but no further information is given
+
 ### Why do companies use Contentsquare?
 
-According to G2 reviews, people like Contentsquare because:
+According to [G2](https://www.g2.com/products/contentsquare/reviews) reviews, people like Contentsquare because:
 
 1. **Data visualization and analysis:** Users like that Contentsquare makes it easy to visualize and analyze large data sets. Advanced features make it easier to identify and fix problems big and small.
 
@@ -246,47 +323,6 @@ According to G2 reviews, people like Contentsquare because:
 > #### Bottom line
 > 
 > From data visualizations, to behavior analysis, and detailed session replays, Contentsquare has a lot to offer, especially for larger companies.
-
-<br />
-
-## 1. PostHog
-
-**Typical users** Engineering and product teams
-  
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/ab-testing.png)
-
-### What is PostHog?
-
-[PostHog](https://posthog.com) (that's us 👋) is an all-in-one platform built to help engineers create better products. It includes [session replays](/session-replay) **and** a whole bunch more, such as [product analytics](/analytics), [A/B testing](/ab-testing), and [feature flags](/feature-flags).
-
-It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
-
-### Supported features
-
-<ComparisonTable column1="">
-  <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
-  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="See where users tap and interact" />
-  <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-  <ComparisonRow column1={false} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
-  <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
-
-### Why do companies use PostHog?
-
-According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
-
-1. **It's many tools in one:** PostHog can replace tools like [Mixpanel](/blog/posthog-vs-mixpanel) (analytics), [UXCam](/blog/best-uxcam-alternatives) (session replay), and [Statsig](/blog/posthog-vs-statsig) (A/B testing and feature flags). This simplifies workflows and ensures all product data is in one place.
-
-2. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and build better products. This means creating funnels to track conversion, watching replays to see where users get stuck, and testing solutions with A/B tests.
-
-3. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
-
-> #### Bottom line
-> 
-> For teams looking for all the tools they need to improve their products, PostHog makes for a great choice. This is especially true for startups and scaleups thanks to it having a generous free tier.
 
 <br />
 
