@@ -17,126 +17,153 @@ Our sample app will have two screens:
 - The first screen is be a `login` screen with email and password textfields.
 - The second screen is a simple screen with welcome text and logout button.
 
-The first step is to create a new app. Open [Android Studio](https://developer.android.com/studio) and create a new project. Select `Empty Activity`, name your project `Android-Session-Replays`, and use the defaults for everything else.
+The first step is to create a new app. Open [Android Studio](https://developer.android.com/studio) and create a new project. Select `No Activity`, name your project `Android-Session-Replays`, and use the defaults for everything else.
 
-Then, replace your code in `MainActivity.kt` to set up a basic UI with a button to navigate to a new screen.
+Then, navigate to the `res` directory and create a new folder `layout` in it. In `res/layout`, create two new layout resource files `activity_login.xml` and `activity_welcome.xml`. Add the following code to each file:
 
-```kotlin file=MainActivity.kt
+```xml file=activity_login.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login" />
+
+</LinearLayout>
+```
+
+```xml file=activity_welcome.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome!"
+        android:textSize="24sp"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout" />
+
+</LinearLayout>
+```
+
+Next we create our activities. In `java/com.example.android_session_replays`, create two new Kotlin files `LoginActivity.kt` and `WelcomeActivity.kt`. Add the following code to each file:
+
+```kotlin file=LoginActivity.kt
 package com.example.android_session_replays
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.example.android_session_replays.ui.theme.AndroidSessionReplaysTheme
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : ComponentActivity() {
+class LoginActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            AndroidSessionReplaysTheme {
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    MyApp()
-                }
-            }
-        }
-    }
-}
+        setContentView(R.layout.activity_login)
 
-@Composable
-fun MyApp() {
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "login_screen") {
-        composable("login_screen") {
-            LoginScreen(navController)
-        }
-        composable("welcome_screen") {
-            WelcomeScreen(navController)
-        }
-    }
-}
+        val email = findViewById<EditText>(R.id.email)
+        val password = findViewById<EditText>(R.id.password)
+        val loginButton = findViewById<Button>(R.id.loginButton)
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text = "Login", style = MaterialTheme.typography.bodyLarge)
-        OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Email") },
-            modifier = Modifier.padding(vertical = 8.dp)
-        )
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.padding(vertical = 8.dp)
-        )
-        Button(
-            onClick = { navController.navigate("welcome_screen") },
-            modifier = Modifier.padding(vertical = 8.dp)
-        ) {
-            Text("Login")
+        loginButton.setOnClickListener {
+            val intent = Intent(this, WelcomeActivity::class.java)
+            startActivity(intent)
         }
-    }
-}
-
-@Composable
-fun WelcomeScreen(navController: NavController, modifier: Modifier = Modifier) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(text = "Welcome!")
-            Button(onClick = { navController.navigate("login_screen") }) {
-                Text("Logout")
-            }
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    AndroidSessionReplaysTheme {
-        MyApp()
     }
 }
 ```
 
-Make sure to add `implementation("androidx.navigation:navigation-compose:2.4.0")` to your `dependencies` in to `Gradle Scripts/build.gradle.kts (Module:app)` and sync your project with the Gradle files.
+```kotlin file=WelcomeActivity.kt
+package com.example.android_session_replays
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+
+class WelcomeActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_welcome)
+
+        val logoutButton = findViewById<Button>(R.id.logoutButton)
+
+        logoutButton.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+}
+```
+
+Lastly, add your new activities to `AndroidManifext.xml`:
+
+```xml file=AndroidManifest.xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AndroidSessionReplays"
+        tools:targetApi="31">
+        <activity android:name=".WelcomeActivity"
+            android:exported="true"/>
+        <activity android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+```
 
 Our basic set up is now complete. Build and run your app to see it in action.
 
-![Basic setup of the Android app](https://res.cloudinary.com/dmukukwp6/video/upload/v1720610940/posthog.com/contents/android-smaple-app.mp4)
+![Basic setup of the Android app](https://res.cloudinary.com/dmukukwp6/video/upload/v1722266060/posthog.com/contents/android-sample-app.mp4)
 
 ## 2. Add PostHog to your app
 
@@ -176,7 +203,7 @@ class MySessionReplaysApplication : Application() {
         ).apply {
             sessionReplay = true
             sessionReplayConfig.maskAllTextInputs = false // Whether all texts are masked or redacted (default is enabled)
-            sessionReplayConfig.screenshot = true // required for JetPack Compose
+            sessionReplayConfig.screenshot = true
         }
         PostHogAndroid.setup(this, config)
     }
@@ -202,54 +229,32 @@ We now need to register our custom application class. Go to `app/manifests/Andro
 To check your setup, build and run your app a few times. Enter in any values in the textfields and click the **Log in** button. You should start session replays in the [Session replay tab](https://us.posthog.com/replay/recent) in PostHog 🎉
 
 <ProductScreenshot
-  imageLight={"https://res.cloudinary.com/dmukukwp6/image/upload/v1720608972/posthog.com/contents/Screenshot_2024-07-10_at_11.55.16_AM.png"} 
-  imageDark={"https://res.cloudinary.com/dmukukwp6/image/upload/v1720608972/posthog.com/contents/Screenshot_2024-07-10_at_11.55.29_AM.png"} 
+  imageLight={"https://res.cloudinary.com/dmukukwp6/image/upload/v1722266411/posthog.com/contents/Screenshot_2024-07-29_at_4.19.27_PM.png"} 
+  imageDark={"https://res.cloudinary.com/dmukukwp6/image/upload/v1722266410/posthog.com/contents/Screenshot_2024-07-29_at_4.19.59_PM.png"} 
   alt="Android session replays in PostHog" 
   classes="rounded"
 />
 
 ## 3. (Optional) Mask sensitive data
 
-Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account.
+Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
 
 To replace any type of `View` with a redacted version in the replay, set the [tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`.
 
-In the below code, we do this for the email and password fields:
+The example below illustrates how to do this for the **Welcome** text in the second screen:
 
-```kotlin file=MainActivity.kt
-// your existing imports
-import androidx.compose.ui.platform.testTag
-
-// your existing of your code
-
-@Composable
-fun WelcomeScreen(navController: NavController, modifier: Modifier = Modifier) {
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = "Welcome!",
-                modifier = Modifier.testTag("ph-no-capture") // Add this modifier to redact the text in replays
-            )
-            Button(onClick = { navController.navigate("login_screen") }) {
-                Text("Logout")
-            }
-        }
-    }
-}
-
-// rest of your existing code
+```kotlin file=activity_welcome.xml
+<!-- rest of your XML -->
+    <TextView
+        android:tag="ph-no-capture"```
+<!-- rest of your XML -->
 ```
 
-Now the welcome messages shows up like this in replays:
+Now the welcome messages shows up in replays like this:
 
-// TODO add this
 <ProductScreenshot
-  imageLight={""} 
-  imageDark={""} 
+  imageLight={"https://res.cloudinary.com/dmukukwp6/image/upload/v1722329155/posthog.com/contents/Screenshot_2024-07-30_at_9.45.16_AM.png"} 
+  imageDark={"https://res.cloudinary.com/dmukukwp6/image/upload/v1722329155/posthog.com/contents/Screenshot_2024-07-30_at_9.45.28_AM.png"} 
   alt="Masking in Android session replay" 
   classes="rounded"
 />
