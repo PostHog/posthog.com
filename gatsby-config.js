@@ -18,6 +18,7 @@ module.exports = {
     },
     trailingSlash: 'never',
     plugins: [
+        `gatsby-plugin-pnpm`,
         {
             resolve: `gatsby-source-ashby`,
             options: {
