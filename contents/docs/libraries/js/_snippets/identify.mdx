@@ -9,3 +9,5 @@ posthog.identify(
 ```
 
 Calling `identify` creates a person profile if one doesn't exist already. This means all events for that distinct ID count as identified events.
+
+You can get the distinct ID of the current user by calling `posthog.get_distinct_id()`.

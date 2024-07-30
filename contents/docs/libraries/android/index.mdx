@@ -37,7 +37,16 @@ import AndroidIdentify from './\_snippets/identify.mdx'
 
 ## Alias
 
-Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend.
+
+In this case, you can use `alias` to assign another distinct ID to the same user.
+
+```kotlin
+/**
+ * Create an alias for the current user.
+ */
+PostHog.alias("distinct_id")
+```
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
@@ -45,9 +54,7 @@ We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assi
 
 To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `userProperties` and `userPropertiesSetOnce`.
 
-##### userProperties
-
-**Example**
+When capturing an event, you can pass a property called `userProperties` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
 ```kotlin
 import com.posthog.PostHog
@@ -62,13 +69,7 @@ PostHog.capture(
 )
 ```
 
-**Usage**
-
-When capturing an event, you can pass a property called `userProperties` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
-
-##### userPropertiesSetOnce
-
-**Example**
+`userPropertiesSetOnce` works just like `userProperties`, except that it will **only set the property if the user doesn't already have that property set**.
 
 ```kotlin
 import com.posthog.PostHog
@@ -82,10 +83,6 @@ PostHog.capture(
     )
 )
 ```
-
-**Usage**
-
-`userPropertiesSetOnce` works just like `userProperties`, except that it will **only set the property if the user doesn't already have that property set**.
 
 ## Super Properties
 

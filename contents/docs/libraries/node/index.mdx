@@ -76,7 +76,16 @@ client.capture({
 
 ## Alias
 
-Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend. 
+
+In this case, you can use `alias` to assign another distinct ID to the same user.
+
+```node
+client.alias({
+    distinctId: 'distinct_id',
+    alias: 'alias_id',
+})
+```
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
@@ -289,4 +298,5 @@ With the release of V2, the API was kept mostly the same but with some small cha
 1. The minimum PostHog version requirement is 1.38
 2. The `callback` parameter passed as an optional last argument to most of the methods is no longer supported
 3. The method signature for `isFeatureEnabled` and `getFeatureFlag` is slightly modified. See the above documentation for each method for more details.
-4. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js-lite/blob/master/posthog-node/CHANGELOG.md)
+4. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js-lite/blob/master/posthog-node/CHANGELOG.md)import { node } from 'webpack'
+

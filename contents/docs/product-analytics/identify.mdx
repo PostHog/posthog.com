@@ -73,10 +73,10 @@ PostHog::alias(array(
 ```
 
 ```ruby
-posthog.alias({
+posthog.alias(
   distinct_id: "distinct_id",
-  alias: "alias_id",
-})
+  alias: "alias_id"
+)
 ```
 
 ```go
@@ -186,7 +186,7 @@ You can view whether a user can be merged into another user using `alias` when [
     alt="Merge restrictions tooltipl"
 />
 
-> Note that when calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they will be merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
+> **Note:** When calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they are merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
 
 ## Anonymous and identified events
 
