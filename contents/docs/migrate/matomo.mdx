@@ -60,20 +60,18 @@ else:
   print(f"Request failed with status code: {response.status_code}")
   ```
 
-To return all rows, set filter limit to `-1`. Matomo recommends you only export 10,000 rows at a time. If you have more than that amount you can use a combination of `filter_limit` and `filter_offset` to get sets of rows.
+To return all rows, set filter limit to `-1`. Matomo recommends you only export 10,000 rows at a time. If you have more than that amount, you can use a combination of `filter_limit` and `filter_offset` to get sets of rows.
 
 ## 2. Converting Matomo event data to the PostHog schema
 
-The schema of Matomo's exported event data is similar to PostHog's schema, but it does require conversion to work with the rest of PostHog's data. You can see details on Matomo's schema in [their docs](https://developer.matomo.org/guides/database-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
+The schema of Matomo's exported event data is similar to PostHog's schema, but it requires conversion to work with the rest of PostHog's data. You can see details on Matomo's schema in [their docs](https://developer.matomo.org/guides/database-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
 
-The big difference is that Matomo structures their data around **visits** that contain one or more **actions**. Matomo actions are similar to PostHog's [events](/docs/data/events).
+The big difference is that Matomo structures their data around **visits** that contain one or more **actions**. Matomo actions are similar to PostHog's [events](/docs/data/events). You can go through each visit and convert it to PostHog's schema by doing the following:
 
-To do this, you can go through each visit and convert it to PostHog's schema by doing the following:
-
-1. Converting properties like `url` to `$current_url` and `operatingSystemVersion` to `$os_version`. 
+1. Converting properties like `operatingSystemVersion` to `$os_version`. 
 2. Omitting properties that aren't relevant like `visitEcommerceStatusIcon`, `plugins`, `timeSpentPretty`, and many more. Matomo includes many more properties on their events than PostHof does.
 3. Looping through the `actionDetails`, converting:
-   - Properties
+   - Properties like `url` to `$current_url`
    - Action types like `action` to event names like `$pageview`
    - Action `timestamp` to an ISO 8601 timestamp
 4. Add visit properties to action properties
