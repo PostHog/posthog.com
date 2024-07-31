@@ -84,47 +84,47 @@ We grow our revenue through helping you grow, and onboarding you onto other tool
 
 We think this is better than trying to squeeze you for every cent you have. You have a great experience, and we'll enjoy better retention and word of mouth for doing the right thing.
 
-## FAQ
-
-### Do I still get 1 million free events?
-Yes, your first 1 million events each month are free, regardless of what type of events you're sending.
-
-### What are the limitations of anonymous events?
-
-When sending anonymous events, you cannot:
-- Filter on persons (e.g. an individual user).
-- Do multi-touch attribution – only last touch is supported.
-- Target by person properties for feature flags, A/B tests, and surveys.
-- Create cohorts filtered on person properties (e.g. paying vs non-paying users).
-- View a person’s profile in the app, or query the persons table in our SQL insights.
-- Use [groups analytics](/docs/product-analytics/group-analytics) on anonymous events.
-
-If you need the above functionality for all your traffic, you don't need to change anything. Continue to send person data with your events.
-
-### Can I use anonymous and identified events together on the same project?
-
-Absolutely. You can send identified events where you need more detailed information, and skip them when you don't need that detail.
-
-Here's how we use them:
-
-- On our website, most users are tracked using anonymous events. When people visit our website, referral data like Entry UTM Source are stored in the sessions table.
-
-- When someone signs up to PostHog and becomes an identified user, referral data like `Entry UTM Source` are merged into the identified user's person profile as `Initial UTM Source`, `Initial Referring Domain`, and so on.
-
-- We run our website and product on the same project. This is how we recommend using PostHog for tracking behavior on both your product and website.
-
-Note, though, that once a user becomes identified, all events they perform are identified events, because we need to check and update their profile each time.
-
-###  How do I start using anonymous events?
-
-For most users, it only requires a simple config change to include `process_persons: "identified_only" in the initialization of your JavaScript Web SDK or snippet.
-
-This will track anonymous events until an identifying action is taken – i.e. using `identify()`, `group()`, setting person properties with `$set`, etc.
-
-You can get more details on this and other use cases, like server-side events, in our [persons documentation](/docs/data/persons).
-
-### I have a question you haven't answered...
-
-It may be covered in our [person](/docs/data/persons) and [person properties](/docs/product-analytics/person-properties) docs.
-
-If not, ask it below, in [our community forum](/questions), or raise a support ticket in the app.
+> ## FAQ
+>
+> ### Do I still get 1 million free events?
+> es, your first 1 million events each month are free, regardless of what type of events you're sending.
+>
+> ### What are the limitations of anonymous events?
+>
+> When sending anonymous events, you cannot:
+> - Filter on persons (e.g. an individual user).
+> - Do multi-touch attribution – only last touch is supported.
+> - Target by person properties for feature flags, A/B tests, and surveys.
+> - Create cohorts filtered on person properties (e.g. paying vs non-paying users).
+> - View a person’s profile in the app, or query the persons table in our SQL insights.
+> - Use [groups analytics](/docs/product-analytics/group-analytics) on anonymous events.
+>
+> If you need the above functionality for all your traffic, you don't need to change anything. Continue to send person data with your events.
+>
+> ### Can I use anonymous and identified events together on the same project?
+>
+> Absolutely. You can send identified events where you need more detailed information, and skip them when you don't need that detail.
+>
+> Here's how we use them:
+>
+> - On our website, most users are tracked using anonymous events. When people visit our website, referral data like Entry UTM Source are stored in the sessions table.
+>
+> - When someone signs up to PostHog and becomes an identified user, referral data like `Entry UTM Source` are merged into the identified user's person profile as `Initial UTM Source`, `Initial Referring Domain`, and so on.
+>
+> - We run our website and product on the same project. This is how we recommend using PostHog for tracking behavior on both your product and website.
+>
+> Note, though, that once a user becomes identified, all events they perform are identified events, because we need to check and update their profile each time.
+> 
+> ###  How do I start using anonymous events?
+>
+> For most users, it only requires a simple config change to include `process_persons: "identified_only" in the initialization of your JavaScript Web SDK or snippet.
+> 
+> This will track anonymous events until an identifying action is taken – i.e. using `identify()`, `group()`, setting person properties with `$set`, etc.
+>
+> You can get more details on this and other use cases, like server-side events, in our [persons documentation](/docs/data/persons).
+>
+> ### I have a question you haven't answered...
+>
+> It may be covered in our [person](/docs/data/persons) and [person properties](/docs/product-analytics/person-properties) docs.
+>
+> If not, ask it below, in [our community forum](/questions), or raise a support ticket in the app.
