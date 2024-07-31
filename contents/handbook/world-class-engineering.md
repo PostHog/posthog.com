@@ -8,7 +8,7 @@ We know we've got to be quick to build all the tools in one. So we better have a
 
 ## No product management by default
 
-Engineers decide what to build. If you need help, our product manager (we have one today) will give you coaching. 
+Engineers decide what to build. If you need help, our product managers (we have two today) will give you coaching. 
 
 If an engineer at PostHog believes they should work on X, they can build X. We'd prefer you ship ten things quickly (and make a couple of mistakes) than plan too much. You will tend to gather more information by _doing_ rather than _planning_. 
 
