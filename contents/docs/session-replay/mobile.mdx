@@ -1,43 +1,64 @@
 ---
-title: Mobile Recording
+title: Mobile replays
 ---
 
 > 🚧 **NOTE:** Mobile recording is currently **only available on Android and iOS** and is considered `beta`. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
 
-> Mobile recording is free and unlimited while it is considered `beta`.
-
-
-# Overview
-
-Mobile Session Recording allows you to record user sessions on mobile devices. This includes screen recordings, network requests, logs, and touches. This data can then be used to understand how users are interacting with your app and to identify bugs and issues.
+Mobile replays allows you to record user sessions in mobile apps. This includes screen recordings, network requests, logs, and touches. This data can then be used to understand how users are interacting with your app and to identify bugs and issues.
 
 ## How it works
 
 We have taken our time to make sure we provide a useful and detailed recording experience whilst keeping the performance and security of your app as a top priority. By default, the configuration is restrictive with automatic masking.
 
-#### Wireframe mode (Default)
+### Wireframe mode (default)
 
 Mobile recording is primarily done using native APIs to grab the view hierarchy state when the screen is drawn. This is done carefully so as not to affect performance in any way a user may notice.
 
 The view hierarchy is transformed to a JSON data structure and later rendered as an HTML [wireframe](https://www.figma.com/resource-library/what-is-wireframing/). Since it is a wireframe, the UI won't have the original look and feel but it should be close enough to understand the user's behavior.
 
-#### Screenshot mode
+### Screenshot mode
 
-If the `screenshot` (Android) or `screenshotMode` (iOS) option is enabled, the SDK will take a screenshot of the screen instead of making a representation of the user's screen (A.k.a. Wireframe mode). The screenshot may contain sensitive information, use it with caution. The automatic masking for the screenshot mode already works on Android and we'll be working on the iOS next.
-
-#### Network recording
-
-If the `captureNetworkTelemetry` option is enabled, the SDK will record Network requests. Only metric-like data is currently gathered to give a picture of speed, size, and response code. No data is captured from the request or response body.
-
-# Installation
+If  `screenshot` (Android) or `screenshotMode` (iOS) option is enabled, the SDK will take a screenshot of the screen instead of making a wireframe representation of the user's screen. The screenshot may contain sensitive information, so proceed with caution and ensure you're masking all relevant views.
 
 ## Android
 
-Add the dependency, check out the [installation docs](/docs/libraries/android#installation).
+### Installation 
 
-Initialize the SDK, check out the [configuration docs](/docs/libraries/android#configuration).
+[Install and configure PostHog]((/docs/libraries/android#installation)) as you normally would. Ensure you've enabled session recordings in your [project settings](/docs/session-replay/installation#step-two-enable-session-recordings-in-your-project-settings) and then add `sessionReplay = true` to your PostHog configuration, alongside any of your other configuration options.  
 
-Add the OkHttp Interceptor for enabling the `captureNetworkTelemetry` option.
+```android_kotlin
+val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
+    // Enable session recording. Requires enabling in your project settings as well.
+    // Default is false.
+    sessionReplay = true
+
+    // Whether text inputs are masked. Default is true.
+    // This isn't supported if using Jetpack Compose views.
+    // Password inputs are always masked regardless
+    sessionReplayConfig.maskAllTextInputs = true
+
+    // Whether images are masked. Default is true.
+    // This isn't supported if using Jetpack Compose views.
+    sessionReplayConfig.maskAllImages = true
+
+    // Capture logs automatically. Default is true.
+    sessionReplayConfig.captureLogcat = true
+
+    // Whether replays are created using high quality screenshots. Default is false.
+    // If disabled, replays are created using wireframes instead.
+    // The screenshot may contain sensitive information, so use with caution
+    sessionReplayConfig.screenshot = false
+
+    // How long to wait before recording user input when typing. Default is 500ms
+    sessionReplayConfig.debouncerDelayMs = 500
+}
+```
+
+### Additional options
+
+#### Capture network telemetry
+
+To capture network requests in your recordings, add `PostHogOkHttpInterceptor` to your `OkHttp Interceptor`. 
 
 ```android_kotlin
 import com.posthog.PostHogOkHttpInterceptor
@@ -48,35 +69,15 @@ private val client = OkHttpClient.Builder()
     .build()
 ```
 
-### Recording specific configuration
+Note that only metric-like data like speed, size, and response code are captured. No data is captured from the request or response body.
 
-SDK configurations during the SDK initialization.
+#### Masking and redacting
 
-```android_kotlin
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
-    // enable session recording, requires enabling on the project configuration as well.
-    sessionReplay = true
-    // all texts are masked or redacted (default is enabled).
-    // this isn't supported if using Jetpack Compose views, use with caution.
-    sessionReplayConfig.maskAllTextInputs = false
-    // all images are placeholders or redacted (default is enabled).
-    // this isn't supported if using Jetpack Compose views, use with caution.
-    sessionReplayConfig.maskAllImages = false
-    // capture logs automatically (default is enabled)
-    sessionReplayConfig.captureLogcat = true
-    // screenshot is disabled by default
-    // The screenshot may contain sensitive information, use with caution
-    sessionReplayConfig.screenshot = false
-    // debouncerDelayMs is 500ms by default
-    sessionReplayConfig.debouncerDelayMs = 500
-}
-```
+> 🚧 **NOTE:** Currently, this isn't supported if using Jetpack Compose views. We're investigating this issue.
 
-#### Masking and Redaction
+Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
 
-> 🚧 **NOTE:** Currently, this isn't supported if using Jetpack Compose views, We're investigating this issue.
-
-[View](https://developer.android.com/reference/android/view/View) configuration, if setting the [View#tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`, the view will be a placeholder or redacted, this setting applies to any type of `View`.
+To replace any type of `View` with a redacted version in the replay, set the [tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`.
 
 ```xml
 <ImageView
@@ -89,41 +90,53 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
 
 ### Limitations
 
-- Requires the PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases) - use the latest version.
-- Requires Android API >= 26, otherwise it's a NoOp.
-- Jetpack Compose is only supported if the `screenshot` option is enabled.
-  - Masking and Redaction aren't supported yet, We're investigating this issue.
-- Custom views is partly supported, and only fully supported if the `screenshot` option is enabled.
-- WebView is not supported, a placeholder will be shown.
-- Keyboard is not supported, a placeholder will be shown.
+- Session replay Requires PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases), and it's recommended to always use the latest version.
+- Requires Android API >= 26.
+- Jetpack Compose is only supported if `screenshotMode` is enabled.
+  - Masking and redacting in Jetpack Compose isn't supported yet. We're investigating this issue.
+- Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
+- WebView is not supported. A placeholder will be shown.
+- Keyboard is not supported. A placeholder will be shown.
 - React Native and Flutter for Android aren't supported.
 
 ## iOS
 
-Add the dependency, check out the [installation docs](/docs/libraries/ios#installation).
-
-Initialize the SDK, check out the [configuration docs](/docs/libraries/ios#configuration).
-
-### Recording specific configuration
-
-SDK configurations during the SDK initialization.
+### Installation
+[Install and configure PostHog]((/docs/libraries/ios#installation)) as you normally would. Ensure you've enabled session recordings in your [project settings](/docs/session-replay/installation#step-two-enable-session-recordings-in-your-project-settings) and then add `config.sessionReplay = true` to your PostHog configuration, alongside any of your other configuration options.  
 
 ```swift
 let config = PostHogConfig(apiKey: apiKey)
-// sessionReplay is disabled by default
+// Enable session recording. Requires enabling in your project settings as well.
+// Default is false.
 config.sessionReplay = true
-// sessionReplayConfig is optional, they are enabled by default
+
+// Whether text inputs are masked. Default is true.
+// This isn't supported if using Jetpack Compose views.
+// Password inputs are always masked regardless
 config.sessionReplayConfig.maskAllTextInputs = true
+
+// Whether images are masked. Default is true.
 config.sessionReplayConfig.maskAllImages = true
+
+// Whether network requests are captured in recordings. Default is true
+// Note that only metric-like data like speed, size, and response code are captured. 
+// No data is captured from the request or response body.
 config.sessionReplayConfig.captureNetworkTelemetry = true
-// screenshotMode is disabled by default
-// The screenshot may contain sensitive information, use with caution
+
+// Whether replays are created using high quality screenshots. Default is false.
+// Required for SwiftUI.
+// If disabled, replays are created using wireframes instead.
+// The screenshot may contain sensitive information, so use with caution
 config.sessionReplayConfig.screenshotMode = true
 ```
 
-#### Masking and Redaction
+### Additional options
 
-[UIView](https://developer.apple.com/documentation/uikit/uiview) configuration, if setting the [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier) or [accessibilityLabel](https://developer.apple.com/documentation/uikit/uiaccessibilityelement/1619577-accessibilitylabel) to `ph-no-capture`, the view will be a placeholder or redacted, this setting applies to any type of `UIView`.
+#### Masking and redacting
+
+Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
+
+To replace any type of `UIView` with a redacted version in the replay, set the [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier) to `ph-no-capture`:
 
 ```swift
 let imvProfilePhoto = UIImageView(frame: CGRect(x: 50, y: 50, width: 100, height: 100))
@@ -140,10 +153,10 @@ The [SwiftUI Text](https://developer.apple.com/documentation/swiftui/text) view 
 
 ### Limitations
 
-- Requires the PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases) - use the latest version.
+- Requires PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases), and it's recommended to always use the latest version.
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/) is only supported if the `screenshotMode` option is enabled.
-- It's a representation of the user's screen, not a video recording nor a screenshot.
-  - Custom views are not fully supported.
-  - If the option `screenshotMode` is enabled, the SDK will take a screenshot of the screen instead of making a representation of the user's screen.
-- WebView is not supported, a placeholder will be shown.
+  - `Text` views in SwiftUI are considered images, so they are masked unless `maskAllImages` is disabled. 
+- Replays are representation of the user's screen, not a video recording nor a screenshot (unless `screenshot` mode is enabled).
+- Custom views are not fully supported if `screenshotMode` is disabled.
+- WebView is not supported. A placeholder will be shown.
 - React Native and Flutter for iOS aren't supported.
