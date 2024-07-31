@@ -6,8 +6,7 @@ featuredImage: >-
 author:
   - andy-vandervell
 featuredImageType: full
-tags:
-  - PostHog news
+category: PostHog news
 ---
 
 ## TL;DR
