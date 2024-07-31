@@ -100,6 +100,7 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val intent = Intent(this, WelcomeActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }
@@ -243,7 +244,7 @@ To replace any type of `View` with a redacted version in the replay, set the [ta
 
 The example below illustrates how to do this for the **Welcome** text in the second screen:
 
-```kotlin file=activity_welcome.xml
+```xml file=activity_welcome.xml
 <!-- rest of your XML -->
     <TextView
         android:tag="ph-no-capture"```
