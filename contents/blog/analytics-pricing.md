@@ -13,11 +13,11 @@ category: PostHog news
 
 - Last week, we [slashed the cost of session replay](/blog/session-replay-pricing) by more than 50%, making PostHog the cheapest session replay tool in its class.
 
-- Today we're announcing Part 2 – a change to our pricing that makes tracking anonymous events up to 80% cheaper, and will reduce our product analytics revenue by ~30%.
+- Today we're announcing Part 2, a change to our pricing that makes tracking events by anonymous users up to 80% cheaper.
 
-- This change will unlock many new cases, like web analytics at massive scale, tracking API and backend events, and many more. 
+- We'll see an ~30% decline in product analytics revenue from the change, but it will unlock several new use cases, such as web analytics at massive scale, and tracking high-volume backend events, that were previously prohibitively expensive.
 
-## Changing how we charge for analytics
+## What's changing?
 
 Up to now, we charged the same for all events we ingested. This is standard practice among product analytics tools. Popular tools like Mixpanel, Amplitude, and Heap all charge customers the same for each tracked user, session, or event, regardless of the cost to them.
 
@@ -29,12 +29,13 @@ But now we’re changing that by splitting our product analytics pricing into tw
 
 ![event types](https://res.cloudinary.com/dmukukwp6/image/upload/events_explained_0bccb88356.png)
 
-A website owner who sends 10m events per month would save $9,072 per year if they switched to only sending anonymous events, a 70% saving compared to sending identified events.
+This means a website owner who sends 10m events per month would pay just $324 per month if they switched to only sending anonymous events, saving $9,072 per year in the process.
 
 You can estimate your potential savings using the calculator on [our pricing page](/pricing), but here's a breakdown of how identified and anonymous events compare:
 
 | **Monthly events** | **Identified events** | **Anonymous events** | **Change** |
 |--------------------|--------------------------|-----------------------------------|----------------|
+| <strong class="text-15px">0-1 million</strong>      | Free | Free  | &nbsp |
 | <strong class="text-15px">1-2 million</strong>      | <span class="text-[15px] font-semibold">$0.0002480</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000500</span><span class="text-sm opacity-70">/event</span>  | <strong class="text-green">80% cheaper</strong> |
 | <strong class="text-15px">2-15 million</strong>     | <span class="text-[15px] font-semibold">$0.0001040</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000343</span><span class="text-sm opacity-70">/event</span>  | <strong class="text-green">67% cheaper</strong> |
 | <strong class="text-15px">15-50 million</strong>    | <span class="text-[15px] font-semibold">$0.0000655</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000295</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">55% cheaper</strong> |
@@ -86,18 +87,7 @@ We think this is better than trying to squeeze you for every cent you have. You 
 ## FAQ
 
 ### Do I still get 1 million free events?
-Yes, your first 1 million events each month are free.
-
-As before, we charge for each event sent after this, with volume discounts for the more you send. You use the calculator on [our pricing page](/pricing) to see how much you could save, but here's a breakdown of our new pricing tiers:
-
-| **Monthly events** | **Identified events** | **Anonymous events** | **Change** |
-|--------------------|--------------------------|-----------------------------------|----------------|
-| <strong class="text-15px">1-2 million</strong>      | <span class="text-[15px] font-semibold">$0.0002480</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000500</span><span class="text-sm opacity-70">/event</span>  | <strong class="text-green">80% cheaper</strong> |
-| <strong class="text-15px">2-15 million</strong>     | <span class="text-[15px] font-semibold">$0.0001040</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000343</span><span class="text-sm opacity-70">/event</span>  | <strong class="text-green">67% cheaper</strong> |
-| <strong class="text-15px">15-50 million</strong>    | <span class="text-[15px] font-semibold">$0.0000655</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000295</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">55% cheaper</strong> |
-| <strong class="text-15px">50-100 million</strong>   | <span class="text-[15px] font-semibold">$0.0000364</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000218</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">40% cheaper</strong> |
-| <strong class="text-15px">100-250 million</strong>  | <span class="text-[15px] font-semibold">$0.0000187</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000150</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">20% cheaper</strong> |
-| <strong class="text-15px">250+ million</strong>     | <span class="text-[15px] font-semibold">$0.0000100</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000090</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">10% cheaper</strong> |
+Yes, your first 1 million events each month are free, regardless of what type of events you're sending.
 
 ### What are the limitations of anonymous events?
 
