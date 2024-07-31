@@ -44,7 +44,6 @@ You can estimate your potential savings using the calculator on [our pricing pag
 
 This means a website owner who sends 10m events per month would pay just $324 per month if they switched to only sending anonymous events, saving $9,072 per year in the process.
 
-
 ## When should I use anonymous events?
 
 Anonymous events are ideal for tracking users who aren't logged in, or for use cases where you only need to analyze behavior at an aggregate level, such as:
@@ -57,7 +56,6 @@ Anonymous events are ideal for tracking users who aren't logged in, or for use c
 - Error monitoring
 
 If you mostly track logged-in users of a B2B product, however, you should continue to do so. 
-
 
 ## Why are anonymous events so much cheaper?
 
@@ -84,6 +82,8 @@ We don't believe in loss-leaders, so we make a modest positive margin on each ev
 We grow our revenue through helping you grow, and onboarding you onto other tools, like session replay, feature flags, and surveys.
 
 We think this is better than trying to squeeze you for every cent you have. You have a great experience, and we'll enjoy better retention and word of mouth for doing the right thing.
+
+<br />
 
 > ## FAQ
 >
