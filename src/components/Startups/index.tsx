@@ -208,6 +208,7 @@ export default function Startups() {
                                         { label: 'More than $5m', value: 100_000_000_000 },
                                     ],
                                     required: true,
+                                    showTip: true,
                                 },
                                 {
                                     label: 'The date that your company was incorportated',
@@ -221,6 +222,16 @@ export default function Startups() {
                                     name: 'referrer',
                                     type: 'string',
                                     required: true,
+                                },
+                                {
+                                    label: 'Are you building LLM-powered features?',
+                                    name: 'is_building_with_llms',
+                                    type: 'enumeration',
+                                    required: true,
+                                    options: [
+                                        { label: 'Yes', value: 'true' },
+                                        { label: 'No', value: 'false' },
+                                    ],
                                 },
                             ],
                             name: 'Startup application',
