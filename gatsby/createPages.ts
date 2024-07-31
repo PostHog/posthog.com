@@ -890,8 +890,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 context: {
                     id,
                     slug,
-                    objectives: `/teams/${slugify(teams[0], { lower: true })}/objectives`,
-                    mission: `/teams/${slugify(teams[0], { lower: true })}/mission`,
+                    objectives: `/teams/${slugify(teams[0] || '', { lower: true })}/objectives`,
+                    mission: `/teams/${slugify(teams[0] || '', { lower: true })}/mission`,
                     gitHubIssues,
                     teams,
                 },
