@@ -128,7 +128,7 @@ let imvProfilePhoto = UIImageView(frame: CGRect(x: 50, y: 50, width: 100, height
 imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 ```
 
-The [SwiftUI TextField](https://developer.apple.com/documentation/swiftui/textfield) when used in combination with [UITextInputTraits](https://developer.apple.com/documentation/uikit/uitextinputtraits) by setting traits such as `TextField("Email", text: ...).keyboardType(.emailAddress)` will always automatically masked since it's for private text.
+The [SwiftUI TextField](https://developer.apple.com/documentation/swiftui/textfield) when used in combination with [UITextInputTraits](https://developer.apple.com/documentation/uikit/uitextinputtraits) by setting traits such as `TextField("Email", text: ...).keyboardType(.emailAddress)` will always be automatically masked since it's for private text.
 
 The [SwiftUI SecureField](https://developer.apple.com/documentation/swiftui/securefield) view is always automatically masked since it's for private text.
 
