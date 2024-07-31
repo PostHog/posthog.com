@@ -43,11 +43,14 @@ You can estimate your potential savings using the calculator on [our pricing pag
 | <strong class="text-15px">100-250 million</strong>  | <span class="text-[15px] font-semibold">$0.0000187</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000150</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">20% cheaper</strong> |
 | <strong class="text-15px">250+ million</strong>     | <span class="text-[15px] font-semibold">$0.0000100</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000090</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">10% cheaper</strong> |
 
+This means a website owner who sends 10m events per month would pay just $324 per month if they switched to only sending anonymous events, saving $9,072 per year in the process.
+
+
 ## When should I use anonymous events?
+
 Anonymous events are ideal for tracking users who aren't logged in, or for use cases where you only need to analyze behavior at an aggregate level, such as:
 
 - Visitors to your marketing website
-- Readers of a news website
 - Shoppers on an e-commerce store
 - Users of a B2C mobile app
 - Tracking API and backend events
@@ -56,7 +59,6 @@ Anonymous events are ideal for tracking users who aren't logged in, or for use c
 
 If you mostly track logged-in users of a B2B product, however, you should continue to do so. 
 
-We're supporting both because we want people to have the level of analysis they need for their use case at a fair price, rather than forcing them to pay more when they only need basic data on individual users.
 
 ## Why are anonymous events so much cheaper?
 
@@ -64,9 +66,9 @@ The ELI5 version is that they cost less to ingest and process, so we're passing 
 
 Here's the slightly longer version:
 
-- When you call `posthog.identify`, or an identified user performs an event, we do a bunch of processing to create, update, or merge person profiles in our backend. This is one of the most complex steps in [our ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline), which makes it expensive.
+- When you call `posthog.identify` or capture an event from an identified user, we do a bunch of processing to create, update, or merge person profiles in our backend. These are stored separately from events in Postgres, making this is one of the most complex and expensive steps in [our ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline).
 
-- When ingesting anonymous events, we store data in a sessions table that captures session properties, such as the referring domain and the URLs visited. This table is much cheaper for us to update and query. It's faster, too.  
+- When ingesting anonymous events, we can entirely rely on our cheaper, faster ClickHouse tables. For example, we use a sessions table to capture session properties, such as the referring domain and the URLs visited.
 
 - This lets us charge you much less for these events, saving you money and enabling many use cases that would have been cost prohibitive before.
 
@@ -87,11 +89,11 @@ We think this is better than trying to squeeze you for every cent you have. You 
 > ## FAQ
 >
 > ### Do I still get 1 million free events?
-> es, your first 1 million events each month are free, regardless of what type of events you're sending.
+> Yes, your first 1 million events each month are free, regardless of what type of events you're sending.
 >
 > ### What are the limitations of anonymous events?
 >
-> When sending anonymous events, you cannot:
+> With anonymous events, you cannot:
 > - Filter on persons (e.g. an individual user).
 > - Do multi-touch attribution – only last touch is supported.
 > - Target by person properties for feature flags, A/B tests, and surveys.
@@ -103,7 +105,7 @@ We think this is better than trying to squeeze you for every cent you have. You 
 >
 > ### Can I use anonymous and identified events together on the same project?
 >
-> Absolutely. You can send identified events where you need more detailed information, and skip them when you don't need that detail.
+> Absolutely. You can capture identified events where you need more detailed information and anonymous events when you don't need that detail.
 >
 > Here's how we use them:
 >
@@ -117,7 +119,7 @@ We think this is better than trying to squeeze you for every cent you have. You 
 > 
 > ###  How do I start using anonymous events?
 >
-> For most users, it only requires a simple config change to include `process_persons: "identified_only" in the initialization of your JavaScript Web SDK or snippet.
+> For most users, it only requires a simple config change to include `process_persons: "identified_only"` in the initialization of your JavaScript Web SDK or snippet.
 > 
 > This will track anonymous events until an identifying action is taken – i.e. using `identify()`, `group()`, setting person properties with `$set`, etc.
 >
