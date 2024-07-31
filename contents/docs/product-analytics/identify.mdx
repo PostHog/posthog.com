@@ -190,7 +190,9 @@ You can view whether a user can be merged into another user using `alias` when [
 
 ## Anonymous and identified events
 
-If your `person_profile` config option is set to `identified_only`, PostHog only captures identified events and creates a person profile once you call one of the following functions or methods:
+If your `person_profile` config option is set to `identified_only`, PostHog will continue to capture all events but only events which count as identified will be associated with a person profile. All other events will display in your activity tab with this note when you click on the user Id for the person: "No profile associated with this ID".
+
+When using the `identified_only` option, person profiles are only created once you have called one of the following functions or methods:
 
 - `identify`
 - `alias`
@@ -199,7 +201,7 @@ If your `person_profile` config option is set to `identified_only`, PostHog only
 - `group`
 - `setGroupPropertiesForFlags`
 
-Once you create a person profile for a user distinct ID, all events for that distinct ID count as identified events.
+Once you create a person profile for a user distinct ID, all events for that distinct ID count as identified events and are then associated with a person profile.
 
 If your `person_profile` config option is set to `always`, PostHog captures identified events and creates a person profile for every user on your site, whether or not they have been identified.
 
