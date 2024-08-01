@@ -108,7 +108,7 @@ We're high on life... and ramen... and pineapple on pizza... except the people w
 
 It's in pre-production. Release date TBD.
 
-We're trying to cast Ryan Reynolds as a character who communicates entirely in cultural references for millennials. Give us a few more years and we could potentially afford a cameo from RDJ's goatee, though [James Greenhill's mustache](/community/profiles/30174) is superior imo.
+I'm trying to cast Ryan Reynolds as a character who communicates entirely in cultural references for millennials. Give us a few more years and we could potentially afford a cameo from RDJ's goatee, though [James Greenhill's mustache](/community/profiles/30174) is superior imho.
 
 ## Which would you rather fight... one horse-sized hedgehog, or 100 hedgehog-sized horses?
 
