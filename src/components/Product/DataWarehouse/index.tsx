@@ -184,7 +184,7 @@ export const ProductDataWarehouse = () => {
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
-                    color="[#8567FF]"
+                    color="lilac"
                     icon={<IconDatabase />}
                     product={product.capitalized}
                     title='All your data <span class="text-red dark:text-yellow">in one place</span>'

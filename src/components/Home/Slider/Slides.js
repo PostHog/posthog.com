@@ -838,7 +838,7 @@ export const DataWarehouse = () => {
     return (
         <Slide
             containerClasses="!pt-0"
-            bgColor="[#8567FF]"
+            bgColor="lilac"
             textColor="primary-dark"
             title="Data warehouse"
             description="Sync data from Stripe, Hubspot, Zendesk, or custom sources."
@@ -895,7 +895,7 @@ export const DataWarehouse = () => {
             buttonLabel="Learn more"
             buttonUrl="/data-warehouse"
             buttonClasses="group !border-white/25 !bg-white/10 md:!w-auto !w-full"
-            buttonChildClasses="!bg-[#8567FF] border-white !text-white group-hover:text-white"
+            buttonChildClasses="!bg-lilac border-white !text-white group-hover:text-white"
         />
     )
 }
