@@ -1,6 +1,6 @@
 ---
 title: How to set up Android session replay
-date: 2024-07-10
+date: 2024-08-01
 author:
   - lior-neu-ner
 tags:
