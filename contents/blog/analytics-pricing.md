@@ -116,6 +116,10 @@ We would never fight hedgehogs, how dare you.
 > ### Do I still get 1 million free events?
 > Yes, your first 1 million events each month are free, regardless of what type of events you're sending.
 >
+> ### How will my bill change?
+> 
+> All events are charged at the base rate for anonymous events. Identified events are then billed as an extra rate on top of them, referred to as 'Person profiles' on your bill. 
+>
 > ### What are the limitations of anonymous events?
 >
 > With anonymous events, you cannot:
