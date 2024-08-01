@@ -116,7 +116,7 @@ Make sure to dynamically import the `PostHogPageView` component or the `useSearc
 
 ## Tracking pageviews in React Router
 
-If you are using [react-router-dom](https://reactrouter.com/en/main), start by adding the `PostHogProvider` component in the `app` folder. Make sure to set `capture_pageview: false` because we will manually capture pageviews.
+If you are using [React Router](https://reactrouter.com/en/main) AKA `react-router-dom`, start by adding the `PostHogProvider` component in the `app` folder. Make sure to set `capture_pageview: false` because we will manually capture pageviews.
 
 ```js
 // app/providers.js
