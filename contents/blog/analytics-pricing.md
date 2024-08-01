@@ -100,14 +100,9 @@ We grow our revenue through helping you grow, and onboarding you onto other tool
 
 We think this is better than trying to squeeze you for every cent you have. You have a great experience, and we'll enjoy better retention and word of mouth for doing the right thing.
 
-## What are you smoking? Can I have some?
-
-We're high on life... and ramen... and pineapple on pizza... except the people who hate pineapple on pizza, which is roughly 46% of the company. They're high on something else, cold brew coffee, probably.
-
 ## When is Part 3?
 
 It's in pre-production. Release date TBD.
-
 
 ## Which would you rather fight... one horse-sized hedgehog, or 100 hedgehog-sized horses?
 
