@@ -1857,6 +1857,14 @@ export const docsMenu = {
                             name: 'Migrate from Heap',
                             url: '/docs/migrate/heap',
                         },
+                        {
+                            name: 'Migrate from Pendo',
+                            url: '/docs/migrate/pendo',
+                        },
+                        {
+                            name: 'Migrate from Matomo',
+                            url: '/docs/migrate/matomo',
+                        },
                     ],
                 },
                 {
@@ -2647,6 +2655,10 @@ export const docsMenu = {
                         {
                             url: '/docs/cdp/intercom',
                             name: 'Intercom',
+                        },
+                        {
+                            url: '/docs/cdp/laudspeaker-connector',
+                            name: 'Laudspeaker',
                         },
                         {
                             url: '/docs/cdp/rudderstack-export',

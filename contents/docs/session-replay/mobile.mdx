@@ -4,6 +4,8 @@ title: Mobile Recording
 
 > 🚧 **NOTE:** Mobile recording is currently **only available on Android and iOS** and is considered `beta`. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
 
+> Mobile recording is free and unlimited while it is considered `beta`.
+
 
 # Overview
 
@@ -54,9 +56,11 @@ SDK configurations during the SDK initialization.
 val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
     // enable session recording, requires enabling on the project configuration as well.
     sessionReplay = true
-    // all texts are masked or redacted (default is enabled)
+    // all texts are masked or redacted (default is enabled).
+    // this isn't supported if using Jetpack Compose views, use with caution.
     sessionReplayConfig.maskAllTextInputs = false
-    // all images are placeholders or redacted (default is enabled)
+    // all images are placeholders or redacted (default is enabled).
+    // this isn't supported if using Jetpack Compose views, use with caution.
     sessionReplayConfig.maskAllImages = false
     // capture logs automatically (default is enabled)
     sessionReplayConfig.captureLogcat = true
@@ -69,6 +73,8 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
 ```
 
 #### Masking and Redaction
+
+> 🚧 **NOTE:** Currently, this isn't supported if using Jetpack Compose views, We're investigating this issue.
 
 [View](https://developer.android.com/reference/android/view/View) configuration, if setting the [View#tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`, the view will be a placeholder or redacted, this setting applies to any type of `View`.
 
@@ -86,6 +92,7 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
 - Requires the PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases) - use the latest version.
 - Requires Android API >= 26, otherwise it's a NoOp.
 - Jetpack Compose is only supported if the `screenshot` option is enabled.
+  - Masking and Redaction aren't supported yet, We're investigating this issue.
 - Custom views is partly supported, and only fully supported if the `screenshot` option is enabled.
 - WebView is not supported, a placeholder will be shown.
 - Keyboard is not supported, a placeholder will be shown.
@@ -122,6 +129,14 @@ config.sessionReplayConfig.screenshotMode = true
 let imvProfilePhoto = UIImageView(frame: CGRect(x: 50, y: 50, width: 100, height: 100))
 imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 ```
+
+The [SwiftUI TextField](https://developer.apple.com/documentation/swiftui/textfield) when used in combination with [UITextInputTraits](https://developer.apple.com/documentation/uikit/uitextinputtraits) by setting traits such as `TextField("Email", text: ...).keyboardType(.emailAddress)` will always be automatically masked since it's for private text.
+
+The [SwiftUI SecureField](https://developer.apple.com/documentation/swiftui/securefield) view is always automatically masked since it's for private text.
+
+The [SwiftUI accessibilityLabel](https://developer.apple.com/documentation/swiftui/view/accessibilitylabel(_:)-7rljm) and [SwiftUI accessibilityIdentifier](https://developer.apple.com/documentation/swiftui/view/accessibilityidentifier(_:)) configurations aren't supported yet for SwiftUI, We're investigating this issue.
+
+The [SwiftUI Text](https://developer.apple.com/documentation/swiftui/text) view is detected as a SwiftUI Image view and it'll be automatically masked if the option `maskAllImages` is enabled even if the `maskAllTextInputs` option is disabled, We're investigating this issue.
 
 ### Limitations
 

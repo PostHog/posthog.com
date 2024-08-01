@@ -285,7 +285,7 @@ h4 {
 
     th:last-child,
     td:last-child {
-        padding-right: 0;
+        /* padding-right: 0; */
     }
 
     th:empty {

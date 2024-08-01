@@ -46,7 +46,7 @@ All features in PostHog Open Source are totally free, including core product ana
 
 PostHog Cloud adds [experimentation](/product/experimentation-suite), [group analytics](/docs/user-guides/group-analytics), and support for multiple projects. It's free to use up to 1 million events per month.
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -221,7 +221,7 @@ PostHog Cloud adds [experimentation](/product/experimentation-suite), [group ana
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ## Integrations and data sources
 
@@ -331,5 +331,9 @@ Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
 ### What about ad blockers?
 
 We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
+
+### Can I migrate from Matomo to PostHog?
+
+Yes. See our [Matomo to PostHog migration guide](/docs/migrate/matomo) for more.
 
 <ArrayCTA />

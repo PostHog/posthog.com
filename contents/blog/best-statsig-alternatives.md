@@ -27,7 +27,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 PostHog is an open-source, all-in-one platform for feature management, A/B testing, product analytics, session replay, and user surveys. It's also building a [data warehouse for startups](/docs/data-warehouse) and a customer data platform (CDP), though both are currently in closed beta.
 
-By combining all these tools into one platform, it eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [carVertical](/feature-flags), which use PostHog for both feature flags and analytics.
+By combining all these tools into one platform, it eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [carVertical](/customers/carvertical), which use PostHog for both feature flags and analytics.
 
 According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), PostHog is used by 4,661 (0.47%) of the top 1 million websites, compared to Statsig's 706 (0.07%). This difference is [confirmed by Google Trends](https://trends.google.com/trends/explore?date=today%205-y&q=posthog,statsig) data.
 

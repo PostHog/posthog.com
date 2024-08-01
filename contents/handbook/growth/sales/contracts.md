@@ -6,14 +6,15 @@ showTitle: true
 
 # Annual plans and more
 
-For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their
-contractual commitment to a minimum term, and likely custom pricing as well.  At a minimum, they should sign an Order Form 
-which references our standard [terms](/terms) and [privacy notice](/privacy).  In addition, they may want a custom Master Services Agreement (MSA) 
-or Data Processing Agreement (DPA)
+For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their contractual commitment to a minimum term, and likely custom pricing as well.  At a minimum, they should sign an Order Form which references our standard [terms](/terms) and [privacy notice](/privacy).  In addition, they may want a custom Master Services Agreement (MSA) or Data Processing Agreement (DPA).
 
-> If a customer wants to vary either our DPA, BAA or MSA terms it is a substantial effort for our legal team to review these changes.  At a minimum we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding Service Level Agreements)
+> If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements).
 
-In addition, customers requiring our Enterprise plan are required to sign up for a minimum of $20k of PostHog Cloud Credit for a year, as well as adding the Teams plan to their subscription.
+In addition, customers requiring our Enterprise plan need to sign up for a minimum of $20k of PostHog Cloud Credit for a year, as well as adding the Teams plan to their subscription.
+
+## Pricing calculator
+
+While we have a transparent pricing available, you'll need to use our [pricing calculator](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only) for customers with very high volumes or bespoke needs. 
 
 ## Discounts
 
@@ -34,6 +35,8 @@ Also note that the minimum amounts here are _after_ discounts e.g. they will nee
 | $100,000 | $153,847 | $166,667 | $181,819 |
 
 If a customer has an annual plan but doesn't _pay_ the whole year up front, we usually halve the discount. Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. 
+
+> It's worth being aware that fast growing startups, even if they have the budget to pay annually, will probably prefer to pay quarterly or even monthly as flexibility may be a priority for them over saving 20%. 
 
 ## Payment method
 

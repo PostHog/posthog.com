@@ -57,7 +57,7 @@ When you set up the snippet or JS library, it autocaptures events (similar to GA
 
 PostHog has much of the same functionality as Google Analytics, but much of it is tweaked and named differently. Here’s a quick comparison of the two:
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
   <thead>
     <tr>
@@ -109,7 +109,7 @@ PostHog has much of the same functionality as Google Analytics, but much of it i
     </tr>
   </tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ## Creating your first dashboard
 

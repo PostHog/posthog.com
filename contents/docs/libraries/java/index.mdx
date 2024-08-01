@@ -36,7 +36,7 @@ import JavaSendEvents from '../../integrate/send-events/_snippets/send-events-ja
 
 ## Person profiles and properties
 
-For backward compatibility, PostHog captures events with [person profiles](/docs/data/persons) by default. To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+For backward compatibility, PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```java
 posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
@@ -57,7 +57,7 @@ posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
 
 For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To capture events without person profiles, set the event's `$process_person_profile` property to `false`:
+To capture anonymous events without person profiles, set the event's `$process_person_profile` property to `false`:
 
 ```java
 posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
@@ -69,7 +69,13 @@ posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
 
 ## Alias
 
-Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend. 
+
+In this case, you can use `alias` to assign another distinct ID to the same user.
+
+```java
+posthog.alias("distinct_id", "alias_id");
+```
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 

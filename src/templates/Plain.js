@@ -15,6 +15,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
+import { OverflowXSection } from '../components/OverflowXSection'
 
 const articleWidth = {
     lg: 'max-w-screen-2xl',
@@ -37,6 +38,7 @@ export default function Plain({ data }) {
         ProductVideo,
         FeatureSnapshot,
         PrivateLink,
+        OverflowXSection,
         Check,
         Close,
         a: A,

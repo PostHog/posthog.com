@@ -149,7 +149,8 @@ const them = [
                 <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-8 md:pb-20">
                     <p>
                         Eventually sign the contract - hopefully you saw the auto-renewal and mandatory price increases
-                        in there! 'Professional services'? Yeah that's just a fancy word for onboarding, but they'll charge you $$$ for it.
+                        in there! 'Professional services'? Yeah that's just a fancy word for onboarding, but they'll
+                        charge you $$$ for it.
                     </p>
                 </div>
 

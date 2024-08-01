@@ -325,7 +325,7 @@ const formSections = [
                             <div className="flex-grow">
                                 <p className="font-bold m-0">Show an AMA</p>
                                 <p className="m-0">
-                                    Let vistors ask you questions. You'll get question notfications via email.
+                                    Let visitors ask you questions. You'll get question notifications via email.
                                 </p>
                             </div>
                             <Switch
