@@ -42,13 +42,11 @@ Once it completes, you can then query the data in PostHog.
 
 You can query your Supabase data using SQL insights. This enables you to combine it with your PostHog usage data.
 
-> The exact queries will be specific to your data. In these examples, our main table is named `newsletters` and this will be different for you.
-
 ### Visualizing the count of objects over time
 
 You can use trends to visualize your data. For example, to visualize a count of objects over time:
 
-1. Create a [new insight](https://us.posthog.com/project/52792/insights/new).
+1. Create a [new insight](https://us.posthog.com/insights/new).
 2. As a series, search for `postgres` and select your table. For us, that is `postgres_newsletters`.
 3. Ensure your ID, distinct ID, and timestamp fields are correct and press **Select.**
 
