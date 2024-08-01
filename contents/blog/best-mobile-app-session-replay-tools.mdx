@@ -19,7 +19,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 ## 1. LogRocket
 **Typical users:** Product managers, engineers, support teams
 
-![LogRocket](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-amplitude-alternatives/logrocket.webp)
+![LogRocket](https://res.cloudinary.com/dmukukwp6/image/upload/v1722525793/posthog.com/contents/logrocket123123.png)
 
 ### What is LogRocket?
 
@@ -28,10 +28,10 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 #### Supported features
 
 <ComparisonTable column1="LogRocket">
-  <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
+  <ComparisonRow column1="Android, iOS, React Native" feature="Supported platforms" description="Mobile platforms where session replay is available" />
+  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
   <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="See where users tap and interact" />
+  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
   <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
   <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
   <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
@@ -61,101 +61,10 @@ Reviewers on [G2](https://www.g2.com/products/logrocket/reviews) use LogRocket f
 
 <br />
 
-## 2. Microsoft Clarity
-**Typical users:** Marketing and content teams
-
-![clarity](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hotjar-alternatives/microsoft-clarity.png)
-
-### What is Microsoft Clarity?
-
-[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports most replay features and heatmaps. It integrates with [Google Analytics 4](/blog/posthog-vs-ga4), so you can view your GA data in Clarity. 
-
-It includes most of the session replay features you would expect, but doesn't support any additional features that some of the other choices on this list do, like crash reports or debug logs.
-
-#### Supported features
-
-<ComparisonTable column1="Microsoft Clarity">
-  <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
-  <ComparisonRow column1={false} feature="Debug logs" description="View console logs, network logs, performance data" />
-  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="See where users tap and interact" />
-  <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-  <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
-  <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
-  <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
-
-### How much does Microsoft Clarity cost?
-
-Clarity is completely free.
-
-### Why do companies use Microsoft Clarity?
-
-According to [reviews on G2](https://www.g2.com/products/microsoft-microsoft-clarity/reviews) and [Capterra](https://www.capterra.com/p/236349/Microsoft-Clarity/), it's because:
-
-1. **It's easy to set up and use:** Setting up Clarity doesn't require much technical knowledge and users mostly like the simple user interface.
-
-2. **It helps uncover how users navigate:** Clarity users are mostly using it to understand how people navigate their app and identify opportunities for improvement.
-
-3. **It's free:** The short 30-day retention limit is easy to forgive when it's free.
-
-> #### Bottom line
-> 
-> If you only care about session replay and dont need other features, Clarity is the obvious choice - especially if you're already using Google Analytics. On the other hand, software engineers will find Clarity's lack of debug logs disappointing.
-
-<br />
-
-## 3. PostHog
-
-**Typical users** Engineering and product teams
-  
-![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/ab-testing.png)
-
-### What is PostHog?
-
-[PostHog](https://posthog.com) (that's us 👋) is an all-in-one platform built to help engineers create better products. It includes [session replays](/session-replay) **and** a whole bunch more, such as [product analytics](/analytics), [A/B testing](/ab-testing), and [feature flags](/feature-flags).
-
-It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
-
-#### Supported features
-
-<ComparisonTable column1="PostHog">
-  <ComparisonRow column1="iOS and Android only" feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
-  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="See where users tap and interact" />
-  <ComparisonRow column1={false} feature="Scroll maps" description="See how far users scroll and where they dwell" />
-  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
-  <ComparisonRow column1={false} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
-  <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
-  <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
-</ComparisonTable>
-
-### How much does PostHog cost?
-
-PostHog has [transparent pricing](/pricing?product=session-replay) based on usage. It’s free to get started and completely free for the first 5,000 recordings. After this free monthly allowance, pricing starts at $0.0050/recording (or $50 for 10k recordings), and recordings cost progressively less the more you use. This makes PostHog significantly cheaper than all the other companies on this list (apart from [Microsoft Clarity](#2-microsoft-clarity)).
-
-### Why do companies use PostHog?
-
-According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
-
-1. **It's many tools in one:** PostHog can replace tools like [Mixpanel](/blog/posthog-vs-mixpanel) (analytics), [UXCam](/blog/best-uxcam-alternatives) (session replay), and [Statsig](/blog/posthog-vs-statsig) (A/B testing and feature flags). This simplifies workflows and ensures all product data is in one place.
-
-2. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and build better products. This means creating funnels to track conversion, watching replays to see where users get stuck, and testing solutions with A/B tests.
-
-3. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
-
-> #### Bottom line
-> 
-> For teams looking for all the tools they need to improve their products, PostHog makes for a great choice. This is especially true for startups and scaleups thanks to it having a generous free tier.
-
-<br />
-
-## 4. UXCam
+## 2. UXCam
 **Typical users:** Product managers in enterprise companies
   
-![UXCam](https://res.cloudinary.com/dmukukwp6/image/upload/v1720771924/posthog.com/contents/Funnel_analytics.png)
+![UXCam](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526111/posthog.com/contents/Analyze_event_in_session.jpg)
 
 ### What is UXCam?
 
@@ -166,10 +75,10 @@ It's designed to provide deep insights into user behavior, helping product manag
 #### Supported features
 
 <ComparisonTable column1="UXCam">
-  <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
+  <ComparisonRow column1="Android, iOS, React Native, Flutter" feature="Supported platforms" description="Mobile platforms where session replay is available" />
+  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
   <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="See where users tap and interact" />
+  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
   <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
   <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
   <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
@@ -197,10 +106,101 @@ Looking at [G2 reviews](https://www.g2.com/products/uxcam/reviews), companies ch
 
 <br/>
 
+## 3. Microsoft Clarity
+**Typical users:** Marketing and content teams
+
+![clarity](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526729/posthog.com/contents/clarity-mobile.png)
+
+### What is Microsoft Clarity?
+
+[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives) is a 100% free session replay tool that supports most replay features and heatmaps. It integrates with [Google Analytics 4](/blog/posthog-vs-ga4), so you can view your GA data in Clarity. 
+
+It includes most of the session replay features you would expect, but doesn't support any additional features that some of the other choices on this list do, like crash reports or debug logs.
+
+#### Supported features
+
+<ComparisonTable column1="Microsoft Clarity">
+  <ComparisonRow column1="Android, iOS, React Native" feature="Supported platforms" description="Mobile platforms where session replay is available" />
+  <ComparisonRow column1={false} feature="Debug logs" description="View console logs, network logs" />
+  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
+  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
+  <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
+  <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
+  <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
+  <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
+  <ComparisonRow column1={true} feature="AI summaries" description="Generate summaries of session replays" />
+</ComparisonTable>
+
+### How much does Microsoft Clarity cost?
+
+Clarity is completely free.
+
+### Why do companies use Microsoft Clarity?
+
+According to [reviews on G2](https://www.g2.com/products/microsoft-microsoft-clarity/reviews) and [Capterra](https://www.capterra.com/p/236349/Microsoft-Clarity/), it's because:
+
+1. **It's easy to set up and use:** Setting up Clarity doesn't require much technical knowledge and users mostly like the simple user interface.
+
+2. **It helps uncover how users navigate:** Clarity users are mostly using it to understand how people navigate their app and identify opportunities for improvement.
+
+3. **It's free:** The short 30-day retention limit is easy to forgive when it's free.
+
+> #### Bottom line
+> 
+> If you only care about session replay and dont need other features, Clarity is the obvious choice - especially if you're already using Google Analytics. On the other hand, software engineers will find Clarity's lack of debug logs disappointing.
+
+<br />
+
+## 4. PostHog
+
+**Typical users** Engineering and product teams
+  
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1722527045/posthog.com/contents/posthog-mobile-replay.png)
+
+### What is PostHog?
+
+[PostHog](https://posthog.com) (that's us 👋) is an all-in-one platform built to help engineers create better products. It includes [session replays](/session-replay) **and** a whole bunch more, such as [product analytics](/analytics), [A/B testing](/ab-testing), and [feature flags](/feature-flags).
+
+It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
+
+#### Supported features
+
+<ComparisonTable column1="PostHog">
+  <ComparisonRow column1="Android, iOS" feature="Supported platforms" description="Mobile platforms where session replay is available" />
+  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
+  <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
+  <ComparisonRow column1={false} feature="Heatmaps" description="Highlight areas that get the most interaction" />
+  <ComparisonRow column1={false} feature="Scroll maps" description="See how far users scroll and where they dwell" />
+  <ComparisonRow column1={false} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
+  <ComparisonRow column1={false} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
+  <ComparisonRow column1={false} feature="Crash reports" description="Learn what happens before a crash without complex debugging or reproduction" />
+  <ComparisonRow column1={false} feature="AI summaries" description="Generate summaries of session replays" />
+</ComparisonTable>
+
+### How much does PostHog cost?
+
+PostHog has [transparent pricing](/pricing?product=session-replay) based on usage. It’s free to get started and completely free for the first 5,000 recordings. After this free monthly allowance, pricing starts at $0.0050/recording (or $50 for 10k recordings), and recordings cost progressively less the more you use. This makes PostHog significantly cheaper than all the other companies on this list (apart from [Microsoft Clarity](#3-microsoft-clarity)).
+
+### Why do companies use PostHog?
+
+According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It's many tools in one:** PostHog can replace tools like [Mixpanel](/blog/posthog-vs-mixpanel) (analytics), [UXCam](/blog/best-uxcam-alternatives) (session replay), and [Statsig](/blog/posthog-vs-statsig) (A/B testing and feature flags). This simplifies workflows and ensures all product data is in one place.
+
+2. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and build better products. This means creating funnels to track conversion, watching replays to see where users get stuck, and testing solutions with A/B tests.
+
+3. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing). Companies eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
+
+> #### Bottom line
+> 
+> For teams looking for all the tools they need to improve their products, PostHog makes for a great choice. This is especially true for startups and scaleups thanks to it having a generous free tier.
+
+<br />
+
 ## 5. Smartlook
 **Typical users:** Engineers, business analysts, product managers
 
-![Smartlook](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-fullstory-alternatives/smartlook.png)
+![Smartlook](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526687/posthog.com/contents/smartlook-mobile.webp)
 
 ### What is Smartlook?
  
@@ -209,10 +209,10 @@ Smartlook combines session replays, product analytics, visualizations, and crash
 #### Supported features
 
 <ComparisonTable column1="Smartlook">
-  <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
+  <ComparisonRow column1="Android, iOS, React Native, Flutter" feature="Supported platforms" description="Mobile platforms where session replay is available" />
+  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
   <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="See where users tap and interact" />
+  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
   <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
   <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
   <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
@@ -244,7 +244,7 @@ According to [G2](https://www.g2.com/products/smartlook/reviews) reviewers, Smar
 
 **Typical users:** Product managers, customer success, and support
 
-![FullStory](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/fullstory.png)
+![FullStory](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526812/posthog.com/contents/fullstory.png)
 
 ### What is FullStory?
 
@@ -253,10 +253,10 @@ According to [G2](https://www.g2.com/products/smartlook/reviews) reviewers, Smar
 #### Supported features
 
 <ComparisonTable column1="FullStory">
-  <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
+  <ComparisonRow column1="Android, iOS, React Native, Flutter" feature="Supported platforms" description="Mobile platforms where session replay is available" />
+  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
   <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="See where users tap and interact" />
+  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
   <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
   <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
   <ComparisonRow column1={true} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
@@ -288,6 +288,8 @@ According to reviews on [G2](https://www.g2.com/products/fullstory/reviews), com
 
 **Typical users:** Product managers, ecommerce teams, and marketers
 
+![contentsquare](https://res.cloudinary.com/dmukukwp6/image/upload/v1722526862/posthog.com/contents/contensquare.webp)
+
 ### What is Contentsquare?
 
 Contentsquare is an analytics platform that combines heatmaps, customer journey analysis, and frustration scoring to help find and fix issues and friction points.
@@ -295,10 +297,10 @@ Contentsquare is an analytics platform that combines heatmaps, customer journey 
 #### Supported features
 
 <ComparisonTable column1="Contentsquare">
-  <ComparisonRow column1={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
-  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs, performance data" />
+  <ComparisonRow column1="Android, iOS, React Native" feature="Supported platforms" description="Mobile platforms where session replay is available" />
+  <ComparisonRow column1={true} feature="Debug logs" description="View console logs, network logs" />
   <ComparisonRow column1={true} feature="Filters" description="View specific replays based on user segments, screens visited, events" />
-  <ComparisonRow column1={true} feature="Heatmaps" description="See where users tap and interact" />
+  <ComparisonRow column1={true} feature="Heatmaps" description="Highlight areas that get the most interaction" />
   <ComparisonRow column1={true} feature="Scroll maps" description="See how far users scroll and where they dwell" />
   <ComparisonRow column1={true} feature="Rage taps" description="Identify repetitive taps made out of frustration" />
   <ComparisonRow column1={false} feature="Dead taps" description="Detect taps on elements that do not respond or trigger an action" />
