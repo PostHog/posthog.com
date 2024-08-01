@@ -333,7 +333,7 @@ export async function middleware(request) {
 
   // Format flags and distinct_id for bootstrap cookie
   const bootstrapData = {
-    distinctId: distinct_id,
+    distinctID: distinct_id,
     featureFlags: data.featureFlags
   }
 
