@@ -166,11 +166,11 @@ export default function RoadmapForm({
                         ...(status === 'complete'
                             ? {
                                   complete: true,
-                                  dateCompleted: new Date(),
+                                  ...(id ? null : { dateCompleted: new Date() }),
                               }
                             : status === 'in-progress'
                             ? {
-                                  projectedCompletion: dayjs().add(1, 'year'),
+                                  ...(id ? null : { projectedCompletion: dayjs().add(1, 'year') }),
                               }
                             : null),
                         ...(uploadedFeaturedImage
