@@ -47,7 +47,7 @@ Anonymous events are _between 55% and 80% cheaper_ for most of our customers, an
 
 In reality, if you're tracking both anonymous traffic (like website visitors) and identified users (like logged-in customers), you'll likely use a mix of both event types. We've updated [our pricing calculator](/pricing#calculator) to help you better estimate your exact usage and potential savings.
 
-But if you were to switch to 100% anonymous events, here's a breakdown of the cost savings:
+If you were to switch to 100% anonymous events, here's a breakdown of the cost savings:
 
 | **Monthly events** | **Identified events** | **Anonymous events** | **Change** |
 |--------------------|--------------------------|-----------------------------------|----------------|
@@ -106,7 +106,9 @@ We're high on life... and ramen... and pineapple on pizza... except the people w
 
 ## When is Part 3?
 
-It's in pre-production. We're trying to cast Ryan Reynolds as a character who communicates entirely in cultural references for millennials. Give us a few more years and we could potentially afford a cameo from RDJ's goatee, though [James Greenhill's mustache](/community/profiles/30174) is superior imo.
+It's in pre-production. Release date TBD.
+
+We're trying to cast Ryan Reynolds as a character who communicates entirely in cultural references for millennials. Give us a few more years and we could potentially afford a cameo from RDJ's goatee, though [James Greenhill's mustache](/community/profiles/30174) is superior imo.
 
 ## Which would you rather fight... one horse-sized hedgehog, or 100 hedgehog-sized horses?
 
