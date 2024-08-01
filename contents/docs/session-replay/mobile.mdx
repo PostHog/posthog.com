@@ -1,149 +1,29 @@
 ---
-title: Mobile Recording
+title: Mobile session replay
 ---
 
-> 🚧 **NOTE:** Mobile recording is currently **only available on Android and iOS** and is considered `beta`. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
+> 🚧 **NOTE:** Mobile session replay is currently **only available on Android and iOS** and is considered `beta` (and is free while in beta). We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
 
-> Mobile recording is free and unlimited while it is considered `beta`.
-
-
-# Overview
-
-Mobile Session Recording allows you to record user sessions on mobile devices. This includes screen recordings, network requests, logs, and touches. This data can then be used to understand how users are interacting with your app and to identify bugs and issues.
+Mobile session replay enables you to record user sessions in mobile apps. This includes screen recordings, network requests, logs, and touches. This data can then be used to understand how users are interacting with your app and to identify bugs and issues.
 
 ## How it works
 
 We have taken our time to make sure we provide a useful and detailed recording experience whilst keeping the performance and security of your app as a top priority. By default, the configuration is restrictive with automatic masking.
 
-#### Wireframe mode (Default)
+### Wireframe mode (default)
 
 Mobile recording is primarily done using native APIs to grab the view hierarchy state when the screen is drawn. This is done carefully so as not to affect performance in any way a user may notice.
 
 The view hierarchy is transformed to a JSON data structure and later rendered as an HTML [wireframe](https://www.figma.com/resource-library/what-is-wireframing/). Since it is a wireframe, the UI won't have the original look and feel but it should be close enough to understand the user's behavior.
 
-#### Screenshot mode
+Below is an example of a screen captured in wireframe mode in Android:
 
-If the `screenshot` (Android) or `screenshotMode` (iOS) option is enabled, the SDK will take a screenshot of the screen instead of making a representation of the user's screen (A.k.a. Wireframe mode). The screenshot may contain sensitive information, use it with caution. The automatic masking for the screenshot mode already works on Android and we'll be working on the iOS next.
+![Wireframe mode in mobile replay](https://res.cloudinary.com/dmukukwp6/image/upload/v1722436140/posthog.com/contents/Screenshot_2024-07-31_at_3.27.44_PM.png)
 
-#### Network recording
+### Screenshot mode
 
-If the `captureNetworkTelemetry` option is enabled, the SDK will record Network requests. Only metric-like data is currently gathered to give a picture of speed, size, and response code. No data is captured from the request or response body.
+If `screenshot` (Android) or `screenshotMode` (iOS) option is enabled, the SDK will take a screenshot of the screen instead of a wireframe representation. The screenshot may contain sensitive information, so proceed with caution and ensure you're masking all relevant views.
 
-# Installation
+Below is an example of a screen captured in screenshot mode in Android:
 
-## Android
-
-Add the dependency, check out the [installation docs](/docs/libraries/android#installation).
-
-Initialize the SDK, check out the [configuration docs](/docs/libraries/android#configuration).
-
-Add the OkHttp Interceptor for enabling the `captureNetworkTelemetry` option.
-
-```android_kotlin
-import com.posthog.PostHogOkHttpInterceptor
-import okhttp3.OkHttpClient
-
-private val client = OkHttpClient.Builder()
-    .addInterceptor(PostHogOkHttpInterceptor(captureNetworkTelemetry = true))
-    .build()
-```
-
-### Recording specific configuration
-
-SDK configurations during the SDK initialization.
-
-```android_kotlin
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY).apply {
-    // enable session recording, requires enabling on the project configuration as well.
-    sessionReplay = true
-    // all texts are masked or redacted (default is enabled).
-    // this isn't supported if using Jetpack Compose views, use with caution.
-    sessionReplayConfig.maskAllTextInputs = false
-    // all images are placeholders or redacted (default is enabled).
-    // this isn't supported if using Jetpack Compose views, use with caution.
-    sessionReplayConfig.maskAllImages = false
-    // capture logs automatically (default is enabled)
-    sessionReplayConfig.captureLogcat = true
-    // screenshot is disabled by default
-    // The screenshot may contain sensitive information, use with caution
-    sessionReplayConfig.screenshot = false
-    // debouncerDelayMs is 500ms by default
-    sessionReplayConfig.debouncerDelayMs = 500
-}
-```
-
-#### Masking and Redaction
-
-> 🚧 **NOTE:** Currently, this isn't supported if using Jetpack Compose views, We're investigating this issue.
-
-[View](https://developer.android.com/reference/android/view/View) configuration, if setting the [View#tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`, the view will be a placeholder or redacted, this setting applies to any type of `View`.
-
-```xml
-<ImageView
-    android:id="@+id/imvProfilePhoto"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
-    android:tag="ph-no-capture"
-/>
-```
-
-### Limitations
-
-- Requires the PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases) - use the latest version.
-- Requires Android API >= 26, otherwise it's a NoOp.
-- Jetpack Compose is only supported if the `screenshot` option is enabled.
-  - Masking and Redaction aren't supported yet, We're investigating this issue.
-- Custom views is partly supported, and only fully supported if the `screenshot` option is enabled.
-- WebView is not supported, a placeholder will be shown.
-- Keyboard is not supported, a placeholder will be shown.
-- React Native and Flutter for Android aren't supported.
-
-## iOS
-
-Add the dependency, check out the [installation docs](/docs/libraries/ios#installation).
-
-Initialize the SDK, check out the [configuration docs](/docs/libraries/ios#configuration).
-
-### Recording specific configuration
-
-SDK configurations during the SDK initialization.
-
-```swift
-let config = PostHogConfig(apiKey: apiKey)
-// sessionReplay is disabled by default
-config.sessionReplay = true
-// sessionReplayConfig is optional, they are enabled by default
-config.sessionReplayConfig.maskAllTextInputs = true
-config.sessionReplayConfig.maskAllImages = true
-config.sessionReplayConfig.captureNetworkTelemetry = true
-// screenshotMode is disabled by default
-// The screenshot may contain sensitive information, use with caution
-config.sessionReplayConfig.screenshotMode = true
-```
-
-#### Masking and Redaction
-
-[UIView](https://developer.apple.com/documentation/uikit/uiview) configuration, if setting the [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier) or [accessibilityLabel](https://developer.apple.com/documentation/uikit/uiaccessibilityelement/1619577-accessibilitylabel) to `ph-no-capture`, the view will be a placeholder or redacted, this setting applies to any type of `UIView`.
-
-```swift
-let imvProfilePhoto = UIImageView(frame: CGRect(x: 50, y: 50, width: 100, height: 100))
-imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
-```
-
-The [SwiftUI TextField](https://developer.apple.com/documentation/swiftui/textfield) when used in combination with [UITextInputTraits](https://developer.apple.com/documentation/uikit/uitextinputtraits) by setting traits such as `TextField("Email", text: ...).keyboardType(.emailAddress)` will always be automatically masked since it's for private text.
-
-The [SwiftUI SecureField](https://developer.apple.com/documentation/swiftui/securefield) view is always automatically masked since it's for private text.
-
-The [SwiftUI accessibilityLabel](https://developer.apple.com/documentation/swiftui/view/accessibilitylabel(_:)-7rljm) and [SwiftUI accessibilityIdentifier](https://developer.apple.com/documentation/swiftui/view/accessibilityidentifier(_:)) configurations aren't supported yet for SwiftUI, We're investigating this issue.
-
-The [SwiftUI Text](https://developer.apple.com/documentation/swiftui/text) view is detected as a SwiftUI Image view and it'll be automatically masked if the option `maskAllImages` is enabled even if the `maskAllTextInputs` option is disabled, We're investigating this issue.
-
-### Limitations
-
-- Requires the PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases) - use the latest version.
-- [SwiftUI](https://developer.apple.com/xcode/swiftui/) is only supported if the `screenshotMode` option is enabled.
-- It's a representation of the user's screen, not a video recording nor a screenshot.
-  - Custom views are not fully supported.
-  - If the option `screenshotMode` is enabled, the SDK will take a screenshot of the screen instead of making a representation of the user's screen.
-- WebView is not supported, a placeholder will be shown.
-- React Native and Flutter for iOS aren't supported.
+![Screenshot mode in mobile replay](https://res.cloudinary.com/dmukukwp6/image/upload/v1722436140/posthog.com/contents/Screenshot_2024-07-31_at_3.16.16_PM.png)
