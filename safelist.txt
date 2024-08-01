@@ -13,6 +13,10 @@
 -mt-44
 -mx-16
 -mx-4
+lg:-mx-6
+lg:px-6
+xl:-mx-12
+xl:px-12
 -right-4
 -rotate-45
 after:bg-blue

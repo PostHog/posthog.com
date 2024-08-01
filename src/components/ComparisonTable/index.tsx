@@ -2,7 +2,7 @@ import React from 'react'
 
 export const ComparisonTable = ({ column1, column2, children }) => {
     return (
-        <div className="overflow-x-auto -mx-5 px-5 w-screen md:w-auto">
+        <div className="min-w-full overflow-x-auto -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12">
             <table className="w-full mt-4">
                 <thead>
                     <tr>

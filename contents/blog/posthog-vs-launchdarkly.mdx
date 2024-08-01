@@ -130,7 +130,7 @@ As mentioned earlier, many of the security, approval, and workflow features that
 
 To give you an idea of what pricing looks like in reality, here are some example situations and their estimated costs for both PostHog and LaunchDarkly.
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
     <thead>
         <tr>
@@ -177,7 +177,7 @@ To give you an idea of what pricing looks like in reality, here are some example
         </tr>
     </tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > **Notes:** 
 > - Using [backend local evaluation](/docs/feature-flags/common-questions#backend-sdks) in PostHog lowers the amount of flag usage to depend on the polling duration and active number of servers. If you use flags with one server polling every 30 seconds, this amount is under 1M requests (meaning free). 
