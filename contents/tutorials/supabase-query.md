@@ -21,20 +21,20 @@ To start, you need both a Supabase and PostHog account. Once you have those, hea
 4. Fill out the PostHog data warehouse link fields with your Supabase data.
     1. Under connection parameters, copy host, database name, port, and user (database name in Supabase is just `database` in PostHog) 
     
-    [https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_30_at_10_35_42_a606e7fc02.png](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_30_at_10_35_42_a606e7fc02.png)
+    ![Supabase data warehouse link setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_30_at_10_35_42_a606e7fc02.png)
     
-    1. Enter the password you set for your database.
-    2. Choose the schema you want to import. See the Supabase table editor for details on what each one has. `public` is the default, but we also use `auth` and `extensions` later in this tutorial.
+    2. Enter the password you set for your database.
+    3. Choose the schema you want to import. See the Supabase table editor for details on what each one has. `public` is the default, but we also use `auth` and `extensions` later in this tutorial.
 5. Once you add the details, click **Next**.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_30_at_10_49_35_eff7638059.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_30_at_10_49_14_b56ffd2b10.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/light_supa_90406c4e12.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/dark_supa_317ba9c1fc.png" 
   alt="Supabase data warehouse link setup in PostHog" 
   classes="rounded"
 />
 
-1. Choose set up the sync methods, choose the tables you want to include, and click **Import** to start the sync.
+6. Choose set up the sync methods, choose the tables you want to include, and click **Import** to start the sync.
 
 Once it completes, you can then query the data in PostHog.
 
