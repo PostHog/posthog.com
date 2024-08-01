@@ -15,7 +15,9 @@ category: PostHog news
 - We’re passing the savings onto you by making session replay _drastically cheaper_, especially at lower volumes.
 - We’re now the cheapest session replay tool among competitive products.
 
-And this is just Part 1...
+~~And this is just Part 1...~~ 
+
+[Part 2 is now live](/blog/analytics-pricing).
 
 ## How will this impact me?
 
