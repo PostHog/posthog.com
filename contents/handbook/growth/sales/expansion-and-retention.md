@@ -22,6 +22,7 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 - Offer to optimize their usage/reduce their billing - if they are pointlessly tracking a bunch of junk, tell them! Otherwise they'll just find out themselves and churn anyway.
 - Tell them about new or upcoming features or products that they may not be aware of which you know could be a great fit for them (and let them try them out for free).
 - Use multiple channels - email is usually the worst way to reach our ICP. Slack, in-app Surveys or even Telegram are all usually better. But try email first anyway.
+- Adding the contact on LinkedIn and sending a very human video or audio message can work really well - even for technical people (use the LinkedIn mobile app).  
 - Figure out what the non-technical people in their team need and then go out and talk to them - get someone who isn’t an engineer to talk to us given engineers don’t want to.
 - If they submit a support request, jump in and respond yourself to try and build a relationship. 
 - Ask the wider team for help - we have to get creative here! As a last resort, deploying the founder card can be surprisingly effective. 
