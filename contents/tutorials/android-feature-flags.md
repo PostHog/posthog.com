@@ -232,6 +232,6 @@ That's it! When you restart your app and click the button, you should see the gr
 
 ## Further reading
 
-- [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
+- [How to set up session replays in Android](/tutorials/android-session-replays)
 - [How to run A/B tests in Android](/tutorials/android-ab-tests)
 - [How to set up analytics in Android](/tutorials/android-analytics)
