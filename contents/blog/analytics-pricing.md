@@ -154,6 +154,8 @@ We would never fight hedgehogs, how dare you.
 >
 > You can get more details on this and other use cases, like server-side events, in our [persons documentation](/docs/data/persons).
 >
+> Soon, we will be making `identified_only` the default for all users. We'll let you know when that change happens.
+>
 > ### I have a question you haven't answered...
 >
 > It may be covered in our [person](/docs/data/persons) and [person properties](/docs/product-analytics/person-properties) docs.
