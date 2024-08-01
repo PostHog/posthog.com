@@ -205,7 +205,9 @@ module.exports = {
                 'gray-accent-dark': '#2C2C2C',
                 'gray-accent-light': '#BFBFBC',
                 red: '#F54E00',
-                green: '#449c1e',
+                green: '#6AA84F',
+                lilac: '#8567FF',
+                'sky-blue': '#2EA2D3',
             },
             minHeight: {
                 md: '780px',

@@ -125,7 +125,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                             className={
                                 showSubtotal
                                     ? `col-span-4`
-                                    : `flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'} justify-end`
+                                    : `flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'}`
                             }
                         >
                             <Title
