@@ -1,5 +1,5 @@
 ---
-title: How to set up Android session replays
+title: How to set up Android session replay
 date: 2024-07-10
 author:
   - lior-neu-ner
@@ -7,19 +7,19 @@ tags:
   - session replay
 ---
 
-[Session replays](/session-replay) are a useful support tool for understanding how users are interacting with your Android app. It also helps you debug and recreate issues. 
-To show how you to set it up with PostHog, in this tutorial we create a basic Kotlin app, add PostHog, and [enable session recordings](/docs/session-replay/mobile#android).
+[Session replay](/session-replay) is a useful support tool for understanding how users are interacting with your Android app. It also helps you debug and recreate issues. 
+To show how you to set it up with PostHog, this tutorial shows you how to create a basic Kotlin app, add PostHog, and [enable session recordings](/docs/session-replay/mobile#android).
 
 ## 1. Create a basic Android app
 
 Our sample app will have two screens:
 
-- The first screen is be a `login` screen with email and password textfields.
+- The first screen is a `login` screen with email and password text fields.
 - The second screen is a simple screen with welcome text and logout button.
 
 The first step is to create a new app. Open [Android Studio](https://developer.android.com/studio) and create a new project. Select `No Activity`, name your project `Android-Session-Replays`, and use the defaults for everything else.
 
-Then, navigate to the `res` directory and create a new folder `layout` in it. In `res/layout`, create two new layout resource files `activity_login.xml` and `activity_welcome.xml`. Add the following code to each file:
+Then, navigate to the `res` directory and create a new directory `layout` in it. In `res/layout`, create two new layout resource files `activity_login.xml` and `activity_welcome.xml`. Add the following code to each file:
 
 ```xml file=activity_login.xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -76,7 +76,7 @@ Then, navigate to the `res` directory and create a new folder `layout` in it. In
 </LinearLayout>
 ```
 
-Next we create our activities. In `java/com.example.android_session_replays`, create two new Kotlin files `LoginActivity.kt` and `WelcomeActivity.kt`. Add the following code to each file:
+Next, we create our activities. In `java/com.example.android_session_replays`, create two new Kotlin files `LoginActivity.kt` and `WelcomeActivity.kt`. Add the following code to each file:
 
 ```kotlin file=LoginActivity.kt
 package com.example.android_session_replays
@@ -131,7 +131,7 @@ class WelcomeActivity : AppCompatActivity() {
 }
 ```
 
-Lastly, add your new activities to `AndroidManifext.xml`:
+Lastly, go to the `manifests` directory and add your new activities to `AndroidManifext.xml`:
 
 ```xml file=AndroidManifest.xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -170,7 +170,7 @@ Our basic set up is now complete. Build and run your app to see it in action.
 
 First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in your `Gradle Scripts/build.gradle.kts (Module: app)` file. You can find the latest version on our [GitHub](https://github.com/PostHog/posthog-android/blob/main/CHANGELOG.md). 
 
-Note that session replays require SDK version `3.4.0` or higher.
+**Note:** Session replay requires SDK version `3.4.0` or higher.
 
 ```gradle_kotlin file=app/build.gradle
 dependencies {
@@ -181,7 +181,7 @@ dependencies {
 
 Sync your project with your Gradle file changes.
 
-Next, we create a Kotlin class where we can configure our PostHog instance. In the `src/main/java/com.example.android_session_replays` folder, add a new file `MySessionReplaysApplication.kt` and then add the following code:
+Next, we create a Kotlin class where we can configure our PostHog instance. In the `java/com.example.android_session_replays` directory, add a new file `MySessionReplaysApplication.kt` and then add the following code:
 
 ```kotlin file=MySessionReplaysApplication.kt
 package com.example.android_session_replays
@@ -211,7 +211,7 @@ class MySessionReplaysApplication : Application() {
 }
 ```
 
-To get your PostHog API key and host, [sign up to PostHog](https://us.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://us.posthog.com/settings/project).
+To get your PostHog API key and host, [sign up for PostHog](https://us.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://us.posthog.com/settings/project).
 
 We now need to register our custom application class. Go to `app/manifests/AndroidManifest.xml` and add `android:name=".MySessionReplaysApplication"` within the `<application>` tag:
 
@@ -227,18 +227,18 @@ We now need to register our custom application class. Go to `app/manifests/Andro
 </manifest>
 ```
 
-To check your setup, build and run your app a few times. Enter in any values in the textfields and click the **Log in** button. You should start session replays in the [Session replay tab](https://us.posthog.com/replay/recent) in PostHog 🎉
+To check your setup, build and run your app a few times. Enter in any values in the text fields and click the **Log in** button. You should start session replays in the [session replay tab](https://us.posthog.com/replay/recent) in PostHog 🎉.
 
 <ProductScreenshot
-  imageLight={"https://res.cloudinary.com/dmukukwp6/image/upload/v1722266411/posthog.com/contents/Screenshot_2024-07-29_at_4.19.27_PM.png"} 
-  imageDark={"https://res.cloudinary.com/dmukukwp6/image/upload/v1722266410/posthog.com/contents/Screenshot_2024-07-29_at_4.19.59_PM.png"} 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1722266411/posthog.com/contents/Screenshot_2024-07-29_at_4.19.27_PM.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1722266410/posthog.com/contents/Screenshot_2024-07-29_at_4.19.59_PM.png"
   alt="Android session replays in PostHog" 
   classes="rounded"
 />
 
 ## 3. (Optional) Mask sensitive data
 
-Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
+Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. PostHog tries to automatically mask sensitive data (like the password text field), but sometimes you need to do it manually.
 
 To replace any type of `View` with a redacted version in the replay, set the [tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`.
 
@@ -247,11 +247,11 @@ The example below illustrates how to do this for the **Welcome** text in the sec
 ```xml file=activity_welcome.xml
 <!-- rest of your XML -->
     <TextView
-        android:tag="ph-no-capture"```
+        android:tag="ph-no-capture"
 <!-- rest of your XML -->
 ```
 
-Now the welcome messages shows up in replays like this:
+Now, the welcome messages shows up in replays like this:
 
 <ProductScreenshot
   imageLight={"https://res.cloudinary.com/dmukukwp6/image/upload/v1722329155/posthog.com/contents/Screenshot_2024-07-30_at_9.45.16_AM.png"} 
