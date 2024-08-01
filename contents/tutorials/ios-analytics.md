@@ -288,4 +288,4 @@ That's it! Feel free to play around in your dashboard and explore the different 
 
 - [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
 - [How to set up feature flags in iOS](/tutorials/ios-feature-flags)
-- [How to run A/B tests in Android](/tutorials/android-ab-tests)
+- [How to set up iOS session replays](/tutorials/ios-session-replays)
