@@ -1,0 +1,82 @@
+---
+title: Android session replay
+---
+
+> 🚧 **NOTE:** Android is considered `beta` and is free while in beta. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
+
+## Installation 
+
+[Install and configure PostHog]((/docs/libraries/android#installation)) as you normally would. Ensure you've enabled session recordings in your [project settings](/docs/session-replay/installation#step-two-enable-session-recordings-in-your-project-settings) and then add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options.  
+
+```android_kotlin
+val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
+    // Enable session recording. Requires enabling in your project settings as well.
+    // Default is false.
+    sessionReplay = true
+
+    // Whether text inputs are masked. Default is true.
+    // This isn't supported for Jetpack Compose views.
+    // Password inputs are always masked regardless
+    sessionReplayConfig.maskAllTextInputs = true
+
+    // Whether images are masked. Default is true.
+    // This isn't supported for Jetpack Compose views.
+    sessionReplayConfig.maskAllImages = true
+
+    // Capture logs automatically. Default is true.
+    sessionReplayConfig.captureLogcat = true
+
+    // Whether replays are created using high quality screenshots. Default is false.
+    // If disabled, replays are created using wireframes instead.
+    // The screenshot may contain sensitive information, so use with caution
+    sessionReplayConfig.screenshot = false
+
+    // How long to wait before recording user input when typing. Default is 500ms
+    sessionReplayConfig.debouncerDelayMs = 500
+}
+```
+
+## Additional options
+
+### Capture network telemetry
+
+To capture network requests in your recordings, add `PostHogOkHttpInterceptor` to your `OkHttp Interceptor`. 
+
+```android_kotlin
+import com.posthog.PostHogOkHttpInterceptor
+import okhttp3.OkHttpClient
+
+private val client = OkHttpClient.Builder()
+    .addInterceptor(PostHogOkHttpInterceptor(captureNetworkTelemetry = true))
+    .build()
+```
+
+> **Note:** Only metric-like data like speed, size, and response code are captured. No data is captured from the request or response body.
+
+#### Masking and redacting
+
+> 🚧 **NOTE:** Currently, this isn't supported if using Jetpack Compose views. We're investigating this issue.
+
+Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
+
+To replace any type of `View` with a redacted version in the recording, set the [tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`.
+
+```xml
+<ImageView
+    android:id="@+id/imvProfilePhoto"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:tag="ph-no-capture"
+/>
+```
+
+### Limitations
+
+- Session replay requires PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases), and it's recommended to always use the latest version.
+- Requires Android API >= 26.
+- Jetpack Compose is only supported if `screenshotMode` is enabled.
+  - Masking and redacting in Jetpack Compose isn't supported yet. We're investigating this issue.
+- Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
+- WebView is not supported. A placeholder will be shown.
+- Keyboard is not supported. A placeholder will be shown.
+- React Native and Flutter for Android aren't supported.

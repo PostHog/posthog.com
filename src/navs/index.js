@@ -2276,7 +2276,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Mobile recording',
+                    name: 'Mobile session replay',
                     url: '/docs/session-replay/mobile',
                     icon: 'IconPhone',
                     color: 'blue',
@@ -2284,6 +2284,16 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
+                    children: [
+                        {
+                            name: 'Android',
+                            url: '/docs/session-replay/android',
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/session-replay/ios',
+                        },
+                    ],
                 },
                 {
                     name: 'Privacy controls',
