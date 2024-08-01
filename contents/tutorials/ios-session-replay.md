@@ -1,21 +1,21 @@
 ---
-title: How to set up iOS session replays
-date: 2024-07-10
+title: How to set up iOS session replay
+date: 2024-08-02
 author:
   - lior-neu-ner
 tags:
   - session replay
 ---
 
-[Session replays](/session-replay) are a useful support tool for understanding how users are interacting with your iOS app. It also helps you debug and recreate issues. 
+[Session replay](/session-replay) is a useful support tool for understanding how users are interacting with your iOS app. It also helps you debug and recreate issues. 
 
-To show how you to set it up with PostHog, in this tutorial we create a basic SwiftUI app, add PostHog, and [enable session recordings](/docs/session-replay/mobile#ios).
+To show how you to set it up with PostHog, this tutorial shows your how to create a basic SwiftUI app, add PostHog, and [enable session recordings](/docs/session-replay/mobile#ios).
 
 ## 1. Create a basic iOS app
 
 Our sample app will have two screens:
 
-- The first screen is be a `login` screen with email and password textfields.
+- The first screen is a `login` screen with name, email, and password text fields.
 - The second screen is a simple screen with welcome text and logout button.
 
 The first step is to create a new app. Open XCode and click **Create new project**. Select iOS as your platform, then **App** and press **next**. Give your app a name, select `SwiftUI` as the interface, and the defaults for everything else. Click next and then **Create**.
@@ -36,6 +36,10 @@ struct ContentView: View {
                 WelcomeView(isLoggedIn: $isLoggedIn)
             } else {
                 VStack {
+                    TextField("Name", text: $name)
+                        .padding()
+                        .border(Color.gray)
+
                     TextField("Email", text: $email)
                         .padding()
                         .keyboardType(.emailAddress)
@@ -101,7 +105,7 @@ struct WelcomeView: View {
 
 Our basic setup is now complete. Build and run your app to see it in action.
 
-![Video of basic iOS app setup](https://res.cloudinary.com/dmukukwp6/video/upload/v1720536097/posthog.com/contents/demo-app-ios.mp4)
+![Video of basic iOS app setup](https://res.cloudinary.com/dmukukwp6/video/upload/v1722519765/posthog.com/contents/sample-app-2.mp4)
 
 ## 2. Add PostHog to your app
 
@@ -111,7 +115,7 @@ First, add [`posthog-ios`](/docs/libraries/ios) as a dependency to your app usin
 
 To add the package dependency to your Xcode project, select `File > Add Package Dependency` and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
 
-Note that session replays require SDK version `3.6.0` or higher.
+**Note:** Session replay requires SDK version `3.6.0` or higher.
 
 ![Add PostHog from Swift Package Manager](https://res.cloudinary.com/dmukukwp6/image/upload/v1720532354/posthog.com/contents/Screenshot_2024-07-09_at_2.32.30_PM.png)
 
@@ -128,6 +132,7 @@ struct posthog_session_replayApp: App {
         let POSTHOG_HOST = "<ph_client_api_host>"  // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
         let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
         configuration.sessionReplay = true
+        configuration.sessionReplayConfig.maskAllImages = false // must be disabled for SwiftUI, else Text views are redacted. See docs for more details: https://posthog.com/docs/session-replay/mobile#ios
         configuration.sessionReplayConfig.maskAllTextInputs = false
         configuration.sessionReplayConfig.screenshotMode = true // required for SwiftUI session replays
         PostHogSDK.shared.setup(configuration)
@@ -141,18 +146,18 @@ struct posthog_session_replayApp: App {
 }
 ```
 
-To check your setup, build and run your app a few times. Enter in any values in the textfields and click **Log in**. You should start session replays in the [Session replay tab](https://us.posthog.com/replay/recent) in PostHog 🎉
+To check your setup, build and run your app a few times. Enter in any values in the text fields and click the **Log in** button. You should start see recordings in the [session replay tab](https://us.posthog.com/replay/recent) in PostHog 🎉
 
 <ProductScreenshot
-  imageLight={""} 
-  imageDark={""} 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1722520038/posthog.com/contents/Screenshot_2024-08-01_at_2.46.25_PM.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1722520038/posthog.com/contents/Screenshot_2024-08-01_at_2.46.38_PM.png" 
   alt="iOS session replays in PostHog" 
   classes="rounded"
 />
 
 ## 3. (Optional) Mask sensitive data
 
-Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account.
+Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. PostHog tries to automatically mask sensitive data (like the password text field), but sometimes you need to do it manually.
 
 To replace any type of `UIView` with a redacted version in the replay, set the [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier) or [accessibilityLabel](https://developer.apple.com/documentation/uikit/uiaccessibilityelement/1619577-accessibilitylabel) to `ph-no-capture`.
 
@@ -174,7 +179,7 @@ struct WelcomeView: View {
 // rest of your existing code
 ```
 
-Now the welcome messages shows up like this in replays:
+Now, the welcome messages shows up like this in replays:
 
 <ProductScreenshot
   imageLight={""} 
