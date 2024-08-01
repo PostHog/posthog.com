@@ -114,7 +114,7 @@ export default function RootLayout({ children }) {
 
 Make sure to dynamically import the `PostHogPageView` component or the `useSearchParams` hook will deopt the entire app into client-side rendering.
 
-## Tracking pageviews in react-router-dom
+## Tracking pageviews in React Router
 
 If you are using [react-router-dom](https://reactrouter.com/en/main), start by adding the `PostHogProvider` component in the `app` folder. Make sure to set `capture_pageview: false` because we will manually capture pageviews.
 
