@@ -104,7 +104,7 @@ We think this is better than trying to squeeze you for every cent you have. You 
 
 It's in pre-production. Release date TBD.
 
-## Which would you rather fight... one horse-sized hedgehog, or 100 hedgehog-sized horses?
+## Would you rather fight one horse-sized hedgehog, or 100 hedgehog-sized horses?
 
 We would never fight hedgehogs, how dare you. 
 
