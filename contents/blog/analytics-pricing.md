@@ -152,6 +152,8 @@ We would never fight hedgehogs, how dare you.
 > 
 > This will track anonymous events until an identifying action is taken – i.e. using `identify()`, `group()`, setting person properties with `$set`, etc.
 >
+> Soon, we will be making `identified_only` the default for all users. We'll let you know when that change happens, but you can make the change now if you prefer.
+>
 > You can get more details on this and other use cases, like server-side events, in our [persons documentation](/docs/data/persons).
 >
 > ### I have a question you haven't answered...
