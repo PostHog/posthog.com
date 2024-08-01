@@ -97,6 +97,7 @@ We think this is better than trying to squeeze you for every cent you have. You 
 <br />
 
 > ## FAQ
+> <p class="!-mb-12 text-xs">&nbsp;</p>
 >
 > ### Do I still get 1 million free events?
 > Yes, your first 1 million events each month are free, regardless of what type of events you're sending.

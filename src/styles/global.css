@@ -244,8 +244,13 @@ h4 {
     blockquote:not(.quote) {
         @apply px-6 py-4 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-4;
 
-        p {
-            @apply !text-[15px];
+        p,
+        li {
+            @apply !text-[15px] leading-relaxed;
+        }
+
+        h3 {
+            @apply mb-2;
         }
     }
 
