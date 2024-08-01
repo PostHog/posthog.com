@@ -1850,6 +1850,10 @@ export const docsMenu = {
                             url: '/docs/migrate/migrate-from-amplitude',
                         },
                         {
+                            name: 'Migrate from Google Analytics',
+                            url: '/docs/migrate/google-analytics',
+                        },
+                        {
                             name: 'Migrate from Mixpanel',
                             url: '/docs/migrate/mixpanel',
                         },
