@@ -4,7 +4,7 @@ title: "We’ve decided to make less money [Part 1]"
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/take_my_money_11433edb48.png
 author:
-  - andy-vandervell
+  - james-hawkins
 featuredImageType: full
 category: PostHog news
 ---
