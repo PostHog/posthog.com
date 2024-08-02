@@ -41,7 +41,6 @@ interface IProps {
             options?: CustomFieldOption[]
             fieldType?: string
             cols?: 1 | 2
-            showTip?: boolean
         }[]
         buttonText?: string
         message?: string
@@ -206,14 +205,12 @@ function RadioGroup({
     placeholder,
     cols = 2,
     type,
-    showTip,
 }: {
     options: CustomFieldOption[]
     name: string
     placeholder: string
     cols?: 1 | 2
     type: string
-    showTip: boolean
 }) {
     if (!name) return null
     const { openOptions, setOpenOptions } = useContext(FormContext)
@@ -240,7 +237,7 @@ function RadioGroup({
                 {placeholder}
             </p>
             <motion.div className="overflow-hidden" animate={{ height: open ? 'auto' : 0 }} initial={{ height: 0 }}>
-                {type !== 'checkbox' && showTip && (
+                {type !== 'checkbox' && (
                     <p className="m-0 mt-1 mb-4 text-xs">
                         <strong>Tip:</strong> Use{' '}
                         <kbd
@@ -399,44 +396,41 @@ export default function SalesforceForm({
                 >
                     <Form className={formOptions?.className}>
                         <div className="grid divide-y divide-border border border-border dark:divide-border-dark dark:border-dark">
-                            {form.fields.map(
-                                ({ name, label, type, required, options, fieldType, cols, showTip }, index) => {
-                                    if (customFields && customFields[name])
-                                        return {
-                                            radioGroup: (
-                                                <RadioGroup
-                                                    type={fieldType}
-                                                    options={customFields[name].options || options}
-                                                    name={name}
-                                                    placeholder={label}
-                                                    cols={customFields[name].cols ?? formOptions?.cols}
-                                                />
-                                            ),
-                                        }[customFields[name]?.type]
-
-                                    if (type === 'enumeration')
-                                        return (
+                            {form.fields.map(({ name, label, type, required, options, fieldType, cols }, index) => {
+                                if (customFields && customFields[name])
+                                    return {
+                                        radioGroup: (
                                             <RadioGroup
                                                 type={fieldType}
-                                                options={options}
+                                                options={customFields[name].options || options}
                                                 name={name}
                                                 placeholder={label}
-                                                showTip={showTip ?? false}
-                                                cols={cols || formOptions?.cols}
+                                                cols={customFields[name].cols ?? formOptions?.cols}
                                             />
-                                        )
+                                        ),
+                                    }[customFields[name]?.type]
 
+                                if (type === 'enumeration')
                                     return (
-                                        <Input
-                                            key={`${name}-${index}`}
+                                        <RadioGroup
                                             type={fieldType}
+                                            options={options}
                                             name={name}
                                             placeholder={label}
-                                            required={required}
+                                            cols={cols || formOptions?.cols}
                                         />
                                     )
-                                }
-                            )}
+
+                                return (
+                                    <Input
+                                        key={`${name}-${index}`}
+                                        type={fieldType}
+                                        name={name}
+                                        placeholder={label}
+                                        required={required}
+                                    />
+                                )
+                            })}
                         </div>
                         <button
                             className={button(

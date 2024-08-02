@@ -208,7 +208,6 @@ export default function Startups() {
                                         { label: 'More than $5m', value: 100_000_000_000 },
                                     ],
                                     required: true,
-                                    showTip: true,
                                 },
                                 {
                                     label: 'The date that your company was incorportated',

@@ -114,7 +114,6 @@ export default function ContactSales({ location }) {
                                         label: 'Role',
                                         name: 'role',
                                         type: 'enumeration',
-                                        showTip: true,
                                         options: [
                                             {
                                                 label: 'Engineering',
