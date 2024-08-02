@@ -304,12 +304,17 @@ export const ProductAbTesting = () => {
                     />
                 </div>
 
-                <section id="customers" className="-mt-20">
-                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
+                <section id="customers" className="-mt-36 pt-36">
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="boosted engagement by 40%"
                             quote="Y Combinator uses PostHog's A/B testing to try new ideas, which has led to significant improvements."
                             customer={ycombinator}
+                        />
+                        <CustomerCard
+                            outcome="tests product changes for over 25M users"
+                            quote="Our data scientists are able to rapidly and autonomously iterate on the data models that power our home feed."
+                            customer={researchgate}
                         />
                         <CustomerCard
                             outcome="increased registrations by 30%"
