@@ -1,5 +1,5 @@
 ---
-title: How to query Supabase in PostHog
+title: How to query Supabase data in PostHog
 date: 2024-08-01
 author:
  - ian-vanagas
@@ -7,7 +7,7 @@ tags:
  - data warehouse
 ---
 
-Combining your app and analytics data is a powerful way to understand your product. Supabase is a popular choice for handling that app data, as it provides a database, auth, storage, and more all-in-one.
+Combining your database and analytics data is a powerful way to understand your users. [Supabase](https://supabase.com/) is a popular choice for handling that app data, as it provides a database, auth, storage, and more all-in-one.
 
 Because Supabase is built on Postgres, we can link and query it in PostHog using our data warehouse. This tutorial shows you how to do that and provides some example insights you can create with the data afterward. 
 
