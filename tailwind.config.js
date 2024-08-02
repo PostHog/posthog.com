@@ -100,6 +100,8 @@ module.exports = {
             'gray-accent-light': '#E5E7E0',
             'gray-accent-light-hover': '#C5C6C2',
             red: '#F54E00',
+            lilac: '#8567FF',
+            'sky-blue': '#2EA2D3',
         }),
         extend: {
             backgroundImage: {
