@@ -113,6 +113,7 @@ export default function RoadmapForm({
     const [loading, setLoading] = useState(false)
     const { getJwt, user } = useUser()
     const { handleSubmit, handleChange, values, setFieldValue, initialValues } = useFormik({
+        enableReinitialize: true,
         validateOnMount: false,
         validationSchema: ValidationSchema(status),
         initialValues: other.initialValues ?? {
@@ -126,6 +127,7 @@ export default function RoadmapForm({
             milestone: false,
             category: undefined,
             githubUrls: [''],
+            dateCompleted: dayjs().format('YYYY-MM-DD'),
         },
         onSubmit: async ({
             title,
@@ -138,6 +140,7 @@ export default function RoadmapForm({
             milestone,
             githubUrls,
             category,
+            dateCompleted,
         }) => {
             setLoading(true)
             try {
@@ -166,13 +169,18 @@ export default function RoadmapForm({
                         ...(status === 'complete'
                             ? {
                                   complete: true,
-                                  ...(id ? null : { dateCompleted: new Date() }),
+                                  dateCompleted,
                               }
                             : status === 'in-progress'
                             ? {
-                                  ...(id ? null : { projectedCompletion: dayjs().add(1, 'year') }),
+                                  complete: false,
+                                  projectedCompletion: dayjs().add(1, 'year'),
                               }
-                            : null),
+                            : {
+                                  complete: false,
+                                  dateCompleted: null,
+                                  projectedCompletion: null,
+                              }),
                         ...(uploadedFeaturedImage
                             ? {
                                   image: uploadedFeaturedImage?.id,
@@ -229,6 +237,16 @@ export default function RoadmapForm({
                             value={status}
                         />
                     </div>
+                )}
+                {status === 'complete' && (
+                    <input
+                        name="dateCompleted"
+                        value={values.dateCompleted}
+                        onChange={handleChange}
+                        placeholder="Date"
+                        className="w-full px-4 py-2 border-0 border-b border-border dark:border-dark bg-transparent"
+                        type="date"
+                    />
                 )}
                 <div className="border-b border-border dark:border-dark">
                     <TeamSelect value={values.team} onChange={(team) => setFieldValue('team', team)} />

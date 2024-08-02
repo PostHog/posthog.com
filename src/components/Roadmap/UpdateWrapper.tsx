@@ -4,6 +4,7 @@ import RoadmapForm, { Status } from 'components/RoadmapForm'
 import Tooltip from 'components/Tooltip'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
+import dayjs from 'dayjs'
 
 export const RoadmapSuccess = ({
     id,
@@ -51,18 +52,20 @@ export default function UpdateWrapper({
     roundButton,
     onSubmit,
     showSuccessMessage = false,
+    ...other
 }: {
     id: number
-    children: JSX.Element
+    children?: JSX.Element
     status: Status
     formClassName?: string
     editButtonClassName?: string
     roundButton?: boolean
     onSubmit?: (roadmap?: any) => void
     showSuccessMessage?: boolean
+    editing?: boolean
 }) {
     const { user, getJwt } = useUser()
-    const [editing, setEditing] = useState(false)
+    const [editing, setEditing] = useState(other.editing ?? false)
     const [initialValues, setInitialValues] = useState<any>(null)
     const [success, setSuccess] = useState(false)
 
@@ -92,8 +95,18 @@ export default function UpdateWrapper({
         fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}?populate=*`)
             .then((res) => res.json())
             .then(({ data: { attributes } }) => {
-                const { title, description, topic, teams, image, betaAvailable, milestone, category, githubUrls } =
-                    attributes
+                const {
+                    title,
+                    description,
+                    topic,
+                    teams,
+                    image,
+                    betaAvailable,
+                    milestone,
+                    category,
+                    githubUrls,
+                    dateCompleted,
+                } = attributes
                 setInitialValues({
                     title,
                     body: description,
@@ -105,6 +118,7 @@ export default function UpdateWrapper({
                     milestone,
                     category: category || undefined,
                     githubUrls: githubUrls?.length > 0 ? githubUrls : [''],
+                    dateCompleted: dateCompleted || dayjs().format('YYYY-MM-DD'),
                 })
             })
 
@@ -130,37 +144,41 @@ export default function UpdateWrapper({
             />
         </div>
     ) : (
-        <>
-            {showSuccessMessage && success && (
-                <RoadmapSuccess description="Roadmap will update on next build" id={id} />
-            )}
-            <div className="relative">
-                {user?.role?.type === 'moderator' && initialValues && (
-                    <div className={`${editButtonClassName} flex space-x-1`}>
-                        <ActionButton onClick={() => setEditing(true)} roundButton={roundButton}>
-                            <Tooltip content="Edit" placement="top">
-                                <IconPencil
-                                    className={`w-5 h-5 inline-block ${
-                                        roundButton ? 'opacity-50 group-hover:opacity-100' : ''
-                                    }}`}
-                                />
-                            </Tooltip>
-                        </ActionButton>
-                        <ActionButton onClick={() => handleUnpublish()} roundButton={roundButton}>
-                            <Tooltip content="Unpublish" placement="top">
-                                <span className="relative">
-                                    <IconHide
-                                        className={`w-5 h-5 inline-block ${
-                                            roundButton ? 'opacity-50 group-hover:opacity-100' : ''
-                                        }}`}
-                                    />
-                                </span>
-                            </Tooltip>
-                        </ActionButton>
+        (showSuccessMessage || children) && (
+            <>
+                {showSuccessMessage && success && (
+                    <RoadmapSuccess description="Roadmap will update on next build" id={id} />
+                )}
+                {children && (
+                    <div className="relative">
+                        {user?.role?.type === 'moderator' && initialValues && (
+                            <div className={`${editButtonClassName} flex space-x-1`}>
+                                <ActionButton onClick={() => setEditing(true)} roundButton={roundButton}>
+                                    <Tooltip content="Edit" placement="top">
+                                        <IconPencil
+                                            className={`w-5 h-5 inline-block ${
+                                                roundButton ? 'opacity-50 group-hover:opacity-100' : ''
+                                            }}`}
+                                        />
+                                    </Tooltip>
+                                </ActionButton>
+                                <ActionButton onClick={() => handleUnpublish()} roundButton={roundButton}>
+                                    <Tooltip content="Unpublish" placement="top">
+                                        <span className="relative">
+                                            <IconHide
+                                                className={`w-5 h-5 inline-block ${
+                                                    roundButton ? 'opacity-50 group-hover:opacity-100' : ''
+                                                }}`}
+                                            />
+                                        </span>
+                                    </Tooltip>
+                                </ActionButton>
+                            </div>
+                        )}
+                        <span>{children}</span>
                     </div>
                 )}
-                <span>{children}</span>
-            </div>
-        </>
+            </>
+        )
     )
 }
