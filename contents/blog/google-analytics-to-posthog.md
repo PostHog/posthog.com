@@ -18,7 +18,7 @@ tags:
 
 With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/blog/ga4-alternatives). 
 
-We’re biased, but PostHog is a great one. When compared with Google Analytics, it is:
+We’re biased, but PostHog is a great one. When [compared with Google Analytics](/blog/posthog-vs-ga4), it is:
 
 - Easier to set up and capture data about traffic and usage.
 - Provides all the same reports, views, and filters.
@@ -26,7 +26,7 @@ We’re biased, but PostHog is a great one. When compared with Google Analytics,
 
 This post will go over the basics you must know to make the transition from Google Analytics to PostHog.
 
-> Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an in-depth look at the differences
+> **Want to migrate your Google Analytics data to PostHog?** Check out our [migration guide](/migrate/google-analytics).
 
 ## Initial PostHog setup
 
