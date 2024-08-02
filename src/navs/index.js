@@ -1854,20 +1854,20 @@ export const docsMenu = {
                             url: '/docs/migrate/google-analytics',
                         },
                         {
-                            name: 'Migrate from Mixpanel',
-                            url: '/docs/migrate/mixpanel',
-                        },
-                        {
                             name: 'Migrate from Heap',
                             url: '/docs/migrate/heap',
                         },
                         {
-                            name: 'Migrate from Pendo',
-                            url: '/docs/migrate/pendo',
-                        },
-                        {
                             name: 'Migrate from Matomo',
                             url: '/docs/migrate/matomo',
+                        },
+                        {
+                            name: 'Migrate from Mixpanel',
+                            url: '/docs/migrate/mixpanel',
+                        },
+                        {
+                            name: 'Migrate from Pendo',
+                            url: '/docs/migrate/pendo',
                         },
                     ],
                 },
