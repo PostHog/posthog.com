@@ -49,6 +49,8 @@ bg-green/10
 bg-lime-green
 bg-opacity-25
 bg-opacity-50
+bg-lilac
+bg-lilac/10
 bg-orange
 bg-orange/10
 bg-purple
