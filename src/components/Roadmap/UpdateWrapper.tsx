@@ -1,10 +1,11 @@
-import { IconPencil, IconHide } from '@posthog/icons'
+import { IconPencil, IconHide, IconDownload } from '@posthog/icons'
 import Link from 'components/Link'
 import RoadmapForm, { Status } from 'components/RoadmapForm'
 import Tooltip from 'components/Tooltip'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
+import qs from 'qs'
 
 export const RoadmapSuccess = ({
     id,
@@ -68,6 +69,7 @@ export default function UpdateWrapper({
     const [editing, setEditing] = useState(other.editing ?? false)
     const [initialValues, setInitialValues] = useState<any>(null)
     const [success, setSuccess] = useState(false)
+    const [subscribers, setSubscribers] = useState([])
 
     const handleUnpublish = async () => {
         const confirmed = window.confirm(
@@ -91,11 +93,14 @@ export default function UpdateWrapper({
         }
     }
 
-    const fetchRoadmapItem = () =>
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}?populate=*`)
-            .then((res) => res.json())
-            .then(({ data: { attributes } }) => {
-                const {
+    const fetchRoadmapItem = async () => {
+        const query = qs.stringify({
+            populate: ['topic', 'teams', 'image', 'category', 'subscribers.user'],
+        })
+        const jwt = await getJwt()
+        const {
+            data: {
+                attributes: {
                     title,
                     description,
                     topic,
@@ -106,21 +111,51 @@ export default function UpdateWrapper({
                     category,
                     githubUrls,
                     dateCompleted,
-                } = attributes
-                setInitialValues({
-                    title,
-                    body: description,
-                    images: [],
-                    topic: topic?.data || undefined,
-                    team: teams?.data?.[0] || undefined,
-                    featuredImage: image?.data ? { file: null, objectURL: image.data.attributes.url } : undefined,
-                    betaAvailable,
-                    milestone,
-                    category: category || undefined,
-                    githubUrls: githubUrls?.length > 0 ? githubUrls : [''],
-                    dateCompleted: dateCompleted || dayjs().format('YYYY-MM-DD'),
-                })
+                    subscribers,
+                },
+            },
+        } = await fetch(
+            `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}?${query}`,
+            jwt
+                ? {
+                      headers: {
+                          Authorization: `Bearer ${jwt}`,
+                      },
+                  }
+                : undefined
+        ).then((res) => res.json())
+        setSubscribers(subscribers?.data)
+        setInitialValues({
+            title,
+            body: description,
+            images: [],
+            topic: topic?.data || undefined,
+            team: teams?.data?.[0] || undefined,
+            featuredImage: image?.data ? { file: null, objectURL: image.data.attributes.url } : undefined,
+            betaAvailable,
+            milestone,
+            category: category || undefined,
+            githubUrls: githubUrls?.length > 0 ? githubUrls : [''],
+            dateCompleted: dateCompleted || dayjs().format('YYYY-MM-DD'),
+        })
+    }
+
+    const handleExport = async () => {
+        const csv = `First name,Last name,Email\n${subscribers
+            .map(({ attributes: { user, firstName, lastName } }) => {
+                return `${firstName},${lastName},${user?.data?.attributes?.email}`
             })
+            .join('\n')}`
+        const blob = new Blob([csv], { type: 'text/csv' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `${initialValues.title} subscribers.csv`
+        document.body.appendChild(link)
+        link.click()
+        link.remove()
+        URL.revokeObjectURL(url)
+    }
 
     useEffect(() => {
         if (user?.role?.type !== 'moderator') return
@@ -153,6 +188,15 @@ export default function UpdateWrapper({
                     <div className="relative">
                         {user?.role?.type === 'moderator' && initialValues && (
                             <div className={`${editButtonClassName} flex space-x-1`}>
+                                <ActionButton onClick={handleExport} roundButton={roundButton}>
+                                    <Tooltip content={`Export ${subscribers.length} subscribers`} placement="top">
+                                        <IconDownload
+                                            className={`w-5 h-5 inline-block ${
+                                                roundButton ? 'opacity-50 group-hover:opacity-100' : ''
+                                            }}`}
+                                        />
+                                    </Tooltip>
+                                </ActionButton>
                                 <ActionButton onClick={() => setEditing(true)} roundButton={roundButton}>
                                     <Tooltip content="Edit" placement="top">
                                         <IconPencil
