@@ -252,7 +252,7 @@ const PairsWithArray = [
 ]
 
 export const ProductAbTesting = () => {
-    const { ycombinator, vendasta, assemblyai } = useStaticQuery(graphql`
+    const { ycombinator, researchgate, vendasta, assemblyai } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -268,6 +268,9 @@ export const ProductAbTesting = () => {
         }
         {
             ycombinator: mdx(slug: { eq: "customers/ycombinator" }) {
+                ...ProductCustomerFragment
+            }
+            researchgate: mdx(slug: { eq: "customers/researchgate" }) {
                 ...ProductCustomerFragment
             }
             vendasta: mdx(slug: { eq: "customers/vendasta" }) {
