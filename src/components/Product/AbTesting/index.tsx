@@ -310,7 +310,7 @@ export const ProductAbTesting = () => {
                 <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="boosted engagement by 40%"
+                            outcome="boosted community engagement by 40%"
                             quote="Y Combinator uses PostHog's A/B testing to try new ideas, which has led to significant improvements."
                             customer={ycombinator}
                         />
