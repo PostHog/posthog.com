@@ -3,7 +3,8 @@ title: "Why engineers should do support: Everything we've learned about doing it
 date: 2024-08-05
 author:
  - ian-vanagas
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/v1713888662/posthog.com/contents/images/newsletter/talk-to-users/talk-to-users-big.png
 featuredImageType: full
 tags:
   - Engineering
@@ -20,7 +21,7 @@ Support is not traditionally thought of as a task of engineers and most will be 
 - "It takes up too much time and prevents me from building anything useful."
 - "We don't need support. Our users should figure this out themselves or they are stupid."
 
-These arguments are the consequence of the wrong priorities and processes. When corrected, you will appreciate the value of engineers doing support and how it can become a core part of building a successful product.
+These arguments are the consequence of the wrong priorities and processes. When corrected, you might appreciate the value of engineers doing support and how it can become a core part of building a successful product.
 
 We know because we've done it. To help you do it too, this post covers why engineers do support at PostHog and everything we've learned about doing it well. 
 
