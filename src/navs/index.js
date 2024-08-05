@@ -2601,6 +2601,15 @@ export const docsMenu = {
                     icon: 'IconHome',
                 },
                 {
+                    name: 'Realtime destinations',
+                    url: '/docs/cdp/destinations',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                    icon: 'IconLive'
+                },
+                {
                     name: 'Batch exports',
                     url: '/docs/cdp/batch-exports',
                     badge: {
