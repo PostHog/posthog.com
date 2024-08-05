@@ -20,9 +20,27 @@ export default function Questions({ topicIds = [] }) {
                     $notContainsi: '/community/profiles',
                 },
             },
-            resolved: {
-                $eq: true,
-            },
+            $or: [
+                {
+                    resolved: {
+                        $eq: true,
+                    },
+                },
+                {
+                    resolved: {
+                        $eq: false,
+                    },
+                    replies: {
+                        profile: {
+                            teams: {
+                                id: {
+                                    $notNull: true,
+                                },
+                            },
+                        },
+                    },
+                },
+            ],
         },
     })
     return (
