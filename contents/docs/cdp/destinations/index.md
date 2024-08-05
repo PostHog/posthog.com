@@ -88,12 +88,37 @@ Below is a the structure of the global variables available whenever templating a
 }
 ```
 
+### Testing it out
+
+Once you have saved your destination, you can test it by invoking it with an example payload. You can choose whether to mock out the `async` calls (e.g. HTTP API calls) or not.
+
+> WARNING: If you do not mock out the API call then it will call your destination! Make sure this is definitely okay and check your example data so that you don't mess up your production data.
+
 
 ### Advanced - custom code
 
 Generally speaking we would recommend using one of the many templates that we are building, that take care of a lot of the logic for you, exposing simple inputs for you to configure. You can however, modify any destination by clicking the `show source code` option. From here you can modify the inputs (for example marking an input as secret so that it will be encrypted) or the code of the function itself.
 
-The code is written in our Hog language with further documentation of available features [here](/docs/hog)
+The code is written in our Hog language with further documentation of available features [here](/docs/hog). The majority of destinations are simply wrappers around `fetch` - a provided function for safely doing async, retriable HTTP calls.
+
+```rust
+let res := fetch(inputs.url, {
+  'headers': inputs.headers,
+  'body': inputs.body,
+  'method': inputs.method
+});
+
+if (res.status >= 400) {
+  print('Bad response', res.status, res.body)
+}
+```
+
+#### Guidelines
+- <b>Start from an existing template - </b> Check out existing templates that are close to your kind of use case and work from there
+- <b>Rely on filters - </b> always offload as much as possible to the built in `filters` and `inputs`. This will make modifying your destination later much simpler (as well as being more performant)
+- <b>Use `inputs` wherever possible - </b> these are great for secrets such as API credentials. You can mark them as secret and they will not be returned to the UI in the future and will be encrypted.
+- <b>Keep it short -</b> We have tight controls on execution time, memory usage etc.
+- <b>Do not do more than 2 `fetch` calls</b> The function will error if you do. If you have a need for more than 2 calls, please contact support.
 
 ### FAQ
 
