@@ -222,6 +222,16 @@ export default function Startups() {
                                     type: 'string',
                                     required: true,
                                 },
+                                {
+                                    label: 'Are you building LLM-powered features?',
+                                    name: 'is_building_with_llms',
+                                    type: 'enumeration',
+                                    required: true,
+                                    options: [
+                                        { label: 'Yes', value: 'true' },
+                                        { label: 'No', value: 'false' },
+                                    ],
+                                },
                             ],
                             name: 'Startup application',
                         }}

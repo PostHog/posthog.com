@@ -131,6 +131,16 @@ export const YCOnboarding = () => {
                                         required: true,
                                     },
                                     {
+                                        label: 'Are you building LLM-powered features?',
+                                        name: 'is_building_with_llms',
+                                        type: 'enumeration',
+                                        required: true,
+                                        options: [
+                                            { label: 'Yes', value: 'true' },
+                                            { label: 'No', value: 'false' },
+                                        ],
+                                    },
+                                    {
                                         label: 'Anything to add?',
                                         type: 'string',
                                         name: 'yc_notes',
