@@ -101,7 +101,7 @@ You can configure the `FeatureFlagRequestTimeout` parameter when initializing yo
  client, _ := posthog.NewWithConfig(
    os.Getenv("<ph_project_api_key>"),
    posthog.Config{
-      PersonalApiKey:            "your personal API key", // Required for feature flags
+      PersonalApiKey:            "your personal API key", // Optional, but much more performant.  If this token is not supplied, then fetching feature flag values will be slower.
       Endpoint:                  "<ph_client_api_host>",
       FeatureFlagRequestTimeout: 3 // Time in seconds. Default is 3.
    },
