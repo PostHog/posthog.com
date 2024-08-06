@@ -45,20 +45,25 @@ Windows isn't supported natively. But, Windows users can run a Linux virtual mac
 
 In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/blob/master/contents/handbook/engineering/developing-locally.md)!
 
-## Developing with Codespaces
+## Option 1: Developing with Codespaces
 
-This is a faster alternative to get up and running. If you don't want to or can't use Codespaces continue from the next section.
-
+This is a faster option to get up and running. If you don't want to or can't use Codespaces, continue from the next section.
 
 1. Create your codespace.
 ![](https://user-images.githubusercontent.com/890921/231489405-cb2010b4-d9e3-4837-bfdf-b2d4ef5c5d0b.png)
-2. Update it to 8-core machine type (the smallest is probably too small to get PostHog running properly). Consider also changing "Open in ..." to be your favorite editor.
+2. Update it to 8-core machine type (the smallest is probably too small to get PostHog running properly).
 ![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
-3. Open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
-4. Open a terminal window and run `./bin/migrate` and then `./bin/start`.
-5. Open browser to http://localhost:8000/.
+3. Open the codespace, using one of the "Open in" options from the list.
+4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
+5. Also in the codespace, open another terminal window and run `./bin/migrate` and then `./bin/start`.
+6. Open browser to http://localhost:8000/.
+7. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
-## macOS prerequisites
+## Option 2: Developing locally
+
+## Prerequisites
+
+### macOS
 
 1. Install Xcode Command Line Tools if you haven't already: `xcode-select --install`.
 
@@ -71,7 +76,9 @@ This is a faster alternative to get up and running. If you don't want to or can'
 
 3. Install [OrbStack](https://orbstack.dev/) – a more performant Docker Desktop alternative – with `brew install orbstack`. Go to OrbStack settings and set the memory usage limit to **at least 4 GB** (or 8 GB if you can afford it) + the CPU usage limit to at least 4 cores (i.e. 400%). You'll want to use Brex for the license if you work at PostHog.
 
-## Ubuntu prerequisites
+4. Continue with the [common prerequisites for both macOS and Linux](#common-prerequisites-for-both-macos--linux).
+
+### Ubuntu
 
 1. Install Docker following [the official instructions here](https://docs.docker.com/engine/install/ubuntu/).
 
@@ -80,8 +87,9 @@ This is a faster alternative to get up and running. If you don't want to or can'
     ```bash
     sudo apt install -y build-essential
     ```
+3. Continue with the [common prerequisites for both macOS and Linux](#common-prerequisites-for-both-macos--linux).
 
-## Common prerequisites for both macOS & Linux
+### Common prerequisites for both macOS & Linux
 
 1. Append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. You can do it in one line with:
 
@@ -99,9 +107,9 @@ This is a faster alternative to get up and running. If you don't want to or can'
     git clone https://github.com/PostHog/posthog && cd posthog/
     ```
 
-## Get things up and running
+### Get things up and running
 
-### 1. Spin up external services
+#### 1. Spin up external services
 
 In this step we will start all the external services needed by PostHog to work.
 
@@ -177,7 +185,7 @@ This intentionally only installs the Postgres client and drivers, and not the se
 
 On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up-to-date list of packages.
 
-### 2. Prepare the frontend
+#### 2. Prepare the frontend
 
 1. Install nvm, with `brew install nvm` or by following the instructions at https://github.com/nvm-sh/nvm. If using fish, you may instead prefer https://github.com/jorgebucaran/nvm.fish.
 
@@ -196,7 +204,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `pnpm typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
-### 3. Prepare plugin server
+#### 3. Prepare plugin server
 
 Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all required packages. You'll also need to install the `brotli` compression library:
 
@@ -218,7 +226,7 @@ export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
 pnpm i --dir plugin-server
 ```
 
-### 4. Prepare the Django server
+#### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
@@ -295,7 +303,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     pip install -r requirements-dev.txt
     ```
 
-### 5. Prepare databases
+#### 5. Prepare databases
 
 We now have the backend ready, and Postgres and ClickHouse running – these databases are blank slates at the moment however, so we need to run _migrations_ to e.g. create all the tables:
 
@@ -307,7 +315,7 @@ DEBUG=1 ./bin/migrate
 
 > **Another friendly tip:** You may run into `psycopg2` errors while migrating on an ARM machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
 
-### 6. Start PostHog
+#### 6. Start PostHog
 
 Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
 
@@ -323,7 +331,7 @@ Open [http://localhost:8000](http://localhost:8000) to see the app.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
 
-### 7. Develop
+#### 7. Develop
 
 This is it! You can now change PostHog in any way you want. See [Project Structure](/handbook/engineering/project-structure) for an intro to the repository's contents.
 
