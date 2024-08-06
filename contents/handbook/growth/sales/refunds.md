@@ -23,6 +23,8 @@ We issue refunds in this category if this is the first bill >$1 and/or they meet
 #### Next steps
 - Use [Refund - Learning Curve email template](https://posthog.lightning.force.com/lightning/r/EmailTemplate/00XHp000001vSDAMA2/view) to respond to the customer if they match criteria.
 - Assign the refund request to the RevOps team in Salesforce for processing.
+- If the issue is caught before the end of the current billing cycle, contact the customer and explain that after the current billing cycle we will refund the delta occured by unusual usage during the learvning curve.
+- Calculate the delta between average use and unusual use and issue a refund through Stripe. 
 
 ### Unexpected Stardom
 We issue refunds in this category if this is the first bill >$1 and/or usage spiked by >200% compared to their average usage over the past 3 months, and/or the account is a non-commercial or a hobby project.
