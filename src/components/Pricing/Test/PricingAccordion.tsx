@@ -120,6 +120,7 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
             <motion.div
                 onAnimationComplete={onAnimationComplete}
                 ref={contentRef}
+                initial={{ height: 0 }}
                 animate={{ height: isOpen ? 'auto' : 0, transition: { duration: 0.3, type: 'tween' } }}
                 className={isOpen ? '' : 'overflow-hidden'}
             >

@@ -1,5 +1,3 @@
-import Pricing from 'components/Pricing/Pricing'
-import { RenderInClient } from 'components/RenderInClient'
 import React, { useEffect, useState } from 'react'
 import usePostHog from 'hooks/usePostHog'
 import { useLocation } from '@reach/router'
@@ -76,17 +74,7 @@ const PricingPage = (): JSX.Element => {
                 ]
             }
         >
-            <RenderInClient
-                render={() => {
-                    const ff = posthog?.getFeatureFlag?.('pricing-test')
-                    return ff === 'test' ? (
-                        <PricingExperiment currentProduct={currentProduct} groupsToShow={groupsToShow} />
-                    ) : (
-                        <Pricing currentProduct={currentProduct} groupsToShow={groupsToShow} />
-                    )
-                }}
-                placeholder={<Skeleton />}
-            />
+            <PricingExperiment currentProduct={currentProduct} groupsToShow={groupsToShow} />
         </Layout>
     )
 }
