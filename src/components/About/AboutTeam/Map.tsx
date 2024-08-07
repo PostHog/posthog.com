@@ -21,7 +21,7 @@ const locations = [
     { latitude: 55.8642, longitude: -4.2518 }, // glasgow
     { latitude: 47.6062095, longitude: -122.3320708 }, // seattle
     { latitude: 44.977753, longitude: -93.2650108 }, // minneapolis
-    { latitude: 4.7109886, longitude: -74.072092 }, // colombia
+    { latitude: 4.570868, longitude: -74.297333 }, // colombia
     { latitude: 47.497912, longitude: 19.040235 }, // budapest
     { latitude: 53.3498053, longitude: -6.2603097 }, // dublin
     { latitude: 39.7392358, longitude: -104.990251 }, // denver
