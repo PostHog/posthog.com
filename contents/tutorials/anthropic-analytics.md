@@ -257,7 +257,7 @@ To create this insight, go the [Product analytics tab](https://us.posthog.com/in
 1. Set the event to `claude_message_completion`
 2. Click on **Total count** to show a dropdown. Click on **Property value (sum)**.
 3. Select the `total_cost_in_dollars` property.
-4. Cclick **+ Add breakdown** and select `model` from the event properties list.
+4. Click **+ Add breakdown** and select `model` from the event properties list.
 
 > **Note:** Insights may show `0` if the total cost is less than `0.01`.
 
@@ -348,4 +348,4 @@ We've shown you the basics of creating insights from your product's Claude usage
 
 - [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
-- [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
+- [How to monitor generative AI calls to AWS Bedrock](/tutorials/monitor-aws-bedrock-calls)
