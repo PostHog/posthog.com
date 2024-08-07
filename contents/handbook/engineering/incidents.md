@@ -89,7 +89,7 @@ When updating the status page, make sure to mark the affected component appropri
 
 <img width="223" alt="status" src="https://github.com/PostHog/posthog.com/assets/4550621/55fb053a-83f4-44c5-ac12-0a5409f4033f" />
 
-Occasionally it may be desirable to do addditional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Comms will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact.
+Occasionally it may be desirable to do additional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Comms will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact.
 
 ## When does an incident end?
 

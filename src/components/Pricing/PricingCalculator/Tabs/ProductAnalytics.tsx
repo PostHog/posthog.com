@@ -193,7 +193,7 @@ const Modal = ({ onClose, isVisible }) => {
                                 .
                             </p>
                             <p className="mb-2">
-                                Indentify users by their email address or other unique identifier, and attach custom
+                                Identify users by their email address or other unique identifier, and attach custom
                                 properties to their person profiles.
                             </p>
 
