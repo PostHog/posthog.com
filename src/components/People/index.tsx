@@ -84,7 +84,7 @@ export default function People() {
 
     const teamSize = teamMembers.length - 1
 
-    // Some Stats were used as fallback until the actual data is added to the GraphlQL Server
+    // Some Stats were used as fallback until the actual data is added to the GraphQL Server
     const teamStats = [
         {
             data: pineappleOnPizzaStat(teamMembers) ? pineappleOnPizzaStat(teamMembers) : [60, 40],

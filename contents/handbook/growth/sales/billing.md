@@ -43,7 +43,7 @@ If this is a new contract for an existing customer, you will need to add their e
 
 ###### Step 4: Apply credits
 - Make sure that the payment is fully processed to avoid any automatic deductions.
-- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment competion and click the "Apply Credit" button.
+- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment completion and click the "Apply Credit" button.
 - **If customer wishes to begin using credits  in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
 
 ###### Step 5: Schedule subscription

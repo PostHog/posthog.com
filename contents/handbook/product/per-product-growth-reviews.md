@@ -12,7 +12,7 @@ The objective of the growth review is to review key product metrics and understa
 
 Looking at the same metrics regularly will increase our understanding how they relate to each other, whether metric changes are expected or exceptions, and will make efforts to improve them more successful.
 
-The growth reviews should focus on analysing anomalies instead of expected metric behaviour, especially as teams become more familiar with their data.
+The growth reviews should focus on analysing anomalies instead of expected metric behavior, especially as teams become more familiar with their data.
 
 Outside of the regular meetings, it’s the job of the Product Manager to regularly monitor these metrics, becoming an expert in their nuances. Should a metric deviate from the norm, they are responsible for presenting a well-researched explanation during the review.
 
@@ -35,7 +35,7 @@ We’ve found that the best way to review what is a quite long list of metrics i
 
 ### Deep dives
 
-In each growth review, we usually do a couple of deep dives. Topics can be proposed in a preceeding growth review, by team members, or it is simply something the Product Manager finds worthwhile. Here are a couple of examples:
+In each growth review, we usually do a couple of deep dives. Topics can be proposed in a preceding growth review, by team members, or it is simply something the Product Manager finds worthwhile. Here are a couple of examples:
 
 - Why was churn so high last month? Can we identify any reasons?
 - Where in the onboarding funnel do new users struggle?
@@ -62,7 +62,7 @@ In each growth review, we usually do a couple of deep dives. Topics can be propo
 
 ### After the meeting
 
-- PM shares summary of meeting dicussion + outcome with the small team
+- PM shares summary of meeting discussion + outcome with the small team
 - PM makes sure all to dos are completed by the next growth reviews
 
 ## Useful material (internal links)

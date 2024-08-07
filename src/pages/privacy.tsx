@@ -1249,7 +1249,7 @@ function Privacy() {
                             </li>
                             <li>
                                 Ashby allows PostHog to search various databases which may include your personal data
-                                (including your CV or Résumé), to find possible candidates to fill our job openings.
+                                (including your CV or resumé), to find possible candidates to fill our job openings.
                                 Where we find you in this way, we will obtain your personal data from these sources.
                             </li>
                             <li>

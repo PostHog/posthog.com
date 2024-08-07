@@ -41,7 +41,7 @@ This has resulted in the highest number of qualified and motivated candidates re
 
 ### External recruiters
 
-All of our recruiting is done in-house, and we do not work with external agencies for any of our roles. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or résumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com. 
+All of our recruiting is done in-house, and we do not work with external agencies for any of our roles. We frequently receive unsolicited messages from agencies - sometimes 20 in a week - who want to work with us, and the best response is to simply ignore the message. If they attach any candidate profiles or resumés to their email, please _do not_ open the attachment. If you are ever unsure what to do, feel free to forward any unsolicited messages to careers@posthog.com.
 
 ### Deciding to hire
 
@@ -155,7 +155,7 @@ We record all candidate-related comms in Ashby so we can ensure we provide all c
 
 Ashby is a pretty intuitive platform to use, but here are a few helpful tips to get you going
 
-*   [A guide to getting started with the basics](https://www.notion.so/Getting-Started-for-Interviewers-4b6bd7cc94834e1ebe8d63345030696f) - this is pretty much everything you need to navigate through Ashby to provide feeedback and review candidates.
+*   [A guide to getting started with the basics](https://www.notion.so/Getting-Started-for-Interviewers-4b6bd7cc94834e1ebe8d63345030696f) - this is pretty much everything you need to navigate through Ashby to provide feedback and review candidates.
 *   Link your Gmail account in Settings if you are in direct contact with candidates - this means any emails you send directly from your inbox will automatically be captured on their Ashby record for everyone on the hiring team to see.
 *   When emailing candidates from within Ashby, you can select a Template from the drop down bar (and customize it if you want). If you find yourself writing the same email, it is worth saving as a template.
 
@@ -244,7 +244,7 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 
 > We aim to make a decision within 48 hours of SuperDay - being decisive is important at this stage, as great candidates will probably be fielding multiple job offers. 
 
-After a SuperDay, everyone involved in the day leaves their feedback on Ashby. This is hugely important to us in making a final decision so team members should make an effort in compeleting their feedback as soon as possible. If there are wildly different opinions, you should open an issue in `company-internal` to discuss.
+After a SuperDay, everyone involved in the day leaves their feedback on Ashby. This is hugely important to us in making a final decision so team members should make an effort in completing their feedback as soon as possible. If there are wildly different opinions, you should open an issue in `company-internal` to discuss.
 
 If a decision is made to hire, the People & Ops team will open an onboarding issue once the candidate has accepted and James/Tim will share in our Monday All Hands Meeting a brief overview of the following: 
 - Who we ended up hiring and their background: what they will be doing, and a summary of the recruitment process (how long open for, no. of applicants etc.)
