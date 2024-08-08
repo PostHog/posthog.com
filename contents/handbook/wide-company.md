@@ -51,7 +51,7 @@ This means titles, as adopted by the wider world, imply that _seniority_ is more
 
 When you are prompted to put your title somewhere, please just say as clearly as you can what you are focused on. Please do not focus on how senior you are.
 
-Before "Senior Engineer at PostHog"
+Before "Senior Engineer at PostHog" (this is not a title that exists at PostHog anyway)
 After "Product Analytics Engineer at PostHog"
 
 ## Goal setting
