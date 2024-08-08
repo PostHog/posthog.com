@@ -1866,6 +1866,10 @@ export const docsMenu = {
                             url: '/docs/migrate/heap',
                         },
                         {
+                            name: 'Migrate from LaunchDarkly',
+                            url: '/docs/migrate/launchdarkly',
+                        },
+                        {
                             name: 'Migrate from Matomo',
                             url: '/docs/migrate/matomo',
                         },
