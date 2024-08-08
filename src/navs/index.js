@@ -700,6 +700,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/billing',
                     },
                     {
+                        name: 'Refunds',
+                        url: '/handbook/growth/sales/refunds',
+                    },
+                    {
                         name: 'Automations',
                         url: '/handbook/growth/sales/automations',
                     },
