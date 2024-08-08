@@ -61,9 +61,9 @@ This is a faster option to get up and running. If you don't want to or can't use
 
 ## Option 2: Developing locally
 
-## Prerequisites
+### Prerequisites
 
-### macOS
+#### macOS
 
 1. Install Xcode Command Line Tools if you haven't already: `xcode-select --install`.
 
@@ -78,7 +78,7 @@ This is a faster option to get up and running. If you don't want to or can't use
 
 4. Continue with the [common prerequisites for both macOS and Linux](#common-prerequisites-for-both-macos--linux).
 
-### Ubuntu
+#### Ubuntu
 
 1. Install Docker following [the official instructions here](https://docs.docker.com/engine/install/ubuntu/).
 
@@ -89,7 +89,7 @@ This is a faster option to get up and running. If you don't want to or can't use
     ```
 3. Continue with the [common prerequisites for both macOS and Linux](#common-prerequisites-for-both-macos--linux).
 
-### Common prerequisites for both macOS & Linux
+#### Common prerequisites for both macOS & Linux
 
 1. Append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. You can do it in one line with:
 

@@ -42,7 +42,7 @@ This is the repository for the PostHog website. It contains:
     Clone the repo and navigate into your new site’s directory:
 
     ```bash
-    git clone https://github.com/PostHog/posthog && cd posthog/
+    git clone git@github.com:PostHog/posthog.com.git && cd posthog.com/
     ```
 
     If you're using an Apple Silicon Mac (M1) you'll need to run the following commands:
