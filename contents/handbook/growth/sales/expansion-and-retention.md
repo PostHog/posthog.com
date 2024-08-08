@@ -29,6 +29,8 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 
 Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!
 
+Ideally you want to get multiple people into a [shared Slack channel[(/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. 
+
 ### 2. Get a longer term commitment
 
 Once you've established contact, you basically want to get them into the same flow as if they were a new customer (and give them the same level of attention). You will be doing a combo of [discovery and commercial evaluation](/handbook/growth/sales/new-sales#sales-process), as the customer will want to figure out whether an annual contract with PostHog makes sense vs. what they've already got.
