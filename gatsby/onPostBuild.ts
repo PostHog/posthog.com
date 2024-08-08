@@ -143,7 +143,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
             (await createCategory(path.split('/')[0]))
 
         let tags = []
-        for (const tagLabel of postTag?.toLowerCase() ? [postTag.toLowerCase()] : postTags || []) {
+        for (const tagLabel of postTags || []) {
             let tag = category?.attributes?.post_tags?.data?.find(
                 (tag) => tag?.attributes?.label?.toLowerCase() === tagLabel?.toLowerCase()
             )
