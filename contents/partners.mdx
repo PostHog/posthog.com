@@ -18,6 +18,8 @@ images:
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/marketing_engineers_logo.jpg
   - >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/wintactix_logo.png
+  - >-
+    https://mpdcrajdndklznccvnuf.supabase.co/storage/v1/object/public/media/converonweb-icon.png
 ---
 
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
@@ -52,60 +54,73 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 </section>
 
 <Section title="Our partners" className="@container">
-                    <div className="flex flex-col @3xl:grid md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
-                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                        <div className="max-h-24">
-                         <GatsbyImage image={getImage(props?.images[3])} alt="Taleno Digital" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
-                         </div>
-                            <h3 className="text-xl mb-2">Taleno Digital</h3>
-                            <p className="text-[15px]">
-                                Joey Taleno can help you deploy PostHog projects, create visualizations, and setup suitable data architectures. 
-                            </p>
-                            <CallToAction to="https://taleno.digital/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
-                                Visit website
-                            </CallToAction>
-                        </div>
-                        <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                        <div className="max-h-24">
-                         <GatsbyImage image={getImage(props?.images[4])} alt="Mentat Analytics" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
-                         </div>
-                            <h3 className="text-xl mb-2">Mentat Analytics</h3>
-                            <p className="text-[15px]">
-                                Specializing in helping tech startups, Mentat can help you build your data stack, implement PostHog, and scale your data.
-                            </p>
-                            <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
-                                <CallToAction to="https://www.mentatanalytics.co/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
-                                    Visit website
-                                </CallToAction>
-                            </div>
-                        </div>
-                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                        <div className="max-h-24">
-                         <GatsbyImage image={getImage(props?.images[5])} alt="Marketing Engineers" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
-                         </div>
-                            <h3 className="text-xl mb-2">Marketing Engineers</h3>
-                            <p className="text-[15px]">
-                                An international team of engineers that can help you with deployment and configuring PostHog for marketing purpose. 
-                            </p>
-                            <CallToAction to="https://marketingengineers.nl/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
-                                Visit website
-                            </CallToAction>
-                        </div>
-                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                        <div className="max-h-24">
-                            <GatsbyImage image={getImage(props?.images[6])} alt="WintactiX" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
-                            </div>
-                            <h3 className="text-xl mb-2">WintactiX</h3>
-                            <p className="text-[15px]">
-                                WintactiX specializes in Rev Ops and software implementation. Available to consult on best practices and to integrate Posthog with your other sales and marketing SaaS without draining your in-house development resources.
-                            </p>
-                            <CallToAction to="https://www.wintactix.com/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
-                                Visit website
-                            </CallToAction>
-                        </div>
-                    </div>
+  <div className="flex flex-col @3xl:grid md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+      <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+      <div className="max-h-24">
+       <GatsbyImage image={getImage(props?.images[3])} alt="Taleno Digital" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
+       </div>
+          <h3 className="text-xl mb-2">Taleno Digital</h3>
+          <p className="text-[15px]">
+              Joey Taleno can help you deploy PostHog projects, create visualizations, and setup suitable data architectures. 
+          </p>
+          <CallToAction to="https://taleno.digital/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
+              Visit website
+          </CallToAction>
+      </div>
+      <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+      <div className="max-h-24">
+       <GatsbyImage image={getImage(props?.images[4])} alt="Mentat Analytics" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
+       </div>
+          <h3 className="text-xl mb-2">Mentat Analytics</h3>
+          <p className="text-[15px]">
+              Specializing in helping tech startups, Mentat can help you build your data stack, implement PostHog, and scale your data.
+          </p>
+          <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
+              <CallToAction to="https://www.mentatanalytics.co/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
+                  Visit website
+              </CallToAction>
+          </div>
+      </div>
+      <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+      <div className="max-h-24">
+       <GatsbyImage image={getImage(props?.images[5])} alt="Marketing Engineers" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
+       </div>
+          <h3 className="text-xl mb-2">Marketing Engineers</h3>
+          <p className="text-[15px]">
+              An international team of engineers that can help you with deployment and configuring PostHog for marketing purpose. 
+          </p>
+          <CallToAction to="https://marketingengineers.nl/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
+              Visit website
+          </CallToAction>
+      </div>
+      <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+      <div className="max-h-24">
+          <GatsbyImage image={getImage(props?.images[6])} alt="WintactiX" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
+          </div>
+          <h3 className="text-xl mb-2">WintactiX</h3>
+          <p className="text-[15px]">
+              WintactiX specializes in Rev Ops and software implementation. Available to consult on best practices and to integrate Posthog with your other sales and marketing SaaS without draining your in-house development resources.
+          </p>
+          <CallToAction to="https://www.wintactix.com/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
+              Visit website
+          </CallToAction>
+      </div>
+      <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+      <div className="max-h-24">
+          <GatsbyImage image={getImage(props?.images[7])} alt="Convert On Web" style={{maxHeight: 100}} objectFit="contain" objectPosition="0 0" />
+          </div>
+          <h3 className="text-xl mb-2">Convert On Web</h3>
+          <p className="text-[15px]">
+              ConvertOnWeb specializes in creating and optimizing high-converting websites for startups. We focus on launching and refining digital experiences to drive measurable success and growth for visionary brands. We offer expertise in PostHog implementation to help you track and analyze user behavior for continuous improvement.
+          </p>
+          <CallToAction to="https://www.convertonweb.com/" type="outline" externalNoIcon size="md" className="!w-full sm:!w-auto">
+              Visit website
+          </CallToAction>
+      </div>
+  </div>
+
   <div className="max-w-[849px] mx-auto text-center">
-  <CallToAction href="/talk-to-a-human">Become a partner</CallToAction>
+    <CallToAction href="/talk-to-a-human">Become a partner</CallToAction>
   </div>
 </Section>
 
