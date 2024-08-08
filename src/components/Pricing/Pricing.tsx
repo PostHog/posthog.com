@@ -54,7 +54,7 @@ const planSummary = [
             'Advanced product features',
             '6 projects',
             '7 year data retention',
-            'Priority support',
+            'Standard support',
             'Pay only for what you use',
             <>
                 <span className="opacity-60 text-sm">* Included with any product subscription</span>
