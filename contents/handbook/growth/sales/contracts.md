@@ -118,11 +118,12 @@ Occasionally, customers will want to sign an MSA instead of referencing our term
 
 ## Business Associate Agreement (BAA)
 
-We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them.  As this means we take on increased financial risk in case of a breach we 
-ask them as a minimum to subscribe to the Teams plan which is a guaranteed monthly payment.
+We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them.  As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to the Teams plan which is a guaranteed monthly payment.
 
 1. Ask the customer to subscribe to the Teams plan (as well as any other paid plans they wish to use).
 2. Create a new document from the [PandaDoc Template](https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a).
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. Once the client has signed it then it will get routed to Fraser for countersignature.
 5. You'll get a notification when everybody has signed it - _don't forget to update the *BAA Signed Date* property on the HubSpot company record,_ so we can keep track of who we have signed a BAA with.
+
+> We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. 
