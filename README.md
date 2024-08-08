@@ -39,10 +39,22 @@ This is the repository for the PostHog website. It contains:
 
 1.  **Start developing**
 
-    Clone the repo then navigate into your new site’s directory, install the site dependencies, and start it up.
+    Clone the repo and navigate into your new site’s directory:
 
     ```bash
-    cd posthog.com/
+    git clone git@github.com:PostHog/posthog.com.git && cd posthog.com/
+    ```
+
+    If you're using an Apple Silicon Mac (M1) you'll need to run the following commands:
+
+    ```bash
+    rm -rf ./node_modules
+    brew install vips
+    ```
+
+    Then install the site dependencies, and start it up:
+
+    ```bash
     yarn
     yarn start
     ```
