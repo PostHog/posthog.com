@@ -87,7 +87,7 @@ export const PaidPlanContent = ({ onFreeTierClick }) => {
                     Unlimited team members
                 </li>
                 <li className="flex items-start gap-2 text-sm">
-                    <IconCheck className="text-green inline-block size-5" />7 projects, 7-year data retention
+                    <IconCheck className="text-green inline-block size-5" />6 projects, 7-year data retention
                 </li>
             </ul>
         </div>

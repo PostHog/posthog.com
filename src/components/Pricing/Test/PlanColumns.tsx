@@ -120,8 +120,8 @@ const planSummary = [
                 description: 'Set billing limits per product so you never pay more than expected.',
             },
             {
-                name: 'Email support',
-                description: 'Community, email support, Slack-based over $2k/mo',
+                name: 'Standard support',
+                description: 'Support via email, Slack-based over $2k/mo',
             },
         ],
         projects: '7',

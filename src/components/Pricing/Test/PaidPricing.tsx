@@ -32,7 +32,7 @@ export const PaidPricing = () => {
                             <li>
                                 <s>1 project</s>{' '}
                                 <span className="bg-highlight p-0.5 font-bold text-[15px] italic text-red dark:text-yellow">
-                                    7 projects
+                                    6 projects
                                 </span>
                             </li>
                             <li>
