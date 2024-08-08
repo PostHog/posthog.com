@@ -291,6 +291,10 @@ export const handbookSidebar = [
                         name: 'How we review PRs',
                         url: '/handbook/engineering/how-we-review',
                     },
+                    {
+                        name: 'How to do product, as an engineer',
+                        url: '/handbook/engineering/product-engineering',
+                    },
                 ],
             },
             {
