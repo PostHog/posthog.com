@@ -10,10 +10,15 @@ export default function CookieBanner() {
     const [consentGiven, setConsentGiven] = useState('undecided')
 
     const handleClick = (accept: boolean) => {
-        accept ? posthog?.opt_in_capturing() : posthog?.opt_out_capturing()
         localStorage.setItem('cookie_consent', accept ? 'yes' : 'no')
         setConsentGiven(accept ? 'yes' : 'no')
     }
+
+    useEffect(() => {
+        if (['yes', 'no'].includes(consentGiven)) {
+            posthog?.set_config({ persistence: consentGiven === 'yes' ? 'localStorage+cookie' : 'memory' })
+        }
+    }, [consentGiven])
 
     useEffect(() => {
         const consent = localStorage.getItem('cookie_consent')
