@@ -40,7 +40,7 @@ It's better for customers because they get all these tools that are well integra
 
 ### Every product should be priced separately
 
-Whenever we build a product, like feature flags, or product experimentation, we should have a specific price for that product by itself. Being consistent here is less confusing than randomly combining products for example, even thouigh it will sometimes mean more items to explain to a customer.
+Whenever we build a product, like feature flags, or product experimentation, we should have a specific price for that product by itself. Being consistent here is less confusing than randomly combining products for example, even though it will sometimes mean more items to explain to a customer.
 
 It means that that customers who want just one product, can compare each of our products to our competitors', seeing that we are cheaper everywhere, improving our self serve top of funnel.
 
