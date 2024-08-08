@@ -12,6 +12,10 @@ For customers who want to sign up for an annual (or longer) plan there is some a
 
 In addition, customers requiring our Enterprise plan need to sign up for a minimum of $20k of PostHog Cloud Credit for a year, as well as adding the Teams plan to their subscription.
 
+### What about monthly customers?
+
+Anyone on a monthly plan simply agrees to our [Terms](/terms) and [Privacy Policy](/privacy) when they sign up. 
+
 ## Pricing calculator
 
 While we have a transparent pricing available, you'll need to use our [pricing calculator](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only) for customers with very high volumes or bespoke needs. 
@@ -36,7 +40,11 @@ Also note that the minimum amounts here are _after_ discounts e.g. they will nee
 
 If a customer has an annual plan but doesn't _pay_ the whole year up front, we usually halve the discount. Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. 
 
-> It's worth being aware that fast growing startups, even if they have the budget to pay annually, will probably prefer to pay quarterly or even monthly as flexibility may be a priority for them over saving 20%. 
+> It's worth being aware that fast growing startups, even if they have the budget to pay annually, will probably prefer to pay quarterly or even monthly as flexibility may be a priority for them over saving 20%.
+
+### Nonprofit discounts
+
+We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing. 
 
 ## Payment method
 
@@ -114,11 +122,12 @@ Occasionally, customers will want to sign an MSA instead of referencing our term
 
 ## Business Associate Agreement (BAA)
 
-We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them.  As this means we take on increased financial risk in case of a breach we 
-ask them as a minimum to subscribe to the Teams plan which is a guaranteed monthly payment.
+We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them.  As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to the Teams plan which is a guaranteed monthly payment.
 
 1. Ask the customer to subscribe to the Teams plan (as well as any other paid plans they wish to use).
 2. Create a new document from the [PandaDoc Template](https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a).
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. Once the client has signed it then it will get routed to Fraser for countersignature.
 5. You'll get a notification when everybody has signed it - _don't forget to update the *BAA Signed Date* property on the HubSpot company record,_ so we can keep track of who we have signed a BAA with.
+
+> We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
