@@ -97,8 +97,8 @@ const planSummary = [
                 description: 'Almost all product features, no credit card required',
             },
             {
-                name: 'Standard support',
-                description: 'Community, email support',
+                name: 'Community support',
+                description: 'Support via community forum',
             },
         ],
         projects: 1,
@@ -120,8 +120,8 @@ const planSummary = [
                 description: 'Set billing limits per product so you never pay more than expected.',
             },
             {
-                name: 'Priority support',
-                description: 'Community, priority email support, Slack-based over $2k/mo',
+                name: 'Email support',
+                description: 'Community, email support, Slack-based over $2k/mo',
             },
         ],
         projects: '7',

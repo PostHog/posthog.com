@@ -52,7 +52,7 @@ const planSummary = [
         features: [
             'Generous free tier on all products',
             'Advanced product features',
-            '6 projects',
+            '7 projects',
             '7 year data retention',
             'Email support',
             'Pay only for what you use',
@@ -650,7 +650,7 @@ const plans = [
                 <ul className="tw-check-bullets @lg:columns-2 pb-2">
                     <li>Usage-based pricing</li>
                     <li>Generous monthly free tier</li>
-                    <li>Up to 6 projects</li>
+                    <li>Up to 7 projects</li>
                     <li>7-year data retention</li>
                     <li>Email and community support</li>
                     <li>Unlimited team members</li>
