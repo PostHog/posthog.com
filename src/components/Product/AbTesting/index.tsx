@@ -307,7 +307,7 @@ export const ProductAbTesting = () => {
                     />
                 </div>
 
-                <section id="customers" className="-mt-20">
+                <section id="customers" className="md:-mt-20">
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="boosted community engagement by 40%"
