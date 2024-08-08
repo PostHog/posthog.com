@@ -124,7 +124,7 @@ const planSummary = [
                 description: 'Support via email, Slack-based over $2k/mo',
             },
         ],
-        projects: '7',
+        projects: '6',
         dataRetention: '7-year',
         intent: 'paid',
     },
