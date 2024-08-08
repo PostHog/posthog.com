@@ -688,10 +688,6 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/icp',
                     },
                     {
-                        name: 'Customer onboarding',
-                        url: '/handbook/growth/sales/customer-onboarding',
-                    },
-                    {
                         name: 'YC onboarding',
                         url: '/handbook/growth/sales/yc-onboarding',
                     },
