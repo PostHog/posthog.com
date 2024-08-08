@@ -54,6 +54,8 @@ a day and reach out to the people who've not been contacted yet. We also have a 
 
 We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users can get in touch with us. The sales@ alias gets an email notification and a notification is also sent to [#website-contact-sales](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted - respond to them in the same way as the email section above.
 
+> If you receive a lead where someone completes the contact form but it is clearly just a regular support request, you should add :ticket: to the relevant thread in the `#website-contact-sales` channel in Slack and mark it as "Unqualified" in Salesforce.
+
 ### Manually adding new users
 
 You can also just manually add a user to Salesforce under 'Contacts'. When creating a new contact, try to add as much useful information as possible, especially about the type of company they work for and what their needs are. This enables us to provide them with the best possible experience. 
