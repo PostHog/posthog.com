@@ -47,7 +47,7 @@ PostHog is _not_ a good place for managers who are territorial and prefer for al
 
 Companies give out titles to people that primarily show how senior they are. 
 
-This means titles, as adopted by the wider world, imply that _seniority_ is more important than what people do. We do not believe that seniority should not determine how decisions get made - people should own decisions in their area of the business. We trust every employee to fully own their area of the business.
+This means titles, as adopted by the wider world, imply that _seniority_ is more important than what people do. We do not believe that seniority should determine how decisions get made - people should own decisions in their area of the business. We trust every employee to fully own their area of the business.
 
 When you are prompted to put your title somewhere, please just say as clearly as you can what you are focused on. Please do not focus on how senior you are.
 
