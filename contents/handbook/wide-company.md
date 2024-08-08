@@ -49,7 +49,7 @@ Companies give out titles to people that primarily show how senior they are.
 
 This means titles, as adopted by the wider world, imply that _seniority_ is more important than what people do. We do not believe that seniority should determine how decisions get made - people should own decisions in their area of the business. We trust every employee to fully own their area of the business.
 
-When you are prompted to put your title somewhere, please just say as clearly as you can what you are focused on. Please do not focus on how senior you are.
+When you are prompted to put your title somewhere like LinkedIn, please just say as clearly as you can what you are focused on. Please do not focus on how senior you are. Feel free to be weird with it.
 
 Before "Senior Engineer at PostHog" (this is not a title that exists at PostHog anyway)
 After "Product Analytics Engineer at PostHog"
