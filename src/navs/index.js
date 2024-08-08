@@ -630,6 +630,10 @@ export const handbookSidebar = [
                 url: '/handbook/comms/press',
             },
             {
+                name: 'Partners',
+                url: '/handbook/comms/partners',
+            },
+            {
                 name: 'Email comms',
                 url: '/handbook/comms/email-comms',
             },
