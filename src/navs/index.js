@@ -1538,6 +1538,11 @@ export const docsMenu = {
                     icon: 'IconBook',
                 },
                 {
+                    name: 'Referrals',
+                    url: '/docs/referrals',
+                    icon: 'IconShare',
+                },
+                {
                     name: 'Settings',
                     url: '/docs/settings/organizations-and-projects',
                     icon: 'IconGear',
