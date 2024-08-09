@@ -7,22 +7,29 @@ import { useLayoutData } from 'components/Layout/hooks'
 export default function CookieBanner() {
     const posthog = usePostHog()
     const { internalMenu } = useLayoutData()
-    const [showBanner, setShowBanner] = useState(false)
+    const [consentGiven, setConsentGiven] = useState('')
 
     const handleClick = (accept: boolean) => {
-        accept ? posthog?.opt_in_capturing() : posthog?.opt_out_capturing()
-        setShowBanner(false)
+        localStorage.setItem('cookie_consent', accept ? 'yes' : 'no')
+        setConsentGiven(accept ? 'yes' : 'no')
     }
 
     useEffect(() => {
-        setShowBanner(
-            typeof posthog?.has_opted_in_capturing !== 'undefined' &&
-                !posthog?.has_opted_in_capturing() &&
-                !posthog?.has_opted_out_capturing()
-        )
+        if (['yes', 'no'].includes(consentGiven)) {
+            posthog?.set_config({ persistence: consentGiven === 'yes' ? 'localStorage+cookie' : 'memory' })
+        }
+    }, [consentGiven])
+
+    useEffect(() => {
+        const consent = localStorage.getItem('cookie_consent')
+        if (!consent) {
+            setConsentGiven('undecided')
+        } else {
+            setConsentGiven(consent)
+        }
     }, [])
 
-    return showBanner ? (
+    return consentGiven === 'undecided' ? (
         <div
             className={`fixed z-[50] left-0 lg:bottom-0 ${
                 internalMenu?.length > 0 ? 'bottom-[122px]' : 'bottom-[75px]'
