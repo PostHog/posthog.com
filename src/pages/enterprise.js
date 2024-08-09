@@ -81,7 +81,7 @@ export default function Enterprise() {
                             <StaticImage
                                 src="../images/enterprise/soc-2type1.png"
                                 height={140}
-                                alt="SOC 2 Type 2 certified"
+                                alt="SOC 2 Type II certified"
                                 placeholder="blurred"
                             />
                             <StaticImage
