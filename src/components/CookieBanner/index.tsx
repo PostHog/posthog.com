@@ -7,7 +7,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 export default function CookieBanner() {
     const posthog = usePostHog()
     const { internalMenu } = useLayoutData()
-    const [consentGiven, setConsentGiven] = useState('undecided')
+    const [consentGiven, setConsentGiven] = useState('')
 
     const handleClick = (accept: boolean) => {
         localStorage.setItem('cookie_consent', accept ? 'yes' : 'no')
