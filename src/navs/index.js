@@ -2932,16 +2932,22 @@ export const docsMenu = {
                     name: 'Integrations',
                 },
                 {
-                    name: 'Langfuse',
-                    url: '/docs/ai-engineering/langfuse-posthog',
-                    icon: 'IconWrench',
-                    color: 'red',
-                },
-                {
                     name: 'Helicone',
                     url: '/docs/ai-engineering/helicone-posthog',
                     icon: 'IconWrench',
                     color: 'green',
+                },
+                {
+                    name: 'Keywords AI',
+                    url: '/docs/ai-engineering/keywords-ai-posthog',
+                    icon: 'IconWrench',
+                    color: 'blue',
+                },
+                {
+                    name: 'Langfuse',
+                    url: '/docs/ai-engineering/langfuse-posthog',
+                    icon: 'IconWrench',
+                    color: 'red',
                 },
                 {
                     name: 'Traceloop',
