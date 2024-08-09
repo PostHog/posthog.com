@@ -105,9 +105,9 @@ The metrics are grouped into three categories: [cost](#cost-related-metrics), [u
 
 ### Generation count
 
-**What is it** The total number of outputs your LLM generates per day, week, or month.
+**What is it?** The total number of outputs your LLM generates per day, week, or month.
 
-**Why it's useful** Helps assess the workload and demand placed on your LLMs, which directly impacts costs and performance.
+**Why it's useful:** Helps assess the workload and demand placed on your LLMs, which directly impacts costs and performance.
 
 **Questions to ask**
 - How has the generation count changed over time, and does this correlate with user growth or engagement?
