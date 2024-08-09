@@ -171,4 +171,8 @@ The merge operation described above explains why a mutable export requires addit
 
 ### Which jobs does the batch export run in BigQuery?
 
-If you check your BigQuery [JOBS view](https://cloud.google.com/bigquery/docs/information-schema-jobs) or the [Google Cloud console](https://cloud.google.com/bigquery/docs/managing-jobs#view-job) for job details, you may notice the PostHog batch export running jobs in your BigQuery warehouse. Regardless of model, PostHog batch exports run a [load job](https://cloud.google.com/bigquery/docs/batch-loading-data) to batch load the data for the current period into BigQuery. Moreover, you will see additional query jobs in your logs when exporting a mutable model as the merge operation the batch export executes requires running additional queries in your BigQuery warehouse.
+If you check your BigQuery [JOBS view](https://cloud.google.com/bigquery/docs/information-schema-jobs) or the [Google Cloud console](https://cloud.google.com/bigquery/docs/managing-jobs#view-job) for job details, you may notice the PostHog batch export running jobs in your BigQuery warehouse.
+
+Regardless of model, PostHog batch exports run a [load job](https://cloud.google.com/bigquery/docs/batch-loading-data) to batch load the data for the current period into BigQuery. Moreover, you will see additional [query jobs](https://cloud.google.com/bigquery/docs/running-queries) in your logs when exporting a mutable model as the merge operation the batch export executes requires running additional queries in your BigQuery warehouse.
+
+If you are noticing an issue with your BigQuery batch export, it may be useful to check the aforementioned [JOBS view](https://cloud.google.com/bigquery/docs/information-schema-jobs) and the [Google Cloud console](https://cloud.google.com/bigquery/docs/managing-jobs#view-job). The error logs in them could be valuable to either diagnose the issue by yourself, or when creating a support request for us to look into.
