@@ -31,13 +31,13 @@ Many companies simply don't care about support. To do it well takes a lot of tim
 
 We disagree with this. Support is core to being a user-focused company. It is where you get the highest volume of feedback about your product experience. Having engineers involved in these interactions provides the following benefits:
 
-### It helps us build a great product people want
+### It helps us build a product people want
 
 When someone makes a support request, it's relatively clear what they want: they are trying to do something and it's not working the way they expect.
 
 Whether it is a bug, missing feature, or misunderstanding, solving the issue makes your product more usable, however small. Sometimes an issue only affects the requester, and other times, it impacts everyone. In either case, solving the issue means others won't run into it.
 
-For example, our customer effort score survey used to give options from 1-5. A user reported that the industry standard is actually 1-7. The next day, [Dylan](https://posthog.com/community/profiles/30455) added 1-7 as an option, making our survey product more accurate for that user and future ones.
+For example, our customer effort score survey used to give options from 1-5. A user reported that the industry standard is actually 1-7. The next day, [Dylan](https://posthog.com/community/profiles/30455) added 1-7 as [an option](https://posthog.com/changelog/2024#surveys-now-support-7-point-likert-scale-responses), making our survey product more accurate for that user and future ones.
 
 ![1-7](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_09_at_10_26_18_2x_7bbc3333be.png)
 
