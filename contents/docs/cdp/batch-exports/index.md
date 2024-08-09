@@ -81,7 +81,7 @@ As an example, creating a batch export of events with daily frequency today will
 
 On each batch export view, you are presented with a list of the latest executed runs:
 
-![batch export runs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/batch-exports-runs.png)
+![batch export runs](https://res.cloudinary.com/dmukukwp6/image/upload/2024_08_09_at_14_52_19_98dde216b8.png)
 
 Each run has:
 1. A state indicator which can be either "Starting", "Running", "Failed", or "Completed."
@@ -93,13 +93,13 @@ Each run has:
 
 You can use batch exports for past data stored in PostHog, known as historical data. For this, you don't need to create a new batch export. The batch export already knows the destination where we wish to send historical data. It only requires the boundaries for the data you want to export, in other words, a start and an end date.
 
-A "Create historic export" button can be found in the UI:
+A "Backfill batch export" button can be found in the UI:
 
-![batch exports ui](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/batch-exports-ui.png)
+![batch exports ui](https://res.cloudinary.com/dmukukwp6/image/upload/2024_08_09_at_14_56_27_8f4f6c7430.png)
 
 Which will let you input the start and end date of the historical export:
 
-![create historic export](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/create-historic-export.png)
+![create historic export](https://res.cloudinary.com/dmukukwp6/image/upload/2024_08_09_at_14_54_54_90338968ac.png)
 
 Immediately afterwards, the historical export runs that fall within the bounds selected are scheduled.
 
