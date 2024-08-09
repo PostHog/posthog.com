@@ -39,8 +39,8 @@ To create your own dashboard from a template:
 3. Select **LLM metrics – Keywords AI** from the list of templates.
 
 <ProductVideo
-    videoLight= "" 
-    videoDark= ""
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/v1723210093/posthog.com/contents/keywords-ai-light.mp4" 
+    videoDark= "https://res.cloudinary.com/dmukukwp6/video/upload/v1723210093/posthog.com/contents/keywords-dark.mp4"
     alt="How to create keywords AI dashboard from a template" 
     classes="rounded"
 />
