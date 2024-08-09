@@ -21,7 +21,7 @@ Support is not traditionally thought of as a task for engineers and most will be
 - "It takes up too much time and prevents me from building anything useful."
 - "We don't need support. Our users should figure this out themselves or they are stupid."
 
-These arguments are the consequence of the wrong priorities and processes. When corrected, you might appreciate the value of engineers doing support and how it can become a core part of building a successful product.
+These arguments are misguided. Discovering the benefits of support can make it a core part of building a successful product.
 
 We know because we've done it, and here's how you can do it too.
 
@@ -31,15 +31,19 @@ Many companies simply don't care about support. To do it well takes a lot of tim
 
 We disagree with this. Support is core to being a user-focused company. It is where you get the highest volume of feedback about your product experience. Having engineers involved in these interactions provides the following benefits:
 
-### 1. It helps us build a great product
+### It helps us build a great product people want
 
-Building something people want starts with knowing what they want. When someone makes a support request, it's relatively clear what they want: they are trying to do something and it's not working the way they expect. This could be a knowledge issue, bug, or missing feature.
+When someone makes a support request, it's relatively clear what they want: they are trying to do something and it's not working the way they expect.
 
-Whatever it is, solving the issue makes your product more usable, however small. Sometimes an issue only affects the requester, and other times, it impacts everyone. In either case, solving the issue means others won't run into it.
+Whether it is a bug, missing feature, or misunderstanding, solving the issue makes your product more usable, however small. Sometimes an issue only affects the requester, and other times, it impacts everyone. In either case, solving the issue means others won't run into it.
+
+For example, our customer effort score survey used to give options from 1-5. A user reported that the industry standard is actually 1-7. The next day, [Dylan](https://posthog.com/community/profiles/30455) added 1-7 as an option, making our survey product more accurate for that user and future ones.
+
+![1-7](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_09_at_10_26_18_2x_7bbc3333be.png)
 
 Doing this repeatedly inches your product towards greatness. Solving support issues is the difference between a polished experience and a janky one.
 
-### 2. Keeps feedback loops fast
+### Keeps feedback loops fast
 
 Even if engineers aren't officially doing support at your company, it often ends up on their plate anyway. The flow usually looks like:
 
@@ -53,12 +57,14 @@ A bonus benefit of fast feedback loops is that it sparks joy. Users love it when
 
 ![Good job Paul](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_02_at_10_09_40_4a2ce6dd87.png)
 
-### 3. Encourages full cycle ownership
+### Encourages full cycle ownership
 
 [Engineers at PostHog](/blog/what-is-a-product-engineer) own the entire product development cycle from ideation, to implementation, to ongoing maintenance. Doing support acts as both input and feedback on this and helps them do it better. For example:
 
-- When ideating and validating, engineers can draw on real customer behavior and pain points. They can back their product decisions on support issues they dealt with and requests from large customers.
+- When ideating and validating, engineers can draw on real customer behavior and pain points. Product decisions are backed by support issues they dealt with and requests from large customers.
+
 - When building, it encourages engineers to write reliable and maintainable code, because they will be the ones who need to fix it if it breaks.
+
 - When doing support, they are familiar with the potential fixes because they were involved with (or wrote) the code related to the issue.
 
 ## Creating a support process built for engineers
@@ -67,7 +73,7 @@ The second problem many companies run into is trying to smush engineers into an 
 
 > **Looking for all the details?** Check out our [support hero handbook entry](/handbook/engineering/support-hero).
 
-### 1. Have a rotation
+### Have a rotation
 
 The biggest complaint engineers have about doing support is that it breaks their flow. Constantly being interrupted by requests is a surefire way to get nothing done. To prevent this, engineers at PostHog rotate through being "support hero" for a week.
 
@@ -77,9 +83,9 @@ Originally, we had a single support hero for the entire company, but now each pr
 
 While support heroes aren't working on the team's core roadmap, the rest of the team is. When combined with our [async culture](https://newsletter.posthog.com/p/how-we-work-asynchronously), this enables everyone to have large blocks of time to work on complex tasks.
 
-### 2. Set expectations
+### Set expectations
 
-Negative support experiences are the result of broken expectations. For example, a response within 12 hours is…
+Garbage support is the result of broken expectations. For example, a response within 12 hours is…
 
 - Awesome if a user expected a response within 48 hours.
 - Awful if they expected a response right away.
@@ -90,31 +96,35 @@ To make sure expectations are clear, we include response times both before and a
 
 We also have response targets and SLAs with our larger customers. We don't do support calls or respond on weekends (except for incidents). This helps us balance providing great support with being always on-call. 
 
-### 3. Documentation is your first line of support
+### Documentation is your first line of support
 
 A user solving their own problem is the most powerful form of support. If they can't figure it out from your product, your docs are next in line. 
 
 Docs should cover basic setup, [popular use cases](/docs/feature-flags/tutorials), [frequently asked questions](/docs/feature-flags/common-questions), and troubleshooting. Link to them as a response whenever you can. If a support request relates to outdated docs, they should be updated. A single support request can represent an issue many users are facing but say nothing about
 
-### 4. Sharpen your support tools
+### Sharpen your support tools
 
 Engineers are great at optimizing repeatable processes. This means crafting and shaping purpose-built tools. These help us do support more effectively and efficiently. Examples of these include:
 
 - **Zendesk.** Centralizing support from in-app, emails, Slack messages, and community questions into prioritized, team-specific queues.
+
 - **Runbooks.** Although we document as much as possible publicly, we also have internal details on common issues and solutions for all our services in Docusauraus.
+
 - **Django admin panel.** User and organization details with features for common support use cases like impersonating users and deleting data.
+
 - **VIP lookup bot.** To help prioritize support, we built a Slack bot that takes an organization name or ID and returns their MRR, plans, links in Django admin, and more.
+
 - **Monitoring.** Logs and metrics for all our services are captured and visualized with tools like Grafana, VictoriaMetrics, Metabase, and PostHog. This enables us to monitor services and dive into specific performance issues and errors.
 
 ## How to scale engineers doing support
 
-As an engineer, you probably have one question in mind right now: "How does this scale?" Although we aren't a huge company, we're ~50 people supporting tens of thousands of users.
+Short answer: We're working on it.
 
-We've done a lot of work to continue to [ship fast](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed) while having engineers do support. Luckily for you, we're sharing what we've figured out here. 
+We're around 50 people supporting tens of thousands of users, but we're growing (and [shipping](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed)) fast and determined to continue having engineers do support. Here's how.
 
-### 1. Prioritize
+### Prioritize
 
-As your company grows, the amount of support surpasses the amount of time you have to do support. Making prioritization clear ensures your work aligns with company goals. At the moment, our support priority looks like this:
+The amount of support eventually surpasses the amount of time you have to do support. Making prioritization clear ensures your work aligns with company goals. At the moment, our support priority looks like this:
 
 1. Incidents
 2. Sales and customer success requests
@@ -124,15 +134,17 @@ As your company grows, the amount of support surpasses the amount of time you ha
 
 We try our best to get to everything, but there are always going to be tickets you want to prioritize more than others. You should be clear about this and automate prioritization as much as possible.
 
-### 2. Support engineers
+### Support engineers
 
 As we grew, even dedicated support heroes weren't enough to keep up with the support load. They couldn't get through high-priority support, let alone the rest of the queue. This was causing them to neglect longer-term improvements critical for reducing support load.
 
 The fix for this was the introduction of [support engineers](/handbook/comms/customer-support) who are entirely dedicated to doing support. This role is not a traditional, non-technical, first-line support agent. They are expected to be able to figure out and fix issues, often by shipping code.
 
+For example, [Marcus](https://posthog.com/community/profiles/30211) has recently shipped fixes for [batch export secrets](https://github.com/PostHog/posthog/pull/23963), the [filter out transformation](https://github.com/PostHog/posthog/pull/23877), and [Reddit as a campaign parameter](https://github.com/PostHog/posthog/pull/23469).
+
 A majority of support is still done by engineers, but support engineers solve as much as they can and escalate when needed. This helps support heroes work on the most pressing and valuable fixes.
 
-### 3. Community ≠ support
+### Community ≠ support
 
 For a long time, we had a Slack community. Although we had visions of it as being a place where users talked and learned about PostHog, it ended up functionally being dedicated to support. On top of this, knowledge was lost due to free plan limits, it was disconnected from our support queues, and it wasn't publicly searchable. 
 
@@ -141,14 +153,6 @@ So we [shut our Slack down](/blog/slack-closure).
 To replace it, we built a [community forum](/community) on our website. It's the opposite of Slack: permanent, public, customizable, and connected to our support queue. This enables us to provide a better support experience while also enabling us to craft a [real community experience](/handbook/community) for our users. 
 
 ![Community forum](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_05_at_10_49_39_b1c6a55cfe.png)
-
-### 4. Make your product easier to support
-
-Supporting a self-hostable product is tricky. Not only do you need to support your product, but users also expect you to support them with infrastructure issues as well. For example, there was a situation where we were debugging a Kubernetes deployment through mobile screenshots of a user's AWS console. 
-
-As our main product matured, it became too much to support complicated self-hosted setups. This is why [we sunset our self-hosted Kubernetes deployment](/blog/sunsetting-helm-support-posthog). It was causing an outsized support load from the 3.5% of users hosting that way.
-
-Sunsetting it simplified the support requests we got. This enabled us to focus on improving the core product which benefited all users. It also taught us a lesson about the importance of building a product we were able to support. Controlling the infrastructure enables us to monitor and proactively fix issues as well as ship fixes quickly when something does happen.
 
 ## Good reads  📖
 
