@@ -314,7 +314,10 @@ export default function Posts({
     const [prev, setPrev] = useState<string | null>(null)
     const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
     const [layoutMenu, setLayoutMenu] = useState(
-        menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] }
+        menusByRoot[root] || {
+            parent: communityMenu,
+            activeInternalMenu: communityMenu.children.find(({ name }) => name.toLowerCase() === 'posts'),
+        }
     )
 
     const [params, setParams] = useState(getParams(root, initialTag, getSortOption(root).sort))
