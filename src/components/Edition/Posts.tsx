@@ -213,7 +213,7 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
 }
 
 const categoriesHideFromIndex = ['tutorials', 'customers', 'spotlight', 'changelog']
-const tagsHideFromIndex = ['Comparisons']
+export const tagsHideFromIndex = ['Comparisons']
 
 export const getParams = (root, tag, sort) => {
     return {
@@ -262,17 +262,28 @@ export const getParams = (root, tag, sort) => {
                       ]
                     : [
                           {
-                              post_tags: {
-                                  label: {
-                                      $notIn: tagsHideFromIndex,
+                              $or: [
+                                  {
+                                      post_tags: {
+                                          label: {
+                                              $notIn: tagsHideFromIndex,
+                                          },
+                                      },
                                   },
-                              },
+                                  {
+                                      post_tags: {
+                                          label: {
+                                              $null: true,
+                                          },
+                                      },
+                                  },
+                              ],
                           },
                           {
                               $or: [
                                   {
                                       hideFromIndex: {
-                                          $not: true,
+                                          $eq: false,
                                       },
                                   },
                                   {
