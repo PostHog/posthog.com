@@ -260,14 +260,29 @@ export const getParams = (root, tag, sort) => {
                               },
                           },
                       ]
-                    : []),
-                {
-                    post_tags: {
-                        label: {
-                            $notIn: tagsHideFromIndex,
-                        },
-                    },
-                },
+                    : [
+                          {
+                              post_tags: {
+                                  label: {
+                                      $notIn: tagsHideFromIndex,
+                                  },
+                              },
+                          },
+                          {
+                              $or: [
+                                  {
+                                      hideFromIndex: {
+                                          $not: true,
+                                      },
+                                  },
+                                  {
+                                      hideFromIndex: {
+                                          $null: true,
+                                      },
+                                  },
+                              ],
+                          },
+                      ]),
             ],
         },
     }
