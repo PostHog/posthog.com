@@ -14,7 +14,7 @@ This includes giving feedback [to each other](/handbook/values#4-trust-and-feedb
 
 ## Full team feedback sessions
 
-We run full team 360-degree feedback session as part of every offsite. The session gives everyone the opportunity to give and receive feedback to everyone else.
+We run full team 360-degree feedback session as part of every offsite. Some teams will do them during their own small team offsite, while others choose to do them as part of the whole company offsite. The session gives everyone the opportunity to give and receive feedback to everyone else. If your team works closely with another or is very small, you may combine with another team (but keep attendees to <8 if you can).
 
 ### Ground rules
 - Everybody participates! You should have a think and write up your notes in advance – don't try and wing it on the day.
