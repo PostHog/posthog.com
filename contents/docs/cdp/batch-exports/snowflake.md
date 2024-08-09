@@ -186,7 +186,7 @@ The following query can be used to count the number of unique persons that have 
 ```sql
 SELECT
   event,
-  COUNT(persons.person_id) AS unique_persons_count
+  COUNT(DISTINCT persons.person_id) AS unique_persons_count
 FROM
   example.events AS events
 LEFT JOIN
