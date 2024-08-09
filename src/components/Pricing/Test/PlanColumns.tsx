@@ -121,7 +121,7 @@ const planSummary = [
             },
             {
                 name: 'Standard support',
-                description: 'Support via email, Slack-based over $2k/mo',
+                description: 'In-app support, Slack for over $2k/mo',
             },
         ],
         projects: '6',
