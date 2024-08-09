@@ -212,7 +212,8 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
     )
 }
 
-const hideFromIndex = ['tutorials', 'customers', 'spotlight', 'changelog']
+const categoriesHideFromIndex = ['tutorials', 'customers', 'spotlight', 'changelog']
+const tagsHideFromIndex = ['Comparisons']
 
 export const getParams = (root, tag, sort) => {
     return {
@@ -244,7 +245,7 @@ export const getParams = (root, tag, sort) => {
                           {
                               post_category: {
                                   folder: {
-                                      $notIn: hideFromIndex,
+                                      $notIn: categoriesHideFromIndex,
                                   },
                               },
                           },
@@ -260,6 +261,13 @@ export const getParams = (root, tag, sort) => {
                           },
                       ]
                     : []),
+                {
+                    post_tags: {
+                        label: {
+                            $notIn: tagsHideFromIndex,
+                        },
+                    },
+                },
             ],
         },
     }
@@ -368,7 +376,7 @@ export default function Posts({
                     value={{
                         title: title || 'Posts',
                         menu: (!root
-                            ? menu.filter(({ url }) => url && !hideFromIndex.includes(url.replace('/', '')))
+                            ? menu.filter(({ url }) => url && !categoriesHideFromIndex.includes(url.replace('/', '')))
                             : [
                                   { name: 'All', icon: 'IconRocket', color: 'purple', url: `/${root}` },
                                   ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || []),
