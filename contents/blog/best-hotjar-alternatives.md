@@ -7,9 +7,9 @@ rootpage: /blog
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/clarity-alternatives/clarity-alternatives.png
 featuredImageType: full
-category: General
 tags:
   - Comparisons
+  - General
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'

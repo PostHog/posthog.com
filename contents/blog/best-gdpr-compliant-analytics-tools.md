@@ -12,9 +12,9 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-at-desk.png
 featuredImageType: full
 featuredVideo: 'https://www.youtube-nocookie.com/embed/o_1AmP_-HPs'
-category: General
 tags:
   - Privacy
+  - General
 ---
 
 The GDPR (General Data Protection Regulation) places significant restrictions on how you can use tools like Google Analytics to track and collect user data.

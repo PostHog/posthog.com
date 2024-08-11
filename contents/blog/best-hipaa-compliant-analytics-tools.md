@@ -10,9 +10,9 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
 featuredImageType: full
-category: General
 tags:
   - Privacy
+  - General
 ---
 
 ## What is HIPAA?

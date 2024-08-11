@@ -10,9 +10,9 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
-category: General
 tags:
   - Comparisons
+  - General
 ---
 
 As an all-in-one platform, PostHog replaces _a lot_ of legacy tools. PostHog is great if you:

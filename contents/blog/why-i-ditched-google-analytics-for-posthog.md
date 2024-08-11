@@ -9,9 +9,9 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 author:
   - colin-wren
-category: General
 tags:
   - Comparisons
+  - General
 ---
 
 _By Colin Wren, Co-founder of [Reciprocal.dev](https://reciprocal.dev/)._
