@@ -133,6 +133,7 @@ h4 {
 
 /* Content pages (Handbook,  Docs, Blog, Customers, FAQ) */
 .article-content {
+    h1,
     h2,
     h3,
     h4,
@@ -143,6 +144,14 @@ h4 {
 
         a:not(.cta) {
             font-variation-settings: 'wght' 800;
+        }
+    }
+
+    h1 {
+        @apply text-[1.75rem];
+
+        code {
+            @apply !text-[1.75rem];
         }
     }
 
@@ -357,6 +366,40 @@ h4 {
 
     .newsletter-form {
         @apply !mt-6 !pt-6 !mb-0 !pb-0 border-t border-light dark:border-dark;
+    }
+}
+
+.bio-preview {
+    * {
+        @apply text-sm mb-2;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply text-sm;
+    }
+}
+
+.bio-sidebar {
+    * {
+        @apply text-base mb-2;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply text-lg;
+    }
+
+    a {
+        @apply font-semibold text-red dark:text-yellow;
     }
 }
 

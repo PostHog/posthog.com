@@ -200,7 +200,7 @@ export const Profile = (profile) => {
             </div>
 
             {biography ? (
-                <Markdown>{biography}</Markdown>
+                <Markdown className="bio-sidebar">{biography}</Markdown>
             ) : (
                 <p className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-4 text-sm">
                     {firstName} has been too busy writing code to fill out a bio!
