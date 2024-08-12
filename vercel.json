@@ -375,6 +375,7 @@
         },
         { "source": "/simongrimm", "destination": "/?utm_source=simongrimm&utm_campaign=simongrimm" },
         { "source": "/howtheygrow", "destination": "/?utm_source=howtheygrow&utm_campaign=howtheygrow" },
+        { "source": "/mikebifulco", "destination": "/?utm_source=mikebifulco&utm_campaign=mikebifulco" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
