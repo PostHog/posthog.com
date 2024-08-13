@@ -1881,6 +1881,10 @@ export const docsMenu = {
                             name: 'Migrate from Pendo',
                             url: '/docs/migrate/pendo',
                         },
+                        {
+                            name: 'Migrate from Statsig',
+                            url: '/docs/migrate/statsig',
+                        },
                     ],
                 },
                 {

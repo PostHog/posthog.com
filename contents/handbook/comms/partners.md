@@ -20,6 +20,7 @@ If a customer contacts us about migrating data into PostHog we should first refe
 - [Migrating from Mixpanel to PostHog](/docs/migrate/mixpanel)
 - [Migrating from Heap to PostHog](/docs/migrate/heap)
 - [Migrating from LaunchDarkly to PostHog](/docs/migrate/launchdarkly)
+- [Migrating from Statsig to PostHog](/docs/migrate/statsig)
 - [Migrating from a self-hosted deployment to PostHog Cloud](/docs/migrate/migrate-to-cloud#between-cloud-instances-eg-us-cloud-to-eu-cloud)
 - [Syncing other platforms to our data warehouse](/docs/data-warehouse/setup)
 
