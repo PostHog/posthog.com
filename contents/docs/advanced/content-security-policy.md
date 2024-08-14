@@ -28,3 +28,4 @@ Our client SDKs (where appropriate) will take care of selecting the correct doma
 | `eu.posthog.com` | EU PostHog app domain (used by the Toolbar) and also legacy ingestion  |
 | `us.posthog.com` | US PostHog app domain (used by the Toolbar) |
 | `app.posthog.com` | Legacy ingestion endpoint |
+| `internal-e.posthog.com` | Ingestion endpoint used by managed reverse proxies |
