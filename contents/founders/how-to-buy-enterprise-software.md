@@ -1,6 +1,6 @@
 ---
 date: 2024-08-15
-title: How to buy enterprise software
+title: How to buy software as an enterprise
 author:
   - charles-cook
   - leon-daly
