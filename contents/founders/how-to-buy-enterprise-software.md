@@ -186,7 +186,7 @@ Your salesperson will dump you the microsecond the deal is closed, so you'll now
 
 ## The 8 final bosses you’ll (probably) need to beat
 
-As you go through this process, you will probably encounter one or more of these people. Here are some quick tips on how to deal with them. [LOTTIE ARTWORK TO BE ADDED]
+As you go through this process, you will probably encounter one or more of these people. Here are some quick tips on how to deal with them.
 
 **The procurement person who actually has a personality if you get to know them**
 - When to engage: when you have selected your vendor of choice.
