@@ -4,7 +4,7 @@ date: 2024-07-18
 author:
   - james-temperton
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1713521535/posthog.com/contents/blog/evolution-of-founders.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/353483136_5f00599e_346c_44d4_a94c_2cd85c9031a0_3c65d69b45.jpg
 featuredImageType: full
 tags:
   - People
@@ -12,87 +12,112 @@ crosspost:
   - Blog
 ---
 
-We get a lot of job applications. In the last two months, we’ve had 900 people apply for engineering roles:
+In the last two months, we’ve had 900 people apply for engineering roles:
 
 * 86 got a first interview
 * 55 got a technical interview
-* 10 did a [SuperDay](https://posthog.com/handbook/people/hiring-process#4-posthog-superday) 
-* 4 were hired 
+* 10 did a[ SuperDay](https://posthog.com/handbook/people/hiring-process#4-posthog-superday)
+* 4 were hired
 
-![hiring engineers](https://res.cloudinary.com/dmukukwp6/image/upload/hiring_hogs_e172cf51da.png)
+![From 900 to 4](https://res.cloudinary.com/dmukukwp6/image/upload/hogs_c30d4b024d.png)
 
 That means we hired 0.4% of people who applied for engineering roles.
 
 So, how do you join the 0.4% of superstar engineers – not just at PostHog, but at any other fast-growing startup?
 
-## Think like a recruiter 
+---
+## **1) Think like a recruiter**
 
-First, some hard truths. There’s a huge gap between what job applicants and recruiters experience. With the exception of very early-stage companies, most startups will use an applicant tracking system like Ashby, Greenhouse, or Lever for hiring. These are designed for speed, not to make you look good. 
+There’s a huge gap between what job applicants and recruiters experience.
 
-You need to think about the information density of your application – less dense is good – and also avoid any formatting that the application system is likely to remove. Keep it simple.
+With the exception of very early-stage companies, most startups will use an applicant tracking system like Ashby, Greenhouse, or Lever for hiring. We use Ashby.
 
-The same rules apply for your resume. Prioritize clarity over design. Black text, white background, no fancy graphics. And please, no profile pictures.
+They’re designed for speed, not to make you look good. This means you need to anticipate how your application will look inside this system, not as a finely-crafted PDF.
 
-![juraj application](https://res.cloudinary.com/dmukukwp6/image/upload/coverletters_9d4dbdb02e.png)
+### **Brevity is your friend**
 
-### Brevity is your friend
+A startup recruiter will, if you’re lucky, spend more than a few seconds reading your application. The easier you make it for them, the longer they’ll spend considering you.
 
-A startup recruiter will, if you’re lucky, spend more than a few seconds reading your application. Brevity and clarity are key to try and ensure your application isn’t quickly dismissed.
+Avoid any formatting that the application system is likely to remove. Keep it simple and low density. Black text, white background, no fancy graphics.
 
-We did the math and, on average, we spend less than one minute reviewing each application we receive. Automated or junk applications (hello, ChatGPT) will be discarded in less than five seconds. Truly great applications will be read for up to five minutes.
+And please, no profile pictures.
 
-### Write a (short) cover letter that doesn't suck
+![Juraj's cover letter](https://res.cloudinary.com/dmukukwp6/image/upload/juraj1_e95d0bc63b.png
+)
 
-And we mean short. Five to ten sentences is fine. Don’t rewrite your resume. Keep it is simple.
+We did the math and, on average, we spend less than one minute reviewing each application we receive. Automated or junk applications (hello, ChatGPT) will be discarded in less than five seconds.
 
-Match the company’s tone – if the job ad is informal, don’t start your cover letter with ‘Dear Sir/Madam.’ And never, ever, use ChatGPT. Not even to help you with a draft. We’ll know, it’s always obvious.
+Truly great applications will be read for up to five minutes.
 
-Particularly strong cover letters we’ve received recently include the following:
+### **Cover letter tips**
 
-* An explanation of exactly why you want to join a company – and why the company should want to hire you.
+Contrary to rumor, cover letters still matter, but they need to be short. Five to ten sentences is fine.
 
-* A clear understanding of the company, its values, what it is trying to achieve, and an explanation of how you can help.
+Don’t rewrite your resume, or start it with with ‘Dear Sir/Madam’. Never, ever, use ChatGPT. Not even to help you with a draft. We’ll know, it’s always obvious.
 
-* A genuine and deep knowledge of the product you’ll be working on.
-* Do a little something to make you stand out. For example, as part of his application, Marcus, one of our support engineers, [opened a PR](https://github.com/PostHog/posthog.com/pull/4922) to add him to the team page. It certainly got our attention.
+![Google Gemini's cover letter](https://res.cloudinary.com/dmukukwp6/image/upload/gemini2_154939763f.png)
 
-![marcus application](https://res.cloudinary.com/dmukukwp6/image/upload/marcushof_2dbd558b21.png)
+Strong cover letters we’ve received recently included the following:
 
-### One simple, annoying trick
+* An explanation of exactly why they want to join PostHog.
+* Style and language that reflected our company culture.
+* Examples of personal projects they’ve worked on with links.
+* Really clear info on what they’re looking for and their availability.
+* Something that made them stand out.[ Marcus](https://posthog.com/community/profiles/30211), one of our support engineers,[ opened a PR](https://github.com/PostHog/posthog.com/pull/4922) to add him to the team page. Others have created PRs to update our docs, or raised useful product issues. When done well, we do notice these things.
 
-Get ready to groan, but there’s one thing that will really help: get a proper, warm referral. We trust our team’s judgment, so a referral can really help us pre-filter applicants.
+![Marcus' cover letter](https://res.cloudinary.com/dmukukwp6/image/upload/marcus_2f0952c1a4.png)
 
-How do you get a warm referral? Bombshell: be a great human and a great engineer. So good, in fact, that other human beings will attest to your greatness. 
+### **One simple, annoying trick**
 
-This does not mean you should randomly spam people on LinkedIn for an intro (this never works), but it does mean you should work hard wherever you go and leave a great impression. People talk to each other. And, who knows, one day maybe they’ll talk about you and be really nice.
+Get ready to groan, but there’s one thing that will really help: a proper, warm referral. We trust our team’s judgment, so a referral can really help us pre-filter applicants.
 
-## Be genuinely curious
+How do you get a warm referral? Bombshell: be a great human[^1] and a great engineer. So good, in fact, that other human beings will attest to your greatness.
 
-One way we’re able to recognize [10x engineers](https://newsletter.posthog.com/p/beyond-the-10x-engineer) at the interview stage is by the questions they ask. It’s not rude to ask very specific questions, it shows you’re genuinely curious about what we’re doing. These are the questions you should be asking when interviewing with a startup founder.
+This doesn’t mean you should randomly spam people on LinkedIn for an intro (this never works), but it does mean you should work hard, attend hackathons (they’re great for networking), and leave a great impression wherever you go.
 
-### Does the company have product-market fit?
+People talk to each other. And, who knows, one day maybe they’ll talk about you and be really nice.
 
-Very few engineers ask this when we do interviews. Ask! You can and should also ask about revenue and the number of daily active users. Very early-stage startups might not have product-market fit, but they should have a plan for how to get there quickly.
+**Further reading: [What recruiters actually see when you apply](https://posthog.com/founders/what-recruiters-see)**
 
-[Strong product-market fit](https://posthog.com/founders/measure-product-market-fit) happens when a company is able to combine significant top-line growth with meaningful usage and a flat retention curve.
+---
+## **2) Be genuinely curious**
 
-### How much runway does the company have?
+One way we’re able to recognize[ 10x engineers](https://newsletter.posthog.com/p/beyond-the-10x-engineer) at the interview stage is by the questions they ask – not just the technical ones, though they’re important too.
 
-Or, simply put: is the company default alive? A company with very little runway and no product-market fit is likely to have a challenging culture. Asking these kinds of questions will get you much closer to understanding what the company is like to work for than lazily asking about the company’s culture.
+It’s not rude to ask very specific questions, it shows you’re genuinely curious about what we’re doing. Here are some questions you should be asking when interviewing with a startup founder.
 
-Sure, a startup might not be profitable – but it should have a plan to be profitable before it runs out of money. If it doesn’t, ask why. Avoid companies that don’t know if they’re default alive or not – or don’t care about it. 
+### **Does the company have product-market fit?**
 
-### If you could throw money at a problem and solve it immediately, what would it be?
+Very few engineers ask this when we do interviews. Ask! You can and should also ask about revenue, and the number of daily active users.
 
-Superstar engineers are laser-focused on working out where a company is struggling and how they can help. Asking this question shows you want to understand our biggest problems and are ready to throw yourself into solving them by shipping and shipping fast. 
+Early-stage startups might not[ have product-market fit](https://posthog.com/founders/product-market-fit-game), but they should have a plan for how to get there, and a[ clear picture what it will look like](https://posthog.com/founders/measure-product-market-fit).
+
+It’s a red flag if they can’t articulate this.
+
+### **How much runway does the company have?**
+
+Or, simply put: is the company[ default alive](https://paulgraham.com/aord.html)?
+
+A company with very little runway and no product-market fit is likely to have a challenging culture. Asking these kinds of questions will get you much closer to understanding what the company is like to work for than asking generic questions like “what’s it like to work here?”
+
+Sure, a startup might not be profitable – but it should have a plan to be profitable before it runs out of money. If it doesn’t, ask why. Avoid companies that don’t know if they’re default alive or not, or don’t care about it.
+
+### **If you could throw money at a problem and solve it immediately, what would it be?**
+
+Superstar engineers are laser-focused on working out where a company is struggling and how they can help.
+
+Asking this question shows you want to understand a company’s biggest problems and are ready to throw yourself into solving them by shipping and shipping fast.
 
 If you get the role, you need to be proactive in speaking to users, understanding problems big and small, taking ownership of them, and fixing them.
 
-## Pick a winning company
+**Further reading: [The really important job interview questions engineers should ask (but don't)](https://posthog.com/founders/what-to-ask-in-interviews)**
 
-Easier said than done! But job ads are actually littered with clues.
+---
+## **3) Pick the right opportunity**
 
-We’ve received 9,000 applications for roles in the last 12 months. One thing we hear a lot? People like our job ads. That’s nice! But writing great job descriptions isn’t just important for recruiting, it’s also a great way for you to scope out a potential employer. This is what you should be looking out for in a job description for an engineering role at a startup.
+It’s easier said than done, but[ good job ads](https://posthog.com/founders/write-great-job-ads) are actually littered with clues.
+
+Here’s what to look for:
 
 * **Really tight requirements.** A list of must-haves and a list of nice-to-haves. Each should be around four items long, that’s it.
 
@@ -100,21 +125,49 @@ We’ve received 9,000 applications for roles in the last 12 months. One thing w
 
 * **Total salary transparency.** This could be a range or it could be a tool that allows you to see an estimate of your potential salary. Either way, salary transparency is a must-have.
 
-* **The job description is fun to read.** No startup should be writing stodgy, corporate-esque job descriptions. They should be stylish, interesting, and entertaining. This helps you better understand the company culture before you (hopefully) receive an offer.
+* **The job description is fun to read.** No startup should be writing stodgy, corporate-esque job descriptions. This helps you better understand the company culture before you (hopefully) receive an offer.
 
-![bad job ad, good job ad](https://res.cloudinary.com/dmukukwp6/image/upload/good_job_bad_job_6c915824a2.png)
+![An Apple job ad](https://res.cloudinary.com/dmukukwp6/image/upload/apple_ad_b599fe7416.png)
 
-Beyond that, research the company on social media. Are they attracting lots of (good) attention? Check [Google Trends]([url](https://trends.google.com/trends/)) to see if there's growing interest in the company. Use [Crunchbase]([url](https://www.crunchbase.com/)) to dig into the company's investors and their track record. And do the same for the founder or founders. Are they first-timers, or have they got previous exits? If so, have they ever had success?
+Beyond that, research the company:
 
-## Be cracked
+* Are they attracting lots of (good) attention on social media?
+* Check Google Trends to see if there's growing interest in the company. This only works if the company has a unique brand name.
+* Use Crunchbase to dig into the company's investors and their track record.
+* Do the same for the founder or founders. Are they first-timers, or have they got previous exits? If they’re first-timers, what did they do before founding a startup? 
 
-This is a little subjective – but we’re obsessed with hiring [cracked engineers](https://posthog.com/founders/cracked-manifesto). ‘Cracked’ means engineers who take extreme ownership of ideas, who are always optimistic, who make people feel excited and energized, are authentic, and who apply themselves to their craft.
+![A PostHog job ad](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ad_5cdcb2f395.png)
 
-We’re not looking for fancy companies on a resume, we’re not looking for assholes, we don’t really care about how much experience you’ve got, but we do care if you’ve got a great side project.
+This can help you find high-potential companies, and give you more context to shine during the interview stage.
 
-## More reading
+---
+## **4) Be cracked**
 
-* Find out more about what startup recruiters actually see [when you apply for a job](https://posthog.com/founders/what-recruiters-see).
-* Read more about the [questions you should be asking](https://posthog.com/founders/what-to-ask-in-interviews) when interviewing for a role at a startup.
-* A good job description is great for employers and for future employees. Everyone wins! [Read more about how to do it right](https://posthog.com/founders/write-great-job-ads).
-* Cracked engineers are special creatures – and we’ve got some [strong opinions about why they’re great hires](https://posthog.com/founders/cracked-manifesto).
+We’ve written about this a lot in the past, but we’re obsessed with hiring[ cracked engineers](https://posthog.com/founders/cracked-manifesto), and have specific ideas as to[ what makes a 10x engineer](https://newsletter.posthog.com/p/beyond-the-10x-engineer).
+
+For us ‘cracked’ means engineers who take extreme ownership of ideas, who are always optimistic, who make people feel excited and energized, are authentic, and who apply themselves to their craft.
+
+There’s no single definition for this, but you should be able to define and articulate what makes you cracked.
+
+---
+## **5) Be available as soon as possible**
+
+This is a hard truth, but availability can make or break your chances.
+
+Outside very senior or critical roles, many startups can’t wait for your three or six-month notice period to expire. This is especially true of early-stage startups, where momentum is critical.
+
+Be honest about your availability up front – and, if you can, be available within weeks, not months.
+
+---
+## **Good reads 📖**
+
+* **[Why doesn't advice work?](https://dynomight.net/advice/)** – Simple question, complex answer.
+* **[If AI chatbots are the future, I hate it](https://www.jeffgeerling.com/blog/2024/if-ai-chatbots-are-future-i-hate-it) **– Wi-Fi and internet aren’t the same thing!
+* **[Should I open source my company?](https://supabase.com/blog/should-i-open-source-my-company)** – Thoughts from the CTO of Supabase.
+* **[Time management techniques that actually work](https://www.lennysnewsletter.com/p/time-management-techniques-that-actually)** – via Lenny Rachitsky.
+
+_Words by James Temperton, who hates LinkedIn._
+
+[^1]Being a great human doesn’t mean being an effervescent personality – you don’t need to be the life and soul of the party. Being reliable and easy to work with is way less common than you might imagine. If you struggle getting referrals from former colleagues, be really honest about why that could be. More companies don’t have a culture of direct, honest feedback, which can obscure problems. It’s why we[ value trust and feedback](https://posthog.com/handbook/values#4-trust-and-feedback-over-process) so much.
+
+
