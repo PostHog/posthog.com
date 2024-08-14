@@ -189,44 +189,44 @@ Your salesperson will dump you the microsecond the deal is closed, so you'll now
 As you go through this process, you will probably encounter one or more of these people. Here are some quick tips on how to deal with them.
 
 **The procurement person who actually has a personality if you get to know them**
-- When to engage: when you have selected your vendor of choice.
+- When to engage: when you’ve picked your preferred option.
 - What they care about: following the proper internal process,  and getting the software for as cheap as possible.
 - How to win them over: frame your request as asking for their expertise, not telling them what to do. Come prepared with all the notes on the evaluation so far.
 
 **The engineer who implemented the current solution and is taking it personally that you’re suggesting something else**
-- When to engage: right at the beginning
+- When to engage: right at the beginning.
 - What they care about: saving face if you replace what they implemented , and not losing any important functionality by changing software.
-- How to win them over: blame the software they implemented, nerd out over technical details
+- How to win them over: blame the software they implemented, nerd out over technical details.
 
-**The anxious infosec who has GDPR PTSD and hates buying outside the Fortune 50**
-- When to engage: when you’ve picked your preferred option
-- What they care about: being careful about sending company data to some random software company
-- How to win them over: send them a SOC 2 or ISO 27001 report, it’s like catnip
+**The anxious infosec officer who has GDPR PTSD and hates buying outside the Fortune 50**
+- When to engage: when you’ve picked your preferred option.
+- What they care about: being careful about sending company data to some random software company.
+- How to win them over: send them a SOC 2 or ISO 27001 report, it’s like catnip.
 
 **The “in the weeds” legal person who loves a redline and hates compromise**
 - When to engage: after you have agreed commercial terms.
-- What they care about: liability, ability to terminate the contract, general legal point scoring
-- How to win them over: thank them profusely for taking a ‘commercial’ angle and not being overly legalistic
+- What they care about: liability, ability to terminate the contract, general legal point scoring.
+- How to win them over: thank them profusely for taking a ‘commercial’ angle and not being overly legalistic.
 
 **The CEO who thinks we should go with something else because they met the founder at Davos**
-- When to engage: you probably won’t get to engage them, but be prepared to justify your choice at no notice
-- What they care about: their LinkedIn following
-- How to win them over:  presentation deck, ten slides, few words, legible on mobile
+- When to engage: you probably won’t get to engage them, but be prepared to justify your choice at no notice.
+- What they care about: their LinkedIn following.
+- How to win them over:  presentation deck, ten slides, few words, legible on mobile.
 
 **The CFO who thinks we should use spreadsheets for everything**
-- When to engage - bizarrely, right at the beginning – if you can even reach them
-- What they care about: the share price
+- When to engage - bizarrely, right at the beginning – if you can even reach them.
+- What they care about: the share price.
 - How to win them over: make the economic case, put numbers against time saved, revenue generated etc. 
 
 **The generic loud person on a totally different team who will only sign in once but give lots of opinions**
-- When to engage: whenever they spring up, you’ll need to be reactive
-- What they care about: having their voice heard
+- When to engage: whenever they spring up, you’ll need to be reactive.
+- What they care about: having their voice heard.
 - How to win them over: get on a call, reassure them their feedback will be taken seriously, then throw away your notes
 
 **The digital transformation guru whose responsibilities are incredibly vague but their solution is always AI**
-- When to engage: whenever really, they are good for helping you build hype internally
-- What they care about: getting the company to do new stuff
-- How to win them over: sympathize with them about how resistant to change the organization is
+- When to engage: whenever really, they are good for helping you build hype internally.
+- What they care about: getting the company to do new stuff.
+- How to win them over: sympathize with them about how resistant to change the organization is.
 
 ## Surely there's a better way?
 
