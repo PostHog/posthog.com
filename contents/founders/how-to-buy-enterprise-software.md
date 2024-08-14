@@ -1,5 +1,5 @@
 ---
-date: 2024-08-15
+date: 2024-08-14
 title: How to buy software as an enterprise
 author:
   - charles-cook
