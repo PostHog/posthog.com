@@ -185,7 +185,7 @@ As you go through this process, you will probably encounter one or more of these
 
 **The engineer who implemented the current solution and is taking it personally that you’re suggesting something else**
 - When to engage - right at the beginning
-- What they care about - saving face if you replace what they implemented
+- What they care about - saving face if you replace what they implemented , and not losing any important functionality by changing software.
 - How to win them over - blame the software they implemented, nerd out over technical details
 
 **The anxious infosec who has GDPR PTSD and hates buying outside the Fortune 50**
