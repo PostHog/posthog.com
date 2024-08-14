@@ -370,5 +370,12 @@
         "name": "Tomás Farías Santana",
         "role": "Software Engineer",
         "image": "../../static/images/authors/tomas-farias-posthog.png"
+    },
+        {
+        "handle": "leon-daly",
+        "name": "Leon Daly",
+        "role": "Technical Account Executive",
+        "image": "../../static/images/authors/tomas-farias-posthog.png"
+        "profile_id": 30833
     }
 ]
