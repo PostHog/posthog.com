@@ -295,13 +295,13 @@ import MigrationWarning from "./_snippets/migration-warning.mdx"
 
 > **Note:** As of writing this guide, the Statsig event API was not returning events. This is written using a mix of their sample data and data returned from requests in-app.
 
-The schema of Statsig's event data is similar to PostHog's schema, but it requires converting to work with the rest of PostHog's data. You can see details on Pendo's schema in [their docs](https://www.statsig.com/glossary/event-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
+The schema of Statsig's event data is similar to PostHog's schema, but it requires converting to work with the rest of PostHog's data. You can see details on Statsig's schema in [their docs](https://www.statsig.com/glossary/event-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
 
 With Statsig's event data, you can go through each row and convert it to PostHog's schema. This requires converting:
 
 - Event names like `auto_capture::page_view` to `$pageview`.
 - Properties like `page_url` to `$current_url`
-- Event `timestamp` to a ISO 8601 timestamp
+- Event `timestamp` to an ISO 8601 timestamp
 
 Once this is done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the `capture` [API endpoint](/docs/api/capture) with `historical_migration` set to `true`. You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project). 
 
