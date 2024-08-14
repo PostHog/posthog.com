@@ -40,6 +40,7 @@ export default function QuestionPage(props: QuestionPageProps) {
     const link = `https://app.posthog.com/persons#q=${encodeURIComponent(JSON.stringify(personsQuery))}`
     const nav = useTopicsNav()
     const backTo = props?.location?.state?.previous
+    const askMax = props?.location?.state?.askMax
 
     return (
         <Layout
@@ -70,7 +71,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                         </Link>
                     </div>
 
-                    <Question showSlug id={permalink} expanded={true} />
+                    <Question askMax={askMax} showSlug id={permalink} expanded={true} />
                 </section>
 
                 {isModerator && question && (

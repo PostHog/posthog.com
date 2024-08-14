@@ -4,6 +4,7 @@ import Avatar from './Avatar'
 import Reply from './Reply'
 import { CurrentQuestionContext } from './Question'
 import getAvatarURL from '../util/getAvatar'
+import { useUser } from 'hooks/useUser'
 
 const getBadge = (questionProfileID: string, replyProfileID: string) => {
     if (!questionProfileID || !replyProfileID) {
@@ -19,15 +20,20 @@ type RepliesProps = {
 }
 
 export const Replies = ({ expanded, setExpanded }: RepliesProps) => {
+    const { user } = useUser()
     const {
-        question: { replies, resolved, resolvedBy },
+        question: { replies: initialReplies, resolvedBy, profile },
     } = useContext(CurrentQuestionContext)
+
+    const isOP = profile?.data?.id === user?.profile?.id
+    const replies = { data: initialReplies?.data?.filter((reply) => reply.attributes.helpful || isOP) }
+
     return replies && replies.data.length > 0 ? (
         <ul className="ml-5 !mb-0 p-0 list-none">
             {expanded || replies.data.length < 3 ? (
-                <Expanded replies={replies} resolvedBy={resolvedBy?.data?.id} />
+                <Expanded replies={replies} resolvedBy={resolvedBy?.data?.id} isOP={isOP} />
             ) : (
-                <Collapsed replies={replies} setExpanded={setExpanded} resolvedBy={resolvedBy?.data?.id} />
+                <Collapsed replies={replies} setExpanded={setExpanded} resolvedBy={resolvedBy?.data?.id} isOP={isOP} />
             )}
         </ul>
     ) : null
@@ -93,9 +99,7 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
                 key={reply?.id}
                 className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
             >
-                <div className={`${!reply?.attributes?.publishedAt ? 'opacity-50' : ''}`}>
-                    <Reply reply={reply} badgeText={badgeText} />
-                </div>
+                <Reply reply={reply} badgeText={badgeText} />
             </li>
         </>
     )
@@ -103,10 +107,9 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
 
 type ExpandedProps = {
     replies: StrapiData<ReplyData[]>
-    resolvedBy: number
 }
 
-const Expanded = ({ replies, resolvedBy }: ExpandedProps) => {
+const Expanded = ({ replies }: ExpandedProps) => {
     const {
         question: {
             profile: {
@@ -125,9 +128,7 @@ const Expanded = ({ replies, resolvedBy }: ExpandedProps) => {
                         key={reply.id}
                         className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
                     >
-                        <div className={`${!reply?.attributes?.publishedAt ? 'opacity-50' : ''}`}>
-                            <Reply reply={reply} badgeText={badgeText} />
-                        </div>
+                        <Reply reply={reply} badgeText={badgeText} />
                     </li>
                 )
             })}

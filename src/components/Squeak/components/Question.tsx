@@ -20,6 +20,9 @@ import Checkbox from 'components/Checkbox'
 import { CallToAction } from 'components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
 import { navigate } from 'gatsby'
+import Logomark from 'components/Home/images/Logomark'
+import Avatar from './Avatar'
+import Reply from './Reply'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -29,6 +32,7 @@ type QuestionProps = {
     showSlug?: boolean
     buttonText?: string
     showActions?: boolean
+    askMax?: boolean
 }
 
 export const CurrentQuestionContext = createContext<any>({})
@@ -222,8 +226,73 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
     )
 }
 
+const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) => {
+    const [loading, setLoading] = useState(true)
+    const [skeletonCount, setSkeletonCount] = useState(1)
+    const { getJwt } = useUser()
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSkeletonCount((count) => (count >= 5 ? 5 : count + 1))
+        }, 3000)
+
+        const askMax = async () => {
+            try {
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/ask-max`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${await getJwt()}`,
+                    },
+                    body: JSON.stringify({ question }),
+                })
+                setLoading(false)
+                clearInterval(interval)
+                refresh()
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        askMax()
+
+        return () => {
+            clearInterval(interval)
+        }
+    }, [])
+
+    return loading ? (
+        <ul className="ml-5 !mb-0 p-0 list-none">
+            <li
+                className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
+            >
+                <div className="flex items-center !text-black dark:!text-white">
+                    <div className="mr-2 relative">
+                        <Avatar
+                            className="w-[25px] h-[25px] rounded-full"
+                            image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
+                        />
+                        <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
+                            <Logomark className="w-[16px]" />
+                        </span>
+                    </div>
+                    <strong>{'Max AI'}</strong>
+                </div>
+                <div className="border-l-0 ml-[33px] pl-0 py-2">
+                    {Array.from({ length: skeletonCount }).map((_, index) => (
+                        <div
+                            key={index}
+                            className="w-full h-[25px] animate-pulse bg-gray-accent dark:bg-gray-accent-dark rounded-md mb-2"
+                        />
+                    ))}
+                </div>
+            </li>
+        </ul>
+    ) : null
+}
+
 export const Question = (props: QuestionProps) => {
-    const { id, question, showSlug, buttonText, showActions = true } = props
+    const { id, question, showSlug, buttonText, showActions = true, askMax } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const { user, notifications, setNotifications } = useUser()
 
@@ -254,6 +323,7 @@ export const Question = (props: QuestionProps) => {
         archive,
         pinTopics,
         escalate,
+        mutate,
     } = useQuestion(id, { data: question })
 
     if (isLoading) {
@@ -280,6 +350,7 @@ export const Question = (props: QuestionProps) => {
                 handleResolve,
                 handleReplyDelete,
                 pinTopics,
+                mutate,
             }}
         >
             <div>
@@ -364,8 +435,8 @@ export const Question = (props: QuestionProps) => {
                                 </p>
                             )}
                         </div>
-
                         <Replies expanded={expanded} setExpanded={setExpanded} />
+                        {askMax && <AskMax question={questionData} refresh={mutate} />}
                     </div>
                     <div
                         className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${
