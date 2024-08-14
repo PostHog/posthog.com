@@ -313,11 +313,9 @@ import json
 import datetime
 from posthog import Posthog
 
-client_api_key = 'phc_67zPXoeBvPFCB66M'
-
 posthog = Posthog(
-  client_api_key, 
-  host='https://us.i.posthog.com',
+  '<ph_project_api_key>', 
+  host='<ph_client_api_host>',
   debug=True,
   historical_migration=True
 )
