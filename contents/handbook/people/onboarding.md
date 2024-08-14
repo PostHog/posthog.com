@@ -10,7 +10,7 @@ Giving a new joiner a great onboarding experience is super important to us. We w
 
 > Want to introduce a new joiner to the People team for onboarding, but don't know who on the team does what? Just introduce them to people@posthog.com and a member of the team will jump in and take it from there!
 
-Our [team](/team) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining.
+Our [team](/people) is spread across the world, and so are our new joiners. In order to ensure the best possible onboarding experience, we aim for the new joiner to meet up with someone from their team in their first week. Depending on the new joiner's location, they might fly out to one of our team members, or the other way around. So the onboarding experience will look a little bit different, depending on where the new joiner is based and which team they will be joining.
 
 ## Onboarding checklist
 
@@ -22,7 +22,7 @@ We send an introductory email to all new hires to welcome them to the team and e
 
 The onboarding email is sent by the People team directly. We want to strike a balance between sending attractive, personalized emails and avoiding creating process or using overpowered tools, such as Customer.io or Mailchimp. So, we send email using Gmail Layouts. You can access Gmail Layouts with this button: 
 
-![google email layouts](../../images/handbook/layouts-button.png)
+![google email layouts](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/layouts-button.png)
 
 If this is the first time you've used Gmail Layouts, select `Default Styling` before choosing a template. Choosing Black `#00000` as your primary colour will create simple black buttons which match the design of other emails. Please also upload a PostHog logo and enter our Twitter and LinkedIn links. You can use the following text in your email footers. 
 
@@ -33,11 +33,11 @@ PostHog's mailing address is 2261 Market Street #4008 in the city of San Francis
 
 With default styling set, you can now choose the 'Call to action' template. 
 
-![google email layouts](../../images/handbook/layout-email.png)
+![google email layouts](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/layout-email.png)
 
 With an email template chosen, you can then enter the copy you want to send. [This doc is a suggested template](https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing) with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails. 
 
-![onboarding image](../../images/handbook/handbook-onboarding-email.jpg)
+![onboarding image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/handbook-onboarding-email.jpg)
 
 ## Onboarding buddy
 
@@ -48,7 +48,8 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 - Once we have decided which team a new joiner will join, the People & Ops team will reach out to the team to find an onboarding buddy. _Please make sure if don't have any leave booked in the week before and the two weeks after the new starter joins_
 - We will intro the new joiner and the onboarding buddy via email - please say hi and decide together where and when the in person onboarding will happen. 
  > If any travel is needed for the in-person onboarding, please check our [Spending Money page](/handbook/people/spending-money) and book your travel accordingly. _You don't need to let us team know, just use your Brex/Revolut card._
-- Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue. 
+- Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#during-their-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding issue.
+    - Make sure to add the details of the in-person onboarding to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) so that other PostHog team members can join, if possible.
 - You will remain the new joiner's main point of contact for the first few weeks, so please continue to check in with them at least once a week for the first month or so. 
 
 ## In-person onboarding
@@ -121,7 +122,7 @@ We use a number of different tools to organise our work and communicate at PostH
 - HubSpot - customer CRM
 - Zendesk - our support platform
 - Pry - financial modelling
-- LTSE Equity - cap table management
+- Carta - cap table management
 - Fondo - US accounting
 - Calendly - external meeting scheduling (e.g. demos, sales)
 - Gusto - US payroll and benefits management
@@ -159,9 +160,30 @@ You can also assign an Issue to a specific person, and tag it with a relevant la
 
 Each Small Team has its own Project for tracking their Issues - [full list here](https://github.com/orgs/PostHog/projects). Most teams run two week sprints - as part of onboarding, you will be invited to the relevant planning meetings. 
 
+### Support hero training
+
+Employees are occasionally called upon to act as [support heroes](/handbook/engineering/support-hero), or need to deal with support tickets that are escalated to them. This most often applies to engineers, but can include any employee regardless of their team. For this reason, we need everyone to have a broad idea of our support processes and know how we deal with customers.
+
+All new hires should schedule a 30 minute session with the [support engineer closest to their timezone](/teams/customer-comms) within their first three weeks at PostHog. 
+
+In this call the support engineer will be able to answer any questions, as well as demonstrate how we deal with support at PostHog. In particular, the support engineer should cover:
+
+- [ ] [What the role of a support hero is](/handbook/growth/customer-support#engineers-are-support-heroes) and how they can expect to receive tickets/escalations
+- [ ] [An overview of where tickets come from](/handbook/growth/customer-support#its-easy-for-customers-to-reach-us) and how to differentiate between paying/free users
+- [ ] [How to create tickets from Slack threads](/handbook/engineering/support-hero#pylon-to-create-zendesk-tickets-from-slack-posts) and [reassign tickets to other teams](https://support.zendesk.com/hc/en-us/articles/4408887127450-Manually-assigning-a-ticket)
+- [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/engineering/support-hero#how-do-i-prioritize)
+- [ ] [How and when to mark tickets as 'On Hold' or 'Pending'](/handbook/engineering/support-hero#ticket-status)
+- [ ] [What our SLAs](/handbook/growth/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
+- [ ] How to deal with bug reports and feature requests
+- [ ] [How to use macros to answer questions quickly](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets)
+- [ ] How to avoid duplication of effort in ZenDesk
+- [ ] [How to create and use personal views in ZenDesk](https://support.zendesk.com/hc/en-us/articles/4408832792986-Managing-your-views)
+
+It can be especially helpful for new hires if support engineers demonstrate how to solve a few simple tickets from start to finish, through shadowing.
+
 ## 30/60/90 day check-ins
 
-As part of the onboarding checklist, the Ops team will schedule reminders for a new team member's manager at the 30, 60 & 90 day mark to simply serve as a reminder that these checkpoints have arrived. There is no formal requirement for a manager to do anything different at these stages but there are a few helpful suggestions below to help the new team member's experience and to make sure everything is on track with the onboarding and the [first 3 months probationary period](https://posthog.com/handbook/people/compensation#notice-period) will be passed.
+As part of the onboarding checklist, the Ops team will schedule reminders for a new team member's manager at the 30, 60 & 90 day mark to simply serve as a reminder that these checkpoints have arrived. There is no formal requirement for a manager to do anything different at these stages but there are a few helpful suggestions below to help the new team member's experience and to make sure everything is on track with the onboarding and the [first 3 months probationary period](/handbook/people/compensation#notice-period) will be passed.
 
 - Around the 30 day mark, it's good for the manager to provide initial feedback - especially if there is constructive feedback that needs to be given to ensure the person passes probation. Separately, it's also a good time to reinforce the positive work that has been done by somebody on the right track.
 - Around the 60 day mark, if things are going well, the manager might want to give an indication of this as it can ease any fears the team member may have. A member of the Ops team will also check in with the manager to see if things are on track.
@@ -169,3 +191,11 @@ As part of the onboarding checklist, the Ops team will schedule reminders for a 
 - Feedback is a really important part of the onboarding process and as a manager it's a good idea to ensure the new team member receives feedback from their peers - either from you collecting it or them receiving it directly from their peers. It won't always be possible or necessary to do a 360 feedback session within the first 3 months, so it's up to you as a manager how best to approach that. As a manager you can also have blind spots on performance, so checking in with their peers can be helpful and can be done during your normal 1-1s.
 
 These check-ins are designed to ensure every new starter is set up for success. Every manager will deal with these slightly differently, but it will hopefully be clear to everybody by around the 60 day mark how things are going and what needs to be worked on, if anything. 
+
+## Team intros
+
+PostHog has lots of small teams and each team has it's own unique history and culture. Throughout your first and second month, you can join 15 minute intro calls to learn more about each team as these are led by the respective team lead. 
+
+All you need to do is add the [onboarding intros calendar](https://calendar.google.com/calendar/u/0?cid=Y18yNWNlYjI4MTI5YjQ0ZDNlOWM1NThjMzYxY2M1NjVmZGU3NWM5NWNjZjgyOTg4NTdjNGM1OWY5YzFmMTUzOWY4QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) to your google calendar and then you will see these on Mondays and Wednesdays throughout the month. Just add yourself to these during your first week and if you can't make one, just add yourself to the next month. 
+
+If you have any issues or any feedback on how to improve a specific intro just post in the #team-people-and-ops slack channel and tag the relevant people

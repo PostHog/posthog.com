@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - tim-glaser
-featuredImage: ../images/blog/migrating-hog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/migrating-hog.png
 featuredImageType: full
 category: Inside PostHog
 ---
@@ -35,4 +36,6 @@ We don't _just_ build infrastructure for other people to run.
 We run one of the biggest PostHog instances ourselves, with >20 billion events. And before you ask, yes, our cloud infrastructure runs the same Helm chart that we ship to our customers.
 
 Did you just read a sales pitch? Yes. Should you [immediately apply for the SRE role](https://apply.workable.com/posthog/j/071DD5C05A/) at PostHog? Also yes.
+
+<NewsletterForm />
 

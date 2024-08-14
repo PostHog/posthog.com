@@ -6,7 +6,8 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 keywords: null
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 author:
   - avi-press
@@ -55,6 +56,4 @@ At [Scarf](https://about.scarf.sh/), we’ve been hard at work trying to help op
 
 If we can facilitate better communication and collaboration between the open-source community and the wide range of enterprise end-users, we can make the most of the immense potential that is there for the taking.
 
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
-
-<ArrayCTA />
+<NewsletterForm />

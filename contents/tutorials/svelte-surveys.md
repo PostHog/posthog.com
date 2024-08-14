@@ -1,20 +1,23 @@
 ---
 title: How to set up surveys in Svelte
 date: 2024-01-25
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-12.png
-tags: ['surveys']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+tags:
+  - surveys
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/svelte-surveys/events-light.png'
-import EventsDark from '../images/tutorials/svelte-surveys/events-dark.png'
-import ImgSurveyResultsLight from '../images/tutorials/svelte-surveys/survey-results-light.png'
-import ImgSurveyResultsDark from '../images/tutorials/svelte-surveys/survey-results-dark.png'
-import ImgSurveyTemplatesLight from '../images/tutorials/svelte-surveys/survey-templates-light.png'
-import ImgSurveyTemplatesDark from '../images/tutorials/svelte-surveys/survey-templates-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/events-dark.png"
+export const ImgSurveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/survey-results-light.png"
+export const ImgSurveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/survey-results-dark.png"
+export const ImgSurveyTemplatesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/survey-templates-light.png"
+export const ImgSurveyTemplatesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/svelte-surveys/survey-templates-dark.png"
 
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Svelte app.
 
@@ -47,7 +50,7 @@ Next, replace the code in `src/routes/+page.svelte` with a simple heading:
 
 Run `npm run dev` and navigate to http://localhost:5173 to see your app in action.
 
-![Basic Svelte app](../images/tutorials/svelte-surveys/basic-app.png)
+![Basic Svelte app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-surveys/basic-app.png)
 
 ## 2. Add PostHog
 
@@ -70,7 +73,7 @@ export const load = async () => {
   if (browser) {
     posthog.init(
       '<ph_project_api_key>',
-      { api_host: '<ph_instance_address>' }
+      { api_host: '<ph_client_api_host>' }
     )
   }
   return
@@ -97,7 +100,7 @@ This tutorial will cover how to implement both options:
 
 ### Option 1: Use PostHog's prebuilt survey UI
 
-This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, and handles all the display logic and response capture for you. You can also customize the questions, branding, and targeting as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
+This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, and handles all the display logic and response capture for you. You can also customize the questions, branding, and display conditions as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
  
 To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey". 
 
@@ -111,12 +114,12 @@ To create a survey with a prebuilt UI, go to the [surveys tab](https://us.postho
 Select any template, or you can create your own by clicking "Create blank survey". Then, configure your survey with the following details:
 
 1. Ensure `Presentation` is set to **Popover**.
-2. Set the targeting to `All users`.
+2. Set the display conditions to `All users`.
 3. Use the default values for everything else.
 
 Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it in your app. After submitting responses, you can [view results in PostHog](#4-view-results).
 
-![Popover survey in app](../images/tutorials/svelte-surveys/popover-survey.png)
+![Popover survey in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-surveys/popover-survey.png)
 
 ### Option 2: Implement your own survey UI
 
@@ -233,7 +236,7 @@ Then, integrate the component into `src/routes/+page.svelte`:
 
 This shows a survey popup every time you visit your app's homepage.
 
-![Custom survey UI](../images/tutorials/svelte-surveys/sample-survey-ui.png)
+![Custom survey UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-surveys/sample-survey-ui.png)
 
 #### 2. Fetch the survey from PostHog
 
@@ -361,7 +364,7 @@ You can capture these events using `posthog.capture()`:
     const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${surveyID}`);
     showSurvey = !hasInteractedWithSurvey;
     if (showSurvey) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }
@@ -422,7 +425,7 @@ Altogether, your code should look like this:
     const hasInteractedWithSurvey = localStorage.getItem(`hasInteractedWithSurvey_${surveyID}`);
     showSurvey = !hasInteractedWithSurvey;
     if (showSurvey) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }
@@ -469,7 +472,7 @@ After interacting with your survey, you can view results by selecting the survey
 - How many users have dismissed the survey.
 - Responses.
 
-You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
+You can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 <ProductScreenshot
   imageLight={ImgSurveyResultsLight} 

@@ -40,15 +40,17 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                 api_host: "${process.env.GATSBY_POSTHOG_API_HOST}",
                                 ui_host: "${process.env.GATSBY_POSTHOG_UI_HOST}",
                                 capture_pageview: false,
+                                capture_pageleave: true,
                                 persistence: 'localStorage+cookie',
                                 uuid_version:'v7',
-                                __preview_send_client_session_params: true,
                                 session_recording: {
                                     maskAllInputs: false,
                                     maskInputOptions: {
                                         password: true,
                                     }
-                                }
+                                },
+                                person_profiles: 'identified_only',
+                                __preview_heatmaps: true,
                             })
                             `,
                         }}

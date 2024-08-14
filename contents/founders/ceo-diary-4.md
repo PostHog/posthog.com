@@ -3,13 +3,14 @@ date: 2021-12-09
 title: '"How come your website is so nice?"'
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
   - Marketing
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 I've been asked this three times today, so I thought I'd explain it from a founder's perspective. This is what I've learned so far.
@@ -73,4 +74,4 @@ You aren't going to get it right on the first go. Be happy [chopping and changin
 
 Many of the best things you can work on are hard to measure - that's why they're opportunities; no one else wants to do them. Investing in design is like this.
 
-_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+<NewsletterForm />

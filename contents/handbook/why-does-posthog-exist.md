@@ -6,24 +6,22 @@ showTitle: true
 
 ## Our mission
 
-To help engineers build better products.
+Equip every developer to build successful products
 
 ## Our strategy
 
-### Provide every tool needed for evaluating feature success
+### Provide every tool needed to build successful products
 
-We want engineers to engineer their products, not their data, and to not have to hire lots of product managers to pull together context from lots of tools.
+Building a successful product is hard. It gets harder when you don't understand how your customers are using your product.
 
-By integrating all these tools we can make this easy – no integration needed, no extra vendors, no extra JavaScript, no sending data to extra third parties, and workflows to guide engineers through feature development.
+PostHog includes all the tools you need to understand how people use your product. All with one simple snippet.
 
-### Get in first
+### Start from the start
 
-We shouldn't aim to integrate with a stack of existing tools that we don't believe in.
+The tools we build help you from your first user to when your product is everything it could be.
 
-Instead, we should get in first – and take people into what we consider best practices. Largely, just having everything in one place. By focusing on engineers, we can be their preferred choice and get in before any other tools are set up. Though we won't say no if someone wants to migrate to us later on.
-
-By already being used by our customers, we’re the default for each additional tool they add. By laddering our tools – for example, session recording is used much earlier in the lifecycle of the product than others like the CDPs – we can avoid competition.
+This means PostHog gives you the best practices and the industry standard tools so that you can focus on what you do best - build successful products. There's a generous free tier, no-brainer pricing and data infrastructure that scales until IPO and beyond.
 
 ### Be the source of truth for customer and product data
 
-Traditionally, as companies scale, their data warehouse becomes the source of truth, and non-warehouse native tools (like product analytics) become less relevant as people lose trust in the data in them. By providing the data and data-intense tools in one place, we can enhance the power of our products (like product analytics), provide increased trust, _and_ enable companies to build on top of the warehouse itself as they see fit, all _without_ them having to set up a complex stack.
+Traditionally, as companies scale, their data warehouse becomes the source of truth, and non-warehouse native tools (like product analytics) become less relevant as people lose trust in the data in them. By providing the data and data-intense tools in one place, we can enhance the power of our products (like product analytics), provide increased trust, and enable companies to build on top of the warehouse itself as they see fit, all without them having to set up a complex stack.

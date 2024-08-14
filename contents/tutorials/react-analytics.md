@@ -1,13 +1,16 @@
 ---
 title: How to set up analytics in React
 date: 2024-01-31
-author: ["lior-neu-ner"]
-tags: ['product analytics']
+featuredVideo: https://www.youtube-nocookie.com/embed/4hl3N8h6b10
+author:
+  - lior-neu-ner
+tags:
+  - product analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/react-analytics/events-light.png'
-import EventsDark from '../images/tutorials/react-analytics/events-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/react-analytics/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/react-analytics/events-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your React app. To show you how to set up analytics, in this tutorial we create a basic React app, add PostHog, and use it to capture pageviews and custom events.
 
@@ -93,7 +96,7 @@ export default App;
 
 The basic setup is now complete. Run `npm start` to see your app in action.
 
-![Basic React app](../images/tutorials/react-analytics/basic-app.png)
+![Basic React app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-analytics/basic-app.png)
 
 ## Adding PostHog
 
@@ -116,7 +119,8 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 
 posthog.init('<ph_project_api_key>', {
-  api_host: '<ph_instance_address>',
+  api_host: '<ph_client_api_host>',
+  person_profiles: 'identified_only',
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -194,7 +198,8 @@ Lastly, go back to `src/index.js` and make sure to set `capture_pageview` in the
 // your existing imports
 
 posthog.init("<ph_project_api_key>", {
-  api_host: "<ph_instance_address>",
+  api_host: "<ph_client_api_host>",
+  person_profiles: 'identified_only',
   capture_pageview: false
 })
 

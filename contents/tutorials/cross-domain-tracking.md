@@ -16,7 +16,7 @@ PostHog doesn’t automatically support cross domain tracking, but we do offer s
 
 ## Automatic first-party cookies
 
-If you are using the JavaScript snippet or `posthog-js` to track a domain, PostHog automatically sets a first-party cookie that works between subdomains. For example, the same cookie works for `posthog.com` and `app.posthog.com`. If you use initiate `posthog-js` or the snippet in the client, you don’t need to do more work to make this happen.
+If you are using the JavaScript snippet or `posthog-js` to track a domain, PostHog automatically sets a first-party cookie that works between subdomains. For example, the same cookie works for `posthog.com` and `us.posthog.com`. If you use initiate `posthog-js` or the snippet in the client, you don’t need to do more work to make this happen.
 
 First-party cookies ensure you get the most data possible, as third-party cookies often get blocked or removed. Similarly, you can [set up a reverse proxy to send events from your domain](/docs/integrate/proxy) so they aren’t intercepted by tracking blockers.
 
@@ -90,4 +90,4 @@ This effectively makes it a third-party cookie, which many browsers, sites, and 
 
 - [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)
 - [Building a tracking cookies opt out banner in React](/tutorials/react-cookie-banner)
-- [How to build, analyze and optimize conversion funnels in PostHog](/tutorials/guide-to-funnels)
+- [The complete guide to event tracking](/tutorials/event-tracking-guide)

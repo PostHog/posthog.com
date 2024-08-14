@@ -3,13 +3,14 @@ date: 2023-09-28
 title: Burning money on paid ads for a dev tool – what we've learned
 author:
   - charles-cook
-featuredImage: ../images/blog/transparency.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/transparency.jpeg
 featuredImageType: full
 tags:
   - Founders
   - Marketing
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Since starting PostHog in 2020, we’ve learned a bunch about what does and doesn’t work when it comes to [marketing to engineers](/blog/dev-marketing-for-startups). Paid ads is a slightly scary area because it is _very_ easy to waste a bunch of money doing stuff that doesn't work. And a lot of it doesn't work. 
@@ -40,7 +41,7 @@ We split our budget 50-50 between the two. This is not a 'rule' – just don't s
 
 Everyone who works at a tech company basically thinks they are immune to ads because they are super good at internetting, and have never seen an ad for a new product, clicked on it, and then signed up. Your _quantitative_ attribution data in PostHog, or whatever analytics tool you are using, will seem to back this up. 
 
-This is why we ask all users where they heard about PostHog whenever they sign up or book a demo – it's a simple (optional) free text field. Enough of our users say 'ad on Google' or similar that we know paid ads do actually reach a large chunk of them. Especially ones with money to spend on behalf of their company. However, you need to take the time to collect and digest this _qualitative_ attribution data in the first place. 
+This is why we ask all users where they heard about PostHog whenever they sign up or book a demo – it's a simple (optional) free text field. Enough of our users say 'ad on Google' or similar that we know paid ads do actually reach a large chunk of them. Especially ones with money to spend on behalf of their company. However, you need to take the time to collect and digest this _qualitative_ attribution data in the first place.
 
 ### An agency will solve all your problems
 
@@ -49,6 +50,8 @@ I'm a big fan of hiring an agency if you're a startup – paying $5-10k/mo for a
 _However,_ I really recommend you get personally familiar with each of the main channels I've listed below first. Working with an agency isn't just set and forget – you need to constantly give feedback, ask questions, and suggest new ideas if you want to get the most out of them. 
 
 I personally like [the Demand Curve course](https://www.demandcurve.com/growth-program), which will give you a great grounding in all the major paid ad channels – it helped get us off the ground and means we're much better equipped to give our agency feedback. Outsource the legwork, not your critical thinking. 
+
+<NewsletterForm />
 
 ## Channel-by-channel tips
 
@@ -151,3 +154,5 @@ Then you can branch out into other channels. For reference, at PostHog we got Go
 - Check out [PostHog’s Marketing Handbook](/handbook/growth/marketing) – and copy it if you want to!
 
 > **Hello, Hacker News.** If you liked this article, why not [subscribe to our newsletter](https://newsletter.posthog.com/), Product for Engineers? We share more articles like this every two weeks or so.
+
+<NewsletterForm />

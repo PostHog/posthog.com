@@ -1,10 +1,12 @@
 ---
 title: How to set up Python feature flags in Flask
 date: 2023-09-05
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["feature flags"]
+tags:
+  - feature flags
 ---
 
 Feature flags make it easy to conditionally run code and show content based on users or conditions. In this tutorial, we show how to create a basic Python Flask app, add PostHog, and set up [feature flags](/feature-flags) to conditionally show content in the app.
@@ -46,7 +48,7 @@ def show_user(user):
 
 Finally run `flask --app hello run` and go to `http://127.0.0.1:5000` to see your basic app running.
 
-![Hello, World!](../images/tutorials/python-feature-flags/hello.png)
+![Hello, World!](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-feature-flags/hello.png)
 
 ## Adding PostHog
 
@@ -56,7 +58,7 @@ Next, we install and set up PostHog using the [Python SDK](/docs/libraries/pytho
 pip install posthog
 ```
 
-We initialize PostHog to our `hello.py` file using our project API key and instance address from [your project settings](https://app.posthog.com/project/settings). In our user route, we use PostHog to capture an event using the user string and set a user property of `initial_name` on that user.
+We initialize PostHog to our `hello.py` file using our project API key and instance address from [your project settings](https://app.posthog.com/project/settings). In our user route, we use PostHog to capture an event using the user string and set a person property of `initial_name` on that user.
 
 ```python
 # flag-demo/hello.py
@@ -65,7 +67,7 @@ from posthog import Posthog
 
 posthog = Posthog(
   '<ph_project_api_key>', 
-  host='<ph_instance_address>'
+  host='<ph_client_api_host>'
 )
 
 app = Flask(__name__)
@@ -88,13 +90,13 @@ def show_user(user):
 
 When we rerun `flask --app hello run` and go to the user route such as `http://127.0.0.1:5000/user/ian`, it captures an event in PostHog.
 
-![Event](../images/tutorials/python-feature-flags/event.png)
+![Event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-feature-flags/event.png)
 
 ## Creating a feature flag
 
 We are now ready to create and set up our flag. To do this, go to the [feature flag tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Add a key (we use `new-cool-feature`), set the release condition to 50% of users, and add another condition set where `initial_name` is `ian` (or whatever URL you just visited). Add any other details and press "Save."
 
-![Feature flag](../images/tutorials/python-feature-flags/flag.png)
+![Feature flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-feature-flags/flag.png)
 
 The second release condition enables us to test the active flag state by going to the `/user/ian` route first but is optional.
 
@@ -130,7 +132,7 @@ def show_user(user):
 
 Since we visited `/user/ian` first, we get the new variant while 50% of the rest of the pages get it as well. If you want to customize this, edit your feature flag to add more conditions.
 
-![Cool new feature](../images/tutorials/python-feature-flags/cool.png)
+![Cool new feature](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-feature-flags/cool.png)
 
 Lastly, we must capture the feature flag details in our event. This enables us to do usage analysis related to the flag later.
 

@@ -1,17 +1,19 @@
 ---
 title: How to set up A/B tests in Laravel
 date: 2024-02-07
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/laravel-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/laravel-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/laravel-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/laravel-ab-tests/experiment-setup-dark.png'
-import ResultsLight from '../images/tutorials/laravel-ab-tests/results-light.png'
-import ResultsDark from '../images/tutorials/laravel-ab-tests/results-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/experiment-setup-dark.png"
+export const ResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/results-light.png"
+export const ResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-ab-tests/results-dark.png"
 
 A/B tests help you improve your Laravel app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Laravel app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -51,7 +53,7 @@ Route::get('/', function () {
 
 Run `php artisan serve` and navigate to `http://127.0.0.1:8000` to see our app in action.
 
-![Basic Laravel app](../images/tutorials/laravel-ab-tests/basic-app.png)
+![Basic Laravel app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/laravel-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -76,7 +78,7 @@ class AppServiceProvider extends ServiceProvider
         PostHog::init(
             '<ph_project_api_key>',
             [
-                'host' => '<ph_instance_address>'
+                'host' => '<ph_client_api_host>'
             ]
         );
     }
@@ -116,8 +118,6 @@ With this set up, restart your app and then refresh your browser a few times. Yo
 />
 
 ## 3. Create an A/B test in PostHog
-
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
 
 Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
 

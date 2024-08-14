@@ -3,7 +3,8 @@ date: 2023-12-13
 title: The ops toolkit for early-stage startups (2024 edition)
 author:
   - charles-cook
-featuredImage: ../images/blog/posthog-release-notes-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-release-notes-blog.png
 featuredImageType: full
 tags:
   - Founders
@@ -26,7 +27,7 @@ I won't offer multiple options here – it's not that kind of guide. Just know t
 
 So, read on if you want to learn how to put together contracts, pay people on time, manage your money and comply with laws you are only just finding out exist.
 
-> [Charles Cook](/community/profiles/254) is VP Marketing & Ops at PostHog, leading operations, marketing, people, finance, and legal. All the fun stuff, basically. As PostHog's first non-product hire, he used these tools to do the work of 5ish people for a long time. 
+> [Charles Cook](/charles) is VP Marketing & Ops at PostHog, leading operations, marketing, people, finance, and legal. All the fun stuff, basically. As PostHog's first non-product hire, he used these tools to do the work of 5ish people for a long time. 
 
 ## 1. Hiring people
 
@@ -58,6 +59,8 @@ The process is pretty straightforward and self-serve, but here are a few things 
 Again, Deel will handle all things payroll. We don't use Deel for US payroll (yet) because it's very new and Gusto is cheap. We might in 2025. 
 
 > Don't forget that hiring someone doesn't just mean paying their salaries - you need to add things like social security payments, pension contributions etc. on top of that! This varies by country, but as a rough guide you should add ~15% to someone's salary to get their 'fully loaded' cost. 
+
+<NewsletterForm />
 
 ## 2. Managing your money
 
@@ -127,3 +130,5 @@ Congrats, you have hopefully saved a bunch of precious time and mental energy th
 - You should probably document all this stuff in your handbook! Don't have one yet? Feel free to [copy ours](/handbook).
 - We've written a step-by-step [guide to startup finance](/founders/startup-finance-without-finance  in detail – without hiring a finance person. 
 - At some point you'll want to [make your first ops hire](/founders/first-ops-hire).
+
+<NewsletterForm />

@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - mo-shehu
-featuredImage: ../images/blog/how-to-pick-cofounder.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/how-to-pick-cofounder.png
 featuredImageType: full
 category: Startups
 ---
@@ -66,4 +67,4 @@ There are a few things PostHog did to guard against this:
 
 Having a co-founder is great - but it's far better to have no co-founder than to have the wrong one. Getting this right is perhaps the most crucial decision you'll take on your road to startup success.
 
-_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+<NewsletterForm />

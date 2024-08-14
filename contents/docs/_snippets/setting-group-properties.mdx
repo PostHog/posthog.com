@@ -1,4 +1,4 @@
-In the same way that every user can have [properties](/docs/getting-started/user-properties) associated with them, every group can have properties associated with it.
+In the same way that every person can have [properties](/docs/getting-started/person-properties) associated with them, every group can have properties associated with it.
 
 Continuing with the previous example of using `company` as our group type, we'll add `company_name`, `date_joined`, and `subscription` as additional properties.
 
@@ -10,7 +10,7 @@ Continuing with the previous example of using `company` as our group type, we'll
 posthog.group('company', 'company_id_in_your_db', {
     name: 'PostHog',
     subscription: "subscription",
-    date_joined: '2020-01-23T00:00:00.000Z'
+    date_joined: '2020-01-23'
 });
 ```
 
@@ -18,7 +18,7 @@ posthog.group('company', 'company_id_in_your_db', {
 posthog.group_identify('company', 'company_id_in_your_db', {
     'name': 'PostHog',
     'subscription': 'subscription',
-    'date_joined': '2020-01-23T00:00:00.000Z'
+    'date_joined': '2020-01-23'
 })
 ```
 
@@ -29,7 +29,7 @@ client.Enqueue(posthog.GroupIdentify{
     Properties: posthog.NewProperties().
         Set("name", "PostHog").
         Set("subscription", "subscription").
-        Set("date_joined", "2020-01-23T00:00:00.000Z"),
+        Set("date_joined", "2020-01-23"),
 })
 ```
 
@@ -40,7 +40,7 @@ posthog.groupIdentify({
     properties: {
         name: 'PostHog',
         subscription: "subscription",
-        date_joined: '2020-01-23T00:00:00.000Z'
+        date_joined: '2020-01-23'
     }
 })
 ```
@@ -49,7 +49,7 @@ posthog.groupIdentify({
 PostHog::groupIdentify([
     'groupType' => 'company',
     'groupKey' => 'company_id_in_your_db',
-    'properties' => ['name' => 'PostHog', 'subscription' => 'premium', 'date_joined' => '2020-01-23T00:00:00.000Z']
+    'properties' => ['name' => 'PostHog', 'subscription' => 'premium', 'date_joined' => '2020-01-23']
 ]);
 ```
 
@@ -57,7 +57,7 @@ PostHog::groupIdentify([
 analytics.group('company_id_in_your_db', {
     "name": "PostHog",
     "subscription": "subscription",
-    "date_joined": "2020-01-23T00:00:00.000Z"
+    "date_joined": "2020-01-23"
 })
 
 ```bash
@@ -71,10 +71,10 @@ curl -v -L --header "Content-Type: application/json" -d '{
         "$group_set": {
             "name": "PostHog",
             "subscription": "premium",
-            "date_joined": "2020-01-23T00:00:00.000Z"
+            "date_joined": "2020-01-23"
         }
     }
-}' <ph_instance_address>/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 </MultiLanguage>

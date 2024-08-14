@@ -3,18 +3,20 @@ title: Identifying users
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
-
+  free: full
+  selfServe: full
+  enterprise: full
 ---
-
 import JSIdentifyIntro from "../\_snippets/identify-intro.mdx"
 import JSIdentifyHowItWorks from "../\_snippets/identify-how-it-works"
 import JSIdentifyWhenToCall from "../\_snippets/identify-when-to-call.mdx"
 import JSIdentifyUseUniqueIds from "../\_snippets/identify-use-unique-ids.mdx"
 import JSIdentifyReset from "../\_snippets/identify-reset.mdx"
 import JSIdentifySetUserProperties from "../\_snippets/identify-setting-user-properties.mdx"
+export const mergeRestrictionsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/data/identify/merge-restrictions-tooltip-light-mode.png"
+export const mergeRestrictionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/data/identify/merge-restrictions-tooltip-dark-mode.png"
+export const splitUsersLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/data/identify/how-to-split-users-light-mode.mp4"
+export const splitUsersDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/data/identify/how-to-split-users-dark-mode.mp4"
 
 <JSIdentifyIntro/> 
 
@@ -36,7 +38,7 @@ import JSIdentifySetUserProperties from "../\_snippets/identify-setting-user-pro
 
 <JSIdentifyReset/>
 
-### 4. Setting user properties
+### 4. Person profiles and properties
 
 <JSIdentifySetUserProperties/>
 
@@ -60,7 +62,7 @@ posthog.alias('alias_id', 'distinct_id');
 ```
 
 ```python
-posthog.alias('distinct_id', 'alias_id', )
+posthog.alias(previous_id='distinct_id', distinct_id='alias_id')
 ```
 
 ```php
@@ -71,10 +73,10 @@ PostHog::alias(array(
 ```
 
 ```ruby
-posthog.alias({
+posthog.alias(
   distinct_id: "distinct_id",
-  alias: "alias_id",
-})
+  alias: "alias_id"
+)
 ```
 
 ```go
@@ -97,7 +99,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     },
     "timestamp": "2020-08-16 09:03:11.913767",
     "event": "$create_alias"
-}' https://app.posthog.com/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 </MultiLanguage>
@@ -177,9 +179,31 @@ posthog.alias("any_other_id", "distinct_id_one");
 
 You can view whether a user can be merged into another user using `alias` when [viewing their properties](/docs/data/user-properties#how-to-view-user-properties) in the PostHog app: Under their ID, you'll see `Merge restrictions`. This will indicate whether there are merge restrictions or not – i.e., whether you can use their ID as an `alias_id` or not.
 
-![Merge restrictions tooltip](../../images/docs/data/identify/merge-restrictions-tooltip.png)
+<ProductScreenshot
+    imageLight = {mergeRestrictionsLight} 
+    imageDark = {mergeRestrictionsDark}
+    classes="rounded"
+    alt="Merge restrictions tooltipl"
+/>
 
-> Note that when calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they will be merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
+> **Note:** When calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they are merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
+
+## Anonymous and identified events
+
+If your `person_profile` config option is set to `identified_only`, PostHog continues to capture all events but, for users without a person profile, these will be anonymous events. This means you can't do person-level analysis on them. For example, when you click the person ID in the activity tab, you'll see a note saying "No profile associated with this ID."
+
+When using the `identified_only` option, person profiles are only created once you call one of the following functions or methods:
+
+- `identify`
+- `alias`
+- `setPersonProperties`
+- `setPersonPropertiesForFlags`
+- `group`
+- `setGroupPropertiesForFlags`
+
+Once you create a person profile for a user distinct ID, all events for that distinct ID count as identified events and are then associated with a person profile.
+
+If your `person_profile` config option is set to `always`, PostHog captures identified events and creates a person profile for every user on your site, whether or not they have been identified.
 
 ## Troubleshooting and FAQs
 
@@ -318,7 +342,7 @@ curl -v -L --header "Content-Type: application/json" -d '{
     "timestamp": "2020-08-16 09:03:11.913767",
     "distinct_id": "distinct_id_of_user_to_merge_into",
     "event": "$merge_dangerously"
-}' https://app.posthog.com/capture/
+}' <ph_client_api_host>/capture/
 ```
 
 </MultiLanguage>
@@ -329,7 +353,12 @@ If you've accidentally linked distinct IDs together that represent different use
 
 > **Warning:** This will treat the distinct IDs as separate users for future events. However, there is no guarantee as to how past events will be treated – they may be be considered separate users, or be considered a single user for some or all events.
 
-![How to split users in PostHog](../../images/docs/data/identify/how-to-split-users.mp4)
+<ProductVideo
+    videoLight = {splitUsersLight}
+    videoDark = {splitUsersDark}
+    classes="rounded"
+    alt="How to split users in PostHog"
+/>
 
 ### How are properties managed when merging users?
 

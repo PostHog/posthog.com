@@ -1,6 +1,7 @@
 ---
 title: Estimating usage & costs
-featuredImage: ./images/docs-groups.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/billing/images/docs-groups.png
 ---
 
 It can be daunting to figure out how much a usage-based platform like PostHog will cost, but there are simple ways to estimate your usage and costs.
@@ -17,7 +18,7 @@ Kind of, yes, but actually no. Some users are very valuable. They use your produ
 
 From a value perspective, you shouldn't need to pay the same amount for both of these users. It makes more sense to pay _only for the value you receive_, which is _directly tied to user activity_ such as events, session replays, or data.
 
-## How do I estimate my usage?
+## How do I estimate my event usage?
 
 If you're already using another tool and want to switch to PostHog (welcome!), your existing tool may have the exact numbers you need. You might need to ask their support for this data directly if it's not easy to find.
 
@@ -37,7 +38,7 @@ If you want a more accurate estimate, give it a week - this way weekdays and wee
 
 Sometimes you can estimate your volumes based on another number that you know, like your monthly active users (MAU).
 
-#### Estimating Session replay volume based on MAUs
+#### Estimating session replay volume based on MAUs
 
 If you know how manu MAUs you have, and you know the average number of sessions per MAU, you can get your estimated volume by simply multiplying the two together. Easy peasy!
 
@@ -45,8 +46,7 @@ If you know how manu MAUs you have, and you know the average number of sessions 
 
 Events are trickier to estimate based on MAUs because not every type of company has the same type of usage. However, we did a bit of diving into our own data and found that there is a bit of usage consistency within different company categories. Using the table below, take the average number of events per MAU and multiply by the number of MAUs you have to get an estimated event volume.
 
-
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -122,22 +122,26 @@ Events are trickier to estimate based on MAUs because not every type of company 
     	</tr>	
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 Event counts also vary based upon whether you are using [autocapture](/docs/integrate/ingest-live-data#use-autocapture), [custom capture](/docs/integrate/ingest-live-data#capture-user-events) or a combination of both. Custom capture may be better if you have lots of users.
 
-### Estimating your monthly bill
+## How do I estimate the number of feature flag requests?
 
-Once you've figured your projected event usages, you can either:
+Feature flags and experiments are charged based on the number of requests. The way to calculate this depends if you're requesting flags from the frontend or backend.
+
+import FlagChargeEstimate from '../feature-flags/snippets/flag-charge-estimate.mdx'
+
+<FlagChargeEstimate />
+
+## Estimating your monthly bill
+
+Once you've figured your projected event usage and flag requests, you can either:
 
 1. Use the pricing calculator on our [pricing](/pricing) page and calculate your estimated costs for adopting PostHog. 
 2. If you're getting your estimated figures from your free PostHog account, you can see your projected volumes and costs right there in your [billing dashboard](https://app.posthog.com/organization/billing).
 
 And don't forget, we have generous free volumes for every one of our products – even if you're on a paid plan!
-
-## What about other products like Feature flags, etc?
-
-We don't have data on those yet, unfortunately. In that case, we'd recommend going with option 1 above – signing up for a free account and getting an accurate projection in just a few days.
 
 ## How to reduce your PostHog costs
 

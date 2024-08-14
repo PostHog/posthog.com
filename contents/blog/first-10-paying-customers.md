@@ -9,7 +9,8 @@ showTitle: true
 hideAnchor: true
 author:
   - mo-shehu
-featuredImage: ../images/blog/first-10-customers.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/first-10-customers.png
 featuredImageType: full
 category: Product growth
 tags:
@@ -97,6 +98,6 @@ Unless you’ve magically built a viral product that sells itself, early user ac
 
 And because we’d be remiss if we didn’t plug our own product, you can track all that user activity, traffic, and revenue using PostHog’s product analytics suite. See the full list of features [here](https://posthog.com/product-features) and sign up for a free trial today.
 
-_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+<NewsletterForm />
 
 

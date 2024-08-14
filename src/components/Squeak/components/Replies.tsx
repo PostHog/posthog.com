@@ -74,7 +74,7 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
                         {avatars.map((avatar, index) => {
                             return (
                                 <div key={index} className="relative -mr-2">
-                                    <Avatar className="w-[25px]" image={avatar} />
+                                    <Avatar className="w-[25px] rounded-full" image={avatar} />
                                 </div>
                             )
                         })}

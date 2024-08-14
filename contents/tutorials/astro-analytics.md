@@ -1,8 +1,12 @@
 ---
-title: How to set up Astro analytics, feature flags, and more
+title: 'How to set up Astro analytics, feature flags, and more'
 date: 2023-11-28
-author: ["ian-vanagas"]
-tags: ["configuration", "feature flags", "events"]
+author:
+  - ian-vanagas
+tags:
+  - configuration
+  - feature flags
+  - events
 ---
 
 [Astro](https://astro.build/) is a frontend JavaScript framework focused on performance and simplifying the creation of content-based sites. It has seen a rapid increase in interest and usage since its release in 2022.
@@ -78,28 +82,30 @@ import Layout from '../layouts/Layout.astro';
 
 Finally, we can run our app with `npm run dev` to see our full Astro app running locally.
 
-![Astro app video](../images/tutorials/astro-analytics/astro.mp4)
+![Astro app video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/astro-analytics/astro.mp4)
 
 ## Adding PostHog on the client side
 
-With our app set up, the next step is to add PostHog to it. To start, create a new `components` folder in the `src` folder. In this folder, create a `posthog.astro` file. In this file, add your Javascript Web snippet which you can find in [your project settings](https://app.posthog.com/settings/project#snippet). 
+With our app set up, the next step is to add PostHog to it. To start, create a new `components` folder in the `src` folder. In this folder, create a `posthog.astro` file. In this file, add your Javascript Web snippet which you can find in [your project settings](https://app.posthog.com/settings/project#snippet). Be sure to include the `is:inline` directive [to prevent Astro from processing it](https://docs.astro.build/en/guides/client-side-scripts/#opting-out-of-processing), or you will get Typescript and build errors that property 'posthog' does not exist on type 'Window & typeof globalThis'.
+
 
 ```js
 ---
 // src/components/posthog.astro
 ---
-<script>
-  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+<script is:inline>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
   posthog.init(
     '<ph_project_api_key>',
     {
-      api_host:'<ph_instance_address>'
+      api_host:'<ph_client_api_host>',
+      person_profiles: 'identified_only'
     }
   )
 </script>
 ```
 
-After doing this, go back to your `Layout.astro` file, import PostHog, and then add it to the header section.
+After doing this, go back to your `Layout.astro` file, import PostHog, and then add it to the head section.
 
 ```js
 ---
@@ -113,7 +119,7 @@ import PostHog from '../components/posthog.astro'
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
-    <PostHog />
+		<PostHog />
 	</head>
 	<body>
 		<a href="/">Home</a>
@@ -125,7 +131,7 @@ import PostHog from '../components/posthog.astro'
 
 When you go back to your app and reload, PostHog now autocaptures pageviews, button clicks, session replays (if you [enable them](https://app.posthog.com/settings/project-replay)), and more.
 
-![Event autocaptured](../images/tutorials/astro-analytics/events.png)
+![Event autocaptured](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/astro-analytics/events.png)
 
 ## Capturing custom events
 
@@ -163,40 +169,40 @@ import Layout from '../layouts/Layout.astro';
 
 When you go back to your app and click the button, you then see a `praise_received` event in PostHog.
 
-![Custom event capture](../images/tutorials/astro-analytics/praise.png)
+![Custom event capture](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/astro-analytics/praise.png)
 
 ## Setting up a feature flag
 
 To use a feature flag in your app, first, you must create it in PostHog. Go to the [feature flags tab](https://app.posthog.com/feature_flags), click "New feature flag," add a key (we chose `new-button`), set the release condition to 100% of users, and click "Save."
 
-With the feature flag, go back to your home page at `pages/index.astro`. Add to your script the `onFeatureFlags()` function with an `isFeatureEnabled()` for your `new-button` flag. If enabled, change the `innerHTML` of your button.
+With the feature flag, go back to your home page at `components/posthog.astro`. Add the `loaded:` argument to your snippet and implement the [`posthog.onFeatureFlags`](/docs/libraries/js#ensuring-flags-are-loaded-before-usage) callback to update the button text depending on the flag value. If enabled, change the `innerText` of your button.
 
 ```js
 ---
-// src/pages/index.astro
-import Layout from '../layouts/Layout.astro';
+// src/components/posthog.astro
 ---
-<Layout>
-	<h1>Home</h1>
-	<button class="main">Great site!</button>
-	<script>
-		const button = document.querySelector('.main');
-		button.addEventListener('click', () => {
-			window.posthog.capture('praise_received')
-		});
-
-		window.posthog.onFeatureFlags(() => {
-			if (window.posthog.isFeatureEnabled('new-button')) {
-				button.innerText = 'The best site ever!';
-			}
-		});
-	</script>
-</Layout>
+<script is:inline>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init(
+    '<ph_project_api_key>',
+    {
+      api_host:'<ph_client_api_host>',
+      person_profiles: 'identified_only',
+      loaded: (posthog) => {
+        posthog.onFeatureFlags(() => {
+          const button = document.querySelector('.main');
+          if (posthog.isFeatureEnabled('new-button')) {
+            button.innerText = 'The best site ever!';
+          }
+        });
+      }
+    }
+  )
+</script>
 ```
-
 When you reload your page, it shows different button text controlled by the PostHog feature flag.
 
-![Flag](../images/tutorials/astro-analytics/flag.png)
+![Flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/astro-analytics/flag.png)
 
 ## Adding PostHog on the server side
 
@@ -217,7 +223,7 @@ let posthogClient = null;
 export default function PostHogClient() {
   if (!posthogClient) {
     posthogClient = new PostHog('<ph_project_api_key>', {
-      host: '<ph_instance_address>',
+      host: '<ph_client_api_host>',
     });
   }
   return posthogClient;
@@ -326,12 +332,19 @@ Finally, in `posthog.astro`, we add logic to get the distinct ID, check if it’
 // src/components/posthog.astro
 ---
 <script>
-  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
   posthog.init(
     '<ph_project_api_key>',
     {
-      api_host:'<ph_instance_address>',
+      api_host:'<ph_client_api_host>',
+			person_profiles: 'identified_only',
       loaded: function(posthog) {
+        const button = document.querySelector('.main');
+        if (posthog.isFeatureEnabled('new-button')) {
+            button.innerText = 'The best site ever!';
+      	}
+
+				// add this code:
         const distinctId = document.querySelector('.did').innerHTML;
         if (posthog.get_distinct_id() && posthog.get_distinct_id() !== distinctId) {
           posthog.identify(distinctId);
@@ -375,6 +388,32 @@ if(await phClient.isFeatureEnabled('new-button', distinctId)) {
 	<button class="main">{buttonText}</button>
 	<p style="display:none" class="did">{distinctId}</p>
 </Layout>
+```
+
+Lastly, remove the `posthog.onFeatureFlags()` code we added in `posthog.astro`:
+
+```js
+---
+// src/components/posthog.astro
+---
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init(
+    '<ph_project_api_key>',
+    {
+      api_host:'<ph_client_api_host>',
+      person_profiles: 'identified_only',
+      loaded: function(posthog) {
+        // posthog.onFeatureFlags has been removed
+
+        const distinctId = document.querySelector('.did').innerHTML;
+        if (posthog.get_distinct_id() && posthog.get_distinct_id() !== distinctId) {
+          posthog.identify(distinctId);
+        }
+      }
+    }
+  )
+</script>
 ```
 
 Now when you refresh your page, your flag won’t flicker because the content is sent from the server. This is especially useful for ensuring good user experiences in A/B tests.

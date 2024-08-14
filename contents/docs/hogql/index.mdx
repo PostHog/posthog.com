@@ -3,17 +3,17 @@ title: HogQL
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
-import ExpressionLight from '../../images/features/hogql/expression-light.png'
-import ExpressionDark from '../../images/features/hogql/expression-dark.png'
-import SQLLight from '../../images/features/hogql/sql-light.png'
-import SQLDark from '../../images/features/hogql/sql-dark.png'
-import WarehouseLight from '../../images/features/hogql/warehouse-light.png'
-import WarehouseDark from '../../images/features/hogql/warehouse-dark.png'
+export const ExpressionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/expression-light.png"
+export const ExpressionDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/expression-dark.png"
+export const SQLLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/sql-light.png"
+export const SQLDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/sql-dark.png"
+export const WarehouseLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/warehouse-light.png"
+export const WarehouseDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/warehouse-dark.png"
 
 HogQL is our take on SQL (Structured Query Language), a language used to manage and access data. It is effectively a wrapper around [ClickHouse SQL](https://clickhouse.com/docs/en/sql-reference), with tweaks such as simplified event and person property access, null handling, and visualization integrations.
 
@@ -51,6 +51,7 @@ WHERE event = '$pageview'
         WHERE event = '$pageview'
         GROUP BY distinct_id
     )
+    AND {filters}
 GROUP BY current_url
 ORDER BY url_count DESC
 ```
@@ -71,12 +72,12 @@ To query events using HogQL via the [PostHog API](/docs/api/query), get [your pr
 {"query": {"kind": "HogQLQuery", "query": "select * from events"}}
 ```
 
-For example, to get a count of the most common `event` values, you can make a request like this (change `app.posthog.com` to `eu.posthog.com` if you're on EU cloud):
+For example, to get a count of the most common `event` values, you can make a request like this (change `us.posthog.com` to `eu.posthog.com` if you're on EU cloud):
 
 <MultiLanguage>
 
 ```bash
-curl -X POST "https://app.posthog.com/api/projects/:project_id/query" \
+curl -X POST "<ph_app_host>/api/projects/:project_id/query" \
      -H "Content-Type: application/json" \
      -H "Authorization: Bearer <personal_api_key>" \
      -d '{
@@ -103,7 +104,7 @@ data = {
 }
 
 response = requests.post(
-    'https://app.posthog.com/api/projects/:project_id/query', 
+    '<ph_app_host>/api/projects/:project_id/query', 
     headers=headers, 
     json=data
 )
@@ -145,4 +146,4 @@ To get a list of all the sources you can query with HogQL, enable the [data ware
   alt="Data warehouse example"
 />
 
-The data warehouse also enables you to add external sources, like Stripe and Hubspot, and query them alongside your PostHog data.
+The data warehouse also enables you to add external sources, like [Stripe](/tutorials/stripe-reports) and Hubspot, and query them alongside your PostHog data.

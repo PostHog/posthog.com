@@ -3,12 +3,12 @@ title: Toolbar
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
-import setupLight from '../../images/tutorials/toolbar/setup-toolbar-light-mode.mp4'
-import setupDark from '../../images/tutorials/toolbar/setup-toolbar-dark-mode.mp4'
+export const setupLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/tutorials/toolbar/setup-toolbar-light-mode.mp4"
+export const setupDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/tutorials/toolbar/setup-toolbar-dark-mode.mp4"
 
 > **Note:** The PostHog toolbar is only available for the [JavaScript web SDK](/docs/libraries/js).
 
@@ -82,3 +82,9 @@ The PostHog toolbar currently doesn't work for Nuxt users because Nuxt overrides
     });
 </script>
 ```
+
+### Reverse proxy
+
+[Deploying a reverse proxy](https://posthog.com/docs/advanced/proxy) is the best way to avoid tracking blockers intercepting calls to PostHog.
+
+If the pages you are trying to open with the toolbar are on this proxy, make sure to [pass the proper `ui_host` parameter](/docs/libraries/js#config) when initializing our browser integration, so that links to the PostHog interface point to the correct host.

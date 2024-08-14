@@ -1,0 +1,142 @@
+This is the main endpoint for querying data from PostHog. It is used for many kinds of queries including `TrendsQuery`, `FunnelsQuery`, `ActorsQuery`, `EventsQuery`, and [more](https://github.com/PostHog/posthog/blob/0834410018bc2b7299d8169f828144c5e94b9f9e/frontend/src/queries/schema.ts#L50).
+
+The most useful for you is likely `HogQLQuery`. This enables you to query PostHog using [HogQL](/docs/hogql). For example, to get events where the `$current_url` contains blog:
+
+<MultiLanguage>
+
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "HogQLQuery",
+          "query": "select properties.$current_url from events where properties.$current_url like '\''%/blog%'\'' limit 100"
+        }
+      }'
+```
+
+```python
+import requests
+import json
+
+url = "<ph_app_host>/api/projects/{project_id}/query/"
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'
+}
+payload = {
+    "query": {
+        "kind": "HogQLQuery",
+        "query": "select properties.$current_url from events where properties.$current_url like '%/blog%' limit 100"
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function createQuery() {
+  const url = "<ph_app_host>/api/projects/:project_id/query/";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const payload = {
+    "query": {
+      "kind": "HogQLQuery",
+      "query": "select properties.$current_url from events where properties.$current_url like '%/blog%' limit 100"
+    }
+  }
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+createQuery()
+```
+
+</MultiLanguage>
+
+It is also useful for querying non-event data like persons, data warehouse, session replay metadata, and more. For example, to get a list of all people with the `email` property:
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "HogQLQuery",
+          "query": "select properties.email from persons where properties.email is not null"
+        }
+      }'
+```
+
+```python
+import requests
+import json
+
+url = "<ph_app_host>/api/projects/{project_id}/query/"
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'
+}
+payload = {
+    "query": {
+        "kind": "HogQLQuery",
+        "query": "select properties.email from persons where properties.email is not null"
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function createQuery() {
+  const url = "<ph_app_host>/api/projects/:project_id/query/";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const payload = {
+    "query": {
+      "kind": "HogQLQuery",
+      "query": "select properties.email from persons where properties.email is not null"
+    }
+  }
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+createQuery()
+```
+
+</MultiLanguage>
+
+> **Note:** This endpoint is limited to 10,000 rows at 120 requests per hour. If you need more, use [batch exports](/docs/cdp/batch-exports).
+
+To learn more, read the [query endpoint code on GitHub](https://github.com/PostHog/posthog/blob/master/posthog/api/query.py) or search for `query` requests in your browser's network tab in PostHog.

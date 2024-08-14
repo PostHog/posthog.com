@@ -165,7 +165,7 @@ const faqs = [
     {
         question: 'Is there a free trial on paid plans?',
         children:
-            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch</a>.',
+            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/talk-to-a-human">get in touch</a>.',
     },
     {
         question: 'What currency are your prices in?',
@@ -321,7 +321,7 @@ const PairsWithArray = [
 ]
 
 export const ProductSessionReplay = () => {
-    const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
+    const { elevenlabs, hasura, netdata, pry } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -336,7 +336,7 @@ export const ProductSessionReplay = () => {
             }
         }
         {
-            contra: mdx(slug: { eq: "customers/contra" }) {
+            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
             hasura: mdx(slug: { eq: "customers/hasura" }) {
@@ -355,7 +355,7 @@ export const ProductSessionReplay = () => {
         <>
             <SEO
                 title="Session Replay - PostHog"
-                description="Session Replay helps you diagnose issues and understand user behavior in your product or website."
+                description="Session Replay helps you diagnose issues and understand user behavior in your product, mobile app, or website."
                 image={`/images/og/session-replay.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
@@ -385,18 +385,18 @@ export const ProductSessionReplay = () => {
                             customer={hasura}
                         />
                         <CustomerCard
-                            outcome="increased registrations by 30%"
-                            quote="From [funnels], we could easily jump to session replays to see the drop-off point."
-                            customer={contra}
+                            outcome="uses replays and surveys when testing ideas"
+                            quote="We watch lots of replays when testing a feature, and love how easy it is to launch surveys."
+                            customer={elevenlabs}
                         />
                         <CustomerCard
                             outcome="reduced back-and-forth in community support"
-                            quote="Session replay is... an essential tool for Netdata."
+                            quote="Session replay in PostHog is so much better than Smartlook, which we used to use."
                             customer={netdata}
                         />
                         <CustomerCard
                             outcome="improved registrations by 20-30%"
-                            quote="Even Pry's support team... uses replays to understand how bugs occurred."
+                            quote="We've improved our whole onboarding flow by about 5% too, which is great."
                             customer={pry}
                         />
                     </ul>
@@ -470,7 +470,7 @@ export const ProductSessionReplay = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
                                         src="../../../images/products/competitors-sr.png"
@@ -526,7 +526,7 @@ export const ProductSessionReplay = () => {
                         <p className="text-center text-sm font-medium">
                             Have questions about PostHog? <br className="md:hidden" />
                             <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                            <Link to="/contact-sales">book a demo</Link>.
+                            <Link to="/talk-to-a-human">book a demo</Link>.
                         </p>
                     </section>
                 </div>
@@ -618,7 +618,7 @@ export const ProductSessionReplay = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicIds={[20]} />
+                    <Questions topicIds={[377]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>

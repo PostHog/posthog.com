@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## Design hiring at PostHog
 
-Our design team is small and we don't hire into this team very often. Please check our [careers page](https://posthog.com/careers) for our open roles. 
+Our design team is small and we don't hire into this team very often. Please check our [careers page](/careers) for our open roles. 
 
 ### What we are looking for in Design hires
 
@@ -29,7 +29,7 @@ This is our standard first round culture interview with the People & Ops team.
 
 #### 2. Technical interview and portfolio review
 
-The [technical interview](https://posthog.com/handbook/people/hiring-process#interview-2) round is a 2-part interview, lasting up to 90 minutes in total.
+The [technical interview](/handbook/people/hiring-process#interview-2) round is a 2-part interview, lasting up to 90 minutes in total.
 
 The first half of the interview will be with [Cory](/community/profiles/2) and 1 or 2 team members, and it will focus on your Product and Design thinking. You can expect questions around your typical design process and how you prioritize. 
 

@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - joe-martin
-featuredImage: ../images/blog/give-back-friday.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/give-back-friday.png
 featuredImageType: full
 category: PostHog news
 tags:
@@ -71,10 +72,6 @@ Some other matters of small print:
 That's it. 
 
 > Support the projects that make PostHog possible by [heading to the PostHog repo and starring it today!](https://github.com/PostHog/posthog) We'll donate $5 for every star between now and the end of Cyber Monday!
-
-> PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
-
-<ArrayCTA />
 
 
  

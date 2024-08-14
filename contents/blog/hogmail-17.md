@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/hogmail.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hogmail.png
 featuredImageType: full
 category: General
 ---
@@ -81,4 +82,4 @@ Charles shares his practical guide to how we run finance without a dedicated fin
 
 - [Marie Kondo your software stack with open source](https://github.com/readme/featured/open-source-minimalism) (17 min read)
 
-> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
+<NewsletterForm />

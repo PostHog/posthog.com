@@ -59,7 +59,7 @@ const featuresPerRow = 3
 const features = [
     {
         title: 'Release conditions',
-        description: 'Customize your rollout strategy by user or group properties, cohort, or trafic percentage',
+        description: 'Customize your rollout strategy by user or group properties, cohort, or traffic percentage',
         image: <StaticImage src="./images/release-conditions.png" width={420} />,
         border: true,
     },
@@ -79,7 +79,7 @@ const features = [
     {
         title: 'Developer-friendly automation',
         description:
-            'Automated usage reports, IP address resolution (for location-based targeting), and recall user properties to avoid passing them manually every time',
+            'Automated usage reports, IP address resolution (for location-based targeting), and recall person properties to avoid passing them manually every time',
         image: <StaticImage src="./images/reports.png" width={420} />,
         border: true,
     },
@@ -167,6 +167,11 @@ const faqs = [
             "The easiest way is to sign up for the Free plan - no credit card required. You'll get an accurate volume projection after just a few days.",
     },
     {
+        question: 'How can I manage cost at high volume?',
+        children:
+            "You can reduce the number of requests to PostHog with <a href='https://posthog.com/docs/feature-flags/local-evaluation'>local evaluation</a>, which stores flag definitions on your server and only polls PostHog periodically.",
+    },
+    {
         question: 'How long do you retain event data?',
         children:
             'Data is guaranteed to be retained for 7 years on any paid plan and 1 year on a free plan. After 1 year, data may be moved into cold storage so queries may run more slowly.',
@@ -174,7 +179,7 @@ const faqs = [
     {
         question: 'Is there a free trial on paid plans?',
         children:
-            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch</a>.',
+            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/talk-to-a-human">get in touch</a>.',
     },
     {
         question: 'What currency are your prices in?',
@@ -205,7 +210,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Target by user properties',
+        feature: 'Target by person properties',
         companies: {
             LaunchDarkly: true,
             Optimizely: true,
@@ -305,7 +310,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Recall user properties by default',
+        feature: 'Recall person properties by default',
         companies: {
             LaunchDarkly: false,
             Optimizely: false,
@@ -340,7 +345,7 @@ const PairsWithArray = [
 ]
 
 export const ProductFeatureFlags = () => {
-    const { phantom, contra, speakeasy, carvertical } = useStaticQuery(graphql`
+    const { phantom, contra, elevenlabs, carvertical } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -361,7 +366,7 @@ export const ProductFeatureFlags = () => {
             contra: mdx(slug: { eq: "customers/contra" }) {
                 ...ProductCustomerFragment
             }
-            speakeasy: mdx(slug: { eq: "customers/speakeasy" }) {
+            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
             carvertical: mdx(slug: { eq: "customers/carvertical" }) {
@@ -399,21 +404,21 @@ export const ProductFeatureFlags = () => {
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="cut failure rates by 90%"
-                            quote="Feature flags are crucial for us. We use them as kill switches for all our features."
+                            quote="Feature flags are crucial for us. We use them as kill switches for all features and use the data to make decisions."
                             customer={phantom}
                         />
                         <CustomerCard
-                            outcome="increased registrations by 30%"
-                            quote="Enables a ‘slow rollout’ strategy... while also analyzing feature adoption and performance in the same tool."
+                            outcome="increased registrations 30%"
+                            quote="Teams used to use different tools. That led to confusion because flags didn't integrate with our analytics or replays."
                             customer={contra}
                         />
                         <CustomerCard
-                            outcome="improved feature roll-out with flags"
-                            quote="The integrated insights and feature flags help us monitor how users with specific flags enabled are using features"
-                            customer={speakeasy}
+                            outcome="uses flags for feature testing"
+                            quote="We test changes as simple as changing the null state of a page through to new onboarding flows or new pricing changes."
+                            customer={elevenlabs}
                         />
                         <CustomerCard
-                            outcome="switched from an in-house tool"
+                            outcome="switched from in-house tools"
                             quote="Feature flags immediately bought a lot of value. What’s really elegant is how flags interlink with product analytics."
                             customer={carvertical}
                         />
@@ -493,7 +498,7 @@ export const ProductFeatureFlags = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
                                         src="../../../images/products/competitors-ff.png"
@@ -534,7 +539,7 @@ export const ProductFeatureFlags = () => {
                         <p className="text-center text-sm font-medium">
                             Have questions about PostHog? <br className="md:hidden" />
                             <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                            <Link to="/contact-sales">book a demo</Link>.
+                            <Link to="/talk-to-a-human">book a demo</Link>.
                         </p>
                     </section>
                 </div>
@@ -626,7 +631,7 @@ export const ProductFeatureFlags = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicIds={[28]} />
+                    <Questions topicIds={[360]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>

@@ -5,8 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/hogmail.png
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hogmail.png
 featuredImageType: full
 category: General
 ---
@@ -51,7 +53,7 @@ We often get asked how to achieve the fabled product-market fit (PMF), mainly be
 
 >"At any given moment in time, even if you have PMF, you still need to be working towards a future state where the market has evolved, and your product has kept up."
 
-![product market fit](../images/blog/product-market-flex.jpeg)
+![product market fit](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-market-flex.jpeg)
  
 The author goes on to argue teams can flex two dimensions to achieve PMF: (i) reduce the effort by the user to get value (product); and (ii) increase user literacy (go-to-market).
 
@@ -69,4 +71,4 @@ John Cutler explores this idea further in [Product GTM Fitness](https://cutlefis
  
 - [How employees can think like shareholders](https://www.mostlymetrics.com/p/questions-to-ask-before-taking-a) – Or, to use the post's original title, "the REAL questions you should ask before taking a job", though the questions here are still relevant outside of that context. CEO James has written about this in the past, too.
 
-> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
+<NewsletterForm />

@@ -1,21 +1,27 @@
 As always, reliability is the #1 unwritten goal: Making sure feature flags are reliable trumps every other objective.
 
+### Objective: Make sure feature flags can handle 10x current scale
 
-### Objective: Doubling down on surveys
+In the beginning of 2024, we hit some scaling limits on flags: It's now very expensive to run flags on Django and we'll hit some scaling limits at 5x our scale.
 
-Last quarter, we officially launched surveys and gathered lots of feedback! This quarter, we're building out more of the things that'll make surveys the obvious choice for customers to collect user feedback. 
+To get ahead of this problem, we'll rewrite our flags service to be more performant and reliable. This is a continuation of last quarter's goal, since we aren't done yet.
 
-We will, in order of priority build:
+### Objective: No-code experiments 
 
-- Event based targeting for surveys
-- Branching logic with multiple questions
-- Better result visualisation for customer experience metric surveys (NPS, CSAT, etc)
+Last quarter we polished up our new experiment UI. This quarter, we want to address some issues that came up, and then focus on building out some more ambitious features on top of experiments.
 
-### Objective: Doubling down on experiments
+Broadly, we will:
+1. Address outstanding experiments UI/UX issues
+2. Build no-code experiments
+3. Explore some cool things we can do on top of no-code experiments, like suggesting and automatically running some no-code experiments based on replay and analytics data
 
-Last quarter, we built out the core missing features for feature flags. Now to leverage these building blocks we want to focus on improving our A/B testing platform.
+### Objective: Split out experiments into its own product
 
-Broadly, we will focus on two themes:
+Experiments can now stand on its own, without the linking to feature flags in the UI, and in pricing.
 
-1. Make it easy for people to set up experiments and understand the results, with clear action items on when to end and what to do after ending experiments.
-2. Expand what is possible to track in experiments: From statistical significance for secondary metrics, to having a linked dashboard for extra result exploration.
+The current state is problematic because
+
+1. It confuses some users over difference between flags and experiments
+2. Pricing for experiments is implicit, and can be hard to understand
+
+We'll update SDKs to have experiment-specific constructs, stop the controlling experiment via feature flag issues, make them independent, track flag calls separately for experiments, and update how we price experiments.

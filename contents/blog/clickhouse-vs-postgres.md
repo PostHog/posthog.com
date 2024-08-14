@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - mathew-pregasen
-featuredImage: ../images/blog/clickhouse-vs-postgres/postgres-vs-clickhouse.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/clickhouse-vs-postgres/postgres-vs-clickhouse.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -25,7 +26,7 @@ At first, the team tried a ton of hack-y and wacky solutions in attempts to get 
 
 This is what that felt like...
 
-![thanos meme](../images/blog/clickhouse-vs-postgres/thanos-meme.png)  
+![thanos meme](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/thanos-meme.png)  
 
 Suddenly, all those data problems were solved, Thanos-snapped from existence. Here, we’re diving deep into how and why ClickHouse saved the day. 
 
@@ -39,11 +40,11 @@ In contrast, ClickHouse is a *columnar* database. ClickHouse tables in memory ar
 
 Here's what that looks like...
 
-![clickhouse vs postgres rows and columns](../images/blog/clickhouse-vs-postgres/rows-vs-columns.png)  
+![clickhouse vs postgres rows and columns](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/rows-vs-columns.png)  
 
 The difference – to be clear – is how the data is *stored*; to the user, no mental-inversion is needed. You still deal with tables with entries. You continue to utilize SQL to interface with ClickHouse. The big difference is that those queries perform differently from the analog queries in Postgres or other row-based relational database. 
 
-![clickhouse vs postgres rows and columns](../images/blog/clickhouse-vs-postgres/rows-vs-columns-user.png) 
+![clickhouse vs postgres rows and columns](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/rows-vs-columns-user.png) 
 
 ClickHouse was designed for products that require fetched aggregate data, such as analytics, financial real-time products, ad-bidding technology, content delivery networks, or log management. Basically, it’s for data that doesn’t need to be *changed*; ClickHouse is downright terrible at mutations.
 
@@ -63,7 +64,7 @@ Postgres would do this seamlessly: access John Doe’s row (including his other 
 
 Let’s analyze Postgres vs ClickHouse with a (very simplified) hedgehog database. Crudely, we can visualize why Postgres crushes ClickHouse when fetching a single hog’s data:
 
-![clickhouse vs postgres fetching data](../images/blog/clickhouse-vs-postgres/rows-vs-columns-fetching-data.png) 
+![clickhouse vs postgres fetching data](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/rows-vs-columns-fetching-data.png) 
 
 **A Simple Case where ClickHouse crushes Postgres:** *You operate a financial transaction startup and need to calculate the average transaction price across billions of entries.* 
 
@@ -71,7 +72,7 @@ Postgres would need to incrementally retrieve every entry, grab the transaction 
 
 If we were to extend the previous hedgehog database, this query looks a little like this:
 
-![clickhouse vs postgres fetching data](../images/blog/clickhouse-vs-postgres/rows-vs-columns-summing-data.png)  
+![clickhouse vs postgres fetching data](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/rows-vs-columns-summing-data.png)  
 
 This is, again, a crude comparison. It ignores caches on both ends, and more interestingly, PostHog’s optimizations under-the-hood, such as:
   
@@ -90,6 +91,8 @@ These optimizations are made possible by ClickHouse’s insert-and-optimize-late
 Because ClickHouse doesn’t expect mutation requests, it can depend on merges because the individual data won’t be changed; by extension, aggregate values won’t need to be recalculated.
 
 > 📖 **Further reader:** ClickHouse is just one of many column-based databases, others include Google's BigQuery, and Snowflake. Read our comparisons between [ClickHouse and BigQuery](/blog/clickhouse-vs-bigquery), and [ClickHouse vs Snowflake](/blog/clickhouse-vs-snowflake) to learn more about different OLAP database solutions.
+
+<NewsletterForm />
 
 ## Comparing ClickHouse and Postgres
 
@@ -113,7 +116,7 @@ ClickHouse’s documentation is a tad confusing to readers unfamiliar with OLAP 
 
 Let’s take a look at ClickHouse’s self-stated key properties: 
 
-![clickhouse vs postgres rows and columns](../images/blog/clickhouse-vs-postgres/clickhouse-guidelines.png) 
+![clickhouse vs postgres rows and columns](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/clickhouse-guidelines.png) 
 
 ClickHouse states that a vast majority of requests should be for read access, but this is a bit misleading — it’s more that read-heavy requests should greatly outnumber update/mutation requests, not inserts. 
 
@@ -125,11 +128,11 @@ When evaluating infrastructure resources, we typically think about CPUs, RAM, an
 
 For Postgres, RAM and Attached Storage obviously matter, but the CPU count has limited benefits. Since 2016, Postgres can parallelize certain computations ([rather inconsistently](https://swarm64.com/post/increase-postgresql-parallelism/)), but is primarily a single-process product, as the below shows:
 
-![postgres resource use](../images/blog/clickhouse-vs-postgres/postgres-scaling.png) 
+![postgres resource use](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/postgres-scaling.png) 
 
 ClickHouse, meanwhile, is all about silently optimizing data and optimizing data in parallel. You can scale the power of your ClickHouse instance’s performance by improving any three of those dimensions, including CPU.
 
-![clickhouse resource use](../images/blog/clickhouse-vs-postgres/clickhouse-scaling.png) 
+![clickhouse resource use](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/clickhouse-scaling.png) 
 
 An optimized ClickHouse instance can function so fast that a bulk of a query’s wait-time from a frontend perspective is a function of network speed, not data retrieval. 
 
@@ -143,7 +146,7 @@ Imagine you’ve abandoned your dating app and banking businesses; now, you run 
 
 Here’s a version using our previous simple hedgehog database:
 
-![clickhouse resource use](../images/blog/clickhouse-vs-postgres/visualizing-materialized-views.png) 
+![clickhouse resource use](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/visualizing-materialized-views.png) 
 
 #### Materialized View averaging age
 
@@ -161,7 +164,7 @@ Here are some strategies on how Postgres can emulate automatic Materialized View
  
 - **Triggers.** You could set a Postgres trigger to refresh a Materialized View on page load. This solution will rarely work unless you have seldom write operations; refreshing the Materialized View completely wipes the original result and will likely bludgeon the CPU. 
 
-![hacking postgres](../images/blog/clickhouse-vs-postgres/hacking-postgres-meme.png) 
+![hacking postgres](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-postgres/hacking-postgres-meme.png) 
 
 In a nutshell, Postgres can be bandaged up to achieve some efficiency that ClickHouse boasts around Materialized Views, but fundamentally, ClickHouse treats Materialized Views as an out-of-the-box benefit with efficiency *and* simplicity as cornerstone value props. 
 
@@ -190,3 +193,5 @@ Sharding can be done prematurely to optimize performance. When multiple ClickHou
 ClickHouse was made to handle lots and lots of aggregate data. While starting with Postgres may be acceptable for the early days of a data-heavy business, platforms like ClickHouse are the better investment when aggregate fetches come into play. 
 
 ClickHouse optimizes data aggregating at every layer — inception, storage, caching, and returning — and will boast 1000x advancements over tools like Postgres. However, ClickHouse can rarely be used in isolation, as many day-to-day needs of an application are too update / single-line-read heavy to utilize a columnar database.
+
+<NewsletterForm />

@@ -1,13 +1,15 @@
 ---
-title: The best Microsoft Clarity alternatives & competitors, compared
+title: 'The best Microsoft Clarity alternatives & competitors, compared'
 date: 2024-02-29
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
 rootpage: /blog
-featuredImage: ../images/blog/clarity-alternatives/clarity-alternatives.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/clarity-alternatives/clarity-alternatives.png
 featuredImageType: full
 category: General
 tags:
- - Comparisons
+  - Comparisons
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
@@ -20,7 +22,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 - **Typical users:** Engineers and product teams
 - **Typical customers:** Mid-size B2B/B2C companies and startups
 
-![posthog](../images/screenshots/session-replay.png)
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/session-replay.png)
 
 ### What is PostHog?
 
@@ -72,7 +74,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 >
 > PostHog goes deeper than Clarity by making it easy to debug issues via detailed event timelines, console logs, and network monitoring, while also enabling you to understand user behavior at every level when combined with product analytics and its other tools.
 
-<ArrayCTA />
+<NewsletterForm />
 
 <br />
 
@@ -83,7 +85,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 - **Typical users:** Product managers, engineers, support teams
 - **Typical customers:** B2B SaaS, B2C retail companies.
 
-![LogRocket](../images/blog/best-fullstory-alternatives/logrocket.webp)
+![LogRocket](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-fullstory-alternatives/logrocket.webp)
 
 ### What is LogRocket?
 
@@ -141,11 +143,11 @@ Reviews on G2.com suggest companies use LogRocket because it:
 - **Typical users:** Product managers, customer success, and support
 - **Typical customers:** Online retailers and SaaS companies
 
-![FullStory](../images/blog/best-logrocket-alternatives/fullstory.png)
+![FullStory](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/fullstory.png)
 
 ### What is FullStory?
 
-[FullStory](/blog/best-fullstory-alternatives) describes itself as Digital Experience Intelligence, which is code for session replay and mobile app analytics, with a side of product analytics. Like LogRocket and PostHog, it supports event autocapture, so you don't have to manually code every event you want to capture.
+[FullStory](/blog/best-fullstory-alternatives) describes itself as Digital Experience Intelligence, which is code for session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools), with a side of product analytics. Like LogRocket and PostHog, it supports event autocapture, so you don't have to manually code every event you want to capture.
 
 According to data from [BuiltWith](https://trends.builtwith.com/analytics/FullStory), as of February 2024, 8,141 of the top 1 million websites in the world deploy FullStory. This makes it less popular than Clarity (45,820), but more popular than PostHog (5,169) and Mouseflow (5,555). Customers tend to be product managers and support teams at larger e-commerce websites and B2C enterprises.
 
@@ -200,11 +202,11 @@ According to reviews on G2, companies use FullStory for:
 - **Typical users:** UX designers, marketers and product managers
 - **Typical customers:** Mid-size companies, delivery, retail and marketplace apps 
 
-![uxcam](../images/blog/clarity-alternatives/uxcam.png)
+![uxcam](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/uxcam.png)
 
 ### What is UXCam?
 
-UXCam is designed specifically for mobile apps rather than websites. It combines basic product analytics with session replay and heatmap tools to help its users understand how people use their apps, and optimize conversions. It offers SDKs for iOS (Swift and Objective C) and Android (Kotlin and Java), but also supports popular cross-platform frameworks, such as React Native and Flutter.
+[UXCam](/blog/best-uxcam-alternatives) is designed specifically for mobile apps rather than websites. It combines basic product analytics with session replay and heatmap tools to help its users understand how people use their apps, and optimize conversions. It offers SDKs for iOS (Swift and Objective C) and Android (Kotlin and Java), but also supports popular cross-platform frameworks, such as React Native and Flutter.
 
 #### Key features
 
@@ -257,7 +259,7 @@ According to G2 reviews, UXCam helps companies:
 - **Typical users:** Marketers and consultants
 - **Typical customers:** Small e-commerce businesses and agencies
 
-![luckyorange](../images/blog/clarity-alternatives/luckyorange.png)
+![luckyorange](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/luckyorange.png)
 
 ### What is Lucky Orange?
 
@@ -318,7 +320,7 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 - **Typical users:** Product designers, researchers, and marketers
 - **Typical customers:** E-commerce and content-driven sites
 
-![Hotjar](../images/blog/best-logrocket-alternatives/hotjar.png)
+![Hotjar](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-logrocket-alternatives/hotjar.png)
 
 ### What is Hotjar?
 
@@ -377,7 +379,7 @@ According to G2 reviews, users are fans of Hotjar because:
 - **Typical users:** Marketing and UX teams
 - **Typical customers:** SMB and enterprises in retail
 
-![mouseflow](../images/blog/clarity-alternatives/mouseflow.png)
+![mouseflow](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/mouseflow.png)
 
 ### What is Mouseflow?
 

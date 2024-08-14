@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - paolodamico
-featuredImage: ../images/blog/Collaboration.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/Collaboration.png
 featuredImageType: full
 category: PostHog news
 tags:
@@ -27,7 +28,7 @@ The most basic collaborative action for an analytics product is sharing insights
 
 To address the above we introduced robust permalinks to insights that can easily be shared across multiple mediums. These links can now be used to send a specific insight (with all configurations) to a colleague, even if you are working across multiple projects.
 
-![Concept of how insight links changed to permalinks today](../images/blog/collaborating-on-posthog_1.png)
+![Concept of how insight links changed to permalinks today](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/collaborating-on-posthog_1.png)
 
 You can share dashboards easily too. Even if you share a link to a dashboard in a different project, recipients will be automatically switched to the correct project if they have access
 
@@ -43,7 +44,7 @@ To aid serendipitous discoveries, we've created a project homepage to surface he
 
 In addition, if your team uses the [Session Recording](/product/session-recording) feature, we'll also surface the most recent recordings here. We've found that users who return to Session Recordings make 3x more discoveries than other users (more context [here](https://github.com/PostHog/posthog/issues/8595#issuecomment-1056916848)). This should also help drive qualitative discoveries about your product.
 
-![Concept of project home page](../images/blog/collaborating-on-posthog_4.png)
+![Concept of project home page](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/collaborating-on-posthog_4.png)
 
 ## Leveraging the work of your colleagues
 
@@ -54,11 +55,11 @@ We find there are two general profiles for PostHog users:
 
 For people who create insights, we've introduced one-click saving and automatic insight naming. This means people who create lots of insights don't have spend time documenting their work, while their colleagues can easily understand what they're looking at.
 
-![Screenshot of automatic insight naming](../images/blog/collaborating-on-posthog_3.png)
+![Screenshot of automatic insight naming](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/collaborating-on-posthog_3.png)
 
 And for people who love discovering insights that others made, we've made it easier to search and find saved insights.
 
-![Screenshot of saved insights](../images/blog/collaborating-on-posthog_2.png)
+![Screenshot of saved insights](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/collaborating-on-posthog_2.png)
 
 To support this work, we also introduced the new [Data Management](/blog/data-management-feature) feature, which brings together all the context on how your product is instrumented. Now there's no need to ask an Engineer or Product Manager which event you should use to answer a question, which both parties will appreciate!
 

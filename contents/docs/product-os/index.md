@@ -28,12 +28,12 @@ Product OS comprises things like:
 
 - Collaboration features like [Notebooks](/docs/notebooks), which enable you to analyze data from all PostHog products in a single document you can share and collaborate on with teammates
 
-- Built-in [data management tools](/docs/data), where you can define and organize events, user properties, data tables, and audit changes made by colleagues
+- Built-in [data management tools](/docs/data), where you can define and organize events, person properties, data tables, and audit changes made by colleagues
 
 - [Data pipelines](/docs/cdp), which enable you to enrich your PostHog data from other sources, and integrate PostHog with other tools for marketing automation, sales, and support
 
 - [HogQL](/docs/hogql), which grants you unrestricted access to your data via custom SQL queries for advanced, custom analysis
 
-- Our infrastructure, which is built upon [ClickHouse](/handbook/engineering/clickhouse), an ultra-fast open-source database system built specifically for real-time data analysis
+- [Our infrastructure](/docs/how-posthog-works), which is built upon [ClickHouse](/handbook/engineering/clickhouse), an ultra-fast open-source database system built specifically for real-time data analysis
 
 - The [PostHog Toolbar](/docs/toolbar), which lets you easily toggle feature flags, inspect elements, create [Actions](/docs/data/actions), and see where users click

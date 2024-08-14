@@ -30,7 +30,6 @@ const userQuery = qs.stringify(
                 },
             },
         },
-        fields: ['profile'],
         populate: 'profile.avatar',
     },
     { encodeValuesOnly: true }
@@ -74,7 +73,7 @@ const TeamMemberSelect = ({ handleChange, setShowMods }) => {
                     </button>
                 </div>
 
-                <Combobox.Options className="list-none m-0 p-0 mt-1 max-h-80 overflow-auto divide-y divide-border dark:divide-border-dark rounded-md border border-border dark:border-dark absolute w-full z-50">
+                <Combobox.Options className="list-none m-0 p-0 mt-1 max-h-80 overflow-auto divide-y divide-border dark:divide-border-dark rounded-md border border-border dark:border-dark absolute w-full z-[50]">
                     {filteredMods.map((mod) => {
                         const name = [mod?.profile?.firstName, mod?.profile?.lastName].filter(Boolean).join(' ')
                         return (

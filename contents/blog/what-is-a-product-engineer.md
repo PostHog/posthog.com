@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - ian-vanagas
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -51,7 +52,7 @@ With a basic idea of what a product engineer is, we can dive deeper into the cha
 
 One characteristic that distinguishes product engineers is their “customer obsession.” They care a lot about the people and organizations using their product and want to build a better solution for them.
 
-Customer obsession manifests in a couple of ways. First is that they talk to users. Talking to users isn’t only a job for product managers and salespeople. Product engineers must do this too. They must understand the real problems users are having and figure out solutions for them. This might entail working with a product manager or designer, but it is the ultimate responsibility of the product engineer to make it happen. [incident.io](http://incident.io) is looking for this in their job post:
+Customer obsession manifests in a couple of ways. First is that they [talk to users](/newsletter/talk-to-users). Talking to users isn’t only a job for product managers and salespeople. Product engineers must do this too. They must understand the real problems users are having and figure out solutions for them. This might entail working with a product manager or designer, but it is the ultimate responsibility of the product engineer to make it happen. [incident.io](http://incident.io) is looking for this in their job post:
 
 > "Enjoy speaking directly with customers and understanding their problems”
 
@@ -97,6 +98,8 @@ A great developer experience enables product engineers to ship fast and focus on
 
 > “Investing heavily in the developer experience: whether it’s metrics, logging, tracing and error tracking, or development workflow. Build times are blazing fast: our CI to deploy time is ~5m. Everyone uses a M1 Pro Macbook, and you have budget for other equipment should you need it.”
 
+<NewsletterForm />
+
 ## Product engineering skills
 
 From these characteristics, we can define the skills product engineers have, here’s a list:
@@ -126,3 +129,5 @@ As long as building great products is an important goal for many companies, prod
 - [Product engineer vs software engineer: what's the difference?](/blog/product-engineer-vs-software-engineer)
 - [How to harness the awesome power of growth loops](/product-engineers/growth-loops)
 - [22 ways PostHog makes it easier to build great products](/blog/using-posthog)
+
+<NewsletterForm />

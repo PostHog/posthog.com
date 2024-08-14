@@ -10,7 +10,9 @@ const OpenSourceDescription = () => {
     return (
         <ul className={descriptionClassName}>
             <li className={descriptionItemClassName}>Deploy with Docker on your own server.</li>
-            <li className={descriptionItemClassName}>Great for internal tools or evaluating without vendor approvals.</li>
+            <li className={descriptionItemClassName}>
+                Great for internal tools or evaluating without vendor approvals.
+            </li>
             <li className={descriptionItemClassName}>
                 <strong>MIT license, no support, BYOEngineers!</strong>
             </li>
@@ -40,7 +42,7 @@ const sections: ISection[] = [
         icon: <IconShield className="w-7 h-7" />,
         description: <EnterpriseDescription />,
         cta: {
-            url: '/contact-sales?edition=enterprise',
+            url: '/talk-to-a-human?edition=enterprise',
             label: 'Get in touch',
             type: 'primary',
         },

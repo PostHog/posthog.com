@@ -3,14 +3,14 @@ title: HogQL expressions
 sidebar: Docs
 showTitle: true
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
 import {ProductScreenshot} from 'components/ProductScreenshot'
-import trendsbreakdownDark from '../../images/features/hogql/trends-breakdown-dark-mode.png'
-import trendsbreakdownLight from '../../images/features/hogql/trends-breakdown-light-mode.png'
+export const trendsbreakdownDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/trends-breakdown-dark-mode.png"
+export const trendsbreakdownLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/trends-breakdown-light-mode.png"
 
 HogQL expressions enable you to directly access, modify, and aggregate data in many places in PostHog including:
 
@@ -36,13 +36,14 @@ HogQL expressions enable you to directly access, modify, and aggregate data in m
 
 HogQL expressions can access data like:
 
-- event properties
-- [person properties](/docs/product-analytics/user-properties)
+- event properties (`properties`)
+- [person properties](/docs/product-analytics/person-properties) (`person.properties`)
 - `event`
-- `elements_chain` (from autocapture)
+- `elements_chain` (from [autocapture](/tutorials/hogql-autocapture))
 - `timestamp`
 - `distinct_id`
 - `person_id`
+- When [joined](/docs/data-warehouse/join), data warehouse source properties
 
 Properties can be accessed with dot notation like `person.properties.$initial_browser` which also works for nested or JSON properties. They can also be accessed with bracket notation like `properties['$feature/cool-flag']`.
 
@@ -56,12 +57,20 @@ Types (and names) for the accessible data can be found in the [database](https:/
 
 - `STRING` (default)
 - `JSON` (accessible with dot or bracket notation)
-- `DATETIME`(in `ISO-8601`, [read more in our data docs](/docs/data/timestamps))
+- `DATETIME`(in `ISO 8601`, [read more in our data docs](/docs/data/timestamps))
 - `INTEGER`
 - `NUMERIC`(AKA float)
 - `BOOLEAN`
 
 Types can be converted using functions like `toString`, `toDate`, `toFloat`, `JSONExtractString`, `JSONExtractInt`, and more.
+
+## Operators
+
+Expressions can use operators to filter and combine data. These include:
+
+- Comparison operators like `=`, `!=`, `<`, or `>=`
+- Logical operators like `AND`, `OR`, `IS` or `NOT`
+- Arithmetic operators like `+`, `-`, `*`, `/`
 
 ## Functions and aggregations
 
@@ -71,45 +80,69 @@ Here are some of the most common and useful ones:
 
 ### Comparisons
 
-- `if`: Checks a condition, and if true (or non-zero), and then returns the result of an expression.
-- `multiIf`: Enables chaining multiple `if` statements together, each with a condition and return expression.
-- `in`: Checks if an array or string contains a value.
-- `match`: Checks whether a string matches a regular expression pattern.
-- `like`: Checks if string matches pattern that contain string(s) and symbols `%` (arbitrary number of arbitrary characters), `_` (single arbitrary character), `\` (escaped literals).
+| Function                                | Definition                                                                                                      |
+|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| `if(cond, then, else)`                  | Checks a condition, and if true (or non-zero), returns the result of an expression                              |
+| `multiIf(cond1, then1, cond2, then2, ..., else)` | Enables chaining multiple `if` statements together, each with a condition and return expression        |
+| `in(value, set)`                        | Checks if an array or string contains a value                                                                   |
+| `match(value, regexp)`                  | Checks whether a string matches a regular expression pattern                                                    |
+| `like`                                  | Checks if a string matches a pattern that contains string(s) and symbols `%`, `_`, `\` (escaped literals)       |
 
 ### Aggregations
 
-- `count`: Counts the values. If you want a condition, use `sumIf`.
-- `count(distinct)`: Counts the number of `uniqExact` values.
-- `uniq`: Calculates the approximate number of different values (`uniqExact` is slower but exact).
-- `uniqExact`: Calculates the exact number of different argument values (`uniq` is faster and you should use it if a close approximation is good enough).
-- `sum`: Calculates the total (sum) numeric value.
-- `sumIf`: Calculates the total (sum) numeric value for values meeting a condition.
-- `avg`: Calculates the average numeric value.
-- `median`: Computes an approximate middle (50%) value for a numeric data sequence.
+| Aggregation     | Definition                                                                                   |
+|-----------------|----------------------------------------------------------------------------------------------|
+| `count`         | Counts the values. If you want a condition, use `sumIf`                                      |
+| `count(distinct)` | Counts the number of `uniqExact` values                                                    |
+| `uniq`          | Calculates the approximate number of different values (`uniqExact` is slower but exact).     |
+| `uniqExact`     | Calculates the exact number of different argument values (`uniq` is faster and you should use it if a close approximation is good enough). |
+| `sum`           | Calculates the total (sum) numeric value                                                     |
+| `sumIf(column, cond)` | Calculates the total (sum) numeric value for values (`column`) meeting a condition (`cond`) |
+| `avg`           | Calculates the average numeric value                                                         |
+| `median`        | Computes an approximate middle (50%) value for a numeric data sequence.                      |
 
 ### Strings
 
-- `extract`: Extracts a fragment of a string using a regular expression.
-- `concat`: Concatenates strings listed without separator.
-- `splitByChar`: Splits string into substrings separated by a specified character.
-- `replaceOne`, `replaceRegexpOne`: Replace the first occurrence of matching a substring or regular expression pattern respectively with a replacement string.
+| Function                                                              | Definition                                                                                                                                                  |
+|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `extract(haystack, pattern)`                                          | Extracts a fragment of a string (`haystack`) using a regular expression (`pattern`) like `extract(properties.$current_url, 'ref=([^&]*)')`                  |
+| `concat(s1, s2, ...)`                                                 | Concatenates strings (`s1`, `s2`, etc.) listed without separator                                                                                            |
+| `splitByChar(separator, s)`                                           | Splits string (`s`) into substrings separated by a specified character (`separator`)                                                                        |
+| `replaceOne(haystack, pattern, replacement)` | Replace the first occurrence of matching a substring (`pattern`) with a replacement string (`replacement`). Example: `replaceOne(properties.$current_url, 'https://us.posthog.com', '/')` |
+| `replaceRegexpOne(haystack, pattern, replacement)` | Replace the first occurrence of matching a regular expression (`pattern`) with a replacement string (`replacement`)                                                            |
+| `substring(s, start)`                                                 | Extracts a substring from a string (`s`) starting at index (`start`)                                                                                        |
 
 ### Dates
 
-- `dateDiff('unit', startdate, enddate)`: Returns the count in `unit` between `startdate` and `enddate`.
-- `toDayOfWeek`, `toHour`, `toMinute`: Converts date number of day of week (1-7), hour in 24-hour time (0-23), and minute in hour (0-59).
-- `now()`, `today()`, `yesterday()`: Returns the current time, date, or yesterday’s date respectively.
-- `interval`: A length of time for use in arithmetic operations with other dates and times.
+| Function                                  | Definition                                                                                                            |
+|-------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| `dateDiff('unit', startdate, enddate)`    | Returns the count in `unit` between `startdate` and `enddate`                                                         |
+| `toDayOfWeek`, `toHour`, `toMinute`       | Converts date number of day of week (1-7), hour in 24-hour time (0-23), and minute in hour (0-59) like `toHour(timestamp)` |
+| `now()`, `today()`, `yesterday()`         | Returns the current time, date, or yesterday's date respectively                                                      |
+| `interval`                                | A length of time for use in arithmetic operations with other dates and times like `person.properties.trial_started + interval 30 day` |
 
 ## Use cases
 
-- Checking if a property or autocapture element chain contains a specific value or any of an array of values using `in` or `match`.
-- Modifying the display string in the visualization by extracting or concatenating properties using `concat()`, `+`, `extract()`, or `replaceOne`.
-- Grouping or binning events based on properties using `if()`, `multiIf()`.
+- Checking if a property or [autocapture element chain](/tutorials/hogql-autocapture) contains a specific value or any of an array of values using `in` or `match`.
+
+- Modifying the display string in the visualization by extracting or concatenating properties using `concat()`, `+`, `extract()`, or `replaceOne` like `concat('OS Version: ', properties.$os_version)`.
+
+- Grouping or binning events based on properties using `if()`, `multiIf()` like `multiIf(properties.$device_type == 'Desktop', 'Desktop', properties.$os == 'iOS', 'iOS', 'Non-iOS')`.
+
 - Accessing nested properties such as `properties.$set.$geoip_city_name`.
-- Filtering for events that happened in the last X minutes or hours with `dateDiff()`, `now()`, and `interval`.
-- Creating percentages by calculating the sum of one property over the sum of all related properties with `sum()`, `/`, `+`, and `*`.
-- Getting unique values with `uniq()`.
-- Binning events based on time of day, week, and month with `toHour`, `toDayOfWeek`, `toStartOfWeek`, `toMonth`.
-- Breaking down by multiple properties using `concat()`.
+
+- Filtering for events that happened in the last X minutes, hours, or days with `dateDiff()`, `now()`, and `interval` like `dateDiff('minute', timestamp, now()) < 30`.
+
+- Creating percentages by calculating the sum of one property over the sum of all related properties inline with `sum()`, `/`, `+`, and `*` like `sumIf(1, properties.$browser = 'Chrome') / sumIf(1, properties.$browser = 'Safari' or properties.$browser = 'Chrome')`
+
+- Binning events based on time of day, week, and month with `toHour`, `toDayOfWeek`, `toStartOfWeek`, `toMonth` like `multiIf(5 >= toHour(timestamp) and toHour(timestamp) < 12, 'morning', 12 >= toHour(timestamp) and toHour(timestamp) < 17, 'afternoon', 'night')`
+
+- Breaking down by multiple properties using `concat()` like `concat(properties.$os_name, ' - ', properties.$os_version)`.
+
+- Matching URL patterns with `like` like `(properties.$current_url LIKE '%/blog%')`
+
+- Filter null property values with `IS NOT NULL` like `person.properties.$initial_utm_source IS NOT NULL`.
+
+- Breakdown by values in an [array](/tutorials/array-filter-breakdown) by using a combination of `JSONExtractArrayRaw` and `arrayJoin` like `arrayJoin(JSONExtractArrayRaw(properties.$active_feature_flags ?? '[]'), ',')`.
+
+- Extracting the ID from [autocaptured elements](/tutorials/hogql-autocapture) like `extract(elements_chain, '[:|"]attr__id="(.*?)"')`.

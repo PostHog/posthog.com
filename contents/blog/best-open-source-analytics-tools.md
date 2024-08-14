@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 category: General
 tags:
@@ -42,7 +43,7 @@ We maintain separate guides on [open-source feature flag tools](/blog/best-open-
 
 ### 1. PostHog
 
-![posthog](../images/screenshots/hogflix-dashboard.png)
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
 - **GitHub Stars:** 14.4k
 - **Category:** Product and website analytics
@@ -80,7 +81,7 @@ PostHog is useful for engineering, data science, and product teams. As an all-in
 Subscribing to PostHog Cloud removes the project limit and adds numerous paid-only features, including experimentation, correlation analysis, group analytics for tracking organizations, and advanced cohorts. PostHog Cloud is [free up to 1 million events per month](/pricing).
 
 ### 2. Matomo
-![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
+![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 - **GitHub Stars:** 18.4k
 - **Category:** Website analytics
@@ -90,7 +91,7 @@ Subscribing to PostHog Cloud removes the project limit and adds numerous paid-on
 
 #### What is Matomo?
 
-[Matomo](https://matomo.org/) is an open-source platform for website analytics. It's one of the most popular open-source [alternatives to Google Analytics 4](/blog/ga4-alternatives) for website owners and marketing teams. It even offers a data import tool for Google Analytics, so you can bring your data with you. You can run it on-premise or use Matomo's own cloud hosting service.
+[Matomo](/blog/posthog-vs-matomo) is an open-source platform for website analytics. It's one of the most popular open-source [alternatives to Google Analytics 4](/blog/ga4-alternatives) for website owners and marketing teams. It even offers a data import tool for Google Analytics, so you can bring your data with you. You can run it on-premise or use Matomo's own cloud hosting service.
 
 #### Who is Matomo for?
 Matomo is intended for marketing and website teams looking to track content performance and marketing attribution. It's suitable for both SMBs and enterprises – the European Union runs a version of Matomo on all its websites.
@@ -108,7 +109,7 @@ Matomo on-premise is available under a AGPLv3 license. It includes Matomo's core
 **Related:** [In-depth PostHog vs Matomo comparison](/blog/posthog-vs-matomo)
 
 ### 3. Metabase
-![Metabase - open source analytics tools](../images/blog/open-source-analytics-tools/metabase-screenshot.png)
+![Metabase - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/metabase-screenshot.png)
 
 - **GitHub Stars:** 34.9k
 - **Category:** Dashboarding and business intelligence
@@ -134,7 +135,7 @@ Metabase's drag-and-drop interface makes it accessible for technical and non-tec
 Metabase is available under a AGPL license. A limited version of the product is available for free, while an Enterprise license is available for a cost. Check [the Metabase repo](https://github.com/metabase/metabase) for more information.
 
 ### 4. Plausible Analytics
-![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
+![Plausible Analytics - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
 - **GitHub Stars:** 16.8k
 - **Category:** Website analytics
@@ -162,7 +163,7 @@ Plausible Analytics is available under a AGPLv3 license and can be self-hosted v
 > **Also consider:** Plausible is one of a large subset of privacy-first analytics products that have proven popular in the wake of GDPR and less permissive attitudes to user tracking. [Umami](https://umami.is/) is another popular, open-source product in this space. Read our [GDPR analytics guide](/blog/best-gdpr-compliant-analytics-tools) for more options.
 
 ### 5. Grafana
-![Grafana - open source analytics tools](../images/blog/open-source-analytics-tools/grafana-screenshot.png)
+![Grafana - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/grafana-screenshot.png)
 
 - **GitHub Stars:** 58k
 - **Category:** Dashboarding and data observability
@@ -191,7 +192,7 @@ Grafana is available to self-host under an AGPLv3 license. Grafana Cloud also ha
 
 ### 6. Umami
 
-![umami analytics](../images/blog/open-source-analytics-tools/umami.png)
+![umami analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/umami.png)
 
 - **GitHub Stars:** 16.9k
 - **Category:** Website analytics
@@ -219,7 +220,7 @@ Umami is available via an MIT license. The cloud hosted option is free up to 10k
 
 ### 7. OpenReplay
 
-![openreplay - open source analytics tools](../images/blog/open-source-analytics-tools/openreplay.png)
+![openreplay - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/openreplay.png)
 
 - **GitHub Stars:** 8.2k
 - **Category:** Session replay and funnel analysis
@@ -246,7 +247,7 @@ OpenReplay is available under the ELv2 license. An Enterprise version adds addit
 
 ### 8. GrowthBook
 
-![GrowthBook - best open source analytics tools](../images/blog/open-source-testing-tools/growthbook.png)
+![GrowthBook - best open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/growthbook.png)
 
 - **GitHub Stars:** 5.1k
 - **Category:** Experimentation
@@ -256,15 +257,15 @@ OpenReplay is available under the ELv2 license. An Enterprise version adds addit
 
 #### What is GrowthBook?
 
-GrowthBook is an [open source A/B testing](/blog/best-open-source-ab-testing-tools) and feature flag tool for teams who want granular control over rolling out new features, and the ability to validate those changes through experiments. 
+[GrowthBook](/blog/posthog-vs-growthbook) is an [open source A/B testing](/blog/best-open-source-ab-testing-tools) and feature flag tool for teams who want granular control over rolling out new features, and the ability to validate those changes through experiments. 
 
-It supports multiple development environments, each with a unique API endpoint, and its comprehensive feature flag functionality allows for targeting based on user properties.
+It supports multiple development environments, each with a unique API endpoint, and its comprehensive feature flag functionality allows for targeting based on person properties.
 
 You don't need to import metric data into GrowthBook as it works with your data wherever it lives, be that a data warehouse or an analytics tool like Mixpanel, but it lacks any additional analytical features.
 
 #### Who is GrowthBook for?
 
-GrowthBook is ideal for engineering teams who want flexible, instant control over what users see in their product and already have, or don't require, a broader analytics platform.
+[GrowthBook](/blog/best-growthbook-alternatives) is ideal for engineering teams who want flexible, instant control over what users see in their product and already have, or don't require, a broader analytics platform.
 
 #### Strengths
 - Multivariate feature flags
@@ -277,7 +278,7 @@ GrowthBook is ideal for engineering teams who want flexible, instant control ove
 GrowthBook is distributed under an MIT license and self-hosted is supported at no cost. The cloud version is free for up to three users, and $20 per user per month thereafter. 
 
 ### 9. Redash
-![Redash - open source analytics tools](../images/blog/open-source-analytics-tools/redash.png)
+![Redash - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/redash.png)
 
 - **GitHub Stars:** 24.1k
 - **Category:** Dashboarding and business intelligence
@@ -305,7 +306,7 @@ Redash is ideal for engineering and data teams who want lots of flexibility for 
 Redash is distributed via a BSD-2-Clause license. It currently has no paid tiers or limitations.
 
 ### 10. Apache Superset
-![superset - open source analytics tools](../images/blog/open-source-analytics-tools/superset.png)
+![superset - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/superset.png)
 
 - **GitHub Stars:** 55.3k
 - **Category:** Dashboarding and business intelligence
@@ -334,7 +335,7 @@ Superset is ideal for enterprises with experienced in-house data teams. It can h
 Apache Superset is distributed under an Apache-2.0 license. There are no paid features or tiers.
 
 ### 11. Countly
-![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
+![Countly - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/countly-screenshot.png)
 
 - **GitHub Stars:** 5.3k
 - **Category:** Product analytics
@@ -362,7 +363,7 @@ Countly's Community Edition is available under a AGPLv3 license, but it's somewh
 
 ### 12. Open Web Analytics
 
-![open web analytics](../images/blog/open-source-analytics-tools/owa.png)
+![open web analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/owa.png)
 
 - **GitHub Stars:** 2.2k
 - **Category:** Website analytics
@@ -389,3 +390,5 @@ OWA suits developers who want self-hosted analytics, but desire more tracking ca
 
 #### Open source license and monetization
 Open Web Analytics is distributed under the GPL-2.0 license. There are no paid features.
+
+<NewsletterForm />

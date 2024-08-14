@@ -3,13 +3,14 @@ date: 2024-03-05
 title: Pragmatic startup lessons from Elon Musk
 author:
   - james-hawkins
-featuredImage: ../images/newsletter/beyond-10x-engineer/elon.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/beyond-10x-engineer/elon.jpg
 featuredImageType: full
-tags: 
- - Being a founder
+tags:
+  - Being a founder
 crosspost:
   - Blog
-  - Newsletter 
+  - Newsletter
 ---
 
 Elon Musk is many things. Erratic. Uncompromising. A prolific shitposter.
@@ -33,7 +34,7 @@ As CTO and CEO, Tim and I are trying to work like this more and more. We aim to 
 
 Fun is undervalued in startup lore and Elon [clearly gets a kick out](https://www.youtube.com/watch?v=rWdavYiwh0I) of what he does, even if some of his weirder projects don’t work out!
 
-![elon-tweet](../images/newsletter/beyond-10x-engineer/elon-tweet.png)
+![elon-tweet](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/beyond-10x-engineer/elon-tweet.png)
 
 Making decisions based on what we find fun and interesting has lead to remarkable things happening with our website, marketing, customer success, and product.
 
@@ -48,6 +49,8 @@ We didn’t enjoy it.
 We didn’t enjoy the sales process, and we didn’t enjoy debugging other people's infrastructure. Lifting those burdens instantly made PostHog more fun and forward-looking.
 
 > **Takeaway:** The easiest way to fail is to simply lose interest. When we made that decision, we optimized for what would keep us and our team motivated in the long term. We optimized for (meaningful) fun.
+
+<NewsletterForm />
 
 ## 3. When artificial deadlines do (and don’t) work
 
@@ -124,3 +127,5 @@ Many VCs will tell you to hire like crazy when you have [product-market fit](/fo
 - **[My Sixth Year as a Bootstrapped Founder](https://mtlynch.io/solo-developer-year-6/) – Michael Lynch:** Lessons from Lynch in his sixth year bootstrapping, where he finally reached $1 million in revenue.
 
 - **[How to fix broken teams](https://blog.staysaasy.com/p/how-to-fix-broken-teams) – Stay SaaSy:** StaySaaSy shares some actionable tips on how to fix to failing teams.
+
+<NewsletterForm />

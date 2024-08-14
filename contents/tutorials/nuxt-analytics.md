@@ -1,13 +1,16 @@
 ---
 title: How to set up analytics in Nuxt
 date: 2024-01-19
-author: ["lior-neu-ner"]
-tags: ['product analytics']
+featuredVideo: https://www.youtube-nocookie.com/embed/7-GS9srUsqs
+author:
+  - lior-neu-ner
+tags:
+  - product analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/nuxt-surveys/events-light.png'
-import EventsDark from '../images/tutorials/nuxt-surveys/events-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-surveys/events-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Nuxt.js app. To show you how to set up analytics, in this tutorial we create a basic Nuxt app, add PostHog on both the client and server, and use it to capture pageviews and custom events.
 
@@ -71,7 +74,7 @@ Lastly, replace the code in `app.vue` with:
 
 The basic setup is now complete. Run `npm run dev` to see your app.
 
-![Basic Nuxt app](../images/tutorials/nuxt-analytics/basic-app.png)
+![Basic Nuxt app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nuxt-analytics/basic-app.png)
 
 ## Adding PostHog on the client side
 
@@ -93,7 +96,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_instance_address>'
+      posthogHost: '<ph_client_api_host>'
     }
   }
 })
@@ -117,6 +120,7 @@ export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: runtimeConfig.public.posthogHost,
+    person_profiles: 'identified_only',
   })
   
   return {
@@ -144,7 +148,7 @@ If we want to capture every route change, we must write code to capture pageview
 
 In `posthog.client.js`, set up PostHog to capture pageviews in the `router.afterEach` function. Additionally, you can use `nextTick` so that you capture the event after the page is mounted.
 
-```js plugins/posthog.client.js
+```js file=plugins/posthog.client.js
 import { defineNuxtPlugin } from '#app'
 import posthog from 'posthog-js'
 
@@ -152,6 +156,7 @@ export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: runtimeConfig.public.posthogHost,
+    person_profiles: 'identified_only'
     capture_pageview: false // set this to false since we manually capture pageviews in router.afterEach
   })
 
@@ -252,7 +257,7 @@ import { PostHog } from 'posthog-node';
 
 export default defineEventHandler(async (event) => {
   const runtimeConfig = useRuntimeConfig();
-  const cookieString = event.req.headers.cookie || '';  
+  const cookieString =  event.node.req.headers.cookie || '';  
   const cookieName =`ph_${runtimeConfig.public.posthogPublicKey}_posthog`;
   const cookieMatch = cookieString.match(new RegExp(cookieName + '=([^;]+)'));
   

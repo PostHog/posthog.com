@@ -23,6 +23,7 @@ import { Label } from './components/Label'
 import { List } from './components/List'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
+import Link from './components/Link'
 import { PrivateLink } from './components/PrivateLink'
 import { AbTesting } from './components/Product/AbTesting'
 import { FeatureFlags } from './components/Product/FeatureFlags'
@@ -53,6 +54,7 @@ import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
 import { Startups } from './components/Startups'
 import { TracksCTA } from './components/TracksCTA'
+import { Tweet } from './components/Tweet'
 import { ZendeskTicket } from './components/ZendeskTicket'
 
 export const shortcodes = {
@@ -79,6 +81,7 @@ export const shortcodes = {
     List,
     OverflowXSection,
     Quote,
+    Link,
     PrivateLink,
     AbTesting,
     FeatureFlags,
@@ -109,5 +112,6 @@ export const shortcodes = {
     StarRepoButton,
     Startups,
     TracksCTA,
+    Tweet,
     ZendeskTicket,
 }

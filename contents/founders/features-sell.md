@@ -3,14 +3,15 @@ date: 2022-11-02
 title: 'Tell me about features, not benefits'
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
- - Marketing
- - Sales & CS
- - Founders
+  - Marketing
+  - Sales & CS
+  - Founders
 crosspost:
-  - Blog 
+  - Blog
 ---
 
 Features tell, benefits sell. Well, they used to.
@@ -66,3 +67,5 @@ We ran an a/b test, using your favorite open source product OS, and happily saw 
 ## Users are as clever as you
 
 Often, users _do_ know the product category they're interested in. I know, for example, the approximate benefits a CRM brings, and I want to choose one that suits my team particularly well. Otherwise I wouldn't have been looking for one in the first place. Show me how your features stack up. Please don't tell me you'll "drive growth with magical customer 360 experiences" (Salesforce's homepage today) – this doesn't help me compare your product to your competitors, and it makes me feel like you're manipulating me instead of helping me decide if you are actually useful.
+
+<NewsletterForm />

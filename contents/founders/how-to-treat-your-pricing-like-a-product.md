@@ -3,7 +3,8 @@ date: 2023-04-19
 title: How (and why) we treat pricing like a product
 author:
   - raquel-m-smith
-featuredImage: ../images/blog/happy-hog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/happy-hog.png
 featuredImageType: full
 tags:
   - Founders
@@ -14,7 +15,6 @@ tags:
 crosspost:
   - Product engineers
   - Blog
-
 ---
 "Pricing is important" is common knowledge – price determines profit margin, which directly or indirectly determines nearly everything else. 
 
@@ -117,3 +117,5 @@ After all, when customer needs are met, this kind of mutually beneficial magic i
 - [Counterintuitive lessons about our pricing](/blog/pricing-lessons): Imagine being able to grow twice as fast with just a few hours of work. Changing your pricing has a real chance to get you there. PostHog CEO, James Hawkins, shares what he's learned.
 
 - [10x engineers talk to users](/blog/10x-engineers-do-user-interviews): PostHog's Head of Product, Luke Harries, on why "best way to become a 10x engineer is to zoom out and solve for user impact."
+
+<NewsletterForm />

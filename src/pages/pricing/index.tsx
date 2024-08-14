@@ -1,8 +1,9 @@
-import Pricing from 'components/Pricing/Pricing'
 import React, { useEffect, useState } from 'react'
+import usePostHog from 'hooks/usePostHog'
 import { useLocation } from '@reach/router'
 import { pricingMenu } from '../../navs'
 import Layout from 'components/Layout'
+import PricingExperiment from 'components/Pricing/PricingExperiment'
 
 const internalProductNames: {
     [key: string]: string
@@ -12,6 +13,7 @@ const internalProductNames: {
     'feature-flags': 'feature_flags',
     'ab-testing': 'ab_testing',
     surveys: 'surveys',
+    'data-warehouse': 'data_warehouse',
 }
 
 const pricingGroupsToShowOverride: {
@@ -20,7 +22,33 @@ const pricingGroupsToShowOverride: {
     'ab-testing': ['feature_flags'],
 }
 
+const Skeleton = () => {
+    return (
+        <div className="my-8 max-w-7xl mx-auto px-4">
+            <div className=" grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div className="max-w-[300px] w-full h-[50px] animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
+                    <div className="max-w-[500px] w-full h-[25px] animate-pulse bg-accent dark:bg-accent-dark rounded-md mt-6" />
+                    <div className="max-w-[290px] w-full h-[25px] animate-pulse bg-accent dark:bg-accent-dark rounded-md mt-2" />
+                    <div className="max-w-[150px] w-full h-[35px] animate-pulse bg-accent dark:bg-accent-dark rounded-md mt-6" />
+                </div>
+                <div className="w-full h-[300px] animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
+            </div>
+            <div className="max-w-[180px] w-full h-[30px] animate-pulse bg-accent dark:bg-accent-dark rounded-md mt-8" />
+            <div className="w-full h-[1px] animate-pulse bg-accent dark:bg-accent-dark rounded-md mt-3" />
+            <div className="max-w-[320px] w-full h-[25px] animate-pulse bg-accent dark:bg-accent-dark rounded-md my-6" />
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 h-[800px] md:h-[400px] gap-4">
+                <div className="w-full h-full animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
+                <div className="w-full h-full animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
+                <div className="w-full h-full animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
+                <div className="w-full h-full animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
+            </div>
+        </div>
+    )
+}
+
 const PricingPage = (): JSX.Element => {
+    const posthog = usePostHog()
     const { search } = useLocation()
     const [groupsToShow, setGroupsToShow] = useState<undefined | string[]>()
     const [currentProduct, setCurrentProduct] = useState<string | null>()
@@ -46,7 +74,7 @@ const PricingPage = (): JSX.Element => {
                 ]
             }
         >
-            <Pricing currentProduct={currentProduct} groupsToShow={groupsToShow} />
+            <PricingExperiment currentProduct={currentProduct} groupsToShow={groupsToShow} />
         </Layout>
     )
 }

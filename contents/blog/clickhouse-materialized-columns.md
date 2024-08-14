@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - karl-aksel-puulmann
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -154,5 +155,5 @@ As a product, we're only scratching the surface of what ClickHouse can do to pow
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
-<ArrayCTA />
+<NewsletterForm />
 

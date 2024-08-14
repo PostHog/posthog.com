@@ -1,8 +1,10 @@
 ---
-title: "Beyond the 10x engineer"
+title: Beyond the 10x engineer
 date: 2024-02-08
-author: ["ian-vanagas"]
-featuredImage: ../images/newsletter/beyond-10x-engineer/super-hog.png
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/beyond-10x-engineer/super-hog.png
 featuredImageType: full
 tags:
   - Engineering
@@ -36,11 +38,11 @@ We don’t have product management or design by default, so they need these skil
 
 [Robbie Coomber](/community/profiles/1187), for example, is a one-person team working on [web analytics](/docs/web-analytics). The [first version](https://github.com/PostHog/posthog/pull/17626) in production was very simple:
 
-![early version](../images/newsletter/beyond-10x-engineer/early-web-analytics.png)
+![early version](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/beyond-10x-engineer/early-web-analytics.png)
 
 He’s since figured out the right visuals, added scroll depth to autocapture, addressed user feedback, optimized query performance, tested sampling, and more.
 
-![later version](../images/newsletter/beyond-10x-engineer/newer-web-analytics.png)
+![later version](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/beyond-10x-engineer/newer-web-analytics.png)
 
 The work it took to reach the current beta phase has required skills across the stack.  
 
@@ -82,6 +84,8 @@ Because engineers shape the direction of every product, having this trait ensure
 
 > **What to look for:** People who build cool stuff for the sake of it – e.g. side projects, open source contributions – and haven’t job-hopped to optimize title or salary.
 
+<NewsletterForm />
+
 ## 4. Customer obsessed
 
 To uncover the real problems users have (and value), [product engineers](/blog/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
@@ -92,7 +96,7 @@ To uncover the real problems users have (and value), [product engineers](/blog/w
 
 For example, [Eric](/community/profiles/115) is building our [data warehouse](/docs/data-warehouse). His goal, instead of features built or usage, is 5 reference customers. To make this happen, he has been finding potential users and shaping the product to their requirements. His choice of early connectors (Stripe, Hubspot, and Postgres) was driven by a [survey](/surveys) he ran.
 
-![survey results](../images/newsletter/beyond-10x-engineer/survey-results.png)
+![survey results](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/beyond-10x-engineer/survey-results.png)
 
 The opposite of this is being dogmatic and solution-obsession. This is being attached to the “right” way or “how we’ve always done it.” It is researching and planning instead of building. It is polishing a feature instead of releasing it and iterating.
 
@@ -144,3 +148,5 @@ Because we believe talent compounds, it is worth the extra work to find someone 
 - **[What Distinguishes Great Software Engineers?](https://newsletter.getdx.com/p/great-engineers) – Abi Noda:** Beyond being a component coder, maximizing the current value of work, making good decisions, and learning continuously set great engineers apart.
 
 - **[What startup recruiters actually see when you apply for a job](/founders/what-recruiters-see) - Charles Cook:** We had 9,000 people apply for roles at PostHog in the last 12 months. Charles goes over how we evaluate them and how to set yourself apart.
+
+<NewsletterForm />

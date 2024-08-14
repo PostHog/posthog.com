@@ -14,7 +14,7 @@ If you are looking for guidance on how to manage customers in HubSpot specifical
 ## Hands-on Process 
 
 1. Customer will either:
-   1. Fill in the contact form on the [contact](/contact-sales) page, which captures what they are interested in as well as metrics such as MAUs, event count etc.
+   1. Fill in the contact form on the [contact](/talk-to-a-human) page, which captures what they are interested in as well as metrics such as MAUs, event count etc.
    1. Email us directly at sales@
 1. We'll do some ICP scoring and either route them to self-serve or email them introducing ourselves and answering any questions they've shared as well as offering up a call/demo to discuss their needs further.
 1. On the initial call we'll spend some time understanding what they want and then optionally give a [demo](/handbook/growth/sales/demos) if that's what they are there for.
@@ -22,7 +22,7 @@ If you are looking for guidance on how to manage customers in HubSpot specifical
 1. If they are ready to get started with PostHog, we should either:
    1. For lower volume customers we should send them a getting started templated email which providers pointers on how to get set up as well as where to get help if they get stuck.
    2. For higher volume customers we can create a Slack Connect channel in our Company Slack, this allows us to provide more focused support to ensure that they are successful.
-1. As a priority we should get them sending data in from production (even just a small part of thair app) so that they can see the value of PostHog quickly (decreasing time to revenue) see how we do this in the Onboarding section below.
+1. As a priority we should get them sending data in from production (even just a small part of their app) so that they can see the value of PostHog quickly (decreasing time to revenue) see how we do this in the Onboarding section below.
 
 
 ## Self-serve Process
@@ -31,7 +31,7 @@ For customers that sign up themselves, and begin using the product, we provide a
 
 1. [Docs](/docs)
 1. [Tutorials](/tutorials)
-1. [Pre-recorded demo](/book-a-demo)
+1. [Pre-recorded demo](/demo)
 1. [Community page](/posts)
 
 Additionally, all users can contact us for support/bugs/feedback using the `?` icon in the top right of the PostHog app. This is routed to the appropriate team in Zendesk.
@@ -104,8 +104,7 @@ Yes! See [migration tools repo](https://github.com/PostHog/posthog-migration-too
 
 _Can a customer transfer from Cloud to Self-hosted?_
 
-Yes! See [the Replicator app](/docs/apps/replicator) for events and the [migrate meta](https://github.com/PostHog/posthog-migrate-meta) repo for everything else.
-
+Yes! [Raise a support ticket in the app](https://app.posthog.com/home#supportModal) under Data Management.
 
 _What if the customer knows their user volumes but has no idea about number of events?_
 

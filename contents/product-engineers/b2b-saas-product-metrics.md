@@ -1,7 +1,8 @@
 ---
 date: 2022-10-26
 title: The most useful B2B SaaS product metrics
-featuredImage: ../images/blog/b2b-product-metrics/b2b-product-metrics.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/b2b-product-metrics/b2b-product-metrics.jpeg
 featuredImageType: full
 author:
   - andy-vandervell
@@ -13,7 +14,7 @@ tags:
   - Growth
 crosspost:
   - Founders
-  - Blog  
+  - Blog
 ---
 
 So, you're building a B2B SaaS product.
@@ -95,6 +96,8 @@ The retention rate formula is `((customers at end of period - new customers) / c
 What constitutes a good ratio depends on the sector, but a [2017 report by Mixpanel](https://discover.mixpanel.com/rs/461-OYV-624/images/2017-Mixpanel-Product-Benchmarks-Report.pdf) suggests SaaS products average 13%, and that a good ratio is 20% or more.
 
 **Is it useful?** Yes, but you need to be careful as a large increase in monthly users can skew your ratio. It's best used by late-stage companies with predictable monthly growth, which is probably why it's popular at Facebook.
+
+<NewsletterForm />
 
 ### Feature usage
 
@@ -227,3 +230,5 @@ You may also find the following guides useful:
 - [Finding your north star metric](/blog/north-star-metrics): All SaaS products can benefit from a north star metric and this guide will help you find one
 
 - [How to measure product-market fit](/blog/measure-product-market-fit): Product-market fit isn't just an ephemeral gut feeling. You can measure it, and it moves as your customer's needs change. 
+
+<NewsletterForm />

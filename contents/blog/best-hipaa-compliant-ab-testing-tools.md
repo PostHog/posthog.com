@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/open-source-testing-tools/testinghog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
 category: General
 tags:
@@ -39,7 +40,7 @@ These are the broad principles, but **please consult an expert** before making a
 
 ### 1. PostHog
 
-![PostHog](../images/screenshots/ab-testing.png)
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/ab-testing.png)
 
 #### Features
 
@@ -60,7 +61,7 @@ PostHog offers a BAA on its Teams plan, which starts at $450 and includes [gener
 
 ### 2. Kameleoon
 
-![kameleoon](../images/blog/hipaa-compliant-ab-testing/kameleoon.png)
+![kameleoon](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/kameleoon.png)
 
 #### Features
 
@@ -75,13 +76,15 @@ PostHog offers a BAA on its Teams plan, which starts at $450 and includes [gener
 
 #### Summary
 
-[Kameleoon](https://vwo.com/) is an A/B testing and personalization platform. It supports A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), and feature flags for managing the rollout of new features and running tests. In addition to testing, it has a real-time personalization engine that's particularly useful for e-commerce. It doesn't have any deeper analytics features, so you'll need to run it alongside another [HIPAA-compliant analytics tool](/blog/best-hipaa-compliant-analytics-tools) to gather deeper user behavior data.
+Kameleoon is an A/B testing and personalization platform. It supports A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples), and feature flags for managing the rollout of new features and running tests. In addition to testing, it has a real-time personalization engine that's particularly useful for e-commerce. It doesn't have any deeper analytics features, so you'll need to run it alongside another [HIPAA-compliant analytics tool](/blog/best-hipaa-compliant-analytics-tools) to gather deeper user behavior data.
 
-Kameleoon doesn't publish pricing publicly, but conversion optimization consultants BrillMark [reports](https://www.brillmark.com/kameleoon-ab-testing-platform/#:~:text=The%20yearly%20licensing%20pricing%20for,pay%20for%20the%20annual%20license) pricing starts at $35,000 per year and scales based on traffic volume, making it a premium option.  
+Kameleoon doesn't publish pricing publicly, but conversion optimization consultants BrillMark [reports](https://www.brillmark.com/kameleoon-ab-testing-platform/#:~:text=The%20yearly%20licensing%20pricing%20for,pay%20for%20the%20annual%20license) pricing starts at $35,000 per year and scales based on traffic volume, making it a premium option.
+
+<NewsletterForm />
 
 ### 3. VWO
 
-![vwo testing](../images/blog/hipaa-compliant-ab-testing/vwo-testing.png)
+![vwo testing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/vwo-testing.png)
 
 #### Features
 
@@ -96,13 +99,13 @@ Kameleoon doesn't publish pricing publicly, but conversion optimization consulta
 
 #### Summary
 
-[VWO](https://vwo.com/) is best known as an A/B testing platform for e-commerce websites and mobile apps, though it also offers basic session replay and analytics tools as part of its myriad pricing tiers. A/B testing features includes support for multi-armed bandit, a visual editor, and advanced targeting options, such as targeting based on screen resolution.
+[VWO](/blog/best-vwo-alternatives) is best known as an A/B testing platform for e-commerce websites and mobile apps, though it also offers basic session replay and analytics tools as part of its myriad pricing tiers. A/B testing features include support for multi-armed bandit, a visual editor, and advanced targeting options, such as targeting based on screen resolution.
 
 Unlike most tools in this list, VWO charges separately for website and mobile apps based on monthly tracked users (MTUs) for both, so it can get expensive quickly if you need both. VWO offers a BAA when you pay for the Security Plus Add-on ($529 per month).
 
 ### 4. LaunchDarkly
 
-![LaunchDarkly mobile app A/B tests](../images/blog/best-mobile-app-ab-testing-tools/launch-darkly.png)
+![LaunchDarkly mobile app A/B tests](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-mobile-app-ab-testing-tools/launch-darkly.png)
 
 #### Features
 

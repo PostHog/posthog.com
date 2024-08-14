@@ -20,12 +20,14 @@ The Sales & CS team act as genuine partners with our users. We should feel as mo
 
 - Being power users of PostHog is a must - otherwise we won't be credible. PostHog is a big and growing platform, so this is a challenge to stay on top of!
 
-- We prioritize getting people set up on multiple products as early as is feasible, as this makes PostHog far more valuable to them and increases our chances of retaining them. 
+- We prioritize getting people set up on multiple products as early as is feasible, as this makes PostHog far more valuable to them and increases our chances of retaining them.
+
+- We don't do margin negative deals in order to win - this doesn't set us up for a successful long term relationship with a paying customer if we're ultimately losing money to land them. Yes, this includes fancy companies whose logos would make us look good. 
 
 
 ## Sales & CS vision 
 
-PostHog's [vision](https://posthog.com/handbook/strategy/overview#long-term-vision-for-2026) is to reach $100m ARR and build a genuinely enduring company. This is what we think CS at PostHog will look like at that point. 
+PostHog's [vision](/handbook/strategy/overview#long-term-vision-for-2026) is to reach $100m ARR and build a genuinely enduring company. This is what we think CS at PostHog will look like at that point. 
 
 ### Things we want to be great at
 
@@ -93,7 +95,7 @@ We'd typically define a deal as a large deal if it has most of the following:
 
 ## Who the Sales & CS team are
 
-Our small team page is maintained [here](/teams/customer-success). By 2026, we still want to be a very small but highly effective and responsive team (<20 people), rather than a very large sales team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
+Our small team page is maintained [here](/teams/sales-cs). By 2026, we still want to be a very small but highly effective and responsive team (<20 people), rather than a very large sales team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
 
 - People who have very high empathy with product engineers and their needs
 - People who are happy to choose their own objectives if it meets a business goal
@@ -101,30 +103,33 @@ Our small team page is maintained [here](/teams/customer-success). By 2026, we s
 - Hands-on people not motivated by managing a team
 - For anyone sales-focused, we would want to buy PostHog from them - this is more important than cool logos
 
+### How we define roles
+
+- Account executive (AE): responsible for selling to qualified leads, getting them properly using the product (ideally annual contract) and being the main point of contact for retaining/upselling to existing customers assigned to them. This is a hybrid role - we don't sell and then throw over the wall to an accounts team to manage.
+- RevOps manager: responsible for ensuring all our sales & CS systems are all functioning as they should to support us as we scale to $50m+ ARR and thousands of paying customers. This covers both the tools themselves, and how we read and act on product usage signals. 
+- Customer success manager (CSM): responsible for the ongoing relationship with customers who are more in a steady state of usage where an ongoing AE relationship doesn't make sense, or where they have more complex ongoing project management-style needs.
+- Inbound sales development rep (SDR): responsible for generating and qualifying leads. At PostHog, this would specifically mean looking at high quality leads from new signups. We don’t do outbound.
+
+### Team roles
+
 This is how current roles are split - including spaces for the next few hires we want to make!
 
-**Sales led** - people who book a demo
+**Sales**
 - Simon
-  - Sales to Extra Large customers
-  - CSM to Extra Large customers (because expansion is particularly important here)
-  - Routes all inbound demos to appropriate person
+  - AE for Extra Large customers
 - Cameron
-  - Sales to Large and Medium customers
-  - Routes smaller customer to self-serve
-- Charles
-  - Inbound SDR for Large and Extra Large customers (ie. sign ups from big company poking around)
-  - We will hire here, as he will do this badly
-
-**Sales assist** - people who self serve but need a bit of help
-- Future hire 
-  - Helps Medium and Large customers get things like proper spend controls set up if they need it
-  - We're mostly automating this right now
+  - AE for Medium & Large customers
+  - Routes inbound demos to appropriate person
+  - If he does a demo and someone is actually smaller than Medium, route to self serve
+- Actively hiring - 2x AE
+  - Medium & Large customers (1x SF-based)
+- Future hire - Inbound SDR
  
-**Retention & Expansion** - ongoing support and growth of paying customers
+**RevOps & Customer Success**
 - Mine
-  - CSM for all Medium and Large customers post 2 paid invoices
-- Future hire
-  - Another CSM doing the above - we would probably split up Medium and Large customers
+  - Building and leading RevOps
+- Future hire - CSM
+  - Manage steady state/single product customers
  
 **Support**
 - Marcus	
@@ -133,9 +138,3 @@ This is how current roles are split - including spaces for the next few hires we
   - Support engineer (US time zones)
 
 Longer term, expansion/renewals is often a separate team, but we don't need to do this now. 
-
-## How we work
-
-We also have detailed guidance in the sidebar for things like how to manage sales day-to-day under [Sales Operations](/handbook/growth/sales/sales-operations) and [CRM](/handbook/growth/sales/crm). 
-
-We are also responsible for [customer support](/handbook/growth/customer-support) at PostHog. 

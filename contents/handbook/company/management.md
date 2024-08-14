@@ -1,5 +1,5 @@
 ---
-title: Management
+title: Managers and management
 sidebar: Handbook
 showTitle: true
 ---
@@ -11,9 +11,10 @@ As we grow, we'll increase the number of managers at PostHog. Here's what a mana
 A manager at PostHog has a short list of responsibilities:
 1. Setting the right context for your direct reports to do their jobs
 2. Making sure your direct reports are happy and productive
-3. Acting as the [hiring manager](https://posthog.com/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
+3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
 4. Creating good plans for new person onboarding and small team offsites
-5. Raising team performance concerns with the relevant member of the exec team if you need help
+
+If you are a [team lead](/handbook/company/management#a-note-on-team-leads-vs-managers), you are also responsible for ensuring your team performs well. This includes raising team performance concerns with the relevant member of the exec team if you need help or think there is a problem you can't resolve yourself.
 
 That's it.
 
@@ -23,20 +24,20 @@ A manager at PostHog is _not_ responsible for:
 3. Providing a [career progression](/handbook/people/career-progression) plan for your team
 4. Figuring out team structure - today that is all handled by the exec team
 5. "Approving," whether that's projects, expenses, days off, or accounts - people should have admin access by default to most things
-6. Dealing with HR issues - [you should escalate these](/handbook/people/grievances) to Charles
+6. Dealing with HR issues - [you should escalate these](/handbook/people/grievances) to Fraser or Charles
 7. Anything legal-related, e.g. someone wants to quit or thinks they did something illegal - route this to the exec team
 8. Deciding to hire or fire people - the exec team do this
 
 ### Part-time managers
 
-Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job. That means everyone, including the CEO and CTO, still spend the majority of their time on practising what they do best (which likely isn't management!).
+Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job. That means everyone, including the founders, still spend the majority of their time on practicing what they do best - for most managers, this isn't actually management!
 
-As an engineer, you wouldn't respect the opinion of someone who can't code on a coding specific question.
+As an engineer, you wouldn't respect the opinion of someone who can't code on a coding-specific question.
 As a designer, you really want your manager to have an eye for design.
 As an operator, you want to be managed by someone who has scaled a business.
 That's why it's important for managers to keep practising their craft.
 
-Management tasks do come first, as giving context to your team tends to have a multiplying effect vs getting one more PR out. After that though, it's back to work.
+However, management tasks do come _first_, as giving context to your team tends to have a multiplying effect vs getting one more PR out. After that though, it's back to work.
 
 ### How do I set context?
 
@@ -62,7 +63,25 @@ The most important thing you can do is to schedule [regular 1:1s](https://github
 - Weekly 1-1s as a regular check in
 - Bi-annual 1-1s to talk about longer term career plans (make sure you put these in the calendar!)
 
-Talking about long-term career plans every now and again is really important but easy to let slip when things get busy. If you can help people achieve long term plans while hitting PostHog's short term needs - whether at PostHog or not - you'll get people's best work! [We have a set of handy templates to use](https://github.com/PostHog/meta/tree/main/.github/1-1-TEMPLATES) - feel free to adapt these for each team member. 
+Talking about long-term career plans every now and again is also important but easy to let slip when things get busy. If you can help people achieve long term plans while hitting PostHog's short term needs - whether at PostHog or not - you'll get people's best work! [We have a set of handy templates to use](https://github.com/PostHog/meta/tree/main/.github/1-1-TEMPLATES) - feel free to adapt these for each team member.
+
+## Team leads vs managers
+
+You'll sometimes hear us use the term "team lead". A team lead is the leader of a small team. By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created. 
+
+**Team leads are simply responsible for making sure the team performs well.** That includes things like setting context and direction within the team, and making sure the processes and rituals the team uses work well. Like everyone else, team leads should give the people in their team frequent [direct feedback](/handbook/people/feedback). If a new person has joined your team, this is especially important during the [first 90 days](/handbook/people/onboarding#306090-day-check-ins). 
+
+Team leads should make sure sprints take place on a regular basis, and are conducted transparently. Setting direction means the team leads finalize the sprint priorities. It's ok for team members to change what they picked to work on during the sprint, but it's the team leads' responsibility to help make sure team members have the right context to make good decisions if they change plan, and that everyone starts the sprint pointing in the right direction.
+
+### The keeper test
+
+As PostHog grows, it's increasingly important that all team leads help us keep the [bar for performance](/handbook/values#6-talent-compounds) high - we can't centralize this with the founders. To help us scale this, the relevant exec team member will regularly check in with their respective team leads to do a [keeper test](https://jobs.netflix.com/culture) on their team members throughout the year:
+
+1. Ask the team lead 'if X was leaving for a similar role at another company, would you try to keep them?'
+2. Dig in where the answer is 'no' - what would it take for this to be a 'yes'? Is this just temporary, or is there a deeper issue to resolve?
+3. Make sure the manager is sharing all of this feedback with their team to help them improve.
+
+> Side note: anyone can ask their team lead/manager 'how hard would you work to change my mind if I were thinking of leaving?' It's a great way to solicit valuable feedback!
 
 ## Ongoing support for managers
 
@@ -71,6 +90,11 @@ We run a monthly, totally optional discussion group for managers, which Charles 
 - Go around and give an update on how the last month has been for your team, plus any particular challenge you'd like to discuss. You don't always have to bring a discussion topic. - 10min
 - Group selects 1 or 2 challenges to discuss in depth. Usually you'll find there will be a topic applicable to multiple people.
 - Roundtable coaching - 45min
+
+Rules:
+- Assume everything is confidential by default - if you want to raise something outside of the meeting, get permission from the relevant person first. For this reason, we don't take notes - take your own personal notes if you want to remember something. 
+- Make sure everyone gets a chance to speak. If we talked about your topic last time, consider not raising one this time. 
+- The session is about helping you to be a better manager - if you want to solve company-wide/cross-functional problems, there will likely be a better venue for this, e.g. an Issue, Slack, or tech leads meeting. 
 
 ## Recommended reading
 
@@ -84,11 +108,3 @@ There are a million good books out there and you'll want to read more widely, bu
 Specifically for engineering managers:
 - [The Manager's Path](https://www.goodreads.com/en/book/show/33369254) by Camille Fournier
 - [An Elegant Puzzle: Systems of Engineering Management](https://www.goodreads.com/en/book/show/45303387) by Will Larson
-
-## A note on team leads vs managers
-
-You'll sometimes hear us use the term "team lead". A team lead is the leader of a small team. By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created. 
-
-**Team leads are simply responsible for making sure the team performs well.** That includes things like setting context and direction within the team, and making sure the processes and rituals the team uses work well. Like everyone else, team leads should give the people in their team frequent [direct feedback](/handbook/people/feedback).
-
-Team leads should make sure sprints take place on a regular basis, and are conducted transparently. Setting direction means the team leads finalize the sprint priorities. It's ok for team members to change what they picked to work on during the sprint, but it's the team leads' responsibility to help make sure team members have the right context to make good decisions if they change plan, and that everyone starts the sprint pointing in the right direction.

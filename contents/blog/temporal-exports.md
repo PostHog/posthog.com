@@ -1,12 +1,15 @@
 ---
 title: Why and how we moved exports to Temporal
 date: 2023-09-26
-author: ["tomas-farias", "ian-vanagas"]
+author:
+  - tomas-farias
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 ---
@@ -122,7 +125,7 @@ For users, the old system hides runs. Exports now [have their own page](https://
 
 - Create historic exports (backfills) using [date range](https://github.com/PostHog/posthog/pull/16286).
 
-![Exports UI](../images/blog/temporal-exports/exports.png)
+![Exports UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/temporal-exports/exports.png)
 
 The work to make exports transparent required us to improve encryption, too. This included: 
 
@@ -169,3 +172,5 @@ You can keep up with our progress and **provide feedback on our roadmap** in the
 - [How PostHog built an app server (from MVP to billions of events)](/blog/how-we-built-an-app-server)
 - [The modern data stack sucks](/blog/modern-data-stack-sucks)
 - [In-depth: ClickHouse vs Snowflake](/blog/clickhouse-vs-snowflake)
+
+<NewsletterForm />

@@ -3,13 +3,14 @@ date: 2023-02-16
 title: Dev tool marketing for early-stage startups – what we’ve learned
 author:
   - charles-cook
-featuredImage: ../images/blog/transparency.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/transparency.jpeg
 featuredImageType: full
 tags:
   - Founders
   - Marketing
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Since starting PostHog in 2020, we’ve learned a bunch about what does and doesn’t work when it comes to marketing to engineers. There are plenty of articles about ‘developer marketing’ out there, but most of them are either generic or focused on late-stage companies. 
@@ -54,9 +55,11 @@ Don’t upvote your own content, and don’t ask other people to – post it and
 
 ### Beware the attribution mirage
 
-You can’t rely on UTM parameters to tell you where a user actually first heard about you. Example: user reads an article about PostHog on Hacker News -> searches 'posthog' -> clicks on a Google Ad. Our analytics will tell us "wow, Google Ads are awesome!" But that’s not the whole picture. 
+You can’t rely on UTM parameters to tell you where a user actually first heard about you. Example: user reads an article about PostHog on Hacker News -> searches 'posthog' -> clicks on a Google Ad. Our analytics will tell us "wow, [Google Ads](/tutorials/google-ads-reports) are awesome!" But that’s not the whole picture. 
 
 In your product signup flow, include an optional free text box asking people where they first heard about you. About 10% of signups usually fill this in. Read the data and report on it every week. It’s manual but vitally important info.
+
+<NewsletterForm />
 
 ## 🚀 Post-product-market fit
 
@@ -97,3 +100,5 @@ We’ve tried a few channels and are seeing promising results on Twitter, but it
 - Have money? Hire someone who can write content and has a deep understanding of SEO. Do not hire an SEO consultant. Don’t have money? Learn how to SEO good with [Ahrefs](https://ahrefs.com/seo) (chapters 6 and 7 are wayyy less important).
 
 - If you want to start doing paid ads, I can personally recommend [the Demand Curve program](https://www.demandcurve.com/growth-program) – it helped get us off the ground and gives you a solid understanding of how to manage your paid ads agency when you hire one.
+
+<NewsletterForm />

@@ -1,17 +1,19 @@
 ---
 title: How to set up feature flags in Laravel
 date: 2024-02-15
-author: ["lior-neu-ner"]
-tags: ['feature flags']
+author:
+  - lior-neu-ner
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/laravel-feature-flags/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/laravel-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/laravel-feature-flags/create-flag-light.png'
-import CreateFlagDark from '../images/tutorials/laravel-feature-flags/create-flag-dark.png'
-import FlagCaptureLight from '../images/tutorials/laravel-feature-flags/flag-capture-light.png'
-import FlagCaptureDark from '../images/tutorials/laravel-feature-flags/flag-capture-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-feature-flags/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-feature-flags/create-flag-dark.png"
+export const FlagCaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-feature-flags/flag-capture-light.png"
+export const FlagCaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/laravel-feature-flags/flag-capture-dark.png"
 
 [Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them in Laravel using PostHog. 
 
@@ -53,7 +55,7 @@ Route::get('/', function () {
 
 Run `php artisan serve` and navigate to `http://127.0.0.1:8000` to see our app in action.
 
-![Basic Laravel app](../images/tutorials/laravel-feature-flags/basic-app.png)
+![Basic Laravel app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/laravel-feature-flags/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -78,7 +80,7 @@ class AppServiceProvider extends ServiceProvider
         PostHog::init(
             '<ph_project_api_key>',
             [
-                'host' => '<ph_instance_address>'
+                'host' => '<ph_client_api_host>'
             ]
         );
     }
@@ -128,7 +130,7 @@ With PostHog set up, your app is ready for feature flags. To create one, go to t
   classes="rounded"
 />
 
-You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
+You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
 
 ## 4. Implement the flag code
 

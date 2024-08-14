@@ -1,15 +1,17 @@
 ---
-title: "How to set up feature flags in Android"
+title: How to set up feature flags in Android
 date: 2024-02-19
-author: ["lior-neu-ner"]
-tags: ['feature flags']
+author:
+  - lior-neu-ner
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/android-feature-flags/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/android-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/android-feature-flags/create-flag-light.png'
-import CreateFlagDark from '../images/tutorials/android-feature-flags/create-flag-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/android-feature-flags/create-flag-dark.png"
 
 [Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them in Android using PostHog. 
 
@@ -112,7 +114,7 @@ Make sure to add `implementation("androidx.navigation:navigation-compose:2.4.0")
 
 Our basic set up is now complete. Build and run your app to see it in action.
 
-![Basic setup of the Android app](../images/tutorials/android-feature-flags/basic-app.png)
+![Basic setup of the Android app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/android-feature-flags/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -140,14 +142,14 @@ import com.posthog.android.PostHogAndroidConfig
 class MyFeatureFlagsApplication : Application() {
     companion object {
         private const val POSTHOG_API_KEY = "<ph_project_api_key>"
-        private const val POSTHOG_HOST = "<ph_instance_address>" // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+        private const val POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     }
 
     override fun onCreate() {
         super.onCreate()
         val config = PostHogAndroidConfig(
             apiKey = POSTHOG_API_KEY,
-            host = POSTHOG_HOST // TIP: host is optional if you use https://app.posthog.com
+            host = POSTHOG_HOST // TIP: host is optional if you use https://us.i.posthog.com
         )
         PostHogAndroid.setup(this, config)
     }
@@ -190,7 +192,7 @@ With PostHog set up, your app is ready for feature flags. To create one, go to t
   classes="rounded"
 />
 
-You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
+You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
 
 ## 4. Implement the flag code
 
@@ -230,6 +232,6 @@ That's it! When you restart your app and click the button, you should see the gr
 
 ## Further reading
 
-- [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
+- [How to set up session replays in Android](/tutorials/android-session-replays)
 - [How to run A/B tests in Android](/tutorials/android-ab-tests)
 - [How to set up analytics in Android](/tutorials/android-analytics)

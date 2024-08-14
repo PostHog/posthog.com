@@ -3,14 +3,15 @@ date: 2022-10-20
 title: How we made something people want
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
   - Product
   - Product-market fit
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 It's one thing to build _something_, it's another to build something that _people want_.
@@ -150,4 +151,6 @@ You may feel cleverer than users – you built the thing, right?
 
 Wrong! You need them, not the other way around. 
 
-Check your ego and listen to users, stay fast and you'll learn the most by doing. That's how you build something people want.
+Check your ego and listen to users, stay fast, and you'll learn the most by doing. That's how you build something people want.
+
+<NewsletterForm />

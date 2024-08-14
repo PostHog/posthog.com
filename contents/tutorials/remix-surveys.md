@@ -1,20 +1,23 @@
 ---
 title: How to set up surveys in Remix
 date: 2024-02-05
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-12.png
-tags: ['surveys']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+tags:
+  - surveys
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/remix-surveys/events-light.png'
-import EventsDark from '../images/tutorials/remix-surveys/events-dark.png'
-import ImgSurveyResultsLight from '../images/tutorials/remix-surveys/survey-results-light.png'
-import ImgSurveyResultsDark from '../images/tutorials/remix-surveys/survey-results-dark.png'
-import ImgSurveyTemplatesLight from '../images/tutorials/remix-surveys/survey-templates-light.png'
-import ImgSurveyTemplatesDark from '../images/tutorials/remix-surveys/survey-templates-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/events-dark.png"
+export const ImgSurveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/survey-results-light.png"
+export const ImgSurveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/survey-results-dark.png"
+export const ImgSurveyTemplatesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/survey-templates-light.png"
+export const ImgSurveyTemplatesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/remix-surveys/survey-templates-dark.png"
 
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Remix app.
 
@@ -44,7 +47,7 @@ export default function Index() {
 
 Run `npm run dev` and navigate to `http://localhost:3000` to see your app in action.
 
-![Basic Remix app](../images/tutorials/remix-surveys/basic-app.png)
+![Basic Remix app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-surveys/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -67,7 +70,7 @@ import posthog from "posthog-js";
 function PosthogInit() {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
-      api_host: '<ph_instance_address>',
+      api_host: '<ph_client_api_host>',
     });
   }, []);
 
@@ -88,8 +91,8 @@ startTransition(() => {
 Once you’ve done this, reload your app and click the button a few times. You should see events appearing in the [PostHog activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
-  imageLight={EventsInPostHogLight} 
-  imageDark={EventsInPostHogDark} 
+  imageLight={EventsLight} 
+  imageDark={EventsDark} 
   alt="Events captured in PostHog" 
   classes="rounded"
 />
@@ -105,7 +108,7 @@ This tutorial covers how to implement both options:
 
 ### Option 1: Use PostHog's prebuilt survey UI
 
-This is the simplest option. PostHog has many [survey templates](/templates?filter=type&value=survey) to choose from, handles all the display logic, and captures responses for you. You can also customize the questions, branding, and targeting as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
+This is the simplest option. PostHog has many [survey templates](/templates?filter=type&value=survey) to choose from, handles all the display logic, and captures responses for you. You can also customize the questions, branding, and display conditions as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
  
 To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey". 
 
@@ -119,12 +122,12 @@ To create a survey with a prebuilt UI, go to the [surveys tab](https://us.postho
 Select any template, or you can create your own by clicking "Create blank survey". Then, configure your survey with the following details:
 
 1. Ensure `Presentation` is set to **Popover**.
-2. Set the targeting to `All users`.
+2. Set the display conditions to `All users`.
 3. Use the default values for everything else.
 
 Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it in your app. After submitting responses, you can [view results in PostHog](#4-view-results).
 
-![Popover survey in app](../images/tutorials/remix-surveys/popover-survey.png)
+![Popover survey in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-surveys/popover-survey.png)
 
 ### Option 2: Implement your own survey UI
 
@@ -243,11 +246,11 @@ export default function Index() {
 
 This shows a survey popup every time you visit your app's homepage.
 
-![Custom survey UI](../images/tutorials/remix-surveys/sample-survey-ui.png)
+![Custom survey UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-surveys/sample-survey-ui.png)
 
 #### 2. Fetch the survey from PostHog
 
-PostHog keeps track of all active surveys for a user. This is especially helpful if you set up [custom targeting options](/docs/surveys/creating-surveys#targeting). 
+PostHog keeps track of all active surveys for a user. This is especially helpful if you set up [custom display conditions](/docs/surveys/creating-surveys#display-conditions).
 
 To fetch the active surveys, we use `posthog.getActiveMatchingSurveys()`. This returns an array of survey objects that looks like this:
 
@@ -379,7 +382,7 @@ You can capture these events using `posthog.capture()`:
 
   useEffect(() => {
     if (showSurvey && surveyID) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }
@@ -433,7 +436,7 @@ export default function Index() {
 
   useEffect(() => {
     if (showSurvey && surveyID) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }
@@ -464,7 +467,7 @@ After interacting with your survey, you can view results by selecting the survey
 - How many users have dismissed the survey.
 - Responses.
 
-You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
+If you capture identified events, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 <ProductScreenshot
   imageLight={ImgSurveyResultsLight} 

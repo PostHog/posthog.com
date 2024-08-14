@@ -3,13 +3,14 @@ date: 2021-08-26
 title: What's the true role of a product team at an engineering-led organization?
 author:
   - paolodamico
-featuredImage: ../images/blog/product-at-posthog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/product-at-posthog.png
 featuredImageType: full
 tags:
   - Founders
   - Product
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 We’ve talked before about [product-minded engineers](/blog/what-is-a-product-engineer) at PostHog. We don’t have PMs dictating a roadmap or solutions - it all comes from engineering. A PostHog engineer has complete autonomy to decide the 'what' (prioritization) and the 'how' (solution) of the features we build, so Product & Design play a role that’s a bit different to the typical tech startup. 
@@ -54,7 +55,7 @@ So if Engineering handles the roadmap and prioritization, and speccing out solut
 
 - **Maintain the user’s point of view:** As we get into the weeds of building things, it’s easy to forget who we’re building this for. To make sure we deliver the best possible user experience, we continuously run usability tests, feedback calls, and even watch session recordings to see things from a user’s point of view and validate or invalidate our assumptions. I can’t tell you enough how useful and often overlooked running usability tests is (more on this in a future post).
 
-- **Provide feedback & ensure product quality:** We want to build new product features and ensure we’re constantly raising the bar. We do this through continuous quality testing, dogfooding our own product, and challenging engineers to sand the rough edges even in the smallest ways. We’re also always on the lookout for remote edge cases that are easy to miss.
+- **Provide feedback & ensure product quality:** We want to build new product features and ensure we’re constantly raising the bar. We do this through continuous quality testing, [dogfooding our own product](/product-engineers/dogfooding), and challenging engineers to sand the rough edges even in the smallest ways. We’re also always on the lookout for remote edge cases that are easy to miss.
 
 - Help **set up metrics and challenge continuous tracking:** Building things is rewarding in its own right as you can clearly see and judge your output. It’s tempting to ignore actual numbers informing you whether your creation was actually successful or not - but remember, it’s about outcome, not output. Even if you created the most amazing product with the smoothest experience, if no one’s using it or they’re using it incorrectly, it’s a failure (and a lesson). As the Product Team, we’re constantly challenging ourselves and engineers to set up the right metrics that measure actual progress towards our goals. Doing this right also contributes more context for the next product iteration.
 
@@ -91,5 +92,7 @@ Finally, I’d like to share some mistakes we’ve made in our iterative journey
 - **Projects with little to no engineering involvement:** You get a spontaneous idea on how to improve the product, gather some context, explore it, and arrive at a fully spec’d out solution with nary an engineer in sight (usually by accident). Two big problems come from this: a) you don’t reach the best solution because you lack important context, and b) you now have a project ready to be implemented but no engineer to pick it up. When working on ideas, however crazy, always involve engineering from the start - ideally have an engineer co-own the idea with you. 
 
 - **Strongly linked dependencies:** This can happen when you have processes that rely on different people (e.g. design having to review every view that goes into the app) or heavily defined scopes (e.g. if you’re a frontend engineer that can’t touch the backend). When this is present, it’s quite hard to be autonomous and effective because you constantly get blocked by other people. Blurring scopes and removing dependencies makes it easier and faster to ship things. Remember, you have a capable team with good judgement, so no need to encumber the creative process.
+
+<NewsletterForm />
 
 

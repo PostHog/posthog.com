@@ -37,7 +37,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null }))
             ),
             schema: endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null })),
-            url: '/docs/api/' + endpoint.name.replace('_', '-'),
+            url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
             name: endpoint.name,
         }
         createNode(node)
@@ -364,5 +364,56 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
             createNode(node)
         })
+    }
+
+    const fetchSlackEmojis = async () => {
+        const slackToken = process.env.SLACK_API_KEY
+        const { emoji } = await fetch('https://slack.com/api/emoji.list', {
+            headers: {
+                Authorization: `Bearer ${slackToken}`,
+            },
+        }).then((res) => res.json())
+        Object.entries(emoji).forEach(([name, url]) => {
+            const node = {
+                id: createNodeId(`slack-emoji-${name}`),
+                internal: {
+                    type: 'SlackEmoji',
+                    contentDigest: createContentDigest(url),
+                },
+                name,
+                url,
+            }
+            createNode(node)
+        })
+    }
+    if (process.env.SLACK_API_KEY) {
+        await fetchSlackEmojis()
+    }
+    const fetchG2Reviews = async (url) => {
+        const g2Token = process.env.G2_API_KEY
+        const { data, links } = await fetch(url, {
+            headers: {
+                Authorization: `Token ${g2Token}`,
+            },
+        }).then((res) => res.json())
+        if (data?.length > 0) {
+            data.forEach((review) => {
+                const node = {
+                    id: createNodeId(`g2-review-${review.id}`),
+                    internal: {
+                        type: 'G2Review',
+                        contentDigest: createContentDigest(review),
+                    },
+                    ...review,
+                }
+                createNode(node)
+            })
+        }
+        if (links?.next) {
+            await fetchG2Reviews(links.next)
+        }
+    }
+    if (process.env.G2_API_KEY) {
+        await fetchG2Reviews('https://data.g2.com/api/v1/survey-responses?page[size]=100')
     }
 }

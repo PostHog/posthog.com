@@ -1,6 +1,7 @@
 ---
 title: Nuxt.js
-icon: ../../images/docs/integrate/frameworks/nuxt.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg
 ---
 
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
@@ -26,7 +27,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_instance_address>'
+      posthogHost: '<ph_client_api_host>'
     }
   }
 })
@@ -40,7 +41,8 @@ import posthog from 'posthog-js'
 export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
-    api_host: runtimeConfig.public.posthogHost || 'https://app.posthog.com',
+    api_host: runtimeConfig.public.posthogHost || '<ph_client_api_host>',
+    person_profiles: 'identified_only',
     capture_pageview: false, // we add manual pageview capturing below
     loaded: (posthog) => {
       if (import.meta.env.MODE === 'development') posthog.debug();
@@ -98,13 +100,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_instance_address>'
+      posthogHost: '<ph_client_api_host>'
     }
   }
 })
 ```
 
-3. Initialize the PostHog Node client where you'd like to use it on the server side. For example, in `[useAsyncData](https://nuxt.com/docs/api/composables/use-async-data)`:
+3. Initialize the PostHog Node client where you'd like to use it on the server side. For example, in [`useAsyncData(https://nuxt.com/docs/api/composables/use-async-data)]`:
 
 ```vue file=app.vue
 <!-- ...rest of code -->
@@ -172,7 +174,8 @@ import Vue from 'vue'
 export default function({ app: { router } }, inject) {
   // Init PostHog
   posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
+    person_profiles: 'identified_only',
     capture_pageview: false,
     loaded: () => posthog.identify('unique_id') // If you can already identify your user
   })
@@ -227,9 +230,13 @@ Let's say for example the user makes a purchase you could track an event like th
 </script>
 ```
 
-## Further reading
+## Next steps
 
+For any technical questions for how to integrate specific PostHog features into Nuxt (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) and [Node](/docs/libraries/node) SDK docs.
+
+Alternatively, the following tutorials can help you get started:
+
+- [How to set up analytics in Nuxt](/tutorials/nuxt-analytics)
+- [How to set up feature flags in Nuxt](/tutorials/nuxt-feature-flags)
 - [How to set up A/B tests in Nuxt](/tutorials/nuxtjs-ab-tests)
-- [PostHog for VueJS users](/docs/libraries/vue-js)
-- [Tracking pageviews in single page apps (SPA)](/tutorials/spa)
-- [Building a Vue cookie consent banner](/tutorials/vue-cookie-banner)
+- [How to set up surveys in Nuxt](/tutorials/nuxt-surveys)

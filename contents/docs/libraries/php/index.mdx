@@ -3,15 +3,16 @@ title: PHP
 sidebarTitle: PHP
 sidebar: Docs
 showTitle: true
-github: https://github.com/PostHog/posthog-php
-icon: ../../../images/docs/integrate/php.svg
+github: 'https://github.com/PostHog/posthog-php'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/php.svg
 features:
-    eventCapture: true
-    userIdentification: true
-    autoCapture: false
-    sessionRecording: false
-    featureFlags: true
-    groupAnalytics: true
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 This is an optional library you can install if you're working with PHP. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
@@ -28,9 +29,9 @@ import PHPSendEvents from '../../integrate/send-events/_snippets/send-events-php
 
 <PHPSendEvents />
 
-## Setting user properties
+## Person profiles and properties
 
-To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
+PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```php
 PostHog::capture(array(
@@ -47,11 +48,32 @@ PostHog::capture(array(
 ));
 ```
 
-For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+
+To capture anonymous events without person profiles, set the event's `$process_person_profile` property to `false`:
+
+```php
+PostHog::capture(array(
+    'distinctId' => 'distinct_id',
+    'event' => 'event_name',
+    'properties' => array(
+        '$process_person_profile' => false
+    )
+));
+```
 
 ## Alias
 
-Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend. 
+
+In this case, you can use `alias` to assign another distinct ID to the same user.
+
+```php
+PostHog::alias(array(
+  'distinctId' => 'distinct_id',
+  'alias' => 'alias_id'
+));
+```
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
@@ -123,7 +145,7 @@ When calling `PostHog::init`, there are various configuration options you can se
 PostHog::init(
     'PROJECT_API_KEY',
     array(
-        'host' => 'https://app.posthog.com', 
+        'host' => '<ph_client_api_host>', 
         'debug' => true,
         'ssl' => false,
         // all options go here

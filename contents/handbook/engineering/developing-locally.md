@@ -13,8 +13,8 @@ Before jumping into setup, let's dissect a PostHog.
 
 The app itself is made up of 4 components that run simultaneously:
 
--   Django server
 -   Celery worker (handles execution of background tasks)
+-   Django server
 -   Node.js plugin server (handles event ingestion and apps/plugins)
 -   React frontend built with Node.js
 
@@ -37,7 +37,7 @@ This is what we'll be using in the guide below.
 > It is also technically possible to run PostHog in Docker completely, but syncing changes is then much slower, and for development you need PostHog dependencies installed on the host anyway (such as formatting or typechecking tools).
 > The other way around – everything on the host, is not practical due to significant complexities involved in instantiating Kafka or ClickHouse from scratch.
 
-The instructions here assume you're running macOS or the current Ubuntu Linux LTS (22.04).
+The instructions here assume you're running macOS or the current Ubuntu Linux LTS (24.04).
 
 For other Linux distros, adjust the steps as needed (e.g. use `dnf` or `pacman` in place of `apt`).
 
@@ -45,20 +45,25 @@ Windows isn't supported natively. But, Windows users can run a Linux virtual mac
 
 In case some steps here have fallen out of date, please tell us about it – feel free to [submit a patch](https://github.com/PostHog/posthog.com/blob/master/contents/handbook/engineering/developing-locally.md)!
 
-## Developing with CodeSpaces
+## Option 1: Developing with Codespaces
 
-This is a faster alternative to get up and running. If you don't want to or can't use Codespaces continue from the next section.
+This is a faster option to get up and running. If you don't want to or can't use Codespaces, continue from the next section.
 
-
-1. Create your codespace
+1. Create your codespace.
 ![](https://user-images.githubusercontent.com/890921/231489405-cb2010b4-d9e3-4837-bfdf-b2d4ef5c5d0b.png)
-2. Update it to 8-core machine type (the smallest is probably too small to get PostHog running properly). Consider also changing "Open in ..." to be your favorite editor.
+2. Update it to 8-core machine type (the smallest is probably too small to get PostHog running properly).
 ![](https://user-images.githubusercontent.com/890921/231490278-140f814e-e77b-46d5-9a4f-31c1b1d6956a.png)
-3. Open a terminal window and run `docker compose -f docker-compose.dev.yml up`
-4. Open a terminal window and run `./bin/migrate` and then `./bin/start`
-5. Open browser to http://localhost:8000/
+3. Open the codespace, using one of the "Open in" options from the list.
+4. In the codespace, open a terminal window and run `docker compose -f docker-compose.dev.yml up`.
+5. Also in the codespace, open another terminal window and run `./bin/migrate` and then `./bin/start`.
+6. Open browser to http://localhost:8000/.
+7. To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`.
 
-## macOS prerequisites
+## Option 2: Developing locally
+
+### Prerequisites
+
+#### macOS
 
 1. Install Xcode Command Line Tools if you haven't already: `xcode-select --install`.
 
@@ -69,9 +74,11 @@ This is a faster alternative to get up and running. If you don't want to or can'
     <code>$PATH</code>. Otherwise the command line will not know about packages installed with <code>brew</code>.
 </blockquote>
 
-3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) and in its settings give Docker **at least 4 GB of RAM** (or 6 GB if you can afford it) and at least 4 CPU cores.
+3. Install [OrbStack](https://orbstack.dev/) – a more performant Docker Desktop alternative – with `brew install orbstack`. Go to OrbStack settings and set the memory usage limit to **at least 4 GB** (or 8 GB if you can afford it) + the CPU usage limit to at least 4 cores (i.e. 400%). You'll want to use Brex for the license if you work at PostHog.
 
-## Ubuntu prerequisites
+4. Continue with the [common prerequisites for both macOS and Linux](#common-prerequisites-for-both-macos--linux).
+
+#### Ubuntu
 
 1. Install Docker following [the official instructions here](https://docs.docker.com/engine/install/ubuntu/).
 
@@ -80,8 +87,9 @@ This is a faster alternative to get up and running. If you don't want to or can'
     ```bash
     sudo apt install -y build-essential
     ```
+3. Continue with the [common prerequisites for both macOS and Linux](#common-prerequisites-for-both-macos--linux).
 
-## Common prerequisites for both macOS & Linux
+#### Common prerequisites for both macOS & Linux
 
 1. Append line `127.0.0.1 kafka clickhouse` to `/etc/hosts`. You can do it in one line with:
 
@@ -99,13 +107,11 @@ This is a faster alternative to get up and running. If you don't want to or can'
     git clone https://github.com/PostHog/posthog && cd posthog/
     ```
 
-## Get things up and running
+### Get things up and running
 
-### 1. Spin up external services
+#### 1. Spin up external services
 
 In this step we will start all the external services needed by PostHog to work.
-
-We'll be using `docker compose`, which is the successor to `docker-compose`. One of its features is better compatibility with ARM environments like Apple Silicon Macs. ([See Docker documentation for details.](https://docs.docker.com/compose/#compose-v2-and-the-new-docker-compose-command))
 
 ```bash
 docker compose -f docker-compose.dev.yml up
@@ -113,16 +119,16 @@ docker compose -f docker-compose.dev.yml up
 
 > **Friendly tip 1:** If you see `Error while fetching server API version: 500 Server Error for http+docker://localhost/version:`, it's likely that Docker Engine isn't running.
 
-> **Friendly tip 2:** If you see "Exit Code 137" anywhere, it means that the container has run out of memory. In this case you need to allocate more RAM in Docker Desktop settings.
+> **Friendly tip 2:** If you see "Exit Code 137" anywhere, it means that the container has run out of memory. In this case you need to allocate more RAM in OrbStack settings.
 
-> **Friendly tip 3:** You _might_ need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall). Or look into [Podman](https://podman.io/getting-started/installation) as an alternative that supports rootless containers.
+> **Friendly tip 3:** On Linux, you might need `sudo` – see [Docker docs on managing Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall). Or look into [Podman](https://podman.io/getting-started/installation) as an alternative that supports rootless containers.
 
->**Friendly tip 4:** If you see `Error: (HTTP code 500) server error - Ports are not available: exposing port TCP 0.0.0.0:5432 -> 0.0.0.0:0: listen tcp 0.0.0.0:5432: bind: address already in use`,  - refer to this [stackoverflow answer](https://stackoverflow.com/questions/38249434/docker-postgres-failed-to-bind-tcp-0-0-0-05432-address-already-in-use). In most cases, you can solve this by stopping the `postgresql` service.
+>**Friendly tip 4:** If you see `Error: (HTTP code 500) server error - Ports are not available: exposing port TCP 0.0.0.0:5432 -> 0.0.0.0:0: listen tcp 0.0.0.0:5432: bind: address already in use`, you have Postgres already running somewhere. Try `docker compose -f docker-compose.dev.yml` first, alternatively run `lsof -i :5432` to see what process is using this port.
 ```bash
 sudo service postgresql stop
 ```
 
-Second, verify via `docker ps` and `docker logs` (or via the Docker Desktop dashboard) that all these services are up and running. They should display something like this in their logs:
+Second, verify via `docker ps` and `docker logs` (or via the OrbStack dashboard) that all these services are up and running. They should display something like this in their logs:
 
 ```shell
 # docker ps                                                                                     NAMES
@@ -179,7 +185,7 @@ This intentionally only installs the Postgres client and drivers, and not the se
 
 On Linux you often have separate packages: `postgres` for the tools, `postgres-server` for the server, and `libpostgres-dev` for the `psycopg2` dependencies. Consult your distro's list for an up-to-date list of packages.
 
-### 2. Prepare the frontend
+#### 2. Prepare the frontend
 
 1. Install nvm, with `brew install nvm` or by following the instructions at https://github.com/nvm-sh/nvm. If using fish, you may instead prefer https://github.com/jorgebucaran/nvm.fish.
 
@@ -198,7 +204,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 > The first time you run typegen, it may get stuck in a loop. If so, cancel the process (`Ctrl+C`), discard all changes in the working directory (`git reset --hard`), and run `pnpm typegen:write` again. You may need to discard all changes once more when the second round of type generation completes.
 
-### 3. Prepare plugin server
+#### 3. Prepare plugin server
 
 Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all required packages. You'll also need to install the `brotli` compression library:
 
@@ -220,7 +226,7 @@ export LDFLAGS=-L/opt/homebrew/opt/openssl/lib
 pnpm i --dir plugin-server
 ```
 
-### 4. Prepare the Django server
+#### 4. Prepare the Django server
 
 1. Install a few dependencies for SAML to work. If you're on macOS, run the command below, otherwise check the official [xmlsec repo](https://github.com/mehcode/python-xmlsec) for more details.
 
@@ -232,28 +238,28 @@ pnpm i --dir plugin-server
    
     - On Debian-based Linux:
         ```bash
-        sudo apt install -y libxml2 libxmlsec1-dev pkg-config
+        sudo apt install -y libxml2 libxmlsec1-dev libffi-dev pkg-config
         ```
 
-1. Install Python 3.10.
+1. Install Python 3.11.
 
-    - On macOS, you can do so with Homebrew: `brew install python@3.10`.
+    - On macOS, you can do so with Homebrew: `brew install python@3.11`.
 
     - On Debian-based Linux:
         ```bash
         sudo add-apt-repository ppa:deadsnakes/ppa -y
         sudo apt update
-        sudo apt install python3.10 python3.10-venv python3.10-dev -y
+        sudo apt install python3.11 python3.11-venv python3.11-dev -y
         ```
 
-Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.10` instead of `python3`.
+Make sure when outside of `venv` to always use `python3` instead of `python`, as the latter may point to Python 2.x on some systems. If installing multiple versions of Python 3, such as by using the `deadsnakes` PPA, use `python3.11` instead of `python3`.
 
 You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage multiple versions of Python 3 on the same machine.
 
 1. Create the virtual environment in current directory called 'env':
 
     ```bash
-    python3.10 -m venv env
+    python3.11 -m venv env
     ```
 
 1. Activate the virtual environment:
@@ -278,7 +284,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 
     ```bash
     brew install openssl
-    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.10-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
+    CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.11-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
     > **Friendly tip:** If you see `ERROR: Could not build wheels for xmlsec`, refer to this [issue](https://github.com/xmlsec/python-xmlsec/issues/254).
@@ -297,7 +303,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     pip install -r requirements-dev.txt
     ```
 
-### 5. Prepare databases
+#### 5. Prepare databases
 
 We now have the backend ready, and Postgres and ClickHouse running – these databases are blank slates at the moment however, so we need to run _migrations_ to e.g. create all the tables:
 
@@ -309,7 +315,7 @@ DEBUG=1 ./bin/migrate
 
 > **Another friendly tip:** You may run into `psycopg2` errors while migrating on an ARM machine. Try out the steps in this [comment](https://github.com/psycopg/psycopg2/issues/1216#issuecomment-820556849) to resolve this.
 
-### 6. Start PostHog
+#### 6. Start PostHog
 
 Now start all of PostHog (backend, worker, plugin server, and frontend – simultaneously) with:
 
@@ -325,7 +331,7 @@ Open [http://localhost:8000](http://localhost:8000) to see the app.
 
 To get some practical test data into your brand-new instance of PostHog, run `DEBUG=1 ./manage.py generate_demo_data`. For a list of useful arguments of the command, run `DEBUG=1 ./manage.py generate_demo_data --help`.
 
-### 7. Develop
+#### 7. Develop
 
 This is it! You can now change PostHog in any way you want. See [Project Structure](/handbook/engineering/project-structure) for an intro to the repository's contents.
 
@@ -349,16 +355,16 @@ You can narrow the run down to only files under matching paths:
 pnpm jest --testPathPattern=frontend/src/lib/components/IntervalFilter/intervalFilterLogic.test.ts
 ```
 
-To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab), and then run:
+To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab). You may also need to install Playwright with `pnpm exec playwright install`. And then run:
 
 ```bash
-pnpm test:visual-regression
+pnpm test:visual
 ```
 
 To only update snapshots for stories under a specific path, run:
 
 ```bash
-pnpm test:visual-regression:stories frontend/src/lib/Example.stories.tsx
+pnpm test:visual:update frontend/src/lib/Example.stories.tsx
 ```
 
 ### Backend
@@ -399,6 +405,8 @@ So, when working with a feature based on feature flag `foo-bar`, [add a feature 
 If you'd like to have ALL feature flags that exist in PostHog at your disposal right away, run `DEBUG=1 python3 manage.py sync_feature_flags` – they will be added to each project in the instance, fully rolled out by default.
 
 This command automatically turns any feature flag ending in `_EXPERIMENT` as a multivariate flag with `control` and `test` variants.
+
+Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSONAL_API_KEY` env var to be set. Generate the key in [your user settings](http://localhost:8000/settings/user#personal-api-keys).
 
 ## Extra: Debugging the backend in PyCharm
 

@@ -1,8 +1,12 @@
 ---
 title: How to set up Next.js A/B tests
 date: 2024-02-16
-author: ["ian-vanagas"]
-tags: ['experimentation', 'feature flags', 'actions']
+author:
+  - ian-vanagas
+tags:
+  - experimentation
+  - feature flags
+  - actions
 ---
 
 [A/B tests](/ab-testing) are a way to make sure the content of your Next.js app performs as well as possible. They compare two or more variations on their impact on a goal.
@@ -34,7 +38,7 @@ export default function Home() {
 
 Once done, run `npm run dev` and go `http://localhost:3000` to see your app.
 
-![App](../images/tutorials/nextjs-ab-tests/app.png)
+![App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-ab-tests/app.png)
 
 ## 2. Add PostHog
 
@@ -57,7 +61,7 @@ import { PostHogProvider } from 'posthog-js/react'
 export function PHProvider({ children }) {
 	if (typeof window !== 'undefined') {
 	  posthog.init('<ph_project_api_key>', {
-	    api_host: '<ph_instance_address>'
+	    api_host: '<ph_client_api_host>'
 	  })
 	}
 
@@ -96,7 +100,7 @@ To enable and launch the toolbar, go to the "[Launch toolbar](https://us.posthog
 
 Name the action "Clicked Main CTA" and then click "Create action."
 
-![Action](../images/tutorials/nextjs-ab-tests/action.png)
+![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-ab-tests/action.png)
 
 > **Note:** You can also use a custom event as a goal metric. See our [full Next.js analytics tutorial](/tutorials/nextjs-app-directory-analytics#capturing-custom-events) for how to set up custom event capture.
 
@@ -128,10 +132,10 @@ Start by installing `uuidv7` and `posthog-node`:
 npm i uuidv7 posthog-node
 ```
 
-Next, create a `utils` folder and create a folder named `gen-id.js`. In this file, we use React's cache feature to generate an ID once and return the same value if we call it again.
+Next, create a `utils` folder and create a folder named `genId.js`. In this file, we use React's cache feature to generate an ID once and return the same value if we call it again.
 
 ```js
-// app/utils/gen-id.js
+// app/utils/genId.js
 import { cache } from 'react'
 import { uuidv7 } from "uuidv7";
  
@@ -141,32 +145,13 @@ export const generateId = cache(() => {
 })
 ```
 
-After this, we are ready to set up the `getBootstrapData` function in `layout.js`:
-
-1. Import PostHog (from Node), the Next `cookies` function, and the `generateId` utility.
-2. Add the `getBootstrapData` function and logic.
-3. Call it from the `RootLayout`.
-4. Pass the data to the `PHProvider`.
+After this, we create another file in `utils` named `getBootstrapData.js`. In it, create a `getBootstrapData` function like this:
 
 ```js
-// app/layout.js
-import './globals.css'
-import PHProvider from "./providers";
+// app/utils/getBootstrapData.js
 import { PostHog } from 'posthog-node'
 import { cookies } from 'next/headers'
-import { generateId } from './utils/gen-id'
-
-export default async function RootLayout({ children }) {
-  const bootstrapData = await getBootstrapData()
-
-  return (
-    <html lang="en">
-      <PHProvider bootstrapData={bootstrapData}>
-        <body>{children}</body>
-      </PHProvider>
-    </html>
-  )
-}
+import { generateId } from './genId'
 
 export async function getBootstrapData() {
   let distinct_id = ''
@@ -185,7 +170,7 @@ export async function getBootstrapData() {
 
   const client = new PostHog(
     phProjectAPIKey,
-    { host: "<ph_instance_address>" })
+    { host: "<ph_client_api_host>" })
   const flags = await client.getAllFlags(distinct_id)
   const bootstrap = {
     distinctID: distinct_id,
@@ -193,6 +178,32 @@ export async function getBootstrapData() {
   }
 
   return bootstrap
+}
+```
+
+Next:
+
+1. Import PostHog (from Node), the Next `cookies` function, and the `generateId` utility.
+2. Import and use the `getBootstrapData` function and logic.
+3. Call it from the `RootLayout`.
+4. Pass the data to the `PHProvider`.
+
+```js
+// app/layout.js
+import './globals.css'
+import PHProvider from "./providers";
+import { getBootstrapData } from './utils/getBootstrapData'
+
+export default async function RootLayout({ children }) {
+  const bootstrapData = await getBootstrapData()
+
+  return (
+    <html lang="en">
+      <PHProvider bootstrapData={bootstrapData}>
+        <body>{children}</body>
+      </PHProvider>
+    </html>
+  )
 }
 ```
 
@@ -207,7 +218,7 @@ import { PostHogProvider } from 'posthog-js/react'
 export default function PHProvider({ children, bootstrapData }) {
   if (typeof window !== 'undefined') {
     posthog.init("<ph_project_api_key>", {
-      api_host: "<ph_instance_address>",
+      api_host: "<ph_client_api_host>",
       bootstrap: bootstrapData
     })
   }
@@ -268,7 +279,7 @@ To set up the A/B test, we change the `app/page.js` component to be server-rende
 
 ```js
 // app/page.js
-import { getBootstrapData } from "./layout"
+import { getBootstrapData } from "./utils/getBootstrapData"
 
 export default async function Home() {
   const bootstrapData = await getBootstrapData()

@@ -3,15 +3,16 @@ title: Android
 sidebarTitle: Android
 sidebar: Docs
 showTitle: true
-github: https://github.com/PostHog/posthog-android
-icon: ../../../images/docs/integrate/android.svg
+github: 'https://github.com/PostHog/posthog-android'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/android.svg
 features:
-    eventCapture: true
-    userIdentification: true
-    autoCapture: false
-    sessionRecording: true
-    featureFlags: true
-    groupAnalytics: true
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: true
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
@@ -28,19 +29,32 @@ import AndroidIdentify from './\_snippets/identify.mdx'
 
 <AndroidSendEvents />
 
-## Identify
+## Identifying users
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
 
 <AndroidIdentify />
 
-### Setting user properties via an event
+## Alias
+
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend.
+
+In this case, you can use `alias` to assign another distinct ID to the same user.
+
+```kotlin
+/**
+ * Create an alias for the current user.
+ */
+PostHog.alias("distinct_id")
+```
+
+We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
+
+## Setting person properties
 
 To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `userProperties` and `userPropertiesSetOnce`.
 
-##### userProperties
-
-**Example**
+When capturing an event, you can pass a property called `userProperties` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
 
 ```kotlin
 import com.posthog.PostHog
@@ -55,13 +69,7 @@ PostHog.capture(
 )
 ```
 
-**Usage**
-
-When capturing an event, you can pass a property called `userProperties` as an event property, and specify its value to be an object with properties to be set on the user that will be associated with the user who triggered the event.
-
-##### userPropertiesSetOnce
-
-**Example**
+`userPropertiesSetOnce` works just like `userProperties`, except that it will **only set the property if the user doesn't already have that property set**.
 
 ```kotlin
 import com.posthog.PostHog
@@ -76,9 +84,37 @@ PostHog.capture(
 )
 ```
 
-**Usage**
+## Super Properties
 
-`userPropertiesSetOnce` works just like `userProperties`, except that it will **only set the property if the user doesn't already have that property set**.
+Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $screen, or anything else.
+
+They are set using `PostHog.register`, which takes a key and value, and they persist across sessions.
+
+For example, take a look at the following call:
+
+```kotlin
+import com.posthog.PostHog
+
+PostHog.register("team_id", 22)
+```
+
+The call above ensures that every event sent by the user will include `"team_id": 22`. This way, if you filtered events by property using `team_id = 22`, it would display all events captured on that user after the `PostHog.register` call, since they all include the specified Super Property.
+
+However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `PostHog.identify`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+
+### Removing stored Super Properties
+
+Super Properties are persisted across sessions so you have to explicitly remove them if they are no longer relevant. In order to stop sending a Super Property with events, you can use `PostHog.unregister`, like so:
+
+```kotlin
+import com.posthog.PostHog
+
+PostHog.unregister("team_id")
+```
+
+This will remove the Super Property and subsequent events will not include it.
+
+If you are doing this as part of a user logging out you can instead simply use `PostHog.reset` which takes care of clearing all stored Super Properties and more.
 
 ## Flush
 
@@ -105,7 +141,7 @@ import com.posthog.PostHog
 PostHog.flush() 
 ```
 
-## Reset
+## Reset after logout
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
 
@@ -139,7 +175,7 @@ if (PostHog.getFeatureFlag("experiment-feature-flag-key") == "variant-name") {
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
-## Groups
+## Group analytics
 
 Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
@@ -170,6 +206,10 @@ PostHog.group(
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+
+## Session replay
+
+To set up [session replay](/docs/session-replay/mobile) in your project, all you need to do is install the Android SDK, enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `sessionReplay` option.
 
 ## All configuration options
 
@@ -215,5 +255,9 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
 
     // Callback that allows to sanitize the event properties (not set by default)
     propertiesSanitizer = { properties -> ... }
+
+    // Enable Recording of Session Replays. (off/false by default)
+    // Experimental support
+    sessionReplay = false
 }
 ```

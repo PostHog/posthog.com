@@ -1,68 +1,43 @@
 ---
-date: 2024-01-10
-title: "In-depth: PostHog vs Google Analytics 4"
+date: 2024-07-09
+title: 'In-depth: PostHog vs Google Analytics 4'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-ga4/posthog-vs-ga4.jpeg
 featuredImageType: full
 author:
-    - lior-neu-ner
+  - lior-neu-ner
 category: General
 tags:
-    - Comparisons
+  - Comparisons
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-Want to know how PostHog and Google Analytics 4 (GA4) compare? If you remember nothing else, remember these two things:
+## How is PostHog different?
 
-1. **Google Analytics** is designed for marketers who want to analyze landing pages, compare marketing channels, and return on ad spend.
+### 1. We're an all-in-one platform
 
-2. **PostHog** is an all-in-one platform built to help engineers understand users and create better products. It includes analytics and a whole bunch more.
+PostHog combines [product analytics](/product-analytics) and [web analytics](/web-analytics) with [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/ab-testing), [surveys](/surveys), and a baked in [data warehouse](/docs/data-warehouse) into one tightly integrated platform. Everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
 
-## How is PostHog different to Google Analytics?
+### 2. It's built for developers
 
-### 1. PostHog does more than analytics
+This means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), and a [SQL query builder](/docs/hogql), so you can analyze data how you want. We're open source, so you can inspect [our source code](https://github.com/PostHog) and vote on what we should build via [our public roadmap](/roadmap).
 
-[Analytics](/product-analytics) is a core part of our platform, but it's just one component in a set of important tools for product teams. PostHog enables you to collect feedback with [surveys](/docs/surveys), understand user behavior with [session replays](/session-replay), test changes with [A/B tests](/ab-testing), and deploy changes with [feature flags](/feature-flags).
+### 3. Transparent and cheap pricing (forever)
 
-### 2. PostHog is built for engineers
-
-We support all popular (and some unpopular) [SDKs](/docs/libraries), have [extensively documented APIs](/docs/api), and a [powerful SQL query builder](/docs/hogql), so you can analyze data how you want. We make it easy to [test in production](/product-engineers/testing-in-production), conduct [phased rollouts](/tutorials/phased-rollout), run [beta programs](/tutorials/public-beta-program), and so much more.
-
-### 3. PostHog is open source and transparent
-
-PostHog is built with transparency at its core. We work in the open and give full access to our [source code](https://github.com/PostHog), and enable you to [build integrations](/docs/apps/build) and [other services](/blog/how-we-built-an-app-server) on top of the product. You can even give feedback on [our public roadmap](/roadmap).
+We default to charging as little as possible while still making a profit – we also have a generous free tier on all our products. We can do this because we're efficient. We don't splurge on massive sales teams, or D-list comedians to host an annual convention you'll never attend. Want to know how much we'll charge? See our [pricing calculator](/pricing).
 
 ## Comparing PostHog and Google Analytics
 
-PostHog offers a wider selection of features than GA4, which focuses solely on analytics. This makes PostHog better suited for teams who are building products.
-
-<ComparisonTable column1="PostHog" column2="Google Analytics">
-  <ComparisonRow column1={true} column2={true} feature="Analytics" description="Track events and conversion, analyze user behavior" />
-  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users use your product, diagnose bugs" />
-  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely, toggle features for cohorts or individuals" />
-  <ComparisonRow column1={true} column2={false} feature="Experiments" description="Run tests on new features, optimize conversion funnels" />
-  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF surveys " />
-  <ComparisonRow column1="Beta" column2={false} feature="Customer data platform" description="Sync data with third-party tools" />
-  <ComparisonRow column1="Beta" column2={false} feature="Data warehouse" description="A single source for all your important data" />
-  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize where users click in your app or website" />
-  <ComparisonRow column1={true} column2={false} feature="Notebooks" description="Ad-hoc analysis and collaboration" />
-  <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
-  <ComparisonRow column1={true} column2={false} feature="Dark mode" description="Choose between light and dark UI" />
-</ComparisonTable>
-
 ### Analytics
 
-Both GA4 and PostHog offer analytics, but _what_ they offer is drastically different: 
-
-- **Google Analytics** makes it easier to calculate monetization and ROI on Google Ads and other marketing campaigns. 
-
-- **PostHog focuses** makes it easier to understand how people use web and mobile apps. The biggest difference is [group analytics](/docs/product-analytics/group-analytics), which enable you to track metrics at an account or company level – a feature which GA4 lacks. This makes PostHog especially useful for building B2B SaaS products.
+Features like [group analytics](/docs/product-analytics/group-analytics), which enables you analyze behavior at an account of company level, make PostHog ideal for B2B SaaS products. 
 
 <ComparisonTable column1="PostHog" column2="Google Analytics">
   <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at account or company level" />
@@ -72,15 +47,18 @@ Both GA4 and PostHog offer analytics, but _what_ they offer is drastically diffe
   <ComparisonRow column1={true} column2={true} feature="Funnels" description="Visualize conversion rates and drop-offs" />
   <ComparisonRow column1={true} column2={true} feature="User paths" description="Track user flows and where they drop-off" />
   <ComparisonRow column1={true} column2={true} feature="Retention" description="Analyze user and revenue retention" />
-  <ComparisonRow column1={false} column2={true} feature="Monetization analytics" description="Track purchase value, LTV, and other revenue metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Monetization analytics" description="Track purchase value, LTV, and other revenue metrics" />
   <ComparisonRow column1={false} column2={true} feature="Advertising analytics" description="Track ROI on Google Ads and other marketing campaigns" />
-  <ComparisonRow column1={false} column2={true} feature="Real-time reporting" description="Monitor activity on your site or app as it happens." />
+  <ComparisonRow column1={true} column2={true} feature="Real-time view" description="Monitor activity on your site or app as it happens." />
   <ComparisonRow column1={false} column2={true} feature="Predictive insights" description="AI-powered alerts when metrics change" />
 </ComparisonTable>
 
-PostHog also offers the following features to help you understand how people are using your product:
+You can also go deeper on user behavior by utilizing [heatmaps](/docs/toolbar/heatmaps), scrollmaps, formulas, and the [custom SQL insights](/docs/hogql).
 
 <ComparisonTable column1="PostHog" column2="Google Analytics">
+  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize how users navigate your app or website" />
+  <ComparisonRow column1={true} column2={false} feature="Clickmaps" description="Visualize where users click in your app or website" />
+  <ComparisonRow column1={true} column2={false} feature="Scrollmaps" description="Visualize how far users scroll in your app or website" />
   <ComparisonRow column1={true} column2={false} feature="Correlation analysis" description="Automatically highlight factors affecting funnel conversion rates" />
   <ComparisonRow column1={true} column2={false} feature="Lifecycle insights" description="Break down events from new, returning, resurrecting, and dormant users" />
   <ComparisonRow column1={true} column2={false} feature="Stickiness insights" description="See how many times users perform an event in a period of time" />
@@ -89,56 +67,67 @@ PostHog also offers the following features to help you understand how people are
   <ComparisonRow column1={true} column2={false} feature="Toolbar" description="View insights on your live website or app with an overlay" />
 </ComparisonTable>
 
-### Integrations
+### Platform
 
-Because PostHog is built to be your single source of truth for viewing data, it's very simple to import data from other sources. 
-
-In contrast, it's hard to import data into GA4 because:
-
-1. The data type and format you're allowed to [import into GA4](https://support.google.com/analytics/answer/10071301) is restrictive. 
-2. You either need to constantly upload CSV files manually, or set up an SFTP server to automatically do this for you.
-
-However, Google Analytics is well integrated into the Google ecosystem, making it easy to transfer data between it and other Google products.
-
-Below is a comparison of some of the most popular apps. For a full list of PostHog’s available integrations, [check our app directory](/cdp).
+When you choose PostHog, you get more than analytics.
 
 <ComparisonTable column1="PostHog" column2="Google Analytics">
+  <ComparisonRow column1={true} column2={true} feature="Analytics" description="Track events and conversion, analyze user behavior" />
+  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users use your product, diagnose bugs" />
+  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely, toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run tests on new features, optimize conversion funnels" />
+  <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF surveys " />
+  <ComparisonRow column1="Beta" column2={false} feature="Customer data platform" description="Sync data with third-party tools" />
+  <ComparisonRow column1={true} column2={false} feature="Data warehouse" description="A single source for all your important data" />
+  <ComparisonRow column1={true} column2={false} feature="Notebooks" description="Ad-hoc analysis and collaboration" />
+  <ComparisonRow column1={true} column2={false} feature="Dark mode" description="Choose between light and dark UI" />
+</ComparisonTable>
+
+### Integrations
+
+It's hard to import data into Google Analytics because:
+
+1. The data type and format you're allowed to [import](https://support.google.com/analytics/answer/10071301) is restrictive. 
+2. You either need to constantly upload CSV files manually, or set up an SFTP server to automatically do this for you.
+
+In contrast, PostHog is built to be your single source of truth, so it's simple to import data from other sources using our [built-in data warehouse](/docs/data-warehouse), or send PostHog data to other tools. You can even [create your own integrations](/docs/cdp/build). 
+
+Below is a comparison of some of the most popular apps – see our [data pipeline](/docs/cdp/airbyte-export) and [warehouse docs](/docs/data-warehouse/setup) for a complete list of integrations.
+
+<ComparisonTable column1="PostHog" column2="Google Analytics">
+  <ComparisonRow column1={true} column2={true} feature="Stripe" description="Import charges, customers, invoices, subscriptions, and more" />
   <ComparisonRow column1={true} column2={true} feature="Zapier" description="Trigger Zaps with events" />
-  <ComparisonRow column1={true} column2={false} feature="Hubspot" description="Sync event and person data" />
+  <ComparisonRow column1={true} column2={false} feature="Hubspot" description="Import contacts, companies, deals, and more" />
   <ComparisonRow column1={true} column2={false} feature="Salesforce" description="Sync event and person data" />
   <ComparisonRow column1={true} column2={false} feature="Intercom" description="Extract and load data to external platforms" />
   <ComparisonRow column1={true} column2={false} feature="Customer.io" description="Sync data between platforms" />
   <ComparisonRow column1={true} column2={false} feature="Sentry" description="Ingest Sentry errors for analysis" />
-  <ComparisonRow column1={false} column2={true} feature="Google Ads" description="Track Google ad ROI" />
+  <ComparisonRow column1={false} column2={true} feature="Google Ads" description="Track Google Ads ROI" />
   <ComparisonRow column1={false} column2={true} feature="Google Search Console" description="Seamlessly import data from your search console" />
   <ComparisonRow column1={true} column2={true} feature="Google BigQuery" description="Automatically export data to BigQuery" />
-  <ComparisonRow column1={false} column2={true} feature="Google Looker Studio" description="Visualize events in Looker dashboards" />
 </ComparisonTable>
-
-> One unique advantage of PostHog is that, because it is open source, it’s easy to [create your own apps and integrations](/tutorials/build-your-own-posthog-app). This is useful if you’re, for example, using niche software in your stack that hasn’t been widely adopted, or if you require a direct integration between PostHog and your product. 
 
 ### Security and compliance
 
-PostHog makes GDPR compliance easy by letting you choose where your data is hosted: EU or US. PostHog also offers cookie-less tracking, and a variety of security options to keep your data secure. Google also offers various [privacy controls](https://support.google.com/analytics/answer/9019185), but you can't choose where your data is stored.
+PostHog makes GDPR compliance easy by letting you choose where your data is hosted: EU or US. Google also offers various [privacy controls](https://support.google.com/analytics/answer/9019185), but you can't choose where your data is stored.
 
 <ComparisonTable column1="PostHog" column2="Google Analytics">
   <ComparisonRow column1={true} column2={false} feature="EU hosting available" description="" />
   <ComparisonRow column1={true} column2={false} feature="HIPAA" description="" />
   <ComparisonRow column1={true} column2={true} feature="Data anonymization" description="" />
-  <ComparisonRow column1={true} column2={true} feature="Cookie-less tracking option" description="" />
-  <ComparisonRow column1="SOC 2" column2="ISO 27001" feature="Security certification" description="" />
-  <ComparisonRow column1="Feature flags only" column2={true} feature="Role-based access control" description="" />
+  <ComparisonRow column1="SOC 2 Type II" column2="ISO 27001" feature="Security certification" description="" />
+  <ComparisonRow column1={true} column2={true} feature="Role-based access control" description="" />
   <ComparisonRow column1={true} column2={true} feature="SAML/SSO available" description="" />
-  <ComparisonRow column1={true} column2={true} feature="" description="2FA available" />
+  <ComparisonRow column1={true} column2={true} feature="2FA available" description="" />
 </ComparisonTable>
 
 ## Frequently asked questions 
 
 ### Does PostHog have reports, dimensions, and other GA4 features?
 
-Yes, PostHog has much of the same functionality as Google Analytics, but much of it is named differently. Here’s a quick comparison of the two:
+Yes, PostHog has much of the same functionality as Google Analytics, but we different terminology. Here’s a quick comparison of the two:
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
   <thead>
     <tr>
@@ -190,21 +179,27 @@ Yes, PostHog has much of the same functionality as Google Analytics, but much of
     </tr>
   </tbody>
 </table>
-</div>
+</OverflowXSection>
 
-> Familiar with Google Analytics and want more information on how to use PostHog? We've written a [guide to PostHog for Google Analytics users](/blog/google-analytics-to-posthog).
+See our [guide to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more help on making the switch.
 
 ### How much do PostHog and Google Analytics cost?
 
-GA4 has a free tier which should be sufficient for most startups and scale-ups. Larger enterprises with higher data collection and export requirements will need to upgrade to GA360, which starts at $50,000 per year. 
+Google Analytics has a free tier that's sufficient for most startups.  Larger enterprises with higher data collection and export requirements will need to upgrade to GA360, which _starts_ at $50,000 per year. 
 
-A good rule of thumb is that if you're exporting more than 1 million events per day, or querying data with more than 10 million events, you'll need to upgrade to GA360 (see a full breakdown on [their website](https://support.google.com/analytics/answer/11202874)). 
+A good rule of thumb is that if you're exporting more than 1 million events per day, or querying data with more than 10 million events, you'll need to upgrade to GA360. See Google's [breakdown](https://support.google.com/analytics/answer/11202874) for more. 
 
-PostHog has transparent pricing based on the usage. It’s free to get started and completely free for the first 1 million analytics events. After this free monthly allowance, you'll pay $0.00031/event, and PostHog charges progressively less the more you use. We recommend trying [our pricing calculator](/pricing) and reading our [guide for estimating your usage](/docs/billing/estimating-usage-costs).
+PostHog has transparent pricing based on the usage. It's free to get started and completely free for the first 1 million analytics events. After this free monthly allowance you're charged based on usage – we charge progressively less per event the more you use. 
+
+We recommend trying [our pricing calculator](/pricing) to estimate your costs.
 
 ### Does PostHog offer a free trial?
 
-With PostHog, you don’t need a free trial — it’s free to get started, with a generous monthly allowance of events, replays, and feature flag requests. If you’re within this allowance, PostHog is free to use forever.
+With PostHog, it's free to get started, with a generous monthly allowance of events, replays, and feature flag requests. If you’re within this allowance, PostHog is free to use forever.
+
+### Can I migrate from Google Analytics to PostHog?
+
+Yes, see our [Google Analytics to PostHog migration guide](/migrate/google-analytics) for more details.
 
 ### Does PostHog block bots by default?
 
@@ -212,10 +207,10 @@ Yes. See the [full blocklist in our docs](/docs/product-analytics/troubleshootin
 
 ### What about ad blockers?
 
-We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
+We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. 
 
-### Are there discounts for nonprofits and startups?
+Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
 
-Yes, PostHog offers both. Nonprofit organizations can contact our team and are usually eligible for a 50% discount, while startups can sign up for $50,000 of free credit (and a host of other perks) in the [PostHog for Startups program](/startups).
+### Are there discounts for non-profits and startups?
 
-<ArrayCTA />
+Yes, PostHog offers both. Non-profit organizations can contact our team and are usually eligible for a 50% discount, while startups can sign up for $50,000 of free credit (and a host of other perks) in the [PostHog for Startups program](/startups).

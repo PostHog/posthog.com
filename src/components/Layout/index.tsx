@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '../Header/Header'
 import { Footer } from '../Footer/Footer'
 import CookieBanner from 'components/CookieBanner'
@@ -12,17 +12,28 @@ import { IProps, LayoutProvider } from './context'
 import { Mobile as MobileNav } from 'components/MainNav'
 import { useLayoutData } from './hooks'
 import SearchBox from 'components/Search/SearchBox'
+import Banner from 'components/Banner'
 
-const Article = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => {
+const Article = ({
+    children,
+    className = '',
+    headerBlur = true,
+}: {
+    children: React.ReactNode
+    className?: string
+    headerBlur?: boolean
+}) => {
     const { compact } = useLayoutData()
+
     return (
         <div className={className}>
+            {/* <Banner /> */}
             {compact ? (
-                <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-50 bg-light dark:bg-dark">
+                <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-[50] bg-light dark:bg-dark">
                     <SearchBox className="!w-full !py-2" location="mobile-header" />
                 </div>
             ) : (
-                <Header />
+                <Header blur={headerBlur} />
             )}
             <main>{children}</main>
             {!compact && (
@@ -41,14 +52,11 @@ const Layout = ({
     parent,
     activeInternalMenu,
     className = '',
-}: IProps & { className?: string }): JSX.Element => {
+    headerBlur = true,
+}: IProps & { className?: string; headerBlur?: boolean }): JSX.Element => {
     const posthog = usePostHog()
 
     useEffect(() => {
-        if (window && posthog?.setPersonProperties) {
-            posthog.setPersonProperties({ preferred_theme: (window as any).__theme })
-        }
-
         posthog?.register_once({
             utm_source: null,
             utm_medium: null,
@@ -61,7 +69,9 @@ const Layout = ({
     return (
         <SearchProvider>
             <LayoutProvider parent={parent} activeInternalMenu={activeInternalMenu}>
-                <Article className={className}>{children}</Article>
+                <Article className={className} headerBlur={headerBlur}>
+                    {children}
+                </Article>
             </LayoutProvider>
         </SearchProvider>
     )

@@ -1,13 +1,15 @@
 ---
 date: 2023-02-17
-title: "Our simpler goal: Help engineers to be better at product"
+title: 'Our simpler goal: Help engineers to be better at product'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 category: CEO diaries
-author: ["james-hawkins"]
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+author:
+  - james-hawkins
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 ---
 
@@ -70,3 +72,5 @@ Ali, on our board, told us "when you get bigger, you can see around corners". Th
 Now we've tried a bunch of stuff and achieved product-market fit – we have 23,000+ companies who have installed PostHog, approaching 70,000 developers in the community and $MM revenue – we can clearly see what we need to do. And, seeing the results we've had so far, increases our confidence we can make it all happen.
 
 Wish us luck, and feedback (I'm james @ you can guess it . com) is more than welcome!
+
+<NewsletterForm />

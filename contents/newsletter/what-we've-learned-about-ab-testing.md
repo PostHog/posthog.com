@@ -1,8 +1,10 @@
 ---
 date: 2023-08-24
-title: "10 things we've learned about A/B testing for startups"
-author: ["ian-vanagas"]
-featuredImage: ../images/newsletter/feature-images/ab-test.png
+title: 10 things we've learned about A/B testing for startups
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/feature-images/ab-test.png
 featuredImageType: full
 tags:
   - AB testing
@@ -48,6 +50,7 @@ He emphasizes two key points:
 Read about Thomas’ experience in [How to start a growth team (as an engineer)](/product-engineers/how-to-start-a-growth-team) on the PostHog blog.
 
 ## 2. Good A/B tests have 5 traits ✅
+
 1. **A specific, measurable goal**
 An ambiguous goal leads to an unclear A/B testing process. It isn’t clear what A/B test to run to “increase sales.” “Increase demo bookings from the sales page” is actionable.
 
@@ -91,6 +94,8 @@ Answering these questions helps Monzo create consistent hypotheses containing a 
 - [How YC's biggest startups run A/B tests (with examples)](/product-engineers/ab-testing-examples) – Ian Vanagas
 - [How we experiment at Monzo](https://monzo.com/blog/2019/07/31/how-we-experiment-at-monzo) – Monzo blog
 
+<NewsletterForm />
+
 ## 5. Understanding significance 📊
 There are two moments when you should analyze your goal, secondary, and counter metrics:
 
@@ -102,7 +107,7 @@ Statistical significance is generally found by calculating how difficult it woul
 
 For example, a p-value of 0.05 means that if the null hypothesis is true, there is a 5% chance of observing the data or more extreme results purely due to random chance, and you can be 95% confident in your change.
 
-![p-value](../images/newsletter/ab-testing/p-value-explained.png)
+![p-value](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/ab-testing/p-value-explained.png)
 
 Remember: lack of statistical significance does not mean your test is a failure. Other reasons for “failure” include not gathering enough data, too small (or large) a change, or aggregate results hiding significance in individual properties.
 
@@ -118,7 +123,7 @@ It’s tempting to end A/B tests when you first get results. This is the “peek
 
 But, as [Airbnb found out](/product-engineers/ab-testing-examples#4-airbnb-interleaving-dynamic-p-values), peeking too early isn’t the only way to get false positives. They found a pattern of hitting significance, and then converging back to insignificant, neutral results in their experiments.
 
-![false positives](../images/newsletter/ab-testing/test-improvement.png)
+![false positives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/ab-testing/test-improvement.png)
 
 To fix this, they calculated a dynamic p-value curve using past experiments, which started at 0 and then curved up towards 0.05 on day 30. This helped them determine whether an early result was worth investigating.
 
@@ -165,9 +170,6 @@ Using actors ensures the experience (and results) for your A/B test are consiste
 
 Read more about targeting in [When and how to run group-targeted A/B tests](/product-engineers/running-group-targeted-ab-tests).
 
-> Thanks for reading Product for Engineers. [Subscribe (it’s free)](https://newsletter.posthog.com/subscribe)
-
-
 ## Good reads 🤔
 **[PostHog's recommended reading for startup teams](/founders/recommended-reading) – Joe Martin:** Great books on leadership, design, venture capital, operations, and sales (pretty much anything to do with startups), as recommended by the PostHog book club!
 
@@ -176,5 +178,7 @@ Read more about targeting in [When and how to run group-targeted A/B tests](/pro
 **[Stop Making People Make Up Their Mind](https://blog.staysaasy.com/p/stop-making-people-make-up-their) – Stay SaaSy:** A great read on the dangers of a “strong opinion” culture in a startup, and how to foster a culture of thoughtfulness instead. “Being right for the wrong reasons (or by chance) is just as worthless as being wrong.”
 
 **[Beware of Price Cliffs](https://goodbetterbest.substack.com/p/beware-of-price-cliffs) – Good Better Best:** A quick and useful lesson on how mental barriers can impact user behavior.
+
+<NewsletterForm />
 
 > _Words by Ian Vanagas, who is A/B testing whether pineapple belongs on pizza._

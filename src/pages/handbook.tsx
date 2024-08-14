@@ -38,7 +38,7 @@ const otherLinks = [
         name: 'Company',
         links: [
             { name: 'Story', to: '/handbook/company/story' },
-            { name: 'People', to: '/people' },
+            { name: 'Team', to: '/team' },
             { name: 'Strategy overview', to: '/handbook/strategy/overview' },
             { name: 'Objectives', to: '/handbook/strategy/objectives' },
         ],
@@ -100,7 +100,7 @@ export const Handbook: React.FC = () => {
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="-mt-16 md:-mt-12">
                             <StaticImage
-                                src="../../contents/images/search-hog-4.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
                                 alt="This hog has an answer"
                                 width={400}
                                 placeholder="blurred"
@@ -110,8 +110,8 @@ export const Handbook: React.FC = () => {
                             <h1 className="font-bold text-5xl mb-6">Company handbook</h1>
                             <h3 className="text-xl">👋 Welcome!</h3>
                             <h5 className="opacity-60 font-semibold leading-tight mb-8 max-w-lg">
-                                This handbook simply explains how we work. It has been one of the most important things
-                                we've ever made.
+                                This handbook simply explains how we work. It is one of the most important things we've
+                                ever made.
                             </h5>
                         </div>
                     </div>

@@ -63,7 +63,7 @@ If you are self-hosting PostHog on a server outside the EU and are collecting EU
 
 If you are using PostHog Cloud US, we also recommend you anonymize any EU user data. 
 
-The PostHog [Property Filter app](https://posthog.com/apps/property-filter) allows you to anonymize user data to ensure you stay compliant with GDPR in both cases. 
+The PostHog [Property Filter transformation](/docs/cdp/property-filter) allows you to anonymize user data to ensure you stay compliant with GDPR in both cases. 
 
 ## How to set PostHog up for GDPR compliance
 
@@ -86,7 +86,7 @@ We recommend using PostHog Cloud EU for GDPR compliance, though you can use Post
 
 If using PostHog Cloud EU, simply follow the steps in the onboarding process to start sending events. Read our [integration documentation](/docs/integrate) for more information on sending events to PostHog. 
 
-Deploying PostHog onto your own infrastructure is straightforward and we provide support to help with any issues you encounter. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started.
+Deploying PostHog onto your own infrastructure is straightforward but we do not provide support for self-hosted instances. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started. 
 
 ### Step 3: Security configuration
 

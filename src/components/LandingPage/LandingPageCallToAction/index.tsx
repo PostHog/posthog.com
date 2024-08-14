@@ -7,7 +7,7 @@ export const LandingPageCallToAction = (): JSX.Element => {
             <CallToAction type="primary" width="56" to="https://app.posthog.com/signup">
                 Get started
             </CallToAction>
-            <CallToAction type="outline" width="56" to="/book-a-demo">
+            <CallToAction type="outline" width="56" to="/demo">
                 Schedule a demo
             </CallToAction>
         </div>

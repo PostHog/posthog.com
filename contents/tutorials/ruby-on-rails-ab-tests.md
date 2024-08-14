@@ -1,17 +1,19 @@
 ---
 title: How to set up A/B tests in Ruby on Rails
 date: 2024-02-14
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/ruby-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/ruby-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/ruby-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/ruby-ab-tests/experiment-setup-dark.png'
-import IdentifyLight from '../images/tutorials/ruby-ab-tests/identify-light.png'
-import IdentifyDark from '../images/tutorials/ruby-ab-tests/identify-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/experiment-setup-dark.png"
+export const IdentifyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/identify-light.png"
+export const IdentifyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/ruby-ab-tests/identify-dark.png"
 
 A/B tests help you improve your Ruby on Rails app by enabling you to compare the impact of changes on key metrics. 
 
@@ -51,7 +53,7 @@ end
 
 Run `rails server` and navigate to `http://localhost:3000` to see our app in action.
 
-![Basic Ruby app](../images/tutorials/ruby-ab-tests/basic-app.png)
+![Basic Ruby app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ruby-ab-tests/basic-app.png)
 
 ## 2. Add PostHog on the client side
 
@@ -73,8 +75,8 @@ To start, we install the [PostHog Web SDK](/docs/libraries/js) on the client sid
     
     <!-- PostHog Snippet --> 
     <script>
-      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-      posthog.init('<ph_project_api_key>',{api_host:'<ph_instance_address>})
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>})
     </script>
   </head>
 
@@ -115,8 +117,6 @@ To measure this, we [capture a custom event](/docs/product-analytics/capture-eve
 With this set up, refresh your app and click the button a few times to see the event captured in PostHog.
 
 ## 4. Create an A/B test in PostHog
-
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
 
 Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
 
@@ -196,7 +196,7 @@ require 'posthog-ruby'
 
 POSTHOG_CLIENT = PostHog::Client.new({
   api_key: '<ph_project_api_key>',
-  host: '<ph_instance_address>'
+  host: '<ph_client_api_host>'
 })
 ```
 

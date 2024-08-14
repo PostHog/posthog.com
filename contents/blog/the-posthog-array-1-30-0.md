@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/1-30-0.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-30-0.png
 featuredImageType: full
 excerpt: >-
   Brand new and faster user interface, automatic conversion signal detection

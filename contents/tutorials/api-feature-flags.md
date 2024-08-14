@@ -1,10 +1,12 @@
 ---
 title: How to evaluate and update feature flags with the PostHog API
 date: 2023-02-13
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['feature flags']
+tags:
+  - feature flags
 ---
 
 Like [capturing events](/tutorials/api-capture-events), feature flags get a special POST-only public endpoint in the PostHog API, `/decide/`.  There are also endpoints to get data from, update this data, and more. This tutorial shows you how to use these endpoints to evaluate your feature flags (both boolean and multivariate), get data about them, update them, and finally, shows how you can combine these requests together.
@@ -27,12 +29,12 @@ Formatting all this correctly looks like this:
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<PH_PROJECT_API_KEY>",
   "distinct_id": "ian@posthog.com"
-}' "https://app.posthog.com/decide/?v=3"
+}' "<ph_app_host>/decide/?v=3"
 ```
 
 ```python
 import requests
-url = "https://app.posthog.com/decide/?v=3"
+url = "<ph_app_host>/decide/?v=3"
 
 headers = {
   "Content-Type": "application/json",
@@ -81,7 +83,7 @@ You can use this response with whatever language to control access or usage of f
 
 ```python
 import requests
-url = "https://app.posthog.com/decide/?v=3"
+url = "<ph_app_host>/decide/?v=3"
 
 headers = {
   "Content-Type": "application/json",
@@ -133,7 +135,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
   -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-  https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/feature_flags/evaluation_reasons/?distinct_id=ian@posthog.com
+  <ph_app_host>/api/projects/$POSTHOG_PROJECT_ID/feature_flags/evaluation_reasons/?distinct_id=ian@posthog.com
 ```
 
 ```python
@@ -145,7 +147,7 @@ DISTINCT_ID = ian@posthog.com
 headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 
 response = requests.get(
-    f"https://app.posthog.com/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/evaluation_reasons/?distinct_id={DISTINCT_ID}",
+    f"<ph_app_host>/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/evaluation_reasons/?distinct_id={DISTINCT_ID}",
     headers=headers
 ).json()
 ```
@@ -165,7 +167,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
   -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-  https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/feature_flags/
+  <ph_app_host>/api/projects/$POSTHOG_PROJECT_ID/feature_flags/
 ```
 
 ```python
@@ -176,7 +178,7 @@ POSTHOG_PERSONAL_API_KEY = <POSTHOG_PERSONAL_API_KEY>
 headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 
 response = requests.get(
-    f"https://app.posthog.com/api/projects/<POSTHOG_PROJECT_ID>/feature_flags",
+    f"<ph_app_host>/api/projects/<POSTHOG_PROJECT_ID>/feature_flags",
     headers=headers
 ).json()
 ```
@@ -192,7 +194,7 @@ export POSTHOG_PERSONAL_API_KEY=<POSTHOG_PERSONAL_API_KEY>
 export POSTHOG_PROJECT_ID=<POSTHOG_PROJECT_ID>
 curl \
   -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-  https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/feature_flags/<FLAG_ID>
+  <ph_app_host>/api/projects/$POSTHOG_PROJECT_ID/feature_flags/<FLAG_ID>
 ```
 
 ```python
@@ -203,7 +205,7 @@ POSTHOG_PERSONAL_API_KEY = <POSTHOG_PERSONAL_API_KEY>
 headers = {"Authorization": f"Bearer {POSTHOG_PERSONAL_API_KEY}" }
 
 response = requests.get(
-  f"https://app.posthog.com/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/<FLAG_ID>",
+  f"<ph_app_host>/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/<FLAG_ID>",
   headers=headers
 ).json()
 ```
@@ -223,7 +225,7 @@ curl \
   -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"filters":{"groups":[{"properties":[],"rollout_percentage":0}]}}' \
-  -X PATCH https://app.posthog.com/api/projects/$POSTHOG_PROJECT_ID/feature_flags/<FLAG_ID>
+  -X PATCH <ph_app_host>/api/projects/$POSTHOG_PROJECT_ID/feature_flags/<FLAG_ID>
 ```
 
 ```python
@@ -244,7 +246,7 @@ filters = {
 }
 
 response = requests.patch(
-  f"https://app.posthog.com/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/<FLAG_ID>",
+  f"<ph_app_host>/api/projects/<POSTHOG_PROJECT_ID>/feature_flags/<FLAG_ID>",
   headers=headers,
   json=filters
 ).json()
@@ -252,7 +254,7 @@ response = requests.patch(
 
 </MultiLanguage>
 
-This filter object can include available user properties, cohorts, or group properties. You also can use the `PATCH` endpoint to change the name, key, filters, deleted status, active status, and more. 
+This filter object can include available person properties, cohorts, or group properties if you capture identified events. You also can use the `PATCH` endpoint to change the name, key, filters, deleted status, active status, and more. 
 
 > Be careful when using the `PATCH` endpoint, as it overwrites any current feature flag details. Find out more in [our API docs](/docs/api/feature-flags#patch-api-projects-project_id-feature_flags-id).
 
@@ -289,7 +291,7 @@ body = {
 }
 
 evaluate = requests.post(
-  'https://app.posthog.com/decide/?v=3',
+  '<ph_app_host>/decide/?v=3',
   headers=json_headers, 
   json=body
 )
@@ -303,7 +305,7 @@ Next, we write a `getFlagId` function to figure out the feature flag ID by check
 ```python
 def getFlagId():
   get_all = requests.get(
-    f"https://app.posthog.com/api/projects/{POSTHOG_PROJECT_ID}/feature_flags",
+    f"<ph_app_host>/api/projects/{POSTHOG_PROJECT_ID}/feature_flags",
     headers=auth_header
   ).json()
 
@@ -338,7 +340,7 @@ def filterUserFromFlag():
   }
 
   response = requests.patch(
-    f"https://app.posthog.com/api/projects/{POSTHOG_PROJECT_ID}/feature_flags/{FLAG_ID}",
+    f"<ph_app_host>/api/projects/{POSTHOG_PROJECT_ID}/feature_flags/{FLAG_ID}",
     headers=auth_header,
     json=filters
   ).json()
@@ -346,12 +348,12 @@ def filterUserFromFlag():
 
 Once done, run this request and check the feature flag in your PostHog instance to see it changed.
 
-![Updated feature flag](../images/tutorials/api-feature-flags/update.png)
+![Updated feature flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/api-feature-flags/update.png)
 
 Once confirmed, you're done. Congratulations, you’ve built a solid grasp of using the PostHog API to evaluate and update feature flags! You can use this skill to customize your implementation to your needs.
 
 ## Further reading
 
 - [How to use the PostHog API to get insights and persons](/tutorials/api-get-insights-persons)
-- [Documentation on POST-only public endpoints](/docs/api/post-only-endpoints)
+- [Documentation on our `decide` endpoint](/docs/api/decide)
 - [Using the PostHog API to capture events](/tutorials/api-capture-events)

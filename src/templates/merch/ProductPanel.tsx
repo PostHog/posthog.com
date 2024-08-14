@@ -35,7 +35,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
     /**
      * The product.variant option from props is a different shape from the
-     * slectedVariant (which comes directly from the Storefront API). We
+     * selectedVariant (which comes directly from the Storefront API). We
      * only want the ID from selectedVariant and will add the corresponding
      * variant in product.variants.
      */
@@ -64,7 +64,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 <ProductCarousel product={product} />
             </div>
             <div className="space-y-0.5">
-                <h3 className="text-xl [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug">
+                <h3 className="text-xl [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug mb-0">
                     {product.title}
                 </h3>
                 <p className="leading-tight">{subtitle}</p>

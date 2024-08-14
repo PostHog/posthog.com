@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/migrating-hog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/migrating-hog.png
 featuredImageType: full
 category: Inside PostHog
 ---
@@ -27,7 +28,7 @@ If I’d stuck to realistic limits, that would be the end of it. I can’t  buil
 
 It turns out that I can. Late last year I made [a ShuffleHog prototype on Twitter](https://twitter.com/thehogbot), coded in [Tracery](https://www.tracery.io/). That lasted until [Marius added the ability to make front-end apps in PostHog](https://github.com/PostHog/posthog/issues/9654#issuecomment-1133222836) last week. 24 hours later, ShuffleHog now lives inside PostHog as a beta feature that can suggest random query ideas.
 
-![ShuffleHog - AKA PostHog's Best Feature](../images/blog/non-coders-thoughts/shufflehog_app.png)
+![ShuffleHog - AKA PostHog's Best Feature](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/non-coders-thoughts/shufflehog_app.png)
 
 ShuffleHog still isn’t quite ready for other users to try yet, but who knows? Maybe I’ll keep following this dream. 
 
@@ -41,7 +42,7 @@ Breaking things is a great way to learn about how to fix them. PostHog recently 
 ### Take it offline
 Something I’ve loved about becoming more confident with code is that I’ve been able to follow this passion outside of work. This creates a feedback loop where I get even more excited about what I’m learning and what I’m able to do, so I bring that energy back into work…where I _also_ learn and do more. It’s very satisfying. 
 
-![Joe's Open Source Arcade](../images/blog/non-coders-thoughts/arcade_open_source.png)
+![Joe's Open Source Arcade](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/non-coders-thoughts/arcade_open_source.png)
 
 The experience I’ve had with GitHub, for example, ended up being the catalyst for me to build my own arcade emulation machine at home because I now had the skills to fork and tweak certain repos. Likewise, spending time in the world of open-source software led to me playing around with a _lot_ of Raspberry Pi sensors at home.
 

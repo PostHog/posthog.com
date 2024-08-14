@@ -212,6 +212,9 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
     )
 }
 
+const categoriesHideFromIndex = ['tutorials', 'customers', 'spotlight', 'changelog']
+export const tagsHideFromIndex = ['Comparisons']
+
 export const getParams = (root, tag, sort) => {
     return {
         sort,
@@ -238,7 +241,15 @@ export const getParams = (root, tag, sort) => {
                               ],
                           },
                       ]
-                    : []),
+                    : [
+                          {
+                              post_category: {
+                                  folder: {
+                                      $notIn: categoriesHideFromIndex,
+                                  },
+                              },
+                          },
+                      ]),
                 ...(tag
                     ? [
                           {
@@ -249,7 +260,40 @@ export const getParams = (root, tag, sort) => {
                               },
                           },
                       ]
-                    : []),
+                    : [
+                          {
+                              $or: [
+                                  {
+                                      post_tags: {
+                                          label: {
+                                              $notIn: tagsHideFromIndex,
+                                          },
+                                      },
+                                  },
+                                  {
+                                      post_tags: {
+                                          label: {
+                                              $null: true,
+                                          },
+                                      },
+                                  },
+                              ],
+                          },
+                          {
+                              $or: [
+                                  {
+                                      hideFromIndex: {
+                                          $eq: false,
+                                      },
+                                  },
+                                  {
+                                      hideFromIndex: {
+                                          $null: true,
+                                      },
+                                  },
+                              ],
+                          },
+                      ]),
             ],
         },
     }
@@ -296,7 +340,10 @@ export default function Posts({
     const [prev, setPrev] = useState<string | null>(null)
     const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
     const [layoutMenu, setLayoutMenu] = useState(
-        menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] }
+        menusByRoot[root] || {
+            parent: communityMenu,
+            activeInternalMenu: communityMenu.children.find(({ name }) => name.toLowerCase() === 'posts'),
+        }
     )
 
     const [params, setParams] = useState(getParams(root, initialTag, getSortOption(root).sort))
@@ -318,7 +365,7 @@ export default function Posts({
             setTag(undefined)
         }
         if (articleView || pathname === '/posts') {
-            setLayoutMenu(menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] })
+            setLayoutMenu(menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[1] })
         }
     }, [pathname])
 
@@ -358,7 +405,7 @@ export default function Posts({
                     value={{
                         title: title || 'Posts',
                         menu: (!root
-                            ? menu
+                            ? menu.filter(({ url }) => url && !categoriesHideFromIndex.includes(url.replace('/', '')))
                             : [
                                   { name: 'All', icon: 'IconRocket', color: 'purple', url: `/${root}` },
                                   ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || []),

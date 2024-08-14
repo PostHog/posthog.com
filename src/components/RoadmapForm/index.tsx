@@ -14,6 +14,7 @@ import { CallToAction } from 'components/CallToAction'
 import Spinner from 'components/Spinner'
 import { IconPlus, IconX } from '@posthog/icons'
 import * as Yup from 'yup'
+import Toggle from 'components/Toggle'
 
 const GitHubURLs = ({
     urls,
@@ -112,6 +113,7 @@ export default function RoadmapForm({
     const [loading, setLoading] = useState(false)
     const { getJwt, user } = useUser()
     const { handleSubmit, handleChange, values, setFieldValue, initialValues } = useFormik({
+        enableReinitialize: true,
         validateOnMount: false,
         validationSchema: ValidationSchema(status),
         initialValues: other.initialValues ?? {
@@ -125,6 +127,7 @@ export default function RoadmapForm({
             milestone: false,
             category: undefined,
             githubUrls: [''],
+            dateCompleted: dayjs().format('YYYY-MM-DD'),
         },
         onSubmit: async ({
             title,
@@ -137,6 +140,7 @@ export default function RoadmapForm({
             milestone,
             githubUrls,
             category,
+            dateCompleted,
         }) => {
             setLoading(true)
             try {
@@ -165,21 +169,24 @@ export default function RoadmapForm({
                         ...(status === 'complete'
                             ? {
                                   complete: true,
-                                  dateCompleted: new Date(),
+                                  dateCompleted,
                               }
                             : status === 'in-progress'
                             ? {
+                                  complete: false,
                                   projectedCompletion: dayjs().add(1, 'year'),
                               }
-                            : null),
+                            : {
+                                  complete: false,
+                                  dateCompleted: null,
+                                  projectedCompletion: null,
+                              }),
                         ...(uploadedFeaturedImage
                             ? {
                                   image: uploadedFeaturedImage?.id,
                               }
                             : null),
-                        teams: {
-                            connect: [team.id],
-                        },
+                        teams: [team.id],
                         betaAvailable,
                         milestone,
                         githubUrls: githubUrls.filter((url) => !!url),
@@ -231,6 +238,16 @@ export default function RoadmapForm({
                         />
                     </div>
                 )}
+                {status === 'complete' && (
+                    <input
+                        name="dateCompleted"
+                        value={values.dateCompleted}
+                        onChange={handleChange}
+                        placeholder="Date"
+                        className="w-full px-4 py-2 border-0 border-b border-border dark:border-dark bg-transparent"
+                        type="date"
+                    />
+                )}
                 <div className="border-b border-border dark:border-dark">
                     <TeamSelect value={values.team} onChange={(team) => setFieldValue('team', team)} />
                 </div>
@@ -281,34 +298,19 @@ export default function RoadmapForm({
                     <div className="py-2 border-t border-border dark:border-dark px-2">
                         <Slider className="space-x-1">
                             {status === 'in-progress' && (
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setFieldValue('betaAvailable', !values.betaAvailable)
-                                    }}
-                                    className={`rounded-md p-2 border whitespace-nowrap text-sm bg-border/10 transition-colors ${
-                                        values.betaAvailable
-                                            ? 'font-bold border-black/90 dark:border-white/90'
-                                            : 'hover:border-black/50 border-border dark:border-dark dark:hover:border-white/40'
-                                    }`}
-                                >
-                                    Beta available
-                                </button>
+                                <Toggle
+                                    checked={values.betaAvailable}
+                                    onChange={(checked) => setFieldValue('betaAvailable', checked)}
+                                    label="Beta available"
+                                />
                             )}
                             {status === 'complete' && (
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setFieldValue('milestone', !values.milestone)
-                                    }}
-                                    className={`rounded-md p-2 border whitespace-nowrap text-sm bg-border/10 transition-colors ${
-                                        values.milestone
-                                            ? 'font-bold border-black/90 dark:border-white/90'
-                                            : 'hover:border-black/50 border-border dark:border-dark dark:hover:border-white/40'
-                                    }`}
-                                >
-                                    Show on homepage
-                                </button>
+                                <Toggle
+                                    checked={values.milestone}
+                                    onChange={(checked) => setFieldValue('milestone', checked)}
+                                    label="Show on homepage"
+                                    tooltip='Adds roadmap item to "We ship weirdly fast" section on homepage'
+                                />
                             )}
                         </Slider>
                     </div>

@@ -1,9 +1,10 @@
 ---
 date: 2023-05-09
-title: "In-depth: The AARRR pirate funnel explained"
+title: 'In-depth: The AARRR pirate funnel explained'
 author:
   - andy-vandervell
-featuredImage: ../images/blog/aarrr-pirate-funnel/pirate-metrics.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/aarrr-pirate-funnel/pirate-metrics.jpeg
 featuredImageType: full
 tags:
   - Product analytics
@@ -35,7 +36,7 @@ In this guide, you'll learn:
 
 ## How does the AARRR funnel work?
 
-![AARRR pirate funnel](../images/blog/aarrr-pirate-funnel/aarrr-graphic.png)
+![AARRR pirate funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aarrr-pirate-funnel/aarrr-graphic.png)
 
 The five pirate metrics are:
 
@@ -51,7 +52,7 @@ McClure visualized the AARRR funnel in a table like the one below, though you co
 
 This version is what the funnel might look like for our product, PostHog, an [all-in-one analytics platform](https://posthog.com/) comprising product analytics, session replay, feature flags, and A/B testing.
 
-![aarrr funnel breakdown](../images/blog/aarrr-pirate-funnel/arrrr-funnel-table.png)
+![aarrr funnel breakdown](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aarrr-pirate-funnel/arrrr-funnel-table.png)
 
 Applying conversion rates is optional – the real value comes from forming an understanding your potential customer journey, and the metrics you need to track to monitor it effectively.
 
@@ -78,6 +79,8 @@ So you're sold on the AARRR framework, how do you get started?
 It all starts with how you track user behavior in your product. While you can use Google Analytics to track some pirate metrics, it's best to use a product analytics tool like PostHog, [Amplitude](/blog/posthog-vs-amplitude) or [Mixpanel](/blog/posthog-vs-mixpanel).
 
 > ☠️ **Try our AARRR dashboard template:** PostHog users can use our [customizable AARRR pirate metrics template](/templates/aarrr-dashboard) to get started. Simply input your events and tweak as you require.
+
+<NewsletterForm />
 
 ### 1. Acquisition
 
@@ -179,7 +182,7 @@ At PostHog, we're [organized into small teams](/handbook/company/small-teams).
 
 Here's how our earlier breakdown might look like if we assigned different PostHog teams to each user status:
 
-![aarrr funnel team](../images/blog/aarrr-pirate-funnel/aarrr-funnel-team.png)
+![aarrr funnel team](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/aarrr-pirate-funnel/aarrr-funnel-team.png)
 
 As you can see, there is trickle down to all levels of the funnel, and we could go further. Activation is influenced by whether people coming into the funnel match our Ideal Customer Profile (ICP), so marketing also influences it even if they don't own activation directly. 
 
@@ -214,3 +217,5 @@ Dave McClure's original framework suggests you spend 80% of your effort on refin
 [^1]: _[Startup Metrics for Pirates deck](https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-nov-2010) – Dave McClure refined his original deck from its inception in 2007. This version is from 2010._ 
 
 > **Want to build an AARRR funnel in PostHog?** Use our [AARRR dashboard template](/templates/aarrr-dashboard) to set one up quickly and easily.
+
+<NewsletterForm />

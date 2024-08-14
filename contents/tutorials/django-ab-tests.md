@@ -1,17 +1,19 @@
 ---
 title: How to set up A/B tests in Django
 date: 2024-02-09
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/django-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/django-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/django-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/django-ab-tests/experiment-setup-dark.png'
-import ResultsLight from '../images/tutorials/django-ab-tests/results-light.png'
-import ResultsDark from '../images/tutorials/django-ab-tests/results-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/experiment-setup-dark.png"
+export const ResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/results-light.png"
+export const ResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/django-ab-tests/results-dark.png"
 
 A/B tests help you improve your Django app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Django app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -59,7 +61,7 @@ urlpatterns = [
 
 Run `python3 manage.py migrate` to migrate the database (you only need to run this once) and then `python3 manage.py runserver` to see our app in action at `http://127.0.0.1:8000`.
 
-![Basic Django app](../images/tutorials/django-ab-tests/basic-app.png)
+![Basic Django app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-ab-tests/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -67,26 +69,43 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 
 To start, run `pip install posthog` to install [PostHog’s Python SDK](/docs/libraries/python).
 
-Then, initialize PostHog in `views.py` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
+Then, set the PostHog API key and host in your `AppConfig` in `basic_app/apps.py` so that's it's available everywhere:
 
-```python file=basic_app/views.py
-from django.http import HttpResponse
-from posthog import Posthog
+```python file=basic_app/apps.py
+from django.apps import AppConfig
+import posthog
 
-def home(request):
-    posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
-
-    # rest of your code
+class BasicAppConfig(AppConfig):
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "basic_app"
+    def ready(self):
+        posthog.api_key = '<ph_project_api_key>'
+        posthog.host = '<ph_client_api_host>'
 ```
 
-Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event using `posthog.capture()`:
+You can find your project API key and instance address in [your project settings](https://us.posthog.com/project/settings). 
+
+Next, add your `AppConfig` to `django_ab_tests/settings.py` under `INSTALLED_APPS`:
+
+```python file=django_ab_tests/settings.py
+INSTALLED_APPS = [
+    'basic_app.apps.BasicAppConfig',  # Add your app config
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+]
+```
+
+Lastly, we import `posthog` into `basic_app/views.py` and [capture](/docs/product-analytics/capture-events) a `$pageview` event using `posthog.capture()`:
 
 ```python file=views.py
 from django.http import HttpResponse
-from posthog import Posthog
+import posthog
 
 def home(request):
-    posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
     distinct_id = 'placeholder-user-id' 
 
     paragraphText = 'Placeholder text'
@@ -114,8 +133,6 @@ With this set up, restart your app and then refresh your browser a few times. Yo
 />
 
 ## 3. Create an A/B test in PostHog
-
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
 
 Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
 
@@ -145,7 +162,6 @@ from django.http import HttpResponse
 from posthog import Posthog
 
 def home(request):
-    posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
     distinct_id = 'placeholder-user-id' 
     enabled_variant = posthog.get_feature_flag('my-cool-experiment', distinct_id)
     

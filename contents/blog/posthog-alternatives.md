@@ -1,12 +1,14 @@
 ---
-title: "The most popular PostHog alternatives, compared"
+title: 'The most popular PostHog alternatives, compared'
 date: 2023-06-23
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/posthog-alternatives/posthog-alternatives.jpeg
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
 category: General
 tags:
@@ -25,7 +27,7 @@ This guide is an overview of some popular alternatives to PostHog, how they comp
 
 ## Amplitude
 
-![amplitude vs posthog](../images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg)
+![amplitude vs posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-amplitude/posthog-vs-amplitude.jpg)
 
 - **Founded:** 2012
 - **Similar to:** Mixpanel, Heap
@@ -38,7 +40,7 @@ Amplitude is most known as a product analytics platform, though it also offers s
 
 ### Amplitude vs PostHog summary
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -117,7 +119,7 @@ Amplitude is most known as a product analytics platform, though it also offers s
    		</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ### Key differences
 
@@ -159,7 +161,7 @@ More technical users sometimes find it inflexible and the documentation lacking:
 
 ## Mixpanel
 
-![mixpanel posthog](../images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg)
+![mixpanel posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-mixpanel/posthog-vs-mixpanel.jpeg)
 
 - **Founded:** 2009
 - **Similar to:** Amplitude, Heap
@@ -172,7 +174,7 @@ Mixpanel is purely focused on product analytics, going so far as to shut down ot
 
 ### Mixpanel vs PostHog summary
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -251,7 +253,7 @@ Mixpanel is purely focused on product analytics, going so far as to shut down ot
    		</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 **Read more:** [The best alternatives to Mixpanel compared](/blog/best-mixpanel-alternatives)
 
@@ -299,7 +301,7 @@ Mixpanel uses its own twist on SQL, called JQL, which adds a learning curve:
 
 ## FullStory
 
-![fullstory posthog](../images/blog/posthog-vs-fullstory/posthog-vs-fullstory.jpg)
+![fullstory posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-fullstory/posthog-vs-fullstory.jpg)
 
 - **Founded:** 2014
 - **Similar to:** LogRocket, Hotjar
@@ -312,7 +314,7 @@ FullStory is primarily a session replay tool, though it also includes some produ
 
 ### FullStory vs PostHog summary
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -391,7 +393,7 @@ FullStory is primarily a session replay tool, though it also includes some produ
    		</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ### Key differences
 
@@ -431,7 +433,7 @@ While users like FullStory's session replay features, some find it falls short f
 
 ## Heap
 
-![heap posthog](../images/blog/posthog-vs-heap/posthog-vs-heap.jpeg)
+![heap posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-heap/posthog-vs-heap.jpeg)
 
 - **Founded:** 2013
 - **Similar to:** Mixpanel, Amplitude
@@ -444,7 +446,7 @@ Heap is very similar to Amplitude and Mixpanel, though it added session replay f
 
 ### Heap vs PostHog at a glance
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -523,7 +525,7 @@ Heap is very similar to Amplitude and Mixpanel, though it added session replay f
    		</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ### Key differences
 
@@ -553,7 +555,7 @@ As autocapture, a feature it shares with PostHog:
 
 Users frequently find it unintuitive:
 
-- "Heap is not the easiest tool to use, in my opinion. I have used other data analytics platforms like Looker, Split and FullStory, and I find Heap to be very difficult to learn."
+- "Heap is not the easiest tool to use, in my opinion. I have used other data analytics platforms like Looker, [Split](/blog/best-split-alternatives) and FullStory, and I find Heap to be very difficult to learn."
 
 - "Not intuitive enough for deep analysis of funnels and journeys. It's difficult for me to understand what's happening between two points in a flow and to determine what the cause for drop-off rates may be."
 
@@ -565,7 +567,7 @@ Some users also complain about performance:
 
 ## LogRocket
 
-![logrocket posthog](../images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg)
+![logrocket posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-logrocket/posthog-vs-logrocket.jpg)
 
 - **Founded:** 2016
 - **Similar to:** FullStory
@@ -578,7 +580,7 @@ LogRocket is similar to FullStory in many respects, but with a greater focus on 
 
 ### LogRocket vs PostHog summary
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -657,7 +659,7 @@ LogRocket is similar to FullStory in many respects, but with a greater focus on 
    		</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ### Key differences
 
@@ -735,4 +737,4 @@ Users consistently praise LogRocket's session replay tools, but other features a
     />
 </BorderWrapper>
 
-Still not sure? [Request a call](/book-a-demo) from our customer success team.
+Still not sure? [Request a call](/demo) from our customer success team.

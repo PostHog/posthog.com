@@ -9,115 +9,112 @@ availability:
 
 ---
 
-## What is an event?
+An event is the core unit of data in PostHog. It represents an interaction a user has with your app or website. Examples include button clicks, pageviews, query completions, and signups.
 
-An event is any recordable interaction a user has in your application or website. Clicking a button, or visiting a page, is an event. Moving a mouse cursor isn't.
+Events consist of:
 
-You can create custom events, but PostHog also autocaptures many basic events (e.g. pageviews) for you. See our [autocapture docs](/docs/data/autocapture) for more on what it does and doesn't capture.
+1. An `event` name like `$pageview` or `query completed`. Events starting with `$` are PostHog defaults.
 
-You can view recent events from the [Activity page](https://us.posthog.com/events) in PostHog, which can be set to automatically update every 30 seconds for a live view of activity in your app.
+2. A `distinct_id` which is a unique identifier for [person](/docs/data/person), commonly a `uuidv7` value like `018daf23-89b3-7cf8-a4f1-94064c96df90`
 
-## Default events and properties
+3. A `timestamp` in ISO 8601 format, which is the time the event occurred like `2024-05-22T17:09:29.220Z`. This is most commonly `now()`, but can also be in the past. 
 
-You may notice that some events or properties are prefixed with `$` and show a PostHog icon next to them – e.g., `$pageview`, `$feature_flag_called`, `$current_url`, or `$os_version`. This indicates that these are default PostHog events or properties.
+4. `properties`, which are additional data like `color` or `$current_url`. Properties starting with `$` are PostHog defaults.
 
-### Pageview events
+You can [capture custom events](/docs/product-analytics/capture-events) using any of [our SDKs](/docs/libraries) or [our API](/docs/api/capture). PostHog's client-side SDKs, like [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native), can also [autocapture](/docs/data/autocapture) events for you.
 
-`$pageview` events are automatically sent when using the [JavaScript snippet or SDK](/docs/libraries/js). You can disable this by setting `capture_pageview: false` in the initialization [config](/docs/libraries/js#config).
+You can view recent events in your [activity tab](https://us.posthog.com/events), which automatically updates every 30 seconds for a live view of activity in your app.
 
-You can manually send pageview events by calling `posthog.capture('$pageview')`. This is necessary for single-page applications like [React](/docs/libraries/react), [Next.js](/docs/libraries/next-js#pages-router) or [Vue](/docs/libraries/vue-js#capturing-page-views), since otherwise a pageview event is only sent for the first page.
+## How events power PostHog
 
-### Pageleave events
+PostHog is event-based, meaning much of the functionality is triggered through events. Much of this is handled (and made nicer) by our SDKs, but under the hood, it is largely events. For example:
 
-Similar to pageview, `$pageleave` events are automatically sent. You can disable them by setting `capture_pageleave: false` in the [config](/docs/libraries/js#config). For single-page applications, you'll also need to manually send these events using `posthog.capture('$pageleave')`.
+- Changing [person properties](/docs/product-analytics/person-properties) using `$set` and `$unset` properties. 
 
-## Event filtering
+- [Identifying](/docs/product-analytics/identify) an anonymous user with the `$identify` event.
 
-You can filter events by [properties](/docs/integrate/client/js#sending-user-information) and [cohorts](/docs/user-guides/cohorts) to focus on specific events that are occurring in your project.
+- Connecting two users with the [`$create_alias`](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) event.
 
-While ingesting events, PostHog detects some type information for properties to allow more intelligent filtering, such as:
+- Creating and updating [groups](/docs/product-analytics/group-analytics) using `$groupidentify` events and `$group` properties. 
 
--   Boolean
--   Dates and Timestamps
--   Numbers
--   Strings
--   Everything else
+- Calculating bounce rate for web analytics relies on the `$pageleave` event.
 
-If you feel something has been detected incorrectly, you can manually change the type by going to `Data management -> Properties` selecting an event, clicking on `Edit`, and then changing the property type manually.
+- Calculating exposure and statistical significance for [experimentation](/docs/experiments) with the `$feature/experiment-feature-flag-key` property and `$feature_flag_called` event.
 
-### Boolean (true or false)
+- Sending data to webhooks is triggered by ingesting specific events.
 
-PostHog detects boolean values and allows filtering by only:
+## Event properties
 
--   equals
--   doesn't equal
--   is set
--   is not set
+Like persons and sessions, events have properties. These are used for [filtering](/docs/product-analytics/trends/filters), [breakdowns](/docs/product-analytics/trends/breakdowns), [cohorts](/docs/data/cohorts), targeting, and more.
 
-### Dates and Timestamps
+While ingesting events, PostHog detects some type information for properties such as:
 
-PostHog detects several formats of string as dates and times:
+- Strings AKA text (default)
+- Boolean
+- Dates and [timestamps](/docs/data/timestamps)
+- Numbers
+- Arrays
+- Objects
 
--   YYYY-MM-DD,
--   Date and date and time strings from [the ISO8601 standard](https://en.wikipedia.org/wiki/ISO_8601),
--   YYYY-MM-DD HH:mm:SS,
--   DD-MM-YYYY HH:mm:SS,
--   DD/MM/YYYY HH:mm:SS,
--   YYYY/MM/DD HH:mm:SS
--   [the RFC 822 standard](https://datatracker.ietf.org/doc/html/rfc822)
+If something has been detected incorrectly, you can manually change the type by going to [properties tab in data management](https://us.posthog.com/data-management/properties), selecting the property, clicking on `Edit`, and then changing the property type manually. You can also add tags or mark a property as verified on this page.
 
-In detection, day and month are interchangeable so MM-DD-YYYY would be detected as a date.
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/edit_property_light_8c549c3cc2.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/edit_property_dark_23507c2df2.png"
+    alt="Edit properties" 
+    classes="rounded"
+/>
 
-Ten and Thirteen digit numbers are detected as [timestamps](https://en.wikipedia.org/wiki/Unix_time) if the property name includes "time" or "timestamp"
+## Anonymous vs identified events
 
-Filtering against that property will then show a date picker and allows filtering only:
+By default, PostHog captures identified events. This means all events create a [person profile](/docs/data/person) and set [person properties](/docs/data/person-properties). 
 
--   equals
--   before
--   after
--   is set
--   is not set
+If you don't need person profiles or properties, you can capture anonymous events. Under our current [pricing](/pricing), anonymous events can be up to 4x cheaper than identified events (due to the cost of processing them).
 
-**See also:** [How PostHog calculates timestamps](/docs/data/timestamps).
+To capture anonymous events, set the `person_profiles` JavaScript Web config option to `identified_only` or capture an event with the `$process_person_profile` property set to `false`.
 
-### Numeric
+<MultiLanguage>
 
-PostHog detects numeric properties and allow filtering by only:
+```js-web
+posthog.init(
+    '<ph_project_api_key>',
+    {
+        api_host: '<ph_client_api_host>',
+        person_profiles: 'identified_only'
+    }
+)
+```
 
--   equals
--   doesn't equal
--   matches regex
--   doesn't match regex
--   greater than
--   lower than
--   is set
--   is not set
+```node
+client.capture({
+    distinctId: 'distinct_id',
+    event: 'event_name',
+    properties: {
+        $process_person_profile: false,
+    },
+})
+```
 
-### Strings (text)
+```python
+posthog.capture(
+    'distinct_id',
+    event='event_name',
+    properties={
+        '$process_person_profile': False
+    }
+)
+```
 
-PostHog detects text content. If it is not true/false, numeric, or a date time. You can filter by:
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "event": "event_name",
+  "distinct_id": "distinct_id",
+  "properties": {
+    "$process_person_profile": false
+  },
+  "timestamp": "2020-08-16T09:03:11.913767"
+}' <ph_client_api_host>/capture/
+```
 
--   equals
--   doesn't equal
--   contains
--   doesn't contain
--   matches regex
--   doesn't match regex
--   is set
--   is not set
-
-## Push-based event tracking
-
-Most users of PostHog will want to combine their back-end data, such as user information, with the front end actions of those users in their UI. There are three ways of passing data to PostHog:
-
--   Our [API](/docs/api/overview)
--   JS [snippet](/docs/integrate)
--   Client- and server-side [libraries](/docs/integrate)
-
-### Further reading
-
--   [How to trigger Discord notifications when an action is detected in PostHog](/tutorials/how-to-connect-discord-to-posthog-with-zapier)
--   [How to automatically organize PostHog actions in Notion](/tutorials/how-to-connect-posthog-and-notion-with-zapier)
--   [The complete guide to event tracking](/tutorials/event-tracking-guide)
-
-Want more? Check our [full list of PostHog tutorials](/tutorials).
+</MultiLanguage>

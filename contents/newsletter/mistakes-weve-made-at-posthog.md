@@ -1,8 +1,10 @@
 ---
 date: 2023-06-29
-title: "6 mistakes we've made at PostHog (and what we learned)"
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/newsletter-hog.png
+title: 6 mistakes we've made at PostHog (and what we learned)
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/newsletter-hog.png
 featuredImageType: full
 tags:
   - Being a founder
@@ -49,13 +51,15 @@ Talking to users is hard, especially when you’re trying to validate a problem 
 - [10x engineers talk to users](/product-engineers/10x-engineers-do-user-interviews) – Luke Harries
 - [How to turn user interviews into actionable snapshots](/product-engineers/interview-snapshot-guide) – Annika Schmid
 
+<NewsletterForm />
+
 ## 4. Enforcing metric-based OKRs on engineering teams
 
 In 2022, we formalized creating quarterly objectives and key results (OKRs) for all our teams.
 
 Conventional wisdom says OKRs should have an objective (what you want to achieve) and a key result (how you’ll measure success). This typically results in OKRs like this [(source)](https://www.whatmatters.com/articles/leading-indicator-product-market-fit-okrs):
 
-![okrs](../images/newsletter/mistakes/superhuman-okr.png)
+![okrs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/mistakes/superhuman-okr.png)
 
 There’s nothing inherently wrong with this approach – it’s a popular method for a reason. But our engineering teams found they agonized over finding the right metrics, and found they didn’t accurately reflect their subjective view of progress.
 
@@ -65,7 +69,7 @@ As one engineer put it:
 
 💡 **What we learned:** One size fits all rarely works, neither does following conventional wisdom because “Google does it”. Instead, we’ve given teams the freedom to set goals and how they measure them – including using precise metrics where appropriate. This has resulted in team goals like this:
 
-![okrs](../images/newsletter/mistakes/okrs.png)
+![okrs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/mistakes/okrs.png)
 
 ## 5. Taking too long to re-hire roles
 
@@ -102,3 +106,5 @@ In contrast, potential enterprise deals took months of intense effort, and rarel
 **[Forming Habits To Improve Retention](https://reidtandy.substack.com/p/forming-habits-to-improve-retention?utm_source=posthog-newsletter&utm_medium=email) – Growth Croissant:** Useful tips on improving retention from Substack’s Reid DeRamus inspired by consumer apps like Strava, Duolingo, and Apple Fitness.
 
 *Words by Andy Vandervell, who optimistically believes England will win The Ashes.*
+
+<NewsletterForm />

@@ -1,10 +1,13 @@
 ---
 title: How to use Next.js middleware to bootstrap feature flags
 date: 2023-07-04
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ["configuration", "feature flags"]
+tags:
+  - configuration
+  - feature flags
 ---
 
 [Next.js middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) enables you to run functions between requests and responses. We can use this to [bootstrap feature flags](/docs/feature-flags/bootstrapping-and-local-evaluation) on page load and make them available immediately without making an additional requests. This is useful for redirecting, showing components without flickering, avoiding layout changes, and more.
@@ -36,7 +39,7 @@ import { PostHogProvider } from 'posthog-js/react'
 
 if (typeof window !== 'undefined') {
   posthog.init("<ph_project_api_key>", {
-    api_host: "<ph_instance_address>"
+    api_host: "<ph_client_api_host>"
   })
 }
 
@@ -67,7 +70,7 @@ export default function RootLayout({ children }) {
 
 After setting up PostHog, we need a [feature flag](/docs/feature-flags). To create one, go to the [feature flag tab](https://app.posthog.com/feature_flags) in your PostHog instance, and click "New feature flag." Add a key (like `bootstrap-test`), set rollout to 100% of users, and press save.
 
-![Flag creation video](../images/tutorials/nextjs-bootstrap-flags/flag.mp4)
+![Flag creation video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-bootstrap-flags/flag.mp4)
 
 Back in your app, set up the base `page.js` file to check the flag:
 
@@ -92,7 +95,7 @@ export default function Home() {
 
 Once done, you can run the site by running the `npm run dev` command. Go to your site running on your [localhost](http://localhost) and you might see "Not yet." Refresh and, if your feature flag is set up correctly, it changes to "PostHog is awesome." This means the flag works, but the app isn’t loading the feature flag value right away. To solve this, we can bootstrap the feature flags. 
 
-![Load site with flags video](../images/tutorials/nextjs-bootstrap-flags/load.mp4)
+![Load site with flags video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-bootstrap-flags/load.mp4)
 
 ## Getting feature flags with Next.js middleware
 
@@ -133,7 +136,7 @@ export async function middleware(request) {
 //...
 ```
 
-With the distinct ID, we can make an API request to evaluate flags for the user. This requires making a request to `https://app.posthog.com/decide?v=3` (or `https://eu.posthog.com/decide?v=3`) with the `api_key` and `distinct_id`. 
+With the distinct ID, we can make an API request to evaluate flags for the user. This requires making a request to `https://us.i.posthog.com/decide?v=3` (or `https://eu.i.posthog.com/decide?v=3`) with the `api_key` and `distinct_id`. 
 
 > **Note:** We use the API because [Vercel edge middleware](https://vercel.com/docs/concepts/functions/edge-middleware) (which optimizes the speed of this request in your app) has a limited number of packages and `posthog-node` isn’t one of them.
 
@@ -151,7 +154,7 @@ const requestOptions = {
 };
 
 const ph_request = await fetch(
-	'https://app.posthog.com/decide?v=3', // or eu
+	'<ph_client_api_host>/decide?v=3',
 	requestOptions
 );
 const data = await ph_request.json();
@@ -189,7 +192,7 @@ export async function middleware(request) {
   };
   
   const ph_request = await fetch(
-		'https://app.posthog.com/decide?v=3', // or eu
+		'<ph_client_api_host>/decide?v=3', // or eu
 		requestOptions
 	);
   const data = await ph_request.json();
@@ -238,7 +241,7 @@ if (typeof window !== 'undefined') {
   }
 
   posthog.init("<ph_project_api_key>", {
-    api_host: "<ph_instance_address>",
+    api_host: "<ph_client_api_host>",
     bootstrap: bootstrapData
   })
 }

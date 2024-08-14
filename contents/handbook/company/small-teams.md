@@ -51,11 +51,11 @@ During the quarter:
 
 ## What is the role of the team lead?
 
-The team lead is overall responsible for ensuring the above happens. They should focus on enabling the team to solve these tasks together rather than trying to do it all themself.
+Overall, the team lead is responsible for ensuring the above happens. They should focus on enabling the team to solve these tasks together rather than trying to do it all themself.
 
 ## How do small teams and product managers work together?
 
-With our engineering-led culture, the engineers on the small team are normally the team leads overall responsible for their area product.
+With our engineering-led culture, the engineers on the small team are normally responsible for their area product.
 
 We have a small number of product managers who support the product small teams in achieving their goals. This includes helping with prioritization, creating/updating dashboards, competitors analysis, speaking to customers etc. However, having product managers doesn't mean that the engineers can abdicate these responsibilities. The engineers should be the experts of the product they are building and their customers.
 
@@ -153,7 +153,7 @@ James and Tim are ultimately responsible for us having (i) no gaps in product (i
 
 #### How do you stop duplicate work?
 
-Luke has the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
+James and Tim have the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
 
 By keeping communication asynchronous and transparent, this is made much easier to do than is typical at other organizations.
 

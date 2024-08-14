@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - marcus-hyett
-featuredImage: ../images/blog/new-vp-nailing-funnels/new-vp-nailing-funnels.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/new-vp-nailing-funnels/new-vp-nailing-funnels.png
 category: Product growth
 ---
 
@@ -79,5 +80,5 @@ But you can't just assume everyone will buy into the strategy because you posted
 
 Read more about our strategy [here](/handbook/strategy/overview).
 
-_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+<NewsletterForm />
 

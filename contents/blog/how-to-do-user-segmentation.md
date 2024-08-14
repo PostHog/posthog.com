@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - marcus-hyett
-featuredImage: ../images/blog/product-people.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/product-people.png
 featuredImageType: full
 category: Product growth
 tags:
@@ -87,6 +88,4 @@ PostHog is a powerful tool for user segmentation because you can explore segment
 
 - [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
-> PostHog is an open-source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
-
-<ArrayCTA />
+<NewsletterForm />

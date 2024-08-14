@@ -2,7 +2,7 @@
 date: 2021-05-28
 title: How to turn your engineers into product people
 featuredImage: >-
-  ../images/blog/turning-engineers-into-product-people/turning-engineers-into-product-people.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/turning-engineers-into-product-people/turning-engineers-into-product-people.png
 featuredImageType: full
 rootPage: /blog
 sidebar: Blog
@@ -59,3 +59,5 @@ Engineers are becoming increasingly mission-driven creators who want to understa
 ### Further reading
 
 - [The difference between product engineers and software engineers](/blog/product-engineer-vs-software-engineer)
+
+<NewsletterForm />

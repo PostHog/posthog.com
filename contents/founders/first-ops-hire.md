@@ -3,14 +3,15 @@ date: 2023-09-15
 title: Making your first startup ops hire – what founders should look for
 author:
   - charles-cook
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 tags:
   - Founders
   - People
   - Ops & finance
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Most founders I talk to approach their first ops hire in a totally sensible but wrong way. Their typical approach is to look at the long list of admin debt they have accumulated, cry a bit, and then look for someone who has done those tasks before, plus a bit extra. However, the reality is that _attributes_ >>> technical expertise when it comes to your _first_ ops hire.
@@ -70,3 +71,5 @@ Finally, your first ops hire needs to recuse themselves from general office goss
 - [What we learned about hiring from our first five employees](https://posthog.com/blog/posthog-first-five)
 - [The ops toolkit for early-stage startups](https://posthog.com/blog/startup-ops-toolkit)
 - [Startups, stop treating engineers like a different species](https://posthog.com/blog/stop-treating-engineers-differently)
+
+<NewsletterForm />

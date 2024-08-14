@@ -2,11 +2,11 @@ import { MDXProvider } from '@mdx-js/react'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { ProductVideo } from 'components/ProductVideo'
+import Link from 'components/Link'
 import { PrivateLink } from 'components/PrivateLink'
 import { Hero } from 'components/Hero'
 import { Check, Close } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
-import Link from 'components/Link'
 import { Section } from 'components/Section'
 import { SEO } from 'components/seo'
 import TutorialsSlider from 'components/TutorialsSlider'
@@ -15,6 +15,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import React from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
+import { OverflowXSection } from '../components/OverflowXSection'
+import { Tweet } from 'components/Tweet'
 
 const articleWidth = {
     lg: 'max-w-screen-2xl',
@@ -37,6 +39,7 @@ export default function Plain({ data }) {
         ProductVideo,
         FeatureSnapshot,
         PrivateLink,
+        OverflowXSection,
         Check,
         Close,
         a: A,

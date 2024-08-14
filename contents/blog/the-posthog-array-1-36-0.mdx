@@ -7,7 +7,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-array-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
 excerpt: >-
   PostHog 1.36.0 introduces AND/OR filtering, timezone support, universal
@@ -18,15 +19,15 @@ tags:
   - Release notes
 ---
 
-import AndOrFilteringImage from '../images/blog/array/1-36-0-and-or-filtering.png'
-import UniversalSearchImage from '../images/blog/array/1-36-0-universal-search.png'
-import InsightOnMultipleDashboardsImage from '../images/blog/array/1-36-0-insight-on-multiple-dashboards.png'
-import DataColorsImage from '../images/blog/array/1-36-0-data-colors.png'
-import NewFunnelVizImage from '../images/blog/array/1-36-0-new-funnel-viz.png'
-import NewFunnelVizDashboardImage from '../images/blog/array/1-36-0-new-funnel-viz-dashboard.png'
-import TimezoneImage from '../images/blog/array/1-36-0-timezone.png'
-import PreflightImage from '../images/blog/array/1-36-0-preflight.png'
-import MultiPointPersonsModalImage from '../images/blog/array/1-36-0-multi-point-persons-modal.gif'
+export const AndOrFilteringImage = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-36-0-and-or-filtering.png"
+export const UniversalSearchImage = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-36-0-universal-search.png"
+export const InsightOnMultipleDashboardsImage = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-36-0-insight-on-multiple-dashboards.png"
+export const DataColorsImage = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-36-0-data-colors.png"
+export const NewFunnelVizImage = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-36-0-new-funnel-viz.png"
+export const NewFunnelVizDashboardImage = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-36-0-new-funnel-viz-dashboard.png"
+export const TimezoneImage = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-36-0-timezone.png"
+export const PreflightImage = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-36-0-preflight.png"
+export const MultiPointPersonsModalImage = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-36-0-multi-point-persons-modal.gif"
 
 
 Want to know more about what we're up to? [Subscribe to our new newsletter](https://newsletter.posthog.com/subscribe), which we send once every two weeks!
@@ -157,7 +158,7 @@ View the commit log in GitHub for a full history of changes: [`release-1.35.0...
 
 -   **For SAML admins:** The previous update, [PostHog 1.35.0](/blog/the-posthog-array-1-35-0), changed SAML from being instance-based to domain-based. This means that SAML configuration takes place in the PostHog UI. You can have multiple SAML providers on the same instance (segment by domain, from the user's email address). Please review our [SSO docs](/sso) for more details.
 -   **For SAML admins:** If you use SAML on a self-hosted instance and have enabled SAML enforcement (previously `SAML_ENFORCED` environment variable) then this environment configuration has been deprecated too. You will now need to configure SSO enforcement via Authentication domains. Check the [SSO docs](/sso#authentication-domains) for more details.
--   **For ~~plugin~~ app developers:** `onEvent`, `onShapshot` and `onAction` event payloads have been cleaned up a bit. Specifically, `timestamp`, `$set`, and `$set_once` are always provided now, while `now`, `sent_at`, `site_url`, `offset`, as well as `kafka_offset` are no longer included. All apps available in our [App Store](https://posthog.com/apps) are compatible with this change. `processEvent` is unaffected.
+-   **For ~~plugin~~ app developers:** `onEvent`, `onShapshot` and `onAction` event payloads have been cleaned up a bit. Specifically, `timestamp`, `$set`, and `$set_once` are always provided now, while `now`, `sent_at`, `site_url`, `offset`, as well as `kafka_offset` are no longer included. All apps available in our App Store are compatible with this change. `processEvent` is unaffected.
 
 ## Share your feedback
 We'd love to hear anything you have to say about PostHog, good or bad. As a thank you, we'll share some awesome [PostHog merch](https://merch.posthog.com).

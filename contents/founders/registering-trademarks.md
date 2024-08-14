@@ -3,13 +3,14 @@ date: 2021-12-01
 title: Don’t bother securing your trademarks in the beginning
 author:
   - charles-cook
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
 tags:
   - Founders
   - Ops & finance
 crosspost:
-  - Blog  
+  - Blog
 ---
 _**Disclaimer:** This is intended as a short, tactical guide to getting your trademarks sorted out for the first time, on a minimal budget. This is *not* legal advice and we are not lawyers - this is just what has worked for us._
 
@@ -43,5 +44,5 @@ We’ve currently secured our brand name ('PostHog') and word mark in the four t
 
 The phrase 'open source' might denote a public codebase, but a brand name can definitely be trademarked. For example, we want people to [deploy our open source edition](https://github.com/PostHog/posthog) wherever they please, but we don't want them to slap the 'PostHog' name on random products. Besides, if you’re [raising money](https://posthog.com/blog/open-source-business-models) for your startup in the future, IP is a box that investors will want you to check as part of their diligence. 
 
-_Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
+<NewsletterForm />
 

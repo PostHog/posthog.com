@@ -1,20 +1,23 @@
 ---
 title: How to set up surveys in Astro
 date: 2024-01-30
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-featuredImage: ../images/tutorials/banners/tutorial-12.png
-tags: ['surveys']
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+tags:
+  - surveys
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/astro-surveys/events-light.png'
-import EventsDark from '../images/tutorials/astro-surveys/events-dark.png'
-import ImgSurveyResultsLight from '../images/tutorials/astro-surveys/survey-results-light.png'
-import ImgSurveyResultsDark from '../images/tutorials/astro-surveys/survey-results-dark.png'
-import ImgSurveyTemplatesLight from '../images/tutorials/astro-surveys/survey-templates-light.png'
-import ImgSurveyTemplatesDark from '../images/tutorials/astro-surveys/survey-templates-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-surveys/events-dark.png"
+export const ImgSurveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-surveys/survey-results-light.png"
+export const ImgSurveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-surveys/survey-results-dark.png"
+export const ImgSurveyTemplatesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-surveys/survey-templates-light.png"
+export const ImgSurveyTemplatesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/astro-surveys/survey-templates-dark.png"
 
 [Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Astro app.
 
@@ -52,7 +55,7 @@ Next, replace the code in `src/pages/index.astro` with a simple heading:
 
 Run `npm run dev` and navigate to `http://localhost:4321` to see your app in action.
 
-![Basic Astro app](../images/tutorials/astro-surveys/basic-app.png)
+![Basic Astro app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/astro-surveys/basic-app.png)
 
 ## 2. Add PostHog
 
@@ -74,11 +77,11 @@ In this file, add your PostHog `Web snippet`. You can find this in [your project
 
 ---
 <script>
-  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
   posthog.init(
     '<ph_project_api_key>',
     {
-      api_host:'<ph_instance_address>',
+      api_host:'<ph_client_api_host>',
     }
   )
 </script>
@@ -146,7 +149,7 @@ This tutorial will cover how to implement both options:
 
 ### Option 1: Use PostHog's prebuilt survey UI
 
-This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, handles all the display logic, and captures responses for you. You can also customize the questions, branding, and targeting as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
+This is the simplest option. PostHog has a variety of [survey templates](/templates?filter=type&value=survey) to choose from, handles all the display logic, and captures responses for you. You can also customize the questions, branding, and display conditions as needed – see our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
  
 To create a survey with a prebuilt UI, go to the [surveys tab](https://us.posthog.com/surveys) in PostHog and click "New survey". 
 
@@ -160,12 +163,12 @@ To create a survey with a prebuilt UI, go to the [surveys tab](https://us.postho
 Select any template, or you can create your own by clicking "Create blank survey". Then, configure your survey with the following details:
 
 1. Ensure `Presentation` is set to **Popover**.
-2. Set the targeting to `All users`.
+2. Set the display conditions to `All users`.
 3. Use the default values for everything else.
 
 Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it in your app. After submitting responses, you can [view results in PostHog](#4-view-results).
 
-![Popover survey in app](../images/tutorials/astro-surveys/popover-survey.png)
+![Popover survey in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/astro-surveys/popover-survey.png)
 
 ### Option 2: Implement your own survey UI
 
@@ -298,11 +301,11 @@ import CustomSurvey from '../components/CustomSurvey.astro';
 
 This shows a survey popup every time you visit your app's homepage.
 
-![Custom survey UI](../images/tutorials/astro-surveys/sample-survey-ui.png)
+![Custom survey UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/astro-surveys/sample-survey-ui.png)
 
 #### 2. Fetch the survey from PostHog
 
-PostHog keeps track of all active surveys for a user. This is especially helpful if you set up [custom targeting options](/docs/surveys/creating-surveys#targeting). 
+PostHog keeps track of all active surveys for a user. This is especially helpful if you set up [custom display conditions](/docs/surveys/creating-surveys#display-conditions).
 
 To fetch the active surveys, we use `posthog.getActiveMatchingSurveys()`. This returns an array of survey objects that looks like this:
 
@@ -476,7 +479,7 @@ import CustomSurvey from '../components/CustomSurvey.astro';
 						surveyElement.style.display = show ? 'block' : 'none';
 
 						if (show) {
-						  window.posthog.capture("survey seen", {
+						  window.posthog.capture("survey shown", {
 						    $survey_id: surveyID // required
 						  })
 						}
@@ -550,7 +553,7 @@ import CustomSurvey from '../components/CustomSurvey.astro';
 				    surveyElement.style.display = show ? 'block' : 'none';
 
 						if (show) {
-							window.posthog.capture("survey seen", {
+							window.posthog.capture("survey shown", {
 							  $survey_id: surveyID // required
 							})
 						}
@@ -595,7 +598,7 @@ After interacting with your survey, you can view results by selecting the survey
 - How many users have dismissed the survey.
 - Responses.
 
-You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
+If you capture identified events, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 <ProductScreenshot
   imageLight={ImgSurveyResultsLight} 

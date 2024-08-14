@@ -1,9 +1,10 @@
 ---
 date: 2023-05-09
-title: "Retention rate vs churn rate: An intro to churn analysis"
+title: 'Retention rate vs churn rate: An intro to churn analysis'
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-marketing/marketing-hog.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
 tags:
   - Product analytics
@@ -72,6 +73,8 @@ I've collated the better sources [in the appendix](#more-on-churn-rate-benchmark
 
 Good retention rates are the same, but inverted – 5% churn equals 95% retention, and so on.
 
+<NewsletterForm />
+
 ## Retention rate formula explained 📈
 
 So that's churn rate, but what about retention rate? The basic formula is very similar:
@@ -86,7 +89,7 @@ Needless to say, ending the year with fewer customers than you started isn't gre
 
 Now, the cool thing about retention rate is it's easy to visualize in a cohort retention table like this:
 
-![new user retention](../images/blog/retention-vs-churn/retention-table-example-all.png)
+![new user retention](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/retention-vs-churn/retention-table-example-all.png)
 
 Retention tables allow you to answer questions like:
 
@@ -103,7 +106,7 @@ Below is a PostHog retention table for an imaginary Dropbox clone called Hedgebo
 
 > `Unique users` who `signed up for the first time` in the last 8 weeks who then came back and triggered the `interacted with file` event in PostHog.
 
-![new user retention](../images/blog/retention-vs-churn/retention-table-example-all.png)
+![new user retention](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/retention-vs-churn/retention-table-example-all.png)
 
 To read it, just start on the left and work your way across:
 
@@ -119,13 +122,13 @@ In this example, we can see retention settles at ~20% from week 4 onwards in mos
 
 That's a useful baseline, but what happens if we filter by just people who use Windows?
 
-![new user retention windows](../images/blog/retention-vs-churn/new-user-retention-windows-users.png)
+![new user retention windows](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/retention-vs-churn/new-user-retention-windows-users.png)
 
 It's obvious Windows users retain worse than the baseline, dipping as low as 15% in week 4 onwards in the 'Dec 11' cohort. 
 
 Do macOS users retain better than Windows users? Let's check...
 
-![new user retention mac os](../images/blog/retention-vs-churn/retention-table-macos.png)
+![new user retention mac os](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/retention-vs-churn/retention-table-macos.png)
 
 They do! While the exact values vary, macOS users consistently retain better than Windows users. 
 
@@ -273,3 +276,5 @@ You can also [sign up to our newsletter](https://newsletter.posthog.com/subscrib
 > - [Recurly's 19-month study](https://recurly.com/research/churn-rate-benchmarks/) of 1,900 subscription products that use its platform. It breaks down churn for B2B and B2C products across multiple cohorts, including average revenue per customer (ARPC).
 >
 > - [Lenny Rachitksy's Q&A](https://www.lennysnewsletter.com/p/monthly-churn-benchmarks) on monthly churn, in which he polls several experts, including the CEO of subscriptions platform ProfitWell.
+
+<NewsletterForm />

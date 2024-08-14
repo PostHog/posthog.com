@@ -1,18 +1,21 @@
 ---
-title: "B2B startup marketing for noobs, by noobs – our most valuable lessons"
+title: 'B2B startup marketing for noobs, by noobs – our most valuable lessons'
 date: 2024-01-04
-author: ["andy-vandervell"]
-featuredImage: ../images/newsletter/startup-marketing/feature.png
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/startup-marketing/feature.png
 featuredImageType: full
 tags:
   - Marketing
 crosspost:
   - Founders
-  - Blog  
-seo: {
-  metaTitle: "B2B Startup Marketing for Noobs: What We've Learned in 3 Years",
-  metaDescription: "The most valuable B2B marketing strategy lessons from 3 years of growing a B2B startup from nothing to millions in revenue."
-}  
+  - Blog
+seo:
+  metaTitle: 'B2B Startup Marketing for Noobs: What We''ve Learned in 3 Years'
+  metaDescription: >-
+    The most valuable B2B marketing strategy lessons from 3 years of growing a
+    B2B startup from nothing to millions in revenue.
 ---
 
 In three years, we’ve grown PostHog from nothing in 2020 to tens of thousands of users, millions in revenue, and default alive.
@@ -21,12 +24,12 @@ We’re product-led. We have [product-market fit](/founders/product-market-fit-g
 
 How nooby? Well, here’s our team and their marketing “credentials”:
 
-- [Charles](/community/profiles/254) – leads marketing and (weirdly) ops and finance. No prior marketing experience.
-- [Andy](/community/profiles/62) – worked in online publishing for 15+ years. No prior marketing experience.
-- [Ian](/community/profiles/269) – software engineering background. No prior marketing experience.
-- [Lior](/community/profiles/684) – spent five years in engineering at Meta before PostHog. No prior marketing experience.
-- [Lottie](/community/profiles/227) – our awesome graphic designer. PostHog is her first proper job.
-- [Joe](/community/profiles/59) – former journalist and, to be fair, has actual marketing experience at previous startups. Way too much experience, probably.
+- [Charles](/charles) – leads marketing and (weirdly) ops and finance. No prior marketing experience.
+- [Andy](/andy) – worked in online publishing for 15+ years. No prior marketing experience.
+- [Ian](/ian) – software engineering background. No prior marketing experience.
+- [Lior](/lior) – spent five years in engineering at Meta before PostHog. No prior marketing experience.
+- [Lottie](/lottie) – our awesome graphic designer. PostHog is her first proper job.
+- [Joe](/joe) – former journalist and, to be fair, has actual marketing experience at previous startups. Way too much experience, probably.
 
 So, yeah. Here’s what we’ve learned about marketing for startups, specifically for a B2B startup for developers. Let us know where we’re wrong!
 
@@ -72,6 +75,8 @@ Other options include:
 
 Why do this? FWIW, a single *Product for Engineers* newsletter drives more clicks to our website than a $5,000 newsletter sponsorship we ran recently.
 
+<NewsletterForm />
+
 ## 4. Make your website genuinely different 🙃
 This means:
 
@@ -79,7 +84,7 @@ This means:
 
 2. Avoiding popular design tropes among similar products – how many devtool websites have you seen that look just like Linear?
 
-![posthog website](../images/newsletter/startup-marketing/website.png)
+![posthog website](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/startup-marketing/website.png)
 
 While our marketing and website teams work closely together, the website team has the final say on what appears on posthog.com. This stops the website becoming too marketing-y and falling foul of marketing ‘best practices’ that most developers (and people in general) despise.
 
@@ -89,7 +94,7 @@ A good (and different) website is a great source of word-of-mouth.
 
 Here’s a simplified history of online marketing attribution:
 
-![ryan reynolds](../images/newsletter/startup-marketing/marketing.png)
+![ryan reynolds](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/startup-marketing/marketing.png)
 
 
 Attribution has always been hard, and it’s only getting harder because traditional methods are impeded by privacy regulations. This is a 7/10 problem. The journey from 7/10 to 10/10 will end you.
@@ -130,7 +135,7 @@ Really good search-optimized content is highly leveraged – it’s cheaper than
 
 2. **It’s pointless before PMF** because your product is changing and you’re unlikely to have the domain authority to rank against entrenched rivals.
 
-![SEO journey](../images/newsletter/startup-marketing/seo-journey.png)
+![SEO journey](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/startup-marketing/seo-journey.png)
 
 That said, don’t delay once you do have product-market fit. It’ll be tempting to use AI to scale SEO quickly. This is a great strategy if you want to murder your growth every six months when Google tweaks its algorithm.
 
@@ -141,7 +146,7 @@ You really don’t want anyone outranking you for any search that’s “your br
 - **Comparisons** – i.e. "your company vs another company"
 - **Alternatives** – i.e. "alternatives to your company"
 
-There’s no shortage of websites that will try. G2 and its many imitators are top of that list, but your competitors will too. You may need to spend some money on defensive Google ads as well.
+There’s no shortage of websites that will try. G2 and its many imitators are top of that list, but your competitors will too. You may need to spend some money on defensive [Google ads](/tutorials/google-ads-reports) as well.
 
 Once you’ve built this content out, focus on SEO content targeting your rivals – e.g. “alternatives to rival companies”. And make it genuinely useful. Include comparison tables, real data, reviews from users, and up-to-date screenshots.
 
@@ -156,3 +161,5 @@ Once you’ve built this content out, focus on SEO content targeting your rivals
 **[Ten Principles for Growth as an Engineer](https://medium.com/@daniel.heller/ten-principles-for-growth-69015e08c35b) – Dan Heller:** ”Your job isn’t just to write the code and wait for everything else to fall into place; your job is to figure out how to create value with your efforts.”
 
 *Words by Andy Vandervell, who thinks people who use a hyphen instead of en dash are sociopaths.*
+
+<NewsletterForm />

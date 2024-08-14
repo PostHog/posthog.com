@@ -58,7 +58,9 @@ export const Select = ({
     }
 
     useEffect(() => {
-        fetchTopicGroups().then((topicGroups) => setTopicGroups(topicGroups))
+        fetchTopicGroups().then((topicGroups) =>
+            setTopicGroups(topicGroups.filter((group) => group?.attributes?.label !== 'Off-topic'))
+        )
     }, [])
 
     return (
@@ -190,7 +192,7 @@ function QuestionFormMain({
                                     />
                                 </div>
                                 <Field
-                                    className="opacity-0 absolute left-0 top-0 h-0 w-0 -z-50 border-0 p-0"
+                                    className="opacity-0 absolute left-0 top-0 h-0 w-0 -z-[50] border-0 p-0"
                                     name="url"
                                     id="url"
                                     type="text"
@@ -285,9 +287,10 @@ export const QuestionForm = ({
         const topicID =
             topic?.id ||
             other?.topicID ||
-            (await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
-                .then((res) => res.json())
-                .then((topic) => topic?.data && topic?.data[0]?.id))
+            (parentName &&
+                (await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${topicQuery}`)
+                    .then((res) => res.json())
+                    .then((topic) => topic?.data && topic?.data[0]?.id)))
 
         const data = {
             subject,
@@ -296,8 +299,8 @@ export const QuestionForm = ({
             slugs: [] as { slug: string }[],
             permalink: '',
             topics: {
-                // 50 is uncategorized topic
-                connect: [topicID || 50],
+                // 346 is uncategorized topic
+                connect: [topicID || 346],
             },
         }
 
@@ -360,11 +363,11 @@ export const QuestionForm = ({
             }
 
             if (formType === 'reply' && questionId) {
-                reply(transformedValues.body)
+                await reply(transformedValues.body)
             }
 
             if (onSubmit) {
-                onSubmit(transformedValues, formType)
+                await onSubmit(transformedValues, formType)
             }
 
             setLoading(false)

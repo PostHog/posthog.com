@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/lw-queries.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/lw-queries.png
 featuredImageType: full
 author:
   - karl-aksel-puulmann
@@ -31,7 +32,7 @@ However, as awesome as ClickHouse is, nothing is without sharp edges and trade-o
 
 ## Speeding up property filtering by 25x
 
-PostHog allows users to send and analyze an arbitrary number of event and user properties with their data. We store these properties as JSON-encoded string columns in our tables.
+PostHog allows users to send and analyze an arbitrary number of event and person properties with their data. We store these properties as JSON-encoded string columns in our tables.
 
 One of the first issues we saw after moving to ClickHouse was that, for our largest users, filtering by properties was slow.
 
@@ -174,9 +175,9 @@ Performance work is never complete and PostHog has a lot of work ahead of us to 
 Some projects currently in the pipeline are:
 
 -   **Removing JOINs for persons (and groups)** - ClickHouse is not designed for doing large-scale joins. We’re currently in the middle of refactoring our entire data model for events, persons, and groups to remove the need for JOINs, bypassing the biggest bottleneck most queries share. More information about our plans can be found [in this PR](https://github.com/PostHog/meta/pull/39/files#diff-4ba257e4b25986d35b3f05a142677c187a7b082284dfb66d5fd74d759c52d618).
--   **Smart caching time-series queries** - PostHog dashboards continually refresh data to show up-to-date graphs. However this results in a lot of repeated work, slowing down queries. By changing semantics around user properties and identifying users, we will be able to start smartly re-using past results when re-calculating queries.
+-   **Smart caching time-series queries** - PostHog dashboards continually refresh data to show up-to-date graphs. However this results in a lot of repeated work, slowing down queries. By changing semantics around person properties and identifying users, we will be able to start smartly re-using past results when re-calculating queries.
 -   **Better JSON support in ClickHouse** - [This feature](https://github.com/ClickHouse/ClickHouse/issues/23516) has been experimentally released in ClickHouse 22.3 and will unlock the benefits of materialized columns with much less complexity.
 
 > Interested in chatting about ClickHouse performance or working on similar problems? Send me an email: [karl+perf@posthog.com](mailto:karl+perf@posthog.com) or join [our community page](/posts).
 
-<ArrayCTA />
+<NewsletterForm />

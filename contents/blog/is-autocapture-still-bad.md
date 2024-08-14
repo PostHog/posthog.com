@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - joe-martin
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: General
 tags:
@@ -79,3 +80,5 @@ As [one of my colleagues puts it](https://github.com/PostHog/posthog.com/issues/
 Again, this is why PostHog offers both — because different teams need different solutions. Autocapture is best for some, manual is best for others and, for most, a mixture of both is preferable. Ultimately, it’s only by understanding and adapting to these needs that anyone, including PostHog, can build the best product. 
 
 It’s ironic that Amplitude doesn’t realize that. 
+
+<NewsletterForm />

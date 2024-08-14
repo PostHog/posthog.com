@@ -6,22 +6,28 @@ import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import airbus from './images/airbus.svg'
 import airbusDark from './images/airbus_dark.svg'
-import phantom from './images/phantom.svg'
-import phantomDark from './images/phantom_dark.svg'
+import hasura from './images/hasura.svg'
+import staplesDark from './images/staples_dark.svg'
+import staples from './images/staples.svg'
+import ycombinatorDark from './images/y-combinator_dark.svg'
+import ycombinator from './images/y-combinator.svg'
+import dhlDark from './images/dhl_dark.svg'
+import dhl from './images/dhl.svg'
+import hasuraDark from './images/hasura_dark.svg'
 import landmark from './images/landmark.svg'
 import landmarkDark from './images/landmark_dark.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
-import HubSpotForm from 'components/HubSpotForm'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import SalesforceForm from 'components/SalesforceForm'
 
 const features = [
-    'SSO SAML',
-    'Advanced permissions',
-    'B2C discounts',
-    'Team training',
+    'Volume discounts',
+    'SAML SSO',
+    'Custom MSA',
     'Dedicated support',
-    'Custom data retention',
+    'Personalized onboarding',
+    'Advanced permissions & audit logs',
 ]
 
 export default function ContactSales({ location }) {
@@ -52,7 +58,7 @@ export default function ContactSales({ location }) {
                 </section>
                 <section className="grid md:grid-cols-2 max-w-5xl mx-auto md:gap-x-16 gap-y-12">
                     <div className="order-2 md:order-1">
-                        <h3 className="text-lg mt-1 mb-4">Benefits of a PostHog Enterprise plan:</h3>
+                        <h3 className="text-lg mt-1 mb-4">Benefits of an enterprise plan:</h3>
                         <ul className="list-none m-0 p-0 mt-2 grid sm:grid-flow-col sm:grid-rows-3 space-y-1">
                             {features.map((feature) => {
                                 return (
@@ -63,38 +69,20 @@ export default function ContactSales({ location }) {
                                 )
                             })}
                         </ul>
-                        <h3 className="text-lg mt-14 mb-12">Who's using PostHog Cloud?</h3>
+                        <h3 className="text-lg mt-14 mb-12">Who trusts PostHog?</h3>
 
                         <div className="grid sm:grid-cols-2 sm:gap-x-12 gap-y-12">
-                            <div>
-                                <div className="text-center bg-[#2D2D2D] p-2 sm:p-3 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0 sm:max-w-full max-w-[200px]">
-                                    <p className="text-white leading-tight m-0 text-xs sm:text-base font-bold font-comic">
-                                        Whoa, industry leaders!
-                                    </p>
-                                    <svg
-                                        className="absolute right-6 -bottom-5 -scale-x-1"
-                                        width="35"
-                                        height="29"
-                                        viewBox="0 0 35 29"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M34.0329 28.7305L28.9422 2.03952L0.169405 0.617765C0.169405 0.617765 12.4378 8.50347 18.738 13.9774C25.0381 19.4513 34.0329 28.7305 34.0329 28.7305Z"
-                                            fill="#2D2D2D"
-                                        />
-                                    </svg>
-                                </div>
-                                <StaticImage
-                                    src="../Pricing/images/vacation-hog.png"
-                                    alt="Vacation Hog"
-                                    width={252}
-                                    placeholder="none"
+                            <div className="flex flex-wrap md:flex-col gap-4 md:gap-0  md:space-y-12 justify-center md:justify-start sm:order-last order-first">
+                                <img src={darkMode ? airbusDark : airbus} className="max-w-[150px] md:max-w-auto" />
+                                <img src={darkMode ? hasuraDark : hasura} className="max-w-[150px] md:max-w-auto" />
+                                <img
+                                    src={darkMode ? ycombinatorDark : ycombinator}
+                                    className="max-w-[150px] md:max-w-auto"
                                 />
                             </div>
                             <div className="flex flex-wrap md:flex-col gap-4 md:gap-0  md:space-y-12 justify-center md:justify-start sm:order-last order-first">
-                                <img src={darkMode ? airbusDark : airbus} className="max-w-[150px] md:max-w-auto" />
-                                <img src={darkMode ? phantomDark : phantom} className="max-w-[150px] md:max-w-auto" />
+                                <img src={darkMode ? staplesDark : staples} className="max-w-[150px] md:max-w-auto" />
+                                <img src={darkMode ? dhlDark : dhl} className="max-w-[150px] md:max-w-auto" />
                                 <img src={darkMode ? landmarkDark : landmark} className="max-w-[150px] md:max-w-auto" />
                             </div>
                         </div>
@@ -105,32 +93,182 @@ export default function ContactSales({ location }) {
                             <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the
                             form at a breakneck pace!
                         </p>
-                        <HubSpotForm
-                            autoValidate
-                            formID="21de475a-af2c-47c2-ae02-414aefdfdeb4"
-                            customFields={{
-                                maus: {
-                                    type: 'radioGroup',
-                                    options: [
-                                        { label: 'Under 10k/mo', value: 10_000 },
-                                        { label: '10k-50k/mo', value: 50_000 },
-                                        { label: '50k-100k/mo', value: 100_000 },
-                                        { label: '100k-500k/mo', value: 500_000 },
-                                        { label: '500k-1m/mo', value: 100_000_000 },
-                                        { label: 'More than 1m/mo', value: 100_000_000_000 },
-                                    ],
-                                },
-                                monthly_events: {
-                                    type: 'radioGroup',
-                                    options: [
-                                        { label: 'Under 1m/mo', value: 1_000_000 },
-                                        { label: '1m-2m/mo', value: 2_000_000 },
-                                        { label: '2m-10m/mo', value: 10_000_000 },
-                                        { label: '10m-100m/mo', value: 100_000_000 },
-                                        { label: 'More than 100m/mo', value: 100_000_000_000 },
-                                        { label: "I'm not sure!", value: 0 },
-                                    ],
-                                },
+                        <SalesforceForm
+                            type="lead"
+                            form={{
+                                fields: [
+                                    {
+                                        label: 'Email',
+                                        type: 'string',
+                                        name: 'email',
+                                        required: true,
+                                        fieldType: 'email',
+                                    },
+                                    {
+                                        label: 'Company',
+                                        type: 'string',
+                                        name: 'company',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Role',
+                                        name: 'role',
+                                        type: 'enumeration',
+                                        options: [
+                                            {
+                                                label: 'Engineering',
+                                                value: 'Engineering',
+                                            },
+                                            {
+                                                label: 'Founder',
+                                                value: 'Founder',
+                                            },
+                                            {
+                                                label: 'Leadership',
+                                                value: 'Leadership',
+                                            },
+                                            {
+                                                label: 'Marketing',
+                                                value: 'Marketing',
+                                            },
+                                            {
+                                                label: 'Other',
+                                                value: 'Other',
+                                            },
+                                            {
+                                                label: 'Product',
+                                                value: 'Product',
+                                            },
+                                            {
+                                                label: 'Sales',
+                                                value: 'Sales',
+                                            },
+                                        ],
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Which products are you interested in?',
+                                        name: 'products',
+                                        type: 'enumeration',
+                                        fieldType: 'checkbox',
+                                        cols: 1,
+                                        options: [
+                                            {
+                                                label: 'Product Analytics',
+                                                value: 'Product Analytics',
+                                            },
+                                            {
+                                                label: 'A/B Testing (Feature Flags)',
+                                                value: 'A/B Testing (Feature Flags)',
+                                            },
+                                            {
+                                                label: 'Session Replay',
+                                                value: 'Session Replay',
+                                            },
+                                            {
+                                                label: 'Other (CDP, Data Warehouse, Surveys)',
+                                                value: 'Other (CDP, Data Warehouse, Surveys)',
+                                            },
+                                        ],
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'I want to implement tracking on:',
+                                        name: 'tracking_on',
+                                        type: 'enumeration',
+                                        fieldType: 'checkbox',
+                                        cols: 1,
+                                        options: [
+                                            {
+                                                label: 'Marketing page',
+                                                value: 'Marketing page',
+                                            },
+                                            {
+                                                label: 'Web app',
+                                                value: 'Web app',
+                                            },
+                                            {
+                                                label: 'Mobile app',
+                                                value: 'Mobile app',
+                                            },
+                                            {
+                                                label: 'Server',
+                                                value: 'Server',
+                                            },
+                                            {
+                                                label: 'Other (e.g., extension, wearable)',
+                                                value: 'Other (e.g., extension, wearable)',
+                                            },
+                                        ],
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Which data warehouse do you use?',
+                                        name: 'data_warehouse',
+                                        type: 'enumeration',
+                                        fieldType: 'checkbox',
+                                        options: [
+                                            {
+                                                label: 'Snowflake',
+                                                value: 'Snowflake',
+                                            },
+                                            {
+                                                label: 'BigQuery',
+                                                value: 'BigQuery',
+                                            },
+                                            {
+                                                label: 'Redshift',
+                                                value: 'Redshift',
+                                            },
+                                            {
+                                                label: 'Azure',
+                                                value: 'Azure',
+                                            },
+                                            {
+                                                label: 'Other',
+                                                value: 'Other',
+                                            },
+                                            {
+                                                label: 'None',
+                                                value: 'None',
+                                            },
+                                        ],
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Monthly active users',
+                                        name: 'monthly_active_users',
+                                        type: 'string',
+                                        fieldType: 'number',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Do you need any of the following:',
+                                        name: 'needs',
+                                        type: 'enumeration',
+                                        fieldType: 'checkbox',
+                                        options: [
+                                            {
+                                                label: 'Legal/security review',
+                                                value: 'Legal/security review',
+                                            },
+                                            {
+                                                label: 'BAA for HIPAA',
+                                                value: 'BAA for HIPAA',
+                                            },
+                                        ],
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'What do you want to talk about on the call?',
+                                        name: 'talk_about',
+                                        type: 'string',
+                                        required: true,
+                                    },
+                                ],
+                                buttonText: 'Submit',
+                                message: "Message received. We'll be in touch!",
+                                name: 'Contact sales',
                             }}
                         />
                     </div>

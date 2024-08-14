@@ -10,16 +10,19 @@ We understand organizing travel can be a challenge when you have personal/family
 
 - Once a year: all-company offsite
 - Once a year: Small Team offsite (app and platform teams do this as a single combined offsite)
-- Occasionally: [in-person onboarding](https://posthog.com/handbook/people/onboarding#onboarding-buddy)
-- Whenever you like: [in-person meetups](https://posthog.com/handbook/people/spending-money#meeting-each-other)
+- Occasionally: [in-person onboarding](/handbook/people/onboarding#onboarding-buddy)
+- Whenever you like: [in-person meetups](/handbook/people/spending-money#meeting-each-other)
 
 ## All-company offsites
+
+> Curious about our all-company offsites? Check out these links:
+> - **2021** [We shot this video at our Portugal offsite](https://www.youtube.com/watch?v=WOBH1Qy0xhA)
+> - **2023** [What we built at our sun-kissed Aruba hackathon](https://posthog.com/blog/aruba-hackathon)
+> - **2024** [What we built at our windswept Mykonos hackathon](https://posthog.com/blog/mykonos-hackathon)
 
 Once a year, the entire company will get together somewhere in the world for a week. Usually we'll all fly on Sunday, have an opening dinner, spend the week doing a mix of hard work, strategy, culture and fun activities and we then all fly back home on Friday. Our past offsites have been in Italy, Portugal and Iceland.
 
 These are organized by the Ops & People team, and we budget up to $3,000 per person in total for these. 
-
-We filmed a video in [Porto in August 2021](https://youtu.be/WOBH1Qy0xhA) which should give you a taste for how these run!
 
 Typical agenda:
 - A couple of structured social events
@@ -42,14 +45,17 @@ Some guidelines:
 - These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. 
 
 Ideas for the agenda:
+
 - A spoken README session early in the week to share "Who am I/How I work best"
 - Planning session. What does the team want to achieve in the next month/quarter/year?
-- Look at the [team page](https://posthog.com/handbook/team-structure#small-teams) - what needs to be updated?
+- Look at the [team page](/handbook/team-structure#small-teams) - what needs to be updated?
 - [360 degree feedback session](/handbook/people/feedback#ground-rules) - these are more effective at small team offsites
-    - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant. Particularly for people who might be anxious about the format or the feedback.
+    - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant, particularly for people who might be anxious about the format or the feedback.
 - Hackathon - try to leave 2 days for this
 
-The budget for these trips is up to $1,500 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. 
+Here's a real-world example: [Product Analytics team's Munich offsite agenda](https://posthog.slack.com/canvas/C07A0BQEAUB) (internal Slack link). Feel free to take inspiration – though your team's needs and wants might be quite different!
+
+The budget for these trips is up to $2,000 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. Generally it's easier to hit budget if you have people travel in on a Monday and out on a Friday - they don't need to be as long as a whole team offsite. 
 
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
 
@@ -58,6 +64,18 @@ You should assign someone on the small team to be responsible for planning the o
 PostHog runs the Hedge House, in Cambridge, UK. It's a place designed for small teams to run their offsites and for in-person onboarding. We'd recommend using the Hedge House for small team offsites for cost and convenience reasons if you are in Europe. 
 
 Anyone at PostHog is welcome to use it as much as they like. See the [full Hedge House docs](https://docs.google.com/document/d/1HS1LPT5fNzAus6TZr_KjZfbQkMfjaGlUYOEZe3fNn_c/edit).
+
+If you'd like to book it, please message Kendal in the #team-people-and-ops channel to check availability. 
+
+## London hotel recommendations
+
+For offsites and onboardings in London, below is a list of hotels recommended in our [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) by folks who have stayed at these hotels.  These are all relatively near our [Work.Life coworking space in Farringdon](https://work.life/office-space/london/city/farringdon/): 
+
+- [citizenM Tower of London hotel](https://www.citizenm.com/hotels/europe/london/tower-of-london-hotel)
+- [Clayton Hotel - City of London](https://www.claytonhotels.com/city-of-london/)
+- [Hampton by Hilton  - London Old Street](https://www.hilton.com/en/hotels/lhroshx-hampton-london-old-street/)
+- [hub by Premier Inn London Clerkenwell hotel](https://www.premierinn.com/gb/en/hotels/england/greater-london/london/hub-london-clerkenwell.html)
+- [Yotel London City](https://www.yotel.com/en/hotels/yotel-london-city)
 
 ## Travel insurance
 

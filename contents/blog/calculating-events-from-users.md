@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/data-management-feature/posthog-data-management.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/data-management-feature/posthog-data-management.png
 featuredImageType: full
 author:
   - simon-fisher
@@ -70,7 +71,7 @@ As a rule of thumb, most fell within the range of 50-100 tracked events per MAU 
 
 We then did a deeper analysis of the different types of customers and came up with the following list of product types and expected monthly events per MAU.
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -146,7 +147,7 @@ We then did a deeper analysis of the different types of customers and came up wi
     	</tr>	
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 As you can see, event counts vary wildly across different types of products, but this should help you get closer to an estimated event count
 based on your product and MAU count.

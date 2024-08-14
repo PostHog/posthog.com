@@ -63,8 +63,8 @@ const features = [
         fade: true,
     },
     {
-        title: 'Targeting',
-        description: 'Target by URL, user property, or feature flag when used with Feature Flags',
+        title: 'Display Conditions',
+        description: 'Display surveys based on URL, person property, or feature flag when used with Feature Flags',
         image: <StaticImage src="./images/targeting.png" width={428} placeholder="none" />,
     },
     {
@@ -130,7 +130,7 @@ const faqs = [
     {
         question: 'Is there a free trial on paid plans?',
         children:
-            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/contact-sales">get in touch</a>.',
+            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/talk-to-a-human">get in touch</a>.',
     },
     {
         question: 'What currency are your prices in?',
@@ -320,7 +320,7 @@ const PairsWithArray = [
 ]
 
 export const ProductSurveys = () => {
-    const { purplewave } = useStaticQuery(graphql`
+    const { purplewave, elevenlabs } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -336,6 +336,9 @@ export const ProductSurveys = () => {
         }
         {
             purplewave: mdx(slug: { eq: "customers/purplewave" }) {
+                ...ProductCustomerFragment
+            }
+            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -366,11 +369,16 @@ export const ProductSurveys = () => {
                     />
                 </div>
                 <section id="customers" className="-mt-36 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-1 gap-4 mb-10 md:mb-20">
+                    <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="reached a 25% response rate with surveys"
                             quote="I hate having to switch software. With PostHog, all our data and survey responses were centralized in one platform."
                             customer={purplewave}
+                        />
+                        <CustomerCard
+                            outcome="uses surveys to organize interviews and more"
+                            quote="We even use surveys to send a little pop-up to our most active users and ask them to review us on G2."
+                            customer={elevenlabs}
                         />
                     </ul>
                 </section>
@@ -445,7 +453,7 @@ export const ProductSurveys = () => {
                         <h3 className="text-center mb-8">So, what's best for you?</h3>
                         <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
                             <VsCompetitor
-                                title="Reasons a competitor might be better for you (for now...)"
+                                title="Reasons a competitor may be best for you(for now...)"
                                 image={
                                     <StaticImage
                                         src="../../../images/products/competitors-surveys.png"
@@ -481,7 +489,7 @@ export const ProductSurveys = () => {
                         <p className="text-center text-sm font-medium">
                             Have questions about PostHog? <br className="md:hidden" />
                             <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                            <Link to="/contact-sales">book a demo</Link>.
+                            <Link to="/talk-to-a-human">book a demo</Link>.
                         </p>
                     </section>
                 </div>
@@ -573,7 +581,7 @@ export const ProductSurveys = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicId={64} />
+                    <Questions topicIds={[347]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>

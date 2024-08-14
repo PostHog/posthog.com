@@ -36,15 +36,21 @@ export const slideButtons = [
         placeholderIcon: 'IconMessage',
     },
     {
-        title: 'Data pipeline',
+        title: 'Data pipelines',
         lottieSrc: '/lotties/product-icons/data-pipeline.lottie',
-        color: '[#2EA2D3]',
+        color: 'sky-blue',
         placeholderIcon: 'IconDecisionTree',
     },
     {
         title: 'Data warehouse',
         lottieSrc: '/lotties/product-icons/data-warehouse.lottie',
-        color: '[#8567FF]',
+        color: 'lilac',
         placeholderIcon: 'IconDatabase',
+    },
+    {
+        title: 'AI engineering',
+        color: '[#8B0DC8]',
+        colorDark: '[#C170E8]',
+        placeholderIcon: 'IconAI',
     },
 ]

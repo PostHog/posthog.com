@@ -1,7 +1,8 @@
 ---
 date: 2022-08-17
 title: How to plan a killer company offsite in just 8 weeks
-featuredImage: ../images/blog/planning-a-company-offsite/planning-offsite.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
 author:
   - grace-mckenzie
@@ -9,7 +10,7 @@ tags:
   - Founders
   - Ops & finance
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 As a company born at the beginning of the pandemic, PostHog has been fully-remote from its inception. Our team is 35+ people distributed across 11 countries; we have no central office, but [we still value getting together](/blog/asynchronous-remote-companies) in person. 
@@ -71,8 +72,10 @@ Numbers can vary wildly depending on location, accommodations, activities, team 
 - Food & drinks = $50/day/person
 - Contingency = 10% of total budget
 
-As a reference, we budget $1,500 per person for a small team offsite and $3,000-5,000 for an all-company offsite, depending on location.
+As a reference, we budget $2,000 per person for a small team offsite and $3,000-5,000 for an all-company offsite, depending on location.
 
 ## Final thoughts
 
 Offsite planning can often be some of the hardest, yet most rewarding work you can do in a startup. I hope the information above helps you along the way, but be sure to check out [our open-source guide](/handbook/company/offsites#how-to-plan-an-offsite-in-8-weeks---a-checklist) for planning offsites. It includes our comprehensive checklist and some public templates you can use to make the process as efficient as possible.
+
+<NewsletterForm />

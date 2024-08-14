@@ -1,11 +1,12 @@
 ---
 date: 2024-01-12
-title: "In-depth: PostHog vs Matomo"
+title: 'In-depth: PostHog vs Matomo'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/comparisons/matomo.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/comparisons/matomo.jpeg
 featuredImageType: full
 author:
   - andy-vandervell
@@ -45,7 +46,7 @@ All features in PostHog Open Source are totally free, including core product ana
 
 PostHog Cloud adds [experimentation](/product/experimentation-suite), [group analytics](/docs/user-guides/group-analytics), and support for multiple projects. It's free to use up to 1 million events per month.
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -220,7 +221,7 @@ PostHog Cloud adds [experimentation](/product/experimentation-suite), [group ana
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ## Integrations and data sources
 
@@ -260,13 +261,13 @@ In addition to extensive selection of dedicated integrations, PostHog [offers tw
 
 ## Strengths of PostHog
 
-![PostHog screenshot](../images/screenshots/hogflix-dashboard.png)
+![PostHog screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
 ### Combining feature flags and product analytics
 
 Feature flags are at the core what makes PostHog a great tool for product-lead businesses. They're especially useful for gradually rolling out new features, and quickly rolling back if you detect problems, but they can be used in other creative ways. 
 
-Need feedback on a design change? Roll it out to internal users first to gather feedback. Need to optimize messaging for different regions or demographics? Use a feature flag targeted on user properties. Want to change something without the CEO noticing? Create a flag just for them. Ok, we don't actually recommend the latter, but you get the idea.
+Need feedback on a design change? Roll it out to internal users first to gather feedback. Need to optimize messaging for different regions or demographics? Use a feature flag targeted on person properties. Want to change something without the CEO noticing? Create a flag just for them. Ok, we don't actually recommend the latter, but you get the idea.
 
 Feature flags also integrate with other analytics insights, so you can breakdown a conversion funnel by a feature flag, or filter trends, paths, and numerous other insights by specific feature flags. Using [Feature Flags](/product/feature-flags) and product analytics together gives developers a complete toolset.
 
@@ -276,7 +277,7 @@ PostHog and Matomo both support event tracking, but PostHog goes one step furthe
 
 ## Strengths of Matomo
 
-![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
+![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 ### E-commerce and marketing analytics
 
@@ -330,5 +331,9 @@ Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
 ### What about ad blockers?
 
 We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
+
+### Can I migrate from Matomo to PostHog?
+
+Yes. See our [Matomo to PostHog migration guide](/docs/migrate/matomo) for more.
 
 <ArrayCTA />

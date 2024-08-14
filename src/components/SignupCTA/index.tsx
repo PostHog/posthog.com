@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { RenderInClient } from 'components/RenderInClient'
 import usePostHog from '../../hooks/usePostHog'

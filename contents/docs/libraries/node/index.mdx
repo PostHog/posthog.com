@@ -3,15 +3,16 @@ title: Node.js
 sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
-github: https://github.com/PostHog/posthog-js-lite/tree/master/posthog-node
-icon: ../../../images/docs/integrate/nodejs.svg
+github: 'https://github.com/PostHog/posthog-js-lite/tree/master/posthog-node'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg
 features:
-    eventCapture: true
-    userIdentification: true
-    autoCapture: false
-    sessionRecording: false
-    featureFlags: true
-    groupAnalytics: true
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
 ---
 
 If you're working with Node.js, the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
@@ -26,14 +27,14 @@ import NodeInstall from '../../integrate/_snippets/install-node.mdx'
 
 | Variable                      | Description                                                                                                           | Default value              |
 | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------- | :------------------------- |
-| `host`                        | Your PostHog host                                                                                                     | `https://app.posthog.com/` |
+| `host`                        | Your PostHog host                                                                                                     | `https://us.i.posthog.com/`|
 | `flushAt`                     | After how many capture calls we should flush the queue (in one batch)                                                 | `20`                       |
 | `flushInterval`               | After how many ms we should flush the queue                                                                           | `10000`                    |
 | `personalApiKey`              | An optional [personal API key](/docs/api/overview#personal-api-keys-recommended) for evaluating feature flags locally | `null`                     |
 | `featureFlagsPollingInterval` | Interval in milliseconds specifying how often feature flags should be fetched from the PostHog API                    | `300000`                   |
 | `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
 | `maxCacheSize`                | Maximum size of cache that deduplicates $feature_flag_called calls per user.                                          | `50000`                    |
-| `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                         | `true`                    |
+| `disableGeoip`                | When true, disables automatic GeoIP resolution for events and feature flags.                                          | `true`                     |
 
 > **Note:** When using PostHog in an AWS Lambda function or a similar serverless function environment, make sure you set `flushAt` to `1` and `flushInterval` to `0`. Also, remember to always call `await posthog.shutdown()` at the end to flush and send all pending events.
 
@@ -44,9 +45,9 @@ import NodeSendEvents from '../../integrate/send-events/_snippets/send-events-no
 
 <NodeSendEvents />
 
-## Setting user properties
+## Person profiles and properties
 
-To set [user properties](/docs/data/user-properties), include the properties you'd like to set when capturing an event: 
+PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```node
 client.capture({
@@ -59,11 +60,32 @@ client.capture({
 })
 ```
 
-For more details on the difference between `$set` and `$set_once`, see our [user properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
+
+To capture anonymous events without person profiles, set the event's `$process_person_profile` property to `false`:
+
+```node
+client.capture({
+    distinctId: 'distinct_id_of_the_user',
+    event: 'movie_played',
+    properties: {
+        $process_person_profile: false,
+    },
+})
+```
 
 ## Alias
 
-Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend. 
+
+In this case, you can use `alias` to assign another distinct ID to the same user.
+
+```node
+client.alias({
+    distinctId: 'distinct_id',
+    alias: 'alias_id',
+})
+```
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
@@ -276,4 +298,5 @@ With the release of V2, the API was kept mostly the same but with some small cha
 1. The minimum PostHog version requirement is 1.38
 2. The `callback` parameter passed as an optional last argument to most of the methods is no longer supported
 3. The method signature for `isFeatureEnabled` and `getFeatureFlag` is slightly modified. See the above documentation for each method for more details.
-4. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js-lite/blob/master/posthog-node/CHANGELOG.md)
+4. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js-lite/blob/master/posthog-node/CHANGELOG.md)import { node } from 'webpack'
+

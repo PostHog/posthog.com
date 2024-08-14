@@ -1,9 +1,10 @@
 ---
 date: 2024-02-13
-title: "Product engineer vs software engineer: How are they different?"
+title: 'Product engineer vs software engineer: How are they different?'
 author:
   - ian-vanagas
-featuredImage: ../images/blog/product-engineer.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/product-engineer.jpg
 featuredImageType: full
 category: Engineering
 tags:
@@ -17,7 +18,7 @@ Software companies were once dominated by two types of roles: product managers a
 
 Want proof? Look at this graph:
 
-![product-engineer-trends](../images/blog/product-engineer-trend.png)
+![product-engineer-trends](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-trend.png)
 
 Online searches for product engineers have grown by 80% since 2021 as startups like [ourselves](https://newsletter.posthog.com/p/beyond-the-10x-engineer), [incident.io](http://incident.io/), and [Ghost](https://ghost.org/), prioritize engineers who are customer obsessed, talk to them directly, and comfortable working autonomously. 
 
@@ -79,10 +80,12 @@ Just remember product engineering is more of a way of working, and thinking, tha
 
 Product engineers are ideal for startups, and companies that want to be agile and move fast, such as B2B SaaS or consumer subscription service. They take a holistic view of the product, and the ability to move fast when the need arises. They're less effective for companies with large, technically complex products, like a data tool, or platforms for large enterprises.
 
-Picking what's right is up to the company and its goals. If you're a small team focusing on building great products, multi-skilled product engineers who can talk to users are a great choice. If your larger product requires specialization to scale and maintain, software engineers are the better choice. Companies with both types of roles have succeeded, and more will continue to succeed.
+Picking what's right is up to the company and its goals. If you're a small team focusing on building great products, multi-skilled product engineers who can [talk to users](/newsletter/talk-to-users) are a great choice. If your larger product requires specialization to scale and maintain, software engineers are the better choice. Companies with both types of roles have succeeded, and more will continue to succeed.
 
 ## Further reading
 
 - [What is a product engineer (and why they matter)](/blog/what-is-a-product-engineer/)
 - [Startups, stop treating engineers like a different species](/blog/stop-treating-engineers-differently)
 - [The really important job interview questions engineers should ask (but don't)](/blog/what-to-ask-in-interviews)
+
+<NewsletterForm />

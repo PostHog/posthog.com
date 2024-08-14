@@ -50,7 +50,7 @@ const DropdownContainer = forwardRef(function DropdownContainer(props, ref) {
     return (
         <div
             ref={ref}
-            className="px-5 py-4 absolute w-full border-b z-50 dark:bg-accent-dark bg-accent border-border dark:border-dark shadow-md overflow-y-auto h-[40vh]"
+            className="px-5 py-4 absolute w-full border-b z-[50] dark:bg-accent-dark bg-accent border-border dark:border-dark shadow-md overflow-y-auto h-[40vh]"
         >
             {children}
         </div>
@@ -188,7 +188,7 @@ export default function MobileNav({ className = '', menu: postMenu }) {
     const Container = compact ? DropdownContainer : MenuContainer
     const ActiveIcon = Icons[activeMenuItem.icon]
     return (
-        <div className={compact ? 'sticky top-[69px] z-50 dark:bg-dark bg-tan' : ''}>
+        <div className={compact ? 'sticky top-[69px] z-[50] dark:bg-dark bg-tan' : ''}>
             <button
                 onClick={() => setOpen(open === 'menu' ? null : 'menu')}
                 className={`font-bold px-5 py-2 flex w-full items-center justify-between border-b border-border dark:border-dark group -mt-1 ${className}`}

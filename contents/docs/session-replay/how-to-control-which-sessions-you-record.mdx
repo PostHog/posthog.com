@@ -1,18 +1,18 @@
 ---
 title: How to control which sessions you record
 availability:
-    free: full
-    selfServe: full
-    enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import ImgFeatureFlagControlLight from '../../images/docs/session-replay/select-replay-control-flag-light-mode.png'
-import ImgFeatureFlagControlDark from '../../images/docs/session-replay/select-replay-control-flag-dark-mode.png'
-import ImgSampleConfigLight from '../../images/tutorials/limit-session-recordings/sampling-config-light-mode.png'
-import ImgSampleConfigDark from '../../images/tutorials/limit-session-recordings/sampling-config-dark-mode.png'
-import ImgMinDurationLight from '../../images/tutorials/limit-session-recordings/min-duration-light-mode.png'
-import ImgMinDurationDark from '../../images/tutorials/limit-session-recordings/min-duration-dark-mode.png'
+export const ImgFeatureFlagControlLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/select-replay-control-flag-light-mode.png"
+export const ImgFeatureFlagControlDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/select-replay-control-flag-dark-mode.png"
+export const ImgSampleConfigLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/sampling-config-light-mode.png"
+export const ImgSampleConfigDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/sampling-config-dark-mode.png"
+export const ImgMinDurationLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/min-duration-light-mode.png"
+export const ImgMinDurationDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/limit-session-recordings/min-duration-dark-mode.png"
 
 If you want control over which sessions to record:
 
@@ -30,7 +30,7 @@ For example:
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     disable_session_recording: true,
     // ... other options
 })
@@ -43,9 +43,12 @@ posthog.startSessionRecording()
 
 You can set a billing limit [using these instructions](https://posthog.com/docs/billing/limits-alerts). We'll stop ingesting recordings when you reach your limit. 
 
-# Available on all plans started since Jan 2024
+# Not available on all plans
 
-We're currently testing these new controls and will release them more widely once those tests are complete. 
+Other controls are available to:
+
+* free and paid plans started since Jan 2024
+* any paid plans started before then
 
 ## With feature flags
 
@@ -76,6 +79,10 @@ Our recommendation is to start with capturing all sessions (e.g. 100% - the defa
 />
 
 Whenever a new session starts after you select a collection below 100%, the browser generates a random number between 0 and 1. If the number is less than the sampling rate (e.g. 0.9 when set to 90%), the session is recorded. If it is greater than the sampling rate, the session is not recorded.
+
+### Overriding sampling
+
+Since posthog-js version 1.119.0 the SDK allows passing an override config when calling `startSessionRecording`. So, you can set a sample rate but can also manually call `posthog.startSessionRecording({sampling: true})` in your code which ensures a recording starts no matter what sample rate you have set. 
 
 ## Minimum duration
 

@@ -1,8 +1,10 @@
 ---
 date: 2023-09-07
-title: "Everything we've learned about hiring for startups (so far)"
-author: ["andy-vandervell"]
-featuredImage: ../images/newsletter/feature-images/hiring.png
+title: Everything we've learned about hiring for startups (so far)
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/feature-images/hiring.png
 featuredImageType: full
 tags:
   - People
@@ -34,7 +36,7 @@ PostHog’s co-founders, Tim and James, wrote [our public handbook](/handbook/) 
 
 ## 2. Your early users could be your best hires
 
-In the early days, PostHog’s CEO, [James Hawkins](/community/profiles/71), would check out people who starred the repo and sometimes get in touch to gather feedback. One such call resulted in our third hire, [James Greenhill](/community/profiles/90).
+In the early days, PostHog’s CEO, [James Hawkins](/james), would check out people who starred the repo and sometimes get in touch to gather feedback. One such call resulted in our third hire, [James Greenhill](/jams).
 
 On the call, James G explained Uber (where he worked) had built a bunch of internal tools like PostHog for data control reasons. He found the project interesting and wanted to work on it. He ended up doing a few days of paid work and the rest is history.
 
@@ -56,7 +58,7 @@ Follow these three principles and your ads will stand out from 90% of the compet
 
 **Why is this important?** Being transparent demonstrates credibility. It shows you’ve thought about the process, why you’re recruiting that role, and you won’t waste people’s time with lowball offers.
 
-![comp calculator](../images/newsletter/hiring/comp-calc.png)
+![comp calculator](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/hiring/comp-calc.png)
 
 ## 4. A “soft yes” is actually a no
 
@@ -84,6 +86,8 @@ As Charles Cook, our head of ops and a veteran of multiple startups, [explains](
 
 **Why is this important?** Managers need to properly own hiring. Those that don’t end up hiring average people and blaming their recruiters.
 
+<NewsletterForm />
+
 ## 6. Good people are always in demand
 
 There’s a school of thought that hiring is easier when other, much bigger, companies are cutting people. This hasn’t been our experience. Here’s Charles [again](/blog/early-stage-startup-hiring-strategy#myth-hiring-gets-easier-when-other-companies-are-making-cuts):
@@ -109,7 +113,7 @@ We’re as flexible as possible with SuperDays. They can be split over more than
 
 **Why is this important?** Real work filters out people who are just good at interviews, and gives you a stronger signal on how they work, communicate, and solve problems.
 
-![hiring process](../images/newsletter/hiring/hiring-process.png)
+![hiring process](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/hiring/hiring-process.png)
 
 ## 8. Make your own mind up
 
@@ -154,3 +158,5 @@ In contrast, someone who’s worked exclusively at FAANG-type companies c.2012-2
 **[What we learned about hiring from our first five employees](https://posthog.com/blog/posthog-first-five) – Andy Vandervell:** “While it's tempting to search for "that hire" who will magically transform your product and company, this is a fool's errand. Successful companies are built on collective strength, which is why talent compounds is one of our core values.”
 
 _Words by Andy Vandervell, who thinks watermelon is pointless._
+
+<NewsletterForm />

@@ -1,0 +1,36 @@
+```python
+from posthog import Posthog
+from datetime import datetime
+
+posthog = Posthog(
+    '<ph_project_api_key>', 
+    host='<ph_client_api_host>',
+    debug=True,
+    historical_migration=True
+)
+
+events = [
+  {
+    "event": "batched_event_name",
+    "properties": {
+      "distinct_id": "user_id",
+      "timestamp": datetime.fromisoformat("2024-04-02T12:00:00")
+    }
+  },
+  {
+    "event": "batched_event_name",
+    "properties": {
+      "distinct_id": "used_id",
+      "timestamp": datetime.fromisoformat("2024-04-02T12:00:00")
+    }
+  }
+]
+
+for event in events:
+  posthog.capture(
+    distinct_id=event["properties"]["distinct_id"],
+    event=event["event"],
+    properties=event["properties"],
+    timestamp=event["properties"]["timestamp"],
+  )
+```

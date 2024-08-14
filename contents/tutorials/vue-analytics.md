@@ -1,13 +1,16 @@
 ---
 title: How to set up analytics in Vue
 date: 2024-01-18
-author: ["lior-neu-ner"]
-tags: ['product analytics']
+featuredVideo: https://www.youtube-nocookie.com/embed/Z-1W21kNwi4
+author:
+  - lior-neu-ner
+tags:
+  - product analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/vue-surveys/events-light.png'
-import EventsDark from '../images/tutorials/vue-surveys/events-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-surveys/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-surveys/events-dark.png"
 
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Vue.js app. To show you how to set up analytics, in this tutorial we create a basic Vue app, add PostHog, and use it to capture pageviews and custom events.
 
@@ -131,7 +134,7 @@ createApp(App).use(router).mount('#app')
 
 The basic setup is now complete. Run `npm run serve` to see your app.
 
-![Basic Vue app](../images/tutorials/vue-analytics/basic-app.png)
+![Basic Vue app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-analytics/basic-app.png)
 
 ## Adding PostHog
 
@@ -163,14 +166,15 @@ export default {
     app.config.globalProperties.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>",
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
       }
     );
   },
 };
 ```
 
-Replace `<ph_project_api_key>` and `<ph_instance_address>` with your your PostHog API key and host. You can find these in your [project settings](https://app.posthog.com/settings/project).
+Replace `<ph_project_api_key>` and `<ph_client_api_host>` with your your PostHog API key and host. You can find these in your [project settings](https://app.posthog.com/settings/project).
 
 Finally, activate your plugin in `main.js`:
 
@@ -235,8 +239,9 @@ export default {
     app.config.globalProperties.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>",
-        capture_pageview: false
+        api_host: "<ph_client_api_host>",
+        capture_pageview: false,
+        person_profiles: 'identified_only',
       }
     );
   },

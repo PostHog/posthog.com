@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - joe-martin
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Using PostHog
 tags:
@@ -56,3 +57,5 @@ Most modern software products will enable users to share some part of it with th
 Referral events aren’t limited to just invitations and shares, however. Depending on your product you could consider product reviews as a replacement, or sharing content from your blog. If you have an incentivised referral program you can track referrals and acceptance separately in order to see if you need a better incentive.
 
 > 💡 **PostHog Tip:** Does this feel like a lot of events to track? Here's [how to create new events the easy way!](/tutorials/how-to-capture-events-the-easy-way)
+
+<NewsletterForm />

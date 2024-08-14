@@ -1,17 +1,19 @@
 ---
-title: "Feature flags as a service: Should you build or buy?"
+title: 'Feature flags as a service: Should you build or buy?'
 date: 2023-09-12
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/green-blog-image.jpg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/green-blog-image.jpg
 featuredImageType: full
 category: Engineering
 tags:
- - Feature flags
- - Explainers
+  - Feature flags
+  - Explainers
 ---
 
 Feature flags are a tool to conditionally turn on or off code and components. They enable you to safely deploy or roll back new features, which helps you follow the [best practice of disconnecting deployment from release](/blog/github-gitlab-feature-flags#why-do-github-and-gitlab-use-feature-flags).
@@ -76,7 +78,7 @@ Feature flags as a service integrate with your app like other external services.
 ```python
 from posthog import Posthog
 
-posthog = Posthog('<ph_project_api_key>', host='<ph_instance_address>')
+posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
 
 is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user')
 ```
@@ -103,7 +105,7 @@ With feature flags as a service, you gain more confidence in:
 
 In fewer words, you pass your potential problems off to them. 
 
-![Problems](../images/blog/feature-flags-as-a-service/problems.jpg)
+![Problems](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/feature-flags-as-a-service/problems.jpg)
 
 ## Deciding whether to build or buy
 
@@ -120,3 +122,5 @@ In more complex situations, the costs of building and maintaining your own featu
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
 - [What you can learn from how GitHub and GitLab use feature flags](/blog/github-gitlab-feature-flags)
+
+<NewsletterForm />

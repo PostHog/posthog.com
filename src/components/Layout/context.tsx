@@ -3,6 +3,8 @@ import menu, { docsMenu } from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
+import { useActions } from 'kea'
+import { layoutLogic } from 'logic/layoutLogic'
 
 export const Context = createContext<any>(undefined)
 
@@ -32,11 +34,13 @@ export interface IProps {
 }
 
 export const LayoutProvider = ({ children, ...other }: IProps) => {
-    const { pathname } = useLocation()
+    const { pathname, search } = useLocation()
+    const { setWebsiteTheme } = useActions(layoutLogic)
     const compact = typeof window !== 'undefined' && window !== window.parent
     const [fullWidthContent, setFullWidthContent] = useState<boolean>(
         compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
     )
+    const [enterpriseMode, setEnterpriseMode] = useState(false)
     const parent =
         other.parent ??
         menu.find(({ children, url }) => {
@@ -82,6 +86,12 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     }, [activeInternalMenu])
 
     useEffect(() => {
+        if (window) {
+            setWebsiteTheme(window.__theme)
+            window.__onThemeChange = () => {
+                setWebsiteTheme(window.__theme)
+            }
+        }
         if (compact) {
             window.parent.postMessage(
                 {
@@ -114,6 +124,23 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         return () => window.removeEventListener('message', onMessage)
     }, [])
 
+    useEffect(() => {
+        if (enterpriseMode) {
+            document.querySelector('body')?.setAttribute('style', 'font-family: Verdana !important')
+        } else {
+            document.querySelector('body')?.removeAttribute('style')
+        }
+    }, [enterpriseMode])
+
+    useEffect(() => {
+        if (pathname !== '/') {
+            setEnterpriseMode(false)
+        }
+        if (pathname === '/' && search.includes('synergy=true')) {
+            setEnterpriseMode(true)
+        }
+    }, [pathname])
+
     return (
         <Context.Provider
             value={{
@@ -124,6 +151,8 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
                 fullWidthContent,
                 setFullWidthContent,
                 compact,
+                enterpriseMode,
+                setEnterpriseMode,
             }}
         >
             {children}

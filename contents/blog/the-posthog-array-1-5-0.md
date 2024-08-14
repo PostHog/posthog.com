@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -21,7 +22,7 @@ Another week, another PostHog Array. We're steadily working towards parity with 
 
 ### [Multiple dashboards](https://github.com/PostHog/posthog/pull/740)
 
-![](../images/05/multiple-dashboards.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/05/multiple-dashboards.png)
 
 It's now possible to have multiple dashboards. This can help you organize your graphs and let people have their own personal dashboards. You can also pin important dashboards so they're easily accessible to anyone in your organization.
 
@@ -29,7 +30,7 @@ In the next release, you'll even be able to resize, re-order and pick your own c
 
 ### [New website](https://posthog.com)
 
-![](../images/05/new-website.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/05/new-website.png)
 
 PostHog has a new home! With improved design and super simple instructions on how to get started with PostHog. Our docs and handbook are also integrated for easy access, and the whole thing is run on Gatsby, because we <3 other open source projects.
 
@@ -37,13 +38,13 @@ This makes it easier for the community to propose changes at the [website repo](
 
 ### [Dark-er mode](https://github.com/PostHog/posthog/pull/740)
 
-![](../images/05/dark-sidebar.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/05/dark-sidebar.png)
 
 PostHog is now a lot prettier, with a sleek dark sidebar.
 
 ### [Break down by cohort](https://github.com/PostHog/posthog/pull/690)
 
-![](../images/05/breakdown-cohort.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/05/breakdown-cohort.png)
 
 You were already able to create cohorts, but now you can use them in trends to find out exactly what your users are doing and how certain groups compare to others.
 

@@ -3,6 +3,9 @@ title: New customer onboarding
 sidebar: Handbook
 showTitle: true
 ---
+
+# Sales-led 
+
 ## Day -1 - Session: Initial demo
 
 Our moat is that we have a fully-integrated tool that allows customers to go across Analytics, Recordings and Experimentation easily.  We want new customers to see the value of this as quickly as possible when evaluating us against other solutions.
@@ -37,6 +40,9 @@ We'll need them to be able to demo their product to us, as well as attend two or
 
 Ideally we will also have them in Slack Connect channel so that we can provide responsive support and expose them to the wider PostHog team.
 
+Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, follow the instructions on [the link here](https://docs.usepylon.com/bridges/microsoft-teams/setup) to get set up.
+Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
+
 ## Day 0 - Session: Kick off
 
 At the start of the evaluation, we want to review their product to understand and advise on the best approach to tracking, as well as address any privacy concerns associated with session recordings.
@@ -47,7 +53,7 @@ By the end of the call we should have a plan for event capture/opt-out capture a
 
 The customer should come prepared to demo their product to us, where we can help figure out the key tracking events needed for the evaluation to be successful.
 
-If they don't already know about AARRR we should share our [AARRR blog post](https://posthog.com/blog/aarrr-pirate-funnel) and [Tracking Plan](https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0) and ask them to review it before the call.
+If they don't already know about AARRR we should share our [AARRR blog post](/blog/aarrr-pirate-funnel) and [Tracking Plan](https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0) and ask them to review it before the call.
 
 ### Structure
 
@@ -115,22 +121,24 @@ Every trial should have an end date by which time we expect the customer to make
 
 If they do become a customer (yay!) then we should agree a regular check in call cadence with them from the start (it's much harder to do after they are in the steady state).
 
+# Customer Success-led
+
+## 1-hr onboarding call
+
+Customers on the Teams plan (and up) are entitled to a one hour kickoff/implementation call. This could include a high-level discussion of how PostHog fits into their stack, troubleshooting issues they've hit so far, or walking them through as they code it up, for simple setups. In practice we only need to worry about this for product-led / customers who haven't talked to sales before. [TO DO] Include a team calendly link in the welcome emails for Teams purchases or set up a separate campaign to email from a CSM. 
+
+## Ongoing Training
+
+Enterprise customers will also receive 1-2 hours of bespoke training per quarter according to their needs.  This can be delivered in a few formats depending on where the customer is in their PostHog journey:
+
+1. A deep-dive on a specific topic of their choosing.
+2. Question and Answer session with their CSM.
+3. An intro/set-up session for a PostHog product they've not used yet.
 
 ## Sales to CSM "handoff"
 
-While we don't follow a traditional model of sales and customer success being fully separate roles with a formal "handoff", we are experimenting with spezialization within the CSM role. Simon is leading new acquisition, commercial conversations, evaluations (especially for larger enterprise-y customers), and Cameron is managing existing accounts, holding regular (at least quarterly) meetings with larger accounts, where review technical issues, product feedback/requests, and gauge overall account health in a more qualitative way to supplement product usage data in pocus and help retention.
+Customer lifecycle handoff/ownership is described [here](/handbook/growth/sales/overview#who-the-sales--cs-team-are).
 
-In practice, everyone on the team should have context on high-touch customers from standups, but a formal introduction will be made when a Slack channel is set up. We don't currently have a great process for this for email only customers, but working this out is a to do (as is keeping better tabs on non-Slack high revenue customers more generally). Given the size of our team, we will still mostly need everyone to have context on all customers, so we have redundancy to cover absences.
-
-
-## Meeting cadence and owners
-
-|Action|Cadence|CSM owner|
-|------|-------|----------|
-|Onboarding / post-sales handoff|Once|Simon|
-|Sync meeting|Quarterly|Cameron|
-|Technical troubleshooting/implementation calls|Ad-hoc|Cameron|
-|Contract re-negotiation|Annually (per contract)| Simon| 
 
 
 

@@ -3,13 +3,14 @@ date: 2022-06-22
 title: The really important job interview questions engineers should ask (but don't)
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
   - Founders
   - People
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Since we started PostHog, our team has interviewed 725 people.
@@ -51,6 +52,8 @@ Avoid:
 * Solutions looking for a problem
 
 If there is no product-market fit, but you think the team could find it, it's very important the company has lots of runway (it'll be hard to raise more money without product-market fit, so time to find it is crucial), doesn't have a huge team (it's harder to make rapid changes in direction with a lot of people), and moves fast (look out for bureaucracy, management, or a team that can't work well with ambiguity).
+
+<NewsletterForm />
 
 ## How much runway does the company have? Does their spending look within reason?
 
@@ -123,3 +126,5 @@ This will reveal perhaps what the hardest challenge will be, and where you could
 ## Be reasonable, but buyer beware
 
 Startups do not have everything figured out. The challenge is figuring out if they can get from where they are today to where they need to be to succeed – just don't shy away from asking to see if they're headed in the right direction.
+
+<NewsletterForm />

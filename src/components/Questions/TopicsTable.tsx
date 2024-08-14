@@ -3,9 +3,13 @@ import React from 'react'
 import Link from 'components/Link'
 import {
     IconApps,
+    IconBox,
     IconBrackets,
+    IconCode,
     IconCursor,
     IconDashboard,
+    IconDatabase,
+    IconDecisionTree,
     IconEllipsis,
     IconFlask,
     IconGear,
@@ -13,6 +17,7 @@ import {
     IconHogQL,
     IconPeople,
     IconPieChart,
+    IconPhone,
     IconPrivacy,
     IconPulse,
     IconRewindPlay,
@@ -26,6 +31,10 @@ import {
     IconFunnels,
     IconTrends,
     IconMessage,
+    IconGlobe,
+    IconMapPin,
+    IconHandwave,
+    IconCoffee,
 } from '@posthog/icons'
 
 import { Megaphone, SparksJoy } from 'components/NotProductIcons'
@@ -42,9 +51,11 @@ export const topicIcons = {
     cohorts: Cohorts, // to be replaced or removed
     configuration: IconGear,
     dashboards: IconDashboard,
+    'data pipelines': IconDecisionTree,
+    'data warehouse': IconDatabase,
     deployment: IconRocket,
+    '#devrel': IconCoffee,
     'events & actions': IconCursor,
-    'event pipelines': IconUser,
     'feature flags': IconToggle,
     funnels: IconFunnels,
     gcp: DataWarehouse, // to be replaced or removed
@@ -52,6 +63,7 @@ export const topicIcons = {
     'helm chart': DataWarehouse, // to be replaced or removed
     hogql: IconHogQL,
     'identify users': DataManagement, // to be replaced or removed
+    '#introductions': IconHandwave,
     kubernetes: DataWarehouse, // to be replaced or removed
     'migrating to posthog': DataManagement, // to be replaced or removed
     migration: IconUpload,
@@ -61,6 +73,7 @@ export const topicIcons = {
     'pricing & billing': IconReceipt,
     monitoring: IconPulse,
     'product analytics': IconGraph,
+    sdks: IconBox,
     security: IconPrivacy,
     'session replay': IconRewindPlay,
     'sparks joy': SparksJoy, // to be replaced or removed
@@ -71,6 +84,7 @@ export const topicIcons = {
     'community spotlight': Megaphone, // to be replaced or removed
     surveys: IconMessage,
     survey: IconMessage,
+    '#where-in-the-world': IconGlobe,
     'web analytics': IconPieChart,
 }
 

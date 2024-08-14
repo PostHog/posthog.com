@@ -162,6 +162,12 @@ export const postsMenu: IMenu[] = [
                 icon: 'IconNewspaper',
                 color: 'green',
             },
+            {
+                name: 'Comparisons',
+                url: '/blog/comparisons',
+                icon: 'IconColumns',
+                color: 'lilac',
+            },
         ],
     },
     {

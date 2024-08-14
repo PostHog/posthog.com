@@ -31,7 +31,7 @@ export const Intro = ({ image = true }) => {
                             placeholder="none"
                             quality={100}
                             className=""
-                            src="../../../contents/images/products/data-warehouse/data-warehouse.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/data-warehouse.png"
                         />
                     </figure>
                 )}
@@ -51,9 +51,9 @@ export const Content = ({ quickLinks = false }) => {
 
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
-                        type="Article"
-                        title="Linking a source"
-                        description="Get started by adding your first external source to PostHog"
+                        type="Guide"
+                        title="How to set up Stripe reports"
+                        description="Connect your revenue data from Stripe to PostHog"
                         Image={
                             <StaticImage
                                 alt=""
@@ -62,15 +62,15 @@ export const Content = ({ quickLinks = false }) => {
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                             />
                         }
-                        url="/docs/data-warehouse/setup"
+                        url="/tutorials/stripe-reports"
                     />
                     <ResourceItem
-                        type="Article"
-                        title="Query your source"
-                        description="Once you have a source linked, learn how to query it using HogQL"
+                        type="Guide"
+                        title="How to set up Hubspot reports"
+                        description="Connect your sales data from Hubspot to PostHog"
                         Image={
                             <StaticImage
                                 alt=""
@@ -79,10 +79,10 @@ export const Content = ({ quickLinks = false }) => {
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                             />
                         }
-                        url="/docs/data-warehouse/query"
+                        url="/tutorials/hubspot-reports"
                     />
                     <ResourceItem
                         type="Guide"
@@ -96,7 +96,7 @@ export const Content = ({ quickLinks = false }) => {
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../../contents/images/products/data-warehouse/warehouse-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                             />
                         }
                         url="/tutorials/hogql-sum-aggregation"

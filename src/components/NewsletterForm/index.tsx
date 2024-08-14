@@ -1,92 +1,86 @@
-import React, { useState } from 'react'
-import { mergeClassList } from '../../lib/utils'
-import envelope from '../Blog/images/envelope.svg'
-import Logo from 'components/Logo'
-import SubstackForm from 'components/SubstackForm'
+import React, { useEffect, useState } from 'react'
+import { useUser } from 'hooks/useUser'
+import usePostHog from 'hooks/usePostHog'
+import { StaticImage } from 'gatsby-plugin-image'
+import Tooltip from 'components/Tooltip'
+import { IconInfo } from '@posthog/icons'
+import { child, container } from 'components/CallToAction'
 
-export const NewsletterForm = ({
-    sidebar = false,
-    compact = false,
-    subcompact = false,
-    bgColor = '#08042f',
-    className = '',
-}: {
-    sidebar?: boolean
-    compact?: boolean
-    subcompact?: boolean
-    bgColor?: string
-    className?: string
-}): JSX.Element => {
+export const NewsletterForm = ({ className = '' }): JSX.Element => {
+    const { user } = useUser()
+    const posthog = usePostHog()
     const [email, setEmail] = useState('')
-    const classList = mergeClassList('w-full p-4 relative z-10 text-center', className)
+    const [submitted, setSubmitted] = useState(false)
 
-    return sidebar ? (
-        <div>
-            <div className="flex items-end space-x-2">
-                <div>
-                    <img className="w-full max-w-[47px]" src={envelope} />
-                </div>
-                <p className="leading-tight text-sm font-bold m-0 flex-shrink-0">
-                    <span className="flex space-x-2 items-center">
-                        <span>The best of</span> <Logo className="w-[80px]" />
-                    </span>{' '}
-                    <span className="text-xs -mt-1 block">
-                        Delivered <span className="text-red">twice</span> a month.
-                    </span>
-                </p>
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        posthog?.capture('newsletter_subscribed', { email })
+        setSubmitted(true)
+    }
+
+    useEffect(() => {
+        if (user?.email) {
+            setEmail(user.email)
+        }
+    }, [user])
+
+    return (
+        <div
+            className={`newsletter-form flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 py-8 md:py-12 ${className}`}
+        >
+            <div className="text-center">
+                <StaticImage
+                    src="../../images/newsletter-signup.png"
+                    objectFit="contain"
+                    className="w-full h-full max-w-[200px] mx-auto flex-shrink-0"
+                />
             </div>
-            <div className="mt-4 md:mt-2">
-                <SubstackForm />
-            </div>
-        </div>
-    ) : compact ? (
-        <div className="w-full mx-auto my-12 text-center">
-            <div className="flex justify-center w-full h-full p-1">
-                <div className={classList}>
-                    <div className="flex flex-col md:flex-row md:space-x-4 items-center">
-                        <figure className="shrink-0 grow-0 basis-12 m-0 text-black dark:text-white">
-                            <svg
-                                className="block h-12 mb-0 fill-current"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 50 50"
+            <div className="w-full max-w-md">
+                {!submitted ? (
+                    <>
+                        <p className="text-sm opacity-50 !m-0">Subscribe to our newsletter</p>
+                        <h4 className="relative text-2xl !m-0">Product for Engineers</h4>
+                        <p className="m-0 text-[15px]">Helping engineers and founders flex their product muscles</p>
+                        <div className="">
+                            <form
+                                onSubmit={handleSubmit}
+                                className="flex flex-col lg:flex-row items-start gap-2 my-4 lg:my-2"
                             >
-                                <path
-                                    d="M41.5 7.5c-3.86 0-7 3.14-7 7s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7Z"
-                                    fill="#F54E00"
+                                <input
+                                    required
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    type="email"
+                                    placeholder="Email address"
+                                    className="dark:bg-accent-dark border border-light dark:border-dark rounded text-[15px] w-full flex-1"
+                                    value={email}
                                 />
-                                <path d="M41.5 23.5c.34 0 .67-.02 1-.06V36.5c0 1.654-1.346 3-3 3h-32c-1.654 0-3-1.346-3-3v-20c0-1.654 1.346-3 3-3h25.06c-.04.33-.06.66-.06 1 0 2.125.74 4.074 1.97 5.615l-8.849 8.85a3.005 3.005 0 0 1-4.244 0l-11.172-11.17a1 1 0 1 0-1.414 1.414l11.17 11.17a4.984 4.984 0 0 0 3.535 1.46c1.28 0 2.56-.484 3.535-1.46l8.85-8.85A8.987 8.987 0 0 0 41.5 23.5Z" />
-                            </svg>
-                        </figure>
-
-                        <span className="flex flex-col md:space-x-2 md:flex-row flex-grow font-bold md:justify-start md:text-left">
-                            <span className="text-lg">The best of PostHog.</span>{' '}
-                            <span className="text-sm md:text-lg">Delivered twice a month.</span>
-                        </span>
+                                <button className={`${container(undefined, 'md')} -mt-px w-full lg:w-auto`}>
+                                    <span className={child(undefined, undefined, undefined, 'md')}>Subscribe</span>
+                                </button>
+                            </form>
+                            <p className="text-sm opacity-50 text-center md:text-left">
+                                We'll share your email with Substack
+                                <Tooltip
+                                    content="Substack's embed form isn't very pretty, so we made our own. But we need to let you know we'll subscribe you on your behalf. Thanks in advance!"
+                                    tooltipClassName="max-w-md"
+                                >
+                                    <IconInfo className="w-4 h-4 inline-block ml-1" />
+                                </Tooltip>
+                            </p>
+                        </div>
+                    </>
+                ) : (
+                    <div className="bg-accent dark:bg-accent-dark border border-border dark:border-dark px-6 py-4 rounded-md">
+                        <h3 className="text-lg font-bold m-0">Thanks for subscribing!</h3>
+                        <p className="m-0 opacity-60">
+                            Keep an eye out for our next edition of{' '}
+                            <strong>
+                                <em>Product for Engineers</em>
+                            </strong>{' '}
+                            from Substack in your inbox.
+                        </p>
                     </div>
-                    <div className="md:ml-16 mt-2 md:mt-0">
-                        <SubstackForm />
-                    </div>
-                </div>
-            </div>
-        </div>
-    ) : subcompact ? (
-        <div className={classList}>
-            <SubstackForm />
-        </div>
-    ) : (
-        <div className="flex w-full h-full p-1 bg-white dark:bg-gray-accent-dark rounded-md mb-6 shadow-xl">
-            <div className="w-full p-4 relative z-10 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-2 items-center">
-                <div className="flex space-x-2 items-center">
-                    <img className="w-[75px] mx-auto" src={envelope} />
-                    <p className="leading-tight font-bold m-0">
-                        The best of PostHog. <br />
-                        Delivered <span className="text-red">twice</span> a month.
-                    </p>
-                </div>
-                <div className="flex-grow w-full md:w-auto">
-                    <SubstackForm />
-                </div>
+                )}
             </div>
         </div>
     )

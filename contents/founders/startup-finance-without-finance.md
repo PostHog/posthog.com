@@ -3,14 +3,15 @@ date: 2022-11-18
 title: How to run finance at your startup without hiring a finance person
 author:
   - charles-cook
-featuredImage: ../images/blog/equity.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/equity.png
 featuredImageType: full
 tags:
   - Founders
   - Finance & ops
   - Being a founder
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 We run finance at PostHog without a dedicated finance person. This is a comprehensive, step-by-step guide to do just that. If you implement _everything_ below, it should take one person a week to complete. 
@@ -109,7 +110,9 @@ Your report (sometimes referred to as 'management accounts') will comprise three
  
 - If you pay a year up front for an annual subscription, make sure your accountants 'amortize' this over the whole year. This means they'll put 1/12 of the annual cost into each month's expenses. They should also do this if a customer pays an annual contract up front, but you'll need to tell them this because... not mind readers, remember?
  
-- You may hear 'accruals' vs. 'cash'-based accounting floating around. 'Accruals' means you record the revenue when you issued the invoice; 'cash' means you record it when the money hits your bank account. We use accruals-based accounting, which is usually the sensible choice for B2B SaaS. 
+- You may hear 'accruals' vs. 'cash'-based accounting floating around. 'Accruals' means you record the revenue when you issued the invoice; 'cash' means you record it when the money hits your bank account. We use accruals-based accounting, which is usually the sensible choice for B2B SaaS.
+
+<NewsletterForm />
 
 ## Predicting the future (aka Financial Planning)
 
@@ -266,3 +269,5 @@ If you found this useful, we recommend reading our [ops toolkit for early-stage 
 Speaking of hiring, [Creating an employee-friendly startup share option scheme](/blog/equity-share-options-explained) will help you create a share option scheme potential hires will love. 
 
 Once you've hired, read [How to plan a killer company offsite in just 8 weeks](/blog/planning-a-company-offsite) – it's killer.
+
+<NewsletterForm />

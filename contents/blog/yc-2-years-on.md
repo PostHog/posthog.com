@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - james-hawkins
-featuredImage: ../images/blog/posthog-ceo-diary-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 category: CEO diaries
 tags:
@@ -90,3 +91,5 @@ Most importantly, and as cheesy a conclusion as this is, it has changed how we s
 Being part of YC means we see people we know very well go on to build very successful companies, sharing what they're up to along the way. 
 
 Before YC, we felt like outsiders. After YC, we have the confidence to build a impactful product, and that's hugely valuable.
+
+<NewsletterForm />

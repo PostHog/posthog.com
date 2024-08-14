@@ -1,5 +1,5 @@
 ---
-title: "How to run A/B tests in iOS"
+title: How to run A/B tests in iOS
 date: 2023-11-16
 author: ["lior-neu-ner"]
 tags: ['experimentation']
@@ -77,7 +77,7 @@ struct FeatureScreenView: View {
 
 Our basic set up is now complete. Build and run your app to test that it's working.
 
-![Basic setup of the iOS app](../images/tutorials/ios-ab-tests/app-setup.mp4)
+![Basic setup of the iOS app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/app-setup.mp4)
 
 ## Adding PostHog to your iOS app
 
@@ -85,7 +85,7 @@ First, add [posthog-ios](https://github.com/PostHog/posthog-ios) as a dependency
 
 Note that for this tutorial we use version `3.1.0` of the SDK.
 
-![Add PostHog from Swift Package Manager](../images/tutorials/ios-ab-tests/swift-npm.png)
+![Add PostHog from Swift Package Manager](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/swift-npm.png)
 
 Next, configure your PostHog instance in your `App.swift` struct initializer:
 
@@ -98,7 +98,7 @@ import PostHog
 struct App: App {
     init() {
         let POSTHOG_API_KEY = "<ph_project_api_key>"
-        let POSTHOG_HOST = "<ph_instance_address>" // usually 'https://app.posthog.com' or 'https://eu.posthog.com'
+        let POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
         let configuration = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) 
         PostHogSDK.shared.setup(configuration)
     }
@@ -111,7 +111,7 @@ struct App: App {
 }
 ```
 
-To get your PostHog API key and host, [sign up to PostHog](https://app.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://app.posthog.com/settings/project). Replace the strings `<ph_project_api_key>` and `<ph_instance_address>` with your API key and host.
+To get your PostHog API key and host, [sign up to PostHog](https://app.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://app.posthog.com/settings/project). Replace the strings `<ph_project_api_key>` and `<ph_client_api_host>` with your API key and host.
 
 Finally, [capture a custom event](/docs/libraries/ios#capturing-events) when the button on `FeatureScreenView` is clicked. We'll use this event as our goal metric in our A/B test.
 
@@ -130,7 +130,7 @@ Button("Click Me!") {
 
 To check your setup, build and run your app. Click your button a few times. You should start seeing events in the [activity tab](https://app.posthog.com/events).
 
-![iOS events captured](../images/tutorials/ios-ab-tests/event-captured.png)
+![iOS events captured](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/event-captured.png)
 
 ## Create an A/B test in PostHog
 
@@ -145,7 +145,7 @@ Go to the [Experiments tab](https://app.posthog.com/experiments) in PostHog and 
 
 Click "Save as draft" and then click "Launch".
 
-![Experiment setup in PostHog](../images/tutorials/ios-ab-tests/experiment-setup.png)
+![Experiment setup in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/ios-ab-tests/experiment-setup.png)
 
 ## Implement the A/B test in Xcode
 

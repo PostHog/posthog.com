@@ -1,13 +1,15 @@
 ---
 title: How we do trunk-based development (and why you should too)
 date: 2024-02-05
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 rootpage: /blog
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 tags:
- - Engineering
- - Feature management
+  - Engineering
+  - Feature management
 ---
 
 What do trees, elephants, and successful software all have in common? They rely on their trunks to help them grow big and strong. In the case of software, the trunk is the main codebase engineers make changes to and that deploys to users.
@@ -26,7 +28,7 @@ Specifically for trunk-based development, there are two types of branches:
 
 2. `feature/fix`: Relatively small and short-lived branches where work and changes happen, and then get squashed and merged into `main` regularly. 
 
-![Trunk-based development diagram](../images/blog/trunk-based-development/trunk.png)
+![Trunk-based development diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/trunk-based-development/trunk.png)
 
 This simplicity is different than other software development strategies with more branches such as:
 
@@ -36,7 +38,7 @@ This simplicity is different than other software development strategies with mor
 
 - **Forking:** Often used by open-source projects, developers have their own repository, make changes, and then maintainers review and pull changes into the main repository.
 
-![Feature branching](../images/blog/trunk-based-development/feature.png)
+![Feature branching](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/trunk-based-development/feature.png)
 
 ## What are the benefits of trunk-based development?
 
@@ -95,7 +97,7 @@ For someone coming from a different branching strategy, this philosophy may seem
 
 We expect engineers to write tests for their code as they are working on it and before they merge it. They run these locally then add them to our test suite that runs on every PR.
 
-![Checks](../images/blog/trunk-based-development/checks.png)
+![Checks](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/trunk-based-development/checks.png)
 
 You can look at [a pull request on our repo](https://github.com/PostHog/posthog/pulls) to see the suite of end-to-end, frontend, linting, Storybook, code quality, visual regression, and migration tests before merging. This enables us to be confident in the code we are merging.
 
@@ -103,7 +105,7 @@ You can look at [a pull request on our repo](https://github.com/PostHog/posthog/
 
 [Feature flags](/feature-flags) enable us to include code in the "trunk" without immediately releasing it to users. This [decouples deployment from release](/product-engineers/decouple-deployment-from-release). 
 
-Once deployed, we can then test in production, dogfood, beta test, get feedback, and progressively roll out the feature. 
+Once deployed, we can then [test in production](/product-engineers/testing-in-production), [dogfood](/product-engineers/dogfooding), beta test, get feedback, and progressively roll out the feature. 
 
 We currently have [67 feature flags](https://github.com/PostHog/posthog/blob/249d82043bcd70bb3e95a0553551246998d0d160/frontend/src/lib/constants.tsx#L125C1-L198C3) in various stages of release in our main PostHog repo.
 
@@ -125,3 +127,5 @@ The combination of a philosophy shift and the implementation of the right tools 
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
 - [Why we test in production (and you should too)](/product-engineers/testing-in-production)
+
+<NewsletterForm />

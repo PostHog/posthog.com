@@ -6,13 +6,13 @@ showTitle: true
 
 A reverse proxy allows you to send events to PostHog Cloud using your own domain.
 
-This means that events are sent from your own domain and are less likely to be intercepted by tracking blockers. You'll be able to capture more usage data without having to self-host PostHog.
+This means that events are less likely to be intercepted by tracking blockers. You'll be able to capture more usage data without having to self-host PostHog.
 
 Setting up a reverse proxy means setting up a service to redirect requests from a subdomain you choose (like `e.yourdomain.com`) to PostHog. It is best practice to use a subdomain that does not include `posthog`, `analytics`, `tracking`, or other similar words. 
 
 > **Note:** PostHog Cloud requires that the proxy sets the `Host` header to the same host it is calling. Check the guides below on how to do that for several proxies.
 
-You then use this subdomain as your instance host in the initialization of PostHog instead of `app.posthog.com` or `eu.posthog.com`.
+You then use this subdomain as your `api_host` in the initialization of PostHog instead of `us.i.posthog.com` or `eu.i.posthog.com`.
 
 > Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js#config) when initializing our browser integration, so that links to the PostHog interface point to the correct host.
 
@@ -20,6 +20,7 @@ You then use this subdomain as your instance host in the initialization of PostH
 
 Options for deploying a reverse proxy include:
 
+- [PostHog's managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) (Recommended, requires the Teams add-on)
 - [AWS CloudFront](/docs/advanced/proxy/cloudfront)
 - [Caddy](/docs/advanced/proxy/caddy)
 - [Cloudflare](/docs/advanced/proxy/cloudflare)

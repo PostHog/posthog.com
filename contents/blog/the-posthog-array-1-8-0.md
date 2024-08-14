@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/default.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/default.png
 featuredImageType: standard
 category: PostHog news
 tags:
@@ -21,7 +22,7 @@ If you're self hosting and want these features - [update your PostHog](/docs/run
 
 ### [Cumulative graphs](https://github.com/PostHog/posthog/pull/862)
 
-![cumulative graphs](../images/cumulative-graph.gif)
+![cumulative graphs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/cumulative-graph.gif)
 
 This feature is designed for startups.
 
@@ -31,11 +32,11 @@ We built it because we our own team had to create an investor presentation showi
 
 We decided that the paths functionality needed more polish. You can't quite see your face in it yet, but this week is a good step up.
 
-![Paths start point](../images/paths-start-point.jpg)
+![Paths start point](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/paths-start-point.jpg)
 
 Finally, you can start your paths on a specific page. Useful for when your landing page isn't your homepage, or when you're trying to remove some of the noise from the graph when you've lots of volume.
 
-![Paths filtering by properties](../images/paths-filtering.jpg)
+![Paths filtering by properties](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/paths-filtering.jpg)
 
 For sweet, sweet bonus points, our close-to-magical / hard-working developers worked in the ability to filter paths by properties.
 
@@ -43,7 +44,7 @@ This means you can understand how traffic from a particular URL, or users with a
 
 ### [Add property filters to actions + lots of improvements (#841)](https://github.com/PostHog/posthog/pull/841)
 
-![Actions property filter](../images/actions-property-filter.jpg)
+![Actions property filter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/actions-property-filter.jpg)
 
 This toy just got shinier. When you create an action, you can now filter events by properties. Not only that, but this pull request also made it easier to create actions too - we saw lots of first time users getting stuck here during the onboarding sessions.
 

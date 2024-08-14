@@ -7,6 +7,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 import HubSpotForm from 'components/HubSpotForm'
+import SalesforceForm from 'components/SalesforceForm'
 
 const benefits = [
     '$50k in PostHog credit',
@@ -22,7 +23,9 @@ const validationSchema = Yup.object().shape({
     lastname: Yup.string().required('Please enter your last name'),
     email: Yup.string().email('Please enter a valid email address').required('Please enter a valid email address'),
     name: Yup.string().required('Please enter your company name'),
-    domain: Yup.string().url('Please enter your company domain').required('Please enter your company domain'),
+    domain: Yup.string()
+        .url('Please enter your company domain, beginning with https://')
+        .required('Please enter your company domain, beginning with https://'),
     self_registration_organization_name: Yup.string().required('Please enter your PostHog organization name'),
     self_registration_raised: Yup.number().required('Please select a value'),
     self_registration_company_founded: Yup.string().required('Please enter a date'),
@@ -135,9 +138,9 @@ export default function Startups() {
                 <div className="flex-shrink-0">
                     <h3 className="mb-0">Finish your application</h3>
                     <p>Remember to complete the steps listed above!</p>
-                    <HubSpotForm
-                        validationSchema={validationSchema}
-                        formID="aa91765b-e790-4e90-847e-46c7ebf43705"
+                    <SalesforceForm
+                        type="contact"
+                        source="startup"
                         customMessage={
                             <>
                                 <h4>
@@ -149,22 +152,88 @@ export default function Startups() {
                                     follow steps 1-2 above!
                                 </p>
                                 <p className="mb-0">
-                                    In the meantime, why not join <Link to="/slack">our Slack community</Link>?
+                                    In the meantime, why not checkout our <Link to="/questions">community forum</Link>?
                                 </p>
                             </>
                         }
-                        customFields={{
-                            self_registration_raised: {
-                                type: 'radioGroup',
-                                options: [
-                                    { label: 'Boostrapped', value: 0 },
-                                    { label: 'Under $100k', value: 100_000 },
-                                    { label: '$100k - $500k', value: 500_000 },
-                                    { label: '$500k - $1m', value: 1_000_000 },
-                                    { label: '$1m - $5m', value: 5_000_000 },
-                                    { label: 'More than $5m', value: 100_000_000_000 },
-                                ],
-                            },
+                        form={{
+                            fields: [
+                                {
+                                    label: 'Email',
+                                    name: 'email',
+                                    type: 'string',
+                                    fieldType: 'email',
+                                    required: true,
+                                },
+                                {
+                                    label: 'First name',
+                                    name: 'first_name',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'Last name',
+                                    name: 'last_name',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'Company name',
+                                    name: 'company',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'Company domain',
+                                    name: 'startup_domain',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'PostHog organization name',
+                                    name: 'posthog_organization_name',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'How much in total funding have you raised (USD)',
+                                    name: 'raised',
+                                    type: 'enumeration',
+                                    options: [
+                                        { label: 'Bootstrapped', value: 0 },
+                                        { label: 'Under $100k', value: 100_000 },
+                                        { label: '$100k - $500k', value: 500_000 },
+                                        { label: '$500k - $1m', value: 1_000_000 },
+                                        { label: '$1m - $5m', value: 5_000_000 },
+                                        { label: 'More than $5m', value: 100_000_000_000 },
+                                    ],
+                                    required: true,
+                                },
+                                {
+                                    label: 'The date that your company was incorporated',
+                                    name: 'incorpation_date',
+                                    type: 'string',
+                                    fieldType: 'date',
+                                    required: true,
+                                },
+                                {
+                                    label: 'The company that referred you',
+                                    name: 'referrer',
+                                    type: 'string',
+                                    required: true,
+                                },
+                                {
+                                    label: 'Are you building LLM-powered features?',
+                                    name: 'is_building_with_llms',
+                                    type: 'enumeration',
+                                    required: true,
+                                    options: [
+                                        { label: 'Yes', value: 'true' },
+                                        { label: 'No', value: 'false' },
+                                    ],
+                                },
+                            ],
+                            name: 'Startup application',
                         }}
                     />
                 </div>

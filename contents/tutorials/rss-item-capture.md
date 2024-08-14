@@ -1,10 +1,13 @@
 ---
-title: How to capture new RSS items in PostHog (releases, blogs, status)
+title: 'How to capture new RSS items in PostHog (releases, blogs, status)'
 date: 2023-08-30
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['events', 'product analytics']
+tags:
+  - events
+  - product analytics
 ---
 
 RSS is a popular format for providing feeds of content. For example, GitHub uses it to provide feeds of releases, blogs provide feeds of new posts, and status pages provide feeds of incidents
@@ -15,7 +18,7 @@ We can capture events from these feeds by polling them, checking for new entries
 
 After signing up for [Val Town](https://www.val.town/), you can go to your workspace and start creating JavaScript functions. We start by writing a function to capture an event using the [PostHog API](/docs/api).
 
-Since we will use this function to capture events from multiple feeds, we make it reusable. We write it as a function that takes an object ccontaining a `key`, `event`, `properties`, and `distinct_id`. It uses these to create the body of the request and then send a fetch request to `https://app.posthog.com/capture/` (or `https://eu.posthog.com/capture/`). Altogether, this looks like this:
+Since we will use this function to capture events from multiple feeds, we make it reusable. We write it as a function that takes an object ccontaining a `key`, `event`, `properties`, and `distinct_id`. It uses these to create the body of the request and then send a fetch request to `https://us.i.posthog.com/capture/` (or `https://eu.i.posthog.com/capture/`). Altogether, this looks like this:
 
 <iframe src="https://www.val.town/embed/ianvph.postHogAPICapture" height="630" frameBorder="0" allowFullScreen></iframe>
 
@@ -97,7 +100,7 @@ Once we make all of these changes, we have a function that looks like this:
 
 When we set it up and schedule it to run every day, it captures new blogs published in PostHog.
 
-![Event captured](../images/tutorials/rss-item-capture/event.png)
+![Event captured](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/rss-item-capture/event.png)
 
 ## Capturing app status changes
 

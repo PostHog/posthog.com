@@ -7,12 +7,13 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/ImcNUnqDoUQ
+featuredVideo: 'https://www.youtube-nocookie.com/embed/ImcNUnqDoUQ'
 category: General
 tags:
- - Guides
+  - Guides
 ---
 
 In July 2023, Google closed Universal Analytics (UA), forcing users to switch to Google Analytics 4 (GA4) or another provider.
@@ -56,7 +57,7 @@ The following GA4 alternatives all solve one or more of these issues. Some provi
 
 ### PostHog
 
-![posthog](../images/screenshots/hogflix-dashboard.png)
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
 - **Best for:** Mobile and web apps
 - **Tracking method:** Event-based
@@ -71,7 +72,7 @@ See [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) 
 
 #### PostHog vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -143,7 +144,7 @@ See [GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools) 
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an in-depth look at the differences
 
@@ -153,20 +154,20 @@ Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an 
 
 ### Matomo
 
-![Matomo - open source analytics tools](../images/blog/open-source-analytics-tools/matomo-screenshot.png)
+![Matomo - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/matomo-screenshot.png)
 
 - **Best for:** Content, marketing and e-commerce websites
 - **Tracking method:** Session-based
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-green text-lg">✔</span>
 
-[Matomo](https://matomo.org/) is one of the most popular Google Analytics alternatives around. Like UA, it's based on a session-based tracking model, and it even allows new users to import data from an existing Google Analytics account.
+[Matomo](/blog/posthog-vs-matomo) is one of the most popular Google Analytics alternatives around. Like UA, it's based on a session-based tracking model, and it even allows new users to import data from an existing Google Analytics account.
 
 It also shares some weaknesses inherent in Universal Analytics. While Matomo has added more advanced analytics features, it's better suited to traditional website analytics than tracking desktop and mobile apps. Like PostHog, it's open source, so can be self-hosted if you prefer.
 
 #### Matomo vs Google Analytics 4  
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -233,7 +234,7 @@ It also shares some weaknesses inherent in Universal Analytics. While Matomo has
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 > 
@@ -241,7 +242,7 @@ It also shares some weaknesses inherent in Universal Analytics. While Matomo has
 
 ### Kissmetrics
 
-![kissmetrics](../images/blog/ga4-alternatives/kissmetrics.png)
+![kissmetrics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/kissmetrics.png)
 
 - **Best for:** Marketing and e-commerce websites
 - **Tracking method:** Event-based
@@ -254,7 +255,7 @@ One of its key features is the Populations report, which groups users into key c
 
 #### Kissmetrics vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -326,7 +327,7 @@ One of its key features is the Populations report, which groups users into key c
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 > 
@@ -334,7 +335,7 @@ One of its key features is the Populations report, which groups users into key c
 
 ### TelemetryDeck
 
-![telemetrydeck](../images/blog/ga4-alternatives/telemetrydeck.png)
+![telemetrydeck](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/telemetrydeck.png)
 
 - **Best for:** Mobile apps
 - **Tracking method:** Event-based
@@ -347,7 +348,7 @@ TelemetryDeck makes it easy for app developers to track things like active users
 
 #### TelemetryDeck vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -414,7 +415,7 @@ TelemetryDeck makes it easy for app developers to track things like active users
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 > 
@@ -422,7 +423,7 @@ TelemetryDeck makes it easy for app developers to track things like active users
 
 ### Plausible
 
-![Plausible Analytics - open source analytics tools](../images/blog/open-source-analytics-tools/plausible-screenshot.png)
+![Plausible Analytics - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/plausible-screenshot.png)
 
 - **Best for:** Content and marketing websites
 - **Tracking method:** Session-based
@@ -437,7 +438,7 @@ But, if you just want basic website analytics, it gets the job done, and won't a
 
 #### Plausible vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -504,7 +505,7 @@ But, if you just want basic website analytics, it gets the job done, and won't a
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -512,7 +513,7 @@ But, if you just want basic website analytics, it gets the job done, and won't a
 
 ### Vercel Web Analytics
 
-![vercel analytics](../images/blog/ga4-alternatives/vercel.png)
+![vercel analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/vercel.png)
 
 - **Best for:** Content and marketing websites
 - **Tracking method:** Event-based
@@ -527,7 +528,7 @@ Vercel acquired another popular analytics tool, Splitbee, in 2022. Splitbee's te
 
 #### Vercel vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -594,7 +595,7 @@ Vercel acquired another popular analytics tool, Splitbee, in 2022. Splitbee's te
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -602,7 +603,7 @@ Vercel acquired another popular analytics tool, Splitbee, in 2022. Splitbee's te
 
 ### Piwik PRO
 
-![piwik pro](../images/blog/ga4-alternatives/piwik-pro.png)
+![piwik pro](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/piwik-pro.png)
 
 - **Best for:** Content, marketing and e-commerce websites
 - **Tracking method:** Session-based
@@ -615,7 +616,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 #### Piwik PRO vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -682,7 +683,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -690,7 +691,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 ### Fathom
 
-![Fathom - GDPR compliant analytics](../images/blog/gdpr-compliant-analytics/fathom.png)
+![Fathom - GDPR compliant analytics](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/gdpr-compliant-analytics/fathom.png)
 
 - **Best for:** Content and marketing websites
 - **Tracking method:** Session-based
@@ -701,7 +702,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 #### Fathom vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -768,7 +769,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >
@@ -776,7 +777,7 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 ### Counter
 
-![counter](../images/blog/ga4-alternatives/counter.png)
+![counter](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/counter.png)
 
 - **Best for:** Content and personal websites
 - **Tracking method:** Session-based
@@ -789,7 +790,7 @@ Counter's creators can offer it for free because it only collects aggregated dat
 
 #### Counter vs Google Analytics 4
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
 	<thead>
     	<tr>
@@ -856,7 +857,7 @@ Counter's creators can offer it for free because it only collects aggregated dat
     	</tr>
 	</tbody>
 </table>
-</div>
+</OverflowXSection>
 
 > #### Verdict
 >

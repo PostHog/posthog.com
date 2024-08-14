@@ -1,15 +1,17 @@
 ---
-title: "How to set up A/B tests in Flutter"
+title: How to set up A/B tests in Flutter
 date: 2024-03-05
-author: ["lior-neu-ner"]
-tags: ['experimentation']
+author:
+  - lior-neu-ner
+tags:
+  - experimentation
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/flutter-ab-tests/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/flutter-ab-tests/events-dark.png'
-import TestSetupLight from '../images/tutorials/flutter-ab-tests/experiment-setup-light.png'
-import TestSetupDark from '../images/tutorials/flutter-ab-tests/experiment-setup-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/events-dark.png"
+export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/experiment-setup-light.png"
+export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/flutter-ab-tests/experiment-setup-dark.png"
 
 [A/B tests](/ab-testing) help you improve your Flutter app by enabling you to compare the impact of changes on key metrics. To show you how to set one up, we create a basic Flutter app, add PostHog, create an A/B test, and implement the code for it.
 
@@ -100,7 +102,7 @@ class FeatureScreenView extends StatelessWidget {
 
 Press **F5** and run the app in any emulator (we chose Android) to see your app in action.
 
-![Basic setup of the Flutter app](../images/tutorials/flutter-ab-tests/basic-app.mp4)
+![Basic setup of the Flutter app](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/flutter-ab-tests/basic-app.mp4)
 
 ## 2. Add PostHog to your app
 
@@ -130,7 +132,7 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
     <application>
         <!-- ... other configuration ... -->
         <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_api_key>" />
-        <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_instance_address>" /> <!-- usually 'https://app.posthog.com' or 'https://eu.posthog.com' -->
+        <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_client_api_host>" /> <!-- usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com' -->
         <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />
         <meta-data android:name="com.posthog.posthog.DEBUG" android:value="true" />
     </application>
@@ -163,7 +165,7 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
   <key>com.posthog.posthog.API_KEY</key>
   <string><ph_project_api_key></string>
   <key>com.posthog.posthog.POSTHOG_HOST</key>
-  <string><ph_instance_address></string>  <!--  https://app.posthog.com or https://eu.posthog.com -->
+  <string><ph_client_api_host></string>  <!--  https://us.i.posthog.com or https://eu.i.posthog.com -->
   <key>com.posthog.posthog.CAPTURE_APPLICATION_LIFECYCLE_EVENTS</key>
   <true/>
   <key>com.posthog.posthog.DEBUG</key>
@@ -192,11 +194,11 @@ For Web, add your `Web snippet` (which you can find in [your project settings](h
   <!-- ... other head elements ... -->
 
   <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init(
       '<ph_project_api_key>',
       {
-        api_host:'<ph_instance_address>',
+        api_host:'<ph_client_api_host>',
       }
     )
   </script>
@@ -252,8 +254,6 @@ Once you’ve done this, reload your app and click the button a few times. You s
 />
 
 ## 4. Create an A/B test in PostHog
-
-If you haven't done so already, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include A/B testing. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million requests per month – so you won't be charged anything yet.
 
 Next, go to the [A/B testing tab](https://us.posthog.com/experiments) and create an A/B test by clicking the **New experiment** button. Add the following details to your experiment:
 

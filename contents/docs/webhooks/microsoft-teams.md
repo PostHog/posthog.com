@@ -20,7 +20,7 @@ For more details, see the [Microsoft Teams documentation](https://docs.microsoft
 
 Navigate to [project settings](https://app.posthog.com/project/settings) in PostHog paste the URL you copied from Teams into the "Webhook integration section".
 
-![Add webhook integration](../../images/docs/webhooks/webhook-integration.png)
+![Add webhook integration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/webhooks/webhook-integration.png)
 
 Click "Test & Save" and you should receive a message on Teams. 
 
@@ -28,8 +28,8 @@ Click "Test & Save" and you should receive a message on Teams.
 
 In PostHog, navigate to the [action](https://app.posthog.com/data-management/actions) that you'd like to receive webhooks for. Then select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
 
-![PostHog Edit Action](../../images/post-action-slack.png)
+![PostHog Edit Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/post-action-slack.png)
 
 ## 4. Celebrate!
 
-![](../../images/mt-message.png)
+![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/mt-message.png)

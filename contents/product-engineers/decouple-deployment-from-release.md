@@ -1,15 +1,17 @@
 ---
-title: Why you should decouple deployment from release (and how) 
+title: Why you should decouple deployment from release (and how)
 date: 2023-09-18
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/green-blog-image.jpg
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/green-blog-image.jpg
 featuredImageType: full
 tags:
- - Product engineers
- - Engineering
- - Feature managemen
+  - Product engineers
+  - Engineering
+  - Feature managemen
 crosspost:
-  - Blog 
+  - Blog
 ---
 
 Releasing a big feature can be nerve-racking. When deploying it, you don't know if it will work in production, break your app, or cause other issues. Without the right processes in place, the safety of your releases is a big question mark.
@@ -26,7 +28,7 @@ A release is when the new code is made available to users. By default, as soon a
 
 This means teams often hold deployments until they are confident the code is ready to release.
 
-![Delivery process](../images/blog/decouple-deployment-from-release/delivery.png)
+![Delivery process](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/decouple-deployment-from-release/delivery.png)
 
 ## Why should you separate deployment and release?
 
@@ -50,9 +52,9 @@ Decoupling can lower the risk of issues, increase developer productivity, and im
 
 We deploy many changes behind [feature flags](/feature-flags) and release them after testing them in production. At any time, there are [30+ flags](https://github.com/PostHog/posthog/blob/03eb1dcaec3cf5064a1ace4433f2f77d6676b634/frontend/src/lib/constants.tsx#L118C1-L118C1) in use in PostHog. They are created and updated daily.
 
-![PostHog's flags](../images/blog/decouple-deployment-from-release/flags.png)
+![PostHog's flags](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/decouple-deployment-from-release/flags.png)
 
-These flags help us dogfood features, roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed 5 new features without releasing them.
+These flags help us [dogfood features](/product-engineers/dogfooding), roll out changes to specific users, do incremental rollouts, and more. For example, in the flags above, we deployed 5 new features without releasing them.
 
 We also dark launch features using feature flags. This means they are available in production but hidden from users. For example, they might only be accessible through the API, don’t have navigation links, or only have limited options shown to users.
 
@@ -95,3 +97,5 @@ Decoupling deployment from release is an ever-moving goal post. What it means is
 - [Feature flag best practices and tips (with examples)](/blog/feature-flag-best-practices)
 - [What you can learn from how GitHub and GitLab use feature flags](/blog/github-gitlab-feature-flags)
 - [Why use feature flags? Benefits, types and use cases, explained](/blog/feature-flag-benefits-use-cases)
+
+<NewsletterForm />

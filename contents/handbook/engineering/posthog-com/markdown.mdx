@@ -1,10 +1,12 @@
 ---
-title: Markdown
+title: MDX components
 ---
+
+There are some nifty MDX components available for use in Markdown content. Because these components are included globally, you don't need to do anything special to use them (like renaming `.md` to `.mdx` or manually importing them at the top of the file).
 
 ## Product screenshots
 
-The `<ProductScreenshot>` component encapsulates an image with a border and background. It's useful since the app's background matches the website background, and without using this component, it can be hard to differentiate between the screenshot and normal page content. ([See an example](/docs/session-replay/how-to-control-which-sessions-you-record) of this component in action.)
+The `<ProductScreenshot />` component encapsulates an image with a border and background. It's useful since the app's background matches the website background, and without using this component, it can be hard to differentiate between the screenshot and normal page content. ([See an example](/docs/session-replay/how-to-control-which-sessions-you-record) of this component in action.)
 
 It supports dark mode screenshots (optional). Here's how to use it:
 
@@ -12,8 +14,8 @@ It supports dark mode screenshots (optional). Here's how to use it:
 
   ```
   ---
-  import ImgSampleConfigLight from '../../images/tutorials/limit-session-recordings/sampling-config-light.png'
-  import ImgSampleConfigDark from '../../images/tutorials/limit-session-recordings/sampling-config-dark.png'
+export const ImgSampleConfigLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-light.png"
+export const ImgSampleConfigDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/handbook/images/tutorials/limit-session-recordings/sampling-config-dark.png"
   ```
 1. Use the component wherever you want the image to appear.
 
@@ -38,8 +40,8 @@ Th `<ProductVideo />` component works the same as product screenshots (above) bu
 
   ```
   ---
-  import NewFunnelLight from '../../images/docs/user-guides/funnels/new-funnel.mp4'
-  import NewFunnelDark from '../../images/docs/user-guides/funnels/new-funnel-dark.mp4'
+export const NewFunnelLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/handbook/images/docs/user-guides/funnels/new-funnel.mp4"
+export const NewFunnelDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/handbook/images/docs/user-guides/funnels/new-funnel-dark.mp4"
 
   ```
 
@@ -219,7 +221,43 @@ cert-manager:
     enabled: true
 ```
 
-## Private links
+## Links
+
+### Linking internally
+
+Use Markdown's standard syntax for linking internally.
+
+```
+[Link text](/absolute-path/to/url)
+```
+
+Be sure to use _relative links_ (exclude `https://posthog.com`) with _absolute paths_ (reference the root of the domain with a preceding `/`).
+
+| | |
+|-----------	|------------------------------------------	|
+| **Correct syntax**   	| `/absolute-path/to/url`                  	|
+| **Incorrect syntax** 	| `https://posthog.com/absolute-path/to/url` 	|
+
+
+### Linking externally
+
+The `<Link />` component is used throughout the site, and is accessible within Markdown. (When used _internally_, it takes advantage of <Link to="https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-link/" external>Gatsby's `<Link />` features</Link> like prefetching and client-side navigation between routes).
+
+While that doesn't apply here, using it comes with some handy parameters that you can see in action via the link above:
+
+- Add `external` to a) open the link in a new tab, and b) add the _external link_ icon (for UX best practices if forcing a link to open in a new window)
+- If, for some reason, you need to hide the icon, use `externalNoIcon` instead
+
+Example:
+
+```
+<Link to="#" external>
+  click here
+</Link>
+
+```
+
+### Private links
 
 Sometimes we link to confidential information in our handbook. Since the handbook is public, it's useful to indicate when a link is private so visitors aren't confused as to why they can't access a URL. Use the `<PrivateLink />` component for this. ([Here's an example.](/handbook/people/share-options#what-are-my-share-options-actually-worth))
 
@@ -232,4 +270,12 @@ Sometimes we link to confidential information in our handbook. Since the handboo
 
 Private links will always open in a new tab.
 
-_Note: When used within a paragraph, you'll need to convert the paragraph into HTML first (wrap with `<p></p>`) for the component to be recognized by MDX._
+## Mention a team member
+
+Use this component to mention a team member in a post. It will link to their community profile and appears like this: <TeamMember name="Cory Watilo" />
+
+```
+<TeamMember name="Cory Watilo" />
+```
+
+There's also a `photo` parameter which will inline their photo next to their name like this: <TeamMember name="Cory Watilo" photo />

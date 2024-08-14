@@ -1,18 +1,20 @@
 ---
 title: Why we use GitHub as our CMS
 date: 2023-03-23
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 rootpage: /blog
 sidebar: Blog
 hideAnchor: true
-featuredImage: ../images/blog/posthog-blog-image.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-blog-image.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y
+featuredVideo: 'https://www.youtube-nocookie.com/embed/Z2-dSM2i2_Y'
 category: Inside PostHog
 ---
 
-As you publish more content, inevitably you need a way to manage it. A content management system, or CMS, is the go-to software solution for this. Examples include WordPress, Drupal, Wix, Ghost, and many more. 
+As you publish more content, inevitably you need a way to manage it. A content management system, or CMS, is the go-to software solution for this. Examples include WordPress, Drupal, [Wix](/tutorials/wix-analytics), Ghost, and many more. 
 
 But there's another left-field option: GitHub. In this post, I'll explain the three reasons we use GitHub as a CMS (and why we love doing so). 
 
@@ -61,7 +63,7 @@ Developers don’t want to spend time in a CMS. They want to use tools they alre
 
 It also encourages our marketing team to be more technical. They must understand how the code and content interact. For example, when missing metadata causes an error in the web app. The marketing team can figure out and solve this themselves, rather than asking the development team to do it.
 
-![VSCode screenshot of this blog](../images/blog/github-cms/blog.png)
+![VSCode screenshot of this blog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/github-cms/blog.png)
 
 By using GitHub as a CMS, we stay engineering-focused. Everyone works like an engineer, and that enables us to understand and build a better product for them. This helps PostHog succeed in the long run. 
 
@@ -72,3 +74,5 @@ If your team values engineering focus, adopting GitHub as a CMS is a practical w
 - [Developer marketing for early-stage startups – what we’ve learned](/blog/dev-marketing-for-startups)
 - [How (and why) our marketing team uses PostHog](/blog/posthog-marketing)
 - [Check out our posthog.com repo](https://github.com/PostHog/posthog.com) to explore what using GitHub as a CMS looks like in reality
+
+<NewsletterForm />

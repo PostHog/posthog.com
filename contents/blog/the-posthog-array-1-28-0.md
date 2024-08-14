@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/array/1-28-0.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-28-0.png
 featuredImageType: full
 excerpt: >-
   Understand your conversion rates better, PostHog 1.28.0 has launched!

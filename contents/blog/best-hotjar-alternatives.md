@@ -1,13 +1,15 @@
 ---
-title: The best Hotjar alternatives & competitors, compared
+title: 'The best Hotjar alternatives & competitors, compared'
 date: 2024-03-04
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
 rootpage: /blog
-featuredImage: ../images/blog/hotjar-alternatives/hotjar-alternatives.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/clarity-alternatives/clarity-alternatives.png
 featuredImageType: full
 category: General
 tags:
- - Comparisons
+  - Comparisons
 ---
 
 import { ComparisonTable } from 'components/ComparisonTable'
@@ -20,7 +22,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 - **Typical users:** Engineers and product teams
 - **Typical customers:** Mid-size B2B/B2C companies and startups
 
-![posthog](../images/screenshots/session-replay.png)
+![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/session-replay.png)
 
 ### What is PostHog?
 
@@ -71,7 +73,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 >
 > PostHog is a broader, more powerful tool than Hotjar. This comes with some extra complexity, but the payoff is all your user data in one place and tightly integrated with powerful analytical tools.
 
-<ArrayCTA />
+<NewsletterForm />
 
 <br />
 
@@ -82,11 +84,11 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
 - **Typical users:** Marketing and UX teams
 - **Typical customers:** SMB and enterprises in retail
 
-![mouseflow](../images/blog/clarity-alternatives/mouseflow.png)
+![mouseflow](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/mouseflow.png)
 
 ### What is Mouseflow?
 
-Mouseflow is a behavioral analytics tool that offers session replays, heatmaps, and basic funnel analysis. It's designed mainly for marketing and e-commerce websites. It's very similar to Hotjar, making it a direct rip and replace solution.
+[Mouseflow](/blog/best-mouseflow-alternatives) is a behavioral analytics tool that offers session replays, heatmaps, and basic funnel analysis. It's designed mainly for marketing and e-commerce websites. It's very similar to Hotjar, making it a direct rip and replace solution.
 
 According to data from BuiltWith, 5,555 of the top 1 million websites use Mouseflow (correct as of Feb 2024), considerably less than Hotjar's 72,048.
 
@@ -140,11 +142,11 @@ Based on reviews from G2.com, customers use Mouseflow because:
 - **Typical users:** Product teams and UX researchers
 - **Typical customers:** Medium and large B2C and B2B products
 
-![sprig](../images/blog/hotjar-alternatives/sprig.png)
+![sprig](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hotjar-alternatives/sprig.png)
 
 ### What is Sprig?
 
-Sprig is a user insights tool that combines surveys and session replays with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user event. It doesn't do funnel analysis, heatmaps, or other basic analytics, focusing solely on in-product user research.
+[Sprig](/blog/best-sprig-alternatives) is a user insights tool that combines surveys and session replays with AI analysis. Sprig works slightly differently than other tools as it links surveys and session replays together in what it calls studies, normally triggered by specific user event. It doesn't do funnel analysis or other basic analytics, focusing solely on in-product user research.
 
 According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig) (Mar 2024), Sprig is used on 521 of the top 1 million websites, though this figure likely doesn't include apps that aren't accessible via the open web. It's used large, B2C companies such as PayPal, Coinbase, and Robinhood.
 
@@ -156,15 +158,15 @@ According to [data from BuiltWith](https://trends.builtwith.com/analytics/Sprig)
 
 ### How does Sprig compare to Hotjar?
 
-Sprig isn't a like-for-like replacement for Hotjar – it lacks heatmaps and scroll maps, for example – but it is a strong option if you find Hotjar's survey tools lacking.
+Sprig is a decent replacement for Hotjar, especially if you find Hotjar's survey tools lacking. It's support for mobile apps is another key differentiator.
 
 <ComparisonTable column1="Sprig" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1={false} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={false} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />
-  <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users click and interact" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={false} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
   <ComparisonRow column1={false} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
   <ComparisonRow column1={false} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
@@ -196,7 +198,7 @@ According to [reviews on G2](https://www.g2.com/products/sprig/reviews), custome
 - **Typical users:** Marketers and consultants
 - **Typical customers:** Small e-commerce businesses and agencies
 
-![luckyorange](../images/blog/clarity-alternatives/luckyorange.png)
+![luckyorange](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clarity-alternatives/luckyorange.png)
 
 ### What is Lucky Orange?
 
@@ -254,7 +256,7 @@ According to [reviews on G2](https://www.g2.com/products/lucky-orange/reviews.ht
 - **Typical users:** Marketers and UX designers
 - **Typical customers:** Small and medium size businesses and agencies
 
-![crazy egg](../images/blog/hotjar-alternatives/crazy-egg.png)
+![crazy egg](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hotjar-alternatives/crazy-egg.png)
 
 ### What is Crazy Egg?
 
@@ -291,7 +293,7 @@ Crazy Egg is very similar to Hotjar. It includes many of the same features and i
 
 According to reviews on G2, people use Crazy Egg because:
 
-1. **It's easy to setup:** Crazy Egg makes it easy integrate with numerous services and content management systems, like Shopify, Wix, and Wordpress. This is especially useful for website owners and agencies who run multiple websites.
+1. **It's easy to setup:** Crazy Egg makes it easy integrate with numerous services and content management systems, like Shopify, [Wix](/tutorials/wix-analytics), and Wordpress. This is especially useful for website owners and agencies who run multiple websites.
 
 2. **They want to improve content and conversions:** Crazy Egg's heatmaps and session replay features enable them to gather valuable insights for optimizing their content, increasing conversions, and understanding how users navigate their websites.
 
@@ -309,7 +311,7 @@ According to reviews on G2, people use Crazy Egg because:
 - **Typical users:** Product managers and customer success teams
 - **Typical customers:** Small and mid-market B2C apps
 
-![Pendo](../images/blog/best-fullstory-alternatives/pendo.png)
+![Pendo](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-fullstory-alternatives/pendo.png)
 
 ### What is Pendo?
 
@@ -366,7 +368,7 @@ According to G2 reviews, customers use Pendo for:
 - **Typical users:** Marketing and content teams
 - **Typical customers:** Small businesses
 
-![clarity](../images/blog/hotjar-alternatives/microsoft-clarity.png)
+![clarity](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hotjar-alternatives/microsoft-clarity.png)
 
 ### What is Microsoft Clarity?
 
@@ -387,7 +389,7 @@ Clarity covers most of the same features as Hotjar with the exclusion of surveys
 
 <ComparisonTable column1="Clarity" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1="Android only" column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={false} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />

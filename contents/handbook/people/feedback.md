@@ -8,16 +8,16 @@ showTitle: true
 
 Sharing and receiving feedback openly is _really_ important to us at PostHog. Part of creating a highly autonomous culture where people feel empowered is maintaining the most transparent and open flow of information that we can. 
 
-This includes giving feedback [to each other](/handbook/company/values#step-on-toes), so we know we are working on the right things, in the right way. While giving feedback to a team member can feel awkward, especially if it is not positive or if you are talking to someone with more experience than you, we believe that it is an important part of [not letting others fail](/handbook/company/culture#dont-let-others-fail). 
+This includes giving feedback [to each other](/handbook/values#4-trust-and-feedback-over-process), so we know we are working on the right things, in the right way. While giving feedback to a team member can feel awkward, especially if it is not positive or if you are talking to someone with more experience than you, we believe that it is an important part of [not letting others fail](/handbook/company/culture#dont-let-others-fail). 
 
 'Open and honest' doesn't mean 'being an asshole' – we expect feedback to be direct, but shared with good intentions and in the spirit of genuinely helping that person and PostHog as a whole to improve. Please make sure your feedback is constructive and based on observations, not _emotions_. If possible, share examples to help the feedback receiver understand the context of the feedback. 
 
 ## Full team feedback sessions
 
-We run full team 360-degree feedback session as part of every offsite. The session gives everyone the opportunity to give and receive feedback to everyone else.
+We run full team 360-degree feedback session as part of every offsite. Some teams will do them during their own small team offsite, while others choose to do them as part of the whole company offsite. The session gives everyone the opportunity to give and receive feedback to everyone else. If your team works closely with another or is very small, you may combine with another team (but keep attendees to <8 if you can).
 
 ### Ground rules
-- Everybody participates! You should have a think and prepare in advance – don't try and wing it on the day.
+- Everybody participates! You should have a think and write up your notes in advance – don't try and wing it on the day.
 
 - Preparation includes reading our handbook about how to be a good feedback [giver](/handbook/people/feedback#how-to-give-good-feedback) and [receiver](/handbook/people/feedback#how-to-receive-feedback-well).
 
@@ -29,7 +29,9 @@ We run full team 360-degree feedback session as part of every offsite. The sessi
 
 - Everyone is responsible for noting down and actioning their own feedback (ie. the people team won't do this for you).
 
-- What is discussed is for the benefit of those present and does not need to be shared with others who were not present. It is ok to follow up with anyone on feedback you received or gave after the session. 
+- What is discussed is for the benefit of those present and does not need to be shared with others who were not present. It is ok to follow up with anyone on feedback you received or gave after the session.
+
+- Use a notebook, or worst case keep notes on your phone. You will be much less present if you use your laptop, so we generally discourage these. 
 
 ### How to give good feedback
 
@@ -59,23 +61,17 @@ Here are a few tips to help you do this:
 
 - It can be useful to paraphrase the feedback to ensure you have understood it correctly, or ask questions to clarify. 
 
-- You do not have to accept all feedback! However, it's probably worth taking time to reflect on it, rather than reacting in the moment. There is a difference between acknowledging feedback and disagreeing with it. 
+- You do not have to accept all feedback! However, it's probably worth taking time to reflect on it, rather than reacting in the moment. There is a difference between acknowledging feedback and disagreeing with it.
 
-### How is this different from individual performance review?
+## Team surveys
 
-The full team session prioritises openness, breadth and transparency of feedback, as everyone gets to both give and receive feedback in front of the entire team. 
-
-The performance review process centres on a single person for one hour, involves their manager only, and is intended to be more of an in-depth conversation about the future.
-
-## Quarterly team surveys
-
-We run quarterly surveys using the _Pulse Surveys by Deel_ Slack app. These are set up to run automatically, including reminder messages in Slack, so you don't need to chase people manually. Charles and Coua have admin access to the surveys in Slack. 
+We run team surveys every 6 months using the _Pulse Surveys by Deel_ Slack app. These are set up to run automatically, including reminder messages in Slack, so you don't need to chase people manually. Charles and Coua have admin access to the surveys in Slack. 
 
 The questions are based on the ones used by [Culture Amp](https://www.cultureamp.com/) and cover categories such as Company Confidence, Culture, Growth etc. on a 1 ('strongly disagree') to 5 ('strongly agree') scale. The benchmark used is against Culture Amp’s ‘new tech’ companies with less than 200 people. We then take the average score out of 5 and multiple it by 20 to get a % number. A bit rough, but close enough so we can compare with the benchmark.
 
 Only the People & Ops and Exec teams have access to the full list of responses, which are not anonymous. 
 
-We follow a template to report a summary of the results in an Issue. [You can view the latest survey results here](https://github.com/PostHog/company-internal/issues/960) - just copy the formatting ever.  
+We follow a template to report a summary of the results in an Issue. [You can view the latest survey results here](https://github.com/PostHog/company-internal/issues/1390) - just copy the formatting ever.  
 
 ### Current list of questions
 

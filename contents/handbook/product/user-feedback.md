@@ -17,7 +17,7 @@ We actively seek (outbound) input in everything we work on. In addition to havin
 Ways to invite users for an interview:
 - [PostHog Surveys](https://app.posthog.com/survey_templates). We even have a template for [user interviews](/templates/user-interview).
 - If a customer has requested a feature through slack then message them directly
-- Email customers who have subscribed to the feature on the [roadmap](https://posthog.com/roadmap)
+- Email customers who have subscribed to the feature on the [roadmap](/roadmap)
 
 **Scheduling**
 - Add all feedback calls to the [User interviews calendar](https://calendar.google.com/calendar/?cid=Y19tczllaWN1Ym92ZGgxYWhzNmtoY2xpNTQ3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t). If the invite was created from your own calendar, you can simply add "User interviews" as an invitee.
@@ -39,7 +39,7 @@ Ways to invite users for an interview:
 We strongly value our users' time. As such, we usually send a small gift of appreciation. We have the following general _guidelines_, but just use your best judgement.
 - Generally we send users a gift card to the [PostHog merch store](https://merch.posthog.com/) with around $30 of value.
 - When the above is not an option (e.g. user has received merch already) we can offer the user a $30 gift card with [Open Collective](https://opencollective.com/).
-- The instructions on how to create gift cards can be found [here](https://posthog.com/handbook/growth/sales/yc-onboarding#after-the-call).
+- The instructions on how to create gift cards can be found [here](/handbook/growth/sales/yc-onboarding#after-the-call).
 
 ### Repositories of information 
 We keep a log of user feedback in the following places:

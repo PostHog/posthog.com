@@ -5,8 +5,10 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-author: ["andy-vandervell"]
-featuredImage: ../images/blog/hogmail.png
+author:
+  - andy-vandervell
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hogmail.png
 featuredImageType: full
 category: General
 ---
@@ -45,7 +47,7 @@ Josephine Conneely [makes a strong case](https://waysofworkingcollection.substac
 
 Here's a [great read on async working](https://async.twist.com/remote-team-culture/) by Chase Warrington, Head of Remote at chat app Twist. It can be summed up by this graphic:
 
-![async](../images/blog/hogmail/Team-culture-comparison-with-Twist-colors.png)
+![async](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hogmail/Team-culture-comparison-with-Twist-colors.png)
 
 The post includes three useful tips for fostering the social bonds in an async team:
 
@@ -67,4 +69,4 @@ Dissent fuels innovation, but a "challenge everything" culture can "quickly meta
 
 **Read:** [Challenging the status quo at work](https://workweek.com/2022/11/28/challenging-the-status-quo-at-work/) by Hebba Youseff
 
-> We send HogMail every two weeks. [Signup here](https://newsletter.posthog.com/subscribe) so you don't miss it.
+<NewsletterForm />

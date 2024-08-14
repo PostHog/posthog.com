@@ -68,7 +68,9 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     var slug = window.location.pathname.substring(1)
     var darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
     darkQuery.addListener(function (e) {
-        window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+        if (!localStorage.getItem('theme')) {
+            window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+        }
     })
     try {
         preferredTheme =

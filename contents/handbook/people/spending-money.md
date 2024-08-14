@@ -28,7 +28,7 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay.
 
-You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please post in the #team-people-and-ops channel in Slack afterwards and tag Charles to get reimbursed manually. 
+You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please post in the #team-people-and-ops channel in Slack afterwards and tag Fraser to get reimbursed manually. 
 
 ### Brex
 
@@ -49,16 +49,18 @@ By default, the email forwarding feature only accepts emails from your PostHog a
 
 ### Your personal card
 
-- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Charles to purchase it for you on theirs in the first instance. 
-- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Charles to get reimbursed manually.  
+- You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Fraser to purchase it for you on theirs in the first instance. 
+- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Fraser to get reimbursed manually.
 
-Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! Again, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
+Personal expenses should be submitted within 90 days of incurring the expense, otherwise these will not be repaid.
+
+Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! If you used your brex card you can login to Brex, find the charge and use the repay function - more details [here](https://www.brex.com/support/employee-repayments). If it was on Revolut, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
 
 ## Making larger purchases
 
 If your purchase fits within the policy below, there is no need to ask. We _cannot_ pay you back for anything without a receipt if you use your personal card.
 
-If you don't have enough space on your company card, just ask Charles to increase your limit.
+If you don't have enough space on your company card, just ask Fraser to increase your limit.
 
 ## Equipment
 
@@ -73,11 +75,13 @@ We'd prefer you to use a laptop. This is so when we host meetups in real life, y
 * For engineering roles, we recommend a Macbook Pro 14-inch M3 Pro, with the 11-core CPU, 14-core GPU upgrade and 32GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
 * For all other roles, we currently recommend a Macbook Air with an Apple Silicon (M2) processor and 16GB of RAM.
 
-These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask Charles.
+These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask Fraser.
 
 Apple offer multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. These make sense if you do a ton of work in coworking spaces or cafés where you do not have a second screen. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large (27 inch) monitor.
 
-When buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on Brex or ask Charles. (Don't do this if you're in the UK though - use your Revolut card.)
+Please purchase an English keyboard (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave. 
+
+If you are in the US only, when buying something at Apple we can get 3% cashback on purchases through Brex. You should be able to find that in the 'Rewards' tab on Brex or ask Fraser. Don't do this if you're in the UK though - use your Revolut card as we claim back the VAT. 
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
@@ -125,9 +129,23 @@ Our entire stack for collaborative software is pleasingly simple. All we use is:
 * GitHub - documents, code, discussion
 * Slack (premium) - chat (although we encourage you to default into discussion of features/strategy etc into GitHub)
 * PostHog - product analytics
-* Figma - graphic design
+* Figma - design
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
+
+### Optional software
+
+There are other tools some team members choose to use individually. In those cases, as they become more widely adopted in the company, it makes sense to have a company account.
+
+Ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink> and someone will grant your request if you ask nicely.
+
+- <Link to="https://www.loom.com" external>Loom</Link>
+
+  You'll be added as a _Creator Lite_ which allows you to record 25 videos/mo at up to 5 minutes in length. Should you need a full Creator account (unlimited videos, advanced features), ask <TeamMember name="Simon Fisher" photo />.
+
+- <Link to="https://www.zoom.us" external>Zoom</Link>
+  
+  We use Google Meet by default, but you can use Zoom for free (up to 40-minute calls). Should you need longer meetings, ask <TeamMember name="Simon Fisher" photo />. (But does anyone _really_ need longer meetings?)
 
 ### IDEs
 
@@ -160,26 +178,12 @@ We have a company WeWork All Access account that allows you to book desks in any
 
 If you need to travel on PostHog’s behalf (e.g. in person onboarding, meeting customers, working on a specific project), again please spend money in the best interests of the company. 
 
-We now use Brex Travel to help with planning and booking travel. If you are booking an individual trip, you can use the ‘Travel’ function to search and book flights directly through Brex.
-- First, click the trips icon and go to ‘Manage Profile’. Here you can enter all of your travel details, including loyalty program and known traveler numbers, so you won't have to enter them manually with an airline, hotel, or car hire service in the future.
-- Go back to the trips section and go into ‘Book a new trip’
-  - Here you can book flights (indexed from Google Flights), hotels, and rental cars
-  - You can also book for a guest, if someone is coming with you pre- or post-offsite
-- Name your trip and assign it to a budget. For example:
-  - To your meeting up stipend
-  - To your offsite budget
-  - To your in-person onboarding budget
-  - To your generic budget for other travel
-- Search for flights, accommodation, rental cars, or train tickets
-  - Your receipts and memos are automatically added to the expense, and you will receive emails with all of the confirmations (as well as be able to access them via the Brex app)
-  - You can also manage your trips if you need to change something or cancel
-
 We do not pre-approve your travel expenses, and trust team members to make the right decisions here. Some guidance:
 - We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
 - Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
 
-If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Charles.
+If you have any questions about this stuff, or are unsure what is reasonable here, feel free to check in with Fraser.
 
 ### Budget for working together/socializing
 

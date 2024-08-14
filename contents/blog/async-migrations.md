@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - yakko-majuri
-featuredImage: ../images/blog/migrating-hog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/migrating-hog.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -81,7 +82,7 @@ We needed something better.
 
 ## Enter async migrations
 
-![Async migrations UI](../images/blog/async-migrations-ui.png)
+![Async migrations UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/async-migrations-ui.png)
 
 The solution we came up with for the problem mentioned above is a system for running so-called async migrations.
 
@@ -157,7 +158,7 @@ Async migrations are triggered from the UI and create a Celery task that handles
 
 Metadata about the migration is stored in Postgres, including things such as status (completed, errored, rolled back, etc), progress, start and finish times, and other useful information.
 
-![Async migrations Architecture](../images/blog/async-migrations-architecture.png)
+![Async migrations Architecture](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/async-migrations-architecture.png)
 
 ### Structure
 

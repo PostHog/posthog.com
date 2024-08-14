@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-If you have users who are Californian residents, it's important to understand the implications of handling their data privately and securely. PostHog doesn't see any of your data and can be self-hosted on your existing infrastructure, making it one of the most CCPA-compliant product analytics platforms available. 
+If you have users who are Californian residents, it's important to understand the implications of handling their data privately and securely.
 
 This guide explains what the CCPA is, what data must be protected and what your options are for CCPA-compliant analytics. 
 
@@ -34,7 +34,7 @@ In short, any information which is tied to a specific individual can be consider
 
 ## What is the impact of CCPA on product analytics?
 
-The CCPA requires businesses to give consumers certain information in a “notice at collection”. This means that, when people sign-up to use your product, you need to explain how you intend to use their data to improve the product for them.
+The CCPA requires businesses to give consumers certain information in a “notice at collection”. This means that, when people sign up to use your product, you need to explain how you intend to use their data to improve the product for them.
 
 A notice at collection must list the categories of personal information businesses collect about consumers and the purposes for which they use the categories of information. The notice must also contain a link to the business’s privacy policy, where consumers can get more details on your privacy practices.
 
@@ -46,11 +46,13 @@ PostHog enables you to self-host your analytics on your own infrastructure and m
 
 ### Step 1: Choose a hosting provider
 
-We recommend hosting PostHog on your own infrastructure, or a private cloud such as AWS, Google Cloud Platform or Microsoft Azure.
+We recommend using PostHog Cloud US for CCPA compliance. If self-hosting, the steps will depend on where you're hosting your data. 
 
 ### Step 2: Deploy PostHog
 
-Deploying PostHog onto your own infrastructure is straightforward and we provide support to help with any issues you encounter. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started, or [arrange a demo](https://posthog.com/book-a-demo) to see it in action first.
+If using PostHog Cloud, simply follow the steps in the onboarding process to start sending events. Read our [integration documentation](/docs/integrate) for more information on sending events to PostHog.
+
+Deploying PostHog onto your own infrastructure is straightforward but we do not provide support for self-hosted instances. You can follow our [standard deployment guides](https://posthog.com/docs/self-host) to get started. 
 
 ### Step 3: Security configuration
 

@@ -1,9 +1,10 @@
 ---
 date: 2023-11-01
-title: "How we designed our company for speed"
+title: How we designed our company for speed
 author:
   - james-hawkins
-featuredImage: ../images/blog/super-hog-pink.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/super-hog-pink.png
 featuredImageType: full
 tags:
   - Founders
@@ -70,7 +71,7 @@ The above requires a lot of context setting from the company. To that end, we're
 
 To do this, we have a clear, simple [mission and strategy](/handbook/why-does-posthog-exist). We communicate this repeatedly through our handbook, during everyone's onboarding, repeatedly in our all hands and when we plan each quarter of work.
 
-![company strat](../images/hubs/how-we-designed-our-company-for-speed/posthog-strat.png)
+![company strat](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hubs/how-we-designed-our-company-for-speed/posthog-strat.png)
 
 Our mission and strategy have both been refined as the company has made progress – they have felt more meaningful as a result as we've gotten further along. We've gradually gone from something hypothetical to these things feeling like an obvious label for what we do.
 
@@ -98,9 +99,9 @@ PostHog works like a group of startups with lots of [small teams](/handbook/comp
 
 It's simple, but if you have lots of spending and focus outside of engineering, you won't get as much built.
 
-At the time of writing, [we are 37 people](/team), only 11 of whom are in Go To Market or Operations roles (and 6 of those 11 have at least some engineering in their background).
+At the time of writing, [we are 37 people](/people), only 11 of whom are in Go To Market or Operations roles (and 6 of those 11 have at least some engineering in their background).
 
-![company composition](../images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
+![company composition](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/hubs/how-we-designed-our-company-for-speed/posthog-team.png)
 
 We don't do outbound sales, our [marketing team](/teams/marketing) is very small, we only have one product manager, and our [exec team](/teams/exec) is only 3 people. These things are all by design. 
 
@@ -140,7 +141,7 @@ To quote one of our team: "process is scar tissue" – it often overcorrects, bu
 
 As a company with high autonomy and low coordination, shipping things that affect multiple teams is a lot harder than shipping something within a single team. You may need extra meetings, or to form a temporary project team, or you may just fail!
 
-Since we handle a lot of data, at scale, this has meant performance has, well, um, been a performance to solve. Performance is a very broad area to solve for, ranging from our infrastructure all the way through to our UX, and thus involves a lot of coordination and dependencies.
+Since we handle a lot of data, at scale, this has meant performance has, well, um, been a performance to solve. Performance is a very broad area to solve for, ranging from [our infrastructure](/docs/how-posthog-works) all the way through to our UX, and thus involves a lot of coordination and dependencies.
 
 ## Should you optimize for speed?
 
@@ -153,3 +154,5 @@ Likewise, if you're building a small software product that has better UX than an
 The most important thing is to figure out if you value speed and autonomy over polish and control. Which path will help you achieve your company's mission better?
 
 Once you've done that, optimize how your company works around that, and accept there are trade-offs! Just make them consciously.
+
+<NewsletterForm />

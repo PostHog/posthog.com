@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/hipaa.jpeg
 featuredImageType: full
 category: General
 tags:
@@ -41,7 +42,7 @@ Some analytics tools, such as Google Analytics, don't offer BAAs and are therefo
 
 ### 1. PostHog
 
-![PostHog](../images/screenshots/hogflix-dashboard.png)
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
 #### Overview
 
@@ -67,9 +68,11 @@ Being an all-in-one platform has two further benefits:
 
 A BAA is available on PostHog's [Teams plan](/pricing), which also includes priority support and generous free usage limits for all tools – e.g. 1 million free analytics events every month. You can also self-host the open-source edition of PostHog, but this isn't recommended as it's provided without guarantee or support.
 
+<NewsletterForm />
+
 ### 2. Mixpanel
 
-![Mixpanel - hipaa analytics tools](../images/blog/open-source-analytics-tools/mixpanel.png)
+![Mixpanel - hipaa analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/mixpanel.png)
 
 #### Overview
 
@@ -94,7 +97,7 @@ A BAA is available on Mixpanel's Growth plan, which starts at $20 per month for 
 
 ### 3. Countly
 
-![Countly - open source analytics tools](../images/blog/open-source-analytics-tools/countly-screenshot.png)
+![Countly - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/countly-screenshot.png)
 
 #### Overview
 
@@ -106,7 +109,7 @@ A BAA is available on Mixpanel's Growth plan, which starts at $20 per month for 
 - **Surveys:** <span className="text-green text-lg">✔</span>
 - **Customer data platform:** <span className="text-red text-lg">✖</span>
 
-[Countly](https://countly.com) is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys. Support for app crash and error reports, and push notifications, makes it particularly well-suited to mobile app analytics.
+[Countly](https://countly.com) is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys. Support for app crash and error reports, and push notifications, makes it particularly well-suited to [mobile app analytics](/blog/best-mobile-app-analytics-tools).
 
 #### Countly and HIPAA compliance
 
@@ -122,7 +125,7 @@ This makes Countly a good option if you'd prefer to self-host your analytics.
 
 ### 4. Freshpaint
 
-![freshpaint](../images/blog/hipaa-compliant-ab-testing/freshpaint.png)
+![freshpaint](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/freshpaint.png)
 
 - **Product analytics:** <span className="text-red text-lg">✖</span>
 - **Web analytics:** <span className="text-red text-lg">✖</span>
@@ -147,7 +150,7 @@ Freshpaint is a cloud-only product specifically designed for healthcare companie
 
 ### 5. Piwik PRO
 
-![piwik pro](../images/blog/ga4-alternatives/piwik-pro.png)
+![piwik pro](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/ga4-alternatives/piwik-pro.png)
 
 - **Product analytics:** <span className="text-red text-lg">✖</span>
 - **Web analytics:** <span className="text-green text-lg">✔</span>
@@ -170,7 +173,7 @@ PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by s
 
 ### 6. Amplitude
 
-![amplitude](../images/blog/posthog-vs-amplitude/amplitude-screenshot.png)
+![amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-amplitude/amplitude-screenshot.png)
 
 #### Overview
 
@@ -182,7 +185,7 @@ PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by s
 - **Surveys:** <span className="text-red text-lg">✖</span>
 - **Customer data platform:** <span className="text-green text-lg">✔</span>
 
-[Amplitude](https://amplitude.com) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but it also offers extras such as session replay, feature flags, and A/B testing. It also offers anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days".   
+[Amplitude](/blog/posthog-vs-amplitude) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but also has extra features such as session replay, feature flags, and A/B testing. It also has anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days."   
 
 #### Amplitude and HIPAA compliance
 
@@ -195,7 +198,7 @@ Amplitude offers a BAA, but doesn't stipulate the minimum terms for signing one 
 
 ### 7. Heap
 
-![heap](../images/blog/best-amplitude-alternatives/heap.png)
+![heap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/best-amplitude-alternatives/heap.png)
 
 - **Product analytics:** <span className="text-green text-lg">✔</span>
 - **Web analytics:** <span className="text-red text-lg">✖</span>

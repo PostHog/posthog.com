@@ -1,19 +1,20 @@
 ---
 title: Hubspot
-github: https://github.com/PostHog/hubspot-plugin
-installUrl: https://app.posthog.com/project/apps?name=Hubspot
-thumbnail: ../../cdp/thumbnails/hubspot.svg
+github: 'https://github.com/PostHog/hubspot-plugin'
+installUrl: 'https://app.posthog.com/project/apps?name=Hubspot'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/hubspot.svg
 tags:
-    - hubspot
+  - hubspot
 ---
+
+import Requirements from "./_snippets/requirements.mdx"
+import FeedbackQuestions from "./_snippets/feedback-questions.mdx"
+import PostHogMaintained from "./_snippets/posthog-maintained.mdx"
 
 Send data from PostHog to Hubspot whenever an `$identify` event occurs. That is, whenever PostHog successfully identifies a user. This is useful for syncing customer information between both PostHog and Hubspot.
 
-## Requirements
-
-This requires either PostHog Cloud with the [data pipeline add-on](https://us.posthog.com/organization/billing), or a self-hosted PostHog instance running [version 1.30.0](https://posthog.com/blog/the-posthog-array-1-30-0) or later.
-
-Not running 1.30.0? Find out [how to update your self-hosted PostHog deployment](https://posthog.com/docs/runbook/upgrading-posthog)!
+<Requirements />
 
 You'll also need a Hubspot account to connect to.
 
@@ -41,7 +42,7 @@ No other information can currently be sent to PostHog using this destination. If
 ### How do I install the Hubspot destination on PostHog?
 
 1. Log in to your PostHog instance
-2.  Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
+2.  Click "[Data pipeline](https://us.posthog.com/pipeline)" in the left sidebar
 3. Search for 'Hubspot'
 4. Select the destination, press 'Install' and follow the on-screen instructions
 
@@ -63,14 +64,6 @@ A lot of people contributed to this destination! We'd like to thank...
 
 For creating this. Thanks, all!
 
-### Who maintains this destination?
+<PostHogMaintained />
 
-This destination is maintained by PostHog. If you have issues with the destination not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this destination?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
-
-### What if my question isn't answered above?
-
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+<FeedbackQuestions />

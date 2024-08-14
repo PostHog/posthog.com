@@ -40,7 +40,7 @@ By default, PostHog fetches these definitions every 30 seconds (or 5 minutes in 
 const client = new PostHog(
     '<ph_project_api_key>',
     { 
-        host: '<ph_instance_address>',
+        host: '<ph_client_api_host>',
         personalApiKey: 'your personal API key from step 1',
         featureFlagsPollingInterval: 30000 // Optional. Measured in milliseconds. Defaults to 30000 (30 seconds)
     }
@@ -50,7 +50,7 @@ const client = new PostHog(
 ```ruby
 posthog = PostHog::Client.new({
   api_key: "<ph_project_api_key>",
-  host: "<ph_instance_address>",
+  host: "<ph_client_api_host>",
   personal_api_key: 'your personal API key from step 1',
   feature_flags_polling_interval: 30 # Optional. Measured in seconds. Defaults to 30.
 })
@@ -68,8 +68,8 @@ func main() {
 	client, _ := posthog.NewWithConfig(
 		os.Getenv("POSTHOG_API_KEY"),
 		posthog.Config{
-			Endpoint:       "<ph_instance_address>",
-			PersonalApiKey: "your personal API key", // Required for feature flags
+			Endpoint:       "<ph_client_api_host>",
+			PersonalApiKey: "your personal API key", // Optional, but much more performant. If this token is not supplied, then fetching feature flag values will be slower.
             DefaultFeatureFlagsPollingInterval: 300 // Optional. Measured in seconds. Defaults to 300 (5 minutes).
             // NextFeatureFlagsPollingTick: func() time.Duration {} // Optional. Use this to sync polling intervals between instances. For an example see: https://github.com/PostHog/posthog-go/pull/36#issuecomment-1991734125
 		},
@@ -81,7 +81,7 @@ func main() {
 
 ```php
 PostHog::init("<ph_project_api_key>",
-  array('host' => '<ph_instance_address>'),
+  array('host' => '<ph_client_api_host>'),
   null, // or custom http client
  'YOUR PERSONAL API KEY from step 1'
 );
@@ -92,8 +92,9 @@ PostHog::init("<ph_project_api_key>",
 from posthog import Posthog
 
 posthog = Posthog('<ph_project_api_key>', 
-    host='<ph_instance_address>',
-    poll_interval=30 # Optional. Measured in seconds. Defaults to 30.
+    host='<ph_client_api_host>',
+    poll_interval=30, # Optional. Measured in seconds. Defaults to 30.
+    personal_api_key='your personal API key from step 1'
 )
 ```
 
@@ -240,11 +241,11 @@ client.ReloadFeatureFlags()
 ```
 
 ```python
-# Force reloading feature flags is not available in our Python SDK
+posthog.load_feature_flags()
 ```
 
 ```php
-// Force reloading feature flags is not available in our PHP SDK
+PostHog::loadFlags()
 ```
 
 </MultiLanguage>

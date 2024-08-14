@@ -1,17 +1,20 @@
 ---
 title: How to set up feature flags in Vue
 date: 2024-01-19
-author: ["lior-neu-ner"]
+featuredVideo: https://www.youtube-nocookie.com/embed/kMrJz-h1YPA
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['feature flags']
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsLight from '../images/tutorials/vue-feature-flags/events-light.png'
-import EventsDark from '../images/tutorials/vue-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/vue-feature-flags/create-flag-light.png'
-import CreateFlagDark from '../images/tutorials/vue-feature-flags/create-flag-dark.png'
+export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/events-light.png"
+export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/create-flag-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/vue-feature-flags/create-flag-dark.png"
 
 [Feature flags](/feature-flags) help you release features and conditionally show content. This tutorial shows you how integrate them in your Vue.js app using PostHog. 
 
@@ -46,7 +49,7 @@ export default {
 
 Run `npm run serve` to start your app.
 
-![Basic Vue app](../images/tutorials/vue-feature-flags/basic-app.png)
+![Basic Vue app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-feature-flags/basic-app.png)
 
 ## Adding PostHog
 
@@ -78,14 +81,14 @@ export default {
     app.config.globalProperties.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>",
+        api_host: "<ph_client_api_host>",
       }
     );
   },
 };
 ```
 
-Replace `<ph_project_api_key>` and `<ph_instance_address>` with your your PostHog API key and host. You can find these in your [project settings](https://us.posthog.com/settings/project).
+Replace `<ph_project_api_key>` and `<ph_client_api_host>` with your your PostHog API key and host. You can find these in your [project settings](https://us.posthog.com/settings/project).
 
 Finally, activate your plugin in `main.js`:
 
@@ -119,7 +122,7 @@ With PostHog set up, your app is ready for feature flags. To create one, go to t
   classes="rounded"
 />
 
-You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
+You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
 
 ## Implementing our flag code
 
@@ -158,7 +161,7 @@ export default {
 
 When you run your app now, you should see the updated text.
 
-![New app after adding the flag](../images/tutorials/vue-feature-flags/flag-enabled-in-app.png)
+![New app after adding the flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/vue-feature-flags/flag-enabled-in-app.png)
 
 ### Bootstrapping feature flags
 
@@ -174,7 +177,7 @@ export default {
     app.config.globalProperties.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>",
+        api_host: "<ph_client_api_host>",
         bootstrap: {
             featureFlags: {
                 'my-cool-flag': true,

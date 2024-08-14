@@ -43,33 +43,39 @@ Whether you have an appointment with your doctor, school run with your kids, or 
 
 ### You are sick
 
-If you are sick, you don't need to work and you will be paid. This is assuming you need a day or two off, then just take them. 
+If you are sick, you don't need to work and you will be paid - the upper limit for paid sick leave for your country will be specified in your contract. This is assuming you need a day or two off, then just take them.
 
-Please let your manager know if you need to take off due to illness as soon as you are able to and add it to PTO by Deel.
+Please let your manager know if you need to take off due to illness as soon as you are able to and add it to PTO by Deel. You shouldn't pre-emptively book a bunch of days off sick, as you can't know how long you will actually be sick for and you may trigger the need for a doctor's note (see below). Just book the day or two off that you are sick then add more if you still feel unwell. 
 
-For extended periods of illness (5+ work days), please speak to Charles so we can work out a plan. In some countries, we may be required to request a doctor's note from you. If you have a medical condition you know will take you away from work regularly, please let Charles know so we can work out accommodations with you and your manager. 
+For extended periods of illness (5+ work days), or if you are going over the limit in your country/[state](https://support.gusto.com/article/106622152100000/Sick-leave-laws-by-state), please speak to Fraser so we can work out a plan. In most countries, we will need a doctor's note from you. 
+
+If you have a medical condition you know will take you away from work regularly, please let Fraser know so we can work out accommodations with you and your manager. 
 
 ### Bereavements / Child loss 
 
-We do not define “closeness” and we won't ask about your relationship to the person or what they meant to you. Take as much time as you need, just give us a quick update every now and then. 
+We do not define “closeness” and we won't ask about your relationship to the person or what they meant to you. Please just let us know up front how much time you would like to take. 
 
-We extended our bereavement policy to also cover pregnancy and child loss for both parents, with no questions asked. Please take at least 2 weeks of paid leave. If you need additional time for physical or mental health reasons, we will treat it as extended sick leave.
+Our bereavement policy also covers pregnancy and child loss for both parents, with no questions asked. Please take at least 2 weeks of paid leave. 
+
+If you need extended time for physical or mental health reasons, we will treat it as extended sick leave.
 
 ### Jury duty / voting / childcare disasters, aka 'life stuff'
 
-There are lots of situations where life needs to come first. Please let it - just be communicative with your team and fit your work around it as you need.
+There are lots of situations where life needs to come first. Please let it - just be communicative with your team and fit your work around it as you need. We trust you will do the right thing here. 
+
+If your are summonsed for jury duty, please let us know right away - we can often get an exception granted if we have enough notice. 
 
 ## Parental leave
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of whether you've become a parent through childbirth or adoption. 
 
-If you have been at PostHog for over 1 year, you can take up to 12 weeks off on full pay. You can take a further 4 weeks unpaid leave if you need more time. After this, if you need to stagger your return to work, you can come back at 50% capacity on 50% pay afterwards. If you live in a country where a statutory parental leave benefit is available, you will be required to claim statutory parental leave pay (if you are eligible) and PostHog will supplement any gaps.
+If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 12 weeks off on full pay. You can take a further 4 weeks unpaid leave if you need more time. We only pay this in one continuous block, i.e. you can't be paid for 8 weeks and then take the remaining 4 weeks later on full pay (this is because it is more disruptive to your team - we prefer you just take one longer chunk here!) If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements. 
 
-If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements.
+Parental leave isn't supposed to be combined with our unlimited PTO policy here - we aren't prescriptive and will trust your judgement, but please note that we usually won't allow you do a combination of parental leave plus a long holiday in addition to that to extend your time off. 
 
-Please communicate parental leave to James or Tim as soon as you feel comfortable doing so, and in any case at least 2 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. 
+Please communicate parental leave to James, Tim, or Charles as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing. 
 
-We are aware that there are local laws around time off for new parents in every country, and that these may vary. Wherever there is a discrepancy between local regulations and PostHog policy, local laws will override PostHog.
+> We are aware that there are local laws around time off for new parents in every country, and that these may vary. Wherever there is a discrepancy between local regulations and PostHog policy, local laws will override PostHog.
 
 ## Birthday and anniversaries
 

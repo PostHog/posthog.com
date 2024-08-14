@@ -7,9 +7,10 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/posthog-company-culture-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
-featuredVideo: https://www.youtube-nocookie.com/embed/rooOi7rxi8Y
+featuredVideo: 'https://www.youtube-nocookie.com/embed/rooOi7rxi8Y'
 category: General
 tags:
   - Guides
@@ -27,7 +28,7 @@ If this sounds like bad news to you, consider one of following six Google Optimi
 
 ## 1. PostHog
 
-![google optimize alternatives](../images/blog/google-optimize-alternatives/posthog.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/posthog.png)
 
 - **Free tier:** <span className="text-green text-lg">✔</span>
 - **Transparent pricing:** <span className="text-green text-lg">✔</span>
@@ -36,11 +37,11 @@ If this sounds like bad news to you, consider one of following six Google Optimi
 
 [PostHog](https://posthog.com/) is a comprehensive [Google Optimize](/blog/optimize-to-posthog) and [GA4 alternative](/blog/ga4-alternatives) that integrates A/B and [multivariate testing](/product-engineers/what-is-multivariate-testing-examples) with event-based analytics, session recording, and feature flags.
 
-PostHog supports A/B and multivariate experiments that target by geography, device, source, cohort, or limitless other user properties. It tracks metric improvement goals for success, secondary goals, and estimates how long it takes to get a statistically significant result. PostHog's experimentation suite is built on its feature flag functionality, making it easy to rollout winning variants.
+PostHog supports A/B and multivariate experiments that target by geography, device, source, cohort, or limitless other person properties. It tracks metric improvement goals for success, secondary goals, and estimates how long it takes to get a statistically significant result. PostHog's experimentation suite is built on its feature flag functionality, making it easy to rollout winning variants.
 
 As an all-in-one platform, PostHog simplifies your data and analytics stack by replacing multiple tools. This makes it easy to quickly create experiments using existing data and cohorts in your product analytics, rather than connecting an external data source.
 
-PostHog has a range of [libraries and SDKs](/docs/integrate), from [JavaScript](/docs/integrate/client/js) to [Python](/docs/integrate/server/python) to [iOS](/docs/integrate/client/ios), to help integrate into your website or apps' codebase. It has has an HTML snippet for easy setup with basic sites, [Shopify](/docs/libraries/shopify), [Wordpress](/docs/libraries/wordpress), [Webflow](/tutorials/webflow), and more.
+PostHog has a range of [libraries and SDKs](/docs/integrate), from [JavaScript](/docs/integrate/client/js) to [Python](/docs/integrate/server/python) to [iOS](/docs/integrate/client/ios), to help integrate into your website or apps' codebase. It has has an HTML snippet for easy setup with basic sites, [Shopify](/docs/libraries/shopify), [Wordpress](/docs/libraries/wordpress), [Webflow](/tutorials/webflow), [Carrd](/tutorials/carrd-analytics), and more.
 
 ### How much does PostHog cost?
 
@@ -55,7 +56,7 @@ PostHog offers **unlimited experiments** on PostHog Cloud, which includes 1 mill
 
 ## 2. Unbounce
 
-![google optimize alternatives](../images/blog/google-optimize-alternatives/unbounce.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/unbounce.png)
 
 - **Free tier:** <span className="text-red text-lg">✖</span>
 - **Transparent pricing:** <span className="text-green text-lg">✔</span>
@@ -80,20 +81,20 @@ Unbounce offers a pleasing range of transparently-priced plans. Its entry-level 
 
 ## 3. GrowthBook
 
-![google optimize alternatives](../images/blog/open-source-testing-tools/growthbook.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-testing-tools/growthbook.png)
 
 - **Free tier:** <span className="text-green text-lg">✔</span>
 - **Transparent pricing:** <span className="text-green text-lg">✔</span>
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Product and engineering teams
 
-[GrowthBook](https://www.growthbook.io/) is a popular open-source feature flagging and experimentation platform. It supports A/B and multivariate tests, and integrates with a range of popular analytics tools, such as Google Analytics (UA), Mixpanel, Matomo, and most popular data warehouses.
+[GrowthBook](/blog/posthog-vs-growthbook) is a popular open-source feature flagging and experimentation platform. It supports A/B and multivariate tests, and integrates with a range of popular analytics tools, such as Google Analytics (UA), Mixpanel, Matomo, and most popular data warehouses.
 
 It offers a basic visual editor so non-technical users can create experiments without writing code. GrowthBook's 'Guardrail' feature monitors for unintended second order effects of your change which you're not actively testing for.
 
 ### How much does GrowthBook cost?
 
-GrowthBook offers unlimited traffic (subject to a fair use policy), feature flags, and experiments. It charges only on the number of user accounts. Its Starter plan includes three GrowthBook users. Its Pro plan adds advanced permissions, custom fields, and its visual A/B test editor, for just $20 per user, per month.
+[GrowthBook](/blog/best-growthbook-alternatives) offers unlimited traffic (subject to a fair use policy), feature flags, and experiments. It charges only on the number of user accounts. Its Starter plan includes three GrowthBook users. Its Pro plan adds advanced permissions, custom fields, and its visual A/B test editor, for just $20 per user, per month.
 
 ### Companies that use GrowthBook
 
@@ -103,7 +104,7 @@ GrowthBook offers unlimited traffic (subject to a fair use policy), feature flag
 
 ## 4. Instapage
 
-![google optimize alternatives](../images/blog/google-optimize-alternatives/instapage.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/instapage.png)
 
 - **Free tier:** <span className="text-red text-lg">✖</span>
 - **Transparent pricing:** Partial
@@ -124,14 +125,14 @@ Instapage's self-serve plan costs $299 per month ($199 if billed annually) and i
 
 ## 5. VWO Testing
 
-![google optimize alternatives](../images/blog/google-optimize-alternatives/vwo-testing.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/vwo-testing.png)
 
 - **Free tier:** <span className="text-green text-lg">✔</span>
 - **Transparent pricing:** <span className="text-red text-lg">✖</span>
 - **Unlimited experiments:** <span className="text-green text-lg">✔</span>
 - **Best for:** Marketing teams
 
-[VWO](https://vwo.com) is a testing platform that primarily targets large enterprises. Its experimentation platform includes support for A/B and multivariate tests, and a visual editor, though some features are locked behind its numerous product tiers. Geo-targeting, for example, is only available on the 'Pro' tier of VWO Testing, while feature flags are only available as part of its VWO FullStack product.
+[VWO](/blog/best-vwo-alternatives) is a testing platform that primarily targets large enterprises. Its experimentation platform includes support for A/B and multivariate tests, and a visual editor, though some features are locked behind its numerous product tiers. Geo-targeting, for example, is only available on the 'Pro' tier of VWO Testing, while feature flags are only available as part of its VWO FullStack product.
 
 ### How much does VWO cost?
 
@@ -145,7 +146,7 @@ Outside of its new Starter plan, VWO is largely a 'price on application' product
 
 ## 6. LaunchDarkly
 
-![google optimize alternatives](../images/blog/google-optimize-alternatives/launch-darkly-experiment.png)
+![google optimize alternatives](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-optimize-alternatives/launch-darkly-experiment.png)
 
 - **Free tier:** <span className="text-green text-lg">✔</span>
 - **Transparent pricing:** Partial
@@ -167,5 +168,3 @@ Experimentation is available on LaunchDarkly's Pro plan, which costs $20 per sea
 - **Square:** Mobile payments
 - **Ryanair:** Affordable airline
 - **HashiCorp:** Infrastructure automation and security
-
-<ArrayCTA />

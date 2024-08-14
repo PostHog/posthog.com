@@ -1,10 +1,13 @@
 ---
 title: How to do A/A testing
 date: 2023-07-07
-author: ["ian-vanagas"]
+author:
+  - ian-vanagas
 showTitle: true
 sidebar: Docs
-tags: ['experimentation', 'feature flags']
+tags:
+  - experimentation
+  - feature flags
 ---
 
 An A/A test is the same as an [A/B test](/docs/experiments) except both groups receive the same code or components. Since both groups get identical functionality, the goal is to **not** see a statistical difference between the variants by the end of the experiment. 
@@ -17,7 +20,7 @@ Teams run A/A tests to ensure their A/B test service, functionality, and impleme
 
 The first step in running an A/A test is creating an experiment. You do this going to the [experiments tab](https://app.posthog.com/experiments) and clicking the "New experiment" button. Set a name, key, and experiment goal. Make sure to clarify in the name or description that it is an A/A test.
 
-![Create an experiment](../images/tutorials/aa-testing/experiment.png)
+![Create an experiment](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/aa-testing/experiment.png)
 
 If you use an absolute goal, like total pageviews, make sure to use an equal variant split (which is the default). If you use a relative goal like conversion, you can test non-equal variant splits like 25-75. To do this, edit the feature flag with the same key as your experiment, change the variant rollout, and press save.
 
@@ -51,7 +54,7 @@ from posthog import Posthog
 
 posthog = Posthog(
   '<ph_project_api_key>', 
-  host='<ph_instance_address>'
+  host='<ph_client_api_host>'
 )
 user_id = 'ian@posthog.com'
 
@@ -78,7 +81,7 @@ If the results are statistically significant, something is wrong. Here are some 
 
 - **Flag implementation:** use the overrides (like `posthog.featureFlags.override({'aa-homepage': 'test'})` for each of the variants and check that the same code runs. Try accessing the code with different states (logged in vs out), browsers, and parameters.
 
-- **Consistently identify, set properties, and group users:** if your experiment or goals depends on a user, property, or group filter, check that you are setting these values correctly before calling the flag. For example, you might not be setting a user property a flag relies on before flag evaluation.
+- **Consistently identify, set properties, and group users:** if your experiment or goals depends on a user, property, or group filter, check that you are setting these values correctly before calling the flag. For example, you might not be setting a person property a flag relies on before flag evaluation.
 
 - If none of these work, raise a [support ticket in-app](https://app.posthog.com/home#supportModal=bug%3Aexperiments).
 

@@ -1,12 +1,17 @@
 ---
-title: Setting up Django analytics, feature flags, and more
+title: 'Setting up Django analytics, feature flags, and more'
 sidebar: Docs
 showTitle: true
-author: ['ian-vanagas']
+author:
+  - ian-vanagas
 date: 2022-12-15
 featuredTutorial: false
-featuredVideo: https://www.youtube-nocookie.com/embed/QB-PI_ZXkwo
-tags: ["configuration", "feature flags", "persons", "events"]
+featuredVideo: 'https://www.youtube-nocookie.com/embed/QB-PI_ZXkwo'
+tags:
+  - configuration
+  - feature flags
+  - persons
+  - events
 ---
 
 Django is a popular Python web framework. It’s used by thousands of teams and developers around the world, including PostHog, to build apps, websites, APIs, and more.
@@ -51,7 +56,7 @@ python manage.py runserver
 
 Going to your [local host](http://127.0.0.1:8000/) should bring you to a page that looks like this:
 
-![Django](../images/tutorials/django-analytics/django.png)
+![Django](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/django.png)
 
 This is a basic Django app up and running. After confirming it’s working, shut down the server, and run the default migrations.
 
@@ -131,7 +136,7 @@ python manage.py createsuperuser
 
 Once you’ve created a superuser, you can go to the [admin panel](http://127.0.0.1:8000/admin) (`/admin`), login, and create a couple of blog posts. Once created and saved, we’ll setup the view to show them.
 
-![Admin panel](../images/tutorials/django-analytics/admin.png)
+![Admin panel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/admin.png)
 
 ### View
 
@@ -202,7 +207,7 @@ urlpatterns = [
 
 Once you save all of this, reload your server, and open your [development site](http://127.0.0.1:8000/). You should see a page with a list of blog posts.
 
-![Blog](../images/tutorials/django-analytics/blog.png)
+![Blog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/blog.png)
 
 ## 3. Adding PostHog
 
@@ -216,15 +221,15 @@ PostHog makes it easy to get started fast with autocapture. This captures events
 
 In a new project’s getting started flow or your project settings, copy the HTML snippet and add it into the `<head>` tag of your `base.html` page. 
 
-![Snippet](../images/tutorials/django-analytics/snippet.png)
+![Snippet](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/snippet.png)
 
 ```html
 <!DOCTYPE html>
 <head>
     <title>My cool blog</title>
     <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('<ph_project_api_key>',{api_host:'<ph_instance_address>'})
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', person_profiles: 'identified_only'})
     </script>
 </head>
 <html>
@@ -253,14 +258,14 @@ We can add all this functionality with the PostHog Python library, and this star
 pip install posthog
 ```
 
-In your `tutorial` project settings page, add your `project_api_key` (found in project settings) and your `instance_address` (like `https://app.posthog.com` or `https://eu.posthog.com` if you’re on Cloud).
+In your `tutorial` project settings page, add your `project_api_key` (found in project settings) and your `api_host` (like `https://us.i.posthog.com` or `https://eu.i.posthog.com` if you’re on Cloud).
 
 ```python
 # tutorials/settings.py
 import posthog
 
 posthog.project_api_key = '<ph_project_api_key>'
-posthog.host = '<ph_instance_address>'
+posthog.host = '<ph_client_api_host>'
 ```
 
 Once you’ve done this, you can import PostHog where ever you want it. See more details about setup and PostHog Python features in the [Python docs here](/docs/integrate/server/python).
@@ -352,8 +357,8 @@ To show off feature flags, add an optional call to action at the bottom of our b
 <head>
     <title>My cool blog</title>
     <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('<ph_project_api_key>',{api_host:'<ph_instance_address>'})
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', person_profiles: 'identified_only'})
     </script>
 </head>
 <html>
@@ -375,7 +380,7 @@ To show off feature flags, add an optional call to action at the bottom of our b
 
 Next, go to our PostHog project and create a feature flag named `blog-cta` and set it to all users for now.
 
-![Feature flag](../images/tutorials/django-analytics/feature-flag.png)
+![Feature flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/feature-flag.png)
 
 We can copy the Python code it gives us, add it to our `get_context_data` function in our `PostListView`, and modify it to work with our code. The code checks if the feature flag is active for that user, and if so, show the call to action.
 
@@ -402,7 +407,7 @@ class PostListView(ListView):
 
 Finally, when we go back to our site, the feature flag is active and the CTA is showing.
 
-![CTA](../images/tutorials/django-analytics/cta.png)
+![CTA](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/django-analytics/cta.png)
 
 > We can also get the feature flags from the cookie by checking the dictionary for `$active_feature_flags`. This means that the user wouldn’t need to login for us to show them the feature flag.
 

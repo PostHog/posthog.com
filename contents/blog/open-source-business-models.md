@@ -70,3 +70,5 @@ This approach is great if you created your product as a hobby and are fine with 
 ## Pick what works for you
 
 There are many ways to monetize open-source software, and the approach you choose will depend on how much maintenance you’d like to take on, how large a team you’d like to assemble, and how much money you’re looking to raise — whether in organic revenue or through venture capital. Whichever approach you take, focus on building an outstanding product and an engaged community at all times, as those advantages accrue to you indefinitely.
+
+<NewsletterForm />

@@ -1,10 +1,12 @@
 ---
 title: How to set up surveys in React
 date: 2023-09-27
-author: ["lior-neu-ner"]
+author:
+  - lior-neu-ner
 showTitle: true
 sidebar: Docs
-tags: ['surveys']
+tags:
+  - surveys
 ---
 
 [Surveys](/docs/surveys) are a great tool to collect qualitative feedback from your users. This tutorial shows you how to implement a survey in a React app. 
@@ -39,7 +41,7 @@ export default App;
 
 Finally, run `npm start` and go to [http://localhost:3000/](http://localhost:3000/) to see our new homepage.
 
-![Basic react app setup to show surveys](../images/tutorials/react-surveys/setup.png) 
+![Basic react app setup to show surveys](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-surveys/setup.png) 
 
 ## Adding PostHog
 
@@ -60,7 +62,7 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 
 posthog.init('<ph_project_api_key>', {
-  api_host: '<ph_instance_address>',
+  api_host: '<ph_client_api_host>',
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -91,11 +93,11 @@ First, create a survey in PostHog by going to the [surveys tab](https://app.post
 1. Add a name (like `my-first-survey`)
 2. Set the display mode to `API`
 3. Set the question type to `Rating`, question title to `How likely are you to recommend us to a friend?`, display type to `number` and scale to `1-10`.
-4. You can leave the remaining optional properties blank (such as `Targeting` or `Thank you message`).
+4. You can leave the remaining optional properties blank (such as `Display conditions` or `Thank you message`).
 
 Click "Save as draft" and then on the next screen click "Launch". We're now ready to integrate this survey into our app.
 
-![Custom survey set up](../images/tutorials/react-surveys/create-api-survey.png)
+![Custom survey set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-surveys/create-api-survey.png)
 
 ### Adding the survey code
 
@@ -203,11 +205,11 @@ export default App;
 
 This shows a survey popup every time you visit your app's homepage.
 
-![Custom survey UI](../images/tutorials/react-surveys/survey-ui.png)
+![Custom survey UI](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-surveys/survey-ui.png)
 
 #### 2. Add the logic for displaying it.
 
-The first part of handling our display logic is fetching the survey from PostHog. PostHog keeps track of all active surveys for a user (this is especially helpful if you have set up [custom targeting options](/docs/surveys/creating-surveys#targeting)). 
+The first part of handling our display logic is fetching the survey from PostHog. PostHog keeps track of all active surveys for a user (this is especially helpful if you have set up [custom display conditions](/docs/surveys/creating-surveys#display-conditions)).
 
 To fetch the active surveys, we use the `usePostHog` hook to retrieve our PostHog instance. Then, we call `posthog.getActiveMatchingSurveys()` using `useEffect()`:
 
@@ -388,7 +390,7 @@ You can capture these events using `posthog.capture()`:
 
   useEffect(() => {
     if (posthog && surveyID && showSurvey) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }
@@ -449,7 +451,7 @@ function App() {
 
   useEffect(() => {
     if (posthog && surveyID && showSurvey) {
-      posthog.capture("survey seen", {
+      posthog.capture("survey shown", {
         $survey_id: surveyID // required
       })
     }
@@ -480,13 +482,13 @@ For a much faster set up, you can use PostHog's prebuilt surveys. There are vari
  
 To create a survey with a prebuilt UI, set the display mode to **`Popover`** when creating your survey:
 
-![Popover survey set up](../images/tutorials/react-surveys/create-popover-survey.png)
+![Popover survey set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-surveys/create-popover-survey.png)
 
 Then, select the question type you want and configure the survey as you like. Click "Save as draft" and then "Launch".
 
 Your survey is now live and you should see it in your app. There are no further code changes needed!
 
-![Popover survey in app](../images/tutorials/react-surveys/popover-survey-in-app.png)
+![Popover survey in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-surveys/popover-survey-in-app.png)
 
 ## Viewing results
 
@@ -496,9 +498,9 @@ After interacting with your survey, you can view results by selecting the survey
 - How many users have dismissed the survey.
 - Responses.
 
-You can also filter these results based on [user properties](/docs/product-analytics/user-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
+If you capture identified events, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
-![Popover survey set up](../images/tutorials/react-surveys/survey-results.png)
+![Popover survey set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-surveys/survey-results.png)
 
 ## Further reading
 

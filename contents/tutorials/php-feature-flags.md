@@ -1,17 +1,19 @@
 ---
 title: How to set up feature flags in PHP
 date: 2024-02-15
-author: ["lior-neu-ner"]
-tags: ['feature flags']
+author:
+  - lior-neu-ner
+tags:
+  - feature flags
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
-import EventsInPostHogLight from '../images/tutorials/php-feature-flags/events-light.png'
-import EventsInPostHogDark from '../images/tutorials/php-feature-flags/events-dark.png'
-import CreateFlagLight from '../images/tutorials/php-feature-flags/events-light.png'
-import CreateFlagDark from '../images/tutorials/php-feature-flags/events-dark.png'
-import FlagCaptureLight from '../images/tutorials/php-feature-flags/flag-capture-light.png'
-import FlagCaptureDark from '../images/tutorials/php-feature-flags/flag-capture-dark.png'
+export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/php-feature-flags/events-light.png"
+export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/php-feature-flags/events-dark.png"
+export const CreateFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/php-feature-flags/events-light.png"
+export const CreateFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/php-feature-flags/events-dark.png"
+export const FlagCaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/php-feature-flags/flag-capture-light.png"
+export const FlagCaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/php-feature-flags/flag-capture-dark.png"
 
 [Feature flags](/feature-flags) help you conditionally roll out and release features safely. This tutorial shows you how integrate them in PHP using PostHog. 
 
@@ -45,7 +47,7 @@ $paragraphText = 'Placeholder text';
 
 Run `php -S localhost:8000` and navigate to `http://localhost:8000` to see our app in action.
 
-![Basic PHP app](../images/tutorials/php-feature-flags/basic-app.png)
+![Basic PHP app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/php-feature-flags/basic-app.png)
 
 ## 2. Add PostHog to your app
 
@@ -62,7 +64,7 @@ use PostHog\PostHog;
 
 PostHog::init(
   '<ph_project_api_key>',
-  ['host' => '<ph_instance_address>']
+  ['host' => '<ph_client_api_host>']
 );
 
 // rest of your code
@@ -77,7 +79,7 @@ use PostHog\PostHog;
 
 PostHog::init(
   '<ph_project_api_key>',
-  ['host' => '<ph_instance_address>']
+  ['host' => '<ph_client_api_host>']
 );
 
 $paragraphText = 'Placeholder text';
@@ -113,7 +115,7 @@ With PostHog set up, your app is ready for feature flags. To create one, go to t
   classes="rounded"
 />
 
-You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/user-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
+You can customize your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) with rollout percentages, and [user](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics) to fit your needs.
 
 ## 4. Implement the flag code
 
@@ -129,7 +131,7 @@ use PostHog\PostHog;
 
 PostHog::init(
   '<ph_project_api_key>',
-  ['host' => '<ph_instance_address>']
+  ['host' => '<ph_client_api_host>']
 );
 
 $paragraphText = 'Placeholder text';

@@ -1,6 +1,7 @@
 ---
 title: Vue.js
-icon: ../../images/docs/integrate/frameworks/vue.svg
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/vue.svg
 ---
 PostHog makes it easy to get data about usage of your [Vue.js](https://vuejs.org/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
@@ -60,7 +61,8 @@ export default {
     app.config.globalProperties.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>",
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
       }
     );
   },
@@ -78,7 +80,8 @@ export default {
     Vue.prototype.$posthog = posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>"
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
       }
     );
   }
@@ -159,7 +162,8 @@ import posthog from "posthog-js";
 
 const app = createApp(App);
 posthog.init("<ph_project_api_key>", {
-  api_host: "<ph_instance_addressT>",
+  api_host: "<ph_client_api_host>",
+  person_profiles: 'identified_only',
 });
 app.provide("posthog", posthog);
 ```
@@ -219,7 +223,8 @@ First, make sure to set `capture_pageview` in the PostHog initialization config 
 posthog.init(
       "<ph_project_api_key>",
       {
-        api_host: "<ph_instance_address>",
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
         capture_pageview: false
       }
 );
@@ -298,8 +303,15 @@ export default {
 </template>
 ```
 
-See the [JavaScript SDK docs](/docs/libraries/js) for all usable functions, such as:
-- [Capture custom event capture, identify users, and more.](/docs/libraries/js#send-custom-events-with-posthogcapture)
-- [Feature flags including variants and payloads.](/docs/libraries/js#feature-flags)
-
 You can the access the project used in this tutorial [on GitHub](https://github.com/mathexl/posthog-vue-demo).
+
+## Next steps
+
+For any technical questions for how to integrate specific PostHog features into Vue (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web](/docs/libraries/js) SDK docs.
+
+Alternatively, the following tutorials can help you get started:
+
+- [How to set up analytics in Vue](/tutorials/vue-analytics)
+- [How to set up feature flags in Vue](/tutorials/vue-feature-flags)
+- [How to set up A/B tests in Vue](/tutorials/vue-ab-tests)
+- [How to set up surveys in Vue](/tutorials/vue-surveys)

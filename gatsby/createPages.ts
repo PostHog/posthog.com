@@ -18,7 +18,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.js`)
-    const HostHogTemplate = path.resolve(`src/templates/HostHog.js`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
@@ -297,12 +296,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            hostHog: allMdx(filter: { fields: { slug: { regex: "/^/hosthog/" } } }) {
-                nodes {
-                    id
-                    slug
-                }
-            }
             jobs: allAshbyJobPosting {
                 nodes {
                     id
@@ -521,6 +514,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     const menuFlattened = flattenMenu(menu)
 
+    const findNext = (menu, currentURL) => {
+        for (let i = 0; i < menu.length; i++) {
+            if (menu[i].url !== currentURL) {
+                return menu[i]
+            }
+        }
+    }
+
     function createPosts(data, menu, template, breadcrumbBase, context) {
         data.forEach((node) => {
             const links =
@@ -534,7 +535,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             const tableOfContents = node.headings && formatToc(node.headings)
             menuFlattened.some((item, index) => {
                 if (item.url === slug) {
-                    next = menuFlattened[index + 1]
+                    next = findNext(menuFlattened.slice(index), slug)
                     nextURL = next && next.url ? next.url : ''
                     previous = menuFlattened[index - 1]
                     breadcrumb = [...item.breadcrumb]
@@ -679,7 +680,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
-    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' })
+    createPosts(result.data.apidocs.nodes, 'docs', ApiEndpoint, { name: 'Docs', url: '/docs' }, (node) => ({
+        regex: `$${node.url}/`,
+    }))
     createPosts(result.data.manual.nodes, 'docs', HandbookTemplate, { name: 'Using PostHog', url: '/using-posthog' })
 
     result.data.tutorials.nodes.forEach((node) => {
@@ -853,18 +856,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             },
         })
     })
-    result.data.hostHog.nodes.forEach((node) => {
-        const { id, slug } = node
-        if (slug) {
-            createPage({
-                path: slug,
-                component: HostHogTemplate,
-                context: {
-                    id,
-                },
-            })
-        }
-    })
 
     if (process.env.ASHBY_API_KEY && process.env.GITHUB_API_KEY) {
         for (node of result.data.jobs.nodes) {
@@ -899,8 +890,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 context: {
                     id,
                     slug,
-                    objectives: `/teams/${slugify(teams[0], { lower: true })}/objectives`,
-                    mission: `/teams/${slugify(teams[0], { lower: true })}/mission`,
+                    objectives: `/teams/${slugify(teams[0] || '', { lower: true })}/objectives`,
+                    mission: `/teams/${slugify(teams[0] || '', { lower: true })}/mission`,
                     gitHubIssues,
                     teams,
                 },

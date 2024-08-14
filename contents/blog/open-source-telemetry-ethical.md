@@ -108,4 +108,4 @@ With that in mind, we felt we'd get a better and happier community by thinking a
 
 For PostHog, that meant being up front about what we track and what we don't track, and giving users the choice if they opt themselves into full user tracking. Most don't, and that's ok!
 
-<ArrayCTA />
+<NewsletterForm />

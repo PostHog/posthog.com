@@ -38,6 +38,9 @@ module.exports = {
             lg: '1024px',
             // => @media (min-width: 1024px) { ... }
 
+            lgxl: '1160px',
+            // => @media (min-width: 1024px) { ... }
+
             xl: '1280px',
             // => @media (min-width: 1280px) { ... }
 
@@ -97,6 +100,8 @@ module.exports = {
             'gray-accent-light': '#E5E7E0',
             'gray-accent-light-hover': '#C5C6C2',
             red: '#F54E00',
+            lilac: '#8567FF',
+            'sky-blue': '#2EA2D3',
         }),
         extend: {
             backgroundImage: {
@@ -105,9 +110,26 @@ module.exports = {
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path fill="%23D0D1C9" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
                 'bullet-dark':
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8"><path fill="%234A4C52" d="M4.23 7.704c-2.034 0-3.636-1.602-3.636-3.6 0-1.98 1.602-3.6 3.636-3.6 1.962 0 3.564 1.62 3.564 3.6 0 1.998-1.602 3.6-3.564 3.6Z"/></svg>\')',
+                'bullet-check-light':
+                    'url(\'data:image/svg+xml,<svg fill="green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.475-3.08a.75.75 0 0 1 .106 1.055l-4.5 5.5a.75.75 0 0 1-1.111.055l-2-2a.75.75 0 1 1 1.06-1.06l1.414 1.414 3.975-4.859a.75.75 0 0 1 1.056-.105Z"></path></svg>\')',
+
+                'bullet-check-dark':
+                    'url(\'data:image/svg+xml,<svg fill="lightgreen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.475-3.08a.75.75 0 0 1 .106 1.055l-4.5 5.5a.75.75 0 0 1-1.111.055l-2-2a.75.75 0 1 1 1.06-1.06l1.414 1.414 3.975-4.859a.75.75 0 0 1 1.056-.105Z"></path></svg>\')',
+
+                'bullet-chevron-light':
+                    'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24"><path fill="%23555" fill-rule="evenodd" d="M8.47 3.47a.75.75 0 0 1 1.06 0l7.293 7.292a1.75 1.75 0 0 1 0 2.475L9.53 20.53a.75.75 0 0 1-1.06-1.06l7.293-7.293a.25.25 0 0 0 0-.354L8.47 4.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/></svg>\')',
+
+                'bullet-chevron-dark':
+                    'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24"><path fill="%23999" fill-rule="evenodd" d="M8.47 3.47a.75.75 0 0 1 1.06 0l7.293 7.292a1.75 1.75 0 0 1 0 2.475L9.53 20.53a.75.75 0 0 1-1.06-1.06l7.293-7.293a.25.25 0 0 0 0-.354L8.47 4.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/></svg>\')',
+            },
+            backgroundPosition: {
+                0: '0',
+                100: '100%',
             },
             fontFamily: {
-                serif: ['MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
+                'fairytale-title': ['Fairytale', 'sans-serif'],
+                fairytale: ['Computer Modern', 'sans-serif'],
+                serif: ['Times New Roman', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
                     'MatterVF',
                     '-apple-system',
@@ -186,6 +208,8 @@ module.exports = {
                 'gray-accent-light': '#BFBFBC',
                 red: '#F54E00',
                 green: '#6AA84F',
+                lilac: '#8567FF',
+                'sky-blue': '#2EA2D3',
             },
             minHeight: {
                 md: '780px',
@@ -215,6 +239,9 @@ module.exports = {
                 'fluid-video': '56.25%',
                 '1/2': '50%',
             },
+            maxWidth: {
+                '2xs': '16rem',
+            },
             keyframes: {
                 wiggle: {
                     '0%, 100%': { transform: 'rotate(6deg)' },
@@ -228,11 +255,30 @@ module.exports = {
                     '0%, 100%': { transform: 'scale(1)' },
                     '50%': { transform: 'scale(1.05)' },
                 },
+                flash: {
+                    '0%, 100%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(1.02)' },
+                },
+                reveal: {
+                    '0%': { maxHeight: 0, opacity: 0 },
+                    '50%': { opacity: 1 },
+                    '100%': { maxHeight: '1000px', opacity: 1 },
+                    'text-gradient': {
+                        '0%': { 'background-position-x': '0%' },
+                        '100%': { 'background-position-x': '100%' },
+                    },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
                 grow: 'grow 2s linear infinite',
                 'grow-sm': 'grow-sm 3s linear infinite',
+                flash: 'flash 1s ease-in-out 2',
+                reveal: 'reveal 1s ease-in-out',
+                'text-gradient': 'text-gradient 2500ms linear infinite',
+            },
+            containers: {
+                '2xs': '16rem',
             },
         },
     },

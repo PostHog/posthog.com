@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - raquel-m-smith
-featuredImage: ../images/blog/happy-hog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/happy-hog.png
 featuredImageType: full
 category: Engineering
 ---
@@ -109,3 +110,5 @@ It's **really hard** to operate in a product **and** an engineering mindset **si
 The former is an external mindset; the latter, an internal one. Switching takes effort, so you need to be conscious about which mindset you're in, and whether it's the right mindset for your active task. Progress becomes slow when you get stuck in the wrong one.
 
 Regardless, I'll take the need to context switch. Because after all, I'm optimizing for _fun_.
+
+<NewsletterForm />

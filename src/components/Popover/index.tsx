@@ -19,7 +19,7 @@ export function Popover({ children, button }: { children: React.ReactNode; butto
     })
 
     return (
-        <HeadlessPopover className="z-50 flex">
+        <HeadlessPopover className="z-[50] flex">
             <HeadlessPopover.Button ref={setReferenceElement}>{button}</HeadlessPopover.Button>
 
             <HeadlessPopover.Panel ref={setPopperElement} style={styles.popper} {...attributes.popper}>

@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - andy-vandervell
-featuredImage: ../images/blog/hogmail.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hogmail.png
 featuredImageType: full
 category: General
 ---
@@ -60,4 +61,4 @@ category: General
 - [Pimp My Beeb (a BBC Micro inside a PC case)](https://github.com/dekuNukem/RGBeeb/blob/master/README.md)
 - [How To Download All of Wikipedia onto a USB Flash Drive](https://planetofthepaul.com/wikipedia-download-usb-flash/)
 
-> We send HogMail every two weeks. [Signup here](/newsletter) so you don't miss it.
+<NewsletterForm />

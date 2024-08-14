@@ -1,0 +1,15 @@
+---
+title: Decide feature flags API endpoint
+sidebar: Docs
+showTitle: true
+---
+
+The `decide` endpoint is used to evaluate a feature flag for a given user. This means it is the main endpoint not only for feature flags, but also experimentation, early access features, and survey display conditions.
+
+It is a POST-only public endpoint that uses your [project API key](https://app.posthog.com/project/settings) and does not return any sensitive data from your PostHog instance.
+
+> **Note:** Make sure to send API requests to the correct domain. These are `https://us.i.posthog.com` for US Cloud, `https://eu.i.posthog.com` for EU Cloud, and your self-hosted domain for self-hosted instances. Confirm yours by checking your URL from your PostHog instance.
+
+import APIFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-api.mdx'
+
+<APIFeatureFlagsCode />

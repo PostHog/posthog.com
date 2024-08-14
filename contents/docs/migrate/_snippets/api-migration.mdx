@@ -1,0 +1,60 @@
+<MultiLanguage>
+
+```bash
+curl -v -L --header "Content-Type: application/json" -d '{
+  "api_key": "<ph_project_api_key>",
+  "historical_migration": true,
+  "batch": [
+    {
+      "event": "batched_event_name",
+      "properties": {
+        "distinct_id": "user_id"
+      },
+      "timestamp": "2024-04-03T12:00:00Z"
+    },
+    {
+      "event": "batched_event_name",
+      "properties": {
+        "distinct_id": "user_id"
+      },
+      "timestamp": "2024-04-03T12:00:00Z"
+    }
+  ]
+}' <ph_client_api_host>/batch/
+```
+
+```python
+# The Python SDK also support historical migrations
+# See: https://posthog.com/docs/libraries/python#historical-migrations
+import requests
+import json
+
+url = "<ph_client_api_host>/batch/"
+headers = {
+  "Content-Type": "application/json"
+}
+payload = {
+  "api_key": "<ph_project_api_key>",
+  "historical_migration": True,
+  "batch": [
+    {
+      "event": "batched_event_name",
+      "properties": {
+        "distinct_id": "user_id",
+      },
+      "timestamp": "2024-04-03T12:00:00Z"
+    },
+    {
+      "event": "batched_event_name",
+      "properties": {
+        "distinct_id": "user_id"
+      },
+      "timestamp": "2024-04-03T12:00:00Z"
+    }
+  ]
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.text)
+```
+
+</MultiLanguage>

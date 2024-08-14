@@ -1,6 +1,8 @@
 import React from 'react'
 import { Switch } from '@headlessui/react'
 import { classNames } from 'lib/utils'
+import Tooltip from 'components/Tooltip'
+import { IconInfo, IconShieldLock } from '@posthog/icons'
 
 export default function Toggle({
     checked,
@@ -8,12 +10,14 @@ export default function Toggle({
     iconLeft,
     iconRight,
     label,
+    tooltip,
 }: {
     checked: boolean
     onChange: (checked: boolean) => void
     iconLeft?: React.ReactNode
     iconRight?: React.ReactNode
     label?: string
+    tooltip?: string
 }) {
     return (
         <span className="flex space-x-1.5 items-center">
@@ -26,7 +30,7 @@ export default function Toggle({
                 <Switch
                     checked={checked}
                     onChange={onChange}
-                    className="flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-2 w-8 cursor-pointer focus:outline-none"
+                    className="group flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-2 w-8 cursor-pointer focus:outline-none"
                 >
                     <span className="sr-only">Use setting</span>
                     <span
@@ -36,7 +40,9 @@ export default function Toggle({
                     <span
                         aria-hidden="true"
                         className={classNames(
-                            checked ? 'translate-x-5 bg-teal dark:bg-teal' : 'translate-x-0 bg-[#555] dark:bg-[#999]',
+                            checked
+                                ? 'translate-x-5 bg-teal dark:bg-teal'
+                                : 'translate-x-0 bg-[#555] hover:bg-[#222] dark:bg-[#999] dark:group-hover:bg-[#ddd]',
                             'pointer-events-none absolute left-0 inline-block h-4 w-4 rounded-full transform ring-0 transition-transform ease-in-out duration-200'
                         )}
                     />
@@ -45,6 +51,13 @@ export default function Toggle({
                     <Switch.Label>
                         <span className="ml-1 font-semibold text-sm">{label}</span>
                     </Switch.Label>
+                )}
+                {tooltip && (
+                    <Tooltip content={tooltip} contentContainerClassName="max-w-xs">
+                        <div className="inline-block relative">
+                            <IconInfo className="w-4 h-4 opacity-50 inline-block" />
+                        </div>
+                    </Tooltip>
                 )}
             </Switch.Group>
             {iconRight && (

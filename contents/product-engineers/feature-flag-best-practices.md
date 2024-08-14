@@ -1,15 +1,17 @@
 ---
 date: 2023-12-07
-title: "9 essential feature flag best practices (with code examples)"
-author: ["ian-vanagas"]
-featuredImage: ../images/blog/green-blog-image.jpg
+title: 9 essential feature flag best practices (with code examples)
+author:
+  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/green-blog-image.jpg
 featuredImageType: full
 tags:
   - Feature management
   - Feature flags
   - Product engineers
 crosspost:
-  - Blog  
+  - Blog
 ---
 
 Feature flags, aka feature toggles, are a simple pattern with many uses. New feature to beta test? Use a feature flag. Testing variants of a new UX? Use a feature flag. Kill switch to prevent performance problems? Yup, feature flag. We could go on, but safe to say there are [many benefits to feature flags](/blog/feature-flag-benefits-use-cases).
@@ -124,7 +126,7 @@ To bootstrap your flags, add the relevant distinct ID and feature flag data when
 
 ```js
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_instance_address>',
+    api_host: '<ph_client_api_host>',
     bootstrap: {
         distinctID: 'your-anonymous-id',
         featureFlags: {
@@ -141,6 +143,8 @@ You can get values for the bootstrap object by using a server-side library. Call
 Bootstrapping also ensures events have accurate feature flag data. If you capture events before receiving feature flags data, data can be missing.
 
 > You can read more about bootstrapping in [our docs](/docs/feature-flags/bootstrapping) or tutorials for [Next.js](/tutorials/nextjs-bootstrap-flags) or [React and Express](/tutorials/bootstrap-feature-flags-react).
+
+<NewsletterForm />
 
 ## 6. Name your feature flags well
 
@@ -170,7 +174,7 @@ Feature flags are usually checked at the person level, but there are other ways.
 
 For example, a customer complains about an issue with your product. You create a fix for them but aren’t sure it works for everyone. You can roll it out behind a feature flag and set the distribution to members of that company.
 
-![Group release](../images/blog/feature-flags-best-practices/group-release.png)
+![Group release](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/feature-flags-best-practices/group-release.png)
 
 Enabling flags for specific groups allows the experience to be consistent for those groups. Members of an organization aren’t seeing different UIs or getting different experiences. They also act as a “permission” to access those changes.
 
@@ -205,3 +209,5 @@ Whatever you choose, it should be clear to your team when to remove a feature fl
 - [What you can learn from how GitHub and GitLab use feature flags](/product-engineers/github-gitlab-feature-flags)
 - [How we build features users love (really fast)](/product-engineers/measuring-feature-success)
 - [Why we test in production (and you should too)](/product-engineers/testing-in-production)
+
+<NewsletterForm />

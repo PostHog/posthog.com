@@ -14,8 +14,8 @@ func main() {
 	client, _ := posthog.NewWithConfig(
 		os.Getenv("POSTHOG_API_KEY"),
 		posthog.Config{
-			PersonalApiKey: "your personal API key", // Required for feature flags
-			Endpoint:       "<ph_instance_address>",
+			PersonalApiKey: "your personal API key", // Optional, but much more performant.  If this token is not supplied, then fetching feature flag values will be slower.
+			Endpoint:       "<ph_client_api_host>",
 		},
 	)
 	defer client.Close()

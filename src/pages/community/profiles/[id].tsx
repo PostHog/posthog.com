@@ -71,13 +71,67 @@ const LikedPosts = ({ profileID }) => {
     )
 }
 
+const Bio = ({ biography, readme }) => {
+    const [activeTab, setActiveTab] = useState('biography')
+    const tabbable = biography && readme
+    const Container = tabbable ? 'button' : 'span'
+    return (
+        <section className="article-content">
+            {biography && (
+                <>
+                    <div className="flex items-end space-x-4 border-b border-border dark:border-dark mb-4">
+                        {biography && (
+                            <Container {...(tabbable ? { onClick: () => setActiveTab('biography') } : null)}>
+                                <h3
+                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${
+                                        activeTab === 'biography'
+                                            ? readme
+                                                ? 'border-red'
+                                                : 'border-transparent pl-0'
+                                            : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                    }`}
+                                >
+                                    Biography
+                                </h3>
+                            </Container>
+                        )}
+                        {readme && (
+                            <Container {...(tabbable ? { onClick: () => setActiveTab('readme') } : null)}>
+                                <h3
+                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${
+                                        activeTab === 'readme'
+                                            ? 'border-red'
+                                            : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                    }`}
+                                >
+                                    README
+                                </h3>
+                            </Container>
+                        )}
+                    </div>
+                    <Markdown>{activeTab === 'biography' ? biography : readme}</Markdown>
+                    {activeTab === 'biography' && readme && (
+                        <>
+                            <button
+                                className="text-red dark:text-yellow font-semibold cursor-pointer"
+                                onClick={() => setActiveTab('readme')}
+                            >
+                                See my README for tips on how to work with me
+                            </button>
+                        </>
+                    )}
+                </>
+            )}
+        </section>
+    )
+}
+
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const [view, setView] = useState('discussions')
-    const [editModalOpen, setEditModalOpen] = React.useState(false)
     const posthog = usePostHog()
     const nav = useTopicsNav()
-    const { user } = useUser()
+    const { user, getJwt } = useUser()
     const [sort, setSort] = useState(sortOptions[0].label)
     const posts = usePosts({
         params: {
@@ -92,6 +146,7 @@ export default function ProfilePage({ params }: PageProps) {
         },
     })
     const isCurrentUser = user?.profile?.id === id
+    const isModerator = user?.role?.type === 'moderator'
 
     const profileQuery = qs.stringify(
         {
@@ -126,6 +181,11 @@ export default function ProfilePage({ params }: PageProps) {
                         },
                     },
                 },
+                ...(isModerator
+                    ? {
+                          user: true,
+                      }
+                    : null),
             },
         },
         {
@@ -136,7 +196,17 @@ export default function ProfilePage({ params }: PageProps) {
     const { data, error, mutate } = useSWR<StrapiRecord<ProfileData>>(
         `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?${profileQuery}`,
         async (url) => {
-            const res = await fetch(url)
+            const jwt = user && (await getJwt())
+            const res = await fetch(
+                url,
+                jwt
+                    ? {
+                          headers: {
+                              Authorization: `Bearer ${jwt}`,
+                          },
+                      }
+                    : undefined
+            )
             const { data } = await res.json()
             return data
         }
@@ -155,11 +225,6 @@ export default function ProfilePage({ params }: PageProps) {
     const name = [firstName, lastName].filter(Boolean).join(' ')
     const isTeamMember = profile?.teams?.data?.length > 0
 
-    const handleEditProfile = () => {
-        mutate()
-        setEditModalOpen(false)
-    }
-
     useEffect(() => {
         if (!profile?.amaEnabled) setView('discussions')
     }, [profile])
@@ -172,31 +237,11 @@ export default function ProfilePage({ params }: PageProps) {
         <>
             <SEO title={`Community Profile - PostHog`} />
             <Layout parent={communityMenu}>
-                <Modal setOpen={setEditModalOpen} open={editModalOpen}>
-                    <div
-                        onClick={() => setEditModalOpen(false)}
-                        className="flex flex-start justify-center absolute w-full p-4"
-                    >
-                        <div
-                            className="max-w-xl bg-white dark:bg-black rounded-md relative w-full p-5"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <EditProfile onSubmit={handleEditProfile} />
-                        </div>
-                    </div>
-                </Modal>
                 <PostLayout
                     title="Profile"
                     breadcrumb={[{ name: 'Community', url: '/questions' }]}
                     menu={nav}
-                    sidebar={
-                        <ProfileSidebar
-                            handleEditProfile={handleEditProfile}
-                            setEditModalOpen={setEditModalOpen}
-                            profile={{ ...profile, id }}
-                            mutate={mutate}
-                        />
-                    }
+                    sidebar={<ProfileSidebar profile={{ ...profile, id }} mutate={mutate} />}
                     hideSurvey
                 >
                     {profile ? (
@@ -228,22 +273,19 @@ export default function ProfilePage({ params }: PageProps) {
                                             </p>
                                         )}
                                     </div>
-
-                                    {profile?.biography && (
-                                        <section className="article-content">
-                                            <h3>Biography</h3>
-
-                                            <Markdown>{profile.biography}</Markdown>
-                                        </section>
+                                    {(profile?.biography || profile?.readme) && (
+                                        <Bio biography={profile.biography} readme={profile.readme} />
                                     )}
                                 </section>
                             </div>
 
                             <div className="mt-12">
-                                <div className="flex items-center relative mb-6 font-semibold border-b border-border dark:border-dark text-base whitespace-nowrap">
+                                <div className="flex items-center relative mb-4 font-semibold border-b border-border dark:border-dark text-base whitespace-nowrap">
                                     <button
-                                        className={`${
-                                            view !== 'discussions' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                        className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                            view !== 'discussions'
+                                                ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                : 'border-red'
                                         } p-4 transition-opacity`}
                                         onClick={() => setView('discussions')}
                                     >
@@ -251,8 +293,10 @@ export default function ProfilePage({ params }: PageProps) {
                                     </button>
                                     {profile?.amaEnabled && (
                                         <button
-                                            className={`${
-                                                view !== 'ama' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                                view !== 'ama'
+                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                    : 'border-red'
                                             } p-4 transition-opacity`}
                                             onClick={() => setView('ama')}
                                         >
@@ -261,8 +305,10 @@ export default function ProfilePage({ params }: PageProps) {
                                     )}
                                     {user?.profile?.id === id && (
                                         <button
-                                            className={`${
-                                                view !== 'liked-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                                view !== 'liked-posts'
+                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                    : 'border-red'
                                             } p-4 transition-opacity`}
                                             onClick={() => setView('liked-posts')}
                                         >
@@ -271,8 +317,10 @@ export default function ProfilePage({ params }: PageProps) {
                                     )}
                                     <div className="flex items-center">
                                         <button
-                                            className={`${
-                                                view !== 'user-posts' ? 'opacity-60 hover:opacity-80' : 'font-bold'
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
+                                                view !== 'user-posts'
+                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                    : 'border-red pr-12'
                                             } p-4 transition-opacity`}
                                             onClick={() => setView('user-posts')}
                                         >
@@ -284,9 +332,13 @@ export default function ProfilePage({ params }: PageProps) {
                                                     initial={{ opacity: 0, translateY: '100%' }}
                                                     animate={{ opacity: 1, translateY: 0 }}
                                                     exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                                                    className={`-ml-4 z-50`}
+                                                    className={`relative -left-12 top-1 z-[50]`}
                                                 >
-                                                    <SortDropdown sort={sort} setSort={setSort} />
+                                                    <SortDropdown
+                                                        sort={sort}
+                                                        setSort={setSort}
+                                                        className="hover:!border-transparent hover:!bg-transparent"
+                                                    />
                                                 </motion.div>
                                             )}
                                         </AnimatePresence>
@@ -318,8 +370,6 @@ export default function ProfilePage({ params }: PageProps) {
 
 type ProfileSidebarProps = {
     profile: ProfileData
-    setEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-    handleEditProfile: () => void
     mutate: () => void
 }
 
@@ -395,163 +445,182 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
     )
 }
 
-const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, setEditModalOpen, handleEditProfile, mutate }) => {
-    const [editProfile, setEditProfile] = useState(false)
-    const { user } = useUser()
-    const breakpoints = useBreakpoint()
+const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
+    const { user, getJwt } = useUser()
 
-    return profile && !editProfile ? (
-        <>
-            {profile.github || profile.twitter || profile.linkedin || profile.website ? (
-                <SidebarSection title="Links">
-                    <ul className="p-0 flex space-x-2 items-center list-none m-0">
-                        {profile.website && (
-                            <li>
-                                <Link to={profile.website}>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth={1.5}
-                                        stroke="currentColor"
-                                        className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
-                                        />
-                                    </svg>
-                                </Link>
-                            </li>
-                        )}
+    const handleBlock = async (blockUser: boolean) => {
+        if (blockUser) {
+            if (confirm('Are you sure you want to block this user and remove all of their posts and replies?')) {
+                try {
+                    const jwt = await getJwt()
+                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/block/${profile.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                    })
+                } catch (err) {
+                    console.error(err)
+                }
+            } else {
+                return
+            }
+        } else {
+            try {
+                const jwt = await getJwt()
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/unblock/${profile.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                })
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        window.location.reload()
+    }
 
-                        {profile.github && (
-                            <li>
-                                <Link to={profile.github}>
-                                    <GitHub className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
-                                </Link>
-                            </li>
-                        )}
+    return (
+        profile && (
+            <>
+                {profile.github || profile.twitter || profile.linkedin || profile.website ? (
+                    <SidebarSection title="Links">
+                        <ul className="p-0 flex space-x-2 items-center list-none m-0">
+                            {profile.website && (
+                                <li>
+                                    <Link to={profile.website} externalNoIcon>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+                                            />
+                                        </svg>
+                                    </Link>
+                                </li>
+                            )}
 
-                        {profile.twitter && (
-                            <li>
-                                <Link to={profile.twitter}>
-                                    <Twitter className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
-                                </Link>
-                            </li>
-                        )}
+                            {profile.github && (
+                                <li>
+                                    <Link to={profile.github} externalNoIcon>
+                                        <GitHub className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
+                                    </Link>
+                                </li>
+                            )}
 
-                        {profile.linkedin && (
-                            <li>
-                                <Link to={profile.linkedin}>
-                                    <LinkedIn className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
-                                </Link>
-                            </li>
-                        )}
-                    </ul>
-                </SidebarSection>
-            ) : null}
+                            {profile.twitter && (
+                                <li>
+                                    <Link to={profile.twitter} externalNoIcon>
+                                        <Twitter className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
+                                    </Link>
+                                </li>
+                            )}
 
-            {profile.achievements?.length > 0 && (
-                <SidebarSection title="Achievements">
-                    <ul className="list-none m-0 p-0 grid grid-cols-5 gap-2">
-                        {profile.achievements
-                            .sort((a, b) => a.id - b.id)
-                            .map(({ achievement, hidden, id }) => {
-                                return (
-                                    <li key={id}>
-                                        <Achievement
-                                            {...achievement.data.attributes}
-                                            id={id}
-                                            hidden={hidden}
-                                            profile={profile}
-                                            mutate={mutate}
-                                        />
-                                    </li>
-                                )
-                            })}
-                    </ul>
-                </SidebarSection>
-            )}
+                            {profile.linkedin && (
+                                <li>
+                                    <Link to={profile.linkedin} externalNoIcon>
+                                        <LinkedIn className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
+                                    </Link>
+                                </li>
+                            )}
+                        </ul>
+                    </SidebarSection>
+                ) : null}
 
-            {profile.teams
-                ? profile.teams?.data?.map(({ attributes: { name, profiles } }) => {
-                      return (
-                          <>
-                              <SidebarSection title="Team">
-                                  <span className="text-xl font-bold">{name}</span>
-                              </SidebarSection>
+                {profile.achievements?.length > 0 && (
+                    <SidebarSection title="Achievements">
+                        <ul className="list-none m-0 p-0 grid grid-cols-5 gap-2">
+                            {profile.achievements
+                                .sort((a, b) => a.id - b.id)
+                                .map(({ achievement, hidden, id }) => {
+                                    return (
+                                        <li key={id}>
+                                            <Achievement
+                                                {...achievement.data.attributes}
+                                                id={id}
+                                                hidden={hidden}
+                                                profile={profile}
+                                                mutate={mutate}
+                                            />
+                                        </li>
+                                    )
+                                })}
+                        </ul>
+                    </SidebarSection>
+                )}
 
-                              {profiles?.data?.length > 0 ? (
-                                  <SidebarSection title="Teammates">
-                                      <ul className="p-0 grid gap-y-2">
-                                          {profiles.data
-                                              .filter(({ id }) => id !== profile.id)
-                                              .map((profile) => {
-                                                  return (
-                                                      <li key={profile.id} className="flex items-center space-x-2">
-                                                          <Avatar className="w-8 h-8" src={getAvatarURL(profile)} />
-                                                          <a href={`/community/profiles/${profile.id}`}>
-                                                              {profile.attributes?.firstName}{' '}
-                                                              {profile.attributes?.lastName}
-                                                          </a>
-                                                      </li>
-                                                  )
-                                              })}
-                                      </ul>
+                {profile.teams
+                    ? profile.teams?.data?.map(({ attributes: { name, profiles } }) => {
+                          return (
+                              <>
+                                  <SidebarSection title="Team">
+                                      <span className="text-xl font-bold">{name}</span>
                                   </SidebarSection>
-                              ) : null}
-                          </>
-                      )
-                  })
-                : null}
 
-            {user?.profile?.id === profile.id && (
-                <SidebarSection>
-                    <button
-                        onClick={() => {
-                            if (breakpoints.md) {
-                                setEditProfile(true)
-                            } else {
-                                setEditModalOpen(true)
-                            }
-                        }}
-                        className="text-base text-red dark:text-yellow font-semibold"
-                    >
-                        Edit profile
-                    </button>
-                </SidebarSection>
-            )}
-            {user?.role?.type === 'moderator' && (
-                <SidebarSection>
-                    <Link
-                        external
-                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::profile.profile/${profile.id}`}
-                        className="text-base text-red dark:text-yellow font-semibold"
-                    >
-                        View in Strapi
-                    </Link>
-                </SidebarSection>
-            )}
-        </>
-    ) : (
-        <div className="pb-6">
-            <div className="mb-4 flex flex-start items-center relative">
-                <button
-                    onClick={() => setEditProfile(false)}
-                    className="inline-block font-bold bg-gray-accent-light dark:bg-gray-accent-dark mr-2 rounded-sm p-1"
-                >
-                    <RightArrow className="w-6 rotate-180" />
-                </button>
-                <h5 className="m-0 text-base font-bold">Back</h5>
-            </div>
-            <EditProfile
-                onSubmit={() => {
-                    handleEditProfile()
-                    setEditProfile(false)
-                }}
-            />
-        </div>
+                                  {profiles?.data?.length > 0 ? (
+                                      <SidebarSection title="Teammates">
+                                          <ul className="p-0 grid gap-y-2">
+                                              {profiles.data
+                                                  .filter(({ id }) => id !== profile.id)
+                                                  .map((profile) => {
+                                                      return (
+                                                          <li key={profile.id} className="flex items-center space-x-2">
+                                                              <Avatar className="w-8 h-8" src={getAvatarURL(profile)} />
+                                                              <a href={`/community/profiles/${profile.id}`}>
+                                                                  {profile.attributes?.firstName}{' '}
+                                                                  {profile.attributes?.lastName}
+                                                              </a>
+                                                          </li>
+                                                      )
+                                                  })}
+                                          </ul>
+                                      </SidebarSection>
+                                  ) : null}
+                              </>
+                          )
+                      })
+                    : null}
+
+                {user?.profile?.id === profile.id && (
+                    <SidebarSection>
+                        <Link
+                            to="/community/profile/edit"
+                            className="text-base text-red dark:text-yellow font-semibold"
+                        >
+                            Edit profile
+                        </Link>
+                    </SidebarSection>
+                )}
+                {user?.role?.type === 'moderator' && (
+                    <>
+                        <SidebarSection>
+                            <Link
+                                external
+                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
+                                className="text-base text-red dark:text-yellow font-semibold"
+                            >
+                                View in Strapi
+                            </Link>
+                        </SidebarSection>
+                        <SidebarSection>
+                            <button
+                                onClick={() => handleBlock(!profile.user?.data.attributes.blocked)}
+                                className="text-red font-bold text-base"
+                            >
+                                {profile.user?.data.attributes.blocked ? 'Unblock user' : 'Block user'}
+                            </button>
+                        </SidebarSection>
+                    </>
+                )}
+            </>
+        )
     )
 }

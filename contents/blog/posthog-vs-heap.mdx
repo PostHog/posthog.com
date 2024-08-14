@@ -1,13 +1,15 @@
 ---
 date: 2024-01-10
-title: "In-depth: PostHog vs Heap"
+title: 'In-depth: PostHog vs Heap'
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: ../images/blog/posthog-vs-heap/posthog-vs-heap.jpeg
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-vs-heap/posthog-vs-heap.jpeg
 featuredImageType: full
-author: ["andy-vandervell"]
+author:
+  - andy-vandervell
 category: General
 tags:
   - Comparisons
@@ -111,8 +113,8 @@ Feature flags make it easy to roll out features to specific users or groups, and
   <ComparisonRow column1={true} column2={false} feature="Local evaluation" description="Store flag definitions locally" />
   <ComparisonRow column1={true} column2={false} feature="Percentage rollouts" description="Target percentages of a group" />
   <ComparisonRow column1={true} column2={false} feature="Custom targeting" description="Target users based on user properties, custom contexts" />
-  <ComparisonRow column1="Beta" column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
-  <ComparisonRow column1="Partial" column2={false} feature="Environments" description="Manage flags for dev, stage, prod" />
+  <ComparisonRow column1="Partial" column2={false} feature="Environments" description="Manage flags for dev, staging, prod" />
+  <ComparisonRow column1={true} column2={false} feature="Scheduling" description="Schedule flags to turn on or off" />
   <ComparisonRow column1={true} column2={false} feature="Bootstrapping" description="Flags available on frontend application load" />
   <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
@@ -166,6 +168,10 @@ PostHog and Heap both offer a wide range if integrations, but only PostHog enabl
 
 ## Frequently asked questions
 
+### Can I migrate from Heap?
+
+Yes. See our [Heap to PostHog migration guide](/docs/migrate/heap) for more.
+
 ### How long does it take to deploy PostHog?
 
 Deploying PostHog takes mere minutes. Just [include our tracking snippet](/docs/integrate?tab=snippet) in your product or website and (thanks to autocapture) you're immediately capturing events. Once up and running, you can enable session replays and other features via your project settings. See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
@@ -189,7 +195,6 @@ We recommend all users deploy a reverse proxy, which enables you send events to 
 ### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
 
 Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
-
 
 ### Can you use PostHog on e-commerce websites?
 

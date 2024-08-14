@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - neil-kakkar
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 category: Engineering
 ---
@@ -76,5 +77,5 @@ I go through all these examples to serve as an intuition pump: feedback loops do
 
 > PostHog is an open source analytics platform you can host yourself. We help you build better products faster, without user data ever leaving your infrastructure.
 
-<ArrayCTA />
+<NewsletterForm />
 

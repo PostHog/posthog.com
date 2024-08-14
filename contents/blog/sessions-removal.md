@@ -7,7 +7,8 @@ showTitle: true
 hideAnchor: true
 author:
   - paolodamico
-featuredImage: ../images/blog/generic-release-notes.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/generic-release-notes.png
 featuredImageType: full
 category: PostHog news
 tags:
@@ -37,7 +38,7 @@ From the context above, we decided to take the following actions:
 - We have removed the Sessions page. It introduced significant confusion and provided limited value. Less than 3% of pageviews in the app in the last month were on the sessions page for users with no recordings enabled (proxy metric).
 - We introduced a recordings list page instead. This page is mostly intended for finding specific recordings you want to watch (e.g. customer support or recordings with exceptions). This page also includes filtering tools geared towards that. _Funnels will be the starting point for other use cases._
 - On the Person modal you get when clicking on a data point in an insight graph, and particularly in Funnels, you now get a direct link to relevant recordings for the specific users in the data point. 
-    ![Person modal with recordings](../images/blog/person-modal-with-recordings.png)
+    ![Person modal with recordings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/person-modal-with-recordings.png)
 
 - On a Person page, recordings are now shown first (if enabled) and events as a secondary tab.
 - We've renamed the "Sessions recordings" feature into just "Recordings" to make it clear these are separate features, with different use cases.
