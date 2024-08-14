@@ -48,13 +48,9 @@ Let's go!
 
 At this point, you either have a problem and you start looking for software solutions _or_ you already know which software you want to use because you’ve used it before. These are the questions you need to answer:
 
-1. _Does this problem just affect me? My team? The whole company?_ If it just affects you, you should probably bail now because you’re unlikely to build a business case internally. Your sweet spot is something that affects your team - you’ll be able to convince the business to buy it, yet keep control of the process. 
+1. _Does this problem just affect me? My team? The whole company?_ If it just affects you, you should probably bail now because you’re unlikely to build a business case internally. Your sweet spot is something that affects your team - you’ll be able to convince the business to buy it, yet keep control of the process. If it affects multiple teams, be careful – you may not be able to get internal traction at all, or you can kick the process off but be prepared for it to be taken out of your hands.
 
-If it affects multiple teams, be careful – you may not be able to get internal traction at all, or you can kick the process off but be prepared for it to be taken out of your hands.
-
-2. _How am I going to convince someone to give me the budget?_ In 2024, large companies define budgets for software projects based on their impact on business metrics like revenue, cost savings through efficiency, productivity increase, risk reduction, etc. 
-
-You won’t win if you just say ‘this is cool’ (unless you are super senior). Don’t put tons of effort in now, but you need a sense check. Can you point directly to a metric that you can impact for the business? Not sure what your company cares about? Read your 10-K or annual report, or look at recent internal comms from your exec team, then tie your problem back. Spoiler alert: your salesperson will help you make this really strong later. 
+2. _How am I going to convince someone to give me the budget?_ In 2024, large companies define budgets for software projects based on their impact on business metrics like revenue, cost savings through efficiency, productivity increase, risk reduction, etc. You won’t win if you just say ‘this is cool’ (unless you are super senior). Don’t put tons of effort in now, but you need a sense check. Not sure what your company cares about? Read your 10-K or annual report, or look at recent internal comms from your exec team, then tie your problem back. Your salesperson will help you make this really strong later.
 
 3. _What did it look like the last time our company bought a new tool?_ What went wrong? Do people still use it? Who drove the process? Who signed off? It’s worth doing a bit of digging here first, as large companies have largely repeatable processes around this stuff. This may seem too early, but will save you a lot of headaches later on. 
 
@@ -68,7 +64,7 @@ Avoid! Don’t get in touch with anyone now, you will just get bugged and railro
 
 Check your company doesn’t already have a solution for this. You’ll be surprised how often you think you’re the first person to identify a problem, only to find out that a different team on a different continent has already solved it. If that’s the case, talk to them first. Maybe they can just add you to the existing company account and you can skip this whole thing. Nice.  
 
-### Level 2 - Shortlist the ones that could do the job
+### Level 2: Shortlist the ones that could do the job
 
 ![pmf-guide](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-level-2.png)
 
@@ -101,7 +97,7 @@ Review websites are a waste of time. Any company that has a good presence on the
 
 <NewsletterForm />
 
-### Level 3 - Get demos and test the ones I like
+### Level 3: Get demos and test the ones I like
 
 ![pmf-guide](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-level-3.png)
 
@@ -133,7 +129,7 @@ This is where the good stuff starts. It's time to put your salesperson to work!
 
 The demo you see is a _very_ polished version of the product and often not reflective of a real customer account. Get your actual data into the product as you might run into performance issues or weird edge cases that a demo account won’t highlight. Only playing around in a sandbox or demo environment is risky business.
 
-### Level 4 – It’s time to negotiate
+### Level 4: It’s time to negotiate
 
 ![pmf-guide](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-level-4.png)
 
@@ -162,7 +158,7 @@ If you tell your salesperson ‘this is my budget’, they will give you a price
 
 Don’t rush into a decision based on a false sense of urgency led by the salesperson.What typically happens is someone in your company will go, "Wait, why are we rushing so much, let’s pause here" and then the whole deal will stall. Let your internal timeline drive, not the salesperson’s.
 
-### Level 5 - How do I actually buy this thing?
+### Level 5: How do I actually buy this thing?
 
 ![pmf-guide](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-level-5.png)
 
