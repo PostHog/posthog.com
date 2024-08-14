@@ -154,15 +154,29 @@ Don’t rush into a decision based on a false sense of urgency led by the salesp
 
 **Internal process**
 
+OMG WE'RE NOT DONE YET. 
+
+Your top priority is getting the contract signed, and you should already know who actually does this. Be conscious that execs are constantly signing contracts every day, so be ready to defend yours _again_ even if you think the deal is done and dusted. This is the riskiest bit of the whole process. 
+
+Be prepared for this bit to take 4 weeks to happen, as buying teams can have huge backlogs of contracts to process, set up on their system etc. Your company will likely only use something like Docusign, or even a third party software purchasing service. 
+
 **Managing your salesperson**
+
+Do not let your salesperson nudge the signer - they will annoy them. You need to manage this sensitive bit. They will get desperate because they’re now thinking about closing the deal, hitting quota, and picking out the color of their new Tesla.
 
 **It's a trap!** 
 
-## A note on implementation
+Don’t sit and wait for stuff to happen because you are not the person signing. Stay alert, check for updates, and make friends with the person who actually signs if you can (or their assistant).
 
-TKTK
+## We did it! Or did we?
+
+Hooray, you’re done! Except you’re not. You’re still responsible for making sure the software is actually working and useful at your company. The salesperson will tell you that implementation usually takes about X months - take that number and double it and you’ll be in the right ballpark. Churning software is bad for everyone. Wasted resources, lost data, broken hearts. 
+
+Your salesperson will dump you the microsecond the deal is closed, so you'll now need to make friends with a customer success person of some sort. This is ok because they are product experts and are usually a lot more chill to deal with because they don't have the time pressure that classic salespeople do.
 
 ## The 8 final bosses you’ll (probably) need to beat
+
+As you go through this process, you will probably encounter one or more of these people. Here are some quick tips on how to deal with them. 
 
 TKTK
 
