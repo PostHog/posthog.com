@@ -29,7 +29,7 @@ Wrong.
 
 ## "What would stop _me_ from using this thing?"
 
-This was the most important conversation Tim and I had before launching PostHog.
+This was the most important conversation [Tim](/community/profiles/27730) and I had before launching PostHog.
 
 It was going to be free on launch day, but we knew users would still be wary of wasting their time deploying a piece of software produced by a two-person startup. 
 
@@ -49,7 +49,7 @@ So, as frustrating as it might be to spend extra time and effort on something "s
 
 ## Your company needs to stand for something
 
-Take two examples:
+Take these two examples of missions for PostHog:
 
 * Open-source product analytics
 * We equip every developer to build successful products
@@ -58,7 +58,7 @@ There is a trade-off between the two.
 
 The first is very clear. We started with it when this is what we had.
 
-As we became more well-known, and as we added lots of products into our platform, we shifted to the latter. This is a better reflection of _why_ our company exists – it is more than just a piece of software. 
+As we became more well-known, and as we added lots of products into our platform, we shifted to the latter mission. It's a better reflection of _why_ our company exists – it's more than just a piece of software. 
 
 We introduced it because the company was getting larger, and the scope of what we were setting out to achieve had expanded. We now have 8+ products, and we produce a ton of content to help engineers build better products. 
 
@@ -68,9 +68,9 @@ The need for total clarity wasn't as important later on, relative to the need fo
 
 One of the most important things we did was to [create an Ideal Customer Profile](/newsletter/ideal-customer-profile-framework).
 
-When we launched, we weren't sure quite how focused we'd need to be on engineers versus product managers. After launching, we realized that we could go all-in on engineers and technical founders, who make up around 80% of our users. Our brand and product has become more oriented towards these users as a result.
+When we launched, we weren't sure quite how focused we'd need to be on engineers versus product managers. After launching, we realized that we could go all-in on engineers and technical founders, who now make up around 80% of our users. Our brand and product has become more oriented towards these users as a result.
 
-Here are some specific ways we got more specific for this audience after we clarified it:
+Here are some ways we got more specific for this audience after we zeroed-in on it:
 
 * We added API examples to our website.
 
@@ -147,6 +147,6 @@ So get out there, and be bold
 
 If your brand isn't going to turn off some people that _might_ have bought your product, then it isn't strong enough to stand out.
 
-Engage your _best_ customers with your brand, and put off your _worst_ ones.
+Engage your best customers with your brand, and put off your worst ones.
 
 <NewsletterForm />
