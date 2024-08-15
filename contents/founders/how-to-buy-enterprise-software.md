@@ -1,5 +1,5 @@
 ---
-date: 2024-08-14
+date: 2024-08-15
 title: How to buy software as an enterprise
 author:
   - charles-cook
@@ -115,7 +115,7 @@ This is where the good stuff starts. It's time to put your salesperson to work!
 
 1. If you haven’t already sent them your requirements in advance, do so.
 
-2. Provide context to who is coming with you to the demos and what they will want to see, as a bad demo reflects badly on you as well as the salesperson. Most people who attend a demo zone out within a few minutes if it’s not relevant to them.
+2. Provide context to who is coming with you to the demos and what they will want to see, so you don't waste their time. Most people who attend a demo zone out within a few minutes if it’s not relevant to them.
 
 3. Your salesperson can be of most value during the testing period. Ask them to help set up your trial account, and to set up a Teams/Slack channel with your team to improve the comms during the trial period. _This is where most deals fall through for salespeople_, so they will be very keen to get this part right, especially if you are showing signs of being eager to progress through this stage. Get them to do some grunt work for you.
 
@@ -147,7 +147,8 @@ Some specific terms to negotiate:
 
 - Waive the implementation fee (they will onboard you for free anyway)
 - No multi-year
-- No auto-renewal
+- No auto-renewal, as you'll forget to give notice to cancel if you hate it
+- Similarly, no 'automatic 10% price increase next year', as you should treat each year as a fresh negotiation
 - Ask for payment in installments (finance people love this one weird trick)
 - Ask for payment terms (net 90 days, you bastard)
 - Make sure that you can terminate the contract under reasonable circumstances
