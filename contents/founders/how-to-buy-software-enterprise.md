@@ -94,7 +94,7 @@ Send over the following info by email in advance of any call to make the best us
 - When you want a solution in place.
 - Who you are and if you have the ability to purchase yourself. Be honest here, they will still want to talk to you even if you don’t have authority to buy software, as you will be their deal ‘champion’.
 
-#### It's a trap!** 
+#### It's a trap! 
 
 Review websites are a waste of time. Any company that has a good presence on them has either paid for them or gamed the system by only asking happy customers for reviews. But reading bad reviews can be insightful.
 
