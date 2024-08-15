@@ -2623,7 +2623,7 @@ export const docsMenu = {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
-                    icon: 'IconLive'
+                    icon: 'IconLive',
                 },
                 {
                     name: 'Batch exports',
