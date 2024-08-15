@@ -19,7 +19,7 @@ Buying software as an enterprise company is a pain in the ass. There's no playbo
 
 - Buying software at big companies can take an insanely long time. It typically takes six to twelve months to go from deciding you need the software to actually closing the deal.
 - Negotiating internally with your team is _much_ more important and difficult than negotiating with the salesperson. 
-- The typical enterprise software buying process involves eight to twelve people – it’s not just you and a finance person who signs it off.
+- The standard enterprise software buying process involves eight to twelve people – it’s not just you and a finance person who signs it off.
 - Your salesperson can do _so_ much more for you than just show you the product and negotiate pricing.
 
 Are you a software buying newbie at a large company? Have you bought software before and it went terribly and took way longer than you expected? Have you been handed something called an RFP and have no idea WTF to do with it? Do you enjoy reading enterprise software buying guides in your spare time?
