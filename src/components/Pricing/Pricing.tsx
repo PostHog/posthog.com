@@ -158,7 +158,8 @@ const Discounts = () => (
                 <IconHandMoney className="size-5 absolute left-0 top-4.5 opacity-50" />
                 <strong>Nonprofit</strong>
                 <p className="text-[15px] mb-2">
-                    Are you a nonprofit? You can save more! Get in touch through the app after signing up and we'll give you an additional discount.
+                    Are you a nonprofit? You can save more! Get in touch through the app after signing up and we'll give
+                    you an additional discount.
                 </p>
             </li>
         </ul>
