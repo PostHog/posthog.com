@@ -98,8 +98,6 @@ Send over the following info by email in advance of any call to make the best us
 
 Review websites are a waste of time. Any company that has a good presence on them has either paid for them or gamed the system by only asking happy customers for reviews. But reading bad reviews can be insightful.
 
-<NewsletterForm />
-
 ### Level 3: Get demos and test the ones I like
 
 ![pmf-guide](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/pmf-game-guide/pmf-level-3.png)
