@@ -68,7 +68,7 @@ The need for total clarity wasn't as important later on, relative to the need fo
 
 One of the most important things we did was to [create an Ideal Customer Profile](/newsletter/ideal-customer-profile-framework).
 
-When we launched, we weren't sure quite how focused we'd need to be on engineers vs product managers. We realized, after launching, that we could go all in on engineers and technical founders, who make up around 80% of our users. Our brand and product has become more oriented towards these users as a result.
+When we launched, we weren't sure quite how focused we'd need to be on engineers versus product managers. After launching, we realized that we could go all-in on engineers and technical founders, who make up around 80% of our users. Our brand and product has become more oriented towards these users as a result.
 
 Here are some specific ways we got more specific for this audience after we clarified it:
 
@@ -78,7 +78,7 @@ Here are some specific ways we got more specific for this audience after we clar
 
 * We chose a more flexible pricing model – it's far more complex, but it's [much better value](/blog/analytics-pricing). We felt more technical people would be happier than non-technical people coping with more complexity to get a better deal. We want developers to be able to manage their spend with us across our eight products, not a "single price".
 
-* In the product, we worked on [SQL access](/docs/hogql), so technical people could get to the underlying data to debug things.
+* In the product, we worked on [SQL access](/docs/hogql), so technical people could get to the underlying data and debug things.
 
 * We [redesigned our entire UX](/blog/posthog-as-a-dev-tool) to have higher information density, dark mode and more flexibility.
 
@@ -86,15 +86,15 @@ Here are some specific ways we got more specific for this audience after we clar
 
 We have often been impressed at the level of polish that others can achieve.
 
-Quoting Cory, our lead designer: "We aren't the best in the world at being polished, but we can be the best in the world at being ourselves".
+Quoting [Cory](/community/profiles/30200), our lead designer: "We aren't the best in the world at being polished, but we can be the best in the world at being ourselves".
 
 We sometimes make business decisions based on who we are, and what we want to do – not always what may, for example, generate the most revenue growth.
 
-For example, we set out initially expecting to have an open core model. We'd offer open-source software, and some people in big enterprises, would self-host and pay for the party for everyone else. 
+For instance, initially we planned to have an open core model. We'd offer open-source software, and some people in big enterprises, would self-host and pay for the party for everyone else. 
 
-We felt this would work as there was no real competition, whereas in cloud we had lots of competitors with over $100M in annual revenue. However, we simply love shipping new features, and after our first hackathon, we wound up with session replay (i.e. a new feature big enough to be its own product), which took off, and this resulted in a multi-product approach. 
+We felt this would work as there was no real competition, whereas in cloud we had lots of competitors with over $100m in annual revenue. However, we simply love shipping new features, and after our first hackathon, we wound up with session replay (i.e. a new feature big enough to be its own product), which took off, and this resulted in a multi-product approach. 
 
-As a result, we could compete in cloud by being way wider than everyone else. Eventually, we removed our paid self-hosted offering entirely, went all in on multi-product in cloud, focused on "getting in first" with earlier-stage companies instead of the largest enterprises, and our motivation, ambition and growth all took off as a result. 
+As a result, we could compete in cloud by being way wider than everyone else. Eventually, we removed our paid, self-hosted offering entirely, and went all in on multi-product in cloud, focused on "getting in first" with earlier-stage companies instead of the largest enterprises. Our motivation, ambition and growth all took off as a result. 
 
 And yes we kept the open-source product, though we stress it's for hobbyists because it's cheaper and easier for companies to have us host if for them.
 
@@ -104,8 +104,8 @@ And yes we kept the open-source product, though we stress it's for hobbyists bec
 
 * How much you invest in each function in your company relative to each other.
 * What you look for when you hire people, and it's the process you use to hire with.
-* How you decide what to build – do you ship features early, or do you focus on meeting the needs of your largest customer with every new thing?
-* How much you are design vs engineering vs product vs sales vs marketing-led – how many people are in each function, but also your processes for deciding what to work done.
+* How you decide what to build. Do you ship features early, or do you focus on meeting the needs of your largest customer with every new thing?
+* How much you are design vs. engineering vs. product vs. sales vs. marketing-led. How many people are in each function, but also your processes for deciding what to work done.
 * The frequency and style with which you email your customers, for marketing, product updates or your activation flow.
 * The kind of people you hire into customer success or sales.
 * The background experience of those in your marketing team.
@@ -125,7 +125,7 @@ So, if you're serious, go nuts on your brand. Go weirdly hard.
 
 To give you an example, we built a [merch store](/merch):
 
-* We started with me emailing users for their address and size, ordering merch and having it delivered to my house, and me then posting it internationally to them. [Do things that don't scale](https://paulgraham.com/ds.html)!
+* We started with me emailing users for their address and size, ordering merch and having it delivered to my house, and me then posting it internationally to them. [Do things that don't scale](https://paulgraham.com/ds.html).
 
 * Next, we set up a store on Shopify. I just threw our logo onto an amusingly wide selection of items – PostHog shower curtain, anyone? It was cool to just have merch for sale and a way of giving it.
 
@@ -143,7 +143,7 @@ This single thing is easy enough to copy, but it's just one activity among hundr
 
 Yes. You can be iterative with it, though. Not everything was amazing on day one, but we keep improving and tweaking everything over time.
 
-So, get out there, and be bold
+So get out there, and be bold
 
 If your brand isn't going to turn off some people that _might_ have bought your product, then it isn't strong enough to stand out.
 
