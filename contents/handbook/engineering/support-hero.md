@@ -10,7 +10,7 @@ As Support Hero, your job is to investigate and resolve issues reported by custo
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-<TeamMember name="Marcus Hof" photo /> and <TeamMember name="Steven Shults" photo />, our Support Engineers, triage tickets for the Product Analytics, Pipeline, Session Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+<TeamMember name="Marcus Hof" photo />, <TeamMember name="Steven Shults" photo /> and <TeamMember name="Abigail Richardson" photo />, our Support Engineers, triage tickets for the Product Analytics, CDP, Session Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -35,9 +35,9 @@ Each engineering team has its own list of tickets in Zendesk:
 
 - [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated tickets only)
 - [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027)
-- [Feature Success](https://posthoghelp.zendesk.com/agent/filters/14507099125531)
-- [Replay](https://posthoghelp.zendesk.com/agent/filters/14507048415771)
-- [Pipeline](https://posthoghelp.zendesk.com/agent/filters/14506794017051)
+- [Feature Success](https://posthoghelp.zendesk.com/agent/filters/25210600744731) (escalated only)
+- [Replay](https://posthoghelp.zendesk.com/agent/filters/25210723706907) (escalated only)
+- [CDP](https://posthoghelp.zendesk.com/agent/filters/28134703633179) (escalated only)
 - [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/14507148758939)
 - [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/14507107058843)
 
