@@ -231,6 +231,6 @@ As you go through this process, you will probably encounter one or more of these
 
 ## Surely there's a better way?
 
-There is! We're trying to do things [a little differently](/sales) at PostHog...
+There is! We're trying to do things [a little differently](/sales) at PostHog on the sales side at least...
 
 <NewsletterForm />
