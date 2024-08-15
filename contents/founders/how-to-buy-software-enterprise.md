@@ -63,7 +63,7 @@ At this point, you either have a problem and you start looking for software solu
 
 Avoid! Don’t get in touch with anyone now, you will just get bugged and railroaded into a demo before you’ve figured out what you actually need. 
 
-#### It's a trap!**
+#### It's a trap!
 
 Check your company doesn’t already have a solution for this. You’ll be surprised how often you think you’re the first person to identify a problem, only to find out that a different team on a different continent has already solved it. If that’s the case, talk to them first. Maybe they can just add you to the existing company account and you can skip this whole thing. Nice.  
 
@@ -197,65 +197,49 @@ As you go through this process, you will probably encounter one or more of these
 **The procurement person who actually has a personality if you get to know them:**
 
 - **When to engage:** When you’ve picked your preferred option.
-
 - **What they care about:** Following the proper internal process, and getting the software for as cheap as possible.
-
 - **How to win them over:** Frame your request as asking for their expertise, not telling them what to do. Come prepared with all the notes on the evaluation so far.
 
 **The engineer who implemented the current solution and is taking it personally that you’re suggesting something else:**
 
 - **When to engage:** Right at the beginning.
-
 - **What they care about:** Saving face if you replace what they implemented, and not losing any important functionality by changing software.
-
 - **How to win them over:** Blame the software they implemented, nerd out over technical details.
 
 **The anxious infosec officer who has GDPR PTSD and hates buying outside the Fortune 50:**
 
 - **When to engage:** when you’ve picked your preferred option.
-
 - **What they care about:** Being careful about sending company data to some random software company.
-
 - **How to win them over:** Send them a SOC 2 or ISO 27001 report, it’s like catnip.
 
 **The “in the weeds” legal person who loves a redline and hates compromise:**
 
 - **When to engage:** After you have agreed commercial terms.
-
 - **What they care about:** Liability, ability to terminate the contract, general legal point scoring.
-
 - **How to win them over:** Thank them profusely for taking a ‘commercial’ angle and not being overly legalistic.
 
 **The CEO who thinks we should go with something else because they met the founder at Davos:**
 
 - **When to engage:** You probably won’t get to engage them, but be prepared to justify your choice at no notice.
-
 - **What they care about:** Their LinkedIn following.
-
 - **How to win them over:** Presentation deck, ten slides, few words, legible on mobile.
 
 **The CFO who thinks we should use spreadsheets for everything:**
 
 - **When to engage:** Bizarrely, right at the beginning – if you can even reach them.
-
-**- What they care about:** The share price.
-
+- **What they care about:** The share price.
 - **How to win them over:** Make the economic case, put numbers against time saved, revenue generated etc. 
 
 **The generic loud person on a totally different team who will only sign in once but give lots of opinions:**
 
 - **When to engage:** Whenever they spring up, you’ll need to be reactive.
-
 - **What they care about:** Having their voice heard.
-
 - **How to win them over:** Get on a call, reassure them their feedback will be taken seriously, then throw away your notes.
 
 **The digital transformation guru whose responsibilities are incredibly vague, but their solution is always AI:**
 
 - **When to engage:** Whenever really, they are good for helping you build hype internally.
-
 - **What they care about:** Getting the company to do new stuff.
-
 - **How to win them over:** Sympathize with them about how resistant to change the organization is.
 
 ## Surely there's a better way?
