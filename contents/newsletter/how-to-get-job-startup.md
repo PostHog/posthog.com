@@ -17,7 +17,7 @@ In the last two months, we’ve had 900 people apply for engineering roles:
 
 * 86 got a first interview
 * 55 got a technical interview
-* 10 did a[ SuperDay](https://posthog.com/handbook/people/hiring-process#4-posthog-superday)
+* 10 did a [SuperDay](/handbook/people/hiring-process#4-posthog-superday)
 * 4 were hired
 
 ![From 900 to 4](https://res.cloudinary.com/dmukukwp6/image/upload/hogs_c30d4b024d.png)
@@ -43,8 +43,7 @@ Avoid any formatting that the application system is likely to remove. Keep it si
 
 And please, no profile pictures.
 
-![Juraj's cover letter](https://res.cloudinary.com/dmukukwp6/image/upload/juraj1_e95d0bc63b.png
-)
+![Juraj's cover letter](https://res.cloudinary.com/dmukukwp6/image/upload/juraj1_e95d0bc63b.png)
 
 We did the math and, on average, we spend less than one minute reviewing each application we receive. Automated or junk applications (hello, ChatGPT) are discarded in less than five seconds.
 
@@ -64,7 +63,7 @@ Strong cover letters we’ve received recently included the following:
 * Style and language that reflected our company culture.
 * Examples of personal projects they’ve worked on with links.
 * Really clear info on what they’re looking for and their availability.
-* Something that made them stand out.[ Marcus](https://posthog.com/community/profiles/30211), one of our support engineers,[ opened a PR](https://github.com/PostHog/posthog.com/pull/4922) to add him to the team page. Others have created PRs to update our docs, or raised useful product issues. When done well, we do notice these things.
+* Something that made them stand out. [Marcus](/community/profiles/30211), one of our support engineers, [opened a PR](/PostHog/posthog.com/pull/4922) to add him to the team page. Others have created PRs to update our docs, or raised useful product issues. When done well, we do notice these things.
 
 ![Marcus' cover letter](https://res.cloudinary.com/dmukukwp6/image/upload/marcus_2f0952c1a4.png)
 
@@ -78,8 +77,7 @@ This doesn’t mean you should randomly spam people on LinkedIn for an intro (th
 
 People talk to each other. And, who knows, one day maybe they’ll talk about you and be really nice.
 
-**Further reading: [What recruiters actually see when you apply](https://posthog.com/founders/what-recruiters-see)**
-
+**Further reading: [What recruiters actually see when you apply](/founders/what-recruiters-see)**
 
 ## 2) Be genuinely curious
 
@@ -113,10 +111,9 @@ If you get the role, you need to be proactive in speaking to users, understandin
 
 **Further reading: [The really important job interview questions engineers should ask (but don't)](https://posthog.com/founders/what-to-ask-in-interviews)**
 
----
 ## 3) Pick the right opportunity
 
-It’s easier said than done, but [good job ads](https://posthog.com/founders/write-great-job-ads) are actually littered with clues.
+It’s easier said than done, but [good job ads](/founders/write-great-job-ads) are actually littered with clues.
 
 Here’s what to look for:
 
@@ -141,8 +138,7 @@ Beyond that, research the company:
 
 This can help you find high-potential companies, and give you more context to shine during the interview stage.
 
----
-## **4) Be cracked**
+## 4) Be cracked
 
 We’ve written about this a lot in the past, but we’re obsessed with hiring [cracked engineers](/founders/cracked-manifesto), and have specific ideas as to [what makes a 10x engineer](https://newsletter.posthog.com/p/beyond-the-10x-engineer).
 
@@ -159,7 +155,6 @@ Outside very senior or critical roles, many startups can’t wait for your three
 
 Be honest about your availability up front – and, if you can, be available within weeks, not months.
 
----
 ## Good reads 📖
 
 * **[Why doesn't advice work?](https://dynomight.net/advice/)** – Simple question, complex answer.
@@ -171,4 +166,4 @@ _Words by James Temperton, who hates LinkedIn._
 
 [^1]: Being a great human doesn’t mean being an effervescent personality – you don’t need to be the life and soul of the party. Being reliable and easy to work with is way less common than you might imagine. If you struggle getting referrals from former colleagues, be really honest about why that could be. More companies don’t have a culture of direct, honest feedback, which can obscure problems. It’s why we[ value trust and feedback](https://posthog.com/handbook/values#4-trust-and-feedback-over-process) so much.
 
-
+<NewsletterForm />
