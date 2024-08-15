@@ -98,8 +98,6 @@ As a result, we could compete in cloud by being way wider than everyone else. Ev
 
 And yes we kept the open-source product, though we stress it's for hobbyists because it's cheaper and easier for companies to have us host if for them.
 
-<NewsletterForm />
-
 ## Your brand isn't just your website...
 
 ...it's how your company is experienced by others. Your _company_ is your product and:
