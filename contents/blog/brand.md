@@ -125,7 +125,7 @@ So, if you're serious, go nuts on your brand. Go weirdly hard.
 
 To give you an example, we built a [merch store](/merch):
 
-* We started with me emailing users for their address and size, ordering merch and having it delivered to my house, and me then posting it internationally to them. [Do things that don't scale](https://paulgraham.com/ds.html]!
+* We started with me emailing users for their address and size, ordering merch and having it delivered to my house, and me then posting it internationally to them. [Do things that don't scale](https://paulgraham.com/ds.html)!
 
 * Next, we set up a store on Shopify. I just threw our logo onto an amusingly wide selection of items – PostHog shower curtain, anyone? It was cool to just have merch for sale and a way of giving it.
 
