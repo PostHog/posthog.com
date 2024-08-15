@@ -9,6 +9,12 @@ author:
   - james-hawkins
 tags:
 - CEO diaries
+- Culture
+- Marketing
+- Growth
+crosspost:
+- Blog
+- Founders
 ---
 
 The world would be more fun if most startups hadn't undergone a personality vasectomy.
@@ -92,6 +98,8 @@ As a result, we could compete in cloud by being way wider than everyone else. Ev
 
 And yes we kept the open-source product, though we stress it's for hobbyists because it's cheaper and easier for companies to have us host if for them.
 
+<NewsletterForm />
+
 ## Your brand isn't just your website...
 
 ...it's how your company is experienced by others. Your _company_ is your product and:
@@ -142,3 +150,5 @@ So, get out there, and be bold
 If your brand isn't going to turn off some people that _might_ have bought your product, then it isn't strong enough to stand out.
 
 Engage your _best_ customers with your brand, and put off your _worst_ ones.
+
+<NewsletterForm />
