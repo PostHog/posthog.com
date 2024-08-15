@@ -132,7 +132,16 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
     await getAllStrapiPostCategories()
     const postsToCreateOrUpdate: any = []
     for (const {
-        frontmatter: { title, date, featuredImage, authorData, category: postTag, tags: postTags, crosspost },
+        frontmatter: {
+            title,
+            date,
+            featuredImage,
+            authorData,
+            category: postTag,
+            tags: postTags,
+            crosspost,
+            hideFromIndex,
+        },
         fields: { slug },
         parent: { relativePath: path },
         excerpt,
@@ -143,7 +152,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
             (await createCategory(path.split('/')[0]))
 
         let tags = []
-        for (const tagLabel of postTag?.toLowerCase() ? [postTag.toLowerCase()] : postTags || []) {
+        for (const tagLabel of postTags || []) {
             let tag = category?.attributes?.post_tags?.data?.find(
                 (tag) => tag?.attributes?.label?.toLowerCase() === tagLabel?.toLowerCase()
             )
@@ -165,6 +174,7 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
             authors: {
                 connect: authorIDs,
             },
+            hideFromIndex,
             ...(category
                 ? {
                       post_category: {
@@ -294,6 +304,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                             profile_id
                         }
                         crosspost
+                        hideFromIndex
                     }
                     excerpt(pruneLength: 250)
                 }

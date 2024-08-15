@@ -291,6 +291,10 @@ export const handbookSidebar = [
                         name: 'How we review PRs',
                         url: '/handbook/engineering/how-we-review',
                     },
+                    {
+                        name: 'How to do product, as an engineer',
+                        url: '/handbook/engineering/product-engineering',
+                    },
                 ],
             },
             {
@@ -626,6 +630,10 @@ export const handbookSidebar = [
                 url: '/handbook/comms/press',
             },
             {
+                name: 'Partners',
+                url: '/handbook/comms/partners',
+            },
+            {
                 name: 'Email comms',
                 url: '/handbook/comms/email-comms',
             },
@@ -684,10 +692,6 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/icp',
                     },
                     {
-                        name: 'Customer onboarding',
-                        url: '/handbook/growth/sales/customer-onboarding',
-                    },
-                    {
                         name: 'YC onboarding',
                         url: '/handbook/growth/sales/yc-onboarding',
                     },
@@ -698,6 +702,10 @@ export const handbookSidebar = [
                     {
                         name: 'Billing',
                         url: '/handbook/growth/sales/billing',
+                    },
+                    {
+                        name: 'Refunds',
+                        url: '/handbook/growth/sales/refunds',
                     },
                     {
                         name: 'Automations',
@@ -1858,6 +1866,10 @@ export const docsMenu = {
                             url: '/docs/migrate/heap',
                         },
                         {
+                            name: 'Migrate from LaunchDarkly',
+                            url: '/docs/migrate/launchdarkly',
+                        },
+                        {
                             name: 'Migrate from Matomo',
                             url: '/docs/migrate/matomo',
                         },
@@ -1868,6 +1880,10 @@ export const docsMenu = {
                         {
                             name: 'Migrate from Pendo',
                             url: '/docs/migrate/pendo',
+                        },
+                        {
+                            name: 'Migrate from Statsig',
+                            url: '/docs/migrate/statsig',
                         },
                     ],
                 },
@@ -2933,16 +2949,22 @@ export const docsMenu = {
                     name: 'Integrations',
                 },
                 {
-                    name: 'Langfuse',
-                    url: '/docs/ai-engineering/langfuse-posthog',
-                    icon: 'IconWrench',
-                    color: 'red',
-                },
-                {
                     name: 'Helicone',
                     url: '/docs/ai-engineering/helicone-posthog',
                     icon: 'IconWrench',
                     color: 'green',
+                },
+                {
+                    name: 'Keywords AI',
+                    url: '/docs/ai-engineering/keywords-ai-posthog',
+                    icon: 'IconWrench',
+                    color: 'blue',
+                },
+                {
+                    name: 'Langfuse',
+                    url: '/docs/ai-engineering/langfuse-posthog',
+                    icon: 'IconWrench',
+                    color: 'red',
                 },
                 {
                     name: 'Traceloop',

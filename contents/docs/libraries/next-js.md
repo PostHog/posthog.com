@@ -142,6 +142,25 @@ export function PHProvider({
 
 </MultiLanguage>
 
+> **Getting a mismatch warning?** If you see a warning like `Warning: Prop dangerouslySetInnerHTML did not match.`, try initializing PostHog in a `useEffect` hook like this:
+> ```js
+> // app/providers.js
+> 'use client'
+> import { useEffect } from 'react'
+> import posthog from 'posthog-js'
+> import { PostHogProvider } from 'posthog-js/react'
+> 
+> export function PHProvider({ children }) {
+>   useEffect(() => {
+>     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+>       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+>     })
+>   }, [])
+> 
+>   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+> }
+> ```
+
 PostHog's `$pageview` autocapture relies on page load events. Since Next.js acts as a single-page app, this event doesn't trigger on navigation and we need to capture `$pageview` events manually. 
 
 To do this, we set up a `PostHogPageView` component to listen to URL path changes:

@@ -47,16 +47,21 @@ the following Salesforce properties if they are set in the PostHog event:
 - is_organization_first_user - whether they have created a new organization or joined an existing one
 - role_at_organization - the role they self-selected when signing up (used in ICP scoring)
 
-This [Salesforce view](https://app.hubspot.com/contacts/6958578/objects/0-1/views/7112066/list) shows contacts who have been created this way, and have an ICP score above 12 - review this at least once
-a day and reach out to the people who've not been contacted yet. We also have a similar view for [lower ICP scores](https://app.hubspot.com/contacts/6958578/objects/0-1/views/9214739/list).
-
 ### Completed contact form
 
 We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users can get in touch with us. The sales@ alias gets an email notification and a notification is also sent to [#website-contact-sales](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted - respond to them in the same way as the email section above.
 
-### Manually adding new users
+> If you receive a lead where someone completes the contact form but it is clearly just a regular support request, you should add :ticket: to the relevant thread in the `#website-contact-sales` channel in Slack and mark it as "Unqualified" in Salesforce.
 
-You can also just manually add a user to Salesforce under 'Contacts'. When creating a new contact, try to add as much useful information as possible, especially about the type of company they work for and what their needs are. This enables us to provide them with the best possible experience. 
+### Manually adding new records
+
+You can also just manually add a user or an organization to Salesforce if they come through different channels. When creating a new contact, try to add as much useful information as possible, especially about the type of company they work for and what their needs are. This enables us to provide them with the best possible experience. 
+
+Our preferred way to keep track of outreach is by creating Salesforce Leads, Contacts, and Opportunities, depending on the stage of the relationship:
+
+- Leads: If a contact is in the initial evaluation stage, it should be entered as a Lead. This allows us to track and manage potential clients who are not yet qualified or who are still in the early stages of engagement. This is typically how we add potential customers who do not use PostHog yet.
+- Opportunities: If you identify potential for growth with an existing user, such as expansion or commitment to an annual plan, you can create an Opportunity directly. This is appropriate for contacts or customers where you've already completed the lead assessment (more on that below).
+
 
 ## How we do lead assessment
 Any user who submits a “contact sales” form on our website shows up as a lead in Salesforce and gets assigned to an Account Executive (AE). This is how we do lead assignment within our sales team:
@@ -141,7 +146,7 @@ You can also create an opportunity directly from scratch, but make sure to conne
 - Fill in Opportunity Details:
  - Opportunity Name
  - Close Date: Choose the estimated date when the opportunity is expected to close.
- - Amount: Enter the potential revenue amount for the opportunity (if blank this will be $20,000 by default).
+ - Amount: Enter the potential revenue amount for the opportunity (if blank this will be $20,000 by default). This should be the amount before any discounts are applied.
  - Stage: Select the current stage of the opportunity in the sales process.
  - Type: If you know whether they're interested in paying on a monthly or an annual basis (if blank this will be Monthly by default)
  - Connect to an Account: In the "Account Name" field, search for and select the account associated with the opportunity. If the account does not exist, create a new account first.
@@ -173,7 +178,7 @@ When an opportunity with Annual Plan type is Closed Won, a Salesforce [flow](htt
 
 * **Amount** - Copied over from the original opportunity
 * **ARR up for renewal** - Copied over from the original amount; so that we can track expansion/churn
-* **Close date** - 365 days in the future (may need adjusting if the opportunity record isn't closed on the contract start date)
+* **Close date** - 4 weeks in the future (may need adjusting if the opportunity record isn't closed on the contract start date)
 
 The renewal pipeline stages are:
 

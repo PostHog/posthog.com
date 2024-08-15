@@ -9,15 +9,29 @@ showTitle: true
 ## Main metrics for each role
 
 - AE: new and expansion revenue in your segment
-- SDR: number of customer meetings booked in correct segment
-- CSM: revenue retention %
 - RevOps: overall revenue from $20k+ segment
 
-Other metrics we care about:
+These roles do not exist at PostHog yet, but if we hire for them we would care about:
+
+- SDR: number of customer meetings booked in correct segment
+- CSM: revenue retention %
+
+Other metrics we generally care about:
 - Closed - won % from demo
 - Time to close
 - Lead volume in each segment
 - Weighted pipeline
+
+## Weekly sales standup
+
+In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standup on a Wednesday. Two AEs are picked at random, and we spend 30min on each going in depth through:
+
+- Your existing book of business - every customer should have a status update and next steps identified
+- Top 3 new leads
+
+The reason for structuring the review in this way is that we find it is much more effective to go deep on a subset of customers than racing around giving everyone 5 minutes to give a very surface level update. Turns are taken randomly so that you are incentivized to turn up to every meeting fully prepared, in case you are selected!
+
+The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - [you should not let your team mates fail](/culture#dont-let-others-fail). 
 
 ## New AE hire ramp up
 - Day 1

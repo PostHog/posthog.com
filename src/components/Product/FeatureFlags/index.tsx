@@ -59,7 +59,7 @@ const featuresPerRow = 3
 const features = [
     {
         title: 'Release conditions',
-        description: 'Customize your rollout strategy by user or group properties, cohort, or trafic percentage',
+        description: 'Customize your rollout strategy by user or group properties, cohort, or traffic percentage',
         image: <StaticImage src="./images/release-conditions.png" width={420} />,
         border: true,
     },

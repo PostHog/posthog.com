@@ -90,7 +90,7 @@ We're 38 people in lots of countries. We're not adding lots of headcount over th
 
 ## Feb 2023: focus on mass adoption
 
-We're very doing well at monetizing high-growth startups due to our optimization work, averaging over 15% MoM for the last 6 months. 
+We're doing very well at monetizing high-growth startups due to our optimization work, averaging over 15% MoM for the last 6 months. 
 
 We've decided to double down on mass adoption of the platform in high potential startups instead of focusing on enterprise. Simply, this will better help us increase the number of successful products in the world. As a result, we've removed support for paid self-hosted deployment and are doubling down on our open source and cloud projects. We have released a PostHog free tier.
 
