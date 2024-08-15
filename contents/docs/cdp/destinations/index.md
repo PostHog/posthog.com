@@ -10,7 +10,6 @@ showTitle: true
 
 To get started, you can create a new Destination from the [Pipeline destinations](https://us.posthog.com/pipeline/destinations) page and choose from a range of available <b>Templates</b>. Depending on the destination there will be a range of configuration options, such as credentials needed or where to find certain properties from the event being processed. 
 
-
 ### Input formatting
 
 Any configuration input for a destination can have its values formatted using our Hog language to include data from the `event`, `person` and more.
