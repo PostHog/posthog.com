@@ -1,6 +1,6 @@
 ---
-title: How to get a great job at a great startup
-date: 2024-07-18
+title: How to get a job at a startup
+date: 2024-08-15
 author:
   - james-temperton
 featuredImage: >-
@@ -10,6 +10,7 @@ tags:
   - People
 crosspost:
   - Blog
+  - Founders
 ---
 
 In the last two months, we’ve had 900 people apply for engineering roles:
@@ -26,7 +27,7 @@ That means we hired 0.4% of people who applied for engineering roles.
 So, how do you join the 0.4% of superstar engineers – not just at PostHog, but at any other fast-growing startup?
 
 ---
-## **1) Think like a recruiter**
+## 1) Think like a recruiter
 
 There’s a huge gap between what job applicants and recruiters experience.
 
@@ -34,7 +35,7 @@ With the exception of very early-stage companies, most startups will use an appl
 
 They’re designed for speed, not to make you look good. This means you need to anticipate how your application will look inside this system, not as a finely-crafted PDF.
 
-### **Brevity is your friend**
+### Brevity is your friend
 
 A startup recruiter will, if you’re lucky, spend more than a few seconds reading your application. The easier you make it for them, the longer they’ll spend considering you.
 
@@ -49,7 +50,7 @@ We did the math and, on average, we spend less than one minute reviewing each ap
 
 Truly great applications are read for up to five minutes.
 
-### **Cover letter tips**
+### Cover letter tips
 
 Contrary to rumor, cover letters still matter, but they need to be short. Five to ten sentences is fine.
 
@@ -67,7 +68,7 @@ Strong cover letters we’ve received recently included the following:
 
 ![Marcus' cover letter](https://res.cloudinary.com/dmukukwp6/image/upload/marcus_2f0952c1a4.png)
 
-### **One simple, annoying trick**
+### One simple, annoying trick
 
 Get ready to groan, but there’s one thing that will really help: a proper, warm referral. We trust our team’s judgment, so a referral can really help us pre-filter applicants.
 
@@ -79,30 +80,30 @@ People talk to each other. And, who knows, one day maybe they’ll talk about yo
 
 **Further reading: [What recruiters actually see when you apply](https://posthog.com/founders/what-recruiters-see)**
 
----
-## **2) Be genuinely curious**
 
-One way we’re able to recognize[ 10x engineers](https://newsletter.posthog.com/p/beyond-the-10x-engineer) at the interview stage is by the questions they ask – not just the technical ones, though they’re important too.
+## 2) Be genuinely curious
+
+One way we’re able to recognize [10x engineers](https://newsletter.posthog.com/p/beyond-the-10x-engineer) at the interview stage is by the questions they ask – not just the technical ones, though they’re important too.
 
 It’s not rude to ask very specific questions, it shows you’re genuinely curious about what we’re doing. Here are some questions you should be asking when interviewing with a startup founder.
 
-### **Does the company have product-market fit?**
+### Does the company have product-market fit?
 
 Very few engineers ask this when we do interviews. Ask! You can and should also ask about revenue, and the number of daily active users.
 
-Early-stage startups might not[ have product-market fit](https://posthog.com/founders/product-market-fit-game), but they should have a plan for how to get there, and a[ clear picture what it will look like](https://posthog.com/founders/measure-product-market-fit).
+Early-stage startups might not [have product-market fit](/founders/product-market-fit-game), but they should have a plan for how to get there, and a [clear picture what it will look like](/founders/measure-product-market-fit).
 
 It’s a red flag if they can’t articulate this.
 
-### **How much runway does the company have?**
+### How much runway does the company have?
 
-Or, simply put: is the company[ default alive](https://paulgraham.com/aord.html)?
+Or, simply put: is the company [default alive](https://paulgraham.com/aord.html)?
 
 A company with very little runway and no product-market fit is likely to have a challenging culture. Asking these kinds of questions will get you much closer to understanding what the company is like to work for than asking generic questions like “what’s it like to work here?”
 
 Sure, a startup might not be profitable – but it should have a plan to be profitable before it runs out of money. If it doesn’t, ask why. Avoid companies that don’t know if they’re default alive or not, or don’t care about it.
 
-### **If you could throw money at a problem and solve it immediately, what would it be?**
+### If you could throw money at a problem and solve it immediately, what would it be?
 
 Superstar engineers are laser-focused on working out where a company is struggling and how they can help.
 
@@ -113,9 +114,9 @@ If you get the role, you need to be proactive in speaking to users, understandin
 **Further reading: [The really important job interview questions engineers should ask (but don't)](https://posthog.com/founders/what-to-ask-in-interviews)**
 
 ---
-## **3) Pick the right opportunity**
+## 3) Pick the right opportunity
 
-It’s easier said than done, but[ good job ads](https://posthog.com/founders/write-great-job-ads) are actually littered with clues.
+It’s easier said than done, but [good job ads](https://posthog.com/founders/write-great-job-ads) are actually littered with clues.
 
 Here’s what to look for:
 
@@ -143,14 +144,14 @@ This can help you find high-potential companies, and give you more context to sh
 ---
 ## **4) Be cracked**
 
-We’ve written about this a lot in the past, but we’re obsessed with hiring[ cracked engineers](https://posthog.com/founders/cracked-manifesto), and have specific ideas as to[ what makes a 10x engineer](https://newsletter.posthog.com/p/beyond-the-10x-engineer).
+We’ve written about this a lot in the past, but we’re obsessed with hiring [cracked engineers](/founders/cracked-manifesto), and have specific ideas as to [what makes a 10x engineer](https://newsletter.posthog.com/p/beyond-the-10x-engineer).
 
 For us ‘cracked’ means engineers who take extreme ownership of ideas, who are always optimistic, who make people feel excited and energized, are authentic, and who apply themselves to their craft.
 
 There’s no single definition for this, but you should be able to define and articulate what makes you cracked.
 
 ---
-## **5) Be available as soon as possible**
+## 5) Be available as soon as possible
 
 This is a hard truth, but availability can make or break your chances.
 
@@ -159,7 +160,7 @@ Outside very senior or critical roles, many startups can’t wait for your three
 Be honest about your availability up front – and, if you can, be available within weeks, not months.
 
 ---
-## **Good reads 📖**
+## Good reads 📖
 
 * **[Why doesn't advice work?](https://dynomight.net/advice/)** – Simple question, complex answer.
 * **[If AI chatbots are the future, I hate it](https://www.jeffgeerling.com/blog/2024/if-ai-chatbots-are-future-i-hate-it) **– Wi-Fi and internet aren’t the same thing!
@@ -168,6 +169,6 @@ Be honest about your availability up front – and, if you can, be available wit
 
 _Words by James Temperton, who hates LinkedIn._
 
-[^1]Being a great human doesn’t mean being an effervescent personality – you don’t need to be the life and soul of the party. Being reliable and easy to work with is way less common than you might imagine. If you struggle getting referrals from former colleagues, be really honest about why that could be. More companies don’t have a culture of direct, honest feedback, which can obscure problems. It’s why we[ value trust and feedback](https://posthog.com/handbook/values#4-trust-and-feedback-over-process) so much.
+[^1]: Being a great human doesn’t mean being an effervescent personality – you don’t need to be the life and soul of the party. Being reliable and easy to work with is way less common than you might imagine. If you struggle getting referrals from former colleagues, be really honest about why that could be. More companies don’t have a culture of direct, honest feedback, which can obscure problems. It’s why we[ value trust and feedback](https://posthog.com/handbook/values#4-trust-and-feedback-over-process) so much.
 
 
