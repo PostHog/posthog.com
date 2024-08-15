@@ -806,8 +806,8 @@ const PricingExperiment = ({
                             </p>
 
                             <p>
-                                <strong>You don't need to compare prices.</strong> We are the cheapest solution for each
-                                product we offer.
+                                <strong>You don't even need to compare prices.</strong> We are the cheapest solution for
+                                each product we offer.
                             </p>
 
                             <div className="inline-block">
