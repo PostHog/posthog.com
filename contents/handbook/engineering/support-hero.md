@@ -89,7 +89,8 @@ You've got a couple of options.  By order of quickness:
 1. Use the VIP Lookup Bot:
  
     In any Slack channel, type `@VIP Lookup Bot [Customer]` (without the brackets.) 
-    'Customer' can be the organization name (case-sensitive), or their organization ID.
+    'Customer' can be the organization name (case-sensitive), or their organization ID. It does work, but the results take up to 30s to load. 
+
 2. In ZenDesk: 
 
    Click the org name near the upper-left of the ticket. The left sidebar opens. 
