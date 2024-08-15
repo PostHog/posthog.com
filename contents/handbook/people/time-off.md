@@ -33,6 +33,10 @@ To book a day off:
 
 The same rules as above apply regardless of the holiday length and type. Sick leave and any other types of time off should also be booked in the same way. 
 
+### How to cancel time off
+
+If you decide to cancel your holiday, drop a message in #team-people-and-ops and a member of the team will cancel the holiday for you, as only admins can delete holidays. 
+
 ## Flexible working
 
 We operate on a trust basis and we don't count hours or days worked. We trust everyone to manage their own time. 

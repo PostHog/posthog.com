@@ -1881,6 +1881,10 @@ export const docsMenu = {
                             name: 'Migrate from Pendo',
                             url: '/docs/migrate/pendo',
                         },
+                        {
+                            name: 'Migrate from Statsig',
+                            url: '/docs/migrate/statsig',
+                        },
                     ],
                 },
                 {
@@ -2611,6 +2615,15 @@ export const docsMenu = {
                     name: 'Overview',
                     url: '/docs/cdp',
                     icon: 'IconHome',
+                },
+                {
+                    name: 'Realtime destinations',
+                    url: '/docs/cdp/destinations',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                    icon: 'IconLive',
                 },
                 {
                     name: 'Batch exports',
