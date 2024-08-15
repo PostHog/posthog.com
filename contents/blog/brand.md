@@ -1,5 +1,5 @@
 ---
-date: 2023-06-25
+date: 2024-08-15
 title: How to brand your startup so it isn't boring
 rootPage: /blog
 sidebar: Blog
@@ -25,11 +25,11 @@ Wrong.
 
 This was the most important conversation Tim and I had before launching PostHog.
 
-It was going to be free on launch day, but users would still be wary of wasting their time deploying a badly supported, broken, or insecure piece of open-source software. All risks people might associate with software produced by a two-person startup.
+It was going to be free on launch day, but we knew users would still be wary of wasting their time deploying a piece of software produced by a two-person startup. 
 
 Being open source helped. People could inspect the code for themselves, but we concluded the majority would turn away _at_ the website, the docs, and the readme before glancing at a line of code.
 
-That's why we set out to create a website and brand that felt both unique and intentional.
+That's why we set out to create a website and brand that felt both unique and intentional, including a [public handbook](/handbook) that explained what we were doing, why, and how.
 
 As a counter example, an obviously templated or one-pager style website signals:
 
@@ -54,15 +54,15 @@ The first is very clear. We started with it when this is what we had.
 
 As we became more well-known, and as we added lots of products into our platform, we shifted to the latter. This is a better reflection of _why_ our company exists – it is more than just a piece of software. 
 
-We introduced it because the company was getting larger, and the scope of what we were setting out to achieve had increased. We now have 8+ products, and we produce a ton of content to help engineers build better products. 
+We introduced it because the company was getting larger, and the scope of what we were setting out to achieve had expanded. We now have 8+ products, and we produce a ton of content to help engineers build better products. 
 
 The need for total clarity wasn't as important later on, relative to the need for us standing for something. It was necessary to start small then widen.
 
 ## You need to create your brand for someone...
 
-One of the most important things we did was to create an Ideal Customer Profile. When we launched, we weren't sure quite how focused we'd need to be on engineers vs product managers.
+One of the most important things we did was to [create an Ideal Customer Profile](/newsletter/ideal-customer-profile-framework).
 
-We realized, after launching, that we could go all in on engineers and technical founders, who make up around 80% of our users. Our brand and product has become more oriented towards these users as a result.
+When we launched, we weren't sure quite how focused we'd need to be on engineers vs product managers. We realized, after launching, that we could go all in on engineers and technical founders, who make up around 80% of our users. Our brand and product has become more oriented towards these users as a result.
 
 Here are some specific ways we got more specific for this audience after we clarified it:
 
@@ -70,11 +70,11 @@ Here are some specific ways we got more specific for this audience after we clar
 
 * We added a "you'll hate PostHog if" section to our homepage, which calls out many pet hates that engineers have when trying to buy, install and use more traditionally-targeted software that they are made to implement.
 
-* We chose a more flexible pricing model – it's far more complex, but it's much better value. We felt more technical people would be happier than non-technical people coping with more complexity to get a better deal. We want developers to be able to manage their spend with us across our eight products, not a "single price".
+* We chose a more flexible pricing model – it's far more complex, but it's [much better value](/blog/analytics-pricing). We felt more technical people would be happier than non-technical people coping with more complexity to get a better deal. We want developers to be able to manage their spend with us across our eight products, not a "single price".
 
-* In the product, we worked on SQL access, so technical people could get to the underlying data to debug things.
+* In the product, we worked on [SQL access](/docs/hogql), so technical people could get to the underlying data to debug things.
 
-* We redesigned our entire UX to have higher information density, dark mode and more flexibility.
+* We [redesigned our entire UX](/blog/posthog-as-a-dev-tool) to have higher information density, dark mode and more flexibility.
 
 ## ...but your brand must be a reflection of _you_
 
@@ -94,7 +94,7 @@ And yes we kept the open-source product, though we stress it's for hobbyists bec
 
 ## Your brand isn't just your website...
 
-...it's how your company is experienced by others. Your _company_ is your product. For example, it's:
+...it's how your company is experienced by others. Your _company_ is your product and:
 
 * How much you invest in each function in your company relative to each other.
 * What you look for when you hire people, and it's the process you use to hire with.
@@ -109,7 +109,7 @@ And yes we kept the open-source product, though we stress it's for hobbyists bec
 * How your social media works.
 * How helpful you are to random founders that message you.
 * The marketing channels you pick.
-* It's what you talk about in your blog. I'm writing this piece for brand reasons (transparency / equipping developers with knowledge to build successful products), nothing else. I don't care or try to generate conversions from this post, I just want to leave an impression on people. And it's who I am – I'm writing this to pass the time on a long plane journey.
+* What you talk about in your blog. I'm writing this piece for brand reasons (transparency / equipping developers with knowledge to build successful products), nothing else. I don't care or try to generate conversions from this post, I just want to leave an impression on people. And it's who I am – I'm writing this to pass the time on a long plane journey.
 
 ## You can't 80:20 everything
 
@@ -117,25 +117,25 @@ A lot of design or brand work has an _increasing_ marginal return. This is becau
 
 So, if you're serious, go nuts on your brand. Go weirdly hard.
 
-To give you an example, we built a merch store:
+To give you an example, we built a [merch store](/merch):
 
-* We started with me emailing users for their address and size, ordering merch and having it delivered to my house, and me then posting it internationally to them.
+* We started with me emailing users for their address and size, ordering merch and having it delivered to my house, and me then posting it internationally to them. [Do things that don't scale](https://paulgraham.com/ds.html]!
 
-* Then we set up a store on Shopify – I just threw our logo onto an amusingly wide selection of items (PostHog shower curtain, anyone?) - it was cool to just have merch for sale and a way of giving it.
+* Next, we set up a store on Shopify. I just threw our logo onto an amusingly wide selection of items – PostHog shower curtain, anyone? It was cool to just have merch for sale and a way of giving it.
 
 * Then we created custom components and built it into our website directly, so it's perfectly integrated.
 
 * Then we booked a photo shoot and took custom photos of our team wearing everything.
 
-* Now we're working on limited editions of certain items to create collectible series of t shirts
+* Now we're working on limited editions of certain items to create collectible series of t-shirts
 
 Who knows what happens next!
 
-It's not the fact we did the above with our merch store (I know people reading may be tempted to copy) - this is one activity of hundreds that builds brand.
+This single thing is easy enough to copy, but it's just one activity among hundreds that builds a brand.
 
 ## Doesn't this imply doing everything to a really high standard and a ridiculous workload?
 
-Yes. You can be iterative with it, though. Not everything was amazing on day one, but we'll keep improving and tweaking everything over time.
+Yes. You can be iterative with it, though. Not everything was amazing on day one, but we keep improving and tweaking everything over time.
 
 So, get out there, and be bold
 
