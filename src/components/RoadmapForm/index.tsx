@@ -6,7 +6,7 @@ import { Select as TopicSelect } from 'components/Squeak/components/QuestionForm
 import dayjs from 'dayjs'
 import { useFormik } from 'formik'
 import { useUser } from 'hooks/useUser'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'components/Select'
 import RichText from 'components/Squeak/components/RichText'
 import Slider from 'components/Slider'
@@ -15,6 +15,7 @@ import Spinner from 'components/Spinner'
 import { IconPlus, IconX } from '@posthog/icons'
 import * as Yup from 'yup'
 import Toggle from 'components/Toggle'
+import qs from 'qs'
 
 const GitHubURLs = ({
     urls,
@@ -90,9 +91,60 @@ const ValidationSchema = (status?: Status) =>
     })
 
 const statusLabels = {
-    'in-progress': 'In progress',
-    complete: 'Complete',
-    'under-consideration': 'Under consideration',
+    'in-progress': 'In progress (WIP)',
+    complete: 'Complete (Changelog)',
+    'under-consideration': 'Under consideration (Roadmap)',
+}
+
+const Input = ({
+    label,
+    className = '',
+    ...other
+}: React.InputHTMLAttributes<HTMLInputElement> & { label: string }) => {
+    return (
+        <label className={`py-2 block ${className}`} htmlFor={other.id}>
+            {other.value && <div className="text-sm opacity-60 -mb-0.5 px-4">{label}</div>}
+            <input className="w-full p-0 px-4 border-0 bg-transparent" {...other} />
+        </label>
+    )
+}
+
+const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any) => void }) => {
+    const [profiles, setProfiles] = useState<any[]>([])
+    useEffect(() => {
+        const query = qs.stringify({
+            pagination: {
+                limit: 100,
+            },
+            filters: {
+                teams: {
+                    id: {
+                        $notNull: true,
+                    },
+                },
+            },
+        })
+        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
+            .then((res) => res.json())
+            .then(({ data }) => {
+                setProfiles(data)
+            })
+    }, [])
+
+    return (
+        <Select
+            placeholder="Author"
+            options={profiles.map((profile) => {
+                const name = [profile.attributes.firstName, profile.attributes.lastName].filter(Boolean).join(' ')
+                return {
+                    label: name,
+                    value: profile,
+                }
+            })}
+            value={value}
+            onChange={onChange}
+        />
+    )
 }
 
 export default function RoadmapForm({
@@ -128,6 +180,7 @@ export default function RoadmapForm({
             category: undefined,
             githubUrls: [''],
             dateCompleted: dayjs().format('YYYY-MM-DD'),
+            author: undefined,
         },
         onSubmit: async ({
             title,
@@ -141,6 +194,7 @@ export default function RoadmapForm({
             githubUrls,
             category,
             dateCompleted,
+            author,
         }) => {
             setLoading(true)
             try {
@@ -215,9 +269,9 @@ export default function RoadmapForm({
 
     return (
         <form onSubmit={handleSubmit} className="mt-2 mb-6 border-b border-light dark:border-dark pb-8">
-            <div className="bg-white dark:bg-accent-dark rounded-md border border-border dark:border-dark overflow-hidden">
+            <div className="bg-white dark:bg-accent-dark rounded-md border border-border dark:border-dark overflow-hidden grid grid-cols-2">
                 {status === 'complete' && (
-                    <div className="border-b border-border dark:border-dark">
+                    <div className="col-span-2">
                         <ImageDrop
                             image={values.featuredImage}
                             onDrop={(image) => setFieldValue('featuredImage', image)}
@@ -225,37 +279,43 @@ export default function RoadmapForm({
                         />
                     </div>
                 )}
-                {!hideStatusSelector && (
-                    <div className="border-b border-border dark:border-dark">
-                        <Select
-                            placeholder="Status"
-                            options={Object.keys(statusLabels).map((key) => ({
-                                label: statusLabels[key],
-                                value: key,
-                            }))}
-                            onChange={(status) => setStatus(status)}
-                            value={status}
-                        />
-                    </div>
-                )}
+                <div>
+                    <Select
+                        placeholder="Status"
+                        options={Object.keys(statusLabels).map((key) => ({
+                            label: statusLabels[key],
+                            value: key,
+                        }))}
+                        onChange={(status) => setStatus(status)}
+                        value={status}
+                    />
+                </div>
                 {status === 'complete' && (
-                    <input
+                    <Input
+                        label="Date"
                         name="dateCompleted"
                         value={values.dateCompleted}
                         onChange={handleChange}
                         placeholder="Date"
-                        className="w-full px-4 py-2 border-0 border-b border-border dark:border-dark bg-transparent"
                         type="date"
                     />
                 )}
-                <div className="border-b border-border dark:border-dark">
+                <div>
                     <TeamSelect value={values.team} onChange={(team) => setFieldValue('team', team)} />
                 </div>
+                <div>
+                    <ProfileSelect value={values.author} onChange={(profile) => setFieldValue('author', profile)} />
+                </div>
                 {status === 'complete' && (
-                    <TopicSelect label="Topic" value={values.topic} setFieldValue={setFieldValue} />
+                    <TopicSelect
+                        label="Product or feature"
+                        value={values.topic}
+                        setFieldValue={setFieldValue}
+                        className="!border-0"
+                    />
                 )}
                 {status === 'complete' && (
-                    <div className="border-b border-border dark:border-dark">
+                    <div>
                         <Select
                             placeholder="Type"
                             options={[
@@ -271,19 +331,24 @@ export default function RoadmapForm({
                         />
                     </div>
                 )}
-                <input
+                <Input
+                    label="Title"
                     name="title"
                     value={values.title}
                     onChange={handleChange}
                     placeholder="Title"
-                    className="w-full px-4 py-2 border-b border-border dark:border-dark bg-transparent"
+                    id="title"
+                    className="col-span-2"
                 />
-                <RichText
-                    initialValue={initialValues.body}
-                    setFieldValue={setFieldValue}
-                    values={values}
-                    maxLength={524288}
-                />
+                <div className="col-span-2">
+                    <RichText
+                        initialValue={initialValues.body}
+                        setFieldValue={setFieldValue}
+                        values={values}
+                        maxLength={524288}
+                        label="Details"
+                    />
+                </div>
                 {(status === 'in-progress' || status === 'under-consideration') && (
                     <GitHubURLs
                         urls={values.githubUrls}
@@ -295,7 +360,7 @@ export default function RoadmapForm({
                     />
                 )}
                 {status !== 'under-consideration' && (
-                    <div className="py-2 border-t border-border dark:border-dark px-2">
+                    <div className="py-2 px-2">
                         <Slider className="space-x-1">
                             {status === 'in-progress' && (
                                 <Toggle
