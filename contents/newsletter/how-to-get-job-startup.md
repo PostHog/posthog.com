@@ -45,9 +45,9 @@ And please, no profile pictures.
 ![Juraj's cover letter](https://res.cloudinary.com/dmukukwp6/image/upload/juraj1_e95d0bc63b.png
 )
 
-We did the math and, on average, we spend less than one minute reviewing each application we receive. Automated or junk applications (hello, ChatGPT) will be discarded in less than five seconds.
+We did the math and, on average, we spend less than one minute reviewing each application we receive. Automated or junk applications (hello, ChatGPT) are discarded in less than five seconds.
 
-Truly great applications will be read for up to five minutes.
+Truly great applications are read for up to five minutes.
 
 ### **Cover letter tips**
 
@@ -127,7 +127,7 @@ Here’s what to look for:
 
 * **The job description is fun to read.** No startup should be writing stodgy, corporate-esque job descriptions. This helps you better understand the company culture before you (hopefully) receive an offer.
 
-![An Apple job ad](https://res.cloudinary.com/dmukukwp6/image/upload/apple_ad_b599fe7416.png)
+![An Apple job ad](https://res.cloudinary.com/dmukukwp6/image/upload/apple_ad_nb_d0514b4c5a.png)
 
 Beyond that, research the company:
 
@@ -136,7 +136,7 @@ Beyond that, research the company:
 * Use Crunchbase to dig into the company's investors and their track record.
 * Do the same for the founder or founders. Are they first-timers, or have they got previous exits? If they’re first-timers, what did they do before founding a startup? 
 
-![A PostHog job ad](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ad_5cdcb2f395.png)
+![A PostHog job ad](https://res.cloudinary.com/dmukukwp6/image/upload/ph_ad_nb_0c5ce93b85.png)
 
 This can help you find high-potential companies, and give you more context to shine during the interview stage.
 
