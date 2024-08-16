@@ -19,6 +19,7 @@ If you are not sure how to get started, we have written many great articles over
 
 - [An engineer’s guide to talking to users](https://posthog.com/newsletter/talk-to-users)
 - [10x engineers talk to users](https://posthog.com/product-engineers/10x-engineers-do-user-interviews)
+- [User feedback](https://posthog.com/handbook/product/user-feedback)
 
 ### Running surveys
 
