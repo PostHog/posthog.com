@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Statsig is a multi-product feature flag, experimentation, and analytics platform. This means going from Statsig to PostHog requires migrating data from each of the different products. 
+Statsig is a multi-product feature flag, experimentation, and analytics platform. This means going from Statsig to PostHog requires migrating data from each product. 
 
 This guide walks through getting data from Statsig, converting it to the PostHog format, and using it to create or capture data in PostHog. 
 
@@ -16,7 +16,7 @@ PostHog and Statsig have many of the same features and concepts, but different n
 
 - Dynamic configs are slightly different. They are a key that returns multiple different values depending on the targeting rules. To match this functionality in PostHog, you can use a multi-variant feature flag with JSON payloads and rely on “optional overrides” to target the specific variant.
 
-- Both primarily rely on a combination of rules and user ID to target flags. Statsig also enables targeting by tags. You can [recreate this functionality](/tutorials/group-page-machine-flags) in PostHog by using person properties to set “tags” on users or groups.
+- Both primarily rely on a combination of rules and user IDs to target flags. Statsig also enables targeting by tags. You can [recreate this functionality](/tutorials/group-page-machine-flags) in PostHog by using person properties to set “tags” on users or groups.
 
 Learn more about how they compare in our [PostHog vs Statsig comparison](/blog/posthog-vs-statsig).
 
@@ -99,7 +99,7 @@ for gate in gates:
   ).json()
 ```
 
-Once migrated, you can go into each flag to set the rules for targeting and enable or rollout the flag. You can also replace your `statsig.checkGate` calls with `posthog.isFeatureEnabled` ones.
+Once migrated, you can go into each flag to set the targeting rules and enable or rollout the flag. You can also replace your `statsig.checkGate` calls with `posthog.isFeatureEnabled` ones.
 
 ## Migrating dynamic configs from Statsig
 
@@ -197,10 +197,9 @@ Once done, you can replace your `statsig.getConfig` call with a `posthog.getFeat
 
 > **Note:** As of writing this guide, Statsig does not have an endpoint for listing parameter stores, but you would follow a similar process to migrate them.
 
-
 ## Migrating experiments from Statsig
 
-Experiments between Statsig and PostHog are the most similar of the data. Because they can be multi-variant and can have rules, we convert them in a similar way to dynamic configs. Some notes:
+Experiments between Statsig and PostHog are the most similar of the migrated data. Because they can be multi-variant and can have rules, we convert them in a similar way to dynamic configs. Some notes:
 
 - PostHog requires the control key to be `control`, so we need to convert whatever group is set as the control group in Statsig to the `control` key.
 
@@ -285,7 +284,7 @@ for exp in experiments:
   ).json()
 ```
 
-Once created, modify the goal and secondary metrics as well the targeting to fit your needs and then launch your experiment.
+Once created, modify the goal and secondary metrics as well as the targeting to fit your needs and then launch your experiment.
 
 ## Migrating events from Statsig
 
@@ -412,3 +411,5 @@ for event in events:
     timestamp=ph_timestamp
   )
 ```
+
+This script may need modification depending on the structure of your Statsig data, but it gives you a start. 

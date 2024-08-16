@@ -8,12 +8,15 @@ import MigrationWarning from "./_snippets/migration-warning.mdx"
 
 <MigrationWarning />
 
+This guide is relevant to users wanting to migrate both:
+
+1. From a self-hosted PostHog instance to PostHog Cloud.
+2. Between PostHog Cloud regions (e.g. US -> EU Cloud).
+
 ## Requirements
 
--   An existing project, either:
-    - on PostHog cloud.
-    - on a self-hosted PostHog instance running at least `1.30.0`. For upgrade instructions, take a look at [this guide](/docs/runbook/upgrading-posthog).
--   A new project on [PostHog Cloud](/docs/getting-started/start-here).
+1. An existing project, either on PostHog Cloud or on a self-hosted instance running at least `1.30.0`. For upgrade instructions, take a look at [this guide](/docs/runbook/upgrading-posthog).
+2. A [new PostHog Cloud project](https://us.posthog.com/signup) hosted in the region of your choice.
 
 ## Approach
 
@@ -21,20 +24,20 @@ This migration has 3 steps:
 
 1. [Migrate your metadata](#migrate-your-metadata) (projects, dashboards, insights, actions, cohorts, feature flags, experiments, annotations).
 
-2. [Migrate your events](#migrate-your-events), this also creates the necessary person, person distinct ID, and related records.
+2. [Migrate your events](#migrate-your-events). Texthis also creates the necessary person, person distinct ID, and related records.
 
-3. [Switch tracking in your product](#switching-tracking-in-you-product) to set-up replication from the old project if needed and to start sending events to the new project.
+3. [Switch tracking in your product](#switching-tracking-in-you-product) to set up replication from the old project if needed and to start sending events to the new project.
 
 ## Migrate your metadata
 
 To migrate metadata like projects, dashboards, insights, actions, feature flags, and more, use the [PostHog migrate metadata script](https://github.com/PostHog/posthog-migrate-meta). This requires:
 
 1. Installing TypeScript and `ts-node`. You can do this by running `npm install -g typescript ts-node` in your terminal.
-2. Your old instance project API key.
-3. Your new cloud instance project API key, which you can get from your [project settings](https://app.posthog.com/project/settings). 
+2. Your old instance personal API key with read access to the project.
+3. Your new cloud instance personal API key with write access to the project, which you can get from your [project settings](https://us.posthog.com/settings/user-api-keys). 
 
 > **Note:** This process has the following caveats:
-> 1. Every object's "created by" information will appear as if it was created by you.
+> 1. Every object's "created by" information will appear as if it was created by the user who created the personal API key.
 > 2. Every object's "created at" information will appear as if it was created at the time you ran this script.
 
 1. Clone the repo and cd into it
@@ -48,15 +51,15 @@ To migrate metadata like projects, dashboards, insights, actions, feature flags,
     ts-node index.ts --source [posthog instance you want to migrate from] --sourcekey [personal api key for that instance] --destination [posthog instance you want to migrate to.] --destinationkey [personal api key for destination instance]
     ```
 
-For more information on the options see the [repo's readme](https://github.com/PostHog/posthog-migrate-meta)
+For more information on the options see the [migrate metadata repo's readme](https://github.com/PostHog/posthog-migrate-meta).
 
 ## Migrate your events to Cloud
 
-Before you start, disable all the apps in the destination cloud project (e.g. GeoIP). Keeping these enabled may change the events you are migrating.
+Before you start, transformations and filtering apps in the destination cloud project (e.g. GeoIP). Keeping these enabled may change the events you are migrating.
 
 > For more details about historical migrations, see our [migration docs](/docs/migrate).
 
-### From self-hosted to Cloud
+### Migrating events from self-hosted to Cloud
 
 To migrate your events, you can read data directly from your ClickHouse cluster and ingest the data with the Python library using our [self-hosted migration tool](https://github.com/PostHog/posthog-migration-tools).
 
@@ -77,23 +80,23 @@ python3 ./migrate.py \
    --clickhouse-password some-password \
    --clickhouse-database posthog \
    --team-id 1234 \
-   --posthog-url https://app.posthog.com \
+   --posthog-url https://us.posthog.com \
    --posthog-api-token "abx123" \
    --start-date 2023-06-18T13:00:00Z \
    --end-date 2023-06-18T13:10:00 \
    --fetch-limit 10000
 ```
 
-This script prints a "cursor" in the case the migration fails. It can be used to resume from where it got to with by adding the `--cursor` argument to the command above.
+This script prints a "cursor" in case the migration fails. It can be used to resume from where it got to by adding the `--cursor` argument to the command above.
 
-```bash:
+```bash
 python3 ./migrate.py \
    --clickhouse-url https://some.clickhouse.cluster:8443 \
    --clickhouse-user default \
    --clickhouse-password some-password \
    --clickhouse-database posthog \
    --team-id 1234 \
-   --posthog-url https://app.posthog.com \
+   --posthog-url https://us.posthog.com \
    --posthog-api-token "abx123" \
    --start-date 2023-06-18T13:00:00Z \
    --end-date 2023-06-18T13:10:00 \
@@ -103,38 +106,38 @@ python3 ./migrate.py \
 
 > **Notes:**
 > - This script adds a `$lib` property of `posthog-python`, overriding any `$lib` property already set.
-> - If the script fails for some reason, just run it again with the latest cursor. There are some transient issues that can happen that are solved by re-running the script.
+> - If the script fails for some reason, just run it again with the latest cursor. Some transient issues are solved by re-running the script.
 
-### Between Cloud instances (e.g. US -> EU Cloud)
+### Migrating events between Cloud instances (e.g. US -> EU Cloud)
 
-You must raise a [support ticket in-app](https://app.posthog.com/home#supportModal) for the PostHog team to do this migration for you. This option is **only available to customers on the team or enterprise plan** as it requires significant engineering time.  
+You must raise a [support ticket in-app](https://us.posthog.com/home#supportModal) with the **Data pipelines** topic for the PostHog team to do this migration for you. This option is **only available to customers on the team or enterprise plan** as it requires significant engineering time.  
 
 ## Switching tracking in your product
 
-To make sure your person properties get the latest values, don't switch over tracking until historical events have been migrated (we'll keep a daily export in the old project for the incoming events, so you don't need to worry about missing any events).
+Now that we've migrated our events, the next step is to switch over tracking within your product to direct any new events to your new PostHog Cloud instance.
 
-Now that we've migrated our events, the next step is to switch over tracking within your product to direct any new events to your new PostHog cloud instance.
+> **Note:** To make sure your person properties get the latest values, don't switch over tracking until historical events have been migrated.
 
 1. Re-enable any apps that you disabled earlier (e.g. GeoIP).
 
-2. Begin swapping out your Project API key and instance address within all the areas of your product that you track. Once done, events using the new API key will go directly to your Cloud instance.
+2. Begin swapping out your project API key and instance address in the product or site. Once done, events using the new API key and host will go to your new Cloud instance.
 
-## Migrating your custom apps
+## Migrating your custom transformations or destinations
 
-If the app was filtering or transforming events before ingestion:
+For custom transformations:
 
-1. Check if we already have an app that does what you need (fastest option). You can see the list of apps [here](/docs/cdp), look for ingestion filtering and event transformation.
+1. Check if we already have a transform that does what you need (fastest option). You can see the list of transformations [here](/docs/cdp).
 
-2. Move this logic your app before you send the event (also fast).
+2. Move this logic to your app before you send the event (also fast).
 
-3. If you can make your app generalizable enough that others can benefit, [submit your app](/docs/apps/build/tutorial#submitting-your-app) to the store. To do this, convert anything specific to your configuration into a `plugin.json` config value.
+3. If you can make your app generalizable enough that others can benefit, [submit your app](/docs/cdp/build/tutorial#submitting-your-transformation-or-destination) to the store. To do this, see the [build docs](/docs/cdp/build/tutorial).
 
-If the app is used to send events to a custom destination:
+For custom destinations:
 
-1. Check to see if we already have an app or batch export that does what you need (fastest option). You can see the list of apps [here](/docs/cdp), look for batch exports and destinations. 
+1. Check to see if we already have a destination or batch export that does what you need (fastest option). You can see the list of destinations and batch exports [here](/docs/cdp).
 
-2. Convert your app to work as a webhook (also fast). We are soon releasing a webhook destination. You can subscribe for updates on the [roadmap](https://github.com/PostHog/posthog/issues/13989)
+2. Convert your app to work as a webhook (also fast). These are currently in beta. See the [details here](https://github.com/PostHog/posthog/issues/16976).
 
-3. If you can make your app generalizable enough that others can benefit then [submit your app](/docs/apps/build/tutorial#submitting-your-app) to the store. To do this, you must convert anything specific to your configuration into a `plugin.json` config value
+3. If you can make your app generalizable enough that others can benefit, [submit your app](/docs/cdp/build/tutorial#submitting-your-transformation-or-destination) to the store. To do this, see the [build docs](/docs/cdp/build/tutorial).
 
 If the options above don't work and you were previously paying a substantial amount self-hosting, then email us at [sales@posthog.com](mailto:sales@posthog.com) with a link to the public GitHub repo and we can see if it's appropriate as a private cloud app.
