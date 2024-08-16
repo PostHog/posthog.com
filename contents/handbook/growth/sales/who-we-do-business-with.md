@@ -52,6 +52,6 @@ We must comply with these sanctions, so in August 2024 we contacted impacted ind
 - We block access to PostHog for all individuals in Russia, based on their IP
 - We terminated paid accounts with all customers located in Russia
 
-Under the new sanctions organizations based in Russia but controlled by US citizens would be exempt, but individuals based in Russia are subject to sanctions even if working for US-based organization.
+There are some exemptions to the sanctions including any service to any entity located in the Russian Federation that is owned or controlled, directly or indirectly, by a U.S. person.
 
 > If you believe you've been incorrectly impacted by our response to these sanctions, or have further questions about them, please contact [sales@posthog.com](mailto:sales@posthog.com) so we can investigate.
