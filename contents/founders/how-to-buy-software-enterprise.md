@@ -190,7 +190,7 @@ Your salesperson will dump you the microsecond the deal is closed, so you'll now
 
 As you go through this process, you will probably encounter one or more of these people. Here are some quick tips on how to deal with them.
 
-![eight-bosses](https://res.cloudinary.com/dmukukwp6/image/upload/v1723719752/posthog.com/contents/eight-bosses-enterprise-software.png)
+![eight-bosses](https://res.cloudinary.com/dmukukwp6/image/upload/colour_without_background_160b0b3a3d.png)
 
 **The procurement person who actually has a personality if you get to know them:**
 
