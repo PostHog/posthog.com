@@ -10,7 +10,7 @@ import MigrationWarning from "./_snippets/migration-warning.mdx"
 
 Migrating from Amplitude is a two step process:
 
-1. Export your data from Amplitude using the organizations settings export, [Amplitude Export API](https://amplitude.com/docs/apis/analytics/export), or the S3 export.
+1. Export your data from Amplitude using the organization settings export, [Amplitude Export API](https://amplitude.com/docs/apis/analytics/export), or the S3 export.
 
 2. [Import data into PostHog](/docs/migrate) using PostHog's [Python SDK](/docs/libraries/python) or [`batch` API](/docs/api/capture) with the `historical_migration` option set to `true`. Other libraries don't support historical migrations yet.
 
@@ -75,7 +75,7 @@ If your data exceeds Amplitude's export size limitation, you can use [their S3 e
 
 ## Importing Amplitude data into PostHog
 
-Amplitude exports data in zipped archive of JSON files. To get this data into PostHog, you need to:
+Amplitude exports data in a zipped archive of JSON files. To get this data into PostHog, you need to:
 
 1. Unzip and read the data
 2. Convert the events from Amplitude's schema to PostHog's
@@ -98,11 +98,11 @@ Some conversions needed include:
 - Changing `event_time` to an ISO 8601 formatted `timestamp`
 - Using `$set` and `$set_once` for person properties
 
-Converting the data ensures that it matches the data PostHog captures and can be integrated into analysis.
+Converting the data ensures that it matches the data PostHog captures and can be integrated in analysis.
 
 ### Example Amplitude migration script
 
-Below is a script that gets Amplitude data from the export folder, unzips it, converts the data to PostHog's schema, and then captures it in PostHog. It gives you a start, but likely needs to be modified to fit your infrastucture and data structure.
+Below is a script that gets Amplitude data from the export folder, unzips it, converts the data to PostHog's schema, and then captures it in PostHog. It gives you a start, but likely needs to be modified to fit your infrastructure and data structure.
 
 ```python
 from posthog import Posthog
@@ -211,9 +211,11 @@ folder_name = '609539'
 get_entries_from_folder_and_capture(folder_name)
 ```
 
+This script may need modification depending on the structure of your Amplitude data, but it gives you a start.
+
 ### Aliasing device IDs to user IDs
 
-In addition to capturing the events, we want to tie users' both before and after login. For Amplitude, events before and after login look a bit like this:
+In addition to capturing the events, we want to combine anonymous and identified users. For Amplitude, events rely on the device ID before identification and the user ID after:
 
 | Event | User ID | Device ID |
 |-------|---------|-----------|
@@ -221,7 +223,7 @@ In addition to capturing the events, we want to tie users' both before and after
 | Login | 123 | 551dc114-7604-430c-a42f-cf81a3059d2b |
 | Purchase | 123 | 551dc114-7604-430c-a42f-cf81a3059d2b |
 
-We want to attribute "Application installed" to the user with ID 123, so we need to also call [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user):
+We want to attribute "Application installed" to the user with ID 123, so we need to also call [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) with both the device ID and user ID:
 
 ```python
 posthog = Posthog(
