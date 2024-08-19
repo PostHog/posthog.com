@@ -4713,6 +4713,11 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
+"@types/web@^0.0.154":
+  version "0.0.154"
+  resolved "https://registry.yarnpkg.com/@types/web/-/web-0.0.154.tgz#adcdc4a8192037029fdf582e1718bb64c8bbf181"
+  integrity sha512-Tc10Nkpbb8AgM3iGnrvpKVb6x8pzrZpMCPqMJe8htXoEdNDKojEevNAkCjxkjCLZF2p1ZB+gknAwdbkypxwxKg==
+
 "@types/webpack-env@^1.16.0":
   version "1.18.0"
   resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.18.0.tgz#ed6ecaa8e5ed5dfe8b2b3d00181702c9925f13fb"
@@ -18890,11 +18895,12 @@ postcss@^8.4.23:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-posthog-js@1.155.4:
-  version "1.155.4"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.155.4.tgz#611a63cf95b8fa908b3b50b1043cbdcb4c2a712b"
-  integrity sha512-suxwAsmZGqMDXJe/RaCKI3PaDEHiuMDDhKcJklgGAg7eDnywieRkr5CoPcOOvnqTDMnuOPETr98jpYBXKUwGFQ==
+posthog-js@1.155.5:
+  version "1.155.5"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.155.5.tgz#e94ee9e2d815adb32da5f6b9293a1ed776815f51"
+  integrity sha512-XWYfzoSWA6HM8HHQmdVnN2EPIkW6zk255U80JRsARER7rcdV6Kg3cbRk379k2QgP2iyfPT2lry65ca+BFchalg==
   dependencies:
+    "@types/web" "^0.0.154"
     fflate "^0.4.8"
     preact "^10.19.3"
     web-vitals "^4.0.1"
