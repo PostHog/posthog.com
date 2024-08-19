@@ -29,7 +29,8 @@ const GitHubURLs = ({
     placeholder?: string
 }) => {
     return (
-        <div className="py-2 border-t border-border dark:border-dark px-2">
+        <div className="p-4 border-t border-border dark:border-dark col-span-2">
+            <label className="text-sm opacity-60 block mb-2">GitHub URLs</label>
             <ul className="list-none m-0 p-0 grid gap-y-2">
                 {urls.map((url, index) => {
                     return (
@@ -269,7 +270,7 @@ export default function RoadmapForm({
 
     return (
         <form onSubmit={handleSubmit} className="mt-2 mb-6 border-b border-light dark:border-dark pb-8">
-            <div className="bg-white dark:bg-accent-dark rounded-md border border-border dark:border-dark overflow-hidden grid grid-cols-2">
+            <div className="bg-white dark:bg-accent-dark rounded-md border border-border dark:border-dark overflow-hidden grid grid-cols-2 [&>*]:border-border [&>*]:dark:border-dark">
                 {status === 'complete' && (
                     <div className="col-span-2">
                         <ImageDrop
@@ -279,7 +280,7 @@ export default function RoadmapForm({
                         />
                     </div>
                 )}
-                <div>
+                <div className="border-r border-b">
                     <Select
                         placeholder="Status"
                         options={Object.keys(statusLabels).map((key) => ({
@@ -298,21 +299,24 @@ export default function RoadmapForm({
                         onChange={handleChange}
                         placeholder="Date"
                         type="date"
+                        className="border-b"
                     />
                 )}
-                <div>
+                <div className="border-r border-b">
                     <TeamSelect value={values.team} onChange={(team) => setFieldValue('team', team)} />
                 </div>
-                <div>
+                <div className={status === 'complete' ? 'border-b' : 'col-span-2'}>
                     <ProfileSelect value={values.author} onChange={(profile) => setFieldValue('author', profile)} />
                 </div>
                 {status === 'complete' && (
-                    <TopicSelect
-                        label="Product or feature"
-                        value={values.topic}
-                        setFieldValue={setFieldValue}
-                        className="!border-0"
-                    />
+                    <div className="border-r">
+                        <TopicSelect
+                            label="Product or feature"
+                            value={values.topic}
+                            setFieldValue={setFieldValue}
+                            className="!border-0"
+                        />
+                    </div>
                 )}
                 {status === 'complete' && (
                     <div>
@@ -338,7 +342,7 @@ export default function RoadmapForm({
                     onChange={handleChange}
                     placeholder="Title"
                     id="title"
-                    className="col-span-2"
+                    className="col-span-2 border-y"
                 />
                 <div className="col-span-2">
                     <RichText
@@ -360,24 +364,25 @@ export default function RoadmapForm({
                     />
                 )}
                 {status !== 'under-consideration' && (
-                    <div className="py-2 px-2">
-                        <Slider className="space-x-1">
-                            {status === 'in-progress' && (
-                                <Toggle
-                                    checked={values.betaAvailable}
-                                    onChange={(checked) => setFieldValue('betaAvailable', checked)}
-                                    label="Beta available"
-                                />
-                            )}
-                            {status === 'complete' && (
+                    <div className="p-4 border-t col-span-2">
+                        <label className="text-sm opacity-60 block mb-2">Options</label>
+                        {status === 'in-progress' && (
+                            <Toggle
+                                checked={values.betaAvailable}
+                                onChange={(checked) => setFieldValue('betaAvailable', checked)}
+                                label="Beta available"
+                            />
+                        )}
+                        {status === 'complete' && (
+                            <div>
                                 <Toggle
                                     checked={values.milestone}
                                     onChange={(checked) => setFieldValue('milestone', checked)}
                                     label="Show on homepage"
                                     tooltip='Adds roadmap item to "We ship weirdly fast" section on homepage'
                                 />
-                            )}
-                        </Slider>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
