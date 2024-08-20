@@ -257,7 +257,6 @@ export default function ContactSales({ location }) {
                                                 value: 'BAA for HIPAA',
                                             },
                                         ],
-                                        required: true,
                                     },
                                     {
                                         label: 'What do you want to talk about on the call?',
