@@ -45,17 +45,19 @@ This determines whether your flag is enabled. Disabled flags return `undefined` 
 
 ### Persisting feature flags across authentication steps
 
-> This is only relevant if your feature flag is shown to both logged out AND logged in users.
+> **Note:** This option introduces trade-offs that are not worthwhile for the majority of our users.
+
+> **Note:** This is only relevant if your feature flag is shown to both logged out AND logged in users.
 
 Feature flag values are calculated based on a user's properties. Since it's possible for a user to have different properties before and after login, they may receive different feature flag values before and after logging in.
 
 By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same. 
 
-There are trade-offs to enabling this:
+There are trade-offs to enabling this. In our experience, these tradeoffs are not worthwile for the majority of our users:
 
-1. It slows down the feature flag response.
-2. It disables [local evaluation](/docs/feature-flags/local-evaluation) of the feature flag.
-3. It disables [bootstrapping](/docs/feature-flags/bootstrapping) the feature flag.
+1. **Slower feature flag response:** Enabling this option introduces additional checks, which can slow down the response time when fetching feature flags.
+2. **Incompatible with [local evaluation](/docs/feature-flags/local-evaluation):** It is necessary to perform the additional checks on the PostHog servers.
+3. **Incompatible with [bootstrapping](/docs/feature-flags/bootstrapping):** Bootstrapping relies on local evaluation, which cannot correctly calculate persistent flag values.
 
 ### Served value
 
