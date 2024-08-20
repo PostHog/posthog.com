@@ -1359,7 +1359,7 @@ export const docsMenu = {
                     icon: 'IconShare',
                     children: [
                         {
-                            name: 'Managed Reverse Proxy',
+                            name: 'Managed reverse proxy',
                             url: '/docs/advanced/proxy/managed-reverse-proxy',
                         },
                         {
@@ -1383,7 +1383,7 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/nextjs',
                         },
                         {
-                            name: 'Next.js Middleware',
+                            name: 'Next.js middleware',
                             url: '/docs/advanced/proxy/nextjs-middleware',
                         },
                         {
