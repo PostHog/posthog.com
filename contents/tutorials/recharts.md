@@ -97,6 +97,8 @@ function App() {
 export default App
 ```
 
+> **Note:** This is a simplified approach and example. You shouldn't expose your personal API key on the client side as it has read access to private data. Instead, you should set up a server-side request with the personal API key to query PostHog.
+
 The page we end up with is just an ugly collection of non-aggregated data, but we'll fix that next. 
 
 ![Ugly data](https://res.cloudinary.com/dmukukwp6/image/upload/raw_5dac24d611.png)
