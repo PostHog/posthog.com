@@ -53,7 +53,7 @@ Feature flag values are calculated based on a user's properties. Since it's poss
 
 By enabling the option to persist feature flags across authentication, you ensure that the flag value remains the same. 
 
-There are trade-offs to enabling this. In our experience, these tradeoffs are not worthwile for the majority of our users:
+There are trade-offs to enabling this. In our experience, these tradeoffs are not worthwhile for the majority of our users:
 
 1. **Slower feature flag response:** Enabling this option introduces additional checks, which can slow down the response time when fetching feature flags.
 2. **Incompatible with [local evaluation](/docs/feature-flags/local-evaluation):** It is necessary to perform the additional checks on the PostHog servers.
