@@ -6,16 +6,18 @@ import { Select as TopicSelect } from 'components/Squeak/components/QuestionForm
 import dayjs from 'dayjs'
 import { useFormik } from 'formik'
 import { useUser } from 'hooks/useUser'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Select from 'components/Select'
 import RichText from 'components/Squeak/components/RichText'
-import Slider from 'components/Slider'
 import { CallToAction } from 'components/CallToAction'
 import Spinner from 'components/Spinner'
-import { IconPlus, IconX } from '@posthog/icons'
+import { IconChevronDown, IconPlus, IconX } from '@posthog/icons'
 import * as Yup from 'yup'
 import Toggle from 'components/Toggle'
 import qs from 'qs'
+import { AnimatePresence, motion } from 'framer-motion'
+import menu from '../../navs'
+import * as Icons from '@posthog/icons'
 
 const GitHubURLs = ({
     urls,
@@ -105,7 +107,7 @@ const Input = ({
     return (
         <label className={`py-2 block ${className}`} htmlFor={other.id}>
             {other.value && <div className="text-sm opacity-60 -mb-0.5 px-4">{label}</div>}
-            <input className="w-full p-0 px-4 border-0 bg-transparent" {...other} />
+            <input className="w-full p-0 px-4 border-0 bg-transparent outline-none" {...other} />
         </label>
     )
 }
@@ -114,6 +116,7 @@ const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any)
     const [profiles, setProfiles] = useState<any[]>([])
     useEffect(() => {
         const query = qs.stringify({
+            populate: ['avatar'],
             pagination: {
                 limit: 100,
             },
@@ -145,6 +148,172 @@ const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any)
             value={value}
             onChange={onChange}
         />
+    )
+}
+
+const getMenuItemFromTopicLabel = (label) => {
+    let menuItem
+    for (const item of menu) {
+        menuItem = item.children?.find((item) => item.name === label)
+        if (menuItem) {
+            break
+        }
+    }
+    return menuItem
+}
+
+const RangeSlider = ({
+    value,
+    onChange,
+    label,
+    min = 20,
+    max = 100,
+    className = '',
+}: {
+    value: string
+    onChange: (e: any) => void
+    label?: string
+    min?: number
+    max?: number
+    className?: string
+}) => {
+    return (
+        <div className={`mt-2 ${className}`}>
+            {label && <label className="block font-semibold">{label}</label>}
+            <input className="w-full" type="range" min={min} max={max} value={value} onChange={onChange} />
+        </div>
+    )
+}
+
+const SocialSharing = ({ values }) => {
+    const [open, setOpen] = useState(false)
+    const menuItem = useMemo(
+        () => getMenuItemFromTopicLabel(values?.topic?.attributes?.label),
+        [values?.topic?.attributes?.label]
+    )
+    const TopicIcon = Icons[menuItem?.icon]
+    const color = menuItem?.color || 'red'
+    const imageURL = values?.featuredImage?.objectURL
+    const { values: socialValues, setFieldValue } = useFormik({
+        onSubmit: () => {},
+        initialValues: {
+            title: values.title,
+            titleSize: '35',
+            imageSize: '50',
+            rotation: '0',
+        },
+    })
+
+    return (
+        <div className="p-4 border-t col-span-2">
+            <button
+                type="button"
+                className="text-sm opacity-60 w-full flex justify-between items-center"
+                onClick={() => setOpen(!open)}
+            >
+                <span>Social sharing</span>
+                <IconChevronDown className={`size-7 transition-transform ${open ? 'rotate-180' : ''}`} />
+            </button>
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        initial={{ height: 0 }}
+                        animate={{ height: 'auto' }}
+                        exit={{ height: 0 }}
+                        className="overflow-hidden"
+                    >
+                        <div className="divide-y divide-border dark:divide-border-dark mt-4">
+                            <Input
+                                label="Short title (supports HTML)"
+                                placeholder="Short title (supports HTML)"
+                                value={socialValues.title}
+                                onChange={(e) => setFieldValue('title', e.target.value)}
+                                className="-mx-4 mb-2"
+                            />
+                            <div className="py-4">
+                                <label className="text-sm opacity-60 block">Title size</label>
+                                <RangeSlider
+                                    value={socialValues.titleSize}
+                                    onChange={(e) => setFieldValue('titleSize', e.target.value)}
+                                    className="max-w-xs"
+                                />
+                            </div>
+                            <div className="py-4">
+                                <label className="text-sm opacity-60 block">Image customization</label>
+                                <div className="flex w-full justify-evenly space-x-8">
+                                    <RangeSlider
+                                        value={socialValues.imageSize}
+                                        onChange={(e) => setFieldValue('imageSize', e.target.value)}
+                                        label="Size"
+                                        className="w-full"
+                                    />
+                                    <RangeSlider
+                                        value={socialValues.rotation}
+                                        onChange={(e) => setFieldValue('rotation', e.target.value)}
+                                        label="Rotation"
+                                        min={-180}
+                                        max={180}
+                                        className="w-full"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <label className="text-sm opacity-60">Preview</label>
+                        <div className={`w-full aspect-square p-6 bg-${color} mt-2 text-primary`}>
+                            <div className="bg-accent size-full rounded-xl px-8 relative overflow-hidden flex flex-col">
+                                <div className="flex justify-center space-x-2 items-center py-4 border-b border-border">
+                                    <div>{TopicIcon && <TopicIcon className={`size-12 text-${color}`} />}</div>
+                                    <h3 className="text-4xl m-0">
+                                        {menuItem?.name || values?.topic?.attributes?.label}
+                                    </h3>
+                                </div>
+                                <div className="relative flex-grow">
+                                    <h2
+                                        style={{ fontSize: `${socialValues.titleSize}px` }}
+                                        className="line-clamp-1 text-center !my-[.3em]"
+                                        dangerouslySetInnerHTML={{ __html: socialValues.title }}
+                                    />
+                                    {imageURL && (
+                                        <div
+                                            style={{
+                                                width: `${socialValues.imageSize}%`,
+                                            }}
+                                            className="absolute left-1/2 -translate-x-1/2"
+                                        >
+                                            <img
+                                                style={{ transform: `rotate(${socialValues.rotation}deg)` }}
+                                                className="w-full shadow-lg"
+                                                src={imageURL}
+                                            />
+                                        </div>
+                                    )}
+                                    {values?.author && (
+                                        <div className="absolute bottom-0 -right-4 flex space-x-2 pb-2 items-center">
+                                            <div className="bg-white p-1 border border-border inline-block rounded-full">
+                                                <img
+                                                    className="size-16 bg-yellow rounded-full"
+                                                    src={values.author.attributes?.avatar?.data?.attributes?.url}
+                                                />
+                                            </div>
+                                            <div>
+                                                <p className="!m-0 !leading-none opacity-70 text-sm">Created by</p>
+                                                <p className="!m-0 font-bold text-lg !leading-none !mt-1">
+                                                    {values.author.attributes?.firstName}{' '}
+                                                    {values.author.attributes?.lastName}
+                                                </p>
+                                                <p className="!m-0 font-bold opacity-70 !leading-none !mt-1">
+                                                    {values.author.attributes?.companyRole}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
     )
 }
 
@@ -385,6 +554,7 @@ export default function RoadmapForm({
                         )}
                     </div>
                 )}
+                <SocialSharing values={values} />
             </div>
             <CallToAction disabled={loading} onClick={handleSubmit} className="mt-2 w-full">
                 {loading ? <Spinner className="text-white mx-auto !w-6 !h-6" /> : buttonText}
