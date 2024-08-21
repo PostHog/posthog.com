@@ -18,7 +18,7 @@ tags:
 
 PostHog offers a variety of tools which are useful for [real user monitoring](/blog/real-user-monitoring) and debugging errors, such as [Session Recording](/docs/user-guides/recordings), [Paths](/docs/user-guides/paths) and [Trends](/docs/user-guides/trends) — yet it is not a bespoke error monitoring tool. 
 
-Sentry is an excellent error-monitoring tool with specialist tools for investigating issues such as slow API calls or database queries, yet lacks the tools to analyse these issues in terms of company metrics. 
+[Sentry](/blog/posthog-vs-sentry) is an excellent error-monitoring tool with specialist tools for investigating issues such as slow API calls or database queries, yet lacks the tools to analyse these issues in terms of company metrics. 
 
 In this tutorial, we’ll demonstrate how connecting PostHog and Sentry enables you to correlate errors in Sentry with other product metrics, and to debug issues more easily. 
 
