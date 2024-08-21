@@ -53,7 +53,7 @@ The best way to imagine PostHog is as an [alternative to Hotjar](/blog/best-hotj
 
 ### Analytics
 
-Although product analytics is not a core focus for Hotjar, it does offer basic features, such as event tracking, funnels, and trend insights, albeit only the Scale plan of its Observe product.
+Although product analytics is not a core focus for Hotjar, it does offer basic features, such as event tracking, funnels, and trend insights, albeit only on the Scale plan of its Observe product.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Log page views, clicks and other custom events" />
@@ -90,7 +90,7 @@ Session replays are an essential tool for understanding how people use your prod
 
 ### Heatmaps
 
-Heatmaps visualize user activity in your app. They use colors or numbers to show which parts of the page people are interacting with the most. Both Hotjar and PostHog offer heatmaps:
+Heatmaps visualize where people click and navigate to on your app or website and, when combined with session replay, can be useful 
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Show where users are clicking" />
@@ -100,11 +100,9 @@ Heatmaps visualize user activity in your app. They use colors or numbers to show
   <ComparisonRow column1={true} column2={false} feature="Toolbar" description="View heatmaps in browser" />
 </ComparisonTable>
 
-> **Further reading:** [Compare other Hotjar alternatives and competitors](/blog/best-hotjar-alternatives)
-
 ### Surveys
 
-Hotjar supports more survey types than PostHog, such as fullscreen surveys, but fewer targeting options. Using PostHog's product analytics and surveys together enables very precise targeting based on whether a user has access to a specific feature (using feature flags), and targeting specific lists of users via static and dynamic cohorts.  
+Hotjar supports more survey types than PostHog, such as fullscreen surveys, but fewer targeting options.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web surveys" description="Show surveys on websites and web apps" />
@@ -115,6 +113,14 @@ Hotjar supports more survey types than PostHog, such as fullscreen surveys, but 
   <ComparisonRow column1={false} column2={true} feature="Embedded surveys" description="Surveys embedded directly into web page" />
   <ComparisonRow column1={false} column2={true} feature="Full screen surveys" description="Surveys that take over whole screen" />
   <ComparisonRow column1={false} column2={true} feature="Sentiment analysis" description="Analyze survey results using AI to discover trends" />
+  <ComparisonRow column1={true} column2={true} feature="Survey templates" description="Templates for NPS, market-fit, and CSAT surveys" />
+  <ComparisonRow column1={true} column2={true} feature="Interview scheduling" description="Send users a link to schedule a feedback meeting." />
+  <ComparisonRow column1={true} column2={true} feature="Webhooks" description="Send survey responses" />
+</ComparisonTable>
+
+Using PostHog's product analytics and surveys together unlocks more precise targeting options for surveys, such as using feature flags and pre-defined cohorts.
+
+<ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Target by URL" description="Surveys triggered when user visits specific URL" />
   <ComparisonRow column1={true} column2={true} feature="Target by person properties" description="Target users by individual attributes" />
   <ComparisonRow column1={true} column2={true} feature="Target by completed event" description="Surveys triggered when user completes specific event" />
@@ -122,9 +128,6 @@ Hotjar supports more survey types than PostHog, such as fullscreen surveys, but 
   <ComparisonRow column1={true} column2={false} feature="Target by feature flag" description="Only show surveys to users with a feature flag enabled" />
   <ComparisonRow column1={true} column2={false} feature="Target by dynamic cohorts" description="Only show surveys to users that meet cohort criteria" />
   <ComparisonRow column1={true} column2={false} feature="Target by static cohorts" description="Only show surveys to a specific list of users " />
-  <ComparisonRow column1={true} column2={true} feature="Survey templates" description="Templates for NPS, market-fit, and CSAT surveys" />
-  <ComparisonRow column1={true} column2={true} feature="Interview scheduling" description="Send users a link to schedule a feedback meeting." />
-  <ComparisonRow column1={true} column2={true} feature="Webhooks" description="Send survey responses" />
 </ComparisonTable>
 
 ### Data sources
@@ -175,38 +178,44 @@ Regulatory compliance can be a critical need for many teams, especially if they 
 
 ## Price comparison
 
-> **Note:** Prices correct as of Aug 21, 2024. Hotjar charges based on 'sessions per day'. We've multiplied these daily sessions by 30 to get a monthly equivalent. 
+> **Note:** Prices correct as of Aug 21, 2024.
 
 PostHog is cheaper than Hotjar for both session replay and user surveys, regardless of whether you choose Hotjar's most popular Business tier, or the more expensive Scale tier that includes Hotjar's basic analytics features, and a dedicated account manager.
 
+### Session replay pricing
+
+Hotjar charges based on 'sessions per day', whereas PostHog uses monthly recorded sessions. We've multiplied Hotjar's daily sessions by 30 to get a monthly equivalent. 
+
 [GRAPH WILL GO HERE]
 
-| Monthly sessions | Hotjar Scale | Hotjar Business | PostHog |
+| Monthly sessions | Hotjar Businss | Hotjar Scale | PostHog |
 |------------------|--------------|-----------------|---------|
-| 5k               | $99          | $213            | $0      |
-| 15k              | $99          | $213            | $50     |
-| 45k              | $249         | $525            | $157    |
-| 75k              | $389         | $827            | $224    |
-| 120k             | $489         | Contact sales   | $313    |
-| 240k             | $789         | Contact sales   | $524    |
+| **5k**               | $99          | $213            | $0      |
+| **15k**              | $99          | $213            | $50     |
+| **45k**              | $249         | $525            | $157    |
+| **75k**              | $389         | $827            | $224    |
+| **120k**             | $489         | Contact sales   | $313    |
+| **240k**             | $789         | Contact sales   | $524    |
 
 At 75k recorded sessions per month, PostHog is $1,980 cheaper over 12 months compared to Hotjar's Business tier, and $7,236 cheaper than Hotjar's Scale tier, when paying monthly.
 
 PostHog also offers a more generous free tier that includes 5,000 replay sessions, 1 million analytics events, and 250 survey reponses for free _every month_. Hotjar doesn't offer any free usage outside of its extremely limited Basic tier.
 
-[GRAPH WILL GO HERE]
-
-| Monthly survey responses | Hotjar Scale | Hotjar Business | PostHog |
-|--------------------------|--------------|-----------------|---------|
-| 250                      | $79          | $159            | $0      |
-| 500                      | $79          | $159            | $51     |
-| 1,000                    | $99          | $259            | $99     |
-| 2,500                    | $179         | $479            | $152    |
-| 5,000                    | $289         | Contact sales   | $240    |
-| 7,500                    | $399         | Contact sales   | $330    |
-| 10,000                   | $479         | Contact sales   | $418    |
+### Surveys pricing
 
 It's similar story for user surveys, where PostHog is cheaper than both Hotjar's Business and Scale tiers. At 2,500 survey responses each month, PostHog is $324 per year cheaper than Hotjar's Business tier when paying monthly.
+
+[GRAPH WILL GO HERE]
+
+| Monthly survey responses | Hotjar Business | Hotjar Scale | PostHog |
+|--------------------------|--------------|-----------------|---------|
+| **250**                      | $79          | $159            | $0      |
+| **500**                      | $79          | $159            | $51     |
+| **1,000**                    | $99          | $259            | $99     |
+| **2,500**                    | $179         | $479            | $152    |
+| **5,000**                    | $289         | Contact sales   | $240    |
+| **7,500**                    | $399         | Contact sales   | $330    |
+| **10,000**                   | $479         | Contact sales   | $418    |
 
 You can see how much PostHog will cost you using the calculator on our [pricing page](/pricing).
 
@@ -214,7 +223,7 @@ You can see how much PostHog will cost you using the calculator on our [pricing 
 
 ### Can I choose which sessions are recorded?
 
-Yes. You can only record sessions on specific pages, or those with a minimum duration that you set. You can also set sampling rate – i.e. only record 20% of sessions – or trigger recordings based on a feature flag. See [How to only record the sessions you want](/tutorials/limit-session-recordings) for more on this.
+Yes. You can choose to only record sessions on specific pages, or sessions with a minimum duration that you set. You can also set a sampling rate – i.e. only record 20% of sessions – or trigger recordings based on a feature flag. See [How to only record the sessions you want](/tutorials/limit-session-recordings) for more.
 
 ### Does PostHog offer discounts for paying annually?
 
