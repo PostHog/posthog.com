@@ -70,6 +70,7 @@ export default function UpdateWrapper({
     const [initialValues, setInitialValues] = useState<any>(null)
     const [success, setSuccess] = useState(false)
     const [subscribers, setSubscribers] = useState([])
+    const [likes, setLikes] = useState([])
 
     const handleUnpublish = async () => {
         const confirmed = window.confirm(
@@ -95,7 +96,7 @@ export default function UpdateWrapper({
 
     const fetchRoadmapItem = async () => {
         const query = qs.stringify({
-            populate: ['topic', 'teams', 'image', 'category', 'subscribers.user'],
+            populate: ['topic', 'teams', 'image', 'category', 'subscribers.user', 'likes.user'],
         })
         const jwt = await getJwt()
         const {
@@ -112,6 +113,7 @@ export default function UpdateWrapper({
                     githubUrls,
                     dateCompleted,
                     subscribers,
+                    likes,
                 },
             },
         } = await fetch(
@@ -124,6 +126,7 @@ export default function UpdateWrapper({
                   }
                 : undefined
         ).then((res) => res.json())
+        setLikes(likes?.data)
         setSubscribers(subscribers?.data)
         setInitialValues({
             title,
@@ -141,11 +144,16 @@ export default function UpdateWrapper({
     }
 
     const handleExport = async () => {
-        const csv = `First name,Last name,Email\n${subscribers
+        const csv = `First name,Last name,Email,Type\n${subscribers
             .map(({ attributes: { user, firstName, lastName } }) => {
-                return `${firstName},${lastName},${user?.data?.attributes?.email}`
+                return `${firstName},${lastName},${user?.data?.attributes?.email},Subscriber`
             })
-            .join('\n')}`
+            .join('\n')}
+${likes
+    .map(({ attributes: { user, firstName, lastName } }) => {
+        return `${firstName},${lastName},${user?.data?.attributes?.email},Voter`
+    })
+    .join('\n')}`
         const blob = new Blob([csv], { type: 'text/csv' })
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
@@ -189,7 +197,10 @@ export default function UpdateWrapper({
                         {user?.role?.type === 'moderator' && initialValues && (
                             <div className={`${editButtonClassName} flex space-x-1`}>
                                 <ActionButton onClick={handleExport} roundButton={roundButton}>
-                                    <Tooltip content={`Export ${subscribers.length} subscribers`} placement="top">
+                                    <Tooltip
+                                        content={`Export ${subscribers.length + likes.length} subscribers`}
+                                        placement="top"
+                                    >
                                         <IconDownload
                                             className={`w-5 h-5 inline-block ${
                                                 roundButton ? 'opacity-50 group-hover:opacity-100' : ''
