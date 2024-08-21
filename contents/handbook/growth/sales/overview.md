@@ -118,23 +118,18 @@ This is how current roles are split - including spaces for the next few hires we
 - Simon
   - AE for Extra Large customers
 - Cameron
-  - AE for Medium & Large customers
-  - Routes inbound demos to appropriate person
-  - If he does a demo and someone is actually smaller than Medium, route to self serve
-- Actively hiring - 2x AE
-  - Medium & Large customers (1x SF-based)
-- Future hire - Inbound SDR
+  - AE for Medium & Large customers in the Americas region
+- Scott
+  - AE for Medium & Large customers in the Americas region
+- Leon
+  - AE for Medium & Large customers in the EMEA/Asia region
+- Seb
+  - AE for Medium & Large customers in the EMEA/Asia region
  
 **RevOps & Customer Success**
 - Mine
   - Building and leading RevOps
 - Future hire - CSM
   - Manage steady state/single product customers
- 
-**Support**
-- Marcus	
-  - Support engineer (EU time zones)
-- Future hire
-  - Support engineer (US time zones)
 
 Longer term, expansion/renewals is often a separate team, but we don't need to do this now. 

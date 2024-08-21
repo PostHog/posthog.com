@@ -213,6 +213,8 @@ get_entries_from_folder_and_capture(folder_name)
 
 This script may need modification depending on the structure of your Amplitude data, but it gives you a start.
 
+> **Why are my event and DAU count lower in PostHog than Amplitude?** PostHog blocks bot traffic by default, while Amplitude doesn't. You can see a full list of the bots PostHog blocks [in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default).
+
 ### Aliasing device IDs to user IDs
 
 In addition to capturing the events, we want to combine anonymous and identified users. For Amplitude, events rely on the device ID before identification and the user ID after:
