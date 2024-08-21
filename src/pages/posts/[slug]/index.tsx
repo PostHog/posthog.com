@@ -1,7 +1,24 @@
 import ClientPost from 'components/Edition/ClientPost'
-import { Skeleton } from 'components/Questions/QuestionsTable'
+import { useLayoutData } from 'components/Layout/hooks'
 import qs from 'qs'
 import React, { useEffect, useState } from 'react'
+
+const Skeleton = () => {
+    const { fullWidthContent } = useLayoutData()
+    return (
+        <div className={`article-content flex-1 transition-all md:pt-8 w-full overflow-auto`}>
+            <div
+                className={`mx-auto transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-3xl'}  md:px-8 2xl:px-12`}
+            >
+                <div>
+                    <div className="bg-accent dark:bg-accent-dark h-[37px] w-2/3 rounded-md" />
+                    <div className="bg-accent dark:bg-accent-dark h-[27px] w-1/3 rounded-md mt-2" />
+                    <div className="bg-accent dark:bg-accent-dark aspect-video w-full rounded-md mt-2" />
+                </div>
+            </div>
+        </div>
+    )
+}
 
 export default function Post({ params }) {
     const [post, setPost] = useState(null)

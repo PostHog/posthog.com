@@ -133,6 +133,7 @@ h4 {
 
 /* Content pages (Handbook,  Docs, Blog, Customers, FAQ) */
 .article-content {
+    h1,
     h2,
     h3,
     h4,
@@ -143,6 +144,14 @@ h4 {
 
         a:not(.cta) {
             font-variation-settings: 'wght' 800;
+        }
+    }
+
+    h1 {
+        @apply text-[1.75rem];
+
+        code {
+            @apply !text-[1.75rem];
         }
     }
 
@@ -244,8 +253,13 @@ h4 {
     blockquote:not(.quote) {
         @apply px-6 py-4 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-4;
 
-        p {
-            @apply !text-[15px];
+        p,
+        li {
+            @apply !text-[15px] leading-relaxed;
+        }
+
+        h3 {
+            @apply mb-2;
         }
     }
 
@@ -285,7 +299,7 @@ h4 {
 
     th:last-child,
     td:last-child {
-        padding-right: 0;
+        /* padding-right: 0; */
     }
 
     th:empty {
@@ -348,6 +362,48 @@ h4 {
 
     details + details {
         @apply border-t-0;
+    }
+
+    .newsletter-form {
+        @apply !mt-6 !pt-6 !mb-0 !pb-0 border-t border-light dark:border-dark;
+    }
+}
+
+.bio-preview {
+    * {
+        @apply text-sm mb-2;
+    }
+
+    li {
+        @apply text-sm;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply text-sm;
+    }
+}
+
+.bio-sidebar {
+    * {
+        @apply text-base mb-2;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply text-lg;
+    }
+
+    a {
+        @apply font-semibold text-red dark:text-yellow;
     }
 }
 
@@ -452,6 +508,14 @@ h4 {
     }
     .product-surveys & {
         @apply !bg-red;
+    }
+}
+
+.rc-slider-handle {
+    @apply !cursor-grab;
+
+    &:focus {
+        @apply !cursor-grabbing;
     }
 }
 
@@ -1427,6 +1491,10 @@ li.squeak-left-border {
         }
     }
 
+    blockquote {
+        @apply border-l-4 border-light dark:border-dark pl-2;
+    }
+
     pre {
         @apply text-base my-3 overflow-scroll p-4 text-[15px];
     }
@@ -1513,6 +1581,52 @@ li.squeak-left-border {
     margin: 0;
 }
 
+.company-name-enter {
+    opacity: 0;
+    transform: translateY(100%);
+}
+.company-name-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 100ms, transform 250ms;
+}
+.company-name-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+.company-name-exit-active {
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 500ms, transform 500ms;
+}
+
+.slide-1,
+.slide-2,
+.slide-3 {
+    transition: transform 0.75s ease-in-out, opacity 0.75s ease-in-out;
+    transform: translateY(20%) scale(0.9);
+    opacity: 0;
+}
+
+.slide-1.opacity-100,
+.slide-2.opacity-100,
+.slide-3.opacity-100 {
+    transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+}
+
+.active + .inactive {
+    @apply !border-t-transparent;
+}
 .preserve-3d {
     transform-style: preserve-3d;
+}
+
+.tw-tweet + .tw-tweet {
+    @apply before:absolute before:w-px before:bg-border dark:before:bg-border-dark before:bottom-[calc(100%_+_1px)] before:-top-8 before:left-10;
+}
+
+.tw-tweet + *:not(.tw-tweet) {
+    @apply before:hidden;
 }

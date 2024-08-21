@@ -18,7 +18,7 @@ Send event data from PostHog to Intercom whenever an event matches a user who ha
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'Intercom' and select the destination, press 'Install'.
 3. Follow the steps below to configure the destination.
 

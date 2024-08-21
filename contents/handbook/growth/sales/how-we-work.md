@@ -9,15 +9,29 @@ showTitle: true
 ## Main metrics for each role
 
 - AE: new and expansion revenue in your segment
-- SDR: number of customer meetings booked in correct segment
-- CSM: revenue retention %
 - RevOps: overall revenue from $20k+ segment
 
-Other metrics we care about:
+These roles do not exist at PostHog yet, but if we hire for them we would care about:
+
+- SDR: number of customer meetings booked in correct segment
+- CSM: revenue retention %
+
+Other metrics we generally care about:
 - Closed - won % from demo
 - Time to close
 - Lead volume in each segment
 - Weighted pipeline
+
+## Weekly sales standup
+
+In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standup on a Wednesday. Two AEs are picked at random, and we spend 30min on each going in depth through:
+
+- Your existing book of business - every customer should have a status update and next steps identified
+- Top 3 new leads
+
+The reason for structuring the review in this way is that we find it is much more effective to go deep on a subset of customers than racing around giving everyone 5 minutes to give a very surface level update. Turns are taken randomly so that you are incentivized to turn up to every meeting fully prepared, in case you are selected!
+
+The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - [you should not let your team mates fail](/culture#dont-let-others-fail). 
 
 ## New AE hire ramp up
 - Day 1
@@ -56,7 +70,7 @@ Other metrics we care about:
   - Cross selling new products - all-in-one is how we will beat the competition.
 - We aim for a 50/50 split between base/commission when calculating OTE by default. 
 
-> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. 
+> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
 
 **Variables**
 
@@ -78,8 +92,13 @@ Other metrics we care about:
   - This incentivises securing upfront payment, not just annual contracts with monthly payment every time.
   - We also don't want AEs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
   - For monthly customers, commission is only paid after the first 2 invoices have been paid (ie. you don't get commission due to a random spike)
+    - To clarify, this means the first 2 invoices the customer has ever paid, ie. you still get commission from 'your' month 1 if you inherit a paying monthly customer
+    - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
+  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter
 - In your first 3 months you will not have a set quota but are expected to retain your existing book and have closed at least one Medium deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE for this period
+
+> Your quota and assigned customers are likely to change slightly from quarter to quarter, e.g. a customer may not have long term expansion potential, or maybe they turn out to be Very Large. In any case, each quarter your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. 
 
 ## Travel to see customers
 

@@ -293,7 +293,7 @@ Crazy Egg is very similar to Hotjar. It includes many of the same features and i
 
 According to reviews on G2, people use Crazy Egg because:
 
-1. **It's easy to setup:** Crazy Egg makes it easy integrate with numerous services and content management systems, like Shopify, Wix, and Wordpress. This is especially useful for website owners and agencies who run multiple websites.
+1. **It's easy to setup:** Crazy Egg makes it easy integrate with numerous services and content management systems, like Shopify, [Wix](/tutorials/wix-analytics), and Wordpress. This is especially useful for website owners and agencies who run multiple websites.
 
 2. **They want to improve content and conversions:** Crazy Egg's heatmaps and session replay features enable them to gather valuable insights for optimizing their content, increasing conversions, and understanding how users navigate their websites.
 
@@ -389,7 +389,7 @@ Clarity covers most of the same features as Hotjar with the exclusion of surveys
 
 <ComparisonTable column1="Clarity" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1="Android only" column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={false} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={false} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />

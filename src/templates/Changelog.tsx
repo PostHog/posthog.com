@@ -98,7 +98,7 @@ export const Change = ({ title, teamName, media, description, cta }) => {
                 </div>
             )}
             <div className="mt-2">
-                <Markdown>{description}</Markdown>
+                <Markdown regularText={true}>{description}</Markdown>
             </div>
             {cta && (
                 <CallToAction type="secondary" size="md" to={cta.url}>

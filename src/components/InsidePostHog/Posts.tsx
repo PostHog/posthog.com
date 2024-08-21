@@ -1,5 +1,6 @@
 import { CallToAction } from 'components/CallToAction'
 import { usePosts } from 'components/Edition/hooks/usePosts'
+import { tagsHideFromIndex } from 'components/Edition/Posts'
 import Link from 'components/Link'
 import React from 'react'
 
@@ -71,6 +72,38 @@ export default function Posts() {
                                 $notIn: ['Changelog', 'Customers', 'Tutorials'],
                             },
                         },
+                    },
+                    {
+                        $or: [
+                            {
+                                post_tags: {
+                                    label: {
+                                        $notIn: tagsHideFromIndex,
+                                    },
+                                },
+                            },
+                            {
+                                post_tags: {
+                                    label: {
+                                        $null: true,
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        $or: [
+                            {
+                                hideFromIndex: {
+                                    $eq: false,
+                                },
+                            },
+                            {
+                                hideFromIndex: {
+                                    $null: true,
+                                },
+                            },
+                        ],
                     },
                 ],
             },

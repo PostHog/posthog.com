@@ -102,7 +102,7 @@ const subfeatures = [
 ]
 
 export const ProductOS = () => {
-    const { contra, hasura, netdata, pry } = useStaticQuery(graphql`
+    const { researchgate, elevenlabs } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -117,16 +117,10 @@ export const ProductOS = () => {
             }
         }
         {
-            contra: mdx(slug: { eq: "customers/contra" }) {
+            researchgate: mdx(slug: { eq: "customers/researchgate" }) {
                 ...ProductCustomerFragment
             }
-            hasura: mdx(slug: { eq: "customers/hasura" }) {
-                ...ProductCustomerFragment
-            }
-            netdata: mdx(slug: { eq: "customers/netdata" }) {
-                ...ProductCustomerFragment
-            }
-            pry: mdx(slug: { eq: "customers/pry" }) {
+            elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -151,33 +145,6 @@ export const ProductOS = () => {
                 <div className="text-center mb-12">
                     <StaticImage src="./images/product-os.png" alt="" className="w-full max-w-[423px]" />
                 </div>
-
-                {/*
-        <section>
-          <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
-            <CustomerCard
-              outcome="improved conversion rates by 10-20%"
-              quote="We wouldn't have noticed that needed fixing without PostHog's session replays."
-              customer={hasura}
-            />
-            <CustomerCard
-              outcome="increased registrations by 30%"
-              quote="From [funnels], we could easily jump to session replays to see the drop-off point."
-              customer={contra}
-            />
-            <CustomerCard
-              outcome="reduced back-and-forth in community support"
-              quote="Session replay is... an essential tool for Netdata."
-              customer={netdata}
-            />
-            <CustomerCard
-              outcome="improved registrations by 20-30%"
-              quote="Even Pry's support team... uses replays to understand how... bug occurred."
-              customer={pry}
-            />
-          </ul>
-        </section>
-        */}
             </div>
 
             {/* <SmoothScroll /> */}
@@ -193,7 +160,7 @@ export const ProductOS = () => {
                     </ul>
                     */}
 
-                    <div className="mb-16">
+                    <div className="mb-4">
                         <h2 className="text-4xl text-center mb-8">
                             A single <span className="text-red dark:text-yellow">home</span> for all product usage data
                         </h2>
@@ -203,6 +170,22 @@ export const ProductOS = () => {
                             })}
                         </ul>
                     </div>
+
+                    <section id="customers" className="-mt-36 pt-36">
+                        <h3 className="text-3xl text-center my-4 md:my-8">Customer stories</h3>
+                        <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
+                            <CustomerCard
+                                outcome="tracks over 25M users accessing more than 160M publications"
+                                quote="We have 100s of millions of pageviews, but it still only takes 10 minutes to set up really detailed insights and funnels"
+                                customer={researchgate}
+                            />
+                            <CustomerCard
+                                outcome="uses every single tool PostHog has to launch new features"
+                                quote="We used to have dashboards in Looker, GA4, and lots of other tools. Now, it's just PostHog and Stripe."
+                                customer={elevenlabs}
+                            />
+                        </ul>
+                    </section>
 
                     <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
                         <div className="flex-1">
@@ -240,7 +223,7 @@ export const ProductOS = () => {
                                     product data.
                                 </p>
                             </div>
-                            <div className="shrink-0 flex gap-2">
+                            <div className="shrink-0 flex flex-wrap gap-2">
                                 <ProductIcon
                                     name="Product analytics"
                                     url="/product-analytics"
@@ -310,7 +293,7 @@ export const ProductOS = () => {
                                 users or groups using feature flags.
                             </p>
                         </div>
-                        <div className="order-1 md:order-2 col-span-7">
+                        <div className="order-1 md:order-2 col-span-7 max-w-screen overflow-hidden md:overflow-visible">
                             <StaticImage
                                 src="./images/site-widget.png"
                                 alt=""
@@ -328,7 +311,7 @@ export const ProductOS = () => {
                             </h2>
                             <p>
                                 We poke fun at a lot of things, but we take security seriously. We're{' '}
-                                <b>SOC 2 Type-1 certified, GDPR ready, HIPAA compliant</b>, and we share our security
+                                <b>SOC 2 Type II certified, GDPR ready, HIPAA compliant</b>, and we share our security
                                 reports publicly. Check <a href="/handbook/company/security">our security docs</a> for
                                 more!
                             </p>
@@ -402,7 +385,7 @@ export const ProductOS = () => {
                                 </CallToAction>
                             </div>
                         </div>
-                        <div className="order-1 mb-10 md:mb-0 md:order-2 text-center">
+                        <div className="order-1 mb-10 md:mb-0 md:order-2 text-center max-w-screen overflow-hidden md:overflow-visible">
                             <StaticImage
                                 src="./images/toolbar.png"
                                 alt=""

@@ -21,7 +21,7 @@ It is [used by teams such as WittyWorks to protect user privacy](https://posthog
 ## Installation
 
 1. Log in to your PostHog instance
-2. Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
+2. Click "[Data pipeline](https://us.posthog.com/pipeline)" in the left sidebar
 3. Search for 'Property Filter' press 'Install'
 4. Configure the by transformation by following the onscreen instructions.
 

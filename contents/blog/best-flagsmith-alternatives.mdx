@@ -27,9 +27,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 PostHog (yup, that's us!) is an open-source, all-in-one platform for feature management, A/B testing, product analytics, session replay, and user surveys. It's also building a [data warehouse for startups](/docs/data-warehouse) and a customer data platform (CDP), though both are currently in closed beta.
 
-By combining all these tools into one platform, it eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [carVertical](/feature-flags), which use PostHog for both feature flags and analytics.
-
-According to [BuiltWith](https://trends.builtwith.com/analytics/PostHog), PostHog is used by 4,661 (0.47%) of the top one million websites.
+By combining all these tools into one platform, it eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [Y Combinator](/customers/ycombinator), which use PostHog for both feature flags and analytics.
 
 #### Key features
 
@@ -172,7 +170,7 @@ It also includes a warehouse-native mode to connect directly and utilize your da
 
 Statsig has a similar feature set to Flagsmith but it does not include flag payloads or remote config. However, it does include built-in analytics and A/B testing. 
 
-<ComparisonTable column1="LanchDarkly" column2="Flagsmith">
+<ComparisonTable column1="Statsig" column2="Flagsmith">
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting and percentage rollouts" />
   <ComparisonRow column1={true} column2={true} feature="Local evaluation" description="Use local, cached flag values to increase speed" />
   <ComparisonRow column1={false} column2={true} feature="Payloads" description="Flags with string, number, or JSON payloads" />

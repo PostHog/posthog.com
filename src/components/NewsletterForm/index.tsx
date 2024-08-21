@@ -26,7 +26,7 @@ export const NewsletterForm = ({ className = '' }): JSX.Element => {
 
     return (
         <div
-            className={`flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 py-8 md:py-12 ${className}`}
+            className={`newsletter-form flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 py-8 md:py-12 ${className}`}
         >
             <div className="text-center">
                 <StaticImage
@@ -38,8 +38,8 @@ export const NewsletterForm = ({ className = '' }): JSX.Element => {
             <div className="w-full max-w-md">
                 {!submitted ? (
                     <>
-                        <p className="text-sm opacity-50 m-0">Subscribe to our newsletter</p>
-                        <h4 className="relative text-2xl m-0">Product for Engineers</h4>
+                        <p className="text-sm opacity-50 !m-0">Subscribe to our newsletter</p>
+                        <h4 className="relative text-2xl !m-0">Product for Engineers</h4>
                         <p className="m-0 text-[15px]">Helping engineers and founders flex their product muscles</p>
                         <div className="">
                             <form

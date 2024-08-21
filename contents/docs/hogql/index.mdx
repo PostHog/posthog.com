@@ -51,6 +51,7 @@ WHERE event = '$pageview'
         WHERE event = '$pageview'
         GROUP BY distinct_id
     )
+    AND {filters}
 GROUP BY current_url
 ORDER BY url_count DESC
 ```
@@ -145,4 +146,4 @@ To get a list of all the sources you can query with HogQL, enable the [data ware
   alt="Data warehouse example"
 />
 
-The data warehouse also enables you to add external sources, like Stripe and Hubspot, and query them alongside your PostHog data.
+The data warehouse also enables you to add external sources, like [Stripe](/tutorials/stripe-reports) and Hubspot, and query them alongside your PostHog data.

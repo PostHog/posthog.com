@@ -131,7 +131,7 @@ export default function ProfilePage({ params }: PageProps) {
     const [view, setView] = useState('discussions')
     const posthog = usePostHog()
     const nav = useTopicsNav()
-    const { user } = useUser()
+    const { user, getJwt } = useUser()
     const [sort, setSort] = useState(sortOptions[0].label)
     const posts = usePosts({
         params: {
@@ -146,6 +146,7 @@ export default function ProfilePage({ params }: PageProps) {
         },
     })
     const isCurrentUser = user?.profile?.id === id
+    const isModerator = user?.role?.type === 'moderator'
 
     const profileQuery = qs.stringify(
         {
@@ -180,6 +181,11 @@ export default function ProfilePage({ params }: PageProps) {
                         },
                     },
                 },
+                ...(isModerator
+                    ? {
+                          user: true,
+                      }
+                    : null),
             },
         },
         {
@@ -190,7 +196,17 @@ export default function ProfilePage({ params }: PageProps) {
     const { data, error, mutate } = useSWR<StrapiRecord<ProfileData>>(
         `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?${profileQuery}`,
         async (url) => {
-            const res = await fetch(url)
+            const jwt = user && (await getJwt())
+            const res = await fetch(
+                url,
+                jwt
+                    ? {
+                          headers: {
+                              Authorization: `Bearer ${jwt}`,
+                          },
+                      }
+                    : undefined
+            )
             const { data } = await res.json()
             return data
         }
@@ -430,7 +446,40 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
 }
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
-    const { user } = useUser()
+    const { user, getJwt } = useUser()
+
+    const handleBlock = async (blockUser: boolean) => {
+        if (blockUser) {
+            if (confirm('Are you sure you want to block this user and remove all of their posts and replies?')) {
+                try {
+                    const jwt = await getJwt()
+                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/block/${profile.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                    })
+                } catch (err) {
+                    console.error(err)
+                }
+            } else {
+                return
+            }
+        } else {
+            try {
+                const jwt = await getJwt()
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/unblock/${profile.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                })
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        window.location.reload()
+    }
 
     return (
         profile && (
@@ -551,15 +600,25 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
                     </SidebarSection>
                 )}
                 {user?.role?.type === 'moderator' && (
-                    <SidebarSection>
-                        <Link
-                            external
-                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::profile.profile/${profile.id}`}
-                            className="text-base text-red dark:text-yellow font-semibold"
-                        >
-                            View in Strapi
-                        </Link>
-                    </SidebarSection>
+                    <>
+                        <SidebarSection>
+                            <Link
+                                external
+                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
+                                className="text-base text-red dark:text-yellow font-semibold"
+                            >
+                                View in Strapi
+                            </Link>
+                        </SidebarSection>
+                        <SidebarSection>
+                            <button
+                                onClick={() => handleBlock(!profile.user?.data.attributes.blocked)}
+                                className="text-red font-bold text-base"
+                            >
+                                {profile.user?.data.attributes.blocked ? 'Unblock user' : 'Block user'}
+                            </button>
+                        </SidebarSection>
+                    </>
                 )}
             </>
         )

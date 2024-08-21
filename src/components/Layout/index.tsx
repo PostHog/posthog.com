@@ -12,6 +12,7 @@ import { IProps, LayoutProvider } from './context'
 import { Mobile as MobileNav } from 'components/MainNav'
 import { useLayoutData } from './hooks'
 import SearchBox from 'components/Search/SearchBox'
+import Banner from 'components/Banner'
 
 const Article = ({
     children,
@@ -26,6 +27,7 @@ const Article = ({
 
     return (
         <div className={className}>
+            {/* <Banner /> */}
             {compact ? (
                 <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-[50] bg-light dark:bg-dark">
                     <SearchBox className="!w-full !py-2" location="mobile-header" />

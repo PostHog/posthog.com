@@ -77,7 +77,7 @@ A trend popular among product engineers is bringing the code framework and infra
 ![Vercel and Next.js](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-tools/vercel.png)
 <Caption>The benefits of integrating infrastructure and code from Vercel and Next.js.</Caption>
 
-Other examples of these code and infrastructure combos include [Supabase](https://supabase.com/), [PlanetScale](https://planetscale.com/), and [Hasura](/customers/hasura). They abstract away infrastructure work while providing speed and tailored offerings. Software engineers and large teams might find their limited customization and options constraining, but product engineers love them.
+Other examples of these code and infrastructure combos include [Supabase](/tutorials/supabase-query), [PlanetScale](https://planetscale.com/), and [Hasura](/customers/hasura). They abstract away infrastructure work while providing speed and tailored offerings. Software engineers and large teams might find their limited customization and options constraining, but product engineers love them.
 
 ## Tools for owning bugs and incidents
 

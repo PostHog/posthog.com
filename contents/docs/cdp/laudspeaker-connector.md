@@ -1,6 +1,6 @@
 ---
 title: Laudspeaker
-github: 'https://github.com/PostHog/posthog-laudspeaker-app'
+github: 'https://github.com/laudspeaker/laudspeaker-posthog-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Laudspeaker'
 thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/cdp/thumbnails/laudspeaker-connector.png
@@ -24,13 +24,13 @@ It is recommended to start by importing PostHog users into Laudspeaker via the e
 After configuring PostHog within Laudspeaker, you can install the Laudspeaker destination in PostHog by following these steps...
 
 1. Log in to your PostHog instance
-2. Click "[Data pipeline](https://us.posthog.com/apps)" in the left sidebar
-3. Search for 'Laudspeaker'
-4. Select the destination, press 'Install'
+2. Click [Data pipeline](https://us.posthog.com/pipeline) in the left sidebar
+3. Search for **Laudspeaker**
+4. Select the destination, press **Install**
 
-To configure the destination, you must provide the destination with your API for `write-key`. This can be found in the 'Settings' section of Laudspeaker and should be copied into the Laudspeaker configuration in PostHog. 
+To configure the destination, you must provide the destination with your API for `write-key`. This can be found in the **Settings** section of Laudspeaker and should be copied into the Laudspeaker configuration in PostHog. 
 
-Finally, you must provide (in PostHog) `[your_server's_url]/events/posthog` for `Lauspeaker URL` (or, if using a Laudspeaker hosted plan, `app.laudspeaker.com/events/posthog`). When this is entered, enable the destination in PostHog. 
+Finally, you must provide (in PostHog) `[your_server's_url]/events/posthog` for `Laudspeaker URL` (or, if using a Laudspeaker hosted plan, `app.laudspeaker.com/events/posthog`). When this is entered, enable the destination in PostHog. 
 
 Other fields (email, phone number, custom) are optional and can be specified if you want to be able to message people from PostHog through those channels with Laudspeaker
 

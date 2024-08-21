@@ -109,7 +109,7 @@ A BAA is available on Mixpanel's Growth plan, which starts at $20 per month for 
 - **Surveys:** <span className="text-green text-lg">✔</span>
 - **Customer data platform:** <span className="text-red text-lg">✖</span>
 
-[Countly](https://countly.com) is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys. Support for app crash and error reports, and push notifications, makes it particularly well-suited to mobile app analytics.
+[Countly](https://countly.com) is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys. Support for app crash and error reports, and push notifications, makes it particularly well-suited to [mobile app analytics](/blog/best-mobile-app-analytics-tools).
 
 #### Countly and HIPAA compliance
 

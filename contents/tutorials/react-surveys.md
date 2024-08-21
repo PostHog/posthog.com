@@ -93,7 +93,7 @@ First, create a survey in PostHog by going to the [surveys tab](https://app.post
 1. Add a name (like `my-first-survey`)
 2. Set the display mode to `API`
 3. Set the question type to `Rating`, question title to `How likely are you to recommend us to a friend?`, display type to `number` and scale to `1-10`.
-4. You can leave the remaining optional properties blank (such as `Targeting` or `Thank you message`).
+4. You can leave the remaining optional properties blank (such as `Display conditions` or `Thank you message`).
 
 Click "Save as draft" and then on the next screen click "Launch". We're now ready to integrate this survey into our app.
 
@@ -209,7 +209,7 @@ This shows a survey popup every time you visit your app's homepage.
 
 #### 2. Add the logic for displaying it.
 
-The first part of handling our display logic is fetching the survey from PostHog. PostHog keeps track of all active surveys for a user (this is especially helpful if you have set up [custom targeting options](/docs/surveys/creating-surveys#targeting)). 
+The first part of handling our display logic is fetching the survey from PostHog. PostHog keeps track of all active surveys for a user (this is especially helpful if you have set up [custom display conditions](/docs/surveys/creating-surveys#display-conditions)).
 
 To fetch the active surveys, we use the `usePostHog` hook to retrieve our PostHog instance. Then, we call `posthog.getActiveMatchingSurveys()` using `useEffect()`:
 
@@ -498,7 +498,7 @@ After interacting with your survey, you can view results by selecting the survey
 - How many users have dismissed the survey.
 - Responses.
 
-If you capture person profiles, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
+If you capture identified events, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 ![Popover survey set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/react-surveys/survey-results.png)
 

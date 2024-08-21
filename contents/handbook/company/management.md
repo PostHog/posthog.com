@@ -30,7 +30,7 @@ A manager at PostHog is _not_ responsible for:
 
 ### Part-time managers
 
-Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job. That means everyone, including the founders, still spend the majority of their time on practising what they do best - for most manager, this isn't actually management!
+Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job. That means everyone, including the founders, still spend the majority of their time on practicing what they do best - for most managers, this isn't actually management!
 
 As an engineer, you wouldn't respect the opinion of someone who can't code on a coding-specific question.
 As a designer, you really want your manager to have an eye for design.
@@ -65,13 +65,23 @@ The most important thing you can do is to schedule [regular 1:1s](https://github
 
 Talking about long-term career plans every now and again is also important but easy to let slip when things get busy. If you can help people achieve long term plans while hitting PostHog's short term needs - whether at PostHog or not - you'll get people's best work! [We have a set of handy templates to use](https://github.com/PostHog/meta/tree/main/.github/1-1-TEMPLATES) - feel free to adapt these for each team member.
 
-## A note on team leads vs managers
+## Team leads vs managers
 
 You'll sometimes hear us use the term "team lead". A team lead is the leader of a small team. By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created. 
 
 **Team leads are simply responsible for making sure the team performs well.** That includes things like setting context and direction within the team, and making sure the processes and rituals the team uses work well. Like everyone else, team leads should give the people in their team frequent [direct feedback](/handbook/people/feedback). If a new person has joined your team, this is especially important during the [first 90 days](/handbook/people/onboarding#306090-day-check-ins). 
 
 Team leads should make sure sprints take place on a regular basis, and are conducted transparently. Setting direction means the team leads finalize the sprint priorities. It's ok for team members to change what they picked to work on during the sprint, but it's the team leads' responsibility to help make sure team members have the right context to make good decisions if they change plan, and that everyone starts the sprint pointing in the right direction.
+
+### The keeper test
+
+As PostHog grows, it's increasingly important that all team leads help us keep the [bar for performance](/handbook/values#6-talent-compounds) high - we can't centralize this with the founders. To help us scale this, the relevant exec team member will regularly check in with their respective team leads to do a [keeper test](https://jobs.netflix.com/culture) on their team members throughout the year:
+
+1. Ask the team lead 'if X was leaving for a similar role at another company, would you try to keep them?'
+2. Dig in where the answer is 'no' - what would it take for this to be a 'yes'? Is this just temporary, or is there a deeper issue to resolve?
+3. Make sure the manager is sharing all of this feedback with their team to help them improve.
+
+> Side note: anyone can ask their team lead/manager 'how hard would you work to change my mind if I were thinking of leaving?' It's a great way to solicit valuable feedback!
 
 ## Ongoing support for managers
 

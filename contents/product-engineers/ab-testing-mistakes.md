@@ -1,6 +1,6 @@
 ---
-date: 2023-05-02
-title: 8 annoying A/B testing mistakes every engineer should know
+date: 2024-08-06
+title: A/B testing mistakes I learned the hard way
 author:
   - lior-neu-ner
 featuredImage: >-
@@ -11,8 +11,16 @@ tags:
   - AB testing
 crosspost:
   - Blog
+  - Newsletter
 ---
 
+Running experiments is equal parts powerful and terrifying.
+
+Powerful because you can validate changes that will transform your product for the better; terrifying because there are so many ways to mess them up.
+
+I’ve run hundreds of A/B tests, both in my previous life as a growth engineer at Meta, and on my personal side project.
+
+These are some classic mistakes I’ve learned the hard way and how to avoid them.
 
 ## 1. Including unaffected users in your experiment
 

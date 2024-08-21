@@ -161,7 +161,7 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         title="Product analytics"
-                        description="Active users, feature flags frowth accounting, traffic sources"
+                        description="Active users, feature flags, growth accounting, traffic sources"
                         Image={
                             <StaticImage
                                 alt=""

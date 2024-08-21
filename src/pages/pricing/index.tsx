@@ -1,5 +1,3 @@
-import Pricing from 'components/Pricing/Pricing'
-import { RenderInClient } from 'components/RenderInClient'
 import React, { useEffect, useState } from 'react'
 import usePostHog from 'hooks/usePostHog'
 import { useLocation } from '@reach/router'
@@ -15,6 +13,7 @@ const internalProductNames: {
     'feature-flags': 'feature_flags',
     'ab-testing': 'ab_testing',
     surveys: 'surveys',
+    'data-warehouse': 'data_warehouse',
 }
 
 const pricingGroupsToShowOverride: {
@@ -75,16 +74,7 @@ const PricingPage = (): JSX.Element => {
                 ]
             }
         >
-            <RenderInClient
-                render={() => {
-                    return posthog?.getFeatureFlag?.('tabbed-pricing-page') === 'test' ? (
-                        <PricingExperiment currentProduct={currentProduct} groupsToShow={groupsToShow} />
-                    ) : (
-                        <Pricing currentProduct={currentProduct} groupsToShow={groupsToShow} />
-                    )
-                }}
-                placeholder={<Skeleton />}
-            />
+            <PricingExperiment currentProduct={currentProduct} groupsToShow={groupsToShow} />
         </Layout>
     )
 }

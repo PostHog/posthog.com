@@ -54,7 +54,7 @@ This is especially helpful for comparing versions when filtering in PostHog insi
 
 ### Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/apps)" tab in the left sidebar.
+1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline)" tab in the left sidebar.
 2. Search for 'SemVer Flattener' and select the transformation, press Install.
 
 That's it!

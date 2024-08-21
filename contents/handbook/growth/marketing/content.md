@@ -25,7 +25,7 @@ Content is the main pillar of our marketing strategy. Our strategy is to go _dee
 
 3. **Helpful evergreen guides:** Articles on topics of interest to our users and potential users. They generally target popular search terms. Examples include [How to measure product-market fit](/founders/measure-product-market-fit), [The AARRR pirate funnel explained](/product-engineers/aarrr-pirate-funnel), and [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes).
 
-4. **Engineering tutorials:** – Guides on how to do specific things in PostHog. These can be for existing PostHog users, or aimed at potential users who are trying to solve a specific problem. Some, like [How to set up Python A/B testing](/tutorials/python-ab-testing) are SEO focused. Others, like [How to show a survey after a delay](/tutorials/delayed-survey), focus on specific PostHog user pain points.
+4. **Engineering tutorials:** – Guides on how to do specific things in PostHog. These can be for existing PostHog users, or aimed at potential users who are trying to solve a specific problem. Some, like [How to set up Python A/B testing](/tutorials/python-ab-testing) are SEO focused. Others focus on specific PostHog user pain points.
 
 5. **Newsletters:** – Our newsletter, [Product for Engineers](https://newsletter.posthog.com), is both a distribution channel and its own content category. Issues often curate or summarize our existing content, or that of others, into an easy-to-digest, snackable format. 
 

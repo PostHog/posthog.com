@@ -7,7 +7,6 @@ import { InlineCode } from 'components/InlineCode'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import Contributors from 'components/PostLayout/Contributors'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import { SEO } from 'components/seo'
 import Team from 'components/People'
@@ -15,7 +14,7 @@ import TestimonialsTable from 'components/TestimonialsTable'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import React from 'react'
+import React, { useState } from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
 import MobileSidebar from 'components/Docs/MobileSidebar'
 import LibraryFeatures from 'components/LibraryFeatures'
@@ -37,6 +36,8 @@ import { TutorialTags } from 'components/Tutorials/constants/tags'
 import { Emoji } from 'components/Emoji'
 import TeamUpdate from 'components/TeamUpdate'
 import CopyCode from 'components/CopyCode'
+import TeamMember from 'components/TeamMember'
+import { Contributor, ContributorImageSmall } from 'components/PostLayout/Contributors'
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -67,18 +68,41 @@ const MDX = ({ body }) => (
     </MDXProvider>
 )
 
+const Contributors = (props) => {
+    const [expanded, setExpanded] = useState(false)
+    const contributors = expanded ? props.contributors : props.contributors.slice(0, 3)
+    const more = props.contributors.length - 3
+    return (
+        <div className={`mb-4 flex flex-col gap-2 -mx-4`}>
+            {contributors.map(({ avatar, username, profile, url }) => {
+                return (
+                    <Contributor
+                        url={profile?.squeakId ? `/community/profiles/${profile.squeakId}` : url}
+                        image={profile?.avatar?.url || avatar}
+                        name={profile ? [profile.firstName, profile.lastName].filter(Boolean).join(' ') : username}
+                        key={username}
+                        role={profile?.companyRole || 'Contributor'}
+                        text
+                        compact
+                        roundedImage={!profile}
+                    />
+                )
+            })}
+            {more > 0 && !expanded && (
+                <button onClick={() => setExpanded(true)} className="mx-4 flex space-x-2 items-center">
+                    <span className="text-sm text-red font-bold text-left flex-shrink-0">+{more} more</span>
+                </button>
+            )}
+        </div>
+    )
+}
+
 export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
     return (
         <>
             {contributors && (
-                <SidebarSection>
-                    <Contributors
-                        contributors={contributors.map(({ url, username, avatar, teamData }) => ({
-                            url,
-                            name: teamData?.name || username,
-                            image: avatar,
-                        }))}
-                    />
+                <SidebarSection title="Contributors">
+                    <Contributors contributors={contributors} />
                 </SidebarSection>
             )}
 
@@ -253,6 +277,7 @@ export default function Handbook({
         Emoji,
         TeamUpdate: (props) => TeamUpdate({ teamName: title?.replace(/team/gi, '').trim(), ...props }),
         CopyCode,
+        TeamMember,
         ...shortcodes,
     }
 
@@ -404,6 +429,15 @@ export const query = graphql`
                     avatar {
                         childImageSharp {
                             gatsbyImageData(width: 38, height: 38)
+                        }
+                    }
+                    profile {
+                        squeakId
+                        firstName
+                        lastName
+                        companyRole
+                        avatar {
+                            url
                         }
                     }
                 }

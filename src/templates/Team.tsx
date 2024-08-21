@@ -16,8 +16,12 @@ import {
     StickerFlagCA,
     StickerFlagCO,
     StickerFlagDE,
+    StickerFlagIE,
+    StickerFlagES,
+    StickerFlagFI,
     StickerFlagFR,
     StickerFlagGB,
+    StickerFlagHU,
     StickerFlagNL,
     StickerFlagPL,
     StickerFlagUnknown,
@@ -46,6 +50,7 @@ import TeamUpdate from 'components/TeamUpdate'
 import { RenderInClient } from 'components/RenderInClient'
 import usePostHog from '../hooks/usePostHog'
 import { companyMenu } from '../navs'
+import { PrivateLink } from 'components/PrivateLink'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -113,6 +118,14 @@ const Stickers = ({ country, pineappleOnPizza, isTeamLead, isModerator, id, hand
                     <StickerFlagGB className="w-8 h-8" />
                 ) : country === 'DE' ? (
                     <StickerFlagDE className="w-8 h-8" />
+                ) : country === 'ES' ? (
+                    <StickerFlagES className="w-8 h-8" />
+                ) : country === 'FI' ? (
+                    <StickerFlagFI className="w-8 h-8" />
+                ) : country === 'HU' ? (
+                    <StickerFlagHU className="w-8 h-8" />
+                ) : country === 'IE' ? (
+                    <StickerFlagIE className="w-8 h-8" />
                 ) : country === 'FR' ? (
                     <StickerFlagFR className="w-8 h-8" />
                 ) : country === 'NL' ? (
@@ -187,7 +200,7 @@ export const Profile = (profile) => {
             </div>
 
             {biography ? (
-                <Markdown>{biography}</Markdown>
+                <Markdown className="bio-sidebar">{biography}</Markdown>
             ) : (
                 <p className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-4 text-sm">
                     {firstName} has been too busy writing code to fill out a bio!
@@ -612,7 +625,7 @@ export default function Team({
             {hasBody && (
                 <Section title="Handbook" id="handbook">
                     <div className="article-content max-w-2xl team-page-content">
-                        <MDXProvider components={{}}>
+                        <MDXProvider components={{ PrivateLink }}>
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                     </div>
