@@ -7,7 +7,7 @@ showTitle: true
 
 > Looking to filter, transform, or export data in PostHog? Check out our [data pipeline docs](/docs/cdp) for all the details.
 
-Site apps enable you easily add functionality to your site without extra code. They are injected through the `posthog-js` library or snippet and can be used to show content or banners on your site. 
+Site apps enable you easily add functionality to your site without extra code. They are injected through the `posthog-js` library or snippet and can be used to show content or banners on your site.
 
 ## Enabling apps
 
@@ -18,8 +18,6 @@ If you're self-hosting, you can install a custom app by pasting a link to its pu
 ## Building a site app
 
 Read our tutorial on [how to build a site app](/tutorials/build-site-app).
-
-If you want to build a destination, transformation, or filter, see the [our data pipeline docs](/docs/cdp/build). 
 
 ## Self-host app troubleshooting
 

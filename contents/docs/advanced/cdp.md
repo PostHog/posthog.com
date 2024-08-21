@@ -13,12 +13,12 @@ The most common CDPs are [Segment](/docs/libraries/segment) and [RudderStack](/d
 
 ## Do I need a CDP?
 
-If you don't have a CDP already set up, you might not need one. PostHog has: 
+If you don't have a CDP already set up, you might not need one. PostHog has:
 
 - [SDKs](/docs/libraries) and [API](/docs/api/capture) to capture data from anywhere.
 - [Data warehouse](/docs/data-warehouse) to easily import and query data from Stripe, Hubspot, [Zendesk](/tutorials/zendesk-reports), S3, and more.
 - Pre-built or customizable [transformations and destinations](/docs/cdp) for cleaning and sending data to other tools.
-- Use your data in PostHog's suite of analysis tools. 
+- Use your data in PostHog's suite of analysis tools.
 
 This means PostHog can act as your single source of truth without needing to set up and pay for another tool.
 
@@ -35,11 +35,10 @@ C --> |No| E[Option 1<br/>Use PostHog as a CDP]
 
 In general, we recommend starting with PostHog as your CDP using our SDKs, data warehouse, destinations, and transformations as needed. This is the easiest and least expensive way to get started.
 
-If you need destinations that we don't currently support, you have several options
+If you need destinations that we don't currently support, you two several options
 
 1. You can send your PostHog data [to a 3rd party CDP](#sending-posthog-data-to-a-3rd-party-cdp-for-extra-destinations).
-2. Build your own [`composeWebhook` destination](/docs/cdp/build).
-3. Fully transition to a 3rd party CDP (option 2).
+2. Fully transition to a 3rd party CDP.
 
 ```mermaid
 graph LR
@@ -63,11 +62,7 @@ Cons:
 
 ### Sending PostHog data to a 3rd party CDP for extra destinations
 
-If there's destination you are looking for that we don't currently have, you have two options:
-
-1. [Build a `composeWebhook` destination](/docs/cdp/build) for it yourself.
-
-2. Use a destination to send data to your CDP like [RudderStack](/docs/cdp/rudderstack-export) and then add the destination you need. This gives you more destinations than PostHog alone, while also mostly relying on PostHog. 
+If there's destination you are looking for that we don't currently have, you can use a destination to send data to your CDP like [RudderStack](/docs/cdp/rudderstack-export) and then add the destination you need. This gives you more destinations than PostHog alone, while also mostly relying on PostHog.
 
 > **Note:** This won't work for the CDP device-mode sources such as Facebook Ads and Google Ads (where the CDP injects the marketing script onto the page). If you need this, we'd recommend integrating the marketing platforms directly, using Google Tag Manager or using a 3rd party CDP as your primary CDP (option 2).
 
@@ -117,7 +112,7 @@ Cons:
 
 ### Using PostHog alongside a 3rd party CDP
 
-You can still use PostHog features like feature flags, session replays, surveys, and more alongside a 3rd party CDP. This will mean that custom events go through the 3rd party CDP and the PostHog specific data (like autocapture events, session replays, and feature flag calls) go directly to PostHog. The true flow of data will end up looking more like the following. 
+You can still use PostHog features like feature flags, session replays, surveys, and more alongside a 3rd party CDP. This will mean that custom events go through the 3rd party CDP and the PostHog specific data (like autocapture events, session replays, and feature flag calls) go directly to PostHog. The true flow of data will end up looking more like the following.
 
 ```mermaid
 graph LR

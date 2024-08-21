@@ -37,7 +37,7 @@ We default to charging as little as possible while still making a profit – we 
 
 ### Analytics
 
-Features like [group analytics](/docs/product-analytics/group-analytics), which enables you analyze behavior at an account of company level, make PostHog ideal for B2B SaaS products. 
+Features like [group analytics](/docs/product-analytics/group-analytics), which enables you analyze behavior at an account of company level, make PostHog ideal for B2B SaaS products.
 
 <ComparisonTable column1="PostHog" column2="Google Analytics">
   <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at account or company level" />
@@ -87,10 +87,10 @@ When you choose PostHog, you get more than analytics.
 
 It's hard to import data into Google Analytics because:
 
-1. The data type and format you're allowed to [import](https://support.google.com/analytics/answer/10071301) is restrictive. 
+1. The data type and format you're allowed to [import](https://support.google.com/analytics/answer/10071301) is restrictive.
 2. You either need to constantly upload CSV files manually, or set up an SFTP server to automatically do this for you.
 
-In contrast, PostHog is built to be your single source of truth, so it's simple to import data from other sources using our [built-in data warehouse](/docs/data-warehouse), or send PostHog data to other tools. You can even [create your own integrations](/docs/cdp/build). 
+In contrast, PostHog is built to be your single source of truth, so it's simple to import data from other sources using our [built-in data warehouse](/docs/data-warehouse), or send PostHog data to other tools.
 
 Below is a comparison of some of the most popular apps – see our [data pipeline](/docs/cdp/airbyte-export) and [warehouse docs](/docs/data-warehouse/setup) for a complete list of integrations.
 
@@ -121,7 +121,7 @@ PostHog makes GDPR compliance easy by letting you choose where your data is host
   <ComparisonRow column1={true} column2={true} feature="2FA available" description="" />
 </ComparisonTable>
 
-## Frequently asked questions 
+## Frequently asked questions
 
 ### Does PostHog have reports, dimensions, and other GA4 features?
 
@@ -185,11 +185,11 @@ See our [guide to PostHog for Google Analytics users](/blog/google-analytics-to-
 
 ### How much do PostHog and Google Analytics cost?
 
-Google Analytics has a free tier that's sufficient for most startups.  Larger enterprises with higher data collection and export requirements will need to upgrade to GA360, which _starts_ at $50,000 per year. 
+Google Analytics has a free tier that's sufficient for most startups.  Larger enterprises with higher data collection and export requirements will need to upgrade to GA360, which _starts_ at $50,000 per year.
 
-A good rule of thumb is that if you're exporting more than 1 million events per day, or querying data with more than 10 million events, you'll need to upgrade to GA360. See Google's [breakdown](https://support.google.com/analytics/answer/11202874) for more. 
+A good rule of thumb is that if you're exporting more than 1 million events per day, or querying data with more than 10 million events, you'll need to upgrade to GA360. See Google's [breakdown](https://support.google.com/analytics/answer/11202874) for more.
 
-PostHog has transparent pricing based on the usage. It's free to get started and completely free for the first 1 million analytics events. After this free monthly allowance you're charged based on usage – we charge progressively less per event the more you use. 
+PostHog has transparent pricing based on the usage. It's free to get started and completely free for the first 1 million analytics events. After this free monthly allowance you're charged based on usage – we charge progressively less per event the more you use.
 
 We recommend trying [our pricing calculator](/pricing) to estimate your costs.
 
@@ -207,7 +207,7 @@ Yes. See the [full blocklist in our docs](/docs/product-analytics/troubleshootin
 
 ### What about ad blockers?
 
-We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain. 
+We recommend all users deploy a reverse proxy, which enables you send events to PostHog Cloud using your own domain.
 
 Events sent from your own domain and are less likely to be intercepted by tracking blockers, ensuring you capture the best data possible. We have [reverse proxy setup guides](/docs/advanced/proxy) for AWS Cloudfront, Caddy, Cloudflare, Netlify, Vercel, and more, in our docs.
 
