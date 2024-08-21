@@ -28,7 +28,7 @@ Yes, PostHog drops data after you go over your billing limit. To capture more du
 
 Yes, early-stage startups can get $50,000 in credits, merch, and exclusive events. Find out more and apply on our [startup program page](/startups).
 
-Non-profits can contact our [sales team](/talk-to-a-human) for 50% off in most cases.
+Non-profits can contact our [sales team](/talk-to-a-human) after signing up to discuss discount options.
 
 ### Can I change the email invoices or billing alerts are sent to?
 
