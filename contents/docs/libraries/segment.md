@@ -111,6 +111,8 @@ analytics.track('user_signed_up', {
 })
 ```
 
+Also, unlike PostHog's JavaScript library's `group` method, you need to pass the `$groups` property on every Segment method call to have that data included.
+
 ## FAQ
 
 ### Where can I find out more?
