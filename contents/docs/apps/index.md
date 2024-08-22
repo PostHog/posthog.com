@@ -15,10 +15,6 @@ Head to 'Data pipelines' -> 'Apps' on the left sidebar in the PostHog app. Here 
 
 If you're self-hosting, you can install a custom app by pasting a link to its public repository, or write your own app directly in PostHog.
 
-## Building a site app
-
-Read our tutorial on [how to build a site app](/tutorials/build-site-app).
-
 ## Self-host app troubleshooting
 
 If you're having issues getting apps to work on your self-hosted instance of PostHog, check out our [troubleshooting guide](/docs/cdp/enabling).

@@ -35,9 +35,10 @@ C --> |No| E[Option 1<br/>Use PostHog as a CDP]
 
 In general, we recommend starting with PostHog as your CDP using our SDKs, data warehouse, destinations, and transformations as needed. This is the easiest and least expensive way to get started.
 
-If you need destinations that we don't currently support, you two several options
+If you need destinations that we don't currently support, you have several options
 
-1. You can send your PostHog data [to a 3rd party CDP](#sending-posthog-data-to-a-3rd-party-cdp-for-extra-destinations).
+1. Build your own in-app destination [real-time destinations](/docs/cdp/destinations) by writing some custom logic to call the 3rd party API.
+2. You can send your PostHog data [to a 3rd party CDP](#sending-posthog-data-to-a-3rd-party-cdp-for-extra-destinations).
 2. Fully transition to a 3rd party CDP.
 
 ```mermaid
@@ -62,8 +63,11 @@ Cons:
 
 ### Sending PostHog data to a 3rd party CDP for extra destinations
 
-If there's destination you are looking for that we don't currently have, you can use a destination to send data to your CDP like [RudderStack](/docs/cdp/rudderstack-export) and then add the destination you need. This gives you more destinations than PostHog alone, while also mostly relying on PostHog.
+If there's destination you are looking for that we don't currently have, you have two options:
 
+1. Build your own [real-time destinations](/docs/cdp/destinations) using custom code. You can also request a new destination in the app and our team will be notified.
+
+2. Use a destination to send data to your CDP like [RudderStack](/docs/cdp/rudderstack-export) and then add the destination you need. This gives you more destinations than PostHog alone, while also mostly relying on PostHog. 
 > **Note:** This won't work for the CDP device-mode sources such as Facebook Ads and Google Ads (where the CDP injects the marketing script onto the page). If you need this, we'd recommend integrating the marketing platforms directly, using Google Tag Manager or using a 3rd party CDP as your primary CDP (option 2).
 
 ```mermaid
