@@ -229,7 +229,8 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                             <MDXRenderer>{body}</MDXRenderer>
                         </MDXProvider>
                         <Upvote className="mt-6" />
-                        <div className={`mt-12 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
+                        <div className={`mt-8 mx-auto pb-20 ${fullWidthContent ? 'max-w-full' : 'max-w-4xl'}`}>
+                            <h3>Comments</h3>
                             <Questions
                                 disclaimer={false}
                                 subject={false}

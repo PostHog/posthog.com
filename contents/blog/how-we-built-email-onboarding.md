@@ -81,7 +81,7 @@ This email performed very well, with a 68% open rate and a 16% CTR. Two emails i
 
 Best of all, though, because it was personalized and came from me directly, it also earned a steady trickle of replies. I responded in kind and was able to feed in further improvements, including adding another option for `role_at_organization` = `founder`.
 
-<NewsletterForm />
+<NewsletterForm placement="middle" />
 
 ## Onboarding 3.3: The one where we added experiments
 
