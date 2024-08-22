@@ -18,7 +18,7 @@ tags:
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-PostHog and Hotjar both include the core tools needed to understand user behavior, including the ability to watch real user sessions, conduct user research, and book interviews, but there are some important differences:
+PostHog and Hotjar both help you understand user behavior, including the ability to watch real user sessions, conduct user research, and book interviews, but there are some important differences:
 
 ## How is PostHog different?
 
@@ -50,14 +50,14 @@ The best way to imagine PostHog is as an [alternative to Hotjar](/blog/best-hotj
   <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for users or cohorts" />
   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze impact" />
   <ComparisonRow column1={true} column2={true} feature="Surveys" description="Capture user feedback with surveys" />
-  <ComparisonRow column1={true} column2={true} feature="Data warehouse" description="Query data from any source and analyze it alongside your product data" />
+  <ComparisonRow column1={true} column2={false} feature="Data warehouse" description="Query data from any source and analyze it alongside your product data" />
   <ComparisonRow column1={true} column2={true} feature="Interview scheduling" description="In-app widget for requesting customer interviews" />
   <ComparisonRow column1={false} column2={true} feature="Interview transcriptions" description="Record and transcribe user interviews" />
 </ComparisonTable>
 
 ### Analytics
 
-Product analytics isn't a core focus for Hotjar, but it does offer basic event tracking, funnels, and trend insights. These features aren't available on its most popular Business plan, however, and require signing up to its Scale plan, which also includes webhooks support, SAML single sign-on, a dedicated account manager, and priority support.
+Product analytics isn't a core focus for Hotjar, but it does offer basic event tracking, funnels, and trend insights on its most expensive Scale plan.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Log page views, clicks and other custom events" />
@@ -92,6 +92,8 @@ Both Hotjar and PostHog are good options if you're looking for a [Microsoft Clar
   <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Trigger recordings based on feature flag variables" />
   <ComparisonRow column1={true} column2={true} feature="Download replays" description="Save replay files offline for storage" />
 </ComparisonTable>
+
+> **Note:** Mobile session replay is free while it's in development, and we're actively working on session replay support for React Native and Flutter, too. See our [mobile replay docs](/docs/session-replay/mobile) for more info on development and how replay works on mobile apps.
 
 ### Heatmaps
 
