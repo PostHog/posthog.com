@@ -199,6 +199,7 @@ const SocialSharing = ({ values }) => {
         initialValues: {
             title: values.title,
             titleSize: '35',
+            titleSpacing: '.3',
             imageSize: '50',
             rotation: '0',
         },
@@ -231,12 +232,23 @@ const SocialSharing = ({ values }) => {
                                 className="-mx-4 mb-2"
                             />
                             <div className="py-4">
-                                <label className="text-sm opacity-60 block">Title size</label>
-                                <RangeSlider
-                                    value={socialValues.titleSize}
-                                    onChange={(e) => setFieldValue('titleSize', e.target.value)}
-                                    className="max-w-xs"
-                                />
+                                <label className="text-sm opacity-60 block">Title options</label>
+                                <div className="flex w-full justify-evenly space-x-8">
+                                    <RangeSlider
+                                        value={socialValues.titleSize}
+                                        onChange={(e) => setFieldValue('titleSize', e.target.value)}
+                                        className="w-full"
+                                        label="Size"
+                                    />
+                                    <RangeSlider
+                                        value={socialValues.titleSpacing}
+                                        onChange={(e) => setFieldValue('titleSpacing', e.target.value)}
+                                        className="w-full"
+                                        label="Spacing"
+                                        max={50}
+                                        min={0}
+                                    />
+                                </div>
                             </div>
                             <div className="py-4">
                                 <label className="text-sm opacity-60 block">Image customization</label>
@@ -261,7 +273,7 @@ const SocialSharing = ({ values }) => {
                         <label className="text-sm opacity-60">Preview</label>
                         <div className={`w-full aspect-square p-6 bg-${color} mt-2 text-primary`}>
                             <div className="bg-accent size-full rounded-xl px-8 relative overflow-hidden flex flex-col">
-                                <div className="flex justify-center space-x-2 items-center py-4 border-b border-border">
+                                <div className="flex justify-center space-x-2 items-end py-4 border-b border-border">
                                     <div>{TopicIcon && <TopicIcon className={`size-12 text-${color}`} />}</div>
                                     <h3 className="text-4xl m-0">
                                         {menuItem?.name || values?.topic?.attributes?.label}
@@ -269,8 +281,11 @@ const SocialSharing = ({ values }) => {
                                 </div>
                                 <div className="relative flex-grow">
                                     <h2
-                                        style={{ fontSize: `${socialValues.titleSize}px` }}
-                                        className="line-clamp-1 text-center !my-[.3em]"
+                                        style={{
+                                            fontSize: `${socialValues.titleSize}px`,
+                                            margin: `${socialValues.titleSpacing}px 0`,
+                                        }}
+                                        className="line-clamp-1 text-center"
                                         dangerouslySetInnerHTML={{ __html: socialValues.title }}
                                     />
                                     {imageURL && (
