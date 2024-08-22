@@ -30,7 +30,6 @@ export const RenderInClient = ({
     const [hasMounted, setHasMounted] = useState(false)
     const [hasFlags, setHasFlags] = useState(false)
     const [flagsUnavailable, setFlagsUnavailable] = useState(false)
-    const [mountTime] = useState(Date.now())
 
     useEffect(() => {
         setHasMounted(true)
@@ -44,23 +43,15 @@ export const RenderInClient = ({
     // default variant.
     useEffect(() => {
         setTimeout(() => {
-            console.log('Check if Flags unavailable after 5 seconds')
             if (!hasFlags) {
-                console.log('No flags available after 5 seconds')
                 setFlagsUnavailable(true)
             }
         }, 5000)
-    }, [mountTime])
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            console.log('hasFlags', hasFlags)
-        })
-        return () => clearInterval(interval)
     }, [])
 
-    if (!hasMounted || (waitForFlags && !hasFlags) || !flagsUnavailable) {
+    if (!hasMounted || (waitForFlags && !hasFlags && !flagsUnavailable)) {
         return placeholder
     }
+
     return render()
 }
