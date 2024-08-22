@@ -33,6 +33,7 @@ Here's how to set these up so that the destination has access only to the datase
    * `bigquery.jobs.create`
    * `bigquery.tables.create`
    * `bigquery.tables.get`
+   * `bigquery.tables.getData`
    * `bigquery.tables.list`
    * `bigquery.tables.updateData`
    * (Optional, for mutable models) `bigquery.tables.delete`
