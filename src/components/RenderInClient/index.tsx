@@ -29,6 +29,8 @@ export const RenderInClient = ({
     const posthog = usePostHog()
     const [hasMounted, setHasMounted] = useState(false)
     const [hasFlags, setHasFlags] = useState(false)
+    const [flagsUnavailable, setFlagsUnavailable] = useState(false)
+    const [mountTime] = useState(Date.now())
 
     useEffect(() => {
         setHasMounted(true)
@@ -37,7 +39,18 @@ export const RenderInClient = ({
         })
     }, [posthog])
 
-    if (!hasMounted || (waitForFlags && !hasFlags)) {
+    // check after 5 seconds to see if we have flags yet. if not, likely blocked by
+    // adblocker or some other issue. Render the component, which should show the
+    // default variant.
+    useEffect(() => {
+        setTimeout(() => {
+            if (!hasFlags) {
+                setFlagsUnavailable(true)
+            }
+        }, 5000)
+    }, [mountTime])
+
+    if (!hasMounted || (waitForFlags && !hasFlags) || !flagsUnavailable) {
         return placeholder
     }
     return render()
