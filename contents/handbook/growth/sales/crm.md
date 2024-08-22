@@ -65,7 +65,7 @@ Our preferred way to keep track of outreach is by creating Salesforce Leads, Con
 - Opportunities: If you identify potential for growth with an existing user, such as expansion or commitment to an annual plan, you can create an Opportunity directly. This is appropriate for contacts or customers where you've already completed the lead assessment (more on that below).
 
 
-## How we do lead assessment
+## How we do lead assignments
 Any user who submits a “contact sales” form on our website shows up as a lead in Salesforce and gets assigned to an Account Executive (AE). This is how we do lead assignment within our sales team:
 - Based on Territory: Leads are assigned based on their geographical location.
   - Territory 1: Users based in the US, Canada, Central and Latin America are assigned to this territory.
@@ -74,7 +74,7 @@ Any user who submits a “contact sales” form on our website shows up as a lea
 
 - Round Robin Within Territory: Leads are assigned in a round-robin fashion to the AEs who own that territory, ensuring equal distribution among them.
 
-### How we process leads in our pipeline
+### How we assess leads in our pipeline
 We have the following lead statuses to manage the lead assessment process before we decide if a user is a right fit to use PostHog.
 
 New: A lead that has just been entered into Salesforce and has not yet been contacted.
@@ -98,7 +98,7 @@ Converted: A lead that has been qualified and is ready to become an opportunity.
 - Ensure all relevant information is transferred accurately and opportunity type is selected properly (more on that below).
 
 Unqualified: A lead that does not meet the criteria to become an opportunity.
-- Document the reasons for disqualification in the “Disqualification reason” field in Salesforce (e.g., budget constraints, lack of fit).
+- Document the reasons for disqualification in the “Disqualification reason” field in Salesforce (e.g., budget constraints, lack of fit, self serve customer, non-opportunity-related inquiries, support requests).
 - Update the lead status to 'Unqualified'.
 
 ### Lead Qualification Criteria
