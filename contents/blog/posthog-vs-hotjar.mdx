@@ -18,11 +18,13 @@ tags:
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
+PostHog and Hotjar both include the core tools needed to understand user behavior, including the ability to watch real user sessions, conduct user research, and book interviews, but there are some important differences:
+
 ## How is PostHog different?
 
 ### 1. We're an all-in-one platform
 
-PostHog goes way beyond [replays](/session-replay) and [user surveys](/surveys) by integrating them with [product](/product-analytics) and [web](/web-analytics) analytics, [feature flags](/feature-flags), [A/B testing](/ab-testing), and a [data warehouse](/data-warehouse). It's everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
+PostHog goes beyond [replays](/session-replay) and [user surveys](/surveys) by integrating them with [product](/product-analytics) and [web](/web-analytics) analytics, [feature flags](/feature-flags), [A/B testing](/ab-testing), and a [data warehouse](/data-warehouse). It's everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
 
 ### 2. We support both web and mobile apps
 
@@ -34,12 +36,14 @@ Every customer gets 5,000 recordings and 1 million events for free each month, n
 
 ## Product comparison
 
-### Platform
+### Core features
 
 The best way to imagine PostHog is as an [alternative to Hotjar](/blog/best-hotjar-alternatives), [Heap](/blog/best-heap-alternatives), and [LaunchDarkly](/blog/best-launchdarkly-alternatives) rolled into one. Oh, and there's a built-in [data warehouse](/data-warehouse) too if you need one.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels and trends" description="Track conversion funnels and event trends over time" />
+  <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Advanced conversion funnels, behavior and retention analysis" />
+  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Replace Google Analytics and track content performance" />
   <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click in your app or website" />
   <ComparisonRow column1={true} column2={true} feature="Scrollmaps" description="Visualize where users scroll on your website" />
@@ -53,7 +57,7 @@ The best way to imagine PostHog is as an [alternative to Hotjar](/blog/best-hotj
 
 ### Analytics
 
-Although product analytics is not a core focus for Hotjar, it does offer basic features, such as event tracking, funnels, and trend insights, albeit only on the Scale plan of its Observe product.
+Product analytics isn't a core focus for Hotjar, but it does offer basic event tracking, funnels, and trend insights. These features aren't available on its most popular Business plan, however, and require signing up to its Scale plan, which also includes webhooks support, SAML single sign-on, a dedicated account manager, and priority support.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Event tracking" description="Log page views, clicks and other custom events" />
@@ -70,7 +74,9 @@ Although product analytics is not a core focus for Hotjar, it does offer basic f
 
 ### Session replay
 
-Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. Both Hotjar and PostHog are good options if you're looking for a [Microsoft Clarity alternative](/blog/best-microsoft-clarity-alternatives).
+Session replays are an essential tool for understanding how people use your product, especially for [early-stage companies](/blog/early-stage-analytics) searching for product-market fit. 
+
+Both Hotjar and PostHog are good options if you're looking for a [Microsoft Clarity alternative](/blog/best-microsoft-clarity-alternatives), though Hotjar doesn't support replays on mobile apps and has no public plans to do so.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web app replays" description="Watch sessions in your web app" />
@@ -89,11 +95,11 @@ Session replays are an essential tool for understanding how people use your prod
 
 ### Heatmaps
 
-Heatmaps visualize where people click and navigate to on your app or website and, when combined with session replay, gives a clearer overview of how users behave.
+Heatmaps visualize where people click and navigate to on your app or website and, when combined with session replay, give a clearer overview of how users behave.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See clicks and mouse movement on your site" />
-    <ComparisonRow column1={true} column2={true} feature="Clickmaps" description="See what elements users click" />
+  <ComparisonRow column1={true} column2={true} feature="Clickmaps" description="See what elements users click" />
   <ComparisonRow column1={true} column2={true} feature="Scrollmaps" description="See how far users scroll" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Track repeated clicks in the same place" />
   <ComparisonRow column1={false} column2={true} feature="Save heatmaps" description="Save historic heatmaps" />
@@ -129,6 +135,51 @@ Using PostHog's product analytics and surveys together unlocks more precise targ
   <ComparisonRow column1={true} column2={false} feature="Target by dynamic cohorts" description="Show to users that meet cohort criteria" />
   <ComparisonRow column1={true} column2={false} feature="Target by static cohorts" description="Show to a specific list of users " />
 </ComparisonTable>
+
+## Price comparison
+
+> **Note:** Prices correct as of Aug 21, 2024.
+
+PostHog is cheaper than Hotjar for both session replay and user surveys, regardless of whether you choose Hotjar's most popular Business tier or the more expensive Scale tier that includes Hotjar's basic analytics features, and a dedicated account manager.
+
+### Session replay pricing
+
+Hotjar charges based on 'sessions per day', whereas PostHog uses monthly recorded sessions. We've multiplied Hotjar's daily sessions by 30 to get a monthly equivalent. 
+
+[GRAPH WILL GO HERE]
+
+| Monthly sessions | Hotjar Business | Hotjar Scale | PostHog |
+|------------------|--------------|-----------------|---------|
+| **5k**               | $99          | $213            | $0      |
+| **15k**              | $99          | $213            | $50     |
+| **45k**              | $249         | $525            | $157    |
+| **75k**              | $389         | $827            | $224    |
+| **120k**             | $489         | Contact sales   | $313    |
+| **240k**             | $789         | Contact sales   | $524    |
+
+At 75k recorded sessions per month, PostHog is $1,980 cheaper over 12 months compared to Hotjar's Business tier, and $7,236 cheaper than Hotjar's Scale tier, when paying monthly.
+
+PostHog also offers a more generous free tier that includes 5,000 replay sessions, 1 million analytics events, and 250 survey responses for free _every month_. Hotjar doesn't offer any free usage outside of its extremely limited Basic tier.
+
+### Surveys pricing
+
+It's similar story for user surveys, where PostHog is cheaper than both Hotjar's Business and Scale tiers. At 2,500 survey responses each month, PostHog is $324 per year cheaper than Hotjar's Business tier when paying monthly.
+
+[GRAPH WILL GO HERE]
+
+| Monthly survey responses | Hotjar Business | Hotjar Scale | PostHog |
+|--------------------------|--------------|-----------------|---------|
+| **250**                      | $79          | $159            | $0      |
+| **500**                      | $79          | $159            | $51     |
+| **1,000**                    | $99          | $259            | $99     |
+| **2,500**                    | $179         | $479            | $152    |
+| **5,000**                    | $289         | Contact sales   | $240    |
+| **7,500**                    | $399         | Contact sales   | $330    |
+| **10,000**                   | $479         | Contact sales   | $418    |
+
+You can see how much PostHog will cost you using the calculator on our [pricing page](/pricing).
+
+## Platform and integrations
 
 ### Data sources
 
@@ -177,50 +228,15 @@ Regulatory compliance can be a critical need for many teams, especially if they 
   <ComparisonRow column1={true} column2={false} feature="Cookieless tracking option" description="Use session replays and analytics without cookie consent banners" />
 </ComparisonTable>
 
-## Price comparison
-
-> **Note:** Prices correct as of Aug 21, 2024.
-
-PostHog is cheaper than Hotjar for both session replay and user surveys, regardless of whether you choose Hotjar's most popular Business tier or the more expensive Scale tier that includes Hotjar's basic analytics features, and a dedicated account manager.
-
-### Session replay pricing
-
-Hotjar charges based on 'sessions per day', whereas PostHog uses monthly recorded sessions. We've multiplied Hotjar's daily sessions by 30 to get a monthly equivalent. 
-
-[GRAPH WILL GO HERE]
-
-| Monthly sessions | Hotjar Business | Hotjar Scale | PostHog |
-|------------------|--------------|-----------------|---------|
-| **5k**               | $99          | $213            | $0      |
-| **15k**              | $99          | $213            | $50     |
-| **45k**              | $249         | $525            | $157    |
-| **75k**              | $389         | $827            | $224    |
-| **120k**             | $489         | Contact sales   | $313    |
-| **240k**             | $789         | Contact sales   | $524    |
-
-At 75k recorded sessions per month, PostHog is $1,980 cheaper over 12 months compared to Hotjar's Business tier, and $7,236 cheaper than Hotjar's Scale tier, when paying monthly.
-
-PostHog also offers a more generous free tier that includes 5,000 replay sessions, 1 million analytics events, and 250 survey responses for free _every month_. Hotjar doesn't offer any free usage outside of its extremely limited Basic tier.
-
-### Surveys pricing
-
-It's similar story for user surveys, where PostHog is cheaper than both Hotjar's Business and Scale tiers. At 2,500 survey responses each month, PostHog is $324 per year cheaper than Hotjar's Business tier when paying monthly.
-
-[GRAPH WILL GO HERE]
-
-| Monthly survey responses | Hotjar Business | Hotjar Scale | PostHog |
-|--------------------------|--------------|-----------------|---------|
-| **250**                      | $79          | $159            | $0      |
-| **500**                      | $79          | $159            | $51     |
-| **1,000**                    | $99          | $259            | $99     |
-| **2,500**                    | $179         | $479            | $152    |
-| **5,000**                    | $289         | Contact sales   | $240    |
-| **7,500**                    | $399         | Contact sales   | $330    |
-| **10,000**                   | $479         | Contact sales   | $418    |
-
-You can see how much PostHog will cost you using the calculator on our [pricing page](/pricing).
-
 ## Frequently asked questions
+
+### Can PostHog replace Google Analytics?
+
+Absolutely. We include an easy-to-use [web analytics dashboard](/web-analytics) for tracking marketing and content performance, and you can use our product analytics to do more in-depth analysis as well. See our [PostHog vs Google Analytics comparison](/blog/posthog-vs-ga4) for more.
+
+### Can PostHog replace Mixpanel, Amplitude and Heap?
+
+It's what PostHog's designed to do. The beauty of PostHog is replaces multiple tools in your analytics and product stack, so you can stop juggling data between multiple tools, and save money by consolidating everything. See our comparisons with [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/blog/posthog-vs-heap) for more.
 
 ### Can I choose which sessions are recorded?
 
