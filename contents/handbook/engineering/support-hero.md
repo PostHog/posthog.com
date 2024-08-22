@@ -77,10 +77,13 @@ If you have any questions about how or when to communicate with users, you can a
 
 As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero. At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
 
-1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel, as there will be some urgency needed.
-1. Open Zendesk tickets for your team that have `high` priority.
-1. Open Zendesk tickets for your team that have `normal` priority.
-1. Open Zendesk tickets for your team that have `low` priority.
+1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel, as there will be some urgency needed. 
+2. `Open`, `escalated` Zendesk tickets for your team that have `High` priority.
+3. `Open`, `escalated` Zendesk tickets for your team that have `Normal` priority.
+4. `New` and `Open`* (non-escalated) Zendesk tickets for your team that are nearing breach or have breached [SLAs](/handbook/comms/customer-support#response-targets)
+5. `Open` ZenDesk tickets for your team that have low priority.
+
+\* Due to the way we're using Pylon, "new" tickets from high prio customer Slack channels only appear as `New` in Zendesk for a few seconds, then a webhook updates the ticket and quickly changes it to `Open`.
 
 ### What if I need to confirm priority by checking a customer's MRR?
 
