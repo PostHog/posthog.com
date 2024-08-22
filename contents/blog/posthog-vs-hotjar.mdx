@@ -30,7 +30,7 @@ We offer integrations for all the most popular web and and mobile SDKs, includin
 
 ### 3. We're cheaper and have a generous free tier
 
-Every customer gets 5,000 recordings and 1 million events for free each month, no matter what plan they're on. Our generous free tier means more than 90% of companies use PostHog for free, and you'll pay less when you do use up your free credits. See the [price comparison section](#price-comparison)
+Every customer gets 5,000 recordings and 1 million events for free each month, no matter what plan they're on. Our generous free tier means more than 90% of companies use PostHog for free, and you'll pay less when you do use up your free credits. See the [price comparison section](#price-comparison) for more.
 
 ## Product comparison
 
@@ -43,7 +43,7 @@ The best way to imagine PostHog is as an [alternative to Hotjar](/blog/best-hotj
   <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click in your app or website" />
   <ComparisonRow column1={true} column2={true} feature="Scrollmaps" description="Visualize where users scroll on your website" />
-  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
+  <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely; toggle features for users or cohorts" />
   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze impact" />
   <ComparisonRow column1={true} column2={true} feature="Surveys" description="Capture user feedback with surveys" />
   <ComparisonRow column1={true} column2={true} feature="Data warehouse" description="Query data from any source and analyze it alongside your product data" />
@@ -74,11 +74,10 @@ Session replays are an essential tool for understanding how people use your prod
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web app replays" description="Watch sessions in your web app" />
-  <ComparisonRow column1="Beta" column2={false} feature="Android app replays" description="Watch real users use your Android app" />
-  <ComparisonRow column1="Beta" column2={false} feature="iOS app replays" description="Watch real users use your iOS app" />
+  <ComparisonRow column1="Beta" column2={false} feature="Android replays" description="Watch real users use your Android app" />
+  <ComparisonRow column1="Beta" column2={false} feature="iOS replays" description="Watch real users use your iOS app" />
   <ComparisonRow column1={true} column2={true} feature="Console logs" description="Debug user problems and app errors" />
-  <ComparisonRow column1={true} column2={false} feature="Network performance" description="See end-user's network performance" />
-  <ComparisonRow column1={true} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
+  <ComparisonRow column1={true} column2={false} feature="Network performance" description="See sessions web vitals and requests" />
   <ComparisonRow column1={true} column2={false} feature="Custom playlists" description="Create playlists of related replays" />
   <ComparisonRow column1={false} column2={true} feature="Create highlights" description="Crop and save segments of recordings" />
   <ComparisonRow column1={false} column2={true} feature="Frustration and engagement scores" description="Filter recordings by scores" />
@@ -90,11 +89,12 @@ Session replays are an essential tool for understanding how people use your prod
 
 ### Heatmaps
 
-Heatmaps visualize where people click and navigate to on your app or website and, when combined with session replay, can be useful 
+Heatmaps visualize where people click and navigate to on your app or website and, when combined with session replay, gives a clearer overview of how users behave.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Show where users are clicking" />
-  <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll" />
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See clicks and mouse movement on your site" />
+    <ComparisonRow column1={true} column2={true} feature="Clickmaps" description="See what elements users click" />
+  <ComparisonRow column1={true} column2={true} feature="Scrollmaps" description="See how far users scroll" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Track repeated clicks in the same place" />
   <ComparisonRow column1={false} column2={true} feature="Save heatmaps" description="Save historic heatmaps" />
   <ComparisonRow column1={true} column2={false} feature="Toolbar" description="View heatmaps in browser" />
@@ -115,19 +115,19 @@ Hotjar supports more survey types than PostHog, such as fullscreen surveys, but 
   <ComparisonRow column1={false} column2={true} feature="Sentiment analysis" description="Analyze survey results using AI to discover trends" />
   <ComparisonRow column1={true} column2={true} feature="Survey templates" description="Templates for NPS, market-fit, and CSAT surveys" />
   <ComparisonRow column1={true} column2={true} feature="Interview scheduling" description="Send users a link to schedule a feedback meeting." />
-  <ComparisonRow column1={true} column2={true} feature="Webhooks" description="Send survey responses" />
+  <ComparisonRow column1={true} column2={false} feature="API" description="Build your own UI and send responses to API" />
+  <ComparisonRow column1={true} column2={true} feature="Webhooks" description="Send survey responses to places like Slack or Teams" />
 </ComparisonTable>
 
 Using PostHog's product analytics and surveys together unlocks more precise targeting options for surveys, such as using feature flags and pre-defined cohorts.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
-  <ComparisonRow column1={true} column2={true} feature="Target by URL" description="Surveys triggered when user visits specific URL" />
+  <ComparisonRow column1={true} column2={true} feature="Target by URL" description="Trigger when user visits specific URL" />
   <ComparisonRow column1={true} column2={true} feature="Target by person properties" description="Target users by individual attributes" />
-  <ComparisonRow column1={true} column2={true} feature="Target by completed event" description="Surveys triggered when user completes specific event" />
-  <ComparisonRow column1={true} column2={true} feature="Target by completed action" description="Surveys triggered by a group of related events" />
-  <ComparisonRow column1={true} column2={false} feature="Target by feature flag" description="Only show surveys to users with a feature flag enabled" />
-  <ComparisonRow column1={true} column2={false} feature="Target by dynamic cohorts" description="Only show surveys to users that meet cohort criteria" />
-  <ComparisonRow column1={true} column2={false} feature="Target by static cohorts" description="Only show surveys to a specific list of users " />
+  <ComparisonRow column1={true} column2={true} feature="Target by completed event" description="Trigger when user completes specific event or action" />
+  <ComparisonRow column1={true} column2={false} feature="Target by feature flag" description="Show to users with a feature flag enabled" />
+  <ComparisonRow column1={true} column2={false} feature="Target by dynamic cohorts" description="Show to users that meet cohort criteria" />
+  <ComparisonRow column1={true} column2={false} feature="Target by static cohorts" description="Show to a specific list of users " />
 </ComparisonTable>
 
 ### Data sources
@@ -144,8 +144,6 @@ PostHog has a [built-in data warehouse](/data-warehouse), so you can import, com
   <ComparisonRow column1={true} column2={false} feature="Postgres" description="Import data from Postgres data warehouse" />
   <ComparisonRow column1={true} column2={false} feature="Snowflake" description="Import data from Snowflake" />
   <ComparisonRow column1={true} column2={false} feature="Google Cloud" description="Import data from GCS" />
-  <ComparisonRow column1={true} column2={false} feature="Azure" description="Import data from Microsoft Azure" />
-  <ComparisonRow column1={true} column2={false} feature="Cloudflare R2" description="Import data from Cloudflare" />
 </ComparisonTable>
 
 ### Data destinations
@@ -154,18 +152,21 @@ Hotjar and PostHog support a similar range of data destinations, though PostHog 
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Hubspot" description="Send data to Hubspot" />
-  <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Send data to Salesforce" />
   <ComparisonRow column1={true} column2={true} feature="Zapier" description="Export events for use in Zaps" />
   <ComparisonRow column1={true} column2={true} feature="Slack" description="Send survey responses and data to Slack" />
   <ComparisonRow column1={true} column2={true} feature="Teams" description="Send survey responses and data to Teams" />
   <ComparisonRow column1={true} column2={false} feature="Discord" description="Send survey responses and data to Discord" />
   <ComparisonRow column1={true} column2={true} feature="Intercom" description="Extract and load data to external platforms" />
+  <ComparisonRow column1={true} column2={true} feature="Salesforce" description="Send data to Salesforce" />
   <ComparisonRow column1={true} column2={false} feature="Customer.io" description="Sync data between platforms" />
+   <ComparisonRow column1={true} column2={true} feature="CSV" description="Export data to CSV" />
+  <ComparisonRow column1={true} column2={false} feature="S3" description="Batch export data to S3" />
+  <ComparisonRow column1={true} column2={false} feature="BigQuery" description="Batch export data to BigQuery" />
 </ComparisonTable>
 
 ### Privacy, compliance, and security
 
-Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPPA and GDPR can require teams to store data in certain locations, or to protect data in certain ways.
+Regulatory compliance can be a critical need for many teams, especially if they operate in financial or healthcare industries. Regulations such as HIPAA and GDPR can require teams to store data in certain locations or protect it in certain ways.
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={false} feature="SOC 2 certified" description="Information security process audited" />
@@ -180,7 +181,7 @@ Regulatory compliance can be a critical need for many teams, especially if they 
 
 > **Note:** Prices correct as of Aug 21, 2024.
 
-PostHog is cheaper than Hotjar for both session replay and user surveys, regardless of whether you choose Hotjar's most popular Business tier, or the more expensive Scale tier that includes Hotjar's basic analytics features, and a dedicated account manager.
+PostHog is cheaper than Hotjar for both session replay and user surveys, regardless of whether you choose Hotjar's most popular Business tier or the more expensive Scale tier that includes Hotjar's basic analytics features, and a dedicated account manager.
 
 ### Session replay pricing
 
@@ -188,7 +189,7 @@ Hotjar charges based on 'sessions per day', whereas PostHog uses monthly recorde
 
 [GRAPH WILL GO HERE]
 
-| Monthly sessions | Hotjar Businss | Hotjar Scale | PostHog |
+| Monthly sessions | Hotjar Business | Hotjar Scale | PostHog |
 |------------------|--------------|-----------------|---------|
 | **5k**               | $99          | $213            | $0      |
 | **15k**              | $99          | $213            | $50     |
