@@ -11,7 +11,7 @@ interface NewsletterFormProps {
     placement?: string
 }
 
-export const NewsletterForm = ({ className = '', placement = '' }: NewsletterFormProps): JSX.Element => {
+export const NewsletterForm = ({ className = '', placement }: NewsletterFormProps): JSX.Element => {
     const { user } = useUser()
     const posthog = usePostHog()
     const [email, setEmail] = useState('')
@@ -23,6 +23,15 @@ export const NewsletterForm = ({ className = '', placement = '' }: NewsletterFor
         setSubmitted(true)
     }
 
+    const placementClasses =
+        placement === 'middle'
+            ? 'border-y !mt-10 !mb-6 xs:!my-6 !py-4'
+            : placement === 'blog-index'
+            ? 'border-0 pt-8'
+            : placement === 'community'
+            ? 'border-0'
+            : 'border-y !mt-6 !mb-0 !py-4'
+
     useEffect(() => {
         if (user?.email) {
             setEmail(user.email)
@@ -31,9 +40,8 @@ export const NewsletterForm = ({ className = '', placement = '' }: NewsletterFor
 
     return (
         <div
-            className={`flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 border-light dark:border-dark ${
-                placement === 'middle' ? 'border-y !mt-10 !mb-6 xs:!my-6 !py-4' : 'border-y !mt-6 !mb-0 !py-4'
-            } ${className}`}
+            className={`
+                flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 border-light dark:border-dark ${placementClasses} ${className}`}
         >
             <div className="text-center hidden md:block">
                 <StaticImage
