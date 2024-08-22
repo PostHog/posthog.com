@@ -35,7 +35,7 @@ export const SignupCTA = ({
                     type={type}
                     className={className}
                     width={width}
-                    to={`https://app.posthog.com/signup`}
+                    to={`https://us.posthog.com/signup`}
                     event={event}
                     size={size}
                 >
