@@ -65,7 +65,7 @@ Cons:
 
 If there's destination you are looking for that we don't currently have, you have two options:
 
-1. Build your own [real-time destinations](/docs/cdp/destinations) using custom code. You can also request a new destination in the app and our team will be notified.
+1. Build your own [real-time destinations](/docs/cdp/destinations) using custom code. You can also request a new destination by clicking **Can't find what your looking for?** when [creating a new destination](https://us.posthog.com/pipeline/new/destination) in-app and our team will be notified.
 
 2. Use a destination to send data to your CDP like [RudderStack](/docs/cdp/rudderstack-export) and then add the destination you need. This gives you more destinations than PostHog alone, while also mostly relying on PostHog. 
 > **Note:** This won't work for the CDP device-mode sources such as Facebook Ads and Google Ads (where the CDP injects the marketing script onto the page). If you need this, we'd recommend integrating the marketing platforms directly, using Google Tag Manager or using a 3rd party CDP as your primary CDP (option 2).
