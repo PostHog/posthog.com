@@ -51,7 +51,7 @@ The simple Segment destination only supports tracking of pageviews, custom event
 
 ## Sending events to PostHog
 
-Once you set up your Segment source and PostHog destination, you can send events via Segment to PostHog. You do this through one of their source libraries or their API. The PostHog destination supports the identify, track, page, screen, group, and alias definitions.
+Once you set up your Segment source and PostHog destination, you can send events via Segment to PostHog. You do this through one of its source libraries or its API. The PostHog destination supports the identify, track, page, screen, group, and alias definitions.
 
 With the Analytics.js source, you can use `analytics.track('Event Name')` to send events to Segment, which is then sent to PostHog. For example, this sends a `user signed up` event with `plan` and `accountType` event properties and a `paid` person property to PostHog:
 
