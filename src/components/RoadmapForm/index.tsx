@@ -6,7 +6,7 @@ import { Select as TopicSelect } from 'components/Squeak/components/QuestionForm
 import dayjs from 'dayjs'
 import { useFormik } from 'formik'
 import { useUser } from 'hooks/useUser'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Select from 'components/Select'
 import RichText from 'components/Squeak/components/RichText'
 import { CallToAction } from 'components/CallToAction'
@@ -18,6 +18,7 @@ import qs from 'qs'
 import { AnimatePresence, motion } from 'framer-motion'
 import menu from '../../navs'
 import * as Icons from '@posthog/icons'
+import { toJpeg } from 'html-to-image'
 
 const GitHubURLs = ({
     urls,
@@ -186,6 +187,8 @@ const RangeSlider = ({
 }
 
 const SocialSharing = ({ values }) => {
+    const [downloaded, setDownloaded] = useState(false)
+    const containerRef = useRef<HTMLDivElement>(null)
     const [open, setOpen] = useState(false)
     const menuItem = useMemo(
         () => getMenuItemFromTopicLabel(values?.topic?.attributes?.label),
@@ -204,6 +207,19 @@ const SocialSharing = ({ values }) => {
             rotation: '0',
         },
     })
+
+    const downloadImage = async () => {
+        if (containerRef.current) {
+            const dataURL = await toJpeg(containerRef.current)
+            const link = document.createElement('a')
+            link.download = `${socialValues.title}.jpeg`
+            link.href = dataURL
+            link.click()
+            link.remove()
+            setDownloaded(true)
+            setTimeout(() => setDownloaded(false), 3000)
+        }
+    }
 
     return (
         <div className="p-4 border-t col-span-2">
@@ -270,12 +286,25 @@ const SocialSharing = ({ values }) => {
                                 </div>
                             </div>
                         </div>
-                        <label className="text-sm opacity-60">Preview</label>
-                        <div className={`w-full aspect-square p-6 bg-${color} mt-2 text-primary`}>
+                        <div className="mb-2 flex justify-between items-center">
+                            <label className="text-sm opacity-60">Preview</label>
+                            {downloaded ? (
+                                <Icons.IconCheck className="size-4 text-green" />
+                            ) : (
+                                <button
+                                    type="button"
+                                    className="text-sm text-red dark:text-yellow font-bold"
+                                    onClick={downloadImage}
+                                >
+                                    Download image
+                                </button>
+                            )}
+                        </div>
+                        <div ref={containerRef} className={`w-full aspect-square p-6 bg-${color} text-primary`}>
                             <div className="bg-accent size-full rounded-xl px-8 relative overflow-hidden flex flex-col">
                                 <div className="flex justify-center space-x-2 items-end py-4 border-b border-border">
                                     <div>{TopicIcon && <TopicIcon className={`size-12 text-${color}`} />}</div>
-                                    <h3 className="text-4xl m-0">
+                                    <h3 className="text-4xl m-0 font-bold">
                                         {menuItem?.name || values?.topic?.attributes?.label}
                                     </h3>
                                 </div>
