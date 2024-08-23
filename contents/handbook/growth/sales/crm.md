@@ -27,9 +27,10 @@ Salesforce offers a ton of [resources](https://trailhead.Salesforce.com) if you 
 ## Managing our CRM
 
 People currently come into Salesforce through one of the following ways:
-- They email sales@posthog.com
-- They fill in a contact/demo request form through the website
-- They are manually added to Salesforce by a member of the team, e.g. if you met someone interested in PostHog at an event
+- Email Inquiries: When someone emails our sales team at sales@posthog.com
+- Website Forms: When they complete a contact or demo request form on our website
+- Product Sign-ups: When they sign up for specific products or plans that include onboarding assistance (e.g., Teams Plan)
+- Manual Entry: When a team member manually adds a contact, such as meeting someone interested in PostHog at an event
 
 ### Email
 
