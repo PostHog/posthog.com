@@ -37,7 +37,7 @@ In general, we recommend starting with PostHog as your CDP using our SDKs, data 
 
 If you need destinations that we don't currently support, you have several options
 
-1. Build your own in-app destination [real-time destinations](/docs/cdp/destinations) by writing some custom logic to call the 3rd party API.
+1. Build your own [real-time destinations](/docs/cdp/destinations) to call the 3rd party API.
 2. You can send your PostHog data [to a 3rd party CDP](#sending-posthog-data-to-a-3rd-party-cdp-for-extra-destinations).
 2. Fully transition to a 3rd party CDP.
 
