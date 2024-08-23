@@ -35,7 +35,7 @@ C --> |No| E[Option 1<br/>Use PostHog as a CDP]
 
 In general, we recommend starting with PostHog as your CDP using our SDKs, data warehouse, destinations, and transformations as needed. This is the easiest and least expensive way to get started.
 
-If you need destinations that we don't currently support, you have several options
+If you need destinations that we don't currently support, you have two options:
 
 1. Build your own [real-time destinations](/docs/cdp/destinations) to call the 3rd party API.
 2. Fully transition to a 3rd party CDP.
