@@ -1265,6 +1265,10 @@
         { "source": "/docs/cdp/build/jobs", "destination": "/docs/cdp/build" },
         { "source": "/docs/cdp/enabling", "destination": "/docs/cdp/build" },
         { "source": "/docs/cdp/build/types", "destination": "/docs/cdp/build#types" },
+        { "source": "/docs/apps", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/build/reference", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/build", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/build/tutorial", "destination": "/docs/cdp/destinations" },
         { "source": "/blog/learnings-from-elon", "destination": "/founders/learnings-from-elon" },
         { "source": "/docs/data/application-settings", "destination": "/docs" },
         {
