@@ -68,6 +68,12 @@ For example, when someone calls a feature flag, we send a $feature_flag_called e
 
 - Features that are focused around extra security, permissioning, compliance, or other enterprise-style upgrades should be reserved for our enterprise pricing tier.
 
-- Unless there is a very good reason not to, we should grandfather existing customers' pricing tiers to avoid unexpected pricing changes.
+- Unless there is a very good reason not to (e.g. we lower our prices), we should grandfather existing customers' pricing tiers to avoid unexpected pricing changes. 
 
+### Deciding on a free volume tier, and making changes to it
 
+- When choosing a free volume tier for a new product, we should choose a value that is in line with our pricing principles: It should give customers the opportunity to experience the product before paying for it, and we should slightly undercut our competitors if they offer a free tier. 
+
+- Keep in mind: It's easy to increase the free tier for existing customers, but it's very painful to decrease it (since we don't want existing customers to pay more).
+
+- If we decide to lower the free tier as part of a wider pricing change (primarily when we lower our prices), in principle we should roll out the new pricing **and** the new free tier to existing customers, because they will likely save money. An exception should be made for customers who are forecasted to pay more, in these cases, we should enroll them in the new pricing, but grandfather the higher free tier.
