@@ -19,6 +19,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import menu from '../../navs'
 import * as Icons from '@posthog/icons'
 import { toJpeg } from 'html-to-image'
+import { graphql, useStaticQuery } from 'gatsby'
+import { capitalizeFirstLetter } from '../../utils'
+import { topicIcons } from 'components/Questions/TopicsTable'
 
 const GitHubURLs = ({
     urls,
@@ -187,14 +190,28 @@ const RangeSlider = ({
 }
 
 const SocialSharing = ({ values }) => {
+    const {
+        allCloudinaryImage: { nodes: allHogs },
+    } = useStaticQuery(graphql`
+        {
+            allCloudinaryImage(filter: { folder: { eq: "hogs" } }) {
+                nodes {
+                    url
+                    public_id
+                }
+            }
+        }
+    `)
+
     const [downloaded, setDownloaded] = useState(false)
+    const [downloadDisabled, setDownloadDisabled] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
     const [open, setOpen] = useState(false)
     const menuItem = useMemo(
         () => getMenuItemFromTopicLabel(values?.topic?.attributes?.label),
         [values?.topic?.attributes?.label]
     )
-    const TopicIcon = Icons[menuItem?.icon]
+    const TopicIcon = Icons[menuItem?.icon] || topicIcons[values?.topic?.attributes?.label?.toLowerCase()]
     const color = menuItem?.color || 'red'
     const imageURL = values?.featuredImage?.objectURL
     const { values: socialValues, setFieldValue } = useFormik({
@@ -202,14 +219,16 @@ const SocialSharing = ({ values }) => {
         initialValues: {
             title: values.title,
             titleSize: '35',
-            titleSpacing: '.3',
-            imageSize: '50',
+            titleSpacing: '20',
+            imageSize: '100',
             rotation: '0',
+            hog: undefined,
         },
     })
 
     const downloadImage = async () => {
         if (containerRef.current) {
+            setDownloadDisabled(true)
             const dataURL = await toJpeg(containerRef.current)
             const link = document.createElement('a')
             link.download = `${socialValues.title}.jpeg`
@@ -217,7 +236,10 @@ const SocialSharing = ({ values }) => {
             link.click()
             link.remove()
             setDownloaded(true)
-            setTimeout(() => setDownloaded(false), 3000)
+            setTimeout(() => {
+                setDownloaded(false)
+                setDownloadDisabled(false)
+            }, 3000)
         }
     }
 
@@ -285,16 +307,32 @@ const SocialSharing = ({ values }) => {
                                     />
                                 </div>
                             </div>
+                            <div>
+                                <Select
+                                    search
+                                    className="!px-0"
+                                    placeholder="Hedgehog"
+                                    onChange={(value) => setFieldValue('hog', value)}
+                                    options={allHogs.map(({ url, public_id }) => ({
+                                        label: capitalizeFirstLetter(
+                                            public_id.replace('hogs/', '').replaceAll('_', ' ')
+                                        ),
+                                        value: url,
+                                    }))}
+                                    value={socialValues.hog}
+                                />
+                            </div>
                         </div>
-                        <div className="mb-2 flex justify-between items-center">
+                        <div className="mb-2 flex justify-between items-center border-t border-border dark:border-dark pt-4">
                             <label className="text-sm opacity-60">Preview</label>
                             {downloaded ? (
                                 <Icons.IconCheck className="size-4 text-green" />
                             ) : (
                                 <button
                                     type="button"
-                                    className="text-sm text-red dark:text-yellow font-bold"
+                                    className="text-sm text-red dark:text-yellow font-bold disabled:opacity-50"
                                     onClick={downloadImage}
+                                    disabled={downloadDisabled}
                                 >
                                     Download image
                                 </button>
@@ -350,6 +388,12 @@ const SocialSharing = ({ values }) => {
                                                 </p>
                                             </div>
                                         </div>
+                                    )}
+                                    {socialValues.hog && (
+                                        <img
+                                            src={socialValues.hog}
+                                            className="absolute -left-8 -bottom-4 max-w-[200px]"
+                                        />
                                     )}
                                 </div>
                             </div>
