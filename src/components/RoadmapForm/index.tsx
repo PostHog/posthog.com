@@ -337,7 +337,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                         <div className="w-full flex justify-center">
                             <div
                                 ref={containerRef}
-                                className={`size-[572px] aspect-square p-6 bg-${color} text-primary`}
+                                className={`size-[572px] aspect-square p-6 bg-${color} text-primary flex-shrink-0`}
                             >
                                 <div className="bg-accent size-full rounded-xl px-8 relative overflow-hidden flex flex-col">
                                     <div className="flex justify-center space-x-2 items-end py-4 border-b border-border">
