@@ -191,7 +191,14 @@ const RangeSlider = ({
     return (
         <div className={`mt-2 ${className}`}>
             {label && <label className="block font-semibold">{label}</label>}
-            <input className="w-full" type="range" min={min} max={max} value={value} onChange={onChange} />
+            <input
+                className="w-full accent-red dark:accent-yellow"
+                type="range"
+                min={min}
+                max={max}
+                value={value}
+                onChange={onChange}
+            />
         </div>
     )
 }
@@ -359,7 +366,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                                 fontSize: `${socialValues.titleSize}px`,
                                                 margin: `${socialValues.titleSpacing}px 0`,
                                             }}
-                                            className="line-clamp-1 text-center"
+                                            className="text-center leading-tight"
                                             dangerouslySetInnerHTML={{ __html: socialValues.title }}
                                         />
                                         {imageURL && (
