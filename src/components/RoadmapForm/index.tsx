@@ -233,6 +233,12 @@ const SocialSharing = ({ values, setFieldValue }) => {
         }
     }
 
+    useEffect(() => {
+        if (!socialValues.title && values.title) {
+            setFieldValue('social.title', values.title)
+        }
+    }, [])
+
     return (
         <div className="p-4 border-t col-span-2">
             <button
