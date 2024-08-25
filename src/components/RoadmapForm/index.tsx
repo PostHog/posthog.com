@@ -141,14 +141,21 @@ const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any)
 
     return (
         <Select
+            search
             placeholder="Author"
-            options={profiles.map((profile) => {
-                const name = [profile.attributes.firstName, profile.attributes.lastName].filter(Boolean).join(' ')
-                return {
-                    label: name,
-                    value: profile,
-                }
-            })}
+            options={[...profiles]
+                .sort((a, b) => {
+                    const nameA = [a.attributes.firstName, a.attributes.lastName].filter(Boolean).join(' ')
+                    const nameB = [b.attributes.firstName, b.attributes.lastName].filter(Boolean).join(' ')
+                    return nameA.localeCompare(nameB)
+                })
+                .map((profile) => {
+                    const name = [profile.attributes.firstName, profile.attributes.lastName].filter(Boolean).join(' ')
+                    return {
+                        label: name,
+                        value: profile,
+                    }
+                })}
             value={(profiles.includes(value) ? value : profiles.find((profile) => profile.id === value?.id)) || {}}
             onChange={onChange}
         />
