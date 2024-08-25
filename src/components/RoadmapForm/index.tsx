@@ -149,7 +149,7 @@ const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any)
                     value: profile,
                 }
             })}
-            value={value && (profiles.includes(value) ? value : profiles.find((profile) => profile.id === value.id))}
+            value={(profiles.includes(value) ? value : profiles.find((profile) => profile.id === value?.id)) || {}}
             onChange={onChange}
         />
     )
