@@ -128,7 +128,7 @@ export default function UpdateWrapper({
 
     const fetchRoadmapItem = async () => {
         const query = qs.stringify({
-            populate: ['topic', 'teams', 'image', 'category', 'subscribers.user'],
+            populate: ['topic', 'teams', 'image', 'category', 'subscribers.user', 'profiles.avatar'],
         })
         const jwt = await getJwt()
         const {
@@ -145,6 +145,8 @@ export default function UpdateWrapper({
                     githubUrls,
                     dateCompleted,
                     subscribers,
+                    socialSharing,
+                    profiles,
                 },
             },
         } = await fetch(
@@ -170,6 +172,8 @@ export default function UpdateWrapper({
             category: category || undefined,
             githubUrls: githubUrls?.length > 0 ? githubUrls : [''],
             dateCompleted: dateCompleted || dayjs().format('YYYY-MM-DD'),
+            social: JSON.parse(socialSharing) || {},
+            author: profiles?.data?.[0] || undefined,
         })
     }
 

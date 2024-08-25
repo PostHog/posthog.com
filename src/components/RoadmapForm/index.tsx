@@ -149,7 +149,7 @@ const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any)
                     value: profile,
                 }
             })}
-            value={value}
+            value={value && (profiles.includes(value) ? value : profiles.find((profile) => profile.id === value.id))}
             onChange={onChange}
         />
     )
@@ -189,7 +189,7 @@ const RangeSlider = ({
     )
 }
 
-const SocialSharing = ({ values }) => {
+const SocialSharing = ({ values, setFieldValue }) => {
     const {
         allCloudinaryImage: { nodes: allHogs },
     } = useStaticQuery(graphql`
@@ -214,17 +214,7 @@ const SocialSharing = ({ values }) => {
     const TopicIcon = Icons[menuItem?.icon] || topicIcons[values?.topic?.attributes?.label?.toLowerCase()]
     const color = menuItem?.color || 'red'
     const imageURL = values?.featuredImage?.objectURL
-    const { values: socialValues, setFieldValue } = useFormik({
-        onSubmit: () => {},
-        initialValues: {
-            title: values.title,
-            titleSize: '35',
-            titleSpacing: '20',
-            imageSize: '100',
-            rotation: '0',
-            hog: undefined,
-        },
-    })
+    const socialValues = values?.social
 
     const downloadImage = async () => {
         if (containerRef.current) {
@@ -266,7 +256,7 @@ const SocialSharing = ({ values }) => {
                                 label="Short title (supports HTML)"
                                 placeholder="Short title (supports HTML)"
                                 value={socialValues.title}
-                                onChange={(e) => setFieldValue('title', e.target.value)}
+                                onChange={(e) => setFieldValue('social.title', e.target.value)}
                                 className="-mx-4 mb-2"
                             />
                             <div className="py-4">
@@ -274,13 +264,13 @@ const SocialSharing = ({ values }) => {
                                 <div className="flex w-full justify-evenly space-x-8">
                                     <RangeSlider
                                         value={socialValues.titleSize}
-                                        onChange={(e) => setFieldValue('titleSize', e.target.value)}
+                                        onChange={(e) => setFieldValue('social.titleSize', e.target.value)}
                                         className="w-full"
                                         label="Size"
                                     />
                                     <RangeSlider
                                         value={socialValues.titleSpacing}
-                                        onChange={(e) => setFieldValue('titleSpacing', e.target.value)}
+                                        onChange={(e) => setFieldValue('social.titleSpacing', e.target.value)}
                                         className="w-full"
                                         label="Spacing"
                                         max={50}
@@ -293,13 +283,13 @@ const SocialSharing = ({ values }) => {
                                 <div className="flex w-full justify-evenly space-x-8">
                                     <RangeSlider
                                         value={socialValues.imageSize}
-                                        onChange={(e) => setFieldValue('imageSize', e.target.value)}
+                                        onChange={(e) => setFieldValue('social.imageSize', e.target.value)}
                                         label="Size"
                                         className="w-full"
                                     />
                                     <RangeSlider
                                         value={socialValues.rotation}
-                                        onChange={(e) => setFieldValue('rotation', e.target.value)}
+                                        onChange={(e) => setFieldValue('social.rotation', e.target.value)}
                                         label="Rotation"
                                         min={-180}
                                         max={180}
@@ -312,7 +302,7 @@ const SocialSharing = ({ values }) => {
                                     search
                                     className="!px-0"
                                     placeholder="Hedgehog"
-                                    onChange={(value) => setFieldValue('hog', value)}
+                                    onChange={(value) => setFieldValue('social.hog', value)}
                                     options={allHogs.map(({ url, public_id }) => ({
                                         label: capitalizeFirstLetter(
                                             public_id.replace('hogs/', '').replaceAll('_', ' ')
@@ -439,6 +429,14 @@ export default function RoadmapForm({
             githubUrls: [''],
             dateCompleted: dayjs().format('YYYY-MM-DD'),
             author: undefined,
+            social: {
+                title: '',
+                titleSize: '35',
+                titleSpacing: '20',
+                imageSize: '100',
+                rotation: '0',
+                hog: undefined,
+            },
         },
         onSubmit: async ({
             title,
@@ -453,6 +451,7 @@ export default function RoadmapForm({
             category,
             dateCompleted,
             author,
+            social,
         }) => {
             setLoading(true)
             try {
@@ -503,6 +502,8 @@ export default function RoadmapForm({
                         milestone,
                         githubUrls: githubUrls.filter((url) => !!url),
                         category,
+                        socialSharing: JSON.stringify(social),
+                        ...(author?.id ? { profiles: { connect: [author.id] } } : null),
                     },
                 })
                 const { data: roadmap } = await fetch(
@@ -642,7 +643,7 @@ export default function RoadmapForm({
                         )}
                     </div>
                 )}
-                <SocialSharing values={values} />
+                <SocialSharing values={values} setFieldValue={setFieldValue} />
             </div>
             <CallToAction disabled={loading} onClick={handleSubmit} className="mt-2 w-full">
                 {loading ? <Spinner className="text-white mx-auto !w-6 !h-6" /> : buttonText}
