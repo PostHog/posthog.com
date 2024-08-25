@@ -328,63 +328,68 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                 </button>
                             )}
                         </div>
-                        <div ref={containerRef} className={`w-full aspect-square p-6 bg-${color} text-primary`}>
-                            <div className="bg-accent size-full rounded-xl px-8 relative overflow-hidden flex flex-col">
-                                <div className="flex justify-center space-x-2 items-end py-4 border-b border-border">
-                                    <div>{TopicIcon && <TopicIcon className={`size-12 text-${color}`} />}</div>
-                                    <h3 className="text-4xl m-0 font-bold">
-                                        {menuItem?.name || values?.topic?.attributes?.label}
-                                    </h3>
-                                </div>
-                                <div className="relative flex-grow">
-                                    <h2
-                                        style={{
-                                            fontSize: `${socialValues.titleSize}px`,
-                                            margin: `${socialValues.titleSpacing}px 0`,
-                                        }}
-                                        className="line-clamp-1 text-center"
-                                        dangerouslySetInnerHTML={{ __html: socialValues.title }}
-                                    />
-                                    {imageURL && (
-                                        <div
+                        <div className="w-full flex justify-center">
+                            <div
+                                ref={containerRef}
+                                className={`size-[572px] aspect-square p-6 bg-${color} text-primary`}
+                            >
+                                <div className="bg-accent size-full rounded-xl px-8 relative overflow-hidden flex flex-col">
+                                    <div className="flex justify-center space-x-2 items-end py-4 border-b border-border">
+                                        <div>{TopicIcon && <TopicIcon className={`size-12 text-${color}`} />}</div>
+                                        <h3 className="text-4xl m-0 font-bold">
+                                            {menuItem?.name || values?.topic?.attributes?.label}
+                                        </h3>
+                                    </div>
+                                    <div className="relative flex-grow">
+                                        <h2
                                             style={{
-                                                width: `${socialValues.imageSize}%`,
+                                                fontSize: `${socialValues.titleSize}px`,
+                                                margin: `${socialValues.titleSpacing}px 0`,
                                             }}
-                                            className="absolute left-1/2 -translate-x-1/2"
-                                        >
-                                            <img
-                                                style={{ transform: `rotate(${socialValues.rotation}deg)` }}
-                                                className="w-full shadow-lg"
-                                                src={imageURL}
-                                            />
-                                        </div>
-                                    )}
-                                    {values?.author && (
-                                        <div className="absolute bottom-0 -right-4 flex space-x-2 pb-2 items-center">
-                                            <div className="bg-white p-1 border border-border inline-block rounded-full">
+                                            className="line-clamp-1 text-center"
+                                            dangerouslySetInnerHTML={{ __html: socialValues.title }}
+                                        />
+                                        {imageURL && (
+                                            <div
+                                                style={{
+                                                    width: `${socialValues.imageSize}%`,
+                                                }}
+                                                className="absolute left-1/2 -translate-x-1/2"
+                                            >
                                                 <img
-                                                    className="size-16 bg-yellow rounded-full"
-                                                    src={values.author.attributes?.avatar?.data?.attributes?.url}
+                                                    style={{ transform: `rotate(${socialValues.rotation}deg)` }}
+                                                    className="w-full shadow-lg"
+                                                    src={imageURL}
                                                 />
                                             </div>
-                                            <div>
-                                                <p className="!m-0 !leading-none opacity-70 text-sm">Created by</p>
-                                                <p className="!m-0 font-bold text-lg !leading-none !mt-1">
-                                                    {values.author.attributes?.firstName}{' '}
-                                                    {values.author.attributes?.lastName}
-                                                </p>
-                                                <p className="!m-0 font-bold opacity-70 !leading-none !mt-1">
-                                                    {values.author.attributes?.companyRole}
-                                                </p>
+                                        )}
+                                        {values?.author && (
+                                            <div className="absolute bottom-0 -right-4 flex space-x-2 pb-2 items-center">
+                                                <div className="bg-white p-1 border border-border inline-block rounded-full">
+                                                    <img
+                                                        className="size-16 bg-yellow rounded-full"
+                                                        src={values.author.attributes?.avatar?.data?.attributes?.url}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <p className="!m-0 !leading-none opacity-70 text-sm">Created by</p>
+                                                    <p className="!m-0 font-bold text-lg !leading-none !mt-1">
+                                                        {values.author.attributes?.firstName}{' '}
+                                                        {values.author.attributes?.lastName}
+                                                    </p>
+                                                    <p className="!m-0 font-bold opacity-70 !leading-none !mt-1">
+                                                        {values.author.attributes?.companyRole}
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}
-                                    {socialValues.hog && (
-                                        <img
-                                            src={socialValues.hog}
-                                            className="absolute -left-8 -bottom-4 max-w-[200px]"
-                                        />
-                                    )}
+                                        )}
+                                        {socialValues.hog && (
+                                            <img
+                                                src={socialValues.hog}
+                                                className="absolute -left-8 -bottom-4 max-w-[200px]"
+                                            />
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
