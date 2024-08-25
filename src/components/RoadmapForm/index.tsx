@@ -196,7 +196,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
         {
             allCloudinaryImage(filter: { folder: { eq: "hogs" } }) {
                 nodes {
-                    url
+                    secure_url
                     public_id
                 }
             }
@@ -309,11 +309,11 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                     className="!px-0"
                                     placeholder="Hedgehog"
                                     onChange={(value) => setFieldValue('social.hog', value)}
-                                    options={allHogs.map(({ url, public_id }) => ({
+                                    options={allHogs.map(({ secure_url, public_id }) => ({
                                         label: capitalizeFirstLetter(
                                             public_id.replace('hogs/', '').replaceAll('_', ' ')
                                         ),
-                                        value: url,
+                                        value: secure_url,
                                     }))}
                                     value={socialValues.hog}
                                 />
