@@ -426,6 +426,15 @@ const SocialSharing = ({ values, setFieldValue }) => {
     )
 }
 
+export const socialDefaults = {
+    title: '',
+    titleSize: '35',
+    titleSpacing: '20',
+    imageSize: '100',
+    rotation: '0',
+    hog: undefined,
+}
+
 export default function RoadmapForm({
     onSubmit,
     hideStatusSelector = true,
@@ -460,14 +469,7 @@ export default function RoadmapForm({
             githubUrls: [''],
             dateCompleted: dayjs().format('YYYY-MM-DD'),
             author: undefined,
-            social: {
-                title: '',
-                titleSize: '35',
-                titleSpacing: '20',
-                imageSize: '100',
-                rotation: '0',
-                hog: undefined,
-            },
+            social: socialDefaults,
         },
         onSubmit: async ({
             title,

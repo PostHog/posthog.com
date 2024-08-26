@@ -1,6 +1,6 @@
 import { IconEllipsis } from '@posthog/icons'
 import Link from 'components/Link'
-import RoadmapForm, { Status } from 'components/RoadmapForm'
+import RoadmapForm, { socialDefaults, Status } from 'components/RoadmapForm'
 import Tooltip from 'components/Tooltip'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
@@ -172,7 +172,7 @@ export default function UpdateWrapper({
             category: category || undefined,
             githubUrls: githubUrls?.length > 0 ? githubUrls : [''],
             dateCompleted: dateCompleted || dayjs().format('YYYY-MM-DD'),
-            social: JSON.parse(socialSharing) || {},
+            social: { ...socialDefaults, ...(socialSharing ? JSON.parse(socialSharing) : {}) },
             author: profiles?.data?.[0] || undefined,
         })
     }
