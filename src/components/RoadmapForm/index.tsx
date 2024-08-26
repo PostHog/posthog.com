@@ -232,7 +232,7 @@ const HogSelector = ({ value, onChange }) => {
             <input
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className="w-full bg-white rounded-md border border-border dark:border-dark mb-2 p-2"
+                className="w-full bg-white rounded-md border border-border dark:border-dark mb-2 p-2 text-primary"
                 placeholder="Search..."
             />
             <ul className="list-none m-0 p-0 grid grid-cols-3 gap-1 max-h-[400px] overflow-auto">
