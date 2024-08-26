@@ -128,7 +128,7 @@ export default function UpdateWrapper({
 
     const fetchRoadmapItem = async () => {
         const query = qs.stringify({
-            populate: ['topic', 'teams', 'image', 'category', 'subscribers.user', 'profiles.avatar'],
+            populate: ['topic', 'teams', 'image', 'category', 'subscribers.user', 'profiles.avatar', 'profiles.teams'],
         })
         const jwt = await getJwt()
         const {

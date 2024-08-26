@@ -120,7 +120,7 @@ const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any)
     const [profiles, setProfiles] = useState<any[]>([])
     useEffect(() => {
         const query = qs.stringify({
-            populate: ['avatar'],
+            populate: ['avatar', 'teams'],
             pagination: {
                 limit: 100,
             },
@@ -229,6 +229,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
     const color = menuItem?.color || 'red'
     const imageURL = values?.featuredImage?.objectURL
     const socialValues = values?.social
+    const teamName = values.author.attributes?.teams?.data?.[0]?.attributes?.name
 
     const downloadImage = async () => {
         if (containerRef.current) {
@@ -400,7 +401,9 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                                         {values.author.attributes?.lastName}
                                                     </p>
                                                     <p className="!m-0 font-semibold opacity-70 !text-sm !leading-none !mt-1">
-                                                        {values.author.attributes?.companyRole}
+                                                        {teamName
+                                                            ? `${teamName} Team`
+                                                            : values.author.attributes?.companyRole}
                                                     </p>
                                                 </div>
                                             </div>
