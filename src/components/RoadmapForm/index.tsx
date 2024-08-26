@@ -235,7 +235,7 @@ const HogSelector = ({ value, onChange }) => {
                 className="w-full bg-white rounded-md border border-border dark:border-dark mb-2 p-2 text-primary"
                 placeholder="Search..."
             />
-            <ul className="list-none m-0 p-0 grid grid-cols-3 gap-1 max-h-[400px] overflow-auto">
+            <ul className="list-none !-mb-4 p-0 grid grid-cols-4 gap-1 max-h-[400px] overflow-auto">
                 {hogs.map(({ secure_url, public_id }) => {
                     const selected = value === secure_url
                     const label = capitalizeFirstLetter(public_id.replace('hogs/', '').replaceAll('_', ' '))
@@ -252,7 +252,7 @@ const HogSelector = ({ value, onChange }) => {
                                 <div className="aspect-square w-full relative">
                                     <img className="object-contain size-full" src={secure_url} />
                                 </div>
-                                <p className="!m-0 text-center font-bold">{label}</p>
+                                <p className="!m-0 text-center !text-sm font-semibold">{label}</p>
                             </button>
                         </li>
                     )
@@ -293,6 +293,8 @@ const SocialSharing = ({ values, setFieldValue }) => {
             }, 3000)
         }
     }
+
+    const [showHogSelector, setShowHogSelector] = useState(false)
 
     useEffect(() => {
         if (!socialValues.title && values.title) {
@@ -369,10 +371,39 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                 </div>
                             </div>
                             <div>
-                                <HogSelector
-                                    value={socialValues.hog}
-                                    onChange={(value) => setFieldValue('social.hog', value)}
-                                />
+                                <AnimatePresence>
+                                    {open && (
+                                        <motion.div
+                                            initial={{ height: 0 }}
+                                            animate={{ height: 'auto' }}
+                                            exit={{ height: 0 }}
+                                            className="overflow-hidden"
+                                        >
+                                            <div className="py-2">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setShowHogSelector(!showHogSelector)}
+                                                    className="text-[15px] font-semibold text-red dark:text-yellow transition-opacity flex items-center justify-between w-full"
+                                                >
+                                                    <span>{showHogSelector ? 'Hide' : 'Show'} hog selector</span>
+                                                    <span>
+                                                        {showHogSelector ? (
+                                                            <Icons.IconMinus className="size-5" />
+                                                        ) : (
+                                                            <IconPlus className="size-5" />
+                                                        )}
+                                                    </span>
+                                                </button>
+                                                {showHogSelector && (
+                                                    <HogSelector
+                                                        value={socialValues.hog}
+                                                        onChange={(value) => setFieldValue('social.hog', value)}
+                                                    />
+                                                )}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         </div>
                         <div className="mb-2 flex justify-between items-center border-t border-border dark:border-dark pt-4">
