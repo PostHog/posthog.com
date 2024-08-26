@@ -278,8 +278,12 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                 placeholder="Short title (supports HTML)"
                                 value={socialValues.title}
                                 onChange={(e) => setFieldValue('social.title', e.target.value)}
-                                className="-mx-4 mb-2"
+                                className="-mx-4 -mb-1"
                             />
+                            <div className="text-xs py-2">
+                                Use <code className="text-xs">&lt;span class="text-red"&gt;</code> to emphasize
+                                important parts and <code className="text-xs">&lt;br /&gt;</code> for a line break
+                            </div>
                             <div className="py-4">
                                 <label className="text-sm opacity-60 block">Title options</label>
                                 <div className="flex w-full justify-evenly space-x-8">
