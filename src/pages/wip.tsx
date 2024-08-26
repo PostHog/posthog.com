@@ -105,7 +105,7 @@ export default function TeamUpdates() {
                                                             roundButton={true}
                                                             status="in-progress"
                                                             formClassName="mb-4"
-                                                            editButtonClassName={'absolute -top-4 -right-4 z-10'}
+                                                            editButtonClassName={'absolute top-3 right-0 z-10'}
                                                             onSubmit={() => mutate()}
                                                         >
                                                             <InProgress
