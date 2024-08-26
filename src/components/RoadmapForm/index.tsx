@@ -358,7 +358,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                 ref={containerRef}
                                 className={`size-[572px] aspect-square p-4 bg-${color} text-primary flex-shrink-0 relative`}
                             >
-                                <div className="bg-accent size-full rounded-xl px-8 relative overflow-hidden flex flex-col">
+                                <div className="bg-light size-full rounded-xl px-8 relative overflow-hidden flex flex-col">
                                     <div className="flex justify-center gap-2 items-end py-4 border-b border-border">
                                         <div>{TopicIcon && <TopicIcon className={`size-6 text-${color}`} />}</div>
                                         <h3 className="text-xl !m-0 font-bold">
