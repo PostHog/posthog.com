@@ -212,6 +212,7 @@ Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all r
     ```bash
     brew install brotli rustup
     rustup default stable
+    rustup-init
     ```
 - On Debian-based Linux:
     ```bash
