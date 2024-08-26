@@ -203,7 +203,7 @@ const RangeSlider = ({
     )
 }
 
-const SocialSharing = ({ values, setFieldValue }) => {
+const HogSelector = ({ value, onChange }) => {
     const {
         allCloudinaryImage: { nodes: allHogs },
     } = useStaticQuery(graphql`
@@ -216,7 +216,53 @@ const SocialSharing = ({ values, setFieldValue }) => {
             }
         }
     `)
+    const [hogs, setHogs] = useState(allHogs)
+    const [searchValue, setSearchValue] = useState('')
 
+    useEffect(() => {
+        const filteredHogs = allHogs.filter((hog) => {
+            const label = capitalizeFirstLetter(hog.public_id.replace('hogs/', '').replaceAll('_', ' '))
+            return label?.toLowerCase().includes(searchValue.toLowerCase())
+        })
+        setHogs(filteredHogs)
+    }, [searchValue])
+
+    return (
+        <div className="py-2">
+            <input
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                className="w-full bg-white rounded-md border border-border dark:border-dark mb-2 p-2"
+                placeholder="Search..."
+            />
+            <ul className="list-none m-0 p-0 grid grid-cols-3 gap-1 max-h-[400px] overflow-auto">
+                {hogs.map(({ secure_url, public_id }) => {
+                    const selected = value === secure_url
+                    const label = capitalizeFirstLetter(public_id.replace('hogs/', '').replaceAll('_', ' '))
+
+                    return (
+                        <li key={public_id}>
+                            <button
+                                type="button"
+                                className={`rounded-md p-2 click border-border dark:border-dark ${
+                                    selected ? 'border-2 bg-border/50 dark:bg-border-dark/50' : ' hover:border-2'
+                                }`}
+                                onClick={() => onChange(secure_url)}
+                            >
+                                <div className="aspect-square w-full relative">
+                                    <img className="object-contain size-full" src={secure_url} />
+                                </div>
+                                <p className="!m-0 text-center font-bold">{label}</p>
+                            </button>
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
+    )
+}
+
+const SocialSharing = ({ values, setFieldValue }) => {
     const [downloaded, setDownloaded] = useState(false)
     const [downloadDisabled, setDownloadDisabled] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
@@ -323,18 +369,9 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                 </div>
                             </div>
                             <div>
-                                <Select
-                                    search
-                                    className="!px-0"
-                                    placeholder="Hedgehog"
-                                    onChange={(value) => setFieldValue('social.hog', value)}
-                                    options={allHogs.map(({ secure_url, public_id }) => ({
-                                        label: capitalizeFirstLetter(
-                                            public_id.replace('hogs/', '').replaceAll('_', ' ')
-                                        ),
-                                        value: secure_url,
-                                    }))}
+                                <HogSelector
                                     value={socialValues.hog}
+                                    onChange={(value) => setFieldValue('social.hog', value)}
                                 />
                             </div>
                         </div>
