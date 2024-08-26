@@ -351,12 +351,12 @@ const SocialSharing = ({ values, setFieldValue }) => {
                         <div className="w-full flex justify-center">
                             <div
                                 ref={containerRef}
-                                className={`size-[572px] aspect-square p-6 bg-${color} text-primary flex-shrink-0`}
+                                className={`size-[572px] aspect-square p-4 bg-${color} text-primary flex-shrink-0 relative`}
                             >
                                 <div className="bg-accent size-full rounded-xl px-8 relative overflow-hidden flex flex-col">
-                                    <div className="flex justify-center space-x-2 items-end py-4 border-b border-border">
-                                        <div>{TopicIcon && <TopicIcon className={`size-12 text-${color}`} />}</div>
-                                        <h3 className="text-4xl m-0 font-bold">
+                                    <div className="flex justify-center gap-2 items-end py-4 border-b border-border">
+                                        <div>{TopicIcon && <TopicIcon className={`size-6 text-${color}`} />}</div>
+                                        <h3 className="text-xl !m-0 font-bold">
                                             {menuItem?.name || values?.topic?.attributes?.label}
                                         </h3>
                                     </div>
@@ -366,7 +366,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                                 fontSize: `${socialValues.titleSize}px`,
                                                 margin: `${socialValues.titleSpacing}px 0`,
                                             }}
-                                            className="text-center leading-tight"
+                                            className="text-center leading-none"
                                             dangerouslySetInnerHTML={{ __html: socialValues.title }}
                                         />
                                         {imageURL && (
@@ -378,7 +378,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                             >
                                                 <img
                                                     style={{ transform: `rotate(${socialValues.rotation}deg)` }}
-                                                    className="w-full shadow-lg"
+                                                    className="w-full shadow-xl"
                                                     src={imageURL}
                                                 />
                                             </div>
@@ -392,25 +392,24 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                                     />
                                                 </div>
                                                 <div>
-                                                    <p className="!m-0 !leading-none opacity-70 text-sm">Created by</p>
-                                                    <p className="!m-0 font-bold text-lg !leading-none !mt-1">
+                                                    <p className="!m-0 font-semibold !leading-none opacity-70 !text-sm">
+                                                        Built by
+                                                    </p>
+                                                    <p className="!m-0 font-bold text-lg !leading-none !mt-1.5">
                                                         {values.author.attributes?.firstName}{' '}
                                                         {values.author.attributes?.lastName}
                                                     </p>
-                                                    <p className="!m-0 font-bold opacity-70 !leading-none !mt-1">
+                                                    <p className="!m-0 font-semibold opacity-70 !text-sm !leading-none !mt-1">
                                                         {values.author.attributes?.companyRole}
                                                     </p>
                                                 </div>
                                             </div>
                                         )}
-                                        {socialValues.hog && (
-                                            <img
-                                                src={socialValues.hog}
-                                                className="absolute -left-8 -bottom-4 max-w-[200px]"
-                                            />
-                                        )}
                                     </div>
                                 </div>
+                                {socialValues.hog && (
+                                    <img src={socialValues.hog} className="absolute -left-11 -bottom-6 max-w-[250px]" />
+                                )}
                             </div>
                         </div>
                     </motion.div>
@@ -662,7 +661,7 @@ export default function RoadmapForm({
                                     checked={values.milestone}
                                     onChange={(checked) => setFieldValue('milestone', checked)}
                                     label="Show on homepage"
-                                    tooltip='Adds roadmap item to "We ship weirdly fast" section on homepage'
+                                    tooltip='Adds roadmap item to the "We ship weirdly fast" section on the homepage'
                                 />
                             </div>
                         )}

@@ -52,7 +52,7 @@ const Menu = ({ subscriberCount, setEditing, handleUnpublish, handleExport }) =>
                     onClick={handleExport}
                     className="text-left p-3 hover:bg-accent dark:hover:bg-accent-dark w-full"
                 >
-                    <p className="m-0 text-xs font-bold">Export subscriber list ({subscriberCount})</p>
+                    <p className="m-0 text-sm font-semibold">Export subscriber list ({subscriberCount})</p>
                     <p className="m-0 text-xs opacity-60">People who subscribed for updates</p>
                 </button>
             </li>
@@ -61,7 +61,7 @@ const Menu = ({ subscriberCount, setEditing, handleUnpublish, handleExport }) =>
                     onClick={() => setEditing(true)}
                     className="text-left p-3 hover:bg-accent dark:hover:bg-accent-dark w-full"
                 >
-                    <p className="m-0 text-xs font-bold">Edit</p>
+                    <p className="m-0 text-sm font-semibold">Edit</p>
                 </button>
             </li>
             <li>
@@ -69,7 +69,7 @@ const Menu = ({ subscriberCount, setEditing, handleUnpublish, handleExport }) =>
                     onClick={handleUnpublish}
                     className="text-left p-3 hover:bg-accent dark:hover:bg-accent-dark w-full"
                 >
-                    <p className="m-0 text-xs font-bold">Unpublish</p>
+                    <p className="m-0 text-sm font-semibold">Unpublish</p>
                 </button>
             </li>
         </ul>
