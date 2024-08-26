@@ -103,6 +103,7 @@ export default function UpdateWrapper({
     const [success, setSuccess] = useState(false)
     const [subscribers, setSubscribers] = useState([])
     const [menuOpen, setMenuOpen] = useState(false)
+    const [likes, setLikes] = useState([])
 
     const handleUnpublish = async () => {
         const confirmed = window.confirm(
@@ -128,7 +129,16 @@ export default function UpdateWrapper({
 
     const fetchRoadmapItem = async () => {
         const query = qs.stringify({
-            populate: ['topic', 'teams', 'image', 'category', 'subscribers.user', 'profiles.avatar', 'profiles.teams'],
+            populate: [
+                'topic',
+                'teams',
+                'image',
+                'category',
+                'subscribers.user',
+                'likes.user',
+                'profiles.avatar',
+                'profiles.teams',
+            ],
         })
         const jwt = await getJwt()
         const {
@@ -147,6 +157,7 @@ export default function UpdateWrapper({
                     subscribers,
                     socialSharing,
                     profiles,
+                    likes,
                 },
             },
         } = await fetch(
@@ -159,6 +170,7 @@ export default function UpdateWrapper({
                   }
                 : undefined
         ).then((res) => res.json())
+        setLikes(likes?.data)
         setSubscribers(subscribers?.data)
         setInitialValues({
             title,
@@ -178,11 +190,16 @@ export default function UpdateWrapper({
     }
 
     const handleExport = async () => {
-        const csv = `First name,Last name,Email\n${subscribers
+        const csv = `First name,Last name,Email,Type\n${subscribers
             .map(({ attributes: { user, firstName, lastName } }) => {
-                return `${firstName},${lastName},${user?.data?.attributes?.email}`
+                return `${firstName},${lastName},${user?.data?.attributes?.email},Subscriber`
             })
-            .join('\n')}`
+            .join('\n')}
+${likes
+    .map(({ attributes: { user, firstName, lastName } }) => {
+        return `${firstName},${lastName},${user?.data?.attributes?.email},Voter`
+    })
+    .join('\n')}`
         const blob = new Blob([csv], { type: 'text/csv' })
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
@@ -228,7 +245,7 @@ export default function UpdateWrapper({
                                 <Tooltip
                                     content={() => (
                                         <Menu
-                                            subscriberCount={subscribers.length}
+                                            subscriberCount={subscribers.length + likes.length}
                                             setEditing={setEditing}
                                             handleUnpublish={handleUnpublish}
                                             handleExport={handleExport}

@@ -124,7 +124,7 @@ Replays enable you watch how users experience your app, diagnose issues, improve
   <ComparisonRow column1={true} column2={false} feature="Web app recordings" description="Capture recordings from single-page apps" />
   <ComparisonRow column1="Beta" column2={false} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
   <ComparisonRow column1={true} column2={false} feature="Identity detection" description="Link recordings to user IDs" />
-  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a users' browser environment" />
+  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a user's browser" />
   <ComparisonRow column1={true} column2={false} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
   <ComparisonRow column1={true} column2={false} feature="Performance monitoring" description="Track network events within a session" />
   <ComparisonRow column1={true} column2={false} feature="Privacy masking" description="Censor personal information from playback" />
@@ -156,7 +156,7 @@ Surveys are great for tracking customer satisfaction scores like Net Promoter Sc
 
 ### Integrations
 
-PostHog and Amplitude both offer a wide range of integrations, sources and destinations. PostHog offers more integrations with developer tools, such as Sentry, Zapier and [Zendesk](/tutorials/zendesk-session-replays), while Amplitude has more integrations with marketing and advertising platforms. See our [data pipeline docs](/docs/cdp) for a full list of PostHog integrations.
+PostHog and Amplitude both offer a wide range of integrations, sources and destinations. PostHog offers more integrations with developer tools, such as [Sentry](/blog/posthog-vs-sentry), Zapier and [Zendesk](/tutorials/zendesk-session-replays), while Amplitude has more integrations with marketing and advertising platforms. See our [data pipeline docs](/docs/cdp) for a full list of PostHog integrations.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
    <ComparisonRow column1={true} column2={true} feature="Imports" description="Import data from data warehouses and other sources" />
@@ -233,6 +233,10 @@ The easiest way is to [sign up to PostHog](https://us.posthog.com/signup), integ
 ### Does PostHog block bots by default?
 
 Yes. See the [full blocklist in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default).
+
+### Does Amplitude block bots by default?
+
+**No.** You need to manually enable bot blocking in Amplitude. This means event and DAU counts can look higher in Amplitude than PostHog.
 
 ### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
 
