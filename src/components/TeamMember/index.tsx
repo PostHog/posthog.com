@@ -98,7 +98,7 @@ export const TeamMemberLink = (person) => {
                 >
                     {photo ? (
                         <>
-                            <div className="h-6 shrink-0 rounded-full overflow-hidden">
+                            <span className="h-6 shrink-0 rounded-full overflow-hidden">
                                 {person ? (
                                     <img src={avatar?.formats?.thumbnail?.url} alt="" className="w-6 bg-red" />
                                 ) : (
@@ -109,7 +109,7 @@ export const TeamMemberLink = (person) => {
                                         className="w-6 bg-red"
                                     />
                                 )}
-                            </div>
+                            </span>
                             <span className="!text-sm text-red dark:text-yellow font-semibold inline-flex">
                                 {person ? [firstName, lastName].filter(Boolean).join(' ') : name}
                             </span>
