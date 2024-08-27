@@ -70,7 +70,7 @@ For example, when someone calls a feature flag, we send a $feature_flag_called e
 
 - Unless there is a very good reason not to, we should grandfather existing customers' pricing tiers if they are cheaper than the new pricing to avoid unexpected pricing changes. 
 
-### Deciding on a free volume tier, and making changes to it
+### Deciding on a free volume, and making changes to it
 
 - When choosing a free volume tier for a new product, we should choose a value that is in line with our pricing principles: It should give customers the opportunity to experience the product before paying for it, and we should slightly undercut our competitors if they offer a free tier. 
 
