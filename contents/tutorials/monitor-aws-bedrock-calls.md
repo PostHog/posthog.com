@@ -328,7 +328,7 @@ Now that we're capturing events, we can create [insights](/docs/product-analytic
   classes="rounded"
 />
 
-### e. Error rate
+### Error rate
 
 **What it is:** The percentage of API requests that result in an error.
 
