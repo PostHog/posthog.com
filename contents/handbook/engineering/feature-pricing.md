@@ -68,7 +68,7 @@ For example, when someone calls a feature flag, we send a $feature_flag_called e
 
 - Features that are focused around extra security, permissioning, compliance, or other enterprise-style upgrades should be reserved for our enterprise pricing tier.
 
-- Unless there is a very good reason not to (e.g. we lower our prices), we should grandfather existing customers' pricing tiers to avoid unexpected pricing changes. 
+- Unless there is a very good reason not to, we should grandfather existing customers' pricing tiers if they are cheaper than the new pricing to avoid unexpected pricing changes. 
 
 ### Deciding on a free volume tier, and making changes to it
 
