@@ -1,6 +1,6 @@
 ---
 title: How to monitor generative AI calls to AWS Bedrock
-date: 2024-08-08
+date: 2024-08-27
 author:
   - lior-neu-ner
 tags:
@@ -44,7 +44,9 @@ const client = new BedrockRuntimeClient({ region: "<YOUR_AWS_REGION>" }); // e.g
 // rest of the code
 ```
 
-You'll also notice that we're using Meta's LLama 3.1 8B Instruct model. Make sure you have access to this model, or [request access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) if you don't. Note that while this tutorial uses the Llama model, the concepts in this tutorial apply to all of Bedrock's [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns).
+You'll also notice that we're using Meta's Llama 3.1 8B Instruct model. Make sure you have access to this model, or [request access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) if you don't (you may need to change regions in AWS if it's not available. Alternatively, you can use a different LLama model). 
+
+Note that while this tutorial uses the Llama model, the concepts in this tutorial apply to all of Bedrock's [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns).
 
 ![Requesting access to AWS Bedrock models](https://res.cloudinary.com/dmukukwp6/image/upload/v1723015919/posthog.com/contents/Screenshot_2024-08-07_at_8.31.28_AM.png)
 
@@ -54,13 +56,13 @@ Run `npm run dev` and go to `http://localhost:3000` to everything in action.
 
 ## 2. Add PostHog to your app
 
-With our app set up, it’s time to install and set up PostHog. We install the [PostHog Node](/docs/libraries/node) SDK to capture events in our API route. Run the following command in your terminal:
+With our app set up, it’s time to install and set up PostHog. To do this, we install the [PostHog Node](/docs/libraries/node) SDK to capture events in our API route by running the following command in our terminal:
 
 ```bash
 npm install posthog-node
 ```
 
-Next, we initialize PostHog using our API key and host (You can find these in [your project settings](https://us.posthog.com/settings/project)). We also call `posthog.shutdown()` in a `finally` block to send any pending events before the serverless function shuts down. Add the below code to `src/app/api/generate-recipe/route.js`:
+Next, we initialize PostHog using our API key and host (you can find these in [your project settings](https://us.posthog.com/settings/project)). We also call `posthog.shutdown()` in a `finally` block to send any pending events before the serverless function shuts down. Add the below code to `src/app/api/generate-recipe/route.js`:
 
 ```js file=src/app/api/generate-recipe/route.js
 // your existing imports
@@ -92,7 +94,8 @@ export async function POST(request) {
 
 With our app set up, we can begin [capturing events](/docs/product-analytics/capture-events) with PostHog.
 
-### a. Successful requests
+### Successful requests
+
 To start, we capture a `bedrock_completion` event with properties related to the API request like:
 
 - `prompt`
@@ -140,7 +143,7 @@ Refresh your app and submit a few prompts. You should then see your events captu
   classes="rounded"
 />
 
-### b. Costs
+### Costs
 
 To keep track of your generative AI costs, you can include additional properties to your event capture, namely:
 
@@ -148,7 +151,7 @@ To keep track of your generative AI costs, you can include additional properties
 - `output_cost_in_dollars` i.e. `generation_token_count` * `token_output_cost`
 - `total_cost_in_dollars` i.e. `input_cost_in_dollars + output_cost_in_dollars`
 
-You can view the token costs for your model in the [Bedrock pricing](https://aws.amazon.com/bedrock/pricing/) page. Since we're using **LLama 3.1 8B Instruct** in this tutorial, we set the `token_input_cost` and `token_output_cost` to the values for this model:
+You can view the token costs for your model in the [Bedrock pricing](https://aws.amazon.com/bedrock/pricing/) page. Since we're using **Llama 3.1 8B Instruct** in this tutorial, we set the `token_input_cost` and `token_output_cost` to the values for this model:
 
 ```js file=src/app/api/generate-recipe/route.js
 // your existing code
@@ -176,9 +179,9 @@ You can view the token costs for your model in the [Bedrock pricing](https://aws
   }
 ```
 
-### c. API response time
+### API response time
 
-API responses can take long, especially for longer outputs, so it's useful to keep an eye on this. To do this, we track the request start and end times and calculate the total time. Then, we include the response time in the event properties:
+API responses can take a long time, especially for longer outputs, so it's useful to monitor this. To do this, we track the request start and end times and calculate the total time. Then, we include the response time in the event properties:
 
 ```js file=src/app/api/generate-recipe/route.js
 // your existing code
@@ -206,7 +209,7 @@ API responses can take long, especially for longer outputs, so it's useful to ke
   }
 ```
 
-### d. Errors
+### Errors
 
 It's not uncommon for generative AI requests to fail and it's important to track these errors. To do this, we capture a `bedrock_error` event in the `catch` block of our code:
 
@@ -241,9 +244,9 @@ It's not uncommon for generative AI requests to fail and it's important to track
 
 ## 4. Create insights
 
-Now that we're capturing events, we can create [insights](/docs/product-analytics/insights) in PostHog to visualize our data. Below are five examples of useful metrics to track:
+Now that we're capturing events, we can create [insights](/docs/product-analytics/insights) in PostHog to visualize our data. Below are five examples of useful metrics to track. Each of these starts by going to the [Product analytics tab](https://us.posthog.com/insights) and clicking **+ New insight**.
 
-### a. Generation count
+### Generation count
 
 **What it is:** The total number of successful requests to your model.
 
@@ -251,10 +254,9 @@ Now that we're capturing events, we can create [insights](/docs/product-analytic
 
 **How to set it up:** 
 
-1. Go the [Product analytics tab](https://us.posthog.com/insights) and click **+ New insight**
-2. Set the event to `bedrock_completion`
-3. Ensure the second dropdown shows **Total count**
-4. Press **Save**
+1. Set the event to `bedrock_completion`
+2. Ensure the second dropdown shows **Total count**
+3. Press **Save**
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1723035517/posthog.com/contents/Screenshot_2024-08-07_at_1.58.12_PM.png"
@@ -263,18 +265,18 @@ Now that we're capturing events, we can create [insights](/docs/product-analytic
   classes="rounded"
 />
 
-### b. Average cost per API call
+### Average cost per API call
 
 **What it is:** How much each model evaluation costs on average.
 
-**Why it's useful:** Gives you an idea of how much your costs will scale with usage..
+**Why it's useful:** Gives you an idea of how much your costs will scale with usage.
 
 **How to set it up:** 
-1. Set the event to `bedrock_completion`
+1. Set the event to `bedrock_completion`.
 2. Click on **Total count** to show a dropdown. Click on **Property value (average)**.
 3. Select the `total_cost_in_dollars` property.
 
-> **Note:** Insights may show 0 if the amount is less than 0.01. If this is the case, click on **Enable formula mode** and then type `A * 100` in the formula box to multiply the value by 100. This shows you the `average cost per 100 API calls`
+> **Note:** Insights may show 0 if the amount is less than 0.01. If this is the case, click on **Enable formula mode** and then type `A * 100` in the formula box to multiply the value by 100. This shows you the average cost per 100 API calls.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1723036493/posthog.com/contents/Screenshot_2024-08-07_at_2.10.27_PM.png"
@@ -283,14 +285,14 @@ Now that we're capturing events, we can create [insights](/docs/product-analytic
   classes="rounded"
 />
 
-### c. Average cost per user
+### Average cost per user
 
 **What it is:** Your total costs divided by the number of active users.
 
 **Why it's useful:** Shows how your costs will grow with user growth. You can also compare this to revenue per user to understand if your profit margin is viable.
 
 **How to set it up:** 
-1. Set the event to `bedrock_completion`
+1. Set the event to `bedrock_completion`.
 2. Click on **Total count** to show a dropdown. Click on **Property value (sum)**.
 3. Select the `total_cost_in_dollars` property.
 4. Click **+ Add graph series** (if your visual is set to `number`, switch it back to `trend` first).
@@ -307,7 +309,7 @@ Now that we're capturing events, we can create [insights](/docs/product-analytic
   classes="rounded"
 />
 
-### d. Average API response time
+### Average API response time
 
 **What it is:** The average time it takes for the model to generate a response.
 
