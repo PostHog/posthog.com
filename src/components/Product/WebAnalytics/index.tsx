@@ -402,9 +402,6 @@ export const ProductWebAnalytics = () => {
             >
                 <h2 className="text-3xl md:text-4xl text-center">Usage-based pricing</h2>
                 <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
-                    <p className="mb-1">
-                        <strong>While in beta...</strong>
-                    </p>
                     <p className="mb-2">
                         Web analytics is currently bundled with <Link to="/product-analytics">product analytics</Link>.
                     </p>
