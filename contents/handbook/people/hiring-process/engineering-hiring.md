@@ -46,11 +46,11 @@ For full-stack roles, the task involves building a small web service (both backe
 
 An engineering SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences)_:
 
-*   An invitation to a personal Slack channel for your SuperDay, which we'll use throughout the day
+*   An invitation to a personal Slack channel for the SuperDay, which we'll use throughout the day
 *   Kick-off session with an engineer
 *   Time to focus on the task
 *   A "peer interview" with a couple of members of our team, so that both us and the candidate can see if we're a fit
-*   A chat with [James](/james) (or [Tim](/tim), if you met with James in the previous stage)
+*   A chat with [James](/james) or [Tim](/tim), whoever they didn't meet with in the previous stage
 *   Wrapping up – at the end of the work day, they'll send us what they've built, along with a summary
 
 A couple of PostHog engineers will then take a look at the candidate's work, and we'll get back to them with our final decision ASAP (always within a few days).
@@ -72,7 +72,7 @@ If you are the interviewer for this call (though it's not an _interview_, really
       - We've provided some stubbed code for convenience, but it's not required to use this. Use what you are most comfortable with.
    - We're looking to see reasonable code, but don't feel the need to test every function. Demonstrating familiarity is enough.
    - Focus on making a useful product. It can be helpful to draw up some persona/use case that you want to build for.
-      - Raquel's note: sometimes leave this out, as I think seeing how they prioritize their time is interesting.
+      - Raquel's note: I sometimes leave this out, as I think seeing how they prioritize their time is interesting.
    - The time cut-off for the day is flexible, just commit to whatever is a reasonable day's worth of work for you.
    - Don't forget to send us a Loom video at the end of the day to show us what you've built and walk us through anything you feel is worth discussing.
    - Communicate consistently and don’t get blocked by us. Just use best judgement to keep making progress/decisions. No need for an update every X minutes but good to have some engagement and check in periodically.
