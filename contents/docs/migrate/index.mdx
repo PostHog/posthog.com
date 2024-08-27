@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 import MigrationWarning from "./_snippets/migration-warning.mdx"
-import PythonMigration from "./_snippets/python-migration.mdx"
+import SDKMigration from "./_snippets/sdk-migration.mdx"
 import ApiMigration from "./_snippets/api-migration.mdx"
 
 <MigrationWarning />
@@ -35,9 +35,9 @@ Start your migration by formatting your data correctly. There is no way to selec
 To capture events, you must use the PostHog Python SDK or the PostHog API `batch` endpoint with the `historical_migration` set to `true`. This ensures we handle this data correctly and you aren't charged standard ingestion fees for it.
 
 
-An example Python implementation looks like this:
+Using our Python or Node SDKs, you can capture events like this:
 
-<PythonMigration />
+<SDKMigration />
 
 An example `cURL` implementation using the `batch` API endpoint looks like this:
 
