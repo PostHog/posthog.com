@@ -72,7 +72,7 @@ For example, when someone calls a feature flag, we send a $feature_flag_called e
 
 ### Deciding on a free volume, and making changes to it
 
-- When choosing a free volume tier for a new product, we should choose a value that is in line with our pricing principles: It should give customers the opportunity to experience the product before paying for it, and we should slightly undercut our competitors if they offer a free tier. 
+- When choosing a free volume for a new product, we should choose a value that is in line with our pricing principles: It should give customers the opportunity to experience the product before paying for it, and we should slightly undercut our competitors if they offer a free tier. 
 
 - Keep in mind: It's easy to increase the free tier for existing customers, but it's very painful to decrease it (since we don't want existing customers to pay more).
 
