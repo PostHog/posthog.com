@@ -724,28 +724,14 @@ const FreeTierItem = ({ icon, icon2, name, allocation, description }) => {
     )
 }
 
-const PricingExperiment = ({
-    groupsToShow,
-    currentProduct,
-}: {
-    groupsToShow: undefined | string[]
-    currentProduct?: string | null
-}): JSX.Element => {
+const PricingExperiment = (): JSX.Element => {
     const [animateFreeTiers, setAnimateFreeTiers] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const products = useProducts()
     const {
         allProductData: {
             nodes: [{ products: billingProducts }],
         },
     } = useStaticQuery(allProductsData)
-
-    const platformAndSupportProduct = billingProducts.find(
-        (product: BillingProductV2Type) => product.type === 'platform_and_support'
-    )
-    const highestSupportPlan = platformAndSupportProduct?.plans?.slice(-1)[0]
-
-    const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
     const [activePlan, setActivePlan] = useState('free')
 
@@ -772,281 +758,259 @@ const PricingExperiment = ({
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
 
-            {!currentProduct && (
-                <>
-                    <div className="md:grid grid-cols-16 my-8 px-4 xl:px-8 2xl:px-12">
-                        <div className="col-span-8 lg:col-span-4 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
-                            <div className="md:hidden mb-2">
-                                <Header />
-                            </div>
-
-                            {/* <div className="aspect-square bg-accent dark:bg-accent-dark w-full flex items-center justify-center">
-                                image
-                            </div> */}
-                            <ImageSlider />
-                        </div>
-
-                        <div className="@container col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 lg:pl-6 xl:pl-10 md:mr-8 lg:mr-6 xl:mr-10 pb-4">
-                            <div className="hidden md:block">
-                                <Header />
-                            </div>
-
-                            <p className="mb-4">
-                                PostHog is designed to grow with you. Our 8 products (and counting) will take you from
-                                idea to product-market fit to IPO and beyond. 🚀
-                            </p>
-
-                            <p className="mb-4">
-                                Our generous free tier means{' '}
-                                <strong>
-                                    <em>more than 90% of companies use PostHog for free.</em>
-                                </strong>{' '}
-                                Only add a card if you need more than the free tier limits, advanced features, or want
-                                more projects. You still keep the same monthly free volume, even after upgrading.
-                            </p>
-
-                            <div className="inline-block">
-                                <div className="flex justify-between items-end gap-4">
-                                    <div>
-                                        {activePlan === 'free' ? (
-                                            <>
-                                                <h3 className="mb-0 text-xl">Free</h3>
-                                                <p className="text-sm mb-4">No credit card required</p>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <p className="text-sm mb-0">From</p>
-                                                <h3 className="mb-4 text-xl">
-                                                    $0<span className="opacity-70 font-normal text-base">/mo</span>
-                                                </h3>
-                                            </>
-                                        )}
-                                    </div>
-                                    <div>
-                                        <ScrollLink to="plans" offset={-120} smooth className="inline-block mb-4">
-                                            <button className="text-red dark:text-yellow font-semibold cursor-pointer text-sm">
-                                                Compare plans
-                                            </button>
-                                        </ScrollLink>
-                                    </div>
-                                </div>
-
-                                <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 md:mb-6 overflow-x-auto">
-                                    <li>
-                                        <button
-                                            onClick={handleFreePlanClick}
-                                            className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
-                                                activePlan === 'free'
-                                                    ? 'border-yellow bg-white dark:bg-white/5'
-                                                    : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
-                                            }`}
-                                        >
-                                            <strong className="whitespace-nowrap">Totally free</strong>
-                                            <span className="text-sm opacity-75 whitespace-nowrap">
-                                                Free - no credit card required
-                                            </span>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            onClick={handlePaidPlanClick}
-                                            className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
-                                                activePlan === 'free'
-                                                    ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
-                                                    : 'border-yellow bg-white dark:bg-white/5'
-                                            }`}
-                                        >
-                                            <strong className="whitespace-nowrap">Ridiculously cheap</strong>
-                                            <span className="text-sm opacity-75 whitespace-nowrap">
-                                                Usage-based pricing
-                                            </span>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="border-t border-light dark:border-dark mt-4 pt-4 h-px"></div>
-
-                            <div
-                                className={`@container transition-all rounded-md border ${
-                                    animateFreeTiers
-                                        ? 'animate-flash bg-[#FAE9CE] dark:bg-[#463B2A] border-yellow -mx-2 -mt-1 px-2 pt-1'
-                                        : 'bg-transparent border-transparent'
-                                }`}
-                                onAnimationEnd={() => setAnimateFreeTiers(false)}
-                            >
-                                <div className="flex items-baseline gap-1 mb-3">
-                                    <h4 className="mb-0 text-lg">Free tier on all plans</h4>
-                                    <span className="opacity-75 text-sm">(resets monthly)</span>
-                                </div>
-
-                                <div className="grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2">
-                                    <FreeTierItem
-                                        name="Analytics"
-                                        allocation="1M events"
-                                        icon={<Icons.IconGraph className="text-blue size-5" />}
-                                        icon2={<Icons.IconPieChart className="text-green size-5" />}
-                                    />
-                                    <FreeTierItem
-                                        name="Session replay"
-                                        allocation="5K recordings"
-                                        icon={<Icons.IconRewindPlay className="text-yellow size-5" />}
-                                    />
-                                    <FreeTierItem
-                                        name="Feature flags"
-                                        allocation="1M requests"
-                                        icon={<Icons.IconToggle className="text-seagreen size-5" />}
-                                    />
-                                    <FreeTierItem
-                                        name="A/B testing"
-                                        description="Billed with feature flags"
-                                        icon={<Icons.IconFlask className="text-purple size-5" />}
-                                    />
-                                    <FreeTierItem
-                                        name="Surveys"
-                                        allocation="250 responses"
-                                        icon={<Icons.IconMessage className="text-red size-5" />}
-                                    />
-                                    <FreeTierItem
-                                        name="Data warehouse"
-                                        allocation="1M rows"
-                                        icon={<Icons.IconDatabase className="text-purple size-5" />}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        <aside className="md:col-span-16 lg:col-span-5 lgxl:col-span-4">
-                            <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6 h-full">
-                                <div className="flex flex-col md:grid grid-cols-2 lg:flex justify-between h-full">
-                                    <PlanContent
-                                        activePlan={activePlan}
-                                        onFreeTierClick={() => setAnimateFreeTiers(true)}
-                                    />
-                                </div>
-                            </div>
-                        </aside>
+            <div className="md:grid grid-cols-16 my-8 px-4 xl:px-8 2xl:px-12">
+                <div className="col-span-8 lg:col-span-4 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
+                    <div className="md:hidden mb-2">
+                        <Header />
                     </div>
 
-                    <PaidPricing />
+                    {/* <div className="aspect-square bg-accent dark:bg-accent-dark w-full flex items-center justify-center">
+                                image
+                            </div> */}
+                    <ImageSlider />
+                </div>
 
-                    <PlanColumns billingProducts={billingProducts} highlight="free" />
+                <div className="@container col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 lg:pl-6 xl:pl-10 md:mr-8 lg:mr-6 xl:mr-10 pb-4">
+                    <div className="hidden md:block">
+                        <Header />
+                    </div>
 
-                    <Addons />
-                    <SimilarProducts />
-                    <PurchasedWith />
-                    <Reviews />
+                    <p className="mb-4">
+                        PostHog is designed to grow with you. Our 8 products (and counting) will take you from idea to
+                        product-market fit to IPO and beyond. 🚀
+                    </p>
 
-                    <SectionLayout>
-                        <SectionHeader>
-                            <h3 id="calculator">Pricing calculator</h3>
-                        </SectionHeader>
-                        <Tabbed />
+                    <p className="mb-4">
+                        Our generous free tier means{' '}
+                        <strong>
+                            <em>more than 90% of companies use PostHog for free.</em>
+                        </strong>{' '}
+                        Only add a card if you need more than the free tier limits, advanced features, or want more
+                        projects. You still keep the same monthly free volume, even after upgrading.
+                    </p>
 
-                        <div className="grid md:grid-cols-2 gap-8 mt-12 max-w-7xl mx-auto">
+                    <div className="inline-block">
+                        <div className="flex justify-between items-end gap-4">
                             <div>
-                                <h4 className="text-lg mb-2">How our pricing works</h4>
-                                <SidebarList>
-                                    <SidebarListItem>Only pay for products you use</SidebarListItem>
-                                    <SidebarListItem>
-                                        <strong className="bg-yellow/50 dark:bg-white/20 italic inline py-0.5">
-                                            Generous free tier for each product (resets monthly)
-                                        </strong>
-                                    </SidebarListItem>
-                                    <SidebarListItem>
-                                        You can set billing limits per product so you never get a surprise bill
-                                    </SidebarListItem>
-                                    <SidebarListItem>
-                                        We also offer{' '}
-                                        <Tooltip content={() => <Discounts />} placement="top">
-                                            <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
-                                                discounts
-                                            </strong>
-                                        </Tooltip>{' '}
-                                        for startups and non-profits
-                                    </SidebarListItem>
-                                </SidebarList>
+                                {activePlan === 'free' ? (
+                                    <>
+                                        <h3 className="mb-0 text-xl">Free</h3>
+                                        <p className="text-sm mb-4">No credit card required</p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p className="text-sm mb-0">From</p>
+                                        <h3 className="mb-4 text-xl">
+                                            $0<span className="opacity-70 font-normal text-base">/mo</span>
+                                        </h3>
+                                    </>
+                                )}
                             </div>
                             <div>
-                                <h4 className="text-lg mb-2">Estimating usage</h4>
-                                <SidebarList>
-                                    <SidebarListItem>
-                                        Not sure what your volume looks like? Add the tracking code to your site and
-                                        check back in a few days – no credit card required.
-                                    </SidebarListItem>
-                                    <SidebarListItem>
-                                        If something stupid happens, like you get an unexpected bill and you’re unhappy,
-                                        we’ll pretty much always refund it!
-                                    </SidebarListItem>
-                                    <SidebarListItem>
-                                        We've also written{' '}
-                                        <Link href="/docs/billing/estimating-usage-costs">this handy guide</Link> to
-                                        help!
-                                    </SidebarListItem>
-                                </SidebarList>
+                                <ScrollLink to="plans" offset={-120} smooth className="inline-block mb-4">
+                                    <button className="text-red dark:text-yellow font-semibold cursor-pointer text-sm">
+                                        Compare plans
+                                    </button>
+                                </ScrollLink>
                             </div>
                         </div>
-                    </SectionLayout>
 
-                    <SectionLayout>
-                        <div className="bg-accent dark:bg-accent-dark p-4 pb-6 md:pb-4 rounded border border-light dark:border-dark flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
-                            <div>
-                                <h3 className="mb-1 text-xl">Give PostHog a try</h3>
-                                <p className="mb-0 text-[15px]">
-                                    No need to pick a plan - try our free version and decide if you want advanced
-                                    features later!
-                                </p>
-                            </div>
-                            <div>
-                                <PlanCTA />
-                            </div>
-                        </div>
-                    </SectionLayout>
-
-                    <SectionLayout>
-                        <SectionHeader>
-                            <h3 className="mb-2">More thing you might like to know about our pricing</h3>
-                            <p>Blah</p>
-                        </SectionHeader>
-                        <ul className="mt-4 list-none -mx-4 px-4 md:mx-0 md:px-0 xl:-mx-8 xl:px-8 2xl:-mx-12 2xl:px-12 pb-2 gap-4 grid grid-flow-col auto-cols-max overflow-x-auto">
-                            <li className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md w-80 p-4">
-                                <div className="flex items-center space-x-2 mb-2">
-                                    <div className="size-8 relative">
-                                        {/* <img className="inset-0 absolute object-contain" src={logo} /> */}
-                                    </div>
-                                    <h5 className="m-0">Pricing philosophy</h5>
-                                </div>
-                                <p className="m-0 text-[15px] opacity-75 leading-tight">
-                                    How we think about our pricing
-                                </p>
+                        <ul className="list-none flex flex-col @md:flex-row gap-2 p-0 -mx-4 px-4 md:mx-0 pb-1 md:pb-0 md:px-0 md:mb-6 overflow-x-auto">
+                            <li>
+                                <button
+                                    onClick={handleFreePlanClick}
+                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
+                                        activePlan === 'free'
+                                            ? 'border-yellow bg-white dark:bg-white/5'
+                                            : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                                    }`}
+                                >
+                                    <strong className="whitespace-nowrap">Totally free</strong>
+                                    <span className="text-sm opacity-75 whitespace-nowrap">
+                                        Free - no credit card required
+                                    </span>
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={handlePaidPlanClick}
+                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
+                                        activePlan === 'free'
+                                            ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                                            : 'border-yellow bg-white dark:bg-white/5'
+                                    }`}
+                                >
+                                    <strong className="whitespace-nowrap">Ridiculously cheap</strong>
+                                    <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
+                                </button>
                             </li>
                         </ul>
-                    </SectionLayout>
-                </>
-            )}
+                    </div>
 
-            {currentProduct && (
-                <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
-                    <Plans showTitle groupsToShow={groupsToShow} />
-                </section>
-            )}
+                    <div className="border-t border-light dark:border-dark mt-4 pt-4 h-px"></div>
 
-            {!currentProduct && (
-                <>
-                    <section id="faq" className={`${section} mb-20 mt-12 md:px-4`}>
-                        <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Pricing FAQ</h2>
-                        <FAQs />
-                        <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
-                            Have another pricing-related question?{' '}
-                            <Link href="/questions/topic/pricing">Ask in our community forum</Link>
+                    <div
+                        className={`@container transition-all rounded-md border ${
+                            animateFreeTiers
+                                ? 'animate-flash bg-[#FAE9CE] dark:bg-[#463B2A] border-yellow -mx-2 -mt-1 px-2 pt-1'
+                                : 'bg-transparent border-transparent'
+                        }`}
+                        onAnimationEnd={() => setAnimateFreeTiers(false)}
+                    >
+                        <div className="flex items-baseline gap-1 mb-3">
+                            <h4 className="mb-0 text-lg">Free tier on all plans</h4>
+                            <span className="opacity-75 text-sm">(resets monthly)</span>
+                        </div>
+
+                        <div className="grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4 @lg:gap-x-2 @lg:gap-y-2">
+                            <FreeTierItem
+                                name="Analytics"
+                                allocation="1M events"
+                                icon={<Icons.IconGraph className="text-blue size-5" />}
+                                icon2={<Icons.IconPieChart className="text-green size-5" />}
+                            />
+                            <FreeTierItem
+                                name="Session replay"
+                                allocation="5K recordings"
+                                icon={<Icons.IconRewindPlay className="text-yellow size-5" />}
+                            />
+                            <FreeTierItem
+                                name="Feature flags"
+                                allocation="1M requests"
+                                icon={<Icons.IconToggle className="text-seagreen size-5" />}
+                            />
+                            <FreeTierItem
+                                name="A/B testing"
+                                description="Billed with feature flags"
+                                icon={<Icons.IconFlask className="text-purple size-5" />}
+                            />
+                            <FreeTierItem
+                                name="Surveys"
+                                allocation="250 responses"
+                                icon={<Icons.IconMessage className="text-red size-5" />}
+                            />
+                            <FreeTierItem
+                                name="Data warehouse"
+                                allocation="1M rows"
+                                icon={<Icons.IconDatabase className="text-purple size-5" />}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <aside className="md:col-span-16 lg:col-span-5 lgxl:col-span-4">
+                    <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6 h-full">
+                        <div className="flex flex-col md:grid grid-cols-2 lg:flex justify-between h-full">
+                            <PlanContent activePlan={activePlan} onFreeTierClick={() => setAnimateFreeTiers(true)} />
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <PaidPricing />
+
+            <PlanColumns billingProducts={billingProducts} highlight="free" />
+
+            <Addons />
+            <SimilarProducts />
+            <PurchasedWith />
+            <Reviews />
+
+            <SectionLayout>
+                <SectionHeader>
+                    <h3 id="calculator">Pricing calculator</h3>
+                </SectionHeader>
+                <Tabbed />
+
+                <div className="grid md:grid-cols-2 gap-8 mt-12 max-w-7xl mx-auto">
+                    <div>
+                        <h4 className="text-lg mb-2">How our pricing works</h4>
+                        <SidebarList>
+                            <SidebarListItem>Only pay for products you use</SidebarListItem>
+                            <SidebarListItem>
+                                <strong className="bg-yellow/50 dark:bg-white/20 italic inline py-0.5">
+                                    Generous free tier for each product (resets monthly)
+                                </strong>
+                            </SidebarListItem>
+                            <SidebarListItem>
+                                You can set billing limits per product so you never get a surprise bill
+                            </SidebarListItem>
+                            <SidebarListItem>
+                                We also offer{' '}
+                                <Tooltip content={() => <Discounts />} placement="top">
+                                    <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                        discounts
+                                    </strong>
+                                </Tooltip>{' '}
+                                for startups and non-profits
+                            </SidebarListItem>
+                        </SidebarList>
+                    </div>
+                    <div>
+                        <h4 className="text-lg mb-2">Estimating usage</h4>
+                        <SidebarList>
+                            <SidebarListItem>
+                                Not sure what your volume looks like? Add the tracking code to your site and check back
+                                in a few days – no credit card required.
+                            </SidebarListItem>
+                            <SidebarListItem>
+                                If something stupid happens, like you get an unexpected bill and you’re unhappy, we’ll
+                                pretty much always refund it!
+                            </SidebarListItem>
+                            <SidebarListItem>
+                                We've also written{' '}
+                                <Link href="/docs/billing/estimating-usage-costs">this handy guide</Link> to help!
+                            </SidebarListItem>
+                        </SidebarList>
+                    </div>
+                </div>
+            </SectionLayout>
+
+            <SectionLayout>
+                <div className="bg-accent dark:bg-accent-dark p-4 pb-6 md:pb-4 rounded border border-light dark:border-dark flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
+                    <div>
+                        <h3 className="mb-1 text-xl">Give PostHog a try</h3>
+                        <p className="mb-0 text-[15px]">
+                            No need to pick a plan - try our free version and decide if you want advanced features
+                            later!
                         </p>
-                    </section>
+                    </div>
+                    <div>
+                        <PlanCTA />
+                    </div>
+                </div>
+            </SectionLayout>
 
-                    <section className="relative">
-                        <CTA />
-                    </section>
-                </>
-            )}
+            <SectionLayout>
+                <SectionHeader>
+                    <h3 className="mb-2">More thing you might like to know about our pricing</h3>
+                    <p>Blah</p>
+                </SectionHeader>
+                <ul className="mt-4 list-none -mx-4 px-4 md:mx-0 md:px-0 xl:-mx-8 xl:px-8 2xl:-mx-12 2xl:px-12 pb-2 gap-4 grid grid-flow-col auto-cols-max overflow-x-auto">
+                    <li className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md w-80 p-4">
+                        <div className="flex items-center space-x-2 mb-2">
+                            <div className="size-8 relative">
+                                {/* <img className="inset-0 absolute object-contain" src={logo} /> */}
+                            </div>
+                            <h5 className="m-0">Pricing philosophy</h5>
+                        </div>
+                        <p className="m-0 text-[15px] opacity-75 leading-tight">How we think about our pricing</p>
+                    </li>
+                </ul>
+            </SectionLayout>
+
+            <section id="faq" className={`${section} mb-20 mt-12 md:px-4`}>
+                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Pricing FAQ</h2>
+                <FAQs />
+                <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
+                    Have another pricing-related question?{' '}
+                    <Link href="/questions/topic/pricing">Ask in our community forum</Link>
+                </p>
+            </section>
+
+            <section className="relative">
+                <CTA />
+            </section>
 
             <section className="bg-primary my-12 md:px-4">
                 <Quote

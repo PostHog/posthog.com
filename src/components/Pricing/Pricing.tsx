@@ -158,7 +158,8 @@ const Discounts = () => (
                 <IconHandMoney className="size-5 absolute left-0 top-4.5 opacity-50" />
                 <strong>Nonprofit</strong>
                 <p className="text-[15px] mb-2">
-                    Are you a nonprofit? You can save more! Get in touch through the app after signing up and we'll give you an additional discount.
+                    Are you a nonprofit? You can save more! Get in touch through the app after signing up and we'll give
+                    you an additional discount.
                 </p>
             </li>
         </ul>
@@ -846,92 +847,6 @@ const PricingExperiment = ({
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
-
-            <section className="w-screen md:w-auto overflow-x-hidden -mx-4 px-4">
-                <div
-                    className={`grid md:grid-cols-2 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
-                >
-                    <div className="md:order-2">
-                        <div className="scale-[1.75] sm:scale-[1.4] md:scale-[1.1] lg:scale-[1.1] py-8 pl-20 sm:pl-28 md:p-0 md:scale-110 -mr-0 md:-mr-56 lg:-mr-64 xl:-mr-80 ">
-                            <Lottie
-                                options={{
-                                    loop: false,
-                                    autoplay: true,
-                                    animationData: tractorHog,
-                                }}
-                            />
-                        </div>
-                    </div>
-                    <div className="md:order-1">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">
-                            {currentProduct
-                                ? billingProducts.find((p: BillingProductV2Type) => p.type === currentProduct)?.name ||
-                                  (currentProduct == 'ab_testing' && 'A/B testing') ||
-                                  'Product'
-                                : 'Usage-based'}{' '}
-                            pricing
-                        </h1>
-                        <p className="text-base font-medium opacity-60 leading-tight mb-4">
-                            PostHog offers usage-based pricing, not{' '}
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-sm">
-                                        <strong className="block text-lg mb-1">What is value-based pricing?</strong>
-                                        <p className="mb-2 text-sm">
-                                            <em>Value-based pricing</em> is geared around testing how much money you're
-                                            willing to pay.
-                                        </p>
-                                        <p className="mb-0 text-sm">
-                                            <em>Usage-based pricing</em> is like a utility - where we continually seek
-                                            to lower costs and make money through volume.
-                                        </p>
-                                    </div>
-                                )}
-                                placement="right"
-                            >
-                                <span className="border-b border-dashed border-primary/50 dark:border-primary-dark/50">
-                                    value-based pricing
-                                </span>
-                            </Tooltip>
-                            .
-                        </p>
-                        <p className="text-base font-medium opacity-60 leading-tight">
-                            Enjoy a generous free tier every month.
-                        </p>
-                        <div className="flex gap-4 items-center">
-                            <div>
-                                <PlanCTA />
-                            </div>
-                            <div>
-                                <span className="text-sm opacity-70">No credit card required</span>
-                                <Tooltip
-                                    content={() => (
-                                        <div className="max-w-[300px] pb-2">
-                                            <p className="mb-1">
-                                                <strong>Totally free</strong>{' '}
-                                                <span className="opacity-70 text-sm italic">
-                                                    - no credit card required
-                                                </span>
-                                            </p>
-                                            <ul className="pl-0 pb-2 list-none [&_li]:text-[15px] opacity-70">
-                                                <li>Usage capped at free tier limits</li>
-                                                <li>Basic product features</li>
-                                                <li>1 project</li>
-                                                <li>1-year data retention</li>
-                                                <li>Community support</li>
-                                            </ul>
-                                            <PlanCTA intent="free" />
-                                        </div>
-                                    )}
-                                    placement="right"
-                                >
-                                    <IconInfo className="size-5 inline-block opacity-60 hover:opacity-75 ml-0.5 -mt-0.5" />
-                                </Tooltip>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {!currentProduct && (
                 <>
