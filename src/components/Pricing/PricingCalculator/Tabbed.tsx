@@ -48,7 +48,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
 
     return (
         <div className="grid grid-cols-6 gap-8 items-center">
-            <div className="col-span-3 md:col-span-4 flex justify-between items-center">
+            <div className="col-span-3 sm:col-span-4 flex justify-between items-center">
                 <div className="flex space-x-1 items-center">
                     <p className="m-0 text-sm font-bold">{name}</p>
                     <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
@@ -59,7 +59,7 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                 </div>
                 <Toggle checked={checked} onChange={handleToggle} />
             </div>
-            <div className="col-span-3 md:col-span-2 flex justify-between">
+            <div className="col-span-3 sm:col-span-2 flex justify-between">
                 <div>
                     <p className="m-0 text-sm opacity-70">Starts at</p>
                     <strong className="text-[15px] md:text-base">
@@ -314,8 +314,8 @@ export default function Tabbed() {
     }, [])
 
     return (
-        <div>
-            <div className="grid md:grid-cols-12 mb-1 md:mb-0 pt-2">
+        <div className="w-full flex-1 max-w-6xl">
+            <div className="grid md:grid-cols-12 mb-1">
                 <div className="md:col-span-4 lg:col-span-3 md:pr-6 mb-4 md:mb-0">
                     <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto w-screen md:w-auto -mx-4 px-4">
@@ -385,7 +385,7 @@ export default function Tabbed() {
                         const checked = platformAddon?.checked
                         return (
                             <div key={type} className="grid grid-cols-6 gap-8 items-center">
-                                <div className="col-span-3 md:col-span-4 flex items-center justify-between">
+                                <div className="col-span-3 sm:col-span-4 flex items-center justify-between">
                                     <div className="flex space-x-1 items-center">
                                         <p className="m-0 text-sm font-bold">{name}</p>
                                         <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
@@ -408,7 +408,7 @@ export default function Tabbed() {
                                         }
                                     />
                                 </div>
-                                <div className="col-span-3 md:col-span-2 flex justify-between">
+                                <div className="col-span-3 sm:col-span-2 flex justify-between">
                                     <div>
                                         <strong className="text-[15px] md:text-base">$450</strong>
                                         <span className="text-sm opacity-70">/mo</span>

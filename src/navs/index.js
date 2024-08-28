@@ -2985,20 +2985,20 @@ export const pricingMenu = {
     children: [
         {
             name: 'PostHog Cloud',
-            icon: 'IconCdCase',
-            color: 'red',
+            icon: 'IconCloud',
+            color: 'blue',
             url: '/pricing',
         },
         {
             name: 'Event types',
             icon: 'IconCursorClick',
-            color: 'blue',
+            color: 'purple',
             url: '#',
         },
         {
             name: 'Add-ons',
             icon: 'IconPuzzle',
-            color: 'purple',
+            color: 'seagreen',
             url: '#',
         },
         {

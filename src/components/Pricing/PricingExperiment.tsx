@@ -195,6 +195,33 @@ const FreeTierItem = ({ icon, icon2, name, allocation, description }) => {
     )
 }
 
+const morePricingReads = [
+    {
+        href: '/events',
+        icon: <Icons.IconCursorClick className="text-purple size-7" />,
+        title: 'Event types',
+        description: 'The cheapest events in the biz',
+    },
+    {
+        href: '/addons',
+        icon: <Icons.IconPuzzle className="text-seagreen size-7" />,
+        title: 'Add-ons',
+        description: 'Extra functionality if you need it',
+    },
+    {
+        href: '/pricing/philosophy',
+        icon: <Icons.IconLightBulb className="text-yellow size-7" />,
+        title: 'Pricing philosophy',
+        description: "tl;dr: it's designed to make you happy",
+    },
+    {
+        href: '/sales',
+        icon: <Icons.IconPercentage className="text-green size-7" />,
+        title: 'How we do "sales"',
+        description: "We don't sell you. You'll sell yourself.",
+    },
+]
+
 const PricingExperiment = (): JSX.Element => {
     const [animateFreeTiers, setAnimateFreeTiers] = useState(false)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
@@ -387,52 +414,55 @@ const PricingExperiment = (): JSX.Element => {
             <PurchasedWith />
             <Reviews />
 
-            <SectionLayout>
+            <SectionLayout id="calculator">
                 <SectionHeader>
-                    <h3 id="calculator">Pricing calculator</h3>
+                    <h3>Pricing calculator</h3>
                 </SectionHeader>
-                <Tabbed />
 
-                <div className="grid md:grid-cols-2 gap-8 mt-12 max-w-7xl mx-auto">
-                    <div>
-                        <h4 className="text-lg mb-2">How our pricing works</h4>
-                        <SidebarList>
-                            <SidebarListItem>Only pay for products you use</SidebarListItem>
-                            <SidebarListItem>
-                                <strong className="bg-yellow/50 dark:bg-white/20 italic inline py-0.5">
-                                    Generous free tier for each product (resets monthly)
-                                </strong>
-                            </SidebarListItem>
-                            <SidebarListItem>
-                                You can set billing limits per product so you never get a surprise bill
-                            </SidebarListItem>
-                            <SidebarListItem>
-                                We also offer{' '}
-                                <Tooltip content={() => <Discounts />} placement="top">
-                                    <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
-                                        discounts
+                <div className="flex flex-col lgxl:flex-row lgxl:gap-8 2xl:gap-12 items-start pt-4">
+                    <Tabbed />
+
+                    <div className="grid md:grid-cols-2 lgxl:grid-cols-1 gap-8 mt-12 lgxl:mt-0 max-w-6xl lgxl:max-w-xs 2xl:max-w-sm sticky top-4">
+                        <div>
+                            <h4 className="text-lg mb-2">How our pricing works</h4>
+                            <SidebarList>
+                                <SidebarListItem>Only pay for products you use</SidebarListItem>
+                                <SidebarListItem>
+                                    <strong className="bg-yellow/50 dark:bg-white/20 italic inline py-0.5">
+                                        Generous free tier for each product (resets monthly)
                                     </strong>
-                                </Tooltip>{' '}
-                                for startups and non-profits
-                            </SidebarListItem>
-                        </SidebarList>
-                    </div>
-                    <div>
-                        <h4 className="text-lg mb-2">Estimating usage</h4>
-                        <SidebarList>
-                            <SidebarListItem>
-                                Not sure what your volume looks like? Add the tracking code to your site and check back
-                                in a few days – no credit card required.
-                            </SidebarListItem>
-                            <SidebarListItem>
-                                If something stupid happens, like you get an unexpected bill and you’re unhappy, we’ll
-                                pretty much always refund it!
-                            </SidebarListItem>
-                            <SidebarListItem>
-                                We've also written{' '}
-                                <Link href="/docs/billing/estimating-usage-costs">this handy guide</Link> to help!
-                            </SidebarListItem>
-                        </SidebarList>
+                                </SidebarListItem>
+                                <SidebarListItem>
+                                    You can set billing limits per product so you never get a surprise bill
+                                </SidebarListItem>
+                                <SidebarListItem>
+                                    We also offer{' '}
+                                    <Tooltip content={() => <Discounts />} placement="top">
+                                        <strong className="text-red dark:text-yellow border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                            discounts
+                                        </strong>
+                                    </Tooltip>{' '}
+                                    for startups and non-profits
+                                </SidebarListItem>
+                            </SidebarList>
+                        </div>
+                        <div>
+                            <h4 className="text-lg mb-2">Estimating usage</h4>
+                            <SidebarList>
+                                <SidebarListItem>
+                                    Not sure what your volume looks like? Add the tracking code to your site and check
+                                    back in a few days – no credit card required.
+                                </SidebarListItem>
+                                <SidebarListItem>
+                                    If something stupid happens, like you get an unexpected bill and you’re unhappy,
+                                    we’ll pretty much always refund it!
+                                </SidebarListItem>
+                                <SidebarListItem>
+                                    We've also written{' '}
+                                    <Link href="/docs/billing/estimating-usage-costs">this handy guide</Link> to help!
+                                </SidebarListItem>
+                            </SidebarList>
+                        </div>
                     </div>
                 </div>
             </SectionLayout>
@@ -454,19 +484,27 @@ const PricingExperiment = (): JSX.Element => {
 
             <SectionLayout>
                 <SectionHeader>
-                    <h3 className="mb-2">More thing you might like to know about our pricing</h3>
-                    <p>Blah</p>
+                    <h3 className="mb-2">More pricing reads</h3>
+                    <p>
+                        If you've made it this far, you might be interested in these other pages about how our pricing
+                        works.
+                    </p>
                 </SectionHeader>
                 <ul className="mt-4 list-none -mx-4 px-4 md:mx-0 md:px-0 xl:-mx-8 xl:px-8 2xl:-mx-12 2xl:px-12 pb-2 gap-4 grid grid-flow-col auto-cols-max overflow-x-auto">
-                    <li className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md w-80 p-4">
-                        <div className="flex items-center space-x-2 mb-2">
-                            <div className="size-8 relative">
-                                {/* <img className="inset-0 absolute object-contain" src={logo} /> */}
-                            </div>
-                            <h5 className="m-0">Pricing philosophy</h5>
-                        </div>
-                        <p className="m-0 text-[15px] opacity-75 leading-tight">How we think about our pricing</p>
-                    </li>
+                    {morePricingReads.map((item, index) => (
+                        <li key={index} className="py-0.5">
+                            <Link
+                                href={item.href}
+                                className="h-full bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md w-80 p-4 flex gap-3 transition-transform relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[.99] active:top-[.5px] text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark"
+                            >
+                                <div>{item.icon}</div>
+                                <div>
+                                    <h4 className="m-0 text-lg pb-0.5">{item.title}</h4>
+                                    <p className="m-0 text-[15px] opacity-75 leading-tight">{item.description}</p>
+                                </div>
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
             </SectionLayout>
 
