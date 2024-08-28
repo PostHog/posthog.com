@@ -73,7 +73,6 @@ One of the most important things we did was to [create an Ideal Customer Profile
 When we launched, we weren't sure quite how focused we'd need to be on engineers versus product managers. After launching, we realized that we could go all-in on engineers and technical founders, who now make up around 80% of our users. Our brand and product has become more oriented towards these users as a result.
 
 ![posthog icp](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/icp/posthog-icp.png)
-<Caption>Our current ideal cusomter profile</Caption>
 
 Here are some ways we got more specific for this audience after we zeroed-in on it:
 
@@ -98,7 +97,6 @@ We sometimes make business decisions based on who we are, and what we want to do
 For instance, initially we planned to have an open core model. We'd offer open-source software, and some people in big enterprises, would self-host and pay for the party for everyone else. 
 
 ![you will hate posthog if](https://res.cloudinary.com/dmukukwp6/image/upload/you_will_hate_posthog_683b1bf3ab.png)
-<Caption>This is one of the most popular elements on our homepage</Caption>
 
 We felt this would work as there was no real competition, whereas in cloud we had lots of competitors with over $100m in annual revenue. However, we simply love shipping new features, and after our first hackathon, we wound up with session replay (i.e. a new feature big enough to be its own product), which took off, and this resulted in a multi-product approach. 
 
@@ -148,7 +146,6 @@ Who knows what happens next!
 This single thing is easy enough to copy, but it's just one activity among hundreds that builds a brand.
 
 ![merch store](https://res.cloudinary.com/dmukukwp6/image/upload/merch_store_a97f57c226.png)
-<Caption>Our sticker packs are weird and awesome<Caption>
 
 ## Doesn't this imply doing everything to a really high standard and a ridiculous workload?
 
