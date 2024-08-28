@@ -10,11 +10,11 @@ PostHog and LaunchDarkly have many of the same features and concepts, but differ
 
 - Flags in LaunchDarkly can be used across environments (such as `Test` and `Production`). In PostHog, they belong to a single project and need to be [copied between them](/docs/feature-flags/multi-project-feature-flags).
 
-- By default, flags in PostHog are available across client, mobile, server-side SDKs as well as the API. LaunchDarkly only makes flags available on the server-side by default.
+- By default, flags in PostHog are available across client, mobile, and server-side SDKs as well as the API. LaunchDarkly only makes flags available on the server-side by default.
 
-- In LaunchDarkly, you use **rules** to target your flag, which are set up after creating the flag. In PostHog, you use **release conditions** which are set up when you create a flag (but can be edited later). For example, rollout percentages are front and center for PostHog, but are hidden in LaunchDarkly.
+- In LaunchDarkly, you use **rules** to target your flag, which are set up after creating the flag. In PostHog, you use **release conditions** which are set up during flag creation (but can be edited later). For example, rollout percentages are front and center for PostHog but hidden in LaunchDarkly.
 
-- LaunchDarkly relies on **contexts** to evaluate flags. PostHog evaluates based on users (but you use “users” however you want).
+- LaunchDarkly relies on **contexts** to evaluate flags. PostHog evaluates based on users (but you can use “users” [however you want](/tutorials/group-page-machine-flags)).
 
 - A lot of LaunchDarkly's targeting, tracking, and metrics relies on importing data from 3rd party tools. This is all first party in PostHog.
 
@@ -40,7 +40,7 @@ From LaunchDarkly, you need:
 
 2. **Environment key**: Like `production` or `test`, from the [environments tab](https://app.launchdarkly.com/projects/default/settings) of your project settings.
 
-3. **API key**: To create one, go to the [authorization tab](https://app.launchdarkly.com/settings/authorization), create **Create token**, add a name, and click **Save token**. Make sure to save it somewhere secure because you cannot access it later
+3. **API key**: To create one, go to the [authorization tab](https://app.launchdarkly.com/settings/authorization), create **Create token**, add a name, and click **Save token**. Make sure to save it somewhere secure because you cannot access it later.
 
 ![LaunchDarkly API key](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_05_at_15_27_30_2x_83f634ee2b.png)
 
@@ -225,6 +225,8 @@ for flag in flag_data['items']:
   
   print(response)
 ```
+
+This script may need modification depending on the structure of your LaunchDarkly data, but it gives you a start.
 
 ### 4. Editing goals and release conditions
 

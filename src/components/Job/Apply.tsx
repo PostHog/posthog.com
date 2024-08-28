@@ -357,7 +357,7 @@ export default function Apply({ id, info }) {
                                 placeholder={
                                     <TrackedCTA
                                         className="mt-auto"
-                                        to={`https://app.posthog.com/signup`}
+                                        to={`https://us.posthog.com/signup`}
                                         size="sm"
                                         event={{ name: `clicked Continue`, type: 'cloud' }}
                                     >
@@ -370,7 +370,7 @@ export default function Apply({ id, info }) {
                                         to={`https://${
                                             posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud')
                                                 ? 'eu'
-                                                : 'app'
+                                                : 'us'
                                         }.posthog.com/signup`}
                                         event={{ name: `clicked Continue`, type: 'cloud' }}
                                     >

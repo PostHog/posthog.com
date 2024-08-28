@@ -8,9 +8,11 @@ showTitle: true
 
 We use [Salesforce](https://posthog.lightning.force.com/lightning/page/home) as our customer relationship management ('CRM') platform. If you need access, you can ask Mine for an invite. 
 
-As a first step, you might find it useful to install Salesforce's [Chrome extension](https://chromewebstore.google.com/detail/Salesforce/jjghhkepijgakdammjldcbnjehfkfmha?hl=en-US), as it means you can manage most things directly in Gmail. 
+As a first step, you might find it useful to install Salesforce's [Chrome extension](https://chromewebstore.google.com/detail/Salesforce/jjghhkepijgakdammjldcbnjehfkfmha?hl=en-US), as it means you can manage most things directly in Gmail.
 
 As a general principle, we try to ensure as much customer communication as possible is captured in Salesforce, rather than in individual email inboxes, so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!). You should use the channel that suits the user, not us. Just make sure you keep Salesforce up to date with your interactions. We've seen much higher response rates on Slack than email. 
+
+For existing customers, you'll sometimes send emails directly from [Vitally](https://posthog.vitally-eu.io/).  To ensure these also make it to Salesforce, first look up your *Email to Salesforce Address* from the [personal settings page](https://posthog.lightning.force.com/lightning/settings/personal/EmailToSalesforceUserSetup/home) in Salesforce, and then add it to your [Vitally gmail settings](https://posthog.vitally-eu.io/settings/profile/gmail).
 
 All Slack messages sync up with the corresponding account in Salesforce. We use [Pylon](https://app.usepylon.com) for this sync, so make sure Pylon is added to the customer Slack channel integrations and the channel is [linked to the Salesforce account](https://app.usepylon.com/integrations/salesforce?tab=account-mapping) properly for the sync to work smoothly.
 
@@ -63,7 +65,7 @@ Our preferred way to keep track of outreach is by creating Salesforce Leads, Con
 - Opportunities: If you identify potential for growth with an existing user, such as expansion or commitment to an annual plan, you can create an Opportunity directly. This is appropriate for contacts or customers where you've already completed the lead assessment (more on that below).
 
 
-## How we do lead assessment
+## How we do lead assignments
 Any user who submits a “contact sales” form on our website shows up as a lead in Salesforce and gets assigned to an Account Executive (AE). This is how we do lead assignment within our sales team:
 - Based on Territory: Leads are assigned based on their geographical location.
   - Territory 1: Users based in the US, Canada, Central and Latin America are assigned to this territory.
@@ -72,7 +74,7 @@ Any user who submits a “contact sales” form on our website shows up as a lea
 
 - Round Robin Within Territory: Leads are assigned in a round-robin fashion to the AEs who own that territory, ensuring equal distribution among them.
 
-### How we process leads in our pipeline
+### How we assess leads in our pipeline
 We have the following lead statuses to manage the lead assessment process before we decide if a user is a right fit to use PostHog.
 
 New: A lead that has just been entered into Salesforce and has not yet been contacted.
@@ -96,7 +98,7 @@ Converted: A lead that has been qualified and is ready to become an opportunity.
 - Ensure all relevant information is transferred accurately and opportunity type is selected properly (more on that below).
 
 Unqualified: A lead that does not meet the criteria to become an opportunity.
-- Document the reasons for disqualification in the “Disqualification reason” field in Salesforce (e.g., budget constraints, lack of fit).
+- Document the reasons for disqualification in the “Disqualification reason” field in Salesforce (e.g., budget constraints, lack of fit, self serve customer, non-opportunity-related inquiries, support requests).
 - Update the lead status to 'Unqualified'.
 
 ### Lead Qualification Criteria

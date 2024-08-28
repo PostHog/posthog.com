@@ -6,7 +6,7 @@ showTitle: true
 
 # Annual plans and more
 
-For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their contractual commitment to a minimum term, and likely custom pricing as well.  At a minimum, they should sign an Order Form which references our standard [terms](/terms) and [privacy notice](/privacy).  In addition, they may want a custom Master Services Agreement (MSA) or Data Processing Agreement (DPA).
+For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their contractual commitment to a minimum term, and likely custom pricing as well. At a minimum, they should sign an Order Form which references our standard [terms](/terms) and [privacy notice](/privacy). In addition, they may want a custom Master Services Agreement (MSA) or Data Processing Agreement (DPA).
 
 > If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements).
 
@@ -103,9 +103,27 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 3. Ensure Document forwarding and Signature forwarding are set to on so that our Contact can re-assign the document if needed.
 4. Click Send at the top of the document and add a message explaining the context of the order form.
 5. Once the Client and then PostHog have signed it you should get an email to confirm completion.
-6. Don't forget to link to a deal in HubSpot and close the associated deal.
-7. Zapier will [automatically add](https://zapier.com/editor/217375860) a record in the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc Order Form ID.  See the [Billing](/handbook/growth/sales/billing) page for steps on how to use this and automate the setup of their Stripe billing components.
+6. Don't forget to link to an opportunity in Salesforce and mark the associated opportunity as Closed Won.
+7. Zapier will [automatically add](https://zapier.com/editor/217375860) a record in the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc Order Form ID.
 8. Celebrate!
+
+
+### Manual upload of signed Order Form
+
+We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer to sign a PDF copy. One way to minimize this is to send contracts for initial review via PandaDoc when possible. It is ok to have multiple drafts in PandaDoc as long as we have the final signed copy in there as well. When a client signs an order form outside of PandaDoc, please follow these steps to complete the process:
+
+1. If you have previously created a draft, find the document in PandaDoc.
+   - Select "Change Status" from the three-dot menu on the right.
+   - Upload the signed PDF of the document.
+   - Mark the status as completed.
+   - Check Audit Trail to make sure the signed version is uploaded correctly.
+   - Link to an opportunity in Salesforce and close the associated opportunity as Closed Won.
+2. If no draft exists, upload the signed document directly ad a new document in PandaDoc.
+   - Mark the status as completed.
+   - Link to an opportunity in Salesforce and close the associated opportunity as Closed Won.
+   
+Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works for more information.
+
 
 ## Master Services Agreement (MSA)
 

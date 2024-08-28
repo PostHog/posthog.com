@@ -4,29 +4,31 @@ icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/segment.svg
 ---
 
-Segment is a Customer Data Platform (CDP) that allows you to easily manage data and integrations with services across your growth, product, and marketing stack. 
+Segment is a customer data platform (CDP) that enables you to capture data from many sources and send it to many destinations. This is a guide for our favorite one of those destinations: PostHog. 
 
-By tracking events and users via Segment’s API and libraries, you can send your product’s data to all of your analytics/marketing platforms, with minimal instrumentation code. They offer support for most platforms, including iOS, Android, JavaScript, Node.js, PHP, and more.
-
-> Before integrating with Segment, we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating with PostHog.
+> **Before you start...** we recommend you read our [CDP integration guide](/docs/integrate/cdp) to understand the different options for integrating with PostHog.
 
 ## Setting up Segment
 
-Make sure you have a [Segment account](https://segment.com/docs/#getting-started) **and** a PostHog account, using [PostHog Cloud](https://us.posthog.com/signup) or a self-hosted instance running [version 1.30.0](/blog/the-posthog-array-1-30-0) or later.
+Make sure you have a [Segment account](https://segment.com/docs/#getting-started) and a PostHog instance, using [PostHog Cloud](https://us.posthog.com/signup) or self-hosted running [version 1.30.0](/blog/the-posthog-array-1-30-0) or later.
 
-1. In the Segment workspace, create a new project and enable PostHog as an integration. We are listed as a [destination on Segment](https://segment.com/docs/connections/destinations/catalog/posthog/).
-2. Grab the PostHog API key from [your project settings](https://us.posthog.com/settings/project).
-3. Use one of Segment's libraries to send events.
-4. See the events coming into PostHog.
+1. Once you have Segment and your source(s) set up, go to the **destinations** tab in your Segment workspace, click **Add Destination**, and search for [PostHog](https://segment.com/docs/connections/destinations/catalog/posthog/).
 
-### Enabling all features via Segment with your website
+2. After selecting PostHog, click **Add Destination**, choose your source(s), add a name, and click **Create destination**.
 
-The simple Segment destination only supports tracking of **pageviews**, **custom events**, and **identifying users**.
+3. With the destination created, get your project API key and instance address from [your project settings](https://us.posthog.com/settings/project). Add them to the fields under **Connection Settings**.
 
-In order to use the full feature set of PostHog (**autocapture**, **session recording**, **feature flags**, **heatmaps**, **surveys**, or the **toolbar**) we need to load our own Javascript snippet directly.
+4. Once added, flip the toggle to enable the destination, and when you capture events from the source, you'll start to see them in PostHog.
 
-1. In addition to Segment, install your [PostHog JS snippet](/docs/integrate/client/js#installation)
-2. Modify the initialization as documented below to pass the segment `analytics` through for PostHog JS to sync with:
+![PostHog in Segment](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_21_at_16_19_25_2x_0412011458.png)
+
+### Enabling all of PostHog's features via Segment
+
+The simple Segment destination only supports tracking of pageviews, custom events, and identifying users. To use the full feature set of PostHog like autocapture, session recording, feature flags, heatmaps, surveys, or the toolbar we need to load our own Javascript snippet directly.
+
+1. In addition to Segment, install your [PostHog snippet](/docs/integrate/client/js#installation).
+
+2. Modify the initialization to pass the Segment `analytics` object through for PostHog to sync with:
 
     ```js
     // Load PostHog JS
@@ -47,31 +49,82 @@ In order to use the full feature set of PostHog (**autocapture**, **session reco
     })
     ```
 
-
 ## Sending events to PostHog
 
-Once you have set up Segment and the destination properly configured, can use it to send events to PostHog. You can do this through the Segment API, or one of the Segment libraries. For example, with javascript you can use the `analytics.track('Event Name')` function to send events to Segment, which will then be sent to PostHog.
+Once you set up your Segment source and PostHog destination, you can send events via Segment to PostHog. You do this through one of its source libraries or its API. The PostHog destination supports the identify, track, page, screen, group, and alias definitions.
 
-For the full list of functions see the relevant SDK docs e.g. the [Javascript SDK](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/).
+With the Analytics.js source, you can use `analytics.track('Event Name')` to send events to Segment, which is then sent to PostHog. For example, this sends a `user signed up` event with `plan` and `accountType` event properties and a `paid` person property to PostHog:
+
+```js
+analytics.track("user signed up", {
+  plan: "Pro Annual",
+  accountType: "Premium"
+  $set: {
+    paid: true
+  }
+});
+```
+
+Similarly, the `analytics.page()` function sends `$pageview` events and the `analytics.screen()` function sends `$screen` events to PostHog.
+
+
+### Identifying users
+
+To add identify users and add person properties, you can use Segment's `identify` function:
+
+```js
+analytics.identify('userId123', {
+  email: 'john.doe@example.com'
+});
+```
+
+This works similarly to PostHog's [`identify` function](/docs/product-analytics/identify):
+
+1. It identifies anonymous users with a distinct ID, creating a person in PostHog.
+2. It sets the person properties.
+
+### Aliasing users
+
+You can also assign multiple distinct IDs to the same user using Segment's `alias` function (the `previousId` argument is optional):
+
+```js
+analytics.alias('aliasId', 'previousId')  
+```
+
+See our [alias docs](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) for more details and restrictions.
 
 ### Using group analytics
 
-If you want to use group analytics, each event should include the property `$groups` as an key-value object of group type and ID like `{ "company": "company_id_in_your_db" }`
+Although Segment has a `group` definition, it works different than its equivalent in PostHog.
+
+Calling `analytics.group()` in Segment sends a `$groupidentify` event and creates a `segment_group` type group with the ID you pass it. For example, this creates a `segment_group` type with the ID `Acme Corp`:
+
+```js
+analytics.group('Acme Corp')
+```
+
+If you want to set any group type on a user, you need to use the `$groups` property on the `track` call instead. For example, this creates a `company` type group with the ID `Twitter`:
+
+```js
+analytics.track('user_signed_up', {
+    $groups: { company: 'Twitter' }
+})
+```
+
+Also, unlike PostHog's JavaScript library's `group` method, you need to pass the `$groups` property on every Segment method call to have that data included.
 
 ## FAQ
 
 ### Where can I find out more?
 
-Further information is available in [Segment's integration catalog](https://segment.com/catalog/integrations/posthog/).
+See Segment's [spec overview](https://segment.com/docs/connections/spec/), [Analytics.js docs](https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/), and [PostHog destination](https://segment.com/catalog/integrations/destination/posthog/) for more information. 
+
+You can also find the code for the PostHog destination on [GitHub](https://github.com/PostHog/posthog-segment).
 
 ### Who maintains this app?
 
-This app is maintained by Segment. If you have issues with the app not functioning as intended, please [let us know](http://app.posthog.com/home#supportModal)!
-
-### What if I have feedback on this app?
-
-We love feature requests and feedback! Please [tell us what you think](http://app.posthog.com/home#supportModal)! to tell us what you think.
+This app is maintained by PostHog. If you have issues with the app not functioning as intended, [let us know in-app](http://us.posthog.com/home#supportModal).
 
 ### What if my question isn't answered above?
 
-We love answering questions. Ask us anything via [our community forum](/questions), or [drop us a message](http://app.posthog.com/home#supportModal). 
+We love answering questions. Ask us anything via [our community forum](/questions).
