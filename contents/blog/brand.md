@@ -1,10 +1,12 @@
 ---
-date: 2024-08-15
+date: 2024-08-28
 title: How to brand your startup so it isn't boring
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/brand_startup_1aa2b151d6.png
 author:
   - james-hawkins
 tags:
@@ -60,15 +62,18 @@ The first is very clear. We started with it when this is what we had.
 
 As we became more well-known, and as we added lots of products into our platform, we shifted to the latter mission. It's a better reflection of _why_ our company exists – it's more than just a piece of software. 
 
-We introduced it because the company was getting larger, and the scope of what we were setting out to achieve had expanded. We now have 8+ products, and we produce a ton of content to help engineers build better products. 
+We introduced it because the company was getting larger, and the scope of what we were setting out to achieve had expanded. We now have 8+ products, and we produce a ton of content to help engineers build better products.
 
-The need for total clarity wasn't as important later on, relative to the need for us standing for something. It was necessary to start small then widen.
+Clarity and simplicity was useful in the early days, but sacrificing some of that clarity helped us stand for something broader that gives us more purpose.
 
 ## You need to create your brand for someone...
 
 One of the most important things we did was to [create an Ideal Customer Profile](/newsletter/ideal-customer-profile-framework).
 
 When we launched, we weren't sure quite how focused we'd need to be on engineers versus product managers. After launching, we realized that we could go all-in on engineers and technical founders, who now make up around 80% of our users. Our brand and product has become more oriented towards these users as a result.
+
+![posthog icp](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/icp/posthog-icp.png)
+<Caption>Our current ideal cusomter profile</Caption>
 
 Here are some ways we got more specific for this audience after we zeroed-in on it:
 
@@ -91,6 +96,9 @@ Quoting [Cory](/community/profiles/30200), our lead designer: "We aren't the bes
 We sometimes make business decisions based on who we are, and what we want to do – not always what may, for example, generate the most revenue growth.
 
 For instance, initially we planned to have an open core model. We'd offer open-source software, and some people in big enterprises, would self-host and pay for the party for everyone else. 
+
+![you will hate posthog if](https://res.cloudinary.com/dmukukwp6/image/upload/you_will_hate_posthog_683b1bf3ab.png)
+<Caption>This is one of the most popular elements on our homepage</Caption>
 
 We felt this would work as there was no real competition, whereas in cloud we had lots of competitors with over $100m in annual revenue. However, we simply love shipping new features, and after our first hackathon, we wound up with session replay (i.e. a new feature big enough to be its own product), which took off, and this resulted in a multi-product approach. 
 
@@ -138,6 +146,9 @@ To give you an example, we built a [merch store](/merch):
 Who knows what happens next!
 
 This single thing is easy enough to copy, but it's just one activity among hundreds that builds a brand.
+
+![merch store](https://res.cloudinary.com/dmukukwp6/image/upload/merch_store_a97f57c226.png)
+<Caption>Our sticker packs are weird and awesome<Caption>
 
 ## Doesn't this imply doing everything to a really high standard and a ridiculous workload?
 
