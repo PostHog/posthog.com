@@ -414,7 +414,10 @@ export const ProductWebAnalytics = () => {
                             access to web analytics at no additional cost.
                         </li>
                     </ul>
-                    <p className="mb-0">Cheaper, dedicated pricing for web analytics is coming soon.</p>
+                    <p className="mb-2">
+                        Web analytics is designed to work well with{' '}
+                        <Link to={'/blog/analytics-pricing'}>anonymous events</Link>.
+                    </p>
                 </div>
 
                 {/*}
