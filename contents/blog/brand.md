@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/brand_startup_1aa2b151d6.png
+featuredImageType: full
 author:
   - james-hawkins
 tags:
