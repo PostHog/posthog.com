@@ -1002,6 +1002,26 @@ const PricingExperiment = ({
                             </div>
                         </div>
                     </SectionLayout>
+
+                    <SectionLayout>
+                        <SectionHeader>
+                            <h3 className="mb-2">More thing you might like to know about our pricing</h3>
+                            <p>Blah</p>
+                        </SectionHeader>
+                        <ul className="mt-4 list-none -mx-4 px-4 md:mx-0 md:px-0 xl:-mx-8 xl:px-8 2xl:-mx-12 2xl:px-12 pb-2 gap-4 grid grid-flow-col auto-cols-max overflow-x-auto">
+                            <li className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md w-80 p-4">
+                                <div className="flex items-center space-x-2 mb-2">
+                                    <div className="size-8 relative">
+                                        {/* <img className="inset-0 absolute object-contain" src={logo} /> */}
+                                    </div>
+                                    <h5 className="m-0">Pricing philosophy</h5>
+                                </div>
+                                <p className="m-0 text-[15px] opacity-75 leading-tight">
+                                    How we think about our pricing
+                                </p>
+                            </li>
+                        </ul>
+                    </SectionLayout>
                 </>
             )}
 
