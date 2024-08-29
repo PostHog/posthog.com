@@ -43,7 +43,7 @@ If this is a new contract for an existing customer, you will need to add their e
 
 ###### Step 4: Apply credits
 - Make sure that the payment is fully processed to avoid any automatic deductions.
-- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment competion and click the "Apply Credit" button.
+- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment completion and click the "Apply Credit" button.
 - **If customer wishes to begin using credits  in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
 
 ###### Step 5: Schedule subscription
@@ -165,10 +165,18 @@ You can manually change the plan for a customer by updating the `plans_map` in t
 
 ### Giving customers a free trial
 
-1. Find the Organization in the Billing Service Admin portal
-2. Find the `Free Trial Until` field and update that to the appropriate date
-3. The next time that Customer visits PostHog, their `AvailableFeatures` will be updated to reflect the standard premium features (they might have to refresh their page to properly sync the new billing information).
-4. Once this date passes their `AvailableFeatures` will be reset to the free plan unless they have subscribed within this time.
+Prerequisites
+- Customer needs to have an Organization set up on the EU or US Cloud
+- You need access to the billing admin (billing.posthog.com).  Ask Raquel or Simon for access.
+
+Process
+1. Log in to [Billing](billing.posthog.com/admin/) with your Google SSO login.
+2. Click the `Customers` link.
+3. Search for the Organization Name (potentially not unique) or Organization ID (potentially unique).
+4. There is a `Plan` section - in there you’ll need to set `Free Trial Until` to the appropriate date. This is usually 2 weeks, or 4 weeks for larger ($100k+) customers. (Optionally, you may want to activate `Is Enterprise Trial` to give them access to Enterprise features
+5. Click `Save`
+6. The next time that Customer visits PostHog, their `AvailableFeatures` will be updated to reflect the standard premium features (they might have to refresh their page to properly sync the new billing information).
+7. Once this date passes their `AvailableFeatures` will be reset to the free plan unless they have subscribed within this time.
 
 
 ### Updating subscriptions

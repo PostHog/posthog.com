@@ -43,9 +43,9 @@ let imvProfilePhoto = UIImageView(frame: CGRect(x: 50, y: 50, width: 100, height
 imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 ```
 
-> **Note:** This is currently not supported for SwiftUI. We're investigating the issue.
+> **Note:** This is currently not supported for SwiftUI. We're investigating the [issue](https://github.com/PostHog/posthog-ios/issues/162).
 
-> **Note:** A technical issue is causing the [SwiftUI Text](https://developer.apple.com/documentation/swiftui/text) view to be detected as a `SwiftUI Image` view. This means that it'll be automatically masked if `maskAllImages` is set to `true`, even if the `maskAllTextInputs` is disabled. We're investigating this issue.
+> **Note:** A technical issue is causing the [SwiftUI Text](https://developer.apple.com/documentation/swiftui/text) view to be detected as a `SwiftUI Image` view. This means that it'll be automatically masked if `maskAllImages` is set to `true`, even if the `maskAllTextInputs` is disabled. We're investigating this [issue](https://github.com/PostHog/posthog-ios/issues/163).
 
 
 ### Masking in SwiftUI

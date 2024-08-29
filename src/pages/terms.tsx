@@ -101,9 +101,9 @@ function Terms() {
                             </Tooltip>
                             :
                         </span>
-                        <div className="text-xs mt-2 md:mt-0 mb-4">
+                        <span className="text-xs mt-2 md:mt-0 mb-4 block">
                             (Serif font demonstrates how important this disclaimer is)
-                        </div>
+                        </span>
                         The following is not legally binding. It is a summary of PostHog's terms. Please read{' '}
                         <SmoothScrollLink
                             to="full-terms"
@@ -146,7 +146,7 @@ function Terms() {
                     >
                         Here's a cat gif to keep you engaged (and to keep the algos intrigued). Please like/RT.
                         <img src="/images/pizza-cat.gif" alt="Cat gif" className="w-full mt-2" />
-                        <p className="text-right !-mb-4">
+                        <span className="text-right !-mb-4 block">
                             <Link
                                 href="https://giphy.com/gifs/cat-pizza-crazy-3o7TKJwsoLn5QAmqw8"
                                 externalNoIcon
@@ -154,7 +154,7 @@ function Terms() {
                             >
                                 Thanks, Giphy!
                             </Link>
-                        </p>
+                        </span>
                     </Tweet>
 
                     <Tweet
@@ -896,7 +896,9 @@ function Terms() {
                             governed by the laws of the State of California, U.S.A. without regard to its conflict of
                             laws provisions. The federal and state courts sitting in San Francisco County, California,
                             U.S.A. will have proper and exclusive jurisdiction and venue with respect to any disputes
-                            arising from or related to the subject matter of this Agreement.
+                            arising from or related to the subject matter of this Agreement. If you provide PostHog with
+                            a link to a recorded video of you reading out these terms in full, we will send you one of
+                            every item of merch we sell today and in future for free.
                         </p>
                     </div>
                     <div className="md:pt-10">

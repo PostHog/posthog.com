@@ -101,24 +101,24 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-# Troubleshooting
+## Troubleshooting
 
-## Recording from localhost
+### Recording from localhost
 
 Due the very high volume of network requests that some tools can make (for example when running hot-reload during development) PostHog does not capture network requests when running on localhost
 
-## Requests early in the page lifecycle don't capture all information
+### Requests early in the page lifecycle don't capture all information
 
 PostHog has to wrap `fetch` and `xhr` in order to capture network requests. If your application makes network requests before PostHog has had a chance to wrap them, then PostHog will not capture all information about the request.
 
-## PostHog truncated the request or response body
+### PostHog truncated the request or response body
 
 In order to maintain service levels we truncate all request and response bodies at 1MB
 
-## A network request says it was redacted
+### A network request says it was redacted
 
 We are cautious in what we capture. If you think we're being too cautious you can override the masking function.
 
-## I want to query the network performance data I capture
+### I want to query the network performance data I capture
 
 We'd love that too! It's not possible right now but watch this space. You can [subscribe for updates in GitHub](https://github.com/PostHog/posthog/issues/19686)

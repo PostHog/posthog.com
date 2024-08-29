@@ -53,6 +53,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
       seo: FrontmatterSEO
+      hideFromIndex: Boolean
     }
     type TeamData {
       name: String
@@ -250,6 +251,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type G2ReviewCommentAnswer {
       value: String
+    }
+    type CloudinaryImage implements Node {
+      folder: String
+      secure_url: String
+      public_id: String
     }
   `)
     createTypes([

@@ -7,6 +7,7 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
+        { "source": "/partners", "destination": "/handbook/comms/partners" },
         { "source": "/handbook/growth/customer-support", "destination": "/handbook/comms/customer-support" },
         { "source": "/handbook/growth/marketing/in-app", "destination": "/handbook/comms/in-app" },
         { "source": "/handbook/growth/marketing/startups", "destination": "/handbook/comms/startups" },
@@ -373,6 +374,10 @@
             "destination": "/?utm_source=youraveragetechbro&utm_campaign=youraveragetechbro"
         },
         { "source": "/simongrimm", "destination": "/?utm_source=simongrimm&utm_campaign=simongrimm" },
+        { "source": "/howtheygrow", "destination": "/?utm_source=howtheygrow&utm_campaign=howtheygrow" },
+        { "source": "/mikebifulco", "destination": "/?utm_source=mikebifulco&utm_campaign=mikebifulco" },
+        { "source": "/kikisbytes", "destination": "/?utm_source=kikisbytes&utm_campaign=kikisbytes" },
+        { "source": "/raroque", "destination": "/?utm_source=raroque&utm_campaign=raroque" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
@@ -1262,6 +1267,10 @@
         { "source": "/docs/cdp/build/jobs", "destination": "/docs/cdp/build" },
         { "source": "/docs/cdp/enabling", "destination": "/docs/cdp/build" },
         { "source": "/docs/cdp/build/types", "destination": "/docs/cdp/build#types" },
+        { "source": "/docs/apps", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/build/reference", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/build", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/build/tutorial", "destination": "/docs/cdp/destinations" },
         { "source": "/blog/learnings-from-elon", "destination": "/founders/learnings-from-elon" },
         { "source": "/docs/data/application-settings", "destination": "/docs" },
         {
@@ -1302,6 +1311,7 @@
             "destination": "/docs/product-analytics/trends/overview"
         },
         { "source": "/book-a-demo", "destination": "/demo" },
-        { "source": "/contact-sales", "destination": "/talk-to-a-human" }
+        { "source": "/contact-sales", "destination": "/talk-to-a-human" },
+        { "source": "/teams/customer-success", "destination": "/teams/sales-cs" }
     ]
 }

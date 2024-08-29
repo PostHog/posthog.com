@@ -359,11 +359,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
         // We don't want any error thrown here to bubble up to the caller.
         try {
-            // We use the existing distinct_id here so we don't clobber the currently identified user.
-            const distinctId = posthog?.get_distinct_id?.()
-
-            if (distinctId && meData?.profile) {
-                posthog?.identify(distinctId, {
+            if (meData?.profile) {
+                posthog?.setPersonProperties({
                     // IMPORTANT: Make sure all properties start with `squeak` so we don't override any existing properties!
                     squeakEmail: meData.email,
                     squeakUsername: meData.username,

@@ -408,7 +408,7 @@ const ProductTabs = ({ billingProducts }) => {
             <div className="text-center mt-4 flex flex-col gap-1 justify-center">
                 {activeTab == undefined && (
                     <p className="m-0 text-sm opacity-60">
-                        *Free tier resets monthly. Prices descrease exponentially with volume.
+                        *Free tier resets monthly. Prices decrease exponentially with volume.
                     </p>
                 )}
 

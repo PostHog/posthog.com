@@ -131,7 +131,7 @@ class WelcomeActivity : AppCompatActivity() {
 }
 ```
 
-Lastly, go to the `manifests` directory and add your new activities to `AndroidManifext.xml`:
+Lastly, go to the `manifests` directory and add your new activities to `AndroidManifest.xml`:
 
 ```xml file=AndroidManifest.xml
 <?xml version="1.0" encoding="utf-8"?>

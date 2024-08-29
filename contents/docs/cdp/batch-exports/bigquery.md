@@ -33,6 +33,7 @@ Here's how to set these up so that the destination has access only to the datase
    * `bigquery.jobs.create`
    * `bigquery.tables.create`
    * `bigquery.tables.get`
+   * `bigquery.tables.getData`
    * `bigquery.tables.list`
    * `bigquery.tables.updateData`
    * (Optional, for mutable models) `bigquery.tables.delete`
@@ -90,29 +91,16 @@ Some fields can be either `STRING` or `JSON` type depending on whether the corre
 
 The schema of the model as created in BigQuery is:
 
-| Field                      | Type               | Description                                                                                          |
-|----------------------------|--------------------|------------------------------------------------------------------------------------------------------|
-| team_id                    | `INT64`            | The id of the project (team) the person belongs to                                                   |
-| distinct_id                | `STRING`           | A `distinct_id` associated with the person                                                           |
-| person_id                  | `STRING`           | The id of the person associated to this (`team_id`, `distinct_id`) pair                              |
-| properties                 | `STRING` or `JSON` | A JSON object with all the latest properties of the person                                           |
-| person_version             | `INT64`            | The version of the person properties associated with a (`team_id`, `distinct_id`) pair               |
-| person_distinct_id_version | `INT64`            | The version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair |
+| Field                      | Type               | Description                                                                                                                        |
+|----------------------------|--------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| team_id                    | `INT64`            | The id of the project (team) the person belongs to                                                                                 |
+| distinct_id                | `STRING`           | A `distinct_id` associated with the person                                                                                         |
+| person_id                  | `STRING`           | The id of the person associated to this (`team_id`, `distinct_id`) pair                                                            |
+| properties                 | `STRING` or `JSON` | A JSON object with all the latest properties of the person                                                                         |
+| person_version             | `INT64`            | Internal version of the person properties associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation               |
+| person_distinct_id_version | `INT64`            | Internal version of the person to `distinct_id` mapping associated with a (`team_id`, `distinct_id`) pair, used by batch export in merge operation |
 
 The BigQuery table will contain one row per `(team_id, distinct_id)` pair, and each pair is mapped to their corresponding `person_id` and latest `properties`. The `properties` field can be either `STRING` or `JSON`, depending on whether the corresponding checkbox is marked or not when creating the batch export.
-
-#### How is the persons model kept up to date?
-
-Exporting mutable data (like the persons model) requires executing a merge operation to apply new updates to existing rows. Executing a merge in BigQuery involves the following steps:
-
-1. Creating a stage table.
-2. Inserting new data into stage table.
-3. Execute a merge operation between existing table and stage table.
-  a. Any rows that match in the final table and for which the stage table's version is higher are updated.
-  b. Any new rows not found in the final table are inserted.
-4. Drop the stage table.
-
-Besides the permissions required for exporting the events model, and since we need to clean-up a stage table, exporting the persons model requires also `bigquery.tables.delete` permissions.
 
 ## Creating the batch export
 
@@ -162,3 +150,30 @@ GROUP BY
 ORDER BY
   unique_persons_count DESC
 ```
+
+## FAQ
+
+### How does PostHog keep the persons model (or any mutable model) up to date?
+
+Exporting a mutable model can be divided into new rows that have to be inserted, and existing rows that have to be updated. When a PostHog batch export exports mutable data (like the persons model) to BigQuery, it executes a merge operation to apply new updates to existing rows.
+
+The operation the PostHog batch export executes in BigQuery roughly involves the following steps:
+
+1. Creating a stage table.
+2. Inserting new data into stage table.
+3. Execute a merge operation between existing table and stage table.
+    a. Any rows that match in the final table and for which any of the stage table's version fields is higher are updated.
+    b. Any new rows not found in the final table are inserted.
+4. Drop the stage table.
+
+### Why are additional permissions required to export the persons model?
+
+The merge operation described above explains why a mutable export requires additional permissions beyond the permissions required for exporting the events model: Since we need to clean-up a stage table, `bigquery.tables.delete` is required.
+
+### Which jobs does the batch export run in BigQuery?
+
+If you check your BigQuery [JOBS view](https://cloud.google.com/bigquery/docs/information-schema-jobs) or the [Google Cloud console](https://cloud.google.com/bigquery/docs/managing-jobs#view-job) for job details, you may notice the PostHog batch export running jobs in your BigQuery warehouse.
+
+Regardless of model, PostHog batch exports run a [load job](https://cloud.google.com/bigquery/docs/batch-loading-data) to batch load the data for the current period into BigQuery. Moreover, you will see additional [query jobs](https://cloud.google.com/bigquery/docs/running-queries) in your logs when exporting a mutable model as the merge operation the batch export executes requires running additional queries in your BigQuery warehouse.
+
+If you are noticing an issue with your BigQuery batch export, it may be useful to check the aforementioned [JOBS view](https://cloud.google.com/bigquery/docs/information-schema-jobs) and the [Google Cloud console](https://cloud.google.com/bigquery/docs/managing-jobs#view-job). The error logs in them could be valuable to either diagnose the issue by yourself, or when creating a support request for us to look into.

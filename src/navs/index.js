@@ -291,6 +291,10 @@ export const handbookSidebar = [
                         name: 'How we review PRs',
                         url: '/handbook/engineering/how-we-review',
                     },
+                    {
+                        name: 'How to do product, as an engineer',
+                        url: '/handbook/engineering/product-engineering',
+                    },
                 ],
             },
             {
@@ -626,6 +630,10 @@ export const handbookSidebar = [
                 url: '/handbook/comms/press',
             },
             {
+                name: 'Partners',
+                url: '/handbook/comms/partners',
+            },
+            {
                 name: 'Email comms',
                 url: '/handbook/comms/email-comms',
             },
@@ -684,10 +692,6 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/icp',
                     },
                     {
-                        name: 'Customer onboarding',
-                        url: '/handbook/growth/sales/customer-onboarding',
-                    },
-                    {
                         name: 'YC onboarding',
                         url: '/handbook/growth/sales/yc-onboarding',
                     },
@@ -698,6 +702,10 @@ export const handbookSidebar = [
                     {
                         name: 'Billing',
                         url: '/handbook/growth/sales/billing',
+                    },
+                    {
+                        name: 'Refunds',
+                        url: '/handbook/growth/sales/refunds',
                     },
                     {
                         name: 'Automations',
@@ -1351,7 +1359,7 @@ export const docsMenu = {
                     icon: 'IconShare',
                     children: [
                         {
-                            name: 'Managed Reverse Proxy',
+                            name: 'Managed reverse proxy',
                             url: '/docs/advanced/proxy/managed-reverse-proxy',
                         },
                         {
@@ -1375,7 +1383,7 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/nextjs',
                         },
                         {
-                            name: 'Next.js Middleware',
+                            name: 'Next.js middleware',
                             url: '/docs/advanced/proxy/nextjs-middleware',
                         },
                         {
@@ -1385,6 +1393,53 @@ export const docsMenu = {
                         {
                             name: 'Vercel',
                             url: '/docs/advanced/proxy/vercel',
+                        },
+                    ],
+                },
+                {
+                    name: 'Migrate',
+                    url: '/docs/migrate',
+                    icon: 'IconRocket',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/migrate',
+                        },
+                        {
+                            name: 'Migrate to PostHog Cloud',
+                            url: '/docs/migrate/migrate-to-cloud',
+                        },
+                        {
+                            name: 'Migrate from Amplitude',
+                            url: '/docs/migrate/migrate-from-amplitude',
+                        },
+                        {
+                            name: 'Migrate from Google Analytics',
+                            url: '/docs/migrate/google-analytics',
+                        },
+                        {
+                            name: 'Migrate from Heap',
+                            url: '/docs/migrate/heap',
+                        },
+                        {
+                            name: 'Migrate from LaunchDarkly',
+                            url: '/docs/migrate/launchdarkly',
+                        },
+                        {
+                            name: 'Migrate from Matomo',
+                            url: '/docs/migrate/matomo',
+                        },
+                        {
+                            name: 'Migrate from Mixpanel',
+                            url: '/docs/migrate/mixpanel',
+                        },
+                        {
+                            name: 'Migrate from Pendo',
+                            url: '/docs/migrate/pendo',
+                        },
+                        {
+                            name: 'Migrate from Statsig',
+                            url: '/docs/migrate/statsig',
                         },
                     ],
                 },
@@ -1830,44 +1885,6 @@ export const docsMenu = {
                         {
                             name: 'Disclaimer',
                             url: '/docs/self-host/open-source/disclaimer',
-                        },
-                    ],
-                },
-                {
-                    name: 'Migrate',
-                    url: '/docs/migrate',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/migrate',
-                        },
-                        {
-                            name: 'Migrate to PostHog Cloud',
-                            url: '/docs/migrate/migrate-to-cloud',
-                        },
-                        {
-                            name: 'Migrate from Amplitude',
-                            url: '/docs/migrate/migrate-from-amplitude',
-                        },
-                        {
-                            name: 'Migrate from Google Analytics',
-                            url: '/docs/migrate/google-analytics',
-                        },
-                        {
-                            name: 'Migrate from Heap',
-                            url: '/docs/migrate/heap',
-                        },
-                        {
-                            name: 'Migrate from Matomo',
-                            url: '/docs/migrate/matomo',
-                        },
-                        {
-                            name: 'Migrate from Mixpanel',
-                            url: '/docs/migrate/mixpanel',
-                        },
-                        {
-                            name: 'Migrate from Pendo',
-                            url: '/docs/migrate/pendo',
                         },
                     ],
                 },
@@ -2601,6 +2618,15 @@ export const docsMenu = {
                     icon: 'IconHome',
                 },
                 {
+                    name: 'Realtime destinations',
+                    url: '/docs/cdp/destinations',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                    icon: 'IconLive',
+                },
+                {
                     name: 'Batch exports',
                     url: '/docs/cdp/batch-exports',
                     badge: {
@@ -2924,16 +2950,22 @@ export const docsMenu = {
                     name: 'Integrations',
                 },
                 {
-                    name: 'Langfuse',
-                    url: '/docs/ai-engineering/langfuse-posthog',
-                    icon: 'IconWrench',
-                    color: 'red',
-                },
-                {
                     name: 'Helicone',
                     url: '/docs/ai-engineering/helicone-posthog',
                     icon: 'IconWrench',
                     color: 'green',
+                },
+                {
+                    name: 'Keywords AI',
+                    url: '/docs/ai-engineering/keywords-ai-posthog',
+                    icon: 'IconWrench',
+                    color: 'blue',
+                },
+                {
+                    name: 'Langfuse',
+                    url: '/docs/ai-engineering/langfuse-posthog',
+                    icon: 'IconWrench',
+                    color: 'red',
                 },
                 {
                     name: 'Traceloop',
