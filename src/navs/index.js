@@ -2993,13 +2993,13 @@ export const pricingMenu = {
             name: 'Event types',
             icon: 'IconCursorClick',
             color: 'purple',
-            url: '#',
+            url: '/events',
         },
         {
             name: 'Add-ons',
             icon: 'IconPuzzle',
             color: 'seagreen',
-            url: '#',
+            url: '/addons',
         },
         {
             name: 'Pricing philosophy',

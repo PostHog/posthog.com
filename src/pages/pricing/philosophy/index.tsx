@@ -75,22 +75,8 @@ const PricingPhilosophy = (): JSX.Element => {
                     </div>
                 </p>
                 <p>
-                    Or if you need more info,{' '}
-                    <button
-                        className="text-red dark:text-yellow font-semibold"
-                        onClick={() =>
-                            window.scrollTo({
-                                top:
-                                    document.querySelector('#faq')?.getBoundingClientRect().top +
-                                    window.pageYOffset -
-                                    128,
-                                behavior: 'smooth',
-                            })
-                        }
-                    >
-                        read our FAQ
-                    </button>
-                    , <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
+                    Or if you need more info, <Link href="/pricing#faq">read our FAQ</Link>,{' '}
+                    <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
                     <Link href="/talk-to-a-human">talk to a human</Link>.
                 </p>
 

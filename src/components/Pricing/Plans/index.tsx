@@ -121,7 +121,11 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                       }-${formatCompactNumber(up_to)}`
                             }
                         />
-                        <div className={showSubtotal ? `col-span-4` : `flex ${test ? 'shrink-0' : 'flex-1'}`}>
+                        <div
+                            className={
+                                showSubtotal ? `col-span-4` : `flex ${test ? 'shrink-0' : 'flex-1 justify-start'}`
+                            }
+                        >
                             <Title
                                 className={`${compact ? 'text-sm' : ''}`}
                                 title={
