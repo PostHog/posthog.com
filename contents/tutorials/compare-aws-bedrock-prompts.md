@@ -7,17 +7,17 @@ tags:
   - product analytics
 ---
 
-Comparing LLM prompts is crucial to understanding if your prompt changes are actually improving your app. In this tutorial, we cover three ways to compare LLM output for different prompts:
+Evaluating LLM prompts is crucial for determining whether your modifications are genuinely enhancing your application. In this tutorial, we explore three methods to assess prompts by comparing their LLM outputs. Namely:
 
-1. Manual annotations
-2. User feedback
-3. Model-based evaluation
+1. [Quantitative metrics](#quantitative-metrics)
+2. [User feedback](#user-feedback)
+3. [Model-based evaluation](#model-based-evaluation)
 
 To show you how, we set up a basic Next.js app, implement the AWS Bedrock API, and capture events using PostHog.
 
 > While this tutorial focuses on [Next.js](/docs/libraries/next-js) and [Node](/docs/libraries/node), PostHog supports many different [SDKs](/docs/libraries) and [frameworks](/docs/frameworks). The concepts in this tutorial apply to all our supported SDKs and frameworks. 
 
-## 1. Download the sample app
+## Download the sample app
 
 We've created a sample app for this tutorial. You can download it from [Github](https://github.com/PostHog/aws-bedrock-compare-prompts-sample-app). 
 
@@ -48,24 +48,12 @@ Note that while this tutorial uses the Llama model, the concepts in this tutoria
 
 ![Requesting access to AWS Bedrock models](https://res.cloudinary.com/dmukukwp6/image/upload/v1723015919/posthog.com/contents/Screenshot_2024-08-07_at_8.31.28_AM.png)
 
-Run `npm run dev` and go to `http://localhost:3000` to everything in action.
+Lastly, the sample app already includes PostHog set up. You need to update the `<ph_project_api_key>` and `<ph_client_api_host>` placeholders with your PostHog API key and host (you can find these in [your project settings](https://us.posthog.com/settings/project)).
 
-![Sample LLM app]()
-
-## 2. Add PostHog to your app
-
-With our app set up, it’s time to install and set up PostHog. To do this, we install the [PostHog Node](/docs/libraries/node) SDK to capture events in our API route by running the following command in our terminal:
-
-```bash
-npm install posthog-node
-```
-
-Next, we initialize PostHog using our API key and host (you can find these in [your project settings](https://us.posthog.com/settings/project)). We also call `posthog.shutdown()` in a `finally` block to send any pending events before the serverless function shuts down. Add the below code to `src/app/api/generate-llm-output/route.js`:
+There are two places to update. First, in `src/app/api/generate-llm-output/route.js`, where PostHog is configured for server-side event capture:
 
 ```js file=src/app/api/generate-llm-output/route.js
-// your existing imports
-
-import { PostHog } from 'posthog-node'; // import PostHog
+// existing imports
 
 export async function POST(request) {
   const posthog = new PostHog(
@@ -73,38 +61,42 @@ export async function POST(request) {
     {
       host: '<ph_client_api_host>',
     },
-  );
+  );  
+```
 
-  // rest of your code
+Second, in `src/app/providers.js`, where PostHog is configured for client-side event capture:
 
-  try {
-    // existing code
-  } catch (error) {
-    // existing code
-  } finally {
-    // Call posthog.shutdown() to flush and send all pending events before the serverless function shuts down.
-    await posthog.shutdown();
-  }
+```js file=src/app/providers.js
+// existing imports
+
+if (typeof window !== 'undefined') {
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+  })
 }
 ```
 
-## 3. Compare prompts
+Run `npm run dev` and go to `http://localhost:3000` to everything in action.
 
-With our app set up, we can begin [capturing events](/docs/product-analytics/capture-events) with PostHog to compare our prompts. We cover three ways to evaluate LLM output, so that you can effictively compare prompts.
+![Sample LLM app](https://res.cloudinary.com/dmukukwp6/video/upload/v1724924215/posthog.com/contents/sample-app-aws.mp4)
 
-### Manual annotations
+## Compare prompts
 
-With manual annotations, you label the LLM outputs to compare them. This is done by assessing properties of the LLM output like:
+With our app set up, we can begin [capturing events](/docs/product-analytics/capture-events) with PostHog to compare prompts. We cover three different ways to evaluate LLM output, so that you can effictively compare prompts.
+
+### Quantitative metrics
+
+Quantitative metrics involve measuring specific, quantifiable properties of the LLM outputs. For example:
 
 - Token output count
 - Latency
 - Error rate
 
-This is the quickest and simplest way to evaluate outputs, but doesn't necessarily provide a clear picture of the output quality.
+This is the quickest and simplest way to evaluate outputs, but doesn't provide a clear picture of the output quality.
 
-#### How to capture manual annotations
+#### How to capture quantitative metrics
 
-We use [`posthog.capture()`](/docs/product-analytics/capture-events?tab=Node.js) to capture a `bedrock_completion` and `bedrock_error` events. In each of these events, we include [event properties](/docs/product-analytics/capture-events#setting-event-properties) for data we want to collect.
+We use [`posthog.capture()`](/docs/product-analytics/capture-events?tab=Node.js) to capture `bedrock_completion` and `bedrock_error` events. In each of these events, we include [properties](/docs/product-analytics/capture-events#setting-event-properties) for data we want to collect.
 
 Update the code in `src/app/api/generate-llm-output/route.js` to capture a `bedrock_completion` event with properties related to the API request like so:
 
@@ -112,18 +104,22 @@ Update the code in `src/app/api/generate-llm-output/route.js` to capture a `bedr
 // your existing code
   try { 
     // ... existing code
-    const startTime = performance.now(); // add just before the API request
+
+    // Add this just before the API request
+    const startTime = performance.now(); 
 
     const response = await client.send(command);
     
-    const endTime = performance.now(); // add just after the API request
+    // Add this just after the API request
+    const endTime = performance.now(); 
     const responseTime = endTime - startTime;
 
+    // The below 3 lines of code already exist in the sample app
     const rawRes = response.body;
     const jsonString = new TextDecoder().decode(rawRes);
     const parsedJSON = JSON.parse(jsonString);
 
-    // Add this
+    // Add the below
     const { generation, prompt_token_count, generation_token_count} = parsedJSON;
     posthog.capture({
       distinctId: email, // unique identifier for the user who performed the action
@@ -147,13 +143,14 @@ Then, to track errors, we capture `bedrock_error` events in the `catch` block of
 
 ```js file=src/app/api/generate-llm-output/route.js
 // your existing code
+  } catch (error) {
     console.error('Error:', error);
 
     posthog.capture({
       distinctId: email,
       event: 'bedrock_error',
       properties: {
-        promptId,
+        promptId, // unique identifier for the prompt
         prompt,
         error_message: error.message,
         error_name: error.name,
@@ -169,6 +166,7 @@ Then, to track errors, we capture `bedrock_error` events in the `catch` block of
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
+  }
 ```
 
 Refresh your app and submit a few prompts. You should then see your events captured in the [PostHog activity tab](https://us.posthog.com/events).
@@ -195,21 +193,21 @@ Below is an example of how to create an insight to compare average API response 
 6. **Save** your insight.
 
 <ProductScreenshot
-  imageLight="" 
-  imageDark="" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1724925781/posthog.com/contents/Screenshot_2024-08-29_at_12.02.34_PM.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1724925781/posthog.com/contents/Screenshot_2024-08-29_at_12.02.49_PM.png" 
   alt="Response time by prompt in PostHog" 
   classes="rounded"
 />
 
 ### User feedback
 
-Another good way to evaluate LLM outputs is to ask your users to rate them. In our sample app, we do this by asking if the response was helpful. Users can submit their response using the **Yes** and **No** buttons at the bottom of the page. 
+A good way to evaluate LLM outputs is to ask your users to rate them. In our sample app, we do this by asking if the response was helpful. Users can submit their response using the **Yes** and **No** buttons at the bottom of the page. 
 
-The biggest advantage of this method is that it's highly representative of your users' experience and expectations. However, since you need to ask your users to rate responses, you're not able to evaluate your prompts before you ship them.
+The advantage of this method is that it's highly representative of your users' experience and expectations. However, since you need to ask your users to rate responses, you're not able to evaluate your prompts before you ship them into production.
 
 #### How to capture user evaluations
 
-To collect this feedback, we capture `llm_feedback_submitted` event with a `score` property (0 or 1). Then, we can create an insight to compare the average score for each prompt.
+We capture an `llm_feedback_submitted` event with a `score` property (0 or 1). Then, we can create an insight to compare the average score for each prompt.
 
 Add the following code to the `handleFeedback` function in `src/app/page.js`:
 
@@ -258,7 +256,7 @@ The results from the judge LLM can be highly accurate, especially when using a f
 
 #### How to capture model-based evaluations
 
-In our sample app, we implement a simple judge LLM by submitting our LLM response to the same Llama 3 model. We ask it to rate its toxicity by asking it whether the response contains any curse words or not. Then, we capture its response with an `bedrock_judge_response` event.
+In our sample app, we implement a simple judge by submitting our LLM response to the same Llama 3 model. We ask it to rate its toxicity by asking it whether the response contains any curse words. Then, we capture its response with a `bedrock_judge_response` event.
 
 ```js file=src/app/api/generate-llm-output/route.js
 // your existing imports
@@ -266,7 +264,7 @@ In our sample app, we implement a simple judge LLM by submitting our LLM respons
 export async function POST(request) {
   // your existing code...
 
-    // Add this code ater your original LLM request and before returning the response
+    // Add this code after your original LLM request
     const judgeInput = {
       modelId,
       contentType: "application/json",
@@ -284,17 +282,16 @@ export async function POST(request) {
     const judgeRawRes = judgeResponse.body;
     const judgeJsonString = new TextDecoder().decode(judgeRawRes);
     const judgeParsedJSON = JSON.parse(judgeJsonString);
-    const { judgeGeneration: generation } = judgeParsedJSON;
+    const { generation: judgeGeneration } = judgeParsedJSON;
 
     posthog.capture({
       distinctId: email,
       event: 'bedrock_judge_response',
       properties: {
         promptId,
-        prompt,
         model_id: modelId,
-        generation: generation,
-        is_toxic: judgeGeneration.includes('yes')
+        generation: judgeGeneration,
+        is_toxic: judgeGeneration.includes('yes') ? 1 : 0
       }
     });
 
@@ -319,8 +316,12 @@ Refresh your app and submit a few prompts (and try to get some toxic responses!)
 6. For nice formatting, press **Options** and under `Y-axis unit` select **Percentage**
 7. **Save** your insight.
 
-ADD IMAGE HERE
-
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1724927515/posthog.com/contents/Screenshot_2024-08-29_at_12.31.27_PM.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1724927516/posthog.com/contents/Screenshot_2024-08-29_at_12.31.42_PM.png" 
+  alt="Model-based evaluation by prompt in PostHog" 
+  classes="rounded"
+/>
 
 ## Further reading
 
