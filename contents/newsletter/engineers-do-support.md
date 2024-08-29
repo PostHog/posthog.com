@@ -17,11 +17,9 @@ Product engineers do support at PostHog. They log into Zendesk, respond to users
 
 This isn’t typical. Most engineers don't do support, and most will be unhappy when you suggest they should. Common pushbacks include:
 
-"Doing support interrupts me and ruins my focus."
-
-"It takes up too much time and prevents me from building anything useful."
-
-“It's not my fault users are dumb. They should figure it out themselves.”
+- "Doing support interrupts me and ruins my focus."
+- "It takes up too much time and prevents me from building anything useful."
+- “It's not my fault users are dumb. They should figure it out themselves.”
 
 These arguments are misguided. Support can be a core part of building a successful product, and make you a better engineer.
 
@@ -156,7 +154,7 @@ For a long time, we had a Slack community. Although we had visions of it as bein
 
 So we [shut our Slack down](/blog/slack-closure).
 
-![Community forum](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_05_at_10_49_39_b1c6a55cfe.png)
+![Community forum](https://res.cloudinary.com/dmukukwp6/image/upload/community_questions_68608655ec.png)
 
 To replace it, we built a [community forum](/community) on our website. It's the opposite of Slack: permanent, public, customizable, and connected to our support queue. This enables us to provide a better support experience while also enabling us to craft a [real community experience](/handbook/community) for our users. 
 
