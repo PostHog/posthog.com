@@ -63,7 +63,7 @@ You will likely need to use the [Pricing Calculator](https://docs.google.com/spr
 
 We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, routing and signature.  Ask Cameron or Simon for access if you don't have it.
 
-1. The [order form template](https://app.pandadoc.com/a/#/templates/dpuESjnYBeytVREMxLxGuC) to use is titled `[Client.Company] PostHog Cloud Order Form - <MMM YYYY>` 
+1. The [order form template](https://app.pandadoc.com/a/#/templates/87jsEEeg8rvYYri9Y8gK5B) to use is titled `[Client.Company] PostHog Cloud Order Form - <MMM YYYY>` 
 2. When looking at the template, click the link to **Use this template** in the top bar.
 3. In the Add recipients box which pops up:
    1. Replace `<MMM YYYY>` with the month and year the contract starts (e.g. March 2023)
