@@ -241,7 +241,7 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
                         <Logomark className="w-[16px]" />
                     </span>
                 </div>
-                <strong>{'Max AI'}</strong>
+                <strong>Max</strong>
             </div>
             <div className="border-l-0 ml-[33px] pl-0 py-2">{children}</div>
         </li>
