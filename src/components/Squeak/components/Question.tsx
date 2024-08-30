@@ -243,7 +243,7 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
                 </div>
                 <strong>Max</strong>
             </div>
-            <div className="border-l-0 ml-[33px] py-2 px-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark">
+            <div className="ml-[33px] py-2 px-4 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
                 {children}
             </div>
         </li>
@@ -253,7 +253,7 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
 const Loading = () => {
     const lottieRef = useRef(null)
     return (
-        <div className="size-12">
+        <div className="size-16">
             <DotLottiePlayer loop lottieRef={lottieRef} src="/lotties/loading.lottie" autoplay />
         </div>
     )
@@ -292,12 +292,18 @@ const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) =
         <ul className="ml-5 !mb-0 p-0 list-none">
             <MaxReply>
                 {loading ? (
-                    <div>
-                        <div className="text-primary/75 dark:text-primary-dark/75 font-normal question-content community-post-markdown !p-0">
-                            <p>Hang tight, checking to see if we can find an answer for you…</p>
-                            <p>This usually takes less than 30 seconds.</p>
+                    <div className="flex gap-1">
+                        <div>
+                            <Loading />
                         </div>
-                        <Loading />
+                        <div className="flex-1 font-normal question-content community-post-markdown !p-0">
+                            <p className="!my-1 !pb-0">
+                                <strong>Hang tight, checking to see if we can find an answer for you...</strong>
+                            </p>
+                            <p className="text-primary/75 dark:text-primary-dark/75">
+                                This usually takes less than 30 seconds.
+                            </p>
+                        </div>
                     </div>
                 ) : (
                     <div className="text-primary/75 dark:text-primary-dark/75 font-normal question-content community-post-markdown !p-0">
