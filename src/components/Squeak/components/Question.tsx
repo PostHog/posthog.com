@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useContext, useMemo } from 'react'
+import React, { useState, createContext, useEffect, useContext, useMemo, useRef } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
 import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
@@ -22,7 +22,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { navigate } from 'gatsby'
 import Logomark from 'components/Home/images/Logomark'
 import Avatar from './Avatar'
-import Reply from './Reply'
+import { DotLottiePlayer } from '@dotlottie/react-player'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -229,7 +229,7 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
 const MaxReply = ({ children }: { children: React.ReactNode }) => {
     return (
         <li
-            className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
+            className={`pr-[5px] pl-[30px] pb-2 !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
         >
             <div className="flex items-center !text-black dark:!text-white">
                 <div className="mr-2 relative">
@@ -243,23 +243,27 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
                 </div>
                 <strong>Max</strong>
             </div>
-            <div className="border-l-0 ml-[33px] pl-0 py-2">{children}</div>
+            <div className="border-l-0 ml-[33px] py-2 px-4 bg-accent dark:bg-accent-dark rounded-md">{children}</div>
         </li>
+    )
+}
+
+const Loading = () => {
+    const lottieRef = useRef(null)
+    return (
+        <div className="size-12">
+            <DotLottiePlayer loop lottieRef={lottieRef} src="/lotties/loading.lottie" autoplay />
+        </div>
     )
 }
 
 const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) => {
     const [confident, setConfident] = useState(false)
     const [loading, setLoading] = useState(true)
-    const [skeletonCount, setSkeletonCount] = useState(1)
     const alreadyAsked = useMemo(() => question?.attributes?.askedMax, [])
     const { getJwt } = useUser()
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setSkeletonCount((count) => (count >= 5 ? 5 : count + 1))
-        }, 3000)
-
         const askMax = async () => {
             try {
                 const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/ask-max`, {
@@ -271,44 +275,36 @@ const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) =
                     body: JSON.stringify({ question }),
                 }).then((res) => res.json())
                 setConfident(response.confident)
-                clearInterval(interval)
                 setLoading(false)
                 refresh()
             } catch (error) {
                 console.error(error)
             }
         }
-
         if (!alreadyAsked) {
             askMax()
         }
-
-        return () => {
-            clearInterval(interval)
-        }
     }, [])
 
-    return !alreadyAsked ? (
+    return !alreadyAsked && (loading || !confident) ? (
         <ul className="ml-5 !mb-0 p-0 list-none">
             <MaxReply>
-                <Markdown>Hang tight, checking to see if we can find an answer for you…</Markdown>
-            </MaxReply>
-            {(loading || !confident) && (
-                <MaxReply>
-                    {loading ? (
-                        Array.from({ length: skeletonCount }).map((_, index) => (
-                            <div
-                                key={index}
-                                className="w-full h-[25px] animate-pulse bg-gray-accent dark:bg-gray-accent-dark rounded-md mb-2"
-                            />
-                        ))
-                    ) : (
-                        <Markdown>
+                {loading ? (
+                    <div>
+                        <div className="text-primary/75 dark:text-primary-dark/75 font-normal question-content community-post-markdown !p-0">
+                            <p>Hang tight, checking to see if we can find an answer for you…</p>
+                            <p>This usually takes less than 30 seconds.</p>
+                        </div>
+                        <Loading />
+                    </div>
+                ) : (
+                    <div className="text-primary/75 dark:text-primary-dark/75 font-normal question-content community-post-markdown !p-0">
+                        <p>
                             Dang, we couldn’t find anything this time. A community member will hopefully respond soon!
-                        </Markdown>
-                    )}
-                </MaxReply>
-            )}
+                        </p>
+                    </div>
+                )}
+            </MaxReply>
         </ul>
     ) : null
 }
