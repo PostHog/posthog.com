@@ -5,6 +5,7 @@ import useProducts from '../Products'
 import { IconCheck, IconX } from '@posthog/icons'
 import Logo from 'components/Logo'
 import { StaticImage } from 'gatsby-plugin-image'
+import { CTA } from '../Plans'
 
 const comparison = [
     {
@@ -109,7 +110,7 @@ const comparison = [
 
 export const SimilarProducts = () => {
     return (
-        <section className={`${section} mb-12 mt-8 md:px-4`}>
+        <section className={`${section} my-8 md:px-4`}>
             <SectionHeader>
                 <h3 className="mb-2">Compare to similar products</h3>
             </SectionHeader>
@@ -133,7 +134,7 @@ export const SimilarProducts = () => {
                 <div className="grid grid-cols-7 min-w-[1000px] divide-y divide-light dark:divide-dark">
                     {Object.keys(comparison[0].products).map((product) => (
                         <React.Fragment key={product}>
-                            <div className="col-span-1 flex items-center gap-2 py-2 pl-2 pr-4 first:border-t border-light dark:border-dark">
+                            <div className="col-span-1 flex items-start gap-2 py-2 pl-2 pr-4 first:border-t border-light dark:border-dark">
                                 <strong className="whitespace-nowrap">{product}</strong>
                             </div>
                             {comparison.map((company) => (
@@ -141,7 +142,7 @@ export const SimilarProducts = () => {
                                     key={`${company.name}-${product}`}
                                     className={`py-2 px-4 text-center ${
                                         company.name === 'PostHog'
-                                            ? 'bg-white border-x-2 !border-x-green dark:bg-green/15 last:!border-b-2 last:!border-b-green last:rounded-b-sm last:pb-4'
+                                            ? 'bg-white border-x-2 !border-x-green dark:bg-green/15 last:!border-b-2 last:!border-b-green last:rounded-b-sm last:pb-4 last:px-2'
                                             : ''
                                     }`}
                                 >
@@ -149,6 +150,11 @@ export const SimilarProducts = () => {
                                         <IconCheck className="size-6 inline-block text-green" />
                                     ) : (
                                         <IconX className="size-6 inline-block text-red" />
+                                    )}
+                                    {product === 'Data warehouse' && company.name === 'PostHog' && (
+                                        <div className="pt-2">
+                                            <CTA size="sm" />
+                                        </div>
                                     )}
                                 </div>
                             ))}
