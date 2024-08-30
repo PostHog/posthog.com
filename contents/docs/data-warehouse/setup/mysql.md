@@ -1,5 +1,5 @@
 ---
-title: Linking Postgres as a source
+title: Linking MySQL as a source
 sidebar: Docs
 showTitle: true
 availability:
@@ -8,28 +8,26 @@ availability:
   enterprise: full
 ---
 
-The Postgres connector can link your database tables to PostHog.
+The MySQL connector can link your database tables to PostHog.
 
-To link Postgres:
+To link MySQL:
 
 1. Go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) and the sources tab in PostHog
-2. Click **New source** and select Postgres
+2. Click **New source** and select MySQL
 3. Enter your database connection details:
     - **Host:** The hostname or IP your database server like `db.example.com` or `123.132.1.100`.
-    - **Port:** The port your database server is listening to. The default is `5432`.
+    - **Port:** The port your database server is listening to. The default is `3306`.
     - **Database:** The name of the database you want like `analytics_db`.
     - **User:** The username with the necessary permissions to access the database.
     - **Password:** The password for the user.
     - **Schema:** The schema for your database where your tables are located. The default is `public`.
 4. Click **Link**
 
-The data warehouse then starts syncing your Postgres data. You can see details and progress in the [sources tab](https://us.posthog.com/pipeline/sources).
-
-> **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
+The data warehouse then starts syncing your MySQL data. You can see details and progress in the [sources tab](https://us.posthog.com/pipeline/sources).
 
 #### Inbound IP addresses
 
-We use a set of IP addresses to access your Postgres instance. To ensure this connector works, add these IPs to your inbound security rules to enable the data import:
+We use a set of IP addresses to access your MySQL instance. To ensure this connector works, add these IPs to your inbound security rules to enable the data import:
 
 | US | EU |
 | --- | --- |
