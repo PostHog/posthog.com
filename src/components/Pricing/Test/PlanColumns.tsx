@@ -256,11 +256,11 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                 availability?
                             </strong>{' '}
                             Visit the product comparison pages:{' '}
-                            <Link to="/pricing?product=product-analytics">Product analytics</Link> |{' '}
-                            <Link to="/pricing?product=session-replay">Session replay</Link> |{' '}
-                            <Link to="/pricing?product=feature-flags">Feature flags</Link> |{' '}
-                            <Link to="/pricing?product=ab-testing">A/B testing</Link> |{' '}
-                            <Link to="/pricing?product=surveys">Surveys</Link>
+                            <Link to="/product-analytics#pricing">Product analytics</Link> |{' '}
+                            <Link to="/session-replay#pricing">Session replay</Link> |{' '}
+                            <Link to="/feature-flags#pricing">Feature flags</Link> |{' '}
+                            <Link to="/ab-testing#pricing">A/B testing</Link> |{' '}
+                            <Link to="/surveys#pricing">Surveys</Link>
                         </p>
                     </div>
                     <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
