@@ -139,6 +139,10 @@ const linklist: IProps[] = [
                 title: 'Build an app',
                 url: '/docs/apps/build',
             },
+            {
+                title: 'Migrate',
+                url: '/docs/migrate',
+            },
         ],
     },
     {

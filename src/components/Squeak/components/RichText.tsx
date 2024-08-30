@@ -86,6 +86,7 @@ export default function RichText({
     onSubmit,
     maxLength = 2000,
     preview = true,
+    label = '',
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
@@ -207,22 +208,25 @@ export default function RichText({
                 </div>
             ) : (
                 <div className="relative">
-                    <textarea
-                        onPaste={handlePaste}
-                        disabled={imageLoading}
-                        autoFocus={autoFocus}
-                        className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 pb-8 resize-none w-full text-black outline-none focus:ring-0"
-                        onBlur={(e) => e.preventDefault()}
-                        name="body"
-                        value={value}
-                        onChange={handleChange}
-                        ref={textarea}
-                        required
-                        id="body"
-                        placeholder={'Type more details...'}
-                        maxLength={maxLength}
-                        onKeyDown={handleKeyDown}
-                    />
+                    <label htmlFor="body" className="py-3 px-4 pb-8 block">
+                        {label && !!value && <span className="text-sm opacity-60 block">{label}</span>}
+                        <textarea
+                            onPaste={handlePaste}
+                            disabled={imageLoading}
+                            autoFocus={autoFocus}
+                            className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] resize-none w-full text-black outline-none focus:ring-0 p-0"
+                            onBlur={(e) => e.preventDefault()}
+                            name="body"
+                            value={value}
+                            onChange={handleChange}
+                            ref={textarea}
+                            required
+                            id="body"
+                            placeholder={'Type more details...'}
+                            maxLength={maxLength}
+                            onKeyDown={handleKeyDown}
+                        />
+                    </label>
                     {isDragActive && (
                         <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-gray-accent-light after:dark:border-gray-accent-dark after:rounded-md">
                             <p className="m-0 font-semibold">Drop image here</p>

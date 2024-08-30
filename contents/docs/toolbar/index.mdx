@@ -47,6 +47,10 @@ if (toolbarJSON) {
 
 We are also working on other solutions. Go to [the related issue](https://github.com/PostHog/posthog/issues/9100) to see progress updates (and encourage us to get it done faster!).
 
+### Toolbar authentication issue (with reverse proxy)
+
+If you are having issues authenticating your toolbar and are using a [reverse proxy](/docs/advanced/proxy), be sure to pass the proper `ui_host` config parameter when initializing (like `ui_host: 'https://us.posthog.com'`). This ensures PostHog makes the authentication request to the correct host.
+
 ### Toolbar not working with Nuxt
 
 The PostHog toolbar currently doesn't work for Nuxt users because Nuxt overrides the URL of our static asset URL from `https://app-static-prod.posthog.com` to `https:/app-static-prod.posthog.com`, removing the second `/`. If you have a solution, [please let us know](https://app.posthog.com/home#supportModal=feedback%3A).
@@ -82,9 +86,3 @@ The PostHog toolbar currently doesn't work for Nuxt users because Nuxt overrides
     });
 </script>
 ```
-
-### Reverse proxy
-
-[Deploying a reverse proxy](https://posthog.com/docs/advanced/proxy) is the best way to avoid tracking blockers intercepting calls to PostHog.
-
-If the pages you are trying to open with the toolbar are on this proxy, make sure to [pass the proper `ui_host` parameter](/docs/libraries/js#config) when initializing our browser integration, so that links to the PostHog interface point to the correct host.

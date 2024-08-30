@@ -16,7 +16,7 @@ Migrating data from Heap is a three step process:
 
 ## 1. Exporting data from Heap
 
-Heap Connect enables you export your data to S3, Redshift, BigQuery, or Snowflake. Data in each of these is much easier to access and capture into PostHog. See how to set this up in [their docs](https://help.heap.io/heap-connect/heap-connect-guide/heap-connect-guide-overview/).
+Heap Connect enables you to export your data to S3, Redshift, BigQuery, or Snowflake. Data in each of these is much easier to access and capture into PostHog. See how to set this up in [their docs](https://help.heap.io/heap-connect/heap-connect-guide/heap-connect-guide-overview/).
 
 This is only available on their *Pro* or *Premier* plans. The chart view CSV export doesn't provide the data we need.
 
@@ -34,9 +34,9 @@ With this event data, you can then go through each row and convert it to PostHog
 
 - Event names like `pageview` to `$pageview`.
 - Properties like `landing_page` to `$current_url`
-- Event `time` to a ISO 8601 timestamp
+- Event `time` to an ISO 8601 timestamp
 
-Once this is done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the `capture` [API endpoint](/docs/api/capture) with `historical_migration` set to `true`. 
+Once done, you can capture the data into PostHog using the [Python SDK](/docs/libraries/python#historical-migrations) or the `capture` [API endpoint](/docs/api/capture) with `historical_migration` set to `true`. 
 
 Here's an example version of a Python script assuming the data is in `.csv` file:
 
@@ -115,7 +115,7 @@ for index, row in data.iterrows():
 
 ## 3. Converting and capturing user data
 
-Heap's user data is stored in the `users` table and connected to events using the `user_id` column. Some of these users have a `identity` column with a value we can use as a `distinct_id`.
+Heap's user data is stored in the `users` table and connected to events using the `user_id` column. Some of these users have an `identity` column with a value we can use as a `distinct_id`.
 
 Converting and capturing this data requires a similar process to the event data. The big difference is the need to call [`posthog.alias()`](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) with the `user_id` and `identity` values so we can query events from either as the same person.
 
@@ -217,3 +217,5 @@ for index, row in data.iterrows():
     properties=combined_properties
   )
 ```
+
+This script may need modification depending on the structure of your Heap data, but it gives you a start.

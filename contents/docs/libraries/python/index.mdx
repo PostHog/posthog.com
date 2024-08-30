@@ -154,11 +154,11 @@ posthog.capture('test_id', 'test_event', disable_geoip=True|False)
 
 ## Historical migrations
 
-You can use the Python SDK to run [historical migrations](/docs/migrate) of data into PostHog. To do so, set the `historical_migration` option to `true` when initializing the client.
+You can use the Python or Node SDK to run [historical migrations](/docs/migrate) of data into PostHog. To do so, set the `historical_migration` option to `true` when initializing the client.
 
-import PythonMigration from "../../migrate/_snippets/python-migration.mdx"
+import SDKMigration from "../../migrate/_snippets/sdk-migration.mdx"
 
-<PythonMigration />
+<SDKMigration />
 
 ## Serverless environments (Render/Lambda/...)
 

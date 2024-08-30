@@ -85,7 +85,7 @@ As Uncle Ben from Spiderman once said “with great product power, comes great p
 
 Good tools for this include:
 - [Grafana](https://grafana.com/), [Better Stack](https://betterstack.com/), [Metabase](https://www.metabase.com/), and more to provide observability into issues in your code. 
-- [Sentry](https://sentry.io/welcome/) and [LogRocket](https://logrocket.com/) to monitor errors. 
+- [Sentry](/blog/posthog-vs-sentry) and [LogRocket](/blog/posthog-vs-logrocket) to monitor errors. 
 - [Incident.io](http://Incident.io) and [PagerDuty](https://www.pagerduty.com/) to help teams respond to incidents when they happen.
 
 ![Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-tools/sentry.png)

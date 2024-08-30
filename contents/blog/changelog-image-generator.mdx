@@ -1,0 +1,110 @@
+---
+date: 2024-08-28
+title: We built an internal tool to generate changelog images for social media
+rootPage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/changelog_image_poster_f60be59481.png
+featuredImageType: full
+author:
+  - cory-watilo
+category: PostHog news
+---
+
+PostHog's marketing team recently [created a plan](https://github.com/PostHog/meta/issues/218) to improve our social media presence. One of the [ideas](https://github.com/PostHog/meta/issues/232) was to share our [changelog updates](/changelog) in a more visual way – using a graphic instead of just a text-based post.
+
+## Why image-based updates?
+
+Image-based posts perform better on X than linking out to another site. <TeamMember name="Ian Vanagas" photo /> originally trialed this with "visual essays". After posting a few of these, we quickly updated the design to match our brand.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/visual_essay_d3b07fbd64.png" 
+    classes="rounded"
+    alt="Visual essay example"
+/>
+
+So that works great for the occasional visual essay, but for changelog posts, we had a problem... we didn't have the bandwidth to create images for every new changelog post – nor should design be a blocker for the marketing team. And I didn't want to force anyone to use Figma to create these images.
+
+So we started to think... could we productize this so our team could generate high-quality images automatically? After all, our [changelog updates](/changelog) already include most of the information we'd need.
+
+A couple years ago, we had done something similar for auto-generating [custom open graph images](/blog/dynamic-open-graph-images) for most pages on the website, so we thought... why not do something similar here?
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/synergy_997b3b5c83.png" 
+    classes="rounded"
+    alt="Github discussion"
+/>
+
+## Figma mockup
+
+So I got to work, mocking up a template that would pull information from our self-rolled CMS.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/changelog_mockup_0c8bcba585.png" 
+    classes="rounded"
+    alt="Changelog image mockup"
+/>
+
+## How we did it
+
+I wrote up [an issue](https://github.com/PostHog/posthog.com/issues/9149) outlining how I thought we'd be able to combine data from changelog updates, small teams, and team members for use in the rendered images.
+
+### Changelog data
+
+Our changelog entries already included `title`, `description`, `screenshot`, `update_type`, and associated `product` and `team`.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/changelog_editor_ef77bb982b.png" 
+    classes="rounded"
+    alt="Changelog editor"
+/>
+
+### Product branding
+
+Each PostHog product has an icon and color associated with it. These are defined in a JSON file that builds our navigation submenus.
+
+```
+{
+  name: 'Data warehouse',
+  url: '/docs/data-warehouse',
+  color: 'lilac',
+  icon: 'IconDatabase',
+}
+```
+
+(The `color` maps to a HEX value defined in Tailwind.)
+
+### Customization
+
+Then it just comes down to visual polish, so we added a few options.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/edit_options_787a9644c6.png" 
+    classes="rounded"
+    alt="Changelog image options"
+/>
+
+### Hedgehogs
+
+And what PostHog graphic wouldn't be complete without a hedgehog?
+
+Recently, <TeamMember name="Lottie Coxon" photo /> organized our [hedgehog library](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=UfQboIrCRcRuvSSK-1) and named each hedgehog.
+
+This made it easy for our front end developer <TeamMember name="Eli Kinsey" photo /> to export them and create a searchable library (based off the filenames).
+
+![Hedgehog library](https://res.cloudinary.com/dmukukwp6/video/upload/hedgehog_library_58a0f71928.mp4)
+
+Now we can choose any hedgehog image from our library – as long as it's uploaded to a folder in Cloudinary.
+
+### Generating the image
+
+We used [html-to-image](https://github.com/bubkoo/html-to-image) to render the final product. When a team member clicks the _download_ button, the image is generated [in a very clever way](https://github.com/bubkoo/html-to-image#how-it-works), then downloaded to the client.
+
+## The final product
+
+And voila, here's an example of our first image produced with this new tool. You should [check it out on X](https://twitter.com/posthog/status/1828458717810983330) - and give us a follow while you're there!
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/changelog_post_598cd1a031.png" 
+    classes="rounded"
+    alt="Changelog post on X"
+/>

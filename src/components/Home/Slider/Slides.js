@@ -336,7 +336,6 @@ export const WebAnalytics = () => {
             bgColor="lime-green"
             textColor="primary"
             title="Web analytics"
-            flag="Beta"
             flagColor="yellow"
             description="Enable aggregate website analytics with one click if you're already using PostHog."
             descriptionClasses="mdlg:hidden lg:block"

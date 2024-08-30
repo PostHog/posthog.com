@@ -1,6 +1,6 @@
-import { IconPencil, IconHide, IconDownload } from '@posthog/icons'
+import { IconEllipsis } from '@posthog/icons'
 import Link from 'components/Link'
-import RoadmapForm, { Status } from 'components/RoadmapForm'
+import RoadmapForm, { socialDefaults, Status } from 'components/RoadmapForm'
 import Tooltip from 'components/Tooltip'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useState } from 'react'
@@ -29,7 +29,7 @@ export const RoadmapSuccess = ({
     )
 }
 
-const ActionButton = ({ onClick, children, roundButton }) => {
+const ActionButton = ({ onClick, children, roundButton = false }) => {
     return (
         <button
             className={`group z-10 font-bold p-2 rounded-full border ${
@@ -41,6 +41,38 @@ const ActionButton = ({ onClick, children, roundButton }) => {
         >
             {children}
         </button>
+    )
+}
+
+const Menu = ({ subscriberCount, setEditing, handleUnpublish, handleExport }) => {
+    return (
+        <ul className="list-none m-0 p-0 -my-3 -mx-4">
+            <li className="border-b-half border-border dark:border-dark">
+                <button
+                    onClick={handleExport}
+                    className="text-left p-3 hover:bg-accent dark:hover:bg-accent-dark w-full"
+                >
+                    <p className="m-0 text-sm font-semibold">Export subscriber list ({subscriberCount})</p>
+                    <p className="m-0 text-xs opacity-60">People who subscribed for updates</p>
+                </button>
+            </li>
+            <li className="border-b-half border-border dark:border-dark">
+                <button
+                    onClick={() => setEditing(true)}
+                    className="text-left p-3 hover:bg-accent dark:hover:bg-accent-dark w-full"
+                >
+                    <p className="m-0 text-sm font-semibold">Edit</p>
+                </button>
+            </li>
+            <li>
+                <button
+                    onClick={handleUnpublish}
+                    className="text-left p-3 hover:bg-accent dark:hover:bg-accent-dark w-full"
+                >
+                    <p className="m-0 text-sm font-semibold">Unpublish</p>
+                </button>
+            </li>
+        </ul>
     )
 }
 
@@ -70,6 +102,8 @@ export default function UpdateWrapper({
     const [initialValues, setInitialValues] = useState<any>(null)
     const [success, setSuccess] = useState(false)
     const [subscribers, setSubscribers] = useState([])
+    const [menuOpen, setMenuOpen] = useState(false)
+    const [likes, setLikes] = useState([])
 
     const handleUnpublish = async () => {
         const confirmed = window.confirm(
@@ -95,7 +129,16 @@ export default function UpdateWrapper({
 
     const fetchRoadmapItem = async () => {
         const query = qs.stringify({
-            populate: ['topic', 'teams', 'image', 'category', 'subscribers.user'],
+            populate: [
+                'topic',
+                'teams',
+                'image',
+                'category',
+                'subscribers.user',
+                'likes.user',
+                'profiles.avatar',
+                'profiles.teams',
+            ],
         })
         const jwt = await getJwt()
         const {
@@ -112,6 +155,9 @@ export default function UpdateWrapper({
                     githubUrls,
                     dateCompleted,
                     subscribers,
+                    socialSharing,
+                    profiles,
+                    likes,
                 },
             },
         } = await fetch(
@@ -124,6 +170,7 @@ export default function UpdateWrapper({
                   }
                 : undefined
         ).then((res) => res.json())
+        setLikes(likes?.data)
         setSubscribers(subscribers?.data)
         setInitialValues({
             title,
@@ -137,15 +184,22 @@ export default function UpdateWrapper({
             category: category || undefined,
             githubUrls: githubUrls?.length > 0 ? githubUrls : [''],
             dateCompleted: dateCompleted || dayjs().format('YYYY-MM-DD'),
+            social: { ...socialDefaults, ...(socialSharing ? JSON.parse(socialSharing) : {}) },
+            author: profiles?.data?.[0] || undefined,
         })
     }
 
     const handleExport = async () => {
-        const csv = `First name,Last name,Email\n${subscribers
+        const csv = `First name,Last name,Email,Type\n${subscribers
             .map(({ attributes: { user, firstName, lastName } }) => {
-                return `${firstName},${lastName},${user?.data?.attributes?.email}`
+                return `${firstName},${lastName},${user?.data?.attributes?.email},Subscriber`
             })
-            .join('\n')}`
+            .join('\n')}
+${likes
+    .map(({ attributes: { user, firstName, lastName } }) => {
+        return `${firstName},${lastName},${user?.data?.attributes?.email},Voter`
+    })
+    .join('\n')}`
         const blob = new Blob([csv], { type: 'text/csv' })
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
@@ -188,35 +242,25 @@ export default function UpdateWrapper({
                     <div className="relative">
                         {user?.role?.type === 'moderator' && initialValues && (
                             <div className={`${editButtonClassName} flex space-x-1`}>
-                                <ActionButton onClick={handleExport} roundButton={roundButton}>
-                                    <Tooltip content={`Export ${subscribers.length} subscribers`} placement="top">
-                                        <IconDownload
-                                            className={`w-5 h-5 inline-block ${
-                                                roundButton ? 'opacity-50 group-hover:opacity-100' : ''
-                                            }}`}
+                                <Tooltip
+                                    content={() => (
+                                        <Menu
+                                            subscriberCount={subscribers.length + likes.length}
+                                            setEditing={setEditing}
+                                            handleUnpublish={handleUnpublish}
+                                            handleExport={handleExport}
                                         />
-                                    </Tooltip>
-                                </ActionButton>
-                                <ActionButton onClick={() => setEditing(true)} roundButton={roundButton}>
-                                    <Tooltip content="Edit" placement="top">
-                                        <IconPencil
-                                            className={`w-5 h-5 inline-block ${
-                                                roundButton ? 'opacity-50 group-hover:opacity-100' : ''
-                                            }}`}
-                                        />
-                                    </Tooltip>
-                                </ActionButton>
-                                <ActionButton onClick={() => handleUnpublish()} roundButton={roundButton}>
-                                    <Tooltip content="Unpublish" placement="top">
-                                        <span className="relative">
-                                            <IconHide
-                                                className={`w-5 h-5 inline-block ${
-                                                    roundButton ? 'opacity-50 group-hover:opacity-100' : ''
-                                                }}`}
-                                            />
-                                        </span>
-                                    </Tooltip>
-                                </ActionButton>
+                                    )}
+                                    placement="right"
+                                    open={menuOpen}
+                                    controlled
+                                >
+                                    <span className="relative">
+                                        <ActionButton onClick={() => setMenuOpen(!menuOpen)}>
+                                            <IconEllipsis className="size-5 rotate-90" />
+                                        </ActionButton>
+                                    </span>
+                                </Tooltip>
                             </div>
                         )}
                         <span>{children}</span>
