@@ -238,7 +238,7 @@ export const postsMenu: IMenu[] = [
                 url: '/tutorials/ai-engineering',
                 color: 'purple',
                 icon: 'IconAI',
-                tag: 'AI',
+                tag: 'AI engineering',
             },
         ],
     },
