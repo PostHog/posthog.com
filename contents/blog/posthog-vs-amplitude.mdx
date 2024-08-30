@@ -1,6 +1,6 @@
 ---
 title: 'In-depth: PostHog vs Amplitude'
-date: 2024-01-08
+date: 2024-08-29
 author:
   - andy-vandervell
 rootpage: /blog
@@ -16,36 +16,34 @@ import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-Want to know how PostHog and Amplitude compare? If you remember nothing else, remember these two things:
+Amplitude and PostHog are superficially similar. They both offer product analytics and a range of additional tools, like feature flags, A/B testing, and session replay. 
 
-1. **Amplitude** is a product analytics tool built for non-technical users and data analysts.
-
-2. **PostHog** is an all-in-one platform built for engineers that replaces Amplitude _and_ numerous other tools.
+Deep down, however, Amplitude is an analytics tool with some extra bits grafted on. PostHog is built from the ground up as an all-in-one platform for building successful products. Here's how they compare.
 
 ## How is PostHog different?
 
-### 1. We're everything you need in one
+### 1. We're engineering and product-led
 
-PostHog replaces multiple tools in your data stack. You could run Amplitude for analytics, [LaunchDarkly](/blog/posthog-vs-launchdarkly) for feature flags and testing, [Hotjar](/blog/posthog-vs-hotjar) for session replays and surveys, or you could just use PostHog for everything. One platform, one bill, and seamless integration.
+This means engineers make product decisisons. It means they do support – all product teams have a [weekly support hero](/handbook/engineering/support-hero) dedicated to solving user issues. It means [we ship fast](/changelog) and iterate based on user feedback. It means we work in the open – [our roadmap](/roadmap) is public, as is [our company handbook](/handbook). It means our pricing is 100% transparent. Most importanly, it means you can sign up and start using PostHog without ever jumping on a quick call. See [how we do sales](/sales).
 
-### 2. We're built for engineers
+### 2. We're building a genuine all-in-one platform
 
-We support all popular (and some unpopular) [SDKs](/docs/libraries), have [extensively documented APIs](/docs/api), and a [powerful SQL query builder](/docs/hogql), so you can analyze data how you want. We make it easy to [test in production](/product-engineers/testing-in-production), conduct [phased rollouts](/tutorials/phased-rollout), run [beta programs](/tutorials/public-beta-program), and so much more.
+We want you to spend less time engineering your data and more time engineering your product. That means ditching [Mixpanel](/blog/posthog-vs-mixpanel) and Amplitude for analytics, [Hotjar](/posthog-vs-hotjar) for replays and surveys, and [LaunchDarkly](/blog/posthog-vs-launchdarkly) for feature flags and experiments, with one seamlessly integrated platform. Need a data warehouse as well? We've got you covered.
 
-### 3. We're open source and transparent
+### 3. We're cheaper with a more generous free tier
 
-Our MIT License isn't just for show. You can read [our source code](https://github.com/PostHog/posthog), raise issues and PRs, and build your own integrations. Our [company handbook](/handbook) is open to everyone, as is [how we pay people](/handbook/people/compensation), [our strategy](/handbook/why-does-posthog-exist), and our [product roadmap](/roadmap). Got a question about anything? Ask in [our online community](/questions).
+We're committed to [sustainably cheap pricing](/blog/analytics-pricing) on all our products. Every user get a generous free usage allowance every month – 1 million events, 1 million API requests, 5,000 recordings, and 250 survey responses. Inputting a card unlocks almost every feature, and you'll pay nothing if you stay within the free allowance. Every customer who switches from Amplitude to PostHog ends up saving money. See the [price comparison section](#price-comparison) for more.
 
-## Comparing PostHog and Amplitude
+## Product comparison
 
-### Platform
+### Core features
 
 Entering a credit card unlocks almost all PostHog features and you **only pay for what you use**. You get a generous free allowance _every_ month and you can set billing limits to prevent surprise bills.
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion, analyze user behavior" />
-  <ComparisonRow column1="Beta" column2={false} feature="Web analytics" description="Easy to use analytics for marketing websites" />
-  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users use your product, diagnose bugs" />
+  <ComparisonRow column1={true} column2={false} feature="Web analytics" description="Easy to use analytics for marketing websites" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product, diagnose bugs" />
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Roll out features safely, toggle features for cohorts or individuals" />
   <ComparisonRow column1={true} column2={true} feature="Experiments" description="Run tests on new features, optimize conversion funnels" />
   <ComparisonRow column1={true} column2={false} feature="User surveys" description="Collect and analyze feedback, run NPS and PMF surveys " />
@@ -117,17 +115,17 @@ PostHog's offers a generous free 1 million A/B testing events. Amplitude's A/B t
 
 ### Session replay
 
-Replays enable you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are _not_ video recordings of users. We reconstruct sessions by capturing Document Object Model (DOM) mutations. You have complete control over what is captured and all private and personal data is masked. 
+Replays enable you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are _not_ video recordings of users. Amplitude introduced session replay recently, but it isn't as advanced as PostHog's and it doesn't yet support recording sessions for mobile apps. 
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
-  <ComparisonRow column1="5,000 recordings" column2="n/a" feature="Free usage" description="How much free usage do you get each month?" />
-  <ComparisonRow column1={true} column2={false} feature="Web app recordings" description="Capture recordings from single-page apps" />
-  <ComparisonRow column1="Beta" column2={false} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
-  <ComparisonRow column1={true} column2={false} feature="Identity detection" description="Link recordings to user IDs" />
+  <ComparisonRow column1="5,000 recordings" column2="1,000" feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1={true} column2={true} feature="Web app recordings" description="Capture recordings from single-page apps" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
+  <ComparisonRow column1={true} column2={true} feature="Identity detection" description="Link recordings to user IDs" />
   <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a user's browser" />
   <ComparisonRow column1={true} column2={false} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
   <ComparisonRow column1={true} column2={false} feature="Performance monitoring" description="Track network events within a session" />
-  <ComparisonRow column1={true} column2={false} feature="Privacy masking" description="Censor personal information from playback" />
+  <ComparisonRow column1={true} column2={true} feature="Privacy masking" description="Censor personal information from playback" />
   <ComparisonRow column1={true} column2={false} feature="Conditional recording" description="Only capture the sessions you want" />
   <ComparisonRow column1={true} column2={false} feature="DOM explorer" description="Explore an interactive snapshot of replays" />
   <ComparisonRow column1={true} column2={false} feature="Export recordings" description="Save important recordings offline" />
@@ -154,6 +152,98 @@ Surveys are great for tracking customer satisfaction scores like Net Promoter Sc
   <ComparisonRow column1={true} column2={false} feature="API mode" description="Create surveys via the API" />
 </ComparisonTable>
 
+## Price comparison
+
+### Free tiers
+
+**PostHog** charges for actual usage – i.e. analytics events, feature flag API requests, and so on. No credit card is required to signup and use PostHog, but entering a credit card unlocks almost all features and **you'll pay nothing** if you stay within our **generous free tier** limits:
+
+| &nbsp                 | **Free usage per month** 
+|-----------------------|--------------------------
+| **Product analytics** | 1 million events        
+| **Session replay**    | 5,000 recordings         
+| **Feature flags**     | 1 million API requests
+| **A/B testing**       | 1 million API requests  
+| **Surveys**           | 250 responses
+
+Users who qualify for [our startup program](/startups) also get $50,000 in PostHog credit and a range of additional benefits. 
+
+**Amplitude** charges based on monthly tracked users (MTUs). The cost of add ons, such as A/B testing (not available on self-serve plans), group analytics, and unlimited cohorts (self-serve plans are limited to five) isn't disclosed.
+
+Amplitude offers a free Starter plan, but it lacks many important features:
+
+<ComparisonTable column1="PostHog" column2="Amplitude">
+   <ComparisonRow column1="1 million events" column2="50k tracked users" feature="Free analytics usage" description="Free tier usage each month" />
+   <ComparisonRow column1="5,000 recordings" column2="1,000 recordings" feature="Free replay usage" description="Free tier usage each month" />
+   <ComparisonRow column1="Users" column2="Unlimited" feature="Unlimited" description="Active accounts" />
+   <ComparisonRow column1="Unlimited" column2="10 only" feature="Saved insights" description="Number of you charts you can create" />   
+   <ComparisonRow column1={true} column2={false} feature="Custom events" description="Create custom tracking events" />
+   <ComparisonRow column1={true} column2={false} feature="Formulas" description="Create custom insights using formulas" />
+   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Release and control features" />
+   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run tests on users and groups" />
+   <ComparisonRow column1={true} column2={false} feature="Surveys" description="Gather feedback and book user interviews" />
+</ComparisonTable>
+
+### Analytics pricing
+
+PostHog is consistently cheaper for both product and web analytics. In the below comparison, we're assuming 75 identified events per monthly tracked user (MTU), which is the typical usage for most PostHog users.
+
+[GRAPH HERE]
+
+| **Monthly tracked users | **Amplitude Growth** | **PostHog** | &nbsp                                                                   |
+|-------------------------|----------------------|-------------|-------------------------------------------------------------------------|
+| 1k                      | $61                  | $0          | <span class="text-[15px] font-semibold">$732 per year cheaper</span>    |
+| 2.5k                    | $99                  | $0          | <span class="text-[15px] font-semibold">$1,888 per year cheaper</span>  |
+| 5k                      | $124                 | $0          | <span class="text-[15px] font-semibold">$1,488 per year cheaper</span>  |
+| 10k                     | $186                 | $0          | <span class="text-[15px] font-semibold">$2,232 per year cheaper</span>  |
+| 25k                     | $186                 | $217        | <span class="text-[15px] font-semibold">$1,128 per year cheaper</span>  |
+| 50k                     | $561                 | $430        | <span class="text-[15px] font-semibold">$1,572 per year cheaper</span>  |
+| 75k                     | $841                 | $625        | <span class="text-[15px] font-semibold">$2,592 per year cheaper</span>  |
+| 100k                    | $1,061               | $820        | <span class="text-[15px] font-semibold">$2,892 per year cheaper</span>  |
+| 150k                    | $1,584               | $1,207      | <span class="text-[15px] font-semibold">$4,524 per year cheaper</span>  |
+| 200k                    | $2,100               | $1,600      | <span class="text-[15px] font-semibold">$6,000 per year cheaper</span>  |
+| 300k                    | $3,150               | $2,091      | <span class="text-[15px] font-semibold">$12,708 per year cheaper</span> |
+
+
+At each tier, PostHog is around 22% to 33% cheaper than Amplitude. Sending more than 75 identified events per MTU will increase the cost of PostHog relative to Amplitude, but we provide numerous ways to control how many events you send and recuce your costs, including the option to send cheaper **anonymous events**.
+
+Anonymous events **only include non-identifying data**, such as referral data (UTMs, domains, etc), device type, and basic location information. They're cheaper for us to ingest, so we charge you between 55% and 80% less for them.
+
+<div class="md:hidden mb-4">
+<img src="https://res.cloudinary.com/dmukukwp6/image/upload/event_types_mobile_light_eca61d99fe.png" alt="Event prices" class="dark:hidden" />
+<img src="https://res.cloudinary.com/dmukukwp6/image/upload/event_types_mobile_dark_686a64f4f1.png" alt="Event prices" class="hidden dark:block" />
+</div>
+
+<div class="hidden md:block mb-4">
+<img src="https://res.cloudinary.com/dmukukwp6/image/upload/event_types_desktop_light_f8989c06cd.png" alt="Event prices" class="dark:hidden" />
+<img src="https://res.cloudinary.com/dmukukwp6/image/upload/event_types_desktop_dark_89c055bd76.png" alt="Event prices" class="hidden dark:block" />
+</div>
+
+Anonymous events are ideal for tracking users who aren't logged in, or for use cases where you only need to analyze behavior at an aggregate level, such as:
+
+- Visitors to your marketing website
+- Shoppers on an e-commerce store
+- Logged-out users of mobile apps
+- Tracking API and backend events
+- Events generated by LLMs
+- Error monitoring
+
+| **Monthly events** | **Identified events** | **Anonymous events** | **Change** |
+|--------------------|--------------------------|-----------------------------------|----------------|
+| <strong class="text-15px">0-1 million</strong>      | Free | Free  | &nbsp |
+| <strong class="text-15px">1-2 million</strong>      | <span class="text-[15px] font-semibold">$0.0002480</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000500</span><span class="text-sm opacity-70">/event</span>  | <strong class="text-green">80% cheaper</strong> |
+| <strong class="text-15px">2-15 million</strong>     | <span class="text-[15px] font-semibold">$0.0001040</span><span class="text-sm opacity-70">/event</span> | <span class="text-[15px] font-semibold">$0.0000343</span><span class="text-sm opacity-70">/event</span>  | <strong class="text-green">67% cheaper</strong> |
+| <strong class="text-15px">15-50 million</strong>    | <span class="text-[15px] font-semibold">$0.0000655</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000295</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">55% cheaper</strong> |
+| <strong class="text-15px">50-100 million</strong>   | <span class="text-[15px] font-semibold">$0.0000364</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000218</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">40% cheaper</strong> |
+| <strong class="text-15px">100-250 million</strong>  | <span class="text-[15px] font-semibold">$0.0000187</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000150</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">20% cheaper</strong> |
+| <strong class="text-15px">250+ million</strong>     | <span class="text-[15px] font-semibold">$0.0000100</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000090</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">10% cheaper</strong> |
+
+Anonymous events are also the default event type. You'll only be charged the identified event rate when you call `posthog.identify`, or or capture an event from an identified user. 
+
+See [We’ve decided to make less money [Part 2]](/blog/analytics-pricing) for more on the difference between anonymous and identified events, and how you can save money when using PostHog.
+
+## Platform comparison
+
 ### Integrations
 
 PostHog and Amplitude both offer a wide range of integrations, sources and destinations. PostHog offers more integrations with developer tools, such as [Sentry](/blog/posthog-vs-sentry), Zapier and [Zendesk](/tutorials/zendesk-session-replays), while Amplitude has more integrations with marketing and advertising platforms. See our [data pipeline docs](/docs/cdp) for a full list of PostHog integrations.
@@ -170,39 +260,6 @@ PostHog and Amplitude both offer a wide range of integrations, sources and desti
    <ComparisonRow column1={true} column2={false} feature="Community integrations" description="Build your own integration" />
    <ComparisonRow column1={false} column2={true} feature="Google Ads" description="Import ROI data from Google Ads" />   
 </ComparisonTable>
-
-### Pricing
-
-**PostHog** charges for actual usage – i.e. product analytics events, feature flag API requests, and so on. No credit card is required to signup and use PostHog, but entering a credit card unlocks almost all features and **you'll pay nothing** if you stay within our **generous free tier** limits:
-
-|                       | **Free usage per month** 
-|-----------------------|--------------------------
-| **Product analytics** | 1 million events        
-| **Session replay**    | 5,000 recordings         
-| **Feature flags**     | 1 million API requests
-| **A/B testing**       | 1 million API requests  
-| **Surveys**           | 250 responses            
-
-**Amplitude** charges based on monthly tracked users (MTUs). The cost of add owns, such as A/B testing (not available on self-serve plans), group analytics, and unlimited cohorts (self-serve plans are limited to five) isn't disclosed.
-
-Our free tiers are for life, which means you'll always get your first 1 million events (or 5,000 replays and so on) for free every month, no matter how many you end up using.
-
-Amplitude offers a free Starter plan, but it lacks many important features:
-
-<ComparisonTable column1="PostHog" column2="Amplitude">
-   <ComparisonRow column1="1 million events" column2="50k tracked users" feature="Free usage" description="Free tier usage each month" />
-   <ComparisonRow column1="Users" column2="Unlimited" feature="Unlimited" description="Active accounts" />
-   <ComparisonRow column1="Unlimited" column2="10 only" feature="Saved insights" description="Number of you charts you can create" />   
-   <ComparisonRow column1={true} column2={false} feature="Custom events" description="Create custom tracking events" />
-   <ComparisonRow column1={true} column2={false} feature="Formulas" description="Create custom insights using formulas" />
-   <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Release and control features" />
-   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run tests on users and groups" />
-   <ComparisonRow column1={true} column2={false} feature="Billing limits" description="Set limits to avoid surprise bills" />
-</ComparisonTable>
-
-We charge progressively less per event, replay, API request the more you use – e.g. we charge $0.000100 per event up to 2 million events, but all events after 10 million a month only cost $0.000025, 75% less.
-
-Eligible companies can also get $50,000 in credit in our [PostHog for Startups program](/startups). 
 
 ### Security and compliance
 
@@ -249,5 +306,3 @@ We recommend all users deploy a reverse proxy, which enables you send events to 
 ### How does PostHog compare to other Amplitude alternatives?
 
 Still need some convincing? See our guide to the [most popular Amplitude alternatives](/blog/best-amplitude-alternatives).
-
-<ArrayCTA />
