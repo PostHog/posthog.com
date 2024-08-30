@@ -243,7 +243,9 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
                 </div>
                 <strong>Max</strong>
             </div>
-            <div className="border-l-0 ml-[33px] py-2 px-4 bg-accent dark:bg-accent-dark rounded-md">{children}</div>
+            <div className="border-l-0 ml-[33px] py-2 px-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark">
+                {children}
+            </div>
         </li>
     )
 }

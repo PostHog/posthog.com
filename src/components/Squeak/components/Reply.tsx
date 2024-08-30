@@ -180,10 +180,23 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
             </div>
 
             <div className="border-l-0 ml-[33px] pl-0 pb-1">
-                {profile.data.id === 28378 && helpful === null && <AIDisclaimer replyID={id} refresh={mutate} />}
+                {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful === null && (
+                    <AIDisclaimer replyID={id} refresh={mutate} />
+                )}
                 <div className={reply?.attributes?.helpful === false ? 'opacity-60' : ''}>
                     <Markdown>{body}</Markdown>
                 </div>
+                {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful && (
+                    <div className="bg-accent dark:bg-accent-dark p-2 rounded-md border border-border dark:border-dark mb-4">
+                        <p className="m-0 text-sm">
+                            AI response generate by{' '}
+                            <Link to="https://inkeep.com" externalNoIcon>
+                                Inkeep
+                            </Link>
+                            .
+                        </p>
+                    </div>
+                )}
 
                 <div className="flex space-x-2 mb-4 relative -top-2 empty:hidden">
                     {resolvable && (
