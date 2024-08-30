@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useContext } from 'react'
+import React, { useState, createContext, useEffect, useContext, useMemo } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
 import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
@@ -226,9 +226,33 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
     )
 }
 
+const MaxReply = ({ children }: { children: React.ReactNode }) => {
+    return (
+        <li
+            className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
+        >
+            <div className="flex items-center !text-black dark:!text-white">
+                <div className="mr-2 relative">
+                    <Avatar
+                        className="w-[25px] h-[25px] rounded-full"
+                        image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
+                    />
+                    <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
+                        <Logomark className="w-[16px]" />
+                    </span>
+                </div>
+                <strong>{'Max AI'}</strong>
+            </div>
+            <div className="border-l-0 ml-[33px] pl-0 py-2">{children}</div>
+        </li>
+    )
+}
+
 const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) => {
+    const [confident, setConfident] = useState(false)
     const [loading, setLoading] = useState(true)
     const [skeletonCount, setSkeletonCount] = useState(1)
+    const alreadyAsked = useMemo(() => question?.attributes?.askedMax, [])
     const { getJwt } = useUser()
 
     useEffect(() => {
@@ -238,55 +262,53 @@ const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) =
 
         const askMax = async () => {
             try {
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/ask-max`, {
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/ask-max`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${await getJwt()}`,
                     },
                     body: JSON.stringify({ question }),
-                })
-                setLoading(false)
+                }).then((res) => res.json())
+                setConfident(response.confident)
                 clearInterval(interval)
+                setLoading(false)
                 refresh()
             } catch (error) {
                 console.error(error)
             }
         }
 
-        askMax()
+        if (!alreadyAsked) {
+            askMax()
+        }
 
         return () => {
             clearInterval(interval)
         }
     }, [])
 
-    return loading ? (
+    return !alreadyAsked ? (
         <ul className="ml-5 !mb-0 p-0 list-none">
-            <li
-                className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
-            >
-                <div className="flex items-center !text-black dark:!text-white">
-                    <div className="mr-2 relative">
-                        <Avatar
-                            className="w-[25px] h-[25px] rounded-full"
-                            image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
-                        />
-                        <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
-                            <Logomark className="w-[16px]" />
-                        </span>
-                    </div>
-                    <strong>{'Max AI'}</strong>
-                </div>
-                <div className="border-l-0 ml-[33px] pl-0 py-2">
-                    {Array.from({ length: skeletonCount }).map((_, index) => (
-                        <div
-                            key={index}
-                            className="w-full h-[25px] animate-pulse bg-gray-accent dark:bg-gray-accent-dark rounded-md mb-2"
-                        />
-                    ))}
-                </div>
-            </li>
+            <MaxReply>
+                <Markdown>Hang tight, checking to see if we can find an answer for you…</Markdown>
+            </MaxReply>
+            {(loading || !confident) && (
+                <MaxReply>
+                    {loading ? (
+                        Array.from({ length: skeletonCount }).map((_, index) => (
+                            <div
+                                key={index}
+                                className="w-full h-[25px] animate-pulse bg-gray-accent dark:bg-gray-accent-dark rounded-md mb-2"
+                            />
+                        ))
+                    ) : (
+                        <Markdown>
+                            Dang, we couldn’t find anything this time. A community member will hopefully respond soon!
+                        </Markdown>
+                    )}
+                </MaxReply>
+            )}
         </ul>
     ) : null
 }
@@ -435,8 +457,8 @@ export const Question = (props: QuestionProps) => {
                                 </p>
                             )}
                         </div>
-                        <Replies expanded={expanded} setExpanded={setExpanded} />
                         {askMax && <AskMax question={questionData} refresh={mutate} />}
+                        <Replies expanded={expanded} setExpanded={setExpanded} />
                     </div>
                     <div
                         className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${
