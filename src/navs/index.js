@@ -2989,18 +2989,18 @@ export const pricingMenu = {
             color: 'blue',
             url: '/pricing',
         },
-        {
-            name: 'Event types',
-            icon: 'IconCursorClick',
-            color: 'purple',
-            url: '/events',
-        },
-        {
-            name: 'Add-ons',
-            icon: 'IconPuzzle',
-            color: 'seagreen',
-            url: '/addons',
-        },
+        // {
+        //     name: 'Event types',
+        //     icon: 'IconCursorClick',
+        //     color: 'purple',
+        //     url: '/events',
+        // },
+        // {
+        //     name: 'Add-ons',
+        //     icon: 'IconPuzzle',
+        //     color: 'seagreen',
+        //     url: '/addons',
+        // },
         {
             name: 'Pricing philosophy',
             icon: 'IconLightBulb',

@@ -196,23 +196,23 @@ const FreeTierItem = ({ icon, icon2, name, allocation, description }) => {
 }
 
 const morePricingReads = [
-    {
-        href: '/events',
-        icon: <Icons.IconCursorClick className="text-purple size-7" />,
-        title: 'Event types',
-        description: 'The cheapest events in the biz',
-    },
-    {
-        href: '/addons',
-        icon: <Icons.IconPuzzle className="text-seagreen size-7" />,
-        title: 'Add-ons',
-        description: 'Extra functionality if you need it',
-    },
+    // {
+    //     href: '/events',
+    //     icon: <Icons.IconCursorClick className="text-purple size-7" />,
+    //     title: 'Event types',
+    //     description: 'The cheapest events in the biz',
+    // },
+    // {
+    //     href: '/addons',
+    //     icon: <Icons.IconPuzzle className="text-seagreen size-7" />,
+    //     title: 'Add-ons',
+    //     description: 'Extra functionality if you need it',
+    // },
     {
         href: '/pricing/philosophy',
         icon: <Icons.IconLightBulb className="text-yellow size-7" />,
         title: 'Pricing philosophy',
-        description: "tl;dr: it's designed to make you happy",
+        description: "tl;dr: It's designed to make you happy.",
     },
     {
         href: '/sales',
