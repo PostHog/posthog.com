@@ -1314,10 +1314,30 @@
         { "source": "/contact-sales", "destination": "/talk-to-a-human" },
         { "source": "/teams/customer-success", "destination": "/teams/sales-cs" },
         { "source": "/blog/posthog-vs-kubit", "destination": "/blog/tags/comparisons" },
-        { "source": "/pricing?product=product-analytics", "destination": "/product-analytics#pricing" },
-        { "source": "/pricing?product=session-replay", "destination": "/session-replay#pricing" },
-        { "source": "/pricing?product=feature-flags", "destination": "/feature-flags#pricing" },
-        { "source": "/pricing?product=ab-testing", "destination": "/ab-testing#pricing" },
-        { "source": "/pricing?product=surveys", "destination": "/surveys#pricing" }
+        {
+            "source": "/pricing",
+            "destination": "/product-analytics#pricing",
+            "has": [{ "type": "query", "key": "product", "value": "product-analytics" }]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/session-replay#pricing",
+            "has": [{ "type": "query", "key": "product", "value": "session-replay" }]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/feature-flags#pricing",
+            "has": [{ "type": "query", "key": "product", "value": "feature-flags" }]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/ab-testing#pricing",
+            "has": [{ "type": "query", "key": "product", "value": "ab-testing" }]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/surveys#pricing",
+            "has": [{ "type": "query", "key": "product", "value": "surveys" }]
+        }
     ]
 }
