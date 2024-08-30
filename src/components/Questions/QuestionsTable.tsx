@@ -105,7 +105,10 @@ const Row = ({
 
     const latestAuthor = replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
     const isOP = profile?.data?.id === user?.profile?.id
-    const numReplies = replies?.data?.filter((reply) => reply.attributes.helpful || isOP).length || 0
+    const numReplies =
+        replies?.data?.filter((reply) =>
+            reply.attributes.profile?.data?.id === 28378 ? reply.attributes.helpful || isOP : true
+        ).length || 0
 
     const { ref, inView } = useInView({
         threshold: 0,

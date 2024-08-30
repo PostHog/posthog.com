@@ -180,7 +180,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
             </div>
 
             <div className="border-l-0 ml-[33px] pl-0 pb-1">
-                {helpful === null && <AIDisclaimer replyID={id} refresh={mutate} />}
+                {profile.data.id === 28378 && helpful === null && <AIDisclaimer replyID={id} refresh={mutate} />}
                 <div className={reply?.attributes?.helpful === false ? 'opacity-60' : ''}>
                     <Markdown>{body}</Markdown>
                 </div>

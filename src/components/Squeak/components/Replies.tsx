@@ -26,7 +26,11 @@ export const Replies = ({ expanded, setExpanded }: RepliesProps) => {
     } = useContext(CurrentQuestionContext)
 
     const isOP = profile?.data?.id === user?.profile?.id
-    const replies = { data: initialReplies?.data?.filter((reply) => reply.attributes.helpful || isOP) }
+    const replies = {
+        data: initialReplies?.data?.filter((reply) =>
+            reply.attributes.profile?.data?.id === 28378 ? reply.attributes.helpful || isOP : true
+        ),
+    }
 
     return replies && replies.data.length > 0 ? (
         <ul className="ml-5 !mb-0 p-0 list-none">
