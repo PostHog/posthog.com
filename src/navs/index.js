@@ -2854,6 +2854,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/postgres',
                         },
                         {
+                            name: 'Salesforce',
+                            url: '/docs/data-warehouse/setup/salesforce',
+                        },
+                        {
                             name: 'Snowflake',
                             url: '/docs/data-warehouse/setup/snowflake',
                         },
