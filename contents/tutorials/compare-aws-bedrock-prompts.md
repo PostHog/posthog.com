@@ -5,6 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
+  - AI engineering
 ---
 
 Evaluating LLM prompts is crucial for determining whether your modifications are genuinely enhancing your application. In this tutorial, we explore three methods to assess prompts by comparing their LLM outputs. Namely:
