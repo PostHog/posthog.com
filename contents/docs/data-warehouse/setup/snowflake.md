@@ -10,7 +10,7 @@ availability:
 
 The data warehouse can link to data in Snowflake. 
 
-Start by going to the [Data warehouse tab](https://us.posthog.com/data-warehouse) and clicking **Link source**. Choose Snowflake and enter the following data:
+Start by going to the [Data pipeline page](https://us.posthog.com/pipeline/sources) and the sources tab and clicking **New source**. Choose Snowflake and enter the following data:
 
 - **Account identifier**: Likely a combination of your organization and the name of the account (e.g. `myorg-account123`). You can find this in the sidebar account selector or by executing the `CURRENT_ACCOUNT_NAME` and `CURRENT_ORGANIZATION_NAME` functions in SQL.
 - **Database**: Like `tasty_bytes_sample_data`
