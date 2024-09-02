@@ -909,6 +909,12 @@ export const communityMenu = {
                         { name: 'Zapier', url: '/tutorials/categories/zapier' },
                     ],
                 },
+                {
+                    name: 'AI engineering',
+                    color: 'purple',
+                    icon: 'IconAI',
+                    url: '/tutorials/ai-engineering',
+                },
             ],
         },
         {

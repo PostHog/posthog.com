@@ -233,6 +233,13 @@ export const postsMenu: IMenu[] = [
                 icon: 'IconPerson',
                 tag: 'Cdp',
             },
+            {
+                name: 'AI engineering',
+                url: '/tutorials/ai-engineering',
+                color: 'purple',
+                icon: 'IconAI',
+                tag: 'AI engineering',
+            },
         ],
     },
     {
