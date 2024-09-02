@@ -2858,6 +2858,14 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/salesforce',
                         },
                         {
+                            name: 'MySQL',
+                            url: '/docs/data-warehouse/setup/mysql',
+                        },
+                        {
+                            name: 'Azure SQL Server',
+                            url: '/docs/data-warehouse/setup/azure-db',
+                        },
+                        {
                             name: 'Snowflake',
                             url: '/docs/data-warehouse/setup/snowflake',
                         },
@@ -2869,8 +2877,8 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/s3',
                         },
                         {
-                            name: 'Azure',
-                            url: '/docs/data-warehouse/setup/azure',
+                            name: 'Azure Blob',
+                            url: '/docs/data-warehouse/setup/azure-blob',
                         },
                         {
                             name: 'Cloudflare R2',
