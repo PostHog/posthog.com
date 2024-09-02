@@ -26,7 +26,7 @@ Sessions enable you to analyze how exactly users are using your product, their e
 
 ## How does PostHog define a session?
 
-Our [JavaScript Web library](/docs/libraries/js) and mobile SDKs (Android, iOS, React Native, and Flutter) add a `$session_id` property to each event. Events captured from the same user, browser, and device get the same `$session_id` until there's **no activity for more than 30 minutes** (up to a maximum of 24 hours). Subsequent events are grouped into a new session and a new session triggers a new session replay.
+Our [JavaScript Web library](/docs/libraries/js) and mobile SDKs (Android, iOS, React Native, and Flutter) add a `$session_id` property to each event. Events captured from the same user, browser, and device get the same `$session_id` within the same session, until a new session is started. A new session is started by default when either there's **no activity for 30 minutes** or the session has reached the maximum session duration of 24 hours. Subsequent events are grouped into a new session and a new session triggers a new session replay.
 
 A session can span multiple tabs and windows, but only on the same browser and device. For example, if a user goes from one Chrome tab to another, it counts as a single session. If they go from Chrome to Firefox, a new session is created. You can also create a new session by calling `posthog.reset()` (which also starts a new session replay).
 
