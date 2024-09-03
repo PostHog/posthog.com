@@ -9,7 +9,7 @@ tags:
   - actions
 ---
 
-[A/B tests](/ab-testing) are a way to make sure the content of your Next.js app performs as well as possible. They compare two or more variations on their impact on a goal.
+[A/B tests](/experiments) are a way to make sure the content of your Next.js app performs as well as possible. They compare two or more variations on their impact on a goal.
 
 PostHog's experimentation tool makes it easy to set up A/B tests. This tutorial shows you how to build a basic Next.js app (with the app router), add PostHog to it, bootstrap feature flag data, and set up the A/B test in the app.
 

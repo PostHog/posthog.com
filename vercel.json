@@ -292,7 +292,7 @@
         { "source": "/product/collaboration", "destination": "/product-analytics" },
         { "source": "/product/session-recording", "destination": "/session-replay" },
         { "source": "/product/feature-flags", "destination": "/feature-flags" },
-        { "source": "/product/experimentation-suite", "destination": "/ab-testing" },
+        { "source": "/product/experimentation-suite", "destination": "/experiments" },
         { "source": "/ab-testing", "destination": "/experiments" },
         { "source": "/product/heatmaps", "destination": "/tutorials/toolbar", "statusCode": 301 },
         { "source": "/heatmaps", "destination": "/tutorials/toolbar" },
@@ -783,7 +783,7 @@
         { "source": "/product-analytics/features", "destination": "/product-analytics" },
         { "source": "/session-replay/features", "destination": "/session-replay" },
         { "source": "/feature-flags/features", "destination": "/feature-flags" },
-        { "source": "/ab-testing/features", "destination": "/ab-testing" },
+        { "source": "/ab-testing/features", "destination": "/experiments" },
         { "source": "/product-os/features", "destination": "/product-os" },
         { "source": "/docs/integrate/webhooks", "destination": "/docs/webhooks" },
         { "source": "/roadmap/changelog", "destination": "/changelog/2024" },
@@ -945,11 +945,6 @@
         {
             "source": "/handbook/growth/marketing/customer-personas",
             "destination": "/handbook/strategy/ideal-customer-persona"
-        },
-        {
-            "source": "/pricing",
-            "destination": "/pricing?product=ab-testing",
-            "has": [{ "type": "query", "key": "product", "value": "experiments" }]
         },
         { "source": "/tutorials/cohorts", "destination": "/docs/data/cohorts" },
         { "source": "/tutorials/retention", "destination": "/tutorials/feature-retention" },
@@ -1173,13 +1168,13 @@
         { "source": "/feature-flags/roadmap", "destination": "/feature-flags#roadmap" },
         { "source": "/feature-flags/questions", "destination": "/feature-flags#questions" },
 
-        { "source": "/ab-testing/pricing", "destination": "/ab-testing#pricing" },
-        { "source": "/ab-testing/customers", "destination": "/ab-testing#customers" },
-        { "source": "/ab-testing/comparisons", "destination": "/ab-testing#posthog-vs" },
-        { "source": "/ab-testing/documentation", "destination": "/ab-testing#docs" },
-        { "source": "/ab-testing/tutorials", "destination": "/ab-testing#tutorials" },
-        { "source": "/ab-testing/roadmap", "destination": "/ab-testing#roadmap" },
-        { "source": "/ab-testing/questions", "destination": "/ab-testing#questions" },
+        { "source": "/ab-testing/pricing", "destination": "/experiments#pricing" },
+        { "source": "/ab-testing/customers", "destination": "/experiments#customers" },
+        { "source": "/ab-testing/comparisons", "destination": "/experiments#posthog-vs" },
+        { "source": "/ab-testing/documentation", "destination": "/experiments#docs" },
+        { "source": "/ab-testing/tutorials", "destination": "/experiments#tutorials" },
+        { "source": "/ab-testing/roadmap", "destination": "/experiments#roadmap" },
+        { "source": "/ab-testing/questions", "destination": "/experiments#questions" },
         { "source": "/handbook/what-is-posthog", "destination": "/handbook/why-does-posthog-exist" },
         { "source": "/handbook/finance/fundraising", "destination": "/handbook/finance" },
         { "source": "/blog/guardrail-metrics", "destination": "/product-engineers/guardrail-metrics" },
@@ -1318,6 +1313,31 @@
         { "source": "/book-a-demo", "destination": "/demo" },
         { "source": "/contact-sales", "destination": "/talk-to-a-human" },
         { "source": "/teams/customer-success", "destination": "/teams/sales-cs" },
-        { "source": "/blog/posthog-vs-kubit", "destination": "/blog/tags/comparisons" }
+        { "source": "/blog/posthog-vs-kubit", "destination": "/blog/tags/comparisons" },
+        {
+            "source": "/pricing",
+            "destination": "/product-analytics#pricing",
+            "has": [{ "type": "query", "key": "product", "value": "product-analytics" }]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/session-replay#pricing",
+            "has": [{ "type": "query", "key": "product", "value": "session-replay" }]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/feature-flags#pricing",
+            "has": [{ "type": "query", "key": "product", "value": "feature-flags" }]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/experiments#pricing",
+            "has": [{ "type": "query", "key": "product", "value": "ab-testing" }]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/surveys#pricing",
+            "has": [{ "type": "query", "key": "product", "value": "surveys" }]
+        }
     ]
 }

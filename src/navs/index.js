@@ -2995,49 +2995,31 @@ export const docsMenu = {
 export const pricingMenu = {
     name: 'Pricing',
     url: '/pricing',
-    icon: 'IconReceipt',
+    icon: 'IconCdCase',
     children: [
         {
-            name: 'All products',
-            icon: 'IconReceipt',
-            color: 'red',
+            name: 'PostHog Cloud',
+            icon: 'IconCloud',
+            color: 'blue',
             url: '/pricing',
         },
+        // {
+        //     name: 'Event types',
+        //     icon: 'IconCursorClick',
+        //     color: 'purple',
+        //     url: '/events',
+        // },
+        // {
+        //     name: 'Add-ons',
+        //     icon: 'IconPuzzle',
+        //     color: 'seagreen',
+        //     url: '/addons',
+        // },
         {
-            name: 'Product analytics',
-            icon: 'IconGraph',
-            color: 'blue',
-            url: '/pricing?product=product-analytics',
-        },
-        {
-            name: 'Session replay',
-            url: '/pricing?product=session-replay',
+            name: 'Pricing philosophy',
+            icon: 'IconLightBulb',
             color: 'yellow',
-            icon: 'IconRewindPlay',
-        },
-        {
-            name: 'Feature flags',
-            icon: 'IconToggle',
-            color: 'seagreen',
-            url: '/pricing?product=feature-flags',
-        },
-        {
-            name: 'Experiments',
-            icon: 'IconFlask',
-            color: 'purple',
-            url: '/pricing?product=experiments',
-        },
-        {
-            name: 'Surveys',
-            icon: 'IconMessage',
-            color: 'red',
-            url: '/pricing?product=surveys',
-        },
-        {
-            name: 'Data warehouse',
-            icon: 'IconDatabase',
-            color: 'lilac',
-            url: '/pricing?product=data-warehouse',
+            url: '/pricing/philosophy',
         },
         {
             name: 'How we do "sales"',

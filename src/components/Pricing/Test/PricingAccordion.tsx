@@ -100,6 +100,7 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
                         ) : (
                             startsAt && (
                                 <span>
+                                    <span className="opacity-60 text-[13px]">From</span>{' '}
                                     <strong className="text-sm">
                                         ${startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt}
                                     </strong>
