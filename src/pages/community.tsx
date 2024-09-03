@@ -25,6 +25,7 @@ import AppStatus from 'components/AppStatus'
 import qs from 'qs'
 import slugify from 'slugify'
 import uniqBy from 'lodash/uniqBy'
+import { NewsletterForm } from 'components/NewsletterForm'
 
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
@@ -305,7 +306,7 @@ const Main = () => {
                     <Posts />
 
                     <div className="pt-4 pb-0 @md:pt-8 @md:pb-4">
-                        <Newsletter />
+                        <NewsletterForm placement="community" />
                     </div>
                     <div className="py-4">
                         <Changelog />

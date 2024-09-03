@@ -818,7 +818,7 @@ export const communityMenu = {
             name: 'Posts',
             icon: 'IconBook',
             color: 'red',
-            url: 'https://posthog.com/posts',
+            url: '/posts',
         },
         {
             name: 'Questions',
@@ -830,7 +830,7 @@ export const communityMenu = {
             name: 'Guides',
             icon: 'IconMap',
             color: 'red',
-            url: 'https://posthog.com/tutorials',
+            url: '/tutorials',
             children: [
                 {
                     name: 'All guides',
@@ -892,7 +892,7 @@ export const communityMenu = {
                     url: '/tutorials/categories/feature-flags',
                 },
                 {
-                    name: 'A/B testing',
+                    name: 'Experiments',
                     icon: 'IconFlask',
                     color: 'purple',
                     url: '/tutorials/categories/experimentation',
@@ -908,6 +908,12 @@ export const communityMenu = {
                         { name: 'Sentry', url: '/tutorials/categories/sentry' },
                         { name: 'Zapier', url: '/tutorials/categories/zapier' },
                     ],
+                },
+                {
+                    name: 'AI engineering',
+                    color: 'purple',
+                    icon: 'IconAI',
+                    url: '/tutorials/ai-engineering',
                 },
             ],
         },
@@ -2441,13 +2447,13 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'A/B testing',
+            name: 'Experiments',
             icon: 'IconFlask',
             color: 'purple',
             url: '/docs/experiments',
             children: [
                 {
-                    name: 'A/B testing',
+                    name: 'Experiments',
                 },
                 {
                     name: 'Overview',
@@ -2854,6 +2860,14 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/postgres',
                         },
                         {
+                            name: 'MySQL',
+                            url: '/docs/data-warehouse/setup/mysql',
+                        },
+                        {
+                            name: 'Azure SQL Server',
+                            url: '/docs/data-warehouse/setup/azure-db',
+                        },
+                        {
                             name: 'Snowflake',
                             url: '/docs/data-warehouse/setup/snowflake',
                         },
@@ -2865,8 +2879,8 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/s3',
                         },
                         {
-                            name: 'Azure',
-                            url: '/docs/data-warehouse/setup/azure',
+                            name: 'Azure Blob',
+                            url: '/docs/data-warehouse/setup/azure-blob',
                         },
                         {
                             name: 'Cloudflare R2',
@@ -3047,10 +3061,10 @@ const menu = [
                 url: '/feature-flags',
             },
             {
-                name: 'A/B testing',
+                name: 'Experiments',
                 icon: 'IconFlask',
                 color: 'purple',
-                url: '/ab-testing',
+                url: '/experiments',
             },
             {
                 name: 'Surveys',

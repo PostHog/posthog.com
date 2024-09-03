@@ -293,6 +293,7 @@
         { "source": "/product/session-recording", "destination": "/session-replay" },
         { "source": "/product/feature-flags", "destination": "/feature-flags" },
         { "source": "/product/experimentation-suite", "destination": "/ab-testing" },
+        { "source": "/ab-testing", "destination": "/experiments" },
         { "source": "/product/heatmaps", "destination": "/tutorials/toolbar", "statusCode": 301 },
         { "source": "/heatmaps", "destination": "/tutorials/toolbar" },
         { "source": "/docs/tutorials/aarrr-framework", "destination": "/tutorials/aarrr-framework" },
@@ -1083,6 +1084,10 @@
         {
             "source": "/blog/churn-rate-vs-retention-rate",
             "destination": "/product-engineers/churn-rate-vs-retention-rate"
+        },
+        {
+            "source": "/product-engineers/ab-testing",
+            "destination": "/product-engineers/experiments"
         },
         {
             "source": "/blog/feature-flag-benefits-use-cases",

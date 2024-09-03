@@ -242,7 +242,12 @@ export const ProductOS = () => {
                                     color="seagreen"
                                     icon={<IconToggle />}
                                 />
-                                <ProductIcon name="A/B testing" url="/ab-testing" color="purple" icon={<IconFlask />} />
+                                <ProductIcon
+                                    name="Experiments"
+                                    url="/experiments"
+                                    color="purple"
+                                    icon={<IconFlask />}
+                                />
                                 <ProductIcon name="CDP" url="/cdp" color="yellow" icon={<IconPerson />} />
                                 <ProductIcon
                                     name="Data warehouse"

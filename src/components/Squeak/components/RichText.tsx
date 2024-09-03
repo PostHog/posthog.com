@@ -244,7 +244,7 @@ export default function RichText({
                     {buttons.map((button, index) => {
                         return (
                             <li key={index}>
-                                <Tooltip content={button.tooltipContent}>
+                                <Tooltip content={button.tooltipContent} placement="top">
                                     <button
                                         className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative"
                                         onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}

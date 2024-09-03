@@ -259,7 +259,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                             <Link to="/product-analytics#pricing">Product analytics</Link> |{' '}
                             <Link to="/session-replay#pricing">Session replay</Link> |{' '}
                             <Link to="/feature-flags#pricing">Feature flags</Link> |{' '}
-                            <Link to="/ab-testing#pricing">A/B testing</Link> |{' '}
+                            <Link to="/experiments#pricing">Experiments</Link> |{' '}
                             <Link to="/surveys#pricing">Surveys</Link>
                         </p>
                     </div>

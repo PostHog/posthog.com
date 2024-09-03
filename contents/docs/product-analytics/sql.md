@@ -475,7 +475,7 @@ Types (and names) for the accessible data can be found in the [database](https:/
 - `JSON` (accessible with dot or bracket notation)
 - `DATETIME`(in `ISO 8601`, [read more in our data docs](/docs/data/timestamps))
 - `INTEGER`
-- `NUMERIC`(AKA float)
+- `FLOAT`
 - `BOOLEAN`
 
 For example:

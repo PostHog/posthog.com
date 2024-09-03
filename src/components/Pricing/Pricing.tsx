@@ -471,7 +471,7 @@ const tabContent = {
     Analytics: TabPA,
     'Session replay': TabSR,
     'Feature flags': TabFF,
-    'A/B testing': TabFF,
+    Experiments: TabFF,
     Surveys: TabSurveys,
     'Data warehouse': TabDW,
 }
@@ -829,6 +829,7 @@ const PricingExperiment = ({
     groupsToShow: undefined | string[]
     currentProduct?: string | null
 }): JSX.Element => {
+    console.log(currentProduct)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const {
         allProductData: {

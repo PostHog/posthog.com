@@ -6,7 +6,12 @@ import Tooltip from 'components/Tooltip'
 import { IconInfo } from '@posthog/icons'
 import { child, container } from 'components/CallToAction'
 
-export const NewsletterForm = ({ className = '' }): JSX.Element => {
+interface NewsletterFormProps {
+    className?: string
+    placement?: string
+}
+
+export const NewsletterForm = ({ className = '', placement }: NewsletterFormProps): JSX.Element => {
     const { user } = useUser()
     const posthog = usePostHog()
     const [email, setEmail] = useState('')
@@ -18,6 +23,15 @@ export const NewsletterForm = ({ className = '' }): JSX.Element => {
         setSubmitted(true)
     }
 
+    const placementClasses =
+        placement === 'middle'
+            ? 'border-y !mt-10 !mb-6 xs:!my-6 !py-4'
+            : placement === 'blog-index'
+            ? 'border-0 pt-8'
+            : placement === 'community'
+            ? 'border-0'
+            : 'border-y !mt-6 !mb-0 !py-4'
+
     useEffect(() => {
         if (user?.email) {
             setEmail(user.email)
@@ -26,21 +40,31 @@ export const NewsletterForm = ({ className = '' }): JSX.Element => {
 
     return (
         <div
-            className={`newsletter-form flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 py-8 md:py-12 ${className}`}
+            className={`
+                flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 border-light dark:border-dark ${placementClasses} ${className}`}
         >
-            <div className="text-center">
+            <div className="text-center hidden md:block">
                 <StaticImage
-                    src="../../images/newsletter-signup.png"
+                    src="../../images/swole-hog.png"
                     objectFit="contain"
-                    className="w-full h-full max-w-[200px] mx-auto flex-shrink-0"
+                    className="w-full h-full max-w-[200px] md:max-w-[250px] mx-auto flex-shrink-0"
                 />
             </div>
             <div className="w-full max-w-md">
                 {!submitted ? (
                     <>
-                        <p className="text-sm opacity-50 !m-0">Subscribe to our newsletter</p>
-                        <h4 className="relative text-2xl !m-0">Product for Engineers</h4>
-                        <p className="m-0 text-[15px]">Helping engineers and founders flex their product muscles</p>
+                        <div className="float-right md:hidden -mt-6 2xs:-mt-12">
+                            <StaticImage
+                                src="../../images/swole-hog.png"
+                                objectFit="contain"
+                                className="w-full h-full max-w-[170px]"
+                            />
+                        </div>
+                        <p className="!text-sm opacity-50 !m-0">Subscribe to our newsletter</p>
+                        <h4 className="relative !text-2xl !m-0 !leading-tight">Product for Engineers</h4>
+                        <p className="!m-0 !text-sm md:!text-[15px] !leading-normal !pt-1">
+                            Helping engineers and founders flex their product muscles
+                        </p>
                         <div className="">
                             <form
                                 onSubmit={handleSubmit}
@@ -58,21 +82,24 @@ export const NewsletterForm = ({ className = '' }): JSX.Element => {
                                     <span className={child(undefined, undefined, undefined, 'md')}>Subscribe</span>
                                 </button>
                             </form>
-                            <p className="text-sm opacity-50 text-center md:text-left">
-                                We'll share your email with Substack
-                                <Tooltip
-                                    content="Substack's embed form isn't very pretty, so we made our own. But we need to let you know we'll subscribe you on your behalf. Thanks in advance!"
-                                    tooltipClassName="max-w-md"
-                                >
-                                    <IconInfo className="w-4 h-4 inline-block ml-1" />
-                                </Tooltip>
+                            <p className="!text-sm opacity-50 text-center md:text-left !mb-0">
+                                We'll share your email with{' '}
+                                <span className="whitespace-nowrap">
+                                    Substack
+                                    <Tooltip
+                                        content="Substack's embed form isn't very pretty, so we made our own. But we need to let you know we'll subscribe you on your behalf. Thanks in advance!"
+                                        tooltipClassName="max-w-md"
+                                    >
+                                        <IconInfo className="w-4 h-4 inline-block ml-1" />
+                                    </Tooltip>
+                                </span>
                             </p>
                         </div>
                     </>
                 ) : (
                     <div className="bg-accent dark:bg-accent-dark border border-border dark:border-dark px-6 py-4 rounded-md">
                         <h3 className="text-lg font-bold m-0">Thanks for subscribing!</h3>
-                        <p className="m-0 opacity-60">
+                        <p className="m-0 opacity-75 !leading-normal !text-[15px]">
                             Keep an eye out for our next edition of{' '}
                             <strong>
                                 <em>Product for Engineers</em>

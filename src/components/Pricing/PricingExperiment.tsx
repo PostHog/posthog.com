@@ -378,7 +378,7 @@ const PricingExperiment = (): JSX.Element => {
                                 icon={<Icons.IconToggle className="text-seagreen size-5" />}
                             />
                             <FreeTierItem
-                                name="A/B testing"
+                                name="Experiments"
                                 description="Billed with feature flags"
                                 icon={<Icons.IconFlask className="text-purple size-5" />}
                             />

@@ -23,7 +23,7 @@ You can use tags from the Founder's hub in product engineer posts, and vice vers
 
 ## Product engineer's hub
 
-- AB testing
+- Experiments
 - Feature management
 - Growth engineering
 - Product analytics
@@ -48,6 +48,7 @@ You can use tags from the Founder's hub in product engineer posts, and vice vers
 - experimentation (labeled A/B testing on website)
 - surveys
 - cdp
+- AI engineering
 
 Note, there are other tags we've used in the past here, but they're largely optional.
 

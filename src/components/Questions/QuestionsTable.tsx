@@ -97,14 +97,20 @@ const Row = ({
     fetchMore,
     showStatus = true,
 }) => {
-    const { isModerator, notifications } = useUser()
+    const { isModerator, notifications, user } = useUser()
     const {
         id,
         attributes: { profile, subject, permalink, replies, createdAt, resolved, topics, activeAt, body },
     } = question
 
     const latestAuthor = replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
-    const numReplies = replies?.data?.length || 0
+    const isOP = profile?.data?.id === user?.profile?.id
+    const numReplies =
+        replies?.data?.filter((reply) =>
+            reply.attributes.profile?.data?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
+                ? reply.attributes.helpful || isOP
+                : true
+        ).length || 0
 
     const { ref, inView } = useInView({
         threshold: 0,

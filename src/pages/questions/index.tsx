@@ -68,7 +68,7 @@ export default function Questions() {
     })
 
     const topicsNav = useTopicsNav()
-
+    console.log(topicsNav)
     return (
         <CommunityLayout menu={topicsNav} title="Questions" contentWidth="100%">
             <div className="space-y-8 pb-12">
@@ -76,7 +76,7 @@ export default function Questions() {
                     <div className="w-full sm:flex items-center mb-8">
                         <h1 className="text-4xl m-0">Community questions</h1>
                         <div className="ml-auto sm:mt-0 mt-4">
-                            <QuestionForm showTopicSelector onSubmit={() => refresh()} />
+                            <QuestionForm showTopicSelector />
                         </div>
                     </div>
                     <SidebarSearchBox filter="question" />
