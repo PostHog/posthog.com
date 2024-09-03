@@ -270,7 +270,7 @@ const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) =
 
     const messages = [
         "This usually takes less than 30 seconds.",
-        "Searching docs, tutorials, blogs, community questions...",
+        "Searching docs, tutorials, GitHub issues, blogs, community answers...",
         "We'll only show an answer if we're confident it's right!",
         "Thanks for your patience! Should be done shortly...",
         "P.S. Have you checked out our merch store?"
