@@ -805,6 +805,11 @@ const PricingExperiment = ({
                                 more projects. You still keep the same monthly free volume, even after upgrading.
                             </p>
 
+                            <p>
+                                <strong>You don't even need to compare prices.</strong> We are the cheapest solution for
+                                each product we offer.
+                            </p>
+
                             <div className="inline-block">
                                 <div className="flex justify-between items-end gap-4">
                                     <div>
@@ -940,6 +945,34 @@ const PricingExperiment = ({
                     <SectionLayout>
                         <SectionHeader>
                             <h3 id="calculator">Pricing calculator</h3>
+                            <div className="rounded bg-red dark:bg-accent-dark p-4 -mt-2 mb-4 flex gap-4 text-white">
+                                <div>
+                                    <svg
+                                        className="size-10 fill-current"
+                                        width="100pt"
+                                        height="100pt"
+                                        version="1.1"
+                                        viewBox="0 0 100 100"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <g>
+                                            <path d="m34.898 13.602l-21.199 21.199v30.301l21.301 21.297h30.301l21.199-21.199v-30.699l-20.898-20.898zm33.203 32.098c1.1992 0.80078 1.8008 2.3008 1.3984 3.6992-0.19922 0.5-3.6992 17.801-11.102 19.602v3c0 1.8008-1.1992 3.3008-3 3.6016-1.3984 0.30078-4.8008 0.5-7 0.5-2.1016 0-3.8984-0.19922-5.1992-0.5-1.6992-0.30078-2.8984-1.8008-2.8984-3.6016v-2.8984c-3.6992-2-5.3008-6.1016-5.3008-14.199v-0.39844-0.10156-19c0-1.5 1.1992-2.6016 2.6016-2.6016h0.19922c1.5 0 2.6016 1.1992 2.6016 2.6016v9.8984c0 0.30078 0.30078 0.60156 0.60156 0.5 0.30078 0 0.5-0.30078 0.5-0.60156l-0.003906-16c0-1.5 1.1992-2.6016 2.6016-2.6016h0.19922c1.5 0 2.6016 1.1992 2.6016 2.6016v16.301c0 0.30078 0.19922 0.60156 0.60156 0.60156h0.19922c0.30078 0 0.60156-0.19922 0.60156-0.60156v-19c0-1.5 1.1992-2.6016 2.6016-2.6016h0.19922c1.5 0 2.6016 1.1992 2.6016 2.6016v19c0 0.30078 0.19922 0.60156 0.60156 0.60156h0.10156c0.30078 0 0.60156-0.19922 0.60156-0.60156l-0.011719-14.602c0-1.5 1.1992-2.6016 2.6016-2.6016l0.39844 0.003906c1.5 0 2.6016 1.1992 2.6016 2.6016v20.301c0 0.39844 0.60156 0.60156 0.80078 0.19922l1.8984-4.1992c0.19922-0.60156 0.60156-1.1016 1.1016-1.3984 1.0977-0.80469 2.4961-0.80469 3.6992-0.10547z" />
+                                            <path d="m69.199 5h-37.898l-26.199 26.301v37.398l26.297 26.301h37.5l26.199-26.199 0.003906-37.902zm21.602 62l-23.699 23.699h-33.902l-23.801-23.801v-33.797l23.703-23.801h34.301l23.398 23.398z" />
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div className="flex-1">
+                                    <h4 className="text-lg mb-0">
+                                        Trying to see if we're cheaper than your current software?{' '}
+                                        <em className="underline">Stop!!</em>
+                                    </h4>
+                                    <p className="mb-0 text-[15px]">
+                                        Our pricing is <strong>intentionally designed</strong> to be cheaper than
+                                        everyone else.{' '}
+                                        <strong className="underline">Your won't pay more with PostHog.</strong>
+                                    </p>
+                                </div>
+                            </div>
                         </SectionHeader>
                         <Tabbed />
 
