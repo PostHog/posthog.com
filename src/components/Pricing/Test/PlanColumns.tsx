@@ -203,11 +203,10 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                 <div className="mt-4 -mx-4 lg:mx-0 px-4 lg:px-0 mb-4 lg:mb-0 overflow-x-auto">
                     <div className="pt-6 pb-2">
                         <div
-                            className={`grid grid-cols-[repeat(3,_minmax(300px,_1fr))] md:grid-cols-[repeat(3,_minmax(300px,_1fr))_1fr] gap-4 mb-4 ${
-                                highlight === 'free'
+                            className={`grid grid-cols-[repeat(3,_minmax(300px,_1fr))] md:grid-cols-[repeat(3,_minmax(300px,_1fr))_1fr] gap-4 mb-4 ${highlight === 'free'
                                     ? '[&>*:nth-child(1)_>div]:border-yellow [&>*:nth-child(1)_>div]:border-3'
                                     : '[&>*:nth-child(2)_>div]:border-yellow [&>*:nth-child(2)_>div]:border-3'
-                            }`}
+                                }`}
                         >
                             {planSummary.map((plan, index) => (
                                 <Plan key={index} planData={plan} />
@@ -239,11 +238,10 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                 </p>
 
                 <div
-                    className={`${
-                        isPlanComparisonVisible
+                    className={`${isPlanComparisonVisible
                             ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
                             : 'overflow-y-hidden invisible max-h-0 opacity-0'
-                    } transition duration-500 ease-in-out transform`}
+                        } transition duration-500 ease-in-out transform`}
                 >
                     <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark px-4 py-3 mb-4 rounded">
                         <p className="mb-2 text-[15px]">
@@ -259,7 +257,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                             <Link to="/product-analytics#pricing">Product analytics</Link> |{' '}
                             <Link to="/session-replay#pricing">Session replay</Link> |{' '}
                             <Link to="/feature-flags#pricing">Feature flags</Link> |{' '}
-                            <Link to="/ab-testing#pricing">A/B testing</Link> |{' '}
+                            <Link to="/experiments#pricing">A/B testing</Link> |{' '}
                             <Link to="/surveys#pricing">Surveys</Link>
                         </p>
                     </div>

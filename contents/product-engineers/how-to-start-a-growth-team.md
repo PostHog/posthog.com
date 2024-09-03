@@ -10,7 +10,7 @@ tags:
   - Product metrics
   - Growth engineering
   - Product engineers
-  - AB testing
+  - Experiments
 crosspost:
   - Blog
 ---

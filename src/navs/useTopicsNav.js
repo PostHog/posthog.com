@@ -45,5 +45,7 @@ export default function useTopicsNav() {
             })
         })
 
+    console.log(nav)
+
     return nav
 }

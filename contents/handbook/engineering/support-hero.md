@@ -98,6 +98,12 @@ You've got a couple of options.  By order of quickness:
    Click the org name near the upper-left of the ticket. The left sidebar opens. 
    There you'll see which plan they're on. If they've already paid some bills, you'll also see MRR there.
 
+### How will I know if a ticket is nearing a breach of our SLA targets?
+
+Alerts are posted to Slack for every team which has a "group" in Zendesk.  The alerts are posted to the `support-` channel for the team (or the `team-` channel for the team if the team has no `support-` channel.)
+
+Alerts are posted for a ticket 3 hours before it breaches the next SLA. If the ticket remains untouched an hour later, another alert will be posted at 2 hours before it breaches an SLA, and again 1 hour before it breaches an SLA. The maximum number of alerts that will be posted for a single ticket is 3. (You can remove the `sla-warning` tags from a ticket if you want the alerts to be sent again for that ticket.)
+
 ## How should I handle self-hosted setups?
 
 It's fine to politely direct users to the docs for [self-serve open-source support](/docs/self-host/open-source/support#support-for-open-source-deployments-of-posthog) and ask them to file a GitHub issue if they believe something is broken in the docs or deployment setup. We do not otherwise provide support for self-hosted PostHog.
