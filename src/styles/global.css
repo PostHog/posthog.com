@@ -1496,7 +1496,7 @@ li.squeak-left-border {
     }
 
     pre {
-        @apply text-base my-3 overflow-scroll p-4 text-[15px];
+        @apply text-base my-3 overflow-auto p-4 text-[15px];
     }
 
     h1 {
