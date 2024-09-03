@@ -24,9 +24,9 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                         ...addon,
                         totalCost: checked
                             ? calculatePrice(
-                                  inclusion_only ? (percentage / 100) * volume : volume,
-                                  plans[plans.length - 1].tiers
-                              ).total
+                                inclusion_only ? (percentage / 100) * volume : volume,
+                                plans[plans.length - 1].tiers
+                            ).total
                             : 0,
                     }
                 }
@@ -128,7 +128,7 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                 }) ||
                     (activeProduct.name == 'Experiments' ? (
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-4 py-3 mb-2 text-sm">
-                            Experiments are currently bundled with Feature flags and share a free tier and volume
+                            Experiments is currently bundled with Feature flags and share a free tier and volume
                             pricing.
                         </div>
                     ) : (
@@ -332,11 +332,10 @@ export default function Tabbed() {
                                 <li key={name} className="flex-1">
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
-                                            active
+                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${active
                                                 ? 'font-bold bg-accent dark:bg-accent-dark'
                                                 : 'hover:bg-accent dark:hover:bg-accent/15'
-                                        }`}
+                                            }`}
                                     >
                                         <div className="flex items-center space-x-2">
                                             <span>
