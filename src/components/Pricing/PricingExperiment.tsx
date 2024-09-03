@@ -355,7 +355,7 @@ const tabContent = {
     'Product analytics': TabPA,
     'Session replay': TabSR,
     'Feature flags': TabFF,
-    'A/B testing': TabFF,
+    Experiments: TabFF,
     Surveys: TabSurveys,
 }
 
@@ -898,7 +898,7 @@ const PricingExperiment = ({
                                         icon={<Icons.IconToggle className="text-seagreen size-5" />}
                                     />
                                     <FreeTierItem
-                                        name="A/B testing"
+                                        name="Experiments"
                                         description="Billed with feature flags"
                                         icon={<Icons.IconFlask className="text-purple size-5" />}
                                     />

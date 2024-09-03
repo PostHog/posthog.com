@@ -158,7 +158,8 @@ const Discounts = () => (
                 <IconHandMoney className="size-5 absolute left-0 top-4.5 opacity-50" />
                 <strong>Nonprofit</strong>
                 <p className="text-[15px] mb-2">
-                    Are you a nonprofit? You can save more! Get in touch through the app after signing up and we'll give you an additional discount.
+                    Are you a nonprofit? You can save more! Get in touch through the app after signing up and we'll give
+                    you an additional discount.
                 </p>
             </li>
         </ul>
@@ -470,7 +471,7 @@ const tabContent = {
     Analytics: TabPA,
     'Session replay': TabSR,
     'Feature flags': TabFF,
-    'A/B testing': TabFF,
+    Experiments: TabFF,
     Surveys: TabSurveys,
     'Data warehouse': TabDW,
 }
@@ -828,6 +829,7 @@ const PricingExperiment = ({
     groupsToShow: undefined | string[]
     currentProduct?: string | null
 }): JSX.Element => {
+    console.log(currentProduct)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const {
         allProductData: {
@@ -866,7 +868,7 @@ const PricingExperiment = ({
                         <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">
                             {currentProduct
                                 ? billingProducts.find((p: BillingProductV2Type) => p.type === currentProduct)?.name ||
-                                  (currentProduct == 'ab_testing' && 'A/B testing') ||
+                                  currentProduct === 'experiments' ||
                                   'Product'
                                 : 'Usage-based'}{' '}
                             pricing

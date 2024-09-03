@@ -34,7 +34,7 @@ const quickLinks = [
     },
     {
         icon: 'IconFlask',
-        name: 'A/B testing',
+        name: 'Experiments',
         to: '/docs/experiments',
         description: 'A/B test UI changes and new features',
         color: 'purple',

@@ -818,7 +818,7 @@ export const communityMenu = {
             name: 'Posts',
             icon: 'IconBook',
             color: 'red',
-            url: 'https://posthog.com/posts',
+            url: '/posts',
         },
         {
             name: 'Questions',
@@ -830,7 +830,7 @@ export const communityMenu = {
             name: 'Guides',
             icon: 'IconMap',
             color: 'red',
-            url: 'https://posthog.com/tutorials',
+            url: '/tutorials',
             children: [
                 {
                     name: 'All guides',
@@ -892,7 +892,7 @@ export const communityMenu = {
                     url: '/tutorials/categories/feature-flags',
                 },
                 {
-                    name: 'A/B testing',
+                    name: 'Experiments',
                     icon: 'IconFlask',
                     color: 'purple',
                     url: '/tutorials/categories/experimentation',
@@ -2447,13 +2447,13 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'A/B testing',
+            name: 'Experiments',
             icon: 'IconFlask',
             color: 'purple',
             url: '/docs/experiments',
             children: [
                 {
-                    name: 'A/B testing',
+                    name: 'Experiments',
                 },
                 {
                     name: 'Overview',
@@ -3022,10 +3022,10 @@ export const pricingMenu = {
             url: '/pricing?product=feature-flags',
         },
         {
-            name: 'A/B testing',
+            name: 'Experiments',
             icon: 'IconFlask',
             color: 'purple',
-            url: '/pricing?product=ab-testing',
+            url: '/pricing?product=experiments',
         },
         {
             name: 'Surveys',
@@ -3079,10 +3079,10 @@ const menu = [
                 url: '/feature-flags',
             },
             {
-                name: 'A/B testing',
+                name: 'Experiments',
                 icon: 'IconFlask',
                 color: 'purple',
-                url: '/ab-testing',
+                url: '/experiments',
             },
             {
                 name: 'Surveys',

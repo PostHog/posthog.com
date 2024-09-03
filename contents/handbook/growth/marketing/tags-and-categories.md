@@ -23,7 +23,7 @@ You can use tags from the Founder's hub in product engineer posts, and vice vers
 
 ## Product engineer's hub
 
-- AB testing
+- Experiments
 - Feature management
 - Growth engineering
 - Product analytics

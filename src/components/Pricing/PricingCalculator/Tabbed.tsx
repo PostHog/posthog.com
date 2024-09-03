@@ -126,9 +126,9 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                     setAddons,
                     addons,
                 }) ||
-                    (activeProduct.name == 'A/B testing' ? (
+                    (activeProduct.name == 'Experiments' ? (
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-4 py-3 mb-2 text-sm">
-                            A/B testing is currently bundled with Feature flags and shares a free tier and volume
+                            Experiments are currently bundled with Feature flags and share a free tier and volume
                             pricing.
                         </div>
                     ) : (
@@ -344,7 +344,7 @@ export default function Tabbed() {
                                             </span>
                                             <span>{name}</span>
                                         </div>
-                                        {name == 'A/B testing' ? (
+                                        {name == 'Experiments' ? (
                                             <span className="opacity-25">--</span>
                                         ) : (
                                             <div className="opacity-70 pl-5 md:pl-0">
@@ -360,7 +360,7 @@ export default function Tabbed() {
                 <div className="md:col-span-8 lg:col-span-9 md:pl-0">
                     <div className="flex space-x-12 justify-between items-center mb-2">
                         <h3 className="m-0 text-lg">Estimate your price</h3>
-                        {!activeProduct.name == 'A/B testing' && (
+                        {!activeProduct.name == 'Experiments' && (
                             <p className="m-0 opacity-70 text-sm font-bold pr-3">Subtotal</p>
                         )}
                     </div>

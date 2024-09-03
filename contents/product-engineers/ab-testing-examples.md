@@ -7,7 +7,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
 tags:
-  - AB testing
+  - Experiments
   - Y Combinator
   - Product engineers
 ---

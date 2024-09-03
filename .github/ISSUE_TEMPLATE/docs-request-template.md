@@ -22,7 +22,7 @@ assignees: andyvan-ph
 - [ ] Product analytics
 - [ ] Session replay
 - [ ] Feature flags
-- [ ] A/B testing
+- [ ] Experiments
 - [ ] Surveys
 - [ ] CDP
 - [ ] Data warehouse

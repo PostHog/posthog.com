@@ -28,8 +28,8 @@ const linklist: IProps[] = [
                 url: '/feature-flags',
             },
             {
-                title: 'A/B testing',
-                url: '/ab-testing',
+                title: 'Experiments',
+                url: '/experiments',
             },
             {
                 title: 'Surveys',
@@ -120,7 +120,7 @@ const linklist: IProps[] = [
                 url: '/docs/feature-flags',
             },
             {
-                title: 'A/B testing',
+                title: 'Experiments',
                 url: '/docs/experiments',
             },
             {

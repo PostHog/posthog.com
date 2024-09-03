@@ -40,7 +40,7 @@ export const tiers = [
     },
     {
         icon: <IconFlask className="text-purple" />,
-        title: 'A/B testing',
+        title: 'Experiments',
         children: <>content</>,
     },
     {
