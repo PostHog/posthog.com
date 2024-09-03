@@ -1336,7 +1336,7 @@
         },
         {
             "source": "/pricing",
-            "destination": "/ab-testing#pricing",
+            "destination": "/experiments#pricing",
             "has": [{ "type": "query", "key": "product", "value": "ab-testing" }]
         },
         {

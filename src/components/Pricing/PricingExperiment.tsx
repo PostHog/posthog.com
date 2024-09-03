@@ -317,11 +317,10 @@ const PricingExperiment = (): JSX.Element => {
                             <li>
                                 <button
                                     onClick={handleFreePlanClick}
-                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
-                                        activePlan === 'free'
+                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${activePlan === 'free'
                                             ? 'border-yellow bg-white dark:bg-white/5'
                                             : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
-                                    }`}
+                                        }`}
                                 >
                                     <strong className="whitespace-nowrap">Totally free</strong>
                                     <span className="text-sm opacity-75 whitespace-nowrap">
@@ -332,11 +331,10 @@ const PricingExperiment = (): JSX.Element => {
                             <li>
                                 <button
                                     onClick={handlePaidPlanClick}
-                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
-                                        activePlan === 'free'
+                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${activePlan === 'free'
                                             ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
                                             : 'border-yellow bg-white dark:bg-white/5'
-                                    }`}
+                                        }`}
                                 >
                                     <strong className="whitespace-nowrap">Ridiculously cheap</strong>
                                     <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
@@ -348,11 +346,10 @@ const PricingExperiment = (): JSX.Element => {
                     <div className="border-t border-light dark:border-dark mt-4 pt-4 h-px"></div>
 
                     <div
-                        className={`@container transition-all rounded-md border ${
-                            animateFreeTiers
+                        className={`@container transition-all rounded-md border ${animateFreeTiers
                                 ? 'animate-flash bg-[#FAE9CE] dark:bg-[#463B2A] border-yellow -mx-2 -mt-1 px-2 pt-1'
                                 : 'bg-transparent border-transparent'
-                        }`}
+                            }`}
                         onAnimationEnd={() => setAnimateFreeTiers(false)}
                     >
                         <div className="flex items-baseline gap-1 mb-3">
@@ -378,7 +375,7 @@ const PricingExperiment = (): JSX.Element => {
                                 icon={<Icons.IconToggle className="text-seagreen size-5" />}
                             />
                             <FreeTierItem
-                                name="A/B testing"
+                                name="Experiments"
                                 description="Billed with feature flags"
                                 icon={<Icons.IconFlask className="text-purple size-5" />}
                             />
