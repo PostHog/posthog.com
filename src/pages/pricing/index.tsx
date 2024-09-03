@@ -11,7 +11,7 @@ const internalProductNames: {
     'product-analytics': 'product_analytics',
     'session-replay': 'session_replay',
     'feature-flags': 'feature_flags',
-    'ab-testing': 'ab_testing',
+    experiments: 'experiments',
     surveys: 'surveys',
     'data-warehouse': 'data_warehouse',
 }
@@ -19,7 +19,7 @@ const internalProductNames: {
 const pricingGroupsToShowOverride: {
     [key: keyof typeof internalProductNames]: string[]
 } = {
-    'ab-testing': ['feature_flags'],
+    experiments: ['feature_flags'],
 }
 
 const Skeleton = () => {

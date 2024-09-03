@@ -114,7 +114,7 @@ export const SimilarProducts = () => {
                     <strong className="text-center py-2 px-4 whitespace-nowrap">Web analytics</strong>
                     <strong className="text-center py-2 px-4 whitespace-nowrap">Session replay</strong>
                     <strong className="text-center py-2 px-4 whitespace-nowrap">Feature flags</strong>
-                    <strong className="text-center py-2 px-4 whitespace-nowrap">A/B testing</strong>
+                    <strong className="text-center py-2 px-4 whitespace-nowrap">Experiments</strong>
                     <strong className="text-center py-2 px-4 whitespace-nowrap">Surveys</strong>
                     <strong className="text-center py-2 px-4 whitespace-nowrap">Data warehouse</strong>
                 </div>

@@ -67,7 +67,7 @@ const fields: {
         options: [
             { value: 'Product Analytics', hubspotValue: 'Product Analytics' },
             { value: 'Session Replay', hubspotValue: 'Session Replay' },
-            { value: 'A/B Testing + Feature Flags', hubspotValue: 'A/B Testing + Feature Flags' },
+            { value: 'Experiments + Feature Flags', hubspotValue: 'A/B Testing + Feature Flags' },
             { value: 'Web Analytics', hubspotValue: 'Web Analytics' },
             { value: 'Surveys', hubspotValue: 'Surveys' },
             { value: 'Data Warehouse', hubspotValue: 'Data Warehouse' },

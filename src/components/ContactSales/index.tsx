@@ -163,8 +163,8 @@ export default function ContactSales({ location }) {
                                                 value: 'Product Analytics',
                                             },
                                             {
-                                                label: 'A/B Testing (Feature Flags)',
-                                                value: 'A/B Testing (Feature Flags)',
+                                                label: 'Experiments (Feature Flags)',
+                                                value: 'Experiments (Feature Flags)',
                                             },
                                             {
                                                 label: 'Session Replay',
