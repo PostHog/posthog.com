@@ -268,6 +268,31 @@ const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) =
     const alreadyAsked = useMemo(() => question?.attributes?.askedMax, [])
     const { getJwt } = useUser()
 
+    const messages = [
+        "This usually takes less than 30 seconds.",
+        "Searching docs, tutorials, blogs, community questions...",
+        "We'll only show an answer if we're confident it's right!",
+        "Thanks for your patience! Should be done shortly...",
+        "P.S. Have you checked out our merch store?"
+    ]
+
+    const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
+    const [fadeState, setFadeState] = useState('in')
+
+    useEffect(() => {
+        if (loading) {
+            const intervalId = setInterval(() => {
+                setFadeState('out')
+                setTimeout(() => {
+                    setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length)
+                    setFadeState('in')
+                }, 500) // Wait for fade out before changing message
+            }, 5000)
+
+            return () => clearInterval(intervalId)
+        }
+    }, [loading])
+
     useEffect(() => {
         const askMax = async () => {
             try {
@@ -303,8 +328,8 @@ const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) =
                             <p className="!mt-1 !mb-0 !pb-0">
                                 <strong>Hang tight, checking to see if we can find an answer for you...</strong>
                             </p>
-                            <p className="text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1">
-                                This usually takes less than 30 seconds.
+                            <p className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${fadeState === 'out' ? 'opacity-0' : 'opacity-100'}`}>
+                                {messages[currentMessageIndex]}
                             </p>
                         </div>
                     </div>
