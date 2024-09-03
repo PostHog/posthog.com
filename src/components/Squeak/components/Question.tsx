@@ -231,7 +231,7 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
             className={`pr-[5px] pl-[30px] pb-2 !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
         >
             <Tooltip content={() => <div className="text-sm max-w-64">Max AI is our resident AI assistant. Double-check responses for accuracy.</div>} placement="top">
-                <div className="relative">
+                <div className="relative inline-block">
                     <div className="flex items-center !text-black dark:!text-white">
                         <div className="mr-2 relative">
                             <Avatar
