@@ -94,7 +94,7 @@ To know whether your sample size is large enough, you'll need to know:
 
 3. **Your desired level of confidence.** The industry standard is 95%.
 
-You then use a [sample size determination formula](https://en.wikipedia.org/wiki/Sample_size_determination) to determine if your sample size is large enough. There are many calculators online that will do this for you, so you can avoid calculating this yourself – [A/B tests in PostHog](/ab-testing) calculate this for you automatically.
+You then use a [sample size determination formula](https://en.wikipedia.org/wiki/Sample_size_determination) to determine if your sample size is large enough. There are many calculators online that will do this for you, so you can avoid calculating this yourself – [A/B tests in PostHog](/experiments) calculate this for you automatically.
 
 ### 5. A long enough test duration
 

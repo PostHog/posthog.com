@@ -27,7 +27,7 @@ This success is largely because Wowzer's product and growth teams are incredibly
 
 ## Rapid experimentation and instant insights
 
-Wowzer is continuously tweaking and [experimenting](/ab-testing) with pricing strategies and features on their platform. The ability to dive deep into real-time results enables quick decisions that significantly impact conversion and engagement.
+Wowzer is continuously tweaking and [experimenting](/experiments) with pricing strategies and features on their platform. The ability to dive deep into real-time results enables quick decisions that significantly impact conversion and engagement.
 
 "For example, we weren't sure what effect moving our DALL-E model from our free to paid tier would have. We ran an experiment and we saw our conversion rate increased by 10%. Not only that, we saw that the average time to conversion decreased from two days to under four hours, and that the number of sessions per user increased," shares Amin.
 

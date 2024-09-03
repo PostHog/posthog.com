@@ -11,7 +11,7 @@ tags:
   - feature flags
 ---
 
-A/B testing enables you to experiment with how changes to your app affect metrics you care about. PostHog makes it easy to set up [A/B tests](/ab-testing) in Python. This tutorial shows you how to create a basic Python app with Flask, add PostHog to it, and then set up an A/B test to compare button variants.
+A/B testing enables you to experiment with how changes to your app affect metrics you care about. PostHog makes it easy to set up [A/B tests](/experiments) in Python. This tutorial shows you how to create a basic Python app with Flask, add PostHog to it, and then set up an A/B test to compare button variants.
 
 ## Creating a basic Flask app
 
