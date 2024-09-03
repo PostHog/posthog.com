@@ -20,7 +20,7 @@ type ReplyProps = {
     className?: string
 }
 
-const AIDisclaimer = ({ replyID, refresh }) => {
+const AIDisclaimer = ({ replyID, refresh, topic }) => {
     const posthog = usePostHog()
     const { getJwt } = useUser()
     const { handleResolve } = useContext(CurrentQuestionContext)
@@ -32,6 +32,10 @@ const AIDisclaimer = ({ replyID, refresh }) => {
             posthog?.capture('Community AI reply', {
                 replyID,
                 helpful,
+                topic: {
+                    label: topic?.attributes?.label,
+                    id: topic?.id,
+                },
             })
 
             await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${replyID}`, {
@@ -143,30 +147,38 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
     return profile?.data ? (
         <div onClick={handleContainerClick}>
             <div className="pb-1 flex items-center space-x-2">
-                {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) ? <Tooltip content={() => <div className="text-sm max-w-64">Max AI is our resident AI assistant. Double-check responses for accuracy.</div>} placement="top">
-                    <div className="relative">
-                        <Link
-                            className="flex items-center !text-black dark:!text-white"
-                            to={`/community/profiles/${profile.data.id}`}
-                        >
-                            <div className="mr-2 relative">
-                                <Avatar
-                                    className="w-[25px] h-[25px] rounded-full"
-                                    image={getAvatarURL(profile?.data?.attributes)}
-                                />
-                                {isTeamMember && (
-                                    <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
-                                        <Logomark className="w-[16px]" />
-                                    </span>
-                                )}
+                {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) ? (
+                    <Tooltip
+                        content={() => (
+                            <div className="text-sm max-w-64">
+                                Max AI is our resident AI assistant. Double-check responses for accuracy.
                             </div>
-                            <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
-                            {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
-                            <IconFeatures className="size-5 ml-1 text-primary opacity-50 inline-block" />
-                        </Link>
-                    </div>
-                </Tooltip>
-                    :
+                        )}
+                        placement="top"
+                    >
+                        <div className="relative">
+                            <Link
+                                className="flex items-center !text-black dark:!text-white"
+                                to={`/community/profiles/${profile.data.id}`}
+                            >
+                                <div className="mr-2 relative">
+                                    <Avatar
+                                        className="w-[25px] h-[25px] rounded-full"
+                                        image={getAvatarURL(profile?.data?.attributes)}
+                                    />
+                                    {isTeamMember && (
+                                        <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
+                                            <Logomark className="w-[16px]" />
+                                        </span>
+                                    )}
+                                </div>
+                                <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
+                                {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
+                                <IconFeatures className="size-5 ml-1 text-primary opacity-50 inline-block" />
+                            </Link>
+                        </div>
+                    </Tooltip>
+                ) : (
                     <Link
                         className="flex items-center !text-black dark:!text-white"
                         to={`/community/profiles/${profile.data.id}`}
@@ -185,7 +197,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                         <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
                         {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
                     </Link>
-                }
+                )}
                 {badgeText && (
                     <span className="border border-gray-accent-light dark:border-gray-accent-dark text-xs py-0.5 px-1 rounded-sm">
                         {badgeText}
@@ -211,10 +223,15 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
 
             <div className="border-l-0 ml-[33px] pl-0 pb-1">
                 {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful === null && (
-                    <AIDisclaimer replyID={id} refresh={mutate} />
+                    <AIDisclaimer topic={topics?.data?.[0]} replyID={id} refresh={mutate} />
                 )}
                 <div className={reply?.attributes?.helpful === false ? 'opacity-70' : ''}>
-                    {reply?.attributes?.helpful === false && <div className="p-2 rounded border border-light dark:border-dark mb-2 text-sm bg-accent dark:bg-accent-dark"><IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful and is only visible to you.</div>}
+                    {reply?.attributes?.helpful === false && (
+                        <div className="p-2 rounded border border-light dark:border-dark mb-2 text-sm bg-accent dark:bg-accent-dark">
+                            <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful and is only
+                            visible to you.
+                        </div>
+                    )}
                     <Markdown>{body}</Markdown>
                 </div>
                 {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful && (
