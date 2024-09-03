@@ -109,9 +109,8 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
                                             return (
                                                 <Listbox.Option key={topic.id} value={topic}>
                                                     <div
-                                                        className={`${
-                                                            active ? 'font-semibold' : ''
-                                                        } py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-black/50 dark:text-primary-dark`}
+                                                        className={`${active ? 'font-semibold' : ''
+                                                            } py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-black/50 dark:text-primary-dark`}
                                                     >
                                                         <span className="flex-shrink-0 w-3">
                                                             {active && <Check2 />}
@@ -253,7 +252,7 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
 const Loading = () => {
     const lottieRef = useRef(null)
     return (
-        <div className="size-16">
+        <div className="size-12">
             <DotLottiePlayer loop lottieRef={lottieRef} src="/lotties/loading.lottie" autoplay />
         </div>
     )
@@ -297,10 +296,10 @@ const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) =
                             <Loading />
                         </div>
                         <div className="flex-1 font-normal question-content community-post-markdown !p-0">
-                            <p className="!my-1 !pb-0">
+                            <p className="!mt-2 !mb-1 !pb-0">
                                 <strong>Hang tight, checking to see if we can find an answer for you...</strong>
                             </p>
-                            <p className="text-primary/75 dark:text-primary-dark/75">
+                            <p className="text-primary/75 dark:text-primary-dark/75 !mb-0">
                                 This usually takes less than 30 seconds.
                             </p>
                         </div>
@@ -465,9 +464,8 @@ export const Question = (props: QuestionProps) => {
                         <Replies expanded={expanded} setExpanded={setExpanded} />
                     </div>
                     <div
-                        className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${
-                            archived ? 'opacity-25' : ''
-                        }`}
+                        className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${archived ? 'opacity-25' : ''
+                            }`}
                     >
                         <QuestionForm
                             archived={archived}
