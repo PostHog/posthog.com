@@ -56,7 +56,7 @@ const AIDisclaimer = ({ replyID, refresh }) => {
     }
 
     return (
-        <div className="p-4 border border-border dark:border-dark rounded-md bg-accent dark:bg-accent-dark mt-1 mb-3">
+        <div className="p-4 border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark mt-1 mb-3">
             {helpful === null ? (
                 <p className="m-0 text-sm">
                     <IconFeatures className="size-6 relative mr-1 -top-0.5 text-primary opacity-50 inline-block" />
@@ -64,10 +64,10 @@ const AIDisclaimer = ({ replyID, refresh }) => {
                 </p>
             ) : helpful ? (
                 <>
-                    <p className="mb-0">
+                    <p className="mb-0 -mt-1 text-[15px]">
                         <strong>Great to hear!</strong> This answer has been marked as the solution.
                     </p>
-                    <div className="text-sm border-t border-light dark:border-dark pt-2 mt-2">
+                    <div className="text-sm border-t border-light dark:border-dark pt-2 mt-2 -mb-1">
                         Response generate by{' '}
                         <Link to="https://inkeep.com?utm_source=posthog" externalNoIcon>
                             Inkeep

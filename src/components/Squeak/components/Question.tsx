@@ -230,19 +230,23 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
         <li
             className={`pr-[5px] pl-[30px] pb-2 !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
         >
-            <div className="flex items-center !text-black dark:!text-white">
-                <div className="mr-2 relative">
-                    <Avatar
-                        className="w-[25px] h-[25px] rounded-full"
-                        image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
-                    />
-                    <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
-                        <Logomark className="w-[16px]" />
-                    </span>
+            <Tooltip content={() => <div className="text-sm max-w-64">Max AI is our resident AI assistant. Double-check responses for accuracy.</div>} placement="top">
+                <div className="relative">
+                    <div className="flex items-center !text-black dark:!text-white">
+                        <div className="mr-2 relative">
+                            <Avatar
+                                className="w-[25px] h-[25px] rounded-full"
+                                image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
+                            />
+                            <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
+                                <Logomark className="w-[16px]" />
+                            </span>
+                        </div>
+                        <strong>Max AI</strong>
+                    </div>
                 </div>
-                <strong>Max</strong>
-            </div>
-            <div className="ml-[33px] py-2 px-4 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
+            </Tooltip>
+            <div className="ml-[33px] mt-1 py-2 px-4 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
                 {children}
             </div>
         </li>
@@ -296,10 +300,10 @@ const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) =
                             <Loading />
                         </div>
                         <div className="flex-1 font-normal question-content community-post-markdown !p-0">
-                            <p className="!mt-2 !mb-1 !pb-0">
+                            <p className="!mt-1 !mb-0 !pb-0">
                                 <strong>Hang tight, checking to see if we can find an answer for you...</strong>
                             </p>
-                            <p className="text-primary/75 dark:text-primary-dark/75 !mb-0">
+                            <p className="text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1">
                                 This usually takes less than 30 seconds.
                             </p>
                         </div>
