@@ -2076,9 +2076,9 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Reducing costs',
-                    url: '/docs/product-analytics/reducing-costs',
-                    icon: 'IconGraduationCap',
+                    name: 'Cutting costs',
+                    url: '/docs/product-analytics/cutting-costs',
+                    icon: 'IconPiggyBank',
                     color: 'purple',
                 },
                 {
@@ -2300,9 +2300,9 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Reducing costs',
-                    url: '/docs/session-replay/reducing-costs',
-                    icon: 'IconGraduationCap',
+                    name: 'Cutting costs',
+                    url: '/docs/session-replay/cutting-costs',
+                    icon: 'IconPiggyBank',
                     color: 'yellow',
                 },
                 {
@@ -2424,9 +2424,9 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Reducing costs',
-                    url: '/docs/feature-flags/reducing-costs',
-                    icon: 'IconGraduationCap',
+                    name: 'Cutting costs',
+                    url: '/docs/feature-flags/cutting-costs',
+                    icon: 'IconPiggyBank',
                     color: 'yellow',
                 },
                 {
@@ -2522,12 +2522,6 @@ export const docsMenu = {
                     url: '/docs/experiments/tutorials',
                     icon: 'IconGraduationCap',
                     color: 'blue',
-                },
-                {
-                    name: 'Reducing costs',
-                    url: '/docs/experiments/reducing-costs',
-                    icon: 'IconGraduationCap',
-                    color: 'yellow',
                 },
                 {
                     name: 'Methodology',
