@@ -2995,7 +2995,7 @@ export const docsMenu = {
 export const pricingMenu = {
     name: 'Pricing',
     url: '/pricing',
-    icon: 'IconCdCase',
+    icon: 'IconReceipt',
     children: [
         {
             name: 'PostHog Cloud',
