@@ -30,10 +30,10 @@ What does this mean?
 
 - It means engineers make product decisions.
 - It means our pricing is 100% transparent.  
-- It means they do support – all product teams have a [weekly support hero](/handbook/engineering/support-hero).
+- It means engineers do support – all product teams have a [weekly support hero](/handbook/engineering/support-hero).
 - It means [we ship fast](/changelog) and iterate based on user feedback. 
 - It means we work in the open – [our roadmap](/roadmap) is public, as is [our company handbook](/handbook). 
-- It means start using PostHog without ever jumping on a quick call – see [how we do sales](/sales).
+- It means you can start using PostHog without ever jumping on a "quick call" – see [how we do sales](/sales).
 
 ### 2. We're building a genuine all-in-one platform
 
@@ -76,7 +76,7 @@ We're committed to [sustainably cheap pricing](/blog/analytics-pricing) on all o
 
 There are two key differences here:
 
-1. PostHog supports autocapture, which makes it much faster to implement if you don't want to manually instrument every event. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture) and use one of our SDKs – we offer the best of both worlds.
+1. PostHog supports [autocapture](/docs/product-analytics/autocapture), which makes it much faster to implement if you don't want to manually instrument every event. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture#disabling-autocapture) and use one of our SDKs – we offer the best of both worlds.
 
 2. PostHog has a [SQL-based query builder](/docs/hogql) for power users, which enables you to generate custom data analyses using PostHog event data. In future, our query builder will let you analyze data as you would in a business intelligence tool, like Metabase, inside PostHog.
 
@@ -207,7 +207,9 @@ PostHog is consistently cheaper for both product and web analytics. In the above
 | 300k                    | $3,150               | $2,091      | <strong class="text-green">$12,708 per year cheaper</strong> |
 
 
-At each tier, PostHog is around 22% to 33% cheaper than Amplitude. Sending more than 75 identified events per MTU will increase the cost of PostHog relative to Amplitude, but we provide numerous ways to control how many events you send and recuce your costs, including the option to send cheaper **anonymous events**.
+At each tier, PostHog is around 22% to 33% cheaper than Amplitude. Sending more than 75 identified events per MTU will increase the cost of PostHog relative to Amplitude, and sending fewer events will reduce the cost. 
+
+The benefit of charging per-event is that you can control how many events you send per user by only sending important events, whereas there is less desirable control for tracking fewer _users_. We provide [numerous ways](/tutorials/fewer-unwanted-events) to control how many events you send and reduce your costs, including the option to send cheaper **anonymous events**.
 
 Anonymous events **only include non-identifying data**, such as referral data (UTMs, domains, etc), device type, and basic location information. They're cheaper for us to ingest, so we charge you between 55% and 80% less for them.
 
@@ -240,7 +242,7 @@ Anonymous events are ideal for tracking users who aren't logged in, or for use c
 | <strong class="text-15px">100-250 million</strong>  | <span class="text-[15px] font-semibold">$0.0000187</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000150</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">20% cheaper</strong> |
 | <strong class="text-15px">250+ million</strong>     | <span class="text-[15px] font-semibold">$0.0000100</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000090</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">10% cheaper</strong> |
 
-Anonymous events are the default event type. You'll only be charged the identified event rate when you call `posthog.identify`, or to capture an event from an identified user. 
+Anonymous events are the default event type. You'll only be charged the identified event rate when you call identifying functions like `posthog.identify()` or `posthog.group()`, or capture an event from an already-identified user. 
 
 See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for more on the difference between anonymous and identified events, and how you can save money when using PostHog.
 
