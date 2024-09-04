@@ -3009,12 +3009,12 @@ export const pricingMenu = {
         //     color: 'purple',
         //     url: '/events',
         // },
-        // {
-        //     name: 'Add-ons',
-        //     icon: 'IconPuzzle',
-        //     color: 'seagreen',
-        //     url: '/addons',
-        // },
+        {
+            name: 'Add-ons',
+            icon: 'IconPuzzle',
+            color: 'seagreen',
+            url: '/addons',
+        },
         {
             name: 'Pricing philosophy',
             icon: 'IconLightBulb',
