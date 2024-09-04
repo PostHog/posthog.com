@@ -27,6 +27,7 @@ import { SortDropdown } from 'components/Edition/Views/Default'
 import { sortOptions } from 'components/Edition/Posts'
 import { AnimatePresence, motion } from 'framer-motion'
 import Tooltip from 'components/Tooltip'
+import NotFoundPage from 'components/NotFoundPage'
 
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
@@ -193,7 +194,7 @@ export default function ProfilePage({ params }: PageProps) {
         }
     )
 
-    const { data, error, mutate } = useSWR<StrapiRecord<ProfileData>>(
+    const { data, error, isLoading, mutate } = useSWR<StrapiRecord<ProfileData>>(
         `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?${profileQuery}`,
         async (url) => {
             const jwt = user && (await getJwt())
@@ -229,8 +230,11 @@ export default function ProfilePage({ params }: PageProps) {
         if (!profile?.amaEnabled) setView('discussions')
     }, [profile])
 
-    if (!profile) {
+    if (!profile && isLoading) {
         return null
+    } else if (!profile && !isLoading) {
+        // if profile wasn't found after loading, show 404 page
+        return <NotFoundPage />
     }
 
     return (
