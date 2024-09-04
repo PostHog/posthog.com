@@ -5,7 +5,7 @@ import { IconAdvanced } from '@posthog/icons'
 import { usePlatform } from 'components/Pricing/Platform/usePlatform'
 import useProducts from 'components/Pricing/Products'
 import { PricingTiers } from 'components/Pricing/Plans'
-import Link from 'components/Link'
+import { Link } from 'react-scroll'
 
 const FeatureItem = ({ icon: Icon, name, description, size }) => (
     <div className="flex gap-2">
@@ -233,19 +233,29 @@ const Addons = (): JSX.Element => {
     return (
         <Layout parent={pricingMenu}>
             <section className="w-11/12 mx-auto px-4 2xl:px-12 py-8">
-                <h1 className="text-4xl 2xl:text-5xl mb-1">Addons</h1>
-                <p className="text-lg font-semibold opacity-75">
+                <h1 className="text-4xl 2xl:text-5xl mb-1">Add-ons</h1>
+                <p className="text-base font-semibold opacity-75">
                     We've moved specialized functionality into add-ons so you never pay for things you don't need.
                 </p>
                 <div className="max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark p-4">
-                    <div>Table of contents</div>
-                    <ul>
+                    <div className="font-semibold opacity-70 mb-1">Jump to:</div>
+                    <ol className="pl-6">
                         {allAddons.map((addon) => (
                             <li key={addon.name}>
-                                <Link to={`#${addon.name.toLowerCase().replace(/\s+/g, '-')}`}>{addon.name}</Link>
+                                <Link
+                                    to={addon.name.toLowerCase().replace(/\s+/g, '-')}
+                                    smooth={true}
+                                    duration={500}
+                                    offset={-127}
+                                    spy={true}
+                                    hashSpy={true}
+                                    className="cursor-pointer"
+                                >
+                                    {addon.name}
+                                </Link>
                             </li>
                         ))}
-                    </ul>
+                    </ol>
                 </div>
                 {allAddons.map((addon) => {
                     const { name, description, plans, unit, type } = addon
@@ -253,9 +263,11 @@ const Addons = (): JSX.Element => {
                     const freeAllocation = plan?.tiers?.find((tier) => tier.unit_amount_usd === '0')?.up_to
 
                     return (
-                        <div key={name} className="grid md:grid-cols-12 gap-12 pt-16">
+                        <div key={name} className="grid md:grid-cols-12 gap-x-12 gap-y-4 mt-16" id={name.toLowerCase().replace(/\s+/g, '-')}>
+                            <div className="md:col-span-12 border-b border-light dark:border-dark pb-2">
+                                <h2 className="mb-1">{name}</h2>
+                            </div>
                             <div className="md:col-span-4 md:sticky top-[120px] self-start">
-                                <h2 id={name.toLowerCase().replace(/\s+/g, '-')}>{name}</h2>
                                 <p className="text-[15px]">{description}</p>
                                 {plan?.flat_rate ? (
                                     <div className="flex items-baseline">
