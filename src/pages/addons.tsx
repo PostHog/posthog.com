@@ -120,8 +120,8 @@ const Addons = (): JSX.Element => {
         <section className="w-11/12 mx-auto px-4 2xl:px-12 py-8">
             <h1 className="text-4xl 2xl:text-5xl mb-1">Addons</h1>
             <p className="text-lg font-semibold opacity-75">We've moved specialized functionality into add-ons so you never pay for things you don't need.</p>
-            <div className="grid grid-cols-12 gap-12 pt-8">
-                <div className="col-span-12 md:col-span-4">
+            <div className="grid md:grid-cols-12 gap-12 pt-8">
+                <div className="md:col-span-4">
                     <h2>Teams</h2>
                     <p className="text-[15px]">A smorgasbord of features for teams, plus security and compliance tools to keep large teams happy.</p>
                     <div className="flex items-baseline">
@@ -129,11 +129,11 @@ const Addons = (): JSX.Element => {
                         <span className="text-[15px] opacity-60">/mo</span>
                     </div>
                 </div>
-                <div className="col-span-12 md:col-span-8">
+                <div className="md:col-span-8">
                     <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
                         {features.map((featureGroup, groupIndex) => (
                             <React.Fragment key={groupIndex}>
-                                <div className="col-span-2">
+                                <div className="md:col-span-2">
                                     <h3 className="text-lg pt-1 mb-0">{featureGroup.group}</h3>
                                 </div>
                                 {featureGroup.items.map((feature, itemIndex) => (
