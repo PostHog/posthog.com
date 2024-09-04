@@ -80,11 +80,12 @@ This is useful if you want to exclude sessions that are too short to be useful. 
 
 ### Limitations
 
+
 The minimum duration is set in seconds. Whenever a new session starts, the browser records the start time. If the minimum duration has passed since the start time, the session data is sent. If it hasn't, the session continues to be buffered in-memory. 
 
-This means that if you set a high minimum duration and your user visits multiple pages each for a short time, you still record the session but miss the beginning. If the user leaves the site before the minimum duration has passed, the session is not recorded.
+This means that if you set a high minimum duration and your user visits multiple pages each for a short time, the browser risks dropping the buffered data. The result is that the session is still recorded, but you miss the beginning.
 
-If you find you are missing the beginning of sessions, you can reduce the minimum duration or use one of our other methods to reduce the number of sessions you record.
+If you find you are missing the beginning of sessions, reduce the minimum duration to fix this.
 
 ## Billing Limits
 
