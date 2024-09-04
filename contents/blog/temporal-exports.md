@@ -54,7 +54,7 @@ It was obvious we'd outgrown the export apps and needed a reliable, transparent,
 
 ## Temporal to the rescue
 
-Early in 2023, one of our engineers, [James Greenhill](/community/profiles/90), opened an [RFC recommending using Temporal at PostHog](https://github.com/PostHog/meta/pull/99). Temporal is a workflow engine abstracting away the details of failure modes, retry logic, and timeouts. This enables developers to build and deploy rock-solid business logic. It's used by companies like Uber, Coinbase, Doordash, and Hashicorp, which have large data flows.
+Early in 2023, one of our engineers, [James Greenhill](/community/profiles/30174), opened an [RFC recommending using Temporal at PostHog](https://github.com/PostHog/meta/pull/99). Temporal is a workflow engine abstracting away the details of failure modes, retry logic, and timeouts. This enables developers to build and deploy rock-solid business logic. It's used by companies like Uber, Coinbase, Doordash, and Hashicorp, which have large data flows.
 
 In Q2, we set a goal of "rock solid-batch processing" and [chose Temporal](https://github.com/PostHog/meta/pull/99) to build it because it helped solve issues like:
 
