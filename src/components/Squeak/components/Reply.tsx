@@ -20,7 +20,7 @@ type ReplyProps = {
     className?: string
 }
 
-const AIDisclaimer = ({ replyID, refresh, topic }) => {
+const AIDisclaimer = ({ replyID, refresh, topic, isAuthor }) => {
     const posthog = usePostHog()
     const { getJwt } = useUser()
     const { handleResolve } = useContext(CurrentQuestionContext)
@@ -86,13 +86,13 @@ const AIDisclaimer = ({ replyID, refresh, topic }) => {
             )}
             {helpful === null && (
                 <div className="flex items-center space-x-2 mt-2">
-                    <CallToAction size="sm" type="secondary" onClick={() => handleHelpful(true)}>
+                    <CallToAction disabled={!isAuthor} size="sm" type="secondary" onClick={() => handleHelpful(true)}>
                         <span className="flex space-x-1 items-center">
                             <IconThumbsUp className="size-4 text-green flex-shrink-0" />
                             <span>Yes, mark as solution</span>
                         </span>
                     </CallToAction>
-                    <CallToAction size="sm" type="secondary" onClick={() => handleHelpful(false)}>
+                    <CallToAction disabled={!isAuthor} size="sm" type="secondary" onClick={() => handleHelpful(false)}>
                         <span className="flex space-x-1 items-center">
                             <IconThumbsDown className="size-4 text-red flex-shrink-0" />
                             <span>No, request human review</span>
@@ -223,7 +223,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
 
             <div className="border-l-0 ml-[33px] pl-0 pb-1">
                 {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful === null && (
-                    <AIDisclaimer topic={topics?.data?.[0]} replyID={id} refresh={mutate} />
+                    <AIDisclaimer isAuthor={isAuthor} topic={topics?.data?.[0]} replyID={id} refresh={mutate} />
                 )}
                 <div className={reply?.attributes?.helpful === false ? 'opacity-70' : ''}>
                     {reply?.attributes?.helpful === false && (

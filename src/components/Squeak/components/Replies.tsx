@@ -20,7 +20,7 @@ type RepliesProps = {
 }
 
 export const Replies = ({ expanded, setExpanded }: RepliesProps) => {
-    const { user } = useUser()
+    const { user, isModerator } = useUser()
     const {
         question: { replies: initialReplies, resolvedBy, profile },
     } = useContext(CurrentQuestionContext)
@@ -29,7 +29,7 @@ export const Replies = ({ expanded, setExpanded }: RepliesProps) => {
     const replies = {
         data: initialReplies?.data?.filter((reply) =>
             reply.attributes.profile?.data?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
-                ? reply.attributes.helpful || isOP
+                ? isModerator || reply.attributes.helpful || isOP
                 : true
         ),
     }
