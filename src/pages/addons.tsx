@@ -20,113 +20,134 @@ const FeatureItem = ({ icon: Icon, name, description }) => (
     </div>
 )
 
-const features = {
-    Teams: [
-        {
-            group: 'Features',
-            items: [
-                {
-                    name: 'Unlimited projects',
-                    description:
-                        'Create silos of data within PostHog. All data belongs to a single project and all queries are project-specific.',
-                    icon: IconAdvanced,
-                },
-                {
-                    name: 'Managed reverse proxy',
-                    description:
-                        'Use our managed proxy service to send events through your own domain. Capture more usage data that might otherwise be intercepted by ad blockers without needing to set up and maintain the proxy yourself.',
-                    icon: IconAdvanced,
-                },
-                {
-                    name: 'White labeling',
-                    description: 'Use your own branding on surveys, shared dashboards, shared insights, and more.',
-                    icon: IconAdvanced,
-                },
-                {
-                    name: 'Ingestion taxonomy',
-                    description:
-                        'Mark events as verified or unverified to help you understand the quality of your data.',
-                    icon: IconAdvanced,
-                },
-                {
-                    name: 'Dashboard tags',
-                    description: 'Organize dashboards with tags.',
-                    icon: IconAdvanced,
-                },
-            ],
-        },
-        {
-            group: 'Security',
-            items: [
-                {
-                    name: 'Enforce SSO login',
-                    description:
-                        'Users can only sign up and log in to your PostHog organization with your specified SSO provider.',
-                    icon: IconAdvanced,
-                },
-                {
-                    name: 'Enforce 2FA',
-                    description: 'Require all users in your organization to enable two-factor authentication.',
-                    icon: IconAdvanced,
-                },
-                {
-                    name: 'Automatic provisioning',
-                    description:
-                        'Verify your domains to enforce SSO and automatically add users with matching email addresses to your organization.',
-                    icon: IconAdvanced,
-                },
-                {
-                    name: 'Project permissions',
-                    description: 'Restrict access to data within the organization to only those who need it.',
-                    icon: IconAdvanced,
-                },
-                {
-                    name: 'Advanced permissions',
-                    description: 'Control who can access and modify data and features within your organization.',
-                    icon: IconAdvanced,
-                },
-                {
-                    name: 'Security assessment',
-                    description: 'Security assessment',
-                    icon: IconAdvanced,
-                },
-            ],
-        },
-        {
-            group: 'Compliance',
-            items: [
-                {
-                    name: 'Audit logs',
-                    description: 'See who in your organization has accessed or modified entities within PostHog.',
-                    icon: IconAdvanced,
-                },
-                {
-                    name: 'HIPAA BAA',
-                    description:
-                        'Get a signed HIPAA Business Associate Agreement (BAA) to use PostHog in a HIPAA-compliant manner.',
-                    icon: IconAdvanced,
-                },
-            ],
-        },
-        {
-            group: 'Support',
-            items: [
-                {
-                    name: 'Priority support',
-                    description:
-                        'Get help from our team faster than other customers with a 12-hour response time target',
-                    icon: IconAdvanced,
-                },
-                {
-                    name: 'Personalized onboarding',
-                    description:
-                        'Get help from our team to create dashboards that will help you understand your data and your business.',
-                    icon: IconAdvanced,
-                },
-            ],
-        },
-    ],
-}
+const addons = [
+    {
+        name: 'Teams',
+        features: [
+            {
+                group: 'Features',
+                items: [
+                    {
+                        name: 'Unlimited projects',
+                        description:
+                            'Create silos of data within PostHog. All data belongs to a single project and all queries are project-specific.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Managed reverse proxy',
+                        description:
+                            'Use our managed proxy service to send events through your own domain. Capture more usage data that might otherwise be intercepted by ad blockers without needing to set up and maintain the proxy yourself.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'White labeling',
+                        description: 'Use your own branding on surveys, shared dashboards, shared insights, and more.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Ingestion taxonomy',
+                        description:
+                            'Mark events as verified or unverified to help you understand the quality of your data.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Dashboard tags',
+                        description: 'Organize dashboards with tags.',
+                        icon: IconAdvanced,
+                    },
+                ],
+            },
+            {
+                group: 'Security',
+                items: [
+                    {
+                        name: 'Enforce SSO login',
+                        description:
+                            'Users can only sign up and log in to your PostHog organization with your specified SSO provider.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Enforce 2FA',
+                        description: 'Require all users in your organization to enable two-factor authentication.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Automatic provisioning',
+                        description:
+                            'Verify your domains to enforce SSO and automatically add users with matching email addresses to your organization.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Project permissions',
+                        description: 'Restrict access to data within the organization to only those who need it.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Advanced permissions',
+                        description: 'Control who can access and modify data and features within your organization.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Security assessment',
+                        description: 'Security assessment',
+                        icon: IconAdvanced,
+                    },
+                ],
+            },
+            {
+                group: 'Compliance',
+                items: [
+                    {
+                        name: 'Audit logs',
+                        description: 'See who in your organization has accessed or modified entities within PostHog.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'HIPAA BAA',
+                        description:
+                            'Get a signed HIPAA Business Associate Agreement (BAA) to use PostHog in a HIPAA-compliant manner.',
+                        icon: IconAdvanced,
+                    },
+                ],
+            },
+            {
+                group: 'Support',
+                items: [
+                    {
+                        name: 'Priority support',
+                        description:
+                            'Get help from our team faster than other customers with a 12-hour response time target',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Personalized onboarding',
+                        description:
+                            'Get help from our team to create dashboards that will help you understand your data and your business.',
+                        icon: IconAdvanced,
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        name: 'Data pipelines',
+        features: [
+            // ... features for Data pipelines ...
+        ],
+    },
+    {
+        name: 'Group analytics',
+        features: [
+            // ... features for Group analytics ...
+        ],
+    },
+    {
+        name: 'Person profiles',
+        features: [
+            // ... features for Person profiles ...
+        ],
+    },
+]
 
 const Addons = (): JSX.Element => {
     const platform = usePlatform()
@@ -175,16 +196,18 @@ const Addons = (): JSX.Element => {
                             </div>
                             <div className="md:col-span-8">
                                 <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
-                                    {features[name]?.map((featureGroup, groupIndex) => (
-                                        <React.Fragment key={groupIndex}>
-                                            <div className="md:col-span-2">
-                                                <h3 className="text-lg pt-1 mb-0">{featureGroup.group}</h3>
-                                            </div>
-                                            {featureGroup.items.map((feature, itemIndex) => (
-                                                <FeatureItem key={`${groupIndex}-${itemIndex}`} {...feature} />
-                                            ))}
-                                        </React.Fragment>
-                                    ))}
+                                    {addons
+                                        .find((addon) => addon.name === name)
+                                        ?.features?.map((featureGroup, groupIndex) => (
+                                            <React.Fragment key={groupIndex}>
+                                                <div className="md:col-span-2">
+                                                    <h3 className="text-lg pt-1 mb-0">{featureGroup.group}</h3>
+                                                </div>
+                                                {featureGroup.items.map((feature, itemIndex) => (
+                                                    <FeatureItem key={`${groupIndex}-${itemIndex}`} {...feature} />
+                                                ))}
+                                            </React.Fragment>
+                                        ))}
                                 </div>
                                 {!plan?.flat_rate && (
                                     <div className="max-w-[400px]">
