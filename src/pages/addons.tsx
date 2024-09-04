@@ -6,10 +6,12 @@ import { usePlatform } from 'components/Pricing/Platform/usePlatform'
 import useProducts from 'components/Pricing/Products'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { Link } from 'react-scroll'
+import { StaticImage } from 'gatsby-plugin-image'
+import { CallToAction } from 'components/CallToAction'
 
 const FeatureItem = ({ icon: Icon, name, description, size }) => (
     <div className="flex gap-2">
-        <div className="shrink-0">
+        <div className="shrink-0 hidden">
             <Icon className="size-8" />
         </div>
         <div className="flex-1">
@@ -232,94 +234,116 @@ const Addons = (): JSX.Element => {
 
     return (
         <Layout parent={pricingMenu}>
-            <section className="w-11/12 mx-auto px-4 2xl:px-12 py-8">
-                <h1 className="text-4xl 2xl:text-5xl mb-1">Add-ons</h1>
-                <p className="text-base font-semibold opacity-75">
-                    We've moved specialized functionality into add-ons so you never pay for things you don't need.
-                </p>
-                <div className="max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark p-4">
-                    <div className="font-semibold opacity-70 mb-1">Jump to:</div>
-                    <ol className="pl-6">
-                        {allAddons.map((addon) => (
-                            <li key={addon.name}>
-                                <Link
-                                    to={addon.name.toLowerCase().replace(/\s+/g, '-')}
-                                    smooth={true}
-                                    duration={500}
-                                    offset={-127}
-                                    spy={true}
-                                    hashSpy={true}
-                                    className="cursor-pointer"
-                                >
-                                    {addon.name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ol>
-                </div>
-                {allAddons.map((addon) => {
-                    const { name, description, plans, unit, type } = addon
-                    const plan = plans[plans.length - 1]
-                    const freeAllocation = plan?.tiers?.find((tier) => tier.unit_amount_usd === '0')?.up_to
-
-                    return (
-                        <div key={name} className="grid md:grid-cols-12 gap-x-12 gap-y-4 mt-16" id={name.toLowerCase().replace(/\s+/g, '-')}>
-                            <div className="md:col-span-12 border-b border-light dark:border-dark pb-2">
-                                <h2 className="mb-1">{name}</h2>
-                            </div>
-                            <div className="md:col-span-4 md:sticky top-[120px] self-start">
-                                <p className="text-[15px]">{description}</p>
-                                {plan?.flat_rate ? (
-                                    <div className="flex items-baseline">
-                                        <strong className="text-xl">${plan.unit_amount_usd.replace('.00', '')}</strong>
-                                        <span className="text-[15px] opacity-60">/mo</span>
-                                    </div>
-                                ) : (
-                                    <>
-                                        <span className="opacity-70 text-sm">Pricing starts at</span>{' '}
-                                        <strong>
-                                            $
-                                            {plan?.tiers?.find((tier) => tier.unit_amount_usd !== '0')?.unit_amount_usd}
-                                        </strong>
-                                        <span className="opacity-70 text-sm">/{unit}</span>
-                                    </>
-                                )}
-                                {freeAllocation && (
-                                    <p className="m-0 text-green text-sm">
-                                        First <strong>{freeAllocation?.toLocaleString()}</strong> {unit}s/mo free
-                                    </p>
-                                )}
-                            </div>
-                            <div className="md:col-span-8">
-                                <div className={`grid gap-x-8 gap-y-4 ${name === "Teams" ? 'md:grid-cols-2' : 'md:grid-cols-1'}`}>
-                                    {addons
-                                        .find((addon) => addon.name === name)
-                                        ?.features?.map((featureGroup, groupIndex) => (
-                                            <React.Fragment key={groupIndex}>
-                                                <div className={name === "Teams" ? 'md:col-span-2' : ''}>
-                                                    <h3 className="text-lg pt-1 mb-0">{featureGroup.group}</h3>
-                                                </div>
-                                                {featureGroup.items.map((feature, itemIndex) => (
-                                                    <FeatureItem key={`${groupIndex}-${itemIndex}`} size={name === "Teams" ? 'small' : ''} {...feature} />
-                                                ))}
-
-                                            </React.Fragment>
-                                        ))}
-                                </div>
-                                {!plan?.flat_rate && (
-                                    <div className="max-w-[400px] mt-8">
-                                        <h5 className="m-0">Price</h5>
-                                        <div className="-ml-2 lg:-ml-4">
-                                            <PricingTiers plans={plans} type={type} unit={unit} test />
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
+            <section className="xl:w-11/12 mx-auto px-4 md:px-8 2xl:px-12 py-8 relative">
+                <div className="flex flex-col-reverse md:flex-row gap-4">
+                    <div className="flex-1">
+                        <h1 className="text-4xl xl:text-5xl mb-2">Add-ons</h1>
+                        <p className="text-[17px] 2xl:text-lg font-semibold opacity-75">
+                            We've moved specialized functionality into add-ons so you never pay for things you don't need.
+                        </p>
+                        <div className="max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark p-4">
+                            <div className="font-semibold opacity-70 mb-1">Jump to:</div>
+                            <ol className="pl-6">
+                                {allAddons.map((addon) => (
+                                    <li key={addon.name}>
+                                        <Link
+                                            to={addon.name.toLowerCase().replace(/\s+/g, '-')}
+                                            smooth={true}
+                                            duration={500}
+                                            offset={-127}
+                                            spy={true}
+                                            hashSpy={true}
+                                            className="cursor-pointer"
+                                        >
+                                            {addon.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ol>
                         </div>
-                    )
-                })}
-            </section>
-        </Layout>
+                    </div>
+                    <aside className="max-w-full -mt-6 md:mt-0 md:max-w-xs mdlg:max-w-sm lg:max-w-lg lg:-my-6 flex justify-end">
+                        <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/add_ons_a700ab577f.png" alt="Add-ons" objectFit="contain" />
+                    </aside>
+                </div>
+                {
+                    allAddons.map((addon) => {
+                        const { name, description, plans, unit, type } = addon
+                        const plan = plans[plans.length - 1]
+                        const freeAllocation = plan?.tiers?.find((tier) => tier.unit_amount_usd === '0')?.up_to
+
+                        return (
+                            <div key={name} className="grid md:grid-cols-12 gap-x-12 gap-y-4 mt-12" id={name.toLowerCase().replace(/\s+/g, '-')}>
+                                <div className="md:col-span-12 border-b border-light dark:border-dark pb-2">
+                                    <h2 className="mb-1">{name}</h2>
+                                </div>
+                                <div className="md:col-span-4 md:sticky top-[120px] self-start">
+                                    <p className="text-[15px]">{description}</p>
+                                    {plan?.flat_rate ? (
+                                        <div className="flex items-baseline">
+                                            <strong className="text-xl">${plan.unit_amount_usd.replace('.00', '')}</strong>
+                                            <span className="text-[15px] opacity-60">/mo</span>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <span className="opacity-70 text-sm">Pricing starts at</span>{' '}
+                                            <strong>
+                                                $
+                                                {plan?.tiers?.find((tier) => tier.unit_amount_usd !== '0')?.unit_amount_usd}
+                                            </strong>
+                                            <span className="opacity-70 text-sm">/{unit}</span>
+                                        </>
+                                    )}
+                                    {freeAllocation && (
+                                        <p className="m-0 text-green text-sm">
+                                            First <strong>{freeAllocation?.toLocaleString()}</strong> {unit}s/mo free
+                                        </p>
+                                    )}
+                                </div>
+                                <div className="md:col-span-8">
+                                    <div className={`grid gap-x-8 gap-y-3 ${name === "Teams" ? 'md:grid-cols-2' : 'md:grid-cols-1'}`}>
+                                        {addons
+                                            .find((addon) => addon.name === name)
+                                            ?.features?.map((featureGroup, groupIndex) => (
+                                                <React.Fragment key={groupIndex}>
+                                                    <div className={name === "Teams" ? 'md:col-span-2 pt-8 first:pt-0' : ''}>
+                                                        <h3 className="text-xl pt-1 mb-0">{featureGroup.group}</h3>
+                                                    </div>
+                                                    {featureGroup.items.map((feature, itemIndex) => (
+                                                        <FeatureItem key={`${groupIndex}-${itemIndex}`} size={name === "Teams" ? 'small' : ''} {...feature} />
+                                                    ))}
+
+                                                </React.Fragment>
+                                            ))}
+                                    </div>
+                                    {!plan?.flat_rate && (
+                                        <div className="max-w-[400px] mt-8">
+                                            <h5 className="mb-2 text-lg">Pricing breakdown</h5>
+                                            <div className="border border-light dark:border-dark rounded divide-y divide-light dark:divide-dark bg-accent/50 dark:bg-accent-dark">
+                                                <PricingTiers plans={plans} type={type} unit={unit} test />
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+                <div className="my-12 border-t border-light dark:border-dark pt-6 flex flex-col items-center">
+                    <p>Subscribe to add-ons after signing up.</p>
+
+                    <CallToAction
+                        type="primary"
+                        size="lg"
+                        width="64"
+                        to={`https://app.posthog.com/signup`}
+                        className="animate-grow-sm"
+                    >
+                        Get started
+                    </CallToAction>
+                </div>
+            </section >
+        </Layout >
     )
 }
 
