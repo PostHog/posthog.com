@@ -47,7 +47,7 @@ const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
 }
 
 const Title = ({ title, className = '' }: { title: string; className?: string }) => {
-    return <h5 className={`m-0 text-sm lg:text-[15px] opacity-70 font-normal ${className}`}>{title}</h5>
+    return <h5 className={`m-0 text-sm opacity-70 font-normal ${className}`}>{title}</h5>
 }
 
 export const InclusionOnlyRow = ({ plans }) => (

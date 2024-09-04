@@ -6,7 +6,7 @@ tags: ['experimentation']
 featuredVideo: https://www.youtube-nocookie.com/embed/BtHeP8lORJY
 ---
 
-[A/B tests](/ab-testing) help you make your iOS app better by comparing the impact of changes on key metrics. 
+[A/B tests](/experiments) help you make your iOS app better by comparing the impact of changes on key metrics. 
 
 PostHog makes [A/B testing on iOS](/docs/experiments/installation?tab=iOS) simple. To show you how, this tutorial will guide you on how to add PostHog to your iOS app and run an A/B test. We'll create a basic A/B test to see how the background color of a screen affects the click-through rate of a button. 
 

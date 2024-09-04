@@ -624,7 +624,7 @@ export const ABTesting = () => {
         <Slide
             bgColor="[#9C19BD]"
             textColor="primary-dark"
-            title="A/B testing"
+            title="Experiments"
             description="Run experiments with statistical significance."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
@@ -699,7 +699,7 @@ export const ABTesting = () => {
             )}
             contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
             buttonLabel="Explore"
-            buttonUrl="/ab-testing"
+            buttonUrl="/experiments"
             buttonClasses="md:!w-auto !w-full"
             buttonChildClasses="!bg-[#9C19BD]"
         />
@@ -973,7 +973,7 @@ export const AIEngineering = () => {
                     <ul className="mb-4">
                         <li>Evaluations with surveys</li>
                         <li>Insights with Session replay</li>
-                        <li>Roll out model improvements with A/B testing</li>
+                        <li>Roll out model improvements with experiments</li>
                     </ul>
                     <p className="mt-2 mb-4 text-sm border-l-3 border-[#7A4096]/50 pl-2">
                         ElevenLabs uses the entire PostHog toolset to build their generative voice AI

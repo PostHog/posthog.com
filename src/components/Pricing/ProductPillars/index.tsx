@@ -26,7 +26,7 @@ const features: IFeature[] = [
     { title: 'Product analytics', icon: <Analytics /> },
     { title: 'Session recording', icon: <SessionRecording /> },
     { title: 'Feature flags', icon: <FeatureFlags /> },
-    { title: 'A/B testing', icon: <AbTesting /> },
+    { title: 'Experiments', icon: <AbTesting /> },
     { title: 'Event pipelines', icon: <EventPipelines /> },
     { title: 'Data warehouse', icon: <DataWarehouse /> },
 ]

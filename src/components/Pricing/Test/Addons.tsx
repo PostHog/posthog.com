@@ -59,7 +59,7 @@ const Addon = ({ name, icon_key, description, plans, unit, type, ...other }) => 
                             exit={{ opacity: 0, translateY: '100%' }}
                             className="absolute inset-0 bg-white dark:bg-accent-dark pt-4 rounded"
                         >
-                            <PricingTiers plans={plans} type={type} unit={unit} />
+                            <PricingTiers plans={plans} type={type} unit={unit} test={true} />
                             <button
                                 onClick={() => setShowBreakdown(false)}
                                 className={`text-red dark:text-yellow font-bold text-sm px-2 lg:px-4`}

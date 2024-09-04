@@ -2766,10 +2766,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
-"@posthog/icons@0.7.3":
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.7.3.tgz#a0664f0aaae1003c45f21baed83a7ec52f83847c"
-  integrity sha512-dw8qLS6aSBGGIjo/d24/yuLOgkFAov4C7yOhomMfhce/RwS+u96XXghVolioRHppnAn48pgGnBQIXEELGVEvPA==
+"@posthog/icons@0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.8.2.tgz#807514e9b8262d4491e5c5d8d0b4bb8a389e7a70"
+  integrity sha512-n7189oRVGO5zxX7FeOvYwp3sebqJ1jBgZGur0f+YHhCLUDNkJrk3BJvtxhj2iBfbYJmtAn3vxsiBkUYeexcT2g==
 
 "@preact/signals-core@^1.2.3":
   version "1.5.1"
@@ -18867,10 +18867,10 @@ postcss@^8.4.23:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-posthog-js@1.160.0:
-  version "1.160.0"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.160.0.tgz#ad686f3c161c7dc2ba716281b5cef94c64ce41b1"
-  integrity sha512-K/RRgmPYIpP69nnveCJfkclb8VU+R+jsgqlrKaLGsM5CtQM9g01WOzAiT3u36WLswi58JiFMXgJtECKQuoqTgQ==
+posthog-js@1.160.3:
+  version "1.160.3"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.160.3.tgz#17c8af4c9ffa2d795d925ca1e7146e61cd5ccabd"
+  integrity sha512-mGvxOIlWPtdPx8EI0MQ81wNKlnH2K0n4RqwQOl044b34BCKiFVzZ7Hc7geMuZNaRAvCi5/5zyGeWHcAYZQxiMQ==
   dependencies:
     fflate "^0.4.8"
     preact "^10.19.3"

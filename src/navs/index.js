@@ -818,7 +818,7 @@ export const communityMenu = {
             name: 'Posts',
             icon: 'IconBook',
             color: 'red',
-            url: 'https://posthog.com/posts',
+            url: '/posts',
         },
         {
             name: 'Questions',
@@ -830,7 +830,7 @@ export const communityMenu = {
             name: 'Guides',
             icon: 'IconMap',
             color: 'red',
-            url: 'https://posthog.com/tutorials',
+            url: '/tutorials',
             children: [
                 {
                     name: 'All guides',
@@ -892,7 +892,7 @@ export const communityMenu = {
                     url: '/tutorials/categories/feature-flags',
                 },
                 {
-                    name: 'A/B testing',
+                    name: 'Experiments',
                     icon: 'IconFlask',
                     color: 'purple',
                     url: '/tutorials/categories/experimentation',
@@ -908,6 +908,12 @@ export const communityMenu = {
                         { name: 'Sentry', url: '/tutorials/categories/sentry' },
                         { name: 'Zapier', url: '/tutorials/categories/zapier' },
                     ],
+                },
+                {
+                    name: 'AI engineering',
+                    color: 'purple',
+                    icon: 'IconAI',
+                    url: '/tutorials/ai-engineering',
                 },
             ],
         },
@@ -2441,13 +2447,13 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'A/B testing',
+            name: 'Experiments',
             icon: 'IconFlask',
             color: 'purple',
             url: '/docs/experiments',
             children: [
                 {
-                    name: 'A/B testing',
+                    name: 'Experiments',
                 },
                 {
                     name: 'Overview',
@@ -2858,6 +2864,14 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/salesforce',
                         },
                         {
+                            name: 'MySQL',
+                            url: '/docs/data-warehouse/setup/mysql',
+                        },
+                        {
+                            name: 'Azure SQL Server',
+                            url: '/docs/data-warehouse/setup/azure-db',
+                        },
+                        {
                             name: 'Snowflake',
                             url: '/docs/data-warehouse/setup/snowflake',
                         },
@@ -2869,8 +2883,8 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/s3',
                         },
                         {
-                            name: 'Azure',
-                            url: '/docs/data-warehouse/setup/azure',
+                            name: 'Azure Blob',
+                            url: '/docs/data-warehouse/setup/azure-blob',
                         },
                         {
                             name: 'Cloudflare R2',
@@ -2985,49 +2999,31 @@ export const docsMenu = {
 export const pricingMenu = {
     name: 'Pricing',
     url: '/pricing',
-    icon: 'IconReceipt',
+    icon: 'IconCdCase',
     children: [
         {
-            name: 'All products',
-            icon: 'IconReceipt',
-            color: 'red',
+            name: 'PostHog Cloud',
+            icon: 'IconCloud',
+            color: 'blue',
             url: '/pricing',
         },
+        // {
+        //     name: 'Event types',
+        //     icon: 'IconCursorClick',
+        //     color: 'purple',
+        //     url: '/events',
+        // },
+        // {
+        //     name: 'Add-ons',
+        //     icon: 'IconPuzzle',
+        //     color: 'seagreen',
+        //     url: '/addons',
+        // },
         {
-            name: 'Product analytics',
-            icon: 'IconGraph',
-            color: 'blue',
-            url: '/pricing?product=product-analytics',
-        },
-        {
-            name: 'Session replay',
-            url: '/pricing?product=session-replay',
+            name: 'Pricing philosophy',
+            icon: 'IconLightBulb',
             color: 'yellow',
-            icon: 'IconRewindPlay',
-        },
-        {
-            name: 'Feature flags',
-            icon: 'IconToggle',
-            color: 'seagreen',
-            url: '/pricing?product=feature-flags',
-        },
-        {
-            name: 'A/B testing',
-            icon: 'IconFlask',
-            color: 'purple',
-            url: '/pricing?product=ab-testing',
-        },
-        {
-            name: 'Surveys',
-            icon: 'IconMessage',
-            color: 'red',
-            url: '/pricing?product=surveys',
-        },
-        {
-            name: 'Data warehouse',
-            icon: 'IconDatabase',
-            color: 'lilac',
-            url: '/pricing?product=data-warehouse',
+            url: '/pricing/philosophy',
         },
         {
             name: 'How we do "sales"',
@@ -3069,10 +3065,10 @@ const menu = [
                 url: '/feature-flags',
             },
             {
-                name: 'A/B testing',
+                name: 'Experiments',
                 icon: 'IconFlask',
                 color: 'purple',
-                url: '/ab-testing',
+                url: '/experiments',
             },
             {
                 name: 'Surveys',

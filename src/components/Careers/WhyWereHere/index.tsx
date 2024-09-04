@@ -83,7 +83,7 @@ export const WhyWereHere = () => {
                                     <h3>An introduction</h3>
                                     <P>
                                         Until now, tools for building products have been fragmented. Product analytics,
-                                        heatmaps, session recording, feature flags and A/B testing are all helpful, but
+                                        heatmaps, session recording, feature flags and experiments are all helpful, but
                                         no one wants to buy, send data to, and integrate multiple products.
                                     </P>
                                     <P>

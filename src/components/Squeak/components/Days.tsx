@@ -10,7 +10,7 @@ export const Days = ({ created }: { created: string | undefined }) => {
     }
 
     return (
-        <Tooltip content={dayjs(created).format('MM/DD/YYYY - h:mm A')}>
+        <Tooltip content={dayjs(created).format('MM/DD/YYYY - h:mm A')} placement="top">
             <span className="text-sm opacity-50 relative cursor-default">{dayjs(created).fromNow()}</span>
         </Tooltip>
     )
