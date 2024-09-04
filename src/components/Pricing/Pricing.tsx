@@ -829,7 +829,6 @@ const PricingExperiment = ({
     groupsToShow: undefined | string[]
     currentProduct?: string | null
 }): JSX.Element => {
-    console.log(currentProduct)
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const {
         allProductData: {
