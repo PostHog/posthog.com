@@ -5,17 +5,19 @@ import { IconAdvanced } from '@posthog/icons'
 import { usePlatform } from 'components/Pricing/Platform/usePlatform'
 import useProducts from 'components/Pricing/Products'
 import { PricingTiers } from 'components/Pricing/Plans'
+import Link from 'components/Link'
 
-// ... other imports ...
-
-const FeatureItem = ({ icon: Icon, name, description }) => (
+const FeatureItem = ({ icon: Icon, name, description, size }) => (
     <div className="flex gap-2">
         <div className="shrink-0">
             <Icon className="size-8" />
         </div>
         <div className="flex-1">
             <h4 className="text-base my-1">{name}</h4>
-            <p className="text-sm text-primary/75 dark:text-primary-dark/75">{description}</p>
+            <p
+                className={`${size === 'small' ? 'text-sm [&_li]:text-sm' : 'text-[15px] [&_li]:text-[15px]'} text-primary/75 dark:text-primary-dark/75 mb-0`}
+                dangerouslySetInnerHTML={{ __html: description }}
+            />
         </div>
     </div>
 )
@@ -132,19 +134,91 @@ const addons = [
     {
         name: 'Data pipelines',
         features: [
-            // ... features for Data pipelines ...
+            {
+                group: 'Benefits',
+                items: [
+                    {
+                        name: 'Send event data to a data warehouse',
+                        description:
+                            'If you have a data lake or data warehouse, you can use destinations to send PostHog event data there, while ensuring you still have that data in PostHog to perform your analytics processes.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Enforce event schemas',
+                        description:
+                            'By default, PostHog does not enforce schemas on events it receives. However, a transformation could do so, preventing ingestion of events that do not match the specified schema in order to keep your data clean and following specific guidelines you need it to follow.',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Label events',
+                        description:
+                            'To facilitate sorting through your events, you can use transformations to determine arbitrary logic to label an event (e.g. by setting a label property). This can help you tailor your metrics in PostHog, as well as facilitate data ordering if you ever use PostHog data elsewhere.',
+                        icon: IconAdvanced,
+                    },
+                ],
+            },
         ],
     },
     {
         name: 'Group analytics',
         features: [
-            // ... features for Group analytics ...
+            {
+                group: 'Examples of how to use groups',
+                items: [
+                    {
+                        name: 'B2B SaaS app',
+                        description:
+                            'Aggregate events at an account-level. Calculate metrics like:<ul><li>number of daily active companies</li><li>company churn rate</li><li>How many companies have adopted a new feature.</li></ul>',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Collaborative, project-based services',
+                        description:
+                            'For project-based products like Notion, Jira, or Figma, create a project group type to calculate:<ul><li>metrics at a project level</li><li>users per project</li><li>project engagement</li></ul>',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Communication-based apps',
+                        description:
+                            'For a product like Slack, you can create a channel group type to measure:<ul><li>the average number of messages per channel</li><li>the number of monthly active channels</li><li>total number of channel participants</li></ul>',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Social media apps',
+                        description:
+                            'For a social network-type product, create a post group type to measure:<ul><li>average number of replies per post</li><li>total count of unique posters per month</li></ul>',
+                        icon: IconAdvanced,
+                    },
+                ],
+            },
         ],
     },
     {
         name: 'Person profiles',
         features: [
-            // ... features for Person profiles ...
+            {
+                group: 'What can I do with person profiles?',
+                items: [
+                    {
+                        name: 'Merge anonymous users with their eventual identified user',
+                        description:
+                            'Like when they sign up for your product or use different devices - enables analyzing the user\'s path',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Store custom properties on users',
+                        description:
+                            'Use these properties in cohorts, session replay, experiments, and feature flags',
+                        icon: IconAdvanced,
+                    },
+                    {
+                        name: 'Create user-specific insights in Product analytics',
+                        description:
+                            '<ul><li>How many times specific users click an element on a page</li><li>Group cohorts of users by device type, location, or property</li><li>Filter to interactions on a specific page by specific users</li></ul>',
+                        icon: IconAdvanced,
+                    },
+                ],
+            },
         ],
     },
 ]
@@ -163,15 +237,25 @@ const Addons = (): JSX.Element => {
                 <p className="text-lg font-semibold opacity-75">
                     We've moved specialized functionality into add-ons so you never pay for things you don't need.
                 </p>
+                <div className="max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark p-4">
+                    <div>Table of contents</div>
+                    <ul>
+                        {allAddons.map((addon) => (
+                            <li key={addon.name}>
+                                <Link to={`#${addon.name.toLowerCase().replace(/\s+/g, '-')}`}>{addon.name}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
                 {allAddons.map((addon) => {
                     const { name, description, plans, unit, type } = addon
                     const plan = plans[plans.length - 1]
                     const freeAllocation = plan?.tiers?.find((tier) => tier.unit_amount_usd === '0')?.up_to
 
                     return (
-                        <div key={name} className="grid md:grid-cols-12 gap-12 pt-8">
+                        <div key={name} className="grid md:grid-cols-12 gap-12 pt-16">
                             <div className="md:col-span-4 md:sticky top-[120px] self-start">
-                                <h2>{name}</h2>
+                                <h2 id={name.toLowerCase().replace(/\s+/g, '-')}>{name}</h2>
                                 <p className="text-[15px]">{description}</p>
                                 {plan?.flat_rate ? (
                                     <div className="flex items-baseline">
@@ -195,24 +279,27 @@ const Addons = (): JSX.Element => {
                                 )}
                             </div>
                             <div className="md:col-span-8">
-                                <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
+                                <div className={`grid gap-x-8 gap-y-4 ${name === "Teams" ? 'md:grid-cols-2' : 'md:grid-cols-1'}`}>
                                     {addons
                                         .find((addon) => addon.name === name)
                                         ?.features?.map((featureGroup, groupIndex) => (
                                             <React.Fragment key={groupIndex}>
-                                                <div className="md:col-span-2">
+                                                <div className={name === "Teams" ? 'md:col-span-2' : ''}>
                                                     <h3 className="text-lg pt-1 mb-0">{featureGroup.group}</h3>
                                                 </div>
                                                 {featureGroup.items.map((feature, itemIndex) => (
-                                                    <FeatureItem key={`${groupIndex}-${itemIndex}`} {...feature} />
+                                                    <FeatureItem key={`${groupIndex}-${itemIndex}`} size={name === "Teams" ? 'small' : ''} {...feature} />
                                                 ))}
+
                                             </React.Fragment>
                                         ))}
                                 </div>
                                 {!plan?.flat_rate && (
-                                    <div className="max-w-[400px]">
-                                        <h5 className="m-0 px-2 lg:px-4">Price</h5>
-                                        <PricingTiers plans={plans} type={type} unit={unit} test />
+                                    <div className="max-w-[400px] mt-8">
+                                        <h5 className="m-0">Price</h5>
+                                        <div className="-ml-2 lg:-ml-4">
+                                            <PricingTiers plans={plans} type={type} unit={unit} test />
+                                        </div>
                                     </div>
                                 )}
                             </div>
