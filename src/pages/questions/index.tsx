@@ -68,7 +68,7 @@ export default function Questions() {
     })
 
     const topicsNav = useTopicsNav()
-    console.log(topicsNav)
+
     return (
         <CommunityLayout menu={topicsNav} title="Questions" contentWidth="100%">
             <div className="space-y-8 pb-12">

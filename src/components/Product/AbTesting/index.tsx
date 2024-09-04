@@ -282,7 +282,7 @@ export const ProductAbTesting = () => {
         }
     `)
     const { fullWidthContent } = useLayoutData()
-    console.log('##############################################', docsMenu)
+
     return (
         <>
             <SEO
