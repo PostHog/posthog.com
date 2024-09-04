@@ -2860,6 +2860,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/postgres',
                         },
                         {
+                            name: 'Salesforce',
+                            url: '/docs/data-warehouse/setup/salesforce',
+                        },
+                        {
                             name: 'MySQL',
                             url: '/docs/data-warehouse/setup/mysql',
                         },

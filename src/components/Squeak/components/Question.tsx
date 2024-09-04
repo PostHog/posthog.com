@@ -109,8 +109,9 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
                                             return (
                                                 <Listbox.Option key={topic.id} value={topic}>
                                                     <div
-                                                        className={`${active ? 'font-semibold' : ''
-                                                            } py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-black/50 dark:text-primary-dark`}
+                                                        className={`${
+                                                            active ? 'font-semibold' : ''
+                                                        } py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-black/50 dark:text-primary-dark`}
                                                     >
                                                         <span className="flex-shrink-0 w-3">
                                                             {active && <Check2 />}
@@ -230,7 +231,14 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
         <li
             className={`pr-[5px] pl-[30px] pb-2 !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
         >
-            <Tooltip content={() => <div className="text-sm max-w-64">Max AI is our resident AI assistant. Double-check responses for accuracy.</div>} placement="top">
+            <Tooltip
+                content={() => (
+                    <div className="text-sm max-w-64">
+                        Max AI is our resident AI assistant. Double-check responses for accuracy.
+                    </div>
+                )}
+                placement="top"
+            >
                 <div className="relative inline-block">
                     <div className="flex items-center !text-black dark:!text-white">
                         <div className="mr-2 relative">
@@ -269,11 +277,11 @@ const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) =
     const { getJwt } = useUser()
 
     const messages = [
-        "This usually takes less than 30 seconds.",
-        "Searching docs, tutorials, GitHub issues, blogs, community answers...",
+        'This usually takes less than 30 seconds.',
+        'Searching docs, tutorials, GitHub issues, blogs, community answers...',
         "We'll only show an answer if we're confident it's right!",
-        "Thanks for your patience! Should be done shortly...",
-        "P.S. Have you checked out our merch store?"
+        'Thanks for your patience! Should be done shortly...',
+        'P.S. Have you checked out our merch store?',
     ]
 
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
@@ -328,7 +336,11 @@ const AskMax = ({ question, refresh }: { question: any; refresh: () => void }) =
                             <p className="!mt-1 !mb-0 !pb-0">
                                 <strong>Hang tight, checking to see if we can find an answer for you...</strong>
                             </p>
-                            <p className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${fadeState === 'out' ? 'opacity-0' : 'opacity-100'}`}>
+                            <p
+                                className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${
+                                    fadeState === 'out' ? 'opacity-0' : 'opacity-100'
+                                }`}
+                            >
                                 {messages[currentMessageIndex]}
                             </p>
                         </div>
@@ -493,8 +505,9 @@ export const Question = (props: QuestionProps) => {
                         <Replies expanded={expanded} setExpanded={setExpanded} />
                     </div>
                     <div
-                        className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${archived ? 'opacity-25' : ''
-                            }`}
+                        className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${
+                            archived ? 'opacity-25' : ''
+                        }`}
                     >
                         <QuestionForm
                             archived={archived}
