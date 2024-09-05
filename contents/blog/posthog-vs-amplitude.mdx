@@ -79,6 +79,8 @@ Use our [built-in data warehouse](/data-warehouse) and SQL insight builder to an
 
 > 💡 **Good to know:** PostHog's feature flags are tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
 
+<br />
+
 ### Experiments
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
@@ -144,10 +146,6 @@ Use our [built-in data warehouse](/data-warehouse) and SQL insight builder to an
 
 ## Price comparison
 
-**PostHog** charges for usage – i.e. analytics events, recorded replays, and so on. **Amplitude** charges based on monthly tracked users (MTUs).
-
-PostHog is consistently cheaper for both product and web analytics. In the below comparison, we're assuming 75 identified events per monthly tracked user (MTU), which is the typical usage for most PostHog users, though many customers send less than this.
-
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_amplitude_light_6accf68a1d.jpg" 
     imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_amplitude_dark_6271c3bfa7.jpg"
@@ -155,13 +153,15 @@ PostHog is consistently cheaper for both product and web analytics. In the below
     alt="product analytics pricing"
 />
 
+PostHog charges for usage – i.e. analytics events, recorded replays, and so on. **Amplitude** charges based on monthly tracked users (MTUs). In the comparison, we're assuming 75 identified events per monthly tracked user (MTU), which is the typical usage for most PostHog users, though many customers send less than this.
+
 | **Monthly tracked users** | **Amplitude Growth** | **PostHog** | &nbsp                                                                   |
 |-------------------------|----------------------|-------------|-------------------------------------------------------------------------|
 | 1k                      | $61                  | $0          | <strong class="text-green">$732 per year cheaper</strong>    |
 | 2.5k                    | $99                  | $0          | <strong class="text-green">$1,888 per year cheaper</strong>  |
 | 5k                      | $124                 | $0          | <strong class="text-green">$1,488 per year cheaper</strong>  |
 | 10k                     | $186                 | $0          | <strong class="text-green">$2,232 per year cheaper</strong>  |
-| 25k                     | $186                 | $217        | <strong class="text-green">$1,128 per year cheaper</strong>  |
+| 25k                     | $249                 | $217        | <strong class="text-green">$1,128 per year cheaper</strong>  |
 | 50k                     | $561                 | $430        | <strong class="text-green">$1,572 per year cheaper</strong>  |
 | 75k                     | $841                 | $625        | <strong class="text-green">$2,592 per year cheaper</strong>  |
 | 100k                    | $1,061               | $820        | <strong class="text-green">$2,892 per year cheaper</strong>  |
@@ -171,7 +171,9 @@ PostHog is consistently cheaper for both product and web analytics. In the below
 
 We also provide numerous ways to [control how many events you send](/tutorials/fewer-unwanted-events) and reduce your costs, including the option to send cheaper **anonymous events**.
 
-Anonymous events **only include non-identifying data**, such as referral data (UTMs, domains, etc), device type, and basic location information. They're cheaper for us to ingest, so we charge you between 55% and 80% less for them.
+### Indentified vs anonymous events
+
+Anonymous events **only include non-identifying data**, such as referral data (UTMs, domains, etc), device type, and basic location information. They're useful if you're tracking a huge number of users and only want to analyze aggregate data, such as on a content website with millions of visitors. Anonymous events cheaper for us to ingest, so we charge you between 55% and 80% less for them.
 
 | **Monthly events** | **Identified events** | **Anonymous events** | **Change** |
 |--------------------|--------------------------|-----------------------------------|----------------|
@@ -205,6 +207,8 @@ See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for mor
 </ComparisonTable>
 
 > 💡 **Good to know:** This is just a small sample of available integrations. See our [data pipeline docs](/docs/cdp) for a full list of destinations, and our [data warehouse docs](/docs/data-warehouse) for a complete list of sources.
+
+<br />
 
 ### Security and compliance
 
