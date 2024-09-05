@@ -153,7 +153,9 @@ Use our [built-in data warehouse](/data-warehouse) and SQL insight builder to an
     alt="product analytics pricing"
 />
 
-PostHog charges for usage – i.e. analytics events, recorded replays, and so on. **Amplitude** charges based on monthly tracked users (MTUs). In the comparison, we're assuming 75 identified events per monthly tracked user (MTU), which is the typical usage for most PostHog users, though many customers send less than this.
+PostHog charges for usage – i.e. analytics events, recorded replays, and so on. **Amplitude** charges based on monthly tracked users (MTUs). 
+
+In the comparison, we're assuming 75 identified events per monthly tracked user (MTU), which is the typical usage for most PostHog users, though many customers send less than this.
 
 | **Monthly tracked users** | **Amplitude Growth** | **PostHog** | &nbsp                                                                   |
 |-------------------------|----------------------|-------------|-------------------------------------------------------------------------|
@@ -173,7 +175,11 @@ We also provide numerous ways to [control how many events you send](/tutorials/f
 
 ### Indentified vs anonymous events
 
-Anonymous events **only include non-identifying data**, such as referral data (UTMs, domains, etc), device type, and basic location information. They're useful if you're tracking a huge number of users and only want to analyze aggregate data, such as on a content website with millions of visitors. Anonymous events cheaper for us to ingest, so we charge you between 55% and 80% less for them.
+Anonymous events **only include non-identifying data**, such as referral data (UTMs, domains, etc), device type, and basic location information. 
+
+They're useful if you're tracking a huge number of users and only want to analyze aggregate data, such as on a content website with millions of visitors. 
+
+Anonymous events cheaper for us to ingest, so we charge you between 55% and 80% less for them. You'll only be charged the identified event rate when you call identifying functions like `posthog.identify()` or `posthog.group()`, or capture an event from an already-identified user. 
 
 | **Monthly events** | **Identified events** | **Anonymous events** | **Change** |
 |--------------------|--------------------------|-----------------------------------|----------------|
@@ -184,8 +190,6 @@ Anonymous events **only include non-identifying data**, such as referral data (U
 | <strong class="text-15px">50-100 million</strong>   | <span class="text-[15px] font-semibold">$0.0000364</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000218</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">40% cheaper</strong> |
 | <strong class="text-15px">100-250 million</strong>  | <span class="text-[15px] font-semibold">$0.0000187</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000150</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">20% cheaper</strong> |
 | <strong class="text-15px">250+ million</strong>     | <span class="text-[15px] font-semibold">$0.0000100</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000090</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">10% cheaper</strong> |
-
-Anonymous events are the default event type, so you'll only be charged the identified event rate when you call identifying functions like `posthog.identify()` or `posthog.group()`, or capture an event from an already-identified user. 
 
 See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for more on the difference between anonymous and identified events. You can use the [calculator on our pricing page](/pricing) to estimate how much you'll pay.
 
