@@ -18,7 +18,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 ## How is PostHog different?
 
-### 1. We're engineering and product-led
+### 1. Engineering and product-led
 
 What does this mean?
 
@@ -26,16 +26,16 @@ What does this mean?
 - It means engineers make product decisions.
 - It means [we ship fast](/changelog) and iterate based on user feedback. 
 - It means engineers do support – all product teams have a [weekly support hero](/handbook/engineering/support-hero).
-- It means we work in the open – [our roadmap](/roadmap) is public, as is [our company handbook](/handbook). 
-- It means you can start using PostHog without ever jumping on a "quick call" – see [how we do sales](/sales).
+- It means we work in the open – [our roadmap](/roadmap) and [company handbook](/handbook) are public.  
+- It means you can use PostHog without ever jumping on a "quick call" – see [how we do sales](/sales).
 
-### 2. We're cheaper and have a generous free tier
+### 2. Sustainably affordable
 
-We're committed to [sustainably cheap pricing](/pricing/philosophy) on all our products, and every customer gets a generous free monthly usage allowance. Inputting a card unlocks almost every feature, but you'll pay nothing if you stay within your free allowance. See the [price comparison section](#price-comparison) for more.
+We're committed to [sustainably low pricing](/pricing/philosophy), and every customer gets a generous free monthly usage allowance. Inputting a card unlocks almost every feature, but you'll pay nothing if you stay within the free tier. See the [price comparison section](#price-comparison) for more.
 
-### 3. We offer a built-in data warehouse
+### 3. Analytics and data warehouse in one
 
-Want the benefits of a data warehouse without the pain managing one? Use our [built-in data warehouse](/data-warehouse) to analyze data from [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), Salesforce, and [Zendesk](/tutorials/stripe-reports) using our SQL insight builder. Already have a one? You can [link it with ours](/docs/data-warehouse/setup) to analyze your data in PostHog, and [batch export event and person data](/docs/cdp/batch-exports) from PostHog to your data warehouse.
+Use our [built-in data warehouse](/data-warehouse) and SQL insight builder to analyze data from [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), Salesforce, and [Zendesk](/tutorials/stripe-reports). Already have a warehouse? You can [link it with ours](/docs/data-warehouse/setup) to analyze your data in PostHog, and [batch export event and person data](/docs/cdp/batch-exports) from PostHog to your data warehouse.
 
 ## Product comparison
 
@@ -57,7 +57,9 @@ Want the benefits of a data warehouse without the pain managing one? Use our [bu
   <ComparisonRow column1={true} column2={true} feature="Custom formulas" description="Use formulas to calculate unique insights" />
 </ComparisonTable>
 
-> **Good to know:** PostHog supports [autocapture](/docs/product-analytics/autocapture), which means you can implement PostHog in mere minutes and ensure you don't miss out on events you haven't manually instrumented. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture#disabling-autocapture) – we offer the best of both worlds.
+> 💡 **Good to know:** PostHog supports [autocapture](/docs/product-analytics/autocapture), which means you can implement PostHog in mere minutes and ensure you don't miss out on events you haven't manually instrumented. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture#disabling-autocapture) – we offer the best of both worlds.
+
+<br />
 
 ### Feature flags
 
@@ -75,7 +77,7 @@ Want the benefits of a data warehouse without the pain managing one? Use our [bu
   <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
-> **Good to know:** PostHog's feature flags are tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
+> 💡 **Good to know:** PostHog's feature flags are tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
 
 ### Experiments
 
@@ -93,7 +95,9 @@ Want the benefits of a data warehouse without the pain managing one? Use our [bu
   <ComparisonRow column1="Bayesian" column2="Sequential" feature="Statistics engine" description="How the results of an experiment are calculated" />
 </ComparisonTable>
 
-> **Good to know:** Amplitude's Web Experiments feature isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
+> 💡 **Good to know:** Amplitude's Web Experiments feature isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
+
+<br />
 
 ### Session replay
 
@@ -114,7 +118,9 @@ Want the benefits of a data warehouse without the pain managing one? Use our [bu
   <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
 </ComparisonTable>
 
-> **Good to know:** Replays let you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are reconstructions of the session, _not_ video recordings of user's screen. Private info, such as passwords, is masked.
+> 💡 **Good to know:** Replays let you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are reconstructions of the session, _not_ video recordings of user's screen. Private info, such as passwords, is masked.
+
+<br />
 
 ### Surveys
 
@@ -132,7 +138,9 @@ Want the benefits of a data warehouse without the pain managing one? Use our [bu
   <ComparisonRow column1={true} column2={false} feature="API mode" description="Create surveys via the API" />
 </ComparisonTable>
 
-> **Good to know:** [Survey templates](/templates?filter=type&value=survey) make it easy to run NPS, product-market-fit (PMF), and customer satisfaction (CSAT) surveys in just a few clicks. Read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to for more on how to use surveys.
+> 💡 **Good to know:** [Survey templates](/templates?filter=type&value=survey) make it easy to run NPS, product-market-fit (PMF), and customer satisfaction (CSAT) surveys in just a few clicks. Read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to for more on how to use surveys.
+
+<br />
 
 ## Price comparison
 
@@ -196,7 +204,7 @@ See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for mor
    <ComparisonRow column1={false} column2={true} feature="Google Ads" description="Import ROI data from Google Ads" />   
 </ComparisonTable>
 
-> **Good to know:** This is just a small sample of available integrations. See our [data pipeline docs](/docs/cdp) for a full list of destinations, and our [data warehouse docs](/docs/data-warehouse) for a complete list of sources.
+> 💡 **Good to know:** This is just a small sample of available integrations. See our [data pipeline docs](/docs/cdp) for a full list of destinations, and our [data warehouse docs](/docs/data-warehouse) for a complete list of sources.
 
 ### Security and compliance
 
@@ -205,10 +213,14 @@ See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for mor
   <ComparisonRow column1={true} column2={true} feature="History, audit logs" description="Manage and view flag edits and related users" />
   <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
   <ComparisonRow column1={true} column2={true} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
-  <ComparisonRow column1={true} column2={true} feature="SOC 2" description="SOC 2 security certification" />
+  <ComparisonRow column1={true} column2={true} feature="SOC 2 Type II" description="SOC 2 security certification" />
   <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
   <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
 </ComparisonTable>
+
+> 💡 **Good to know:** Wee offer a Business Associate Aggreement (BAA) for any customer on the Teams add-on, which also includes priority support, SSO enforcement, and additional collaboration features.
+
+<br />
 
 ## FAQ
 
