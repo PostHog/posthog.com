@@ -1,6 +1,6 @@
 ---
 title: 'In-depth: PostHog vs Amplitude'
-date: 2024-09-03
+date: 2024-09-05
 author:
   - andy-vandervell
 rootpage: /blog
@@ -33,9 +33,9 @@ What does this mean?
 
 We're committed to [sustainably cheap pricing](/pricing/philosophy) on all our products, and every customer gets a generous free monthly usage allowance. Inputting a card unlocks almost every feature, but you'll pay nothing if you stay within your free allowance. See the [price comparison section](#price-comparison) for more.
 
-### 3. You can use our data warehouse (or run your own)
+### 3. We offer a built-in data warehouse
 
-Want the benefits of a data warehouse without the pain managing one? Use our [built-in data warehouse](/data-warehouse) to analyze data from [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), Salesforce, and [Zendesk](/tutorials/stripe-reports) using our SQL insight builder. Already have a warehouse? You can [link it ours](/docs/data-warehouse/setup) and analyze your data in PostHog, and [batch export event and person data](/docs/cdp/batch-exports) from PostHog to your data warehouse.
+Want the benefits of a data warehouse without the pain managing one? Use our [built-in data warehouse](/data-warehouse) to analyze data from [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), Salesforce, and [Zendesk](/tutorials/stripe-reports) using our SQL insight builder. Already have a one? You can [link it with ours](/docs/data-warehouse/setup) to analyze your data in PostHog, and [batch export event and person data](/docs/cdp/batch-exports) from PostHog to your data warehouse.
 
 ## Product comparison
 
@@ -57,7 +57,7 @@ Want the benefits of a data warehouse without the pain managing one? Use our [bu
   <ComparisonRow column1={true} column2={true} feature="Custom formulas" description="Use formulas to calculate unique insights" />
 </ComparisonTable>
 
-> PostHog supports [autocapture](/docs/product-analytics/autocapture), which makes it much faster to implement if you don't want to manually instrument every event. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture#disabling-autocapture) and use one of our SDKs – we offer the best of both worlds.
+> **Good to know:** PostHog supports [autocapture](/docs/product-analytics/autocapture), which means you can implement PostHog in mere minutes and ensure you don't miss out on events you haven't manually instrumented. Don't want autocapture? Just [turn it off](/docs/product-analytics/autocapture#disabling-autocapture) – we offer the best of both worlds.
 
 ### Feature flags
 
@@ -75,7 +75,7 @@ Want the benefits of a data warehouse without the pain managing one? Use our [bu
   <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
-> PostHog's feature flags are tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
+> **Good to know:** PostHog's feature flags are tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
 
 ### Experiments
 
@@ -93,7 +93,7 @@ Want the benefits of a data warehouse without the pain managing one? Use our [bu
   <ComparisonRow column1="Bayesian" column2="Sequential" feature="Statistics engine" description="How the results of an experiment are calculated" />
 </ComparisonTable>
 
-> Amplitude's Web Experiments feature isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
+> **Good to know:** Amplitude's Web Experiments feature isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
 
 ### Session replay
 
@@ -114,7 +114,7 @@ Want the benefits of a data warehouse without the pain managing one? Use our [bu
   <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
 </ComparisonTable>
 
-> Replays let you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are _not_ video recordings of users.
+> **Good to know:** Replays let you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are reconstructions of the session, _not_ video recordings of user's screen. Private info, such as passwords, is masked.
 
 ### Surveys
 
@@ -132,11 +132,13 @@ Want the benefits of a data warehouse without the pain managing one? Use our [bu
   <ComparisonRow column1={true} column2={false} feature="API mode" description="Create surveys via the API" />
 </ComparisonTable>
 
-> [Survey templates](/templates?filter=type&value=survey) make it easy to run NPS, product-market-fit (PMF), and customer satisfaction (CSAT) surveys in just a few clicks. Read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which one you should use and when.
+> **Good to know:** [Survey templates](/templates?filter=type&value=survey) make it easy to run NPS, product-market-fit (PMF), and customer satisfaction (CSAT) surveys in just a few clicks. Read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to for more on how to use surveys.
 
 ## Price comparison
 
-**PostHog** charges for usage – i.e. analytics events, recorded replays, and so on. **Amplitude** charges based on monthly tracked users (MTUs). The cost of add ons, such as A/B testing (not available on self-serve plans), group analytics, and unlimited cohorts (self-serve plans are limited to five) isn't disclosed.
+**PostHog** charges for usage – i.e. analytics events, recorded replays, and so on. **Amplitude** charges based on monthly tracked users (MTUs).
+
+PostHog is consistently cheaper for both product and web analytics. In the below comparison, we're assuming 75 identified events per monthly tracked user (MTU), which is the typical usage for most PostHog users, though many customers send less than this.
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_amplitude_light_6accf68a1d.jpg" 
@@ -144,8 +146,6 @@ Want the benefits of a data warehouse without the pain managing one? Use our [bu
     classes="rounded"
     alt="product analytics pricing"
 />
-
-PostHog is consistently cheaper for both product and web analytics. In the above comparison, we're assuming 75 identified events per monthly tracked user (MTU), which is the typical usage for most PostHog users, though many customers send less than this.
 
 | **Monthly tracked users** | **Amplitude Growth** | **PostHog** | &nbsp                                                                   |
 |-------------------------|----------------------|-------------|-------------------------------------------------------------------------|
@@ -161,7 +161,7 @@ PostHog is consistently cheaper for both product and web analytics. In the above
 | 200k                    | $2,100               | $1,600      | <strong class="text-green">$6,000 per year cheaper</strong>  |
 | 300k                    | $3,150               | $2,091      | <strong class="text-green">$12,708 per year cheaper</strong> |
 
-We also provide [numerous ways](/tutorials/fewer-unwanted-events) to control how many events you send and reduce your costs, including the option to send cheaper **anonymous events**.
+We also provide numerous ways to [control how many events you send](/tutorials/fewer-unwanted-events) and reduce your costs, including the option to send cheaper **anonymous events**.
 
 Anonymous events **only include non-identifying data**, such as referral data (UTMs, domains, etc), device type, and basic location information. They're cheaper for us to ingest, so we charge you between 55% and 80% less for them.
 
@@ -196,7 +196,7 @@ See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for mor
    <ComparisonRow column1={false} column2={true} feature="Google Ads" description="Import ROI data from Google Ads" />   
 </ComparisonTable>
 
-- See our [data pipeline docs](/docs/cdp) for a full list of PostHog integrations.
+> **Good to know:** This is just a small sample of available integrations. See our [data pipeline docs](/docs/cdp) for a full list of destinations, and our [data warehouse docs](/docs/data-warehouse) for a complete list of sources.
 
 ### Security and compliance
 
@@ -214,7 +214,7 @@ See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for mor
 
 ### Does PostHog offer a free trial?
 
-We don't need to. Every customer gets a generous free usage allowance each month, so you can sign up and start using PostHog for nothing. Here's how PostHog's and Amplitude's free tiers compare:
+We don't need to. Every customer gets a generous free usage allowance each month, so you can sign up and start using PostHog for nothing. Here's how PostHog and Amplitude's free tiers compare:
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
    <ComparisonRow column1="1 million events" column2="50k tracked users" feature="Free analytics usage" description="Free tier usage each month" />
@@ -230,7 +230,7 @@ We don't need to. Every customer gets a generous free usage allowance each month
 
 Companies that qualify for [our startup program](/startups) also get $50,000 in PostHog credit and a range of additional benefits. 
 
-### Can PostHog also replace Google Analytics?
+### Can PostHog replace Google Analytics?
 
 Yes. PostHog can replace Google Analytics for many use cases – [our marketing team uses PostHog](/blog/posthog-marketing), for example. You can integrate PostHog into your website using [Google Tag Manager](/docs/libraries/google-tag-manager). See our comparison of [PostHog and Google Analytics 4](/blog/posthog-vs-ga4) and [an intro to PostHog for Google Analytics users](/blog/google-analytics-to-posthog) for more.
 
