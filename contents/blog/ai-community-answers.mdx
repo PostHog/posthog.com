@@ -1,0 +1,123 @@
+---
+date: 2024-09-05
+title: How we're enlisting AI to answer community questions
+rootPage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/changelog_image_poster_f60be59481.png
+featuredImageType: full
+author:
+  - cory-watilo
+category: PostHog news
+---
+
+AI. You may have heard of it.
+
+Sure, ChatGPT is pretty cool, but when it comes to AI chatbots that try to replace a human, I've generally been underwhelmed.
+
+But it's not all the fault of LLMs. It also has to do with the available information about a product that an LLM consumes. And for a technical product like PostHog, the documentation has to be extensive enough to answer very nuanced questions. (This is tricky when there's always room for improvement!)
+
+As the product owner for posthog.com, I've contemplated how we can make use of AI to help answer questions... and until now, I've been missing a good solution.
+
+The reason we've been so cautious to introduce AI is that we're very intentional about earning (and not losing) the trust of our audience. We do this in a handful of ways:
+
+1. We don't use fancy words that don't mean anything
+1. We try to be relatable and show a personality
+1. We traded in the [value-based sales model](/sales) for a no-BS approach (self-service, fair, usage-based pricing)
+1. We avoid gimmicky marketing tactics (like popups and jamming CTAs into every available whitespace)
+
+So when it comes to integrating AI, it has to be tactful and it needs to work well. After all, if you interact with an AI chatbot and don't get the answer you're looking for, you're likely to write it off entirely. And that's what I want to avoid.
+
+## Why AI chatbots have a bad rap
+
+There are a lot of _"wrong"_ ways to do AI chatbots, and many examples exist before we actually started using AI for this.
+
+How many times have you tried to create a support ticket but then:
+
+- been prompted to review a list of "related questions" that may solve your issue first
+- been _blocked_ from submitting until you explicitly verify that none of the suggested answers are helpful
+
+In no world would we subject our very technical audience to this.
+
+And now in a world of _actual_ AI, we more issues, largely centered around LLMs not understanding the question or the context.
+
+There are a handful of exceptions (Intercom and Shopify do this well), but the status quo the industry has to overcome is this negative connotation of bad chatbot interactions.
+
+## Our approach
+
+The most natural place to include an AI chatbot would be in our [docs](/docs). But I was hesitant to start here, as the conversational nature of AI means we'd lack control over the quality and accuracy of the responses. So I decided to go a different route.
+
+We have a [community questions](/questions) page where users can ask questions directly in the docs, and right now there are _a lot_ more questions than answers.
+
+This presented an opportunity. Using AI here seemed like a great place to start.
+
+**But how would we avoid the issue of quality control?**
+
+Then it hit me: because community questions are _asynchronous_ (like a forum), what if we limited the AI solution to answer _only_ the questions it was confident in answering, while leaving others for humans to answer?
+
+Using this approach, AI can _add_ value by instantly responding if it has a high degree of confidence, but it won't detract from the experience if it doesn't have the solution.
+
+## Introducing Inkeep
+
+This whole thing came about from an [Inkeep](https://inkeep.com?utm_source=posthog) ad on LinkedIn – which is incredible to say because I'm generally alergic to ads. But Inkeep's ad spoke to me.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/inkeep_ad_9b53d43fda.png" 
+    classes="rounded"
+    alt="Inkeep's LinkedIn ad"
+/>
+
+I took the bait, and they quickly set me up with [a custom sandbox](https://share.inkeep.com/posthog/3003538eb7fd) to try them out.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/inkeep_sandbox_4ca8513bf0.png" 
+    classes="rounded"
+    alt="Inkeep sandbox"
+/>
+
+They even themed it to match our brand.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/inkeep_email_f22b3b7112.png" 
+    classes="rounded"
+    alt="Inkeep email"
+/>
+
+To vet the quality of the answers, I started copy/pasting unanswered community questions into the sandbox and seeing what Inkeep could produce. And to say I wasn't let down should tell you a lot. It was good enough to where I was willing to try it out on our real questions.
+
+## How it works
+
+1. When a new question is submitted, we send it to Inkeep's API.
+1. Within ~20 seconds, we get a response.
+1. In the response, we get a `confidence` score.
+
+    ```
+    const KnownAnswerConfidence = z.enum([
+      "very_confident",
+      "somewhat_confident",
+      "not_confident",
+      "no_sources",
+      "other",
+    ]);
+    ```
+
+    - **If the confidence score is high enough,** we show the answer to the user as posted by <TeamMember name="Max AI" photo />.
+    - **If Inkeep isn't confident in the answer,** we show a message that says we couldn't find an answer, and that a human will appear to answer as soon as they can.
+1. If an answer is presented, we show feedback buttons so they can tell us if the answer was helpful. We use this information to improve the quality of the answers.
+
+<TeamMember name="Max AI" photo />
+
+## Demo
+
+<ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/inkeep_demo_71fa820a65.mp4" 
+    alt="Inkeep answers a PostHog question" 
+    classes="rounded shadow-xl"
+/>
+
+
+---
+
+@todo:
+
+findings:
+- "not helpful" might mean "actually inaccurate" but more likely means "i didn't like this answer"
