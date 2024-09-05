@@ -14,7 +14,10 @@ As general guidance, we don't care about a few days here and there. If you are t
 
 We care about your results, not how long you work.
 
-You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. For example, having an entire Small Team off at the same time means we can't be responsive to community issues.
+You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. You should avoid things like:
+
+- Having an entire Small Team off - this means we can't provide support to customers
+- Having the only X people who can do some totally critical task at PostHog off - if this is unavoidable, try to make sure one of you can at least check in if something goes horribly wrong
 
 ### How to book time off in PTO by Deel
 
