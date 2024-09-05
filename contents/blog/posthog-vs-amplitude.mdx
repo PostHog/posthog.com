@@ -16,12 +16,6 @@ import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-Amplitude and PostHog are superficially similar. 
-
-They both offer product analytics and a range of additional tools, like feature flags, A/B testing, and session replay. 
-
-But, deep down, Amplitude is an analytics tool with some extra bits grafted on. In contrast, PostHog is built from the ground up as an all-in-one platform for building successful products. Here's how they compare.
-
 ## How is PostHog different?
 
 ### 1. We're engineering and product-led
@@ -35,13 +29,13 @@ What does this mean?
 - It means we work in the open – [our roadmap](/roadmap) is public, as is [our company handbook](/handbook). 
 - It means you can start using PostHog without ever jumping on a "quick call" – see [how we do sales](/sales).
 
-### 2. We're building a genuine all-in-one platform
+### 2. We're cheaper and have a generous free tier
+
+We're committed to [sustainably cheap pricing](/blog/analytics-pricing) on all our products. Every customer gets a generous free allowance every month. Inputting a card unlocks almost every feature, but you'll pay nothing if you stay within your free allowance. See the [price comparison section](#price-comparison) for more.
+
+### 3. We're building a genuine all-in-one platform (REWORK THIS)
 
 We want you to spend less time engineering your data and more time engineering your product. You can ditch [Mixpanel](/blog/posthog-vs-mixpanel) and Amplitude for analytics, [Hotjar](/posthog-vs-hotjar) for replays and surveys, and [LaunchDarkly](/blog/posthog-vs-launchdarkly) for feature flags and experiments, with one seamlessly integrated platform. Need a data warehouse as well? We've [got you covered](/data-warehouse).
-
-### 3. We're cheaper and have a generous free tier
-
-We're committed to [sustainably cheap pricing](/blog/analytics-pricing) on all our products. Every user get a [generous free allowance](#free-tiers) every month. Inputting a card unlocks almost every feature, but you'll pay nothing if you stay within the free tiers. See the [price comparison section](#price-comparison) for more.
 
 ## Product comparison
 
@@ -96,14 +90,14 @@ There are two key differences here:
   <ComparisonRow column1={true} column2={false} feature="Early access" description="Manage betas, test features" />
 </ComparisonTable>
 
-- Feature flags make it easy to roll out features to specific users or groups, and [safely test in production](/product-engineers/testing-in-production). 
-
 - PostHog's feature flags are also tightly integrated with other features, so you can target session replays, surveys, and more using existing feature flags. See our guide on the [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) for more.
 
 ### Experiments
 
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1="1 million API requests" column2="None" feature="Free usage" description="How much free usage do you get each month?" />
+  <ComparisonRow column1={true} column2={true} feature="Web experiments" description="Run A/B tests on web apps and websites" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile experiments" description="Run A/B tests on Android and iOS apps" />
   <ComparisonRow column1={true} column2={true} feature="Custom goals" description="Customize metrics that a test tracks" />
   <ComparisonRow column1={true} column2={true} feature="Secondary metrics" description="Monitor impact on unrelated metrics" />
   <ComparisonRow column1={true} column2={true} feature="Split testing" description="Split participants into groups" />
@@ -114,7 +108,7 @@ There are two key differences here:
   <ComparisonRow column1="Bayesian" column2="Sequential" feature="Statistics engine" description="How the results of an experiment are calculated" />
 </ComparisonTable>
 
-- PostHog's offers a generous free 1 million A/B testing events. Amplitude's A/B testing isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
+- Amplitude's Web Experiments feature isn't available on any self-serve plan and the price isn't disclosed. You must contact its sales team to use it.
 
 ### Session replay
 
@@ -153,35 +147,13 @@ There are two key differences here:
   <ComparisonRow column1={true} column2={false} feature="API mode" description="Create surveys via the API" />
 </ComparisonTable>
 
-- Surveys are great for tracking customer satisfaction scores like Net Promoter Score (NPS), customer satisfaction (CSAT), and customer effort score (CES).
-
 - We include [survey templates](/templates?filter=type&value=survey) for all these and more helping you get started fast. Read our [guide comparing NPS, CSAT and CES](/product-engineers/nps-vs-csat-vs-ces) to see which one you should use and when.
 
 ## Price comparison
 
-### Free tier
-
-<ComparisonTable column1="PostHog" column2="Amplitude">
-   <ComparisonRow column1="1 million events" column2="50k tracked users" feature="Free analytics usage" description="Free tier usage each month" />
-   <ComparisonRow column1="5,000 recordings" column2="1,000 recordings" feature="Free replay usage" description="Free tier usage each month" />
-   <ComparisonRow column1="Unlimited" column2="10 only" feature="Saved insights" description="Number of you charts you can create" />   
-   <ComparisonRow column1={true} column2={false} feature="Custom events" description="Create custom tracking events" />
-   <ComparisonRow column1={true} column2={false} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
-   <ComparisonRow column1={true} column2={false} feature="Formulas" description="Create custom insights using formulas" />
-   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Release and control features" />
-   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run tests on users and groups" />
-   <ComparisonRow column1={true} column2={false} feature="Surveys" description="Gather feedback and book user interviews" />
-</ComparisonTable>
-
-- Amplitude offers a free Starter plan, but it has many arbitrary limitations and a low limit on usage.
-
-- Users who qualify for [our startup program](/startups) also get $50,000 in PostHog credit and a range of additional benefits. 
-
-### Analytics pricing
-
 **PostHog** charges for usage – i.e. analytics events, recorded replays, feature flag API requests, and so on. No credit card is required to signup and use PostHog, but entering a credit card unlocks almost all features and **you'll pay nothing** if you stay within our **generous free tier**
 
-**Amplitude** charges based on monthly tracked users (MTUs). The cost of add owns, such as A/B testing (not available on self-serve plans), group analytics, and unlimited cohorts (self-serve plans are limited to five) isn't disclosed.
+**Amplitude** charges based on monthly tracked users (MTUs). The cost of add ons, such as A/B testing (not available on self-serve plans), group analytics, and unlimited cohorts (self-serve plans are limited to five) isn't disclosed.
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog_vs_amplitude_light_6accf68a1d.jpg" 
@@ -206,31 +178,11 @@ PostHog is consistently cheaper for both product and web analytics. In the above
 | 200k                    | $2,100               | $1,600      | <strong class="text-green">$6,000 per year cheaper</strong>  |
 | 300k                    | $3,150               | $2,091      | <strong class="text-green">$12,708 per year cheaper</strong> |
 
+At each tier, PostHog is around 22% to 33% cheaper than Amplitude. Sending more than 75 identified events per MTU will increase the cost of PostHog relative to Amplitude, while sending fewer events will reduce the cost further still. This means you can tune your usage to your needs and still track all your users.
 
-At each tier, PostHog is around 22% to 33% cheaper than Amplitude. Sending more than 75 identified events per MTU will increase the cost of PostHog relative to Amplitude, and sending fewer events will reduce the cost. 
-
-The benefit of charging per-event is that you can control how many events you send per user by only sending important events, whereas there is less desirable control for tracking fewer _users_. We provide [numerous ways](/tutorials/fewer-unwanted-events) to control how many events you send and reduce your costs, including the option to send cheaper **anonymous events**.
+We also provide [numerous ways](/tutorials/fewer-unwanted-events) to control how many events you send and reduce your costs, including the option to send cheaper **anonymous events**.
 
 Anonymous events **only include non-identifying data**, such as referral data (UTMs, domains, etc), device type, and basic location information. They're cheaper for us to ingest, so we charge you between 55% and 80% less for them.
-
-<div class="md:hidden mb-4">
-<img src="https://res.cloudinary.com/dmukukwp6/image/upload/event_types_mobile_light_eca61d99fe.png" alt="Event prices" class="dark:hidden" />
-<img src="https://res.cloudinary.com/dmukukwp6/image/upload/event_types_mobile_dark_686a64f4f1.png" alt="Event prices" class="hidden dark:block" />
-</div>
-
-<div class="hidden md:block mb-4">
-<img src="https://res.cloudinary.com/dmukukwp6/image/upload/event_types_desktop_light_f8989c06cd.png" alt="Event prices" class="dark:hidden" />
-<img src="https://res.cloudinary.com/dmukukwp6/image/upload/event_types_desktop_dark_89c055bd76.png" alt="Event prices" class="hidden dark:block" />
-</div>
-
-Anonymous events are ideal for tracking users who aren't logged in, or for use cases where you only need to analyze behavior at an aggregate level, such as:
-
-- Visitors to your marketing website
-- Shoppers on an e-commerce store
-- Logged-out users of mobile apps
-- Tracking API and backend events
-- Events generated by LLMs
-- Error monitoring
 
 | **Monthly events** | **Identified events** | **Anonymous events** | **Change** |
 |--------------------|--------------------------|-----------------------------------|----------------|
@@ -242,11 +194,9 @@ Anonymous events are ideal for tracking users who aren't logged in, or for use c
 | <strong class="text-15px">100-250 million</strong>  | <span class="text-[15px] font-semibold">$0.0000187</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000150</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">20% cheaper</strong> |
 | <strong class="text-15px">250+ million</strong>     | <span class="text-[15px] font-semibold">$0.0000100</span><span class="text-sm opacity-70">/event</span>  | <span class="text-[15px] font-semibold">$0.0000090</span><span class="text-sm opacity-70">/event</span> | <strong class="text-green">10% cheaper</strong> |
 
-Anonymous events are the default event type. You'll only be charged the identified event rate when you call identifying functions like `posthog.identify()` or `posthog.group()`, or capture an event from an already-identified user. 
+Anonymous events are the default event type, so you'll only be charged the identified event rate when you call identifying functions like `posthog.identify()` or `posthog.group()`, or capture an event from an already-identified user. 
 
-See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for more on the difference between anonymous and identified events, and how you can save money when using PostHog.
-
-Use the [calculator on our pricing page](/pricing) to estimate how much you'll pay.
+See [We've decided to make less money [Part 2]](/blog/analytics-pricing) for more on the difference between anonymous and identified events, and how you can save money when using PostHog. You can use the [calculator on our pricing page](/pricing) to estimate how much you'll pay.
 
 ## Platform comparison
 
@@ -280,6 +230,24 @@ Use the [calculator on our pricing page](/pricing) to estimate how much you'll p
 </ComparisonTable>
 
 ## FAQ
+
+### Does PostHog offer a free trial?
+
+We don't need to. Every customer gets a generous free usage allowance each month, so you can sign up and start using PostHog for nothing. Here's how PostHog's and Amplitude's free tiers compare:
+
+<ComparisonTable column1="PostHog" column2="Amplitude">
+   <ComparisonRow column1="1 million events" column2="50k tracked users" feature="Free analytics usage" description="Free tier usage each month" />
+   <ComparisonRow column1="5,000 recordings" column2="1,000 recordings" feature="Free replay usage" description="Free tier usage each month" />
+   <ComparisonRow column1="Unlimited" column2="10 only" feature="Saved insights" description="Number of you charts you can create" />   
+   <ComparisonRow column1={true} column2={false} feature="Custom events" description="Create custom tracking events" />
+   <ComparisonRow column1={true} column2={false} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
+   <ComparisonRow column1={true} column2={false} feature="Formulas" description="Create custom insights using formulas" />
+   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Release and control features" />
+   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Run tests on users and groups" />
+   <ComparisonRow column1={true} column2={false} feature="Surveys" description="Gather feedback and book user interviews" />
+</ComparisonTable>
+
+Companies that qualify for [our startup program](/startups) also get $50,000 in PostHog credit and a range of additional benefits. 
 
 ### Can PostHog also replace Google Analytics?
 
