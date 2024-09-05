@@ -1,10 +1,10 @@
 import React from 'react'
 
-export const ProductVideo = ({ videoLight, videoDark, classes = '' }) => {
+export const ProductVideo = ({ videoLight, videoDark, autoplay = true, classes = '' }) => {
     return (
         <div className="mb-4 border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark">
             <video
-                autoPlay
+                autoPlay={autoplay}
                 loop
                 muted
                 playsInline
@@ -13,7 +13,7 @@ export const ProductVideo = ({ videoLight, videoDark, classes = '' }) => {
             ></video>
             {videoDark && (
                 <video
-                    autoPlay
+                    autoPlay={autoplay}
                     loop
                     muted
                     playsInline

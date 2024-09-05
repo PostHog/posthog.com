@@ -172,7 +172,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                         </span>
                                     )}
                                 </div>
-                                <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
+                                <strong>{profile.data.attributes.firstName || 'Anonymous'} {profile.data.attributes.lastName || 'Anonymous'}</strong>
                                 {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
                                 <IconFeatures className="size-5 ml-1 text-primary dark:text-primary-dark opacity-50 inline-block" />
                             </Link>
@@ -227,7 +227,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                 )}
                 <div className={reply?.attributes?.helpful === false ? 'opacity-70' : ''}>
                     {reply?.attributes?.helpful === false && (
-                        <div className="p-2 rounded border border-light dark:border-dark mb-2 text-sm bg-accent dark:bg-accent-dark">
+                        <div className="p-2 rounded border border-light dark:border-dark text-sm bg-accent dark:bg-accent-dark">
                             <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful and is only
                             visible to you.
                         </div>
