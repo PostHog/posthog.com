@@ -20,7 +20,7 @@ Our sample app will have two screens:
 - The first screen is a `login` screen with name, email, and password text fields.
 - The second screen is a simple screen with welcome text and logout button.
 
-The first step is to create a new app. Open XCode and click **Create new project**. Select iOS as your platform, then **App** and press **next**. Give your app a name, select `Storyboard` as the interface, and the defaults for everything else. Click next and then **Create**.
+The first step is to create a new app. Open XCode and click **Create new project**. Select iOS as your platform, then **App** and press **Next**. Give your app a name, select `Storyboard` as the interface, and the defaults for everything else. Click next and then **Create**.
 
 Then, replace your code in `ViewController` with the following:
 
