@@ -56,10 +56,6 @@
         "url": "/cdp/timestamp-parser"
     },
     {
-        "name": "Twilio",
-        "url": "/cdp/twilio"
-    },
-    {
         "name": "User Agent Populator",
         "url": "/cdp/user-agent-populator"
     }

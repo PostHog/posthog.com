@@ -2723,10 +2723,6 @@ export const docsMenu = {
                             name: 'Sentry',
                         },
                         {
-                            url: '/docs/cdp/twilio',
-                            name: 'Twilio',
-                        },
-                        {
                             url: '/docs/cdp/variance-connector',
                             name: 'Variance',
                         },

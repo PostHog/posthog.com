@@ -14,7 +14,7 @@ tags:
 
 Apps are an incredibly powerful part of the PostHog platform, capable of doing almost anything. Apps can alter events as they are ingested, sync data with other platforms, perform scheduled chores and a lot more besides. Almost anything you may want to do with PostHog, you can do with an app.
 
-Right now, PostHog has a library of more than 50 apps available to all users. These include apps which integrate PostHog with platforms such as [Salesforce](/apps/salesforce-connector), [BigQuery](/apps/bigquery-export), [Hubspot](/apps/hubspot-connector), [Twilio](/apps/twilio), [Zapier](/apps/zapier-connector) and [more](/apps).
+Right now, PostHog has a library of more than 50 apps available to all users. These include apps which integrate PostHog with platforms such as [Salesforce](/apps/salesforce-connector), [BigQuery](/apps/bigquery-export), [Hubspot](/apps/hubspot-connector), [Zapier](/apps/zapier-connector) and [more](/apps).
 
 Even better, if there isn’t an app available that does what you need then you can build your own! There are several ways to create an app, including [creating a dedicated GitHub repo](/docs/apps/build/tutorial#using-a-github-repository) — but in this tutorial we’ll explore how you can create your own app without ever leaving the PostHog platform. 
 
