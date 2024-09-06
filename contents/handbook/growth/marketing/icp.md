@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 Aligned with our Strategic [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework), ICP scoring helps us to focus our efforts on those customers who are likely to help us hit our growth targets quickly.
-We use [Clearbit](https://clearbit.com/) to enhance our contact information as it is created and then compute a score out of 24 in [HubSpot](https://app.hubspot.com/property-settings/6958578/properties?action=edit&property=hubspotscore&search=hubspot&type=0-1) based on the following parameters:
+We use [Clearbit](https://clearbit.com/) to enhance our contact information as it is created and then compute a score out of 24 in [Salesforce](https://posthog.lightning.force.com/lightning/setup/ObjectManager/Lead/FieldsAndRelationships/00NHp000018JdMZ/view) based on the following parameters:
 
 - *Employee count* - we use this as a strong indicator for product market fit.  Smaller companies are less likely to have achieved this so our highest score here goes to companies in the 15-500 employee range.  We score companies over 500 employees lower as they will generally be slower to deal with.
 - *Ability to pay* - indicates whether a company is likely to pay for a product like PostHog to solve their problems.  This is computed from the estimated company revenue. If their revenue is between $1m and $50m they get the highest score (6 points).
@@ -34,4 +34,4 @@ We use [Clearbit](https://clearbit.com/) to enhance our contact information as i
 | Email provider | Non-work email                                                                                                                                                                                                                                                                           | -10   |
 
 
-We also sync the HubSpot score back into PostHog as the `hubspot_score` person property using the [HubSpot App](/apps/hubspot-connector).  Our current dividing line between High and Low ICP score is **12**.
+We also sync the ICP score back into PostHog as the `icp_score` person property.  Our current dividing line between High and Low ICP score is **12**.

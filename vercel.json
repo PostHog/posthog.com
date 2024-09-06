@@ -1335,6 +1335,10 @@
             "source": "/pricing",
             "destination": "/surveys#pricing",
             "has": [{ "type": "query", "key": "product", "value": "surveys" }]
+        },
+        {
+            "source": "/handbook/growth/sales/icp",
+            "destination": "/handbook/growth/marketing/icp"
         }
     ]
 }
