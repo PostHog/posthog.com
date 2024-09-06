@@ -1,0 +1,46 @@
+---
+title: Web vitals autocapture
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import { ProductVideo } from 'components/ProductVideo'
+
+PostHog can automatically capture [core web vitals](https://web.dev/explore/learn-core-web-vitals) like LCP, FID, CLS, and FCP. This you means you don't need to manually add logging from [Google's web vitals library](https://github.com/GoogleChrome/web-vitals).
+
+## How to enable web vitals autocapture
+
+Go to your [Autocapture & heapmaps settings](https://us.posthog.com/project/settings/project-autocapture#web-vitals-autocapture). Then, in the **Web vitals autocapture** section, click **Enable**.
+
+Note that web vitals autocapture is separate from our regular [autocapture](/docs/product-analytics/autocapture) feature. Web vitals can be captured regardless of whether autocapture is enabled.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1725632828/posthog.com/contents/Screenshot_2024-09-06_at_3.26.12_PM.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1725632829/posthog.com/contents/Screenshot_2024-09-06_at_3.26.18_PM.png"
+  alt="How to enable web vitals autocapture" 
+  classes="rounded"
+/>
+
+Once enabled, web vitals will be captured under the `Web vitals` event name.
+
+## Dashboard template
+
+Once you've enabled the integration, we've created a dashboard templatehelp you quickly set up relevant insights. 
+
+To create your own dashboard from a template:
+
+1. Go the [dashboard tab](https://us.posthog.com/dashboard) in PostHog.
+2. Click the **New dashboard** button in the top right.
+3. Select **Web vitals** from the list of templates.
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/v1725633857/posthog.com/contents/dashbaord-template.mp4" 
+    videoDark="https://res.cloudinary.com/dmukukwp6/video/upload/v1725633861/posthog.com/contents/dark.mp4"
+    alt="Popover icon" 
+    classes="rounded"
+/>

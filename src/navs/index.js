@@ -2186,6 +2186,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Web vitals',
+                    url: '/docs/product-analytics/web-vitals',
+                    icon: 'IconWrench',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Data management',
                     url: '/docs/data',
                     icon: 'IconDatabase',
