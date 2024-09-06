@@ -1,0 +1,30 @@
+> This library was built by the community and is not maintained by the PostHog core team.
+
+Run the following command to install the package:
+
+```
+npm install @capawesome/capacitor-posthog posthog-js
+```
+
+After installing the package, you need to sync your Capacitor project:
+
+```
+npx cap sync
+```
+
+### Configuration
+
+To use the plugin, you need to call the `setup(...)` method with your PostHog project's API key:
+
+```typescript
+import { Posthog } from '@capawesome/capacitor-posthog';
+
+const setup = async () => {
+  await Posthog.setup({
+    apiKey: 'phc_g8wMenebiIQ1pYd5v9Vy7oakn6MczVKIsNG5ZHCspdy',
+    host: 'https://eu.i.posthog.com',
+  });
+};
+```
+
+You can also pass in a `host` key to specify the PostHog instance you want to send events to. The default host is `https://us.i.posthog.com`.

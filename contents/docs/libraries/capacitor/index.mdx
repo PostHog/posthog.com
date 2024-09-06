@@ -1,0 +1,81 @@
+---
+title: Capacitor
+sidebarTitle: Capacitor
+sidebar: Docs
+showTitle: true
+tags:
+  - community
+github: 'https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/posthog'
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/capacitor.svg
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: false
+  featureFlags: false
+  groupAnalytics: true
+---
+
+This Capacitor plugin enables you to integrate PostHog with your Capacitor project. Take a look at the [plugin documentation](https://capawesome.io/plugins/posthog/) for more information.
+
+## Installation
+
+import CapacitorInstall from '../../integrate/_snippets/install-capacitor.mdx'
+
+<CapacitorInstall />
+
+## Capturing events
+
+import CapacitorSendEvents from '../../integrate/send-events/_snippets/send-events-capacitor.mdx'
+
+<CapacitorSendEvents />
+
+## Feature flags
+
+import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
+
+<FeatureFlagsLibsIntro />
+
+Feature flags are not yet supported by this library. If you would like to contribute, please check out the [GitHub repository](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/posthog).
+
+## Group analytics
+
+Group analytics allows you to associate the events for that person's session with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
+
+> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
+
+-   Associate the events for this session with a group
+
+```js
+import { Posthog } from '@capawesome/capacitor-posthog';
+
+const group = async () => {
+  await Posthog.group({
+    type: 'company',
+    key: 'company_id_in_your_db',
+  });
+};
+```
+
+-   Associate the events for this session with a group AND update the properties of that group
+
+```js
+import { Posthog } from '@capawesome/capacitor-posthog';
+
+const group = async () => {
+  await Posthog.group({
+    type: 'company',
+    key: 'company_id_in_your_db',
+    groupProperties: {
+      name: 'Awesome Inc.',
+    },
+  });
+};
+```
+
+The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+
+## Credits
+
+This library was built by the [Capawesome team](https://capawesome.io/). It is not maintained by the PostHog core team. If you have any questions or issues, please create a discussion or an issue in the [GitHub repository](https://github.com/capawesome-team/capacitor-plugins).
