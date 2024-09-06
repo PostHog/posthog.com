@@ -6,7 +6,7 @@ showTitle: true
 
 We want to support other YC companies using PostHog because:
 
-- Many of these companies will quickly grow into [our ICP](/handbook/strategy/ideal-customer-persona) and we have an opportunity to get in early with them. 
+- Many of these companies will quickly grow into [our ICP](/handbook/who-we-are-building-for) and we have an opportunity to get in early with them. 
 - A lot of our most helpful and direct product feedback has generally come from other YC companies. 
 - It's nice to give back to the YC community. 
 

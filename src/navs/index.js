@@ -692,6 +692,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/crm',
                     },
                     {
+                        name: 'Lead scoring',
+                        url: '/handbook/growth/sales/lead-scoring',
+                    },
+                    {
                         name: 'YC onboarding',
                         url: '/handbook/growth/sales/yc-onboarding',
                     },
