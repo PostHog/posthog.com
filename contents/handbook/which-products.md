@@ -18,8 +18,6 @@ Products we build into the platform should:
 
 * Be very easy to integrate and turn on for existing customers. For example, users can enable the product without a code change
 
-* Solve web or mobile product engineering problems
-
 [This diagram](https://miro.com/app/board/uXjVMF-MT74=/?share_link_id=847485164707) shows example products we could ship:
 
 ![a diagram showing which products we could build in which order](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/product-order.png)
