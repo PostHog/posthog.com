@@ -52,7 +52,7 @@ AEs also do expansion at PostHog. This is because we are constantly on a sales f
 - Understanding the blockers to using other products - these could be:
   - Privacy/compliance concerns (e.g. viewing session recordings) - we have a lot of documentation on this
   - Already doing it in house/with something else - demonstrated cool ways in which the products integrate and save their team time
-  - May be too far down the line with their own data warehouse - this is hard to overcome at this stage
+  - May be too far down the line with their own data warehouse - it is hard to do a replacement at this stage, so instead talk about how you can enrich their data in PostHog with what's already in their data warehouse
   - Not ready to invest the time and resources to implement more tools - you need to tie this to the pain of _not_ having an additional solution in place
  
 These are typically combinations of products that we've seen be successful:
