@@ -12,11 +12,11 @@ category: PostHog news
 
 AI. You may have heard of it.
 
-Sure, ChatGPT is pretty cool, but when it comes to AI chatbots that try to replace a human in a product support context, I've generally been underwhelmed.
+Sure, ChatGPT is pretty cool, but when it comes to AI chatbots that try to replace a human in a product support context, I've generally been underwhelmed. The experience generally isn't great, and I'm often left with more frustration than before I skeptically asked the question in the first place.
 
 But it's not all the fault of LLMs. It also has to do with the available information about a product that an LLM consumes. And for a technical product like PostHog, the documentation has to be extensive enough to answer very nuanced questions. (This is tricky as information is constantly changing and there's always room for improvement!)
 
-As the ~~product owner~~ _totally official_ "Webmaster" of PostHog.com, I've contemplated how we can make use of AI to help answer questions... and until now, I've lacked a good solution.
+As the ~~product owner~~ _totally official_ "webmaster" of PostHog.com, I've contemplated how we can make use of AI to help answer questions... and until now, I've lacked a good solution.
 
 ## Why AI chatbots have a bad rap
 
@@ -42,7 +42,7 @@ The reason we've been so cautious to introduce AI is that we're very intentional
 1. We traded in the [value-based sales model](/sales) for a no-BS approach (self-service, fair, usage-based pricing)
 1. We avoid gimmicky marketing tactics (like popups and jamming CTAs into every available whitespace)
 
-So for an AI solution to mesh well with our brand tone, it needs to be accurate and succinct in its replies, and never make up a false answer.
+So for an AI solution to mesh well with our brand's vibe (because yes, we're all about vibes), it needs to be accurate and succinct in its replies, and never make up a false answer.
 
 After all, if you interact with an AI chatbot and don't get the answer you're looking for, you're likely to write it off entirely. And that's exactly what I want to avoid.
 
@@ -58,7 +58,7 @@ Using this approach, AI can _add_ value by instantly responding if it has a high
 
 ## Introducing Inkeep
 
-This whole idea came about from an [Inkeep](https://inkeep.com?utm_source=posthog) ad on LinkedIn – which is incredible to say because I'm generally alergic to ads. But Inkeep's ad spoke to me.
+This whole idea came about from an [Inkeep](https://inkeep.com?utm_source=posthog) ad on LinkedIn – which is incredible to say because I'm generally allergic to ads. But Inkeep's ad spoke to me.
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/inkeep_ad_9b53d43fda.png" 
@@ -86,7 +86,7 @@ To vet the quality of the answers, I started copy/pasting unanswered community q
 
 ## How it works
 
-> It's worth noting: Inkeep went above and beyond and implemented a custom solution for us. For most companies, their pre-built library of UI elements should work great, but they went the extra mile for us.
+> Inkeep's pre-built library of UI components works great for most companies. But out of the kindness of their hearts, they went the extra mile for us.
 
 **Here's how our setup works:**
 
@@ -109,7 +109,7 @@ To vet the quality of the answers, I started copy/pasting unanswered community q
     ]);
     ```
 
-    <p><strong className="text-green">If the confidence score is high enough,</strong> we show the answer to the user, credited to <TeamMember name="Max AI" photo />.</p>
+    <p><strong className="text-green">If the confidence score is high enough,</strong> we show the answer to the user, credited to our hedgehog mascot, <TeamMember name="Max AI" photo />.</p>
     <p><strong className="text-red">If Inkeep <em>isn't</em> confident in the answer,</strong> we show a message that says we couldn't find an answer, and that a human will appear as soon as possible.</p>
 
 When an AI answer is presented, we show feedback buttons so the original poster can tell us if the answer was helpful. We use this information to improve the quality of the answers.
@@ -161,4 +161,14 @@ In some cases, we're receiving feedback that the answer _wasn't_ helpful, but af
 
 ---
 
-We're still early in our days of exploring AI – and don't worry, AI _is_ coming to the PostHog application when we feel confident in its abilities – but I'm bullish about the prospect of finding a way to leverage the benefits of AI where it makes sense, while avoiding the negative potentials so that we can continue to create a great experience for our customers on PostHog.com.
+We're still early in our days of exploring AI – and don't worry, AI _is_ coming to the PostHog app when we feel it's ready.
+
+But I couldn't give you a better rationale for a slow rollout a colleague explained to me:
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/anonymous_colleague_5fbf20644b.png" 
+    classes="rounded"
+    alt="Anonymous quote"
+/>
+
+Hopefully the next time you [ask a question](/questions) in our community, you'll get the answer you're looking for. And just maybe, you'll get it faster than a human could even answer.
