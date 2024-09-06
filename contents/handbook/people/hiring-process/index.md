@@ -258,11 +258,9 @@ If we don't make an offer, it's important to clearly outline to the candidate wh
 
 Hooray!
 
-The People & Ops team will prepare the offer details. James and Tim give final signoff. We then schedule an offer call with the candidate and James or Tim. 
+The People & Ops team will prepare the offer details. James and Tim give final signoff. We then schedule an offer call with the candidate and Charles. 
 
-During the offer call, James or Tim will share feedback from the interview process, and will sell the role and opportunity here at PostHog. They will also briefly cover the offer details (salary, equity, benefits), and answer any open questions. 
-
-The People & Ops team will then follow up with an offer email, outlining all details. 
+During the offer call, Charles will share feedback from the interview process, and will sell the role and opportunity here at PostHog. He will also briefly cover the offer details (salary, equity, benefits), and answer any open questions. He'll then follow up with an offer email, outlining all details. If a candidate is proving tricky to close, he may escalate to James or Tim to help. 
 
 Once the candidate accepts, the People & Ops team will kick off the [onboarding process](/handbook/people/onboarding) and take the role offline, after rejecting all remaining candidates. 
 
