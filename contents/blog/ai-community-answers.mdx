@@ -1,9 +1,9 @@
 ---
-date: 2024-09-05
-title: How we're enlisting AI to answer community questions
+date: 2024-09-06
+title: Did you know AI is answering our community questions?
 rootPage: /blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/max_ai_poster_4300182421.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/max_ai_poster_b829564bbf.png
 featuredImageType: full
 author:
   - cory-watilo
@@ -42,13 +42,13 @@ The reason we've been so cautious to introduce AI is that we're very intentional
 1. We traded in the [value-based sales model](/sales) for a no-BS approach (self-service, fair, usage-based pricing)
 1. We avoid gimmicky marketing tactics (like popups and jamming CTAs into every available whitespace)
 
-So for an AI solution to mesh well with our brand's vibe (because yes, we're all about vibes), it needs to be accurate and succinct in its replies, and never make up a false answer.
+So for an AI solution to mesh well with our brand's vibe (yes, we're about the vibes), it needs to be accurate and succinct in its replies, and never make up a false answer.
 
 After all, if you interact with an AI chatbot and don't get the answer you're looking for, you're likely to write it off entirely. And that's exactly what I want to avoid.
 
 ## Where we decided to implement AI
 
-The most natural place to include an AI chatbot would be in our [docs](/docs). But I was hesitant to start here, as the conversational nature of AI meant we'd lack control over the quality and accuracy of the responses. So I decided to go a different route.
+The most natural place to include an AI chatbot would be in our [docs](/docs). But I was hesitant to start here, as the conversational nature of AI meant we'd lack control over the quality and accuracy of the responses. So I decided to try something different.
 
 Our [community questions](/questions) section is where users can ask questions directly in the docs. And we currently have... a lot of open (unanswered) questions. But because they're posted in a forum-style format, there's no expectation of a live chat experience. And this presented an opportunity...
 
@@ -133,7 +133,7 @@ Here's what it looks like to submit a question and receive an AI answer from Ink
 
 ## How we're tracking feedback
 
-As you can imagine, every time a customer gives feedback, we're sending the information into PostHog as a custom event. Along with the event, it sends properties that identify the response sentiment along with the category of the question. (This will help us identify if certain areas of our documentation needs to improve.)
+As you can imagine, every time a customer rates a response, we're sending the information into PostHog as a custom event. Along with the event, it sends properties like the sentiment ("helpful" or "not helpful") and the category of the question. (This will help us identify if certain areas of our documentation needs to improve.)
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/inkeep_event_957c7b340d.png" 
@@ -163,12 +163,12 @@ In some cases, we're receiving feedback that the answer _wasn't_ helpful, but af
 
 We're still early in our days of exploring AI – and don't worry, AI _is_ coming to the PostHog app when we feel it's ready.
 
-But I couldn't give you a better rationale for a slow rollout a colleague explained to me:
+But I couldn't give you a better rationale for a slow rollout than how a colleague explained it to me:
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/anonymous_colleague_5fbf20644b.png" 
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/anonymous_colleague_ec9787d2ed.png" 
     classes="rounded"
     alt="Anonymous quote"
 />
 
-Hopefully the next time you [ask a question](/questions) in our community, you'll get the answer you're looking for. And just maybe, you'll get it faster than a human could even answer.
+Hopefully the next time you [ask a question](/questions) in our community, you'll get the answer you're looking for. And even better – if you get it even faster than a human could answer.
