@@ -359,7 +359,14 @@ You can narrow the run down to only files under matching paths:
 pnpm jest --testPathPattern=frontend/src/lib/components/IntervalFilter/intervalFilterLogic.test.ts
 ```
 
-To update all visual regression test snapshots, make sure Storybook is running on your machine (you can start it with `pnpm storybook` in a separate Terminal tab). You may also need to install Playwright with `pnpm exec playwright install`. And then run:
+To update all visual regression test snapshots, make sure Storybook is running on your machine (in a separate Terminal tab):
+```bash
+pnpm install http-server
+pnpm run build-storybook
+pnpm exec http-server storybook-static --port 6006 
+```
+
+You may also need to install Playwright with `pnpm exec playwright install`. And then run:
 
 ```bash
 pnpm test:visual
