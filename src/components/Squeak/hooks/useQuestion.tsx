@@ -11,6 +11,7 @@ type UseQuestionOptions = {
 const query = (id: string | number, isModerator: boolean) =>
     qs.stringify(
         {
+            publicationState: isModerator ? 'preview' : 'live',
             filters: {
                 ...(typeof id === 'string'
                     ? {
