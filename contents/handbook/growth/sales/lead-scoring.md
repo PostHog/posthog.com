@@ -37,6 +37,3 @@ We use [Clearbit](https://clearbit.com/) to enhance our contact information as i
 | Country        | Austria, Canada, France, Germany, Japan, Norway, Sweden, USA                                                       | 10    |
 |                | Australia, Belgium, Estonia, Finland, Georgia, Guernsey, Netherlands, New Zealand, Poland, Portugal, Singapore, UK | 5     |
 |                | Other                                                                                                              | 0     |
-
-
-See this internal GitHub [issue](https://github.com/PostHog/company-internal/issues/1459) for discussion on how we arrived at the above scoring
