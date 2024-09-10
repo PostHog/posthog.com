@@ -43,6 +43,12 @@ With an email template chosen, you can then enter the copy you want to send. [Th
 
 Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner will meet their onboarding buddy in person during their first week. In case in-person onboarding isn't an option, we will make alternative arrangements. The onboarding buddy is usually a member of the team a new joiner is joining - ideally the team lead - and they can help with any questions that pop up and with socializing during the first couple of weeks at PostHog. Of course, everyone is available to help, but it’s nice to have a dedicated person to help.
 
+## Onboarding intros
+
+We have onboarding intro calls which give new starters a personal intro to each Small Team, where they can learn about what they do, the history of the team, the team members, what they are working on, their challenges, etc. These are 15 minute calls held once a month by the team leads. 
+
+When you start, you will be automatically invited to these. They are totally optional so if you can't make it, that's fine! You can always join the next month - just invite yourself using this [calendar](https://calendar.google.com/calendar/u/0?cid=Y18yNWNlYjI4MTI5YjQ0ZDNlOWM1NThjMzYxY2M1NjVmZGU3NWM5NWNjZjgyOTg4NTdjNGM1OWY5YzFmMTUzOWY4QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) 
+
 ### Guidance for onboarding buddies
 
 - Once we have decided which team a new joiner will join, the People & Ops team will reach out to the team to find an onboarding buddy. _Please make sure if don't have any leave booked in the week before and the two weeks after the new starter joins_
