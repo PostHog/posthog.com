@@ -71,7 +71,7 @@ const AIDisclaimerMod = ({ opName, replyID, mutate }) => {
     )
 }
 
-const AIDisclaimer = ({ replyID, mutate, topic, isAuthor }) => {
+const AIDisclaimer = ({ replyID, mutate, topic, isAuthor, confidence }) => {
     const posthog = usePostHog()
     const { getJwt } = useUser()
     const { handleResolve } = useContext(CurrentQuestionContext)
@@ -83,6 +83,7 @@ const AIDisclaimer = ({ replyID, mutate, topic, isAuthor }) => {
             posthog?.capture('Community AI reply', {
                 replyID,
                 helpful,
+                confidence,
                 topic: {
                     label: topic?.attributes?.label,
                     id: topic?.id,
@@ -158,7 +159,7 @@ const AIDisclaimer = ({ replyID, mutate, topic, isAuthor }) => {
 export default function Reply({ reply, badgeText }: ReplyProps) {
     const {
         id,
-        attributes: { body, createdAt, profile, publishedAt },
+        attributes: { body, createdAt, profile, publishedAt, meta },
     } = reply
 
     const {
@@ -282,7 +283,13 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                             mutate={mutate}
                         />
                     ) : (
-                        <AIDisclaimer isAuthor={isAuthor} topic={topics?.data?.[0]} replyID={id} mutate={mutate} />
+                        <AIDisclaimer
+                            isAuthor={isAuthor}
+                            topic={topics?.data?.[0]}
+                            replyID={id}
+                            mutate={mutate}
+                            confidence={meta?.confidence}
+                        />
                     ))}
                 <div className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}>
                     {reply?.attributes?.helpful === false && (
