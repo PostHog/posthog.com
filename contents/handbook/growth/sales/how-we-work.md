@@ -8,19 +8,21 @@ showTitle: true
 
 ## Main metrics for each role
 
-- AE: new and expansion revenue in your segment
+- AE: new and expansion revenue in your book of business
 - RevOps: overall revenue from $20k+ segment
-
-These roles do not exist at PostHog yet, but if we hire for them we would care about:
-
-- SDR: number of customer meetings booked in correct segment
-- CSM: revenue retention %
+- CSM: logo retention 
 
 Other metrics we generally care about:
 - Closed - won % from demo
 - Time to close
 - Lead volume in each segment
 - Weighted pipeline
+
+## Book of business
+
+Each AE is assigned ~10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 20 accounts, so staying extremely focused is important. 
+
+If you have been assigned an existing customer that you think doesn't belong in your book, e.g. there is zero expansion potential and you have tried everything with them, you can chat to Simon about swapping in a different account. The bar is very high here though - you can't just swap out a customer because it's hard work! Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
 
 ## Weekly sales standup
 
