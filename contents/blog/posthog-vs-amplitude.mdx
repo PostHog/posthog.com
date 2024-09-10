@@ -120,7 +120,7 @@ Use our [built-in data warehouse](/data-warehouse) and SQL insight builder to an
   <ComparisonRow column1={true} column2={false} feature="Record via feature flag" description="Only record sessions for users that have the flag enabled" />
 </ComparisonTable>
 
-> 💡 **Good to know:** Replays let you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are reconstructions of the session, _not_ video recordings of user's screen. Private info, such as passwords, is masked.
+> 💡 **Good to know:** Replays let you watch how users experience your app, diagnose issues, improve support, and understand real user behavior in a way raw data can't. They are reconstructions of the session, _not_ video recordings of user's screen. Private info, such as passwords, are masked.
 
 <br />
 
@@ -179,7 +179,7 @@ Anonymous events **only include non-identifying data**, such as referral data (U
 
 They're useful if you're tracking a huge number of users and only want to analyze aggregate data, such as on a content website with millions of visitors. 
 
-Anonymous events cheaper for us to ingest, so we charge you between 55% and 80% less for them. You'll only be charged the identified event rate when you call identifying functions like `posthog.identify()` or `posthog.group()`, or capture an event from an already-identified user. 
+Anonymous events are cheaper for us to ingest, so we charge you between 55% and 80% less for them. You'll only be charged the identified event rate when you call identifying functions like `posthog.identify()` or `posthog.group()`, or capture an event from an already-identified user. 
 
 | **Monthly events** | **Identified events** | **Anonymous events** | **Change** |
 |--------------------|--------------------------|-----------------------------------|----------------|
