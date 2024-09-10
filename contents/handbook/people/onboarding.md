@@ -45,7 +45,9 @@ Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner w
 
 ## Onboarding intros
 
-We have onboarding intro calls which give new starters a personal intro to each team, where they can learn about:- what they do, the history of the team, the team members, what they are working on, their challenges, etc. These are 15 minute calls held once a month by the team leads. When you start, you will be automatically invited to these, they are totally optional so if you can't make it, that's fine! You can always join the next month- just invite yourself using this [calendar](https://calendar.google.com/calendar/u/0?cid=Y18yNWNlYjI4MTI5YjQ0ZDNlOWM1NThjMzYxY2M1NjVmZGU3NWM5NWNjZjgyOTg4NTdjNGM1OWY5YzFmMTUzOWY4QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) 
+We have onboarding intro calls which give new starters a personal intro to each Small Team, where they can learn about what they do, the history of the team, the team members, what they are working on, their challenges, etc. These are 15 minute calls held once a month by the team leads. 
+
+When you start, you will be automatically invited to these. They are totally optional so if you can't make it, that's fine! You can always join the next month - just invite yourself using this [calendar](https://calendar.google.com/calendar/u/0?cid=Y18yNWNlYjI4MTI5YjQ0ZDNlOWM1NThjMzYxY2M1NjVmZGU3NWM5NWNjZjgyOTg4NTdjNGM1OWY5YzFmMTUzOWY4QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) 
 
 ### Guidance for onboarding buddies
 
