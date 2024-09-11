@@ -18,7 +18,7 @@ In our [JavaScript web](/docs/libraries/js) and [React Native](/docs/libraries/r
 
 If you're using [local evaluation](/docs/feature-flags/local-evaluation), your bill may be high because of too many requests to fetch feature flag definitions. By default, PostHog fetches these every 30 seconds.
 
-Each request charges 10 credits, so assuming your server is constantly running and making 2 requests per minute, this will charge `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
+Each request charges 10 credits, so assuming your server is constantly running and making 2 requests per minute (the default setting), this will charge `10 * 2 * 60 * 24 * 30 = 864,000 credits` each month.
 
 You can reduce this by increasing the [feature flag polling interval](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-personal-api-key) when initializing PostHog. For example, every 5 minutes instead of every 30 seconds.
 

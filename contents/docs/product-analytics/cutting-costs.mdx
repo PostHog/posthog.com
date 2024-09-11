@@ -1,5 +1,5 @@
 ---
-title: Cutting costs
+title: Cutting product analytics costs
 sidebar: Docs
 showTitle: true
 ---
@@ -53,7 +53,7 @@ In client-side SDKs, it's only necessary to call [`group()`](/docs/product-analy
 
 ## Disable pageview or pageleave events
 
-PostHog automatically captures pageviews and pageleaves. This is great for product analytics, but it may mean sending more events than you need. An alternative is to disable automatically capturing these events and instead capture them manually for the pages you need.
+PostHog automatically captures pageviews and pageleaves. This is great for analytics, but it may capture more events than you need. An alternative is disabling these events and capturing them manually for the pages you need instead.
 
 To disable automatically capturing these events, set `capture_pageviews` and `capture_pageleave` to `false` in the configuration options when initializing PostHog:
 
@@ -69,4 +69,4 @@ To disable automatically capturing these events, set `capture_pageviews` and `ca
 
 To manually capture these events, call `posthog.capture('$pageview')` and `posthog.capture('$pageleave')`.
 
-Note that disabling these events may prevent other PostHog features from working, like [bounce rate](/docs/data/events#how-events-power-posthog).
+> **Note:** Disabling pageview and pageleave events may prevent other PostHog features from working, like [bounce rate](/docs/data/events#how-events-power-posthog).

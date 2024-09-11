@@ -16,7 +16,7 @@ There are several ways to control which sessions you record:
 
 ## Programmatically start and stop recordings
 
-1. Ensure your domain is added to the [Authorized Domains list](https://app.posthog.com/settings/project-replay#replay-authorized-domains).
+1. Ensure your domain is added to the [authorized domains list](https://us.posthog.com/settings/project-replay#replay-authorized-domains).
 
 
 2. Set `disable_session_recording: true` in your [config](/docs/integrate/client/js/#config).
@@ -59,11 +59,11 @@ Sampling enables you to record a percentage of all sessions. To set a sampling r
 
 Our recommendation is to start with capturing 100% of sessions and decrease it as needed. This helps you get a sense of how many sessions you’re recording and how much data you’re collecting.
 
-Note that sampling reduces the number of sessions you record, but it doesn’t let you control which sessions are recorded.
+> **Note:** Sampling reduces the number of sessions you record, but it doesn’t let you control which sessions are recorded.
 
 ### Overriding sampling
 
-Since [posthog-js](/docs/libraries/js) version 1.119.0, you can begin a recording regardless of sampling by calling `posthog.startSessionRecording({sampling: true})`
+You can begin a recording regardless of sampling by calling `posthog.startSessionRecording({sampling: true})`
 
 ## Minimum duration
 
