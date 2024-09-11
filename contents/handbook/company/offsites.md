@@ -108,7 +108,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 
 - [ ] Secure accommodations
   - The ideal location will depend on the size of your team
-  - We recommend booking a large AirBnB for teams under 10 people as this provides for a more casual atmosphere and can help control costs if you opt to have the team cook meals together. You can also book an AirBnB and supplement with a closeby hotel if the AirBnB doesn't have enough rooms.
+  - We recommend booking a large Airbnb for teams under 10 people as this provides for a more casual atmosphere and can help control costs if you opt to have the team cook meals together. You can also book an Airbnb and supplement with a nearby hotel if the Airbnb doesn't have enough rooms.
   - For larger teams, consider a centrally located hotel that has a bookable space with configurable furniture for different activities, an onsite restaurant or bar to simplify meals and provide a location for free social time, as well as amenities like a gym for those who like to stay active while they travel
 - [ ] Start flight booking process
   - To simplify this process, we give all team members access to a company card, and we ask people to book their own flights
