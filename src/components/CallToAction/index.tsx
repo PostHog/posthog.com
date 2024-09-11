@@ -209,7 +209,11 @@ export interface TrackedCTAPropsType extends CTAPropsType {
     }
 }
 
-export const TrackedCTA = ({ width, event: { name: eventName, ...event }, ...props }: TrackedCTAPropsType): JSX.Element => {
+export const TrackedCTA = ({
+    width,
+    event: { name: eventName, ...event },
+    ...props
+}: TrackedCTAPropsType): JSX.Element => {
     const posthog = usePostHog()
 
     return (
