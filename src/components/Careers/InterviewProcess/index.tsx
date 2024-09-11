@@ -88,7 +88,7 @@ export const InterviewProcess = () => {
                     Image={Superday}
                     title="4. PostHog SuperDay"
                     subtitle="Paid day of work"
-                    description="You’ll meet a few more members of the team and work on a independent project. It's challenging, but most people say it's fun!"
+                    description="You’ll meet a few more members of the team and work on a independent project that lets you showcase your skills."
                 />
                 <SliderItem
                     Image={Offer}
