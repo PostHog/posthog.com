@@ -22,6 +22,14 @@ This has resulted in the highest number of qualified and motivated candidates re
 - Giving candidates genuinely useful and direct feedback if they weren't successful with us
 - Running a smooth and incredibly slick recruitment process, from application to offer
 
+## Countries we employ people in
+
+We are all-remote, but we have a few limitations on the countries we are able to employ people in:
+
+- We hire within -8 to +2 GMT timezones - beyond these, it proves too difficult for us to collaborate effectively. We do hire in GMT +2 countries that shift to GMT +3 for daylight saving time only (e.g. Bulgaria, Greece). 
+- Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria
+- We don't currently employ people in France or Italy due to the high costs (40-50% on top of gross salary)
+
 ## Hiring Process
 
 ### Summary of process for current live roles
