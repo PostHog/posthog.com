@@ -15,8 +15,6 @@ To provide examples of what you can do with it, we create a basic Next.js app, s
 
 ## Creating a Next.js app
 
-Because we need to query private data, we need a way to make server side requests. Next.js makes this easy (which is why we chose it).
-
 To create a Next.js app, run the following command, choose all the default options, and select the `app` router.
 
 ```bash
@@ -39,6 +37,8 @@ Start by creating a personal API key. You can do this by going to [personal API 
   alt="Creating a personal API key in PostHog" 
   classes="rounded"
 />
+
+> **⚠️ Warning:** The following is a simplified example. It will expose your private PostHog data to the public internet, so don't do this in real life. You want to make sure your personal API key isn't exposed and your query request happens securely on the server side.
 
 Next, go into your `react-charts-example` folder, then the `app` folder, and create an `api` folder. In the `api` folder, create a `query.js` file. Here we set up a fetch request to PostHog's [query API endpoint](/docs/api/query) using your project ID (from your PostHog URL) and personal API key like this:
 
@@ -101,8 +101,6 @@ export default function Home() {
   )
 }
 ```
-
-> **Note:** You'll likely want to include the payload on the server-side too so users can't make requests to this endpoint with arbitrary queries. We don't do this in this tutorial to keep the changes in the examples below in a single file.
 
 The page we end up with is an ugly collection of non-aggregated data, but we'll fix that next.
 
