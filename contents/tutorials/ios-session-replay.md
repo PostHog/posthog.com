@@ -1,6 +1,6 @@
 ---
 title: How to set up iOS session replay
-date: 2024-08-02
+date: 2024-09-11
 author:
   - lior-neu-ner
 tags:
