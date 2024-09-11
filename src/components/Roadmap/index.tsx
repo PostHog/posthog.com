@@ -199,10 +199,11 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
     return (
         <button
             onClick={onClick}
-            className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${active
+            className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${
+                active
                     ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-light dark:border-dark'
                     : 'border-transparent hover:border-light dark:hover:border-dark hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark'
-                } ${className}`}
+            } ${className}`}
         >
             {children}
         </button>
@@ -340,10 +341,11 @@ export default function Roadmap() {
                                 <button
                                     key={team}
                                     onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
-                                    className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${selectedTeam === team
+                                    className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${
+                                        selectedTeam === team
                                             ? 'bg-accent dark:bg-accent-dark font-bold'
                                             : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
-                                        }`}
+                                    }`}
                                 >
                                     {team.replace(' Team', '')}
                                 </button>

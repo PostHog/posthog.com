@@ -23,7 +23,9 @@ export const Markdown = ({
             remarkPlugins={[remarkGfm]}
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
-            className={`flex-1 !text-sm overflow-hidden text-ellipsis mr-1 !pb-0 text-primary/75 dark:text-primary-dark/75 font-normal ${regularText ? '' : 'question-content community-post-markdown'}`}
+            className={`flex-1 !text-sm overflow-hidden text-ellipsis mr-1 !pb-0 text-primary/75 dark:text-primary-dark/75 font-normal ${
+                regularText ? '' : 'question-content community-post-markdown'
+            }`}
             components={{
                 pre: ({ children }) => {
                     return (
