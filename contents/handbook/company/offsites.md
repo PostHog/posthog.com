@@ -113,7 +113,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 - [ ] Start flight booking process
   - To simplify this process, we give all team members access to a company card, and we ask people to book their own flights
   - We strongly recommend this approach as centralizing flight booking can be a huge headache for offsite lead, and this allows team members to accurately enter their personal information including airline frequent flier and trusted traveller numbers
-  - Encourage folks to buy flights early and with the option to refund if they are unable to attend to save on costs, use your judgement here (~20% more is reasonable, double the price is not really worth it)
+  - Encourage folks to buy flights early and with the option to refund if they are unable to attend to save on costs. Use your judgement here - 20% or so is reasonable for the flexibility, but double the price is not really worth it.
   - In the event that a new team member will be attending an offsite, but has not started yet, please contact the Ops team to help coordinate. In these cases, the process is:
     1. Preemptively create the new team member a Google account
     2. Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
