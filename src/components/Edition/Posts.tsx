@@ -29,6 +29,7 @@ import { postsMenu as menu } from '../../navs/posts'
 import { Authentication } from 'components/Squeak'
 import { PostFilters } from './Views/Default'
 import { CallToAction, child, container } from 'components/CallToAction'
+import { NewsletterForm } from 'components/NewsletterForm'
 
 dayjs.extend(relativeTime)
 
@@ -203,7 +204,7 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
                     '/features': <Blog title="Features" />,
                     '/founders': <Blog title="Founders" />,
                     '/blog': <Blog />,
-                    '/newsletter': <Newsletter />,
+                    '/newsletter': <NewsletterForm placement="blog-index" />,
                     '/spotlight': <Blog title="Spotlight" />,
                     '/customers': <Customers />,
                 }[pathname] || <Default>{children}</Default>
@@ -212,7 +213,8 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
     )
 }
 
-const hideFromIndex = ['tutorials', 'customers', 'spotlight', 'changelog']
+const categoriesHideFromIndex = ['tutorials', 'customers', 'spotlight', 'changelog']
+export const tagsHideFromIndex = ['Comparisons']
 
 export const getParams = (root, tag, sort) => {
     return {
@@ -244,7 +246,7 @@ export const getParams = (root, tag, sort) => {
                           {
                               post_category: {
                                   folder: {
-                                      $notIn: hideFromIndex,
+                                      $notIn: categoriesHideFromIndex,
                                   },
                               },
                           },
@@ -259,7 +261,40 @@ export const getParams = (root, tag, sort) => {
                               },
                           },
                       ]
-                    : []),
+                    : [
+                          {
+                              $or: [
+                                  {
+                                      post_tags: {
+                                          label: {
+                                              $notIn: tagsHideFromIndex,
+                                          },
+                                      },
+                                  },
+                                  {
+                                      post_tags: {
+                                          label: {
+                                              $null: true,
+                                          },
+                                      },
+                                  },
+                              ],
+                          },
+                          {
+                              $or: [
+                                  {
+                                      hideFromIndex: {
+                                          $eq: false,
+                                      },
+                                  },
+                                  {
+                                      hideFromIndex: {
+                                          $null: true,
+                                      },
+                                  },
+                              ],
+                          },
+                      ]),
             ],
         },
     }
@@ -306,7 +341,10 @@ export default function Posts({
     const [prev, setPrev] = useState<string | null>(null)
     const [activeMenu, setActiveMenu] = useState(menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1]))
     const [layoutMenu, setLayoutMenu] = useState(
-        menusByRoot[root] || { parent: communityMenu, activeInternalMenu: communityMenu.children[0] }
+        menusByRoot[root] || {
+            parent: communityMenu,
+            activeInternalMenu: communityMenu.children.find(({ name }) => name.toLowerCase() === 'posts'),
+        }
     )
 
     const [params, setParams] = useState(getParams(root, initialTag, getSortOption(root).sort))
@@ -368,7 +406,7 @@ export default function Posts({
                     value={{
                         title: title || 'Posts',
                         menu: (!root
-                            ? menu.filter(({ url }) => url && !hideFromIndex.includes(url.replace('/', '')))
+                            ? menu.filter(({ url }) => url && !categoriesHideFromIndex.includes(url.replace('/', '')))
                             : [
                                   { name: 'All', icon: 'IconRocket', color: 'purple', url: `/${root}` },
                                   ...(menu.find(({ url }) => root === url?.split('/')[1])?.children || []),

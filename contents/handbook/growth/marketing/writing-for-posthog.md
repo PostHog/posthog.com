@@ -100,7 +100,7 @@ The main folders are:
 - `/contents/founders` – Articles for the [Founder content hub](/founders).
 - `/contents/product-engineers` – Articles for the [Product engineer content hub](/product-engineers)
 - `/contents/tutorials` – Tutorials
-- `/content/cusomters` – Customer stories
+- `/content/customers` – Customer stories
 - `/contents/spotlight` – Startup spotlight
 
 **Important:** Some articles can rightfully belong in both the founder hub _and_ the product engineers hub. In this case, choose the most appropriate hub folder and then add the `crosspost:` field to your frontmatter so it appears in both. So, add `crosspost: product-engineers` to post a founder's hub article in product engineers as well, and vice versa. You can also add tags from either hub like normal.

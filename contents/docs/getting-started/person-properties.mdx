@@ -15,9 +15,9 @@ import UserPropertiesSetVsSetOnce from "./\_snippets/user-properties-set-vs-set-
 
 For example, you can create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts) based on person properties, which can then be used to [create insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more. 
 
-For backward compatibility, PostHog captures events with [person profiles](/docs/data/persons) by default. You can change this by setting your JavaScript initialization's `person_profiles` value to `identified_only` or an event's `$process_person_profile` property to `false`.
+For backward compatibility, PostHog captures identified events that create a [person profile](/docs/data/persons) by default. You can change this by setting your JavaScript initialization's `person_profiles` value to `identified_only` or an event's `$process_person_profile` property to `false`.
 
-> **Note:** Setting person properties creates a profile for the person you are tracking. Under our current [pricing](/pricing), events _without_ person profiles can be up to 4x cheaper than events _with_ them (due to the cost of processing them), so it's recommended only to capture person profiles (via `identify()` or `$set`) when needed.
+> **Note:** Capturing identified events and setting person properties creates a person profile. Under our current [pricing](/pricing), anonymous events can be up to 4x cheaper than identified events (due to the cost of processing them), so it's recommended only to capture identified events when needed.
 
 ## How to set person properties
 

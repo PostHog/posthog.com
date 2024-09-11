@@ -14,7 +14,7 @@ const content = {
     'product analytics': productAnalyticsContent,
     'session replay': sessionReplayContent,
     'feature flags': featureFlagsContent,
-    'a/b testing': abTestingContent,
+    experiments: abTestingContent,
 }
 
 export default function CodeBlocks() {

@@ -24,7 +24,7 @@ export const slideButtons = [
         placeholderIcon: 'IconToggle',
     },
     {
-        title: 'A/B testing',
+        title: 'Experiments',
         lottieSrc: '/lotties/product-icons/ab-testing.lottie',
         color: 'purple',
         placeholderIcon: 'IconFlask',
@@ -38,13 +38,13 @@ export const slideButtons = [
     {
         title: 'Data pipelines',
         lottieSrc: '/lotties/product-icons/data-pipeline.lottie',
-        color: '[#2EA2D3]',
+        color: 'sky-blue',
         placeholderIcon: 'IconDecisionTree',
     },
     {
         title: 'Data warehouse',
         lottieSrc: '/lotties/product-icons/data-warehouse.lottie',
-        color: '[#8567FF]',
+        color: 'lilac',
         placeholderIcon: 'IconDatabase',
     },
     {

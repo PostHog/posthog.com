@@ -200,7 +200,7 @@ export default function Startups() {
                                     name: 'raised',
                                     type: 'enumeration',
                                     options: [
-                                        { label: 'Boostrapped', value: 0 },
+                                        { label: 'Bootstrapped', value: 0 },
                                         { label: 'Under $100k', value: 100_000 },
                                         { label: '$100k - $500k', value: 500_000 },
                                         { label: '$500k - $1m', value: 1_000_000 },
@@ -210,7 +210,7 @@ export default function Startups() {
                                     required: true,
                                 },
                                 {
-                                    label: 'The date that your company was incorportated',
+                                    label: 'The date that your company was incorporated',
                                     name: 'incorpation_date',
                                     type: 'string',
                                     fieldType: 'date',
@@ -221,6 +221,16 @@ export default function Startups() {
                                     name: 'referrer',
                                     type: 'string',
                                     required: true,
+                                },
+                                {
+                                    label: 'Are you building LLM-powered features?',
+                                    name: 'is_building_with_llms',
+                                    type: 'enumeration',
+                                    required: true,
+                                    options: [
+                                        { label: 'Yes', value: 'true' },
+                                        { label: 'No', value: 'false' },
+                                    ],
                                 },
                             ],
                             name: 'Startup application',

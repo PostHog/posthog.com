@@ -153,7 +153,7 @@ James and Tim are ultimately responsible for us having (i) no gaps in product (i
 
 #### How do you stop duplicate work?
 
-Luke has the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
+James and Tim have the ultimate responsibility to make sure we don't build the same thing in two different teams, or that we don't accidentally compete with each other internally.
 
 By keeping communication asynchronous and transparent, this is made much easier to do than is typical at other organizations.
 

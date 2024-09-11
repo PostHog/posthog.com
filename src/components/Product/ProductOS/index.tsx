@@ -242,7 +242,12 @@ export const ProductOS = () => {
                                     color="seagreen"
                                     icon={<IconToggle />}
                                 />
-                                <ProductIcon name="A/B testing" url="/ab-testing" color="purple" icon={<IconFlask />} />
+                                <ProductIcon
+                                    name="Experiments"
+                                    url="/experiments"
+                                    color="purple"
+                                    icon={<IconFlask />}
+                                />
                                 <ProductIcon name="CDP" url="/cdp" color="yellow" icon={<IconPerson />} />
                                 <ProductIcon
                                     name="Data warehouse"
@@ -311,7 +316,7 @@ export const ProductOS = () => {
                             </h2>
                             <p>
                                 We poke fun at a lot of things, but we take security seriously. We're{' '}
-                                <b>SOC 2 Type-1 certified, GDPR ready, HIPAA compliant</b>, and we share our security
+                                <b>SOC 2 Type II certified, GDPR ready, HIPAA compliant</b>, and we share our security
                                 reports publicly. Check <a href="/handbook/company/security">our security docs</a> for
                                 more!
                             </p>

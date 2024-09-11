@@ -46,7 +46,7 @@ const enterpriseModeProductNames = {
     'Web analytics': 'Visitor insights',
     'Session replay': 'Behavioral intelligence',
     'Feature flags': 'Risk mitigation',
-    'A/B testing': 'CX optimization',
+    Experiments: 'CX optimization',
     Surveys: 'Qualitative feedback',
     'Data pipelines': 'CDP/ETL',
     'Data warehouse': 'Secure data vault',

@@ -5,6 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
+  - AI engineering
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'

@@ -16,11 +16,7 @@ Products we build into the platform should:
 
 * Help customers build more successful products. This doesn't _just_ mean writing code, it means commercial stuff too.
 
-* Work with our SDKs so customers can switch on new functionality immediately.
-
-* Be easy to get a lot of customers using, either new or existing
-
-* Solve web or mobile product engineering problems
+* Be very easy to integrate and turn on for existing customers. For example, users can enable the product without a code change
 
 [This diagram](https://miro.com/app/board/uXjVMF-MT74=/?share_link_id=847485164707) shows example products we could ship:
 
@@ -32,6 +28,6 @@ When deciding what to prioritize, we should consider:
 
 * Whether there is someone on the PostHog team passionate about building it
 
-At earlier stage companies, technical founders will do _every_ role, so tools traditionally used by those further from engineering (i.e. support) are likely to get usage if built into PostHog's platform. In later stage companies, we need - for now - to remain closer to engineering tools
+At earlier stage companies, technical founders will do _every_ role, so tools traditionally used by those further from engineering (i.e. support) are likely to get usage if built into PostHog's platform. In later stage companies, we need - for now - to remain closer to engineering tools.
 
 If we decide to build a product, we should build the version that gets adopted _earliest_, to avoid having to rip and replace an existing solution. For example, we are currently working on a data warehouse. We need this to work for people who have _not_ already got a warehouse set up – it needs to be inexpensive and simple.

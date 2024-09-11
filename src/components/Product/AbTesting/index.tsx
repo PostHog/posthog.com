@@ -35,9 +35,9 @@ import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 
 const product = {
-    slug: 'ab-testing',
-    lowercase: 'A/B testing',
-    capitalized: 'A/B testing',
+    slug: 'experiments',
+    lowercase: 'Experiments',
+    capitalized: 'Experiments',
     freeTier: '1,000,000 requests',
 }
 
@@ -252,7 +252,7 @@ const PairsWithArray = [
 ]
 
 export const ProductAbTesting = () => {
-    const { ycombinator, vendasta, assemblyai } = useStaticQuery(graphql`
+    const { ycombinator, researchgate, vendasta, assemblyai } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -270,6 +270,9 @@ export const ProductAbTesting = () => {
             ycombinator: mdx(slug: { eq: "customers/ycombinator" }) {
                 ...ProductCustomerFragment
             }
+            researchgate: mdx(slug: { eq: "customers/researchgate" }) {
+                ...ProductCustomerFragment
+            }
             vendasta: mdx(slug: { eq: "customers/vendasta" }) {
                 ...ProductCustomerFragment
             }
@@ -279,10 +282,11 @@ export const ProductAbTesting = () => {
         }
     `)
     const { fullWidthContent } = useLayoutData()
+
     return (
         <>
             <SEO
-                title="A/B Testing - PostHog"
+                title="Experiments - PostHog"
                 description="Run statistically-significant multivariate tests and robust targeting & exclusion rules."
                 image={`/images/og/ab-testing.jpg`}
             />
@@ -304,12 +308,17 @@ export const ProductAbTesting = () => {
                     />
                 </div>
 
-                <section id="customers" className="-mt-20">
-                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
+                <section id="customers" className="md:-mt-20">
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="boosted engagement by 40%"
-                            quote="Y Combinator uses PostHog's A/B testing to try new ideas, which has led to significant improvements."
+                            outcome="boosted community engagement by 40%"
+                            quote="Y Combinator uses PostHog's experiments to try new ideas, which has led to significant improvements."
                             customer={ycombinator}
+                        />
+                        <CustomerCard
+                            outcome="tests product changes for over 25M users"
+                            quote="Our data scientists are able to rapidly and autonomously iterate on the data models that power our home feed."
+                            customer={researchgate}
                         />
                         <CustomerCard
                             outcome="increased registrations by 30%"
@@ -364,7 +373,7 @@ export const ProductAbTesting = () => {
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
-                            <strong>Note:</strong> A/B Testing and Feature Flags are currently packaged together and
+                            <strong>Note:</strong> Experiments and Feature Flags are currently packaged together and
                             share volume limits.
                         </div>
                     </div>
@@ -506,7 +515,7 @@ export const ProductAbTesting = () => {
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
                     <DocLinks
-                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'a/b testing').children}
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'experiments').children}
                     />
                 </section>
 

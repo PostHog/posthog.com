@@ -10,7 +10,7 @@ module.exports = {
         title: 'PostHog',
         titleTemplate: '%s',
         description:
-            'The single platform for engineers to analyze, test, observe, and deploy new features. Product analytics, session replay, feature flags, A/B testing, CDP, and more.',
+            'The single platform for engineers to analyze, test, observe, and deploy new features. Product analytics, session replay, feature flags, experiments, CDP, and more.',
         url: 'https://posthog.com', // No trailing slash allowed!
         image: '/banner.png', // Path to your image you placed in the 'static' folder
         twitterUsername: '@PostHog',
@@ -163,14 +163,28 @@ module.exports = {
                       path
                     }
                   }
+                  questions: allSqueakQuestion {
+                    nodes {
+                       permalink
+                    }
+                  }
                 }`,
                 resolveSiteUrl: ({ site }) => {
                     return site.siteMetadata.siteUrl
                 },
-                resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
+                resolvePages: async ({
+                    allSitePage: { nodes: allPages },
+                    site,
+                    questions: { nodes: allQuestions },
+                }) => {
                     const transformedPages = allPages.map(({ path }) => {
                         return {
                             path: `${site.siteMetadata.siteUrl}${path}`,
+                        }
+                    })
+                    const transformedQuestionPages = allQuestions.map(({ permalink }) => {
+                        return {
+                            path: `${site.siteMetadata.siteUrl}/questions/${permalink}`,
                         }
                     })
 
@@ -188,7 +202,7 @@ module.exports = {
                         path: `${site.siteMetadata.siteUrl}/plugins/` + plugin.name.toLowerCase().replace(/ /g, '-'),
                     }))
 
-                    return [...transformedPages, ...plugins]
+                    return [...transformedPages, ...transformedQuestionPages, ...plugins]
                 },
                 serialize: async ({ path }) => {
                     let changefreq = 'monthly'

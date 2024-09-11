@@ -13,8 +13,6 @@ export const webAnalyticsDark = "https://res.cloudinary.com/dmukukwp6/image/uplo
 export const webAnalyticsVideoLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/web-analytics/web-analytics-light-mode.mp4"
 export const webAnalyticsVideoDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/web-analytics/web-analytics-dark-mode.mp4"
 
-> Web analytics is currently an open beta. This means it's not yet a perfect experience, but we'd love to know your thoughts. Please [share your feedback](http://app.posthog.com/home#supportModal) and [follow our roadmap](https://github.com/PostHog/posthog/issues/18547).
-
 Web analytics enables you to easily track and monitor many of the most important metrics for your website. 
 
 Unlike product analytics, web analytics offers a more streamlined and focused experience. This is especially useful for marketers, content creators, or anyone used to tools like Google Analytics. It includes a dashboard that offers essential metrics, such as visitors, views, sessions, session duration, bounce rate, paths, referrers, and more.
@@ -34,9 +32,9 @@ Getting started is a simple three-step process.
 
 Follow the [installation instructions](/docs/product-analytics/installation) to setup either the JavaScript snippet or the JavaScript Web SDK for the website you want to track.
 
-Web analytics works without capturing [person profiles](/docs/data/persons). This means if you are primarily using PostHog for web analytics, it can be significantly cheaper for you. 
+Web analytics works with anonymous events. This means if you are primarily using PostHog for web analytics, it can be significantly cheaper for you. 
 
-To do this, set your [JavaScript Web](/docs/libraries/js) `person_profiles` config option to `identified_only` like this:
+To capture anonymous events, set your [JavaScript Web](/docs/libraries/js) `person_profiles` config option to `identified_only` like this:
 
 ```js-web
 posthog.init(
@@ -49,7 +47,6 @@ posthog.init(
 ```
 
 > [Single-page apps](/tutorials/single-page-app-pageviews) might require you to manually implement `$pageview` and `$pageleave` event capture for every navigation change. See our tutorials on how to do this in [React](/tutorials/single-page-app-pageviews), [Next.js](/docs/libraries/next-js#client-side-setup), [Vue](/docs/libraries/vue-js#capturing-page-views), and [Svelte](/tutorials/svelte-analytics#capturing-pageviews-and-pageleaves).
-
 
 ### 2. Go to the web analytics dashboard
 

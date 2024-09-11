@@ -112,6 +112,16 @@ WHERE event = '$pageview'
    AND properties.$current_url LIKE '%/blog%'
 ```
 
+To have the insight or dashboard date range selector apply to the insight, include `{filters}` in query like this:
+
+```sql
+SELECT *
+FROM events
+WHERE event = '$pageview'
+   AND properties.$current_url LIKE '%/blog%'
+   AND {filters}
+```
+
 `WHERE` is also useful for querying across multiple tables. For example, if you have the Hubspot connector set up, you can get a count of events for contacts with a query like this:
 
 ```sql
@@ -465,7 +475,7 @@ Types (and names) for the accessible data can be found in the [database](https:/
 - `JSON` (accessible with dot or bracket notation)
 - `DATETIME`(in `ISO 8601`, [read more in our data docs](/docs/data/timestamps))
 - `INTEGER`
-- `NUMERIC`(AKA float)
+- `FLOAT`
 - `BOOLEAN`
 
 For example:

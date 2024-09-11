@@ -31,7 +31,7 @@ import PythonSendEvents from '../../integrate/send-events/_snippets/send-events-
 
 ## Person profiles and properties
 
-For backward compatibility, PostHog captures events with [person profiles](/docs/data/persons) by default. To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```python
 posthog.capture(
@@ -46,7 +46,7 @@ posthog.capture(
 
 For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To capture events without person profiles, set the event's `$process_person_profile` property to `false`:
+To capture anonymous events without person profiles, set the event's `$process_person_profile` property to `false`:
 
 ```python
 posthog.capture(
@@ -154,11 +154,11 @@ posthog.capture('test_id', 'test_event', disable_geoip=True|False)
 
 ## Historical migrations
 
-You can use the Python SDK to run [historical migrations](/docs/migrate) of data into PostHog. To do so, set the `historical_migration` option to `true` when initializing the client.
+You can use the Python or Node SDK to run [historical migrations](/docs/migrate) of data into PostHog. To do so, set the `historical_migration` option to `true` when initializing the client.
 
-import PythonMigration from "../../migrate/_snippets/python-migration.mdx"
+import SDKMigration from "../../migrate/_snippets/sdk-migration.mdx"
 
-<PythonMigration />
+<SDKMigration />
 
 ## Serverless environments (Render/Lambda/...)
 
