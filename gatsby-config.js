@@ -356,6 +356,9 @@ module.exports = {
                 ],
             },
         },
+        {
+            resolve: 'gatsby-plugin-no-sourcemaps',
+        },
         ...(process.env.SHOPIFY_APP_PASSWORD &&
         process.env.GATSBY_MYSHOPIFY_URL &&
         process.env.GATBSY_SHOPIFY_SALES_CHANNEL
