@@ -7,9 +7,9 @@ tags:
  - product analytics
 ---
 
-React Charts is a popular visualization and charting library for React. It provides a simplified set of performant charts to use with analytics data from PostHog.
+[React Charts](https://react-charts.tanstack.com/) is a popular visualization and charting library for React. It provides a simplified set of performant charts to use with analytics data from PostHog.
 
-To provide examples of what you can do with it, we create a basic Next.js app, set it up to get data from PostHog's query API, and visualize it with React Charts.
+To provide examples of what you can do with it, we create a basic Next.js app, set it up to fetch data from [PostHog's query API](/docs/api/query), and visualize it with React Charts.
 
 > **Don't want to do all the work of querying and visualizing?** You can always share or embed insights, dashboards, and more. See [sharing docs](/docs/product-analytics/sharing) for more.
 
@@ -29,7 +29,7 @@ This creates a `react-charts-example` folder with everything we need to get star
 
 Assuming you have data in PostHog to query, the next step is to set up our query request to PostHog.
 
-> **Don't have data to query?** Check out [our guide to setting up analytics in Next.js](/tutorials/nextjs-app-directory-analytics) to start capturing some. Unlike other tutorials, we aren't going to install PostHog in this one.
+> **Don't have data to query?** Check out [our guide to setting up analytics in Next.js](/tutorials/nextjs-app-directory-analytics) to start capturing some.
 
 Start by creating a personal API key. You can do this by going to [personal API keys](https://us.posthog.com/settings/user-api-keys) in your project settings, clicking **Create personal API key**, giving it a label, choosing the **Performing analytics queries** scope (AKA query read), and clicking **Create key**.
 
@@ -42,11 +42,10 @@ Start by creating a personal API key. You can do this by going to [personal API 
 
 Next, go into your `react-charts-example` folder, then the `app` folder, and create an `api` folder. In the `api` folder, create a `query.js` file. Here we set up a fetch request to PostHog's [query API endpoint](/docs/api/query) using your project ID (from your PostHog URL) and personal API key like this:
 
-```js
-// app/api/query.js
+```js file=app/api/query.js
 export const fetchQuery = async (payload) => {
-  const projectId = "12345";
-  const apiKey = "phx_1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0tuvwxyz";
+  const projectId = "12345"; // e.g. if your PostHog dashboard URL is https://us.posthog.com/project/12345
+  const apiKey = "<your_personal_api_key>";
   try {
     const response = await fetch(`https://us.posthog.com/api/projects/${projectId}/query/`, {
       method: "POST",
