@@ -1,6 +1,6 @@
 ---
 title: How to use React Charts to visualize analytics data (with examples)
-date: 2024-08-23
+date: 2024-09-12
 author:
  - ian-vanagas
 tags:
@@ -64,8 +64,6 @@ export const fetchQuery = async (payload) => {
 }
 ```
 
-> **Note:** You'll likely want to include the payload on the server-side too so users can't make requests to this endpoint with arbitrary queries. We don't do this in this tutorial to keep the changes in the examples below in a single file.
-
 Finally, in our client component, we make the query request using [HogQL](/docs/product-analytics/sql) and display the data:
 
 ```js
@@ -103,6 +101,8 @@ export default function Home() {
   )
 }
 ```
+
+> **Note:** You'll likely want to include the payload on the server-side too so users can't make requests to this endpoint with arbitrary queries. We don't do this in this tutorial to keep the changes in the examples below in a single file.
 
 The page we end up with is an ugly collection of non-aggregated data, but we'll fix that next.
 
