@@ -11,13 +11,13 @@ availability:
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { ProductVideo } from 'components/ProductVideo'
 
-PostHog can automatically capture [core web vitals](https://web.dev/explore/learn-core-web-vitals) like LCP, FID, CLS, and FCP. This you means you don't need to manually add logging from [Google's web vitals library](https://github.com/GoogleChrome/web-vitals).
+PostHog can automatically capture [core web vitals](https://web.dev/explore/learn-core-web-vitals) like largest contentful paint, first input delay, cumulative layout shift, and first contentful paint. This you means you don't need to manually add web vitals logging.
 
 ## How to enable web vitals autocapture
 
-Go to your [Autocapture & heapmaps settings](https://us.posthog.com/project/settings/project-autocapture#web-vitals-autocapture). Then, in the **Web vitals autocapture** section, click **Enable**.
+Go to your [Autocapture & heatmaps settings](https://us.posthog.com/settings/project-autocapture#web-vitals-autocapture). Then, in the **Web vitals autocapture** section, click **Enable**.
 
-Note that web vitals autocapture is separate from our regular [autocapture](/docs/product-analytics/autocapture) feature. Web vitals can be captured regardless of whether autocapture is enabled.
+> **Note:** Web vitals autocapture is separate from our regular [autocapture](/docs/product-analytics/autocapture) feature. Web vitals can be captured regardless of whether autocapture is enabled.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1725632828/posthog.com/contents/Screenshot_2024-09-06_at_3.26.12_PM.png"
@@ -26,11 +26,11 @@ Note that web vitals autocapture is separate from our regular [autocapture](/doc
   classes="rounded"
 />
 
-Once enabled, web vitals will be captured under the `Web vitals` event name.
+Once enabled, web vitals are captured under the `$web_vitals` event name. These events include properties for each of the metrics like `$web_vitals_FCP_value` and `$web_vitals_FCP_event`.
 
 ## Dashboard template
 
-Once you've enabled the integration, we've created a dashboard templatehelp you quickly set up relevant insights. 
+Once you've enabled the integration, we've created a dashboard template to help you quickly set up relevant insights. 
 
 To create your own dashboard from a template:
 
