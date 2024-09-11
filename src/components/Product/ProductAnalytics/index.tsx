@@ -719,10 +719,10 @@ const PairsWithArray = [
     },
     {
         icon: <IconFlask />,
-        product: 'A/B testing',
+        product: 'Experiments',
         description:
             'Filter data down to users within an active experiment, whether part of a control group or a test variant',
-        url: '/ab-testing',
+        url: '/experiments',
     },
 ]
 
@@ -761,7 +761,7 @@ export const ProductProductAnalytics = () => {
         <>
             <SEO
                 title="Product Analytics - PostHog"
-                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, A/B Testing, and Surveys."
+                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/product-analytics.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
@@ -770,7 +770,7 @@ export const ProductProductAnalytics = () => {
                     icon={<IconGraph />}
                     product={product.capitalized}
                     title="Product analytics with autocapture"
-                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/ab-testing'>A/B testing</a>, and <a href='/surveys'>surveys</a>."
+                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/experiments'>experiments</a>, and <a href='/surveys'>surveys</a>."
                 />
 
                 <div className="text-center">

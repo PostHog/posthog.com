@@ -464,7 +464,7 @@ export const ProductFeatureFlags = () => {
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
-                            <strong>Note:</strong> Feature flags and A/B testing are currently packaged together and
+                            <strong>Note:</strong> Feature flags and Experiments are currently packaged together and
                             share volume limits.
                         </div>
                     </div>

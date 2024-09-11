@@ -24,7 +24,7 @@ export const slideButtons = [
         placeholderIcon: 'IconToggle',
     },
     {
-        title: 'A/B testing',
+        title: 'Experiments',
         lottieSrc: '/lotties/product-icons/ab-testing.lottie',
         color: 'purple',
         placeholderIcon: 'IconFlask',

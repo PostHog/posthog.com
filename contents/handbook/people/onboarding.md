@@ -35,13 +35,19 @@ With default styling set, you can now choose the 'Call to action' template.
 
 ![google email layouts](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/layout-email.png)
 
-With an email template chosen, you can then enter the copy you want to send. [This doc is a suggested template](https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing) with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails. 
+With an email template chosen, you can then enter the copy you want to send. <PrivateLink url="https://docs.google.com/document/d/1O3_d4v3xgOr1awKkJb8K3xj8-6VV_fHsPkwtgaEhWKI/edit?usp=sharing">This doc is a suggested template</PrivateLink> with important actions specified, though we recommend personalizing it to the individual. We've linked to these as docs and direct images to make the formatting easier for you, but here is an accompanying image for use in emails. 
 
 ![onboarding image](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/handbook-onboarding-email.jpg)
 
 ## Onboarding buddy
 
 Every new joiner at PostHog has an onboarding buddy. If possible, a new joiner will meet their onboarding buddy in person during their first week. In case in-person onboarding isn't an option, we will make alternative arrangements. The onboarding buddy is usually a member of the team a new joiner is joining - ideally the team lead - and they can help with any questions that pop up and with socializing during the first couple of weeks at PostHog. Of course, everyone is available to help, but it’s nice to have a dedicated person to help.
+
+## Onboarding intros
+
+We have onboarding intro calls which give new starters a personal intro to each Small Team, where they can learn about what they do, the history of the team, the team members, what they are working on, their challenges, etc. These are 15 minute calls held once a month by the team leads. 
+
+When you start, you will be automatically invited to these. They are totally optional so if you can't make it, that's fine! You can always join the next month - just invite yourself using this [calendar](https://calendar.google.com/calendar/u/0?cid=Y18yNWNlYjI4MTI5YjQ0ZDNlOWM1NThjMzYxY2M1NjVmZGU3NWM5NWNjZjgyOTg4NTdjNGM1OWY5YzFmMTUzOWY4QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) 
 
 ### Guidance for onboarding buddies
 

@@ -45,7 +45,7 @@ import { API, DataManagement, DataWarehouse } from 'components/ProductIcons'
 dayjs.extend(relativeTime)
 
 export const topicIcons = {
-    'a/b testing': IconFlask,
+    experiments: IconFlask,
     api: IconTerminal,
     apps: IconApps,
     cohorts: Cohorts, // to be replaced or removed

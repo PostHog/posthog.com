@@ -31,7 +31,7 @@ Web analytics in PostHog is similar to Plausible – it’s centered around [a s
 
 “We were using Plausible but it doesn’t really have any cool features to analyze data more deeply,” said Tomás. “PostHog, on the other hand, enables us to analyze our traffic in more ways and to set up funnels when we need to.”
 
-Tomás is currently focused on tracking typical user interactions and uses [funnel and path insights](/product-analytics) to see which pages people move through, including their entry and exit points, and form submissions. In the future he envisions using additional tools, such as [A/B testing](/ab-testing) to learn even more. 
+Tomás is currently focused on tracking typical user interactions and uses [funnel and path insights](/product-analytics) to see which pages people move through, including their entry and exit points, and form submissions. In the future he envisions using additional tools, such as [A/B testing](/experiments) to learn even more. 
 
 “We’re planning to deploy different landing pages across the site,” said Tomás. “A/B testing is one of the other features we’re going to start using first, so we can get an idea of what works and what helps us get more leads.”
 

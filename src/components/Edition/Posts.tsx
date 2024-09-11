@@ -29,6 +29,7 @@ import { postsMenu as menu } from '../../navs/posts'
 import { Authentication } from 'components/Squeak'
 import { PostFilters } from './Views/Default'
 import { CallToAction, child, container } from 'components/CallToAction'
+import { NewsletterForm } from 'components/NewsletterForm'
 
 dayjs.extend(relativeTime)
 
@@ -203,7 +204,7 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
                     '/features': <Blog title="Features" />,
                     '/founders': <Blog title="Founders" />,
                     '/blog': <Blog />,
-                    '/newsletter': <Newsletter />,
+                    '/newsletter': <NewsletterForm placement="blog-index" />,
                     '/spotlight': <Blog title="Spotlight" />,
                     '/customers': <Customers />,
                 }[pathname] || <Default>{children}</Default>

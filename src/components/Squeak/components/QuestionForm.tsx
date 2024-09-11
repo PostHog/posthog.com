@@ -317,7 +317,7 @@ export const QuestionForm = ({
             ]
         }
 
-        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
+        const { data: questionData } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -326,7 +326,8 @@ export const QuestionForm = ({
             body: JSON.stringify({
                 data,
             }),
-        })
+        }).then((res) => res.json())
+        return questionData
     }
 
     const transformValues = async (values: QuestionFormValues, user: User) => {
@@ -363,21 +364,22 @@ export const QuestionForm = ({
 
         if (user) {
             const transformedValues = await transformValues(values, user)
+            let data
             if (formType === 'question') {
-                await createQuestion(transformedValues)
+                data = await createQuestion(transformedValues)
             }
 
             if (formType === 'reply' && questionId) {
                 await reply(transformedValues.body)
             }
 
-            if (onSubmit) {
-                await onSubmit(transformedValues, formType)
-            }
-
             setLoading(false)
             setView(null)
             setFormValues(null)
+
+            if (onSubmit) {
+                await onSubmit(transformedValues, formType, data)
+            }
         } else {
             setFormValues(values)
             setView('auth')

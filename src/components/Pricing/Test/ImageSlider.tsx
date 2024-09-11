@@ -30,7 +30,7 @@ const images = [
     {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ab_testing_0c3f4b82f8.png',
         thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/ab_testing_thumb_8729e68844.png',
-        alt: 'A/B testing',
+        alt: 'Experiments',
     },
     {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_224b1c8aaa.png',

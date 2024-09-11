@@ -16,11 +16,7 @@ Products we build into the platform should:
 
 * Help customers build more successful products. This doesn't _just_ mean writing code, it means commercial stuff too.
 
-* Work with our SDKs so customers can switch on new functionality immediately.
-
-* Be easy to get a lot of customers using, either new or existing
-
-* Solve web or mobile product engineering problems
+* Be very easy to integrate and turn on for existing customers. For example, users can enable the product without a code change
 
 [This diagram](https://miro.com/app/board/uXjVMF-MT74=/?share_link_id=847485164707) shows example products we could ship:
 

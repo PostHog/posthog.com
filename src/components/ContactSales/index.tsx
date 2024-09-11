@@ -37,7 +37,12 @@ export default function ContactSales({ location }) {
     const darkMode = websiteTheme === 'dark'
     return (
         <Layout>
-            <SEO title="Contact Sales - PostHog" />
+            <SEO
+                title="Talk to a human - PostHog"
+                description="PostHog is self-serve, but you can talk to a real person if you need to!"
+                image={`/images/og/talk-to-a-human.png`}
+            />
+
             <div className="lg:py-12 py-4 px-5">
                 <section className="mb-12">
                     <div className="text-center">
@@ -158,8 +163,8 @@ export default function ContactSales({ location }) {
                                                 value: 'Product Analytics',
                                             },
                                             {
-                                                label: 'A/B Testing (Feature Flags)',
-                                                value: 'A/B Testing (Feature Flags)',
+                                                label: 'Experiments (Feature Flags)',
+                                                value: 'Experiments (Feature Flags)',
                                             },
                                             {
                                                 label: 'Session Replay',

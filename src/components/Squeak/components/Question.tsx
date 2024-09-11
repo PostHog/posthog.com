@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useContext } from 'react'
+import React, { useState, createContext, useEffect, useContext, useMemo, useRef } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
 import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
@@ -10,7 +10,7 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
-import { IconArchive, IconPin, IconTrash, IconUndo } from '@posthog/icons'
+import { IconArchive, IconPin, IconSparkles, IconTrash, IconUndo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
@@ -20,6 +20,9 @@ import Checkbox from 'components/Checkbox'
 import { CallToAction } from 'components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
 import { navigate } from 'gatsby'
+import Logomark from 'components/Home/images/Logomark'
+import Avatar from './Avatar'
+import { DotLottiePlayer } from '@dotlottie/react-player'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -29,6 +32,7 @@ type QuestionProps = {
     showSlug?: boolean
     buttonText?: string
     showActions?: boolean
+    askMax?: boolean
 }
 
 export const CurrentQuestionContext = createContext<any>({})
@@ -222,10 +226,168 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
     )
 }
 
+const MaxReply = ({ children }: { children: React.ReactNode }) => {
+    return (
+        <li
+            className={`pr-[5px] pl-[30px] pb-2 !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
+        >
+            <Tooltip
+                content={() => (
+                    <div className="text-sm max-w-64">
+                        Max AI is our resident AI assistant. Double-check responses for accuracy.
+                    </div>
+                )}
+                placement="top"
+            >
+                <div className="relative inline-block">
+                    <div className="flex items-center !text-black dark:!text-white">
+                        <div className="mr-2 relative">
+                            <Avatar
+                                className="w-[25px] h-[25px] rounded-full"
+                                image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
+                            />
+                            <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
+                                <Logomark className="w-[16px]" />
+                            </span>
+                        </div>
+                        <strong>Max AI</strong>
+                    </div>
+                </div>
+            </Tooltip>
+            <div className="ml-[33px] mt-1 py-2 px-4 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
+                {children}
+            </div>
+        </li>
+    )
+}
+
+const Loading = () => {
+    const lottieRef = useRef(null)
+    return (
+        <div className="size-12">
+            <DotLottiePlayer loop lottieRef={lottieRef} src="/lotties/loading.lottie" autoplay />
+        </div>
+    )
+}
+
+const AskMax = ({ question, refresh, manual }: { question: any; refresh: () => void; manual?: boolean }) => {
+    const [confident, setConfident] = useState(false)
+    const [loading, setLoading] = useState(true)
+    const alreadyAsked = useMemo(() => question?.attributes?.askedMax, [])
+    const { getJwt } = useUser()
+
+    const messages = [
+        'This usually takes less than 30 seconds.',
+        'Searching docs, tutorials, GitHub issues, blogs, community answers...',
+        "We'll only show an answer if we're confident it's right!",
+        'Thanks for your patience! Should be done shortly...',
+        'P.S. Have you checked out our merch store?',
+    ]
+
+    const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
+    const [fadeState, setFadeState] = useState('in')
+
+    useEffect(() => {
+        if (loading) {
+            const intervalId = setInterval(() => {
+                setFadeState('out')
+                setTimeout(() => {
+                    setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length)
+                    setFadeState('in')
+                }, 500) // Wait for fade out before changing message
+            }, 5000)
+
+            return () => clearInterval(intervalId)
+        }
+    }, [loading])
+
+    useEffect(() => {
+        const askMax = async () => {
+            try {
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/ask-max`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${await getJwt()}`,
+                    },
+                    body: JSON.stringify({
+                        question,
+                        manual,
+                    }),
+                }).then((res) => res.json())
+                setConfident(response.confident)
+                setLoading(false)
+                refresh()
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        if (!alreadyAsked) {
+            askMax()
+        }
+    }, [])
+
+    return !alreadyAsked && (loading || !confident) ? (
+        <ul className="ml-5 !mb-0 p-0 list-none">
+            <MaxReply>
+                {loading ? (
+                    <div className="flex gap-1">
+                        <div>
+                            <Loading />
+                        </div>
+                        <div className="flex-1 font-normal question-content community-post-markdown !p-0">
+                            <p className="!mt-1 !mb-0 !pb-0">
+                                <strong>Hang tight, checking to see if we can find an answer for you...</strong>
+                            </p>
+                            <p
+                                className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${
+                                    fadeState === 'out' ? 'opacity-0' : 'opacity-100'
+                                }`}
+                            >
+                                {messages[currentMessageIndex]}
+                            </p>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="text-primary/75 dark:text-primary-dark/75 font-normal question-content community-post-markdown !p-0">
+                        <p>
+                            Dang, we couldn’t find anything this time. A community member will hopefully respond soon!
+                        </p>
+                    </div>
+                )}
+            </MaxReply>
+        </ul>
+    ) : null
+}
+
+const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () => void }) => {
+    const [alreadyAsked, setAlreadyAsked] = useState(askedMax)
+
+    const handleClick = () => {
+        setAlreadyAsked(true)
+        onClick()
+    }
+
+    return (
+        <button
+            disabled={alreadyAsked}
+            onClick={handleClick}
+            className="flex items-center leading-none rounded-sm p-1 relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold disabled:!scale-[1] disabled:!top-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:!text-primary/50 dark:disabled:!text-primary-dark/50"
+        >
+            <Tooltip content={() => <div style={{ maxWidth: 320 }}>Ask Max</div>}>
+                <span className="flex w-6 h-6">
+                    <IconSparkles />
+                </span>
+            </Tooltip>
+        </button>
+    )
+}
+
 export const Question = (props: QuestionProps) => {
-    const { id, question, showSlug, buttonText, showActions = true } = props
+    const { id, question, showSlug, buttonText, showActions = true, askMax } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const { user, notifications, setNotifications } = useUser()
+    const [manualAskMax, setManualAskMax] = useState(false)
 
     useEffect(() => {
         if (
@@ -254,6 +416,7 @@ export const Question = (props: QuestionProps) => {
         archive,
         pinTopics,
         escalate,
+        mutate,
     } = useQuestion(id, { data: question })
 
     if (isLoading) {
@@ -280,6 +443,7 @@ export const Question = (props: QuestionProps) => {
                 handleResolve,
                 handleReplyDelete,
                 pinTopics,
+                mutate,
             }}
         >
             <div>
@@ -329,6 +493,10 @@ export const Question = (props: QuestionProps) => {
                                         )}
                                     </button>
                                     <DeleteButton questionID={questionData.id} />
+                                    <AskMaxButton
+                                        onClick={() => setManualAskMax(true)}
+                                        askedMax={questionData?.attributes.askedMax}
+                                    />
                                 </>
                             )}
                             {!archived && (
@@ -364,7 +532,9 @@ export const Question = (props: QuestionProps) => {
                                 </p>
                             )}
                         </div>
-
+                        {(askMax || manualAskMax) && (
+                            <AskMax question={questionData} refresh={mutate} manual={manualAskMax} />
+                        )}
                         <Replies expanded={expanded} setExpanded={setExpanded} />
                     </div>
                     <div

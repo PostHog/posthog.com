@@ -13,15 +13,15 @@ In this tutorial, we show how you can create Hubspot reports in PostHog by conne
 
 ## Linking Hubspot data to PostHog
 
-To start, you need both Hubspot and PostHog accounts. Once you have those, head to PostHog's [data warehouse tab](https://us.posthog.com/data-warehouse) and:
+To start, you need both Hubspot and PostHog accounts. Once you have those, head to PostHog's [data pipeline sources tab](https://us.posthog.com/pipeline/sources) and:
 
-1. Click **Link source**
+1. Click **New source**
 2. Choose the Hubspot option by clicking **Link**
 3. Choose the Hubspot account you want to link
 4. Add a table prefix like `prod_` (optional) and press **Next**
 5. Select all the tables, choose your sync method, and press **Import**
 
-Once done, PostHog will automatically pull and format your Hubspot data for querying. You can adjust the sync frequency, see the last successful run, and more in [data warehouse settings](https://us.posthog.com/data-warehouse/settings/managed).
+Once done, PostHog will automatically pull and format your Hubspot data for querying. You can adjust the sync frequency, see the last successful run, and more in [data pipeline sources tab](https://us.posthog.com/pipeline/sources).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/hubspot_import_light_a33a8297cf.png"

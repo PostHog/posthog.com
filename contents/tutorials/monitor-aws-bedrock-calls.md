@@ -5,6 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
+  - AI engineering
 ---
 
 Tracking your AWS Bedrock usage, costs, and latency is crucial to understanding how your users are interacting with your AI and LLM powered features. In this tutorial, we show you how to monitor important metrics such as:
