@@ -95,7 +95,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
   - Be mindful of the season of your chosen location, as this will dictate what activities you can plan
   - It is worth getting people to hold dates as early as possible, even before you've selected a location
 - [ ] Choose location
-  - Consider choosing a location that is relatively easy for most people to attend without having to travel outrageous distances or deal with difficult visa processes or COVID testing requirements
+  - Consider choosing a location that is relatively easy for most people to attend without having to travel outrageous distances or deal with difficult visa processes.
   - Transportation to the offsite is usually one of the larger budget line items, so do some research on the cost of flights from team locations before finalizing a location.
   - Consider the cost of transportation to/from the airport, and around town, for when your team arrives at the offsite location.
   - Be mindful that people who take long flights won't appreciate a 2hr journey from the airport to accommodation!
@@ -108,12 +108,12 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 
 - [ ] Secure accommodations
   - The ideal location will depend on the size of your team
-  - We recommend booking a large AirBnB for teams under 20 people as this provides for a more casual atmosphere and can help control costs if you opt to have the team cook meals together
+  - We recommend booking a large AirBnB for teams under 10 people as this provides for a more casual atmosphere and can help control costs if you opt to have the team cook meals together. You can also book an AirBnB and supplement with a closeby hotel if the AirBnB doesn't have enough rooms.
   - For larger teams, consider a centrally located hotel that has a bookable space with configurable furniture for different activities, an onsite restaurant or bar to simplify meals and provide a location for free social time, as well as amenities like a gym for those who like to stay active while they travel
 - [ ] Start flight booking process
   - To simplify this process, we give all team members access to a company card, and we ask people to book their own flights
   - We strongly recommend this approach as centralizing flight booking can be a huge headache for offsite lead, and this allows team members to accurately enter their personal information including airline frequent flier and trusted traveller numbers
-  - Encourage folks to buy flights early and with the option to refund if they are unable to attend to save on costs
+  - Encourage folks to buy flights early and with the option to refund if they are unable to attend to save on costs, use your judgement here (~20% more is reasonable, double the price is not really worth it)
   - In the event that a new team member will be attending an offsite, but has not started yet, please contact the Ops team to help coordinate. In these cases, the process is:
     1. Preemptively create the new team member a Google account
     2. Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
@@ -123,7 +123,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
   - Building the schedule as a [separate Google Calendar](https://support.google.com/calendar/answer/37095?hl=en) that can eventually be [shared with the team](https://support.google.com/calendar/answer/37082?hl=en) will allow you to flexibly move sessions around as you finalize the itinerary
 - [ ] Send [info gathering form](https://docs.google.com/forms/d/1QWhbQbHxoq--XWhMfTXeccTaq1ru0v_VPhuwOA3xS48/edit?usp=sharing)
   - Use this form to collect important information like flight details, clothing sizes for merch, dietary restriction, and preferences for things like sharing rooms
-- [ ] Brainstorm merch/meeting room decorations
+- [ ] Brainstorm merch/meeting room decorations (generally just for company-wide offsites)
   - Having some branded merch to commemorate the offsite upon arrival is a great way to welcome people and get them excited for their time together (generally this is for whole team offsites only for budgetary reasons)
   - If you are staying in a hotel, decorating a meeting room makes it feel much more personal and less corporate
   - In the past, we've done shirts, hats, scarves, notebooks, stickers, pens, and water bottles -- feel free to get creative with it
