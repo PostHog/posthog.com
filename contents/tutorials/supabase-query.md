@@ -13,9 +13,9 @@ Because Supabase is built on Postgres, we can link and query it in PostHog using
 
 ## Linking Supabase data to PostHog
 
-To start, you need both a Supabase and PostHog account. Once you have those, head to PostHog's [data warehouse tab](https://us.posthog.com/data-warehouse) and:
+To start, you need both a Supabase and PostHog account. Once you have those, head to PostHog's [data pipeline sources tab](https://us.posthog.com/pipeline/sources) and:
 
-1. Click **Link source.** (or, if you've already added a source, **Manage sources** then **+ New source**)
+1. Click **New source**
 2. Choose the **Postgres** option by clicking **Link.**
 3. Go to your Supabase project settings and under configuration, click **Database.**
 4. Fill out the PostHog data warehouse link fields with your Supabase data.

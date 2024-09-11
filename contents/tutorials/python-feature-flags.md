@@ -161,7 +161,7 @@ def show_user(user):
   return f"<p>Hello, {user}!</p>"
 ```
 
-This is the basic implementation of Python feature flags in Flask set up. From here, we can set up [A/B tests](/ab-testing), a [public beta program](/tutorials/public-beta-program), or [canary releases](/tutorials/canary-release). 
+This is the basic implementation of Python feature flags in Flask set up. From here, we can set up [A/B tests](/experiments), a [public beta program](/tutorials/public-beta-program), or [canary releases](/tutorials/canary-release). 
 
 ## Further reading
 

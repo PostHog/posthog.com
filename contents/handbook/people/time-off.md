@@ -14,7 +14,10 @@ As general guidance, we don't care about a few days here and there. If you are t
 
 We care about your results, not how long you work.
 
-You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. For example, having an entire Small Team off at the same time means we can't be responsive to community issues.
+You do not need to get approval for time off from your manager. Instead, we expect everyone to coordinate with their team to make sure that we're still able to move forwards in your absence. You should avoid things like:
+
+- Having an entire Small Team off - this means we can't provide support to customers
+- Having the only X people who can do some totally critical task at PostHog off - if this is unavoidable, try to make sure one of you can at least check in if something goes horribly wrong
 
 ### How to book time off in PTO by Deel
 
@@ -61,13 +64,13 @@ We do not define “closeness” and we won't ask about your relationship to the
 
 Our bereavement policy also covers pregnancy and child loss for both parents, with no questions asked. Please take at least 2 weeks of paid leave. 
 
-If you need extended time for physical or mental health reasons, we will treat it as extended sick leave.
+If you need extended time for physical or mental health reasons, we will treat it as extended sick leave - just chat to Fraser. 
 
 ### Jury duty / voting / childcare disasters, aka 'life stuff'
 
 There are lots of situations where life needs to come first. Please let it - just be communicative with your team and fit your work around it as you need. We trust you will do the right thing here. 
 
-If your are summonsed for jury duty, please let us know right away - we can often get an exception granted if we have enough notice. 
+If your are summonsed for jury duty, please let Fraser know right away - we can often get an exception granted if we have enough notice. 
 
 ## Parental leave
 
@@ -77,7 +80,7 @@ If you have been at PostHog for over 1 year as of the date of your child's birth
 
 Parental leave isn't supposed to be combined with our unlimited PTO policy here - we aren't prescriptive and will trust your judgement, but please note that we usually won't allow you do a combination of parental leave plus a long holiday in addition to that to extend your time off. 
 
-Please communicate parental leave to James, Tim, or Charles as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing. 
+Please communicate parental leave to Fraser as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing. 
 
 > We are aware that there are local laws around time off for new parents in every country, and that these may vary. Wherever there is a discrepancy between local regulations and PostHog policy, local laws will override PostHog.
 

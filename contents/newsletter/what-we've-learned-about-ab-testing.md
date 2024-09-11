@@ -7,7 +7,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/feature-images/ab-test.png
 featuredImageType: full
 tags:
-  - AB testing
+  - Experiments
 crosspost:
   - Product engineers
   - Blog

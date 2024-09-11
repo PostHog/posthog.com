@@ -5,6 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
+  - AI engineering
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
@@ -348,4 +349,4 @@ We've shown you the basics of creating insights from your product's Claude usage
 
 - [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
-- [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
+- [How to monitor generative AI calls to AWS Bedrock](/tutorials/monitor-aws-bedrock-calls)

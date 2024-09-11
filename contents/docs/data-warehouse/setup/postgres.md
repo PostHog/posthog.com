@@ -12,10 +12,10 @@ The Postgres connector can link your database tables to PostHog.
 
 To link Postgres:
 
-1. Go to the [data warehouse tab](https://us.posthog.com/data-warehouse) in PostHog
-2. Click **Link Source** and select Postgres
+1. Go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) and the sources tab in PostHog
+2. Click **New source** and select Postgres
 3. Enter your database connection details:
-    - **Host:** The hostname or IP your database server like `db.example.com` or `192.168.1.100`.
+    - **Host:** The hostname or IP your database server like `db.example.com` or `123.132.1.100`.
     - **Port:** The port your database server is listening to. The default is `5432`.
     - **Database:** The name of the database you want like `analytics_db`.
     - **User:** The username with the necessary permissions to access the database.
@@ -23,7 +23,7 @@ To link Postgres:
     - **Schema:** The schema for your database where your tables are located. The default is `public`.
 4. Click **Link**
 
-The data warehouse then starts syncing your Postgres data. You can see details and progress in the [data warehouse settings tab](https://us.posthog.com/data-warehouse/settings).
+The data warehouse then starts syncing your Postgres data. You can see details and progress in the [sources tab](https://us.posthog.com/pipeline/sources).
 
 > **Looking for an example of the Postgres source?** Check out our tutorial where we [connect and query Supabase data](/tutorials/supabase-query).
 

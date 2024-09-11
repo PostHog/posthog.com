@@ -56,7 +56,7 @@ A beginner's guide to some of our custom Slack emojis and various anecdotes you'
 
 * <Emoji name="bad-internet" src="/images/emojis/bad-internet.png" /> Yakko always had bad internet when demoing. <em>Always.</em>
 
-* [Jams](/community/profiles/90) wore a skin tight green all-body suit for months to improve his Zoom background game without us realizing.
+* [Jams](/community/profiles/30174) wore a skin tight green all-body suit for months to improve his Zoom background game without us realizing.
 
 * <Emoji name="ben-peace" src="/images/emojis/ben-peace.png" /> Ben has the same pose in 90% of PostHog photos. It's a reference to a meme.
 
@@ -78,11 +78,11 @@ A beginner's guide to some of our custom Slack emojis and various anecdotes you'
 
 * IPO promises. There is a list of these that is brought out at certain moments. You may see.
 
-* [Marius](/community/profiles/1) will train you on Post-it notes if you go to an offsite with him. Success of a good Post-it note posting is in the lift away from the surface – the most important thing is to peel off the Post-it note, as opposed to pulling.
+* [Marius](/community/profiles/30202) will train you on Post-it notes if you go to an offsite with him. Success of a good Post-it note posting is in the lift away from the surface – the most important thing is to peel off the Post-it note, as opposed to pulling.
 
 * Three finger rule - another Marius invention, if someone holds up three fingers while you're talking, it means you aren't being concise enough. We don't actually use this much as it's predictably awkward and distracting, so ruins any meeting it could have otherwise helped.
 
-* When we hit 10,000 GitHub stars, [Ian](../community/profiles/269) read every username on a live stream that took over six hours.
+* When we hit 10,000 GitHub stars, [Ian](../community/profiles/29296) read every username on a live stream that took over six hours.
 
 * We like to nail things. It's not uncommon to see a GitHub issue titled "Nail [feature name]". Sometimes we'll even assign an absurd version number like "3000". (The codename for the next generation UI of the PostHog app is referred to as PostHog 3000, and other projects have also adopted this naming convention as well.)
 

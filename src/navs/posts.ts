@@ -88,11 +88,11 @@ export const postsMenu: IMenu[] = [
         color: 'orange',
         children: [
             {
-                name: 'A/B testing',
-                url: '/product-engineers/ab-testing',
+                name: 'Experiments',
+                url: '/product-engineers/experiments',
                 icon: 'IconFlask',
                 color: 'green',
-                tag: 'AB testing',
+                tag: 'Experiments',
             },
             {
                 name: 'Feature management',
@@ -214,7 +214,7 @@ export const postsMenu: IMenu[] = [
                 color: 'seagreen',
             },
             {
-                name: 'A/B testing',
+                name: 'Experiments',
                 url: '/tutorials/experimentation',
                 icon: 'IconFlask',
                 color: 'purple',
@@ -232,6 +232,13 @@ export const postsMenu: IMenu[] = [
                 color: 'yellow',
                 icon: 'IconPerson',
                 tag: 'Cdp',
+            },
+            {
+                name: 'AI engineering',
+                url: '/tutorials/ai-engineering',
+                color: 'purple',
+                icon: 'IconAI',
+                tag: 'AI engineering',
             },
         ],
     },

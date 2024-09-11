@@ -1,5 +1,5 @@
 import { Placement, reference } from '@popperjs/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePopper } from 'react-popper'
 import { createPortal } from 'react-dom'
 
@@ -12,6 +12,8 @@ export default function Tooltip({
     placement = 'bottom',
     title,
     contentContainerClassName = '',
+    controlled,
+    ...other
 }: {
     children: JSX.Element
     content: string | ((setOpen: React.Dispatch<React.SetStateAction<boolean>>) => React.ReactNode)
@@ -21,8 +23,10 @@ export default function Tooltip({
     placement?: Placement
     title?: string
     contentContainerClassName?: string
+    open?: boolean
+    controlled?: boolean
 }): JSX.Element {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(other.open ?? false)
     const [referenceElement, setReferenceElement] = useState(null)
     const [popperElement, setPopperElement] = useState(null)
     const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -34,8 +38,18 @@ export default function Tooltip({
         ],
     })
 
+    useEffect(() => {
+        if (controlled && other.open !== undefined) {
+            setOpen(other.open)
+        }
+    }, [other.open])
+
     return (
-        <span onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} className={className}>
+        <span
+            onMouseEnter={() => !controlled && setOpen(true)}
+            onMouseLeave={() => !controlled && setOpen(false)}
+            className={className}
+        >
             {React.cloneElement(children, {
                 ref: setReferenceElement,
             })}

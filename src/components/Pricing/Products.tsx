@@ -141,9 +141,9 @@ export const useProducts = () => {
         },
         {
             icon: <IconFlask className="w-5 h-6 text-purple" />,
-            name: 'A/B testing',
+            name: 'Experiments',
             type: 'feature_flags',
-            slug: 'ab-testing',
+            slug: 'experiments',
             freeLimit: '',
             denomination: '',
             price: '',

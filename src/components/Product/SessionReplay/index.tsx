@@ -313,10 +313,10 @@ const PairsWithArray = [
     },
     {
         icon: <IconFlask />,
-        product: 'A/B testing',
+        product: 'Experiments',
         description:
             'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
-        url: '/ab-testing',
+        url: '/experiments',
     },
 ]
 
