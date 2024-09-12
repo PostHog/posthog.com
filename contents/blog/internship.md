@@ -40,6 +40,7 @@ Go nuts - build a CRM, build a customer support, or something else.
 * If we don't get any good submissions, we may award no one, but think that's very unlikely
 * We own your work - we may even choose to ship your prouct for real.
 * You must tell us roughly how much work you put into it to the nearest half a day
+* You must publish your work as a fork of [PostHog](https://github.com/PostHog/posthog).
 
 ## The internship
 
