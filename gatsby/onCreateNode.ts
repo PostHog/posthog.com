@@ -67,9 +67,7 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
         const { resources, next_cursor } = await fetch(
             `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${
                 process.env.GATSBY_CLOUDINARY_CLOUD_NAME
-            }/resources/image?prefix=posthog.com&type=upload&max_results=500${
-                nextCursor ? `&next_cursor=${nextCursor}` : ``
-            }`
+            }/resources/image?type=upload&max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`
         )
             .then((res) => res.json())
             .catch((e) => console.error(e))
