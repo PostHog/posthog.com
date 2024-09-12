@@ -17,7 +17,7 @@ Competition will be fierce, this is how to get a spot.
 
 ## Criteria
 
-* You must be a developer but have less than 1 year of professional experience (!)
+* You must have less than 1 year of professional experience as a software developer (!)
 * You must be based between GMT+2 to GMT-8
 
 ## The competition
