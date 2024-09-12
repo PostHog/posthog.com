@@ -162,14 +162,28 @@ module.exports = {
                       path
                     }
                   }
+                  questions: allSqueakQuestion {
+                    nodes {
+                       permalink
+                    }
+                  }
                 }`,
                 resolveSiteUrl: ({ site }) => {
                     return site.siteMetadata.siteUrl
                 },
-                resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
+                resolvePages: async ({
+                    allSitePage: { nodes: allPages },
+                    site,
+                    questions: { nodes: allQuestions },
+                }) => {
                     const transformedPages = allPages.map(({ path }) => {
                         return {
                             path: `${site.siteMetadata.siteUrl}${path}`,
+                        }
+                    })
+                    const transformedQuestionPages = allQuestions.map(({ permalink }) => {
+                        return {
+                            path: `${site.siteMetadata.siteUrl}/questions/${permalink}`,
                         }
                     })
 
