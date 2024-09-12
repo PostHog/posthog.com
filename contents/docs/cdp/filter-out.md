@@ -67,6 +67,9 @@ The followed types and operators are allowed:
 
 ## FAQ
 
+### Q: How can I filter out events from unwanted hosts when using the PostHog browser SDK while still retaining events from other sdk?
+
+**A:** if you enable the option to `Keep event if any of the filtered properties are undefined?`, any events where the $host property is undefined will not be filtered out.
 <CommunityMaintained />
 
 <FeedbackQuestions />
