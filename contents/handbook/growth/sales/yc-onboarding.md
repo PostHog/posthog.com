@@ -23,7 +23,7 @@ If a founder refers us to another YC company, both founders get an additional $5
 
 For previous batches:
 
-- Get $50k of credit for PostHog Cloud for 12 months ($25k / 6 months for anyone not in the last 4 batches).
+- Get $50k of credit for PostHog Cloud for 12 months ($25k / 6 months for anyone not in the last 8 batches).
 
 > Only James has the ability to update our deal in Bookface, so any changes to the deal text should be made in [this Google Doc](https://docs.google.com/document/d/17MtngAx2DeVo3YyhPwwKRvakI54SJuNmHkPtFns2IVQ/edit) then shared with him. 
 
