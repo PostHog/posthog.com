@@ -1,6 +1,6 @@
 ---
 title: How to compare AWS Bedrock prompts
-date: 2024-08-29
+date: 2024-09-12
 author:
   - lior-neu-ner
 tags:
@@ -8,7 +8,7 @@ tags:
   - AI engineering
 ---
 
-Evaluating LLM prompts is crucial for determining whether your modifications are genuinely enhancing your application. In this tutorial, we explore three methods to assess prompts by comparing their LLM outputs. Namely:
+Evaluating LLM prompts is important for determining whether they are improving your app. In this tutorial, we explore three methods to assess prompts by comparing their LLM outputs. Namely:
 
 1. [Quantitative metrics](#quantitative-metrics)
 2. [User feedback](#user-feedback)
@@ -23,7 +23,7 @@ To show you how, we set up a basic Next.js app, implement the AWS Bedrock API, a
 We've created a sample app for this tutorial. You can download it from [Github](https://github.com/PostHog/aws-bedrock-compare-prompts-sample-app). 
 
 ```bash
-git clone git@github.com:PostHog/aws-bedrock-compare-prompts-sample-app.git
+git clone https://github.com/PostHog/aws-bedrock-compare-prompts-sample-app
 ```
 
 To set your app up, first ensure [Node](https://nodejs.dev/en/learn/how-to-install-nodejs/) is install. Then run `npm install` to install all dependencies. 
@@ -43,9 +43,9 @@ const client = new BedrockRuntimeClient({ region: "<YOUR_AWS_REGION>" }); // e.g
 // rest of the code
 ```
 
-You'll also notice that we're using Meta's Llama 3 8B Instruct model. Make sure you have access to this model, or [request access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) if you don't (you may need to change regions in AWS if it's not available. Alternatively, you can use a different Llama model). 
+You'll also notice that we're using Meta's Llama 3 8B Instruct model. Make sure you have access to this model, or [request access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) if you don't. You may need to change regions in AWS if it's not available. Alternatively, you can use a different Llama model. 
 
-Note that while this tutorial uses the Llama model, the concepts in this tutorial apply to all of Bedrock's [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns).
+> **Note:** While this tutorial uses the Llama model, the concepts in this tutorial apply to all of Bedrock's [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns).
 
 ![Requesting access to AWS Bedrock models](https://res.cloudinary.com/dmukukwp6/image/upload/v1723015919/posthog.com/contents/Screenshot_2024-08-07_at_8.31.28_AM.png)
 
@@ -83,11 +83,11 @@ Run `npm run dev` and go to `http://localhost:3000` to everything in action.
 
 ## Compare prompts
 
-With our app set up, we can begin [capturing events](/docs/product-analytics/capture-events) with PostHog to compare prompts. We cover three different ways to evaluate LLM output, so that you can effictively compare prompts.
+With our app set up, we can begin [capturing events](/docs/product-analytics/capture-events) with PostHog to evaluate and compare prompts. We cover three different ways to do this.
 
-### Quantitative metrics
+### 1. Quantitative metrics
 
-Quantitative metrics involve measuring specific, quantifiable properties of the LLM outputs. For example:
+Quantitative metrics involve measuring specific, quantifiable properties of the LLM outputs like:
 
 - Token output count
 - Latency
@@ -292,7 +292,7 @@ export async function POST(request) {
         promptId,
         model_id: modelId,
         generation: judgeGeneration,
-        is_toxic: judgeGeneration.includes('yes') ? 1 : 0
+        is_toxic: judgeGeneration.toLowerCase().includes('yes') ? 1 : 0
       }
     });
 
