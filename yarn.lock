@@ -11043,12 +11043,12 @@ gatsby-plugin-mdx@^3.20.0:
     unist-util-remove "^1.0.3"
     unist-util-visit "^1.4.1"
 
-gatsby-plugin-no-sourcemaps@^5.13.0:
-  version "5.13.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-no-sourcemaps/-/gatsby-plugin-no-sourcemaps-5.13.0.tgz#1052a0148ecd623a1df6ac586d0c8fcf7ebae6af"
-  integrity sha512-C6BHpd7W82Ps6oA6IW5UuXxbDyZzvcsz96UMIBkn+n+MCNaoB6AjQDZlPcvZHaxyZ4ovqZnf7TBbvugxgzwq0g==
+gatsby-plugin-no-sourcemaps@4.25.0:
+  version "4.25.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-no-sourcemaps/-/gatsby-plugin-no-sourcemaps-4.25.0.tgz#d14f40882be9731522383c8fa191cec76178e5ca"
+  integrity sha512-gurzjbY7TPrGim69x+P0D11f6t5VMqK460KEtDB5LYitDVCnNJ2KDfy3J0cg6eGWWq646vGVEMaFQ5HdioMdJg==
   dependencies:
-    "@babel/runtime" "^7.20.13"
+    "@babel/runtime" "^7.15.4"
 
 gatsby-plugin-offline@^5.20.0:
   version "5.23.1"
