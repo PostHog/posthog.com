@@ -28,7 +28,7 @@ You can build _whatever_ you want. We have plenty of public info in terms of wha
 
 We are looking for:
 
-* products we could actually ship to real users
+* products we could actually ship to real users (our strategy: ["to provide every tool needed to build successful products"](https://posthog.com/handbook/why-does-posthog-exist#provide-every-tool-needed-to-build-successful-products))
 * things that have an impressive amount of scope
 
 Go nuts - build a CRM, build a customer support, or something else.
