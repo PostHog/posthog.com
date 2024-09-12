@@ -312,12 +312,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 originalFormat: (image?.data?.attributes?.ext || '').replace('.', ''),
             }
 
-            const hasMedia =
-                cloudinaryMedia.publicId &&
-                cloudinaryMedia.originalHeight &&
-                cloudinaryMedia.originalWidth &&
-                cloudinaryMedia.originalFormat
-
             const node = {
                 squeakId: roadmap.id,
                 internal: {
@@ -325,7 +319,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     contentDigest: createContentDigest(roadmap.attributes),
                 },
                 ...rest,
-                ...(hasMedia ? { media: cloudinaryMedia } : {}),
+                media: cloudinaryMedia,
                 ...(image.data && {
                     id: createNodeId(`squeak-image-${image.data.id}`),
                     url: image.data.attributes.url,
