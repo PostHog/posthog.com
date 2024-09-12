@@ -340,7 +340,7 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-transformer-cloudinary`,
+            resolve: require.resolve(`./plugins/gatsby-transformer-cloudinary`),
             options: {
                 transformTypes: [
                     `RoadmapMedia`,
