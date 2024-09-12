@@ -67,9 +67,7 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
         const { resources, next_cursor } = await fetch(
             `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${
                 process.env.GATSBY_CLOUDINARY_CLOUD_NAME
-            }/resources/image?prefix=posthog.com&type=upload&max_results=500${
-                nextCursor ? `&next_cursor=${nextCursor}` : ``
-            }`
+            }/resources/image?type=upload&max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`
         )
             .then((res) => res.json())
             .catch((e) => console.error(e))
@@ -117,15 +115,22 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 if (!cloudinaryData) {
                     console.warn(`Cloudinary data not found for ${publicId}`)
                 }
+
+                const hasData = publicId && cloudinaryData?.format && cloudinaryData?.width && cloudinaryData?.height
+
                 node.frontmatter[field] = {
                     publicURL: node.frontmatter?.[field],
-                    childImageSharp: {
-                        cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                        publicId,
-                        originalFormat: cloudinaryData?.format,
-                        originalWidth: cloudinaryData?.width,
-                        originalHeight: cloudinaryData?.height,
-                    },
+                    ...(hasData
+                        ? {
+                              childImageSharp: {
+                                  cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                                  publicId,
+                                  originalFormat: cloudinaryData?.format,
+                                  originalWidth: cloudinaryData?.width,
+                                  originalHeight: cloudinaryData?.height,
+                              },
+                          }
+                        : {}),
                 }
             }
         })
