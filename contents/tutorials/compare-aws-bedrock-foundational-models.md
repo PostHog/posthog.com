@@ -1,5 +1,5 @@
 ---
-title: How to compare AWS Bedrock prompts
+title: How to compare AWS Bedrock foundational models
 date: 2024-09-12
 author:
   - lior-neu-ner
@@ -8,13 +8,13 @@ tags:
   - AI engineering
 ---
 
-Evaluating LLM prompts is important for determining whether they are improving your app. In this tutorial, we explore three methods to assess prompts by comparing their LLM outputs. Namely:
+Evaluating LLM models is important for determining which is the best for your use case. In this tutorial, we explore three methods to assess models by comparing their LLM outputs. Namely:
 
 1. [Quantitative metrics](#quantitative-metrics)
 2. [User feedback](#user-feedback)
 3. [Model-based evaluation](#model-based-evaluation)
 
-To show you how, we set up a basic Next.js app, implement the AWS Bedrock API, and capture events using PostHog.
+To show you how, we set up a basic Next.js app, implement the AWS Bedrock API for three different models, and capture events using PostHog.
 
 > While this tutorial focuses on [Next.js](/docs/libraries/next-js) and [Node](/docs/libraries/node), PostHog supports many different [SDKs](/docs/libraries) and [frameworks](/docs/frameworks). The concepts in this tutorial apply to all our supported SDKs and frameworks. 
 
@@ -23,7 +23,7 @@ To show you how, we set up a basic Next.js app, implement the AWS Bedrock API, a
 We've created a sample app for this tutorial. You can download it from [Github](https://github.com/PostHog/aws-bedrock-compare-prompts-sample-app). 
 
 ```bash
-git clone https://github.com/PostHog/aws-bedrock-compare-prompts-sample-app
+git clone https://github.com/PostHog/aws-bedrock-compare-models-sample-app.git
 ```
 
 To set your app up, first ensure [Node](https://nodejs.dev/en/learn/how-to-install-nodejs/) is install. Then run `npm install` to install all dependencies. 
@@ -43,9 +43,15 @@ const client = new BedrockRuntimeClient({ region: "<YOUR_AWS_REGION>" }); // e.g
 // rest of the code
 ```
 
-You'll also notice that we're using Meta's Llama 3 8B Instruct model. Make sure you have access to this model, or [request access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) if you don't. You may need to change regions in AWS if it's not available. Alternatively, you can use a different Llama model. 
+You'll also notice that we're using the following model:
 
-> **Note:** While this tutorial uses the Llama model, the concepts in this tutorial apply to all of Bedrock's [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns).
+- Amazon's Titan Text G1 Express
+- Anthropic's Claude 2.1
+- Meta's Llama 3 8B Instruct. 
+
+Make sure you have access to all these models, or [request access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) if you don't. You may need to change regions in AWS if it's not available. Alternatively, you can use different models. 
+
+> **Note:** While this tutorial uses the above three models, the concepts in this tutorial apply to all of Bedrock's [supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns).
 
 ![Requesting access to AWS Bedrock models](https://res.cloudinary.com/dmukukwp6/image/upload/v1723015919/posthog.com/contents/Screenshot_2024-08-07_at_8.31.28_AM.png)
 
@@ -79,7 +85,7 @@ if (typeof window !== 'undefined') {
 
 Run `npm run dev` and go to `http://localhost:3000` to everything in action.
 
-![Sample LLM app](https://res.cloudinary.com/dmukukwp6/video/upload/v1724924215/posthog.com/contents/sample-app-aws.mp4)
+![Sample LLM app](https://res.cloudinary.com/dmukukwp6/video/upload/v1726151627/posthog.com/contents/sample-app-models.mp4)
 
 ## Compare prompts
 
@@ -120,22 +126,45 @@ Update the code in `src/app/api/generate-llm-output/route.js` to capture a `bedr
     const jsonString = new TextDecoder().decode(rawRes);
     const parsedJSON = JSON.parse(jsonString);
 
-    // Add the below
-    const { generation, prompt_token_count, generation_token_count} = parsedJSON;
+    
+    // Add these two new variables
+    let promptTokenCount;
+    let generationTokenCount;
+
+    // Update the existing switch statement to the following
+    switch (modelId) {
+      case "meta.llama3-8b-instruct-v1:0":
+        parsedResponse = parsedJSON.generation;
+        promptTokenCount = parsedJSON.prompt_token_count;
+        generationTokenCount = parsedJSON.generation_token_count;
+        break;
+      case "amazon.titan-text-express-v1":
+        parsedResponse = parsedJSON.results[0].outputText;
+        promptTokenCount = parsedJSON.inputTextTokenCount;
+        generationTokenCount = parsedJSON.results[0].tokenCount;
+        break;
+      case "anthropic.claude-v2:1":
+        parsedResponse = parsedJSON.completion;
+        // Estimate token count for Claude v2.1 since it doesn't return it
+        // This is a rough estimate and may not be exact
+        promptTokenCount = Math.ceil(prompt.split(/\s+/).length * 1.3);
+        generationTokenCount = Math.ceil(parsedJSON.completion.split(/\s+/).length * 1.3);
+        break;
+    }
+
+    // Capture the event
     posthog.capture({
-      distinctId: email, // unique identifier for the user who performed the action
+      distinctId: email,
       event: 'bedrock_completion',
       properties: {
-        promptId,
-        prompt,
         model_id: modelId,
-        generation: generation,
-        prompt_token_count: prompt_token_count,
-        generation_token_count: generation_token_count,
+        prompt,
+        generation: parsedResponse,
+        prompt_token_count: promptTokenCount,
+        generation_token_count: generationTokenCount,
         response_time_in_ms: responseTime
       }
     });
-
     // rest of your code
   }
 ```
@@ -151,7 +180,7 @@ Then, to track errors, we capture `bedrock_error` events in the `catch` block of
       distinctId: email,
       event: 'bedrock_error',
       properties: {
-        promptId, // unique identifier for the prompt
+        model_id: modelId,
         prompt,
         error_message: error.message,
         error_name: error.name,
@@ -159,7 +188,6 @@ Then, to track errors, we capture `bedrock_error` events in the `catch` block of
         error_type: error.__type,
         error_requestId: error.$metadata?.requestId,
         error_stack: error.stack,
-        model_id: modelId,
       }
     });
 
@@ -173,15 +201,15 @@ Then, to track errors, we capture `bedrock_error` events in the `catch` block of
 Refresh your app and submit a few prompts. You should then see your events captured in the [PostHog activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1723020434/posthog.com/contents/Screenshot_2024-08-07_at_9.46.52_AM.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1723020434/posthog.com/contents/Screenshot_2024-08-07_at_9.47.04_AM.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1726151964/posthog.com/contents/Screenshot_2024-09-12_at_3.38.51_PM.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1726151964/posthog.com/contents/Screenshot_2024-09-12_at_3.38.59_PM.png" 
   alt="AWS Bedrock events in PostHog" 
   classes="rounded"
 />
 
 #### How to create insights
 
-Now that we're capturing events, we can create [insights](/docs/product-analytics/insights) in PostHog to visualize our data. Most importantly, we breakdown our data by `promptId` to compare them.
+Now that we're capturing events, we can create [insights](/docs/product-analytics/insights) in PostHog to visualize our data. Most importantly, we breakdown our data by `model_id` to compare them.
 
 Below is an example of how to create an insight to compare average API response time for each prompt:
 
@@ -190,12 +218,12 @@ Below is an example of how to create an insight to compare average API response 
 2. Click on **Total count** to show a dropdown. Click on **Property value (average)**.
 3. Select the `response_time_in_ms` property.
 4. For nice formatting, press **Options** and under `Y-axis unit` select **Duration (ms)**
-5. Click **+ Add breakdown** and select `promptId`. 
+5. Click **+ Add breakdown** and select `model_id`. 
 6. **Save** your insight.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1724925781/posthog.com/contents/Screenshot_2024-08-29_at_12.02.34_PM.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1724925781/posthog.com/contents/Screenshot_2024-08-29_at_12.02.49_PM.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1726152090/posthog.com/contents/Screenshot_2024-09-12_at_3.41.16_PM.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1726152090/posthog.com/contents/Screenshot_2024-09-12_at_3.41.07_PM.png" 
   alt="Response time by prompt in PostHog" 
   classes="rounded"
 />
@@ -204,7 +232,7 @@ Below is an example of how to create an insight to compare average API response 
 
 A good way to evaluate LLM outputs is to ask your users to rate them. In our sample app, we do this by asking if the response was helpful. Users can submit their response using the **Yes** and **No** buttons at the bottom of the page. 
 
-The advantage of this method is that it's highly representative of your users' experience and expectations. However, since you need to ask your users to rate responses, you're not able to evaluate your prompts before you ship them into production.
+The advantage of this method is that it's highly representative of your users' experience and expectations. However, since you need to ask your users to rate responses, you're not able to evaluate your models before you ship them into production.
 
 #### How to capture user evaluations
 
@@ -223,7 +251,7 @@ export default function Home() {
 
     posthog.capture('llm_feedback_submitted', {
       score: isHelpful ? 1 : 0,
-      promptId,
+      model_id: modelId,
     });
   };
 
@@ -239,13 +267,13 @@ Refresh your app, submit a few prompts, and click on the **Yes** and **No** butt
 2. Set the event to `llm_feedback_submitted`
 3. Click on **Total count** to show a dropdown. Click on **Property value (average)**.
 4. Select the `score` property.
-5. Click **+ Add breakdown** and select `promptId`. 
+5. Click **+ Add breakdown** and select `model_id`. 
 6. **Save** your insight.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1724848567/posthog.com/contents/Screenshot_2024-08-28_at_2.35.00_PM.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1724848567/posthog.com/contents/Screenshot_2024-08-28_at_2.35.15_PM.png" 
-  alt="LLM feedback by prompt in PostHog" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1726152289/posthog.com/contents/Screenshot_2024-09-12_at_3.44.33_PM.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1726152289/posthog.com/contents/Screenshot_2024-09-12_at_3.44.39_PM.png" 
+  alt="LLM feedback by model in PostHog" 
   classes="rounded"
 />
 
@@ -257,7 +285,7 @@ The results from the judge LLM can be highly accurate, especially when using a f
 
 #### How to capture model-based evaluations
 
-In our sample app, we implement a simple judge by submitting our LLM response to the same Llama 3 model. We ask it to rate its toxicity by asking it whether the response contains any curse words. Then, we capture its response with a `bedrock_judge_response` event.
+In our sample app, we implement a simple judge by submitting our LLM response to the Llama 3 model. We ask it to rate its toxicity by asking it whether the response contains any curse words. Then, we capture its response with a `bedrock_judge_response` event.
 
 ```js file=src/app/api/generate-llm-output/route.js
 // your existing imports
@@ -266,30 +294,30 @@ export async function POST(request) {
   // your existing code...
 
     // Add this code after your original LLM request
+    // Judge the response using Llama 3 8B Instruct
     const judgeInput = {
-      modelId,
+      modelId: "meta.llama3-8b-instruct-v1:0",
       contentType: "application/json",
       accept: "application/json",
       body: JSON.stringify({
-        prompt: `Does the following text contain any curse words? You MUST ONLY answer with "yes" or "no". \n\n${generation}`,
-        max_gen_len: 512,
+        prompt: `Human: Does the following text contain any curse words? You MUST ONLY answer with "yes" or "no". \n\n${parsedResponse} \n\n Assitant:`,
+        max_gen_len: 10,
         temperature: 0,
         top_p: 0.1,
       }),
-    }
+    };
     
     const judgeCommand = new InvokeModelCommand(judgeInput);
     const judgeResponse = await client.send(judgeCommand);
     const judgeRawRes = judgeResponse.body;
     const judgeJsonString = new TextDecoder().decode(judgeRawRes);
     const judgeParsedJSON = JSON.parse(judgeJsonString);
-    const { generation: judgeGeneration } = judgeParsedJSON;
+    const judgeGeneration = judgeParsedJSON.generation.trim();
 
     posthog.capture({
       distinctId: email,
       event: 'bedrock_judge_response',
       properties: {
-        promptId,
         model_id: modelId,
         generation: judgeGeneration,
         is_toxic: judgeGeneration.toLowerCase().includes('yes') ? 1 : 0
@@ -313,19 +341,19 @@ Refresh your app and submit a few prompts (and try to get some toxic responses!)
 2. Set the event to `bedrock_judge_response`
 3. Click on **Total count** to show a dropdown. Click on **Property value (average)**.
 4. Select the `is_toxic` property.
-5. Click **+ Add breakdown** and select `promptId`. 
+5. Click **+ Add breakdown** and select `model_id`. 
 6. For nice formatting, press **Options** and under `Y-axis unit` select **Percentage**
 7. **Save** your insight.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1724927515/posthog.com/contents/Screenshot_2024-08-29_at_12.31.27_PM.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1724927516/posthog.com/contents/Screenshot_2024-08-29_at_12.31.42_PM.png" 
-  alt="Model-based evaluation by prompt in PostHog" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1726152708/posthog.com/contents/Screenshot_2024-09-12_at_3.51.28_PM.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1726152708/posthog.com/contents/Screenshot_2024-09-12_at_3.51.35_PM.png" 
+  alt="Model-based evaluation by model in PostHog" 
   classes="rounded"
 />
 
 ## Further reading
 
 - [How to monitor generative AI calls to AWS Bedrock](/tutorials/monitor-aws-bedrock-calls)
-- [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
-- [How to compare AWS Bedrock foundational models](/tutorials/compare-aws-bedrock-foundational-models)
+- [How to compare AWS Bedrock prompts](/tutorials/compare-aws-bedrock-prompts)
+- [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
