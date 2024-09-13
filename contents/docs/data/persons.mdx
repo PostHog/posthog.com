@@ -28,13 +28,13 @@ People have [person properties](/docs/product-analytics/person-properties), whic
 
 ## People and person profiles
 
-Using people in PostHog requires capturing identified events. These create person profiles that attribute events and properties to specific users. Examples of scenarios where you want to capture identified events are:
+Using people in PostHog requires capturing **identified events**. These create **person profiles** that attribute events and properties to specific users. Examples of scenarios where you want to capture identified events are:
 
 - Tracking logged-in users in B2B and B2C SaaS apps
 - Doing user segmented product analysis
 - Growth and marketing teams wanting to analyze the _complete_ conversion lifecycle
 
-On the other hand, there are many use cases that don't require person profiles and can use anonymous events, such as:
+On the other hand, there are many use cases that don't require person profiles and can use **anonymous events**, such as:
 
 - Tracking a marketing website
 - Content-focused sites
@@ -45,27 +45,9 @@ Under our current [pricing](/pricing), anonymous events can be up to 4x cheaper 
 
 ### Capturing anonymous events
 
-PostHog captures identified events with person profiles by default. 
+import HowToCaptureAnonymousEvents from '../../docs/libraries/js/_snippets/how-to-capture-anonymous-events.mdx'
 
-To change this and capture anonymous events in the [JavaScript Web SDK](/docs/libraries/js), change the `person_profiles` [config](/docs/libraries/js#config) option:
-
-import PersonProfilesJSConfig from '../../docs/libraries/js/_snippets/person-profiles-config.mdx'
-
-<PersonProfilesJSConfig />
-
-Other SDKs and the [API](/docs/api) can pass the `$process_person_profile` property in events. Again, identified events are enabled by default, but you can disable this by setting the property to `false`.
-
-Below is an example in Node, but the same applies to other SDKs:
-
-```node
-client.capture({
-    distinctId: 'distinct_id_of_the_user',
-    event: 'movie_played',
-    properties: {
-        $process_person_profile: false,
-    },
-})
-```
+<HowToCaptureAnonymousEvents />
 
 ### Person profiles and distinct IDs
 
