@@ -34,9 +34,9 @@ If relevant, we'll go through a candidate's portfolio.
 
 #### 3. Marketing SuperDay
 
-The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work with us, which we can flexibly arrange around your schedule. 
+The final stage of our interview process is the PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work, which we can flexibly arrange around your schedule. 
 
-The task will usually be actual marketing work, involving creating a piece of content or talking to customers. We usually give a fairly open-ended task, where it is up to you to decide how you want to prioritize and tackle it. 
+The task will usually be actual marketing work, involving creating a piece of content or talking to customers, though we don't actually publish the work. We usually give a fairly open-ended task, where it is up to you to decide how you want to prioritize and tackle it. 
 
 A Marketing SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences):_
 
@@ -44,7 +44,7 @@ A Marketing SuperDay usually looks like this (_there is a degree of flexibility 
 *   Meet the founders - Tim and James
 *   Time to focus on the task, we can provide support via your personal Slack channel
 *   Informal session with a few team members
-*   On days when we have company wide meetings, we will invite you along to that and give you a chance to introduce yourself. On days without company-wide meetings, we will arrange for you to meet a few members of our team for a casual lunch/coffee break
+*   Meet a few members of our team for a quick chat
 
 Overall, you should spend at least 80% of your time and energy on the task and less than 20% on meeting people, as we will base our decision on your output of the day. However, we encourage everyone to use the Slack channel as much as needed for any questions or problems. 
 

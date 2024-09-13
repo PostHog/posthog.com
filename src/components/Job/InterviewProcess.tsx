@@ -26,7 +26,7 @@ const defaultInterviewProcess: IInterviewProcess[] = [
     },
     {
         title: 'PostHog SuperDay',
-        description: `You’ll join a standup, meet the team, and work on a task related to your role, offering a realistic view of what it’s like working at PostHog.`,
+        description: `You’ll meet a few more members of the team and work on a independent project. It's challenging, but most people say it's fun!`,
         badge: 'Paid day of work',
     },
     {
