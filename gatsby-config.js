@@ -340,7 +340,7 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-transformer-cloudinary`,
+            resolve: require.resolve(`./plugins/gatsby-transformer-cloudinary`),
             options: {
                 transformTypes: [
                     `RoadmapMedia`,
@@ -356,6 +356,9 @@ module.exports = {
                 ],
             },
         },
+        {
+            resolve: 'gatsby-plugin-no-sourcemaps',
+        },
         ...(process.env.SHOPIFY_APP_PASSWORD &&
         process.env.GATSBY_MYSHOPIFY_URL &&
         process.env.GATBSY_SHOPIFY_SALES_CHANNEL
@@ -367,7 +370,7 @@ module.exports = {
                           storeUrl: process.env.GATSBY_MYSHOPIFY_URL,
                           shopifyConnections: ['collections'],
                           salesChannel: process.env.GATBSY_SHOPIFY_SALES_CHANNEL,
-                          downloadImages: true,
+                          downloadImages: false,
 
                           // salesChannel: process.env.SHOPIFY_APP_ID, // Optional but recommended
                       },
