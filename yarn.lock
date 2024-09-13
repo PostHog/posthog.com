@@ -11043,12 +11043,12 @@ gatsby-plugin-mdx@^3.20.0:
     unist-util-remove "^1.0.3"
     unist-util-visit "^1.4.1"
 
-gatsby-plugin-no-sourcemaps@^5.13.0:
-  version "5.13.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-no-sourcemaps/-/gatsby-plugin-no-sourcemaps-5.13.0.tgz#1052a0148ecd623a1df6ac586d0c8fcf7ebae6af"
-  integrity sha512-C6BHpd7W82Ps6oA6IW5UuXxbDyZzvcsz96UMIBkn+n+MCNaoB6AjQDZlPcvZHaxyZ4ovqZnf7TBbvugxgzwq0g==
+gatsby-plugin-no-sourcemaps@4.25.0:
+  version "4.25.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-no-sourcemaps/-/gatsby-plugin-no-sourcemaps-4.25.0.tgz#d14f40882be9731522383c8fa191cec76178e5ca"
+  integrity sha512-gurzjbY7TPrGim69x+P0D11f6t5VMqK460KEtDB5LYitDVCnNJ2KDfy3J0cg6eGWWq646vGVEMaFQ5HdioMdJg==
   dependencies:
-    "@babel/runtime" "^7.20.13"
+    "@babel/runtime" "^7.15.4"
 
 gatsby-plugin-offline@^5.20.0:
   version "5.23.1"
@@ -11416,17 +11416,6 @@ gatsby-telemetry@^3.25.0:
     is-docker "^2.2.1"
     lodash "^4.17.21"
     node-fetch "^2.6.7"
-
-gatsby-transformer-cloudinary@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-cloudinary/-/gatsby-transformer-cloudinary-4.5.0.tgz#02a99f5e12de932b9d8e6424a8c29c5c32413f9e"
-  integrity sha512-btiynpmXUVkkjnTDXb0Ei3vxAEyCV6G5jpcwun6eHg6jM7S0GvqkRle6GvlaguKtLAJzb30GbIzU9IBGwb3xlg==
-  dependencies:
-    axios "~1.1.3"
-    cloudinary "^1.35.0"
-    fast-json-stable-stringify "2.1.0"
-    gatsby-plugin-utils "^4.0.0"
-    probe-image-size "7.2.3"
 
 gatsby-transformer-json@^4.20.0:
   version "4.23.0"

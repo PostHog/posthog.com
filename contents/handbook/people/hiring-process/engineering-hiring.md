@@ -46,11 +46,11 @@ For full-stack roles, the task involves building a small web service (both backe
 
 An engineering SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences)_:
 
-*   An invitation to a personal Slack channel for your SuperDay, which we'll use throughout the day
+*   An invitation to a personal Slack channel for the SuperDay, which we'll use throughout the day
 *   Kick-off session with an engineer
 *   Time to focus on the task
 *   A "peer interview" with a couple of members of our team, so that both us and the candidate can see if we're a fit
-*   A chat with [James](/james) (or [Tim](/tim), if you met with James in the previous stage)
+*   A chat with [James](/james) or [Tim](/tim), whoever they didn't meet with in the previous stage
 *   Wrapping up – at the end of the work day, they'll send us what they've built, along with a summary
 
 A couple of PostHog engineers will then take a look at the candidate's work, and we'll get back to them with our final decision ASAP (always within a few days).
