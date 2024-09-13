@@ -48,7 +48,7 @@ Start by creating a personal API key. You can do this by going to [personal API 
   classes="rounded"
 />
 
-> **⚠️ Warning:** The following is a simplified example. It will expose your private PostHog data to the public internet, so don't do this in real life. You want to make sure your personal API key isn't exposed and your query request happens securely on the server side.
+> **⚠️ Warning:** The following is a simplified example. Exposing your personal API key (like we do below) exposes your private PostHog data to the public internet, so don't do this in real life. Make sure your personal API key isn't exposed and your query request happens securely on the server side.
 
 With this personal API key, we can set up a request in our React app to PostHog's [query API endpoint](/docs/api/query) using your project ID. We use [HogQL](/docs/product-analytics/sql) in the payload to get the data we want and display it unformatted in our app for now:
 
