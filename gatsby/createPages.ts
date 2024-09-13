@@ -344,11 +344,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         featuredMedia {
                             preview {
                                 image {
-                                    localFile {
-                                        childImageSharp {
-                                            gatsbyImageData
-                                        }
-                                    }
+                                    width
+                                    height
+                                    originalSrc
                                 }
                             }
                         }
@@ -358,22 +356,18 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             mediaContentType
                             preview {
                                 image {
-                                    localFile {
-                                        childImageSharp {
-                                            gatsbyImageData
-                                        }
-                                    }
+                                    width
+                                    height
+                                    originalSrc
                                 }
                             }
                         }
 						imageProducts {
 							handle
 							featuredImage {
-								localFile {
-									childImageSharp {
-									gatsbyImageData
-									}
-								}
+								width
+                                height
+                                originalSrc
 							}
 						}
                         metafields {
@@ -403,11 +397,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             media {
                                 preview {
                                     image {
-                                        localFile {
-                                            childImageSharp {
-                                                gatsbyImageData
-                                            }
-                                        }
+                                        width
+                                        height
+                                        originalSrc
                                     }
                                 }
                             }
@@ -417,11 +409,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                                 featuredMedia {
                                     preview {
                                         image {
-                                            localFile {
-                                                childImageSharp {
-                                                    gatsbyImageData
-                                                }
-                                            }
+                                            width
+                                            height
+                                            originalSrc
                                         }
                                     }
                                 }

@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
 import { getProductImages } from './utils'
+import { getShopifyImage } from 'gatsby-source-shopify'
 
 type ProductCarouselProps = {
     className?: string
@@ -36,7 +37,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
         return (
             <GatsbyImage
                 className="w-full rounded-md overflow-hidden aspect-square"
-                image={product.featuredMedia.preview.image.localFile.childImageSharp.gatsbyImageData}
+                image={getShopifyImage({ image: product.featuredMedia.preview.image })}
                 alt={product.title}
             />
         )
@@ -49,7 +50,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
                         <div className={`keen-slider__slide number-slide${i}} max-w-full bg-white`} key={i}>
                             <GatsbyImage
                                 className="w-full rounded-md overflow-hidden aspect-square"
-                                image={image.preview.image.localFile.childImageSharp.gatsbyImageData}
+                                image={getShopifyImage({ image: image.preview.image })}
                                 alt={title}
                             />
                         </div>
