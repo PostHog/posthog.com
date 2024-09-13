@@ -20,7 +20,7 @@ To show you how, we set up a basic Next.js app, implement the AWS Bedrock API fo
 
 ## Download the sample app
 
-We've created a sample app for this tutorial. You can download it from [Github](https://github.com/PostHog/aws-bedrock-compare-prompts-sample-app). 
+We've created a sample app for this tutorial. You can download it from [Github](https://github.com/PostHog/aws-bedrock-compare-models-sample-app). 
 
 ```bash
 git clone https://github.com/PostHog/aws-bedrock-compare-models-sample-app.git
