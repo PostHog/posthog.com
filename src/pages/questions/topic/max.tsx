@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import { useQuestions } from 'hooks/useQuestions'
-import { graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import Link from 'components/Link'
 import { RightArrow } from 'components/Icons'
 import CommunityLayout from 'components/Community/Layout'
 import useTopicsNav from '../../../navs/useTopicsNav'
 import Select from 'components/Select'
+import { useUser } from 'hooks/useUser'
 
 interface ITopic {
     label: string
@@ -29,6 +30,7 @@ interface IProps {
 }
 
 export default function Questions({ location }: IProps) {
+    const { isModerator } = useUser()
     const [sortBy, setSortBy] = useState<'newest' | 'activity' | 'popular'>('activity')
     const [helpful, setHelpful] = useState('all')
     const title = 'Max AI questions'
@@ -65,6 +67,12 @@ export default function Questions({ location }: IProps) {
 
     const topicsNav = useTopicsNav()
     const backTo = location?.state?.previous
+
+    useEffect(() => {
+        if (!isModerator) {
+            navigate('/questions')
+        }
+    }, [isModerator])
 
     return (
         <CommunityLayout menu={topicsNav} title="Max AI">
