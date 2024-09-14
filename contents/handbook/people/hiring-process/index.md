@@ -22,6 +22,14 @@ This has resulted in the highest number of qualified and motivated candidates re
 - Giving candidates genuinely useful and direct feedback if they weren't successful with us
 - Running a smooth and incredibly slick recruitment process, from application to offer
 
+## Countries we employ people in
+
+We are all-remote, but we have a few limitations on the countries we are able to employ people in:
+
+- We hire within -8 to +2 GMT timezones - beyond these, it proves too difficult for us to collaborate effectively. We do hire in GMT +2 countries that shift to GMT +3 for daylight saving time only (e.g. Bulgaria, Greece). 
+- Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria
+- We don't currently employ people in France or Italy due to the high costs (40-50% on top of gross salary)
+
 ## Hiring Process
 
 ### Summary of process for current live roles
@@ -33,7 +41,7 @@ This has resulted in the highest number of qualified and motivated candidates re
 | Product Engineers          | Multiple teams                  | Tech Lead  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ an engineer (60mins)</li><li>Small team screen w/ James (30mins)</li><li>SuperDay - task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>           |
 | Mobile Engineer              | Replay                   | Paul   | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Paul (60mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
 | Support Engineer             | Comms                 | Joe  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Joe (30mins)</li><li>Small team screen w/ James (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
-| Site Relaibility Engineer              | Infrastructure                  | Ben  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Ben (60mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
+| Site Reliability Engineer              | Infrastructure                  | Ben  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Ben (60mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
 | Community Manager              | Comms                 | Joe  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Joe (30mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
 
 
@@ -218,7 +226,7 @@ The final stage of our interview process is what we call a PostHog SuperDay. Thi
 
 > If it is difficult for a candidate to commit to a whole day in one go - they may not be able to get the time off, or have childcare commitments that make this difficult - we can be _very_ flexible. For example, we can split the SuperDay across two or more sessions, and can align timezones to suit the candidate, given we have a team that's globally distributed. A candidate will never lose out because they are not available to do a SuperDay right away.
 
-The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of their potential direct team members, and if they haven’t already, our founders. This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate. It is a demanding day of work.
+The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of their potential direct team members, and if they haven’t already, our founders. This gives the candidate a chance to show off their skills, and for us to see the quality, speed and communication of the candidate. It is a demanding day of work.
 
 We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it. If the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice from our [Project list](/handbook/growth/marketing/open-source-sponsorship) of sponsorships.
 
