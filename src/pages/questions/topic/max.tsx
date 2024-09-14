@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import { useQuestions } from 'hooks/useQuestions'
-import { graphql, navigate } from 'gatsby'
+import { navigate } from 'gatsby'
 import Link from 'components/Link'
 import { RightArrow } from 'components/Icons'
 import CommunityLayout from 'components/Community/Layout'
@@ -133,13 +133,3 @@ export default function Questions({ location }: IProps) {
         </CommunityLayout>
     )
 }
-
-export const query = graphql`
-    query ($id: String!) {
-        squeakTopic(id: { eq: $id }) {
-            id
-            squeakId
-            label
-        }
-    }
-`
