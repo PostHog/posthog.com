@@ -2,6 +2,7 @@ import { topicIcons } from 'components/Questions/TopicsTable'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import { useUser, User } from 'hooks/useUser'
+import { IconSparkles } from '@posthog/icons'
 
 const navSorted = ['Products', 'Data', 'Product OS', 'Self-hosting', 'Off-topic', 'Other']
 
@@ -21,7 +22,7 @@ export default function useTopicsNav() {
         }
     `)
 
-    const { user, getJwt, logout } = useUser()
+    const { user, getJwt, logout, isModerator } = useUser()
     const isLoggedIn = !!user
 
     const nav = [
@@ -44,6 +45,10 @@ export default function useTopicsNav() {
                 })
             })
         })
+
+    if (isModerator) {
+        nav.push({ name: 'Max AI', url: '/questions/topic/max', icon: <IconSparkles /> })
+    }
 
     return nav
 }
