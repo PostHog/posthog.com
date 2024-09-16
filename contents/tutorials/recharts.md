@@ -48,6 +48,8 @@ Start by creating a personal API key. You can do this by going to [personal API 
   classes="rounded"
 />
 
+> **⚠️ Warning:** The following is a simplified example. Exposing your personal API key (like we do below) exposes your private PostHog data to the public internet, so don't do this in real life. Make sure your personal API key isn't exposed and your query request happens securely on the server side.
+
 With this personal API key, we can set up a request in our React app to PostHog's [query API endpoint](/docs/api/query) using your project ID. We use [HogQL](/docs/product-analytics/sql) in the payload to get the data we want and display it unformatted in our app for now:
 
 ```js
@@ -96,8 +98,6 @@ function App() {
 
 export default App
 ```
-
-> **Note:** This is a simplified approach and example. You shouldn't expose your personal API key on the client side as it has read access to private data. Instead, you should set up a server-side request with the personal API key to query PostHog.
 
 The page we end up with is just an ugly collection of non-aggregated data, but we'll fix that next. 
 
@@ -452,4 +452,4 @@ This creates a nice-looking pie chart with labels like this:
 
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
 - [How Mintlify launched user-facing analytics, powered by PostHog](/customers/mintlify)
-- [How to set up customer-facing analytics with PostHog, Next.js, and Tremor](/tutorials/customer-facing-analytics)
+- [How to use React Charts to visualize analytics data (with examples)](/tutorials/react-charts)

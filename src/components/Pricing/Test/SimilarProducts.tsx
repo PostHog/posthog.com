@@ -120,10 +120,11 @@ export const SimilarProducts = () => {
                     {comparison.map((company) => (
                         <div
                             key={company.name}
-                            className={`text-center py-2 px-4 whitespace-nowrap flex flex-col justify-end ${company.name === 'PostHog'
-                                ? 'bg-white dark:bg-green/15 border-x-2 border-t-green border-x-green rounded-t-sm border-t-2'
-                                : ''
-                                }`}
+                            className={`text-center py-2 px-4 whitespace-nowrap flex flex-col justify-end ${
+                                company.name === 'PostHog'
+                                    ? 'bg-white dark:bg-green/15 border-x-2 border-t-green border-x-green rounded-t-sm border-t-2'
+                                    : ''
+                            }`}
                         >
                             <div className="max-h-9 text-center mb-2">{company.logo}</div>
                             <strong>{company.name}</strong>
@@ -139,10 +140,11 @@ export const SimilarProducts = () => {
                             {comparison.map((company) => (
                                 <div
                                     key={`${company.name}-${product}`}
-                                    className={`py-2 px-4 text-center ${company.name === 'PostHog'
-                                        ? 'bg-white border-x-2 !border-x-green dark:bg-green/15 last:!border-b-2 last:!border-b-green last:rounded-b-sm last:pb-4 last:px-2'
-                                        : ''
-                                        }`}
+                                    className={`py-2 px-4 text-center ${
+                                        company.name === 'PostHog'
+                                            ? 'bg-white border-x-2 !border-x-green dark:bg-green/15 last:!border-b-2 last:!border-b-green last:rounded-b-sm last:pb-4 last:px-2'
+                                            : ''
+                                    }`}
                                 >
                                     {company.products[product] ? (
                                         <IconCheck className="size-6 inline-block text-green" />

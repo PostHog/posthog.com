@@ -24,9 +24,9 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                         ...addon,
                         totalCost: checked
                             ? calculatePrice(
-                                inclusion_only ? (percentage / 100) * volume : volume,
-                                plans[plans.length - 1].tiers
-                            ).total
+                                  inclusion_only ? (percentage / 100) * volume : volume,
+                                  plans[plans.length - 1].tiers
+                              ).total
                             : 0,
                     }
                 }
@@ -332,10 +332,11 @@ export default function Tabbed() {
                                 <li key={name} className="flex-1">
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${active
+                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                            active
                                                 ? 'font-bold bg-accent dark:bg-accent-dark'
                                                 : 'hover:bg-accent dark:hover:bg-accent/15'
-                                            }`}
+                                        }`}
                                     >
                                         <div className="flex items-center space-x-2">
                                             <span>

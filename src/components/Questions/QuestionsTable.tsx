@@ -108,7 +108,7 @@ const Row = ({
     const numReplies =
         replies?.data?.filter((reply) =>
             reply.attributes.profile?.data?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
-                ? reply.attributes.helpful || isOP
+                ? isModerator || reply.attributes.helpful || isOP
                 : true
         ).length || 0
 
