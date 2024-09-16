@@ -243,6 +243,63 @@ crosspost:
 - Is there a correlation between the timing of renewals and revenue churn rates?
 - What is the impact of customer onboarding on reducing revenue churn?
 
+## User Retention Metrics
+
+### 21. N-day retention rate
+
+**What is it?** The percentage of users who return to your app  after their first visit within a specific time frame (e.g., 1-day, 7-day, 30-day retention).
+
+**Why it's useful:** Helps you understand how well your app keeps users engaged over time.
+
+**Questions to ask**
+- What features or actions are associated with higher retention rates?
+- How does the onboarding experience impact long-term retention rates?
+- What is the relationship between user feedback (e.g., ratings, reviews) and retention rates?
+
+### 22. Churn rate
+
+**What is it?** The percentage of users who stop using your app within a given time period.
+
+**Why it's useful:** Identifies how quickly you're losing users and helps focus efforts on retention strategies.
+
+**Questions to ask**
+- Are there specific points in the user journey where churn is more likely to occur?
+- How does churn rate correlate with feature adoption?
+- How does the churn rate vary between different subscription tiers or pricing plans?
+- 
+### 23. Time between sessions
+
+**What is it?** The average time between a user's app sessions.
+
+**Why it's useful:** Helps you understand your app's usage patterns and identify opportunities to re-engage users.
+
+**Questions to ask**
+- Is there a correlation between time between sessions and likelihood of churn?
+- How do push notifications or email campaigns affect the time between sessions?
+- How does the time between sessions compare to the time between engagement in specific features?
+
+### 24. Reactivation/Resurrection rate
+
+**What is it?** The percentage of inactive users who return to your app after a period of inactivity.
+
+**Why it's useful:** Measures the effectiveness of your re-engagement strategies and the app's ability to win back lapsed users.
+
+**Questions to ask**
+- What strategies or campaigns are most effective in reactivating users?
+- How does the behavior of reactivated users compare to that of consistently active users?
+- What is the long-term retention rate of reactivated users compared to new users?
+
+### 25. User lifetime
+
+**What is it?** The average length of time a user remains active on your app before churning.
+
+**Why it's useful:** Provides insight into the overall health of your app and helps in forecasting long-term user behavior.
+
+**Questions to ask**
+- What actions or behaviors are associated with longer user lifetimes?
+- How does user lifetime correlate with lifetime value (LTV)?
+- What is the impact of customer support interactions on user lifetime?
+
 ## Further reading
 
 - [Best mobile app analytics tools](/blog/best-mobile-app-analytics-tools)
