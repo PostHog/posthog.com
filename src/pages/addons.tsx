@@ -235,17 +235,19 @@ const Addons = (): JSX.Element => {
                                                   />
                                               )
                                           })
-                                        : Object.keys(featuresByCategory)?.map((category) => {
-                                              const features = featuresByCategory[category]
-                                              return (
-                                                  <Features
-                                                      key={`${name}-${category}`}
-                                                      title={category}
-                                                      addonName={name}
-                                                      features={features}
-                                                  />
-                                              )
-                                          })}
+                                        : Object.keys(featuresByCategory)
+                                              .sort((feature) => (feature === 'Features' ? -1 : 1))
+                                              ?.map((category) => {
+                                                  const features = featuresByCategory[category]
+                                                  return (
+                                                      <Features
+                                                          key={`${name}-${category}`}
+                                                          title={category}
+                                                          addonName={name}
+                                                          features={features}
+                                                      />
+                                                  )
+                                              })}
                                 </div>
                                 {!plan?.flat_rate && (
                                     <div className="max-w-[400px] mt-8">
