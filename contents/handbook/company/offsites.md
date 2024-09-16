@@ -39,19 +39,23 @@ We want to try to encourage small teams to get together once each year. These ar
 Some guidelines:
 
 - These are more focused on work than the all-company offsite, but it's still worth organizing a fun activity, do some sightseeing and in general spend time together.
+- Quarterly planning is a great focal point for team offsites – it's worth scheduling your meetup for the week of planning.
 - You should default to picking a city that one or more of your team members already live in, and a place that minimizes travel time/expenses for everyone else.
 - Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going. 
-- We'd encourage you to get an AirBnB for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved.
-- These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. 
+- We'd encourage you to get an Airbnb for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved.
+- Specify offsite start and end times down to the hour, for clarity and efficient use of everyone's time.
+- These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip.
 
 Ideas for the agenda:
 
 - A spoken README session early in the week to share "Who am I/How I work best"
-- Planning session. What does the team want to achieve in the next month/quarter/year?
+- Planning session – what does the team want to achieve in the next month/quarter/year?
 - Look at the [team page](/handbook/team-structure#small-teams) - what needs to be updated?
 - [360 degree feedback session](/handbook/people/feedback#ground-rules) - these are more effective at small team offsites
     - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant, particularly for people who might be anxious about the format or the feedback.
-- Hackathon - try to leave 2 days for this
+- Dogfooding session – set PostHog up in a toy project from scratch, looking for pain points
+- Hackathon - try to leave 2 days for this, and most importantly avoid sessions interrupting hacking
+- Even some regular work on ongoing challenging projects - this is the best time for exchanging knowledge!
 
 Here's a real-world example: [Product Analytics team's Munich offsite agenda](https://posthog.slack.com/canvas/C07A0BQEAUB) (internal Slack link). Feel free to take inspiration – though your team's needs and wants might be quite different!
 
