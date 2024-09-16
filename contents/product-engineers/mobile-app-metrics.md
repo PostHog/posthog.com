@@ -1,6 +1,6 @@
 ---
-date: 2024-09-17
-title: 20 mobile app metrics to track
+date: 2024-09-16
+title: '20 mobile app metrics to track'
 author:
   - lior-neu-ner
 featuredImage: >-
@@ -14,67 +14,9 @@ crosspost:
   - Blog
 ---
 
-## Performance and error metrics
-
-### 1. API request latency
-
-**What is it?** The time it takes to receive a response from your API endpoints. 
-
-**Why it's useful:** Helps identify performance bottlenecks and ensures your UX meets user expectations for responsiveness.
-
-**Questions to ask:**
-- What is the average latency for different types of API requests?
-- How does latency vary across different devices and network conditions?
-- Are there specific features or interactions that contribute to increased latency?
-
-### 2. API request error rate
-
-**What is it?** The percentage of network requests that result in errors.
-
-**Why it's useful:** Enables you to pinpoint problematic API requests.
-
-**Questions to ask:**
-- What is the overall error rate, and how does it break down into client-side versus server-side issues i.e 4xx and 5xx error codes?
-- What are the most common errors, and what are their causes?
-- Are there specific features or scenarios that are more prone to errors?
-
-### 3. App launch time
-
-**What is it?** The time it takes for your app to become responsive when opened.
-
-**Why it's useful:** User's expect apps to be responsive, and a slow launch time can be a major turn off.
-
-**Questions to ask**
-
-- How does the app launch time vary across different devices and network conditions?
-- What are the most common causes of slow app launch times, and how can they be addressed?
-- How does app launch time correlate with user engagement and satisfaction?
-
-### 4. Percentage of users who experience crashes or errors
-
-**What is it?** How many of your overall users are affected by crashes and/or errors.
-
-**Why it's useful:** Gives you a sense of how many of your users are having a bad experience with your app.
-
-**Questions to ask**
-- How does the crash rate vary across different devices and app versions?
-- Which features are most likely to cause errors?
-- How does this rate correlate with user retention and churn?
-
-### 5. p95 errors per user
-
-**What is it?** The 95th percentile of users who experience the most errors.
-
-**Why it's useful:** Helps you identify the users who are most affected by errors.
-
-**Questions to ask**
-- What are common characteristics of users who experience the most errors?
-- Which features are the most problematic for these users?
-- How do error rates change after app updates for these users?
-
 ## Sign up and onboarding metrics
 
-### 6. App downloads
+### 1. App downloads
 
 **What is it?** The number of times your app has been downloaded.
 
@@ -85,7 +27,7 @@ crosspost:
 - Is there a correlation between the number of downloads and user engagement or retention?
 - How do different marketing channels impact the number of downloads?
 
-### 7. Home screen bounce rate
+### 2. Home screen bounce rate
 
 **What is it?** The percentage of users who view your home screen but don't perform any actions.
 
@@ -96,7 +38,7 @@ crosspost:
 - Are users in specifc countries more likely to bounce? How does localization correlate with bounce rate?
 - How does the bounce rate vary across different devices and app versions?
 
-### 8. Permissions granted ratio
+### 3. Permissions granted ratio
 
 **What is it?** The percentage of users who grant the necessary permissions to use your app.
 
@@ -107,7 +49,7 @@ crosspost:
 - How does the permission grant ratio correlate with user engagement and activation?
 - What makes users more likely to trust your app and grant permissions?
 
-### 9. Activation rate
+### 4. Activation rate
 
 **What is it?** The percentage of users who reach the "aha" moment and experience the product's core value.
 
@@ -118,7 +60,7 @@ crosspost:
 - How does activation correlate with retention and customer lifetime value?
 - How do other external factors like marketing or app performance impact activation?
 
-### 10. Average time to activation
+### 5. Average time to activation
 
 **What is it?** The average time it takes for a user to reach activation.
 
@@ -129,7 +71,7 @@ crosspost:
 - How does the time to activation vary across different features or user personas?
 - Is there a correlation between the time to activation and churn?
 
-### 11. Average time to first purchase
+### 6. Average time to first purchase
 
 **What is it?** The time it takes for users to make their first purchase.
 
@@ -142,7 +84,7 @@ crosspost:
 
 ## Engagement metrics
 
-### 12. Average number of sessions per user per day
+### 7. Average number of sessions per user per day
 
 **What is it?** The average number of times each user opens your app every day.
 
@@ -153,7 +95,7 @@ crosspost:
 - How strong is the correlation between number of sessions and retention?
 - How does this number vary across different user personas?
 
-### 13. DAU / MAU ratio
+### 8. DAU / MAU ratio
 
 **What is it?** The ratio of daily active users (DAU) to monthly active users (MAU).
 
@@ -164,7 +106,7 @@ crosspost:
 - How does your DAU/MAU ratio compare to [industry standards](/tutorials/dau-mau-ratio#what-is-a-good-daumau-ratio)?
 - Are users who are active daily more likely buy in-app purchases?
 
-### 14. Feature adoption and stickiness
+### 9. Feature adoption and stickiness
 
 **What is it?** The percentage of users who adopt and stick to a new feature or product change.
 
@@ -175,7 +117,7 @@ crosspost:
 - What are the characteristics of the users who adopt new features versus those who don't?
 - Are users who try out a new feature likely to continue using it?
 
-### 15. NPS score
+### 10. NPS score
 
 **What is it?** [Net Promoter Score (NPS)](/product-engineers/nps-vs-csat-vs-ces#what-is-nps) measures how passionate users are about your product. You ask them how likely they are to recommend your product to a friend or coworker and they respond on a scale from 0 (not likely at all) to 10 (extremely likely).
 
@@ -186,6 +128,64 @@ crosspost:
 - What's the relationship between NPS scores and user retention rates at different time intervals (30, 60, 90 days)?
 - Are there significant differences in NPS scores between users on different platforms (iOS vs Android) or subscription tiers?
 
+
+## Performance and error metrics
+
+### 11. API request latency
+
+**What is it?** The time it takes to receive a response from your API endpoints. 
+
+**Why it's useful:** Helps identify performance bottlenecks and ensures your UX meets user expectations for responsiveness.
+
+**Questions to ask:**
+- What is the average latency for different types of API requests?
+- How does latency vary across different devices and network conditions?
+- Are there specific features or interactions that contribute to increased latency?
+
+### 12. API request error rate
+
+**What is it?** The percentage of network requests that result in errors.
+
+**Why it's useful:** Enables you to pinpoint problematic API requests.
+
+**Questions to ask:**
+- What is the overall error rate, and how does it break down into client-side versus server-side issues i.e 4xx and 5xx error codes?
+- What are the most common errors, and what are their causes?
+- Are there specific features or scenarios that are more prone to errors?
+
+### 13. App launch time
+
+**What is it?** The time it takes for your app to become responsive when opened.
+
+**Why it's useful:** User's expect apps to be responsive, and a slow launch time can be a major turn off.
+
+**Questions to ask**
+
+- How does the app launch time vary across different devices and network conditions?
+- What are the most common causes of slow app launch times, and how can they be addressed?
+- How does app launch time correlate with user engagement and satisfaction?
+
+### 14. Percentage of users who experience crashes or errors
+
+**What is it?** How many of your overall users are affected by crashes and/or errors.
+
+**Why it's useful:** Gives you a sense of how many of your users are having a bad experience with your app.
+
+**Questions to ask**
+- How does the crash rate vary across different devices and app versions?
+- Which features are most likely to cause errors?
+- How does this rate correlate with user retention and churn?
+
+### 15. p95 errors per user
+
+**What is it?** The 95th percentile of users who experience the most errors.
+
+**Why it's useful:** Helps you identify the users who are most affected by errors.
+
+**Questions to ask**
+- What are common characteristics of users who experience the most errors?
+- Which features are the most problematic for these users?
+- How do error rates change after app updates for these users?
 
 ## Revenue metrics
 
