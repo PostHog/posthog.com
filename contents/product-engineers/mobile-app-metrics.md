@@ -35,7 +35,7 @@ crosspost:
 
 **Questions to ask**
 - How does the bounce rate correlate with downloads from different marketing channels?
-- Are users in specifc countries more likely to bounce? How does localization correlate with bounce rate?
+- Are users in specific countries more likely to bounce? How does localization correlate with bounce rate?
 - How does the bounce rate vary across different devices and app versions?
 
 ### 3. Permissions granted ratio
