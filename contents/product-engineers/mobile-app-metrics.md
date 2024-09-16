@@ -164,7 +164,7 @@ crosspost:
 - How does your DAU/MAU ratio compare to [industry standards](/tutorials/dau-mau-ratio#what-is-a-good-daumau-ratio)?
 - Are users who are active daily more likely buy in-app purchases?
 
-### 14. Feature adoption and stickiness (use chart) https://posthog.com/docs/product-analytics/stickiness  
+### 14. Feature adoption and stickiness
 
 **What is it?** The percentage of users who adopt and stick to a new feature or product change.
 
@@ -243,8 +243,10 @@ crosspost:
 - Is there a correlation between the timing of renewals and revenue churn rates?
 - What is the impact of customer onboarding on reducing revenue churn?
 
-### 
-
 ## Further reading
+
+- [Best mobile app analytics tools](/blog/best-mobile-app-analytics-tools)
+- [The 9 best mobile app A/B testing tools](/blog/best-mobile-app-ab-testing-tools)
+- [7 best session replay tools for mobile apps (iOS & Android)](/blog/best-mobile-app-session-replay-tools)
 
 <NewsletterForm />

@@ -298,8 +298,8 @@ This one is hard to benchmark as the variation between features and companies is
 
 ## Further reading 📖
 
-- [An engineer’s guide to talking to users](/newsletter/talk-to-users): The best way to fix poor retention is to build a better product, and to do that you need to talk to your users. This guide is for engineers, but the lessons are universal.
-
-- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers): Want to test new features to improve retention? Start here.
+- [20 mobile app metrics to track](/blog/mobile-app-metrics)
+- [An engineer’s guide to talking to users](/newsletter/talk-to-users)
+- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 
 <NewsletterForm />

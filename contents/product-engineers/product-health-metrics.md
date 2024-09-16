@@ -148,6 +148,6 @@ Ultimately, using product health metrics should help you understand the well-bei
 
 - [The most useful B2B SaaS product metrics](/blog/b2b-saas-product-metrics)
 - [Finding your North Star metric and why it matters](/blog/north-star-metrics)
-- [What is real user monitoring (and how to set it up)](/blog/real-user-monitoring)
+- [20 mobile app metrics to track](/blog/mobile-app-metrics)
 
 <NewsletterForm />
