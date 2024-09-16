@@ -77,9 +77,9 @@ module.exports = {
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
-                    // {
-                    //     resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
-                    // },
+                    {
+                        resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
+                    },
                     {
                         resolve: require.resolve('./plugins/gatsby-remark-video'),
                     },
@@ -340,7 +340,7 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-transformer-cloudinary`,
+            resolve: require.resolve(`./plugins/gatsby-transformer-cloudinary`),
             options: {
                 transformTypes: [
                     `RoadmapMedia`,
@@ -370,7 +370,7 @@ module.exports = {
                           storeUrl: process.env.GATSBY_MYSHOPIFY_URL,
                           shopifyConnections: ['collections'],
                           salesChannel: process.env.GATBSY_SHOPIFY_SALES_CHANNEL,
-                          downloadImages: true,
+                          downloadImages: false,
 
                           // salesChannel: process.env.SHOPIFY_APP_ID, // Optional but recommended
                       },
