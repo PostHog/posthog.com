@@ -12,6 +12,31 @@ Three principles to bear in mind:
 - **Discovery is an ongoing process** - you want to be finding out useful information at each stage, not just going through a checklist at the beginning. Asking 'why' can be a really powerful tool, and you should be curious throughout, not just selling.
 - At the end of each conversation with a customer, you should aim to **be really specific and prescriptive about next steps**. If you haven't identified a next step, the opportunity is Closed - Lost. Waiting for a customer to come back to you is not a valid next step - instead you should be saying things like "at this point, usually the next best step is for us to do X".
 
+## Maximizing your chance of success
+
+Selling software, especially to larger companies, can be a complex process with lots of stakeholders involved.  When moving your deal along you should aim to know as much about the following as possible given where you are in the process (inspired by [MEDDPICC](https://www.scratchpad.com/blog/meddpicc):
+
+* Pain - Do they have a problem?  
+  * Is it painful enough right now that they are willing to adopt a new solution to solve it?  
+  * Will PostHog solve this problem for them?
+* Timeline - When do whey want to have a contract signed/solution in place?
+* Pricing - We should know the rough size of the opportunity, and that that is in line with expectations and budget of the customer.
+* Champion - Are you working with a champion who is going to sell internally?
+  * Are they the buyer (see below) or do they know who the buyer is?
+* Decision - How are they evaluating us?  
+  * Is it competitive?  Who?  
+  * What is their criteria for success?
+* Economic Buyer - Sometimes your Champion has to convince upper management to spend money.
+  * Is that person aware of PostHog and on board with signing a contract if an evaluation is successful?
+* Paper process - After a successful evaluation what happens next?  
+  * Do they need a Custom DPA/BAA/MSA?  
+  * Is there a security review needed?  
+  * Who signs the Order Form?
+
+These are presented in the most likely order that you will be able to discover them, although that is not a hard and fast rule.
+
+They are also available as Opportunity fields in Salesforce and as such you should keep them up to date when you learn more.
+
 ## Sales process
 
 This is an overview for what you should actually be doing with a customer at each stage of the sales process. For details on how to manage this in our CRM, visit our [Salesforce docs](/handbook/growth/sales/crm). The steps are:
@@ -32,7 +57,7 @@ Most people fill in the [form](/talk-to-a-human) via the website. Some email sal
 
 Info on how leads are assigned can be [found here](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assessment). Once you have been assigned a lead, you'll want to qualify them - don't just immediately go out and offer a demo every time. Things to consider:
 
-- How closely do they match our [ICP](/handbook/who-we-are-building-for)?
+- What is their [Lead Score](/handbook/growth/sales/lead-scoring)?
 - Which products are they looking to use? What's their use case?
 - How large is their company? Revenue? Have they raised funding? (ie. will they pay >$20k for PostHog?)
 - What is the role of the person who filled out the form?
@@ -60,7 +85,7 @@ You can also redirect them to use the In-app support modal if they have a produc
 
 This is basically a combo of discovery and demo call - your objectives here are to:
 
-- Show the customer PostHog and get them excited
+- Show the customer PostHog and get them excited about working with us
 - Find out as much as you reasonably can about them
 - Have a solid plan for next steps in place
 
@@ -72,39 +97,31 @@ For example, a customer may say "we need to see how our customers our using our 
 
 > Start with what their biggest problem/request is, stay there until they are happy, then move on to point two. We don't want to fall into the trap of doing the same demo for each customer regardless of what they say at the beginning.
 
-#### Exit criteria
+Make sure you cover:
 
-Before moving on to an evaluation, we should know the following (inspired by [BANT](https://www.scratchpad.com/blog/bant) and [MEDDPICC](https://www.scratchpad.com/blog/meddpicc)):
-
-* Pain - Do they have a problem?  Is it painful enough right now that they are willing to adopt a new solution to solve it?  Will PostHog solve this problem for them?
-* Pricing - We should know the rough size of the opportunity, and that that is in line with expectations and budget of the customer.
-* Decision - How are they evaluating us?  Is it competitive?  Who?  What is their criteria for success?
-* Champion - Are you working with a champion who is going to sell internally?  Are they the buyer or do they know who the buyer is?
-* Paper process - After a successful evaluation what happens next?  Do they need a Custom DPA/BAA/MSA?  Is there a security review needed?  Who signs the Order Form?
-* Timeline - When do whey want to have a contract signed/solution in place?
-
-These should all be documented in the Salesforce Opportunity record before moving to Product Evaluation.  Note that you shouldn't ask these as a set of interrogation questions (or even worse email them to the customer ahead of time) but can work them conversationally into your demo meeting flow as follows:
-
-In addition, you should find these out throughout the call, rather than via an interrogation/checklist at the start.  A good demo call flow looks like this:
-
-- Who is there and what their roles are - in particular, are they the decision-makers at their company? [Champion]
-- Why do they _need_ PostHog? [Pain]
-- Opportunity for them to ask up-front questions and get direct answers to them [Pain]
+- Who is there and what their roles are - in particular, are they the decision-makers at their company?
+- Why do they _need_ PostHog?
+- Opportunity for them to ask up-front questions and get direct answers to them
 - Demo specific product features according to what they have asked for - _this is really important, don't just chat about PostHog's vision or give a high level product overview_
   - Consider complementary products, e.g. analytics + replay; analytics + warehouse; surveys + flags
   - Don't [promise](/handbook/growth/sales/overview#enterprise-customers) things we can't/don't want to deliver
   - Also use this as further discovery to see if PostHog is a good fit for them.
-- Budget - try and understand what their likely usage and spend is, as well as willingness to spend / commit to an annual plan [Pricing]
-- Timeline - how fast do they want to move? What does their decision-making process look like? [Decision/Timeline/Paper Process]
-- Next steps - this is really important, don't just end the demo with no clear follow up action
+- How pricing works with an indication on their potential spend if you have enough information
+- Next steps - this is really important, don't just end the demo with no clear follow-up action
+
+To help you decide on whether and when to suggest a hands-on evaluation you should have a good idea about the following by the end of the call:
+
+1. Need - from this initial discussion is PostHog a good fit for them?  Be honest if we are not so as not to waste your and the customer's time.
+2. Budget - with usage-based pricing it can be hard to calculate where they may end-up pricing wise.  You can calculate and share rough ballpark figure to set the right expectations based on:
+   * Which products they are looking to use
+   * Number of active users/sessions per month
+3. Timeline - when are they looking to make a decision/have a contract in place?
 
 If you realize that they will be too small (<$20k) to go through our sales-led process, you should route to [self-serve](/handbook/growth/sales/crm#self-serve-opportunity-record-type).
 
-If we're not super clear on any of the Exit Criteria then it's likely worth adding in another scoping call to figure out whether the opportunity is real before starting an evaluation.
-
 ### 4. Product evaluation
 
-If you think they are a good prospect for our sales-led process, and you have covered all of the Exit Criteria from Step 3, your first priority is to try and get them into a shared Slack channel as quickly as possible. If you close them, this will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread.
+If you think they are a good prospect for our sales-led process, your first priority is to try and get them into a shared Slack channel as quickly as possible. If you close them, this will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread.
 
 Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, [follow the instructions here](https://docs.usepylon.com/bridges/microsoft-teams/setup) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
 
@@ -115,7 +132,7 @@ You should then follow up with a standard email/Slack message that:
 - Shares a proposed timetable for the evaluation and onboarding process
 - Includes any useful links (e.g. Docs page, competitor comparisons, relevant case studies)
 
-Probably as a separate message, you should set out the criteria for the product evaluation to be considered a success. These should be aligned with the Decision criteria identified in the Demo step above - the evaluation will almost certainly fail if you just leave the customer to noodle around trying PostHog.
+Probably as a separate message, you should set out the criteria for the product evaluation to be considered a success - the evaluation will almost certainly fail if you just leave the customer to noodle around trying PostHog.
 
 If the customer isn't super clear on how to articulate the success criteria then use the following as inspiration:
 
@@ -124,14 +141,24 @@ If the customer isn't super clear on how to articulate the success criteria then
 - Surveys: deploy a survey, view and analyze the results
 - Data warehouse: set up the warehouse, sync at least 1 data source or pull additional person data in to enrich an insight
 
-The AE acts as the support person during this period, usually answering questions in Slack.
+> The AE acts as the support person during this period and it's your opportunity to show them what working with you and PostHog will be like should they decide to become a paying customer.  You shouldn't just leave the customer to fend for themselves.
+
+1. Guide them on how to set up tracking depending on their app paying attention to common points of friction such as:
+   * [Anonymous vs Identified](/docs/product-analytics/identify#anonymous-and-identified-events) events.
+   * Tracking pageviews in [single page apps](/docs/libraries/js#single-page-apps-and-pageviews).
+   * Deploying a [reverse proxy](/docs/advanced/proxy).
+2. Guide them on creating insights either based on:
+   * Metrics they've shared that they need to see or;
+   * Things we know companies often want to track (e.g. the [AARRR framework](/product-engineers/aarrr-pirate-funnel)).
+3. Once you have a week's worth of data in, calculate pricing based on their actual usage and proactively share this.
+4. A week before the trial period ends have a wrap-up call to ensure that they have seen everything they need to see, and identify any last remaining areas you can help them with, and next steps after the trial ends.
+
+In an ideal world this involves multiple calls per week during the trial period so that you can build a trusted relationship with the customer, but don't force that if they prefer to use Slack/Email.
 
 We usually set up the following trials depending on likely contract size:
 
 - $20-60k - 2 weeks
 - $60k+ - 4 weeks
-
-Set yourself a reminder for halfway through their evaluation period to look at their usage then put together a commercial proposal. At the end of the product evaluation, you should have a followup call with the customer to talk through the success criteria you outlined at the beginning, to show how you have (hopefully) successful hit them and are ready to move to the next stage!
 
 ### 5. Security & legal review
 
@@ -186,7 +213,7 @@ Post-onboarding, you'll want to move the customer into our Expansion or Retentio
 
 ### 7. Closed - lost
 
-Oh no! It's ok - the most important thing here is that we learn. You should capture the reason in HubSpot - this could be:
+Oh no! It's ok - the most important thing here is that we learn. You should capture the reason in the Salesforce opportunity - this could be:
 
 - Product/feature gap:
   - Threshold-based alerting
