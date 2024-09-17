@@ -84,13 +84,12 @@ const Bio = ({ biography, readme }) => {
                         {biography && (
                             <Container {...(tabbable ? { onClick: () => setActiveTab('biography') } : null)}>
                                 <h3
-                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${
-                                        activeTab === 'biography'
-                                            ? readme
-                                                ? 'border-red'
-                                                : 'border-transparent pl-0'
-                                            : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                    }`}
+                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${activeTab === 'biography'
+                                        ? readme
+                                            ? 'border-red'
+                                            : 'border-transparent pl-0'
+                                        : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                        }`}
                                 >
                                     Biography
                                 </h3>
@@ -99,11 +98,10 @@ const Bio = ({ biography, readme }) => {
                         {readme && (
                             <Container {...(tabbable ? { onClick: () => setActiveTab('readme') } : null)}>
                                 <h3
-                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${
-                                        activeTab === 'readme'
-                                            ? 'border-red'
-                                            : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                    }`}
+                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${activeTab === 'readme'
+                                        ? 'border-red'
+                                        : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                        }`}
                                 >
                                     README
                                 </h3>
@@ -159,12 +157,12 @@ export default function ProfilePage({ params }: PageProps) {
                 achievements: {
                     ...(!isCurrentUser
                         ? {
-                              filters: {
-                                  hidden: {
-                                      $ne: true,
-                                  },
-                              },
-                          }
+                            filters: {
+                                hidden: {
+                                    $ne: true,
+                                },
+                            },
+                        }
                         : null),
                     populate: {
                         achievement: {
@@ -184,8 +182,8 @@ export default function ProfilePage({ params }: PageProps) {
                 },
                 ...(isModerator
                     ? {
-                          user: true,
-                      }
+                        user: true,
+                    }
                     : null),
             },
         },
@@ -202,10 +200,10 @@ export default function ProfilePage({ params }: PageProps) {
                 url,
                 jwt
                     ? {
-                          headers: {
-                              Authorization: `Bearer ${jwt}`,
-                          },
-                      }
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                    }
                     : undefined
             )
             const { data } = await res.json()
@@ -286,22 +284,20 @@ export default function ProfilePage({ params }: PageProps) {
                             <div className="mt-12">
                                 <div className="flex items-center relative mb-4 font-semibold border-b border-border dark:border-dark text-base whitespace-nowrap">
                                     <button
-                                        className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
-                                            view !== 'discussions'
-                                                ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                                : 'border-red'
-                                        } p-4 transition-opacity`}
+                                        className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${view !== 'discussions'
+                                            ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                            : 'border-red'
+                                            } p-4 transition-opacity`}
                                         onClick={() => setView('discussions')}
                                     >
                                         Discussions
                                     </button>
                                     {profile?.amaEnabled && (
                                         <button
-                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
-                                                view !== 'ama'
-                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                                    : 'border-red'
-                                            } p-4 transition-opacity`}
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${view !== 'ama'
+                                                ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                : 'border-red'
+                                                } p-4 transition-opacity`}
                                             onClick={() => setView('ama')}
                                         >
                                             Ask me anything
@@ -309,11 +305,10 @@ export default function ProfilePage({ params }: PageProps) {
                                     )}
                                     {user?.profile?.id === id && (
                                         <button
-                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
-                                                view !== 'liked-posts'
-                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                                    : 'border-red'
-                                            } p-4 transition-opacity`}
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${view !== 'liked-posts'
+                                                ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                : 'border-red'
+                                                } p-4 transition-opacity`}
                                             onClick={() => setView('liked-posts')}
                                         >
                                             Upvoted posts
@@ -321,11 +316,10 @@ export default function ProfilePage({ params }: PageProps) {
                                     )}
                                     <div className="flex items-center">
                                         <button
-                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
-                                                view !== 'user-posts'
-                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                                    : 'border-red pr-12'
-                                            } p-4 transition-opacity`}
+                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${view !== 'user-posts'
+                                                ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
+                                                : 'border-red pr-12'
+                                                } p-4 transition-opacity`}
                                             onClick={() => setView('user-posts')}
                                         >
                                             Posts
@@ -563,34 +557,34 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
 
                 {profile.teams
                     ? profile.teams?.data?.map(({ attributes: { name, profiles } }) => {
-                          return (
-                              <>
-                                  <SidebarSection title="Team">
-                                      <span className="text-xl font-bold">{name}</span>
-                                  </SidebarSection>
+                        return (
+                            <>
+                                <SidebarSection title="Team">
+                                    <span className="text-xl font-bold">{name}</span>
+                                </SidebarSection>
 
-                                  {profiles?.data?.length > 0 ? (
-                                      <SidebarSection title="Teammates">
-                                          <ul className="p-0 grid gap-y-2">
-                                              {profiles.data
-                                                  .filter(({ id }) => id !== profile.id)
-                                                  .map((profile) => {
-                                                      return (
-                                                          <li key={profile.id} className="flex items-center space-x-2">
-                                                              <Avatar className="w-8 h-8" src={getAvatarURL(profile)} />
-                                                              <a href={`/community/profiles/${profile.id}`}>
-                                                                  {profile.attributes?.firstName}{' '}
-                                                                  {profile.attributes?.lastName}
-                                                              </a>
-                                                          </li>
-                                                      )
-                                                  })}
-                                          </ul>
-                                      </SidebarSection>
-                                  ) : null}
-                              </>
-                          )
-                      })
+                                {profiles?.data?.length > 0 ? (
+                                    <SidebarSection title="Teammates">
+                                        <ul className="p-0 grid gap-y-2">
+                                            {profiles.data
+                                                .filter(({ id }) => id !== profile.id)
+                                                .map((profile) => {
+                                                    return (
+                                                        <li key={profile.id} className="flex items-center space-x-2">
+                                                            <Avatar className="w-8 h-8" src={getAvatarURL(profile)} />
+                                                            <a href={`/community/profiles/${profile.id}`}>
+                                                                {profile.attributes?.firstName}{' '}
+                                                                {profile.attributes?.lastName}
+                                                            </a>
+                                                        </li>
+                                                    )
+                                                })}
+                                        </ul>
+                                    </SidebarSection>
+                                ) : null}
+                            </>
+                        )
+                    })
                     : null}
 
                 {user?.profile?.id === profile.id && (
@@ -608,7 +602,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
                         <SidebarSection>
                             <Link
                                 external
-                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
+                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/plugin::users-permissions.user/${profile.user?.data.id}`}
                                 className="text-base text-red dark:text-yellow font-semibold"
                             >
                                 View in Strapi
