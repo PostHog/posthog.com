@@ -71,19 +71,43 @@ const AIDisclaimerMod = ({ opName, replyID, mutate }) => {
     )
 }
 
+const feedbackOptions = [
+    {
+        label: 'Yes, mark as solution',
+        helpful: true,
+    },
+    {
+        label: "Not the answer I'm looking for",
+        helpful: false,
+    },
+    {
+        label: 'I think this is a bug',
+        helpful: false,
+    },
+    {
+        label: 'My question is more nuanced',
+        helpful: false,
+    },
+    {
+        label: 'Answer is wrong',
+        helpful: false,
+    },
+]
+
 const AIDisclaimer = ({ replyID, mutate, topic, isAuthor, confidence }) => {
     const posthog = usePostHog()
     const { getJwt } = useUser()
     const { handleResolve } = useContext(CurrentQuestionContext)
     const [helpful, setHelpful] = useState<boolean | null>(null)
 
-    const handleHelpful = async (helpful: boolean) => {
+    const handleHelpful = async (helpful: boolean, feedback: string) => {
         try {
             setHelpful(helpful)
             posthog?.capture('Community AI reply', {
                 replyID,
                 helpful,
                 confidence,
+                feedback,
                 topic: {
                     label: topic?.attributes?.label,
                     id: topic?.id,
@@ -137,20 +161,22 @@ const AIDisclaimer = ({ replyID, mutate, topic, isAuthor, confidence }) => {
                 </p>
             )}
             {helpful === null && (
-                <div className="flex items-center space-x-2 mt-2">
-                    <CallToAction disabled={!isAuthor} size="sm" type="secondary" onClick={() => handleHelpful(true)}>
-                        <span className="flex space-x-1 items-center">
-                            <IconThumbsUp className="size-4 text-green flex-shrink-0" />
-                            <span>Yes, mark as solution</span>
-                        </span>
-                    </CallToAction>
-                    <CallToAction disabled={!isAuthor} size="sm" type="secondary" onClick={() => handleHelpful(false)}>
-                        <span className="flex space-x-1 items-center">
-                            <IconThumbsDown className="size-4 text-red flex-shrink-0" />
-                            <span>No, request human review</span>
-                        </span>
-                    </CallToAction>
-                </div>
+                <ul className="flex items-center space-x-2 list-none p-0 flex-wrap">
+                    {feedbackOptions.map(({ label, helpful }) => {
+                        return (
+                            <li key={label}>
+                                <button
+                                    className={`click px-3 py-1 bg-white rounded-full text-sm mt-2 font-semibold border ${
+                                        helpful ? 'border-green' : 'border-red'
+                                    }`}
+                                    onClick={() => handleHelpful(helpful, label)}
+                                >
+                                    {label}
+                                </button>
+                            </li>
+                        )
+                    })}
+                </ul>
             )}
         </div>
     )
