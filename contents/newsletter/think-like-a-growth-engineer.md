@@ -1,0 +1,94 @@
+---
+title: How to think like a growth engineer
+date: 2024-09-16
+author:
+ - ian-vanagas
+featuredImage: >-
+featuredImageType: full
+tags:
+  - Engineering
+crosspost:
+  - Product engineers
+  - Founders
+  - Blog
+---
+
+From the outside, it can seem like growth engineers are bouncing around the product: signup flows, product onboarding, revenue reporting, and subscription tracking. You might think all this doesn't matter, but as many growth teams show, incremental improvements can lead to massive gains for the entire business.
+
+Growth engineers capture these gains through their unique way of thinking and working. Luckily, you don't need to go to growth engineer school to learn this yourself. If you aspire to create a successful product and business, you should care about what growth engineers do to make that happen, and this post aims to help you do just that.
+
+## 1. Become a data-driven (for real)
+
+Everyone claims they are data-driven, but growth engineers prove it.
+
+![GROWTH ENGINEER RONNIE](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_16_at_11_21_09_29ee4dbab8.png)
+
+Their work comes down to tracking and improving platform or business-level metrics. For example, our growth team cares about new revenue, expansion, signup conversion, activation, retention, and more. Their planning, prioritization, and execution are focused on improving these metrics.
+
+The tradeoff is caring less about products, features, and user requests. They aren't planning their roadmap months in advance or caring about accurate project timelines. They let the metrics be their north star and do whatever, wherever to improve it.
+
+> **Takeaway:** Create a dashboard using a framework like [AARRR](/product-engineers/aarrr-pirate-funnel) or [growth loops](/product-engineers/growth-loops) to monitor your key flow conversions, activation, and retention.
+
+![AARRR and growth loops](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_17_at_11_56_15_193aeaa117.png)
+
+## 2. Develop an experimentation mindset
+
+The big way growth engineers improve the metrics they care about is through experiments. Doing this well requires developing the elusive "experimentation mindset." This differs from the traditional software engineering mindset in a few ways:
+
+1. **Hypothesis over requirements.** Software engineers work on features users clearly need. Growth engineers work on more unknowns. They run experiments to validate their assumptions and care more about exploration and discovery. 
+
+2. **Iteration over stability.** While most engineers focus on developing stable, bug-free code, growth engineers would rather fail fast and iterate. A software engineer might feel uncomfortable adding a dependency before evaluating it, while a growth engineer will ship it to help them test faster. 
+
+3. **Pragmatism over perfection.** Growth engineers know their experiments might fail and get torn out. This means they ship the "good enough" version over the maintainable and scalable one. They know they can always improve it later. For example, our team 
+
+> **Takeaway:** Instead of shipping the next feature on your list, take a moment to develop a hypothesis on how you could improve your product. Does what you are working on fit the hypothesis? What would it take to test the hypothesis?
+
+## 3. Prioritize like a growth engineer
+
+Engineers are like bus drivers, helping move a product along its roadmap toward success. Growth engineers are like Uber drivers, bouncing from experiment to experiment stacking little wins that payoff in the long term. 
+
+Let's look at a recent example from our growth team.
+
+1. **Identify a target area.** Product analytics has seen some massive upgrades lately and we've also added our data warehouse. Onboarding for both these products hasn't kept up, so they identified this as an area to improve.
+
+2. **Identify a metric that represents that target area.** They chose the percentage of new organizations that activate, which combines creating a dashboard, analyzing an insight, inviting a teammate, and more. They wanted to improve this metric while keeping retention the same or improving it.
+
+3. **Create hypotheses.** Dashboard templates help teams get value out of PostHog quickly. They hypothesized that adding a dashboard template to the onboarding flow using actions would lead to better activation.
+
+4. **Implement as small of an experiment as reasonably possible.** They added a step in the onboarding flow to choose a dashboard template and fill out the variables by creating actions.
+
+![Dashboard templates in onboarding](https://res.cloudinary.com/dmukukwp6/image/upload/template_27fddd57a8.png)
+
+> **Takeaway:** For the area you work on, identify a metric that represents it. Track how the features you are shipping impact this metric. Are the features you are shipping helping or hurting this metric?
+
+## 4. How to run and evaluate experiments
+
+When you're ready to implement your experiment, there are a few more things you need:
+
+1. **A sufficiently large sample size of users.** This ensures you can hit statistical significance AKA your impact is better than random chance. 
+
+2. **A long enough test duration.** As a rule of thumb, one week is a good minimum to include the variety of usage across the week. One month is a good maximum to avoid delaying shipping important changes.
+
+3. **A list of [common mistakes](/product-engineers/ab-testing-mistakes) and how to avoid them.** These include only viewing aggregate results, not having a predetermined duration, and neglecting counter metrics. 
+
+4. **A way to split and log participants.** You want to randomly split test and control groups as well as only log participants in your results. [Feature flags](/feature-flags) help do this.
+
+> **Takeaway:** Try it! [Running an experiment](/product-engineers/how-to-do-ab-testing) reveals a lot about crafting a good hypothesis, choosing a good goal metric, and evaluating results. It may even lead you to reevaluate changes you once considered obvious.
+
+## 5. Failure is not the end of the world
+
+For a software engineer, failure means bugs, downtime, data corruption, and many more nightmare-inducing issues. For growth engineers, it's just another day on the job.
+
+Many experiments fail. Often, a majority of experiments fail. At [Google](https://hbr.org/2017/09/the-surprising-power-of-online-experiments#:~:text=At%20Google%20and%20Bing%2C%20only%20about%2010%25%20to%2020%25%20of%20experiments%20generate%20positive%20results.), 80-90% of experiments "fail." You might think of this as a waste of time, but, at scale, 10% of successes can more than pay for all the failures. For example, an A/B test of how Bing displayed headlines boosted revenue by 12% (more than $100M at the time). 
+
+On top of the successes, failures are also opportunities to learn. As the saying goes "it's only a failure if you fail to learn." Rapid experimentation, and the gains it provides, are only possible when you embrace failure.
+
+> **Takeaway:** Set up the infrastructure and processes to run experiments safely. Get comfortable running experiments on small groups before scaling. 
+
+## More good reads
+
+- [Debugging conversion problems](https://mikebifulco.com/posts/debugging-a-conversion-problem-on-my-nextjs-site) - Mike 
+Mike details his ongoing work to improve newsletter conversion on his site.
+- [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers) - Lior
+
+<NewsletterForm />
