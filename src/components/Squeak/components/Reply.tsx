@@ -161,12 +161,12 @@ const AIDisclaimer = ({ replyID, mutate, topic, isAuthor, confidence }) => {
                 </p>
             )}
             {helpful === null && (
-                <ul className="flex items-center space-x-2 list-none p-0 flex-wrap">
+                <ul className="flex items-center space-x-2 list-none p-0 flex-wrap -ml-2">
                     {feedbackOptions.map(({ label, helpful }) => {
                         return (
-                            <li key={label}>
+                            <li className="ml-2 mt-2" key={label}>
                                 <button
-                                    className={`click px-3 py-1 bg-white rounded-full text-sm mt-2 font-semibold border ${
+                                    className={`click px-3 py-1 bg-white rounded-full text-sm font-semibold border ${
                                         helpful ? 'border-green' : 'border-red'
                                     }`}
                                     onClick={() => handleHelpful(helpful, label)}
