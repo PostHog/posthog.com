@@ -1339,6 +1339,10 @@
         {
             "source": "/handbook/growth/sales/icp",
             "destination": "/handbook/growth/marketing/icp"
+        },
+      {
+            "source": "/teams/pipeline",
+            "destination": "/teams/cdp"
         }
     ]
 }
