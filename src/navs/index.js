@@ -508,6 +508,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing/value-propositions',
             },
             {
+                name: 'ICP scoring',
+                url: '/handbook/growth/marketing/icp',
+            },
+            {
                 name: 'Marketing channels',
                 url: '',
                 children: [
@@ -688,8 +692,8 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/crm',
                     },
                     {
-                        name: 'ICP scoring',
-                        url: '/handbook/growth/sales/icp',
+                        name: 'Lead scoring',
+                        url: '/handbook/growth/sales/lead-scoring',
                     },
                     {
                         name: 'YC onboarding',
