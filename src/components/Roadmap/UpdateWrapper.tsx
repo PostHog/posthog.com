@@ -20,7 +20,7 @@ export const RoadmapSuccess = ({
             <p className="!m-0">{description}</p>
             <Link
                 external
-                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::roadmap.roadmap/${id}`}
+                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::roadmap.roadmap/${id}`}
                 className="mt-2 text-sm"
             >
                 View in Strapi
@@ -32,10 +32,11 @@ export const RoadmapSuccess = ({
 const ActionButton = ({ onClick, children, roundButton = false }) => {
     return (
         <button
-            className={`group z-10 font-bold p-2 rounded-full border ${roundButton
-                ? ' bg-white dark:bg-dark border-light dark:border-dark'
-                : '-mt-2 opacity-50 hover:bg-white hover:dark:bg-dark border-transparent hover:border-light hover:dark:border-dark'
-                } leading-none hover:scale-[1.02] hover:-translate-y-px active:translate-y-px active:scale-[.98]`}
+            className={`group z-10 font-bold p-2 rounded-full border ${
+                roundButton
+                    ? ' bg-white dark:bg-dark border-light dark:border-dark'
+                    : '-mt-2 opacity-50 hover:bg-white hover:dark:bg-dark border-transparent hover:border-light hover:dark:border-dark'
+            } leading-none hover:scale-[1.02] hover:-translate-y-px active:translate-y-px active:scale-[.98]`}
             onClick={onClick}
         >
             {children}
@@ -163,10 +164,10 @@ export default function UpdateWrapper({
             `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps/${id}?${query}`,
             jwt
                 ? {
-                    headers: {
-                        Authorization: `Bearer ${jwt}`,
-                    },
-                }
+                      headers: {
+                          Authorization: `Bearer ${jwt}`,
+                      },
+                  }
                 : undefined
         ).then((res) => res.json())
         setLikes(likes?.data)
@@ -195,10 +196,10 @@ export default function UpdateWrapper({
             })
             .join('\n')}
 ${likes
-                .map(({ attributes: { user, firstName, lastName } }) => {
-                    return `${firstName},${lastName},${user?.data?.attributes?.email},Voter`
-                })
-                .join('\n')}`
+    .map(({ attributes: { user, firstName, lastName } }) => {
+        return `${firstName},${lastName},${user?.data?.attributes?.email},Voter`
+    })
+    .join('\n')}`
         const blob = new Blob([csv], { type: 'text/csv' })
         const url = URL.createObjectURL(blob)
         const link = document.createElement('a')
