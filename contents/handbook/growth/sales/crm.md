@@ -36,7 +36,7 @@ People currently come into Salesforce through one of the following ways:
 
 We respond to emails which come into sales@posthog.com by replying with sales@ in BCC to ensure that everyone else on the team knows that you're handling the query. 
 
-If you've turned on the Salesforce Chrome Extension you can see the person's Salesforce profile directly within Gmail which should give you their auto-computed ICP score (more on this below) so this will help you decide on the correct approach (hands-on/self-serve).
+If you've turned on the Salesforce Chrome Extension you can see the person's Salesforce profile directly within Gmail which should give you their auto-computed [Lead score](/handbook/growth/sales/lead-scoring) so this will help you decide on the correct approach (hands-on/self-serve).
 
 We have lots of handy templates you can use as well - just select _Template_ in the email window in Salesforce. If you find yourself sending the same type of email repeatedly, you may want to create your own template - go to 'App Launcher' (the grid icon) > 'Email Templates' > 'New Email Template'.
 
@@ -48,7 +48,7 @@ the following Salesforce properties if they are set in the PostHog event:
 - selected_deployment_type - usually `cloud` or `hosted_clickhouse`
 - product_signup_ts - the time they signed up/purchased a license
 - is_organization_first_user - whether they have created a new organization or joined an existing one
-- role_at_organization - the role they self-selected when signing up (used in ICP scoring)
+- role_at_organization - the role they self-selected when signing up (used in Lead scoring)
 
 ### Completed contact form
 
@@ -125,7 +125,7 @@ Existing Business (Expansion Opportunity): Choose this type when selling additio
 
 Existing - Convert to Annual: Choose this when discussing an annual contract with a pay-as-you-go customer.
 
-Self Serve: Represents opportunities where the customer does not fit our hands-on Ideal Customer Profile (ICP) and is better suited for a self-service approach. Select this type when the customer is likely to benefit more from our self-serve offerings rather than direct sales engagement. This will move these opportunities to the self-serve pipeline.
+Self Serve: Represents opportunities where the customer does not fit our ideal hands-on customer and is better suited for a self-service approach. Select this type when the customer is likely to benefit more from our self-serve offerings rather than direct sales engagement. This will move these opportunities to the self-serve pipeline.
 
 Renewal: Choose this type when an existing customer is renewing their contract or subscription for our products or services. We automatically create a renewal opportunity if an 'Annual Plan' opportunity is Closed (more on these later).
 
@@ -166,7 +166,7 @@ Stages will differ depending on the chosen Opportunity Record Type. The followin
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
 
 ### Self-Serve Opportunity Record Type
-If after a demo call you feel like a customer doesn't fit our hands-on ICP, then you should convert the lead to an opportunity and mark the Opportunity Record Type as "Self Serve". This will add the lead to our self-serve pipeline and then automation will take care of the rest. 
+If after a demo call you feel like a customer doesn't fit a hands-on flow, then you should convert the lead to an opportunity and mark the Opportunity Record Type as "Self Serve". This will add the lead to our self-serve pipeline and then automation will take care of the rest. 
 
 Points to consider:
 - Usage Volume: If their usage volume is around 5 million monthly events and 100,000 recordings, they should be hands-on.
