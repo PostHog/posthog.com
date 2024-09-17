@@ -13,7 +13,7 @@ crosspost:
   - Blog
 ---
 
-From the outside, it can seem like growth engineers are bouncing around the product: signup flows, product onboarding, revenue reporting, and subscription tracking. You might think all this doesn't matter, but as many growth teams show, incremental improvements can lead to massive gains for the entire business.
+From the outside, it can seem like growth engineers bounce around the product aimlessly: signup flows, product onboarding, revenue reporting, and subscription tracking. You might think all this doesn't matter, but as many growth teams show, incremental improvements can lead to massive gains for the entire business.
 
 Growth engineers capture these gains through their unique way of thinking and working. Luckily, you don't need to go to growth engineer school to learn this yourself. If you aspire to create a successful product and business, you should care about what growth engineers do to make that happen, and this post aims to help you do just that.
 
@@ -37,9 +37,9 @@ The big way growth engineers improve the metrics they care about is through expe
 
 1. **Hypothesis over requirements.** Software engineers work on features users clearly need. Growth engineers work on more unknowns. They run experiments to validate their assumptions and care more about exploration and discovery. 
 
-2. **Iteration over stability.** While most engineers focus on developing stable, bug-free code, growth engineers would rather fail fast and iterate. A software engineer might feel uncomfortable adding a dependency before evaluating it, while a growth engineer will ship it to help them test faster. 
+2. **Iteration over stability.** While most engineers focus on developing stable, bug-free code, growth engineers would rather fail fast and iterate. For example, a software engineer might feel uncomfortable adding a dependency before evaluating it, while a growth engineer will ship it to help them test faster. 
 
-3. **Pragmatism over perfection.** Growth engineers know their experiments might fail and get torn out. This means they ship the "good enough" version over the maintainable and scalable one. They know they can always improve it later. For example, our team 
+3. **Pragmatism over perfection.** Growth engineers know their experiments might fail and get removed. This means they ship the "good enough" version over the maintainable and scalable one. They know they can always improve it later.
 
 > **Takeaway:** Instead of shipping the next feature on your list, take a moment to develop a hypothesis on how you could improve your product. Does what you are working on fit the hypothesis? What would it take to test the hypothesis?
 
@@ -47,7 +47,7 @@ The big way growth engineers improve the metrics they care about is through expe
 
 Engineers are like bus drivers, helping move a product along its roadmap toward success. Growth engineers are like Uber drivers, bouncing from experiment to experiment stacking little wins that payoff in the long term. 
 
-Let's look at a recent example from our growth team.
+To understand what their work looks like, let's look at a recent example from our growth team:
 
 1. **Identify a target area.** Product analytics has seen some massive upgrades lately and we've also added our data warehouse. Onboarding for both these products hasn't kept up, so they identified this as an area to improve.
 
@@ -59,7 +59,7 @@ Let's look at a recent example from our growth team.
 
 ![Dashboard templates in onboarding](https://res.cloudinary.com/dmukukwp6/image/upload/template_27fddd57a8.png)
 
-> **Takeaway:** For the area you work on, identify a metric that represents it. Track how the features you are shipping impact this metric. Are the features you are shipping helping or hurting this metric?
+> **Takeaway:** For the area you work on, identify a metric that represents it. Track the impact features ship have on this metric. Is what you are shipping helping or hurting it?
 
 ## 4. How to run and evaluate experiments
 
