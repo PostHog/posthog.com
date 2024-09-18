@@ -303,6 +303,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             }
             type ShopifyImage {
               localFile: File
+              width: Int
+              height: Int
+              originalSrc: String
+
             }
             type ShopifyMediaPreviewImage {
               image: ShopifyImage
@@ -320,6 +324,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             }
             type ShopifyFeaturedImage {
               localFile: File
+              width: Int
+              height: Int
+              originalSrc: String
             }
             type ShopifyProduct implements Node {
               description: String!

@@ -204,7 +204,7 @@ const Router = ({ children, prev }: { children: React.ReactNode; prev: string | 
                     '/features': <Blog title="Features" />,
                     '/founders': <Blog title="Founders" />,
                     '/blog': <Blog />,
-                    '/newsletter': <NewsletterForm placement="blog-index" />,
+                    '/newsletter': <Newsletter />,
                     '/spotlight': <Blog title="Spotlight" />,
                     '/customers': <Customers />,
                 }[pathname] || <Default>{children}</Default>

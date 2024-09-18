@@ -180,6 +180,6 @@ That's it! When you restart your app and click the button, you should see the gr
 
 ## Further reading
 
-- [How to set up one-time feature flags](/tutorials/one-time-feature-flags)
+- [How to set up iOS session replay](/tutorials/ios-session-replay)
 - [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
 - [How to set up analytics in iOS](/tutorials/ios-analytics)

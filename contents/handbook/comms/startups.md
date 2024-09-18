@@ -66,3 +66,6 @@ Referred customers should apply for the PostHog for Startups program as normal, 
 There are currently no limits on how many startups can be referred into the program successfully. 
 
 Customer can also refer an investor, or startup accelerator. If an investor or accelerator signs up as a PostHog for Startups partner, we will double the credits of the referring customer to a total of $100,000.
+
+### Program extensions
+Extensions aren’t something we usually do because we set the initial terms to keep things fair and consistent for everyone. We recommend using your credits within the deal period to make the most of the program. If you’ve had some unusual circumstances, we’re open to hearing about them. Please make sure your request clearly explains why you couldn’t use the credits as planned and shows recent growth or a change in direction that makes the extension necessary. Our Customer Success team reviews each request on a case-by-case basis.

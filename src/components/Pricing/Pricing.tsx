@@ -296,6 +296,11 @@ export const allProductsData = graphql`
                         name
                         type
                         unit
+                        features {
+                            category
+                            name
+                            description
+                        }
                         plans {
                             description
                             docs_url
