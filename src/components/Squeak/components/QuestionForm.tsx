@@ -16,6 +16,8 @@ import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
 import Spinner from 'components/Spinner'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
+import { useAppStatus } from 'hooks/useAppStatus'
+import Link from 'components/Link'
 
 type QuestionFormValues = {
     subject: string
@@ -129,6 +131,7 @@ function QuestionFormMain({
 }: QuestionFormMainProps) {
     const posthog = usePostHog()
     const { user, logout } = useUser()
+    const { status } = useAppStatus()
 
     return (
         <div className="flex-1 mb-1">
@@ -171,6 +174,22 @@ function QuestionFormMain({
                             </div>
 
                             <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
+                                {status && status !== 'none' && (
+                                    <div className="p-4 bg-accent dark:bg-dark border-b border-border dark:border-dark">
+                                        <h5 className="m-0">Heads up!</h5>
+                                        <p className="m-0">
+                                            We're currently experiencing an incident. Check{' '}
+                                            <Link
+                                                className="text-red dark:text-yellow font-bold"
+                                                to="https://status.posthog.com"
+                                                externalNoIcon
+                                            >
+                                                here
+                                            </Link>{' '}
+                                            for the latest info.
+                                        </p>
+                                    </div>
+                                )}
                                 {showTopicSelector && <Select value={values.topic} setFieldValue={setFieldValue} />}
                                 {subject && (
                                     <>
