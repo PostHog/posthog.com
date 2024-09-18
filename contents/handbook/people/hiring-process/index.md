@@ -90,7 +90,7 @@ Once the hiring manager has signed off on the spec, we will publish it on Ashby 
 
 #### Job boards
 
-Ashby will automatically add the role on our [careers page](/careers). It will also 'helpfully' publish it on a bunch of other free but irrelevant job boards - you should manually remove all of those except for Ashby and LinkedIn. [Wellfound (formerly AngelList)](https://wellfound.com/company/posthoghq/jobs) will need to be posted manually. 
+Ashby will automatically add the role on our [careers page](/careers). It will also 'helpfully' publish it on a bunch of other free but irrelevant job boards - you should manually remove all of those except for Ashby and LinkedIn. [Wellfound](https://wellfound.com/company/posthoghq/jobs) will need to be posted manually. 
 
 As a Y Combinator company, we can post [jobs ads on the HackerNews front page](https://news.ycombinator.com/jobguide.html) for free at [https://news.ycombinator.com/submitjob](https://news.ycombinator.com/submitjob). This requires a founder's HackerNews account to do so. 
 
