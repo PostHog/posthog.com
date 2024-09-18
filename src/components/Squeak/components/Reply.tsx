@@ -166,7 +166,7 @@ const AIDisclaimer = ({ replyID, mutate, topic, isAuthor, confidence }) => {
                         return (
                             <li className="ml-2 mt-2" key={label}>
                                 <button
-                                    className={`click px-3 py-1 bg-white rounded-full text-sm font-semibold border ${
+                                    className={`click px-3 py-1 bg-white dark:bg-dark rounded-full text-sm font-semibold border ${
                                         helpful ? 'border-green' : 'border-red'
                                     }`}
                                     onClick={() => handleHelpful(helpful, label)}
