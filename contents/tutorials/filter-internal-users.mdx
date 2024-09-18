@@ -43,6 +43,10 @@ Any internal users you identify for a project will apply for _all_ users on that
 
 ## Step 2: Add an internal user filter
 
+> **Update 18 Sept, 2024:** When filtering out internal users by person properties, like email, 
+> instead of the instructions below, we now recommend [creating a Cohort](https://posthog.com/docs/data/cohorts#method-2-create-a-new-cohort-from-the-cohorts-page)
+> with those properties, and then adding that cohort with a "not in" operator in your ‘_Filter out internal and test users_’ settings.
+
 In project settings, scroll down to the ‘_Filter out internal and test users_’ section and click ‘_+ Add filter_’ to begin. 
 
 Adding a filter here works exactly the same as it does when you add a filter to any other insight, with a list of available events, properties and cohorts to choose from as a base for your filter. You can add several filters at once, to create an inclusive list of ways to identify groups of internal users or beta testers. 

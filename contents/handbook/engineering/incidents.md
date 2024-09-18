@@ -91,6 +91,14 @@ When updating the status page, make sure to mark the affected component appropri
 
 Occasionally it may be desirable to do additional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Comms will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact.
 
+In the case that we need to update a _specific_ customer, such as when a individual org is causing an incident, we should let them know as soon as possible. Use the following guidelines to ensure smooth communication:
+
+- Communication is best done through Zendesk. The Comms team can create tickets and handle this for you. 
+- Before sending any comms, check with the incident lead. Then, share a ticket link in the incident channel. 
+- If action is needed, it's better to take that action and inform the user than to ask the user to do it.
+- If you're not able to take the required action, give the user deadlines for the changes they need to do and explain what will happen if they don't meet the deadline.
+- Try to keep all communication on a single ticket, with all relevant parties. 
+
 ## When does an incident end?
 
 When we’ve identified the root cause of the issue and put a fix in place. End the incident by typing `/inc close` in the incident channel. Make sure to also mark the incident as resolved on the status page.

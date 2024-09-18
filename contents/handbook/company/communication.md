@@ -240,7 +240,7 @@ An RFC is likely to be unhelpful as a first step in other circumstances. Specifi
 
 ## Internal meetings
 
-PostHog uses [Google Meet](https://meet.google.com/) for video communications.
+PostHog uses [Google Meet](https://meet.google.com/) for video communications. For large meetings, use `CMD + minus key` to zoom out and see everyone - you'll usually need to do this in All Hands. 
 
 Use video calls if you find yourself going back and forth in an issue/via email or over chat. Sometimes it is still more valuable to have a 40+ message conversation via chat as it improves transparency, is easy to refer back to, and is friendlier to newcomers getting up to speed.
 

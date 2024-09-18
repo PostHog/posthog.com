@@ -165,11 +165,9 @@ export const query = graphql`
                 mediaContentType
                 preview {
                     image {
-                        localFile {
-                            childImageSharp {
-                                gatsbyImageData
-                            }
-                        }
+                        width
+                        height
+                        originalSrc
                     }
                 }
             }
@@ -189,11 +187,9 @@ export const query = graphql`
             featuredMedia {
                 preview {
                     image {
-                        localFile {
-                            childImageSharp {
-                                gatsbyImageData
-                            }
-                        }
+                        width
+                        height
+                        originalSrc
                     }
                 }
             }
@@ -215,11 +211,9 @@ export const query = graphql`
                     featuredMedia {
                         preview {
                             image {
-                                localFile {
-                                    childImageSharp {
-                                        gatsbyImageData
-                                    }
-                                }
+                                width
+                                height
+                                originalSrc
                             }
                         }
                     }
@@ -227,11 +221,9 @@ export const query = graphql`
                 media {
                     preview {
                         image {
-                            localFile {
-                                childImageSharp {
-                                    gatsbyImageData
-                                }
-                            }
+                            width
+                            height
+                            originalSrc
                         }
                     }
                 }
