@@ -6,11 +6,13 @@ showTitle: true
 
 # Annual plans and more
 
-For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their contractual commitment to a minimum term, and likely custom pricing as well.  At a minimum, they should sign an Order Form which references our standard [terms](/terms) and [privacy notice](/privacy).  In addition, they may want a custom Master Services Agreement (MSA) or Data Processing Agreement (DPA).
+For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their contractual commitment to a minimum term, and likely custom pricing as well. At a minimum, they should sign an Order Form which references our standard [terms](/terms) and [privacy notice](/privacy). In addition, they may want a custom Master Services Agreement (MSA) or Data Processing Agreement (DPA).
 
-> If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements).
+> If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements). The minimum is $100k to bring your own contract instead of our template - see 'Non PostHog Contracts' below.
 
 In addition, customers requiring our Enterprise plan need to sign up for a minimum of $20k of PostHog Cloud Credit for a year, as well as adding the Teams plan to their subscription.
+
+If you are discussing any annual plan that deviates from our standard terms, such as a plan with monthly payments or other custom terms, please consult with Simon and Mine beforehand. This is to ensure we have the capacity and resources to support the proposed terms.
 
 ### What about monthly customers?
 
@@ -63,7 +65,7 @@ You will likely need to use the [Pricing Calculator](https://docs.google.com/spr
 
 We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, routing and signature.  Ask Cameron or Simon for access if you don't have it.
 
-1. The [order form template](https://app.pandadoc.com/a/#/templates/dpuESjnYBeytVREMxLxGuC) to use is titled `[Client.Company] PostHog Cloud Order Form - <MMM YYYY>` 
+1. The [order form template](https://app.pandadoc.com/a/#/templates/87jsEEeg8rvYYri9Y8gK5B) to use is titled `[Client.Company] PostHog Cloud Order Form - <MMM YYYY>` 
 2. When looking at the template, click the link to **Use this template** in the top bar.
 3. In the Add recipients box which pops up:
    1. Replace `<MMM YYYY>` with the month and year the contract starts (e.g. March 2023)
@@ -103,9 +105,27 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 3. Ensure Document forwarding and Signature forwarding are set to on so that our Contact can re-assign the document if needed.
 4. Click Send at the top of the document and add a message explaining the context of the order form.
 5. Once the Client and then PostHog have signed it you should get an email to confirm completion.
-6. Don't forget to link to a deal in HubSpot and close the associated deal.
-7. Zapier will [automatically add](https://zapier.com/editor/217375860) a record in the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc Order Form ID.  See the [Billing](/handbook/growth/sales/billing) page for steps on how to use this and automate the setup of their Stripe billing components.
+6. Don't forget to link to an opportunity in Salesforce and mark the associated opportunity as Closed Won.
+7. Zapier will [automatically add](https://zapier.com/editor/217375860) a record in the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc Order Form ID.
 8. Celebrate!
+
+
+### Manual upload of signed Order Form
+
+We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer to sign a PDF copy. One way to minimize this is to send contracts for initial review via PandaDoc when possible. It is ok to have multiple drafts in PandaDoc as long as we have the final signed copy in there as well. When a client signs an order form outside of PandaDoc, please follow these steps to complete the process:
+
+1. If you have previously created a draft, find the document in PandaDoc.
+   - Select "Change Status" from the three-dot menu on the right.
+   - Upload the signed PDF of the document.
+   - Mark the status as completed.
+   - Check Audit Trail to make sure the signed version is uploaded correctly.
+   - Link to an opportunity in Salesforce and close the associated opportunity as Closed Won.
+2. If no draft exists, upload the signed document directly ad a new document in PandaDoc.
+   - Mark the status as completed.
+   - Link to an opportunity in Salesforce and close the associated opportunity as Closed Won.
+   
+Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works for more information.
+
 
 ## Master Services Agreement (MSA)
 
@@ -131,3 +151,6 @@ We offer HIPAA Compliance on PostHog Cloud and as such health companies will req
 5. You'll get a notification when everybody has signed it - _don't forget to update the *BAA Signed Date* property on the HubSpot company record,_ so we can keep track of who we have signed a BAA with.
 
 > We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
+
+## Non-PostHog contracts
+If a customer requests to use a non-PostHog drafted contract for DPA, MSA, Order Form, or BAA generally we avoid doing this as it adds too much risk for us. We usually would not even consider this for deals not above $100k or for extremely blue chip companies. It is best to manage this expectation early and just avoid entertaining the idea with customers as soon as possible. An exception to this rule is for NDAs - these are usually fine.

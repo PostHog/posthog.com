@@ -5,6 +5,7 @@ import useProducts from '../Products'
 import * as Icons from '@posthog/icons'
 import { PricingTiers } from '../Plans'
 import { AnimatePresence, motion } from 'framer-motion'
+import Link from 'components/Link'
 
 const Addon = ({ name, icon_key, description, plans, unit, type, ...other }) => {
     const [showBreakdown, setShowBreakdown] = useState(false)
@@ -59,7 +60,7 @@ const Addon = ({ name, icon_key, description, plans, unit, type, ...other }) => 
                             exit={{ opacity: 0, translateY: '100%' }}
                             className="absolute inset-0 bg-white dark:bg-accent-dark pt-4 rounded"
                         >
-                            <PricingTiers plans={plans} type={type} unit={unit} />
+                            <PricingTiers plans={plans} type={type} unit={unit} test={true} />
                             <button
                                 onClick={() => setShowBreakdown(false)}
                                 className={`text-red dark:text-yellow font-bold text-sm px-2 lg:px-4`}
@@ -96,6 +97,7 @@ export const Addons = (props) => {
                     ))}
                 </div>
             </div>
+            <Link to="/addons" className="font-bold">Explore add-ons</Link>
         </section>
     )
 }

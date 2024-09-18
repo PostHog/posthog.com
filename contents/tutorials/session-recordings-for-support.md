@@ -71,7 +71,7 @@ Within a recording, you can search for the specific console logs you’re lookin
 
 ### Setting up and using Sentry to get error monitoring data
 
-A more automated way of getting error data into PostHog is using our Sentry integration. Sentry is an application performance and error monitoring product that integrates with your code to capture errors and provide details about them (like the stack trace).
+A more automated way of getting error data into PostHog is using our Sentry integration. [Sentry](/blog/posthog-vs-sentry) is an application performance and error monitoring product that integrates with your code to capture errors and provide details about them (like the stack trace).
 
 Our two-way integration sends person data related to an error to Sentry and an `$exception` event to PostHog with a link to Sentry. This enables you to combine Sentry’s error monitoring tools with PostHog’s product tools for a better support experience.
 

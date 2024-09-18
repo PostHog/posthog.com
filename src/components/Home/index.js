@@ -33,7 +33,7 @@ const Home = () => {
             <Layout>
                 <SEO
                     title="PostHog - How developers build successful products"
-                    description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, A/B testing, and surveys that's built for developers."
+                    description="PostHog is the only all-in-one platform for product analytics, feature flags, session replays, experiments, and surveys that's built for developers."
                     image="/images/home.png"
                 />
                 <Hero />

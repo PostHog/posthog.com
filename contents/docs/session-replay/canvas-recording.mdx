@@ -8,6 +8,8 @@ availability:
 
 export const ImgReplayCanvasLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-canvas-recording-in-replay-settings.png"
 
+> **Important:** Canvas support was added in v1.105.7 of the PostHog JS SDK. Make sure you are using at least that version or canvas capture will not work.
+
 PostHog can capture canvas elements from your application. It works in both 2D and WebGL environments. 
 
 As canvas elements can contain sensitive information and there is **no way to mask canvas elements right now**, we do not capture these automatically. Once you are sure they are free of PII, you can enable this feature globally from your [replay settings](https://us.posthog.com/settings/project-replay#replay).

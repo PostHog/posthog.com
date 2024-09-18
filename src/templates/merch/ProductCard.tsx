@@ -3,6 +3,7 @@ import React from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
+import { getShopifyImage } from 'gatsby-source-shopify'
 
 type ProductCardProps = {
     product: ShopifyProduct
@@ -29,7 +30,7 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                 <div className="relative h-full bg-white rounded-md border border-light dark:border-dark flex items-center hover:top-[-1px] hover:scale-[1.005] active:top-[2px] active:scale-[.99] hover:transition-all">
                     <GatsbyImage
                         className="w-full h-full rounded-md overflow-hidden"
-                        image={product.featuredMedia.preview.image.localFile.childImageSharp.gatsbyImageData}
+                        image={getShopifyImage({ image: product.featuredMedia.preview.image })}
                         alt={product.title}
                     />
                 </div>

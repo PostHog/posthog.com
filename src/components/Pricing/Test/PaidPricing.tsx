@@ -44,7 +44,7 @@ export const PaidPricing = () => {
                             <li>
                                 <s>Community support</s>{' '}
                                 <span className="bg-highlight p-0.5 font-bold text-[15px] italic text-red dark:text-yellow">
-                                    Priority support
+                                    Email support
                                 </span>
                             </li>
                         </ul>

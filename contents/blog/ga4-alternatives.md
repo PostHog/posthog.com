@@ -27,7 +27,7 @@ In this guide we'll cover:
 - The best GA4 alternatives for different use cases
 
 > **Changelog:**
-> - **Aug 24, 2023:** Added Kissmetrics and Vercel Web Analytics; updated info on EU-U.S. privacy framework.  
+> - **Aug 24, 2023:** Added Kissmetrics and Vercel Web Analytics; updated info on EU-U.S. privacy framework.
 
 ## GA4 vs Universal Analytics... what's the difference?
 

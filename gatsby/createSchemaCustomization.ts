@@ -252,6 +252,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type G2ReviewCommentAnswer {
       value: String
     }
+    type CloudinaryImage implements Node {
+      folder: String
+      secure_url: String
+      public_id: String
+    }
   `)
     createTypes([
         schema.buildObjectType({
@@ -298,6 +303,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             }
             type ShopifyImage {
               localFile: File
+              width: Int
+              height: Int
+              originalSrc: String
+
             }
             type ShopifyMediaPreviewImage {
               image: ShopifyImage
@@ -315,6 +324,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             }
             type ShopifyFeaturedImage {
               localFile: File
+              width: Int
+              height: Int
+              originalSrc: String
             }
             type ShopifyProduct implements Node {
               description: String!

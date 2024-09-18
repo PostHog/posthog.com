@@ -416,4 +416,24 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     if (process.env.G2_API_KEY) {
         await fetchG2Reviews('https://data.g2.com/api/v1/survey-responses?page[size]=100')
     }
+    if (
+        process.env.CLOUDINARY_API_KEY &&
+        process.env.CLOUDINARY_API_SECRET &&
+        process.env.GATSBY_CLOUDINARY_CLOUD_NAME
+    ) {
+        const { resources } = await fetch(
+            `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/resources/image?prefix=hogs&type=upload&max_results=500`
+        ).then((res) => res.json())
+        resources.forEach((resource) => {
+            const node = {
+                id: createNodeId(`cloudinary-image-${resource.public_id}`),
+                internal: {
+                    type: 'CloudinaryImage',
+                    contentDigest: createContentDigest(resource),
+                },
+                ...resource,
+            }
+            createNode(node)
+        })
+    }
 }

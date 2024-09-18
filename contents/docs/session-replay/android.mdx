@@ -55,7 +55,7 @@ private val client = OkHttpClient.Builder()
 
 #### Masking and redacting
 
-> 🚧 **NOTE:** Currently, this isn't supported if using Jetpack Compose views. We're investigating this issue.
+> 🚧 **NOTE:** Currently, this isn't supported if using Jetpack Compose views. We're investigating this [issue](https://github.com/PostHog/posthog-android/issues/158).
 
 Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
 
@@ -75,7 +75,7 @@ To replace any type of `View` with a redacted version in the recording, set the 
 - Session replay requires PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases), and it's recommended to always use the latest version.
 - Requires Android API >= 26.
 - Jetpack Compose is only supported if `screenshotMode` is enabled.
-  - Masking and redacting in Jetpack Compose isn't supported yet. We're investigating this issue.
+  - Masking and redacting in Jetpack Compose isn't supported yet. We're investigating this [issue](https://github.com/PostHog/posthog-android/issues/158).
 - Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
 - WebView is not supported. A placeholder will be shown.
 - Keyboard is not supported. A placeholder will be shown.

@@ -194,4 +194,4 @@ With this, you’re ready to launch your A/B test! PostHog will randomly split y
 
 - [How to set up Angular analytics, feature flags, and more](/tutorials/angular-analytics)
 - [How to set up surveys in Angular](/tutorials/angular-surveys)
-- [How to set up session replays in Android](/tutorials/android-session-replays)
+- [How to set up session replays in Android](/tutorials/android-session-replay)

@@ -66,7 +66,7 @@ export const TeamMember = (props) => {
                         />
                     </figure>
                     <div className="overflow-hidden absolute h-full w-full inset-0 p-4 bg-accent dark:bg-accent-dark">
-                        <ReactMarkdown className="text-sm [&_p]:text-sm [&_p]:mb-2">{biography}</ReactMarkdown>
+                        <ReactMarkdown className="text-sm bio-preview">{biography}</ReactMarkdown>
                         <div className="bg-gradient-to-t from-accent dark:from-accent-dark to-transparent absolute inset-0 w-full h-full" />
                     </div>
                 </div>

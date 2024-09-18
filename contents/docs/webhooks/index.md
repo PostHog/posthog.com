@@ -7,8 +7,6 @@ showTitle: true
 
 Webhooks enable you to receive messages whenever any of your [actions](/docs/user-guides/actions) trigger. You can receive messages in [Slack](/docs/webhooks/slack), [Teams](/docs/webhooks/microsoft-teams), [Discord](/docs/webhooks/discord), or your own custom webhook endpoint.
 
-> **Looking for an option not listed here?** You can build your own webhook destination to send messages wherever or trigger custom workflows. See our [guide to building a destination](/docs/cdp/build) to learn how.
-
 ## Message formatting
 
 By default, the webhook message format is:

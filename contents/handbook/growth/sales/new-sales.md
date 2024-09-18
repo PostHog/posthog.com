@@ -123,6 +123,8 @@ Most customers don't need this beyond sharing our existing documentation. This s
 
 If the customer requires a vendor questionnaire or security questionnaire then it's best for the AE involved to try and fill it out. If a company reaches out initially with this request, it's often best to try and understand if the customer has an intention to pay or at least grow into a paying customer before investing a lot of time filling it out. If there are any questions that are unclear post the specific question in #team-people-and-ops channel.
 
+Some customers may need payment details up front as part of their vendor onboarding process.  Stripe allows you to generate these ahead of them signing the contract - you can see how to do it [here](/handbook/growth/sales/billing#step-5-apply-credits).
+
 If you need help with anything data privacy or [MSA-related](/handbook/growth/sales/contracts), ping Fraser for help. 
 
 ### 6. Commercial evaluation

@@ -29,6 +29,7 @@ import { postsMenu as menu } from '../../navs/posts'
 import { Authentication } from 'components/Squeak'
 import { PostFilters } from './Views/Default'
 import { CallToAction, child, container } from 'components/CallToAction'
+import { NewsletterForm } from 'components/NewsletterForm'
 
 dayjs.extend(relativeTime)
 

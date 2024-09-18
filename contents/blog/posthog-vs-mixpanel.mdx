@@ -23,7 +23,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 ### 1. We're an all-in-one platform
 
-PostHog combines [product analytics](/product-analytics) with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/ab-testing), [surveys](/surveys), and a [data warehouse](/docs/data-warehouse) into one tightly integrated platform. Everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
+PostHog combines [product analytics](/product-analytics) with [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [surveys](/surveys), and a [data warehouse](/docs/data-warehouse) into one tightly integrated platform. Everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
 
 ### 2. It's built for developers
 
@@ -127,7 +127,7 @@ Replays enable you watch how users experience your app, diagnose issues, improve
   <ComparisonRow column1={true} column2="Closed beta" feature="Web app recordings" description="Capture recordings from single-page apps" />
   <ComparisonRow column1="Beta" column2={false} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
   <ComparisonRow column1={true} column2={false} feature="Identity detection" description="Link recordings to user IDs" />
-  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a users' browser environment" />
+  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a user's browser" />
   <ComparisonRow column1={true} column2={false} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
   <ComparisonRow column1={true} column2={false} feature="Performance monitoring" description="Track network events within a session" />
   <ComparisonRow column1={true} column2={true} feature="Privacy masking" description="Censor personal information from playback" />

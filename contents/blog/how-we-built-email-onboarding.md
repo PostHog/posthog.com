@@ -81,7 +81,7 @@ This email performed very well, with a 68% open rate and a 16% CTR. Two emails i
 
 Best of all, though, because it was personalized and came from me directly, it also earned a steady trickle of replies. I responded in kind and was able to feed in further improvements, including adding another option for `role_at_organization` = `founder`.
 
-<NewsletterForm />
+<NewsletterForm placement="middle" />
 
 ## Onboarding 3.3: The one where we added experiments
 
@@ -179,16 +179,5 @@ We've run tests on this several times and [Lottie's](https://posthog.com/communi
 Personalization doesn't mean calling users by their first name using a [liquid](https://customer.io/docs/journeys/using-liquid/) tag and pretending to be best buds. It means providing the right content, at the right time, in the right way. 
 
 We do this in several ways in the latest version – delaying our welcome email, tailoring the emails users receive based on their choices, and sending newsletter invites from my personal address. If nothing else, the replies I frequently receive from users are a testament to how effective this is. 
-
-## What’s next?
-
-At the time of writing, Onboarding 5.0 has been live just one week – it’s too early to judge any of the metrics because users will have only received the first email. The plan, however, is to keep an eye on the data (and user feedback) and find new ways to improve the flow even further. 
-
-![Onboarding 5.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_6.png)
-<Caption>An active experiment within the current version of our email flow</Caption>
-
-One way we’re already experimenting with this is by bringing back checks to see if users are ingesting events or not. We’re testing this with the session replay product by running the flow you can see above for the first email after the welcome email. 
-
-Hopefully we’ll see this test prove successful and we’ll be able to replicate these secondary checks across all products soon – in Onboarding 6.0!
 
 <NewsletterForm />

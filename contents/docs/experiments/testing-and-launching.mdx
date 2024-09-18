@@ -12,20 +12,21 @@ import {ProductVideo} from 'components/ProductVideo'
 import {ProductScreenshot} from 'components/ProductScreenshot'
 export const assignAnOverrideLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-light-mode.mp4"
 export const assignAnOverrideDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/experiments/assigning-an-override-dark-mode.mp4"
-export const resultLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/experiment-result-light-mode.png"
-export const resultDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/experiments/experiment-result-light-mode.png"
 
 Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. If you find out your implementation had a bug after you've launched the experiment, you lose days of effort as the experiment results can no longer be trusted.
 
-The best way to do this is **adding an optional override** to your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions). For example, you can create an override to assign a user to the 'test' variant if their email is your own (or someone in your team). To do this:
+The best way to do this is **adding an optional override** to your [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions). For example, you can create an override to assign a user to the `test` variant if their email is your own (or someone in your team). To do this:
 
 1. Go to your experiment feature flag.
+
 2. Ensure the feature flag is enabled by checking the "Enable feature flag" box.
+
 3. Add a new condition set with the condition to `email = your_email@domain.com`. Set the rollout percentage for this set to 100%.
    
    - In cases where `email` is not available (such as when your users are logged out), you can use a parameter like `utm_source` and append `?utm_source=your_variant_name` to your URL.
 
 4. Set the optional override for the variant you'd like to assign these users to.
+
 5. Click "Save".
 
 <ProductVideo
@@ -46,23 +47,45 @@ Once you test it works, you're ready to launch your experiment.
 While the experiment is running, you can see results on the page:
 
 <ProductScreenshot
-    imageLight = {resultLight}
-    imageDark = {resultDark}
-    alt = "Viewing experiment results"
-    classes = "rounded"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_16_at_16_14_33_2x_cd19cb7043.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_08_16_at_16_14_14_2x_5f922eac50.png"
+  alt = "Viewing experiment results"
+  classes = "rounded"
 />
 
-Sometimes, in the beginning of an experiment, results can be skewed to one side while enough data is being still gathered. While peeking at preliminary results is not a problem, making quick decisions based on them is [problematic](/blog/ab-testing-mistakes#3-conducting-an-experiment-without-a-predetermined-duration). We advise you to wait until your experiment has had a chance to gather enough data.
+This page shows its status, whether draft, running, or complete as well as whether it has reached significance or not. It will also provide advice on how to interpret the results.
+
+Beyond this, you can see a summary of the experiment including goals, variants, data collection, and more.
+
+Sometimes, in the beginning of an experiment, results can be skewed to one side while enough data is still being gathered. While peeking at preliminary results is not a problem, making quick decisions based on them is [problematic](/blog/ab-testing-mistakes#3-conducting-an-experiment-without-a-predetermined-duration). We advise you to wait until your experiment has had a chance to gather enough data.
+
+### Advanced results metrics
+
+- **Mean:** For trends, the number who completed the goal divided by the number who were exposed. 
+
+- **Delta %:** The percentage change between the control and test variants.
+
+- **Credible interval:** Represents a range within which we believe the true difference between the test variant and the control means lies, with 95% probability. In this context, the interval is expressed as a percentage change, indicating how much higher or lower the mean of the test variant could be compared to the control, based on the observed data and our prior beliefs.
+
+- **Win probability:** The probability that variant is the best performing one.
 
 ## Ending an experiment
 
-Here is checklist of things to do when ready to end your experiment:
--   [ ] Click on "Stop" button on the experiment page. This will ensure final results are stored.
--   [ ] Roll out the winning variant of your experiment by setting the feature flag conditions accordingly. This ensures that your users see the winning variant without needing to make any code changes.
--   [ ] Remove the experiment and losing variant's code to launch the winning variant to all your users.
--   [ ] Share results with your team.
--   [ ] Document conclusions and findings in the "description" field your PostHog experiment. This will help preserve historical context for future team members.
--   [ ] Archive the experiment.
+When you're ready to end an experiment, you can click the **Ship a variant** button on the experiment page to roll out a variant and stop the experiment. _(Note: This button only appears when the experiment has reached statistical significance.)_
+
+![Ship a variant](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_08_23_at_13_52_25_6c1cf85153.png)
+
+If you want more precise control over your release, you can also set the release condition for the feature flag and stop the experiment manually.
+
+Beyond this, we recommend:
+
+1. Sharing the results with your team.
+
+2. Documenting conclusions and findings in the description field your experiment. This helps preserve historical context for future team members.
+
+3. Removing the experiment and losing variant's code.
+
+4. Archiving the experiment.
 
 ## Further reading
 

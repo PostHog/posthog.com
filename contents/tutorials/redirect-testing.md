@@ -12,7 +12,7 @@ tags:
   - feature flags
 ---
 
-Redirect testing is a way to [A/B test](/ab-testing) web pages by redirecting users to one or the other.
+Redirect testing is a way to [A/B test](/experiments) web pages by redirecting users to one or the other.
 
 To show you how to do a redirect test with PostHog, we set up a two-page Next.js app, create an A/B test in PostHog, and then implement it in our app using middleware and feature flags. 
 

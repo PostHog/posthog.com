@@ -206,15 +206,19 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 #### 3. Prepare plugin server
 
-Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all required packages. You'll also need to install the `brotli` compression library:
+Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all required packages. You'll also need to install the `brotli` compression library and `rust` stable via `rustup`:
 
 - On macOS:
     ```bash
-    brew install brotli
+    brew install brotli rustup
+    rustup default stable
+    rustup-init
     ```
 - On Debian-based Linux:
     ```bash
     sudo apt install -y brotli
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    # Select 1 to proceed with default installation
     ```
 
 We'll run the plugin server in a later step.
@@ -234,8 +238,8 @@ pnpm i --dir plugin-server
         ```bash
         brew install libxml2 libxmlsec1 pkg-config
         ```
-        > If installing `xmlsec` doesn't work, try updating macOS to the latest version (Sonoma). 
-   
+        > If installing `xmlsec` doesn't work, try updating macOS to the latest version (Sonoma).
+
     - On Debian-based Linux:
         ```bash
         sudo apt install -y libxml2 libxmlsec1-dev libffi-dev pkg-config
@@ -419,7 +423,7 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
 3. Setup Django support (Settings… > Languages & Frameworks > Django):
    - Django project root: `path_to_repo`
    - Settings: `posthog/settings/__init__py`
-  
+
 ### Start the debugging environment
 
 1. Instead of manually running `docker compose` you can open the `docker-compose.dev.yml` file and click on the double play icon next to `services`

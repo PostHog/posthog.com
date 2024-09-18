@@ -16,6 +16,8 @@ import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
 import Spinner from 'components/Spinner'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
+import { useAppStatus } from 'hooks/useAppStatus'
+import Link from 'components/Link'
 
 type QuestionFormValues = {
     subject: string
@@ -46,10 +48,12 @@ export const Select = ({
     value,
     setFieldValue,
     label = 'Please select a topic',
+    className = '',
 }: {
     value?: Topic
     setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void
     label?: string
+    className?: string
 }) => {
     const [topicGroups, setTopicGroups] = useState([])
 
@@ -64,15 +68,18 @@ export const Select = ({
     }, [])
 
     return (
-        <div className="relative border-b border-border dark:border-dark">
+        <div className={`relative border-b border-border dark:border-dark ${className}`}>
             <Listbox value={value || {}} onChange={handleChange}>
                 <Listbox.Button
-                    className={`font-semibold text-black dark:text-primary-dark text-base w-full py-3 px-4 outline-none rounded-none text-left flex items-center justify-between ${
+                    className={`font-semibold text-black dark:text-primary-dark text-base w-full py-3 px-4 outline-none rounded-none text-left  ${
                         !value?.attributes?.label ? 'opacity-60' : ''
                     }`}
                 >
-                    <span>{value?.attributes?.label || label}</span>
-                    <Chevron className="w-2.5" />
+                    {label && !!value && <label className="text-sm opacity-60 -mb-0.5 block">{label}</label>}
+                    <div className="flex items-center justify-between">
+                        <span>{value?.attributes?.label || label}</span>
+                        <Chevron className="w-2.5" />
+                    </div>
                 </Listbox.Button>
                 {topicGroups?.length > 0 && (
                     <Listbox.Options className="list-none p-0 m-0 absolute z-20 bg-white dark:bg-gray-accent-dark-hover w-full max-h-[247px] overflow-auto shadow-md rounded-br-md rounded-bl-md border-t divide-y border-black/30 dark:border-primary-dark/30 divide-black/30 dark:divide-primary-dark/30">
@@ -124,6 +131,7 @@ function QuestionFormMain({
 }: QuestionFormMainProps) {
     const posthog = usePostHog()
     const { user, logout } = useUser()
+    const { status } = useAppStatus()
 
     return (
         <div className="flex-1 mb-1">
@@ -166,6 +174,22 @@ function QuestionFormMain({
                             </div>
 
                             <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
+                                {status && status !== 'none' && (
+                                    <div className="p-4 bg-accent dark:bg-dark border-b border-border dark:border-dark">
+                                        <h5 className="m-0">Heads up!</h5>
+                                        <p className="m-0">
+                                            We're currently experiencing an incident. Check{' '}
+                                            <Link
+                                                className="text-red dark:text-yellow font-bold"
+                                                to="https://status.posthog.com"
+                                                externalNoIcon
+                                            >
+                                                here
+                                            </Link>{' '}
+                                            for the latest info.
+                                        </p>
+                                    </div>
+                                )}
                                 {showTopicSelector && <Select value={values.topic} setFieldValue={setFieldValue} />}
                                 {subject && (
                                     <>
@@ -312,7 +336,7 @@ export const QuestionForm = ({
             ]
         }
 
-        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
+        const { data: questionData } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -321,7 +345,8 @@ export const QuestionForm = ({
             body: JSON.stringify({
                 data,
             }),
-        })
+        }).then((res) => res.json())
+        return questionData
     }
 
     const transformValues = async (values: QuestionFormValues, user: User) => {
@@ -358,21 +383,22 @@ export const QuestionForm = ({
 
         if (user) {
             const transformedValues = await transformValues(values, user)
+            let data
             if (formType === 'question') {
-                await createQuestion(transformedValues)
+                data = await createQuestion(transformedValues)
             }
 
             if (formType === 'reply' && questionId) {
                 await reply(transformedValues.body)
             }
 
-            if (onSubmit) {
-                await onSubmit(transformedValues, formType)
-            }
-
             setLoading(false)
             setView(null)
             setFormValues(null)
+
+            if (onSubmit) {
+                await onSubmit(transformedValues, formType, data)
+            }
         } else {
             setFormValues(values)
             setView('auth')
