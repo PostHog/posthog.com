@@ -272,6 +272,14 @@
         "link_url": "https://www.linkedin.com/in/igorkotua/"
     },
     {
+        "handle": "manoel-aranda-neto",
+        "name": "Manoel Aranda Neto",
+        "role": "Mobile Engineer",
+        "image": "../../static/images/authors/manoel.png",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/marandaneto"
+    },
+    {
         "handle": "mathew-pregasen",
         "name": "Mathew Pregasen",
         "role": "Contributor",

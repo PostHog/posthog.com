@@ -3,8 +3,10 @@ title: How we built mobile replay
 date: 2024-09-18
 author:
  - ian-vanagas
+ - manoel-aranda-netos
 rootpage: /blog
-featuredImage: ../images/blog/posthog-engineering-blog.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 tags:
  - Guides
