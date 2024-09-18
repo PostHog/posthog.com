@@ -1,36 +1,32 @@
-**Decide on the future of where we store our data and work towards that**
+**Data Storage and Querying at PostHog**
 
-ByConity is an interesting alternative to CH that incorporates a few features that we require:
-- Rules and cost based query optimizer
-- Separation of Storage and Compute
-- Virtual Warehouses
+Data Team mission is to provide a storage and query engine that meets these requirements:
+- Continue to meet the needs of the product today now and in the future
+- Maintain and optimize our current ClickHouse deployment
+- Elastically scale our capacity with little effort
+- Support multiple query quality of service (QOS) guarantees (Real-time, Batch, etc.)
+- Data is stored once and queryable from the appropriate tool
+- Queries are optimized for cost and performance
+- Tunable execution performance to allow trade-offs between cost and performance
+- Storage is durable
 
-A major goal for us this quarter is to evaluate the feasibility of this migration.
+In service of this mission, our goals for Q4 are:
 
+**Goals for Q4:**
 
-**List of all goals**
-
-- Support P0 tasks such as 
-    - Deletes
-    - Keeping clusters happy
-    - provisioning more disks
-    - Schema Reviews
-    - Debugging
-    - Performance
-    - Backups/Restores
-- Decide whether ByConity is the way forward
-    - Load it with data, set up 
-    - Test performance, test the functionality/compatibility gaps
-- Branch in goals depending on ByConity feasibility
-    - If ByConity works, migrate over to it
-        - Enumerate all functionality that doesn’t work and update the functions/contribute to ByConity
-            - Syntax
-        - If it works on metal, put it in k8s with Karpenter
-        - Evaluate which nodes we should use
-    - If ByConity doesn’t work, reshard US to look like EU cluster
-        - All clusters (Dev, US, EU) should be consistent in shape and topology. This will make it easier to manage and maintain the clusters and apply learnings from one cluster to another.
-        - We want all cluster operations to be automated and managed through some form of infra as code that is available in source control.
-        - Schema management on ClickHouse should be entirely automated and managed through source control with no exceptions. This includes Coordinator schemas.
-        - We should be able to spin up and down replicas of any cluster with no manual intervention.
-        - We should be able to upgrade ClickHouse versions with no manual intervention.
-        - We should have tooling / runbooks for resharding (if we continue down the current coordinator path)
+- Improve elasticity and flexibility of our data store by putting all our data in Iceberg
+    - Work with Altinity effectively to ship read path for Iceberg on ClickHouse Brett Hoerner
+    - Setup infrastructure to ship all of our data to Iceberg on S3 James Greenhill
+    - Shipping Query logs to Iceberg James Greenhill
+- Continue improving CH operational expertise
+    - Upgrade to a later version of Clickhouse James Greenhill
+    - Capacity planning James Greenhill
+    - Automation Daniel Escribano
+    - Put some of the basic mitigation operations in runbooks Daniel Escribano
+- Schema management
+    - Tool for schema migration (coordinator schemas) Daniel Escribano
+    - Tool for long running mutations Daniel Escribano
+- Continued investment in performance
+    - Tooling for other teams to understand which queries are slow and why Ted Kaemming
+    - Investigate variability of queries Ted Kaemming
+    - Per-team limits on queries/query complexity (needs product work) Ted Kaemming
