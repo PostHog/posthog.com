@@ -508,6 +508,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing/value-propositions',
             },
             {
+                name: 'ICP scoring',
+                url: '/handbook/growth/marketing/icp',
+            },
+            {
                 name: 'Marketing channels',
                 url: '',
                 children: [
@@ -688,8 +692,8 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/crm',
                     },
                     {
-                        name: 'ICP scoring',
-                        url: '/handbook/growth/sales/icp',
+                        name: 'Lead scoring',
+                        url: '/handbook/growth/sales/lead-scoring',
                     },
                     {
                         name: 'YC onboarding',
@@ -3019,7 +3023,7 @@ export const docsMenu = {
 export const pricingMenu = {
     name: 'Pricing',
     url: '/pricing',
-    icon: 'IconCdCase',
+    icon: 'IconReceipt',
     children: [
         {
             name: 'PostHog Cloud',
@@ -3033,12 +3037,12 @@ export const pricingMenu = {
         //     color: 'purple',
         //     url: '/events',
         // },
-        // {
-        //     name: 'Add-ons',
-        //     icon: 'IconPuzzle',
-        //     color: 'seagreen',
-        //     url: '/addons',
-        // },
+        {
+            name: 'Add-ons',
+            icon: 'IconPuzzle',
+            color: 'seagreen',
+            url: '/addons',
+        },
         {
             name: 'Pricing philosophy',
             icon: 'IconLightBulb',

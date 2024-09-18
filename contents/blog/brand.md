@@ -1,6 +1,6 @@
 ---
-date: 2024-08-28
-title: How to brand your startup so it isn't boring
+date: 2024-09-13
+title: How not to be boring
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -17,18 +17,17 @@ tags:
 - Growth
 crosspost:
 - Blog
+- Newsletter
 - Founders
 ---
 
-The world would be more fun if most startups hadn't undergone a personality vasectomy.
+The world would be more fun if most startups hadn't undergone a personality bypass. But, sadly, most software companies look and feel the same.
 
-Be it the human instinct for conformity, or the inevitable groupthink of similar people solving similar problems, the majority of the world's software companies feel samey.
+Founders have no end of excuses for this. It’s more important to build your MVP and validate it, or you need to find product-market fit and make money so you can survive.
 
-There's no shortage of excuses for this. First, you want to get the Minimum Viable Product built and validated. Next, you need to make money; you're going to fail without it.
+Creating a cool website won't help with either, right?
 
-Creating a pretty website won't help with either, right?
-
-Wrong.
+Wrong. Let me explain why.
 
 ## "What would stop _me_ from using this thing?"
 
@@ -36,93 +35,86 @@ This was the most important conversation [Tim](/community/profiles/27730) and I 
 
 It was going to be free on launch day, but we knew users would still be wary of wasting their time deploying a piece of software produced by a two-person startup. 
 
-Being open source helped. People could inspect the code for themselves, but we concluded the majority would turn away _at_ the website, the docs, and the readme before glancing at a line of code.
+Being open source helped because people could inspect the code, but we concluded the majority would turn away at the website, the docs, and the readme first.
 
 That's why we set out to create a website and brand that felt both unique and intentional, including a [public handbook](/handbook) that explained what we were doing, why, and how.
 
-As a counter example, an obviously templated or one-pager style website signals:
+An obviously templated or generic website signals:
 
-1. **The product may not be secure.** If a startup doesn't care about having their own website design, will they care about security? A lack of demonstrated competence shows a lack of attention to detail.
+1. **The team behind the product isn't very strong.** The product probably won't improve quickly, or become a "must use" tool. Those startup launches that everyone hears about? They've put energy into their appearance.
 
-2. **The team behind the product isn't very strong.** The product probably won't improve quickly, or become a "must use" tool. Those startup launches that everyone hears about? They've put energy into their appearance.
-
-3. **The product may not exist in a few more weeks.** Why should a potential customer invest time in a product if it's obvious the team making it threw its website together in a day, or ripped it from an existing template?
+2. **The product may not exist in a few more weeks.** Why should a potential customer invest time in a product if it's obvious the team making it threw its website together in a day, or ripped it from an existing template?
 
 So, as frustrating as it might be to spend extra time and effort on something "superficial" like a website, remember you're providing your product to human beings. Everyone judges books by their covers.
-
-## Your company needs to stand for something
-
-Take these two examples of missions for PostHog:
-
-* Open-source product analytics
-* We equip every developer to build successful products
-
-There is a trade-off between the two.
-
-The first is very clear. We started with it when this is what we had.
-
-As we became more well-known, and as we added lots of products into our platform, we shifted to the latter mission. It's a better reflection of _why_ our company exists – it's more than just a piece of software. 
-
-We introduced it because the company was getting larger, and the scope of what we were setting out to achieve had expanded. We now have 8+ products, and we produce a ton of content to help engineers build better products.
-
-Clarity and simplicity was useful in the early days, but sacrificing some of that clarity helped us stand for something broader that gives us more purpose.
 
 ## You need to create your brand for someone...
 
 One of the most important things we did was to [create an Ideal Customer Profile](/newsletter/ideal-customer-profile-framework).
 
-When we launched, we weren't sure quite how focused we'd need to be on engineers versus product managers. After launching, we realized that we could go all-in on engineers and technical founders, who now make up around 80% of our users. Our brand and product has become more oriented towards these users as a result.
+When we launched, we weren't sure whether to focus on engineers, product managers, or both. But we soon realized that we could go all-in on engineers and technical founders, who now make up around 80% of our users.
+
+Our brand and product has become more oriented towards these users as a result.
 
 ![posthog icp](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/icp/posthog-icp.png)
 
 Here are some ways we got more specific for this audience after we zeroed-in on it:
 
-* We added API examples to our website.
+* **We added code examples to the homepage**, such as how to track an event, or identify a user, and examples of what you can do with our API.
 
-* We added a "you'll hate PostHog if" section to our homepage, which calls out many pet hates that engineers have when trying to buy, install and use more traditionally-targeted software that they are made to implement.
+* **We made buying PostHog easy** – the "You'll hate PostHog if" section of our homepage calls out the pet hates of engineers when buying SaaS products.
 
-* We chose a more flexible pricing model – it's far more complex, but it's [much better value](/blog/analytics-pricing). We felt more technical people would be happier than non-technical people coping with more complexity to get a better deal. We want developers to be able to manage their spend with us across our eight products, not a "single price".
+* **We chose a transparent, flexible pricing model.** It's more complex, but also [much better value](/blog/analytics-pricing). We’ve found technical users tolerate a little more complexity if it helps them save money, and only pay for what they use.
 
-* In the product, we worked on [SQL access](/docs/hogql), so technical people could get to the underlying data and debug things.
+* **We focused on power user features**, such as [SQL access](/docs/hogql) and a [built-in data warehouse](/data-warehouse), so technical people can get to the underlying data and debug things.
 
-* We [redesigned our entire UX](/blog/posthog-as-a-dev-tool) to have higher information density, dark mode and more flexibility.
+* **We redesigned our entire UX** to have more flexibility, greater information density, and a dark mode. We want PostHog to [look like a dev tool](/blog/posthog-as-a-dev-tool), not an analytics product.
 
 ## ...but your brand must be a reflection of _you_
 
-We have often been impressed at the level of polish that others can achieve.
+We’re often impressed at the level of polish others achieve. But, quoting Cory, our lead designer:
 
-Quoting [Cory](/community/profiles/30200), our lead designer: "We aren't the best in the world at being polished, but we can be the best in the world at being ourselves".
+> "We aren't the best in the world at being polished, but we can be the best in the world at being ourselves".
 
 We sometimes make business decisions based on who we are, and what we want to do – not always what may, for example, generate the most revenue growth.
 
-For instance, initially we planned to have an open core model. We'd offer open-source software, and some people in big enterprises, would self-host and pay for the party for everyone else. 
+We chose this path because there was less competition for a self-hosted product. We could build a refined point solution that anyone could self-host, and not worry about competing with cloud-based competitors with over $100m in annual revenue.
 
-![you will hate posthog if](https://res.cloudinary.com/dmukukwp6/image/upload/you_will_hate_posthog_683b1bf3ab.png)
+But we soon realized we just love shipping new features. After our first hackathon, we wound up with session replay – i.e. a new feature big enough to be its own product. It took off and this resulted in our current multi-product approach.
 
-We felt this would work as there was no real competition, whereas in cloud we had lots of competitors with over $100m in annual revenue. However, we simply love shipping new features, and after our first hackathon, we wound up with session replay (i.e. a new feature big enough to be its own product), which took off, and this resulted in a multi-product approach. 
+Eventually, we removed our paid, self-hosted offering entirely, and went all in on multi-product in cloud, and "getting in first" with early-stage companies, not enterprises.
 
-As a result, we could compete in cloud by being way wider than everyone else. Eventually, we removed our paid, self-hosted offering entirely, and went all in on multi-product in cloud, focused on "getting in first" with earlier-stage companies instead of the largest enterprises. Our motivation, ambition and growth all took off as a result. 
+We kept the open-source product, though we stress it's for hobbyists because it's cheaper and easier for companies to have us host it for them.
 
-And yes we kept the open-source product, though we stress it's for hobbyists because it's cheaper and easier for companies to have us host if for them.
+This strategy works because:
+
+1. Being broad lets us compete by being way wider than everyone else.
+2. Being broad also means we can charge less by cross-selling multiple products.
+3. It reflects who we are – passionate engineers who love shipping new products.
+
+Had we stuck with the original plan, we’d have lost interest because we weren’t doing what we enjoy. We apply the same mindset to our brand.
+
+If you don’t love it, why will anyone else?
 
 ## Your brand isn't just your website...
 
-...it's how your company is experienced by others. Your _company_ is your product and:
+It's how your company is experienced by others. Your company is the product and:
 
-* How much you invest in each function in your company relative to each other.
-* What you look for when you hire people, and it's the process you use to hire with.
-* How you decide what to build. Do you ship features early, or do you focus on meeting the needs of your largest customer with every new thing?
-* How much you are design vs. engineering vs. product vs. sales vs. marketing-led. How many people are in each function, but also your processes for deciding what to work done.
-* The frequency and style with which you email your customers, for marketing, product updates or your activation flow.
-* The kind of people you hire into customer success or sales.
-* The background experience of those in your marketing team.
-* The tone of voice on your website.
-* Who is on your board.
-* How your pricing works.
-* How your social media works.
-* How helpful you are to random founders that message you.
-* The marketing channels you pick.
-* What you talk about in your blog. I'm writing this piece for brand reasons (transparency / equipping developers with knowledge to build successful products), nothing else. I don't care or try to generate conversions from this post, I just want to leave an impression on people. And it's who I am – I'm writing this to pass the time on a long plane journey.
+- How much you invest in each function in your company relative to each other.
+- What [you look for when you hire people](https://newsletter.posthog.com/p/hiring-and-managing-cracked-engineers), and the process you use to hire them.
+- [How you decide what to build](https://newsletter.posthog.com/p/how-we-decide-what-to-build). Do you ship features early, or do you focus on meeting the needs of your largest customer with every new thing?
+- The degree to which you’re led by design, engineering product, sales, or marketing. How many people are in each function, but also your processes for deciding what to work on.
+- The frequency and style with which you [email your customers](https://posthog.com/blog/how-we-built-email-onboarding), for marketing, product updates or your activation flow.
+- The kind of people you hire into customer success or sales.
+- The background and experience of those in your marketing team.
+- The tone of voice on your website.
+- Who is on your board.
+- [How your pricing works](https://newsletter.posthog.com/p/10-essential-lessons-about-saas-product).
+- How your social media works.
+- How helpful you are to random founders that message you.
+- The marketing channels you pick.
+- What you talk about in your blog. I'm writing this piece for brand reasons –transparency / equipping developers with knowledge to build successful products. I don’t care if it converts people, I just want to leave an impression. And it's who I am – I'm writing this to pass the time on a long flight.
+
+Everything matters.
 
 ## You can't 80:20 everything
 
@@ -131,6 +123,8 @@ A lot of design or brand work has an _increasing_ marginal return. This is becau
 So, if you're serious, go nuts on your brand. Go weirdly hard.
 
 To give you an example, we built a [merch store](/merch):
+
+![merch store](https://res.cloudinary.com/dmukukwp6/image/upload/merch_store_a97f57c226.png)
 
 * We started with me emailing users for their address and size, ordering merch and having it delivered to my house, and me then posting it internationally to them. [Do things that don't scale](https://paulgraham.com/ds.html).
 
@@ -146,15 +140,15 @@ Who knows what happens next!
 
 This single thing is easy enough to copy, but it's just one activity among hundreds that builds a brand.
 
-![merch store](https://res.cloudinary.com/dmukukwp6/image/upload/merch_store_a97f57c226.png)
-
 ## Doesn't this imply doing everything to a really high standard and a ridiculous workload?
 
-Yes. You can be iterative with it, though. Not everything was amazing on day one, but we keep improving and tweaking everything over time.
+Yes. You can be iterative with it, though.
+
+Not everything was amazing on day one, but we keep improving and tweaking everything over time.
 
 So get out there, and be bold
 
-If your brand isn't going to turn off some people that _might_ have bought your product, then it isn't strong enough to stand out.
+If your brand isn't going to turn off some people that might have bought your product, then it isn't strong enough to stand out.
 
 Engage your best customers with your brand, and put off your worst ones.
 

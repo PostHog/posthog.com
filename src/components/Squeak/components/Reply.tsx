@@ -71,18 +71,43 @@ const AIDisclaimerMod = ({ opName, replyID, mutate }) => {
     )
 }
 
-const AIDisclaimer = ({ replyID, mutate, topic, isAuthor }) => {
+const feedbackOptions = [
+    {
+        label: 'Yes, mark as solution',
+        helpful: true,
+    },
+    {
+        label: "Not the answer I'm looking for",
+        helpful: false,
+    },
+    {
+        label: 'I think this is a bug',
+        helpful: false,
+    },
+    {
+        label: 'My question is more nuanced',
+        helpful: false,
+    },
+    {
+        label: 'Answer is wrong',
+        helpful: false,
+    },
+]
+
+const AIDisclaimer = ({ replyID, mutate, topic, isAuthor, confidence }) => {
     const posthog = usePostHog()
     const { getJwt } = useUser()
     const { handleResolve } = useContext(CurrentQuestionContext)
     const [helpful, setHelpful] = useState<boolean | null>(null)
 
-    const handleHelpful = async (helpful: boolean) => {
+    const handleHelpful = async (helpful: boolean, feedback: string) => {
         try {
             setHelpful(helpful)
             posthog?.capture('Community AI reply', {
                 replyID,
                 helpful,
+                confidence,
+                feedback,
                 topic: {
                     label: topic?.attributes?.label,
                     id: topic?.id,
@@ -136,20 +161,22 @@ const AIDisclaimer = ({ replyID, mutate, topic, isAuthor }) => {
                 </p>
             )}
             {helpful === null && (
-                <div className="flex items-center space-x-2 mt-2">
-                    <CallToAction disabled={!isAuthor} size="sm" type="secondary" onClick={() => handleHelpful(true)}>
-                        <span className="flex space-x-1 items-center">
-                            <IconThumbsUp className="size-4 text-green flex-shrink-0" />
-                            <span>Yes, mark as solution</span>
-                        </span>
-                    </CallToAction>
-                    <CallToAction disabled={!isAuthor} size="sm" type="secondary" onClick={() => handleHelpful(false)}>
-                        <span className="flex space-x-1 items-center">
-                            <IconThumbsDown className="size-4 text-red flex-shrink-0" />
-                            <span>No, request human review</span>
-                        </span>
-                    </CallToAction>
-                </div>
+                <ul className="flex items-center space-x-2 list-none p-0 flex-wrap -ml-2">
+                    {feedbackOptions.map(({ label, helpful }) => {
+                        return (
+                            <li className="ml-2 mt-2" key={label}>
+                                <button
+                                    className={`click px-3 py-1 bg-white dark:bg-dark rounded-full text-sm font-semibold border ${
+                                        helpful ? 'border-green' : 'border-red'
+                                    }`}
+                                    onClick={() => handleHelpful(helpful, label)}
+                                >
+                                    {label}
+                                </button>
+                            </li>
+                        )
+                    })}
+                </ul>
             )}
         </div>
     )
@@ -158,7 +185,7 @@ const AIDisclaimer = ({ replyID, mutate, topic, isAuthor }) => {
 export default function Reply({ reply, badgeText }: ReplyProps) {
     const {
         id,
-        attributes: { body, createdAt, profile, publishedAt },
+        attributes: { body, createdAt, profile, publishedAt, meta },
     } = reply
 
     const {
@@ -282,7 +309,13 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                             mutate={mutate}
                         />
                     ) : (
-                        <AIDisclaimer isAuthor={isAuthor} topic={topics?.data?.[0]} replyID={id} mutate={mutate} />
+                        <AIDisclaimer
+                            isAuthor={isAuthor}
+                            topic={topics?.data?.[0]}
+                            replyID={id}
+                            mutate={mutate}
+                            confidence={meta?.confidence}
+                        />
                     ))}
                 <div className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}>
                     {reply?.attributes?.helpful === false && (

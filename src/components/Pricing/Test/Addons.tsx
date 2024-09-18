@@ -5,6 +5,7 @@ import useProducts from '../Products'
 import * as Icons from '@posthog/icons'
 import { PricingTiers } from '../Plans'
 import { AnimatePresence, motion } from 'framer-motion'
+import Link from 'components/Link'
 
 const Addon = ({ name, icon_key, description, plans, unit, type, ...other }) => {
     const [showBreakdown, setShowBreakdown] = useState(false)
@@ -96,6 +97,7 @@ export const Addons = (props) => {
                     ))}
                 </div>
             </div>
+            <Link to="/addons" className="font-bold">Explore add-ons</Link>
         </section>
     )
 }

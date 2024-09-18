@@ -68,7 +68,7 @@ export default function Select({
                     {placeholder && !!activeOption && (
                         <label className="text-sm opacity-60 -mb-0.5 block">{placeholder}</label>
                     )}
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between space-x-2">
                         <span>{activeOption?.label || activeOption?.value || placeholder}</span>
                         <Chevron className="w-2.5" />
                     </div>
