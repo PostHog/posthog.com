@@ -1271,6 +1271,13 @@ export const docsMenu = {
                             url: '/docs/libraries/bubble',
                         },
                         {
+                            name: 'Capacitor',
+                            url: '/docs/libraries/capacitor',
+                            badge: {
+                                title: '3rd party',
+                            },
+                        },
+                        {
                             name: 'Django',
                             url: '/docs/libraries/django',
                         },
