@@ -33,8 +33,8 @@ Swap with a teammate in advance! Find a volunteer by asking in Slack, then use P
 
 Each engineering team has its own list of tickets in Zendesk:
 
-- [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated tickets only)
-- [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027)
+- [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated only)
+- [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027) (escalated only)
 - [Feature Success](https://posthoghelp.zendesk.com/agent/filters/25210600744731) (escalated only)
 - [Replay](https://posthoghelp.zendesk.com/agent/filters/25210723706907) (escalated only)
 - [CDP](https://posthoghelp.zendesk.com/agent/filters/28134703633179) (escalated only)
