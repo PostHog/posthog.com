@@ -67,9 +67,20 @@ The followed types and operators are allowed:
 
 ## FAQ
 
-### Q: How can I filter out events from unwanted hosts when using the JavaScript Web SDK while still retaining events from other SDKs?
+### Q: How can I filter out events from unwanted hosts?
 
-If you enable the option to `Keep event if any of the filtered properties are undefined?`, any events where the `$host` property is undefined will not be filtered out.
+You could use the following config:
+```
+[
+  {
+    "property": "$host",
+    "type": "string",
+    "operator": "is",
+    "value": "posthog.com"
+  }
+]
+```
+Make sure to enable the `Keep event if any of the filtered properties are undefined?` option, otherwise, any events where the `$host` property is undefined will be filtered out.
 
 <CommunityMaintained />
 
