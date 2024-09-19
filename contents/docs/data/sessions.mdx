@@ -150,6 +150,6 @@ Custom session IDs must meet the following requirements:
 * The timestamp part of the UUIDv7 must be equal to or before the timestamp of the first event in the session
 * The timestamp part of the UUIDv7 plus 24 hours must be after the timestamp of the last event in the session
 
-Any events that do not meet these requirements will not be included in session aggregations.
+Any events with session IDs that do not meet these requirements are not included in session aggregations.
 
 Our [JavaScript Web library](/docs/libraries/js) and mobile SDKs (Android, iOS, React Native, and Flutter) automatically create session IDs for you, but if you override them, you also must ensure they meet these requirements.
