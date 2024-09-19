@@ -145,7 +145,7 @@ Our server-side SDKs do not send `$session_id` by default. If you want to use se
 
 Custom session IDs must meet the following requirements:
 * Must be consistent across events in the same session
-* Must not be reused by a different user or for a different session
+* Must not be reused by a different user or session
 * Must be a valid UUIDv7
 * The timestamp part of the UUIDv7 must be equal to or before the timestamp of the first event in the session
 * The timestamp part of the UUIDv7 plus 24 hours must be after the timestamp of the last event in the session
