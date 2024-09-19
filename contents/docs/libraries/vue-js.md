@@ -273,6 +273,51 @@ export default new Router({
 });
 ```
 
+## Capturing pageleaves
+
+Similar to pageviews, you need to manually capture pageleaves in a Vue single-page app. 
+
+This starts by setting `capture_pageleave` to `false` in the PostHog initialization config to ensure you don’t double-capture pageleaves. 
+
+```js
+// In the file where you initialize PostHog
+posthog.init(
+      "<ph_project_api_key>",
+      {
+        api_host: "<ph_client_api_host>",
+        person_profiles: 'identified_only',
+        capture_pageview: false,
+        capture_pageleave: false
+      }
+);
+```
+
+**Vue 3.x:** 
+
+You can then use the same `router.afterEach` hook to capture pageleaves. The difference is that you need to manually set the `$current_url` and `path` properties using the `from` object.
+
+```js
+import { createApp, nextTick } from 'vue'
+import App from './App.vue'
+import router from './router'
+import posthogPlugin from '../plugins/posthog';
+
+
+const app = createApp(App);
+app.use(posthogPlugin)
+.use(router)
+.mount('#app');
+
+router.afterEach((to, from, failure) => {
+  if (!failure) {
+    nextTick(() => {
+      app.config.globalProperties.$posthog.capture('$pageleave', { $current_url: window.location.host + from.fullPath, path: from.fullPath });
+      app.config.globalProperties.$posthog.capture('$pageview', { path: to.fullPath });
+    });
+  }
+});
+```
+
 ## Capturing events
 
 Here’s a simple example of using PostHog to capture a barebones login button. 
