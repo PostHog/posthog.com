@@ -44,6 +44,22 @@ If a customer has an annual plan but doesn't _pay_ the whole year up front, we u
 
 > It's worth being aware that fast growing startups, even if they have the budget to pay annually, will probably prefer to pay quarterly or even monthly as flexibility may be a priority for them over saving 20%.
 
+### Self-serve discounts
+
+We also offer a way for customers to receive discounts on their usage without talking to sales or being on an Enterprise plan. In PostHog, if a customer meets certain criteria, they will see a banner on their billing page with a call-to-action (CTA) to "buy credits". The form they fill out will be auto-populated with an estimated number of credits based on their last 3 months of usage, but they can adjust this value as needed. They will have the option to pay with the card on file or to receive an invoice. Credits will be applied to their account once the invoice is paid.
+
+Requirements for self-serve discounts:
+- 3 or more paid invoices
+- Average of $500 or more across the last three invoices
+- No open invoices
+- Not currently on the startup plan, a legacy plan, or having existing credits
+
+Additional notes on self-serve discounts:
+- The minimum purchase is $500/month, which equates to $6,000 upfront for the year.
+- For credit purchases between $6,000 and $20,000, the discount is 10% off. Above $20,000 follows the standard volume discount structure above.
+- Instead of providing all credits upfront, we apply 1/12 of the credits each month for the next 12 months. These credits do not expire for 1 year after they've been applied. 
+- If a customer uses all credits in a month, they will be billed for extra usage at the standard rate.
+
 ### Nonprofit discounts
 
 We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing. 
