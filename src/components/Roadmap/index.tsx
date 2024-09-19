@@ -200,8 +200,8 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
         <button
             onClick={onClick}
             className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${active
-                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-light dark:border-dark'
-                    : 'border-transparent hover:border-light dark:hover:border-dark hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark'
+                ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-light dark:border-dark'
+                : 'border-transparent hover:border-light dark:hover:border-dark hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark'
                 } ${className}`}
         >
             {children}
@@ -328,107 +328,115 @@ export default function Roadmap() {
                         />
                     )}
                 </div>
-                <input
-                    onChange={(e) => setRoadmapSearch(e.target.value)}
-                    placeholder="Search this page..."
-                    className="w-full p-2 rounded-md border border-border dark:bg-accent-dark dark:border-dark text-primary dark:text-primary-dark"
-                />
-                {sortBy === 'team' && teams.length > 0 && (
-                    <Slider activeIndex={teams.indexOf(selectedTeam)} className="whitespace-nowrap space-x-1.5 mt-4">
-                        {['All teams', ...teams].map((team) => {
-                            return (
-                                <button
-                                    key={team}
-                                    onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
-                                    className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${selectedTeam === team
-                                            ? 'bg-accent dark:bg-accent-dark font-bold'
-                                            : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
-                                        }`}
-                                >
-                                    {team.replace(' Team', '')}
-                                </button>
-                            )
-                        })}
-                    </Slider>
-                )}
-                {isLoading ? (
-                    <Skeleton />
-                ) : (
-                    <ul className="m-0 p-0 list-none mt-10 space-y-10">
-                        {sortBy === 'popular' || sortBy === 'latest' ? (
-                            [...roadmaps]
-                                .sort((a, b) => {
-                                    return sortBy === 'popular'
-                                        ? b.attributes.likeCount - a.attributes.likeCount
-                                        : b.attributes.createdAt - a.attributes.createdAt
-                                })
-                                .map((roadmap) => {
+
+                <div className="grid grid-cols-2 gap-4">
+                    <div>
+                        <input
+                            onChange={(e) => setRoadmapSearch(e.target.value)}
+                            placeholder="Search this page..."
+                            className="w-full p-2 rounded-md border border-border dark:bg-accent-dark dark:border-dark text-primary dark:text-primary-dark"
+                        />
+                        {sortBy === 'team' && teams.length > 0 && (
+                            <Slider activeIndex={teams.indexOf(selectedTeam)} className="whitespace-nowrap space-x-1.5 mt-4">
+                                {['All teams', ...teams].map((team) => {
                                     return (
-                                        <li className="" key={roadmap.id}>
-                                            <Feature
-                                                id={roadmap.id}
-                                                {...roadmap.attributes}
-                                                onLike={mutate}
-                                                onUpdate={mutate}
-                                            />
-                                        </li>
+                                        <button
+                                            key={team}
+                                            onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
+                                            className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${selectedTeam === team
+                                                ? 'bg-accent dark:bg-accent-dark font-bold'
+                                                : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
+                                                }`}
+                                        >
+                                            {team.replace(' Team', '')}
+                                        </button>
                                     )
-                                })
+                                })}
+                            </Slider>
+                        )}
+                        {isLoading ? (
+                            <Skeleton />
                         ) : (
-                            <ul className="m-0 p-0 list-none mt-6 space-y-10">
-                                {teams
-                                    .filter((team) => selectedTeam === 'All teams' || team === selectedTeam)
-                                    .map((team) => {
-                                        const roadmaps = roadmapsGroupedByTeam[team]
-                                        return (
-                                            <li className="relative" key={team}>
-                                                <h4 className="text-lg m-0 mb-6 pr-2 inline-flex items-center bg-light dark:bg-dark after:-z-10 after:absolute after:w-full after:h-[1px] after:bg-border after:dark:bg-border-dark after:translate-y-[2px]">
-                                                    {team}
-                                                </h4>
-                                                <ul className="m-0 p-0 list-none space-y-8">
-                                                    {[...roadmaps]
-                                                        .sort((a, b) => b.attributes.likeCount - a.attributes.likeCount)
-                                                        .map((roadmap) => {
-                                                            return (
-                                                                <li key={roadmap.id}>
-                                                                    <Feature
-                                                                        id={roadmap.id}
-                                                                        {...roadmap.attributes}
-                                                                        onLike={mutate}
-                                                                        onUpdate={mutate}
-                                                                    />
-                                                                </li>
-                                                            )
-                                                        })}
-                                                </ul>
-                                            </li>
-                                        )
-                                    })}
+                            <ul className="m-0 p-0 list-none mt-10 space-y-10">
+                                {sortBy === 'popular' || sortBy === 'latest' ? (
+                                    [...roadmaps]
+                                        .sort((a, b) => {
+                                            return sortBy === 'popular'
+                                                ? b.attributes.likeCount - a.attributes.likeCount
+                                                : b.attributes.createdAt - a.attributes.createdAt
+                                        })
+                                        .map((roadmap) => {
+                                            return (
+                                                <li className="" key={roadmap.id}>
+                                                    <Feature
+                                                        id={roadmap.id}
+                                                        {...roadmap.attributes}
+                                                        onLike={mutate}
+                                                        onUpdate={mutate}
+                                                    />
+                                                </li>
+                                            )
+                                        })
+                                ) : (
+                                    <ul className="m-0 p-0 list-none mt-6 space-y-10">
+                                        {teams
+                                            .filter((team) => selectedTeam === 'All teams' || team === selectedTeam)
+                                            .map((team) => {
+                                                const roadmaps = roadmapsGroupedByTeam[team]
+                                                return (
+                                                    <li className="relative" key={team}>
+                                                        <h4 className="text-lg m-0 mb-6 pr-2 inline-flex items-center bg-light dark:bg-dark after:-z-10 after:absolute after:w-full after:h-[1px] after:bg-border after:dark:bg-border-dark after:translate-y-[2px]">
+                                                            {team}
+                                                        </h4>
+                                                        <ul className="m-0 p-0 list-none space-y-8">
+                                                            {[...roadmaps]
+                                                                .sort((a, b) => b.attributes.likeCount - a.attributes.likeCount)
+                                                                .map((roadmap) => {
+                                                                    return (
+                                                                        <li key={roadmap.id}>
+                                                                            <Feature
+                                                                                id={roadmap.id}
+                                                                                {...roadmap.attributes}
+                                                                                onLike={mutate}
+                                                                                onUpdate={mutate}
+                                                                            />
+                                                                        </li>
+                                                                    )
+                                                                })}
+                                                        </ul>
+                                                    </li>
+                                                )
+                                            })}
+                                    </ul>
+                                )}
+
+                                <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark px-8 py-8 rounded-md">
+                                    <h3 className="m-0 mb-2 text-lg">Request another feature</h3>
+                                    <p className="mb-3">
+                                        We add features to our roadmap based on customer feedback shared{' '}
+                                        <Link to="https://github.com/posthog/posthog/issues" external>
+                                            in our GitHub repo
+                                        </Link>
+                                        . We'd love to have you share your best ideas there!
+                                    </p>
+                                    <p className="mb-0">
+                                        <CallToAction
+                                            size="sm"
+                                            type="secondary"
+                                            to="https://github.com/posthog/posthog/issues"
+                                            externalNoIcon
+                                        >
+                                            Request a feature
+                                        </CallToAction>
+                                    </p>
+                                </div>
                             </ul>
                         )}
-
-                        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark px-8 py-8 rounded-md">
-                            <h3 className="m-0 mb-2 text-lg">Request another feature</h3>
-                            <p className="mb-3">
-                                We add features to our roadmap based on customer feedback shared{' '}
-                                <Link to="https://github.com/posthog/posthog/issues" external>
-                                    in our GitHub repo
-                                </Link>
-                                . We'd love to have you share your best ideas there!
-                            </p>
-                            <p className="mb-0">
-                                <CallToAction
-                                    size="sm"
-                                    type="secondary"
-                                    to="https://github.com/posthog/posthog/issues"
-                                    externalNoIcon
-                                >
-                                    Request a feature
-                                </CallToAction>
-                            </p>
-                        </div>
-                    </ul>
-                )}
+                    </div>
+                    <div>
+                        column 2
+                    </div>
+                </div>
             </section>
         </CommunityLayout>
     )
