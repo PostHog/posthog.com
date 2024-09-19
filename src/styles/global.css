@@ -1388,6 +1388,10 @@ iframe[src*='youtube-nocookie.com'] {
     }
     p {
         @apply !min-h-0 mb-4;
+
+        &:empty {
+            @apply hidden;
+        }
     }
     ul {
         @apply mb-4;
