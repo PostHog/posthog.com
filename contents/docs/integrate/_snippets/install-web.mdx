@@ -40,6 +40,8 @@ If you're using React or Next.js, checkout our [React SDK](/docs/libraries/react
 
 By default, the PostHog JS library will only load the core functionality, lazy-loading extensions such as Surveys or the Session Replay 'recorder' when needed. This can cause issues if you have a Content Security Policy (CSP) that blocks inline scripts or if you want to optimize your bundle at build time to ensure all dependencies are ready immediately. In addition environments like the Chrome Extension store will reject code that loads remote code. To solve this issue we have multiple import options available.
 
+> Please note - with any of the `no-external` options, the Toolbar will be unavailable as this is only possible as a runtime dependency loaded directly from `us.posthog.com` 
+
 ```js-web
 // No external code loading possible (this disables all extensions such as Replay, Surveys, Exceptions etc.)
 import posthog from 'posthog-js/dist/module.no-external'
