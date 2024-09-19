@@ -337,7 +337,7 @@ export default function Roadmap() {
             title="Roadmap"
             fullWidthContent
         >
-            <section>
+            <section className="@container">
                 <div className="relative">
                     <div className="flex justify-between items-center">
                         <div className="flex gap-4 items-center w-full justify-between">
@@ -360,7 +360,6 @@ export default function Roadmap() {
                         </span>
                     </p>
 
-
                     {isModerator && adding && (
                         <RoadmapForm
                             status="under-consideration"
@@ -372,7 +371,7 @@ export default function Roadmap() {
                     )}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 lg:gap-8 xl:gap-12">
+                <div className="grid @4xl:grid-cols-2 gap-4 lg:gap-8 xl:gap-12">
                     <div>
 
                         <div className="mb-6">
