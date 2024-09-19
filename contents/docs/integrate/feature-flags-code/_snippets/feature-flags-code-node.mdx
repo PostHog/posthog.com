@@ -101,3 +101,38 @@ const client = new PostHog('<ph_project_api_key>', {
     }
 )
 ```
+
+### Error handling
+
+When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
+
+```js
+async function handleFeatureFlag(client, flagKey, distinctId) {
+    try {
+        const isEnabled = await client.isFeatureEnabled(flagKey, distinctId);
+        console.log(`Feature flag '${flagKey}' for user '${distinctId}' is ${isEnabled ? 'enabled' : 'disabled'}`);
+        return isEnabled;
+    } catch (error) {
+        console.error(`Error fetching feature flag '${flagKey}': ${error.message}`);
+        // Optionally, you can return a default value or throw the error
+        // return false; // Default to disabled
+        throw error;
+    }
+}
+
+// Usage example
+try {
+    const flagEnabled = await handleFeatureFlag(client, 'new-feature', 'user-123');
+    if (flagEnabled) {
+        // Implement new feature logic
+    } else {
+        // Implement old feature logic
+    }
+} catch (error) {
+    // Handle the error at a higher level
+    console.error('Feature flag check failed, using default behavior');
+    // Implement fallback logic
+}
+```
+
+
