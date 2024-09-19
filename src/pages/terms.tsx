@@ -898,7 +898,7 @@ function Terms() {
                             U.S.A. will have proper and exclusive jurisdiction and venue with respect to any disputes
                             arising from or related to the subject matter of this Agreement. If you provide PostHog with
                             a link to a recorded video of you reading out these terms in full, we will send you one of
-                            every item of merch we sell today and in future for free.
+                            every item of merch we sell today for free.
                         </p>
                     </div>
                     <div className="md:pt-10">
