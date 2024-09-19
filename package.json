@@ -152,6 +152,7 @@
         "react-window": "^1.8.10",
         "redoc": "^2.0.0-rc.62",
         "redux": "^4.0.5",
+        "rehype-raw": "^7.0.0",
         "rehype-sanitize": "^5.0.1",
         "remark-gfm": "^3.0.1",
         "request": "^2.88.2",
