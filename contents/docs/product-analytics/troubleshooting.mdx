@@ -119,7 +119,7 @@ Once you have confirmed there is an issue with event ingestion, you can [report 
 
 ## How do I speed up my insights and queries?
 
-PostHog dedicates huge amounts of infrastructure to running your insight and queries. We also use a specialised database called an OLAP database (Clickhouse in our case) which is optimized for running analytics queries quickly.
+PostHog dedicates huge amounts of infrastructure to running your insight and queries. We also use a specialized database called an OLAP database (Clickhouse in our case) which is optimized for running analytics queries quickly.
 
 Sometimes, insights and queries can still be slow. Here are some things you can do to speed them up:
 
@@ -127,9 +127,9 @@ Sometimes, insights and queries can still be slow. Here are some things you can 
 
 Filtering by "All events" is useful, but is also much slower than filtering by a specific event. Try using a specific autocaptured or custom event instead.
 
-### 2. Reduce the time period you're filtering on
+### 2. Reduce the period you're filtering on
 
-A smaller time period means less data to process. You can always adjust the time period later if you need to.
+A smaller time period means less data to process. You can always adjust the period later if you need to.
 
 ### 3. Change the person properties mode
 
@@ -137,9 +137,9 @@ PostHog provides multiple modes for the behavior of person property filters. You
 
 ![Person properties mode](https://res.cloudinary.com/dmukukwp6/image/upload/v1726779369/posthog.com/contents/CleanShot_2024-09-19_at_13.53.25_2x.png)
 
-We recommend using properties "Use person properties from the time of the event," but "Use person IDs and person properties from the time of the event" is even faster if needed. The tradeoff is that the latter mode creates inaccurate funnels and unique user counts.
+We recommend using "Use person properties from the time of the event," but "Use person IDs and person properties from the time of the event" is even faster if needed. The tradeoff is that the latter mode creates inaccurate funnels and unique user counts.
 
-You can find more details about how these mode works in our doc on [how querying works](/docs/how-posthog-works/queries#filtering-on-person-properties).
+You can find more details about how these modes works in our doc on [how querying works](/docs/how-posthog-works/queries#filtering-on-person-properties).
 
 ### 4. Use sampling
 
