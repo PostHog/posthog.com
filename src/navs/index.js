@@ -1192,6 +1192,13 @@ export const docsMenu = {
                             },
                         },
                         {
+                            name: 'Capacitor',
+                            url: '/docs/libraries/capacitor',
+                            badge: {
+                                title: '3rd party',
+                            },
+                        },
+                        {
                             name: 'Elixir',
                             url: '/docs/libraries/elixir',
                         },
@@ -1273,13 +1280,6 @@ export const docsMenu = {
                         {
                             name: 'Bubble',
                             url: '/docs/libraries/bubble',
-                        },
-                        {
-                            name: 'Capacitor',
-                            url: '/docs/libraries/capacitor',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Django',
