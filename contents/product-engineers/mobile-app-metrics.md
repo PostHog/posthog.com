@@ -20,7 +20,7 @@ crosspost:
 
 **What it is:** The number of times your app has been downloaded.
 
-**Why it's useful:** Shows you how well your marketing efforts are doing.
+**Why it's useful:** Provides a baseline metric for user acquisition and helps measure the effectiveness of marketing campaigns.
 
 **Questions to ask:**
 - How does the number of downloads vary across different platforms (iOS, Android, etc.)?
@@ -36,11 +36,13 @@ crosspost:
     alt="Number of app downloads"
 />
 
-### 2. Home screen bounce rate
+### 2. App bounce rate
 
-**What it is:** The percentage of users who view your home screen but don't perform any actions.
+**What it is:** The percentage of users who view your home screen but don't view a second screen.
 
 **Why it's useful:** Enables you to learn if your welcome messaging is resonating with news users.
+
+**Good benchmark:** Below 9% is considered good – [Source](https://contentsquare.com/blog/app-metrics/)
 
 **Questions to ask:**
 - How does the bounce rate correlate with downloads from different marketing channels?
@@ -62,6 +64,8 @@ crosspost:
 
 **Why it's useful:** Indicates if users are comfortable with your app and the permissions its requesting.
 
+**Good benchmark:** While there are no publicly available benchmarks, between 60-80% is considered good.
+
 **Questions to ask:**
 - Which permissions are most commonly granted, and which are least likely to be granted?
 - How does the number correlate with user activation and retention?
@@ -78,9 +82,11 @@ crosspost:
 
 ### 4. Activation rate
 
-**What it is:** The percentage of users who reach the "aha" moment and experience the app's core value.
+**What it is:** The percentage of users who reach the "aha" moment and experience your app's core value.
 
 **Why it's useful:** Measures how effective your app's onboarding and messaging is.
+
+**Good benchmark:** Above 8% – [Source](https://www.businessofapps.com/data/app-activation-rates/)
 
 **Questions to ask:**
 - Where are the largest drop-offs in the onboarding funnel before activation?
@@ -101,6 +107,8 @@ crosspost:
 **What it is:** The average time it takes for a user to reach activation.
 
 **Why it's useful:** Gives you a sense of how long it takes for a user to get value from your app.
+
+**Good benchmark:** Varies depending on the type of app.
 
 **Questions to ask:**
 - What are common characteristics of users who take shorter or longer to activate?
@@ -124,6 +132,8 @@ crosspost:
 
 **Why it's useful:** Shows you if your app has successfully created a habit among your users.
 
+**Good benchmark** Varies depending on the type of app.
+
 **Questions to ask:**
 - What percentage of users have interacted with a specific feature at least 3 times in the last 7 days? 
 - What are the characteristics of the users who adopt new features versus those who don't?
@@ -144,6 +154,8 @@ crosspost:
 
 **Why it's useful:** Highlights user loyalty and the app's ability to create daily habits.
 
+**Good benchmark:** 20% is good, while above 25% is considered great – [Source](https://www.businessofapps.com/guide/mobile-app-retention/)
+
 **Questions to ask:**
 - How does this ratio change over time, and what factors might be influencing this trend?
 - How does your DAU/MAU ratio compare to [industry standards](/tutorials/dau-mau-ratio#what-is-a-good-daumau-ratio)?
@@ -160,9 +172,11 @@ crosspost:
 
 ### 8. NPS score
 
-**What it is:** [Net Promoter Score (NPS)](/product-engineers/nps-vs-csat-vs-ces#what-is-nps) measures how passionate users are about your product. You ask them how likely they are to recommend your product to a friend or coworker and they respond on a scale from 0 (not likely at all) to 10 (extremely likely).
+**What it is:** [Net Promoter Score (NPS)](/product-engineers/nps-vs-csat-vs-ces#what-is-nps) measures how passionate users are about your product. You ask them how likely they are to recommend your product to a friend or coworker and they respond on a scale from 0 (not likely at all) to 10 (extremely likely). Your score is the percentage of promoters (people who respond with 9 or 10) minus the percentage of detractors (people who respond with 0-6).
 
 **Why it's useful:** NPS is a strong indicator of product-market fit. It's also a leading indicator of future revenue.
+
+**Good benchmark:**  Anything above 0 is good, above 20 is great, and above 50 is amazing – [Source](/product-engineers/nps-vs-csat-vs-ces#what-is-a-good-nps-score-for-saas)
 
 **Questions to ask:**
 - How does NPS score trend over time, especially after major updates or feature releases?
@@ -177,6 +191,48 @@ crosspost:
     alt="NPS score"
 />
 
+### 9. In-app response rate
+
+**What it is:** The percentage of users who respond to your in-app messages, surveys, or review requests.
+
+**Why it's useful:** Indicates how engaged and vested users are with using your app.
+
+**Good benchmark:** 28% for in-app prompts, 13% for in-app surveys – [Source](https://www.businessofapps.com/data/in-app-response-rates/)
+
+**Question to ask:**
+- How does the timing and frequency of in-app prompts affect response rates?
+- Is there a correlation between response rates and user satisfaction or retention?
+- What is the optimal length for in-app surveys to maximize completion rates?
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1726753147/posthog.com/contents/Screenshot_2024-09-19_at_2.38.01_PM.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1726753147/posthog.com/contents/Screenshot_2024-09-19_at_2.38.08_PM.png"
+    classes="rounded"
+    alt="In app response rate"
+/>
+
+### 10. Average session length
+
+**What it is:** The average length of time a user spends in your app during a single session.
+
+**Why it's useful:** Helps you understand how long users are engaging with your app and identify opportunities to keep them engaged longer.
+
+**Good benchmark:** Varies depending on app type. 443 seconds for entertainment apps, 69 seconds for business apps, and 64 seconds for tool apps – [Source](https://www.businessofapps.com/data/app-engagement-rates/)
+
+**Questions to ask:**
+- Is there a correlation between session length and user engagement or retention?
+- How does the average session length vary across different user segments (e.g., new vs. long-term users)?
+- What is the impact of push notifications or email campaigns on session length?
+
+**Insight type:** [SQL](/docs/product-analytics/sql)
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1726753843/posthog.com/contents/Screenshot_2024-09-19_at_2.50.25_PM.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1726753843/posthog.com/contents/Screenshot_2024-09-19_at_2.50.32_PM.png"
+    classes="rounded"
+    alt="Average session length"
+/>
+
 ## User Retention Metrics
 
 ### 11. N-day retention rate
@@ -184,6 +240,8 @@ crosspost:
 **What it is:** The percentage of users who return to your app after their first visit within a specific time frame (e.g., 1-day, 7-day, 30-day retention).
 
 **Why it's useful:** Helps you understand how well your app keeps users engaged over time.
+
+**Good benchmark:** Above 20% for 1-day retention, 14% for 3-day, and 10% for 7-day – [Source](https://www.appsflyer.com/resources/reports/app-retention-benchmarks/)
 
 **Questions to ask:**
 - What features or actions are associated with higher retention rates?
@@ -200,11 +258,13 @@ crosspost:
 />
 
 
-### 12. Churn rate
+### 12. New user churn rate
 
-**What it is:** The percentage of users who stop using your app within a given time period.
+**What it is:** The percentage of new users who stop using your app within a given time period.
 
 **Why it's useful:** Identifies how quickly you're losing users and helps focus efforts on retention strategies.
+
+**Good benchmark:** Less than 96% within 30 days – [Source](https://www.businessofapps.com/data/app-churn-rates/)
 
 **Questions to ask:**
 - Are there specific points in the user journey where churn is more likely to occur?
@@ -225,6 +285,8 @@ crosspost:
 **What it is:** The average time between a user's app sessions.
 
 **Why it's useful:** Helps you understand your app's usage patterns and identify opportunities to re-engage users.
+
+**Good benchmark:** Varies depending on the app type.
 
 **Questions to ask:**
 - Is there a correlation between time between sessions and likelihood of churn?
@@ -247,6 +309,8 @@ crosspost:
 
 **Why it's useful:** Measures the effectiveness of your re-engagement strategies and the app's ability to win back lapsed users.
 
+**Good benchmark:** 9% for apps with weekly subscription plans, 12% for monthly, and 6% for annual – [Source](https://www.businessofapps.com/data/app-reactivation-rates/)
+
 **Questions to ask:**
 - What strategies or campaigns are most effective in reactivating users?
 - How does the behavior of reactivated users compare to that of consistently active users?
@@ -266,6 +330,8 @@ crosspost:
 **What it is:** The average length of time a user remains active before churning.
 
 **Why it's useful:** Provides insight into the overall health of your app and helps in forecasting long-term user behavior.
+
+**Good benchmark:** Retaining 24% or more of users after their first day, and more than 4% after their first month – [Source](https://www.businessofapps.com/data/app-retention-rates/)
 
 **Questions to ask:**
 - What actions or behaviors are associated with longer user lifetimes?
@@ -290,6 +356,8 @@ crosspost:
 
 **Why it's useful:** Similar to activation time, it's a strong indication of how long it takes for users to understand your app's core value prop.
 
+**Good benchmark:** Varies depending on the app type.
+
 **Questions to ask:**
 - Which marketing channels or user acquisition methods lead to faster first purchases?
 - Are there specific in-app events or interactions that typically precede a user's first purchase?
@@ -302,24 +370,26 @@ crosspost:
     alt="Average time to first purchase"
 />
 
-### 17. Ratio of free to paying users
+### 17. Refund rate
 
-**What it is:** The ratio of free to paying users.
+**What it is:** The percentage of payments that are refunded.
 
-**Why it's useful:** Paying users are more valuable than free users. By understanding this ratio, you can make informed decisions about how to balance the requests of your free and paying users.
+**Why it's useful:** Highlights customer satisfaction and product quality issues. 
+
+**Good benchmark:** Less than 3% – [Source](https://www.businessofapps.com/data/app-refund-rates/)
 
 **Questions to ask:**
-- What is the conversion rate from free to paid users, and how does it change over time?
-- Are there specific features or usage patterns that are more common among paying users?
-- How does the lifetime value (LTV) differ between users who start as paid versus those who convert from free?
+- Are there specific features or in-app purchases that have higher refund rates?
+- How does the refund rate vary across different user segments (e.g., new vs. long-term users)?
+- Is there a correlation between refund rates and specific app versions or updates?
 
 **Insight type:** [Trend with formula mode](/docs/product-analytics/trends/formulas)
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1726651166/posthog.com/contents/Screenshot_2024-09-18_at_10.18.52_AM.png"
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1726651166/posthog.com/contents/Screenshot_2024-09-18_at_10.18.42_AM.png"
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1726649288/posthog.com/contents/Screenshot_2024-09-18_at_9.47.23_AM.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/v1726649288/posthog.com/contents/Screenshot_2024-09-18_at_9.47.56_AM.png"
     classes="rounded"
-    alt="Ratio of free to paying users"
+    alt="Refund rate"
 />
 
 ### 18. Revenue per paying user
@@ -327,6 +397,8 @@ crosspost:
 **What it is:** Total revenue divided by the number of paying users.
 
 **Why it's useful:** Shows you how much revenue on average each paying user is generating for you.
+
+**Good benchmark:** A life-time value (LTV) of $80 or more for travel apps, $38 for e-commerce apps, and $2.50 for gaming apps – [Source](https://www.businessofapps.com/data/ltv-app-rates/)
 
 **Questions to ask:**
 - What are the differences between the top 10% who generate the most revenue versus the rest of the users?
@@ -343,14 +415,19 @@ crosspost:
 
 ### 19. In-app purchase conversion rate 
 
-**What it is:** The percentage of users who make an in-app purchase after being presented with an offer. 
+**What it is:** The percentage of users who make an in-app purchase. 
 
 **Why it's useful:** Indicates how appealing your app's premium features are.
+
+**Good benchmark:** Above 2% – [Source](https://www.businessinsider.com/just-2-of-app-installs-lead-to-purchases-2017-2?)
 
 **Questions to ask:** 
 - How does the conversion rate vary for different types of in-app purchases? 
 - What user behaviors or app interactions correlate with higher conversion rates? 
 - How do promotional offers or discounts impact the conversion rate?
+
+**Good benchmark:** Varies depending on the app type. 
+https://www.businessofapps.com/data/app-conversion-rates/
 
 **Insight type:** [Funnel](/docs/product-analytics/funnels)
 
@@ -363,9 +440,11 @@ crosspost:
 
 ### 20. Revenue churn
 
-**What it is:** The amount of revenue lost per month.
+**What it is:** The amount of revenue lost per month from canceled subscriptions.
 
 **Why it's useful:** Measure customer loyalty and identify potential issues in your product or pricing strategy.
+
+**Good benchmark:** 15% for weekly and monthly subscriptions, 41% for annual subscriptions – [Source](https://www.businessofapps.com/data/app-renewal-rates/)
 
 **Questions to ask:**
 - What are the key drivers of revenue churn? For example, price changes, product updates, or something else?
@@ -383,11 +462,13 @@ crosspost:
 
 ## Performance and error metrics
 
-### 21. API request latency
+### 21. API response time
 
 **What it is:** The time it takes to receive a response from your API endpoints. 
 
 **Why it's useful:** Helps identify performance bottlenecks and ensures your UX meets user expectations for responsiveness.
+
+**Good benchmark:** Below 1 second is good. Anything above 1 second and users begin to notice some delay.
 
 **Questions to ask:**
 - What is the average latency for different types of API requests?
@@ -409,6 +490,8 @@ crosspost:
 
 **Why it's useful:** Enables you to pinpoint problematic flows in your app.
 
+**Good benchmark:** Less than 1%.
+
 **Questions to ask:**
 - What is the overall error rate, and how does it break down into client-side versus server-side issues i.e 4xx and 5xx error codes?
 - What are the most common errors, and what are their causes?
@@ -429,8 +512,9 @@ crosspost:
 
 **Why it's useful:** User's expect apps to be responsive, and a slow launch time can be off-putting to users.
 
-**Questions to ask:**
+**Good benchmark** [Apple](https://developer.apple.com/videos/play/wwdc2019/423/?time=305) recommends at most up to 400ms to render the first frame. [Google](https://developer.android.com/topic/performance/vitals/launch-time) recommends cold launches to be below 5 seconds and hot launches to be below 1.5 seconds.
 
+**Questions to ask:**
 - How does the app launch time vary across different devices and network conditions?
 - What are the most common causes of slow app launch times, and how can they be addressed?
 - How does app launch time correlate with user engagement and satisfaction?
@@ -449,6 +533,8 @@ crosspost:
 **What it is:** How many of your overall users are affected by crashes and/or errors.
 
 **Why it's useful:** Gives you a sense of how many of your users are having a bad experience with your app.
+
+**Good benchmark:** Less than 1% –[Source](https://www.businessofapps.com/data/app-performance-rates/)
 
 **Questions to ask:**
 - How does the crash rate vary across different devices and app versions?
