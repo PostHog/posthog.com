@@ -35,3 +35,40 @@ All good web analytics dashboards need to include a world map. Ours includes it 
 ## Do stats include bots and crawlers?
 
 No, we automatically block bots and crawlers. You can see exactly which ones [we block here](https://github.com/PostHog/posthog-js/blob/master/src/utils/blocked-uas.ts).
+
+## Why are my pageview/users count different on posthog than GA/vercel/plausible/etc
+### Ad Blockers
+*Affects: visitor count, session count, pageview count*
+
+Around 1 in 3 internet users use an ad blocker, more in some demographics, with 25-34 being the highest.
+
+Google Analytics is blocked by almost every ad blocker, whereas other analytics tools are not always blocked. Additionally, you can use a reverse proxy which makes it harder for ad blockers to block our traffic.
+
+### Different methods of counting unique users
+*Affects: visitor count*
+
+In posthog, you can identify users with e.g. an email address or a user ID, so a user who logged in twice on two different devices would be correctly counted as one visitor. Analytics tools that don’t allow for identifying users would incorrectly count these as two visitors.
+
+Cookieless trackers, e.g. Plausible and Vercel, track users by combining a few properties into a hash. This includes the user agent, the IP address, and a daily salt. This means that if a user visited your site 7 days in a row, they would be counted as 7 different visitors, as the salt will be different each day. In Posthog, if the user is identified, or if you are using cookies, they will be correctly counted as 1 visitor. These cookieless trackers also incorrectly count the same user on different devices as different visitors, as the user agent would differ.
+
+### Different methods of tracking sessions
+*Affects: session count*
+
+A session is a grouping of user activity, which starts on the first event (e.g. page view) and ends after 30 minutes of inactivity. By default, we store the user’s current session ID in a cookie. Other tools might have a different timeout period, or a different way of storing the session state, which can affect the count.
+
+### Bot detection
+*Affects: visitor count, session count, pageview count*
+
+Some traffic to your site might be bots, e.g. search engines, archivers, content scrapers, etc. You may want some of these to be able to access your site, but you don’t want them to appear in your analytics data. Different tools use different methods, which may result in different visitor or page view counts.
+
+Our client-side bot detection code in posthog-js is available here https://github.com/PostHog/posthog-js/blob/main/src/utils/blocked-uas.ts (Pull Requests welcome!), and we automatically prevent detected bots from sending events.
+
+## Why am I getting a lot of direct traffic?
+Direct traffic can refer to when a user enters the address to your website directly, however, it also includes any traffic where the referrer is unknown or impossible to calculate. We use the `document.referrer` property, which might be hidden for a few reasons:
+* Some browsers and privacy extensions strip hide the referrer, particularly in private browsing / incognito mode.
+* Links opened from an app (for example, a messaging or email app) won’t have a referrer set. You can use UTM tags to help attribute links shared this way. Note that many apps, like the iOS Mail app, will strip ad-specific parameters like `gclid`/`fbclid`/etc.
+* Browsers won’t include the referrer for links from HTTPS to HTTP.
+* Link tracking or redirection services may result in the original referrer being lost.
+* Websites can specify that the referrer should not be sent, by including the `referrerpolicy` meta tag in the page or `rel="noreferrer"` on the link.
+
+Note that if you have auto-tagged traffic set up in Google Ads, parameters set this way do not appear as URL parameters, and therefore aren’t available for us to use for attribution. You can set up tracking templates in Google Ads to add query parameters automatically.
