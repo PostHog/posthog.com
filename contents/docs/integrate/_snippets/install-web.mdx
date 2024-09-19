@@ -38,19 +38,28 @@ If you're using React or Next.js, checkout our [React SDK](/docs/libraries/react
 
 #### Advanced option - bundle all required extensions
 
-By default, the PostHog JS library will only load the core functionality, lazy-loading extensions such as Surveys or the Session Replay 'recorder' when needed. This can cause issues if you have a Content Security Policy (CSP) that blocks inline scripts or if you want to optimize your bundle at build time to ensure all dependencies are ready immediately.
-
-You can include all extensions in your bundle by importing them directly before initializing PostHog. In addition you can configure the SDK to never load extensions lazily.
+By default, the PostHog JS library will only load the core functionality, lazy-loading extensions such as Surveys or the Session Replay 'recorder' when needed. This can cause issues if you have a Content Security Policy (CSP) that blocks inline scripts or if you want to optimize your bundle at build time to ensure all dependencies are ready immediately. In addition environments like the Chrome Extension store will reject code that loads remote code. To solve this issue we have multiple import options available.
 
 ```js-web
+// No external code loading possible (this disables all extensions such as Replay, Surveys, Exceptions etc.)
+import posthog from 'posthog-js/dist/module.no-external'
+
+// No external code loading possible but all external dependencies pre-bundled
+import posthog from 'posthog-js/dist/module.full.no-external'
+
+// All external dependencies pre-bundled and with the ability to load external scripts (primarily useful is you use Site Apps)
+import posthog from 'posthog-js/dist/module.full'
+
+// Finally you can also import specific extra dependencies 
 import "posthog-js/dist/recorder"
 import "posthog-js/dist/surveys"
 import "posthog-js/dist/exception-autocapture"
 import "posthog-js/dist/tracing-headers"
 import "posthog-js/dist/web-vitals"
-import posthog from 'posthog-js'
+import posthog from 'posthog-js/dist/module.no-external'
 
-posthog.init('<ph_project_api_key>', { 
-    api_host: '<ph_client_api_host>', 
-    disable_external_dependency_loading: true // Optional - will ensure we never try to load extensions lazily
-})
+// All other posthog commands are the same as usual
+posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', person_profiles: 'identified_only' })
+```
+
+> NOTE: You should ensure if using this option that you always import `posthog-js` from the same module, otherwise multiple bundles could get included. At this time `posthog-js/react` does not work with any module import other than the default.
