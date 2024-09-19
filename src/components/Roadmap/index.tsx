@@ -181,7 +181,7 @@ const Sort = ({ sortBy, className = '' }) => {
     return (
         <div className={`md:space-x-2 items-center mb-4 sm:mb-0 ${className}`}>
             <p className="sr-only">Sort by</p>
-            <div className="flex items-center border border-light dark:border-dark md:border-transparent dark:md:border-transparent hover:border-light dark:hover:border-dark p-0.5 rounded gap-x-[3px] transition-all ease-in-out md:delay-500 hover:delay-0 md:duration-500 w-full md:w-auto">
+            <div className="flex items-center border border-light dark:border-dark  hover:border-light dark:hover:border-dark p-0.5 rounded gap-x-[3px] transition-all ease-in-out md:delay-500 hover:delay-0 md:duration-500 w-full md:w-auto">
                 <SortButton className="" active={sortBy === 'popular'} onClick={() => navigate(`?sort=popular`)}>
                     Popular
                 </SortButton>
@@ -335,14 +335,15 @@ export default function Roadmap() {
             parent={companyMenu}
             activeInternalMenu={companyMenu.children.find(({ name }) => name.toLowerCase() === 'roadmap')}
             title="Roadmap"
+            fullWidthContent
         >
             <section>
                 <div className="relative">
                     <div className="flex justify-between items-center">
-                        <div className="flex gap-4 items-center">
+                        <div className="flex gap-4 items-center w-full justify-between">
                             <h1 className="font-bold text-3xl sm:text-4xl my-0">Roadmap</h1>
                             {isModerator && !adding && (
-                                <div className="relative top-1">
+                                <div className="relative">
                                     <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
                                         <Tooltip content="Only moderators can see this" placement="top">
                                             <IconShieldLock className="w-6 h-6 inline-block mr-1" />
@@ -352,19 +353,13 @@ export default function Roadmap() {
                                 </div>
                             )}
                         </div>
-                        <Sort className="hidden sm:flex" setSortBy={setSortBy} sortBy={sortBy} />
                     </div>
-                    <p className="my-0 font-semibold mt-2 mb-4">
+                    <p className="my-0 font-semibold mt-2 mb-4 border-b border-light dark:border-dark pb-4">
                         <span className="opacity-70">
-                            Here's what we're thinking about building next. Vote for your favorites, or request a new
-                            feature{' '}
+                            Here's where our competitors decide what to build next.
                         </span>
-                        <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
-                            on GitHub
-                        </Link>
-                        <span className="opacity-70">.</span>
                     </p>
-                    <Sort className="sm:hidden flex mt-4" setSortBy={setSortBy} sortBy={sortBy} />
+
 
                     {isModerator && adding && (
                         <RoadmapForm
@@ -377,31 +372,60 @@ export default function Roadmap() {
                     )}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 lg:gap-8 xl:gap-12">
                     <div>
-                        <input
-                            onChange={(e) => setRoadmapSearch(e.target.value)}
-                            placeholder="Search this page..."
-                            className="w-full p-2 rounded-md border border-border dark:bg-accent-dark dark:border-dark text-primary dark:text-primary-dark"
-                        />
+
+                        <div className="mb-6">
+                            <div className="flex gap-4 items-center">
+                                <h2 className="font-bold text-lg sm:text-xl my-0">Feature requests</h2>
+                            </div>
+                            <p className="my-0 font-semibold text-[15px] mb-4">
+                                <span className="text-primary/70 dark:text-primary-dark/70">
+                                    Here's what we're thinking about building next. Vote for your faves, or request a new
+                                    feature{' '}
+                                    <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
+                                        on GitHub
+                                    </Link>.
+                                </span>
+                            </p>
+                        </div>
+
+                        <div className="flex gap-2 items-center">
+                            <div className="flex-1">
+                                <input
+                                    onChange={(e) => setRoadmapSearch(e.target.value)}
+                                    placeholder="Search feature requests..."
+                                    className="w-full p-2 rounded-md border border-border dark:bg-accent-dark dark:border-dark text-primary dark:text-primary-dark"
+                                />
+                            </div>
+                            <div>
+                                <Sort className="hidden sm:flex" setSortBy={setSortBy} sortBy={sortBy} />
+
+                                <Sort className="sm:hidden flex mt-4" setSortBy={setSortBy} sortBy={sortBy} />
+                            </div>
+                        </div>
+
                         {sortBy === 'team' && teams.length > 0 && (
-                            <Slider activeIndex={teams.indexOf(selectedTeam)} className="whitespace-nowrap space-x-1.5 mt-4">
-                                {['All teams', ...teams].map((team) => {
-                                    return (
-                                        <button
-                                            key={team}
-                                            onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
-                                            className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${selectedTeam === team
-                                                ? 'bg-accent dark:bg-accent-dark font-bold'
-                                                : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
-                                                }`}
-                                        >
-                                            {team.replace(' Team', '')}
-                                        </button>
-                                    )
-                                })}
-                            </Slider>
+                            <div>
+                                <Slider activeIndex={teams.indexOf(selectedTeam)} className="whitespace-nowrap space-x-1.5 mt-4">
+                                    {['All teams', ...teams].map((team) => {
+                                        return (
+                                            <button
+                                                key={team}
+                                                onClick={() => navigate(`?sort=team&team=${encodeURIComponent(team)}`)}
+                                                className={`px-2 py-1 text-sm border border-border dark:border-dark rounded-md relative hover:scale-[1.01] active:top-[.5px] active:scale-[.99] ${selectedTeam === team
+                                                    ? 'bg-accent dark:bg-accent-dark font-bold'
+                                                    : 'text-primary-75 dark:hover:text-primary-dark-75 hover:bg-accent/75 dark:hover:bg-accent-dark'
+                                                    }`}
+                                            >
+                                                {team.replace(' Team', '')}
+                                            </button>
+                                        )
+                                    })}
+                                </Slider>
+                            </div>
                         )}
+
                         {isLoading ? (
                             <Skeleton />
                         ) : (
@@ -483,22 +507,12 @@ export default function Roadmap() {
                     </div>
                     <div>
                         <section>
-                            <div className="relative mb-6">
+                            <div className="mb-6">
                                 <div className="flex gap-4 items-center">
-                                    <h1 className="font-bold text-3xl sm:text-4xl my-0">Work in progress</h1>
-                                    {isModerator && !adding && (
-                                        <div className="relative top-1">
-                                            <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                                <Tooltip content="Only moderators can see this" placement="top">
-                                                    <IconShieldLock className="w-6 h-6 inline-block mr-1" />
-                                                </Tooltip>
-                                                Add a feature
-                                            </CallToAction>
-                                        </div>
-                                    )}
+                                    <h2 className="font-bold text-lg sm:text-xl my-0">Work in progress</h2>
                                 </div>
-                                <p className="my-0 font-semibold mt-2 mb-4">
-                                    <span className="opacity-70">
+                                <p className="my-0 font-semibold text-[15px] mb-4">
+                                    <span className="text-primary/70 dark:text-primary-dark/70">
                                         Here's what we're working on right now.
                                     </span>
                                 </p>
