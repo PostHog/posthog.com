@@ -290,7 +290,7 @@ export default function RichText({
     }, [])
 
     const handleProfileSelect = (profile) => {
-        setValue((prevValue) => prevValue + `${profile.id} `)
+        setValue((prevValue) => prevValue + `${profile.attributes.firstName.toLowerCase()}/${profile.id} `)
         setShowMentionProfiles(false)
     }
 
