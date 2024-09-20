@@ -27,16 +27,15 @@ const Card = ({ top, bottom, Image, ImageSize, color }: CardProps) => {
   )
 }
 
-// Update the component to accept data as a prop
-export default function NoHatingAllowed({ data }: { data: CardProps[] }) {
+export default function NoHatingAllowed({ data, title, size }: { data: CardProps[]; title: string, size: string }) {
   const listRef = useRef<HTMLUListElement>(null)
   const { enterpriseMode } = useLayoutData()
 
   return (
     <div className="relative pt-8 mb-12 overflow-hidden">
-      <h2 className="text-4xl lg:text-6xl text-center mb-5">
+      <h2 className={`text-center mb-5 ${size}`}>
         {!enterpriseMode && <span className="text-red uppercase block md:inline">Warning:</span>} You'll{' '}
-        {enterpriseMode ? <span className="text-red">LOVE</span> : 'hate'} PostHog if...
+        {enterpriseMode ? <span className="text-red">LOVE</span> : 'hate'} {title} if...
       </h2>
       <div className="absolute z-10 -left-10 top-64 bottom-32 w-48 bg-gradient-radial from-light/30 via-light/0 to-light/0 dark:from-dark/30 dark:via-dark/0 dark:to-dark/0" />
       <div className="absolute z-20 top-1/2 left-0 -translate-y-1/2 mt-16">

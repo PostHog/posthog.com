@@ -186,3 +186,70 @@ export const HomepageCards = [
         ImageSize: 'w-[230px] -mt-4',
     },
 ]
+
+export const CareersCards = [
+    {
+        top: 'You want a clearly-documented career progression framework',
+        bottom: <>Everyone here is as equal as possible to maintain autonomy.</>,
+        color: '#FFD89E',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/i-love-telemarketing.png" />,
+        ImageSize: 'w-[calc(100%_+_5rem)] -mt-4',
+    },
+    {
+        top: 'You aspire to manage a large team',
+        bottom: (
+            <>
+                Our{' '}
+                <Link to="/teams" className="!text-red">
+                    small teams
+                </Link>{' '}
+                operate like startups within the company.
+            </>
+        ),
+        color: '#DCE7D0',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/wasting-money.png" />,
+        ImageSize: 'w-full mt-8',
+    },
+    {
+        top: 'You want to be able to tell other people what to do',
+        bottom: 'Anyone can propose an idea, but only the best ideas win.',
+        color: '#D9E1FC',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/try-buy.png" />,
+        ImageSize: 'w-[240px] -mt-4',
+    },
+    {
+        top: 'You expect your manager to tell you what to do',
+        bottom: "James and Tim set context. But it's up to you to decide where your time is best spent.",
+        color: '#FDBAF2',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/bad-trade.png" />,
+        ImageSize: 'w-full mt-4',
+    },
+    {
+        top: 'The phrase "That\'s not my job" exists in your vocabulary',
+        bottom: "We all wear a lot of hats, and we all pitch in wherever's needed.",
+        color: '#FFD89E',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/stranger-danger.png" />,
+        ImageSize: 'w-[230px] mt-6',
+    },
+    {
+        top: 'You enjoy playing corporate politics',
+        bottom: "We're low ego and nearly all communication is public.",
+        color: '#DCE7D0',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/commitment-issues.png" />,
+        ImageSize: 'w-full mt-4',
+    },
+    {
+        top: 'You want a predictable career',
+        bottom: "If you like routine, we're not the place for you.",
+        color: '#D9E1FC',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/i-hate-change.png" />,
+        ImageSize: 'w-full',
+    },
+    {
+        top: "You don't like to hustle",
+        bottom: 'Our guiding metric is how fast we ship features and bug fixes to our customers.',
+        color: '#FDBAF2',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/mangle.png" />,
+        ImageSize: 'w-[230px] mt-6',
+    },
+]

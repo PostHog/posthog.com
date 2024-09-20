@@ -42,7 +42,7 @@ const Home = () => {
                 <AllInOne />
                 <Libraries />
                 <CodeBlocks />
-                <NoHatingAllowed data={HomepageCards} />
+                <NoHatingAllowed data={HomepageCards} title="PostHog" size="text-4xl lg:text-6xl" />
 
                 <RenderInClient
                     render={() => {

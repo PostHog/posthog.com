@@ -15,6 +15,8 @@ import { TeamQuote } from '../components/TeamQuote'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import MegaQuote from 'components/Careers/MegaQuote'
 import CompanyHandbook from 'components/Careers/Handbook'
+import NoHatingAllowed from '../components/NoHatingAllowed'
+import { CareersCards } from '../components/NoHatingAllowed/data.js'
 
 const menu = [
     {
@@ -67,6 +69,7 @@ const IndexPage = () => {
             <MegaQuote />
 
             <CompanyHandbook />
+            <NoHatingAllowed data={CareersCards} title="working here" size="text-3xl lg:text-5xl" />
 
 
 
