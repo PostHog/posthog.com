@@ -163,6 +163,12 @@ const MentionProfiles = ({ onSelect, onClose }) => {
     )
 }
 
+const replaceMentions = (body: string) => {
+    return body.replace(/@([a-zA-Z0-9-]+\/[0-9]+)/g, (match, username) => {
+        return `[${match}](/community/profiles/${username.split('/')[1]})`
+    })
+}
+
 export default function RichText({
     initialValue = '',
     setFieldValue,
@@ -207,7 +213,7 @@ export default function RichText({
         accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'], 'image/gif': ['.gif'] },
     })
 
-    const replaceSelection = (selectionStart?: number, selectionEnd?: number, text = '') => {
+    const replaceSelection = (selectionStart?: number, selectionEnd?: number, text = '', value: string) => {
         return value.substring(0, selectionStart) + text + value.substring(selectionEnd, value.length)
     }
 
@@ -227,7 +233,7 @@ export default function RichText({
 
         const { selectionStart, selectionEnd, selectedText } = getTextSelection()
         textarea?.current?.focus()
-        setValue(replaceSelection(selectionStart, selectionEnd, replaceWith(selectedText)))
+        setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, replaceWith(selectedText), prevValue))
         setCursor(cursor)
     }
 
@@ -239,7 +245,9 @@ export default function RichText({
         const { selectionStart, selectionEnd, selectedText } = getTextSelection()
         if (selectedText) {
             textarea?.current?.focus()
-            setValue(replaceSelection(selectionStart, selectionEnd, `[${selectedText}](${url})`))
+            setValue((prevValue) =>
+                replaceSelection(selectionStart, selectionEnd, `[${selectedText}](${url})`, prevValue)
+            )
         }
     }
 
@@ -303,17 +311,8 @@ export default function RichText({
 
     const handleProfileSelect = (profile) => {
         const { selectionStart, selectionEnd } = getTextSelection()
-        setValue((prevValue) => {
-            const mention = `${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
-            if (selectionStart === 1) {
-                return prevValue + mention
-            }
-            return replaceSelection(
-                selectionStart,
-                selectionEnd,
-                `${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
-            )
-        })
+        const mention = `${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
+        setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, mention, prevValue))
         setShowMentionProfiles(false)
         textarea.current?.focus()
     }
@@ -332,7 +331,7 @@ export default function RichText({
                                 return objectURL || fakeImagePath
                             }}
                         >
-                            {value}
+                            {replaceMentions(value)}
                         </Markdown>
                     </div>
                 ) : (
