@@ -10,6 +10,7 @@ import { isURL } from 'lib/utils'
 import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
 import { AnimatePresence, motion } from 'framer-motion'
+import { IconX } from '@posthog/icons'
 
 const buttons = [
     {
@@ -81,7 +82,7 @@ const buttons = [
     },
 ]
 
-const MentionProfiles = ({ onSelect }) => {
+const MentionProfiles = ({ onSelect, onClose }) => {
     const currentQuestion = useContext(CurrentQuestionContext) ?? {}
     const replies = currentQuestion?.question?.replies
     const mentionProfiles = [
@@ -121,9 +122,19 @@ const MentionProfiles = ({ onSelect }) => {
             initial={{ opacity: 0, translateX: '100%' }}
             animate={{ opacity: 1, translateX: 0, transition: { type: 'tween', duration: 0.1 } }}
             exit={{ opacity: 0, translateX: '100%' }}
-            className="w-[200px] h-full overflow-auto bg-tan dark:bg-dark absolute right-0 top-0 z-50 border-l border-border dark:border-dark"
+            className="w-[200px] h-full absolute right-0 top-0 z-50 pt-2.5 pr-2"
         >
-            <ul ref={listRef} className="m-0 p-0 list-none">
+            <button
+                type="button"
+                className="p-1 rounded-full bg-white dark:bg-dark border border-border dark:border-dark absolute top-0.5 -left-2 z-10"
+                onClick={onClose}
+            >
+                <IconX className="w-3" />
+            </button>
+            <ul
+                ref={listRef}
+                className="m-0 p-0 list-none border border-border dark:border-dark bg-light dark:bg-dark h-full rounded-md overflow-auto "
+            >
                 {mentionProfiles.map((profile, index) => {
                     const { firstName, lastName, avatar } = profile.attributes
                     const name = [firstName, lastName].filter(Boolean).join(' ')
@@ -132,7 +143,7 @@ const MentionProfiles = ({ onSelect }) => {
                             <button
                                 onClick={() => onSelect?.(profile)}
                                 type="button"
-                                className={`text-left flex space-x-2 font-bold px-3 py-1 items-center rounded-sm hover:bg-accent hover:dark:bg-accent-dark w-full outline-none ${
+                                className={`click text-left flex space-x-2 font-bold px-3 py-1 items-center rounded-sm hover:bg-accent hover:dark:bg-accent-dark w-full outline-none ${
                                     focused === index ? 'bg-accent dark:bg-accent-dark' : ''
                                 }`}
                             >
@@ -140,7 +151,7 @@ const MentionProfiles = ({ onSelect }) => {
                                     <Avatar className="w-full" image={avatar?.data?.attributes?.url} />
                                 </div>
                                 <div>
-                                    <p className="m-0 text-xs font-semibold opacity-50 leading-none">#{profile.id}</p>
+                                    <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>
                                     <p className="m-0 leading-none text-sm">{name}</p>
                                 </div>
                             </button>
@@ -161,6 +172,7 @@ export default function RichText({
     maxLength = 2000,
     preview = true,
     label = '',
+    mentions = false,
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
@@ -290,21 +302,25 @@ export default function RichText({
     }, [])
 
     const handleProfileSelect = (profile) => {
-        setValue((prevValue) => prevValue + `${profile.attributes.firstName.toLowerCase()}/${profile.id} `)
+        const { selectionStart, selectionEnd } = getTextSelection()
+        setValue((prevValue) => {
+            const mention = `${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
+            if (selectionStart === 1) {
+                return prevValue + mention
+            }
+            return replaceSelection(
+                selectionStart,
+                selectionEnd,
+                `${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
+            )
+        })
         setShowMentionProfiles(false)
+        textarea.current?.focus()
     }
 
     return (
         <div className="relative" {...getRootProps()}>
             <div onClick={handleContainerClick}>
-                <AnimatePresence>
-                    {showMentionProfiles && (
-                        <div ref={mentionProfilesRef} onClick={(e) => e.stopPropagation()}>
-                            <MentionProfiles onSelect={handleProfileSelect} />
-                        </div>
-                    )}
-                </AnimatePresence>
-
                 <input className="hidden" {...getInputProps()} />
                 {showPreview ? (
                     <div className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0 overflow-auto">
@@ -321,6 +337,21 @@ export default function RichText({
                     </div>
                 ) : (
                     <div className="relative">
+                        {mentions && (
+                            <AnimatePresence>
+                                {showMentionProfiles && (
+                                    <div ref={mentionProfilesRef} onClick={(e) => e.stopPropagation()}>
+                                        <MentionProfiles
+                                            onClose={() => {
+                                                setShowMentionProfiles(false)
+                                                textarea.current?.focus()
+                                            }}
+                                            onSelect={handleProfileSelect}
+                                        />
+                                    </div>
+                                )}
+                            </AnimatePresence>
+                        )}
                         <label htmlFor="body" className="py-3 px-4 pb-8 block">
                             {label && !!value && <span className="text-sm opacity-60 block">{label}</span>}
                             <textarea

@@ -128,6 +128,7 @@ function QuestionFormMain({
     initialValues,
     showTopicSelector,
     disclaimer = true,
+    formType,
 }: QuestionFormMainProps) {
     const posthog = usePostHog()
     const { user, logout } = useUser()
@@ -213,6 +214,7 @@ function QuestionFormMain({
                                         setFieldValue={setFieldValue}
                                         initialValue={initialValues?.body}
                                         values={values}
+                                        mentions={formType === 'reply'}
                                     />
                                 </div>
                                 <Field
@@ -251,7 +253,7 @@ function QuestionFormMain({
 
 type QuestionFormProps = {
     slug?: string
-    formType: string
+    formType?: 'question' | 'reply'
     questionId?: number
     reply: (body: string) => Promise<void>
     onSubmit?: (values: any, formType: string) => void
@@ -428,6 +430,7 @@ export const QuestionForm = ({
                             loading={loading}
                             onSubmit={handleMessageSubmit}
                             showTopicSelector={showTopicSelector}
+                            formType={formType}
                         />
                     ),
                     auth: (
