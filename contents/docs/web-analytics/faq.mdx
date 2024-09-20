@@ -86,16 +86,17 @@ Direct traffic usually refers to when a user enters the address to your website 
 This is called self-referral traffic, having a small amount (<5%) of self-referral traffic is normal, and it can happen for a few reasons:
 
 ### Cross-domain tracking
+
 If you track multiple domains, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed.
 
 ### Session timeout
+
 1. A user visits a site (for example, `google.com`) that links to yours.
-2. The user clicks a link to your site. At this point a new session will be started and the referrer will be `google.com`.
+2. The user clicks a link to your site. At this point, a new session starts and the referrer is `google.com`.
 3. The user walks away from their computer, and is inactive long enough for the session to expire (30 minutes by default).
-4. User comes back to their computer, goes to the already-open browser tab with your site, and clicks an internal link. A new session will be started, and the referrer will be your own site.
+4. User comes back to their computer, goes to the already-open browser tab with your site, and clicks an internal link. A new session starts and the referrer is your own site.
 
 If your users are typically inactive for longer than 30 minutes within one period of activity, you can increase the `session_idle_timeout_seconds` setting in your [posthog-js configuration](/libraries/js#config).
 
-If these two sessions are genuinely different periods of activity, then this is known as a legitimate self-referral.
 
 
