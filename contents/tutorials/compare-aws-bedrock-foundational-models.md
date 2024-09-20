@@ -1,6 +1,6 @@
 ---
 title: How to compare AWS Bedrock foundational models
-date: 2024-09-12
+date: 2024-09-20
 author:
   - lior-neu-ner
 tags:
@@ -198,7 +198,7 @@ Then, to track errors, we capture `bedrock_error` events in the `catch` block of
   }
 ```
 
-Refresh your app and submit a few prompts. You should then see your events captured in the [PostHog activity tab](https://us.posthog.com/events).
+Refresh your app and submit a request using the various LLM buttons. You should then see your events captured in the [PostHog activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1726151964/posthog.com/contents/Screenshot_2024-09-12_at_3.38.51_PM.png" 
