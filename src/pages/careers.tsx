@@ -14,6 +14,7 @@ import { SEO } from '../components/seo'
 import { TeamQuote } from '../components/TeamQuote'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import MegaQuote from 'components/Careers/MegaQuote'
+import CompanyHandbook from 'components/Careers/Handbook'
 
 const menu = [
     {
@@ -64,6 +65,10 @@ const IndexPage = () => {
             <CareersHero />
 
             <MegaQuote />
+
+            <CompanyHandbook />
+
+
 
             <div className="careers-anchor-navbar">
                 <WhyWereHere />
