@@ -154,7 +154,11 @@ function Tooltip({
 
     useEffect(() => {
         function handleClick(e) {
-            if (containerEl?.current && !containerEl?.current.contains(e.target)) {
+            if (
+                containerEl?.current &&
+                !containerEl?.current.contains(e.target) &&
+                !document.querySelector('#portal-tooltip')?.contains(e.target)
+            ) {
                 setOpen(false)
             }
         }
@@ -389,12 +393,16 @@ const TheoTooltip = () => {
             <div>
                 <h4 className="text-base m-0 mb-1">Enable Theo (clutter-free) mode</h4>
                 <p className="text-sm m-0">
-                    <Link className="text-red dark:text-yellow" to="https://www.youtube.com/@t3dotgg" externalNoIcon>
+                    <Link
+                        className="text-red dark:text-yellow font-bold"
+                        to="https://www.youtube.com/@t3dotgg"
+                        externalNoIcon
+                    >
                         Theo - t3.gg
                     </Link>{' '}
                     once{' '}
                     <Link
-                        className="text-red dark:text-yellow"
+                        className="text-red dark:text-yellow font-bold"
                         to="https://youtu.be/zcZZxzkLwOc?si=FD5UJeFvh7uwKYy2&t=883"
                         externalNoIcon
                     >

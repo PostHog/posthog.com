@@ -56,6 +56,7 @@ export default function Tooltip({
             {open &&
                 createPortal(
                     <div
+                        id="portal-tooltip"
                         className="z-[9999999999] print:hidden"
                         role="tooltip"
                         ref={setPopperElement}
