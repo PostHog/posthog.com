@@ -141,7 +141,11 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
         if (pathname === '/' && search.includes('synergy=true')) {
             setEnterpriseMode(true)
         }
-        if (['/blog', '/founders', '/product-engineers', '/newsletter'].some((prefix) => pathname.startsWith(prefix))) {
+        if (
+            ['/blog/', '/founders/', '/product-engineers/', '/newsletter/'].some((prefix) =>
+                pathname.startsWith(prefix)
+            )
+        ) {
             setPost(true)
         } else {
             setPost(false)
