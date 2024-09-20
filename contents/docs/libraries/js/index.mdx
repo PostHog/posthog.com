@@ -407,7 +407,7 @@ For PostHog to work optimally, we store small amount of information about the us
 -   Any super properties you have defined.
 -   Some PostHog configuration options (e.g. whether session recording is enabled)
 
-By default, we store all this information in a `cookie`, which means PostHog can identify your users across subdomains. By default, this cookie is set to expire after `365` days and is named with your Project API key e.g. `ph_<project_api_key>_posthog`.
+By default, we store all this information in both a `cookie` and `localStorage`, which means PostHog can identify your users across subdomains. By default, this cookie is set to expire after `365` days and is named with your Project API key e.g. `ph_<project_api_key>_posthog`.
 
 If you want to change how PostHog stores this information, you can do so with the `persistence` configuration option:
 
