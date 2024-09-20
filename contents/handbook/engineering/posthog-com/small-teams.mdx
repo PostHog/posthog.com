@@ -2,7 +2,9 @@
 title: Managing small teams
 ---
 
-## Creating a new job
+## Managing a small team
+
+### Creating a new job
 
 - Create a directory and team file in the repo (eg: `/contents/teams/team-name/index.mdx`)
 - Ask Lottie to create a new team crest
@@ -14,16 +16,46 @@ title: Managing small teams
 
 *This is temporary / will be self-serve via the website in the future
 
+### Changing the header image
 
-## FYIs
+To change your team's image, send it to [#team-website-and-docs](https://posthog.slack.com/archives/C01V9AT7DK4).
+
+### FYIs
 
 - Any MDX files in the repo will display below the team members and _recently shipped_ sections.
 
-## In the future
+### In the future
 
 - We're moving toward having quarterly goals in their own MDX files, like `2024-Q1.mdx`. This will allow us to show the current team goals, while displaying previous goals in an accordion.
 - Moderators will be able to create teams directly on the website (no Strapi required)
 
-## Removing a small team
+## Team management
+
+### Creating a new small team
+
+#### Initial setup in Strapi
+
+> There's some manual config that needs to be done in our CMS. Ask the Website & Docs team for help here.
+
+1. Create Team record
+1. Add the [placeholder crest](https://www.figma.com/design/QCYxjm4wVVVvs6UA27xRmz/Website-art?node-id=2043-2&t=aO62tCO12PoIZMt9-1) with the new team's name on it
+1. Go to small team members' profiles, add them to the team, remove from other teams, and assign the tema lead
+1. Publish the changes to the team record
+
+#### Setup in the repo
+
+1. Create a directory for the team in `/contents/teams/{team-name}` and duplicate `index.mdx` and `objectives.mdx` from another team as a starting point
+1. Add the team's name to `src/navs/index.js` under the `companyMenu` section in alphabetical order under the _Engineering_ or _Not engineering_ heading
+1. Rebuild the site (after the Strapi configuration) to see the new page
+
+#### Other tasks
+
+1. Request a custom team crest from Lottie. Describe your team with a few adjectives, maybe physical tools that can be used in an illustration, and a sentence or two about what you do.
+1. Add the small team's mission on their page once the site is built
+1. Add the team's feature ownership to the [feature list](/handbook/engineering/feature-ownership)
+
+
+
+### Removing a small team
 
 Ask the Website & Docs team for help.
