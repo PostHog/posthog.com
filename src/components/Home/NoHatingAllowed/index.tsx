@@ -194,7 +194,7 @@ const Card = ({ top, bottom, Image, ImageSize, color }) => {
     return (
         <li
             style={{ backgroundColor: color || 'white' }}
-            className="h-[400px] w-[300px] flex flex-col justify-between p-5 rounded-md relative even:rotate-3 odd:-rotate-3 flex-shrink-0 snap-center overflow-hidden md:first:ml-12"
+            className="h-[400px] w-[300px] flex flex-col justify-between p-5 rounded-md relative even:rotate-3 odd:-rotate-3 flex-shrink-0 snap-center overflow-hidden md:first:ml-12 shadow-xl"
         >
             <div className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 px-8 ${ImageSize}`}>
                 {Image}
