@@ -378,6 +378,36 @@ const Notifications = () => {
     ) : null
 }
 
+const TheoTooltip = () => {
+    return (
+        <div className="flex max-w-[350px] space-x-3">
+            <img
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/theo_tooltip_22f692044d.png"
+                alt="Theo"
+                className="size-[80px]"
+            />
+            <div>
+                <h4 className="text-base m-0 mb-1">Enable Theo (clutter-free) mode</h4>
+                <p className="text-sm m-0">
+                    <Link className="text-red dark:text-yellow" to="https://www.youtube.com/@t3dotgg" externalNoIcon>
+                        Theo - t3.gg
+                    </Link>{' '}
+                    once{' '}
+                    <Link
+                        className="text-red dark:text-yellow"
+                        to="https://youtu.be/zcZZxzkLwOc?si=FD5UJeFvh7uwKYy2&t=883"
+                        externalNoIcon
+                    >
+                        complained
+                    </Link>{' '}
+                    our blog had too many things on it for making screen recordings.
+                </p>
+                <p className="text-sm m-0 mt-1">So here's to you, Theo.</p>
+            </div>
+        </div>
+    )
+}
+
 export const Main = () => {
     const { user } = useUser()
     const { open } = useSearch()
@@ -390,6 +420,9 @@ export const Main = () => {
         setFullWidthContent,
         enterpriseMode,
         setEnterpriseMode,
+        theoMode,
+        setTheoMode,
+        post,
     } = useLayoutData()
     const { pathname } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)
@@ -581,6 +614,27 @@ export const Main = () => {
                                                 <Toggle checked={fullWidthContent} />
                                             </button>
                                         </li>
+                                        {post && (
+                                            <li className="hidden md:block px-1">
+                                                <HoverTooltip placement="left" content={() => <TheoTooltip />}>
+                                                    <button
+                                                        onClick={() => setTheoMode(!theoMode)}
+                                                        className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
+                                                    >
+                                                        <div className="flex items-center relative">
+                                                            <img
+                                                                className="w-[20px] inline-block mr-2 "
+                                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/theo_mode_0b96ff74d6.png"
+                                                                alt="Theo mode"
+                                                            />
+                                                            <span>Theo mode</span>
+                                                        </div>
+
+                                                        <Toggle checked={theoMode} />
+                                                    </button>
+                                                </HoverTooltip>
+                                            </li>
+                                        )}
                                         {pathname === '/' && (
                                             <li className="px-1 whitespace-nowrap">
                                                 <button
