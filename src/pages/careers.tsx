@@ -13,6 +13,7 @@ import { WorkingAtPostHog } from '../components/Careers/WorkingAtPostHog'
 import { SEO } from '../components/seo'
 import { TeamQuote } from '../components/TeamQuote'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import MegaQuote from 'components/Careers/MegaQuote'
 
 const menu = [
     {
@@ -61,6 +62,9 @@ const IndexPage = () => {
             />
 
             <CareersHero />
+
+            <MegaQuote />
+
             <div className="careers-anchor-navbar">
                 <WhyWereHere />
                 <Transparency />
