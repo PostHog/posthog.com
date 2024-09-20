@@ -137,7 +137,7 @@ PostHog provides multiple modes for the behavior of person property filters. You
 
 ![Person properties mode](https://res.cloudinary.com/dmukukwp6/image/upload/v1726779369/posthog.com/contents/CleanShot_2024-09-19_at_13.53.25_2x.png)
 
-We recommend using "Use person properties from the time of the event," but "Use person IDs and person properties from the time of the event" is even faster if needed. The tradeoff is that the latter mode creates inaccurate funnels and unique user counts.
+We recommend using "Use person properties from the time of the event," but "Use person IDs and person properties from the time of the event" is even faster if needed. The tradeoff is that the latter mode creates inaccurate funnels and unique user counts if you have both anonymous and identified users.
 
 You can find more details about how these modes works in our doc on [how querying works](/docs/how-posthog-works/queries#filtering-on-person-properties).
 
