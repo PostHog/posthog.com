@@ -13,18 +13,21 @@ import { Mobile as MobileNav } from 'components/MainNav'
 import { useLayoutData } from './hooks'
 import SearchBox from 'components/Search/SearchBox'
 import Toggle from 'components/Toggle'
+import Tooltip from 'components/Tooltip'
 
 const TheoToggle = () => {
     const { theoMode, setTheoMode } = useLayoutData()
     return (
-        <div className="fixed top-4 right-4 flex items-center bg-accent dark:bg-accent-dark rounded-full border border-border dark:border-dark py-1 pl-2 pr-3">
-            <img
-                className="w-[25px] inline-block mr-2 "
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/theo_mode_0b96ff74d6.png"
-                alt="Theo mode"
-            />
-            <Toggle checked={theoMode} onChange={(checked) => setTheoMode(checked)} />
-        </div>
+        <Tooltip content="Want to disable Theo mode?" placement="right-start">
+            <div className="group fixed top-4 right-4 flex items-center bg-accent dark:bg-accent-dark rounded-full border border-border dark:border-dark py-1 pl-2 pr-3">
+                <img
+                    className="w-[25px] inline-block mr-1.5 grayscale group-hover:grayscale-0 transition-all duration-300 opacity-50 group-hover:opacity-100 relative group-hover:scale-[1.75] group-hover:-rotate-12 group-hover:-top-0.5"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/theo_mode_0b96ff74d6.png"
+                    alt="Want to disable Theo mode?"
+                />
+                <Toggle checked={theoMode} onChange={(checked) => setTheoMode(checked)} />
+            </div>
+        </Tooltip>
     )
 }
 
