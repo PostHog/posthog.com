@@ -112,7 +112,7 @@ export const CareersHero = () => {
                     <h2 className="text-2xl font-bold">{selectedJob.fields.title}</h2>
 
 
-                    <div className="flex gap-8">
+                    <div className="flex flex-col lg:flex-row gap-8">
                         <div className="flex-1">
                             <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                                 <Detail

@@ -11,7 +11,7 @@ const TeamMemberLink = (person) => {
     <span className="relative inline-block">
       <a href={person && `/community/profiles/${squeakId}`}>
 
-        <div className="size-48 rounded-full overflow-hidden flex justify-end items-end">
+        <div className="size-48 rounded-full overflow-hidden flex justify-end items-end mx-auto">
           {person ? (
             <img src={avatar?.formats?.thumbnail?.url} alt={`${firstName} ${lastName}`} className="size-48 bg-orange" />
           ) : (
@@ -106,15 +106,15 @@ const TeamMember: React.FC<{ name: string }> = ({ name }) => {
 
 const MegaQuote: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto p-4 lg:p-8 rounded-lg bg-accent dark:bg-accent-dark flex">
-      <aside className="min-w-80 max-w-full">
+    <div className="max-w-7xl mx-auto p-4 lg:p-8 rounded-lg bg-accent dark:bg-accent-dark flex flex-col-reverse gap-4 items-center lg:items-start lg:flex-row">
+      <aside className="min-w-80 max-w-full text-center">
         <TeamMember name="Raquel Smith" />
       </aside>
-      <div className="flex-1 p-4 bg-white dark:bg-dark rounded-lg flex-col-reverse lg:flex-col">
+      <div className="flex-1 p-6 lg:p-8 bg-white dark:bg-dark rounded-lg flex-col-reverse lg:flex-col [&_p]:text-lg [&_p:last-child]:mb-0">
         <p>At PostHog I'm given the trust to work on things that I think matter for the business and our customers.</p>
-        <p><strong>There are no politics, no micromanaging, and pretty extreme amounts of autonomy for every employee.</strong></p>
+        <p>There are <strong>no politics, no micromanaging,</strong> and <strong>pretty extreme amounts of autonomy</strong> for every employee.</p>
         <p>I've never worked at a company that can ship so well and so fast. The people here are of incredible caliber, and management just gets out of the way (while also being helpful) so everyone can just can do their job in the best way possible.</p>
-        <p><strong>Basically everything you hate* about your job *is the exact opposite here at PostHog. It's the weirdest, coolest place I've ever worked.</strong></p>
+        <p><strong>Basically everything you hate</strong> about your job <strong>is the exact opposite here at PostHog. It's the weirdest, coolest place I've ever worked.</strong></p>
       </div>
     </div>
   )
