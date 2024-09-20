@@ -9,29 +9,6 @@ import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { kebabCase } from 'lib/utils'
 import React, { useState } from 'react'
-import {
-    StickerMayor,
-    StickerFlagAR,
-    StickerFlagAT,
-    StickerFlagBE,
-    StickerFlagCA,
-    StickerFlagCO,
-    StickerFlagDE,
-    StickerFlagIE,
-    StickerFlagES,
-    StickerFlagFI,
-    StickerFlagFR,
-    StickerFlagGB,
-    StickerFlagHU,
-    StickerFlagHR,
-    StickerFlagNL,
-    StickerFlagPL,
-    StickerFlagUnknown,
-    StickerFlagUS,
-    StickerPineappleYes,
-    StickerPineappleNo,
-    StickerPineappleUnknown,
-} from 'components/Stickers/Index'
 import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
 import { Change } from './Changelog'
 import { MDXProvider } from '@mdx-js/react'
@@ -53,6 +30,7 @@ import { RenderInClient } from 'components/RenderInClient'
 import usePostHog from '../hooks/usePostHog'
 import { companyMenu } from '../navs'
 import { PrivateLink } from 'components/PrivateLink'
+import Stickers from 'components/ProfileStickers'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -98,86 +76,6 @@ const Section = ({ children, cta, title, className = '', id = '' }) => {
             )}
             <div>{children}</div>
         </section>
-    )
-}
-
-const Stickers = ({ country, pineappleOnPizza, isTeamLead, isModerator, id, handleTeamLead }) => {
-    const TeamLeadContainer = isModerator && handleTeamLead ? 'span' : 'button'
-
-    const handleTeamLeadClick = (e) => {
-        e.stopPropagation()
-        handleTeamLead(id, isTeamLead)
-    }
-
-    return (
-        <>
-            <span>
-                {country === 'BE' ? (
-                    <StickerFlagBE className="w-8 h-8" />
-                ) : country === 'US' ? (
-                    <StickerFlagUS className="w-8 h-8" />
-                ) : country === 'GB' ? (
-                    <StickerFlagGB className="w-8 h-8" />
-                ) : country === 'DE' ? (
-                    <StickerFlagDE className="w-8 h-8" />
-                ) : country === 'ES' ? (
-                    <StickerFlagES className="w-8 h-8" />
-                ) : country === 'FI' ? (
-                    <StickerFlagFI className="w-8 h-8" />
-                ) : country === 'HU' ? (
-                    <StickerFlagHU className="w-8 h-8" />
-                ) : country === 'HR' ? (
-                    <StickerFlagHR className="w-8 h-8" />
-                ) : country === 'IE' ? (
-                    <StickerFlagIE className="w-8 h-8" />
-                ) : country === 'FR' ? (
-                    <StickerFlagFR className="w-8 h-8" />
-                ) : country === 'NL' ? (
-                    <StickerFlagNL className="w-8 h-8" />
-                ) : country === 'AR' ? (
-                    <StickerFlagAR className="w-8 h-8" />
-                ) : country === 'AT' ? (
-                    <StickerFlagAT className="w-8 h-8" />
-                ) : country === 'CA' ? (
-                    <StickerFlagCA className="w-8 h-8" />
-                ) : country === 'CO' ? (
-                    <StickerFlagCO className="w-8 h-8" />
-                ) : country === 'PL' ? (
-                    <StickerFlagPL className="w-8 h-8" />
-                ) : (
-                    <StickerFlagUnknown className="w-8 h-8" />
-                )}
-            </span>
-            <span>
-                {pineappleOnPizza === null ? (
-                    <Tooltip content="We're not sure if they like pineapple on pizza (yet)!">
-                        <StickerPineappleUnknown className="w-8 h-8" />
-                    </Tooltip>
-                ) : pineappleOnPizza ? (
-                    <Tooltip content="Prefers pineapple on pizza!">
-                        <StickerPineappleYes className="w-8 h-8" />
-                    </Tooltip>
-                ) : (
-                    <Tooltip content="Does not believe pineapple belongs on pizza">
-                        <StickerPineappleNo className="w-8 h-8" />
-                    </Tooltip>
-                )}
-            </span>
-            {isTeamLead || isModerator ? (
-                <TeamLeadContainer {...(isModerator && handleTeamLead ? { onClick: handleTeamLeadClick } : {})}>
-                    <Tooltip content={isTeamLead ? 'Team lead' : 'Make team lead?'}>
-                        <span>
-                            <StickerMayor
-                                active={isTeamLead}
-                                className={`w-8 h-8 ${isTeamLead ? '' : 'opacity-40 hover:opacity-75'}`}
-                            />
-                        </span>
-                    </Tooltip>
-                </TeamLeadContainer>
-            ) : (
-                ''
-            )}
-        </>
     )
 }
 
@@ -518,8 +416,8 @@ export default function Team({
                                     <SidebarSection
                                         title="Total team height as measured in hedgehogs"
                                         tooltip={`The average hedgehog is ${posthog?.getFeatureFlag?.('are-you-in-the-us')
-                                                ? '7 inches'
-                                                : '17 centimeters'
+                                            ? '7 inches'
+                                            : '17 centimeters'
                                             } long`}
                                     >
                                         <ul className="list-none m-0 p-0 flex flex-wrap">
