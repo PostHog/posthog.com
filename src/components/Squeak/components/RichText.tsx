@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState, useCallback, useContext } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState, useCallback, useContext, useMemo } from 'react'
 import MarkdownLogo from './MarkdownLogo'
 import { useDropzone } from 'react-dropzone'
 import Spinner from 'components/Spinner'
@@ -11,6 +11,8 @@ import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
 import { AnimatePresence, motion } from 'framer-motion'
 import { IconX } from '@posthog/icons'
+import { graphql, useStaticQuery } from 'gatsby'
+import groupBy from 'lodash.groupby'
 
 const buttons = [
     {
@@ -82,15 +84,77 @@ const buttons = [
     },
 ]
 
-const MentionProfiles = ({ onSelect, onClose }) => {
+const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) => {
+    const { firstName, lastName, avatar } = profile.attributes
+    const name = [firstName, lastName].filter(Boolean).join(' ')
+
+    return (
+        <li className="border-b border-border dark:border-dark p-1">
+            <button
+                onClick={() => onSelect?.(profile, selectionStart)}
+                type="button"
+                className={`click text-left flex space-x-2 font-bold px-3 py-1 items-center rounded-sm hover:bg-accent hover:dark:bg-accent-dark w-full outline-none ${
+                    focused === index ? 'bg-accent dark:bg-accent-dark' : ''
+                }`}
+            >
+                <div className="size-6 overflow-hidden rounded-full">
+                    <Avatar className="w-full" image={avatar?.data?.attributes?.url} />
+                </div>
+                <div>
+                    <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>
+                    <p className="m-0 leading-none text-sm line-clamp-1">{name}</p>
+                </div>
+            </button>
+        </li>
+    )
+}
+
+const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
+    const { staffProfiles } = useStaticQuery(graphql`
+        {
+            staffProfiles: allSqueakProfile(sort: { fields: firstName }) {
+                nodes {
+                    avatar {
+                        url
+                    }
+                    firstName
+                    lastName
+                    squeakId
+                }
+            }
+        }
+    `)
     const currentQuestion = useContext(CurrentQuestionContext) ?? {}
     const replies = currentQuestion?.question?.replies
+    const selectionStart = useMemo(() => other.selectionStart, [])
+    const search = body.substring(selectionStart).split(' ')[0].replace('@', '')
     const mentionProfiles = [
         { attributes: { profile: { data: currentQuestion?.question?.profile?.data } } },
         ...replies?.data,
+        ...staffProfiles.nodes.map((node) => ({
+            attributes: {
+                profile: {
+                    data: {
+                        id: node.squeakId,
+                        attributes: { ...node, avatar: { data: { attributes: { url: node.avatar?.url } } } },
+                    },
+                },
+            },
+        })),
     ]
         .map((reply) => reply?.attributes?.profile?.data)
-        .filter((profile, index, self) => profile && self.findIndex((p) => p?.id === profile.id) === index)
+        .filter((profile, index, self) => {
+            const { firstName, lastName } = profile.attributes
+            const name = [firstName, lastName].filter(Boolean).join(' ')
+            return (
+                profile &&
+                self.findIndex((p) => p?.id === profile.id) === index &&
+                name.toLowerCase().includes(search.toLowerCase())
+            )
+        })
+    const grouped = groupBy(mentionProfiles, (profile) =>
+        staffProfiles.nodes.some((node) => node.squeakId === profile.id) ? 'Staff' : 'In this thread'
+    )
     const listRef = useRef<HTMLUListElement>(null)
     const [focused, setFocused] = useState(0)
 
@@ -106,7 +170,7 @@ const MentionProfiles = ({ onSelect, onClose }) => {
             }
             if (e.key === 'Tab' || e.key === 'Enter') {
                 e.preventDefault()
-                onSelect?.(mentionProfiles[focused])
+                onSelect?.(mentionProfiles[focused], selectionStart)
             }
         }
 
@@ -115,47 +179,43 @@ const MentionProfiles = ({ onSelect, onClose }) => {
         return () => {
             window.removeEventListener('keydown', handleKeyDown)
         }
-    }, [focused])
+    }, [focused, search])
 
     return (
         <motion.div
             initial={{ opacity: 0, translateX: '100%' }}
             animate={{ opacity: 1, translateX: 0, transition: { type: 'tween', duration: 0.1 } }}
             exit={{ opacity: 0, translateX: '100%' }}
-            className="w-[200px] h-full absolute right-0 top-0 z-50 pt-2.5 pr-2"
+            className="w-[200px] h-full absolute right-0 top-0 z-50 pt-2.5 pr-2.5"
         >
             <button
                 type="button"
-                className="p-1 rounded-full bg-white dark:bg-dark border border-border dark:border-dark absolute top-0.5 -left-2 z-10"
+                className="p-1 rounded-full bg-white dark:bg-dark border border-border dark:border-dark absolute top-0.5 right-0.5 z-20"
                 onClick={onClose}
             >
                 <IconX className="w-3" />
             </button>
             <ul
                 ref={listRef}
-                className="m-0 p-0 list-none border border-border dark:border-dark bg-light dark:bg-dark h-full rounded-md overflow-auto "
+                className="m-0 p-0 list-none border border-border dark:border-dark bg-light dark:bg-dark h-full rounded-md overflow-auto"
             >
-                {mentionProfiles.map((profile, index) => {
-                    const { firstName, lastName, avatar } = profile.attributes
-                    const name = [firstName, lastName].filter(Boolean).join(' ')
+                {Object.entries(grouped).map(([key, profiles], index) => {
                     return (
-                        <li className="border-b border-border dark:border-dark p-1" key={index}>
-                            <button
-                                onClick={() => onSelect?.(profile)}
-                                type="button"
-                                className={`click text-left flex space-x-2 font-bold px-3 py-1 items-center rounded-sm hover:bg-accent hover:dark:bg-accent-dark w-full outline-none ${
-                                    focused === index ? 'bg-accent dark:bg-accent-dark' : ''
-                                }`}
-                            >
-                                <div className="size-6 overflow-hidden rounded-full">
-                                    <Avatar className="w-full" image={avatar?.data?.attributes?.url} />
-                                </div>
-                                <div>
-                                    <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>
-                                    <p className="m-0 leading-none text-sm">{name}</p>
-                                </div>
-                            </button>
-                        </li>
+                        <>
+                            <li className="p-1 text-xs font-semibold sticky top-0 bg-light dark:bg-dark z-10">
+                                <span className="opacity-50">{key}</span>
+                            </li>
+                            {profiles.map((profile, index) => (
+                                <MentionProfile
+                                    focused={focused}
+                                    index={index}
+                                    onSelect={onSelect}
+                                    profile={profile}
+                                    selectionStart={selectionStart}
+                                    key={profile.id}
+                                />
+                            ))}
+                        </>
                     )
                 })}
             </ul>
@@ -297,7 +357,7 @@ export default function RichText({
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Escape' || e.key === 'Backspace') {
+            if (e.key === 'Escape' || e.key === 'Backspace' || e.key === ' ') {
                 setShowMentionProfiles(false)
             }
         }
@@ -309,9 +369,9 @@ export default function RichText({
         }
     }, [])
 
-    const handleProfileSelect = (profile) => {
-        const { selectionStart, selectionEnd } = getTextSelection()
-        const mention = `${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
+    const handleProfileSelect = (profile, selectionStart) => {
+        const { selectionEnd } = getTextSelection()
+        const mention = `@${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
         setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, mention, prevValue))
         setShowMentionProfiles(false)
         textarea.current?.focus()
@@ -341,6 +401,8 @@ export default function RichText({
                                 {showMentionProfiles && (
                                     <div ref={mentionProfilesRef} onClick={(e) => e.stopPropagation()}>
                                         <MentionProfiles
+                                            body={value}
+                                            selectionStart={textarea.current?.selectionStart}
                                             onClose={() => {
                                                 setShowMentionProfiles(false)
                                                 textarea.current?.focus()
