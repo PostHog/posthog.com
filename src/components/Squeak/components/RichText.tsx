@@ -357,7 +357,7 @@ export default function RichText({
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Escape' || e.key === 'Backspace' || e.key === ' ') {
+            if (e.key === 'Escape' || e.key === ' ') {
                 setShowMentionProfiles(false)
             }
         }
