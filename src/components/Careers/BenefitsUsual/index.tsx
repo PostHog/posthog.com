@@ -40,7 +40,7 @@ export const benefits = [
   },
 ]
 
-const SvgIcon: React.FC<{ src: string; className?: string }> = ({ src, className }) => {
+const Icon: React.FC<{ src: string; className?: string }> = ({ src, className }) => {
   return (
     <div
       className={className}
@@ -60,11 +60,11 @@ interface BenefitProps {
 
 const Benefit = ({ icon, title, details, className = '' }: BenefitProps) => {
   return (
-    <div className={`bg-accent dark:bg-accent-dark rounded-lg p-8 ${className}`}>
-      <div className="">
-        <SvgIcon src={icon} className="size-8" />
+    <div className={`flex${className}`}>
+      <div className="w-12">
+        <Icon src={icon} className="size-8 fill-current opacity-40" />
       </div>
-      <div className="flex-grow mt-4">
+      <div className="flex-1 flex-grow">
         <h4 className="mb-0 text-lg leading-tight">{title}</h4>
         <p className="mt-2">{details}</p>
       </div>
