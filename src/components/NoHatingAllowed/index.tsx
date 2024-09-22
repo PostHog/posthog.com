@@ -27,7 +27,7 @@ const Card = ({ top, bottom, Image, ImageSize, color }: CardProps) => {
   )
 }
 
-export default function NoHatingAllowed({ data, title, size }: { data: CardProps[]; title: string, size: string }) {
+export default function NoHatingAllowed({ data, youllHate, size }: { data: CardProps[]; youllHate: string, size: string }) {
   const listRef = useRef<HTMLUListElement>(null)
   const { enterpriseMode } = useLayoutData()
 
@@ -35,7 +35,7 @@ export default function NoHatingAllowed({ data, title, size }: { data: CardProps
     <div className="relative pt-8 mb-12 overflow-hidden">
       <h2 className={`text-center mb-5 ${size}`}>
         {!enterpriseMode && <span className="text-red uppercase block md:inline">Warning:</span>} You'll{' '}
-        {enterpriseMode ? <span className="text-red">LOVE</span> : 'hate'} {title} if...
+        {enterpriseMode ? <span className="text-red">LOVE</span> : 'hate'} {youllHate} if...
       </h2>
       <div className="absolute z-10 -left-10 top-64 bottom-32 w-48 bg-gradient-radial from-light/30 via-light/0 to-light/0 dark:from-dark/30 dark:via-dark/0 dark:to-dark/0" />
       <div className="absolute z-20 top-1/2 left-0 -translate-y-1/2 mt-16">

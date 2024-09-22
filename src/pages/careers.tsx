@@ -69,7 +69,9 @@ const IndexPage = () => {
             <MegaQuote />
 
             <CompanyHandbook />
-            <NoHatingAllowed data={CareersCards} title="working here" size="text-3xl lg:text-5xl" />
+            <NoHatingAllowed data={CareersCards} youllHate="working here" size="text-3xl lg:text-5xl" />
+
+
 
 
 

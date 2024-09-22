@@ -84,7 +84,7 @@ export const CareersHero = () => {
 
     return (
         <>
-            <h1 className="text-3xl xl:text-5xl font-bold text-center mb-2">Who's hiring</h1>
+            <h1 className="text-3xl lg:text-5xl font-bold text-center mb-2 pt-8">Who's hiring</h1>
             <p className="text-center mb-8 text-base">We currently looking to add <strong>{jobs.length} team members</strong>.</p>
             <div className="flex flex-col md:flex-row gap-4 px-4 max-w-7xl mx-auto 2xl:px-8 mb-8">
                 <div className="w-full md:w-1/4">
