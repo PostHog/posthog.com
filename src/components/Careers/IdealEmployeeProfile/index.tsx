@@ -19,7 +19,6 @@ const IdealEmployeeProfile: React.FC = () => {
         <h3 className="text-lg mb-1">Low egos</h3>
         <p>Fast, scrappy people thrive here. We're informal, we use clear language and get a broad variety of work done fast. We're not a fit if you want process.</p>
       </div>
-
     </section>
   )
 }
