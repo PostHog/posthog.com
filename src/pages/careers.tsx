@@ -17,6 +17,7 @@ import MegaQuote from 'components/Careers/MegaQuote'
 import CompanyHandbook from 'components/Careers/Handbook'
 import NoHatingAllowed from '../components/NoHatingAllowed'
 import { CareersCards } from '../components/NoHatingAllowed/data.js'
+import IdealEmployeeProfile from 'components/Careers/IdealEmployeeProfile'
 
 const menu = [
     {
@@ -70,6 +71,7 @@ const IndexPage = () => {
 
             <CompanyHandbook />
             <NoHatingAllowed data={CareersCards} youllHate="working here" size="text-3xl lg:text-5xl" />
+            <IdealEmployeeProfile />
 
 
 
