@@ -1630,3 +1630,8 @@ li.squeak-left-border {
 .tw-tweet + *:not(.tw-tweet) {
     @apply before:hidden;
 }
+
+.cursor-play {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" width="45" height="45" viewBox="0 0 33 33"><g fill="%23fff" filter="url(%23a)"><path fill-rule="evenodd" d="M16.25 6.75a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17Zm-10 8.5c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10Z" clip-rule="evenodd"/><path d="M14.25 18.054v-5.608a.5.5 0 0 1 .782-.413l4.112 2.804a.5.5 0 0 1 0 .826l-4.112 2.804a.5.5 0 0 1-.782-.413Z"/></g><defs><filter id="a" width="32" height="32" x=".25" y=".25" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dy="1"/><feGaussianBlur stdDeviation="3"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_15894_119681"/><feBlend in="SourceGraphic" in2="effect1_dropShadow_15894_119681" result="shape"/></filter></defs></svg>'),
+        auto;
+}

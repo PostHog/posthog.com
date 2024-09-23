@@ -15,7 +15,7 @@ import jamesQuote9 from './Audio/quote-9.mp3'
 import jamesQuote10 from './Audio/quote-10.mp3'
 
 const P = ({ children }) => {
-    return <p className="text-sm md:text-base mb-3">{children}</p>
+    return <p className="text-sm md:text-[15px] leading-normal mb-3">{children}</p>
 }
 
 export const FounderNote = () => {
@@ -49,53 +49,55 @@ export const FounderNote = () => {
     }
 
     return (
-        <div id="introduction" className="px-4 max-w-7xl mx-auto">
-            <div className="bg-white dark:bg-accent-dark p-4 lg:p-6 rounded">
+        <div id="introduction" className="px-4 max-w-7xl mx-auto mb-12">
+            <div className="bg-white dark:bg-accent-dark pt-4 px-4 rounded shadow-xl overflow-hidden">
+                <div className="border-b border-light dark:border-dark pb-2 mb-4">
+                    <strong>Hey from PostHog!</strong> 👋
+                </div>
 
-                <div className="grid grid-cols-12 gap-4">
-                    <div className="col-span-2">
-
-                        <button onClick={playRandomJamesAudio}>
+                <div className="flex flex-col-reverse lg:flex-row lg:gap-4 items-end">
+                    <div className="-mt-16 lg:mt-0 -mr-4 lg:mr-0">
+                        <button onClick={playRandomJamesAudio} className="relative top-[1px] lg:top-0 hover:top-[-3px] transform scale-100 hover:scale-[1.05] active:scale-[.995] active:top-px transition-all duration-100 cursor-play">
                             <StaticImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/team/james.png"
                                 alt="James Hawkins"
-                                className="w-14 h-14 rounded-full bg-yellow border-2 border-solid border-white cursor-pointer"
+                                className="size-[5.1rem] lg:size-36"
                                 placeholder="blurred"
                             />
                         </button>
                         <StaticImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/team/tim.png"
                             alt="Tim Glaser"
-                            className="w-14 h-14 rounded-full bg-red border-2 border-solid border-white -ml-4"
+                            className="size-[5rem] lg:size-[8.75rem] top-[3px] lg:top-0 lg:mt-1 -ml-6 lg:-ml-11"
                             placeholder="blurred"
                         />
                     </div>
 
-                    <div className="col-span-10 columns-2 gap-8">
+                    <div className="flex-1 pb-4">
 
-                        <P><strong>We're James and Tim.</strong> 👋</P>
-                        <P>
-                            We started PostHog during Y Combinator's W20 cohort and had the most successful
-                            B2B software launch on Hacker News since 2012 - with a product that was just 4
-                            weeks old.
-                        </P>
-                        <P>
-                            We now have over 10,000 customers, we're{' '}
-                            <Link to="http://www.paulgraham.com/aord.html">default alive</Link>, and we grow 97%
-                            through word of mouth.
-                        </P>
+                        <div className="lg:columns-2 lg:gap-4 xl:gap-6">
 
-                        <P>
-                            What does this mean for you? We have a lot of capital (and from the world's best
-                            investors), but we're a lean, strong team - so you've got the opportunity to
-                            have a huge impact.
-                        </P>
-                        <P>We'd love to have you join us!</P>
+                            <P>
+                                We started PostHog during Y Combinator's W20 cohort and had the most successful
+                                B2B software launch on Hacker News since 2012 - with a product that was just 4
+                                weeks old.
+                            </P>
+                            <P>
+                                We now have over 10,000 customers, we're{' '}
+                                <Link to="http://www.paulgraham.com/aord.html">default alive</Link>, and we grow 97%
+                                through word of mouth.
+                            </P>
 
-                        <div className="flex items-center space-x-3 transform scale-75">
-                            <James />
-                            <Plus />
-                            <Tim />
+                            <P>
+                                What does this mean for you? We have a lot of capital (and from the world's best
+                                investors), but we're a lean, strong team - so you've got the opportunity to
+                                have a huge impact. We'd love to have you join us!
+                            </P>
+                            <div className="flex items-center space-x-3">
+                                <James className="h-8" />
+                                <Plus className="h-4" />
+                                <Tim className="h-6" />
+                            </div>
                         </div>
                     </div>
                 </div>
