@@ -20,6 +20,7 @@ import { CareersCards } from '../components/NoHatingAllowed/data.js'
 import IdealEmployeeProfile from 'components/Careers/IdealEmployeeProfile'
 import BenefitsUnexpected from 'components/Careers/BenefitsUnexpected'
 import BenefitsUsual from 'components/Careers/BenefitsUsual'
+import Compensation from 'components/Careers/Compensation'
 
 const menu = [
     {
@@ -76,9 +77,19 @@ const IndexPage = () => {
             <IdealEmployeeProfile />
             <BenefitsUnexpected />
             <BenefitsUsual />
+            <Compensation />
 
 
 
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
 
 
             <div className="careers-anchor-navbar">
