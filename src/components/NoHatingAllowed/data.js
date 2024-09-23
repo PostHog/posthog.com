@@ -252,4 +252,11 @@ export const CareersCards = [
         Image: <StaticImage quality={100} placeholder="none" src="./images/mangle.png" />,
         ImageSize: 'w-[230px] mt-6',
     },
+    {
+        top: 'You require mockups before firing up your code editor',
+        bottom: "Projects are developer-led. Design isn't a blocker to shipping.",
+        color: '#FFD89E',
+        Image: <StaticImage quality={100} placeholder="none" src="./images/mangle.png" />,
+        ImageSize: 'w-[230px] mt-6',
+    },
 ]

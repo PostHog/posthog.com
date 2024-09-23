@@ -10,7 +10,7 @@ export const benefits = [
   {
     title: 'Unlimited paid time off (25 days minimum!)',
     details:
-      "You're required to take at least 25 days off per year. This doesn't come out of your sick leave or generous parental leave.",
+      "You're required to take at least 25 days off per year. (If you don't, you will be locked out of Slack. Just kidding.) This doesn't come out of your sick leave or generous parental leave.",
     icon: Pto
   },
   {
@@ -66,7 +66,7 @@ const Benefit = ({ icon, title, details, className = '' }: BenefitProps) => {
       </div>
       <div className="flex-1 flex-grow">
         <h4 className="mb-0 text-lg leading-tight">{title}</h4>
-        <p className="mt-2">{details}</p>
+        <p className="mt-1">{details}</p>
       </div>
     </div>
   )
@@ -76,12 +76,12 @@ const BenefitsUsual: React.FC = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-2 lg:gap-8">
       <div className="">
-        <h2 className="text-3xl xl:text-4xl font-bold mb-2">The usual benefits</h2>
-        <p>Everybody offers healthcare, paid time off, and a laptop, so we organized our benefits by awesomeness (and put the typical benefits near the bottom.</p>
+        <h2 className="text-4xl font-bold mb-2">The <em>usual</em> benefits</h2>
+        <p>Everybody offers healthcare, paid time off, and a laptop, so we organized our benefits by awesomeness. (Would we even be a tech startup without these?)</p>
 
-        <p>The one exception is equity (which you get), but is so unique that it deserves its own section below.</p>
+        <p className="mb-0">The one exception is equity (which you get), but is so unique that it deserves its own section below.</p>
       </div>
-      <div>
+      <div className="pt-12">
         <div className="grid gap-2">
           {benefits.map((benefit) => (
             <Benefit key={benefit.title} {...benefit} />
