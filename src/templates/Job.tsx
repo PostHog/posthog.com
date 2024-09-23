@@ -253,7 +253,8 @@ export default function Job({
                                 )}
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
-                                        <InterviewProcess role={title} />
+                                        <p>We do 2-3 short interviews, then pay you to do some real-life (or close to real-life) work.</p>
+                                        <InterviewProcess role={title} inApplicationProcess />
                                     </div>
                                 </Accordion>
                                 <Accordion title="Apply" id="apply">

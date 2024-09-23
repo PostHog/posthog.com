@@ -107,7 +107,7 @@ const TeamMember: React.FC<{ name: string }> = ({ name }) => {
 const MegaQuote: React.FC = () => {
   return (
     <div className="px-4">
-      <div className="max-w-7xl mx-auto p-4 lg:p-8 rounded-lg bg-accent dark:bg-accent-dark flex flex-col-reverse gap-4 items-center lg:items-start lg:flex-row">
+      <div className="max-w-7xl mx-auto p-4 lg:p-8 rounded-md bg-accent dark:bg-accent-dark flex flex-col-reverse gap-4 items-center lg:items-start lg:flex-row">
         <aside className="min-w-80 max-w-full text-center">
           <TeamMember name="Raquel Smith" />
         </aside>

@@ -21,6 +21,7 @@ import BenefitsUsual from 'components/Careers/BenefitsUsual'
 import Compensation from 'components/Careers/Compensation'
 import InterviewProcess from 'components/Job/InterviewProcess'
 import { FounderNote } from 'components/Careers/FounderNote'
+import { InterviewProcessOverview } from 'components/Careers/InterviewProcessOverview'
 
 const menu = [
     {
@@ -76,7 +77,7 @@ const IndexPage = () => {
             <BenefitsUsual />
             <Compensation />
 
-            <InterviewProcess />
+            <InterviewProcessOverview />
 
 
 
