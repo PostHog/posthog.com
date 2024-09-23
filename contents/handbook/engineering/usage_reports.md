@@ -26,3 +26,5 @@ python manage.py send_usage_report --date YYYY-MM-DD
 where the date is the day that the usage report would have been run, so is *one day past the date where usage reports are missing*. For instance, if we had 0 usage reports on May 11, the date you'd use in the command is actually May 12 (because usage reports are reporting usage for the previous day). 
 
 The command can take a while to run, and if it gets interrupted (eg because pods were turned over with a deploy) it'll fail again with `command terminated with exit code 137`. Simply reconnect and try again. If it's successful, you'll get a log like `21262 Reports sent!`. 
+
+It is recommended to run async using the `--async 1` option so you don't need to wait for all the billing requests to be completed synchronously. If you're using this option, it'll finish with `Done!`
