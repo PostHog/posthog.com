@@ -2342,6 +2342,10 @@ export const docsMenu = {
                             name: 'iOS',
                             url: '/docs/session-replay/ios',
                         },
+                        {
+                            name: 'React Native',
+                            url: '/docs/session-replay/react-native',
+                        },
                     ],
                 },
                 {
