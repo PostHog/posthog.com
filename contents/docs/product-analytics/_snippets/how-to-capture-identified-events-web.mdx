@@ -1,0 +1,12 @@
+Identified events are captured by default if you've set the `person_profiles` [config](/docs/libraries/js#config) to `always` (the default option).
+
+If you've set the `person_profiles` to `identified_only`, anonymous events are captured by default. Then, to capture identified events, call any of the following functions:
+
+- [`identify()`](/docs/product-analytics/identify)
+- [`alias()`](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user)
+- [`group()`](/docs/product-analytics/group-analytics)
+- [`setPersonProperties()`](/docs/product-analytics/person-properties)
+- [`setPersonPropertiesForFlags()`](/docs/libraries/js#overriding-server-properties)
+- [`setGroupPropertiesForFlags()`](/docs/libraries/js#overriding-server-properties)
+
+When you call any of these functions, it creates a [person profile](/docs/data/persons) for the user. Once this profile is created, all subsequent events for this user will be captured as identified events.

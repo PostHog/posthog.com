@@ -113,3 +113,90 @@ Once your PostHog instance is up and running, the next step is to start sending 
 ## Event ingestion
 
 It's a priority for us that events are fully processed and saved as soon as possible. Typically, events will be usable in queries within a few minutes.
+
+## Advanced: Anonymous vs identified events
+
+import WebIdentifiedVsAnonymous from './_snippets/web-anonymous-vs-identified'
+import BackendIdentifiedVsAnonymous from './_snippets/backend-anonymous-vs-identified'
+<Tab.Group tabs={[
+    'Web', 
+    'Node.js', 
+    'Python', 
+    'PHP', 
+    'Ruby', 
+    'Go', 
+    'React', 
+    'React Native', 
+    'Android', 
+    'iOS', 
+    'Java', 
+    'Rust', 
+    'Elixir', 
+    'Flutter', 
+    'api']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>Node.js</Tab>
+        <Tab>Python</Tab>
+        <Tab>PHP</Tab>
+        <Tab>Ruby</Tab>
+        <Tab>Go</Tab>
+        <Tab>React</Tab>
+        <Tab>React Native</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+        <Tab>Java</Tab>
+        <Tab>Rust</Tab>
+        <Tab>Elixir</Tab>
+        <Tab>Flutter</Tab>
+        <Tab>API</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <WebIdentifiedVsAnonymous />
+        </Tab.Panel>
+        <Tab.Panel>
+            <BackendIdentifiedVsAnonymous />
+        </Tab.Panel>
+        <Tab.Panel>
+            <BackendIdentifiedVsAnonymous />
+        </Tab.Panel>
+        <Tab.Panel>
+            <BackendIdentifiedVsAnonymous />
+        </Tab.Panel>
+        <Tab.Panel>
+            <BackendIdentifiedVsAnonymous />
+        </Tab.Panel>
+        <Tab.Panel>
+           <BackendIdentifiedVsAnonymous />
+        </Tab.Panel>
+        <Tab.Panel>
+            <WebIdentifiedVsAnonymous />
+        </Tab.Panel>
+        <Tab.Panel>
+           <div />
+        </Tab.Panel>
+        <Tab.Panel>
+           <div />
+        </Tab.Panel>
+        <Tab.Panel>
+            <div />
+        </Tab.Panel>
+        <Tab.Panel>
+            <div />
+        </Tab.Panel>
+        <Tab.Panel>
+          <div />
+        </Tab.Panel>
+        <Tab.Panel>
+           <div />
+        </Tab.Panel>
+        <Tab.Panel>
+           <div />
+        </Tab.Panel>
+        <Tab.Panel>
+            <div />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
