@@ -63,8 +63,36 @@ const BenefitsUnexpected: React.FC = () => {
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-8">
-      <h2 className="text-center text-2xl lg:text-4xl mb-2">Unexpected benefits</h2>
+      <h2 className="text-center text-5xl mb-2"><em className="text-red dark:text-yellow">Unexpected</em> benefits</h2>
       <p className="text-center font-semibold opacity-75">Perks you'll only find here</p>
+
+      <div className="grid md:grid-cols-2 md:items-center md:gap-8">
+        <aside className="order-2 md:order-1 relative">
+          <div className="dark:hidden">
+            <StaticImage src="./images/meeting-free-days.png" alt="Calendar with two glorious days of no meetings" />
+          </div>
+          <div className="hidden dark:block">
+            <StaticImage src="./images/meeting-free-days-dark.png" alt="Calendar with two glorious days of no meetings" />
+          </div>
+          <div className="lg:hidden absolute left-0 bottom-0 z-10">
+            <StaticImage src="./images/police-hog.png" alt="Police hog sez..." className="w-[106px] -scale-x-1" />
+            <StaticImage src="./images/police-hog-quote.png" alt="Look at all those empty time slots!" className="w-[194px] -ml-4" />
+          </div>
+        </aside>
+        <div className="order-1 md:order-2 relative">
+          <h3 className="text-3xl md:text-4xl mb-1"><span className="text-red dark:text-yellow">Two meeting-free days</span> per week</h3>
+          <p className="max-w-lg mb-3">After extensive research, we've found the best way to ship fast is to have fewer meetings.</p>
+
+          <p className="text-sm opacity-75 max-w-lg mb-3">
+            *Illustration is not indicative of an product engineer’s calendar at PostHog. We actually have relatively few meetings.
+          </p>
+
+          <div className="hidden lg:block">
+            <StaticImage src="./images/police-hog.png" alt="Police hog sez..." className="w-[106px] mt-10" />
+            <StaticImage src="./images/police-hog-quote.png" alt="Look at all those empty time slots!" className="w-[194px] -ml-4" />
+          </div>
+        </div>
+      </div>
 
       <Masonry
         breakpointCols={breakpointColumnsObj}
