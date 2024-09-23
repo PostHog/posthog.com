@@ -1004,6 +1004,10 @@ export const companyMenu = {
                     url: '/teams/data-warehouse',
                 },
                 {
+                    name: 'Error Tracking',
+                    url: '/teams/error-tracking',
+                },
+                {
                     name: 'Feature Success',
                     url: '/teams/feature-success',
                 },
