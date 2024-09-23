@@ -21,16 +21,21 @@ const formatCur = (val: number, currency = 'USD') => {
 
 const Section = ({
     title,
+    subtitle,
     description,
     children,
 }: {
     title: string
+    subtitle?: string
     description?: string
     children: React.ReactNode
 }) => {
     return (
         <div>
-            <h3 className="text-lg m-0 mt-5">{title}</h3>
+            <div className="flex items-baseline gap-1">
+                <h3 className="!text-[15px] !m-0">{title}</h3>
+                {subtitle && <span className="text-sm text-black/70 dark:text-white/70">{subtitle}</span>}
+            </div>
             {description && <p className="text-sm mb-2 text-black/70 dark:text-white/70">{description}</p>}
             {children}
         </div>
@@ -149,18 +154,21 @@ export const CompensationCalculator = ({
                 </Section>
             )}
             <Section
-                title={'Location (based on market rates)'}
+                title={'Location'}
+                subtitle={'(based on market rates)'}
                 description={descriptions['location'] && descriptions['location']}
             >
-                <div className="grid grid-cols-2 gap-x-4">
+                <div className="grid md:grid-cols-2 gap-x-4">
                     <Combobox
                         label="Country"
+                        hideLabel
                         value={country}
                         onChange={setItem('country')}
                         options={countries.sort()}
                     />
                     <Combobox
                         label="Region"
+                        hideLabel
                         value={region}
                         onChange={setItem('region')}
                         options={locationFactor
@@ -171,42 +179,48 @@ export const CompensationCalculator = ({
                     />
                 </div>
             </Section>
-            <Section title="Level" description={descriptions['level'] && descriptions['level']}>
-                {breakpoints.sm ? (
-                    <RadioGroup as="div" className="block" value={level} onChange={setItem('level')}>
-                        <div className="w-full inline-flex flex-col items-stretch md:flex-row md:items-center bg-white dark:bg-gray-accent-dark rounded divide-y md:divide-y-0 md:divide-x divide-black/10 overflow-hidden shadow-sm border border-black/10 text-sm mt-1.5">
-                            {Object.entries(levelModifier).map(([level, modifier]) => (
-                                <RadioGroup.Option
-                                    as="button"
-                                    key={level}
-                                    value={level}
-                                    className={({ checked }) => `
+            <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                    <Section title="Level" description={descriptions['level'] && descriptions['level']}>
+                        {breakpoints.sm ? (
+                            <RadioGroup as="div" className="block" value={level} onChange={setItem('level')}>
+                                <div className="w-full inline-flex flex-col items-stretch md:flex-row md:items-center bg-white dark:bg-gray-accent-dark rounded divide-y md:divide-y-0 md:divide-x divide-black/10 overflow-hidden shadow-sm border border-black/10 text-sm mt-1.5">
+                                    {Object.entries(levelModifier).map(([level, modifier]) => (
+                                        <RadioGroup.Option
+                                            as="button"
+                                            key={level}
+                                            value={level}
+                                            className={({ checked }) => `
                                 px-4 py-1.5 whitespace-nowrap text-left md:text-center
                               ${checked ? 'bg-orange text-white' : 'hover:bg-black/10'}
                             `}
-                                >
-                                    {level} <span>{modifier}</span>
-                                </RadioGroup.Option>
-                            ))}
-                        </div>
-                    </RadioGroup>
-                ) : (
-                    <Combobox
-                        value={level}
-                        onChange={setItem('level')}
-                        options={Object.keys(levelModifier)}
-                        display={(level) => `${level} ${levelModifier[level]}`}
-                    />
-                )}
-            </Section>
-            <Section title="Step" description={descriptions['step'] && descriptions['step']}>
-                <Combobox
-                    value={step}
-                    onChange={setItem('step')}
-                    options={Object.keys(stepModifier)}
-                    display={(step: string) => `${step} ${stepModifier[step]?.[0]} - ${stepModifier[step]?.[1]}`}
-                />
-            </Section>
+                                        >
+                                            {level} <span>{modifier}</span>
+                                        </RadioGroup.Option>
+                                    ))}
+                                </div>
+                            </RadioGroup>
+                        ) : (
+                            <Combobox
+                                value={level}
+                                onChange={setItem('level')}
+                                options={Object.keys(levelModifier)}
+                                display={(level) => `${level} (${levelModifier[level]})`}
+                            />
+                        )}
+                    </Section>
+                </div>
+                <div>
+                    <Section title="Step" description={descriptions['step'] && descriptions['step']}>
+                        <Combobox
+                            value={step}
+                            onChange={setItem('step')}
+                            options={Object.keys(stepModifier)}
+                            display={(step: string) => `${step} (${stepModifier[step]?.[0]} - ${stepModifier[step]?.[1]})`}
+                        />
+                    </Section>
+                </div>
+            </div>
 
             <Section title="Salary calculator">
                 <div className="px-4 py-2 my-2 max-w-lg border border-light dark:border-dark rounded">
@@ -245,20 +259,20 @@ export const CompensationCalculator = ({
                             <span className="font-bold">
                                 {job && country && region && currentLocation && level && step
                                     ? formatCur(
-                                          sfBenchmark[job] *
-                                              currentLocation.locationFactor *
-                                              levelModifier[level] *
-                                              stepModifier[step][0],
-                                          currentLocation.currency
-                                      ) +
-                                      ' - ' +
-                                      formatCur(
-                                          sfBenchmark[job] *
-                                              currentLocation.locationFactor *
-                                              levelModifier[level] *
-                                              stepModifier[step][1],
-                                          currentLocation.currency
-                                      )
+                                        sfBenchmark[job] *
+                                        currentLocation.locationFactor *
+                                        levelModifier[level] *
+                                        stepModifier[step][0],
+                                        currentLocation.currency
+                                    ) +
+                                    ' - ' +
+                                    formatCur(
+                                        sfBenchmark[job] *
+                                        currentLocation.locationFactor *
+                                        levelModifier[level] *
+                                        stepModifier[step][1],
+                                        currentLocation.currency
+                                    )
                                     : '--'}
                             </span>
                             <span className="text-sm">
@@ -268,6 +282,6 @@ export const CompensationCalculator = ({
                     </div>
                 </div>
             </Section>
-        </div>
+        </div >
     )
 }
