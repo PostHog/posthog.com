@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'components/Link'
 import { CompensationCalculator } from 'components/CompensationCalculator'
 import { IconChevronDown } from '@posthog/icons'
+import { CallToAction } from 'components/CallToAction'
 
 const Compensation: React.FC = () => {
   const equityTerms = [
@@ -29,7 +30,7 @@ const Compensation: React.FC = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 py-8">
       <h2 className="text-4xl font-bold mb-2 text-center">Compensation &amp; equity</h2>
-      <p className="text-center text-balance">We hire the best talent and pay accordingly. We want everyone to feel invested in the company's success, so we offer equity with very employee-friendly terms.</p>
+      <p className="text-center text-balance max-w-2xl mx-auto">We hire the best talent and pay accordingly. We want everyone to feel invested in the company's success, so we offer equity with very employee-friendly terms.</p>
 
       <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
         <div className="bg-accent dark:bg-accent-dark p-4 lg:p-6 rounded">
@@ -50,7 +51,9 @@ const Compensation: React.FC = () => {
             ))}
           </ul>
 
-          <p><Link href="handbook/people/share-options" className="font-semibold text-red dark:text-yellow">Learn more about share options</Link></p>
+          <CallToAction to="/handbook/people/share-options" type="secondary" size="sm">
+            Learn more about share options
+          </CallToAction>
         </div>
       </div>
     </section>
