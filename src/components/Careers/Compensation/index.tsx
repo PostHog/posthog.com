@@ -35,7 +35,7 @@ const Compensation: React.FC = () => {
         <div className="bg-accent dark:bg-accent-dark p-4 lg:p-6 rounded">
           <h3 className="text-xl mb-1">Transparent pay</h3>
           <p>Use our <Link href="/handbook/people/compensation">full salary calculator</Link> to see what you'll make here. You’ll know your approximate starting salary before you even apply.</p>
-          <CompensationCalculator />
+          <CompensationCalculator initialJob="Product Engineer" />
         </div>
         <div className="bg-accent dark:bg-accent-dark p-4 lg:p-6 rounded">
           <h3 className="text-xl mb-4">(Really) employee-friendly equity terms</h3>
