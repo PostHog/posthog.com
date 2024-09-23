@@ -38,22 +38,24 @@ To change your team's image, send it to [#team-website-and-docs](https://posthog
 > There's some manual config that needs to be done in our CMS. Ask the Website & Docs team for help here.
 
 1. Create Team record
-1. Add the [placeholder crest](https://www.figma.com/design/QCYxjm4wVVVvs6UA27xRmz/Website-art?node-id=2043-2&t=aO62tCO12PoIZMt9-1) with the new team's name on it
-1. Go to small team members' profiles, add them to the team, remove from other teams, and assign the tema lead
-1. Publish the changes to the team record
+2. Add the [placeholder crest](https://www.figma.com/design/QCYxjm4wVVVvs6UA27xRmz/Website-art?node-id=2043-2&t=aO62tCO12PoIZMt9-1) with the new team's name on it
+3. Go to small team members' profiles, add them to the team, remove from other teams, and assign the team lead
+4. Publish the changes to the team record
 
 #### Setup in the repo
 
 1. Create a directory for the team in `/contents/teams/{team-name}` and duplicate `index.mdx` and `objectives.mdx` from another team as a starting point
-1. Add the team's name to `src/navs/index.js` under the `companyMenu` section in alphabetical order under the _Engineering_ or _Not engineering_ heading
-1. Rebuild the site (after the Strapi configuration) to see the new page
+2. Add the team's name to `src/navs/index.js` under the `companyMenu` section in alphabetical order under the _Engineering_ or _Not engineering_ heading
+3. Rebuild the site (after the Strapi configuration) to see the new page
 
 #### Other tasks
 
 1. Request a custom team crest from Lottie. Describe your team with a few adjectives, maybe physical tools that can be used in an illustration, and a sentence or two about what you do.
-1. Add the small team's mission on their page once the site is built
-1. Add the team's feature ownership to the [feature list](/handbook/engineering/feature-ownership)
-
+2. Add the small team's mission on their page once the site is built
+3. Add the team's feature ownership to the [feature list](/handbook/engineering/feature-ownership)
+4. [Create a new team on GitHub](https://github.com/orgs/PostHog/teams) and remove the new members from their previous team
+5. Create the new `feature/team-{team-name}` labels [on GitHub](https://github.com/PostHog/posthog/labels)
+6. On Slack, create a new channel called #team-{team-name}. Add a new People > User group with the handle @team-{team-name}-folks. Add / Remove people from other groups as necessary.
 
 
 ### Removing a small team
