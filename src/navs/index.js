@@ -2663,6 +2663,12 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     icon: 'IconLive',
+                    children: [
+                        {
+                            name: 'Customer.io',
+                            url: '/docs/cdp/destinations/customerio',
+                        },
+                    ],
                 },
                 {
                     name: 'Batch exports',

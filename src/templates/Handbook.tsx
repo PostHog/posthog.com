@@ -153,6 +153,18 @@ type AppParametersProps = {
         | null
 }
 
+type TemplateParametersProps =
+    | {
+          key: string
+          type: string | null
+          label: string | null
+          description: string | null
+          default: string | null
+          secret: boolean | null
+          required: boolean | null
+      }[]
+    | null
+
 export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({ config }) => {
     const AppParameters = () => {
         if (!config) {
@@ -211,6 +223,60 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
     return AppParameters
 }
 
+export const TemplateParametersFactory: (params: TemplateParametersProps) => React.FC = (input_schema) => {
+    const TemplateParameters = () => {
+        if (!input_schema) {
+            return null
+        }
+
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {input_schema.map((input) => {
+                        if (!input.label) {
+                            return null
+                        }
+
+                        return (
+                            <tr key={input.key}>
+                                <td>
+                                    <div className="mb-6">
+                                        <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded">
+                                            {input.label}
+                                        </code>
+                                    </div>
+
+                                    {input.type && (
+                                        <div>
+                                            <strong>Type: </strong>
+                                            <span>{input.type}</span>
+                                        </div>
+                                    )}
+
+                                    <div>
+                                        <strong>Required: </strong>
+                                        <span>{input.required ? 'True' : 'False'}</span>
+                                    </div>
+                                </td>
+
+                                <td>{input.description ? <Markdown>{input.description || ''}</Markdown> : null}</td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        )
+    }
+
+    return TemplateParameters
+}
+
 export default function Handbook({
     data: { post, nextPost, glossary },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
@@ -219,7 +285,7 @@ export default function Handbook({
     const {
         body,
         frontmatter,
-        fields: { slug, contributors, appConfig },
+        fields: { slug, contributors, appConfig, templateConfig },
     } = post
     const {
         title,
@@ -270,6 +336,7 @@ export default function Handbook({
         a: A,
         TestimonialsTable,
         AppParameters: AppParametersFactory({ config: appConfig }),
+        TemplateParameters: TemplateParametersFactory(templateConfig),
         TeamRoadmap: (props) => TeamRoadmap({ team: title?.replace(/team/gi, '').trim(), ...props }),
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,

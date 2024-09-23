@@ -220,6 +220,35 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 console.error(`Error fetching plugin.json from ${owner}/${name}: ${error}`)
             }
         }
+
+        if (/^\/docs\/(apps|cdp)/.test(slug) && node?.frontmatter?.templateId) {
+            const templateId = node.frontmatter.templateId
+
+            try {
+                const res = await fetch(
+                    `https://mock_8627312fd6c54b6c937fc63cf59f4b0f.mock.insomnia.rest/hog_functions`
+                )
+
+                if (res.status !== 200) {
+                    throw `Got status code ${res.status}`
+                }
+
+                const body = await res.json()
+                const config = body.results.find(
+                    (template: { id: string }) => template?.id === templateId
+                ).inputs_schema
+
+                if (config) {
+                    createNodeField({
+                        node,
+                        name: `templateConfig`,
+                        value: config,
+                    })
+                }
+            } catch (error) {
+                console.error(`Error fetching input_schema for ${templateId}: ${error}`)
+            }
+        }
     }
 
     if (node.internal.type === 'Plugin' && node.url.includes('github.com') && process.env.GITHUB_API_KEY) {
