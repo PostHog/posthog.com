@@ -173,11 +173,6 @@ export default function Job({
                                         </p>
                                         <div className="mb-6">
                                             <CompensationCalculator
-                                                descriptions={{
-                                                    step: `We hire into the Established step by default and believe there's a place to have incremental steps to allow for more flexibility.`,
-                                                    location: `The benchmark for each role we are hiring for is based on the market rate in San Francisco.`,
-                                                    level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
-                                                }}
                                                 hideRole
                                                 initialJob={salaryRole}
                                             />

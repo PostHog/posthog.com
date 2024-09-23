@@ -25,16 +25,18 @@ const Section = ({
     subtitle,
     description,
     children,
+    hideTitle = false,
 }: {
     title: string
     subtitle?: string
     description?: string
     children: React.ReactNode
+    hideTitle?: boolean
 }) => {
     return (
         <div>
             <div className="flex items-baseline gap-1">
-                <h3 className="!text-[15px] !m-0">{title}</h3>
+                {!hideTitle && <h3 className="!text-[15px] !m-0">{title}</h3>}
                 {subtitle && <span className="text-sm text-black/70 dark:text-white/70">{subtitle}</span>}
                 {description && <Tooltip placement="top" content={() => <div className="max-w-xs">{description}</div>}>
                     <span className="inline-block p-0.5 opacity-60 hover:opacity-100 cursor-help relative -top-px -left-0.5">
@@ -50,7 +52,7 @@ const Section = ({
 
 const Factor: React.FC = (props) => {
     return (
-        <li className="list-none px-1 py-1 flex !text-[15px] justify-between border-t border-light dark:border-dark first:border-none">
+        <li className="flex-col @sm:flex-row list-none px-1 py-1 flex !text-[15px] justify-between border-t border-light dark:border-dark first:border-none !leading-snug">
             {props.children}
         </li>
     )
@@ -60,7 +62,12 @@ export const CompensationCalculator = ({
     hideFormula = false,
     hideRole = false,
     initialJob,
-    descriptions = { role: null, location: null, level: null, step: null },
+    descriptions = {
+        role: null,
+        location: 'The benchmark for each role we are hiring for is based on the market rate in San Francisco.',
+        level: 'We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill',
+        step: "We hire into the Established step by default and believe there's a place to have incremental steps to allow for more flexibility.",
+    },
 }: {
     hideFormula?: boolean
     hideRole?: boolean
@@ -153,7 +160,7 @@ export const CompensationCalculator = ({
 
     const countries = Array.from(new Set(locationFactor.map((l) => l.country)))
     return (
-        <div className="@container ph-no-capture space-y-4 mb-4">
+        <div className="@container ph-no-capture space-y-3 mb-4">
             {!hideRole && (
                 <Section title="Role" description={descriptions['role'] && descriptions['role']}>
                     <Combobox value={job} onChange={setItem('job')} options={Object.keys(sfBenchmark)} />
@@ -185,7 +192,7 @@ export const CompensationCalculator = ({
                     />
                 </div>
             </Section>
-            <div className="grid @sm:grid-cols-2 gap-4 @sm:gap-2 @md:gap-4 @lg:gap-6">
+            <div className="grid @sm:grid-cols-2 gap-4 @sm:gap-2 @md:gap-4 @lg:gap-6 !pb-1">
                 <div>
                     <Section title="Level" description={descriptions['level'] && descriptions['level']}>
                         {breakpoints.sm ? (
@@ -228,9 +235,8 @@ export const CompensationCalculator = ({
                 </div>
             </div>
             {job && country && region && currentLocation && level && step ? (
-
-                <Section title="Salary calculator">
-                    <div className="px-4 py-2 my-2 max-w-lg border border-light dark:border-dark rounded">
+                <Section title="Salary calculator" hideTitle={hideFormula}>
+                    <div className={` ${hideFormula ? '' : 'px-4 py-2 my-2 max-w-lg border border-light dark:border-dark rounded'}`}>
                         {!hideFormula && job && country && currentLocation && level && step && (
                             <ol className="ml-0 !mb-2 p-0 border-b-2 border-light dark:border-dark">
                                 <Factor>
@@ -260,9 +266,9 @@ export const CompensationCalculator = ({
                                 </Factor>
                             </ol>
                         )}
-                        <div className="rounded flex justify-between" id="compensation">
-                            <span className="font-bold">Salary</span>
-                            <span className="flex justify-end flex-col text-right">
+                        <div className={`rounded flex ${hideFormula ? 'border-t-2 justify-between border-light dark:border-dark pt-2' : 'justify-between'}`} id="compensation">
+                            <span className="font-bold">{hideFormula ? <span>Total</span> : 'Salary'}&nbsp;</span>
+                            <span className={`flex ${hideFormula ? 'gap-1 items-baseline' : 'flex-col justify-end text-right'}`}>
                                 <span className="font-bold">
                                     {formatCur(
                                         sfBenchmark[job] *
@@ -280,7 +286,7 @@ export const CompensationCalculator = ({
                                             currentLocation.currency
                                         )}
                                 </span>
-                                <span className="text-sm">plus equity</span>
+                                <span className="text-sm opacity-60">plus equity</span>
                             </span>
                         </div>
                     </div>
