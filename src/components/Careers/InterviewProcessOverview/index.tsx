@@ -13,9 +13,10 @@ export const InterviewProcessOverview = () => {
             <p className="max-w-md">We do 2-3 short interviews, then pay you to do some real-life (or close to real-life) work.</p>
           </div>
 
-          <div className="lg:pr-12 -ml-4">
-            <p className="font-bold pl-4 mb-0">POV: We're excited to meet you!</p>
+          <div className="lg:pr-12 lg:-ml-4 inline-block -rotate-1 lg:rotate-0">
             <StaticImage quality={90} placeholder="blurred" src="../../../images/sales/posthog-ae.png" width={872} height={476} alt="You in the interview process" className="w-full" />
+            <p className="font-medium pl-4 mb-0 text-sm text-center">POV: We're excited to meet you!</p>
+
           </div>
         </div>
         <div>

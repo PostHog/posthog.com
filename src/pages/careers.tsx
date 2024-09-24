@@ -72,7 +72,7 @@ const IndexPage = () => {
             <MegaQuote />
 
             <CompanyHandbook />
-            <NoHatingAllowed data={CareersCards} youllHate="working here" size="text-3xl lg:text-5xl" />
+            <NoHatingAllowed data={CareersCards} youllHate="working here" size="text-4xl lg:text-5xl" />
             <IdealEmployeeProfile />
             <BenefitsUnexpected />
             <BenefitsUsual />
