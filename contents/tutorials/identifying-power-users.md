@@ -40,7 +40,7 @@ You can find profiles in the people and groups tab. But you shouldn't try to man
 
 There's no single definition of 'power user.' Like an [ideal customer](/newsletter/ideal-customer-profile-framework), it varies from product to product, and sometimes even from different stages of maturity in the same product.
 
-Take some time to think about what it would mean to really push your product to its ceiling:
+Take some time to think about what it would mean to really push your product to its ceiling, such as:
 
 - Frequency of use
 - Interaction with specific features
