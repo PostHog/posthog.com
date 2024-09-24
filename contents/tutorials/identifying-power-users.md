@@ -51,7 +51,7 @@ In PostHog, for example, power users leverage [HogQL](/docs/hogql) to go beyond 
 
 It's ok if your initial assumptions are wrong, but it's useful to have a hypothesis. In the next stage, I'm going to explain how to identify your power users.
 
-# Power user signals
+## Step 2: Power user signals
 
 Try the simplest thing that works, then observe and iterate.
 
