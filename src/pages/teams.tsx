@@ -76,8 +76,8 @@ const Teams: React.FC = () => {
                                     >
                                         <GatsbyImage image={getImage(crest)} alt={`${name} Team`} />
                                         <h3 className="text-base my-2 leading-snug">{name} Team</h3>
-                                        <div className="flex justify-center -mr-3">
-                                            {profiles.data.map(
+                                        <div className="flex justify-center -mr-3" dir="rtl">
+                                            {profiles.data.slice().reverse().map(
                                                 ({ id, attributes: { firstName, lastName, avatar, color } }, index) => {
                                                     const name = [firstName, lastName].filter(Boolean).join(' ')
                                                     const isTeamLead = leadProfiles.data.some(
