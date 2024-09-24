@@ -13,14 +13,14 @@ crosspost:
   - Blog
 ---
 
-Duolingo has grown rapidly over the past few years, with a market cap recently exceeding $10B. ["Test everything"](https://blog.duolingo.com/improving-duolingo-one-experiment-at-a-time/) is one of their core principles, and it credits **A/B testing** as _the_ source of the company's success. [source](https://www.youtube.com/watch?v=9KqrnBiyBQ8)
+Duolingo has experienced insane growth over the past few years, with a market cap recently exceeding $10B. ["Test everything"](https://blog.duolingo.com/improving-duolingo-one-experiment-at-a-time/) is one of their core principles, and it credits **A/B testing** as _the_ source of the company's success. [source](https://www.youtube.com/watch?v=9KqrnBiyBQ8)
 
 In this article, we'll try to extract a few lessons from Duolingo's experimentation process.
 
-- reframe the way we think about our product, focusing on tiny details to continually improve quality
+- add engaging details to your product until it stands out in a sea of uninspired competitors
 - build a massive audience by offering a generous free tier
-- improve onboarding, retention, and user engagement
-- align the goals of our users with the goals of our company
+- decrease friction until users develop ~~an unhealthy addiction~~ a healthy craving for your app
+- align the goals of your users with the goals of your company
 
 ## 🕹️ Lesson 1: Think of your product as a detailed game
 
