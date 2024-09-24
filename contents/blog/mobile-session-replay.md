@@ -26,7 +26,7 @@ Others have complained about [the lack of good mobile replay options](https://me
 
 The secret about web session replay industry-wide is that it largely relies on a single open source library to work: [rrweb](https://github.com/rrweb-io/rrweb). It includes tools for recording web interactions and state changes, structuring session data, and playback. 
 
-Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, we needed to do all the work ourselves, and when compared to the web, this is a lot of work. This is because, instead of a single JavaScript library, language, and SDK, mobile requires multiple (like iOS, Android, and React Native). 
+Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, we needed to do all the work ourselves, and when compared to the web, this is a lot of work. This is because, instead of a single JavaScript library, language, and SDK, mobile requires multiple (like iOS, Android, React Native, and Flutter). 
 
 There are even breaking differences within platforms. For example, Jetpack Compose uses a compositional model for UI, different from Android's traditional view-based model. This means you need to develop separate ways of doing replays when using it. iOS has a similar problem with SwiftUI.
 
