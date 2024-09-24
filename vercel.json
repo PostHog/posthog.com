@@ -428,7 +428,6 @@
         { "source": "/apps/snowflake-export/docs", "destination": "/docs/apps/snowflake-export" },
         { "source": "/apps/taxonomy-standardizer/docs", "destination": "/docs/apps/taxonomy-standardizer" },
         { "source": "/apps/timestamp-parser/docs", "destination": "/docs/apps/timestamp-parser" },
-        { "source": "/apps/twilio/docs", "destination": "/docs/apps/twilio" },
         { "source": "/apps/twitter-followers/docs", "destination": "/docs/apps/twitter-followers" },
         { "source": "/apps/unduplicator/docs", "destination": "/docs/cdp" },
         { "source": "/apps/url-normalizer/docs", "destination": "/docs/apps/url-normalizer" },
@@ -845,7 +844,6 @@
         { "source": "/apps/stripe-connector", "destination": "/cdp" },
         { "source": "/apps/taxonomy-standardizer", "destination": "/cdp/taxonomy-standardizer" },
         { "source": "/apps/timestamp-parser", "destination": "/cdp/timestamp-parser" },
-        { "source": "/apps/twilio", "destination": "/cdp/twilio" },
         { "source": "/apps/twitter-followers", "destination": "/cdp/" },
         { "source": "/apps/unduplicator", "destination": "/cdp/" },
         { "source": "/apps/url-normalizer", "destination": "/cdp/url-normalizer" },
@@ -911,7 +909,6 @@
         { "source": "/docs/apps/stripe-connector", "destination": "/docs/cdp/stripe-connector" },
         { "source": "/docs/apps/taxonomy-standardizer", "destination": "/docs/cdp/taxonomy-standardizer" },
         { "source": "/docs/apps/timestamp-parser", "destination": "/docs/cdp/timestamp-parser" },
-        { "source": "/docs/apps/twilio", "destination": "/docs/cdp/twilio" },
         { "source": "/docs/apps/twitter-followers", "destination": "/docs/cdp/twitter-followers" },
         { "source": "/docs/apps/unduplicator", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/url-normalizer", "destination": "/docs/cdp/url-normalizer" },
@@ -1338,6 +1335,14 @@
             "source": "/pricing",
             "destination": "/surveys#pricing",
             "has": [{ "type": "query", "key": "product", "value": "surveys" }]
+        },
+        {
+            "source": "/handbook/growth/sales/icp",
+            "destination": "/handbook/growth/marketing/icp"
+        },
+      {
+            "source": "/teams/pipeline",
+            "destination": "/teams/cdp"
         }
     ]
 }

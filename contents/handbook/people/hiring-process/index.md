@@ -22,6 +22,14 @@ This has resulted in the highest number of qualified and motivated candidates re
 - Giving candidates genuinely useful and direct feedback if they weren't successful with us
 - Running a smooth and incredibly slick recruitment process, from application to offer
 
+## Countries we employ people in
+
+We are all-remote, but we have a few limitations on the countries we are able to employ people in:
+
+- We hire within -8 to +2 GMT timezones - beyond these, it proves too difficult for us to collaborate effectively. We do hire in GMT +2 countries that shift to GMT +3 for daylight saving time only (e.g. Bulgaria, Greece). 
+- Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria
+- We don't currently employ people in France or Italy due to the high costs (40-50% on top of gross salary)
+
 ## Hiring Process
 
 ### Summary of process for current live roles
@@ -33,7 +41,7 @@ This has resulted in the highest number of qualified and motivated candidates re
 | Product Engineers          | Multiple teams                  | Tech Lead  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ an engineer (60mins)</li><li>Small team screen w/ James (30mins)</li><li>SuperDay - task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>           |
 | Mobile Engineer              | Replay                   | Paul   | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Paul (60mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
 | Support Engineer             | Comms                 | Joe  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Joe (30mins)</li><li>Small team screen w/ James (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
-| Site Relaibility Engineer              | Infrastructure                  | Ben  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Ben (60mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
+| Site Reliability Engineer              | Infrastructure                  | Ben  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Ben (60mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
 | Community Manager              | Comms                 | Joe  | <ol><li>Culture screen with Coua (30mins)</li><li>Technical screen w/ Joe (30mins)</li><li>Small team screen w/ James H. (30mins)</li><li>SuperDay- task assessment, peer team interview, and culture and motivation interview w/ Tim (8-10hrs)</li></ol>            |
 
 
@@ -82,7 +90,7 @@ Once the hiring manager has signed off on the spec, we will publish it on Ashby 
 
 #### Job boards
 
-Ashby will automatically add the role on our [careers page](/careers). It will also 'helpfully' publish it on a bunch of other free but irrelevant job boards - you should manually remove all of those except for Ashby and LinkedIn. [AngelList](https://angel.co/company/posthoghq/jobs) will need to be posted manually. 
+Ashby will automatically add the role on our [careers page](/careers). It will also 'helpfully' publish it on a bunch of other free but irrelevant job boards - you should manually remove all of those except for Ashby and LinkedIn. [Wellfound](https://wellfound.com/company/posthoghq/jobs) will need to be posted manually. 
 
 As a Y Combinator company, we can post [jobs ads on the HackerNews front page](https://news.ycombinator.com/jobguide.html) for free at [https://news.ycombinator.com/submitjob](https://news.ycombinator.com/submitjob). This requires a founder's HackerNews account to do so. 
 
@@ -218,7 +226,7 @@ The final stage of our interview process is what we call a PostHog SuperDay. Thi
 
 > If it is difficult for a candidate to commit to a whole day in one go - they may not be able to get the time off, or have childcare commitments that make this difficult - we can be _very_ flexible. For example, we can split the SuperDay across two or more sessions, and can align timezones to suit the candidate, given we have a team that's globally distributed. A candidate will never lose out because they are not available to do a SuperDay right away.
 
-The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of their potential direct team members, and if they haven’t already, our founders. This gives the candidate a chance to learn how we work, and for us to see the quality, speed and communication of the candidate. It is a demanding day of work.
+The candidate will be working on a task that is similar to the day-to-day work someone in this role does at PostHog. They will also have the chance to meet a few of their potential direct team members, and if they haven’t already, our founders. This gives the candidate a chance to show off their skills, and for us to see the quality, speed and communication of the candidate. It is a demanding day of work.
 
 We will pay the candidate their 'normal day rate.' If they have done contracting before they will have one, but if not we can use [this formula](https://www.ellwoodatfield.com/event/how-to-calculate-out-your-day-rate/) to calculate it. If the candidate is unable to accept payment for the SuperDay, we will donate the amount to a charity of their choice from our [Project list](/handbook/growth/marketing/open-source-sponsorship) of sponsorships.
 
@@ -258,11 +266,9 @@ If we don't make an offer, it's important to clearly outline to the candidate wh
 
 Hooray!
 
-The People & Ops team will prepare the offer details. James and Tim give final signoff. We then schedule an offer call with the candidate and James or Tim. 
+The People & Ops team will prepare the offer details. James and Tim give final signoff. We then schedule an offer call with the candidate and Charles. 
 
-During the offer call, James or Tim will share feedback from the interview process, and will sell the role and opportunity here at PostHog. They will also briefly cover the offer details (salary, equity, benefits), and answer any open questions. 
-
-The People & Ops team will then follow up with an offer email, outlining all details. 
+During the offer call, Charles will share feedback from the interview process, and will sell the role and opportunity here at PostHog. He will also briefly cover the offer details (salary, equity, benefits), and answer any open questions. He'll then follow up with an offer email, outlining all details. If a candidate is proving tricky to close, he may escalate to James or Tim to help. 
 
 Once the candidate accepts, the People & Ops team will kick off the [onboarding process](/handbook/people/onboarding) and take the role offline, after rejecting all remaining candidates. 
 

@@ -95,3 +95,36 @@ PostHog::init("<ph_project_api_key>",
   ) 
 );
 ```
+
+### Error handling
+
+When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
+
+```php
+function handleFeatureFlag($client, $flagKey, $distinctId) {
+    try {
+        $isEnabled = $client->isFeatureEnabled($flagKey, $distinctId);
+        echo "Feature flag '$flagKey' for user '$distinctId' is " . ($isEnabled ? 'enabled' : 'disabled') . "\n";
+        return $isEnabled;
+    } catch (Exception $e) {
+        echo "Error fetching feature flag '$flagKey': " . $e->getMessage() . "\n";
+        // Optionally, you can return a default value or throw the error
+        // return false; // Default to disabled
+        throw $e;
+    }
+}
+
+// Usage example
+try {
+    $flagEnabled = handleFeatureFlag($client, 'new-feature', 'user-123');
+    if ($flagEnabled) {
+        // Implement new feature logic
+    } else {
+        // Implement old feature logic
+    }
+} catch (Exception $e) {
+    // Handle the error at a higher level
+    echo 'Feature flag check failed, using default behavior';
+    // Implement fallback logic
+}
+```

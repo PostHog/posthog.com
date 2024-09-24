@@ -897,8 +897,7 @@ function Terms() {
                             laws provisions. The federal and state courts sitting in San Francisco County, California,
                             U.S.A. will have proper and exclusive jurisdiction and venue with respect to any disputes
                             arising from or related to the subject matter of this Agreement. If you provide PostHog with
-                            a link to a recorded video of you reading out these terms in full, we will send you one of
-                            every item of merch we sell today and in future for free.
+                            a link to a recorded video of you reading out these terms in full, we will hook you up with FIVE merch items of your choice for free. 
                         </p>
                     </div>
                     <div className="md:pt-10">

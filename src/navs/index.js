@@ -508,6 +508,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing/value-propositions',
             },
             {
+                name: 'ICP scoring',
+                url: '/handbook/growth/marketing/icp',
+            },
+            {
                 name: 'Marketing channels',
                 url: '',
                 children: [
@@ -688,8 +692,8 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/crm',
                     },
                     {
-                        name: 'ICP scoring',
-                        url: '/handbook/growth/sales/icp',
+                        name: 'Lead scoring',
+                        url: '/handbook/growth/sales/lead-scoring',
                     },
                     {
                         name: 'YC onboarding',
@@ -1000,6 +1004,10 @@ export const companyMenu = {
                     url: '/teams/data-warehouse',
                 },
                 {
+                    name: 'Error Tracking',
+                    url: '/teams/error-tracking',
+                },
+                {
                     name: 'Feature Success',
                     url: '/teams/feature-success',
                 },
@@ -1185,6 +1193,13 @@ export const docsMenu = {
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Capacitor',
+                            url: '/docs/libraries/capacitor',
+                            badge: {
+                                title: '3rd party',
                             },
                         },
                         {
@@ -2076,6 +2091,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Cutting costs',
+                    url: '/docs/product-analytics/cutting-costs',
+                    icon: 'IconPiggyBank',
+                    color: 'purple',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
@@ -2186,6 +2207,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Web vitals',
+                    url: '/docs/product-analytics/web-vitals',
+                    icon: 'IconWrench',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Data management',
                     url: '/docs/data',
                     icon: 'IconDatabase',
@@ -2294,6 +2321,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Cutting costs',
+                    url: '/docs/session-replay/cutting-costs',
+                    icon: 'IconPiggyBank',
+                    color: 'yellow',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -2319,6 +2352,10 @@ export const docsMenu = {
                         {
                             name: 'iOS',
                             url: '/docs/session-replay/ios',
+                        },
+                        {
+                            name: 'React Native',
+                            url: '/docs/session-replay/react-native',
                         },
                     ],
                 },
@@ -2410,6 +2447,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/tutorials',
                     icon: 'IconGraduationCap',
                     color: 'blue',
+                },
+                {
+                    name: 'Cutting costs',
+                    url: '/docs/feature-flags/cutting-costs',
+                    icon: 'IconPiggyBank',
+                    color: 'yellow',
                 },
                 {
                     name: 'Features',
@@ -2723,10 +2766,6 @@ export const docsMenu = {
                             name: 'Sentry',
                         },
                         {
-                            url: '/docs/cdp/twilio',
-                            name: 'Twilio',
-                        },
-                        {
                             url: '/docs/cdp/variance-connector',
                             name: 'Variance',
                         },
@@ -2858,6 +2897,10 @@ export const docsMenu = {
                         {
                             name: 'Postgres',
                             url: '/docs/data-warehouse/setup/postgres',
+                        },
+                        {
+                            name: 'Salesforce',
+                            url: '/docs/data-warehouse/setup/salesforce',
                         },
                         {
                             name: 'MySQL',
@@ -2995,7 +3038,7 @@ export const docsMenu = {
 export const pricingMenu = {
     name: 'Pricing',
     url: '/pricing',
-    icon: 'IconCdCase',
+    icon: 'IconReceipt',
     children: [
         {
             name: 'PostHog Cloud',
@@ -3009,12 +3052,12 @@ export const pricingMenu = {
         //     color: 'purple',
         //     url: '/events',
         // },
-        // {
-        //     name: 'Add-ons',
-        //     icon: 'IconPuzzle',
-        //     color: 'seagreen',
-        //     url: '/addons',
-        // },
+        {
+            name: 'Add-ons',
+            icon: 'IconPuzzle',
+            color: 'seagreen',
+            url: '/addons',
+        },
         {
             name: 'Pricing philosophy',
             icon: 'IconLightBulb',

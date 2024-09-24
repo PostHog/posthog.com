@@ -352,6 +352,6 @@ Now that we're capturing events, we can create [insights](/docs/product-analytic
 
 ## Further reading
 
-- [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
+- [How to compare AWS Bedrock prompts](/tutorials/compare-aws-bedrock-prompts)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
-- [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
+- [How to compare AWS Bedrock foundational models](/tutorials/compare-aws-bedrock-foundational-models)

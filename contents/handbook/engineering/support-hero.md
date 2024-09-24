@@ -10,7 +10,7 @@ As Support Hero, your job is to investigate and resolve issues reported by custo
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-<TeamMember name="Marcus Hof" photo />, <TeamMember name="Steven Shults" photo />, and <TeamMember name="Abigail Richardson" photo />, our Support Engineers, triage tickets for the Product Analytics, CDP, Session Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+<TeamMember name="Marcus Hof" photo />, <TeamMember name="Steven Shults" photo />, and <TeamMember name="Abigail Richardson" photo />, our Support Engineers, triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -33,8 +33,8 @@ Swap with a teammate in advance! Find a volunteer by asking in Slack, then use P
 
 Each engineering team has its own list of tickets in Zendesk:
 
-- [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated tickets only)
-- [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027)
+- [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated only)
+- [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027) (escalated only)
 - [Feature Success](https://posthoghelp.zendesk.com/agent/filters/25210600744731) (escalated only)
 - [Replay](https://posthoghelp.zendesk.com/agent/filters/25210723706907) (escalated only)
 - [CDP](https://posthoghelp.zendesk.com/agent/filters/28134703633179) (escalated only)
@@ -92,7 +92,8 @@ You've got a couple of options.  By order of quickness:
 1. Use the VIP Lookup Bot:
  
     In any Slack channel, type `@VIP Lookup Bot [Customer]` (without the brackets.) 
-    'Customer' can be the organization name (case-sensitive), or their organization ID.
+    'Customer' can be the organization name (case-sensitive), or their organization ID. It does work, but the results take up to 30s to load. 
+
 2. In ZenDesk: 
 
    Click the org name near the upper-left of the ticket. The left sidebar opens. 

@@ -9,7 +9,7 @@ import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
 import Logomark from 'components/Home/images/Logomark'
 import { CallToAction } from 'components/CallToAction'
-import { IconInfo, IconThumbsDown, IconThumbsUp, IconWarning } from '@posthog/icons'
+import { IconInfo, IconThumbsDown, IconThumbsUp } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
@@ -20,18 +20,94 @@ type ReplyProps = {
     className?: string
 }
 
-const AIDisclaimer = ({ replyID, refresh, topic }) => {
+const AIDisclaimerMod = ({ opName, replyID, mutate }) => {
+    const { getJwt } = useUser()
+    const [loading, setLoading] = useState(false)
+
+    const handleHelpful = async (helpful: boolean) => {
+        setLoading(true)
+        if (helpful) {
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/ask-max/publish/${replyID}`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            })
+        } else {
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${replyID}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            })
+        }
+        setLoading(false)
+        mutate()
+    }
+
+    return (
+        <div className="p-4 border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark mt-1 mb-3">
+            <p className="m-0 text-sm">
+                <IconFeatures className="size-6 relative mr-1 -top-0.5 text-primary dark:text-primary-dark opacity-50 inline-block" />
+                <strong>This answer is only visible to moderators.</strong> Does it answer {opName}'s question?
+            </p>
+
+            <div className="flex items-center space-x-2 mt-2">
+                <CallToAction disabled={loading} size="sm" type="secondary" onClick={() => handleHelpful(true)}>
+                    <span className="flex space-x-1 items-center">
+                        <IconThumbsUp className="size-4 text-green flex-shrink-0" />
+                        <span>Yes, publish and notify subscribers</span>
+                    </span>
+                </CallToAction>
+                <CallToAction disabled={loading} size="sm" type="secondary" onClick={() => handleHelpful(false)}>
+                    <span className="flex space-x-1 items-center">
+                        <IconThumbsDown className="size-4 text-red flex-shrink-0" />
+                        <span>No, delete this answer</span>
+                    </span>
+                </CallToAction>
+            </div>
+        </div>
+    )
+}
+
+const feedbackOptions = [
+    {
+        label: 'Yes, mark as solution',
+        helpful: true,
+    },
+    {
+        label: "Not the answer I'm looking for",
+        helpful: false,
+    },
+    {
+        label: 'I think this is a bug',
+        helpful: false,
+    },
+    {
+        label: 'My question is more nuanced',
+        helpful: false,
+    },
+    {
+        label: 'Answer is wrong',
+        helpful: false,
+    },
+]
+
+const AIDisclaimer = ({ replyID, mutate, topic, isAuthor, confidence }) => {
     const posthog = usePostHog()
     const { getJwt } = useUser()
     const { handleResolve } = useContext(CurrentQuestionContext)
     const [helpful, setHelpful] = useState<boolean | null>(null)
 
-    const handleHelpful = async (helpful: boolean) => {
+    const handleHelpful = async (helpful: boolean, feedback: string) => {
         try {
             setHelpful(helpful)
             posthog?.capture('Community AI reply', {
                 replyID,
                 helpful,
+                confidence,
+                feedback,
                 topic: {
                     label: topic?.attributes?.label,
                     id: topic?.id,
@@ -53,7 +129,7 @@ const AIDisclaimer = ({ replyID, refresh, topic }) => {
 
             await handleResolve(helpful, replyID)
 
-            refresh()
+            mutate()
         } catch (error) {
             console.error(error)
         }
@@ -85,20 +161,22 @@ const AIDisclaimer = ({ replyID, refresh, topic }) => {
                 </p>
             )}
             {helpful === null && (
-                <div className="flex items-center space-x-2 mt-2">
-                    <CallToAction size="sm" type="secondary" onClick={() => handleHelpful(true)}>
-                        <span className="flex space-x-1 items-center">
-                            <IconThumbsUp className="size-4 text-green flex-shrink-0" />
-                            <span>Yes, mark as solution</span>
-                        </span>
-                    </CallToAction>
-                    <CallToAction size="sm" type="secondary" onClick={() => handleHelpful(false)}>
-                        <span className="flex space-x-1 items-center">
-                            <IconThumbsDown className="size-4 text-red flex-shrink-0" />
-                            <span>No, request human review</span>
-                        </span>
-                    </CallToAction>
-                </div>
+                <ul className="flex items-center space-x-2 list-none p-0 flex-wrap -ml-2">
+                    {feedbackOptions.map(({ label, helpful }) => {
+                        return (
+                            <li className="ml-2 mt-2" key={label}>
+                                <button
+                                    className={`click px-3 py-1 bg-white dark:bg-dark rounded-full text-sm font-semibold border ${
+                                        helpful ? 'border-green' : 'border-red'
+                                    }`}
+                                    onClick={() => handleHelpful(helpful, label)}
+                                >
+                                    {label}
+                                </button>
+                            </li>
+                        )
+                    })}
+                </ul>
             )}
         </div>
     )
@@ -107,7 +185,7 @@ const AIDisclaimer = ({ replyID, refresh, topic }) => {
 export default function Reply({ reply, badgeText }: ReplyProps) {
     const {
         id,
-        attributes: { body, createdAt, profile, publishedAt },
+        attributes: { body, createdAt, profile, publishedAt, meta },
     } = reply
 
     const {
@@ -222,10 +300,24 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
             </div>
 
             <div className="border-l-0 ml-[33px] pl-0 pb-1">
-                {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) && helpful === null && (
-                    <AIDisclaimer topic={topics?.data?.[0]} replyID={id} refresh={mutate} />
-                )}
-                <div className={reply?.attributes?.helpful === false ? 'opacity-70' : ''}>
+                {profile.data.id === Number(process.env.GATSBY_AI_PROFILE_ID) &&
+                    helpful === null &&
+                    (isModerator && !publishedAt ? (
+                        <AIDisclaimerMod
+                            opName={questionProfile.data.attributes.firstName || 'OP'}
+                            replyID={id}
+                            mutate={mutate}
+                        />
+                    ) : (
+                        <AIDisclaimer
+                            isAuthor={isAuthor}
+                            topic={topics?.data?.[0]}
+                            replyID={id}
+                            mutate={mutate}
+                            confidence={meta?.confidence}
+                        />
+                    ))}
+                <div className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}>
                     {reply?.attributes?.helpful === false && (
                         <div className="p-2 rounded border border-light dark:border-dark mb-2 text-sm bg-accent dark:bg-accent-dark">
                             <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful and is only

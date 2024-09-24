@@ -11,6 +11,8 @@ import { PricingTiers } from '../Plans'
 import ProductAnalyticsTab, { analyticsSliders, getTotalEnhancedPersonsVolume } from './Tabs/ProductAnalytics'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
+import { NumericFormat } from 'react-number-format'
+import AutosizeInput from 'react-input-autosize'
 
 const Addon = ({ type, name, description, plans, addons, setAddons, volume, inclusion_only }) => {
     const addon = addons.find((addon) => addon.type === type)
@@ -24,9 +26,9 @@ const Addon = ({ type, name, description, plans, addons, setAddons, volume, incl
                         ...addon,
                         totalCost: checked
                             ? calculatePrice(
-                                inclusion_only ? (percentage / 100) * volume : volume,
-                                plans[plans.length - 1].tiers
-                            ).total
+                                  inclusion_only ? (percentage / 100) * volume : volume,
+                                  plans[plans.length - 1].tiers
+                              ).total
                             : 0,
                     }
                 }
@@ -136,7 +138,13 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                             <div className="grid grid-cols-8">
                                 <div className="col-span-6">
                                     <p className="mb-2">
-                                        <strong>{Math.round(volume).toLocaleString()}</strong>{' '}
+                                        <NumericFormat
+                                            inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
+                                            value={volume}
+                                            thousandSeparator=","
+                                            onValueChange={({ floatValue }) => setVolume(type, floatValue)}
+                                            customInput={AutosizeInput}
+                                        />{' '}
                                         <span className="opacity-70 text-sm">{billingData.unit}s/month</span>
                                     </p>
                                 </div>
@@ -308,9 +316,15 @@ export default function Tabbed() {
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search)
         const volumes = qs.parse(urlParams.toString())
-        Object.keys(volumes).forEach((type) => {
+        const volumeTypes = Object.keys(volumes)
+        volumeTypes.forEach((type) => {
             setVolume(type, volumes[type].volume)
         })
+        const el = document.getElementById('calculator')
+        if (el && products.some((product) => volumeTypes.includes(product.type))) {
+            const y = el.getBoundingClientRect().top + window.scrollY - (window.innerWidth > 767 ? 108 : 57)
+            window.scrollTo({ top: y, behavior: 'smooth' })
+        }
     }, [])
 
     return (
@@ -332,10 +346,11 @@ export default function Tabbed() {
                                 <li key={name} className="flex-1">
                                     <button
                                         onClick={() => setActiveTab(index)}
-                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${active
+                                        className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                            active
                                                 ? 'font-bold bg-accent dark:bg-accent-dark'
                                                 : 'hover:bg-accent dark:hover:bg-accent/15'
-                                            }`}
+                                        }`}
                                     >
                                         <div className="flex items-center space-x-2">
                                             <span>

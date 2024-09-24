@@ -93,3 +93,28 @@ posthog = Posthog('<ph_project_api_key>',
     feature_flags_request_timeout_seconds=3 // Time in second. Default is 3
 )
 ```
+
+### Error handling
+
+When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
+
+```python
+def handle_feature_flag(client, flag_key, distinct_id):
+    try:
+        is_enabled = client.is_feature_enabled(flag_key, distinct_id)
+        print(f"Feature flag '{flag_key}' for user '{distinct_id}' is {'enabled' if is_enabled else 'disabled'}")
+        return is_enabled
+    except Exception as e:
+        print(f"Error fetching feature flag '{flag_key}': {str(e)}")
+        raise e
+
+# Usage example
+try:
+    flag_enabled = handle_feature_flag(client, 'new-feature', 'user-123')
+    if flag_enabled:
+        # Implement new feature logic
+    else:
+        # Implement old feature logic
+except Exception as e:
+    # Handle the error at a higher level
+```

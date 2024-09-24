@@ -14,6 +14,17 @@ It is being used to build our CDP product, which you can follow along with in [G
 
 > **Note:** Hog shouldn't be confused with [HogQL](/docs/hogql), our SQL-like query language used inside PostHog. If you're looking to query data in PostHog, see those docs.
 
+## Quickstart
+
+Hog was designed to be syntax-compatible with SQL / HogQL. This means all HogQL expressions work as Hog code.
+
+This compatibility imposes a few key differences comparted to other programming languages:
+
+- Variable assignment in Hog is done with the `:=` operator, as `=` and `==` are both used for equality comparisons in SQL
+- You must type out `and`, `or` and `not`. Currently `&&` and `!` raise syntax errors, whereas `||` is used as the string concatenation operator.
+- All arrays in Hog start from index `1`. Yes, for real. Trust us, we know. However that's how SQL has always worked, so we adopted it.
+- The easiest way to debug your code is to `print()` the variables in question, and then check the logs.
+
 ## Syntax
 
 ### Comments
@@ -110,17 +121,23 @@ print(f'hello {str}') // prints 'hello string'
 print(f'hello {f'{str} world'}') // prints 'hello string world'
 ```
 
-### Functions
+### Functions and lambdas
 
-Can only be defined at the top scope. See [Hog's standard library](#hogs-standard-library) for a list of built-in functions.
+Functions are first class variables, just like in JavaScript. You can define them with `fun`, or inline as lambdas:
 
 ```rust
-fn addNumbers(num1, num2) { 
+fun addNumbers(num1, num2) { 
     let newNum := num1 + num2
     return newNum
 }
 print(addNumbers(1, 2))
+
+let square := (a) -> a * a
+print(square(4))
 ```
+
+See [Hog's standard library](#hogs-standard-library) for a list of built-in functions.
+
 
 ### Logic
 
@@ -185,11 +202,12 @@ Hog's standard library includes the following functions and will expand. To see 
 
 - `toString(arg: any): string`
 - `toUUID(arg: any): UUID`
-- `toInt(arg: any): int`
+- `toInt(arg: any): integer`
 - `toFloat(arg: any): float`
-- `toDate(arg: string | int): Date`
-- `toDateTime(arg: string | int): DateTime`
+- `toDate(arg: string | integer): Date`
+- `toDateTime(arg: string | integer): DateTime`
 - `tuple(...args: any[]): tuple`
+- `typeof(arg: any): string`
 
 ### Comparisons
 
@@ -200,7 +218,7 @@ Hog's standard library includes the following functions and will expand. To see 
 - `print(...args: any[])`
 - `concat(...args: string[]): string`
 - `match(arg: string, regex: string): boolean`
-- `length(arg: string): int`
+- `length(arg: string): integer`
 - `empty(arg: string): boolean`
 - `notEmpty(arg: string): boolean`
 - `lower(arg: string): string`
@@ -209,9 +227,9 @@ Hog's standard library includes the following functions and will expand. To see 
 - `trim(arg: string, char?: string): string`
 - `trimLeft(arg: string, char?: string): string`
 - `trimRight(arg: string, char?: string): string`
-- `splitByString(separator: string, str: string, maxParts?: int): string[]`
+- `splitByString(separator: string, str: string, maxParts?: integer): string[]`
 - `jsonParse(arg: string): any`
-- `jsonStringify(arg: object): string`
+- `jsonStringify(arg: object, indent = 0): string`
 - `base64Encode(arg: string): string`
 - `base64Decode(arg: string): string`
 - `tryBase64Decode(arg: string): string`
@@ -220,13 +238,17 @@ Hog's standard library includes the following functions and will expand. To see 
 - `replaceOne(arg: string, needle: string, replacement: string): string`
 - `replaceAll(arg: string, needle: string, replacement: string): string`
 - `generateUUIDv4(): string`
+- `position(haystack: string, needle: string): integer`
+- `positionCaseInsensitive(haystack: string, needle: string): integer`
 
 ### Objects and arrays
-- `length(arg: any[] | object): int`
+- `length(arg: any[] | object): integer`
 - `empty(arg: any[] | object): boolean`
 - `notEmpty(arg: any[] | object): boolean`
 - `keys(arg: any[] | object): string[]`
 - `vaues(arg: any[] | object): string[]`
+- `indexOf(array: any[], elem: any): integer`
+- `has(array: any[], element: any)`
 - `arrayPushBack(arr: any[], value: any): any[]`
 - `arrayPushFront(arr: any[], value: any): any[]`
 - `arrayPopBack(arr: any[]): any[]`
@@ -235,21 +257,25 @@ Hog's standard library includes the following functions and will expand. To see 
 - `arrayReverse(arr: any[]): any[]`
 - `arrayReverseSort(arr: any[]): any[]`
 - `arrayStringConcat(arr: any[], separator?: string): string`
+- `arrayMap(callback: (arg: any): any, array: any[]): any[]`
+- `arrayFilter(callback: (arg: any): boolean, array: any[]): any[]`
+- `arrayExists(callback: (arg: any): boolean, array: any[]): boolean`
+- `arraCount(callback: (arg: any): boolean, array: any[]): integer`
 
 ### Date functions
 - `now(): DateTime`
 - `toUnixTimestamp(input: DateTime | Date | string, zone?: string): float`
 - `fromUnixTimestamp(input: number): DateTime`
 - `toUnixTimestampMilli(input: DateTime | Date | string, zone?: string): float`
-- `fromUnixTimestampMilli(input: int | float): DateTime`
+- `fromUnixTimestampMilli(input: integer | float): DateTime`
 - `toTimeZone(input: DateTime, zone: string): DateTime | Date`
-- `toDate(input: string | int | float): Date`
-- `toDateTime(input: string | int | float, zone?: string): DateTime`
+- `toDate(input: string | integer | float): Date`
+- `toDateTime(input: string | integer | float, zone?: string): DateTime`
 - `formatDateTime(input: DateTime, format: string, zone?: string): string` - we use use the [ClickHouse formatDateTime syntax](https://clickhouse.com/docs/en/sql-reference/functions/date-time-functions#formatdatetime).
-- `toInt(arg: any): int` - Converts `arg` to a 64-bit integer. Converts `Date`s into days from epoch, and `DateTime`s into seconds from epoch
+- `toInt(arg: any): integer` - Converts `arg` to a 64-bit integer. Converts `Date`s into days from epoch, and `DateTime`s into seconds from epoch
 - `toFloat(arg: any): float` - Converts `arg` to a 64-bit float. Converts `Date`s into days from epoch, and `DateTime`s into seconds from epoch
-- `toDate(arg: string | int): Date` - `arg` must be a string `YYYY-MM-DD` or a Unix timestamp in seconds
-- `toDateTime(arg: string | int): DateTime` - `arg` must be an ISO timestamp string or a Unix timestamp in seconds
+- `toDate(arg: string | integer): Date` - `arg` must be a string `YYYY-MM-DD` or a Unix timestamp in seconds
+- `toDateTime(arg: string | integer): DateTime` - `arg` must be an ISO timestamp string or a Unix timestamp in seconds
 
 ### Cryptographic functions
 

@@ -5,7 +5,10 @@ title: iOS session replay
 > 🚧 **NOTE:** iOS session replay is considered `beta` and is free while in beta. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
 
 ## Installation
-[Install and configure PostHog]((/docs/libraries/ios#installation)) as you normally would. Ensure you've enabled session recordings in your [project settings](/docs/session-replay/installation#step-two-enable-session-recordings-in-your-project-settings) and then add `config.sessionReplay = true` to your PostHog configuration alongside any of your other configuration options.  
+
+[Install and configure PostHog](/docs/libraries/ios#installation) as you normally would. Ensure you've enabled session recordings in your [project settings](/docs/session-replay/installation#step-two-enable-session-recordings-in-your-project-settings) and then add `config.sessionReplay = true` to your PostHog configuration alongside any of your other configuration options.  
+
+> Requires PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases), and it's recommended to always use the latest version.
 
 ```swift
 let config = PostHogConfig(apiKey: apiKey)
@@ -30,6 +33,9 @@ config.sessionReplayConfig.captureNetworkTelemetry = true
 // If disabled, replays are created using wireframes instead.
 // The screenshot may contain sensitive information, so use with caution
 config.sessionReplayConfig.screenshotMode = true
+
+// Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1s
+config.sessionReplayConfig.debouncerDelay = 1.0
 ```
 
 ## Masking and redacting
@@ -55,10 +61,8 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 
 ## Limitations
 
-- Requires PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases), and it's recommended to always use the latest version.
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/) is only supported if the `screenshotMode` option is enabled.
   - `Text` views in SwiftUI are considered images, so they are masked unless `maskAllImages` is disabled. 
-- Replays are representation of the user's screen, not a video recording.
 - Custom views are not fully supported if `screenshotMode` is disabled.
 - WebView is not supported. A placeholder will be shown.
-- React Native and Flutter for iOS aren't supported.
+- Flutter for iOS isn't supported.

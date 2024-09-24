@@ -19,7 +19,7 @@ PostHog may have been built for product analytics, but that doesn’t mean you c
 
 Using PostHog to gather analytics in this way isn’t just an excuse for us to [‘dogfood’ our own product](/product-engineers/dogfooding). It’s also a best practice that we strongly recommend to other organizations for several reasons...
 
-> Already want to track your marketing website with PostHog? Find out [how to install our JavaScript snippet](/docs/integrate/client/js) in just a few minutes!
+> Want to track your website with PostHog? Check out [our web analytics tool](/web-analytics), or get started straight away by [integrating PostHog immediately](/docs/getting-started/install)!
 
 ### 1. Get better data
 
