@@ -38,6 +38,7 @@ export const TeamMembers = ({ profiles }) => {
                         firstName,
                         lastName,
                         country,
+                        color,
                     },
                     id,
                 }) => {
@@ -45,11 +46,7 @@ export const TeamMembers = ({ profiles }) => {
                     return (
                         <li
                             key={name}
-                            className="first:-ml-0 -ml-2 transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20 rounded-full 
-                    [&:nth-child(4n+1)]:bg-orange
-                    [&:nth-child(4n+2)]:bg-blue 
-                    [&:nth-child(4n+3)]:bg-red 
-                    [&:nth-child(4n+4)]:bg-yellow 
+                            className="first:-ml-0 -ml-2 transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20 rounded-full
                     "
                         >
                             <Link to={`/community/profiles/${id}`}>
@@ -69,8 +66,8 @@ export const TeamMembers = ({ profiles }) => {
                                         <ContributorImageSmall
                                             name={name}
                                             image={avatar}
-                                            className="!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary"
-                                            imgClassName=""
+                                            className={`!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary bg-${color ? color : 'accent'} dark:bg-${color ? color : 'accent-dark'}`}
+                                            imgClassName={``}
                                         />
                                     </span>
                                 </Tooltip>
@@ -90,7 +87,7 @@ const Team = ({ profiles, leadProfiles, className = '' }) => {
         teamLength > 0 &&
         Math.round(
             (profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) *
-                100
+            100
         )
     const teamLead = profiles?.data?.find(({ id }) => leadProfiles?.data?.[0]?.id === id)
     const teamLeadName = [teamLead?.attributes.firstName, teamLead?.attributes.lastName].filter(Boolean).join(' ')
