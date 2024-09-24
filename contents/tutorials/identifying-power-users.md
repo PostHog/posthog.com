@@ -22,6 +22,8 @@ But first, I need explain the one cool thing PostHog does to make this all possi
 
 # Person profiles hold the clues
 
+[TK screenshot of a person profile]
+
 Anyone familiar with Google Analytics will be used to thinking about sessions, rather than people. PostHog, however, assembles a *[profile](/docs/data/persons)* for every user of your product, providing information like:
 
 - **Properties:** [Things we know](/docs/getting-started/person-properties) about a given user. This spans everything from [UTM values](/docs/data/utm-segmentation) that were set on their first and latest session, IP geolocation values, browser and platform details, plus any properties you choose to log, which can include account details like name and email address.
@@ -32,7 +34,7 @@ Anyone familiar with Google Analytics will be used to thinking about sessions, r
 
 With profiles, PostHog catalogs vast detail about people and their behavior so you can research the effectiveness of your product's design, communication and architecture.
 
-But you shouldn't try to manually fish your power users out of a sea of profiles. We've got tools to find the ones you most want to learn from.
+You can find profiles in the people and groups tab. But you shouldn't try to manually fish your power users out of a sea of profiles. We've got tools to find the ones you most want to learn from.
 
 ## Decide what power means to you
 
