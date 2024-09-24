@@ -110,7 +110,11 @@ Survey submissions are stored as events in a person profile, allowing you to que
 
 These are just a few examples – be creative with how you use your PostHog data.
 
-Once you've picked signals for identifying power users, assemble [cohorts](/docs/data/cohorts) that gather and surface them. These enable you and your teammates to dive deep on usage patterns, create insights and review replays.
+Once you've picked signals for identifying power users, it's time to assemble [cohorts](/docs/data/cohorts) that gather and surface them.
+
+Cohorts group specific users who have something in common. You can apply a cohort to a dashboard, to understand trends for just that group, or use it to filter replays. You can even compare *behavior* between people inside and outside a cohort.
+
+Here's how to create them.
 
 ## Static cohorts
 
