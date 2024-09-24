@@ -4,13 +4,21 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 import ReactCountryFlag from 'react-country-flag'
 import Stickers from 'components/ProfileStickers'
+import useTeam from 'hooks/useTeam'
 
 const TeamMemberLink = (person) => {
-  const { firstName, lastName, country, companyRole, pineappleOnPizza, isTeamLead, id, squeakId, avatar, teams } = person ?? {}
+  const { firstName, lastName, country, companyRole, pineappleOnPizza, id, squeakId, avatar, teams } = person ?? {}
+  const { team } = useTeam({ teamName: name })
+
+  const leadProfiles = team?.attributes?.leadProfiles
+
   const teamName = teams?.data?.[0]?.attributes?.name
+  function isTeamLead(id) {
+    return leadProfiles?.data?.some(({ id: leadID }) => leadID === id)
+  }
 
   return (
-    <span className="relative inline-block">
+    <div className="relative inline-block">
       <a href={person && `/community/profiles/${squeakId}`}>
         <div className="size-48 rounded-full overflow-hidden flex justify-end items-end mx-auto">
           {person ? (
@@ -34,49 +42,24 @@ const TeamMemberLink = (person) => {
               {person.companyRole && `${person.companyRole}`}
             </div>
             <div>
-              {person.isTeamLead ? "Team lead, " : ""}
-              {teamName}
+              {isTeamLead ? "Team lead, " : ""}
+              {teamName} Team
 
-              {teamName.leadsProfiles ? "Team lead, " : ""}
             </div>
-          </div>
-
-          <div className="border border-light">
-            <Stickers
-              pineappleOnPizza={pineappleOnPizza}
-              isTeamLead
-            />
-
-            pineapple on pizza preference text
-
           </div>
 
         </>
       )}
 
-      {person && person.location && (
-        <div>
-          <Stickers
-            country={country}
-          />
-          {person.location}
-        </div>
-      )}
-
-
-      ---
-
-
-
-
-      ---
-
-
-      <Stickers
-        isTeamLead={isTeamLead}
-        pineappleOnPizza={pineappleOnPizza}
-      />
-    </span>
+      <div className="mt-2 flex space-x-1 justify-center">
+        <Stickers
+          country={country}
+          location={person.location}
+          isTeamLead={isTeamLead}
+          pineappleOnPizza={pineappleOnPizza}
+        />
+      </div>
+    </div>
   )
 }
 

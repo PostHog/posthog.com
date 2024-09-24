@@ -80,7 +80,7 @@ const Section = ({ children, cta, title, className = '', id = '' }) => {
 }
 
 export const Profile = (profile) => {
-    const { firstName, lastName, country, companyRole, pineappleOnPizza, biography, isTeamLead, id } = profile
+    const { firstName, lastName, country, companyRole, pineappleOnPizza, biography, isTeamLead, id, location } = profile
     const name = [firstName, lastName].filter(Boolean).join(' ')
     return (
         <div>
@@ -96,6 +96,7 @@ export const Profile = (profile) => {
                         <Stickers
                             className="w-8 h-8"
                             country={country}
+                            location={location}
                             pineappleOnPizza={pineappleOnPizza}
                             isTeamLead={isTeamLead}
                         />
@@ -331,6 +332,7 @@ export default function Team({
                                                 firstName,
                                                 lastName,
                                                 country,
+                                                location,
                                                 companyRole,
                                                 pineappleOnPizza,
                                             },
@@ -365,6 +367,7 @@ export default function Team({
                                                         <div className="mt-1 flex space-x-1 items-center">
                                                             <Stickers
                                                                 country={country}
+                                                                location={location}
                                                                 isTeamLead={isTeamLead(id)}
                                                                 pineappleOnPizza={pineappleOnPizza}
                                                                 handleTeamLead={handleTeamLead}

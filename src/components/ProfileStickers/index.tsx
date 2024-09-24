@@ -24,7 +24,7 @@ import {
   StickerPineappleUnknown,
 } from 'components/Stickers/Index'
 
-const Stickers = ({ country, pineappleOnPizza, isTeamLead, isModerator, id, handleTeamLead }) => {
+const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, isModerator, id, handleTeamLead }) => {
   const TeamLeadContainer = isModerator && handleTeamLead ? 'span' : 'button'
 
   const handleTeamLeadClick = (e) => {
@@ -34,7 +34,7 @@ const Stickers = ({ country, pineappleOnPizza, isTeamLead, isModerator, id, hand
 
   return (
     <>
-      <span>
+      <Tooltip content={`Lives in ${location}`}>
         {country === 'BE' ? (
           <StickerFlagBE className="w-8 h-8" />
         ) : country === 'US' ? (
@@ -70,7 +70,7 @@ const Stickers = ({ country, pineappleOnPizza, isTeamLead, isModerator, id, hand
         ) : (
           <StickerFlagUnknown className="w-8 h-8" />
         )}
-      </span>
+      </Tooltip>
       <span>
         {pineappleOnPizza === null ? (
           <Tooltip content="We're not sure if they like pineapple on pizza (yet)!">
