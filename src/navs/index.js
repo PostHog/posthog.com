@@ -1004,6 +1004,10 @@ export const companyMenu = {
                     url: '/teams/data-warehouse',
                 },
                 {
+                    name: 'Error Tracking',
+                    url: '/teams/error-tracking',
+                },
+                {
                     name: 'Feature Success',
                     url: '/teams/feature-success',
                 },
@@ -2341,6 +2345,10 @@ export const docsMenu = {
                         {
                             name: 'iOS',
                             url: '/docs/session-replay/ios',
+                        },
+                        {
+                            name: 'React Native',
+                            url: '/docs/session-replay/react-native',
                         },
                     ],
                 },
