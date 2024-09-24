@@ -223,12 +223,6 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
     )
 }
 
-const replaceMentions = (body: string) => {
-    return body.replace(/@([a-zA-Z0-9-]+\/[0-9]+)/g, (match, username) => {
-        return `[${match}](/community/profiles/${username.split('/')[1]})`
-    })
-}
-
 export default function RichText({
     initialValue = '',
     setFieldValue,
@@ -391,7 +385,7 @@ export default function RichText({
                                 return objectURL || fakeImagePath
                             }}
                         >
-                            {replaceMentions(value)}
+                            {value}
                         </Markdown>
                     </div>
                 ) : (
