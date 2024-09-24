@@ -92,6 +92,8 @@ const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; 
     )
 }
 
+const hideTeamsByJob = ['Technical ex-founder', 'Speculative application']
+
 export const CareersHero = () => {
     const {
         allAshbyJobPosting: { departments, jobs },
@@ -142,35 +144,41 @@ export const CareersHero = () => {
             <div className="flex flex-col md:flex-row gap-4 px-4 max-w-7xl mx-auto 2xl:px-8 mb-8">
                 <div className="w-full md:w-1/4">
                     <ul className="list-none p-0 m-0 divide-y-px">
-                        {jobs.map((job) => (
-                            <li key={job.fields.title} className="">
-                                <button
-                                    className={`w-full flex flex-col text-left p-2 border rounded ${
-                                        selectedJob.fields.title === job.fields.title
-                                            ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
-                                            : 'border-transparent'
-                                    }`}
-                                    onClick={() => setSelectedJob(job)}
-                                >
-                                    <span
-                                        className={`font-semibold text-base ${
-                                            selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
+                        {jobs.map((job) => {
+                            return (
+                                <li key={job.fields.title} className="">
+                                    <button
+                                        className={`w-full flex flex-col text-left p-2 border rounded ${
+                                            selectedJob.fields.title === job.fields.title
+                                                ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
+                                                : 'border-transparent'
                                         }`}
+                                        onClick={() => setSelectedJob(job)}
                                     >
-                                        {job.fields.title}
-                                    </span>
-                                    <span className="text-[13px] text-black/50 dark:text-white/50">
-                                        {(() => {
-                                            const teamsField = job.parent.customFields.find(
-                                                (field: { title: string }) => field.title === 'Teams'
-                                            )
-                                            const teams = teamsField ? JSON.parse(teamsField.value) : []
-                                            return teams.length > 1 ? 'Multiple teams' : teams.length === 1 && teams[0]
-                                        })()}
-                                    </span>
-                                </button>
-                            </li>
-                        ))}
+                                        <span
+                                            className={`font-semibold text-base ${
+                                                selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
+                                            }`}
+                                        >
+                                            {job.fields.title}
+                                        </span>
+                                        {!hideTeamsByJob.includes(job.fields?.title) && (
+                                            <span className="text-[13px] text-black/50 dark:text-white/50">
+                                                {(() => {
+                                                    const teamsField = job.parent.customFields.find(
+                                                        (field: { title: string }) => field.title === 'Teams'
+                                                    )
+                                                    const teams = teamsField ? JSON.parse(teamsField.value) : []
+                                                    return teams.length > 1
+                                                        ? 'Multiple teams'
+                                                        : teams.length === 1 && teams[0]
+                                                })()}
+                                            </span>
+                                        )}
+                                    </button>
+                                </li>
+                            )
+                        })}
                     </ul>
                 </div>
                 <div className="w-full md:w-3/4 p-4 bg-white border border-light dark:border-dark dark:bg-accent-dark rounded">
