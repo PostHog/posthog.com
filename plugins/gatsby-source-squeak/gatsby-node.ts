@@ -25,7 +25,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     page,
                     pageSize: 100,
                 },
-                populate: ['avatar', 'teams', 'leadTeams', 'quotes'],
+                populate: ['avatar', 'teams', 'leadTeams', 'quotes', 'color'],
             },
             {
                 encodeValuesOnly: true, // prettify URL

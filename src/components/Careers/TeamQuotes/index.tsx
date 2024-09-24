@@ -7,7 +7,7 @@ import Link from 'components/Link'
 import Masonry from 'react-masonry-css'
 
 const TeamMemberLink = (person) => {
-  const { firstName, lastName, country, startDate, pineappleOnPizza, squeakId, avatar, teams, leadTeams, quotes } =
+  const { firstName, lastName, country, startDate, pineappleOnPizza, squeakId, avatar, teams, leadTeams, quotes, color } =
     person ?? {}
 
   const teamName = teams?.data?.[0]?.attributes?.name
@@ -24,13 +24,13 @@ const TeamMemberLink = (person) => {
         ))}
       </div>
 
-      <div className="p-0.5 leading-[0] bg-white dark:bg-accent-dark rounded-full border-2 border-light relative dark:border-dark hover:border-red dark:hover:border-yellow scale-100 hover:scale-[1.03] active:scale-[.99] active:top-[2px] transition-transform duration-200">
+      <div className={`p-0.5 leading-[0] bg-white dark:bg-accent-dark rounded-full border-2 border-light relative dark:border-dark hover:border-${color ? color : 'red'} dark:hover:border-${color ? color : 'yellow'} scale-100 hover:scale-[1.03] active:scale-[.99] active:top-[2px] transition-transform duration-200`}>
         <Link href={`/community/profiles/${squeakId}`} className="bg-red inline-block size-20 rounded-full overflow-hidden">
           {person ? (
             <img
               src={avatar?.formats?.thumbnail?.url}
               alt={`${firstName} ${lastName}`}
-              className="size-20 bg-orange"
+              className={`size-20 ${color ? `bg-${color}` : 'bg-orange'}`}
             />
           ) : (
             <StaticImage
@@ -88,6 +88,7 @@ const TeamMember: React.FC<{ name: string }> = ({ name }) => {
                           id
                           quote
                   }
+                  color
               }
           }
       }
