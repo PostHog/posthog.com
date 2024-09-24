@@ -73,8 +73,8 @@ The first level of Super Mario Bros. is considered a masterclass in onboarding. 
 
 If word of mouth is your primary marketing vehicle, you want people to tell their friends about how awesome your product made _them_, not just how awesome your product is. Consider the following:
 
-> "I just got back from my dream vacation to Venice!"
-> "Really? Do you speak Italian?"
+> "I just got back from my dream vacation to Venice!"<br>
+> "Really? Do you speak Italian?"<br>
 > "I didn't have time to take a long course. But I did a couple Duolingo lessons every day for the past few months. By the time I got to Venice, I had no problem getting by."
 
 For Duolingo, it's important that users keep coming back. Not only because it's good for their company, but also because that's how learning works. It's hard to learn a new language if you're only studying once a week. If you can build a consistent study habit, you can chip away at it and learn over time. It's a huge opportunity for Duolingo to make their product more engaging, but also to help users achieve their goals of learning a language.
