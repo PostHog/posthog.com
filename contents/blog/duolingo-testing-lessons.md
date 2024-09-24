@@ -86,14 +86,12 @@ When it comes to product engagement, there is a fine line between:
 
 A/B testing streak reminders provides a great example of aligning these goals. They tinkered with the copy, the timing, the frequency, and personalization of these reminders to get them just right. If you think about it, it doesn't make sense to get a streak reminder while you're asleep. And users probably have different times of the day when they are able to allocate time for study. Running experiments allowed them to find compounding improvements for personalized copy at just the right time of day.
 
-## 🏁 Conclusion
+## 🧪 Actionable things to try
 
-Here are a few key takeaways to think about when building your product:
+Here are a couple of actionable takeaways to think about when building your product:
 
-- Think of your product as a game where you can run A/B tests to constantly tweak details.
-- Add a generous free tier to encourage more people to try your product
-- Use tests to decrease friction in the onboarding experience
-- Balance engagement intentionally by aligning with user goals
+- Try going through the full onboarding experience for your product. Can you identify the top 2 friction points? Is there a quicker path for users to get value from your product? Can you run a test to figure out whether or not removing a superfluous form field makes a difference?
+- Run a test on the copy for your sign up button. Should it say "Sign up" or "Register" or "Get started" or "Try it for free"? Does it matter? This is a good place to start because you want to find something that's [easy to implement with a large potential impact](/product-engineers/how-to-do-ab-testing#where-to-run-your-first-ab-test). Does that test lead to others? What if you change the color, or the size, or add some fancy animations and hover states? Can you incorporate testing into your product development process?
 
 ## 📚 Further reading
 
@@ -104,3 +102,5 @@ Here are a few key takeaways to think about when building your product:
 - [Getting Real: Free Samples](https://basecamp.com/gettingreal/12.1-free-samples) from Basecamp
 - [The Art of Screenshake](https://www.youtube.com/watch?v=AJdEqssNZ-U) from Jan Willem Nijman
 - [Badass: Making Users Awesome](https://www.amazon.com/Badass-Making-Awesome-Kathy-Sierra/dp/1491919019) by Kathy Sierra
+
+<NewsletterForm />
