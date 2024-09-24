@@ -22,13 +22,13 @@ Let's walk through how you can use PostHog to discover and learn from your power
 
 # Person profiles hold the clues
 
-PostHog assembles a *[profile](https://posthog.com/docs/data/persons)* for every user of your product, providing information like:
+PostHog assembles a *[profile](/docs/data/persons)* for every user of your product, providing information like:
 
-- **Properties:** [Things we know](https://posthog.com/docs/getting-started/person-properties) about a given user. This spans everything from [UTM values](https://posthog.com/docs/data/utm-segmentation) that were set on their first and latest session, IP geolocation values, browser and platform details, plus any properties you choose to log, which can include account details like name and email address.
+- **Properties:** [Things we know](/docs/getting-started/person-properties) about a given user. This spans everything from [UTM values](/docs/data/utm-segmentation) that were set on their first and latest session, IP geolocation values, browser and platform details, plus any properties you choose to log, which can include account details like name and email address.
 
-- **Events:** An [event](https://posthog.com/docs/getting-started/send-events) stream detailing everything this person has done in your product, ordered chronologically. Autocapture stores many things without your having to lift a finger, including pageviews and form interactions. You can also log events manually in your own code, revealing fine-grain detail about funnel progress. Your events can also include [custom properties](https://posthog.com/docs/getting-started/send-events#sending-custom-properties-on-an-event), like the value of purchases made via your product.
+- **Events:** An [event](/docs/getting-started/send-events) stream detailing everything this person has done in your product, ordered chronologically. Autocapture stores many things without your having to lift a finger, including pageviews and form interactions. You can also log events manually in your own code, revealing fine-grain detail about funnel progress. Your events can also include [custom properties](/docs/getting-started/send-events#sending-custom-properties-on-an-event), like the value of purchases made via your product.
 
-- **Recordings:** If you've enabled [session replay](https://posthog.com/docs/session-replay), any recordings associated with a given user are available via their profile. This provides a clear window into behavior, roadblocks and persuasive content. Seeing replays of the people most relevant to your business goals can provide potent insights.
+- **Recordings:** If you've enabled [session replay](/docs/session-replay), any recordings associated with a given user are available via their profile. This provides a clear window into behavior, roadblocks and persuasive content. Seeing replays of the people most relevant to your business goals can provide potent insights.
 
 With profiles, PostHog catalogs vast detail about people and their behavior so you can research the effectiveness of your product's design, communication and architecture.
 
@@ -36,7 +36,7 @@ But you shouldn't try to manually fish your power users out of a sea of profiles
 
 ## Decide what power means to you
 
-There's no single definition of 'power user.' Like an [ideal customer](https://posthog.com/newsletter/ideal-customer-profile-framework), it varies from product to product, and sometimes even from different stages of maturity in the same product.
+There's no single definition of 'power user.' Like an [ideal customer](/newsletter/ideal-customer-profile-framework), it varies from product to product, and sometimes even from different stages of maturity in the same product.
 
 Take some time to think about what it would mean to really push your product to its ceiling:
 
@@ -45,7 +45,7 @@ Take some time to think about what it would mean to really push your product to 
 - Adoption of paid tiers
 - Combined use of multiple features
 
-In PostHog, for example, power users leverage [HogQL](https://posthog.com/docs/hogql) to go beyond the basics exposed by our UI. In the heyday of Twitter, power users, already posting a lot, began to write lengthy, viral threads.
+In PostHog, for example, power users leverage [HogQL](/docs/hogql) to go beyond the basics exposed by our UI. In the heyday of Twitter, power users, already posting a lot, began to write lengthy, viral threads.
 
 We'll talk through some power user signals you can detect using PostHog, then explore some example queries to let you surface these users on an ongoing basis.
 
@@ -57,19 +57,19 @@ Note that you can use a composite of these approaches using PostHog's query buil
 
 ## Autocapture events and user properties
 
-[Autocapture](https://posthog.com/docs/product-analytics/autocapture) will log events as your user moves through your product. If specific paths – like a pageview at `/product/our-advanced-new-feature` — are enough to reveal your power users, you're all set.
+[Autocapture](/docs/product-analytics/autocapture) will log events as your user moves through your product. If specific paths – like a pageview at `/product/our-advanced-new-feature` — are enough to reveal your power users, you're all set.
 
 It’s possible you already know your power users because you’ve been talking to them – or they’ve been talking to you, demanding new features that bulk up your roadmap.
 
-You can [identify users](https://posthog.com/docs/product-analytics/identify) in PostHog, attaching their email address and other properties to their profile. Next time you get a lengthy feature request email, you'll be able to look up your correspondent's latest activity in detail.
+You can [identify users](/docs/product-analytics/identify) in PostHog, attaching their email address and other properties to their profile. Next time you get a lengthy feature request email, you'll be able to look up your correspondent's latest activity in detail.
 
-If your product has a paid tier tailored to power user patterns, you could also create a subscription tier [property](https://posthog.com/docs/getting-started/person-properties#how-to-set-person-properties).
+If your product has a paid tier tailored to power user patterns, you could also create a subscription tier [property](/docs/getting-started/person-properties#how-to-set-person-properties).
 
 ## Stickiness and engagement frequency
 
 In some products, what makes a power user is raw engagement.
 
-If you want to find the users who just keep coming back, you can try a **[Stickiness](https://posthog.com/docs/product-analytics/stickiness)** insight. This way, you can see the users who are committed enough to return, and how often they do it. You can learn the stickiness not just of your product in general, but also of a specific path, feature or behavior.
+If you want to find the users who just keep coming back, you can try a **[Stickiness](/docs/product-analytics/stickiness)** insight. This way, you can see the users who are committed enough to return, and how often they do it. You can learn the stickiness not just of your product in general, but also of a specific path, feature or behavior.
 
 [TK screenshot of a Stickiness graph with the People list hover box displayed]
 
@@ -93,13 +93,13 @@ If your power user is someone who uses multiple features in combination, you can
 
 ## Surveys
 
-[Surveys](https://posthog.com/tutorials/feedback-interviews-site-apps) require more effort – you have to write them, your users have to complete them. But if your definition of power user is hard to derive from behavior or inference, they can be a great option.
+[Surveys](/tutorials/feedback-interviews-site-apps) require more effort – you have to write them, your users have to complete them. But if your definition of power user is hard to derive from behavior or inference, they can be a great option.
 
 If your product is in its early days, you may find that merely being willing to take the survey is itself a signal that your user is highly engaged and committed to your long term success.
 
 Otherwise, think about power user signals you could gather from a survey:
 
-- An [NPS survey](https://posthog.com/templates/nps-survey) could mark users who are thrilled with what you've built
+- An [NPS survey](/templates/nps-survey) could mark users who are thrilled with what you've built
 - A multiple choice survey asking which features a user most wants you to build next could reveal would-be power users waiting to be unleashed
 
 Survey submissions are stored as events in a person profile, allowing you to query them later.
@@ -108,11 +108,11 @@ Survey submissions are stored as events in a person profile, allowing you to que
 
 These are just a few examples – be creative with how you use your PostHog data.
 
-Once you've picked signals for identifying power users, assemble [cohorts](https://posthog.com/docs/data/cohorts) that gather and surface them. These enable you and your teammates to dive deep on usage patterns, create insights and review replays.
+Once you've picked signals for identifying power users, assemble [cohorts](/docs/data/cohorts) that gather and surface them. These enable you and your teammates to dive deep on usage patterns, create insights and review replays.
 
 ## Static cohorts
 
-When reviewing insights, like [funnels](https://posthog.com/docs/product-analytics/funnels) or stickiness, you can save the list of users the report describes as a static cohort.
+When reviewing insights, like [funnels](/docs/product-analytics/funnels) or stickiness, you can save the list of users the report describes as a static cohort.
 
 These cohorts won't change unless you update them yourself.
 
@@ -178,4 +178,4 @@ Now you can dig into the details. Check out event streams and replays. Does this
 
 Like everything in building a product, treat this as an iterative process. Experiment, check your results, and keep trying.
 
-Create a [notebook](https://posthog.com/docs/notebooks) to keep track of profiles and replays you can learn from. Keep an eye out for friction that emerges across users.
+Create a [notebook](/docs/notebooks) to keep track of profiles and replays you can learn from. Keep an eye out for friction that emerges across users.
