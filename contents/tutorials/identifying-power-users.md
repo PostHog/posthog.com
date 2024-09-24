@@ -116,13 +116,13 @@ Cohorts group specific users who have something in common. You can apply a cohor
 
 Here's how to create them.
 
-## Static cohorts
+### Static cohorts
 
 When reviewing insights, like [funnels](/docs/product-analytics/funnels) or stickiness, you can save the list of users the report describes as a static cohort.
 
 These cohorts won't change unless you update them yourself.
 
-## Dynamic cohorts built from queries
+### Dynamic cohorts built from queries
 
 PostHog cohorts can also be *dynamic:* as users trigger the events that mark them as power users, PostHog will update the list of users responsive to your query.
 
@@ -134,7 +134,7 @@ You can further create multiple *groups* of criteria, for more complex queries t
 
 Here are some examples.
 
-### Querying by events
+#### Querying by events
 
 Imagine we've built an exciting new feature at the path `/tools/discombobulator`. Imagine our product also sports an array of experimental widgets, whose paths all start with `/widgets/experimental/`.
 
@@ -150,13 +150,13 @@ Give the cohort a name, save it, and you'll have an ongoing list of potential po
 
 The same approach works with any custom events your product sends to PostHog as well.
 
-### Querying by frequency of event
+#### Querying by frequency of event
 
 If frequency of a given event is a meaningful signal – how many times a user visited the `/tools/discombobulator` path, for example – use **Completed an event multiple times**, and set the number you want to query for.
 
 [TK variation on the above screenshot, now showing the multiple times option]
 
-### Querying user properties
+#### Querying user properties
 
 Perhaps we're logging `subscription_tier` as a property, and think our power users are clustered into the `pro` tier.
 
@@ -168,7 +168,7 @@ We'll ask for persons who **Have the property** **subscription_tier**, equal to 
 
 As more pro subscribers convert, this cohort will grow.
 
-### Querying survey completion
+#### Querying survey completion
 
 When a user submits a PostHog survey, a `survey sent` event is created including their response data.
 
