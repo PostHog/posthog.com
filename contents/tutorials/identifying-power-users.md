@@ -36,7 +36,7 @@ With profiles, PostHog catalogs vast detail about people and their behavior, so 
 
 You can find profiles in the people and groups tab. But you shouldn't try to manually fish your power users out of a sea of profiles. We've got tools to find the ones you most want to learn from.
 
-## Decide what power means to you
+## Step 1: Decide what a power user means to you
 
 There's no single definition of 'power user.' Like an [ideal customer](/newsletter/ideal-customer-profile-framework), it varies from product to product, and sometimes even from different stages of maturity in the same product.
 
