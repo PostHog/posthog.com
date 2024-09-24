@@ -6,11 +6,12 @@ import ReactCountryFlag from 'react-country-flag'
 import Stickers from 'components/ProfileStickers'
 
 const TeamMemberLink = (person) => {
-  const { firstName, lastName, country, companyRole, pineappleOnPizza, isTeamLead, id, squeakId, avatar } = person ?? {}
+  const { firstName, lastName, country, companyRole, pineappleOnPizza, isTeamLead, id, squeakId, avatar, teams } = person ?? {}
+  const teamName = teams?.data?.[0]?.attributes?.name
+
   return (
     <span className="relative inline-block">
       <a href={person && `/community/profiles/${squeakId}`}>
-
         <div className="size-48 rounded-full overflow-hidden flex justify-end items-end mx-auto">
           {person ? (
             <img src={avatar?.formats?.thumbnail?.url} alt={`${firstName} ${lastName}`} className="size-48 bg-orange" />
@@ -34,13 +35,16 @@ const TeamMemberLink = (person) => {
             </div>
             <div>
               {person.isTeamLead ? "Team lead, " : ""}
-              TEAM NAME {/* pull first value if they're assigned to multiple teams */}
+              {teamName}
+
+              {teamName.leadsProfiles ? "Team lead, " : ""}
             </div>
           </div>
 
-          <div>
+          <div className="border border-light">
             <Stickers
               pineappleOnPizza={pineappleOnPizza}
+              isTeamLead
             />
 
             pineapple on pizza preference text
@@ -62,6 +66,10 @@ const TeamMemberLink = (person) => {
 
       ---
 
+
+
+
+      ---
 
 
       <Stickers
@@ -92,6 +100,13 @@ const TeamMember: React.FC<{ name: string }> = ({ name }) => {
                   companyRole
                   location
                   country
+                  teams {
+                      data {
+                          attributes {
+                              name
+                          }
+                      }
+                  }
               }
           }
       }
