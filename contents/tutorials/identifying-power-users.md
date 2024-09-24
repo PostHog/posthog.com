@@ -47,7 +47,7 @@ Take some time to think about what it would mean to really push your product to 
 
 In PostHog, for example, power users leverage [HogQL](/docs/hogql) to go beyond the basics exposed by our UI. In the heyday of Twitter, power users, already posting a lot, began to write lengthy, viral threads.
 
-We'll talk through some power user signals you can detect using PostHog, then explore some example queries to let you surface these users on an ongoing basis.
+We'll talk through some power user signals you can detect using PostHog, then explore example queries to let you surface these users on an ongoing basis.
 
 # Power user signals
 
