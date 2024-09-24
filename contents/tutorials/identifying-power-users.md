@@ -79,7 +79,7 @@ To dig into the profiles of sticky users, click a data point on the graph. You'l
 
 You can also query for *repetition* of any event PostHog tracks.
 
-## Flag with custom events
+### 3. Flag with custom events
 
 If the above approaches aren't enough, you can log custom events in your code that flag your power users.
 
