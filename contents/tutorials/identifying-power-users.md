@@ -57,7 +57,7 @@ Try the simplest thing that works, then observe and iterate.
 
 Note that you can use a composite of these approaches using PostHog's query building interface. You're not locked into a single marker of power users.
 
-## Autocapture events and user properties
+### 1. Autocapture events and user properties
 
 [Autocapture](/docs/product-analytics/autocapture) will log events as your user moves through your product. If specific paths – like a pageview at `/product/our-advanced-new-feature` — are enough to reveal your power users, you're all set.
 
