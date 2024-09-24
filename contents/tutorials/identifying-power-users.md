@@ -67,7 +67,7 @@ You can [identify users](/docs/product-analytics/identify) in PostHog, attaching
 
 If your product has a paid tier tailored to power user patterns, you could also create a subscription tier [property](/docs/getting-started/person-properties#how-to-set-person-properties).
 
-## Stickiness and engagement frequency
+### 2. Stickiness and engagement frequency
 
 In some products – think social media platforms or fitness trackers – what makes a power user is raw engagement. 
 
