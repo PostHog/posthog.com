@@ -6,6 +6,8 @@ import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { PineappleText, TeamMembers } from 'components/Job/Sidebar'
 import slugify from 'slugify'
+import { IconPineapple } from '@posthog/icons'
+import { StickerPineapple, StickerPineappleNo, StickerPineappleYes } from 'components/Stickers/Index'
 
 const query = graphql`
     query CareersHero {
@@ -114,7 +116,7 @@ export const CareersHero = () => {
         Math.round(
             (selectedTeam.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length /
                 teamLength) *
-                100
+            100
         )
 
     useEffect(() => {
@@ -148,17 +150,15 @@ export const CareersHero = () => {
                             return (
                                 <li key={job.fields.title} className="">
                                     <button
-                                        className={`w-full flex flex-col text-left p-2 border rounded ${
-                                            selectedJob.fields.title === job.fields.title
-                                                ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
-                                                : 'border-transparent'
-                                        }`}
+                                        className={`w-full flex flex-col text-left p-2 rounded border border-b-3 ${selectedJob.fields.title === job.fields.title
+                                            ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
+                                            : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                                            }`}
                                         onClick={() => setSelectedJob(job)}
                                     >
                                         <span
-                                            className={`font-semibold text-base ${
-                                                selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
-                                            }`}
+                                            className={`font-semibold text-base ${selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
+                                                }`}
                                         >
                                             {job.fields.title}
                                         </span>
@@ -181,30 +181,27 @@ export const CareersHero = () => {
                         })}
                     </ul>
                 </div>
-                <div className="w-full md:w-3/4 p-4 bg-white border border-light dark:border-dark dark:bg-accent-dark rounded">
-                    <h2 className="text-2xl font-bold">{selectedJob.fields.title}</h2>
+                <div className="w-full md:w-3/4 bg-white border border-light dark:border-dark dark:bg-accent-dark rounded flex flex-col lg:flex-row">
+                    <div className="p-4 lg:p-6 flex-1">
+                        <h2 className="text-2xl font-bold">{selectedJob.fields.title}</h2>
 
-                    <div className="flex flex-col lg:flex-row gap-8">
-                        <div className="flex-1">
-                            <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
-                                <Detail
-                                    title="Location"
-                                    value={`Remote${
-                                        selectedJob.parent.customFields.find(
-                                            (field: { title: string }) => field.title === 'Location(s)'
-                                        )?.value
-                                            ? ` (${
-                                                  selectedJob.parent.customFields.find(
-                                                      (field: { title: string }) => field.title === 'Location(s)'
-                                                  ).value
-                                              })`
-                                            : ''
+                        <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
+                            <Detail
+                                title="Location"
+                                value={`Remote${selectedJob.parent.customFields.find(
+                                    (field: { title: string }) => field.title === 'Location(s)'
+                                )?.value
+                                    ? ` (${selectedJob.parent.customFields.find(
+                                        (field: { title: string }) => field.title === 'Location(s)'
+                                    ).value
+                                    })`
+                                    : ''
                                     }`}
-                                    icon={<Location />}
-                                />
-                                {selectedJob.parent.customFields.find(
-                                    (field: { title: string }) => field.title === 'Timezone(s)'
-                                )?.value && (
+                                icon={<Location />}
+                            />
+                            {selectedJob.parent.customFields.find(
+                                (field: { title: string }) => field.title === 'Timezone(s)'
+                            )?.value && (
                                     <Detail
                                         title="Timezone(s)"
                                         value={
@@ -215,50 +212,57 @@ export const CareersHero = () => {
                                         icon={<Timezone />}
                                     />
                                 )}
-                            </ul>
+                        </ul>
 
-                            <div className="job-content mt-4">
-                                <div dangerouslySetInnerHTML={{ __html: processedHtml }} />
-                                <CallToAction to={selectedJob.fields.slug}>Read more</CallToAction>
-                            </div>
+                        <div className="job-content mt-4">
+                            <div dangerouslySetInnerHTML={{ __html: processedHtml }} className="[&_summary]:hidden" />
+                            <CallToAction to={selectedJob.fields.slug} size="sm">Read more</CallToAction>
                         </div>
-                        <div>
-                            {teams.length > 1 && (
-                                <p className="mb-2">
-                                    <strong>{teams.length} teams hiring for this role</strong>
-                                </p>
-                            )}
+                    </div>
+                    <div className="max-w-xs md:border-l border-light dark:border-dark p-4 md:p-6 bg-accent/50 dark:bg-accent-dark">
+                        {teams.length > 1 && (
+                            <p className="mb-2">
+                                <strong>{teams.length} teams hiring for this role</strong>
+                            </p>
+                        )}
 
-                            <div className="border border-light dark:border-dark rounded max-w-[300px] text-center">
-                                <div className="flex flex-col items-center gap-2">
-                                    {teams.length > 1 && (
-                                        <select
-                                            className="w-full p-2 mb-2 border-0 border-b border-light dark:border-dark rounded-tl rounded-tr"
-                                            value={selectedTeamName}
-                                            onChange={(e) => {
-                                                setSelectedTeamName(e.target.value)
-                                            }}
-                                        >
-                                            {teams.map((team) => (
-                                                <option key={team} value={team}>
-                                                    {team}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    )}
-                                    <div className="p-4 text-center">
-                                        <div className="mb-2 max-w-40 mx-auto">
-                                            <GatsbyImage image={getImage(selectedTeam.crest)} />
-                                        </div>
-                                        <h5 className="m-0 mb-2">
-                                            <Link to={teamURL}>{selectedTeam.name}</Link>
-                                        </h5>
-                                        <div className="flex justify-center">
-                                            <TeamMembers profiles={selectedTeam.profiles} />
-                                        </div>
-                                        <p className="text-xs mt-2">{PineappleText(pineapplePercentage)}</p>
-                                    </div>
-                                </div>
+                        <div className="flex flex-col items-center gap-2">
+                            {teams.length > 1 && (
+                                <select
+                                    className="w-full p-2 mb-2 border-0 border-b border-light dark:border-dark rounded-tl rounded-tr"
+                                    value={selectedTeamName}
+                                    onChange={(e) => {
+                                        setSelectedTeamName(e.target.value)
+                                    }}
+                                >
+                                    {teams.map((team) => (
+                                        <option key={team} value={team}>
+                                            {team}
+                                        </option>
+                                    ))}
+                                </select>
+                            )}
+                            <p className="text-sm text-center opacity-60 font-medium mb-0">About this team</p>
+                            <div className="max-w-48 mx-auto">
+                                <GatsbyImage image={getImage(selectedTeam.crest)} />
+                            </div>
+                            <h5 className="m-0 -mt-2 text-center">
+                                <Link to={teamURL}>{selectedTeam.name} Team</Link>
+                            </h5>
+                            <div className="flex justify-center">
+                                <TeamMembers profiles={selectedTeam.profiles} />
+                            </div>
+
+                            <div className="inline-flex mx-auto gap-2">
+                                {pineapplePercentage > 50
+                                    ? <>
+                                        <StickerPineappleYes className="size-12" />
+
+                                    </>
+                                    : pineapplePercentage === 50
+                                        ? <><StickerPineapple className="size-12" /></>
+                                        : <><StickerPineappleNo className="size-12" /></>}
+                                <p className="text-[13px] mt-2 mb-0 w-auto leading-tight">{PineappleText(pineapplePercentage)}</p>
                             </div>
                         </div>
                     </div>
