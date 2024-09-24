@@ -125,12 +125,15 @@ export const CareersHero = () => {
 
         const whoWereLookingFor = doc.querySelector('details:has(h2[id="who-we\'re-looking-for"])')
         const whatYoullBeDoing = doc.querySelector('details:has(h2[id="what-you\'ll-be-doing"])')
+        const requirements = doc.querySelector('details:has(h2[id="requirements"])')
 
         let content = ''
         if (whoWereLookingFor) {
             content = whoWereLookingFor.outerHTML
         } else if (whatYoullBeDoing) {
             content = whatYoullBeDoing.outerHTML
+        } else if (requirements) {
+            content = requirements.outerHTML
         }
 
         setProcessedHtml(content)
@@ -157,7 +160,7 @@ export const CareersHero = () => {
                                         onClick={() => setSelectedJob(job)}
                                     >
                                         <span
-                                            className={`font-semibold text-base ${selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
+                                            className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
                                                 }`}
                                         >
                                             {job.fields.title}
@@ -181,7 +184,7 @@ export const CareersHero = () => {
                         })}
                     </ul>
                 </div>
-                <div className="w-full md:w-3/4 bg-white border border-light dark:border-dark dark:bg-accent-dark rounded flex flex-col lg:flex-row">
+                <div className="w-full md:w-3/4 bg-white shadow-lg border border-light dark:border-dark dark:bg-accent-dark rounded flex flex-col lg:flex-row">
                     <div className="p-4 lg:p-6 flex-1">
                         <h2 className="text-2xl font-bold">{selectedJob.fields.title}</h2>
 
@@ -215,7 +218,8 @@ export const CareersHero = () => {
                         </ul>
 
                         <div className="job-content mt-4">
-                            <div dangerouslySetInnerHTML={{ __html: processedHtml }} className="[&_summary]:hidden" />
+                            <h3 className="mb-1 text-[15px]">Summary</h3>
+                            <div dangerouslySetInnerHTML={{ __html: processedHtml }} className="[&_summary]:hidden [&_p]:text-[15px]" />
                             <CallToAction to={selectedJob.fields.slug} size="sm">Read more</CallToAction>
                         </div>
                     </div>
@@ -229,7 +233,7 @@ export const CareersHero = () => {
                         <div className="flex flex-col items-center gap-2">
                             {teams.length > 1 && (
                                 <select
-                                    className="w-full p-2 mb-2 border-0 border-b border-light dark:border-dark rounded-tl rounded-tr"
+                                    className="w-full p-2 mb-2 border border-b-3 border-light dark:border-dark rounded text-sm font-medium"
                                     value={selectedTeamName}
                                     onChange={(e) => {
                                         setSelectedTeamName(e.target.value)
