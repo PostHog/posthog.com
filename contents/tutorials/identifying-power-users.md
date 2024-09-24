@@ -168,7 +168,7 @@ We'll ask for persons who **Have the property** **subscription_tier**, equal to 
 
 As more pro subscribers convert, this cohort will grow.
 
-### Querying survey completion
+#### Querying survey completion
 
 When a user submits a PostHog survey, a `survey sent` event is created including their response data.
 
