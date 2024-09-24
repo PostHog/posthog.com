@@ -69,7 +69,7 @@ If your product has a paid tier tailored to power user patterns, you could also 
 
 ## Stickiness and engagement frequency
 
-In some products, what makes a power user is raw engagement.
+In some products – think social media platforms or fitness trackers – what makes a power user is raw engagement. 
 
 If you want to find the users who just keep coming back, you can try a **[Stickiness](/docs/product-analytics/stickiness)** insight. This way, you can see the users who are committed enough to return, and how often they do it. You can learn the stickiness not just of your product in general, but also of a specific path, feature or behavior.
 
