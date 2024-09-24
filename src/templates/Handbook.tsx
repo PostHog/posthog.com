@@ -508,6 +508,14 @@ export const query = graphql`
                         }
                     }
                 }
+                templateConfig {
+                    key
+                    type
+                    label
+                    secret
+                    required
+                    description
+                }
             }
             frontmatter {
                 title
