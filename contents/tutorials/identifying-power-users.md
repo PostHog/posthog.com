@@ -11,12 +11,13 @@ Not every user of your product will become a true believer. But some are so comm
 
 They try things you didn't expect, combining features in ways that surprise you, and best of all: they succeed. They win with your product in ways that build loyalty, so they tell their friends, tell your story, and show off their discoveries.
 
-Let's walk through how you can use PostHog to discover and learn from your power users:
+I'm going to walk you through how you can use PostHog to:
 
-- How PostHog stores properties, events and replays for the people who use your product
-- How to think about power users for *your* product
-- Using signals from person profiles and insights
-- Gathering profiles into cohorts
+1. Define your power user
+2. Identify them using events and properties
+3. Build cohorts for further analysis
+
+But first, I need explain the one cool thing PostHog does to make this all possible...
 
 ---
 
