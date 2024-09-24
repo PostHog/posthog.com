@@ -52,9 +52,9 @@ Before we can start running experiments on all those tiny details, we need real-
 3. Collect a treasure trove of usage data
 4. Run experiments against all that data
 
-Duolingo has 34M daily active users 😳. And 90% of those are non-paying users. But those free users complete 13B exercises every week, which allows Duolingo to not only run experiments, but ensure that their findings are [statistically significant](https://posthog.com/docs/experiments/experiment-significance).
+Duolingo has 34M daily active users 😳. And 90% of those are non-paying users. But those free users complete 13B exercises every week, which allows Duolingo to not only run experiments, but ensure that their findings are [statistically significant](/docs/experiments/experiment-significance).
 
-Not every startup is going to have an audience that size. If you're running an early stage startup with a small number of users, it may be more effective to watch [session replays](https://posthog.com/session-replay) to see how people are interacting with your product. But offering a generous free tier (send me an invite!) can drive more users that you can leverage for continual improvements to the product over time. If you're getting started, check out these additional guidelines about [when to run your first A/B test](https://posthog.com/product-engineers/how-to-do-ab-testing#when-to-run-your-first-ab-test).
+Not every startup is going to have an audience that size. If you're running an early stage startup with a small number of users, it may be more effective to watch [session replays](/session-replay) to see how people are interacting with your product. But offering a generous free tier (send me an invite!) can drive more users that you can leverage for continual improvements to the product over time. If you're getting started, check out these additional guidelines about [when to run your first A/B test](/product-engineers/how-to-do-ab-testing#when-to-run-your-first-ab-test).
 
 ## 📈 Lesson 3: Use tests to strive for a more seamless onboarding
 
@@ -101,7 +101,7 @@ Here are a few key takeaways to think about when building your product:
 - [How Duolingo Turned a Free Language App Into a $7.7B Business](https://www.youtube.com/watch?v=9KqrnBiyBQ8) from the Wall Street Journal
 - [Improving Duo, One Experiment at a Time](https://blog.duolingo.com/improving-duolingo-one-experiment-at-a-time/) from the Duolingo Blog
 - [The Tenets of A/B Testing](https://review.firstround.com/the-tenets-of-a-b-testing-from-duolingos-master-growth-hacker/) from First Round
-- [A/B Testing Mistakes](https://posthog.com/product-engineers/ab-testing-mistakes) from PostHog
+- [A/B Testing Mistakes](/product-engineers/ab-testing-mistakes) from PostHog
 - [Getting Real: Free Samples](https://basecamp.com/gettingreal/12.1-free-samples) from Basecamp
 - [The Art of Screenshake](https://www.youtube.com/watch?v=AJdEqssNZ-U) from Jan Willem Nijman
 - [Badass: Making Users Awesome](https://www.amazon.com/Badass-Making-Awesome-Kathy-Sierra/dp/1491919019) by Kathy Sierra
