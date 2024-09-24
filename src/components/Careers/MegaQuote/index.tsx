@@ -101,12 +101,12 @@ const TeamMember: React.FC<{ name: string }> = ({ name }) => {
 
 const MegaQuote: React.FC = () => {
   return (
-    <div className="px-4">
-      <div className="max-w-7xl mx-auto p-4 lg:p-8 rounded-md bg-accent dark:bg-accent-dark flex flex-col-reverse gap-4 items-center lg:items-start lg:flex-row">
-        <aside className="min-w-64 max-w-full text-center">
+    <div className="px-4 xl:px-8">
+      <div className="max-w-7xl mx-auto flex flex-col-reverse gap-4 items-center lg:items-start lg:flex-row">
+        <aside className="min-w-48 max-w-full text-center">
           <TeamMember name="Raquel Smith" />
         </aside>
-        <div className="flex-1 p-6 lg:p-8 bg-white dark:bg-dark rounded-lg flex-col-reverse lg:flex-col [&_p]:text-lg [&_p]:mb-3 [&_p:last-child]:mb-0">
+        <div className="flex-1 p-6 lg:p-8 bg-white dark:bg-dark rounded shadow-lg flex-col-reverse lg:flex-col [&_p]:text-lg [&_p]:mb-3 [&_p:last-child]:mb-0">
           <p>At PostHog I'm given the trust to work on things that I think matter for the business and our customers.</p>
           <p>There are <strong>no politics, no micromanaging,</strong> and <strong>pretty extreme amounts of autonomy</strong> for every employee.</p>
           <p>I've never worked at a company that can ship so well and so fast. The people here are of incredible caliber, and management just gets out of the way (while also being helpful) so everyone can just can do their job in the best way possible.</p>
