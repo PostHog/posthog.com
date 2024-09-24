@@ -181,7 +181,7 @@ For this, choose the **survey sent** event as the **Completed event**, then we c
 1. The survey name
 2. The survey response 
 
-# Now what?
+## Now what?
 
 So you've taken a swing at some signals that might indicate a power user, and built a cohort to gather their profiles.
 
