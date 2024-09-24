@@ -106,7 +106,7 @@ Otherwise, think about power user signals you could gather from a survey:
 
 Survey submissions are stored as events in a person profile, allowing you to query them later.
 
-# Building cohorts
+## Step 3: Build you power user cohorts
 
 These are just a few examples – be creative with how you use your PostHog data.
 
