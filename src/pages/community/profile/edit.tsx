@@ -336,6 +336,45 @@ const formSections = [
                     )
                 },
             },
+            color: {
+                label: 'Favorite color',
+                className: 'w-full',
+                component: ({ values, setFieldValue }) => {
+                    return (
+                        <>
+                            <label className="font-bold">Pick your favorite color</label>
+                            <ul className="list-none m-0 p-0 mt-2 flex space-x-1">
+                                {[
+                                    'lime-green',
+                                    'blue',
+                                    'orange',
+                                    'teal',
+                                    'purple',
+                                    'seagreen',
+                                    'salmon',
+                                    'yellow',
+                                    'red',
+                                    'green',
+                                    'lilac',
+                                    'sky-blue',
+                                ].map((color) => {
+                                    const active = values.color === color
+                                    return (
+                                        <li key={color} onClick={() => setFieldValue('color', color)}>
+                                            <button
+                                                type="button"
+                                                className={`w-6 h-6 rounded-full bg-${color} border-[1.5px] ${
+                                                    active ? 'border-black dark:border-white' : 'border-transparent'
+                                                }`}
+                                            />
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </>
+                    )
+                },
+            },
         },
     },
     {
