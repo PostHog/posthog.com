@@ -106,7 +106,11 @@ function Avatar({ values, setFieldValue }) {
     }, [values.avatar])
 
     return (
-        <div className="relative w-full aspect-square rounded-full flex justify-center items-center border border-gray-accent-light dark:border-gray-accent-dark text-black/50 dark:text-white/50 overflow-hidden group -mb-2">
+        <div
+            className={`relative w-full aspect-square rounded-full flex justify-center items-center border-[1.5px] ${
+                values.color ? `border-${values.color}` : `border-gray-accent-light dark:border-gray-accent-dark`
+            } text-black/50 dark:text-white/50 overflow-hidden group -mb-2`}
+        >
             {imageURL ? (
                 <img className="w-full absolute inset-0 object-cover" src={imageURL} />
             ) : (
