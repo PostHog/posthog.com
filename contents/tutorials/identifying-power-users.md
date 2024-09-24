@@ -116,7 +116,7 @@ Cohorts group specific users who have something in common. You can apply a cohor
 
 Here's how to create them.
 
-## Static cohorts
+### Static cohorts
 
 When reviewing insights, like [funnels](/docs/product-analytics/funnels) or stickiness, you can save the list of users the report describes as a static cohort.
 
