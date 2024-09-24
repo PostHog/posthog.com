@@ -3,7 +3,7 @@ title: How we built mobile replay
 date: 2024-09-18
 author:
  - ian-vanagas
- - manoel-aranda-netos
+ - manoel-aranda-neto
 rootpage: /blog
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
@@ -14,7 +14,7 @@ tags:
 
 [Session replay](/session-replay) is one of the most powerful tools for understanding user behavior. Web session replay has been a core part of PostHog for a long time now (it was built in our first hackathon), but mobile teams have had to wait longer.
 
-Fortunately, it's finally here on [iOS](/docs/session-replay/ios) and [Android](/docs/session-replay/android) (with [React Native](https://github.com/PostHog/posthog/issues/13269) and [Flutter](https://github.com/PostHog/posthog-flutter/issues/69) coming soon). 
+Fortunately, it's finally here on [iOS](/docs/session-replay/ios), [Android](/docs/session-replay/android), and [React Native](/docs/session-replay/react-native) (with [Flutter](https://github.com/PostHog/posthog-flutter/issues/69) coming soon). 
 
 What took so long? Although we had the structure to ingest and playback replays, recording them in mobile apps is much trickier than in web apps. This post goes over why and how we finally managed to overcome them.
 
@@ -24,7 +24,7 @@ Others have complained about [the lack of good mobile replay options](https://me
 
 ### 1. Multiple platforms
 
-The secret about web session replay industry-wide is that it largely relies on a single open source library to work: [rrweb](https://github.com/rrweb-io/rrweb). It makes building web session replays a lot easier. 
+The secret about web session replay industry-wide is that it largely relies on a single open source library to work: [rrweb](https://github.com/rrweb-io/rrweb). It includes tools for recording web interactions and state changes, structuring session data, and playback. 
 
 Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, we needed to do all the work ourselves, and when compared to the web, this is a lot of work. This is because, instead of a single JavaScript library, language, and SDK, mobile requires multiple (like iOS, Android, and React Native). 
 
@@ -129,7 +129,9 @@ We added this functionality on both wireframe and screenshot mode. Although as n
 
 ## Making mobile session replay available for everyone
 
-Because mobile replay shares pricing with web replays, PostHog now offers the most generous free tier for mobile replays on the market. Where mobile replay was once a tool only available for large enterprise plans, now anyone can get 5000 replays for free every month.
+In many ways, mobile has been neglected by the analytics industry. Tools like session replay have either not existed, been locked behind enterprise plans, or been too expensive for most developers.
+
+We want to change this. Mobile replay is free while in beta, and once it's out of beta, we'll follow [our pricing principles](/handbook/engineering/feature-pricing), making it as affordable as possible.
 
 This enables us to help more developers have the tools they need to build successful products.
 
