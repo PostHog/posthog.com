@@ -150,7 +150,7 @@ Give the cohort a name, save it, and you'll have an ongoing list of potential po
 
 The same approach works with any custom events your product sends to PostHog as well.
 
-### Querying by frequency of event
+#### Querying by frequency of event
 
 If frequency of a given event is a meaningful signal – how many times a user visited the `/tools/discombobulator` path, for example – use **Completed an event multiple times**, and set the number you want to query for.
 
