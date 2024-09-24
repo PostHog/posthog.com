@@ -134,7 +134,7 @@ You can further create multiple *groups* of criteria, for more complex queries t
 
 Here are some examples.
 
-### Querying by events
+#### Querying by events
 
 Imagine we've built an exciting new feature at the path `/tools/discombobulator`. Imagine our product also sports an array of experimental widgets, whose paths all start with `/widgets/experimental/`.
 
