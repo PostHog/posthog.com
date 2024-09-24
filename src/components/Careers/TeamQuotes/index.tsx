@@ -15,7 +15,7 @@ const TeamMemberLink = (person) => {
   const teamURL = `/teams/${slugify(teamName, { lower: true })}`
 
   return (
-    <div className="flex flex-col items-center mb-8">
+    <div className="flex flex-col items-center mb-8 xl:mb-12">
       <div className="bg-white dark:bg-accent-dark rounded-md px-6 py-4 mb-4 shadow-lg">
         {quotes.map((quote) => (
           <div key={quote.id}>
@@ -114,8 +114,8 @@ const TeamQuotes: React.FC = () => {
 
       <Masonry
         breakpointCols={breakpointColumnsObj}
-        className="flex -ml-8 w-auto"
-        columnClassName="pl-8 bg-clip-padding"
+        className="flex -ml-8 xl:-ml-12 w-auto"
+        columnClassName="pl-8 xl:pl-12 bg-clip-padding"
       >
         <TeamMember name="Lottie Coxon" />
         <TeamMember name="Paul D'Ambra" />
