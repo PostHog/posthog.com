@@ -13,7 +13,7 @@ crosspost:
   - Blog
 ---
 
-Duolingo has grown rapidly over the past few years, with a market cap recently exceeding $10B. ["Test everything"](https://blog.duolingo.com/improving-duolingo-one-experiment-at-a-time/) is one of their core principles, and they credit **A/B testing** as _the_ source of the company's success. [source](https://www.youtube.com/watch?v=9KqrnBiyBQ8)
+Duolingo has grown rapidly over the past few years, with a market cap recently exceeding $10B. ["Test everything"](https://blog.duolingo.com/improving-duolingo-one-experiment-at-a-time/) is one of their core principles, and it credits **A/B testing** as _the_ source of the company's success. [source](https://www.youtube.com/watch?v=9KqrnBiyBQ8)
 
 In this article, we'll try to extract a few lessons from Duolingo's experimentation process.
 
