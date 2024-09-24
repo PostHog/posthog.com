@@ -219,7 +219,7 @@ export const CareersCards = [
     },
     {
         top: 'You expect your manager to tell you what to do',
-        bottom: "James and Tim set context. But it's up to you to decide where your time is best spent.",
+        bottom: "James and Tim provide context in weekly all-hands. But it's up to you to decide where your time is best spent.",
         color: '#FDBAF2',
         Image: <StaticImage quality={100} placeholder="none" src="./images/bad-trade.png" />,
         ImageSize: 'w-full mt-4',
@@ -239,15 +239,15 @@ export const CareersCards = [
         ImageSize: 'w-full mt-4',
     },
     {
-        top: 'You want a predictable career',
-        bottom: "If you like routine, we're not the place for you.",
+        top: 'You like to have a detailed plan before starting a project',
+        bottom: 'Our plans always turn out to be wrong anyways, which is why we ship first.',
         color: '#D9E1FC',
         Image: <StaticImage quality={100} placeholder="none" src="./images/i-hate-change.png" />,
         ImageSize: 'w-full',
     },
     {
-        top: "You don't like to hustle",
-        bottom: 'Our guiding metric is how fast we ship features and bug fixes to our customers.',
+        top: '"Work you" and "home you" are different people',
+        bottom: "We don't put on a corporate facade when we show up to work every day.",
         color: '#FDBAF2',
         Image: <StaticImage quality={100} placeholder="none" src="./images/mangle.png" />,
         ImageSize: 'w-[230px] mt-6',
