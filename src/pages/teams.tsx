@@ -19,6 +19,7 @@ const Teams: React.FC = () => {
                         data {
                             id
                             attributes {
+                                color
                                 firstName
                                 lastName
                                 avatar {
@@ -77,7 +78,7 @@ const Teams: React.FC = () => {
                                         <h3 className="text-base my-2 leading-snug">{name} Team</h3>
                                         <div className="flex justify-center -mr-3">
                                             {profiles.data.map(
-                                                ({ id, attributes: { firstName, lastName, avatar } }, index) => {
+                                                ({ id, attributes: { firstName, lastName, avatar, color } }, index) => {
                                                     const name = [firstName, lastName].filter(Boolean).join(' ')
                                                     const isTeamLead = leadProfiles.data.some(
                                                         ({ id: leadID }) => leadID === id
@@ -93,7 +94,9 @@ const Teams: React.FC = () => {
                                                             >
                                                                 <img
                                                                     src={avatar?.data?.attributes?.url}
-                                                                    className="w-10 h-10 rounded-full bg-white dark:bg-accent-dark border border-light dark:border-dark"
+                                                                    className={`w-10 h-10 rounded-full bg-${
+                                                                        color ?? 'white'
+                                                                    } dark:bg-accent-dark border border-light dark:border-dark`}
                                                                     alt={name}
                                                                 />
                                                             </Tooltip>
