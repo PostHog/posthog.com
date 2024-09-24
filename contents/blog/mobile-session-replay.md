@@ -127,6 +127,8 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 
 We added this functionality on both wireframe and screenshot mode. Although as nice as it would have been to have automatic masking like we do on the web, the ability to have masking at all enables privacy-sensitive teams to actually use replay. 
 
+There is more challenges to solve, specifically around [SwiftUI](https://github.com/PostHog/posthog-ios/issues/162) and Jetpack Compose, since the way they transpile code causes the representation to not be a 1:1 match and properties are lost.
+
 ## Making mobile session replay available for everyone
 
 In many ways, mobile has been neglected by the analytics industry. Tools like session replay have either not existed, been locked behind enterprise plans, or been too expensive for most developers.
