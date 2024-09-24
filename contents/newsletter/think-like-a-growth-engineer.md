@@ -13,19 +13,21 @@ crosspost:
   - Blog
 ---
 
-From the outside, it can seem like growth engineers bounce around the product aimlessly: signup flows, product onboarding, revenue reporting, and subscription tracking. You might think all this doesn't matter, but as many growth teams show, incremental improvements can lead to massive gains for the entire business.
+From the outside, it can seem as if growth engineers bounce around the product aimlessly – tweaking signup and onboarding flows, and running endless experiments, many of which fail.
 
-Growth engineers capture these gains through their unique way of thinking and working. Luckily, you don't need to go to growth engineer school to learn this yourself. If you aspire to create a successful product and business, you should care about what growth engineers do to make that happen, and this post aims to help you do just that.
+It's tempting to dismiss this as busywork, but that would be a mistake. Many successful startups have a thriving growth team at their core, driving incremental improvements that accumulate massive gains.
 
-## 1. Become a data-driven (for real)
+Growth engineers capture these gains through their unique way of thinking and working. And, luckily, you don't need to go to growth engineer school to learn their secrets. It all starts by learning to think like they do – here's how.
 
-Everyone claims they are data-driven, but growth engineers prove it.
+## 1. Become data-driven (for real)
+
+Everyone claims they are data-driven, but it's more than a meme for growth engineers.
 
 ![GROWTH ENGINEER RONNIE](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_16_at_11_21_09_29ee4dbab8.png)
 
-Their work comes down to tracking and improving platform or business-level metrics. For example, our growth team cares about new revenue, expansion, signup conversion, activation, retention, and more. Their planning, prioritization, and execution are focused on improving these metrics.
+Their work comes down to tracking and improving platform or business-level metrics. Our growth team, for example, cares about new revenue, expansion, signup conversion, activation, retention, and more. Their planning, prioritization, and execution are focused on improving these metrics.
 
-The tradeoff is caring less about products, features, and user requests. They aren't planning their roadmap months in advance or caring about accurate project timelines. They let the metrics be their north star and do whatever, wherever to improve it.
+The tradeoff is caring less about products, features, and user requests. They aren't planning their roadmap months in advance or obsessing about accurate project timelines. They let the metrics be their north star and do whatever, wherever to improve them.
 
 > **Takeaway:** Figure out the status quo for the area you work on. To do this:
 > 1. Define and track your activation and retention numbers. 
@@ -39,7 +41,7 @@ The tradeoff is caring less about products, features, and user requests. They ar
 
 ## 2. Develop an experimentation mindset
 
-The big way growth engineers improve the metrics they care about is through experiments. Doing this well requires developing the elusive "experimentation mindset." This differs from the traditional software engineering mindset in a few ways:
+Growth engineers often say "everything is an experiment." This is the elusive "experimentation mindset" that drives them. It differs from the traditional software engineering mindset in a few ways:
 
 1. **Hypothesis over requirements.** Software engineers work on features users clearly need. Growth engineers work on more unknowns and care more about exploration and discovery. To do this, they develop hypotheses and run experiments to validate their assumptions.
 
@@ -73,7 +75,7 @@ To understand what their work looks like, let's look at a recent example from ou
 
 ## 4. Trust the (experimentation) process
 
-Engineers might see the word "process" and shutter, but to be data-driven, you need to follow process to ensure you can trust your data when making decisions. When it comes to running experiments, growth engineers always make sure to have:
+Engineers might see the word "process" and shudder, but being data-driven requires an established process so you can trust the data when making decisions. When it comes to running experiments, growth engineers always make sure to have:
 
 1. **A sufficiently large sample size of users.** This ensures you can hit statistical significance AKA your impact is better than random chance. 
 
