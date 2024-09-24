@@ -147,7 +147,7 @@ export const CareersHero = () => {
             <p className="text-center mb-8 text-base">
                 Our small teams are looking to add <strong>{jobs.length} team members</strong>.
             </p>
-            <div className="flex flex-col md:flex-row md:gap-4 px-4 max-w-7xl mx-auto 2xl:px-8 mb-8">
+            <section className="flex flex-col md:flex-row md:gap-4 px-4 max-w-7xl mx-auto 2xl:px-8 mb-16">
                 <div className="w-full md:w-1/4">
                     <label htmlFor="job-select" className="block md:hidden font-bold mb-1 text-center">Select a role</label>
                     <select
@@ -288,7 +288,7 @@ export const CareersHero = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </>
     )
 }
