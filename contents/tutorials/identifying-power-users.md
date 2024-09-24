@@ -22,7 +22,7 @@ But first, I need explain the one cool thing PostHog does to make this all possi
 
 ## Person profiles hold the clues
 
-[TK screenshot of a person profile]
+![Part of a person profile](https://res.cloudinary.com/dmukukwp6/image/upload/profile_91acc0fc5a.png)
 
 Anyone familiar with Google Analytics will be used to thinking about sessions, rather than people. PostHog, however, assembles a *[profile](/docs/data/persons)* for every user of your product, providing information like:
 
@@ -73,7 +73,7 @@ In some products – think social media platforms or fitness trackers – what m
 
 If you think there's a specific event your power users will trigger again and again, you can try a **[Stickiness](/docs/product-analytics/stickiness)** insight. This will break down how many users repeat that event over time.
 
-[TK screenshot of a Stickiness graph with the People list hover box displayed]
+![A stickiness graph](https://res.cloudinary.com/dmukukwp6/image/upload/stickiness_7460700ab8.png)
 
 To dig into the profiles of sticky users, click a data point on the graph. You'll get a list of profiles, and you can save them as a cohort to review later (more on these shortly). 
 
@@ -85,8 +85,8 @@ If the above approaches aren't enough, you can log custom events in your code th
 
 Pick a milestone in your feature's workflow where you feel the user has committed to using it – perhaps after a save button is clicked. There you can send an event in PostHog, attaching this milestone to the user's event stream:
 
-```
-posthog.capture('user_completed_a_powerful_workflow')
+```js
+posthog.capture('user_completed_a_powerful_workflow');
 ```
 
 If you're going to the trouble of custom code to identify your power users, it may make more sense to use events than, say, setting a user property like `power_user: true`. Your definition of power users is likely to evolve over time, so sending events you can use as changeable inputs to this definition will be more flexible and long-term useful.
@@ -142,7 +142,7 @@ We could surmise that anyone who engages with both paths is really pushing the l
 
 Create a new **Cohort** in **People and groups**. A query to show us everyone who fits this description could look like:
 
-[TK screenshot of the query]
+![A query to find users who have two kinds of events](https://res.cloudinary.com/dmukukwp6/image/upload/composite_event_496dad20e0.png)
 
 We query for users who **Completed event** **Pageview**, filter it by the **Path Names** we care about, and make sure that we are ANDing these together by choosing 'Match persons against **ALL** criteria', showing us users who have both kinds of events in their history.
 
@@ -154,7 +154,7 @@ The same approach works with any custom events your product sends to PostHog as 
 
 If frequency of a given event is a meaningful signal – how many times a user visited the `/tools/discombobulator` path, for example – use **Completed an event multiple times**, and set the number you want to query for.
 
-[TK variation on the above screenshot, now showing the multiple times option]
+![A query to find users who have completed an event multiple times](https://res.cloudinary.com/dmukukwp6/image/upload/recurring_event_fe67853bf0.png)
 
 #### Querying user properties
 
@@ -162,7 +162,7 @@ Perhaps we're logging `subscription_tier` as a property, and think our power use
 
 A new cohort querying this could look like:
 
-[TK screenshot of a property query]
+![A query to find users who have a property set to a specific value](https://res.cloudinary.com/dmukukwp6/image/upload/match_property_11fe970774.png)
 
 We'll ask for persons who **Have the property** **subscription_tier**, equal to **pro**.
 
@@ -174,12 +174,12 @@ When a user submits a PostHog survey, a `survey sent` event is created including
 
 You can create a cohort based on these submissions, including filters to show you only users who chose a specific response.
 
-[TK screenshot of a survey query]
+![A query to find users who have completed a survey](https://res.cloudinary.com/dmukukwp6/image/upload/survey_query_beb33f8758.png)
 
-For this, choose a survey sent event as the **Completed event**, then we can filter for:
+For this, choose the **survey sent** event as the **Completed event**, then we can filter for:
 
 1. The survey name
-2. The survey value 
+2. The survey response 
 
 # Now what?
 
