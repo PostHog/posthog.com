@@ -122,7 +122,7 @@ When reviewing insights, like [funnels](/docs/product-analytics/funnels) or stic
 
 These cohorts won't change unless you update them yourself.
 
-## Dynamic cohorts built from queries
+### Dynamic cohorts built from queries
 
 PostHog cohorts can also be *dynamic:* as users trigger the events that mark them as power users, PostHog will update the list of users responsive to your query.
 
