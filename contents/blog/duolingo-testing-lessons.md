@@ -33,6 +33,10 @@ And what's interesting about game design is that it's all about how tiny details
 - Or test a sound effect like a little _\*ding\*_ when you get the right answer to a question
 - Or test how a detailed animation can add resonance to a particular milestone
 
+![Duolingo Animation Example](https://res.cloudinary.com/dmukukwp6/image/upload/duo_animation_07292d1c86.gif)
+
+Duolingo incorporates detailed animations in their lessons. Here's an example of where they added some resonance to the milestone of reaching a year-long streak. [source](https://blog.duolingo.com/world-character-visemes/)
+
 All those details add up! There's a conference talk about this topic called [_The Art of Screenshake_](https://www.youtube.com/watch?v=AJdEqssNZ-U), where game designer Jan Willem Nijman takes a banal example of a platform game and keeps adding tiny details to it until the game is noticeably better at the end.
 
 > "Think of any feature that you’ve come across while using Duolingo. Animated skill icons? The result of an experiment. Adding five new leagues to the Leaderboard? Also the result of an experiment. The amount of tears that our owl mascot, Duo, cries in your inbox when you forget to do your lessons? You guessed it." [source](https://blog.duolingo.com/improving-duolingo-one-experiment-at-a-time/)
@@ -61,6 +65,10 @@ Having users sign up is still a critical part of the flow, because it allows the
 > "Simply moving the sign-up screen back a few steps led to about a 20% increase in DAUs." Gina Gotthilf
 
 Rather than prompting people to sign up immediately, they gave new users the ability to try a lesson first. That solved the problem of losing an early cohort of users, and then they were able to prompt the users later in the experience to sign up after they had already gotten value from the lessons. You can read more about this in the [tenets of A/B testing](https://review.firstround.com/the-tenets-of-a-b-testing-from-duolingos-master-growth-hacker/).
+
+![Super Mario Bros. Visual](https://res.cloudinary.com/dmukukwp6/image/upload/mario_onboarding_4d694891db.jpg)
+
+The first level of Super Mario Bros. is considered a masterclass in onboarding. There is no expository pop-up that says "Welcome! Press the right arrow button to start moving right." Instead, you start situated at the left of the screen; so it's intuitively obvious that you should probably start moving to the right, where Mario is pointing and all the stuff seems to be located. We can take onboarding cues from examples like this and Duolingo to decrease friction in the onboarding experiences we build.
 
 ## 🎯 Lesson 4: Help people with _their_ goals (not yours)
 
