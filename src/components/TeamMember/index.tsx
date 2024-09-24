@@ -5,7 +5,7 @@ import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
 
 export const TeamMemberLink = (person) => {
-    const { firstName, lastName, squeakId, avatar, companyRole, location, country, photo = false, color } = person ?? {}
+    const { firstName, lastName, squeakId, avatar, companyRole, location, country, photo = false, color, className } = person ?? {}
     return (
         <span className="relative inline-block">
             <a href={person && `/community/profiles/${squeakId}`}>
@@ -92,7 +92,7 @@ export const TeamMemberLink = (person) => {
                     className={`inline-flex items-center ${photo
                         ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full'
                         : 'border-b border-light dark:border-dark border-dashed hover:border-bg-dark/50 dark:hover:border-bg-light/50'
-                        }`}
+                        } ${className}`}
                 >
                     {photo ? (
                         <>
@@ -122,7 +122,9 @@ export const TeamMemberLink = (person) => {
                                                 <img
                                                     src={avatar?.formats?.thumbnail?.url}
                                                     alt={
-                                                        person ? [firstName, lastName].filter(Boolean).join(' ') : name
+                                                        person
+                                                            ? [firstName, lastName].filter(Boolean).join(' ')
+                                                            : name
                                                     }
                                                     className="w-full aspect-square"
                                                 />
@@ -162,7 +164,7 @@ export const TeamMemberLink = (person) => {
     )
 }
 
-export default function TeamMember({ name, photo }) {
+export default function TeamMember({ name, photo, className }) {
     const {
         profiles: { nodes },
     } = useStaticQuery(graphql`
@@ -192,5 +194,5 @@ export default function TeamMember({ name, photo }) {
         ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
     )
 
-    return person ? <TeamMemberLink {...person} photo={photo} /> : null
+    return person ? <TeamMemberLink {...person} photo={photo} className={className} /> : null
 }
