@@ -34,8 +34,7 @@ And what's interesting about game design is that it's all about how tiny details
 - Or test how a detailed animation can add resonance to a particular milestone
 
 ![Duolingo Animation Example](https://res.cloudinary.com/dmukukwp6/image/upload/duo_animation_07292d1c86.gif)
-
-Duolingo incorporates detailed animations in their lessons. Here's an example of where they added some resonance to the milestone of reaching a year-long streak. [source](https://blog.duolingo.com/world-character-visemes/)
+<Caption>Duolingo incorporates detailed animations in their lessons. Here's an example of where they added some resonance to the milestone of reaching a year-long streak.</Caption>
 
 All those details add up! There's a conference talk about this topic called [_The Art of Screenshake_](https://www.youtube.com/watch?v=AJdEqssNZ-U), where game designer Jan Willem Nijman takes a banal example of a platform game and keeps adding tiny details to it until the game is noticeably better at the end.
 
