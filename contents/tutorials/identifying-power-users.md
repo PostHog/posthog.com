@@ -32,7 +32,7 @@ Anyone familiar with Google Analytics will be used to thinking about sessions, r
 
 - **Recordings:** If you've enabled [session replay](/docs/session-replay), any recordings associated with a given user are available via their profile. This provides a clear window into behavior, roadblocks and persuasive content. Seeing replays of the people most relevant to your business goals can provide potent insights.
 
-With profiles, PostHog catalogs vast detail about people and their behavior, so you can research the effectiveness of your product's design, communication and architecture. You can even do this groups of users, such as all users at the same company – see [group analytics](/docs/product-analytics/group-analytics) for more on this.
+With profiles, PostHog catalogs vast detail about people and their behavior, so you can research the effectiveness of your product's design, communication and architecture. You can even do this for groups of users, such as all users at the same company – see [group analytics](/docs/product-analytics/group-analytics) for more on this.
 
 You can find profiles in the people and groups tab. But you shouldn't try to manually fish your power users out of a sea of profiles. We've got tools to find the ones you most want to learn from.
 
