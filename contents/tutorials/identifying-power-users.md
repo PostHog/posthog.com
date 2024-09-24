@@ -49,7 +49,7 @@ Take some time to think about what it would mean to really push your product to 
 
 In PostHog, for example, power users leverage [HogQL](/docs/hogql) to go beyond the basics exposed by our UI. In the heyday of Twitter, power users, already posting a lot, began to write lengthy, viral threads. For Airbnb, it's the both the hosts who manage multiple properties, and the 99th percentile of customers who book the most trips. There can be more than one type of power user.
 
-We'll talk through some power user signals you can detect using PostHog, then explore example queries to let you surface these users on an ongoing basis.
+It's ok if your initial assumptions are wrong, but it's useful to have a hypothesis. In the next stage, I'm going to explain how to identify your power users.
 
 # Power user signals
 
