@@ -383,6 +383,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             squeakId: Int!
             firstName: String
             lastName: String
+            color: String
         }
 
         type SqueakQuestion implements Node {
