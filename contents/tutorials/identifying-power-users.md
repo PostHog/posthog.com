@@ -156,7 +156,7 @@ If frequency of a given event is a meaningful signal – how many times a user v
 
 [TK variation on the above screenshot, now showing the multiple times option]
 
-### Querying user properties
+#### Querying user properties
 
 Perhaps we're logging `subscription_tier` as a property, and think our power users are clustered into the `pro` tier.
 
