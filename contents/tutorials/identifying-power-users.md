@@ -4,7 +4,7 @@ title: "How to learn from your power users"
 rootPage: /blog
 author: ["danilo-campos"]
 featuredTutorial: false
-tags: ["Using PostHog", "Privacy"]
+tags: ["Product Analytics", "Session Replay", "Cohorts", "Events", "Persons"]
 ---
 
 Not every user of your product will become a true believer. But some are so committed, so dedicated to discovering an advantage, they go deep.
