@@ -1004,6 +1004,10 @@ export const companyMenu = {
                     url: '/teams/data-warehouse',
                 },
                 {
+                    name: 'Error Tracking',
+                    url: '/teams/error-tracking',
+                },
+                {
                     name: 'Feature Success',
                     url: '/teams/feature-success',
                 },
@@ -1189,6 +1193,13 @@ export const docsMenu = {
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Capacitor',
+                            url: '/docs/libraries/capacitor',
+                            badge: {
+                                title: '3rd party',
                             },
                         },
                         {
@@ -2341,6 +2352,10 @@ export const docsMenu = {
                         {
                             name: 'iOS',
                             url: '/docs/session-replay/ios',
+                        },
+                        {
+                            name: 'React Native',
+                            url: '/docs/session-replay/react-native',
                         },
                     ],
                 },

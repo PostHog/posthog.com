@@ -88,6 +88,41 @@ export const posthog = new PostHog('<ph_project_api_key>', {
 })
 ```
 
+### Error handling
+
+When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
+
+```react-native
+function handleFeatureFlag(client, flagKey, distinctId) {
+    try {
+        const isEnabled = client.isFeatureEnabled(flagKey, distinctId);
+        console.log(`Feature flag '${flagKey}' for user '${distinctId}' is ${isEnabled ? 'enabled' : 'disabled'}`);
+        return isEnabled;
+    } catch (error) {
+        console.error(`Error fetching feature flag '${flagKey}': ${error.message}`);
+        // Optionally, you can return a default value or throw the error
+        // return false; // Default to disabled
+        throw error;
+    }
+}
+
+// Usage example
+try {
+    const flagEnabled = handleFeatureFlag(client, 'new-feature', 'user-123');
+    if (flagEnabled) {
+        // Implement new feature logic
+    } else {
+        // Implement old feature logic
+    }
+} catch (error) {
+    // Handle the error at a higher level
+    console.error('Feature flag check failed, using default behavior');
+    // Implement fallback logic
+}
+```
+
+
+
 ### Overriding server properties
 
 Sometimes, you might want to evaluate feature flags using properties that haven't been ingested yet, or were set incorrectly earlier. You can do so by setting properties the flag depends on with these calls:
