@@ -143,9 +143,9 @@ export const CareersHero = () => {
 
     return (
         <>
-            <h1 className="text-4xl lg:text-5xl font-bold text-center mb-2 pt-8">Who's hiring</h1>
+            <h1 className="text-4xl lg:text-5xl font-bold text-center mb-2 pt-8">Who's hiring?</h1>
             <p className="text-center mb-8 text-base">
-                We currently looking to add <strong>{jobs.length} team members</strong>.
+                Our small teams are looking to add <strong>{jobs.length} team members</strong>.
             </p>
             <div className="flex flex-col md:flex-row md:gap-4 px-4 max-w-7xl mx-auto 2xl:px-8 mb-8">
                 <div className="w-full md:w-1/4">
@@ -165,12 +165,12 @@ export const CareersHero = () => {
                             </option>
                         ))}
                     </select>
-                    <ul className="hidden md:block list-none p-0 m-0 divide-y-px">
+                    <ul className="hidden md:block list-none p-0 m-0 space-y-0.5">
                         {jobs.map((job) => {
                             return (
                                 <li key={job.fields.title} className="">
                                     <button
-                                        className={`w-full flex flex-col text-left p-2 rounded border border-b-3 ${selectedJob.fields.title === job.fields.title
+                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${selectedJob.fields.title === job.fields.title
                                             ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
                                             : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                                             }`}
@@ -243,7 +243,7 @@ export const CareersHero = () => {
                     <div className="md:max-w-xs border-t md:border-t-0 md:border-l border-light dark:border-dark p-4 md:p-6 bg-accent/50 dark:bg-accent-dark">
                         {teams.length > 1 && (
                             <p className="mb-2">
-                                <strong>{teams.length} teams hiring for this role</strong>
+                                <strong>{teams.length} small teams are hiring for this role</strong>
                             </p>
                         )}
 
