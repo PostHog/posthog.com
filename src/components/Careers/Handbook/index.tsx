@@ -26,7 +26,7 @@ const CompanyHandbook: React.FC = () => {
         </div>
       </div>
       <aside>
-        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 md:px-6 xl:py-6 xl:px-8">
+        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 md:px-6 xl:py-6 xl:px-8 shadow-xl">
           <h4>Handbook chapters</h4>
           {chapters.map((category) => {
             return (

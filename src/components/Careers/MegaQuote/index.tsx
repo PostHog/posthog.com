@@ -19,37 +19,34 @@ const TeamMemberLink = (person) => {
 
   return (
     <div className="relative inline-block">
-      <a href={person && `/community/profiles/${squeakId}`}>
-        <div className="size-48 rounded-full overflow-hidden flex justify-end items-end mx-auto">
-          {person ? (
-            <img src={avatar?.formats?.thumbnail?.url} alt={`${firstName} ${lastName}`} className="size-48 bg-orange" />
-          ) : (
-            <StaticImage
-              alt=""
-              width={40}
-              src="../../pages-content/images/hog-9.png"
-              className="size-48 bg-orange"
-            />
-          )}
+      <a href={person && `/community/profiles/${squeakId}`} className="flex flex-col gap-2 items-center">
+        <div className="border-2 border-light dark:border-dark p-0.5 bg-white dark:bg-dark rounded-full">
+          <div className="size-36 rounded-full overflow-hidden mx-auto">
+            {person ? (
+              <img src={avatar?.formats?.thumbnail?.url} alt={`${firstName} ${lastName}`} className="size-36 bg-orange" />
+            ) : (
+              <StaticImage
+                alt=""
+                width={36}
+                src="../../pages-content/images/hog-9.png"
+                className="size-36 bg-orange"
+              />
+            )}
+          </div>
         </div>
-        {person ? [firstName, lastName].filter(Boolean).join(' ') : name}
+        <span>{person ? [firstName, lastName].filter(Boolean).join(' ') : name}</span>
       </a>
 
-      {person && (
-        <>
-          <div className="text-sm">
-            <div>
-              {person.companyRole && `${person.companyRole}`}
-            </div>
-            <div>
-              {isTeamLead ? "Team lead, " : ""}
-              {teamName} Team
+      <div className="text-sm">
+        <div>
+          {person.companyRole && `${person.companyRole}`}
+        </div>
+        <div className="text-[13px] opacity-75">
+          {isTeamLead ? "Team lead, " : ""}
+          {teamName} Team
+        </div>
+      </div>
 
-            </div>
-          </div>
-
-        </>
-      )}
 
       <div className="mt-2 flex space-x-1 justify-center">
         <Stickers
@@ -106,7 +103,7 @@ const MegaQuote: React.FC = () => {
   return (
     <div className="px-4">
       <div className="max-w-7xl mx-auto p-4 lg:p-8 rounded-md bg-accent dark:bg-accent-dark flex flex-col-reverse gap-4 items-center lg:items-start lg:flex-row">
-        <aside className="min-w-80 max-w-full text-center">
+        <aside className="min-w-64 max-w-full text-center">
           <TeamMember name="Raquel Smith" />
         </aside>
         <div className="flex-1 p-6 lg:p-8 bg-white dark:bg-dark rounded-lg flex-col-reverse lg:flex-col [&_p]:text-lg [&_p]:mb-3 [&_p:last-child]:mb-0">
