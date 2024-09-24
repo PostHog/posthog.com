@@ -142,13 +142,29 @@ export const CareersHero = () => {
 
     return (
         <>
-            <h1 className="text-3xl lg:text-5xl font-bold text-center mb-2 pt-8">Who's hiring</h1>
+            <h1 className="text-4xl lg:text-5xl font-bold text-center mb-2 pt-8">Who's hiring</h1>
             <p className="text-center mb-8 text-base">
                 We currently looking to add <strong>{jobs.length} team members</strong>.
             </p>
-            <div className="flex flex-col md:flex-row gap-4 px-4 max-w-7xl mx-auto 2xl:px-8 mb-8">
+            <div className="flex flex-col md:flex-row md:gap-4 px-4 max-w-7xl mx-auto 2xl:px-8 mb-8">
                 <div className="w-full md:w-1/4">
-                    <ul className="list-none p-0 m-0 divide-y-px">
+                    <label htmlFor="job-select" className="block md:hidden font-bold mb-1 text-center">Select a role</label>
+                    <select
+                        className="block md:hidden w-full p-2 border border-b-0 border-light dark:border-dark rounded-tl rounded-tr text-xl font-bold relative z-10"
+                        value={selectedJob.fields.title}
+                        onChange={(e) => {
+                            const selectedJobTitle = e.target.value
+                            const job = jobs.find((job) => job.fields.title === selectedJobTitle)
+                            setSelectedJob(job)
+                        }}
+                    >
+                        {jobs.map((job) => (
+                            <option key={job.fields.title} value={job.fields.title}>
+                                {job.fields.title}
+                            </option>
+                        ))}
+                    </select>
+                    <ul className="hidden md:block list-none p-0 m-0 divide-y-px">
                         {jobs.map((job) => {
                             return (
                                 <li key={job.fields.title} className="">
@@ -184,9 +200,9 @@ export const CareersHero = () => {
                         })}
                     </ul>
                 </div>
-                <div className="w-full md:w-3/4 bg-white shadow-lg border border-light dark:border-dark dark:bg-accent-dark rounded flex flex-col lg:flex-row">
+                <div className="w-full md:w-3/4 bg-white shadow-lg border border-light dark:border-dark dark:bg-accent-dark rounded-bl rounded-br md:rounded flex flex-col lg:flex-row">
                     <div className="p-4 lg:p-6 flex-1">
-                        <h2 className="text-2xl font-bold">{selectedJob.fields.title}</h2>
+                        <h2 className="hidden md:block text-2xl font-bold">{selectedJob.fields.title}</h2>
 
                         <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                             <Detail
@@ -223,7 +239,7 @@ export const CareersHero = () => {
                             <CallToAction to={selectedJob.fields.slug} size="sm">Read more</CallToAction>
                         </div>
                     </div>
-                    <div className="max-w-xs md:border-l border-light dark:border-dark p-4 md:p-6 bg-accent/50 dark:bg-accent-dark">
+                    <div className="md:max-w-xs border-t md:border-t-0 md:border-l border-light dark:border-dark p-4 md:p-6 bg-accent/50 dark:bg-accent-dark">
                         {teams.length > 1 && (
                             <p className="mb-2">
                                 <strong>{teams.length} teams hiring for this role</strong>
