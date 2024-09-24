@@ -4,6 +4,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Stickers from 'components/ProfileStickers'
 import slugify from 'slugify'
 import Link from 'components/Link'
+import Masonry from 'react-masonry-css'
 
 const TeamMemberLink = (person) => {
   const { firstName, lastName, country, startDate, pineappleOnPizza, squeakId, avatar, teams, leadTeams, quotes } =
@@ -14,8 +15,8 @@ const TeamMemberLink = (person) => {
   const teamURL = `/teams/${slugify(teamName, { lower: true })}`
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="bg-white dark:bg-accent-dark rounded px-6 py-4 mb-4 shadow-lg">
+    <div className="flex flex-col items-center mb-8">
+      <div className="bg-white dark:bg-accent-dark rounded-md px-6 py-4 mb-4 shadow-lg">
         {quotes.map((quote) => (
           <div key={quote.id}>
             <p dangerouslySetInnerHTML={{ __html: quote.quote }} className="mb-0 text-center" />
@@ -23,8 +24,8 @@ const TeamMemberLink = (person) => {
         ))}
       </div>
 
-      <div className="p-0.5 bg-white dark:bg-accent-dark rounded-full border-2 border-light dark:border-dark">
-        <div className="bg-red size-20 rounded-full overflow-hidden">
+      <div className="p-0.5 leading-[0] bg-white dark:bg-accent-dark rounded-full border-2 border-light relative dark:border-dark hover:border-red dark:hover:border-yellow scale-100 hover:scale-[1.03] active:scale-[.99] active:top-[2px] transition-transform duration-200">
+        <Link href={`/community/profiles/${squeakId}`} className="bg-red inline-block size-20 rounded-full overflow-hidden">
           {person ? (
             <img
               src={avatar?.formats?.thumbnail?.url}
@@ -39,11 +40,11 @@ const TeamMemberLink = (person) => {
               className="size-20 bg-orange"
             />
           )}
-        </div>
+        </Link>
       </div>
 
       <div className="leading-tight text-center mt-1">
-        <Link href={person.url} className="text-red dark:text-yellow font-semibold inline-block">{person ? [firstName, lastName].filter(Boolean).join(' ') : name}</Link><br />
+        <Link href={`/community/profiles/${squeakId}`} className="text-red dark:text-yellow font-semibold inline-block">{person ? [firstName, lastName].filter(Boolean).join(' ') : name}</Link><br />
         <span className="text-sm opacity-75">{person.companyRole && `${person.companyRole}`}</span>
       </div>
     </div>
@@ -99,84 +100,29 @@ const TeamMember: React.FC<{ name: string }> = ({ name }) => {
   return person ? <TeamMemberLink {...person} /> : null
 }
 
-const teamQuotesData = [
-  {
-    image: (
-      <StaticImage
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575125/paul_64ee2de98e.png"
-        alt="Paul"
-        width={80}
-        height={80}
-        className=""
-      />
-    ),
-    name: "Paul",
-    role: "Product Manager",
-    url: "/handbook/team/paul",
-    quote: "I wake up so excited to get to work that sometimes I pinch myself to make sure I'm not dreaming. The combination of high expectations, high trust, high autonomy, and high reward is so unique and drives me to improve every day.",
-  },
-  {
-    image: (
-      <StaticImage
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575125/paul_64ee2de98e.png"
-        alt="Paul"
-        width={80}
-        height={80}
-        className=""
-      />
-    ),
-    name: "Paul",
-    role: "Product Manager",
-    url: "/handbook/team/paul",
-    quote: "I wake up so excited to get to work that sometimes I pinch myself to make sure I'm not dreaming. The combination of high expectations, high trust, high autonomy, and high reward is so unique and drives me to improve every day.",
-  },
-  {
-    image: (
-      <StaticImage
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575125/paul_64ee2de98e.png"
-        alt="Paul"
-        width={80}
-        height={80}
-        className=""
-      />
-    ),
-    name: "Paul",
-    role: "Product Manager",
-    url: "/handbook/team/paul",
-    quote: "I wake up so excited to get to work that sometimes I pinch myself to make sure I'm not dreaming. The combination of high expectations, high trust, high autonomy, and high reward is so unique and drives me to improve every day.",
-  },
-  {
-    image: (
-      <StaticImage
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575125/paul_64ee2de98e.png"
-        alt="Paul"
-        width={80}
-        height={80}
-        className=""
-      />
-    ),
-    name: "Paul",
-    role: "Product Manager",
-    url: "/handbook/team/paul",
-    quote: "I wake up so excited to get to work that sometimes I pinch myself to make sure I'm not dreaming. The combination of high expectations, high trust, high autonomy, and high reward is so unique and drives me to improve every day.",
-  },
-]
-
 const TeamQuotes: React.FC = () => {
+  const breakpointColumnsObj = {
+    default: 3,
+    1024: 2,
+    640: 1
+  };
+
   return (
-    <section className="max-w-7xl mx-auto px-4 pt-8 pb-12 grid gap-12 xl:gap-16">
-      <h2 className="text-center text-4xl mb-2">Things we definitely didn't coerce anyone into saying...</h2>
+    <section className="max-w-7xl mx-auto px-4 pt-8 pb-12">
+      <h2 className="text-center text-4xl mb-8">Nice things we didn't coerce anyone into saying</h2>
 
-
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="flex -ml-8 w-auto"
+        columnClassName="pl-8 bg-clip-padding"
+      >
         <TeamMember name="Lottie Coxon" />
         <TeamMember name="Paul D'Ambra" />
         <TeamMember name="Raquel Smith" />
         <TeamMember name="Charles Cook" />
         <TeamMember name="Cory Watilo" />
         <TeamMember name="Ian Vanagas" />
-      </div>
+      </Masonry>
     </section>
   )
 }
