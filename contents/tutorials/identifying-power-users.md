@@ -20,7 +20,7 @@ I'm going to walk you through how you can use PostHog to:
 But first, I need explain the one cool thing PostHog does to make this all possible...
 
 
-# Person profiles hold the clues
+## Person profiles hold the clues
 
 [TK screenshot of a person profile]
 
