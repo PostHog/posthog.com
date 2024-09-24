@@ -86,7 +86,7 @@ If the above approaches aren't enough, you can log custom events in your code th
 Pick a milestone in your feature's workflow where you feel the user has committed to using it – perhaps after a save button is clicked. There you can send an event in PostHog, attaching this milestone to the user's event stream:
 
 ```
-//TK the code that does this
+posthog.capture('user_completed_a_powerful_workflow')
 ```
 
 If you're going to the trouble of custom code to identify your power users, it may make more sense to use events than, say, setting a user property like `power_user: true`. Your definition of power users is likely to evolve over time, so sending events you can use as changeable inputs to this definition will be more flexible and long-term useful.
@@ -144,7 +144,7 @@ Create a new **Cohort** in **People and groups**. A query to show us everyone wh
 
 [TK screenshot of the query]
 
-We query for users who **Completed event** **Pageview**, filter it by the **Path Names** we care about, and make sure that we are **AND**ing these together, showing us users who have both kinds of events in their history.
+We query for users who **Completed event** **Pageview**, filter it by the **Path Names** we care about, and make sure that we are ANDing these together by choosing 'Match persons against **ALL** criteria', showing us users who have both kinds of events in their history.
 
 Give the cohort a name, save it, and you'll have an ongoing list of potential power usr profiles you can review.
 
@@ -174,7 +174,12 @@ When a user submits a PostHog survey, a `survey sent` event is created including
 
 You can create a cohort based on these submissions, including filters to show you only users who chose a specific response.
 
-[TK an explainer on the best way to build a cohort from such data, based on what we agree makes sense given the Bug Situation we've discovered may be at play; also a screenshot]
+[TK screenshot of a survey query]
+
+For this, choose a survey sent event as the **Completed event**, then we can filter for:
+
+1. The survey name
+2. The survey value 
 
 # Now what?
 
