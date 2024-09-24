@@ -58,7 +58,7 @@ const Teams: React.FC = () => {
                         <div className="md:flex-1">
                             <h1 className="font-bold text-3xl md:text-4xl mb-6">Small teams</h1>
                             <p className="opacity-60 ">
-                                We've organized the team into small teams that are multi-disciplinary and as
+                                We've organized the company into small teams that are multi-disciplinary and as
                                 self-sufficient as possible.
                             </p>
                             <p className="">
@@ -94,9 +94,8 @@ const Teams: React.FC = () => {
                                                             >
                                                                 <img
                                                                     src={avatar?.data?.attributes?.url}
-                                                                    className={`w-10 h-10 rounded-full bg-${
-                                                                        color ?? 'white'
-                                                                    } dark:bg-accent-dark border border-light dark:border-dark`}
+                                                                    className={`w-10 h-10 rounded-full bg-${color ?? 'white'
+                                                                        } dark:bg-accent-dark border border-light dark:border-dark`}
                                                                     alt={name}
                                                                 />
                                                             </Tooltip>
