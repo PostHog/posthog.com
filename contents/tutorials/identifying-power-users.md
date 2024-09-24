@@ -93,7 +93,7 @@ If you're going to the trouble of custom code to identify your power users, it m
 
 If your power user is someone who uses multiple features in combination, you can repeat this process across those feature workflows.
 
-## Surveys
+### Surveys
 
 [Surveys](/tutorials/feedback-interviews-site-apps) require more effort – you have to write them, your users have to complete them. But if your definition of power user is hard to derive from behavior or inference, they can be a great option.
 
@@ -106,7 +106,7 @@ Otherwise, think about power user signals you could gather from a survey:
 
 Survey submissions are stored as events in a person profile, allowing you to query them later.
 
-## Step 3: Build you power user cohorts
+## Step 3: Build your power user cohorts
 
 These are just a few examples – be creative with how you use your PostHog data.
 
