@@ -1196,6 +1196,13 @@ export const docsMenu = {
                             },
                         },
                         {
+                            name: 'Capacitor',
+                            url: '/docs/libraries/capacitor',
+                            badge: {
+                                title: '3rd party',
+                            },
+                        },
+                        {
                             name: 'Elixir',
                             url: '/docs/libraries/elixir',
                         },
