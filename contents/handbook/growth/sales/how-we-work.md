@@ -69,7 +69,6 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 - AEs are responsible for selling to qualified leads, getting them properly using the product (ideally annual contract), and continuing to be the main point of contact for retention, expansion and cross-sell. Specifically, AEs should grow accounts either by selling in new products or expanding existing products into new teams. This means they have to nurture customers, not just throw them over the fence to a CS person to deal with. 
 - When thinking about commission, we want to particularly incentivize:
-  - Closing annual contracts - better retention, de-risks PostHog financially.
   - Cross selling new products - all-in-one is how we will beat the competition.
 - We aim for a 50/50 split between base/commission when calculating OTE by default. 
 
@@ -81,13 +80,18 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - This means you can hit quota by a combo of bringing in new business and expanding existing. 
 - It also means that you are less likely to totally neglect existing customers because if they churn, it hurts your overall ARR figure.
 - Commission is uncapped and paid out based on:
-  - X% of ARR for new annual deals sold
-  - X% of ARR for renewed annual deals sold
+  - X% * Y of ARR for new annual deals sold
+  - X% * Y of ARR for renewed annual deals sold
     - This stops overselling in the first year
+    - Y is a multiplier based on the [annual plan discount table](/handbook/growth/sales/contracts#discounts) which ensures you aren't penalized by converting monthly customers to annual, where the ARR would drop.
+      - Y = 1.25 where ARR >=$20K and <$60K
+      - Y = 1.33 where ARR >=$60K and <$100K
+      - Y = 1.54 where ARR >= $100K
+      - If you discount less, you'll make more commission.
     - We’ll adjust your quota to account for the fact that a big chunk of the quota will be met by the renewal itself
-  - 0.5X% of ARR for monthly customers
+  - X% of MRR for monthly customers
     - Some customers will just self serve or happily stay on month-to-month
-    - We want to incentivize conversion to annual contracts _but_ we don’t want you to force people into annual where it doesn’t make sense, hence a smaller % still paid out
+    - Your focus here will be expanded product adoption, which may naturally drive conversations about annual plans
   - 0% of ARR on any overages at the end of an annual contract
     - This is because we don’t do overages in our current model
   - Your specific commission % will depend on your OTE and quota size
