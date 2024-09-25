@@ -8,18 +8,23 @@ import PostLayout from 'components/PostLayout'
 import Link from 'components/Link'
 import List from 'components/List'
 
-export const quickLinks = [
+type QuickLinks = {
+    name: string;
+    to: string;
+}[];
+
+export const quickLinks: QuickLinks = [
     {
         name: 'Angular',
         to: '/docs/libraries/angular',
     },
     {
         name: 'Astro',
-        url: '/docs/libraries/astro',
+        to: '/docs/libraries/astro',
     },
     {
         name: 'Bubble',
-        url: '/docs/libraries/bubble',
+        to: '/docs/libraries/bubble',
     },
     {
         name: 'Django',
@@ -35,7 +40,7 @@ export const quickLinks = [
     },
     {
         name: 'Framer',
-        url: '/docs/libraries/framer',
+        to: '/docs/libraries/framer',
     },
     {
         name: 'Gatsby',
@@ -47,7 +52,7 @@ export const quickLinks = [
     },
     {
         name: 'Laravel',
-        url: '/docs/libraries/laravel',
+        to: '/docs/libraries/laravel',
     },
     {
         name: 'Next.js',
