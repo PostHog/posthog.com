@@ -26,7 +26,7 @@ Simon and Charles will also review everyone's accounts each month proactively to
 
 ### Handing-off customers from AE to CSM
 
-We want to ensure the expansion potential of a customer has been thoroughly exhausted before moving to a Customer Success Manager for steady-state retention.  When you want to move a customer off your book you should talk it through with Simon, here are the things we will be looking at:
+We want to ensure the expansion potential of a customer has been thoroughly exhausted before moving to a Customer Success Manager for steady-state retention.  When you want to move a customer off your book you should talk it through with Simon. Here are the things we will be looking at:
 
 1. Have you tried multiple times to [make contact](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you) with all of the active users in an account?
    - An _Active User_ is someone who has been seen in Vitally in the past month
