@@ -225,9 +225,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             const templateId = node.frontmatter.templateId
 
             try {
-                const res = await fetch(
-                    `https://mock_8627312fd6c54b6c937fc63cf59f4b0f.mock.insomnia.rest/hog_functions`
-                )
+                const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates/`)
 
                 if (res.status !== 200) {
                     throw `Got status code ${res.status}`
