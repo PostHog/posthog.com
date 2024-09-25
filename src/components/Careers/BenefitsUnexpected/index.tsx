@@ -43,7 +43,7 @@ const BenefitsUnexpected: React.FC = () => {
           <h3 className="text-4xl mb-1">Company off-sites <span className="text-red dark:text-yellow">in exotic locations</span></h3>
           <p className="max-w-lg mb-3">Each year we organize fully paid company off-sites. The highlight is the hackathon where we team up to build things that aren't on our roadmap.</p>
 
-          <p className="font-bold text-[15px] mb-1">Off-site history:</p><div className="inline-grid grid-cols-2 min-w-72 divide-y divide-light dark:divide-dark text-sm [&_*]:py-0.5"><strong>Year</strong><strong className="!border-t-0">Location</strong><div>2020</div><div>Tuscany</div><div>2021</div><div>Portugal</div><div>2022</div><div>Iceland</div><div>2023</div><div>Aruba</div><div>2024</div><div>Mykonos</div><div>2025</div><div><span className="inline-block bg-border dark:bg-border-dark rounded-[2px] text-sm w-16 h-[16px] relative top-[2px]"></span></div></div>
+          <p className="font-bold text-[15px] mb-1">Off-site history:</p><div className="grid md:inline-grid grid-cols-2 min-w-72 divide-y divide-light dark:divide-dark text-sm [&_*]:py-0.5"><strong>Year</strong><strong className="!border-t-0">Location</strong><div>2020</div><div>Tuscany</div><div>2021</div><div>Portugal</div><div>2022</div><div>Iceland</div><div>2023</div><div>Aruba</div><div>2024</div><div>Mykonos</div><div>2025</div><div><span className="inline-block bg-border dark:bg-border-dark rounded-[2px] text-sm w-16 h-[16px] relative top-[2px]"></span></div></div>
         </div>
         <aside>
           <div className="border-8 border-white shadow-xl rounded relative rotate-1">
@@ -57,7 +57,7 @@ const BenefitsUnexpected: React.FC = () => {
         <aside className="order-2 md:order-1 relative">
           <div className="border-8 border-white shadow-xl rounded relative -rotate-1">
             <StaticImage src="./images/dope.png" alt="" />
-            <div className="absolute bottom-0 left-0 w-full text-white bg-gradient-to-b from-black/0 to-black/70 p-2 pt-12 text-sm text-balance xl:text-wrap leading-tight"><Link href="https://maps.app.goo.gl/iYmWWo7C6Q7hBJa48" externalNoIcon className="text-white font-bold hover:!underline hover:text-white dark:hover:text-white">Dope Roasting Co.</Link> in Athens, Greece – a personal favorite of the guy who made this page</div>
+            <div className="absolute bottom-0 left-0 w-full text-white bg-gradient-to-b from-black/0 to-black/70 p-2 pt-12 text-sm text-balance xl:text-wrap leading-tight"><Link href="https://maps.app.goo.gl/iYmWWo7C6Q7hBJa48" externalNoIcon className="text-white font-bold hover:!underline hover:text-white dark:hover:text-white">Dope Roasting Co.</Link> in Athens, Greece – a great place to build pages like this</div>
           </div>
         </aside>
         <div className="order-1 md:order-2 relative">

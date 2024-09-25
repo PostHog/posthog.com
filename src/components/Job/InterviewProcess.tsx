@@ -10,7 +10,7 @@ const defaultInterviewProcess: IInterviewProcess[] = [
     {
         title: 'Application',
         description:
-            'Our talent team will review your application to see how your skills and experience align with our needs.',
+            "We're looking to see how your skills and experience align with our needs.",
         badge: 'Our talent team will review your application',
     },
     {

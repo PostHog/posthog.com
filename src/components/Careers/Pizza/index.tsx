@@ -97,9 +97,9 @@ export const Pizza = () => {
     <div className="px-4 max-w-7xl mx-auto py-12">
       <div className="text-center">
         <div className="text-lg opacity-70 mb-2">Speaking of small teams...</div>
-        <h2 className="text-4xl font-bold mb-2 flex items-center gap-2 justify-center flex-col md:flex-row">
+        <h2 className="text-4xl font-bold mb-2 flex items-center gap-2 justify-center flex-col md:flex-row leading-none">
           <StickerPineapple className="inline-block size-10" />
-          Pineapple on pizza: a house divided
+          Pineapple on pizza: <span className="whitespace-nowrap">a house <em className="text-red dark:text-yellow">divided</em></span>
         </h2>
         <div className="max-w-2xl mx-auto">
           <p>

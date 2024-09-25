@@ -143,9 +143,9 @@ export const CareersHero = () => {
 
     return (
         <>
-            <h1 className="text-4xl lg:text-5xl font-bold text-center mb-2 pt-8">Who's hiring?</h1>
-            <p className="text-center mb-8 text-base">
-                Our small teams are looking to add <strong>{jobs.length} team members</strong>.
+            <h1 className="text-4xl lg:text-5xl font-bold text-center mb-2 pt-8 px-2">Who's hiring?</h1>
+            <p className="text-center mb-8 text-base px-4">
+                Our small teams are looking to add <strong className="whitespace-nowrap">{jobs.length} team members</strong>.
             </p>
             <section className="flex flex-col md:flex-row md:gap-4 px-4 max-w-7xl mx-auto 2xl:px-8 mb-16">
                 <div className="w-full md:w-1/4">

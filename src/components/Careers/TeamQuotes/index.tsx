@@ -109,7 +109,7 @@ const TeamQuotes: React.FC = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 pt-8 pb-12">
+    <section className="max-w-7xl mx-auto px-4 py-12">
       <h2 className="text-center text-4xl mb-8">Nice things we didn't coerce anyone into saying</h2>
 
       <Masonry
