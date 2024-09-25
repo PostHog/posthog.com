@@ -4,7 +4,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 export const InterviewProcessOverview = () => {
   return (
-    <div id="introduction" className="px-4 max-w-7xl mx-auto my-12">
+    <div className="px-4 max-w-7xl mx-auto my-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
         <div className="flex flex-col justify-between">
           <div>

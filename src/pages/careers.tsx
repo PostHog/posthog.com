@@ -23,6 +23,7 @@ import InterviewProcess from 'components/Job/InterviewProcess'
 import { FounderNote } from 'components/Careers/FounderNote'
 import { InterviewProcessOverview } from 'components/Careers/InterviewProcessOverview'
 import TeamQuotes from 'components/Careers/TeamQuotes'
+import { SmallTeams } from 'components/Careers/SmallTeams'
 
 const menu = [
     {
@@ -79,6 +80,7 @@ const IndexPage = () => {
             <Compensation />
             <InterviewProcessOverview />
             <TeamQuotes />
+            <SmallTeams />
 
 
 
