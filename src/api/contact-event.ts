@@ -20,6 +20,8 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
     })
 
     await client.shutdown()
+
+    return res.status(200).send('OK')
 }
 
 export default handler
