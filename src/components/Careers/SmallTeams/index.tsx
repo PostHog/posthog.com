@@ -30,7 +30,7 @@ export const SmallTeams = () => {
   return (
     <div className="px-4 max-w-7xl mx-auto my-12">
 
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 gap-8">
 
         <div>
           <div className="opacity-60 mb-2">Small teams</div>
@@ -44,21 +44,24 @@ export const SmallTeams = () => {
           </div>
         </div>
 
-        <div className="col-span-2 grid grid-cols-2 text-center border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded divide-x divide-y divide-border dark:divide-border-dark">
-          {allTeams.nodes.map(({ id, name, profiles, crest, leadProfiles }) => (
-            <Link
-              to={`/teams/${slugify(name.toLowerCase().replace('ops', ''), {
-                remove: /and/,
-              })}`}
-              key={id}
-              className="px-2 py-1 items-center text-left hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px flex gap-2"
-            >
-              <GatsbyImage image={getImage(crest)} alt={`${name} Team`} className="w-16" />
-              <div>
-                <h3 className="text-base my-2 leading-snug">{name} Team</h3>
-              </div>
-            </Link>
-          ))}
+        <div>
+          <h3 className="md:hidden text-base font-bold mb-2">Small teams</h3>
+          <div className="grid grid-cols-2 text-center max-w-xl">
+            {allTeams.nodes.map(({ id, name, profiles, crest, leadProfiles }) => (
+              <Link
+                to={`/teams/${slugify(name.toLowerCase().replace('ops', ''), {
+                  remove: /and/,
+                })}`}
+                key={id}
+                className="items-center text-left flex gap-2 w-full px-2 py-1 rounded-md border border-b-3 hover:bg-white/50 hover:dark:bg-accent-dark border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+              >
+                <GatsbyImage image={getImage(crest)} alt={`${name} Team`} className="w-16" />
+                <div>
+                  <h3 className="text-[15px] my-0 leading-snug text-primary dark:text-primary-dark font-semibold">{name} Team</h3>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
