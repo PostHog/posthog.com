@@ -676,6 +676,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/new-sales',
             },
             {
+                name: 'Product-led sales',
+                url: '/handbook/growth/sales/product-led-sales',
+            },
+            {
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
