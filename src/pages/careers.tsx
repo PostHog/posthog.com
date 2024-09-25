@@ -24,6 +24,7 @@ import { FounderNote } from 'components/Careers/FounderNote'
 import { InterviewProcessOverview } from 'components/Careers/InterviewProcessOverview'
 import TeamQuotes from 'components/Careers/TeamQuotes'
 import { SmallTeams } from 'components/Careers/SmallTeams'
+import { Pizza } from 'components/Careers/Pizza'
 
 const menu = [
     {
@@ -81,6 +82,7 @@ const IndexPage = () => {
             <InterviewProcessOverview />
             <TeamQuotes />
             <SmallTeams />
+            <Pizza />
 
 
 
