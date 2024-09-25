@@ -4,7 +4,10 @@ import { PostHog } from 'posthog-node'
 const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) => {
     const ip = req.headers['x-forwarded-for']
     const { distinctId, formName, ...other } = JSON.parse(req.body)
-    const client = new PostHog(process.env.GATSBY_POSTHOG_API_KEY, { host: process.env.GATSBY_POSTHOG_UI_HOST })
+    const client = new PostHog(process.env.GATSBY_POSTHOG_API_KEY, {
+        host: process.env.GATSBY_POSTHOG_UI_HOST,
+        disableGeoip: false,
+    })
 
     await client.capture({
         distinctId,
