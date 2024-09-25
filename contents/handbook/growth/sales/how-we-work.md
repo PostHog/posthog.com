@@ -22,7 +22,25 @@ Other metrics we generally care about:
 
 Each AE is assigned ~10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 20 accounts, so staying extremely focused is important. 
 
-If you have been assigned an existing customer that you think doesn't belong in your book, e.g. there is zero expansion potential and you have tried everything with them, you can chat to Simon about swapping in a different account. The bar is very high here though - you can't just swap out a customer because it's hard work! Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
+Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
+
+### Handing-off customers from AE to CSM
+
+We want to ensure the expansion potential of a customer has been thoroughly exhausted before moving to a Customer Success Manager for steady-state retention.  When you want to move a customer off your book you should talk it through with Simon, here are the things we will be looking at:
+
+1. Have you tried multiple times to make contact with all of the active users in an account?
+   - An _Active User_ is someone who has been seen in Vitally in the past month
+   - When you reach out, demonstrate how you can help that person out, be specific to their role/usage of PostHog.
+2. Are they using all PostHog products?
+   - If they have been customers for a while they may not be aware of new products like Surveys and Data Warehouse.  Look at their usage and see if there are any obvious cross-sell opportunities.
+   - Could they benefit from some of the advanced capabilities and training/support available in Teams/Enterprise?
+3. Is there an opportunity to cross-sell to a different team?
+   - Have a look at what they are tracking with PostHog.  If it's an app then maybe get in touch with the marketing team to talk about Web Analytics or No Code Testing
+   - Are they a multi-product company?  Find out if there are other teams who aren't using us who could benefit from PostHog today, and then use your current users as an internal reference.
+   
+If the answer to any of the above questions is 'no' then it's likely that there is more work to be done with a customer, but we will use a common sense approach here.
+
+> A customer being negative/difficult to work with isn't a reason to remove them from your book.  It's your job to turn them around to being a happy customer (AKA be their favorite).
 
 ## Weekly sales standup
 
