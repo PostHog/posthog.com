@@ -345,9 +345,9 @@ export default function SalesforceForm({
         posthog?.identify?.(distinctId, {
             email: values.email,
         })
-        posthog?.capture?.('form submission', {
-            form_name: form.name,
-            form_data: JSON.stringify(values),
+        await fetch(`/api/contact-event`, {
+            method: 'POST',
+            body: JSON.stringify({ ...values, type, source, distinctId, formName: form.name }),
         })
         await fetch('https://hooks.zapier.com/hooks/catch/8898847/222z130/', {
             method: 'POST',
