@@ -2660,10 +2660,6 @@ export const docsMenu = {
             children: [
                 {
                     name: 'Data pipelines (CDP)',
-                    badge: {
-                        title: 'Preview',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Overview',
@@ -2678,45 +2674,14 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     icon: 'IconLive',
-                },
-                {
-                    name: 'Batch exports',
-                    url: '/docs/cdp/batch-exports',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                    icon: 'IconShare',
                     children: [
                         {
-                            name: 'Amazon S3',
-                            url: '/docs/cdp/batch-exports/s3',
+                            name: 'Overview',
+                            url: '/docs/cdp/destinations',
                         },
                         {
-                            name: 'Snowflake',
-                            url: '/docs/cdp/batch-exports/snowflake',
+                            name: 'Destinations',
                         },
-                        {
-                            name: 'BigQuery',
-                            url: '/docs/cdp/batch-exports/bigquery',
-                        },
-                        {
-                            name: 'Postgres',
-                            url: '/docs/cdp/batch-exports/postgres',
-                        },
-                        {
-                            name: 'Redshift',
-                            url: '/docs/cdp/batch-exports/redshift',
-                        },
-                    ],
-                },
-                {
-                    name: 'Connectors',
-                },
-                {
-                    name: 'Destinations',
-                    url: '',
-                    children: [
                         {
                             url: '/docs/cdp/airbyte-export',
                             name: 'Airbyte',
@@ -2780,8 +2745,40 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Batch exports',
+                    url: '/docs/cdp/batch-exports',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                    icon: 'IconShare',
+                    children: [
+                        {
+                            name: 'Amazon S3',
+                            url: '/docs/cdp/batch-exports/s3',
+                        },
+                        {
+                            name: 'Snowflake',
+                            url: '/docs/cdp/batch-exports/snowflake',
+                        },
+                        {
+                            name: 'BigQuery',
+                            url: '/docs/cdp/batch-exports/bigquery',
+                        },
+                        {
+                            name: 'Postgres',
+                            url: '/docs/cdp/batch-exports/postgres',
+                        },
+                        {
+                            name: 'Redshift',
+                            url: '/docs/cdp/batch-exports/redshift',
+                        },
+                    ],
+                },
+                {
                     name: 'Transformations',
                     url: '',
+                    icon: 'IconWrench',
                     children: [
                         {
                             url: '/docs/cdp/geoip-enrichment',
@@ -2826,31 +2823,9 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'More',
-                },
-                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/cdp/common-questions',
                     icon: 'IconQuestion',
-                },
-                {
-                    name: 'Build a connector',
-                    url: '/docs/cdp/build',
-                    icon: 'IconGraduationCap',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/cdp/build',
-                        },
-                        {
-                            name: 'Developer reference',
-                            url: '/docs/cdp/build/reference',
-                        },
-                        {
-                            name: 'Tutorial',
-                            url: '/docs/cdp/build/tutorial',
-                        },
-                    ],
                 },
             ],
         },
