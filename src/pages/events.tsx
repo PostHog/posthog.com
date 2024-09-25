@@ -21,7 +21,7 @@ const Events = (): JSX.Element => {
                     <h3 className="mb-4 md:hidden">Anonymous events</h3>
                     <div className="max-w-md">
                         <StaticImage
-                            src="./event-anonymous.png"
+                            src="./components/Pricing/PricingCalculator/Tabs/event-anonymous.png"
                             alt="Anonymous event example"
                             className=""
                             placeholder="blurred"
@@ -83,7 +83,7 @@ const Events = (): JSX.Element => {
                     <h3 className="mb-4 md:hidden">Identified events</h3>
                     <div className="max-w-md">
                         <StaticImage
-                            src="./event-identified.png"
+                            src="./components/Pricing/PricingCalculator/Tabs/event-identified.png"
                             alt="Identified event example"
                             placeholder="blurred"
                         />

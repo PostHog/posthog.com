@@ -33,7 +33,7 @@ const TeamMemberLink = (person) => {
                             <StaticImage
                                 alt=""
                                 width={24}
-                                src="../../pages-content/images/hog-9.png"
+                                src="../../../pages-content/images/hog-9.png"
                                 className="size-24"
                             />
                         )}
