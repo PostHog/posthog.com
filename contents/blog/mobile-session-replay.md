@@ -141,4 +141,4 @@ This enables us to help more developers have the tools they need to build succes
 
 - [The 80/20 of early-stage startup analytics](/founders/early-stage-analytics)
 - [We decided to make session replay cheaper](/blog/session-replay-pricing)
-- [How to set up Android session replay](/tutorials/android-session-replay) and [How to set up iOS session replay](/tutorials/ios-session-replay)
+- How to set up [Android](/tutorials/android-session-replay), [iOS](/tutorials/ios-session-replay), and [React Native](/docs/session-replay/react-native) session replay
