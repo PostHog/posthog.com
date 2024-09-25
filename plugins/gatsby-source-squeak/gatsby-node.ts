@@ -227,6 +227,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     fields: 'id',
                 },
                 crest: true,
+                miniCrest: true,
                 teamImage: {
                     populate: {
                         image: true,
@@ -242,7 +243,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     const teams = await fetch(`${apiHost}/api/teams?${teamQuery}`).then((res) => res.json())
 
     for (const team of teams.data) {
-        const { roadmaps, crest, teamImage, ...rest } = team.attributes
+        const { roadmaps, crest, miniCrest, teamImage, ...rest } = team.attributes
 
         const cloudinaryTeamImage = {
             ...teamImage,
@@ -262,6 +263,15 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             originalFormat: (crest?.data?.attributes?.ext || '').replace('.', ''),
         }
 
+        const cloudinaryMiniCrest = {
+            ...miniCrest,
+            cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+            publicId: miniCrest?.data?.attributes?.provider_metadata?.public_id,
+            originalHeight: miniCrest?.data?.attributes?.height,
+            originalWidth: miniCrest?.data?.attributes?.width,
+            originalFormat: (miniCrest?.data?.attributes?.ext || '').replace('.', ''),
+        }
+
         const node = {
             id: createNodeId(`squeak-team-${team.id}`),
             squeakId: team.id,
@@ -271,6 +281,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             },
             teamImage: cloudinaryTeamImage,
             crest: cloudinaryCrest,
+            miniCrest: cloudinaryMiniCrest,
             ...rest,
             roadmaps: roadmaps.data.map((roadmap) => ({
                 id: createNodeId(`squeak-roadmap-${roadmap.id}`),
