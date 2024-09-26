@@ -70,6 +70,8 @@ const IndexPage = () => {
 
             <CareersHero />
             <FounderNote />
+            <SmallTeams />
+            <Pizza />
 
             <MegaQuote />
 
@@ -81,8 +83,6 @@ const IndexPage = () => {
             <Compensation />
             <InterviewProcessOverview />
             <TeamQuotes />
-            <SmallTeams />
-            <Pizza />
 
             {/* <Transparency /> */}
 

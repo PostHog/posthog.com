@@ -4,8 +4,34 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import slugify from 'slugify'
 import { Link } from 'gatsby'
 import { StickerPineapple, StickerPineappleYes, StickerPineappleNo } from 'components/Stickers/Index'
-import Masonry from 'react-masonry-css'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, A11y } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { StaticImage } from 'gatsby-plugin-image'
+import { useState } from 'react';
+
+interface FullscreenModalProps {
+  image: React.ReactNode;
+  onClose: () => void;
+}
+
+const FullscreenModal: React.FC<FullscreenModalProps> = ({ image, onClose }) => {
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center" onClick={onClose}>
+      <div className="max-w-4xl max-h-[90vh] overflow-auto" onClick={(e) => e.stopPropagation()}>
+        {image}
+      </div>
+      <button
+        className="absolute top-4 right-4 text-white text-2xl"
+        onClick={onClose}
+      >
+        ×
+      </button>
+    </div>
+  );
+};
 
 const PizzaBox = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -16,6 +42,16 @@ const PizzaBox = ({ children }: { children: React.ReactNode }) => {
 }
 
 export const Pizza = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const openFullscreen = (index: number) => {
+    setActiveIndex(index);
+  };
+
+  const closeFullscreen = () => {
+    setActiveIndex(null);
+  };
+
   const { allTeams } = useStaticQuery(graphql`
     {
       allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, miniCrest: { publicId: { ne: null } } }) {
@@ -72,14 +108,12 @@ export const Pizza = () => {
     groupedTeams[key].sort((a, b) => parseFloat(b.pineapplePercentage) - parseFloat(a.pineapplePercentage))
   })
 
-  const breakpointColumnsObj = {
-    default: 3,
-    1024: 2,
-    640: 1
-  };
-
   const pizzaImages = [
     <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20220926_204026_a1ca58e1cc.jpg" alt="Pizza 4" />,
+    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
+    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
+    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
+    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
     <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
     <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210929_183537661_PORTRAIT_750e977998.jpg" alt="Pizza 4" />,
     <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_4af46118e2.jpg" alt="Pizza 4" />,
@@ -221,17 +255,44 @@ export const Pizza = () => {
       <h3 className="text-3xl mb-0 text-center">Speaking of pizza...</h3>
       <div className="text-lg opacity-70 mb-6 text-center">Here are some of our creations.</div>
 
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="flex -ml-2 xl:-ml-6 w-auto"
-        columnClassName="pl-2 xl:pl-6 bg-clip-padding"
+      <Swiper
+        modules={[Navigation, Pagination, A11y]}
+        autoHeight={true}
+        spaceBetween={20}
+        slidesPerView={1}
+        navigation
+        speed={500}
+        pagination={{ clickable: true }}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+          },
+        }}
+        className="pizza-swiper"
       >
         {pizzaImages.map((image, index) => (
-          <PizzaBox key={index}>
-            {image}
-          </PizzaBox>
+          <SwiperSlide key={index}>
+            <div
+              className="cursor-pointer transition-transform duration-300 hover:scale-105"
+              onClick={() => openFullscreen(index)}
+            >
+              <PizzaBox>{image}</PizzaBox>
+            </div>
+          </SwiperSlide>
         ))}
-      </Masonry>
+      </Swiper>
+
+      {activeIndex !== null && (
+        <FullscreenModal
+          image={pizzaImages[activeIndex]}
+          onClose={closeFullscreen}
+        />
+      )}
     </div>
   )
 }
