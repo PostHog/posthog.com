@@ -76,7 +76,7 @@ const BenefitsUsual: React.FC = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-2 lg:gap-8">
       <div className="">
-        <h2 className="text-4xl font-bold mb-2">The <em>usual</em> benefits</h2>
+        <h2 className="text-4xl font-bold mb-2">The <em>boring</em> benefits</h2>
         <p>Everybody offers healthcare, paid time off, and a laptop, so we organized our benefits by awesomeness. (Would we even be a tech startup without these?)</p>
 
         <p className="mb-0">The one exception is equity (which you get), but is so unique that it deserves its own section below.</p>
