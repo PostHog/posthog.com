@@ -7,7 +7,7 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-Send event data from PostHog into Customer.io. User emails will also be sent if available and customers will be created in Customer.io.
+Send event data from PostHog into Customer.io.
 
 <Requirements />
 

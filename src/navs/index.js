@@ -2665,8 +2665,92 @@ export const docsMenu = {
                     icon: 'IconLive',
                     children: [
                         {
+                            name: 'Slack',
+                            url: '/docs/cdp/destinations/slack',
+                        },
+                        {
+                            name: 'Webhook',
+                            url: '/docs/cdp/destinations/webhook',
+                        },
+                        {
+                            name: 'ActiveCampaign',
+                            url: '/docs/cdp/destinations/activecampaign',
+                        },
+                        {
+                            name: 'Avo',
+                            url: '/docs/cdp/destinations/avo',
+                        },
+                        {
+                            name: 'AWS Kinesis',
+                            url: '/docs/cdp/destinations/aws-kinesis',
+                        },
+                        {
+                            name: 'Braze',
+                            url: '/docs/cdp/destinations/braze',
+                        },
+                        {
                             name: 'Customer.io',
                             url: '/docs/cdp/destinations/customerio',
+                        },
+                        {
+                            name: 'Engage.so',
+                            url: '/docs/cdp/destinations/engage',
+                        },
+                        {
+                            name: 'Gleap',
+                            url: '/docs/cdp/destinations/gleap',
+                        },
+                        {
+                            name: 'Google Cloud Storage',
+                            url: '/docs/cdp/destinations/google-cloud-storage',
+                        },
+                        {
+                            name: 'Google Pub/Sub',
+                            url: '/docs/cdp/destinations/google-pubsub',
+                        },
+                        {
+                            name: 'Hubspot',
+                            url: '/docs/cdp/destinations/hubspot',
+                        },
+                        {
+                            name: 'Intercom',
+                            url: '/docs/cdp/destinations/intercom',
+                        },
+                        {
+                            name: 'Knock',
+                            url: '/docs/cdp/destinations/knock',
+                        },
+                        {
+                            name: 'Loops',
+                            url: '/docs/cdp/destinations/loops',
+                        },
+                        {
+                            name: 'Mailgun',
+                            url: '/docs/cdp/destinations/mailgun',
+                        },
+                        {
+                            name: 'Mailjet',
+                            url: '/docs/cdp/destinations/mailjet',
+                        },
+                        {
+                            name: 'RudderStack',
+                            url: '/docs/cdp/destinations/rudderstack',
+                        },
+                        {
+                            name: 'Salesforce',
+                            url: '/docs/cdp/destinations/salesforce',
+                        },
+                        {
+                            name: 'Sendgrid',
+                            url: '/docs/cdp/destinations/sendgrid',
+                        },
+                        {
+                            name: 'Zapier',
+                            url: '/docs/cdp/destinations/zapier',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/cdp/destinations/zendesk',
                         },
                     ],
                 },
