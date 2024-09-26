@@ -147,7 +147,7 @@ export const Pizza = () => {
         <div>
           <div className="font-bold mb-4 border-b border-light dark:border-dark pb-2 flex gap-2">
             <StickerPineappleNo className="inline-block size-10" />
-            <h3 className="text-[19px] leading-tight m-0 pt-2">Small teams who <span className="text-red">don't believe</span> pineapple on pizza</h3>
+            <h3 className="text-[19px] leading-tight m-0 pt-2">Small teams who <span className="text-red">don't believe</span> pineapple belongs on pizza</h3>
           </div>
 
           <ul className="list-none p-0 space-y-3">

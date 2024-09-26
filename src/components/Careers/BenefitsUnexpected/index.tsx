@@ -28,7 +28,7 @@ const BenefitsUnexpected: React.FC = () => {
           <p className="max-w-lg mb-3">After extensive research, we've found the best way to ship fast is to have fewer meetings.</p>
 
           <p className="text-sm opacity-75 max-w-lg mb-3">
-            *Illustration is not indicative of an product engineer’s calendar at PostHog. We actually have relatively few meetings.
+            *Illustration is not indicative of a product engineer’s calendar at PostHog. We actually have relatively few meetings.
           </p>
 
           <div className="hidden lg:block scale-100 hover:scale-[1.2] transition-all duration-200 relative left-0 hover:left-4 rotate-0 hover:rotate-3">
