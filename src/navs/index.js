@@ -2754,7 +2754,7 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     icon: 'IconShare',
-                    color: 'red',
+                    color: 'purple',
                     children: [
                         {
                             name: 'Amazon S3',
@@ -2780,9 +2780,9 @@ export const docsMenu = {
                 },
                 {
                     name: 'Transformations',
-                    url: '',
+                    url: '/docs/cdp/geoip-enrichment',
                     icon: 'IconWrench',
-                    color: 'blue',
+                    color: 'yellow',
                     children: [
                         {
                             url: '/docs/cdp/geoip-enrichment',
