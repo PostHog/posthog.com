@@ -9,7 +9,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 const PizzaBox = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="bg-white dark:bg-black border-8 border-white dark:border-dark rounded-md shadow-md overflow-hidden mb-2 xl:mb-6">
+    <div className="bg-white dark:bg-black border-8 border-white rounded-md shadow-md overflow-hidden mb-2 xl:mb-6">
       {children}
     </div>
   )
@@ -110,7 +110,7 @@ export const Pizza = () => {
 
       <div className="grid md:grid-cols-2 gap-10 md:gap-12 pt-6 pb-12">
         <div>
-          <div className="font-bold mb-4 border-b border-light dark:border-light-dark pb-2 flex gap-2">
+          <div className="font-bold mb-4 border-b border-light dark:border-dark pb-2 flex gap-2">
             <StickerPineappleYes className="inline-block size-10" />
             <h3 className="text-[19px] leading-tight m-0 pt-2">Small teams who <span className="text-green">correctly agree</span> pineapple belongs on pizza</h3>
           </div>
@@ -132,7 +132,7 @@ export const Pizza = () => {
                     <div className="flex-1">
                       <Link to={`/teams/${slugify(team.name.toLowerCase(), { remove: /and/ })}`} className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow">{team.name}</Link>
                       <div className="flex gap-2 items-center -mt-1">
-                        <div className="flex-1 relative h-2 w-full bg-accent dark:bg-accent-dark rounded-full">
+                        <div className="flex-1 relative h-2 w-full bg-accent dark:bg-white/10 rounded-full">
                           <div className="absolute left-0 top-0 h-full bg-green rounded-full" style={{ width: `${team.pineapplePercentage}%` }}></div>
                         </div>
                         <span className="text-sm font-medium">{Math.round(team.pineapplePercentage)}%</span>
@@ -145,7 +145,7 @@ export const Pizza = () => {
           </ul>
         </div>
         <div>
-          <div className="font-bold mb-4 border-b border-light dark:border-light-dark pb-2 flex gap-2">
+          <div className="font-bold mb-4 border-b border-light dark:border-dark pb-2 flex gap-2">
             <StickerPineappleNo className="inline-block size-10" />
             <h3 className="text-[19px] leading-tight m-0 pt-2">Small teams who <span className="text-red">don't believe</span> pineapple on pizza</h3>
           </div>
@@ -167,7 +167,7 @@ export const Pizza = () => {
                     <div className="flex-1">
                       <Link to={`/teams/${slugify(team.name.toLowerCase(), { remove: /and/ })}`} className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow">{team.name}</Link>
                       <div className="flex gap-2 items-center -mt-1">
-                        <div className="flex-1 relative h-2 w-full bg-accent dark:bg-accent-dark rounded-full">
+                        <div className="flex-1 relative h-2 w-full bg-accent dark:bg-white/10 rounded-full">
                           <div className="absolute left-0 top-0 h-full bg-green rounded-full" style={{ width: `${team.pineapplePercentage}%` }}></div>
                         </div>
                         <span className="text-sm font-medium">{Math.round(team.pineapplePercentage)}%</span>
@@ -180,7 +180,7 @@ export const Pizza = () => {
           </ul>
 
           <div className="mt-8">
-            <div className="font-bold mb-4 border-b border-light dark:border-light-dark pb-2 flex gap-2">
+            <div className="font-bold mb-4 border-b border-light dark:border-dark pb-2 flex gap-2">
               <StickerPineapple className="inline-block size-10" />
               <h3 className="text-[19px] leading-tight m-0 pt-2">Small teams who are <span className="text-yellow">split</span> on pineapple on pizza</h3>
             </div>
@@ -202,7 +202,7 @@ export const Pizza = () => {
                       <div className="flex-1">
                         <Link to={`/teams/${slugify(team.name.toLowerCase(), { remove: /and/ })}`} className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow">{team.name}</Link>
                         <div className="flex gap-2 items-center -mt-1">
-                          <div className="flex-1 relative h-2 w-full bg-accent dark:bg-accent-dark rounded-full">
+                          <div className="flex-1 relative h-2 w-full bg-accent dark:bg-white/10 rounded-full">
                             <div className="absolute left-0 top-0 h-full bg-yellow rounded-full" style={{ width: `${team.pineapplePercentage}%` }}></div>
                           </div>
                           <span className="text-sm font-medium">{Math.round(team.pineapplePercentage)}%</span>

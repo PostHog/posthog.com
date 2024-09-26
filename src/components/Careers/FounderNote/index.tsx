@@ -53,7 +53,7 @@ export const FounderNote = () => {
         <section className="@container px-4 max-w-7xl mx-auto mb-16">
             <div className="grid md:grid-cols-5 gap-12 items-center">
                 <div className="hidden @sm:block col-span-2 text-right">
-                    <button onClick={playRandomJamesAudio} className="inline-block border-[6px] border-white dark:border-accent-dark rounded-md shadow-lg -rotate-1 relative top-[1px] lg:top-0 hover:top-[-3px] transform scale-100 hover:scale-[1.02] active:scale-[.998] active:top-px transition-all duration-100 cursor-play">
+                    <button onClick={playRandomJamesAudio} className="inline-block border-[6px] border-white dark:border-white rounded-md shadow-lg -rotate-1 relative top-[1px] lg:top-0 hover:top-[-3px] transform scale-100 hover:scale-[1.02] active:scale-[.998] active:top-px transition-all duration-100 cursor-play">
                         <StaticImage
                             src="./images/these-founders-ship.jpg"
                             alt="James Hawkins and Tim Glaser: These founders ship"
@@ -64,7 +64,7 @@ export const FounderNote = () => {
                 </div>
                 <div className="col-span-3">
                     <h2 className="text-2xl font-bold mb-2 @sm:mb-4 @sm:flex items-center gap-3">Thanks for checking out <span className="@sm:hidden">PostHog!</span> <Logo className="hidden @sm:inline-block h-8" /></h2>
-                    <button onClick={playRandomJamesAudio} className="float-right max-w-sm inline-block @sm:hidden border-[6px] border-white dark:border-accent-dark rounded-md shadow-lg rotate-1 relative top-[1px] lg:top-0 hover:top-[-3px] transform scale-100 hover:scale-[1.02] active:scale-[.998] active:top-px transition-all duration-100 ml-2 cursor-play">
+                    <button onClick={playRandomJamesAudio} className="float-right max-w-sm inline-block @sm:hidden border-[6px] border-white dark:border-white rounded-md shadow-lg rotate-1 relative top-[1px] lg:top-0 hover:top-[-3px] transform scale-100 hover:scale-[1.02] active:scale-[.998] active:top-px transition-all duration-100 ml-2 cursor-play">
                         <StaticImage
                             src="./images/these-founders-ship.jpg"
                             alt="James Hawkins and Tim Glaser: These founders ship"

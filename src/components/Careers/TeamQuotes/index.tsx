@@ -16,7 +16,7 @@ const TeamMemberLink = (person) => {
 
   return (
     <div className="flex flex-col items-center mb-8 xl:mb-12">
-      <div className="bg-white dark:bg-accent-dark rounded-md px-6 py-4 mb-4 shadow-lg">
+      <div className="bg-white dark:bg-accent-dark dark:border dark:border-dark rounded-md px-6 py-4 mb-4 shadow-lg">
         {quotes.map((quote) => (
           <div key={quote.id}>
             <p dangerouslySetInnerHTML={{ __html: quote.quote }} className="mb-0 text-center" />

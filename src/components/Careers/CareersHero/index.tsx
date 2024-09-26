@@ -153,7 +153,7 @@ export const CareersHero = () => {
                         Select a role
                     </label>
                     <select
-                        className="block md:hidden w-full p-2 border border-b-0 border-light dark:border-dark rounded-tl rounded-tr text-xl font-bold relative z-10"
+                        className="block md:hidden w-full p-2 border border-b-0 border-light bg-accent dark:bg-accent-dark dark:border-dark rounded-tl rounded-tr text-xl font-bold relative z-10"
                         value={selectedJob.fields.title}
                         onChange={(e) => {
                             const selectedJobTitle = e.target.value
