@@ -1412,6 +1412,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/nextjs-middleware',
                         },
                         {
+                            name: 'nginx',
+                            url: '/docs/advanced/proxy/nginx',
+                        },
+                        {
                             name: 'Nuxt',
                             url: '/docs/advanced/proxy/nuxt',
                         },
