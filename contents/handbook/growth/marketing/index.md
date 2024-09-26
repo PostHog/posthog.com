@@ -4,20 +4,26 @@ sidebar: Handbook
 showTitle: true
 ---
 
-The Marketing & Content team exist to drive organic, word-of-mouth growth by:
+The marketing team has two core goals:
 
-1. Producing world-class top-of-funnel content for our ICP
-2. Ensuring the information users need is easy to find and maintained to a high standard
+1. Increase awareness of PostHog, especially among people in our ideal customer profile.
+2. Make engineers and PostHog users feel like badass ninjas by teaching them cool stuff.
 
-Marketing is the [newsroom](https://en.wikipedia.org/wiki/Newsroom) of PostHog. This means:
+We do this by:
 
-- A small, talented team of in-house content creators with strong editorial capability – our default is to keep writing in-house, not farm it out to a network of freelancers.
- 
-- Building a reputation for high-quality, trustworthy content that is a go-to resource for our users and wider reading audience. 
-
-- Extreme responsiveness to opportunities, both internal and external (e.g. cool Hackathon projects, GDPR rulings).
- 
-- Proactively reporting and amplifying company and product news, rather than [artificially creating news](https://en.wikipedia.org/wiki/Tomorrow_Never_Dies) or buzz by telling people what to build.
+- Building a reputation for world-class content
+- Constantly working to improve our documentation
+- Identifying where content can help users be more successful
+- Proactively promoting the work of product teams
+- Never telling them what to build 
+- Holding a high bar for quality in everything we do
+- Never being satisfied with how high that bar is
+- Being weird, opinionated, and unafraid of being wrong
+- Reacting quickly to opportunities whenever they arise
+- Not being precious about our work and priorities
+- Having a team of talented, technically literate writers (and Andy)
+- Not relying on freelancers or guest contributors for content
+- Avoiding tedious enterprise marketing nonsense (PDFs, gated content, webinars, etc.)
 
 The latest goals for marketing can be found on the [Marketing Small Team page](/teams/marketing).
 
@@ -26,16 +32,16 @@ The latest goals for marketing can be found on the [Marketing Small Team page](/
 PostHog's [vision](/handbook/strategy/overview#long-term-vision-for-2026) is to IPO in 2026 with $100m ARR. This is what we think marketing & content at PostHog will look like at that point. 
 
 ### Things we want to be brilliant at
-
-- **Acting as the newsroom of PostHog:** We actively engage with engineering teams (like a journalist would engage with subjects), find out what they’re working on and partner with them to amplify what they are doing.
  
 - **Word of mouth mindset:** By IPO, we want to have built a hugely successful company driven primarily by word of mouth, rather than paid ads or PR.
 
-- **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
+- **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate.
 
-- **Content for our ideal customer:** We deliver genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’. Ahrefs and HubSpot are examples of companies who do this brilliantly for their audience.
+- **Helping PostHog users be successful:** Through our docs, tutorials, newsletter and beyond, we help PostHog users be more successful, both generally in their goals, but also more successful and powerful users of PostHog.
 
-- **Documentation** We work with Website & Docs, and product teams, to maintain docs to a high standard, and ensure users can easily find answers to their questions
+- **Content for our ideal customer:** We deliver genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’.
+
+- **Documentation** We work with Website & Docs, and product teams, to maintain docs to a high standard, and ensure users can easily find answers to their questions.
  
 ### Things we want to be good at
 
@@ -43,9 +49,9 @@ PostHog's [vision](/handbook/strategy/overview#long-term-vision-for-2026) is to 
 
 - **Paid ads:** An agency should keep handling this for us, but we shouldn’t get better at it internally. This includes out of home, should we ever decide to do this. We see paid ads as a hygiene factor. 
 
-### Things we might want to be good at but haven't tested yet
-
 - **Developer influencers:** A small but growing trend in the industry, most of these are very expensive and overwhelmingly focused on teaching people how to code (i.e. not our target audience). We tried this with an agency and didn't get traction, but have seen some early promising signs going to developers directly. 
+
+### Things we might want to be good at but haven't tested yet
 
 - **Highly visible at industry events:** We could become known for giving good talks at events, because this enhances word of mouth and is a natural extension of being good at creating good content.
  
@@ -124,10 +130,6 @@ The Marketing team's main focus is acquisition of customers in our [ideal custom
 We have established that _word of mouth_ is the most effective way to do this – virtually all of our high quality signups have come organically. 
 
 Our channels are listed in the sidebar, including those currently on hiatus. By far, our most important channel is Content & SEO.  
-
-## Competitors
-
-Sometimes we summarise our findings into internal reports to help us stay informed and understand how other products are developing. Our collection of summaries isn't exhaustive and cannot be shared publicly as it often includes details of the experiences of individual user experiences whose privacy we don't want to sacrifice. However, PostHog team members can find our competitor summaries in <PrivateLink url="https://drive.google.com/drive/folders/1RdzCKhGjJ3f7RbzvBkVjKfPXZ0lbBefY?usp=sharing">the relevant folder of the Marketing shared drive</PrivateLink>.
 
 ## Who the marketing team are
 
