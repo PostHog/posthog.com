@@ -2919,6 +2919,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/snowflake',
                         },
                         {
+                            name: 'Vitally',
+                            url: '/docs/data-warehouse/setup/vitally',
+                        },
+                        {
                             name: 'Self-managed',
                         },
                         {
