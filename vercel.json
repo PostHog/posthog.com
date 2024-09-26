@@ -1340,9 +1340,28 @@
             "source": "/handbook/growth/sales/icp",
             "destination": "/handbook/growth/marketing/icp"
         },
-      {
+        {
             "source": "/teams/pipeline",
             "destination": "/teams/cdp"
-        }
+        },
+        { "source": "/docs/cdp/airbyte-export", "destination": "/docs/cdp/batch-exports" },
+        { "source": "/docs/cdp/avo-inspector", "destination": "/docs/cdp/destinations/avo" },
+        { "source": "/docs/cdp/customer-io", "destination": "/docs/cdp/destinations/customerio" },
+        { "source": "/docs/cdp/engage-connector", "destination": "/docs/cdp/destinations/engage" },
+        { "source": "/docs/cdp/google-pub-sub-connector", "destination": "/docs/cdp/destinations/google-pubsub" },
+        { "source": "/docs/cdp/google-cloud-export", "destination": "/docs/cdp/destinations/google-cloud-storage" },
+        { "source": "/docs/cdp/hubspot-connector", "destination": "/docs/cdp/destinations/hubspot" },
+        { "source": "/docs/cdp/intercom", "destination": "/docs/cdp/destinations/intercom" },
+        { "source": "/docs/cdp/laudspeaker-connector", "destination": "/docs/cdp/destinations/laudspeaker" },
+        { "source": "/docs/cdp/rudderstack-export", "destination": "/docs/cdp/destinations/rudderstack" },
+        { "source": "/docs/cdp/salesforce-connector", "destination": "/docs/cdp/destinations/salesforce" },
+        { "source": "/docs/cdp/sendgrid-connector", "destination": "/docs/cdp/destinations/sendgrid" },
+        { "source": "/docs/cdp/variance-connector", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/pace-integration", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/memphis-exporter", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/outfunnel-exporter", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/route-censor", "destination": "/docs/cdp" },
+        { "source": "/docs/cdp/semver-flattener", "destination": "/docs/cdp" },
+        { "source": "/xx", "destination": "/x" }
     ]
 }
