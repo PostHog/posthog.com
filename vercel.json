@@ -1361,7 +1361,6 @@
         { "source": "/docs/cdp/memphis-exporter", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/cdp/outfunnel-exporter", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/cdp/route-censor", "destination": "/docs/cdp" },
-        { "source": "/docs/cdp/semver-flattener", "destination": "/docs/cdp" },
-        { "source": "/xx", "destination": "/x" }
+        { "source": "/docs/cdp/semver-flattener", "destination": "/docs/cdp" }
     ]
 }
