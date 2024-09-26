@@ -2665,6 +2665,7 @@ export const docsMenu = {
                     name: 'Overview',
                     url: '/docs/cdp',
                     icon: 'IconHome',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Realtime destinations',
@@ -2674,6 +2675,7 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     icon: 'IconLive',
+                    color: 'salmon',
                     children: [
                         {
                             name: 'Overview',
@@ -2752,6 +2754,7 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     icon: 'IconShare',
+                    color: 'red',
                     children: [
                         {
                             name: 'Amazon S3',
@@ -2779,6 +2782,7 @@ export const docsMenu = {
                     name: 'Transformations',
                     url: '',
                     icon: 'IconWrench',
+                    color: 'blue',
                     children: [
                         {
                             url: '/docs/cdp/geoip-enrichment',
@@ -2826,6 +2830,7 @@ export const docsMenu = {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/cdp/common-questions',
                     icon: 'IconQuestion',
+                    color: 'blue',
                 },
             ],
         },
