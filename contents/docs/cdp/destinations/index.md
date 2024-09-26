@@ -7,7 +7,7 @@ showTitle: true
 
 ## Template library
 
-To get started, you can create a new destination from the [pipeline destinations](https://us.posthog.com/pipeline/destinations) page and choose from a range of available **templates**. Depending on the destination, there are a range of configuration options, such as credentials needed or where to find certain properties from the event being processed. 
+To get started, you can create a new destination from the [Data pipelines](https://us.posthog.com/pipeline/destinations) page and choose from a range of available **templates**. Depending on the destination, there are a range of configuration options, such as credentials needed or where to find certain properties from the event being processed. 
 
 ## Input formatting
 
@@ -121,7 +121,7 @@ if (res.status >= 400) {
 
 - **Keep it short:** We have tight controls on execution time, memory usage etc.
 
-- **Do not do more than 2 `fetch` calls:** The function will error if you do. If you have a need for more than 2 calls, please contact support.
+- **Do not do more than 2 `fetch` calls:** The function will error if you do. If you have a need for more than 2 calls, please [contact support](https://us.posthog.com/#panel=support%3Asupport%3Aapps%3A%3Atrue).
 
 ## FAQ
 
