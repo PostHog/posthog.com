@@ -2,7 +2,6 @@ import { IconChevronDown } from '@posthog/icons'
 import React, { useRef } from 'react'
 import { useLayoutData } from '../Layout/hooks'
 
-// Define the type for a single card
 type CardProps = {
   top: React.ReactNode
   bottom: React.ReactNode
@@ -32,7 +31,7 @@ export default function NoHatingAllowed({ data, youllHate, size }: { data: CardP
   const { enterpriseMode } = useLayoutData()
 
   return (
-    <div className="relative pt-8 mb-12 overflow-hidden">
+    <div className="relative my-12 overflow-hidden">
       <h2 className={`text-center mb-5 ${size}`}>
         {!enterpriseMode && <span className="text-red uppercase block md:inline">Warning:</span>} You'll{' '}
         {enterpriseMode ? <span className="text-red">LOVE</span> : 'hate'} {youllHate} if...
