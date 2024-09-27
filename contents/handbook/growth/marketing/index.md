@@ -6,7 +6,7 @@ showTitle: true
 
 The marketing team has two core goals:
 
-1. Increase awareness of PostHog, especially among people in our ideal customer profile.
+1. Increase awareness of PostHog, especially among people in our ideal customer profile
 2. Help developers and PostHog users flex their product muscles and be more successful
 
 We do this by:
