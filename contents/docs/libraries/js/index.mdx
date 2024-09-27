@@ -380,6 +380,13 @@ posthog.startSessionRecording()
 // Turns session recording off
 posthog.stopSessionRecording()
 
+// if you use ingestion controls they still apply,
+// you can pass override config to make sure the session starts
+// even if your ingestion controls would not have allowed it
+// so you could be sampling only 80% of sessions that match a particular linked flag
+// and still start recording for the current session using
+posthog.startSessionRecording({ linked_flag: true, sampling: true })
+
 // Check if session recording is currently running
 posthog.sessionRecordingStarted()
 ```
