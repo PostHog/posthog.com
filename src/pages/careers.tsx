@@ -80,9 +80,9 @@ const IndexPage = () => {
             <BenefitsUsual />
             <Compensation />
             <InterviewProcessOverview />
+            <Transparency />
             <TeamQuotes />
 
-            {/* <Transparency /> */}
 
             <OpenRoles />
             <br />
