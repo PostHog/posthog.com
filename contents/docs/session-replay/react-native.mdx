@@ -1,0 +1,104 @@
+---
+title: React Native session replay
+---
+
+> 🚧 **NOTE:** React Native session replay is considered `beta` and is free while in beta. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
+
+## Installation
+
+[Install and configure PostHog](/docs/libraries/react-native#installation) as you normally would. Ensure you've enabled session recordings in your [project settings](/docs/session-replay/installation#step-two-enable-session-recordings-in-your-project-settings) and then add `enableSessionReplay: true` to your PostHog configuration alongside any of your other configuration options.
+
+> Requires PostHog React Native SDK version >= [3.2.0](https://github.com/PostHog/posthog-js-lite/releases), and it's recommended to always use the latest version.
+
+Install the session replay plugin.
+
+```bash
+yarn add posthog-react-native-session-replay
+# or npm
+npm i -s posthog-react-native-session-replay
+```
+
+```js
+export const posthog = new PostHog(
+  'apiKey',
+  {
+    // Enable session recording. Requires enabling in your project settings as well.
+    // Default is false.
+    enableSessionReplay: true,
+    sessionReplayConfig: {
+      // Whether text inputs are masked. Default is true.
+      // Password inputs are always masked regardless
+      maskAllTextInputs: true,
+      // Whether images are masked. Default is true.
+      maskAllImages: true,
+      // Capture logs automatically. Default is true.
+      // Android only (Native Logcat only)
+      captureLog: true,
+      // Whether network requests are captured in recordings. Default is true
+      // Only metric-like data like speed, size, and response code are captured.
+      // No data is captured from the request or response body.
+      // iOS only
+      captureNetworkTelemetry: true,
+      // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 500ms
+      androidDebouncerDelayMs: 500,
+      // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1000ms
+      iOSdebouncerDelayMs: 1000,
+    },
+  },
+);
+```
+
+Or using the `PostHogProvider`:
+
+```js
+<PostHogProvider
+        apiKey="apiKey"
+        options={{
+          enableSessionReplay: true,
+          ...
+        }}
+      >
+```
+
+## Masking and redacting
+
+Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
+
+To replace any type of `React.Component` with a redacted version in the replay, set the [accessibilityLabel](https://reactnative.dev/docs/accessibility#accessibilitylabel) to `ph-no-capture`:
+
+```js
+<Text accessibilityLabel="ph-no-capture">Hello PostHog 👋</Text>
+```
+
+## Expo
+
+Mobile Session Replay for Expo works normally, but prefer the `expo` tools for installing and running your project.
+
+Install the session replay plugin.
+
+```bash
+npx expo install posthog-react-native-session-replay
+```
+
+Expo Go isn't supported since it uses Native plugins, please use development build.
+
+```bash
+# Run Android development build 
+npx expo run:android --no-build-cache --device
+
+# Run iOS development build 
+npx expo run:ios --no-build-cache --device
+```
+
+## Limitations
+
+- On Android, requires API >= 26.
+- WebView is not supported. A placeholder will be shown.
+- Keyboard is not supported. A placeholder will be shown.
+- Wireframe mode isn't supported, only screenshot mode.
+- Expo Go isn't supported since it uses Native plugins, please use development build.
+
+## Troubleshooting
+
+- Run a clean build if you experience issues such as `The package 'posthog-react-native-session-replay' doesn't seem to be linked`.
+- Update your iOS Pods.

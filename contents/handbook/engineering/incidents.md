@@ -93,6 +93,7 @@ Occasionally it may be desirable to do additional customer communications, such 
 
 In the case that we need to update a _specific_ customer, such as when a individual org is causing an incident, we should let them know as soon as possible. Use the following guidelines to ensure smooth communication:
 
+- Ensure you are always contacting the admins of the impacted organization
 - Communication is best done through Zendesk. The Comms team can create tickets and handle this for you. 
 - Before sending any comms, check with the incident lead. Then, share a ticket link in the incident channel. 
 - If action is needed, it's better to take that action and inform the user than to ask the user to do it.

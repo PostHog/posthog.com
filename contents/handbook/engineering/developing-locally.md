@@ -312,6 +312,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
 We now have the backend ready, and Postgres and ClickHouse running – these databases are blank slates at the moment however, so we need to run _migrations_ to e.g. create all the tables:
 
 ```bash
+cargo install sqlx-cli # If you haven't already
 DEBUG=1 ./bin/migrate
 ```
 

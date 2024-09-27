@@ -8,6 +8,8 @@ title: Android session replay
 
 [Install and configure PostHog]((/docs/libraries/android#installation)) as you normally would. Ensure you've enabled session recordings in your [project settings](/docs/session-replay/installation#step-two-enable-session-recordings-in-your-project-settings) and then add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options.  
 
+> Session replay requires PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases), and it's recommended to always use the latest version.
+
 ```android_kotlin
 val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
     // Enable session recording. Requires enabling in your project settings as well.
@@ -31,7 +33,7 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
     // The screenshot may contain sensitive information, so use with caution
     sessionReplayConfig.screenshot = false
 
-    // How long to wait before recording user input when typing. Default is 500ms
+    // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 500ms
     sessionReplayConfig.debouncerDelayMs = 500
 }
 ```
@@ -72,11 +74,10 @@ To replace any type of `View` with a redacted version in the recording, set the 
 
 ### Limitations
 
-- Session replay requires PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases), and it's recommended to always use the latest version.
 - Requires Android API >= 26.
 - Jetpack Compose is only supported if `screenshotMode` is enabled.
   - Masking and redacting in Jetpack Compose isn't supported yet. We're investigating this [issue](https://github.com/PostHog/posthog-android/issues/158).
 - Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
 - WebView is not supported. A placeholder will be shown.
 - Keyboard is not supported. A placeholder will be shown.
-- React Native and Flutter for Android aren't supported.
+- Flutter for Android isn't supported.
