@@ -82,7 +82,7 @@ const BenefitsUsual: React.FC = () => {
         <p className="mb-0">The one exception is equity (which you get), but is so unique that it deserves its own section below.</p>
       </div>
       <div className="pt-12">
-        <div className="grid gap-2">
+        <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-2 md:gap-6 lg:gap-2">
           {benefits.map((benefit) => (
             <Benefit key={benefit.title} {...benefit} />
           ))}

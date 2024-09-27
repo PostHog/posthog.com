@@ -52,6 +52,7 @@ export const FounderNote = () => {
 
     return (
         <section className="@container px-4 max-w-7xl mx-auto mb-16">
+            <h2 className="text-center text-4xl mb-8">This message brought to you by our co-founder</h2>
             <div className="grid justify-center">
                 <div className="hidden col-span-2 text-right">
                     <button onClick={playRandomJamesAudio} className="inline-block border-[6px] border-white dark:border-white rounded-md shadow-lg -rotate-1 relative top-[1px] lg:top-0 hover:top-[-3px] transform scale-100 hover:scale-[1.02] active:scale-[.998] active:top-px transition-all duration-100 cursor-play">

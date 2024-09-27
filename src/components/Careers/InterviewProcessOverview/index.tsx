@@ -5,7 +5,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 export const InterviewProcessOverview = () => {
   return (
     <div className="px-4 max-w-7xl mx-auto my-12">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
         <div className="flex flex-col justify-between">
           <div>
             <div className="opacity-60 mb-2">Interview process</div>
@@ -13,7 +13,7 @@ export const InterviewProcessOverview = () => {
             <p className="max-w-md">We do 2-3 short interviews, then pay you to do some real-life (or close to real-life) work.</p>
           </div>
 
-          <div className="lg:pr-12 lg:-ml-4 inline-block -rotate-1 lg:rotate-0">
+          <div className="md:pr-12 md:-ml-4 inline-block -rotate-1 md:rotate-0">
             <StaticImage quality={90} placeholder="blurred" src="../../../images/sales/posthog-ae.png" width={872} height={476} alt="You in the interview process" className="w-full" />
             <p className="font-medium pl-4 mb-0 text-sm text-center">POV: We're excited to meet you!</p>
 

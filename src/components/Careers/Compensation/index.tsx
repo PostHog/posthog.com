@@ -32,13 +32,13 @@ const Compensation: React.FC = () => {
       <h2 className="text-4xl font-bold mb-2 text-center">Compensation &amp; equity</h2>
       <p className="text-center text-balance max-w-2xl mx-auto">We hire the best talent and pay accordingly. We want everyone to feel invested in the company's success, so we offer equity with very employee-friendly terms.</p>
 
-      <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
-        <div className="bg-accent dark:bg-accent-dark dark:border dark:border-dark p-4 lg:p-6 rounded">
+      <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div className="bg-accent dark:bg-accent-dark dark:border dark:border-dark p-4 md:p-6 rounded">
           <h3 className="text-xl mb-1">Transparent pay</h3>
           <p>Use our <Link href="/handbook/people/compensation">full salary calculator</Link> to see what you'll make here. You’ll know your approximate starting salary before you even apply.</p>
           <CompensationCalculator initialJob="Product Engineer" hideFormula />
         </div>
-        <div className="bg-accent dark:bg-accent-dark dark:border dark:border-dark p-4 lg:p-6 rounded">
+        <div className="bg-accent dark:bg-accent-dark dark:border dark:border-dark p-4 md:p-6 rounded">
           <h3 className="text-xl mb-4">(Really) employee-friendly equity terms</h3>
 
           <ul className="list-none p-0 pb-4 grid gap-3">

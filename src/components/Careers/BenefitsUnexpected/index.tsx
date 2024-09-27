@@ -43,7 +43,7 @@ const BenefitsUnexpected: React.FC = () => {
           <h3 className="text-4xl mb-1">Company off-sites <span className="text-red dark:text-yellow">in exotic locations</span></h3>
           <p className="max-w-lg mb-3">Each year we organize fully paid company off-sites. The highlight is the hackathon where we team up to build things that aren't on our roadmap.</p>
 
-          <p className="font-bold text-[15px] mb-1">Off-site history:</p><div className="grid md:inline-grid grid-cols-2 min-w-72 divide-y divide-light dark:divide-dark text-sm [&_*]:py-0.5"><strong>Year</strong><strong className="!border-t-0">Location</strong><div>2020</div><div>Tuscany</div><div>2021</div><div>Portugal</div><div>2022</div><div>Iceland</div><div>2023</div><div>Aruba</div><div>2024</div><div>Mykonos</div><div>2025</div><div><span className="inline-block bg-border dark:bg-border-dark rounded-[2px] text-sm w-16 h-[16px] relative top-[2px]"></span></div></div>
+          <p className="font-bold text-[15px] mb-1">Off-site history:</p><div className="grid md:inline-grid grid-cols-2 min-w-72 divide-y divide-light dark:divide-dark text-sm [&_*]:py-1 md[&_*]:py-0.5"><strong>Year</strong><strong className="!border-t-0">Location</strong><div>2020</div><div>Tuscany</div><div>2021</div><div>Portugal</div><div>2022</div><div>Iceland</div><div>2023</div><div>Aruba</div><div>2024</div><div>Mykonos</div><div>2025</div><div><span className="inline-block bg-border dark:bg-border-dark rounded-[2px] text-sm w-16 h-[16px] relative top-[2px]"></span></div></div>
         </div>
         <aside>
           <div className="border-8 border-white shadow-xl rounded relative rotate-1">
@@ -93,7 +93,7 @@ const BenefitsUnexpected: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 items-start lg:items-center gap-4 md:gap-8 lg:gap-12">
+      <div className="grid md:grid-cols-2 items-start md:items-center gap-4 md:gap-8 lg:gap-12">
         <div className="relative">
           <h3 className="text-4xl mb-1">Access to the <span className="text-red dark:text-yellow">Hedge House</span></h3>
           <p className="max-w-lg mb-3">Work with co-workers (or by yourself) in Cambridge, UK and stay for free whenever you want.</p>
