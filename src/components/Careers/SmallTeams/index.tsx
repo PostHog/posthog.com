@@ -32,7 +32,7 @@ export const SmallTeams = () => {
     `)
 
   return (
-    <div className="px-4 max-w-7xl mx-auto mb-6 md:mb-12 flex justify-center">
+    <div className="px-4 max-w-7xl mx-auto mb-6 md:mb-12 flex justify-center 2xl:px-8">
       <div className="flex flex-col md:flex-row md:gap-8 w-full">
         <div className="flex-1">
           <h2 className="text-5xl font-bold mb-4">

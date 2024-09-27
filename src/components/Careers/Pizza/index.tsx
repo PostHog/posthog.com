@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import slugify from 'slugify'
@@ -10,10 +10,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { StaticImage } from 'gatsby-plugin-image'
-import { useState } from 'react';
 
 interface FullscreenModalProps {
-  image: React.ReactNode;
+  image: { image: React.ReactNode; pineapple: boolean };
   onClose: () => void;
 }
 
@@ -21,7 +20,7 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({ image, onClose }) => 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center" onClick={onClose}>
       <div className="max-w-4xl max-h-[90vh] overflow-auto" onClick={(e) => e.stopPropagation()}>
-        {image}
+        {image.image}
       </div>
       <button
         className="absolute top-4 right-4 text-white text-2xl"
@@ -33,6 +32,26 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({ image, onClose }) => 
   );
 };
 
+
+const pizzaImages = [
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20220926_204026_a1ca58e1cc.jpg" alt="Pizza 4" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210929_183537661_PORTRAIT_750e977998.jpg" alt="Pizza 4" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_4af46118e2.jpg" alt="Pizza 4" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20220926_204026_a1ca58e1cc.jpg" alt="Pizza 4" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210929_183537661_PORTRAIT_750e977998.jpg" alt="Pizza 4" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_4af46118e2.jpg" alt="Pizza 4" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20220926_204026_a1ca58e1cc.jpg" alt="Pizza 4" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210929_183537661_PORTRAIT_750e977998.jpg" alt="Pizza 4" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_4af46118e2.jpg" alt="Pizza 4" />, pineapple: false },
+];
+
 const PizzaBox = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="bg-white dark:bg-black border-8 border-white rounded-md shadow-md overflow-hidden mb-2 xl:mb-6">
@@ -43,6 +62,19 @@ const PizzaBox = ({ children }: { children: React.ReactNode }) => {
 
 export const Pizza = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const [filter, setFilter] = useState('all');
+  const [filteredImages, setFilteredImages] = useState(pizzaImages);
+
+  useEffect(() => {
+    let filtered = pizzaImages;
+    if (filter === 'with pineapple') {
+      filtered = pizzaImages.filter(img => img.pineapple);
+    } else if (filter === 'sans pineapple') {
+      filtered = pizzaImages.filter(img => !img.pineapple);
+    }
+    setFilteredImages(filtered);
+  }, [filter]);
 
   const openFullscreen = (index: number) => {
     setActiveIndex(index);
@@ -107,25 +139,6 @@ export const Pizza = () => {
   Object.keys(groupedTeams).forEach(key => {
     groupedTeams[key].sort((a, b) => parseFloat(b.pineapplePercentage) - parseFloat(a.pineapplePercentage))
   })
-
-  const pizzaImages = [
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20220926_204026_a1ca58e1cc.jpg" alt="Pizza 4" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210929_183537661_PORTRAIT_750e977998.jpg" alt="Pizza 4" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_4af46118e2.jpg" alt="Pizza 4" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20220926_204026_a1ca58e1cc.jpg" alt="Pizza 4" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210929_183537661_PORTRAIT_750e977998.jpg" alt="Pizza 4" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_4af46118e2.jpg" alt="Pizza 4" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20220926_204026_a1ca58e1cc.jpg" alt="Pizza 4" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210929_183537661_PORTRAIT_750e977998.jpg" alt="Pizza 4" />,
-    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_4af46118e2.jpg" alt="Pizza 4" />,
-  ];
 
   return (
     <div className="px-4 max-w-7xl mx-auto py-12">
@@ -255,7 +268,23 @@ export const Pizza = () => {
       <h3 className="text-3xl mb-0 text-center">Speaking of pizza...</h3>
       <div className="text-lg opacity-70 mb-6 text-center">Here are some of our creations.</div>
 
+      <div className="flex justify-center space-x-4 mb-6">
+        {['all', 'with pineapple', 'sans pineapple'].map((option) => (
+          <button
+            key={option}
+            onClick={() => setFilter(option)}
+            className={`px-4 py-2 rounded-full transition-colors duration-300 ${filter === option
+              ? 'bg-primary text-white'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
+
       <Swiper
+        key={filter} // Force re-render when filter changes
         modules={[Navigation, Pagination, A11y]}
         autoHeight={true}
         spaceBetween={20}
@@ -275,13 +304,17 @@ export const Pizza = () => {
         }}
         className="pizza-swiper"
       >
-        {pizzaImages.map((image, index) => (
+        {filteredImages.map((image, index) => (
           <SwiperSlide key={index}>
             <div
-              className="cursor-pointer transition-transform duration-300 hover:scale-105"
+              className="cursor-pointer transition-all duration-300 hover:scale-105"
               onClick={() => openFullscreen(index)}
             >
-              <PizzaBox>{image}</PizzaBox>
+              <PizzaBox>
+                <div className="animate-fade-in">
+                  {image.image}
+                </div>
+              </PizzaBox>
             </div>
           </SwiperSlide>
         ))}
@@ -289,7 +322,7 @@ export const Pizza = () => {
 
       {activeIndex !== null && (
         <FullscreenModal
-          image={pizzaImages[activeIndex]}
+          image={filteredImages[activeIndex]}
           onClose={closeFullscreen}
         />
       )}
