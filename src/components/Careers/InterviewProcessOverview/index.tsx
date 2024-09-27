@@ -9,7 +9,7 @@ export const InterviewProcessOverview = () => {
         <div className="flex flex-col justify-between">
           <div>
             <div className="opacity-60 mb-2">Interview process</div>
-            <h2 className="text-3xl xl:text-4xl font-bold mb-2">Interview Process</h2>
+            <h2 className="text-3xl xl:text-4xl font-bold mb-2">Get paid to try working here</h2>
             <p className="max-w-md">We do 2-3 short interviews, then pay you to do some real-life (or close to real-life) work.</p>
           </div>
 
