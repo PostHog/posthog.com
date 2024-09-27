@@ -16,7 +16,6 @@ We do this by:
 - Constantly working to improve our documentation
 - Identifying where content can help users be more successful
 - Proactively promoting the work of product teams
-- Never telling them what to build
 - Producing ad campaigns that people actually like and share 
 - Holding a high bar for quality in everything we do
 - Never being satisfied with how high that bar is
@@ -24,7 +23,7 @@ We do this by:
 - Reacting quickly to opportunities whenever they arise
 - Not being precious about our work and priorities
 - Having a team of talented, technically literate writers (and Andy)
-- Not overly relying on freelancers or guest contributors for content
+- Not relying on freelancers or guest contributors for content
 - Avoiding tedious enterprise marketing nonsense (PDFs, gated content, webinars, etc.)
 - Just being a great vibe generally
 
@@ -44,7 +43,7 @@ PostHog's [vision](/handbook/strategy/overview#long-term-vision-for-2026) is to 
 
 - **Content for our ideal customer:** We deliver genuinely useful insights about things those customers care about (can be purely product-related, but also general advice). We're pitching our content at ‘self-servers’.
 
-- **Documentation** We work with Website & Docs, and product teams, to maintain docs to a high standard, and ensure users can easily find answers to their questions.
+- **Documentation** We work with product teams to maintain update-to-date, high quality docs. We work with Website & Docs to ensure users can discover what they want to know. 
  
 ### Things we want to be good at
 
