@@ -32,13 +32,13 @@ export const SmallTeams = () => {
     `)
 
   return (
-    <div className="px-4 max-w-7xl mx-auto mb-12 flex justify-center">
-      <div className="inline-flex flex-col md:flex-row md:gap-8">
-        <div>
-          <h2 className="text-5xl font-bold mb-2">
+    <div className="px-4 max-w-7xl mx-auto mb-6 md:mb-12 flex justify-center">
+      <div className="flex flex-col md:flex-row md:gap-8 w-full">
+        <div className="flex-1">
+          <h2 className="text-5xl font-bold mb-4">
             Join a startup <em className="text-red dark:text-yellow block">within a startup</em>
           </h2>
-          <div className="max-w-md">
+          <div className="max-w-xl">
             <p>
               Starting a job at a company of 50+ people can be intimidating!
             </p>
@@ -50,7 +50,7 @@ export const SmallTeams = () => {
 
         <div>
           <h3 className="text-base font-bold mb-2 md:ml-4 pt-1">Our small teams</h3>
-          <div className="grid grid-cols-2 text-center max-w-xl -mx-4 md:mx-0">
+          <div className="grid grid-cols-2 text-center max-w-xl -mx-4 md:mx-0 md:gap-x-8">
             {allTeams.nodes.map(({ id, name, profiles, miniCrest, leadProfiles }) => {
               const gatsbyImageMiniCrest = getImage(miniCrest)
               return (
