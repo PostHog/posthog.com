@@ -21,7 +21,6 @@ import Tooltip from 'components/Tooltip'
 import { IconShieldLock } from '@posthog/icons'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { Skeleton } from 'components/Questions/QuestionsTable'
 import uniqBy from 'lodash/uniqBy'
 
 const Select = ({ onChange, values, ...other }) => {
@@ -108,6 +107,15 @@ export const Change = ({ title, teamName, media, description, cta }) => {
                 </CallToAction>
             )}
         </>
+    )
+}
+
+export const Skeleton = () => {
+    return (
+        <div className="space-y-2">
+            <div className="animate-pulse bg-accent dark:bg-accent-dark h-8 w-full rounded-md" />
+            <div className="animate-pulse bg-accent dark:bg-accent-dark h-44 w-full rounded-md" />
+        </div>
     )
 }
 
@@ -204,7 +212,7 @@ export default function Changelog({ pageContext }) {
     const changesByMonth = groupBy(roadmaps, (roadmap) => dayjs(roadmap.attributes.dateCompleted).format('MMM'))
 
     const tableOfContents = Object.keys(
-        groupBy(initialRoadmaps, (roadmap) => dayjs(roadmap.attributes.dateCompleted).format('MMMM'))
+        groupBy(roadmaps, (roadmap) => dayjs(roadmap.attributes.dateCompleted).format('MMMM'))
     ).map((month) => {
         return { url: month, value: month, depth: 0 }
     })
