@@ -1,6 +1,6 @@
 ---
 title: How to think like a growth engineer
-date: 2024-09-16
+date: 2024-09-26
 author:
  - ian-vanagas
 featuredImage: >-
