@@ -25,33 +25,7 @@ import { InterviewProcessOverview } from 'components/Careers/InterviewProcessOve
 import TeamQuotes from 'components/Careers/TeamQuotes'
 import { SmallTeams } from 'components/Careers/SmallTeams'
 import { Pizza } from 'components/Careers/Pizza'
-
-const menu = [
-    {
-        name: 'Introduction',
-        url: 'introduction',
-    },
-    {
-        name: 'Transparency',
-        url: 'transparency',
-    },
-    {
-        name: 'Who we hire',
-        url: 'who-we-hire',
-    },
-    {
-        name: 'Benefits',
-        url: 'benefits',
-    },
-    {
-        name: 'Working here',
-        url: 'working-at-posthog',
-    },
-    {
-        name: 'Open roles',
-        url: 'open-roles',
-    },
-]
+import FunStuff from 'components/Careers/FunStuff'
 
 const IndexPage = () => {
     const data = useStaticQuery(query)
@@ -81,9 +55,8 @@ const IndexPage = () => {
             <Compensation />
             <InterviewProcessOverview />
             <Transparency />
+            <FunStuff />
             <TeamQuotes />
-
-
             <OpenRoles />
             <br />
             <br />
