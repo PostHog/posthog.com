@@ -25,7 +25,6 @@ We do this by:
 - Having a team of talented, technically literate writers (and Andy)
 - Not relying on freelancers or guest contributors for content
 - Avoiding tedious enterprise marketing nonsense (PDFs, gated content, webinars, etc.)
-- Just being a great vibe generally
 
 The latest goals for marketing can be found on the [Marketing Small Team page](/teams/marketing).
 
