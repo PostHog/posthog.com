@@ -4,6 +4,7 @@ date: 2024-09-16
 author:
  - ian-vanagas
 featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/growth_think_905cd0fa65.png
 featuredImageType: full
 tags:
   - Engineering
