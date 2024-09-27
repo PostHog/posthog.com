@@ -31,9 +31,14 @@ code {
     --squeak-primary-color: 0, 0, 0;
     --squeak-default-avatar-fill: 255, 255, 255;
     --squeak-button-color: 245, 78, 0;
+    --swiper-pagination-color: #f54e00;
+    --swiper-pagination-bullet-inactive-color: #000;
+
     .dark {
         --squeak-primary-color: 255, 255, 255;
         --squeak-default-avatar-fill: 0, 0, 0;
+        --swiper-pagination-color: #f7a501;
+        --swiper-pagination-bullet-inactive-color: #fff;
     }
 }
 
@@ -1644,9 +1649,9 @@ li.squeak-left-border {
     @apply pb-12;
 }
 
-.swiper-button-next,
-.swiper-button-prev {
-    @apply text-black;
+.swiper-button-next:disabled svg,
+.swiper-button-prev:disabled svg {
+    @apply bg-transparent border-transparent hidden;
 }
 
 .swiper-pagination {

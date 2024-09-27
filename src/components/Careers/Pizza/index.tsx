@@ -7,9 +7,9 @@ import { StickerPineapple, StickerPineappleYes, StickerPineappleNo } from 'compo
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { StaticImage } from 'gatsby-plugin-image'
+import { IconChevronDown } from '@posthog/icons'
 
 interface FullscreenModalProps {
   image: { image: React.ReactNode; pineapple: boolean };
@@ -18,8 +18,8 @@ interface FullscreenModalProps {
 
 const FullscreenModal: React.FC<FullscreenModalProps> = ({ image, onClose }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center" onClick={onClose}>
-      <div className="max-w-4xl max-h-[90vh] overflow-auto" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center z-[9999999]" onClick={onClose}>
+      <div className="max-w-7xl max-h-screen overflow-hidden" onClick={(e) => e.stopPropagation()}>
         {image.image}
       </div>
       <button
@@ -34,22 +34,22 @@ const FullscreenModal: React.FC<FullscreenModalProps> = ({ image, onClose }) => 
 
 
 const pizzaImages = [
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20220926_204026_a1ca58e1cc.jpg" alt="Pizza 4" />, pineapple: true },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: false },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: true },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: false },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: true },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: false },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210929_183537661_PORTRAIT_750e977998.jpg" alt="Pizza 4" />, pineapple: true },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_4af46118e2.jpg" alt="Pizza 4" />, pineapple: false },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20220926_204026_a1ca58e1cc.jpg" alt="Pizza 4" />, pineapple: true },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: false },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210929_183537661_PORTRAIT_750e977998.jpg" alt="Pizza 4" />, pineapple: true },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_4af46118e2.jpg" alt="Pizza 4" />, pineapple: false },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20220926_204026_a1ca58e1cc.jpg" alt="Pizza 4" />, pineapple: true },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20230627_171655584_PORTRAIT_364f944289.jpg" alt="Pizza 2" />, pineapple: false },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210929_183537661_PORTRAIT_750e977998.jpg" alt="Pizza 4" />, pineapple: true },
-  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_4af46118e2.jpg" alt="Pizza 4" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20220926_122003344_f2ecbfb133.jpg" alt="Pizza 4" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20221104_004314601_y_f698bf09b8.jpg" alt="Pizza 5" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/20210902_203941_y_1852a0cbfb.jpg" alt="Pizza 6" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/DSCF_0417_86971e3157.jpg" alt="Pizza 2" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20211214_165823360_PORTRAIT_6023eb7c12.jpg" alt="Pizza 7" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20231203_022415683_b6cc6a4419.jpg" alt="Pizza 8" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210902_201120213_MP_y_ea7ebfee9f.jpg" alt="Pizza 9" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20220927_115940380_092cb3d14e.jpg" alt="Pizza 10" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20220927_120456325_PORTRAIT_d47c8b41b1.jpg" alt="Pizza 11" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20220330_232649824_y_e574d0d797.jpg" alt="Pizza 12" />, pineapple: true },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20210929_183537661_PORTRAIT_2c9d82d7bb.jpg" alt="Pizza 13" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20220926_184039530_c12bfb3800.jpg" alt="Pizza 14" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/DSCF_0194_b7276079a4.jpg" alt="Pizza 1" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20240915_172705072_eaba45a567.jpg" alt="Pizza 15" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/PXL_20231203_022158957_f8a82551da.jpg" alt="Pizza 16" />, pineapple: false },
+  { image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/IMG_2628_y_adb2c7d449.jpg" alt="Pizza 3" />, pineapple: true },
 ];
 
 const PizzaBox = ({ children }: { children: React.ReactNode }) => {
@@ -63,14 +63,14 @@ const PizzaBox = ({ children }: { children: React.ReactNode }) => {
 export const Pizza = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState('All');
   const [filteredImages, setFilteredImages] = useState(pizzaImages);
 
   useEffect(() => {
     let filtered = pizzaImages;
-    if (filter === 'with pineapple') {
+    if (filter === 'Pineapple') {
       filtered = pizzaImages.filter(img => img.pineapple);
-    } else if (filter === 'sans pineapple') {
+    } else if (filter === 'No pineapple') {
       filtered = pizzaImages.filter(img => !img.pineapple);
     }
     setFilteredImages(filtered);
@@ -269,13 +269,13 @@ export const Pizza = () => {
       <div className="text-lg opacity-70 mb-6 text-center">Here are some of our creations.</div>
 
       <div className="flex justify-center space-x-4 mb-6">
-        {['all', 'with pineapple', 'sans pineapple'].map((option) => (
+        {['All', 'Pineapple', 'No pineapple'].map((option) => (
           <button
             key={option}
             onClick={() => setFilter(option)}
-            className={`px-4 py-2 rounded-full transition-colors duration-300 ${filter === option
-              ? 'bg-primary text-white'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            className={`px-1 pt-1 pb-0.5 border-b-2 text-[15px] font-medium ${filter === option
+              ? 'border-red dark:border-yellow font-bold'
+              : 'border-transparent hover:border-light dark:hover:border-dark text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100'
               }`}
           >
             {option}
@@ -284,12 +284,15 @@ export const Pizza = () => {
       </div>
 
       <Swiper
-        key={filter} // Force re-render when filter changes
+        key={filter}
         modules={[Navigation, Pagination, A11y]}
         autoHeight={true}
         spaceBetween={20}
         slidesPerView={1}
-        navigation
+        navigation={{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }}
         speed={500}
         pagination={{ clickable: true }}
         breakpoints={{
@@ -302,7 +305,7 @@ export const Pizza = () => {
             slidesPerGroup: 3,
           },
         }}
-        className="pizza-swiper"
+        className="pizza-swiper relative"
       >
         {filteredImages.map((image, index) => (
           <SwiperSlide key={index}>
@@ -318,6 +321,16 @@ export const Pizza = () => {
             </div>
           </SwiperSlide>
         ))}
+        <button
+          className="swiper-button-prev absolute left-0 top-1/2 -translate-y-1/2 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] md:z-30 p-2 xl:p-6 box-border peer"
+        >
+          <IconChevronDown className="w-12 h-12 rounded-sm text-white hover:text-white/100 dark:text-primary-dark dark:hover:text-primary-dark/100 rotate-90 bg-black/75 hover:bg-black/90 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border border-r-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
+        </button>
+        <button
+          className="swiper-button-next absolute right-0 top-1/2 -translate-y-1/2 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] md:z-30 p-2 xl:p-6 box-border peer"
+        >
+          <IconChevronDown className="w-12 h-12 rounded-sm text-white hover:text-white/100 dark:text-primary-dark dark:hover:text-primary-dark/100 -rotate-90 bg-black/75 hover:bg-black/90 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border border-l-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
+        </button>
       </Swiper>
 
       {activeIndex !== null && (
