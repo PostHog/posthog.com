@@ -2685,64 +2685,92 @@ export const docsMenu = {
                             name: 'Destinations',
                         },
                         {
-                            url: '/docs/cdp/airbyte-export',
-                            name: 'Airbyte',
+                            name: 'Slack',
+                            url: '/docs/cdp/destinations/slack',
                         },
                         {
-                            url: '/docs/cdp/avo-inspector',
+                            name: 'Webhook',
+                            url: '/docs/cdp/destinations/webhook',
+                        },
+                        {
+                            name: 'ActiveCampaign',
+                            url: '/docs/cdp/destinations/activecampaign',
+                        },
+                        {
                             name: 'Avo',
+                            url: '/docs/cdp/destinations/avo',
                         },
                         {
-                            url: '/docs/cdp/customer-io',
+                            name: 'AWS Kinesis',
+                            url: '/docs/cdp/destinations/aws-kinesis',
+                        },
+                        {
+                            name: 'Braze',
+                            url: '/docs/cdp/destinations/braze',
+                        },
+                        {
                             name: 'Customer.io',
+                            url: '/docs/cdp/destinations/customerio',
                         },
                         {
-                            url: '/docs/cdp/engage-connector',
                             name: 'Engage.so',
+                            url: '/docs/cdp/destinations/engage',
                         },
                         {
-                            url: '/docs/cdp/google-pub-sub-connector',
-                            name: 'GCP Pub/Sub',
+                            name: 'Gleap',
+                            url: '/docs/cdp/destinations/gleap',
                         },
                         {
-                            url: '/docs/cdp/google-cloud-export',
                             name: 'Google Cloud Storage',
+                            url: '/docs/cdp/destinations/google-cloud-storage',
                         },
                         {
-                            url: '/docs/cdp/hubspot-connector',
+                            name: 'Google Pub/Sub',
+                            url: '/docs/cdp/destinations/google-pubsub',
+                        },
+                        {
                             name: 'Hubspot',
+                            url: '/docs/cdp/destinations/hubspot',
                         },
                         {
-                            url: '/docs/cdp/intercom',
                             name: 'Intercom',
+                            url: '/docs/cdp/destinations/intercom',
                         },
                         {
-                            url: '/docs/cdp/laudspeaker-connector',
-                            name: 'Laudspeaker',
+                            name: 'Knock',
+                            url: '/docs/cdp/destinations/knock',
                         },
                         {
-                            url: '/docs/cdp/rudderstack-export',
+                            name: 'Loops',
+                            url: '/docs/cdp/destinations/loops',
+                        },
+                        {
+                            name: 'Mailgun',
+                            url: '/docs/cdp/destinations/mailgun',
+                        },
+                        {
+                            name: 'Mailjet',
+                            url: '/docs/cdp/destinations/mailjet',
+                        },
+                        {
                             name: 'RudderStack',
+                            url: '/docs/cdp/destinations/rudderstack',
                         },
                         {
-                            url: '/docs/cdp/salesforce-connector',
                             name: 'Salesforce',
+                            url: '/docs/cdp/destinations/salesforce',
                         },
                         {
-                            url: '/docs/cdp/sendgrid-connector',
                             name: 'Sendgrid',
+                            url: '/docs/cdp/destinations/sendgrid',
                         },
                         {
-                            url: '/docs/cdp/sentry-connector',
-                            name: 'Sentry',
+                            name: 'Zapier',
+                            url: '/docs/cdp/destinations/zapier',
                         },
                         {
-                            url: '/docs/cdp/variance-connector',
-                            name: 'Variance',
-                        },
-                        {
-                            url: '/docs/cdp/pace-integration',
-                            name: 'Pace',
+                            name: 'Zendesk',
+                            url: '/docs/cdp/destinations/zendesk',
                         },
                     ],
                 },
@@ -2897,6 +2925,10 @@ export const docsMenu = {
                         {
                             name: 'Snowflake',
                             url: '/docs/data-warehouse/setup/snowflake',
+                        },
+                        {
+                            name: 'Vitally',
+                            url: '/docs/data-warehouse/setup/vitally',
                         },
                         {
                             name: 'Self-managed',
