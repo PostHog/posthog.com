@@ -69,12 +69,10 @@ const IndexPage = () => {
             />
 
             <CareersHero />
-            <FounderNote />
             <SmallTeams />
             <Pizza />
-
+            <FounderNote />
             <MegaQuote />
-
             <CompanyHandbook />
             <NoHatingAllowed data={CareersCards} youllHate="working here" size="text-4xl lg:text-5xl" />
             <IdealEmployeeProfile />

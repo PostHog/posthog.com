@@ -14,6 +14,7 @@ import jamesQuote8 from './Audio/quote-8.mp3'
 import jamesQuote9 from './Audio/quote-9.mp3'
 import jamesQuote10 from './Audio/quote-10.mp3'
 import Logo from 'components/Logo'
+import { Tweet } from 'components/Tweet'
 
 const P = ({ children }) => {
     return <p className="text-base leading-normal mb-3 max-w-xl">{children}</p>
@@ -51,8 +52,8 @@ export const FounderNote = () => {
 
     return (
         <section className="@container px-4 max-w-7xl mx-auto mb-16">
-            <div className="grid md:grid-cols-5 gap-12 items-center">
-                <div className="hidden @sm:block col-span-2 text-right">
+            <div className="grid justify-center">
+                <div className="hidden col-span-2 text-right">
                     <button onClick={playRandomJamesAudio} className="inline-block border-[6px] border-white dark:border-white rounded-md shadow-lg -rotate-1 relative top-[1px] lg:top-0 hover:top-[-3px] transform scale-100 hover:scale-[1.02] active:scale-[.998] active:top-px transition-all duration-100 cursor-play">
                         <StaticImage
                             src="./images/these-founders-ship.jpg"
@@ -63,7 +64,7 @@ export const FounderNote = () => {
                     </button>
                 </div>
                 <div className="col-span-3">
-                    <h2 className="text-2xl font-bold mb-2 @sm:mb-4 @sm:flex items-center gap-3">Thanks for checking out <span className="@sm:hidden">PostHog!</span> <Logo className="hidden @sm:inline-block h-8" /></h2>
+                    <h2 className="hidden text-2xl font-bold mb-2 @sm:mb-4 @sm:f lex items-center gap-3">Thanks for checking out <span className="@sm:hidden">PostHog!</span> <Logo className="hidden @sm:inline-block h-8" /></h2>
                     <button onClick={playRandomJamesAudio} className="float-right max-w-sm inline-block @sm:hidden border-[6px] border-white dark:border-white rounded-md shadow-lg rotate-1 relative top-[1px] lg:top-0 hover:top-[-3px] transform scale-100 hover:scale-[1.02] active:scale-[.998] active:top-px transition-all duration-100 ml-2 cursor-play">
                         <StaticImage
                             src="./images/these-founders-ship.jpg"
@@ -72,30 +73,40 @@ export const FounderNote = () => {
                             placeholder="blurred"
                         />
                     </button>
-                    <P>
-                        We started PostHog during Y Combinator's W20 cohort and had the most successful
-                        B2B software launch on Hacker News since 2012 - with a product that was just 4
-                        weeks old.
-                    </P>
-                    <P>
-                        We now have over 10,000 customers, we're{' '}
-                        <Link to="http://www.paulgraham.com/aord.html">default alive</Link>, and we grow 97%
-                        through word of mouth.
-                    </P>
+                    <Tweet alertMessage="yo, just apply already!">
+                        <p className="mb-2">yo, i’m james, one of the two co-founders, and there are a lot of things i can’t offer you…</p>
+                        <ul>
+                            <li>we don’t offer career progression frameworks</li>
+                            <li>we don’t offer mentorship</li>
+                            <li>we don’t offer lots of meetings</li>
+                            <li>we don’t hold back if we think something is wrong</li>
+                            <li>i don’t offer many capital letters</li>
+                        </ul>
+                    </Tweet>
+                    <Tweet alertMessage="yo, just apply already!">
+                        <p>if you join, my job is to provide an environment where we coach you to build the best products you can.</p>
+                    </Tweet>
+                    <Tweet alertMessage="yo, just apply already!">
+                        <p className="mb-2">it looks like:</p>
+                        <ul>
+                            <li>high expectations - i expect you to decide what to ship, for you to ship fast and for you to then iterate with users. you don’t have to do this alone, there are lots of friendly, deeply skilled and helpful people here - you just need to make sure you go get help instead of assuming it will come to you</li>
+                            <li>coaching for your team in the early days of a new product</li>
+                            <li>growth reviews of your product when it is popular to scale it or split it into more products</li>
+                            <li>lots of deep work time</li>
+                            <li>we will raise feedback constructively and will encourage crazy ideas</li>
+                            <li>lots of weird in jokes</li>
+                        </ul>
+                    </Tweet>
 
-                    <P>
-                        What does this mean for you? We have a lot of capital (and from the world's best
-                        investors), but we're a lean, strong team - so you've got the opportunity to
-                        have a huge impact.
-                    </P>
-                    <P>
-                        We'd love to have you join us!
-                    </P>
-                    <div className="flex items-center space-x-3 mt-4">
-                        <James className="h-11" />
-                        <Plus className="h-5" />
-                        <Tim className="h-8" />
-                    </div>
+                    <Tweet alertMessage="yo, just apply already!">
+                        <p>i believe you focusing on shipping products and learning from this is how you progress your career. anything else is a means to this end.</p>
+                    </Tweet>
+                    <Tweet alertMessage="yo, just apply already!">
+                        <p>if you are joining a role outside of engineering, the concepts are exactly the same. that’s why we’re well known for a very different approach to marketing, sales, ops, recruitment and design.</p>
+                    </Tweet>
+                    <Tweet alertMessage="yo, just apply already!">
+                        <p>come work with people that are truly great at, and focused on, what they do</p>
+                    </Tweet>
                 </div>
             </div>
         </section>
