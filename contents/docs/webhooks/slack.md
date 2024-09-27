@@ -6,7 +6,7 @@ showTitle: true
 
 You can receive messages in Slack whenever your [actions](/docs/user-guides/actions) trigger. 
 
-> **New:** Our new [realtime Slack destinations](/docs/cdp/destinations/slack) is currently in preview. It provides more formatting options, a revamped configuration UI, and the ability to send events *or* actions. Go to [its listing in the data pipeline docs](/docs/cdp/destinations/slack) to learn more.
+> Our new [realtime Slack destinations](/docs/cdp/destinations/slack) is currently in preview. It provides more formatting options, a revamped configuration UI, and the ability to send events *or* actions. Go to [its listing in the data pipeline docs](/docs/cdp/destinations/slack) to learn more.
 
 ## 1. Create an app in Slack
 
