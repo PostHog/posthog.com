@@ -15,7 +15,7 @@ curl -v -L --header "Content-Type: application/json" -d '  {
     "groups" : {
         "group_type": "group_id"
     }
-}' <ph_client_api_host>/decide?v=3 
+}' "<ph_client_api_host>/decide?v=3"
 ```
 
 ```python
@@ -79,7 +79,7 @@ When called, `decide` returns the flag values and payloads, along with more info
     "enable_collect_everything": true
   },
   "toolbarParams": {},
-  "errorComputingFlags": false,
+  "errorsWhileComputingFlags": false,
   "isAuthenticated": false,
   "supportedCompression": [
     "gzip",
@@ -98,7 +98,7 @@ When called, `decide` returns the flag values and payloads, along with more info
 }
 ```
 
-> **Note:** `errorComputingFlags` will return `true` if we didn't manage to compute some flags (for example, if there's an [ongoing incident involving flag evaluation](https://status.posthog.com/)). 
+> **Note:** `errorsWhileComputingFlags` will return `true` if we didn't manage to compute some flags (for example, if there's an [ongoing incident involving flag evaluation](https://status.posthog.com/)). 
 > 
 > This enables partial updates to currently active flags in your clients.
 
