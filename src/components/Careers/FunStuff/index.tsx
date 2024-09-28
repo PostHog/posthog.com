@@ -10,7 +10,7 @@ import TeamMember from 'components/TeamMember'
 const FunThing: React.FC<{ image: React.ReactNode, title: string, content: string, link?: string, imagePosition: 'top' | 'bottom' }> = ({ image, title, content, link, imagePosition }) => (
     <div className={`bg-white dark:bg-accent-dark rounded-md shadow-lg overflow-hidden mb-4 lg:mb-6 xl:mb-8 flex flex-col ${imagePosition === 'top' ? 'flex-col-reverse' : ''}`}>
         {link ? <a href={link} target="_blank" rel="noopener">{image}</a> : image}
-        <div className={`px-4 pt-4 ${imagePosition === 'top' ? '' : 'pb-4'}`}>
+        <div className={`p-4 ${imagePosition === 'top' ? '' : ''}`}>
             <h3 className="text-xl mb-1 leading-tight" dangerouslySetInnerHTML={{ __html: title }} />
             <div className="text-[15px] [&_p]:text-[15px] [&_p]:mb-2 last:[&_p]:mb-0" dangerouslySetInnerHTML={{ __html: content }} />
         </div>
@@ -57,11 +57,43 @@ const frameContents = [
         image: <StaticImage src="./images/github-stars.png" alt="20k+ GitHub stars" />,
         imagePosition: 'bottom',
     },
+    {
+        title: 'Built big things with small teams',
+        content: 'Our <a href="/data-warehouse">Data warehouse</a> was built by a team of two. Same with <a href="/session-replay">Session replay</a>. And we shipped a <a href="/web-analytics">Google Analytics replacement</a> with a team of one.',
+        image: <StaticImage src="./images/web-analytics.png" alt="Big products from small teams" />,
+        imagePosition: 'bottom',
+    },
+    {
+        title: 'Wrote the ClickHouse manual that other companies use',
+        content: "We literally wrote a <a href='/handbook/engineering/clickhouse'>ClickHouse manual</a> that other companies use.",
+        image: <StaticImage src="./images/clickhouse-manual.png" alt="ClickHouse manual" />,
+        imagePosition: 'bottom',
+    },
+    {
+        title: 'Crazy popular with the YC crowd',
+        content: "One of the most adopted products by new YC startups",
+        image: <StaticImage src="./images/yc.png" alt="One of the most adopted products by new YC startups" />,
+        imagePosition: 'top',
+    },
+    {
+        title: 'PostHog for enterprise',
+        content: "We built <a href='/enterprise'>a page</a> for selling to large enterprises. It is very serious.",
+        link: '/enterprise',
+        image: <StaticImage src="./images/enterprise-page.png" alt="Enterprise page" />,
+        imagePosition: 'top',
+    },
+    {
+        title: 'Hedgehog mode',
+        content: "It's like a Chia pet, but for hedgehogs. Find it inside PostHog by searching with <code>CMD + K</code>.",
+        link: '',
+        image: <StaticImage src="./images/hedgehog-mode.png" alt="Hedgehog mode" />,
+        imagePosition: 'bottom',
+    },
     // {
     //     title: '',
     //     content: "",
-    //     imageSrc: './images/.png',
-    //     imageAlt: '',
+    //     link: '',
+    //     image: <StaticImage src="./images/blah.png" alt="" />,
     //     imagePosition: 'bottom',
     // },
 ]
@@ -76,10 +108,10 @@ const FunStuff: React.FC = () => {
 
     return (
         <section className="max-w-7xl mx-auto px-4 py-12">
-            <h2 className="text-center text-4xl xl:text-5xl text-balance">
+            <h2 className="text-center text-4xl lg:text-5xl text-balance">
                 Live, Laugh, LEquip every developer to build successful products
             </h2>
-            <p className="text-center text-lg mb-8 font-semibold opacity-75">Our jobs are zero fun.</p>
+            <p className="text-center text-lg mb-8 font-semibold opacity-75">Our jobs are zero fun. Here are some things that have made it a little less insufferable.</p>
 
             <Masonry
                 breakpointCols={breakpointColumnsObj}
