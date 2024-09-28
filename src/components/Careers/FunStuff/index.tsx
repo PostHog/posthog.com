@@ -7,9 +7,65 @@ import Link from 'components/Link'
 import Masonry from 'react-masonry-css'
 import TeamMember from 'components/TeamMember'
 
-const Frame: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <div className="bg-white dark:bg-accent-dark rounded-md shadow-lg overflow-hidden mb-8">{children}</div>
+const FunThing: React.FC<{ image: React.ReactNode, title: string, content: string, link?: string, imagePosition: 'top' | 'bottom' }> = ({ image, title, content, link, imagePosition }) => (
+    <div className={`bg-white dark:bg-accent-dark rounded-md shadow-lg overflow-hidden mb-4 lg:mb-6 xl:mb-8 flex flex-col ${imagePosition === 'top' ? 'flex-col-reverse' : ''}`}>
+        {link ? <a href={link} target="_blank" rel="noopener">{image}</a> : image}
+        <div className={`px-4 pt-4 ${imagePosition === 'top' ? '' : 'pb-4'}`}>
+            <h3 className="text-xl mb-1 leading-tight" dangerouslySetInnerHTML={{ __html: title }} />
+            <div className="text-[15px] [&_p]:text-[15px] [&_p]:mb-2 last:[&_p]:mb-0" dangerouslySetInnerHTML={{ __html: content }} />
+        </div>
+    </div>
 )
+
+const frameContents = [
+    {
+        title: 'IsGoogleAnalyticsIllegal.com',
+        content: `We spun up <a href="https://isgoogleanalyticsillegal.com">a microsite</a> when courts across the EU started to find Google Analytics in violation of GDPR.`,
+        link: 'https://isgoogleanalyticsillegal.com',
+        image: <StaticImage src="./images/is-ga-illegal.png" alt="Is Google Analytics Illegal?: A microsite" />,
+        imagePosition: 'bottom',
+    },
+    {
+        title: '<strike>That one time</strike> we found favor on Hacker News',
+        content: "We appear on Hacker News quite often. And we don't even submit all of our own posts!",
+        image: <StaticImage src="./images/hn-posts.png" alt="Found favor with the Hacker News crowd" />,
+        imagePosition: 'top',
+    },
+    {
+        title: 'Patrick Collison tweeted about us',
+        content: `When the co-founder of Stripe <a href="https://x.com/patrickc/status/1728009393118032343" target="_blank" rel="noopener">tweets</a> about you unsolicitedly, it's a big deal.`,
+        link: 'https://x.com/patrickc/status/1728009393118032343',
+        image: <StaticImage src="./images/patrick-collison-tweet.png" alt="Patrick Collison liked our website" />,
+        imagePosition: 'bottom',
+    },
+    {
+        title: '6+ hour GitHub star live stream',
+        content: `When we hit 10,000 stars on GitHub, <TeamMember name="Ian Vanagas" /> live streamed to thank <a href="https://www.youtube.com/watch?v=SD7B2teuLXk" target="_blank" rel="noopener">every single one of them</a>.`,
+        link: 'https://www.youtube.com/watch?v=SD7B2teuLXk',
+        image: <StaticImage src="./images/thanking-stars.jpg" alt="6+ hour GitHub star live stream" />,
+        imagePosition: 'bottom',
+    },
+    {
+        title: `Enterprise mode<sup class="text-xs">TM</sup> on PostHog.com`,
+        content: `<p>Same website, just with bigger words. It makes us more approachable to the suits.</p><p class="!text-sm">Find it under the Account menu (top right) on the homepage.</p>`,
+        image: <StaticImage src="./images/enterprise-mode.png" alt="Enterprise mode on PostHog.com" />,
+        imagePosition: 'bottom',
+    },
+    {
+        title: '20k+ GitHub stars',
+        content: `<p>We are honored to be the most popular open source Product OS on GitHub. (Yes, we defined the category, but still...)</p><p>Won't you <a href="https://github.com/PostHog/posthog" target="_blank" rel="noopener">be our next star?</a></p>`,
+        image: <StaticImage src="./images/github-stars.png" alt="20k+ GitHub stars" />,
+        imagePosition: 'bottom',
+    },
+    // {
+    //     title: '',
+    //     content: "",
+    //     imageSrc: './images/.png',
+    //     imageAlt: '',
+    //     imagePosition: 'bottom',
+    // },
+]
+
 
 const FunStuff: React.FC = () => {
     const breakpointColumnsObj = {
@@ -27,91 +83,19 @@ const FunStuff: React.FC = () => {
 
             <Masonry
                 breakpointCols={breakpointColumnsObj}
-                className="flex -ml-8 w-auto"
-                columnClassName="pl-8 bg-clip-padding"
+                className="flex -ml-4 lg:-ml-6 xl:-ml-8 w-auto"
+                columnClassName="pl-4 lg:pl-6 xl:pl-8 bg-clip-padding"
             >
-                <Frame>
-                    <StaticImage src="./images/is-ga-illegal.png" alt="Is Google Analytics Illegal?: A microsite" />
-                    <div className="p-4">
-                        <h3 className="text-xl mb-1">IsGoogleAnalyticsIllegal.com</h3>
-                        <p className="text-[15px] mb-0">
-                            We spun up{' '}
-                            <Link href="https://isgoogleanalyticsillegal.com" externalNoIcon>
-                                a microsite
-                            </Link>{' '}
-                            when courts across the EU started to find Google Analytics in violation of GDPR.
-                        </p>
-                    </div>
-                </Frame>
-
-                <Frame>
-                    <div className="px-4 pt-4">
-                        <h3 className="text-xl mb-1"><strike>That one time</strike> we found favor on Hacker News</h3>
-                        <p className="text-[15px] mb-0">
-                            We appear on Hacker News quite often. And we don't even submit all of our own posts!
-                        </p>
-                    </div>
-                    <StaticImage src="./images/hn-posts.png" alt="Found favor with the Hacker News crowd" />
-                </Frame>
-
-                <Frame>
-                    <div className="px-4 pt-4">
-                        <h3 className="text-xl mb-1">Patrick Collison tweeted about us</h3>
-                        <p className="text-[15px] mb-0">
-                            When the co-founder of Stripe{' '}
-                            <Link href="https://x.com/patrickc/status/1728009393118032343" externalNoIcon>
-                                tweets
-                            </Link>{' '}
-                            about you unsolicitedly, it's a big deal.
-                        </p>
-                    </div>
-                    <StaticImage src="./images/patrick-collison-tweet.png" alt="Patrick Collison liked our website" />
-                </Frame>
-
-                <Frame>
-                    <Link href="https://www.youtube.com/watch?v=SD7B2teuLXk" externalNoIcon>
-                        <StaticImage src="./images/thanking-stars.jpg" alt="Thanking 10,000 GitHub stars" />
-                    </Link>
-                    <div className="px-4 pt-4">
-                        <h3 className="text-xl mb-1">6+ hour GitHub star live stream</h3>
-                        <p className="text-[15px] mb-4">
-                            When we hit 10,000 stars on GitHub, <TeamMember name="Ian Vanagas" /> read out the username
-                            for{' '}
-                            <Link href="https://www.youtube.com/watch?v=SD7B2teuLXk" externalNoIcon>
-                                every single one of them
-                            </Link>
-                            .
-                        </p>
-                    </div>
-                </Frame>
-
-                <Frame>
-                    <StaticImage src="./images/enterprise-mode.png" alt="Enterprise mode on PostHog.com" />
-                    <div className="px-4 pt-4">
-                        <h3 className="text-xl mb-1">
-                            Enterprise mode<sup className="text-xs">TM</sup> on PostHog.com
-                        </h3>
-                        <p className="text-[15px] mb-4">
-                            Same website, just with bigger words. It makes us more approachable to the suits.
-                        </p>
-                        <p className="text-sm mb-4">Find it under the Account menu (top right) on the homepage.</p>
-                    </div>
-                </Frame>
-
-                <Frame>
-                    <StaticImage src="./images/github-stars.png" alt="GitHub stars" />
-                    <div className="p-4">
-                        <h3 className="text-xl mb-1">
-                            20k+ GitHub stars
-                        </h3>
-                        <p className="text-[15px] mb-2">
-                            We are honored to be the most popular open source Product OS on GitHub. (Yes, we defined the category, but still...)
-                        </p>
-                        <p className="text-[15px] mb-0">
-                            Won't you <Link href="https://github.com/PostHog/posthog" externalNoIcon>be our next star?</Link>
-                        </p>
-                    </div>
-                </Frame>
+                {frameContents.map((frame, index) => (
+                    <FunThing
+                        key={index}
+                        title={frame.title}
+                        content={frame.content}
+                        link={frame.link}
+                        image={frame.image}
+                        imagePosition={frame.imagePosition}
+                    />
+                ))}
             </Masonry>
         </section>
     )
