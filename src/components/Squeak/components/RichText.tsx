@@ -85,7 +85,7 @@ const buttons = [
 ]
 
 const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) => {
-    const { firstName, lastName, avatar } = profile.attributes
+    const { firstName, lastName, avatar, gravatarURL } = profile.attributes
     const name = [firstName, lastName].filter(Boolean).join(' ')
 
     return (
@@ -98,7 +98,7 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
                 }`}
             >
                 <div className="size-6 overflow-hidden rounded-full">
-                    <Avatar className="w-full" image={avatar?.data?.attributes?.url} />
+                    <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
                 </div>
                 <div>
                     <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>
@@ -131,16 +131,18 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
     const mentionProfiles = [
         { attributes: { profile: { data: currentQuestion?.question?.profile?.data } } },
         ...replies?.data,
-        ...staffProfiles.nodes.map((node) => ({
-            attributes: {
-                profile: {
-                    data: {
-                        id: node.squeakId,
-                        attributes: { ...node, avatar: { data: { attributes: { url: node.avatar?.url } } } },
+        ...staffProfiles.nodes
+            .filter((node) => node.squeakId === Number(process.env.GATSBY_AI_PROFILE_ID))
+            .map((node) => ({
+                attributes: {
+                    profile: {
+                        data: {
+                            id: node.squeakId,
+                            attributes: { ...node, avatar: { data: { attributes: { url: node.avatar?.url } } } },
+                        },
                     },
                 },
-            },
-        })),
+            })),
     ]
         .map((reply) => reply?.attributes?.profile?.data)
         .filter((profile, index, self) => {
@@ -199,26 +201,16 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
                 ref={listRef}
                 className="m-0 p-0 list-none border border-border dark:border-dark bg-light dark:bg-dark h-full rounded-md overflow-auto"
             >
-                {Object.entries(grouped).map(([key, profiles], index) => {
-                    const prev = Object.entries(grouped)[index - 1]
-                    return (
-                        <>
-                            <li className="p-1 text-xs font-semibold sticky top-0 bg-light dark:bg-dark z-10 shadow-sm">
-                                <span className="opacity-50">{key}</span>
-                            </li>
-                            {profiles.map((profile, index) => (
-                                <MentionProfile
-                                    focused={focused}
-                                    index={index + (prev ? prev.length - 1 : 0)}
-                                    onSelect={onSelect}
-                                    profile={profile}
-                                    selectionStart={selectionStart}
-                                    key={profile.id}
-                                />
-                            ))}
-                        </>
-                    )
-                })}
+                {mentionProfiles.map((profile, index) => (
+                    <MentionProfile
+                        focused={focused}
+                        index={index}
+                        onSelect={onSelect}
+                        profile={profile}
+                        selectionStart={selectionStart}
+                        key={profile.id}
+                    />
+                ))}
             </ul>
         </motion.div>
     )
