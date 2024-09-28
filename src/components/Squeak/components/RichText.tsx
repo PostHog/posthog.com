@@ -200,6 +200,7 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
                 className="m-0 p-0 list-none border border-border dark:border-dark bg-light dark:bg-dark h-full rounded-md overflow-auto"
             >
                 {Object.entries(grouped).map(([key, profiles], index) => {
+                    const prev = Object.entries(grouped)[index - 1]
                     return (
                         <>
                             <li className="p-1 text-xs font-semibold sticky top-0 bg-light dark:bg-dark z-10 shadow-sm">
@@ -208,7 +209,7 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
                             {profiles.map((profile, index) => (
                                 <MentionProfile
                                     focused={focused}
-                                    index={index}
+                                    index={index + (prev ? prev.length - 1 : 0)}
                                     onSelect={onSelect}
                                     profile={profile}
                                     selectionStart={selectionStart}
