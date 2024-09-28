@@ -9,6 +9,7 @@ import feedbackImg from './images/feedback.svg'
 import Logo from 'components/Logo'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 interface TransparencyFeatureProps {
     Image: any
@@ -55,25 +56,28 @@ const TransparencyFeature = ({ Image, title, children, className = '' }: Transpa
 
 export const Transparency = () => {
     const getPreviousMonth = () => {
-        const now = new Date();
-        now.setMonth(now.getMonth() - 1);
-        return now.toLocaleString('default', { month: 'long', year: 'numeric' });
-    };
+        const now = new Date()
+        now.setMonth(now.getMonth() - 1)
+        return now.toLocaleString('default', { month: 'long', year: 'numeric' })
+    }
 
     const handleOpenReport = () => {
-        alert("Nice try... you'll have to join us first!");
-    };
+        alert("Nice try... you'll have to join us first!")
+    }
 
     return (
         <div className="careers-transparency py-12">
             <div className="w-11/12 max-w-4xl mx-auto md:text-center">
-                <h2 className="text-4xl md:text-5xl">The most transparent company, <em className="text-red dark:text-yellow">ever</em>
+                <h2 className="text-4xl md:text-5xl">
+                    The most transparent company, <em className="text-red dark:text-yellow">ever</em>
                 </h2>
-                <h4 className="lg:text-center opacity-70 font-medium max-w-2xl mx-auto leading-tight text-lg">We're open-source and fully remote. In order to enable teams to make great decisions, we share as much information as we can. This includes:</h4>
+                <h4 className="lg:text-center opacity-70 font-medium max-w-2xl mx-auto leading-tight text-lg">
+                    We're open-source and fully remote. In order to enable teams to make great decisions, we share as
+                    much information as we can. This includes:
+                </h4>
             </div>
 
             <div className="w-full max-w-screen-xl md:px-4 md:mx-auto mt-8 mb-16 text-left grid md:grid-cols-3 gap-4">
-
                 <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
                     <TransparencyFeature title="Board meetings" Image={BoardMeetings} className="max-w-md mx-auto">
                         <p className="mb-0 text-base">
@@ -109,19 +113,32 @@ export const Transparency = () => {
                 <div className="bg-white aspect-video dark:bg-accent-dark rounded-md p-4 xs:px-6 xl:py-6 xl:px-8 mx-4 xl:mx-8 border border-light dark:border-dark relative w-full">
                     <div className="absolute left-0 top-0 w-full h-full bg-black/40 z-10 rounded-md"></div>
                     <Logo className="h-6 xs:h-8 sm:h-12 -ml-3 xs:ml-0 mb-4 sm:mb-8 md:mb-10" />
-                    <div className="text-2xl xs:text-[1.5rem] sm:text-[2rem] md:text-[3rem] lg:text-[4rem] font-extrabold font-['Helvetica','Arial'] mb-1 xs:mb-2 md:mb-4 lg:mb-8">Management report</div>
-                    <div className="text-lg xs:text-xl sm:text-2xl lg:text-4xl font-semibold font-['Helvetica','Arial']">{getPreviousMonth()}</div>
+                    <div className="text-2xl xs:text-[1.5rem] sm:text-[2rem] md:text-[3rem] lg:text-[4rem] font-extrabold font-['Helvetica','Arial'] mb-1 xs:mb-2 md:mb-4 lg:mb-8">
+                        Management report
+                    </div>
+                    <div className="text-lg xs:text-xl sm:text-2xl lg:text-4xl font-semibold font-['Helvetica','Arial']">
+                        {getPreviousMonth()}
+                    </div>
                     <div className="absolute top-4 right-4">
                         <span className="bg-black/60 rounded text-white px-2 py-1 text-sm font-semibold">1 of 8</span>
                     </div>
                     <div className="absolute bottom-2 right-2">
-                        <StaticImage src="./images/business-hog.png" alt="This hog's presenting in a suit and tie" className="w-32 xs:w-32 sm:w-48 md:w-64" />
+                        <CloudinaryImage
+                            width={260}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/business_hog_adb9cf3c35.png"
+                            alt="This hog's presenting in a suit and tie"
+                            className="w-32 xs:w-32 sm:w-48 md:w-64"
+                        />
                     </div>
                     <div className="absolute bottom-3 left-3 xs:bottom-6 xs:left-6">
-                        <span className="text-red uppercase border border-red rounded-sm text-xs md:text-sm p-1 font-bold font-['Helvetica','Arial']">Confidential</span>
+                        <span className="text-red uppercase border border-red rounded-sm text-xs md:text-sm p-1 font-bold font-['Helvetica','Arial']">
+                            Confidential
+                        </span>
                     </div>
                     <div className="absolute z-20 left-0 top-0 w-full h-full flex justify-center items-center">
-                        <CallToAction type="secondary" onClick={handleOpenReport}>Open report</CallToAction>
+                        <CallToAction type="secondary" onClick={handleOpenReport}>
+                            Open report
+                        </CallToAction>
                     </div>
                 </div>
             </div>
