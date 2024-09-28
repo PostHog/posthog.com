@@ -117,7 +117,7 @@ export const CareersHero = () => {
         Math.round(
             (selectedTeam.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length /
                 teamLength) *
-            100
+                100
         )
 
     useEffect(() => {
@@ -145,7 +145,8 @@ export const CareersHero = () => {
         <>
             <h1 className="text-4xl lg:text-5xl font-bold text-center mb-2 pt-8 px-2">Who's hiring?</h1>
             <p className="text-center mb-8 text-base px-4">
-                Our small teams are looking to add <strong className="whitespace-nowrap">{jobs.length} team members</strong>.
+                Our small teams are looking to add{' '}
+                <strong className="whitespace-nowrap">{jobs.length} team members</strong>.
             </p>
             <section className="flex flex-col md:flex-row md:gap-4 px-4 max-w-7xl mx-auto 2xl:px-8 mb-16">
                 <div className="w-full md:w-1/4">
@@ -172,15 +173,17 @@ export const CareersHero = () => {
                             return (
                                 <li key={job.fields.title} className="">
                                     <button
-                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${selectedJob.fields.title === job.fields.title
-                                            ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
-                                            : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
-                                            }`}
+                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${
+                                            selectedJob.fields.title === job.fields.title
+                                                ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
+                                                : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                                        }`}
                                         onClick={() => setSelectedJob(job)}
                                     >
                                         <span
-                                            className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
-                                                }`}
+                                            className={`font-semibold text-[15px] ${
+                                                selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
+                                            }`}
                                         >
                                             {job.fields.title}
                                         </span>
@@ -210,30 +213,32 @@ export const CareersHero = () => {
                         <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                             <Detail
                                 title="Location"
-                                value={`Remote${selectedJob.parent.customFields.find(
-                                    (field: { title: string }) => field.title === 'Location(s)'
-                                )?.value
-                                    ? ` (${selectedJob.parent.customFields.find(
+                                value={`Remote${
+                                    selectedJob.parent.customFields.find(
                                         (field: { title: string }) => field.title === 'Location(s)'
-                                    ).value
-                                    })`
-                                    : ''
-                                    }`}
+                                    )?.value
+                                        ? ` (${
+                                              selectedJob.parent.customFields.find(
+                                                  (field: { title: string }) => field.title === 'Location(s)'
+                                              ).value
+                                          })`
+                                        : ''
+                                }`}
                                 icon={<Location />}
                             />
                             {selectedJob.parent.customFields.find(
                                 (field: { title: string }) => field.title === 'Timezone(s)'
                             )?.value && (
-                                    <Detail
-                                        title="Timezone(s)"
-                                        value={
-                                            selectedJob.parent.customFields.find(
-                                                (field: { title: string }) => field.title === 'Timezone(s)'
-                                            ).value
-                                        }
-                                        icon={<Timezone />}
-                                    />
-                                )}
+                                <Detail
+                                    title="Timezone(s)"
+                                    value={
+                                        selectedJob.parent.customFields.find(
+                                            (field: { title: string }) => field.title === 'Timezone(s)'
+                                        ).value
+                                    }
+                                    icon={<Timezone />}
+                                />
+                            )}
                         </ul>
 
                         <div className="job-content mt-4">
@@ -242,15 +247,19 @@ export const CareersHero = () => {
                                 dangerouslySetInnerHTML={{ __html: processedHtml }}
                                 className="[&_summary]:hidden [&_p]:text-[15px] relative max-h-56 overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
                             />
-                            {selectedJob.fields.title == "Speculative application" && <>
-                                <p className="text-[15px]">
-                                    We take exceptional people when they come along - and we really mean that!
-                                </p>
+                            {selectedJob.fields.title == 'Speculative application' && (
+                                <>
+                                    <p className="text-[15px]">
+                                        We take exceptional people when they come along - and we really mean that!
+                                    </p>
 
-                                <p className="text-[15px]">
-                                    Don’t see a specific role listed? That doesn't mean we won't have a spot for you. Send us a speculative application and let us know how you think you could contribute to PostHog.
-                                </p>
-                            </>}
+                                    <p className="text-[15px]">
+                                        Don’t see a specific role listed? That doesn't mean we won't have a spot for
+                                        you. Send us a speculative application and let us know how you think you could
+                                        contribute to PostHog.
+                                    </p>
+                                </>
+                            )}
                             <CallToAction to={selectedJob.fields.slug} size="sm">
                                 Read more
                             </CallToAction>
@@ -266,7 +275,7 @@ export const CareersHero = () => {
                         <div className="flex flex-col items-center gap-2">
                             {teams.length > 1 && (
                                 <select
-                                    className="w-full p-2 mb-2 border border-b-3 border-light dark:border-dark rounded text-sm font-medium"
+                                    className="w-full p-2 mb-2 border border-b-3 border-light dark:border-dark rounded text-sm font-medium dark:bg-dark"
                                     value={selectedTeamName}
                                     onChange={(e) => {
                                         setSelectedTeamName(e.target.value)
