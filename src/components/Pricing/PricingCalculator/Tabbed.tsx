@@ -316,11 +316,12 @@ export default function Tabbed() {
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search)
         const volumes = qs.parse(urlParams.toString())
-        Object.keys(volumes).forEach((type) => {
+        const volumeTypes = Object.keys(volumes)
+        volumeTypes.forEach((type) => {
             setVolume(type, volumes[type].volume)
         })
         const el = document.getElementById('calculator')
-        if (el) {
+        if (el && products.some((product) => volumeTypes.includes(product.type))) {
             const y = el.getBoundingClientRect().top + window.scrollY - (window.innerWidth > 767 ? 108 : 57)
             window.scrollTo({ top: y, behavior: 'smooth' })
         }
