@@ -228,36 +228,38 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
 
 const MaxReply = ({ children }: { children: React.ReactNode }) => {
     return (
-        <li
-            className={`pr-[5px] pl-[30px] pb-2 !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
-        >
-            <Tooltip
-                content={() => (
-                    <div className="text-sm max-w-64">
-                        Max AI is our resident AI assistant. Double-check responses for accuracy.
-                    </div>
-                )}
-                placement="top"
+        <ul className="ml-5 !mb-0 p-0 list-none">
+            <li
+                className={`pr-[5px] pl-[30px] pb-2 !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
             >
-                <div className="relative inline-block">
-                    <div className="flex items-center !text-black dark:!text-white">
-                        <div className="mr-2 relative">
-                            <Avatar
-                                className="w-[25px] h-[25px] rounded-full"
-                                image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
-                            />
-                            <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
-                                <Logomark className="w-[16px]" />
-                            </span>
+                <Tooltip
+                    content={() => (
+                        <div className="text-sm max-w-64">
+                            Max AI is our resident AI assistant. Double-check responses for accuracy.
                         </div>
-                        <strong>Max AI</strong>
+                    )}
+                    placement="top"
+                >
+                    <div className="relative inline-block">
+                        <div className="flex items-center !text-black dark:!text-white">
+                            <div className="mr-2 relative">
+                                <Avatar
+                                    className="w-[25px] h-[25px] rounded-full"
+                                    image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
+                                />
+                                <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
+                                    <Logomark className="w-[16px]" />
+                                </span>
+                            </div>
+                            <strong>Max AI</strong>
+                        </div>
                     </div>
+                </Tooltip>
+                <div className="ml-[33px] mt-1 py-2 px-4 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
+                    {children}
                 </div>
-            </Tooltip>
-            <div className="ml-[33px] mt-1 py-2 px-4 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
-                {children}
-            </div>
-        </li>
+            </li>
+        </ul>
     )
 }
 
@@ -270,12 +272,7 @@ const Loading = () => {
     )
 }
 
-const AskMax = ({ question, refresh, manual }: { question: any; refresh: () => void; manual?: boolean }) => {
-    const [confident, setConfident] = useState(false)
-    const [loading, setLoading] = useState(true)
-    const alreadyAsked = useMemo(() => question?.attributes?.askedMax, [])
-    const { getJwt } = useUser()
-
+const AskMaxLoading = () => {
     const messages = [
         'This usually takes less than 30 seconds.',
         'Searching docs, tutorials, GitHub issues, blogs, community answers...',
@@ -288,76 +285,38 @@ const AskMax = ({ question, refresh, manual }: { question: any; refresh: () => v
     const [fadeState, setFadeState] = useState('in')
 
     useEffect(() => {
-        if (loading) {
-            const intervalId = setInterval(() => {
-                setFadeState('out')
-                setTimeout(() => {
-                    setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length)
-                    setFadeState('in')
-                }, 500) // Wait for fade out before changing message
-            }, 5000)
+        const intervalId = setInterval(() => {
+            setFadeState('out')
+            setTimeout(() => {
+                setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length)
+                setFadeState('in')
+            }, 500) // Wait for fade out before changing message
+        }, 5000)
 
-            return () => clearInterval(intervalId)
-        }
-    }, [loading])
-
-    useEffect(() => {
-        const askMax = async () => {
-            try {
-                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/ask-max`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${await getJwt()}`,
-                    },
-                    body: JSON.stringify({
-                        question,
-                        manual,
-                    }),
-                }).then((res) => res.json())
-                setConfident(response.confident)
-                setLoading(false)
-                refresh()
-            } catch (error) {
-                console.error(error)
-            }
-        }
-        if (!alreadyAsked) {
-            askMax()
-        }
+        return () => clearInterval(intervalId)
     }, [])
 
-    return !alreadyAsked && (loading || !confident) ? (
-        <ul className="ml-5 !mb-0 p-0 list-none">
-            <MaxReply>
-                {loading ? (
-                    <div className="flex gap-1">
-                        <div>
-                            <Loading />
-                        </div>
-                        <div className="flex-1 font-normal question-content community-post-markdown !p-0">
-                            <p className="!mt-1 !mb-0 !pb-0">
-                                <strong>Hang tight, checking to see if we can find an answer for you...</strong>
-                            </p>
-                            <p
-                                className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${
-                                    fadeState === 'out' ? 'opacity-0' : 'opacity-100'
-                                }`}
-                            >
-                                {messages[currentMessageIndex]}
-                            </p>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="text-primary/75 dark:text-primary-dark/75 font-normal question-content community-post-markdown !p-0">
-                        <p>
-                            Dang, we couldn’t find anything this time. A community member will hopefully respond soon!
-                        </p>
-                    </div>
-                )}
-            </MaxReply>
-        </ul>
-    ) : null
+    return (
+        <MaxReply>
+            <div className="flex gap-1">
+                <div>
+                    <Loading />
+                </div>
+                <div className="flex-1 font-normal question-content community-post-markdown !p-0">
+                    <p className="!mt-1 !mb-0 !pb-0">
+                        <strong>Hang tight, checking to see if we can find an answer for you...</strong>
+                    </p>
+                    <p
+                        className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${
+                            fadeState === 'out' ? 'opacity-0' : 'opacity-100'
+                        }`}
+                    >
+                        {messages[currentMessageIndex]}
+                    </p>
+                </div>
+            </div>
+        </MaxReply>
+    )
 }
 
 const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () => void }) => {
@@ -383,11 +342,62 @@ const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () =>
     )
 }
 
+const AskMax = ({
+    question,
+    refresh,
+    manual = false,
+    withContext = false,
+}: {
+    question: any
+    refresh: () => void
+    manual?: boolean
+    withContext?: boolean
+}) => {
+    const [loading, setLoading] = useState(true)
+    const [confident, setConfident] = useState(false)
+    const { getJwt } = useUser()
+
+    useEffect(() => {
+        const askMax = async () => {
+            try {
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/ask-max`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${await getJwt()}`,
+                    },
+                    body: JSON.stringify({
+                        question,
+                        manual,
+                        withContext,
+                    }),
+                }).then((res) => res.json())
+                setConfident(response.confident)
+                setLoading(false)
+                refresh()
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        askMax()
+    }, [])
+
+    return loading ? (
+        <AskMaxLoading />
+    ) : !confident ? (
+        <MaxReply>
+            <div className="text-primary/75 dark:text-primary-dark/75 font-normal question-content community-post-markdown !p-0">
+                <p>Dang, we couldn’t find anything this time. A community member will hopefully respond soon!</p>
+            </div>
+        </MaxReply>
+    ) : null
+}
+
 export const Question = (props: QuestionProps) => {
-    const { id, question, showSlug, buttonText, showActions = true, askMax } = props
+    const { id, question, showSlug, buttonText, showActions = true, ...other } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const { user, notifications, setNotifications } = useUser()
-    const [manualAskMax, setManualAskMax] = useState(false)
+    const [maxQuestions, setMaxQuestions] = useState(other.askMax ? [{ manual: false, withContext: false }] : [])
 
     useEffect(() => {
         if (
@@ -429,6 +439,12 @@ export const Question = (props: QuestionProps) => {
 
     if (!questionData) {
         return <div>Question not found</div>
+    }
+
+    const handleReply = async (_values, _formData, data) => {
+        if (data.askMax) {
+            setMaxQuestions([...maxQuestions, { manual: false, withContext: true }])
+        }
     }
 
     const archived = questionData?.attributes.archived
@@ -494,7 +510,9 @@ export const Question = (props: QuestionProps) => {
                                     </button>
                                     <DeleteButton questionID={questionData.id} />
                                     <AskMaxButton
-                                        onClick={() => setManualAskMax(true)}
+                                        onClick={() =>
+                                            setMaxQuestions([...maxQuestions, { manual: true, withContext: true }])
+                                        }
                                         askedMax={questionData?.attributes.askedMax}
                                     />
                                 </>
@@ -532,10 +550,18 @@ export const Question = (props: QuestionProps) => {
                                 </p>
                             )}
                         </div>
-                        {(askMax || manualAskMax) && (
-                            <AskMax question={questionData} refresh={mutate} manual={manualAskMax} />
-                        )}
                         <Replies expanded={expanded} setExpanded={setExpanded} />
+                        {maxQuestions.map((question, index) => {
+                            return (
+                                <AskMax
+                                    key={`ask-max-${index}`}
+                                    question={questionData}
+                                    refresh={mutate}
+                                    manual={question.manual}
+                                    withContext={question.withContext}
+                                />
+                            )
+                        })}
                     </div>
                     <div
                         className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${
@@ -548,6 +574,7 @@ export const Question = (props: QuestionProps) => {
                             buttonText={buttonText}
                             formType="reply"
                             reply={reply}
+                            onSubmit={handleReply}
                         />
                     </div>
                 </div>

@@ -202,7 +202,7 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
                 {Object.entries(grouped).map(([key, profiles], index) => {
                     return (
                         <>
-                            <li className="p-1 text-xs font-semibold sticky top-0 bg-light dark:bg-dark z-10">
+                            <li className="p-1 text-xs font-semibold sticky top-0 bg-light dark:bg-dark z-10 shadow-sm">
                                 <span className="opacity-50">{key}</span>
                             </li>
                             {profiles.map((profile, index) => (

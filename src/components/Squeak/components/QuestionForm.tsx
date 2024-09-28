@@ -391,7 +391,7 @@ export const QuestionForm = ({
             }
 
             if (formType === 'reply' && questionId) {
-                await reply(transformedValues.body)
+                data = await reply(transformedValues.body)
             }
 
             setLoading(false)
