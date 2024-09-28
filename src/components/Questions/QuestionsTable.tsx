@@ -104,13 +104,7 @@ const Row = ({
     } = question
 
     const latestAuthor = replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
-    const isOP = profile?.data?.id === user?.profile?.id
-    const numReplies =
-        replies?.data?.filter((reply) =>
-            reply.attributes.profile?.data?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
-                ? isModerator || reply.attributes.helpful || isOP
-                : true
-        ).length || 0
+    const numReplies = replies?.data?.length || 0
 
     const { ref, inView } = useInView({
         threshold: 0,
