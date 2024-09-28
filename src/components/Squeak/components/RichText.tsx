@@ -10,7 +10,7 @@ import { isURL } from 'lib/utils'
 import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconX } from '@posthog/icons'
+import { IconFeatures, IconX } from '@posthog/icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import groupBy from 'lodash.groupby'
 
@@ -87,6 +87,7 @@ const buttons = [
 const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) => {
     const { firstName, lastName, avatar, gravatarURL } = profile.attributes
     const name = [firstName, lastName].filter(Boolean).join(' ')
+    const isAI = profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
 
     return (
         <li className="border-b border-border dark:border-dark p-1">
@@ -101,8 +102,11 @@ const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) =
                     <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
                 </div>
                 <div>
-                    <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>
-                    <p className="m-0 leading-none text-sm line-clamp-1">{name}</p>
+                    {!isAI && <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>}
+                    <div className="flex space-x-1 items-center">
+                        <p className="m-0 leading-none text-sm line-clamp-1">{name}</p>
+                        {isAI && <IconFeatures className="size-4 text-primary dark:text-primary-dark opacity-50" />}
+                    </div>
                 </div>
             </button>
         </li>
@@ -358,7 +362,10 @@ export default function RichText({
 
     const handleProfileSelect = (profile, selectionStart) => {
         const { selectionEnd } = getTextSelection()
-        const mention = `@${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
+        const mention =
+            profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
+                ? `@max `
+                : `@${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
         setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, mention, prevValue))
         setShowMentionProfiles(false)
         textarea.current?.focus()
