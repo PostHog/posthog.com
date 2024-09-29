@@ -71,7 +71,7 @@ const AIDisclaimerMod = ({ opName, replyID, mutate }) => {
     )
 }
 
-const AIDisclaimer = ({ replyID, mutate, topic, isAuthor, confidence, resolvable }) => {
+const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
     const posthog = usePostHog()
     const { getJwt } = useUser()
     const { handleResolve } = useContext(CurrentQuestionContext)
@@ -324,8 +324,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                 <div className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}>
                     {reply?.attributes?.helpful === false && (
                         <div className="p-2 rounded border border-light dark:border-dark mb-2 text-sm bg-accent dark:bg-accent-dark">
-                            <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful and is only
-                            visible to you.
+                            <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful.
                         </div>
                     )}
                     <Markdown>{body}</Markdown>
