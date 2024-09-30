@@ -30,6 +30,15 @@ export default function NoHatingAllowed({ data, youllHate, size }: { data: CardP
   const listRef = useRef<HTMLUListElement>(null)
   const { enterpriseMode } = useLayoutData()
 
+  const getScrollDistance = () => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 768) return 300
+      if (window.innerWidth < 1024) return 600
+      return 900
+    }
+    return 300 // Default value if window is not available
+  }
+
   return (
     <div className="relative my-12 overflow-hidden">
       <h2 className={`text-center mb-5 ${size}`}>
@@ -37,12 +46,12 @@ export default function NoHatingAllowed({ data, youllHate, size }: { data: CardP
         {enterpriseMode ? <span className="text-red">LOVE</span> : 'hate'} {youllHate} if...
       </h2>
       <div className="absolute z-10 -left-10 top-64 bottom-32 w-48 bg-gradient-radial from-light/30 via-light/0 to-light/0 dark:from-dark/30 dark:via-dark/0 dark:to-dark/0" />
-      <div className="absolute z-20 top-1/2 left-0 -translate-y-1/2 mt-16">
+      <div className="absolute z-20 top-1/2 -left-6 md:left-0 -translate-y-1/2 mt-12">
         <button
-          onClick={() => listRef?.current?.scrollBy({ left: -300, behavior: 'smooth' })}
+          onClick={() => listRef?.current?.scrollBy({ left: -getScrollDistance(), behavior: 'smooth' })}
           className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
         >
-          <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark" />
+          <IconChevronDown className="w-12 h-12 rounded-sm text-primary-dark/60 hover:text-primary-dark/100 dark:text-primary/60 dark:hover:text-primary/100 rotate-90 bg-accent-dark dark:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm" />
         </button>
       </div>
       <ul
@@ -54,12 +63,12 @@ export default function NoHatingAllowed({ data, youllHate, size }: { data: CardP
         })}
       </ul>
       <div className="absolute -right-10 top-64 bottom-32 w-48 bg-gradient-radial from-light/30 via-light/0 to-light/0 dark:from-dark/30 dark:via-dark/0 dark:to-dark/0" />
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 mt-16">
+      <div className="absolute top-1/2 -right-6 md:right-0 -translate-y-1/2 mt-12">
         <button
-          onClick={() => listRef?.current?.scrollBy({ left: 300, behavior: 'smooth' })}
+          onClick={() => listRef?.current?.scrollBy({ left: getScrollDistance(), behavior: 'smooth' })}
           className="relative hover:scale-[1.01] hover:top-[-1px] active:top-[.5px] active:scale-[.99] md:z-30 p-8"
         >
-          <IconChevronDown className="w-12 h-12 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark" />
+          <IconChevronDown className="w-12 h-12 rounded-sm text-primary-dark/60 hover:text-primary-dark/100 dark:text-primary/60 dark:hover:text-primary/100 -rotate-90 bg-accent-dark dark:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm" />
         </button>
       </div>
     </div>
