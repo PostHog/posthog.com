@@ -49,14 +49,11 @@ PostHogSDK.shared.alias("alias_id")
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-## Person Profiles ("anonymous" vs "identified" persons)
+## Anonymous vs identfied events
 
-The default behavior for this SDK is to use the `.identifiedOnly` mode of person processing, but this can be changed in the config. The options are:
-- `.identifiedOnly`
-- `.never`
-- `.always`
+import iOSIdentifiedVsAnonymous from '../../product-analytics/_snippets/ios-anonymous-vs-identified.mdx'
 
-See [person profiles](/docs/data/persons) for more info.
+<iOSIdentifiedVsAnonymous />
 
 ## Setting person properties
 
