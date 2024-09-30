@@ -7,7 +7,7 @@ tags:
  - data warehouse
 ---
 
-PostHog can capture a lot of data about your users. For data it can't capture, you can leverage the [data warehouse](/data-warehouse) to add whatever data you want as a CSV.
+PostHog can capture a lot of data about your users. For data it can't capture, you can leverage the [data warehouse](/data-warehouse) to manually upload any data you'd like as a CSV
 
 This tutorial shows you how to upload a CSV to storage, connect that storage source to PostHog, and then query the CSV alongside your data in PostHog.
 
