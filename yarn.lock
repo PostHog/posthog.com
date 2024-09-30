@@ -19175,6 +19175,11 @@ react-markdown@^8.0.4:
     unist-util-visit "^4.0.0"
     vfile "^5.0.0"
 
+react-masonry-css@^1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/react-masonry-css/-/react-masonry-css-1.0.16.tgz#72b28b4ae3484e250534700860597553a10f1a2c"
+  integrity sha512-KSW0hR2VQmltt/qAa3eXOctQDyOu7+ZBevtKgpNDSzT7k5LA/0XntNa9z9HKCdz3QlxmJHglTZ18e4sX4V8zZQ==
+
 react-medium-image-zoom@^4.3.5:
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/react-medium-image-zoom/-/react-medium-image-zoom-4.4.3.tgz#d5e3074becef7be4bfe35ebcd291eac462093bf5"
@@ -21765,6 +21770,11 @@ swap-case@^2.0.2:
   integrity sha512-kc6S2YS/2yXbtkSMunBtKdah4VFETZ8Oh6ONSmSd9bRxhqTrtARUCBUiWXH3xVPpvR7tz2CSnkuXVE42EcGnMw==
   dependencies:
     tslib "^2.0.3"
+
+swiper@^11.1.14:
+  version "11.1.14"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-11.1.14.tgz#7901b4955c46dd0ad76fac1e9de2a69f04f34abb"
+  integrity sha512-VbQLQXC04io6AoAjIUWuZwW4MSYozkcP9KjLdrsG/00Q/yiwvhz9RQyt0nHXV10hi9NVnDNy1/wv7Dzq1lkOCQ==
 
 swr@^2.0.0:
   version "2.0.0"

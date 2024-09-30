@@ -30,7 +30,7 @@ const query = (id: string | number, isModerator: boolean) =>
                     select: ['id'],
                 },
                 profile: {
-                    select: ['id', 'firstName', 'lastName'],
+                    select: ['id', 'firstName', 'lastName', 'color'],
                     populate: {
                         avatar: {
                             select: ['id', 'url'],
@@ -48,7 +48,7 @@ const query = (id: string | number, isModerator: boolean) =>
                     sort: ['createdAt:asc'],
                     populate: {
                         profile: {
-                            fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns'],
+                            fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns', 'color'],
                             populate: {
                                 avatar: {
                                     fields: ['id', 'url'],

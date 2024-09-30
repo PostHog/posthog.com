@@ -263,7 +263,9 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     >
                         <div className="mr-2 relative">
                             <Avatar
-                                className="w-[25px] h-[25px] rounded-full"
+                                className={`w-[25px] h-[25px] rounded-full ${
+                                    profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
+                                }`}
                                 image={getAvatarURL(profile?.data?.attributes)}
                             />
                             {isTeamMember && (
