@@ -116,90 +116,73 @@ It's a priority for us that events are fully processed and saved as soon as poss
 
 ## Advanced: Anonymous vs identified events
 
-import WebIdentifiedVsAnonymous from './_snippets/web-anonymous-vs-identified.mdx'
-import AndroidIdentifiedVsAnonymous from './_snippets/android-anonymous-vs-identified.mdx'
-import IOSSIdentifiedVsAnonymous from './_snippets/ios-anonymous-vs-identified.mdx'
-import BackendIdentifiedVsAnonymous from './_snippets/backend-anonymous-vs-identified.mdx'
+import IdentifiedVsAnonymousIntro from './_snippets/identified-vs-anonymous-intro.mdx'
+
+<IdentifiedVsAnonymousIntro />
+
+### How to capture anonymous events
+
+import HowToCaptureAnonymousEventsBackend from './_snippets/how-to-capture-anonymous-backend-and-api.mdx'
+import HowToCaptureAnonymousEventsIOS from './_snippets/how-to-capture-anonymous-events-ios.mdx'
+import HowToCaptureAnonymousEventsWeb from './_snippets/how-to-capture-anonymous-events-web.mdx'
+import HowToCaptureAnonymousEventsAndroid from './_snippets/how-to-capture-anonymous-events-android.mdx'
 
 <Tab.Group tabs={[
     'Web', 
-    'Node.js', 
-    'Python', 
-    'PHP', 
-    'Ruby', 
-    'Go', 
-    'React', 
-    'React Native', 
+    'Backend', 
     'Android', 
-    'iOS', 
-    'Java', 
-    'Rust', 
-    'Elixir', 
-    'Flutter', 
-    'api']}>
+    'iOS']}>
     <Tab.List>
         <Tab>Web</Tab>
-        <Tab>Node.js</Tab>
-        <Tab>Python</Tab>
-        <Tab>PHP</Tab>
-        <Tab>Ruby</Tab>
-        <Tab>Go</Tab>
-        <Tab>React</Tab>
-        <Tab>React Native</Tab>
+        <Tab>Backend</Tab>
         <Tab>Android</Tab>
         <Tab>iOS</Tab>
-        <Tab>Java</Tab>
-        <Tab>Rust</Tab>
-        <Tab>Elixir</Tab>
-        <Tab>Flutter</Tab>
-        <Tab>API</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
-            <WebIdentifiedVsAnonymous />
+            <HowToCaptureAnonymousEventsWeb />
         </Tab.Panel>
         <Tab.Panel>
-            <BackendIdentifiedVsAnonymous />
+            <HowToCaptureAnonymousEventsBackend />
         </Tab.Panel>
         <Tab.Panel>
-            <BackendIdentifiedVsAnonymous />
+           <HowToCaptureAnonymousEventsAndroid />
         </Tab.Panel>
         <Tab.Panel>
-            <BackendIdentifiedVsAnonymous />
-        </Tab.Panel>
-        <Tab.Panel>
-            <BackendIdentifiedVsAnonymous />
-        </Tab.Panel>
-        <Tab.Panel>
-           <BackendIdentifiedVsAnonymous />
-        </Tab.Panel>
-        <Tab.Panel>
-            <WebIdentifiedVsAnonymous />
-        </Tab.Panel>
-        <Tab.Panel>
-            <WebIdentifiedVsAnonymous />
-        </Tab.Panel>
-        <Tab.Panel>
-           <AndroidIdentifiedVsAnonymous />
-        </Tab.Panel>
-        <Tab.Panel>
-           <IOSSIdentifiedVsAnonymous />
-        </Tab.Panel>
-        <Tab.Panel>
-            <BackendIdentifiedVsAnonymous />
-        </Tab.Panel>
-        <Tab.Panel>
-            <BackendIdentifiedVsAnonymous />
-        </Tab.Panel>
-        <Tab.Panel>
-            <BackendIdentifiedVsAnonymous />
-        </Tab.Panel>
-        <Tab.Panel>
-            <BackendIdentifiedVsAnonymous />
-        </Tab.Panel>
-        <Tab.Panel>
-            <BackendIdentifiedVsAnonymous />
+           <HowToCaptureAnonymousEventsIOS />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
 
+### How to capture identified events
+
+import HowToCaptureIdentifiedEvents from './_snippets/how-to-capture-identified-events-frontend.mdx'
+
+import HowToCaptureIdentifiedEventsBackend from './_snippets/how-to-capture-identified-events-backend.mdx'
+
+<Tab.Group tabs={[
+    'Web', 
+    'Backend', 
+    'Android', 
+    'iOS']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>Backend</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <HowToCaptureIdentifiedEvents />
+        </Tab.Panel>
+        <Tab.Panel>
+            <HowToCaptureIdentifiedEventsBackend />
+        </Tab.Panel>
+        <Tab.Panel>
+            <HowToCaptureIdentifiedEvents />
+        </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureIdentifiedEvents />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
