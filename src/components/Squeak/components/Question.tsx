@@ -380,6 +380,7 @@ const AskMax = ({
             }
         }
         askMax()
+        window.history.replaceState({ ...window.history.state, askMax: false }, '')
     }, [])
 
     return loading ? (
