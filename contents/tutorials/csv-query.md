@@ -1,6 +1,6 @@
 ---
 title: How to query a CSV in PostHog
-date: 2024-09-23
+date: 2024-09-30
 author:
  - ian-vanagas
 tags:
