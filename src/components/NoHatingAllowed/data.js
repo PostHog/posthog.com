@@ -263,7 +263,7 @@ export const HomepageCards = [
 export const CareersCards = [
     {
         top: 'You want a clearly-documented career progression framework',
-        bottom: <>Everyone here is as equal as possible to maintain autonomy.</>,
+        bottom: <>We believe shipping is much more important than ticking boxes.</>,
         color: '#FFD89E',
         Image: (
             <CloudinaryImage

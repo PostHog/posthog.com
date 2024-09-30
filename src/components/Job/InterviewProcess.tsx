@@ -25,6 +25,11 @@ const defaultInterviewProcess: IInterviewProcess[] = [
         badge: '45 minutes, varies by role',
     },
     {
+        title: 'Founder interview',
+        description: `You have reached the final boss. It's time to chat with James or Tim.`,
+        badge: '30 minutes',
+    },
+    {
         title: 'PostHog SuperDay',
         description: `You’ll meet a few more members of the team and work on a independent project. It's challenging, but most people say it's fun!`,
         badge: 'Paid day of work',

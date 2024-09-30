@@ -10,9 +10,8 @@ const FunThing: React.FC<{
     imagePosition: 'top' | 'bottom'
 }> = ({ image, title, content, link, imagePosition }) => (
     <div
-        className={`bg-white dark:bg-accent-dark rounded-md shadow-lg overflow-hidden mb-4 lg:mb-6 xl:mb-8 flex flex-col ${
-            imagePosition === 'top' ? 'flex-col-reverse' : ''
-        }`}
+        className={`bg-white dark:bg-accent-dark rounded-md shadow-lg overflow-hidden mb-4 lg:mb-6 xl:mb-8 flex flex-col ${imagePosition === 'top' ? 'flex-col-reverse' : ''
+            }`}
     >
         {link ? (
             <a href={link} target="_blank" rel="noopener">
@@ -80,23 +79,23 @@ const frameContents = [
         imagePosition: 'bottom',
     },
     {
-        title: `Enterprise mode<sup class="text-xs">TM</sup> on PostHog.com`,
-        content: `<p>Same website, just with bigger words. It makes us more approachable to the suits.</p><p class="!text-sm">Find it under the Account menu (top right) on the homepage.</p>`,
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/enterprise_mode_1cf9836f42.png"
-                alt="Enterprise mode on PostHog.com"
-            />
-        ),
-        imagePosition: 'bottom',
-    },
-    {
         title: '20k+ GitHub stars',
         content: `<p>We are honored to be the most popular open source Product OS on GitHub. (Yes, we defined the category, but still...)</p><p>Won't you <a href="https://github.com/PostHog/posthog" target="_blank" rel="noopener">be our next star?</a></p>`,
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/github_stars_7e1b503d8b.png"
                 alt="20k+ GitHub stars"
+            />
+        ),
+        imagePosition: 'bottom',
+    },
+    {
+        title: `Enterprise mode<sup class="text-xs">TM</sup> on PostHog.com`,
+        content: `<p>Same website, just with bigger words. It makes us more approachable to the suits.</p><p class="!text-sm">Find it under the Account menu (top right) on the homepage.</p>`,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/enterprise_mode_1cf9836f42.png"
+                alt="Enterprise mode on PostHog.com"
             />
         ),
         imagePosition: 'bottom',
