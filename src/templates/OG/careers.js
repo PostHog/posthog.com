@@ -26,6 +26,8 @@ module.exports = careers = ({ jobs, font }) => {
             overflow: hidden;
             color: black;
             background-color: #eeefe9;
+            height: 630px;
+            width: 1200px;
           }
           header {
             position: relative;
@@ -176,7 +178,7 @@ module.exports = careers = ({ jobs, font }) => {
           </h1>
           
           <div class="columns">
-            <aside style="grid-column: span 2;">
+            <aside style="grid-column: span 2; position: relative; z-index: 1;">
               <img
             style="width: 501px;"
             src="data:image/jpeg;charset=utf-8;base64,${notWorkingHere}"
