@@ -188,23 +188,6 @@ You can view whether a user can be merged into another user using `alias` when [
 
 > **Note:** When calling `alias` in the frontend SDKs, if you have set any properties onto the anonymous user, they are merged into the user with `distinct_id`. For more details, see the FAQ on [how properties are managed when identifying anonymous users](/docs/data/identify#how-are-properties-managed-when-identifying-anonymous-users).
 
-## Anonymous and identified events
-
-If your `person_profile` config option is set to `identified_only`, PostHog continues to capture all events but, for users without a person profile, these will be anonymous events. This means you can't do person-level analysis on them. For example, when you click the person ID in the activity tab, you'll see a note saying "No profile associated with this ID."
-
-When using the `identified_only` option, person profiles are only created once you call one of the following functions or methods:
-
-- `identify`
-- `alias`
-- `setPersonProperties`
-- `setPersonPropertiesForFlags`
-- `group`
-- `setGroupPropertiesForFlags`
-
-Once you create a person profile for a user distinct ID, all events for that distinct ID count as identified events and are then associated with a person profile.
-
-If your `person_profile` config option is set to `always`, PostHog captures identified events and creates a person profile for every user on your site, whether or not they have been identified.
-
 ## Troubleshooting and FAQs
 
 ### What happens if you call `identify` or `alias` with invalid inputs?

@@ -39,36 +39,15 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 <WebSendEvents />
 
-## Person profiles and properties
+## Setting person properties
 
-PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+To do: add snippet
 
-```js-web
-posthog.capture(
-  'event_name',
-  {
-    $set: { name: 'Max Hedgehog'  },
-    $set_once: { initial_url: '/blog' },
-  }
-)
-```
+## Anonymous vs identfied events
 
-Typically, person properties are set when an event occurs like `user updated email` but there may be occasions where you want to set person properties as its own event. 
+import WebIdentifiedVsAnonymous from '../../product-analytics/_snippets/web-anonymous-vs-identified.mdx'
 
-```javascript
-posthog.setPersonProperties(
-    { name: "Max Hedgehog" }, // Thes properties are like the `$set` from above
-    { initial_url: "/blog" }  // Thes properties are like the `$set_once` from above
-)
-```
-
-This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
-
-To control whether you capture identified events and person profiles, update the `person_profiles` config option:
-
-import PersonProfilesConfig from '../../product-analytics/_snippets/person-profiles-config.mdx'
-
-<PersonProfilesConfig />
+<WebIdentifiedVsAnonymous />
 
 ## Identifying users
 
