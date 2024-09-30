@@ -16,7 +16,12 @@ export const Profile = ({ className, profile }: ProfileProps) => {
             to={`/community/profiles/${profile.id}`}
         >
             <div className="w-[40px] h-[40px] rounded-full mr-[10px] overflow-hidden">
-                <Avatar className="w-[40px] object-fill" image={getAvatarURL(profile?.attributes)} />
+                <Avatar
+                    className={`w-[40px] object-fill ${
+                        profile.attributes.color ? `bg-${profile.attributes.color}` : ''
+                    }`}
+                    image={getAvatarURL(profile?.attributes)}
+                />
             </div>
             <strong>{profile.attributes.firstName || 'Anonymous'}</strong>
         </Link>
