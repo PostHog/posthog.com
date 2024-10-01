@@ -117,7 +117,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
             const token = await getJwt()
 
-            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
+            const data = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -139,7 +139,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                         },
                     },
                 }),
-            })
+            }).then((res) => res.json())
 
             posthog?.capture('squeak reply', {
                 questionId: questionID,
@@ -148,6 +148,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
             await fetchUser()
 
             await mutate()
+
+            return data
         } catch (error) {
             posthog?.capture('squeak error', {
                 source: 'useQuestion.reply',
