@@ -431,7 +431,7 @@ I still think it does need an intro, but it can be very matter of fact – i.e. 
 - How does the refund rate vary across different user segments (e.g., new vs. long-term users)?
 - Is there a correlation between refund rates and specific app versions or updates?
 
-**How to track it:** Capture events whenver a user makes a purchase and requests a refund. Then create a [trend insight with formula mode](/docs/product-analytics/trends/formulas). Set your `A-series` to your purcahse event and the `B-series` to refund event. Then type `B / A` in the formula box.
+**How to track it:** Capture events whenever a user makes a purchase and requests a refund. Then create a [trend insight with formula mode](/docs/product-analytics/trends/formulas). Set your `A-series` to your purchase event and the `B-series` to refund event. Then type `B / A` in the formula box.
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1726649288/posthog.com/contents/Screenshot_2024-09-18_at_9.47.23_AM.png"
@@ -454,7 +454,7 @@ I still think it does need an intro, but it can be very matter of fact – i.e. 
 - What are the differences between the top 10% who generate the most revenue versus the rest of the users?
 - What is the impact of customer support interactions on revenue per paying user?
 
-**How to track it:** Capture events whenver a user makes a purchase and set the amount paid as a property. Then create a [trend insight with formula mode](/docs/product-analytics/trends/formulas). Set your `A-series` to your purchase event and change the aggregation type to `Property value - sum` and select the amount paid property. Then set the `B-series` to your purchase event, but this time set the aggregation type to `Unique users`. Finally, type `B / A` in the formula box.
+**How to track it:** Capture events whenever a user makes a purchase and set the amount paid as a property. Then create a [trend insight with formula mode](/docs/product-analytics/trends/formulas). Set your `A-series` to your purchase event and change the aggregation type to `Property value - sum` and select the amount paid property. Then set the `B-series` to your purchase event, but this time set the aggregation type to `Unique users`. Finally, type `B / A` in the formula box.
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1726651534/posthog.com/contents/Screenshot_2024-09-18_at_10.25.02_AM.png"
@@ -530,7 +530,7 @@ I still think it does need an intro, but it can be very matter of fact – i.e. 
 - How does latency vary across different devices and network conditions?
 - Are there specific features or interactions that contribute to increased latency?
 
-**How to track it:** Whenver you make an API request, capture an event with time taken to receive a response. Then create a [trend](/docs/product-analytics/trends/overview) and set the aggregation type to `Property value - average`. Select the response time property.
+**How to track it:** Whenever you make an API request, capture an event with time taken to receive a response. Then create a [trend](/docs/product-analytics/trends/overview) and set the aggregation type to `Property value - average`. Select the response time property.
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1726653011/posthog.com/contents/Screenshot_2024-09-18_at_10.48.50_AM.png"
