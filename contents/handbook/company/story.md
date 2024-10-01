@@ -22,7 +22,7 @@ We got into Y Combinator's W20 batch, and just a couple of weeks after starting 
 
 We launched on [Hacker News](https://news.ycombinator.com/item?id=22376732) with our MVP, just 4 weeks after we started writing code.
 
-The response was overwhelmingly positive. We had over 300 deployments in a couple of days. 2 weeks later, we'd gone past 1,500 stars on [GitHub](https://github.com/PostHog/posthog).
+The response was overwhelmingly positive. We had over 300 deployments in a couple of days. Two weeks later, we'd gone past 1,500 stars on [GitHub](https://github.com/PostHog/posthog).
 
 Since then, we've realized that the same reasons that PostHog was appealing to us as individual developers are the reasons why many enterprise customers also find the software is very appealing. We got a lot of inbound demand, and realized we weren't just onto a cool side project, we were onto what could be a huge company.
 
