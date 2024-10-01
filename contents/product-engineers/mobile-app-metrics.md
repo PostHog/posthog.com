@@ -478,9 +478,6 @@ I still think it does need an intro, but it can be very matter of fact – i.e. 
 - What user behaviors or app interactions correlate with higher conversion rates? 
 - How do promotional offers or discounts impact the conversion rate?
 
-**Good benchmark:** Varies depending on the app type. 
-https://www.businessofapps.com/data/app-conversion-rates/
-
 **How to track it:** Capture events whenever a user views an in-app offer and also when they make a purchase. Create a [funnel](/docs/product-analytics/funnels) with these events.
 
 <ProductScreenshot
