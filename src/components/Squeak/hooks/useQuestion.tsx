@@ -48,7 +48,7 @@ const query = (id: string | number, isModerator: boolean) =>
                     sort: ['createdAt:asc'],
                     populate: {
                         profile: {
-                            fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns', 'color'],
+                            fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns', 'color', 'startDate'],
                             populate: {
                                 avatar: {
                                     fields: ['id', 'url'],

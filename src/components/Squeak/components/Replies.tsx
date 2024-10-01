@@ -108,24 +108,35 @@ type ExpandedProps = {
     replies: StrapiData<ReplyData[]>
 }
 
+const getComunityClasses = (reply, isResolution) => {
+    const profile = reply?.attributes?.profile?.data
+    const isTeamMember = !!profile?.attributes?.startDate
+    const isAI = profile?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
+    return `${isAI ? 'community-profile-ai' : isTeamMember ? 'community-profile-mod' : 'community-profile-member'}${
+        isResolution ? ' community-reply-resolution' : ''
+    }`
+}
+
 const Expanded = ({ replies }: ExpandedProps) => {
     const {
         question: {
             profile: {
                 data: { id: questionProfileID },
             },
+            resolvedBy,
         },
     } = useContext(CurrentQuestionContext)
-
     return (
         <>
             {replies.data.map((reply) => {
                 const badgeText = getBadge(questionProfileID, reply?.attributes?.profile?.data?.id)
-
                 return (
                     <li
                         key={reply.id}
-                        className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
+                        className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0 ${getComunityClasses(
+                            reply,
+                            resolvedBy?.data?.id === reply.id
+                        )}`}
                     >
                         <Reply reply={reply} badgeText={badgeText} />
                     </li>
