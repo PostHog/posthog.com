@@ -17,7 +17,7 @@ const IdealEmployeeProfile: React.FC = () => {
           <p className="mb-3">We look for adventurers. We're here to take a small company to IPO, and beyond. We will only get there if we think differently to everyone else. We're not a fit if you want a predictable career.</p>
 
           <p className="text-[15px] text-primary/75 dark:text-primary-dark/75 border border-light dark:border-dark p-2 rounded-md bg-accent dark:bg-accent-dark mb-6">
-            <TeamMember name="Joe Martin" photo className="bg-white/50 dark:bg-dark/50" /> worked as a clown, a morgue cleaner, and a chainsaw salesman before joining the Marketing team. He now leads the Customer Comms team.
+            <TeamMember name="Joe Martin" photo className="bg-white/50 dark:bg-dark/50" /> worked as a clown, a morgue cleaner, and a chainsaw salesman before joining the Marketing team. He now leads the <Link href="/teams/customer-comms">Customer Comms team</Link>.
           </p>
         </div>
 
