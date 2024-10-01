@@ -1,4 +1,4 @@
-PostHog captures identified events by default. To capture anonymous events, set the `$process_person_profile` property in events to `false`:
+PostHog captures identified events by default. To capture anonymous events, set the `$process_person_profile` property to `false`:
 
 <MultiLanguage>
 
@@ -76,7 +76,7 @@ Posthog.capture("your_event_name", %{
 })
 ```
 
-```API
+```bash
 curl -v -L --header "Content-Type: application/json" -d '{
     "api_key": "<ph_project_api_key>",
     "properties": {

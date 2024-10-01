@@ -88,22 +88,23 @@ import HowToCaptureIdentifiedEventsBackend from '../product-analytics/_snippets/
 You **can**:
 
 - Set [event properties](/docs/product-analytics/capture-events#setting-event-properties)
-- Aggregate and filter events by event properties e.g. URL, geographic location, utm source, etc.
-- Create insights like [trends](/docs/data/trends), [funnels](/docs/data/funnels), [SQL insights](/docs/product-analytics/sql) and more.
+- Aggregate and filter events by event properties e.g. URL, geographic location, UTM source.
+- Create insights like [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels), [SQL insights](/docs/product-analytics/sql) and more.
 
 You **cannot**:
 
 - Set [person properties](/docs/product-analytics/person-properties)
 - Create [cohorts](/docs/data/cohorts)
 - Filter on person properties
-- Use person properties for targeting feature flags, A/B tests, and surveys.
+- Use person properties for targeting feature flags, A/B tests, or surveys
 - Query the `persons` table using [SQL insights](/docs/product-analytics/sql)
+- Use group analytics
 
 ### What can and can't I do with identified events?
 
 You can use all of PostHog's features with identified events. There are no restrictions.
 
-### What happens to previous and future events when an anonymous user is identified? 
+### What happens to events when an anonymous user is identified? 
 
 All future events are associated with their person profile and are captured and billed as identified events.
 
@@ -111,19 +112,19 @@ All past events remain anonymous and are not changed.
 
 ### Can identified events still be "anonymous"?
 
-Yes, identified events can still be "anonymous" in the sense that they don't need to contain personal information such as name, email, phone number, etc. A person profile is still created for them, but it doesn't have to include any personal information.
+Yes, identified events can still be "anonymous" in the sense that they don't need to contain personal information such as name, email, or phone number. A person profile is still created for them, but it doesn't need to include any personal information.
 
-### Can I specify some events to be identified, and keep other events anonymous for the same users?
+### Can I specify some events to be identified and others to be anonymous for the same users?
 
-Not if you're already identified them. Once a user is identified, all _future_ events for that user are associated with their person profile and are captured as identified events.
+Not if you already identified them. Once a user is identified, all _future_ events for that user are associated with their person profile and are captured as identified events.
 
-### How do I revert back to anonymous events after identifying them?
+### How do I revert back to anonymous events after identifying?
 
 Calling [`reset()`](/docs/product-analytics/identify#3-reset-after-logout) will unlink the person profile from the user and create a new PostHog anonymous ID for capturing events. Any future events are captured as anonymous events. 
 
 However, if you capture events using the `distinct_id` used in their previously identified person profile, the events are captured as identified events. You need to use a new `distinct_id` to capture events as anonymous events.
 
-### Why are Identified events so much more expensive?
+### Why are identified events so much more expensive?
 
 Since identified events are associated with a person profile, querying them requires using resource intensive table JOINs.
 
@@ -131,12 +132,14 @@ On the other hands, anonymous events are stored in a single table and are more e
 
 ### Why does PostHog capture identified events by default?
 
-This is due to legacy reasons. Previously, all events were captured as identified events. When we added anonymous events, we didn't want to change the default behavior since that could cause issues with existing users.
+This is required for backwards compatiability. Previously, all events were captured as identified events. When we added anonymous events, we didn't want to change the default behavior since that could cause issues with existing users.
 
 However, since anonymous events are cheaper to capture, we recommend capturing them by default.
 
-### Billing FAQ
-
-#### Why am I being charged for both "events" and "persons"
+### Why am I being charged for both "events" and "persons"
 
 We're not charging you for both. The person profiles line item you see on your invoice is a number of identified events captured. The events line item is the total number of anonymous events captured.
+
+### How does my free allowance work for anonymous vs identified events?
+
+Your first one million events each month are free, regardless if they are anonymous or identified. 
