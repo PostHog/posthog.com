@@ -8,7 +8,6 @@ import { PineappleText, TeamMembers } from 'components/Job/Sidebar'
 import slugify from 'slugify'
 import { IconPineapple } from '@posthog/icons'
 import { StickerPineapple, StickerPineappleNo, StickerPineappleYes } from 'components/Stickers/Index'
-import { Spinner } from 'components/Spinner'
 
 const query = graphql`
     query CareersHero {
@@ -152,9 +151,6 @@ export const CareersHero = () => {
                 Our small teams are looking to add{' '}
                 <strong className="whitespace-nowrap">{jobs.length} team members</strong>.
             </p>
-            <p className="text-center mb-8 text-base px-4">
-                We're always open to hiring exceptional people when they come along.
-            </p>
             <section className="flex flex-col md:flex-row md:gap-4 px-4 max-w-7xl mx-auto 2xl:px-8 mb-16">
                 <div className="w-full md:w-1/4">
                     <label htmlFor="job-select" className="block md:hidden font-bold mb-1 text-center">
@@ -247,8 +243,13 @@ export const CareersHero = () => {
                         <div className="job-content mt-4">
                             <h3 className="mb-1 text-[15px]">Summary</h3>
                             {isLoading ? (
-                                <div className="flex justify-center items-center h-32">
-                                    <Spinner />
+                                <div className="space-y-1 mb-3">
+                                    <div className="bg-accent dark:bg-accent-dark h-5 w-full rounded animate-pulse" />
+                                    <div className="bg-accent dark:bg-accent-dark h-5 w-[calc(100%-3rem)] rounded animate-pulse" />
+                                    <div className="bg-accent dark:bg-accent-dark h-5 w-[calc(100%-1rem)] rounded animate-pulse" />
+                                    <div className="bg-accent dark:bg-accent-dark h-5 w-72 max-w-full rounded animate-pulse" />
+                                    <div className="md:hidden bg-accent dark:bg-accent-dark h-5 w-60 max-w-full rounded animate-pulse" />
+                                    <div className="md:hidden bg-accent dark:bg-accent-dark h-5 w-36 max-w-full rounded animate-pulse" />
                                 </div>
                             ) : (
                                 <div
