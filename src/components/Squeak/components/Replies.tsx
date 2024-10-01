@@ -110,7 +110,7 @@ type ExpandedProps = {
 
 const getComunityClasses = (reply, isResolution) => {
     const profile = reply?.attributes?.profile?.data
-    const isTeamMember = profile?.attributes?.teams?.data?.length > 0
+    const isTeamMember = !!profile?.attributes?.startDate
     const isAI = profile?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
     return `${isAI ? 'community-profile-ai' : isTeamMember ? 'community-profile-mod' : 'community-profile-member'}${
         isResolution ? ' community-reply-resolution' : ''
