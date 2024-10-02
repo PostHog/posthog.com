@@ -13,7 +13,7 @@ A large proportion of our paying customer base sign up to a paid plan without ev
 Product-led leads can be generated in different ways:
 
 1. Customers who have an active subscription in Stripe, and are forecasted to pay a first time bill of $500 or more.
-2. Customers who have a high [lead score](/handbook/growth/sales/lead-scoring) (>=20), and have more than 1 user in the organization, but haven't yet subscribed.
+2. Customers who have a high [lead score](/handbook/growth/sales/lead-scoring) (>=20) with 50+ employees, and have more than 1 user in the organization and started sending events, but haven't yet subscribed.
 
 They follow the [normal territory assignment rules](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assignments) in Salesforce. 
 
