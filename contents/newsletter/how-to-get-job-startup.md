@@ -63,7 +63,7 @@ Strong cover letters we’ve received recently included the following:
 * Style and language that reflected our company culture.
 * Examples of personal projects they’ve worked on with links.
 * Really clear info on what they’re looking for and their availability.
-* Something that made them stand out. [Marcus](/community/profiles/30211), one of our support engineers, [opened a PR](/PostHog/posthog.com/pull/4922) to add him to the team page. Others have created PRs to update our docs, or raised useful product issues. When done well, we do notice these things.
+* Something that made them stand out. [Marcus](/community/profiles/30211), one of our support engineers, [opened a PR](https://github.com/PostHog/posthog.com/pull/4922) to add him to the team page. Others have created PRs to update our docs, or raised useful product issues. When done well, we do notice these things.
 
 ![Marcus' cover letter](https://res.cloudinary.com/dmukukwp6/image/upload/marcus_2f0952c1a4.png)
 
