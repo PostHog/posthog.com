@@ -41,8 +41,8 @@ const product = {
     freeTier: '1,000,000 requests',
 }
 
-const team = 'Feature Success'
-const teamSlug = '/teams/feature-success'
+const team = 'Experiments'
+const teamSlug = '/teams/experiments'
 
 const featuresPerRow = 3
 const features = [

@@ -117,8 +117,10 @@ export const CareersHero = () => {
         Math.round(
             (selectedTeam.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length /
                 teamLength) *
-                100
+            100
         )
+
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const parser = new DOMParser()
@@ -139,6 +141,7 @@ export const CareersHero = () => {
 
         setProcessedHtml(content)
         setSelectedTeamName(teams[0])
+        setIsLoading(false)
     }, [selectedJob])
 
     return (
@@ -173,17 +176,15 @@ export const CareersHero = () => {
                             return (
                                 <li key={job.fields.title} className="">
                                     <button
-                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${
-                                            selectedJob.fields.title === job.fields.title
-                                                ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
-                                                : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
-                                        }`}
+                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${selectedJob.fields.title === job.fields.title
+                                            ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
+                                            : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                                            }`}
                                         onClick={() => setSelectedJob(job)}
                                     >
                                         <span
-                                            className={`font-semibold text-[15px] ${
-                                                selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
-                                            }`}
+                                            className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
+                                                }`}
                                         >
                                             {job.fields.title}
                                         </span>
@@ -213,40 +214,49 @@ export const CareersHero = () => {
                         <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                             <Detail
                                 title="Location"
-                                value={`Remote${
-                                    selectedJob.parent.customFields.find(
+                                value={`Remote${selectedJob.parent.customFields.find(
+                                    (field: { title: string }) => field.title === 'Location(s)'
+                                )?.value
+                                    ? ` (${selectedJob.parent.customFields.find(
                                         (field: { title: string }) => field.title === 'Location(s)'
-                                    )?.value
-                                        ? ` (${
-                                              selectedJob.parent.customFields.find(
-                                                  (field: { title: string }) => field.title === 'Location(s)'
-                                              ).value
-                                          })`
-                                        : ''
-                                }`}
+                                    ).value
+                                    })`
+                                    : ''
+                                    }`}
                                 icon={<Location />}
                             />
                             {selectedJob.parent.customFields.find(
                                 (field: { title: string }) => field.title === 'Timezone(s)'
                             )?.value && (
-                                <Detail
-                                    title="Timezone(s)"
-                                    value={
-                                        selectedJob.parent.customFields.find(
-                                            (field: { title: string }) => field.title === 'Timezone(s)'
-                                        ).value
-                                    }
-                                    icon={<Timezone />}
-                                />
-                            )}
+                                    <Detail
+                                        title="Timezone(s)"
+                                        value={
+                                            selectedJob.parent.customFields.find(
+                                                (field: { title: string }) => field.title === 'Timezone(s)'
+                                            ).value
+                                        }
+                                        icon={<Timezone />}
+                                    />
+                                )}
                         </ul>
 
                         <div className="job-content mt-4">
                             <h3 className="mb-1 text-[15px]">Summary</h3>
-                            <div
-                                dangerouslySetInnerHTML={{ __html: processedHtml }}
-                                className="[&_summary]:hidden [&_p]:text-[15px] relative max-h-56 overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
-                            />
+                            {isLoading ? (
+                                <div className="space-y-1 mb-3">
+                                    <div className="bg-accent dark:bg-accent-dark h-5 w-full rounded animate-pulse" />
+                                    <div className="bg-accent dark:bg-accent-dark h-5 w-[calc(100%-3rem)] rounded animate-pulse" />
+                                    <div className="bg-accent dark:bg-accent-dark h-5 w-[calc(100%-1rem)] rounded animate-pulse" />
+                                    <div className="bg-accent dark:bg-accent-dark h-5 w-72 max-w-full rounded animate-pulse" />
+                                    <div className="md:hidden bg-accent dark:bg-accent-dark h-5 w-60 max-w-full rounded animate-pulse" />
+                                    <div className="md:hidden bg-accent dark:bg-accent-dark h-5 w-36 max-w-full rounded animate-pulse" />
+                                </div>
+                            ) : (
+                                <div
+                                    dangerouslySetInnerHTML={{ __html: processedHtml }}
+                                    className="[&_summary]:hidden [&_p]:text-[15px] relative max-h-56 overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
+                                />
+                            )}
                             {selectedJob.fields.title == 'Speculative application' && (
                                 <>
                                     <p className="text-[15px]">
@@ -254,7 +264,7 @@ export const CareersHero = () => {
                                     </p>
 
                                     <p className="text-[15px]">
-                                        Don’t see a specific role listed? That doesn't mean we won't have a spot for
+                                        Don't see a specific role listed? That doesn't mean we won't have a spot for
                                         you. Send us a speculative application and let us know how you think you could
                                         contribute to PostHog.
                                     </p>
