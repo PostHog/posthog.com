@@ -15,7 +15,7 @@ Errors are captured as `$exception` events which means that you can create insig
 Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Python application.
 
 ```python
-from posthoganalytics import Posthog
+from posthog import Posthog
 
 posthog = Posthog("API_KEY", enable_exception_autocapture=True, ...)
 ```
@@ -23,7 +23,7 @@ posthog = Posthog("API_KEY", enable_exception_autocapture=True, ...)
 If you're using Django 4.2+, you can enable the exception autocapture integration which will also automatically capture Django errors.
 
 ```python
-from posthoganalytics.exception_capture import Integrations
+from posthog.exception_capture import Integrations
 
 Posthog("API_KEY", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
 ```
