@@ -1420,6 +1420,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/nuxt',
                         },
                         {
+                            name: 'Remix',
+                            url: '/docs/advanced/proxy/remix',
+                        },
+                        {
                             name: 'Vercel',
                             url: '/docs/advanced/proxy/vercel',
                         },
