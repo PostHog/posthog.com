@@ -14,6 +14,8 @@ import IdentifiedVsAnonymousIntro from '../product-analytics/_snippets/identifie
 
 <IdentifiedVsAnonymousIntro />
 
+![Anonymous vs identified events](https://res.cloudinary.com/dmukukwp6/image/upload/v1727855989/posthog.com/contents/anon-vs-identifd.png)
+
 ## How to capture anonymous events
 
 import HowToCaptureAnonymousEventsBackend from '../product-analytics/_snippets/how-to-capture-anonymous-backend-and-api.mdx'
@@ -108,7 +110,7 @@ You can use all of PostHog's features with identified events. There are no restr
 
 All future events are associated with their person profile and are captured and billed as identified events.
 
-All past events remain anonymous and are not changed.
+Past events are attributed to the person, but are otherwise unchanged. This means that past events remain billed as anonymous.
 
 ### Can identified events still be "anonymous"?
 
@@ -126,9 +128,9 @@ However, if you capture events using the `distinct_id` used in their previously 
 
 ### Why are identified events so much more expensive?
 
-Since identified events are associated with a person profile, querying them requires using resource intensive table JOINs.
+Since identified events are associated with a person profile, processing and querying them requires using resource intensive table JOINs. On the other hand, anonymous events are stored in a single table and are more efficient to query.
 
-On the other hands, anonymous events are stored in a single table and are more efficient to query.
+This [post](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper) goes into more detail.
 
 ### Why does PostHog capture identified events by default?
 

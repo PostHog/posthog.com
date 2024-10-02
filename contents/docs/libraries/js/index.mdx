@@ -39,16 +39,6 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 <WebSendEvents />
 
-## Setting person properties
-
-To do: add snippet
-
-## Anonymous vs identfied events
-
-import WebIdentifiedVsAnonymous from '../../product-analytics/_snippets/web-anonymous-vs-identified.mdx'
-
-<WebIdentifiedVsAnonymous />
-
 ## Identifying users
 
 > We strongly recommend reading our docs on [identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
@@ -86,6 +76,37 @@ If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
 ```js-web
 posthog.reset(true)
 ```
+
+## Anonymous vs identfied events
+
+import WebIdentifiedVsAnonymous from '../../product-analytics/_snippets/web-anonymous-vs-identified.mdx'
+
+<WebIdentifiedVsAnonymous />
+
+## Setting person properties
+
+To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+
+```js-web
+posthog.capture(
+  'event_name',
+  {
+    $set: { name: 'Max Hedgehog'  },
+    $set_once: { initial_url: '/blog' },
+  }
+)
+```
+
+Typically, person properties are set when an event occurs like `user updated email` but there may be occasions where you want to set person properties as its own event. 
+
+```javascript
+posthog.setPersonProperties(
+    { name: "Max Hedgehog" }, // These properties are like the `$set` from above
+    { initial_url: "/blog" }  // These properties are like the `$set_once` from above
+)
+```
+
+This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
 ## Super Properties
 

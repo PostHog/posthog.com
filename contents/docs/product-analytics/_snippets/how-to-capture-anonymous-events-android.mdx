@@ -1,6 +1,6 @@
 PostHog captures identified events by default. To change this and capture anonymous events, change the `person_profiles` [config](/docs/libraries/android#all-configuration-options) when initializing PostHog:
 
-1. `personProfiles: 'PersonProfiles.ALWAYS'` _(default)_ - We capture identified events for all events.
+1. `personProfiles: 'PersonProfiles.ALWAYS'` _(default)_ - Capture identified events for all events.
 
 2. `personProfiles: PersonProfiles.IDENTIFIED_ONLY` _(recommended)_ - Anonymous events are captured by default. PostHog only captures identified events for users where [person profiles](/docs/data/persons) have already been created.
 
