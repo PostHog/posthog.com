@@ -32,8 +32,8 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Data Warehouse | [Team Data Warehouse](teams/data-warehouse)  | <span class="lemon-tag gh-tag">feature/data-warehouse</span> |
 | Error tracking | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |
 | Events | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
-| Experimentation | [Team Feature Success][Team Feature Success] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
-| Feature Flags | [Team Feature Success][Team Feature Success]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
+| Experimentation | [Team Experimentation][Team Experimentation] |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
+| Feature Flags | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Group Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
 | HogQL | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Heatmaps | [Team Replay][Team Replay] | <span class="lemon-tag gh-tag">feature/heatmaps</span> |
@@ -56,6 +56,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Session Analytics | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
 | Settings (personal & project) | [@benjackwhite][@benjackwhite]   |  <span class="lemon-tag gh-tag">feature/settings</span> |
 | SSO | [@mariusandra][@mariusandra]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
+| Surveys | [Team Surveys][Team Surveys] | <span class="lemon-tag gh-tag">feature/surveys</span> |
 | Toolbar | [Team Replay][Team Replay]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
 | Web Analytics                            | [Team Web Analytics][Team Web Analytics]                                                                   | <span class="lemon-tag gh-tag">feature/web-analytics</span>        |
 | Webhook delivery service | [Team Pipeline][Team Pipeline] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
