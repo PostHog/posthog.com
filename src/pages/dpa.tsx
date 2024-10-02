@@ -1273,7 +1273,6 @@ function DpaGenerator() {
                                 notifies Processor that Company identifies and treats genetic data, data relating to
                                 sexual orientation, biometric data processed for the purpose of uniquely identifying
                                 data subjects and data relating to criminal convictions and offenses as sensitive].
-                                that:
                             </p>
 
                             {/* <div className="pl-8 pb-2">
@@ -1317,24 +1316,114 @@ function DpaGenerator() {
                                 Appendices to the UK Standard Contractual Clauses being as set out in Annex I and II of
                                 this Agreement
                             </p>
-                            {/* <div className="pl-8 pb-2">
-                                        <p>
-                                            10.4.1. the details of the parties in table 1 shall be as set out in Annex I
-                                            (with no requirement for signature);
-                                        </p>
-                                        <p>
-                                            10.4.2. for the purposes of table 2, the Addendum shall be appended to the
-                                            EU Standard Contractual Clauses as defined above (including the selection of
-                                            modules and options and the disapplication of optional clauses as noted
-                                            above); and
-                                        </p>
-                                        <p>
-                                            10.4.3. the appendix information listed in table 3 is set out in Annex I and
-                                            II.
-                                        </p>
-                                    </div> */}
+                            <p className="pl-8 pb-2">
+                                In relation to the EU Standard Contractual Clauses, the Parties agree that:
+                            </p>
+                            <div className="pl-8 pb-2">
+                                <p>
+                                    10.4.1. for the purposes of clause 9, option 2 (general written authorization for
+                                    subprocessors) shall apply and the Parties agree that the time period for notifying
+                                    changes to the list shall be in accordance with Clause 5.3 above;
+                                </p>
+                                <p>
+                                    10.4.2. for the purposes of clause 17, the clauses shall be governed by the laws of{' '}
+                                    <Tooltip
+                                        content={() => (
+                                            <>
+                                                Fill out the form <span className="md:hidden">at the top</span>
+                                                <span className="hidden md:inline-block">to the left</span> populate
+                                                these fields
+                                            </>
+                                        )}
+                                        placement="top"
+                                        className="[&_button]:cursor-auto"
+                                    >
+                                        <span className="relative">
+                                            <button type="button">
+                                                <label
+                                                    htmlFor="jurisdiction"
+                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                >
+                                                    {jurisdiction ? jurisdiction : '[JURISDICTION]'}
+                                                </label>
+                                            </button>
+                                        </span>
+                                    </Tooltip>
+                                </p>
+                                <p>
+                                    10.4.3. for the purposes of clause 18, the courts of{' '}
+                                    <Tooltip
+                                        content={() => (
+                                            <>
+                                                Fill out the form <span className="md:hidden">at the top</span>
+                                                <span className="hidden md:inline-block">to the left</span> populate
+                                                these fields
+                                            </>
+                                        )}
+                                        placement="top"
+                                        className="[&_button]:cursor-auto"
+                                    >
+                                        <span className="relative">
+                                            <button type="button">
+                                                <label
+                                                    htmlFor="jurisdiction"
+                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                >
+                                                    {jurisdiction ? jurisdiction : '[JURISDICTION]'}
+                                                </label>
+                                            </button>
+                                        </span>
+                                    </Tooltip>{' '}
+                                    shall have jurisdiction; and
+                                </p>
+                                <p>
+                                    10.4.4. for the purposes of clause 13 and Annex I.C, the
+                                    <Tooltip
+                                        content={() => (
+                                            <>
+                                                Fill out the form <span className="md:hidden">at the top</span>
+                                                <span className="hidden md:inline-block">to the left</span> populate
+                                                these fields
+                                            </>
+                                        )}
+                                        placement="top"
+                                        className="[&_button]:cursor-auto"
+                                    >
+                                        <span className="relative">
+                                            <button type="button">
+                                                <label
+                                                    htmlFor="supervisoryAuthority"
+                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                >
+                                                    {supervisoryAuthority
+                                                        ? supervisoryAuthority
+                                                        : '[SUPERVISORY AUTHORITY]'}
+                                                </label>
+                                            </button>
+                                        </span>
+                                    </Tooltip>
+                                </p>
+                            </div>
                             <p>
-                                10.5. In relation to Swiss Personal Data that is transferred outside of the Protected
+                                10.5. In relation to the UK Standard Contractual Clauses, as permitted by clause 17 of
+                                such Addendum, the Parties agree to change the format of the information set out in Part
+                                1 of the Addendum so that:
+                            </p>
+                            <div className="pl-8 pb-2">
+                                <p>
+                                    10.5.1. the details of the parties in table 1 shall be as set out in Annex I (with
+                                    no requirement for signature);
+                                </p>
+                                <p>
+                                    10.5.2. for the purposes of table 2, the Addendum shall be appended to the EU
+                                    Standard Contractual Clauses as defined above (including the selection of modules
+                                    and options and the disapplication of optional clauses as noted in the definition
+                                    above); and
+                                </p>
+                                <p>10.5.3. the appendix information listed in table 3 is set out in Annex I and II.</p>
+                            </div>
+                            <p>
+                                10.6. In relation to Swiss Personal Data that is transferred outside of the Protected
                                 Area, the Parties agree that such transfers shall be subject to the EU Standard
                                 Contractual Clauses as compiled and completed in Sections 10.2 and 10.3 above, with the
                                 following amendments: (a) any references to the GDPR shall be interpreted as references
@@ -1350,11 +1439,11 @@ function DpaGenerator() {
                                 Clauses as natural persons.
                             </p>
                             <p>
-                                10.6. In the event of any conflict between this Agreement and the Standard Contractual
+                                10.7. In the event of any conflict between this Agreement and the Standard Contractual
                                 Clauses, the Standard Contractual Clauses shall prevail.
                             </p>
                             <p>
-                                10.7. In the event that a relevant European Commission decision or other valid adequacy
+                                10.8. In the event that a relevant European Commission decision or other valid adequacy
                                 method under applicable Data Protection Legislation on which the Company has relied in
                                 authorising the data transfer is held to be invalid, or that any supervisory authority
                                 requires transfers of personal data made pursuant to such decision to be suspended, or
