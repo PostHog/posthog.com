@@ -430,7 +430,7 @@ TelemetryDeck makes it easy for app developers to track things like active users
 - **GDPR compliance:** <span className="text-green text-lg">✔</span>
 - **GA data import:** <span className="text-green text-lg">✔</span>
 
-[Plausible](https://plausible.io/) is a leader in the trend of lightweight, privacy-orientated analytics tools. It's easy to use and doesn't collect any personally identifiable information. This makes it ideal for complying with GDPR, but this comes at the cost of functionality. 
+[Plausible](/blog/posthog-vs-plausible) is a leader in the trend of lightweight, privacy-orientated analytics tools. It's easy to use and doesn't collect any personally identifiable information. This makes it ideal for complying with GDPR, but this comes at the cost of functionality. 
 
 Plausible, and others like it, can only track very basic website metrics like pageviews, session duration, and referrer information. This makes it useless for apps, and significantly less powerful than Google Analytics and other alternatives in this list.
 
