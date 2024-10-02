@@ -1,12 +1,22 @@
-### Q3 2024 Objectives
+### Q4 2024 Objectives
 
-**Error tracking in beta**
-* the top 5 features implemented
-    * SDKs capture errors in one front-end and one back-end language (almost certainly JS and Python)
-    * Stack traces are actionable and human-readable
-    * Similar errors are grouped together
-    * High-volume errors trigger the Alerting system
-    * Integrated with other products such as Session replay
-* real customers using it and giving us feedback
-* integrated with CDP for notifications
-* integrated with replay for investigation
+#### Human readable stack traces for Javascript
+
+* Separate ingestion route to produce human readable stack trace from new exceptions
+* Store customer provided source map files
+
+#### Ensure scalability of query time issue grouping
+
+* Migrate to ClickHouse based overrides table for issue merging 
+
+#### Alerting via CDP
+
+* Continue implementation of custom masking via fingerprint
+* Build Hog function template
+* Add support for custom archive / snoozing rules
+
+#### Objective: Launch
+
+* Improve UI / UX of individual exceptions
+* Release to cohorts of supported users as available during beta
+* Openly available product with support for Javascript & Python
