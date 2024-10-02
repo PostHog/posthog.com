@@ -1020,10 +1020,6 @@ export const companyMenu = {
                     url: '/teams/infrastructure',
                 },
                 {
-                    name: 'Pipeline',
-                    url: '/teams/pipeline',
-                },
-                {
                     name: 'Product Analytics',
                     url: '/teams/product-analytics',
                 },
