@@ -1,5 +1,5 @@
 ---
-date: 2024-09-17
+date: 2024-10-03
 title: Did you know AI is answering our community questions?
 rootPage: /blog
 featuredImage: >-
@@ -157,7 +157,35 @@ This allowed me to configure notifications when we get feedback about an AI answ
     alt="Slack notification"
 />
 
-In some cases, we're receiving feedback that the answer _wasn't_ helpful, but after reviewing the response, the best way to accurately summarize the bulk of feedback is, "The answer is _correct,_ but I didn't _like_ the answer." (This is usually the case when a feature isn't yet supported and it's not the answer the customer was hoping for.)
+## So how's it working?
+
+Overall, it's working pretty well! In fact, it worked so well [in one case](/questions/autocapture-event-bubbling) that the original poster replied to share his delight.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/positive_reply_1_ce48f0fc3a.png" 
+    classes="rounded"
+    alt="Customer approved"
+/>
+
+In other examples, we were receiving feedback that the answer _wasn't_ helpful. But after reviewing the response, the best way to accurately summarize the bulk of feedback is: "The answer is _correct,_ but I didn't _like_ the answer." (This is usually the case when a feature isn't yet supported and it's not the answer the customer was hoping for.)
+
+This resulted in a lower overall success rate. So we modified the response options to better understand the different reasons why a response might not meet the mark.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/ai_responses_cc819a5877.png" 
+    classes="rounded"
+    alt="Response options"
+/>
+
+With these additional feedback options, we're able to use it to inform areas for improvement. For example, if someone says, _"I think this is a bug",_ we'll take a closer look. Or if they choose the _"Answer is wrong"_ option, we'll take a look into what might be missing from the documentation.
+
+It's also won over some internal support from developers on the PostHog team:
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/positive_reply_2_90d983c0e5.png" 
+    classes="rounded"
+    alt="Developer approved"
+/>
 
 ---
 
