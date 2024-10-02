@@ -862,54 +862,54 @@ function DpaGenerator() {
                             <p>
                                 We started with a promise, data in our hands,
                                 <br />
-                                You’re the controller, I’m the one who understands,
+                                You're the controller, I'm the one who understands,
                                 <br />
                                 You wanna share your secrets, let me hold the key,
                                 <br />
-                                We’ll keep it all secure, like it’s meant to be.
+                                We'll keep it all secure, like it's meant to be.
                             </p>
                             <p>
-                                We’ll follow every rule, every law, every line,
+                                We'll follow every rule, every law, every line,
                                 <br />
-                                From the EEA to the Swiss, we’ll keep it fine,
+                                From the EEA to the Swiss, we'll keep it fine,
                                 <br />
                                 No breach of trust, no whispers in the dark,
                                 <br />
-                                We’ll protect it all, every little spark.
+                                We'll protect it all, every little spark.
                             </p>
                             <p className="font-bold">
                                 This is our data dance, under moonlit skies,
                                 <br />
-                                With the GDPR watching, we’ll never compromise,
+                                With the GDPR watching, we'll never compromise,
                                 <br />
-                                I’ll be your processor, with a duty so true,
+                                I'll be your processor, with a duty so true,
                                 <br />
-                                Every byte, every bit, I’ll handle it for you.
+                                Every byte, every bit, I'll handle it for you.
                             </p>
                             <p>
-                                If there’s a breach, I’ll let you know,
+                                If there's a breach, I'll let you know,
                                 <br />
                                 In the dead of night, or the morning glow,
                                 <br />
-                                We’ll fix it fast, we’ll make it right,
+                                We'll fix it fast, we'll make it right,
                                 <br />
-                                Together we’ll stand, in this data fight.
+                                Together we'll stand, in this data fight.
                             </p>
                             <p className="font-bold">
                                 This is our data dance, under moonlit skies,
                                 <br />
-                                With the GDPR watching, we’ll never compromise,
+                                With the GDPR watching, we'll never compromise,
                                 <br />
-                                I’ll be your processor, with a duty so true,
+                                I'll be your processor, with a duty so true,
                                 <br />
-                                Every byte, every bit, I’ll handle it for you.
+                                Every byte, every bit, I'll handle it for you.
                             </p>
                             <p>
-                                In this digital world, where privacy’s the song,
+                                In this digital world, where privacy's the song,
                                 <br />
-                                We’ll keep on dancing, where we both belong,
+                                We'll keep on dancing, where we both belong,
                                 <br />
-                                With every step, we’ll take this vow,
+                                With every step, we'll take this vow,
                                 <br />
                                 To protect and cherish, here and now.
                             </p>
@@ -935,8 +935,8 @@ function DpaGenerator() {
                         </div>
                         <h2 className="!text-2xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>
-                            This Data Processing Agreement (“<strong>Agreement</strong>”) forms part of the Contract for
-                            Services (“<strong>Principal Agreement</strong>”) between{' '}
+                            This Data Processing Agreement ("<strong>Agreement</strong>") forms part of the Contract for
+                            Services ("<strong>Principal Agreement</strong>") between{' '}
                             <Tooltip
                                 content={() => (
                                     <>
@@ -956,8 +956,8 @@ function DpaGenerator() {
                                     </button>
                                 </span>
                             </Tooltip>{' '}
-                            (the “<strong>Company</strong>”) and <strong>PostHog, Inc.</strong> (the “
-                            <strong>Processor</strong>”) (together as the “<strong>Parties</strong>”).
+                            (the "<strong>Company</strong>") and <strong>PostHog, Inc.</strong> (the "
+                            <strong>Processor</strong>") (together as the "<strong>Parties</strong>").
                         </p>
                         <p>
                             In the event of a conflict between this Agreement and the provisions of related agreements,
@@ -985,83 +985,83 @@ function DpaGenerator() {
                                 Agreement shall have the following meaning:
                             </p>
                             <div className="pl-8 pb-2">
-                                <p>1.1.1. “Agreement” means this Data Processing Agreement and all Annexes;</p>
+                                <p>1.1.1. "Agreement" means this Data Processing Agreement and all Annexes;</p>
                                 <p>
-                                    1.1.2. “Company Personal Data” means any Personal Data relating to Company’s end
+                                    1.1.2. "Company Personal Data" means any Personal Data relating to Company's end
                                     users provided to or Processed by the Processor on behalf of the Company pursuant to
                                     or in connection with the Principal Agreement;
                                 </p>
                                 <p>
-                                    1.1.3. “Data Protection Laws” means all applicable laws relating to Processing of
+                                    1.1.3. "Data Protection Laws" means all applicable laws relating to Processing of
                                     Personal Data and privacy that may exist in any relevant jurisdiction, including
                                     European Data Protection Laws and US Data Protection Laws;
                                 </p>
-                                <p>1.1.4. “EEA” means the European Economic Area;</p>
+                                <p>1.1.4. "EEA" means the European Economic Area;</p>
                                 <p>
-                                    1.1.5. “EU Personal Data” means the Processing of Personal Data by the Processor to
+                                    1.1.5. "EU Personal Data" means the Processing of Personal Data by the Processor to
                                     which data protection legislation of the European Union, or of a Member State of the
                                     European Union or EEA, applies;
                                 </p>
                                 <p>
-                                    1.1.6. “European Data Protection Laws” means the GDPR, UK Data Protection Act 2018,
+                                    1.1.6. "European Data Protection Laws" means the GDPR, UK Data Protection Act 2018,
                                     the UK GDPR, ePrivacy Directive 2002/58/EC, FADP, and any associated or additional
                                     legislation in force in the EU, EEA, Member States and the United Kingdom as
                                     amended, replaced or superseded from time to time;
                                 </p>
                                 <p>
-                                    1.1.7. “FADP” means the Swiss Federal Act on Data Protection and its Ordinances, as
+                                    1.1.7. "FADP" means the Swiss Federal Act on Data Protection and its Ordinances, as
                                     amended from time to time;
                                 </p>
                                 <p>
-                                    1.1.8. “FDPIC” means the Swiss Federal Data Protection and Information Commissioner;
+                                    1.1.8. "FDPIC" means the Swiss Federal Data Protection and Information Commissioner;
                                 </p>
-                                <p>1.1.9. “GDPR” General Data Protection Regulation EU2016/679;</p>
+                                <p>1.1.9. "GDPR" General Data Protection Regulation EU2016/679;</p>
                                 <p>
-                                    1.1.10. “UK GDPR” means General Data Protection Regulation (EU) 2016/679 as
+                                    1.1.10. "UK GDPR" means General Data Protection Regulation (EU) 2016/679 as
                                     applicable as part of UK domestic law by virtue of section 3 of the European Union
                                     (Withdrawal) Act 2018 and as amended by the Data Protection, Privacy and Electronic
                                     Communications (Amendments etc) (EU Exit) Regulations 2019 (as amended);
                                 </p>
                                 <p>
-                                    1.1.11. “US Data Protection Laws” means all data privacy, data protection, and
+                                    1.1.11. "US Data Protection Laws" means all data privacy, data protection, and
                                     cybersecurity laws, rules, and regulations of the United States applicable to the
-                                    Processing of Personal Data under the Principal Agreement. “US Data Protection Laws”
+                                    Processing of Personal Data under the Principal Agreement. "US Data Protection Laws"
                                     may include, but is not limited to, the California Consumer Privacy Act of 2018, as
-                                    amended by the California Privacy Rights Act of 2020 (together, the “
-                                    <strong>CCPA</strong>”), the Colorado Privacy Act (“<strong>CPA</strong>”), the
-                                    Connecticut Data Privacy Act (“<strong>CTDPA</strong>”), the Utah Consumer Privacy
-                                    Act (“<strong>UCPA</strong>”), and the Virginia Consumer Data Protection Act (“
-                                    <strong>VACDPA</strong>”), and any binding regulations promulgated thereunder, as
+                                    amended by the California Privacy Rights Act of 2020 (together, the "
+                                    <strong>CCPA</strong>"), the Colorado Privacy Act ("<strong>CPA</strong>"), the
+                                    Connecticut Data Privacy Act ("<strong>CTDPA</strong>"), the Utah Consumer Privacy
+                                    Act ("<strong>UCPA</strong>"), and the Virginia Consumer Data Protection Act ("
+                                    <strong>VACDPA</strong>"), and any binding regulations promulgated thereunder, as
                                     amended or updated from time to time;
                                 </p>
                                 <p>
-                                    1.1.12. “Protected Area” means (i) in the case of EU Personal Data, the member
+                                    1.1.12. "Protected Area" means (i) in the case of EU Personal Data, the member
                                     states of the European Union and the EEA and any country, territory, sector or
-                                    international organisation in respect of which an adequacy decision under Art 45
+                                    international organization in respect of which an adequacy decision under Art 45
                                     GDPR is in force or (ii) in the case of UK Personal Data, the United Kingdom and any
-                                    country, territory, sector or international organisation in respect of which an
+                                    country, territory, sector or international organization in respect of which an
                                     adequacy decision under UK adequacy regulations is in force; or (iii) in the case of
-                                    Swiss Personal Data, any country, territory, sector or international organisation
-                                    which is recognised as adequate by the FDPIC or the Swiss Federal Council (as the
+                                    Swiss Personal Data, any country, territory, sector or international organization
+                                    which is recognized as adequate by the FDPIC or the Swiss Federal Council (as the
                                     case may be);
                                 </p>
                                 <p>
-                                    1.1.13. “Personal Data” means any information provided by Company to Processor that
-                                    is protected as “personal data,” “personal information,” “personally identifiable
-                                    information,” or similar terms defined in Data Protection Laws;
+                                    1.1.13. "Personal Data" means any information provided by Company to Processor that
+                                    is protected as "personal data," "personal information," "personally identifiable
+                                    information," or similar terms defined in Data Protection Laws;
                                 </p>
                                 <p>
-                                    1.1.14. “Services” means the product and data analytics services the Processor
+                                    1.1.14. "Services" means the product and data analytics services the Processor
                                     provides pursuant to the Principal Agreement , including but not limited to the
                                     provision of testing, support, product development, service improvement,
                                     benchmarking and troubleshooting activities on behalf of the Data Controller.
                                 </p>
                                 <p>
-                                    1.1.15. “Subprocessor” means any person appointed by or on behalf of Processor to
+                                    1.1.15. "Subprocessor" means any person appointed by or on behalf of Processor to
                                     Process Personal Data on behalf of the Company in connection with the Agreement.
                                 </p>
                                 <p>
-                                    1.1.16. “Standard Contractual Clauses” means (i) in respect of UK Personal Data, the
+                                    1.1.16. "Standard Contractual Clauses" means (i) in respect of UK Personal Data, the
                                     International Data Transfer Addendum to the EU Standard Contractual Clauses, issued
                                     by the Information Commissioner and laid before Parliament in accordance with s.119A
                                     of the Data Protection Act 2018 on 2 February 2022 ("UK Standard Contractual
@@ -1075,23 +1075,23 @@ function DpaGenerator() {
                                     its Statement of 27 August 2021;
                                 </p>
                                 <p>
-                                    1.1.17. “Swiss Personal Data” means personal data to which the FADP was applicable
+                                    1.1.17. "Swiss Personal Data" means personal data to which the FADP was applicable
                                     prior to its Processing by Processor;
                                 </p>
                                 <p>
-                                    1.1.18. “UK Personal Data” means the Processing of Personal Data by the Processor to
+                                    1.1.18. "UK Personal Data" means the Processing of Personal Data by the Processor to
                                     which the laws of the United Kingdom apply
                                 </p>
                             </div>
                             <p>
-                                1.2. The terms, “Controller”, “Data Subject”, “Member State”, “Personal Data”, “Personal
-                                Data Breach”, “Processing” and “Supervisory Authority” shall have the same meaning as in
+                                1.2. The terms, "Controller", "Data Subject", "Member State", "Personal Data", "Personal
+                                Data Breach", "Processing" and "Supervisory Authority" shall have the same meaning as in
                                 the GDPR and UK GDPR, and their cognate terms shall be construed accordingly with other
                                 Data Protection Laws. For example, Data Subject shall include such analogous terms as
                                 Consumer under US Data Protection Laws.
                             </p>
                             <p>
-                                1.3. The terms “sell,” “sale,” “share,” and “sharing,” and “Service Provider” shall have
+                                1.3. The terms "sell," "sale," "share," and "sharing," and "Service Provider" shall have
                                 the same meanings as in the CCPA.
                             </p>
                         </div>
@@ -1124,7 +1124,7 @@ function DpaGenerator() {
                                     Personal Data; and
                                 </p>
                                 <p>
-                                    2.2.2. not Process Company Personal Data other than on the relevant Company’s
+                                    2.2.2. not Process Company Personal Data other than on the relevant Company's
                                     documented instructions including with regard to data transfers outside of the
                                     Protected Area, unless required to do so by laws to which the Processor is subject;
                                     in such a case, Processor shall inform the Company of that legal requirement before
@@ -1132,10 +1132,10 @@ function DpaGenerator() {
                                     public interest.
                                 </p>
                                 <p>
-                                    2.2.3. notify the Company immediately if, in the Processor’s reasonable opinion, an
+                                    2.2.3. notify the Company immediately if, in the Processor's reasonable opinion, an
                                     instruction for the Processing of Personal Data given by the Company infringes
                                     applicable Data Protection Laws , it being acknowledged that the Processor shall not
-                                    be obliged to undertake additional work or screening to determine if the Company’s
+                                    be obliged to undertake additional work or screening to determine if the Company's
                                     instructions are compliant.
                                 </p>
                                 <p>2.2.4. not directly or indirectly sell or share any Personal Data;</p>
@@ -1147,7 +1147,7 @@ function DpaGenerator() {
                             </p>
                             <p>
                                 2.4. Processor acknowledges that it is a Service Provider and that all Personal Data
-                                that it may receive from Company, Company’s employees or consultants, or otherwise
+                                that it may receive from Company, Company's employees or consultants, or otherwise
                                 acquired by virtue of the performance of services under the Principal Agreement shall be
                                 regarded by Processor as strictly confidential and held by Processor in confidence.
                             </p>
@@ -1163,8 +1163,8 @@ function DpaGenerator() {
                             <p>
                                 2.7. Company, upon written notice, may take reasonable and appropriate steps to stop and
                                 remediate unauthorized use of Personal Data, including without limitation, exercising
-                                Company’s right to conduct an audit of Processor, or terminating the Principal Agreement
-                                and exercising Company’s right to request deletion or return of Personal Data.
+                                Company's right to conduct an audit of Processor, or terminating the Principal Agreement
+                                and exercising Company's right to request deletion or return of Personal Data.
                             </p>
                         </div>
                         <p>
@@ -1197,8 +1197,8 @@ function DpaGenerator() {
                         </p>
                         <div className="pl-8 pb-2">
                             <p>
-                                5.1. The Company provides Processor with general authorisation to engage the
-                                Subprocessors set out in Annex III. These will differ depending on the Data Centre
+                                5.1. The Company provides Processor with general authorization to engage the
+                                Subprocessors set out in Annex III. These will differ depending on the Data Center
                                 Location chosen by the Company.
                             </p>
                             <p>
@@ -1215,16 +1215,16 @@ function DpaGenerator() {
                             </p>
                             <p>
                                 5.4. If the Company objects to a Subprocessor, the Company shall notify Processor
-                                thereof in writing within seven (7) days after receipt of Processor’s updated
-                                Subprocessors’ list. If the Company objects to the use of the Subprocessor, Processor
+                                thereof in writing within seven (7) days after receipt of Processor's updated
+                                Subprocessors' list. If the Company objects to the use of the Subprocessor, Processor
                                 shall use efforts to address the objection through one of the following options: (a)
                                 Processor will cancel its plans to use Subprocessor with regard to Company Personal Data
                                 or will offer an alternative to provide the Services without such Subprocessor; or (b)
                                 Processor will take any corrective steps requested by the Company in its objection
-                                (which would therefore remove the Company’s objection) and proceed to use Subprocessor.
+                                (which would therefore remove the Company's objection) and proceed to use Subprocessor.
                                 If none of the above options are reasonably available and the objection has not been
-                                sufficiently addressed within thirty (30) days after Processor’s receipt of the
-                                Company’s objection, the Company may terminate the affected Service with reasonable
+                                sufficiently addressed within thirty (30) days after Processor's receipt of the
+                                Company's objection, the Company may terminate the affected Service with reasonable
                                 prior written notice.
                             </p>
                         </div>
@@ -1234,8 +1234,8 @@ function DpaGenerator() {
                         <div className="pl-8 pb-2">
                             <p>
                                 6.1. Taking into account the nature of the Processing, Processor shall assist the
-                                Company by implementing appropriate technical and organisational measures, insofar as
-                                this is possible, for the fulfilment of the Company obligations, as reasonably
+                                Company by implementing appropriate technical and organizational measures, insofar as
+                                this is possible, for the fulfillment of the Company obligations, as reasonably
                                 understood by Company, to respond to requests to exercise Data Subject rights under
                                 applicable Data Protection Laws.
                             </p>
@@ -1263,8 +1263,8 @@ function DpaGenerator() {
                         <p>
                             6.4. To the extent that assistance under this Agreement is not included within the Services,
                             the Processor may charge a reasonable fee for any such assistance, save where assistance was
-                            required directly as a result of the Processor’s own acts or omissions, in which case such
-                            assistance will be at the Processor’s expense.
+                            required directly as a result of the Processor's own acts or omissions, in which case such
+                            assistance will be at the Processor's expense.
                         </p>
                         <p>
                             <strong>7. Personal Data Breach</strong>
@@ -1308,12 +1308,12 @@ function DpaGenerator() {
                         </div>
 
                         <p>
-                            <strong>10. Data Centre Location and Transfers Outside of the Protected Area</strong>
+                            <strong>10. Data Center Location and Transfers Outside of the Protected Area</strong>
                         </p>
                         <div className="pl-8 pb-2">
                             <p>
                                 10.1. <strong>Storage of Personal Data.</strong> Company Personal Data will be housed in
-                                data centres located in the Data Centre Location set out in the Principal Agreement
+                                data centers located in the Data Center Location set out in the Principal Agreement
                                 unless the parties otherwise expressly agree in writing.
                             </p>
                             <p>
@@ -1324,20 +1324,20 @@ function DpaGenerator() {
                             <p>
                                 10.3. <strong>Data Privacy Framework.</strong> Processor confirms that it participates
                                 in the EU-US Data Privacy Framework and the UK Extension to this Framework (together,
-                                the “DPF”). The Supplier undertakes to maintain its self-certification to the DPF; to
+                                the "DPF"). The Supplier undertakes to maintain its self-certification to the DPF; to
                                 notify Company without undue delay if Processor determines that it will cease to
-                                self-certify to the DPF; and to notify Company immediately if Processor’s participation
+                                self-certify to the DPF; and to notify Company immediately if Processor's participation
                                 in the DPF is otherwise terminated. [In respect of UK Personal Data, Company hereby
                                 notifies Processor that Company identifies and treats genetic data, data relating to
                                 sexual orientation, biometric data processed for the purpose of uniquely identifying
-                                data subjects and data relating to criminal convictions and offences as sensitive].
+                                data subjects and data relating to criminal convictions and offenses as sensitive].
                                 that:
                             </p>
 
                             {/* <div className="pl-8 pb-2">
                                         <p>
                                             10.3.1. for the purposes of clause 9, option 2 (general written
-                                            authorisation for subprocessors) shall apply and the Parties agree that the
+                                            authorization for subprocessors) shall apply and the Parties agree that the
                                             time period for notifying changes to the list shall be in accordance with
                                             Clause 5.3 above;
                                         </p>
@@ -1368,8 +1368,8 @@ function DpaGenerator() {
                             <p>
                                 10.4. <strong>Standard Contractual Clauses.</strong> Notwithstanding 10.3, the parties
                                 agree to comply with the obligations set out in the Standard Contractual Clauses as
-                                though they were set out in full in this Agreement, with the Company as the “data
-                                exporter” and the Processor as the “data importer”, with the parties signatures and
+                                though they were set out in full in this Agreement, with the Company as the "data
+                                exporter" and the Processor as the "data importer", with the parties signatures and
                                 dating of this Agreement being deemed to be the signature and dating of the Standard
                                 Contractual Clauses and with Annexes to EU Standard Contractual Clauses and the
                                 Appendices to the UK Standard Contractual Clauses being as set out in Annex I and II of
@@ -1428,7 +1428,7 @@ function DpaGenerator() {
                             <p>
                                 11.1. <em>Confidentiality.</em> Each Party must keep this Agreement and information it
                                 receives about the other Party and its business in connection with this Agreement
-                                (“Confidential Information”) confidential and must not use or disclose that Confidential
+                                ("Confidential Information") confidential and must not use or disclose that Confidential
                                 Information without the prior written consent of the other Party except to the extent
                                 that:
                             </p>
@@ -1495,7 +1495,7 @@ function DpaGenerator() {
                             <strong>Categories of data subjects</strong>
                         </p>
                         <p>The personal data processed relates to the following categories of data subjects:</p>
-                        <p>Company’s end users (including prospects, customer and contractors)</p>
+                        <p>Company's end users (including prospects, customer and contractors)</p>
 
                         <p>
                             <strong>Categories of personal data processed</strong>
@@ -1642,12 +1642,12 @@ function DpaGenerator() {
                             <p>
                                 <em>Categories of data subjects whose personal data is transferred:</em>
                             </p>
-                            <p>See ‘A. Processing Activities’ above</p>
+                            <p>See ‘A. Processing Activities' above</p>
 
                             <p>
                                 <em>Categories of personal data transferred:</em>
                             </p>
-                            <p>See ‘A. Processing Activities’ above</p>
+                            <p>See ‘A. Processing Activities' above</p>
 
                             <p>
                                 <em>
@@ -1671,7 +1671,7 @@ function DpaGenerator() {
                             <p>
                                 <em>Nature of the processing/ processing operations:</em>
                             </p>
-                            <p>See ‘A. Processing Activities’ above.</p>
+                            <p>See ‘A. Processing Activities' above.</p>
 
                             <p>
                                 <em>
@@ -1679,7 +1679,7 @@ function DpaGenerator() {
                                     Clauses only):
                                 </em>
                             </p>
-                            <p>See ‘A. Processing Activities’ above.</p>
+                            <p>See ‘A. Processing Activities' above.</p>
 
                             <p>
                                 <em>
@@ -1687,7 +1687,7 @@ function DpaGenerator() {
                                     the criteria used to determine that period (EU Standard Contractual Clauses only):
                                 </em>
                             </p>
-                            <p>See ‘A. Processing Activities’ above.</p>
+                            <p>See ‘A. Processing Activities' above.</p>
 
                             <p>
                                 <em>
@@ -1695,7 +1695,7 @@ function DpaGenerator() {
                                     Clauses only):
                                 </em>
                             </p>
-                            <p>See ‘A. Processing Activities’ above.</p>
+                            <p>See ‘A. Processing Activities' above.</p>
                         </div>
 
                         <p className="text-center mt-12 !mb-0 !pb-0">
