@@ -21,6 +21,10 @@ A bounce is a session where the user only had one pageview, no autocaptures, and
 
 PostHog uses autocaptured events to calculate this. To make sure this value is accurate, make sure you enable [autocapture](/docs/product-analytics/autocapture) and are capturing both `$pageleave` and `$autocapture` events.
 
+## LCP Score
+
+LCP stands for "Largest Contentful Paint", and is a Web vitals metric that measures how long it takes for the largest content element on a page to load. To calculate the score, we take the 75th percentile of the LCP values for the first pageview of each session. A good LCP score is less than 2.5 seconds, and a poor score is more than 4 seconds.
+
 ## Paths
 
 Top paths and top entry paths drill down into specific pages on your site to show their views, visitors, bounce rate, and scroll depth. You can click on any of the paths to filter the dashboard for that path.
