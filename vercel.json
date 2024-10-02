@@ -823,7 +823,7 @@
         { "source": "/apps/outfunnel-exporter", "destination": "/cdp/outfunnel-exporter" },
         { "source": "/apps/pace-integration", "destination": "/cdp/pace-integration" },
         { "source": "/apps/pagerduty-connector", "destination": "/cdp/" },
-        { "source": "/apps/patterns-connector", "destination": "/cdp/patterns-connector" },
+        { "source": "/apps/patterns-connector", "destination": "/docs/cdp" },
         { "source": "/apps/postgres-export", "destination": "/cdp/postgres-export" },
         { "source": "/apps/property-filter", "destination": "/cdp/property-filter" },
         { "source": "/apps/property-flattener", "destination": "/cdp/" },
@@ -888,7 +888,7 @@
         { "source": "/docs/apps/outfunnel-exporter", "destination": "/docs/cdp/outfunnel-exporter" },
         { "source": "/docs/apps/pace-integration", "destination": "/docs/cdp/pace-integration" },
         { "source": "/docs/apps/pagerduty-connector", "destination": "/docs/cdp" },
-        { "source": "/docs/apps/patterns-connector", "destination": "/docs/cdp/patterns-connector" },
+        { "source": "/docs/apps/patterns-connector", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/postgres-export", "destination": "/docs/cdp/postgres-export" },
         { "source": "/docs/apps/property-filter", "destination": "/docs/cdp/property-filter" },
         { "source": "/docs/apps/property-flattener", "destination": "/docs/cdp/" },
@@ -952,6 +952,7 @@
         { "source": "/tutorials/how-to-segment-users", "destination": "/tutorials/power-users" },
         { "source": "/tutorials/stripe-payment-data", "destination": "/tutorials/stripe-reports" },
         { "source": "/tutorials/delayed-survey", "destination": "/docs/surveys/creating-surveys#customization" },
+        { "source": "/tutorials/how-to-connect-patterns-and-posthog", "destination": "/docs/cdp/" },
         { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" },
 
         { "source": "/james", "destination": "/community/profiles/27732" },
@@ -1254,6 +1255,7 @@
         { "source": "/cdp/bigquery-export", "destination": "/docs/cdp/batch-exports/bigquery" },
         { "source": "/cdp/rudderstack-import", "destination": "/docs/libraries/rudderstack" },
         { "source": "/cdp/airbyte-export", "destination": "/docs/cdp" },
+        { "source": "/cdp/patterns-connector", "destination": "/docs/cdp" },
         { "source": "/docs/apps/build/types", "destination": "/docs/cdp/build#types" },
         { "source": "/docs/apps/build/tutorial", "destination": "/docs/cdp/build/tutorial" },
         { "source": "/docs/apps/build/testing", "destination": "/docs/cdp/build/reference#writing-tests" },
@@ -1340,9 +1342,31 @@
             "source": "/handbook/growth/sales/icp",
             "destination": "/handbook/growth/marketing/icp"
         },
-      {
+        {
             "source": "/teams/pipeline",
             "destination": "/teams/cdp"
-        }
+        },
+        {
+            "source": "/teams/feature-success",
+            "destination": "/teams/feature-flags"
+        },
+        { "source": "/docs/cdp/airbyte-export", "destination": "/docs/cdp/batch-exports" },
+        { "source": "/docs/cdp/avo-inspector", "destination": "/docs/cdp/destinations/avo" },
+        { "source": "/docs/cdp/customer-io", "destination": "/docs/cdp/destinations/customerio" },
+        { "source": "/docs/cdp/engage-connector", "destination": "/docs/cdp/destinations/engage" },
+        { "source": "/docs/cdp/google-pub-sub-connector", "destination": "/docs/cdp/destinations/google-pubsub" },
+        { "source": "/docs/cdp/google-cloud-export", "destination": "/docs/cdp/destinations/google-cloud-storage" },
+        { "source": "/docs/cdp/hubspot-connector", "destination": "/docs/cdp/destinations/hubspot" },
+        { "source": "/docs/cdp/intercom", "destination": "/docs/cdp/destinations/intercom" },
+        { "source": "/docs/cdp/laudspeaker-connector", "destination": "/docs/cdp/destinations/laudspeaker" },
+        { "source": "/docs/cdp/rudderstack-export", "destination": "/docs/cdp/destinations/rudderstack" },
+        { "source": "/docs/cdp/salesforce-connector", "destination": "/docs/cdp/destinations/salesforce" },
+        { "source": "/docs/cdp/sendgrid-connector", "destination": "/docs/cdp/destinations/sendgrid" },
+        { "source": "/docs/cdp/variance-connector", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/pace-integration", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/memphis-exporter", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/outfunnel-exporter", "destination": "/docs/cdp/destinations" },
+        { "source": "/docs/cdp/route-censor", "destination": "/docs/cdp" },
+        { "source": "/docs/cdp/semver-flattener", "destination": "/docs/cdp" }
     ]
 }

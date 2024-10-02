@@ -50,6 +50,15 @@ PostHog.alias("distinct_id")
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
+## Person Profiles ("anonymous" vs "identified" persons)
+
+The default behavior for this SDK is to use the `IDENTIFIED_ONLY` mode of person processing, but this can be changed in the config. The options are:
+- `IDENTIFIED_ONLY`
+- `NEVER`
+- `ALWAYS`
+
+See [person profiles](/docs/data/persons) for more info.
+
 ## Setting person properties
 
 To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `userProperties` and `userPropertiesSetOnce`.
@@ -256,8 +265,25 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     // Callback that allows to sanitize the event properties (not set by default)
     propertiesSanitizer = { properties -> ... }
 
-    // Enable Recording of Session Replays. (off/false by default)
+    // Hook for encrypt and decrypt events
+    // Devices are sandbox already
+    // Defaults to no encryption
+    encryption = object : PostHogEncryption { ... }
+
+    // Hook that allows for modification of the default mechanism for
+    // generating anonymous id (which as of now is just random UUID v7)
+    getAnonymousId = { ... }
+
+    // Determines the behavior for processing user profiles.
+    // Defaults to PersonProfiles.IDENTIFIED_ONLY
+    personProfiles = PersonProfiles.IDENTIFIED_ONLY
+
+    // Enable Recording of Session Replay. (off/false by default)
     // Experimental support
     sessionReplay = false
+
+    // Session Replay configuration
+    // Experimental support
+    sessionReplayConfig = PostHogSessionReplayConfig(...)
 }
 ```

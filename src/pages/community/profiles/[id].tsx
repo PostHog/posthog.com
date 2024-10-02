@@ -32,7 +32,7 @@ import NotFoundPage from 'components/NotFoundPage'
 const Avatar = (props: { className?: string; src?: string }) => {
     return (
         <div
-            className={`overflow-hidden aspect-square rounded-full bg-white border border-light dark:border-dark ${props.className}`}
+            className={`overflow-hidden aspect-square rounded-full border border-light dark:border-dark ${props.className}`}
         >
             {props.src ? (
                 <img className="w-full object-fill" alt="" src={props.src} />
@@ -254,7 +254,11 @@ export default function ProfilePage({ params }: PageProps) {
                                 <section className="">
                                     <div className="relative w-48 h-48 float-right -mt-12">
                                         <Avatar
-                                            className=" bg-gray-accent dark:gray-accent-dark"
+                                            className={`${
+                                                profile.color
+                                                    ? `bg-${profile.color}`
+                                                    : 'bg-gray-accent dark:gray-accent-dark'
+                                            }`}
                                             src={getAvatarURL(profile)}
                                         />
                                         {isTeamMember && (
@@ -577,7 +581,12 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
                                                   .map((profile) => {
                                                       return (
                                                           <li key={profile.id} className="flex items-center space-x-2">
-                                                              <Avatar className="w-8 h-8" src={getAvatarURL(profile)} />
+                                                              <Avatar
+                                                                  className={`w-8 h-8 bg-${
+                                                                      profile.attributes.color ?? 'white'
+                                                                  }`}
+                                                                  src={getAvatarURL(profile)}
+                                                              />
                                                               <a href={`/community/profiles/${profile.id}`}>
                                                                   {profile.attributes?.firstName}{' '}
                                                                   {profile.attributes?.lastName}
