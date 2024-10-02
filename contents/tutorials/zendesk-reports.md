@@ -13,14 +13,14 @@ In this tutorial, we show how you can create Zendesk reports in PostHog by conne
 
 ## Linking Zendesk data to PostHog
 
-To start, you need both Zendesk and PostHog accounts. Once you have those, head to PostHog's [data warehouse tab](https://us.posthog.com/data-warehouse) and:
+To start, you need both Zendesk and PostHog accounts. Once you have those, head to PostHog's [data pipeline sources tab](https://us.posthog.com/pipeline/sources) and:
 
-1. Click **Link source**
+1. Click **New source**
 2. Choose the Zendesk option by clicking **Link**
 3. Enter your Zendesk subdomain (like `posthoghelp` for `https://posthoghelp.zendesk.com/`), [API key](https://support.zendesk.com/hc/en-us/articles/4408889192858-Managing-access-to-the-Zendesk-API#topic_bsw_lfg_mmb),  email, table prefix (optional), and then press **Next**
 4. Select the tables you want to import as well as your sync methods, and press **Import**
 
-Once done, PostHog will automatically pull and format your Zendesk data for querying. You can adjust the sync frequency, see the last successful run, and more in [data warehouse settings](https://us.posthog.com/data-warehouse/settings/managed).
+Once done, PostHog will automatically pull and format your Zendesk data for querying. You can adjust the sync frequency, see the last successful run, and more in [data pipeline sources tab](https://us.posthog.com/pipeline/sources).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/zd_link_d66a49cdc7.png"
@@ -34,6 +34,8 @@ Once done, PostHog will automatically pull and format your Zendesk data for quer
 ## Creating insights for your Zendesk report
 
 Now that your Zendesk data is synced into PostHog, you can use it to create insights for your report. Each requires you to create a [new insight in the product analytics tab](https://us.posthog.com/project/insights/new).
+
+> **Want to get started fast?** Check out our [Zendesk starter report template](/templates/zendesk-report-dashboard).
 
 ### Ticket count
 

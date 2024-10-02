@@ -24,7 +24,7 @@ Autocapture is available for our [JavaScript Web](/docs/libraries/js), [React](/
 
 ### Reducing events with an allow and ignorelist
 
-Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using `allowlists` and `ignorelists`. 
+Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using `allowlists` and `ignorelists` (NB some options use allow behavior and some use ignore behavior. 
 
 These are an array of events, URLs, elements, and CSS selectors that you want autocapture to allow or ignore.
 
@@ -36,6 +36,8 @@ posthog.init('<ph_project_api_key>', {
     autocapture: {
         dom_event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
         url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
+        // url_ignorelist can be used on its own, or combined with url_allowlist to further filter which URLs are captured
+        url_ignorelist: ['posthog.com./docs/.*/secret-section/.*'], // strings or RegExps
         element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
         css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
         element_attribute_ignorelist:['data-attr-pii="email"'], // List of element attributes to ignore

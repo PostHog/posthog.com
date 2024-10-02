@@ -10,7 +10,7 @@ As Support Hero, your job is to investigate and resolve issues reported by custo
 
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-<TeamMember name="Marcus Hof" /> and <TeamMember name="Steven Shults" />, our Support Engineers, triage tickets for the Product Analytics, Pipeline, Session Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+<TeamMember name="Marcus Hof" photo />, <TeamMember name="Steven Shults" photo />, and <TeamMember name="Abigail Richardson" photo />, our Support Engineers, triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -33,11 +33,11 @@ Swap with a teammate in advance! Find a volunteer by asking in Slack, then use P
 
 Each engineering team has its own list of tickets in Zendesk:
 
-- [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated tickets only)
-- [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027)
-- [Feature Success](https://posthoghelp.zendesk.com/agent/filters/14507099125531)
-- [Replay](https://posthoghelp.zendesk.com/agent/filters/14507048415771)
-- [Pipeline](https://posthoghelp.zendesk.com/agent/filters/14506794017051)
+- [Product Analytics](https://posthoghelp.zendesk.com/agent/filters/17989255082139) (escalated only)
+- [Web Analytics](https://posthoghelp.zendesk.com/agent/filters/21786368880027) (escalated only)
+- [Feature Success](https://posthoghelp.zendesk.com/agent/filters/25210600744731) (escalated only)
+- [Replay](https://posthoghelp.zendesk.com/agent/filters/25210723706907) (escalated only)
+- [CDP](https://posthoghelp.zendesk.com/agent/filters/28134703633179) (escalated only)
 - [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/14507148758939)
 - [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/14507107058843)
 
@@ -77,10 +77,13 @@ If you have any questions about how or when to communicate with users, you can a
 
 As a business we need to ensure we are focusing support on our paying customers, as such this is the prioritization order you should apply as Support Hero. At the end of your rotation you need to ensure that any items in 1-4 are resolved or passed to the next Support Hero _as a minimum_.
 
-1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel, as there will be some urgency needed.
-1. Open Zendesk tickets for your team that have `high` priority.
-1. Open Zendesk tickets for your team that have `normal` priority.
-1. Open Zendesk tickets for your team that have `low` priority.
+1. Any requests where you are tagged by the Customer Success team in a dedicated Slack channel, as there will be some urgency needed. 
+2. `Open`, `escalated` Zendesk tickets for your team that have `High` priority.
+3. `Open`, `escalated` Zendesk tickets for your team that have `Normal` priority.
+4. `New` and `Open`* (non-escalated) Zendesk tickets for your team that are nearing breach or have breached [SLAs](/handbook/comms/customer-support#response-targets)
+5. `Open` ZenDesk tickets for your team that have low priority.
+
+\* Due to the way we're using Pylon, "new" tickets from high prio customer Slack channels only appear as `New` in Zendesk for a few seconds, then a webhook updates the ticket and quickly changes it to `Open`.
 
 ### What if I need to confirm priority by checking a customer's MRR?
 
@@ -89,11 +92,18 @@ You've got a couple of options.  By order of quickness:
 1. Use the VIP Lookup Bot:
  
     In any Slack channel, type `@VIP Lookup Bot [Customer]` (without the brackets.) 
-    'Customer' can be the organization name (case-sensitive), or their organization ID.
+    'Customer' can be the organization name (case-sensitive), or their organization ID. It does work, but the results take up to 30s to load. 
+
 2. In ZenDesk: 
 
    Click the org name near the upper-left of the ticket. The left sidebar opens. 
    There you'll see which plan they're on. If they've already paid some bills, you'll also see MRR there.
+
+### How will I know if a ticket is nearing a breach of our SLA targets?
+
+Alerts are posted to Slack for every team which has a "group" in Zendesk.  The alerts are posted to the `support-` channel for the team (or the `team-` channel for the team if the team has no `support-` channel.)
+
+Alerts are posted for a ticket 3 hours before it breaches the next SLA. If the ticket remains untouched an hour later, another alert will be posted at 2 hours before it breaches an SLA, and again 1 hour before it breaches an SLA. The maximum number of alerts that will be posted for a single ticket is 3. (You can remove the `sla-warning` tags from a ticket if you want the alerts to be sent again for that ticket.)
 
 ## How should I handle self-hosted setups?
 
@@ -151,6 +161,14 @@ Tips:
 
 * Err on the side of Solving tickets (see below) if you expect no further input from the customer, as a lot of them don't reply to confirm that the problem has been solved.
 * Provide actionable information as an _Internal Note_ on the ZenDesk ticket (e.g. links to internal slack threads, partial investigation, ...)
+
+### Creating tickets on behalf of users or from existing tickets
+
+Sometimes users will contact us over Twitter, or email, asking support questions. Sometimes they will respond to old, solved ticket threads with new problems, or tickets will spiral into multiple issues. In both situations it's best to create a new ticket for the user so we can apply the correct SLAs and keep issues distinct for easy assignment. 
+
+You can ask a user to create a new ticket themselves, but it's best if we do it for them. The easiest way to do this correctly is to login to PostHog as the user, and then create a fresh ticket on their behalf using the information you have. This will ensure the correct tags, SLAs, and so on are automatically applied. 
+
+If the user raised the issue in a public forum, such as Twitter, it can be a good idea to tell them you've opened a ticket on their behalf. If the user was replying to an old, already solved ticket, you should mark the old issue to `Closed`. 
 
 #### Avoiding duplication of effort in ZenDesk
 
@@ -230,7 +248,7 @@ For bug reports from normal and high priority users (assuming you've confirmed i
 
 1. [Open a bug report](https://github.com/PostHog/posthog/issues/new?assignees=&labels=bug&projects=&template=bug_report.yml) on our GitHub repo
 2. Be sure to include a link to the insight (or other), below the repo steps
-3. Include "From: `https://URL_for_ZenDesk_ticket`" in the `additional info` section of the bug comment (where the URL is for the ZenDesk ticket where the customer reported the bug)
+3. Include "From: `https://URL_for_ZenDesk_ticket`" in the `additional info` section of the bug comment (where the URL is for the ZenDesk ticket where the customer reported the bug)
 4. Reply to the user to thank* them for alerting us to the bug. Let them know you've opened a bug report and provide a link to it.
 5. Let them know they can follow the bug report on GitHub for updates.
 6. When sending the reply, change the ticket from `Open` to `Pending`

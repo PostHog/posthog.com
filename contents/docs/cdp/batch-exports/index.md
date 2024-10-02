@@ -81,7 +81,7 @@ As an example, creating a batch export of events with daily frequency today will
 
 On each batch export view, you are presented with a list of the latest executed runs:
 
-![batch export runs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/batch-exports-runs.png)
+![batch export runs](https://res.cloudinary.com/dmukukwp6/image/upload/2024_08_09_at_14_52_19_98dde216b8.png)
 
 Each run has:
 1. A state indicator which can be either "Starting", "Running", "Failed", or "Completed."
@@ -93,13 +93,13 @@ Each run has:
 
 You can use batch exports for past data stored in PostHog, known as historical data. For this, you don't need to create a new batch export. The batch export already knows the destination where we wish to send historical data. It only requires the boundaries for the data you want to export, in other words, a start and an end date.
 
-A "Create historic export" button can be found in the UI:
+A "Backfill batch export" button can be found in the UI:
 
-![batch exports ui](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/batch-exports-ui.png)
+![batch exports ui](https://res.cloudinary.com/dmukukwp6/image/upload/2024_08_09_at_14_56_27_8f4f6c7430.png)
 
 Which will let you input the start and end date of the historical export:
 
-![create historic export](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/create-historic-export.png)
+![create historic export](https://res.cloudinary.com/dmukukwp6/image/upload/2024_08_09_at_14_54_54_90338968ac.png)
 
 Immediately afterwards, the historical export runs that fall within the bounds selected are scheduled.
 
@@ -107,7 +107,9 @@ Immediately afterwards, the historical export runs that fall within the bounds s
 
 > **Note:** A batch export may optionally be created with an end date: Batch exports will never export data past this end date, even if requesting a historical export which exceeds this upper bound.
 
-## How do batch exports work?
+## FAQ
+
+### How do batch exports work?
 
 As previously mentioned, batch exports are implemented on [Temporal](https://www.temporal.io/). More in detail, each supported destination is defined as a [Temporal Workflow](https://docs.temporal.io/workflows), with a [Workflow Type](https://docs.temporal.io/workflows#workflow-type) that indicates which destination is implemented in it.
 
@@ -147,7 +149,7 @@ sequenceDiagram
     PostHog->>User: Inform batch export status
 ```
 
-## How does this differ from the old export destinations, formerly known as apps?
+### How does this differ from the old export destinations, formerly known as apps?
 
 - The data is exported on batches at a fixed frequency, like hourly or daily.
   - This allows us to optimize uploads and insertions which generally perform better with larger sizes.
@@ -155,3 +157,9 @@ sequenceDiagram
 
 - Some features of the old export destinations are still being ported over.
   - This includes logs and error reporting.
+
+### How do batch exports handle periods with no data?
+
+If no data is found for a particular batch period, then the batch export run will immediately succeed. No data to export is not considered a failure, as it is expected that there may be times of low or no volume of events coming into PostHog, and it is particularly relevant when filtering the batch export to only export very low volume events.
+
+> **Note:** This could mean that underlying configuration issues are not surfaced early, as we do not attempt to connect to a destination if there is nothing to export. It is recommended to confirm there is data to export to ensure a batch export has been configured correctly. This can be done by checking batch export debug logs as they will display how many rows are exported. So, if no debug logs appear, it means there is no data to export, so we haven't had a chance to validate the batch export configuration.

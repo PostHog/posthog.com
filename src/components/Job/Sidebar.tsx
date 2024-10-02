@@ -24,6 +24,62 @@ export const PineappleText = (percentage: number) => {
     )
 }
 
+export const TeamMembers = ({ profiles }) => {
+    return (
+        <ul className="list-none m-0 p-0 flex flex-wrap">
+            {profiles?.data?.map(
+                ({
+                    attributes: {
+                        avatar: {
+                            data: {
+                                attributes: { url: avatar },
+                            },
+                        },
+                        firstName,
+                        lastName,
+                        country,
+                        color,
+                    },
+                    id,
+                }) => {
+                    const name = [firstName, lastName].filter(Boolean).join(' ')
+                    return (
+                        <li
+                            key={name}
+                            className="first:-ml-0 -ml-2 transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20 rounded-full
+                    "
+                        >
+                            <Link to={`/community/profiles/${id}`}>
+                                <Tooltip
+                                    placement="top"
+                                    className="whitespace-nowrap"
+                                    content={() => (
+                                        <div className="flex space-x-1 items-center">
+                                            <span className="text-xs">{name}</span>
+                                            <span className="w-[14px] flex">
+                                                <ReactCountryFlag width={14} svg countryCode={country} />
+                                            </span>
+                                        </div>
+                                    )}
+                                >
+                                    <span className="relative">
+                                        <ContributorImageSmall
+                                            name={name}
+                                            image={avatar}
+                                            className={`!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary bg-${color ? color : 'accent'} dark:bg-${color ? color : 'accent-dark'}`}
+                                            imgClassName={``}
+                                        />
+                                    </span>
+                                </Tooltip>
+                            </Link>
+                        </li>
+                    )
+                }
+            )}
+        </ul>
+    )
+}
+
 const Team = ({ profiles, leadProfiles, className = '' }) => {
     const teamLength = profiles?.data?.length
     const pineapplePercentage =
@@ -31,67 +87,13 @@ const Team = ({ profiles, leadProfiles, className = '' }) => {
         teamLength > 0 &&
         Math.round(
             (profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) *
-                100
+            100
         )
     const teamLead = profiles?.data?.find(({ id }) => leadProfiles?.data?.[0]?.id === id)
     const teamLeadName = [teamLead?.attributes.firstName, teamLead?.attributes.lastName].filter(Boolean).join(' ')
     return (
         <div className={`${className} my-4`}>
-            <ul className="list-none m-0 p-0 flex flex-wrap">
-                {profiles?.data?.map(
-                    ({
-                        attributes: {
-                            avatar: {
-                                data: {
-                                    attributes: { url: avatar },
-                                },
-                            },
-                            firstName,
-                            lastName,
-                            country,
-                        },
-                        id,
-                    }) => {
-                        const name = [firstName, lastName].filter(Boolean).join(' ')
-                        return (
-                            <li
-                                key={name}
-                                className="first:-ml-0 -ml-2 transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20 rounded-full 
-                                [&:nth-child(4n+1)]:bg-orange
-                                [&:nth-child(4n+2)]:bg-blue 
-                                [&:nth-child(4n+3)]:bg-red 
-                                [&:nth-child(4n+4)]:bg-yellow 
-                                "
-                            >
-                                <Link to={`/community/profiles/${id}`}>
-                                    <Tooltip
-                                        placement="top"
-                                        className="whitespace-nowrap"
-                                        content={() => (
-                                            <div className="flex space-x-1 items-center">
-                                                <span className="text-xs">{name}</span>
-                                                <span className="w-[14px] flex">
-                                                    <ReactCountryFlag width={14} svg countryCode={country} />
-                                                </span>
-                                            </div>
-                                        )}
-                                    >
-                                        <span className="relative">
-                                            <ContributorImageSmall
-                                                name={name}
-                                                image={avatar}
-                                                className="!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary"
-                                                imgClassName=""
-                                            />
-                                        </span>
-                                    </Tooltip>
-                                </Link>
-                            </li>
-                        )
-                    }
-                )}
-            </ul>
-
+            <TeamMembers profiles={profiles} />
             {teamLead && (
                 <SidebarSection title="Team lead">
                     <Link

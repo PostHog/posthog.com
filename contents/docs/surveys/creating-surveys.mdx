@@ -12,6 +12,8 @@ export const newSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload
 export const newSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/surveys/new-survey-dark-mode.png"
 export const delaySurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_57_AM_fb3b007108.png"
 export const delaySurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_41_AM_52fd4a8e34.png"
+export const displayConditionsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_48_AM_6287f11b96.png"
+export const displayConditionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_35_AM_3fefd0b9cc.png"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
@@ -75,6 +77,7 @@ Customization enables you to change the look, feel, and timing of your popover s
 - The visibility of the PostHog branding.
 - Whether to shuffle the order of the choices and questions.
 - The delay (in seconds) before the survey appears on the page.
+- Whether the confirmation message auto disappears after 5 seconds.
 
 <ProductScreenshot
     imageLight={delaySurveyLight} 
@@ -83,26 +86,26 @@ Customization enables you to change the look, feel, and timing of your popover s
     classes="rounded"
 />
 
-### Targeting
+### Display conditions
 
 This specifies the conditions a user must meet to be shown the survey. A user must meet **ALL** the conditions to be eligible.
 
-You can target your survey to specific users based on:
+You can display your survey to specific users based on:
 
 - **Linked feature flag:** Whether a user has a specific [feature flag](/docs/feature-flags) enabled. For example, if you're rolling out a new landing page using a feature flag `new-landing-page`, you can gather feedback only from users who have that flag enabled. This is also a way to show surveys to cohorts (but it must be a [non-behavioral one](/docs/feature-flags/common-questions#why-cant-i-use-a-cohort-with-behavioral-filters-in-my-feature-flag)).
 
 - **URL targeting:** Show when URL either contains a string, exactly matches a string, matches a regex.
   
-- **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can target a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
+- **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
 
 - **Wait period**: Hide surveys from users who have seen a survey in the last X days. Note that a user who completes a survey are never shown the same survey again, even if no wait period is set.
 
-- **User and group properties:** If you are capturing [person profiles](/docs/data/persons), you can target a survey to users who have specific [user](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option.
+- **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1714693687/posthog.com/contents/images/docs/surveys/target-light.png" 
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1714693687/posthog.com/contents/images/docs/surveys/target-dark.png"
-    alt="Targeting" 
+    imageLight={displayConditionsLight} 
+    imageDark={displayConditionsDark}
+    alt="Display conditions" 
     classes="rounded"
 />
 
@@ -114,7 +117,7 @@ This enables you to stop your survey once you receive a specific number of respo
 
 Once you've set up your survey, click "Save as draft" to save your survey. This enables you to review any changes before launching. Then, when you're ready to launch, click the "Launch" button.
 
-If you've created a [popover survey](#presentation), your survey will begin showing immediately to users matching your targeting.
+If you've created a [popover survey](#presentation), your survey will begin showing immediately to users matching your display conditions.
 
 If you've created an [API survey](#presentation), you'll need to add your [custom survey code](/docs/surveys/implementing-custom-surveys) before launching.
 

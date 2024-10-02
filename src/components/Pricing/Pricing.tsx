@@ -15,7 +15,7 @@ import CTA from 'components/Home/CTA.js'
 import { IconCheck, IconHandMoney, IconInfo, IconRocket } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
-import useProducts from './Products'
+import useProducts from 'hooks/useProducts'
 import { graphql, useStaticQuery } from 'gatsby'
 import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
 import Tabs from 'components/Tabs'
@@ -156,9 +156,10 @@ const Discounts = () => (
             </li>
             <li className="relative pl-7 pt-4">
                 <IconHandMoney className="size-5 absolute left-0 top-4.5 opacity-50" />
-                <strong>Non-profits</strong>
+                <strong>Nonprofit</strong>
                 <p className="text-[15px] mb-2">
-                    Most non-profits are eligible for 50% off. Get in touch through the app after signing up.
+                    Are you a nonprofit? You can save more! Get in touch through the app after signing up and we'll give
+                    you an additional discount.
                 </p>
             </li>
         </ul>
@@ -210,9 +211,9 @@ const AddonContent = ({ name, description, plans }) => {
 
 const AllAddons = () => {
     const platform = usePlatform()
-    const products = useProducts()
+    const { products } = useProducts()
     const platformAddons = platform.addons.filter((addon) => !addon.inclusion_only)
-    const productAddons = products.flatMap((product) => product.addons)
+    const productAddons = products.flatMap((product) => product.billingData.addons)
     const allAddons = [...platformAddons, ...productAddons]
     const [activeTab, setActiveTab] = useState(0)
     const activeAddon = allAddons[activeTab]
@@ -295,6 +296,11 @@ export const allProductsData = graphql`
                         name
                         type
                         unit
+                        features {
+                            category
+                            name
+                            description
+                        }
                         plans {
                             description
                             docs_url
@@ -458,19 +464,28 @@ const TabSurveys = (props) => {
     )
 }
 
-const tabContent = {
-    'Product analytics': TabPA,
-    'Session replay': TabSR,
-    'Feature flags': TabFF,
-    'A/B testing': TabFF,
-    Surveys: TabSurveys,
+const TabDW = (props) => {
+    return (
+        <div>
+            <Pricing {...props} />
+        </div>
+    )
 }
 
-const ProductTabs = ({ billingProducts }) => {
+const tabContent = {
+    Analytics: TabPA,
+    'Session replay': TabSR,
+    'Feature flags': TabFF,
+    Experiments: TabFF,
+    Surveys: TabSurveys,
+    'Data warehouse': TabDW,
+}
+
+const ProductTabs = () => {
     const [activeTab, setActiveTab] = useState()
-    const products = useProducts()
+    const { products } = useProducts()
     const activeProduct = products[activeTab ?? 0]
-    const productData = billingProducts.find(({ type }) => type === activeProduct?.type)
+    const productData = activeProduct.billingData
 
     return (
         <div>
@@ -485,22 +500,21 @@ const ProductTabs = ({ billingProducts }) => {
                 activeTab={activeTab}
                 onClick={(_tab, index) => setActiveTab(index)}
                 size="sm"
-                className="overflow-x-auto w-screen md:w-auto -mx-4 px-4"
-                tabs={products.map(({ name, icon, price, denomination, freeLimit, message }) => ({
+                tabs={products.map(({ name, Icon, color, billedWith, freeLimit, startsAt, billingData: { unit } }) => ({
                     title: name,
-                    subtitle: price ? (
+                    subtitle: !billedWith ? (
                         <>
                             <span className="text-green font-semibold">
-                                {freeLimit} {denomination}s free,
+                                {freeLimit} {unit}s free,
                             </span>{' '}
                             <br />
-                            then <strong>${price}</strong>
-                            <span className="opacity-75 text-sm font-semibold">/{denomination}</span>
+                            then <strong>${startsAt}</strong>
+                            <span className="opacity-75 text-sm font-semibold">/{unit}</span>
                         </>
                     ) : (
-                        message
+                        <em className="font-normal opacity-75">Billed with {billedWith}</em>
                     ),
-                    icon: icon,
+                    icon: <Icon className={`w-5 text-${color}`} />,
                 }))}
             />
             {activeTab !== undefined && (
@@ -515,13 +529,14 @@ const ProductTabs = ({ billingProducts }) => {
             <div className="text-center mt-4 flex flex-col gap-1 justify-center">
                 {activeTab == undefined && (
                     <p className="m-0 text-sm opacity-60">
-                        *Free tier resets monthly. Prices descrease exponentially with volume.
+                        *Free tier resets monthly. Prices decrease exponentially with volume.
                     </p>
                 )}
 
                 <div
-                    className={`text-center font-semibold text-[15px] mt-4 ${activeTab === undefined && 'border-t'
-                        } border-light dark:border-dark`}
+                    className={`text-center font-semibold text-[15px] mt-4 ${
+                        activeTab === undefined && 'border-t'
+                    } border-light dark:border-dark`}
                 >
                     <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3">
                         <button
@@ -537,251 +552,251 @@ const ProductTabs = ({ billingProducts }) => {
     )
 }
 
-const PlansTabs = () => {
-    const plans = [
-        {
-            name: 'Totally free',
-            description: <span className="font-normal">No credit card required</span>,
-            html: (
-                <>
-                    <h4>Use PostHog free forever, with some limits</h4>
-                    <div className="grid grid-cols-3 @xl:grid-cols-5 pb-4 text-[15px] [&>*:nth-child(3)]:opacity-60">
-                        <div className="px-2 pb-2 border-b border-light dark:border-dark">&nbsp;</div>
-                        <div className="@xl:col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
-                            <strong>Totally free</strong>
-                            <br />
-                            <span className="text-green font-semibold text-sm">(This plan)</span>
-                        </div>
-                        <div className="@xl:col-span-2 pl-2 pb-2 border-b border-light dark:border-dark text-opacity-70">
-                            <strong>Ridiculously cheap</strong>
-                        </div>
+const plans = [
+    {
+        name: 'Totally free',
+        description: <span className="font-normal">No credit card required</span>,
+        html: (
+            <>
+                <h4>Use PostHog free forever, with some limits</h4>
+                <div className="grid grid-cols-3 @xl:grid-cols-5 pb-4 text-[15px] [&>*:nth-child(3)]:opacity-60">
+                    <div className="px-2 pb-2 border-b border-light dark:border-dark">&nbsp;</div>
+                    <div className="@xl:col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
+                        <strong>Totally free</strong>
+                        <br />
+                        <span className="text-green font-semibold text-sm">(This plan)</span>
                     </div>
-                    <div className="grid grid-cols-3 @xl:grid-cols-5 gap-x-4 gap-y-2 text-[15px] [&>*:nth-child(3n+1)]:opacity-70 [&>*:nth-child(3n+3)]:opacity-70">
-                        <div>Price</div>
-                        <div className="@xl:col-span-2">Free forever</div>
-                        <div className="@xl:col-span-2">Starts at $0/mo</div>
-
-                        <div>Volume limits</div>
-                        <div className="@xl:col-span-2">
-                            Limited to free monthly allowance{' '}
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-[250px]">
-                                        Usage is capped at the free tier limits for each product and resets monthly.
-                                    </div>
-                                )}
-                                placement="top"
-                            >
-                                <IconInfo className="size-4 inline-block" />
-                            </Tooltip>
-                        </div>
-                        <div className="@xl:col-span-2">Unlimited</div>
-
-                        <div>Product features</div>
-                        <div className="@xl:col-span-2">
-                            Almost all the features{' '}
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-[320px]">
-                                        <p className="mb-2 text-sm">
-                                            Use each product for free without advanced features. Compare functionality
-                                            limitations on each product page.
-                                        </p>
-                                        <p className="mb-0 text-sm">
-                                            For full functionality, just enter a credit card and you'll be on the{' '}
-                                            <em>Ridiculously cheap</em> plan. PostHog is still free up to the monthly
-                                            free tier limits, and you can set a billing limit as low as $0.
-                                        </p>
-                                    </div>
-                                )}
-                                placement="top"
-                            >
-                                <IconInfo className="size-4 inline-block" />
-                            </Tooltip>
-                        </div>
-                        <div className="@xl:col-span-2">All features</div>
-
-                        <div>Support</div>
-                        <div className="@xl:col-span-2">Community support</div>
-                        <div className="@xl:col-span-2">Standard support</div>
-
-                        <div>
-                            Add-ons{' '}
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-[300px]">
-                                        Add-ons extend functionality of products and are priced separately.
-                                    </div>
-                                )}
-                                placement="top"
-                            >
-                                <IconInfo className="size-4 inline-block" />
-                            </Tooltip>
-                        </div>
-                        <div className="@xl:col-span-2">
-                            Limited
-                            <br />
-                            <div className="pt-2">
-                                <PlanCTA intent="free" />
-                            </div>
-                        </div>
-                        <div className="@xl:col-span-2">Available</div>
+                    <div className="@xl:col-span-2 pl-2 pb-2 border-b border-light dark:border-dark text-opacity-70">
+                        <strong>Ridiculously cheap</strong>
                     </div>
-                </>
-            ),
-        },
-        {
-            name: 'Ridiculously cheap',
-            description: <span className="font-normal">Starts at $0/mo</span>,
-            html: (
-                <>
-                    <h4 className="mb-0">The "ridiculously cheap" plan</h4>
-                    <p className="text-sm inline-flex rounded-sm bg-yellow/25 py-0.5 px-1">
-                        86% of customers use this plan
-                    </p>
-                    <ul className="tw-check-bullets @lg:columns-2 pb-2">
-                        <li>Usage-based pricing</li>
-                        <li>Generous monthly free tier</li>
-                        <li>Up to 6 projects</li>
-                        <li>7-year data retention</li>
-                        <li>Email and community support</li>
-                        <li>Unlimited team members</li>
-                        <li>Unlimited tracked users</li>
-                    </ul>
-                    <PlanCTA intent="paid" />
-                </>
-            ),
-        },
-        {
-            name: 'Enterprise mode',
-            description: <span className="font-normal">$20k/yr minimum spend</span>,
-            html: (
-                <>
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <div className="mb-2">
-                                <strong>
-                                    Everything in <em>Ridiculously cheap</em> plus:
-                                </strong>
-                            </div>
-                            <ul className="tw-check-bullets">
-                                <li>SAML SSO enforcement</li>
-                                <li>Custom MSA</li>
-                                <li>Priority training, support</li>
-                                <li>Advanced permissions</li>
-                                <li>Audit logs</li>
-                            </ul>
-                        </div>
-                        <div className="relative pb-20 md:pb-0">
-                            <div className="mb-2">
-                                <strong>How it works</strong>
-                            </div>
-                            <ul className="tw-chevron-bullets [&_li]:text-sm">
-                                <li>Starts at $20k/year w/ fixed annual terms</li>
-                                <li>Annual contract with minimum commitment</li>
-                                <li>No upcharge on usage-based prices</li>
-                            </ul>
-                            <div className="pt-4 md:mb-20 xl:mb-0 relative z-20">
-                                <CallToAction
-                                    href="/talk-to-a-human"
-                                    size="md"
-                                    event={{
-                                        name: `clicked Talk to a helpful person`,
-                                        type: 'cloud',
-                                        intent: 'enterprise',
-                                    }}
-                                >
-                                    Talk to a helpful person
-                                </CallToAction>
-                            </div>
-                            <div className="absolute -bottom-4 -right-4">
-                                <div className="relative flex">
-                                    <Tooltip
-                                        content={() => (
-                                            <div className="max-w-sm">
-                                                <Link
-                                                    href="/community/profiles/28895"
-                                                    className="text-red dark:text-yellow text-[15px]"
-                                                >
-                                                    <strong className="block">Simon Fisher</strong>
-                                                </Link>
-                                                <p className="mb-0 text-sm opacity-75">Customer Success</p>
-                                            </div>
-                                        )}
-                                        placement="top"
-                                    >
-                                        <div className="relative size-20 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
-                                            <StaticImage
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575173/simon_bb4af1b047.png"
-                                                quality={100}
-                                                alt="Simon Fisher, Customer Success"
-                                                placeholder="none"
-                                                objectFit="contain"
-                                                className=""
-                                            />
-                                        </div>
-                                    </Tooltip>
+                </div>
+                <div className="grid grid-cols-3 @xl:grid-cols-5 gap-x-4 gap-y-2 text-[15px] [&>*:nth-child(3n+1)]:opacity-70 [&>*:nth-child(3n+3)]:opacity-70">
+                    <div>Price</div>
+                    <div className="@xl:col-span-2">Free forever</div>
+                    <div className="@xl:col-span-2">Starts at $0/mo</div>
 
-                                    <Tooltip
-                                        content={() => (
-                                            <div className="max-w-sm">
-                                                <Link
-                                                    href="/community/profiles/28622"
-                                                    className="text-red dark:text-yellow text-[15px]"
-                                                >
-                                                    <strong className="block">Cameron DeLeone</strong>
-                                                </Link>
-                                                <p className="mb-0 text-sm opacity-75">Customer Success</p>
-                                            </div>
-                                        )}
-                                        placement="top"
-                                    >
-                                        <div className="relative size-[5.5rem] -ml-7 -mr-8 -mt-2 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
-                                            <StaticImage
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1685570037/cameron_bc0de38765.png"
-                                                quality={100}
-                                                alt="Cameron DeLeone, Customer Success"
-                                                placeholder="none"
-                                                objectFit="contain"
-                                                className=""
-                                            />
-                                        </div>
-                                    </Tooltip>
-
-                                    <Tooltip
-                                        content={() => (
-                                            <div className="max-w-sm">
-                                                <Link
-                                                    href="/community/profiles/29862"
-                                                    className="text-red dark:text-yellow text-[15px]"
-                                                >
-                                                    <strong className="block">Mine Kansu</strong>
-                                                </Link>
-                                                <p className="mb-0 text-sm opacity-75">Customer Success Manager</p>
-                                            </div>
-                                        )}
-                                        placement="top"
-                                    >
-                                        <div className="relative size-20 top-0 hover:top-[-.2rem] hover:scale-[1.075] transition-all">
-                                            <StaticImage
-                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/v1704468198/Mine_dc7d915835.png"
-                                                quality={100}
-                                                alt="Mine Kansu, Customer Success Manager"
-                                                placeholder="none"
-                                                objectFit="contain"
-                                                className=""
-                                            />
-                                        </div>
-                                    </Tooltip>
+                    <div>Volume limits</div>
+                    <div className="@xl:col-span-2">
+                        Limited to free monthly allowance{' '}
+                        <Tooltip
+                            content={() => (
+                                <div className="max-w-[250px]">
+                                    Usage is capped at the free tier limits for each product and resets monthly.
                                 </div>
+                            )}
+                            placement="top"
+                        >
+                            <IconInfo className="size-4 inline-block" />
+                        </Tooltip>
+                    </div>
+                    <div className="@xl:col-span-2">Unlimited</div>
+
+                    <div>Product features</div>
+                    <div className="@xl:col-span-2">
+                        Almost all the features{' '}
+                        <Tooltip
+                            content={() => (
+                                <div className="max-w-[320px]">
+                                    <p className="mb-2 text-sm">
+                                        Use each product for free without advanced features. Compare functionality
+                                        limitations on each product page.
+                                    </p>
+                                    <p className="mb-0 text-sm">
+                                        For full functionality, just enter a credit card and you'll be on the{' '}
+                                        <em>Ridiculously cheap</em> plan. PostHog is still free up to the monthly free
+                                        tier limits, and you can set a billing limit as low as $0.
+                                    </p>
+                                </div>
+                            )}
+                            placement="top"
+                        >
+                            <IconInfo className="size-4 inline-block" />
+                        </Tooltip>
+                    </div>
+                    <div className="@xl:col-span-2">All features</div>
+
+                    <div>Support</div>
+                    <div className="@xl:col-span-2">Community support</div>
+                    <div className="@xl:col-span-2">Standard support</div>
+
+                    <div>
+                        Add-ons{' '}
+                        <Tooltip
+                            content={() => (
+                                <div className="max-w-[300px]">
+                                    Add-ons extend functionality of products and are priced separately.
+                                </div>
+                            )}
+                            placement="top"
+                        >
+                            <IconInfo className="size-4 inline-block" />
+                        </Tooltip>
+                    </div>
+                    <div className="@xl:col-span-2">
+                        Limited
+                        <br />
+                        <div className="pt-2">
+                            <PlanCTA intent="free" />
+                        </div>
+                    </div>
+                    <div className="@xl:col-span-2">Available</div>
+                </div>
+            </>
+        ),
+    },
+    {
+        name: 'Ridiculously cheap',
+        description: <span className="font-normal">Starts at $0/mo</span>,
+        html: (
+            <>
+                <h4 className="mb-0">The "ridiculously cheap" plan</h4>
+                <p className="text-sm inline-flex rounded-sm bg-yellow/25 py-0.5 px-1">
+                    86% of customers use this plan
+                </p>
+                <ul className="tw-check-bullets @lg:columns-2 pb-2">
+                    <li>Usage-based pricing</li>
+                    <li>Generous monthly free tier</li>
+                    <li>Up to 6 projects</li>
+                    <li>7-year data retention</li>
+                    <li>Email and community support</li>
+                    <li>Unlimited team members</li>
+                    <li>Unlimited tracked users</li>
+                </ul>
+                <PlanCTA intent="paid" />
+            </>
+        ),
+    },
+    {
+        name: 'Enterprise mode',
+        description: <span className="font-normal">$20k/yr minimum spend</span>,
+        html: (
+            <>
+                <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div className="mb-2">
+                            <strong>
+                                Everything in <em>Ridiculously cheap</em> plus:
+                            </strong>
+                        </div>
+                        <ul className="tw-check-bullets">
+                            <li>SAML SSO enforcement</li>
+                            <li>Custom MSA</li>
+                            <li>Priority training, support</li>
+                            <li>Advanced permissions</li>
+                            <li>Audit logs</li>
+                        </ul>
+                    </div>
+                    <div className="relative pb-20 md:pb-0">
+                        <div className="mb-2">
+                            <strong>How it works</strong>
+                        </div>
+                        <ul className="tw-chevron-bullets [&_li]:text-sm">
+                            <li>Starts at $20k/year w/ fixed annual terms</li>
+                            <li>Annual contract with minimum commitment</li>
+                            <li>No upcharge on usage-based prices</li>
+                        </ul>
+                        <div className="pt-4 md:mb-20 xl:mb-0 relative z-20">
+                            <CallToAction
+                                href="/talk-to-a-human"
+                                size="md"
+                                event={{
+                                    name: `clicked Talk to a helpful person`,
+                                    type: 'cloud',
+                                    intent: 'enterprise',
+                                }}
+                            >
+                                Talk to a helpful person
+                            </CallToAction>
+                        </div>
+                        <div className="absolute -bottom-4 -right-4">
+                            <div className="relative flex">
+                                <Tooltip
+                                    content={() => (
+                                        <div className="max-w-sm">
+                                            <Link
+                                                href="/community/profiles/28895"
+                                                className="text-red dark:text-yellow text-[15px]"
+                                            >
+                                                <strong className="block">Simon Fisher</strong>
+                                            </Link>
+                                            <p className="mb-0 text-sm opacity-75">Customer Success</p>
+                                        </div>
+                                    )}
+                                    placement="top"
+                                >
+                                    <div className="relative size-20 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
+                                        <StaticImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575173/simon_bb4af1b047.png"
+                                            quality={100}
+                                            alt="Simon Fisher, Customer Success"
+                                            placeholder="none"
+                                            objectFit="contain"
+                                            className=""
+                                        />
+                                    </div>
+                                </Tooltip>
+
+                                <Tooltip
+                                    content={() => (
+                                        <div className="max-w-sm">
+                                            <Link
+                                                href="/community/profiles/28622"
+                                                className="text-red dark:text-yellow text-[15px]"
+                                            >
+                                                <strong className="block">Cameron DeLeone</strong>
+                                            </Link>
+                                            <p className="mb-0 text-sm opacity-75">Customer Success</p>
+                                        </div>
+                                    )}
+                                    placement="top"
+                                >
+                                    <div className="relative size-[5.5rem] -ml-7 -mr-8 -mt-2 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
+                                        <StaticImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1685570037/cameron_bc0de38765.png"
+                                            quality={100}
+                                            alt="Cameron DeLeone, Customer Success"
+                                            placeholder="none"
+                                            objectFit="contain"
+                                            className=""
+                                        />
+                                    </div>
+                                </Tooltip>
+
+                                <Tooltip
+                                    content={() => (
+                                        <div className="max-w-sm">
+                                            <Link
+                                                href="/community/profiles/29862"
+                                                className="text-red dark:text-yellow text-[15px]"
+                                            >
+                                                <strong className="block">Mine Kansu</strong>
+                                            </Link>
+                                            <p className="mb-0 text-sm opacity-75">Customer Success Manager</p>
+                                        </div>
+                                    )}
+                                    placement="top"
+                                >
+                                    <div className="relative size-20 top-0 hover:top-[-.2rem] hover:scale-[1.075] transition-all">
+                                        <StaticImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1704468198/Mine_dc7d915835.png"
+                                            quality={100}
+                                            alt="Mine Kansu, Customer Success Manager"
+                                            placeholder="none"
+                                            objectFit="contain"
+                                            className=""
+                                        />
+                                    </div>
+                                </Tooltip>
                             </div>
                         </div>
                     </div>
-                </>
-            ),
-        },
-    ]
+                </div>
+            </>
+        ),
+    },
+]
 
+const PlansTabs = () => {
     const [activeTab, setActiveTab] = useState(0)
     const activePlan = plans[activeTab]
 
@@ -792,11 +807,10 @@ const PlansTabs = () => {
                     activeTab={activeTab}
                     onClick={(_tab, index) => setActiveTab(index)}
                     size="sm"
-                    className="transition-all w-[fit-content] md:w-full md:!px-3"
                     tabs={plans.map(({ name, description, html }) => ({
                         title: name,
                         subtitle: description,
-                        html: html,
+                        html,
                     }))}
                 />
             </div>
@@ -821,7 +835,6 @@ const PricingExperiment = ({
     currentProduct?: string | null
 }): JSX.Element => {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
-    const products = useProducts()
     const {
         allProductData: {
             nodes: [{ products: billingProducts }],
@@ -840,456 +853,345 @@ const PricingExperiment = ({
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
 
-            <section className="w-screen md:w-auto overflow-x-hidden -mx-4 px-4">
-                <div
-                    className={`grid md:grid-cols-2 md:mt-8 md:gap-x-12 lg:gap-x-8 xl:gap-x-4 gap-y-3 md:gap-y-0 mb-4 md:px-4 items-center ${section}`}
-                >
-                    <div className="md:order-2">
-                        <div className="scale-[1.75] sm:scale-[1.4] md:scale-[1.1] lg:scale-[1.1] py-8 pl-20 sm:pl-28 md:p-0 md:scale-110 -mr-0 md:-mr-56 lg:-mr-64 xl:-mr-80 ">
-                            <Lottie
-                                options={{
-                                    loop: false,
-                                    autoplay: true,
-                                    animationData: tractorHog,
-                                }}
-                            />
-                        </div>
+            <section className={`${section} mb-12 mt-8 md:px-4`}>
+                <ProductTabs />
+            </section>
+
+            <SectionLayout>
+                <SectionHeader>
+                    <h3>Pricing calculator</h3>
+                </SectionHeader>
+
+                <SectionMainCol>
+                    <Tabbed />
+                </SectionMainCol>
+            </SectionLayout>
+
+            <SectionLayout>
+                <div className="bg-accent dark:bg-accent-dark p-4 pb-6 md:pb-4 rounded border border-light dark:border-dark flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
+                    <div>
+                        <h3 className="mb-1 text-xl">Give PostHog a try</h3>
+                        <p className="mb-0 text-[15px]">
+                            No need to pick a plan - try our free version and decide if you want advanced features
+                            later!
+                        </p>
                     </div>
-                    <div className="md:order-1">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl mt-0 mb-4">
-                            {currentProduct
-                                ? billingProducts.find((p: BillingProductV2Type) => p.type === currentProduct)?.name ||
-                                (currentProduct == 'ab_testing' && 'A/B testing') ||
-                                'Product'
-                                : 'Usage-based'}{' '}
-                            pricing
-                        </h1>
-                        <p className="text-base font-medium opacity-60 leading-tight mb-4">
-                            PostHog offers usage-based pricing, not{' '}
-                            <Tooltip
-                                content={() => (
-                                    <div className="max-w-sm">
-                                        <strong className="block text-lg mb-1">What is value-based pricing?</strong>
-                                        <p className="mb-2 text-sm">
-                                            <em>Value-based pricing</em> is geared around testing how much money you're
-                                            willing to pay.
-                                        </p>
-                                        <p className="mb-0 text-sm">
-                                            <em>Usage-based pricing</em> is like a utility - where we continually seek
-                                            to lower costs and make money through volume.
-                                        </p>
-                                    </div>
-                                )}
-                                placement="right"
+                    <div>
+                        <PlanCTA />
+                    </div>
+                </div>
+            </SectionLayout>
+
+            <SectionLayout>
+                <SectionHeader>
+                    <h3>One plan for most customers</h3>
+                </SectionHeader>
+
+                <SectionColumns>
+                    <SectionMainCol>
+                        <PlansTabs />
+                    </SectionMainCol>
+                    <SectionSidebar className="justify-between">
+                        <div>
+                            <h4 className="text-lg mb-2">Plan FYIs</h4>
+                            <SidebarList>
+                                <SidebarListItem>Self-serve, no upsells, no need to "talk to sales"</SidebarListItem>
+                                <SidebarListItem>
+                                    We don't do outbound sales. Everyone pays the same rates.
+                                </SidebarListItem>
+                                <SidebarListItem>
+                                    You can set billing limits per product so you never get a surprise bill
+                                </SidebarListItem>
+                                <SidebarListItem>
+                                    90% of our customers don't pay anything to use PostHog!
+                                    <Tooltip
+                                        content={() => (
+                                            <div className="max-w-[300px]">
+                                                <p className="mb-1">
+                                                    <strong>... and we're cool with it!</strong>
+                                                </p>
+                                                <p className="text-[15px] mb-0">
+                                                    Use PostHog for free within our generous free tier limits. Exceed
+                                                    the free tier limits and you'll only pay for what you use.
+                                                </p>
+                                            </div>
+                                        )}
+                                        placement="bottom"
+                                    >
+                                        <IconInfo className="size-4 inline-block ml-0.5 -mt-0.5" />
+                                    </Tooltip>{' '}
+                                </SidebarListItem>
+                            </SidebarList>
+                        </div>
+                        <div>
+                            <button
+                                onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
+                                className="text-red dark:text-yellow font-semibold cursor-pointer"
                             >
-                                <span className="border-b border-dashed border-primary/50 dark:border-primary-dark/50">
-                                    value-based pricing
-                                </span>
-                            </Tooltip>
-                            .
-                        </p>
-                        <p className="text-base font-medium opacity-60 leading-tight">
-                            Enjoy a generous free tier every month.
-                        </p>
-                        <div className="flex gap-4 items-center">
-                            <div>
-                                <PlanCTA />
-                            </div>
-                            <div>
-                                <span className="text-sm opacity-70">No credit card required</span>
-                                <Tooltip
-                                    content={() => (
-                                        <div className="max-w-[300px] pb-2">
-                                            <p className="mb-1">
-                                                <strong>Totally free</strong>{' '}
-                                                <span className="opacity-70 text-sm italic">
-                                                    - no credit card required
-                                                </span>
-                                            </p>
-                                            <ul className="pl-0 pb-2 list-none [&_li]:text-[15px] opacity-70">
-                                                <li>Usage capped at free tier limits</li>
-                                                <li>Basic product features</li>
-                                                <li>1 project</li>
-                                                <li>1-year data retention</li>
-                                                <li>Community support</li>
-                                            </ul>
-                                            <PlanCTA intent="free" />
-                                        </div>
-                                    )}
-                                    placement="right"
-                                >
-                                    <IconInfo className="size-5 inline-block opacity-60 hover:opacity-75 ml-0.5 -mt-0.5" />
-                                </Tooltip>
-                            </div>
+                                {isPlanComparisonVisible ? 'Hide' : 'Show'} full plan comparison
+                            </button>
+                        </div>
+                    </SectionSidebar>
+                </SectionColumns>
+            </SectionLayout>
+
+            <section
+                className={`${section} ${
+                    isPlanComparisonVisible
+                        ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
+                        : 'overflow-y-hidden invisible max-h-0 opacity-0'
+                } transition duration-500 ease-in-out transform`}
+            >
+                <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+                    <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
+                        <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-1">&nbsp;</div>
+                        {platformAndSupportProduct?.plans
+                            ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                            ?.map((plan: BillingV2PlanType) => (
+                                <div className="col-span-4 px-3 py-1" key={plan.key}>
+                                    <strong className="text-sm opacity-75">{plan.name}</strong>
+                                </div>
+                            ))}
+                    </div>
+
+                    <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
+                        <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                            <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
+                        </div>
+                        {platformAndSupportProduct?.plans
+                            ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                            ?.map((plan: BillingV2PlanType) => {
+                                return (
+                                    <div className="col-span-4 px-3 py-2 text-sm" key={`${plan.key}-base-price`}>
+                                        {plan.included_if === 'no_active_subscription' ? (
+                                            <span>Free forever</span>
+                                        ) : plan.included_if === 'has_subscription' ? (
+                                            <span>$0</span>
+                                        ) : plan.unit_amount_usd ? (
+                                            `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
+                                        ) : plan.contact_support ? (
+                                            'Contact us'
+                                        ) : (
+                                            'Contact us'
+                                        )}
+                                    </div>
+                                )
+                            })}
+                        {highestSupportPlan?.features
+                            ?.filter(
+                                (f: BillingV2FeatureType) =>
+                                    ![
+                                        // TODO: this shouldn't be necessary, update billing products api to include entitlement_only info
+                                        'role_based_access',
+                                        'project_based_permissioning',
+                                        'ingestion_taxonomy',
+                                        'tagging',
+                                    ].includes(f.key)
+                            )
+                            .map((feature: BillingV2FeatureType) => (
+                                <>
+                                    <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                                        {feature.description ? (
+                                            <Tooltip content={feature.description}>
+                                                <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                    {feature.name}
+                                                </strong>
+                                            </Tooltip>
+                                        ) : (
+                                            <strong className="text-primary/75 dark:text-primary-dark/75">
+                                                {feature.name}
+                                            </strong>
+                                        )}
+                                    </div>
+                                    {platformAndSupportProduct?.plans
+                                        ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
+                                        ?.map((plan: BillingV2PlanType) => {
+                                            const planFeature = plan?.features?.find((f) => f.key === feature.key)
+                                            return (
+                                                <div
+                                                    className="col-span-4 px-3 py-2 text-sm"
+                                                    key={`${plan.key}-${feature.key}`}
+                                                >
+                                                    {planFeature ? (
+                                                        <div className="flex gap-x-2">
+                                                            {planFeature.note ?? (
+                                                                <IconCheck className="w-5 h-5 text-green" />
+                                                            )}
+                                                            {planFeature.limit && (
+                                                                <span className="opacity-75">
+                                                                    <>
+                                                                        {planFeature.limit} {planFeature.unit}
+                                                                    </>
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    ) : (
+                                                        <></>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                </>
+                            ))}
+                    </div>
+                    <div className="grid grid-cols-16 min-w-[1000px]">
+                        <div className="col-span-4 px-3 py-2 text-sm">&nbsp;</div>
+                        <div className="col-span-4 px-3 py-2">
+                            <PlanCTA intent="free" />
+                        </div>
+                        <div className="col-span-4 px-3 py-2">
+                            <PlanCTA intent="paid" />
+                        </div>
+                        <div className="col-span-4 px-3 py-2">
+                            <PlanCTA intent="enterprise" ctaText="Get in touch" ctaLink="/talk-to-a-human" />
                         </div>
                     </div>
                 </div>
             </section>
 
-            {!currentProduct && (
-                <>
-                    <section className={`${section} mb-12 mt-8 md:px-4`}>
-                        <ProductTabs billingProducts={billingProducts} />
-                    </section>
+            <SectionLayout id="add-ons">
+                <SectionHeader>
+                    <h3>Add-ons</h3>
+                </SectionHeader>
 
-                    <SectionLayout>
-                        <SectionHeader>
-                            <h3>Pricing calculator</h3>
-                        </SectionHeader>
+                <SectionColumns>
+                    <SectionMainCol>
+                        <AllAddons />
+                    </SectionMainCol>
+                    <SectionSidebar>
+                        <h4 className="text-lg mb-0">Why add-ons?</h4>
+                        <SidebarList>
+                            <SidebarListItem>
+                                We move additional functionality to add-ons to keep our base prices low. This is so you
+                                never pay for functionality you don't want or need.
+                            </SidebarListItem>
+                            <SidebarListItem>Subscribe to add-ons after signing up.</SidebarListItem>
+                        </SidebarList>
+                    </SectionSidebar>
+                </SectionColumns>
+            </SectionLayout>
 
-                        <SectionMainCol>
-                            <Tabbed />
-                        </SectionMainCol>
-                    </SectionLayout>
+            <section className="bg-white text-dark shadow-xl rounded pt-6 pb-2 md:py-8 px-8 md:px-12 mx-6 md:mx-auto w-[calc(100%_-_3rem)] md:w-full max-w-3xl -rotate-1">
+                <SectionHeader>
+                    <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>
+                    <h3>Our pricing is designed to make you happy</h3>
+                </SectionHeader>
 
-                    <SectionLayout>
-                        <div className="bg-accent dark:bg-accent-dark p-4 pb-6 md:pb-4 rounded border border-light dark:border-dark flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
-                            <div>
-                                <h3 className="mb-1 text-xl">Give PostHog a try</h3>
-                                <p className="mb-0 text-[15px]">
-                                    No need to pick a plan - try our free version and decide if you want advanced
-                                    features later!
-                                </p>
-                            </div>
-                            <div>
-                                <PlanCTA />
-                            </div>
-                        </div>
-                    </SectionLayout>
-
-                    <SectionLayout>
-                        <SectionHeader>
-                            <h3>One plan for most customers</h3>
-                        </SectionHeader>
-
-                        <SectionColumns>
-                            <SectionMainCol>
-                                <PlansTabs />
-                            </SectionMainCol>
-                            <SectionSidebar className="justify-between">
-                                <div>
-                                    <h4 className="text-lg mb-2">Plan FYIs</h4>
-                                    <SidebarList>
-                                        <SidebarListItem>
-                                            Self-serve, no upsells, no need to "talk to sales"
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            We don't do outbound sales. Everyone pays the same rates.
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            You can set billing limits per product so you never get a surprise bill
-                                        </SidebarListItem>
-                                        <SidebarListItem>
-                                            90% of our customers don't pay anything to use PostHog!
-                                            <Tooltip
-                                                content={() => (
-                                                    <div className="max-w-[300px]">
-                                                        <p className="mb-1">
-                                                            <strong>... and we're cool with it!</strong>
-                                                        </p>
-                                                        <p className="text-[15px] mb-0">
-                                                            Use PostHog for free within our generous free tier limits.
-                                                            Exceed the free tier limits and you'll only pay for what you
-                                                            use.
-                                                        </p>
-                                                    </div>
-                                                )}
-                                                placement="bottom"
-                                            >
-                                                <IconInfo className="size-4 inline-block ml-0.5 -mt-0.5" />
-                                            </Tooltip>{' '}
-                                        </SidebarListItem>
-                                    </SidebarList>
+                <p className="mt-4">Here's what you should know about our pricing:</p>
+                <ul className="space-y-1 mb-4 [&_li]:leading-7 pl-4 md:pl-8">
+                    <li>
+                        <strong>We make a profit with every product.</strong> This means we don’t have loss-leader
+                        products that will go up in pricing later or get retired.
+                    </li>
+                    <li>
+                        <strong>We aim to be the cheapest for each product at every scale</strong> compared to every
+                        major competitor.{' '}
+                        <Link
+                            iconClasses="!text-dark"
+                            href="https://twitter.com/intent/tweet?text=@posthog%20Your%20pricing%20is..."
+                            external
+                        >
+                            <em>Tell us if we're not!</em>
+                        </Link>{' '}
+                        (Note: This doesn't include your buddy's two person startup.)
+                    </li>
+                    <li>
+                        The company in general has significant revenue, over 60,000 customers, runs{' '}
+                        <Link href="/newsletter/the-companies-that-shaped-posthog#our-takeaways-2">default alive</Link>,
+                        and aims to IPO rather than sell. This means{' '}
+                        <strong>we don’t rely on investors to grow, and we’re stable.</strong> Of course we aren’t
+                        perfect, but this goes a long way to avoiding the average dumb vc-backed company stuff in
+                        general - like running out of money or selling to a lame bigger company who just kills off our
+                        products.
+                    </li>
+                    <li>
+                        We have an open source product too - so if you must, you can self host. It is MIT licensed if
+                        you want to use it in a big organization that isn’t ready to move to PostHog Cloud yet.
+                        <Tooltip
+                            content={() => (
+                                <div className="max-w-sm">
+                                    <strong className="block">A disclaimer about self-hosting</strong>
+                                    <p className="mb-2 text-sm">
+                                        Being upfront, self-hosting PostHog has limitations and is usually a worse
+                                        experience (and more expensive) than PostHog Cloud.
+                                    </p>
+                                    <p className="mb-0 text-sm">
+                                        Main benefits of PostHog Cloud include our large, shared infrastructure and lack
+                                        of separate hosting costs, required maintenance, and upgrades that come with
+                                        self-hosting.
+                                    </p>
                                 </div>
-                                <div>
-                                    <button
-                                        onClick={() => setIsPlanComparisonVisible(!isPlanComparisonVisible)}
-                                        className="text-red dark:text-yellow font-semibold cursor-pointer"
-                                    >
-                                        {isPlanComparisonVisible ? 'Hide' : 'Show'} full plan comparison
-                                    </button>
-                                </div>
-                            </SectionSidebar>
-                        </SectionColumns>
-                    </SectionLayout>
-
-                    <section
-                        className={`${section} ${isPlanComparisonVisible
-                                ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
-                                : 'overflow-y-hidden invisible max-h-0 opacity-0'
-                            } transition duration-500 ease-in-out transform`}
+                            )}
+                        >
+                            <IconInfo className="size-4 inline-block relative left-0.5 -top-0.5" />
+                        </Tooltip>
+                    </li>
+                </ul>
+                <p className="mb-4">If this makes you happy – like most people - just start here:</p>
+                <p>
+                    <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
+                        <PlanCTA />
+                        <em className="opacity-75 text-sm">No credit card required</em>
+                    </div>
+                </p>
+                <p>
+                    Or if you need more info,{' '}
+                    <button
+                        className="text-red dark:text-yellow font-semibold"
+                        onClick={() =>
+                            window.scrollTo({
+                                top:
+                                    document.querySelector('#faq')?.getBoundingClientRect().top +
+                                    window.pageYOffset -
+                                    128,
+                                behavior: 'smooth',
+                            })
+                        }
                     >
-                        <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
-                            <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
-                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-1">&nbsp;</div>
-                                {platformAndSupportProduct?.plans
-                                    ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                    ?.map((plan: BillingV2PlanType) => (
-                                        <div className="col-span-4 px-3 py-1" key={plan.key}>
-                                            <strong className="text-sm opacity-75">{plan.name}</strong>
-                                        </div>
-                                    ))}
-                            </div>
+                        read our FAQ
+                    </button>
+                    , <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
+                    <Link href="/talk-to-a-human">talk to a human</Link>.
+                </p>
 
-                            <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
-                                <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                    <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
-                                </div>
-                                {platformAndSupportProduct?.plans
-                                    ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                    ?.map((plan: BillingV2PlanType) => {
-                                        return (
-                                            <div
-                                                className="col-span-4 px-3 py-2 text-sm"
-                                                key={`${plan.key}-base-price`}
-                                            >
-                                                {plan.included_if === 'no_active_subscription' ? (
-                                                    <span>Free forever</span>
-                                                ) : plan.included_if === 'has_subscription' ? (
-                                                    <span>$0</span>
-                                                ) : plan.unit_amount_usd ? (
-                                                    `$${parseFloat(plan.unit_amount_usd).toFixed(0)}/mo`
-                                                ) : plan.contact_support ? (
-                                                    'Contact us'
-                                                ) : (
-                                                    'Contact us'
-                                                )}
-                                            </div>
-                                        )
-                                    })}
-                                {highestSupportPlan?.features
-                                    ?.filter(
-                                        (f: BillingV2FeatureType) =>
-                                            ![
-                                                // TODO: this shouldn't be necessary, update billing products api to include entitlement_only info
-                                                'role_based_access',
-                                                'project_based_permissioning',
-                                                'ingestion_taxonomy',
-                                                'tagging',
-                                            ].includes(f.key)
-                                    )
-                                    .map((feature: BillingV2FeatureType) => (
-                                        <>
-                                            <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                                {feature.description ? (
-                                                    <Tooltip content={feature.description}>
-                                                        <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
-                                                            {feature.name}
-                                                        </strong>
-                                                    </Tooltip>
-                                                ) : (
-                                                    <strong className="text-primary/75 dark:text-primary-dark/75">
-                                                        {feature.name}
-                                                    </strong>
-                                                )}
-                                            </div>
-                                            {platformAndSupportProduct?.plans
-                                                ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
-                                                ?.map((plan: BillingV2PlanType) => {
-                                                    const planFeature = plan?.features?.find(
-                                                        (f) => f.key === feature.key
-                                                    )
-                                                    return (
-                                                        <div
-                                                            className="col-span-4 px-3 py-2 text-sm"
-                                                            key={`${plan.key}-${feature.key}`}
-                                                        >
-                                                            {planFeature ? (
-                                                                <div className="flex gap-x-2">
-                                                                    {planFeature.note ?? (
-                                                                        <IconCheck className="w-5 h-5 text-green" />
-                                                                    )}
-                                                                    {planFeature.limit && (
-                                                                        <span className="opacity-75">
-                                                                            <>
-                                                                                {planFeature.limit} {planFeature.unit}
-                                                                            </>
-                                                                        </span>
-                                                                    )}
-                                                                </div>
-                                                            ) : (
-                                                                <></>
-                                                            )}
-                                                        </div>
-                                                    )
-                                                })}
-                                        </>
-                                    ))}
-                            </div>
-                            <div className="grid grid-cols-16 min-w-[1000px]">
-                                <div className="col-span-4 px-3 py-2 text-sm">&nbsp;</div>
-                                <div className="col-span-4 px-3 py-2">
-                                    <PlanCTA intent="free" />
-                                </div>
-                                <div className="col-span-4 px-3 py-2">
-                                    <PlanCTA intent="paid" />
-                                </div>
-                                <div className="col-span-4 px-3 py-2">
-                                    <PlanCTA intent="enterprise" ctaText="Get in touch" ctaLink="/talk-to-a-human" />
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                <div className="flex gap-2 items-center">
+                    <Link
+                        href="/community/profiles/27732"
+                        className="rounded-full overflow-hidden size-12 border border-border hover:border-bg-dark/30 dark:border-dark dark:hover:border-light/50 p-0.5 bg-light dark:bg-dark"
+                    >
+                        <StaticImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
+                            quality={100}
+                            alt="James Hawkins, CEO, Co-founder"
+                            placeholder="none"
+                            objectFit="contain"
+                            className="bg-yellow rounded-full"
+                        />
+                    </Link>
+                    <p className="leading-tight mb-0">
+                        <Link href="/community/profiles/27732" className="flex">
+                            <strong>James Hawkins</strong>
+                        </Link>
+                        <span className="text-sm opacity-70">Co-founder</span>
+                    </p>
+                </div>
+                <p className="pl-14 text-sm opacity-75 italic">
+                    When James isn't thinking about how to cut prices (again), you'll likely find him changing a diaper.
+                </p>
+            </section>
 
-                    <SectionLayout id="add-ons">
-                        <SectionHeader>
-                            <h3>Add-ons</h3>
-                        </SectionHeader>
+            <section id="faq" className={`${section} mb-20 mt-12 md:px-4`}>
+                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Pricing FAQ</h2>
+                <FAQs />
+                <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
+                    Have another pricing-related question?{' '}
+                    <Link href="/questions/topic/pricing">Ask in our community forum</Link>
+                </p>
+            </section>
 
-                        <SectionColumns>
-                            <SectionMainCol>
-                                <AllAddons />
-                            </SectionMainCol>
-                            <SectionSidebar>
-                                <h4 className="text-lg mb-0">Why add-ons?</h4>
-                                <SidebarList>
-                                    <SidebarListItem>
-                                        We move additional functionality to add-ons to keep our base prices low. This is
-                                        so you never pay for functionality you don't want or need.
-                                    </SidebarListItem>
-                                    <SidebarListItem>Subscribe to add-ons after signing up.</SidebarListItem>
-                                </SidebarList>
-                            </SectionSidebar>
-                        </SectionColumns>
-                    </SectionLayout>
-
-                    <section className="bg-white text-dark shadow-xl rounded pt-6 pb-2 md:py-8 px-8 md:px-12 mx-6 md:mx-auto w-[calc(100%_-_3rem)] md:w-full max-w-3xl -rotate-1">
-                        <SectionHeader>
-                            <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>
-                            <h3>Our pricing is designed to make you happy</h3>
-                        </SectionHeader>
-
-                        <p className="mt-4">Here's what you should know about our pricing:</p>
-                        <ul className="space-y-1 mb-4 [&_li]:leading-7 pl-4 md:pl-8">
-                            <li>
-                                <strong>We make a profit with every product.</strong> This means we don’t have
-                                loss-leader products that will go up in pricing later or get retired.
-                            </li>
-                            <li>
-                                <strong>We aim to be the cheapest for each product at every scale</strong> compared to
-                                every major competitor.{' '}
-                                <Link
-                                    iconClasses="!text-dark"
-                                    href="https://twitter.com/intent/tweet?text=@posthog%20Your%20pricing%20is..."
-                                    external
-                                >
-                                    <em>Tell us if we're not!</em>
-                                </Link>{' '}
-                                (Note: This doesn't include your buddy's two person startup.)
-                            </li>
-                            <li>
-                                The company in general has significant revenue, over 60,000 customers, runs{' '}
-                                <Link href="/newsletter/the-companies-that-shaped-posthog#our-takeaways-2">
-                                    default alive
-                                </Link>
-                                , and aims to IPO rather than sell. This means{' '}
-                                <strong>we don’t rely on investors to grow, and we’re stable.</strong> Of course we
-                                aren’t perfect, but this goes a long way to avoiding the average dumb vc-backed company
-                                stuff in general - like running out of money or selling to a lame bigger company who
-                                just kills off our products.
-                            </li>
-                            <li>
-                                We have an open source product too - so if you must, you can self host. It is MIT
-                                licensed if you want to use it in a big organization that isn’t ready to move to PostHog
-                                Cloud yet.
-                                <Tooltip
-                                    content={() => (
-                                        <div className="max-w-sm">
-                                            <strong className="block">A disclaimer about self-hosting</strong>
-                                            <p className="mb-2 text-sm">
-                                                Being upfront, self-hosting PostHog has limitations and is usually a
-                                                worse experience (and more expensive) than PostHog Cloud.
-                                            </p>
-                                            <p className="mb-0 text-sm">
-                                                Main benefits of PostHog Cloud include our large, shared infrastructure
-                                                and lack of separate hosting costs, required maintenance, and upgrades
-                                                that come with self-hosting.
-                                            </p>
-                                        </div>
-                                    )}
-                                >
-                                    <IconInfo className="size-4 inline-block relative left-0.5 -top-0.5" />
-                                </Tooltip>
-                            </li>
-                        </ul>
-                        <p className="mb-4">If this makes you happy – like most people - just start here:</p>
-                        <p>
-                            <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
-                                <PlanCTA />
-                                <em className="opacity-75 text-sm">No credit card required</em>
-                            </div>
-                        </p>
-                        <p>
-                            Or if you need more info,{' '}
-                            <button
-                                className="text-red dark:text-yellow font-semibold"
-                                onClick={() =>
-                                    window.scrollTo({
-                                        top:
-                                            document.querySelector('#faq')?.getBoundingClientRect().top +
-                                            window.pageYOffset -
-                                            128,
-                                        behavior: 'smooth',
-                                    })
-                                }
-                            >
-                                read our FAQ
-                            </button>
-                            , <Link href="/questions/topic/pricing">ask a question</Link>, or{' '}
-                            <Link href="/talk-to-a-human">talk to a human</Link>.
-                        </p>
-
-                        <div className="flex gap-2 items-center">
-                            <Link
-                                href="/community/profiles/27732"
-                                className="rounded-full overflow-hidden size-12 border border-border hover:border-bg-dark/30 dark:border-dark dark:hover:border-light/50 p-0.5 bg-light dark:bg-dark"
-                            >
-                                <StaticImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
-                                    quality={100}
-                                    alt="James Hawkins, CEO, Co-founder"
-                                    placeholder="none"
-                                    objectFit="contain"
-                                    className="bg-yellow rounded-full"
-                                />
-                            </Link>
-                            <p className="leading-tight mb-0">
-                                <Link href="/community/profiles/27732" className="flex">
-                                    <strong>James Hawkins</strong>
-                                </Link>
-                                <span className="text-sm opacity-70">Co-founder</span>
-                            </p>
-                        </div>
-                        <p className="pl-14 text-sm opacity-75 italic">
-                            When James isn't thinking about how to cut prices (again), you'll likely find him changing a
-                            diaper.
-                        </p>
-                    </section>
-                </>
-            )}
-
-            {currentProduct && (
-                <section className={`${section} mb-12 mt-8 md:px-4 overflow-auto`}>
-                    <Plans showTitle groupsToShow={groupsToShow} />
-                </section>
-            )}
-
-            {!currentProduct && (
-                <>
-                    <section id="faq" className={`${section} mb-20 mt-12 md:px-4`}>
-                        <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Pricing FAQ</h2>
-                        <FAQs />
-                        <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
-                            Have another pricing-related question?{' '}
-                            <Link href="/questions/topic/pricing">Ask in our community forum</Link>
-                        </p>
-                    </section>
-
-                    <section className="relative">
-                        <CTA />
-                    </section>
-                </>
-            )}
+            <section className="relative">
+                <CTA />
+            </section>
 
             <section className="bg-primary my-12 md:px-4">
                 <Quote

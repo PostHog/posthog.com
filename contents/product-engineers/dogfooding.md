@@ -4,7 +4,7 @@ date: 2024-07-04
 author:
  - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/dogfood_0015adbb54.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/dogfood_531145ada2.jpg
 featuredImageType: full
 tags:
   - Product engineers
@@ -46,7 +46,7 @@ The development of HogQL was largely driven by dogfooding for two reasons:
 
 2. **We use it elsewhere.** HogQL is now the underlying query engine for all insights. Improvements to functionality and performance we created internally end up benefiting external users too.
 
-For example, HogQL was missing `OFFSET` support until <TeamMember name="Michael Matloka" /> discovered that limitation when wanting to calculate the average number of times a dashboard is viewed. 
+For example, HogQL was missing `OFFSET` support until <TeamMember name="Michael Matloka" photo /> discovered that limitation when wanting to calculate the average number of times a dashboard is viewed. 
 
 ![Michael dogfooding](https://res.cloudinary.com/dmukukwp6/image/upload/michael_0e8e2df547.png)
 

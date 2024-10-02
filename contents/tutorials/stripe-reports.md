@@ -13,11 +13,13 @@ This tutorial shows you how to sync your Stripe data to PostHog and then create 
 
 ## Linking Stripe data to PostHog
 
-To start, you need both a Stripe and PostHog account. Once you have those, head to PostHog's [data warehouse tab](https://us.posthog.com/data-warehouse) and:
-1. Click **Link source**
+To start, you need both a Stripe and PostHog account. Once you have those, head to PostHog's [Data pipeline page](https://us.posthog.com/pipeline/sources) and:
+1. Under the sources tab, click **New source**
 2. Choose the Stripe option by clicking **Link**
 3. Enter [your account ID](https://dashboard.stripe.com/settings/user) and a [restricted API key](https://dashboard.stripe.com/apikeys/create) that can read the resources you want to query
 4. Press **Next**, keep all tables selected and click **Import**
+
+> For Stripe tables, incremental syncs will only sync new records and not update existing records. This is a limitation of the Stripe API in which it's not possible to query for updated data. 
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/link_light_d827d9f83f.png"
@@ -26,9 +28,9 @@ To start, you need both a Stripe and PostHog account. Once you have those, head 
   classes="rounded"
 />
 
-Once done, PostHog will automatically pull and format your Stripe data for querying. You can adjust the sync frequency, see the last successful run, and more in [data warehouse settings](https://us.posthog.com/data-warehouse/settings/managed).
+Once done, PostHog will automatically pull and format your Stripe data for querying. You can adjust the sync frequency, see the last successful run, and more in [data pipeline sources tab](https://us.posthog.com/pipeline/sources).
 
-> **Note:** If you are missing a table, check your [data warehouse settings](https://us.posthog.com/data-warehouse/settings/managed) to make sure it synced correctly.
+> **Note:** If you are missing a table, check your [data pipeline sources tab](https://us.posthog.com/pipeline/sources) to make sure it synced correctly.
 
 ## Creating insights for your Stripe report
 
@@ -92,7 +94,7 @@ WITH subscription_items AS (
     SELECT
         id,
         current_period_start,
-        JSONExtractArrayRaw(items, 'data') AS data_items
+        JSONExtractArrayRaw(items ?? '[]', 'data') AS data_items
     FROM stripe_subscription
 ),
 flattened_items AS (

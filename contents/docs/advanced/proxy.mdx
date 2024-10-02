@@ -14,7 +14,7 @@ Setting up a reverse proxy means setting up a service to redirect requests from 
 
 You then use this subdomain as your `api_host` in the initialization of PostHog instead of `us.i.posthog.com` or `eu.i.posthog.com`.
 
-> Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js#config) when initializing our browser integration, so that links to the PostHog interface point to the correct host.
+> **Note** Make sure to [pass the proper `ui_host` parameter](/docs/libraries/js#config) when initializing PostHog, so that links to PostHog point to the correct host. This is required for tasks like authenticating the toolbar.
 
 ## Deploying a reverse proxy
 
@@ -28,6 +28,7 @@ Options for deploying a reverse proxy include:
 - [Netlify](/docs/advanced/proxy/netlify)
 - [Next.js rewrites](/docs/advanced/proxy/nextjs)
 - [Next.js middleware](/docs/advanced/proxy/nextjs-middleware)
+- [nginx](/docs/advanced/proxy/nginx)
 - [Vercel](/docs/advanced/proxy/vercel)
 - [Nuxt](/docs/advanced/proxy/nuxt)
 

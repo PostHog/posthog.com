@@ -72,7 +72,7 @@ With our app and PostHog set up, we can go to the [surveys tab](https://app.post
 
 ![Enable surveys](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/survey/enable.mp4)
 
-Aftwards click "Create survey." Enter a name, question, and any of the other details you want (like targeting). Once done, click "Save as draft," make sure everything looks good, then click "Launch."
+Aftwards click "Create survey." Enter a name, question, and any of the other details you want (like display conditions). Once done, click "Save as draft," make sure everything looks good, then click "Launch."
 
 ![Feedback survey video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/survey/create-survey.mp4)
 

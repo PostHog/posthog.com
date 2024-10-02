@@ -43,10 +43,9 @@ The response targets listed below are our minimums for an initial response, and 
 
 Tickets are considered high priority if they fulfill ANY of the following conditions:
 
-- The user is tagged as belonging to a priority customer org
-- The user is in a trial stage with the product
-- The user raises an issue through a shared Slack channel
-- The user belongs to an org which qualifies as a high-paying customer
+- The customer is high paying
+- The customer is in a trial stage with the product
+- The customer is subscribed to the teams add-on
 - The ticket is listed as critical severity
 
 This ensures that users who pay for support or which are otherwise considered a priority customer are prioritized and get the best possible support experience. Free users can raise critical impact bugs or issues to an appropriate level.
@@ -56,9 +55,9 @@ This ensures that users who pay for support or which are otherwise considered a 
 
 Tickets are considered normal priority if they fulfill ANY of the following conditions but the user does NOT qualify as a high-paying org:
 
-- The org is a paying customer
-- The org is on a PostHog for Startups or Y Combinator plan
-- The user is raising a billing issue
+- The customer is subscribed to the `Ridiculously cheap` plan
+- The customer is on a PostHog for Startups or Y Combinator plan
+- The customer is raising a billing issue
 - The ticket is listed as high severity
 
 This ensures that most paying users get appropriately rapid support and that all billing issues are ensured to get a response. Free users can raise high impact bugs or issues to an appropriate level.
@@ -91,14 +90,17 @@ We send out CSAT surveys after a ticket has been closed for at least 3 days usin
 
 We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, support engineers sit in [the Comms team](/teams/customer-comms) and cover: 
 
-- Product Analytics (<TeamMember name="Marcus Hof" /> & <TeamMember name="Steven Shults" />)
-- Pipeline (<TeamMember name="Marcus Hof" />)
-- Session Reply (<TeamMember name="Steven Shults" />)
-- Feature Success (<TeamMember name="Steven Shults" />)
-- Comms (<TeamMember name="Marcus Hof" /> & <TeamMember name="Steven Shults" />)
-- Data Warehouse (<TeamMember name="Marcus Hof" />)
+- Product analytics (whole team)
+- Web analytics (whole team)
+- Session replay (whole team)
+- Feature success (whole team)
+- Comms (whole team)
+- CDP (<TeamMember name="Marcus Hof" />)
+- Data warehouse (<TeamMember name="Marcus Hof" />)
 
 Support engineers respond to as many tickets as they can for these products, and escalate other tickets to the appropriate teams as needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
+
+When we hire new support engineers they will usually spend the first few weeks focused just on product and web analytics tickets, until they've started to build more familiarity with the platform as a whole. 
 
 ### Engineers are Support Heroes
 

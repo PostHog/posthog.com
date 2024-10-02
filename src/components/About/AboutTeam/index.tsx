@@ -81,9 +81,7 @@ const query = graphql`
     {
         teamMembers: allSqueakProfile(
             filter: {
-                lastName: {
-                    in: ["Yi Yu", "Kakkar", "Majuri", "Duong", "Andra", "Coxon", "Phang", "Obermüller", "DeLeone"]
-                }
+                lastName: { in: ["Andra", "Coxon", "Phang", "Obermüller", "Temperton", "Matloka", "Majerik"] }
                 teams: { data: { elemMatch: { attributes: { name: { ne: null } } } } }
             }
             sort: { fields: startDate }

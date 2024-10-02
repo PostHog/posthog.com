@@ -335,7 +335,6 @@ export const ProductWebAnalytics = () => {
                 <Hero
                     color="[#36C46F]"
                     icon={<IconPieChart />}
-                    beta={true}
                     product={product.capitalized}
                     title="Monitor your website traffic"
                     description="Web analytics for people who really liked GA3..."
@@ -403,9 +402,6 @@ export const ProductWebAnalytics = () => {
             >
                 <h2 className="text-3xl md:text-4xl text-center">Usage-based pricing</h2>
                 <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
-                    <p className="mb-1">
-                        <strong>While in beta...</strong>
-                    </p>
                     <p className="mb-2">
                         Web analytics is currently bundled with <Link to="/product-analytics">product analytics</Link>.
                     </p>
@@ -418,7 +414,10 @@ export const ProductWebAnalytics = () => {
                             access to web analytics at no additional cost.
                         </li>
                     </ul>
-                    <p className="mb-0">Cheaper, dedicated pricing for web analytics is coming soon.</p>
+                    <p className="mb-2">
+                        Web analytics is designed to work well with{' '}
+                        <Link to={'/blog/analytics-pricing'}>anonymous events</Link>.
+                    </p>
                 </div>
 
                 {/*}

@@ -97,7 +97,7 @@ const Row = ({
     fetchMore,
     showStatus = true,
 }) => {
-    const { isModerator, notifications } = useUser()
+    const { isModerator, notifications, user } = useUser()
     const {
         id,
         attributes: { profile, subject, permalink, replies, createdAt, resolved, topics, activeAt, body },

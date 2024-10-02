@@ -1,5 +1,5 @@
 ---
-title: Integrating with Langfuse
+title: Integrating with Traceloop
 availability:
     free: full
     selfServe: full

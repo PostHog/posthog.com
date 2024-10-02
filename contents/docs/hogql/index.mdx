@@ -51,6 +51,7 @@ WHERE event = '$pageview'
         WHERE event = '$pageview'
         GROUP BY distinct_id
     )
+    AND {filters}
 GROUP BY current_url
 ORDER BY url_count DESC
 ```

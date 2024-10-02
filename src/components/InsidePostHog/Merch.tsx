@@ -11,11 +11,9 @@ export default function Merch() {
                 featuredMedia {
                     preview {
                         image {
-                            localFile {
-                                childImageSharp {
-                                    gatsbyImageData
-                                }
-                            }
+                            width
+                            height
+                            originalSrc
                         }
                     }
                 }

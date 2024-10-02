@@ -10,7 +10,7 @@ export const FunnelExperimentCalculationDark = "https://res.cloudinary.com/dmuku
 export const FunnelSignificanceLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-significance-light.png"
 export const FunnelSignificanceDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/user-guides/experimentation/funnel-significance-dark.png"
 
-Below are all the formulas and calculations we use to determine the significance of an experiment
+Below are all the formulas and calculations we use to determine the significance of an experiment.
 
 ## Bayesian experimentation
 
@@ -18,7 +18,8 @@ In the field of experimentation, there are two primary statistical approaches: f
 
 We adopt the Bayesian methodology because it directly answers the question: "Is variant A better than variant B?" This approach minimizes judgment errors, which are more common with the frequentist method.
 
-> In a frequentist approach, you start with a null hypothesis, which typically represents the current state of things or no effect. For example, the null hypothesis might state that there is no difference between variant A and variant B. The goal is to collect enough data to disprove this null hypothesis. However, disproving the null hypothesis does not directly tell us that "A is better than B." It only tells us that there is a statistically significant difference between the two. This approach can often lead to misinterpretations, especially if the context of the difference isn't considered.
+> In a frequentist approach, you start with a null hypothesis, which typically represents the current state of things or no effect. For example, the null hypothesis might state that there is no difference between variant A and variant B. 
+> The goal is to collect enough data to disprove this null hypothesis. However, disproving the null hypothesis does not directly tell us that "A is better than B." It only tells us that there is a statistically significant difference between the two. This approach can often lead to misinterpretations, especially if the context of the difference isn't considered.
 
 Our Bayesian experimentation method focuses on two key parameters during experiments:
 
@@ -29,9 +30,11 @@ Our Bayesian experimentation method focuses on two key parameters during experim
 
 Funnel experiments compare conversion rates. For example, if you want to measure the change in the conversion rate for subscribing to your site, you would use this type of experiment.
 
-#### 1. Probability of being the best
+### 1. Probability of being the best
 
-We use Monte Carlo simulations to determine the probability of each variant being the best. Each variant can be modeled as a beta distribution, with the alpha parameter equal to the number of conversions and the beta parameter equal to the number of failures for that variant. For each variant, we sample from their respective distributions to get a conversion rate. We perform 100,000 simulation runs in our calculations.
+We use Monte Carlo simulations to determine the probability of each variant being the best. 
+
+Each variant can be modeled as a beta distribution, with the alpha parameter equal to the number of conversions and the beta parameter equal to the number of failures for that variant. For each variant, we sample from their respective distributions to get a conversion rate. We perform 100,000 simulation runs in our calculations.
 
 The probability of a variant being the best is given by:
 
@@ -42,7 +45,7 @@ The probability of a variant being the best is given by:
   classes="rounded"
 />
 
-#### 2. Statistical significance
+### 2. Statistical significance
 
 To calculate significance, we measure the expected loss, as described in [VWO's SmartStats whitepaper](https://vwo.com/downloads/VWO_SmartStats_technical_whitepaper.pdf).
 
@@ -61,9 +64,11 @@ This represents the expected loss in conversion rate if you choose any other var
 
 Trend experiments capture count data. For example, if you want to measure the change in the total count of clicks, you would use this type of experiment.
 
-#### 1. Probability of being the best
+### 1. Probability of being the best
 
-We use Monte Carlo simulations to determine the probability of each variant being the best. Each variant can be modeled as a gamma distribution, with the shape parameter equal to the trend count and the exposure parameter equal to the relative exposure for that variant. For each variant, we sample from their respective distributions to get a count value. We perform 100,000 simulation runs in our calculations.
+We use Monte Carlo simulations to determine the probability of each variant being the best. 
+
+Each variant can be modeled as a gamma distribution, with the shape parameter equal to the trend count and the exposure parameter equal to the relative exposure for that variant. For each variant, we sample from their respective distributions to get a count value. We perform 100,000 simulation runs in our calculations.
 
 The probability of a variant being the best is given by:
 
@@ -76,24 +81,23 @@ The probability of a variant being the best is given by:
 
 >**Trend experiment exposure**
 >
->
 >Trend experiments compare counts of events. Since count data can refer to the total count of events or the number of unique users, we use a proxy metric to measure exposure. The number of times the `feature_flag_called` event returns control or test is used as the respective exposure for the variant. This event is sent automatically when you call `posthog.getFeatureFlag()`.
 >
->It's important to note that a variant showing fewer count data can still have a higher probability of being the best if its exposure is much smaller. This is because the relative exposure is taken into account when calculating probabilities.
+>Note that a variant showing fewer count data can still have a higher probability of being the best if its exposure is much smaller. This is because the relative exposure is taken into account when calculating probabilities.
 
-#### 2. Statistical significance
+### 2. Statistical significance
 
 To calculate significance, we measure p-values using a [Poisson means test](https://www.evanmiller.org/statistical-formulas-for-programmers.html#count_test). Results are significant when the p-value is less than 0.05
 
 ## How do we determine final significance?
 
-For your results and conclusions to be valid, any experiment must have significant exposure. For instance, if you test a product change and only one user sees the change, you can't extrapolate from that single user that the change will be beneficial or detrimental for your entire user base. This principle holds true for any simple randomized controlled experiment, such as those used in testing new drugs or vaccines.
+For your results and conclusions to be valid, any experiment must have significant exposure. For instance, if you test a product change and only one user sees the change, you can't extrapolate from that single user that the change will be beneficial or detrimental. This principle holds true for any simple randomized controlled experiment, such as those used in testing new drugs or vaccines.
 
-Even with a large sample size (e.g., approximately 10,000 participants), results can still be ambiguous. For example, if the difference in conversion rates between variants is less than 1%, it becomes difficult to determine if one variant is truly better than the other. To achieve statistical significance, there must be a sufficient difference between the conversion rates given the exposure size.
+Even with a large sample size (e.g. ~10,000 participants), results can still be ambiguous. For example, if the difference in conversion rates between variants is less than 1%, it becomes difficult to determine if one variant is truly better than the other. To achieve statistical significance, there must be a sufficient difference between the conversion rates given the exposure size.
 
-PostHog computes this statistical significance for you automatically. We notify you when your experiment has reached statistically significant results, making it safe to draw conclusions and terminate the experiment.
+PostHog computes this statistical significance for you automatically. We display on the results page when your experiment has reached statistically significant results, making it safe to draw conclusions and terminate the experiment.
 
-In the early days of an experiment, data can vary wildly, and sometimes one variant can seem overwhelmingly better. In this case, our significance calculations might say that the results are significant, but this shouldn't be the case, since we need more data.
+In the early days of an experiment, data can vary wildly and sometimes one variant can seem overwhelmingly better. In this case, our significance calculations might say that the results are significant, but this shouldn't be the case, since we need more data.
 
 Therefore, we have additional criteria to determine what we call **final significance**. Before each variant in an experiment reaches 100 unique users, we default to considering the results as not significant. Additionally, if the combined probability of all test variants being the best is less than 90%, we also default to considering the results as not significant.
 

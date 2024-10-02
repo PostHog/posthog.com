@@ -63,8 +63,8 @@ const features = [
         fade: true,
     },
     {
-        title: 'Targeting',
-        description: 'Target by URL, person property, or feature flag when used with Feature Flags',
+        title: 'Display Conditions',
+        description: 'Display surveys based on URL, person property, or feature flag when used with Feature Flags',
         image: <StaticImage src="./images/targeting.png" width={428} placeholder="none" />,
     },
     {

@@ -8,16 +8,51 @@ showTitle: true
 
 ## Main metrics for each role
 
-- AE: new and expansion revenue in your segment
-- SDR: number of customer meetings booked in correct segment
-- CSM: revenue retention %
+- AE: new and expansion revenue in your book of business
 - RevOps: overall revenue from $20k+ segment
+- CSM: logo retention 
 
-Other metrics we care about:
+Other metrics we generally care about:
 - Closed - won % from demo
 - Time to close
 - Lead volume in each segment
 - Weighted pipeline
+
+## Book of business
+
+Each AE is assigned ~10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 20 accounts, so staying extremely focused is important. 
+
+Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
+
+### Handing-off customers from AE to CSM
+
+We want to ensure the expansion potential of a customer has been thoroughly exhausted before moving to a Customer Success Manager for steady-state retention.  When you want to move a customer off your book you should talk it through with Simon. Here are the things we will be looking at:
+
+1. Have you tried multiple times to [make contact](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you) with all of the active users in an account?
+   - An _Active User_ is someone who has been seen in Vitally in the past month
+   - When you reach out, demonstrate how you can help that person out, be specific to their role/usage of PostHog.
+2. Are they using all PostHog products?
+   - If they have been customers for a while they may not be aware of new products like Surveys and Data Warehouse.  Look at their usage and see if there are any obvious cross-sell opportunities.
+   - Could they benefit from some of the advanced capabilities and training/support available in Teams/Enterprise?
+3. Is there an opportunity to cross-sell to a different team?
+   - Have a look at what they are tracking with PostHog.  If it's an app then maybe get in touch with the marketing team to talk about Web Analytics or No Code Testing
+   - Are they a multi-product company?  Find out if there are other teams who aren't using us who could benefit from PostHog today, and then use your current users as an internal reference.
+   
+If the answer to any of the above questions is 'no' then it's likely that there is more work to be done with a customer, but we will use a common sense approach here.
+
+> A customer being negative/difficult to work with isn't a reason to remove them from your book.  It's your job to turn them around to being a happy customer (AKA be their favorite).
+
+## Weekly sales standup
+
+In addition to the weekly sprint planning meeting on a Monday, we do a weekly sales standup on a Wednesday. Two AEs are picked at random, and we spend 30min on each going in depth through:
+
+- Your existing book of business - every customer should have a status update and next steps identified
+- Top 3 new leads
+- Any renewals in the current and next quarter
+
+The reason for structuring the review in this way is that we find it is much more effective to go deep on a subset of customers than racing around giving everyone 5 minutes to give a very surface level update. Turns are taken randomly so that you are incentivized to turn up to every meeting fully prepared, in case you are selected!
+
+The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - [you should not let your team mates fail](/culture#dont-let-others-fail). 
 
 ## New AE hire ramp up
 - Day 1

@@ -147,7 +147,7 @@ Reviews on G2.com suggest companies use LogRocket because it:
 
 ### What is FullStory?
 
-[FullStory](/blog/best-fullstory-alternatives) describes itself as Digital Experience Intelligence, which is code for session replay and mobile app analytics, with a side of product analytics. Like LogRocket and PostHog, it supports event autocapture, so you don't have to manually code every event you want to capture.
+[FullStory](/blog/best-fullstory-alternatives) describes itself as Digital Experience Intelligence, which is code for session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools), with a side of product analytics. Like LogRocket and PostHog, it supports event autocapture, so you don't have to manually code every event you want to capture.
 
 According to data from [BuiltWith](https://trends.builtwith.com/analytics/FullStory), as of February 2024, 8,141 of the top 1 million websites in the world deploy FullStory. This makes it less popular than Clarity (45,820), but more popular than PostHog (5,169) and Mouseflow (5,555). Customers tend to be product managers and support teams at larger e-commerce websites and B2C enterprises.
 
@@ -206,7 +206,7 @@ According to reviews on G2, companies use FullStory for:
 
 ### What is UXCam?
 
-UXCam is designed specifically for mobile apps rather than websites. It combines basic product analytics with session replay and heatmap tools to help its users understand how people use their apps, and optimize conversions. It offers SDKs for iOS (Swift and Objective C) and Android (Kotlin and Java), but also supports popular cross-platform frameworks, such as React Native and Flutter.
+[UXCam](/blog/best-uxcam-alternatives) is designed specifically for mobile apps rather than websites. It combines basic product analytics with session replay and heatmap tools to help its users understand how people use their apps, and optimize conversions. It offers SDKs for iOS (Swift and Objective C) and Android (Kotlin and Java), but also supports popular cross-platform frameworks, such as React Native and Flutter.
 
 #### Key features
 

@@ -30,13 +30,19 @@ Sometimes these principles still leave room for questions – what, if anything,
 
 For these types of questions, we've defined a runbook for deciding which plans, and at what limits, features should be assigned to.
 
-### We should match the cheapest competitor
+### We should slightly undercut the cheapest competitor
 
-In general, we should roughly match the pricing of the cheapest big competitor for that product, so long as the unit economics make sense, to make it a no-brainer to use PostHog.
+In general, we should slightly undercut the pricing of the cheapest big competitor for that product, so long as the unit economics make sense, to make it a no-brainer to use PostHog. To qualify for this, a competitor must be _making actual revenue_ at significant scale - we won't match the pricing random startups or new products at existing competitors offer, since these products and GTMs aren't mature yet.
 
 We can do this because we can upsell customers multiple of our other products. The total ACV is higher even if the per-product ACV is lower. 
 
 It's better for customers because they get all these tools that are well integrated for the cheapest possible price.
+
+### Every product should be priced separately
+
+Whenever we build a product, like feature flags, or product experimentation, we should have a specific price for that product by itself. Being consistent here is less confusing than randomly combining products for example, even though it will sometimes mean more items to explain to a customer.
+
+It means that that customers who want just one product, can compare each of our products to our competitors', seeing that we are cheaper everywhere, improving our self serve top of funnel.
 
 ### Features that increase our stickiness should be free (with a reasonable limit)
 
@@ -62,6 +68,12 @@ For example, when someone calls a feature flag, we send a $feature_flag_called e
 
 - Features that are focused around extra security, permissioning, compliance, or other enterprise-style upgrades should be reserved for our enterprise pricing tier.
 
-- Unless there is a very good reason not to, we should grandfather existing customers' pricing tiers to avoid unexpected pricing changes.
+- Unless there is a very good reason not to, we should grandfather existing customers' pricing tiers if they are cheaper than the new pricing to avoid unexpected pricing changes. 
 
+### Deciding on a free volume, and making changes to it
 
+- When choosing a free volume for a new product, we should choose a value that is in line with our pricing principles: It should give customers the opportunity to experience the product before paying for it, and we should slightly undercut our competitors if they offer a free tier. 
+
+- Keep in mind: It's easy to increase the free tier for existing customers, but it's very painful to decrease it (since we don't want existing customers to pay more).
+
+- If we decide to lower the free tier as part of a wider pricing change (primarily when we lower our prices), in principle we should roll out the new pricing **and** the new free tier to existing customers, because they will likely save money. An exception should be made for customers who are forecasted to pay more, in these cases, we should enroll them in the new pricing, but grandfather the higher free tier.

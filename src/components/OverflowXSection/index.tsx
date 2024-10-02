@@ -5,5 +5,5 @@ interface OverflowXSectionProps {
 }
 
 export const OverflowXSection = ({ children }: OverflowXSectionProps) => {
-    return <div className="w-full overflow-x-auto">{children}</div>
+    return <div className="min-w-full overflow-x-auto -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12">{children}</div>
 }

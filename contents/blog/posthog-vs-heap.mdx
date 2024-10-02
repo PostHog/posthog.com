@@ -89,7 +89,7 @@ Session replays are an essential tool for understanding how people use your prod
   <ComparisonRow column1={true} column2={false} feature="Web app recordings" description="Capture recordings from single-page apps" />
   <ComparisonRow column1="Beta" column2={false} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
   <ComparisonRow column1={true} column2={true} feature="Identity detection" description="Link recordings to user IDs" />
-  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a users' browser environment" />
+  <ComparisonRow column1={true} column2={false} feature="Console logs" description="Capture extra content from a user's browser" />
   <ComparisonRow column1={true} column2={false} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
   <ComparisonRow column1={true} column2={false} feature="Performance monitoring" description="Track network events within a session" />
   <ComparisonRow column1={true} column2={true} feature="Privacy masking" description="Censor personal information from playback" />
@@ -168,6 +168,10 @@ PostHog and Heap both offer a wide range if integrations, but only PostHog enabl
 
 ## Frequently asked questions
 
+### Can I migrate from Heap?
+
+Yes. See our [Heap to PostHog migration guide](/docs/migrate/heap) for more.
+
 ### How long does it take to deploy PostHog?
 
 Deploying PostHog takes mere minutes. Just [include our tracking snippet](/docs/integrate?tab=snippet) in your product or website and (thanks to autocapture) you're immediately capturing events. Once up and running, you can enable session replays and other features via your project settings. See our guide to [getting started on PostHog Cloud](/docs/getting-started/cloud) for more info.
@@ -191,7 +195,6 @@ We recommend all users deploy a reverse proxy, which enables you send events to 
 ### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
 
 Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
-
 
 ### Can you use PostHog on e-commerce websites?
 

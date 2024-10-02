@@ -116,7 +116,7 @@ To create a survey with a prebuilt UI, go to the [surveys tab](https://app.posth
 1. Add a name (like `my-first-survey`).
 2. Set the display mode to `Popover`.
 3. Select the `Rating` question type. Set the question title to `How likely are you to recommend us to a friend?`, display type to `number` and scale to `1-10`.
-4. Leave the remaining optional properties blank (such as `Targeting` or `Thank you message`).
+4. Leave the remaining optional properties blank (such as `Display conditions` or `Thank you message`).
 5. Click "Save as draft" and then on the next screen click "Launch". 
 
 ![Popover survey set up](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-surveys/create-popover-survey.png)
@@ -250,7 +250,7 @@ This shows a survey popup every time you visit your app's homepage.
 
 #### 2. Fetch the survey from PostHog
 
-PostHog keeps track of all active surveys for a user (this is especially helpful if you have set up [custom targeting options](/docs/surveys/creating-surveys#targeting)). 
+PostHog keeps track of all active surveys for a user (this is especially helpful if you have set up [custom display conditions](/docs/surveys/creating-surveys#display-conditions)).
 
 To fetch the active surveys, we use the `usePostHog` hook to call `posthog.getActiveMatchingSurveys()` using `useEffect()`:
 
@@ -501,7 +501,7 @@ After interacting with your survey, you can view results by selecting the survey
 - How many users have dismissed the survey.
 - Responses.
 
-If you capture person profiles, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
+If you capture identified events, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 ![Viewing survey results](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-surveys/survey-results.png)
 

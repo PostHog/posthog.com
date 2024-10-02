@@ -28,20 +28,20 @@ const them = [
                 <div className="col-span-3 rotate-2 -mt-6 mb-6 relative left-3 md:left-0">
                     <div className="dark:hidden">
                         <StaticImage
-                            quality={90}
+                            quality={100}
                             placeholder="blurred"
                             loading="eager"
                             src="../images/sales/demo-form-light.png"
-                            width={294}
+                            width={270}
                         />
                     </div>
                     <div className="hidden dark:block">
                         <StaticImage
-                            quality={90}
+                            quality={100}
                             placeholder="blurred"
                             loading="eager"
                             src="../images/sales/demo-form-dark.png"
-                            width={294}
+                            width={270}
                         />
                     </div>
                 </div>
@@ -76,12 +76,7 @@ const them = [
                 </div>
 
                 <div className="col-span-4 -mt-4 pb-6 rotate-2">
-                    <StaticImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="../images/sales/sdr-on-zoom.png"
-                        width={505.5}
-                    />
+                    <StaticImage quality={90} placeholder="blurred" src="../images/sales/sdr-on-zoom.png" width={436} />
                 </div>
             </>
         ),
@@ -98,7 +93,9 @@ const them = [
                     </p>
                 </div>
 
-                <div className="col-span-3 -mt-8 pb-6"></div>
+                <div className="col-span-3 -mt-6 md:-mt-12 pb-4">
+                    <StaticImage quality={90} placeholder="blurred" src="../images/sales/no-hope.png" width={352} />
+                </div>
             </>
         ),
     },
@@ -149,16 +146,17 @@ const them = [
                 <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-8 md:pb-20">
                     <p>
                         Eventually sign the contract - hopefully you saw the auto-renewal and mandatory price increases
-                        in there!
+                        in there! 'Professional services'? Yeah that's just a fancy word for onboarding, but they'll
+                        charge you $$$ for it.
                     </p>
                 </div>
 
-                <div className="col-span-3 -mt-12">
+                <div className="col-span-3 -mt-6">
                     <StaticImage
                         quality={90}
                         placeholder="blurred"
-                        src="../images/sales/ribbon-cutting.png"
-                        width={326}
+                        src="../images/sales/contract-negotiation.png"
+                        width={369}
                     />
                 </div>
             </>
@@ -208,13 +206,8 @@ const them = [
                     </p>
                 </div>
 
-                <div className="col-span-3 -mt-4 md:-mt-12 text-center">
-                    <StaticImage
-                        quality={90}
-                        placeholder="blurred"
-                        src="../images/sales/confused-hog.png"
-                        width={202}
-                    />
+                <div className="col-span-3 -mt-4 md:-mt-8 md:pb-8 text-center">
+                    <StaticImage quality={90} placeholder="blurred" src="../images/sales/shocked-hog.png" width={200} />
                 </div>
             </>
         ),
@@ -274,7 +267,7 @@ const us = [
 
         children: (
             <>
-                <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl pb-12 md:pb-24">
+                <div className="col-span-5 pl-1 md:pl-9 [&_p]:mb-2 max-w-2xl md:pb-24">
                     <p>
                         Get booked on a demo call with a technical person who will spend 90% of the call in the PostHog
                         app, not chatting about our vision. They will use the info you’ve shared to customize the demo.
@@ -286,7 +279,7 @@ const us = [
                     </p>
                 </div>
 
-                <div className="col-span-3 text-center">
+                <div className="col-span-3 text-center rotate-2 pb-4 pr-2">
                     <StaticImage quality={90} placeholder="blurred" src="../images/sales/posthog-ae.png" width={436} />
                 </div>
             </>
@@ -341,8 +334,13 @@ const us = [
                     </p>
                 </div>
 
-                <div className="col-span-4 -mt-4 text-center">
-                    <StaticImage quality={90} placeholder="blurred" src="../images/sales/discounts.png" width={321} />
+                <div className="col-span-4 -mt-8 md:-mt-12 text-center">
+                    <StaticImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="../images/sales/choose-discount.png"
+                        width={433}
+                    />
                 </div>
             </>
         ),

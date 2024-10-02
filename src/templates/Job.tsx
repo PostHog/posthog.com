@@ -63,12 +63,13 @@ export default function Job({
     const salaryRole = parent?.customFields?.find(({ title }) => title === 'Salary')?.value || title
     const missionAndObjectives = parent?.customFields?.find(({ title }) => title === 'Mission & objectives')?.value
     const showObjectives = missionAndObjectives !== 'false'
-    const availableTeams = groupBy(allJobPostings.nodes, ({ parent }) => {
+    const availableTeams = groupBy(allJobPostings.nodes, ({ parent, departmentName }) => {
         const teams = JSON.parse(parent?.customFields?.find(({ title }) => title === 'Teams')?.value || '[]')
-        return teams.length > 1 ? 'Multiple teams' : `Team ${teams[0]}`
+        const speculative = departmentName?.toLowerCase() === 'speculative'
+        return speculative ? 'Speculative' : teams.length > 1 ? 'Multiple teams' : `Team ${teams[0]}`
     })
     const multipleTeams = teams?.nodes?.length > 1
-    const teamName = multipleTeams ? 'Multiple teams' : `Team ${teams?.nodes?.[0]?.name}`
+    const teamName = multipleTeams ? 'Multiple teams' : teams?.nodes?.[0]?.name ? `Team ${teams?.nodes?.[0]?.name}` : ''
 
     const openRolesMenu = []
     Object.keys(availableTeams)
@@ -108,7 +109,10 @@ export default function Job({
     const [jobTitle] = title.split(' - ')
 
     return (
-        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[6]}>
+        <Layout
+            parent={companyMenu}
+            activeInternalMenu={companyMenu.children.find(({ name }) => name.toLowerCase() === 'careers')}
+        >
             <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
             <div className="">
                 <PostLayout
@@ -137,7 +141,7 @@ export default function Job({
                 >
                     <div className="relative">
                         <div>
-                            <p className="m-0 opacity-60 pb-2">{teamName}</p>
+                            {teamName && <p className="m-0 opacity-60 pb-2">{teamName}</p>}
                             <h1 className="m-0 text-5xl">{jobTitle}</h1>
                             <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 mt-6 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                                 {departmentName?.toLowerCase() !== 'speculative' && (
@@ -169,11 +173,6 @@ export default function Job({
                                         </p>
                                         <div className="mb-6">
                                             <CompensationCalculator
-                                                descriptions={{
-                                                    step: `We hire into the Established step by default and believe there's a place to have incremental steps to allow for more flexibility.`,
-                                                    location: `The benchmark for each role we are hiring for is based on the market rate in San Francisco.`,
-                                                    level: `We pay more experienced team members a greater amount since it is reasonable to expect this correlates with an increase in skill`,
-                                                }}
                                                 hideRole
                                                 initialJob={salaryRole}
                                             />
@@ -254,7 +253,8 @@ export default function Job({
                                 )}
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
-                                        <InterviewProcess role={title} />
+                                        <p>We do 2-3 short interviews, then pay you to do some real-life (or close to real-life) work.</p>
+                                        <InterviewProcess role={title} inApplicationProcess />
                                     </div>
                                 </Accordion>
                                 <Accordion title="Apply" id="apply">
@@ -319,6 +319,7 @@ export const query = graphql`
         }
         allJobPostings: allAshbyJobPosting {
             nodes {
+                departmentName
                 fields {
                     title
                     slug

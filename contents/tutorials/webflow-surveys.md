@@ -34,7 +34,7 @@ Create a survey in PostHog by going to the [surveys tab](https://app.posthog.com
 
 ![PostHog survey templates](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-surveys/survey-templates.png)
 
-Next, customize your survey as needed. You can customize the questions, branding, and targeting. See our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
+Next, customize your survey as needed. You can customize the questions, branding, and display conditions. See our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
 
 Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it on your website! 
 

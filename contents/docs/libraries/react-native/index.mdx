@@ -3,14 +3,14 @@ title: React Native
 sidebarTitle: React Native
 sidebar: Docs
 showTitle: true
-github: 'https://github.com/PostHog/posthog-react-native'
+github: 'https://github.com/PostHog/posthog-js-lite/tree/main/posthog-react-native'
 icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg
 features:
   eventCapture: true
   userIdentification: true
   autoCapture: true
-  sessionRecording: false
+  sessionRecording: true
   featureFlags: true
   groupAnalytics: true
 ---
@@ -123,7 +123,14 @@ import ReactNativeIdentify from './\_snippets/identify.mdx'
 
 ## Alias
 
-Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend. 
+
+In this case, you can use `alias` to assign another distinct ID to the same user.
+
+```react-native
+// Sets alias for current user
+posthog.alias('distinct_id')
+```
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
@@ -284,6 +291,10 @@ posthog.group('company', 'company_id_in_your_db', {
 ```
 
 The `name` is a special property which is used in the PostHog UI for the name of the Group. If you don't specify a `name` property, the group ID will be used instead.
+
+## Session replay
+
+To set up [session replay](/docs/session-replay/mobile) in your project, all you need to do is install the React Native SDK and the Session replay plugin, enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay) and enable the `enableSessionReplay` option.
 
 ## Disabling for local development
 

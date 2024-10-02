@@ -35,6 +35,7 @@ You should default to using your company card in all cases - it has no transacti
 We now use Brex Empower. This allows the People and Ops team to effectively track overall spending habits of the company without waiting for end of month reports, with very little changes to how you use your Brex account.
 
 - Before spending money on your Brex card, you’ll need to log into your account either through the app or desktop, and assign a ‘spending budget’ to your card. The budget you pick from should relate to the transaction you are about to complete. For example, if you are buying a book for BookHog, this should come out of your ‘Books stipend’ budget. When you then complete your purchase, the money will be taken from that specific budget and you will easily be able to see how much of your budget you have remaining.
+- For subscriptions, you can [create a virtual card](https://dashboard.brex.com/p/wallet?expenses.wallet.view=all&walletCreateCard=true) and assign your subscriptions to that virtual card so all those charges will come from that spend limit and not your default card limit.
 - If you forget to assign a budget before completing the purchase, you can retroactively go into your Brex account and assign the transaction to the related budget. 
 - For the vast majority of transactions, you now will not need to upload a receipt as Brex Empower does this automatically. The exception to this is if they have requirements to provide the IRS with itemized receipts. If this is the case and it’s a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it’s a physical receipt, take a picture and upload it with a note: you can use the Brex app, email or reply to the SMS notification.
 - You only need to submit receipts for purchases of $75 or more. You don’t need to keep receipts below this amount.
@@ -50,7 +51,9 @@ By default, the email forwarding feature only accepts emails from your PostHog a
 ### Your personal card
 
 - You shouldn't usually need to do this - if you can't use your PostHog card for some reason, ask Fraser to purchase it for you on theirs in the first instance. 
-- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Fraser to get reimbursed manually.  
+- If you do need to use your personal card, just post the receipt in the #team-people-and-ops channel in Slack and tag Fraser to get reimbursed manually.
+
+Personal expenses should be submitted within 90 days of incurring the expense, otherwise these will not be repaid.
 
 Accidentally bought something on the company card when it was a personal expense? Tried changing the payment method with the merchant and it's too late? Don't worry! If you used your brex card you can login to Brex, find the charge and use the repay function - more details [here](https://www.brex.com/support/employee-repayments). If it was on Revolut, just post in #team-people-and-ops _as soon as you become aware_ and we will provide you with the relevant bank details for you to repay PostHog. 
 
@@ -127,9 +130,23 @@ Our entire stack for collaborative software is pleasingly simple. All we use is:
 * GitHub - documents, code, discussion
 * Slack (premium) - chat (although we encourage you to default into discussion of features/strategy etc into GitHub)
 * PostHog - product analytics
-* Figma - graphic design
+* Figma - design
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
+
+### Optional software
+
+There are other tools some team members choose to use individually. In those cases, as they become more widely adopted in the company, it makes sense to have a company account.
+
+Ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink> and someone will grant your request if you ask nicely.
+
+- <Link to="https://www.loom.com" external>Loom</Link>
+
+  You'll be added as a _Creator Lite_ which allows you to record 25 videos/mo at up to 5 minutes in length. Should you need a full Creator account (unlimited videos, advanced features), ask <TeamMember name="Simon Fisher" photo />.
+
+- <Link to="https://www.zoom.us" external>Zoom</Link>
+  
+  We use Google Meet by default, but you can use Zoom for free (up to 40-minute calls). Should you need longer meetings, ask <TeamMember name="Simon Fisher" photo />. (But does anyone _really_ need longer meetings?)
 
 ### IDEs
 

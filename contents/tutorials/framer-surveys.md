@@ -38,7 +38,7 @@ Create a survey in PostHog by going to the [surveys tab](https://app.posthog.com
 
 ![PostHog survey templates](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/framer-surveys/survey-templates.png)
 
-Next, customize your survey as needed. You can customize the questions, branding, and targeting. See our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
+Next, customize your survey as needed. You can customize the questions, branding, and display conditions. See our [survey docs](/docs/surveys/creating-surveys) for more details on how to do so.
 
 Then, click "Save as draft" and then "Launch". Your survey is now live and you should see it on your website! 
 
@@ -50,7 +50,7 @@ After interacting with your survey, you can view results by selecting the survey
 - How many users have dismissed the survey.
 - Responses.
 
-If you capture person profiles, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
+If you capture identified events, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 ![Survey results](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/framer-surveys/survey-results.png)
 

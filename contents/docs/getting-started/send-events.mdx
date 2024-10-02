@@ -88,7 +88,7 @@ A second reason why Custom events become important is for keeping tracking consi
 When elements of your frontend change, this can affect how autocapture events show up in PostHog.
 Continuing with the example above, if we changed the text for our add to cart button to just 'Add', our autocapure events would begin showing up as `Clicked button with text 'Add'` instead of what they had previously been.
 
-While combining these two events using [Actions](/manual/actions) to fix this drift is possible, manually track these high-value actions with custom events is far more reliable.
+While combining these two events using [Actions](/manual/actions) to fix this drift is possible, manually tracking these high-value actions with custom events is far more reliable.
 
 ## 3. Capture backend events
 
@@ -105,6 +105,7 @@ Our [SDK pages](/docs/integrate?tab=sdks) contain information on installing Post
 <SendEventBackend />
 
 The only major difference on the server-side is that we must include a `distinct_id` with every event.
+
 Often, this will come in the form of a unique user ID and can be pulled from a session cookie when requests arrive from the client.
 
 ## When should I send events from the server vs. the client?
@@ -120,6 +121,10 @@ That said, we strongly recommend tracking the following events from the server-s
 3. **Backend jobs**: PostHog is for more than just optimizing your frontend. It can often be useful to send events whenever backend jobs or workflows are kicked off, which allows you to analyze them within PostHog.
 
 > **Tip**: We recommend using different event names for your backend and frontend events to avoid the chance of duplicate counting. Often these should be the CRUD events themselves e.g. `User created` for the backend and `User signed up` for the frontend. Additionally, you can use the `source` property to filter for events from a specific source.
+
+## Can I migrate events from another tool?
+
+Yup, we even [wrote some guides](/docs/migrate) to help you out for tools like [Google Analytics](/docs/migrate/google-analytics), [Mixpanel](/docs/migrate/mixpanel), [Heap](/docs/migrate/heap), [Amplitude](/docs/migrate/migrate-from-amplitude), and [Pendo](/docs/migrate/pendo).
 
 ## Event ingestion nuances
 

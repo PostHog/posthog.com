@@ -6,19 +6,17 @@ showTitle: true
 
 We want to support other YC companies using PostHog because:
 
-- Many of these companies will quickly grow into [our ICP](/handbook/strategy/ideal-customer-persona) and we have an opportunity to get in early with them. 
+- Many of these companies will quickly grow into [our ICP](/handbook/who-we-are-building-for) and we have an opportunity to get in early with them. 
 - A lot of our most helpful and direct product feedback has generally come from other YC companies. 
 - It's nice to give back to the YC community. 
 
 ## The YC deal
 
-For startups in the W23 batch:
+For startups in the S24 batch:
 
 - Get $50k of credit for PostHog Cloud for 12 months
 - _All founders_ get a Timbuk2 backpack
-- Book into a free YC group setup session where we will…
-  - Build a dashboard for the batch with your product growth metrics
-  - Pair with you to ensure you pass calls correctly
+- A private YC Slack channel for priority support
 - Get the batphone - CEO on whatsapp/text
 
 If a founder refers us to another YC company, both founders get an additional $5k of credit for PostHog Cloud plus a copy of the PMF guide. 
