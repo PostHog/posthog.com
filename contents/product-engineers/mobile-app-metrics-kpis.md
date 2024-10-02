@@ -1,6 +1,6 @@
 ---
 date: 2024-10-02
-title: The actionable mobile app metrics you should track (with benchmarks)
+title: Actionable mobile app metrics you should track (with benchmarks)
 author:
   - lior-neu-ner
 featuredImage: >-
