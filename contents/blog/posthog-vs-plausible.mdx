@@ -22,9 +22,7 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
 
 Our ["ridiculously cheap" tier](/pricing) includes all of the features of PostHog for free with an allowance of 1M events per month. For Plausible, this would cost a minimum of $69/m. 
 
-Beyond PostHog's free tier, we try to be as cheap as possible and transparent. We can do this because we're efficient. We don't splurge on massive sales teams, or D-list comedians to host an annual convention you'll never attend.
-
-Want to know how much we'll charge? See our [pricing calculator](/pricing).
+Beyond PostHog's free tier, we try to be as cheap as possible and transparent. Want to know how much we'll charge? See our [pricing calculator](/pricing).
 
 ### 2. We're more than just web analytics
 
@@ -53,6 +51,7 @@ Both Plausible and PostHog are [Google Analytics alternatives](/blog/ga4-alterna
   <ComparisonRow column1={true} column2={true} feature="UTM tracking" description="Track marketing campaigns with UTM tags" />
   <ComparisonRow column1={true} column2={true} feature="Cookieless tracking" description="Track users without cookies" />
   <ComparisonRow column1={true} column2={true} feature="Snippet install" description="Install HTML snippet" />
+  <ComparisonRow column1={"56.8 kb"} column2={"<1 kB"} feature="Script size" description="Size of the script that runs on your site" />
 </ComparisonTable>
 
 ## Product analytics
@@ -79,6 +78,7 @@ Teams rely on [product analytics](/product-analytics) when they need more custom
 ## Platform
 
 Beyond web analytics is where PostHog really shines. We provide all of the tools developers need to build a successful product (and they all work together). 
+
 <ComparisonTable column1="PostHog" column2="Plausible">
   <ComparisonRow column1={true} column2={true} feature="EU hosting" description="Access and store your data in the EU" />
   <ComparisonRow column1={true} column2={true} feature="Open source" description="View code, comment on roadmap, and contribute" />
@@ -93,6 +93,10 @@ Beyond web analytics is where PostHog really shines. We provide all of the tools
   <ComparisonRow column1={true} column2="Partial" feature="API" description="Capture events, get stats, and make changes via API" />
 </ComparisonTable>
 
+> 💡 **Good to know:** 
+> 1. Plausible's API is limited to capturing events and querying aggregate metrics. PostHog's API provides capture, full SQL querying, feature flags, and CRUD operations for all metadata.
+> 2. You can add unlimited teammates to your project in PostHog. Plausible limits you to 3 on their growth plan and 10 on their business plan. For more than that, you need a custom enterprise plan.
+
 ## Integrations
 
 Although Plausible has some integrations with other tools, it mostly stands on its own. PostHog has many more features for importing data from other sources as well as sending it to other destinations.
@@ -104,6 +108,7 @@ Although Plausible has some integrations with other tools, it mostly stands on i
   <ComparisonRow column1={true} column2={false} feature="Warehouse import" description="Import data from third-party sources like Postgres, S3, and GCS" />
   <ComparisonRow column1="Events, reports" column2="Reports, anomalies" feature="Slack" description="Send events, reports, and anomalies to Slack" />
   <ComparisonRow column1={true} column2={true} feature="Email" description="Send reports to email" />
+  <ComparisonRow column1={false} column2={true} feature="Google Search Console" description="See search queries that sent traffic to your site" />
   <ComparisonRow column1={true} column2={false} feature="Stripe" description="Import charges, customers, invoices, subscriptions, and more" />
   <ComparisonRow column1={true} column2={false} feature="Hubspot" description="Import contacts, companies, deals, and more" />
   <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
@@ -176,3 +181,5 @@ Our [install snippet](/docs/getting-started/install?tab=snippet) is also only a 
 ```
 
 Our users range from [individual indie hackers](/customers/headshot-pro) to [YC-backed startups](/customers/mintlify) to [massive enterprises](/customers/researchgate).
+
+<ArrayCTA />
