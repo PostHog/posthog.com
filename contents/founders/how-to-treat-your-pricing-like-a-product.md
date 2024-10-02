@@ -102,7 +102,7 @@ Any good product manager will tell you that a product is (almost) never done. Th
 
 ## How "pricing as a product" works at PostHog
 
-We've been on this journey for close to a year now. It started with realizing that our pricing wasn't serving the needs of both our internal and external customers, then hiring a growth engineer to own it. 
+We've been on this journey for close to a year now. It started with realizing that our pricing wasn't serving the needs of both our internal and external customers, then hiring a [growth engineer](/newsletter/think-like-a-growth-engineer) to own it. 
 
 We built a completely new billing service from the ground up to satisfy those needs, and have gone through multiple iterations of how we price and sell to customers to align with our company strategy.
 

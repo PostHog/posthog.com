@@ -2,7 +2,7 @@ import React from 'react'
 import useSWRInfinite from 'swr/infinite'
 import qs from 'qs'
 
-const query = (params: any, offset: number) => {
+const query = (params: any, offset: number, limit = 20) => {
     const query = {
         populate: {
             updates: {
@@ -14,11 +14,12 @@ const query = (params: any, offset: number) => {
             likes: true,
             topic: true,
             image: true,
+            cta: true,
         },
         sort: 'updatedAt:desc',
         pagination: {
-            start: offset * 20,
-            limit: 20,
+            start: offset * limit,
+            limit: limit,
         },
         ...params,
     }
@@ -27,9 +28,9 @@ const query = (params: any, offset: number) => {
     })
 }
 
-export const useRoadmaps = ({ params = {} }: { params?: any }) => {
-    const { data, size, setSize, isLoading, error, mutate, isValidating } = useSWRInfinite(
-        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${query(params, offset)}`,
+export const useRoadmaps = ({ params = {}, limit }: { params?: any; limit?: number }) => {
+    const { data, size, setSize, isLoading, mutate, isValidating } = useSWRInfinite(
+        (offset) => `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${query(params, offset, limit)}`,
         (url: string) => fetch(url).then((r) => r.json())
     )
     const roadmaps = React.useMemo(() => {
