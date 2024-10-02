@@ -3,10 +3,10 @@ import React from 'react'
 
 const Image = ({ src, className = '' }: { src: string | null | undefined; className?: '' }) => {
     return src ? (
-        <img className={`object-fill ${className}`} src={src} />
+        <img className={`object-fill rounded-full ${className}`} src={src} />
     ) : (
         <svg
-            className={`bg-gray-accent-light rounded-full ${className}`}
+            className={`bg-accent dark:bg-accent-dark rounded-full ${className}`}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 40 40"
@@ -26,19 +26,29 @@ export const Avatar = ({
     image,
     url,
     className = '',
+    color,
 }: {
     image?: string | null
     url?: string | null
     className?: string
+    color?: string
 }) => {
     return (
-        <div className="float-left shrink-0 leading-[0]">
+        <div
+            className={`float-left 
+        leading-[0] rounded-full relative inline-block aspect-square p-px bg-light dark:bg-dark border border-light dark:border-dark ${
+            color ? `hover:border-${color}` : 'hover:border-[rgba(0,0,0,0.2)] dark:hover:border-[rgba(255,255,255,0.2)]'
+        }`}
+        >
             {url ? (
-                <Link to={url}>
+                <Link to={url} className={`shrink-0 ${color ? `bg-${color}` : 'bg-accent dark:bg-accent-dark'}  `}>
                     <Image className={className} src={image} />
                 </Link>
             ) : (
-                <Image className={className} src={image} />
+                <Image
+                    className={`${color ? `bg-${color}` : 'bg-accent dark:bg-accent-dark'} ${className}`}
+                    src={image}
+                />
             )}
         </div>
     )

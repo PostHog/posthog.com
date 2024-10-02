@@ -1477,7 +1477,7 @@ iframe[src*='youtube-nocookie.com'] {
 }
 
 .squeak-left-border {
-    @apply before:border-l before:border-b before:border-solid before:border-light dark:before:border-dark before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:left-0;
+    @apply before:border-l before:border-b before:border-solid before:border-light dark:before:border-dark before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:-left-px;
 }
 
 li.squeak-left-border {

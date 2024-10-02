@@ -171,14 +171,18 @@ function QuestionFormMain({
                     return (
                         <Form className="mb-0">
                             <div className="w-[40px] h-[40px] mr-[10px] float-left rounded-full overflow-hidden">
-                                <Avatar className="w-[40px] aspect-fill" image={getAvatarURL(user?.profile)} />
+                                <Avatar
+                                    className="w-[40px] aspect-fill"
+                                    image={getAvatarURL(user?.profile)}
+                                    color={user?.profile?.color}
+                                />
                             </div>
 
                             <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
                                 {status && status !== 'none' && (
                                     <div className="p-4 bg-accent dark:bg-dark border-b border-border dark:border-dark">
                                         <h5 className="m-0">Heads up!</h5>
-                                        <p className="m-0">
+                                        <p className="m-0 text-sm">
                                             We're currently experiencing an incident. Check{' '}
                                             <Link
                                                 className="text-red dark:text-yellow font-bold"
@@ -446,7 +450,11 @@ export const QuestionForm = ({
             ) : (
                 <div className="flex flex-1 space-x-2">
                     <div className="rounded-full overflow-hidden w-[40px] h-[40px]">
-                        <Avatar className="w-[40px]" image={getAvatarURL(user?.profile)} />
+                        <Avatar
+                            className="w-[40px] rounded-full"
+                            image={getAvatarURL(user?.profile)}
+                            color={user?.profile?.color}
+                        />
                     </div>
                     <Button
                         disabled={archived}
