@@ -1,0 +1,19 @@
+### Objective: No-code experiments
+
+Last quarter we polished up our new experiment UI. This quarter, we want to address some issues that came up, and then focus on building out some more ambitious features on top of experiments.
+
+Broadly, we will:
+1. Address outstanding experiments UI/UX issues
+2. Build no-code experiments
+3. Explore some cool things we can do on top of no-code experiments, like suggesting and automatically running some no-code experiments based on replay and analytics data
+
+### Objective: Split out experiments into its own product
+
+Experiments can now stand on its own, without the linking to feature flags in the UI, and in pricing.
+
+The current state is problematic because
+
+1. It confuses some users over difference between flags and experiments
+2. Pricing for experiments is implicit, and can be hard to understand
+
+We'll update SDKs to have experiment-specific constructs, stop the controlling experiment via feature flag issues, make them independent, track flag calls separately for experiments, and update how we price experiments.
