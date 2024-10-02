@@ -1012,8 +1012,12 @@ export const companyMenu = {
                     url: '/teams/error-tracking',
                 },
                 {
-                    name: 'Feature Success',
-                    url: '/teams/feature-success',
+                    name: 'Experiments',
+                    url: '/teams/experiments',
+                },
+                {
+                    name: 'Feature Flags',
+                    url: '/teams/feature-flags',
                 },
                 {
                     name: 'Infrastructure',
@@ -1026,6 +1030,10 @@ export const companyMenu = {
                 {
                     name: 'Replay',
                     url: '/teams/replay',
+                },
+                {
+                    name: 'Surveys',
+                    url: '/teams/surveys',
                 },
                 {
                     name: 'Web Analytics',
