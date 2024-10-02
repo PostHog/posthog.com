@@ -959,6 +959,10 @@ function DpaGenerator() {
                             (the “<strong>Company</strong>”) and <strong>PostHog, Inc.</strong> (the “
                             <strong>Processor</strong>”) (together as the “<strong>Parties</strong>”).
                         </p>
+                        <p>
+                            In the event of a conflict between this Agreement and the provisions of related agreements,
+                            including the Principal Agreement, the terms of this Agreement shall prevail.
+                        </p>
                         <p>WHEREAS</p>
                         <p>(A) The Company acts as a Data Controller.</p>
                         <p>
@@ -967,9 +971,9 @@ function DpaGenerator() {
                         </p>
                         <p>
                             (C) The Parties seek to implement a data processing agreement that complies with applicable
-                            Data Protection Laws (as defined below) (D) The Parties wish to lay down their rights and
-                            obligations.
+                            Data Protection Laws (as defined below)
                         </p>
+                        <p>(D) The Parties wish to lay down their rights and obligations.</p>
                         <p>IT IS AGREED AS FOLLOWS:</p>
                         <p>
                             <strong>1. Definitions and Interpretation</strong>
@@ -983,26 +987,26 @@ function DpaGenerator() {
                             <div className="pl-8 pb-2">
                                 <p>1.1.1. “Agreement” means this Data Processing Agreement and all Annexes;</p>
                                 <p>
-                                    1.1.2. “Company Personal Data” means any Personal Data provided to or Processed by
-                                    the Processor on behalf of the Company pursuant to or in connection with the
-                                    Principal Agreement;
+                                    1.1.2. “Company Personal Data” means any Personal Data relating to Company’s end
+                                    users provided to or Processed by the Processor on behalf of the Company pursuant to
+                                    or in connection with the Principal Agreement;
                                 </p>
                                 <p>
                                     1.1.3. “Data Protection Laws” means all applicable laws relating to Processing of
                                     Personal Data and privacy that may exist in any relevant jurisdiction, including
-                                    European Data Protection Laws;
+                                    European Data Protection Laws and US Data Protection Laws;
                                 </p>
                                 <p>1.1.4. “EEA” means the European Economic Area;</p>
                                 <p>
-                                    1.1.5. “EU Personal Data” means the Processing of Personal Data to which (i) data
-                                    protection legislation of the European Union, or of a Member State of the European
-                                    Union or EEA, was applicable prior to the Processing by the Processor;
+                                    1.1.5. “EU Personal Data” means the Processing of Personal Data by the Processor to
+                                    which data protection legislation of the European Union, or of a Member State of the
+                                    European Union or EEA, applies;
                                 </p>
                                 <p>
                                     1.1.6. “European Data Protection Laws” means the GDPR, UK Data Protection Act 2018,
                                     the UK GDPR, ePrivacy Directive 2002/58/EC, FADP, and any associated or additional
                                     legislation in force in the EU, EEA, Member States and the United Kingdom as
-                                    amended, replaced or superceded from time to time;
+                                    amended, replaced or superseded from time to time;
                                 </p>
                                 <p>
                                     1.1.7. “FADP” means the Swiss Federal Act on Data Protection and its Ordinances, as
@@ -1011,7 +1015,7 @@ function DpaGenerator() {
                                 <p>
                                     1.1.8. “FDPIC” means the Swiss Federal Data Protection and Information Commissioner;
                                 </p>
-                                <p>1.1.9. “GDPR” means General Data Protection Regulation EU2016/679;</p>
+                                <p>1.1.9. “GDPR” General Data Protection Regulation EU2016/679;</p>
                                 <p>
                                     1.1.10. “UK GDPR” means General Data Protection Regulation (EU) 2016/679 as
                                     applicable as part of UK domestic law by virtue of section 3 of the European Union
@@ -1019,7 +1023,19 @@ function DpaGenerator() {
                                     Communications (Amendments etc) (EU Exit) Regulations 2019 (as amended);
                                 </p>
                                 <p>
-                                    1.1.11. “Protected Area” means (i) in the case of EU Personal Data, the member
+                                    1.1.11. “US Data Protection Laws” means all data privacy, data protection, and
+                                    cybersecurity laws, rules, and regulations of the United States applicable to the
+                                    Processing of Personal Data under the Principal Agreement. “US Data Protection Laws”
+                                    may include, but is not limited to, the California Consumer Privacy Act of 2018, as
+                                    amended by the California Privacy Rights Act of 2020 (together, the “
+                                    <strong>CCPA</strong>”), the Colorado Privacy Act (“<strong>CPA</strong>”), the
+                                    Connecticut Data Privacy Act (“<strong>CTDPA</strong>”), the Utah Consumer Privacy
+                                    Act (“<strong>UCPA</strong>”), and the Virginia Consumer Data Protection Act (“
+                                    <strong>VACDPA</strong>”), and any binding regulations promulgated thereunder, as
+                                    amended or updated from time to time;
+                                </p>
+                                <p>
+                                    1.1.12. “Protected Area” means (i) in the case of EU Personal Data, the member
                                     states of the European Union and the EEA and any country, territory, sector or
                                     international organisation in respect of which an adequacy decision under Art 45
                                     GDPR is in force or (ii) in the case of UK Personal Data, the United Kingdom and any
@@ -1030,18 +1046,53 @@ function DpaGenerator() {
                                     case may be);
                                 </p>
                                 <p>
-                                    1.1.12. “Services” means the product and data analytics services the Processor
-                                    provides.
+                                    1.1.13. “Personal Data” means any information provided by Company to Processor that
+                                    is protected as “personal data,” “personal information,” “personally identifiable
+                                    information,” or similar terms defined in Data Protection Laws;
                                 </p>
                                 <p>
-                                    1.1.13. “Subprocessor” means any person appointed by or on behalf of Processor to
+                                    1.1.14. “Services” means the product and data analytics services the Processor
+                                    provides pursuant to the Principal Agreement , including but not limited to the
+                                    provision of testing, support, product development, service improvement,
+                                    benchmarking and troubleshooting activities on behalf of the Data Controller.
+                                </p>
+                                <p>
+                                    1.1.15. “Subprocessor” means any person appointed by or on behalf of Processor to
                                     Process Personal Data on behalf of the Company in connection with the Agreement.
+                                </p>
+                                <p>
+                                    1.1.16. “Standard Contractual Clauses” means (i) in respect of UK Personal Data, the
+                                    International Data Transfer Addendum to the EU Standard Contractual Clauses, issued
+                                    by the Information Commissioner and laid before Parliament in accordance with s.119A
+                                    of the Data Protection Act 2018 on 2 February 2022 ("UK Standard Contractual
+                                    Clauses"); (ii) in respect of EU Personal Data, the standard contractual clauses for
+                                    the transfer of personal data to third countries pursuant to the GDPR, adopted by
+                                    the European Commission under Commission Implementing Decision (EU) 2021/914
+                                    including the text from module 2 and no other modules and not including any clauses
+                                    marked as optional, ("EU Standard Contractual Clauses"); and (iii) in respect of
+                                    Swiss Personal Data, the EU Standard Contractual Clauses with the necessary
+                                    adaptations and amendments for the purposes of the FADP as required by the FDPIC in
+                                    its Statement of 27 August 2021;
+                                </p>
+                                <p>
+                                    1.1.17. “Swiss Personal Data” means personal data to which the FADP was applicable
+                                    prior to its Processing by Processor;
+                                </p>
+                                <p>
+                                    1.1.18. “UK Personal Data” means the Processing of Personal Data by the Processor to
+                                    which the laws of the United Kingdom apply
                                 </p>
                             </div>
                             <p>
                                 1.2. The terms, “Controller”, “Data Subject”, “Member State”, “Personal Data”, “Personal
                                 Data Breach”, “Processing” and “Supervisory Authority” shall have the same meaning as in
-                                the GDPR and UK GDPR, and their cognate terms shall be construed accordingly.
+                                the GDPR and UK GDPR, and their cognate terms shall be construed accordingly with other
+                                Data Protection Laws. For example, Data Subject shall include such analogous terms as
+                                Consumer under US Data Protection Laws.
+                            </p>
+                            <p>
+                                1.3. The terms “sell,” “sale,” “share,” and “sharing,” and “Service Provider” shall have
+                                the same meanings as in the CCPA.
                             </p>
                         </div>
                         <p>
@@ -1061,7 +1112,10 @@ function DpaGenerator() {
                                     and in particular any consents needed to meet the cookie requirements in the
                                     ePrivacy Directive 2002/58/EC and any associated national legislation;
                                 </p>
-                                <p>2.1.3. instruct the Processor to process Company Personal Data.</p>
+                                <p>
+                                    2.1.3. instruct the Processor to process Company Personal Data to provide the
+                                    Services.
+                                </p>
                             </div>
                             <p>2.2. Processor shall:</p>
                             <div className="pl-8 pb-2">
@@ -1075,11 +1129,7 @@ function DpaGenerator() {
                                     Protected Area, unless required to do so by laws to which the Processor is subject;
                                     in such a case, Processor shall inform the Company of that legal requirement before
                                     Processing, unless that law prohibits such information on important grounds of
-                                    public interest. The Company acknowledges that as part of the processing
-                                    instructions, Processor may aggregate, anonymise, extract and combine or otherwise
-                                    deidentify information resulting from the Company’s use of the licensed materials
-                                    and services for product improvement, benchmarking, and the development of new
-                                    products; and
+                                    public interest.
                                 </p>
                                 <p>
                                     2.2.3. notify the Company immediately if, in the Processor’s reasonable opinion, an
@@ -1088,10 +1138,37 @@ function DpaGenerator() {
                                     be obliged to undertake additional work or screening to determine if the Company’s
                                     instructions are compliant.
                                 </p>
+                                <p>2.2.4. not directly or indirectly sell or share any Personal Data;</p>
                             </div>
+                            <p>
+                                2.3. Annex I A sets out the subject-matter and duration of the processing, the nature
+                                and purpose of the processing, the type of personal data and categories of data
+                                subjects. The obligations and rights of the Company are as set out in this Agreement
+                            </p>
+                            <p>
+                                2.4. Processor acknowledges that it is a Service Provider and that all Personal Data
+                                that it may receive from Company, Company’s employees or consultants, or otherwise
+                                acquired by virtue of the performance of services under the Principal Agreement shall be
+                                regarded by Processor as strictly confidential and held by Processor in confidence.
+                            </p>
+                            <p>
+                                2.5. Processor shall not directly or indirectly sell any Personal Data, or retain, use,
+                                or disclose any Personal Data for any purpose other than for the purpose of performing
+                                services for Company; or retain, use, or disclose any Personal Data outside the scope of
+                                this Agreement or the Principal Agreement.
+                            </p>
+                            <p>
+                                2.6. Processor understands the restrictions in this Section 2 and will comply with them.
+                            </p>
+                            <p>
+                                2.7. Company, upon written notice, may take reasonable and appropriate steps to stop and
+                                remediate unauthorized use of Personal Data, including without limitation, exercising
+                                Company’s right to conduct an audit of Processor, or terminating the Principal Agreement
+                                and exercising Company’s right to request deletion or return of Personal Data.
+                            </p>
                         </div>
                         <p>
-                            <strong>3. Processor Personnel</strong>
+                            <strong>3. Processor Personnel & Confidentiality</strong>
                         </p>
                         <div className="pl-8 pb-2">
                             <p>
@@ -1120,7 +1197,9 @@ function DpaGenerator() {
                         </p>
                         <div className="pl-8 pb-2">
                             <p>
-                                5.1. The Company provides Processor with general authorisation to engage Subprocessors.
+                                5.1. The Company provides Processor with general authorisation to engage the
+                                Subprocessors set out in Annex III. These will differ depending on the Data Centre
+                                Location chosen by the Company.
                             </p>
                             <p>
                                 5.2. Processor shall enter into a written contract with any Subprocessor and this
@@ -1130,14 +1209,14 @@ function DpaGenerator() {
                                 the Subprocessors obligations.
                             </p>
                             <p>
-                                5.3. The list of Subprocessors engaged by the Processor can be found at Annex III.
-                                Processor may update this list from time to time as applicable, providing the Company
-                                with notice of such update at least fourteen (14) days in advance of such updates.
+                                5.3. Processor may update the list of Subprocessors from time to time as applicable,
+                                providing the Company with notice of such update (and an opportunity to object) at least
+                                fourteen (14) days in advance of such updates.
                             </p>
                             <p>
                                 5.4. If the Company objects to a Subprocessor, the Company shall notify Processor
                                 thereof in writing within seven (7) days after receipt of Processor’s updated
-                                Subprocessors list. If the Company objects to the use of the Subprocessor, Processor
+                                Subprocessors’ list. If the Company objects to the use of the Subprocessor, Processor
                                 shall use efforts to address the objection through one of the following options: (a)
                                 Processor will cancel its plans to use Subprocessor with regard to Company Personal Data
                                 or will offer an alternative to provide the Services without such Subprocessor; or (b)
@@ -1222,43 +1301,40 @@ function DpaGenerator() {
                             <p>
                                 9.1. Following a request from the Company, Processor shall promptly and in any event
                                 within 10 business days of the date of cessation of any Services involving the
-                                Processing of Company Personal Data , return or delete and procure the deletion of all
+                                Processing of Company Personal Data, return or delete and procure the deletion of all
                                 copies of the Company Personal Data unless applicable laws require storage of such
-                                Customer Personal Data.
+                                Company Personal Data.
                             </p>
                         </div>
 
-                        {region == 'region-us' && (
-                            <>
-                                <p>
-                                    <strong>10. Data Transfer Outside of the Protected Area</strong>
-                                </p>
-                                <div className="pl-8 pb-2">
-                                    <p>
-                                        10.1. The Company acknowledges that the Processor will Process the Personal Data
-                                        outside of the Protected Area including in the US.
-                                    </p>
-                                    <p>
-                                        10.2. As such, the parties agree to comply with the obligations set out in the{' '}
-                                        <Link
-                                            href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32021D0914&qid=1694542707177"
-                                            className="!text-red"
-                                            external
-                                        >
-                                            EU Standard Contractual Clauses
-                                        </Link>{' '}
-                                        as though they were set out in full in this Agreement, with the Company as the
-                                        “data exporter” and the Processor as the “data importer”, with the parties
-                                        signatures and dating of this Agreement being deemed to be the signature and
-                                        dating of the Standard Contractual Clauses and with Annexes to EU Standard
-                                        Contractual Clauses and the Appendices to the UK Standard Contractual Clauses
-                                        being as set out in Annex I and II of this Agreement
-                                    </p>
-                                    <p>
-                                        10.3. In relation to the EU Standard Contractual Clauses, the Parties agree
-                                        that:
-                                    </p>
-                                    <div className="pl-8 pb-2">
+                        <p>
+                            <strong>10. Data Centre Location and Transfers Outside of the Protected Area</strong>
+                        </p>
+                        <div className="pl-8 pb-2">
+                            <p>
+                                10.1. <strong>Storage of Personal Data.</strong> Company Personal Data will be housed in
+                                data centres located in the Data Centre Location set out in the Principal Agreement
+                                unless the parties otherwise expressly agree in writing.
+                            </p>
+                            <p>
+                                10.2. <strong>Transfers.</strong> The Company acknowledges that the Processor will
+                                Process the Company Personal Data outside of the Protected Area including in the US to
+                                provide the Services.
+                            </p>
+                            <p>
+                                10.3. <strong>Data Privacy Framework.</strong> Processor confirms that it participates
+                                in the EU-US Data Privacy Framework and the UK Extension to this Framework (together,
+                                the “DPF”). The Supplier undertakes to maintain its self-certification to the DPF; to
+                                notify Company without undue delay if Processor determines that it will cease to
+                                self-certify to the DPF; and to notify Company immediately if Processor’s participation
+                                in the DPF is otherwise terminated. [In respect of UK Personal Data, Company hereby
+                                notifies Processor that Company identifies and treats genetic data, data relating to
+                                sexual orientation, biometric data processed for the purpose of uniquely identifying
+                                data subjects and data relating to criminal convictions and offences as sensitive].
+                                that:
+                            </p>
+
+                            {/* <div className="pl-8 pb-2">
                                         <p>
                                             10.3.1. for the purposes of clause 9, option 2 (general written
                                             authorisation for subprocessors) shall apply and the Parties agree that the
@@ -1288,13 +1364,18 @@ function DpaGenerator() {
                                                     : '[Supervisory Authority]'}
                                             </span>
                                         </p>
-                                    </div>
-                                    <p>
-                                        10.4. In relation to the UK Standard Contractual Clauses, as permitted by clause
-                                        17 of such Addendum, the Parties agree to change the format of the information
-                                        set out in Part 1 of the Addendum so that:
-                                    </p>
-                                    <div className="pl-8 pb-2">
+                                    </div> */}
+                            <p>
+                                10.4. <strong>Standard Contractual Clauses.</strong> Notwithstanding 10.3, the parties
+                                agree to comply with the obligations set out in the Standard Contractual Clauses as
+                                though they were set out in full in this Agreement, with the Company as the “data
+                                exporter” and the Processor as the “data importer”, with the parties signatures and
+                                dating of this Agreement being deemed to be the signature and dating of the Standard
+                                Contractual Clauses and with Annexes to EU Standard Contractual Clauses and the
+                                Appendices to the UK Standard Contractual Clauses being as set out in Annex I and II of
+                                this Agreement
+                            </p>
+                            {/* <div className="pl-8 pb-2">
                                         <p>
                                             10.4.1. the details of the parties in table 1 shall be as set out in Annex I
                                             (with no requirement for signature);
@@ -1309,62 +1390,61 @@ function DpaGenerator() {
                                             10.4.3. the appendix information listed in table 3 is set out in Annex I and
                                             II.
                                         </p>
-                                    </div>
-                                    <p>
-                                        10.5. In relation to Swiss Personal Data that is transferred outside of the
-                                        Protected Area, the Parties agree that such transfers shall be subject to the EU
-                                        Standard Contractual Clauses as compiled and completed in Sections 10.2 and 10.3
-                                        above, with the following amendments: (a) any references to the GDPR shall be
-                                        interpreted as references to the FADP; (b) references to the EU and EU Member
-                                        States shall be interpreted to mean Switzerland; (c) the competent supervisory
-                                        authority according to Clause 13(a) and Part C of Annex I is the FDPIC insofar
-                                        as the data transfers are governed by the FADP; (d) the term EU Member State
-                                        shall not be interpreted in such a way as to exclude data subject in Switzerland
-                                        from the possibility of suing for their rights in their place of habitual
-                                        residence in accordance with Clause 18(c) of the EU Standard Contractual
-                                        Clauses; and (e) until the entry into force of the revised FADP on 1 September
-                                        2023, the EU Standard Contractual Clauses shall also protect the personal data
-                                        of legal entities and legal entities shall receive the same protection under the
-                                        EU Standard Contractual Clauses as natural persons.
-                                    </p>
-                                    <p>
-                                        10.6. In the event of any conflict between this Agreement and the Standard
-                                        Contractual Clauses, the Standard Contractual Clauses shall prevail.
-                                    </p>
-                                    <p>
-                                        10.7. In the event that the Standard Contractual Clauses are no longer valid for
-                                        use under the GDPR or UK GDPR, the Parties agree to promptly implement a
-                                        replacement transfer mechanism, and making such further amendments to the
-                                        application of such replacement mechanism, as the Processor deems reasonably
-                                        necessary.
-                                    </p>
-                                </div>
-                            </>
-                        )}
+                                    </div> */}
+                            <p>
+                                10.5. In relation to Swiss Personal Data that is transferred outside of the Protected
+                                Area, the Parties agree that such transfers shall be subject to the EU Standard
+                                Contractual Clauses as compiled and completed in Sections 10.2 and 10.3 above, with the
+                                following amendments: (a) any references to the GDPR shall be interpreted as references
+                                to the FADP; (b) references to the EU and EU Member States shall be interpreted to mean
+                                Switzerland; (c) the competent supervisory authority according to Clause 13(a) and Part
+                                C of Annex I is the FDPIC insofar as the data transfers are governed by the FADP; (d)
+                                the term EU Member State shall not be interpreted in such a way as to exclude data
+                                subject in Switzerland from the possibility of suing for their rights in their place of
+                                habitual residence in accordance with Clause 18(c) of the EU Standard Contractual
+                                Clauses; and (e) until the entry into force of the revised FADP on 1 September 2023, the
+                                EU Standard Contractual Clauses shall also protect the personal data of legal entities
+                                and legal entities shall receive the same protection under the EU Standard Contractual
+                                Clauses as natural persons.
+                            </p>
+                            <p>
+                                10.6. In the event of any conflict between this Agreement and the Standard Contractual
+                                Clauses, the Standard Contractual Clauses shall prevail.
+                            </p>
+                            <p>
+                                10.7. In the event that a relevant European Commission decision or other valid adequacy
+                                method under applicable Data Protection Legislation on which the Company has relied in
+                                authorising the data transfer is held to be invalid, or that any supervisory authority
+                                requires transfers of personal data made pursuant to such decision to be suspended, or
+                                in the event that Processor ceases to participate in the DPF then the parties will agree
+                                to use a suitable and appropriate alternative transfer solution.
+                            </p>
+                        </div>
 
                         <p>
-                            <strong>{region == 'region-us' ? '11.' : '10.'} General Terms</strong>
+                            <strong>11. General Terms</strong>
                         </p>
                         <div className="pl-8 pb-2">
                             <p>
-                                11.1. Confidentiality. Each Party must keep this Agreement and information it receives
-                                about the other Party and its business in connection with this Agreement (“Confidential
-                                Information”) confidential and must not use or disclose that Confidential Information
-                                without the prior written consent of the other Party except to the extent that:
+                                11.1. <em>Confidentiality.</em> Each Party must keep this Agreement and information it
+                                receives about the other Party and its business in connection with this Agreement
+                                (“Confidential Information”) confidential and must not use or disclose that Confidential
+                                Information without the prior written consent of the other Party except to the extent
+                                that:
                             </p>
                             <div className="pl-8 pb-2">
                                 <p>11.1.1. disclosure is required by law;</p>
                                 <p>11.1.2. the relevant information is already in the public domain.</p>
                             </div>
                             <p>
-                                11.2. Notices. All notices and communications given under this Agreement must be in
-                                writing and will be delivered personally, sent by post or sent by email to the address
-                                or email address set out in the heading of this Agreement at such other address as
-                                notified from time to time by the Parties changing address,
+                                11.2. <em>Notices.</em> All notices and communications given under this Agreement must
+                                be in writing and will be delivered personally, sent by post or sent by email to the
+                                address or email address set out in the heading of this Agreement at such other address
+                                as notified from time to time by the Parties changing address,
                             </p>
                             <p>
-                                11.3. Governing Law and Jurisdiction. This Agreement is governed by the laws of England
-                                and Wales.
+                                11.3. <em>Governing Law and Jurisdiction.</em> This Agreement is governed by the laws
+                                and choice of jurisdiction stipulated in the Agreement.
                             </p>
                         </div>
                         <p className="[page-break-before:always] print:pt-12">
@@ -1386,7 +1466,13 @@ function DpaGenerator() {
                             </p>
                         </div>
 
-                        <p>The personal data shall be processed in order to allow Processor to provide the Services.</p>
+                        <p>
+                            The personal data shall be processed in order to allow Processor to provide the Services.
+                            Processor provides a software platform that equips developers to build successful products.
+                            Processor provides a single platform to analyze, test, observe, and deploy new features in
+                            order to provide these services. Processor also provides support to Customers to triage,
+                            debug, and resolve issues that may affect their use of the services
+                        </p>
 
                         <div className="ml-12">
                             <p>
@@ -1394,7 +1480,11 @@ function DpaGenerator() {
                             </p>
                         </div>
 
-                        <p>Product analytics, including insights, heatmaps, session recording and feature flags.</p>
+                        <p>
+                            Product analytics, including insights, heatmaps, session recording and feature flags.
+                            Troubleshooting, benchmarking, product development and service improvement activities to
+                            ensure the continuing provision of the Services.
+                        </p>
 
                         <p>
                             <strong className="underline">Duration</strong>
@@ -1405,26 +1495,25 @@ function DpaGenerator() {
                             <strong>Categories of data subjects</strong>
                         </p>
                         <p>The personal data processed relates to the following categories of data subjects:</p>
-                        <ul>
-                            <li>Employees</li>
-                            <li>Customers</li>
-                            <li>Visitors</li>
-                            <li>Prospects</li>
-                            <li>Contractors</li>
-                        </ul>
+                        <p>Company’s end users (including prospects, customer and contractors)</p>
 
                         <p>
                             <strong>Categories of personal data processed</strong>
                         </p>
                         <p>The personal data processed comprises the following categories of data:</p>
-                        <ul>
-                            <li>Identifying – name, username</li>
-                            <li>Computer device – IP address, MAC address, browser footprint</li>
-                            <li>Contact – email address</li>
-                            <li>Location – country, territory, city</li>
-                            <li>Behavioral – product usage (page views, clicks, browsing behavior)</li>
-                        </ul>
+                        <p>(As determined at the discretion of the Company):</p>
 
+                        <ul>
+                            <li>
+                                Personal details and contact information including name, address, email address, title,
+                                position, contact information, social profile information, IP address, unique user IDs
+                                (such as cookie IDs) and marketing profiles.
+                            </li>
+                            <li>
+                                Documents and Content: Documents, images, and content uploaded to the Services in
+                                electronic form which may contain any type of Personal Data.
+                            </li>
+                        </ul>
                         <p>
                             <strong>Sensitive categories of personal data processed (if applicable)</strong>
                         </p>
@@ -1499,7 +1588,32 @@ function DpaGenerator() {
                                     the signature of the data exporter and the date of signature shall be as signed
                                     above;
                                 </li>
-                                <li>the role of the exporter is controller; and</li>
+                                <li>
+                                    the role of the{' '}
+                                    <Tooltip
+                                        content={() => (
+                                            <>
+                                                Fill out the form <span className="md:hidden">at the top</span>
+                                                <span className="hidden md:inline-block">to the left</span> populate
+                                                these fields
+                                            </>
+                                        )}
+                                        placement="top"
+                                        className="[&_button]:cursor-auto"
+                                    >
+                                        <span className="relative">
+                                            <button type="button">
+                                                <label
+                                                    htmlFor="yourTitle"
+                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                                >
+                                                    {yourTitle ? yourTitle : '[YOUR TITLE]'}
+                                                </label>
+                                            </button>
+                                        </span>
+                                    </Tooltip>{' '}
+                                    is controller; and
+                                </li>
                                 <li>the activities relate to the provision of the Services.</li>
                             </ul>
                         </div>
