@@ -25,8 +25,6 @@ Jump to a specific category:
 
 ## Sign up and onboarding metrics
 
-<br /> 
-
 ### 1. App bounce rate
 
 **What is it?** The percentage of users who view your home screen but don't view a second screen.
@@ -48,8 +46,6 @@ Jump to a specific category:
     classes="rounded"
     alt="Home screen bounce rate"
 />
-
-<br /> 
 
 ### 2. Permissions granted rate
 
@@ -73,8 +69,6 @@ Jump to a specific category:
     alt="Permissions granted rate"
 />
 
-<br /> 
-
 ### 3. App downloads
 
 **What is it?** The number of times your app has been downloaded.
@@ -94,9 +88,6 @@ Jump to a specific category:
     classes="rounded"
     alt="Number of app downloads"
 />
-
-<br /> 
-
 
 ### 4. Activation rate
 
@@ -119,8 +110,6 @@ Jump to a specific category:
     classes="rounded"
     alt="Activation rate"
 />
-
-<br /> 
 
 ### 5. Average time to activation
 
@@ -148,8 +137,6 @@ Jump to a specific category:
 
 ## Engagement metrics
 
-<br /> 
-
 ### 6. App and feature stickiness
 
 **What is it?** The number of users who open your app and/or performed a specific action repeatedly over a given time period.
@@ -171,8 +158,6 @@ Jump to a specific category:
     classes="rounded"
     alt="Feature stickiness"
 />
-
-<br /> 
 
 ### 7. DAU / MAU ratio
 
@@ -196,8 +181,6 @@ Jump to a specific category:
     alt="DAU/MAU ratio"
 />
 
-<br /> 
-
 ### 8. NPS score
 
 **What is it?** [Net Promoter Score (NPS)](/product-engineers/nps-vs-csat-vs-ces#what-is-nps) measures how passionate users are about your product. You ask them how likely they are to recommend your product to a friend or coworker and they respond on a scale from 0 (not likely at all) to 10 (extremely likely). Your score is the percentage of promoters (people who respond with 9 or 10) minus the percentage of detractors (people who respond with 0-6).
@@ -218,8 +201,6 @@ Jump to a specific category:
     classes="rounded"
     alt="NPS score"
 />
-
-<br /> 
 
 ### 9. In-app response rate
 
@@ -242,8 +223,6 @@ Jump to a specific category:
     classes="rounded"
     alt="In app response rate"
 />
-
-<br /> 
 
 ### 10. Average session length
 
@@ -271,8 +250,6 @@ Jump to a specific category:
 
 ## User Retention Metrics
 
-<br /> 
-
 ### 11. N-day retention rate
 
 **What is it?** The percentage of users who return to your app after their first visit within a specific time frame (e.g., 1-day, 7-day, 30-day retention).
@@ -294,9 +271,6 @@ Jump to a specific category:
     classes="rounded"
     alt="Retention rate chart"
 />
-
-
-<br /> 
 
 ### 12. Churn rate
 
@@ -320,8 +294,6 @@ Jump to a specific category:
     alt="Churn rate chart"
 />
 
-<br /> 
-
 ### 13. Time between sessions
 
 **What is it?** The average time between a user's app sessions.
@@ -344,9 +316,6 @@ Jump to a specific category:
     alt="Time between sessions"
 />
 
-
-<br /> 
-
 ### 14. Reactivation/Resurrection rate
 
 **What is it?** The percentage of inactive users who return to your app after a period of inactivity.
@@ -368,8 +337,6 @@ Jump to a specific category:
     classes="rounded"
     alt="Retention rate chart"
 />
-
-<br /> 
 
 ### 15. User lifetime
 
@@ -397,8 +364,6 @@ Jump to a specific category:
 
 ## Revenue metrics
 
-<br /> 
-
 ### 16. Average time to first purchase
 
 **What is it?** The time it takes for users to make their first purchase.
@@ -420,8 +385,6 @@ Jump to a specific category:
     classes="rounded"
     alt="Average time to first purchase"
 />
-
-<br /> 
 
 ### 17. Refund rate
 
@@ -445,8 +408,6 @@ Jump to a specific category:
     alt="Refund rate"
 />
 
-<br /> 
-
 ### 18. Revenue per paying user
 
 **What is it?** Total revenue divided by the number of paying users.
@@ -467,8 +428,6 @@ Jump to a specific category:
     classes="rounded"
     alt="Revenue per paying user"
 />
-
-<br /> 
 
 ### 19. In-app purchase conversion rate 
 
@@ -491,8 +450,6 @@ Jump to a specific category:
     classes="rounded"
     alt="Revenue per paying user"
 />
-
-<br /> 
 
 ### 20. Revenue churn
 
@@ -520,8 +477,6 @@ Jump to a specific category:
 
 ## Performance and error metrics
 
-<br /> 
-
 ### 21. API response time
 
 **What is it?** The time it takes to receive a response from your API endpoints. 
@@ -543,8 +498,6 @@ Jump to a specific category:
     classes="rounded"
     alt="API request latency"
 />
-
-<br /> 
 
 ### 22. API request error rate
 
@@ -568,8 +521,6 @@ Jump to a specific category:
     alt="API request error rate"
 />
 
-<br /> 
-
 ### 23. App launch time
 
 **What is it?** The time it takes for your app to become responsive when opened.
@@ -592,8 +543,6 @@ Jump to a specific category:
     alt="App launch time"
 />
 
-<br /> 
-
 ### 24. Percentage of users who experience crashes or errors
 
 **What is it?** How many of your overall users are affected by crashes and/or errors.
@@ -615,8 +564,6 @@ Jump to a specific category:
     classes="rounded"
     alt="Percentage of users who experience crashes or errors"
 />
-
-<br /> 
 
 ### 25. p95 errors per user
 
