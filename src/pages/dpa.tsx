@@ -1274,38 +1274,6 @@ function DpaGenerator() {
                                 sexual orientation, biometric data processed for the purpose of uniquely identifying
                                 data subjects and data relating to criminal convictions and offenses as sensitive].
                             </p>
-
-                            {/* <div className="pl-8 pb-2">
-                                        <p>
-                                            10.3.1. for the purposes of clause 9, option 2 (general written
-                                            authorization for subprocessors) shall apply and the Parties agree that the
-                                            time period for notifying changes to the list shall be in accordance with
-                                            Clause 5.3 above;
-                                        </p>
-                                        <p>
-                                            10.3.2. for the purposes of clause 17, the clauses shall be governed by the
-                                            laws of{' '}
-                                            <span className="bg-yellow/40 font-bold px-0.5">
-                                                {jurisdiction ? jurisdiction : '[Jurisdiction]'}
-                                            </span>
-                                            ;
-                                        </p>
-                                        <p>
-                                            10.3.3. for the purposes of clause 18, the courts of{' '}
-                                            <span className="bg-yellow/40 font-bold px-0.5">
-                                                {jurisdiction ? jurisdiction : '[Jurisdiction]'}
-                                            </span>{' '}
-                                            shall have jurisdiction;
-                                        </p>
-                                        <p>
-                                            10.3.4. for the purposes of clause 13 and Annex I.C, the{' '}
-                                            <span className="bg-yellow/40 font-bold px-0.5">
-                                                {supervisoryAuthority
-                                                    ? supervisoryAuthority
-                                                    : '[Supervisory Authority]'}
-                                            </span>
-                                        </p>
-                                    </div> */}
                             <p>
                                 10.4. <strong>Standard Contractual Clauses.</strong> Notwithstanding 10.3, the parties
                                 agree to comply with the obligations set out in the Standard Contractual Clauses as
@@ -1377,7 +1345,7 @@ function DpaGenerator() {
                                     shall have jurisdiction; and
                                 </p>
                                 <p>
-                                    10.4.4. for the purposes of clause 13 and Annex I.C, the
+                                    10.4.4. for the purposes of clause 13 and Annex I.C, the{' '}
                                     <Tooltip
                                         content={() => (
                                             <>
