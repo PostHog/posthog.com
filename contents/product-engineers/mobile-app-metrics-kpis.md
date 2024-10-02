@@ -1,27 +1,29 @@
 ---
-date: 2024-10-01
-title: The most useful mobile app metrics
+date: 2024-10-02
+title: The actionable mobile app metrics you should track (with benchmarks)
 author:
   - lior-neu-ner
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1727786448/posthog.com/contents/header-mobile-app-metrics.jpg
 featuredImageType: full
-category: Engineering
 tags:
   - Guides
   - Product metrics
 crosspost:
   - Blog
+seo: {
+    metaTitle: Actionable mobile app metrics & KPIs to track (with benchmarks)
+    metaDescription: A complete guide to actionble metrics for your mobile app, including onboarding, app engagement, user retention, app revenue, and app performance metrics.
 ---
 
-Tracking the right metrics is critical for improving your app. This guide covers 25 metrics across five categories that can provide valuable insights into your app's success. We've focused on specific, actionable metrics rather than broad ones like DAU or number of active users.
+This guide covers 25 mobile app metrics and KPIs across five categories that can provide valuable insights into your app's success. We've focused on specific, actionable metrics rather than broad ones like daily active users (DAU), or the number of active users.
 
 Jump to a specific category:
 - [Sign up and onboarding metrics](#sign-up-and-onboarding-metrics)
-- [Engagement metrics](#engagement-metrics)
+- [App engagement metrics](#engagement-metrics)
 - [User retention metrics](#user-retention-metrics)
-- [Revenue metrics](#revenue-metrics)
-- [Performance and error metrics](#performance-and-error-metrics)
+- [App revenue metrics](#revenue-metrics)
+- [App performance and error metrics](#performance-and-error-metrics)
 
 ## Sign up and onboarding metrics
 
