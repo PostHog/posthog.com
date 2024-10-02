@@ -74,21 +74,17 @@ Some of the features we are building may exist in other products already. It is 
 
 [@benjackwhite]: https://github.com/benjackwhite
 [@EDsCODE]: https://github.com/EDsCODE
-[@liyiy]: https://github.com/liyiy
-[@macobo]: https://github.com/macobo
 [@mariusandra]: https://github.com/mariusandra
 [@neilkakkar]: https://github.com/neilkakkar
 [@pauldambra]: https://github.com/pauldambra
-[@rcmarron]: https://github.com/rcmarron
 [@Twixes]: https://github.com/Twixes
-[@yakkomajuri]: https://github.com/yakkomajuri
 [@timgl]: https://github.com/timgl
 [Team Product Analytics]: /teams/product-analytics
 [Team Web Analytics]: /teams/web-analytics
 [Team Replay]: /teams/replay
 [Team Pipeline]: /teams/pipeline
 [Team Infrastructure]: /teams/infrastructure
-[Team Feature Success]: /teams/feature-success
+[Team Feature Flags]: /teams/feature-flags
 [Team Infrastructure]: /teams/infrastructure
 [Team Growth]: /teams/growth
 [Team ClickHouse]: /teams/clickhouse

@@ -45,8 +45,8 @@ const product = {
     freeTier: '250 survey responses',
 }
 
-const team = 'Feature Success'
-const teamSlug = '/teams/feature-success'
+const team = 'Surveys'
+const teamSlug = '/teams/surveys'
 
 const featuresPerRow = 3
 const features = [
