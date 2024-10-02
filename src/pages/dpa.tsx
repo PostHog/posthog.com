@@ -32,7 +32,6 @@ function DpaGenerator() {
     const [jurisdiction, setJurisdiction] = useState('')
     const [supervisoryAuthority, setSupervisoryAuthority] = useState('')
     const [mode, setMode] = useState('pretty')
-    const [region, setRegion] = useState('region-eu')
     const [isFormComplete, setIsFormComplete] = useState(false)
     const divRef = useRef(null)
 
@@ -387,63 +386,6 @@ function DpaGenerator() {
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
-
-                            <div className="col-span-5 @md:col-span-2 text-sm self-baseline pt-2">
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            <p className="max-w-sm !mb-2">
-                                                PostHog offers hosting in the 🇪🇺 European Union and the 🇺🇸 United
-                                                States.
-                                            </p>
-                                            <p className="max-w-sm !mb-0">
-                                                Select the region you chose when you signed up. (You can find the region
-                                                in the URL when signed into PostHog.)
-                                            </p>
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="border-b border-dashed border-light dark:border-dark pb-0.5 mb-1 inline-block">
-                                        Data region
-                                    </span>
-                                </Tooltip>
-                            </div>
-
-                            <ul className="flex col-span-5 @md:col-span-3 gap-3 list-none pl-0">
-                                <li className="pl-7 relative">
-                                    <input
-                                        type="radio"
-                                        id="region-eu"
-                                        name="region"
-                                        value="region-eu"
-                                        className="absolute left-1 top-1"
-                                        onChange={(e) => {
-                                            setRegion(e.target.value)
-                                        }}
-                                        checked={region === 'region-eu'}
-                                    />
-                                    <label className="font-semibold" htmlFor="region-eu">
-                                        EU <span className="opacity-50 text-[15px]">(Frankfurt)</span>
-                                    </label>
-                                </li>
-                                <li className="pl-7 relative">
-                                    <input
-                                        type="radio"
-                                        id="region-us"
-                                        name="region"
-                                        value="region-us"
-                                        className="absolute left-1 top-1"
-                                        onChange={(e) => {
-                                            setRegion(e.target.value)
-                                        }}
-                                    />
-                                    <label className="font-semibold" htmlFor="region-us">
-                                        US <span className="opacity-50 text-[15px]">(Virginia)</span>
-                                    </label>
-                                </li>
-                            </ul>
 
                             <div className="col-span-5 @md:col-span-2 text-sm self-baseline pt-2">Format</div>
 
@@ -1725,85 +1667,81 @@ function DpaGenerator() {
                         }`}
                     >
                         <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm [&>div:nth-child(5n+6)]:border-t [&>div:nth-child(5n+6)]:border-light [&>div:nth-child(5n+6)]:pt-8 mb-8">
-                            {subprocessors
-                                .filter((subprocessor) => subprocessor.region === region)
-                                .map((subprocessor, index) => (
-                                    <React.Fragment key={index}>
-                                        <div className="col-span-3 @xl:!-mb-6">
-                                            <h3 className="!my-0 text-xl">
-                                                <strong>{subprocessor.name}</strong>
-                                            </h3>
+                            {subprocessors.map((subprocessor, index) => (
+                                <React.Fragment key={index}>
+                                    <div className="col-span-3 @xl:!-mb-6">
+                                        <h3 className="!my-0 text-xl">
+                                            <strong>{subprocessor.name}</strong>
+                                        </h3>
+                                    </div>
+                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
+                                        <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
+                                        <div className="pt-2">
+                                            <strong>Details</strong>
+                                            <br />
+                                            <Link
+                                                href={subprocessor.details}
+                                                externalNoIcon
+                                                className="[word-break:break-word]"
+                                            >
+                                                {subprocessor.details}
+                                            </Link>
                                         </div>
-                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
-                                            <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
-                                            <div className="pt-2">
-                                                <strong>Details</strong>
-                                                <br />
-                                                <Link
-                                                    href={subprocessor.details}
-                                                    externalNoIcon
-                                                    className="[word-break:break-word]"
-                                                >
-                                                    {subprocessor.details}
-                                                </Link>
-                                            </div>
+                                    </div>
+                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                        <div>
+                                            <strong className="block">Categories of data subject</strong>
+                                            <div>{subprocessor.categories}</div>
                                         </div>
-                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
-                                            <div>
-                                                <strong className="block">Categories of data subject</strong>
-                                                <div>{subprocessor.categories}</div>
-                                            </div>
-                                            <div>
-                                                <strong className="block">Duration of the processing</strong>
-                                                <div>{subprocessor.duration}</div>
-                                            </div>
-                                            <div>
-                                                <strong className="block">
-                                                    Geographical location of the processing
-                                                </strong>
-                                                <div>{subprocessor.location}</div>
-                                            </div>
+                                        <div>
+                                            <strong className="block">Duration of the processing</strong>
+                                            <div>{subprocessor.duration}</div>
                                         </div>
-                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
-                                            <div>
-                                                <div>
-                                                    <strong>Subject matter of the processing</strong>
-                                                </div>
-                                                <div>{subprocessor.subject}</div>
-                                            </div>
-                                            <div>
-                                                <div>
-                                                    <strong>Nature and purpose of the processing</strong>
-                                                </div>
-                                                <div>{subprocessor.reason}</div>
-                                            </div>
+                                        <div>
+                                            <strong className="block">Geographical location of the processing</strong>
+                                            <div>{subprocessor.location}</div>
                                         </div>
-                                        <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
-                                            <strong className="block mb-2 text-base">
-                                                Type of personal data processed
-                                            </strong>
-                                            <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
-                                                {Object.entries(subprocessor.type).map(([typeName, typeValues]) => (
-                                                    <React.Fragment key={typeName}>
-                                                        <div>
-                                                            <strong className="block pb-1">{typeName}</strong>
-                                                            <ul className="pl-4 !mb-1">
-                                                                {typeValues.map((typeValue, index) => (
-                                                                    <li
-                                                                        key={index}
-                                                                        className="!mb-0 !leading-normal !text-sm"
-                                                                    >
-                                                                        {typeValue}
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        </div>
-                                                    </React.Fragment>
-                                                ))}
+                                    </div>
+                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                        <div>
+                                            <div>
+                                                <strong>Subject matter of the processing</strong>
                                             </div>
+                                            <div>{subprocessor.subject}</div>
                                         </div>
-                                    </React.Fragment>
-                                ))}
+                                        <div>
+                                            <div>
+                                                <strong>Nature and purpose of the processing</strong>
+                                            </div>
+                                            <div>{subprocessor.reason}</div>
+                                        </div>
+                                    </div>
+                                    <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
+                                        <strong className="block mb-2 text-base">
+                                            Type of personal data processed
+                                        </strong>
+                                        <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
+                                            {Object.entries(subprocessor.type).map(([typeName, typeValues]) => (
+                                                <React.Fragment key={typeName}>
+                                                    <div>
+                                                        <strong className="block pb-1">{typeName}</strong>
+                                                        <ul className="pl-4 !mb-1">
+                                                            {typeValues.map((typeValue, index) => (
+                                                                <li
+                                                                    key={index}
+                                                                    className="!mb-0 !leading-normal !text-sm"
+                                                                >
+                                                                    {typeValue}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                </React.Fragment>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </React.Fragment>
+                            ))}
                         </div>
                     </div>
                 </div>
