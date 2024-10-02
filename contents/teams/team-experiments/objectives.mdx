@@ -1,19 +1,19 @@
-### Objective: No-code experiments
+### Q4 2024 Objectives
 
-Last quarter we polished up our new experiment UI. This quarter, we want to address some issues that came up, and then focus on building out some more ambitious features on top of experiments.
+This quarter, we're focusing on more feature improvements to help users create comprehensive and easy-to-analyze experiments. These improvements will make our product more mature and complete.
 
-Broadly, we will:
-1. Address outstanding experiments UI/UX issues
-2. Build no-code experiments
-3. Explore some cool things we can do on top of no-code experiments, like suggesting and automatically running some no-code experiments based on replay and analytics data
+### Objective 1: Finish HogQL rewrite
 
-### Objective: Split out experiments into its own product
+We will migrate Experiments to HogQL, making result calculations more reliable and performant. This will also enable the addition of new features listed below.
 
-Experiments can now stand on its own, without the linking to feature flags in the UI, and in pricing.
+### Objective 2: Multiple experiment goals supported + visualized
 
-The current state is problematic because
+We will add support for multiple goal metrics in a single experiment, allowing them to be visualized together and making it easier to interpret results across all metrics simultaneously.
 
-1. It confuses some users over difference between flags and experiments
-2. Pricing for experiments is implicit, and can be hard to understand
+### Objective 3: Reusable experiment metrics
 
-We'll update SDKs to have experiment-specific constructs, stop the controlling experiment via feature flag issues, make them independent, track flag calls separately for experiments, and update how we price experiments.
+We will add the ability to create metric sets that users can save and reuse. This will reduce friction, improve maintainability, and decrease the likelihood of errors.
+
+### Objective 4: Review and adjust methodology with a statistician
+
+We will review our current methodology to ensure it is both accurate and easy for our users to understand.
