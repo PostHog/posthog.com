@@ -13,6 +13,7 @@ import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { getShopifyImage } from 'gatsby-source-shopify'
+import { IconSpinner } from '@posthog/icons'
 
 type ProductPanelProps = {
     className?: string
@@ -104,10 +105,21 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
             <Quantity value={quantity} onChange={setQuantity} />
 
-            <CallToAction disabled={outOfStock} onClick={handleAddToCart} type="primary" className="relative w-full">
+            <CallToAction
+                disabled={loading || outOfStock}
+                onClick={handleAddToCart}
+                type="primary"
+                className="relative w-full"
+            >
                 <>
                     <span className={cn('', isAdding && 'invisible')}>
-                        {outOfStock ? 'Out of Stock' : 'Add to Cart'}
+                        {loading ? (
+                            <IconSpinner className="w-5 mx-auto animate-spin" />
+                        ) : outOfStock ? (
+                            'Out of Stock'
+                        ) : (
+                            'Add to Cart'
+                        )}
                     </span>
                     <LoaderIcon
                         className={cn(
