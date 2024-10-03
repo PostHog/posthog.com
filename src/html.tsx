@@ -47,7 +47,8 @@ export default function HTML(props: HTMLProps): JSX.Element {
                                     maskAllInputs: false,
                                     maskInputOptions: {
                                         password: true,
-                                    }
+                                    },
+                                    compress_events: true,
                                 },
                                 person_profiles: 'identified_only',
                                 __preview_heatmaps: true,

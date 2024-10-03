@@ -56,7 +56,7 @@ The default behavior for this SDK is to use the `.identifiedOnly` mode of person
 - `.never`
 - `.always`
 
-See [Person Profiles](/data/persons) for more info.
+See [person profiles](/docs/data/persons) for more info.
 
 ## Setting person properties
 
@@ -245,8 +245,38 @@ configuration.debug = false
 configuration.optOut = false
 
 /**
+ * Callback that allows to sanitize the event properties (not set by default)
+ */
+configuration.propertiesSanitizer = { ... }
+
+/**
+ * Hook that allows for modification of the default mechanism for
+ * generating anonymous id (which as of now is just random UUID v7)
+ */
+configuration.getAnonymousId = { ... }
+
+/**
+ * Allows to send your data only if the data mode matches your configuration
+ * such as wifi only, cellular only or any.
+ * Defaults to .any
+ */
+configuration.dataMode = .any
+
+/**
+ * Determines the behavior for processing user profiles.
+ * Defaults to .identifiedOnly
+ */
+configuration.personProfiles = .identifiedOnly
+
+/**
  * Enable Recording of Session Replays. (off/false by default)
  * Experimental support
  */
 configuration.sessionReplay = false
+
+/**
+ * Session Replay configuration
+ * Experimental support
+ */
+configuration.sessionReplayConfig = .init()
 ```

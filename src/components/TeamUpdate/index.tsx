@@ -114,6 +114,7 @@ export default function TeamUpdate({
         } = await fetch(
             `${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${qs.stringify(
                 {
+                    populate: ['profiles', 'leadProfiles'],
                     filters: {
                         name: {
                             $eqi: teamName,

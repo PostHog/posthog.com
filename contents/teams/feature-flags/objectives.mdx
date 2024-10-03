@@ -1,0 +1,19 @@
+### Q4 2024 Objectives
+
+As always, reliability is the #1 goal: Making sure feature flags are reliable and performant trumps every other objective.
+
+### Objective 1: Make sure the new feature flags service (the `/flags` endpoint) can handle 10x current scale with a 2x speed increase
+
+In the beginning of 2024, we hit some scaling limits on flags: It's now very expensive to run flags on Django and we'll hit some scaling limits at 5x our scale.
+
+To get ahead of this problem, [we decided]((https://github.com/PostHog/posthog/issues/22131)) to [rewrite our flags service](https://github.com/PostHog/posthog/issues/22131) to be more performant and reliable.
+
+As of Q3 2024, we were at 90% feature parity with the `/decide` endpoint.  Q4 will be when we roll out the new feature flag service to all users.
+
+### Objective 2: Maintain and improve reliability of the existing feature flag platform (the `/decide` endpoint)
+
+While we roll out the new feature flag platform, we need to maintain and improve reliability of the existing feature flag platform, which mostly consists of:
+
+- Fixing bugs in the existing feature flag platform
+- Improving alerting and monitoring of the existing feature flag platform
+- Improving the documentation of the existing feature flag platform
