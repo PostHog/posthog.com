@@ -241,10 +241,11 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                 className="flex items-center !text-black dark:!text-white"
                                 to={`/community/profiles/${profile.data.id}`}
                             >
-                                <div className="mr-2 relative">
+                                <div className="mr-2 relative ml-[-2px]">
                                     <Avatar
                                         className="w-[25px] h-[25px] rounded-full"
                                         image={getAvatarURL(profile?.data?.attributes)}
+                                        color={profile?.data.attributes.color}
                                     />
                                     {isTeamMember && (
                                         <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-aggent-dark text-primary dark:text-primary-dark">
@@ -252,7 +253,10 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                         </span>
                                     )}
                                 </div>
-                                <strong>{profile.data.attributes.firstName || 'Anonymous'}</strong>
+                                <strong>
+                                    {profile.data.attributes.firstName || 'Anonymous'}{' '}
+                                    {profile.data.attributes.lastName || 'Anonymous'}
+                                </strong>
                                 {pronouns && <span className="text-xs opacity-70 ml-1">({pronouns})</span>}
                                 <IconFeatures className="size-5 ml-1 text-primary dark:text-primary-dark opacity-50 inline-block" />
                             </Link>
@@ -263,12 +267,13 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                         className="flex items-center !text-black dark:!text-white"
                         to={`/community/profiles/${profile.data.id}`}
                     >
-                        <div className="mr-2 relative">
+                        <div className="mr-2 relative ml-[-2px]">
                             <Avatar
                                 className={`w-[25px] h-[25px] rounded-full ${
                                     profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
                                 }`}
                                 image={getAvatarURL(profile?.data?.attributes)}
+                                color={profile?.data.attributes.color}
                             />
                             {isTeamMember && (
                                 <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark">
@@ -326,7 +331,8 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                 <div className={reply?.attributes?.helpful === false || !publishedAt ? 'opacity-70' : ''}>
                     {reply?.attributes?.helpful === false && (
                         <div className="p-2 rounded border border-light dark:border-dark mb-2 text-sm bg-accent dark:bg-accent-dark">
-                            <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful.
+                            <IconInfo className="size-5 inline-block" /> This answer was marked as unhelpful and is only
+                            visible to you.
                         </div>
                     )}
                     <Markdown>{body}</Markdown>
