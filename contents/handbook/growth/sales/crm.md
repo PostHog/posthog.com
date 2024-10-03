@@ -192,6 +192,12 @@ The renewal pipeline stages are:
 7. Closed Won (100%) - They have signed the contract.
 8. Closed Lost (0%) - At some point in the pipeline they decided not to renew. We should make a note as to the reasons why and optionally set a reminder task to follow up with them if we have improvements that could change their mind on our roadmap.
 
+### Opportunity Notes
+The "Opportunity Notes" section is to track key actions and next steps to manage an opportunity and avoid missed follow-ups. It has the following fields:
+- Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
+- Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
+
+
 ## All done - now what?
 
 This is just the beginning of what will hopefully be an awesome relationship with a new customer!
