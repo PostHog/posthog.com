@@ -250,6 +250,9 @@ function DpaGenerator() {
                         Once the form is completed, you can export to PDF. Sign it and send it to privacy@posthog.com
                         for counter-signature.
                     </p>
+                    <p className="text-sm">
+                        Need changes to this DPA? <Link to="/talk-to-a-human">Contact us</Link> first.
+                    </p>
                     <form>
                         <div className="grid grid-cols-5 gap-1 @sm:gap-2 items-center">
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyName">
