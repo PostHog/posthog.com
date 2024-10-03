@@ -251,7 +251,7 @@ function DpaGenerator() {
                         for counter-signature.
                     </p>
                     <p className="text-sm">
-                        Want to propose changes to the DPA? <Link to="/talk-to-a-human">Contact us</Link> first.
+                        Need changes to this DPA? <Link to="/talk-to-a-human">Contact us</Link> first.
                     </p>
                     <form>
                         <div className="grid grid-cols-5 gap-1 @sm:gap-2 items-center">
