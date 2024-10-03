@@ -63,6 +63,14 @@ If not much is happening, feel free to do feature work – but in the case of a 
 
 It might be an intense week, but you're also going to solve so many real problems, and that feels great.
 
+## Don't ask users to do work that you can do!
+
+If folk are asking us for help, then we know the product already didn't meet their needs. Asking them to do leg-work that we could do is adding insult to injury.
+
+For example don't ask them what version of posthog-js they're using or what their posthog config is when you can find out for yourself. Or visit their website and check the console instead of asking them if they had any errors.
+
+If you do then have to ask them to do something, make sure you explain why you need it and what you're going to do with it.
+
 ## How do I communicate?
 
 There are two valid modes (which overlap!)
