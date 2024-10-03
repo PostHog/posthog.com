@@ -132,7 +132,7 @@ Renewal: Choose this type when an existing customer is renewing their contract o
 ### Opportunity Types
 Annual Plan: Select this type when the customer agrees to pay for a year-long+ subscription to our services.
 
-Monthly Plan: Choose this type when the customer opts for a month-to-month subscription to our services.
+Monthly Plan: Choose this type when the customer opts for a month-to-month subscription to our services. Amount field still reflects ARR here.
 
 ### How to Create an Opportunity
 
