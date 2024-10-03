@@ -150,7 +150,7 @@ Metabase is available under a AGPL license. A limited version of the product is 
 Unlike Matomo, Plausible is a very streamlined tool rather than a feature-equivalent Google Analytics alternative. As a result, it's a great fit for smaller teams who prefer ease of use to in-depth reporting, or hobby deployments if you just want basic analytics for a website or blog.
 
 #### Who is Plausible Analytics for?
-Plausible is intended for marketing teams and website owners who want to track top-level website metrics, such as pageviews, bounce rate and visit duration, but it's not an ideal tool for understanding user behavior.
+[Plausible](/blog/posthog-vs-plausible) is intended for marketing teams and website owners who want to track top-level website metrics, such as pageviews, bounce rate and visit duration, but it's not an ideal tool for understanding user behavior.
 
 #### Strengths
 - Easy to use and focused on essential web metrics

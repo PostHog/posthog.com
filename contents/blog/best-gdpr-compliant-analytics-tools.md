@@ -91,7 +91,8 @@ Plausible’s lightweight nature does offer several benefits however, such as a 
 Plausible’s intense focus on privacy makes it an attractive option for individuals, but also imposes restrictions on how data can be used and stored. There’s no way to identify users or track behavior across multiple sessions or devices, for example. 
 
 #### Who is Plausible for?
-Plausible is a good fit for small content and marketing teams who need to track simple website metrics, or for freelancers and bloggers who only need to monitor small sites. 
+
+[Plausible](/blog/posthog-vs-plausible) is a good fit for small content and marketing teams who need to track simple website metrics, or for freelancers and bloggers who only need to monitor small sites. 
 
 #### Features & benefits
 - Lightweight script with minimal page speed impact
