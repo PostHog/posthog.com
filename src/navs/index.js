@@ -1839,29 +1839,6 @@ export const docsMenu = {
                     icon: 'IconSearch',
                 },
                 {
-                    name: 'Webhooks',
-                    url: '/docs/webhooks',
-                    icon: 'IconWebhooks',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/webhooks',
-                        },
-                        {
-                            name: 'Microsoft Teams',
-                            url: '/docs/webhooks/microsoft-teams',
-                        },
-                        {
-                            name: 'Slack',
-                            url: '/docs/webhooks/slack',
-                        },
-                        {
-                            name: 'Discord',
-                            url: '/docs/webhooks/discord',
-                        },
-                    ],
-                },
-                {
                     name: 'Hog',
                     url: '/docs/hog',
                     icon: 'IconCode',
