@@ -8,9 +8,11 @@ Every week, one person in each engineering team is designated the Support Hero. 
 
 As Support Hero, your job is to investigate and resolve issues reported by customers. A single case of suspicious data or a show-stopping bug can really undermine one's confidence in a data product, so it's important that we get to the bottom of all issues.
 
+One of the many awesome things about PostHog is that support is being dealt with by engineers and they ship fixes and improvements in real-time when you contact them. It is impossible to overstate how valuable it is for customers when they ask a question and get a shipped feature within a day.
+
 You'll see some teams using a term of endearment for Support Hero, examples being "Infra Hero" or… "Luigi". Don't ask – we don't know.
 
-<TeamMember name="Marcus Hof" photo />, <TeamMember name="Steven Shults" photo />, and <TeamMember name="Abigail Richardson" photo />, our Support Engineers, triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
+Our Support Engineers, in [the Comms team](/teams/customer-comms) triage tickets for the Product Analytics, Web Analytics, Data Warehouse, CDP, Replay, and Feature Success teams, due to the high volume of tickets those teams get. They will resolve tickets if possible, and escalate to the engineering team responsible if they need further help.
 
 ## When is my turn?
 
@@ -41,7 +43,7 @@ Each engineering team has its own list of tickets in Zendesk:
 - [Infrastructure](https://posthoghelp.zendesk.com/agent/filters/14507148758939)
 - [Auth & Billing, handled by Growth](https://posthoghelp.zendesk.com/agent/filters/14507107058843)
 
-Your job is simple: resolve ticket after ticket from your team's list.
+Your job is simple: ship features and fixes, and resolve ticket after ticket from your team's list.
 
 There are three sources of tickets:
 
@@ -49,24 +51,49 @@ There are three sources of tickets:
 1. Community questions asked on PostHog.com.
 1. Slack threads that have been marked with the 🎫 reaction in customer support channels.
 
-Some of them will ask for new features. If the feature would be widely useful for users matching [our ICP](/handbook/who-we-are-building-for), it might be a good idea to build it. Otherwise, feel free to just create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](/teams/customer-success) know, since they will track feature requests for paying customers.
+### Shipping features
 
-Others will report bugs or suspected bugs. Get to the bottom of each one - you never know what you'll find. If the issue decidedly affects only that one user under one-in-a-million circumstances, it might not be worth fixing. But if it's far-reaching, a proper fix is in order. And then there are "bugs" which turn out to be pure cases of confusing UX. Try to improve these too.
+Some tickets ask for new features. If the feature is useful for users matching [our ICP](/handbook/who-we-are-building-for), then decide whether to just build it. Otherwise, create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](/teams/customer-success) know, since they will track feature requests for paying customers.
+
+### Fixing bugs
+
+Others tickets report bugs or suspected bugs. Get to the bottom of each one - you never know what you'll find. If the issue decidedly affects only that one user under one-in-a-million circumstances, it might not be worth fixing. But if it's far-reaching, a proper fix is in order. And then there are "bugs" which turn out to be pure cases of confusing UX. Try to improve these too.
 
 If not much is happening, feel free to do feature work – but in the case of a backlog in Zendesk, drop other things and roll up your sleeves. When you're Support Hero, supporting users comes first.
 
-It's going to be an intense week, but you're also going to solve so many real problems, and that feels great.
+It might be an intense week, but you're also going to solve so many real problems, and that feels great.
 
 ## How do I communicate?
 
-As an engineer, when a question comes in your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. Hence the following guidelines:
+There are two valid modes (which overlap!)
+
+1. excited, like a labrador puppy, to discover a new way to improve the product
+2. clinical and clear
+
+### Excited like a labrador puppy
+
+The first is great for when you're talking to someone with feedback or who doesn't seem frustrated. It's important because every single support interaction is an opportunity to ship a fix or an improvement. And the excitement is how we show enough interest to properly hear the feedback.
+
+example: "You can't do that right now, but it sounds super useful. Out of interest what does it unlock for you?"
+
+### Clinical and clear
+
+The second is great for when the issue is tricky or the customer seems frustrated. Sometimes this goes as far as communicating in bullet points instead of paragraphs. When something isn't working the person might (quite rightly) have low tolerance for a support interaction.
+
+example: "Ah, I see what you mean, that's not ideal! Sorry. I'll dig in to that now and let you know what I find by the end of tomorrow."
+
+### General tone
+
+As an engineer, when answering a question, your first instinct is to give them an answer as quickly as possible. That means we often forget pleasantries, or will ignore a question until we've found the answer. So, the following guidelines:
 
 - Always respond to a question within a reasonable timeframe during your working day. Our SLAs are [explained here](/handbook/comms/customer-support#response-targets), but you should always try to respond to tickets quickly. 
-  - If you're ready to look into the issue and you think it might take a while/require a fix, just mention that and say you'll get back to them
+  - If you're ready to look into the issue, and you think it might take a while/require a fix, just mention that and say you'll get back to them
   - If you have no idea how to answer or fix their issue, @mention someone who does
+  - They need to know we've understood them. And have a clear picture of what their onward journey is. Are they waiting for us? How Long? Or - are we waiting for them? what for?
 - Start your response with `Hey [insert name], ...` and make sure you're polite, not everyone you talk to is an engineer and as accepting of terse messages
   - If they expressed frustration, acknowledging it ("Sorry for the confusion", "Apologies for the trouble" etc.) can earn goodwill quickly.
   - Be sure to thank them for reporting problems, giving feedback, creating issues, PRs, etc.
+  - Even if you're using the support portal think about whether they'll see the message in Slack or email. A Slack message that reads like an email seems weirdly formal.
 - Follow up!
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 - If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
