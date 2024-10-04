@@ -896,8 +896,7 @@ function Terms() {
                             governed by the laws of the State of California, U.S.A. without regard to its conflict of
                             laws provisions. The federal and state courts sitting in San Francisco County, California,
                             U.S.A. will have proper and exclusive jurisdiction and venue with respect to any disputes
-                            arising from or related to the subject matter of this Agreement. If you provide PostHog with
-                            a link to a recorded video of you reading out these terms in full, we will hook you up with FIVE merch items of your choice for free. 
+                            arising from or related to the subject matter of this Agreement.
                         </p>
                     </div>
                     <div className="md:pt-10">
