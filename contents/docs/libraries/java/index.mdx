@@ -57,7 +57,7 @@ posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
 
 For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To capture anonymous events without person profiles, set the event's `$process_person_profile` property to `false`:
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `false`:
 
 ```java
 posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {

@@ -132,7 +132,7 @@ Renewal: Choose this type when an existing customer is renewing their contract o
 ### Opportunity Types
 Annual Plan: Select this type when the customer agrees to pay for a year-long+ subscription to our services.
 
-Monthly Plan: Choose this type when the customer opts for a month-to-month subscription to our services.
+Monthly Plan: Choose this type when the customer opts for a month-to-month subscription to our services. Amount field still reflects ARR here.
 
 ### How to Create an Opportunity
 
@@ -191,6 +191,12 @@ The renewal pipeline stages are:
 6. Commercial & Legal Review (80%) - We are now working with them on contractual items such as custom pricing, MSAs etc.
 7. Closed Won (100%) - They have signed the contract.
 8. Closed Lost (0%) - At some point in the pipeline they decided not to renew. We should make a note as to the reasons why and optionally set a reminder task to follow up with them if we have improvements that could change their mind on our roadmap.
+
+### Opportunity Notes
+The "Opportunity Notes" section is to track key actions and next steps to manage an opportunity and avoid missed follow-ups. It has the following fields:
+- Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
+- Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
+
 
 ## All done - now what?
 
