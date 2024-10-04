@@ -112,7 +112,7 @@ One person on each product team takes on the **[Support Hero](/handbook/engineer
 
 ### Difficult support requests 
 
-We very occasionally receive messages from people either wishing to make a legal claim or who you suspect may have a mental illness, either via the app or [Community Questions](/questions). If this happens, notify Charles or Fraser in the first instance. They will either take this on, or advise you on how to reply.
+We very occasionally receive messages from people either wishing to make a legal claim or who you suspect may have a mental illness, either via the app or [Community Questions](/questions). If this happens, notify <TeamMember name="Charles Cook" photo /> or <TeamMember name="Fraser Hopper" photo /> in the first instance. They will either take this on, or advise you on how to reply.
 
 ## Community
 
