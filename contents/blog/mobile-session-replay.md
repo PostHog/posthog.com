@@ -1,5 +1,5 @@
 ---
-title: How we built mobile replay
+title: How we built mobile replay (and why it took so long)
 date: 2024-09-18
 author:
  - ian-vanagas
