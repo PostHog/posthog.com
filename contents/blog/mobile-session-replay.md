@@ -24,19 +24,19 @@ Others have complained about [the lack of good mobile replay options](https://me
 
 ### 1. Multiple platforms
 
-The secret about web session replay industry-wide is that it largely relies on a single open source library to work: [rrweb](https://github.com/rrweb-io/rrweb). It includes tools for recording web interactions and state changes, structuring session data, and playback. 
+The industry's big secret about web session replay is that it largely relies on a single open source library to work: [rrweb](https://github.com/rrweb-io/rrweb). It includes tools for recording web interactions and state changes, structuring session data, and playback. 
 
 Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, we needed to do all the work ourselves, and when compared to the web, this is a lot of work. This is because, instead of a single JavaScript library, language, and SDK, mobile requires multiple (like iOS, Android, React Native, and Flutter). 
 
-There are even breaking differences within platforms. For example, Jetpack Compose uses a compositional model for UI, different from Android's traditional view-based model. This means you need to develop separate ways of doing replays when using it. iOS has a similar problem with SwiftUI.
+There are even breaking differences within platforms. For example, Jetpack Compose uses a compositional model for UI, which is different from Android's traditional view-based model. This means you need to develop separate ways of doing replays when using it. iOS has a similar problem with SwiftUI versus UIKit.
 
 ### 2. Performance
 
-Desktops are a lot more powerful than phones. Because of this, we need to be much more sensitive about performance. 
+Phones are much less powerful than desktops. Because of this, we need to be much more sensitive about performance. 
 
 If you've ever tried to record your phone screen, you would know its impact on performance. Apps take longer to load, animations become choppy, reactivity degrades, and your phone heats up.
 
-Any that degrades the experience this much is not an option for many developers.
+Anything that degrades your user experience is not an option for many developers.
 
 ### 3. Privacy
 
@@ -44,13 +44,13 @@ A big difference between web and mobile apps is the DOM.
 
 In web apps, this provides a hierarchical tree structure that represents and uniquely identifies elements. The web also has standardized elements, like `<input type="password">`. Combining these makes it easier to identify, mask, and exclude sensitive elements on the web.
 
-Mobile doesn't have standardized structures or elements. Accessibility identifiers are also inconsistently implemented. This means identifying, masking, and excluding content is a lot more tricky.
+Mobile doesn't have standardized structures or elements. Accessibility identifiers are also inconsistently implemented. This means identifying, masking, and excluding content is a lot trickier.
 
 ### 4. Testing
 
-We're big fans of [dogfooding](/product-engineers/dogfooding) at PostHog. Often, we are our own best users. As you might know, we don't have a mobile app. 
+We're big fans of [dogfooding](/product-engineers/dogfooding) at PostHog. Often, we are our own best users, but we don't have a mobile app. 
 
-During development, we would need to rely on demo and open source apps. We risk creating something that doesn't work well for larger, production-quality apps.
+This meant that during development we relied on demo and open source apps. This risks creating something that doesn't work well for larger, production-quality apps.
 
 Developing a high-quality mobile replay product means relying more on our users and their feedback.
 
@@ -95,7 +95,7 @@ The other two have more clever solutions.
 
 Not slowing down people's apps was core to our mission with session replay. 
 
-Our strategy to do wireframes was much less performance-intensive than others tools' reliance on screenshots. We still built screenshot mode, which provided a more accurate representation, but mostly focused on making our wireframe mode as good as possible. 
+Our strategy to do wireframes is much less performance-intensive than others tools' reliance on screenshots. We still built screenshot mode, which provided a more accurate representation; however, we mostly focused on making our wireframe mode as good as possible. 
 
 ![Screenshot vs Wireframe](https://res.cloudinary.com/dmukukwp6/image/upload/wireframe_78ce94bd4b.png)
 
