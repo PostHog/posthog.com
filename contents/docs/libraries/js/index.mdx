@@ -39,6 +39,16 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 <WebSendEvents />
 
+## Page events
+
+To capture page events, you just have to send the url:
+
+```js-web
+posthog.page('https://example.com')
+```
+
+This internally calls `posthog.capture('$pageview')` with the `$current_url` property as `https://example.com`.
+
 ## Person profiles and properties
 
 PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
