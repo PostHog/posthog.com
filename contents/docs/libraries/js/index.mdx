@@ -111,7 +111,7 @@ posthog.capture(
 
 Typically, person properties are set when an event occurs like `user updated email` but there may be occasions where you want to set person properties as its own event. 
 
-```javascript
+```js
 posthog.setPersonProperties(
     { name: "Max Hedgehog" }, // These properties are like the `$set` from above
     { initial_url: "/blog" }  // These properties are like the `$set_once` from above
