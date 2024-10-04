@@ -1,11 +1,11 @@
 ---
 title: How we built mobile replay (and why it took so long)
-date: 2024-09-18
+date: 2024-10-04
 author:
  - ian-vanagas
  - manoel-aranda-neto
 rootpage: /blog
-featuredImage: >-
+featuredImage: >- 
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
 tags:
