@@ -18,7 +18,7 @@ Fortunately, it's finally here on [iOS](/docs/session-replay/ios), [Android](/do
 
 What took so long? Although we had the structure to ingest and playback replays, recording them in mobile apps is much trickier than in web apps. This post goes over why and how we finally managed to overcome them.
 
-## What's so difficult about mobile session replay
+## What's so difficult about mobile session replay?
 
 Others have complained about [the lack of good mobile replay options](https://medium.com/goodones/15-years-later-there-is-still-no-good-session-replay-for-ios-f8d335999737). Why is that the case?
 
@@ -26,7 +26,7 @@ Others have complained about [the lack of good mobile replay options](https://me
 
 The industry's big secret about web session replay is that it largely relies on a single open source library to work: [rrweb](https://github.com/rrweb-io/rrweb). It includes tools for recording web interactions and state changes, structuring session data, and playback. 
 
-Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, we needed to do all the work ourselves, and when compared to the web, this is a lot of work. This is because, instead of a single JavaScript library, language, and SDK, mobile requires multiple (like iOS, Android, React Native, and Flutter). 
+Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, we needed to do all the work ourselves, and when compared to the web, this is a lot. Instead of a single JavaScript SDK, mobile requires multiple (like iOS, Android, React Native, and Flutter). 
 
 There are even breaking differences within platforms. For example, Jetpack Compose uses a compositional model for UI, which is different from Android's traditional view-based model. This means you need to develop separate ways of doing replays when using it. iOS has a similar problem with SwiftUI versus UIKit.
 
@@ -54,56 +54,43 @@ This meant that during development we relied on demo and open source apps. This 
 
 Developing a high-quality mobile replay product means relying more on our users and their feedback.
 
-## The prerequisites for mobile session replay
+## Solving mobile session replay's big problems
 
-First, none of this would be possible without [Manoel](/community/profiles/30206). We had mobile experience, but not the dedicated mobile SDK experience needed for this big of a feature. Manoel had that experience and this was only possible thanks to him.
+Here's how we tackled all four of these:
 
-When Manoel joined the first thing he worked on was [rewriting](https://github.com/PostHog/product-internal/issues/506) the SDKs in Kotlin and Swift, removing code we didn't use, improving tests, automating deployments, and making sure they worked with the latest platforms.
+### 1. Multiple platforms
 
-We already had the other prerequisite, our existing session replay infrastructure. We had the data structure, the way to store replays, as well as a complete product for playback and analysis. All this could be reused for mobile replay.
+We took a simple approach to solving this problem: do the work to develop for each platform.
+
+The one thing that made this easier was reusing our existing session replay infrastructure. This included the data structure, the way to store replays, as well as a complete product for playback and analysis.
 
 ![Replay](https://res.cloudinary.com/dmukukwp6/image/upload/replay_03a8c56981.png)
 
-Importantly, Paul and Manoel realized the mobile data needed to be transformed into a format the rrweb player could use. They wanted to keep the rrweb schema to ensure the fewest changes possible to our API and player. To do this, they wrote a [validation and testing tool](https://github.com/PostHog/mobile-replay-data-transformer) to rapidly test the transformations before deploying it in our main app. 
+The first platform-specific work we did was rewriting the SDKs in Kotlin and Swift, removing code we didn't use, improving tests, automating deployments, and making sure they worked with the latest platforms.
 
-Once this was done, everything was ready for the mobile replay capture to be worked on. 
+Once updated, we could get on with the work developing platform-specific proof-of-concepts.
 
-## How we built mobile session replay
-
-Work started by developing a [proof of concept](https://github.com/PostHog/posthog-android/pull/69) for Android session replay. This developed from sending anything from an Android app and being replayed to basic components like text and images.
-
-![PoC](https://res.cloudinary.com/dmukukwp6/image/upload/mobile_b85c032c93.png)
-
-From here, there was wireframe capture along with logs and network requests. Afterwards, there were standard Android components like radios, checkboxes, Calendar, [Toggle](https://github.com/PostHog/posthog/pull/19279), RatingBar, and more. 
-
-These need to be transformed to render as an HTML wireframe (as rrweb expects). Many of them required custom transformation and components to render properly. For example, radio buttons didn't group, padding wasn't applied, and positioning was wrong.
-
-Beyond this, fitting the data into a service meant for web caused many challenges. For example, click events weren't showing even though the types and data were the same as data that worked. After some investigation, we found that rrweb expects touch events to be associated with specific elements. Setting the ID to the `body` element was enough to fix it.
-
-Once we got consistent and useful results from what we built, we recruited our first test users and iterated from there. Later, we followed a similar process for [iOS](https://github.com/PostHog/posthog-ios/pull/115).
-
-## Solving mobile replays big problems
-
-So how did we solve some of the big problems we identified earlier? Two were relatively simple:
-
-1. **Multiple platforms:** Do the work to develop mobile replay for all the platforms (which is still ongoing).
-2. **Testing:** Use open source and test apps to develop a proof of concept. Once complete, use our large user base to find users willing to test our prototype. Luckily, this feature had massive demand and there were users who were willing to try the earliest versions of it.
-
-The other two have more clever solutions. 
-
-### 1. Performance
+### 2. Performance
 
 Not slowing down people's apps was core to our mission with session replay. 
 
-Our strategy to do wireframes is much less performance-intensive than others tools' reliance on screenshots. We still built screenshot mode, which provided a more accurate representation; however, we mostly focused on making our wireframe mode as good as possible. 
+To do this, we decided to focus on capturing wireframes instead of screenshots. Although we built both in the end, wireframe mode is much less performance-intensive, meaning it is the mode users prefer.
 
 ![Screenshot vs Wireframe](https://res.cloudinary.com/dmukukwp6/image/upload/wireframe_78ce94bd4b.png)
 
-Many performance issues users faced were either caused by screenshot mode or unsupported data being captured. Both of these were solved by making wireframe mode better.
+Building wireframe mode meant starting from capturing and rendering the smallest amount of data and building up to more complex components. In our [Android proof-of-concept](https://github.com/PostHog/posthog-android/pull/69), we started by using `Curtains` to capture the view hierarchy, listen for changes, and track touch events. We then transformed this data to render it as an HTML wireframe (as rrweb expects).
 
-On top of this, we try to offload as much work to our servers as possible. For example, the transformation to the rrweb schema happens on the server side. 
+![PoC](https://res.cloudinary.com/dmukukwp6/image/upload/mobile_b85c032c93.png)
 
-### 2. Privacy
+Once this was working, we worked to capture standard Android components like radios, checkboxes, Calendar, [Toggle](https://github.com/PostHog/posthog/pull/19279), and RatingBar. Many of them required custom transformation and components to render properly. For example, radio buttons didn't group, padding wasn't applied, and positioning was wrong.
+
+Beyond this, fitting the data into a service meant for the web caused many challenges. For example, click events weren't showing even though the types and data were the same as the web data. After investigation, we found that rrweb expects touch events to be associated with specific elements. Setting the ID to the `body` element was enough to fix it.
+
+Once we got consistent and useful results from what we built, we recruited our first test users and iterated from there. Later, we followed a similar process for [iOS](https://github.com/PostHog/posthog-ios/pull/115).
+
+Beyond our focus on wireframe mode, the biggest performance improvements came from getting mobile replay into the hands of our users. We found and solved multiple performance issues thanks to their feedback.
+
+### 3. Privacy
 
 As for privacy, we built the ability to mask all text inputs and images as well as redact certain views with `ph-no-capture` like this:
 
@@ -125,9 +112,19 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 
 </MultiLanguage>
 
-We added this functionality on both wireframe and screenshot mode. Although as nice as it would have been to have automatic masking like we do on the web, the ability to have masking at all enables privacy-sensitive teams to actually use replay. 
+We added this functionality on both wireframe and screenshot mode. As nice as it would have been to have automatic masking like we do on the web, the ability to have masking at all enables privacy-sensitive teams to actually use replay. 
 
-There is more challenges to solve, specifically around [SwiftUI](https://github.com/PostHog/posthog-ios/issues/162) and Jetpack Compose, since the way they transpile code causes the representation to not be a 1:1 match and properties are lost.
+There are more challenges to solve, specifically around [SwiftUI](https://github.com/PostHog/posthog-ios/issues/162) and Jetpack Compose, since the way they transpile code causes the representation to not be a 1:1 match and properties are lost.
+
+### 4. Testing
+
+We solved the testing problem in 3 key ways:
+
+1. **Building testing tools:** <TeamMember name="Paul D'Ambra" /> and <TeamMember name="Manoel Aranda Neto"> wanted to keep the rrweb schema for mobile replay to ensure the fewest changes possible to our API and player. To do this, they wrote a [validation and testing tool](https://github.com/PostHog/mobile-replay-data-transformer) to rapidly test the transformations before deploying it in our main app.
+
+2. **Using open source apps:** The team found a [list of open source apps](https://github.com/pcqpcq/open-source-android-apps) they could test with. This helped find issues, support more edge cases, and build test coverage.
+
+3. **Testing in production:** Luckily, mobile replay had massive demand. We could rely on our users to test in production and give us feedback. We recruited users from the public issues for mobile replay, sales conversations, and existing mobile SDK users.
 
 ## Making mobile session replay available for everyone
 
