@@ -1,0 +1,24 @@
+import SettingProperties from "./setting-properties-text.mdx" 
+import NamingTip from "./naming-tip.mdx" 
+import Intro from "./intro.mdx" 
+
+<Intro />
+
+```js
+await Posthog.capture({
+    event: 'test-event',
+});
+```
+
+<NamingTip />
+
+<SettingProperties />
+
+```js
+await Posthog.capture({
+    event: 'test-event',
+    properties: {
+        key: 'value',
+    },
+});
+```

@@ -345,6 +345,7 @@ module.exports = {
                 transformTypes: [
                     `RoadmapMedia`,
                     `SqueakTeamCrest`,
+                    `SqueakTeamMiniCrest`,
                     `SqueakRoadmapMedia`,
                     `SqueakTeamTeamImage`,
                     `MdxFrontmatterFeaturedImageChildImageSharp`,

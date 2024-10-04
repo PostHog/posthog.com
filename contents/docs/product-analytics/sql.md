@@ -502,7 +502,7 @@ Some queries can error when accessing null values. To avoid this, use the `COALE
 
 ### Actions
 
-To use [actions](/docs/actions) in SQL insights, use the `matchesAction()` function. For example, to get a count of the action `clicked homepage button`, you can do:
+To use [actions](/docs/data/actions) in SQL insights, use the `matchesAction()` function. For example, to get a count of the action `clicked homepage button`, you can do:
 
 ```sql
 SELECT count() 

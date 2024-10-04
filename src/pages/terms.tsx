@@ -680,8 +680,8 @@ function Terms() {
                             notice to Customer (which may be sent by email). If Customer believes that PostHog has
                             billed Customer incorrectly, Customer must contact PostHog no later than 60 days after the
                             closing date on the first billing statement in which the error or problem appeared, in order
-                            to receive an adjustment or credit. Inquiries should be directed to Company’s customer
-                            success department (sales@posthog.com).
+                            to receive an adjustment or credit. Inquiries should be submitted via 
+                            an in-app support ticket to the Company's customer success department.
                         </p>
                     </div>
                     <div className="md:pt-10">
