@@ -108,7 +108,11 @@ The direct interaction between our engineering team and our users is _hugely_ va
 
 Providing support across most products is a responsibility shared across our engineering teams - we expect everyone to jump in and help a user if you see they have a question or problem. Once you have made the initial contact or response, it is your responsibility to see it through or explicitly hand over to someone else if they are better-equipped to help.
 
-One person on each product team takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
+One person on each product team takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback.
+
+### Difficult support requests 
+
+We very occasionally receive messages from people either wishing to make a legal claim or who you suspect may have a mental illness, either via the app or [Community Questions](/questions). If this happens, notify Charles or Fraser in the first instance. They will either take this on, or advise you on how to reply.
 
 ## Community
 
