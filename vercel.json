@@ -1346,6 +1346,10 @@
             "source": "/teams/pipeline",
             "destination": "/teams/cdp"
         },
+        {
+            "source": "/teams/feature-success",
+            "destination": "/teams/feature-flags"
+        },
         { "source": "/docs/cdp/airbyte-export", "destination": "/docs/cdp/batch-exports" },
         { "source": "/docs/cdp/avo-inspector", "destination": "/docs/cdp/destinations/avo" },
         { "source": "/docs/cdp/customer-io", "destination": "/docs/cdp/destinations/customerio" },

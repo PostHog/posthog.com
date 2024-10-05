@@ -52,7 +52,7 @@ Google Analytics is blocked by almost every ad blocker, whereas other analytics 
 
 In PostHog, you can [identify](/docs/product-analytics/identify) anonymous users across with the same distinct ID across visitors and devices they are correctly counted as one user. Analytics tools that don’t allow for identifying users would incorrectly count these as multiple users.
 
-Cookieless trackers, like Plausible and Vercel, track users by combining a few properties into a hash. This includes the user agent, IP address, and a daily salt. Because the salt changes every day, a user that visits your site 7 days in a row counts as 7 different users in these tools. In PostHog, if the user is identified, or if you are using cookies, they are correctly counted as a single user. 
+Cookieless trackers, like [Plausible](/blog/posthog-vs-plausible) and Vercel, track users by combining a few properties into a hash. This includes the user agent, IP address, and a daily salt. Because the salt changes every day, a user that visits your site 7 days in a row counts as 7 different users in these tools. In PostHog, if the user is identified, or if you are using cookies, they are correctly counted as a single user. 
 
 These cookieless trackers also incorrectly count the same user on different devices as different visitors, as the user agent would differ.
 
