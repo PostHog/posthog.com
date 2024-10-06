@@ -1,0 +1,147 @@
+---
+title: Anonymous vs identified events
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import Tab from "components/Tab"
+
+import IdentifiedVsAnonymousIntro from '../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
+
+<IdentifiedVsAnonymousIntro />
+
+![Anonymous vs identified events](https://res.cloudinary.com/dmukukwp6/image/upload/v1727855989/posthog.com/contents/anon-vs-identifd.png)
+
+## How to capture anonymous events
+
+import HowToCaptureAnonymousEventsBackend from '../product-analytics/_snippets/how-to-capture-anonymous-backend-and-api.mdx'
+import HowToCaptureAnonymousEventsIOS from '../product-analytics/_snippets/how-to-capture-anonymous-events-ios.mdx'
+import HowToCaptureAnonymousEventsWeb from '../product-analytics/_snippets/how-to-capture-anonymous-events-web.mdx'
+import HowToCaptureAnonymousEventsAndroid from '../product-analytics/_snippets/how-to-capture-anonymous-events-android.mdx'
+
+<Tab.Group tabs={[
+    'Web', 
+    'Backend', 
+    'Android', 
+    'iOS']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>Backend</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <HowToCaptureAnonymousEventsWeb />
+        </Tab.Panel>
+        <Tab.Panel>
+            <HowToCaptureAnonymousEventsBackend />
+        </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureAnonymousEventsAndroid />
+        </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureAnonymousEventsIOS />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+## How to capture identified events
+
+import HowToCaptureIdentifiedEvents from '../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
+
+import HowToCaptureIdentifiedEventsBackend from '../product-analytics/_snippets/how-to-capture-identified-events-backend.mdx'
+
+<Tab.Group tabs={[
+    'Web', 
+    'Backend', 
+    'Android', 
+    'iOS']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>Backend</Tab>
+        <Tab>Android</Tab>
+        <Tab>iOS</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <HowToCaptureIdentifiedEvents />
+        </Tab.Panel>
+        <Tab.Panel>
+            <HowToCaptureIdentifiedEventsBackend />
+        </Tab.Panel>
+        <Tab.Panel>
+            <HowToCaptureIdentifiedEvents />
+        </Tab.Panel>
+        <Tab.Panel>
+           <HowToCaptureIdentifiedEvents />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+## Frequently asked questions
+
+### What can and can't I do with anonymous events?
+
+You **can**:
+
+- Set [event properties](/docs/product-analytics/capture-events#setting-event-properties)
+- Aggregate and filter events by event properties e.g. URL, geographic location, UTM source.
+- Create insights like [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels), [SQL insights](/docs/product-analytics/sql) and more.
+
+You **cannot**:
+
+- Set [person properties](/docs/product-analytics/person-properties)
+- Create [cohorts](/docs/data/cohorts)
+- Filter on person properties
+- Use person properties for targeting feature flags, A/B tests, or surveys
+- Query the `persons` table using [SQL insights](/docs/product-analytics/sql)
+- Use group analytics
+
+### What can and can't I do with identified events?
+
+You can use all of PostHog's features with identified events. There are no restrictions.
+
+### What happens to events when an anonymous user is identified? 
+
+All future events are associated with their person profile and are captured and billed as identified events.
+
+Past events are attributed to the person, but are otherwise unchanged. This means that past events remain billed as anonymous.
+
+### Can identified events still be "anonymous"?
+
+Yes, identified events can still be "anonymous" in the sense that they don't need to contain personal information such as name, email, or phone number. A person profile is still created for them, but it doesn't need to include any personal information.
+
+### Can I specify some events to be identified and others to be anonymous for the same users?
+
+Not if you already identified them. Once a user is identified, all _future_ events for that user are associated with their person profile and are captured as identified events.
+
+### How do I revert back to anonymous events after identifying?
+
+Calling [`reset()`](/docs/product-analytics/identify#3-reset-after-logout) will unlink the person profile from the user and create a new PostHog anonymous ID for capturing events. Any future events are captured as anonymous events. 
+
+However, if you capture events using the `distinct_id` used in their previously identified person profile, the events are captured as identified events. You need to use a new `distinct_id` to capture events as anonymous events.
+
+### Why are identified events so much more expensive?
+
+Since identified events are associated with a person profile, processing and querying them requires using resource intensive table JOINs. On the other hand, anonymous events are stored in a single table and are more efficient to query.
+
+This [post](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper) goes into more detail.
+
+### Why does PostHog capture identified events by default?
+
+This is required for backwards compatiability. Previously, all events were captured as identified events. When we added anonymous events, we didn't want to change the default behavior since that could cause issues with existing users.
+
+However, since anonymous events are cheaper to capture, we recommend capturing them by default.
+
+### Why am I being charged for both "events" and "persons"
+
+We're not charging you for both. The person profiles line item you see on your invoice is a number of identified events captured. The events line item is the total number of anonymous events captured.
+
+### How does my free allowance work for anonymous vs identified events?
+
+Your first one million events each month are free, regardless if they are anonymous or identified. 

@@ -1531,6 +1531,12 @@ export const docsMenu = {
                         {
                             name: 'Events',
                             url: '/docs/data/events',
+                            children: [
+                                {
+                                    name: 'Anonymous vs identified events',
+                                    url: '/docs/data/anonymous-vs-identified-events',
+                                },
+                            ],
                         },
                         {
                             name: 'Ingestion warnings',

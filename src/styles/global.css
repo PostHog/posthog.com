@@ -194,6 +194,14 @@ h4 {
 
     li {
         @apply mb-0.5;
+
+        p {
+            @apply mb-0;
+
+            & + p {
+                @apply mt-2;
+            }
+        }
     }
 
     .caption + * {
@@ -317,7 +325,7 @@ h4 {
 
     /* expandable/collapsible sections */
     details {
-        @apply rounded bg-accent dark:bg-accent-dark;
+        @apply rounded bg-accent dark:bg-accent-dark mb-px;
 
         > summary {
             @apply cursor-pointer text-red dark:text-yellow rounded border border-transparent hover:border-light hover:dark:border-dark font-semibold list-none p-4 pl-8 relative before:absolute before:left-3 before:top-6 before:w-[10px] before:h-[7px];
@@ -1469,7 +1477,7 @@ iframe[src*='youtube-nocookie.com'] {
 }
 
 .squeak-left-border {
-    @apply before:border-l before:border-b before:border-solid before:border-light dark:before:border-dark before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:left-0;
+    @apply before:border-l before:border-b before:border-solid before:border-light dark:before:border-dark before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:-left-px;
 }
 
 li.squeak-left-border {
