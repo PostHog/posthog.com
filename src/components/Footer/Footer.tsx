@@ -70,7 +70,7 @@ const linklist: IProps[] = [
         url: '/docs/product-os',
         items: [
             {
-                title: 'New? Start here.',
+                title: 'New? Start here',
                 url: '/docs/getting-started/install',
             },
             {
