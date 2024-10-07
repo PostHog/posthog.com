@@ -10,6 +10,8 @@ featuredImage: >-
 featuredImageType: full
 ---
 
+> **Updated July 26, 2024:** Added information about Onboarding 6.0
+
 Marketers believe onboarding emails are a powerful tool for driving engagement. Everyone else thinks they're annoying and ineffective. The truth, as always, is a little more complicated.
 
 People, and developers in particular, hate onboarding campaigns because the bad ones are so memorable. And how would you know what "good" looks like without signing up and risking a flood of tedious outreach emails from sales reps?
@@ -79,7 +81,7 @@ This email performed very well, with a 68% open rate and a 16% CTR. Two emails i
 
 Best of all, though, because it was personalized and came from me directly, it also earned a steady trickle of replies. I responded in kind and was able to feed in further improvements, including adding another option for `role_at_organization` = `founder`.
 
-<NewsletterForm />
+<NewsletterForm placement="middle" />
 
 ## Onboarding 3.3: The one where we added experiments
 
@@ -105,11 +107,11 @@ By this point we’d also changed our conversion event to mean a user enabling b
 
 Around this point we also started filtering out teams in our [ideal customer profile](/newsletter/ideal-customer-profile-framework) (ICP) using a scoring system implemented in Hubspot. If a user scored over a certain threshold they’d be moved out of the usual flow so [our customer success team](/teams/customer-success) could reach out directly. We’ve since removed this check because it felt too salesy and didn’t perform well, however. 
 
-## Onboarding 5.0: The current one
+## Onboarding 5.0: The gosh-thats-complicated one
 
-At the time of writing this is the current onboarding flow. It contains over 53 emails and 38 timed events and was, quite simply, a pain in the ass to explain to everyone internally.
+The next version was where things got out of hand. It contained over 53 emails and 38 timed events and was, quite simply, a pain in the ass to explain to everyone internally.
 
-The goal of this flow is to focus on improving activation, and build on some parallel improvements to our in-app onboarding flow. Now when a user signs up to PostHog we ask them to select a product to setup first: analytics, replays, flags, or surveys. [Onboarding 5.0](https://github.com/PostHog/meta/issues/172) builds off that selection by encouraging users to use that product, and then showing how other features can combine with it.
+The goal of this flow was to focus on improving activation, and build on some parallel improvements to our in-app onboarding flow. When a user signed up to PostHog we asked them to select a product to setup first: analytics, replays, flags, or surveys. [Onboarding 5.0](https://github.com/PostHog/meta/issues/172) builds off that selection by encouraging users to use that product, and then showing how other features can combine with it.
 
 ![Onboarding 5.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_5.png)
 <Caption>Onboarding 5.0: Messy, complex, and highly personalized to user interests</Caption>
@@ -121,11 +123,38 @@ The hope was that this would improve in-app activation, which we roughly define 
 - **Feature flags:** 1 feature flag created
 - **Surveys:** 1 survey launched
 
-To avoid annoying users, we added a time block based on our activation criteria – if a user hasn’t activated after two emails, we stop sending them emails for six weeks. We also use an unsubscribe notice that tells users how many emails they can typically expect: one email per week, for six weeks. 
+To avoid annoying users, we added a time block based on our activation criteria – if a user hasn’t activated after two emails, we stop sending them emails for six weeks. We also use an unsubscribe notice that tells users how many emails they can typically expect: one email per week, for six weeks.
+
+And as for performance?
+
+- **Open rate:** 50%
+- **Click-through-rate:** 2.4%
+- **Conversion rate:** 3.5%
+- **Unsubscribe rate:** 0.4%
+
+## Onboarding 6.0: The current one
+
+The next [(and current) version](https://github.com/PostHog/meta/issues/212) is where we decided to simplify things. We stripped out a bunch of the flows which were adding maintenance overheads and bought everything down to a far simpler, linear flow where every email was determined by a simple user choice. Already using session replays? Fine, we'll email you about something else then. 
+
+![Onboarding 6.0](https://res.cloudinary.com/dmukukwp6/image/upload/6_0_workflow_0a235a781a.png)
+<Caption>Onboarding 6.0: Simpler. Better. Funnier.</Caption>
+
+It's also where, following some feedback, I decided to more directly embrace the PostHog tone of voice and make everything a little bit more sassy and anarchic. I added things like calling out product names, or the irony of emailing users about an email. I also made liberal use of memes from Lottie. 
+
+![memes](https://res.cloudinary.com/dmukukwp6/image/upload/email_unsub_6015c09eb1.png)
+
+The biggest change, however, was changing just over 50% of the emails to come from me. As in, directly from my email address. Users can (and do) respond to them, and a growing amount of my time is now spent chatting with users over email - time well spent, in other words.
+
+You'd think doing things like actively goading users into unsubscribing would be bad for conversion rates and subscriptions. You'd be wrong. 
+
+- **Open rate:** 52%
+- **Click-through-rate:** 3.1%
+- **Conversion rate:** 2.2% (with a new conversion event of activating any single product)
+- **Unsubscribe rate:** 0.3%
 
 ## What we learned
 
-Across the five major versions (and many other smaller iterations) of our email onboarding, there are a few definite things we've learned. 
+Across the ~five~ six major versions (and many other smaller iterations) of our email onboarding, there are a few definite things we've learned. 
 
 ### Email works for engineers too
 As I said at the start, the conventional wisdom is that engineers are particularly skeptical of any marketing activity, and likely to unsubscribe to emails. However, our unsubscribe rates have been consistently low enough to disprove this. If the emails add value for engineers and are [well-written for that audience](/founders/writing-for-developers), they can still be effective. 
@@ -150,16 +179,5 @@ We've run tests on this several times and [Lottie's](https://posthog.com/communi
 Personalization doesn't mean calling users by their first name using a [liquid](https://customer.io/docs/journeys/using-liquid/) tag and pretending to be best buds. It means providing the right content, at the right time, in the right way. 
 
 We do this in several ways in the latest version – delaying our welcome email, tailoring the emails users receive based on their choices, and sending newsletter invites from my personal address. If nothing else, the replies I frequently receive from users are a testament to how effective this is. 
-
-## What’s next?
-
-At the time of writing, Onboarding 5.0 has been live just one week – it’s too early to judge any of the metrics because users will have only received the first email. The plan, however, is to keep an eye on the data (and user feedback) and find new ways to improve the flow even further. 
-
-![Onboarding 5.0](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_6.png)
-<Caption>An active experiment within the current version of our email flow</Caption>
-
-One way we’re already experimenting with this is by bringing back checks to see if users are ingesting events or not. We’re testing this with the session replay product by running the flow you can see above for the first email after the welcome email. 
-
-Hopefully we’ll see this test prove successful and we’ll be able to replicate these secondary checks across all products soon – in Onboarding 6.0!
 
 <NewsletterForm />

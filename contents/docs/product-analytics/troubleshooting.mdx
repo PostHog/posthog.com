@@ -117,6 +117,38 @@ To confirm if this is the issue, use the following steps:
 
 Once you have confirmed there is an issue with event ingestion, you can [report your issue](#report-your-issue) to get further support.
 
+## How do I speed up my insights and queries?
+
+PostHog dedicates huge amounts of infrastructure to running your insight and queries. We also use a specialized database called an OLAP database (Clickhouse in our case) which is optimized for running analytics queries quickly.
+
+Sometimes, insights and queries can still be slow. Here are some things you can do to speed them up:
+
+### 1. Select a specific event
+
+Filtering by "All events" is useful, but is also much slower than filtering by a specific event. Try using a specific autocaptured or custom event instead.
+
+### 2. Reduce the period you're filtering on
+
+A smaller time period means less data to process. You can always adjust the period later if you need to.
+
+### 3. Change the person properties mode
+
+PostHog provides multiple modes for the behavior of person property filters. You can find and change them in [your project settings](https://us.posthog.com/settings/project#persons-on-events). 
+
+![Person properties mode](https://res.cloudinary.com/dmukukwp6/image/upload/v1726779369/posthog.com/contents/CleanShot_2024-09-19_at_13.53.25_2x.png)
+
+We recommend using "Use person properties from the time of the event," but "Use person IDs and person properties from the time of the event" is even faster if needed. The tradeoff is that the latter mode creates inaccurate funnels and unique user counts if you have both anonymous and identified users.
+
+You can find more details about how these modes works in our doc on [how querying works](/docs/how-posthog-works/queries#filtering-on-person-properties).
+
+### 4. Use sampling
+
+[Sampling](/docs/product-analytics/sampling) speeds up insights and queries by taking a portion of your data to calculate aggregate results. 
+
+This can be enabled on insights by clicking the "Sampling" toggle on insights or the prompt when they are querying.
+
+![Sampling](https://res.cloudinary.com/dmukukwp6/image/upload/v1726779686/posthog.com/contents/CleanShot_2024-09-19_at_14.01.02_2x.png)
+
 ## Does PostHog block bots by default?
 
 Yes, PostHog blocks most known bots by default, including:
@@ -150,6 +182,12 @@ Yes, PostHog blocks most known bots by default, including:
 |                           | 'yandexbot',        |
 
 Want a bot added to this list? Request it via [the in-app feedback form](http://us.posthog.com/home#supportModal), or raise an issue in the [posthog-js GitHub repo](https://github.com/PostHog/posthog-js/issues).
+
+## Is it ok for my API key to be exposed and public?
+
+import ExposedApiKeys from "../\_snippets/exposed-api-keys.mdx"
+
+<ExposedApiKeys />
 
 ## Report your issue
 

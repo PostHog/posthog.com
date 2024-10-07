@@ -85,6 +85,7 @@ const Toggle = ({ name, label, checked, onChange, options }) => {
 function Avatar({ values, setFieldValue }) {
     const inputRef = useRef<HTMLInputElement>(null)
     const [imageURL, setImageURL] = useState(values?.avatar?.url)
+    const favoriteColor = values.color
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         const file = e.target.files[0]
@@ -106,7 +107,15 @@ function Avatar({ values, setFieldValue }) {
     }, [values.avatar])
 
     return (
-        <div className="relative w-full aspect-square rounded-full flex justify-center items-center border border-gray-accent-light dark:border-gray-accent-dark text-black/50 dark:text-white/50 overflow-hidden group -mb-2">
+        <div
+            className={`relative w-full aspect-square rounded-full flex justify-center items-center border-[1.5px] ${
+                favoriteColor
+                    ? imageURL
+                        ? `bg-${favoriteColor} border-gray-accent-light dark:border-gray-accent-dark`
+                        : `border-${favoriteColor} dark:border-${favoriteColor}`
+                    : `border-gray-accent-light dark:border-gray-accent-dark`
+            }  text-black/50 dark:text-white/50 overflow-hidden group -mb-2`}
+        >
             {imageURL ? (
                 <img className="w-full absolute inset-0 object-cover" src={imageURL} />
             ) : (
@@ -223,6 +232,45 @@ const formSections = [
                     )
                 },
             },
+            color: {
+                label: 'Favorite color',
+                className: 'w-full',
+                component: ({ values, setFieldValue }) => {
+                    return (
+                        <>
+                            <label className="font-bold">Pick your favorite color</label>
+                            <ul className="list-none m-0 p-0 mt-2 flex space-x-1">
+                                {[
+                                    'lime-green',
+                                    'blue',
+                                    'orange',
+                                    'teal',
+                                    'purple',
+                                    'seagreen',
+                                    'salmon',
+                                    'yellow',
+                                    'red',
+                                    'green',
+                                    'lilac',
+                                    'sky-blue',
+                                ].map((color) => {
+                                    const active = values.color === color
+                                    return (
+                                        <li key={color} onClick={() => setFieldValue('color', color)}>
+                                            <button
+                                                type="button"
+                                                className={`w-6 h-6 rounded-full bg-${color} border-[1.5px] ${
+                                                    active ? 'border-black dark:border-white' : 'border-transparent'
+                                                }`}
+                                            />
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </>
+                    )
+                },
+            },
         },
     },
     {
@@ -325,7 +373,7 @@ const formSections = [
                             <div className="flex-grow">
                                 <p className="font-bold m-0">Show an AMA</p>
                                 <p className="m-0">
-                                    Let vistors ask you questions. You'll get question notfications via email.
+                                    Let visitors ask you questions. You'll get question notifications via email.
                                 </p>
                             </div>
                             <Switch

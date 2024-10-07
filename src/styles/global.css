@@ -31,9 +31,14 @@ code {
     --squeak-primary-color: 0, 0, 0;
     --squeak-default-avatar-fill: 255, 255, 255;
     --squeak-button-color: 245, 78, 0;
+    --swiper-pagination-color: #f54e00;
+    --swiper-pagination-bullet-inactive-color: #000;
+
     .dark {
         --squeak-primary-color: 255, 255, 255;
         --squeak-default-avatar-fill: 0, 0, 0;
+        --swiper-pagination-color: #f7a501;
+        --swiper-pagination-bullet-inactive-color: #fff;
     }
 }
 
@@ -133,6 +138,7 @@ h4 {
 
 /* Content pages (Handbook,  Docs, Blog, Customers, FAQ) */
 .article-content {
+    h1,
     h2,
     h3,
     h4,
@@ -143,6 +149,14 @@ h4 {
 
         a:not(.cta) {
             font-variation-settings: 'wght' 800;
+        }
+    }
+
+    h1 {
+        @apply text-[1.75rem];
+
+        code {
+            @apply !text-[1.75rem];
         }
     }
 
@@ -180,6 +194,14 @@ h4 {
 
     li {
         @apply mb-0.5;
+
+        p {
+            @apply mb-0;
+
+            & + p {
+                @apply mt-2;
+            }
+        }
     }
 
     .caption + * {
@@ -244,8 +266,13 @@ h4 {
     blockquote:not(.quote) {
         @apply px-6 py-4 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-4;
 
-        p {
-            @apply !text-[15px];
+        p,
+        li {
+            @apply !text-[15px] leading-relaxed;
+        }
+
+        h3 {
+            @apply mb-2;
         }
     }
 
@@ -285,7 +312,7 @@ h4 {
 
     th:last-child,
     td:last-child {
-        padding-right: 0;
+        /* padding-right: 0; */
     }
 
     th:empty {
@@ -298,7 +325,7 @@ h4 {
 
     /* expandable/collapsible sections */
     details {
-        @apply rounded bg-accent dark:bg-accent-dark;
+        @apply rounded bg-accent dark:bg-accent-dark mb-px;
 
         > summary {
             @apply cursor-pointer text-red dark:text-yellow rounded border border-transparent hover:border-light hover:dark:border-dark font-semibold list-none p-4 pl-8 relative before:absolute before:left-3 before:top-6 before:w-[10px] before:h-[7px];
@@ -349,9 +376,43 @@ h4 {
     details + details {
         @apply border-t-0;
     }
+}
 
-    .newsletter-form {
-        @apply !mt-6 !pt-6 !mb-0 !pb-0 border-t border-light dark:border-dark;
+.bio-preview {
+    * {
+        @apply text-sm mb-2;
+    }
+
+    li {
+        @apply text-sm;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply text-sm;
+    }
+}
+
+.bio-sidebar {
+    * {
+        @apply text-base mb-2;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply text-lg;
+    }
+
+    a {
+        @apply font-semibold text-red dark:text-yellow;
     }
 }
 
@@ -1340,6 +1401,10 @@ iframe[src*='youtube-nocookie.com'] {
     }
     p {
         @apply !min-h-0 mb-4;
+
+        &:empty {
+            @apply hidden;
+        }
     }
     ul {
         @apply mb-4;
@@ -1412,7 +1477,7 @@ iframe[src*='youtube-nocookie.com'] {
 }
 
 .squeak-left-border {
-    @apply before:border-l before:border-b before:border-solid before:border-light dark:before:border-dark before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:left-0;
+    @apply before:border-l before:border-b before:border-solid before:border-light dark:before:border-dark before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:-left-px;
 }
 
 li.squeak-left-border {
@@ -1444,7 +1509,7 @@ li.squeak-left-border {
     }
 
     pre {
-        @apply text-base my-3 overflow-scroll p-4 text-[15px];
+        @apply text-base my-3 overflow-auto p-4 text-[15px];
     }
 
     h1 {
@@ -1569,4 +1634,48 @@ li.squeak-left-border {
 }
 .preserve-3d {
     transform-style: preserve-3d;
+}
+
+.tw-tweet + .tw-tweet {
+    @apply before:absolute before:w-px before:bg-border dark:before:bg-border-dark before:bottom-[calc(100%_+_1px)] before:-top-8 before:left-10;
+}
+
+.tw-tweet + *:not(.tw-tweet) {
+    @apply before:hidden;
+}
+
+.cursor-play {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" width="45" height="45" viewBox="0 0 33 33"><g fill="%23fff" filter="url(%23a)"><path fill-rule="evenodd" d="M16.25 6.75a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17Zm-10 8.5c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10Z" clip-rule="evenodd"/><path d="M14.25 18.054v-5.608a.5.5 0 0 1 .782-.413l4.112 2.804a.5.5 0 0 1 0 .826l-4.112 2.804a.5.5 0 0 1-.782-.413Z"/></g><defs><filter id="a" width="32" height="32" x=".25" y=".25" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dy="1"/><feGaussianBlur stdDeviation="3"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_15894_119681"/><feBlend in="SourceGraphic" in2="effect1_dropShadow_15894_119681" result="shape"/></filter></defs></svg>'),
+        auto;
+}
+
+.pizza-swiper {
+    @apply py-5 relative;
+}
+
+.swiper-wrapper {
+    @apply pb-12;
+}
+
+.swiper-button-next:disabled svg,
+.swiper-button-prev:disabled svg {
+    @apply bg-transparent border-transparent hidden;
+}
+
+.swiper-pagination {
+    @apply bottom-0 top-[unset];
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
 }

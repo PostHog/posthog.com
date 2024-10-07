@@ -10,6 +10,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { IconArrowRightDown } from '@posthog/icons'
 import { sexyLegalMenu } from '../navs'
 import Lawyers from 'components/Lawyers'
+import { Tweet } from 'components/Tweet'
 
 const privacyClasses = cntl`
   full-privacy-policy
@@ -64,113 +65,6 @@ function Privacy() {
         const h2s = fullPrivacyPolicy.querySelectorAll(':nth-child(odd) h2')
         setHeaders(Array.from(h2s))
     }, [])
-
-    const Tweet = ({ children, lastTweet = false }) => (
-        <div
-            className={`max-w-xl mx-auto bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${!lastTweet &&
-                'after:absolute after:w-px after:bg-border dark:after:bg-border-dark after:top-[calc(100%_+_1px)] after:-bottom-4 after:h-12 after:left-10'
-                }`}
-        >
-            <div className="flex items-center space-x-4">
-                <div className="rounded-full bg-accent w-12 h-12 overflow-hidden">
-                    <StaticImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
-                        alt='James ("Veg"/"JC") Hawkins'
-                        className="w-12 h-12"
-                    />
-                </div>
-                <div>
-                    <div className="text-lg font-semibold leading-tight">James Hawkins</div>
-                    <div className="text-gray-500 text-sm">
-                        <Link
-                            href="https://x.com/james406"
-                            externalNoIcon
-                            className="text-primary/70 dark:text-primary-dark/70 hover:text-red dark:hover:text-yellow"
-                        >
-                            @james406
-                        </Link>
-                    </div>
-                </div>
-            </div>
-            <div className="mt-4">
-                <p className="text-gray-700">{children}</p>
-            </div>
-            <div className="mt-4 flex justify-between items-center text-gray-500">
-                <div className="flex space-x-4">
-                    <DontClickButton>
-                        <button className="dont-click flex items-center space-x-1 hover:text-blue-500">
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M14 9l-5 5m0 0l5 5m-5-5h12"
-                                ></path>
-                            </svg>
-                            <span>Reply</span>
-                        </button>
-                    </DontClickButton>
-                    <DontClickButton>
-                        <button className="dont-click flex items-center space-x-1 hover:text-green-500">
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M5 15l7-7 7 7"
-                                ></path>
-                            </svg>
-                            <span>Retweet</span>
-                        </button>
-                    </DontClickButton>
-                    <DontClickButton>
-                        <button className="dont-click flex items-center space-x-1 hover:text-red-500">
-                            <svg
-                                className="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M12 4v16m8-8H4"
-                                ></path>
-                            </svg>
-                            <span>Like</span>
-                        </button>
-                    </DontClickButton>
-                </div>
-            </div>
-        </div>
-    )
-
-    const DontClickButton = ({ children, ...props }) => (
-        <button
-            className="dont-click flex items-center space-x-1 hover:text-blue-500"
-            onClick={(e) => {
-                e.preventDefault()
-                alert("Gen Z? Don't get distracted. You're here to read our thrilling terms.")
-            }}
-            {...props}
-        >
-            {children}
-        </button>
-    )
 
     return (
         <Layout
@@ -232,23 +126,35 @@ function Privacy() {
                         and don't rely on 140 characters at a time, especially from someone who isn't a lawyer.
                     </p>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
+                    >
                         Our privacy policy covers it all – from cookies 🍪 to your data protection rights under your
                         country’s law 🌍. Read it carefully as using our site means you agree to it!
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
+                    >
                         🔓 As an open-source project, some info you share might be public for our awesome community’s
                         collaboration. But don't worry, we’re committed to collecting and sharing the minimum amount of
                         personal info. We're the Data Controller for all this!
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
+                    >
                         💻 We collect data like your IP address, device info, and pages/content you view to improve your
                         experience. No third-party cookies here – we don’t do retargeting ads or creepy tracking!
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
+                    >
                         Here's a cat gif to keep you engaged (and to keep the algos intrigued). Please like/RT.
                         <img src="/images/pizza-cat.gif" alt="Cat gif" className="w-full mt-2" />
                         <p className="text-right !-mb-4">
@@ -262,31 +168,46 @@ function Privacy() {
                         </p>
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
+                    >
                         🛠️ We gather usage data to analyze and improve our site, but you can opt out. If you share your
                         info, like name and email, it’s only used for necessary stuff. No sensitive info like genetic
                         data here, and definitely no under-18 data!
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
+                    >
                         🌐 We share your info with service providers to run our site and product, but nothing else.
                         We’re part of the EU-US Data Privacy Framework, ensuring your data is safe. You can opt out if
                         you like!
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
+                    >
                         📬 We may contact you occasionally via email with updates, but you can unsubscribe anytime. We
                         promise not to spam you! Our first-party cookies remember you and improve your experience.
                         Reminder: we don't use any third-party cookies.
                     </Tweet>
 
-                    <Tweet>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
+                    >
                         🚀 We respect your rights and keep your info as long as your account is active. You can delete
                         it anytime. Contributions to our projects remain public to keep the integrity of our open-source
                         code.
                     </Tweet>
 
-                    <Tweet lastTweet={true}>
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
+                    >
                         If you liked this summary, you'll love following me on{' '}
                         <Link
                             href="https://twitter.com/james406"
@@ -1145,34 +1066,124 @@ function Privacy() {
                     <div></div>
                     <div className="md:pb-12">
                         <h3>Introduction</h3>
-                        <p>This Addendum (“Addendum”) forms part of the Privacy Policy, and of any superseding written agreement, entered by and between you, the Customer (as defined in the Agreement) (“Customer”), and PostHog Inc. (“PostHog”; and collectively – the “Agreement”).</p>
-                        <p>This Addendum reflects the parties’ desire and intent to modify and amend the Agreement, in accordance with the terms and conditions hereinafter set forth, with regard to the processing of Customer Personal Information (as defined below) by PostHog on behalf of the Customer.</p>
-                        <p>Capitalized terms not defined herein shall have the meanings assigned to such terms in the Agreement.</p>
-                        <p>You represent and warrant that you have full authority to bind the Customer to this Addendum. If you cannot, or do not agree to, comply with and be bound by this Addendum, or do not have authority to bind the Customer or any other entity, please do not provide any Customer Personal Information to us.</p>
-                        <p>This Addendum shall become effective as of the commencement of processing of Customer Personal Information under the Agreement (“Addendum Effective Date”).</p>
-                        <p>If you need a signed copy of this Addendum you can download a <Link href="https://docs.google.com/document/d/17VawApHNJzXNkxYiDidw7UTQBJr347FfL6nVDxEYgsg/edit?usp=sharing" external>template</Link>, enter your details, send a request to <a rel="noopener noreferrer" href="mailto:privacy@posthog.com">privacy@posthog.com</a> and we’ll provide you a countersigned copy.</p>
+                        <p>
+                            This Addendum (“Addendum”) forms part of the Privacy Policy, and of any superseding written
+                            agreement, entered by and between you, the Customer (as defined in the Agreement)
+                            (“Customer”), and PostHog Inc. (“PostHog”; and collectively – the “Agreement”).
+                        </p>
+                        <p>
+                            This Addendum reflects the parties’ desire and intent to modify and amend the Agreement, in
+                            accordance with the terms and conditions hereinafter set forth, with regard to the
+                            processing of Customer Personal Information (as defined below) by PostHog on behalf of the
+                            Customer.
+                        </p>
+                        <p>
+                            Capitalized terms not defined herein shall have the meanings assigned to such terms in the
+                            Agreement.
+                        </p>
+                        <p>
+                            You represent and warrant that you have full authority to bind the Customer to this
+                            Addendum. If you cannot, or do not agree to, comply with and be bound by this Addendum, or
+                            do not have authority to bind the Customer or any other entity, please do not provide any
+                            Customer Personal Information to us.
+                        </p>
+                        <p>
+                            This Addendum shall become effective as of the commencement of processing of Customer
+                            Personal Information under the Agreement (“Addendum Effective Date”).
+                        </p>
+                        <p>
+                            If you need a signed copy of this Addendum you can download a{' '}
+                            <Link
+                                href="https://docs.google.com/document/d/17VawApHNJzXNkxYiDidw7UTQBJr347FfL6nVDxEYgsg/edit?usp=sharing"
+                                external
+                            >
+                                template
+                            </Link>
+                            , enter your details, send a request to{' '}
+                            <a rel="noopener noreferrer" href="mailto:privacy@posthog.com">
+                                privacy@posthog.com
+                            </a>{' '}
+                            and we’ll provide you a countersigned copy.
+                        </p>
                         <h3>Definitions</h3>
-                        <p>“<strong>CCPA</strong>” means the California Consumer Privacy Act of 2018, Cal. Civ. Code §1798.100 et. seq., and its implementing regulations. </p>
-                        <p>“<strong>Customer Personal Information</strong>” means any Customer Data maintained by Customer and processed by PostHog solely on Customer’s behalf, that identifies, relates to, describes, is capable of being associated with, or could reasonably be linked, directly or indirectly, with a particular consumer or household, to the extent that such information is protected as “personal information” (or an analogous variation of such term) under applicable U.S. Data Protection Laws. </p>
-                        <p>“<strong>U.S. Data Protection Laws</strong>” means all laws and regulations of the United States of America, including the CCPA, applicable to the processing of personal information (or an analogous variation of such term).</p>
-                        <p>“<strong>Service Provider</strong>” has the meaning set forth in Section 1798.140(v) of the CCPA.</p>
+                        <p>
+                            “<strong>CCPA</strong>” means the California Consumer Privacy Act of 2018, Cal. Civ. Code
+                            §1798.100 et. seq., and its implementing regulations.{' '}
+                        </p>
+                        <p>
+                            “<strong>Customer Personal Information</strong>” means any Customer Data maintained by
+                            Customer and processed by PostHog solely on Customer’s behalf, that identifies, relates to,
+                            describes, is capable of being associated with, or could reasonably be linked, directly or
+                            indirectly, with a particular consumer or household, to the extent that such information is
+                            protected as “personal information” (or an analogous variation of such term) under
+                            applicable U.S. Data Protection Laws.{' '}
+                        </p>
+                        <p>
+                            “<strong>U.S. Data Protection Laws</strong>” means all laws and regulations of the United
+                            States of America, including the CCPA, applicable to the processing of personal information
+                            (or an analogous variation of such term).
+                        </p>
+                        <p>
+                            “<strong>Service Provider</strong>” has the meaning set forth in Section 1798.140(v) of the
+                            CCPA.
+                        </p>
                         <h3>Amendments</h3>
                         <h4>Roles</h4>
-                        <p>The parties acknowledge and agree that with regard to the processing of Customer Personal Information performed solely on behalf of Customer, PostHog is a Service Provider and receives Customer Personal Information pursuant to the business purpose of providing the Services to Customer in accordance with the Agreement.</p>
+                        <p>
+                            The parties acknowledge and agree that with regard to the processing of Customer Personal
+                            Information performed solely on behalf of Customer, PostHog is a Service Provider and
+                            receives Customer Personal Information pursuant to the business purpose of providing the
+                            Services to Customer in accordance with the Agreement.
+                        </p>
                         <h4>No Sale of Customer Personal Information to PostHog</h4>
-                        <p>Customer and PostHog hereby acknowledge and agree that in no event shall the transfer of Customer Personal Information from Customer to PostHog pursuant to the Agreement constitute a sale of information to PostHog, and that nothing in the Agreement shall be construed as providing for the sale of Customer Personal Information to PostHog.</p>
+                        <p>
+                            Customer and PostHog hereby acknowledge and agree that in no event shall the transfer of
+                            Customer Personal Information from Customer to PostHog pursuant to the Agreement constitute
+                            a sale of information to PostHog, and that nothing in the Agreement shall be construed as
+                            providing for the sale of Customer Personal Information to PostHog.
+                        </p>
                         <h4>Limitations on Use and Disclosure</h4>
-                        <p>PostHog is prohibited from using or disclosing Customer Personal Information for any purpose other than the specific purpose of performing the Services specified in the Agreement, the permitted business purposes set under applicable law, and as required under applicable law. PostHog hereby certifies that it understands the foregoing restriction and will comply with it in accordance with the requirements of applicable U.S. Data Protection Laws.</p>
+                        <p>
+                            PostHog is prohibited from using or disclosing Customer Personal Information for any purpose
+                            other than the specific purpose of performing the Services specified in the Agreement, the
+                            permitted business purposes set under applicable law, and as required under applicable law.
+                            PostHog hereby certifies that it understands the foregoing restriction and will comply with
+                            it in accordance with the requirements of applicable U.S. Data Protection Laws.
+                        </p>
                         <h4>Data Subject Access Requests</h4>
-                        <p>PostHog will reasonably assist Customer with any data subject access, erasure or opt-out requests and objections. If PostHog receives any request from data subjects, authorities, or others relating to its data processing, PostHog will without undue delay inform Customer and reasonably assist Customer with developing a response (but PostHog will not itself respond other than to confirm receipt of the request, to inform the data subject, authority or other third party that their request has been forwarded to Customer, and/or to refer them to Customer, except per reasonable instructions from Customer). PostHog will also reasonably assist Customer with the resolution of any request or inquiries that Customer receives from data protection authorities relating to PostHog, unless PostHog elects to object such requests directly with such authorities.</p>
+                        <p>
+                            PostHog will reasonably assist Customer with any data subject access, erasure or opt-out
+                            requests and objections. If PostHog receives any request from data subjects, authorities, or
+                            others relating to its data processing, PostHog will without undue delay inform Customer and
+                            reasonably assist Customer with developing a response (but PostHog will not itself respond
+                            other than to confirm receipt of the request, to inform the data subject, authority or other
+                            third party that their request has been forwarded to Customer, and/or to refer them to
+                            Customer, except per reasonable instructions from Customer). PostHog will also reasonably
+                            assist Customer with the resolution of any request or inquiries that Customer receives from
+                            data protection authorities relating to PostHog, unless PostHog elects to object such
+                            requests directly with such authorities.
+                        </p>
                         <h4>Effect of this Addendum</h4>
-                        <p>In the event of any conflict or inconsistency between the terms of this Addendum and the terms of the Agreement with respect to the subject matter hereof and solely where U.S. Data Protection Laws apply, the terms of this Addendum shall control.</p>
+                        <p>
+                            In the event of any conflict or inconsistency between the terms of this Addendum and the
+                            terms of the Agreement with respect to the subject matter hereof and solely where U.S. Data
+                            Protection Laws apply, the terms of this Addendum shall control.
+                        </p>
                     </div>
                     <div>
                         <p>This section is specific to California residents.</p>
-                        <p>PostHog acts as a "Service Provider" and processes your personal information only to provide services, not selling it.</p>
-                        <p>We cannot use or disclose your personal information for other purposes and must comply with U.S. Data Protection Laws. We'll help you with data access, erasure, or opt-out requests.</p>
-                        <p>In case of any conflict between this Addendum and the main agreement regarding U.S. Data Protection Laws, this Addendum prevails.</p>
+                        <p>
+                            PostHog acts as a "Service Provider" and processes your personal information only to provide
+                            services, not selling it.
+                        </p>
+                        <p>
+                            We cannot use or disclose your personal information for other purposes and must comply with
+                            U.S. Data Protection Laws. We'll help you with data access, erasure, or opt-out requests.
+                        </p>
+                        <p>
+                            In case of any conflict between this Addendum and the main agreement regarding U.S. Data
+                            Protection Laws, this Addendum prevails.
+                        </p>
                     </div>
 
                     <div>
@@ -1182,75 +1193,177 @@ function Privacy() {
                     </div>
                     <div></div>
                     <div>
-                        <p>This section sets out how we collect, store, and process personal information as part of our recruitment process. It only applies to users of our website who submit an application for one of our open roles and is supplemental to the above Privacy Policy.</p>
-                        <p>We use <Link href="https://www.ashbyhq.com/" external>Ashby</Link>, an online application provided by Ashby Inc., to assist with our recruitment process. We use Ashby to process personal information as a data processor on our behalf. Ashby is only entitled to process your personal data in accordance with our instructions.</p>
-                        <p>Where you apply for a job opening posted by us, these provisions will apply to our processing of your personal information. When you apply for a job opening via the application function on a job site like LinkedIn or similar online service provider (referred to below as a “Partner”), you should note that the relevant Partner may retain your personal data and may also collect data from us in respect of the progress of your application. Any use by the Partner of your data will be in accordance with the Partner’s privacy policy.</p>
+                        <p>
+                            This section sets out how we collect, store, and process personal information as part of our
+                            recruitment process. It only applies to users of our website who submit an application for
+                            one of our open roles and is supplemental to the above Privacy Policy.
+                        </p>
+                        <p>
+                            We use{' '}
+                            <Link href="https://www.ashbyhq.com/" external>
+                                Ashby
+                            </Link>
+                            , an online application provided by Ashby Inc., to assist with our recruitment process. We
+                            use Ashby to process personal information as a data processor on our behalf. Ashby is only
+                            entitled to process your personal data in accordance with our instructions.
+                        </p>
+                        <p>
+                            Where you apply for a job opening posted by us, these provisions will apply to our
+                            processing of your personal information. When you apply for a job opening via the
+                            application function on a job site like LinkedIn or similar online service provider
+                            (referred to below as a “Partner”), you should note that the relevant Partner may retain
+                            your personal data and may also collect data from us in respect of the progress of your
+                            application. Any use by the Partner of your data will be in accordance with the Partner’s
+                            privacy policy.
+                        </p>
                         <h3 id="information-we-collect-from-applicants">Information we collect from applicants</h3>
                         <h4 id="information-we-collect-from-you">Information we collect from you</h4>
-                        <p className="mb-2">We collect and process some or all of the following types of information from you:</p>
+                        <p className="mb-2">
+                            We collect and process some or all of the following types of information from you:
+                        </p>
                         <ul>
-                            <li>Information you provide when you apply for a role, including contact details such as name, email address, physical address, telephone number</li>
-                            <li>Information relating to your employment history such as resumé/CV, employment history, qualifications and skills</li>
+                            <li>
+                                Information you provide when you apply for a role, including contact details such as
+                                name, email address, physical address, telephone number
+                            </li>
+                            <li>
+                                Information relating to your employment history such as resumé/CV, employment history,
+                                qualifications and skills
+                            </li>
                             <li>If you contact us, we may keep a record of that correspondence</li>
                             <li>A record of your progress through any hiring process that we may conduct</li>
-                            <li>Details of your visits to Ashby’s Website including, but not limited to, traffic data, location data, weblogs and other communication data, the site that referred you to Ashby’s Website and the resources that you access.</li>
+                            <li>
+                                Details of your visits to Ashby’s Website including, but not limited to, traffic data,
+                                location data, weblogs and other communication data, the site that referred you to
+                                Ashby’s Website and the resources that you access.
+                            </li>
                         </ul>
-                        <h4 id="information-we-collect-from-other-sources">Information we collect from other sources</h4>
+                        <h4 id="information-we-collect-from-other-sources">
+                            Information we collect from other sources
+                        </h4>
                         <ul>
-                            <li>Ashby provides PostHog with the ability to link the data you provide to us, with other publicly available information about you that you have published online, such as on LinkedIn, GitHub or other public social media profiles.</li>
-                            <li>Ashby allows PostHog to search various databases which may include your personal data (including your CV or Résumé), to find possible candidates to fill our job openings. Where we find you in this way, we will obtain your personal data from these sources.</li>
-                            <li>We may receive your personal data from a third party who recommends you as a candidate for a specific job opening or for our business more generally.</li>
+                            <li>
+                                Ashby provides PostHog with the ability to link the data you provide to us, with other
+                                publicly available information about you that you have published online, such as on
+                                LinkedIn, GitHub or other public social media profiles.
+                            </li>
+                            <li>
+                                Ashby allows PostHog to search various databases which may include your personal data
+                                (including your CV or résumé), to find possible candidates to fill our job openings.
+                                Where we find you in this way, we will obtain your personal data from these sources.
+                            </li>
+                            <li>
+                                We may receive your personal data from a third party who recommends you as a candidate
+                                for a specific job opening or for our business more generally.
+                            </li>
                         </ul>
                     </div>
                     <div>
-                        <p>When you apply for a job with us, we collect and process your personal information using Ashby, our applicant tracking system. We may also get information from public sources like LinkedIn.</p>
+                        <p>
+                            When you apply for a job with us, we collect and process your personal information using
+                            Ashby, our applicant tracking system. We may also get information from public sources like
+                            LinkedIn.
+                        </p>
                     </div>
                     <div>
                         <h3 id="how-we-use-applicant-information">How we use applicant information</h3>
                     </div>
                     <div></div>
                     <div>
-                        <p className="mb-2">We <em>only</em> collect and use your personal information for the following purposes:</p>
+                        <p className="mb-2">
+                            We <em>only</em> collect and use your personal information for the following purposes:
+                        </p>
                         <ul>
-                            <li>To communicate with you about the role you have applied for and to manage the recruitment process</li>
+                            <li>
+                                To communicate with you about the role you have applied for and to manage the
+                                recruitment process
+                            </li>
                             <li>To consider your application for potential future job opportunities</li>
                         </ul>
                         <p>We will never use a candidate's personal information for marketing purposes. </p>
-                        <h3 id="lawful-basis-and-purposes-for-processing-applicant-personal-information">Lawful basis and purposes for processing applicant personal information</h3>
-                        <p>If you are a national of countries in the European Economic Area (EEA), United Kingdom, or Switzerland, we collect and process your personal information on the following legal bases set out by applicable law:</p>
-                        <p><strong>Consent:</strong> We may ask you for your consent to process your personal information. You can withdraw your consent at any time, which will not affect the lawfulness of the processing before your consent was withdrawn.</p>
-                        <p><strong>Legitimate Interest:</strong> We process certain personal information for our legitimate interests. These legitimate interests include, for example, running our recruitment process and managing applicants.</p>
-                        <p><strong>Compliance with Legal Obligations</strong>: In some cases, we may have a legal obligation to process your personal information, such as to meet our legal requirements or in response to a court or regulatory order. We also may need to process your personal information to protect vital interests, or to exercise, establish, or defend legal claims.</p>
+                        <h3 id="lawful-basis-and-purposes-for-processing-applicant-personal-information">
+                            Lawful basis and purposes for processing applicant personal information
+                        </h3>
+                        <p>
+                            If you are a national of countries in the European Economic Area (EEA), United Kingdom, or
+                            Switzerland, we collect and process your personal information on the following legal bases
+                            set out by applicable law:
+                        </p>
+                        <p>
+                            <strong>Consent:</strong> We may ask you for your consent to process your personal
+                            information. You can withdraw your consent at any time, which will not affect the lawfulness
+                            of the processing before your consent was withdrawn.
+                        </p>
+                        <p>
+                            <strong>Legitimate Interest:</strong> We process certain personal information for our
+                            legitimate interests. These legitimate interests include, for example, running our
+                            recruitment process and managing applicants.
+                        </p>
+                        <p>
+                            <strong>Compliance with Legal Obligations</strong>: In some cases, we may have a legal
+                            obligation to process your personal information, such as to meet our legal requirements or
+                            in response to a court or regulatory order. We also may need to process your personal
+                            information to protect vital interests, or to exercise, establish, or defend legal claims.
+                        </p>
                     </div>
                     <div>
-                        <p>We use your data to manage the hiring process and for future job opportunities, but never for marketing.</p>
+                        <p>
+                            We use your data to manage the hiring process and for future job opportunities, but never
+                            for marketing.
+                        </p>
                     </div>
                     <div>
-                        <h3 id="international-data-transfer-of-applicant-data">International data transfer of applicant data</h3>
+                        <h3 id="international-data-transfer-of-applicant-data">
+                            International data transfer of applicant data
+                        </h3>
                     </div>
                     <div></div>
                     <div className="md:pb-12">
-                        <p>Your personal information may be processed in the United States, the country where you have applied for a job, or any other country where PostHog has team members or operations.</p>
-                        <p>PostHog may transfer, store, or process your personal information in a country outside your jurisdiction, including countries outside the European Economic Area (“EEA”), Switzerland, and the United Kingdom. If we transfer personal information from the EEA, Switzerland, or United Kingdom to a country outside it, such as the United States, we will enter into Standard Contractual Clauses (“SCCs”) approved by the EU Commission or by the UK Government,  with the data importer, or take other measures to provide an adequate level of data protection.</p>
+                        <p>
+                            Your personal information may be processed in the United States, the country where you have
+                            applied for a job, or any other country where PostHog has team members or operations.
+                        </p>
+                        <p>
+                            PostHog may transfer, store, or process your personal information in a country outside your
+                            jurisdiction, including countries outside the European Economic Area (“EEA”), Switzerland,
+                            and the United Kingdom. If we transfer personal information from the EEA, Switzerland, or
+                            United Kingdom to a country outside it, such as the United States, we will enter into
+                            Standard Contractual Clauses (“SCCs”) approved by the EU Commission or by the UK Government,
+                            with the data importer, or take other measures to provide an adequate level of data
+                            protection.
+                        </p>
                         <h3 id="how-long-we-keep-applicant-personal-data">How long we keep applicant personal data</h3>
-                        <p>We will hold all the data for 24 months. Prior to that, your personal information will be deleted if:</p>
+                        <p>
+                            We will hold all the data for 24 months. Prior to that, your personal information will be
+                            deleted if:
+                        </p>
                         <ul>
                             <li>You delete your personal information; or</li>
                             <li>You write to us asking us to delete your personal information.</li>
                         </ul>
                         <h3 id="your-rights-and-choices-as-an-applicant">Your rights and choices as an applicant</h3>
 
-                        <p>Please see the section on <SmoothScrollLink
-                            to="privacy-practices"
-                            spy={true}
-                            smooth={true}
-                            offset={-128}
-                            duration={1500}
-                            className="cursor-pointer"
-                        >Global Privacy Practices and Your Rights</SmoothScrollLink> above.</p>
+                        <p>
+                            Please see the section on{' '}
+                            <SmoothScrollLink
+                                to="privacy-practices"
+                                spy={true}
+                                smooth={true}
+                                offset={-128}
+                                duration={1500}
+                                className="cursor-pointer"
+                            >
+                                Global Privacy Practices and Your Rights
+                            </SmoothScrollLink>{' '}
+                            above.
+                        </p>
                     </div>
                     <div>
-                        <p>If you're from the EEA, UK, or Switzerland, we handle your data based on consent, legitimate interest, or legal obligations. Your data may be processed outside your country, and we keep it for 24 months unless you ask us to delete it.</p>
+                        <p>
+                            If you're from the EEA, UK, or Switzerland, we handle your data based on consent, legitimate
+                            interest, or legal obligations. Your data may be processed outside your country, and we keep
+                            it for 24 months unless you ask us to delete it.
+                        </p>
                     </div>
 
                     <div>
@@ -1260,10 +1373,18 @@ function Privacy() {
                     </div>
                     <div></div>
                     <div className="md:pb-12">
-                        <p>If you need to enter into a Data Processing Agreement with us, the version you need will depend on whether you have signed up for PostHog Cloud in the US or EU. Please visit our <Link href="/dpa">world-class DPA generator</Link> and follow the instructions to have it counter-signed by PostHog.</p>
+                        <p>
+                            If you need to enter into a Data Processing Agreement with us, the version you need will
+                            depend on whether you have signed up for PostHog Cloud in the US or EU. Please visit our{' '}
+                            <Link href="/dpa">world-class DPA generator</Link> and follow the instructions to have it
+                            counter-signed by PostHog.
+                        </p>
                     </div>
                     <div>
-                        <p>We'll counter-sign a data processing agreement after you generate one in our DPA generator and send it to us.</p>
+                        <p>
+                            We'll counter-sign a data processing agreement after you generate one in our DPA generator
+                            and send it to us.
+                        </p>
                     </div>
 
                     <div>
@@ -1273,7 +1394,11 @@ function Privacy() {
                     </div>
                     <div></div>
                     <div className="md:pb-12">
-                        <p>You can <Link href="/handbook/company/security">view our complete set of security measures</Link> for SOC 2, GDPR, and CCPA.</p>
+                        <p>
+                            You can{' '}
+                            <Link href="/handbook/company/security">view our complete set of security measures</Link>{' '}
+                            for SOC 2, GDPR, and CCPA.
+                        </p>
                     </div>
                     <div>
                         <p>Our internal security practices are available in our public handbook.</p>
@@ -1286,21 +1411,45 @@ function Privacy() {
                     </div>
                     <div></div>
                     <div className="md:pb-12">
+                        <p>
+                            The relevant data controller for any personal information processed in connection with our
+                            Websites or self-managed installations is PostHog Inc, 2261 Market Street #4008, San
+                            Francisco, CA 94114. If you apply for a job with us, the relevant data controller is the
+                            country-specific PostHog entity which will be your employer.
+                        </p>
 
-                        <p>The relevant data controller for any personal information processed in connection with our Websites or self-managed installations is PostHog Inc, 2261 Market Street #4008, San Francisco, CA 94114. If you apply for a job with us, the relevant data controller is the country-specific PostHog entity which will be your employer.</p>
+                        <p>
+                            If you have any questions about this Privacy Policy or our privacy and security practices or
+                            you wish to make a complaint about our compliance with applicable privacy laws, please feel
+                            free to contact us at <a href="mailto:privacy@posthog.com">privacy@posthog.com</a>.
+                        </p>
 
-                        <p>If you have any questions about this Privacy Policy or our privacy and security practices or you wish to make a complaint about our compliance with applicable privacy laws, please feel free to contact us at <a href="mailto:privacy@posthog.com">privacy@posthog.com</a>.</p>
+                        <p>
+                            If your query is in connection with a job application, please email us at{' '}
+                            <a href="mailto:careers@posthog.com">careers@posthog.com</a>.
+                        </p>
 
-                        <p>If your query is in connection with a job application, please email us at <a href="mailto:careers@posthog.com">careers@posthog.com</a>.</p>
+                        <p>
+                            We have appointed an EU and UK representative who can also be contacted at{' '}
+                            <a href="mailto:privacy@posthog.com">privacy@posthog.com</a>.
+                        </p>
 
-                        <p>We have appointed an EU and UK representative who can also be contacted at <a href="mailto:privacy@posthog.com">privacy@posthog.com</a>.</p>
+                        <p>
+                            If you have questions or concerns about the way we are handling your personal information,
+                            or would like to exercise your privacy rights, please email us with the subject line
+                            "Privacy Concern" at <a href="mailto:privacy@posthog.com">privacy@posthog.com</a>.
+                        </p>
 
-                        <p>If you have questions or concerns about the way we are handling your personal information, or would like to exercise your privacy rights, please email us with the subject line "Privacy Concern" at <a href="mailto:privacy@posthog.com">privacy@posthog.com</a>.</p>
-
-                        <p>In most cases, we will respond within 30 days of receiving your message but please note for promptest response, we recommend emailing us.</p>
+                        <p>
+                            In most cases, we will respond within 30 days of receiving your message but please note for
+                            promptest response, we recommend emailing us.
+                        </p>
                     </div>
                     <div>
-                        <p>If you have questions or concerns about your privacy or want to file a complaint, email us at privacy@posthog.com.</p>
+                        <p>
+                            If you have questions or concerns about your privacy or want to file a complaint, email us
+                            at privacy@posthog.com.
+                        </p>
                         <p>For job applications, email careers@posthog.com.</p>
                     </div>
                     <div>
@@ -1308,12 +1457,24 @@ function Privacy() {
                     </div>
                     <div>&nbsp;</div>
                     <div className="md:pb-12">
-                        <p>Although most changes are likely to be minor, PostHog may change its privacy policy from time to time, and in PostHog's sole discretion.</p>
+                        <p>
+                            Although most changes are likely to be minor, PostHog may change its privacy policy from
+                            time to time, and in PostHog's sole discretion.
+                        </p>
 
-                        <p>We may also provide notification to customers who have provided us email addresses of material changes to this Privacy Policy through our Website. PostHog encourages visitors to frequently check this page for any minor changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.</p>
+                        <p>
+                            We may also provide notification to customers who have provided us email addresses of
+                            material changes to this Privacy Policy through our Website. PostHog encourages visitors to
+                            frequently check this page for any minor changes to its Privacy Policy. Your continued use
+                            of this site after any change in this Privacy Policy will constitute your acceptance of such
+                            change.
+                        </p>
                     </div>
                     <div>
-                        <p>We might change our privacy policy, so check our website often. Your use of our site means you accept any changes.</p>
+                        <p>
+                            We might change our privacy policy, so check our website often. Your use of our site means
+                            you accept any changes.
+                        </p>
                     </div>
                 </div>
             </div>

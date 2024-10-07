@@ -17,7 +17,7 @@ export const apiEventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/
 
 PostHog provides [libraries](/docs/integrate?tab=sdks) that make it easy to capture events in popular languages. These libraries are basically wrappers around the API. They handle and automate common tasks like capturing pageviews.
 
-Using the API directly allows for any language that can send requests to capture events, or completely customize your implementation. Using the API to capture events directly also gives you a better understanding of [PostHog’s event-based data structures](/docs/how-posthog-works/data-model) which is abstracted if you use a library. 
+Using the API directly allows for any language that can send requests to capture events, or completely customize your implementation. Using the API to capture events directly also gives you a better understanding of [PostHog's event-based data structures](/docs/how-posthog-works/data-model) which is abstracted if you use a library. 
 
 ## Authenticating with the project API key
 
@@ -63,7 +63,7 @@ print(response.json())
 
 </MultiLanguage>
 
-Once you’ve done that, you should see the event in your PostHog instance.
+Once you've done that, you should see the event in your PostHog instance.
 
 <ProductScreenshot
     imageLight = {apiEventsLight} 
@@ -74,7 +74,7 @@ Once you’ve done that, you should see the event in your PostHog instance.
 
 ### Adding properties and batching
 
-You can also add properties and a timestamp in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) to this request. If you don’t add a timestamp, we automatically set it to the current time. 
+You can also add properties and a timestamp in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) to this request. If you don't add a timestamp, we automatically set it to the current time. 
 
 <MultiLanguage>
 
@@ -224,7 +224,7 @@ print(response.json())
 
 ### Aliasing users
 
-If you have two users you’d like to combine together, you can use a `$create_alias` event. See more about this in our [identifying users documentation](/docs/integrate/identifying-users).
+If you have two users you'd like to combine together, you can use a `$create_alias` event. See more about this in our [identifying users documentation](/docs/integrate/identifying-users).
 
 <MultiLanguage>
 

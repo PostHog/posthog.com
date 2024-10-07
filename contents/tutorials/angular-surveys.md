@@ -20,7 +20,7 @@ export const ImgSurveyResultsDark = "https://res.cloudinary.com/dmukukwp6/image/
 export const ImgSurveyTemplatesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/survey-templates-light.png"
 export const ImgSurveyTemplatesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/survey-templates-dark.png"
 
-[Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Angular.js app.
+[Surveys](/docs/surveys) are a great way to get feedback from your users. In this guide, we show you how to add a survey to your Angular app.
 
 We'll create a basic Angular app, add PostHog, create a survey, and then show you how to display the survey in the app and get responses.
 
@@ -517,7 +517,7 @@ After interacting with your survey, you can view results by selecting the survey
 - How many users have dismissed the survey.
 - Responses.
 
-If you capture events with [person profiles](/docs/data/persons), you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
+If you capture identified events, you can also filter these results based on [person properties](/docs/product-analytics/person-properties), [cohorts](/docs/data/cohorts), [feature flags](/docs/feature-flags/creating-feature-flags) and more.
 
 <ProductScreenshot
   imageLight={ImgSurveyResultsLight} 

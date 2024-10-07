@@ -52,14 +52,14 @@ const product = {
     freeTier: '1,000,000 requests',
 }
 
-const team = 'Feature Success'
-const teamSlug = '/teams/feature-success'
+const team = 'Feature Flags'
+const teamSlug = '/teams/feature-flags'
 
 const featuresPerRow = 3
 const features = [
     {
         title: 'Release conditions',
-        description: 'Customize your rollout strategy by user or group properties, cohort, or trafic percentage',
+        description: 'Customize your rollout strategy by user or group properties, cohort, or traffic percentage',
         image: <StaticImage src="./images/release-conditions.png" width={420} />,
         border: true,
     },
@@ -464,7 +464,7 @@ export const ProductFeatureFlags = () => {
                             Either way, your first {product.freeTier} are free – every month.
                         </p>
                         <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-8 py-4 mb-2 text-sm">
-                            <strong>Note:</strong> Feature flags and A/B testing are currently packaged together and
+                            <strong>Note:</strong> Feature flags and Experiments are currently packaged together and
                             share volume limits.
                         </div>
                     </div>

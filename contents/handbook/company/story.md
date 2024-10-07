@@ -22,7 +22,7 @@ We got into Y Combinator's W20 batch, and just a couple of weeks after starting 
 
 We launched on [Hacker News](https://news.ycombinator.com/item?id=22376732) with our MVP, just 4 weeks after we started writing code.
 
-The response was overwhelmingly positive. We had over 300 deployments in a couple of days. 2 weeks later, we'd gone past 1,500 stars on [GitHub](https://github.com/PostHog/posthog).
+The response was overwhelmingly positive. We had over 300 deployments in a couple of days. Two weeks later, we'd gone past 1,500 stars on [GitHub](https://github.com/PostHog/posthog).
 
 Since then, we've realized that the same reasons that PostHog was appealing to us as individual developers are the reasons why many enterprise customers also find the software is very appealing. We got a lot of inbound demand, and realized we weren't just onto a cool side project, we were onto what could be a huge company.
 
@@ -90,7 +90,7 @@ We're 38 people in lots of countries. We're not adding lots of headcount over th
 
 ## Feb 2023: focus on mass adoption
 
-We're very doing well at monetizing high-growth startups due to our optimization work, averaging over 15% MoM for the last 6 months. 
+We're doing very well at monetizing high-growth startups due to our optimization work, averaging over 15% MoM for the last 6 months. 
 
 We've decided to double down on mass adoption of the platform in high potential startups instead of focusing on enterprise. Simply, this will better help us increase the number of successful products in the world. As a result, we've removed support for paid self-hosted deployment and are doubling down on our open source and cloud projects. We have released a PostHog free tier.
 

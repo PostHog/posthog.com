@@ -9,27 +9,6 @@ import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { kebabCase } from 'lib/utils'
 import React, { useState } from 'react'
-import {
-    StickerMayor,
-    StickerFlagAT,
-    StickerFlagBE,
-    StickerFlagCA,
-    StickerFlagCO,
-    StickerFlagDE,
-    StickerFlagIE,
-    StickerFlagES,
-    StickerFlagFI,
-    StickerFlagFR,
-    StickerFlagGB,
-    StickerFlagHU,
-    StickerFlagNL,
-    StickerFlagPL,
-    StickerFlagUnknown,
-    StickerFlagUS,
-    StickerPineappleYes,
-    StickerPineappleNo,
-    StickerPineappleUnknown,
-} from 'components/Stickers/Index'
 import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
 import { Change } from './Changelog'
 import { MDXProvider } from '@mdx-js/react'
@@ -51,6 +30,7 @@ import { RenderInClient } from 'components/RenderInClient'
 import usePostHog from '../hooks/usePostHog'
 import { companyMenu } from '../navs'
 import { PrivateLink } from 'components/PrivateLink'
+import Stickers from 'components/ProfileStickers'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -99,90 +79,17 @@ const Section = ({ children, cta, title, className = '', id = '' }) => {
     )
 }
 
-const Stickers = ({ country, pineappleOnPizza, isTeamLead, isModerator, id, handleTeamLead }) => {
-    const TeamLeadContainer = isModerator && handleTeamLead ? 'span' : 'button'
-
-    const handleTeamLeadClick = (e) => {
-        e.stopPropagation()
-        handleTeamLead(id, isTeamLead)
-    }
-
-    return (
-        <>
-            <span>
-                {country === 'BE' ? (
-                    <StickerFlagBE className="w-8 h-8" />
-                ) : country === 'US' ? (
-                    <StickerFlagUS className="w-8 h-8" />
-                ) : country === 'GB' ? (
-                    <StickerFlagGB className="w-8 h-8" />
-                ) : country === 'DE' ? (
-                    <StickerFlagDE className="w-8 h-8" />
-                ) : country === 'ES' ? (
-                    <StickerFlagES className="w-8 h-8" />
-                ) : country === 'FI' ? (
-                    <StickerFlagFI className="w-8 h-8" />
-                ) : country === 'HU' ? (
-                    <StickerFlagHU className="w-8 h-8" />
-                ) : country === 'IE' ? (
-                    <StickerFlagIE className="w-8 h-8" />
-                ) : country === 'FR' ? (
-                    <StickerFlagFR className="w-8 h-8" />
-                ) : country === 'NL' ? (
-                    <StickerFlagNL className="w-8 h-8" />
-                ) : country === 'AT' ? (
-                    <StickerFlagAT className="w-8 h-8" />
-                ) : country === 'CA' ? (
-                    <StickerFlagCA className="w-8 h-8" />
-                ) : country === 'CO' ? (
-                    <StickerFlagCO className="w-8 h-8" />
-                ) : country === 'PL' ? (
-                    <StickerFlagPL className="w-8 h-8" />
-                ) : (
-                    <StickerFlagUnknown className="w-8 h-8" />
-                )}
-            </span>
-            <span>
-                {pineappleOnPizza === null ? (
-                    <Tooltip content="We're not sure if they like pineapple on pizza (yet)!">
-                        <StickerPineappleUnknown className="w-8 h-8" />
-                    </Tooltip>
-                ) : pineappleOnPizza ? (
-                    <Tooltip content="Prefers pineapple on pizza!">
-                        <StickerPineappleYes className="w-8 h-8" />
-                    </Tooltip>
-                ) : (
-                    <Tooltip content="Does not believe pineapple belongs on pizza">
-                        <StickerPineappleNo className="w-8 h-8" />
-                    </Tooltip>
-                )}
-            </span>
-            {isTeamLead || isModerator ? (
-                <TeamLeadContainer {...(isModerator && handleTeamLead ? { onClick: handleTeamLeadClick } : {})}>
-                    <Tooltip content={isTeamLead ? 'Team lead' : 'Make team lead?'}>
-                        <span>
-                            <StickerMayor
-                                active={isTeamLead}
-                                className={`w-8 h-8 ${isTeamLead ? '' : 'opacity-40 hover:opacity-75'}`}
-                            />
-                        </span>
-                    </Tooltip>
-                </TeamLeadContainer>
-            ) : (
-                ''
-            )}
-        </>
-    )
-}
-
 export const Profile = (profile) => {
-    const { firstName, lastName, country, companyRole, pineappleOnPizza, biography, isTeamLead, id } = profile
+    const { firstName, lastName, country, companyRole, pineappleOnPizza, biography, isTeamLead, id, location, color } =
+        profile
     const name = [firstName, lastName].filter(Boolean).join(' ')
     return (
         <div>
             <div className="flex space-x-2 mb-6">
                 <Avatar
-                    className="w-24 h-24 bg-accent dark:bg-dark rounded-full border border-border dark:border-dark"
+                    className={`w-24 h-24 ${
+                        color ? `bg-${color}` : 'bg-accent dark:bg-dark'
+                    } rounded-full border border-border dark:border-dark`}
                     src={getAvatarURL(profile)}
                 />
                 <div>
@@ -192,6 +99,7 @@ export const Profile = (profile) => {
                         <Stickers
                             className="w-8 h-8"
                             country={country}
+                            location={location}
                             pineappleOnPizza={pineappleOnPizza}
                             isTeamLead={isTeamLead}
                         />
@@ -200,7 +108,7 @@ export const Profile = (profile) => {
             </div>
 
             {biography ? (
-                <Markdown>{biography}</Markdown>
+                <Markdown className="bio-sidebar">{biography}</Markdown>
             ) : (
                 <p className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-4 text-sm">
                     {firstName} has been too busy writing code to fill out a bio!
@@ -427,6 +335,7 @@ export default function Team({
                                                   firstName,
                                                   lastName,
                                                   country,
+                                                  location,
                                                   companyRole,
                                                   pineappleOnPizza,
                                               },
@@ -461,6 +370,7 @@ export default function Team({
                                                           <div className="mt-1 flex space-x-1 items-center">
                                                               <Stickers
                                                                   country={country}
+                                                                  location={location}
                                                                   isTeamLead={isTeamLead(id)}
                                                                   pineappleOnPizza={pineappleOnPizza}
                                                                   handleTeamLead={handleTeamLead}

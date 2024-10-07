@@ -45,8 +45,8 @@ GCS uses service accounts to control access to resources. We need one to connect
 
 ## Step 4: Create the table in PostHog
 
-1. In PostHog, go to the [data warehouse tab](https://us.posthog.com/data-warehouse) and click **Link source**
-2. Under self managed, look for **Google Cloud Storage** and click **Link**
+1. Go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) and the sources tab in PostHog
+2. Click **New source**. Under self managed, look for **Google Cloud Storage** and click **Link**
 3. Fill the table name, then use the data from GCS: 
     - For files URL pattern, use `https://storage.googleapis.com/` followed by your bucket and file or folder name like `https://storage.googleapis.com/posthog-warehouse/july12_google_ads_fixed.csv`. You can also use `*` to query multiple files.
     - Chose the correct file format

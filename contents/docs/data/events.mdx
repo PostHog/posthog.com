@@ -15,7 +15,7 @@ Events consist of:
 
 1. An `event` name like `$pageview` or `query completed`. Events starting with `$` are PostHog defaults.
 
-2. A `distinct_id` which is a unique identifier for [person](/docs/data/person), commonly a `uuidv7` value like `018daf23-89b3-7cf8-a4f1-94064c96df90`
+2. A `distinct_id` which is a unique identifier for [person](/docs/data/persons), commonly a `uuidv7` value like `018daf23-89b3-7cf8-a4f1-94064c96df90`
 
 3. A `timestamp` in ISO 8601 format, which is the time the event occurred like `2024-05-22T17:09:29.220Z`. This is most commonly `now()`, but can also be in the past. 
 
@@ -42,6 +42,12 @@ PostHog is event-based, meaning much of the functionality is triggered through e
 - Calculating exposure and statistical significance for [experimentation](/docs/experiments) with the `$feature/experiment-feature-flag-key` property and `$feature_flag_called` event.
 
 - Sending data to webhooks is triggered by ingesting specific events.
+
+## Anonymous vs identified events
+
+PostHog captures two types of events: **anonymous** and **identified**. Identified events enable you to attribute events to person profiles, while anonymous events do not.
+
+See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) for more information.
 
 ## Event properties
 

@@ -43,7 +43,7 @@ const initialProducts = [
     },
     {
         Icon: IconFlask,
-        name: 'A/B testing',
+        name: 'Experiments',
         type: 'feature_flags',
         color: 'purple',
         billedWith: 'Feature flags',

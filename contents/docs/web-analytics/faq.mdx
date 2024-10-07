@@ -26,7 +26,7 @@ Web analytics relies on a subset of the events and properties used by product an
 
 ## How much does web analytics cost?
 
-During beta, web analytics is no additional cost on top of product analytics. Events are used between both, and follow [product analytics' pricing](/pricing?product=product-analytics).
+Web analytics is no additional cost on top of product analytics. Events are used between both, and follow [product analytics' pricing](/product-analytics#pricing).
 
 ## Where is my world map?
 
@@ -35,3 +35,68 @@ All good web analytics dashboards need to include a world map. Ours includes it 
 ## Do stats include bots and crawlers?
 
 No, we automatically block bots and crawlers. You can see exactly which ones [we block here](https://github.com/PostHog/posthog-js/blob/master/src/utils/blocked-uas.ts).
+
+## Why is my pageview/user count different on PostHog than my other analytics tool?
+
+### 1. Ad Blockers
+
+*Affects: visitor count, session count, pageview count*
+
+Around 1 in 3 internet users use an ad blocker, more in some demographics, with 25-34 being the highest.
+
+Google Analytics is blocked by almost every ad blocker, whereas other analytics tools are not always blocked. Additionally, you can use a [reverse proxy](/docs/advanced/proxy) which makes it harder for ad blockers to block our traffic.
+
+### 2. Different methods of counting unique users
+
+*Affects: visitor count*
+
+In PostHog, you can [identify](/docs/product-analytics/identify) anonymous users across with the same distinct ID across visitors and devices they are correctly counted as one user. Analytics tools that don’t allow for identifying users would incorrectly count these as multiple users.
+
+Cookieless trackers, like [Plausible](/blog/posthog-vs-plausible) and Vercel, track users by combining a few properties into a hash. This includes the user agent, IP address, and a daily salt. Because the salt changes every day, a user that visits your site 7 days in a row counts as 7 different users in these tools. In PostHog, if the user is identified, or if you are using cookies, they are correctly counted as a single user. 
+
+These cookieless trackers also incorrectly count the same user on different devices as different visitors, as the user agent would differ.
+
+### 3. Different methods of tracking sessions
+
+*Affects: session count*
+
+A [session](/docs/data/sessions) is a grouping of user activity, which starts on the first event (e.g. pageview) and ends after 30 minutes of inactivity. By default, we store the user’s current session ID in a cookie. Other tools might have a different timeout period or a different way of storing the session state which can affect the count.
+
+### 4. Bot detection
+
+*Affects: visitor count, session count, pageview count*
+
+Some traffic to your site might be bots like search engines crawlers, archivers, or content scrapers. You may want some of these to be able to access your site, but you don’t want them to appear in your analytics data. Different tools use different methods, which may result in different visitor or page view counts.
+
+Our client-side bot detection code is available on [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/blocked-uas.ts) (pull requests welcome!) and we automatically prevent detected bots from sending events.
+
+## Why am I getting a lot of direct traffic?
+
+Direct traffic usually refers to when a user enters the address to your website directly, but it also includes any traffic where the referrer is unknown or impossible to calculate. We use the `document.referrer` property, which might be hidden for a few reasons:
+* Some browsers and privacy extensions strip or hide the referrer, particularly in private browsing or incognito mode.
+* Links opened from an app (for example, a messaging or email app) won’t have a referrer set. You can use UTM tags to help attribute links shared this way. Note that many apps, like the iOS Mail app, will strip ad-specific parameters like `gclid`, `fbclid`, etc.
+* Browsers won’t include the referrer for links from HTTPS to HTTP.
+* Link tracking or redirection services may result in the original referrer being lost.
+* Websites can specify that the referrer should not be sent, by including the `referrerpolicy` meta tag in the page or `rel="noreferrer"` on the link.
+
+> **Note:** If you have auto-tagged traffic set up in Google Ads, parameters set this way do not appear as URL parameters, and therefore aren’t available for us to use for attribution. You can set up tracking templates in Google Ads to add query parameters automatically.
+
+## Why does my own site appear as a referrer?
+
+This is called self-referral traffic, having a small amount (<5%) of self-referral traffic is normal, and it can happen for a few reasons:
+
+### Cross-domain tracking
+
+If you track multiple domains, you might need to set up [cross-domain tracking](/tutorials/cross-domain-tracking) to ensure that sessions are correctly attributed.
+
+### Session timeout
+
+1. A user visits a site (for example, `google.com`) that links to yours.
+2. The user clicks a link to your site. At this point, a new session starts and the referrer is `google.com`.
+3. The user walks away from their computer, and is inactive long enough for the session to expire (30 minutes by default).
+4. User comes back to their computer, goes to the already-open browser tab with your site, and clicks an internal link. A new session starts and the referrer is your own site.
+
+If your users are typically inactive for longer than 30 minutes within one period of activity, you can increase the `session_idle_timeout_seconds` setting in your [posthog-js configuration](/docs/libraries/js#config).
+
+
+

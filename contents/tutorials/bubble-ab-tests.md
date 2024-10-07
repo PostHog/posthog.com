@@ -15,7 +15,7 @@ export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/u
 export const TestSetupLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-ab-tests/test-setup-light.png"
 export const TestSetupDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-ab-tests/test-setup-dark.png"
 
-[Bubble](https://bubble.io/) is a great tool for building marketing websites. However, sometimes you may be unsure if a change actually improves your conversion rate. This is where [A/B testing](/ab-testing) is helpful. It enables you to test and compare the results of your changes.
+[Bubble](https://bubble.io/) is a great tool for building marketing websites. However, sometimes you may be unsure if a change actually improves your conversion rate. This is where [A/B testing](/experiments) is helpful. It enables you to test and compare the results of your changes.
 
 This tutorial shows you how to set up A/B tests with Bubble and PostHog to get the most out of your website.
 

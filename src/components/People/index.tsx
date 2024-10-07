@@ -11,6 +11,7 @@ import { SEO } from '../seo'
 import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
 import { StaticImage } from 'gatsby-plugin-image'
 import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 import SideModal from 'components/Modal/SideModal'
 import { Profile } from '../../templates/Team'
 
@@ -66,7 +67,9 @@ export const TeamMember = (props) => {
                         />
                     </figure>
                     <div className="overflow-hidden absolute h-full w-full inset-0 p-4 bg-accent dark:bg-accent-dark">
-                        <ReactMarkdown className="text-sm [&_p]:text-sm [&_p]:mb-2">{biography}</ReactMarkdown>
+                        <ReactMarkdown rehypePlugins={[rehypeRaw]} className="text-sm bio-preview">
+                            {biography}
+                        </ReactMarkdown>
                         <div className="bg-gradient-to-t from-accent dark:from-accent-dark to-transparent absolute inset-0 w-full h-full" />
                     </div>
                 </div>
@@ -84,7 +87,7 @@ export default function People() {
 
     const teamSize = teamMembers.length - 1
 
-    // Some Stats were used as fallback until the actual data is added to the GraphlQL Server
+    // Some Stats were used as fallback until the actual data is added to the GraphQL Server
     const teamStats = [
         {
             data: pineappleOnPizzaStat(teamMembers) ? pineappleOnPizzaStat(teamMembers) : [60, 40],

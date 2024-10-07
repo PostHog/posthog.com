@@ -4,10 +4,9 @@ title: "We’ve decided to make less money [Part 1]"
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/take_my_money_11433edb48.png
 author:
-  - andy-vandervell
+  - james-hawkins
 featuredImageType: full
-tags:
-  - PostHog news
+category: PostHog news
 ---
 
 ## TL;DR
@@ -16,7 +15,9 @@ tags:
 - We’re passing the savings onto you by making session replay _drastically cheaper_, especially at lower volumes.
 - We’re now the cheapest session replay tool among competitive products.
 
-And this is just Part 1...
+~~And this is just Part 1...~~ 
+
+[Part 2 is now live](/blog/analytics-pricing).
 
 ## How will this impact me?
 

@@ -23,7 +23,11 @@ Then complete the set up for each platform:
 
 #### Android setup
 
-For Android, add your PostHog configuration to your `AndroidManifest.xml` file located in the `android/app/src/main`:
+There are 2 ways of initializing the SDK, automatically and manually.
+
+Automatically:
+
+Add your PostHog configuration to your `AndroidManifest.xml` file located in the `android/app/src/main`:
 
 ```xml file=android/app/src/main/AndroidManifest.xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="your.package.name">
@@ -37,7 +41,36 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
 </manifest>
 ```
 
-You'll also need to update the minimum Android SDK version to `21` in `android/app/build.gradle`:
+Or manually (more control and more configurations available):
+
+Add your PostHog configuration to your `AndroidManifest.xml` file located in the `android/app/src/main`:
+
+```xml file=android/app/src/main/AndroidManifest.xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="your.package.name">
+    <application>
+        <!-- ... other configuration ... -->
+        <meta-data android:name="com.posthog.posthog.AUTO_INIT" android:value="false" />
+    </application>
+</manifest>
+```
+
+And setup the SDK manually:
+
+```dart
+Future<void> main() async {
+    // init WidgetsFlutterBinding if not yet
+    WidgetsFlutterBinding.ensureInitialized();
+    final config = PostHogConfig('YOUR_API_KEY_GOES_HERE');
+    config.debug = true;
+    config.captureApplicationLifecycleEvents = true;
+    // or EU Host: 'https://eu.i.posthog.com'
+    config.host = 'https://us.i.posthog.com';
+    await Posthog().setup(config);
+    runApp(MyApp());
+}
+```
+
+In both cases, you'll also need to update the minimum Android SDK version to `21` in `android/app/build.gradle`:
 
 ```gradle_kotlin file=android/app/build.gradle
 // rest of your config
@@ -52,7 +85,13 @@ You'll also need to update the minimum Android SDK version to `21` in `android/a
 
 #### iOS setup
 
-For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
+There are 2 ways of initializing the SDK, automatically and manually.
+
+You'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed.
+
+Automatically:
+
+Add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
 
 ```xml file=ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
@@ -72,7 +111,39 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
 </plist>
 ```
 
-Then you need to set the minimum platform version to iOS 13.0 in your Podfile:
+Or manually (more control and more configurations available):
+
+Add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
+
+```xml file=ios/Runner/Info.plist
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+<!-- rest of your configuration -->
+  <key>com.posthog.posthog.AUTO_INIT</key>
+	<false/>
+</dict>
+</plist>
+```
+
+And setup the SDK manually:
+
+```dart
+Future<void> main() async {
+    // init WidgetsFlutterBinding if not yet
+    WidgetsFlutterBinding.ensureInitialized();
+    final config = PostHogConfig('YOUR_API_KEY_GOES_HERE');
+    config.debug = true;
+    config.captureApplicationLifecycleEvents = true;
+    // or EU Host: 'https://eu.i.posthog.com'
+    config.host = 'https://us.i.posthog.com';
+    await Posthog().setup(config);
+    runApp(MyApp());
+}
+```
+
+In both cases, you'll need to set the minimum platform version to iOS 13.0 in your Podfile:
 
 ```yaml file=ios/Podfile
 platform :ios, '13.0'

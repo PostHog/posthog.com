@@ -1,0 +1,71 @@
+<MultiLanguage>
+
+```python
+from posthog import Posthog
+from datetime import datetime
+
+posthog = Posthog(
+    '<ph_project_api_key>', 
+    host='<ph_client_api_host>',
+    debug=True,
+    historical_migration=True
+)
+
+events = [
+  {
+    "event": "batched_event_name",
+    "properties": {
+      "distinct_id": "user_id",
+      "timestamp": datetime.fromisoformat("2024-04-02T12:00:00")
+    }
+  },
+  {
+    "event": "batched_event_name",
+    "properties": {
+      "distinct_id": "used_id",
+      "timestamp": datetime.fromisoformat("2024-04-02T12:00:00")
+    }
+  }
+]
+
+for event in events:
+  posthog.capture(
+    distinct_id=event["properties"]["distinct_id"],
+    event=event["event"],
+    properties=event["properties"],
+    timestamp=event["properties"]["timestamp"],
+  )
+```
+
+
+```node
+import { PostHog } from 'posthog-node'
+
+const client = new PostHog(
+    '<ph_project_api_key>',
+    { 
+      host: '<ph_client_api_host>', 
+      historicalMigration: true
+    }
+)
+
+client.debug()
+
+client.capture({
+    event: "batched_event_name",
+    distinctId: "user_id",
+    properties: {},
+    timestamp: "2024-04-03T12:00:00Z"
+})
+
+client.capture({
+    event: "batched_event_name",
+    distinctId: "user_id",
+    properties: {},
+    timestamp: "2024-04-03T13:00:00Z"
+})
+
+await client.shutdown() 
+```
+
+</MultiLanguage>

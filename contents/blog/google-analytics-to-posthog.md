@@ -18,7 +18,7 @@ tags:
 
 With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/blog/ga4-alternatives). 
 
-We’re biased, but PostHog is a great one. When compared with Google Analytics, it is:
+We’re biased, but PostHog is a great one. When [compared with Google Analytics](/blog/posthog-vs-ga4), it is:
 
 - Easier to set up and capture data about traffic and usage.
 - Provides all the same reports, views, and filters.
@@ -26,7 +26,7 @@ We’re biased, but PostHog is a great one. When compared with Google Analytics,
 
 This post will go over the basics you must know to make the transition from Google Analytics to PostHog.
 
-> Read our [PostHog and Google Analytics comparison](/blog/posthog-vs-ga4) for an in-depth look at the differences
+> **Want to track website visitors in PostHog?** Find out [how to migrate from Google Analytics to PostHog](/migrate/google-analytics) and start using [our new web analytics tool](/web-analytics). 
 
 ## Initial PostHog setup
 
@@ -57,7 +57,7 @@ When you set up the snippet or JS library, it autocaptures events (similar to GA
 
 PostHog has much of the same functionality as Google Analytics, but much of it is tweaked and named differently. Here’s a quick comparison of the two:
 
-<div className="overflow-x-auto -mx-5 px-5">
+<OverflowXSection>
 <table className="w-full mt-4" style="min-width: 600px;">
   <thead>
     <tr>
@@ -109,7 +109,7 @@ PostHog has much of the same functionality as Google Analytics, but much of it i
     </tr>
   </tbody>
 </table>
-</div>
+</OverflowXSection>
 
 ## Creating your first dashboard
 

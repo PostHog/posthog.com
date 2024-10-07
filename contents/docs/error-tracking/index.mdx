@@ -1,0 +1,71 @@
+---
+title: Error tracking
+---
+
+> ⚠️ Error tracking is considered an alpha product while we continue to ship some crucial features.
+
+Error tracking allows you to track, investigate, and resolve exceptions your customers face.
+
+Errors are captured as `$exception` events which means that you can create insights, filter recordings and trigger surveys based on them exactly the same way you can for any other type of event.
+
+## Installation
+
+### Python
+
+> A minimum SDK version of v3.7.0 is required
+
+Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Python application.
+
+```python
+from posthog import Posthog
+
+posthog = Posthog("API_KEY", enable_exception_autocapture=True, ...)
+```
+
+If you're using Django 4.2+, you can enable the exception autocapture integration which will also automatically capture Django errors.
+
+```python
+from posthog.exception_capture import Integrations
+
+Posthog("API_KEY", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
+```
+
+For exceptions handled by your application that you would still like sent to PostHog it is possible to manually call the capture method.
+
+```python
+posthog.capture_exception(e, 'DISTINCT_ID', properties=additional_properties)
+```
+
+### Javascript
+
+> A minimum SDK version of v1.160.0 is required
+
+Exception autocapture within the JS SDK is remotely controlled via [the PostHog app](https://us.posthog.com/settings/project-autocapture#exception-autocapture).
+
+It is also possible to manually capture exceptions using the JS SDK.
+
+```js
+posthog.captureException(error, additionalProperties)
+```
+
+## Functionality
+
+In addition to using events in insights, replays, and surveys as mentioned above customers can also visit the [error tracking page](https://us.posthog.com/error_tracking).
+
+Exceptions are grouped by type. Aggregated counts and sparklines provide an indication of the severity of each group. Search makes it easy to find exceptions containing specific text, and filters allow you to see which exceptions affect certain users.
+
+![Error tracking groups](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_10_01_at_18_08_33_46c312e330.png)
+
+Clicking through to an individual group shows you all the associated exceptions, including the associated stack trace, active feature flags when the exception was captured and a link to the relevant session replay. 
+
+![Exception events](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_10_01_at_18_08_56_8efb2e9aba.png)
+
+## Upcoming features
+
+There is a long list of features on our roadmap but we're primarily working towards:
+
+* Stack trace demangling (for Javascript)
+* Actioning exceptions (merging, assigning, resolving, etc)
+* Alerting
+
+If you have any feedback during the alpha please [share it with us](https://us.posthog.com/?panel=support%3Asupport%3A%3A%3Afalse#panel=support%3Asupport%3A%3A%3Afalse).

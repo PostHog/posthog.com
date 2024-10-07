@@ -39,18 +39,25 @@ We want to try to encourage small teams to get together once each year. These ar
 Some guidelines:
 
 - These are more focused on work than the all-company offsite, but it's still worth organizing a fun activity, do some sightseeing and in general spend time together.
+- Quarterly planning is a great focal point for team offsites – it's worth scheduling your meetup for the week of planning.
 - You should default to picking a city that one or more of your team members already live in, and a place that minimizes travel time/expenses for everyone else.
 - Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going. 
-- We'd encourage you to get an AirBnB for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved.
-- These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip. 
+- We'd encourage you to get an Airbnb for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved.
+- Specify offsite start and end times down to the hour, for clarity and efficient use of everyone's time.
+- These offsites don't happen very often and involve a lot of travel, so make sure you make the most out of it by having an agenda and an idea of what you want to achieve _before_ the start of the trip.
 
 Ideas for the agenda:
+
 - A spoken README session early in the week to share "Who am I/How I work best"
-- Planning session. What does the team want to achieve in the next month/quarter/year?
+- Planning session – what does the team want to achieve in the next month/quarter/year?
 - Look at the [team page](/handbook/team-structure#small-teams) - what needs to be updated?
 - [360 degree feedback session](/handbook/people/feedback#ground-rules) - these are more effective at small team offsites
     - This can work better over a shared cooked meal or takeaway in the accommodation rather than a noisy restaurant, particularly for people who might be anxious about the format or the feedback.
-- Hackathon - try to leave 2 days for this
+- Dogfooding session – set PostHog up in a toy project from scratch, looking for pain points
+- Hackathon - try to leave 2 days for this, and most importantly avoid sessions interrupting hacking
+- Even some regular work on ongoing challenging projects - this is the best time for exchanging knowledge!
+
+Here's a real-world example: [Product Analytics team's Munich offsite agenda](https://posthog.slack.com/canvas/C07A0BQEAUB) (internal Slack link). Feel free to take inspiration – though your team's needs and wants might be quite different!
 
 The budget for these trips is up to $2,000 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. Generally it's easier to hit budget if you have people travel in on a Monday and out on a Friday - they don't need to be as long as a whole team offsite. 
 
@@ -92,7 +99,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
   - Be mindful of the season of your chosen location, as this will dictate what activities you can plan
   - It is worth getting people to hold dates as early as possible, even before you've selected a location
 - [ ] Choose location
-  - Consider choosing a location that is relatively easy for most people to attend without having to travel outrageous distances or deal with difficult visa processes or COVID testing requirements
+  - Consider choosing a location that is relatively easy for most people to attend without having to travel outrageous distances or deal with difficult visa processes.
   - Transportation to the offsite is usually one of the larger budget line items, so do some research on the cost of flights from team locations before finalizing a location.
   - Consider the cost of transportation to/from the airport, and around town, for when your team arrives at the offsite location.
   - Be mindful that people who take long flights won't appreciate a 2hr journey from the airport to accommodation!
@@ -105,12 +112,12 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 
 - [ ] Secure accommodations
   - The ideal location will depend on the size of your team
-  - We recommend booking a large AirBnB for teams under 20 people as this provides for a more casual atmosphere and can help control costs if you opt to have the team cook meals together
+  - We recommend booking a large Airbnb for teams under 10 people as this provides for a more casual atmosphere and can help control costs if you opt to have the team cook meals together. You can also book an Airbnb and supplement with a nearby hotel if the Airbnb doesn't have enough rooms.
   - For larger teams, consider a centrally located hotel that has a bookable space with configurable furniture for different activities, an onsite restaurant or bar to simplify meals and provide a location for free social time, as well as amenities like a gym for those who like to stay active while they travel
 - [ ] Start flight booking process
   - To simplify this process, we give all team members access to a company card, and we ask people to book their own flights
   - We strongly recommend this approach as centralizing flight booking can be a huge headache for offsite lead, and this allows team members to accurately enter their personal information including airline frequent flier and trusted traveller numbers
-  - Encourage folks to buy flights early and with the option to refund if they are unable to attend to save on costs
+  - Encourage folks to buy flights early and with the option to refund if they are unable to attend to save on costs. Use your judgement here - 20% or so is reasonable for the flexibility, but double the price is not really worth it.
   - In the event that a new team member will be attending an offsite, but has not started yet, please contact the Ops team to help coordinate. In these cases, the process is:
     1. Preemptively create the new team member a Google account
     2. Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
@@ -120,7 +127,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
   - Building the schedule as a [separate Google Calendar](https://support.google.com/calendar/answer/37095?hl=en) that can eventually be [shared with the team](https://support.google.com/calendar/answer/37082?hl=en) will allow you to flexibly move sessions around as you finalize the itinerary
 - [ ] Send [info gathering form](https://docs.google.com/forms/d/1QWhbQbHxoq--XWhMfTXeccTaq1ru0v_VPhuwOA3xS48/edit?usp=sharing)
   - Use this form to collect important information like flight details, clothing sizes for merch, dietary restriction, and preferences for things like sharing rooms
-- [ ] Brainstorm merch/meeting room decorations
+- [ ] Brainstorm merch/meeting room decorations (generally just for company-wide offsites)
   - Having some branded merch to commemorate the offsite upon arrival is a great way to welcome people and get them excited for their time together (generally this is for whole team offsites only for budgetary reasons)
   - If you are staying in a hotel, decorating a meeting room makes it feel much more personal and less corporate
   - In the past, we've done shirts, hats, scarves, notebooks, stickers, pens, and water bottles -- feel free to get creative with it

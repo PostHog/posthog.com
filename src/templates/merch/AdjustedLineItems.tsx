@@ -1,7 +1,7 @@
-import { ExclamationCircleOutlined } from '@ant-design/icons'
 import React from 'react'
 import { cn } from '../../utils'
 import { AdjustedLineItem } from './types'
+import { IconInfo } from '@posthog/icons'
 
 type AdjustedLineItemsProps = {
     className?: string
@@ -26,7 +26,7 @@ export function AdjustedLineItems(props: AdjustedLineItemsProps): React.ReactEle
                 <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-md p-4">
                     <div className="flex">
                         <div className="flex-shrink-0">
-                            <ExclamationCircleOutlined />
+                            <IconInfo />
                         </div>
                         <div className="ml-3">
                             <div className="text-sm">
@@ -55,7 +55,7 @@ export function AdjustedLineItems(props: AdjustedLineItemsProps): React.ReactEle
                 <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded-md p-4">
                     <div className="flex">
                         <div className="flex-shrink-0">
-                            <ExclamationCircleOutlined />
+                            <IconInfo />
                         </div>
                         <div className="ml-3">
                             <div className="mb-1 text-sm font-medium">

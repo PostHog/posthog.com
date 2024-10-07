@@ -48,7 +48,7 @@ export default function Product(props: ProductPageProps): React.ReactElement {
 
     /**
      * The product.variant option from props is a different shape from the
-     * slectedVariant (which comes directly from the Storefront API). We
+     * selectedVariant (which comes directly from the Storefront API). We
      * only want the ID from selectedVariant and will add the corresponding
      * variant in product.variants.
      */
@@ -165,11 +165,9 @@ export const query = graphql`
                 mediaContentType
                 preview {
                     image {
-                        localFile {
-                            childImageSharp {
-                                gatsbyImageData
-                            }
-                        }
+                        width
+                        height
+                        originalSrc
                     }
                 }
             }
@@ -189,11 +187,9 @@ export const query = graphql`
             featuredMedia {
                 preview {
                     image {
-                        localFile {
-                            childImageSharp {
-                                gatsbyImageData
-                            }
-                        }
+                        width
+                        height
+                        originalSrc
                     }
                 }
             }
@@ -215,11 +211,9 @@ export const query = graphql`
                     featuredMedia {
                         preview {
                             image {
-                                localFile {
-                                    childImageSharp {
-                                        gatsbyImageData
-                                    }
-                                }
+                                width
+                                height
+                                originalSrc
                             }
                         }
                     }
@@ -227,11 +221,9 @@ export const query = graphql`
                 media {
                     preview {
                         image {
-                            localFile {
-                                childImageSharp {
-                                    gatsbyImageData
-                                }
-                            }
+                            width
+                            height
+                            originalSrc
                         }
                     }
                 }

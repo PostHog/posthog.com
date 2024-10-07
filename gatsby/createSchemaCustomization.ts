@@ -53,6 +53,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
       seo: FrontmatterSEO
+      hideFromIndex: Boolean
     }
     type TeamData {
       name: String
@@ -127,7 +128,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       tableOfContents: [AshbyJobTableOfContents],
       html: String,
       title: String,
-      slug: String
+      slug: String,
+      locations: [String],
     }
     type AshbyJobPostingFormDefFieldsSectionsFieldsField {
       type: String,
@@ -233,6 +235,28 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       url: String
       localFile: File @link(from: "fields.localFile")
     }
+    type G2Review implements Node {
+      attributes: G2ReviewAttributes
+    }
+    type G2ReviewAttributes {
+      title: String
+      star_rating: Float
+      submitted_at: Date
+      comment_answers: G2ReviewCommentAnswers
+    }
+    type G2ReviewCommentAnswers {
+      love: G2ReviewCommentAnswer
+      hate: G2ReviewCommentAnswer
+      benefits: G2ReviewCommentAnswer
+    }
+    type G2ReviewCommentAnswer {
+      value: String
+    }
+    type CloudinaryImage implements Node {
+      folder: String
+      secure_url: String
+      public_id: String
+    }
   `)
     createTypes([
         schema.buildObjectType({
@@ -279,6 +303,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             }
             type ShopifyImage {
               localFile: File
+              width: Int
+              height: Int
+              originalSrc: String
+
             }
             type ShopifyMediaPreviewImage {
               image: ShopifyImage
@@ -296,6 +324,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             }
             type ShopifyFeaturedImage {
               localFile: File
+              width: Int
+              height: Int
+              originalSrc: String
             }
             type ShopifyProduct implements Node {
               description: String!

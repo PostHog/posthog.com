@@ -154,7 +154,11 @@ function Tooltip({
 
     useEffect(() => {
         function handleClick(e) {
-            if (containerEl?.current && !containerEl?.current.contains(e.target)) {
+            if (
+                containerEl?.current &&
+                !containerEl?.current.contains(e.target) &&
+                !document.querySelector('#portal-tooltip')?.contains(e.target)
+            ) {
                 setOpen(false)
             }
         }
@@ -170,11 +174,10 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${
-                        open
+                    className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${open
                             ? 'border-primary/50 dark:border-primary-dark/50'
                             : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
-                    }`}
+                        }`}
                 >
                     {children}
                 </button>
@@ -182,9 +185,8 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`ml-2 flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
-                        open ? 'bg-border dark:bg-border-dark' : ' hover:scale-[1.05]'
-                    }`}
+                    className={`ml-2 flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${open ? 'bg-border dark:bg-border-dark' : ' hover:scale-[1.05]'
+                        }`}
                 >
                     {children}
                 </button>
@@ -217,16 +219,14 @@ const ActiveBackground = ({ mobile = false }) => {
         <span
             className={`bg-light dark:bg-dark absolute w-full h-[calc(100%+1px)] left-0 inset-0
                 before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
-                after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:right-0 after:bg-accent dark:after:bg-accent-dark ${
-                    mobile
-                        ? 'before:rounded-tr-lg after:rounded-tl-lg top-[-1px] before:border-t after:border-t'
-                        : 'before:rounded-br-lg after:rounded-bl-lg before:border-b after:border-b'
+                after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:right-0 after:bg-accent dark:after:bg-accent-dark ${mobile
+                    ? 'before:rounded-tr-lg after:rounded-tl-lg top-[-1px] before:border-t after:border-t'
+                    : 'before:rounded-br-lg after:rounded-bl-lg before:border-b after:border-b'
                 }`}
         >
             <span
-                className={`absolute ${
-                    mobile ? 'top-0' : 'bottom-0'
-                } left-0 border-b border-bg-light dark:border-bg-dark w-full`}
+                className={`absolute ${mobile ? 'top-0' : 'bottom-0'
+                    } left-0 border-b border-bg-light dark:border-bg-dark w-full`}
             />
         </span>
     )
@@ -277,9 +277,8 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                 <button
                     onDoubleClick={(e) => e.preventDefault()}
                     onClick={() => ref.current?.scrollBy({ left: -75, behavior: 'smooth' })}
-                    className={`absolute top-0 left-0 h-[calc(100%-2px)] flex justify-end items-center w-10 pl-2 bg-gradient-to-l from-transparent to-light via-light dark:via-dark dark:to-dark ${
-                        firstInView ? '-z-10' : 'z-10'
-                    }`}
+                    className={`absolute top-0 left-0 h-[calc(100%-2px)] flex justify-end items-center w-10 pl-2 bg-gradient-to-l from-transparent to-light via-light dark:via-dark dark:to-dark ${firstInView ? '-z-10' : 'z-10'
+                        }`}
                 >
                     <IconChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
                 </button>
@@ -312,30 +311,26 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                                         onClick?.()
                                     }}
                                     to={url}
-                                    className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 ${
-                                        active
+                                    className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 ${active
                                             ? ''
                                             : 'border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
-                                    }`}
+                                        }`}
                                 >
                                     <span className={`w-6 h-6 mr-2 text-${color} dark:text-${colorDark}`}>
                                         <Icon />
                                     </span>
                                     <span
-                                        className={`text-sm whitespace-nowrap ${
-                                            active
+                                        className={`text-sm whitespace-nowrap ${active
                                                 ? 'font-bold opacity-100'
                                                 : 'font-semibold opacity-60 group-hover:opacity-100'
-                                        }`}
+                                            }`}
                                     >
                                         {name}
                                     </span>
                                     <span
-                                        className={`absolute ${
-                                            mobile ? 'top-[-4px]' : '-bottom-2'
-                                        } left-0 w-full border-b-[1.5px] rounded-full transition-colors ${
-                                            active ? `border-${color} dark:border-${colorDark}` : `border-transparent`
-                                        }`}
+                                        className={`absolute ${mobile ? 'top-[-4px]' : '-bottom-2'
+                                            } left-0 w-full border-b-[1.5px] rounded-full transition-colors ${active ? `border-${color} dark:border-${colorDark}` : `border-transparent`
+                                            }`}
                                     />
                                 </Link>
                             </div>
@@ -347,9 +342,8 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                 <button
                     onDoubleClick={(e) => e.preventDefault()}
                     onClick={() => ref.current?.scrollBy({ left: 75, behavior: 'smooth' })}
-                    className={`absolute top-0 right-0 h-[calc(100%-2px)] flex justify-end items-center w-10 pr-2 bg-gradient-to-r from-transparent to-light via-light dark:via-dark dark:to-dark ${
-                        lastInView ? '-z-10' : 'z-10'
-                    }`}
+                    className={`absolute top-0 right-0 h-[calc(100%-2px)] flex justify-end items-center w-10 pr-2 bg-gradient-to-r from-transparent to-light via-light dark:via-dark dark:to-dark ${lastInView ? '-z-10' : 'z-10'
+                        }`}
                 >
                     <IconChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
                 </button>
@@ -378,6 +372,40 @@ const Notifications = () => {
     ) : null
 }
 
+const TheoTooltip = () => {
+    return (
+        <div className="flex max-w-[350px] space-x-3">
+            <img
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/theo_tooltip_22f692044d.png"
+                alt="Theo"
+                className="size-[80px]"
+            />
+            <div>
+                <h4 className="text-base m-0 mb-1">Enable Theo (clutter-free) mode</h4>
+                <p className="text-sm m-0">
+                    <Link
+                        className="text-red dark:text-yellow font-bold cursor-pointer"
+                        to="https://www.x.com/t3dotgg"
+                        externalNoIcon
+                    >
+                        Theo - t3.gg
+                    </Link>{' '}
+                    once{' '}
+                    <Link
+                        className="text-red dark:text-yellow font-bold cursor-pointer"
+                        to="https://youtu.be/zcZZxzkLwOc?si=FD5UJeFvh7uwKYy2&t=883"
+                        externalNoIcon
+                    >
+                        complained
+                    </Link>{' '}
+                    our blog had too many things on it for making screen recordings.
+                </p>
+                <p className="text-sm m-0 mt-1">So here's to you, Theo. Film away.</p>
+            </div>
+        </div>
+    )
+}
+
 export const Main = () => {
     const { user } = useUser()
     const { open } = useSearch()
@@ -390,6 +418,9 @@ export const Main = () => {
         setFullWidthContent,
         enterpriseMode,
         setEnterpriseMode,
+        theoMode,
+        setTheoMode,
+        post,
     } = useLayoutData()
     const { pathname } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)
@@ -424,9 +455,8 @@ export const Main = () => {
             <MediaUploadModal open={mediaModalOpen} setOpen={setMediaModalOpen} />
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
                 <div
-                    className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${
-                        fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
-                    }`}
+                    className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
+                        }`}
                 >
                     <div className="flex-1 flex">
                         <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
@@ -449,11 +479,10 @@ export const Main = () => {
                                 <li className="h-full" key={name}>
                                     <Link
                                         to={url}
-                                        className={`text-[13.5px] font-medium flex h-full items-center relative px-3 py-4 mdlg:p-4 ${
-                                            active
+                                        className={`text-[13.5px] font-medium flex h-full items-center relative px-3 py-4 mdlg:p-4 ${active
                                                 ? 'px-[calc(.75rem_+_10px)] mdlg:px-[calc(1rem_+_10px)] mx-[-10px]'
                                                 : 'opacity-70 hover:opacity-100'
-                                        }`}
+                                            }`}
                                     >
                                         {active && <ActiveBackground />}
                                         <span className="relative">
@@ -581,6 +610,27 @@ export const Main = () => {
                                                 <Toggle checked={fullWidthContent} />
                                             </button>
                                         </li>
+                                        {post && (
+                                            <li className="hidden md:block px-1">
+                                                <HoverTooltip placement="left" content={() => <TheoTooltip />}>
+                                                    <button
+                                                        onClick={() => setTheoMode(!theoMode)}
+                                                        className="group group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark flex justify-between items-center w-full"
+                                                    >
+                                                        <div className="flex items-center relative">
+                                                            <img
+                                                                className="w-[20px] inline-block mr-2 relative group-hover:scale-[1.75] group-hover:-rotate-12 group-hover:-top-0.5"
+                                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/theo_mode_0b96ff74d6.png"
+                                                                alt="Theo mode"
+                                                            />
+                                                            <span>Theo mode</span>
+                                                        </div>
+
+                                                        <Toggle checked={theoMode} />
+                                                    </button>
+                                                </HoverTooltip>
+                                            </li>
+                                        )}
                                         {pathname === '/' && (
                                             <li className="px-1 whitespace-nowrap">
                                                 <button
@@ -639,7 +689,8 @@ export const Main = () => {
                                 <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex relative">
                                     <Avatar
                                         src={getAvatarURL(user?.profile)}
-                                        className="w-9 h-9 inline-block bg-tan rounded-full dark:bg-dark"
+                                        className={`w-9 h-9 inline-block bg-${user.profile.color ?? 'white'
+                                            } rounded-full dark:bg-dark`}
                                     />
                                     <div className="absolute bottom-0 right-0 translate-x-1/2">
                                         <Notifications />
@@ -672,7 +723,7 @@ export const Mobile = () => {
     const { menu, parent, internalMenu, activeInternalMenu, enterpriseMode, setEnterpriseMode } = useLayoutData()
 
     return (
-        <div className="fixed bottom-0 w-full md:hidden z-[9999999] print:hidden">
+        <div className="fixed bottom-0 w-full md:hidden z-[9999998] print:hidden">
             <InternalMenu
                 mobile
                 className="bg-light dark:bg-dark border-t mb-[-1px]"
@@ -688,11 +739,10 @@ export const Mobile = () => {
                         <li className="h-full" key={name}>
                             <Link
                                 to={url}
-                                className={`text-[12.5px] font-medium relative px-4 py-4 flex flex-col space-y-1 items-center ${
-                                    active
+                                className={`text-[12.5px] font-medium relative px-4 py-4 flex flex-col space-y-1 items-center ${active
                                         ? 'bg-light dark:bg-dark font-bold px-[calc(1rem_+_10px)] mx-[-10px]'
                                         : 'opacity-70 hover:opacity-100'
-                                }`}
+                                    }`}
                             >
                                 {active && <ActiveBackground mobile />}
                                 <span className={`w-5 h-5 inline-block relative !m-0`}>

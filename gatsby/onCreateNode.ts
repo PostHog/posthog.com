@@ -67,9 +67,7 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
         const { resources, next_cursor } = await fetch(
             `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${
                 process.env.GATSBY_CLOUDINARY_CLOUD_NAME
-            }/resources/image?prefix=posthog.com&type=upload&max_results=500${
-                nextCursor ? `&next_cursor=${nextCursor}` : ``
-            }`
+            }/resources/image?type=upload&max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`
         )
             .then((res) => res.json())
             .catch((e) => console.error(e))
@@ -220,6 +218,33 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 }
             } catch (error) {
                 console.error(`Error fetching plugin.json from ${owner}/${name}: ${error}`)
+            }
+        }
+
+        if (/^\/docs\/(apps|cdp)/.test(slug) && node?.frontmatter?.templateId) {
+            const templateId = node.frontmatter.templateId
+
+            try {
+                const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates/`)
+
+                if (res.status !== 200) {
+                    throw `Got status code ${res.status}`
+                }
+
+                const body = await res.json()
+                const config = body.results.find(
+                    (template: { id: string }) => template?.id === templateId
+                ).inputs_schema
+
+                if (config) {
+                    createNodeField({
+                        node,
+                        name: `templateConfig`,
+                        value: config,
+                    })
+                }
+            } catch (error) {
+                console.error(`Error fetching input_schema for ${templateId}: ${error}`)
             }
         }
     }

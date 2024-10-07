@@ -77,6 +77,7 @@ Customization enables you to change the look, feel, and timing of your popover s
 - The visibility of the PostHog branding.
 - Whether to shuffle the order of the choices and questions.
 - The delay (in seconds) before the survey appears on the page.
+- Whether the confirmation message auto disappears after 5 seconds.
 
 <ProductScreenshot
     imageLight={delaySurveyLight} 
@@ -99,7 +100,7 @@ You can display your survey to specific users based on:
 
 - **Wait period**: Hide surveys from users who have seen a survey in the last X days. Note that a user who completes a survey are never shown the same survey again, even if no wait period is set.
 
-- **User and group properties:** If you are capturing [person profiles](/docs/data/persons), you can display a survey to users who have specific [user](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option.
+- **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option.
 
 <ProductScreenshot
     imageLight={displayConditionsLight} 

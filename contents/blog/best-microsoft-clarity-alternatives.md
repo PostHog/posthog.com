@@ -147,7 +147,7 @@ Reviews on G2.com suggest companies use LogRocket because it:
 
 ### What is FullStory?
 
-[FullStory](/blog/best-fullstory-alternatives) describes itself as Digital Experience Intelligence, which is code for session replay and mobile app analytics, with a side of product analytics. Like LogRocket and PostHog, it supports event autocapture, so you don't have to manually code every event you want to capture.
+[FullStory](/blog/best-fullstory-alternatives) describes itself as Digital Experience Intelligence, which is code for session replay and [mobile app analytics](/blog/best-mobile-app-analytics-tools), with a side of product analytics. Like LogRocket and PostHog, it supports event autocapture, so you don't have to manually code every event you want to capture.
 
 According to data from [BuiltWith](https://trends.builtwith.com/analytics/FullStory), as of February 2024, 8,141 of the top 1 million websites in the world deploy FullStory. This makes it less popular than Clarity (45,820), but more popular than PostHog (5,169) and Mouseflow (5,555). Customers tend to be product managers and support teams at larger e-commerce websites and B2C enterprises.
 

@@ -101,9 +101,31 @@ You can configure the `FeatureFlagRequestTimeout` parameter when initializing yo
  client, _ := posthog.NewWithConfig(
    os.Getenv("<ph_project_api_key>"),
    posthog.Config{
-      PersonalApiKey:            "your personal API key", // Required for feature flags
+      PersonalApiKey:            "your personal API key", // Optional, but much more performant.  If this token is not supplied, then fetching feature flag values will be slower.
       Endpoint:                  "<ph_client_api_host>",
       FeatureFlagRequestTimeout: 3 // Time in seconds. Default is 3.
    },
 )
 ```
+
+### Error handling
+
+When using the PostHog SDK, it's important to handle potential errors that may occur during feature flag operations. Here's an example of how to wrap PostHog SDK methods in an error handler:
+
+```go
+func handleFeatureFlag(client *posthog.Client, flagKey string, distinctId string) {
+    flag, err := client.GetFeatureFlag(posthog.FeatureFlagPayload{
+        Key:        flagKey,
+        DistinctId: distinctId,
+    })
+    if err != nil {
+        // Handle the error appropriately
+        log.Printf("Error fetching feature flag: %v", err)
+        return
+    }
+
+    // Use the flag value as needed
+    fmt.Printf("Feature flag '%s' for user '%s': %s\n", flagKey, distinctId, flag)
+}
+```
+

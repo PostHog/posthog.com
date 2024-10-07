@@ -41,7 +41,7 @@ We have two repos to centralize and document private internal communication. The
 ### Company Internal
 Repository can be found in https://github.com/PostHog/company-internal
 
-Documents any company-wide information that can't be share publicly within People, Ops, Legal, Finance or Strategy.
+Documents any company-wide information that can't be shared publicly within People, Ops, Legal, Finance or Strategy.
 
 **Examples of information that should go here:**
 - ✅ Hiring plans and discussions _before_ we post a job ad
@@ -195,7 +195,7 @@ Here are the steps for an RFC:
 2. They create an RFC as a pull request (normally into PostHog/posthog or PostHog/posthog.com unless in the rare case it's confidential where we use PostHog/product-internal) with the title `RFC: ...`. The RFC should include:
    1. The decision to be made
    2. Who will make the decision
-      - By default this should be the person who will own the project and do the work. In the rare case that it's a non-reversible decision it might be more appropriate have the team lead be the decision maker.
+      - By default this should be the person who will own the project and do the work. In the rare case that it's a non-reversible decision it might be more appropriate to have the team lead be the decision maker.
    3. When the decision will be made by (normally less than 1 week). You don't need to wait for this date if you've already received input from the key people you need.
    4. The specific people that you want feedback from (as GitHub assignees)
       - It can be useful to say which people are required vs which are welcome but optional so others know if they need to respond
@@ -240,7 +240,7 @@ An RFC is likely to be unhelpful as a first step in other circumstances. Specifi
 
 ## Internal meetings
 
-PostHog uses [Google Meet](https://meet.google.com/) for video communications.
+PostHog uses [Google Meet](https://meet.google.com/) for video communications. For large meetings, use `CMD + minus key` to zoom out and see everyone - you'll usually need to do this in All Hands. 
 
 Use video calls if you find yourself going back and forth in an issue/via email or over chat. Sometimes it is still more valuable to have a 40+ message conversation via chat as it improves transparency, is easy to refer back to, and is friendlier to newcomers getting up to speed.
 

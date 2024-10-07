@@ -39,37 +39,6 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 <WebSendEvents />
 
-## Person profiles and properties
-
-For backward compatibility, PostHog captures events with [person profiles](/docs/data/persons) by default. To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
-
-```js-web
-posthog.capture(
-  'event_name',
-  {
-    $set: { name: 'Max Hedgehog'  },
-    $set_once: { initial_url: '/blog' },
-  }
-)
-```
-
-Typically, person properties are set when an event occurs like `user updated email` but there may be occasions where you want to set person properties as its own event. 
-
-```javascript
-posthog.setPersonProperties(
-    { name: "Max Hedgehog" }, // Thes properties are like the `$set` from above
-    { initial_url: "/blog" }  // Thes properties are like the `$set_once` from above
-)
-```
-
-This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
-
-To control whether you capture person profiles, update the `person_profiles` config option:
-
-import PersonProfilesConfig from './_snippets/person-profiles-config.mdx'
-
-<PersonProfilesConfig />
-
 ## Identifying users
 
 > We strongly recommend reading our docs on [identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
@@ -80,7 +49,13 @@ import JSIdentify from './\_snippets/identify.mdx'
 
 ## Alias
 
-Sometimes, you may want to assign multiple distinct IDs to a single user. This is helpful in scenarios where your primary distinct ID may be inaccessible. For example, if a distinct ID which is typically used on the frontend is not available in certain parts of your backend code. In this case, you can use `alias` to assign another distinct ID to the same user.
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend.
+
+In this case, you can use `alias` to assign another distinct ID to the same user.
+
+```js-web
+posthog.alias('alias_id', 'distinct_id');
+```
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
@@ -101,6 +76,49 @@ If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
 ```js-web
 posthog.reset(true)
 ```
+
+## Anonymous vs identfied events
+
+import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
+
+<IdentifiedVsAnonymousIntro />
+
+### How to capture anonymous events
+
+import HowToCaptureAnonymousEventsWeb from '../../product-analytics/_snippets/how-to-capture-anonymous-events-web.mdx'
+
+<HowToCaptureAnonymousEventsWeb />
+
+### How to capture identified events
+
+import HowToCaptureIdentifiedEventsWeb from '../../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
+
+<HowToCaptureIdentifiedEventsWeb />
+
+## Setting person properties
+
+To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+
+```js-web
+posthog.capture(
+  'event_name',
+  {
+    $set: { name: 'Max Hedgehog'  },
+    $set_once: { initial_url: '/blog' },
+  }
+)
+```
+
+Typically, person properties are set when an event occurs like `user updated email` but there may be occasions where you want to set person properties as its own event. 
+
+```js
+posthog.setPersonProperties(
+    { name: "Max Hedgehog" }, // These properties are like the `$set` from above
+    { initial_url: "/blog" }  // These properties are like the `$set_once` from above
+)
+```
+
+This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
 ## Super Properties
 
@@ -145,7 +163,7 @@ This will remove the Super Property and subsequent events will not include it.
 
 PostHog JS offers a function to opt users out based on your cookie settings definition (e.g. preferences set via a cookie banner).
 
-This is also the suggested way to prevent capturing _any data_ from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in you app and call it directly after an admin/team member logs in.
+This is also the suggested way to prevent capturing _any data_ from the admin on the page, as well as from team members of your organization. A simple way to do this is to access the page as the admin (or any other user on your team you wish to stop capturing data on), and call `posthog.opt_out_capturing();` on the developer console. You can also add this logic in your app and call it directly after an admin/team member logs in.
 
 If you still wish to capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
 
@@ -365,7 +383,7 @@ posthog.capture("survey sent", {
 
 To set up [session replay](/docs/session-replay) in your project, all you need to do is install the JavaScript web library and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay).
 
-For [fine-tuning control](/docs/session-replay/how-to-control-which-sessions-you-record) of which sessions you record, you can set the `disable_session_recording` [config option](#config) and use the following methods:
+For [fine-tuning control](/docs/session-replay/how-to-control-which-sessions-you-record) of which sessions you record, you can use [feature flags](/docs/session-replay/how-to-control-which-sessions-you-record#with-feature-flags), [sampling](/docs/session-replay/how-to-control-which-sessions-you-record#sampling), [minimum duration](/docs/session-replay/how-to-control-which-sessions-you-record#minimum-duration), or set the `disable_session_recording` [config option](#config) and use the following methods:
 
 ```js-web
 // Turns session recording on
@@ -376,6 +394,12 @@ posthog.stopSessionRecording()
 
 // Check if session recording is currently running
 posthog.sessionRecordingStarted()
+```
+
+If you are using feature flags or sampling to control which sessions you record, you can override the default behavior (and start a recording regardless) by passing the `linked_flag` or `sampling` overrides. The following would start a recording for all users, even if they don't match the flag or aren't in the sample:
+
+```js-web
+posthog.startSessionRecording({ linked_flag: true, sampling: true })
 ```
 
 To get the playback URL of the current session replay, you can use the following method:
@@ -401,7 +425,7 @@ For PostHog to work optimally, we store small amount of information about the us
 -   Any super properties you have defined.
 -   Some PostHog configuration options (e.g. whether session recording is enabled)
 
-By default, we store all this information in a `cookie`, which means PostHog can identify your users across subdomains. By default, this cookie is set to expire after `365` days and is named with your Project API key e.g. `ph_<project_api_key>_posthog`.
+By default, we store all this information in both a `cookie` and `localStorage`, which means PostHog can identify your users across subdomains. By default, this cookie is set to expire after `365` days and is named with your Project API key e.g. `ph_<project_api_key>_posthog`.
 
 If you want to change how PostHog stores this information, you can do so with the `persistence` configuration option:
 
@@ -456,7 +480,7 @@ Some of the most relevant options are:
 | Attribute                                                                                                                                                                                 | Description                                                                                                                    |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `api_host`<br/><br/>**Type:** String<br/>**Default:** `https://us.i.posthog.com`                                                                                                          | URL of your PostHog instance.                                                                                                  |
-| `ui_host`<br/><br/>**Type:** String<br/>**Default:** undefined                                                                                                                            | If using a [reverse proxy](/docs/advanced/proxy) for `api_host` then this should be the actual PostHog app URL (e.g. https://us.posthog.com) |
+| `ui_host`<br/><br/>**Type:** String<br/>**Default:** undefined                                                                                                                            | If using a [reverse proxy](/docs/advanced/proxy) for `api_host` then this should be the actual PostHog app URL (e.g. https://us.posthog.com). This ensures that links to PostHog point to the correct host. |
 | `autocapture`<br/><br/>**Type:** Boolean or AutocaptureConfig<br/>**Default:** `true`                                                                                                     | Determines if PostHog should [autocapture](#autocapture) events. This setting does not affect capturing pageview events (see `capture_pageview`).  [See below for `AutocaptureConfig`](#autocaptureconfig))          |
 | `bootstrap`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                                                                                                               | An object containing the `distinctID`, `isIdentifiedID`, and `featureFlags` keys, where `distinctID` is a string, and `featureFlags` is an object of key-value pairs |
 | `capture_pageview`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                                                                                                     | Determines if PostHog should automatically capture pageview events.                                                            |
@@ -474,7 +498,7 @@ Some of the most relevant options are:
 | `opt_out_persistence_by_default`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                                                                                                      | Determines if users should be opted out of browser data storage by this PostHog instance by default, requiring additional logic to opt them into capturing by calling `posthog.opt_in_capturing`. |
 | `persistence`<br/><br/>**Type:** `localStorage` or `sessionStorage` or `cookie` or `memory` or `localStorage+cookie`<br/>**Default:** `cookie`                                            | Determines how PostHog stores information about the user. See [persistence](#persistence) for details.                         |
 | `property_denylist`<br/><br/>**Type:** Array<br/>**Default:** `[]`                                                                                                                        | A list of properties that should never be sent with `capture` calls.                                                           |
-| `person_profiles`<br /><br />**Type:** Enum: `always`, `identified_only`<br/>**Default:** `always`                                                                                | Set whether events should have person profiles processed |
+| `person_profiles`<br /><br />**Type:** Enum: `always`, `identified_only`<br/>**Default:** `always`                                                                                | Set whether events should capture identified events and process person profiles |
 | `sanitize_properties`<br/><br/>**Type:** Function<br/>**Default:** `null`                                                                                                                 | A function that allows you to sanitize or modify the properties that get sent. Example: `sanitize_properties: function(properties, event) { if(properties['$ip']) { properties['$ip'] = null } return properties }` |
 | `session_recording`<br/><br/>**Type:** Object<br/>**Default:** [See here.](https://github.com/PostHog/posthog-js/blob/96fa9339b9c553a1c69ec5db9d282f31a65a1c25/src/posthog-core.js#L1032) | Configuration options for recordings. More details [found here](/docs/session-replay/manual)         |
 | `session_idle_timeout_seconds`<br/><br/>**Type:** Integer<br/>**Default:** `1800`                                                                                                         | The maximum amount of time a session can be inactive before it is split into a new session.                                    |

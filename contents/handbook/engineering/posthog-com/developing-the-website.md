@@ -257,7 +257,7 @@ import { ComparisonHeader } from 'components/ComparisonTable/header'
 ```
 <ComparisonTable column1="Company name 1" column2="Company name 2">
   <ComparisonHeader category="Optional header row" />
-  <ComparisonRow column1={true} column2="Text" feature="Feature name" description="Feature descrpition" />
+  <ComparisonRow column1={true} column2="Text" feature="Feature name" description="Feature description" />
 </ComparisonTable>
 ```
 

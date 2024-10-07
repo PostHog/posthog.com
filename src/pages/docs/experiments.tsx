@@ -58,7 +58,7 @@ type ExperimentsProps = {
 export const Intro = ({ image = true }) => (
     <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded flex flex-col items-center md:flex-row md:gap-4 pt-2 mb-8">
         <div className="p-4 md:p-8">
-            <h1 className="text-4xl mt-0 mb-2">A/B testing</h1>
+            <h1 className="text-4xl mt-0 mb-2">Experiments</h1>
             <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
                 Test changes in production with an experimentation suite that makes it easy to get the results you want.
             </h3>
@@ -139,7 +139,7 @@ export const Content = ({ quickLinks = false }) => {
                                 src="../../components/Home/Slider/images/experiment-hog.png"
                             />
                         }
-                        url="/tutorials/experiments"
+                        url="/docs/experiments/running-experiments-without-feature-flags"
                     />
                 </ul>
                 <CallToAction
@@ -160,14 +160,14 @@ export const Content = ({ quickLinks = false }) => {
 const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
     return (
         <Layout>
-            <SEO title="A/B testing - Docs - PostHog" />
+            <SEO title="Experiments - Docs - PostHog" />
 
             <PostLayout title={'Experiments'} hideSurvey hideSidebar>
                 <Intro />
                 <Content />
 
                 <div className="">
-                    <CallToAction to="/docs/experiments/manual" width="full">
+                    <CallToAction to="/docs/experiments/installation" width="full">
                         Visit the manual
                     </CallToAction>
                 </div>

@@ -47,7 +47,7 @@ const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
 }
 
 const Title = ({ title, className = '' }: { title: string; className?: string }) => {
-    return <h5 className={`m-0 text-sm lg:text-[15px] opacity-70 font-normal ${className}`}>{title}</h5>
+    return <h5 className={`m-0 text-sm opacity-70 font-normal ${className}`}>{title}</h5>
 }
 
 export const InclusionOnlyRow = ({ plans }) => (
@@ -125,7 +125,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                             className={
                                 showSubtotal
                                     ? `col-span-4`
-                                    : `flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'} justify-end`
+                                    : `flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'}`
                             }
                         >
                             <Title
@@ -272,11 +272,17 @@ export const CTA = ({
     ctaText,
     ctaLink,
     intent = '',
+    size = 'md',
+    width = 'auto',
+    className = '',
 }: {
     type?: 'primary' | 'secondary'
     ctaText?: string
     ctaLink?: string
     intent?: string
+    size?: string
+    width?: string
+    className?: string
 }): JSX.Element => {
     const posthog = usePostHog()
     return (
@@ -287,8 +293,9 @@ export const CTA = ({
                 intent,
             }}
             type={type}
-            size="md"
-            className="shadow-md !w-auto"
+            size={size}
+            width={width}
+            className={`shadow-md !w-auto ${className}`}
             to={
                 ctaLink
                     ? ctaLink

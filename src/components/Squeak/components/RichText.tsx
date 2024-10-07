@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState, useCallback } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState, useCallback, useContext, useMemo } from 'react'
 import MarkdownLogo from './MarkdownLogo'
 import { useDropzone } from 'react-dropzone'
 import Spinner from 'components/Spinner'
@@ -7,6 +7,12 @@ import slugify from 'slugify'
 import { Edit } from 'components/Icons'
 import Tooltip from 'components/Tooltip'
 import { isURL } from 'lib/utils'
+import { CurrentQuestionContext } from './Question'
+import Avatar from './Avatar'
+import { AnimatePresence, motion } from 'framer-motion'
+import { IconFeatures, IconX } from '@posthog/icons'
+import { graphql, useStaticQuery } from 'gatsby'
+import groupBy from 'lodash.groupby'
 
 const buttons = [
     {
@@ -78,6 +84,142 @@ const buttons = [
     },
 ]
 
+const MentionProfile = ({ profile, onSelect, selectionStart, index, focused }) => {
+    const { firstName, lastName, avatar, gravatarURL } = profile.attributes
+    const name = [firstName, lastName].filter(Boolean).join(' ')
+    const isAI = profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
+
+    return (
+        <li className="border-b border-border dark:border-dark p-1">
+            <button
+                onClick={() => onSelect?.(profile, selectionStart)}
+                type="button"
+                className={`click text-left flex space-x-2 font-bold px-3 py-1 items-center rounded-sm hover:bg-accent hover:dark:bg-accent-dark w-full outline-none ${
+                    focused === index ? 'bg-accent dark:bg-accent-dark' : ''
+                }`}
+            >
+                <div className="size-6 overflow-hidden rounded-full">
+                    <Avatar className="w-full" image={avatar?.data?.attributes?.url || gravatarURL} />
+                </div>
+                <div>
+                    {!isAI && <p className="m-0 text-xs font-semibold opacity-50 leading-none">{profile.id}</p>}
+                    <div className="flex space-x-1 items-center">
+                        <p className="m-0 leading-none text-sm line-clamp-1">{name}</p>
+                        {isAI && <IconFeatures className="size-4 text-primary dark:text-primary-dark opacity-50" />}
+                    </div>
+                </div>
+            </button>
+        </li>
+    )
+}
+
+const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
+    const { staffProfiles } = useStaticQuery(graphql`
+        {
+            staffProfiles: allSqueakProfile(sort: { fields: firstName }) {
+                nodes {
+                    avatar {
+                        url
+                    }
+                    firstName
+                    lastName
+                    squeakId
+                }
+            }
+        }
+    `)
+    const currentQuestion = useContext(CurrentQuestionContext) ?? {}
+    const replies = currentQuestion?.question?.replies
+    const selectionStart = useMemo(() => other.selectionStart, [])
+    const search = body.substring(selectionStart).split(' ')[0].replace('@', '')
+    const mentionProfiles = [
+        { attributes: { profile: { data: currentQuestion?.question?.profile?.data } } },
+        ...replies?.data,
+        ...staffProfiles.nodes
+            .filter((node) => node.squeakId === Number(process.env.GATSBY_AI_PROFILE_ID))
+            .map((node) => ({
+                attributes: {
+                    profile: {
+                        data: {
+                            id: node.squeakId,
+                            attributes: { ...node, avatar: { data: { attributes: { url: node.avatar?.url } } } },
+                        },
+                    },
+                },
+            })),
+    ]
+        .map((reply) => reply?.attributes?.profile?.data)
+        .filter((profile, index, self) => {
+            const { firstName, lastName } = profile.attributes
+            const name = [firstName, lastName].filter(Boolean).join(' ')
+            return (
+                profile &&
+                self.findIndex((p) => p?.id === profile.id) === index &&
+                name.toLowerCase().includes(search.toLowerCase())
+            )
+        })
+    const grouped = groupBy(mentionProfiles, (profile) =>
+        staffProfiles.nodes.some((node) => node.squeakId === profile.id) ? 'Staff' : 'In this thread'
+    )
+    const listRef = useRef<HTMLUListElement>(null)
+    const [focused, setFocused] = useState(0)
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault()
+                setFocused((prev) => (prev + 1) % mentionProfiles.length)
+            }
+            if (e.key === 'ArrowUp') {
+                e.preventDefault()
+                setFocused((prev) => (prev - 1 + mentionProfiles.length) % mentionProfiles.length)
+            }
+            if (e.key === 'Tab' || e.key === 'Enter') {
+                e.preventDefault()
+                onSelect?.(mentionProfiles[focused], selectionStart)
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [focused, search])
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, translateX: '100%' }}
+            animate={{ opacity: 1, translateX: 0, transition: { type: 'tween', duration: 0.1 } }}
+            exit={{ opacity: 0, translateX: '100%' }}
+            className="w-[200px] h-full absolute right-0 top-0 z-50 pt-2.5 pr-2.5"
+        >
+            <button
+                type="button"
+                className="p-1 rounded-full bg-white dark:bg-dark border border-border dark:border-dark absolute top-0.5 right-0.5 z-20"
+                onClick={onClose}
+            >
+                <IconX className="w-3" />
+            </button>
+            <ul
+                ref={listRef}
+                className="m-0 p-0 list-none border border-border dark:border-dark bg-light dark:bg-dark h-full rounded-md overflow-auto"
+            >
+                {mentionProfiles.map((profile, index) => (
+                    <MentionProfile
+                        focused={focused}
+                        index={index}
+                        onSelect={onSelect}
+                        profile={profile}
+                        selectionStart={selectionStart}
+                        key={profile.id}
+                    />
+                ))}
+            </ul>
+        </motion.div>
+    )
+}
+
 export default function RichText({
     initialValue = '',
     setFieldValue,
@@ -86,12 +228,16 @@ export default function RichText({
     onSubmit,
     maxLength = 2000,
     preview = true,
+    label = '',
+    mentions = false,
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
     const [cursor, setCursor] = useState<number | null>(null)
     const [imageLoading, setImageLoading] = useState(false)
     const [showPreview, setShowPreview] = useState(false)
+    const [showMentionProfiles, setShowMentionProfiles] = useState(false)
+    const mentionProfilesRef = useRef<HTMLDivElement>(null)
 
     const onDrop = useCallback(
         async (acceptedFiles) => {
@@ -118,7 +264,7 @@ export default function RichText({
         accept: { 'image/png': ['.png'], 'image/jpeg': ['.jpg', '.jpeg'], 'image/gif': ['.gif'] },
     })
 
-    const replaceSelection = (selectionStart?: number, selectionEnd?: number, text = '') => {
+    const replaceSelection = (selectionStart?: number, selectionEnd?: number, text = '', value: string) => {
         return value.substring(0, selectionStart) + text + value.substring(selectionEnd, value.length)
     }
 
@@ -138,7 +284,7 @@ export default function RichText({
 
         const { selectionStart, selectionEnd, selectedText } = getTextSelection()
         textarea?.current?.focus()
-        setValue(replaceSelection(selectionStart, selectionEnd, replaceWith(selectedText)))
+        setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, replaceWith(selectedText), prevValue))
         setCursor(cursor)
     }
 
@@ -150,7 +296,9 @@ export default function RichText({
         const { selectionStart, selectionEnd, selectedText } = getTextSelection()
         if (selectedText) {
             textarea?.current?.focus()
-            setValue(replaceSelection(selectionStart, selectionEnd, `[${selectedText}](${url})`))
+            setValue((prevValue) =>
+                replaceSelection(selectionStart, selectionEnd, `[${selectedText}](${url})`, prevValue)
+            )
         }
     }
 
@@ -187,164 +335,225 @@ export default function RichText({
         if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && onSubmit) {
             onSubmit()
         }
+        if (e.key === '@' && e.shiftKey) {
+            setShowMentionProfiles(true)
+        }
+    }
+
+    const handleContainerClick = (e) => {
+        if (!e.target.contains(mentionProfilesRef.current)) {
+            setShowMentionProfiles(false)
+        }
+    }
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' || e.key === ' ') {
+                setShowMentionProfiles(false)
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [])
+
+    const handleProfileSelect = (profile, selectionStart) => {
+        const { selectionEnd } = getTextSelection()
+        const mention =
+            profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
+                ? `@max `
+                : `@${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
+        setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, mention, prevValue))
+        setShowMentionProfiles(false)
+        textarea.current?.focus()
     }
 
     return (
         <div className="relative" {...getRootProps()}>
-            <input className="hidden" {...getInputProps()} />
-            {showPreview ? (
-                <div className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0 overflow-auto">
-                    <Markdown
-                        transformImageUri={(fakeImagePath) => {
-                            const objectURL = values.images.find(
-                                (image) => image.fakeImagePath === fakeImagePath
-                            )?.objectURL
-                            return objectURL || fakeImagePath
-                        }}
-                    >
-                        {value}
-                    </Markdown>
-                </div>
-            ) : (
-                <div className="relative">
-                    <textarea
-                        onPaste={handlePaste}
-                        disabled={imageLoading}
-                        autoFocus={autoFocus}
-                        className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 pb-8 resize-none w-full text-black outline-none focus:ring-0"
-                        onBlur={(e) => e.preventDefault()}
-                        name="body"
-                        value={value}
-                        onChange={handleChange}
-                        ref={textarea}
-                        required
-                        id="body"
-                        placeholder={'Type more details...'}
-                        maxLength={maxLength}
-                        onKeyDown={handleKeyDown}
-                    />
-                    {isDragActive && (
-                        <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-gray-accent-light after:dark:border-gray-accent-dark after:rounded-md">
-                            <p className="m-0 font-semibold">Drop image here</p>
-                        </div>
-                    )}
-                    <span className="bg-white dark:bg-accent-dark absolute right-4 bottom-2 px-1 rounded-sm">
-                        <span className="text-xs opacity-70">
-                            {values.body.length} / {maxLength}
+            <div onClick={handleContainerClick}>
+                <input className="hidden" {...getInputProps()} />
+                {showPreview ? (
+                    <div className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] py-3 px-4 resize-none w-full text-black outline-none focus:ring-0 overflow-auto">
+                        <Markdown
+                            transformImageUri={(fakeImagePath) => {
+                                const objectURL = values.images.find(
+                                    (image) => image.fakeImagePath === fakeImagePath
+                                )?.objectURL
+                                return objectURL || fakeImagePath
+                            }}
+                        >
+                            {value}
+                        </Markdown>
+                    </div>
+                ) : (
+                    <div className="relative">
+                        {mentions && (
+                            <AnimatePresence>
+                                {showMentionProfiles && (
+                                    <div ref={mentionProfilesRef} onClick={(e) => e.stopPropagation()}>
+                                        <MentionProfiles
+                                            body={value}
+                                            selectionStart={textarea.current?.selectionStart}
+                                            onClose={() => {
+                                                setShowMentionProfiles(false)
+                                                textarea.current?.focus()
+                                            }}
+                                            onSelect={handleProfileSelect}
+                                        />
+                                    </div>
+                                )}
+                            </AnimatePresence>
+                        )}
+                        <label htmlFor="body" className="py-3 px-4 pb-8 block">
+                            {label && !!value && <span className="text-sm opacity-60 block">{label}</span>}
+                            <textarea
+                                onPaste={handlePaste}
+                                disabled={imageLoading}
+                                autoFocus={autoFocus}
+                                className="bg-white dark:bg-accent-dark dark:text-primary-dark border-none text-base h-[200px] resize-none w-full text-black outline-none focus:ring-0 p-0"
+                                onBlur={(e) => e.preventDefault()}
+                                name="body"
+                                value={value}
+                                onChange={handleChange}
+                                ref={textarea}
+                                required
+                                id="body"
+                                placeholder={'Type more details...'}
+                                maxLength={maxLength}
+                                onKeyDown={handleKeyDown}
+                            />
+                        </label>
+                        {isDragActive && (
+                            <div className="bg-white dark:bg-accent-dark z-10 rounded-md flex items-center justify-center absolute w-full h-full inset-0 p-2 after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-[calc(100%-2rem)] after:h-[calc(100%-2rem)] after:border after:border-dashed after:border-gray-accent-light after:dark:border-gray-accent-dark after:rounded-md">
+                                <p className="m-0 font-semibold">Drop image here</p>
+                            </div>
+                        )}
+                        <span className="bg-white dark:bg-accent-dark absolute right-4 bottom-2 px-1 rounded-sm">
+                            <span className="text-xs opacity-70">
+                                {values.body.length} / {maxLength}
+                            </span>
                         </span>
-                    </span>
-                </div>
-            )}
-            <div className="flex items-center justify-between py-1">
-                <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full !mb-0">
-                    {buttons.map((button, index) => {
-                        return (
-                            <li key={index}>
-                                <Tooltip content={button.tooltipContent}>
-                                    <button
-                                        className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative"
-                                        onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
-                                    >
-                                        {button.icon}
-                                    </button>
-                                </Tooltip>
-                            </li>
-                        )
-                    })}
-                    <li>
-                        <Tooltip content="Image">
-                            <button
-                                className="flex items-center bg-none border-none rounded-sm text-primary/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] relative hover:border hover:border-light dark:hover:border-dark hover:bg-light dark:hover:bg-dark hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15]"
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    open()
-                                }}
-                            >
-                                <svg className="w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 14">
-                                    <path
-                                        d="M12 5.714a1.715 1.715 0 1 0 0-3.43 1.715 1.715 0 0 0 0 3.43Z"
-                                        fill="currentColor"
-                                    />
-                                    <path
-                                        d="M15 0H1C.443 0 0 .454 0 1.01v11.694c0 .557.443 1.01 1 1.01h14c.557 0 1-.453 1-1.01V1.01C16 .454 15.557 0 15 0Zm-3.682 7.06a.614.614 0 0 0-.457-.22c-.183 0-.311.085-.458.203l-.667.564c-.14.1-.25.168-.411.168a.59.59 0 0 1-.393-.146 4.668 4.668 0 0 1-.154-.147L6.857 5.404a.788.788 0 0 0-.596-.268c-.24 0-.461.118-.6.278l-4.518 5.45V1.561a.47.47 0 0 1 .468-.418h12.775c.246 0 .446.182.46.428l.011 9.3-3.54-3.81Z"
-                                        fill="currentColor"
-                                    />
-                                </svg>
-                            </button>
-                        </Tooltip>
-                    </li>
-                    {preview && (
-                        <>
-                            <li className="!ml-auto">
-                                <Tooltip content="Edit">
-                                    <button
-                                        onClick={() => setShowPreview(false)}
-                                        type="button"
-                                        className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
-                                            showPreview
-                                                ? ''
-                                                : '!border border-light dark:border-dark bg-light dark:bg-dark'
-                                        }`}
-                                    >
-                                        <Edit />
-                                    </button>
-                                </Tooltip>
-                            </li>
-                            <li>
-                                <Tooltip content="Preview">
-                                    <button
-                                        onClick={() => setShowPreview(true)}
-                                        type="button"
-                                        className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
-                                            showPreview
-                                                ? 'border border-light dark:border-dark bg-light dark:bg-dark'
-                                                : ''
-                                        }`}
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="w-5 h-5"
+                    </div>
+                )}
+                <div className="flex items-center justify-between py-1">
+                    <ul className="flex items-center list-none p-0 mx-2 space-x-1 w-full !mb-0">
+                        {buttons.map((button, index) => {
+                            return (
+                                <li key={index}>
+                                    <Tooltip content={button.tooltipContent} placement="top">
+                                        <button
+                                            className="flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative"
+                                            onClick={(e) => handleClick(e, button.replaceWith, button.cursor)}
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
-                                            />
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                            />
-                                        </svg>
-                                    </button>
-                                </Tooltip>
-                            </li>
-                        </>
-                    )}
-                </ul>
+                                            {button.icon}
+                                        </button>
+                                    </Tooltip>
+                                </li>
+                            )
+                        })}
+                        <li>
+                            <Tooltip content="Image" placement="top">
+                                <button
+                                    className="flex items-center bg-none border-none rounded-sm text-primary/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] relative hover:border hover:border-light dark:hover:border-dark hover:bg-light dark:hover:bg-dark hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15]"
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        open()
+                                    }}
+                                >
+                                    <svg
+                                        className="w-4"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 16 14"
+                                    >
+                                        <path
+                                            d="M12 5.714a1.715 1.715 0 1 0 0-3.43 1.715 1.715 0 0 0 0 3.43Z"
+                                            fill="currentColor"
+                                        />
+                                        <path
+                                            d="M15 0H1C.443 0 0 .454 0 1.01v11.694c0 .557.443 1.01 1 1.01h14c.557 0 1-.453 1-1.01V1.01C16 .454 15.557 0 15 0Zm-3.682 7.06a.614.614 0 0 0-.457-.22c-.183 0-.311.085-.458.203l-.667.564c-.14.1-.25.168-.411.168a.59.59 0 0 1-.393-.146 4.668 4.668 0 0 1-.154-.147L6.857 5.404a.788.788 0 0 0-.596-.268c-.24 0-.461.118-.6.278l-4.518 5.45V1.561a.47.47 0 0 1 .468-.418h12.775c.246 0 .446.182.46.428l.011 9.3-3.54-3.81Z"
+                                            fill="currentColor"
+                                        />
+                                    </svg>
+                                </button>
+                            </Tooltip>
+                        </li>
+                        {preview && (
+                            <>
+                                <li className="!ml-auto">
+                                    <Tooltip content="Edit">
+                                        <button
+                                            onClick={() => setShowPreview(false)}
+                                            type="button"
+                                            className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 justify-center w-[32px] h-[32px] hover:bg-black/[.15] dark:hover:bg-primary-dark/[.15] relative ${
+                                                showPreview
+                                                    ? ''
+                                                    : '!border border-light dark:border-dark bg-light dark:bg-dark'
+                                            }`}
+                                        >
+                                            <Edit />
+                                        </button>
+                                    </Tooltip>
+                                </li>
+                                <li>
+                                    <Tooltip content="Preview">
+                                        <button
+                                            onClick={() => setShowPreview(true)}
+                                            type="button"
+                                            className={`flex items-center bg-none border-none rounded-sm text-black/50 dark:text-primary-dark/50 justify-center w-[32px] h-[32px] hover:bg-black/[.15] hover:text-black/75 dark:hover:bg-primary-dark/[.15] dark:hover:text-primary-dark/75 relative ${
+                                                showPreview
+                                                    ? 'border border-light dark:border-dark bg-light dark:bg-dark'
+                                                    : ''
+                                            }`}
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1.5}
+                                                stroke="currentColor"
+                                                className="w-5 h-5"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                                                />
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </Tooltip>
+                                </li>
+                            </>
+                        )}
+                    </ul>
+                </div>
+                {imageLoading && (
+                    <div className="w-full h-full inset-0 bg-white/50 dark:bg-black/50 absolute flex justify-center items-center">
+                        <Spinner className="w-10 h-10" />
+                    </div>
+                )}
+                {!value && (
+                    <div className="absolute top-4 right-4">
+                        <a
+                            className="!text-primary/30 hover:!text-primary/50 dark:!text-primary-dark/30 dark:hover:!text-primary-dark/50"
+                            href="https://www.markdownguide.org/cheat-sheet/"
+                            target="_blank"
+                            rel="noreferrer"
+                            title="Supports Markdown syntax"
+                        >
+                            <MarkdownLogo />
+                        </a>
+                    </div>
+                )}
             </div>
-            {imageLoading && (
-                <div className="w-full h-full inset-0 bg-white/50 dark:bg-black/50 absolute flex justify-center items-center">
-                    <Spinner className="w-10 h-10" />
-                </div>
-            )}
-            {!value && (
-                <div className="absolute top-4 right-4">
-                    <a
-                        className="!text-primary/30 hover:!text-primary/50 dark:!text-primary-dark/30 dark:hover:!text-primary-dark/50"
-                        href="https://www.markdownguide.org/cheat-sheet/"
-                        target="_blank"
-                        rel="noreferrer"
-                        title="Supports Markdown syntax"
-                    >
-                        <MarkdownLogo />
-                    </a>
-                </div>
-            )}
         </div>
     )
 }

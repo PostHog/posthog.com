@@ -12,6 +12,7 @@ import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { getShopifyImage } from 'gatsby-source-shopify'
 
 type ProductPanelProps = {
     className?: string
@@ -35,7 +36,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
     /**
      * The product.variant option from props is a different shape from the
-     * slectedVariant (which comes directly from the Storefront API). We
+     * selectedVariant (which comes directly from the Storefront API). We
      * only want the ID from selectedVariant and will add the corresponding
      * variant in product.variants.
      */
@@ -137,7 +138,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                             return (
                                 <li key={handle}>
                                     <a href={`?product=${handle}`}>
-                                        <GatsbyImage alt={handle} image={getImage(featuredImage?.localFile)} />
+                                        <GatsbyImage alt={handle} image={getShopifyImage({ image: featuredImage })} />
                                     </a>
                                 </li>
                             )

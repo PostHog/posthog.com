@@ -18,8 +18,8 @@ import landmark from './images/landmark.svg'
 import landmarkDark from './images/landmark_dark.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
-import HubSpotForm from 'components/HubSpotForm'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import SalesforceForm from 'components/SalesforceForm'
 
 const features = [
     'Volume discounts',
@@ -37,7 +37,12 @@ export default function ContactSales({ location }) {
     const darkMode = websiteTheme === 'dark'
     return (
         <Layout>
-            <SEO title="Contact Sales - PostHog" />
+            <SEO
+                title="Talk to a human - PostHog"
+                description="PostHog is self-serve, but you can talk to a real person if you need to!"
+                image={`/images/og/talk-to-a-human.png`}
+            />
+
             <div className="lg:py-12 py-4 px-5">
                 <section className="mb-12">
                     <div className="text-center">
@@ -93,10 +98,182 @@ export default function ContactSales({ location }) {
                             <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the
                             form at a breakneck pace!
                         </p>
-                        <HubSpotForm
-                            autoValidate
-                            formID="32d0b55f-9de6-4c40-a6ec-ddfd2c39578b"
-                            formOptions={{ cols: 1 }}
+                        <SalesforceForm
+                            type="lead"
+                            form={{
+                                fields: [
+                                    {
+                                        label: 'Email',
+                                        type: 'string',
+                                        name: 'email',
+                                        required: true,
+                                        fieldType: 'email',
+                                    },
+                                    {
+                                        label: 'Company',
+                                        type: 'string',
+                                        name: 'company',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Role',
+                                        name: 'role',
+                                        type: 'enumeration',
+                                        options: [
+                                            {
+                                                label: 'Engineering',
+                                                value: 'Engineering',
+                                            },
+                                            {
+                                                label: 'Founder',
+                                                value: 'Founder',
+                                            },
+                                            {
+                                                label: 'Leadership',
+                                                value: 'Leadership',
+                                            },
+                                            {
+                                                label: 'Marketing',
+                                                value: 'Marketing',
+                                            },
+                                            {
+                                                label: 'Other',
+                                                value: 'Other',
+                                            },
+                                            {
+                                                label: 'Product',
+                                                value: 'Product',
+                                            },
+                                            {
+                                                label: 'Sales',
+                                                value: 'Sales',
+                                            },
+                                        ],
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Which products are you interested in?',
+                                        name: 'products',
+                                        type: 'enumeration',
+                                        fieldType: 'checkbox',
+                                        cols: 1,
+                                        options: [
+                                            {
+                                                label: 'Product Analytics',
+                                                value: 'Product Analytics',
+                                            },
+                                            {
+                                                label: 'Experiments (Feature Flags)',
+                                                value: 'Experiments (Feature Flags)',
+                                            },
+                                            {
+                                                label: 'Session Replay',
+                                                value: 'Session Replay',
+                                            },
+                                            {
+                                                label: 'Other (CDP, Data Warehouse, Surveys)',
+                                                value: 'Other (CDP, Data Warehouse, Surveys)',
+                                            },
+                                        ],
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'I want to implement tracking on:',
+                                        name: 'tracking_on',
+                                        type: 'enumeration',
+                                        fieldType: 'checkbox',
+                                        cols: 1,
+                                        options: [
+                                            {
+                                                label: 'Marketing page',
+                                                value: 'Marketing page',
+                                            },
+                                            {
+                                                label: 'Web app',
+                                                value: 'Web app',
+                                            },
+                                            {
+                                                label: 'Mobile app',
+                                                value: 'Mobile app',
+                                            },
+                                            {
+                                                label: 'Server',
+                                                value: 'Server',
+                                            },
+                                            {
+                                                label: 'Other (e.g., extension, wearable)',
+                                                value: 'Other (e.g., extension, wearable)',
+                                            },
+                                        ],
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Which data warehouse do you use?',
+                                        name: 'data_warehouse',
+                                        type: 'enumeration',
+                                        fieldType: 'checkbox',
+                                        options: [
+                                            {
+                                                label: 'Snowflake',
+                                                value: 'Snowflake',
+                                            },
+                                            {
+                                                label: 'BigQuery',
+                                                value: 'BigQuery',
+                                            },
+                                            {
+                                                label: 'Redshift',
+                                                value: 'Redshift',
+                                            },
+                                            {
+                                                label: 'Azure',
+                                                value: 'Azure',
+                                            },
+                                            {
+                                                label: 'Other',
+                                                value: 'Other',
+                                            },
+                                            {
+                                                label: 'None',
+                                                value: 'None',
+                                            },
+                                        ],
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Monthly active users',
+                                        name: 'monthly_active_users',
+                                        type: 'string',
+                                        fieldType: 'number',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Do you need any of the following:',
+                                        name: 'needs',
+                                        type: 'enumeration',
+                                        fieldType: 'checkbox',
+                                        options: [
+                                            {
+                                                label: 'Legal/security review',
+                                                value: 'Legal/security review',
+                                            },
+                                            {
+                                                label: 'BAA for HIPAA',
+                                                value: 'BAA for HIPAA',
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        label: 'What do you want to talk about on the call?',
+                                        name: 'talk_about',
+                                        type: 'string',
+                                        required: true,
+                                    },
+                                ],
+                                buttonText: 'Submit',
+                                message: "Message received. We'll be in touch!",
+                                name: 'Contact sales',
+                            }}
                         />
                     </div>
                 </section>

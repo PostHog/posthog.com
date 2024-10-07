@@ -95,7 +95,7 @@ We'd typically define a deal as a large deal if it has most of the following:
 
 ## Who the Sales & CS team are
 
-Our small team page is maintained [here](/teams/customer-success). By 2026, we still want to be a very small but highly effective and responsive team (<20 people), rather than a very large sales team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
+Our small team page is maintained [here](/teams/sales-cs). By 2026, we still want to be a very small but highly effective and responsive team (<20 people), rather than a very large sales team with all the traditional functions and hierarchy. In addition to people who share PostHog's culture, we also value:
 
 - People who have very high empathy with product engineers and their needs
 - People who are happy to choose their own objectives if it meets a business goal
@@ -118,23 +118,18 @@ This is how current roles are split - including spaces for the next few hires we
 - Simon
   - AE for Extra Large customers
 - Cameron
-  - AE for Medium & Large customers
-  - Routes inbound demos to appropriate person
-  - If he does a demo and someone is actually smaller than Medium, route to self serve
-- Actively hiring - 2x AE
-  - Medium & Large customers (1x SF-based)
-- Future hire - Inbound SDR
+  - AE for Medium & Large customers in the Americas region
+- Scott
+  - AE for Medium & Large customers in the Americas region
+- Leon
+  - AE for Medium & Large customers in the EMEA/Asia region
+- Seb
+  - AE for Medium & Large customers in the EMEA/Asia region
  
 **RevOps & Customer Success**
 - Mine
   - Building and leading RevOps
 - Future hire - CSM
   - Manage steady state/single product customers
- 
-**Support**
-- Marcus	
-  - Support engineer (EU time zones)
-- Future hire
-  - Support engineer (US time zones)
 
 Longer term, expansion/renewals is often a separate team, but we don't need to do this now. 

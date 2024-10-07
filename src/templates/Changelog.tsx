@@ -1,7 +1,6 @@
 import CommunityLayout from 'components/Community/Layout'
 import { topicIcons } from 'components/Questions/TopicsTable'
-import { graphql } from 'gatsby'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Markdown from 'components/Squeak/components/Markdown'
 import { CallToAction } from 'components/CallToAction'
 import groupBy from 'lodash.groupby'
@@ -14,13 +13,15 @@ import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
 import { navigate } from 'gatsby'
-import UpdateWrapper, { RoadmapSuccess } from 'components/Roadmap/UpdateWrapper'
+import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
 import { Video } from 'cloudinary-react'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import RoadmapForm from 'components/RoadmapForm'
 import { useUser } from 'hooks/useUser'
 import Tooltip from 'components/Tooltip'
 import { IconShieldLock } from '@posthog/icons'
+import { useRoadmaps } from 'hooks/useRoadmaps'
+import CloudinaryImage from 'components/CloudinaryImage'
+import uniqBy from 'lodash/uniqBy'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -30,10 +31,11 @@ const Select = ({ onChange, values, ...other }) => {
                 {({ open }) => (
                     <>
                         <Listbox.Button
-                            className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${open
+                            className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
+                                open
                                     ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
                                     : 'border-transparent'
-                                }`}
+                            }`}
                         >
                             {({ value }) => (
                                 <>
@@ -48,10 +50,11 @@ const Select = ({ onChange, values, ...other }) => {
                                     {({ selected }) => {
                                         return (
                                             <li
-                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${(other.value ? value.label === other.value : selected)
+                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${
+                                                    (other.value ? value.label === other.value : selected)
                                                         ? 'font-bold'
                                                         : ''
-                                                    }`}
+                                                }`}
                                             >
                                                 {value.label}
                                             </li>
@@ -79,7 +82,7 @@ export const Change = ({ title, teamName, media, description, cta }) => {
                     {media?.data?.attributes?.mime === 'video/mp4' ? (
                         <ZoomImage>
                             <Video
-                                publicId={media.publicId}
+                                publicId={media?.data?.attributes?.provider_metadata?.public_id}
                                 cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
                                 className="max-w-2xl w-full"
                                 autoPlay
@@ -90,7 +93,7 @@ export const Change = ({ title, teamName, media, description, cta }) => {
                         </ZoomImage>
                     ) : (
                         <ZoomImage>
-                            <GatsbyImage image={getImage(media)} />
+                            <CloudinaryImage src={media?.data?.attributes?.url} className="w-full" width={650} />
                         </ZoomImage>
                     )}
                 </div>
@@ -107,12 +110,76 @@ export const Change = ({ title, teamName, media, description, cta }) => {
     )
 }
 
-export default function Changelog({ data: { allRoadmap, filterOptions }, pageContext }) {
+export const Skeleton = () => {
+    return (
+        <div className="space-y-2">
+            <div className="animate-pulse bg-accent dark:bg-accent-dark h-8 w-full rounded-md" />
+            <div className="animate-pulse bg-accent dark:bg-accent-dark h-44 w-full rounded-md" />
+        </div>
+    )
+}
+
+export default function Changelog({ pageContext }) {
     const { user } = useUser()
-    const [changes, setChanges] = useState(allRoadmap.nodes)
     const [filters, setFilters] = useState({})
-    const [newRoadmapID, setNewRoadmapID] = useState()
     const [adding, setAdding] = useState(false)
+    const [roadmaps, setRoadmaps] = useState([])
+    const {
+        roadmaps: initialRoadmaps,
+        isLoading,
+        mutate,
+        hasMore,
+        fetchMore,
+    } = useRoadmaps({
+        limit: 100,
+        params: {
+            sort: 'dateCompleted:desc',
+            filters: {
+                $and: [
+                    {
+                        dateCompleted: {
+                            $gte: `${pageContext.year}-01-01`,
+                        },
+                    },
+                    {
+                        dateCompleted: {
+                            $lt: `${pageContext.year + 1}-01-01`,
+                        },
+                    },
+                    {
+                        complete: {
+                            $eq: true,
+                        },
+                    },
+                ],
+            },
+        },
+    })
+
+    const filterOptions = useMemo(() => {
+        return {
+            topics: uniqBy(initialRoadmaps, 'attributes.topic.data.attributes.label')
+                .map((roadmap) => ({
+                    field: 'attributes.topic.data.attributes.label',
+                    value: roadmap.attributes.topic.data?.attributes.label,
+                    label: roadmap.attributes.topic.data?.attributes.label,
+                }))
+                .filter((topic) => topic.value),
+            types: uniqBy(initialRoadmaps, 'attributes.category')
+                .map((roadmap) => ({
+                    field: 'attributes.category',
+                    value: roadmap.attributes.category,
+                    label: roadmap.attributes.category,
+                }))
+                .filter((category) => category.value),
+        }
+    }, [initialRoadmaps])
+
+    useEffect(() => {
+        if (hasMore) {
+            fetchMore()
+        }
+    }, [hasMore])
 
     const handleChange = (key, { value }, field) => {
         const newFilters = { ...filters }
@@ -126,21 +193,27 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
 
     useEffect(() => {
         const filterKeys = Object.keys(filters)
-        const newChanges =
+        const newRoadmaps =
             filterKeys.length <= 0
-                ? allRoadmap.nodes
-                : allRoadmap.nodes.filter((change) =>
-                    filterKeys.every((filter) => {
-                        const { value, field } = filters[filter]
-                        return get(change, field) === value
-                    })
-                )
-        setChanges([...newChanges])
+                ? initialRoadmaps
+                : initialRoadmaps.filter((roadmap) =>
+                      filterKeys.every((filter) => {
+                          const { value, field } = filters[filter]
+                          return get(roadmap, field) === value
+                      })
+                  )
+        setRoadmaps(newRoadmaps)
     }, [filters])
 
-    const changesByMonth = groupBy(changes, (node) => node.monthShort)
+    useEffect(() => {
+        setRoadmaps(initialRoadmaps)
+    }, [initialRoadmaps])
 
-    const tableOfContents = Object.keys(groupBy(changes, (node) => node.monthLong)).map((month) => {
+    const changesByMonth = groupBy(roadmaps, (roadmap) => dayjs(roadmap.attributes.dateCompleted).format('MMM'))
+
+    const tableOfContents = Object.keys(
+        groupBy(roadmaps, (roadmap) => dayjs(roadmap.attributes.dateCompleted).format('MMMM'))
+    ).map((month) => {
         return { url: month, value: month, depth: 0 }
     })
 
@@ -203,126 +276,84 @@ export default function Changelog({ data: { allRoadmap, filterOptions }, pageCon
 
             {isModerator && (
                 <>
-                    {newRoadmapID && (
-                        <RoadmapSuccess id={newRoadmapID} description="Changelog will update on next build" />
-                    )}
                     {adding && (
                         <div className="mb-6 border-border dark:border-dark">
-                            <RoadmapForm status="complete" onSubmit={(roadmap) => setNewRoadmapID(roadmap.id)} />
+                            <RoadmapForm
+                                status="complete"
+                                onSubmit={() => {
+                                    setAdding(false)
+                                    mutate()
+                                }}
+                            />
                         </div>
                     )}
                 </>
             )}
 
             <section className="grid article-content">
-                {Object.keys(changesByMonth).map((month, index) => {
-                    const nodes = changesByMonth[month]
-                    return (
-                        <div key={`${month}-${index}`} id={tableOfContents[index].url} className="flex gap-4">
-                            <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
-                                <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
-                                    <h2 className="!text-sm font-bold uppercase !m-0">{month}</h2>
-                                    <div className="text-xs font-semibold">{pageContext.year}</div>
+                {isLoading ? (
+                    <Skeleton />
+                ) : (
+                    Object.keys(changesByMonth).map((month, index) => {
+                        const nodes = changesByMonth[month]
+                        return (
+                            <div key={`${month}-${index}`} id={tableOfContents[index].url} className="flex gap-4">
+                                <div className="shrink-0 basis-[50px] relative after:w-[1px] after:absolute after:top-0 after:bottom-0 after:left-[25px] after:bg-border dark:after:bg-border-dark after:content-['']">
+                                    <div className="inline-flex flex-col items-center rounded bg-light dark:bg-dark border border-light dark:border-dark py-1 px-2 relative z-30">
+                                        <h2 className="!text-sm font-bold uppercase !m-0">{month}</h2>
+                                        <div className="text-xs font-semibold">{pageContext.year}</div>
+                                    </div>
                                 </div>
+                                <ul className="list-none m-0 p-0 grid gap-y-12 flex-1 pb-12">
+                                    {nodes.map(
+                                        ({
+                                            id: strapiID,
+                                            attributes: { description, image: media, topic, teams, title, cta },
+                                        }) => {
+                                            const team = teams?.data[0]
+                                            const topicName = topic?.data?.attributes.label
+                                            const teamName = team?.attributes?.name
+                                            const Icon = topicIcons[topicName?.toLowerCase()]
+                                            return (
+                                                <li
+                                                    id={slugify(title, { lower: true })}
+                                                    className="scroll-mt-[108px]"
+                                                    key={strapiID}
+                                                >
+                                                    {topicName && (
+                                                        <p className="font-bold flex mt-3 !-mb-2 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
+                                                            <span className="inline-flex space-x-2 bg-light dark:bg-dark px-2 z-20">
+                                                                {Icon && <Icon className="w-5" />}
+                                                                <span>{topicName}</span>
+                                                            </span>
+                                                        </p>
+                                                    )}
+                                                    <UpdateWrapper
+                                                        status="complete"
+                                                        formClassName="mt-8"
+                                                        editButtonClassName="absolute -top-4 md:top-0 right-0 z-20"
+                                                        roundButton={false}
+                                                        id={strapiID}
+                                                        onSubmit={() => mutate()}
+                                                    >
+                                                        <Change
+                                                            cta={cta}
+                                                            description={description}
+                                                            media={media}
+                                                            teamName={teamName}
+                                                            title={title}
+                                                        />
+                                                    </UpdateWrapper>
+                                                </li>
+                                            )
+                                        }
+                                    )}
+                                </ul>
                             </div>
-                            <ul className="list-none m-0 p-0 grid gap-y-12 flex-1 pb-12">
-                                {nodes.map(({ description, media, topic, teams, title, cta, strapiID }) => {
-                                    const team = teams?.data[0]
-                                    const topicName = topic?.data?.attributes.label
-                                    const teamName = team?.attributes?.name
-                                    const Icon = topicIcons[topicName?.toLowerCase()]
-                                    return (
-                                        <li
-                                            id={slugify(title, { lower: true })}
-                                            className="scroll-mt-[108px]"
-                                            key={strapiID}
-                                        >
-                                            {topicName && (
-                                                <p className="font-bold flex mt-3 !-mb-2 opacity-80 relative after:absolute after:border-t after:border-light dark:after:border-dark content-[''] after:top-3 after:left-[calc(-25px_-_1rem)] after:right-0">
-                                                    <span className="inline-flex space-x-2 bg-light dark:bg-dark px-2 z-20">
-                                                        {Icon && <Icon className="w-5" />}
-                                                        <span>{topicName}</span>
-                                                    </span>
-                                                </p>
-                                            )}
-                                            <UpdateWrapper
-                                                status="complete"
-                                                formClassName="mt-8"
-                                                editButtonClassName="absolute -top-4 md:top-0 right-0"
-                                                roundButton={false}
-                                                id={strapiID}
-                                                showSuccessMessage
-                                            >
-                                                <Change
-                                                    cta={cta}
-                                                    description={description}
-                                                    media={media}
-                                                    teamName={teamName}
-                                                    title={title}
-                                                />
-                                            </UpdateWrapper>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </div>
-                    )
-                })}
+                        )
+                    })
+                )}
             </section>
         </CommunityLayout>
     )
 }
-
-export const query = graphql`
-    query ChangelogQuery($year: Int!) {
-        allRoadmap(sort: { fields: date, order: DESC }, filter: { year: { eq: $year }, complete: { eq: true } }) {
-            nodes {
-                strapiID
-                monthShort: date(formatString: "MMM")
-                monthLong: date(formatString: "MMMM")
-                description
-                media {
-                    gatsbyImageData
-                    publicId
-                    data {
-                        attributes {
-                            mime
-                        }
-                    }
-                }
-                topic {
-                    data {
-                        attributes {
-                            label
-                        }
-                    }
-                }
-                teams {
-                    data {
-                        attributes {
-                            name
-                        }
-                    }
-                }
-                cta {
-                    url
-                    label
-                }
-                title
-                type
-            }
-        }
-        filterOptions: allRoadmap(filter: { year: { eq: $year } }) {
-            topics: group(field: topic___data___attributes___label) {
-                label: fieldValue
-                value: fieldValue
-                field
-            }
-            types: group(field: type) {
-                label: fieldValue
-                value: fieldValue
-                field
-            }
-        }
-    }
-`
