@@ -175,8 +175,8 @@ function Tooltip({
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
                     className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${open
-                        ? 'border-primary/50 dark:border-primary-dark/50'
-                        : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
+                            ? 'border-primary/50 dark:border-primary-dark/50'
+                            : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
                         }`}
                 >
                     {children}
@@ -312,8 +312,8 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                                     }}
                                     to={url}
                                     className={`snap-center group flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 ${active
-                                        ? ''
-                                        : 'border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                                            ? ''
+                                            : 'border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                                         }`}
                                 >
                                     <span className={`w-6 h-6 mr-2 text-${color} dark:text-${colorDark}`}>
@@ -321,8 +321,8 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                                     </span>
                                     <span
                                         className={`text-sm whitespace-nowrap ${active
-                                            ? 'font-bold opacity-100'
-                                            : 'font-semibold opacity-60 group-hover:opacity-100'
+                                                ? 'font-bold opacity-100'
+                                                : 'font-semibold opacity-60 group-hover:opacity-100'
                                             }`}
                                     >
                                         {name}
@@ -480,8 +480,8 @@ export const Main = () => {
                                     <Link
                                         to={url}
                                         className={`text-[13.5px] font-medium flex h-full items-center relative px-3 py-4 mdlg:p-4 ${active
-                                            ? 'px-[calc(.75rem_+_10px)] mdlg:px-[calc(1rem_+_10px)] mx-[-10px]'
-                                            : 'opacity-70 hover:opacity-100'
+                                                ? 'px-[calc(.75rem_+_10px)] mdlg:px-[calc(1rem_+_10px)] mx-[-10px]'
+                                                : 'opacity-70 hover:opacity-100'
                                             }`}
                                     >
                                         {active && <ActiveBackground />}
@@ -689,7 +689,8 @@ export const Main = () => {
                                 <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex relative">
                                     <Avatar
                                         src={getAvatarURL(user?.profile)}
-                                        className="w-9 h-9 inline-block bg-tan rounded-full dark:bg-dark"
+                                        className={`w-9 h-9 inline-block bg-${user.profile.color ?? 'white'
+                                            } rounded-full dark:bg-dark`}
                                     />
                                     <div className="absolute bottom-0 right-0 translate-x-1/2">
                                         <Notifications />
@@ -722,7 +723,7 @@ export const Mobile = () => {
     const { menu, parent, internalMenu, activeInternalMenu, enterpriseMode, setEnterpriseMode } = useLayoutData()
 
     return (
-        <div className="fixed bottom-0 w-full md:hidden z-[9999999] print:hidden">
+        <div className="fixed bottom-0 w-full md:hidden z-[9999998] print:hidden">
             <InternalMenu
                 mobile
                 className="bg-light dark:bg-dark border-t mb-[-1px]"
@@ -739,8 +740,8 @@ export const Mobile = () => {
                             <Link
                                 to={url}
                                 className={`text-[12.5px] font-medium relative px-4 py-4 flex flex-col space-y-1 items-center ${active
-                                    ? 'bg-light dark:bg-dark font-bold px-[calc(1rem_+_10px)] mx-[-10px]'
-                                    : 'opacity-70 hover:opacity-100'
+                                        ? 'bg-light dark:bg-dark font-bold px-[calc(1rem_+_10px)] mx-[-10px]'
+                                        : 'opacity-70 hover:opacity-100'
                                     }`}
                             >
                                 {active && <ActiveBackground mobile />}

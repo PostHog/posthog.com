@@ -612,6 +612,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-as-beta',
             },
             {
+                name: 'Building new products fast',
+                url: '/handbook/product/building-new-products-fast',
+            },
+            {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
             },
@@ -1012,16 +1016,16 @@ export const companyMenu = {
                     url: '/teams/error-tracking',
                 },
                 {
-                    name: 'Feature Success',
-                    url: '/teams/feature-success',
+                    name: 'Experiments',
+                    url: '/teams/experiments',
+                },
+                {
+                    name: 'Feature Flags',
+                    url: '/teams/feature-flags',
                 },
                 {
                     name: 'Infrastructure',
                     url: '/teams/infrastructure',
-                },
-                {
-                    name: 'Pipeline',
-                    url: '/teams/pipeline',
                 },
                 {
                     name: 'Product Analytics',
@@ -1030,6 +1034,10 @@ export const companyMenu = {
                 {
                     name: 'Replay',
                     url: '/teams/replay',
+                },
+                {
+                    name: 'Surveys',
+                    url: '/teams/surveys',
                 },
                 {
                     name: 'Web Analytics',
@@ -1412,6 +1420,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/nextjs-middleware',
                         },
                         {
+                            name: 'nginx',
+                            url: '/docs/advanced/proxy/nginx',
+                        },
+                        {
                             name: 'Nuxt',
                             url: '/docs/advanced/proxy/nuxt',
                         },
@@ -1523,6 +1535,12 @@ export const docsMenu = {
                         {
                             name: 'Events',
                             url: '/docs/data/events',
+                            children: [
+                                {
+                                    name: 'Anonymous vs identified events',
+                                    url: '/docs/data/anonymous-vs-identified-events',
+                                },
+                            ],
                         },
                         {
                             name: 'Ingestion warnings',
@@ -2660,15 +2678,12 @@ export const docsMenu = {
             children: [
                 {
                     name: 'Data pipelines (CDP)',
-                    badge: {
-                        title: 'Preview',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Overview',
                     url: '/docs/cdp',
                     icon: 'IconHome',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Realtime destinations',
@@ -2678,7 +2693,15 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     icon: 'IconLive',
+                    color: 'salmon',
                     children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/cdp/destinations',
+                        },
+                        {
+                            name: 'Destinations',
+                        },
                         {
                             name: 'Slack',
                             url: '/docs/cdp/destinations/slack',
@@ -2777,6 +2800,7 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     icon: 'IconShare',
+                    color: 'purple',
                     children: [
                         {
                             name: 'Amazon S3',
@@ -2801,11 +2825,10 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Connectors',
-                },
-                {
                     name: 'Transformations',
-                    url: '',
+                    url: '/docs/cdp/geoip-enrichment',
+                    icon: 'IconWrench',
+                    color: 'yellow',
                     children: [
                         {
                             url: '/docs/cdp/geoip-enrichment',
@@ -2850,31 +2873,10 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'More',
-                },
-                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/cdp/common-questions',
                     icon: 'IconQuestion',
-                },
-                {
-                    name: 'Build a connector',
-                    url: '/docs/cdp/build',
-                    icon: 'IconGraduationCap',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/cdp/build',
-                        },
-                        {
-                            name: 'Developer reference',
-                            url: '/docs/cdp/build/reference',
-                        },
-                        {
-                            name: 'Tutorial',
-                            url: '/docs/cdp/build/tutorial',
-                        },
-                    ],
+                    color: 'blue',
                 },
             ],
         },

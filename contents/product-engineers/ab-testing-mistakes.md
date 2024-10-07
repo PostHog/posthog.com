@@ -18,7 +18,7 @@ Running experiments is equal parts powerful and terrifying.
 
 Powerful because you can validate changes that will transform your product for the better; terrifying because there are so many ways to mess them up.
 
-I’ve run hundreds of A/B tests, both in my previous life as a growth engineer at Meta, and on my personal side project.
+I’ve run hundreds of A/B tests, both in my previous life as a [growth engineer](/newsletter/think-like-a-growth-engineer) at Meta, and on my personal side project.
 
 These are some classic mistakes I’ve learned the hard way and how to avoid them.
 

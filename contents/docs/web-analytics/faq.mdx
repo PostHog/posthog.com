@@ -52,7 +52,7 @@ Google Analytics is blocked by almost every ad blocker, whereas other analytics 
 
 In PostHog, you can [identify](/docs/product-analytics/identify) anonymous users across with the same distinct ID across visitors and devices they are correctly counted as one user. Analytics tools that don’t allow for identifying users would incorrectly count these as multiple users.
 
-Cookieless trackers, like Plausible and Vercel, track users by combining a few properties into a hash. This includes the user agent, IP address, and a daily salt. Because the salt changes every day, a user that visits your site 7 days in a row counts as 7 different users in these tools. In PostHog, if the user is identified, or if you are using cookies, they are correctly counted as a single user. 
+Cookieless trackers, like [Plausible](/blog/posthog-vs-plausible) and Vercel, track users by combining a few properties into a hash. This includes the user agent, IP address, and a daily salt. Because the salt changes every day, a user that visits your site 7 days in a row counts as 7 different users in these tools. In PostHog, if the user is identified, or if you are using cookies, they are correctly counted as a single user. 
 
 These cookieless trackers also incorrectly count the same user on different devices as different visitors, as the user agent would differ.
 
@@ -96,7 +96,7 @@ If you track multiple domains, you might need to set up [cross-domain tracking](
 3. The user walks away from their computer, and is inactive long enough for the session to expire (30 minutes by default).
 4. User comes back to their computer, goes to the already-open browser tab with your site, and clicks an internal link. A new session starts and the referrer is your own site.
 
-If your users are typically inactive for longer than 30 minutes within one period of activity, you can increase the `session_idle_timeout_seconds` setting in your [posthog-js configuration](/libraries/js#config).
+If your users are typically inactive for longer than 30 minutes within one period of activity, you can increase the `session_idle_timeout_seconds` setting in your [posthog-js configuration](/docs/libraries/js#config).
 
 
 

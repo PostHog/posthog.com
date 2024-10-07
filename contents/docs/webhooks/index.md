@@ -7,6 +7,8 @@ showTitle: true
 
 Webhooks enable you to receive messages whenever any of your [actions](/docs/user-guides/actions) trigger. You can receive messages in [Slack](/docs/webhooks/slack), [Teams](/docs/webhooks/microsoft-teams), [Discord](/docs/webhooks/discord), or your own custom webhook endpoint.
 
+> Our new [realtime destinations](/docs/cdp/destinations) are currently in preview. These provide customizable destinations, more formatting options, a revamped UI, and the ability to send events *or* actions. Learn more about them in the [data pipeline docs](/docs/cdp/destinations).
+
 ## Message formatting
 
 By default, the webhook message format is:
@@ -38,7 +40,6 @@ Group information can be accessed using the [group key](/docs/getting-started/gr
 
 - `[groups.<group_key>]`: The name of the associated group or the key if there is no associated `name` property. This token is formatted as a link to the group in PostHog.
 - `[groups.<group_key>.properties.<property_name>]`: Value of group `<property_name>` – e.g., `[groups.organization.properties.total_revenue]`
-
 
 ### Action tokens
 
