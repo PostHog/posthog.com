@@ -90,14 +90,17 @@ We send out CSAT surveys after a ticket has been closed for at least 3 days usin
 
 We hire Support Engineers once a product reaches a significant level of scale and/or product-market fit. This is a subjective judgement. Right now, support engineers sit in [the Comms team](/teams/customer-comms) and cover: 
 
-- Product Analytics (<TeamMember name="Marcus Hof" /> & <TeamMember name="Steven Shults" /> & <TeamMember name="Abigail Richardson" />)
+- Product analytics (whole team)
+- Web analytics (whole team)
+- Session replay (whole team)
+- Feature success (whole team)
+- Comms (whole team)
 - CDP (<TeamMember name="Marcus Hof" />)
-- Session Reply (<TeamMember name="Steven Shults" />)
-- Feature Success (<TeamMember name="Steven Shults" />)
-- Comms (<TeamMember name="Marcus Hof" /> & <TeamMember name="Steven Shults" />)
-- Data Warehouse (<TeamMember name="Marcus Hof" />)
+- Data warehouse (<TeamMember name="Marcus Hof" />)
 
 Support engineers respond to as many tickets as they can for these products, and escalate other tickets to the appropriate teams as needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
+
+When we hire new support engineers they will usually spend the first few weeks focused just on product and web analytics tickets, until they've started to build more familiarity with the platform as a whole. 
 
 ### Engineers are Support Heroes
 
@@ -105,7 +108,11 @@ The direct interaction between our engineering team and our users is _hugely_ va
 
 Providing support across most products is a responsibility shared across our engineering teams - we expect everyone to jump in and help a user if you see they have a question or problem. Once you have made the initial contact or response, it is your responsibility to see it through or explicitly hand over to someone else if they are better-equipped to help.
 
-One person on each product team takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback. 
+One person on each product team takes on the **[Support Hero](/handbook/engineering/support-hero)** role each week. This is a rotating responsibility, where the person involved spends a significant chunk of their time responding to support queries across Slack, email and Zendesk, and sharing that feedback with the team and/or building features and fixes in response. We have found that each stint as Support Hero has thrown up a lot of really valuable feedback.
+
+### Difficult support requests 
+
+We very occasionally receive messages from people either wishing to make a legal claim or who you suspect may have a mental illness, either via the app or [Community Questions](/questions). If this happens, notify <TeamMember name="Charles Cook" photo /> or <TeamMember name="Fraser Hopper" photo /> in the first instance. They will either take this on, or advise you on how to reply.
 
 ## Community
 

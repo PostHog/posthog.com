@@ -49,6 +49,24 @@ PostHogSDK.shared.alias("alias_id")
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
+## Anonymous vs identfied events
+
+import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
+
+<IdentifiedVsAnonymousIntro />
+
+### How to capture anonymous events
+
+import HowToCaptureAnonymousEventsIOS from '../../product-analytics/_snippets/how-to-capture-anonymous-events-ios.mdx'
+
+<HowToCaptureAnonymousEventsIOS />
+
+### How to capture identified events
+
+import HowToCaptureIdentifiedEventsIOS from '../../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
+
+<HowToCaptureIdentifiedEventsIOS />
+
 ## Setting person properties
 
 To set [properties](/docs/data/user-properties) on your users via an event, you can leverage the event properties `userProperties` and `userPropertiesSetOnce`.
@@ -67,7 +85,7 @@ PostHogSDK.shared.capture("signed_up", properties: ["plan": "Pro++"], userProper
 
 ## Super Properties
 
-Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $screen, or anything else.
+Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a `$screen`, or anything else.
 
 They are set using `PostHogSDK.shared.register`, which takes a properties object as a parameter, and they persist across sessions.
 
@@ -236,8 +254,38 @@ configuration.debug = false
 configuration.optOut = false
 
 /**
+ * Callback that allows to sanitize the event properties (not set by default)
+ */
+configuration.propertiesSanitizer = { ... }
+
+/**
+ * Hook that allows for modification of the default mechanism for
+ * generating anonymous id (which as of now is just random UUID v7)
+ */
+configuration.getAnonymousId = { ... }
+
+/**
+ * Allows to send your data only if the data mode matches your configuration
+ * such as wifi only, cellular only or any.
+ * Defaults to .any
+ */
+configuration.dataMode = .any
+
+/**
+ * Determines the behavior for processing user profiles.
+ * Defaults to .identifiedOnly
+ */
+configuration.personProfiles = .identifiedOnly
+
+/**
  * Enable Recording of Session Replays. (off/false by default)
  * Experimental support
  */
 configuration.sessionReplay = false
+
+/**
+ * Session Replay configuration
+ * Experimental support
+ */
+configuration.sessionReplayConfig = .init()
 ```

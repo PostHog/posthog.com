@@ -19,7 +19,7 @@ export const Drawer = (props: DrawerProps): React.ReactElement => {
 
     return (
         <Transition.Root show={isOpen} as={Fragment}>
-            <Dialog as="div" className="drawer relative z-[9999999]" onClose={onClose}>
+            <Dialog as="div" className="drawer relative z-[9999998]" onClose={onClose}>
                 <Transition.Child
                     as={Fragment}
                     enter={cn('ease-out duration-[0s]', animateOpen && 'duration-300')}

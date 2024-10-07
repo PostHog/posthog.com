@@ -200,7 +200,7 @@ Below is an example of how to create an insight to compare average API response 
   classes="rounded"
 />
 
-### User feedback
+### 2. User feedback
 
 A good way to evaluate LLM outputs is to ask your users to rate them. In our sample app, we do this by asking if the response was helpful. Users can submit their response using the **Yes** and **No** buttons at the bottom of the page. 
 
@@ -249,7 +249,7 @@ Refresh your app, submit a few prompts, and click on the **Yes** and **No** butt
   classes="rounded"
 />
 
-### Model-based evaluation
+### 3. Model-based evaluation
 
 Model-based evaluation, also known as "LLM-as-a-judge", is a powerful tool to assess large amounts of LLM outputs. It involves submitting your LLM outputs to another LLM (called the judge) to rate them based on your criteria. Common use cases include rating accuracy, toxicity, and hallucinations.
 
@@ -328,4 +328,4 @@ Refresh your app and submit a few prompts (and try to get some toxic responses!)
 
 - [How to monitor generative AI calls to AWS Bedrock](/tutorials/monitor-aws-bedrock-calls)
 - [How to set up LLM analytics for ChatGPT](/tutorials/chatgpt-analytics) 
-- [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)
+- [How to compare AWS Bedrock foundational models](/tutorials/compare-aws-bedrock-foundational-models)

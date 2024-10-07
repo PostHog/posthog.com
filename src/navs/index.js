@@ -612,6 +612,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-as-beta',
             },
             {
+                name: 'Building new products fast',
+                url: '/handbook/product/building-new-products-fast',
+            },
+            {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
             },
@@ -674,6 +678,10 @@ export const handbookSidebar = [
             {
                 name: 'New sales',
                 url: '/handbook/growth/sales/new-sales',
+            },
+            {
+                name: 'Product-led sales',
+                url: '/handbook/growth/sales/product-led-sales',
             },
             {
                 name: 'Expansion & Retention',
@@ -1004,16 +1012,20 @@ export const companyMenu = {
                     url: '/teams/data-warehouse',
                 },
                 {
-                    name: 'Feature Success',
-                    url: '/teams/feature-success',
+                    name: 'Error Tracking',
+                    url: '/teams/error-tracking',
+                },
+                {
+                    name: 'Experiments',
+                    url: '/teams/experiments',
+                },
+                {
+                    name: 'Feature Flags',
+                    url: '/teams/feature-flags',
                 },
                 {
                     name: 'Infrastructure',
                     url: '/teams/infrastructure',
-                },
-                {
-                    name: 'Pipeline',
-                    url: '/teams/pipeline',
                 },
                 {
                     name: 'Product Analytics',
@@ -1022,6 +1034,10 @@ export const companyMenu = {
                 {
                     name: 'Replay',
                     url: '/teams/replay',
+                },
+                {
+                    name: 'Surveys',
+                    url: '/teams/surveys',
                 },
                 {
                     name: 'Web Analytics',
@@ -1189,6 +1205,13 @@ export const docsMenu = {
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
+                        },
+                        {
+                            name: 'Capacitor',
+                            url: '/docs/libraries/capacitor',
+                            badge: {
+                                title: '3rd party',
                             },
                         },
                         {
@@ -1397,6 +1420,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/nextjs-middleware',
                         },
                         {
+                            name: 'nginx',
+                            url: '/docs/advanced/proxy/nginx',
+                        },
+                        {
                             name: 'Nuxt',
                             url: '/docs/advanced/proxy/nuxt',
                         },
@@ -1508,6 +1535,12 @@ export const docsMenu = {
                         {
                             name: 'Events',
                             url: '/docs/data/events',
+                            children: [
+                                {
+                                    name: 'Anonymous vs identified events',
+                                    url: '/docs/data/anonymous-vs-identified-events',
+                                },
+                            ],
                         },
                         {
                             name: 'Ingestion warnings',
@@ -2342,6 +2375,10 @@ export const docsMenu = {
                             name: 'iOS',
                             url: '/docs/session-replay/ios',
                         },
+                        {
+                            name: 'React Native',
+                            url: '/docs/session-replay/react-native',
+                        },
                     ],
                 },
                 {
@@ -2641,15 +2678,12 @@ export const docsMenu = {
             children: [
                 {
                     name: 'Data pipelines (CDP)',
-                    badge: {
-                        title: 'Preview',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Overview',
                     url: '/docs/cdp',
                     icon: 'IconHome',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Realtime destinations',
@@ -2659,6 +2693,104 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     icon: 'IconLive',
+                    color: 'salmon',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/cdp/destinations',
+                        },
+                        {
+                            name: 'Destinations',
+                        },
+                        {
+                            name: 'Slack',
+                            url: '/docs/cdp/destinations/slack',
+                        },
+                        {
+                            name: 'Webhook',
+                            url: '/docs/cdp/destinations/webhook',
+                        },
+                        {
+                            name: 'ActiveCampaign',
+                            url: '/docs/cdp/destinations/activecampaign',
+                        },
+                        {
+                            name: 'Avo',
+                            url: '/docs/cdp/destinations/avo',
+                        },
+                        {
+                            name: 'AWS Kinesis',
+                            url: '/docs/cdp/destinations/aws-kinesis',
+                        },
+                        {
+                            name: 'Braze',
+                            url: '/docs/cdp/destinations/braze',
+                        },
+                        {
+                            name: 'Customer.io',
+                            url: '/docs/cdp/destinations/customerio',
+                        },
+                        {
+                            name: 'Engage.so',
+                            url: '/docs/cdp/destinations/engage',
+                        },
+                        {
+                            name: 'Gleap',
+                            url: '/docs/cdp/destinations/gleap',
+                        },
+                        {
+                            name: 'Google Cloud Storage',
+                            url: '/docs/cdp/destinations/google-cloud-storage',
+                        },
+                        {
+                            name: 'Google Pub/Sub',
+                            url: '/docs/cdp/destinations/google-pubsub',
+                        },
+                        {
+                            name: 'Hubspot',
+                            url: '/docs/cdp/destinations/hubspot',
+                        },
+                        {
+                            name: 'Intercom',
+                            url: '/docs/cdp/destinations/intercom',
+                        },
+                        {
+                            name: 'Knock',
+                            url: '/docs/cdp/destinations/knock',
+                        },
+                        {
+                            name: 'Loops',
+                            url: '/docs/cdp/destinations/loops',
+                        },
+                        {
+                            name: 'Mailgun',
+                            url: '/docs/cdp/destinations/mailgun',
+                        },
+                        {
+                            name: 'Mailjet',
+                            url: '/docs/cdp/destinations/mailjet',
+                        },
+                        {
+                            name: 'RudderStack',
+                            url: '/docs/cdp/destinations/rudderstack',
+                        },
+                        {
+                            name: 'Salesforce',
+                            url: '/docs/cdp/destinations/salesforce',
+                        },
+                        {
+                            name: 'Sendgrid',
+                            url: '/docs/cdp/destinations/sendgrid',
+                        },
+                        {
+                            name: 'Zapier',
+                            url: '/docs/cdp/destinations/zapier',
+                        },
+                        {
+                            name: 'Zendesk',
+                            url: '/docs/cdp/destinations/zendesk',
+                        },
+                    ],
                 },
                 {
                     name: 'Batch exports',
@@ -2668,6 +2800,7 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     icon: 'IconShare',
+                    color: 'purple',
                     children: [
                         {
                             name: 'Amazon S3',
@@ -2692,77 +2825,10 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Connectors',
-                },
-                {
-                    name: 'Destinations',
-                    url: '',
-                    children: [
-                        {
-                            url: '/docs/cdp/airbyte-export',
-                            name: 'Airbyte',
-                        },
-                        {
-                            url: '/docs/cdp/avo-inspector',
-                            name: 'Avo',
-                        },
-                        {
-                            url: '/docs/cdp/customer-io',
-                            name: 'Customer.io',
-                        },
-                        {
-                            url: '/docs/cdp/engage-connector',
-                            name: 'Engage.so',
-                        },
-                        {
-                            url: '/docs/cdp/google-pub-sub-connector',
-                            name: 'GCP Pub/Sub',
-                        },
-                        {
-                            url: '/docs/cdp/google-cloud-export',
-                            name: 'Google Cloud Storage',
-                        },
-                        {
-                            url: '/docs/cdp/hubspot-connector',
-                            name: 'Hubspot',
-                        },
-                        {
-                            url: '/docs/cdp/intercom',
-                            name: 'Intercom',
-                        },
-                        {
-                            url: '/docs/cdp/laudspeaker-connector',
-                            name: 'Laudspeaker',
-                        },
-                        {
-                            url: '/docs/cdp/rudderstack-export',
-                            name: 'RudderStack',
-                        },
-                        {
-                            url: '/docs/cdp/salesforce-connector',
-                            name: 'Salesforce',
-                        },
-                        {
-                            url: '/docs/cdp/sendgrid-connector',
-                            name: 'Sendgrid',
-                        },
-                        {
-                            url: '/docs/cdp/sentry-connector',
-                            name: 'Sentry',
-                        },
-                        {
-                            url: '/docs/cdp/variance-connector',
-                            name: 'Variance',
-                        },
-                        {
-                            url: '/docs/cdp/pace-integration',
-                            name: 'Pace',
-                        },
-                    ],
-                },
-                {
                     name: 'Transformations',
-                    url: '',
+                    url: '/docs/cdp/geoip-enrichment',
+                    icon: 'IconWrench',
+                    color: 'yellow',
                     children: [
                         {
                             url: '/docs/cdp/geoip-enrichment',
@@ -2807,31 +2873,10 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'More',
-                },
-                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/cdp/common-questions',
                     icon: 'IconQuestion',
-                },
-                {
-                    name: 'Build a connector',
-                    url: '/docs/cdp/build',
-                    icon: 'IconGraduationCap',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/cdp/build',
-                        },
-                        {
-                            name: 'Developer reference',
-                            url: '/docs/cdp/build/reference',
-                        },
-                        {
-                            name: 'Tutorial',
-                            url: '/docs/cdp/build/tutorial',
-                        },
-                    ],
+                    color: 'blue',
                 },
             ],
         },
@@ -2898,6 +2943,10 @@ export const docsMenu = {
                         {
                             name: 'Snowflake',
                             url: '/docs/data-warehouse/setup/snowflake',
+                        },
+                        {
+                            name: 'Vitally',
+                            url: '/docs/data-warehouse/setup/vitally',
                         },
                         {
                             name: 'Self-managed',

@@ -93,11 +93,24 @@ Occasionally it may be desirable to do additional customer communications, such 
 
 In the case that we need to update a _specific_ customer, such as when a individual org is causing an incident, we should let them know as soon as possible. Use the following guidelines to ensure smooth communication:
 
+- Ensure you are always contacting the admins of the impacted organization
 - Communication is best done through Zendesk. The Comms team can create tickets and handle this for you. 
 - Before sending any comms, check with the incident lead. Then, share a ticket link in the incident channel. 
 - If action is needed, it's better to take that action and inform the user than to ask the user to do it.
 - If you're not able to take the required action, give the user deadlines for the changes they need to do and explain what will happen if they don't meet the deadline.
-- Try to keep all communication on a single ticket, with all relevant parties. 
+- Try to keep all communication on a single ticket, with all relevant parties.
+
+In the case that we need to temporarily limit a _specific_ customer's access to any functionality (e.g. temporarily prevent them from using an endpoint) as a result of certain usage resulting in an incident, we need to make sure we put an alert on their Zendesk tickets.  This will make sure that anyone working on a ticket from the org will know what's happening with the org before replying (even if we've already reached out to the org, some folks at the org may not be aware, and so may open a support ticket.)
+
+You'll just need to set the name of the org in an existing trigger in Zendesk, then reverse that change when the org's full access has been restored:
+
+1. After Logging into Zendesk, go to the [admin center](https://posthoghelp.zendesk.com/admin/home)
+2. In the left column, expand `Objects and rules` and click on `Triggers` (under "Business rules")
+3. On the Triggers page, expand `Prioritization and new ticket notifications` and click on `Add alert for org with special-handling`
+4. Under `Conditions`, the last condition is: `Organization > Organization` `Is` `PostHog`. Change `PostHog` to the name of organization who has had their access limited as a result of the incident. (Click on "PostHog" and then start typing to filter and find the org name, then click on it)
+5. Scroll to the bottom of the page and click the `Save` button
+
+Once the org has had their full access restored, repeat the steps above, but this time put `PostHog` back in the last condition, and remember to `Save` the change.
 
 ## When does an incident end?
 

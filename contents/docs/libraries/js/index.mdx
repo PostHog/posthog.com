@@ -39,37 +39,6 @@ import WebSendEvents from '../../integrate/send-events/_snippets/send-events-web
 
 <WebSendEvents />
 
-## Person profiles and properties
-
-PostHog captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
-
-```js-web
-posthog.capture(
-  'event_name',
-  {
-    $set: { name: 'Max Hedgehog'  },
-    $set_once: { initial_url: '/blog' },
-  }
-)
-```
-
-Typically, person properties are set when an event occurs like `user updated email` but there may be occasions where you want to set person properties as its own event. 
-
-```javascript
-posthog.setPersonProperties(
-    { name: "Max Hedgehog" }, // Thes properties are like the `$set` from above
-    { initial_url: "/blog" }  // Thes properties are like the `$set_once` from above
-)
-```
-
-This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
-
-To control whether you capture identified events and person profiles, update the `person_profiles` config option:
-
-import PersonProfilesConfig from './_snippets/person-profiles-config.mdx'
-
-<PersonProfilesConfig />
-
 ## Identifying users
 
 > We strongly recommend reading our docs on [identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
@@ -107,6 +76,49 @@ If you _also_ want to reset `device_id`, you can pass `true` as a parameter:
 ```js-web
 posthog.reset(true)
 ```
+
+## Anonymous vs identfied events
+
+import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
+
+<IdentifiedVsAnonymousIntro />
+
+### How to capture anonymous events
+
+import HowToCaptureAnonymousEventsWeb from '../../product-analytics/_snippets/how-to-capture-anonymous-events-web.mdx'
+
+<HowToCaptureAnonymousEventsWeb />
+
+### How to capture identified events
+
+import HowToCaptureIdentifiedEventsWeb from '../../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
+
+<HowToCaptureIdentifiedEventsWeb />
+
+## Setting person properties
+
+To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+
+```js-web
+posthog.capture(
+  'event_name',
+  {
+    $set: { name: 'Max Hedgehog'  },
+    $set_once: { initial_url: '/blog' },
+  }
+)
+```
+
+Typically, person properties are set when an event occurs like `user updated email` but there may be occasions where you want to set person properties as its own event. 
+
+```js
+posthog.setPersonProperties(
+    { name: "Max Hedgehog" }, // These properties are like the `$set` from above
+    { initial_url: "/blog" }  // These properties are like the `$set_once` from above
+)
+```
+
+This creates a special `$set` event that is sent to PostHog. For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
 ## Super Properties
 
@@ -371,7 +383,7 @@ posthog.capture("survey sent", {
 
 To set up [session replay](/docs/session-replay) in your project, all you need to do is install the JavaScript web library and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay).
 
-For [fine-tuning control](/docs/session-replay/how-to-control-which-sessions-you-record) of which sessions you record, you can set the `disable_session_recording` [config option](#config) and use the following methods:
+For [fine-tuning control](/docs/session-replay/how-to-control-which-sessions-you-record) of which sessions you record, you can use [feature flags](/docs/session-replay/how-to-control-which-sessions-you-record#with-feature-flags), [sampling](/docs/session-replay/how-to-control-which-sessions-you-record#sampling), [minimum duration](/docs/session-replay/how-to-control-which-sessions-you-record#minimum-duration), or set the `disable_session_recording` [config option](#config) and use the following methods:
 
 ```js-web
 // Turns session recording on
@@ -382,6 +394,12 @@ posthog.stopSessionRecording()
 
 // Check if session recording is currently running
 posthog.sessionRecordingStarted()
+```
+
+If you are using feature flags or sampling to control which sessions you record, you can override the default behavior (and start a recording regardless) by passing the `linked_flag` or `sampling` overrides. The following would start a recording for all users, even if they don't match the flag or aren't in the sample:
+
+```js-web
+posthog.startSessionRecording({ linked_flag: true, sampling: true })
 ```
 
 To get the playback URL of the current session replay, you can use the following method:
@@ -407,7 +425,7 @@ For PostHog to work optimally, we store small amount of information about the us
 -   Any super properties you have defined.
 -   Some PostHog configuration options (e.g. whether session recording is enabled)
 
-By default, we store all this information in a `cookie`, which means PostHog can identify your users across subdomains. By default, this cookie is set to expire after `365` days and is named with your Project API key e.g. `ph_<project_api_key>_posthog`.
+By default, we store all this information in both a `cookie` and `localStorage`, which means PostHog can identify your users across subdomains. By default, this cookie is set to expire after `365` days and is named with your Project API key e.g. `ph_<project_api_key>_posthog`.
 
 If you want to change how PostHog stores this information, you can do so with the `persistence` configuration option:
 
