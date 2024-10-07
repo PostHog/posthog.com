@@ -292,20 +292,22 @@ Truth be told, we didn't set out to build our own programming language. We actua
 
 ### HogVM
 
-The HogVM is a stack-based bytecode virtual machine (VM). It was built to power event filtering in our real-time ingestion flow.
+The HogVM is a stack-based bytecode virtual machine (VM). It was built to power event filtering in our real-time delivery system.
 
 It's paired with a compiler that converts HogQL expressions like `properties.$screen_width < properties.$screen_height` into bytecode like `["_H", 1, 32, "$screen_height", 32, "properties", 1, 2, 32, "$screen_width", 32, "properties", 1, 2, 15, 35]`. The HogVM then executes that bytecode.
 
 The HogVM had a few design constraints:
 
 - Virtually no startup time (thousands of different expressions must run against millions of events every minute).
-- Fast enough to run hundreds (or thousands?) of these events per second on a single core.
+- Fast enough to filter the firehose of our event stream without drowning us in hosting costs.
+- Runtime flexibility: the ability to embed Hog in many target languages like Python, NodeJS and the browser.
+- Small surface area that makes it easy maintain multiple implementations.
 - Secure enough to run user provided code.
 - Syntax compatible with HogQL.
 
 Effectively, we wanted to run HogQL synchronously within a NodeJS process, at scale. So that's what we built, twice.
 
-We now have two identical HogVMs: one in [Python](https://github.com/PostHog/posthog/blob/master/hogvm/python/execute.py) (to run alongside queries, unreleased), and one in [TypeScript](https://github.com/PostHog/posthog/blob/master/hogvm/typescript/src/execute.ts) (to run alongside ingestion). We might even build a third version in Rust soon. The surface area for the VM is really that small.
+We now have two identical HogVMs: one in [Python](https://github.com/PostHog/posthog/blob/master/hogvm/python/execute.py) (to run alongside queries, unreleased), and one in [TypeScript](https://github.com/PostHog/posthog/blob/master/hogvm/typescript/src/execute.ts) (to run in the pipeline, and in the browser). We might even build a third version in Rust soon. The surface area for the VM is really that small.
 
 ### Async HogVM
 
