@@ -47,7 +47,7 @@ Following the initial implementation, Maria enabled autocapture to get data flow
 
 “Analysis is always kind of funky because marketing data is so volatile,” says Maria. “Our content has gone viral a few times and that puts all sorts of peaks and dips onto the charts. When I don’t need to make adjustments I can just use web analytics, but other times I need to change the data and filter stuff out — it’s all easily done though.”
 
-In addition to setting up these initial dashboards and insights, Maria also integrated PostHog with Hubspot so data could flow seamlessly between the two platforms. No middleware or Zapier processes required. 
+In addition to setting up these initial dashboards and insights, Maria also integrated PostHog with Hubspot so data could flow seamlessly between the two platforms.  
 
 “We don’t have a sales team, so we use Hubspot for automations based on sign-ups. We have different workflows which depend on how far people get with the product, where people get stuck. We’re still in an exploratory phase with this, but connecting PostHog and Hubspot was very useful.”
 
