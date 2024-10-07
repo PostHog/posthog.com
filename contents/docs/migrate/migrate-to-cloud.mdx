@@ -24,7 +24,7 @@ This migration has 3 steps:
 
 1. [Migrate your metadata](#migrate-your-metadata) (projects, dashboards, insights, actions, cohorts, feature flags, experiments, annotations).
 
-2. [Migrate your events](#migrate-your-events). Texthis also creates the necessary person, person distinct ID, and related records.
+2. [Migrate your events](#migrate-your-events). This also creates the necessary person, person distinct ID, and related records.
 
 3. [Switch tracking in your product](#switching-tracking-in-you-product) to set up replication from the old project if needed and to start sending events to the new project.
 
@@ -40,7 +40,7 @@ To migrate metadata like projects, dashboards, insights, actions, feature flags,
 > 1. Every object's "created by" information will appear as if it was created by the user who created the personal API key.
 > 2. Every object's "created at" information will appear as if it was created at the time you ran this script.
 
-1. Clone the repo and cd into it
+1. Clone the repo and `cd` into it
     ```bash
     git clone https://github.com/PostHog/posthog-migrate-meta
     cd posthog-migrate-meta
