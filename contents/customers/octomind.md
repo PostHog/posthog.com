@@ -24,7 +24,7 @@ date: 2024-11-10
 
 Popular with fast-moving builders on [ProductHunt](https://www.producthunt.com/products/octomind), [Octomind](https://www.octomind.dev/) is an AI-powered end-to-end testing tool for developers. Unsurprisingly for a DevTool company, the team is engineer-led — to the point that even Maria Zahorcova, Octomind's Chief Marketing Officer, has a strong grasp of developer tools like Git. When it came to choosing an analytics tool, however, she was starting from scratch.
 
-“I’m far from an engineer myself, though I’ve always been on the technical side,” says Maria. “I’m also the only marketer at Octomind and I’m very new to analytics. Like a lot of startup marketers I’d only really used Google Analytics before.”
+“I’m far from an engineer myself, though I’ve always been on the technical side,” says Maria. “I’m also the only marketer at Octomind. Like a lot of startup marketers I’d used Google Analytics in other teams before.”
 
 Maria knew she needed a way to track marketing metrics, but also knew that Google Analytics because it could only provide high-level metrics from the marketing site — not the full user journey. There seemed no point knowing how many pageviews the marketing site had if she couldn’t turn that into a conversion rate or track product retention.
 
