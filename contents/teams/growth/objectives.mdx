@@ -1,27 +1,21 @@
-### Q3 2024 Objectives
+### Q4 2024 Objectives
 
-- **Objective 1**: Make onboarding awesome for Product analytics and Data warehouse (Raquel)
-  - Use templates, toolbar, and actions in analytics onboarding so people can get to insights more quickly.
-  - Work with data warehouse team to make a bespoke flow to help people get their first integration set up.
-  - Reasoning: Templates are useful for getting people to valuable insights quickly, but they have to wait for data to come in before they can use themes. If we use actions, they can be made right away. For DW, none of our current onboarding steps for getting data in are relevant - we need to think through this from scratch.
-  - Metrics: Percent of new orgs that activate increases, retention goes up or stays the same, people actually use the flow.
-- **Objective 2**: Support self-serve annual commitments (Zach)
-  - Reasoning: Annual commitments means we get more money now, reduces churn risk, and can be cheaper for customers. But, people have to talk to sales right now to get on these contracts. If they could self-serve this, we could theoretically sell more of them.
-  - Metrics: We have the feature, and people use it.
-  - Side hustle, if time permits: Figure out how to do experiments with pricing.
-- **Objective 3**: Dive into the data to understand our billing metrics and customers better (Zach)
-  - Reasoning: We want to know:
-      - How the startup program is performing and how we should change things there
-      - How well we cross-sell and how that can be improved
-      - Why CC input rate is going down, even though signups are going up.
-      - If we can trust the revenue number every single day
-  - Metrics: We have access to more stripe data in billing (i.e. stripe customer metadata), and we can answer the questions above.
-- **Objective 4**: Keep up with ongoing needs from our team:
-  - Hire 2 people onto the team - one billing focused, one auth/permissions or growth focused (Raquel)
-  - Launch pricing for Data warehouse (likely soon) (Raquel)
-  - Launch pricing for CDP (if it's ready)
+- **Objective 1**: Get to a 4/10 in Enterprise platform support (Zach)
+  - Release Enterprise addon and iterate with sales to find a pricing model that makes sense
+  - Build RBAC
+  - Reasoning: As a company we want to have a 4/10 support for enterprise - and our platform needs to support that.
+  - Metrics: RBAC is at a place where enterprises who require it can actually use it.
+- **Objective 2**: Make revenue & forecasting more reliable (Patricio)
+  - Rejig how we do sync_invoices so we don’t see big drops - respond to webhooks instead of large syncs
+  - Evaluate temporal vs celery for usage reports and billing tasks so we can adhere to rate limits better
+  - Side hustle, if time permits: Rejig how anonymous / identified events are billed, as the current implementation is confusing.
+- **Objective 3**: Activation: reverse trials, analytics onboarding flow, understand CC activation (Raquel)
+  - Dig into the data, watch replays to figure out why CC activation rate has been falling
+  - Add reverse trial to onboarding
+  - Add reverse trial to billing page for teams
+  - Reasoning: Our CC activation rate has been falling and we aren't really sure why. We should figure it out and try a few things to improve it. I also want to continue my focus on analytics activation that I finally got to start last quarter that I didn't get to finish!
+  - Metrics: Improved CC activaiton rate. Increase in people who sign up for Teams. Increase in people who successfully activate into product analytics and replay.
 
-If we have time:
-  - Build a better billing page that gives breakdowns by project, is easier to mentally parse, is more beautiful, etc. 
-  - Fix all the bugs and unknowns with auth (eg why xmlsec gives us so many problems)
-  - Move CC entry into the app
+Stretch goals:
+  - API query pricing (Raquel & Patricio)
+  - Move the annual credits flow out of Zapier
