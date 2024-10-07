@@ -30,7 +30,7 @@ Although our standard monthly [pricing](/pricing) has volume discounts built in,
 2. **Annual Plan:** We offer a 20% discount on an annual paid-up-front plan, because it's beneficial to PostHog to have a customer committed for a year.
 3. **Higher Spend:** We offer an additional 5% and then 15% on top of the annual plans when the customer spends above $60k and $100k respectively.
 4. **Multi-year:** We offer an additional 5% for each additional year of commitment, as longer commitments are beneficial to PostHog.  
-5. **Up-front payment:** We offer an additional 5% where a *multi-year* contract is all **paid up-front**, as it's better for PostHog to have the money in the bank.
+5. **Up-front payment:** We offer an additional 3% where a *multi-year* contract is all **paid up-front**, as it's better for PostHog to have the money in the bank.
 
 The below table summarizes the discount levels contained in points 2-4:
 
