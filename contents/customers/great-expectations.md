@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_dark_5a1dba99f7.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/adauris_62af5ac994.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_great_expectations_f90a29aa4d.jpg
 featuredCustomer: false
 industries:
   - 'SaaS, Data'
