@@ -612,6 +612,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-as-beta',
             },
             {
+                name: 'Building new products fast',
+                url: '/handbook/product/building-new-products-fast',
+            },
+            {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
             },
