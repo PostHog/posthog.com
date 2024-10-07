@@ -54,11 +54,11 @@ We update [our changelog](/changelog) with a recap of new features every week, a
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Roll out features safely; toggle features for cohorts or individuals" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
   <ComparisonRow column1={false} column2={true} feature="Dynamic config" description="Replace hard-coded values in your app with config values" />
-  <ComparisonRow column1={true} column2={false} feature="Session replays" description="Watch real users use your product; debug behavior" />
+  <ComparisonRow column1={true} column2={true} feature="Web session replays" description="Watch real users use your web app; debug behavior" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile session replays" description="Watch real users use your native mobile app" />
   <ComparisonRow column1={true} column2={false} feature="User surveys" description="Ask users for qualitative feedback and gather responses" />
   <ComparisonRow column1={true} column2={false} feature="Notebooks" description="Collaborate on analysis in shareable notebooks" />
   <ComparisonRow column1={true} column2={false} feature="Open source" description="Code publicly accessible" />
-  <ComparisonRow column1="In beta" column2={false} feature="Data warehouse storage" description="Store large amounts of analytics data" />
   <ComparisonRow column1={false} column2={true} feature="Data warehouse experiments" description="Run A/B tests natively on data in your existing warehouse" />
 </ComparisonTable>
 
@@ -126,22 +126,6 @@ Both PostHog and Statsig offer the functionality you expect from product analyti
   <ComparisonRow column1={true} column2={false} feature="Query editor" description="Write your own queries in SQL" />
 </ComparisonTable>
 
-### Pricing
-
-Both PostHog and Statsig offer simple, transparent pricing.
-
-**Statsig** has a free plan for up to 1 million *metered events* (a metered event is any feature flag, A/B testing, or logging event). Thereafter, it's $150 per month for up to 5 million metered events, and then $50 per every 1 million events. 
-
-**PostHog’s** prices for [A/B testing and feature flags](/feature-flags#pricing) requests are as follows: 
-   - Free up to 1 million requests. 
-   - **$0.000100** per request between 1-2 million requests – i.e., $100 for 1 million requests.
-   - **$0.000045** from 2-10 million requests – i.e. $45 for 1 million requests
-   - Progressively cheaper beyond 10 million requests.
-
-You can, however, significantly reduce feature flag and A/B testing requests by using [PostHog's backend local evaluation](/docs/feature-flags/local-evaluation), potentially saving you a considerable amount of money.
-
-> **Note:** Product analytics are billed separately from A/B testing and feature flag requests. See our [analytics pricing](/product-analytics#pricing) for more details.
-
 ### Integrations
 
 Both PostHog and Statsig have a range of integrations that enable them to import, export, enhance, and make use of data, but PostHog being open source means you can [create your own integration](/docs/apps/build).
@@ -205,5 +189,3 @@ Statsig is free up to 1M requests per month. Thereafter, it's $150 per month for
 ### Does PostHog offer discounts for nonprofits and startups?
 
 Yes, PostHog offers both. Nonprofit organizations can contact our team and are usually eligible for a 50% discount, while startups can sign up for $50,000 of free credit (and a host of other perks) in the [PostHog for Startups program](/startups).
-
-<ArrayCTA />
