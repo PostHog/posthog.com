@@ -24,7 +24,15 @@ While we have a transparent pricing available, you'll need to use our [pricing c
 
 ## Discounts
 
-Our standard monthly [pricing](/pricing) has volume discounts built in, and we offer a pretty generous 20% discount for annual paid up-front plans, but some customers may ask for more.  This table outlines what we would require in return (bigger spend/longer commitment) to secure that bigger discount.
+Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practise when negotiating software contracts for the customer (and their procurement team) to ask for a discount.  We can be super transparent about the levers we have in discounting PostHog:
+
+1. In our consumption-based pricing model, the easiest way to reduce spend is to ensure that the customer is only sending data to us which is valuable to them.  There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
+2. **Annual Plan:** We offer a 20% discount on an annual paid-up-front plan, because it's beneficial to PostHog to have a customer committed for a year.
+3. **Higher Spend:** We offer an additional 5% and then 15% on top of the annual plans when the customer spends above $60k and $100k respectively.
+4. **Multi-year:** We offer an additional 5% for each additional year of commitment, as longer commitments are beneficial to PostHog.  
+5. **Up-front payment:** We offer an additional 5% where a *multi-year* contract is all **paid up-front**, as it's better for PostHog to have the money in the bank.
+
+The below table summarizes the discount levels contained in points 2-4:
 
 | Minimum Spend | 1 Year        | 2 Year         | 3 Year        |
 |---------------|---------------|----------------|---------------|
