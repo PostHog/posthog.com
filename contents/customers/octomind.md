@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/octomind_logo_dark_a89deeee90.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/adauris_62af5ac994.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_octomind_bb047603a6.jpg
 featuredCustomer: false
 industries:
   - 'Devtool, SaaS'
