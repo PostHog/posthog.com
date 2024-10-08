@@ -113,7 +113,7 @@ Our teams have a lot of autonomy. They decide on their roadmap, goals, and imple
 - Choosing the right metrics to [measure the success of new features](https://newsletter.posthog.com/p/how-to-build-new-features-users-love).
 - Understanding the infrastructure requirements and scalability.
 
-To guide the development of mobile replay, [Manoel](/community/profiles/1166) researched competitors and feedback about them. He and [Paul](/community/profiles/69) also developed a spec for mobile replay that included details about the client lifecycle, API request, data structure, and compatibility with [rrweb](https://github.com/rrweb-io/rrweb). This research and planning helps them build a feature that makes business sense while also being scalable and maintainable.
+To guide the [development of mobile replay](/blog/mobile-session-replay), [Manoel](/community/profiles/1166) researched competitors and feedback about them. He and [Paul](/community/profiles/69) also developed a spec for mobile replay that included details about the client lifecycle, API request, data structure, and compatibility with [rrweb](https://github.com/rrweb-io/rrweb). This research and planning helps them build a feature that makes business sense while also being scalable and maintainable.
 
 The ability to see the bigger picture enables us to make better long-term decisions. If we’re too tunnel-visioned, we can miss opportunities or build things that break in the long run.
 
