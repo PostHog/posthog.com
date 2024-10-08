@@ -96,6 +96,7 @@ We hire Support Engineers once a product reaches a significant level of scale an
 - Feature success
 - Comms
 - Data warehouse
+- Customer Success
 
 Support engineers respond to as many tickets as they can for these products, and escalate other tickets to the appropriate teams as needed. For all other products, the engineers on those teams are directly responsible for support. The support runbook is maintained on the [Support Hero page](/handbook/engineering/support-hero). 
 
