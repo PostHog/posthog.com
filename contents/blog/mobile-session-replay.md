@@ -16,11 +16,11 @@ Web session replay has been a core part of PostHog since our first hackathon way
 
 Why the long wait? 
 
-1. It made sense for us to focus mainly on web-based B2B customers during our early-stage phase.
+1. We had much more demand from web-based B2B customers during our early-stage phase.
 
-2. We shipped a whole suite of products, including feature flags, experiments, surveys and (more recently) our own data warehouse.
+2. We went wide instead of deep. We shipped a whole suite of products, including feature flags, experiments, surveys and (more recently) our own data warehouse.
 
-3. Building reliable and useful replay for mobile apps is way harder than web.
+3. Building performant and functional replay for mobile apps is way harder than web.
 
 Happily, after several months of hard work from the replay team, we have betas for [iOS](/docs/session-replay/ios), [Android](/docs/session-replay/android), and [React Native](/docs/session-replay/react-native), with [Flutter](https://github.com/PostHog/posthog-flutter/issues/69) coming soon. 
 
@@ -28,23 +28,25 @@ This post covers how it works and some the technical challenges we overcame it m
 
 ## What's so difficult about mobile session replay?
 
-Developers have complained about [the lack of good mobile replay options](https://medium.com/goodones/15-years-later-there-is-still-no-good-session-replay-for-ios-f8d335999737). Why is that the case?
+Developers complain about [the lack of good mobile replay options](https://medium.com/goodones/15-years-later-there-is-still-no-good-session-replay-for-ios-f8d335999737). The existing options were too expensive, ruined performance, lacked privacy controls, or locked behind [annoying salespeople](/founders/negotiate-software-better). These are all antithetical to how we do things at PostHog.
+
+Why was it this way for so long?
 
 ### 1. Multiple platforms
 
-The industry's big secret about web session replay is that it largely relies on a single open-source library to work: [rrweb](https://github.com/rrweb-io/rrweb). It includes tools for recording web interactions and state changes, structuring session data, and playback. 
+The industry's big secret about web session replay is that it largely relies on a single open-source library to work: [rrweb](https://github.com/rrweb-io/rrweb). It includes tools for recording web interactions and state changes, structuring session data, and playback.
 
-Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, we needed to do all the work ourselves, and this was a lot. Instead of a single JavaScript SDK, mobile requires multiple (like iOS, Android, React Native, and Flutter). 
+Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, you simply need to do a lot of work. Instead of a single JavaScript SDK, mobile requires multiple (like iOS, Android, React Native, and Flutter) and all the building and testing that goes with it.
 
 There are even breaking differences within platforms. For example, Jetpack Compose uses a compositional model for UI, which is different from Android's traditional view-based model. This means you need to develop separate ways of doing replays when using it. iOS has a similar problem with SwiftUI versus UIKit.
 
 ### 2. Performance
 
-Phones are much less powerful than desktops. Because of this, we need to be much more sensitive about performance. 
+Phones are much less powerful than desktops, and not all phones are a top-of-the-line iPhone. Because of this, we need to be much more sensitive about performance. 
 
-If you've ever tried to record your phone screen, you would know its impact on performance. Apps take longer to load, animations become choppy, reactivity degrades, and your phone heats up.
+If you've ever tried to record your screen on an older phone, you would know its impact on performance. Apps take longer to load, animations become choppy, reactivity degrades, and your phone heats up.
 
-Anything that degrades your user experience is not an option for many developers.
+Developers don't know what devices their users are on, so they need to be especially careful about performance. Anything that degrades user experience is not an option for many developers.
 
 ### 3. Privacy
 
@@ -56,11 +58,11 @@ Mobile doesn't have standardized structures or elements. Accessibility identifie
 
 ### 4. Testing
 
-We're big fans of [dogfooding](/product-engineers/dogfooding) at PostHog. Often, we are our own best users, but we don't have a mobile app.
+We're big fans of [dogfooding](/product-engineers/dogfooding) at PostHog. This helps us [test in production](/product-engineers/testing-in-production), find issues, and fix them before they affect users. We can often ship a feature early because we can test it ourselves.
 
-This meant that during development we relied on demo and open source apps. This risks creating something that doesn't work well for larger, production-quality apps.
+Unfortunately, like most analytics tools, PostHog is built for the desktop and we don't have a mobile app. We can't dogfood mobile replay and need to spend more time testing in development to make up for it.
 
-Developing a high-quality mobile replay product means relying more on our users and their feedback.
+This means relying more on demo and open source apps as well as our users and their feedback. If we were not careful, we would ship more bugs and build something that doesn't work well for larger, production-quality apps.
 
 ## How we solved these problems
 
@@ -135,6 +137,13 @@ We solved the testing problem in 3 key ways:
 ## Making mobile session replay available for everyone
 
 In many ways, mobile has been neglected by the analytics industry. Tools like session replay have either not existed, been locked behind enterprise plans, or been too expensive for most developers.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1725526016/posthog.com/contents/Screenshot_2024-09-05_at_9.46.17_AM.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1725526016/posthog.com/contents/Screenshot_2024-09-05_at_9.46.32_AM.png" 
+  alt="iOS session replays in PostHog" 
+  classes="rounded"
+/>
 
 We want to change this. Mobile replay is free while in beta, and once it's out of beta, we'll follow [our pricing principles](/handbook/engineering/feature-pricing), making it as affordable as possible.
 
