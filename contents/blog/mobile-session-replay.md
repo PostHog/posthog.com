@@ -14,19 +14,19 @@ tags:
 
 [Session replay](/session-replay) is one of the most powerful tools for understanding user behavior. Web session replay has been a core part of PostHog for a long time now (it was built in our first hackathon), but mobile teams have had to wait longer.
 
-Fortunately, it's finally here on [iOS](/docs/session-replay/ios), [Android](/docs/session-replay/android), and [React Native](/docs/session-replay/react-native) (with [Flutter](https://github.com/PostHog/posthog-flutter/issues/69) coming soon). 
+Finally, it's here on [iOS](/docs/session-replay/ios), [Android](/docs/session-replay/android), and [React Native](/docs/session-replay/react-native) (with [Flutter](https://github.com/PostHog/posthog-flutter/issues/69) coming soon). 
 
-What took so long? Although we had the structure to ingest and playback replays, recording them in mobile apps is much trickier than in web apps. This post goes over why and how we finally managed to overcome them.
+What took so long? Recording them in mobile apps is much trickier than in web apps. This post goes over why and how we finally managed to make it happen.
 
 ## What's so difficult about mobile session replay?
 
-Others have complained about [the lack of good mobile replay options](https://medium.com/goodones/15-years-later-there-is-still-no-good-session-replay-for-ios-f8d335999737). Why is that the case?
+Developers have complained about [the lack of good mobile replay options](https://medium.com/goodones/15-years-later-there-is-still-no-good-session-replay-for-ios-f8d335999737). Why is that the case?
 
 ### 1. Multiple platforms
 
 The industry's big secret about web session replay is that it largely relies on a single open source library to work: [rrweb](https://github.com/rrweb-io/rrweb). It includes tools for recording web interactions and state changes, structuring session data, and playback. 
 
-Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, we needed to do all the work ourselves, and when compared to the web, this is a lot. Instead of a single JavaScript SDK, mobile requires multiple (like iOS, Android, React Native, and Flutter). 
+Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, we needed to do all the work ourselves, and this was a lot. Instead of a single JavaScript SDK, mobile requires multiple (like iOS, Android, React Native, and Flutter). 
 
 There are even breaking differences within platforms. For example, Jetpack Compose uses a compositional model for UI, which is different from Android's traditional view-based model. This means you need to develop separate ways of doing replays when using it. iOS has a similar problem with SwiftUI versus UIKit.
 
@@ -54,9 +54,7 @@ This meant that during development we relied on demo and open source apps. This 
 
 Developing a high-quality mobile replay product means relying more on our users and their feedback.
 
-## Solving mobile session replay's big problems
-
-Here's how we tackled all four of these:
+## How we solved these problems
 
 ### 1. Multiple platforms
 
@@ -92,7 +90,7 @@ Beyond our focus on wireframe mode, the biggest performance improvements came fr
 
 ### 3. Privacy
 
-As for privacy, we built the ability to mask all text inputs and images as well as redact certain views with `ph-no-capture` like this:
+As for privacy, we built the ability to mask all text inputs and images as well as redact certain views by adding `ph-no-capture` tags like this:
 
 <MultiLanguage>
 
