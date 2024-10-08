@@ -1,5 +1,5 @@
 ---
-date: 2024-10-07
+date: 2024-10-08
 title: 'In-depth: PostHog vs Heap'
 rootPage: /blog
 sidebar: Blog
@@ -18,26 +18,40 @@ tags:
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
+Could the intro points be:
+
+We're built by engineers for engineers
+Engineers choose what to build, iterate with customers, do support
+SDKs, APIs, SQL querying, and warehouse
+All-in-one
+We're transparent
+Pricing
+No need to hop on a call, self-serve
+Open source
+
 ## How is PostHog different?
 
-### 1. We're engineering and product-led
+### 1. We're build for engineers
 
 What does this mean?
 
-- It means our pricing is 100% transparent. 
-- It means engineers make product decisions.
-- It means [we ship fast](/changelog) and iterate based on user feedback. 
+- It means [we ship fast](/changelog) and iterate based on user feedback.
 - It means engineers do support – all product teams have a [weekly support hero](/handbook/engineering/support-hero).
-- It means we work in the open – [our roadmap](/roadmap) and [company handbook](/handbook) are public.  
-- It means no jumping on a "quick call" (unless you want to) – see [how we do sales](/sales).
+- It means we have extensive [public and private API endpoints](/docs/api), and a [powerful SQL query builder](/docs/hogql).
+- It means we support all popular (and many unpopular) [SDKs](/docs/libraries) for client-side, backend, and mobile tracking.
+- It means we make it easy to [test in production](/product-engineers/testing-in-production), conduct [phased rollouts](/tutorials/phased-rollout), run [beta programs](/tutorials/public-beta-program), and so much more.
 
 ### 2. We're an all-in-one platform
 
-Heap is mainly focused on product analytics. This means you need to adopt additional tools for things like feature management, experiments, and surveys. This is all built-in to PostHog – we even have a built-in data warehouse that [integrates with Stripe](/tutorials/stripe-reports) and [Hubspot](/tutorials/hubspot-reports). 
+Heap is mainly focused on product analytics. This means you need to adopt additional tools for things like feature management, experiments, and surveys. They're all built into PostHog – we even have a built-in data warehouse that [integrates with Stripe](/tutorials/stripe-reports) and [Hubspot](/tutorials/hubspot-reports). You can replace half a dozen tools with PostHog, save money, and get more from your data.
 
-### 3. We build for engineers
+### 3. We're totally transparent
 
-We support all popular (and some unpopular) [SDKs](/docs/libraries), extensive [public and private API endpoints](/docs/api), and a [powerful SQL query builder](/docs/hogql), so you can query data how you want. We make it easy to [test in production](/product-engineers/testing-in-production), conduct [phased rollouts](/tutorials/phased-rollout), run [beta programs](/tutorials/public-beta-program), and so much more.
+- How much will PostHog cost? Use our [pricing calculator](/pricing). 
+- What are we working on? It's on our [public roadmap](/roadmap)? 
+- How does sales work? We have a [whole page on it](/sales).
+- What do we care about? We explain everything in our [public company handbook](/handbook).
+- How do we make money? That's [in the handbook](/handbook/how-we-make-money), too.
 
 ## Comparing PostHog and Heap
 
@@ -58,7 +72,7 @@ We support all popular (and some unpopular) [SDKs](/docs/libraries), extensive [
   <ComparisonRow column1={true} column2={false} feature="Open source" description="Build your own apps and contribute code" />
 </ComparisonTable>
 
-> 💡 **Good to know:** PostHog can replace multiple tools, such as [Hotjar](/blog/posthog-vs-hotjar), [Google Analytics](/blog/posthog-vs-ga4), and [LaunchDarkly](/blog/posthog-vs-launchdarkly). This makes it a lot easier to extract usable insights, since you don't have to constantly switch between tools. Running PostHog on both your product and website makes it easier to understand how marketing activity influences signups and usage. 
+> 💡 **Good to know:** PostHog can replace multiple tools, such as [Hotjar](/blog/posthog-vs-hotjar), [Google Analytics](/blog/posthog-vs-ga4), and [LaunchDarkly](/blog/posthog-vs-launchdarkly). This makes it a lot easier to extract usable insights, since you don't have to constantly switch between tools. Running PostHog on both your product and website makes it easier to understand how marketing activity influences signups and usage, too. 
 
 ### Product analytics
 
