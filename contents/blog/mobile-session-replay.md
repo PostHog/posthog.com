@@ -1,6 +1,6 @@
 ---
 title: How we built mobile replay (and why it took so long)
-date: 2024-10-04
+date: 2024-10-08
 author:
  - ian-vanagas
  - manoel-aranda-neto
@@ -40,15 +40,15 @@ Anything that degrades your user experience is not an option for many developers
 
 ### 3. Privacy
 
-A big difference between web and mobile apps is the DOM. 
+To protect users privacy, developers often mask and exclude sensitive information. The tricky part of this is identifying what information is sensitive.
 
-In web apps, this provides a hierarchical tree structure that represents and uniquely identifies elements. The web also has standardized elements, like `<input type="password">`. Combining these makes it easier to identify, mask, and exclude sensitive elements on the web.
+Web apps rely on the DOM to do this. The DOM provides a hierarchical tree structure that represents and uniquely identifies elements. The web also has standardized elements, like `<input type="password">`. Combining these makes it easier to identify, mask, and exclude sensitive elements on the web.
 
 Mobile doesn't have standardized structures or elements. Accessibility identifiers are also inconsistently implemented. This means identifying, masking, and excluding content is a lot trickier.
 
 ### 4. Testing
 
-We're big fans of [dogfooding](/product-engineers/dogfooding) at PostHog. Often, we are our own best users, but we don't have a mobile app. 
+We're big fans of [dogfooding](/product-engineers/dogfooding) at PostHog. Often, we are our own best users, but we don't have a mobile app.
 
 This meant that during development we relied on demo and open source apps. This risks creating something that doesn't work well for larger, production-quality apps.
 
@@ -58,7 +58,7 @@ Developing a high-quality mobile replay product means relying more on our users 
 
 ### 1. Multiple platforms
 
-We took a simple approach to solving this problem: do the work to develop for each platform.
+The solution to this problem is plastered on motivation posters everywhere: **do the work** (to develop for each platform).
 
 The one thing that made this easier was reusing our existing session replay infrastructure. This included the data structure, the way to store replays, as well as a complete product for playback and analysis.
 
