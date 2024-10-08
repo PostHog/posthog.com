@@ -84,7 +84,7 @@ LogRocket and PostHog both offer robust, full-featured [session replay tools](/b
 
 <ComparisonTable column1="PostHog" column2="LogRocket">
   <ComparisonRow column1={true} column2={true} feature="Web app recordings" description="Capture recordings from single-page apps" />
-  <ComparisonRow column1="Beta" column2={true} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
+  <ComparisonRow column1={true} column2={true} feature="Mobile app recordings" description="Capture recordings in iOS and Android apps" />
   <ComparisonRow column1={true} column2={true} feature="Identity detection" description="Link recordings to user IDs" />
   <ComparisonRow column1={true} column2={true} feature="Console logs" description="Capture extra content from a users’ browser environment" />
   <ComparisonRow column1={true} column2={true} feature="Playlists" description="Sort recordings into static and dynamic playlists" />
@@ -98,13 +98,10 @@ LogRocket and PostHog both offer robust, full-featured [session replay tools](/b
 
 ### Heatmaps and click tracking
 
-LogRocket’s heatmap and click tracking functionality exceeds PostHog’s and enables you to visualize more precisely how users interact with your site at the aggregate level. PostHog’s [toolbar](/docs/toolbar) focuses on visualizing clicks, and enabling users to [quickly track such events within product analytics](/tutorials/toolbar).
-
-<ComparisonTable column1="LogRocket" column2="PostHog">
-  <ComparisonRow column1={true} column2={false} feature="Heatmaps" description="Visualize cursor movements on a page" />
+<ComparisonTable column1="PostHog" column2="LogRocket">
+  <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize cursor movements on a page" />
   <ComparisonRow column1={true} column2={true} feature="Clickmaps" description="Visualize where users click on a page" />
-  <ComparisonRow column1={true} column2={false} feature="Scrollmaps" description="Visualize how far down a page users scroll" />
-  <ComparisonRow column1={false} column2={false} feature="Eyetracking" description="Visualize precisely where users are looking on a page" />
+  <ComparisonRow column1={true} column2={true} feature="Scrollmaps" description="Visualize how far down a page users scroll" />
 </ComparisonTable>
 
 ### Tracking & SDKs
@@ -211,5 +208,3 @@ We recommend all users deploy a reverse proxy, which enables you send events to 
 ### Can I use PostHog with a CDP? (Segment, Rudderstack, etc.)
 
 Yes. See [Using PostHog with a CDP](/docs/advanced/cdp) in our docs.
-
-<ArrayCTA />
