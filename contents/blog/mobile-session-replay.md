@@ -12,11 +12,19 @@ tags:
  - Guides
 ---
 
-[Session replay](/session-replay) is one of the most powerful tools for understanding user behavior. Web session replay has been a core part of PostHog for a long time now (it was built in our first hackathon), but mobile teams have had to wait longer.
+Web session replay has been a core part of PostHog since our first hackathon way back in 2020, but we only released our first betas for mobile apps in April of this year.
 
-Finally, it's here on [iOS](/docs/session-replay/ios), [Android](/docs/session-replay/android), and [React Native](/docs/session-replay/react-native) (with [Flutter](https://github.com/PostHog/posthog-flutter/issues/69) coming soon). 
+Why the long wait? 
 
-What took so long? Recording them in mobile apps is much trickier than in web apps. This post goes over why and how we finally managed to make it happen.
+1. It made sense for us to focus mainly on web-based B2B customers during our early-stage phase.
+
+2. We shipped a whole suite of products, including feature flags, experiments, surveys and (more recently) our own data warehouse.
+
+3. Building reliable and useful replay for mobile apps is way harder than web.
+
+Happily, after several months of hard work from the replay team, we have betas for [iOS](/docs/session-replay/ios), [Android](/docs/session-replay/android), and [React Native](/docs/session-replay/react-native), with [Flutter](https://github.com/PostHog/posthog-flutter/issues/69) coming soon. 
+
+This post covers how it works and some the technical challenges we overcame it make it.
 
 ## What's so difficult about mobile session replay?
 
@@ -24,7 +32,7 @@ Developers have complained about [the lack of good mobile replay options](https:
 
 ### 1. Multiple platforms
 
-The industry's big secret about web session replay is that it largely relies on a single open source library to work: [rrweb](https://github.com/rrweb-io/rrweb). It includes tools for recording web interactions and state changes, structuring session data, and playback. 
+The industry's big secret about web session replay is that it largely relies on a single open-source library to work: [rrweb](https://github.com/rrweb-io/rrweb). It includes tools for recording web interactions and state changes, structuring session data, and playback. 
 
 Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, we needed to do all the work ourselves, and this was a lot. Instead of a single JavaScript SDK, mobile requires multiple (like iOS, Android, React Native, and Flutter). 
 
