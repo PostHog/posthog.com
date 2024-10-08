@@ -8,11 +8,13 @@ export default function SideModal({
     title,
     open,
     setOpen,
+    className = '',
 }: {
     children: React.ReactNode
     title?: string
     open: boolean
     setOpen: Dispatch<SetStateAction<boolean>>
+    className?: string
 }): JSX.Element {
     return (
         <Modal open={open} setOpen={setOpen}>
@@ -21,7 +23,7 @@ export default function SideModal({
                     transition={{ type: 'tween' }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="bg-tan dark:bg-dark z-10 absolute left-4 right-4 md:right-0 md:left-auto top-4 md:top-0 bottom-0 border border-border dark:border-dark md:border-t-0 md:border-r-0 md:border-b-0 h-full max-w-[500px] p-5 flex flex-col overflow-auto rounded-tl-md rounded-tr-md md:rounded-none shadow-xl"
+                    className={`bg-tan dark:bg-dark z-10 absolute left-4 right-4 md:right-0 md:left-auto top-4 md:top-0 bottom-0 border border-border dark:border-dark md:border-t-0 md:border-r-0 md:border-b-0 h-full max-w-[500px] p-5 flex flex-col overflow-auto rounded-tl-md rounded-tr-md md:rounded-none shadow-xl ${className}`}
                 >
                     <div className="relative">
                         <div

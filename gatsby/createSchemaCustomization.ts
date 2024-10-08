@@ -257,6 +257,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       secure_url: String
       public_id: String
     }
+    type PostHogDestination implements Node {
+      mdx: Mdx @link(by: "frontmatter.templateId", from: "destinationId")
+    }
   `)
     createTypes([
         schema.buildObjectType({

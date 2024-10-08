@@ -1,73 +1,29 @@
-import Chip from 'components/Chip'
-import FooterCTA from 'components/FooterCTA'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
-import { navigate } from 'gatsby'
-import List from 'components/List'
-
-const filters = [
-    {
-        type: 'type',
-        name: 'Data-in',
-    },
-    {
-        type: 'type',
-        name: 'Data-out',
-    },
-    {
-        type: 'type',
-        name: 'Ingestion-filtering',
-    },
-    {
-        type: 'maintainer',
-        name: 'Official',
-    },
-    {
-        type: 'maintainer',
-        name: 'Community',
-    },
-]
+import { AnimatePresence, motion } from 'framer-motion'
+import { IconSearch } from '@posthog/icons'
+import Fuse from 'fuse.js'
+import Select from 'components/Select'
+import SideModal from 'components/Modal/SideModal'
+import { MDXProvider } from '@mdx-js/react'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { TemplateParametersFactory } from '../../templates/Handbook'
 
 function PipelinesPage({ location }) {
     const {
-        pipelines: { nodes },
+        pipelines: { nodes, categories },
     } = useStaticQuery(query)
-    const [pipelines, setPipelines] = useState(nodes)
-    const [filteredPipelines, setFilteredPipelines] = useState(null)
-    const [currentFilter, setCurrentFilter] = useState('all')
 
-    const filter = (filter) => pipelines.filter(filter)
-
-    const filterPipelines = (type, name) => {
-        let filteredPipelines = []
-        if (type === 'type') {
-            filteredPipelines = filter((pipeline) => pipeline.frontmatter.filters?.type.includes(name))
-        }
-        if (type === 'maintainer') {
-            filteredPipelines = filter((pipeline) => pipeline.frontmatter.filters?.maintainer === name)
-        }
-        if (type === 'builtIn') {
-            filteredPipelines = filter((pipeline) => pipeline.frontmatter.filters?.builtIn)
-        }
-        setCurrentFilter(name)
-        setFilteredPipelines(filteredPipelines)
-    }
-
-    const resetFilters = () => {
-        navigate('?')
-        setCurrentFilter('all')
-        setFilteredPipelines(pipelines)
-    }
-
-    useEffect(() => {
-        const params = new URLSearchParams(location?.search)
-        const filter = params.get('filter')
-        const value = params.get('value')
-
-        if (filter && value) filterPipelines(filter, value)
-    }, [location])
+    const [searchValue, setSearchValue] = React.useState('')
+    const [selectedCategory, setSelectedCategory] = React.useState('All')
+    const nodesByCategory =
+        selectedCategory === 'All' ? nodes : nodes.filter((node) => node.category.includes(selectedCategory))
+    const fuse = useMemo(() => new Fuse(nodesByCategory, { keys: ['name', 'description'] }), [nodesByCategory])
+    const filteredNodes = searchValue ? fuse.search(searchValue).map(({ item }) => item) : nodesByCategory
+    const [selectedDestination, setSelectedDestination] = React.useState(null)
+    const [modalOpen, setModalOpen] = React.useState(false)
 
     return (
         <Layout>
@@ -76,42 +32,133 @@ function PipelinesPage({ location }) {
                 description="Get all your data into PostHog with 60+ sources & destinations"
                 image={`/og-images/apps.jpeg`}
             />
-            <header className="py-12">
-                <h2 className="m-0 text-center text-[2.75rem] leading-none  md:text-6xl text-primary dark:text-primary-dark">
-                    Get all your data into PostHog with <br className="hidden lg:block" />
-                    <span className="text-blue">data connections</span>
-                </h2>
-                <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary dark:text-primary-dark max-w-2xl opacity-75">
-                    (Our full customer data platform is coming soon.)
-                </p>
-            </header>
-            <div className="flex justify-start px-4 md:justify-center items-center mb-6 space-x-2 overflow-auto whitespace-nowrap">
-                <Chip onClick={resetFilters} active={currentFilter === 'all'} text="All" />
-                {filters.map(({ type, name }) => (
-                    <Chip
-                        onClick={() => navigate(`?filter=${type}&value=${name.toLowerCase()}`)}
-                        active={currentFilter === name.toLowerCase()}
-                        key={name}
-                        text={name}
+            <SideModal
+                title={
+                    selectedDestination ? (
+                        <div className="flex space-x-2">
+                            <div className="size-7 flex-shrink-0">
+                                <img
+                                    className="w-full"
+                                    src={`https://app.posthog.com/${selectedDestination.icon_url}`}
+                                    alt={selectedDestination.name}
+                                />
+                            </div>
+                            <span>{selectedDestination.name}</span>
+                        </div>
+                    ) : (
+                        ''
+                    )
+                }
+                open={modalOpen}
+                setOpen={setModalOpen}
+                className="max-w-screen-md"
+            >
+                {selectedDestination && (
+                    <div className="article-content">
+                        <MDXProvider
+                            components={{
+                                TemplateParameters: TemplateParametersFactory(selectedDestination.inputs_schema),
+                            }}
+                        >
+                            <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
+                )}
+            </SideModal>
+            <div className="max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12">
+                <aside className="md:col-span-1">
+                    <div className="md:block hidden">
+                        <h2>Destinations</h2>
+                        <ul className="list-none m-0 p-0">
+                            {[{ fieldValue: 'All' }, ...categories].map((category) => {
+                                const value = category.fieldValue
+                                const active = selectedCategory === value
+                                return (
+                                    <li className="relative flex items-center" key={value}>
+                                        <button
+                                            onClick={() => setSelectedCategory(value)}
+                                            className={`text-left py-1 bg-light dark:bg-dark z-10 relative transition-all ${
+                                                active ? 'font-bold ml-2' : ' ml-0'
+                                            }`}
+                                        >
+                                            {value}
+                                        </button>
+                                        <AnimatePresence>
+                                            {active && (
+                                                <motion.span
+                                                    initial={{ opacity: 0, translateX: '100%' }}
+                                                    animate={{ opacity: 1, translateX: '-100%' }}
+                                                    exit={{ opacity: 0, translateX: '100%' }}
+                                                    className="w-1 h-[70%] absolute left-0 bg-red rounded-full"
+                                                />
+                                            )}
+                                        </AnimatePresence>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                    <Select
+                        className="md:hidden block w-full bg-white border border-border dark:border-dark dark:bg-accent-dark !rounded-md mb-2"
+                        placeholder="Destinations"
+                        value={selectedCategory}
+                        onChange={setSelectedCategory}
+                        options={[
+                            { value: 'All', label: 'All' },
+                            ...categories.map(({ fieldValue }) => ({ value: fieldValue, label: fieldValue })),
+                        ]}
                     />
-                ))}
-            </div>
-            <List
-                className="max-w-2xl mx-auto"
-                items={[
-                    ...(filteredPipelines || pipelines)?.map(
-                        ({ fields: { slug }, frontmatter: { thumbnail, title, badge, price } }) => ({
-                            label: title,
-                            url: slug,
-                            badge: badge?.toLowerCase() !== 'built-in' && (price || 'Free'),
-                            image: thumbnail?.publicURL,
-                        })
-                    ),
-                    { label: <>Build your own &rarr;</>, url: '/docs/cdp/build', image: '/images/builder-hog.png' },
-                ]}
-            />
-            <div className="my-12 md:my-24 px-5 max-w-[960px] mx-auto">
-                <FooterCTA />
+                </aside>
+                <section className="md:col-span-3">
+                    <div className="w-full mb-5 rounded-md border border-border dark:border-dark py-3 px-4 bg-white dark:bg-accent-dark flex space-x-1.5">
+                        <IconSearch className="w-5 opacity-60" />
+                        <input
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            className="bg-transparent w-full border-none outline-none"
+                            placeholder="Search destinations"
+                        />
+                    </div>
+
+                    <ul className="list-none m-0 p-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
+                        {filteredNodes.map((destination) => {
+                            const { id, name, description, icon_url } = destination
+                            const Container = destination.mdx ? 'button' : 'div'
+                            return (
+                                <li key={id}>
+                                    <Container
+                                        {...(destination.mdx
+                                            ? {
+                                                  onClick: () => {
+                                                      setSelectedDestination(destination)
+                                                      setModalOpen(true)
+                                                  },
+                                              }
+                                            : {})}
+                                        className={`flex items-start text-left size-full border border-border dark:border-dark rounded-md bg-white dark:bg-accent-dark p-4 ${
+                                            destination.mdx ? 'click' : ''
+                                        }`}
+                                    >
+                                        <div>
+                                            <div className="flex space-x-3 items-center">
+                                                <div className="size-7 flex-shrink-0">
+                                                    <img
+                                                        className="w-full"
+                                                        src={`https://app.posthog.com/${icon_url}`}
+                                                        alt={name}
+                                                    />
+                                                </div>
+
+                                                <h3 className="m-0 leading-none text-lg">{name}</h3>
+                                            </div>
+                                            <p className="opacity-70 m-0 ml-10 text-base leading-snug">{description}</p>
+                                        </div>
+                                    </Container>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </section>
             </div>
         </Layout>
     )
@@ -119,24 +166,27 @@ function PipelinesPage({ location }) {
 
 const query = graphql`
     query {
-        pipelines: allMdx(filter: { fields: { slug: { regex: "/^/cdp/(?!.*/docs).*/" } } }) {
+        pipelines: allPostHogDestination {
             nodes {
                 id
-                fields {
-                    slug
+                name
+                category
+                description
+                icon_url
+                mdx {
+                    body
                 }
-                frontmatter {
-                    thumbnail {
-                        publicURL
-                    }
-                    title
-                    badge
-                    price
-                    filters {
-                        type
-                        maintainer
-                    }
+                inputs_schema {
+                    key
+                    type
+                    label
+                    secret
+                    required
+                    description
                 }
+            }
+            categories: group(field: category) {
+                fieldValue
             }
         }
     }
