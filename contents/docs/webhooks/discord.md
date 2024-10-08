@@ -5,6 +5,7 @@ showTitle: true
 ---
 
 You can send messages to Discord whenever an [action](/docs/user-guides/actions) triggers.  
+# TODO
 
 ## 1. Create an incoming webhook in Discord 
 
@@ -21,19 +22,27 @@ It should look something like this.
 
 For more information, see the [Discord webhook docs](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
 
-## 2. Setup the webhook in PostHog
+# TODO: this is no longer valid
 
-Copy the Webhook URL from Discord, navigate to project settings in PostHog, and paste the URL into the "Webhook integration section".
+[//]: # (## 2. Setup the webhook in PostHog)
 
-![Add webhook integration](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/webhooks/webhook-integration.png)
+[//]: # ()
+[//]: # (Copy the Webhook URL from Discord, navigate to project settings in PostHog, and paste the URL into the "Webhook integration section".)
 
-Click "Test & Save" and you should receive a message on Discord. 
+[//]: # ()
+[//]: # (![Add webhook integration]&#40;https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/webhooks/webhook-integration.png&#41;)
 
-## 3. Post actions to the webhook
+[//]: # ()
+[//]: # (Click "Test & Save" and you should receive a message on Discord. )
 
-In PostHog, navigate to the [action](https://app.posthog.com/data-management/actions) that you'd like to receive webhooks for. Then select "Post to webhook when this action is triggered". You can also modify the [message format](/docs/webhooks#message-formatting).
+[//]: # ()
+[//]: # (## 3. Post actions to the webhook)
 
-![PostHog edit action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/post-action-slack.png)
+[//]: # ()
+[//]: # (In PostHog, navigate to the [action]&#40;https://app.posthog.com/data-management/actions&#41; that you'd like to receive webhooks for. Then select "Post to webhook when this action is triggered". You can also modify the [message format]&#40;/docs/webhooks#message-formatting&#41;.)
+
+[//]: # ()
+[//]: # (![PostHog edit action]&#40;https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/post-action-slack.png&#41;)
 
 ## 4. Celebrate
 ![](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/discord-message.png)

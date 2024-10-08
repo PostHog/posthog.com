@@ -110,48 +110,13 @@ When you go to a route that doesn’t exist, like [http://localhost:3000/test](h
 
 ## Sending 404s to Slack
 
-Since we want to send our 404s and broken links to somewhere we check frequently, we will set up a Slack webhook to send notifications. There are two options for setting this up: PostHog webhooks or our new realtime destinations.
+Since we want to send our 404s and broken links to somewhere we check frequently, we will set up a Slack webhook to send notifications.
 
-### Option 1: Using PostHog webhooks
+### Using realtime destinations
 
-To do this send 404s to Slack using PostHog webhooks:
+Our [realtime destinations](/docs/cdp/destinations) provide customizable destinations, flexible formatting options, a revamped configuration UI. We can use them to send survey responses to Slack or any other destination that supports webhooks.
 
-1. Start by going to the [Slack developer dashboard](https://api.slack.com/apps?new_app=1), create an app from scratch, name it, select your workspace, and click "Create App."
-
-2. Next, go to "Incoming Webhooks," activate them, click "add new webhook to workspace," select a channel (I made a new `404s-broken-links` channel for it), and click allow.
-
-3. Copy your webhook URL for use in PostHog.
-
-#### Creating an action and sending it to Slack
-
-With our Slack webhook, we can set up an action that triggers the webhook when someone hits a 404 or broken link. 
-
-1. Go to your [project settings](https://app.posthog.com/project/settings#webhook), scroll to webhook integration, paste your Slack webhook link, and click "test and save."
-
-2. After successfully sending a test event, you can set up your action. To create it, [go to actions](https://app.posthog.com/data-management/actions) in PostHog, click "New action," select "From event or pageview," and match your "not found" custom event. 
-
-3. Select "Post to webhook when this action is triggered," set your message format to `[user.pathname] by [user.name]`, and press save.
-
-4. Visit [http://localhost:3000/test](http://localhost:3000/test) again, and you’ll see a message in your Slack channel.
-
-![Slack](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/broken-link-checker/slack.mp4)
-
-> **Note:** you can only send actions to one webhook. If you have multiple destinations you want to send to, you can use [Zapier](/docs/apps/zapier-connector).
-
-### Option 2: Using realtime destinations
-
-Our new [realtime destinations](/docs/cdp/destinations) are currently in preview. These provide customizable destinations, more formatting options, a revamped configuration UI. We can use them to send survey responses to Slack or any other destination that supports webhooks.
-
-To do this, start by enabling the **Pipeline destinations 3000** feature preview.
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_27_at_10_43_50_2x_3dfeeef497.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_09_27_at_10_41_53_2x_6d5fb3686c.png"
-    alt="Enable Pipeline destinations 3000 feature preview"
-    classes="rounded"
-/>
-
-Next, go to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations) and search for the **Slack** destination and click **+ Create**. On the creation screen:
+Start by going to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations) and search for the **Slack** destination and click **+ Create**. On the creation screen:
 
 1. Follow the steps to integrate with your Slack workspace if you haven't already and then select it.
 
