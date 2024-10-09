@@ -2667,13 +2667,13 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Data pipelines',
+            name: 'CDP',
             url: '/docs/cdp',
             color: 'sky-blue',
             icon: 'IconDecisionTree',
             children: [
                 {
-                    name: 'Data pipelines (CDP)',
+                    name: 'Customer data platform',
                 },
                 {
                     name: 'Overview',
@@ -3144,6 +3144,12 @@ const menu = [
                 icon: 'IconMessage',
                 color: 'salmon',
                 url: '/surveys',
+            },
+            {
+                name: 'CDP',
+                icon: 'IconDecisionTree',
+                color: 'sky-blue',
+                url: '/cdp',
             },
             {
                 name: 'Data warehouse',
