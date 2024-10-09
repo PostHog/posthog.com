@@ -21,6 +21,8 @@ You'll also need access to the relevant Knock account.
 4. Add your Knock.app webhook destination URL at the configuration step.
 5. Press 'Create & Enable' and watch your 'Audience' list get populated in Knock!
 
+<HideOnCDPIndex>
+
 ## Configuration
 
 <TemplateParameters />
@@ -34,3 +36,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

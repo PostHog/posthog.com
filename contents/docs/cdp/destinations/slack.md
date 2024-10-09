@@ -36,6 +36,8 @@ You'll also need access to the relevant Slack account.
 
 You can see a full example of this in our tutorial on [how to send survey responses to Slack](/tutorials/slack-surveys)
 
+<HideOnCDPIndex>
+
 ## Configuration
 
 <TemplateParameters />
@@ -49,3 +51,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>
