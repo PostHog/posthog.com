@@ -21,17 +21,17 @@ toolsUsed:
 date: 2024-10-05
 ---
 
-Founded in 2017 and backed by [Index Ventures](https://www.indexventures.com/) and [CRV](https://www.crv.com/), Great Expectations creates software to help other teams ensure their data quality and avoid reporting anomalies. As you’d expect the team takes its own data seriously and decided in 2023 they needed the ability to gather data from across the entire user journey. 
+Founded in 2017 and backed by [Index Ventures](https://www.indexventures.com/) and [CRV](https://www.crv.com/), Great Expectations creates software to help other teams ensure data quality and avoid reporting anomalies. As you’d expect, the team takes its own data seriously and decided in 2023 they needed the ability to gather data from across the entire user journey. 
 
-“We have our marketing site, our docs website, and our product,” explains Marketing Project Manager Erica Howard. “We needed to look holistically across all three of these. Prior to PostHog we hadn’t been able to follow these full user journeys or track data in a granular way.”
+“We have our marketing site, our docs website, and our product,” explains Marketing Project Manager Erica Howard. “We needed to look holistically across all three of these. Prior to PostHog, we hadn’t been able to follow these full user journeys or track data in a granular way.”
 
-[Implementing PostHog across all three domains](/tutorials/cross-domain-tracking) also meant that this wasn’t just solving a need for the marketing team either. Soon, every team in the company was using PostHog in some capacity to gather the data they needed. 
+[Implementing PostHog across all three domains](/tutorials/cross-domain-tracking) also meant that this wasn’t just solving a need for the marketing team, either. Soon, every team in the company was using PostHog in some capacity to gather the data they needed. 
 
 “Our growth team also uses PostHog, plus some of our software engineers,” says Erica. “Personally, I came in cold and didn’t know the product at all — but once I’d seen one insight setup it was fairly easy to replicate and go from there. There’s a whole lot more I _could_ do in PostHog, but getting started was pretty easy.”
 
 ### Analytics, annotations, and activation 
 
-As soon as tracking was implemented across the three touch-points, Great Expectations’ marketing and growth teams started creating reporting dashboards to track their most important metrics. 
+As soon as tracking was implemented across the three touchpoints, Great Expectations’ marketing and growth teams started creating reporting dashboards to track their most important metrics. 
 
 “We look at things like the number of unique users and their referral sources,” says Erica. “We also track the number of pageviews per user, session durations, pages per session, etc. We use [user paths](/docs/product-analytics/paths) a lot to see how people move through the site. We have dashboards for most things, plus specialized views looking at particular marketing pages.”
 
