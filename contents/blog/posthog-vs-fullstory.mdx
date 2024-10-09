@@ -96,8 +96,8 @@ You can also do this in reverse by filtering for session replays where particula
 FullStory is _primarily_ a session replay tool, while PostHog is all-in-one platform. FullStory's specialism means it has some extra features compared to Posthog, though the gap isn’t as large as you may imagine... and it's closing fast.
 
 <ComparisonTable column1="PostHog" column2="FullStory">
-  <ComparisonRow column1="In beta" column2={true} feature="iOS app replays" description="Record user sessions in iOS apps." />
-  <ComparisonRow column1="On the roadmap" column2={true} feature="Android app replays" description="Record user sessions in Android apps" />
+  <ComparisonRow column1={true} column2={true} feature="iOS app replays" description="Record user sessions in iOS apps." />
+  <ComparisonRow column1={true} column2={true} feature="Android app replays" description="Record user sessions in Android apps" />
   <ComparisonRow column1={true} column2={true} feature="Web app replays" description="Capture replays from single-page apps" />
   <ComparisonRow column1={true} column2={true} feature="Privacy masking" description="Avoid capturing user data" />
   <ComparisonRow column1={true} column2={true} feature="Conditional capturing" description="Only capture the sessions you want" />
@@ -117,13 +117,12 @@ FullStory is _primarily_ a session replay tool, while PostHog is all-in-one plat
 Beyond this, PostHog and FullStory are roughly comparable even in spite of FullStory’s near-exclusive focus on session replays as a feature. A major exception is PostHog’s lack of mobile app recording features, but [we’re working on it](/roadmap).
 
 ### Heatmaps, clickmaps and scrollmaps
-Different types of heatmaps enable you to see where users are focusing their attention – or even precisely where they are looking on a page. FullStory is inarguably a better heatmapping tool, but PostHog's clickmaps offer all the essential information – especially when used in conjunction with session replays and product analytics.
+Different types of heatmaps enable you to see where users are focusing their attention – or even precisely where they are looking on a page.
 
 <ComparisonTable column1="PostHog" column2="FullStory">
   <ComparisonRow column1={true} column2={true} feature="Clickmaps" description="Visualize where users click on a page" />
-  <ComparisonRow column1={false} column2={false} feature="Scrollmaps" description="Check where users scroll to" />
-  <ComparisonRow column1={false} column2={true} feature="Movement maps" description="Visualize mouse movements" />
-  <ComparisonRow column1={false} column2={false} feature="Eye tracking" description="Support for eye-tracking tools" />
+  <ComparisonRow column1={true} column2={true} feature="Scrollmaps" description="Check where users scroll to" />
+  <ComparisonRow column1={true} column2={true} feature="Movement maps" description="Visualize mouse movements" />
 </ComparisonTable>
 
 ### Apps, integrations and plugins
@@ -150,7 +149,6 @@ Below are some of the most popular apps and integrations for FullStory and PostH
   <ComparisonRow column1={true} column2={true} feature="BigQuery" description="Export data to Google BigQuery for analysis" />
   <ComparisonRow column1={true} column2={true} feature="Rudderstack" description="Sync event and person data" />
 </ComparisonTable>
-
 
 ## Event tracking
 
@@ -206,6 +204,4 @@ Both PostHog and FullStory offer privacy masking to automatically remove text fi
 
 #### What are the alternatives to PostHog and FullStory?
 
-Some other popular session replay tools include [HotJar](/blog/posthog-vs-hotjar) and [LogRocket](/blog/posthog-vs-logrocket). For more information on how PostHog compares to these, check [the session replay page](/session-replay). 
-
-<ArrayCTA />
+Some other popular session replay tools include [HotJar](/blog/posthog-vs-hotjar) and [LogRocket](/blog/posthog-vs-logrocket). For more information on how PostHog compares to these, check [the session replay page](/session-replay).

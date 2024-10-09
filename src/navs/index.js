@@ -612,6 +612,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-as-beta',
             },
             {
+                name: 'Building new products fast',
+                url: '/handbook/product/building-new-products-fast',
+            },
+            {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
             },
@@ -1357,10 +1361,6 @@ export const docsMenu = {
                             url: '/docs/libraries/sentry',
                         },
                         {
-                            name: 'Slack',
-                            url: '/docs/libraries/slack',
-                        },
-                        {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
                         },
@@ -1422,6 +1422,10 @@ export const docsMenu = {
                         {
                             name: 'Nuxt',
                             url: '/docs/advanced/proxy/nuxt',
+                        },
+                        {
+                            name: 'Remix',
+                            url: '/docs/advanced/proxy/remix',
                         },
                         {
                             name: 'Vercel',
@@ -1845,29 +1849,6 @@ export const docsMenu = {
                     icon: 'IconSearch',
                 },
                 {
-                    name: 'Webhooks',
-                    url: '/docs/webhooks',
-                    icon: 'IconWebhooks',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/webhooks',
-                        },
-                        {
-                            name: 'Microsoft Teams',
-                            url: '/docs/webhooks/microsoft-teams',
-                        },
-                        {
-                            name: 'Slack',
-                            url: '/docs/webhooks/slack',
-                        },
-                        {
-                            name: 'Discord',
-                            url: '/docs/webhooks/discord',
-                        },
-                    ],
-                },
-                {
                     name: 'Hog',
                     url: '/docs/hog',
                     icon: 'IconCode',
@@ -2268,10 +2249,6 @@ export const docsMenu = {
             children: [
                 {
                     name: 'Web analytics',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Overview',
@@ -2884,10 +2861,6 @@ export const docsMenu = {
             children: [
                 {
                     name: 'Data warehouse',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Overview',

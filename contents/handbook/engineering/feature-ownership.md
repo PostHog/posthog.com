@@ -41,7 +41,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Insights | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/insights</span>  |
 | Live Events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
 | Messaging (Email, Notifications) | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
-| Notebooks | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
+| Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
 | Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/persons</span>  |

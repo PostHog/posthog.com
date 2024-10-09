@@ -26,6 +26,8 @@ This compatibility imposes a few key differences comparted to other programming 
 - The easiest way to debug your code is to `print()` the variables in question, and then check the logs.
 - Strings must always be written with `'single quotes'`. You may use `f`-string templates like `f'Hello {name}'`.
 
+Read more about the story behind Hog in [Why hog?](#why-hog) below.
+
 ## Syntax
 
 ### Comments
@@ -127,7 +129,7 @@ print(f'hello {f'{str} world'}') // prints 'hello string world'
 Functions are first class variables, just like in JavaScript. You can define them with `fun`, or inline as lambdas:
 
 ```rust
-fun addNumbers(num1, num2) { 
+fun addNumbers(num1, num2) {
     let newNum := num1 + num2
     return newNum
 }
@@ -283,6 +285,49 @@ Hog's standard library includes the following functions and will expand. To see 
 - `md5Hex(arg: string): string`
 - `sha256Hex(arg: string): string`
 - `sha256HmacChainHex(arg: string[]): string`
+
+## Why Hog?
+
+Truth be told, we didn't set out to build our own programming language. We actually wanted to build the **HogVM**: a way to run HogQL expressions synchronously within our NodeJS ingestion pipeline. However, things escalated quickly.
+
+### HogVM
+
+The HogVM is a stack-based bytecode virtual machine (VM). It was built to power event filtering in our real-time delivery system.
+
+It's paired with a compiler that converts HogQL expressions like `properties.$screen_width < properties.$screen_height` into bytecode like `["_H", 1, 32, "$screen_height", 32, "properties", 1, 2, 32, "$screen_width", 32, "properties", 1, 2, 15, 35]`. The HogVM then executes that bytecode.
+
+The HogVM had a few design constraints:
+
+- Virtually no startup time (thousands of different expressions must run against millions of events every minute).
+- Fast enough to filter the firehose of our event stream without drowning us in hosting costs.
+- Runtime flexibility: the ability to embed Hog in many target languages like Python, NodeJS and the browser.
+- Small surface area that makes it easy maintain multiple implementations.
+- Secure enough to run user provided code.
+- Syntax compatible with HogQL.
+
+Effectively, we wanted to run HogQL synchronously within a NodeJS process, at scale. So that's what we built, twice.
+
+We now have two identical HogVMs: one in [Python](https://github.com/PostHog/posthog/blob/master/hogvm/python/execute.py) (to run alongside queries, unreleased), and one in [TypeScript](https://github.com/PostHog/posthog/blob/master/hogvm/typescript/src/execute.ts) (to run in the pipeline, and in the browser). We might even build a third version in Rust soon. The surface area for the VM is really that small.
+
+### Async HogVM
+
+We chose NodeJS for our [old ingestion pipeline](https://posthog.com/blog/how-we-built-an-app-server) because we wanted to give users the ability to write their own custom JavaScript functions. That was a mistake. We never released this on Cloud because it was too risky:
+
+1. There's no way to run untrusted JavaScript without heavy sandboxing (our approach with VM2 fell short).
+2. ~~User provided~~ JavaScript is unpredictable and leaky (unfinished promises, data in globals, etc).
+3. Functions must run until the end. We can't pause or resume and must set short global runtime limits.
+
+The "aha" moment came when we realized we could build a real programming language on top of HogVM to get around these limitations.
+
+The key insight was this: we can pause and resume our own VM at any point, including right before `fetch()` calls. When a script calls `fetch`, we serialize the entire VM state (stack, bytecode, metadata), pass all of that onto the "fetch service" (via a queue like Kafka), push the response back onto the VM's stack, and resume execution on what might be a completely different machine. It doesn't matter if the fetch was called in a for loop or in an extremely recursive call stack, we can pause and resume the language at will. It's magic.
+
+During the [MyKonos hackathon](https://posthog.com/blog/mykonos-hackathon) in May we built the first version of Hog, and then productized it over the next 5 months as part of our new CDP product.
+
+So that's why we built Hog: to run multi-hop user-provided async scripts in a safe, predictable, and scalable way.
+
+### Future Hog
+
+These are the early days for Hog and the HogVM. We will be evolving the language and the experience based on user feedback, so please let us know what you think. We're excited to see what you're going to build with it.
 
 ## Running Hog locally
 

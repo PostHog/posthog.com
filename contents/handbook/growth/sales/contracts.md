@@ -156,6 +156,8 @@ Occasionally, customers will want to sign an MSA instead of referencing our term
 7. Check the signing order (Client, then PostHog normally).
 8. Send for signature.
 
+Sometimes large customers will ask for changes to our MSA. We have a list of the kinds of changes we will/won't consider in a private repo [here](https://github.com/PostHog/company-internal/blob/master/finance/sales%20contract%20changes) that you can generally agree to without the Ops team reviewing. However, if you are ever in doubt, ask Fraser. 
+
 ## Business Associate Agreement (BAA)
 
 We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them.  As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to the Teams plan which is a guaranteed monthly payment.

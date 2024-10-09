@@ -44,13 +44,13 @@ According to BuiltWith, 27% of sites using Hotjar also use an analytics tool lik
 
 <ComparisonTable column1="PostHog" column2="Hotjar">
   <ComparisonRow column1={true} column2={true} feature="Web session replay" description="View real sessions on websites and web apps" />
-  <ComparisonRow column1="Android only*" column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
+  <ComparisonRow column1={true} column2={false} feature="Mobile session replay" description="View real sessions in mobile apps" />
   <ComparisonRow column1={true} column2={true} feature="Event timeline" description="History of everything that happened in a user's session" />
   <ComparisonRow column1={true} column2={false} feature="Network monitor" description="Analyze performance and network calls" />
   <ComparisonRow column1={true} column2={true} feature="Console logs" description="Debug issues faster by browsing the user's console" />
   <ComparisonRow column1={true} column2={true} feature="Heatmaps" description="See where users click and interact" />
   <ComparisonRow column1={true} column2={true} feature="Rage clicks" description="Detect when users click rapidly in the same place" />
-  <ComparisonRow column1={false} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
+  <ComparisonRow column1={true} column2={true} feature="Scroll maps" description="See how far users scroll on websites and apps" />
   <ComparisonRow column1={true} column2={false} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
   <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Control feature access and phase rollouts" />  
   <ComparisonRow column1={true} column2={false} feature="A/B testing" description="Test changes and analyze their impact" />
