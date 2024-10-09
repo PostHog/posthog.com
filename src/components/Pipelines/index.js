@@ -252,7 +252,7 @@ function PipelinesPage({ location }) {
                         />
                     </div>
                 </div>
-                <aside className="md:col-span-1">
+                <aside className="md:col-span-1 md:sticky top-[120px] self-start">
                     <Category
                         active={selectedType === 'All' && selectedCategory === 'All'}
                         value="All sources & destinations"
