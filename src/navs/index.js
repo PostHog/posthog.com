@@ -619,10 +619,6 @@ export const handbookSidebar = [
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
             },
-            {
-                name: 'In-app prompts',
-                url: '/handbook/product/in-app-prompts',
-            },
         ],
     },
     {
