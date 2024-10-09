@@ -9,11 +9,11 @@ tags:
   - surveys
 ---
 
-It's useful to send survey responses from your users to Slack. This way you're notified as soon as they respond to a survey. There are two options for setting this up: PostHog webhooks or our new realtime destinations.
+It's useful to send survey responses from your users to Slack. This way you're notified as soon as they respond to a survey. You can do this using our realtime destinations.
 
-The requirement for both is that you created a survey. Our [docs](/docs/surveys/creating-surveys) cover how to do this, so we won't go into detail here. We also have [framework-specific tutorials](/docs/surveys/tutorials#framework-guides).
+This requires you to create a survey. Our [docs](/docs/surveys/creating-surveys) cover how to do this, so we won't go into detail here. We also have [framework-specific tutorials](/docs/surveys/tutorials#framework-guides).
 
-Next, go to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations) and search for the **Slack** destination and click **+ Create**. On the creation screen:
+Once created, go to the [data pipeline destinations tab](https://us.posthog.com/pipeline/destinations) and search for the **Slack** destination and click **+ Create**. On the creation screen:
 
 1. Follow the steps to integrate with your Slack workspace if you haven't already and then select it.
 
