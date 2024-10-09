@@ -19,6 +19,8 @@ Send event data from PostHog into an HTTP Webhook.
 4. Add your Webhook URL at the configuration step.
 5. Press 'Create & Enable' and watch your 'Events' get sent to the Webhook!
 
+<HideOnCDPIndex>
+
 ## Configuration
 
 <TemplateParameters />
@@ -32,3 +34,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

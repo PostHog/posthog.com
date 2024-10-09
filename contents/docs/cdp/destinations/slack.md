@@ -23,6 +23,8 @@ You'll also need access to the relevant Slack account.
 4. Connect your Slack account and select the channel at the configuration step.
 5. Press 'Create & Enable' and watch your Messages appear in Slack!
 
+<HideOnCDPIndex>
+
 ## Configuration
 
 <TemplateParameters />
@@ -36,3 +38,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

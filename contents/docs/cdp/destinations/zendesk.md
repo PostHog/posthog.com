@@ -21,6 +21,8 @@ You'll also need access to the relevant Zendesk account.
 4. Add your Zendesk subdomain, user email, and API token at the configuration step.
 5. Press 'Create & Enable' and watch your 'Customer' list get populated in Zendesk!
 
+<HideOnCDPIndex>
+
 ## Configuration
 
 <TemplateParameters />
@@ -34,3 +36,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

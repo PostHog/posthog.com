@@ -12,7 +12,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import { Hero } from 'components/Products/Hero'
 import { StaticImage } from 'gatsby-plugin-image'
 import { MenuItem, menuVariants } from 'components/PostLayout/Menu'
-import { CodeBlock } from 'components/CodeBlock'
+import { CallToAction } from 'components/CallToAction'
 
 const sources = [
     {
@@ -198,23 +198,22 @@ function PipelinesPage({ location }) {
                 className="max-w-screen-md"
             >
                 {selectedDestination && (
-                    <div className="article-content">
-                        <MDXProvider
-                            components={{
-                                TemplateParameters: () => {
-                                    const languages = [
-                                        {
-                                            language: 'json',
-                                            code: JSON.stringify(selectedDestination.inputs_schema, null, 2),
-                                        },
-                                    ]
-                                    return <CodeBlock currentLanguage={languages[0]}>{languages}</CodeBlock>
-                                },
-                            }}
-                        >
-                            <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
-                        </MDXProvider>
-                    </div>
+                    <>
+                        <div className="article-content">
+                            <MDXProvider
+                                components={{
+                                    HideOnCDPIndex: () => null,
+                                }}
+                            >
+                                <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
+                            </MDXProvider>
+                        </div>
+                        <div className="border-t border-border dark:border-dark pt-4 mt-4">
+                            <CallToAction to={selectedDestination.mdx.fields.slug} type="secondary">
+                                Learn more in docs
+                            </CallToAction>
+                        </div>
+                    </>
                 )}
             </SideModal>
 
@@ -342,6 +341,9 @@ const query = graphql`
                 icon_url
                 mdx {
                     body
+                    fields {
+                        slug
+                    }
                 }
                 inputs_schema {
                     key
