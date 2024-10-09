@@ -5,15 +5,14 @@ import { SEO } from 'components/seo'
 import { AnimatePresence, motion } from 'framer-motion'
 import { IconSearch, IconDecisionTree } from '@posthog/icons'
 import Fuse from 'fuse.js'
-import Select from 'components/Select'
 import SideModal from 'components/Modal/SideModal'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { TemplateParametersFactory } from '../../templates/Handbook'
 import { useLayoutData } from 'components/Layout/hooks'
 import { Hero } from 'components/Products/Hero'
 import { StaticImage } from 'gatsby-plugin-image'
 import { MenuItem, menuVariants } from 'components/PostLayout/Menu'
+import { CodeBlock } from 'components/CodeBlock'
 
 const sources = [
     {
@@ -202,7 +201,15 @@ function PipelinesPage({ location }) {
                     <div className="article-content">
                         <MDXProvider
                             components={{
-                                TemplateParameters: TemplateParametersFactory(selectedDestination.inputs_schema),
+                                TemplateParameters: () => {
+                                    const languages = [
+                                        {
+                                            language: 'json',
+                                            code: JSON.stringify(selectedDestination.inputs_schema, null, 2),
+                                        },
+                                    ]
+                                    return <CodeBlock currentLanguage={languages[0]}>{languages}</CodeBlock>
+                                },
                             }}
                         >
                             <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
