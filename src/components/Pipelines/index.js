@@ -90,7 +90,7 @@ const sources = [
 
 const Category = ({ onClick, value, active }) => {
     return (
-        <li className="md:m-0 m-1">
+        <>
             <button
                 onClick={() => onClick(value)}
                 className={`group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-[15px] md:px-0 md:pl-3 py-0.5 rounded cursor-pointer px-2 md:border-none border border-border dark:border-dark ${
@@ -110,20 +110,24 @@ const Category = ({ onClick, value, active }) => {
                 </AnimatePresence>
                 <MenuItem color={active} name={value} />
             </button>
-        </li>
+        </>
     )
 }
 
 const Categories = ({ type, categories, onClick, selectedCategory, selectedType }) => {
     return (
-        <li className="mb-3 last:mb-0">
+        <li className="mt-3">
             <p className="flex gap-2 items-baseline text-sm font-semibold md:mx-3 mb-1">
                 <span className="opacity-25">{type}</span>
             </p>
             <ul className="list-none m-0 p-0 md:block flex whitespace-nowrap flex-wrap md:mx-0 -mx-1">
                 {['All', ...categories].map((category) => {
                     const active = selectedType === type && selectedCategory === category
-                    return <Category key={category} value={category} onClick={onClick} active={active} />
+                    return (
+                        <li className="md:m-0 m-1" key={category}>
+                            <Category key={category} value={category} onClick={onClick} active={active} />
+                        </li>
+                    )
                 })}
             </ul>
         </li>
@@ -242,6 +246,14 @@ function PipelinesPage({ location }) {
                     </div>
                 </div>
                 <aside className="md:col-span-1">
+                    <Category
+                        active={selectedType === 'All' && selectedCategory === 'All'}
+                        value="All sources & destinations"
+                        onClick={() => {
+                            setSelectedType('All')
+                            setSelectedCategory('All')
+                        }}
+                    />
                     <ul className="list-none m-0 p-0">
                         {Object.keys(pipelines).map((type) => {
                             const values = pipelines[type]
