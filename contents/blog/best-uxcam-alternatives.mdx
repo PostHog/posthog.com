@@ -43,13 +43,7 @@ By combining all these tools into one platform, it eliminates the need for stitc
 
 ### How does PostHog compare to UXCam?
 
-Both PostHog and UXCam offer product analytics and session replay, but differ on the platforms they support:
-
-- Both platforms support product analytics on all mobile platforms, but UXCam doesn't offer event capturing for server-side events. This means you need an additional tool to capture mobile app related events in your backend.
-
-- UXCam supports session replay across all mobile platforms, whereas PostHog only supports iOS and Android. React Native support is on [PostHog's roadmap](/roadmap).
-
-Apart from this, both platforms are similar. However, teams building B2B SaaS apps will find UXCam's lack of [group analytics](/docs/product-analytics/group-analytics) disappointing.
+UXCam is solely focused on mobile apps. PostHog, however, supports both mobile and web apps, with SDKs for all popular web and mobile frameworks, including React Native.
 
 <ComparisonTable column1="PostHog" column2="UXCam">
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Custom trends, funnels, paths, and retention analysis" />
@@ -57,7 +51,7 @@ Apart from this, both platforms are similar. However, teams building B2B SaaS ap
   <ComparisonRow column1={true} column2={true} feature="Funnels and journey maps" description="Measure conversion and track the paths users take" />
   <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at the account or company level" />
   <ComparisonRow column1={true} column2={true} feature="User segmenting" description="Analyze and filter based on user properties and behaviors" />
-  <ComparisonRow column1="iOS and Android only" column2={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your mobile apps; discover friction points" />
   <ComparisonRow column1={false} column2={true} feature="Heatmaps" description="See where users tap and interact" />
   <ComparisonRow column1={true} column2={true} feature="Integrations" description="Import from and export to external services" />
   <ComparisonRow column1={true} column2={false} feature="Transparent pricing" description="Get pricing immediately without talking to sales" />

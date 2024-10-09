@@ -91,7 +91,8 @@ Plausible’s lightweight nature does offer several benefits however, such as a 
 Plausible’s intense focus on privacy makes it an attractive option for individuals, but also imposes restrictions on how data can be used and stored. There’s no way to identify users or track behavior across multiple sessions or devices, for example. 
 
 #### Who is Plausible for?
-Plausible is a good fit for small content and marketing teams who need to track simple website metrics, or for freelancers and bloggers who only need to monitor small sites. 
+
+[Plausible](/blog/posthog-vs-plausible) is a good fit for small content and marketing teams who need to track simple website metrics, or for freelancers and bloggers who only need to monitor small sites. 
 
 #### Features & benefits
 - Lightweight script with minimal page speed impact
@@ -182,7 +183,7 @@ Like Plausible, Fathom charges by pageview, though it's a bit cheaper than Plaus
 
 One of Matomo’s most appealing features is the ability to import existing Google Analytics data into Matomo when getting started, so that you don’t lose any previous insights.
 
-Matomo offers a wealth of other features, from custom alerts to tag managers and media analytics, though many of these are sold under per-feature subscriptions which can make the cost of on-premise deployments hard to predict. 
+[Matomo](/blog/best-matomo-alternatives) offers a wealth of other features, from custom alerts to tag managers and media analytics, though many of these are sold under per-feature subscriptions which can make the cost of on-premise deployments hard to predict. 
 
 #### Who is Matomo for?
 Matomo is suitable for businesses of all sizes which need an alternative to Google Analytics. The cloud version of Matomo is also easy to setup, making it ideal for non-technical users.

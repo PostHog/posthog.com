@@ -125,14 +125,12 @@ Existing Business (Expansion Opportunity): Choose this type when selling additio
 
 Existing - Convert to Annual: Choose this when discussing an annual contract with a pay-as-you-go customer.
 
-Self Serve: Represents opportunities where the customer does not fit our ideal hands-on customer and is better suited for a self-service approach. Select this type when the customer is likely to benefit more from our self-serve offerings rather than direct sales engagement. This will move these opportunities to the self-serve pipeline.
-
 Renewal: Choose this type when an existing customer is renewing their contract or subscription for our products or services. We automatically create a renewal opportunity if an 'Annual Plan' opportunity is Closed (more on these later).
 
 ### Opportunity Types
 Annual Plan: Select this type when the customer agrees to pay for a year-long+ subscription to our services.
 
-Monthly Plan: Choose this type when the customer opts for a month-to-month subscription to our services.
+Monthly Plan: Choose this type when the customer opts for a month-to-month subscription to our services. Amount field still reflects ARR here.
 
 ### How to Create an Opportunity
 
@@ -165,17 +163,6 @@ Stages will differ depending on the chosen Opportunity Record Type. The followin
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
 
-### Self-Serve Opportunity Record Type
-If after a demo call you feel like a customer doesn't fit a hands-on flow, then you should convert the lead to an opportunity and mark the Opportunity Record Type as "Self Serve". This will add the lead to our self-serve pipeline and then automation will take care of the rest. 
-
-Points to consider:
-- Usage Volume: If their usage volume is around 5 million monthly events and 100,000 recordings, they should be hands-on.
-- Annual Commitment: If they want an annual commitment, keep them in the hands-on pipeline.
-- Guided Evaluation Help: If they need help with a guided evaluation and their potential value is high enough, create a Slack Connect channel to assist them during the evaluation and keep them in the hands-on pipeline.
-- None of the Above: If none of the above apply, move them to self-serve.
-
-When moving someone to self-serve we should set them up for success by using the [Post Demo route to self-serve](https://posthog.lightning.force.com/lightning/r/EmailTemplate/00XHp000001vNpqMAE/view). This encourages them to sign up to PostHog Cloud and provides some helpful getting started pointers. If there were any follow-up questions from initial meeting we should answer those in this email as well.
-
 ### Renewal pipeline
 When an opportunity with Annual Plan type is Closed Won, a Salesforce [flow](https://posthog.lightning.force.com/builder_platform_interaction/flowBuilder.app?flowId=301Hp0000019zhnIAA) will create an opportunity associated with the contact and account from the original opportunity. The following fields will also be set:
 
@@ -191,6 +178,41 @@ The renewal pipeline stages are:
 6. Commercial & Legal Review (80%) - We are now working with them on contractual items such as custom pricing, MSAs etc.
 7. Closed Won (100%) - They have signed the contract.
 8. Closed Lost (0%) - At some point in the pipeline they decided not to renew. We should make a note as to the reasons why and optionally set a reminder task to follow up with them if we have improvements that could change their mind on our roadmap.
+
+### Opportunity Notes
+The "Opportunity Notes" section is to track key actions and next steps to manage an opportunity and avoid missed follow-ups. It has the following fields:
+- Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
+- Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
+
+### Self-Serve Opportunities
+If you feel like a customer doesn't fit a hands-on flow, then you mark the lead or opportunity as self serve. There are two ways to do this:
+
+#### 1. Self Serve - No Interaction
+Use this checkbox when you decide to move a new lead to the automated self serve flow without any personal interaction or discussion. You can use this checkbox when a lead does not meet the necessary qualifications for direct engagement and the automated self serve emails would be sufficient for successful onboarding.
+
+How to use:
+- Go to the lead record in Salesforce.
+- Click the checkbox labeled "Self Serve - No Interaction" under the Lead Details section.
+- Once marked, the automated self serve email flow will be triggered, no need to do anything else.
+
+#### 2. Self Serve - Post Engagement
+Use this checkbox if you have engaged with the lead in some form, such as a demo or discussion, but you believe they can proceed without further involvement.
+
+How to use:
+- Go to the opportunity record in Salesforce.
+- Click the checkbox labeled "Self Serve - Post Engagement" under the Opportunity Information section.
+
+Important notes:
+- There are no automated email flows attached to this checkbox. Once you have spoken with a customer at least once, all future communications should come directly from you.
+- Separately, these customers will still receive the standard onboarding emails from the app regardless of their self serve status in salesforce.
+
+#### Points to consider when marking leads as self serve:
+- Usage Volume: If their usage volume is around 5 million monthly events and 100,000 recordings, they should be hands-on.
+- Annual Commitment: If they want an annual commitment, keep them in the hands-on pipeline.
+- Guided Evaluation Help: If they need help with a guided evaluation and their potential value is high enough, create a Slack Connect channel to assist them during the evaluation and keep them in the hands-on pipeline.
+- None of the Above: If none of the above apply, move them to self-serve.
+
+When moving someone to self-serve we should set them up for success by using the [Post Demo route to self-serve](https://posthog.lightning.force.com/lightning/r/EmailTemplate/00XHp000001vNpqMAE/view). This encourages them to sign up to PostHog Cloud and provides some helpful getting started pointers. If there were any follow-up questions from initial meeting we should answer those in this email as well.
 
 ## All done - now what?
 

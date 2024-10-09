@@ -12,6 +12,8 @@ Errors are captured as `$exception` events which means that you can create insig
 
 ### Python
 
+> A minimum SDK version of v3.7.0 is required
+
 Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Python application.
 
 ```python
@@ -35,6 +37,8 @@ posthog.capture_exception(e, 'DISTINCT_ID', properties=additional_properties)
 ```
 
 ### Javascript
+
+> A minimum SDK version of v1.160.0 is required
 
 Exception autocapture within the JS SDK is remotely controlled via [the PostHog app](https://us.posthog.com/settings/project-autocapture#exception-autocapture).
 

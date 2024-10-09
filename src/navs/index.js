@@ -612,6 +612,10 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-as-beta',
             },
             {
+                name: 'Building new products fast',
+                url: '/handbook/product/building-new-products-fast',
+            },
+            {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
             },
@@ -1420,6 +1424,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/nuxt',
                         },
                         {
+                            name: 'Remix',
+                            url: '/docs/advanced/proxy/remix',
+                        },
+                        {
                             name: 'Vercel',
                             url: '/docs/advanced/proxy/vercel',
                         },
@@ -1527,6 +1535,12 @@ export const docsMenu = {
                         {
                             name: 'Events',
                             url: '/docs/data/events',
+                            children: [
+                                {
+                                    name: 'Anonymous vs identified events',
+                                    url: '/docs/data/anonymous-vs-identified-events',
+                                },
+                            ],
                         },
                         {
                             name: 'Ingestion warnings',
@@ -2235,10 +2249,6 @@ export const docsMenu = {
             children: [
                 {
                     name: 'Web analytics',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Overview',
@@ -2851,10 +2861,6 @@ export const docsMenu = {
             children: [
                 {
                     name: 'Data warehouse',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Overview',

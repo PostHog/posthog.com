@@ -94,7 +94,8 @@ Subscribing to PostHog Cloud removes the project limit and adds numerous paid-on
 [Matomo](/blog/posthog-vs-matomo) is an open-source platform for website analytics. It's one of the most popular open-source [alternatives to Google Analytics 4](/blog/ga4-alternatives) for website owners and marketing teams. It even offers a data import tool for Google Analytics, so you can bring your data with you. You can run it on-premise or use Matomo's own cloud hosting service.
 
 #### Who is Matomo for?
-Matomo is intended for marketing and website teams looking to track content performance and marketing attribution. It's suitable for both SMBs and enterprises – the European Union runs a version of Matomo on all its websites.
+
+[Matomo](/blog/best-matomo-alternatives) is intended for marketing and website teams looking to track content performance and marketing attribution. It's suitable for both SMBs and enterprises – the European Union runs a version of Matomo on all its websites.
 
 #### Strengths
 - Google Analytics data importer
@@ -150,7 +151,7 @@ Metabase is available under a AGPL license. A limited version of the product is 
 Unlike Matomo, Plausible is a very streamlined tool rather than a feature-equivalent Google Analytics alternative. As a result, it's a great fit for smaller teams who prefer ease of use to in-depth reporting, or hobby deployments if you just want basic analytics for a website or blog.
 
 #### Who is Plausible Analytics for?
-Plausible is intended for marketing teams and website owners who want to track top-level website metrics, such as pageviews, bounce rate and visit duration, but it's not an ideal tool for understanding user behavior.
+[Plausible](/blog/posthog-vs-plausible) is intended for marketing teams and website owners who want to track top-level website metrics, such as pageviews, bounce rate and visit duration, but it's not an ideal tool for understanding user behavior.
 
 #### Strengths
 - Easy to use and focused on essential web metrics
