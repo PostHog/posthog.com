@@ -13,6 +13,7 @@ import { Hero } from 'components/Products/Hero'
 import { StaticImage } from 'gatsby-plugin-image'
 import { MenuItem, menuVariants } from 'components/PostLayout/Menu'
 import { CallToAction } from 'components/CallToAction'
+import { Badge } from 'components/Pricing/PricingTable/Plan'
 
 const sources = [
     {
@@ -179,7 +180,7 @@ function PipelinesPage({ location }) {
             <SideModal
                 title={
                     selectedDestination ? (
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-2 items-center">
                             <div className="size-7 flex-shrink-0">
                                 <img
                                     className="w-full"
@@ -188,6 +189,13 @@ function PipelinesPage({ location }) {
                                 />
                             </div>
                             <span>{selectedDestination.name}</span>
+                            <p className="m-0 px-1 py-0 border border-border dark:border-dark rounded text-sm">
+                                <span className="opacity-70">
+                                    {Object.keys(pipelines)
+                                        .find((key) => pipelines[key].includes(selectedDestination))
+                                        .slice(0, -1)}
+                                </span>
+                            </p>
                         </div>
                     ) : (
                         ''
@@ -314,6 +322,15 @@ function PipelinesPage({ location }) {
                                                     </div>
 
                                                     <h3 className="m-0 leading-none text-base">{name}</h3>
+                                                    {selectedType === 'All' && (
+                                                        <p className="m-0 !ml-1.5 px-1 py-0 border border-border dark:border-dark rounded text-xs">
+                                                            <span className="opacity-70">
+                                                                {Object.keys(pipelines)
+                                                                    .find((key) => pipelines[key].includes(destination))
+                                                                    .slice(0, -1)}
+                                                            </span>
+                                                        </p>
+                                                    )}
                                                 </div>
                                                 <p className="opacity-70 !text-[15px] m-0 ml-10 text-base leading-snug">
                                                     {description}
