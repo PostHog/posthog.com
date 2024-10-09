@@ -1,5 +1,5 @@
 ---
-title: 'How Great Expectations uses PostHog to improve it’s content strategy'
+title: 'How Great Expectations uses PostHog to improve content strategy'
 customer: Great Expectations
 logo: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/gx_logo_light_ce286f1955.png
