@@ -1679,3 +1679,17 @@ li.squeak-left-border {
 .animate-fade-in {
     animation: fadeIn 0.3s ease-out;
 }
+
+.side-modal {
+    h2 {
+        @apply text-xl;
+    }
+    h3 {
+        @apply text-lg mb-1;
+    }
+    td {
+        code {
+            @apply whitespace-nowrap text-sm;
+        }
+    }
+}
