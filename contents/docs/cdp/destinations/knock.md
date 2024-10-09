@@ -1,5 +1,5 @@
 ---
-title: Knock
+title: Send data to Knock
 templateId: template-knock
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Loops
+title: Send data to Loops
 templateId: template-loops
 ---
 

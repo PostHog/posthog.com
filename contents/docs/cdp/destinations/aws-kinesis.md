@@ -1,5 +1,5 @@
 ---
-title: AWS Kinesis
+title: Send data to AWS Kinesis
 templateId: template-aws-kinesis
 ---
 

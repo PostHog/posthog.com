@@ -1,5 +1,5 @@
 ---
-title: Salesforce
+title: Send data to Salesforce
 templateId: template-salesforce-create
 ---
 

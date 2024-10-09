@@ -1,5 +1,5 @@
 ---
-title: RudderStack
+title: Send data to RudderStack
 templateId: template-rudderstack
 ---
 

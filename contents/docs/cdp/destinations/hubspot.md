@@ -1,5 +1,5 @@
 ---
-title: Hubspot
+title: Send data to Hubspot
 templateId: template-hubspot
 ---
 
