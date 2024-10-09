@@ -13,7 +13,7 @@ import { TemplateParametersFactory } from '../../templates/Handbook'
 import { useLayoutData } from 'components/Layout/hooks'
 import { Hero } from 'components/Products/Hero'
 import { StaticImage } from 'gatsby-plugin-image'
-import groupBy from 'lodash.groupby'
+import { MenuItem, menuVariants } from 'components/PostLayout/Menu'
 
 const sources = [
     {
@@ -90,44 +90,43 @@ const sources = [
 
 const Category = ({ onClick, value, active }) => {
     return (
-        <>
+        <li className="md:m-0 m-1">
             <button
                 onClick={() => onClick(value)}
-                className={`text-left py-1 bg-light dark:bg-dark z-10 relative transition-all ${
-                    active ? 'font-bold ml-2' : ' ml-0'
+                className={`group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-[15px] md:px-0 md:pl-3 py-0.5 rounded cursor-pointer px-2 md:border-none border border-border dark:border-dark ${
+                    active ? 'border-inherit dark:border-inherit' : ''
                 }`}
             >
-                {value}
+                <AnimatePresence>
+                    {active && (
+                        <motion.span
+                            variants={menuVariants}
+                            className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0 md:inline hidden"
+                            initial="hidden"
+                            animate="visible"
+                            exit="hidden"
+                        />
+                    )}
+                </AnimatePresence>
+                <MenuItem color={active} name={value} />
             </button>
-            <AnimatePresence>
-                {active && (
-                    <motion.span
-                        initial={{ opacity: 0, translateX: '100%' }}
-                        animate={{ opacity: 1, translateX: '-100%' }}
-                        exit={{ opacity: 0, translateX: '100%' }}
-                        className="w-1 h-[70%] absolute left-0 bg-red rounded-full"
-                    />
-                )}
-            </AnimatePresence>
-        </>
+        </li>
     )
 }
 
 const Categories = ({ type, categories, onClick, selectedCategory, selectedType }) => {
     return (
-        <>
-            <h3 className="text-lg opacity-75">{type}</h3>
-            <ul className="list-none m-0 p-0">
+        <li className="mb-3 last:mb-0">
+            <p className="flex gap-2 items-baseline text-sm font-semibold md:mx-3 mb-1">
+                <span className="opacity-25">{type}</span>
+            </p>
+            <ul className="list-none m-0 p-0 md:block flex whitespace-nowrap flex-wrap md:mx-0 -mx-1">
                 {['All', ...categories].map((category) => {
                     const active = selectedType === type && selectedCategory === category
-                    return (
-                        <li className="relative flex items-center" key={category}>
-                            <Category value={category} onClick={onClick} active={active} />
-                        </li>
-                    )
+                    return <Category key={category} value={category} onClick={onClick} active={active} />
                 })}
             </ul>
-        </>
+        </li>
     )
 }
 
@@ -232,7 +231,7 @@ function PipelinesPage({ location }) {
                 <div className="md:col-span-4 md:mb-4">
                     <h2 className="text-center text-2xl lg:text-4xl">Sources &amp; destinations library</h2>
 
-                    <div className="max-w-lg mx-auto mb-5 rounded-md border border-border dark:border-dark py-3 px-4 bg-white dark:bg-accent-dark flex space-x-1.5">
+                    <div className="md:max-w-lg mx-auto mb-5 rounded-md border border-border dark:border-dark py-3 px-4 bg-white dark:bg-accent-dark flex space-x-1.5">
                         <IconSearch className="w-5 opacity-60" />
                         <input
                             value={searchValue}
@@ -243,13 +242,13 @@ function PipelinesPage({ location }) {
                     </div>
                 </div>
                 <aside className="md:col-span-1">
-                    <div className="md:block hidden">
+                    <ul className="list-none m-0 p-0">
                         {Object.keys(pipelines).map((type) => {
                             const values = pipelines[type]
                             return (
                                 <Categories
                                     key={type}
-                                    categories={Object.keys(groupBy(values, 'category')).sort()}
+                                    categories={[...new Set(values.flatMap((value) => value.category))].sort()}
                                     selectedCategory={selectedCategory}
                                     selectedType={selectedType}
                                     onClick={(value) => {
@@ -260,9 +259,9 @@ function PipelinesPage({ location }) {
                                 />
                             )
                         })}
-                    </div>
+                    </ul>
                 </aside>
-                <section className="md:col-span-3">
+                <section className="md:col-span-3 md:mt-0 mt-5">
                     <ul className="list-none m-0 p-0 grid @lg:grid-cols-2 @2xl:grid-cols-1 @3xl:grid-cols-2 @6xl:grid-cols-3 gap-2 md:gap-4">
                         {filteredNodes.map((destination) => {
                             const { id, name, description, icon_url } = destination

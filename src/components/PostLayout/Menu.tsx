@@ -79,6 +79,20 @@ export const MenuItem = ({ icon, color, badge, name }) => {
     )
 }
 
+export const menuVariants = {
+    hidden: {
+        translateX: '100%',
+        opacity: 0,
+    },
+    visible: {
+        transition: {
+            delay: 0.3,
+        },
+        translateX: 0,
+        opacity: '100%',
+    },
+}
+
 export default function Menu({
     name,
     url,
@@ -127,20 +141,6 @@ export default function Menu({
         setIsActive(isMenuItemActive?.({ name, url }) || url?.split('?')[0] === pathname)
     }, [pathname])
 
-    const variants = {
-        hidden: {
-            translateX: '100%',
-            opacity: 0,
-        },
-        visible: {
-            transition: {
-                delay: 0.3,
-            },
-            translateX: 0,
-            opacity: '100%',
-        },
-    }
-
     const isWithChild = children && children.length > 0
     const MenuLink = { standard: Link, scroll: ScrollLink }[menuType]
     const menuLinkProps = {
@@ -183,7 +183,7 @@ export default function Menu({
                         <AnimatePresence>
                             {isActive && !isWithChild && (
                                 <motion.span
-                                    variants={variants}
+                                    variants={menuVariants}
                                     className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
                                     initial="hidden"
                                     animate="visible"
