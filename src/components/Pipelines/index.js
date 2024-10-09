@@ -3,13 +3,16 @@ import React, { useMemo } from 'react'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconSearch } from '@posthog/icons'
+import { IconSearch, IconDecisionTree } from '@posthog/icons'
 import Fuse from 'fuse.js'
 import Select from 'components/Select'
 import SideModal from 'components/Modal/SideModal'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { TemplateParametersFactory } from '../../templates/Handbook'
+import { useLayoutData } from 'components/Layout/hooks'
+import { Hero } from 'components/Products/Hero'
+import { StaticImage } from 'gatsby-plugin-image'
 
 function PipelinesPage({ location }) {
     const {
@@ -24,13 +27,21 @@ function PipelinesPage({ location }) {
     const filteredNodes = searchValue ? fuse.search(searchValue).map(({ item }) => item) : nodesByCategory
     const [selectedDestination, setSelectedDestination] = React.useState(null)
     const [modalOpen, setModalOpen] = React.useState(false)
+    const { fullWidthContent } = useLayoutData()
+
+    const product = {
+        slug: 'cdp',
+        lowercase: 'cdp',
+        capitalized: 'CDP',
+        freeTier: '10m rows',
+    }
 
     return (
         <Layout>
             <SEO
                 title="CDP sources & destinations"
                 description="Get all your data into PostHog with 60+ sources & destinations"
-                image={`/og-images/apps.jpeg`}
+                image={`images/og/cdp.jpg`}
             />
             <SideModal
                 title={
@@ -65,17 +76,44 @@ function PipelinesPage({ location }) {
                     </div>
                 )}
             </SideModal>
+
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+                <Hero
+                    color="sky-blue"
+                    icon={<IconDecisionTree />}
+                    product={product.capitalized}
+                    title="Customer data platform"
+                    description="Import from a data warehouse to analyze your data with PostHog product data and send it all to 25+ destinations."
+                    beta
+                />
+
+                <div className="text-center -mb-12 md:-mb-28">
+                    <StaticImage
+                        src="../../images/products/screenshot-cdp.png"
+                        alt="Screenshot of PostHog's CDP"
+                        className="w-full max-w-[1280px]"
+                        placeholder="none"
+                    />
+                </div>
+            </div>
+
             <div className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12">
-                <div className="md:col-span-4">
-                    <h1 className="mb-2">CDP sources & destinations</h1>
-                    <p>
-                        Import from a data warehouse to analyze your data with PostHog product data and send it all to
-                        25+ destinations.
-                    </p>
+                <div className="md:col-span-4 md:mb-4">
+                    <h2 className="text-center text-2xl lg:text-4xl">Sources &amp; destinations library</h2>
+
+                    <div className="max-w-lg mx-auto mb-5 rounded-md border border-border dark:border-dark py-3 px-4 bg-white dark:bg-accent-dark flex space-x-1.5">
+                        <IconSearch className="w-5 opacity-60" />
+                        <input
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            className="bg-transparent w-full border-none outline-none"
+                            placeholder="Search destinations"
+                        />
+                    </div>
                 </div>
                 <aside className="md:col-span-1">
                     <div className="md:block hidden">
-                        <h2 className="text-lg opacity-75">Destinations</h2>
+                        <h3 className="text-lg opacity-75">Destinations</h3>
                         <ul className="list-none m-0 p-0">
                             {[{ fieldValue: 'All' }, ...categories].map((category) => {
                                 const value = category.fieldValue
@@ -117,16 +155,6 @@ function PipelinesPage({ location }) {
                     />
                 </aside>
                 <section className="md:col-span-3">
-                    <div className="w-full mb-5 rounded-md border border-border dark:border-dark py-3 px-4 bg-white dark:bg-accent-dark flex space-x-1.5">
-                        <IconSearch className="w-5 opacity-60" />
-                        <input
-                            value={searchValue}
-                            onChange={(e) => setSearchValue(e.target.value)}
-                            className="bg-transparent w-full border-none outline-none"
-                            placeholder="Search destinations"
-                        />
-                    </div>
-
                     <ul className="list-none m-0 p-0 grid @lg:grid-cols-2 @2xl:grid-cols-1 @3xl:grid-cols-2 @6xl:grid-cols-3 gap-2 md:gap-4">
                         {filteredNodes.map((destination) => {
                             const { id, name, description, icon_url } = destination
