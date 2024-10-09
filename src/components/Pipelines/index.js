@@ -93,7 +93,7 @@ const Category = ({ onClick, value, active }) => {
         <>
             <button
                 onClick={() => onClick(value)}
-                className={`group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-[15px] md:px-0 md:pl-3 py-0.5 rounded cursor-pointer px-2 md:border-none border border-border dark:border-dark ${
+                className={`group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex justify-between items-center relative text-[15px] md:px-0 md:pl-3 py-0.5 rounded cursor-pointer px-2 md:border-none border border-border dark:border-dark w-auto ${
                     active ? 'border-inherit dark:border-inherit' : ''
                 }`}
             >
