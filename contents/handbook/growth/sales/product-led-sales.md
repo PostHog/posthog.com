@@ -18,6 +18,8 @@ Product-led leads can be generated in different ways:
 
 They follow the [normal territory assignment rules](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assignments) in Salesforce. 
 
+**Note:** Some product-led leads might have already chatted with someone on our team. Before reaching out, take a quick look in Vitally to see if there’s any prior activity, and check in with the AE or team member who was involved to get the full picture if needed. Every lead has a "Vitally account URL" field in Salesforce which links directly to their Vitally profile for easy review.
+
 ## Working with the customer
 
 Just as with the [inbound sales process](/handbook/growth/sales/new-sales), it's on you to decide how you qualify the lead.  If you think they have potential to end up paying more than $20k a year then you should reach out to introduce yourself and offer help.  As they have likely done a lot of research themselves, they may not need a demo so a 30-minute [discovery](/handbook/growth/sales/new-sales#maximizing-your-chance-of-success) is probably more appropriate here. 
