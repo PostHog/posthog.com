@@ -1357,10 +1357,6 @@ export const docsMenu = {
                             url: '/docs/libraries/sentry',
                         },
                         {
-                            name: 'Slack',
-                            url: '/docs/libraries/slack',
-                        },
-                        {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
                         },
