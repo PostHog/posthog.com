@@ -2,32 +2,55 @@
 title: Managing small teams
 ---
 
-## Managing a small team
+Small team pages are managed in a few places:
 
-### Creating a new job
-
-- Create a directory and team file in the repo (eg: `/contents/teams/team-name/index.mdx`)
-- Ask Lottie to create a new team crest
-- Ask Website & Docs Team to create a team in Strapi and upload a team photo*
-- Once the page is previewable (on its Vercel branch), login to the website to:
-  - add team members
-  - assign the team lead (the crown icon)
-  - add a mission
-
-*This is temporary / will be self-serve via the website in the future
+1. MDX files in the repo under `/contents/teams/{team-name}`
+   - _Quarterly goals, team-specific handbook content_
+2. Team records in our CMS, with most fields editable directly on the small team page
+   - _Team photo, mission, crest_
+3. Small team FAQs
+   - _Aggregated from team member profiles, and from our CMS_
 
 ### Changing the header image
 
 To change your team's image, send it to [#team-website-and-docs](https://posthog.slack.com/archives/C01V9AT7DK4).
 
-### FYIs
+### Changing a mission
 
-- Any MDX files in the repo will display below the team members and _recently shipped_ sections.
+Change a small team's mission by clicking _edit mission_ on the small team page.
 
-### In the future
+### Team page content
 
-- We're moving toward having quarterly goals in their own MDX files, like `2024-Q1.mdx`. This will allow us to show the current team goals, while displaying previous goals in an accordion.
-- Moderators will be able to create teams directly on the website (no Strapi required)
+Any MDX files in the repo will display below the team members and _recently shipped_ sections.
+
+### Quarterly goals
+
+We're moving toward having quarterly goals in their own MDX files, like `2024-Q1.mdx`. This will allow us to show the current team goals, while displaying previous goals in an accordion.
+
+Until then, when adding quarterly goals for a new quarter, add them to the `index.mdx` file and move the previous goals into a section below them (rather than deleting):
+
+```
+## Previous goals
+
+<details>
+<summary>Q3 2024 goals</summary>
+
+### Goal 1
+
+- Details
+- More details
+
+### Goal 2
+
+- Details
+- More details
+
+</details>
+```
+
+See the Website & Docs team's [small team page](/teams/website-docs) as an example of how it will look.
+
+--- 
 
 ## Team management
 
@@ -35,12 +58,10 @@ To change your team's image, send it to [#team-website-and-docs](https://posthog
 
 #### Initial setup in Strapi
 
-> There's some manual config that needs to be done in our CMS. Ask the Website & Docs team for help here.
+> This config needs to be done in our CMS. Ask the Website & Docs team for help here.
 
 1. Create Team record
 2. Add the [placeholder crest](https://www.figma.com/design/QCYxjm4wVVVvs6UA27xRmz/Website-art?node-id=2043-2&t=aO62tCO12PoIZMt9-1) with the new team's name on it
-3. Go to small team members' profiles, add them to the team, remove from other teams, and assign the team lead
-4. Publish the changes to the team record
 
 #### Setup in the repo
 
@@ -48,10 +69,18 @@ To change your team's image, send it to [#team-website-and-docs](https://posthog
 2. Add the team's name to `src/navs/index.js` under the `companyMenu` section in alphabetical order under the _Engineering_ or _Not engineering_ heading
 3. Rebuild the site (after the Strapi configuration) to see the new page
 
+#### Add content to the small team's page
+
+Visit the new small team page to:
+
+1. Add team members
+1. Assign the team lead (click the crown icon)
+1. Add a mission
+1. Ask the Website & Docs team to create a team in Strapi and upload a team photo
+
 #### Other tasks
 
-1. Request a custom team crest from Lottie. Describe your team with a few adjectives, maybe physical tools that can be used in an illustration, and a sentence or two about what you do.
-2. Add the small team's mission on their page once the site is built
+1. [Request a custom team crest](https://github.com/PostHog/posthog.com/issues/new?assignees=&labels=&projects=&template=art-request-template.md&title=Art+request+-+%7Btitle%7D) from Lottie. Describe your team with a few adjectives, maybe physical tools that can be used in an illustration, and a sentence or two about what you do. She'll create two versions: a large one (for your small team's page) and a miniature version used in other places (like the [careers page](/careers)).
 3. Add the team's feature ownership to the [feature list](/handbook/engineering/feature-ownership)
 4. [Create a new team on GitHub](https://github.com/orgs/PostHog/teams) and remove the new members from their previous team
 5. Create the new `feature/team-{team-name}` labels [on GitHub](https://github.com/PostHog/posthog/labels)
@@ -59,7 +88,14 @@ To change your team's image, send it to [#team-website-and-docs](https://posthog
 7. If there are existing forum topics or roadmap items, re-assign them to the new team.
 8. Update small team names in [Ashby](https://app.ashbyhq.com/admin/organizational-settings/custom-fields/job/6897f288-b46e-4d51-9bd9-aeb20ad8e62f).
 
+### Managing a small team
+
+To manage content on the small team page, see the [Add content to the small team's page](#add-content-to-the-small-teams-page) section above.
+
+To change the photo, ask the Website & Docs team.
 
 ### Removing a small team
 
 Ask the Website & Docs team for help.
+
+**Note:** When a small team is removed, all previous site builds will fail and will need to be rebuilt. Remind the team to merge `master` into any WIP branch.
