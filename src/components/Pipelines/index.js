@@ -13,16 +13,147 @@ import { TemplateParametersFactory } from '../../templates/Handbook'
 import { useLayoutData } from 'components/Layout/hooks'
 import { Hero } from 'components/Products/Hero'
 import { StaticImage } from 'gatsby-plugin-image'
+import groupBy from 'lodash.groupby'
+
+const sources = [
+    {
+        id: 'source-stripe',
+        name: 'Stripe',
+        description: 'Payment processing platform',
+        icon_url: '/static/services/stripe.png',
+        category: ['Custom'],
+    },
+    {
+        id: 'source-hubspot',
+        name: 'Hubspot',
+        description: 'CRM platform',
+        icon_url: '/static/services/hubspot.png',
+        category: ['CRM'],
+    },
+    {
+        id: 'source-postgres',
+        name: 'Postgres',
+        description: 'Open source relational database',
+        icon_url: '/static/services/postgres.png',
+        category: ['Custom'],
+    },
+    {
+        id: 'source-mysql',
+        name: 'MySQL',
+        description: 'Popular open-source database',
+        icon_url: '/static/services/mysql.png',
+        category: ['Custom'],
+    },
+    {
+        id: 'source-mssql',
+        name: 'MSSQL',
+        description: 'Microsoft SQL Server',
+        icon_url: '/static/services/sql-azure.png',
+        category: ['Custom'],
+    },
+    {
+        id: 'source-zendesk',
+        name: 'Zendesk',
+        description: 'Customer service software',
+        icon_url: '/static/services/zendesk.png',
+        category: ['Customer Success'],
+    },
+    {
+        id: 'source-snowflake',
+        name: 'Snowflake',
+        description: 'Cloud data platform',
+        icon_url: '/static/services/snowflake.png',
+        category: ['Analytics'],
+    },
+    {
+        id: 'source-salesforce',
+        name: 'Salesforce',
+        description: 'Customer relationship management',
+        icon_url: '/static/services/salesforce.png',
+        category: ['CRM'],
+    },
+    {
+        id: 'source-vitally',
+        name: 'Vitally',
+        description: 'Customer success platform',
+        icon_url: '/static/services/vitally.png',
+        category: ['Customer Success'],
+    },
+    {
+        id: 'source-bigquery',
+        name: 'BigQuery',
+        description: 'Google Cloud data warehouse',
+        icon_url: '/static/services/bigquery.png',
+        category: ['Analytics'],
+    },
+]
+
+const Category = ({ onClick, value, active }) => {
+    return (
+        <>
+            <button
+                onClick={() => onClick(value)}
+                className={`text-left py-1 bg-light dark:bg-dark z-10 relative transition-all ${
+                    active ? 'font-bold ml-2' : ' ml-0'
+                }`}
+            >
+                {value}
+            </button>
+            <AnimatePresence>
+                {active && (
+                    <motion.span
+                        initial={{ opacity: 0, translateX: '100%' }}
+                        animate={{ opacity: 1, translateX: '-100%' }}
+                        exit={{ opacity: 0, translateX: '100%' }}
+                        className="w-1 h-[70%] absolute left-0 bg-red rounded-full"
+                    />
+                )}
+            </AnimatePresence>
+        </>
+    )
+}
+
+const Categories = ({ type, categories, onClick, selectedCategory, selectedType }) => {
+    return (
+        <>
+            <h3 className="text-lg opacity-75">{type}</h3>
+            <ul className="list-none m-0 p-0">
+                {['All', ...categories].map((category) => {
+                    const active = selectedType === type && selectedCategory === category
+                    return (
+                        <li className="relative flex items-center" key={category}>
+                            <Category value={category} onClick={onClick} active={active} />
+                        </li>
+                    )
+                })}
+            </ul>
+        </>
+    )
+}
 
 function PipelinesPage({ location }) {
     const {
-        pipelines: { nodes, categories },
+        destinations: { nodes },
     } = useStaticQuery(query)
 
     const [searchValue, setSearchValue] = React.useState('')
+
     const [selectedCategory, setSelectedCategory] = React.useState('All')
-    const nodesByCategory =
-        selectedCategory === 'All' ? nodes : nodes.filter((node) => node.category.includes(selectedCategory))
+    const [selectedType, setSelectedType] = React.useState('All')
+
+    const pipelines = {
+        Sources: sources,
+        Destinations: nodes,
+    }
+
+    const nodesByCategory = useMemo(() => {
+        if (selectedType === 'All') {
+            return Object.values(pipelines).flat()
+        }
+        return pipelines[selectedType].filter(
+            (node) => selectedCategory === 'All' || node.category.includes(selectedCategory)
+        )
+    }, [selectedType, selectedCategory, pipelines])
     const fuse = useMemo(() => new Fuse(nodesByCategory, { keys: ['name', 'description'] }), [nodesByCategory])
     const filteredNodes = searchValue ? fuse.search(searchValue).map(({ item }) => item) : nodesByCategory
     const [selectedDestination, setSelectedDestination] = React.useState(null)
@@ -113,46 +244,23 @@ function PipelinesPage({ location }) {
                 </div>
                 <aside className="md:col-span-1">
                     <div className="md:block hidden">
-                        <h3 className="text-lg opacity-75">Destinations</h3>
-                        <ul className="list-none m-0 p-0">
-                            {[{ fieldValue: 'All' }, ...categories].map((category) => {
-                                const value = category.fieldValue
-                                const active = selectedCategory === value
-                                return (
-                                    <li className="relative flex items-center" key={value}>
-                                        <button
-                                            onClick={() => setSelectedCategory(value)}
-                                            className={`text-left py-1 bg-light dark:bg-dark z-10 relative transition-all ${
-                                                active ? 'font-bold ml-2' : ' ml-0'
-                                            }`}
-                                        >
-                                            {value}
-                                        </button>
-                                        <AnimatePresence>
-                                            {active && (
-                                                <motion.span
-                                                    initial={{ opacity: 0, translateX: '100%' }}
-                                                    animate={{ opacity: 1, translateX: '-100%' }}
-                                                    exit={{ opacity: 0, translateX: '100%' }}
-                                                    className="w-1 h-[70%] absolute left-0 bg-red rounded-full"
-                                                />
-                                            )}
-                                        </AnimatePresence>
-                                    </li>
-                                )
-                            })}
-                        </ul>
+                        {Object.keys(pipelines).map((type) => {
+                            const values = pipelines[type]
+                            return (
+                                <Categories
+                                    key={type}
+                                    categories={Object.keys(groupBy(values, 'category')).sort()}
+                                    selectedCategory={selectedCategory}
+                                    selectedType={selectedType}
+                                    onClick={(value) => {
+                                        setSelectedType(type)
+                                        setSelectedCategory(value)
+                                    }}
+                                    type={type}
+                                />
+                            )
+                        })}
                     </div>
-                    <Select
-                        className="md:hidden block w-full bg-white border border-border dark:border-dark dark:bg-accent-dark !rounded-md mb-2"
-                        placeholder="Destinations"
-                        value={selectedCategory}
-                        onChange={setSelectedCategory}
-                        options={[
-                            { value: 'All', label: 'All' },
-                            ...categories.map(({ fieldValue }) => ({ value: fieldValue, label: fieldValue })),
-                        ]}
-                    />
                 </aside>
                 <section className="md:col-span-3">
                     <ul className="list-none m-0 p-0 grid @lg:grid-cols-2 @2xl:grid-cols-1 @3xl:grid-cols-2 @6xl:grid-cols-3 gap-2 md:gap-4">
@@ -181,7 +289,7 @@ function PipelinesPage({ location }) {
                                                 <div className="size-7 flex-shrink-0">
                                                     <img
                                                         className="w-full"
-                                                        src={`https://app.posthog.com/${icon_url}`}
+                                                        src={`https://app.posthog.com${icon_url}`}
                                                         alt={name}
                                                     />
                                                 </div>
@@ -205,7 +313,7 @@ function PipelinesPage({ location }) {
 
 const query = graphql`
     query {
-        pipelines: allPostHogDestination {
+        destinations: allPostHogDestination {
             nodes {
                 id
                 name
@@ -223,9 +331,6 @@ const query = graphql`
                     required
                     description
                 }
-            }
-            categories: group(field: category) {
-                fieldValue
             }
         }
     }
