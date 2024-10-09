@@ -28,7 +28,7 @@ function PipelinesPage({ location }) {
     return (
         <Layout>
             <SEO
-                title="CDP data connections"
+                title="CDP sources & destinations"
                 description="Get all your data into PostHog with 60+ sources & destinations"
                 image={`/og-images/apps.jpeg`}
             />
@@ -65,10 +65,17 @@ function PipelinesPage({ location }) {
                     </div>
                 )}
             </SideModal>
-            <div className="max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12">
+            <div className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12">
+                <div className="md:col-span-4">
+                    <h1 className="mb-2">CDP sources & destinations</h1>
+                    <p>
+                        Import from a data warehouse to analyze your data with PostHog product data and send it all to
+                        25+ destinations.
+                    </p>
+                </div>
                 <aside className="md:col-span-1">
                     <div className="md:block hidden">
-                        <h2>Destinations</h2>
+                        <h2 className="text-lg opacity-75">Destinations</h2>
                         <ul className="list-none m-0 p-0">
                             {[{ fieldValue: 'All' }, ...categories].map((category) => {
                                 const value = category.fieldValue
@@ -120,7 +127,7 @@ function PipelinesPage({ location }) {
                         />
                     </div>
 
-                    <ul className="list-none m-0 p-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
+                    <ul className="list-none m-0 p-0 grid @lg:grid-cols-2 @2xl:grid-cols-1 @3xl:grid-cols-2 @6xl:grid-cols-3 gap-2 md:gap-4">
                         {filteredNodes.map((destination) => {
                             const { id, name, description, icon_url } = destination
                             const Container = destination.mdx ? 'button' : 'div'
@@ -135,8 +142,10 @@ function PipelinesPage({ location }) {
                                                   },
                                               }
                                             : {})}
-                                        className={`flex items-start text-left size-full border border-border dark:border-dark rounded-md bg-white dark:bg-accent-dark p-4 ${
-                                            destination.mdx ? 'click' : ''
+                                        className={`flex items-start text-left size-full border border-light dark:border-dark rounded-md bg-white dark:bg-accent-dark p-4 relative border-b-3 ${
+                                            destination.mdx
+                                                ? 'click hover:top-[-1px] active:top-[1px] transition-all duration-75'
+                                                : ''
                                         }`}
                                     >
                                         <div>
@@ -149,9 +158,11 @@ function PipelinesPage({ location }) {
                                                     />
                                                 </div>
 
-                                                <h3 className="m-0 leading-none text-lg">{name}</h3>
+                                                <h3 className="m-0 leading-none text-base">{name}</h3>
                                             </div>
-                                            <p className="opacity-70 m-0 ml-10 text-base leading-snug">{description}</p>
+                                            <p className="opacity-70 !text-[15px] m-0 ml-10 text-base leading-snug">
+                                                {description}
+                                            </p>
                                         </div>
                                     </Container>
                                 </li>
