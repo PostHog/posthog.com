@@ -189,7 +189,7 @@ function PipelinesPage({ location }) {
                                 />
                             </div>
                             <span>{selectedDestination.name}</span>
-                            <p className="m-0 px-1 py-0 border border-border dark:border-dark rounded text-sm">
+                            <p className="m-0 px-1 py-0 border border-border dark:border-dark rounded text-sm font-normal">
                                 <span className="opacity-70">
                                     {Object.keys(pipelines)
                                         .find((key) => pipelines[key].includes(selectedDestination))
