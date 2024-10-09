@@ -96,11 +96,7 @@ const linklist: IProps[] = [
             {
                 title: 'API',
                 url: '/docs/api',
-            },
-            {
-                title: 'Webhooks',
-                url: '/docs/webhooks',
-            },
+            }
         ],
     },
     {

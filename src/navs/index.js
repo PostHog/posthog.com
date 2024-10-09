@@ -1361,10 +1361,6 @@ export const docsMenu = {
                             url: '/docs/libraries/sentry',
                         },
                         {
-                            name: 'Slack',
-                            url: '/docs/libraries/slack',
-                        },
-                        {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
                         },
@@ -1851,29 +1847,6 @@ export const docsMenu = {
                     name: 'Command palette',
                     url: '/docs/cmd-k',
                     icon: 'IconSearch',
-                },
-                {
-                    name: 'Webhooks',
-                    url: '/docs/webhooks',
-                    icon: 'IconWebhooks',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/webhooks',
-                        },
-                        {
-                            name: 'Microsoft Teams',
-                            url: '/docs/webhooks/microsoft-teams',
-                        },
-                        {
-                            name: 'Slack',
-                            url: '/docs/webhooks/slack',
-                        },
-                        {
-                            name: 'Discord',
-                            url: '/docs/webhooks/discord',
-                        },
-                    ],
                 },
                 {
                     name: 'Hog',
