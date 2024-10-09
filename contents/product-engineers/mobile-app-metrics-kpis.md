@@ -12,8 +12,9 @@ tags:
 crosspost:
   - Blog
 seo: {
-    metaTitle: Actionable mobile app metrics & KPIs to track (with benchmarks)
+    metaTitle: Actionable mobile app metrics & KPIs to track (with benchmarks),
     metaDescription: A complete guide to actionble metrics for your mobile app, including onboarding, app engagement, user retention, app revenue, and app performance metrics.
+}
 ---
 
 This guide covers 25 mobile app metrics and KPIs across five categories that can provide valuable insights into your app's success. We've focused on specific, actionable metrics rather than broad ones like daily active users (DAU), or the number of active users, that you know about already.
