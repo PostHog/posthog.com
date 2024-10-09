@@ -1,5 +1,5 @@
 ---
-date: 2024-10-08
+date: 2024-10-09
 title: Actionable mobile app metrics you should track (with benchmarks)
 author:
   - lior-neu-ner
