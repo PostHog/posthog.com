@@ -1,5 +1,5 @@
 ---
-title: Mailgun
+title: Send data to Mailgun
 templateId: template-mailgun-send-email
 ---
 

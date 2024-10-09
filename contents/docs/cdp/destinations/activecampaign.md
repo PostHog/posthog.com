@@ -1,5 +1,5 @@
 ---
-title: ActiveCampaign
+title: Send data to ActiveCampaign
 templateId: template-activecampaign
 ---
 

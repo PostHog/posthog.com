@@ -1,5 +1,5 @@
 ---
-title: Zapier
+title: Send data to Zapier
 templateId: template-zapier
 ---
 

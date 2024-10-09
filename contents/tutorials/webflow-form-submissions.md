@@ -77,7 +77,7 @@ Now, when users submit the form, it is captured as an event in PostHog.
 
 ![Event](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-form-submissions/event.png)
 
-With this, you can set up alerts in Slack for email submissions with a [webhook](/docs/webhooks/slack), [identify users](/docs/data/identify) with the email they submit, and export [cohorts of users](/docs/data/cohorts) who submit emails.
+With this, you can set up alerts in Slack for email submissions with a [destination](/docs/cdp/destinations/slack), [identify users](/docs/data/identify) with the email they submit, and export [cohorts of users](/docs/data/cohorts) who submit emails.
 
 ## Further reading
 

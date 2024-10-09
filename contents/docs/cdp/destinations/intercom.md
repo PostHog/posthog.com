@@ -1,5 +1,5 @@
 ---
-title: Intercom
+title: Send data to Intercom
 templateId: template-intercom
 ---
 

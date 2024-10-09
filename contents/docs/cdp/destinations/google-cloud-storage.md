@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Storage
+title: Send data to Google Cloud Storage
 templateId: template-google-cloud-storage
 ---
 

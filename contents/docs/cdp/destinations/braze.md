@@ -1,5 +1,5 @@
 ---
-title: Braze
+title: Send data to Braze
 templateId: template-braze
 ---
 

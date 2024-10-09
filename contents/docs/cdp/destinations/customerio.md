@@ -1,5 +1,5 @@
 ---
-title: Customer.io
+title: Send data to Customer.io
 templateId: template-customerio
 ---
 

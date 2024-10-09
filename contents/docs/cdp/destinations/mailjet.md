@@ -1,5 +1,5 @@
 ---
-title: Mailjet
+title: Send data to Mailjet
 templateId: template-mailjet-create-contact
 ---
 

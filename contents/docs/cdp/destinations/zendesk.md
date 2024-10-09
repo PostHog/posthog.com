@@ -1,5 +1,5 @@
 ---
-title: Zendesk
+title: Send data to Zendesk
 templateId: template-zendesk
 ---
 

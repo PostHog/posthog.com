@@ -1,5 +1,5 @@
 ---
-title: Google Pub/Sub
+title: Send data to Google Pub/Sub
 templateId: template-google-pubsub
 ---
 

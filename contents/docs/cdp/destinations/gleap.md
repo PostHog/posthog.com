@@ -1,5 +1,5 @@
 ---
-title: Gleap
+title: Send data to Gleap
 templateId: template-gleap
 ---
 

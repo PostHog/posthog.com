@@ -1,5 +1,5 @@
 ---
-title: Avo
+title: Send data to Avo
 templateId: template-avo
 ---
 

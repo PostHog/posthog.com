@@ -1,5 +1,5 @@
 ---
-title: Sendgrid
+title: Send data to Sendgrid
 templateId: template-sendgrid
 ---
 

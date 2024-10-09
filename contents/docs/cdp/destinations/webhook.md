@@ -1,5 +1,5 @@
 ---
-title: Webhook
+title: Send data to custom webhooks
 templateId: template-webhook
 ---
 

@@ -177,7 +177,7 @@ You can also use properties to create [cohorts](/docs/data/cohorts). These are l
 
 The PostHog equivalent to goals and conversions are [actions](/docs/data/actions). An action is one or more events with filters matching a user’s behavior. For example, a "shown interest" action could include a visit to the pricing page, clicking a book demo button, or signing up.
 
-You create actions in the [data management tab](https://app.posthog.com/data-management/actions). Once created, you can use them in insights. For example, if you want to track conversion, they are especially useful in the funnel-type insight. Actions can also trigger [webhooks](/docs/webhooks) and send messages in [Slack](/docs/webhooks/slack) or [Teams](/docs/webhooks/microsoft-teams).
+You create actions in the [data management tab](https://app.posthog.com/data-management/actions). Once created, you can use them in insights. For example, if you want to track conversion, they are especially useful in the funnel-type insight. Actions can also be used in destinations to send messages in [Slack](/docs/cdp/destinations/slack) or data to [custom webhooks](/docs/cdp/destinations/webhook).
 
 Beyond actions, PostHog also can run A/B tests, which compare "test" and "control" variants to calculate whether a change impacts a goal metric. This is our version of Google Optimize. For an example, see "[How to run A/B tests in Webflow with PostHog](/tutorials/webflow-ab-tests)."
 
