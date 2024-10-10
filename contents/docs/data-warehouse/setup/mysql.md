@@ -25,12 +25,6 @@ To link MySQL:
 
 The data warehouse then starts syncing your MySQL data. You can see details and progress in the [sources tab](https://us.posthog.com/pipeline/sources).
 
-#### Inbound IP addresses
+import InboundIpAddresses from './snippets/inbound-ip-addresses.mdx'
 
-We use a set of IP addresses to access your MySQL instance. To ensure this connector works, add these IPs to your inbound security rules to enable the data import:
-
-| US | EU |
-| --- | --- |
-| 44.205.89.55  | 3.75.65.221 |
-| 44.208.188.173 | 18.197.246.42 |
-| 52.4.194.122 | 3.120.223.253 |
+<InboundIpAddresses />
