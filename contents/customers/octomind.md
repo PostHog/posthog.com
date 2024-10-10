@@ -32,7 +32,7 @@ Maria knew she needed a way to track marketing metrics, but also knew that Googl
 
 “Sometimes it can be difficult to persuade engineers to even implement a simple cookie banner, but in this case? Our developers love PostHog and quickly got started with no-cookie tracking and EU servers. GDPR compliance was just really easy and our engineers knew they had a real partner in the choice of analytics platform.”
 
-### PostHog + Hubspot = A marketers dream
+### PostHog + Hubspot = A marketer's dream
 Following the initial implementation, Maria enabled autocapture to get data flowing into PostHog straight away, and got started with [web analytics](/web-analytics) and [pre-built dashboard templates](/templates). These enabled her to track the high-level data immediately, and as she’s become more familiar with the data she’s started building her own insights too. 
 
 <BorderWrapper>
