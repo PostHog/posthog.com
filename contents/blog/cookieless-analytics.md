@@ -12,9 +12,9 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/cookieless-analytics.png
 featuredImageType: full
-category: General
 tags:
   - Privacy
+  - General
 ---
 
 Google [says](https://blog.google/products/chrome/updated-timeline-privacy-sandbox-milestones/) they intend to deprecate the use of third-party cookies in 2023. But why is this important, and how will this affect product analytics?

@@ -10,9 +10,9 @@ featuredImage: >-
 featuredImageType: full
 author:
   - andy-vandervell
-category: General
 tags:
   - Open source
+  - General
 ---
 
 The [benefits of feature flags](/product-engineers/feature-flag-benefits-use-cases) are numerous. They help you mitigate risk, [test changes in production](/product-engineers/testing-in-production), manage access, and most important of all, ship faster.

@@ -14,6 +14,7 @@ category: General
 tags:
   - Open source
   - Comparisons
+  - General
 ---
 
 ## What are the criteria for this guide?

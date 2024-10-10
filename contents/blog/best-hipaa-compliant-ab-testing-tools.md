@@ -10,9 +10,9 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
-category: General
 tags:
   - Privacy
+  - General
 ---
 
 What do [Optimizely](/blog/posthog-vs-optimizely), Convert, and Webtrends Optimize have in common?

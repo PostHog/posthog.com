@@ -11,9 +11,9 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
 featuredVideo: 'https://www.youtube-nocookie.com/embed/ImcNUnqDoUQ'
-category: General
 tags:
   - Guides
+  - General  
 ---
 
 In July 2023, Google closed Universal Analytics (UA), forcing users to switch to Google Analytics 4 (GA4) or another provider.

@@ -14,9 +14,9 @@ excerpt: >-
   The image preview you see when sharing a link is a great opportunity to get
   your brand’s message in front of people without them even clicking through to
   your website. Most sites just opt to display a logo and some brand elements.
-category: General
 tags:
   - Marketing
+  - General
 ---
 
 ## The TL;DR version:

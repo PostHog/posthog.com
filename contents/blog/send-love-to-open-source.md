@@ -10,9 +10,9 @@ featuredImage: >-
 featuredImageType: standard
 author:
   - andy-vandervell
-category: General
 tags:
   - Open source
+  - General
 ---
 
 Valentine's Day is coming up and we'd like to share our love for the open-source community that helps power PostHog! Here's how:
