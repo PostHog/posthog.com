@@ -366,6 +366,7 @@ export const ProductSessionReplay = () => {
                     title="Watch how users <span class='text-red dark:text-yellow'>experience</span> your app"
                     description='Session replay helps <span class="bg-yellow/25 p-0.5">diagnose issues</span> and <span class="bg-yellow/25 p-0.5">understand user behavior</span> in your product or
                     website.'
+                    signupCTACopy="Experience user journeys"
                 />
 
                 <div className="text-center">

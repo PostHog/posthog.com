@@ -338,6 +338,7 @@ export const ProductWebAnalytics = () => {
                     product={product.capitalized}
                     title="Monitor your website traffic"
                     description="Web analytics for people who really liked GA3..."
+                    signupCTACopy="Visualize your traffic"
                 />
 
                 <div className="text-center -mb-24">
