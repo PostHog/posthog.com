@@ -42,7 +42,7 @@ In SwiftUI, views can exist at multiple levels of abstraction, making automatic 
 
 Moreover, because of SwiftUI's declarative nature and dynamic view construction, SwiftUI views may sometimes lack clear, static names that are suitable for analytics purposes. 
 
-To track a screen view, you can explicitly apply the `postHogScreenView` view modifier to your full-screen view. While the PostHog iOS SDK will attempt to infer the screen's name based on the view's `Type`, you can also pass a custom screen name that better describes your view, along with optional event properties].
+To track a screen view, you can explicitly apply the `postHogScreenView` view modifier to your full-screen view. While the PostHog iOS SDK will attempt to infer the screen's name based on the view's `Type`, you can also pass a custom screen name that better describes your view, along with optional event properties.
 
 ```swift 
 // This will trigger a screen view event with $screen_name: "HomeView"
