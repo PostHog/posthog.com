@@ -54,7 +54,7 @@ Hiring people is hard.
 
 Take this recent example:[^1]
 
-[IMAGRE HERE]
+![From 900 to 4](https://res.cloudinary.com/dmukukwp6/image/upload/hogs_c30d4b024d.png)
 
 - Screening 900 candidates = 15 hours (~1 min each)
 - 86 first interviews = 43 hours (30 mins each)
