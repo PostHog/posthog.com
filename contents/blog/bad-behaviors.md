@@ -16,6 +16,8 @@ crosspost:
 
 ## 1. Not praising people for day-to-day work
 
+![star](https://res.cloudinary.com/dmukukwp6/image/upload/star_hog_0c334584ca.png)
+
 Who is more valuable?
 
 Someone who occasionally does something very visible and noteworthy, or the person who does their job to a consistently high standard every day?
@@ -29,6 +31,8 @@ Most people don’t nail their jobs every day. Make a habit of recognizing those
 > **What we’ve learned:** We made “acknowledgments” a core part of our weekly company all-hands. It’s explicitly for thanking people for their work, rather than praising major milestones.
 
 ## 2. Giving mostly positive feedback
+
+![angel](https://res.cloudinary.com/dmukukwp6/image/upload/angel_b0144c1e70.png)
 
 This isn’t a contradiction.
 
@@ -50,6 +54,8 @@ Hiring people is hard.
 
 Take this recent example:[^1]
 
+[IMAGRE HERE]
+
 - Screening 900 candidates = 15 hours (~1 min each)
 - 86 first interviews = 43 hours (30 mins each)
 - 55 tech interviews = 55 hours (60 mins each)
@@ -70,6 +76,8 @@ This is wrong for three reasons:
 
 ## 4. Not trusting teammates
 
+![shock](https://res.cloudinary.com/dmukukwp6/image/upload/shock_27b28ed3ad.png)
+
 We’ve all worked with micromanagers, or colleagues who second guess everything. They’re rarely malicious, but it’s impossible to build a successful startup this way.
 
 Startups live and die on speed – it’s the biggest advantage they have against incumbents. A lack of trust leads to bottlenecks. Bottlenecks kill momentum.
@@ -79,9 +87,11 @@ Why does this happen? Often it’s because:
 1. You hired someone that doesn’t raise the bar.
 2. You failed to give them constructive feedback.
 
-> **What we’ve learned:** Be decisive when you lose trust in a colleague. [When we let people go](/handbook/people/offboarding#involuntary-departure), we communicate the reasons why to the whole company, and conduct retrospectives on what we could have done better. If someone’s surprised when they’re let go, you’ve failed to give them the necessary feedback. 
+> **What we’ve learned:** Be decisive when you lose trust in a colleague. [When we let people go](/handbook/people/offboarding#involuntary-departure), we communicate the reasons why to the whole company, and conduct retrospectives on what we could have done better. If someone is surprised when they’re let go, you’ve failed to give them the necessary feedback. 
 
-## 5. Sticking rigidly to plans 
+## 5. Sticking rigidly to plans
+
+![reset button](https://res.cloudinary.com/dmukukwp6/image/upload/reset_5cca52828c.png)
 
 People often conflate “good execution” with executing a specific plan. This is a trap.
 
@@ -99,7 +109,9 @@ There’s always tension between being opinionated and building what users want.
 
 > **What we’ve learned:** Judge people on what they ship, how often they ship, and the impact of their work, not on whether they “stuck to the plan.” People who feel like they must stick to the plan won’t [bias for impact](/handbook/values#5-bias-for-impact).
 
-## 6. Waiting “one more week” to ship something 
+## 6. Waiting “one more week” to ship something
+
+![glengarry glen ross](https://res.cloudinary.com/dmukukwp6/image/upload/glengarry_glen_hog_b952c1fc80.jpg)
 
 One more week sounds harmless enough, right? It’s just ONE week. 
 
@@ -117,7 +129,9 @@ Exceptions include:
 
 > **What we’ve learned:** [Product engineers](https://posthog.com/blog/what-is-a-product-engineer) who can work autonomously are essential, as is a “[no design by default](/handbook/design/process#no-design-by-default)” approach, so engineers can ship basic UX on their own. We use feature flags to [test in production](/product-engineers/testing-in-production), and we avoid innovating on MVPs, so we don’t get bogged down in minutiae.
 
-## 7. Not following-up with customers 
+## 7. Not following-up with customers
+
+![talking to user](https://res.cloudinary.com/dmukukwp6/image/upload/pair_a276b66c35.png)
 
 We [bang on about talking](https://newsletter.posthog.com/p/talk-to-users) to users all the time in this newsletter, but it’s important to remember it’s a two-way collaboration, not a one-way transaction.
 
@@ -128,6 +142,8 @@ Failing to do so will teach them not to share more feedback in the future. If an
 > **What we’ve learned:** Don’t outsource this to a specific team – make it everyone’s responsibility. Reward helpful users with merch store discounts (also, have [a merch store](/merch!)) and early access to new features. We pull all feedback into a single Slack channel, so everyone sees it.
 
 ## 8. Obsessing over competitors
+
+![spiderhog meme](https://res.cloudinary.com/dmukukwp6/image/upload/spiderhog_09aab2b0e2.png)
 
 Any startup that has some degree of success will spawn competitors and imitators. There are two failure modes here:
 
@@ -156,6 +172,6 @@ _Words by Andy Vandervell, mechanical pencil enthusiast._
 
 [^1]: Want to work for PostHog? Read [How to get a job at a startup](https://newsletter.posthog.com/p/how-to-get-a-job-at-a-startup), then head to [our careers page](https://posthog.com/careers) – we’re always hiring.
 
-[^2:]We’ve since split this team intro three dedicated teams for [feature flags](/teams/feature-flags), [experiments](/teams/experiments), and [surveys](/teams/surveys) because of the magic of small engineering teams. We’ll be hiring for these teams soon so, you know, see above.
+[^2]: We’ve since split this team into three dedicated teams for [feature flags](/teams/feature-flags), [experiments](/teams/experiments), and [surveys](/teams/surveys) because of the magic of small engineering teams. We’ll be hiring for these teams soon so, you know, see above.
 
-[^3]: We find charging for a specific product increases usage because people see you’re taking it more seriously. One of our goals for experiments pricing is to make it cheaper, so users can run use them more without fear of running up a big bill.  
+[^3]: We find charging for a specific product increases usage because people see you’re taking it more seriously. One of our goals for pricing is to make experiments cheaper, so users can run more of them without fear of running up a big bill.  
