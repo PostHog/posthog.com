@@ -36,7 +36,7 @@ Hence the explicit separation between the data and view layers.
   - Name the `.ts` file according to its main export: `DashboardMenu.ts` or `DashboardMenu.tsx` or `dashboardLogic.ts` or `Dashboard.scss`. Pay attention to the case.
   - Avoid `index.ts`, `styles.css`, and other generic names, even if this is the only file in a directory.
 - CSS
-  - We use tailwind css whereever possible
+  - We use tailwind css wherever possible
   - Where it's not possible
     - We use regular SCSS files for styling to keep things simple and maintainable in the long run, as opposed to supporting the CSS-in-JS flavour of the month.
     - Inside `MyBlogComponent.tsx` import `MyBlogComponent.scss`
