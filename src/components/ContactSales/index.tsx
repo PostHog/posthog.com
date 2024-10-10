@@ -4,18 +4,6 @@ import Link from 'components/Link'
 import SEO from 'components/seo'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
-import airbus from './images/airbus.svg'
-import airbusDark from './images/airbus_dark.svg'
-import hasura from './images/hasura.svg'
-import staplesDark from './images/staples_dark.svg'
-import staples from './images/staples.svg'
-import ycombinatorDark from './images/y-combinator_dark.svg'
-import ycombinator from './images/y-combinator.svg'
-import dhlDark from './images/dhl_dark.svg'
-import dhl from './images/dhl.svg'
-import hasuraDark from './images/hasura_dark.svg'
-import landmark from './images/landmark.svg'
-import landmarkDark from './images/landmark_dark.svg'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import KeyboardShortcut from 'components/KeyboardShortcut'
@@ -74,22 +62,15 @@ export default function ContactSales({ location }) {
                                 )
                             })}
                         </ul>
-                        <h3 className="text-lg mt-14 mb-12">Who trusts PostHog?</h3>
+                        <h3 className="text-lg mt-14 mb-12">Quick demo first?</h3>
 
                         <div className="grid sm:grid-cols-2 sm:gap-x-12 gap-y-12">
-                            <div className="flex flex-wrap md:flex-col gap-4 md:gap-0  md:space-y-12 justify-center md:justify-start sm:order-last order-first">
-                                <img src={darkMode ? airbusDark : airbus} className="max-w-[150px] md:max-w-auto" />
-                                <img src={darkMode ? hasuraDark : hasura} className="max-w-[150px] md:max-w-auto" />
-                                <img
-                                    src={darkMode ? ycombinatorDark : ycombinator}
-                                    className="max-w-[150px] md:max-w-auto"
-                                />
-                            </div>
-                            <div className="flex flex-wrap md:flex-col gap-4 md:gap-0  md:space-y-12 justify-center md:justify-start sm:order-last order-first">
-                                <img src={darkMode ? staplesDark : staples} className="max-w-[150px] md:max-w-auto" />
-                                <img src={darkMode ? dhlDark : dhl} className="max-w-[150px] md:max-w-auto" />
-                                <img src={darkMode ? landmarkDark : landmark} className="max-w-[150px] md:max-w-auto" />
-                            </div>
+                            <Link to="/community/profiles/1727">Mine Kansu</Link>, from our Sales team, made this demo
+                            video. If you're short on time and need to see what PostHog has to offer, check it out!
+                            <iframe
+                                src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI"
+                                className="rounded shadow-xl"
+                            />
                         </div>
                     </div>
                     <div className="order-1 md:order-2">
@@ -152,116 +133,11 @@ export default function ContactSales({ location }) {
                                         required: true,
                                     },
                                     {
-                                        label: 'Which products are you interested in?',
-                                        name: 'products',
-                                        type: 'enumeration',
-                                        fieldType: 'checkbox',
-                                        cols: 1,
-                                        options: [
-                                            {
-                                                label: 'Product Analytics',
-                                                value: 'Product Analytics',
-                                            },
-                                            {
-                                                label: 'Experiments (Feature Flags)',
-                                                value: 'Experiments (Feature Flags)',
-                                            },
-                                            {
-                                                label: 'Session Replay',
-                                                value: 'Session Replay',
-                                            },
-                                            {
-                                                label: 'Other (CDP, Data Warehouse, Surveys)',
-                                                value: 'Other (CDP, Data Warehouse, Surveys)',
-                                            },
-                                        ],
-                                        required: true,
-                                    },
-                                    {
-                                        label: 'I want to implement tracking on:',
-                                        name: 'tracking_on',
-                                        type: 'enumeration',
-                                        fieldType: 'checkbox',
-                                        cols: 1,
-                                        options: [
-                                            {
-                                                label: 'Marketing page',
-                                                value: 'Marketing page',
-                                            },
-                                            {
-                                                label: 'Web app',
-                                                value: 'Web app',
-                                            },
-                                            {
-                                                label: 'Mobile app',
-                                                value: 'Mobile app',
-                                            },
-                                            {
-                                                label: 'Server',
-                                                value: 'Server',
-                                            },
-                                            {
-                                                label: 'Other (e.g., extension, wearable)',
-                                                value: 'Other (e.g., extension, wearable)',
-                                            },
-                                        ],
-                                        required: true,
-                                    },
-                                    {
-                                        label: 'Which data warehouse do you use?',
-                                        name: 'data_warehouse',
-                                        type: 'enumeration',
-                                        fieldType: 'checkbox',
-                                        options: [
-                                            {
-                                                label: 'Snowflake',
-                                                value: 'Snowflake',
-                                            },
-                                            {
-                                                label: 'BigQuery',
-                                                value: 'BigQuery',
-                                            },
-                                            {
-                                                label: 'Redshift',
-                                                value: 'Redshift',
-                                            },
-                                            {
-                                                label: 'Azure',
-                                                value: 'Azure',
-                                            },
-                                            {
-                                                label: 'Other',
-                                                value: 'Other',
-                                            },
-                                            {
-                                                label: 'None',
-                                                value: 'None',
-                                            },
-                                        ],
-                                        required: true,
-                                    },
-                                    {
                                         label: 'Monthly active users',
                                         name: 'monthly_active_users',
                                         type: 'string',
                                         fieldType: 'number',
                                         required: true,
-                                    },
-                                    {
-                                        label: 'Do you need any of the following:',
-                                        name: 'needs',
-                                        type: 'enumeration',
-                                        fieldType: 'checkbox',
-                                        options: [
-                                            {
-                                                label: 'Legal/security review',
-                                                value: 'Legal/security review',
-                                            },
-                                            {
-                                                label: 'BAA for HIPAA',
-                                                value: 'BAA for HIPAA',
-                                            },
-                                        ],
                                     },
                                     {
                                         label: 'What do you want to talk about on the call?',

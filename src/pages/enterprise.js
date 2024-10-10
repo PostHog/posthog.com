@@ -37,8 +37,13 @@ export default function Enterprise() {
                 </h2>
                 <div className="flex justify-center items-center gap-2 home-hero-cta mb-16">
                     <SignupCTA />
-                    <TrackedCTA event={{ name: `clicked Get a demo` }} href="/demo" type="secondary" size="lg">
-                        Get a demo
+                    <TrackedCTA
+                        event={{ name: `clicked Talk to a human` }}
+                        href="/talk-to-a-human"
+                        type="secondary"
+                        size="lg"
+                    >
+                        Talk to a human
                     </TrackedCTA>
                 </div>
 
