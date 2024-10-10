@@ -116,13 +116,6 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `authorImages`,
-                path: `${__dirname}/static/images/authors`,
-            },
-        },
-        {
             resolve: `gatsby-source-strapi-pages`,
             options: {
                 strapiURL: process.env.STRAPI_URL,

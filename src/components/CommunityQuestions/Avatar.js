@@ -1,11 +1,16 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
 
-export default function Avatar({ image }) {
+export default function Avatar({ image, url }) {
     return (
         <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded-full w-[30px] h-[30px] overflow-hidden flex-shrink-0">
-            {image ? (
-                <GatsbyImage className="w-[30px] h-[30px]" image={getImage(image)} />
+            {image || url ? (
+                url ? (
+                    <CloudinaryImage width={60} src={url} />
+                ) : (
+                    <GatsbyImage className="w-[30px] h-[30px]" image={getImage(image)} />
+                )
             ) : (
                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

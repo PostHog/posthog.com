@@ -27,6 +27,7 @@ import { IconMap, IconOpenSidebar } from '@posthog/icons'
 import { NewsletterForm } from 'components/NewsletterForm'
 import BuiltBy from '../components/BuiltBy'
 import TeamMember from 'components/TeamMember'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
 
@@ -97,7 +98,8 @@ const ContributorsSmall = ({ contributors }) => {
                                 <Container className="flex space-x-2 items-center" {...(url ? { to: url } : {})}>
                                     <span>
                                         {typeof image === 'string' ? (
-                                            <img
+                                            <CloudinaryImage
+                                                width={50}
                                                 className="w-6 h-6 border-border border dark:border-dark rounded-full"
                                                 src={image}
                                             />
@@ -216,7 +218,6 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                             featuredImage={featuredImage}
                             featuredVideo={featuredVideo}
                             featuredImageType={featuredImageType}
-                            contributors={contributors}
                             date={date}
                             tags={tags}
                         />
@@ -308,11 +309,6 @@ export const query = graphql`
                 }
                 contributors: authorData {
                     id
-                    image {
-                        childImageSharp {
-                            gatsbyImageData
-                        }
-                    }
                     name
                     profile_id
                     role

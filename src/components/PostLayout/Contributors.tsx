@@ -4,6 +4,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { IContributor } from './types'
 import { Image, Transformation } from 'cloudinary-react'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 const isCloudinaryImage = (url: string): boolean => {
     const cloudinaryUrlPattern = new RegExp(`https://res.cloudinary.com/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/`)
@@ -73,7 +74,11 @@ export const ContributorImage = ({ image, name, compact, rounded }) => {
             }`}
         >
             {typeof image === 'string' ? (
-                <img className={compact ? 'absolute w-full h-full object-cover' : 'w-24 h-24'} src={image} />
+                <CloudinaryImage
+                    width={200}
+                    className={compact ? 'absolute w-full h-full object-cover' : 'w-24 h-24'}
+                    src={image}
+                />
             ) : gatsbyImage ? (
                 <GatsbyImage
                     image={gatsbyImage}

@@ -23,6 +23,11 @@ interface IPost {
     authors: {
         name: string
         image: ImageDataLike
+        profile: {
+            avatar?: {
+                url: string
+            }
+        }
     }[]
     imgClassName?: string
 }
@@ -44,10 +49,10 @@ export const Post = ({ featuredImage, slug, title, category, date, authors, imgC
                     </h3>
                     <p className="m-0 !text-sm font-light mt-1">{date}</p>
                     <ul className="list-none m-0 p-0 mt-auto space-x-4 hidden md:flex">
-                        {authors?.slice(0, 2).map(({ name, image }) => {
+                        {authors?.slice(0, 2).map(({ name, image, profile }) => {
                             return (
                                 <li className="flex space-x-2 items-center" key={name}>
-                                    <Avatar image={image} />
+                                    <Avatar url={profile?.avatar?.url} image={image} />
                                     <span>{name}</span>
                                 </li>
                             )
@@ -217,9 +222,9 @@ export const BlogFragment = graphql`
                 role
                 link_type
                 link_url
-                image {
-                    childImageSharp {
-                        gatsbyImageData(width: 30, height: 30)
+                profile {
+                    avatar {
+                        url
                     }
                 }
             }
