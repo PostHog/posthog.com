@@ -74,7 +74,7 @@ const features = [
     },
 ]
 
-const subfeaturesItemCount = 5
+const subfeaturesItemCount = 4
 const subfeatures = [
     {
         title: 'Capture sessions without extra code',
@@ -85,11 +85,6 @@ const subfeatures = [
         title: 'Automatic playlists',
         description: 'Filter by user behavior or time',
         icon: <IconPlaylist />,
-    },
-    {
-        title: 'Web or mobile session recording',
-        description: 'Web or Android (beta) available',
-        icon: <IconPhone />,
     },
     {
         title: 'Download recordings',
@@ -420,6 +415,60 @@ export const ProductSessionReplay = () => {
                     </ul>
                 </section>
 
+                <section className="max-w-screen md:max-w-7xl mx-auto px-5 -mt-10 md:mt-0 mb-10 md:mb-20">
+                    <div className="grid md:grid-cols-12 md:gap-8 items-center">
+                        <div className="order-2 md:order-1 col-span-5">
+                            <h2 className="text-4xl mb-5">
+                                Capture from web, mobile, <span className="text-red dark:text-yellow">or both</span>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {/* Subfeatures on the left */}
+                        <ul className="list-none p-0 grid md:grid-cols-1 gap-3 w-full">
+                            <Subfeature
+                                title="Web"
+                                description={
+                                    <>
+                                        No special instrumentation needed on <a href="/docs/libraries/js">Javascript</a>
+                                        ,<a href="/docs/libraries/react"> React</a>,
+                                        <a href="/docs/libraries/nextjs"> Next.js</a>,
+                                        <a href="/docs/libraries/vue"> Vue</a>, and more.
+                                    </>
+                                }
+                            />
+                            <Subfeature
+                                title="Server-side"
+                                description={
+                                    <>
+                                        Choose <a href="/docs/libraries/nodejs">Node.js</a>,
+                                        <a href="/docs/libraries/python"> Python</a>,
+                                        <a href="/docs/libraries/java"> Java</a>,<a href="/docs/libraries/php"> PHP</a>,
+                                        <a href="/docs/libraries/ruby"> Ruby</a>, or others. Plays nice with web
+                                        libraries.
+                                    </>
+                                }
+                            />
+                            <Subfeature
+                                title="Mobile"
+                                description={
+                                    <>
+                                        Replays supported on <a href="/docs/libraries/android">Android</a>,
+                                        <a href="/docs/libraries/ios"> iOS</a>,
+                                        <a href="/docs/libraries/react-native"> React Native</a>,
+                                        <a href="/docs/libraries/flutter"> Flutter</a>, and more.
+                                    </>
+                                }
+                            />
+                        </ul>
+
+                        {/* Image on the right */}
+                        <div className="flex justify-center items-center">
+                            <StaticImage src="./images/phone.png" alt="Phone" className="w-full max-w-[262px]" />
+                        </div>
+                    </div>
+                </section>
                 <section className="bg-accent dark:bg-accent-dark">
                     <Marquee product={product.capitalized}>
                         {questions.map((question, index) => {
@@ -428,6 +477,7 @@ export const ProductSessionReplay = () => {
                     </Marquee>
                 </section>
             </div>
+
             <section
                 id="pricing"
                 className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
