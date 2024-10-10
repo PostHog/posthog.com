@@ -16,7 +16,7 @@ Web session replay has been a core part of PostHog since our first hackathon way
 
 Why the long wait? 
 
-1. We had much more demand from web-based B2B customers during our early-stage phase.
+1. We had more demand from web-based B2B customers during our early-stage phase.
 
 2. We went wide instead of deep. We shipped a whole suite of products, including feature flags, experiments, surveys and (more recently) our own data warehouse.
 
@@ -24,13 +24,15 @@ Why the long wait?
 
 Happily, after several months of hard work from the replay team, we have betas for [iOS](/docs/session-replay/ios), [Android](/docs/session-replay/android), and [React Native](/docs/session-replay/react-native), with [Flutter](https://github.com/PostHog/posthog-flutter/issues/69) coming soon. 
 
-This post covers how it works and some the technical challenges we overcame it make it.
+This post covers how it works and some of the technical challenges we overcame it make it.
 
 ## What's so difficult about mobile session replay?
 
-Developers complain about [the lack of good mobile replay options](https://medium.com/goodones/15-years-later-there-is-still-no-good-session-replay-for-ios-f8d335999737). The existing options were too expensive, ruined performance, lacked privacy controls, or locked behind [annoying salespeople](/founders/negotiate-software-better). These are all antithetical to how we do things at PostHog.
+Developers frequently complain about [the lack of good mobile replay options](https://medium.com/goodones/15-years-later-there-is-still-no-good-session-replay-for-ios-f8d335999737). 
 
-Why was it this way for so long?
+The existing options were too expensive, ruined performance, lacked privacy controls, or locked behind [annoying salespeople](/founders/negotiate-software-better). These are all antithetical to how we do things at PostHog.
+
+But why was it this way for so long?
 
 ### 1. Multiple platforms
 
@@ -38,7 +40,7 @@ The industry's big secret about web session replay is that it largely relies on 
 
 Unfortunately, rrweb for mobile doesn't exist. To build mobile session replay, you simply need to do a lot of work. Instead of a single JavaScript SDK, mobile requires multiple (like iOS, Android, React Native, and Flutter) and all the building and testing that goes with it.
 
-There are even breaking differences within platforms. For example, Jetpack Compose uses a compositional model for UI, which is different from Android's traditional view-based model. This means you need to develop separate ways of doing replays when using it. iOS has a similar problem with SwiftUI versus UIKit.
+There are even breaking differences within platforms. Jetpack Compose, for example, uses a compositional model for UI, which is different from Android's traditional view-based model. This means you need to develop separate ways of doing replays when using it. iOS has a similar problem with SwiftUI versus UIKit.
 
 ### 2. Performance
 
@@ -46,11 +48,11 @@ Phones are much less powerful than desktops, and not all phones are a top-of-the
 
 If you've ever tried to record your screen on an older phone, you would know its impact on performance. Apps take longer to load, animations become choppy, reactivity degrades, and your phone heats up.
 
-Developers don't know what devices their users are on, so they need to be especially careful about performance. Anything that degrades user experience is not an option for many developers.
+Developers need to support a wide range of devices, so they need to be especially careful about performance. Anything that degrades user experience is not an option for many developers.
 
 ### 3. Privacy
 
-To protect users privacy, developers often mask and exclude sensitive information. The tricky part of this is identifying what information is sensitive.
+To protect user privacy, developers often mask and exclude sensitive information. The tricky part of this is identifying what information is sensitive.
 
 Web apps rely on the DOM to do this. The DOM provides a hierarchical tree structure that represents and uniquely identifies elements. The web also has standardized elements, like `<input type="password">`. Combining these makes it easier to identify, mask, and exclude sensitive elements on the web.
 
