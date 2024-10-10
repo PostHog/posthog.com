@@ -49,7 +49,7 @@ let imvProfilePhoto = UIImageView(frame: CGRect(x: 50, y: 50, width: 100, height
 imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 ```
 
-> **Note:** This is currently not supported for SwiftUI. We're investigating the [issue](https://github.com/PostHog/posthog-ios/issues/162).
+> **Note:** For SwiftUI please refer to the [Masking in SwiftUI](#masking-in-swiftui) section below
 
 > **Note:** A technical issue is causing the [SwiftUI Text](https://developer.apple.com/documentation/swiftui/text) view to be detected as a `SwiftUI Image` view. This means that it'll be automatically masked if `maskAllImages` is set to `true`, even if the `maskAllTextInputs` is disabled. We're investigating this [issue](https://github.com/PostHog/posthog-ios/issues/163).
 
@@ -58,6 +58,13 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 
 - When using the [SwiftUI TextField](https://developer.apple.com/documentation/swiftui/textfield) with [UITextInputTraits](https://developer.apple.com/documentation/uikit/uitextinputtraits), setting traits such as `TextField("Email", text: ...).keyboardType(.emailAddress)` will always be automatically masked since it's for private text.
 - The [SwiftUI SecureField](https://developer.apple.com/documentation/swiftui/securefield) view is always automatically masked.
+- You can manually mark a SwiftUI View for masking using the `postHogMask(_:)` view modifier:
+
+  ```swift
+  // This view will be masked in session replay recordings
+  MyCoolView()
+    .postHogMask()
+  ```
 
 ## Limitations
 
