@@ -103,7 +103,7 @@ export default function QuestionPage(props: QuestionPageProps) {
                                         View in PostHog
                                     </Link>
                                     <Link
-                                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collectionType/api::question.question/${question?.id}`}
+                                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${question?.id}`}
                                         externalNoIcon
                                         className="font-bold"
                                     >
@@ -113,9 +113,8 @@ export default function QuestionPage(props: QuestionPageProps) {
                             </div>
                         </div>
                         <div
-                            className={`grid gap-x-4 mt-4 border-t divide-x divide-border dark:divide-border-dark border-light dark:border-dark ${
-                                question.attributes.zendeskTicketID ? 'grid-cols-2' : ''
-                            }`}
+                            className={`grid gap-x-4 mt-4 border-t divide-x divide-border dark:divide-border-dark border-light dark:border-dark ${question.attributes.zendeskTicketID ? 'grid-cols-2' : ''
+                                }`}
                         >
                             <ZendeskTicket mutateQuestion={mutate} question={question} questionID={question.id} />
                             <div className={`pt-4 ${question.attributes.zendeskTicketID ? 'pl-4' : ''}`}>
