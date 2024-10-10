@@ -233,6 +233,7 @@ function PipelinesPage({ location }) {
                     title="Customer data platform"
                     description="Import from a data warehouse to analyze your data with PostHog product data and send it all to 25+ destinations."
                     beta
+                    signupCTACopy="Control all your data"
                 />
 
                 <div className="text-center -mb-12 md:-mb-28">

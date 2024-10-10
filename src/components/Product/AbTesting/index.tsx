@@ -297,6 +297,7 @@ export const ProductAbTesting = () => {
                     product={product.capitalized}
                     title='Test changes with <span class="text-red dark:text-yellow">statistical significance</span>'
                     description='A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with <a href="/product-analytics">product analytics</a> and <a href="/session-replay">session replay</a>.'
+                    signupCTACopy="Boost conversions"
                 />
 
                 <div className="text-center">

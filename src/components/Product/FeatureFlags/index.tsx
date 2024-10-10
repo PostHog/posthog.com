@@ -389,6 +389,7 @@ export const ProductFeatureFlags = () => {
                     product={product.capitalized}
                     title='<span class="text-red dark:text-yellow">Safely roll out features</span> to specific users or groups'
                     description='Test changes with small groups of users before rolling out wider. Analyze usage with <a href="/product-analytics">product analytics</a> and <a href="/session-replay">session replay</a>.'
+                    signupCTACopy="Start controlled rollouts"
                 />
 
                 <div className="text-center">

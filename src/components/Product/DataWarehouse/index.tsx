@@ -189,6 +189,7 @@ export const ProductDataWarehouse = () => {
                     product={product.capitalized}
                     title='All your data <span class="text-red dark:text-yellow">in one place</span>'
                     description="Unify and query data from any source and analyze it alongside your product data."
+                    signupCTACopy="Explore unified data"
                 />
 
                 <div className="text-center">
