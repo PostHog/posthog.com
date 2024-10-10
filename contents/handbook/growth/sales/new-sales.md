@@ -218,7 +218,7 @@ Oh no! It's ok - the most important thing here is that we learn. You should capt
 - Product/feature gap:
   - Threshold-based alerting
   - Role-based access
-  - Mobile session replay
+  - [Mobile session replay](/blog/mobile-session-replay)
   - Experimentation
   - Error monitoring
   - (Create a new category if something else comes up, don’t just have an ‘other’ bucket)
