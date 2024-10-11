@@ -26,7 +26,7 @@ Teams that praise highly visible contributions more than day-to-day excellence f
 
 Most people don’t nail their jobs every day. Make a habit of recognizing those who do, and their success will compound throughout your team.
 
-> **What we’ve learned:** We made “acknowledgments” a core part of our weekly company all-hands. It’s explicitly for thanking people for their work, rather than praising major milestones.
+> **What we’ve learned:** We made "acknowledgments" a core part of our weekly company all-hands. It’s explicitly for thanking people for their work, rather than praising major milestones.
 
 ## 2. Giving mostly positive feedback
 
