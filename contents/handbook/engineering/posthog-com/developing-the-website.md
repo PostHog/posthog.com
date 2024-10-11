@@ -476,13 +476,17 @@ If you know who you would like to review the pull request, select them in the **
 
 After a series of checks are run (to ensure nothing in your pull request breaks the website), Vercel will generate a preview link available in the Vercel bot comment. This includes all of your changes, so you can preview before your pull request is merged.
 
+An initial build can take up to 50 minutes to run. After the initial build, subsequent builds should complete in under ~15 minutes. We're limited to two concurrent builds, so if there's a backlog, this process can take longer.
+
+Because Vercel charges per seat, we don't automatically invite all team members to our Vercel account. If your build fails, you can run `yarn build` locally to see what's erroring out. If nothing is erroring locally, it's likely the build timed out in Vercel. The Website & Docs team monitors for failed builds, so they'll re-run it for you. If the build is urgent, give a shout in #team-website-and-docs and someone with Vercel access can trigger a rebuild for you.
+
 ![Preview branch](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/preview-branch.png)
 
 > **Note:** Checks are run automatically for PostHog org members and previous contributors. First time contributors will require authorization for checks to be run by a PostHog org member.
 
 ## Deployment
 
-To get changes into production, the website deploys automatically from `master`. The build takes 5-10 minutes.
+To get changes into production, the website deploys automatically from `master`. The build takes up to an hour, but can be delayed if other preview builds are in the queue.
 
 #### Acknowledgements
 
