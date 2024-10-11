@@ -21,7 +21,7 @@ toolsUsed:
 date: 2024-10-05
 ---
 
-Founded in 2017, [Great Expectations (GX)](https://greatexpectations.io/) helps data teams have confidence in their data. Its SaaS platform, GX Cloud, is a fully managed end-to-end solution for managing the data quality process. As you’d expect the team takes its own data seriously and decided in 2023 that they needed to gather data from across the entire user journey.
+Founded in 2017, [Great Expectations (GX)](https://greatexpectations.io/) helps data teams have confidence in their data. Its SaaS platform, GX Cloud, is a fully managed end-to-end solution for managing the data quality process. As you’d expect, the team takes its own data seriously and decided in 2023 that they needed to gather data from across the entire user journey.
 
 “We have our marketing site, our docs website, and our product,” explains Marketing Project Manager Erica Howard. “We needed to look holistically across all three of these. Prior to PostHog we hadn’t been able to follow the full user journey or track data in a granular way.”
 
