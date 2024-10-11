@@ -8,6 +8,7 @@ import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import SalesforceForm from 'components/SalesforceForm'
+import TeamMember from 'components/TeamMember'
 
 const features = [
     'Volume discounts',
@@ -62,11 +63,10 @@ export default function ContactSales({ location }) {
                                 )
                             })}
                         </ul>
-                        <h3 className="text-lg mt-14 mb-12">Quick demo first?</h3>
-
-                        <div className="grid sm:grid-cols-2 sm:gap-x-12 gap-y-12">
-                            <Link to="/community/profiles/1727">Mine Kansu</Link>, from our Sales team, made this demo
-                            video. If you're short on time and need to see what PostHog has to offer, check it out!
+                        <h3 className="text-lg mt-12 mb-4">Quick demo first?</h3>
+                        <div className="space-y-3">
+                            <TeamMember name="Mine Kansu" photo />, from our Sales team, made this demo video. If you're
+                            short on time and need to see what PostHog has to offer, check it out!
                             <iframe
                                 src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI"
                                 className="rounded shadow-xl"
