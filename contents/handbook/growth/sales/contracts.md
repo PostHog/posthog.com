@@ -116,7 +116,7 @@ If a customer has an annual plan but doesn't _pay_ the whole year up front, we u
 Occasionally, customers may ask for a discount in return for a case study:
 1. Don't proactively offer this as we have been successful in getting case studies from happy paying customers without additional discounts.
 2. If a customer offers, first check with [Joe](/community/profiles/29070) as to whether he'd like one from this customer.
-3. If yes, we can add an additional 5% discount in the Order Form, and a Special Term that they will work with us to publish a case study in the first 3 months of the contract.
+3. If yes, we can add an additional 5% discount in the Order Form, and a Special Term that they will work with us to publish a case study in the first 3 months of the contract. If no, do not push this through anyway - a case study needs to be actually useful to us. 
 
 ### Self-serve discounts
 
