@@ -1,22 +1,20 @@
 ---
 title: Non-obvious behaviors that will kill your startup
-date: 2024-10-10
+date: 2024-10-11
 author:
   - andy-vandervell
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/353483136_5f00599e_346c_44d4_a94c_2cd85c9031a0_3c65d69b45.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/glengarry_glen_hog_b952c1fc80.jpg
 featuredImageType: full
 tags:
   - Culture
   - People
 crosspost:
-  - Newsletter
+  - Blog
   - Founders
 ---
 
 ## 1. Not praising people for day-to-day work
-
-![star](https://res.cloudinary.com/dmukukwp6/image/upload/star_hog_0c334584ca.png)
 
 Who is more valuable?
 
