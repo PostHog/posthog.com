@@ -12,7 +12,7 @@ tags:
 
 With all the drama in the world of WordPress, it’s a great time to explore Ghost, a robust blogging and newsletter CMS. You can [self-host](https://ghost.org/docs/install/) Ghost on your own server, or lean on managed hosting from [Ghost.org](https://ghost.org).
 
-However you host, adding PostHog for [web analytics](/docs/web-analytics) and [session replay](/docs/session-replay) is a quick process that gives you immediate insight about how people are finding your site, enjoying your writing and exploring your archives. PostHog accounts are free, so sign up and follow along.
+However you host, adding PostHog for [web analytics](/docs/web-analytics), [product analytics](/docs/product-analytics), and [session replay](/docs/session-replay) is a quick process that gives you immediate insight about how people are finding your site, enjoying your writing and exploring your archives. PostHog accounts are free, so sign up and follow along.
 
 ## Adding PostHog using Ghost’s code injection
 
