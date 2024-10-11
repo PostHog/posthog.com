@@ -20,7 +20,7 @@ Grab the PostHog script:
 
 <Snippet />
 
-In your Ghost publication’s settings, click the Settings button, labeled with a gear:
+In your Ghost publication’s settings, click the Settings button, labeled with a **gear icon**:
 
 ![Ghost settings menu](https://res.cloudinary.com/dmukukwp6/image/upload/ghost_settings_e1f6c4b436.png)
 
