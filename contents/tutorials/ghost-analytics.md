@@ -1,5 +1,5 @@
 ---
-title: Quick start: Ghost analytics and session replay
+title: "Quick start: Ghost analytics and session replay"
 date: 2024-10-11
 featuredTutorial: false
 author:
@@ -30,7 +30,7 @@ Scroll toward the bottom of the sidebar, looking for **Advanced**, and select **
 
 Paste the PostHog script into the **Site header** code block:
 
-![Ghost code injection settings](https://res.cloudinary.com/dmukukwp6/image/upload/ghost_settings_e1f6c4b436.png)
+![Ghost code injection settings](https://res.cloudinary.com/dmukukwp6/image/upload/injection_field_87c4475be8.png)
 
 Click **Save**, and you’re all set. Explore your blog to generate some activity, then have a look around your PostHog account to see the results.
 
