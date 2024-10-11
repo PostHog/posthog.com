@@ -38,21 +38,30 @@ export default function ContactSales({ location }) {
                         <StaticImage
                             loading="eager"
                             placeholder="none"
-                            width={750}
+                            width={600}
                             alt="Sales hedgehogs"
                             src="./images/sales-hogs.png"
                         />
                         <h1 className="text-3xl md:text-5xl mt-4 mb-2">Let's chat</h1>
-                        <p className="m-0">
-                            PostHog Cloud is self-serve (
-                            <Link to="https://app.posthog.com/signup">get started here</Link>), but we’re here to chat
-                            if you have bespoke needs.
-                        </p>
                     </div>
                 </section>
                 <section className="grid md:grid-cols-2 max-w-5xl mx-auto md:gap-x-16 gap-y-12">
                     <div className="order-2 md:order-1">
-                        <h3 className="text-lg mt-1 mb-4">Benefits of an enterprise plan:</h3>
+                        <h3 className="text-lg mb-4">Quick demo first?</h3>
+                        <div className="space-y-3">
+                            <iframe
+                                src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI"
+                                className="rounded shadow-xl"
+                            />
+                        </div>
+                        <h3 className="text-lg mt-1 mb-4">Help with your bill?</h3>
+                        <p>
+                            Here's{' '}
+                            <Link to="/docs/billing/estimating-usage-costs#how-to-reduce-your-posthog-costs">
+                                how to reduce your costs
+                            </Link>
+                        </p>
+                        <h3 className="text-lg mt-1 mb-4">Benefits of an enterprise plan</h3>
                         <ul className="list-none m-0 p-0 mt-2 grid sm:grid-flow-col sm:grid-rows-3 space-y-1">
                             {features.map((feature) => {
                                 return (
@@ -63,22 +72,9 @@ export default function ContactSales({ location }) {
                                 )
                             })}
                         </ul>
-                        <h3 className="text-lg mt-12 mb-4">Quick demo first?</h3>
-                        <div className="space-y-3">
-                            <TeamMember name="Mine Kansu" photo />, from our Sales team, made this demo video. If you're
-                            short on time and need to see what PostHog has to offer, check it out!
-                            <iframe
-                                src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI"
-                                className="rounded shadow-xl"
-                            />
-                        </div>
                     </div>
                     <div className="order-1 md:order-2">
                         <h3 className="mb-1">Contact us</h3>
-                        <p className="text-sm">
-                            <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the
-                            form at a breakneck pace!
-                        </p>
                         <SalesforceForm
                             type="lead"
                             form={{
@@ -118,16 +114,16 @@ export default function ContactSales({ location }) {
                                                 value: 'Marketing',
                                             },
                                             {
-                                                label: 'Other',
-                                                value: 'Other',
-                                            },
-                                            {
                                                 label: 'Product',
                                                 value: 'Product',
                                             },
                                             {
                                                 label: 'Sales',
                                                 value: 'Sales',
+                                            },
+                                            {
+                                                label: 'Other',
+                                                value: 'Other',
                                             },
                                         ],
                                         required: true,
