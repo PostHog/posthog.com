@@ -245,7 +245,7 @@ function PipelinesPage({ location }) {
                 </div>
             </div>
 
-            <div className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12">
+            <div className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12 relative">
                 <div className="md:col-span-4 md:mb-4">
                     <h2 className="text-center text-2xl lg:text-4xl">Sources &amp; destinations library</h2>
 
@@ -255,7 +255,7 @@ function PipelinesPage({ location }) {
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                             className="bg-transparent w-full border-none outline-none"
-                            placeholder="Search destinations"
+                            placeholder="Search sources & destinations"
                         />
                     </div>
                 </div>
