@@ -127,7 +127,7 @@ Exceptions include:
 - You’re building some kind of mission critical infrastructure.
 - Your product is a design-led take on a product that already exists (e.g [Linear](https://linear.app/)), where design and polish are the reason to use it over alternatives. 
 
-> **What we’ve learned:** [Product engineers](https://posthog.com/blog/what-is-a-product-engineer) who can work autonomously are essential, as is a “[no design by default](/handbook/design/process#no-design-by-default)” approach, so engineers can ship basic UX on their own. We use feature flags to [test in production](/product-engineers/testing-in-production), and we avoid innovating on MVPs, so we don’t get bogged down in minutiae.
+> **What we’ve learned:** [Product engineers](/blog/what-is-a-product-engineer) who can work autonomously are essential, as is a “[no design by default](/handbook/design/process#no-design-by-default)” approach, so engineers can ship basic UX on their own. We use feature flags to [test in production](/product-engineers/testing-in-production), and we avoid innovating on MVPs, so we don’t get bogged down in minutiae.
 
 ## 7. Not following-up with customers
 
@@ -163,10 +163,10 @@ You shouldn’t ignore competitors, but the decisions you make about your produc
 ## 📖 Box fresh reads, delivered to your inbox
 
 - **[Burn the Playbooks](https://www.notboring.co/p/burn-the-playbooks) – Packy McCormick** 
-- **[Actionable metrics for mobile apps](/product-engineers/mobile-app-metrics-kpis) – Lior Neu-ner**
+- **[Actionable metrics for mobile apps](/product-engineers/mobile-app-metrics-kpis) – <TeamMember name="Lior Neu-ner" />**
 - **[Is It Day Two At Amazon?](https://www.bigtechnology.com/p/is-it-day-two-at-amazon) – Kristi Coulter**
 - **[I interviewed 100 DevTools founders and this is what I learned](https://blog.scalingdevtools.com/i-interviewed-100-devtools-founders/) – Jack Bridger**
-- **[How we built an (actually useful) AI community support bot](https://posthog.com/blog/ai-community-answers) – Cory Watilo**
+- **[How we built an (actually useful) AI community support bot](/blog/ai-community-answers) – <TeamMember name="Cory Watilo" />**
 
 _Words by Andy Vandervell, mechanical pencil enthusiast._
 
