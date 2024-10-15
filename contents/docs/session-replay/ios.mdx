@@ -43,7 +43,7 @@ config.sessionReplayConfig.debouncerDelay = 1.0
 ### Capture network telemetry
 #### URLSession - async/await methods
 
-In iOS, PostHog automatically captures network logs by using method swizzling on [URLSession](https://developer.apple.com/documentation/foundation/urlsession) methods, which allows for the out-of-the-box collection of network data.
+In iOS, PostHog uses method swizzling on [URLSession](https://developer.apple.com/documentation/foundation/urlsession) methods, which allows for the out-of-the-box collection of network data.
 
 However, URLSession’s async/await-powered APIs which are not exposed to the `objc` runtime and cannot be swizzled. As a result, network telemetry cannot be automatically captured. 
 
