@@ -46,9 +46,7 @@ In iOS, PostHog uses method swizzling on [URLSession](https://developer.apple.co
 
 However, URLSession’s async/await-powered APIs which are not exposed to the `objc` runtime and cannot be swizzled. As a result, network telemetry cannot be automatically captured. 
 
-For apps using async `URLSession` methods, PostHog provides wrapper functions which you can use to manually capture network logs. 
-
-##### Example:
+For apps using async `URLSession` methods, PostHog provides wrapper functions that you can use to manually capture network logs. 
 
 ```swift
 import PostHog
