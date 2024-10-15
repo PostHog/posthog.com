@@ -53,15 +53,16 @@ Using the Next.js app router requires us to initialize PostHog differently than 
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    person_profiles: 'identified_only',
-  })
-}
+import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
+  useEffect(() => {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+      person_profiles: 'identified_only'
+    })
+  }, []);
+
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -193,6 +194,15 @@ export default function RootLayout({ children }) {
 Once done, you should see pageview events for individual pages in your PostHog instance.
 
 ![Pageviews](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-app-directory-analytics/pageview.png)
+
+> **Note:** To avoid the initial pageview from being duplicated, we need to set `capture_pageview: false` in the `posthog.init` call in `app/providers.js`.
+> ```js
+> posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+>   api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+>   person_profiles: 'identified_only',
+>   capture_pageview: false
+> })
+> ```
 
 ## Using PostHog with server-rendered components
 
