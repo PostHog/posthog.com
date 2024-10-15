@@ -38,6 +38,37 @@ config.sessionReplayConfig.screenshotMode = true
 config.sessionReplayConfig.debouncerDelay = 1.0
 ```
 
+## Additional options
+
+### Capture network telemetry
+#### URLSession - async/await methods
+
+In iOS, PostHog automatically captures network logs by using method swizzling on [URLSession](https://developer.apple.com/documentation/foundation/urlsession) methods, which allows for the out-of-the-box collection of network data.
+
+However, URLSession’s async/await-powered APIs which are not exposed to the `objc` runtime and cannot be swizzled. As a result, network telemetry cannot be automatically captured. 
+
+For apps using async `URLSession` methods, PostHog provides wrapper functions which you can use to manually capture network logs. 
+
+##### Example:
+
+```swift
+import PostHog
+
+func fetchData(from url: URL) async throws -> Data {
+   // let (data, _) = try await URLSession.shared.data(from: url)      // ⬅ replace this
+   let (data, _) = try await URLSession.shared.postHogData(from: url)  // 🦔 with this
+
+  // your logic here...
+  return data
+    
+}
+```
+
+You can find a list of available methods to use manually [here](https://github.com/PostHog/posthog-ios/blob/main/PostHog/Replay/URLSessionExtension.swift).
+
+> **Note:** Only metric-like data like speed, size, and response code are captured. No data is captured from the request or response body.
+
+
 ## Masking and redacting
 
 Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
