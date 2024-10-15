@@ -14,6 +14,28 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { MenuItem, menuVariants } from 'components/PostLayout/Menu'
 import { CallToAction } from 'components/CallToAction'
 import { Badge } from 'components/Pricing/PricingTable/Plan'
+import { Subfeature } from 'components/Products/Subfeature'
+import {
+    IconAsterisk,
+    IconBolt,
+    IconBuilding,
+    IconCursorClick,
+    IconEye,
+    IconFlask,
+    IconGraph,
+    IconPeople,
+    IconPerson,
+    IconPlus,
+    IconRevert,
+    IconRewindPlay,
+    IconServer,
+    IconToggle,
+    IconCrown,
+    IconStack,
+    IconHeadset,
+    IconWarning,
+    IconMessage,
+} from '@posthog/icons'
 
 const sources = [
     {
@@ -170,6 +192,40 @@ function PipelinesPage({ location }) {
         freeTier: '10m rows',
     }
 
+    const subfeaturesItemCount = 5
+    const subfeatures = [
+        {
+            title: 'Integrate with a CRM',
+            description:
+                'Sync PostHog with Hubspot or Salesforce to create a single view of each customer and auto-assign leads.',
+            icon: <IconStack />,
+        },
+        {
+            title: 'Improve user support',
+            description:
+                'Update user information in Zendesk or Intercom to route requests based on priority, topic, or user payments.',
+            icon: <IconHeadset />,
+        },
+        {
+            title: 'Run email campaigns',
+            description:
+                'Pipe data to Braze or Customer.io to power onboarding emails, run marketing campaigns, or send newsletters.',
+            icon: <IconMessage />,
+        },
+        {
+            title: 'Enrich your user data',
+            description:
+                'Load data from the Clearbit API to enrich user data and get user info automatically without having to ask.',
+            icon: <IconPeople />,
+        },
+        {
+            title: 'Setup internal alerts',
+            description:
+                'Trigger webhooks or send messages directly to Slack to alert you about errors, churns, new leads, and more. ',
+            icon: <IconWarning />,
+        },
+    ]
+
     return (
         <Layout>
             <SEO
@@ -244,6 +300,37 @@ function PipelinesPage({ location }) {
                     />
                 </div>
             </div>
+
+            <div className="max-w-full px-8 pb-12">
+                <h2 className="text-4xl text-center mb-5">
+                    It's one tool, with <span className="text-red dark:text-yellow">unlimited</span> use-cases
+                </h2>
+                <p className="text-center mb-8">
+                    Here are just five we thought up quickly to avoid this being just a vague promise
+                </p>
+                <ul className={`list-none p-0 grid md:grid-cols-${subfeaturesItemCount} gap-4`}>
+                    {subfeatures.map((subfeature, index) => {
+                        return <Subfeature {...subfeature} key={index} />
+                    })}
+                </ul>
+            </div>
+
+            <section>
+                <div className="max-w-full px-8 pb-12">
+                    <ul className={`list-none p-0 grid md:grid-cols-2 gap-8`}>
+                        <Subfeature
+                            title="Suitable for fast, scrappy startups..."
+                            description="Connect with popular startup tools, like Vitally and Hubspot — or build your own automations quickly with the Zapier destination. Pull data from open source databases like Postgres and MySQL, send it to Slack."
+                            icon={<IconBolt />}
+                        />
+                        <Subfeature
+                            title="...Or big, powerful enterprises"
+                            description="Stick with your existing platforms and focus on adding that sweet, sweet shareholder value. Integrate with all the tools you know and love, from Snowflake and Stripe to Salesforce. MS Teams coming soon, maybe."
+                            icon={<IconCrown />}
+                        />
+                    </ul>
+                </div>
+            </section>
 
             <div className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12 relative">
                 <div className="md:col-span-4 md:mb-4">
