@@ -324,8 +324,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         authorData {
                             name
                             role
-                            image {
-                                absolutePath
+                            profile {
+                                avatar {
+                                    url
+                                }
                             }
                         }
                     }
@@ -467,9 +469,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         const author =
             authorData &&
             authorData.map((author) => {
-                const image = fs.readFileSync(author.image.absolutePath, {
-                    encoding: 'base64',
-                })
+                const image = author.profile?.avatar?.url
                 return {
                     ...author,
                     image,
