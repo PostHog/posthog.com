@@ -1,23 +1,35 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useMemo } from 'react'
+import Link from 'components/Link'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
 import { AnimatePresence, motion } from 'framer-motion'
 import { IconSearch, IconDecisionTree } from '@posthog/icons'
 import Fuse from 'fuse.js'
+import TeamMembers from '../TeamMembers'
 import SideModal from 'components/Modal/SideModal'
+import Questions from '../Product/Questions'
+import { DocLinks } from 'components/Products/DocsLinks'
+import { docsMenu } from '../../navs'
 import { MDXProvider } from '@mdx-js/react'
+import { VsCompetitor } from 'components/Products/Competitor'
+import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { useLayoutData } from 'components/Layout/hooks'
 import { Hero } from 'components/Products/Hero'
+import { PairsWith } from 'components/Products/PairsWith'
+import { PairsWithItem } from 'components/Products/PairsWith/item'
 import { StaticImage } from 'gatsby-plugin-image'
 import { MenuItem, menuVariants } from 'components/PostLayout/Menu'
 import { CallToAction } from 'components/CallToAction'
+import { Question } from 'components/Products/Question'
 import { Badge } from 'components/Pricing/PricingTable/Plan'
+import CTA from 'components/Home/CTA'
 import { Subfeature } from 'components/Products/Subfeature'
 import {
     IconAsterisk,
     IconBolt,
+    IconDatabase,
     IconBuilding,
     IconCursorClick,
     IconEye,
@@ -36,6 +48,9 @@ import {
     IconWarning,
     IconMessage,
 } from '@posthog/icons'
+
+const team = 'CDP'
+const teamSlug = '/teams/cdp'
 
 const sources = [
     {
@@ -107,6 +122,24 @@ const sources = [
         description: 'Google Cloud data warehouse',
         icon_url: '/static/services/bigquery.png',
         category: ['Analytics'],
+    },
+]
+
+const pairsWithItemCount = 2
+const PairsWithArray = [
+    {
+        icon: <IconGraph />,
+        product: 'Product analytics',
+        description:
+            'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviours.',
+        url: '/product-analytics',
+    },
+    {
+        icon: <IconDatabase />,
+        product: 'Data warehouse',
+        description:
+            'Build a data warehouse in PostHog and then pull in data from all your platforms to one place where it can be easily interrogated.',
+        url: '/product-analytics',
     },
 ]
 
@@ -207,7 +240,7 @@ function PipelinesPage({ location }) {
             icon: <IconHeadset />,
         },
         {
-            title: 'Runn email campaigns',
+            title: 'Run email campaigns',
             description:
                 'Pipe data to Braze or Customer.io to power onboarding emails, run marketing campaigns, or send newsletters.',
             icon: <IconMessage />,
@@ -315,21 +348,34 @@ function PipelinesPage({ location }) {
                 </ul>
             </div>
 
-            <section>
-                <div className="max-w-full px-8 pb-12">
-                    <ul className={`list-none p-0 grid md:grid-cols-2 gap-8`}>
-                        <Subfeature
-                            title="Suitable for fast, scrappy startups..."
-                            description="Connect with popular startup tools, like Vitally and Hubspot — or build your own automations quickly with the Zapier destination. Pull data from open source databases like Postgres and MySQL, send it to Slack."
-                            icon={<IconBolt />}
-                        />
-                        <Subfeature
-                            title="...Or big, powerful enterprises"
-                            description="Stick with your existing platforms and focus on adding that sweet, sweet shareholder value. Integrate with all the tools you know and love, from Snowflake and Stripe to Salesforce. MS Teams coming soon, maybe."
-                            icon={<IconCrown />}
-                        />
-                    </ul>
+            <section className="mb-20 max-w-full px-8 pb-12">
+                <h3 className="text-center mb-8">Integrations that work at any scale</h3>
+                <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
+                    <VsCompetitor
+                        title="Suitable for fast, scrappy startups"
+                        image={<StaticImage src="../../../images/products/engineer.png" className="max-w-[176px]" />}
+                    >
+                        <p>
+                            Connect with popular startup tools, like Vitally and Hubspot — or build your own automations
+                            quickly with the Zapier destination. Pull data from open source databases like Postgres and
+                            MySQL, send it to Slack.{' '}
+                        </p>
+                    </VsCompetitor>
+                    <VsCompetitor
+                        title="Or big, serious enterprises"
+                        image={<StaticImage src="../../../images/products/suit.png" className="max-w-[176px]" />}
+                    >
+                        <p>
+                            Stick with your existing platforms and focus on adding that sweet, sweet shareholder value.
+                            Integrate with all the tools you know and love, from Snowflake and Stripe to Salesforce.
+                            Microsoft Teams coming soon, maybe.{' '}
+                        </p>
+                    </VsCompetitor>
                 </div>
+
+                <p className="text-center text-sm font-medium">
+                    Curious how other teams use PostHog? <Link to="/customers">Read their stories</Link>.
+                </p>
             </section>
 
             <div className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12 relative">
@@ -428,6 +474,51 @@ function PipelinesPage({ location }) {
                                 )
                             })}
                     </ul>
+                </section>
+            </div>
+
+            <section id="docs" className="mb-20 px-5 md:px-0">
+                <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
+                <p className="mt-0 text-opacity-70 text-center">
+                    Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
+                </p>
+                <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'cdp').children} />
+            </section>
+
+            <section id="team" className="mb-20 px-5">
+                <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
+
+                <p className="text-center mb-2">
+                    PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for building
+                    our CDP.
+                </p>
+                <TeamMembers teamName={team} />
+            </section>
+
+            <section id="questions" className="mb-20 px-5">
+                <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
+
+                <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
+
+                <div className="text-center mb-8">
+                    <CallToAction href={`/questions/data-pipelines`} type="secondary" size="sm">
+                        View CDP questions
+                    </CallToAction>
+                </div>
+
+                <Questions topicIds={[383]} />
+            </section>
+
+            <div>
+                <PairsWith items={pairsWithItemCount}>
+                    {PairsWithArray.map((card, index) => {
+                        return <PairsWithItem {...card} key={index} />
+                    })}
+                </PairsWith>
+            </div>
+            <div className="max-w-7xl mx-auto relative">
+                <section className="mb-20">
+                    <CTA />
                 </section>
             </div>
         </Layout>
