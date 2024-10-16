@@ -515,7 +515,7 @@ function PipelinesPage({ location }) {
 
                 <p className="text-center mb-2">
                     PostHog works in small teams. <Link to={teamSlug}>Here's the team</Link> responsible for building
-                    our CDP.
+                    our customer data platform.
                 </p>
                 <TeamMembers teamName={team} />
             </section>
@@ -529,8 +529,8 @@ function PipelinesPage({ location }) {
                 <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
 
                 <div className="text-center mb-8">
-                    <CallToAction href={`/questions/data-pipelines`} type="secondary" size="sm">
-                        View CDP questions
+                    <CallToAction href={`/questions/cdp`} type="secondary" size="sm">
+                        View CDP &amp; data pipeline questions
                     </CallToAction>
                 </div>
 
