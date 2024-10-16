@@ -207,7 +207,7 @@ function PipelinesPage({ location }) {
             icon: <IconHeadset />,
         },
         {
-            title: 'Run email campaigns',
+            title: 'Runn email campaigns',
             description:
                 'Pipe data to Braze or Customer.io to power onboarding emails, run marketing campaigns, or send newsletters.',
             icon: <IconMessage />,
@@ -306,7 +306,7 @@ function PipelinesPage({ location }) {
                     It's one tool, with <span className="text-red dark:text-yellow">unlimited</span> use-cases
                 </h2>
                 <p className="text-center mb-8">
-                    Here are just five we thought up quickly to avoid this being just a vague promise
+                    (But here's five we personally use it for to avoid that being just a vague promise)
                 </p>
                 <ul className={`list-none p-0 grid md:grid-cols-${subfeaturesItemCount} gap-4`}>
                     {subfeatures.map((subfeature, index) => {
