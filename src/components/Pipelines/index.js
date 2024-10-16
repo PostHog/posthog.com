@@ -49,6 +49,7 @@ import {
     IconMessage,
 } from '@posthog/icons'
 import { Link as SmoothScrollLink } from 'react-scroll'
+import { SmoothScroll } from 'components/Products/SmoothScroll'
 
 const team = 'CDP'
 const teamSlug = '/teams/cdp'
@@ -317,13 +318,13 @@ function PipelinesPage({ location }) {
                 )}
             </SideModal>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="sky-blue"
                     icon={<IconDecisionTree />}
                     product={product.capitalized}
-                    title="Customer data platform"
-                    description="Import from a data warehouse to analyze your data with PostHog product data and send it all to 25+ destinations."
+                    title="Ingest, transform, and send data between 25+ tools"
+                    description="Pre-built recipes make it easy to import data from a warehouse, sync with PostHog event data, and send to other products in your stack"
                     beta
                 />
 
@@ -349,6 +350,22 @@ function PipelinesPage({ location }) {
                         placeholder="none"
                     />
                 </div>
+            </div>
+
+            {/*
+                TODO: Add custom sections (Sources & destinations library, etc)
+                <SmoothScroll exclude={['Pricing', 'Tutorials', 'PostHog vs...', 'Installation']} />
+            */}
+
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+                <h2 className="text-4xl lg:text-5xl text-center mb-3">
+                    <span className="text-red dark:text-yellow">Sync product data</span> with third-party tools
+                </h2>
+                <p className="text-center mb-8 text-lg">
+                    Any event or action in PostHog can update user records or trigger workflows in other products in
+                    your stack
+                </p>
+                graphic goez here
             </div>
 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
