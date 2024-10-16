@@ -37,7 +37,7 @@ PostHog's [vision](/handbook/strategy/overview#long-term-vision-for-2026) is to 
 
 - **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
 
-- **Internal outreach:** We get hundreds of ICP signups to PostHog every week, and we want to make sure we're laser focused on ensuring they have the best possible experience with PostHog by proactively reaching out to them. 
+- **Internal outreach:** We get hundreds of ICP signups to PostHog every week, and we want to make sure we're laser focused on ensuring they have the best possible experience with PostHog by proactively reaching out to them based on certain triggers. Some people call this 'warm outbound'. 
 
 ### Things we might want to be great at but haven't tested yet
 
@@ -69,11 +69,11 @@ At PostHog, we already have thousands of ICPs using the product, so we need to b
 
 We categorize customer size using a deeply technical and McKinsey-endorsed framework - you may need an MBA to fully understand it:
 
-- Extra Large: $100k+/yr
-- Large: $60-100k/yr
-- Medium: $20-60k/yr
+- Large: $100k+/yr
+- Medium: $5k-100k/yr
+- Small: $1-5k/yr
 
-These are not rigid definitions - for example, we consider some customers to be ‘Extra Large’ even if their spend is low today because they could be huge but may need time to fully adopt PostHog in their org. We are pragmatic in how we define people here. 
+The Sales & CS team look after people in the Medium and Large buckets only. Typically this means customers who are paying $20k+/yr, but sometimes we will work with smaller accounts if we see potential to grow them into larger ones. 
 
 ### 'Enterprise' customers
 
@@ -116,7 +116,7 @@ This is how current roles are split - including spaces for the next few hires we
 
 **Sales**
 - Simon
-  - AE for Extra Large customers
+  - Team Lead, AE for a handful of the Largest customers 
 - Cameron
   - AE for Medium & Large customers in the Americas region
 - Scott
@@ -131,5 +131,3 @@ This is how current roles are split - including spaces for the next few hires we
   - Building and leading RevOps
 - Future hire - CSM
   - Manage steady state/single product customers
-
-Longer term, expansion/renewals is often a separate team, but we don't need to do this now. 
