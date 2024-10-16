@@ -116,7 +116,7 @@ This is how current roles are split - including spaces for the next few hires we
 
 **Sales**
 - Simon
-  - Team Lead, AE for a handful of the Largest cuatomers 
+  - Team Lead, AE for a handful of the Largest customers 
 - Cameron
   - AE for Medium & Large customers in the Americas region
 - Scott
