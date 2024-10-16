@@ -469,7 +469,9 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         const author =
             authorData &&
             authorData.map((author) => {
-                const image = author.profile?.avatar?.url
+                const image =
+                    author.profile?.avatar?.url ||
+                    `https://res.cloudinary.com/dmukukwp6/image/upload/contributor_posthog_e8c595ea3d.png`
                 return {
                     ...author,
                     image,
