@@ -1,5 +1,5 @@
 ---
-title: Customer.io
+title: Send data to Customer.io
 templateId: template-customerio
 ---
 
@@ -21,6 +21,8 @@ You'll also need access to the relevant Customer.io account.
 4. Add your Customer.io site ID and API Key at the configuration step.
 5. Press 'Create & Enable' and watch your 'People' list get populated in Customer.io!
 
+<HideOnCDPIndex>
+
 ## Configuration
 
 <TemplateParameters />
@@ -34,3 +36,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

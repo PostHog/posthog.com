@@ -31,6 +31,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Data Management | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
 | Data Warehouse | [Team Data Warehouse](teams/data-warehouse)  | <span class="lemon-tag gh-tag">feature/data-warehouse</span> |
 | Error tracking | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |
+| Sentry integration | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |
 | Events | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/events</span>  |
 | Experimentation | [Team Experiments](teams/experiments) |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
 | Feature Flags | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
@@ -41,7 +42,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Insights | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/insights</span>  |
 | Live Events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
 | Messaging (Email, Notifications) | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
-| Notebooks | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
+| Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
 | Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Permissions | [@Twixes][@Twixes]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [Team Pipeline][Team Pipeline]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
@@ -78,6 +79,7 @@ Some of the features we are building may exist in other products already. It is 
 [@neilkakkar]: https://github.com/neilkakkar
 [@pauldambra]: https://github.com/pauldambra
 [@Twixes]: https://github.com/Twixes
+[@daibhin]: https://github.com/daibhin
 [@timgl]: https://github.com/timgl
 [Team Product Analytics]: /teams/product-analytics
 [Team Web Analytics]: /teams/web-analytics

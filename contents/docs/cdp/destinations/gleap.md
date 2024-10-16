@@ -1,5 +1,5 @@
 ---
-title: Gleap
+title: Send data to Gleap
 templateId: template-gleap
 ---
 
@@ -21,6 +21,8 @@ You'll also need access to the relevant Gleap account.
 4. Add your Gleap access token at the configuration step.
 5. Press 'Create & Enable' and watch your 'Contacts' list get populated in Gleap!
 
+<HideOnCDPIndex>
+
 ## Configuration
 
 <TemplateParameters />
@@ -34,3 +36,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

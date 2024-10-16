@@ -36,10 +36,13 @@ Hence the explicit separation between the data and view layers.
   - Name the `.ts` file according to its main export: `DashboardMenu.ts` or `DashboardMenu.tsx` or `dashboardLogic.ts` or `Dashboard.scss`. Pay attention to the case.
   - Avoid `index.ts`, `styles.css`, and other generic names, even if this is the only file in a directory.
 - CSS
-  - We use regular SCSS files for styling to keep things simple and maintainable in the long run, as opposed to supporting the CSS-in-JS flavour of the month.
-  - Inside `MyBlogComponent.tsx` import `MyBlogComponent.scss`
-  - Namespace all your CSS rules under globally unique classes that match the component's name and case, for example `.DashboardMenu { put everything here }`
-  - We loosely follow BEM conventions. If an element can't be namespaced inside a container class (e.g. modals that break out of the containing DOM element), use BEM style names like `.DashboardMenu__modal` to keep things namespaced.
+  - We use Tailwind CSS wherever possible
+  - Where it's not possible
+    - We use regular SCSS files for styling to keep things simple and maintainable in the long run, as opposed to supporting the CSS-in-JS flavour of the month.
+    - Inside `MyBlogComponent.tsx` import `MyBlogComponent.scss`
+    - Namespace all your CSS rules under globally unique classes that match the component's name and case, for example `.DashboardMenu { put everything here }`
+    - We loosely follow BEM conventions. If an element can't be namespaced inside a container class (e.g. modals that break out of the containing DOM element), use BEM style names like `.DashboardMenu__modal` to keep things namespaced.
+  - Keep an eye out for custom styles in SCSS files that can be easily replaced with Tailwind classes and replace them with Tailwind when you see them
 - Testing
   - Write [logic tests](https://keajs.org/docs/intro/testing) for all logic files. 
   - If your component is in the `lib/` folder, and has some interactivity, write a [react testing library](https://testing-library.com/docs/react-testing-library/intro/) test for it.
