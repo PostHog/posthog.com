@@ -7,11 +7,6 @@
         { "source": "/posts/:path*", "destination": "/posts/[slug]/index.html" }
     ],
     "redirects": [
-        { "source": "/partners", "destination": "/handbook/comms/partners" },
-        { "source": "/handbook/growth/customer-support", "destination": "/handbook/comms/customer-support" },
-        { "source": "/handbook/growth/marketing/in-app", "destination": "/handbook/comms/in-app" },
-        { "source": "/handbook/growth/marketing/startups", "destination": "/handbook/comms/startups" },
-        { "source": "/handbook/growth/marketing/press", "destination": "/handbook/comms/press" },
         {
             "source": "/handbook/growth/marketing/product-announcements",
             "destination": "/handbook/comms/product-announcements"
@@ -1325,6 +1320,7 @@
         { "source": "/docs/webhooks", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" }
+        { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
+        { "source": "/teams/website-docs", "destination": "/teams-vibes" }
     ]
 }

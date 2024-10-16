@@ -35,6 +35,7 @@ import {
     IconMapPin,
     IconHandwave,
     IconCoffee,
+    IconWarning,
 } from '@posthog/icons'
 
 import { Megaphone, SparksJoy } from 'components/NotProductIcons'
@@ -55,6 +56,7 @@ export const topicIcons = {
     'data warehouse': IconDatabase,
     deployment: IconRocket,
     '#devrel': IconCoffee,
+    'error tracking': IconWarning,
     'events & actions': IconCursor,
     'feature flags': IconToggle,
     funnels: IconFunnels,
