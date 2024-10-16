@@ -37,7 +37,7 @@ PostHog's [vision](/handbook/strategy/overview#long-term-vision-for-2026) is to 
 
 - **Speed:** We want to be highly reactive, low process, and reliant on other teams as little as possible to ship things. We want to get stuff wrong quickly, then iterate. 
 
-- **Internal outreach:** We get hundreds of ICP signups to PostHog every week, and we want to make sure we're laser focused on ensuring they have the best possible experience with PostHog by proactively reaching out to them based on certain triggers. Some people call this 'warm outbound'. 
+- **Internal outreach:** We get hundreds of ICP signups to PostHog every week, and we want to make sure we're laser focused on ensuring they have the best possible experience with PostHog by [proactively reaching out to them](/handbook/growth/sales/product-led-sales#product-led-lead-generation) based on certain triggers. Some people call this 'warm outbound'. 
 
 ### Things we might want to be great at but haven't tested yet
 
@@ -73,7 +73,7 @@ We categorize customer size using a deeply technical and McKinsey-endorsed frame
 - Medium: $5k-100k/yr
 - Small: $1-5k/yr
 
-The Sales & CS team look after people in the Medium and Large buckets only. Typically this means customers who are paying $20k+/yr, but sometimes we will work with smaller accounts if we see potential to grow them into larger ones. 
+The Sales & CS team look after people in the Medium and Large buckets only. Typically this means customers who are paying $20k+/yr, but sometimes we will work with smaller accounts [if we see potential](/handbook/growth/sales/product-led-sales#product-led-lead-generation) to grow them into larger ones. 
 
 ### 'Enterprise' customers
 

@@ -36,13 +36,13 @@ In client-side SDKs, it's only necessary to call [`group()`](/docs/product-analy
 
 PostHog automatically captures pageviews and pageleaves. This is great for analytics, but it may capture more events than you need. An alternative is disabling these events and capturing them manually for the pages you need instead.
 
-To disable automatically capturing these events, set `capture_pageviews` and `capture_pageleave` to `false` in the configuration options when initializing PostHog:
+To disable automatically capturing these events, set `capture_pageview` and `capture_pageleave` to `false` in the configuration options when initializing PostHog:
 
 ```js
   posthog.init('<ph_project_api_key>',
     {
       api_host: '<ph_client_api_host>',
-      capture_pageviews: false,
+      capture_pageview: false,
       capture_pageleave: false,
     }
   )
