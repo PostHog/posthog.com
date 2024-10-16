@@ -564,10 +564,10 @@ export const query = graphql`
             }
             teamImage {
                 caption
-                gatsbyImageData(width: 380, placeholder: BLURRED)
+                gatsbyImageData(width: 380)
             }
             crest {
-                gatsbyImageData(width: 227, placeholder: BLURRED)
+                gatsbyImageData(width: 227)
             }
             roadmaps {
                 squeakId

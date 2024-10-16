@@ -38,7 +38,7 @@ const Teams: React.FC = () => {
                         }
                     }
                     crest {
-                        gatsbyImageData(width: 200, height: 200, placeholder: BLURRED)
+                        gatsbyImageData(width: 200, height: 200)
                     }
                 }
             }
