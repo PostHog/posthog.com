@@ -110,7 +110,10 @@ export const CareersHero = () => {
     const [selectedTeamName, setSelectedTeamName] = useState(teams[0])
     const selectedTeam = allTeams.find((team) => team.name.toLowerCase() === selectedTeamName.toLowerCase())
     const teamLength = selectedTeam.profiles?.data?.length
-    const teamURL = `/teams/${slugify(selectedTeam.name, { lower: true })}`
+    const teamURL = `/teams/${slugify((selectedTeam.name || '').toLowerCase().replace('ops', ''), {
+        lower: true,
+        remove: /and/,
+    })}`
     const pineapplePercentage =
         teamLength &&
         teamLength > 0 &&
