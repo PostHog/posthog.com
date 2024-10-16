@@ -18,6 +18,7 @@ import {
     IconPeople,
     IconPieChart,
     IconPhone,
+    IconPlug,
     IconPrivacy,
     IconPulse,
     IconRewindPlay,
@@ -52,6 +53,7 @@ export const topicIcons = {
     cohorts: Cohorts, // to be replaced or removed
     configuration: IconGear,
     dashboards: IconDashboard,
+    cdp: IconPlug,
     'data pipelines': IconDecisionTree,
     'data warehouse': IconDatabase,
     deployment: IconRocket,
