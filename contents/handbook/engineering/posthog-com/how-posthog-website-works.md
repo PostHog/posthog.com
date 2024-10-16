@@ -15,6 +15,7 @@ PostHog.com is built and maintained in-house by the [Website & Docs team](/teams
 | Algolia (API) 	| Site search 	|
 | Strapi 	| Headless CMS 	|
 | PostHog 	| Analytics, feature flags 	|
+| Inkeep | AI-powered community answers |
 
 ![Diagram of PostHog.com](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/contribute/website-diagram.png)
 

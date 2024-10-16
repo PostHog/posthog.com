@@ -12,10 +12,13 @@ A large proportion of our paying customer base sign up to a paid plan without ev
 
 Product-led leads can be generated in different ways:
 
-1. Customers who have an active subscription in Stripe, and are forecasted to pay a first time bill of $500 or more.
-2. Customers who have a high [lead score](/handbook/growth/sales/lead-scoring) (>=20) with 50+ employees, and have more than 1 user in the organization and started sending events, but haven't yet subscribed.
+1. Customers with an active subscription in Stripe who are forecasted to receive a first time bill of $500 or more.
+2. Customers with a high [lead score](/handbook/growth/sales/lead-scoring) (>=20) who have 50+ employees, more than 1 user in the organization, and have started sending events but haven't yet subscribed.
+3. Customers who have used most of their startup credits and are expected to have significant spend after the program ends.
 
 They follow the [normal territory assignment rules](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assignments) in Salesforce. 
+
+**Note:** Some product-led leads might have already chatted with someone on our team. Before reaching out, take a quick look in Vitally to see if there’s any prior activity, and check in with the AE or team member who was involved to get the full picture if needed. Every lead has a "Vitally account URL" field in Salesforce which links directly to their Vitally profile for easy review.
 
 ## Working with the customer
 

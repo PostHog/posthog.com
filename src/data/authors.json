@@ -335,5 +335,14 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/leon-daly-b5529a180/",
         "profile_id": 30833
+    },
+    {
+        "handle": "danilo-campos",
+        "name": "Danilo Campos",
+        "role": "Technical Content Marketer",
+        "image": "../../static/images/authors/danilo-campos-posthog.png",
+        "link_type": "LinkedIn",
+        "link_url": "https://www.linkedin.com/in/danilo-campos/",
+        "profile_id": 31731
     }
 ]

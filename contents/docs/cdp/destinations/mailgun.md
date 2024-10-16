@@ -1,5 +1,5 @@
 ---
-title: Mailgun
+title: Send data to Mailgun
 templateId: template-mailgun-send-email
 ---
 
@@ -21,6 +21,8 @@ You'll also need access to the relevant Mailgun account.
 4. Add your Mailgun API Key at the configuration step.
 5. Press 'Create & Enable' and watch your 'Contacts' list get populated in Mailgun!
 
+<HideOnCDPIndex>
+
 ## Configuration
 
 <TemplateParameters />
@@ -34,3 +36,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

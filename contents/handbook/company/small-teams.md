@@ -47,7 +47,7 @@ During the quarter:
   4. Triage and fix related bugs
   5. Assist the support hero in answering related questions
   6. Collaborate with other Small Teams such as marketing
-  7. Become power users of their area of Posthog and use PostHog in their processes
+  7. Become power users of their area of PostHog and use PostHog in their processes
 
 ## What is the role of the team lead?
 

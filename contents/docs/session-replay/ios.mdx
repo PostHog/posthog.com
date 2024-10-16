@@ -38,6 +38,34 @@ config.sessionReplayConfig.screenshotMode = true
 config.sessionReplayConfig.debouncerDelay = 1.0
 ```
 
+## Additional options
+
+### Capture network telemetry
+
+In iOS, PostHog uses method swizzling on [URLSession](https://developer.apple.com/documentation/foundation/urlsession) methods, which allows for the out-of-the-box collection of network data.
+
+However, URLSession’s async/await-powered APIs which are not exposed to the `objc` runtime and cannot be swizzled. As a result, network telemetry cannot be automatically captured. 
+
+For apps using async `URLSession` methods, PostHog provides wrapper functions that you can use to manually capture network logs. 
+
+```swift
+import PostHog
+
+func fetchData(from url: URL) async throws -> Data {
+   // let (data, _) = try await URLSession.shared.data(from: url)      // ⬅ replace this
+   let (data, _) = try await URLSession.shared.postHogData(from: url)  // 🦔 with this
+
+  // your logic here...
+  return data
+    
+}
+```
+
+You can find a list of available methods to use manually [here](https://github.com/PostHog/posthog-ios/blob/main/PostHog/Replay/URLSessionExtension.swift).
+
+> **Note:** Only metric-like data like speed, size, and response code are captured. No data is captured from the request or response body.
+
+
 ## Masking and redacting
 
 Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
@@ -49,7 +77,7 @@ let imvProfilePhoto = UIImageView(frame: CGRect(x: 50, y: 50, width: 100, height
 imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 ```
 
-> **Note:** This is currently not supported for SwiftUI. We're investigating the [issue](https://github.com/PostHog/posthog-ios/issues/162).
+> **Note:** For SwiftUI please refer to the [Masking in SwiftUI](#masking-in-swiftui) section below
 
 > **Note:** A technical issue is causing the [SwiftUI Text](https://developer.apple.com/documentation/swiftui/text) view to be detected as a `SwiftUI Image` view. This means that it'll be automatically masked if `maskAllImages` is set to `true`, even if the `maskAllTextInputs` is disabled. We're investigating this [issue](https://github.com/PostHog/posthog-ios/issues/163).
 
@@ -58,6 +86,13 @@ imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
 
 - When using the [SwiftUI TextField](https://developer.apple.com/documentation/swiftui/textfield) with [UITextInputTraits](https://developer.apple.com/documentation/uikit/uitextinputtraits), setting traits such as `TextField("Email", text: ...).keyboardType(.emailAddress)` will always be automatically masked since it's for private text.
 - The [SwiftUI SecureField](https://developer.apple.com/documentation/swiftui/securefield) view is always automatically masked.
+- You can manually mark a SwiftUI View for masking using the `postHogMask(_:)` view modifier:
+
+  ```swift
+  // This view will be masked in session replay recordings
+  MyCoolView()
+    .postHogMask()
+  ```
 
 ## Limitations
 
