@@ -1,12 +1,12 @@
 ---
 title: How we built mobile replay (and why it took so long)
-date: 2024-10-08
+date: 2024-10-16
 author:
  - ian-vanagas
  - manoel-aranda-neto
 rootpage: /blog
 featuredImage: >- 
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/mobile_replay_7ff47733d8.png
 featuredImageType: full
 tags:
  - Guides
@@ -84,7 +84,7 @@ Once updated, we could get on with the work developing platform-specific proof-o
 
 Not slowing down people's apps was core to our mission with session replay. 
 
-To do this, we decided to focus on capturing wireframes instead of screenshots. Although we built both in the end, wireframe mode is much less performance-intensive, meaning it is the mode users prefer.
+To do this, we initially focused on capturing wireframes instead of screenshots. Using wireframes enabled us to have better control over what and how we captured recordings. We could optimize performance-intensive components like images and animations.
 
 ![Screenshot vs Wireframe](https://res.cloudinary.com/dmukukwp6/image/upload/wireframe_78ce94bd4b.png)
 
@@ -98,7 +98,12 @@ Beyond this, fitting the data into a service meant for the web caused many chall
 
 Once we got consistent and useful results from what we built, we recruited our first test users and iterated from there. Later, we followed a similar process for [iOS](https://github.com/PostHog/posthog-ios/pull/115).
 
-Beyond our focus on wireframe mode, the biggest performance improvements came from getting mobile replay into the hands of our users. We found and solved multiple performance issues thanks to their feedback.
+> **What about screenshot mode?** We didn't forget about it. After developing wireframe mode, we continued to make improvements to screenshot mode. This included:
+> - Doing as much work as possible off the main thread to avoid blocking.
+> - Converting images to JPEGs at 30% of original quality.
+> - Only taking a screenshot when there is interactions, so if the app does nothing for 10 minutes, there's no screenshot taken.
+>
+> Screenshots now tend to be around 20kb (each) before compression, and for most of our users, this has become their preferred option.
 
 ### 3. Privacy
 
