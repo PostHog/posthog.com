@@ -8,6 +8,9 @@ import MigrationWarning from "./_snippets/migration-warning.mdx"
 
 <MigrationWarning />
 
+> **⚠️ Experimental:** The following migration guide is not comprehensive and generates data that is less accurate than the data captured by PostHog.
+> Contributions to improve it are welcome, feel free to [open a PR here](https://github.com/PostHog/posthog.com/tree/master/contents/docs/migrate/plausible.mdx).
+
 Compared to other tools, Plausible is easy to get data out of, but it is difficult to convert to PostHog's schema. This is because data exported from Plausible is aggregated, rather than the individual events that make up the aggregation (like we expect in PostHog).
 
 This means we can try to convert data, but it won't be 100% accurate. For example, Plausible data tells there is a certain number of visitors, pageviews, and visits, but it doesn't tell you which user did what event at what time. We need break down this data to generate individual events that create an equivalent aggregation.
@@ -16,7 +19,7 @@ This guide aims to convert aggregate data into events where possible and capture
 
 > **Terminology differences:** Although pageviews, custom events, and many properties are the same between Plausible and PostHog, there are two major terminology differences:
 > 1. Plausible uses **visitors** to represent the users behind pageviews and custom events. In PostHog, these are called [persons](/docs/data/persons).
-> 2. Plausible uses **variousisit** to represent a single use of your product or visit to your site. In PostHog, these are called [sessions](/docs/data/sessions).
+> 2. Plausible uses **visit** to represent a single use of your product or visit to your site. In PostHog, these are called [sessions](/docs/data/sessions).
 
 ## 1. Export data from Plausible
 
@@ -26,14 +29,12 @@ To export data from Plausible, go to your site settings and click on the **Impor
 
 ## 2. Convert Plausible data and capture it in PostHog
 
-> **🛠️ Work in progress:** The follow import converts and capture visitors and pageviews, but is not comprehensive. For example, it doesn't include:
+> **🛠️ Work in progress:** The following script converts and capture visitors and pageviews, but is not comprehensive. For example, it doesn't include:
 > 1. Person or event properties like UTMs or channels
 > 2. Session data (generating `$session_id` and correct timing for session duration)
 > 3. Bounce rate
 > 4. Custom events
 > 5. Entry or exit pages
->
-> Contributions are welcome.
 
 Once you have your exported data, you can run the following script to convert it to PostHog's schema and capture pageviews. This script randomly generates `$distinct_id` values for each visitor and randomly assigns them pageviews. It requires the names and locations of your exported data as well as your Plausible **Site Timezone** which you can find in your site settings. 
 
