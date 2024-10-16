@@ -301,18 +301,21 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description: 'Jump into a playlist of session recordings directly from any time series in a graph',
         url: '/product-analytics',
     },
     {
         icon: <IconToggle />,
+        color: 'seagreen',
         product: 'Feature flags',
         description: "See which feature flags are enabled for a user's session",
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
+        color: 'purple',
         product: 'Experiments',
         description:
             'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',

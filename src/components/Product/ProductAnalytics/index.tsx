@@ -707,18 +707,21 @@ const PairsWithArray = [
     {
         icon: <IconRewindPlay />,
         product: 'Session replay',
+        color: 'yellow',
         description:
             'Jump into a playlist of session recordings directly from any point in a graph, or segment of a funnel',
         url: '/session-replay',
     },
     {
         icon: <IconToggle />,
+        color: 'seagreen',
         product: 'Feature flags',
         description: 'See which feature flags were enabled for a user during a session',
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
+        color: 'purple',
         product: 'Experiments',
         description:
             'Filter data down to users within an active experiment, whether part of a control group or a test variant',

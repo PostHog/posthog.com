@@ -130,6 +130,7 @@ const pairsWithItemCount = 2
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description:
             'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviours.',
@@ -137,6 +138,7 @@ const PairsWithArray = [
     },
     {
         icon: <IconDatabase />,
+        color: 'lilac',
         product: 'Data warehouse',
         description:
             'Build a data warehouse in PostHog and then pull in data from all your platforms to one place where it can be easily interrogated.',

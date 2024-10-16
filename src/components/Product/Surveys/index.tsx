@@ -300,18 +300,21 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description: 'Use insights to breakdown average scores, analyze results over time, or find trends.',
         url: '/product-analytics',
     },
     {
         icon: <IconToggle />,
+        color: 'seagreen',
         product: 'Feature flags',
         description: 'Connect a survey to a feature flag to gather feedback on your latest ideas and tests.',
         url: '/feature-flags',
     },
     {
         icon: <IconRewindPlay />,
+        color: 'yellow',
         product: 'Session replay',
         description:
             "Watch recordings of users completing a survey to understand full context about a user's behavior.",

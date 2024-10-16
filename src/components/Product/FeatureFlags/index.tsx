@@ -325,6 +325,7 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description:
             "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
@@ -332,12 +333,14 @@ const PairsWithArray = [
     },
     {
         icon: <IconUserPaths />,
+        color: 'primary dark:text-primary-dark',
         product: 'User paths',
         description: 'See how a flag’s value influenced an intended outcome',
         url: '/product-analytics',
     },
     {
         icon: <IconRewindPlay />,
+        color: 'yellow',
         product: 'Session replay',
         description: 'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
         url: '/session-replay',
