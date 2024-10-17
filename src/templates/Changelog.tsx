@@ -77,27 +77,27 @@ export const Change = ({ title, teamName, media, description, cta }) => {
                 {title}
             </Heading>
             {teamName && <p className="m-0 text-sm opacity-60 font-semibold">{teamName} Team</p>}
-            {media?.data?.attributes?.mime && (
+            {media?.data?.attributes?.mime === 'video/mp4' ? (
                 <div className="my-4">
-                    {media?.data?.attributes?.mime === 'video/mp4' ? (
-                        <ZoomImage>
-                            <Video
-                                publicId={media?.data?.attributes?.provider_metadata?.public_id}
-                                cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
-                                className="max-w-2xl w-full"
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                            />
-                        </ZoomImage>
-                    ) : (
-                        <ZoomImage>
-                            <CloudinaryImage src={media?.data?.attributes?.url} className="w-full" width={650} />
-                        </ZoomImage>
-                    )}
+                    <ZoomImage>
+                        <Video
+                            publicId={media?.data?.attributes?.provider_metadata?.public_id}
+                            cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                            className="max-w-2xl w-full"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                        />
+                    </ZoomImage>
                 </div>
-            )}
+            ) : media?.data?.attributes?.url ? (
+                <div className="my-4">
+                    <ZoomImage>
+                        <CloudinaryImage src={media?.data?.attributes?.url} className="w-full" width={650} />
+                    </ZoomImage>
+                </div>
+            ) : null}
             <div className="mt-2">
                 <Markdown regularText={true}>{description}</Markdown>
             </div>

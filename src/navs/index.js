@@ -1475,6 +1475,10 @@ export const docsMenu = {
                             url: '/docs/migrate/pendo',
                         },
                         {
+                            name: 'Migrate from Plausible',
+                            url: '/docs/migrate/plausible',
+                        },
+                        {
                             name: 'Migrate from Statsig',
                             url: '/docs/migrate/statsig',
                         },
