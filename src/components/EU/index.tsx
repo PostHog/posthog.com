@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import AnimateIntoView from 'components/AnimateIntoView'
 import { CallToAction, TrackedCTA } from 'components/CallToAction'
 import Layout from 'components/Layout'
@@ -13,7 +14,7 @@ export default function EU() {
             <SEO title={`PostHog Cloud EU`} />
             <section className="grid md:grid-cols-2 md:gap-x-8 md:gap-y-0 gap-y-6 -mt-1 items-center bg-gradient-to-b from-[#DFDFCD] via-[#DFDFCD] to-accent dark:to-dark px-5 md:pb-24 pb-12 pt-12 text-primary">
                 <div className="text-right order-last lg:order-first ">
-                    <StaticImage placeholder="none" src="./images/eu-hog.png" alt="EU hog" className="max-w-2xl" />
+                    <CloudinaryImage placeholder="none" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/EU/images/eu-hog.png" alt="EU hog" className="max-w-2xl" />
                 </div>
                 <div className="max-w-[530px]">
                     <h1 className="text-xl sm:text-2xl m-0 mb-5 pb-5 inline-block">
@@ -55,7 +56,7 @@ export default function EU() {
                         </p>
                     </div>
                     <div className="sm:-my-12 text-right max-w-[120px] sm:max-w-full flex-shrink-0">
-                        <StaticImage placeholder="none" width={372} src="./images/france-hog.png" alt="France hog" />
+                        <CloudinaryImage placeholder="none" width={372} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/EU/images/france-hog.png" alt="France hog" />
                     </div>
                 </div>
             </section>
@@ -69,10 +70,10 @@ export default function EU() {
                         >
                             <img src={ursulaApproves} />
                         </AnimateIntoView>
-                        <StaticImage
+                        <CloudinaryImage
                             placeholder="none"
                             className="-bottom-12 md:-bottom-20"
-                            src="./images/ursula.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/EU/images/ursula.png"
                             alt="Ursula von der Leyen"
                         />
                     </div>
@@ -113,7 +114,7 @@ export default function EU() {
                         </p>
                     </div>
                     <div className="text-right md:relative absolute max-w-[150px] bottom-0 right-0 md:max-w-full">
-                        <StaticImage placeholder="none" width={372} src="./images/mug-hog.png" alt="Mug hog" />
+                        <CloudinaryImage placeholder="none" width={372} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/EU/images/mug-hog.png" alt="Mug hog" />
                     </div>
                 </div>
             </section>

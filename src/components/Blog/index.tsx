@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import Avatar from 'components/CommunityQuestions/Avatar'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
@@ -40,7 +41,7 @@ export const Post = ({ featuredImage, slug, title, category, date, authors, imgC
                 {image ? (
                     <GatsbyImage alt={title} className={imgClassName ?? 'w-full'} image={image} />
                 ) : (
-                    <StaticImage className={imgClassName ?? 'w-full'} alt={title} src="./images/default.jpg" />
+                    <CloudinaryImage className={imgClassName ?? 'w-full'} alt={title} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Blog/images/default.jpg" />
                 )}
                 <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 px-4 py-3 md:p-5 flex flex-col h-full w-full">
                     {category && <p className="m-0 text-sm opacity-80">{category}</p>}
