@@ -174,47 +174,47 @@ export const Trends = () => {
             </div>
             <div className="product-slider overflow-x-auto flex gap-8 pb-4 -mx-8 px-8 product-scrollbar">
                 <div className="flex-shrink-0 w-full md:w-3/5">
-                    <StaticImage
+                    <CloudinaryImage
                         objectPosition="left"
                         height={420}
                         objectFit="cover"
-                        src="../../Product/ProductAnalytics/images/screenshot-trend-bar.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-bar.png"
                         className="shadow-xl h-full"
                     />
                 </div>
                 <div className="flex-shrink-0 w-full md:w-3/5">
-                    <StaticImage
+                    <CloudinaryImage
                         objectPosition="left"
                         height={420}
                         objectFit="cover"
-                        src="../../Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-multiple-sparklines.png"
                         className="shadow-xl h-full"
                     />
                 </div>
                 <div className="flex-shrink-0 w-full md:w-3/5">
-                    <StaticImage
+                    <CloudinaryImage
                         objectPosition="left"
                         height={420}
                         objectFit="cover"
-                        src="../../Product/ProductAnalytics/images/screenshot-trend-area.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-area.png"
                         className="shadow-xl h-full"
                     />
                 </div>
                 <div className="flex-shrink-0 w-full md:w-3/5">
-                    <StaticImage
+                    <CloudinaryImage
                         objectPosition="left"
                         height={420}
                         objectFit="cover"
-                        src="../../Product/ProductAnalytics/images/screenshot-trend-sparkline.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-sparkline.png"
                         className="shadow-xl h-full"
                     />
                 </div>
                 <div className="flex-shrink-0 w-full md:w-3/5">
-                    <StaticImage
+                    <CloudinaryImage
                         objectPosition="left"
                         height={420}
                         objectFit="cover"
-                        src="../../Product/ProductAnalytics/images/screenshot-trend-map.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-trend-map.png"
                         className="shadow-xl h-full"
                     />
                 </div>

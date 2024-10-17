@@ -848,7 +848,7 @@ export const ProductProductAnalytics = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/product-analytics-hog.png" alt="" />
+                        <CloudinaryImage placeholder="none" quality={100} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png" alt="" />
                     </div>
                 </div>
 

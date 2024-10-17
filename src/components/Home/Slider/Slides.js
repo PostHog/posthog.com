@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import {
     IconArrowRight,
     IconBadge,
@@ -262,21 +263,21 @@ export const ProductAnalytics = () => {
                     <>
                         {enterpriseMode ? (
                             <div className="py-2">
-                                <StaticImage src="./images/enterprise-mode/shutterstock_758444896.jpg" alt="" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/enterprise-mode/shutterstock_758444896.jpg" alt="" />
                             </div>
                         ) : (
                             <>
                                 <div className="block dark:hidden">
-                                    <StaticImage
+                                    <CloudinaryImage
                                         {...imageProps}
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/product-analytics-light.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/product-analytics-light.png"
                                         alt="A funnel insight with 3 steps showing how many users dropped off during a sign-up flow"
                                     />
                                 </div>
                                 <div className="hidden dark:block">
-                                    <StaticImage
+                                    <CloudinaryImage
                                         {...imageProps}
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/product-analytics-dark.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/product-analytics/product-analytics-dark.png"
                                         alt="A funnel insight with 3 steps showing how many users dropped off during a sign-up flow"
                                     />
                                 </div>
@@ -286,22 +287,22 @@ export const ProductAnalytics = () => {
                 )
             }}
             HogMobile={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[180px] sm:max-w-[230px] md:max-w-[260px]"
-                    src="./images/product-analytics-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                     alt="A hedgehog looking at product analytics"
                 />
             )}
             HogDesktop={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[180px] lg:max-w-[230px] xl:max-w-[300px]"
-                    src="./images/product-analytics-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                     alt="A hedgehog looking at product analytics"
                 />
             )}
@@ -349,21 +350,21 @@ export const WebAnalytics = () => {
                     <>
                         {enterpriseMode ? (
                             <div className="py-2">
-                                <StaticImage src="./images/enterprise-mode/shutterstock_2001554009.jpg" alt="" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/enterprise-mode/shutterstock_2001554009.jpg" alt="" />
                             </div>
                         ) : (
                             <>
                                 <div className="block dark:hidden">
-                                    <StaticImage
+                                    <CloudinaryImage
                                         {...imageProps}
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/web-analytics/web-analytics-light.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/web-analytics/web-analytics-light.png"
                                         alt="A screenshot of web analytics"
                                     />
                                 </div>
                                 <div className="hidden dark:block">
-                                    <StaticImage
+                                    <CloudinaryImage
                                         {...imageProps}
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/web-analytics/web-analytics-dark.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/web-analytics/web-analytics-dark.png"
                                         alt="A screenshot of web analytics"
                                     />
                                 </div>
@@ -373,22 +374,22 @@ export const WebAnalytics = () => {
                 )
             }}
             HogMobile={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="max-w-[150px] sm:max-w-[203px] md:max-w-[203px]"
-                    src="./images/web-analytics-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png"
                     alt="A hedgehog looking at product analytics"
                 />
             )}
             HogDesktop={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[180px] 2xl:max-w-[203px]"
-                    src="./images/web-analytics-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png"
                     alt="A hedgehog looking at product analytics"
                 />
             )}
@@ -433,21 +434,21 @@ export const SessionReplay = () => {
                     <>
                         {enterpriseMode ? (
                             <div className="py-2">
-                                <StaticImage src="./images/enterprise-mode/shutterstock_2312841725.jpg" alt="" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/enterprise-mode/shutterstock_2312841725.jpg" alt="" />
                             </div>
                         ) : (
                             <>
                                 <div className="block dark:hidden">
-                                    <StaticImage
+                                    <CloudinaryImage
                                         {...imageProps}
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/session-replay/session-replay-light.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/session-replay/session-replay-light.png"
                                         alt="A screenshot of a session recording"
                                     />
                                 </div>
                                 <div className="hidden dark:block">
-                                    <StaticImage
+                                    <CloudinaryImage
                                         {...imageProps}
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/session-replay/session-replay-dark.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/session-replay/session-replay-dark.png"
                                         alt="A screenshot of a session recording"
                                     />
                                 </div>
@@ -457,22 +458,22 @@ export const SessionReplay = () => {
                 )
             }}
             HogMobile={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                    src="./images/session-recording-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
                     alt="A hedgehog watching a session recording"
                 />
             )}
             HogDesktop={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[180px] xl:max-w-[220px] 2xl:max-w-[275px]"
-                    src="./images/session-recording-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
                     alt="A hedgehog watching a session recording"
                 />
             )}
@@ -525,39 +526,39 @@ export const FeatureFlags = () => {
                     <>
                         {enterpriseMode ? (
                             <div className="py-2">
-                                <StaticImage src="./images/enterprise-mode/shutterstock_1974130838.jpg" alt="" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/enterprise-mode/shutterstock_1974130838.jpg" alt="" />
                             </div>
                         ) : (
                             <>
                                 <div className="-rotate-1 -mr-6 -mt-2 mdlg:-mr-24 lg:-mr-52 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
                                     <div className="block dark:hidden">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             {...image1Props}
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-1-light.png"
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-1-light.png"
                                             className={`${image1Props.className}`}
                                         />
                                     </div>
                                     <div className="hidden dark:block">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             {...image1Props}
                                             className={`${image1Props.className}`}
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-1-dark.png"
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-1-dark.png"
                                         />
                                     </div>
                                 </div>
                                 <div className="rotate-1 -ml-20 mdlg:-ml-28 lg:-ml-60 w-3/4 mdlg:w-3/4 lg:w-3/5">
                                     <div className="block dark:hidden">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             {...image2Props}
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-2-light.png"
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-2-light.png"
                                             className={`${image2Props.className}`}
                                         />
                                     </div>
                                     <div className="hidden dark:block">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             {...image2Props}
                                             className={`${image2Props.className} `}
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-2-dark.png"
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/feature-flags/feature-flags-2-dark.png"
                                         />
                                     </div>
                                 </div>
@@ -567,22 +568,22 @@ export const FeatureFlags = () => {
                 )
             }}
             HogMobile={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                    src="./images/feature-flags-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                     alt="A hedgehog toggling a feature flag"
                 />
             )}
             HogDesktop={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[200px] mdlg:block lg:max-w-[230px] xl:max-w-[300px]"
-                    src="./images/feature-flags-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                     alt="A hedgehog toggling a feature flag"
                 />
             )}
@@ -636,39 +637,39 @@ export const ABTesting = () => {
                     <>
                         {enterpriseMode ? (
                             <div className="py-2">
-                                <StaticImage src="./images/enterprise-mode/shutterstock_639884194.jpg" alt="" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/enterprise-mode/shutterstock_639884194.jpg" alt="" />
                             </div>
                         ) : (
                             <>
                                 <div className="-rotate-1 mdlg:ml-4 lg:ml-8 mt-8 md:mt-0 md:mb-8 mdlg:m-0 w-3/4 mdlg:w-3/4 lg:w-3/5 z-10">
                                     <div className="block dark:hidden">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             {...image1Props}
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-1-light.png"
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-1-light.png"
                                             className={`${image1Props.className} block dark:hidden`}
                                         />
                                     </div>
                                     <div className="hidden dark:block">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             {...image1Props}
                                             className={`${image1Props.className}`}
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-1-dark.png"
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-1-dark.png"
                                         />
                                     </div>
                                 </div>
                                 <div className="rotate-1 -mt-12 mdlg:mt-0 -ml-24 md:-ml-32 w-5/6 mdlg:w-3/4 lg:w-3/5 z-20">
                                     <div className="block dark:hidden">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             {...image2Props}
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-2-light.png"
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-2-light.png"
                                             className={`${image2Props.className} `}
                                         />
                                     </div>
                                     <div className="hidden dark:block">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             {...image2Props}
                                             className={`${image2Props.className} `}
-                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-2-dark.png"
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/ab-testing/ab-testing-2-dark.png"
                                         />
                                     </div>
                                 </div>
@@ -678,22 +679,22 @@ export const ABTesting = () => {
                 )
             }}
             HogMobile={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px] z-30"
-                    src="./images/experiment-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
                     alt="A hedgehog running an experiment"
                 />
             )}
             HogDesktop={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[120px] lg:max-w-[120px] xl:max-w-[175px]"
-                    src="./images/experiment-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
                     alt="A hedgehog running an experiment"
                 />
             )}
@@ -733,17 +734,17 @@ export const Surveys = () => {
                     <>
                         {enterpriseMode ? (
                             <div className="py-2">
-                                <StaticImage src="./images/enterprise-mode/shutterstock_2090565652.jpg" alt="" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/enterprise-mode/shutterstock_2090565652.jpg" alt="" />
                             </div>
                         ) : (
                             <>
-                                <StaticImage
+                                <CloudinaryImage
                                     alt="Survey widget example"
                                     placeholder="none"
                                     quality={100}
                                     objectFit="contain"
                                     className="w-full h-full pb-8 mdlg:py-4 max-w-[337px] md:max-w-[287px] mdlg:max-w-[337px] rotate-1"
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/surveys/survey.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/surveys/survey.png"
                                 />
                             </>
                         )}
@@ -751,22 +752,22 @@ export const Surveys = () => {
                 )
             }}
             HogMobile={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[180px] sm:max-w-[230px] md:max-w-[260px]"
-                    src="./images/surveys-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
                     alt="A hedgehog looking at product analytics"
                 />
             )}
             HogDesktop={() => (
-                <StaticImage
+                <CloudinaryImage
                     loading="eager"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[200px] mdlg:block lg:max-w-[250px] xl:max-w-[350px]"
-                    src="./images/surveys-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
                     alt="A hedgehog looking at product analytics"
                 />
             )}
@@ -805,17 +806,17 @@ export const DataPipeline = () => {
                     <>
                         {enterpriseMode ? (
                             <div className="py-2">
-                                <StaticImage src="./images/enterprise-mode/shutterstock_2278332703.jpg" alt="" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/enterprise-mode/shutterstock_2278332703.jpg" alt="" />
                             </div>
                         ) : (
                             <>
-                                <StaticImage
+                                <CloudinaryImage
                                     alt="Some hedgehogs fixing some data pipes"
                                     placeholder="none"
                                     quality={100}
                                     objectFit="contain"
                                     className="w-full h-full max-w-[571px]"
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/cdp/pipeline-scene.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/cdp/pipeline-scene.png"
                                 />
                             </>
                         )}
@@ -855,17 +856,17 @@ export const DataWarehouse = () => {
                     <>
                         {enterpriseMode ? (
                             <div className="py-2 pl-2">
-                                <StaticImage src="./images/enterprise-mode/shutterstock_343843886.jpg" alt="" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/enterprise-mode/shutterstock_343843886.jpg" alt="" />
                             </div>
                         ) : (
                             <>
-                                <StaticImage
+                                <CloudinaryImage
                                     alt="An artist's depiction of a data warehouse"
                                     placeholder="none"
                                     quality={100}
                                     objectFit="contain"
                                     className="w-full h-full max-h-96 max-w-[826px]"
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-scene.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-scene.png"
                                 />
                             </>
                         )}
@@ -873,21 +874,21 @@ export const DataWarehouse = () => {
                 )
             }}
             HogMobile={() => (
-                <StaticImage
+                <CloudinaryImage
                     alt="Just another hedgehog"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                 />
             )}
             HogDesktop={() => (
-                <StaticImage
+                <CloudinaryImage
                     alt="Just another hedgehog"
                     placeholder="none"
                     quality={100}
                     className="w-full max-w-[100px] mdlg:block lg:max-w-[130px] xl:max-w-[150px]"
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
                 />
             )}
             contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
@@ -993,7 +994,7 @@ export const AIEngineering = () => {
                     <>
                         {enterpriseMode ? (
                             <div className="py-2 pl-2">
-                                <StaticImage src="./images/enterprise-mode/shutterstock_2372110997.jpg" alt="" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/enterprise-mode/shutterstock_2372110997.jpg" alt="" />
                             </div>
                         ) : (
                             <>
@@ -1043,13 +1044,13 @@ export const Sql = () => {
             <div className="relative md:grid grid-cols-16 gap-2 lg:gap-4 w-full">
                 <ImageContainer className="pl-8 md:col-span-9 lg:col-span-10">
                     <div className="h-full">
-                        <StaticImage
+                        <CloudinaryImage
                             alt="A hedgehog working on a laptop while standing, using some sort of internet link that connects to the stars..."
                             placeholder="none"
                             quality={100}
                             objectFit="contain"
                             className="w-full h-full py-10 max-h-96"
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/sql/sql-hog.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/https:/res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/sql/sql-hog.png"
                         />
                     </div>
                 </ImageContainer>

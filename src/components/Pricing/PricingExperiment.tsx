@@ -528,11 +528,11 @@ const PricingExperiment = (): JSX.Element => {
                     name={<span className="text-white">Cat Li</span>}
                     title={<span className="text-white">Product & Engineering Lead, Y Combinator</span>}
                     image={
-                        <StaticImage
+                        <CloudinaryImage
                             width={100}
                             height={100}
                             alt="Cat Li, Y Combinator"
-                            src="../../images/cat.jpeg"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/cat.jpeg"
                             placeholder="none"
                             className="rounded-full"
                         />

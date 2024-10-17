@@ -62,7 +62,7 @@ export default function CTA() {
                         animate={{ translateX: '-2rem', opacity: 1 }}
                         className="absolute bottom-0 right-0 xl:block hidden -z-10"
                     >
-                        <StaticImage loading="eager" placeholder="none" width={300} src="./images/conversion-hog.png" />
+                        <CloudinaryImage loading="eager" placeholder="none" width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/conversion-hog.png" />
                     </motion.div>
                 )}
                 <h2 className={heading('lg')}>

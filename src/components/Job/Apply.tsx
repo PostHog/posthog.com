@@ -236,12 +236,12 @@ export default function Apply({ id, info }) {
                             </span>
                         </button>
                         <div className="px-8 text-center">
-                            <StaticImage
+                            <CloudinaryImage
                                 className=""
                                 objectFit="contain"
                                 placeholder="blurred"
                                 width={296}
-                                src="./images/newsletter-signup.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Job/images/newsletter-signup.png"
                             />
                         </div>
                         <div className="bg-blue/10 py-8 px-6 md:px-12 mb-8">

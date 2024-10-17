@@ -461,7 +461,7 @@ export const ProductSurveys = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/surveys-hog.png" alt="" />
+                        <CloudinaryImage placeholder="none" quality={100} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/surveys-hog.png" alt="" />
                     </div>
                 </div>
 

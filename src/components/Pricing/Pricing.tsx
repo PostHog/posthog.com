@@ -1200,11 +1200,11 @@ const PricingExperiment = ({
                     name={<span className="text-white">Cat Li</span>}
                     title={<span className="text-white">Product & Engineering Lead, Y Combinator</span>}
                     image={
-                        <StaticImage
+                        <CloudinaryImage
                             width={100}
                             height={100}
                             alt="Cat Li, Y Combinator"
-                            src="../../images/cat.jpeg"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/cat.jpeg"
                             placeholder="none"
                             className="rounded-full"
                         />
@@ -1223,7 +1223,7 @@ const PricingExperiment = ({
             </section>
             <section className={`${section} mb-12 mt-16`}>
                 <div className="sm:flex-row flex-col-reverse flex items-center sm:items-start justify-center">
-                    <StaticImage src="./images/vacation-hog.png" alt="Vacation Hog" width={252} placeholder="none" />
+                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/images/vacation-hog.png" alt="Vacation Hog" width={252} placeholder="none" />
                     <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0">
                         <p className="text-white m-0 text-[18px] font-bold font-comic">
                             Looking for the signup button?
