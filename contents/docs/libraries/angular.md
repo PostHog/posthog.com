@@ -65,7 +65,7 @@ PostHog only captures pageview events when a [page load](https://developer.mozil
 
 If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
 
-To start, we need to add `capture_pageviews: false` to the PostHog initialization to avoid double capturing the first pageview.
+To start, we need to add `capture_pageview: false` to the PostHog initialization to avoid double capturing the first pageview.
 
 ```ts file=main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -78,7 +78,7 @@ posthog.init(
   {
     api_host:'<ph_client_api_host>',
     person_profiles: 'identified_only',
-    capture_pageviews: false
+    capture_pageview: false
   }
 )
 
@@ -170,7 +170,7 @@ posthog.init(
   {
     api_host:'<ph_client_api_host>',
     person_profiles: 'identified_only',
-    capture_pageviews: false,
+    capture_pageview: false,
     capture_pageleave: true
   }
 )

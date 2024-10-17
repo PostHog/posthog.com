@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction/index.tsx'
 import { SEO } from 'components/seo'
 import React from 'react'
@@ -78,28 +79,32 @@ export default function Enterprise() {
                         </div>
 
                         <div className="flex justify-center items-center gap-4 sm:gap-8 md:gap-4 lg:gap-8">
-                            <StaticImage
-                                src="../images/enterprise/soc-2type1.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/soc-2type1.png"
                                 height={140}
+                                width={140}
                                 alt="SOC 2 Type II certified"
                                 placeholder="blurred"
                             />
-                            <StaticImage
-                                src="../images/enterprise/hipaa.webp"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/hipaa.webp"
                                 height={120}
+                                width={225}
                                 alt="HIPAA compliant"
                                 className="relative md:top-2"
                                 placeholder="blurred"
                             />
-                            <StaticImage
-                                src="../images/enterprise/gdpr-ready.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/gdpr-ready.png"
+                                width={153}
                                 height={66.5}
                                 alt="GDPR ready"
                                 placeholder="blurred"
                             />
-                            <StaticImage
-                                src="../images/enterprise/dpf.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/dpf.png"
                                 height={122}
+                                width={266}
                                 alt="EU-U.S. Data Privacy Framework"
                                 placeholder="blurred"
                             />
@@ -107,8 +112,8 @@ export default function Enterprise() {
                     </div>
 
                     <aside className="md:w-[580px] md:h-[320px] max-w-full">
-                        <StaticImage
-                            src="../images/enterprise/flair-hogs.png"
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/flair-hogs.png"
                             alt="We need to talk about your flair"
                             placeholder="blurred"
                         />

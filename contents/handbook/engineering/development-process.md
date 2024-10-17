@@ -161,7 +161,7 @@ Always request a review on your pull request by a fellow team member (or leave u
 
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
-It's not the responsibility of either [Website & Docs](/teams/website-docs) or [Marketing](/teams/marketing) to document features.
+It's not the responsibility of either [Vibes](/teams/vibes) or [Marketing](/teams/marketing) teams to document features.
 
 ## Releasing
 

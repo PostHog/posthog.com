@@ -1071,8 +1071,8 @@ export const companyMenu = {
                     url: '/teams/sales-cs',
                 },
                 {
-                    name: 'Website & Docs',
-                    url: '/teams/website-docs',
+                    name: 'Vibes',
+                    url: '/teams/vibes',
                 },
             ],
         },
@@ -2647,7 +2647,7 @@ export const docsMenu = {
             name: 'CDP',
             url: '/docs/cdp',
             color: 'sky-blue',
-            icon: 'IconDecisionTree',
+            icon: 'IconPlug',
             children: [
                 {
                     name: 'Customer data platform',
@@ -3120,7 +3120,7 @@ const menu = [
             },
             {
                 name: 'CDP',
-                icon: 'IconDecisionTree',
+                icon: 'IconPlug',
                 color: 'sky-blue',
                 url: '/cdp',
             },

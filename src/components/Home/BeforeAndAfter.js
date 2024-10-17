@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { ReactCompareSlider, ReactCompareSliderHandle } from 'react-compare-slider'
@@ -38,10 +39,10 @@ export default function BeforeAndAfter() {
                         <AnimateIntoView className="absolute left-20">
                             <img src={factoBlurb} />
                         </AnimateIntoView>
-                        <StaticImage
+                        <CloudinaryImage
                             alt="A cartoon hedgehog laying on their back"
                             className="max-w-[200px] md:max-w-[300px]"
-                            src="../../images/facto-home.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/facto-home.png"
                         />
                     </div>
                     <div>

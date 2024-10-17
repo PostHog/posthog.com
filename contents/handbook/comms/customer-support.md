@@ -116,7 +116,7 @@ We very occasionally receive messages from people either wishing to make a legal
 
 ## Community
 
-Support =/= community - we consider them to be separate things. [Learn more about how we think about community.](/teams/website-docs/community)
+Support =/= community - we consider them to be separate things.
 
 ### Tutorials
 
