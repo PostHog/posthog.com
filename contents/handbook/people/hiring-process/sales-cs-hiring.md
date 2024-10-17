@@ -29,7 +29,7 @@ This is our usual first round interview with a member of the People & Ops team.
 
 #### Technical Interview 
 
-The technical interview with [Simon](/community/profiles/28895) usually lasts 45 minutes.  For this round, we will use scenario-based questions to assess your technical and customer skills, as well as knowledge of PostHog.
+The technical interview with [Simon](/community/profiles/28895) usually lasts 45 minutes.  For this round, we will use scenario-based questions to assess your technical and customer skills, as well as knowledge of PostHog. As part of this, we will ask you to give a quick pitch of PostHog (not a full demo). 
 
 #### Small Team Screen
 
