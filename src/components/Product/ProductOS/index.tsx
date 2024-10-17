@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -143,7 +144,7 @@ export const ProductOS = () => {
                 />
 
                 <div className="text-center mb-12">
-                    <StaticImage src="./images/product-os.png" alt="" className="w-full max-w-[423px]" />
+                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/product-os.png" alt="" className="w-full max-w-[423px]" />
                 </div>
             </div>
 
@@ -206,7 +207,7 @@ export const ProductOS = () => {
                             <p>You can also query directly from our data warehouse (powered by ClickHouse).</p>
                         </div>
                         <aside className="shrink-0 md:basis-[500px]">
-                            <StaticImage src="./images/sql-hog.png" alt="" className="w-full max-w-[562px]" />
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/sql-hog.png" alt="" className="w-full max-w-[562px]" />
                         </aside>
                     </div>
 
@@ -299,8 +300,8 @@ export const ProductOS = () => {
                             </p>
                         </div>
                         <div className="order-1 md:order-2 col-span-7 max-w-screen overflow-hidden md:overflow-visible">
-                            <StaticImage
-                                src="./images/site-widget.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/site-widget.png"
                                 alt=""
                                 className="relative w-[125%] left-[-12.5%] md:left-0 md:w-full max-w-[780px] top-12 md:top-16"
                             />
@@ -322,7 +323,7 @@ export const ProductOS = () => {
                             </p>
                         </div>
                         <aside className="shrink-0 md:basis-[300px] xl:basis-[500px]">
-                            <StaticImage src="./images/alert.png" alt="" className="w-full max-w-[262px]" />
+                            <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/alert.png" alt="" className="w-full max-w-[262px]" />
                         </aside>
                     </div>
                 </section>
@@ -391,8 +392,8 @@ export const ProductOS = () => {
                             </div>
                         </div>
                         <div className="order-1 mb-10 md:mb-0 md:order-2 text-center max-w-screen overflow-hidden md:overflow-visible">
-                            <StaticImage
-                                src="./images/toolbar.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductOS/images/toolbar.png"
                                 alt=""
                                 className="relative rounded w-[110%] left-[-5%] sm:left-0 md:w-full max-w-[614px] top-12 md:top-16"
                             />

@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -23,10 +24,10 @@ export const TeamMemberLink = (person) => {
                                         {person ? (
                                             <img src={avatar?.formats?.thumbnail?.url} alt="" className={`w-6 bg-${color ? color : 'red'}`} />
                                         ) : (
-                                            <StaticImage
+                                            <CloudinaryImage
                                                 alt=""
                                                 width={40}
-                                                src="../../pages-content/images/hog-9.png"
+                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
                                                 className="w-6 bg-red"
                                             />
                                         )}
@@ -55,10 +56,10 @@ export const TeamMemberLink = (person) => {
                                                 </div>
                                             ) : (
                                                 <div className="inline-block size-24 bg-yellow rounded-full overflow-hidden p-1 border-light dark:border-dark">
-                                                    <StaticImage
+                                                    <CloudinaryImage
                                                         alt=""
                                                         width={100}
-                                                        src="../../pages-content/images/hog-9.png"
+                                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
                                                         className="w-24"
                                                     />
                                                 </div>
@@ -100,10 +101,10 @@ export const TeamMemberLink = (person) => {
                                 {person ? (
                                     <img src={avatar?.formats?.thumbnail?.url} alt="" className={`w-6 bg-${color ? color : 'red'}`} />
                                 ) : (
-                                    <StaticImage
+                                    <CloudinaryImage
                                         alt=""
                                         width={40}
-                                        src="../../pages-content/images/hog-9.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
                                         className="w-6 bg-red"
                                     />
                                 )}
@@ -132,10 +133,10 @@ export const TeamMemberLink = (person) => {
                                         </div>
                                     ) : (
                                         <div className="inline-block size-24 bg-yellow rounded-full overflow-hidden p-1 border-light dark:border-dark">
-                                            <StaticImage
+                                            <CloudinaryImage
                                                 alt=""
                                                 width={100}
-                                                src="../../pages-content/images/hog-9.png"
+                                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
                                                 className="w-24"
                                             />
                                         </div>

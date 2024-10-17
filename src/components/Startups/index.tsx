@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { Check2 } from 'components/Icons'
 import Layout from 'components/Layout'
 import { GatsbyImage, getImage, StaticImage } from 'gatsby-plugin-image'
@@ -70,10 +71,10 @@ export default function Startups() {
             <SEO title={'Startups - PostHog'} />
             <section className="text-center py-20 max-w-screen-lg mx-auto relative px-5">
                 <div className="absolute right-0 -bottom-12 md:-bottom-20 md:max-w-[240px] max-w-[150px]">
-                    <StaticImage width={240} src="./images/belay-on.png" />
+                    <CloudinaryImage width={240} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Startups/images/belay-on.png" />
                 </div>
                 <div className="absolute left-0 bottom-0 max-w-[120px] md:max-w-[200px]">
-                    <StaticImage width={200} src="./images/on-belay.png" />
+                    <CloudinaryImage width={200} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Startups/images/on-belay.png" />
                 </div>
                 <div className="relative hidden lg:block">
                     <h1 className="max-w-lg mx-auto pb-2 text-center">Apply for PostHog's startup program</h1>

@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState, createContext, useEffect, useContext, useMemo, useRef } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
@@ -169,8 +170,8 @@ const EscalateButton = ({ escalate, escalated }) => {
                                     Response will come from Max, the support hog
                                 </p>
                                 <div className="flex space-x-2 items-start mb-6">
-                                    <StaticImage
-                                        src="../images/max.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Squeak/images/max.png"
                                         width={40}
                                         height={40}
                                         className="rounded-full flex-shrink-0 bg-light dark:bg-dark border border-border dark:border-dark"
