@@ -1321,6 +1321,6 @@
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/teams/website-docs", "destination": "/teams-vibes" }
+        { "source": "/teams/website-docs", "destination": "/teams/website-vibes" }
     ]
 }

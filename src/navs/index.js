@@ -1071,8 +1071,8 @@ export const companyMenu = {
                     url: '/teams/sales-cs',
                 },
                 {
-                    name: 'Vibes',
-                    url: '/teams/vibes',
+                    name: 'Website & Vibes',
+                    url: '/teams/website-vibes',
                 },
             ],
         },
