@@ -18323,14 +18323,14 @@ postcss@^8.4.23:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-posthog-js@1.170.0:
-  version "1.170.0"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.170.0.tgz#3f0adf7791215aecdca74273b9de7fbe1b0ac36b"
-  integrity sha512-jBPB0YnbMNOwzbjxtW5YnJ95qRv5GE6pU+BHntbQpPdp0iAooKif0Fvr+c6KEMmA5ObRgJ8iCuuBsAPCBQsBSw==
+posthog-js@1.171.0:
+  version "1.171.0"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.171.0.tgz#1117ac00efd2164a25ef22d2bd09a366aead0ee8"
+  integrity sha512-0ElicUivU/bnexbDzy0sa5cmf4CPGVPBRMnXu27lklgbGC5qA8oPyZqMT4q+Lsd2Nu7i9DhGUTak6EioIdIOEA==
   dependencies:
     fflate "^0.4.8"
     preact "^10.19.3"
-    web-vitals "^4.0.1"
+    web-vitals "^4.2.0"
 
 posthog-node@^4.2.0:
   version "4.2.0"
@@ -23486,10 +23486,10 @@ web-namespaces@^2.0.0:
   resolved "https://registry.yarnpkg.com/web-namespaces/-/web-namespaces-2.0.1.tgz#1010ff7c650eccb2592cebeeaf9a1b253fd40692"
   integrity sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==
 
-web-vitals@^4.0.1:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-4.2.0.tgz#008949ab79717a68ccaaa3c4371cbc7bbbd78a92"
-  integrity sha512-ohj72kbtVWCpKYMxcbJ+xaOBV3En76hW47j52dG+tEGG36LZQgfFw5yHl9xyjmosy3XUMn8d/GBUAy4YPM839w==
+web-vitals@^4.2.0:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-4.2.3.tgz#270c4baecfbc6ec6fc15da1989e465e5f9b94fb7"
+  integrity sha512-/CFAm1mNxSmOj6i0Co+iGFJ58OS4NRGVP+AWS/l509uIK5a1bSoIVaHz/ZumpHTfHSZBpgrJ+wjfpAOrTHok5Q==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
