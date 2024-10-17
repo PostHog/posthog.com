@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -12,7 +13,7 @@ export default function OnePlatform() {
             </p>
             <ul className="p-0 grid md:grid-cols-3 gap-6 md:gap-12">
                 <li className="list-none">
-                    <StaticImage src="./images/mds.png" alt="Drake Hog" className="max-w-[179px] h-[200px]" />
+                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/mds.png" alt="Drake Hog" className="max-w-[179px] h-[200px]" />
                     <h3 className="text-xl pt-4 mb-2 text-red">Replaces the modern data stack</h3>
                     <p>
                         With 8+ products on one platform, you'll spend less time engineering your data integrations and
@@ -20,8 +21,8 @@ export default function OnePlatform() {
                     </p>
                 </li>
                 <li className="list-none">
-                    <StaticImage
-                        src="./images/tutorials-tutorials-tutorials.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/tutorials-tutorials-tutorials.png"
                         alt="Ballmer Hog"
                         className="max-w-[194px] h-[200px]"
                     />
@@ -32,8 +33,8 @@ export default function OnePlatform() {
                     </p>
                 </li>
                 <li className="list-none">
-                    <StaticImage
-                        src="./images/hockeystick-growth.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/hockeystick-growth.png"
                         alt="Graduate Hog"
                         className="max-w-[170px] h-[200px]"
                     />

@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -72,7 +73,7 @@ const quickLinks = [
         name: 'PostHog for AI',
         to: '/docs/ai-engineering',
         description: 'Track metrics for AI & LLM products',
-        color: 'black',
+        color: '[#681291]',
     },
 ]
 
@@ -101,7 +102,7 @@ export const DocsIndex = () => {
                     </div>
                     <aside>
                         <figure className="m-0">
-                            <StaticImage
+                            <CloudinaryImage
                                 objectFit="contain"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/adventure-hog.png"
                                 alt="This hog knows where he's headed"

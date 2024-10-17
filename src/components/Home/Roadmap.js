@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
@@ -21,13 +22,13 @@ const Roadmap = () => {
     return (
         <div className="px-4 mb-12 max-w-7xl mx-auto md:grid md:grid-cols-3 md:gap-12">
             <figure className="w-64 mx-auto md:w-auto">
-                <StaticImage
+                <CloudinaryImage
                     width={367}
                     height={348}
                     imgClassName=""
                     placeholder="blurred"
                     alt={`Here's what's cookin', good lookin'`}
-                    src="./images/experiment-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/experiment-hog.png"
                 />
             </figure>
             <div className="col-span-2">

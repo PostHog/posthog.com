@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -33,10 +34,10 @@ const TeamMemberLink = (person) => {
               className={`size-20 ${color ? `bg-${color}` : 'bg-orange'}`}
             />
           ) : (
-            <StaticImage
+            <CloudinaryImage
               alt=""
               width={20}
-              src="../../../pages-content/images/hog-9.png"
+              src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
               className="size-20 bg-orange"
             />
           )}
