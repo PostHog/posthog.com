@@ -42,10 +42,9 @@ export default function NotFoundPage(): JSX.Element {
                                 }}
                             />
                         ) : (
-                            <StaticImage
-                                src="../../images/astrohog.gif"
+                            <img
+                                src="/images/astrohog.gif"
                                 alt="Space hog"
-                                placeholder="blurred"
                                 className="w-[250px] sm:w-[500px] rotate-12"
                             />
                         )}
