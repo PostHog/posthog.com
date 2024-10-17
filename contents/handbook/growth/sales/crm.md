@@ -214,6 +214,8 @@ Important notes:
 
 When moving someone to self-serve we should set them up for success by using the [Post Demo route to self-serve](https://posthog.lightning.force.com/lightning/r/EmailTemplate/00XHp000001vNpqMAE/view). This encourages them to sign up to PostHog Cloud and provides some helpful getting started pointers. If there were any follow-up questions from initial meeting we should answer those in this email as well.
 
+> If you move an opportunity to self-serve then it won't be included in your quota retirement/commission calculation (as you aren't working on it).
+
 ## All done - now what?
 
 This is just the beginning of what will hopefully be an awesome relationship with a new customer!
