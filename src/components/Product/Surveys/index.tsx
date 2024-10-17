@@ -395,6 +395,7 @@ export const ProductSurveys = () => {
                     product={product.capitalized}
                     title='Ask anything with <span class="text-red dark:text-yellow">no-code surveys</span>'
                     description="Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control."
+                    signupCTACopy="Capture user feedback"
                 />
 
                 <div className="text-center">

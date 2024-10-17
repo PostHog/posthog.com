@@ -104,7 +104,7 @@ On top of this, we try to maintain a strong financial position and [never need t
 
 Y Combinator helps create many successful startups. Core to doing this is a couple pieces of advice:
 
-- **Build people something want.** This requires talking to users and having them shape the roadmap, even when your intuition says otherwise.
+- **Build something people want.** This requires talking to users and having them shape the roadmap, even when your intuition says otherwise.
 
 - **Launch now.** Shipping fast enables you to [test in production](/product-engineers/testing-in-production) and get the most real feedback possible.
 
