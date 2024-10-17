@@ -96,7 +96,7 @@ export default function Lawyers() {
             <div className="flex gap-3 justify-center py-1">
                 <div className="mt-1 rounded-full bg-accent w-12 h-12 overflow-hidden">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Lawyers/https:/res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
                         alt='James ("Veg"/"JC") Hawkins'
                         className="w-12 h-12"
                     />
