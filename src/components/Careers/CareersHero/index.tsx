@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import Link from 'components/Link'
 import { Department, Location, Timezone } from 'components/NotProductIcons'
@@ -99,12 +99,23 @@ const hideTeamsByJob = ['Technical ex-founder', 'Speculative application']
 
 export const CareersHero = () => {
     const {
-        allAshbyJobPosting: { departments, jobs },
+        allAshbyJobPosting: { departments, jobs: originalJobs },
         allTeams: { nodes: allTeams },
     } = useStaticQuery(query)
 
+    const jobs = useMemo(() => {
+        const sortedJobs = [...originalJobs];
+        const speculativeIndex = sortedJobs.findIndex(job => job.fields.title === "Speculative application");
+        if (speculativeIndex !== -1) {
+            const [speculativeJob] = sortedJobs.splice(speculativeIndex, 1);
+            sortedJobs.push(speculativeJob);
+        }
+        return sortedJobs;
+    }, [originalJobs]);
+
     const [selectedJob, setSelectedJob] = useState(jobs[0])
     const [processedHtml, setProcessedHtml] = useState('')
+    const [websiteDescription, setWebsiteDescription] = useState('')
     const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
     const teams = teamsField ? JSON.parse(teamsField.value) : []
     const [selectedTeamName, setSelectedTeamName] = useState(teams[0])
@@ -141,6 +152,12 @@ export const CareersHero = () => {
 
         setProcessedHtml(content)
         setSelectedTeamName(teams[0])
+
+        const websiteDescField = selectedJob.parent.customFields.find(
+            (field: { title: string }) => field.title === 'Website description'
+        )
+        setWebsiteDescription(websiteDescField ? websiteDescField.value : '')
+
         setIsLoading(false)
     }, [selectedJob])
 
@@ -242,6 +259,7 @@ export const CareersHero = () => {
 
                         <div className="job-content mt-4">
                             <h3 className="mb-1 text-[15px]">Summary</h3>
+
                             {isLoading ? (
                                 <div className="space-y-1 mb-3">
                                     <div className="bg-accent dark:bg-accent-dark h-5 w-full rounded animate-pulse" />
@@ -252,22 +270,30 @@ export const CareersHero = () => {
                                     <div className="md:hidden bg-accent dark:bg-accent-dark h-5 w-36 max-w-full rounded animate-pulse" />
                                 </div>
                             ) : (
-                                <div
-                                    dangerouslySetInnerHTML={{ __html: processedHtml }}
-                                    className="[&_summary]:hidden [&_p]:text-[15px] relative max-h-56 overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
-                                />
-                            )}
-                            {selectedJob.fields.title == 'Speculative application' && (
                                 <>
-                                    <p className="text-[15px]">
-                                        We take exceptional people when they come along - and we really mean that!
-                                    </p>
+                                    {websiteDescription ? (
+                                        <div className="mb-4">
+                                            <p className="text-[15px]" dangerouslySetInnerHTML={{ __html: websiteDescription }} />
+                                        </div>
+                                    ) : (
+                                        <div
+                                            dangerouslySetInnerHTML={{ __html: processedHtml }}
+                                            className="[&_summary]:hidden [&_p]:text-[15px] relative max-h-56 overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
+                                        />
+                                    )}
+                                    {selectedJob.fields.title == 'Speculative application' && (
+                                        <>
+                                            <p className="text-[15px]">
+                                                We take exceptional people when they come along - and we really mean that!
+                                            </p>
 
-                                    <p className="text-[15px]">
-                                        Don't see a specific role listed? That doesn't mean we won't have a spot for
-                                        you. Send us a speculative application and let us know how you think you could
-                                        contribute to PostHog.
-                                    </p>
+                                            <p className="text-[15px]">
+                                                Don't see a specific role listed? That doesn't mean we won't have a spot for
+                                                you. Send us a speculative application and let us know how you think you could
+                                                contribute to PostHog.
+                                            </p>
+                                        </>
+                                    )}
                                 </>
                             )}
                             <CallToAction to={selectedJob.fields.slug} size="sm">
@@ -312,7 +338,7 @@ export const CareersHero = () => {
                             <div className="inline-flex mx-auto gap-2">
                                 {pineapplePercentage > 50 ? (
                                     <>
-                                        <StickerPineappleYes className="size-12" />
+                                        <StickerPineapple className="size-12" />
                                     </>
                                 ) : pineapplePercentage === 50 ? (
                                     <>
