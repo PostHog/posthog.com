@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
 import React, { useEffect, useState } from 'react'
 import { heading, section } from './classes'
@@ -61,7 +62,7 @@ export default function CTA() {
                         animate={{ translateX: '-2rem', opacity: 1 }}
                         className="absolute bottom-0 right-0 xl:block hidden -z-10"
                     >
-                        <StaticImage loading="eager" placeholder="none" width={300} src="./images/conversion-hog.png" />
+                        <CloudinaryImage loading="eager" placeholder="none" width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/conversion-hog.png" />
                     </motion.div>
                 )}
                 <h2 className={heading('lg')}>
@@ -78,11 +79,15 @@ export default function CTA() {
                 <div className="md:grid grid-cols-2 gap-16 md:pt-24 pb-16 max-w-5xl mx-auto">
                     <div className="relative text-right">
                         <div className="mb-2">
-                            <StaticImage src="./images/cloud-cd.jpg" alt="PostHog Cloud" className="max-w-[443px]" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/cloud-cd.jpg"
+                                alt="PostHog Cloud"
+                                className="max-w-[443px]"
+                            />
                         </div>
                         <div className="absolute -left-4 bottom-12 md:left-[-8px] md:bottom-24">
-                            <StaticImage
-                                src="./images/g2-badge.png"
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/g2-badge.png"
                                 alt="People on G2 think we're great"
                                 className="w-[90px]"
                             />

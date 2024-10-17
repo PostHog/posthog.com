@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Layout from 'components/Layout'
@@ -32,12 +33,12 @@ export const Intro = ({ image = true }) => (
 
         {image && (
             <figure className="m-0 p-0">
-                <StaticImage
+                <CloudinaryImage
                     alt=""
                     placeholder="none"
                     quality={100}
                     className=""
-                    src="../../components/Home/Slider/images/surveys-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
                 />
             </figure>
         )}
@@ -61,13 +62,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Get feedback and book user interviews with surveys"
                         description="Automate the process of finding the right users and booking interviews"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/surveys-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
                             />
                         }
                         url="/tutorials/feedback-interviews-site-apps"
@@ -77,13 +78,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="How to create custom surveys"
                         description="Customize the look and feel of your surveys"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/surveys-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png"
                             />
                         }
                         url="/tutorials/survey"
@@ -99,13 +100,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Net Promoter Score (NPS)"
                         description="The benchmark for judging what users think of you"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/nps-survey.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/nps-survey.png"
                             />
                         }
                         url="/templates/nps-survey"
@@ -114,13 +115,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Customer Satisfaction (CSAT)"
                         description="Get a vibe check on your product"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/csat-survey.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/csat-survey.png"
                             />
                         }
                         url="/templates/csat-survey"
@@ -129,13 +130,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Customer Churn Rate (CCR)"
                         description="Find out why your users are saying goodbye"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/ccr-survey.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/ccr-survey.png"
                             />
                         }
                         url="/templates/churn-survey"

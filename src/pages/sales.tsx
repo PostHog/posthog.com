@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import Layout from 'components/Layout'
 import React, { useEffect, useRef, useState } from 'react'
 import SEO from 'components/seo'
@@ -27,20 +28,20 @@ const them = [
 
                 <div className="col-span-3 rotate-2 -mt-6 mb-6 relative left-3 md:left-0">
                     <div className="dark:hidden">
-                        <StaticImage
+                        <CloudinaryImage
                             quality={100}
                             placeholder="blurred"
                             loading="eager"
-                            src="../images/sales/demo-form-light.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/demo-form-light.png"
                             width={270}
                         />
                     </div>
                     <div className="hidden dark:block">
-                        <StaticImage
+                        <CloudinaryImage
                             quality={100}
                             placeholder="blurred"
                             loading="eager"
-                            src="../images/sales/demo-form-dark.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/demo-form-dark.png"
                             width={270}
                         />
                     </div>
@@ -58,7 +59,7 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-12">
-                    <StaticImage quality={90} placeholder="blurred" src="../images/sales/sdr.png" width={338} />
+                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr.png" width={338} />
                 </div>
             </>
         ),
@@ -76,7 +77,7 @@ const them = [
                 </div>
 
                 <div className="col-span-4 -mt-4 pb-6 rotate-2">
-                    <StaticImage quality={90} placeholder="blurred" src="../images/sales/sdr-on-zoom.png" width={436} />
+                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr-on-zoom.png" width={436} />
                 </div>
             </>
         ),
@@ -94,7 +95,7 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-6 md:-mt-12 pb-4">
-                    <StaticImage quality={90} placeholder="blurred" src="../images/sales/no-hope.png" width={352} />
+                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/no-hope.png" width={352} />
                 </div>
             </>
         ),
@@ -112,7 +113,7 @@ const them = [
                 </div>
 
                 <div className="col-span-5 text-center -mt-12">
-                    <StaticImage quality={90} placeholder="blurred" src="../images/sales/receipt.png" width={613} />
+                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/receipt.png" width={613} />
                 </div>
             </>
         ),
@@ -129,10 +130,10 @@ const them = [
                 </div>
 
                 <div className="col-span-4 -mt-12 pb-4 text-center">
-                    <StaticImage
+                    <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
-                        src="../images/sales/decision-makers.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/decision-makers.png"
                         width={286}
                     />
                 </div>
@@ -152,10 +153,10 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-6">
-                    <StaticImage
+                    <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
-                        src="../images/sales/contract-negotiation.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/contract-negotiation.png"
                         width={369}
                     />
                 </div>
@@ -176,19 +177,19 @@ const them = [
 
                 <div className="col-span-4 -mt-8 pb-8 -mx-2 md:mx-0">
                     <div className="dark:hidden">
-                        <StaticImage
+                        <CloudinaryImage
                             quality={90}
                             placeholder="blurred"
-                            src="../images/sales/gantt-chart-light.png"
-                            width={554.5}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/gantt-chart-light.png"
+                            width={555}
                         />
                     </div>
                     <div className="hidden dark:block">
-                        <StaticImage
+                        <CloudinaryImage
                             quality={90}
                             placeholder="blurred"
-                            src="../images/sales/gantt-chart-dark.png"
-                            width={554.5}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/gantt-chart-dark.png"
+                            width={555}
                         />
                     </div>
                 </div>
@@ -207,7 +208,7 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-4 md:-mt-8 md:pb-8 text-center">
-                    <StaticImage quality={90} placeholder="blurred" src="../images/sales/shocked-hog.png" width={200} />
+                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png" width={200} />
                 </div>
             </>
         ),
@@ -251,11 +252,11 @@ const us = [
                 </div>
 
                 <div className="col-span-3 -mt-6 pb-8 text-center">
-                    <StaticImage
+                    <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
                         loading="eager"
-                        src="../images/sales/drake-hog-yes.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/drake-hog-yes.png"
                         width={234}
                     />
                 </div>
@@ -280,7 +281,7 @@ const us = [
                 </div>
 
                 <div className="col-span-3 text-center rotate-2 pb-4 pr-2">
-                    <StaticImage quality={90} placeholder="blurred" src="../images/sales/posthog-ae.png" width={436} />
+                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-ae.png" width={436} />
                 </div>
             </>
         ),
@@ -307,10 +308,10 @@ const us = [
                 </div>
 
                 <div className="col-span-4">
-                    <StaticImage
+                    <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
-                        src="../images/sales/posthog-follow-up.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-follow-up.png"
                         width={600}
                     />
                 </div>
@@ -335,10 +336,10 @@ const us = [
                 </div>
 
                 <div className="col-span-4 -mt-8 md:-mt-12 text-center">
-                    <StaticImage
+                    <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
-                        src="../images/sales/choose-discount.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/choose-discount.png"
                         width={433}
                     />
                 </div>
@@ -365,10 +366,10 @@ const us = [
                     </div>
 
                     <div className="-mx-4 md:ml-[-3.25rem] md:-mr-4">
-                        <StaticImage
+                        <CloudinaryImage
                             quality={90}
                             placeholder="blurred"
-                            src="../images/sales/celebration.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/celebration.png"
                             layout="fullWidth"
                         />
                     </div>
@@ -395,28 +396,25 @@ const AccordionItem = ({
 
     return (
         <li
-            className={`border-t relative ${
-                isOpen
+            className={`border-t relative ${isOpen
                     ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
                     : 'inactive border-light dark:border-dark first:border-transparent'
-            }`}
+                }`}
         >
             <button
                 onClick={onClick}
-                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${
-                    isOpen
+                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
                         ? 'pt-4 pb-2 z-20'
                         : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
-                }`}
+                    }`}
             >
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 [flex:0_0_2rem] justify-center items-center p-1 font-semibold rounded-full bg-accent dark:bg-accent/10">
                         {number}
                     </span>
                     <span
-                        className={`transition-all leading-tight ${
-                            isOpen ? 'font-bold text-lg md:text-2xl' : 'font-semibold text-[17px]'
-                        }`}
+                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg md:text-2xl' : 'font-semibold text-[17px]'
+                            }`}
                     >
                         {title}
                     </span>
@@ -613,10 +611,10 @@ function Sales() {
                     <div className="relative order-1 md:order-2 pl-8 md:pl-0">
                         <div className="md:absolute md:top-0 md:left-0 md:bottom-0">
                             <div className="dark:hidden">
-                                <StaticImage
+                                <CloudinaryImage
                                     quality={100}
                                     placeholder="none"
-                                    src="../images/sales/phone-hog-light.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png"
                                     className="h-48 xs:h-[17rem] md:h-72"
                                     loading="eager"
                                     objectPosition="left top"
@@ -624,10 +622,10 @@ function Sales() {
                                 />
                             </div>
                             <div className="hidden dark:block">
-                                <StaticImage
+                                <CloudinaryImage
                                     quality={100}
                                     placeholder="none"
-                                    src="../images/sales/phone-hog-dark.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-dark.png"
                                     className="h-48 xs:h-[17rem] md:h-72"
                                     loading="eager"
                                     objectPosition="left top"

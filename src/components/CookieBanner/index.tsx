@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { StaticImage } from 'gatsby-plugin-image'
 import usePostHog from '../../hooks/usePostHog'
 import React, { useEffect, useState } from 'react'
@@ -75,10 +76,10 @@ export default function CookieBanner() {
                 offset={[0, 0]}
             >
                 <div className="relative max-w-[280px]">
-                    <StaticImage
+                    <CloudinaryImage
                         alt="Ursula von der Leyen, President of the European Commission"
                         width={250}
-                        src="../EU/images/ursula.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/EU/images/ursula.png"
                     />
                 </div>
             </Tooltip>

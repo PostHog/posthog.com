@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -30,10 +31,10 @@ const TeamMemberLink = (person) => {
                                 className="size-24"
                             />
                         ) : (
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 width={24}
-                                src="../../../pages-content/images/hog-9.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
                                 className="size-24"
                             />
                         )}
