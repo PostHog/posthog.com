@@ -794,7 +794,7 @@ export const DataPipeline = () => {
             title="Customer data platform"
             flag="Beta"
             flagColor="yellow"
-            description="60+ data connections available now. Full CDP coming soon."
+            description="Import data from your warehouse and send to 25+ destinations."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="flex items-center justify-center pl-8 py-4 md:col-span-9 lg:col-span-10"

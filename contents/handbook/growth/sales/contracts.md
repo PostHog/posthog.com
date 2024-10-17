@@ -16,65 +16,6 @@ If you are discussing any annual plan that deviates from our standard terms, suc
 
 ### What about monthly customers?
 
-Anyone on a monthly plan simply agrees to our [Terms](/terms) and [Privacy Policy](/privacy) when they sign up. 
-
-## Pricing calculator
-
-While we have a transparent pricing available, you'll need to use our [pricing calculator](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing) (internal only) for customers with very high volumes or bespoke needs. 
-
-## Discounts
-
-Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practise when negotiating software contracts for the customer (and their procurement team) to ask for a discount.  We can be super transparent about the levers we have in discounting PostHog:
-
-1. In our consumption-based pricing model, the easiest way to reduce spend is to ensure that the customer is only sending data to us which is valuable to them.  There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
-2. **Annual Plan:** We offer a 20% discount on an annual paid-up-front plan, because it's beneficial to PostHog to have a customer committed for a year.
-3. **Higher Spend:** We offer an additional 5% and then 15% on top of the annual plans when the customer spends above $60k and $100k respectively.
-4. **Multi-year:** We offer an additional 5% for each additional year of commitment, as longer commitments are beneficial to PostHog.  
-5. **Up-front payment:** We offer an additional 3% where a *multi-year* contract is all **paid up-front**, as it's better for PostHog to have the money in the bank.
-
-The below table summarizes the discount levels contained in points 2-4:
-
-| Minimum Spend | 1 Year        | 2 Year         | 3 Year        |
-|---------------|---------------|----------------|---------------|
-| $20,000 | 20%  | 25% | 30%  |
-| $60,000 | 25%  | 30%   | 35%           |
-| $100,000 | 35%           | 40%            | 45%           |
-
-Also note that the minimum amounts here are _after_ discounts e.g. they will need to purchase a minimum of $25k of credit to get a discount of 20% and contract for $20k.  The table below will help you with the list price required to enable each discount.
-
-| Segment  | 1 Year   | 2 Year   | 3 Year   |
-|----------|----------|----------|----------|
-| $20,000  | $25,000  | $26,666  | $28,572  |
-| $60,000  | $80,000  | $85,715  | $92,308  |
-| $100,000 | $153,847 | $166,667 | $181,819 |
-
-If a customer has an annual plan but doesn't _pay_ the whole year up front, we usually halve the discount. Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. 
-
-> It's worth being aware that fast growing startups, even if they have the budget to pay annually, will probably prefer to pay quarterly or even monthly as flexibility may be a priority for them over saving 20%.
-
-Occasionally, customers may ask for a discount in return for a case study:
-1. Don't proactively offer this as we have been successful in getting case studies from happy paying customers without additional discounts.
-2. If a customer offers, first check with [Joe](/community/profiles/29070) as to whether he'd like one from this customer.
-3. If yes, we can add an additional 5% discount in the Order Form, and a Special Term that they will work with us to publish a case study in the first 3 months of the contract.
-
-> We don't offer a discount for signin---
-title: Contracts
-sidebar: Handbook
-showTitle: true
----
-
-# Annual plans and more
-
-For customers who want to sign up for an annual (or longer) plan there is some additional paperwork needed to capture their contractual commitment to a minimum term, and likely custom pricing as well. At a minimum, they should sign an Order Form which references our standard [terms](/terms) and [privacy notice](/privacy). In addition, they may want a custom Master Services Agreement (MSA) or Data Processing Agreement (DPA).
-
-> If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements). The minimum is $100k to bring your own contract instead of our template - see 'Non PostHog Contracts' below.
-
-In addition, customers requiring our Enterprise plan need to sign up for a minimum of $20k of PostHog Cloud Credit for a year, as well as adding the Teams plan to their subscription.
-
-If you are discussing any annual plan that deviates from our standard terms, such as a plan with monthly payments or other custom terms, please consult with Simon and Mine beforehand. This is to ensure we have the capacity and resources to support the proposed terms.
-
-### What about monthly customers?
-
 Anyone on a monthly plan simply agrees to our [Terms](/terms) and [Privacy Policy](/privacy) when they sign up.
 
 ## Pricing calculator

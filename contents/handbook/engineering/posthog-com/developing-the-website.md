@@ -8,11 +8,58 @@ You can contribute to the PostHog documentation, handbook, and blog in two ways:
 
 1. You can create a pull request in GitHub for any page that has an **Edit this page** link on it. In this situation you must edit the page using the GitHub web editor interface. This method is suitable for text-only edits and basic file manipulation, such as renaming.
 
-2. You can run the posthog.com website locally and make changes there by creating a branch of the master codebase, committing changes to that branch and raising a pull request to merge those changes. This is the recommended method as it allows you to quickly preview your changes, as well as perform more complex changes easily.
+2. You can run the posthog.com website in development and make changes there by creating a branch of the master codebase, committing changes to that branch and raising a pull request to merge those changes. This is the recommended method as it allows you to quickly preview your changes, as well as perform more complex changes easily.
 
-Below, we'll explain how to set up option two.
+Below, we'll explain the two options for option two.
 
-## Editing posthog.com locally
+## Option 1: Running with codespaces
+
+### Creating/running the codespace
+
+1. Open the [posthog.com repository](https://github.com/PostHog/posthog.com) in GitHub.
+1. Click the **Code** button, then the **Codespaces** tab, then under the `...` menu, choose **New with options...**
+    ![New with options...](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_new_ef2888e9b2.png)
+1. Under **Machine type**, choose **4-core**.
+    ![Configure machine type](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_configure_74499bde9c.png)
+1. When the repo opens in Codespaces, it will install some things automatically.
+    ![Codespaces installing dependencies](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_auto_setup_4db1dd65e0.png)
+
+    When completed, press any key.
+1. In terminal, type `yarn && yarn start` and hit [Enter].
+    ![yarn start](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_yarn_b02a89ed6b.png)
+    - This will take a while. The last step of the process is "Building development bundle" which will take a few minutes on its own.
+    - You may see a dialog that says, "Your application running on port 8001 is available." Don't be enticed by the big green button quite yet.
+1. Once you see <code><span class="text-green">success</span> Writing page-data.json files...</code>, you can click the green **Open in browser** button which will open the site at [http://localhost:8001](http://localhost:8001).
+
+### Committing and pushing changes
+
+Use the built-in Git tab in VS Code to commit and push your changes.
+
+1. From the Git source control `...` menu, choose **Checkout to...** to create a new branch.
+    ![Checkout to...](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_checkout_e634e2c0c0.png)
+1. Type a new branch name and press enter.
+    ![Branch name](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_branch_name_89ff5c8314.png)
+1. Now you can commit changes to your new branch. Type a commit message and use `Cmd` + `Enter` (or push the big green button).
+    ![Commit message](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_commit_cbe6e34635.png)
+1. If you see the dialog below, choose **Always** to always stage all files you've changed. (Otherwise, you'll need to hit the `+` button next to each file you want to commit.)
+    ![Stage all](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_commit_directly_f9d811d6d3.png)
+1. Now that your changes are committed, it's time to publish them to GitHub.
+    ![Publish changes](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_publish_81f21426e4.png)
+
+> **Note:** After finish changes on your branch, be sure to switch back to `master` so you don't inadvertently make future changes to your current branch.
+> ![Checkout to master](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_checkout_master_4821478b5e.png)
+> ![Switch to master](https://res.cloudinary.com/dmukukwp6/image/upload/codespaces_select_branch_58c9512cee.png)
+
+### Stopping the server
+
+1. Place your cursor into Terminal and type `Cmd+C` to stop the server.
+1. In the bottom left corner of the window, click **Codspaces: [your codespace name]**, then **Stop current codespace.**
+
+### Notes
+
+If you plan on using this codespace frequently, disable **Auto-delete codespace** in the `...` menu under the **Code > Codespaces**  dropdown [in the repo](https://github.com/posthog/posthog.com).
+
+## Option 2: Editing posthog.com locally
 
 ### Before you begin
 

@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconSearch, IconDecisionTree } from '@posthog/icons'
+import { IconSearch, IconPlug, IconDecisionTree } from '@posthog/icons'
 import Fuse from 'fuse.js'
 import SideModal from 'components/Modal/SideModal'
 import { MDXProvider } from '@mdx-js/react'
@@ -228,7 +228,7 @@ function PipelinesPage({ location }) {
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="sky-blue"
-                    icon={<IconDecisionTree />}
+                    icon={<IconPlug />}
                     product={product.capitalized}
                     title="Customer data platform"
                     description="Import from a data warehouse to analyze your data with PostHog product data and send it all to 25+ destinations."
