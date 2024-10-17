@@ -1,10 +1,11 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useMemo } from 'react'
 import Link from 'components/Link'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconSearch, IconDecisionTree, IconArrowRightDown } from '@posthog/icons'
+import { IconSearch, IconPlug, IconArrowRightDown } from '@posthog/icons'
 import Fuse from 'fuse.js'
 import TeamMembers from '../TeamMembers'
 import SideModal from 'components/Modal/SideModal'
@@ -321,7 +322,7 @@ function PipelinesPage({ location }) {
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="sky-blue"
-                    icon={<IconDecisionTree />}
+                    icon={<IconPlug />}
                     product={product.capitalized}
                     title="Ingest, transform, and send data between 25+ tools"
                     description="Pre-built recipes make it easy to import data from a warehouse, sync with PostHog event data, and send to other products in your stack"
@@ -343,8 +344,8 @@ function PipelinesPage({ location }) {
                 </div>
 
                 <div className="text-center -mb-12 md:-mb-28">
-                    <StaticImage
-                        src="../../images/products/screenshot-cdp.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png"
                         alt="Screenshot of PostHog's CDP"
                         className="w-full max-w-[1280px]"
                         placeholder="none"

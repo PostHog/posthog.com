@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
@@ -45,12 +46,12 @@ export const NextStep: React.FC<NextStepProps> = ({ title, url, links, children 
 export const ProductAnalytics = () => {
     return (
         <NextStep title="Product Analytics" url="/docs/product-analytics" links={[]}>
-            <StaticImage
+            <CloudinaryImage
                 alt=""
                 placeholder="none"
                 quality={100}
                 className="w-full"
-                src="../Home/Slider/images/product-analytics-hog.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
             />
         </NextStep>
     )
@@ -59,12 +60,12 @@ export const ProductAnalytics = () => {
 export const SessionRecording = () => {
     return (
         <NextStep title="Session recording" url="/docs/session-replay" links={sessionRecordingLinks}>
-            <StaticImage
+            <CloudinaryImage
                 alt=""
                 placeholder="none"
                 quality={100}
                 className="w-full"
-                src="../Home/Slider/images/session-recording-hog.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/session-recording-hog.png"
             />
         </NextStep>
     )
@@ -73,12 +74,12 @@ export const SessionRecording = () => {
 export const FeatureFlags = () => {
     return (
         <NextStep title="Feature flags" url="/docs/feature-flags" links={featureFlagsLinks}>
-            <StaticImage
+            <CloudinaryImage
                 alt=""
                 placeholder="none"
                 quality={100}
                 className="w-full"
-                src="../Home/Slider/images/feature-flags-hog.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
             />
         </NextStep>
     )
@@ -87,12 +88,12 @@ export const FeatureFlags = () => {
 export const Experiments = () => {
     return (
         <NextStep title="Experiments" url="/docs/experiments" links={experimentsLinks}>
-            <StaticImage
+            <CloudinaryImage
                 alt=""
                 placeholder="none"
                 quality={100}
                 className="w-full"
-                src="../Home/Slider/images/ab-testing-hog.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
             />
         </NextStep>
     )
@@ -109,12 +110,12 @@ export const Apps = () => {
                 { name: 'Build your own app', to: '/docs/apps/build' },
             ]}
         >
-            <StaticImage
+            <CloudinaryImage
                 alt=""
                 placeholder="none"
                 quality={100}
                 className="w-full"
-                src="../Home/Slider/images/event-pipelines-hog.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/event-pipelines-hog.png"
             />
         </NextStep>
     )

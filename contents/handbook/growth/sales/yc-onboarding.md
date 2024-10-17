@@ -12,7 +12,7 @@ We want to support other YC companies using PostHog because:
 
 ## The YC deal
 
-For startups in the S24 batch:
+For startups in the current batch:
 
 - Get $50k of credit for PostHog Cloud for 12 months
 - _All founders_ get a Timbuk2 backpack

@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { section, SectionHeader } from './Sections'
 import { usePlatform } from '../Platform/usePlatform'
@@ -11,7 +12,7 @@ const comparison = [
     {
         name: 'Amplitude',
         logo: (
-            <StaticImage src={`./images/icon-amp.png`} className="" height={32} placeholder="blurred" alt="Amplitude" />
+            <CloudinaryImage src={`./images/icon-amp.png`} className="" height={32} placeholder="blurred" alt="Amplitude" />
         ),
         products: {
             'Product analytics': true,
@@ -26,7 +27,7 @@ const comparison = [
     {
         name: 'Mixpanel',
         logo: (
-            <StaticImage src={`./images/icon-mp.png`} className="" height={32} placeholder="blurred" alt="Mixpanel" />
+            <CloudinaryImage src={`./images/icon-mp.png`} className="" height={32} placeholder="blurred" alt="Mixpanel" />
         ),
         products: {
             'Product analytics': true,
@@ -41,7 +42,7 @@ const comparison = [
     {
         name: 'Heap',
         logo: (
-            <StaticImage
+            <CloudinaryImage
                 src={`./images/icon-heep.png`}
                 className="h-full rotate-3"
                 height={40}
@@ -62,7 +63,7 @@ const comparison = [
     {
         name: 'Pendo',
         logo: (
-            <StaticImage src={`./images/icon-pnd0.png`} className="" height={32} placeholder="blurred" alt="Mixpanel" />
+            <CloudinaryImage src={`./images/icon-pnd0.png`} className="" height={32} placeholder="blurred" alt="Mixpanel" />
         ),
         products: {
             'Product analytics': true,
@@ -77,7 +78,7 @@ const comparison = [
     {
         name: 'FullStory',
         logo: (
-            <StaticImage src={`./images/icon-fs.png`} className="" height={32} placeholder="blurred" alt="Mixpanel" />
+            <CloudinaryImage src={`./images/icon-fs.png`} className="" height={32} placeholder="blurred" alt="Mixpanel" />
         ),
         products: {
             'Product analytics': true,

@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -60,31 +61,31 @@ const features = [
     {
         title: 'Top paths',
         description: 'See the most visited pages on your site',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/top-paths.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/top-paths.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Top referrers',
         description: 'Discover where traffic is coming from',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/top-referrers.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/top-referrers.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Device types',
         description: 'Break down traffic by device',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/device-types.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/device-types.jpg" width={420} />,
         border: true,
     },
     {
         title: 'World map',
         description: 'Visualize users across planet earth',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/world-map.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/world-map.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Retention cohorts',
         description: 'Analyze retention by week',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/retention-cohorts.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/retention-cohorts.jpg" width={420} />,
         border: true,
     },
 ]
@@ -346,8 +347,8 @@ export const ProductWebAnalytics = () => {
                 />
 
                 <div className="text-center -mb-24">
-                    <StaticImage
-                        src="../../../../static/images/products/web-analytics/screenshot-web-analytics.png"
+                    <img
+                        src="/images/products/web-analytics/screenshot-web-analytics.png"
                         alt="Screenshot of web analytics in PostHog"
                         className="w-full max-w-[1440px]"
                         placeholder="none"
@@ -436,7 +437,7 @@ export const ProductWebAnalytics = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/session-replay-hog.png" alt="" />
+                        <CloudinaryImage placeholder="none" quality={100} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/session-replay-hog.png" alt="" />
                     </div>
                 </div>
 
@@ -467,8 +468,8 @@ export const ProductWebAnalytics = () => {
                             <VsCompetitor
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-sr.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-sr.png"
                                         className="max-w-[167px]"
                                     />
                                 }

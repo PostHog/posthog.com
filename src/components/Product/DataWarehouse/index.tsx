@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -41,22 +42,22 @@ const features = [
     {
         title: 'Sync from Stripe',
         description: 'Combine financial and product data to see how usage turns into growth.',
-        image: <StaticImage src="./images/stripe.png" width={428} placeholder="none" />,
+        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png" width={428} placeholder="none" />,
     },
     {
         title: 'Sync from Hubspot',
         description: 'Bring your CRM into the mix and track your sales funnel directly in PostHog.',
-        image: <StaticImage src="./images/hubspot.png" width={428} height={312} placeholder="none" />,
+        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/hubspot.png" width={428} height={312} placeholder="none" />,
     },
     {
         title: 'Sync from Zendesk',
         description: 'See how ticket volumes and SLA breaches impact sign-ups and churn.',
-        image: <StaticImage src="./images/zendesk.png" width={428} placeholder="none" />,
+        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/zendesk.png" width={428} placeholder="none" />,
     },
     {
         title: 'Sync from anywhere',
         description: 'Adwords? Salesforce? Grab anything you want using custom sources.',
-        image: <StaticImage src="./images/custom.png" width={428} height={312} placeholder="none" />,
+        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png" width={428} height={312} placeholder="none" />,
     },
 ]
 
@@ -195,8 +196,8 @@ export const ProductDataWarehouse = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
-                        src="../../../images/products/screenshot-data-warehouse.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-data-warehouse.png"
                         alt="Screenshot of the PostHog data warehouse"
                         className="w-full max-w-[1440px]"
                         placeholder="none"
@@ -254,7 +255,7 @@ export const ProductDataWarehouse = () => {
                         <p className="">Use the {product.lowercase} for free up to 1 million rows/mo.</p>
                     </div>
                     <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-8">
-                        <StaticImage
+                        <CloudinaryImage
                             alt="Just another hedgehog"
                             placeholder="blurred"
                             quality={100}
