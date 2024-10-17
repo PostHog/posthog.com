@@ -60,33 +60,33 @@ const features = [
     {
         title: 'Release conditions',
         description: 'Customize your rollout strategy by user or group properties, cohort, or traffic percentage',
-        image: <StaticImage src="./images/release-conditions.png" width={420} />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/release-conditions.png" width={420} />,
         border: true,
     },
     {
         title: 'Multivariate feature flags',
         description: 'Simultaneously test multiple versions against a control group',
-        image: <StaticImage src="./images/multivariate.png" width={420} />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png" width={420} />,
         border: true,
     },
     {
         title: 'Test changes without touching your codebase',
         description:
             'JSON payloads let you change text, visuals, or entire blocks of code without subsequent deployments',
-        image: <StaticImage src="./images/payloads.png" width={420} />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/payloads.png" width={420} />,
         border: true,
     },
     {
         title: 'Developer-friendly automation',
         description:
             'Automated usage reports, IP address resolution (for location-based targeting), and recall person properties to avoid passing them manually every time',
-        image: <StaticImage src="./images/reports.png" width={420} />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/reports.png" width={420} />,
         border: true,
     },
     {
         title: 'Early access feature opt-in widget',
         description: 'Allow users to opt in to (or out of) specified features. Or use the API to build your own UI.',
-        image: <StaticImage src="./images/early-access.png" width={420} />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/early-access.png" width={420} />,
         border: true,
     },
 ]
@@ -393,7 +393,7 @@ export const ProductFeatureFlags = () => {
 
                 <div className="text-center">
                     <StaticImage
-                        src="./images/screenshot-feature-flags.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/screenshot-feature-flags.png"
                         alt="Screenshot of a feature flag in PostHog"
                         className="w-full max-w-[1361px]"
                         placeholder="none"
@@ -501,7 +501,7 @@ export const ProductFeatureFlags = () => {
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
-                                        src="../../../images/products/competitors-ff.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ff.png"
                                         className="max-w-[176px]"
                                     />
                                 }

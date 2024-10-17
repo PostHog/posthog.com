@@ -237,7 +237,7 @@ function PipelinesPage({ location }) {
 
                 <div className="text-center -mb-12 md:-mb-28">
                     <StaticImage
-                        src="../../images/products/screenshot-cdp.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png"
                         alt="Screenshot of PostHog's CDP"
                         className="w-full max-w-[1280px]"
                         placeholder="none"

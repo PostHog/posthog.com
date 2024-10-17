@@ -11,7 +11,7 @@ export default function Lawyers() {
                 <div className="flex flex-col items-center gap-1 text-center">
                     <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
                         <StaticImage
-                            src="../../images/lawyers/barry-zuckerkorn.jpg"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/barry-zuckerkorn.jpg"
                             className="rounded-full "
                             alt="Barry Zuckerkorn"
                         />
@@ -30,7 +30,7 @@ export default function Lawyers() {
                 <div className="flex flex-col items-center gap-1 text-center">
                     <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
                         <StaticImage
-                            src="../../images/lawyers/wayne-jarvis.jpg"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/wayne-jarvis.jpg"
                             className="rounded-full "
                             alt="Wayne Jarvis"
                         />
@@ -49,7 +49,7 @@ export default function Lawyers() {
                 <div className="flex flex-col items-center gap-1 text-center">
                     <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
                         <StaticImage
-                            src="../../images/lawyers/maggie-lizer.jpg"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/maggie-lizer.jpg"
                             className="rounded-full "
                             alt="Maggie Lizer"
                         />
@@ -68,7 +68,7 @@ export default function Lawyers() {
                 <div className="flex flex-col items-center gap-1 text-center">
                     <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
                         <StaticImage
-                            src="../../images/lawyers/bob-loblaw.jpg"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/bob-loblaw.jpg"
                             className="rounded-full "
                             alt="Bob Loblaw"
                         />
@@ -95,7 +95,7 @@ export default function Lawyers() {
             <div className="flex gap-3 justify-center py-1">
                 <div className="mt-1 rounded-full bg-accent w-12 h-12 overflow-hidden">
                     <StaticImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Lawyers/https:/res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
                         alt='James ("Veg"/"JC") Hawkins'
                         className="w-12 h-12"
                     />

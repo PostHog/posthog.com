@@ -170,7 +170,7 @@ const EscalateButton = ({ escalate, escalated }) => {
                                 </p>
                                 <div className="flex space-x-2 items-start mb-6">
                                     <StaticImage
-                                        src="../images/max.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Squeak/images/max.png"
                                         width={40}
                                         height={40}
                                         className="rounded-full flex-shrink-0 bg-light dark:bg-dark border border-border dark:border-dark"

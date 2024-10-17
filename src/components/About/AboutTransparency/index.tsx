@@ -69,7 +69,7 @@ export const AboutTransparency = () => {
                     </div>
 
                     <StaticImage
-                        src="./images/xray.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/About/AboutTransparency/images/xray.png"
                         width={651}
                         height={289}
                         objectFit="contain"

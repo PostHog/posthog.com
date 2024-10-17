@@ -53,35 +53,35 @@ const features = [
     {
         title: 'Question types',
         description: 'Multiple choice, multi-select, numerical rating, emoji reaction, embedded links',
-        image: <StaticImage src="./images/question-types.png" width={428} placeholder="none" />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/question-types.png" width={428} placeholder="none" />,
     },
     {
         title: 'Templates',
         description: 'Choose from the library or start from scratch',
-        image: <StaticImage src="./images/templates.png" width={428} placeholder="none" />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/templates.png" width={428} placeholder="none" />,
         background: true,
         fade: true,
     },
     {
         title: 'Display Conditions',
         description: 'Display surveys based on URL, person property, or feature flag when used with Feature Flags',
-        image: <StaticImage src="./images/targeting.png" width={428} placeholder="none" />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/targeting.png" width={428} placeholder="none" />,
     },
     {
         title: 'Multi-step surveys',
         description: 'Up to 10 questions',
-        image: <StaticImage src="./images/steps.png" width={428} placeholder="none" />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/steps.png" width={428} placeholder="none" />,
     },
     {
         title: 'Link somewhere',
         description: 'Send users to a webpage or invite them to book a meeting with a calendar invite',
-        image: <StaticImage src="./images/link-scheduler.png" width={428} placeholder="none" />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/link-scheduler.png" width={428} placeholder="none" />,
     },
     {
         title: 'No-code? Yes. API? Yes.',
         description:
             "Using PostHog.js? No more code required. But want to create your own UI? Check out the <a href='/docs/api/surveys'>Surveys API</a>.",
-        image: <StaticImage src="./images/api.png" width={428} placeholder="none" />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/api.png" width={428} placeholder="none" />,
         fade: true,
     },
 ]
@@ -362,7 +362,7 @@ export const ProductSurveys = () => {
 
                 <div className="text-center">
                     <StaticImage
-                        src="../../../images/products/screenshot-surveys.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-surveys.png"
                         alt="Screenshot of survey results in PostHog"
                         className="w-full max-w-[1360px]"
                         placeholder="none"
@@ -456,7 +456,7 @@ export const ProductSurveys = () => {
                                 title="Reasons a competitor may be best for you(for now...)"
                                 image={
                                     <StaticImage
-                                        src="../../../images/products/competitors-surveys.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-surveys.png"
                                         className="max-w-[159px]"
                                         placeholder="none"
                                     />

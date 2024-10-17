@@ -12,7 +12,7 @@ export default function SlackPage(): JSX.Element {
             <div className="max-w-6xl px-4 lg:px-8 xl:px-0 mx-auto md:py-12">
                 <figure className="md:float-right">
                     <StaticImage
-                        src="../../images/max.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/max.png"
                         alt="The stars in the sky"
                         placeholder="blurred"
                         className="max-w-[250px] md:max-w-xs"

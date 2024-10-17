@@ -44,7 +44,7 @@ export const AboutStory = () => {
                 </div>
                 <div className="flex justify-end relative">
                     <StaticImage
-                        src="./images/hn-screenshot.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/About/AboutStory/images/hn-screenshot.png"
                         width={620}
                         height={397.5}
                         alt="PostHog launches on HackerNews"

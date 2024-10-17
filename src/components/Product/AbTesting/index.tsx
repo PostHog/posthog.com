@@ -49,19 +49,19 @@ const features = [
     {
         title: 'Customizable goals',
         description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance',
-        image: <StaticImage src="./images/goals.png" width={428} />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png" width={428} />,
         border: true,
     },
     {
         title: 'Targeting & exclusion rules',
         description: 'Set criteria for user location, person property, cohort, or group',
-        image: <StaticImage src="./images/targeting-ab.png" width={428} />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/targeting-ab.png" width={428} />,
         border: true,
     },
     {
         title: 'Recommendations',
         description: 'Automatic suggestions for duration, sample size, and confidence threshold in a winning variant',
-        image: <StaticImage src="./images/recommendations.png" width={428} />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/recommendations.png" width={428} />,
         border: true,
     },
 ]
@@ -301,7 +301,7 @@ export const ProductAbTesting = () => {
 
                 <div className="text-center">
                     <StaticImage
-                        src="./images/screenshot-ab-testing.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/screenshot-ab-testing.png"
                         alt="Screenshot of managing an A/B test in PostHog"
                         className="w-full max-w-[1361px]"
                         placeholder="none"
@@ -409,7 +409,7 @@ export const ProductAbTesting = () => {
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
-                                        src="../../../images/products/competitors-ab.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ab.png"
                                         className="max-w-[189px]"
                                     />
                                 }

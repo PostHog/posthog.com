@@ -499,7 +499,7 @@ function DpaGenerator() {
 
                                             <div className="my-2 border border-light dark:border-dark rounded overflow-hidden">
                                                 <StaticImage
-                                                    src="../images/dpa/print-settings.png"
+                                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/print-settings.png"
                                                     alt="Print settings"
                                                     placeholder="blurred"
                                                     className="dark:rounded"
@@ -547,7 +547,7 @@ function DpaGenerator() {
                         </h2>
                         <div className="[&>p]:text-[19px] [&>p]:leading-relaxed [&>p]:pb-6 [&_li]:text-[19px] [&_li]:leading-relaxed max-w-xl mx-auto font-fairytale">
                             <StaticImage
-                                src="../images/dpa/map.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/map.png"
                                 alt="Map"
                                 placeholder="blurred"
                                 className={FloatRight}
@@ -583,7 +583,7 @@ function DpaGenerator() {
                             </p>
 
                             <StaticImage
-                                src="../images/dpa/sword.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/sword.png"
                                 alt="Sword"
                                 placeholder="blurred"
                                 className={FloatLeft}
@@ -618,7 +618,7 @@ function DpaGenerator() {
                             </p>
 
                             <StaticImage
-                                src="../images/dpa/wizard.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/wizard.png"
                                 alt="Wizard"
                                 placeholder="blurred"
                                 className={FloatRight}
@@ -677,7 +677,7 @@ function DpaGenerator() {
                             </p>
 
                             <StaticImage
-                                src="../images/dpa/gnomes.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/gnomes.png"
                                 alt="Gnomes"
                                 placeholder="blurred"
                                 className={FloatLeft}
@@ -719,7 +719,7 @@ function DpaGenerator() {
                             </p>
 
                             <StaticImage
-                                src="../images/dpa/porridge.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/porridge.png"
                                 alt="Porridge"
                                 placeholder="blurred"
                                 className={FloatRight}
@@ -797,7 +797,7 @@ function DpaGenerator() {
 
                             <div className="@lg:float-right flex flex-col -mr-2 ml-2 md:ml-0 mb-2 mt:mt-0 w-48 md:w-64">
                                 <StaticImage
-                                    src="../images/dpa/t-swift.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/t-swift.png"
                                     alt="Taylor Swift hog"
                                     placeholder="blurred"
                                     className="mb-2"

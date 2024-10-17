@@ -9,7 +9,7 @@ export const VsPostHog = ({ children }) => {
         >
             <div className="shrink-0 basis-[145px] text-center">
                 <StaticImage
-                    src="../../../images/products/competitors-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-hog.png"
                     className="max-w-[145px]"
                     placeholder="none"
                 />

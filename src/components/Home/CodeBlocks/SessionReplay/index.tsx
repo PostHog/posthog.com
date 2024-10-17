@@ -37,7 +37,7 @@ function CaptureFormInputs() {
                 <div className="flex-1">
                     <h4 className="text-lg">Session replay</h4>
                     <StaticImage
-                        src="./session-replay.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/CodeBlocks/SessionReplay/session-replay.png"
                         alt="A screenshot of a session replay"
                         placeholder="blurred"
                     />
@@ -67,7 +67,7 @@ function ConsoleLogs() {
                 </div>
                 <div className="flex-1">
                     <h4 className="text-lg">Console logs in a session replay</h4>
-                    <StaticImage src="./console-logs.png" alt="Console logs in PostHog" placeholder="blurred" />
+                    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/CodeBlocks/SessionReplay/console-logs.png" alt="Console logs in PostHog" placeholder="blurred" />
                 </div>
             </div>
         </div>

@@ -12,22 +12,22 @@ const librariesData = {
             {
                 name: 'JavaScript',
                 url: '/docs/libraries/js',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/js.svg" alt="JavaScript" />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg" alt="JavaScript" />,
             },
             {
                 name: 'React',
                 url: '/docs/libraries/react',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/react.svg" alt="React" />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg" alt="React" />,
             },
             {
                 name: 'Next.js',
                 url: '/docs/libraries/next-js',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/frameworks/nextjs.svg" alt="Next.js" />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg" alt="Next.js" />,
             },
             {
                 name: 'Vue',
                 url: '/docs/libraries/vue-js',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/frameworks/vue.svg" alt="Vue" />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/vue.svg" alt="Vue" />,
             },
             {
                 name: 'More',
@@ -43,27 +43,27 @@ const librariesData = {
             {
                 name: 'Node.js',
                 url: '/docs/libraries/node',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/nodejs.svg" alt="Node.js" />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg" alt="Node.js" />,
             },
             {
                 name: 'Python',
                 url: '/docs/libraries/python',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/python.svg" alt="Python" />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg" alt="Python" />,
             },
             {
                 name: 'Java',
                 url: '/docs/libraries/java',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/java.svg" alt="Java" height={32} />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/java.svg" alt="Java" height={32} />,
             },
             {
                 name: 'PHP',
                 url: '/docs/libraries/php',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/php.svg" alt="PHP" />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/php.svg" alt="PHP" />,
             },
             {
                 name: 'Ruby',
                 url: '/docs/libraries/ruby',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/ruby.svg" alt="Ruby" />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg" alt="Ruby" />,
             },
             {
                 name: 'More',
@@ -79,14 +79,14 @@ const librariesData = {
             {
                 name: 'Android',
                 url: '/docs/libraries/android',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/android.svg" alt="Android" />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/android.svg" alt="Android" />,
             },
             {
                 name: 'iOS',
                 url: '/docs/libraries/ios',
                 icon: (
                     <StaticImage
-                        src="../../../contents/images/docs/integrate/ios.svg"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg"
                         className="dark:invert"
                         alt="iOS"
                     />
@@ -95,12 +95,12 @@ const librariesData = {
             {
                 name: 'React Native',
                 url: '/docs/libraries/react-native',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/react.svg" alt="React Native" />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg" alt="React Native" />,
             },
             {
                 name: 'Flutter',
                 url: '/docs/libraries/flutter',
-                icon: <StaticImage src="../../../contents/images/docs/integrate/flutter.svg" alt="Flutter" />,
+                icon: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg" alt="Flutter" />,
             },
         ],
     },
@@ -112,7 +112,7 @@ export default function Libraries() {
             <div className="sm:grid grid-cols-12">
                 <div className="col-span-5">
                     <div className="rotate-3">
-                        <StaticImage src="./images/hogflix-mobile.png" alt="Hogflix mobile" placeholder="blurred" />
+                        <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/hogflix-mobile.png" alt="Hogflix mobile" placeholder="blurred" />
                     </div>
                 </div>
 

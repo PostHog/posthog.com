@@ -775,7 +775,7 @@ export const ProductProductAnalytics = () => {
 
                 <div className="text-center">
                     <StaticImage
-                        src="./images/screenshot-product-analytics.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
                         alt="Screenshot of PostHog Product Analytics"
                         className="w-full max-w-[1360px]"
                         placeholder="none"
@@ -878,7 +878,7 @@ export const ProductProductAnalytics = () => {
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
-                                        src="../../../images/products/competitors-pa.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-pa.png"
                                         className="max-w-[171px]"
                                     />
                                 }

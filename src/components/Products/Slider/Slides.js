@@ -119,10 +119,10 @@ export const Funnels = () => {
             <h2 className="text-3xl md:text-4xl text-center">Find drop-off across a series of actions</h2>
             <div className="grid md:grid-cols-12 gap-4">
                 <div className="md:col-span-5">
-                    <StaticImage src="./images/funnel-basic.png" className="w-full shadow-xl" height={335} />
+                    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png" className="w-full shadow-xl" height={335} />
                 </div>
                 <div className="md:col-span-7">
-                    <StaticImage src="./images/funnel-grouped.png" className="w-full shadow-xl" height={335} />
+                    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-grouped.png" className="w-full shadow-xl" height={335} />
                 </div>
             </div>
 
@@ -249,7 +249,7 @@ export const UserPaths = () => {
             </div>
 
             <StaticImage
-                src="../../Product/ProductAnalytics/images/screenshot-paths.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-paths.png"
                 className="w-full shadow-xl"
             />
 
@@ -293,7 +293,7 @@ export const CorrelationAnalysis = () => {
 
             <div className="md:!-mb-20">
                 <StaticImage
-                    src="../../Product/ProductAnalytics/images/screenshot-correlation-analysis.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-correlation-analysis.png"
                     className="w-full"
                 />
             </div>
@@ -319,7 +319,7 @@ export const Retention = () => {
             </div>
 
             <StaticImage
-                src="../../Product/ProductAnalytics/images/screenshot-retention.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-retention.png"
                 className="w-full shadow-xl mb-4"
             />
 
@@ -344,7 +344,7 @@ export const Stickiness = () => {
             </div>
 
             <StaticImage
-                src="../../Product/ProductAnalytics/images/screenshot-stickiness.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-stickiness.png"
                 className="w-full shadow-xl mb-4"
             />
 
@@ -370,7 +370,7 @@ export const Lifecycle = () => {
             </div>
 
             <StaticImage
-                src="../../Product/ProductAnalytics/images/screenshot-lifecycle.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-lifecycle.png"
                 className="w-full shadow-xl mb-4"
             />
 
@@ -417,7 +417,7 @@ export const Dashboards = () => {
             </div>
 
             <StaticImage
-                src="../../Product/ProductAnalytics/images/screenshot-dashboards.png"
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-dashboards.png"
                 className="w-full shadow-xl mb-4"
             />
 
@@ -461,7 +461,7 @@ export const HogQL = () => {
 
             <div className="md:overflow-hidden relative md:after:absolute after:bg-gradient-to-b after:from-accent/0 after:to-accent/100 dark:after:from-accent-dark/0 dark:after:to-accent-dark/100 after:h-40 after:bottom-0 after:left-0 after:w-full after:content-[''] after:z-10">
                 <StaticImage
-                    src="../../Product/ProductAnalytics/images/screenshot-hogql.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-hogql.png"
                     className="w-full shadow-xl"
                 />
             </div>

@@ -31,7 +31,7 @@ export default function BillboardTruck({ leftHandDrive }) {
                         className={`md:hidden w-[809px] max-w-screen ${leftHandDrive ? 'transform -scale-x-100' : ''}`}
                     >
                         <StaticImage
-                            src="./images/billboard-truck-short.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard-truck-short.png"
                             alt=""
                             quality={100}
                             placeholder="tracedSVG"
@@ -42,7 +42,7 @@ export default function BillboardTruck({ leftHandDrive }) {
                             leftHandDrive ? 'transform -scale-x-100' : ''
                         }`}
                     >
-                        <StaticImage src="./images/billboard-truck.png" alt="" quality={100} placeholder="tracedSVG" />
+                        <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard-truck.png" alt="" quality={100} placeholder="tracedSVG" />
                     </div>
                     <div
                         className={`absolute top-[16.25%] w-[341px] md:w-[495px] h-[239px] ${
@@ -70,7 +70,7 @@ export default function BillboardTruck({ leftHandDrive }) {
                             </div>
                             <div className="absolute left-0 bottom-0">
                                 <StaticImage
-                                    src="./images/gajus.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/gajus.png"
                                     alt=""
                                     className="w-[62px] h-[72px] md:w-[164px] md:h-[190px]"
                                     quality={100}

@@ -123,7 +123,7 @@ export default function People() {
 
                     <div className="float-right">
                         <StaticImage
-                            src="../../images/explorer-hog.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/explorer-hog.png"
                             alt="Hiking hog"
                             width="250"
                             height="250"

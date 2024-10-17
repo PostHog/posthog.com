@@ -57,19 +57,19 @@ const features = [
     {
         title: 'Event timeline',
         description: "History of everything that happened in a user's session",
-        image: <StaticImage src="./images/timeline.png" width={420} />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/timeline.png" width={420} />,
         border: true,
     },
     {
         title: 'Console logs',
         description: "Debug issues faster by browsing the user's console",
-        image: <StaticImage src="./images/console.png" width={420} />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/console.png" width={420} />,
         border: true,
     },
     {
         title: 'Network monitor',
         description: 'Analyze performance and network calls',
-        image: <StaticImage src="./images/network.png" width={420} />,
+        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png" width={420} />,
         border: true,
     },
 ]
@@ -370,7 +370,7 @@ export const ProductSessionReplay = () => {
 
                 <div className="text-center">
                     <StaticImage
-                        src="../../../images/products/screenshot-session-replay.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-session-replay.png"
                         alt="Screenshot of Session Replay in PostHog"
                         className="w-full max-w-[1360.5px]"
                         placeholder="none"
@@ -473,7 +473,7 @@ export const ProductSessionReplay = () => {
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <StaticImage
-                                        src="../../../images/products/competitors-sr.png"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-sr.png"
                                         className="max-w-[167px]"
                                     />
                                 }

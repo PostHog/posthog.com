@@ -20,13 +20,13 @@ export default function NotFoundPage(): JSX.Element {
             <div className="bg-black -mt-1">
                 <div className="max-w-6xl px-4 lg:px-8 xl:px-0 mx-auto py-24 text-white relative overflow-hidden">
                     <StaticImage
-                        src="../../images/galaxy-1.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/galaxy-1.png"
                         alt="The stars in the sky"
                         placeholder="blurred"
                         className="!absolute top-0 -left-24 max-h-full"
                     />
                     <StaticImage
-                        src="../../images/galaxy-2.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/galaxy-2.png"
                         alt="More stars in the sky"
                         placeholder="blurred"
                         className="!absolute top-0 -right-8 max-h-full"

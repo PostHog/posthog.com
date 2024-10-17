@@ -269,7 +269,7 @@ export default function Apply({ id, info }) {
                         </div>
 
                         <div className="px-6 md:px-12 mb-8">
-                            <StaticImage src="./images/sticker.png" width={140} className="float-right ml-4" />
+                            <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Job/images/sticker.png" width={140} className="float-right ml-4" />
 
                             <h3 className="m-0 text-base">Here's a laptop sticker, on us!</h3>
                             <p className="m-0 mb-3 text-sm">

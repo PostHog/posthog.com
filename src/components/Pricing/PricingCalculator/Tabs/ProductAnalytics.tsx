@@ -114,7 +114,7 @@ const Modal = ({ onClose, isVisible }) => {
                             <h3 className="mb-4 md:hidden">Anonymous events</h3>
                             <div className="max-w-md">
                                 <StaticImage
-                                    src="./event-anonymous.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-anonymous.png"
                                     alt="Anonymous event example"
                                     className=""
                                     placeholder="blurred"
@@ -177,7 +177,7 @@ const Modal = ({ onClose, isVisible }) => {
                             <h3 className="mb-4 md:hidden">Identified events</h3>
                             <div className="max-w-md">
                                 <StaticImage
-                                    src="./event-identified.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-identified.png"
                                     alt="Identified event example"
                                     placeholder="blurred"
                                 />

@@ -45,7 +45,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
         >
             <div className="text-center hidden md:block">
                 <StaticImage
-                    src="../../images/swole-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/swole-hog.png"
                     objectFit="contain"
                     className="w-full h-full max-w-[200px] md:max-w-[250px] mx-auto flex-shrink-0"
                 />
@@ -55,7 +55,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                     <>
                         <div className="float-right md:hidden -mt-6 2xs:-mt-12">
                             <StaticImage
-                                src="../../images/swole-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/swole-hog.png"
                                 objectFit="contain"
                                 className="w-full h-full max-w-[170px]"
                             />
