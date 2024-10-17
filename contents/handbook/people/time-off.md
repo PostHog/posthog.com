@@ -76,13 +76,15 @@ If your are summonsed for jury duty, please let Fraser know right away - we can 
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of whether you've become a parent through childbirth or adoption. 
 
-If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 12 weeks off on full pay. You can take a further 4 weeks unpaid leave if you need more time. We only pay this in one continuous block, i.e. you can't be paid for 8 weeks and then take the remaining 4 weeks later on full pay (this is because it is more disruptive to your team - we prefer you just take one longer chunk here!) If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements. 
+If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 4 weeks paternity leave on full pay.
+
+We only pay this in one continuous block. If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements. 
 
 Parental leave isn't supposed to be combined with our unlimited PTO policy here - we aren't prescriptive and will trust your judgement, but please note that we usually won't allow you do a combination of parental leave plus a long holiday in addition to that to extend your time off. 
 
 Please communicate parental leave to Fraser as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing. 
 
-> We are aware that there are local laws around time off for new parents in every country, and that these may vary. Wherever there is a discrepancy between local regulations and PostHog policy, local laws will override PostHog.
+> Wherever there is a discrepancy between local regulations and PostHog policy, we will merge the local minimum rules with the above where relevant.
 
 ## Birthday and anniversaries
 
