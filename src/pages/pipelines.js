@@ -1,3 +1,3 @@
-import PipelinesPage from 'components/Pipelines'
+import PipelinesPage from 'components/Product/Pipelines'
 
 export default PipelinesPage
