@@ -214,7 +214,7 @@ const them = [
         cta: (
             <div className="flex flex-col md:flex-row gap-3 my-4">
                 <CallToAction href="https://app.posthog.com/signup">Ew, take me to PostHog, please!</CallToAction>
-                <CallToAction href="/demo" type="outline">
+                <CallToAction href="/talk-to-a-human" type="outline">
                     Get a demo (but not like this one!)
                 </CallToAction>
             </div>
