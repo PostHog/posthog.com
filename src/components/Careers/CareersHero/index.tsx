@@ -338,7 +338,7 @@ export const CareersHero = () => {
                             <div className="inline-flex mx-auto gap-2">
                                 {pineapplePercentage > 50 ? (
                                     <>
-                                        <StickerPineapple className="size-12" />
+                                        <StickerPineappleYes className="size-12" />
                                     </>
                                 ) : pineapplePercentage === 50 ? (
                                     <>
