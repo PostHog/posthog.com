@@ -53,15 +53,15 @@ Next, we set up Posthog using our API key and host (You can find these in [your 
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-
-if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    person_profiles: 'identified_only',
-  })
-}
+import { useEffect } from 'react'
 
 export function PHProvider({ children }) {
+  useEffect(() => {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      person_profiles: 'identified_only'
+    })
+  }, []);
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
