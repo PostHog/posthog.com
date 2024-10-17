@@ -59,56 +59,31 @@ const features = [
     {
         title: 'Top paths',
         description: 'See the most visited pages on your site',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/static/images/products/web-analytics/top-paths.jpg"
-                width={420}
-            />
-        ),
+        image: <img src="/images/products/web-analytics/top-paths.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Top referrers',
         description: 'Discover where traffic is coming from',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/static/images/products/web-analytics/top-referrers.jpg"
-                width={420}
-            />
-        ),
+        image: <img src="/images/products/web-analytics/top-referrers.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Device types',
         description: 'Break down traffic by device',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/static/images/products/web-analytics/device-types.jpg"
-                width={420}
-            />
-        ),
+        image: <img src="/images/products/web-analytics/device-types.jpg" width={420} />,
         border: true,
     },
     {
         title: 'World map',
         description: 'Visualize users across planet earth',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/static/images/products/web-analytics/world-map.jpg"
-                width={420}
-            />
-        ),
+        image: <img src="/images/products/web-analytics/world-map.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Retention cohorts',
         description: 'Analyze retention by week',
-        image: (
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/static/images/products/web-analytics/retention-cohorts.jpg"
-                width={420}
-            />
-        ),
+        image: <img src="/images/products/web-analytics/retention-cohorts.jpg" width={420} />,
         border: true,
     },
 ]
@@ -367,8 +342,8 @@ export const ProductWebAnalytics = () => {
                 />
 
                 <div className="text-center -mb-24">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/static/images/products/web-analytics/screenshot-web-analytics.png"
+                    <img
+                        src="/images/products/web-analytics/screenshot-web-analytics.png"
                         alt="Screenshot of web analytics in PostHog"
                         className="w-full max-w-[1440px]"
                         placeholder="none"
