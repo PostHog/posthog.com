@@ -14,7 +14,7 @@ In addition, customers requiring our Enterprise plan need to sign up for a minim
 
 If you are discussing any annual plan that deviates from our standard terms, such as a plan with monthly payments or other custom terms, please consult with Simon and Mine beforehand. This is to ensure we have the capacity and resources to support the proposed terms.
 
-Payments for annual plans are via Bank Transfer only (no cheques).
+Payments for annual plans are via Bank Transfer only (no checks).
 
 ### What about monthly customers?
 
