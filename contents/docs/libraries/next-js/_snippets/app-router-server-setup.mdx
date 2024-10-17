@@ -1,0 +1,48 @@
+For the app router, we can initialize the `posthog-node` SDK once with a `PostHogClient` function, and import it into files.
+
+This enables us to send events and fetch data from PostHog on the server – without making client-side requests.
+
+```js
+// app/posthog.js
+import { PostHog } from 'posthog-node'
+
+export default function PostHogClient() {
+  const posthogClient = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    flushAt: 1,
+    flushInterval: 0
+  })
+  return posthogClient
+}
+```
+
+> **Note:** Because server-side functions in Next.js can be short-lived, we set `flushAt` to `1` and `flushInterval` to `0`. 
+> - `flushAt` sets how many capture calls we should flush the queue (in one batch). 
+> - `flushInterval` sets how many milliseconds we should wait before flushing the queue. 
+> Setting them to the lowest number ensures events are sent immediately and not batched. We also need to call `await posthog.shutdown()` once done.
+
+To use this client, we import it into our pages and call it with the `PostHogClient` function:
+
+```js
+import Link from 'next/link'
+import PostHogClient from '../posthog'
+
+export default async function About() {
+
+  const posthog = PostHogClient()
+  const flags = await posthog.getAllFlags(
+    'user_distinct_id' // replace with a user's distinct ID
+  );
+  await posthog.shutdown()
+
+  return (
+    <main>
+      <h1>About</h1>
+      <Link href="/">Go home</Link>
+      { flags['main-cta'] &&
+        <Link href="http://posthog.com/">Go to PostHog</Link>
+      }
+    </main>
+  )
+}
+```
