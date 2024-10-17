@@ -51,6 +51,7 @@ export default function ContactSales({ location }) {
                             loading="eager"
                             placeholder="none"
                             width={750}
+                            height={309}
                             alt="Sales hedgehogs"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/ContactSales/images/sales-hogs.png"
                         />

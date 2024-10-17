@@ -778,7 +778,7 @@ export const ProductProductAnalytics = () => {
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
                         alt="Screenshot of PostHog Product Analytics"
-                        className="w-full max-w-[1360px]"
+                        className="w-full max-w-[1360px]]"
                         placeholder="none"
                     />
                 </div>

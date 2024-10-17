@@ -181,7 +181,7 @@ const them = [
                             quality={90}
                             placeholder="blurred"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/gantt-chart-light.png"
-                            width={554.5}
+                            width={555}
                         />
                     </div>
                     <div className="hidden dark:block">
@@ -189,7 +189,7 @@ const them = [
                             quality={90}
                             placeholder="blurred"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/gantt-chart-dark.png"
-                            width={554.5}
+                            width={555}
                         />
                     </div>
                 </div>
@@ -396,28 +396,25 @@ const AccordionItem = ({
 
     return (
         <li
-            className={`border-t relative ${
-                isOpen
+            className={`border-t relative ${isOpen
                     ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
                     : 'inactive border-light dark:border-dark first:border-transparent'
-            }`}
+                }`}
         >
             <button
                 onClick={onClick}
-                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${
-                    isOpen
+                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
                         ? 'pt-4 pb-2 z-20'
                         : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
-                }`}
+                    }`}
             >
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 [flex:0_0_2rem] justify-center items-center p-1 font-semibold rounded-full bg-accent dark:bg-accent/10">
                         {number}
                     </span>
                     <span
-                        className={`transition-all leading-tight ${
-                            isOpen ? 'font-bold text-lg md:text-2xl' : 'font-semibold text-[17px]'
-                        }`}
+                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg md:text-2xl' : 'font-semibold text-[17px]'
+                            }`}
                     >
                         {title}
                     </span>

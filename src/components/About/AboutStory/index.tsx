@@ -58,7 +58,7 @@ export const AboutStory = () => {
                     <CloudinaryImage
                         breakpoints={[750, 1080, 1366, 1920]}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/About/AboutStory/images/james.png"
-                        width={385.5}
+                        width={386}
                         height={366}
                         quality={100}
                         alt="James Hawkins, CEO, Co-founder"

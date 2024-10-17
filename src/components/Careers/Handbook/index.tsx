@@ -22,6 +22,7 @@ const CompanyHandbook: React.FC = () => {
             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
             alt="This hog has an answer"
             height={250}
+            width={330}
             placeholder="blurred"
           />
         </div>

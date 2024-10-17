@@ -73,7 +73,7 @@ const quickLinks = [
         name: 'PostHog for AI',
         to: '/docs/ai-engineering',
         description: 'Track metrics for AI & LLM products',
-        color: 'black',
+        color: '[#681291]',
     },
 ]
 
