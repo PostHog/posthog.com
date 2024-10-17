@@ -219,6 +219,10 @@ export const handbookSidebar = [
                         name: 'Exec hiring',
                         url: '/handbook/people/hiring-process/exec-hiring',
                     },
+                    {
+                        name: 'Sales and CS hiring',
+                        url: '/handbook/people/hiring-process/sales-cs-hiring',
+                    },
                 ],
             },
         ],
