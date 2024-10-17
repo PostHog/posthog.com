@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -774,10 +775,10 @@ export const ProductProductAnalytics = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
-                        src="./images/screenshot-product-analytics.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
                         alt="Screenshot of PostHog Product Analytics"
-                        className="w-full max-w-[1360px]"
+                        className="w-full max-w-[1360px]]"
                         placeholder="none"
                     />
                 </div>
@@ -847,7 +848,7 @@ export const ProductProductAnalytics = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/product-analytics-hog.png" alt="" />
+                        <CloudinaryImage placeholder="none" quality={100} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png" alt="" />
                     </div>
                 </div>
 
@@ -877,8 +878,8 @@ export const ProductProductAnalytics = () => {
                             <VsCompetitor
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-pa.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-pa.png"
                                         className="max-w-[171px]"
                                     />
                                 }

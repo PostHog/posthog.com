@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -122,8 +123,8 @@ export default function People() {
                     <h2 className="text-4xl">People</h2>
 
                     <div className="float-right">
-                        <StaticImage
-                            src="../../images/explorer-hog.png"
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/explorer-hog.png"
                             alt="Hiking hog"
                             width="250"
                             height="250"
