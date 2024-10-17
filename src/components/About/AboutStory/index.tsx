@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import GitHubButton from 'react-github-btn'
@@ -43,7 +44,7 @@ export const AboutStory = () => {
                     <YCBadge className="w-[95px] h-[63px] md:mr-12 lg:top-0" />
                 </div>
                 <div className="flex justify-end relative">
-                    <StaticImage
+                    <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/About/AboutStory/images/hn-screenshot.png"
                         width={620}
                         height={397.5}

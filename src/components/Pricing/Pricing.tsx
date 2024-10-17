@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
@@ -725,7 +726,7 @@ const plans = [
                                     placement="top"
                                 >
                                     <div className="relative size-20 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1688575173/simon_bb4af1b047.png"
                                             quality={100}
                                             alt="Simon Fisher, Customer Success"
@@ -751,7 +752,7 @@ const plans = [
                                     placement="top"
                                 >
                                     <div className="relative size-[5.5rem] -ml-7 -mr-8 -mt-2 top-0 hover:top-[-.3rem] hover:scale-[1.1] transition-all">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1685570037/cameron_bc0de38765.png"
                                             quality={100}
                                             alt="Cameron DeLeone, Customer Success"
@@ -777,7 +778,7 @@ const plans = [
                                     placement="top"
                                 >
                                     <div className="relative size-20 top-0 hover:top-[-.2rem] hover:scale-[1.075] transition-all">
-                                        <StaticImage
+                                        <CloudinaryImage
                                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1704468198/Mine_dc7d915835.png"
                                             quality={100}
                                             alt="Mine Kansu, Customer Success Manager"
@@ -1159,7 +1160,7 @@ const PricingExperiment = ({
                         href="/community/profiles/27732"
                         className="rounded-full overflow-hidden size-12 border border-border hover:border-bg-dark/30 dark:border-dark dark:hover:border-light/50 p-0.5 bg-light dark:bg-dark"
                     >
-                        <StaticImage
+                        <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
                             quality={100}
                             alt="James Hawkins, CEO, Co-founder"

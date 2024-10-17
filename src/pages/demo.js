@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction/index.tsx'
 import { SEO } from 'components/seo'
 import React from 'react'
@@ -18,7 +19,7 @@ export default function BookADemo() {
                 </header>
                 <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
                     <span className="bg-blue rounded-full leading-none flex h-12 w-12 overflow-hidden shrink-0 basis-12">
-                        <StaticImage
+                        <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/mine.png"
                             width={60}
                             height={60}

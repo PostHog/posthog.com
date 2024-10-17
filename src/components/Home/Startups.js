@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import { Quote } from 'components/Pricing/Quote'
@@ -20,7 +21,7 @@ export default function Startups() {
         <section className="overflow-x-hidden pt-12 md:pt-20">
             <div className="max-w-5xl p-8 border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded mb-12 lg:mb-20 xl:mb-24 mx-4 xl:mx-auto">
                 <div className="-mt-28 -mx-12 mb-6 lg:float-right lg:ml-4 lg:-mt-40 lg:-mr-20 xl:-mr-32 lg:mb-0 lg:w-auto relative text-center">
-                    <StaticImage
+                    <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard.png"
                         alt="A billboard with Dalton Caldwell extolling how great PostHog is"
                         className="max-w-[654px]"

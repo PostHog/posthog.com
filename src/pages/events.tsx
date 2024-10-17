@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useEffect, useState } from 'react'
 import { pricingMenu } from '../navs'
 import Layout from 'components/Layout'
@@ -20,7 +21,7 @@ const Events = (): JSX.Element => {
                 <div className="col-span-1 md:col-span-2 md:flex justify-center">
                     <h3 className="mb-4 md:hidden">Anonymous events</h3>
                     <div className="max-w-md">
-                        <StaticImage
+                        <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-anonymous.png"
                             alt="Anonymous event example"
                             className=""
@@ -82,7 +83,7 @@ const Events = (): JSX.Element => {
                 <div className="col-span-1 md:col-span-2 md:flex justify-center">
                     <h3 className="mb-4 md:hidden">Identified events</h3>
                     <div className="max-w-md">
-                        <StaticImage
+                        <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/PricingCalculator/Tabs/event-identified.png"
                             alt="Identified event example"
                             placeholder="blurred"

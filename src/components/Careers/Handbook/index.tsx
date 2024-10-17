@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
@@ -17,7 +18,7 @@ const CompanyHandbook: React.FC = () => {
         </ul>
         <CallToAction href="/handbook" type="secondary" size="sm">Visit the handbook</CallToAction>
         <div className="absolute bottom-12 md:bottom-0 -right-8 md:right-0 h-[150px] lg:h-[250px] scale-75 md:scale-100">
-          <StaticImage
+          <CloudinaryImage
             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
             alt="This hog has an answer"
             height={250}

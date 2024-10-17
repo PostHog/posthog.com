@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -30,7 +31,7 @@ export default function BillboardTruck({ leftHandDrive }) {
                     <div
                         className={`md:hidden w-[809px] max-w-screen ${leftHandDrive ? 'transform -scale-x-100' : ''}`}
                     >
-                        <StaticImage
+                        <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard-truck-short.png"
                             alt=""
                             quality={100}
@@ -42,7 +43,7 @@ export default function BillboardTruck({ leftHandDrive }) {
                             leftHandDrive ? 'transform -scale-x-100' : ''
                         }`}
                     >
-                        <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard-truck.png" alt="" quality={100} placeholder="tracedSVG" />
+                        <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/billboard-truck.png" alt="" quality={100} placeholder="tracedSVG" />
                     </div>
                     <div
                         className={`absolute top-[16.25%] w-[341px] md:w-[495px] h-[239px] ${
@@ -69,7 +70,7 @@ export default function BillboardTruck({ leftHandDrive }) {
                                 </div>
                             </div>
                             <div className="absolute left-0 bottom-0">
-                                <StaticImage
+                                <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/gajus.png"
                                     alt=""
                                     className="w-[62px] h-[72px] md:w-[164px] md:h-[190px]"

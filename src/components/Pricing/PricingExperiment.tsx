@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useState, useEffect, useRef } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
@@ -550,7 +551,12 @@ const PricingExperiment = (): JSX.Element => {
             </section>
             <section className={`${section} mb-12 mt-16`}>
                 <div className="sm:flex-row flex-col-reverse flex items-center sm:items-start justify-center">
-                    <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/images/vacation-hog.png" alt="Vacation Hog" width={252} placeholder="none" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/images/vacation-hog.png"
+                        alt="Vacation Hog"
+                        width={252}
+                        placeholder="none"
+                    />
                     <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0">
                         <p className="text-white m-0 text-[18px] font-bold font-comic">
                             Looking for the signup button?

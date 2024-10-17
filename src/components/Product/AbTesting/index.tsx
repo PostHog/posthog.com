@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -49,19 +50,34 @@ const features = [
     {
         title: 'Customizable goals',
         description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance',
-        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png" width={428} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png"
+                width={428}
+            />
+        ),
         border: true,
     },
     {
         title: 'Targeting & exclusion rules',
         description: 'Set criteria for user location, person property, cohort, or group',
-        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/targeting-ab.png" width={428} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/targeting-ab.png"
+                width={428}
+            />
+        ),
         border: true,
     },
     {
         title: 'Recommendations',
         description: 'Automatic suggestions for duration, sample size, and confidence threshold in a winning variant',
-        image: <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/recommendations.png" width={428} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/recommendations.png"
+                width={428}
+            />
+        ),
         border: true,
     },
 ]
@@ -300,7 +316,7 @@ export const ProductAbTesting = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
+                    <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/screenshot-ab-testing.png"
                         alt="Screenshot of managing an A/B test in PostHog"
                         className="w-full max-w-[1361px]"
@@ -408,7 +424,7 @@ export const ProductAbTesting = () => {
                             <VsCompetitor
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
+                                    <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ab.png"
                                         className="max-w-[189px]"
                                     />

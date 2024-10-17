@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
 import React, { useEffect, useState } from 'react'
 import { heading, section } from './classes'
@@ -78,10 +79,14 @@ export default function CTA() {
                 <div className="md:grid grid-cols-2 gap-16 md:pt-24 pb-16 max-w-5xl mx-auto">
                     <div className="relative text-right">
                         <div className="mb-2">
-                            <StaticImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/cloud-cd.jpg" alt="PostHog Cloud" className="max-w-[443px]" />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/cloud-cd.jpg"
+                                alt="PostHog Cloud"
+                                className="max-w-[443px]"
+                            />
                         </div>
                         <div className="absolute -left-4 bottom-12 md:left-[-8px] md:bottom-24">
-                            <StaticImage
+                            <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/g2-badge.png"
                                 alt="People on G2 think we're great"
                                 className="w-[90px]"

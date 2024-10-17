@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
@@ -15,7 +16,7 @@ export const Handbook: React.FC = () => {
                 <section className="max-w-4xl mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="-mt-16 md:-mt-12">
-                            <StaticImage
+                            <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/search-hog-4.png"
                                 alt="This hog has an answer"
                                 width={400}

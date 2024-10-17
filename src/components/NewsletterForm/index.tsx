@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useEffect, useState } from 'react'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
@@ -44,7 +45,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                 flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 border-light dark:border-dark ${placementClasses} ${className}`}
         >
             <div className="text-center hidden md:block">
-                <StaticImage
+                <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/swole-hog.png"
                     objectFit="contain"
                     className="w-full h-full max-w-[200px] md:max-w-[250px] mx-auto flex-shrink-0"
@@ -54,7 +55,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                 {!submitted ? (
                     <>
                         <div className="float-right md:hidden -mt-6 2xs:-mt-12">
-                            <StaticImage
+                            <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/swole-hog.png"
                                 objectFit="contain"
                                 className="w-full h-full max-w-[170px]"

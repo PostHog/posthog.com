@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -774,7 +775,7 @@ export const ProductProductAnalytics = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
+                    <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
                         alt="Screenshot of PostHog Product Analytics"
                         className="w-full max-w-[1360px]"
@@ -877,7 +878,7 @@ export const ProductProductAnalytics = () => {
                             <VsCompetitor
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
+                                    <CloudinaryImage
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-pa.png"
                                         className="max-w-[171px]"
                                     />

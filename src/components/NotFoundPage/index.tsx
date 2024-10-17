@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useEffect, useState } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { CallToAction } from '../CallToAction'
@@ -19,13 +20,13 @@ export default function NotFoundPage(): JSX.Element {
         <Layout className="not-found-page-container">
             <div className="bg-black -mt-1">
                 <div className="max-w-6xl px-4 lg:px-8 xl:px-0 mx-auto py-24 text-white relative overflow-hidden">
-                    <StaticImage
+                    <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/galaxy-1.png"
                         alt="The stars in the sky"
                         placeholder="blurred"
                         className="!absolute top-0 -left-24 max-h-full"
                     />
-                    <StaticImage
+                    <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/galaxy-2.png"
                         alt="More stars in the sky"
                         placeholder="blurred"

@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Logo from 'components/Logo'
@@ -8,7 +9,7 @@ export const VsPostHog = ({ children }) => {
             className={`rounded-md p-4 border-2 border-blue dark:border-blue bg-white/50 dark:bg-accent-dark flex flex-col md:flex-row gap-4`}
         >
             <div className="shrink-0 basis-[145px] text-center">
-                <StaticImage
+                <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-hog.png"
                     className="max-w-[145px]"
                     placeholder="none"

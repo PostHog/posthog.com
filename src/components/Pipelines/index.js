@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useMemo } from 'react'
 import Layout from '../Layout'
@@ -236,7 +237,7 @@ function PipelinesPage({ location }) {
                 />
 
                 <div className="text-center -mb-12 md:-mb-28">
-                    <StaticImage
+                    <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png"
                         alt="Screenshot of PostHog's CDP"
                         className="w-full max-w-[1280px]"

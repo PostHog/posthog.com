@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -101,7 +102,7 @@ export const DocsIndex = () => {
                     </div>
                     <aside>
                         <figure className="m-0">
-                            <StaticImage
+                            <CloudinaryImage
                                 objectFit="contain"
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/adventure-hog.png"
                                 alt="This hog knows where he's headed"
