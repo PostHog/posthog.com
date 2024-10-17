@@ -105,11 +105,19 @@ export const CareersHero = () => {
 
     const jobs = useMemo(() => {
         const sortedJobs = [...originalJobs];
+
+        const productEngineerIndex = sortedJobs.findIndex(job => job.fields.title === "Product Engineer");
+        if (productEngineerIndex !== -1) {
+            const [productEngineerJob] = sortedJobs.splice(productEngineerIndex, 1);
+            sortedJobs.unshift(productEngineerJob);
+        }
+
         const speculativeIndex = sortedJobs.findIndex(job => job.fields.title === "Speculative application");
         if (speculativeIndex !== -1) {
             const [speculativeJob] = sortedJobs.splice(speculativeIndex, 1);
             sortedJobs.push(speculativeJob);
         }
+
         return sortedJobs;
     }, [originalJobs]);
 
@@ -278,7 +286,7 @@ export const CareersHero = () => {
                                     ) : (
                                         <div
                                             dangerouslySetInnerHTML={{ __html: processedHtml }}
-                                            className="[&_summary]:hidden [&_p]:text-[15px] relative max-h-56 overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
+                                            className="[&_summary]:hidden [&_p]:text-[15px] [&_p]:mb-2 [&_ul_p]:pb-0 [&_ul_p]:mb-0 relative max-h-56 overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
                                         />
                                     )}
                                     {selectedJob.fields.title == 'Speculative application' && (
