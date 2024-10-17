@@ -181,9 +181,11 @@ Don't be the AE who gets to this point and suddenly realizes you have no idea wh
 By this point, you may have started running into some objections. These are the most common, and how to handle:
 
 - Gap in the product - introduce the customer to the relevant product engineer to build together (but first agree with product team if it’s a reasonable ask). We have found this approach works exceptionally well for our newer products.
-- Pricing issue - understand their budget, just make sure that the deal overall isn't margin negative. You can also help them tune their usage to lower costs. We don't buy customers out of existing contracts, and we don't do deals where year 1 is super cheap then we ratchet up the price in year 2.
+- Pricing issue - understand their budget; our [discounts](/handbook/growth/sales/contracts#discounts) section had the different levers you can pull to get a customer to the right price point. You can also help them tune their usage to lower costs. We don't buy customers out of existing contracts, and we don't do deals where year 1 is super cheap then we ratchet up the price in year 2.
 - Performance (e.g. slow dashboards) - for Extra Large, usually get Tim involved, or he can loop in the right engineer to help.
 - Confidence in PostHog - often [this Handbook page](/handbook/finance) is enough. For Very Large companies who need to be sold a bit more on the company vision, you can get James H involved.
+
+> Ahead of the contract being signed, you'll also need to understand the customer's invoicing process.  Companies will typically have a Finance or AP team who should be the billing contact in Stripe.  Make sure you are also aware of any special invoicing requirements (e.g. a Purchase Order number) well ahead of the invoice being generated.  In addition, we only accept annual plan payments via Bank Transfer (no checks).
 
 ### 7. Closed - won
 
