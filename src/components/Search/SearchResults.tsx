@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useEffect, useState } from 'react'
 import { useSearchBox, useRefinementList, useHits, useInstantSearch } from 'react-instantsearch-hooks-web'
 import { Hit } from 'instantsearch.js'
@@ -398,7 +399,7 @@ const Hits: React.FC<HitsProps> = ({ activeOption, close }) => {
                             </div>
 
                             <div className="text-center mb-4">
-                                <StaticImage
+                                <CloudinaryImage
                                     placeholder="none"
                                     loading="eager"
                                     quality={100}

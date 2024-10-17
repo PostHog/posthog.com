@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Lottie from 'react-lottie'
@@ -49,7 +50,7 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hog1Data}
                             placeholder={
-                                <StaticImage src="../../../images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
                             }
                         />
                     </div>
@@ -57,7 +58,7 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hog2Data}
                             placeholder={
-                                <StaticImage src="../../../images/about-hog-2.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-2.svg" alt="Hog" placeholder="blurred" />
                             }
                         />
                     </div>
@@ -67,7 +68,7 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hog3Data}
                             placeholder={
-                                <StaticImage src="../../../images/about-hog-3.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-3.svg" alt="Hog" placeholder="blurred" />
                             }
                         />
                     </div>
@@ -75,7 +76,7 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hog4Data}
                             placeholder={
-                                <StaticImage src="../../../images/about-hog-4.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-4.svg" alt="Hog" placeholder="blurred" />
                             }
                         />
                     </div>

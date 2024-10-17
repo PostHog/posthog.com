@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { LazyHog } from 'components/About/AboutHero'
 import { CallToAction } from 'components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -24,7 +25,7 @@ export default function CommunityCTA() {
                         }}
                     />
                 ) : (
-                    <StaticImage width={300} src="../../images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
+                    <CloudinaryImage width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
                 )}
             </div>
             <div className="max-w-[400px]">

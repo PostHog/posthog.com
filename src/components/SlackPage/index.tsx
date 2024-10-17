@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useEffect, useState } from 'react'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'
@@ -11,8 +12,8 @@ export default function SlackPage(): JSX.Element {
         <Layout>
             <div className="max-w-6xl px-4 lg:px-8 xl:px-0 mx-auto md:py-12">
                 <figure className="md:float-right">
-                    <StaticImage
-                        src="../../images/max.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/max.png"
                         alt="The stars in the sky"
                         placeholder="blurred"
                         className="max-w-[250px] md:max-w-xs"
