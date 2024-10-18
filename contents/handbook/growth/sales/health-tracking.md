@@ -10,7 +10,7 @@ We use Vitally as a Customer Success platform.  You can log in via Google SSO to
 
 ## Health Scoring
 
-Health Scores are a great way to assess whether your customer is at risk of churn or in a good state and are a common pattern in Customer Success tracking.  We compute an overall [health score](https://posthog.vitally-eu.io/settings/health/accounts) out of 10 based on the following factors and weighting.  You can read more about how Vitally health scores work in their docs [here](https://docs.vitally.io/account-health-scores-and-metrics/health-scores).  We have different weightings for scoring depending on whether a customer is New (organiation created in the last 90 days) or not:
+Health Scores are a great way to assess whether your customer is at risk of churn or in a good state and are a common pattern in Customer Success tracking.  We compute an overall [health score](https://posthog.vitally-eu.io/settings/health/accounts) out of 10 based on the following factors and weighting.  You can read more about how Vitally health scores work in their docs [here](https://docs.vitally.io/account-health-scores-and-metrics/health-scores).  We have different weightings for scoring depending on whether a customer is New (organization created in the last 90 days) or not:
 
 | Score Name                | Measuring                                      | New Customer | Established Customer |
 |---------------------------|------------------------------------------------|--------------|----------------------|
