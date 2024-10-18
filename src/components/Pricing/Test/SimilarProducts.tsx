@@ -47,7 +47,7 @@ const comparison = [
                 className="h-full rotate-3"
                 height={40}
                 placeholder="blurred"
-                alt="Mixpanel"
+                alt="Heap"
             />
         ),
         products: {
@@ -63,7 +63,7 @@ const comparison = [
     {
         name: 'Pendo',
         logo: (
-            <CloudinaryImage src={`./images/icon-pnd0.png`} className="" height={32} placeholder="blurred" alt="Mixpanel" />
+            <CloudinaryImage src={`./images/icon-pnd0.png`} className="" height={32} placeholder="blurred" alt="Pendo" />
         ),
         products: {
             'Product analytics': true,
@@ -78,7 +78,7 @@ const comparison = [
     {
         name: 'FullStory',
         logo: (
-            <CloudinaryImage src={`./images/icon-fs.png`} className="" height={32} placeholder="blurred" alt="Mixpanel" />
+            <CloudinaryImage src={`./images/icon-fs.png`} className="" height={32} placeholder="blurred" alt="FullStory" />
         ),
         products: {
             'Product analytics': true,
