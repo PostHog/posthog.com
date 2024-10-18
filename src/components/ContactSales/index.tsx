@@ -145,6 +145,9 @@ export default function ContactSales({ location }) {
                         <h3 className="mb-3">Contact us</h3>
                         <SalesforceForm
                             type="lead"
+                            buttonOptions={{
+                                size: 'lg',
+                            }}
                             form={{
                                 fields: [
                                     {
@@ -208,6 +211,7 @@ export default function ContactSales({ location }) {
                                         name: 'talk_about',
                                         type: 'string',
                                         required: true,
+                                        fieldType: 'textarea',
                                     },
                                 ],
                                 buttonText: 'Submit',
