@@ -51,6 +51,7 @@ import {
 } from '@posthog/icons'
 import { Link as SmoothScrollLink } from 'react-scroll'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
+import ReactFlow, { Handle, Position } from 'react-flow-renderer'
 
 const team = 'CDP'
 const teamSlug = '/teams/cdp'
@@ -191,6 +192,104 @@ const Categories = ({ type, categories, onClick, selectedCategory, selectedType 
                 })}
             </ul>
         </li>
+    )
+}
+
+const CustomNode = ({ data }) => (
+    <div className="custom-node">
+        <Handle type="target" position={Position.Left} />
+        <div className="node-content">
+            <div className="node-header">
+                {data.icon && <img src={data.icon} alt={data.label} className="node-icon" />}
+                <strong>{data.label}</strong>
+            </div>
+            <p>{data.description}</p>
+        </div>
+        <Handle type="source" position={Position.Right} />
+    </div>
+)
+
+const initialNodes = [
+    {
+        id: 'posthog',
+        type: 'input',
+        data: { label: 'PostHog', icon: '/path/to/posthog-icon.png' },
+        position: { x: 0, y: 150 },
+    },
+    {
+        id: 'crm',
+        type: 'custom',
+        position: { x: 300, y: 0 },
+        data: {
+            label: 'CRM',
+            icon: '/path/to/crm-icon.png',
+            description:
+                'Sync PostHog with Hubspot or Salesforce to create a single view of each customer and auto-assign leads.',
+        },
+    },
+    {
+        id: 'support',
+        type: 'custom',
+        position: { x: 300, y: 100 },
+        data: {
+            label: 'Support',
+            icon: '/path/to/support-icon.png',
+            description:
+                'Update user information in Zendesk or Intercom to route requests based on priority, topic, or user payments.',
+        },
+    },
+    {
+        id: 'messaging',
+        type: 'custom',
+        position: { x: 300, y: 200 },
+        data: {
+            label: 'Messaging',
+            icon: '/path/to/messaging-icon.png',
+            description:
+                'Pipe data to Braze or Customer.io to power onboarding emails, run marketing campaigns, or send newsletters.',
+        },
+    },
+    {
+        id: 'enrichment',
+        type: 'custom',
+        position: { x: 300, y: 300 },
+        data: {
+            label: 'Enrichment',
+            icon: '/path/to/enrichment-icon.png',
+            description:
+                'Load data from the Clearbit API to enrich user data and get user info automatically without having to ask.',
+        },
+    },
+    {
+        id: 'internal-alerts',
+        type: 'custom',
+        position: { x: 300, y: 400 },
+        data: {
+            label: 'Internal alerts',
+            icon: '/path/to/internal-alerts-icon.png',
+            description:
+                'Trigger webhooks or send messages directly to Slack to alert you about errors, churns, new leads, and more.',
+        },
+    },
+]
+
+const initialEdges = [
+    { id: 'e-posthog-crm', source: 'posthog', target: 'crm' },
+    { id: 'e-posthog-support', source: 'posthog', target: 'support' },
+    { id: 'e-posthog-messaging', source: 'posthog', target: 'messaging' },
+    { id: 'e-posthog-enrichment', source: 'posthog', target: 'enrichment' },
+    { id: 'e-posthog-internal-alerts', source: 'posthog', target: 'internal-alerts' },
+]
+
+const nodeTypes = {
+    custom: CustomNode,
+}
+
+const CDPFlowChart = () => {
+    return (
+        <div style={{ height: '500px', width: '100%' }}>
+            <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView />
+        </div>
     )
 }
 
@@ -366,7 +465,7 @@ function PipelinesPage({ location }) {
                     Any event or action in PostHog can update user records or trigger workflows in other products in
                     your stack
                 </p>
-                graphic goez here
+                <CDPFlowChart />
             </div>
 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
