@@ -67,7 +67,7 @@ Here we track the sentiment of the customer, looking at the most recent NPS or C
 
 ## Account Indicators
 
-Health scores are useful for tracking the long-term trends in an account, but occasionally there are more point-in-time events that we should react to.  These are tracked as indicators in Vitally and fall into one of two categories
+Health scores are useful for tracking the long-term trends in an account, but occasionally there are more immediate point-in-time events that we should react to.  These are tracked as indicators in Vitally and fall into one of two categories
 
  - Risk indicators - show up red against the account name and indicate potential churn
  - Opportunity indicators - show up green against the account name and indicate a potential opportunity for growth
