@@ -59,6 +59,7 @@ import ReactFlow, {
     useEdgesState,
     useReactFlow,
     MarkerType,
+    Panel,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
 
@@ -207,12 +208,19 @@ const Categories = ({ type, categories, onClick, selectedCategory, selectedType 
 const CustomNode = ({ data }) => (
     <div className="custom-node">
         <Handle type="target" position={Position.Left} style={{ left: -5 }} />
-        <div className="node-content">
+        <div className="node-content max-w-sm">
             <div className="node-header">
-                {data.icon && <img src={data.icon} alt={data.label} className="node-icon" />}
+                {data.icon && (
+                    <img
+                        src={data.icon}
+                        alt={data.label}
+                        className="node-icon"
+                        style={{ width: '24px', height: '24px' }} // Add this line
+                    />
+                )}
                 <strong>{data.label}</strong>
             </div>
-            <p>{data.description}</p>
+            <p className="text-sm">{data.description}</p>
         </div>
         <Handle type="source" position={Position.Right} style={{ right: -5 }} />
     </div>
@@ -221,8 +229,12 @@ const CustomNode = ({ data }) => (
 const initialNodes = [
     {
         id: 'posthog',
-        type: 'input',
-        data: { label: 'PostHog', icon: '/path/to/posthog-icon.png' },
+        type: 'custom', // Change this from 'input' to 'custom'
+        data: {
+            label: 'PostHog',
+            icon: 'https://us.posthog.com/static/posthog-icon.svg',
+            description: 'Your data platform', // Add a description if desired
+        },
         position: { x: 0, y: 0 },
     },
     {
@@ -231,7 +243,7 @@ const initialNodes = [
         position: { x: 300, y: 0 },
         data: {
             label: 'CRM',
-            icon: '/path/to/crm-icon.png',
+            icon: 'https://us.posthog.com/static/services/hubspot.png',
             description:
                 'Sync PostHog with Hubspot or Salesforce to create a single view of each customer and auto-assign leads.',
         },
@@ -242,7 +254,7 @@ const initialNodes = [
         position: { x: 300, y: 100 },
         data: {
             label: 'Support',
-            icon: '/path/to/support-icon.png',
+            icon: 'https://us.posthog.com/static/services/zendesk.png',
             description:
                 'Update user information in Zendesk or Intercom to route requests based on priority, topic, or user payments.',
         },
@@ -253,9 +265,9 @@ const initialNodes = [
         position: { x: 300, y: 200 },
         data: {
             label: 'Messaging',
-            icon: '/path/to/messaging-icon.png',
+            icon: 'https://us.posthog.com/static/services/customerio.png',
             description:
-                'Pipe data to Braze or Customer.io to power onboarding emails, run marketing campaigns, or send newsletters.',
+                'Pipe data to Customer.io or Braze to power onboarding emails, run marketing campaigns, or send newsletters.',
         },
     },
     {
@@ -264,7 +276,7 @@ const initialNodes = [
         position: { x: 300, y: 300 },
         data: {
             label: 'Enrichment',
-            icon: '/path/to/enrichment-icon.png',
+            icon: 'https://us.posthog.com/static/services/clearbit.png',
             description:
                 'Load data from the Clearbit API to enrich user data and get user info automatically without having to ask.',
         },
@@ -275,7 +287,7 @@ const initialNodes = [
         position: { x: 300, y: 400 },
         data: {
             label: 'Internal alerts',
-            icon: '/path/to/internal-alerts-icon.png',
+            icon: 'https://us.posthog.com/static/services/slack.png',
             description:
                 'Trigger webhooks or send messages directly to Slack to alert you about errors, churns, new leads, and more.',
         },
@@ -351,6 +363,8 @@ const Flow = () => {
         },
     }
 
+    const proOptions = { hideAttribution: true } // Add this line
+
     return (
         <ReactFlow
             nodes={nodes}
@@ -370,6 +384,7 @@ const Flow = () => {
             preventScrolling={true}
             minZoom={1}
             maxZoom={1}
+            proOptions={proOptions} // Add this line
         />
     )
 }
@@ -430,40 +445,6 @@ function PipelinesPage({ location }) {
         capitalized: 'CDP',
         freeTier: '10m rows',
     }
-
-    const subfeaturesItemCount = 5
-    const subfeatures = [
-        {
-            title: 'Integrate with a CRM',
-            description:
-                'Sync PostHog with Hubspot or Salesforce to create a single view of each customer and auto-assign leads.',
-            icon: <IconStack />,
-        },
-        {
-            title: 'Improve user support',
-            description:
-                'Update user information in Zendesk or Intercom to route requests based on priority, topic, or user payments.',
-            icon: <IconHeadset />,
-        },
-        {
-            title: 'Run email campaigns',
-            description:
-                'Pipe data to Braze or Customer.io to power onboarding emails, run marketing campaigns, or send newsletters.',
-            icon: <IconMessage />,
-        },
-        {
-            title: 'Enrich your user data',
-            description:
-                'Load data from the Clearbit API to enrich user data and get user info automatically without having to ask.',
-            icon: <IconPeople />,
-        },
-        {
-            title: 'Setup internal alerts',
-            description:
-                'Trigger webhooks or send messages directly to Slack to alert you about errors, churns, new leads, and more. ',
-            icon: <IconWarning />,
-        },
-    ]
 
     return (
         <Layout>
@@ -568,20 +549,6 @@ function PipelinesPage({ location }) {
                     your stack
                 </p>
                 <CDPFlowChart />
-            </div>
-
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
-                <h2 className="text-4xl text-center mb-5">
-                    It's one tool, with <span className="text-red dark:text-yellow">unlimited</span> use-cases
-                </h2>
-                <p className="text-center mb-8">
-                    (But here's five we personally use it for to avoid that being just a vague promise)
-                </p>
-                <ul className={`list-none p-0 grid md:grid-cols-${subfeaturesItemCount} gap-4`}>
-                    {subfeatures.map((subfeature, index) => {
-                        return <Subfeature {...subfeature} key={index} />
-                    })}
-                </ul>
             </div>
 
             <section
