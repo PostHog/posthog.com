@@ -27,7 +27,7 @@ Are you the founder of a startup that has never sold before, and you're trying t
 
 You have one job. Get to product market fit.
 
-It's a _terrible_ idea to out
+It's a _terrible_ idea to outsource sales to someone else. It's half the battle.
 
 It _could_ of course work, but it just adds another variable to the most important and most multivariate problem you will _ever_ solve as a startup.
 
@@ -71,7 +71,7 @@ In _both_ types of meeting, you should be asking lots of questions. However, the
 * In sales meetings, you are steering the customer. In product meetings, you should let users meander.
 * In sales meetings, you learn by seeing if it closes or not. In product meetings, you learn based on what people are saying.
 
-We should talk vibes for a moment. First, don't make it painful for the customer to interact with you. _You_ are leading the meeting because you asked forit. A good way of doing this is to have some friendly rapport at the beginning, then layout "hey so there are four things I hoped to run through with you in this meeting. First, I want to get a grip on your company and priorities, second I'd like to cover X problem space a bit, and third, I wanted to talk about our product and show you a few relevant bits of it. Is that a good use of the next 25 minutes from your perspective?" Asking for _permission_ to ask questions means it'll feel less awkward when you do. Because you should.
+We should talk vibes for a moment. First, don't make it painful for the customer to interact with you. _You_ are leading the meeting because you asked for it. A good way of doing this is to have some friendly rapport at the beginning, then layout "hey so there are four things I hoped to run through with you in this meeting. First, I want to get a grip on your company and priorities, second I'd like to cover X problem space a bit, and third, I wanted to talk about our product and show you a few relevant bits of it. Is that a good use of the next 25 minutes from your perspective?" Asking for _permission_ to ask questions means it'll feel less awkward when you do. Because you should.
 
 Failure mode - you go straight into a demo without any understanding of their business. This _feels_ like the easy thing to do, but you'll leave having no real idea _why_ they maybe don't move forward or return your calls.
 
@@ -88,7 +88,7 @@ Be proud of who you are. When you're tiny, it can feel like you have no hope - y
 
 ## Closing a deal
 
-* Work backwards. Ask the customer something like "so to get you up and running as a customer, what are all the steps needed?" then get them to go into detail. Do they actually _have_ the budget or do they need to get it? If they need to get it, who do they get it from? Could you run a demo for the other person?
+Start by working backwards. Ask the customer something like "so to get you up and running as a customer, what are all the steps needed?" then get them to go into detail. Do they actually _have_ the budget or do they need to get it? If they need to get it, who do they get it from? Could you run a demo for the other person?
 
 Managing stakeholders is ultra important. If you are selling to businesses, it is likely that multiple people are involved in the decision. If you are single threaded into the customer, there are two ways you can easily fail to close a deal. First, your stakeholder may love you, but someone internal quickly "no, but..."s the deal without considering it. Second, your stakeholder may be unreliable or trying to be kind and acting more interested than they really are. Building up relationships with everyone who is relevant dramatically increases your chances of closing a deal, depending on its size. You can ask about this too "hey we could start at $100/month, is this a decision you can take totally solo or do you need to run it by someone else? Does your buying process change depending on the value?" Our first enterprise customer at PostHog miraculously started at exactly the budget under which more stakeholders needed to get involved in the deal! Consider yourself the quarterback of the deal, not just one of the team members.
 
