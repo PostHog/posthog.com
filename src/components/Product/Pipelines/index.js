@@ -205,7 +205,7 @@ const Categories = ({ type, categories, onClick, selectedCategory, selectedType 
     )
 }
 
-const CustomNode = ({ data }) => (
+const CustomNode = ({ data, isMobile }) => (
     <div className="custom-node">
         {data.label !== 'PostHog' && <Handle type="target" position={Position.Left} style={{ left: -5 }} />}
         <div className="node-content max-w-sm">
@@ -222,7 +222,13 @@ const CustomNode = ({ data }) => (
             </div>
             <p className="text-sm">{data.description}</p>
         </div>
-        {data.label === 'PostHog' && <Handle type="source" position={Position.Right} style={{ right: -5 }} />}
+        {data.label === 'PostHog' && (
+            <Handle
+                type="source"
+                position={isMobile ? Position.Bottom : Position.Right}
+                style={isMobile ? { bottom: -5 } : { right: -5 }}
+            />
+        )}
     </div>
 )
 
@@ -302,10 +308,6 @@ const initialEdges = [
     { id: 'e-posthog-internal-alerts', source: 'posthog', target: 'internal-alerts' },
 ]
 
-const nodeTypes = {
-    custom: CustomNode,
-}
-
 const Flow = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
@@ -316,19 +318,19 @@ const Flow = () => {
     const updateLayout = useCallback(() => {
         const newNodes = nodes.map((node, index) => {
             if (node.id === 'posthog') {
-                return { ...node, position: { x: isMobile ? -50 : 0, y: isMobile ? 0 : 150 } }
+                return { ...node, position: { x: 0, y: isMobile ? 0 : 150 } }
             }
             return {
                 ...node,
                 position: {
                     x: isMobile ? 50 : 300,
-                    y: isMobile ? (index - 1) * 200 + 100 : index * 100,
+                    y: isMobile ? index * 200 : index * 100,
                 },
             }
         })
         setNodes(newNodes)
         setTimeout(() => fitView(), 0)
-    }, [isMobile, setNodes, fitView])
+    }, [isMobile, setNodes, fitView, nodes])
 
     useEffect(() => {
         const checkMobile = () => {
@@ -364,6 +366,13 @@ const Flow = () => {
     }
 
     const proOptions = { hideAttribution: true }
+
+    const nodeTypes = useMemo(
+        () => ({
+            custom: (props) => <CustomNode {...props} isMobile={isMobile} />,
+        }),
+        [isMobile]
+    )
 
     return (
         <ReactFlow
