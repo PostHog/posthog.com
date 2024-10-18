@@ -31,6 +31,18 @@ posthog.init('<ph_project_api_key>', {
 
 3. Manually start recording by calling `posthog.startSessionRecording()`. Similarly, you can stop the recording at any point by calling `posthog.stopSessionRecording()`.
 
+## With URL trigger conditions
+
+You can opt to only start recordings once your user visits a certain page. After the url matches, the recoding will continue even after they have left the matching page.  
+The client keeps a short buffer in-memory, so you'll still be able to see how they have arrived at the page.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_light_bc6130e3d0.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_dark_9c6ebb6c37.png"
+    alt="Adding URL trigger to control session recordings" 
+    classes="rounded"
+/>
+
 ## With feature flags
 
 You can select a [feature flag](/docs/feature-flags) to control whether to record sessions or not. Recordings will only be collected for users when the flag is enabled for them.
