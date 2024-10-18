@@ -104,7 +104,7 @@ We wound up quadrupling our revenue, but only increasing our net headcount by th
 
 54% of the first YCombinator batch this year adopted PostHog. 
 
-Tim and James turned up to talk at batch events and we were surprised at the number of groupies wearing [PostHog merch](/merch) – our merch is really cool now, e've gone way beyond the logo-on-a-black-t-shirt standard. 
+Tim and James turned up to talk at batch events and we were surprised at the number of groupies wearing [PostHog merch](/merch) – our merch is really cool now, we've gone way beyond the logo-on-a-black-t-shirt standard. 
 
 As far as we can tell, we're in the top three products used by YC companies.
 
