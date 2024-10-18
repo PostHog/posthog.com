@@ -1,6 +1,6 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useMemo } from 'react'
+import React, { useMemo, useState, useCallback, useEffect } from 'react'
 import Link from 'components/Link'
 import Layout from '../../Layout'
 import { SEO } from 'components/seo'
@@ -51,7 +51,8 @@ import {
 } from '@posthog/icons'
 import { Link as SmoothScrollLink } from 'react-scroll'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
-import ReactFlow, { Handle, Position } from 'react-flow-renderer'
+import ReactFlow, { ReactFlowProvider, Handle, Position, useNodesState, useEdgesState, useReactFlow } from 'reactflow'
+import 'reactflow/dist/style.css'
 
 const team = 'CDP'
 const teamSlug = '/teams/cdp'
@@ -197,7 +198,7 @@ const Categories = ({ type, categories, onClick, selectedCategory, selectedType 
 
 const CustomNode = ({ data }) => (
     <div className="custom-node">
-        <Handle type="target" position={Position.Left} />
+        <Handle type="target" position={Position.Left} style={{ left: -5 }} />
         <div className="node-content">
             <div className="node-header">
                 {data.icon && <img src={data.icon} alt={data.label} className="node-icon" />}
@@ -205,7 +206,7 @@ const CustomNode = ({ data }) => (
             </div>
             <p>{data.description}</p>
         </div>
-        <Handle type="source" position={Position.Right} />
+        <Handle type="source" position={Position.Right} style={{ right: -5 }} />
     </div>
 )
 
@@ -214,7 +215,7 @@ const initialNodes = [
         id: 'posthog',
         type: 'input',
         data: { label: 'PostHog', icon: '/path/to/posthog-icon.png' },
-        position: { x: 0, y: 150 },
+        position: { x: 0, y: 0 },
     },
     {
         id: 'crm',
@@ -285,10 +286,72 @@ const nodeTypes = {
     custom: CustomNode,
 }
 
-const CDPFlowChart = () => {
+const Flow = () => {
+    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
+    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+    const { fitView } = useReactFlow()
+
+    const [isMobile, setIsMobile] = useState(false)
+
+    const updateLayout = useCallback(() => {
+        const newNodes = nodes.map((node, index) => {
+            if (node.id === 'posthog') {
+                return { ...node, position: { x: isMobile ? 0 : 0, y: isMobile ? 0 : 150 } }
+            }
+            return {
+                ...node,
+                position: {
+                    x: isMobile ? 0 : 300,
+                    y: isMobile ? (index - 1) * 200 + 100 : index * 100,
+                },
+            }
+        })
+        setNodes(newNodes)
+        setTimeout(() => fitView(), 0)
+    }, [isMobile, setNodes, fitView])
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 767)
+        }
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
+
+    useEffect(() => {
+        updateLayout()
+    }, [isMobile, updateLayout])
+
     return (
-        <div style={{ height: '500px', width: '100%' }}>
-            <ReactFlow nodes={initialNodes} edges={initialEdges} nodeTypes={nodeTypes} fitView />
+        <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            nodeTypes={nodeTypes}
+            fitView
+        />
+    )
+}
+
+const CDPFlowChart = () => {
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 767)
+        }
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
+
+    return (
+        <div style={{ height: isMobile ? '1000px' : '500px', width: '100%' }}>
+            <ReactFlowProvider>
+                <Flow />
+            </ReactFlowProvider>
         </div>
     )
 }
