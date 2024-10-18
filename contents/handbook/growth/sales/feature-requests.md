@@ -23,7 +23,7 @@ If you've checked the list above and can't see an existing request then you shou
 1. When looking at the list of features, there is a Create new button in the top left of the UI.
 2. When looking at an account, you can see the feature requests they are connected to in the related objects section of the UI.  There's a Create new button at the top of that UI as well.
 
-Most of the fields are self-explanatory, and the status should almost always be set to `Requested` if it's a new one, unless the team is actively working on it.  Make sure you add ad much context in the text area at the bottom as possible, with links to Slack/Zendesk tickets.
+Most of the fields are self-explanatory, and the status should almost always be set to `Requested` if it's a new one, unless the team is actively working on it.  Make sure you add as much context in the text area at the bottom as possible, with links to Slack/Zendesk tickets.
 
 # Collaborating with product teams
 
