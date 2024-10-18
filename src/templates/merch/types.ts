@@ -151,6 +151,7 @@ export interface StorefrontProductVariantNode {
     }
     quantityAvailable: number
     selectedOptions: VariantSelectedOption[]
+    brilliantQuantity: number
 }
 
 export type StorefrontProductVariant = StorefrontProductVariantNode
