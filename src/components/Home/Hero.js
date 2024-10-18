@@ -288,7 +288,7 @@ export default function Hero() {
                         <div className="flex justify-center items-center gap-2 home-hero-cta">
                             {enterpriseMode ? (
                                 <CallToAction size="lg" to="/demo">
-                                    Watch a demo
+                                    Contact Sales
                                 </CallToAction>
                             ) : (
                                 <SignupCTA />
