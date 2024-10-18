@@ -1,9 +1,10 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useMemo } from 'react'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconSearch, IconDecisionTree } from '@posthog/icons'
+import { IconSearch, IconPlug, IconDecisionTree } from '@posthog/icons'
 import Fuse from 'fuse.js'
 import SideModal from 'components/Modal/SideModal'
 import { MDXProvider } from '@mdx-js/react'
@@ -228,7 +229,7 @@ function PipelinesPage({ location }) {
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="sky-blue"
-                    icon={<IconDecisionTree />}
+                    icon={<IconPlug />}
                     product={product.capitalized}
                     title="Customer data platform"
                     description="Import from a data warehouse to analyze your data with PostHog product data and send it all to 25+ destinations."
@@ -236,8 +237,8 @@ function PipelinesPage({ location }) {
                 />
 
                 <div className="text-center -mb-12 md:-mb-28">
-                    <StaticImage
-                        src="../../images/products/screenshot-cdp.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png"
                         alt="Screenshot of PostHog's CDP"
                         className="w-full max-w-[1280px]"
                         placeholder="none"
@@ -245,7 +246,7 @@ function PipelinesPage({ location }) {
                 </div>
             </div>
 
-            <div className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12">
+            <div className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12 relative">
                 <div className="md:col-span-4 md:mb-4">
                     <h2 className="text-center text-2xl lg:text-4xl">Sources &amp; destinations library</h2>
 
@@ -255,7 +256,7 @@ function PipelinesPage({ location }) {
                             value={searchValue}
                             onChange={(e) => setSearchValue(e.target.value)}
                             className="bg-transparent w-full border-none outline-none"
-                            placeholder="Search destinations"
+                            placeholder="Search sources & destinations"
                         />
                     </div>
                 </div>

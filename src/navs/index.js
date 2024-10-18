@@ -1071,8 +1071,8 @@ export const companyMenu = {
                     url: '/teams/sales-cs',
                 },
                 {
-                    name: 'Website & Docs',
-                    url: '/teams/website-docs',
+                    name: 'Website & Vibes',
+                    url: '/teams/website-vibes',
                 },
             ],
         },
@@ -1473,6 +1473,10 @@ export const docsMenu = {
                         {
                             name: 'Migrate from Pendo',
                             url: '/docs/migrate/pendo',
+                        },
+                        {
+                            name: 'Migrate from Plausible',
+                            url: '/docs/migrate/plausible',
                         },
                         {
                             name: 'Migrate from Statsig',
@@ -2647,7 +2651,7 @@ export const docsMenu = {
             name: 'CDP',
             url: '/docs/cdp',
             color: 'sky-blue',
-            icon: 'IconDecisionTree',
+            icon: 'IconPlug',
             children: [
                 {
                     name: 'Customer data platform',
@@ -3120,7 +3124,7 @@ const menu = [
             },
             {
                 name: 'CDP',
-                icon: 'IconDecisionTree',
+                icon: 'IconPlug',
                 color: 'sky-blue',
                 url: '/cdp',
             },

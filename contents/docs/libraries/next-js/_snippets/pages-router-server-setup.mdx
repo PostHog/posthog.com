@@ -1,0 +1,70 @@
+For the pages router, we can use the `getServerSideProps` function to access PostHog on the server-side, send events, evaluate feature flags, and more.
+
+This looks like this:
+
+```js
+// pages/posts/[id].js
+import { useContext, useEffect, useState } from 'react'
+import { getServerSession } from "next-auth/next"
+import { PostHog } from 'posthog-node'
+
+export default function Post({ post, flags }) {
+  const [ctaState, setCtaState] = useState()
+
+  useEffect(() => {
+    if (flags) {
+      setCtaState(flags['blog-cta'])
+    }
+  })
+
+  return (
+    <div>
+      <h1>{post.title}</h1>
+      <p>By: {post.author}</p>
+      <p>{post.content}</p>
+      {ctaState &&
+        <p><a href="/">Go to PostHog</a></p>
+      }
+      <button onClick={likePost}>Like</button>
+    </div>
+  )
+}
+
+export async function getServerSideProps(ctx) {
+
+  const session = await getServerSession(ctx.req, ctx.res)
+  let flags = null
+
+  if (session) {
+    const client = new PostHog(
+      process.env.NEXT_PUBLIC_POSTHOG_KEY,
+      {
+        host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+      }
+    )
+
+    flags = await client.getAllFlags(session.user.email);
+    client.capture({
+      distinctId: session.user.email,
+      event: 'loaded blog article',
+      properties: {
+        $current_url: ctx.req.url,
+      },
+    });
+
+    await client.shutdown()
+  }
+
+  const { posts } = await import('../../blog.json')
+  const post = posts.find((post) => post.id.toString() === ctx.params.id)
+  return {
+    props: {
+      post,
+      flags
+    },
+  }
+}
+```
+
+> **Note**: Make sure to _always_ call `await client.shutdown()` after sending events from the server-side.
+> PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.

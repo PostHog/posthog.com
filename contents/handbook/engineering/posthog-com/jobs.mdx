@@ -80,6 +80,37 @@ const roleInterviewProcess: Record<string, IInterviewProcess[]> = {
 }
 ```
 
+#### Custom description for the `/careers` page
+
+By default, we look for section headers (`<h2>`) in the job description to show in the summary that appears at the top of the [careers](/careers) page. We're sniffing for these subheaders (in this order):
+
+- "Who we're looking for"
+- "What you'll be doing"
+- "Requirements"
+
+If none of these are found, the job description will be blank.
+
+If your job description has more creative titles, you can add a short custom description that _only_ appears on this section of the website. (This will take priority over the subheaders listed above.) Add this in the role's settings in Ashby under the _Website description_ field. It requires html, but here's a template you can use:
+
+```
+<p><strong>Things you definitely won't be doing:</strong></p>
+<ul class="list-none p-0">
+<li>❌ backlog grooming (it always sounded gross anyway)</li>
+<li>❌ deciding what we build</li>
+<li>❌ shielding developers from users</li>
+<li>❌ project management/writing gazillions of tickets, RFCs, or PRDs</li>
+</ul>
+
+<p><strong>From you:</strong></p>
+<ul class="list-none p-0">
+<li>✅ SQL (any technical experience beyond this is a plus) - you must be able to be a self-serve PM, not relying on engineers to do analysis</li>
+<li>✅ very proactive/organized</li>
+<li>✅ collaborative</li>
+<li>✅ several years of experience as a PM talking to users/interviewing</li>
+</ul>
+```
+
+
 #### Apply
 This section appears on all job postings. The input fields here directly reflect the Application Form assigned to the job. The Application Form can be found on the job's settings page.
 

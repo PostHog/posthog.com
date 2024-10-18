@@ -19,7 +19,7 @@ export const Hero = ({ color, icon, beta, product, title, description }: HeroPro
                 <span className={`w-6 h-6 text-${color}`}>{icon}</span>
                 <span className="text-[15px] font-semibold text-opacity-60">{product}</span>
                 {beta && (
-                    <span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase">
+                    <span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">
                         Beta
                     </span>
                 )}

@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
@@ -33,7 +34,7 @@ export default function Merch() {
                 {/* quote source: https://posthog.slack.com/archives/C011L071P8U/p1710758940243199 */}
 
                 <Link to="/merch">
-                    <StaticImage
+                    <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/v1715109076/dw.jpg"
                         alt="PostHog t-shirt"
                         className="w-full"

@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { Check2 } from 'components/Icons'
 import Layout from 'components/Layout'
 import Link from 'components/Link'
@@ -35,12 +36,13 @@ export default function ContactSales({ location }) {
             <div className="lg:py-12 py-4 px-5">
                 <section className="mb-12">
                     <div className="text-center">
-                        <StaticImage
+                        <CloudinaryImage
                             loading="eager"
                             placeholder="none"
                             width={600}
+                            height={309}
                             alt="Sales hedgehogs"
-                            src="./images/sales-hogs.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/ContactSales/images/sales-hogs.png"
                         />
                         <h1 className="text-3xl md:text-5xl mt-4 mb-2">Let's chat</h1>
                     </div>
