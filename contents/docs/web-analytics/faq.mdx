@@ -120,7 +120,8 @@ At a more philosophical level, we question the premise of the question. PageSpee
 1. **It's not realistic.** PageSpeed judges your website on its performance for an underpowered device with a bad internet connection. For example, on mobile, it uses a broadband speed of ~1.6 Mbps, which is significantly slower than the typical 5-50 Mbps (5G can be faster than this too)**.
     - You can use PostHog to [autocapture core web vitals](/docs/product-analytics/web-vitals) to give you a more realistic picture of your users' experiences.  
 
-2. **It doesn't directly impact search rankings.** Although speed matters for user experience, there is no evidence to suggest Google uses data from PageSpeed Insight in its search ranking algorithm. [Leaks about the search ranking algorithm](https://ipullrank.com/google-algo-leak) don't mention PageSpeed as important to search rankings. Optimizing your site speed can improve your user experience and lead to more clicks and fewer bounces, which can improve your search rankings, but any positive or negative impact on rankings is based on user behavior, not this arbitrary score.
+2. **It doesn't directly impact search rankings.** Although speed matters for user experience, there is no evidence to suggest Google uses data from PageSpeed Insight directly in its search ranking algorithm. [Leaks about the search ranking algorithm](https://ipullrank.com/google-algo-leak) don't mention PageSpeed as important to search rankings. Optimizing your site speed can improve your user experience and lead to more clicks and fewer bounces, which can improve your search rankings, but any positive or negative impact on rankings is based on user behavior, not this arbitrary score.
+  - Google Ads' [Quality Score](https://support.google.com/google-ads/answer/6167118?hl=en) is a similar situation where loading speed and user experience impact your CPC, CTR, impressions, paid ranking, and more. This doesn't mean your PageSpeed score directly impacts these either.
 
 3. **Nearly everyone has “failing” PageSpeed scores.** Large and popular sites, from the New York Times to Shopify have failing PageSpeed scores. For example, the NYT loads 43,906 ms worth of scripts, nearly 100x more than the execution time of PostHog.
 
@@ -132,7 +133,7 @@ At a more philosophical level, we question the premise of the question. PageSpee
 
 2. Move the PostHog snippet down in your header, below other scripts. This can impact loading time.
 
-3. Although we don't recommend it, you could lazy load PostHog by having it trigger on scroll or a timer. This can miss initial events, start session replays later, and delay other features. 
+3. Although we don't recommend it, you could lazy load PostHog by having it trigger on scroll or a timer. This can miss initial events, start session replays later, cause lower event counts, and delay other features. 
 
 4. Utilize server-side tracking. We have a range of SDKs for backend languages and frameworks you can use to capture events and use the features of PostHog without needing to load any code on the client side.
 
