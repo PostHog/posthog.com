@@ -51,7 +51,15 @@ import {
 } from '@posthog/icons'
 import { Link as SmoothScrollLink } from 'react-scroll'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
-import ReactFlow, { ReactFlowProvider, Handle, Position, useNodesState, useEdgesState, useReactFlow } from 'reactflow'
+import ReactFlow, {
+    ReactFlowProvider,
+    Handle,
+    Position,
+    useNodesState,
+    useEdgesState,
+    useReactFlow,
+    MarkerType,
+} from 'reactflow'
 import 'reactflow/dist/style.css'
 
 const team = 'CDP'
@@ -296,12 +304,12 @@ const Flow = () => {
     const updateLayout = useCallback(() => {
         const newNodes = nodes.map((node, index) => {
             if (node.id === 'posthog') {
-                return { ...node, position: { x: isMobile ? 0 : 0, y: isMobile ? 0 : 150 } }
+                return { ...node, position: { x: isMobile ? -50 : 0, y: isMobile ? 0 : 150 } }
             }
             return {
                 ...node,
                 position: {
-                    x: isMobile ? 0 : 300,
+                    x: isMobile ? 50 : 300,
                     y: isMobile ? (index - 1) * 200 + 100 : index * 100,
                 },
             }
@@ -323,6 +331,26 @@ const Flow = () => {
         updateLayout()
     }, [isMobile, updateLayout])
 
+    const edgeOptions = {
+        type: 'smoothstep',
+        markerEnd: {
+            type: MarkerType.ArrowClosed,
+        },
+        style: {
+            stroke: '#888',
+        },
+        animated: true,
+    }
+
+    const mobileEdgeOptions = {
+        ...edgeOptions,
+        type: 'default',
+        style: {
+            ...edgeOptions.style,
+            strokeWidth: 2,
+        },
+    }
+
     return (
         <ReactFlow
             nodes={nodes}
@@ -331,6 +359,17 @@ const Flow = () => {
             onEdgesChange={onEdgesChange}
             nodeTypes={nodeTypes}
             fitView
+            defaultEdgeOptions={isMobile ? mobileEdgeOptions : edgeOptions}
+            nodesDraggable={false}
+            nodesConnectable={false}
+            elementsSelectable={false}
+            zoomOnScroll={false}
+            panOnScroll={false}
+            panOnDrag={false}
+            zoomOnDoubleClick={false}
+            preventScrolling={true}
+            minZoom={1}
+            maxZoom={1}
         />
     )
 }
@@ -520,11 +559,11 @@ function PipelinesPage({ location }) {
                 <SmoothScroll exclude={['Pricing', 'Tutorials', 'PostHog vs...', 'Installation']} />
             */}
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
-                <h2 className="text-4xl lg:text-5xl text-center mb-3">
+            <div className={`${fullWidthContent ? 'max-w-full' : 'max-w-7xl mx-auto'} py-10 md:pt-20 pb-0`}>
+                <h2 className="text-4xl lg:text-5xl text-center mb-3 px-5">
                     <span className="text-red dark:text-yellow">Sync product data</span> with third-party tools
                 </h2>
-                <p className="text-center mb-8 text-lg">
+                <p className="text-center mb-8 text-lg px-5">
                     Any event or action in PostHog can update user records or trigger workflows in other products in
                     your stack
                 </p>
