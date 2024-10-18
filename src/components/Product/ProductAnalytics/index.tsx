@@ -772,6 +772,7 @@ export const ProductProductAnalytics = () => {
                     product={product.capitalized}
                     title="Product analytics with autocapture"
                     description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/experiments'>experiments</a>, and <a href='/surveys'>surveys</a>."
+                    signupCTACopy="Upgrade your insights"
                 />
 
                 <div className="text-center">

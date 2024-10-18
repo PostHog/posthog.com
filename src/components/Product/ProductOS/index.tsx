@@ -141,6 +141,7 @@ export const ProductOS = () => {
                     product={product.capitalized}
                     title="Product data infrastructure"
                     description="Product OS is the foundation that all PostHog products are built on. You have access to all PostHog data with the API."
+                    signupCTACopy="Build your data home"
                 />
 
                 <div className="text-center mb-12">
