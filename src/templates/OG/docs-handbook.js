@@ -250,7 +250,7 @@ module.exports = docsHandbook = ({ title, timeToRead, excerpt, lastUpdated, brea
                       height: 100%;
                       object-fit: cover;
                     "
-                    src="data:image/jpeg;charset=utf-8;base64,${avatar}"
+                    src="${avatar}"
                   />
                 </div>`
                         : ''

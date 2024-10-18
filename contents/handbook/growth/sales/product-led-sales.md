@@ -28,7 +28,7 @@ Just as with the [inbound sales process](/handbook/growth/sales/new-sales), it's
 
 If it's a viable opportunity then you should convert the lead to an [opportunity](/handbook/growth/sales/crm#opportunities) and then follow the [New sales process](/handbook/growth/sales/new-sales). Bear in mind that you can join it at any point depending on where the customer is at in their buying journey (e.g. you might skip product evaluation if they are ready to buy).
 
-Even if after speaking with them you think they may end up at $20k+, you should educate them on how to get help, as well as the value of adding our Teams and Enterprise plans.
+Even if after speaking with them you think they may not end up at $20k+, you should educate them on how to get help, as well as the value of adding our Teams and Enterprise plans.
 
 ## Getting recognized on the deal
 
