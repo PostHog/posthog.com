@@ -738,8 +738,12 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Health Tracking',
+                        name: 'Health tracking',
                         url: '/handbook/growth/sales/health-tracking',
+                    },
+                    {
+                        name: 'Feature requests',
+                        url: '/handbook/growth/sales/feature-requests',
                     },
                 ],
             },
