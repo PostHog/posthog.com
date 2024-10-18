@@ -339,9 +339,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         slug
                         contributors {
                             username
-                            avatar {
-                                absolutePath
-                            }
+                            avatar
                         }
                     }
                     frontmatter {
@@ -495,11 +493,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
             const { avatar, username } = contributor
             return {
                 username,
-                avatar:
-                    avatar?.absolutePath &&
-                    fs.readFileSync(avatar.absolutePath, {
-                        encoding: 'base64',
-                    }),
+                avatar,
             }
         })
         let breadcrumbs = null
