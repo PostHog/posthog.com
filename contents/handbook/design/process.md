@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: false
 ---
 
-## No Product Design within teams
+## No product design within small teams
 
 We encourage engineers to act like feature owners, carrying a project from ideation to completion. We maintain a design system in [Storybook](https://storybook.posthog.net/), so engineers can build high-quality features independently, as much as possible.
 
