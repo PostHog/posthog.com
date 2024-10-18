@@ -49,26 +49,26 @@ export default function ContactSales({ location }) {
                 </section>
                 <section className="grid md:grid-cols-2 max-w-5xl mx-auto md:gap-x-16 gap-y-12">
                     <div className="order-2 md:order-1">
-                        <h3 className="text-lg mb-4">Quick demo first?</h3>
+                        <h3 className="text-lg mb-3">Quick demo first?</h3>
                         <div className="space-y-3">
                             <iframe
                                 src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI"
                                 className="rounded shadow-xl"
                             />
                         </div>
-                        <h3 className="text-lg mt-1 mb-4">Help with your bill?</h3>
+                        <h3 className="text-lg mt-1 mb-2">Help with your bill?</h3>
                         <p>
                             Here's{' '}
                             <Link to="/docs/billing/estimating-usage-costs#how-to-reduce-your-posthog-costs">
                                 how to reduce your costs
                             </Link>
                         </p>
-                        <h3 className="text-lg mt-1 mb-4">Benefits of an enterprise plan</h3>
+                        <h3 className="text-lg mt-1 mb-3">Benefits of an enterprise plan</h3>
                         <ul className="list-none m-0 p-0 mt-2 grid sm:grid-flow-col sm:grid-rows-3 space-y-1">
                             {features.map((feature) => {
                                 return (
                                     <li key={feature} className="flex space-x-2">
-                                        <Check2 className="w-4 opacity-60" />
+                                        <Check2 className="w-4 opacity-60 text-green" />
                                         <span>{feature}</span>
                                     </li>
                                 )
@@ -76,7 +76,7 @@ export default function ContactSales({ location }) {
                         </ul>
                     </div>
                     <div className="order-1 md:order-2">
-                        <h3 className="mb-1">Contact us</h3>
+                        <h3 className="mb-3">Contact us</h3>
                         <SalesforceForm
                             type="lead"
                             form={{
