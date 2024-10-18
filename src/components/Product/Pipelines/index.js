@@ -207,7 +207,7 @@ const Categories = ({ type, categories, onClick, selectedCategory, selectedType 
 
 const CustomNode = ({ data }) => (
     <div className="custom-node">
-        <Handle type="target" position={Position.Left} style={{ left: -5 }} />
+        {data.label !== 'PostHog' && <Handle type="target" position={Position.Left} style={{ left: -5 }} />}
         <div className="node-content max-w-sm">
             <div className="node-header">
                 {data.icon && (
@@ -215,25 +215,25 @@ const CustomNode = ({ data }) => (
                         src={data.icon}
                         alt={data.label}
                         className="node-icon"
-                        style={{ width: '24px', height: '24px' }} // Add this line
+                        style={{ width: '24px', height: '24px' }}
                     />
                 )}
                 <strong>{data.label}</strong>
             </div>
             <p className="text-sm">{data.description}</p>
         </div>
-        <Handle type="source" position={Position.Right} style={{ right: -5 }} />
+        {data.label === 'PostHog' && <Handle type="source" position={Position.Right} style={{ right: -5 }} />}
     </div>
 )
 
 const initialNodes = [
     {
         id: 'posthog',
-        type: 'custom', // Change this from 'input' to 'custom'
+        type: 'custom',
         data: {
             label: 'PostHog',
             icon: 'https://us.posthog.com/static/posthog-icon.svg',
-            description: 'Your data platform', // Add a description if desired
+            description: 'Your data platform',
         },
         position: { x: 0, y: 0 },
     },
@@ -363,7 +363,7 @@ const Flow = () => {
         },
     }
 
-    const proOptions = { hideAttribution: true } // Add this line
+    const proOptions = { hideAttribution: true }
 
     return (
         <ReactFlow
@@ -384,7 +384,7 @@ const Flow = () => {
             preventScrolling={true}
             minZoom={1}
             maxZoom={1}
-            proOptions={proOptions} // Add this line
+            proOptions={proOptions}
         />
     )
 }
