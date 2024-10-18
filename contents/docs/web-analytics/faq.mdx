@@ -109,18 +109,18 @@ The simple answer: PostHog consumes resources (CPU) and execution time to load t
 
 We try our best to only include code necessary for PostHog to function, but we do have multiple features, from autocapture to session replay to surveys, that need to load.
 
-We load most of these assets from an external `.js` file **asynchronously**. This means it doesn't block other assets, such as the ones required to render the page. In PageSpeed terms,  This minimizes the impact on First Contentful Paint (FCP) and Largest Contentful Paint (LCP). We also serve these assets from a CDN to speed them up.
+We load most of these assets from an external `.js` file **asynchronously**. This means it doesn't block other which minimizes the impact on First Contentful Paint (FCP) and Largest Contentful Paint (LCP). We also serve these assets from a CDN to speed them up.
 
-We also optimize our assets specifically for PageSpeed Insights whenever possible. For example, we recently removed legacy JavaScript required to support IE 11 which PageSpeed Insights generated a warning about.
+We also optimize our assets specifically for PageSpeed Insights whenever possible. For example, we recently [removed legacy JavaScript](https://github.com/PostHog/posthog-js/pull/1480) required to support IE 11, which PageSpeed Insights generated a warning about.
 
 ### Why you shouldn't care about PageSpeed score
 
 At a more philosophical level, we question the premise of the question. PageSpeed score isn't an objective judge of quality or performance for the following reasons:
 
-1. **It's not realistic.** PageSpeed judges your website on its performance for an underpowered device with a bad internet connection. For example, on mobile, it uses a broadband speed of ~1.6 Mbps which is significantly slower than the typical 5-50 Mbps (5G can be faster than this too)**.**
+1. **It's not realistic.** PageSpeed judges your website on its performance for an underpowered device with a bad internet connection. For example, on mobile, it uses a broadband speed of ~1.6 Mbps, which is significantly slower than the typical 5-50 Mbps (5G can be faster than this too)**.
     - You can use PostHog to [autocapture core web vitals](/docs/product-analytics/web-vitals) to give you a more realistic picture of your users' experiences.  
 
-2. **It doesn't directly impact search rankings.** Although speed matters for user experience, there is no evidence to suggest Google uses data from PageSpeed Insight in its search ranking algorithm. [Leaks about the search ranking algorithm](https://ipullrank.com/google-algo-leak) don't mention PageSpeed as important to search rankings. Optimizing your site speed can improve your user experience and lead to more clicks and fewer bounces which can improve your search rankings.
+2. **It doesn't directly impact search rankings.** Although speed matters for user experience, there is no evidence to suggest Google uses data from PageSpeed Insight in its search ranking algorithm. [Leaks about the search ranking algorithm](https://ipullrank.com/google-algo-leak) don't mention PageSpeed as important to search rankings. Optimizing your site speed can improve your user experience and lead to more clicks and fewer bounces, which can improve your search rankings, but any positive or negative impact on rankings is based on user behavior, not this arbitrary score.
 
 3. **Nearly everyone has “failing” PageSpeed scores.** Large and popular sites, from the New York Times to Shopify have failing PageSpeed scores. For example, the NYT loads 43,906 ms worth of scripts, nearly 100x more than the execution time of PostHog.
 
