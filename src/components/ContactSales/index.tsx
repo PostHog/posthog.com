@@ -20,14 +20,22 @@ const features = [
     'Advanced permissions & audit logs',
 ]
 
+const VideoSection = () => (
+    <section
+        id="demo-video"
+        className={`overflow-hidden transition-all duration-300 h-auto max-h-[90vh] border border-light dark:border-dark rounded leading-[0] shadow-xl mb-8`}
+    >
+        <iframe
+            src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?autoplay=1"
+            className="rounded w-full aspect-video m-0"
+            allow="autoplay"
+        />
+    </section>
+)
+
 export default function ContactSales({ location }) {
-    const search = location?.search
-    const params = new URLSearchParams(search)
-    const { websiteTheme } = useValues(layoutLogic)
-    const darkMode = websiteTheme === 'dark'
     const [showVideo, setShowVideo] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
-    const videoSectionRef = useRef<HTMLElement>(null)
 
     useEffect(() => {
         const checkMobile = () => {
@@ -42,34 +50,13 @@ export default function ContactSales({ location }) {
         setShowVideo(true)
         if (!isMobile) {
             setTimeout(() => {
-                const headerOffset = 80
-                const elementPosition = videoSectionRef.current?.getBoundingClientRect().top
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
                 window.scrollTo({
-                    top: offsetPosition,
+                    top: document.getElementById('demo-video').offsetTop - 80,
                     behavior: 'smooth',
                 })
             }, 100)
         }
     }
-
-    const VideoSection = () => (
-        <section
-            ref={videoSectionRef}
-            className={`overflow-hidden transition-all duration-300 ${
-                showVideo
-                    ? 'h-auto max-h-[90vh] border border-light dark:border-dark rounded leading-[0] shadow-xl mb-8'
-                    : 'h-0'
-            } scroll-mt-[90px]`}
-        >
-            <iframe
-                src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?autoplay=1"
-                className="rounded w-full aspect-video m-0"
-                allow="autoplay"
-            />
-        </section>
-    )
 
     return (
         <Layout>
@@ -93,7 +80,7 @@ export default function ContactSales({ location }) {
                         <h1 className="text-3xl md:text-5xl mt-4 mb-2">Let's chat</h1>
                     </div>
                 </section>
-                {!isMobile && <VideoSection />}
+                {!isMobile && showVideo && <VideoSection />}
                 <section className="grid md:grid-cols-2 max-w-5xl mx-auto md:gap-x-16 gap-y-12">
                     <div className="">
                         <div
@@ -107,15 +94,15 @@ export default function ContactSales({ location }) {
                         >
                             <h3 className="text-lg mb-3 text-center md:text-left">Quick demo first?</h3>
 
-                            <div
-                                className="aspect-video cursor-pointer relative hover:-top-0.5 active:top-[2px] hover:scale-[1.005] active:scale-[.995] transition-all hover:duration-100 rounded border border-light dark:border-dark p-1 leading-[0] bg-accent dark:bg-accent-dark shadow-xl"
+                            <button
+                                className="aspect-video cursor-pointer relative hover:-top-0.5 active:top-[2px] hover:scale-[1.005] active:scale-[.995] transition-all hover:duration-100 rounded border border-light dark:border-dark p-1 leading-[0] bg-accent dark:bg-accent-dark shadow-xl !m-0"
                                 onClick={handleShowVideo}
                             >
                                 <CloudinaryImage
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/demo_thumb_68d0d8d56d.jpg"
                                     className="rounded"
                                 />
-                            </div>
+                            </button>
                         </div>
                         {isMobile && showVideo && <VideoSection />}
                         <div className="border border-light dark:border-dark px-4 py-3 mb-6 bg-accent dark:bg-accent-dark rounded">
