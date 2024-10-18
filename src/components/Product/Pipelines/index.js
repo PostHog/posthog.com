@@ -1,20 +1,70 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useMemo } from 'react'
-import Layout from '../Layout'
+import React, { useMemo, useState, useCallback, useEffect } from 'react'
+import Link from 'components/Link'
+import Layout from '../../Layout'
 import { SEO } from 'components/seo'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconSearch, IconPlug, IconDecisionTree } from '@posthog/icons'
+import { IconSearch, IconPlug, IconArrowRightDown } from '@posthog/icons'
 import Fuse from 'fuse.js'
+import TeamMembers from '../TeamMembers'
 import SideModal from 'components/Modal/SideModal'
+import Questions from '../Questions'
+import { DocLinks } from 'components/Products/DocsLinks'
+import { docsMenu } from '../../../navs'
 import { MDXProvider } from '@mdx-js/react'
+import { VsCompetitor } from 'components/Products/Competitor'
+import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { useLayoutData } from 'components/Layout/hooks'
 import { Hero } from 'components/Products/Hero'
+import { PairsWith } from 'components/Products/PairsWith'
+import { PairsWithItem } from 'components/Products/PairsWith/item'
 import { StaticImage } from 'gatsby-plugin-image'
 import { MenuItem, menuVariants } from 'components/PostLayout/Menu'
 import { CallToAction } from 'components/CallToAction'
+import { Question } from 'components/Products/Question'
 import { Badge } from 'components/Pricing/PricingTable/Plan'
+import CTA from 'components/Home/CTA'
+import { Subfeature } from 'components/Products/Subfeature'
+import {
+    IconAsterisk,
+    IconBolt,
+    IconDatabase,
+    IconBuilding,
+    IconCursorClick,
+    IconEye,
+    IconFlask,
+    IconGraph,
+    IconPeople,
+    IconPerson,
+    IconPlus,
+    IconRevert,
+    IconRewindPlay,
+    IconServer,
+    IconToggle,
+    IconCrown,
+    IconStack,
+    IconHeadset,
+    IconWarning,
+    IconMessage,
+} from '@posthog/icons'
+import { Link as SmoothScrollLink } from 'react-scroll'
+import { SmoothScroll } from 'components/Products/SmoothScroll'
+import ReactFlow, {
+    ReactFlowProvider,
+    Handle,
+    Position,
+    useNodesState,
+    useEdgesState,
+    useReactFlow,
+    MarkerType,
+    Panel,
+} from 'reactflow'
+import 'reactflow/dist/style.css'
+
+const team = 'CDP'
+const teamSlug = '/teams/cdp'
 
 const sources = [
     {
@@ -89,6 +139,26 @@ const sources = [
     },
 ]
 
+const pairsWithItemCount = 2
+const PairsWithArray = [
+    {
+        icon: <IconGraph />,
+        color: 'blue',
+        product: 'Product analytics',
+        description:
+            'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviours.',
+        url: '/product-analytics',
+    },
+    {
+        icon: <IconDatabase />,
+        color: 'lilac',
+        product: 'Data warehouse',
+        description:
+            'Build a data warehouse in PostHog and then pull in data from all your platforms to one place where it can be easily interrogated.',
+        url: '/product-analytics',
+    },
+]
+
 const Category = ({ onClick, value, active }) => {
     return (
         <>
@@ -132,6 +202,220 @@ const Categories = ({ type, categories, onClick, selectedCategory, selectedType 
                 })}
             </ul>
         </li>
+    )
+}
+
+const CustomNode = ({ data, isMobile }) => (
+    <div className="custom-node">
+        {data.label !== 'PostHog' && <Handle type="target" position={Position.Left} style={{ left: -5 }} />}
+        <div className="node-content max-w-sm">
+            <div className="node-header">
+                {data.icon && (
+                    <img
+                        src={data.icon}
+                        alt={data.label}
+                        className="node-icon"
+                        style={{ width: '24px', height: '24px' }}
+                    />
+                )}
+                <strong>{data.label}</strong>
+            </div>
+            <p className="text-sm">{data.description}</p>
+        </div>
+        {data.label === 'PostHog' && (
+            <Handle
+                type="source"
+                position={isMobile ? Position.Bottom : Position.Right}
+                style={isMobile ? { bottom: -5 } : { right: -5 }}
+            />
+        )}
+    </div>
+)
+
+const initialNodes = [
+    {
+        id: 'posthog',
+        type: 'custom',
+        data: {
+            label: 'PostHog',
+            icon: 'https://us.posthog.com/static/posthog-icon.svg',
+            description: 'Your data platform',
+        },
+        position: { x: 0, y: 0 },
+    },
+    {
+        id: 'crm',
+        type: 'custom',
+        position: { x: 300, y: 0 },
+        data: {
+            label: 'CRM',
+            icon: 'https://us.posthog.com/static/services/hubspot.png',
+            description:
+                'Sync PostHog with Hubspot or Salesforce to create a single view of each customer and auto-assign leads.',
+        },
+    },
+    {
+        id: 'support',
+        type: 'custom',
+        position: { x: 300, y: 100 },
+        data: {
+            label: 'Support',
+            icon: 'https://us.posthog.com/static/services/zendesk.png',
+            description:
+                'Update user information in Zendesk or Intercom to route requests based on priority, topic, or user payments.',
+        },
+    },
+    {
+        id: 'messaging',
+        type: 'custom',
+        position: { x: 300, y: 200 },
+        data: {
+            label: 'Messaging',
+            icon: 'https://us.posthog.com/static/services/customerio.png',
+            description:
+                'Pipe data to Customer.io or Braze to power onboarding emails, run marketing campaigns, or send newsletters.',
+        },
+    },
+    {
+        id: 'enrichment',
+        type: 'custom',
+        position: { x: 300, y: 300 },
+        data: {
+            label: 'Enrichment',
+            icon: 'https://us.posthog.com/static/services/clearbit.png',
+            description:
+                'Load data from the Clearbit API to enrich user data and get user info automatically without having to ask.',
+        },
+    },
+    {
+        id: 'internal-alerts',
+        type: 'custom',
+        position: { x: 300, y: 400 },
+        data: {
+            label: 'Internal alerts',
+            icon: 'https://us.posthog.com/static/services/slack.png',
+            description:
+                'Trigger webhooks or send messages directly to Slack to alert you about errors, churns, new leads, and more.',
+        },
+    },
+]
+
+const initialEdges = [
+    { id: 'e-posthog-crm', source: 'posthog', target: 'crm' },
+    { id: 'e-posthog-support', source: 'posthog', target: 'support' },
+    { id: 'e-posthog-messaging', source: 'posthog', target: 'messaging' },
+    { id: 'e-posthog-enrichment', source: 'posthog', target: 'enrichment' },
+    { id: 'e-posthog-internal-alerts', source: 'posthog', target: 'internal-alerts' },
+]
+
+const Flow = () => {
+    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
+    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+    const { fitView } = useReactFlow()
+
+    const [isMobile, setIsMobile] = useState(false)
+
+    const updateLayout = useCallback(() => {
+        const newNodes = nodes.map((node, index) => {
+            if (node.id === 'posthog') {
+                return { ...node, position: { x: 0, y: isMobile ? 0 : 150 } }
+            }
+            return {
+                ...node,
+                position: {
+                    x: isMobile ? 50 : 300,
+                    y: isMobile ? index * 200 : index * 100,
+                },
+            }
+        })
+        setNodes(newNodes)
+        setTimeout(() => fitView(), 0)
+    }, [isMobile, setNodes, fitView, nodes])
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 767)
+        }
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
+
+    useEffect(() => {
+        updateLayout()
+    }, [isMobile, updateLayout])
+
+    const edgeOptions = {
+        type: 'smoothstep',
+        markerEnd: {
+            type: MarkerType.ArrowClosed,
+        },
+        style: {
+            stroke: '#888',
+        },
+        animated: true,
+    }
+
+    const mobileEdgeOptions = {
+        ...edgeOptions,
+        type: 'default',
+        style: {
+            ...edgeOptions.style,
+            strokeWidth: 2,
+        },
+    }
+
+    const proOptions = { hideAttribution: true }
+
+    const nodeTypes = useMemo(
+        () => ({
+            custom: (props) => <CustomNode {...props} isMobile={isMobile} />,
+        }),
+        [isMobile]
+    )
+
+    return (
+        <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            nodeTypes={nodeTypes}
+            fitView
+            defaultEdgeOptions={isMobile ? mobileEdgeOptions : edgeOptions}
+            nodesDraggable={false}
+            nodesConnectable={false}
+            elementsSelectable={false}
+            zoomOnScroll={false}
+            panOnScroll={false}
+            panOnDrag={false}
+            zoomOnDoubleClick={false}
+            preventScrolling={true}
+            minZoom={1}
+            maxZoom={1}
+            proOptions={proOptions}
+        />
+    )
+}
+
+const CDPFlowChart = () => {
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 767)
+        }
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
+
+    return (
+        <div style={{ height: isMobile ? '1000px' : '500px', width: '100%' }}>
+            <ReactFlowProvider>
+                <Flow />
+            </ReactFlowProvider>
+        </div>
     )
 }
 
@@ -226,15 +510,29 @@ function PipelinesPage({ location }) {
                 )}
             </SideModal>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
                     color="sky-blue"
                     icon={<IconPlug />}
                     product={product.capitalized}
-                    title="Customer data platform"
-                    description="Import from a data warehouse to analyze your data with PostHog product data and send it all to 25+ destinations."
+                    title="Ingest, transform, and send data between 25+ tools"
+                    description="Pre-built recipes make it easy to import data from a warehouse, sync with PostHog event data, and send to other products in your stack"
                     beta
                 />
+
+                <div className="flex justify-center mb-12">
+                    <SmoothScrollLink
+                        to="library"
+                        spy={true}
+                        smooth={true}
+                        offset={-108}
+                        duration={1000}
+                        className="cursor-pointer inline-flex items-center rounded-full bg-accent dark:bg-accent-dark px-3 py-1 text-sm border border-light dark:border-dark text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark hover:border-red dark:hover:border-yellow"
+                    >
+                        Explore our sources &amp; destinations library{' '}
+                        <IconArrowRightDown className="inline-block w-4 text-red dark:text-yellow" />
+                    </SmoothScrollLink>
+                </div>
 
                 <div className="text-center -mb-12 md:-mb-28">
                     <CloudinaryImage
@@ -246,7 +544,55 @@ function PipelinesPage({ location }) {
                 </div>
             </div>
 
-            <div className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12 relative">
+            {/*
+                TODO: Add custom sections (Sources & destinations library, etc)
+                <SmoothScroll exclude={['Pricing', 'Tutorials', 'PostHog vs...', 'Installation']} />
+            */}
+
+            <div className={`${fullWidthContent ? 'max-w-full' : 'max-w-7xl mx-auto'} py-10 md:pt-20 pb-0`}>
+                <h2 className="text-4xl lg:text-5xl text-center mb-3 px-5">
+                    <span className="text-red dark:text-yellow">Sync product data</span> with third-party tools
+                </h2>
+                <p className="text-center mb-8 text-lg px-5">
+                    Any event or action in PostHog can update user records or trigger workflows in other products in
+                    your stack
+                </p>
+                <CDPFlowChart />
+            </div>
+
+            <section
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
+                <h3 className="text-center mb-8">Integrations that work at any scale</h3>
+                <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
+                    <VsCompetitor
+                        title="Suitable for fast, scrappy startups"
+                        image={<StaticImage src="../../../images/products/engineer.png" className="max-w-[176px]" />}
+                    >
+                        <p>
+                            Connect with popular startup tools, like Vitally and Hubspot — or build your own automations
+                            quickly with the Zapier destination. Pull data from open source databases like Postgres and
+                            MySQL, send it to Slack.{' '}
+                        </p>
+                    </VsCompetitor>
+                    <VsCompetitor
+                        title="Or big, serious enterprises"
+                        image={<StaticImage src="../../../images/products/suit.png" className="max-w-[176px]" />}
+                    >
+                        <p>
+                            Stick with your existing platforms and focus on adding that sweet, sweet shareholder value.
+                            Integrate with all the tools you know and love, from Snowflake and Stripe to Salesforce.
+                            Microsoft Teams coming soon, maybe.{' '}
+                        </p>
+                    </VsCompetitor>
+                </div>
+
+                <p className="text-center text-sm font-medium">
+                    Curious how other teams use PostHog? <Link to="/customers">Read their stories</Link>.
+                </p>
+            </section>
+
+            <div id="library" className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12 relative">
                 <div className="md:col-span-4 md:mb-4">
                     <h2 className="text-center text-2xl lg:text-4xl">Sources &amp; destinations library</h2>
 
@@ -342,6 +688,64 @@ function PipelinesPage({ location }) {
                                 )
                             })}
                     </ul>
+                </section>
+            </div>
+
+            <section
+                id="docs"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
+                <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
+                <p className="mt-0 text-opacity-70 text-center">
+                    Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
+                </p>
+                <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'cdp').children} />
+            </section>
+
+            <section
+                id="team"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
+                <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
+
+                <p className="text-center mb-2">
+                    PostHog works in small teams. <Link to={teamSlug}>Here's the team</Link> responsible for building
+                    our customer data platform.
+                </p>
+                <TeamMembers teamName={team} />
+            </section>
+
+            <section
+                id="questions"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
+                <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
+
+                <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
+
+                <div className="text-center mb-8">
+                    <CallToAction href={`/questions/cdp`} type="secondary" size="sm">
+                        View CDP &amp; data pipeline questions
+                    </CallToAction>
+                </div>
+
+                <Questions topicIds={[383]} />
+            </section>
+
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+                <PairsWith items={pairsWithItemCount}>
+                    {PairsWithArray.map((card, index) => {
+                        return <PairsWithItem {...card} key={index} />
+                    })}
+                </PairsWith>
+            </div>
+            <div
+                className={`${
+                    fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'
+                } relative px-5 py-10 md:pt-20 pb-0`}
+            >
+                <section className="mb-20">
+                    <CTA />
                 </section>
             </div>
         </Layout>
