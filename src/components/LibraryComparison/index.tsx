@@ -15,10 +15,10 @@ type LibraryNode = {
 
 type LibraryFeatures = {
     eventCapture: boolean
-    autoCapture: boolean
+    autoCapture?: boolean
     featureFlags: boolean
     groupAnalytics: boolean
-    sessionRecording: boolean
+    sessionRecording?: boolean
     userIdentification: boolean
 }
 
@@ -57,7 +57,10 @@ export const LibraryComparison = () => {
     `)
 
     const renderAvailability = (isAvailable?: boolean) => {
-        return isAvailable ? <img className="w-4 h-4" src={CheckIcon} /> : <img className="w-4 h-4" src={XIcon} />
+        if (isAvailable === null || isAvailable === undefined) {
+            return null
+        }
+        return isAvailable ? <img className="w-4 h-4" src={CheckIcon} /> : <img className="w-4 h-4" src={XIcon}/>
     }
 
     return (
