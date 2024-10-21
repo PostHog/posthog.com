@@ -49,7 +49,7 @@ To create your own dashboard from a template:
 
 ## Events captured
 
-The SDK groups available metrics in order to reduce the cost. That means each `$web_vitals` event carries one or more metric result. By default we wait up to 5 seconds in order to try and catch all four metrics in one event. See the section on configuring web vitals capture below for how to change this behaviour.
+The SDK groups available metrics in order to reduce the cost. That means each `$web_vitals` event carries one or more metric result. By default we wait up to 5 seconds (since the page load or last set of metrics was sent) in order to try and catch all four metrics in one event. See the section on configuring web vitals capture below for how to change this behaviour.
 
 Metrics are made available when the [web vitals library](https://github.com/GoogleChrome/web-vitals) triggers them. This is different for different metrics.
 
