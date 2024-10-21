@@ -51,6 +51,11 @@ To create your own dashboard from a template:
 
 The SDK groups available metrics in order to reduce the cost. That means each `$web_vitals` event carries one or more metric result. By default we wait up to 5 seconds in order to try and catch all four metrics in one event. See the section on configuring web vitals capture below for how to change this behaviour.
 
+Metrics are made available when the [web vitals library](https://github.com/GoogleChrome/web-vitals) triggers them. This is different for different metrics.
+
+[FCP](https://web.dev/articles/fcp) and [LCP](https://web.dev/articles/lcp) are relative to a page being rendered and are made available relatively soon after loading a page. [INP](https://web.dev/articles/inp) and [CLS](https://web.dev/articles/cls) are measures across the lifecycle of a page and don't have a fixed time they become available.
+
+
 ## Configuring web vitals autocapture
 
 You can provide client side config to tune web vitals autocapture. These are set on [the `capture_performance` key of PosthogConfig](https://github.com/PostHog/posthog-js/blob/38744a512abef2f4eb7327e7a3c23d184c3993ca/src/types.ts#L209)
