@@ -347,30 +347,48 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     </div>
                 )}
 
-                <div className="flex justify-end space-x-1 border-t border-light dark:border-dark mt-1 pt-1 pb-2 empty:hidden">
-                    {resolvable && (
-                        <button
-                            onClick={() => handleResolve(true, id)}
-                            className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                        >
-                            <IconCheck className="size-4 mr-1 text-green inline-block" />
-                            Mark as solution
-                        </button>
+                <div className={`flex ${isModerator ? 'justify-end border-t border-light dark:border-dark' : ''}  mt-4 -mb-4 pt-1 pb-2 empty:hidden`}>
+
+                    {!isModerator && (
+                        <div className="-mt-4 -ml-1">
+                            {resolvable && (
+                                <button
+                                    onClick={() => handleResolve(true, id)}
+                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                >
+                                    <IconCheck className="size-4 mr-1 text-green inline-block" />
+                                    Mark as solution
+                                </button>
+                            )}
+                        </div>
                     )}
                     {isModerator && (
-                        <button
-                            onClick={() => handlePublishReply(!!publishedAt, id)}
-                            className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
-                        >
-                            <IconArchive className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
-                            {publishedAt ? 'Unpublish' : 'Publish'}
-                        </button>
-                    )}
-                    {isModerator && (
-                        <button onClick={handleDelete} className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50">
-                            <IconTrash className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
-                            {confirmDelete ? 'Click again to confirm' : 'Delete'}
-                        </button>
+                        <div className="inline-flex space-x-1 bg-light dark:bg-dark px-1 mr-4 -mt-5">
+                            {resolvable && (
+                                <button
+                                    onClick={() => handleResolve(true, id)}
+                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                >
+                                    <IconCheck className="size-4 mr-1 text-green inline-block" />
+                                    Mark as solution
+                                </button>
+                            )}
+                            {isModerator && (
+                                <button
+                                    onClick={() => handlePublishReply(!!publishedAt, id)}
+                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                >
+                                    <IconArchive className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
+                                    {publishedAt ? 'Unpublish' : 'Publish'}
+                                </button>
+                            )}
+                            {isModerator && (
+                                <button onClick={handleDelete} className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50">
+                                    <IconTrash className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
+                                    {confirmDelete ? 'Click again to confirm' : 'Delete'}
+                                </button>
+                            )}
+                        </div>
                     )}
                 </div>
             </div>
