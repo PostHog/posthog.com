@@ -2349,6 +2349,10 @@ export const docsMenu = {
                     },
                     children: [
                         {
+                            name: 'Overview',
+                            url: '/docs/session-replay/mobile',
+                        },
+                        {
                             name: 'Android',
                             url: '/docs/session-replay/android',
                         },
