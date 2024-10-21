@@ -46,3 +46,20 @@ To create your own dashboard from a template:
     alt="Popover icon" 
     classes="rounded"
 />
+
+## Events captured
+
+The SDK groups available metrics in order to reduce the cost. That means each `$web_vitals` event carries one or more metric result. By default we wait up to 5 seconds in order to try and catch all four metrics in one event. See the section on configuring web vitals capture below for how to change this behaviour.
+
+## Configuring web vitals autocapture
+
+You can provide client side config to tune web vitals autocapture. These are set on [the `capture_performance` key of PosthogConfig](https://github.com/PostHog/posthog-js/blob/38744a512abef2f4eb7327e7a3c23d184c3993ca/src/types.ts#L209)
+
+| config | | default|
+|-|-|
+|__web_vitals_max_value| We observe very large values reported by the Chrome web vitals library. These outliers are likely not real, useful values, and we exclude them. You can set this to 0 in order to include all values | 15 minutes |
+|web_vitals_allowed_metrics| By default all 4 metrics are captured. You can set this config to restrict which metrics are captured. e.g. ['CLS', 'FCP'] to only capture those two metrics. NB setting this does not override whether the capture is enabled | ['LCP', 'CLS', 'FCP', 'INP' ] |
+|web_vitals_delayed_flush_ms|we delay flushing web vitals metrics to reduce the number of events we send. This is the maximum time we will wait before sending the metrics. | 5000 |
+
+
+
