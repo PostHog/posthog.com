@@ -17,8 +17,8 @@ export default function TeamMembers({ teamName }) {
 
     return (
         <>
-            {pineapplePercentage < 50 && (
-                <p className="text-center text-sm">(Shockingly, this team prefers their pizza without pineapple.)</p>
+            {pineapplePercentage > 50 && (
+                <p className="text-center text-sm">(Shockingly, this team prefers their pizza with pineapple.)</p>
             )}
             <ul className="list-none m-0 p-0 grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-20">
                 {teamMembers.map((teamMember, index) => {

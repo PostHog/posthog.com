@@ -16,10 +16,11 @@ interface ISidebarProps {
 
 export const PineappleText = (percentage: number) => {
     if (percentage === 50) return 'This team is evenly split on whether pineapple belongs on pizza'
-    if (percentage < 50) return 'Shockingly, this team prefers their pizza without pineapple'
+    if (percentage > 50) return 'Shockingly, this team prefers their pizza with pineapple'
+
     return (
         <>
-            <strong>{percentage}%</strong> of this team (correctly) agree pineapple belongs on pizza
+            <strong>{100 - percentage}%</strong> of this team (correctly) agree pineapple does NOT belong on pizza
         </>
     )
 }
@@ -66,7 +67,9 @@ export const TeamMembers = ({ profiles }) => {
                                         <ContributorImageSmall
                                             name={name}
                                             image={avatar}
-                                            className={`!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary bg-${color ? color : 'accent'} dark:bg-${color ? color : 'accent-dark'}`}
+                                            className={`!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary bg-${
+                                                color ? color : 'accent'
+                                            } dark:bg-${color ? color : 'accent-dark'}`}
                                             imgClassName={``}
                                         />
                                     </span>
@@ -87,7 +90,7 @@ const Team = ({ profiles, leadProfiles, className = '' }) => {
         teamLength > 0 &&
         Math.round(
             (profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length / teamLength) *
-            100
+                100
         )
     const teamLead = profiles?.data?.find(({ id }) => leadProfiles?.data?.[0]?.id === id)
     const teamLeadName = [teamLead?.attributes.firstName, teamLead?.attributes.lastName].filter(Boolean).join(' ')

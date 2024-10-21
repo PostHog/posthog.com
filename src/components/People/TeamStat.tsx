@@ -13,12 +13,6 @@ export type teamMembersDataProps = {
     squeakId: number
 }
 
-export const pineappleOnPizzaStat = (teamMembersData: teamMembersDataProps[]): number[] => {
-    const pineappleOnPizzaStatIsTrue = teamMembersData.filter((item) => item.pineappleOnPizza === true)
-    const pineappleOnPizzaPercent = ((pineappleOnPizzaStatIsTrue.length / teamMembersData.length) * 100).toPrecision(2)
-    return [Number(pineappleOnPizzaPercent), 100 - Number(pineappleOnPizzaPercent)]
-}
-
 interface Props {
     teamStatData: number[]
     caption: string

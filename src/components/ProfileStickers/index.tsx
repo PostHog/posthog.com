@@ -80,11 +80,11 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, isModerator
                         <StickerPineappleUnknown className="w-8 h-8" />
                     </Tooltip>
                 ) : pineappleOnPizza ? (
-                    <Tooltip content="Prefers pineapple on pizza!">
+                    <Tooltip content="Believes pineapple belongs on pizza">
                         <StickerPineappleYes className="w-8 h-8" />
                     </Tooltip>
                 ) : (
-                    <Tooltip content="Does not believe pineapple belongs on pizza">
+                    <Tooltip content="No pineapple on their pizza (as it shouldn't)!">
                         <StickerPineappleNo className="w-8 h-8" />
                     </Tooltip>
                 )}
