@@ -127,9 +127,12 @@ export const CareersHero = () => {
     const teamsField = selectedJob?.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
     const teams = teamsField ? JSON.parse(teamsField.value) : []
     const [selectedTeamName, setSelectedTeamName] = useState(teams[0])
-    const selectedTeam = allTeams.find((team) => team.name.toLowerCase() === selectedTeamName?.toLowerCase())
-    const teamLength = selectedTeam?.profiles?.data?.length
-    const teamURL = selectedTeam ? `/teams/${slugify(selectedTeam.name, { lower: true })}` : `/teams`
+    const selectedTeam = allTeams.find((team) => team.name.toLowerCase() === selectedTeamName.toLowerCase())
+    const teamLength = selectedTeam.profiles?.data?.length
+    const teamURL = `/teams/${slugify((selectedTeam.name || '').toLowerCase().replace('ops', ''), {
+        lower: true,
+        remove: /and/,
+    })}`
     const pineapplePercentage =
         teamLength &&
         teamLength > 0 &&

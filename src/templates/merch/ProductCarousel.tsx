@@ -29,7 +29,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
         },
     })
 
-    const classes = cn('relative', className)
+    const classes = cn('relative rounded overflow-hidden', className)
 
     if (!images || images.length === 0) return null
 
@@ -49,7 +49,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
                     return (
                         <div className={`keen-slider__slide number-slide${i}} max-w-full bg-white`} key={i}>
                             <GatsbyImage
-                                className="w-full rounded-md overflow-hidden aspect-square"
+                                className="w-full aspect-square"
                                 image={getShopifyImage({ image: image.preview.image })}
                                 alt={title}
                             />
