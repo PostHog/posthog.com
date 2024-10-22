@@ -14,7 +14,7 @@ We issue refunds in this category if this is the first bill >$1 and/or they meet
 ### Unexpected Stardom
 Side project sudden volume spike
 
-We issue refunds in this category if this is the first bill >$1 and/or usage spiked by >200% compared to their average usage over the past 3 months, and/or the account is a non-commercial or a hobby project.
+We issue refunds in this category if this is the first bill >$1 and/or usage spiked by >200% compared to their average usage over the past 3 months, and the company doesn't have any revenue, or is a hobby project.
 
 ### Under Attack
 Bot spike/abusive user drove traffic which in turn increased posthog usage
