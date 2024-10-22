@@ -8,7 +8,6 @@ import { SEO } from '../seo'
 import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
-import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
 import Link from 'components/Link'
@@ -233,6 +232,7 @@ const PricingExperiment = (): JSX.Element => {
     } = useStaticQuery(allProductsData)
 
     const [activePlan, setActivePlan] = useState('free')
+    const [tractorHogData, setTractorHogData] = useState(null)
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
@@ -240,6 +240,13 @@ const PricingExperiment = (): JSX.Element => {
         if (plan === 'free' || plan === 'paid') {
             setActivePlan(plan)
         }
+    }, [])
+
+    useEffect(() => {
+        fetch('https://res.cloudinary.com/dmukukwp6/raw/upload/tractor_hog_40f242f09b.json')
+            .then(response => response.json())
+            .then(data => setTractorHogData(data))
+            .catch(error => console.error('Error loading Lottie animation:', error))
     }, [])
 
     const handleFreePlanClick = () => {
@@ -318,11 +325,10 @@ const PricingExperiment = (): JSX.Element => {
                             <li>
                                 <button
                                     onClick={handleFreePlanClick}
-                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
-                                        activePlan === 'free'
-                                            ? 'border-yellow bg-white dark:bg-white/5'
-                                            : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
-                                    }`}
+                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${activePlan === 'free'
+                                        ? 'border-yellow bg-white dark:bg-white/5'
+                                        : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                                        }`}
                                 >
                                     <strong className="whitespace-nowrap">Totally free</strong>
                                     <span className="text-sm opacity-75 whitespace-nowrap">
@@ -333,11 +339,10 @@ const PricingExperiment = (): JSX.Element => {
                             <li>
                                 <button
                                     onClick={handlePaidPlanClick}
-                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${
-                                        activePlan === 'free'
-                                            ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
-                                            : 'border-yellow bg-white dark:bg-white/5'
-                                    }`}
+                                    className={`w-full flex flex-col py-2 px-4 rounded-md border-2 @md:min-w-56 ${activePlan === 'free'
+                                        ? 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                                        : 'border-yellow bg-white dark:bg-white/5'
+                                        }`}
                                 >
                                     <strong className="whitespace-nowrap">Ridiculously cheap</strong>
                                     <span className="text-sm opacity-75 whitespace-nowrap">Usage-based pricing</span>
@@ -349,11 +354,10 @@ const PricingExperiment = (): JSX.Element => {
                     <div className="border-t border-light dark:border-dark mt-4 pt-4 h-px"></div>
 
                     <div
-                        className={`@container transition-all rounded-md border ${
-                            animateFreeTiers
-                                ? 'animate-flash bg-[#FAE9CE] dark:bg-[#463B2A] border-yellow -mx-2 -mt-1 px-2 pt-1'
-                                : 'bg-transparent border-transparent'
-                        }`}
+                        className={`@container transition-all rounded-md border ${animateFreeTiers
+                            ? 'animate-flash bg-[#FAE9CE] dark:bg-[#463B2A] border-yellow -mx-2 -mt-1 px-2 pt-1'
+                            : 'bg-transparent border-transparent'
+                            }`}
                         onAnimationEnd={() => setAnimateFreeTiers(false)}
                     >
                         <div className="flex items-baseline gap-1 mb-3">

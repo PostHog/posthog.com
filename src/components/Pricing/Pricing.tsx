@@ -1,6 +1,6 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -8,7 +8,6 @@ import { SEO } from '../seo'
 import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
-import tractorHog from '../../../static/lotties/tractor-hog.json'
 import Lottie from 'react-lottie'
 import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
 import Link from 'components/Link'
@@ -535,9 +534,8 @@ const ProductTabs = () => {
                 )}
 
                 <div
-                    className={`text-center font-semibold text-[15px] mt-4 ${
-                        activeTab === undefined && 'border-t'
-                    } border-light dark:border-dark`}
+                    className={`text-center font-semibold text-[15px] mt-4 ${activeTab === undefined && 'border-t'
+                        } border-light dark:border-dark`}
                 >
                     <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3">
                         <button
@@ -849,6 +847,15 @@ const PricingExperiment = ({
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
+    const [tractorHog, setTractorHog] = useState(null)
+
+    useEffect(() => {
+        fetch('https://res.cloudinary.com/dmukukwp6/raw/upload/tractor_hog_40f242f09b.json')
+            .then(response => response.json())
+            .then(data => setTractorHog(data))
+            .catch(error => console.error('Error loading tractorHog:', error))
+    }, [])
+
     return (
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
@@ -937,11 +944,10 @@ const PricingExperiment = ({
             </SectionLayout>
 
             <section
-                className={`${section} ${
-                    isPlanComparisonVisible
-                        ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
-                        : 'overflow-y-hidden invisible max-h-0 opacity-0'
-                } transition duration-500 ease-in-out transform`}
+                className={`${section} ${isPlanComparisonVisible
+                    ? 'visible max-h-full opacity-1 mb-12 mt-8 md:px-4'
+                    : 'overflow-y-hidden invisible max-h-0 opacity-0'
+                    } transition duration-500 ease-in-out transform`}
             >
                 <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                     <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
