@@ -1,0 +1,24 @@
+> 🚧 **NOTE:** Currently, this isn't supported if using Jetpack Compose views. We're investigating this [issue](https://github.com/PostHog/posthog-android/issues/158).
+
+Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
+
+To replace any type of `View` with a redacted version in the recording, set the [tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`.
+
+```xml
+<ImageView
+    android:id="@+id/imvProfilePhoto"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:tag="ph-no-capture"
+/>
+```
+
+### Limitations
+
+- Requires Android API >= 26.
+- Jetpack Compose is only supported if `screenshotMode` is enabled.
+  - Masking and redacting in Jetpack Compose isn't supported yet. We're investigating this [issue](https://github.com/PostHog/posthog-android/issues/158).
+- Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
+- WebView is not supported. A placeholder will be shown.
+- Keyboard is not supported. A placeholder will be shown.
+- Flutter for Android isn't supported.

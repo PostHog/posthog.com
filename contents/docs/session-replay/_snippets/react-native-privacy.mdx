@@ -1,0 +1,36 @@
+Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
+
+To replace any type of `React.Component` with a redacted version in the replay, set the [accessibilityLabel](https://reactnative.dev/docs/accessibility#accessibilitylabel) to `ph-no-capture`:
+
+```js
+<Text accessibilityLabel="ph-no-capture">Hello PostHog 👋</Text>
+```
+
+## Expo
+
+Mobile Session Replay for Expo works normally, but prefer the `expo` tools for installing and running your project.
+
+Install the session replay plugin.
+
+```bash
+npx expo install posthog-react-native-session-replay
+```
+
+Expo Go isn't supported since it uses Native plugins, please use development build.
+
+```bash
+# Run Android development build 
+npx expo run:android --no-build-cache --device
+
+# Run iOS development build 
+npx expo run:ios --no-build-cache --device
+```
+
+## Limitations
+
+- On Android, requires API >= 26.
+- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
+- WebView is not supported. A placeholder will be shown.
+- Keyboard is not supported. A placeholder will be shown.
+- Wireframe mode isn't supported, only screenshot mode.
+- Expo Go isn't supported since it uses Native plugins, please use development build.

@@ -1,0 +1,34 @@
+Your replays may contain sensitive information. For example, if you're building a banking app you may not want to capture how much money a user has in their account. 
+
+To replace any type of `UIView` with a redacted version in the replay, set the [accessibilityIdentifier](https://developer.apple.com/documentation/uikit/uiaccessibilityidentification/1623132-accessibilityidentifier) to `ph-no-capture`:
+
+```swift
+let imvProfilePhoto = UIImageView(frame: CGRect(x: 50, y: 50, width: 100, height: 100))
+imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
+```
+
+> **Note:** For SwiftUI please refer to the [Masking in SwiftUI](#masking-in-swiftui) section below
+
+> **Note:** A technical issue is causing the [SwiftUI Text](https://developer.apple.com/documentation/swiftui/text) view to be detected as a `SwiftUI Image` view. This means that it'll be automatically masked if `maskAllImages` is set to `true`, even if the `maskAllTextInputs` is disabled. We're investigating this [issue](https://github.com/PostHog/posthog-ios/issues/163).
+
+
+### Masking in SwiftUI
+
+- When using the [SwiftUI TextField](https://developer.apple.com/documentation/swiftui/textfield) with [UITextInputTraits](https://developer.apple.com/documentation/uikit/uitextinputtraits), setting traits such as `TextField("Email", text: ...).keyboardType(.emailAddress)` will always be automatically masked since it's for private text.
+- The [SwiftUI SecureField](https://developer.apple.com/documentation/swiftui/securefield) view is always automatically masked.
+- You can manually mark a SwiftUI View for masking using the `postHogMask(_:)` view modifier:
+
+  ```swift
+  // This view will be masked in session replay recordings
+  MyCoolView()
+    .postHogMask()
+  ```
+
+## Limitations
+
+- On iOS, minimum deployment target is [iOS13](/docs/libraries/ios)
+- [SwiftUI](https://developer.apple.com/xcode/swiftui/) is only supported if the `screenshotMode` option is enabled.
+  - `Text` views in SwiftUI are considered images, so they are masked unless `maskAllImages` is disabled. 
+- Custom views are not fully supported if `screenshotMode` is disabled.
+- WebView is not supported. A placeholder will be shown.
+- Flutter for iOS isn't supported.
