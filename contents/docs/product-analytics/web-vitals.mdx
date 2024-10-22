@@ -51,9 +51,10 @@ To create your own dashboard from a template:
 
 The SDK groups available metrics in order to reduce the cost. That means each `$web_vitals` event carries one or more metric result. By default we wait up to 5 seconds (since the page load or last set of metrics was sent) in order to try and catch all four metrics in one event. See the section on configuring web vitals capture below for how to change this behaviour.
 
-Metrics are made available when the [web vitals library](https://github.com/GoogleChrome/web-vitals) triggers them. This is different for different metrics.
+Metrics are made available when the [web vitals library](https://github.com/GoogleChrome/web-vitals) triggers them:
 
-[FCP](https://web.dev/articles/fcp) and [LCP](https://web.dev/articles/lcp) are relative to a page being rendered and are made available relatively soon after loading a page. [INP](https://web.dev/articles/inp) and [CLS](https://web.dev/articles/cls) are measures across the lifecycle of a page and don't have a fixed time they become available.
+- [FCP](https://web.dev/articles/fcp) and [LCP](https://web.dev/articles/lcp) are relative to a page being rendered and are made available relatively soon after loading a page. 
+- [INP](https://web.dev/articles/inp) and [CLS](https://web.dev/articles/cls) are measures across the lifecycle of a page and don't have a fixed time they become available.
 
 We wait until all allowed metrics have been triggered or `web_vitals_delayed_flush_ms` has passed and then send a single `$web_vitals` event with each of the triggered metrics.
 
