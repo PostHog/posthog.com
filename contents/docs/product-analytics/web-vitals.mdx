@@ -60,7 +60,7 @@ Metrics are made available when the [web vitals library](https://github.com/Goog
 
 You can provide a client side config to tune web vitals autocapture. These are set on [the `capture_performance` key](https://github.com/PostHog/posthog-js/blob/main/src/types.ts#L209).
 
-| attribute | description|
+| Attribute | Description |
 |-|-|
 |`__web_vitals_max_value`<br/>default: 15 minutes| We observe very large values reported by the Chrome web vitals library. These outliers are likely not real, useful values, and we exclude them. You can set this to 0 in order to include all values |
 |`web_vitals_allowed_metrics`<br/>default: ['LCP', 'CLS', 'FCP', 'INP' ]| By default all 4 metrics are captured. You can set this config to restrict which metrics are captured. e.g. ['CLS', 'FCP'] to only capture those two metrics. NB setting this does not override whether the capture is enabled |
