@@ -9,4 +9,30 @@ availability:
 
 ---
 
-An event is the core unit of data in PostHog. It represents an interaction a user has with your app or website. Examples include button clicks, pageviews, query completions, and signups.
+tl;dr: Use Actions.
+
+One thing I've noticed as I'm getting started here at PostHog is a bias
+towards action. Get stuff done, then get it right.
+
+Once you get your PostHog account up and running, the next step is to start
+sending events. Events are an elemental unit of data in PostHog. They
+represent an interaction a user has with your app or website.
+
+Examples include button clicks, pageviews, query completions, and signups.
+
+But what if you want to rename an event?
+
+You renamed your "Get Started" button to "LFG" but now all your existing
+events don't make sense. And you probably don't want to sift through hundreds
+of thousands of events and rename them.
+
+## Actions
+
+The solution is to start sending events with the new name. And then use
+[Actions](https://posthog.com/docs/data/actions) to group them. Actions are a
+way of combining several related events into one.
+
+## Links
+
+- `contents/docs/data/events.mdx`
+- `contents/docs/product-analytics/insights.mdx`
