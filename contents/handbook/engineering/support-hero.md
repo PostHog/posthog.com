@@ -21,7 +21,7 @@ Most engineering teams run a PagerDuty schedule:
 - [Product Analytics](https://posthog.pagerduty.com/schedules#PXUZ9XL)
 - [Feature Success](https://posthog.pagerduty.com/schedules#P04FUTJ)
 - [Replay](https://posthog.pagerduty.com/schedules#PLGXQIF)
-- [Pipeline](https://posthog.pagerduty.com/schedules#PM8YSH8)
+- [CDP](https://posthog.pagerduty.com/schedules#PM8YSH8)
 - [Infrastructure](https://posthog.pagerduty.com/schedules#P78OOWZ)
 - [Growth](https://posthog.pagerduty.com/schedules#PN1Q6BO)
 
