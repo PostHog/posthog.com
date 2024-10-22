@@ -10,6 +10,7 @@ import { IconLightBulb } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
+import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 
 const ProductLink = ({ icon, name, url, color }) => {
     const Icon = Icons[icon]
@@ -111,7 +112,11 @@ export const DocsIndex = () => {
 
                 <section className="@container">
 
-                    <h4 className="mb-0">Product documentation</h4>
+                    <h4 className="mb-2">Product documentation</h4>
+
+                    <div className="max-w-4xl">
+                        <SidebarSearchBox filter="docs" />
+                    </div>
 
                     <ProductList />
 
