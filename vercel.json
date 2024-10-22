@@ -338,6 +338,7 @@
         { "source": "/mikebifulco", "destination": "/?utm_source=mikebifulco&utm_campaign=mikebifulco" },
         { "source": "/kikisbytes", "destination": "/?utm_source=kikisbytes&utm_campaign=kikisbytes" },
         { "source": "/raroque", "destination": "/?utm_source=raroque&utm_campaign=raroque" },
+        { "source": "/ashishps", "destination": "/?utm_source=ashishps&utm_campaign=ashishps" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
