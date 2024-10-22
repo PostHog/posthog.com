@@ -58,42 +58,58 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
   const [mediaModalOpen, setMediaModalOpen] = useState(false)
   const posthog = usePostHog()
   const [openAccordions, setOpenAccordions] = useState<string[]>(['Products'])
+  const [activeItem, setActiveItem] = useState<string>('')
 
   useEffect(() => {
     const currentPath = pathname
-    const openSections = menu.flatMap(item =>
-      item.children?.flatMap((child: any) => {
-        if (currentPath.startsWith(child.url)) {
-          return [item.name, child.name]
-        }
-        return child.children?.some((grandchild: any) => currentPath.startsWith(grandchild.url))
-          ? [item.name, child.name]
-          : []
-      }) || []
-    )
+    const openSections: string[] = []
+    let activeItemFound = false
+
+    menu.forEach(item => {
+      if (item.children) {
+        item.children.forEach(child => {
+          if (currentPath.startsWith(child.url)) {
+            openSections.push(item.name, child.name)
+            if (child.children) {
+              const activeChild = child.children.find(grandchild => currentPath.startsWith(grandchild.url))
+              if (activeChild) {
+                setActiveItem(activeChild.url)
+                activeItemFound = true
+              }
+            }
+            if (!activeItemFound) {
+              setActiveItem(child.url)
+            }
+          }
+        })
+      }
+    })
 
     setOpenAccordions(prev => Array.from(new Set([...prev, ...openSections])))
   }, [pathname])
 
-  const toggleAccordion = (name: string) => {
+  const toggleAccordion = (name: string, url: string) => {
     setOpenAccordions(prev =>
       prev.includes(name) ? prev.filter(item => item !== name) : [...prev, name]
     )
+    if (url) {
+      setActiveItem(url)
+    }
   }
 
   const renderMenuItem = (item: any, depth = 0) => {
     const hasChildren = item.children && item.children.length > 0
     const isOpen = openAccordions.includes(item.name)
     const IconComponent = depth > 0 && item.icon ? icons[item.icon as keyof typeof icons] : null
-    const isActive = pathname === item.url || pathname.startsWith(item.url + '/')
+    const isActive = activeItem === item.url
 
     return (
       <li key={item.name} className={`ml-${depth * 2}`}>
         <div className="flex items-center px-1">
           {hasChildren ? (
             <button
-              onClick={() => toggleAccordion(item.name)}
-              className="flex items-center justify-between w-full p-1 hover:bg-accent dark:hover:bg-accent-dark rounded text-sm"
+              onClick={() => toggleAccordion(item.name, hasChildren && depth === 1 ? item.children[0].url : item.url)}
+              className={`flex items-center justify-between w-full p-1 hover:bg-accent dark:hover:bg-accent-dark rounded text-sm ${depth === 2 && isActive ? 'font-bold bg-accent dark:bg-accent-dark' : ''}`}
             >
               <span className="flex items-center gap-1">
                 {IconComponent && <IconComponent className={`size-5 text-${item.color || 'current'}`} />}
@@ -104,8 +120,8 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
           ) : (
             <Link
               to={item.url}
-              className={`w-full flex items-center gap-1 text-sm py-1 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark ${isActive ? 'font-bold bg-accent dark:bg-accent-dark' : ''
-                }`}
+              onClick={() => setActiveItem(item.url)}
+              className={`w-full flex items-center gap-1 text-sm py-1 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark ${isActive ? 'font-bold bg-accent dark:bg-accent-dark' : ''}`}
             >
               {IconComponent && <IconComponent className={`size-5 text-${item.color || 'current'}`} />}
               <span>{item.name}</span>
