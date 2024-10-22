@@ -3155,6 +3155,32 @@ const menu = [
                 icon: 'IconGraph',
                 color: 'blue',
                 url: '/product-analytics',
+                children: [
+                    {
+                        name: 'Features',
+                        url: '/product-analytics',
+                    },
+                    {
+                        name: 'Pricing',
+                        url: '/product-analytics/pricing',
+                    },
+                    {
+                        name: 'Compare',
+                        url: '/product-analytics/compare',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/product-analytics/docs',
+                    },
+                    {
+                        name: 'Tutorials',
+                        url: '/product-analytics/tutorials',
+                    },
+                    {
+                        name: 'Questions?',
+                        url: '/product-analytics/questions',
+                    },
+                ],
             },
             {
                 name: 'Web analytics',

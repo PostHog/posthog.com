@@ -61,9 +61,16 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
 
   useEffect(() => {
     const currentPath = pathname
-    const openSections = menu.filter(item =>
-      item.children?.some((child: any) => currentPath.startsWith(child.url))
-    ).map(item => item.name)
+    const openSections = menu.flatMap(item =>
+      item.children?.flatMap((child: any) => {
+        if (currentPath.startsWith(child.url)) {
+          return [item.name, child.name]
+        }
+        return child.children?.some((grandchild: any) => currentPath.startsWith(grandchild.url))
+          ? [item.name, child.name]
+          : []
+      }) || []
+    )
 
     setOpenAccordions(prev => Array.from(new Set([...prev, ...openSections])))
   }, [pathname])
@@ -78,27 +85,35 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
     const hasChildren = item.children && item.children.length > 0
     const isOpen = openAccordions.includes(item.name)
     const IconComponent = depth > 0 && item.icon ? icons[item.icon as keyof typeof icons] : null
+    const isActive = pathname === item.url || pathname.startsWith(item.url + '/')
 
     return (
-      <li key={item.name} className={`ml-${depth * 4}`}>
-        <div className="flex items-center">
+      <li key={item.name} className={`ml-${depth * 2}`}>
+        <div className="flex items-center px-1">
           {hasChildren ? (
             <button
               onClick={() => toggleAccordion(item.name)}
               className="flex items-center justify-between w-full p-1 hover:bg-accent dark:hover:bg-accent-dark rounded text-sm"
             >
-              {item.name}
+              <span className="flex items-center gap-1">
+                {IconComponent && <IconComponent className={`size-5 text-${item.color || 'current'}`} />}
+                {item.name}
+              </span>
               {isOpen ? <icons.IconMinus className="size-4" /> : <icons.IconPlus className="size-4" />}
             </button>
           ) : (
-            <Link to={item.url} className="w-full flex items-center gap-1 text-[15px] py-1 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark">
-              {IconComponent && <IconComponent className={`size-4 text-${item.color || 'current'}`} />}
+            <Link
+              to={item.url}
+              className={`w-full flex items-center gap-1 text-sm py-1 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark ${isActive ? 'font-bold bg-accent dark:bg-accent-dark' : ''
+                }`}
+            >
+              {IconComponent && <IconComponent className={`size-5 text-${item.color || 'current'}`} />}
               <span>{item.name}</span>
             </Link>
           )}
         </div>
         {hasChildren && (
-          <ul className={`p-0 m-0 list-none overflow-hidden transition-all duration-100 ease-in-out ${isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+          <ul className={`p-0 m-0 mt-px space-y-px list-none overflow-hidden transition-all duration-100 ease-in-out ${isOpen ? 'max-h-[1000px] opacity-300 mb-2' : 'max-h-0 opacity-0'}`}>
             {item.children.map((child: any) => renderMenuItem(child, depth + 1))}
           </ul>
         )}
@@ -108,7 +123,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
 
   return (
     <nav className={className}>
-      <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
+      <Link className="flex justify-center p-1 rounded hover:bg-accent dark:hover:bg-accent-dark grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative mb-2" to="/">
         {pathname === '/' && <ActiveBackground />}
         {enterpriseMode ? (
           <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/MainNav/posthog-tm.png" className="h-6 mx-6" />
