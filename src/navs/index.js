@@ -1138,7 +1138,7 @@ export const docsMenu = {
             name: 'Product OS',
             icon: 'IconStack',
             color: 'salmon',
-            url: '/docs',
+            url: '/docs/product-os',
             description: 'The PostHog platform for building and improving your product',
             children: [
                 {
