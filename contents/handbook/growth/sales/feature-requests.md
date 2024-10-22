@@ -37,5 +37,5 @@ If a customer is at risk of churn, or otherwise unhappy about the missing featur
 
 We should also review the list of requests with teams on an ongoing basis:
 
-1. Monthly on the Product <> CS Call
+1. Monthly on the Product &lt;&gt; CS Call
 2. When teams are doing quarterly planning
