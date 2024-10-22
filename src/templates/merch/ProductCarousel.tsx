@@ -29,7 +29,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
         },
     })
 
-    const classes = cn('relative', className)
+    const classes = cn('relative rounded overflow-hidden', className)
 
     if (!images || images.length === 0) return null
 
