@@ -9,30 +9,56 @@ availability:
 
 ---
 
-tl;dr: Use Actions.
+## tl;dr
 
-One thing I've noticed as I'm getting started here at PostHog is a bias
-towards action. Get stuff done, then get it right.
+Use [Actions](/docs/data/actions). Start capturing events with the new name, and then create an Action to group it with the existing event.
 
-Once you get your PostHog account up and running, the next step is to start
-sending events. Events are an elemental unit of data in PostHog. They
-represent an interaction a user has with your app or website.
+## Events
 
-Examples include button clicks, pageviews, query completions, and signups.
+Once your PostHog account is up and running, you'll start capturing events. Some events are [autocaptured](/docs/product-analytics/autocapture). And you can also [capture custom events](/docs/product-analytics/capture-events).
 
-But what if you want to rename an event?
+You can find all your events in the [Data Management](/data-management/actions) tab in the left navigation.
 
-You renamed your "Get Started" button to "LFG" but now all your existing
-events don't make sense. And you probably don't want to sift through hundreds
-of thousands of events and rename them.
+But once an event is captured, there is no option to rename it!
 
 ## Actions
 
-The solution is to start sending events with the new name. And then use
-[Actions](https://posthog.com/docs/data/actions) to group them. Actions are a
-way of combining several related events into one.
+The solution is to start sending events with the new name, and then create an Action. Actions are a way of combining several related events into one. You can match both the old and new event name and get a fluent transition in your insights, without losing historical data.
 
-## Links
+Start by clicking the "New action" button in the [Actions](/data-management/actions) tab in Data Management. Then, select the "from event or pageview" option.
 
-- `contents/docs/data/events.mdx`
-- `contents/docs/product-analytics/insights.mdx`
+<ProductScreenshot
+    imageLight="create-first-action-light.png"
+    imageDark="create-first-action-dark.png"
+    alt="Create first action"
+    classes="rounded"
+/>
+
+For example, you can rename your sign up call to action button text from "Try for Free" to "Pricing + Signup". And those would create two separate events. But you can use Match groups to find both of those events and see them as one "Clicked Sign Up CTA" action.
+
+<ProductScreenshot
+    imageLight="create-action-light"
+    imageDark="create-action-dark"
+    alt="Create action page with match groups"
+    classes="rounded"
+/>
+
+## Viewing the results
+
+You can check the Matching events section at the bottom of the Action page to verify that it's matching both of the events.
+
+<ProductScreenshot
+    imageLight="matching-events-light"
+    imageDark="matching-events-dark"
+    alt="View matching events"
+    classes="rounded"
+/>
+
+Lastly, you can create an [Insight](/docs/product-analytics/insights) with an Action just like you would do with a single event.
+
+<ProductScreenshot
+    imageLight="action-insight-light"
+    imageDark="action-insight-dark"
+    alt="Create an Insight with an Action"
+    classes="rounded"
+/>
