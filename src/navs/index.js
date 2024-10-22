@@ -219,6 +219,10 @@ export const handbookSidebar = [
                         name: 'Exec hiring',
                         url: '/handbook/people/hiring-process/exec-hiring',
                     },
+                    {
+                        name: 'Sales and CS hiring',
+                        url: '/handbook/people/hiring-process/sales-cs-hiring',
+                    },
                 ],
             },
         ],
@@ -2358,6 +2362,10 @@ export const docsMenu = {
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                     },
                     children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/session-replay/mobile',
+                        },
                         {
                             name: 'Android',
                             url: '/docs/session-replay/android',
