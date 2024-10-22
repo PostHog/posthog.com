@@ -2,35 +2,36 @@
 title: How to rename events
 sidebar: Docs
 showTitle: true
-availability:
-    free: full
-    selfServe: full
-    enterprise: full
-
+author:
+  - bijan-boustani
+date: 2024-10-22
+tags:
+  - actions
+  - events
 ---
 
-## tl;dr
+**Estimated reading time:** 3 minutes ☕☕
 
-Use [Actions](/docs/data/actions). Start capturing events with the new name, and then create an Action to group it with the existing event.
+**tl;dr** Use [Actions](/docs/data/actions). Start capturing events with the new name, and then create an Action to group it with the existing event.
 
-## Events
+## Capturing events
 
 Once your PostHog account is up and running, you'll start capturing events. Some events are [autocaptured](/docs/product-analytics/autocapture). And you can also [capture custom events](/docs/product-analytics/capture-events).
 
-You can find all your events in the [Data Management](/data-management/actions) tab in the left navigation.
+You can find all your events in the [Data management](/data-management/actions) tab in the left navigation.
 
 But once an event is captured, there is no option to rename it!
 
-## Actions
+## Grouping with actions
 
 The solution is to start sending events with the new name, and then create an Action. Actions are a way of combining several related events into one. You can match both the old and new event name and get a fluent transition in your insights, without losing historical data.
 
-Start by clicking the "New action" button in the [Actions](/data-management/actions) tab in Data Management. Then, select the "from event or pageview" option.
+Start by clicking the "New action" button in the [Actions](/data-management/actions) tab in Data management. Then, select the "from event or pageview" option.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/create_first_action_light_63d4f8aa42.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/create_first_action_dark_bb2ec7a894.png"
-    alt="Create first action"
+    alt="Create an action"
     classes="rounded"
 />
 
@@ -43,7 +44,7 @@ For example, you can rename your sign up call to action button text from "Try fo
     classes="rounded"
 />
 
-## Viewing the results
+## Seeing the results
 
 You can check the Matching events section at the bottom of the Action page to verify that it's matching both of the events.
 
