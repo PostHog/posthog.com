@@ -63,7 +63,7 @@ function Privacy() {
     useEffect(() => {
         const fullPrivacyPolicy = document.querySelector('.full-privacy-policy')
         const h2s = fullPrivacyPolicy.querySelectorAll(':nth-child(odd) h2')
-        setHeaders(Array.from(h2s))
+        setHeaders(Array.from(h2s).map((header) => ({ id: header.id, innerText: header.innerText })))
     }, [])
 
     return (
