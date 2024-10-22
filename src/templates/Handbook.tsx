@@ -493,11 +493,7 @@ export const query = graphql`
                     teamData {
                         name
                     }
-                    avatar {
-                        childImageSharp {
-                            gatsbyImageData(width: 38, height: 38)
-                        }
-                    }
+                    avatar
                     profile {
                         squeakId
                         firstName

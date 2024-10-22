@@ -37,7 +37,7 @@ If this is a new contract for an existing customer, you will need to add their e
 ###### Step 3: Verify invoice details and send
 - Use the Invoice ID recorded in the table to locate the invoice in Stripe.
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
-- Send the invoice to the customer and wait for the payment to be completed.
+- Send the invoice to the customer and wait for the payment to be completed.  Ensure that the customer is aware that payment is via Bank Transfer only (no checks).
 
 **Do not proceed to the next steps until payment is confirmed.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 

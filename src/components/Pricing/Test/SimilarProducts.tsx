@@ -12,7 +12,13 @@ const comparison = [
     {
         name: 'Amplitude',
         logo: (
-            <CloudinaryImage src={`./images/icon-amp.png`} className="" height={32} placeholder="blurred" alt="Amplitude" />
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_amp_4d0e457978.png"
+                className=""
+                width={32}
+                placeholder="blurred"
+                alt="Amplitude"
+            />
         ),
         products: {
             'Product analytics': true,
@@ -27,7 +33,13 @@ const comparison = [
     {
         name: 'Mixpanel',
         logo: (
-            <CloudinaryImage src={`./images/icon-mp.png`} className="" height={32} placeholder="blurred" alt="Mixpanel" />
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_mp_6404158e7f.png"
+                className=""
+                width={32}
+                placeholder="blurred"
+                alt="Mixpanel"
+            />
         ),
         products: {
             'Product analytics': true,
@@ -43,11 +55,10 @@ const comparison = [
         name: 'Heap',
         logo: (
             <CloudinaryImage
-                src={`./images/icon-heep.png`}
-                className="h-full rotate-3"
-                height={40}
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_heep_7d9bb0f55a.png"
+                width={16}
                 placeholder="blurred"
-                alt="Mixpanel"
+                alt="Heap"
             />
         ),
         products: {
@@ -63,7 +74,13 @@ const comparison = [
     {
         name: 'Pendo',
         logo: (
-            <CloudinaryImage src={`./images/icon-pnd0.png`} className="" height={32} placeholder="blurred" alt="Mixpanel" />
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_pnd0_dc3ea0f56f.png"
+                className=""
+                width={32}
+                placeholder="blurred"
+                alt="Pendo"
+            />
         ),
         products: {
             'Product analytics': true,
@@ -78,7 +95,13 @@ const comparison = [
     {
         name: 'FullStory',
         logo: (
-            <CloudinaryImage src={`./images/icon-fs.png`} className="" height={32} placeholder="blurred" alt="Mixpanel" />
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_fs_542ca7eb05.png"
+                className=""
+                width={32}
+                placeholder="blurred"
+                alt="FullStory"
+            />
         ),
         products: {
             'Product analytics': true,
