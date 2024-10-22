@@ -1,5 +1,5 @@
 ---
-title: How Airbus deployed PostHog across 4,000 applications
+title: How Airbus deploys PostHog across 3,000 web and mobile apps
 customer: Airbus
 logo: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/airbus_light_7d8cc90e62.png
@@ -23,9 +23,9 @@ As Europe’s largest aerospace company, [Airbus](https://www.airbus.com/en) is 
 
 Put simply, there was no unified tool for gathering data and each application would frequently use its own stack entirely. 
 
-“Many of our 10,000 apps are just for internal usage, but around 4,000 of them have external users who come to us to buy aircraft or services,” explains Francois Toulouse, a Product Owner in Airbus’ User Behaviour Analytics team. “The challenge was that nobody was able to say who these users were, or what features they used. All we could do was look at login logs in Splunk to count them.”
+"Many of our 10,000 apps are used for machine to machine data transfer but 3,000 are web and mobile applications used by Airbus & suppliers employees and 100 are dedicated to our end customers who come to us to buy aircraft and services," explains Francois Toulouse, the Product Owner of Airbus’ User Behaviour Analytics team. “The challenge was that nobody was able to say who these users were, or what features they used. All we could do was look at login logs in Splunk to count them on some applications.”
 
-As a result, Francois’ team realized that Airbus needed a single, dedicated tool with which to collect and analyze usage data from these 4,000 applications. He began researching potential tools such as Piwik Pro, Matomo, and Google Analytics — but each of these proved unusable at the scale Airbus needed them. 
+As a result, Francois’ team realized that Airbus needed a single, dedicated tool with which to collect and analyze usage data from these 3,000 applications. He began researching potential tools such as Piwik Pro, Matomo, and Google Analytics — but each of these proved unusable at the scale Airbus needed them. 
 
 “One of my colleagues wanted to use Matomo, but they eventually said we were too huge for them,” says Francois. “They ended up not even continuing the conversation with us because our scale was too big...and [we couldn’t use Google Analytics for GDPR reasons either](/blog/best-gdpr-compliant-analytics-tools).”
 
@@ -45,7 +45,7 @@ As a result, Raquel extended [the PostHog API](/docs/api) in two ways to help ad
 
 “Honestly, the support experience was really nice,” says Francois. “[Simon](https://posthog.com/community/profiles/28895) is always a great help too, telling us what we need to know. Compared to other tools I’ve used, the support has been perfect — and we were really happy to see Raquel could develop what we need for our scale.”
 
-### Adopting PostHog across over 4,000 applications at once
+### Adopting PostHog across over 3,000 applications at once
 
 Now, with Airbus’ adoption growing and more projects starting on PostHog, Francois is looking to expand usage into other parts of the platform — such as [user surveys](https://posthog.com/surveys). 
 
@@ -56,4 +56,3 @@ Combining surveys and analytics into a single tool also means that Airbus is abl
 “We’ve made all sorts of discoveries since adopting PostHog,” says Francois. “Some of our product owners have found that features they’d been supporting actually aren’t used by users at all, or only by a few people. We can target these users with surveys to understand them more, or just decommission the features saves us time, but also money that we can put into other projects.”
 
 “That’s one of the strongest benefits of PostHog, for us — that we’re able to save time and money by understanding our users more.”
-
