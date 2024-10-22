@@ -737,6 +737,20 @@ export const handbookSidebar = [
                     },
                 ],
             },
+            {
+                name: 'CS Operations',
+                url: '',
+                children: [
+                    {
+                        name: 'Health tracking',
+                        url: '/handbook/growth/sales/health-tracking',
+                    },
+                    {
+                        name: 'Feature requests',
+                        url: '/handbook/growth/sales/feature-requests',
+                    },
+                ],
+            },
         ],
     },
     {
