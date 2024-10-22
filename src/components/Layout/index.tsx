@@ -14,6 +14,7 @@ import { useLayoutData } from './hooks'
 import SearchBox from 'components/Search/SearchBox'
 import Toggle from 'components/Toggle'
 import Tooltip from 'components/Tooltip'
+import Navigation from 'components/Navigation'
 
 const TheoToggle = () => {
     const { theoMode, setTheoMode } = useLayoutData()
@@ -43,24 +44,27 @@ const Article = ({
     const { compact, theoMode } = useLayoutData()
 
     return (
-        <div className={className}>
-            {/* <Banner /> */}
-            {compact ? (
-                <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-[50] bg-light dark:bg-dark">
-                    <SearchBox className="!w-full !py-2" location="mobile-header" />
-                </div>
-            ) : theoMode ? null : (
-                <Header blur={headerBlur} />
-            )}
-            <main>{children}</main>
-            {!compact && !theoMode && (
-                <>
-                    <Footer />
-                    <CookieBanner />
-                    <MobileNav />
-                </>
-            )}
-            {theoMode && <TheoToggle />}
+        <div className="flex">
+            <Navigation className="shrink-0 h-screen max-h-screen overflow-y-auto sticky top-0 border-r border-light dark:border-dark flex-[0_0_220px]" />
+            <div className={`${className} flex-1 overflow-x-hidden`}>
+                {/* <Banner /> */}
+                {compact ? (
+                    <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-[50] bg-light dark:bg-dark">
+                        <SearchBox className="!w-full !py-2" location="mobile-header" />
+                    </div>
+                ) : theoMode ? null : (
+                    <Header blur={headerBlur} />
+                )}
+                <main>{children}</main>
+                {!compact && !theoMode && (
+                    <>
+                        <Footer />
+                        <CookieBanner />
+                        <MobileNav />
+                    </>
+                )}
+                {theoMode && <TheoToggle />}
+            </div>
         </div>
     )
 }
