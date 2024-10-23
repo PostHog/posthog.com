@@ -113,6 +113,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - Your specific commission % will depend on your OTE and quota size
 - Commission is paid out quarterly, and in any case after an invoice is paid
   - This incentivises securing upfront payment, not just annual contracts with monthly payment every time.
+    - If you close an annual contract with monthly/quarterly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
   - We also don't want AEs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
   - For monthly customers, commission is only paid after the first 2 invoices have been paid (ie. you don't get commission due to a random spike)
     - To clarify, this means the first 2 invoices the customer has ever paid, ie. you still get commission from 'your' month 1 if you inherit a paying monthly customer
