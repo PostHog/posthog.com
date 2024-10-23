@@ -12,21 +12,21 @@ tags:
 
 **Estimated reading time:** 3 minutes ☕☕
 
-**tl;dr** Use [Actions](/docs/data/actions). Start capturing events with the new name, and then create an action to group it with the existing event.
+**tl;dr** Use [actions](/docs/data/actions). Start capturing events with the new name, and then create an action to group it with the existing event.
 
-## Capturing events
+## Managing events
 
-Once your PostHog account is up and running, you'll start capturing events. Some events are [autocaptured](/docs/product-analytics/autocapture). And you can also [capture custom events](/docs/product-analytics/capture-events).
+After you've started capturing events, you can find them in the [data management](/data-management/actions) tab in the left navigation.
 
-You can find all your events in the [Data management](/data-management/actions) tab in the left navigation.
+For example, you might have an existing event named `register_button_clicked` and you want to rename it to `signup_button_clicked`.
 
-But once an event is captured, there is no option to rename it!
+But once an event is logged, there is no option to rename it!
 
 ## How to create an action
 
-The solution is to start sending events with the new name, and then create an Action. Actions are a way of combining several related events into one. You can match both the old and new event name and get a fluent transition in your insights, without losing historical data.
+The solution is to start sending events with the new name, and then create an action. Actions are a way of combining several related events into one. You can match both the old and new event name and get a fluent transition in your insights, without losing historical data.
 
-Start by clicking the "New action" button in the [Actions](/data-management/actions) tab in Data management. Then, select the "from event or pageview" option.
+Start by clicking the "New action" button in the [actions](/data-management/actions) tab in data management. Then, select the "from event or pageview" option.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/create_first_action_light_63d4f8aa42.png"
@@ -35,7 +35,9 @@ Start by clicking the "New action" button in the [Actions](/data-management/acti
     classes="rounded"
 />
 
-For example, you can rename your sign up call to action button text from "Try for Free" to "Pricing + Signup". And those would create two separate events. But you can use Match groups to find both of those events and see them as one "Clicked Sign Up CTA" action.
+Now you can take the two separate events (`register_button_clicked` and `signup_button_clicked`) and combine them. Match groups allow you to find both of those events and see them as one "Clicked Sign Up CTA" action.
+
+For this example, you can create two match groups and find the events by name using the "Other events" option.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/create_action_light_e35075ceb0.png"
@@ -46,7 +48,7 @@ For example, you can rename your sign up call to action button text from "Try fo
 
 ## Seeing the results
 
-You can check the Matching events section at the bottom of the Action page to verify that it's matching both of the events.
+After you click the "Save" button, check the matching events section at the bottom of the page to verify it's matching both events.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/matching_events_light_4b8c1accc4.png"
@@ -55,11 +57,11 @@ You can check the Matching events section at the bottom of the Action page to ve
     classes="rounded"
 />
 
-Lastly, you can create an [Insight](/docs/product-analytics/insights) with an Action just like you would do with a single event.
+Lastly, you can create an [insight](/docs/product-analytics/insights) with an action just like you would do with a single event.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/action_insight_light_1e11ea7591.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/action_insight_dark_94069b9c07.png"
-    alt="Create an Insight with an Action"
+    alt="Create an insight with an action"
     classes="rounded"
 />
