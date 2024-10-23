@@ -172,9 +172,9 @@ function Privacy() {
                         className="mx-auto"
                         alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
                     >
-                        🛠️ We gather usage data to analyze and improve our site, but you can opt out. If you share your
-                        info, like name and email, it’s only used for necessary stuff. No sensitive info like genetic
-                        data here, and definitely no under-18 data!
+                        🛠️ We gather usage data from our self-managed instances to analyze and improve our site, but you
+                        can opt out. If you share your info, like name and email, it’s only used for necessary stuff. No
+                        sensitive info like genetic data here, and definitely no under-18 data!
                     </Tweet>
 
                     <Tweet
