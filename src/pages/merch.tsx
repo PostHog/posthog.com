@@ -4,6 +4,9 @@ import Collection from '../templates/merch/Collection'
 
 export default function Merch({ data }) {
     const collection = data.shopifyCollection
+    if (!collection) {
+        return null
+    }
     const { products, handle } = collection
 
     return <Collection pageContext={{ handle, productsForCurrentPage: products }} />
