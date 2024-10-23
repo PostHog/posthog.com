@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import { useSearch } from 'components/Search/SearchContext'
@@ -462,7 +463,7 @@ export const Main = () => {
                         <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
                             {pathname === '/' && <ActiveBackground />}
                             {enterpriseMode ? (
-                                <StaticImage src="./posthog-tm.png" className="h-6 mx-6" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/MainNav/posthog-tm.png" className="h-6 mx-6" />
                             ) : (
                                 <Logo
                                     color={websiteTheme === 'dark' && 'white'}

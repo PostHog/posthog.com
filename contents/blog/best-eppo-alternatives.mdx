@@ -363,7 +363,7 @@ According to G2 reviews, people are fans of Optimizely because:
 
 1. **It's easy to use for non-engineers**: Optimizely makes it easy for anyone to run web experiments thanks to no code visual editor.
 
-2. **It integrates with their analytics platforms:** Optimizely doesn't have built-in analytics, but reviewers appreciate its integrations with Google Analytics, Adobe Analytics, and others.
+2. **It integrates with their analytics platforms:** Optimizely doesn't have built-in analytics, but reviewers appreciate its integrations with Google Analytics, [Adobe Analytics](/blog/best-adobe-analytics-alternatives), and others.
 
 3. **It's business-oriented:** Optimizely focuses on optimizing business, marketing, and ecommerce use cases, and helps users improve the core business metrics they care about most.
 

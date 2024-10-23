@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
@@ -68,8 +69,8 @@ export const AboutTransparency = () => {
                         <p className="font-bold text-sm mb-0">- As voted by employees</p>
                     </div>
 
-                    <StaticImage
-                        src="./images/xray.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/About/AboutTransparency/images/xray.png"
                         width={651}
                         height={289}
                         objectFit="contain"

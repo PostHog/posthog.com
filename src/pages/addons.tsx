@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { pricingMenu } from '../navs'
 import Layout from 'components/Layout'
@@ -172,7 +173,7 @@ const Addons = (): JSX.Element => {
                         </div>
                     </div>
                     <aside className="max-w-full -mt-6 md:mt-0 md:max-w-xs mdlg:max-w-sm lg:max-w-lg lg:-my-6 flex justify-end">
-                        <StaticImage
+                        <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/add_ons_a700ab577f.png"
                             alt="Add-ons"
                             objectFit="contain"

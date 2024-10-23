@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
@@ -10,8 +11,8 @@ export default function Lawyers() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pb-4 mb-4 border-b border-light dark:border-dark">
                 <div className="flex flex-col items-center gap-1 text-center">
                     <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
-                        <StaticImage
-                            src="../../images/lawyers/barry-zuckerkorn.jpg"
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/barry-zuckerkorn.jpg"
                             className="rounded-full "
                             alt="Barry Zuckerkorn"
                         />
@@ -29,8 +30,8 @@ export default function Lawyers() {
                 </div>
                 <div className="flex flex-col items-center gap-1 text-center">
                     <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
-                        <StaticImage
-                            src="../../images/lawyers/wayne-jarvis.jpg"
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/wayne-jarvis.jpg"
                             className="rounded-full "
                             alt="Wayne Jarvis"
                         />
@@ -48,8 +49,8 @@ export default function Lawyers() {
                 </div>
                 <div className="flex flex-col items-center gap-1 text-center">
                     <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
-                        <StaticImage
-                            src="../../images/lawyers/maggie-lizer.jpg"
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/maggie-lizer.jpg"
                             className="rounded-full "
                             alt="Maggie Lizer"
                         />
@@ -67,8 +68,8 @@ export default function Lawyers() {
                 </div>
                 <div className="flex flex-col items-center gap-1 text-center">
                     <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
-                        <StaticImage
-                            src="../../images/lawyers/bob-loblaw.jpg"
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/bob-loblaw.jpg"
                             className="rounded-full "
                             alt="Bob Loblaw"
                         />
@@ -94,7 +95,7 @@ export default function Lawyers() {
             </div>
             <div className="flex gap-3 justify-center py-1">
                 <div className="mt-1 rounded-full bg-accent w-12 h-12 overflow-hidden">
-                    <StaticImage
+                    <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
                         alt='James ("Veg"/"JC") Hawkins'
                         className="w-12 h-12"

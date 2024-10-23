@@ -17,7 +17,7 @@ For existing customers, you'll sometimes send emails directly from [Vitally](htt
 All Slack messages sync up with the corresponding account in Salesforce. We use [Pylon](https://app.usepylon.com) for this sync, so make sure Pylon is added to the customer Slack channel integrations and the channel is [linked to the Salesforce account](https://app.usepylon.com/integrations/salesforce?tab=account-mapping) properly for the sync to work smoothly.
 
 You are most likely to use the following regularly:
-- _Leads_ - A lead is a potential customer who has shown interest but hasn't yet been qualified. We create leads for every new user emailing sales@posthog.com or filling out contact sales form on our website. You can also create them manually if you are introduced through other sources (e.g. events, referrals). 
+- _Leads_ - A lead is a potential customer who has shown interest but hasn't yet been qualified. We create leads for every new user emailing sales@posthog.com or filling out contact sales form on our website. You can also create them manually if you are introduced through other sources (e.g. events, referrals) or by tagging tickets in Zendesk. 
 - _Opportunities_ - An opportunity is a qualified lead that has been assessed and is considered a potential sales deal (with an estimated revenue and an expected close date). This is where we manage our customers through their buying cycle. 
 - _Contacts_ - Contacts are individuals who use PostHog or contacts we interact with. You can create contacts manually or convert a Lead to a Contact after evaluating the lead and deciding to continue working with them.
 - _Accounts_ - You will also create an account record to associate with any contact. You can associate multiple contacts with a single account. If you enter the company's domain name, we have data enrichment in place to pull in additional data on the organization. 
@@ -65,6 +65,9 @@ Our preferred way to keep track of outreach is by creating Salesforce Leads, Con
 - Leads: If a contact is in the initial evaluation stage, it should be entered as a Lead. This allows us to track and manage potential clients who are not yet qualified or who are still in the early stages of engagement. This is typically how we add potential customers who do not use PostHog yet.
 - Opportunities: If you identify potential for growth with an existing user, such as expansion or commitment to an annual plan, you can create an Opportunity directly. This is appropriate for contacts or customers where you've already completed the lead assessment (more on that below).
 
+### Zendesk Integration
+
+If you add "sf-lead" tag to a ticket in Zendesk, a new lead will be automatically created in Salesforce. This helps streamline the process of converting support questions or tickets into potential sales opportunities directly from Zendesk.
 
 ## How we do lead assignments
 Any user who submits a “contact sales” form on our website shows up as a lead in Salesforce and gets assigned to an Account Executive (AE). This is how we do lead assignment within our sales team:
@@ -213,6 +216,8 @@ Important notes:
 - None of the Above: If none of the above apply, move them to self-serve.
 
 When moving someone to self-serve we should set them up for success by using the [Post Demo route to self-serve](https://posthog.lightning.force.com/lightning/r/EmailTemplate/00XHp000001vNpqMAE/view). This encourages them to sign up to PostHog Cloud and provides some helpful getting started pointers. If there were any follow-up questions from initial meeting we should answer those in this email as well.
+
+> If you move an opportunity to self-serve then it won't be included in your quota retirement/commission calculation (as you aren't working on it).
 
 ## All done - now what?
 

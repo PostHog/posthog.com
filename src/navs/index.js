@@ -219,6 +219,10 @@ export const handbookSidebar = [
                         name: 'Exec hiring',
                         url: '/handbook/people/hiring-process/exec-hiring',
                     },
+                    {
+                        name: 'Sales and CS hiring',
+                        url: '/handbook/people/hiring-process/sales-cs-hiring',
+                    },
                 ],
             },
         ],
@@ -1071,8 +1075,8 @@ export const companyMenu = {
                     url: '/teams/sales-cs',
                 },
                 {
-                    name: 'Website & Docs',
-                    url: '/teams/website-docs',
+                    name: 'Website & Vibes',
+                    url: '/teams/website-vibes',
                 },
             ],
         },
@@ -1473,6 +1477,10 @@ export const docsMenu = {
                         {
                             name: 'Migrate from Pendo',
                             url: '/docs/migrate/pendo',
+                        },
+                        {
+                            name: 'Migrate from Plausible',
+                            url: '/docs/migrate/plausible',
                         },
                         {
                             name: 'Migrate from Statsig',
@@ -2341,6 +2349,10 @@ export const docsMenu = {
                     },
                     children: [
                         {
+                            name: 'Overview',
+                            url: '/docs/session-replay/mobile',
+                        },
+                        {
                             name: 'Android',
                             url: '/docs/session-replay/android',
                         },
@@ -2647,7 +2659,7 @@ export const docsMenu = {
             name: 'CDP',
             url: '/docs/cdp',
             color: 'sky-blue',
-            icon: 'IconDecisionTree',
+            icon: 'IconPlug',
             children: [
                 {
                     name: 'Customer data platform',
@@ -3120,7 +3132,7 @@ const menu = [
             },
             {
                 name: 'CDP',
-                icon: 'IconDecisionTree',
+                icon: 'IconPlug',
                 color: 'sky-blue',
                 url: '/cdp',
             },
