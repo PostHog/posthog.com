@@ -303,6 +303,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 image: {
                     fields: '*',
                 },
+                likes: true,
                 cta: true,
             },
         })
