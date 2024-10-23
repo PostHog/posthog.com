@@ -2370,10 +2370,6 @@ export const docsMenu = {
                     icon: 'IconPhone',
                     color: 'blue',
                     featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                     children: [
                         {
                             name: 'Overview',
@@ -2382,14 +2378,26 @@ export const docsMenu = {
                         {
                             name: 'Android',
                             url: '/docs/session-replay/android',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'iOS',
                             url: '/docs/session-replay/ios',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                         {
                             name: 'React Native',
                             url: '/docs/session-replay/react-native',
+                            badge: {
+                                title: 'Beta',
+                                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                            },
                         },
                     ],
                 },
