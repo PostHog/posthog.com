@@ -15,8 +15,7 @@ import usePostHog from 'hooks/usePostHog'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSearch } from 'components/Search/SearchContext'
-import menu from '../../navs/menu'
-import docs from '../../navs/docs'
+import topLevelNav from '../../navs/topLevelNav'
 import { navigate } from 'gatsby'
 
 const ActiveBackground = ({ mobile = false }) => {
@@ -67,7 +66,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
     const openSections: string[] = []
     let activeItemFound = false
 
-    menu.forEach(item => {
+    topLevelNav.forEach(item => {
       if (item.children) {
         item.children.forEach(child => {
           if (currentPath.startsWith(child.url)) {
@@ -112,7 +111,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
             // top-level accordion
             <button
               onClick={() => toggleAccordion(item.name, hasChildren && depth === 1 ? item.children[0].url : item.url)}
-              className={`flex items-center justify-between w-full p-1 hover:bg-accent dark:hover:bg-accent-dark rounded text-sm relative border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px] ${depth === 2 && isActive ? 'font-bold bg-accent dark:bg-accent-dark hover:border-transparent' : ''}`}
+              className={`flex items-center justify-between w-full p-1 hover:bg-accent dark:hover:bg-accent-dark rounded text-sm relative border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px] ${depth === 0 && isActive ? 'font-bold' : ''} ${depth === 2 && isActive ? 'font-bold bg-accent dark:bg-accent-dark hover:border-transparent' : 'font-semibold'}`}
             >
               <span className="flex items-center gap-1">
                 {IconComponent && <IconComponent className={`size-5 text-${item.color || 'current'}`} />}
@@ -165,7 +164,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
       </Link>
 
       <ul className="p-0 m-0 list-none">
-        {menu.map(item => renderMenuItem(item))}
+        {topLevelNav.map(item => renderMenuItem(item))}
       </ul>
     </nav>
   );
