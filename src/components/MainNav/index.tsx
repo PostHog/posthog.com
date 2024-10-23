@@ -233,61 +233,6 @@ const ActiveBackground = ({ mobile = false }) => {
     )
 }
 
-export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex, scrollOnRender = true }) => {
-    const ref = useRef<HTMLUListElement>(null)
-    const [firstRef, firstInView] = useInView({ threshold: 1 })
-    const [lastRef, lastInView] = useInView({ threshold: 1 })
-    const [overflowing, setOverflowing] = useState(false)
-    const menuItemsRef = useRef(null)
-
-    const scrollToIndex = (index) => {
-        const map = getMap()
-        const node = map.get(index)
-        node?.scrollIntoView({
-            block: 'nearest',
-            inline: 'center',
-        })
-    }
-
-    const getMap = () => {
-        if (!menuItemsRef.current) {
-            menuItemsRef.current = new Map()
-        }
-        return menuItemsRef.current
-    }
-
-    function handleResize() {
-        setOverflowing((ref?.current && ref?.current.scrollWidth > ref?.current.clientWidth) || false)
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize)
-        handleResize()
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
-    }, [])
-
-    useEffect(() => {
-        if (scrollOnRender && overflowing) scrollToIndex(activeIndex)
-    }, [overflowing])
-
-    return menu?.length > 0 ? (
-        <div className="relative">
-            {overflowing && (
-                <button
-                    onDoubleClick={(e) => e.preventDefault()}
-                    onClick={() => ref.current?.scrollBy({ left: -75, behavior: 'smooth' })}
-                    className={`absolute top-0 left-0 h-[calc(100%-2px)] flex justify-end items-center w-10 pl-2 bg-gradient-to-l from-transparent to-light via-light dark:via-dark dark:to-dark ${firstInView ? '-z-10' : 'z-10'
-                        }`}
-                >
-                    <IconChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
-                </button>
-            )}
-        </div>
-    ) : null
-}
-
 const keyboardShortcut =
     'box-content p-[5px] border border-b-2 border-gray-accent-light dark:border-gray-accent-light/40 rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs'
 
@@ -348,8 +293,6 @@ export const Main = () => {
     const {
         menu,
         parent,
-        internalMenu,
-        activeInternalMenu,
         fullWidthContent,
         setFullWidthContent,
         enterpriseMode,
@@ -394,19 +337,6 @@ export const Main = () => {
                     className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
                         }`}
                 >
-                    <div className="flex-1 flex">
-                        <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
-                            {pathname === '/' && <ActiveBackground />}
-                            {enterpriseMode ? (
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/MainNav/posthog-tm.png" className="h-6 mx-6" />
-                            ) : (
-                                <Logo
-                                    color={websiteTheme === 'dark' && 'white'}
-                                    className="h-[24px] fill-current relative px-2 box-content"
-                                />
-                            )}
-                        </Link>
-                    </div>
                     <ul className="md:flex hidden list-none m-0 p-0">
                         {menu.map((menuItem) => {
                             const active = menuItem.name === parent?.name
@@ -639,11 +569,6 @@ export const Main = () => {
                     </div>
                 </div>
             </div>
-            <InternalMenu
-                menu={internalMenu}
-                activeIndex={internalMenu?.findIndex((menu) => menu === activeInternalMenu)}
-                className="md:flex hidden"
-            />
         </div>
     )
 }
@@ -656,16 +581,11 @@ export const Mobile = () => {
         Community: 'Newsroom',
         Company: 'Investor relations',
     }
-    const { menu, parent, internalMenu, activeInternalMenu, enterpriseMode, setEnterpriseMode } = useLayoutData()
+    const { menu, parent, enterpriseMode, setEnterpriseMode } = useLayoutData()
 
     return (
         <div className="fixed bottom-0 w-full md:hidden z-[9999998] print:hidden">
-            <InternalMenu
-                mobile
-                className="bg-light dark:bg-dark border-t mb-[-1px]"
-                menu={internalMenu}
-                activeIndex={internalMenu?.findIndex((menu) => menu === activeInternalMenu)}
-            />
+
             <ul className="grid grid-cols-5 gap-[2px] list-none m-0 px-2 bg-accent dark:bg-accent-dark border-t border-border dark:border-dark">
                 {menu.map((menuItem) => {
                     const active = menuItem.name === parent?.name

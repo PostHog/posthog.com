@@ -1,4 +1,3 @@
-import { InternalMenu } from 'components/MainNav'
 import { docsMenu } from '../../../navs'
 import React, { useState } from 'react'
 import ContentViewer from 'components/ContentViewer'
@@ -34,15 +33,6 @@ export default function CodeBlocks() {
                     (Not using JavaScript?)
                 </Link>
             </p>
-            <InternalMenu
-                scrollOnRender={false}
-                activeIndex={menu.findIndex(({ name }) => name.toLowerCase() === activeName)}
-                menu={menu.map((child) => ({
-                    ...child,
-                    url: null,
-                    onClick: () => setActiveName(child.name.toLowerCase()),
-                }))}
-            />
             <div className="my-6 -mb-4 lg:mb-12 lg:my-12 px-5">
                 <ContentViewer scrollToTop={false} content={content[activeName]} />
             </div>
