@@ -61,9 +61,11 @@ function Privacy() {
     const [headers, setHeaders] = useState([])
 
     useEffect(() => {
-        const fullPrivacyPolicy = document.querySelector('.full-privacy-policy')
-        const h2s = fullPrivacyPolicy.querySelectorAll(':nth-child(odd) h2')
-        setHeaders(Array.from(h2s).map((header) => ({ id: header.id, innerText: header.innerText })))
+        if (typeof window !== 'undefined') {
+            const fullPrivacyPolicy = document.querySelector('.full-privacy-policy')
+            const h2s = fullPrivacyPolicy.querySelectorAll(':nth-child(odd) h2')
+            setHeaders(Array.from(h2s).map((header) => ({ id: header.id, innerText: header.innerText })))
+        }
     }, [])
 
     return (
