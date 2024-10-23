@@ -15,7 +15,8 @@ import usePostHog from 'hooks/usePostHog'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSearch } from 'components/Search/SearchContext'
-import menu from '../../navs/index'
+import menu from '../../navs/menu'
+import docs from '../../navs/docs'
 
 const ActiveBackground = ({ mobile = false }) => {
   return (
@@ -104,12 +105,13 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
     const isActive = activeItem === item.url
 
     return (
-      <li key={item.name} className={`ml-${depth * 2}`}>
+      <li key={item.name} className={`${depth === 1 ? 'ml-0' : depth === 2 ? 'ml-5' : ''}`}>
         <div className="flex items-center px-1">
           {hasChildren ? (
+            // top-level accordion
             <button
               onClick={() => toggleAccordion(item.name, hasChildren && depth === 1 ? item.children[0].url : item.url)}
-              className={`flex items-center justify-between w-full p-1 hover:bg-accent dark:hover:bg-accent-dark rounded text-sm ${depth === 2 && isActive ? 'font-bold bg-accent dark:bg-accent-dark' : ''}`}
+              className={`flex items-center justify-between w-full p-1 hover:bg-accent dark:hover:bg-accent-dark rounded text-sm relative border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px] ${depth === 2 && isActive ? 'font-bold bg-accent dark:bg-accent-dark hover:border-transparent' : ''}`}
             >
               <span className="flex items-center gap-1">
                 {IconComponent && <IconComponent className={`size-5 text-${item.color || 'current'}`} />}
@@ -118,10 +120,11 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
               {isOpen ? <icons.IconMinus className="size-4" /> : <icons.IconPlus className="size-4" />}
             </button>
           ) : (
+            // top-level item
             <Link
               to={item.url}
               onClick={() => setActiveItem(item.url)}
-              className={`w-full flex items-center gap-1 text-sm py-1 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark ${isActive ? 'font-bold bg-accent dark:bg-accent-dark' : ''}`}
+              className={`w-full flex items-center gap-1 text-sm py-1 px-2 rounded relative border border-b-2 hover:border-light dark:hover:border-dark ${isActive ? 'font-bold bg-accent dark:bg-accent-dark border-light dark:border-dark' : 'hover:-top-px active:top-[.5px] hover:bg-accent dark:hover:bg-accent-dark border-transparent'}`}
             >
               {IconComponent && <IconComponent className={`size-5 text-${item.color || 'current'}`} />}
               <span>{item.name}</span>
@@ -129,7 +132,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
           )}
         </div>
         {hasChildren && (
-          <ul className={`p-0 m-0 mt-px space-y-px list-none overflow-hidden transition-all duration-100 ease-in-out ${isOpen ? 'max-h-[1000px] opacity-300 mb-2' : 'max-h-0 opacity-0'}`}>
+          <ul className={`px-0 py-px m-0 mt-px space-y-px list-none overflow-hidden transition-all duration-100 ease-in-out ${isOpen ? 'max-h-[1000px] opacity-300 mb-2' : 'max-h-0 opacity-0'}`}>
             {item.children.map((child: any) => renderMenuItem(child, depth + 1))}
           </ul>
         )}
@@ -139,7 +142,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
 
   return (
     <nav className={className}>
-      <Link className="flex justify-center p-1 rounded hover:bg-accent dark:hover:bg-accent-dark grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative mb-2" to="/">
+      <Link className="flex justify-center m-2 pt-1.5 pb-2 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative mb-2 border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px]" to="/">
         {pathname === '/' && <ActiveBackground />}
         {enterpriseMode ? (
           <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/MainNav/posthog-tm.png" className="h-6 mx-6" />
