@@ -109,9 +109,9 @@ function Privacy() {
                             </Tooltip>
                             :
                         </span>
-                        <div className="text-xs mt-2 md:mt-0 mb-4">
+                        <span className="text-xs mt-2 md:mt-0 mb-4">
                             (Serif font demonstrates how important this disclaimer is)
-                        </div>
+                        </span>
                         The following is only a summary of PostHog's privacy policy. Please read{' '}
                         <SmoothScrollLink
                             to="full-privacy-policy"
@@ -157,7 +157,7 @@ function Privacy() {
                     >
                         Here's a cat gif to keep you engaged (and to keep the algos intrigued). Please like/RT.
                         <img src="/images/pizza-cat.gif" alt="Cat gif" className="w-full mt-2" />
-                        <p className="text-right !-mb-4">
+                        <span className="text-right !-mb-4">
                             <Link
                                 href="https://giphy.com/gifs/cat-pizza-crazy-3o7TKJwsoLn5QAmqw8"
                                 externalNoIcon
@@ -165,7 +165,7 @@ function Privacy() {
                             >
                                 Thanks, Giphy!
                             </Link>
-                        </p>
+                        </span>
                     </Tweet>
 
                     <Tweet
