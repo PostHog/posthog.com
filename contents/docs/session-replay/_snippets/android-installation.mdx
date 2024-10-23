@@ -6,9 +6,9 @@ import AndroidInstall from "../../integrate/_snippets/install-android.mdx"
 
 <AndroidInstall />
 
-Add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options.  
-
 > Session replay requires PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases), and it's recommended to always use the latest version.
+
+Add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
 
 ```android_kotlin
 val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {

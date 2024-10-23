@@ -6,9 +6,9 @@ import IOSInstall from "../../integrate/_snippets/install-ios.mdx"
 
 <IOSInstall />
 
-Add `config.sessionReplay = true` to your PostHog configuration alongside any of your other configuration options.  
-
 > Requires PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases), and it's recommended to always use the latest version.
+
+Add `config.sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
 
 ```swift
 let config = PostHogConfig(apiKey: apiKey)
