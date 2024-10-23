@@ -17,6 +17,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSearch } from 'components/Search/SearchContext'
 import menu from '../../navs/menu'
 import docs from '../../navs/docs'
+import { navigate } from 'gatsby'
 
 const ActiveBackground = ({ mobile = false }) => {
   return (
@@ -140,9 +141,18 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
     )
   }
 
+  const handleRightClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    navigate('/logo') // Replace with your desired destination
+  }
+
   return (
     <nav className={className}>
-      <Link className="flex justify-center m-2 pt-1.5 pb-2 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative mb-2 border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px]" to="/">
+      <Link
+        className="flex justify-center m-2 pt-1.5 pb-2 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative mb-2 border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px]"
+        to="/"
+        onContextMenu={handleRightClick}
+      >
         {pathname === '/' && <ActiveBackground />}
         {enterpriseMode ? (
           <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/MainNav/posthog-tm.png" className="h-6 mx-6" />
