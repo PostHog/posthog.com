@@ -575,20 +575,14 @@ function PipelinesPage({ location }) {
             >
                 <h3 className="text-center mb-8">Integrations that work at any scale</h3>
                 <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
-                    <VsCompetitor
-                        title="Suitable for fast, scrappy startups"
-                        image={<StaticImage src="../../../images/products/engineer.png" className="max-w-[176px]" />}
-                    >
+                    <VsCompetitor title="Suitable for fast, scrappy startups">
                         <p>
                             Connect with popular startup tools, like Vitally and Hubspot — or build your own automations
                             quickly with the Zapier destination. Pull data from open source databases like Postgres and
                             MySQL, send it to Slack.{' '}
                         </p>
                     </VsCompetitor>
-                    <VsCompetitor
-                        title="Or big, serious enterprises"
-                        image={<StaticImage src="../../../images/products/suit.png" className="max-w-[176px]" />}
-                    >
+                    <VsCompetitor title="Or big, serious enterprises">
                         <p>
                             Stick with your existing platforms and focus on adding that sweet, sweet shareholder value.
                             Integrate with all the tools you know and love, from Snowflake and Stripe to Salesforce.
