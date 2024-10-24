@@ -9,10 +9,11 @@ interface HeroProps {
     product: string
     title: string
     description: string
+    signupCTACopy?: string
     image: any
 }
 
-export const Hero = ({ color, icon, beta, product, title, description }: HeroProps): JSX.Element => {
+export const Hero = ({ color, icon, beta, product, title, description, signupCTACopy }: HeroProps): JSX.Element => {
     return (
         <section>
             <div className="flex gap-1.5 justify-center items-center mb-3">
@@ -31,7 +32,7 @@ export const Hero = ({ color, icon, beta, product, title, description }: HeroPro
             />
             <div className="flex justify-center gap-2 mb-12">
                 <CallToAction href="https://app.posthog.com/signup" type="primary">
-                    Get started - free
+                    {signupCTACopy ?? 'Get started'} - free
                 </CallToAction>
                 <CallToAction href="/talk-to-a-human" type="secondary">
                     Talk to a human
