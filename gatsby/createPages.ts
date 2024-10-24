@@ -416,89 +416,136 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    const categories = {}
-    result.data.categories.categories.forEach(({ category, totalCount }) => {
-        const slug = slugify(category, { lower: true })
-        const base = `/blog/categories/${slug}`
-        categories[category] = {
-            slug,
-            url: base,
-        }
+    if (process.env.VERCEL_ENV !== 'preview') {
+        const categories = {}
+        result.data.categories.categories.forEach(({ category, totalCount }) => {
+            const slug = slugify(category, { lower: true })
+            const base = `/blog/categories/${slug}`
+            categories[category] = {
+                slug,
+                url: base,
+            }
 
-        createPaginatedPages({ totalCount, base, template: BlogCategoryTemplate, extraContext: { category, slug } })
-    })
+            createPaginatedPages({ totalCount, base, template: BlogCategoryTemplate, extraContext: { category, slug } })
+        })
 
-    result.data.categories.tags.forEach(({ tag, totalCount }) => {
-        const slug = slugify(tag, { lower: true })
-        const base = `/blog/tags/${slug}`
+        result.data.categories.tags.forEach(({ tag, totalCount }) => {
+            const slug = slugify(tag, { lower: true })
+            const base = `/blog/tags/${slug}`
+
+            createPaginatedPages({
+                totalCount,
+                base,
+                template: BlogTagTemplate,
+                extraContext: { tag, slug },
+            })
+        })
 
         createPaginatedPages({
-            totalCount,
-            base,
-            template: BlogTagTemplate,
-            extraContext: { tag, slug },
-        })
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.blogPosts.totalCount,
-        base: '/blog/all',
-        template: PaginationTemplate,
-        extraContext: {
-            regex: '/^/blog/',
-            title: 'Blog',
-        },
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.library.totalCount,
-        base: '/library/all',
-        template: PaginationTemplate,
-        extraContext: {
-            regex: '/^/library/',
-            title: 'Library',
-        },
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.founders.totalCount,
-        base: '/founders/all',
-        template: PaginationTemplate,
-        extraContext: {
-            regex: '/^/founders/',
-            title: 'Founders',
-        },
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.productEngineers.totalCount,
-        base: '/product-engineers/all',
-        template: PaginationTemplate,
-        extraContext: {
-            regex: '/^/product-engineers/',
-            title: 'Product engineers',
-        },
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.features.totalCount,
-        base: '/features/all',
-        template: PaginationTemplate,
-        extraContext: {
-            regex: '/^/features/',
-            title: 'Features',
-        },
-    })
-
-    result.data.allMdx.nodes.forEach((node) => {
-        createPage({
-            path: replacePath(node.slug),
-            component: PlainTemplate,
-            context: {
-                id: node.id,
+            totalCount: result.data.blogPosts.totalCount,
+            base: '/blog/all',
+            template: PaginationTemplate,
+            extraContext: {
+                regex: '/^/blog/',
+                title: 'Blog',
             },
         })
-    })
+
+        createPaginatedPages({
+            totalCount: result.data.library.totalCount,
+            base: '/library/all',
+            template: PaginationTemplate,
+            extraContext: {
+                regex: '/^/library/',
+                title: 'Library',
+            },
+        })
+
+        createPaginatedPages({
+            totalCount: result.data.founders.totalCount,
+            base: '/founders/all',
+            template: PaginationTemplate,
+            extraContext: {
+                regex: '/^/founders/',
+                title: 'Founders',
+            },
+        })
+
+        createPaginatedPages({
+            totalCount: result.data.productEngineers.totalCount,
+            base: '/product-engineers/all',
+            template: PaginationTemplate,
+            extraContext: {
+                regex: '/^/product-engineers/',
+                title: 'Product engineers',
+            },
+        })
+
+        createPaginatedPages({
+            totalCount: result.data.features.totalCount,
+            base: '/features/all',
+            template: PaginationTemplate,
+            extraContext: {
+                regex: '/^/features/',
+                title: 'Features',
+            },
+        })
+
+        result.data.allMdx.nodes.forEach((node) => {
+            createPage({
+                path: replacePath(node.slug),
+                component: PlainTemplate,
+                context: {
+                    id: node.id,
+                },
+            })
+        })
+
+        result.data.tutorials.categories.forEach(({ category, totalCount }) => {
+            const slug = slugify(category, { lower: true })
+            const base = `/tutorials/categories/${slug}`
+
+            createPaginatedPages({
+                totalCount,
+                base,
+                template: TutorialsCategoryTemplate,
+                extraContext: { activeFilter: category, slug },
+            })
+        })
+
+        createPaginatedPages({
+            totalCount: result.data.tutorials.totalCount,
+            base: '/tutorials/all',
+            template: TutorialsTemplate,
+        })
+
+        result.data.postCategories.nodes.forEach(
+            ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
+                createPage({
+                    path: `/${categoryFolder}`,
+                    component: PostListingTemplate,
+                    context: {
+                        post: true,
+                        title: categoryLabel,
+                        article: false,
+                    },
+                })
+
+                post_tags?.data?.forEach(({ attributes: { label: tagLabel } }) => {
+                    createPage({
+                        path: `/${categoryFolder}/${slugify(tagLabel, { lower: true, strict: true })}`,
+                        component: PostListingTemplate,
+                        context: {
+                            selectedTag: tagLabel,
+                            post: true,
+                            title: tagLabel,
+                            article: false,
+                        },
+                    })
+                })
+            }
+        )
+    }
 
     createPosts(result.data.handbook.nodes, 'handbook', HandbookTemplate, { name: 'Handbook', url: '/handbook' })
     createPosts(result.data.docs.nodes, 'docs', HandbookTemplate, { name: 'Docs', url: '/docs' })
@@ -521,24 +568,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 article: true,
             },
         })
-    })
-
-    result.data.tutorials.categories.forEach(({ category, totalCount }) => {
-        const slug = slugify(category, { lower: true })
-        const base = `/tutorials/categories/${slug}`
-
-        createPaginatedPages({
-            totalCount,
-            base,
-            template: TutorialsCategoryTemplate,
-            extraContext: { activeFilter: category, slug },
-        })
-    })
-
-    createPaginatedPages({
-        totalCount: result.data.tutorials.totalCount,
-        base: '/tutorials/all',
-        template: TutorialsTemplate,
     })
 
     result.data.blogPosts.nodes.forEach((node) => {
@@ -582,33 +611,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             article: false,
         },
     })
-
-    result.data.postCategories.nodes.forEach(
-        ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
-            createPage({
-                path: `/${categoryFolder}`,
-                component: PostListingTemplate,
-                context: {
-                    post: true,
-                    title: categoryLabel,
-                    article: false,
-                },
-            })
-
-            post_tags?.data?.forEach(({ attributes: { label: tagLabel } }) => {
-                createPage({
-                    path: `/${categoryFolder}/${slugify(tagLabel, { lower: true, strict: true })}`,
-                    component: PostListingTemplate,
-                    context: {
-                        selectedTag: tagLabel,
-                        post: true,
-                        title: tagLabel,
-                        article: false,
-                    },
-                })
-            })
-        }
-    )
 
     result.data.spotlights.nodes.forEach((node) => {
         const { slug } = node.fields

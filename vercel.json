@@ -1323,6 +1323,12 @@
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/teams/website-docs", "destination": "/teams/website-vibes" }
+        { "source": "/teams/website-docs", "destination": "/teams/website-vibes" },
+        { "source": "/docs/session-replay/android", "destination": "/docs/session-replay/installation?tab=Android" },
+        { "source": "/docs/session-replay/ios", "destination": "/docs/session-replay/installation?tab=iOS" },
+        {
+            "source": "/docs/session-replay/react-native",
+            "destination": "/docs/session-replay/installation?tab=React+Native"
+        }
     ]
 }

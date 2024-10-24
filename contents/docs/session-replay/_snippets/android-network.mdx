@@ -1,0 +1,12 @@
+To capture network requests in your recordings, add `PostHogOkHttpInterceptor` to your `OkHttp Interceptor`. 
+
+```android_kotlin
+import com.posthog.PostHogOkHttpInterceptor
+import okhttp3.OkHttpClient
+
+private val client = OkHttpClient.Builder()
+    .addInterceptor(PostHogOkHttpInterceptor(captureNetworkTelemetry = true))
+    .build()
+```
+
+> **Note:** Only metric-like data like speed, size, and response code are captured. No data is captured from the request or response body.
