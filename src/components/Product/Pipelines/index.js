@@ -590,7 +590,7 @@ function PipelinesPage({ location }) {
                 </p>
             </section>
 
-            <div id="library" className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 py-12 relative">
+            <div id="library" className="@container max-w-screen-2xl px-5 mx-auto grid md:grid-cols-4 pt-12 relative">
                 <div className="md:col-span-4 md:mb-4">
                     <h2 className="text-center text-2xl lg:text-4xl">Sources &amp; destinations library</h2>
 
@@ -634,57 +634,74 @@ function PipelinesPage({ location }) {
                 </aside>
                 <section className="md:col-span-3 md:mt-0 mt-5">
                     <ul className="list-none m-0 p-0 grid @lg:grid-cols-2 @2xl:grid-cols-1 @3xl:grid-cols-2 @6xl:grid-cols-3 gap-2 md:gap-4">
-                        {[...filteredNodes]
-                            .sort((a, b) => a.name.localeCompare(b.name))
-                            .map((destination) => {
-                                const { id, name, description, icon_url } = destination
-                                const Container = destination.mdx ? 'button' : 'div'
-                                return (
-                                    <li key={id}>
-                                        <Container
-                                            {...(destination.mdx
-                                                ? {
-                                                      onClick: () => {
-                                                          setSelectedDestination(destination)
-                                                          setModalOpen(true)
-                                                      },
-                                                  }
-                                                : {})}
-                                            className={`flex items-start text-left size-full border border-light dark:border-dark rounded-md bg-white dark:bg-accent-dark p-4 relative border-b-3 ${
-                                                destination.mdx
-                                                    ? 'click hover:top-[-1px] active:top-[1px] transition-all duration-75'
-                                                    : ''
-                                            }`}
-                                        >
-                                            <div>
-                                                <div className="flex space-x-3 items-center">
-                                                    <div className="size-7 flex-shrink-0">
-                                                        <img
-                                                            className="w-full"
-                                                            src={`https://app.posthog.com${icon_url}`}
-                                                            alt={name}
-                                                        />
-                                                    </div>
+                        {filteredNodes.length === 0 ? (
+                            <li className="col-span-full">
+                                <p className="mb-2">
+                                    <strong className="font-semibold">
+                                        We don't have that one... <em>yet!</em>
+                                    </strong>
+                                </p>
+                                <p>
+                                    <Link to="https://github.com/PostHog/posthog" external>
+                                        Request a data connector on GitHub
+                                    </Link>
+                                </p>
+                            </li>
+                        ) : (
+                            [...filteredNodes]
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .map((destination) => {
+                                    const { id, name, description, icon_url } = destination
+                                    const Container = destination.mdx ? 'button' : 'div'
+                                    return (
+                                        <li key={id}>
+                                            <Container
+                                                {...(destination.mdx
+                                                    ? {
+                                                          onClick: () => {
+                                                              setSelectedDestination(destination)
+                                                              setModalOpen(true)
+                                                          },
+                                                      }
+                                                    : {})}
+                                                className={`flex items-start text-left size-full border border-light dark:border-dark rounded-md bg-white dark:bg-accent-dark p-4 relative border-b-3 ${
+                                                    destination.mdx
+                                                        ? 'click hover:top-[-1px] active:top-[1px] transition-all duration-75'
+                                                        : ''
+                                                }`}
+                                            >
+                                                <div>
+                                                    <div className="flex space-x-3 items-center">
+                                                        <div className="size-7 flex-shrink-0">
+                                                            <img
+                                                                className="w-full"
+                                                                src={`https://app.posthog.com${icon_url}`}
+                                                                alt={name}
+                                                            />
+                                                        </div>
 
-                                                    <h3 className="m-0 leading-none text-base">{name}</h3>
-                                                    {selectedType === 'All' && (
-                                                        <p className="m-0 !ml-1.5 px-1 py-0 border border-border dark:border-dark rounded text-xs">
-                                                            <span className="opacity-70">
-                                                                {Object.keys(pipelines)
-                                                                    .find((key) => pipelines[key].includes(destination))
-                                                                    .slice(0, -1)}
-                                                            </span>
-                                                        </p>
-                                                    )}
+                                                        <h3 className="m-0 leading-none text-base">{name}</h3>
+                                                        {selectedType === 'All' && (
+                                                            <p className="m-0 !ml-1.5 px-1 py-0 border border-border dark:border-dark rounded text-xs">
+                                                                <span className="opacity-70">
+                                                                    {Object.keys(pipelines)
+                                                                        .find((key) =>
+                                                                            pipelines[key].includes(destination)
+                                                                        )
+                                                                        .slice(0, -1)}
+                                                                </span>
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                    <p className="opacity-70 !text-[15px] m-0 ml-10 text-base leading-snug">
+                                                        {description}
+                                                    </p>
                                                 </div>
-                                                <p className="opacity-70 !text-[15px] m-0 ml-10 text-base leading-snug">
-                                                    {description}
-                                                </p>
-                                            </div>
-                                        </Container>
-                                    </li>
-                                )
-                            })}
+                                            </Container>
+                                        </li>
+                                    )
+                                })
+                        )}
                     </ul>
                 </section>
             </div>
