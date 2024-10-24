@@ -238,9 +238,9 @@ const CustomNode = ({ data }) => (
                     return (
                         <li
                             key={icon}
-                            className="rounded-full bg-white size-8 overflow-hidden border border-light dark:border-dark inline-block even:!-ml-2"
+                            className="rounded-full bg-white size-8 overflow-hidden border border-light dark:border-dark inline-block even:!-ml-2 relative"
                         >
-                            <img src={icon} alt={data.label} className="size-8" />
+                            <img src={icon} alt={data.label} className="size-full absolute inset-0" />
                         </li>
                     )
                 })}
