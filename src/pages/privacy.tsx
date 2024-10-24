@@ -181,9 +181,8 @@ function Privacy() {
                         className="mx-auto"
                         alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
                     >
-                        🌐 We share necessary info of yours with service providers to run our site and product, but nothing else.
-                        We’re part of the EU-US Data Privacy Framework, ensuring your data is safe. You can opt out if
-                        you like!
+                        🌐 We share necessary info of yours with service providers to run our site and product, but
+                        nothing else. We’re part of the EU-US Data Privacy Framework, ensuring your data is safe.
                     </Tweet>
 
                     <Tweet
