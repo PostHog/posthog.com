@@ -20,7 +20,6 @@ Content is the main pillar of our marketing strategy. Our strategy is to go _dee
 
 1. **Opinionated advice** – Articles where we offer a strong point of view on a topic that impacts our audience. Examples include [The Product-Market Fit Game](/founders/product-market-fit-game), [Burning money on paid ads for a dev tool](/founders/dev-marketing-paid-ads), and [How to design your company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed) 
 
-
 2. **High intent SEO comparisons** – Articles for people actively considering PostHog, or searching for a product like ours. Examples include comparisons between [PostHog and competing products](/blog/tags/comparisons), guides on the [best alternatives to popular tools](/blog/best-heap-alternatives), and guides to [most popular tools in our segments](/blog/best-open-source-ab-testing-tools).
 
 3. **Helpful evergreen guides:** Articles on topics of interest to our users and potential users. They generally target popular search terms. Examples include [How to measure product-market fit](/founders/measure-product-market-fit), [The AARRR pirate funnel explained](/product-engineers/aarrr-pirate-funnel), and [8 annoying A/B testing mistakes every engineer should know](/product-engineers/ab-testing-mistakes).
@@ -28,6 +27,45 @@ Content is the main pillar of our marketing strategy. Our strategy is to go _dee
 4. **Engineering tutorials:** – Guides on how to do specific things in PostHog. These can be for existing PostHog users, or aimed at potential users who are trying to solve a specific problem. Some, like [How to set up Python A/B testing](/tutorials/python-ab-testing) are SEO focused. Others focus on specific PostHog user pain points.
 
 5. **Newsletters:** – Our newsletter, [Product for Engineers](https://newsletter.posthog.com), is both a distribution channel and its own content category. Issues often curate or summarize our existing content, or that of others, into an easy-to-digest, snackable format. 
+
+## Content distribution
+
+So you've written a great piece of content. Now what? Here are various ways to spread the word:
+
+### LinkedIn
+
+Post via Buffer. Ask andy to add you to it
+
+
+
+## Newsletter
+
+https://github.com/PostHog/posthog.com/issues/9646
+
+
+LinkedIn
+
+Twitter
+
+Reddit
+
+https://posthog.com/handbook/growth/marketing/open-source-sponsorship#newsletters
+
+Newsletter Ads
+
+Paid Ads 
+
+Success metrics
+Key is to remember that most people are on mobile, so they're not going to signup directly from the ad.
+
+
+
+
+### Blog posts
+
+### Tutorials
+
+
 
 ### Good to knows
 
