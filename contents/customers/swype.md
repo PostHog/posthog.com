@@ -20,7 +20,7 @@ toolsUsed:
 date: 2024-10-22
 ---
 
-Built in just over a month, [Swype](https://swype.jobs/) is an iOS app that helps technical people find new jobs using a tailored AI agent. Like Tinder for jobs, candidates can swipe left and right to dismiss or automatically apply for interesting roles — and the team has built PostHog into the app from the start to get the insights they need. 
+Built in just over a month, [Swype](https://swype.jobs/) is an iOS app that helps people find new jobs using a tailored AI agent. Like Tinder for jobs, candidates can swipe left and right to dismiss or automatically apply for interesting roles — and the team has built PostHog into the app from the start to get the insights they need. 
 
 “We were considering options like Firebase Analytics or building our own analytics,” says Swipe’s founding full-stack engineer, David Alade. “We thought about either sending messages to our backend, or using something like Sentry to send logs from the app — but we settled on PostHog because of how easy it was to set everything up and present the data.”
 
