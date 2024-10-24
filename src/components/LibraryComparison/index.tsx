@@ -57,10 +57,10 @@ export const LibraryComparison = () => {
     `)
 
     const renderAvailability = (isAvailable?: boolean) => {
-        if (isAvailable === null || isAvailable === undefined) {
+        if (isAvailable == null) {
             return null
         }
-        return isAvailable ? <img className="w-4 h-4" src={CheckIcon} /> : <img className="w-4 h-4" src={XIcon}/>
+        return isAvailable ? <img className="w-4 h-4" src={CheckIcon} /> : <img className="w-4 h-4" src={XIcon} />
     }
 
     return (
