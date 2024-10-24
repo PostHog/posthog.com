@@ -112,9 +112,8 @@ const getComunityClasses = (reply, isResolution) => {
     const profile = reply?.attributes?.profile?.data
     const isTeamMember = !!profile?.attributes?.startDate
     const isAI = profile?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
-    return `${isAI ? 'community-profile-ai' : isTeamMember ? 'community-profile-mod' : 'community-profile-member'}${
-        isResolution ? ' community-reply-resolution' : ''
-    }`
+    return `${isAI ? 'community-profile-ai' : isTeamMember ? 'community-profile-mod' : 'community-profile-member'}${isResolution ? ' community-reply-resolution' : ''
+        }`
 }
 
 const Expanded = ({ replies }: ExpandedProps) => {
@@ -133,7 +132,7 @@ const Expanded = ({ replies }: ExpandedProps) => {
                 return (
                     <li
                         key={reply.id}
-                        className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0 ${getComunityClasses(
+                        className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0 pb-4 ${getComunityClasses(
                             reply,
                             resolvedBy?.data?.id === reply.id
                         )}`}

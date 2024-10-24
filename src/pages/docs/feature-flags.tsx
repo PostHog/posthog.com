@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Layout from 'components/Layout'
@@ -71,12 +72,12 @@ export const Intro = ({ image = true }) => (
 
         {image && (
             <figure className="m-0 p-0">
-                <StaticImage
+                <CloudinaryImage
                     alt=""
                     placeholder="none"
                     quality={100}
                     className=""
-                    src="../../components/Home/Slider/images/feature-flags-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                 />
             </figure>
         )}
@@ -102,13 +103,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Feature flags API"
                         description="Evaluate and update with the /decide/ endpoint"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                             />
                         }
                         url="/tutorials/api-feature-flags"
@@ -118,13 +119,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Canary releases"
                         description="Gradual rollouts to a subset of users"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                             />
                         }
                         url="/tutorials/canary-release"
@@ -134,13 +135,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Bootstrapping feature flags in React"
                         description="Available at client-side load time"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                             />
                         }
                         url="/tutorials/bootstrap-feature-flags-react"
@@ -150,13 +151,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Best practices for feature flags"
                         description="Contains 8 examples"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                             />
                         }
                         url="/blog/feature-flag-best-practices"
@@ -166,13 +167,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="How to set up one-time feature flags"
                         description="Show a component or content just once"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                             />
                         }
                         url="/tutorials/one-time-feature-flags"
@@ -182,13 +183,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Cookie-based feature flags"
                         description="Storing feature flag values locally"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                             />
                         }
                         url="/tutorials/one-time-feature-flags"
@@ -215,13 +216,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Add popups to a React app"
                         description="Using payloads to send arbitrary data to your frontend"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                             />
                         }
                         url="/tutorials/react-popups"
@@ -230,13 +231,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Location-based site banner"
                         description="Regional announcements or country-based alerts"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                             />
                         }
                         url="/tutorials/location-based-banner"
@@ -245,13 +246,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Sampling with feature flags and local evaluation"
                         description="Use flags to capture a subset of events for analysis"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/feature-flags-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/feature-flags-hog.png"
                             />
                         }
                         url="/tutorials/track-high-volume-apis"

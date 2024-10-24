@@ -56,13 +56,6 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
-                name: `images`,
-                path: `${__dirname}/src/images`,
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
                 name: `contents`,
                 path: `${__dirname}/contents`,
             },
@@ -77,9 +70,9 @@ module.exports = {
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
-                    {
-                        resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
-                    },
+                    // {
+                    //     resolve: require.resolve(`./plugins/gatsby-remark-mermaid`),
+                    // },
                     {
                         resolve: require.resolve('./plugins/gatsby-remark-video'),
                     },
@@ -116,13 +109,6 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `authorImages`,
-                path: `${__dirname}/static/images/authors`,
-            },
-        },
-        {
             resolve: `gatsby-source-strapi-pages`,
             options: {
                 strapiURL: process.env.STRAPI_URL,
@@ -130,8 +116,6 @@ module.exports = {
             },
         },
         `gatsby-plugin-image`,
-        'gatsby-transformer-sharp',
-        'gatsby-plugin-sharp',
         {
             resolve: `gatsby-plugin-manifest`,
             options: {

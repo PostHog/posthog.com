@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState, createContext, useEffect, useContext, useMemo, useRef } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
@@ -109,9 +110,8 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
                                             return (
                                                 <Listbox.Option key={topic.id} value={topic}>
                                                     <div
-                                                        className={`${
-                                                            active ? 'font-semibold' : ''
-                                                        } py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-black/50 dark:text-primary-dark`}
+                                                        className={`${active ? 'font-semibold' : ''
+                                                            } py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-black/50 dark:text-primary-dark`}
                                                     >
                                                         <span className="flex-shrink-0 w-3">
                                                             {active && <Check2 />}
@@ -169,8 +169,8 @@ const EscalateButton = ({ escalate, escalated }) => {
                                     Response will come from Max, the support hog
                                 </p>
                                 <div className="flex space-x-2 items-start mb-6">
-                                    <StaticImage
-                                        src="../images/max.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Squeak/images/max.png"
                                         width={40}
                                         height={40}
                                         className="rounded-full flex-shrink-0 bg-light dark:bg-dark border border-border dark:border-dark"
@@ -307,9 +307,8 @@ const AskMaxLoading = () => {
                         <strong>Hang tight, checking to see if we can find an answer for you...</strong>
                     </p>
                     <p
-                        className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${
-                            fadeState === 'out' ? 'opacity-0' : 'opacity-100'
-                        }`}
+                        className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${fadeState === 'out' ? 'opacity-0' : 'opacity-100'
+                            }`}
                     >
                         {messages[currentMessageIndex]}
                     </p>
@@ -525,7 +524,7 @@ export const Question = (props: QuestionProps) => {
                     </div>
 
                     <div className={archived ? 'opacity-50' : ''}>
-                        <div className="ml-5 pl-[30px] border-l border-light dark:border-dark">
+                        <div className="ml-5 pl-[30px] pb-4 border-l border-light dark:border-dark">
                             {questionData.attributes.subject && (
                                 <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
                                     <Link
@@ -565,9 +564,8 @@ export const Question = (props: QuestionProps) => {
                         })}
                     </div>
                     <div
-                        className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${
-                            archived ? 'opacity-25' : ''
-                        }`}
+                        className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${archived ? 'opacity-25' : ''
+                            }`}
                     >
                         <QuestionForm
                             archived={archived}

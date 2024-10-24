@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -67,12 +68,12 @@ export const Intro = ({ image = true }) => (
 
         {image && (
             <figure className="m-0 mt-auto p-0">
-                <StaticImage
+                <CloudinaryImage
                     alt=""
                     placeholder="none"
                     quality={100}
                     className=""
-                    src="../../components/Home/Slider/images/ab-testing-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
                 />
             </figure>
         )}
@@ -98,13 +99,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Running experiments on new users"
                         description="Test changes to signup and onboarding flows"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/experiment-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
                             />
                         }
                         url="/tutorials/new-user-experiments"
@@ -114,13 +115,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Run A/B tests in Webflow"
                         description="A guide to low-code experimentation"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/experiment-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
                             />
                         }
                         url="/tutorials/webflow-ab-tests"
@@ -130,13 +131,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Run experiments without feature flags"
                         description="Useful if you don't use PostHog feature flags"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 placeholder="none"
                                 objectFit="contain"
                                 className="h-full"
                                 quality={100}
-                                src="../../components/Home/Slider/images/experiment-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
                             />
                         }
                         url="/docs/experiments/running-experiments-without-feature-flags"

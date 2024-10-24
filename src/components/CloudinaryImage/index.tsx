@@ -7,16 +7,26 @@ const isCloudinaryImage = (url: string): boolean => {
 }
 
 const getCloudinaryPublicId = (url: string): string | null => {
-    const cloudinaryUrlPattern = /https:\/\/res\.cloudinary\.com\/[^/]+\/(?:image|video)\/upload\/(?:v\d+\/)?([^/.]+)/
+    const cloudinaryUrlPattern =
+        /https:\/\/res\.cloudinary\.com\/[^/]+\/(?:image|video)\/upload\/(?:v\d+\/)?(.+?)(?:\.[^.]+)?$/
     const match = url.match(cloudinaryUrlPattern)
     return match ? match[1] : null
 }
 
-export default function CloudinaryImage({ src, width = 600, ...other }) {
+export default function CloudinaryImage({ src, width, placeholder, className = '', ...other }) {
     const cloudinaryPublicId = isCloudinaryImage(src) && getCloudinaryPublicId(src)
     return cloudinaryPublicId ? (
-        <Image {...other} publicId={cloudinaryPublicId} cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}>
-            <Transformation width={width} crop="scale" />
-        </Image>
-    ) : null
+        <div className={`inline-block ${className}`}>
+            <Image
+                {...other}
+                publicId={cloudinaryPublicId}
+                cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                className={className}
+            >
+                <Transformation width={width} crop="scale" />
+            </Image>
+        </div>
+    ) : (
+        <img src={src} width={width} className={`inline-block ${className}`} {...other} />
+    )
 }

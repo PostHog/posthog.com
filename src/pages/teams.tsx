@@ -38,7 +38,7 @@ const Teams: React.FC = () => {
                         }
                     }
                     crest {
-                        gatsbyImageData(width: 200, height: 200, placeholder: BLURRED)
+                        gatsbyImageData(width: 200, height: 200)
                     }
                 }
             }
@@ -104,16 +104,14 @@ const Teams: React.FC = () => {
                                                                 className="cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark"
                                                             >
                                                                 <Tooltip
-                                                                    content={`${name} ${
-                                                                        isTeamLead ? '(Team lead)' : ''
-                                                                    }`}
+                                                                    content={`${name} ${isTeamLead ? '(Team lead)' : ''
+                                                                        }`}
                                                                     placement="top"
                                                                 >
                                                                     <img
                                                                         src={avatar?.data?.attributes?.url}
-                                                                        className={`w-10 h-10 rounded-full bg-${
-                                                                            color ?? 'white'
-                                                                        } dark:bg-accent-dark border border-light dark:border-dark`}
+                                                                        className={`w-10 h-10 rounded-full bg-${color ?? 'white dark:bg-accent-dark'
+                                                                            } border border-light dark:border-dark`}
                                                                         alt={name}
                                                                     />
                                                                 </Tooltip>

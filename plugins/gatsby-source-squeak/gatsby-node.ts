@@ -15,10 +15,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         let profileQuery = qs.stringify(
             {
                 filters: {
-                    teams: {
-                        id: {
-                            $notNull: true,
-                        },
+                    startDate: {
+                        $notNull: true,
                     },
                 },
                 pagination: {
@@ -305,6 +303,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                 image: {
                     fields: '*',
                 },
+                likes: true,
                 cta: true,
             },
         })
