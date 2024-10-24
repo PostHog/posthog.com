@@ -737,6 +737,20 @@ export const handbookSidebar = [
                     },
                 ],
             },
+            {
+                name: 'CS Operations',
+                url: '',
+                children: [
+                    {
+                        name: 'Health tracking',
+                        url: '/handbook/growth/sales/health-tracking',
+                    },
+                    {
+                        name: 'Feature requests',
+                        url: '/handbook/growth/sales/feature-requests',
+                    },
+                ],
+            },
         ],
     },
     {
@@ -1138,7 +1152,8 @@ export const docsMenu = {
             name: 'Product OS',
             icon: 'IconStack',
             color: 'salmon',
-            url: '/docs',
+            url: '/docs/product-os',
+            description: 'The PostHog platform for building and improving your product',
             children: [
                 {
                     name: 'Docs',
@@ -2039,6 +2054,7 @@ export const docsMenu = {
             icon: 'IconGraph',
             color: 'blue',
             url: '/docs/product-analytics',
+            description: 'Funnels, graphs, user paths, correlation analysis, retention, stickiness, lifecycle, SQL',
             children: [
                 {
                     name: 'Product analytics',
@@ -2054,6 +2070,7 @@ export const docsMenu = {
                     url: '/docs/product-analytics/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Capturing events',
@@ -2078,6 +2095,7 @@ export const docsMenu = {
                     url: '/docs/product-analytics/person-properties',
                     icon: 'IconProfile',
                     color: 'seagreen',
+                    featured: true,
                 },
                 {
                     name: 'Group analytics',
@@ -2096,6 +2114,7 @@ export const docsMenu = {
                     url: '/docs/product-analytics/tutorials',
                     icon: 'IconGraduationCap',
                     color: 'red',
+                    featured: true,
                 },
                 {
                     name: 'Cutting costs',
@@ -2254,6 +2273,7 @@ export const docsMenu = {
             icon: 'IconPieChart',
             color: '[#36C46F]',
             url: '/docs/web-analytics',
+            description: 'Monitor your website traffic. Built for people who really liked GA3...',
             children: [
                 {
                     name: 'Web analytics',
@@ -2263,6 +2283,7 @@ export const docsMenu = {
                     url: '/docs/web-analytics',
                     icon: 'IconHome',
                     color: 'seagreen',
+                    featured: true,
                 },
                 {
                     name: 'Dashboard',
@@ -2275,6 +2296,7 @@ export const docsMenu = {
                     url: '/docs/web-analytics/faq',
                     icon: 'IconQuestion',
                     color: 'blue',
+                    featured: true,
                 },
             ],
         },
@@ -2283,6 +2305,7 @@ export const docsMenu = {
             url: '/docs/session-replay',
             color: 'yellow',
             icon: 'IconRewindPlay',
+            description: 'Watch how users interact with your app in a DVR-like playback experience.',
             children: [
                 {
                     name: 'Session replay',
@@ -2298,18 +2321,30 @@ export const docsMenu = {
                     url: '/docs/session-replay/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Watching recordings',
                     url: '/docs/session-replay/how-to-watch-recordings',
                     icon: 'IconApp',
                     color: 'orange',
+                    featured: true,
                 },
                 {
                     name: 'Controlling which sessions you record',
                     url: '/docs/session-replay/how-to-control-which-sessions-you-record',
                     icon: 'IconToggle',
                     color: 'red',
+                },
+                {
+                    name: 'Mobile session replay',
+                    url: '/docs/session-replay/mobile',
+                    icon: 'IconPhone',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Troubleshooting and FAQs',
@@ -2322,6 +2357,7 @@ export const docsMenu = {
                     url: '/docs/session-replay/tutorials',
                     icon: 'IconGraduationCap',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Cutting costs',
@@ -2343,28 +2379,7 @@ export const docsMenu = {
                     url: '/docs/session-replay/mobile',
                     icon: 'IconPhone',
                     color: 'blue',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/session-replay/mobile',
-                        },
-                        {
-                            name: 'Android',
-                            url: '/docs/session-replay/android',
-                        },
-                        {
-                            name: 'iOS',
-                            url: '/docs/session-replay/ios',
-                        },
-                        {
-                            name: 'React Native',
-                            url: '/docs/session-replay/react-native',
-                        },
-                    ],
+                    featured: true
                 },
                 {
                     name: 'Privacy controls',
@@ -2409,6 +2424,7 @@ export const docsMenu = {
             icon: 'IconToggle',
             color: 'seagreen',
             url: '/docs/feature-flags',
+            description: 'Safely roll out features to specific users or groups.',
             children: [
                 {
                     name: 'Feature flags',
@@ -2424,12 +2440,14 @@ export const docsMenu = {
                     url: '/docs/feature-flags/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Creating feature flags',
                     url: '/docs/feature-flags/creating-feature-flags',
                     icon: 'IconFlag',
                     color: 'orange',
+                    featured: true,
                 },
                 {
                     name: 'Adding your code',
@@ -2442,6 +2460,7 @@ export const docsMenu = {
                     url: '/docs/feature-flags/testing',
                     icon: 'IconTestTube',
                     color: 'purple',
+                    featured: true,
                 },
                 {
                     name: 'Troubleshooting and FAQs',
@@ -2454,6 +2473,7 @@ export const docsMenu = {
                     url: '/docs/feature-flags/tutorials',
                     icon: 'IconGraduationCap',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Cutting costs',
@@ -2501,6 +2521,7 @@ export const docsMenu = {
             icon: 'IconFlask',
             color: 'purple',
             url: '/docs/experiments',
+            description: 'Test changes with statistical significance with multivariate tests and robust targeting.',
             children: [
                 {
                     name: 'Experiments',
@@ -2524,12 +2545,14 @@ export const docsMenu = {
                     url: '/docs/experiments/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Creating an experiment',
                     url: '/docs/experiments/creating-an-experiment',
                     icon: 'IconTarget',
                     color: 'orange',
+                    featured: true,
                 },
                 {
                     name: 'Adding your code',
@@ -2542,12 +2565,14 @@ export const docsMenu = {
                     url: '/docs/experiments/testing-and-launching',
                     icon: 'IconRocket',
                     color: 'purple',
+                    featured: true,
                 },
                 {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/experiments/common-questions',
                     icon: 'IconQuestion',
                     color: 'seagreen',
+                    featured: true,
                 },
                 {
                     name: 'Tutorials and guides',
@@ -2592,6 +2617,7 @@ export const docsMenu = {
             url: '/docs/surveys',
             icon: 'IconMessage',
             color: 'salmon',
+            description: 'In-app popups with a library of response templates, plus an API',
             children: [
                 {
                     name: 'Surveys',
@@ -2607,12 +2633,14 @@ export const docsMenu = {
                     url: '/docs/surveys/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Creating a survey',
                     url: '/docs/surveys/creating-surveys',
                     icon: 'IconTarget',
                     color: 'yellow',
+                    featured: true,
                 },
                 {
                     name: 'Implementing custom surveys',
@@ -2637,6 +2665,7 @@ export const docsMenu = {
                     url: '/docs/surveys/tutorials',
                     icon: 'IconGraduationCap',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Features',
@@ -2652,6 +2681,7 @@ export const docsMenu = {
                     url: '/docs/surveys/conditional-questions',
                     icon: 'IconUserPaths',
                     color: 'blue',
+                    featured: true,
                 },
             ],
         },
@@ -2660,6 +2690,7 @@ export const docsMenu = {
             url: '/docs/cdp',
             color: 'sky-blue',
             icon: 'IconPlug',
+            description: 'Collect, enrich, and send data to your destinations.',
             children: [
                 {
                     name: 'Customer data platform',
@@ -2679,6 +2710,7 @@ export const docsMenu = {
                     },
                     icon: 'IconLive',
                     color: 'salmon',
+                    featured: true,
                     children: [
                         {
                             name: 'Overview',
@@ -2786,6 +2818,7 @@ export const docsMenu = {
                     },
                     icon: 'IconShare',
                     color: 'purple',
+                    featured: true,
                     children: [
                         {
                             name: 'Amazon S3',
@@ -2814,6 +2847,7 @@ export const docsMenu = {
                     url: '/docs/cdp/geoip-enrichment',
                     icon: 'IconWrench',
                     color: 'yellow',
+                    featured: true,
                     children: [
                         {
                             url: '/docs/cdp/geoip-enrichment',
@@ -2862,6 +2896,7 @@ export const docsMenu = {
                     url: '/docs/cdp/common-questions',
                     icon: 'IconQuestion',
                     color: 'blue',
+                    featured: true,
                 },
             ],
         },
@@ -2870,6 +2905,7 @@ export const docsMenu = {
             url: '/docs/data-warehouse',
             color: 'lilac',
             icon: 'IconDatabase',
+            description: 'Unify and query data from any source and analyze it alongside your product data.',
             children: [
                 {
                     name: 'Data warehouse',
@@ -2885,6 +2921,7 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/setup',
                     icon: 'IconBook',
                     color: 'blue',
+                    featured: true,
                     children: [
                         {
                             name: 'Overview',
@@ -2961,24 +2998,28 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/join',
                     icon: 'IconList',
                     color: 'orange',
+                    featured: true,
                 },
                 {
                     name: 'Save views',
                     url: '/docs/data-warehouse/views',
                     icon: 'IconCalculator',
                     color: 'salmon',
+                    featured: true,
                 },
                 {
                     name: 'Under the hood',
                     url: '/docs/data-warehouse/under-the-hood',
                     icon: 'IconMagicWand',
                     color: 'seagreen',
+                    featured: true,
                 },
                 {
                     name: 'Tutorials and guides',
                     url: '/docs/data-warehouse/tutorials',
                     icon: 'IconGraduationCap',
                     color: 'blue',
+                    featured: true,
                 },
             ],
         },
@@ -2988,6 +3029,7 @@ export const docsMenu = {
             color: '[#681291]',
             colorDark: '[#C170E8]',
             icon: 'IconAI',
+            description: 'Insights for building your AI and LLM products',
             badge: {
                 title: 'Beta',
                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -3011,12 +3053,14 @@ export const docsMenu = {
                     url: '/docs/ai-engineering/llm-insights',
                     icon: 'IconAIText',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Tutorials and guides',
                     url: '/docs/ai-engineering/tutorials',
                     icon: 'IconGraduationCap',
                     color: 'yellow',
+                    featured: true,
                 },
                 {
                     name: 'Integrations',

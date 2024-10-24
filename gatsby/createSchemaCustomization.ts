@@ -280,6 +280,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     ) {
         createTypes(
             `
+            type ShopifyCollection implements Node {
+              handle: String!
+              products: [ShopifyProduct!]!
+            }
             type ShopifySelectedOption {
               name: String!
               value: String!

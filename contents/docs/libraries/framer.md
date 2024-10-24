@@ -25,7 +25,7 @@ Go to the **General** tab in site settings and scroll down to the **Custom Code*
 
 Finally, **publish** your site.
 
-![How to add PostHog to Framer](./images/add-posthog-to-framer.mp4)
+![How to add PostHog to Framer](https://res.cloudinary.com/dmukukwp6/video/upload/add_posthog_to_framer_e3ac0fe6a9.mp4)
 
 ## Capture custom events
 
@@ -53,7 +53,7 @@ export default function CaptureButton() {
 
 Press `Cmd/Ctrl + s` to save your changes. Then press the **Home** button to go back to the home page. Add your new `CaptureButton` to your page by dragging it from the Code tab.
 
-![Create a code snippet in Framer](./images/framer-create-code-component.mp4)
+![Create a code snippet in Framer](https://res.cloudinary.com/dmukukwp6/video/upload/framer_create_code_component_85251f4561.mp4)
 
 Publish your site and then click your new button to [see the event in PostHog](https://app.posthog.com/events).
 
