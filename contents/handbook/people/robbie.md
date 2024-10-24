@@ -1,36 +1,97 @@
-# How we built web analytics
-ALternative: Why product analytics are more expensive/harder than web analytics
-Alternative: How we improved performance and pricing for web analytics
-Why web analytics is 4x cheaper than product analytics
+# Building a Google Analytics alternative: the hard parts
 
-Last month we finally launched web analytics. You would think for a company that does product analytics, adding web analytics would be straight-forward and quick. Alas, this is not the case. It took @Robbie a year to get it done, and it's not because he's lazy. Product analytics fundamentally requires a different architecture to web analytics. I
+Last month we finally launched [web analytics](link), our Google analytics alternative.. You would think for a company that does product analytics, adding web analytics would be straight-forward and quick. Alas, this is not the case. It took @Robbie a year to get it done, and it's not because he's lazy. 
 
-Web analytics is a fundamentally different problem to product analytics. t's more expensive (4x more times expesnsive) and slower, which means we're less performance and more expensive than products that focus solely on web analytics (e.g. Plausible, Fathom. Add link to comparison)
+They fundamentally require different architecture (rephrase this)
 
 In this post we dive into why that is and how we solved it so that we can price competitively to plausible and others.
+
+![Photo of robbie. He's definitey not lazy](image)
 
 ## Web analytics vs product analytics
 // todo make heading more interesting.
 
-In product analytics, you're trying to understand how people are using your app. You care about things like retention, churn, feature usage etc.
+Before we dive into the hard parts, let's first understand the difference between web analytics and product analytics:
 
-In web analytics, you're trying to understand whose visiting your marketing website and how they're interacting with it. You care about things like page views, unique visitors,bounce rate, top sources of traffic, top pages etc.
+- **Web analytics** tracks visitors to your marketing website. You care about things like page views, unique visitors, bounce rate, top sources of traffic, top pages etc.
 
-The differences between these two means that in product analytics you care about **individual useres** and their behavior, so it's important to identify users e.g. B2B saas apps are interested in how admins use the product.
+- **Product analytics** tracks how people are using your app. You care about things like retention, churn, feature usage etc.
 
-In web analytics you're more interested in their aggregate behavior (their identities don't matter). It doesn't matter who the users are, it's just about the data itself.
 
-These differences mean that for product analytics it's important to identify and track individual users over time, whereas in web analytics you're only the current session and the user is not identified
+In practice, this means that for product analytics you care about **individual users** and their behavior, whereas in web analytics you care only care about **aggregate** behavior and not the individuals.
 
-<todo add diagram of events. For product you have person in the middle and events associated to them. In web analytics, you just have events with no person in the middle>
+![image of event types explained](image)
 
-So web analytics is a different problem to product analytics.
 
-The implications of this means that the cost of running product analtyics is higher, which leads us to the next higher
+Fundamentally, this makes web analytics simpler. You only need to track sessions, without attributing previous events to the user. On the other hand, for product analytics it's important to identify and track individual users over time. 
 
-## 1. Why product analytics are more expensive than web analytics
+<todo add diagram of events. For product you have person in the middle and events associated to them. In web analytics, you just have events with no person in the middle. Maybe as a database >
 
-## 2. Why product analytics perforamnce is slower
+This introduces complexities for product analytics, such as the order of events matters (diagram of robbie example)
+
+Diagram?
+What if you wanted to write a query "get all subsequent pageviews where the user's first pageview was a blog post"?
+In web analytics, you cant do this at all. Whereas in product analytics, you can do this by joining on the person ID.
+
+## What would happen if we just used our product analytics architecture for web analytics?
+
+Because of the additional architecture requred for product analytics, if we ran our web analytics on the same architecture, the performace and price would be worse:
+
+## 1. Why web analytics perforamnce is faster
+
+People have high expectation for web analytics query performance. This is for a few reasons:
+
+1. Google analytics is fast.
+2. The queries you view with web analytics are simpler. And they're the same each time. For exmaple, page views or bounce rate.
+
+On the other hand, users have different expectations for product analytics. They're a bit more generous with their waiting time since queries are custom and complex, e.g. the number of users who have used feature X in the last 30 days.
+
+1. The queries are more complex.
+2. They're not the same each time.
+
+(They still expect some performance though)
+
+When you have millions of events, the best way to optimize query performance is do sampling. Sample relies on sorting (why?. For web-analytics, this is simpler since it's is session based. You only need to sample events from a single session.
+
+However, for product analytics, if you need to sample events from a single user, this is much harder since a user can have multiple IDs over time. For example, if they logged in on different devices, sessions from each device would have different IDs.
+
+This means that their sessions are likely split across multiple granules and not sorted (and you cannot sort since it requires changing row, which is expensive). As opposed to session, which is sorted and in a single granule.
+
+So if you want to sample, say, 10% of data, you still need to load all of granules, instead of a single one.
+
+![image of clickhouse granules](image)
+
+All these contributes to performance delays, meaning that sampling is not a viable solution for product analytics. Ultimately, this affects performance.
+
+## 2. Why web analytics is cheaper than product analytics
+
+To understand why web analytics is cheaper than product analytics, first we need to understand how we store our data.
+
+We use [ClickHouse](https://posthog.com/blog/how-we-turned-clickhouse-into-our-eventmansion) to store our events. ClickHouse is an OLAP database. It stores rows in blocks called "granules", and each granule contains about 100k rows. It's optimized for reading data. However, it's writing and editing data is an expensive operation, since you need to load an entire block even if you want to change a single row. This means ideally once a row is inserted, you don't change it, else performance will degrade.
+
+So with ClickHouse, you should avoid as much as possible changes to rows. But Person properties can change a lot. It could be every event causes an update. 
+
+To work around this, we store aggregated user data in Postgres, for example the initial URL, name, email etc, which is faster to write to.
+
+This means our event processing pipeline also includes Postgres
+
+![diagram of our pipeline, clickhouse and postgres](image)
+
+Sorting across multiple sessions is hard. 
+
+
+To work around this, we store aggregated user data in Postgres. This way we can change individual rows without impacting performance. For example, we store person properties like the initial URL in Postgres. 
+e.g. you might have this event sets the initial URL, but this later event need to have that person properties 
+
+Postgres increases our processing and length of our pipleine queue, ultimately increasing our costs.
+
+
+Why is it expensive to process profile 
+- It’s hard to update things in click house and hard to do something that only affects one row (we talked about this earlier). So we store them in Postgres
+    - Remember, reading and writing Is expensive because you need to read the whole block (granule) and then rewrite the whole thing)
+
+
+
 
 ## Our solution
 
@@ -38,34 +99,28 @@ The implications of this means that the cost of running product analtyics is hig
 
 ### 2. How we improved performance
 
+our solution:
+What breaks 
+- So introduced anonymous events. Which doesn’t do person processing, so no Postgres. Which means it’s cheaper for us. 
+
+**Since we dont need to set person properties (but we do still have other properties) on events themselves, we dont care about the order. e.g. in product analytics , you can filter events  by initial current url, but not possible in web analytics and you dont need it**
+
+Plausible has session properties. They do it at session-level not person level.
+
+Order of events doesn’t matter for session properties. We use click house for this. Session properties only change in a specific way. We either care first or last value. e.g. for referring domain, or session ending. Then we only care about first or last value.
+
+For example, initial url example. (add diagram for this)
+
+
+So introduced anonymous events. Which doesn’t do person processing, so no Postgres. Which means it’s cheaper for us. Up to 4x cheaper.
 
 
 ## Why we didn't have it up until now
 
-Higher expectations from users: Google analytics is quick, instant, and free. Whereas there was never an equivalent for google
-
-Query performance. People have different expectations. For product analytics , it’s fine to wait 10s, because queries are more complex. Whereas web analytics queries are simpler, so the expectation from users is that its faster
 
 
 
-We started as a product analytics tool
 
-Most web analytics tools will use a lot of sampling. It easy for them to because their data-model allows. (How their database is laid out).
-e.g. a users identity never changes over time. But in posthog you can identify, log out etc. So identity changes. So it’s much harder for us to sample.
-
-Basically with Clickhouse, its OLAP database (online analytical processing database) versus OLTP which is like postresges. ITs very good at making changes at one row of data. You want this for apps e.g. change a user’s profile picture
-
-Whereas with click house you can’t make really make changes to a single row, because everything is stored in a single block (called a granule) (which is read only), so you have change the entire block, which is an expensive operation 
-
-The way sampling works is that it would pick 1% of the granules. The problem with this, is that if you wanted to sample by person ID, which changes 
-
-OLTP have indexes. In Clickhouse you dont have indexes (you only have the order they are laid out. You only have one of these!)), you only have the order. So if the index was person ID. You would be able to sample, but only if it never changed. But if it’s an index it can’t change, because then it would move block, which is an expensive operation. 
-So every time someone calls identify, we would have to rewrite tons of data 
-
-So this is why its hard to do this sampling for product analytics tools
-
-There are ways around it:
-- E.g. limit how often and when you can call identify
 
 **Why doesn’t plausible or vercel have this problem?**
 They dont have a changing identity. You can’t have an identify function. So they can use user ID (called visit “hash”) as their sample key (the thing you are sampling by) 
@@ -87,27 +142,12 @@ Sampling is only applied at query time. But all events are captured. - https://p
 
 ## What is the difference and  between web analytics and product analytics
 
-Myabe have a list of things web analytics cares about vs product analytics care about
-e.g. which metrics, actions, visitors, bounce rate, churn .
-For the web analytics, you dont need to identify a user. You can just use the session. For product naalytics, its important to know who the user is
-
-
-Maybe we need a heading ## Why is there a differnece
-- What’s the different between web analytics and product analytics
-**The value of individual user is much higher product analytics than web analytics**
-
-
 What exactly each are.
 Why there is a difference between web and product costs (use OLAP database), but expesnive to write. ALso, sorting is hard. with multiple sessions
 
 
 Web analytics is more standardized/opionated. So our user experience wasnt great
 We’re known to be a complicated tool. Having web analytics means people can use posthog in minutes without having everything set up
-
-Why can you be more opinionated with web analytics than product analytics? There’s more common ground. Product analytics are more bespoke to the product. Some may care more about retention, or activation. Whereas web analytics you kind of just care about number of users etc (look up this part in video of how Robbie phrased it)
-
-
-
 
 ## Problem 1 : Pricing
 
@@ -148,8 +188,6 @@ Build a dashboard.
 e.g. make a graph of unique users. We can put topline stats, like (visitors, pageviews etc.). you write them using HogQL.
 The first version was just a dashboard, which contained the same stuff. It was to get a sense internally if it was useful, the right direction 
 
-
-
 ### WHy we can't do sampling
 - Sampling is the easiest way. That’s what plausible and vercel scale about 20 million page views.
     - This is next step. We need to figure out how to use sampling on an identity that can change. I think we can just store all the older data with person-ids . So we only sample older data but not newer one (so you can’t)
@@ -173,3 +211,9 @@ How did you fix query performance
 # End result
 
 We should show pricing comparison on other websites
+
+
+---
+notes
+
+Web analytics is a fundamentally different problem to product analytics. t's more expensive (4x more times expesnsive) and slower, which means we're less performance and more expensive than products that focus solely on web analytics (e.g. Plausible, Fathom. Add link to comparison)
