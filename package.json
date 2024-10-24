@@ -118,7 +118,6 @@
         "react-country-flag": "^3.0.2",
         "react-dom": "^16.13.1",
         "react-dropzone": "^14.2.3",
-        "react-flow-renderer": "^10.3.17",
         "react-github-btn": "^1.2.1",
         "react-helmet": "^5.2.1",
         "react-input-autosize": "^3.0.0",

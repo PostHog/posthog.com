@@ -1,6 +1,6 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useMemo, useState, useCallback, useEffect } from 'react'
+import React, { useMemo, useState, useCallback, useEffect, useLayoutEffect } from 'react'
 import Link from 'components/Link'
 import Layout from '../../Layout'
 import { SEO } from 'components/seo'
@@ -315,24 +315,25 @@ const Flow = () => {
 
     const [isMobile, setIsMobile] = useState(false)
 
+    // Use useCallback to memoize the updateLayout function
     const updateLayout = useCallback(() => {
-        const newNodes = nodes.map((node, index) => {
-            if (node.id === 'posthog') {
-                return { ...node, position: { x: 0, y: isMobile ? 0 : 150 } }
-            }
-            return {
-                ...node,
-                position: {
-                    x: isMobile ? 50 : 300,
-                    y: isMobile ? index * 200 : index * 100,
-                },
-            }
-        })
-        setNodes(newNodes)
-        setTimeout(() => fitView(), 0)
-    }, [isMobile, setNodes, fitView, nodes])
+        setNodes((prevNodes) =>
+            prevNodes.map((node, index) => {
+                if (node.id === 'posthog') {
+                    return { ...node, position: { x: 0, y: isMobile ? 0 : 150 } }
+                }
+                return {
+                    ...node,
+                    position: {
+                        x: isMobile ? 50 : 300,
+                        y: isMobile ? index * 200 : index * 100,
+                    },
+                }
+            })
+        )
+    }, [isMobile, setNodes])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const checkMobile = () => {
             setIsMobile(window.innerWidth <= 767)
         }
@@ -341,29 +342,38 @@ const Flow = () => {
         return () => window.removeEventListener('resize', checkMobile)
     }, [])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         updateLayout()
-    }, [isMobile, updateLayout])
+        setTimeout(() => fitView(), 0)
+    }, [isMobile, updateLayout, fitView])
 
-    const edgeOptions = {
-        type: 'smoothstep',
-        markerEnd: {
-            type: MarkerType.ArrowClosed,
-        },
-        style: {
-            stroke: '#888',
-        },
-        animated: true,
-    }
+    // Memoize edgeOptions
+    const edgeOptions = useMemo(
+        () => ({
+            type: 'smoothstep',
+            markerEnd: {
+                type: MarkerType.ArrowClosed,
+            },
+            style: {
+                stroke: '#888',
+            },
+            animated: true,
+        }),
+        []
+    )
 
-    const mobileEdgeOptions = {
-        ...edgeOptions,
-        type: 'default',
-        style: {
-            ...edgeOptions.style,
-            strokeWidth: 2,
-        },
-    }
+    // Memoize mobileEdgeOptions
+    const mobileEdgeOptions = useMemo(
+        () => ({
+            ...edgeOptions,
+            type: 'default',
+            style: {
+                ...edgeOptions.style,
+                strokeWidth: 2,
+            },
+        }),
+        [edgeOptions]
+    )
 
     const proOptions = { hideAttribution: true }
 
