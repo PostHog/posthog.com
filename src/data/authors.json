@@ -241,6 +241,14 @@
         "link_url": "https://www.linkedin.com/in/igorkotua/"
     },
     {
+        "handle": "robbie-coomber",
+        "name": "Robbie Coomber",
+        "role": "Full Stack Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/robbiecoomber",
+        "profile_id": 29292
+    },
+    {
         "handle": "manoel-aranda-neto",
         "name": "Manoel Aranda Neto",
         "role": "Mobile Engineer",
