@@ -135,13 +135,13 @@ The first mention on a page of a PostHog term, feature, or SDK should link to it
 
 ### Link to PostHog app
 
-You can also link to the PostHog app directly by using `https://us.posthog.com/${path}`. This saves time for our users and makes it easier for them to find what they need.
+You can also link to the PostHog app directly by using `https://us.posthog.com/${path}`. This saves time for our users and makes it easier for them to find what they need. Make sure to remove `project/2/` from the URL so it redirects them to their project. EU Cloud users are redirected automatically.
 
 > **Example:** "To create an insight, first [capture events](/docs/product-analytics/capture-events). Then, go to the [insights tab](https://us.posthog.com/insights) and click **+ New insight**."
 
-### Bold button names
+### Bold button and tab names
 
-Put button names in bold. This makes it easier for our users to skim through the docs.
+Put button, tab, and other navigation names in bold. This makes it easier for our users to skim through the docs, while be cleaner than using quotes all the time.
 
 > **Example:** "Go to the [insights tab](https://us.posthog.com/insights) and click **+ New insight**."
 
@@ -168,9 +168,9 @@ posthog.capture('user_signed_up', {
 
 ### Record videos
 
-For flows with many steps, it's often more helpful to include a video instead of a screenshot. We use [screen studio](https://screen.studio/) to record videos.
+For flows with many steps, it's often more helpful to include a video instead of a screenshot. We use [Screen Studio](https://screen.studio/) to record videos. Feel free to buy yourself a license.
 
 Use the following settings:
 - [Preset](https://posthog.slack.com/archives/C01FHN8DNN6/p1729759474007969)
 - Remove any zooming-in for clicks, as this can sometimes make videos hard to follow.
-- For exporting: use MP4, 1080p, 60 fps, and "web" quality
+- For exporting: use MP4, 720, 60 fps, and "web" quality
