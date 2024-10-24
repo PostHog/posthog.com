@@ -205,30 +205,51 @@ const Categories = ({ type, categories, onClick, selectedCategory, selectedType 
     )
 }
 
-const CustomNode = ({ data, isMobile }) => (
-    <div className="custom-node">
-        {data.label !== 'PostHog' && <Handle type="target" position={Position.Left} style={{ left: -5 }} />}
-        <div className="node-content max-w-sm">
-            <div className="node-header">
-                {data.icon && (
-                    <img
-                        src={data.icon}
-                        alt={data.label}
-                        className="node-icon"
-                        style={{ width: '24px', height: '24px' }}
-                    />
-                )}
-                <strong>{data.label}</strong>
+const PostHogNode = ({ data, isMobile }) => {
+    return (
+        <div>
+            <div className="max-w-sm">
+                <div className="p-3 rounded-full bg-accent dark:bg-accent-dark border border-border dark:border-dark">
+                    {data.icons && <img src={data.icons[0]} alt={data.label} className="size-10" />}
+                </div>
             </div>
-            <p className="text-sm">{data.description}</p>
-        </div>
-        {data.label === 'PostHog' && (
             <Handle
                 type="source"
                 position={isMobile ? Position.Bottom : Position.Right}
                 style={isMobile ? { bottom: -5 } : { right: -5 }}
+                className="opacity-0"
             />
-        )}
+        </div>
+    )
+}
+
+const CustomNode = ({ data }) => (
+    <div>
+        <Handle
+            type="target"
+            position={Position.Left}
+            style={{ left: -5, transform: 'none', top: 14 }}
+            className="opacity-0"
+        />
+
+        <div className="max-w-sm flex space-x-1 items-start">
+            <ul className="flex items-center space-x-1 m-0 p-0 list-none flex-shrink-0">
+                {data.icons?.map((icon) => {
+                    return (
+                        <li
+                            key={icon}
+                            className="rounded-full bg-white p-2 border border-border dark:border-dark inline-block even:!-ml-2"
+                        >
+                            <img src={icon} alt={data.label} className="size-4" />
+                        </li>
+                    )
+                })}
+            </ul>
+            <div>
+                <strong>{data.label}</strong>
+                <p className="text-sm">{data.description}</p>
+            </div>
+        </div>
     </div>
 )
 
@@ -238,7 +259,7 @@ const initialNodes = [
         type: 'custom',
         data: {
             label: 'PostHog',
-            icon: 'https://us.posthog.com/static/posthog-icon.svg',
+            icons: ['https://us.posthog.com/static/posthog-icon.svg'],
             description: 'Your data platform',
         },
         position: { x: 0, y: 0 },
@@ -249,7 +270,7 @@ const initialNodes = [
         position: { x: 300, y: 0 },
         data: {
             label: 'CRM',
-            icon: 'https://us.posthog.com/static/services/hubspot.png',
+            icons: ['https://us.posthog.com/static/services/hubspot.png'],
             description:
                 'Sync PostHog with Hubspot or Salesforce to create a single view of each customer and auto-assign leads.',
         },
@@ -260,7 +281,7 @@ const initialNodes = [
         position: { x: 300, y: 100 },
         data: {
             label: 'Support',
-            icon: 'https://us.posthog.com/static/services/zendesk.png',
+            icons: ['https://us.posthog.com/static/services/zendesk.png'],
             description:
                 'Update user information in Zendesk or Intercom to route requests based on priority, topic, or user payments.',
         },
@@ -271,7 +292,7 @@ const initialNodes = [
         position: { x: 300, y: 200 },
         data: {
             label: 'Messaging',
-            icon: 'https://us.posthog.com/static/services/customerio.png',
+            icons: ['https://us.posthog.com/static/services/customerio.png'],
             description:
                 'Pipe data to Customer.io or Braze to power onboarding emails, run marketing campaigns, or send newsletters.',
         },
@@ -282,7 +303,7 @@ const initialNodes = [
         position: { x: 300, y: 300 },
         data: {
             label: 'Enrichment',
-            icon: 'https://us.posthog.com/static/services/clearbit.png',
+            icons: ['https://us.posthog.com/static/services/clearbit.png'],
             description:
                 'Load data from the Clearbit API to enrich user data and get user info automatically without having to ask.',
         },
@@ -293,7 +314,7 @@ const initialNodes = [
         position: { x: 300, y: 400 },
         data: {
             label: 'Internal alerts',
-            icon: 'https://us.posthog.com/static/services/slack.png',
+            icons: ['https://us.posthog.com/static/services/slack.png'],
             description:
                 'Trigger webhooks or send messages directly to Slack to alert you about errors, churns, new leads, and more.',
         },
@@ -308,91 +329,70 @@ const initialEdges = [
     { id: 'e-posthog-internal-alerts', source: 'posthog', target: 'internal-alerts' },
 ]
 
-const Flow = () => {
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
-    const { fitView } = useReactFlow()
+const CustomNodePicker = (props) => {
+    return props.id === 'posthog' ? <PostHogNode {...props} /> : <CustomNode {...props} />
+}
 
-    const [isMobile, setIsMobile] = useState(false)
+const Flow = ({ isMobile }) => {
+    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
+    const [edges, onEdgesChange] = useEdgesState(initialEdges)
+    const { fitView } = useReactFlow()
 
     // Use useCallback to memoize the updateLayout function
     const updateLayout = useCallback(() => {
         setNodes((prevNodes) =>
             prevNodes.map((node, index) => {
                 if (node.id === 'posthog') {
-                    return { ...node, position: { x: 0, y: isMobile ? 0 : 150 } }
+                    return { ...node, position: { x: 0, y: isMobile ? 0 : 284 } }
                 }
                 return {
                     ...node,
                     position: {
-                        x: isMobile ? 50 : 300,
-                        y: isMobile ? index * 200 : index * 100,
+                        x: isMobile ? 80 : 200,
+                        y: index * 100,
                     },
                 }
             })
         )
-    }, [isMobile, setNodes])
-
-    useLayoutEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth <= 767)
-        }
-        checkMobile()
-        window.addEventListener('resize', checkMobile)
-        return () => window.removeEventListener('resize', checkMobile)
-    }, [])
+    }, [isMobile])
 
     useLayoutEffect(() => {
         updateLayout()
         setTimeout(() => fitView(), 0)
-    }, [isMobile, updateLayout, fitView])
+    }, [isMobile])
 
     // Memoize edgeOptions
     const edgeOptions = useMemo(
         () => ({
-            type: 'smoothstep',
-            markerEnd: {
-                type: MarkerType.ArrowClosed,
-            },
+            type: isMobile ? 'default' : 'smoothstep',
             style: {
                 stroke: '#888',
+                ...(isMobile ? { strokeWidth: 2 } : {}),
             },
             animated: true,
         }),
-        []
-    )
-
-    // Memoize mobileEdgeOptions
-    const mobileEdgeOptions = useMemo(
-        () => ({
-            ...edgeOptions,
-            type: 'default',
-            style: {
-                ...edgeOptions.style,
-                strokeWidth: 2,
-            },
-        }),
-        [edgeOptions]
+        [isMobile]
     )
 
     const proOptions = { hideAttribution: true }
 
     const nodeTypes = useMemo(
         () => ({
-            custom: (props) => <CustomNode {...props} isMobile={isMobile} />,
+            custom: (props) => <CustomNodePicker {...props} isMobile={isMobile} />,
         }),
         [isMobile]
     )
 
     return (
         <ReactFlow
+            className="!overflow-visible"
             nodes={nodes}
             edges={edges}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             nodeTypes={nodeTypes}
             fitView
-            defaultEdgeOptions={isMobile ? mobileEdgeOptions : edgeOptions}
+            defaultEdgeOptions={edgeOptions}
             nodesDraggable={false}
             nodesConnectable={false}
             elementsSelectable={false}
@@ -421,9 +421,9 @@ const CDPFlowChart = () => {
     }, [])
 
     return (
-        <div className="pointer-events-none" style={{ height: isMobile ? '1000px' : '500px', width: '100%' }}>
+        <div className="pointer-events-none px-12" style={{ height: isMobile ? '600px' : '500px', width: '100%' }}>
             <ReactFlowProvider>
-                <Flow />
+                <Flow isMobile={isMobile} />
             </ReactFlowProvider>
         </div>
     )
