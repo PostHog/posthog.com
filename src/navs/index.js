@@ -2375,6 +2375,13 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Mobile session replay',
+                    url: '/docs/session-replay/mobile',
+                    icon: 'IconPhone',
+                    color: 'blue',
+                    featured: true
+                },
+                {
                     name: 'Privacy controls',
                     url: '/docs/session-replay/privacy',
                     icon: 'IconShield',
