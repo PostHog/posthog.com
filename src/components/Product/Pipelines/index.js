@@ -538,7 +538,7 @@ function PipelinesPage({ location }) {
                     icon={<IconPlug />}
                     product={product.capitalized}
                     title="Ingest, transform, and send data between 25+ tools"
-                    description="Pre-built recipes make it easy to import data from a warehouse, sync with PostHog event data, and send to other products in your stack"
+                    description="Pre-built recipes make it easy to import data from a warehouse, sync with PostHog event data, and send to other products in your stack."
                     beta
                 />
 
@@ -577,7 +577,7 @@ function PipelinesPage({ location }) {
                 </h2>
                 <p className="text-center mb-12 text-lg px-5">
                     Any event or action in PostHog can update user records or trigger workflows in other products in
-                    your stack
+                    your stack.
                 </p>
                 <CDPFlowChart />
             </div>
