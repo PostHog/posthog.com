@@ -105,13 +105,13 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
     const isActive = activeItem === item.url
 
     return (
-      <li key={item.name} className={`${depth === 1 ? 'ml-0' : depth === 2 ? 'ml-5' : ''}`}>
-        <div className="flex items-center px-1">
+      <li key={item.name} className={`${depth === 1 ? 'ml-0' : depth === 2 ? 'pl-5' : ''} ${depth === 2 && isActive ? 'bg-accent  dark:bg-accent-dark py-4 !-my-3.5  font-bold relative before:absolute before:top-0 before:-right-px before:w-full before:h-4 before:bg-light dark:before:bg-dark before:border-r before:border-b before:border-light dark:before:border-dark before:rounded-br-[10px] after:absolute after:bottom-0 after:-right-px after:w-full after:h-4 after:bg-light dark:after:bg-dark after:border-r after:border-t after:border-light dark:after:border-dark after:rounded-tr-[10px]' : ''}`}>
+        <div className={`flex items-center px-1 ${depth === 2 && isActive ? 'before:absolute before:border-r before:border-red dark:before:bg-accent-dark before:top-2 before:bottom-2 before:right-0 before:z-20 before:w-px' : ''}`}>
           {hasChildren ? (
             // top-level accordion
             <button
               onClick={() => toggleAccordion(item.name, hasChildren && depth === 1 ? item.children[0].url : item.url)}
-              className={`flex items-center justify-between w-full p-1 hover:bg-accent dark:hover:bg-accent-dark rounded text-sm relative border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px] ${depth === 0 && isActive ? 'font-bold' : ''} ${depth === 2 && isActive ? 'font-bold bg-accent dark:bg-accent-dark hover:border-transparent' : 'font-semibold'}`}
+              className={`flex items-center justify-between w-full p-1 hover:bg-accent dark:hover:bg-accent-dark rounded text-sm relative z-10 border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px] ${depth === 0 && isActive ? 'font-bold' : ''} ${depth === 2 && isActive ? ' hover:border-transparent' : 'font-semibold'}`}
             >
               <span className="flex items-center gap-1">
                 {IconComponent && <IconComponent className={`size-5 text-${item.color || 'current'}`} />}
@@ -124,7 +124,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
             <Link
               to={item.url}
               onClick={() => setActiveItem(item.url)}
-              className={`w-full flex items-center gap-1 text-sm py-1 px-2 rounded relative border border-b-2 hover:border-light dark:hover:border-dark ${isActive ? 'font-bold bg-accent dark:bg-accent-dark border-light dark:border-dark' : 'hover:-top-px active:top-[.5px] hover:bg-accent dark:hover:bg-accent-dark border-transparent'}`}
+              className={`relative z-10 w-full flex items-center gap-1 text-sm py-1 px-2 rounded border border-b-2  ${isActive ? 'border-transparent' : 'hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px] hover:bg-accent dark:hover:bg-accent-dark border-transparent'}`}
             >
               {IconComponent && <IconComponent className={`size-5 text-${item.color || 'current'}`} />}
               <span>{item.name}</span>

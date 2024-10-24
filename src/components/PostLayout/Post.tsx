@@ -57,7 +57,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         className="w-full flex-shrink-0 md:block hidden relative z-20"
                     >
                         <aside
-                            className={`md:sticky md:top-0 reasonable:top-[108px] max-h-screen reasonable:h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end md:box-border my-10 md:my-0 mr-auto overflow-y-auto bg-light dark:bg-dark border-r border-light dark:border-dark ${hideSearch ? 'pt-5' : ''
+                            className={`md:sticky md:top-0 reasonable:top-[108px] max-h-screen reasonable:h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end md:box-border my-10 md:my-0 mr-auto overflow-y-auto bg-accent dark:bg-accent-dark border-r border-light dark:border-dark ${hideSearch ? 'pt-5' : ''
                                 }`}
                         >
                             {/*
