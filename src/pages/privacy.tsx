@@ -155,6 +155,15 @@ function Privacy() {
                         className="mx-auto"
                         alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
                     >
+                        🛠️ We gather usage data from our self-managed instances to analyze and improve our site, but you
+                        can opt out. If you share your info, like name and email, it’s only used for necessary stuff. No
+                        sensitive info like genetic data here, and definitely no under-18 data!
+                    </Tweet>
+
+                    <Tweet
+                        className="mx-auto"
+                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
+                    >
                         Here's a cat gif to keep you engaged (and to keep the algos intrigued). Please like/RT.
                         <img src="/images/pizza-cat.gif" alt="Cat gif" className="w-full mt-2" />
                         <span className="text-right !-mb-4">
@@ -172,16 +181,7 @@ function Privacy() {
                         className="mx-auto"
                         alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
                     >
-                        🛠️ We gather usage data to analyze and improve our site, but you can opt out. If you share your
-                        info, like name and email, it’s only used for necessary stuff. No sensitive info like genetic
-                        data here, and definitely no under-18 data!
-                    </Tweet>
-
-                    <Tweet
-                        className="mx-auto"
-                        alertMessage="Gen Z? Don't get distracted. You're here to read our thrilling privacy policy."
-                    >
-                        🌐 We share your info with service providers to run our site and product, but nothing else.
+                        🌐 We share necessary info of yours with service providers to run our site and product, but nothing else.
                         We’re part of the EU-US Data Privacy Framework, ensuring your data is safe. You can opt out if
                         you like!
                     </Tweet>
