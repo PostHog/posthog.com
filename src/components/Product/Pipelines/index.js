@@ -575,7 +575,7 @@ function PipelinesPage({ location }) {
                 <h2 className="text-4xl lg:text-5xl text-center mb-3 px-5">
                     <span className="text-red dark:text-yellow">Sync product data</span> with third-party tools
                 </h2>
-                <p className="text-center mb-8 text-lg px-5">
+                <p className="text-center mb-12 text-lg px-5">
                     Any event or action in PostHog can update user records or trigger workflows in other products in
                     your stack
                 </p>
@@ -585,26 +585,8 @@ function PipelinesPage({ location }) {
             <section
                 className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
             >
-                <h3 className="text-center mb-8">Integrations that work at any scale</h3>
-                <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
-                    <VsCompetitor title="Suitable for fast, scrappy startups">
-                        <p>
-                            Connect with popular startup tools, like Vitally and Hubspot — or build your own automations
-                            quickly with the Zapier destination. Pull data from open source databases like Postgres and
-                            MySQL, send it to Slack.{' '}
-                        </p>
-                    </VsCompetitor>
-                    <VsCompetitor title="Or big, serious enterprises">
-                        <p>
-                            Stick with your existing platforms and focus on adding that sweet, sweet shareholder value.
-                            Integrate with all the tools you know and love, from Snowflake and Stripe to Salesforce.
-                            Microsoft Teams coming soon, maybe.{' '}
-                        </p>
-                    </VsCompetitor>
-                </div>
-
-                <p className="text-center text-sm font-medium">
-                    Curious how other teams use PostHog? <Link to="/customers">Read their stories</Link>.
+                <p className="text-center text-[15px] font-medium">
+                    Curious how other teams use PostHog? <Link to="/customers">Read their stories.</Link>
                 </p>
             </section>
 
