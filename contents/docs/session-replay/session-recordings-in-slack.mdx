@@ -1,0 +1,68 @@
+---
+title: How to send a slack notification when there's a recording to watch
+availability:
+  free: false
+  selfServe: false
+  enterprise: full
+---
+
+
+Sometimes it's important to watch recordings as soon as they are available. You can take advantage of a little custom code and our new Hog powered functions to receive a slack notification every time there's a new recording.
+
+# overview
+
+You'll need: 
+
+* the data pipelines add-on in posthog cloud
+* a little custom code when you start posthog-js
+* a destination sending to Slack 
+
+## the data pipelines add-on
+
+can be found in this way and etc etc the docs
+
+## a little custom code
+
+When you start posthog-js we can add code once the library is loaded to watch for the condition that for your app means the recording is ready to watch
+
+```js
+posthog.init('your-token', {
+    api_host: 'https://us.i.posthog.com',
+    loaded: (ph) => {
+      let checkInterval
+
+      // this will be called every time a new sesson starts
+      ph.onSessionId((sessionId) => {
+        clearInterval(checkInterval)
+
+        // setup a check for the condition that means the recording is interesting enough to be watched
+        checkInterval = setInterval(() => {
+          // we want to read the session data, but not change it, so we pass `true`
+          const { 
+            lastActivityTimestamp, 
+            // or maybe sessionStartTimestamp, 
+            sessionId 
+           } = ph.sessionManager.checkAndGetSessionAndWindowId(true)
+            
+            const sinceLastActivity = Math.abs(new Date().getTime() - lastActivityTimestamp)
+            const fiveMinutesInMillis = 5 * 60 * 1000
+            if (sinceLastActivity > fiveMinutesInMillis) {
+                // capture an event that will be used to trigger the posthog destination
+              ph.capture('session_idle_for_five_minutes', {
+                sessionURL: ph.get_session_replay_url({ withTimestamp: true }),
+                idleSessionId: sessionId,
+              })
+
+              // clear the interval so we only send the event once
+              clearInterval(checkInterval)
+            }
+          
+        }, 5000)
+      })
+    }
+  })
+```
+
+## a destination
+
+set up a destination by doing x, y, z
