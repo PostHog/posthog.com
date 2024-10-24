@@ -361,7 +361,7 @@ const Flow = ({ isMobile }) => {
                     ...node,
                     position: {
                         x: isMobile ? 80 : 200,
-                        y: index * 100,
+                        y: index * 115,
                     },
                 }
             })
