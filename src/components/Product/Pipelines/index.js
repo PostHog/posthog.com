@@ -421,7 +421,7 @@ const CDPFlowChart = () => {
     }, [])
 
     return (
-        <div style={{ height: isMobile ? '1000px' : '500px', width: '100%' }}>
+        <div className="pointer-events-none" style={{ height: isMobile ? '1000px' : '500px', width: '100%' }}>
             <ReactFlowProvider>
                 <Flow />
             </ReactFlowProvider>
