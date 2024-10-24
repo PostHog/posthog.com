@@ -32,6 +32,7 @@ export default function BuiltBy({ people }) {
                     const person = nodes.find(
                         ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
                     )
+                    if (!person) return null
                     return (
                         <li key={name}>
                             <TeamMemberLink {...person} photo />
