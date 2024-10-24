@@ -209,7 +209,7 @@ const PostHogNode = ({ data, isMobile }) => {
     return (
         <div>
             <div className="max-w-sm">
-                <div className="p-3 rounded-full bg-accent dark:bg-accent-dark border border-border dark:border-dark">
+                <div className="p-3 rounded-full bg-white border border-light dark:border-dark">
                     {data.icons && <img src={data.icons[0]} alt={data.label} className="size-10" />}
                 </div>
             </div>
@@ -232,20 +232,20 @@ const CustomNode = ({ data }) => (
             className="opacity-0"
         />
 
-        <div className="max-w-sm flex space-x-1 items-start">
-            <ul className="flex items-center space-x-1 m-0 p-0 list-none flex-shrink-0">
+        <div className="max-w-sm flex gap-3 items-start">
+            <ul className="flex items-center m-0 p-0 list-none flex-shrink-0">
                 {data.icons?.map((icon) => {
                     return (
                         <li
                             key={icon}
-                            className="rounded-full bg-white p-2 border border-border dark:border-dark inline-block even:!-ml-2"
+                            className="rounded-full bg-white size-8 overflow-hidden border border-light dark:border-dark inline-block even:!-ml-2"
                         >
-                            <img src={icon} alt={data.label} className="size-4" />
+                            <img src={icon} alt={data.label} className="size-8" />
                         </li>
                     )
                 })}
             </ul>
-            <div>
+            <div className={`mt-1 ${data.icons?.length === 1 ? 'pl-6' : ''}`}>
                 <strong>{data.label}</strong>
                 <p className="text-sm">{data.description}</p>
             </div>
@@ -270,7 +270,10 @@ const initialNodes = [
         position: { x: 300, y: 0 },
         data: {
             label: 'CRM',
-            icons: ['https://us.posthog.com/static/services/hubspot.png'],
+            icons: [
+                'https://us.posthog.com/static/services/hubspot.png',
+                'https://us.posthog.com/static/services/salesforce.png',
+            ],
             description:
                 'Sync PostHog with Hubspot or Salesforce to create a single view of each customer and auto-assign leads.',
         },
@@ -281,7 +284,10 @@ const initialNodes = [
         position: { x: 300, y: 100 },
         data: {
             label: 'Support',
-            icons: ['https://us.posthog.com/static/services/zendesk.png'],
+            icons: [
+                'https://us.posthog.com/static/services/zendesk.png',
+                'https://us.posthog.com/static/services/intercom.png',
+            ],
             description:
                 'Update user information in Zendesk or Intercom to route requests based on priority, topic, or user payments.',
         },
@@ -292,7 +298,10 @@ const initialNodes = [
         position: { x: 300, y: 200 },
         data: {
             label: 'Messaging',
-            icons: ['https://us.posthog.com/static/services/customerio.png'],
+            icons: [
+                'https://us.posthog.com/static/services/customerio.png',
+                'https://us.posthog.com/static/services/braze.png',
+            ],
             description:
                 'Pipe data to Customer.io or Braze to power onboarding emails, run marketing campaigns, or send newsletters.',
         },
@@ -314,7 +323,10 @@ const initialNodes = [
         position: { x: 300, y: 400 },
         data: {
             label: 'Internal alerts',
-            icons: ['https://us.posthog.com/static/services/slack.png'],
+            icons: [
+                'https://us.posthog.com/static/services/slack.png',
+                'https://us.posthog.com/static/services/zapier.png',
+            ],
             description:
                 'Trigger webhooks or send messages directly to Slack to alert you about errors, churns, new leads, and more.',
         },
