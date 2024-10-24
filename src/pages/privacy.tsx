@@ -109,7 +109,7 @@ function Privacy() {
                             </Tooltip>
                             :
                         </span>
-                        <span className="text-xs mt-2 md:mt-0 mb-4">
+                        <span className="text-xs mt-2 md:mt-0 mb-4 block">
                             (Serif font demonstrates how important this disclaimer is)
                         </span>
                         The following is only a summary of PostHog's privacy policy. Please read{' '}
