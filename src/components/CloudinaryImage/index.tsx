@@ -17,11 +17,16 @@ export default function CloudinaryImage({ src, width, placeholder, className = '
     const cloudinaryPublicId = isCloudinaryImage(src) && getCloudinaryPublicId(src)
     return cloudinaryPublicId ? (
         <div className={`inline-block ${className}`}>
-            <Image {...other} publicId={cloudinaryPublicId} cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}>
+            <Image
+                {...other}
+                publicId={cloudinaryPublicId}
+                cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                className={className}
+            >
                 <Transformation width={width} crop="scale" />
             </Image>
         </div>
     ) : (
-        <img src={src} width={width} className={className} {...other} />
+        <img src={src} width={width} className={`inline-block ${className}`} {...other} />
     )
 }
