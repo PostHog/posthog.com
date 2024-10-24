@@ -141,7 +141,7 @@ You can also link to the PostHog app directly by using `https://us.posthog.com/$
 
 ### Bold button and tab names
 
-Put button, tab, and other navigation names in bold. This makes it easier for our users to skim through the docs, while be cleaner than using quotes all the time.
+Put button, tab, and other navigation names in bold. This makes it easier for our users to skim through the docs, and it's cleaner than using quotes all the time.
 
 > **Example:** "Go to the [insights tab](https://us.posthog.com/insights) and click **+ New insight**."
 
