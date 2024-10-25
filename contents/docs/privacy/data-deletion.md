@@ -38,7 +38,7 @@ You can paginate through the results using the `next` and `previous` parameters 
 
 To delete the persons and their events, you can use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id)
 
-To do that, iterate through the persons returned in the previous step and use the person's `id` or `distinct_id` in the DELETE call. To delete the person's corresponding events in addition to the person, add the `delete_events=true` parameter. For example:
+To do that, iterate through the persons returned in the previous step and use the person's `id` in the DELETE call. To delete the person's corresponding events in addition to the person, add the `delete_events=true` parameter. For example:
 
 ```
 DELETE https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true
