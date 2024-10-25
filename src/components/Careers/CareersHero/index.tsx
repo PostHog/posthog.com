@@ -124,7 +124,7 @@ export const CareersHero = () => {
     const [selectedJob, setSelectedJob] = useState(jobs[0])
     const [processedHtml, setProcessedHtml] = useState('')
     const [websiteDescription, setWebsiteDescription] = useState('')
-    const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
+    const teamsField = selectedJob?.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
     const teams = teamsField ? JSON.parse(teamsField.value) : []
     const [selectedTeamName, setSelectedTeamName] = useState(teams[0])
     const selectedTeam = allTeams.find((team) => team.name.toLowerCase() === selectedTeamName.toLowerCase())
@@ -145,6 +145,8 @@ export const CareersHero = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        if (!selectedJob) return
+
         const parser = new DOMParser()
         const doc = parser.parseFromString(selectedJob.fields.html, 'text/html')
 
@@ -171,6 +173,8 @@ export const CareersHero = () => {
 
         setIsLoading(false)
     }, [selectedJob])
+
+    if (!selectedJob) return null
 
     return (
         <>
