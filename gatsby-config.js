@@ -1,9 +1,36 @@
 const fetch = require(`node-fetch`)
 const algoliaConfig = require('./gatsby/algoliaConfig')
+const qs = require('qs')
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
+
+const getQuestionPages = async (base) => {
+    const fetchQuestions = async (page) => {
+        const questionQuery = qs.stringify({
+            populate: '*',
+            pagination: {
+                page,
+                pageSize: 100,
+            },
+        })
+
+        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${questionQuery}`)
+        return response.json()
+    }
+
+    const initialResponse = await fetchQuestions(1)
+    const totalPages = initialResponse.meta.pagination.pageCount
+
+    const allResponses = await Promise.all(Array.from({ length: totalPages }, (_, i) => fetchQuestions(i + 1)))
+
+    const questions = allResponses.flatMap((response) =>
+        response.data.map((question) => ({ path: `${base}/questions/${question.attributes.permalink}` }))
+    )
+
+    return questions
+}
 
 module.exports = {
     siteMetadata: {
@@ -176,7 +203,9 @@ module.exports = {
                         path: `${site.siteMetadata.siteUrl}/plugins/` + plugin.name.toLowerCase().replace(/ /g, '-'),
                     }))
 
-                    return [...transformedPages, ...plugins]
+                    const questionPages = await getQuestionPages(site.siteMetadata.siteUrl)
+
+                    return [...transformedPages, ...questionPages, ...plugins]
                 },
                 serialize: async ({ path }) => {
                     let changefreq = 'monthly'
