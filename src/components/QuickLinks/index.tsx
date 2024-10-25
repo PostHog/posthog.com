@@ -15,7 +15,13 @@ export default function QuickLinks({ items }) {
                         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mb-6"
                         items={groupedMenuItems[key]
                             .filter(({ url }) => url)
-                            .map(({ url, name, icon, color }) => ({ label: name, url, icon, iconColor: color }))}
+                            .map(({ url, name, icon, color, children }) => ({
+                                label: name,
+                                url,
+                                icon,
+                                iconColor: color,
+                                children,
+                            }))}
                     />
                 </>
             )

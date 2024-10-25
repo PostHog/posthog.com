@@ -1,0 +1,91 @@
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
+export const EnableSessionReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-dark-mode.png"
+export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-light-mode.png"
+
+## Step one: Install our JavaScript web library
+
+If you already have our JavaScript library or snippet installed, you can skip this step.
+
+import JSInstallWeb from "../../integrate/_snippets/install-web.mdx"
+
+<JSInstallWeb />
+
+## Step two: Enable session recordings in your project settings
+
+Enable session recordings in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+<ProductScreenshot
+  imageLight={EnableSessionReplayLight} 
+  imageDark={EnableSessionReplayDark} 
+  alt="Enable session recordings in your PostHog'"
+  classes="rounded"
+/>
+
+Once enabled, the library will start recording sessions by default.
+
+They can be toggled off in the by setting the `disable_session_recording: true` flag in the [config](/docs/integrate/client/js/#config). 
+
+Users who [opt out](/docs/libraries/js#opt-users-out) of event capturing will not have their sessions recorded.
+
+> **Note on using Segment's SDK**: Session Replay does not work if you send data using [Segment's SDK](/docs/libraries/segment) as this data is not collected. If you use Segment, you may want to add the PostHog library as well – (make sure to only send regular event data from one source).
+
+## How to ignore sensitive elements
+
+You may want to hide sensitive text or elements in your replays. See our [privacy controls](/docs/session-replay/privacy) docs for how to do this.
+
+## How to record sessions across different domains
+
+PostHog automatically captures sessions across subdomains (e.g. `posthog.com` and `us.posthog.com`), but recording sessions across different domains (e.g. `posthog.com` and `hogflix.com`) requires a bit more setup.
+
+To do this, you need to pass the `session_id` from the first domain to the second domain (for example, as a URL parameter). You can get this value by calling `posthog.get_session_id()`.
+
+Below is an example of how this looks like in Next.js:
+
+```js
+// first domain
+'use client'
+import { usePostHog } from 'posthog-js/react'
+
+export default function FirstDomain() {
+  const posthog = usePostHog()
+  return (
+    <div>
+      <h1>Welcome to the first domain</h1>
+      <button onClick={
+        () => window.location.href = `https://seconddomain.com/?session_id=${posthog.get_session_id()}`
+      }>
+        Go to the second domain
+      </button>
+    </div>
+  )
+}
+```
+
+On the second domain, bootstrap the PostHog initialization using the session ID. 
+
+```js
+// second domain
+'use client'
+import posthog from 'posthog-js'
+import { PostHogProvider } from 'posthog-js/react'
+import { useSearchParams } from 'next/navigation'
+
+export function PHProvider({ children }) {
+  const searchParams = useSearchParams()
+  const sessionId = searchParams.get('session_id')
+
+  if (typeof window !== 'undefined') {
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      bootstrap: {
+        sessionID: sessionId
+      }
+    })
+  }
+
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+}
+```
+
+With this setup, PostHog tracks the user's session across domains and captures a single, combined replay.

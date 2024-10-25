@@ -8,7 +8,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 	}
     type Mdx implements Node {
       frontmatter: Frontmatter
-      avatar: File @link(from: "avatar___NODE")
+      avatar: String
       teamMember: Mdx
       name: String
       childMdx: Mdx
@@ -36,7 +36,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       description: String
     }
     type Contributors {
-      avatar: File @link(from: "avatar___NODE")
+      avatar: String
       url: String
       username: String
       teamData: TeamData
@@ -280,6 +280,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     ) {
         createTypes(
             `
+            type ShopifyCollection implements Node {
+              handle: String!
+              products: [ShopifyProduct!]!
+            }
             type ShopifySelectedOption {
               name: String!
               value: String!

@@ -1,9 +1,36 @@
 const fetch = require(`node-fetch`)
 const algoliaConfig = require('./gatsby/algoliaConfig')
+const qs = require('qs')
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
 })
+
+const getQuestionPages = async (base) => {
+    const fetchQuestions = async (page) => {
+        const questionQuery = qs.stringify({
+            populate: '*',
+            pagination: {
+                page,
+                pageSize: 100,
+            },
+        })
+
+        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${questionQuery}`)
+        return response.json()
+    }
+
+    const initialResponse = await fetchQuestions(1)
+    const totalPages = initialResponse.meta.pagination.pageCount
+
+    const allResponses = await Promise.all(Array.from({ length: totalPages }, (_, i) => fetchQuestions(i + 1)))
+
+    const questions = allResponses.flatMap((response) =>
+        response.data.map((question) => ({ path: `${base}/questions/${question.attributes.permalink}` }))
+    )
+
+    return questions
+}
 
 module.exports = {
     siteMetadata: {
@@ -56,15 +83,9 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
-                name: `images`,
-                path: `${__dirname}/src/images`,
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
                 name: `contents`,
                 path: `${__dirname}/contents`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
         {
@@ -92,6 +113,7 @@ module.exports = {
             options: {
                 name: `menuItems`,
                 path: `${__dirname}/src/menuItems`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
         {
@@ -99,6 +121,7 @@ module.exports = {
             options: {
                 name: `navs`,
                 path: `${__dirname}/src/navs`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
         {
@@ -106,6 +129,7 @@ module.exports = {
             options: {
                 name: `authors`,
                 path: `${__dirname}/src/data/authors.json`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
         {
@@ -113,6 +137,7 @@ module.exports = {
             options: {
                 name: `testimonials`,
                 path: `${__dirname}/src/data/testimonials.json`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
         {
@@ -123,8 +148,6 @@ module.exports = {
             },
         },
         `gatsby-plugin-image`,
-        'gatsby-transformer-sharp',
-        'gatsby-plugin-sharp',
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
@@ -155,28 +178,14 @@ module.exports = {
                       path
                     }
                   }
-                  questions: allSqueakQuestion {
-                    nodes {
-                       permalink
-                    }
-                  }
                 }`,
                 resolveSiteUrl: ({ site }) => {
                     return site.siteMetadata.siteUrl
                 },
-                resolvePages: async ({
-                    allSitePage: { nodes: allPages },
-                    site,
-                    questions: { nodes: allQuestions },
-                }) => {
+                resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
                     const transformedPages = allPages.map(({ path }) => {
                         return {
                             path: `${site.siteMetadata.siteUrl}${path}`,
-                        }
-                    })
-                    const transformedQuestionPages = allQuestions.map(({ permalink }) => {
-                        return {
-                            path: `${site.siteMetadata.siteUrl}/questions/${permalink}`,
                         }
                     })
 
@@ -194,7 +203,9 @@ module.exports = {
                         path: `${site.siteMetadata.siteUrl}/plugins/` + plugin.name.toLowerCase().replace(/ /g, '-'),
                     }))
 
-                    return [...transformedPages, ...transformedQuestionPages, ...plugins]
+                    const questionPages = await getQuestionPages(site.siteMetadata.siteUrl)
+
+                    return [...transformedPages, ...questionPages, ...plugins]
                 },
                 serialize: async ({ path }) => {
                     let changefreq = 'monthly'

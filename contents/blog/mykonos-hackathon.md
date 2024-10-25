@@ -188,7 +188,7 @@ If you feel the need for a quick distraction while you wait, you could also chec
 
 ## CLI
 
-<BuiltBy people={["Manoel Aranda Neto", "Daniel Esneider"]} />
+<BuiltBy people={["Manoel Aranda Neto", "Daniel Esneider Jaramillo"]} />
 
 We build products for engineers, so there’s nothing better than bringing PostHog closer to their natural environment: the terminal.
 

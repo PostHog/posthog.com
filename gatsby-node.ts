@@ -25,6 +25,9 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
     actions.setWebpackConfig({
+        cache: process.env.NODE_ENV === 'development' || {
+            compression: 'gzip',
+        },
         resolve: {
             extensions: ['.js', '.ts', '.tsx'],
             alias: {

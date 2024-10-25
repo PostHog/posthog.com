@@ -42,19 +42,8 @@ exports.onCreateNode = async function ({ node, getNode, actions, getCache, cache
                         const contributorsNode = await Promise.all(
                             contributors.map(async (contributor) => {
                                 const { avatar, url, username } = contributor
-                                const fileNode =
-                                    avatar &&
-                                    (await createRemoteFileNode({
-                                        url: avatar,
-                                        parentNodeId: node.id,
-                                        createNode,
-                                        cache,
-                                        getCache,
-                                        createNodeId,
-                                        store,
-                                    }))
                                 return {
-                                    avatar___NODE: fileNode && fileNode.id,
+                                    avatar,
                                     url,
                                     username,
                                 }

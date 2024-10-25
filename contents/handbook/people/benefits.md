@@ -60,6 +60,9 @@ If you ever need change of scenery, we offer a monthly budget towards [coworking
 
 > Please message Kendal to get added to our company WeWork account. 
 
+### Cyclescheme
+In the UK we offer [Cyclescheme](https://www.cyclescheme.co.uk/) to save money on new cycling gear. To get started, activate your cyclescheme account [here](https://app.workplaceextras.com/employee-register/9a1bc53).
+
 ### Meeting up 
 
 We do regular [team offsites](/handbook/company/offsites) - recent trips have included Aruba, Iceland, and Portugal! Small Teams also have their own offsites at least once a year. 

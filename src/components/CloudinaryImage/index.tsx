@@ -13,13 +13,20 @@ const getCloudinaryPublicId = (url: string): string | null => {
     return match ? match[1] : null
 }
 
-export default function CloudinaryImage({ src, width, placeholder, className, ...other }) {
+export default function CloudinaryImage({ src, width, placeholder, className = '', ...other }) {
     const cloudinaryPublicId = isCloudinaryImage(src) && getCloudinaryPublicId(src)
     return cloudinaryPublicId ? (
         <div className={`inline-block ${className}`}>
-            <Image {...other} publicId={cloudinaryPublicId} cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}>
+            <Image
+                {...other}
+                publicId={cloudinaryPublicId}
+                cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
+                className={className}
+            >
                 <Transformation width={width} crop="scale" />
             </Image>
         </div>
-    ) : null
+    ) : (
+        <img src={src} width={width} className={`inline-block ${className}`} {...other} />
+    )
 }

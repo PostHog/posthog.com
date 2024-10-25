@@ -61,67 +61,10 @@ const fields: {
         hubspotField: 'icp___role_list',
     },
     {
-        name: 'contactSalesProducts',
-        placeHolder: 'Product Analytics',
-        Component: RadioGroup,
-        options: [
-            { value: 'Product Analytics', hubspotValue: 'Product Analytics' },
-            { value: 'Session Replay', hubspotValue: 'Session Replay' },
-            { value: 'Experiments + Feature Flags', hubspotValue: 'A/B Testing + Feature Flags' },
-            { value: 'Web Analytics', hubspotValue: 'Web Analytics' },
-            { value: 'Surveys', hubspotValue: 'Surveys' },
-            { value: 'Data Warehouse', hubspotValue: 'Data Warehouse' },
-            { value: 'CDP', hubspotValue: 'CDP' },
-        ],
-        hubspotField: 'contact_sales_products',
-    },
-    {
-        name: 'contactSalesReason',
-        placeHolder: '',
-        Component: RadioGroup,
-        options: [
-            { value: 'How much will PostHog cost me?', hubspotValue: 'Help understanding/forecasting the cost' },
-            {
-                value: 'Will PostHog solve the problem I have?',
-                hubspotValue: 'Help figuring out whether PostHog will solve my problem',
-            },
-            {
-                value: 'I want to discuss how PostHog fits into my stack',
-                hubspotValue: 'Discuss how PostHog fits into my architecture/data stack',
-            },
-            { value: 'I want a custom demo of PostHog', hubspotValue: 'Get a live demo of PostHog' },
-            {
-                value: 'I am evaluating PostHog on behalf of a client (or someone else)',
-                hubspotValue: 'I am evaluating PostHog on behalf of a client (or someone else)',
-            },
-            {
-                value: 'Im doing due diligence on multiple vendors',
-                hubspotValue: 'Doing due diligence on multiple vendors',
-            },
-        ],
-        hubspotField: 'contact_sales_reason',
-    },
-    {
         name: 'contactSalesMonthlyActiveUsers',
         placeHolder: 'How many monthly active users do you have?',
         Component: Input,
         hubspotField: 'contact_sales_monthly_active_users',
-    },
-    {
-        name: 'contactSalesSecurityComplianceNeeds',
-        placeHolder: '',
-        Component: RadioGroup,
-        options: [
-            { value: 'Formal Security Review', hubspotValue: 'Formal Security Review' },
-            { value: 'Business Associate Agreement', hubspotValue: 'Business Associate Agreement' },
-            { value: 'Custom Data Processing Agreement (DPA)', hubspotValue: 'Custom Data Processing Agreement (DPA)' },
-            { value: 'Custom Master Services Agreement (MSA)', hubspotValue: 'Custom Master Services Agreement (MSA)' },
-            {
-                value: 'Slack Connect Channel for setup/support',
-                hubspotValue: 'Slack Connect Channel for setup/support',
-            },
-        ],
-        hubspotField: 'contact_sales_security_compliance_needs',
     },
     {
         name: 'details',
@@ -327,9 +270,6 @@ const ValidationSchema = Yup.object().shape({
     companyName: Yup.string().required('Please enter your company name'),
     role: Yup.string().required('Please select your role'),
     monthlyActiveUsers: Yup.number().required('Please select a value'),
-    monthlyEvents: Yup.number().required('Please select a value'),
-    product: Yup.string().required("Please select the product you're interested in"),
-    personalizedDemo: Yup.string().required('Please select an option'),
     details: Yup.string().nullable(),
     whereDidYouHearAboutPostHog: Yup.string().nullable(),
 })
