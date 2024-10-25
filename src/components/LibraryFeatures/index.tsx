@@ -33,19 +33,22 @@ export const LibraryFeatures = ({ availability }: LibraryFeaturesProps) => {
             </h5>
 
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 m-0 gap-x-2 gap-y-1">
-                {features.map((feature) => (
-                    <li key={feature.key} className="flex items-center">
-                        {availability[feature.key] ? (
-                            <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
-                        ) : (
-                            <img src={MinusIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
-                        )}
-                        <span className="text-[15px] ml-2 mr-.5">{feature.name}</span>
-                        <Link to={feature.url} className="hover:!bg-none active:!bg-none focus:!bg-none p-1 group">
-                            <InfoIcon className="w-4 xl:w-3.5 h-4 xl:h-3.5 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
-                        </Link>
-                    </li>
-                ))}
+                {features
+                    // Only render features that are "defined"
+                    .filter((feature) => availability[feature.key] !== undefined && availability[feature.key] !== null)
+                    .map((feature) => (
+                        <li key={feature.key} className="flex items-center">
+                            {availability[feature.key] ? (
+                                <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
+                            ) : (
+                                <img src={MinusIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
+                            )}
+                            <span className="text-[15px] ml-2 mr-.5">{feature.name}</span>
+                            <Link to={feature.url} className="hover:!bg-none active:!bg-none focus:!bg-none p-1 group">
+                                <InfoIcon className="w-4 xl:w-3.5 h-4 xl:h-3.5 opacity-75 group-hover:opacity-100 relative transform transition-all group-hover:scale-[1.2] active:top-[1px] active:scale-[1.1]" />
+                            </Link>
+                        </li>
+                    ))}
             </ul>
         </div>
     ) : null
