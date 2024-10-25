@@ -1,3 +1,7 @@
+import Tab from "components/Tab"
+import IOSUIKit from "./code-variants/ios-uikit.mdx"
+import IOSSwiftUI from "./code-variants/ios-swiftui.mdx"
+
 PostHog is available through [CocoaPods](http://cocoapods.org) or you can add it as a Swift Package Manager based dependency.
 
 ### CocoaPods
@@ -28,21 +32,17 @@ and then as a dependency for the Package target utilizing PostHog:
 
 ### Configuration
 
-```swift
-import Foundation
-import PostHog
-import UIKit
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        let POSTHOG_API_KEY = "<ph_project_api_key>"
-        // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-        let POSTHOG_HOST = "<ph_client_api_host>"
-
-        let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) // TIP: host is optional if you use https://us.i.posthog.com
-        PostHogSDK.shared.setup(config)
-
-        return true
-    }
-}
-```
+<Tab.Group tabs={['App Delegate/UIKit', 'SwiftUI Lifecycle']}>
+     <Tab.List>
+         <Tab>UIKit</Tab>
+         <Tab>SwiftUI</Tab>
+     </Tab.List>
+     <Tab.Panels>
+         <Tab.Panel>
+            {IOSUIKit}
+         </Tab.Panel>
+         <Tab.Panel>
+            {IOSSwiftUI}
+         </Tab.Panel>
+     </Tab.Panels>
+ </Tab.Group>
