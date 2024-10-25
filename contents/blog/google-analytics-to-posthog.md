@@ -49,7 +49,7 @@ If you’ve set up Google Analytics, PostHog’s setup won’t look too differen
 </script>
 ```
 
-This works wherever code you can add code to your `<head>` tag, for example, site builders like [WordPress](/docs/libraries/wordpress) and [Webflow](/tutorials/webflow). Alternatively, you can add the PostHog snippet through [Google Tag Manager](/docs/libraries/google-tag-manager) or install the [JavaScript library](/docs/libraries/js) in your app. 
+This works wherever code you can add code to your `<head>` tag, for example, site builders like [WordPress](/docs/libraries/wordpress), [Webflow](/tutorials/webflow), and [Squarespace](/tutorials/squarespace-analytics). Alternatively, you can add the PostHog snippet through [Google Tag Manager](/docs/libraries/google-tag-manager) or install the [JavaScript library](/docs/libraries/js) in your app. 
 
 When you set up the snippet or JS library, it autocaptures events (similar to GA4’s [enhanced measurement](https://support.google.com/analytics/answer/9216061)) and they start showing up in your PostHog instance. Pageviews, clicks, inputs, and sessions are all captured without needing to create "properties," "streams," or instrument events yourself.
 
