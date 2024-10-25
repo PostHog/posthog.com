@@ -23,7 +23,7 @@ With the snippet copied, go to your Bubble site settings by clicking on the icon
 
 Go to the **SEO / metatags** tab in site settings. Paste your PostHog snippet in the **Script/meta tags in header** section. Then, deploy your site to live.
 
-![How to add PostHog to Bubble](./images/bubble-adding-posthog.mp4)
+![How to add PostHog to Bubble](https://res.cloudinary.com/dmukukwp6/video/upload/bubble_adding_posthog_ba8a84a861.mp4)
 
 ## Capture custom events
 
@@ -41,7 +41,7 @@ Below is an example of how to capture an event when a button is pressed:
 window.posthog.capture("button_clicked")
 ```
 
-![Capture custom event in Bubble](./images/bubble-capture-custom-event.mp4)
+![Capture custom event in Bubble](https://res.cloudinary.com/dmukukwp6/video/upload/bubble_capture_custom_event_5f91897641.mp4)
 
 ## Next steps
 

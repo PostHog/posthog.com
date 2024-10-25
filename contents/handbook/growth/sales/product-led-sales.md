@@ -14,7 +14,7 @@ Product-led leads can be generated in different ways:
 
 1. Customers with an active subscription in Stripe who are forecasted to receive a first time bill of $500 or more.
 2. Customers with a high [lead score](/handbook/growth/sales/lead-scoring) (>=20) who have 50+ employees, more than 1 user in the organization, and have started sending events but haven't yet subscribed.
-3. Customers who have used most of their startup credits and are expected to have significant spend after the program ends.
+3. Customers who have used >50% of their startup credits and are expected to have >$1500/mo spend after the program ends.
 
 They follow the [normal territory assignment rules](https://posthog.com/handbook/growth/sales/crm#how-we-do-lead-assignments) in Salesforce. 
 
