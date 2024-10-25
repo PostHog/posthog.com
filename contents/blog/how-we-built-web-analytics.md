@@ -64,9 +64,9 @@ People have high expectation for web analytics query performance. This is for a 
 
 On the other hand, product analytics users have slightly lower expectations for performance. They're a bit more generous with their waiting time since queries are usually custom and complex. For example, someone may create a query to see how users interacted with a specific feature in their product.
 
-But why is product analytics slower? Let's have a look:
+But why is product analytics slower? When you have millions of events, the best way to optimize query performance is do sampling. But this is not possible for product analytics. Let's have a look at why:
 
-When you have millions of events, the best way to optimize query performance is do sampling. But this is not possible with productAs mentioned above, we use ClickHouse to store our events. It stores rows in blocks called "granules", and each granule contains about 8,000 rows. When you need to read a single row, you need to load an entire granule.
+As mentioned above, we use ClickHouse to store our events. It stores rows in blocks called "granules", and each granule contains about 8,000 rows. When you need to read a single row, you need to load an entire granule.
 
 Now, in web analytics, it's easy to sample events from a single session since all the events are highly likely to be stored together in a single granule.
 
@@ -77,36 +77,31 @@ However, for product analytics, their data is likely to spread across multiple g
 ## Our solution
 
 ### 1. How we improved costs
-Robbie came up with [anonymous events](https://posthog.com/blog/anonymous-events). These would be used for web analytics, while our existing product analytics would continue to the regular events (now called **identified events**).
+Robbie came up with [anonymous events](https://posthog.com/blog/anonymous-events). These are to be used for web analytics, while our existing product analytics would continue to use our regular events (now called **identified events**).
 
-Anonymous events and identified events differ in an important way: For anonymous events, we don't create a person profile. This means we can write our events directly to ClickHouse first, without needing to deal with Postgres at all. This massively reduces our processing costs.]
+Anonymous events and identified events differ in an important way: For anonymous events, we don't create a person profile. This means we can write our events directly to ClickHouse first, without needing to deal with Postgres at all. This massively reduces our processing costs.
 
-Anonymous event you can:
+Anonymous event you can still:
 - Set event properties
 - Aggregate and filter events by event properties e.g. URL, geographic location, UTM source.
 - Create insights like trends, funnels, SQL insights and more.
 
-However, their limitations are that you cannot:
-- Set person properties
-- Create cohorts
+However, since they don't have a person profile, you cannot:
 - Filter on person properties
-- Use person properties for targeting feature flags, A/B tests, or surveys
-- Query the persons table using SQL insights
-- Use group analytics
-
-However, an important piece is that ou can still upgrade anonymous events to identified events....
+- Create cohorts based on person properties
+- Use person properties for targeting [feature flags](/feature-flags), [A/B tests](/experiments), or [surveys](/surveys)
 
 ### 2. How we improved performance
 
 Using anonymous events improved the processing time of writing events to ClickHouse. However, Robbie still needed to improve query performance.
 
-Unfortunately, Robbie was still not able to implement sampling as all events (regardless of whether they are anonymous or identified) are stored in the same ClickHouse granules. Refactoring the database so it can support event sampling is going to be a heavy lift, but in the meantime Robbie came up with some workarounds.
+Unfortunately, Robbie was still not able to implement sampling as all events are stored in the same ClickHouse granules, regardless of whether they are anonymous or identified. Refactoring the database so it can support event sampling is going to be a heavy lift, but in the meantime Robbie came up with a workaround.
 
-To start, Robbie built an initial version of the web analytics dashboard. It shows important metrics like number of unique visitors, bounce rate, top sources of traffic, visitors by device type, and more. This enabled him to get a feel for the default performance of queries.
+To start, Robbie built an initial version of the web analytics dashboard to get a feel for the default performance of the queries. It showed important web metrics like number of unique visitors, bounce rate, top sources of traffic, visitors by device type, and more.
 
-Next, Robbie noticed that metrics such as session duration, session bounce rate, and top pages could be precomputed. He created a script that would precompute these metrics for each session that would run in the background once a session had ended. These are then stored in a separate table in ClickHouse.
+Next, Robbie noticed that metrics such as session duration, session bounce rate, and top pages could be precomputed. He implemented a robust processing pipeline that calculates these metrics for each session in the background once a session has ended. These precomputed results are then stored in a separate table in ClickHouse for fast querying.
 
-This meant that when you queried these metrics, you don't need to query every event and calculate them on the spot. Instead, you can just read from the table. This massively sped up query performance and decreased waiting time by about 50%.
+This means that when you query these metrics, you don't need to query every event and do your calculations at query time. Instead, you can just read from the table. This massively sped up query performance.
 
 ![How we improve performance](https://res.cloudinary.com/dmukukwp6/image/upload/perf_6cafe5250e.png)
 
