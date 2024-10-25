@@ -16,7 +16,7 @@ tags:
 
 ---
 
-After you've started capturing events, you might decide that the original name you've given the event doesn't quite suit it. For example, you might have an event `register_button_clicked` and you want to rename it to `signup_button_clicked`.
+After you've started capturing events, you might decide that the original name you've given an event doesn't quite suit it. For example, you might have an event called `register_button_clicked` and you want to rename it to `signup_button_clicked`.
 
 However, it's not possible to rename events in PostHog. Instead, you should use [actions](/docs/data/actions) to group the old and new events together. This tutorial shows you how.
 
@@ -33,22 +33,18 @@ Start by clicking the **New action** button in the [actions tab](https://us.post
     classes="rounded"
 />
 
-Next, in **Match Group #1**, click **Other events** and select the old event name. Then click **+ Add match group** and add the new event name.
-
-Lastly, give your action a name and press **Save**.
-
 Now you can take the two separate events (`register_button_clicked` and `signup_button_clicked`) and combine them. Match groups allow you to find both of those events and see them as one `Sign Up CTA Clicked` action.
 
-For example, to rename an event `register_button_clicked`, we group it with the new event name `signup_button_clicked` and create an action called `Sign Up CTA Clicked`.
+In **Match Group #1**, click **Other events** and select the old event name. Then click **+ Add match group** and add the new event name. Then, give your action a name and press the **Save** button.
 
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/create_action_light_b6e41e971c.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/create_action_dark_d81043846b.png"
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/action_match_groups_light_c1aeb1f8a4.mp4"
+    videoDark="https://res.cloudinary.com/dmukukwp6/video/upload/action_match_groups_dark_a990b24407.mp4"
     alt="Create action page with match groups"
     classes="rounded"
 />
 
-After you click the **Save** button, check the matching events section at the bottom of the page to verify it's matching both events.
+After saving the action, check the matching events section at the bottom of the page to verify it's matching both events.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/matching_events_light_7e62c3b84a.png"
