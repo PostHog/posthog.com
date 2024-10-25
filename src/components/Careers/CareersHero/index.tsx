@@ -104,22 +104,22 @@ export const CareersHero = () => {
     } = useStaticQuery(query)
 
     const jobs = useMemo(() => {
-        const sortedJobs = [...originalJobs];
+        const sortedJobs = [...originalJobs]
 
-        const productEngineerIndex = sortedJobs.findIndex(job => job.fields.title === "Product Engineer");
+        const productEngineerIndex = sortedJobs.findIndex((job) => job.fields.title === 'Product Engineer')
         if (productEngineerIndex !== -1) {
-            const [productEngineerJob] = sortedJobs.splice(productEngineerIndex, 1);
-            sortedJobs.unshift(productEngineerJob);
+            const [productEngineerJob] = sortedJobs.splice(productEngineerIndex, 1)
+            sortedJobs.unshift(productEngineerJob)
         }
 
-        const speculativeIndex = sortedJobs.findIndex(job => job.fields.title === "Speculative application");
+        const speculativeIndex = sortedJobs.findIndex((job) => job.fields.title === 'Speculative application')
         if (speculativeIndex !== -1) {
-            const [speculativeJob] = sortedJobs.splice(speculativeIndex, 1);
-            sortedJobs.push(speculativeJob);
+            const [speculativeJob] = sortedJobs.splice(speculativeIndex, 1)
+            sortedJobs.push(speculativeJob)
         }
 
-        return sortedJobs;
-    }, [originalJobs]);
+        return sortedJobs
+    }, [originalJobs])
 
     const [selectedJob, setSelectedJob] = useState(jobs[0])
     const [processedHtml, setProcessedHtml] = useState('')
@@ -139,7 +139,7 @@ export const CareersHero = () => {
         Math.round(
             (selectedTeam.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length /
                 teamLength) *
-            100
+                100
         )
 
     const [isLoading, setIsLoading] = useState(true)
@@ -204,15 +204,17 @@ export const CareersHero = () => {
                             return (
                                 <li key={job.fields.title} className="">
                                     <button
-                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${selectedJob.fields.title === job.fields.title
-                                            ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
-                                            : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
-                                            }`}
+                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${
+                                            selectedJob.fields.title === job.fields.title
+                                                ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
+                                                : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                                        }`}
                                         onClick={() => setSelectedJob(job)}
                                     >
                                         <span
-                                            className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
-                                                }`}
+                                            className={`font-semibold text-[15px] ${
+                                                selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
+                                            }`}
                                         >
                                             {job.fields.title}
                                         </span>
@@ -242,30 +244,32 @@ export const CareersHero = () => {
                         <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                             <Detail
                                 title="Location"
-                                value={`Remote${selectedJob.parent.customFields.find(
-                                    (field: { title: string }) => field.title === 'Location(s)'
-                                )?.value
-                                    ? ` (${selectedJob.parent.customFields.find(
+                                value={`Remote${
+                                    selectedJob.parent.customFields.find(
                                         (field: { title: string }) => field.title === 'Location(s)'
-                                    ).value
-                                    })`
-                                    : ''
-                                    }`}
+                                    )?.value
+                                        ? ` (${
+                                              selectedJob.parent.customFields.find(
+                                                  (field: { title: string }) => field.title === 'Location(s)'
+                                              ).value
+                                          })`
+                                        : ''
+                                }`}
                                 icon={<Location />}
                             />
                             {selectedJob.parent.customFields.find(
                                 (field: { title: string }) => field.title === 'Timezone(s)'
                             )?.value && (
-                                    <Detail
-                                        title="Timezone(s)"
-                                        value={
-                                            selectedJob.parent.customFields.find(
-                                                (field: { title: string }) => field.title === 'Timezone(s)'
-                                            ).value
-                                        }
-                                        icon={<Timezone />}
-                                    />
-                                )}
+                                <Detail
+                                    title="Timezone(s)"
+                                    value={
+                                        selectedJob.parent.customFields.find(
+                                            (field: { title: string }) => field.title === 'Timezone(s)'
+                                        ).value
+                                    }
+                                    icon={<Timezone />}
+                                />
+                            )}
                         </ul>
 
                         <div className="job-content mt-4">
@@ -284,7 +288,10 @@ export const CareersHero = () => {
                                 <>
                                     {websiteDescription ? (
                                         <div className="mb-4">
-                                            <p className="text-[15px]" dangerouslySetInnerHTML={{ __html: websiteDescription }} />
+                                            <p
+                                                className="text-[15px]"
+                                                dangerouslySetInnerHTML={{ __html: websiteDescription }}
+                                            />
                                         </div>
                                     ) : (
                                         <div
@@ -295,13 +302,14 @@ export const CareersHero = () => {
                                     {selectedJob.fields.title == 'Speculative application' && (
                                         <>
                                             <p className="text-[15px]">
-                                                We take exceptional people when they come along - and we really mean that!
+                                                We take exceptional people when they come along - and we really mean
+                                                that!
                                             </p>
 
                                             <p className="text-[15px]">
-                                                Don't see a specific role listed? That doesn't mean we won't have a spot for
-                                                you. Send us a speculative application and let us know how you think you could
-                                                contribute to PostHog.
+                                                Don't see a specific role listed? That doesn't mean we won't have a spot
+                                                for you. Send us a speculative application and let us know how you think
+                                                you could contribute to PostHog.
                                             </p>
                                         </>
                                     )}
