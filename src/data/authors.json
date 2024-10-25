@@ -351,5 +351,11 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/danilo-campos/",
         "profile_id": 31731
+    },
+    {
+        "handle": "paul-dambra",
+        "name": "Paul D'Ambra",
+        "role": "Software Engineer",
+        "profile_id": 30173
     }
 ]
