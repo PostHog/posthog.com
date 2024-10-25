@@ -16,11 +16,9 @@ tags:
 
 ---
 
-After you start capturing events, you can find them in the [data management](https://us.posthog.com/data-management/actions) tab in the left navigation.
+After you've started capturing events, you might decide that the original name you've given the event doesn't quite suit it. For example, you might have an event `register_button_clicked` and you want to rename it to `signup_button_clicked`.
 
-For example, you might have an existing event named `register_button_clicked` and you want to rename it to `signup_button_clicked`.
-
-But once an event is logged, there is no option to rename it!
+However, it's not possible to rename events in PostHog. Instead, you should use [actions](/docs/data/actions) to group the old and new events together. This tutorial shows you how.
 
 ## How to create an action
 
@@ -35,6 +33,10 @@ Start by clicking the **New action** button in the [actions tab](https://us.post
     classes="rounded"
 />
 
+Next, in **Match Group #1**, click **Other events** and select the old event name. Then click **+ Add match group** and add the new event name.
+
+Lastly, give your action a name and press **Save**.
+
 Now you can take the two separate events (`register_button_clicked` and `signup_button_clicked`) and combine them. Match groups allow you to find both of those events and see them as one `Sign Up CTA Clicked` action.
 
 For example, to rename an event `register_button_clicked`, we group it with the new event name `signup_button_clicked` and create an action called `Sign Up CTA Clicked`.
@@ -46,8 +48,6 @@ For example, to rename an event `register_button_clicked`, we group it with the 
     classes="rounded"
 />
 
-## Creating insights with your action
-
 After you click the **Save** button, check the matching events section at the bottom of the page to verify it's matching both events.
 
 <ProductScreenshot
@@ -56,6 +56,8 @@ After you click the **Save** button, check the matching events section at the bo
     alt="View matching events"
     classes="rounded"
 />
+
+## Creating insights with your action
 
 Lastly, you can create an [insight](/docs/product-analytics/insights) with an action just like you normally would. Under event name, select your new action.
 
