@@ -51,7 +51,7 @@ This requires creating and storing a person profile for each user. Usually, we u
 
 ![Processing events for web analytics vs product analytics](https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_2023_07_04_1645_efb32323b9.png)
 
-Incuding PostGres in our data pipeline introduces more overhead. There are also other edge cases to consider. For example, it's possible for a user to have multiple profiles created for them (for example, if they log in on different devices). We then need to merge these duplicate profiles.
+Including PostGres in our data pipeline introduces more overhead. There are also other edge cases to consider. For example, it's possible for a user to have multiple profiles created for them (for example, if they log in on different devices). We then need to merge these duplicate profiles.
 
 All these extra steps in our pipeline mean that processing, storing, and querying data is more expensive for product analytics. Thus if we were to use our existing product analytics architecture for web analytics, the costs of it would be too high.
 

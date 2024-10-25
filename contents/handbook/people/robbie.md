@@ -31,18 +31,18 @@ This introduces complexities for product analytics, such as the order of events 
 
 Diagram?
 What if you wanted to write a query "get all subsequent pageviews where the user's first pageview was a blog post"?
-In web analytics, you cant do this at all. Whereas in product analytics, you can do this by joining on the person ID.
+In web analytics, you can't do this at all. Whereas in product analytics, you can do this by joining on the person ID.
 
 ## What would happen if we just used our product analytics architecture for web analytics?
 
-Because of the additional architecture requred for product analytics, if we ran our web analytics on the same architecture, the performace and price would be worse:
+Because of the additional architecture required for product analytics, if we ran our web analytics on the same architecture, the performance and price would be worse:
 
 ## 1. Why web analytics perforamnce is faster
 
 People have high expectation for web analytics query performance. This is for a few reasons:
 
 1. Google analytics is fast.
-2. The queries you view with web analytics are simpler. And they're the same each time. For exmaple, page views or bounce rate.
+2. The queries you view with web analytics are simpler. And they're the same each time. For example, page views or bounce rate.
 
 On the other hand, users have different expectations for product analytics. They're a bit more generous with their waiting time since queries are custom and complex, e.g. the number of users who have used feature X in the last 30 days.
 
@@ -83,7 +83,7 @@ Sorting across multiple sessions is hard.
 To work around this, we store aggregated user data in Postgres. This way we can change individual rows without impacting performance. For example, we store person properties like the initial URL in Postgres. 
 e.g. you might have this event sets the initial URL, but this later event need to have that person properties 
 
-Postgres increases our processing and length of our pipleine queue, ultimately increasing our costs.
+Postgres increases our processing and length of our pipeline queue, ultimately increasing our costs.
 
 
 Why is it expensive to process profile 
@@ -146,7 +146,7 @@ What exactly each are.
 Why there is a difference between web and product costs (use OLAP database), but expesnive to write. ALso, sorting is hard. with multiple sessions
 
 
-Web analytics is more standardized/opionated. So our user experience wasnt great
+Web analytics is more standardized/opionated. So our user experience wasn't great
 We’re known to be a complicated tool. Having web analytics means people can use posthog in minutes without having everything set up
 
 ## Problem 1 : Pricing
