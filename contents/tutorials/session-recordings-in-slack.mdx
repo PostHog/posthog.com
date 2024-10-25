@@ -9,7 +9,7 @@ tags:
   - session replay
 ---
 
-Sometimes it's important to watch recordings as soon as they are available. You can take advantage of a little custom code and our new Hog powered functions to receive a slack notification every time there's a new recording.
+Sometimes it's important to watch recordings as soon as they are available. You can take advantage of a little custom code and our new [Hog](/docs/hog) powered functions to receive a Slack notification every time there's a new recording.
 
 ## Prerequisites
 
@@ -23,11 +23,11 @@ You'll need:
 
 We'll be using [PostHog's CDP](/docs/cdp) data pipelines add-on. This enables you to react to events in realtime, sending messages to destinations like [Slack](https://us.posthog.com/pipeline/new/destination/hog-template-slack), [Airtable](https://us.posthog.com/pipeline/new/destination/hog-template-airtable), and many more.
 
-This will enables us to send an event to PostHog from a user's browser when we detect a recording that we want to act on and have that converted to a message to a Slack channel.
+This enables us to send an event to PostHog from a user's browser when we detect a recording that we want to act on and have that converted to a message to a Slack channel.
 
 ## A little custom code
 
-When you start `posthog-js`, we can add code once the library is loaded to watch for the condition that for your app means the recording is ready to watch
+When you start `posthog-js`, we can add code once the library is loaded to watch for the condition that for your app means the recording is ready to watch.
 
 Here we'll wait until a recording has been idle for 5 minutes, but you might wait for some time after starting or use the `onCapture` hook to send a Slack message when a user experiences a `$exception` event.
 
@@ -80,7 +80,7 @@ In this case, we want to set the event trigger to the event emitted above:
 * Set the event trigger to the event `session_idle_for_five_minutes`.
 * If you use our replay ingestion controls, not all sessions are recorded. You can add a filter for `session_recording_start_reason is set` to only react to sessions where recording is running.
 
-Finally, you can change the message template. Here we add a button to jump to the person or straight to the recording:
+Finally, you can change the templated message we send to Slack. Here we add a button to jump to the person or straight to the recording:
 
 ```hog
 [
