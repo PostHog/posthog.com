@@ -12,11 +12,11 @@ tags:
  - Guides
 ---
 
-Last month we finally launched [web analytics](/web-analytics), our Google Analytics alternative 🎉 
+Last month we finally launched [web analytics](/web-analytics), our Google Analytics alternative 🎉 You would think for a company that already does [product analytics](/product-analytics), adding web analytics would be easy. 
 
-You would think for a company that already does [product analytics](/product-analytics), adding web analytics would be easy. Alas, this is not the case. It took <TeamMember name="Robbie Coomber" /> a year to do it, and it's not because he's lazy. 
+Alas, this is not the case. It took <TeamMember name="Robbie Coomber" /> a year to do it, and it's not because he's lazy. 
 
-They're fundamentally different products and thus require different architectures. In this post, we dive into the differences between the two, the challenges we faced, and how we solved them.
+Fundametally, they have different use cases and thus require different architectures. In this post, we dive into the differences between the two, the challenges we faced, and how we solved them.
 
 ![Photo of Robbie being lazy](placeholder)
 <Caption>Robbie. He's definitely not lazy.</Caption>
@@ -31,205 +31,93 @@ In practice, this means that for web analytics you care about _what_ people are 
 
 ![Web analytics vs product analytics](https://res.cloudinary.com/dmukukwp6/image/upload/web_vs_prodyuct_21a8b644e9.png)
 
-To understand this more, let's look at things you can and cannot do with web analytics that you can with product analytics.
+Fundamentally, this makes web analytics simpler, and simpler means cheaper and faster. So if we used our existing product analytics architecture for web analytics, users would complain about the performance and costs.
 
-In web analytics, you can:
+To understand the reasons why, let's dive into each one in detail.
+
+### 1. Why web analytics is cheaper
+
+In web analytics, everything is session-based. A session consists of multiple events. Each event has properties set on it, such as the URL, device, and geolocation. When you query data, properties are read from the event. 
+
+This also means that in web analytics, there's no concept of a "person". So you cannot query based on person properties. For example, you cannot filter queries based on the date a user first signed up.
+
+Contrast this to product analytics, where each user has a person profile. This means that not only do events have properties, but so do people. For example, you might want to query based on the date a user first signed up. 
+
+![Web events vs product events](https://res.cloudinary.com/dmukukwp6/image/upload/events_6caabf2705.png)
+
+Person properties change frequently too, since every event may have data that could be relevant to the user. For example, the URL of the last page they visited, or the most recent browser they used are important properties to store.
+
+This requires creating and storing a person profile for each user. Usually, we use [ClickHouse](https://posthog.com/blog/how-we-turned-clickhouse-into-our-eventmansion) for our data storage. However, ClickHouse is optimized for storing larges amounts of data that never changes (like events). But since person properties can change frequently, we store them in Postgres.
+
+![Processing events for web analytics vs product analytics](https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_2023_07_04_1645_efb32323b9.png)
+
+Incuding PostGres in our data pipeline introduces more overhead. There are also other edge cases to consider. For example, it's possible for a user to have multiple profiles created for them (for example, if they log in on different devices). We then need to merge these duplicate profiles.
+
+All these extra steps in our pipeline mean that processing, storing, and querying data is more expensive for product analytics. Thus if we were to use our existing product analytics architecture for web analytics, the costs of it would be too high.
+
+### 2. Why web analytics performance is faster
+
+People have high expectation for web analytics query performance. This is for a few reasons:
+
+1. Google analytics (the benchmark) is fast.
+2. The queries you view for web analytics are mostly the same each time. For example, people always want to know about unique visitors or bounce rate.
+
+On the other hand, product analytics users have slightly lower expectations for performance. They're a bit more generous with their waiting time since queries are usually custom and complex. For example, someone may create a query to see how users interacted with a specific feature in their product.
+
+But why is product analytics slower? Let's have a look:
+
+When you have millions of events, the best way to optimize query performance is do sampling. But this is not possible with productAs mentioned above, we use ClickHouse to store our events. It stores rows in blocks called "granules", and each granule contains about 8,000 rows. When you need to read a single row, you need to load an entire granule.
+
+Now, in web analytics, it's easy to sample events from a single session since all the events are highly likely to be stored together in a single granule.
+
+However, for product analytics, their data is likely to spread across multiple granules. This is because a single user is likely to have multiple IDs over time (for example, if they logged in on different devices). As a result, if you need to sample events from a single user, you still need to load all the granules. So you don't get the performance benefits of sampling.
+
+![image of clickhouse granules](https://res.cloudinary.com/dmukukwp6/image/upload/granules_f969035f22.png)
+
+## Our solution
+
+### 1. How we improved costs
+Robbie came up with [anonymous events](https://posthog.com/blog/anonymous-events). These would be used for web analytics, while our existing product analytics would continue to the regular events (now called **identified events**).
+
+Anonymous events and identified events differ in an important way: For anonymous events, we don't create a person profile. This means we can write our events directly to ClickHouse first, without needing to deal with Postgres at all. This massively reduces our processing costs.]
+
+Anonymous event you can:
 - Set event properties
 - Aggregate and filter events by event properties e.g. URL, geographic location, UTM source.
 - Create insights like trends, funnels, SQL insights and more.
 
-However, you cannot:
+However, their limitations are that you cannot:
 - Set person properties
 - Create cohorts
-- Filter based on person properties
+- Filter on person properties
 - Use person properties for targeting feature flags, A/B tests, or surveys
 - Query the persons table using SQL insights
 - Use group analytics
-- Maybe exmaples of queries you cannot do?
-   - What if you wanted to write a query "get all subsequent pageviews where the user's first pageview was a blog post"?
-   - In web analytics, you cant do this at all. Whereas in product analytics, you can do this by joining on the person ID.
 
-
-Fundamentally, this makes web analytics simpler, and simpler means cheaper and faster. So if we used our existing product analytics architecture for web analytics, users would complain about the performance and costs.
-
-To understand why this is, let's look at how we process events for web analytics vs product analytics.
-
-### 1. Why web analytics is cheaper
-
-In web analytics, everything is session-based. There's no such thing as a person. A session consists of multiple events. Each event has properties set on it, such as the URL, device, and geolocation. When you query data, properties are read from the event.
-
-Contrast this to product analytics, where each user has a person profile. Not only do events have properties, but so do persons. For example, you might want to query based on the date a user first signed up. 
-
-![Web events vs product events](https://res.cloudinary.com/dmukukwp6/image/upload/event_types_mobile_light_491249e368.png)
-
-Person properties can change frequently, since every event may have data that could be relevant to the user. For example, the URL of the last page they visited, or the most recent browser they used.
-
-To do this, this requires the following:
-1. Storing events on a separate profile
-2. Frequently updating the person's properties, based on events and the order they are received
-
-We use [ClickHouse](https://posthog.com/blog/how-we-turned-clickhouse-into-our-eventmansion) to store our events, which is optimized for storing larges amounts of data that never change (like events). But since person properties can change frequently, we store them in Postgres.
-
-![Processing events for web analytics vs product analytics](https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_2023_07_04_1645_efb32323b9.png)
-
-There are also other edge cases to consider. For example, everytime a session is created on PostHog we create a new person profile. But if a user logs in and is "identified", we need to merge the profiles.
-
-All these extra steps in our pipeline mean that processing, storing, and querying data is more expensive for product analytics.
-
-Thus if we were to use our existing product analytics architecture for web analytics, the costs of it would be too high.
-
-
-
-
-
-To understand why web analytics is cheaper than product analytics, first we need to understand how we store our data.
-
-We use [ClickHouse](https://posthog.com/blog/how-we-turned-clickhouse-into-our-eventmansion) to store our events. ClickHouse is an OLAP database. It stores rows in blocks called "granules", and each granule contains about 100k rows. It's optimized for reading data. However, it's writing and editing data is an expensive operation, since you need to load an entire block even if you want to change a single row. This means ideally once a row is inserted, you don't change it, else performance will degrade.
-
-Sorting across multiple sessions is hard. 
-
-
-To work around this, we store aggregated user data in Postgres. This way we can change individual rows without impacting performance. For example, we store person properties like the initial URL in Postgres. 
-e.g. you might have this event sets the initial URL, but this later event need to have that person properties 
-
-Postgres increases our processing and length of our pipleine queue, ultimately increasing our costs.
-
-
-
-## 1. Why web analytics perforamnce is faster
-
-A person can have multiple IDs
-<!-- <todo add diagram of events. For product you have person in the middle and events associated to them. In web analytics, you just have events with no person in the middle. Maybe as a database > -->
-
-
-People have high expectation for web analytics query performance. This is for a few reasons:
-
-1. Google analytics is fast.
-2. The queries you view with web analytics are simpler. And they're the same each time. For exmaple, page views or bounce rate.
-
-On the other hand, users have different expectations for product analytics. They're a bit more generous with their waiting time since queries are custom and complex, e.g. the number of users who have used feature X in the last 30 days.
-
-1. The queries are more complex.
-2. They're not the same each time.
-
-(They still expect some performance though)
-
-When you have millions of events, the best way to optimize query performance is do sampling. Sample relies on sorting (why?. For web-analytics, this is simpler since it's is session based. You only need to sample events from a single session.
-
-However, for product analytics, if you need to sample events from a single user, this is much harder since a user can have multiple IDs over time. For example, if they logged in on different devices, sessions from each device would have different IDs.
-
-This means that their sessions are likely split across multiple granules and not sorted (and you cannot sort since it requires changing row, which is expensive). As opposed to session, which is sorted and in a single granule.
-
-So if you want to sample, say, 10% of data, you still need to load all of granules, instead of a single one.
-
-![image of clickhouse granules](image)
-
-All these contributes to performance delays, meaning that sampling is not a viable solution for product analytics. Ultimately, this affects performance.
-
-## 2. Why web analytics is cheaper than product analytics
-
-
-
-## Our solution
-
-Robbie came up with [anonymous events](https://posthog.com/blog/anonymous-events). These would be used for web analytics, while our existing product analytics would continue to the regular events (now call **"identified events"**).
-
-<!-- ![diagram of anonymous events vs identified events](anonymous events)  -->
-<!-- - use the "events type explained image", with a person in the middle for identified events. Showing that events get their properties from the person  -->
-
-
-Anonymous events and identified events differ in an important way: For anonymous events, we don't create a person profile. This means we can write our events directly to ClickHouse first, without needing to write to Postgres at all. This massively reduces our processing costs.
-
-
-Anonymous event enable us to:
-Set event properties
-Aggregate and filter events by event properties e.g. URL, geographic location, UTM source.
-Create insights like trends, funnels, SQL insights and more.
-
-However, their limitations are that you cannot:
-Set person properties
-Create cohorts
-Filter on person properties
-Use person properties for targeting feature flags, A/B tests, or surveys
-Query the persons table using SQL insights
-Use group analytics
-
+However, an important piece is that ou can still upgrade anonymous events to identified events....
 
 ### 2. How we improved performance
 
-**Since we dont need to set person properties (but we do still have other properties) on events themselves, we dont care about the order. e.g. in product analytics , you can filter events  by initial current url, but not possible in web analytics and you dont need it**
+Using anonymous events improved the processing time of writing events to ClickHouse. However, Robbie still needed to improve query performance.
 
-Order of events doesn’t matter for session properties. We use click house for this. Session properties only change in a specific way. We either care first or last value. e.g. for referring domain, or session ending. Then we only care about first or last value.
+Unfortunately, Robbie was still not able to implement sampling as all events (regardless of whether they are anonymous or identified) are stored in the same ClickHouse granules. Refactoring the database so it can support event sampling is going to be a heavy lift, but in the meantime Robbie came up with some workarounds.
 
-For example, initial url example. (add diagram for this)
+To start, Robbie built an initial version of the web analytics dashboard. It shows important metrics like number of unique visitors, bounce rate, top sources of traffic, visitors by device type, and more. This enabled him to get a feel for the default performance of queries.
 
+Next, Robbie noticed that metrics such as session duration, session bounce rate, and top pages could be precomputed. He created a script that would precompute these metrics for each session that would run in the background once a session had ended. These are then stored in a separate table in ClickHouse.
 
+This meant that when you queried these metrics, you don't need to query every event and calculate them on the spot. Instead, you can just read from the table. This massively sped up query performance and decreased waiting time by about 50%.
 
-## Problem 1 : Pricing
+![How we improve performance](https://res.cloudinary.com/dmukukwp6/image/upload/perf_6cafe5250e.png)
 
-**How much does Postgres contribute to costs? Exactly percentages. Find out**
+Robbie still has plans to improve performance. Besides implementing event sampling, he also wants to improve query performance by loading all the data on the page in a single query, instead of multiple separate queries for each metric (and if this sounds interesting to you, [we're hiring!](/careers/product-engineer)).
 
+## End result
 
-Why is it expensive to process profile 
-- It’s hard to update things in click house and hard to do something that only affects one row (we talked about this earlier). So we store them in Postgres
-    - Remember, reading and writing Is expensive because you need to read the whole block (granule) and then rewrite the whole thing)
-- If you care about person processing, ordering matters e.g. you might have this event sets the initial URL, but this later event need to have that person properties 
-- There’s also ways to merge users which can be difficult 
-- Pipeline team can tell you. Basically it increases length of the cue
-- Person properties can change a lot. It could be every event causes an update.
-- They change every session. e.g. the most recent refferer changes. We store this in Postgres in and not in clikchouse
-- TLDR: Postgres is extra work. A lot of the costs of the events come here. Why though? (Ask pipeline though)
+Ultimately, all of Robbie's efforts means that we've been able to save a huge amount of costs on anonymous events – a saving which we're passing onto our customers. Anonymous events are currently 4x cheaper than identified events!
 
-our solution:
-What breaks 
-- So introduced anonymous events. Which doesn’t do person processing, so no Postgres. Which means it’s cheaper for us. 
+The performance improvements have also increased the initial dashboard load time by more than 50%, meaning that our users can get insights their faster.
 
-**Since we dont need to set person properties (but we do still have other properties) on events themselves, we dont care about the order. e.g. in product analytics , you can filter events  by initial current url, but not possible in web analytics and you dont need it**
+See, we told you Robbie wasn't lazy!
 
-Plausible has session properties. They do it at session-level not person level.
-
-Order of events doesn’t matter for session properties. We use click house for this. Session properties only change in a specific way. We either care first or last value. e.g. for referring domain, or session ending. Then we only care about first or last value.
-
-For example, initial url example. (add diagram for this)
-
-
-So introduced anonymous events. Which doesn’t do person processing, so no Postgres. Which means it’s cheaper for us. Up to 4x cheaper.
-
-
-## Problem 2: Performance
-Robbie built initalial dashboard to get a feel for it:
-- Our starting point was bad. We just used 10 queries  with product analytics 
-
-Build a dashboard.
-e.g. make a graph of unique users. We can put topline stats, like (visitors, pageviews etc.). you write them using HogQL.
-The first version was just a dashboard, which contained the same stuff. It was to get a sense internally if it was useful, the right direction 
-
-### WHy we can't do sampling
-- Sampling is the easiest way. That’s what plausible and vercel scale about 20 million page views.
-    - This is next step. We need to figure out how to use sampling on an identity that can change. I think we can just store all the older data with person-ids . So we only sample older data but not newer one (so you can’t)
-
-### What we did instead
-How did you fix query performance
-- Our starting point was bad. We just used 10 queries  with product analytics 
-    - 
-- Starting point was to play around with sampling, but we couldn’t use it for the reasons we discussed above. Session duration would be wrong.
-- So I threw it out for now (and we don’t do it).. We still have to think about it for upgrade works for
-
-- Then I created sessions table in clickhouse. Aggregate information for a single session - precompute it ahead of time. It’s faster to query since you dont need to query every event, you just look at the session. So you dont need to do this at query time
-- This sped up some queries
-
-- Next steps
-    - Loading all the data on the page is one pass, instead of 10 separate queries
-    - Combininng should take a bit longer (getting first data on the page), but massively speed up getting all data on the page
-
-- Its twice as fast as it used to be
-
-# End result
-
-We should show pricing comparison on other websites
-
-
----
-notes
-
-Web analytics is a fundamentally different problem to product analytics. t's more expensive (4x more times expesnsive) and slower, which means we're less performance and more expensive than products that focus solely on web analytics (e.g. Plausible, Fathom. Add link to comparison)
+![Great job, Robbie!](https://res.cloudinary.com/dmukukwp6/image/upload/Group_10118_c7ca47feb9.png)
