@@ -136,6 +136,7 @@
         "react-textarea-autosize": "^8.4.0",
         "react-transition-group": "^4.4.5",
         "react-tsparticles": "^2.11.0",
+        "reactflow": "^11.11.4",
         "redoc": "^2.0.0-rc.62",
         "redux": "^4.0.5",
         "rehype-raw": "^7.0.0",
