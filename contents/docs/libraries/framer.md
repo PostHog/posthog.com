@@ -14,7 +14,7 @@ Go to your [project settings](https://us.posthog.com/settings/project#snippet) a
 
 ```js
 <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('<ph_api_key>',{api_host:'<ph_client_api_host>', person_profiles: 'identified_only'})
 </script>
 ```
@@ -25,7 +25,7 @@ Go to the **General** tab in site settings and scroll down to the **Custom Code*
 
 Finally, **publish** your site.
 
-![How to add PostHog to Framer](./images/add-posthog-to-framer.mp4)
+![How to add PostHog to Framer](https://res.cloudinary.com/dmukukwp6/video/upload/add_posthog_to_framer_e3ac0fe6a9.mp4)
 
 ## Capture custom events
 
@@ -53,7 +53,7 @@ export default function CaptureButton() {
 
 Press `Cmd/Ctrl + s` to save your changes. Then press the **Home** button to go back to the home page. Add your new `CaptureButton` to your page by dragging it from the Code tab.
 
-![Create a code snippet in Framer](./images/framer-create-code-component.mp4)
+![Create a code snippet in Framer](https://res.cloudinary.com/dmukukwp6/video/upload/framer_create_code_component_85251f4561.mp4)
 
 Publish your site and then click your new button to [see the event in PostHog](https://app.posthog.com/events).
 

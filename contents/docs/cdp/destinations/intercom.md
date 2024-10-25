@@ -1,5 +1,5 @@
 ---
-title: Intercom
+title: Send data to Intercom
 templateId: template-intercom
 ---
 
@@ -21,6 +21,8 @@ You'll also need access to the relevant Intercom account.
 4. Add your Intercom access token at the configuration step.
 5. Press 'Create & Enable' and watch your 'Contacts' list get populated in Intercom!
 
+<HideOnCDPIndex>
+
 ## Configuration
 
 <TemplateParameters />
@@ -34,3 +36,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

@@ -96,11 +96,7 @@ const linklist: IProps[] = [
             {
                 title: 'API',
                 url: '/docs/api',
-            },
-            {
-                title: 'Webhooks',
-                url: '/docs/webhooks',
-            },
+            }
         ],
     },
     {
@@ -112,7 +108,7 @@ const linklist: IProps[] = [
                 url: '/docs/product-analytics/',
             },
             {
-                title: 'Session recording',
+                title: 'Session replay',
                 url: '/docs/session-replay',
             },
             {

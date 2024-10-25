@@ -158,7 +158,7 @@ posthog.capture('some_event', { $set_once: { userProperty: 'value' } })
 
 ## Super properties
 
-Super properties are properties associated with events that are set once and then sent with every `capture` call, be it a $screen, an autocaptured touch, or anything else.
+Super properties are properties associated with events that are set once and then sent with every `capture` call, be it a `$screen`, an autocaptured touch, or anything else.
 
 They are set using `posthog.register`, which takes a properties object as a parameter, and they persist across sessions.
 

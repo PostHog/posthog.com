@@ -1,5 +1,5 @@
 ---
-title: Google Pub/Sub
+title: Send data to Google Pub/Sub
 templateId: template-google-pubsub
 ---
 
@@ -21,6 +21,8 @@ You'll also need access to the relevant Google Cloud account.
 4. Connect your Google Cloud account at the configuration step.
 5. Press 'Create & Enable' and watch your 'topic' list get populated in Google Pub/Sub!
 
+<HideOnCDPIndex>
+
 ## Configuration
 
 <TemplateParameters />
@@ -34,3 +36,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

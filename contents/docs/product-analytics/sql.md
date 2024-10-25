@@ -452,6 +452,25 @@ select
 from events
 ```
 
+#### Session replays
+
+You can create a button to view the replay for a session by using the `recording_button()` function with the `session_id`. For example, to get a list of recent replays, you can use:
+
+```sql
+SELECT
+    person.properties.email,
+    min_first_timestamp AS start,
+    recording_button(session_id)
+FROM
+    raw_session_replay_events
+WHERE
+    min_first_timestamp >= now() - INTERVAL 1 DAY
+    AND min_first_timestamp <= now()
+ORDER BY
+    min_first_timestamp DESC
+LIMIT 10
+```
+
 ## Accessing data
 
 ### Strings and quotes
@@ -502,7 +521,7 @@ Some queries can error when accessing null values. To avoid this, use the `COALE
 
 ### Actions
 
-To use [actions](/docs/actions) in SQL insights, use the `matchesAction()` function. For example, to get a count of the action `clicked homepage button`, you can do:
+To use [actions](/docs/data/actions) in SQL insights, use the `matchesAction()` function. For example, to get a count of the action `clicked homepage button`, you can do:
 
 ```sql
 SELECT count() 

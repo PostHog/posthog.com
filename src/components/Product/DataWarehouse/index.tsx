@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -41,22 +42,22 @@ const features = [
     {
         title: 'Sync from Stripe',
         description: 'Combine financial and product data to see how usage turns into growth.',
-        image: <StaticImage src="./images/stripe.png" width={428} placeholder="none" />,
+        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png" width={428} placeholder="none" />,
     },
     {
         title: 'Sync from Hubspot',
         description: 'Bring your CRM into the mix and track your sales funnel directly in PostHog.',
-        image: <StaticImage src="./images/hubspot.png" width={428} height={312} placeholder="none" />,
+        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/hubspot.png" width={428} height={312} placeholder="none" />,
     },
     {
         title: 'Sync from Zendesk',
         description: 'See how ticket volumes and SLA breaches impact sign-ups and churn.',
-        image: <StaticImage src="./images/zendesk.png" width={428} placeholder="none" />,
+        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/zendesk.png" width={428} placeholder="none" />,
     },
     {
         title: 'Sync from anywhere',
         description: 'Adwords? Salesforce? Grab anything you want using custom sources.',
-        image: <StaticImage src="./images/custom.png" width={428} height={312} placeholder="none" />,
+        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png" width={428} height={312} placeholder="none" />,
     },
 ]
 
@@ -133,18 +134,21 @@ const PairsWithArray = [
     {
         icon: <IconGraph />,
         product: 'Product analytics',
+        color: 'blue',
         description: 'Analyze data from any source independently, or alongside product data.',
         url: '/product-analytics',
     },
     {
         icon: <IconToggle />,
         product: 'Feature flags',
+        color: 'seagreen',
         description: 'Use synced data to toggle feature flags, trigger A/B experiments, and more.',
         url: '/feature-flags',
     },
     {
         icon: <IconHogQL />,
         product: 'HogQL',
+        color: 'black dark:text-white',
         description: 'Use our take on SQL to create entirely custom queries and get the answers you need.',
         url: '/docs/hogql',
     },
@@ -192,14 +196,14 @@ export const ProductDataWarehouse = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
-                        src="../../../images/products/screenshot-data-warehouse.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-data-warehouse.png"
                         alt="Screenshot of the PostHog data warehouse"
                         className="w-full max-w-[1440px]"
                         placeholder="none"
                     />
                 </div>
-                <section id="customers" className="-mt-36 pt-36">
+                <section id="customers" className="-mt-48 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="analyzes Google Adwords data in PostHog"
@@ -251,7 +255,7 @@ export const ProductDataWarehouse = () => {
                         <p className="">Use the {product.lowercase} for free up to 1 million rows/mo.</p>
                     </div>
                     <div className="md:w-96 md:text-right mb-8 md:mb-0 -mt-8">
-                        <StaticImage
+                        <CloudinaryImage
                             alt="Just another hedgehog"
                             placeholder="blurred"
                             quality={100}
@@ -275,7 +279,7 @@ export const ProductDataWarehouse = () => {
                 </div>
             </section>
 
-            <section id="tutorials">
+            <section id="tutorials" className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-0 md:-mt-12 pb-0`}>
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
                     <p className="mt-0 text-opacity-75 text-center mb-6">
@@ -313,7 +317,7 @@ export const ProductDataWarehouse = () => {
         </section>
         */}
 
-            <section id="docs" className="mb-20 px-5 md:px-0">
+            <section id="docs" className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
                 <p className="mt-0 text-opacity-70 text-center">
                     Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
@@ -323,7 +327,7 @@ export const ProductDataWarehouse = () => {
                 />
             </section>
 
-            <section id="team" className="mb-20 px-5">
+            <section id="team" className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
@@ -335,7 +339,7 @@ export const ProductDataWarehouse = () => {
                 </div>
             </section>
 
-            <section id="roadmap" className="mb-20 px-5">
+            <section id="roadmap" className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
 
@@ -354,7 +358,7 @@ export const ProductDataWarehouse = () => {
                 </div>
             </section>
 
-            <section id="questions" className="mb-20 px-5">
+            <section id="questions" className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
 
@@ -370,13 +374,15 @@ export const ProductDataWarehouse = () => {
                 <Questions topicIds={[382]} />
             </section>
 
-            <PairsWith items={pairsWithItemCount}>
-                {PairsWithArray.map((card, index) => {
-                    return <PairsWithItem {...card} key={index} />
-                })}
-            </PairsWith>
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+                <PairsWith items={pairsWithItemCount}>
+                    {PairsWithArray.map((card, index) => {
+                        return <PairsWithItem {...card} key={index} />
+                    })}
+                </PairsWith>
+            </div>
 
-            <div className="max-w-7xl mx-auto relative">
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} relative px-5 py-10 pb-0`}>
                 <section className="mb-20">
                     <CTA />
                 </section>

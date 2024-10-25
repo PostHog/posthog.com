@@ -194,6 +194,14 @@ h4 {
 
     li {
         @apply mb-0.5;
+
+        p {
+            @apply mb-0;
+
+            & + p {
+                @apply mt-2;
+            }
+        }
     }
 
     .caption + * {
@@ -317,7 +325,7 @@ h4 {
 
     /* expandable/collapsible sections */
     details {
-        @apply rounded bg-accent dark:bg-accent-dark;
+        @apply rounded bg-accent dark:bg-accent-dark mb-px;
 
         > summary {
             @apply cursor-pointer text-red dark:text-yellow rounded border border-transparent hover:border-light hover:dark:border-dark font-semibold list-none p-4 pl-8 relative before:absolute before:left-3 before:top-6 before:w-[10px] before:h-[7px];
@@ -367,6 +375,10 @@ h4 {
 
     details + details {
         @apply border-t-0;
+    }
+
+    del {
+        @apply text-primary/50 dark:text-primary-dark/50;
     }
 }
 
@@ -1469,7 +1481,7 @@ iframe[src*='youtube-nocookie.com'] {
 }
 
 .squeak-left-border {
-    @apply before:border-l before:border-b before:border-solid before:border-light dark:before:border-dark before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:left-0;
+    @apply before:border-l before:border-b before:border-solid before:border-light dark:before:border-dark before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:-left-px;
 }
 
 li.squeak-left-border {
@@ -1478,6 +1490,10 @@ li.squeak-left-border {
 
 .community-post-markdown {
     @apply text-[15px] leading-normal break-words pb-3;
+
+    > div > *:last-child {
+        @apply mb-0;
+    }
 
     a {
         @apply font-semibold;
@@ -1670,4 +1686,18 @@ li.squeak-left-border {
 }
 .animate-fade-in {
     animation: fadeIn 0.3s ease-out;
+}
+
+.side-modal {
+    h2 {
+        @apply text-xl;
+    }
+    h3 {
+        @apply text-lg mb-1;
+    }
+    td {
+        code {
+            @apply whitespace-nowrap text-sm;
+        }
+    }
 }

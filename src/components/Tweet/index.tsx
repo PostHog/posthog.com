@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
@@ -26,7 +27,7 @@ export const Tweet = ({ children, className = '', alertMessage }) => {
                         externalNoIcon
                         className="bg-accent rounded-full overflow-hidden block aspect-square m-px"
                     >
-                        <StaticImage
+                        <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/v1683655764/james_b841adce96.png"
                             alt='James ("Veg"/"JC") Hawkins'
                             className="size-12"

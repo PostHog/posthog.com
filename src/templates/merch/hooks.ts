@@ -36,16 +36,31 @@ export function useProduct(id: string): {
 
     const [selectedOptions, setSelectedOptions] = useState<SelectedOptions | null>()
 
+    const [options, setOptions] = useState<StorefrontProductOption[]>([])
+
     useEffect(() => {
         if (!product) return
         const initialVariant = product.variants.find((v) => v.availableForSale) || product.variants[0]
+        const options: StorefrontProductOption[] = []
+        product.variants.forEach((variant) => {
+            variant.selectedOptions.forEach((option) => {
+                if (!options.find((o) => o.name === option.name)) {
+                    options.push({ id: '', name: option.name, values: [] })
+                }
+                const optionIndex = options.findIndex((o) => o.name === option.name)
+                if (!options[optionIndex].values.includes(option.value)) {
+                    options[optionIndex].values.push(option.value)
+                }
+            })
+        })
+        setOptions(options)
         setSelectedVariant(initialVariant)
         setSelectedOptions(
-            product.options.map((_, index) =>
+            options.map((_, index) =>
                 getVariantOption({
-                    name: product.options[index].name,
+                    name: options[index].name,
                     value: initialVariant.selectedOptions[index].value,
-                    options: product.options,
+                    options,
                 })
             )
         )
@@ -73,7 +88,7 @@ export function useProduct(id: string): {
                     ? getVariantOption({
                           name: option.name,
                           value,
-                          options: product?.options,
+                          options: options,
                       })
                     : opt
             })

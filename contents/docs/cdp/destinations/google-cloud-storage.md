@@ -1,5 +1,5 @@
 ---
-title: Google Cloud Storage
+title: Send data to Google Cloud Storage
 templateId: template-google-cloud-storage
 ---
 
@@ -21,6 +21,8 @@ You'll also need access to the relevant Google Cloud account.
 4. Connect your Google Cloud account at the configuration step.
 5. Press 'Create & Enable' and watch your 'events' get populated in Google Cloud Storage!
 
+<HideOnCDPIndex>
+
 ## Configuration
 
 <TemplateParameters />
@@ -34,3 +36,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

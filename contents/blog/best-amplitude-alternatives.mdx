@@ -44,16 +44,15 @@ Typical PostHog users are engineers, founders, and product managers at startups 
 
 ### How does PostHog compare to Amplitude?
 
-Although PostHog is a younger company, it includes all the key features of Amplitude and more. Most importantly, it includes autocapture, session replay, and surveys which help you better understand the usage of your app and website.
-
 <ComparisonTable column1="PostHog" column2="Amplitude">
   <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={true} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
   <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at the account or company level" />
   <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
   <ComparisonRow column1={true} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and instant rollbacks" />
-  <ComparisonRow column1={true} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
   <ComparisonRow column1={true} column2={true} feature="Integrations" description="Import from and export to external services" />
   <ComparisonRow column1={true} column2={true} feature="EU Cloud" description="Store your data in the EU to comply with privacy regulations" />
   <ComparisonRow column1={true} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
@@ -110,11 +109,12 @@ Mixpanel and Amplitude are the original product analytics platforms and have bat
 <ComparisonTable column1="Mixpanel" column2="Amplitude">
   <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
-  <ComparisonRow column1={false} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
+  <ComparisonRow column1={false} column2={true} feature="Autocapture" description="Capture events without manual instrumentation" />
   <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at the account or company level" />
   <ComparisonRow column1={"Manual"} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
   <ComparisonRow column1={false} column2={true} feature="Feature flags" description="Deploy features safely with targeting, percentage rollouts, and instant rollbacks" />
-  <ComparisonRow column1={false} column2={false} feature="Session replay" description="Watch real users on your site; discover friction points" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users on your site; discover friction points" />
   <ComparisonRow column1={true} column2={true} feature="Integrations" description="Import from and export to external services" />
   <ComparisonRow column1={true} column2={true} feature="EU Cloud" description="Store your data in the EU to comply with privacy regulations" />
   <ComparisonRow column1={false} column2={false} feature="Open source" description="Audit code, contribute to roadmap, and build integrations" />
@@ -169,6 +169,7 @@ Pendo doesn't have as deep of product analytics functionality and doesn't includ
 <ComparisonTable column1="Pendo" column2="Amplitude">
   <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={false} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
   <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Track metrics at the account or company level" />
   <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
@@ -232,6 +233,7 @@ Heap's big advantage over Amplitude is autocapture and session replay. If you're
 <ComparisonTable column1="Heap" column2="Amplitude">
   <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
   <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at the account or company level" />
   <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
@@ -295,6 +297,7 @@ A big downside of Glassbox is a lack of self-serve. Other than that, it is simil
 <ComparisonTable column1="Glassbox" column2="Amplitude">
   <ComparisonRow column1={false} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={false} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
   <ComparisonRow column1={true} column2={true} feature="Group analytics" description="Track metrics at the account or company level" />
   <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
@@ -360,6 +363,7 @@ Like many of the other alternatives, LogRocket lacks group analytics, A/B testin
 <ComparisonTable column1="LogRocket" column2="Amplitude">
   <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={false} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
   <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Track metrics at the account or company level" />
   <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
@@ -421,6 +425,7 @@ Smartlook swaps Amplitude's A/B testing and feature flags for autocapture and se
 <ComparisonTable column1="Smartlook" column2="Amplitude">
   <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
   <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={false} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
   <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Track metrics at the account or company level" />
   <ComparisonRow column1={false} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />
@@ -478,7 +483,8 @@ Opposite to many of the alternatives on this list, Statsig focuses on A/B testin
 
 <ComparisonTable column1="Statsig" column2="Amplitude">
   <ComparisonRow column1={true} column2={true} feature="Self-serve" description="Free to try, no mandatory sales calls" />
-  <ComparisonRow column1={"Missing path"} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Filter and visualize data with trends, funnels, paths, and retention analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregated traffic, sources, campaigns, and session metrics" />
   <ComparisonRow column1={false} column2={false} feature="Autocapture" description="Capture events without manual instrumentation" />
   <ComparisonRow column1={false} column2={true} feature="Group analytics" description="Track metrics at the account or company level" />
   <ComparisonRow column1={true} column2={true} feature="A/B testing" description="Run multivariate tests and see the impact of changes with custom goals and reports" />

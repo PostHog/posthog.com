@@ -1,5 +1,5 @@
-import { StaticImage } from 'gatsby-plugin-image'
-import React, { useState, useEffect, useRef } from 'react'
+import CloudinaryImage from 'components/CloudinaryImage'
+import React, { useState, useEffect } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
 import 'components/Pricing/styles/index.scss'
@@ -7,22 +7,14 @@ import { SEO } from '../seo'
 import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
-import tractorHog from '../../../static/lotties/tractor-hog.json'
-import Lottie from 'react-lottie'
-import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
+import { CTA as PlanCTA } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
-import { IconCheck, IconHandMoney, IconInfo, IconRocket, IconStarFilled, IconStar } from '@posthog/icons'
+import { IconHandMoney, IconRocket } from '@posthog/icons'
 import * as Icons from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
-import useProducts from './Products'
 import { graphql, useStaticQuery } from 'gatsby'
-import { BillingProductV2Type, BillingV2FeatureType, BillingV2PlanType } from 'types'
-import Tabs from 'components/Tabs'
-import { CallToAction } from 'components/CallToAction'
 import Tabbed from './PricingCalculator/Tabbed'
-import { usePlatform } from './Platform/usePlatform'
-import { motion } from 'framer-motion'
 import { PlanColumns } from './Test/PlanColumns'
 import PlanContent from './Test/PlanContent'
 import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, SectionSidebar } from './Test/Sections'
@@ -527,11 +519,11 @@ const PricingExperiment = (): JSX.Element => {
                     name={<span className="text-white">Cat Li</span>}
                     title={<span className="text-white">Product & Engineering Lead, Y Combinator</span>}
                     image={
-                        <StaticImage
+                        <CloudinaryImage
                             width={100}
                             height={100}
                             alt="Cat Li, Y Combinator"
-                            src="../../images/cat.jpeg"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/cat.jpeg"
                             placeholder="none"
                             className="rounded-full"
                         />
@@ -550,7 +542,12 @@ const PricingExperiment = (): JSX.Element => {
             </section>
             <section className={`${section} mb-12 mt-16`}>
                 <div className="sm:flex-row flex-col-reverse flex items-center sm:items-start justify-center">
-                    <StaticImage src="./images/vacation-hog.png" alt="Vacation Hog" width={252} placeholder="none" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/images/vacation-hog.png"
+                        alt="Vacation Hog"
+                        width={252}
+                        placeholder="none"
+                    />
                     <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0">
                         <p className="text-white m-0 text-[18px] font-bold font-comic">
                             Looking for the signup button?

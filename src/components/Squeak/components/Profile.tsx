@@ -15,12 +15,11 @@ export const Profile = ({ className, profile }: ProfileProps) => {
             className={`flex items-center !text-black dark:!text-white relative ${className}`}
             to={`/community/profiles/${profile.id}`}
         >
-            <div className="w-[40px] h-[40px] rounded-full mr-[10px] overflow-hidden">
+            <div className="w-[44px] h-[44px] ml-[-2px] rounded-full mr-[10px] overflow-hidden">
                 <Avatar
-                    className={`w-[40px] object-fill ${
-                        profile.attributes.color ? `bg-${profile.attributes.color}` : ''
-                    }`}
+                    className={`w-[40px]`}
                     image={getAvatarURL(profile?.attributes)}
+                    color={profile.attributes.color}
                 />
             </div>
             <strong>{profile.attributes.firstName || 'Anonymous'}</strong>

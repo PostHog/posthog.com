@@ -61,9 +61,9 @@ export const tutorialsFragment = graphql`
             Category: tags
             Contributor: authorData {
                 id
-                image {
-                    childImageSharp {
-                        gatsbyImageData(width: 36, height: 36)
+                profile {
+                    avatar {
+                        url
                     }
                 }
                 name

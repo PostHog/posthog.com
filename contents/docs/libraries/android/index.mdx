@@ -50,13 +50,24 @@ PostHog.alias("distinct_id")
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-## Person Profiles ("anonymous" vs "identified" persons)
+## Anonymous and identified events
 
-The default behavior for this SDK is to use the `IDENTIFIED_ONLY` mode of person processing, but this can be changed in the config. The options are:
-- `IDENTIFIED_ONLY`
-- `NEVER`
-- `ALWAYS`
-See [Person Profiles](/data/persons) for more info.
+import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
+
+<IdentifiedVsAnonymousIntro />
+
+### How to capture anonymous events
+
+import HowToCaptureAnonymousEventsAndroid from '../../product-analytics/_snippets/how-to-capture-anonymous-events-android.mdx'
+
+<HowToCaptureAnonymousEventsAndroid />
+
+### How to capture identified events
+
+import HowToCaptureIdentifiedEvents from '../../product-analytics/_snippets/how-to-capture-identified-events-frontend.mdx'
+
+<HowToCaptureIdentifiedEvents />
+
 
 ## Setting person properties
 
@@ -94,7 +105,7 @@ PostHog.capture(
 
 ## Super Properties
 
-Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a $screen, or anything else.
+Super Properties are properties associated with events that are set once and then sent with every `capture` call, be it a `$screen`, or anything else.
 
 They are set using `PostHog.register`, which takes a key and value, and they persist across sessions.
 

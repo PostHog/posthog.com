@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -57,19 +58,34 @@ const features = [
     {
         title: 'Event timeline',
         description: "History of everything that happened in a user's session",
-        image: <StaticImage src="./images/timeline.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/timeline.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Console logs',
         description: "Debug issues faster by browsing the user's console",
-        image: <StaticImage src="./images/console.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/console.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Network monitor',
         description: 'Analyze performance and network calls',
-        image: <StaticImage src="./images/network.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png"
+                width={420}
+            />
+        ),
         border: true,
     },
 ]
@@ -301,18 +317,21 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description: 'Jump into a playlist of session recordings directly from any time series in a graph',
         url: '/product-analytics',
     },
     {
         icon: <IconToggle />,
+        color: 'seagreen',
         product: 'Feature flags',
         description: "See which feature flags are enabled for a user's session",
         url: '/feature-flags',
     },
     {
         icon: <IconFlask />,
+        color: 'purple',
         product: 'Experiments',
         description:
             'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
@@ -369,8 +388,8 @@ export const ProductSessionReplay = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
-                        src="../../../images/products/screenshot-session-replay.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-session-replay.png"
                         alt="Screenshot of Session Replay in PostHog"
                         className="w-full max-w-[1360.5px]"
                         placeholder="none"
@@ -442,7 +461,7 @@ export const ProductSessionReplay = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/session-replay-hog.png" alt="" />
+                        <CloudinaryImage placeholder="none" quality={100} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/session-replay-hog.png" alt="" />
                     </div>
                 </div>
 
@@ -472,8 +491,8 @@ export const ProductSessionReplay = () => {
                             <VsCompetitor
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-sr.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-sr.png"
                                         className="max-w-[167px]"
                                     />
                                 }

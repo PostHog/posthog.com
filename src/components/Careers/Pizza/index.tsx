@@ -365,7 +365,7 @@ export const Pizza = () => {
                       <div className="flex gap-2 items-center -mt-1">
                         <div className="flex-1 relative h-2 w-full bg-accent dark:bg-white/10 rounded-full">
                           <div
-                            className="absolute left-0 top-0 h-full bg-green rounded-full"
+                            className="absolute left-0 top-0 h-full bg-red rounded-full"
                             style={{ width: `${team.pineapplePercentage}%` }}
                           ></div>
                         </div>

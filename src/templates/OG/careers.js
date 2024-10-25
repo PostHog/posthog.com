@@ -3,7 +3,7 @@ const path = require('path')
 const fs = require('fs')
 
 module.exports = careers = ({ jobs, font }) => {
-    const workHogs = fs.readFileSync(path.resolve(__dirname, './images/work-hogs.png'), {
+    const notWorkingHere = fs.readFileSync(path.resolve(__dirname, './images/not-working-here.png'), {
         encoding: 'base64',
     })
     return `
@@ -26,37 +26,72 @@ module.exports = careers = ({ jobs, font }) => {
             overflow: hidden;
             color: black;
             background-color: #eeefe9;
+            height: 630px;
+            width: 1200px;
+          }
+          header {
+            position: relative;
+            text-align: center;
+          }
+
+          header:before,
+          header:after {
+            background: #E5E7E0;
+            border-bottom: solid 1px #D0D1C9;
+            content: '';
+            height: 66px;
+            position: absolute;
+          }
+
+          header:before {
+            border-right: solid 1px #D0D1C9;
+            border-bottom-right-radius: 1em;
+            left: 0;
+            right: 60%;
+          }
+
+          header:after {
+            border-left: solid 1px #D0D1C9;
+            border-bottom-left-radius: 1em;
+            right: 0;
+            left: 60%;
+          }
+          .columns {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            column-gap: 100px;
+            padding: 1rem 0 0 1rem;
           }
           .careers {
+            display: flex;
+            flex-direction: column;
             list-style: none;
-            margin: 42px 0 0 0;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            column-gap: 54px;
+            margin: 0;
+            padding: 0 0 0 20px;
+            position: relative;
+            text-align: left;
           }
           .careers li {
-            font-size: 36px;
-            padding-bottom: 18px;
-            margin-bottom: 23px;
-            border-bottom: 2px dashed #d4d4d4;
+            border-bottom: 2px solid #d4d4d4;
+            font-size: 32px;
+            font-weight: 600;
             font-weight: 400;
+            overflow: hidden;
+            padding: 1rem 0;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
         </style>
       </head>
     
-      <body>
-        <section style="padding: 41px 45px 0px 45px">
-          <img
-            style="width: 762px; position: absolute; right: 0; top: 0"
-            src="data:image/jpeg;charset=utf-8;base64,${workHogs}"
-          />
+      <body style="margin: 0; padding: 0;">
+        <header>
           <svg
-            width="251"
-            height="48"
+            height="36"
             viewBox="0 0 251 48"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+               style="margin-top: 14px;"
           >
             <g clip-path="url(#clip0_3154_131496)">
               <path
@@ -134,23 +169,35 @@ module.exports = careers = ({ jobs, font }) => {
               </clipPath>
             </defs>
           </svg>
-          <h1 style="font-size: 96px; margin: 51px 0 21px 0; line-height: 0.8">
-            Careers
+        </header>
+        <section style="padding: 40px 10px 10px; text-align: center;">
+          <h1 style="font-size: 48px; margin: 10px 0 20px; line-height: 0.8; text-align: center; font-weight: 800;">
+            Work at PostHog. We’re hiring for <strong style="color: #F54E00";>${jobs.length} open role${
+        jobs.length === 1 ? '' : 's'
+    }</strong>.
           </h1>
-          <h2 style="margin: 0; font-size: 36px; line-height: 64px; opacity: 50%">
-            ${jobs.length} role${jobs.length === 1 ? '' : 's'} available
-          </h2>
-          ${
-              jobs.length > 0
-                  ? `<ul class="careers">
+          
+          <div class="columns">
+            <aside style="grid-column: span 2; position: relative; z-index: 1;">
+              <img
+            style="width: 501px;"
+            src="data:image/jpeg;charset=utf-8;base64,${notWorkingHere}"
+               width="501"
+               height="398"
+          />
+            </aside>
+            <div style="position: relative; grid-column: span 3;">
+              ${
+                  jobs.length > 0
+                      ? `<ul class="careers">
             ${jobs.map(({ title }) => `<li>${title}</li>`).join('')}
           </ul>`
-                  : ''
-          }
-        </section>
-        ${
-            jobs.length > 6
-                ? `<div
+                      : ''
+              }
+              
+              ${
+                  jobs.length > 4
+                      ? `<div
         style="
             position: fixed;
             left: 0;
@@ -160,8 +207,12 @@ module.exports = careers = ({ jobs, font }) => {
             background: linear-gradient(180deg, #eeefe900 0%, #eeefe9 130%);
         "
         ></div>`
-                : ''
-        }
+                      : ''
+              }
+              
+            </div>
+          </div>
+        </section>
       </body>
     </html>
     `
