@@ -108,7 +108,7 @@ const linklist: IProps[] = [
                 url: '/docs/product-analytics/',
             },
             {
-                title: 'Session recording',
+                title: 'Session replay',
                 url: '/docs/session-replay',
             },
             {
