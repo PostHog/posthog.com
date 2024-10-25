@@ -146,28 +146,14 @@ module.exports = {
                       path
                     }
                   }
-                  questions: allSqueakQuestion {
-                    nodes {
-                       permalink
-                    }
-                  }
                 }`,
                 resolveSiteUrl: ({ site }) => {
                     return site.siteMetadata.siteUrl
                 },
-                resolvePages: async ({
-                    allSitePage: { nodes: allPages },
-                    site,
-                    questions: { nodes: allQuestions },
-                }) => {
+                resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
                     const transformedPages = allPages.map(({ path }) => {
                         return {
                             path: `${site.siteMetadata.siteUrl}${path}`,
-                        }
-                    })
-                    const transformedQuestionPages = allQuestions.map(({ permalink }) => {
-                        return {
-                            path: `${site.siteMetadata.siteUrl}/questions/${permalink}`,
                         }
                     })
 
@@ -185,7 +171,7 @@ module.exports = {
                         path: `${site.siteMetadata.siteUrl}/plugins/` + plugin.name.toLowerCase().replace(/ /g, '-'),
                     }))
 
-                    return [...transformedPages, ...transformedQuestionPages, ...plugins]
+                    return [...transformedPages, ...plugins]
                 },
                 serialize: async ({ path }) => {
                     let changefreq = 'monthly'
