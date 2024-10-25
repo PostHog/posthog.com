@@ -38,3 +38,7 @@ Once done, you can now [query](/docs/data-warehouse/query) your new table using 
   alt="Snowflake details" 
   classes="rounded"
 />
+
+import InboundIpAddresses from './snippets/inbound-ip-addresses.mdx'
+
+<InboundIpAddresses />
