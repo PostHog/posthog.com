@@ -58,6 +58,7 @@ module.exports = {
             options: {
                 name: `contents`,
                 path: `${__dirname}/contents`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
         {
@@ -85,6 +86,7 @@ module.exports = {
             options: {
                 name: `menuItems`,
                 path: `${__dirname}/src/menuItems`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
         {
@@ -92,6 +94,7 @@ module.exports = {
             options: {
                 name: `navs`,
                 path: `${__dirname}/src/navs`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
         {
@@ -99,6 +102,7 @@ module.exports = {
             options: {
                 name: `authors`,
                 path: `${__dirname}/src/data/authors.json`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
         {
@@ -106,6 +110,7 @@ module.exports = {
             options: {
                 name: `testimonials`,
                 path: `${__dirname}/src/data/testimonials.json`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },
         {
