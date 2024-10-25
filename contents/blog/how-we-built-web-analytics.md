@@ -23,7 +23,7 @@ They're fundamentally different products and thus require different architecture
 
 ## The difference between web and product analytics
 
-When people talk about **web analytics**, they're referring to tracking visitors to your marketing website. They care about things like page views, bounce rate, and top sources of traffic.
+When people talk about **web analytics**, they're referring to tracking visitors on your marketing website. They care about things like page views, bounce rate, and top sources of traffic.
 
 On the other hand, **product analytics** tracks how people are using your web or mobile app. It gives you insights into metrics such as feature adoption rate, user retention, and churn.
 
@@ -31,26 +31,76 @@ In practice, this means that for web analytics you care about _what_ people are 
 
 ![Web analytics vs product analytics](https://res.cloudinary.com/dmukukwp6/image/upload/web_vs_prodyuct_21a8b644e9.png)
 
+To understand this more, let's look at things you can and cannot do with web analytics that you can with product analytics.
 
-Fundamentally, this makes web analytics simpler. You only need to track sessions, without attributing previous events to the user. On the other hand, for product analytics it's important to identify and track individual users over time. 
+In web analytics, you can:
+- Set event properties
+- Aggregate and filter events by event properties e.g. URL, geographic location, UTM source.
+- Create insights like trends, funnels, SQL insights and more.
+
+However, you cannot:
+- Set person properties
+- Create cohorts
+- Filter based on person properties
+- Use person properties for targeting feature flags, A/B tests, or surveys
+- Query the persons table using SQL insights
+- Use group analytics
+- Maybe exmaples of queries you cannot do?
+   - What if you wanted to write a query "get all subsequent pageviews where the user's first pageview was a blog post"?
+   - In web analytics, you cant do this at all. Whereas in product analytics, you can do this by joining on the person ID.
+
+
+Fundamentally, this makes web analytics simpler, and simpler means cheaper and faster. So if we used our existing product analytics architecture for web analytics, users would complain about the performance and costs.
+
+To understand why this is, let's look at how we process events for web analytics vs product analytics.
+
+### 1. Why web analytics is cheaper
+
+In web analytics, everything is session-based. There's no such thing as a person. A session consists of multiple events. Each event has properties set on it, such as the URL, device, and geolocation. When you query data, properties are read from the event.
+
+Contrast this to product analytics, where each user has a person profile. Not only do events have properties, but so do persons. For example, you might want to query based on the date a user first signed up. 
+
+![Web events vs product events](https://res.cloudinary.com/dmukukwp6/image/upload/event_types_mobile_light_491249e368.png)
+
+Person properties can change frequently, since every event may have data that could be relevant to the user. For example, the URL of the last page they visited, or the most recent browser they used.
+
+To do this, this requires the following:
+1. Storing events on a separate profile
+2. Frequently updating the person's properties, based on events and the order they are received
+
+We use [ClickHouse](https://posthog.com/blog/how-we-turned-clickhouse-into-our-eventmansion) to store our events, which is optimized for storing larges amounts of data that never change (like events). But since person properties can change frequently, we store them in Postgres.
+
+![Processing events for web analytics vs product analytics](https://res.cloudinary.com/dmukukwp6/image/upload/Untitled_2023_07_04_1645_efb32323b9.png)
+
+There are also other edge cases to consider. For example, everytime a session is created on PostHog we create a new person profile. But if a user logs in and is "identified", we need to merge the profiles.
+
+All these extra steps in our pipeline mean that processing, storing, and querying data is more expensive for product analytics.
+
+Thus if we were to use our existing product analytics architecture for web analytics, the costs of it would be too high.
+
+
+
+
+
+To understand why web analytics is cheaper than product analytics, first we need to understand how we store our data.
+
+We use [ClickHouse](https://posthog.com/blog/how-we-turned-clickhouse-into-our-eventmansion) to store our events. ClickHouse is an OLAP database. It stores rows in blocks called "granules", and each granule contains about 100k rows. It's optimized for reading data. However, it's writing and editing data is an expensive operation, since you need to load an entire block even if you want to change a single row. This means ideally once a row is inserted, you don't change it, else performance will degrade.
+
+Sorting across multiple sessions is hard. 
+
+
+To work around this, we store aggregated user data in Postgres. This way we can change individual rows without impacting performance. For example, we store person properties like the initial URL in Postgres. 
+e.g. you might have this event sets the initial URL, but this later event need to have that person properties 
+
+Postgres increases our processing and length of our pipleine queue, ultimately increasing our costs.
+
+
+
+## 1. Why web analytics perforamnce is faster
 
 A person can have multiple IDs
 <!-- <todo add diagram of events. For product you have person in the middle and events associated to them. In web analytics, you just have events with no person in the middle. Maybe as a database > -->
 
-This introduces complexities for product analytics, such as the order of events matters (diagram of robbie example)
-
-Diagram?
-What if you wanted to write a query "get all subsequent pageviews where the user's first pageview was a blog post"?
-In web analytics, you cant do this at all. Whereas in product analytics, you can do this by joining on the person ID.
-
-## What would happen if we just used our product analytics architecture for web analytics?
-
-Because of the additional architecture requred for product analytics, if we ran our web analytics on the same architecture, the performace and price would be worse:
-
-person processing makes the rest of the infrastructure more complex because we need to ensure that all events for the same user are processed in order (otherwise an event might see person properties that were set in the future)
-
-
-## 1. Why web analytics perforamnce is faster
 
 People have high expectation for web analytics query performance. This is for a few reasons:
 
@@ -77,32 +127,6 @@ So if you want to sample, say, 10% of data, you still need to load all of granul
 All these contributes to performance delays, meaning that sampling is not a viable solution for product analytics. Ultimately, this affects performance.
 
 ## 2. Why web analytics is cheaper than product analytics
-
-To understand why web analytics is cheaper than product analytics, first we need to understand how we store our data.
-
-We use [ClickHouse](https://posthog.com/blog/how-we-turned-clickhouse-into-our-eventmansion) to store our events. ClickHouse is an OLAP database. It stores rows in blocks called "granules", and each granule contains about 100k rows. It's optimized for reading data. However, it's writing and editing data is an expensive operation, since you need to load an entire block even if you want to change a single row. This means ideally once a row is inserted, you don't change it, else performance will degrade.
-
-So with ClickHouse, you should avoid as much as possible changes to rows. But Person properties can change a lot. It could be every event causes an update. 
-
-To work around this, we store aggregated user data in Postgres, for example the initial URL, name, email etc, which is faster to write to.
-
-This means our event processing pipeline also includes Postgres
-
-![diagram of our pipeline, clickhouse and postgres](image)
-
-Sorting across multiple sessions is hard. 
-
-
-To work around this, we store aggregated user data in Postgres. This way we can change individual rows without impacting performance. For example, we store person properties like the initial URL in Postgres. 
-e.g. you might have this event sets the initial URL, but this later event need to have that person properties 
-
-Postgres increases our processing and length of our pipleine queue, ultimately increasing our costs.
-
-
-Why is it expensive to process profile 
-- It’s hard to update things in click house and hard to do something that only affects one row (we talked about this earlier). So we store them in Postgres
-    - Remember, reading and writing Is expensive because you need to read the whole block (granule) and then rewrite the whole thing)
-
 
 
 
