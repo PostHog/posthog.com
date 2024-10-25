@@ -15,6 +15,7 @@ import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
 import SEO from 'components/seo'
+import { IconSpinner } from '@posthog/icons'
 
 type ProductPageProps = {
     className?: string
@@ -120,14 +121,20 @@ export default function Product(props: ProductPageProps): React.ReactElement {
                         <Quantity value={quantity} onChange={setQuantity} />
 
                         <CallToAction
-                            disabled={outOfStock}
+                            disabled={loading || outOfStock}
                             onClick={handleAddToCart}
                             type="primary"
                             className="relative w-full"
                         >
                             <>
                                 <span className={cn('', isAdding && 'invisible')}>
-                                    {outOfStock ? 'Out of Stock' : 'Add to Cart'}
+                                    {loading ? (
+                                        <IconSpinner className="w-5 mx-auto animate-spin" />
+                                    ) : outOfStock ? (
+                                        'Out of Stock'
+                                    ) : (
+                                        'Add to Cart'
+                                    )}
                                 </span>
                                 <LoaderIcon
                                     className={cn(
