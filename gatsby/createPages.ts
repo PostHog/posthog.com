@@ -368,6 +368,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             createPage({
                 path: replacePath(slug),
                 component: template,
+                defer: process.env.VERCEL_ENV === 'preview',
                 context: {
                     id: node.id,
                     nextURL,
@@ -412,6 +413,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 path: i === 0 ? base : `${base}/${i + 1}`,
                 component: template,
                 context,
+                defer: process.env.VERCEL_ENV === 'preview',
             })
         })
     }
@@ -498,6 +500,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 context: {
                     id: node.id,
                 },
+                defer: process.env.VERCEL_ENV === 'preview',
             })
         })
 
@@ -529,6 +532,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         title: categoryLabel,
                         article: false,
                     },
+                    defer: process.env.VERCEL_ENV === 'preview',
                 })
 
                 post_tags?.data?.forEach(({ attributes: { label: tagLabel } }) => {
@@ -541,6 +545,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             title: tagLabel,
                             article: false,
                         },
+                        defer: process.env.VERCEL_ENV === 'preview',
                     })
                 })
             }
@@ -567,6 +572,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 post: true,
                 article: true,
             },
+            defer: process.env.VERCEL_ENV === 'preview',
         })
     })
 
@@ -583,6 +589,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 post: true,
                 article: true,
             },
+            defer: process.env.VERCEL_ENV === 'preview',
         })
     })
 
@@ -599,6 +606,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 post: true,
                 article: true,
             },
+            defer: process.env.VERCEL_ENV === 'preview',
         })
     })
 
@@ -610,6 +618,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             title: 'Posts',
             article: false,
         },
+        defer: process.env.VERCEL_ENV === 'preview',
     })
 
     result.data.spotlights.nodes.forEach((node) => {
@@ -625,6 +634,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 post: true,
                 article: true,
             },
+            defer: process.env.VERCEL_ENV === 'preview',
         })
     })
 
@@ -641,6 +651,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 post: true,
                 article: true,
             },
+            defer: process.env.VERCEL_ENV === 'preview',
         })
     })
 
@@ -654,6 +665,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
                 documentation: documentation || '',
             },
+            defer: process.env.VERCEL_ENV === 'preview',
         })
     })
 
@@ -667,6 +679,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 id: node.id,
                 documentation: documentation || '',
             },
+            defer: process.env.VERCEL_ENV === 'preview',
         })
     })
 
@@ -678,6 +691,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: {
                 id: node.id,
             },
+            defer: process.env.VERCEL_ENV === 'preview',
         })
     })
 
@@ -719,6 +733,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     gitHubIssues,
                     teams,
                 },
+                defer: process.env.VERCEL_ENV === 'preview',
             })
         }
     }
@@ -730,6 +745,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: {
                 year: Number(year),
             },
+            defer: process.env.VERCEL_ENV === 'preview',
         })
     })
 
@@ -744,6 +760,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 ignoreWrapper: true,
                 objectives: `${slug}/objectives`,
             },
+            defer: process.env.VERCEL_ENV === 'preview',
         })
     })
 }
