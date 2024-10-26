@@ -75,7 +75,7 @@ You could use the following config:
   {
     "property": "$host",
     "type": "string",
-    "operator": "is",
+    "operator": "is_not",
     "value": "posthog.com"
   }
 ]
