@@ -67,19 +67,31 @@ The followed types and operators are allowed:
 
 ## FAQ
 
-### Q: How can I filter out events from unwanted hosts?
+### Q: How can I filter out events from unwanted hostnames or IP addresses?
 
-You could use the following config:
+To filter out all traffic from hosts that are not (for example) `posthog.com`, you could use the following config:
 ```
 [
   {
     "property": "$host",
     "type": "string",
-    "operator": "is_not",
+    "operator": "is",
     "value": "posthog.com"
   }
 ]
 ```
+Or, to filter out all traffic from a particular IP address, you could use a config like this example:
+```
+[
+    {
+        "property": "$ip",
+        "type": "string",
+        "operator": "is_not",
+        "value": "192.168.01.123"
+    }
+]
+```
+
 Make sure to enable the `Keep event if any of the filtered properties are undefined?` option, otherwise, any events where the `$host` property is undefined will be filtered out.
 
 <CommunityMaintained />
