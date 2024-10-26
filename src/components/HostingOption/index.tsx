@@ -1,5 +1,4 @@
 import React from 'react'
-import hostingSprite from './images/sprite-hosting.svg'
 import { Link } from 'gatsby'
 
 interface HostingOptionProps {

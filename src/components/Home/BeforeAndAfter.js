@@ -1,13 +1,12 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { ReactCompareSlider, ReactCompareSliderHandle } from 'react-compare-slider'
-import factoBlurb from '../../images/facto-blurb.svg'
-import outlinedChart from '../../images/outlined-chart.svg'
 import AnimateIntoView from '../AnimateIntoView'
 import Logo from '../Logo'
 import { gradientWrapper, section } from './classes'
 import CodeBlock from './CodeBlock'
+const outlinedChart = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/outlined-chart.svg'
+const factoBlurb = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/facto-blurb.svg'
 
 const exampleCode = `SELECT entrance_period_start,
        reached_from_step_count,

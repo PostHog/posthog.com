@@ -1,8 +1,6 @@
-import Roadmap from 'components/Roadmap'
 import Layout from 'components/Layout'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql } from 'gatsby'
 import React from 'react'
-import groupBy from 'lodash.groupby'
 import Link from 'components/Link'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
@@ -10,7 +8,7 @@ import Section from 'components/ProductPage/Section'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
 import { SidecarLogo } from 'components/SidecarLogo/sidecarLogo'
 
-import banner from '../../images/sidecar-screenshot.png'
+const banner = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sidecar-screenshot.png'
 
 export default function RoadmapPage() {
     const HomePage = ({ data }) => {

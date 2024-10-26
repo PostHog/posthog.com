@@ -1,7 +1,8 @@
 import React from 'react'
-import spritedIcons from './images/icons/sprited-icons.svg'
 import ProductImage from './ProductImage'
 import { Link } from 'gatsby'
+const spritedIcons =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/ProductFeature/images/icons/sprited-icons.svg'
 
 interface ProductFeatureProps {
     layout?: string

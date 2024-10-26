@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import CheckIcon from '../../images/check.svg'
-import XIcon from '../../images/x.svg'
+const XIcon = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/x.svg'
+const CheckIcon = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/check.svg'
 
 type LibraryNode = {
     fields: {

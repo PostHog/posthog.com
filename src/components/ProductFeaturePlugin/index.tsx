@@ -1,5 +1,6 @@
 import React from 'react'
-import pluginsSprite from './images/sprite-plugins.svg'
+const pluginsSprite =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/ProductFeaturePlugin/images/sprite-plugins.svg'
 
 interface ProductFeaturePluginProps {
     handle: string

@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Layout from '../components/Layout'
 import Link from 'components/Link'
-import HubSpotForm from 'components/HubSpotForm'
-import YCsign from '../images/max-yc.png'
-import { StaticImage } from 'gatsby-plugin-image'
 import { Check2 } from 'components/Icons'
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import SalesforceForm from 'components/SalesforceForm'
+const YCsign = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/max-yc.png'
 
 const features = [
     '$50,000 in PostHog credit for 12 months<sup>1</sup>',

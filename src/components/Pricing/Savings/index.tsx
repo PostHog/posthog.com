@@ -2,8 +2,6 @@ import React from 'react'
 
 import { Structure } from '../../Structure'
 
-import checkIcon from '../../../images/check.svg'
-
 export const Savings = () => {
     return (
         <div className="pricing-hero text-white text-center relative">

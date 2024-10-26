@@ -1,5 +1,6 @@
 import React from 'react'
-import rocket from './images/rocket.svg'
+const rocket =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/RocketHorizontalRule/images/rocket.svg'
 
 export const RocketHorizontalRule = () => {
     return (

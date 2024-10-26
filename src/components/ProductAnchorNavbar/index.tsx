@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import downIcon from '../../images/icons/down-caret.svg'
 import { scrollWithOffset } from 'lib/utils'
 import Chip from 'components/Chip'
+const downIcon = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/icons/down-caret.svg'
 
 const ButtonLink = ({
     section,

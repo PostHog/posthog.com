@@ -2,23 +2,32 @@ import React from 'react'
 import { useInView } from 'react-intersection-observer'
 import Logomark from './images/Logomark'
 
-import airbus from './images/customers/airbus.svg'
-import assemblyai from './images/customers/assemblyai.svg'
-import dhl from './images/customers/dhl.svg'
-import hasura from './images/customers/hasura.svg'
-import joybird from './images/customers/joybird.svg'
-import mux from './images/customers/mux.svg'
-import outbrain from './images/customers/outbrain.svg'
-import phantom from './images/customers/phantom.svg'
-import posthog from './images/customers/posthog.svg'
-import staples from './images/customers/staples.svg'
-import trustwallet from './images/customers/trustwallet.svg'
-import yCombinator from './images/customers/y-combinator.svg'
-
 import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import Link from 'components/Link'
 import { useLayoutData } from 'components/Layout/hooks'
+const yCombinator =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/y-combinator.svg'
+const trustwallet =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/trustwallet.svg'
+const staples =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/staples.svg'
+const posthog =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/posthog.svg'
+const phantom =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/phantom.svg'
+const outbrain =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/outbrain.svg'
+const mux = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/mux.svg'
+const joybird =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/joybird.svg'
+const hasura =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/hasura.svg'
+const dhl = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/dhl.svg'
+const assemblyai =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/assemblyai.svg'
+const airbus =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/customers/airbus.svg'
 
 const Logo = ({ src, alt, className = '' }) => (
     <img className={`icon px-4 md:px-6 lg:px-4 w-full ${className}`} src={src} alt={alt} />

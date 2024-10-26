@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Layout from '../components/Layout'
 import Link from 'components/Link'
-import SalesHogs from '../images/sales-hogs.png'
-import { StaticImage } from 'gatsby-plugin-image'
 import { Check2 } from 'components/Icons'
 import { useValues } from 'kea'
 import Contact from 'components/ContactSales/Contact'
 import { layoutLogic } from 'logic/layoutLogic'
+const SalesHogs = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales-hogs.png'
 
 const features = [
     'Extended 2-month trial of premium features',

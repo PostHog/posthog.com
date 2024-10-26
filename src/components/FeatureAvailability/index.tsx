@@ -1,8 +1,8 @@
 import React from 'react'
 import InfoIcon from '../InfoIcon/Index'
-import CheckIcon from '../../images/check.svg'
-import XIcon from '../../images/x.svg'
 import Tooltip from 'components/Tooltip'
+const XIcon = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/x.svg'
+const CheckIcon = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/check.svg'
 
 type FeatureAvailabilityProps = {
     availability:

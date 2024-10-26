@@ -2,7 +2,8 @@ import React from 'react'
 import { emojiKey } from './emojiKey'
 import Tooltip from 'components/Tooltip'
 import Link from 'components/Link'
-import tooltipIcon from './images/tooltip.svg'
+const tooltipIcon =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/ContributorCard/images/tooltip.svg'
 
 type ContributorCardProps = {
     name: string

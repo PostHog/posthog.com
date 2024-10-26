@@ -1,8 +1,8 @@
 import React from 'react'
-import CheckIcon from '../../images/check.svg'
-import MinusIcon from '../../images/x.svg'
 import InfoIcon from '../InfoIcon/Index'
 import Link from 'components/Link'
+const MinusIcon = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/x.svg'
+const CheckIcon = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/check.svg'
 
 const features = [
     { key: 'eventCapture', name: 'Event capture', url: 'https://posthog.com/tutorials/event-tracking-guide' },

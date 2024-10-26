@@ -2,18 +2,6 @@ import React from 'react'
 
 import { Structure } from '../../Structure'
 import { mergeClassList } from '../../../lib/utils'
-import compensationImg from './images/compensation.svg'
-import hackerHouseImg from './images/hacker-house.svg'
-import ptoImg from './images/pto.svg'
-import meetingFreeDaysImg from './images/meeting-free-days.svg'
-import insuranceImg from './images/insurance.svg'
-import trainingBudgetImg from './images/training-budget.svg'
-import coworkingCreditImg from './images/coworking-credit.svg'
-import homeOfficeImg from './images/home-office.svg'
-import carbonOffsettingImg from './images/carbon-offsetting.svg'
-import retirementImg from './images/retirement.svg'
-import spillMentalHealthImg from './images/spill-mental-health.svg'
-import companyOffsitesImg from './images/company-offsites.svg'
 
 interface BenefitProps {
     image: string

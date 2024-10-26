@@ -4,11 +4,12 @@ import { Spacer } from 'components/Spacer'
 import { useValues } from 'kea'
 import { contributorsLogic } from '../logic/contributorsLogic'
 import { SEO } from 'components/seo'
-import pluginLibraryOgImage from '../images/posthog-plugins.png'
 import { ContributorCard } from 'components/ContributorCard'
 import { Contributor } from 'types'
 import { ContributorSearch } from 'components/ContributorSearch'
 import Spinner from 'components/Spinner'
+const pluginLibraryOgImage =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/posthog-plugins.png'
 
 export const ContributorsPage = () => {
     const { filteredContributors, contributorsLoading } = useValues(contributorsLogic)
