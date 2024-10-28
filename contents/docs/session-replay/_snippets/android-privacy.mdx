@@ -1,0 +1,12 @@
+> 🚧 **NOTE:** Currently, this isn't supported if using Jetpack Compose views. We're investigating this [issue](https://github.com/PostHog/posthog-android/issues/158).
+
+To replace any type of `View` with a redacted version in the recording, set the [tag](https://developer.android.com/reference/android/view/View#tags) to `ph-no-capture`.
+
+```xml
+<ImageView
+    android:id="@+id/imvProfilePhoto"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:tag="ph-no-capture"
+/>
+```

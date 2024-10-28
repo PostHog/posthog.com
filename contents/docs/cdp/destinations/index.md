@@ -3,7 +3,7 @@ title: Realtime destinations
 showTitle: true
 ---
 
-> Our new realtime destinations are in **preview**. You can opt in to try them out in the [Feature previews panel](https://us.posthog.com/#panel=feature-previews). Destinations require the data pipeline add-on in [your billing settings](https://us.posthog.com/organization/billing).
+> Destinations require the data pipeline add-on in [your billing settings](https://us.posthog.com/organization/billing).
 
 ## Template library
 
