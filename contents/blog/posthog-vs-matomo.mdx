@@ -31,12 +31,11 @@ PostHog can also replace Google Analytics, but it offers a wider suite of tools 
 
 Matomo charges extra for features like funnel analysis, cohorts, path analysis, A/B testing, and session recording. These are also considered add-ons and are not tightly integrated with the main analytics product. In PostHog, all of these tools work together and each comes with a generous free tier.
 
-
 ### 2. It's built for engineers
 
-PostHog gives engineering and product teams the tools they need to build better products. 
+Rather than focusing on marketers like Matomo, PostHog focuses on the tools engineers need to build better products. 
 
-The core product analytics tools are part of this, but we go further by providing market-leading feature flag functionality, and integrating Session Recording so you can deploy one platform that does everything, rather than integrating multiple discrete tools into your stack.
+On top of product analytics, this includes A/B testing, feature flags, a complete API, direct SQL access, and more. PostHog also includes a data warehouse so you can import and query data from other sources as well as destinations to send your data to external warehouses or other tools.
 
 ### 3. Seamless integrations with the tools you already use
 
@@ -53,9 +52,9 @@ Both PostHog and Matomo offer a range of tools for tracking and analyzing your s
 <ComparisonTable column1="PostHog" column2="Matomo">
  <ComparisonRow column1={true} column2={true} feature="Product analytics" description="Track events and conversion; analyze user behavior" />
   <ComparisonRow column1={true} column2={true} feature="Web analytics" description="Simple dashboard of aggregate traffic, sources, campaigns, and session metrics" />
-  <ComparisonRow column1={true} column2="Add on" feature="Session replay" description="Watch real users use your product, diagnose bugs" />
-	<ComparisonRow column1={true} column2="Add on" feature="Heatmaps" description="Visualize where users click in your app or website" />
-  <ComparisonRow column1={true} column2="Add on" feature="Experiments" description="Run A/B/n tests on new features, optimize conversion funnels" />
+  <ComparisonRow column1={true} column2={true} feature="Session replay" description="Watch real users use your product, diagnose bugs" />
+	<ComparisonRow column1={true} column2={true} feature="Heatmaps" description="Visualize where users click in your app or website" />
+  <ComparisonRow column1={true} column2={true} feature="Experiments" description="Run A/B/n tests on new features, optimize conversion funnels" />
   <ComparisonRow column1={true} column2={false} feature="Surveys" description="Collect and analyze feedback, run NPS and PMF surveys" />
   <ComparisonRow column1={true} column2={false} feature="Feature flags" description="Roll out features safely, toggle features for cohorts or individuals" />
 	<ComparisonRow column1={true} column2={false} feature="Free tier" description="Free forever option, no credit card required" />
@@ -67,7 +66,7 @@ Both PostHog and Matomo offer a range of tools for tracking and analyzing your s
   <ComparisonRow column1={true} column2={true} feature="API" description="Capture events, get stats, and make changes via API" />
 </ComparisonTable>
 
-> 💡 **Good to know:** Matomo's add owns can cost hundreds of dollars per year. For example, their "Heatmap & Session Recording" add on starts at 219€ per year.
+> 💡 **Good to know:** Matomo's first paid tier comes with 1,500 heatmap pageviews and 150 session recordings per month.
 
 ### Web analytics
 
@@ -83,10 +82,8 @@ Both PostHog and Matomo offer all the features you expect from [Google Analytics
   <ComparisonRow column1={true} column2={true} feature="Outbound clicks" description="See the links that take users away" />
   <ComparisonRow column1={true} column2={true} feature="UTM tracking" description="Track marketing campaigns with UTM tags" />
   <ComparisonRow column1={true} column2={true} feature="Cookieless tracking" description="Track users without cookies" />
-  <ComparisonRow column1={true} column2={false} feature="Snippet install" description="Install simple HTML snippet" />
+  <ComparisonRow column1={true} column2={true} feature="Snippet install" description="Install simple HTML snippet" />
 </ComparisonTable>
-
-> 💡 **Good to know:** Although Matomo offers a script install, it's not simple. It's 12 lines long with several confusing configuration options. 
 
 ### Product analytics
 
@@ -97,13 +94,13 @@ Product analytics reveals the evolution of both tools. While PostHog has always 
   <ComparisonRow column1={true} column2={true} feature="Custom properties" description="Add more data to custom events or users" />
   <ComparisonRow column1={true} column2={false} feature="Autocapture" description="Capture frontend clicks and events automatically" />
   <ComparisonRow column1={true} column2={true} feature="Graphs and trends" description="Build custom insights and visualizations" />
-  <ComparisonRow column1={true} column2="Add on" feature="Funnels" description="Track users through a sequence of events" />
-  <ComparisonRow column1={true} column2="Add on" feature="Retention" description="Visualize which users stay, for how long" />
+  <ComparisonRow column1={true} column2={true} feature="Funnels" description="Track users through a sequence of events" />
+  <ComparisonRow column1={true} column2={true} feature="Retention" description="Visualize which users stay, for how long" />
   <ComparisonRow column1={true} column2={true} feature="Custom dashboards" description="Build a custom dashboard of your own or use a template" />
-  <ComparisonRow column1={true} column2="Add on" feature="Cohorts" description="Combine users based on properties and events for group analysis" />
+  <ComparisonRow column1={true} column2={true} feature="Cohorts" description="Combine users based on properties and events for group analysis" />
   <ComparisonRow column1={true} column2={true} feature="User profiles" description="View user demographic data such as country, language, and device type" />
   <ComparisonRow column1={true} column2={false} feature="Group analytics" description="Track metrics at a company and account level" />
-  <ComparisonRow column1={true} column2="Add on" feature="Paths" description="Track user flows and where they drop off" />
+  <ComparisonRow column1={true} column2={true} feature="Paths" description="Track user flows and where they drop off" />
   <ComparisonRow column1={true} column2="Enterprise" feature="SQL" description="Query your data with SQL" />
 </ComparisonTable>
 
@@ -122,7 +119,7 @@ But this doesn't mean either lacks those types of integrations.
   <ComparisonRow column1={true} column2={false} feature="Warehouse import" description="Import and query data from third-party sources like Postgres, S3, and GCS" />
   <ComparisonRow column1="Events, reports" column2="Reports, anomalies" feature="Slack" description="Send events, reports, and anomalies to Slack" />
   <ComparisonRow column1={true} column2={true} feature="Email" description="Send reports to email" />
-  <ComparisonRow column1={false} column2="Add on" feature="Google Search Console" description="See search queries that sent traffic to your site" />
+  <ComparisonRow column1={false} column2={false} feature="Google Search Console" description="See search queries that sent traffic to your site" />
 	<ComparisonRow column1="Script" column2={true} feature="WordPress" description="Capture events from WordPress" />
   <ComparisonRow column1={true} column2={false} feature="Stripe" description="Import and query charges, customers, invoices, subscriptions, and more" />
   <ComparisonRow column1={true} column2={false} feature="Hubspot" description="Import and query contacts, companies, deals, and more" />
@@ -139,15 +136,15 @@ Matomo positions itself as a Google Analytics alternative that protects your dat
 
 <ComparisonTable column1="PostHog" column2="Matomo">
   <ComparisonRow column1={true} column2={true} feature="Self-hostable" description="Self-host your instance for full control" />
-  <ComparisonRow column1={true} column2={false} feature="Bot blocking" description="Block scrapers, crawlers, and other unwanted traffic from stats" />
+  <ComparisonRow column1={true} column2={true} feature="Bot blocking" description="Block scrapers, crawlers, and other unwanted traffic from stats" />
   <ComparisonRow column1={true} column2={false} feature="Reverse proxy" description="Official instructions on avoiding tracking blockers" />
   <ComparisonRow column1={true} column2={false} feature="HIPAA-ready" description="Can be compliant with HIPAA" />
   <ComparisonRow column1={true} column2={true} feature="GDPR-ready" description="Can be compliant with GDPR" />
   <ComparisonRow column1={true} column2={true} feature="Data anonymization" description="Options to anonymize user data" />
   <ComparisonRow column1={true} column2={false} feature="SOC 2" description="SOC 2 security certification" />
   <ComparisonRow column1={true} column2={true} feature="2FA" description="Enforce login with two-factor authentication" />
-  <ComparisonRow column1="Enterprise" column2="Add on" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
-	<ComparisonRow column1="Enterprise" column2={"Add on"} feature="Audit log" description="Get a report of all activities happening in your instance" />
+  <ComparisonRow column1="Enterprise" column2="Enterprise" feature="SAML/SSO" description="Use SAML or single sign-on authentication" />
+	<ComparisonRow column1="Enterprise" column2={true} feature="Audit log" description="Get a report of all activities happening in your instance" />
 </ComparisonTable>
 
 > 💡 **Good to know:** 
@@ -158,7 +155,7 @@ Matomo positions itself as a Google Analytics alternative that protects your dat
 
 ### How much do PostHog and Matomo cost?
 
-Matomo's Cloud offering starts at $29/month for 50,000 hits. 
+Matomo's Cloud offering starts at $29/month for 50,000 hits. This includes 1,500 heatmap pageviews and 150 session recordings per month.
 
 PostHog is [entirely usage-based](/pricing). Its free tier includes:
 
