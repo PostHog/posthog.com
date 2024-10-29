@@ -2337,6 +2337,16 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Mobile session replay',
+                    url: '/docs/session-replay/mobile',
+                    icon: 'IconPhone',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/session-replay/troubleshooting',
                     icon: 'IconQuestion',
@@ -2363,35 +2373,6 @@ export const docsMenu = {
                     url: '/docs/session-replay/network-recording',
                     icon: 'IconDashboard',
                     color: 'seagreen',
-                },
-                {
-                    name: 'Mobile session replay',
-                    url: '/docs/session-replay/mobile',
-                    icon: 'IconPhone',
-                    color: 'blue',
-                    featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/session-replay/mobile',
-                        },
-                        {
-                            name: 'Android',
-                            url: '/docs/session-replay/android',
-                        },
-                        {
-                            name: 'iOS',
-                            url: '/docs/session-replay/ios',
-                        },
-                        {
-                            name: 'React Native',
-                            url: '/docs/session-replay/react-native',
-                        },
-                    ],
                 },
                 {
                     name: 'Privacy controls',

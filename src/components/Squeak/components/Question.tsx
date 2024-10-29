@@ -440,7 +440,7 @@ export const Question = (props: QuestionProps) => {
     }
 
     if (!questionData) {
-        return <div>Question not found</div>
+        return null
     }
 
     const handleReply = async (_values, _formData, data) => {
@@ -526,7 +526,7 @@ export const Question = (props: QuestionProps) => {
                     </div>
 
                     <div className={archived ? 'opacity-50' : ''}>
-                        <div className="ml-5 pl-[30px] border-l border-light dark:border-dark">
+                        <div className="ml-5 pl-[30px] pb-4 border-l border-light dark:border-dark">
                             {questionData.attributes.subject && (
                                 <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
                                     <Link

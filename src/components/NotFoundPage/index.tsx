@@ -12,9 +12,17 @@ export default function NotFoundPage(): JSX.Element {
     const [hogData, setHogData] = useState<any | null>(null)
 
     useEffect(() => {
-        import('../../../static/lotties/astrohog.json').then((data) => setHogData(data.default))
-        posthog?.capture('page_404')
-    }, [])
+        // Fetch the JSON file from the external domain
+        fetch('https://res.cloudinary.com/dmukukwp6/raw/upload/astrohog_a46fc15855.json')
+            .then(response => response.json())
+            .then(data => setHogData(data))
+            .catch(error => console.error('Error loading animation data:', error))
+
+        // Capture the event only if posthog is available
+        if (posthog) {
+            posthog.capture('page_404')
+        }
+    }, [posthog])
 
     return (
         <Layout className="not-found-page-container">

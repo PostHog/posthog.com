@@ -351,5 +351,19 @@
         "link_type": "LinkedIn",
         "link_url": "https://www.linkedin.com/in/danilo-campos/",
         "profile_id": 31731
+    },
+    {
+        "handle": "paul-dambra",
+        "name": "Paul D'Ambra",
+        "role": "Software Engineer",
+        "profile_id": 30173
+    },
+    {
+        "handle": "bijan-boustani",
+        "name": "Bijan Boustani",
+        "role": "Technical Content Marketer",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/bijanbwb",
+        "profile_id": 31729
     }
 ]

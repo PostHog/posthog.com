@@ -1,5 +1,4 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import { StaticImage } from 'gatsby-plugin-image'
 import React, { useState } from 'react'
 import { FAQs } from 'components/Pricing/FAQs'
 import { Quote } from 'components/Pricing/Quote'
@@ -8,9 +7,7 @@ import { SEO } from '../seo'
 import cntl from 'cntl'
 import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
-import tractorHog from '../../../static/lotties/tractor-hog.json'
-import Lottie from 'react-lottie'
-import Plans, { CTA as PlanCTA, PricingTiers } from './Plans'
+import { CTA as PlanCTA, PricingTiers } from './Plans'
 import Link from 'components/Link'
 import CTA from 'components/Home/CTA.js'
 import { IconCheck, IconHandMoney, IconInfo, IconRocket } from '@posthog/icons'
@@ -1223,7 +1220,12 @@ const PricingExperiment = ({
             </section>
             <section className={`${section} mb-12 mt-16`}>
                 <div className="sm:flex-row flex-col-reverse flex items-center sm:items-start justify-center">
-                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/images/vacation-hog.png" alt="Vacation Hog" width={252} placeholder="none" />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Pricing/images/vacation-hog.png"
+                        alt="Vacation Hog"
+                        width={252}
+                        placeholder="none"
+                    />
                     <div className="text-center bg-[#2D2D2D] p-4 rounded-md relative sm:rotate-6 sm:-mr-8 flex-shrink-0">
                         <p className="text-white m-0 text-[18px] font-bold font-comic">
                             Looking for the signup button?
