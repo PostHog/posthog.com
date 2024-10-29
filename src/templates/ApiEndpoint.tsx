@@ -17,6 +17,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { shortcodes } from '../mdxGlobalComponents'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
+import { docsMenu } from '../navs'
+import { CallToAction } from 'components/CallToAction'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -491,6 +493,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
         allMdx,
     } = data
     const name = humanReadableName(data.data.name)
+    const nextURL = data.data.nextURL
     const paths = {}
     const components = {
         inlineCode: InlineCode,
@@ -522,7 +525,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
     }, [])
 
     return (
-        <Layout>
+        <Layout parent={docsMenu} activeInternalMenu={docsMenu.children.find(({ name }) => name === 'Product OS')}>
             <SEO title={`${name} API Reference - PostHog`} />
             <PostLayout
                 title={name}
@@ -621,6 +624,8 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                         </div>
                     )
                 })}
+
+                {nextURL && <CallToAction to={nextURL}>Next page →</CallToAction>}
             </PostLayout>
         </Layout>
     )
@@ -645,6 +650,7 @@ export const query = graphql`
             items
             name
             url
+            nextURL
         }
         apiComponents: apiComponents {
             components

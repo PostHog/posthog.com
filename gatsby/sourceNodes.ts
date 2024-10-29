@@ -24,6 +24,27 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const menu = MenuBuilder.buildStructure(parser, {} as any)
 
     let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
+    const maxEndpointItems = 30
+    all_endpoints = all_endpoints.flatMap((endpoint) => {
+        if (endpoint.items.length > maxEndpointItems) {
+            const chunks = []
+            for (let i = 0; i < endpoint.items.length; i += maxEndpointItems) {
+                const next =
+                    i + maxEndpointItems < endpoint.items.length &&
+                    `${endpoint.name}-${Math.floor(i / maxEndpointItems) + 2}`
+                const name = i === 0 ? endpoint.name : `${endpoint.name}-${Math.floor(i / maxEndpointItems) + 1}`
+                const chunk = {
+                    ...endpoint,
+                    name,
+                    items: endpoint.items.slice(i, i + maxEndpointItems),
+                    next,
+                }
+                chunks.push(chunk)
+            }
+            return chunks
+        }
+        return endpoint
+    })
     all_endpoints.forEach((endpoint) => {
         const node = {
             id: createNodeId(`api_endpoint-${endpoint.name}`),
@@ -39,6 +60,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             schema: endpoint.items.map((item) => ({ ...item, operationSpec: item.operationSpec, parent: null })),
             url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
             name: endpoint.name,
+            nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
         }
         createNode(node)
     })
