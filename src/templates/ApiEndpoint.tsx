@@ -625,7 +625,11 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                     )
                 })}
 
-                {nextURL && <CallToAction to={nextURL}>Next page →</CallToAction>}
+                {nextURL && (
+                    <CallToAction className="mt-8" to={nextURL}>
+                        Next page →
+                    </CallToAction>
+                )}
             </PostLayout>
         </Layout>
     )
