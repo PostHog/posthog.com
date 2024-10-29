@@ -398,6 +398,10 @@ function Privacy() {
                             We use cookies to do this and they help us understand how we can improve a user's
                             experience.
                         </p>
+                      <p>
+                            We use our own products to do this. eg we will use our Session Replay tool to debug user issues
+                            or understand how to improve our product.
+                        </p>
                         <p>
                             FYI, we don’t use any third-party cookies at all. This means we don’t run any retargeting ad
                             campaigns, or use any other invasive tracking techniques that follow you around the
