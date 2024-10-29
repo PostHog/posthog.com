@@ -37,16 +37,12 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({ createResolvers
             imageProducts: {
                 type: ['ShopifyProduct'],
                 resolve(source, args, context, info) {
-                    const metafieldNodesIds = source.metafields___NODE
+                    const metafields = source.metafields
                     let productIds = []
 
-                    for (const metafieldNodeId of metafieldNodesIds) {
-                        const metafieldNode = context.nodeModel.getNodeById({
-                            id: metafieldNodeId,
-                        })
-
-                        if (metafieldNode.key === 'image_products') {
-                            productIds = productIds.concat(JSON.parse(metafieldNode.value))
+                    for (const metafield of metafields) {
+                        if (metafield.key === 'image_products') {
+                            productIds = productIds.concat(JSON.parse(metafield.value))
                         }
                     }
 

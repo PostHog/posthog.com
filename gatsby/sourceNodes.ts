@@ -364,6 +364,165 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
             createNode(node)
         })
+
+        const collection = await fetch(`https://${shopifyURL}/admin/api/${shopifyAdminAPIVersion}/graphql.json`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Shopify-Access-Token': shopifyAdminAPIAPIPassword!,
+            },
+            body: JSON.stringify({
+                query: ` {
+            collectionByHandle(handle: "all-products") {
+              handle
+              products(first: 250) {
+                nodes {
+                  description
+                  featuredMedia {
+                    preview {
+                      image {
+                        width
+                        height
+                        originalSrc
+                      }
+                    }
+                  }
+                  handle
+                  id
+                  media(first: 250) {
+                    nodes {
+                      mediaContentType
+                      preview {
+                        image {
+                          width
+                          height
+                          originalSrc
+                        }
+                      }
+                    }
+                  }
+                  metafields(first: 250) {
+                    nodes {
+                      value
+                      key
+                    }
+                  }
+                  options {
+                    shopifyId: id
+                    name
+                    values
+                  }
+                  priceRangeV2 {
+                    maxVariantPrice {
+                      amount
+                    }
+                    minVariantPrice {
+                      amount
+                    }
+                  }
+                  shopifyId: id
+                  status
+                  title
+                  tags
+                  totalInventory
+                }
+              }
+            }
+          } 
+              `,
+            }),
+        }).then((res) => res.json())
+        const variants = await fetch(`https://${shopifyURL}/admin/api/${shopifyAdminAPIVersion}/graphql.json`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Shopify-Access-Token': shopifyAdminAPIAPIPassword!,
+            },
+            body: JSON.stringify({
+                query: ` {
+            productVariants(first: 250) {
+                nodes {
+                availableForSale
+                media(first: 250) {
+                    nodes {
+                    preview {
+                        image {
+                        width
+                        height
+                        originalSrc
+                        }
+                    }
+                    }
+                }
+                price
+                product {
+                    shopifyId: id
+                    title
+                    featuredMedia {
+                    preview {
+                        image {
+                        width
+                        height
+                        originalSrc
+                        }
+                    }
+                    }
+                }
+                selectedOptions {
+                    name
+                    value
+                }
+                shopifyId: id
+                sku
+                title
+                }
+            }
+          } 
+              `,
+            }),
+        }).then((res) => res.json())
+        const moveNodesToParent = (obj) => {
+            if (Array.isArray(obj)) {
+                return obj.map(moveNodesToParent)
+            } else if (obj && typeof obj === 'object') {
+                if (obj.nodes) {
+                    return moveNodesToParent(obj.nodes)
+                }
+                return Object.fromEntries(Object.entries(obj).map(([key, value]) => [key, moveNodesToParent(value)]))
+            }
+            return obj
+        }
+
+        const products = moveNodesToParent(collection.data.collectionByHandle.products.nodes).filter(
+            (product) => product.status === 'ACTIVE'
+        )
+        products.forEach((product) => {
+            product.variants = moveNodesToParent(
+                variants.data.productVariants.nodes.filter((variant) => variant.product.shopifyId === product.shopifyId)
+            )
+            const node = {
+                id: createNodeId(`shopify-product-${product.shopifyId}`),
+                internal: {
+                    type: 'ShopifyProduct',
+                    contentDigest: createContentDigest(product),
+                },
+                ...product,
+            }
+            createNode(node)
+        })
+        const data = {
+            handle: collection.data.collectionByHandle.handle,
+            products: products.map((product) => ({ shopifyId: product.shopifyId })),
+        }
+        const node = {
+            id: createNodeId(`shopify-collection`),
+            internal: {
+                type: 'ShopifyCollection',
+                contentDigest: createContentDigest(data),
+            },
+            ...data,
+        }
+        createNode(node)
     }
 
     const fetchSlackEmojis = async () => {
