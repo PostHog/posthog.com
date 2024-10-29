@@ -35,8 +35,9 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
     // The screenshot may contain sensitive information, so use with caution
     sessionReplayConfig.screenshot = false
 
-    // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 500ms
-    sessionReplayConfig.debouncerDelayMs = 500
+    // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1000ms
+    // Ps: it was 500ms (0.5s) by default until version 3.8.2
+    sessionReplayConfig.debouncerDelayMs = 1000
 }
 ```
 
