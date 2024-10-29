@@ -121,6 +121,10 @@ export const CareersHero = () => {
         return sortedJobs
     }, [originalJobs])
 
+    if (!jobs?.length) {
+        return null
+    }
+
     const [selectedJob, setSelectedJob] = useState(jobs[0])
     const [processedHtml, setProcessedHtml] = useState('')
     const [websiteDescription, setWebsiteDescription] = useState('')
