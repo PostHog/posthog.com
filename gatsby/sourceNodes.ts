@@ -24,7 +24,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const menu = MenuBuilder.buildStructure(parser, {} as any)
 
     let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
-    const maxEndpointItems = 30
+    const maxEndpointItems = 20
     all_endpoints = all_endpoints.flatMap((endpoint) => {
         if (endpoint.items.length > maxEndpointItems) {
             const chunks = []
