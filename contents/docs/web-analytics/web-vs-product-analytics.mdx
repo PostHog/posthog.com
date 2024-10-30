@@ -4,4 +4,108 @@ sidebar: Docs
 showTitle: true
 ---
 
-...
+PostHog's ultimate [goal](/handbook/why-does-posthog-exist#our-mission) is to help you build successful products.
+
+And to build a successful product, you'll need to cultivate an intuition for what is working and what isn't. You define what success looks like for your product, set goals, and collect data. Then use that data to garner insights and get feedback about whether you're making progress.
+
+[Web analytics](/web-analytics) and [product analytics](/product-analytics) are different products that will help you collect insights from real-world usage data, which you can use to set your direction. But what is the distinction between the two?
+
+## Web analytics
+
+Web analytics is all about gathering insights by monitoring website traffic.
+
+It's an alternative [Google Analytics](/blog/posthog-vs-ga4) that enables you to see the number of visitors to your website, which pages they're visiting, where they came from, etc.
+
+In the context of building a successful product, this data is invaluable. Think of your product as a ship ⛵ out in the middle of the ocean in the dead of night 🌃. There are plenty of ways to make it back to land, but there's no guarantee you'll get there. You'll need to use all the data available to you to get a sense of direction and forge ahead, lest ye be torn asunder. 🌊
+
+### Analytics data
+
+Web analytics gives you the ability to answer questions about your product based on traffic data:
+
+- **Visitors:** how many people are visiting?
+- **Paths:** which pages are they visiting?
+- **Channels:** what are the different sources of traffic to your website?
+- **Locations:** where are visitors located?
+- **Device:** did they use a desktop or tablet or phone?
+- **Browser** what browser were they using?
+
+### Finding answers to your questions
+
+Next, let's take a look at some practical examples of what to do with all that web analytics data.
+
+#### 🛣️ Paths: Where are visitors going?
+
+Paths contain critical insights because they enable you to figure out which pages are most frequently visited. You can see how many users are arriving on your landing page (`/`), your about page (`/about`), your pricing page (`/pricing`), etc. You can use the [web analytics](https://us.posthog.com/web) page in your PostHog dashboard to find out which pages visitors are most interested in.
+
+PostHog is an instructive example, because it's basically a dozen different products in one. And paths give us a way to determine which products are most popular.
+
+```
+/product-analytics
+/web-analytics
+/session-replay
+/feature-flags
+/experiments
+/surveys
+/cdp
+/data-warehouse
+/product-os
+```
+
+Based on the analytics, maybe it's time to double down on that feature that 80% of your users are there for? Or maybe it's time to shutter that one feature that only 5% care about when it's generating 90% of your support issues (more on this later)?
+
+Also keep in mind that some pages might surprise you. You might spend a ton of time crafting your marketing pages, but what if you find that your company's `/about` page is one of the main things people are interested in? Now you know to spend some more time being intentional about the content you put there.
+
+#### 📱 Devices: How are users interacting?
+
+What if you're an early stage startup that built a small mobile application for iOS and Android? But it turns out 83% of your visitors are actually using a desktop browser. That's a pretty big insight, and it might be time to build out your web application.
+
+#### 🗺️ Location: Where are they?
+
+If you live in San Francisco, it's safe to assume all your users live there too, right? Oh weird, it turns out half of the traffic is coming from Paris? Would it be considered gauche to put a billboard on the Louvre Pyramid? Or maybe it's time to add a French translation?
+
+#### 🔄 Retention: Are visitors coming back?
+
+It looks like 100% of the people visiting for the first time are visiting for the first time (it's a relief that objective mathematical reality works here). And one week later, maybe 5% of visitors are coming back. That's alright it makes sense that only a subset are going to come back. But what if, after two weeks, it's a precipitous drop down to 1%? Maybe you could re-engage users with a timely email after two weeks?
+
+#### 📥 Channels: Where is traffic coming from?
+
+Channels are the different sources that bring traffic to your website. Are they coming from paid advertisements? Organic social? Direct traffic? This can help you figure out whether its worth spending money on ads or sticking with word of mouth.
+
+### 🏆 Finding quick wins
+
+One of the key takeaways with web analytics is that it can have a drastic influence on where you focus your time and effort. It can also help to start with a quick win. For example, you might find out that half your traffic is going to _one_ blog post you wrote, and you didn't even realize it. Adding a call to action at the bottom of that post would be a minor change in terms of effort, but could be the most important thing you could do right now.
+
+## Product analytics
+
+[Product analytics](/product-analytics) is a broader topic that encompasses _a lot_ of features. But ultimately it's about the same things we talked about above: gathering insights into real-world usage so you can make informed decisions about how to build a successful product.
+
+Where web analytics gives you a single pre-built dashboard for your traffic, product analytics enables you to track more granular events in your product and create customizable dashboards. So instead of just tracking pageviews, you're also tracking button clicks, links, form submissions, etc.
+
+Thankfully, it's easy to get up and running with product analytics. After you [install PostHog](/docs/getting-started/install), you'll automatically start capturing events in your application. And once you're capturing events and identity data, you can start turning those into insights.
+
+### 👀 Dashboards and Insights
+
+Product analytics enables you to create dashboards to monitor your KPIs. Each dashboard is a customizable collection of insights. For example, if you're building a habit streak application that depends on daily engagement, you might create a dashboard to track [_Daily Active Users_](/tutorials/dau-mau-ratio).
+
+You can build dashboards to answer specific questions about your product:
+
+- What percentage of people on the pricing page actually click a CTA?
+	- Filter for pageviews on the `/pricing` page where the `signup_cta_clicked` event was captured.
+	- Filter by the last 180 days and group by week.
+- How has the support contact rate changed over time?
+- What percentage of new orgs complete the onboarding process?
+- What do you need to do to [lower churn rate](tutorials/churn-rate)?
+
+### 📈 Trends
+
+Trends enable you to add a graph or numeric value to your dashboards. For instance, you can build a dashboard that includes a trend of how many new users signed up in the past 30 days (with a comparison of the previous 30 days).
+
+### 🧪 Funnels
+
+[Funnels](/docs/product-analytics/funnels) are another type of insight that can give you information about where friction points are. [Hasura](/customers/hasura) was able improve conversion rates 10-20% by identifying these points in their onboarding process:
+
+> "Using PostHog, we observed drop-offs at very particular stages of our onboarding flows. As a result, we took several actions such as moving these steps further down the funnel. These changes helped us deliver a 10-20% improvement in our conversion rate." Hasura engineer Rikin Kachhia
+
+## Takeaways
+
+There are a ton of other features beyond the scope of this post. But check out the [product analytics docs](/docs/product-analytics) for a treasure trove of guides and examples.
