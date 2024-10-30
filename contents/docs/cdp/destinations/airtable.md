@@ -21,7 +21,7 @@ Then add the **base** you want to create new records in.
 
 ![Airtable token configuration](https://res.cloudinary.com/dmukukwp6/image/upload/airtable_pat_7ce7c538e6.png)
 
-Next, you’ll want to visit Airtable’s [API reference](https://airtable.com/developers/web/api/introduction) to get your base ID, table name and field names.
+Next, you’ll want to visit Airtable’s [API reference](https://airtable.com/developers/web/api/introduction) to get your base ID, table name, and field names.
 
 ## Configuring PostHog’s Airtable destination
 
