@@ -9,12 +9,18 @@ import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
 import Layout from 'components/Layout'
 import { SEO } from '../seo'
-import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
+import TeamStat from './TeamStat'
 import { StaticImage } from 'gatsby-plugin-image'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import SideModal from 'components/Modal/SideModal'
 import { Profile } from '../../templates/Team'
+
+const pineappleOnPizzaStat = (teamMembersData: teamMembersDataProps[]): number[] => {
+    const pineappleOnPizzaStatIsTrue = teamMembersData.filter((item) => item.pineappleOnPizza === true)
+    const pineappleOnPizzaPercent = ((pineappleOnPizzaStatIsTrue.length / teamMembersData.length) * 100).toPrecision(2)
+    return [100 - Number(pineappleOnPizzaPercent), Number(pineappleOnPizzaPercent)]
+}
 
 export const TeamMember = (props) => {
     const { avatar, lastName, firstName, companyRole, country, squeakId, location, biography, setActiveProfile } = props
@@ -91,8 +97,8 @@ export default function People() {
     // Some Stats were used as fallback until the actual data is added to the GraphQL Server
     const teamStats = [
         {
-            data: pineappleOnPizzaStat(teamMembers) ? pineappleOnPizzaStat(teamMembers) : [60, 40],
-            caption: '(Correctly) think pineapple belongs on pizza',
+            data: pineappleOnPizzaStat(teamMembers) ?? [60, 40],
+            caption: '(Correctly) think pineapple does NOT belong on pizza',
             icon: '🍍 + 🍕',
         },
         {
