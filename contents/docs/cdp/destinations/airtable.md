@@ -25,14 +25,14 @@ Next, you’ll want to visit Airtable’s [API reference](https://airtable.com/d
 
 ## Configuring PostHog’s Airtable destination
 
-With these details gathered:
+You should have these details now:
 
 - Access token
 - Base ID
 - Table name
 - Field names
 
-we’re ready to set up the Airtable destination.
+With them, we’re ready to set up the Airtable destination.
 
 1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
 2. Click the 'Destinations' tab.
