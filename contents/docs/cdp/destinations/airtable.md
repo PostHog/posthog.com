@@ -50,7 +50,7 @@ The **Fields** editor enables you to map whatever PostHog [values](/docs/cdp/des
 
 In its experimental state, the Airtable destination will not batch its output to your base. If you trigger on events that happen more than five times per second, you’ll hit the Airtable API [rate limit](https://airtable.com/developers/web/api/rate-limits).
 
-So be selective about the events you forward to Airtable. Instead of every pageview, for example, maybe you want to send just the high-impact events like conversions. Use the **Filters** panel to set this up.
+So be selective about the events you forward to Airtable. Instead of every pageview, for example, just send the high-impact events like conversions. Use the **Filters** panel to set this up.
 
 ### Testing
 
