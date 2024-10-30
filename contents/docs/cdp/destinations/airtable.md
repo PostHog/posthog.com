@@ -42,7 +42,7 @@ Now we can plug in the above values.
 
 ![Airtable field mapping](https://res.cloudinary.com/dmukukwp6/image/upload/airtable_fields_597f303a7a.png)
 
-The **Fields** editor allows you to map whatever PostHog [values](/docs/cdp/destinations#input-formatting) you like to columns in your Airtable base. The keys on the left should match the names you’ve already set for columns in Airtable. Values on the right can be any property on a `person` or `event` instance.
+The **Fields** editor enables you to map whatever PostHog [values](/docs/cdp/destinations#input-formatting) you like to columns in your Airtable base. The keys on the left should match the names you’ve already set for columns in Airtable. Values on the right can be any property on a `person` or `event` instance.
 
 <HideOnCDPIndex>
 
