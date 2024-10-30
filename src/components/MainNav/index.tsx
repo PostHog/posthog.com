@@ -463,7 +463,7 @@ export const Main = () => {
                         <Link className="py-4 grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative" to="/">
                             {pathname === '/' && <ActiveBackground />}
                             {enterpriseMode ? (
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/MainNav/posthog-tm.png" className="h-6 mx-6" />
+                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/MainNav/posthog-tm.png" className="h-5 mx-6 relative" />
                             ) : (
                                 <Logo
                                     color={websiteTheme === 'dark' && 'white'}
