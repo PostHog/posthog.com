@@ -77,6 +77,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                 description={description || excerpt}
                 article
                 image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
             />
             <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
                 <div className="flex-1 transition-all pt-8 w-full">

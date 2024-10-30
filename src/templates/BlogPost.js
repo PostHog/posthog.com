@@ -203,6 +203,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 description={seo?.metaDescription || excerpt}
                 article
                 image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
             />
 
             <div className="flex flex-col-reverse @3xl:flex-row">

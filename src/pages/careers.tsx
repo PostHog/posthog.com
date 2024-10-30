@@ -37,6 +37,7 @@ const IndexPage = () => {
                 image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers.jpeg${
                     latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
                 }`}
+                imageType="absolute"
             />
 
             <CareersHero />

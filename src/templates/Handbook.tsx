@@ -355,6 +355,7 @@ export default function Handbook({
                 description={seo?.metaDescription || excerpt}
                 article
                 image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
             />
             <Layout>
                 <PostLayout
