@@ -2729,6 +2729,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/activecampaign',
                         },
                         {
+                            name: 'Airtable',
+                            url: '/docs/cdp/destinations/airtable',
+                        },
+                        {
                             name: 'Avo',
                             url: '/docs/cdp/destinations/avo',
                         },
