@@ -19,12 +19,10 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
     sessionReplay = true
 
     // Whether text inputs are masked. Default is true.
-    // This isn't supported for Jetpack Compose views.
     // Password inputs are always masked regardless
     sessionReplayConfig.maskAllTextInputs = true
 
     // Whether images are masked. Default is true.
-    // This isn't supported for Jetpack Compose views.
     sessionReplayConfig.maskAllImages = true
 
     // Capture logs automatically. Default is true.
