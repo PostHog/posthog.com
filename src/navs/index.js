@@ -1729,6 +1729,10 @@ export const docsMenu = {
                             url: '/docs/api/early-access-feature',
                         },
                         {
+                            name: 'Environments',
+                            url: '/docs/api/environments',
+                        },
+                        {
                             name: 'Event definitions',
                             url: '/docs/api/event-definitions',
                         },
