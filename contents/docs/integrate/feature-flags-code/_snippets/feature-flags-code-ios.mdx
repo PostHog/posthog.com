@@ -30,17 +30,41 @@ To handle this, you can use the `didReceiveFeatureFlags` notification to wait fo
 
 ```swift
 // Before SDK initialization
-NotificationCenter.default.addObserver(self, selector: #selector(receiveFeatureFlags), name: PostHogSDK.didReceiveFeatureFlags, object: nil)
-PostHogSDK.shared.setup(config)
+func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool { 
+    // your code
+
+    // Register to didReceiveFeatureFlags notification
+    NotificationCenter.default.addObserver(self, selector: #selector(receiveFeatureFlags), name: PostHogSDK.didReceiveFeatureFlags, object: nil)
+    PostHogSDK.shared.setup(config)
+
+    return true
+}
 
 // The "receiveFeatureFlags" method will be called when the SDK receives the feature flags from the server.
-
-// And/Or manually the SDK is initialized
-PostHogSDK.shared.reloadFeatureFlags {
-    if PostHogSDK.shared.isFeatureEnabled("flag-key") {
-        // do something
-    }
+@objc func receiveFeatureFlags() {
+    print("receiveFeatureFlags called")
 }
+```
+
+Or manually using the `reloadFeatureFlags` after the SDK is initialized: 
+
+
+``` swift
+// After SDK initialization
+func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool { 
+    // your code
+
+    PostHogSDK.shared.setup(config)
+
+    PostHogSDK.shared.reloadFeatureFlags {
+        if PostHogSDK.shared.isFeatureEnabled("flag-key") {
+            // do something
+        }
+    }
+
+    return true
+}
+
 ```
 
 ### Reloading feature flags
