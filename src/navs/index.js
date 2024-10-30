@@ -1729,6 +1729,10 @@ export const docsMenu = {
                             url: '/docs/api/early-access-feature',
                         },
                         {
+                            name: 'Environments',
+                            url: '/docs/api/environments',
+                        },
+                        {
                             name: 'Event definitions',
                             url: '/docs/api/event-definitions',
                         },
@@ -2723,6 +2727,10 @@ export const docsMenu = {
                         {
                             name: 'ActiveCampaign',
                             url: '/docs/cdp/destinations/activecampaign',
+                        },
+                        {
+                            name: 'Airtable',
+                            url: '/docs/cdp/destinations/airtable',
                         },
                         {
                             name: 'Avo',

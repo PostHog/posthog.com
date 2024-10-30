@@ -19,12 +19,10 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
     sessionReplay = true
 
     // Whether text inputs are masked. Default is true.
-    // This isn't supported for Jetpack Compose views.
     // Password inputs are always masked regardless
     sessionReplayConfig.maskAllTextInputs = true
 
     // Whether images are masked. Default is true.
-    // This isn't supported for Jetpack Compose views.
     sessionReplayConfig.maskAllImages = true
 
     // Capture logs automatically. Default is true.
@@ -35,8 +33,9 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
     // The screenshot may contain sensitive information, so use with caution
     sessionReplayConfig.screenshot = false
 
-    // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 500ms
-    sessionReplayConfig.debouncerDelayMs = 500
+    // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1000ms
+    // Ps: it was 500ms (0.5s) by default until version 3.8.2
+    sessionReplayConfig.debouncerDelayMs = 1000
 }
 ```
 
@@ -44,7 +43,6 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
 
 - Requires Android API >= 26.
 - Jetpack Compose is only supported if `screenshotMode` is enabled.
-  - Masking and redacting in Jetpack Compose isn't supported yet. We're investigating this [issue](https://github.com/PostHog/posthog-android/issues/158).
 - Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
 - WebView is not supported. A placeholder will be shown.
 - Keyboard is not supported. A placeholder will be shown.
