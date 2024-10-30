@@ -34,7 +34,9 @@ const IndexPage = () => {
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world.
                 Adventurers needed."
-                image={`/og-images/careers.jpeg${latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''}`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/careers.jpeg${
+                    latestJobCreatedAt ? `?${latestJobCreatedAt.getTime()}` : ''
+                }`}
             />
 
             <CareersHero />

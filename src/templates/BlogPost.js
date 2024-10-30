@@ -202,7 +202,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 title={seo?.metaTitle || title + ' - PostHog'}
                 description={seo?.metaDescription || excerpt}
                 article
-                image={`/og-images/${fields.slug.replace(/\//g, '')}.jpeg`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
             />
 
             <div className="flex flex-col-reverse @3xl:flex-row">
