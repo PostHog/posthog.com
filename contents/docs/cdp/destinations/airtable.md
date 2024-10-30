@@ -60,6 +60,8 @@ Once you’ve configured your Airtable destination, click **Start testing** to v
 
 Where possible, Airtable will convert values into native datatypes set in your columns. So, if you pass `event.timestamp` to an Airtable `Date` column, that will work just fine.
 
+***
+
 <TemplateParameters />
 
 ## FAQ
