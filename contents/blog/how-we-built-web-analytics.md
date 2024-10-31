@@ -1,5 +1,5 @@
 ---
-title: The hard parts of building a Google Analytics alternative
+title: "Building a Google Analytics alternative: the hard parts"
 date: 2024-10-24
 author:
  - lior-neu-ner
@@ -12,36 +12,49 @@ tags:
  - Guides
 ---
 
-Last month we finally launched [web analytics](/web-analytics), our Google Analytics alternative 🎉 You would think for a company that already does [product analytics](/product-analytics), adding web analytics would be easy. 
+There's a divide between marketing and product tools. 
 
-Alas, this is not the case. It took <TeamMember name="Robbie Coomber" /> a year to do it, and it's not because he's lazy. 
+On one hand there's [web analytics](/web-analytics), tools like Google Analytics and Plausible exist to serve marketing teams. They focus on analytics for your marketing site, and focus on metrics like top sources of traffic, bounce rate, and so on.
 
-Fundametally, they have different use cases and thus require different architectures. In this post, we dive into the differences between the two, the challenges we faced, and how we solved them.
+On the other hand, there's [product analytics](/product-analytics). Tools like PostHog, Mixpanel, and Amplitude exist to serve product teams. They focus on analytics for your product, and focus on metrics like feature adoption rate, user retention, and so on.
 
-![Photo of Robbie being lazy](placeholder)
-<Caption>Robbie. He's definitely not lazy.</Caption>
+But what ends up happening is that information is siloed in separate tools and separate teams. This makes it hard to get a complete picture of what's happening with your business. This makes it hard to answer questions like:
 
-## The difference between web and product analytics
+- What ad campaigns are giving you the best retention?
+- What pages on your website are driving the highest paying customers?
+- How do users who read your docs before signing up compare to those who don't?
 
-When people talk about **web analytics**, they're referring to tracking visitors on your marketing website. They care about things like page views, bounce rate, and top sources of traffic.
+ Our users were grumbling and they wanted us to fix this. So off <TeamMember name="Robbie Coomber" /> went to investigate how to build web analytics.
 
-On the other hand, **product analytics** tracks how people are using your web or mobile app. It gives you insights into metrics such as feature adoption rate, user retention, and churn.
+![Marketing and product teams](https://res.cloudinary.com/dmukukwp6/image/upload/989ry1_cc27ac90e3.jpg)
+![Siloed data](https://res.cloudinary.com/dmukukwp6/image/upload/989ry1_cc27ac90e3.jpg)
+![Siloed data](https://res.cloudinary.com/dmukukwp6/image/upload/download_2_e0046b3acb.jpeg)
 
-In practice, this means that for web analytics you care about _what_ people are doing on your website and _how many_ people are doing it, whereas in product analytics the _who_ is also important.
+## The gap between product and web analytics
 
+Up until now, PostHog only offered product analytics. You may think to yourself, "Well, why not just use product analytics for web analytics?" and the answer to this is "Yes you can, but...".
+
+<!-- Could maybe add a line here about how robbie built a dashboard -->
+
+There are two things holding back product analytics from being a world class tool for web analytics:
+
+1. **Cost**
+2. **Performance**
+
+But why is there a difference? Fundamentally, in web analytics you care about _what_ people are doing on your website and _how many_ people are doing it, but in product analytics the _who_ is also important. 
 ![Web analytics vs product analytics](https://res.cloudinary.com/dmukukwp6/image/upload/web_vs_prodyuct_21a8b644e9.png)
 
-Fundamentally, this makes web analytics simpler, and simpler means cheaper and faster. So if we used our existing product analytics architecture for web analytics, users would complain about the performance and costs.
+Ultimately, this makes product analytics more complex and expensive. So Robbie had to adapt our existing architecture to fix these.
 
-To understand the reasons why, let's dive into each one in detail.
+Let's dive into the two main issues between web and product analytics and how Robbie fixed them
 
-### 1. Why web analytics is cheaper
+### 1. Costs
+
+Product analytics is more expensive than web analytics because it has to deal with person profiles. Each event is associated with a unique person, and events need to aggregated for each person, regardless of if they're using app across multiple devices, platforms, or sessions.
 
 In web analytics, everything is session-based. A session consists of multiple events. Each event has properties set on it, such as the URL, device, and geolocation. When you query data, properties are read from the event. 
 
 This also means that in web analytics, there's no concept of a "person". So you cannot query based on person properties. For example, you cannot filter queries based on the date a user first signed up.
-
-Contrast this to product analytics, where each user has a person profile. This means that not only do events have properties, but so do people. For example, you might want to query based on the date a user first signed up. 
 
 ![Web events vs product events](https://res.cloudinary.com/dmukukwp6/image/upload/events_6caabf2705.png)
 
