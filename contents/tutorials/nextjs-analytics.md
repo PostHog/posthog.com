@@ -18,11 +18,11 @@ Next.js is a popular web framework built on React. It provides optimizations and
 
 In this tutorial, we will:
 
-1. build a basic Next.js blog with user authentication
-2. add PostHog to it
-3. set up the features of PostHog like custom event capture, user identification, and feature flags
+1. Build a basic Next.js blog with user authentication
+2. Add PostHog to it
+3. Set up the features of PostHog like custom event capture, user identification, and feature flags
 
-> If you use Next.js with the **app** router, check out our other [Next.js app router analytics tutorial](/tutorials/nextjs-app-directory-analytics).
+> If you use Next.js with the **app router**, check out our other [Next.js app router analytics tutorial](/tutorials/nextjs-app-directory-analytics).
 
 ## Creating our Next.js app
 
@@ -292,22 +292,23 @@ Now we will set up the `PostHogProvider` for our app. This enables you to access
 import { SessionProvider } from "next-auth/react"
 import posthog from "posthog-js"
 import { PostHogProvider } from 'posthog-js/react'
-
-// Check that PostHog is client-side
-if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
-    person_profiles: 'identified_only',
-    // Enable debug mode in development
-    loaded: (posthog) => {
-      if (process.env.NODE_ENV === 'development') posthog.debug()
-    }
-  })
-}
+import { useEffect } from 'react'
 
 export default function App(
   { Component, pageProps: { session, ...pageProps } }
 ) {
+
+  useEffect(() => {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
+      person_profiles: 'identified_only',
+      // Enable debug mode in development
+      loaded: (posthog) => {
+        if (process.env.NODE_ENV === 'development') posthog.debug()
+      }
+    })
+  }, [])
+
   return (
     <>
       <PostHogProvider client={posthog}>
@@ -335,7 +336,7 @@ To solve this, we can capture a custom event when the route changes using `next/
 ```js
 // pages/_app.js
 import { SessionProvider } from "next-auth/react"
-import { useRouter } from "next/router"
+import { Router } from "next/router"
 import { useEffect } from "react"
 import posthog from "posthog-js"
 import { PostHogProvider } from "posthog-js/react"
@@ -343,14 +344,15 @@ import { PostHogProvider } from "posthog-js/react"
 export default function App(
   { Component, pageProps: { session, ...pageProps } }
 ) {
-  const router = useRouter()
   useEffect(() => {
+    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+      // ... rest of the init code
+    })
     // Track page views
-    const handleRouteChange = () => posthog.capture('$pageview')
-    router.events.on('routeChangeComplete', handleRouteChange)
-
+    const handleRouteChange = () => posthog?.capture('$pageview')
+    Router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
-        router.events.off('routeChangeComplete', handleRouteChange)
+      Router.events.off('routeChangeComplete', handleRouteChange);
     }
   }, [])
 //... the rest of the code you wrote earlier
@@ -358,7 +360,7 @@ export default function App(
 
 Once you set this up, navigating between pages captures pageviews for each. The routes show up in the `URL/Screen` column in PostHog as well.
 
-> **Note**: when in React strict mode, `useEffect` runs twice: once to mount and again to remount. This means pageviews trigger twice. When you deploy and run an app in production, this doesn’t happen. To turn off strict mode in development, go to `next.config.js` and set `reactStrictMode` to `false`. Find more details about strict mode in [the React documentation](https://beta.reactjs.org/learn/synchronizing-with-effects#sending-analytics).
+> **Note**: When in React strict mode, `useEffect` runs twice. Once to mount and again to remount. This means pageviews trigger twice. When you deploy and run an app in production, this doesn’t happen. To turn off strict mode in development, go to `next.config.js` and set `reactStrictMode` to `false`. Find more details about strict mode in [the React documentation](https://beta.reactjs.org/learn/synchronizing-with-effects#sending-analytics).
 
 ## Capturing custom events
 

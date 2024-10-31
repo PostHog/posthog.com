@@ -104,22 +104,26 @@ export const CareersHero = () => {
     } = useStaticQuery(query)
 
     const jobs = useMemo(() => {
-        const sortedJobs = [...originalJobs];
+        const sortedJobs = [...originalJobs]
 
-        const productEngineerIndex = sortedJobs.findIndex(job => job.fields.title === "Product Engineer");
+        const productEngineerIndex = sortedJobs.findIndex((job) => job.fields.title === 'Product Engineer')
         if (productEngineerIndex !== -1) {
-            const [productEngineerJob] = sortedJobs.splice(productEngineerIndex, 1);
-            sortedJobs.unshift(productEngineerJob);
+            const [productEngineerJob] = sortedJobs.splice(productEngineerIndex, 1)
+            sortedJobs.unshift(productEngineerJob)
         }
 
-        const speculativeIndex = sortedJobs.findIndex(job => job.fields.title === "Speculative application");
+        const speculativeIndex = sortedJobs.findIndex((job) => job.fields.title === 'Speculative application')
         if (speculativeIndex !== -1) {
-            const [speculativeJob] = sortedJobs.splice(speculativeIndex, 1);
-            sortedJobs.push(speculativeJob);
+            const [speculativeJob] = sortedJobs.splice(speculativeIndex, 1)
+            sortedJobs.push(speculativeJob)
         }
 
-        return sortedJobs;
-    }, [originalJobs]);
+        return sortedJobs
+    }, [originalJobs])
+
+    if (!jobs?.length) {
+        return null
+    }
 
     const [selectedJob, setSelectedJob] = useState(jobs[0])
     const [processedHtml, setProcessedHtml] = useState('')
@@ -129,7 +133,10 @@ export const CareersHero = () => {
     const [selectedTeamName, setSelectedTeamName] = useState(teams[0])
     const selectedTeam = allTeams.find((team) => team.name.toLowerCase() === selectedTeamName.toLowerCase())
     const teamLength = selectedTeam.profiles?.data?.length
-    const teamURL = `/teams/${slugify(selectedTeam.name, { lower: true })}`
+    const teamURL = `/teams/${slugify((selectedTeam.name || '').toLowerCase().replace('ops', ''), {
+        lower: true,
+        remove: /and/,
+    })}`
     const pineapplePercentage =
         teamLength &&
         teamLength > 0 &&
@@ -281,7 +288,10 @@ export const CareersHero = () => {
                                 <>
                                     {websiteDescription ? (
                                         <div className="mb-4">
-                                            <p className="text-[15px]" dangerouslySetInnerHTML={{ __html: websiteDescription }} />
+                                            <p
+                                                className="text-[15px]"
+                                                dangerouslySetInnerHTML={{ __html: websiteDescription }}
+                                            />
                                         </div>
                                     ) : (
                                         <div
@@ -292,13 +302,14 @@ export const CareersHero = () => {
                                     {selectedJob.fields.title == 'Speculative application' && (
                                         <>
                                             <p className="text-[15px]">
-                                                We take exceptional people when they come along - and we really mean that!
+                                                We take exceptional people when they come along - and we really mean
+                                                that!
                                             </p>
 
                                             <p className="text-[15px]">
-                                                Don't see a specific role listed? That doesn't mean we won't have a spot for
-                                                you. Send us a speculative application and let us know how you think you could
-                                                contribute to PostHog.
+                                                Don't see a specific role listed? That doesn't mean we won't have a spot
+                                                for you. Send us a speculative application and let us know how you think
+                                                you could contribute to PostHog.
                                             </p>
                                         </>
                                     )}
@@ -309,7 +320,7 @@ export const CareersHero = () => {
                             </CallToAction>
                         </div>
                     </div>
-                    <div className="md:max-w-xs border-t md:border-t-0 md:border-l border-light dark:border-dark p-4 md:p-6 bg-accent/50 dark:bg-accent-dark">
+                    <div className="lg:max-w-xs border-t md:border-t-0 md:border-l border-light dark:border-dark p-4 md:p-6 bg-accent/50 dark:bg-accent-dark">
                         {teams.length > 1 && (
                             <p className="mb-2">
                                 <strong>{teams.length} small teams are hiring for this role</strong>

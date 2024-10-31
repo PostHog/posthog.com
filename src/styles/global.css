@@ -1491,6 +1491,10 @@ li.squeak-left-border {
 .community-post-markdown {
     @apply text-[15px] leading-normal break-words pb-3;
 
+    > div > *:last-child {
+        @apply mb-0;
+    }
+
     a {
         @apply font-semibold;
     }

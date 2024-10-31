@@ -354,7 +354,8 @@ export default function Handbook({
                 title={seo?.metaTitle || `${title} - ${breadcrumbBase.name} - PostHog`}
                 description={seo?.metaDescription || excerpt}
                 article
-                image={`/og-images/${slug.replace(/\//g, '')}.jpeg`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
             />
             <Layout>
                 <PostLayout

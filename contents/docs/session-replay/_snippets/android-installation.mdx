@@ -1,0 +1,49 @@
+> 🚧 **NOTE:** Android is considered `beta` and is free while in beta. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
+
+## Step one: Add PostHog to your app
+
+import AndroidInstall from "../../integrate/_snippets/install-android.mdx"
+
+<AndroidInstall />
+
+> Session replay requires PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases), and it's recommended to always use the latest version.
+
+## Step two: Configure replay settings
+
+Add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
+
+```android_kotlin
+val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
+    // Enable session recording. Requires enabling in your project settings as well.
+    // Default is false.
+    sessionReplay = true
+
+    // Whether text inputs are masked. Default is true.
+    // Password inputs are always masked regardless
+    sessionReplayConfig.maskAllTextInputs = true
+
+    // Whether images are masked. Default is true.
+    sessionReplayConfig.maskAllImages = true
+
+    // Capture logs automatically. Default is true.
+    sessionReplayConfig.captureLogcat = true
+
+    // Whether replays are created using high quality screenshots. Default is false.
+    // If disabled, replays are created using wireframes instead.
+    // The screenshot may contain sensitive information, so use with caution
+    sessionReplayConfig.screenshot = false
+
+    // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1000ms
+    // Ps: it was 500ms (0.5s) by default until version 3.8.2
+    sessionReplayConfig.debouncerDelayMs = 1000
+}
+```
+
+### Limitations
+
+- Requires Android API >= 26.
+- Jetpack Compose is only supported if `screenshotMode` is enabled.
+- Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
+- WebView is not supported. A placeholder will be shown.
+- Keyboard is not supported. A placeholder will be shown.
+- Flutter for Android isn't supported.

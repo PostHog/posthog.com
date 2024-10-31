@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import slugify from 'slugify'
 import { Link } from 'gatsby'
-import { StickerPineapple, StickerPineappleYes, StickerPineappleNo } from 'components/Stickers/Index'
+import { StickerPineapple, StickerPineappleYes, StickerPineappleNo, StickerPineappleUnknown } from 'components/Stickers/Index'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, A11y } from 'swiper/modules'
 import 'swiper/css'
@@ -279,19 +279,25 @@ export const Pizza = () => {
         <div className="max-w-2xl mx-auto">
           <p>
             Our small teams meet up in various places around the world. Pizza is often involved. Pineapple
-            on the pizza is <strike>optional</strike> contentious. Choose your team wisely.
+            on the pizza is <span className="opacity-60 line-through">optional</span> contentious.
+          </p>
+          <p className="mb-2">
+            <strong>Here's how our teams feel.</strong> (Choose your team wisely.)
           </p>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-10 md:gap-12 pt-6 pb-12">
+      <div className="grid md:grid-cols-3 gap-10 md:gap-6 lg:gap-12 pt-6 pb-12">
         <div>
-          <div className="font-bold mb-4 border-b border-light dark:border-dark pb-2 flex gap-2">
-            <StickerPineappleYes className="inline-block size-10" />
-            <h3 className="text-[19px] leading-tight m-0 pt-2">
-              Small teams who <span className="text-green">correctly agree</span> pineapple belongs on
-              pizza
-            </h3>
+          <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
+            <StickerPineappleYes className="inline-block size-12" />
+            <div className="flex-1 items-baseline gap-1 md:block">
+              <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">Small teams who<span className="hidden md:inline-block">...</span></p>
+              <h3 className="text-[19px] leading-tight m-0 font-bold">
+                <span className="text-green">CORRECTLY agree</span>
+              </h3>
+              <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">pineapple belongs on pizza</p>
+            </div>
           </div>
 
           <ul className="list-none p-0 space-y-3">
@@ -333,12 +339,73 @@ export const Pizza = () => {
             })}
           </ul>
         </div>
+
         <div>
-          <div className="font-bold mb-4 border-b border-light dark:border-dark pb-2 flex gap-2">
-            <StickerPineappleNo className="inline-block size-10" />
-            <h3 className="text-[19px] leading-tight m-0 pt-2">
-              Small teams who <span className="text-red">don't believe</span> pineapple belongs on pizza
-            </h3>
+          <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
+            <StickerPineappleUnknown className="inline-block size-12" />
+            <div className="flex-1 items-baseline gap-1 md:block">
+              <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">Small teams who<span className="hidden md:inline-block">...</span></p>
+              <div className="flex items-baseline gap-1">
+                <h3 className="text-[19px] leading-tight m-0 font-bold">
+                  <span className="text-yellow">are SPLIT</span>
+                </h3>
+                on whether
+              </div>
+              <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">pineapple belongs on pizza</p>
+            </div>
+          </div>
+
+          <ul className="list-none p-0 space-y-3">
+            {groupedTeams.exactly50.map((team) => {
+              const teamData = allTeams.nodes.find((node) => node.name === team.name)
+              const teamMiniCrest = getImage(teamData.miniCrest)
+              return (
+                <li key={team.name} className="">
+                  <div className="flex gap-2">
+                    {teamMiniCrest && (
+                      <GatsbyImage
+                        image={teamMiniCrest}
+                        alt={`${team.name} mini crest`}
+                        className="mr-2"
+                      />
+                    )}
+                    <div className="flex-1">
+                      <Link
+                        to={`/teams/${slugify(team.name.toLowerCase(), { remove: /and/ })}`}
+                        className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
+                      >
+                        {team.name}
+                      </Link>
+                      <div className="flex gap-2 items-center -mt-1">
+                        <div className="flex-1 relative h-2 w-full bg-accent dark:bg-white/10 rounded-full">
+                          <div
+                            className="absolute left-0 top-0 h-full bg-yellow rounded-full"
+                            style={{ width: `${team.pineapplePercentage}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-sm font-medium">
+                          {Math.round(team.pineapplePercentage)}%
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
+          <p className="text-sm mt-2 italic pl-14 font-medium">(You could break the tie!)</p>
+        </div>
+
+        <div>
+          <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center md:items-start">
+            <StickerPineappleNo className="inline-block size-12" />
+            <div className="flex-1 items-baseline gap-1 md:block">
+              <p className="m-0 text-[15px] md:text-sm mdlg:text-[15px] font-bold md:font-normal">Small teams who<span className="hidden md:inline-block">...</span></p>
+              <h3 className="text-[19px] leading-tight m-0 font-bold">
+                <span className="text-red">shockingly DISAGREE</span>
+              </h3>
+              <p className="text-[15px] md:text-sm mdlg:text-[15px] mb-0 font-bold md:font-normal">pineapple belongs on pizza</p>
+            </div>
           </div>
 
           <ul className="list-none p-0 space-y-3">
@@ -379,55 +446,6 @@ export const Pizza = () => {
               )
             })}
           </ul>
-
-          <div className="mt-8">
-            <div className="font-bold mb-4 border-b border-light dark:border-dark pb-2 flex gap-2">
-              <StickerPineapple className="inline-block size-10" />
-              <h3 className="text-[19px] leading-tight m-0 pt-2">
-                Small teams who are <span className="text-yellow">split</span> on pineapple on pizza
-              </h3>
-            </div>
-
-            <ul className="list-none p-0 space-y-3">
-              {groupedTeams.exactly50.map((team) => {
-                const teamData = allTeams.nodes.find((node) => node.name === team.name)
-                const teamMiniCrest = getImage(teamData.miniCrest)
-                return (
-                  <li key={team.name} className="">
-                    <div className="flex gap-2">
-                      {teamMiniCrest && (
-                        <GatsbyImage
-                          image={teamMiniCrest}
-                          alt={`${team.name} mini crest`}
-                          className="mr-2"
-                        />
-                      )}
-                      <div className="flex-1">
-                        <Link
-                          to={`/teams/${slugify(team.name.toLowerCase(), { remove: /and/ })}`}
-                          className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
-                        >
-                          {team.name}
-                        </Link>
-                        <div className="flex gap-2 items-center -mt-1">
-                          <div className="flex-1 relative h-2 w-full bg-accent dark:bg-white/10 rounded-full">
-                            <div
-                              className="absolute left-0 top-0 h-full bg-yellow rounded-full"
-                              style={{ width: `${team.pineapplePercentage}%` }}
-                            ></div>
-                          </div>
-                          <span className="text-sm font-medium">
-                            {Math.round(team.pineapplePercentage)}%
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                )
-              })}
-            </ul>
-            <p className="text-sm mt-2 italic pl-14 font-medium">(You could break the tie!)</p>
-          </div>
         </div>
       </div>
 

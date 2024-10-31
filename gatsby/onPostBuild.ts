@@ -245,7 +245,12 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
-    if (process.env.VERCEL_GIT_COMMIT_REF !== 'master') return
+    if (process.env.AWS_CODEPIPELINE !== 'true') {
+        console.log('Skipping onPostBuild tasks')
+        return
+    }
+
+    console.log('Running onPostBuild tasks')
 
     const { data } = await graphql(`
         query {
@@ -404,9 +409,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
         }
     `)
 
-    if (process.env.VERCEL_GIT_COMMIT_REF === 'master') {
-        await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
-    }
+    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
 
     const dir = path.resolve(__dirname, '../public/og-images')
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
