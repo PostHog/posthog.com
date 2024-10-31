@@ -67,12 +67,12 @@ const Teams: React.FC = () => {
                             </p>
 
                             <div className="grid grid-cols-3 gap-4 my-12">
-
                                 <TeamPatch
                                     name="Website & Vibes"
                                     imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
                                     color="purple"
                                     frame="half-round"
+                                    plaque="straight"
                                 />
 
                                 <TeamPatch
@@ -80,6 +80,7 @@ const Teams: React.FC = () => {
                                     imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
                                     color="purple"
                                     frame="square"
+                                    plaque="curved"
                                 />
 
                                 <TeamPatch
@@ -89,8 +90,8 @@ const Teams: React.FC = () => {
                                     textColor="[#1E2F46]"
                                     textShadow="dark"
                                     frame="rounded"
+                                    plaque="straight"
                                 />
-
                             </div>
 
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-5 text-center">
@@ -132,14 +133,16 @@ const Teams: React.FC = () => {
                                                                 className="cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark"
                                                             >
                                                                 <Tooltip
-                                                                    content={`${name} ${isTeamLead ? '(Team lead)' : ''
-                                                                        }`}
+                                                                    content={`${name} ${
+                                                                        isTeamLead ? '(Team lead)' : ''
+                                                                    }`}
                                                                     placement="top"
                                                                 >
                                                                     <img
                                                                         src={avatar?.data?.attributes?.url}
-                                                                        className={`w-10 h-10 rounded-full bg-${color ?? 'white dark:bg-accent-dark'
-                                                                            } border border-light dark:border-dark`}
+                                                                        className={`w-10 h-10 rounded-full bg-${
+                                                                            color ?? 'white dark:bg-accent-dark'
+                                                                        } border border-light dark:border-dark`}
                                                                         alt={name}
                                                                     />
                                                                 </Tooltip>

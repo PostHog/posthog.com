@@ -242,12 +242,16 @@ w-full
 
 border-team-purple-border
 bg-team-purple-bg
+fill-team-purple-plaque-bg
 bg-team-purple-plaque-bg
 bg-team-purple-plaque-bg-dark
 bg-team-purple-plaque-shadow
 
+fill-white
+
 border-team-yellow-border
 bg-team-yellow-bg
+fill-team-yellow-plaque-bg
 bg-team-yellow-plaque-bg
 bg-team-yellow-plaque-bg-dark
 bg-team-yellow-plaque-shadow

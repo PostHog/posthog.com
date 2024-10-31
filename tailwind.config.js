@@ -7,23 +7,6 @@ module.exports = {
     },
     darkMode: 'class', // or 'media' or 'class'
     theme: {
-        fill: {
-            current: 'currentColor',
-            white: 'white',
-
-            'lime-green': '#96E5B6',
-            blue: '#1D4AFF',
-            yellow: '#F7A501',
-            red: '#F54E00',
-            green: '#6AA84F',
-            primary: '#151515',
-
-            'gray-accent': '#D0D1C9',
-            'gray-accent-dark': '#2C2C2C',
-            'gray-accent-dark-hover': '#3D3D3D',
-            'gray-accent-light': '#E5E7E0',
-            'gray-accent-light-hover': '#C5C6C2',
-        },
         screens: {
             '2xs': '400px',
             xs: '482px',
@@ -78,9 +61,6 @@ module.exports = {
             highlight: 'rgba(235,157,42,.2)',
             footer: '#08042f',
 
-            'gray-accent-dark': '#2C2C2C',
-            'gray-accent-light': '#BFBFBC',
-            'gray-accent': '#E5E7E0',
             black: '#000',
             blue: '#2F80FA',
             gray: '#8F8F8C',
@@ -165,6 +145,7 @@ module.exports = {
                 button: ['MatterVF', 'sans-serif'],
                 nav: ['MatterVF', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
+                squeak: ['Squeak', 'sans-serif'],
                 comic: [
                     'Comic Sans MS',
                     'Comic Sans',
