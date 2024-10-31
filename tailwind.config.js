@@ -100,9 +100,9 @@ module.exports = {
 
             'team-purple-border': '#78689D',
             'team-purple-bg': '#E2D6FF',
-            'team-purple-bg-full': '#6A6686',
-            'team-purple-bg-full-dark': '#625E7E',
-            'team-purple-bg-shadow': '#47416C',
+            'team-purple-plaque-bg': '#6A6686',
+            'team-purple-plaque-bg-dark': '#625E7E',
+            'team-purple-plaque-shadow': '#47416C',
 
             'button-shadow': '#CD8407',
             'button-border': '#B17816',
