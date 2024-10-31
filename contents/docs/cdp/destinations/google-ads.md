@@ -44,7 +44,7 @@ You'll also need access to the relevant Google Cloud, Google Ads and Google Ads 
    9. In this case, the Conversion action ID is going to be the `send_to` value before the forward slash like `AW-XXXXXXXXXXX`
    <img alt="Steps to create a conversion action inside Google Ads" src="https://res.cloudinary.com/dmukukwp6/image/upload/2024_10_30_at_15_04_47_772e736817.gif"/>
 
-10. Press 'Create & Enable' and watch your 'conversions' get sent to Google Ads!
+10. Press **Create & Enable** and watch your conversions get sent to Google Ads!
 
 <HideOnCDPIndex>
 
