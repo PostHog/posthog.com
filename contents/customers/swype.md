@@ -20,7 +20,7 @@ toolsUsed:
 date: 2024-10-22
 ---
 
-Built in just over a month, [Swype](https://swype.jobs/) is an iOS app that helps people find new jobs using a tailored AI agent. Like Tinder for jobs, candidates can swipe left and right to dismiss or automatically apply for interesting roles — and the team has built PostHog into the app from the start to get the insights they need. 
+Built in just over a month, [Swype](https://swype.jobs/) is an iOS app that helps people find new jobs using a tailored AI agent. Like Tinder for jobs, candidates can swipe left and right to dismiss or automatically apply for interesting roles — and the team built PostHog into the app from the start to get the insights they need. 
 
 “We were considering options like Firebase Analytics or building our own analytics,” says Swipe’s founding full-stack engineer, David Alade. “We thought about either sending messages to our backend, or using something like Sentry to send logs from the app — but we settled on PostHog because of how easy it was to set everything up and present the data.”
 
@@ -32,7 +32,7 @@ Tempted by the monthly allowance of 5,000 free replays, David quickly deployed P
 
 ### One reason why PostHog is better than Netflix
 
-Since deploying mobile replays David has made it a habit to watch as many recordings as he can — sometimes even watching them in an uninterrupted stream when he doesn’t have a particular event he wants to filter by. 
+Since deploying mobile replays, David watches as many recordings as he can — sometimes even watching them in an uninterrupted stream when he doesn’t have a particular event he wants to filter by. 
 
 “Maybe I’m a little weird but sometimes I’ll just binge on mobile replays,” says David. “I’ll just put it on like it’s Netflix and I’ll watch them all and take notes as I go. I’ll use filters if I want to see what a specific user is doing, but if someone has paid in our app? I watch their replay from beginning to end and ask myself how I can make everyone else have this experience.”
 
@@ -44,7 +44,7 @@ David’s approach isn’t the only way to watch session recordings — there ar
 
 Mobile replays have also proven useful in other areas for David, such as testing new versions or monitoring some aspects of app performance. Console logs, for example, provide information about network latency that can sometimes help add context to a user’s behaviour. 
 
-“I’d say one of the underrated things about mobile replays is being able to see how the UI looks on smaller devices,” says David. “I don’t always want to test UI on every device size and will often test on my phone quickly — but I have a large phone. There have been a few times where I find an issue in replays 
+“I’d say one of the underrated things about mobile replays is being able to see how the UI looks on smaller devices,” says David. “I don’t always want to test the UI on every device size and will often test on my phone quickly — but I have a large phone. There have been a few times where I find an issue in replays. 
 
 The interoperability of tools in PostHog also means that David can use replays to get context on user behavior in other ways. It’s effortless to jump from a funnel in product analytics to a relevant replay, for example — and that helps the team get insights as the experiment with app design, pricing, and more. 
 
