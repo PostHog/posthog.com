@@ -15,7 +15,7 @@ The best way to add PostHog to your WordPress site depends on what version of Wo
 
 All of them require you to add the PostHog snippet with your project API key and instance address. You can get this from your project settings.
 
-### Option 1: Add a theme function
+### Option 1: Edit your theme's functions file
 
 [Theme functions](https://developer.wordpress.org/themes/basics/theme-functions/) enable you to add functionality to your WordPress site. This makes them a great way to add PostHog.
 
