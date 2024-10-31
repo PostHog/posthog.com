@@ -86,6 +86,8 @@ const Teams: React.FC = () => {
                                     name="Website & Vibes"
                                     imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
                                     color="yellow"
+                                    textColor="[#1E2F46]"
+                                    textShadow="dark"
                                     frame="rounded"
                                 />
 
