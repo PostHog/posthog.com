@@ -20,12 +20,13 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
   <ComparisonRow column1={"At-a-glance view of website traffic"} column2={"Analysis of product usage and user behavior"} feature="Use case" />
 </ComparisonTable>
 
-
 ## When should you use web analytics?
 
 You should use web analytics when you want a high-level overview of your site.
 
 Web analytics is about collecting aggregate data (how many people visited in total), as opposed to specific interactions (which users clicked on a CTA).
+
+When people talk about web analytics, they're referring to tracking visitors on your marketing website. They care about things like page views, bounce rate, and top sources of traffic.
 
 ### Dashboard
 
@@ -65,18 +66,28 @@ Using web analytics helps you figure out what content to work on next, what prod
 
 ## When should you use product analytics?
 
+![](https://res.cloudinary.com/dmukukwp6/image/upload/web_vs_prodyuct_21a8b644e9.png)
+
 You should use product analytics when you want to dive deeper into the usage of your product.
 
+On the other hand, product analytics tracks how people are using your web or mobile app. It gives you insights into metrics such as feature adoption rate, user retention, and churn.
+
+how people are interacting, and with product analytics _who_ is using it.
+
+- Building custom dashboards
 - Analyze specific users or groups of users
 - User cohorts
 - retentions
-- Building custom dashboards
 
 Using product analytics helps you understand the usage of specific products, the behavior of specific users, etc…
 
-## Technical Details
+## Under the hood
 
 Session-based vs. Event-based
+
+they have different use cases and thus require different architectures
+
+For more information, see [how we built web analytics](/blog/how-we-built-web-analytics.md)
 
 ## Links
 
