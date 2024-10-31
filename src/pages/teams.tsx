@@ -66,26 +66,30 @@ const Teams: React.FC = () => {
                                 <Link to="/handbook/company/small-teams">Learn more about why we have small teams</Link>
                             </p>
 
-                            <TeamPatch
-                                name="Website & Vibes"
-                                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
-                                color="purple"
-                                frame="half-round"
-                            />
+                            <div className="grid grid-cols-3 gap-4 my-12">
 
-                            <TeamPatch
-                                name="Website & Vibes"
-                                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
-                                color="purple"
-                                frame="rounded"
-                            />
+                                <TeamPatch
+                                    name="Website & Vibes"
+                                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
+                                    color="purple"
+                                    frame="half-round"
+                                />
 
-                            <TeamPatch
-                                name="Website & Vibes"
-                                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
-                                color="purple"
-                                frame="square"
-                            />
+                                <TeamPatch
+                                    name="Website & Vibes"
+                                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
+                                    color="purple"
+                                    frame="square"
+                                />
+
+                                <TeamPatch
+                                    name="Website & Vibes"
+                                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
+                                    color="yellow"
+                                    frame="rounded"
+                                />
+
+                            </div>
 
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-5 text-center">
                                 {allTeams.nodes.map(({ id, name, profiles, crest, leadProfiles }) => (

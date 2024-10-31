@@ -98,11 +98,17 @@ module.exports = {
             white: '#fff',
             yellow: '#F7A501',
 
-            'team-purple-border': '#78689D',
+            'team-purple-border': '#3C3154',
             'team-purple-bg': '#E2D6FF',
             'team-purple-plaque-bg': '#6A6686',
             'team-purple-plaque-bg-dark': '#625E7E',
             'team-purple-plaque-shadow': '#47416C',
+
+            'team-yellow-border': '#6D5838',
+            'team-yellow-bg': '#F6DEB9',
+            'team-yellow-plaque-bg': '#FFCD81',
+            'team-yellow-plaque-bg-dark': '#FFCD81',
+            'team-yellow-plaque-shadow': '#EDA840',
 
             'button-shadow': '#CD8407',
             'button-border': '#B17816',

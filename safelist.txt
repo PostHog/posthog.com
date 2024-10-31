@@ -239,3 +239,15 @@ w-72
 w-[(100%_+_4rem)]
 w-[calc(100%_+_3px)]
 w-full
+
+border-team-purple-border
+bg-team-purple-bg
+bg-team-purple-plaque-bg
+bg-team-purple-plaque-bg-dark
+bg-team-purple-plaque-shadow
+
+border-team-yellow-border
+bg-team-yellow-bg
+bg-team-yellow-plaque-bg
+bg-team-yellow-plaque-bg-dark
+bg-team-yellow-plaque-shadow
