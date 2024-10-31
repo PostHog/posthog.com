@@ -98,6 +98,12 @@ module.exports = {
             white: '#fff',
             yellow: '#F7A501',
 
+            'team-purple-border': '#78689D',
+            'team-purple-bg': '#E2D6FF',
+            'team-purple-bg-full': '#6A6686',
+            'team-purple-bg-full-dark': '#625E7E',
+            'team-purple-bg-shadow': '#47416C',
+
             'button-shadow': '#CD8407',
             'button-border': '#B17816',
             'button-shadow-dark': '#99660E',
