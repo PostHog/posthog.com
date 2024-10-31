@@ -23,9 +23,9 @@ You'll also need access to the relevant Google Cloud, Google Ads and Google Ads 
 
 4. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
 
-5. Click the 'Destinations' tab.
+5. Click the **Destinations** tab.
 
-6. Search for 'Google Ads Conversions' and select the destination.
+6. Search for **Google Ads Conversions** and select the destination.
 
 7. Connect your Google account at the configuration step.
 
