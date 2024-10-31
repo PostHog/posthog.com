@@ -4,12 +4,13 @@ interface TeamPatchProps {
   name: string;
   imageUrl: string;
   color: string;
+  frame: string;
 }
 
-export default function TeamPatch({ name, imageUrl, color }: TeamPatchProps) {
+export default function TeamPatch({ name, imageUrl, color, frame }: TeamPatchProps) {
   return (
     <div className="size-72 mx-auto flex items-end justify-center">
-      <div className={`relative w-48 h-64 shadow-xl border-4 mx-auto rounded-tl-[100px] rounded-tr-[100px] flex items-center justify-center border-team-${color}-border bg-team-${color}-bg`}>
+      <div className={`relative w-48 h-64 shadow-xl border-4 mx-auto flex items-center justify-center border-team-${color}-border bg-team-${color}-bg ${frame === 'half-round' ? 'rounded-tl-[100px] rounded-tr-[100px]' : frame === 'rounded' ? 'rounded-lg' : frame === 'square' ? '' : ''}`}>
         <div className={`left-round-behind w-3 h-1 border-l-2 border-b-2 border-black bg-team-${color}-plaque-shadow rounded-bl-full absolute left-[calc(-1rem_-_0px)] bottom-2.5`} />
         <div className={`right-round-behind w-3 h-1 border-r-2 border-b-2 border-black bg-team-${color}-plaque-shadow rounded-br-full absolute right-[calc(-1rem_-_0px)] bottom-2.5`} />
         <div className="banner-text-bg bg-white bg-opacity-80 border-2 border-black h-8 rounded-tl rounded-tr absolute bottom-4 -left-4 -right-4 z-10 flex items-center justify-center text-white uppercase font-lg font-bold" />

@@ -70,6 +70,21 @@ const Teams: React.FC = () => {
                                 name="Website & Vibes"
                                 imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
                                 color="purple"
+                                frame="half-round"
+                            />
+
+                            <TeamPatch
+                                name="Website & Vibes"
+                                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
+                                color="purple"
+                                frame="rounded"
+                            />
+
+                            <TeamPatch
+                                name="Website & Vibes"
+                                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
+                                color="purple"
+                                frame="square"
                             />
 
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-5 text-center">
