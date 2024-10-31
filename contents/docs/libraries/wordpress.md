@@ -1,5 +1,5 @@
 ---
-title: WordPress
+title: How to set up WordPress analytics with PostHog
 icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/wordpress.svg
 ---
@@ -10,12 +10,27 @@ Getting traffic, usage, and user behavior data about your [WordPress](https://ww
 
 The best way to add PostHog to your WordPress site depends on what version of WordPress you are using. 
 
-1. After [signing up for PostHog](https://us.posthog.com/signup), get your [snippet](/docs/getting-started/install?tab=snippet) with your project API key and instance address from [your project settings](https://us.posthog.com/settings/environment-details#snippet).
+All of them require you to [signup for PostHog](https://us.posthog.com/signup), get your [snippet](/docs/getting-started/install?tab=snippet) with your project API key and instance address from [your project settings](https://us.posthog.com/settings/environment-details#snippet), and add the PostHog snippet to your site.
 
+### Option 1: Use a plugin
 
-All of them require you to add the PostHog snippet with your project API key and instance address. You can get this from your project settings.
+The first option is to use a plugin. These enable you to easily add custom code to your site's header which we can use to add the PostHog snippet. 
 
-### Option 1: Edit your theme's functions file
+For **WordPress.com** users, this is also the only option. This is because you don't have access to the `header.php` or `functions.php` files. Using plugins does require their **Business** or **Commerce** plans.
+
+Two plugin options include:
+
+1. WordPress.com recommends using the free [Insert Headers and Footers](https://wordpress.com/plugins/insert-headers-and-footers) plugin. 
+
+2. If you are already using Google Tag Manager on your WordPress site with a plugin like [Site Kit](https://wordpress.org/plugins/google-site-kit/), you can add the PostHog snippet as a tag instead. See our [Google Tag Manager docs](/docs/libraries/google-tag-manager) for more information.
+
+The workflow for these is the same:
+
+1. Install the plugin.
+2. Add the PostHog snippet to the header via the plugin.
+3. Activate the plugin.
+
+### Option 2: Edit your theme's functions file
 
 [Theme functions](https://developer.wordpress.org/themes/basics/theme-functions/) enable you to add functionality to your WordPress site. This makes them a great way to add PostHog.
 
@@ -60,7 +75,7 @@ add_action('wp_head', 'add_posthog', 999);
 
 After saving your changes or clicking **Update File**, PostHog should begin to autocapture pageviews, clicks, and more.
 
-### Option 2: Edit your theme's header file
+### Option 3: Edit your theme's header file
 
 If you are using an older version of WordPress, you can edit the `header.php` file directly.
 
@@ -79,21 +94,3 @@ To confirm PostHog is configured correctly, visit your website and then check if
 > **Notes:** 
 > - Using the Theme Editor is very convenient, but you have to consider the potential drawbacks of having template files writable, which many prefer to disable for security purposes. Also, wrongfully editing a file may cause problems so be sure to perform appropriate backups before attempting this.
 > - If your theme auto-updates, manually editing the `header.php` file may lose your settings. Making a [Child Theme](https://developer.wordpress.org/themes/advanced-topics/child-themes/) is the recommended approach.
-
-### Option 3: Use a plugin
-
-The final option is to use a plugin. These enable you to easily add custom code to your site's header which we can use to add the PostHog snippet. 
-
-For **WordPress.com** users, this is also the only option. This is because you don't have access to the `header.php` or `functions.php` files. Using plugins does require their **Business** or **Commerce** plans.
-
-Two plugin options include:
-
-1. WordPress.com recommends using the free [Insert Headers and Footers](https://wordpress.com/plugins/insert-headers-and-footers) plugin. 
-
-2. If you are already using Google Tag Manager on your WordPress site with a plugin like [Site Kit](https://wordpress.org/plugins/google-site-kit/), you can add the PostHog snippet as a tag instead. See our [Google Tag Manager docs](/docs/libraries/google-tag-manager) for more information.
-
-The workflow for these is the same:
-
-1. Install the plugin.
-2. Add the PostHog snippet to the header via the plugin.
-3. Activate the plugin.
