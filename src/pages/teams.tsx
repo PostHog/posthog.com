@@ -75,7 +75,7 @@ const Teams: React.FC = () => {
                                         className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-2 md:p-4 hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px"
                                     >
                                         <GatsbyImage image={getImage(crest)} alt={`${name} Team`} />
-                                        <h3 className="text-base my-2 leading-snug">{name} Team</h3>
+                                        <h3 className="text-base my-2 leading-snug">{name}</h3>
                                         <div className="flex justify-center -mr-3" dir="rtl">
                                             {profiles.data
                                                 .slice()

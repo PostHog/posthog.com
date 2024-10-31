@@ -143,7 +143,7 @@ export const CareersHero = () => {
         Math.round(
             (selectedTeam.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length /
                 teamLength) *
-                100
+            100
         )
 
     const [isLoading, setIsLoading] = useState(true)
@@ -208,17 +208,15 @@ export const CareersHero = () => {
                             return (
                                 <li key={job.fields.title} className="">
                                     <button
-                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${
-                                            selectedJob.fields.title === job.fields.title
-                                                ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
-                                                : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
-                                        }`}
+                                        className={`w-full flex flex-col text-left px-2 py-1 rounded border border-b-3 ${selectedJob.fields.title === job.fields.title
+                                            ? 'border-light dark:border-dark bg-white dark:bg-accent-dark'
+                                            : 'hover:bg-light/50 hover:dark:bg-dark/50 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                                            }`}
                                         onClick={() => setSelectedJob(job)}
                                     >
                                         <span
-                                            className={`font-semibold text-[15px] ${
-                                                selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
-                                            }`}
+                                            className={`font-semibold text-[15px] ${selectedJob.fields.title === job.fields.title ? 'font-bold' : ''
+                                                }`}
                                         >
                                             {job.fields.title}
                                         </span>
@@ -248,32 +246,30 @@ export const CareersHero = () => {
                         <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                             <Detail
                                 title="Location"
-                                value={`Remote${
-                                    selectedJob.parent.customFields.find(
+                                value={`Remote${selectedJob.parent.customFields.find(
+                                    (field: { title: string }) => field.title === 'Location(s)'
+                                )?.value
+                                    ? ` (${selectedJob.parent.customFields.find(
                                         (field: { title: string }) => field.title === 'Location(s)'
-                                    )?.value
-                                        ? ` (${
-                                              selectedJob.parent.customFields.find(
-                                                  (field: { title: string }) => field.title === 'Location(s)'
-                                              ).value
-                                          })`
-                                        : ''
-                                }`}
+                                    ).value
+                                    })`
+                                    : ''
+                                    }`}
                                 icon={<Location />}
                             />
                             {selectedJob.parent.customFields.find(
                                 (field: { title: string }) => field.title === 'Timezone(s)'
                             )?.value && (
-                                <Detail
-                                    title="Timezone(s)"
-                                    value={
-                                        selectedJob.parent.customFields.find(
-                                            (field: { title: string }) => field.title === 'Timezone(s)'
-                                        ).value
-                                    }
-                                    icon={<Timezone />}
-                                />
-                            )}
+                                    <Detail
+                                        title="Timezone(s)"
+                                        value={
+                                            selectedJob.parent.customFields.find(
+                                                (field: { title: string }) => field.title === 'Timezone(s)'
+                                            ).value
+                                        }
+                                        icon={<Timezone />}
+                                    />
+                                )}
                         </ul>
 
                         <div className="job-content mt-4">
@@ -324,7 +320,7 @@ export const CareersHero = () => {
                             </CallToAction>
                         </div>
                     </div>
-                    <div className="md:max-w-xs border-t md:border-t-0 md:border-l border-light dark:border-dark p-4 md:p-6 bg-accent/50 dark:bg-accent-dark">
+                    <div className="lg:max-w-xs border-t md:border-t-0 md:border-l border-light dark:border-dark p-4 md:p-6 bg-accent/50 dark:bg-accent-dark">
                         {teams.length > 1 && (
                             <p className="mb-2">
                                 <strong>{teams.length} small teams are hiring for this role</strong>
