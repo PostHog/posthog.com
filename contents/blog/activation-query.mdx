@@ -1,6 +1,6 @@
 ---
 date: 2024-10-31
-title: The exact query we used to find our activaiton metric
+title: The exact query we used to find our activation metric
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,14 +8,14 @@ hideAnchor: true
 author:
   - raquel-smith
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/DEF-NOT-THIS-IMAGE.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
-category: IDK!
+category: Engineering
 tags:
-  - idk!
+  - Product analytics
+  - Product engineers
+  - Growth
 ---
-
-# The exact query we used to find our activation metric
 
 Activation gets talked about a lot. It's the second A in the pirate metrics framework. It's the thing that defines the "ah-ha" moment for your users. It's the thing that lets you know if your users are going to find success with your product.
 
@@ -31,7 +31,7 @@ But before we jump in... what even _is_ activation?
 
 An activation metric is a set of actions a user performs that are correlated with greater retention.
 
-In other words, imagine you have actions A through Z. if users who do actions D, K, and L are more likely to still be using your platform at some point down the line, then D, K, and L combined are your activation metric. We might think that actions B, F, and G are good things for them to do - but if they aren't correlated with retention, then they aren't part of your activation metric.
+In other words, imagine you have actions A through Z. If users who do actions D, K, and L are more likely to still be using your platform at some point down the line, then D, K, and L combined are your activation metric. We might think that actions B, F, and G are good things for them to do, but if they aren't correlated with retention, then they aren't part of your activation metric.
 
 ### What is PostHog's activation metric?
 
@@ -58,7 +58,7 @@ Step 2: Create groups of 3-5 events that you can test together. Aim for 5-10 dif
 
 Step 3: Use the query below to test the metric for retention. You're looking for a retention percentage that's nominally higher than your average retention rate for all users.
 
-- Make sure there are enough users in each month cohort to generate good results. If only 2 groups did all the activation steps, their retention rate isn't going to be very trustworthy.
+- Make sure there are enough users in each month's cohort to generate good results. If only 2 groups did all the activation steps, their retention rate isn't going to be very trustworthy.
 
 Remember: retention is your guide. Your activation metric is a reflection of your retention rate - because people who activate are more likely to continue using your product.
 
@@ -66,11 +66,11 @@ Remember: retention is your guide. Your activation metric is a reflection of you
 
 If you use PostHog, you can use our same exact query to explore your data and find your activation metric.
 
-First I'll break the query down into bits to explain what's happening, then I'll provide the whole thing in one chunk at the end.
+First, I'll break the query down into bits to explain what's happening, then I'll provide the whole thing in one chunk at the end.
 
 #### Step 1. Get all the orgs who started with your product, broken down by month
 
-Find an event that represents when a user starts with your product. For many products, this can simply be when the user first signed up. Because this is querying off the events table directly, you can't use an Action for this (or any of the events in the query) - it has to be a "manually" collected event (ie one that is defined in your codebase).
+Find an event that represents when a user starts with your product. For many products, this can simply be when the user first signed up. Because this is querying off the events table directly, you can't use an action for this (or any of the events in the query) - it must be a "manually" collected event (i.e. one defined in your codebase).
 
 Use that event in this step of the query, which then breaks the users apart by month that they started. If you use groups, you'll also need to include the group ID so that you're filtering everything else down the funnel by group ID.
 
@@ -119,7 +119,7 @@ downfunnel AS (
 
 #### Step 3. Calculate which groups were successful after they started in the funnel
 
-"Successful" groups are ones who do all the criteria from one of the event groupings your identified in step 2 (the first step two). You can check that they did the event at all (`>= 0`), or that they did it multiple times (`>= N-times`).
+"Successful" groups are ones who meet all the criteria from one of the event groupings you identified in step 2 (the first step two). You can check that they did the event at all (`>= 0`), or that they did it multiple times (`>= N-times`).
 
 ```sql
 successful_orgs AS (
@@ -158,7 +158,7 @@ retained AS (
 
 #### Step 5. Put it all together
 
-The final SELECT statement then just gathers up all the info, does some calcs across it, and presents it to you in a nice table from oldest to newest month.
+The final `SELECT` statement then just gathers up all the info, does some calcs across it, and presents it to you in a nice table from oldest to newest month.
 
 ```sql
 SELECT
@@ -258,7 +258,7 @@ It's possible you have too few users coming in, or not enough consistency in the
 
 ## Should I drop all my other plans to focus on activation?
 
-Definitely not. If you've built a good product, people will likely find a way to use it. First focus on finding PMF for your product, and use activation as an optimization layer on top of a solid product.
+Definitely not. If you've built a good product, people will likely find a way to use it. First, focus on finding PMF for your product, and use activation as an optimization layer on top of a solid product.
 
 ## Conclusion
 
