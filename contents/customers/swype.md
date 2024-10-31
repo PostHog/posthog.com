@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/swype_logo_dark_acb437c1ef.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog_great_expectations_f90a29aa4d.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/swype_34c89913d9.png
 featuredCustomer: false
 industries:
   - 'Recruitment, Data'
