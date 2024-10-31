@@ -159,9 +159,7 @@ export const TeamMemberLink = (person = false) => {
                                             >
                                                 <img
                                                     src={avatar?.formats?.thumbnail?.url}
-                                                    alt={
-                                                        person ? [firstName, lastName].filter(Boolean).join(' ') : name
-                                                    }
+                                                    alt={displayName}
                                                     className="w-full aspect-square"
                                                 />
                                             </div>
