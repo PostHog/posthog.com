@@ -1,0 +1,265 @@
+---
+date: 2024-10-31
+title: The exact query we used to find our activaiton metric
+rootPage: /blog
+sidebar: Blog
+showTitle: true
+hideAnchor: true
+author:
+  - raquel-smith
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/DEF-NOT-THIS-IMAGE.png
+featuredImageType: full
+category: IDK!
+tags:
+  - idk!
+---
+
+# The exact query we used to find our activation metric
+
+Activation gets talked about a lot. It's the second A in the pirate metrics framework. It's the thing that defines the "ah-ha" moment for your users. It's the thing that lets you know if your users are going to find success with your product.
+
+In a word, it's _important_.
+
+But it's also really difficult to define.
+
+We have 8+ products, and _each_ of them needs to get activated into separately. So we spent a lot of time figuring out how to _figure out_ what our activation metrics are. And because we did this all inside of PostHog, we figured we'd share it with you, so you can do the same!
+
+But before we jump in... what even _is_ activation?
+
+## What is an activation metric?
+
+An activation metric is a set of actions a user performs that are correlated with greater retention.
+
+In other words, imagine you have actions A through Z. if users who do actions D, K, and L are more likely to still be using your platform at some point down the line, then D, K, and L combined are your activation metric. We might think that actions B, F, and G are good things for them to do - but if they aren't correlated with retention, then they aren't part of your activation metric.
+
+### What is PostHog's activation metric?
+
+We can look at session replay. Based on our analysis, users who:
+
+- Watch 5 session replays
+- Set replay filters > 0 times
+
+are much more likely to still be using session replay in 3 months time than people who didn't do those things.
+
+## What do I do with the activation metric?
+
+You push for it, of course! If you know you need people to do actions D, K, and L, you can email them about those things, track it in your metrics, run experiments to get more people using it, etc.
+
+For session replay, we email people pretty soon off the bat if they've shown interest in the product but haven't activated.
+
+## How do I find my activation metric?
+
+Fortunately, by using the query in this article, finding your activation metric should be relatively easy.
+
+Step 1: Create a list of events that you think might "hook" your user into using your product.
+
+Step 2: Create groups of 3-5 events that you can test together. Aim for 5-10 different groupings, including the number of times the event occurs - sometimes users have to do something more than once to reach their "ah-ha" moment.
+
+Step 3: Use the query below to test the metric for retention. You're looking for a retention percentage that's nominally higher than your average retention rate for all users.
+
+- Make sure there are enough users in each month cohort to generate good results. If only 2 groups did all the activation steps, their retention rate isn't going to be very trustworthy.
+
+Remember: retention is your guide. Your activation metric is a reflection of your retention rate - because people who activate are more likely to continue using your product.
+
+### Activation query
+
+If you use PostHog, you can use our same exact query to explore your data and find your activation metric.
+
+First I'll break the query down into bits to explain what's happening, then I'll provide the whole thing in one chunk at the end.
+
+#### Step 1. Get all the orgs who started with your product, broken down by month
+
+Find an event that represents when a user starts with your product. For many products, this can simply be when the user first signed up. Because this is querying off the events table directly, you can't use an Action for this (or any of the events in the query) - it has to be a "manually" collected event (ie one that is defined in your codebase).
+
+Use that event in this step of the query, which then breaks the users apart by month that they started. If you use groups, you'll also need to include the group ID so that you're filtering everything else down the funnel by group ID.
+
+```sql
+WITH starting_orgs AS (
+   SELECT
+      organization_id,
+      start_date,
+      start_month
+   FROM (
+      SELECT
+         person.properties.organization_id as organization_id, -- some unique id for the group
+         toDate(timestamp) as start_date,
+         toStartOfMonth(toDate(timestamp)) as start_month,
+         ROW_NUMBER() OVER(PARTITION BY person.properties.organization_id ORDER BY toDate(timestamp)) as rn
+      FROM events
+      WHERE toDate(timestamp) >= now() - interval 6 month
+      event = 'user signed up' -- the event that defines the start of the funnel
+      AND properties.some_prop = 'my_prop' -- any properties you want to filter on
+   ) sub
+   WHERE sub.rn = 1
+),
+```
+
+#### Step 2. Gather up all the events that are important for activation in the downfunnel
+
+Take your events that you identified in step 1 above (NOTE TO EDITOR: having multiple sets of steps here is confusing, maybe we should combine it all into one list) and filter for them in this part of the query:
+
+```sql
+downfunnel AS (
+  SELECT
+    person.properties.organization_id as organization_id, -- again, the unique id for the group
+    toDate(timestamp) as date_str,
+    toStartOfMonth(toDate(timestamp)) as event_month,
+    -- below, the events that might make up an activation metric. Anywhere from 2-5 events usually.
+    sum(CASE WHEN event ='important button clicked' THEN 1 ELSE 0 END) as event_1,
+    sum(CASE WHEN event = 'thing saved to db' THEN 1 ELSE 0 end) as event_2,
+    sum(CASE WHEN event = 'team member invited' THEN 1 ELSE 0 end) as event_3
+  FROM events
+  WHERE toDate(timestamp) >= now() - interval 6 month
+  -- filter by the events here
+  AND event IN ('important button clicked', 'thing saved to db', 'team member invited')
+  GROUP BY 1,2
+),
+```
+
+#### Step 3. Calculate which groups were successful after they started in the funnel
+
+"Successful" groups are ones who do all the criteria from one of the event groupings your identified in step 2 (the first step two). You can check that they did the event at all (`>= 0`), or that they did it multiple times (`>= N-times`).
+
+```sql
+successful_orgs AS (
+  SELECT
+    starting_orgs.organization_id
+  from starting_orgs
+  join downfunnel on starting_orgs.organization_id = downfunnel.organization_id
+  where downfunnel.date_str >= starting_orgs.start_date
+  and downfunnel.date_str <= starting_orgs.start_date + interval 30 day -- this interval is the amount of time someone has to complete all the activation events. you can try moving it up or down.
+  group by 1
+  -- below, define the number of times you want each event to happen. Sometimes people have to do an event 2 or 3 times before they "get it."
+  having sum(coalesce(downfunnel.event_1, 0)) >= 1 AS event_1
+  AND sum(coalesce(downfunnel.event_2, 0)) >= 2 AS event_2
+  AND sum(coalesce(downfunnel.event_3, 0)) >= 1 AS event_3
+),
+```
+
+#### Step 4. For the groups that were successful, calculate their retention 3 months later
+
+This is how we identify if our activation metric is good - did we see a higher retention 3 months later than we see on average for all users?
+
+The retention events are possibly different, but maybe the same, as the activation events. It can be as simple as someone logging in, or actually creating new things in your product, or a list of potential activities. Whatever tells you they are an active user.
+
+```sql
+retained AS (
+  SELECT
+    DISTINCT e.person.properties.organization_id as organization_id
+  FROM events e
+  JOIN starting_orgs ON e.person.properties.organization_id = starting_orgs.organization_id
+  WHERE toDate(timestamp) >= starting_orgs.start_date + interval 3 month
+  and toDate(timestamp) <= starting_orgs.start_date + interval 4 month
+  -- below, any events that tell you that the user/group is still using the product 3 months later
+  AND event IN ('certain page viewed', 'thing saved to db', 'button clicked', 'logged in')
+)
+```
+
+#### Step 5. Put it all together
+
+The final SELECT statement then just gathers up all the info, does some calcs across it, and presents it to you in a nice table from oldest to newest month.
+
+```sql
+SELECT
+    starting_orgs.start_month,
+    COUNT(DISTINCT starting_orgs.organization_id) as total_starting_orgs,
+    COUNT(DISTINCT successful_orgs.organization_id) as total_orgs_activated,
+    round((COUNT(DISTINCT successful_orgs.organization_id) * 100.0 / coalesce(COUNT(DISTINCT starting_orgs.organization_id), 0)), 2) as activation_percentage,
+    COUNT(DISTINCT CASE WHEN retained.organization_id IS NOT NULL THEN successful_orgs.organization_id else null END) as total_activated_orgs_survived,
+    round((COUNT(DISTINCT retained.organization_id) * 100.0 / coalesce(COUNT(DISTINCT successful_orgs.organization_id), 0)), 2) as retained_percentage_of_activated
+FROM starting_orgs
+LEFT JOIN successful_orgs ON starting_orgs.organization_id = successful_orgs.organization_id
+LEFT JOIN retained ON successful_orgs.organization_id = retained.organization_id
+GROUP BY starting_orgs.start_month
+ORDER BY starting_orgs.start_month
+```
+
+### Step 6. Run the query for each potential activation metric you've listed
+
+Earlier you wrote out 5-10 potential groupings of metrics that could indicate successful activation. Run the query for each of those groupings, saving the resulting table somewhere so you can compare across groupings. Find the grouping that has the most users with the highest final retention. If you can't identify one, try playing with the number of times things happen - sometimes people need to do something quite a few times before it becomes a habit.
+
+#### The final query
+
+```sql
+WITH starting_orgs AS (
+   SELECT
+      organization_id,
+      start_date,
+      start_month
+   FROM (
+      SELECT
+         person.properties.organization_id as organization_id, -- some unique id for the group
+         toDate(timestamp) as start_date,
+         toStartOfMonth(toDate(timestamp)) as start_month,
+         ROW_NUMBER() OVER(PARTITION BY person.properties.organization_id ORDER BY toDate(timestamp)) as rn
+      FROM events
+      WHERE toDate(timestamp) >= now() - interval 6 month
+      event = 'user signed up' -- the event that defines the start of the funnel
+      AND properties.some_prop = 'my_prop' -- any properties you want to filter on
+   ) sub
+   WHERE sub.rn = 1
+), downfunnel AS (
+  SELECT
+    person.properties.organization_id as organization_id, -- again, the unique id for the group
+    toDate(timestamp) as date_str,
+    toStartOfMonth(toDate(timestamp)) as event_month,
+    -- below, the events that might make up an activation metric. Anywhere from 2-5 events usually.
+    sum(CASE WHEN event ='important button clicked' THEN 1 ELSE 0 END) as event_1,
+    sum(CASE WHEN event = 'thing saved to db' THEN 1 ELSE 0 end) as event_2,
+    sum(CASE WHEN event = 'team member invited' THEN 1 ELSE 0 end) as event_3
+  FROM events
+  WHERE toDate(timestamp) >= now() - interval 6 month
+  -- filter by the events here
+  AND event IN ('important button clicked', 'thing saved to db', 'team member invited')
+  GROUP BY 1,2
+), successful_orgs AS (
+  SELECT
+    starting_orgs.organization_id
+  from starting_orgs
+  join downfunnel on starting_orgs.organization_id = downfunnel.organization_id
+  where downfunnel.date_str >= starting_orgs.start_date
+  and downfunnel.date_str <= starting_orgs.start_date + interval 30 day -- this interval is the amount of time someone has to complete all the activation events. you can try moving it up or down.
+  group by 1
+  -- below, define the number of times you want each event to happen. Sometimes people have to do an event 2 or 3 times before they "get it."
+  having sum(coalesce(downfunnel.event_1, 0)) >= 1 AS event_1
+  AND sum(coalesce(downfunnel.event_2, 0)) >= 2 AS event_2
+  AND sum(coalesce(downfunnel.event_3, 0)) >= 1 AS event_3
+),
+retained AS (
+  SELECT
+    DISTINCT e.person.properties.organization_id as organization_id
+  FROM events e
+  JOIN starting_orgs ON e.person.properties.organization_id = starting_orgs.organization_id
+  WHERE toDate(timestamp) >= starting_orgs.start_date + interval 3 month
+  and toDate(timestamp) <= starting_orgs.start_date + interval 4 month
+  -- below, any events that tell you that the user/group is still using the product 3 months later
+  AND event IN ('certain page viewed', 'thing saved to db', 'button clicked', 'logged in')
+)
+SELECT
+    starting_orgs.start_month,
+    COUNT(DISTINCT starting_orgs.organization_id) as total_starting_orgs,
+    COUNT(DISTINCT successful_orgs.organization_id) as total_orgs_activated,
+    round((COUNT(DISTINCT successful_orgs.organization_id) * 100.0 / coalesce(COUNT(DISTINCT starting_orgs.organization_id), 0)), 2) as activation_percentage,
+    COUNT(DISTINCT CASE WHEN retained.organization_id IS NOT NULL THEN successful_orgs.organization_id else null END) as total_activated_orgs_survived,
+    round((COUNT(DISTINCT retained.organization_id) * 100.0 / coalesce(COUNT(DISTINCT successful_orgs.organization_id), 0)), 2) as retained_percentage_of_activated
+FROM starting_orgs
+LEFT JOIN successful_orgs ON starting_orgs.organization_id = successful_orgs.organization_id
+LEFT JOIN retained ON successful_orgs.organization_id = retained.organization_id
+GROUP BY starting_orgs.start_month
+ORDER BY starting_orgs.start_month
+```
+
+If you're not using PostHog, you can use the above query as a guide for writing your query for another platform.
+
+## What if I don't find a good metric?
+
+It's possible you have too few users coming in, or not enough consistency in their behaviors. This is a good opportunity to do some qualitative analysis via surveys or user interviews - what are people coming to you for? When did they first find success? Why did they leave?
+
+## Should I drop all my other plans to focus on activation?
+
+Definitely not. If you've built a good product, people will likely find a way to use it. First focus on finding PMF for your product, and use activation as an optimization layer on top of a solid product.
+
+## Conclusion
+
+One of the most challenging metrics to figure out is your activation metric. But it's also incredibly important. A good activation metric will help you understand what your users need to do in their first few days with you as a user in order to find success and stick with you for the long run.
