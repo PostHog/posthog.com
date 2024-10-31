@@ -1,6 +1,6 @@
 ---
 title: 'How Swype uses mobile session replays for testing, user insights'
-customer: Great Expectations
+customer: Swype
 logo: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/swype_34c89913d9.png
 logoDark: >-
