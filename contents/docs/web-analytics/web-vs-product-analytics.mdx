@@ -20,21 +20,48 @@ import { ComparisonRow } from 'components/ComparisonTable/row'
   <ComparisonRow column1={"At-a-glance view of website traffic"} column2={"Analysis of product usage and user behavior"} feature="Use case" />
 </ComparisonTable>
 
-Web analytics relies on a subset of the events and properties used by product analytics. This means you can use both in tandem.
 
 ## When should you use web analytics?
 
-- You should use web analytics when you want a high-level overview of your site…
-- Visitors: how many people are visiting?
-- Paths: which pages are they visiting?
-- Sources: what are the different sources of traffic to your website?
-- Locations: where are visitors located?
-- Device: did they use a desktop or tablet or phone?
-- Browser: what browser were they using?
-- Bounce rates
+You should use web analytics when you want a high-level overview of your site.
+
+Web analytics is about collecting aggregate data (how many people visited in total), as opposed to specific interactions (which users clicked on a CTA).
+
+### Dashboard
+
+Web analytics gives you a single [dashboard](/docs/web-analytics/dashboard) (as opposed to multiple customizable dashboards with product analytics).
+
+![Web analytics dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_dark_mode_2024_10_6aa6dc9aeb.png)
+
+You can use web analytics to answer questions based on your website traffic.
+
+- **Visitors**
+  - how many people are currently online right now?
+  - how many people visited in the last N days?
+- **Paths**
+  - which pages are they visiting?
+  - what's the bounce rate?
+  - scroll depth?
+- **Sources**
+  - what are the different sources of traffic to your website?
+  - PostHog automatically classifies traffic into specific acquisition [channel types](/docs/web-analytics/dashboard#channel-types).
+- **Locations**
+  - where are visitors located geographically?
+- **Devices**
+  - did they use a desktop or tablet or phone?
+- **Browsers**
+  - what browser were they using?
+- **OS**
+  - which operating systems are they using?
+- **Bounce rates**
+  - end path, outbound clicks
 - Session durations
-- Conversion goals: how many people are completing important tasks AKA converting
-- Using web analytics helps you figure out what content to work on next, what products are most popular, etc…
+  - how long do sessions last?
+- **Conversion goals**
+ - how many people are completing important tasks AKA converting
+ - how many people "showed consideration" by visiting specific pages?
+
+Using web analytics helps you figure out what content to work on next, what products are most popular, etc.
 
 ## When should you use product analytics?
 
@@ -50,3 +77,7 @@ Using product analytics helps you understand the usage of specific products, the
 ## Technical Details
 
 Session-based vs. Event-based
+
+## Links
+
+- [Product analytics insights](/docs/product-analytics/insights)
