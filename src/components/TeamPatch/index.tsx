@@ -33,7 +33,7 @@ export default function TeamPatch({ name, imageUrl, color, textColor, textShadow
               className={`right-round-behind w-4 h-1.5 border-r-2 border-b-2 border-team-${color}-border bg-team-${color}-plaque-shadow rounded-br-full absolute right-[calc(-1rem_-_0px)] ${size === 'lg' ? 'bottom-1.5' : size === 'md' ? 'bottom-1' : size === 'sm' ? 'bottom-0' : 'bottom-1.5'} z-[-1]`}
             />
             <div
-              className={`banner-text-bg bg-team-${color}-plaque-bg bg-opacity-80 border-2 border-team-${color}-border h-8 rounded-tl rounded-tr absolute ${size === 'lg' ? 'bottom-4' : size === 'md' ? 'bottom-3' : size === 'sm' ? 'bottom-2' : 'bottom-4'} -left-4 -right-4 z-20 flex items-center justify-center text-center leading-none uppercase ${size === 'lg' ? 'text-xl' : size === 'md' ? 'text-lg' : size === 'sm' ? 'text-sm' : 'text-xl'} font-bold font-squeak [font-variant:none] text-${textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'
+              className={`banner-text-bg bg-team-${color}-plaque-bg bg-opacity-80 border-2 border-team-${color}-border rounded-tl rounded-tr absolute ${size === 'lg' ? 'bottom-4' : size === 'md' ? 'bottom-3' : size === 'sm' ? 'bottom-2' : 'bottom-4'} -left-4 -right-4 z-20 flex items-center justify-center text-center leading-none uppercase ${size === 'lg' ? 'text-xl h-8' : size === 'md' ? 'text-lg h-7' : size === 'sm' ? 'text-sm h-6' : 'text-xl h-8'} font-bold font-squeak [font-variant:none] text-${textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'
                 } ${textShadow === 'light'
                   ? '0_1px_0_rgba(255,255,255,.5)'
                   : textShadow === 'dark'
