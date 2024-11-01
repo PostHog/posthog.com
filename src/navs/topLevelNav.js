@@ -4,7 +4,6 @@ const topLevelNav = [
     {
         name: 'Products',
         url: '/product-analytics',
-        icon: 'IconFeatures',
         children: [
             {
                 name: 'Product analytics',

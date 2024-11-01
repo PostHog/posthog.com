@@ -1,7 +1,6 @@
 export const pricingMenu = {
     name: 'Pricing',
     url: '/pricing',
-    icon: 'IconReceipt',
     children: [
         {
             name: 'PostHog Cloud',
