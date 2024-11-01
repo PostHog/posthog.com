@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Brand matters to us, greatly. It's every interaction we have with our users and comes from how the company itself is designed. It's more than hedgehogs:
+Brand matters to us, greatly. It's one of the four major reasons people get recommended PostHog so directly helps us grow. Everyone else is largely terrible at it so it's a massive opportunity to build a long term advantage as a company, and frankly it's fun. It's every interaction we have with our users and comes from how the company itself is designed. It's more than hedgehogs:
 
 * how our pricing works
 * the way we word our emails
