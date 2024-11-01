@@ -95,7 +95,7 @@ You can tweak how autocapture works by passing custom options.
             if (params.id) return `${name}/${params.id}`
             return name
         },
-        routeToParams: (name, params) => {
+        routeToProperties: (name, params) => {
             if (name === "SensitiveScreen") return undefined
             return params
         },
