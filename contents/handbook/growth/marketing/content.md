@@ -34,7 +34,7 @@ So you've written a great piece of content. Now what? Here are various ways to s
 
 ### 1. LinkedIn
 
-Share a post using either your own account or the company account. To post using the company account, use [Buffer](https://buffer.com/) (ask <TeamMemberLink squeakId="andy-vandervell" /> to add you to it if you don't have access).
+Share a post using either your own account or the company account, but note that the company account will have dramatically less reach than your personal one. To post using the company account, use [Buffer](https://buffer.com/) (ask <TeamMemberLink squeakId="andy-vandervell" /> to add you to it if you don't have access).
 
 Tips for writing a good post:
 - Don't just share the link. Write out an intriguing summary or introduction of the post. Here's a [good example](https://www.linkedin.com/feed/update/urn:li:activity:7257340218159116289).
@@ -44,16 +44,16 @@ Tips for writing a good post:
 
 ### 2. Twitter / X
 
-Again, use buffer to post from the company account.
+Again, use Buffer to post from the company account.
 
 Tips for writing a good post:
 - Write a brief summary of the post while sharing as much content as possible in it. [Good example](https://x.com/posthog/status/1851571551314825375).
 - Attach an image to the post (don't really on the link's social graph preview). Again, you can use **Add entry** in the [changelog](/changelog/) to create a nice image.
-- Do your best not to sound "corporate" or serious. Authenticity is appreciated on twitter. Have fun with it!
+- Do your best not to sound "corporate" or serious. Authenticity is appreciated on Twitter. Have fun with it!
 
 ### 3. Paid ads + newsletters
 
-You can promote your post by buying sponsored slots in newsletters. See [sponsorships](/handbook/growth/marketing/open-source-sponsorship) for more.
+You can promote your post by buying sponsored slots in newsletters. <TeamMember name="Ian Vanagas" /> has a list of newsletters and booked slots we can use to promote content. See [sponsorships](/handbook/growth/marketing/open-source-sponsorship) for more.
 
 If you want to run a paid ad campaign on Reddit, Google, or Twitter, see the [paid ads page](/handbook/growth/marketing/paid-ads).
 
