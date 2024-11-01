@@ -104,7 +104,7 @@ const subfeatures = [
     },
     {
         title: 'Web or mobile session recording',
-        description: 'Web or Android (beta) available',
+        description: 'Web, iOS, and Android',
         icon: <IconPhone />,
     },
     {
@@ -340,7 +340,7 @@ const PairsWithArray = [
 ]
 
 export const ProductSessionReplay = () => {
-    const { elevenlabs, hasura, netdata, pry } = useStaticQuery(graphql`
+    const { elevenlabs, hasura, netdata, swype } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -364,7 +364,7 @@ export const ProductSessionReplay = () => {
             netdata: mdx(slug: { eq: "customers/netdata" }) {
                 ...ProductCustomerFragment
             }
-            pry: mdx(slug: { eq: "customers/pry" }) {
+            pry: mdx(slug: { eq: "customers/swype" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -414,9 +414,9 @@ export const ProductSessionReplay = () => {
                             customer={netdata}
                         />
                         <CustomerCard
-                            outcome="improved registrations by 20-30%"
-                            quote="We've improved our whole onboarding flow by about 5% too, which is great."
-                            customer={pry}
+                            outcome="uses replays to aid mobile testing"
+                            quote="Replays help us see how our mobile app looks on different devices and screen sizes."
+                            customer={swype}
                         />
                     </ul>
                 </section>
@@ -461,7 +461,12 @@ export const ProductSessionReplay = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <CloudinaryImage placeholder="none" quality={100} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/session-replay-hog.png" alt="" />
+                        <CloudinaryImage
+                            placeholder="none"
+                            quality={100}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/session-replay-hog.png"
+                            alt=""
+                        />
                     </div>
                 </div>
 
