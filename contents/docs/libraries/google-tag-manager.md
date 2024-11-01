@@ -32,7 +32,7 @@ It is an easy way to integrate PostHog into your website without having to updat
 
 ## Using all the features of PostHog via Google Tag Manager
 
-PostHog works the same via Google Tag Manager as it does via our snippet directly. This means you can use all of features like session replays, surveys, and more without additional setup. 
+PostHog works the same via Google Tag Manager as it does via our snippet directly. This means you can use all of the features like session replays, surveys, and more without additional setup. 
 
 Some of these do require calling PostHog, which you can do by checking for the window's `posthog` object and calling any of its methods. For example, you can capture a custom event like this:
 
