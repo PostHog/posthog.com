@@ -9,7 +9,7 @@ icon: >-
 features:
   eventCapture: true
   userIdentification: true
-  autoCapture: false
+  autoCapture: true
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
@@ -35,6 +35,116 @@ PostHog supports the following Apple platforms:
 ## Capturing events
 
 <IOSSendEvents />
+
+## Autocapture 
+
+PostHog autocapture automatically tracks the following events for you:
+
+-   **Application Opened** - when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
+-   **Application Backgrounded** - when the app is sent to the background by the user
+-   **Application Installed** - when the app is installed.
+-   **Application Updated** - when the app is updated.
+-   **$screen** - when the user navigates (if using `UIViewController`)
+
+### Autocapture configuration
+
+You can enable or disable screen and application lifecycle autocapture through the `PostHogConfig` object.
+
+```swift
+let POSTHOG_API_KEY = "<ph_project_api_key>"
+// usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+let POSTHOG_HOST = "https://us.i.posthog.com"
+
+let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
+
+// capture screen views
+config.captureScreenViews = true 
+// capture application lifecycle events
+config.captureApplicationLifecycleEvents = true
+
+PostHogSDK.shared.setup(config)
+```
+
+### Capturing screen views
+
+With [`configuration.captureScreenViews`](/docs/libraries/ios#all-configuration-options) set as `true`, PostHog will try to record all screen changes automatically.
+
+If you want to manually send a new screen capture event, use the `screen` function.
+
+```swift
+PostHogSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])
+```
+
+> **Important:** Please note that `captureScreenViews` configuration is intented for `UIKit` use. For `SwiftUI` screen captures, please see the following section.
+
+### Capturing screen views in SwiftUI
+
+To track a screen view in `SwiftUI`, apply the `postHogScreenView` modifier to your full-screen views. The PostHog iOS SDK will infer a screen name based on the view’s type, but you can provide a custom name and event properties if needed.
+
+```swift 
+// This will trigger a screen view event with $screen_name: "HomeViewContent"
+struct HomeView: View {
+    var body: some View {
+        HomeViewContent()
+            .postHogScreenView()
+    }
+}
+
+// This will trigger a screen view event with $screen_name: "My Home View" and an additional event property from_button: "start"
+struct HomeView: View {
+    var body: some View {
+        HomeViewContent()
+            .postHogScreenView("My Home View", ["from_button": "start"])
+    }
+}
+```
+
+*In SwiftUI, views can range from entire screens to small UI components. Unlike UIKit, SwiftUI doesn’t clearly distinguish between these levels, which makes automatic tracking of full-screen views harder.*
+
+## Autocapture interactions
+
+> 🚧 **Note:** Autocapturing element interactions are currently only supported in `UIKit` and are in an experimental state (disabled by default). SwiftUI support will be coming soon.
+
+If enabled, PostHog will automatically track interactions with elements in a screen and track them as the following event: 
+
+-   **$autocapture** - interactions with elements in a screen (if using `UIKit`)
+
+### Autocapture interactions configuration
+
+You can enable or disable this feature through the `configuration.autocapture` property and customize it using the `configuration.autocaptureConfig` object.
+
+```swift
+let POSTHOG_API_KEY = "<ph_project_api_key>"
+// usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+let POSTHOG_HOST = "https://us.i.posthog.com"
+
+let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
+
+// enable $autocapture events
+config.autocapture = true // TIP: This is false by default
+// capture text input changes and edits
+config.autocaptureConfig.captureTextEdits = true 
+// capture gestures such as swipes and taps
+config.autocaptureConfig.captureGestures = true
+// capture action events such as button presses
+config.autocaptureConfig.captureControlActions = true
+// captures values or text from controls such as text views and buttons
+config.autocaptureConfig.captureValues = true 
+
+PostHogSDK.shared.setup(config)
+```
+
+## Preventing sensitive data capture
+
+If there are UI elements you don't want to be captured, you can add `ph-no-capture` as an `accessibilityLabel` or `accessibilityIdentifier`. If this label or identifier are found anywhere up the view hierarchy, the autocapture event will be ignored:
+
+```swift
+// This will be ignored
+let view = UIView()
+view.accessibilityLabel = "ph-no-capture"
+```
+
+> **Note:** PostHog will automatically skip any fields that can detect as sensitive by default, even without the `ph-no-capture` tag. These include password fields, credit card fields, OTP fields and any other field that relates to Personal Identifiable Information (PII).
 
 ## Identifying users
 
@@ -294,6 +404,17 @@ configuration.sessionReplay = false
  */
 configuration.sessionReplayConfig = .init()
 
+/**
+ * Enable Enable Autocapture. (off/false by default)
+ * Experimental support
+ */
+configuration.autocapture = false
+
+/**
+ * Autocapture configuration
+ * Experimental support
+ */
+configuration.autocaptureConfig = .init()
 
 /**
 * The identifier of the App Group that should be used to store shared analytics data. 
