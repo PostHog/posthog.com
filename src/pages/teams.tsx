@@ -73,6 +73,7 @@ const Teams: React.FC = () => {
                                     color="purple"
                                     frame="half-round"
                                     plaque="straight"
+                                    size="lg"
                                 />
 
                                 <TeamPatch
@@ -81,6 +82,7 @@ const Teams: React.FC = () => {
                                     color="purple"
                                     frame="square"
                                     plaque="curved"
+                                    size="md"
                                 />
 
                                 <TeamPatch
@@ -91,6 +93,7 @@ const Teams: React.FC = () => {
                                     textShadow="dark"
                                     frame="rounded"
                                     plaque="straight"
+                                    size="sm"
                                 />
                             </div>
 
@@ -133,16 +136,14 @@ const Teams: React.FC = () => {
                                                                 className="cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark"
                                                             >
                                                                 <Tooltip
-                                                                    content={`${name} ${
-                                                                        isTeamLead ? '(Team lead)' : ''
-                                                                    }`}
+                                                                    content={`${name} ${isTeamLead ? '(Team lead)' : ''
+                                                                        }`}
                                                                     placement="top"
                                                                 >
                                                                     <img
                                                                         src={avatar?.data?.attributes?.url}
-                                                                        className={`w-10 h-10 rounded-full bg-${
-                                                                            color ?? 'white dark:bg-accent-dark'
-                                                                        } border border-light dark:border-dark`}
+                                                                        className={`w-10 h-10 rounded-full bg-${color ?? 'white dark:bg-accent-dark'
+                                                                            } border border-light dark:border-dark`}
                                                                         alt={name}
                                                                     />
                                                                 </Tooltip>
