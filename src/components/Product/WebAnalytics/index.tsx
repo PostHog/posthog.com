@@ -332,7 +332,7 @@ export const ProductWebAnalytics = () => {
                 description="It's like Google Analytics 3, but it still exists..."
                 image={`/images/og/web-analytics.jpg`}
             />
-            <div className={`@container transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
+            <div className="@container">
                 <Hero
                     color="[#36C46F]"
                     icon={<IconPieChart />}
@@ -342,9 +342,9 @@ export const ProductWebAnalytics = () => {
                     className={fullWidthContent ? 'max-w-full' : 'max-w-7xl'}
                 />
 
-                <Screenshot className="" />
+                <Screenshot className={`transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`} />
 
-                <div className="-mb-24">
+                <div className={`-mb-24 transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
                     <img
                         src="/images/products/web-analytics/screenshot-web-analytics.png"
                         alt="Screenshot of web analytics in PostHog"
@@ -353,11 +353,11 @@ export const ProductWebAnalytics = () => {
                     />
                 </div>
 
-                <section id="customers" className="-mt-56 pt-36 px-4 @5xl:px-8">
+                <section id="customers" className={`-mt-56 pt-36 px-4 @5xl:px-8 transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="gets 30% more data than with GA4"
-                            quote="Other platforms we looked at dropped data due to adblockers and third-party cookies."
+                            quote="Other platforms we looked at dropped data due to ad blockers and third-party cookies."
                             customer={ycombinator}
                         />
                         <CustomerCard
