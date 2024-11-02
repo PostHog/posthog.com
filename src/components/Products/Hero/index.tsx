@@ -25,9 +25,9 @@ export const Hero = ({ color, icon, beta, product, title, description, className
                     </span>
                 )}
             </div>
-            <h1 className={`text-3xl md:text-4xl mb-4 md:mb-2 px-4 ${className}`} dangerouslySetInnerHTML={{ __html: title }} />
+            <h1 className={`text-3xl md:text-4xl mb-1 px-4 ${className}`} dangerouslySetInnerHTML={{ __html: title }} />
             <p
-                className={`font-semibold text-primary/75 dark:text-primary-dark/75 mb-5 px-4 ${className}`}
+                className={`font-semibold text-primary/75 dark:text-primary-dark/75 mb-3 px-4 ${className}`}
                 dangerouslySetInnerHTML={{ __html: description }}
             />
             <div className={`flex gap-2 mb-8 px-4 ${className}`}>
