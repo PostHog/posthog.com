@@ -332,9 +332,9 @@ export const Main = () => {
     return (
         <div>
             <MediaUploadModal open={mediaModalOpen} setOpen={setMediaModalOpen} />
-            <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
+            <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark">
                 <div
-                    className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
+                    className={`flex mx-auto px-2 md:px-0 justify-between transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
                         }`}
                 >
                     <ul className="md:flex hidden list-none m-0 p-0">

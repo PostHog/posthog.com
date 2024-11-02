@@ -41,7 +41,7 @@ const MenuItem = ({ name, children, url, icon, color, depth = 0 }: IMenu & { dep
             <div
                 className={`flex items-center px-1 ${
                     depth === 2 && isActive
-                        ? 'before:absolute before:border-r before:border-tan dark:before:bg-accent-dark before:top-2 before:bottom-2 before:right-0 before:translate-x-full before:w-px before:z-[-1]'
+                        ? 'before:absolute before:border-r before:border-accent dark:before:bg-accent-dark before:top-2 before:bottom-2 before:right-0 before:translate-x-full before:w-px before:z-[-1]'
                         : ''
                 }`}
             >

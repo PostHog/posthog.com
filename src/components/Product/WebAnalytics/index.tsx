@@ -43,6 +43,7 @@ import Install from '../Install'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
+import { Screenshot } from 'components/Products/Screenshot'
 
 const product = {
     slug: 'web-analytics',
@@ -54,7 +55,6 @@ const product = {
 const team = 'Web Analytics'
 const teamSlug = '/teams/web-analytics'
 
-const featuresPerRow = 3
 const features = [
     {
         title: 'Top paths',
@@ -332,16 +332,19 @@ export const ProductWebAnalytics = () => {
                 description="It's like Google Analytics 3, but it still exists..."
                 image={`/images/og/web-analytics.jpg`}
             />
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+            <div className={`${fullWidthContent ? 'max-w-full' : ''}`}>
                 <Hero
                     color="[#36C46F]"
                     icon={<IconPieChart />}
                     product={product.capitalized}
                     title="Monitor your website traffic"
                     description="Web analytics for people who really liked GA3..."
+                    className={fullWidthContent ? 'max-w-full' : 'max-w-7xl'}
                 />
 
-                <div className="text-center -mb-24">
+                <Screenshot className="" />
+
+                <div className="-mb-24">
                     <img
                         src="/images/products/web-analytics/screenshot-web-analytics.png"
                         alt="Screenshot of web analytics in PostHog"
@@ -374,9 +377,9 @@ export const ProductWebAnalytics = () => {
             <SmoothScroll exclude={['Installation', 'Meet the team']} />
 
             <div id="features">
-                <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
-                    <h3 className="text-3xl text-center mb-8">Features</h3>
-                    <ul className={`list-none p-0 grid md:grid-cols-${featuresPerRow} gap-12 mb-8`}>
+                <section className="@container max-w-7xl mx-auto px-5 mb-10 md:mb-20">
+                    <h3 className="text-2xl mb-4">Features</h3>
+                    <ul className={`list-none p-0 grid @xs:grid-cols-2 @3xl:grid-cols-3 gap-4 @3xl:gap-8 @5xl:gap-12 mb-8`}>
                         {features.map((feature, index) => {
                             return <Feature {...feature} key={index} />
                         })}

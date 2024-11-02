@@ -10,12 +10,13 @@ interface HeroProps {
     title: string
     description: string
     image: any
+    className?: string
 }
 
-export const Hero = ({ color, icon, beta, product, title, description }: HeroProps): JSX.Element => {
+export const Hero = ({ color, icon, beta, product, title, description, className }: HeroProps): JSX.Element => {
     return (
         <section>
-            <div className="flex gap-1.5 justify-center items-center mb-3">
+            <div className={`flex gap-1.5 items-center mb-3 py-2 border-b border-light dark:border-dark px-4`}>
                 <span className={`w-6 h-6 text-${color}`}>{icon}</span>
                 <span className="text-[15px] font-semibold text-opacity-60">{product}</span>
                 {beta && (
@@ -24,16 +25,16 @@ export const Hero = ({ color, icon, beta, product, title, description }: HeroPro
                     </span>
                 )}
             </div>
-            <h1 className="text-5xl md:text-6xl text-center mb-4 md:mb-2" dangerouslySetInnerHTML={{ __html: title }} />
+            <h1 className={`text-3xl md:text-4xl mb-4 md:mb-2 px-4 ${className}`} dangerouslySetInnerHTML={{ __html: title }} />
             <p
-                className="text-lg font-semibold text-center text-opacity-75 mb-5"
+                className={`font-semibold text-primary/75 dark:text-primary-dark/75 mb-5 px-4 ${className}`}
                 dangerouslySetInnerHTML={{ __html: description }}
             />
-            <div className="flex justify-center gap-2 mb-12">
-                <CallToAction href="https://app.posthog.com/signup" type="primary">
+            <div className={`flex gap-2 mb-8 px-4 ${className}`}>
+                <CallToAction href="https://app.posthog.com/signup" type="primary" size="sm">
                     Get started - free
                 </CallToAction>
-                <CallToAction href="/talk-to-a-human" type="secondary">
+                <CallToAction href="/talk-to-a-human" type="secondary" size="sm">
                     Talk to a human
                 </CallToAction>
             </div>
