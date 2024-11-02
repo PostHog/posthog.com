@@ -332,7 +332,7 @@ export const ProductWebAnalytics = () => {
                 description="It's like Google Analytics 3, but it still exists..."
                 image={`/images/og/web-analytics.jpg`}
             />
-            <div className={`${fullWidthContent ? 'max-w-full' : ''}`}>
+            <div className={`@container ${fullWidthContent ? 'max-w-full' : ''}`}>
                 <Hero
                     color="[#36C46F]"
                     icon={<IconPieChart />}
