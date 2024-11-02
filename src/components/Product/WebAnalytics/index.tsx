@@ -59,31 +59,31 @@ const features = [
     {
         title: 'Top paths',
         description: 'See the most visited pages on your site',
-        image: <img src="/images/products/web-analytics/top-paths.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/top-paths.jpg" />,
         border: true,
     },
     {
         title: 'Top referrers',
         description: 'Discover where traffic is coming from',
-        image: <img src="/images/products/web-analytics/top-referrers.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/top-referrers.jpg" />,
         border: true,
     },
     {
         title: 'Device types',
         description: 'Break down traffic by device',
-        image: <img src="/images/products/web-analytics/device-types.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/device-types.jpg" />,
         border: true,
     },
     {
         title: 'World map',
         description: 'Visualize users across planet earth',
-        image: <img src="/images/products/web-analytics/world-map.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/world-map.jpg" />,
         border: true,
     },
     {
         title: 'Retention cohorts',
         description: 'Analyze retention by week',
-        image: <img src="/images/products/web-analytics/retention-cohorts.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/retention-cohorts.jpg" />,
         border: true,
     },
 ]
@@ -332,7 +332,7 @@ export const ProductWebAnalytics = () => {
                 description="It's like Google Analytics 3, but it still exists..."
                 image={`/images/og/web-analytics.jpg`}
             />
-            <div className={`@container ${fullWidthContent ? 'max-w-full' : ''}`}>
+            <div className={`@container transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
                 <Hero
                     color="[#36C46F]"
                     icon={<IconPieChart />}
@@ -353,7 +353,7 @@ export const ProductWebAnalytics = () => {
                     />
                 </div>
 
-                <section id="customers" className="-mt-56 pt-36">
+                <section id="customers" className="-mt-56 pt-36 px-4 @5xl:px-8">
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
                         <CustomerCard
                             outcome="gets 30% more data than with GA4"
@@ -376,10 +376,10 @@ export const ProductWebAnalytics = () => {
 
             <SmoothScroll exclude={['Installation', 'Meet the team']} />
 
-            <div id="features">
-                <section className="@container max-w-7xl mx-auto px-5 mb-10 md:mb-20">
+            <div id="features" className="@container">
+                <section className={`transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'} px-4 @5xl:px-8 mb-10 md:mb-20`}>
                     <h3 className="text-2xl mb-4">Features</h3>
-                    <ul className={`list-none p-0 grid @xs:grid-cols-2 @3xl:grid-cols-3 gap-4 @3xl:gap-8 @5xl:gap-12 mb-8`}>
+                    <ul className={`list-none p-0 grid @xs:grid-cols-2 @4xl:grid-cols-3 gap-4 @4xl:gap-6 @5xl:gap-8 mb-8`}>
                         {features.map((feature, index) => {
                             return <Feature {...feature} key={index} />
                         })}

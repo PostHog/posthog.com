@@ -46,7 +46,7 @@ const Article = ({
     return (
         <div className="flex">
             <Navigation className="shrink-0 h-screen max-h-screen sticky top-0 border-r border-light dark:border-dark flex-[0_0_220px]" />
-            <div className={`${className} flex-1 overflow-x-hidden`}>
+            <div className={`${className} flex-1`}>
                 {/* <Banner /> */}
                 {compact ? (
                     <div className="px-4 py-3 border-b border-border dark:border-dark sticky top-0 z-[50] bg-light dark:bg-dark">

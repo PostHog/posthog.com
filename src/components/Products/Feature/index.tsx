@@ -2,7 +2,7 @@ import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
 interface FeatureProps {
-    name: string
+    title: string
     description: string
     image: any
     background?: boolean
@@ -12,7 +12,7 @@ interface FeatureProps {
 
 export const Feature = ({ title, description, image, background, border, fade }: FeatureProps): JSX.Element => {
     return (
-        <li className="text-center">
+        <li className="">
             <div
                 className={`mb-2 w-full ${background || (border && 'rounded overflow-hidden')} ${
                     background && 'bg-accent dark:bg-accent-dark'
@@ -23,8 +23,8 @@ export const Feature = ({ title, description, image, background, border, fade }:
             >
                 {image}
             </div>
-            <h4 className="mb-1 leading-tight text-lg">{title}</h4>
-            <p className="text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />
+            <h4 className="mb-0.5 leading-tight text-lg">{title}</h4>
+            <p className="text-[15px] text-primary/75 dark:text-primary-dark/75" dangerouslySetInnerHTML={{ __html: description }} />
         </li>
     )
 }
