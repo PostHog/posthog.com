@@ -26,13 +26,13 @@ export const CustomerCard = ({ outcome, quote, customer }: CustomerCardProps): J
     const darkMode = websiteTheme === 'dark'
 
     return (
-        <li className=" bg-accent dark:bg-accent-dark p-6 rounded">
+        <li className="border-t @sm:border-t-0 @6xl:first:border-t first:border-t-0 border-light dark:border-dark pt-4 @sm:pt-0 @6xl:pt-4 first:pt-0">
             <img
                 className="mb-4 max-h-8 max-w-[200px] w-full object-contain object-left"
                 src={customer.frontmatter[darkMode ? 'logoDark' : 'logo'].publicURL}
             />
             <p className="text-lg font-semibold m-0 leading-tight mb-1">{outcome}</p>
-            <p className="text-sm">
+            <p className="text-sm mb-2">
                 <span className="bg-highlight p-0.5">"{quote}"</span>
             </p>
             <CallToAction to={customer.fields.slug} type="secondary" size="sm">

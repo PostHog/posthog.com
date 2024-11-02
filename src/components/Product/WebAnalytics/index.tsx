@@ -342,36 +342,39 @@ export const ProductWebAnalytics = () => {
                     className={fullWidthContent ? 'max-w-full' : 'max-w-7xl'}
                 />
 
-                <Screenshot className={`transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`} />
 
-                <div className={`-mb-24 transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
-                    <img
-                        src="/images/products/web-analytics/screenshot-web-analytics.png"
-                        alt="Screenshot of web analytics in PostHog"
-                        className="w-full max-w-[1440px]"
-                        placeholder="none"
-                    />
+                <div className={`flex flex-col @6xl:flex-row items-start gap-8 @5xl:gap-12 transition-all px-4 @5xl:px-8 mb-8 ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
+                    <Screenshot className={``} />
+{/* 
+                    <div className={`flex-1 transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
+                        <img
+                            src="/images/products/web-analytics/screenshot-web-analytics.png"
+                            alt="Screenshot of web analytics in PostHog"
+                            className="w-full max-w-[1440px]"
+                            placeholder="none"
+                        />
+                    </div> */}
+
+                    <section id="customers" className={`@container w-full @6xl:basis-96`}>
+                        <ul className="list-none p-0 grid grid-cols-1 @sm:grid-cols-2 @2xl:grid-cols-3 @6xl:grid-cols-1 gap-8 @6xl:gap-4">
+                            <CustomerCard
+                                outcome="gets 30% more data than with GA4"
+                                quote="Other platforms we looked at dropped data due to ad blockers and third-party cookies."
+                                customer={ycombinator}
+                            />
+                            <CustomerCard
+                                outcome="switched from Plausible"
+                                quote="PostHog is way more powerful and insightful than Plausible. We have more info than we used to have."
+                                customer={significa}
+                            />
+                            <CustomerCard
+                                outcome="switched from Google Analytics"
+                                quote="Web analytics gives us all the metrics we really care about. It is so much better than GA4."
+                                customer={creatify}
+                            />
+                        </ul>
+                    </section>
                 </div>
-
-                <section id="customers" className={`-mt-56 pt-36 px-4 @5xl:px-8 transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
-                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
-                        <CustomerCard
-                            outcome="gets 30% more data than with GA4"
-                            quote="Other platforms we looked at dropped data due to ad blockers and third-party cookies."
-                            customer={ycombinator}
-                        />
-                        <CustomerCard
-                            outcome="switched from Plausible"
-                            quote="PostHog is way more powerful and insightful than Plausible. We have more info than we used to have."
-                            customer={significa}
-                        />
-                        <CustomerCard
-                            outcome="switched from Google Analytics"
-                            quote="Web analytics gives us all the metrics we really care about. It is so much better than GA4."
-                            customer={creatify}
-                        />
-                    </ul>
-                </section>
             </div>
 
             <SmoothScroll exclude={['Installation', 'Meet the team']} />
@@ -379,7 +382,7 @@ export const ProductWebAnalytics = () => {
             <div id="features" className="@container">
                 <section className={`transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'} px-4 @5xl:px-8 mb-10 md:mb-20`}>
                     <h3 className="text-2xl mb-4">Features</h3>
-                    <ul className={`list-none p-0 grid @xs:grid-cols-2 @4xl:grid-cols-3 gap-4 @4xl:gap-6 @5xl:gap-8 mb-8`}>
+                    <ul className={`list-none p-0 grid @xs:grid-cols-2 @6xl:grid-cols-3 gap-4 @6xl:gap-6 @5xl:gap-8 mb-8`}>
                         {features.map((feature, index) => {
                             return <Feature {...feature} key={index} />
                         })}
