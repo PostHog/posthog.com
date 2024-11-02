@@ -7,9 +7,8 @@ showTitle: true
 import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-- [Web analytics](/web-analytics) is for tracking website metrics. It's for marketing websites, blogs, or high volume B2C apps where users don't log in.
-- [Product analytics](/product-analytics) for tracking your product. It's more powerful than web analytics. It's for web and mobile apps.
-
+- [Web analytics](/web-analytics) is for tracking website metrics. It's for marketing websites, blogs, or high volume B2C apps where users aren't logged in.
+- [Product analytics](/product-analytics) is for tracking your product. It's more powerful than web analytics. It's for web and mobile apps.
 
 <ComparisonTable column1="Web analytics" column2="Product analytics">
   <ComparisonRow column1={"One, pre-built"} column2={"Unlimited, customizable"} feature="Dashboards" />
@@ -33,9 +32,21 @@ It can help you figure out which pages and products are most popular and resonat
     classes="rounded"
 />
 
-You can use web analytics to find out (click the 👀 emojis to see visual examples):
+You can use web analytics to find out:
 
-- How many [visitors](/docs/web-analytics/dashboard) there were in the last _X_ days, weeks, or months <details style="display:inline;"><summary style="padding:0;">👀</summary>![Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png)</details>
+<details>
+  <summary>How many <strong>visitors</strong> there were in recent days, weeks, and months</summary>
+
+  Use the [web analytics dashboard](/docs/web-analytics/dashboard) to see the number of visitors currently online. Or filter by a specific time period like the last 14 days. You can also filter by unique visitors, pageviews, and sessions.
+
+  <ProductScreenshot
+      imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png"
+      imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_dark_mode_2024_10_6aa6dc9aeb.png"
+      alt="Web analytics dashboard"
+      classes="rounded"
+  />
+</details>
+
 - Which [pages](/docs/web-analytics/dashboard#paths) people are visiting <details style="display:inline;"><summary style="padding:0;">👀</summary>![Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png)</details>
 - The [bounce rate](/docs/web-analytics/dashboard#bounce-rate) <details style="display:inline;"><summary style="padding:0;">👀</summary>![Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png)</details>
 - All the different [sources of traffic](/docs/web-analytics/dashboard#referrers-channels-utms) to your website <details style="display:inline;"><summary style="padding:0;">👀</summary>![Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png)</details>
@@ -44,13 +55,11 @@ You can use web analytics to find out (click the 👀 emojis to see visual examp
 - How long sessions last on average <details style="display:inline;"><summary style="padding:0;">👀</summary>![Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png)</details>
 - How many people converting <details style="display:inline;"><summary style="padding:0;">👀</summary>![Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png)</details>
 
-
 ## When should you use product analytics?
 
 When you want to dive deeper into user behavior in your app and how they are interacting with features. It gives you insights into metrics such as feature adoption rate, user retention, and churn.
 
 ![Product analytics examples](https://res.cloudinary.com/dmukukwp6/image/upload/f_webp,h_1080,w_1920,c_fill,g_auto,q_auto/v1/posthog.com/contents/templates/thumbnails/featured/prodcut-analytics?_a=AXAH4nI0)
-
 
 You can use product analytics to:
 
