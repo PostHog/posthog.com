@@ -2,10 +2,12 @@ import React from 'react'
 
 interface ScreenshotProps {
     icon: React.ReactNode
+    product: string
+    slug: string
     className?: string
 }
 
-export const Screenshot = ({ icon, className = '' }: ScreenshotProps): JSX.Element => {
+export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotProps): JSX.Element => {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1280 736" className={`${className} shadow-xl rounded-md max-h-[calc(100vh_-_53px_-_2rem)]`}>
          <g clipPath="url(#a)">
@@ -40,7 +42,7 @@ export const Screenshot = ({ icon, className = '' }: ScreenshotProps): JSX.Eleme
     </mask>
     <g mask="url(#g)">
       <text xmlSpace="preserve" fill="#3D4043" fontFamily="SF Pro Text" fontSize="12"
-        letterSpacing="0em" style={{ whiteSpace: 'pre' }}><tspan x="114" y="29.266">Web analytics - PostHog</tspan></text>
+        letterSpacing="0em" style={{ whiteSpace: 'pre' }}><tspan x="114" y="29.266">{product} - PostHog</tspan></text>
     </g>
     <path fill="#5E6063"
       d="M298.281 27.816a.707.707 0 0 0 1 1l2.758-2.758 2.758 2.758a.707.707 0 0 0 1-1l-2.758-2.758 2.758-2.758a.707.707 0 0 0-1-1l-2.758 2.758-2.758-2.758a.707.707 0 1 0-1 1l2.758 2.758-2.758 2.758Z" />
@@ -70,7 +72,7 @@ export const Screenshot = ({ icon, className = '' }: ScreenshotProps): JSX.Eleme
       d="M126 55a2.5 2.5 0 0 0-2.5 2.5v1h-.5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-.5v-1A2.5 2.5 0 0 0 126 55Zm1.5 3.5v-1a1.5 1.5 0 0 0-3 0v1h3Z"
       clipRule="evenodd" />
     <text xmlSpace="preserve" fill="#202124" fontFamily="SF Pro Text" fontSize="14"
-      letterSpacing="0em" style={{ whiteSpace: 'pre'}}><tspan x="204.48" y="64.977">.posthog.com/web-analytics</tspan></text>
+      letterSpacing="0em" style={{ whiteSpace: 'pre'}}><tspan x="204.48" y="64.977">.posthog.com/{ slug }</tspan></text>
     <text xmlSpace="preserve" fill="#767676" fontFamily="SF Pro Text" fontSize="14"
       letterSpacing="0em" style={{ whiteSpace: 'pre'}}><tspan x="142" y="64.977">https://us</tspan></text>
     <path fill="#606367"
@@ -137,7 +139,7 @@ export const Screenshot = ({ icon, className = '' }: ScreenshotProps): JSX.Eleme
     {/* product label */}
 
     <text xmlSpace="preserve" fill="#121212" fontFamily="Matter SQ" fontSize="14"
-      fontWeight="600" letterSpacing="0em" transform="translate(40 576.5)" style={{ whiteSpace: 'pre'}}><tspan x="0" y="12.498">Web analytics</tspan></text>
+      fontWeight="600" letterSpacing="0em" transform="translate(40 576.5)" style={{ whiteSpace: 'pre'}}><tspan x="0" y="12.498">{ product }</tspan></text>
     <mask id="m" fill="#fff">
       <path d="M1232 77h48v661h-48V77Z" />
     </mask>
@@ -224,7 +226,7 @@ export const Screenshot = ({ icon, className = '' }: ScreenshotProps): JSX.Eleme
       <use xlinkHref="#n" transform="matrix(.00833 0 0 .01286 0 -.079)" />
     </pattern>
     {/* product screenshot */}
-    <image xlinkHref="/images/products/web-analytics/screenshot.png" id="n" width="120" height="90" />
+    <image xlinkHref={`/images/products/${slug}/screenshot.png`} id="n" width="120" height="90" />
   </defs>
       </svg>
     )
