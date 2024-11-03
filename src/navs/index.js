@@ -1012,6 +1012,9 @@ export const companyMenu = {
             children: [
                 {
                     name: 'Small teams',
+                },
+                {
+                    name: 'Overview',
                     url: '/teams',
                 },
                 {

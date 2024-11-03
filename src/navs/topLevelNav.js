@@ -1,5 +1,6 @@
 import { pricingMenu } from './pricing'
-
+import { roadmapMenu } from './roadmap'
+import { companyMenu } from './company'
 const topLevelNav = [
     {
         name: 'Products',
@@ -270,8 +271,9 @@ const topLevelNav = [
         ],
     },
     pricingMenu,
+    roadmapMenu,
     // communityMenu,
-    // companyMenu,
+    companyMenu,
 ]
 
 export default topLevelNav
