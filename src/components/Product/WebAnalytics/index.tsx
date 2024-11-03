@@ -343,7 +343,7 @@ export const ProductWebAnalytics = () => {
                 />
 
 
-                <div className={`flex flex-col @6xl:flex-row items-start gap-8 @5xl:gap-12 transition-all px-4 @5xl:px-8 mb-8 ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
+                <div className={`flex flex-col @6xl:flex-row items-start @6xl:items-center gap-8 @5xl:gap-12 transition-all px-4 @5xl:px-8 mb-8 ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
                     <Screenshot 
                         product={product.capitalized} 
                         slug={product.slug} 
