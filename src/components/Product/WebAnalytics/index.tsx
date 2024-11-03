@@ -344,7 +344,7 @@ export const ProductWebAnalytics = () => {
 
 
                 <div className={`flex flex-col @6xl:flex-row items-start gap-8 @5xl:gap-12 transition-all px-4 @5xl:px-8 mb-8 ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
-                    <Screenshot className={``} />
+                    <Screenshot icon={<IconPieChart />} className={``} />
 {/* 
                     <div className={`flex-1 transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
                         <img
