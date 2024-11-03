@@ -112,10 +112,10 @@ export default function Menu({
     const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-sm py-0.5 px-1 rounded border border-b-3 border-transparent cursor-pointer font-semibold ${children || topLevel
+    const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full items-center relative text-sm px-1 rounded border border-b-3 border-transparent cursor-pointer font-semibold ${children || topLevel
         ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
         : ''
-        } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold !border-light dark:!border-dark' : ''}`
+        } ${children && open ? 'font-bold border border-b-3 !border-light dark:!border-dark bg-white dark:bg-accent-dark hover:translate-y-[0px] active:translate-y-[0px] [&_.icon]:!text-primary/75 dark:[&_.icon]:!text-primary-dark/75' : ''}`
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
@@ -171,8 +171,8 @@ export default function Menu({
                                 setOpen(!open)
                             }
                         }}
-                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${color ? '!py-1' : ''} ${isActive || isWithChild ? 'font-bold border border-b-3 !border-light dark:!border-dark bg-white dark:bg-accent-dark hover:translate-y-[0px] active:translate-y-[0px] [&_.icon]:!text-primary/100 dark:[&_.icon]:!text-primary-dark/100' : ''
-                            }`}
+                        className={`${buttonClasses} ${!topLevel ? 'group py-0.5' : ''} ${color ? ' ' : ''} ${isActive || isWithChild ? 'active ' : ''
+                            } ${isActive && topLevel ? 'font-bold border border-b-3 !border-light dark:!border-dark bg-white dark:bg-accent-dark hover:translate-y-[0px] active:translate-y-[0px]' : ''} ${isActive && !topLevel ? 'font-bold' : ''}`}
                         to={menuType === 'scroll' ? url.replace(pathname + '#', '') : url}
                         {...menuLinkProps}
                     >

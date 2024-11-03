@@ -396,9 +396,9 @@ export default function Handbook({
                                                 </p>
                                             )}
                                             {(!hideLastUpdated || filePath) && (
-                                                <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
+                                                <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-[15px] text-black dark:text-white">
                                                     {!hideLastUpdated && (
-                                                        <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
+                                                        <p className="m-0 text-[15px] font-semibold text-primary/30 dark:text-primary-dark/30">
                                                             Last updated: <time>{lastUpdated}</time>
                                                         </p>
                                                     )}
