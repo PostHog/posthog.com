@@ -40,7 +40,7 @@ const getIcon = (name: string) => {
 export const Icon = ({ color, icon }: { color?: string; icon: string | React.ReactNode }) => {
     return (
         <span
-            className={`flex items-center justify-center shrink-0 ${color
+            className={`icon flex items-center justify-center shrink-0 ${color
                 ? `text-primary/50 dark:text-primary-dark/50 group-hover:text-primary/80 dark:group-hover:text-primary-dark/80 bg-primary/10 dark:bg-primary-dark/10 rounded-sm w-6 h-6 basis-6`
                 : 'w-4 h-4 basis-4 opacity-70'
                 }`}
@@ -54,7 +54,7 @@ export const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary
 export const MenuItem = ({ icon, color, badge, name }) => {
     return icon ? (
         <span
-            className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${color ? 'items-center' : 'items-center'
+            className={`cursor-pointer w-full flex space-x-2 text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${color ? 'items-center' : 'items-center'
                 }`}
         >
             <Icon icon={icon} color={color} />
@@ -112,7 +112,7 @@ export default function Menu({
     const menuType = other.menuType === 'scroll' && !url?.includes(pathname) ? 'standard' : other.menuType ?? 'standard'
     const [isActive, setIsActive] = useState(false)
     const [open, setOpen] = useState<boolean | undefined>(false)
-    const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-sm py-0.5 rounded border border-b-3 border-transparent cursor-pointer ${children || topLevel
+    const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-sm py-0.5 px-1 rounded border border-b-3 border-transparent cursor-pointer font-semibold ${children || topLevel
         ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
         : ''
         } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold !border-light dark:!border-dark' : ''}`
@@ -153,11 +153,11 @@ export default function Menu({
         },
     }[menuType]
     return (
-        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden py-[1px] px-2 ${className}`}>
+        <ul className={`list-none m-0 p-0 text-lg font-semibold overflow-hidden py-px px-2 ${className}`}>
             <li>
                 {(url === undefined || url === null) && name ? (
-                    <p className="flex gap-2 items-baseline text-sm font-semibold mt-3 mx-3 mb-1">
-                        <span className="opacity-25">{name}</span>
+                    <p className="flex gap-2 items-baseline text-[13px] font-semibold mt-3 mx-1 mb-1">
+                        <span className="opacity-50">{name}</span>
 
                         {badge?.title && (
                             <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>
@@ -171,7 +171,7 @@ export default function Menu({
                                 setOpen(!open)
                             }
                         }}
-                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${color ? '!py-1' : ''} ${isActive || isWithChild ? 'active' : ''
+                        className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${color ? '!py-1' : ''} ${isActive || isWithChild ? 'font-bold border border-b-3 !border-light dark:!border-dark bg-white dark:bg-accent-dark hover:translate-y-[0px] active:translate-y-[0px] [&_.icon]:!text-primary/100 dark:[&_.icon]:!text-primary-dark/100' : ''
                             }`}
                         to={menuType === 'scroll' ? url.replace(pathname + '#', '') : url}
                         {...menuLinkProps}
@@ -180,7 +180,7 @@ export default function Menu({
                             {isActive && !isWithChild && (
                                 <motion.span
                                     variants={menuVariants}
-                                    className="absolute w-[4px] bg-red rounded-[2px] top-[2px] h-[calc(100%_-_4px)] left-0"
+                                    className=""
                                     initial="hidden"
                                     animate="visible"
                                     exit="hidden"
