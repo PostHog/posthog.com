@@ -24,7 +24,7 @@ export const Screenshot = ({ icon, product, slug, order, className = '' }: Scree
   const isDark = websiteTheme === 'dark'
 
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1280 736" className={`${className} shadow-xl rounded-md reasonable:max-h-[calc(100vh_-_53px_-_2rem)]`}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1280 736" className={`${className} shadow-xl rounded-md reasonable:max-h-[calc(100vh_-_53px_-_2rem)] border border-transparent dark:border-dark/50`}>
          <g clipPath="url(#a)">
     {/* content frame */}
     <path className="fill-light dark:fill-dark" d="M0 0h1280v736H0z" />
@@ -186,11 +186,10 @@ export const Screenshot = ({ icon, product, slug, order, className = '' }: Scree
     </text>
     {/* end */}
 
+    {/* side panel */}
     <mask id="m" className="fill-border dark:fill-border-dark">
       <path d="M1232 77h48v661h-48V77Z" />
     </mask>
-
-    {/* side panel */}
     <path className="fill-light dark:fill-dark" d="M1232 77h48v661h-48V77Z" />
     <path className="fill-border dark:fill-border-dark" d="M1233 738V77h-2v661h2Z" mask="url(#m)" />
 
