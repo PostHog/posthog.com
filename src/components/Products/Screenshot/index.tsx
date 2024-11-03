@@ -1,4 +1,5 @@
 import React from 'react'
+import usePostHog from '../../../hooks/usePostHog'
 
 interface ScreenshotProps {
     icon: React.ReactNode
@@ -8,6 +9,9 @@ interface ScreenshotProps {
 }
 
 export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotProps): JSX.Element => {
+  const posthog = usePostHog()
+  const region = posthog?.getFeatureFlag?.('are-you-in-the-eu') ? 'eu' : 'us'
+
     return (
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1280 736" className={`${className} shadow-xl rounded-md max-h-[calc(100vh_-_53px_-_2rem)]`}>
          <g clipPath="url(#a)">
@@ -41,7 +45,7 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
       <path fill="url(#f)" d="M114 15h177v20H114z" />
     </mask>
     <g mask="url(#g)">
-      <text xmlSpace="preserve" fill="#3D4043" fontFamily="SF Pro Text" fontSize="12"
+      <text xmlSpace="preserve" fill="#3D4043" fontFamily="SF Pro, -apple-system, Inter, BlinkMacSystemFont, system-ui, sans-serif" fontSize="12"
         letterSpacing="0em" style={{ whiteSpace: 'pre' }}><tspan x="114" y="29.266">{product} - PostHog</tspan></text>
     </g>
     <path fill="#5E6063"
@@ -71,10 +75,10 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
     <path fill="#606367" fillRule="evenodd"
       d="M126 55a2.5 2.5 0 0 0-2.5 2.5v1h-.5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-.5v-1A2.5 2.5 0 0 0 126 55Zm1.5 3.5v-1a1.5 1.5 0 0 0-3 0v1h3Z"
       clipRule="evenodd" />
-    <text xmlSpace="preserve" fill="#202124" fontFamily="SF Pro Text" fontSize="14"
+    <text xmlSpace="preserve" fill="#202124" fontFamily="SF Pro, -apple-system, Inter, BlinkMacSystemFont, system-ui, sans-serif" fontSize="14"
       letterSpacing="0em" style={{ whiteSpace: 'pre'}}><tspan x="204.48" y="64.977">.posthog.com/{ slug }</tspan></text>
-    <text xmlSpace="preserve" fill="#767676" fontFamily="SF Pro Text" fontSize="14"
-      letterSpacing="0em" style={{ whiteSpace: 'pre'}}><tspan x="142" y="64.977">https://us</tspan></text>
+    <text xmlSpace="preserve" fill="#767676" fontFamily="SF Pro, -apple-system, Inter, BlinkMacSystemFont, system-ui, sans-serif" fontSize="14"
+      letterSpacing="0em" style={{ whiteSpace: 'pre'}}><tspan x="142" y="64.977">https://{region}</tspan></text>
     <path fill="#606367"
       d="M1259.5 55.1a1.499 1.499 0 1 1-3 0 1.499 1.499 0 1 1 3 0ZM1259.5 60.1a1.499 1.499 0 1 1-3 0 1.499 1.499 0 1 1 3 0ZM1259.5 65.1a1.499 1.499 0 1 1-3 0 1.499 1.499 0 1 1 3 0Z" />
     <mask id="i" fill="#fff">
@@ -82,12 +86,11 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
     </mask>
     <path fill="#E8E9E2" d="M215 77h1065v60H215V77Z" />
     <path fill="#D0D1C9" d="M1280 136H215v2h1065v-2Z" mask="url(#i)" />
-    <text xmlSpace="preserve" fill="#111" fontFamily="SF Pro Text" fontSize="12"
+    <text xmlSpace="preserve" fill="#111" fontFamily="SF Pro, -apple-system, Inter, BlinkMacSystemFont, system-ui, sans-serif" fontSize="12"
       fontWeight="600" letterSpacing="0em" opacity=".5" style={{ whiteSpace: 'pre'}}><tspan x="318.578" y="99.165">/</tspan></text>
     <rect width="100" height="20" x="330.531" y="84" fill="#D0D1C9" rx="4" />
     <rect width="81" height="20" x="232" y="84" fill="#D0D1C9" rx="4" />
-    <text xmlSpace="preserve" fill="#111" fontFamily="SF Pro Text" fontSize="16"
-      fontWeight="600" letterSpacing="0em" style={{ whiteSpace: 'pre'}}><tspan x="231" y="125.187">Product name</tspan></text>
+    <text xmlSpace="preserve" fill="#111" fontFamily="SF Pro, -apple-system, Inter, BlinkMacSystemFont, system-ui, sans-serif" fontSize="16" fontWeight="800" letterSpacing="0em" style={{ whiteSpace: 'pre'}}><tspan x="231" y="125.187">{product}</tspan></text>
     <path fill="url(#j)" d="M215 77h1017v659H215z" />
     <mask id="k" fill="#fff">
       <path d="M0 77h215v659H0V77Z" />
@@ -129,17 +132,9 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
       </g>
     </g>
 
-    {/* <g fill="#000" fillRule="evenodd" clipRule="evenodd" opacity=".5">
-      <path
-        d="M24.755 578.597a6.25 6.25 0 1 0 6.65 6.653H26.69c-.214 0-.411 0-.576-.013a1.485 1.485 0 0 1-.564-.146 1.455 1.455 0 0 1-.637-.637 1.477 1.477 0 0 1-.146-.564 7.469 7.469 0 0 1-.013-.576v-4.717Zm-7.087 6.236a7.5 7.5 0 0 1 7.73-7.496c.338.01.607.287.607.625v5.33c0 .244 0 .389.009.496a.516.516 0 0 0 .015.101c.02.037.05.068.087.087a.43.43 0 0 0 .1.015c.108.009.253.009.497.009h5.327c.338 0 .615.269.625.607a7.5 7.5 0 0 1-7.497 7.726 7.5 7.5 0 0 1-7.5-7.5Zm8.446-.857h.001Zm-.085-.085v-.001Z" />
-      <path
-        d="M34.234 581.05c-.017-.108-.05-.217-.075-.317v-.016a7.034 7.034 0 0 0-4.95-4.95h-.017c-.1-.025-.208-.059-.316-.075a1.098 1.098 0 0 0-.459.025 1.078 1.078 0 0 0-.591.458.963.963 0 0 0-.142.45c-.008.108-.008.233-.008.35v4.325c.008.108.033.25.108.4.1.2.258.358.458.458.15.075.292.1.4.109h4.325c.117 0 .242 0 .35-.009a1.06 1.06 0 0 0 .45-.141c.217-.134.384-.35.459-.592.05-.175.041-.333.025-.458l-.017-.017Z" />
-    </g> */}
-
     {/* product label */}
-
-    <text xmlSpace="preserve" fill="#121212" fontFamily="Matter SQ" fontSize="14"
-      fontWeight="600" letterSpacing="0em" transform="translate(40 576.5)" style={{ whiteSpace: 'pre'}}><tspan x="0" y="12.498">{ product }</tspan></text>
+    <text xmlSpace="preserve" fill="#121212" fontFamily="MatterVF" fontSize="14"
+      fontWeight="600" letterSpacing="0em" transform="translate(40 576.5)" style={{ whiteSpace: 'pre', fontVariationSettings: "'wght' 800"}}><tspan x="0" y="12.498">{ product }</tspan></text>
     <mask id="m" fill="#fff">
       <path d="M1232 77h48v661h-48V77Z" />
     </mask>
@@ -150,7 +145,7 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
       clipRule="evenodd" opacity=".5" />
     {/* end */}
 
-    <text xmlSpace="preserve" fill="#121212" fillOpacity=".6" fontFamily="Matter SQ"
+    <text xmlSpace="preserve" fill="#121212" fillOpacity=".6" fontFamily="MatterVF"
       fontSize="14" fontWeight="570" letterSpacing="0em" transform="rotate(90 571.25 692.25)" style={{ whiteSpace: 'pre'}}><tspan x="0" y="12.498">Notebooks</tspan></text>
     <g fill="#000" opacity=".5">
       <path fillRule="evenodd"
@@ -161,15 +156,13 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
         d="M1256 217.75a.753.753 0 0 1-.75-.75c0-.414.34-.75.75-.75s.75.336.75.75-.34.75-.75.75Zm0-1.25c-.28 0-.5.224-.5.5s.22.5.5.5.5-.224.5-.5-.22-.5-.5-.5Z"
         clipRule="evenodd" />
     </g>
-    <text xmlSpace="preserve" fill="#121212" fillOpacity=".6" fontFamily="Matter SQ"
+    <text xmlSpace="preserve" fill="#121212" fillOpacity=".6" fontFamily="MatterVF"
       fontSize="14" fontWeight="570" letterSpacing="0em" transform="rotate(90 509.75 753.75)" style={{ whiteSpace: 'pre' }}><tspan x="0" y="12.498">Docs</tspan></text>
     <path fill="#000" fillRule="evenodd"
       d="M1249.48 300.543a8.507 8.507 0 0 0 0 10.914l2.49-2.492A4.986 4.986 0 0 1 1251 306c0-1.11.36-2.136.97-2.965l-2.49-2.492Zm1.06-1.06 2.49 2.491A4.993 4.993 0 0 1 1256 301c1.11 0 2.14.362 2.97.974l2.49-2.491a8.473 8.473 0 0 0-5.46-1.983c-2.08 0-3.98.745-5.46 1.983Zm11.98 1.06-2.49 2.492c.61.829.97 1.855.97 2.965 0 1.11-.36 2.136-.97 2.965l2.49 2.492a8.507 8.507 0 0 0 0-10.914Zm-1.06 11.974-2.49-2.491c-.83.612-1.86.974-2.97.974s-2.14-.362-2.97-.974l-2.49 2.491a8.473 8.473 0 0 0 5.46 1.983c2.08 0 3.98-.745 5.46-1.983ZM1246 306c0-5.523 4.48-10 10-10s10 4.477 10 10-4.48 10-10 10-10-4.477-10-10Zm10-3.5c-1.93 0-3.5 1.567-3.5 3.5s1.57 3.5 3.5 3.5 3.5-1.567 3.5-3.5-1.57-3.5-3.5-3.5Z"
       clipRule="evenodd" opacity=".5" />
-    <text xmlSpace="preserve" fill="#121212" fillOpacity=".6" fontFamily="Matter SQ"
+    <text xmlSpace="preserve" fill="#121212" fillOpacity=".6" fontFamily="MatterVF"
       fontSize="14" fontWeight="570" letterSpacing="0em" transform="rotate(90 467.25 796.25)" style={{ whiteSpace: 'pre'}}><tspan x="0" y="12.498">Support</tspan></text>
-      
-      
   </g>
   <defs>
     <filter id="c" width="12" height="12" x="13" y="16" colorInterpolationFilters="sRGB"
