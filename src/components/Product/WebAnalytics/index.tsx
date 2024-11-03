@@ -348,6 +348,7 @@ export const ProductWebAnalytics = () => {
                         product={product.capitalized} 
                         slug={product.slug} 
                         icon={<IconPieChart />} 
+                        order={1}
                         className={``} 
                     />
 {/* 

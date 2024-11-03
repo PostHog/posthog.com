@@ -5,12 +5,16 @@ interface ScreenshotProps {
     icon: React.ReactNode
     product: string
     slug: string
+    order: number
     className?: string
 }
 
-export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotProps): JSX.Element => {
+export const Screenshot = ({ icon, product, slug, order, className = '' }: ScreenshotProps): JSX.Element => {
   const posthog = usePostHog()
   const region = posthog?.getFeatureFlag?.('are-you-in-the-eu') ? 'eu' : 'us'
+
+  const navOrder = 36.5 * order
+  const navOrderOffset = navOrder
 
     return (
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1280 736" className={`${className} shadow-xl rounded-md reasonable:max-h-[calc(100vh_-_53px_-_2rem)]`}>
@@ -121,15 +125,15 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
 
     {/* active button shadow*/}
 
-    <rect width="192.5" height="10" x="8.75" y="557.5" fill="#E0DDDD" stroke="#CCC"
+    <rect width="192.5" height="10" x="8.75" y={301.5 + navOrderOffset} fill="#E0DDDD" stroke="#CCC"
       stroke-width="1.5" rx="5.25" />
     
     {/* active button background */}
-    <rect width="192.5" height="31.5" x="8.75" y="531.75" fill="#fff" stroke="#AAA"
+    <rect width="192.5" height="31.5" x="8.75" y={275.75 + navOrderOffset} fill="#fff" stroke="#AAA"
       stroke-width="1.5" rx="5.25" />
 
     {/* active product icon */}
-    <g transform="translate(8, 536)">
+    <g transform={`translate(8, ${280 + navOrderOffset})`}>
       <g transform="scale(0.03)" opacity=".5">
         {icon}
       </g>
@@ -137,7 +141,7 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
 
     {/* product label */}
     <text xmlSpace="preserve" fill="#121212" fontFamily="MatterVF" fontSize="14"
-      fontWeight="600" letterSpacing="0em" transform="translate(40 540.5)" style={{ whiteSpace: 'pre', fontVariationSettings: "'wght' 800"}}>
+      fontWeight="600" letterSpacing="0em" transform={`translate(40, ${284.5 + navOrderOffset})`} style={{ whiteSpace: 'pre', fontVariationSettings: "'wght' 800"}}>
       <tspan x="0" y="12.498">{ product }</tspan>
     </text>
     {/* end */}
