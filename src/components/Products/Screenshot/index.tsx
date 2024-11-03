@@ -13,7 +13,7 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
   const region = posthog?.getFeatureFlag?.('are-you-in-the-eu') ? 'eu' : 'us'
 
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1280 736" className={`${className} shadow-xl rounded-md max-h-[calc(100vh_-_53px_-_2rem)]`}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1280 736" className={`${className} shadow-xl rounded-md reasonable:max-h-[calc(100vh_-_53px_-_2rem)]`}>
          <g clipPath="url(#a)">
     <path fill="#fff" d="M0 0h1280v736H0z" />
     <path fill="url(#b)" d="M0 0h1280v40.937H0z" />
