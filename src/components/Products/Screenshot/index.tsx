@@ -120,13 +120,16 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
     <rect width="121" height="28" x="8" y="532" fill="#D0D1C9" rx="4" />
 
     {/* active button shadow*/}
-    <path fill="#E0DDDD" stroke="#CCC"
-      d="M8.5 596.5h193v.5a5.5 5.5 0 0 1-5.5 5.5H14a5.5 5.5 0 0 1-5.5-5.5v-.5Z" />
-    <rect width="192.5" height="31.5" x="8.75" y="567.75" fill="#fff" stroke="#AAA"
+
+    <rect width="192.5" height="10" x="8.75" y="557.5" fill="#E0DDDD" stroke="#CCC"
+      stroke-width="1.5" rx="5.25" />
+    
+    {/* active button background */}
+    <rect width="192.5" height="31.5" x="8.75" y="531.75" fill="#fff" stroke="#AAA"
       stroke-width="1.5" rx="5.25" />
 
     {/* active product icon */}
-    <g transform="translate(8, 572)">
+    <g transform="translate(8, 536)">
       <g transform="scale(0.03)" opacity=".5">
         {icon}
       </g>
@@ -134,16 +137,20 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
 
     {/* product label */}
     <text xmlSpace="preserve" fill="#121212" fontFamily="MatterVF" fontSize="14"
-      fontWeight="600" letterSpacing="0em" transform="translate(40 576.5)" style={{ whiteSpace: 'pre', fontVariationSettings: "'wght' 800"}}><tspan x="0" y="12.498">{ product }</tspan></text>
+      fontWeight="600" letterSpacing="0em" transform="translate(40 540.5)" style={{ whiteSpace: 'pre', fontVariationSettings: "'wght' 800"}}>
+      <tspan x="0" y="12.498">{ product }</tspan>
+    </text>
+    {/* end */}
+
     <mask id="m" fill="#fff">
       <path d="M1232 77h48v661h-48V77Z" />
     </mask>
     <path fill="#EEEFE9" d="M1232 77h48v661h-48V77Z" />
     <path fill="#D0D1C9" d="M1233 738V77h-2v661h2Z" mask="url(#m)" />
+
     <path fill="#000" fillRule="evenodd"
       d="M1247.5 90.25c0-.966.78-1.75 1.75-1.75h13.5c.97 0 1.75.784 1.75 1.75v15.5c0 .966-.78 1.75-1.75 1.75h-13.5c-.97 0-1.75-.784-1.75-1.75v-3.25h-.25a.753.753 0 0 1-.75-.75c0-.414.34-.75.75-.75h.25v-2.25h-.25a.753.753 0 0 1-.75-.75c0-.414.34-.75.75-.75h.25V95h-.25a.753.753 0 0 1-.75-.75c0-.414.34-.75.75-.75h.25v-3.25ZM1249 95h.25c.41 0 .75-.336.75-.75s-.34-.75-.75-.75h-.25v-3.25c0-.138.11-.25.25-.25h13.5c.14 0 .25.112.25.25v15.5c0 .138-.11.25-.25.25h-13.5a.249.249 0 0 1-.25-.25v-3.25h.25c.41 0 .75-.336.75-.75s-.34-.75-.75-.75h-.25v-2.25h.25c.41 0 .75-.336.75-.75s-.34-.75-.75-.75h-.25V95Zm4-.75c0-.414.34-.75.75-.75h4.5c.41 0 .75.336.75.75s-.34.75-.75.75h-4.5a.753.753 0 0 1-.75-.75Zm0 3.75c0-.414.34-.75.75-.75h2.5c.41 0 .75.336.75.75s-.34.75-.75.75h-2.5a.753.753 0 0 1-.75-.75Z"
       clipRule="evenodd" opacity=".5" />
-    {/* end */}
 
     <text xmlSpace="preserve" fill="#121212" fillOpacity=".6" fontFamily="MatterVF"
       fontSize="14" fontWeight="570" letterSpacing="0em" transform="rotate(90 571.25 692.25)" style={{ whiteSpace: 'pre'}}><tspan x="0" y="12.498">Notebooks</tspan></text>
