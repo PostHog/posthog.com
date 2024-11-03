@@ -90,7 +90,7 @@ export const Screenshot = ({ icon, product, slug, className = '' }: ScreenshotPr
       fontWeight="600" letterSpacing="0em" opacity=".5" style={{ whiteSpace: 'pre'}}><tspan x="318.578" y="99.165">/</tspan></text>
     <rect width="100" height="20" x="330.531" y="84" fill="#D0D1C9" rx="4" />
     <rect width="81" height="20" x="232" y="84" fill="#D0D1C9" rx="4" />
-    <text xmlSpace="preserve" fill="#111" fontFamily="SF Pro, -apple-system, Inter, BlinkMacSystemFont, system-ui, sans-serif" fontSize="16" fontWeight="800" letterSpacing="0em" style={{ whiteSpace: 'pre'}}><tspan x="231" y="125.187">{product}</tspan></text>
+    <text xmlSpace="preserve" fill="#111" fontFamily="MatterVF" fontSize="16" fontWeight="800" letterSpacing="0em" style={{ whiteSpace: 'pre', fontVariationSettings: "'wght' 800"}}><tspan x="231" y="125.187">{product}</tspan></text>
     <path fill="url(#j)" d="M215 77h1017v659H215z" />
     <mask id="k" fill="#fff">
       <path d="M0 77h215v659H0V77Z" />
