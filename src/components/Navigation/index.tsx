@@ -112,7 +112,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
                 )}
             </Link>
 
-            <ul className="p-0 m-0 list-none flex-1 overflow-y-auto">
+            <ul className="px-0 py-px m-0 list-none flex-1 overflow-y-auto overflow-x-hidden">
                 {topLevelNav.map((item) => (
                     <MenuItem key={`${item.name}-${item.url}`} {...item} />
                 ))}
