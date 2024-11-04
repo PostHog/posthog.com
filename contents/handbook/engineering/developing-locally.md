@@ -213,6 +213,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
     brew install brotli rustup
     rustup default stable
     rustup-init
+    # Select 1 to proceed with default installation
     ```
 - On Debian-based Linux:
     ```bash
