@@ -31,6 +31,7 @@ import usePostHog from '../hooks/usePostHog'
 import { companyMenu } from '../navs'
 import { PrivateLink } from 'components/PrivateLink'
 import Stickers from 'components/ProfileStickers'
+import TeamPatch from 'components/TeamPatch'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -158,7 +159,7 @@ export default function Team({
     data: {
         mdx: { body },
         allSlackEmoji: { totalCount: totalSlackEmojis },
-        team: { crest, name, roadmaps, teamImage, ...other },
+        team: { crest, crestOptions, name, roadmaps, teamImage, ...other },
         objectives,
     },
     pageContext,
@@ -170,7 +171,7 @@ export default function Team({
     const description = team?.attributes?.description
     const profiles = team?.attributes?.profiles
     const leadProfiles = team?.attributes?.leadProfiles
-    const teamName = `${name} Team`
+    const teamName = name
     const teamLength = profiles?.data?.length
     const pineapplePercentage =
         teamLength &&
@@ -239,9 +240,19 @@ export default function Team({
             </SideModal>
             <Section className="mb-6">
                 <div className="flex flex-col md:flex-row space-x-4 items-center">
-                    <GatsbyImage image={getImage(crest)} alt={teamName} />
+                    <TeamPatch
+                        name={teamName}
+                        imageUrl={getImage(crest)}
+                        color={crestOptions?.color}
+                        textColor={crestOptions?.textColor}
+                        textShadow={crestOptions?.textShadow}
+                        frame={crestOptions?.frame}
+                        plaque={crestOptions?.plaque}
+                        size="lg"
+                        className="mt-8"
+                    />
                     <div className="max-w-xl w-full">
-                        <h1 className="m-0">{teamName}</h1>
+                        <h1 className="m-0">{teamName} Team</h1>
                         {editingDescription ? (
                             <DescriptionForm
                                 initialValues={{ description }}
@@ -565,7 +576,14 @@ export const query = graphql`
                 gatsbyImageData(width: 380)
             }
             crest {
-                gatsbyImageData(width: 227)
+                gatsbyImageData(width: 500)
+            }
+            crestOptions {
+                color
+                textColor
+                textShadow
+                frame
+                plaque
             }
             roadmaps {
                 squeakId

@@ -10,11 +10,12 @@ interface TeamPatchProps {
   frame: string
   plaque: string
   size?: string
+  className?: string
 }
 
-export default function TeamPatch({ name, imageUrl, color, textColor, textShadow, frame, plaque, size }: TeamPatchProps) {
+export default function TeamPatch({ name, imageUrl, color, textColor, textShadow, frame, plaque, size, className }: TeamPatchProps) {
   return (
-    <div className={`size-${size === 'lg' ? '72' : size === 'md' ? '56' : size === 'sm' ? '36' : '72'} mx-auto flex justify-center`}>
+    <div className={`size-${size === 'lg' ? '72' : size === 'md' ? '56' : size === 'sm' ? '36' : '72'} mx-auto flex justify-center ${className}`}>
       <div
         className={`relative ${size === 'lg' ? 'w-48 h-64' : size === 'md' ? 'w-36 h-48' : size === 'sm' ? 'w-24 h-32' : 'w-48 h-64'} shadow-xl ${size === 'lg' ? 'border-4' : size === 'md' ? 'border-3' : size === 'sm' ? 'border-2' : 'border-4'} mx-auto flex items-center justify-center border-team-${color}-border bg-team-${color}-bg ${frame === 'half-round'
           ? 'rounded-tl-[100px] rounded-tr-[100px]'
