@@ -2972,6 +2972,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/vitally',
                         },
                         {
+                            name: 'Chargebee',
+                            url: '/docs/data-warehouse/setup/chargebee',
+                        },
+                        {
                             name: 'Self-managed',
                         },
                         {
