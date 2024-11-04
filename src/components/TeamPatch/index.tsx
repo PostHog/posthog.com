@@ -1,8 +1,9 @@
 import React from 'react'
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
 interface TeamPatchProps {
   name: string
-  imageUrl: string
+  imageUrl: IGatsbyImageData | undefined
   color: string
   textColor?: string
   textShadow?: string
@@ -99,7 +100,14 @@ export default function TeamPatch({ name, imageUrl, color, textColor, textShadow
           </div>
         )}
       </div>
-      <img src={imageUrl} className={`${size === 'lg' ? 'w-56' : size === 'md' ? 'w-44' : 'w-28'} absolute -translate-y-14 z-10`} alt={name} />
+      {imageUrl && (
+        <GatsbyImage 
+          image={imageUrl} 
+          alt={`${name} Team`} 
+          className={`${size === 'lg' ? 'w-56' : size === 'md' ? 'w-44' : 'w-28'} absolute -translate-y-14 z-10`}
+          imgStyle={{ objectFit: "contain", width: "100%", height: "auto" }}
+        />
+      )}
     </div>
   )
 }

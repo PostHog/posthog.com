@@ -39,7 +39,14 @@ const Teams: React.FC = () => {
                         }
                     }
                     crest {
-                        gatsbyImageData(width: 200, height: 200)
+                        gatsbyImageData(width: 500)
+                    }
+                    crestOptions {
+                        color
+                        textColor
+                        textShadow
+                        frame
+                        plaque
                     }
                 }
             }
@@ -98,17 +105,30 @@ const Teams: React.FC = () => {
                             </div>
 
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-5 text-center">
-                                {allTeams.nodes.map(({ id, name, profiles, crest, leadProfiles }) => (
+                                {allTeams.nodes
+                                    .sort((a, b) => a.name.localeCompare(b.name))
+                                    .map(({ id, name, profiles, crest, crestOptions, leadProfiles }) => (
                                     <Link
                                         to={`/teams/${slugify(name.toLowerCase().replace('ops', ''), {
                                             remove: /and/,
                                         })}`}
                                         key={id}
-                                        className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-2 md:p-4 hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px"
+                                        className="group relative p-2 md:p-4 mt-20 mb-12"
                                     >
-                                        <GatsbyImage image={getImage(crest)} alt={`${name} Team`} />
-                                        <h3 className="text-base my-2 leading-snug">{name}</h3>
-                                        <div className="flex justify-center -mr-3" dir="rtl">
+                                        <div className="hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px">
+                                            <TeamPatch
+                                                name={name}
+                                                imageUrl={getImage(crest)}
+                                                color={crestOptions?.color}
+                                                textColor={crestOptions?.textColor}
+                                                textShadow={crestOptions?.textShadow}
+                                                frame={crestOptions?.frame}
+                                                plaque={crestOptions?.plaque}
+                                                size="md"
+                                            />
+                                        </div>
+
+                                        <div className="absolute -bottom-10 left-0 right-0 flex justify-center -mr-3 transform group-hover:scale-125 transition-all duration-100" dir="rtl">
                                             {profiles.data
                                                 .slice()
                                                 .sort((a, b) => {
@@ -142,7 +162,7 @@ const Teams: React.FC = () => {
                                                                 >
                                                                     <img
                                                                         src={avatar?.data?.attributes?.url}
-                                                                        className={`w-10 h-10 rounded-full bg-${color ?? 'white dark:bg-accent-dark'
+                                                                        className={`size-10 rounded-full bg-${color ?? 'white dark:bg-accent-dark'
                                                                             } border border-light dark:border-dark`}
                                                                         alt={name}
                                                                     />

@@ -142,6 +142,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     fields: 'id',
                 },
                 crest: true,
+                crestOptions: true,
                 miniCrest: true,
                 teamImage: {
                     populate: {
