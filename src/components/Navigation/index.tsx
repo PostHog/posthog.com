@@ -41,7 +41,7 @@ const MenuItem = ({ name, children, url, icon, color, depth = 0 }: IMenu & { dep
             <div
                 className={`flex items-center px-1 ${
                     depth === 2 && isActive
-                        ? 'before:absolute before:border-r before:border-accent dark:before:border-accent-dark before:top-2 before:bottom-2 before:right-0 before:translate-x-full before:w-px before:z-[-1]'
+                        ? 'before:absolute before:bg-accent dark:before:bg-accent-dark before:top-[11px] before:bottom-[11px] before:rounded-tl-[11px] before:rounded-bl-[11px] before:right-px before:translate-x-full before:w-px before:z-10'
                         : ''
                 }`}
             >
@@ -95,28 +95,31 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
 
     return (
         <nav className={className}>
-            <Link
-                className="flex justify-center m-2 pt-1.5 pb-2 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative mb-2 border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px]"
+            <div className="relative flex flex-col h-screen max-h-screen">
+                <Link
+                    className="flex justify-center m-2 pt-1.5 pb-2 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative mb-2 border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px]"
                 to="/"
-            >
-                {enterpriseMode ? (
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/MainNav/posthog-tm.png"
-                        className="h-6 mx-6"
-                    />
-                ) : (
-                    <Logo
+                >
+                    {enterpriseMode ? (
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/MainNav/posthog-tm.png"
+                            className="h-6 mx-6"
+                        />
+                    ) : (
+                        <Logo
                         color={websiteTheme === 'dark' && 'white'}
                         className="h-[24px] fill-current relative px-2 box-content"
                     />
-                )}
-            </Link>
+                    )}
+                </Link>
 
-            <ul className="px-0 py-px m-0 list-none flex-1 overflow-y-auto overflow-x-hidden">
-                {topLevelNav.map((item) => (
-                    <MenuItem key={`${item.name}-${item.url}`} {...item} />
-                ))}
-            </ul>
+                <ul className="px-0 py-px m-0 list-none flex-1 overflow-y-auto overflow-x-hidden">
+                    {topLevelNav.map((item) => (
+                        <MenuItem key={`${item.name}-${item.url}`} {...item} />
+                    ))}
+                </ul>
+                <div className="absolute top-0 right-0 bottom-0 bg-border dark:bg-border-dark w-px"></div>
+            </div>
         </nav>
     )
 }
