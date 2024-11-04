@@ -113,7 +113,7 @@ const Teams: React.FC = () => {
                                             remove: /and/,
                                         })}`}
                                         key={id}
-                                        className="group relative p-2 md:p-4 mt-20 mb-12"
+                                        className="group relative mt-20 mb-12"
                                     >
                                         <div className="hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px">
                                             <TeamPatch
@@ -128,49 +128,51 @@ const Teams: React.FC = () => {
                                             />
                                         </div>
 
-                                        <div className="absolute -bottom-10 left-0 right-0 flex justify-center -mr-3 transform group-hover:scale-125 transition-all duration-100" dir="rtl">
-                                            {profiles.data
-                                                .slice()
-                                                .sort((a, b) => {
-                                                    const aIsLead = leadProfiles.data.some(
-                                                        ({ id: leadID }) => leadID === a.id
-                                                    )
-                                                    const bIsLead = leadProfiles.data.some(
-                                                        ({ id: leadID }) => leadID === b.id
-                                                    )
-                                                    return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
-                                                })
-                                                .reverse()
-                                                .map(
-                                                    (
-                                                        { id, attributes: { firstName, lastName, avatar, color } },
-                                                        index
-                                                    ) => {
-                                                        const name = [firstName, lastName].filter(Boolean).join(' ')
-                                                        const isTeamLead = leadProfiles.data.some(
-                                                            ({ id: leadID }) => leadID === id
+                                        <div className="absolute top-[calc(100%+1rem)] left-0 right-0 justify-center -mr-3 transform group-hover:scale-125 transition-all duration-100">
+                                            <div className="flex flex-wrap justify-center" dir="rtl">
+                                                {profiles.data
+                                                    .slice()
+                                                    .sort((a, b) => {
+                                                        const aIsLead = leadProfiles.data.some(
+                                                            ({ id: leadID }) => leadID === a.id
                                                         )
-                                                        return (
-                                                            <span
-                                                                key={`${name}-${index}`}
-                                                                className="cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark"
-                                                            >
-                                                                <Tooltip
-                                                                    content={`${name} ${isTeamLead ? '(Team lead)' : ''
-                                                                        }`}
-                                                                    placement="top"
+                                                        const bIsLead = leadProfiles.data.some(
+                                                            ({ id: leadID }) => leadID === b.id
+                                                        )
+                                                        return aIsLead === bIsLead ? 0 : aIsLead ? -1 : 1
+                                                    })
+                                                    .reverse()
+                                                    .map(
+                                                        (
+                                                            { id, attributes: { firstName, lastName, avatar, color } },
+                                                            index
+                                                        ) => {
+                                                            const name = [firstName, lastName].filter(Boolean).join(' ')
+                                                            const isTeamLead = leadProfiles.data.some(
+                                                                ({ id: leadID }) => leadID === id
+                                                            )
+                                                            return (
+                                                                <span
+                                                                    key={`${name}-${index}`}
+                                                                    className="cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark"
                                                                 >
-                                                                    <img
-                                                                        src={avatar?.data?.attributes?.url}
-                                                                        className={`size-10 rounded-full bg-${color ?? 'white dark:bg-accent-dark'
-                                                                            } border border-light dark:border-dark`}
-                                                                        alt={name}
-                                                                    />
-                                                                </Tooltip>
-                                                            </span>
-                                                        )
-                                                    }
-                                                )}
+                                                                    <Tooltip
+                                                                        content={`${name} ${isTeamLead ? '(Team lead)' : ''
+                                                                            }`}
+                                                                        placement="top"
+                                                                    >
+                                                                        <img
+                                                                            src={avatar?.data?.attributes?.url}
+                                                                            className={`size-10 rounded-full bg-${color ?? 'white dark:bg-accent-dark'
+                                                                                } border border-light dark:border-dark`}
+                                                                            alt={name}
+                                                                        />
+                                                                    </Tooltip>
+                                                                </span>
+                                                            )
+                                                        }
+                                                    )}
+                                                    </div>
                                         </div>
                                     </Link>
                                 ))}
