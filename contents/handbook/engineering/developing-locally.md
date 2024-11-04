@@ -291,7 +291,7 @@ You can also use [pyenv](https://github.com/pyenv/pyenv) if you wish to manage m
     CFLAGS="-I /opt/homebrew/opt/openssl/include $(python3.11-config --includes)" LDFLAGS="-L /opt/homebrew/opt/openssl/lib" GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip install -r requirements.txt
     ```
 
-    > **Friendly tip:** If you see `ERROR: Could not build wheels for xmlsec`, refer to this [issue comment](https://github.com/xmlsec/python-xmlsec/issues/254#issuecomment-2451868088).
+    > **Friendly tip:** If you see `ERROR: Could not build wheels for xmlsec`, refer to this [issue comment](https://github.com/xmlsec/python-xmlsec/issues/254#issuecomment-2451868088). You will need to install the full Xcode app to use the `--build-from-source` flag.
 
     These will be used when installing `grpcio` and `psycopg2`. After doing this once, and assuming nothing changed with these two packages, next time simply run:
 
