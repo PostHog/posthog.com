@@ -245,7 +245,6 @@ w-full
 stroke-team-purple-border
 fill-team-purple-bg
 fill-team-purple-plaque-bg
-fill-team-purple-plaque-bg
 fill-team-purple-plaque-bg-dark
 fill-team-purple-plaque-shadow
 
@@ -262,3 +261,21 @@ fill-team-yellow-plaque-bg
 fill-team-yellow-plaque-bg-dark
 fill-team-yellow-plaque-shadow
 text-[#1E2F46]
+
+stroke-team-green-border
+fill-team-green-bg
+fill-team-green-plaque-bg
+stroke-team-green-plaque-border
+fill-team-green-plaque-shadow
+
+stroke-team-orange-border
+stroke-team-orange-plague-border
+fill-team-orange-bg
+fill-team-orange-plaque-shadow-bg
+
+fill-team-white-plaque-bg
+stroke-team-white-plaque-border
+fill-team-white-plaque-shadow
+
+stroke-team-pink-border
+fill-team-pink-bg

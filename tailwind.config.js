@@ -84,6 +84,24 @@ module.exports = {
             'team-yellow-plaque-bg-dark': '#FFCD81',
             'team-yellow-plaque-shadow': '#EDA840',
 
+            'team-green-border': '#34796F',
+            'team-green-bg': '#6BC0B3',
+            'team-green-plaque-bg': '#F87A4C',
+            'team-green-plaque-border': '#C03300',
+            'team-green-plaque-bg-dark': '#BD4012',
+
+            'team-orange-border': '#8E2600',
+            'team-orange-bg': '#DF6133',
+            'team-orange-plaque-border': '#C03300',
+            'team-orange-plaque-shadow-bg': '#BD4012',
+
+            'team-white-plaque-bg': '#fff',
+            'team-white-plaque-border': '#1E2F46',
+            'team-white-plaque-shadow': '#fff',
+
+            'team-pink-border': '#8C0D3B',
+            'team-pink-bg': '#E34C6F',
+
             'button-shadow': '#CD8407',
             'button-border': '#B17816',
             'button-shadow-dark': '#99660E',
