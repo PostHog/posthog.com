@@ -343,7 +343,7 @@ export const ProductWebAnalytics = () => {
                 />
 
 
-                <div className={`flex flex-col @6xl:flex-row items-start @6xl:items-center gap-8 @5xl:gap-12 transition-all px-4 @5xl:px-8 mb-8 ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
+                <div className={`flex flex-col @7xl:flex-row items-start @7xl:items-center gap-8 @5xl:gap-12 transition-all px-4 @5xl:px-8 mb-8 ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
                     <Screenshot 
                         product={product.capitalized} 
                         slug={product.slug} 
@@ -361,8 +361,8 @@ export const ProductWebAnalytics = () => {
                         />
                     </div> */}
 
-                    <section id="customers" className={`@container w-full @6xl:basis-96`}>
-                        <ul className="list-none p-0 grid grid-cols-1 @sm:grid-cols-2 xl:@sm:grid-cols-1 @2xl:grid-cols-3 @6xl:grid-cols-1 gap-8 @6xl:gap-4">
+                    <section id="customers" className={`@container w-full @7xl:basis-96`}>
+                        <ul className="list-none p-0 grid grid-cols-1 @sm:grid-cols-2 2xl:@sm:grid-cols-1 @2xl:grid-cols-3 @7xl:grid-cols-1 gap-8 @7xl:gap-4">
                             <CustomerCard
                                 outcome="gets 30% more data than with GA4"
                                 quote="Other platforms we looked at dropped data due to ad blockers and third-party cookies."
