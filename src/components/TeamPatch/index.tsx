@@ -85,6 +85,18 @@ export default function TeamPatch({
                         />
                       </g>
                     )}
+                    {plaque === 'stepped' && (
+                      <g id="stepped bg">
+                        <rect id="stepped bg_2" x="10.0478" y="232.028" width="258.995" height="47.6707" rx="2.9487"
+                          fill="white" stroke="#1E2F46" stroke-width="3.9316" />
+                        <path id="Vector 182"
+                          d="M44.0709 256.605H27.3567C26.9316 256.605 26.707 257.109 26.9908 257.425L44.8135 277.3C45.4155 277.971 46.5282 277.546 46.5282 276.644V259.063C46.5282 257.706 45.428 256.605 44.0709 256.605Z"
+                          fill="white" stroke="#1E2F46" stroke-width="3.9316" />
+                        <path id="Vector 183"
+                          d="M235.611 256.605H252.325C252.75 256.605 252.975 257.109 252.691 257.425L234.868 277.3C234.266 277.971 233.153 277.546 233.153 276.644V259.063C233.153 257.706 234.254 256.605 235.611 256.605Z"
+                          fill="white" stroke="#1E2F46" stroke-width="3.9316" />
+                      </g>
+                    )}
                 </g>
 
                 {frame === 'half-round' && (
@@ -126,6 +138,11 @@ export default function TeamPatch({
                         className={`fill-team-${color}-bg stroke-team-${color}-border`}
                     />
 
+                )}
+                {frame === 'squareish' && (
+                  <path id="squareish"
+                  d="M62.5725 38.9658H215.905C228.39 38.9658 238.512 49.0872 238.512 61.5725V277.811C238.512 290.296 228.39 300.417 215.905 300.417H62.5725C50.0872 300.417 39.9658 290.296 39.9658 277.811V61.5726C39.9658 49.0872 50.0872 38.9658 62.5725 38.9658Z"
+                  fill="#DF6133" stroke="#8E2600" stroke-width="3.9316" />
                 )}
                 <path
                     id="frame"
@@ -280,6 +297,26 @@ export default function TeamPatch({
                           </textPath>
                       </text>
                       </>
+                    )}
+                    {plaque === 'stepped' && (
+                      <g id="stepped marquee">
+                        <rect id="stepped - mid" x="212.522" y="208.685" width="40.7904" height="47.6707"
+                          rx="2.9487" fill="white" stroke="#1E2F46" stroke-width="3.9316" />
+                        <rect id="stepped - mid_2" x="26.2588" y="208.685" width="40.5447" height="47.6707"
+                          rx="2.9487" fill="white" stroke="#1E2F46" stroke-width="3.9316" />
+                        <path id="Vector 186"
+                          d="M66.3112 234.613H49.5969C49.1718 234.613 48.9472 235.116 49.231 235.433L67.0538 255.308C67.6557 255.979 68.7684 255.553 68.7684 254.652V237.071C68.7684 235.713 67.6683 234.613 66.3112 234.613Z"
+                          fill="white" stroke="#1E2F46" stroke-width="3.9316" />
+                        <path id="Vector 187"
+                          d="M213.007 234.613H229.721C230.147 234.613 230.371 235.116 230.087 235.433L212.265 255.308C211.663 255.979 210.55 255.553 210.55 254.652V237.071C210.55 235.713 211.65 234.613 213.007 234.613Z"
+                          fill="white" stroke="#1E2F46" stroke-width="3.9316" />
+                        <g id="Rectangle 218" filter="url(#filter0_b_2806_100)">
+                          <rect x="46.6445" y="185.836" width="186.505" height="51.6023" rx="4.91451" fill="white"
+                            fill-opacity="0.8" />
+                          <rect x="48.6103" y="187.802" width="182.574" height="47.6707" rx="2.9487"
+                            stroke="#1E2F46" stroke-width="3.9316" />
+                        </g>
+                      </g>
                     )}
                 </g>
             </g>
