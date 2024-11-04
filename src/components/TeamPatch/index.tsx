@@ -15,100 +15,107 @@ interface TeamPatchProps {
 
 export default function TeamPatch({ name, imageUrl, color, textColor, textShadow, frame, plaque, size, className }: TeamPatchProps) {
   return (
-    <div className={`size-${size === 'lg' ? '72' : size === 'md' ? '56' : size === 'sm' ? '36' : '72'} mx-auto flex justify-center ${className}`}>
-      <div
-        className={`relative ${size === 'lg' ? 'w-48 h-64' : size === 'md' ? 'w-36 h-48' : size === 'sm' ? 'w-24 h-32' : 'w-48 h-64'} shadow-xl ${size === 'lg' ? 'border-4' : size === 'md' ? 'border-3' : size === 'sm' ? 'border-2' : 'border-4'} mx-auto flex items-center justify-center border-team-${color}-border bg-team-${color}-bg ${frame === 'half-round'
-          ? 'rounded-tl-[100px] rounded-tr-[100px]'
-          : frame === 'rounded'
-            ? size === 'lg' ? 'rounded-lg' : size === 'md' ? 'rounded-md' : size === 'sm' ? 'rounded-sm' : 'rounded-lg'
-            : frame === 'square'
-              ? ''
-              : ''
-          }`}
-      >
+    <svg viewBox="0 0 278 305" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className={`w-full ${className}`}>
+      <g id="all variants - slice">
+        <g id="marquees - background">
+          {plaque === 'straight' && (
+            <g id="straight">
+              <rect id="Rectangle 170" x="19.555" y="280.42" width="238.888" height="14.2546" rx="7.12732" strokeWidth="2.4577" className={`fill-team-${color}-plaque-shadow stroke-team-${color}-border`} />
+          </g>
+          )}
+          {plaque === 'curved' && (
+            <g id="curved">
+            <path id="Rectangle 136" d="M4.05433 268.289C53.9505 245.878 93.7581 234.065 134.869 233.736C175.982 233.407 218.525 244.564 273.885 268.32C275.242 268.903 276.14 270.253 276.14 271.711V295.158C276.14 297.82 273.348 299.625 270.87 298.528C220.602 276.276 180.175 264.932 139.516 264.849C98.8568 264.766 58.0882 275.944 7.1364 298.522C4.65676 299.621 1.86166 297.815 1.86166 295.153V271.653C1.86166 270.215 2.72994 268.884 4.05433 268.289Z" strokeWidth="2.4577" className={`fill-team-${color}-plaque-shadow stroke-team-${color}-border`}/>
+            </g>
+          )}
+        </g>
+
+        {frame === 'half-round' && (
+          <path id="half-round" d="M237.548 140.827V303.035H38.9662V140.827C38.9662 85.9905 83.4202 41.5365 138.257 41.5365C193.094 41.5365 237.548 85.9905 237.548 140.827Z" stroke-width="3.93231" className={`fill-team-${color}-bg stroke-team-${color}-border`}/>
+        )}
+        {frame === 'rectangle' && (
+          <rect id="rectangle" x="38.9662" y="41.9662" width="198.578" height="261.498" stroke-width="3.93231" className={`fill-team-${color}-bg stroke-team-${color}-border`}/>
+        )}
+        {frame === 'round' && (
+          <rect id="round" x="38.9662" y="41.9662" width="198.578" height="261.498" rx="28.0338" stroke-width="3.93231" className={`fill-team-${color}-bg stroke-team-${color}-border`}/>
+        )}
+  
+        <path id="frame" d="M238.29 140.827V303.035H39.7083V140.827C39.7083 85.9905 84.1624 41.5365 138.999 41.5365C193.836 41.5365 238.29 85.9905 238.29 140.827Z"  strokeWidth="3.93231"  />
+        <g id="marquees - solids">
+        {plaque === 'curved' && (
+          <g id="curved_2">
+            <path id="Rectangle 139" d="M23.1566 240.914C95.3745 208.334 181.331 207.803 254.838 240.915C256.135 241.499 256.968 242.8 256.968 244.237V279.091C256.153 280.3 255.53 280.761 255.084 280.923C254.67 281.073 254.193 281.041 253.437 280.695C252.775 280.391 252.066 279.929 251.17 279.344C250.988 279.225 250.797 279.101 250.597 278.971C249.462 278.237 248.124 277.411 246.533 276.74C163.105 241.526 78.7314 253.416 32.0769 276.773C31.1729 277.226 30.235 277.785 29.3373 278.321C29.0899 278.468 28.8456 278.614 28.6059 278.755C27.4598 279.43 26.3936 280.017 25.3946 280.38C24.3954 280.743 23.5905 280.834 22.926 280.662C22.3326 280.507 21.6816 280.099 21.0296 279.106V244.235C21.0296 242.798 21.8614 241.498 23.1566 240.914Z" fill="white" stroke="black" strokeWidth="2.4577"/>
+          </g>
+        )}
         {plaque === 'straight' && (
-          <>
-            <div
-              className={`left-round-behind w-4 h-1.5 border-l-2 border-b-2 border-team-${color}-border bg-team-${color}-plaque-shadow rounded-bl-full absolute left-[calc(-1rem_-_0px)] ${size === 'lg' ? 'bottom-1.5' : size === 'md' ? 'bottom-1' : size === 'sm' ? 'bottom-0' : 'bottom-1.5'} z-[-1]`}
-            />
-            <div
-              className={`right-round-behind w-4 h-1.5 border-r-2 border-b-2 border-team-${color}-border bg-team-${color}-plaque-shadow rounded-br-full absolute right-[calc(-1rem_-_0px)] ${size === 'lg' ? 'bottom-1.5' : size === 'md' ? 'bottom-1' : size === 'sm' ? 'bottom-0' : 'bottom-1.5'} z-[-1]`}
-            />
-            <div
-              className={`banner-text-bg bg-team-${color}-plaque-bg bg-opacity-80 border-2 border-team-${color}-border rounded-tl rounded-tr absolute ${size === 'lg' ? 'bottom-4' : size === 'md' ? 'bottom-3' : size === 'sm' ? 'bottom-2' : 'bottom-4'} -left-4 -right-4 z-20 flex items-center justify-center text-center leading-none uppercase ${size === 'lg' ? 'text-xl h-8' : size === 'md' ? 'text-lg h-7' : size === 'sm' ? 'text-sm h-6' : 'text-xl h-8'} font-bold font-squeak [font-variant:none] text-${textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'
+          <g id="straight_2">
+            <path id="solid white background" d="M23.2416 245.772H254.756C256.792 245.772 258.443 247.422 258.443 249.458V286.181C257.137 284.985 255.777 284.098 254.197 283.487C252.132 282.689 249.786 282.399 246.86 282.399H31.4842C27.5414 282.399 23.2354 283.383 19.555 286.382V249.458C19.555 247.422 21.2055 245.772 23.2416 245.772Z" fill="white" stroke="#40396E" strokeWidth="2.4577"/>
+            </g>
+          )}
+        </g>
+      <image 
+        id="website-vibes"
+        x="0"
+        y="0"
+        width="200"
+        height="300"
+        href={imageUrl}
+        className="w-full transform "
+        preserveAspectRatio="xMidYMid meet"
+        style={{ pointerEvents: 'none' }}
+      />
+        <g id="marquees - foreground">
+        {plaque === 'curved' && (
+          <g id="curved_3">
+            <path id="Rectangle 138" d="M23.1566 240.914C95.3745 208.334 181.331 207.803 254.838 240.915C256.135 241.499 256.968 242.8 256.968 244.237V279.091C256.153 280.3 255.53 280.761 255.084 280.923C254.67 281.073 254.193 281.041 253.437 280.695C252.775 280.391 252.066 279.929 251.17 279.344C250.988 279.225 250.797 279.101 250.597 278.971C249.462 278.237 248.124 277.411 246.533 276.74C163.105 241.526 78.7314 253.416 32.0769 276.773C31.1729 277.226 30.235 277.785 29.3373 278.321C29.0899 278.468 28.8456 278.614 28.6059 278.755C27.4598 279.43 26.3936 280.017 25.3946 280.38C24.3954 280.743 23.5905 280.834 22.926 280.662C22.3326 280.507 21.6816 280.099 21.0296 279.106V244.235C21.0296 242.798 21.8614 241.498 23.1566 240.914Z" fill="#FFCD81" fillOpacity="0.8" stroke="black" strokeWidth="2.4577"/>
+            <path id="name" fillRule="evenodd" clipRule="evenodd" pathLength="1" d="M20.0462 274.378C20.0299 274.348 19.9353 274.176 19.3856 273.18C18.7214 271.976 18.722 271.975 18.7227 271.975L18.7333 271.969L18.7632 271.953C18.7892 271.939 18.8272 271.918 18.8771 271.891C18.9769 271.837 19.1244 271.758 19.3184 271.656C19.7066 271.451 20.2815 271.153 21.0357 270.775C22.544 270.017 24.7697 268.939 27.6535 267.648C33.4207 265.064 41.8218 261.624 52.3817 258.185C73.4979 251.308 103.269 244.43 137.886 244.43C172.502 244.43 202.087 251.309 223.018 258.186C233.485 261.625 241.793 265.066 247.491 267.65C250.34 268.942 252.536 270.021 254.025 270.778C254.769 271.157 255.336 271.455 255.719 271.66C255.91 271.762 256.055 271.841 256.154 271.895C256.203 271.922 256.24 271.943 256.266 271.957L256.296 271.973L256.304 271.978L256.306 271.979C256.307 271.98 256.308 271.98 255.636 273.18C254.964 274.379 254.964 274.379 254.964 274.379L254.963 274.379L254.958 274.376L254.934 274.363C254.912 274.351 254.878 274.332 254.833 274.307C254.742 274.257 254.605 274.183 254.421 274.085C254.055 273.888 253.504 273.599 252.777 273.229C251.324 272.489 249.164 271.429 246.355 270.155C240.736 267.606 232.521 264.203 222.16 260.799C201.434 253.988 172.144 247.18 137.886 247.18C103.627 247.18 74.1483 253.989 53.2332 260.8C42.7775 264.204 34.4677 267.608 28.7778 270.157C25.9331 271.432 23.7438 272.492 22.2692 273.232C21.5319 273.602 20.9734 273.892 20.601 274.089C20.4148 274.187 20.2752 274.262 20.183 274.311C20.1369 274.336 20.1027 274.355 20.0804 274.367L20.0561 274.38L20.0506 274.383L20.0496 274.384C20.0496 274.384 20.0496 274.384 20.0462 274.378Z" fill="none"/>
+            <text fill="#1E2F46" className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-3xl text-${textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'
                 } ${textShadow === 'light'
                   ? '0_1px_0_rgba(255,255,255,.5)'
                   : textShadow === 'dark'
                     ? '0_1px_0_rgba(0,0,0,.5)'
                     : ''
-                }`}
-            >
-              {name}
-            </div>
-            <div className={`fake-corners absolute ${size === 'lg' ? 'bottom-4' : size === 'md' ? 'bottom-3' : size === 'sm' ? 'bottom-2' : 'bottom-4'} -left-3.5 -right-3.5`}>
-              <div className="relative mt-[-2px]">
-                <div
-                  className={`left-line bg-team-${color}-plaque-bg dark:team-${color}-plaque-bg-dark border-l-2 border-team-${color}-border w-2 h-3 absolute -left-0.5 -bottom-1 z-20 [clip-path:polygon(6px_8px,0px_6px,0px_12px,10px_12px)]`}
-                />
-                <div
-                  className={`left-rounded-corner bg-team-${color}-plaque-shadow border-l-2 border-t-2 rounded-tl-full border-team-${color}-border ${size === 'lg' ? 'w-3' : size === 'md' ? 'w-3.5' : size === 'sm' ? 'w-3.5' : 'w-3'} h-1.5 absolute -left-0.5 -bottom-1.5 z-20 `}
-                />
-                <div
-                  className={`right-line bg-team-${color}-plaque-bg dark:team-${color}-plaque-bg-dark border-r-2 border-team-${color}-border w-2 h-3 absolute -right-0.5 -bottom-1 z-20 [clip-path:polygon(4px_8px,10px_6px,10px_12px,0px_12px)]`}
-                />
-                <div
-                  className={`right-rounded-corner bg-team-${color}-plaque-shadow border-r-2 border-t-2 rounded-tr-full border-team-${color}-border ${size === 'lg' ? 'w-3' : size === 'md' ? 'w-3.5' : size === 'sm' ? 'w-3.5' : 'w-3'} h-1.5 absolute -right-0.5 -bottom-1.5 z-20`}
-                />
-              </div>
-            </div>
-          </>
+                }`}>
+              <textPath
+                href="#name"
+                startOffset="26%"
+                textAnchor="middle"
+              >
+                {name}
+              </textPath>
+            </text>
+          </g>
         )}
-        {plaque === 'curved' && (
-          <div className={`absolute ${size === 'lg' ? 'bottom-4' : size === 'md' ? 'bottom-3' : size === 'sm' ? 'bottom-2' : 'bottom-4'} -left-3.5 -right-3.5 z-20`}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 274" fill="none" className="w-full">
-              <path
-                className={`fill-team-${color}-plaque-bg`}
-                stroke="#000"
-                strokeWidth="10"
-                d="M13.654 105.234c293.844-132.564 643.588-134.723 942.678.002 5.276 2.377 8.668 7.67 8.668 13.518v141.807c-3.107 4.539-5.978 6.733-8.436 7.709-2.513.997-5.208.966-8.367-.052-3.255-1.05-6.781-3.082-10.647-5.811-2.993-2.114-5.966-4.48-9.055-6.937-.908-.723-1.826-1.454-2.758-2.188a24.213 24.213 0 0 0-5.615-3.296C581.456 107.952 239.33 156.327 49.95 251.139c-3.679 1.842-7.495 4.118-11.148 6.297-1.006.6-2 1.193-2.975 1.767-4.664 2.747-9.002 5.136-13.067 6.613-4.065 1.478-7.34 1.847-10.044 1.145-2.414-.628-5.063-2.291-7.716-6.33V118.744c0-5.846 3.384-11.133 8.654-13.51Z"
-              />
-              <path
-                fill="none"
-                fillRule="evenodd"
-                d="m15.642 234.291-2.643-4.791c-2.656-4.816-2.654-4.817-2.651-4.819l.042-.023.12-.065a182.363 182.363 0 0 1 2.22-1.188 385.126 385.126 0 0 1 6.87-3.526c6.033-3.028 14.936-7.34 26.471-12.508 23.069-10.335 56.673-24.095 98.913-37.851 84.465-27.506 203.55-55.02 342.015-55.02 138.468 0 256.807 27.515 340.53 55.025 41.868 13.757 75.1 27.52 97.891 37.857 11.396 5.169 20.183 9.482 26.135 12.511a369.576 369.576 0 0 1 6.776 3.528c.766.409 1.347.725 1.741.941l.45.247.118.066.033.018.009.006c.003.001.005.002-2.683 4.801l-2.687 4.799-.004-.002-.021-.012-.095-.053a158.362 158.362 0 0 0-2.05-1.112 361.2 361.2 0 0 0-6.575-3.423c-5.815-2.959-14.454-7.201-25.691-12.297-22.475-10.195-55.336-23.807-96.781-37.425-82.902-27.24-200.063-54.475-337.096-54.475-137.034 0-254.949 27.235-338.609 54.48-41.823 13.619-75.062 27.233-97.822 37.43-11.379 5.098-20.136 9.34-26.034 12.301a380.72 380.72 0 0 0-6.673 3.424c-.745.393-1.303.692-1.672.891l-.41.223-.098.053-.021.012-.005.002-.013-.025Z"
-                clipRule="evenodd"
-                id="name"
-                pathLength="4"
-              />
-              <text fill="#000">
-                <textPath
-                  href="#name"
-                  startOffset="1"
-                  textAnchor="middle"
-                  fontSize="96px"
-                  className={`font-squeak [font-variant:none] uppercase fill-${textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'
-                    } ${textShadow === 'light'
-                      ? '0_1px_0_rgba(255,255,255,.5)'
-                      : textShadow === 'dark'
-                        ? '0_1px_0_rgba(0,0,0,.5)'
-                        : ''
-                    }`}
-                >
-                  {name}
-                </textPath>
-              </text>
-            </svg>
-          </div>
-        )}
-      </div>
-      {imageUrl && (
-        <GatsbyImage 
-          image={imageUrl} 
-          alt={`${name} Team`} 
-          className={`${size === 'lg' ? 'w-56' : size === 'md' ? 'w-44' : 'w-28'} absolute -translate-y-14 z-10`}
-          imgStyle={{ objectFit: "contain", width: "100%", height: "auto" }}
-        />
-      )}
-    </div>
+          {plaque === 'straight' && (
+            <g id="straight_3">
+              <path id="name background (partially transparent)" d="M23.2416 245.772H254.756C256.792 245.772 258.443 247.422 258.443 249.458V286.181C257.137 284.985 255.777 284.098 254.197 283.487C252.132 282.689 249.786 282.399 246.86 282.399H31.4842C27.5414 282.399 23.2354 283.383 19.555 286.382V249.458C19.555 247.422 21.2055 245.772 23.2416 245.772Z"  fillOpacity="0.8" strokeWidth="2.4577" className={`fill-team-${color}-plaque-bg stroke-team-${color}-plaque-border`} />
+              <g id="Website &#38; Vibes" filter="url(#filter0_i_2806_100)">
+                <text className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-3xl text-${textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'
+                } ${textShadow === 'light'
+                  ? '0_1px_0_rgba(255,255,255,.5)'
+                  : textShadow === 'dark'
+                    ? '0_1px_0_rgba(0,0,0,.5)'
+                    : ''
+                }`} fill="#FDE3EC" xmlSpace="preserve" style={{ whiteSpace: 'pre' }} letterSpacing="0em" textAnchor="middle" x="140">
+                  <tspan y="273.218">{name}</tspan>
+                </text>
+              </g>
+            </g>
+          )}
+        </g>
+      </g>
+      <defs>
+        <filter id="filter0_i_2806_100" x="30.4902" y="252.41" width="217.025" height="20.6172" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+          <feOffset dy="0.737309"/>
+          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"/>
+          <feBlend mode="normal" in2="shape" result="effect1_innerShadow_2806_100"/>
+        </filter>
+      </defs>
+      
+    </svg>
   )
 }

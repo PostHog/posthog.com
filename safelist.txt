@@ -240,19 +240,23 @@ w-[(100%_+_4rem)]
 w-[calc(100%_+_3px)]
 w-full
 
-border-team-purple-border
-bg-team-purple-bg
+stroke-team-purple-border
+fill-team-purple-bg
 fill-team-purple-plaque-bg
-bg-team-purple-plaque-bg
-bg-team-purple-plaque-bg-dark
-bg-team-purple-plaque-shadow
+fill-team-purple-plaque-bg
+fill-team-purple-plaque-bg-dark
+fill-team-purple-plaque-shadow
 
 fill-white
 
-border-team-yellow-border
-bg-team-yellow-bg
+stroke-team-yellow-border
+fill-team-yellow-bg
 fill-team-yellow-plaque-bg
-bg-team-yellow-plaque-bg
-bg-team-yellow-plaque-bg-dark
-bg-team-yellow-plaque-shadow
+
+fill-team-yellow-bg
+stroke-team-yellow-border
+
+fill-team-yellow-plaque-bg
+fill-team-yellow-plaque-bg-dark
+fill-team-yellow-plaque-shadow
 text-[#1E2F46]

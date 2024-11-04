@@ -74,7 +74,7 @@ module.exports = {
 
             'team-purple-border': '#3C3154',
             'team-purple-bg': '#E2D6FF',
-            'team-purple-plaque-bg': '#6A6686',
+            'team-purple-plaque-bg': '#40396E',
             'team-purple-plaque-bg-dark': '#625E7E',
             'team-purple-plaque-shadow': '#47416C',
 

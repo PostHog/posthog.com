@@ -118,7 +118,7 @@ const Teams: React.FC = () => {
                                         <div className="hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px">
                                             <TeamPatch
                                                 name={name}
-                                                imageUrl={getImage(crest)}
+                                                imageUrl={crest?.gatsbyImageData?.images?.fallback?.src}
                                                 color={crestOptions?.color}
                                                 textColor={crestOptions?.textColor}
                                                 textShadow={crestOptions?.textShadow}
