@@ -221,8 +221,7 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     # Select 1 to proceed with default installation
     ```
-2. Run `pnpm i --dir plugin-server` to install all required packages
-3. We'll run the plugin server in a later step.
+2. Run `pnpm i --dir plugin-server` to install all required packages. We'll actually run the plugin server in a later step.
 
 > Note: If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
 ```bash
