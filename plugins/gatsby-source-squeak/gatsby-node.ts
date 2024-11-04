@@ -328,13 +328,23 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             slug: String!
             label: String!
         }
-
+        type SqueakCrestOption {
+            color: String
+            textColor: String
+            textShadow: String
+            frame: String
+            plaque: String
+            imageScale: Int
+            imageXOffset: Int
+            imageYOffset: Int
+        }
         type SqueakTeam implements Node {
             id: ID!
             squeakId: Int!
             name: String!
             roadmaps: [SqueakRoadmap!] @link(by: "id", from: "roadmaps.id")
             emojis: [SlackEmoji] @link(by: "name", from: "emojis")
+            crestOptions: SqueakCrestOption
         }
 
         type SqueakRoadmap implements Node {
