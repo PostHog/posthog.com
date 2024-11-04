@@ -10,10 +10,13 @@ interface TeamPatchProps {
   frame: string
   plaque: string
   size?: string
+  imageXOffset?: number
+  imageYOffset?: number
+  imageScale?: number
   className?: string
 }
 
-export default function TeamPatch({ name, imageUrl, color, textColor, textShadow, frame, plaque, size, className }: TeamPatchProps) {
+export default function TeamPatch({ name, imageUrl, color, textColor, textShadow, frame, plaque, imageXOffset, imageYOffset, imageScale, className }: TeamPatchProps) {
   return (
     <svg viewBox="0 0 278 305" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className={`w-full ${className}`}>
       <g id="all variants - slice">
@@ -54,13 +57,13 @@ export default function TeamPatch({ name, imageUrl, color, textColor, textShadow
           )}
         </g>
       <image 
-        id="website-vibes"
-        x="0"
-        y="0"
+        id="team-image"
+        x={imageXOffset ? imageXOffset : '0'}
+        y={imageYOffset ? imageYOffset : '0'}
         width="200"
         height="300"
         href={imageUrl}
-        className="w-full transform "
+        className={`w-full transform ${imageScale && 'scale-' + imageScale}`}
         preserveAspectRatio="xMidYMid meet"
         style={{ pointerEvents: 'none' }}
       />
@@ -89,7 +92,7 @@ export default function TeamPatch({ name, imageUrl, color, textColor, textShadow
           {plaque === 'straight' && (
             <g id="straight_3">
               <path id="name background (partially transparent)" d="M23.2416 245.772H254.756C256.792 245.772 258.443 247.422 258.443 249.458V286.181C257.137 284.985 255.777 284.098 254.197 283.487C252.132 282.689 249.786 282.399 246.86 282.399H31.4842C27.5414 282.399 23.2354 283.383 19.555 286.382V249.458C19.555 247.422 21.2055 245.772 23.2416 245.772Z"  fillOpacity="0.8" strokeWidth="2.4577" className={`fill-team-${color}-plaque-bg stroke-team-${color}-plaque-border`} />
-              <g id="Website &#38; Vibes" filter="url(#filter0_i_2806_100)">
+              <g id="team name" filter="url(#filter0_i_2806_100)">
                 <text className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-3xl text-${textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'
                 } ${textShadow === 'light'
                   ? '0_1px_0_rgba(255,255,255,.5)'

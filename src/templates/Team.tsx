@@ -248,7 +248,9 @@ export default function Team({
                         textShadow={crestOptions?.textShadow}
                         frame={crestOptions?.frame}
                         plaque={crestOptions?.plaque}
-                        size="lg"
+                        imageXOffset={crestOptions?.imageXOffset}
+                        imageYOffset={crestOptions?.imageYOffset}
+                        imageScale={crestOptions?.imageScale}
                         className="mt-8"
                     />
                     <div className="max-w-xl w-full">
@@ -588,6 +590,7 @@ export const query = graphql`
                 textShadow
                 frame
                 plaque
+                imageScale
             }
             roadmaps {
                 squeakId

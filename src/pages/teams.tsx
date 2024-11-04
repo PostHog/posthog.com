@@ -47,6 +47,9 @@ const Teams: React.FC = () => {
                         textShadow
                         frame
                         plaque
+                        imageXOffset
+                        imageYOffset
+                        imageScale
                     }
                 }
             }
@@ -73,37 +76,6 @@ const Teams: React.FC = () => {
                                 <Link to="/handbook/company/small-teams">Learn more about why we have small teams</Link>
                             </p>
 
-                            <div className="grid grid-cols-3 gap-4 my-12">
-                                <TeamPatch
-                                    name="Website & Vibes"
-                                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
-                                    color="purple"
-                                    frame="half-round"
-                                    plaque="straight"
-                                    size="lg"
-                                />
-
-                                <TeamPatch
-                                    name="Website & Vibes"
-                                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
-                                    color="purple"
-                                    frame="square"
-                                    plaque="curved"
-                                    size="md"
-                                />
-
-                                <TeamPatch
-                                    name="Website & Vibes"
-                                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/website_vibes_5853ce3aec.png"
-                                    color="yellow"
-                                    textColor="[#1E2F46]"
-                                    textShadow="dark"
-                                    frame="rounded"
-                                    plaque="straight"
-                                    size="sm"
-                                />
-                            </div>
-
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-5 text-center">
                                 {allTeams.nodes
                                     .sort((a, b) => a.name.localeCompare(b.name))
@@ -124,7 +96,9 @@ const Teams: React.FC = () => {
                                                 textShadow={crestOptions?.textShadow}
                                                 frame={crestOptions?.frame}
                                                 plaque={crestOptions?.plaque}
-                                                size="md"
+                                                imageXOffset={crestOptions?.imageXOffset}
+                                                imageYOffset={crestOptions?.imageYOffset}
+                                                imageScale={crestOptions?.imageScale}
                                             />
                                         </div>
 
