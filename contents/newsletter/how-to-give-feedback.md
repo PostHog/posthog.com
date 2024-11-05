@@ -77,6 +77,8 @@ And our API hasn’t broken since. Good job, Neil and Juraj!
 
 ![Neil and Juraj](https://res.cloudinary.com/dmukukwp6/image/upload/5289cf24_d5d5_499b_be27_0781df426243_1080x930_760317db50.webp)
 
+<NewsletterForm />
+
 ## 4. You wait for the "right" time
 
 Because we have a tendency to avoid confrontation and conflict, we make up excuses not to give feedback. You’ve probably told yourself before:
