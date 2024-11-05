@@ -56,8 +56,6 @@ bg-burnt-orange
 bg-burnt-orange-dark
 bg-creamsicle
 bg-creamsicle-dark
-bg-dark-blue
-bg-dark-blue-dark
 bg-gold
 bg-gold-dark
 bg-gradient-to-tr
@@ -147,8 +145,6 @@ fill-burnt-orange
 fill-burnt-orange-dark
 fill-creamsicle
 fill-creamsicle-dark
-fill-dark-blue
-fill-dark-blue-dark
 fill-gold
 fill-gold-dark
 fill-gradient-to-tr
@@ -167,6 +163,7 @@ fill-lilac
 fill-lilac/10
 fill-lime-green
 fill-navy
+fill-navy-dark
 fill-opacity-100
 fill-opacity-25
 fill-opacity-50
@@ -199,6 +196,8 @@ fill-teal-2-dark
 fill-teal/10
 fill-white
 fill-yellow
+fill-yellow-2
+fill-yellow-2-dark
 
 flex
 flex
@@ -332,6 +331,7 @@ stroke-lilac
 stroke-lilac/10
 stroke-lime-green
 stroke-navy
+stroke-navy-dark
 stroke-opacity-100
 stroke-opacity-25
 stroke-opacity-50
@@ -364,8 +364,8 @@ stroke-teal-2-dark
 stroke-teal/10
 stroke-white
 stroke-white-dark
-stroke-yellow
-stroke-yellow-dark
+stroke-yellow-2
+stroke-yellow-2-dark
 
 text-[#36C46F]
 text-[#43B6E7]
@@ -427,5 +427,4 @@ w-[calc(100%_+_3px)]
 w-full
 
 fill-white
-text-navy
 text-brown
