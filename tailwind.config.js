@@ -93,6 +93,13 @@ module.exports = {
             'team-yellow-plaque-shadow-bg': '#589DF8',
             'team-yellow-plaque-bg-dark': '#FFCD81',
 
+            'team-yellow-orange-frame-border': '#000',
+            'team-yellow-orange-frame-bg': '#FFCE5C',
+            'team-yellow-orange-plaque-bg': '#DF6133',
+            'team-yellow-orange-plaque-border': '#000',
+            'team-yellow-orange-plaque-shadow-bg': '#DF6133',
+            'team-yellow-orange-plaque-bg-dark': '#FFCD81',
+
             'team-cream-frame-border': '#6D5838',
             'team-cream-frame-bg': '#F6DEB9',
             'team-cream-plaque-bg': '#FFCD81',

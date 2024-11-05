@@ -164,6 +164,27 @@ export default function TeamPatch({
                            />
                       </g>
                     )}
+                    {plaque === 'upward-curve' && (
+                      <g id="wavy background">
+                        <g id="shield">
+                          <path id="Rectangle 208"
+                            d="M263.852 172.518V215.537C263.852 216.704 263.158 217.758 262.087 218.22L235.74 229.585C174.979 255.793 106.127 255.929 45.2626 229.961L17.7236 218.211C16.6468 217.752 15.9482 216.694 15.9482 215.523V172.486C15.9482 170.391 18.0894 168.976 20.0172 169.799L43.7336 179.917C105.579 206.304 175.542 206.166 237.283 179.535L259.772 169.835C261.701 169.003 263.852 170.417 263.852 172.518Z"
+                            stroke-width="3.89632" 
+                            className={`fill-team-${color}-plaque-shadow-bg stroke-team-${color}-plaque-border`}
+                            />
+                          <path id="Vector 182"
+                            d="M251.755 193.827L251.755 233.142C251.755 233.559 251.644 233.978 251.439 234.34C241.848 251.296 235.385 255.404 220.957 256.508C219.371 256.63 218.136 255.182 218.459 253.624L230.057 197.655C230.246 196.744 230.937 196.02 231.838 195.79L248.716 191.468C250.256 191.074 251.755 192.237 251.755 193.827Z"
+                            stroke-width="3.89632"
+                            className={`fill-team-${color}-plaque-shadow-bg stroke-team-${color}-plaque-border`}
+                          />
+                          <path id="Vector 183"
+                            d="M30.4536 193.827L30.4538 233.142C30.4538 233.559 30.5651 233.978 30.7704 234.34C40.361 251.296 46.8238 255.404 61.2522 256.508C62.8382 256.63 64.0731 255.182 63.7503 253.624L52.1519 197.655C51.9632 196.744 51.2723 196.02 50.3714 195.79L33.4928 191.468C31.9525 191.074 30.4536 192.237 30.4536 193.827Z"
+                            stroke-width="3.89632"
+                            className={`fill-team-${color}-plaque-shadow-bg stroke-team-${color}-plaque-border`}
+                          />
+                        </g>
+                      </g>
+                    )}
                 </g>
 
                 {frame === 'half-round' && (
@@ -220,6 +241,13 @@ export default function TeamPatch({
                     className={`fill-team-${color}-frame-bg stroke-team-${color}-frame-border`}
                   />
                 )}
+                {frame === 'shield' && (
+                  <path id="shield frame"
+                    d="M139.897 40.0861L238.279 77.7619V200.672C238.279 255.007 194.232 299.054 139.897 299.054C85.5618 299.054 41.5146 255.007 41.5146 200.672V77.7619L139.897 40.0861Z"
+                    stroke-width="3.89632" 
+                    className={`fill-team-${color}-frame-bg stroke-team-${color}-frame-border`}
+                  />
+                )}
                 
                 <g id="marquees - solids">
                     {plaque === 'curved' && (
@@ -251,17 +279,28 @@ export default function TeamPatch({
                         </g>
                       </>
                     )}
+                    {plaque === 'upward-curve' && (
+                      <g id="shield marquee" filter="url(#filter0_b_2806_100)">
+                        <path
+                          d="M28.3672 192.441C28.3672 188.89 32.0443 186.533 35.2708 188.015L39.6081 190.008C105.058 220.076 180.46 219.628 245.548 188.786L246.911 188.14C250.142 186.609 253.867 188.965 253.867 192.541V232.901C253.867 234.783 252.783 236.497 251.082 237.303L245.548 239.925C180.46 270.768 105.058 271.215 39.6081 241.147L31.2044 237.286C29.4753 236.492 28.3672 234.764 28.3672 232.861V192.441Z"
+                          fill="white" />
+                        <path
+                          d="M251.919 192.541V232.901C251.919 234.03 251.268 235.059 250.248 235.542L244.714 238.165C180.146 268.76 105.347 269.204 40.4214 239.377L32.0177 235.516C30.9802 235.04 30.3153 234.002 30.3153 232.861V192.441C30.3153 190.311 32.5216 188.896 34.4575 189.786L38.7949 191.778C104.768 222.087 180.774 221.636 246.382 190.546L247.745 189.9C249.684 188.982 251.919 190.396 251.919 192.541Z"
+                          className={`stroke-team-${color}-plaque-border`}
+                          stroke-width="3.89632" />
+                    </g>
+                    )}
                 </g>
                 <image
                     id="team-image"
                     x={imageXOffset ? imageXOffset : '0'}
                     y={imageYOffset ? imageYOffset : '0'}
-                    width="200"
-                    height="300"
+                    width="288"
+                    height="305"
                     href={imageUrl}
-                    className={`w-full transform ${imageScale && 'scale-' + imageScale}`}
+                    className={`transform ${imageScale ? 'scale-' + imageScale : 'scale-75'}`}
                     preserveAspectRatio="xMidYMid meet"
-                    style={{ pointerEvents: 'none' }}
+                    style={{ pointerEvents: 'none', transformOrigin: 'center center' }}
                 />
                 <g id="marquees - foreground">
                     {plaque === 'curved' && (
@@ -411,6 +450,31 @@ export default function TeamPatch({
                           name={name}
                         />
                       </>
+                    )}
+                    {plaque === 'upward-curve' && (
+                      <g id="shield marquee_2" filter="url(#filter1_b_2806_100)">
+                        <path
+                          d="M28.3672 192.441C28.3672 188.89 32.0443 186.533 35.2708 188.015L39.6081 190.008C105.058 220.076 180.46 219.628 245.548 188.786L246.911 188.14C250.142 186.609 253.867 188.965 253.867 192.541V232.901C253.867 234.783 252.783 236.497 251.082 237.303L245.548 239.925C180.46 270.768 105.058 271.215 39.6081 241.147L31.2044 237.286C29.4753 236.492 28.3672 234.764 28.3672 232.861V192.441Z"
+                          fill-opacity="0.8"
+                          className={`fill-team-${color}-plaque-bg`}
+                          />
+                        <path
+                          d="M251.919 192.541V232.901C251.919 234.03 251.268 235.059 250.248 235.542L244.714 238.165C180.146 268.76 105.347 269.204 40.4214 239.377L32.0177 235.516C30.9802 235.04 30.3153 234.002 30.3153 232.861V192.441C30.3153 190.311 32.5216 188.896 34.4575 189.786L38.7949 191.778C104.768 222.087 180.774 221.636 246.382 190.546L247.745 189.9C249.684 188.982 251.919 190.396 251.919 192.541Z"
+                          stroke-width="3.89632"
+                          className={`stroke-team-${color}-plaque-border`}
+                        />
+                          <path id="upward-curve-name" d="M32 224.5C32 221.5 97.0179 249.5 140.5 246.5C194 249.5 249 224.5 249 224.5" stroke="none"/>
+
+                          <TeamName
+                            textColor={textColor}
+                            fill={textColor}
+                            textShadow={textShadow}
+                            textAnchor="middle"
+                            href="upward-curve-name"
+                            startOffset="50%"
+                            name={name}
+                          />
+                      </g>
                     )}
                 </g>
             </g>

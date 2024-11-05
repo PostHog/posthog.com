@@ -201,7 +201,9 @@ pr-32
 rotate-180
 rotate-45
 rotate-90
+scale-75
 scale-90
+scale-95
 scale-105
 scale-110
 sm:hidden
@@ -260,6 +262,13 @@ fill-team-yellow-plaque-bg
 stroke-team-yellow-plaque-border
 fill-team-yellow-plaque-shadow-bg
 fill-team-yellow-plaque-bg-dark
+
+stroke-team-yellow-orange-frame-border
+fill-team-yellow-orange-frame-bg
+fill-team-yellow-orange-plaque-bg
+stroke-team-yellow-orange-plaque-border
+fill-team-yellow-orange-plaque-shadow-bg
+fill-team-yellow-orange-plaque-bg-dark
 
 stroke-team-cream-frame-border
 fill-team-cream-frame-bg
