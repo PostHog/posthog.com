@@ -8,17 +8,22 @@ import { layoutLogic } from 'logic/layoutLogic'
 
 export const Context = createContext<any>(undefined)
 
-function recursiveSearch(array, value, onMatch) {
+function recursiveSearch(array, value) {
     for (let i = 0; i < array?.length || 0; i++) {
         const element = array[i]
-        if (
-            element.url.split('?')[0] === value ||
-            (element.children && recursiveSearch(element.children || element.internal, value, onMatch))
-        ) {
-            onMatch(element)
+
+        if (typeof element === 'string' && element.split('?')[0] === value) {
             return true
         }
+
+        if (typeof element === 'object' && element !== null) {
+            const found = recursiveSearch(Object.values(element), value)
+            if (found) {
+                return true
+            }
+        }
     }
+
     return false
 }
 
@@ -26,6 +31,19 @@ export interface IProps {
     children: React.ReactNode
     parent?: IMenu
     activeInternalMenu?: IMenu
+}
+
+const findInternalMenu = (menu: IMenu[]) => {
+    for (const item of menu || []) {
+        if (item.internal) {
+            return item.internal
+        }
+        if (item.children) {
+            const found = findInternalMenu(item.children)
+            if (found) return found
+        }
+    }
+    return undefined
 }
 
 export const LayoutProvider = ({ children, ...other }: IProps) => {
@@ -38,20 +56,13 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     const [enterpriseMode, setEnterpriseMode] = useState(false)
     const [theoMode, setTheoMode] = useState(false)
     const [post, setPost] = useState<boolean>(false)
-    let activeInternalMenu = other.activeInternalMenu
     const parent =
         other.parent ??
         menu.find(({ children, url }) => {
             const currentURL = pathname
-            return (
-                currentURL === url.split('?')[0] ||
-                recursiveSearch(children, currentURL, (match) => {
-                    if (!activeInternalMenu) {
-                        activeInternalMenu = match.children || match.internal
-                    }
-                })
-            )
+            return currentURL === url.split('?')[0] || recursiveSearch(children, currentURL)
         })
+    const activeInternalMenu = findInternalMenu(parent?.children)
 
     const internalMenu = parent?.children
 
