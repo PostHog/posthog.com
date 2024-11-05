@@ -1,4 +1,7 @@
 import React from 'react'
+
+// source for this entire SVG lives here:
+// https://www.figma.com/design/QCYxjm4wVVVvs6UA27xRmz/Website-art?node-id=2806-100&t=OEHDCRsAlrgEUkV4-1
 interface TeamPatchProps {
     name?: string
     imageUrl: string
@@ -82,7 +85,7 @@ export default function TeamPatch({
                                 height="14.2546"
                                 rx="7.12732"
                                 strokeWidth="2.4577"
-                                className={`fill-team-${color}-plaque-shadow stroke-team-${color}-border`}
+                                className={`fill-team-${color}-plaque-shadow-bg stroke-team-${color}-frame-border`}
                             />
                         </g>
                     )}
@@ -92,7 +95,7 @@ export default function TeamPatch({
                                 id="Rectangle 136"
                                 d="M4.05433 268.289C53.9505 245.878 93.7581 234.065 134.869 233.736C175.982 233.407 218.525 244.564 273.885 268.32C275.242 268.903 276.14 270.253 276.14 271.711V295.158C276.14 297.82 273.348 299.625 270.87 298.528C220.602 276.276 180.175 264.932 139.516 264.849C98.8568 264.766 58.0882 275.944 7.1364 298.522C4.65676 299.621 1.86166 297.815 1.86166 295.153V271.653C1.86166 270.215 2.72994 268.884 4.05433 268.289Z"
                                 strokeWidth="2.4577"
-                                className={`fill-team-${color}-plaque-shadow stroke-team-${color}-border`}
+                                className={`fill-team-${color}-plaque-shadow-bg stroke-team-${color}-frame-border`}
                             />
                         </g>
                     )}
@@ -111,25 +114,34 @@ export default function TeamPatch({
                         <path id="wavy shadow"
                           d="M224.391 269.804L213.467 249.955C213.371 249.78 213.453 249.56 213.641 249.491C224.535 245.489 234.771 239.884 244.012 232.86L244.411 232.557C244.603 232.411 244.878 232.47 244.994 232.68L255.854 252.413C255.968 252.62 255.913 252.879 255.724 253.023L255.325 253.326C246.066 260.364 235.808 265.981 224.891 269.991C224.701 270.061 224.488 269.981 224.391 269.804Z"
                           strokeWidth="3.93536"
-                          className={`fill-team-${color}-plaque-shadow stroke-team-${color}-plaque-border`}
+                          className={`fill-team-${color}-plaque-shadow-bg stroke-team-${color}-plaque-border`}
                           />
                         <path id="wavy shadow_2"
                           d="M60.4784 269.804L71.402 249.955C71.4983 249.78 71.4162 249.56 71.2286 249.491C60.3341 245.489 50.0977 239.884 40.8576 232.86L40.4577 232.557C40.2665 232.411 39.9909 232.47 39.8751 232.68L29.0155 252.413C28.9015 252.62 28.9565 252.879 29.1447 253.023L29.5443 253.326C38.8035 260.364 49.061 265.981 59.9779 269.991C60.1681 270.061 60.3807 269.981 60.4784 269.804Z"
                           strokeWidth="3.93536"
-                          className={`fill-team-${color}-plaque-shadow stroke-team-${color}-plaque-border`}
+                          className={`fill-team-${color}-plaque-shadow-bg stroke-team-${color}-plaque-border`}
                         />
                       </g>
                     )}
                     {plaque === 'stepped' && (
                       <g id="stepped bg">
                         <rect id="stepped bg_2" x="10.0478" y="232.028" width="258.995" height="47.6707" rx="2.9487"
-                          fill="white" stroke="#1E2F46" stroke-width="3.9316" />
+                          fill="white" 
+                          stroke-width="3.9316" 
+                          className={`stroke-team-${color}-plaque-border`}
+                          />
                         <path id="Vector 182"
                           d="M44.0709 256.605H27.3567C26.9316 256.605 26.707 257.109 26.9908 257.425L44.8135 277.3C45.4155 277.971 46.5282 277.546 46.5282 276.644V259.063C46.5282 257.706 45.428 256.605 44.0709 256.605Z"
-                          fill="white" stroke="#1E2F46" stroke-width="3.9316" />
+                          fill="white" 
+                          stroke-width="3.9316" 
+                          className={`stroke-team-${color}-plaque-border`}
+                          />
                         <path id="Vector 183"
                           d="M235.611 256.605H252.325C252.75 256.605 252.975 257.109 252.691 257.425L234.868 277.3C234.266 277.971 233.153 277.546 233.153 276.644V259.063C233.153 257.706 234.254 256.605 235.611 256.605Z"
-                          fill="white" stroke="#1E2F46" stroke-width="3.9316" />
+                          fill="white" 
+                          stroke-width="3.9316" 
+                          className={`stroke-team-${color}-plaque-border`}
+                          />
                       </g>
                     )}
                     {plaque === 'downward-curve' && (
@@ -137,17 +149,17 @@ export default function TeamPatch({
                         <path id="Rectangle 213"
                           d="M264.035 280.737V244.712C264.035 243.535 263.335 242.471 262.255 242.005L235.677 230.542C174.385 204.104 104.932 203.967 43.5358 230.162L15.7562 242.015C14.67 242.478 13.9652 243.545 13.9652 244.726V280.769C13.9652 282.884 16.1252 284.31 18.0698 283.481L41.9934 273.274C104.379 246.656 174.953 246.796 237.234 273.659L259.92 283.444C261.865 284.283 264.035 282.857 264.035 280.737Z"
                           stroke-width="3.93037"
-                          className={`fill-team-${color}-plaque-shadow stroke-team-${color}-plaque-border`}
+                          className={`fill-team-${color}-plaque-shadow-bg stroke-team-${color}-plaque-border`}
                         />
                         <path id="Vector 184"
                           d="M28.3467 263.209L28.3467 225.353C28.3467 224.932 28.4592 224.51 28.6667 224.144C38.5417 206.738 45.8494 203.988 61.069 203.082C62.3685 203.005 63.4974 203.971 63.6333 205.266L68.2916 249.654C68.4173 250.852 67.6517 251.965 66.4914 252.289C54.015 255.775 45.5384 259.072 31.8612 265.437C30.2274 266.198 28.3467 265.011 28.3467 263.209Z"
                           stroke-width="3.93037"
-                          className={`fill-team-${color}-plaque-shadow stroke-team-${color}-plaque-border`}
+                          className={`fill-team-${color}-plaque-shadow-bg stroke-team-${color}-plaque-border`}
                         />
                         <path id="Vector 185"
                           d="M252.472 263.209L252.472 225.353C252.472 224.932 252.359 224.51 252.152 224.144C242.277 206.738 234.969 203.988 219.749 203.082C218.45 203.005 217.321 203.971 217.185 205.266L212.527 249.654C212.401 250.852 213.167 251.965 214.327 252.289C226.803 255.775 235.28 259.072 248.957 265.437C250.591 266.198 252.472 265.011 252.472 263.209Z"
                           stroke-width="3.93037"
-                          className={`fill-team-${color}-plaque-shadow stroke-team-${color}-plaque-border`}
+                          className={`fill-team-${color}-plaque-shadow-bg stroke-team-${color}-plaque-border`}
                            />
                       </g>
                     )}
@@ -158,7 +170,7 @@ export default function TeamPatch({
                         id="half-round"
                         d="M237.548 140.827V303.035H38.9662V140.827C38.9662 85.9905 83.4202 41.5365 138.257 41.5365C193.094 41.5365 237.548 85.9905 237.548 140.827Z"
                         strokeWidth="3.93231"
-                        className={`fill-team-${color}-bg stroke-team-${color}-border`}
+                        className={`fill-team-${color}-frame-bg stroke-team-${color}-frame-border`}
                     />
                 )}
                 {frame === 'rectangle' && (
@@ -169,7 +181,7 @@ export default function TeamPatch({
                         width="198.578"
                         height="261.498"
                         strokeWidth="3.93231"
-                        className={`fill-team-${color}-bg stroke-team-${color}-border`}
+                        className={`fill-team-${color}-frame-bg stroke-team-${color}-frame-border`}
                     />
                 )}
                 {frame === 'round' && (
@@ -181,7 +193,7 @@ export default function TeamPatch({
                         height="261.498"
                         rx="28.0338"
                         strokeWidth="3.93231"
-                        className={`fill-team-${color}-bg stroke-team-${color}-border`}
+                        className={`fill-team-${color}-frame-bg stroke-team-${color}-frame-border`}
                     />
                 )}
                 {frame === 'hexagon' && (
@@ -189,7 +201,7 @@ export default function TeamPatch({
                         id="hexagon"
                         d="M45.2966 76.0206V264.552C45.2966 275.576 53.2417 284.996 64.1083 286.856L94.3286 292.027L144.664 300.64L225.221 286.856C236.087 284.996 244.032 275.576 244.032 264.552V76.0206C244.032 65.0917 236.221 55.7245 225.47 53.7607L144.664 39.0002L63.8588 53.7607C53.1078 55.7245 45.2966 65.0917 45.2966 76.0206Z"
                         strokeWidth="3.93536"
-                        className={`fill-team-${color}-bg stroke-team-${color}-border`}
+                        className={`fill-team-${color}-frame-bg stroke-team-${color}-frame-border`}
                     />
 
                 )}
@@ -197,14 +209,14 @@ export default function TeamPatch({
                   <path id="squareish"
                   d="M62.5725 38.9658H215.905C228.39 38.9658 238.512 49.0872 238.512 61.5725V277.811C238.512 290.296 228.39 300.417 215.905 300.417H62.5725C50.0872 300.417 39.9658 290.296 39.9658 277.811V61.5726C39.9658 49.0872 50.0872 38.9658 62.5725 38.9658Z"
                   stroke-width="3.9316"
-                  className={`fill-team-${color}-bg stroke-team-${color}-border`}
+                  className={`fill-team-${color}-frame-bg stroke-team-${color}-frame-border`}
                   />
                 )}
                 {frame === 'oval' && (
                   <path id="frame oval"
                     d="M238.449 138.207V201.093C238.449 255.903 194.017 300.335 139.207 300.335C84.3972 300.335 39.9652 255.903 39.9652 201.093V138.207C39.9652 83.3973 84.3972 38.9652 139.207 38.9652C194.017 38.9652 238.449 83.3972 238.449 138.207Z"
                     stroke-width="3.93037" 
-                    className={`fill-team-${color}-bg stroke-team-${color}-border`}
+                    className={`fill-team-${color}-frame-bg stroke-team-${color}-frame-border`}
                   />
                 )}
                 
@@ -215,8 +227,8 @@ export default function TeamPatch({
                                 id="Rectangle 139"
                                 d="M23.1566 240.914C95.3745 208.334 181.331 207.803 254.838 240.915C256.135 241.499 256.968 242.8 256.968 244.237V279.091C256.153 280.3 255.53 280.761 255.084 280.923C254.67 281.073 254.193 281.041 253.437 280.695C252.775 280.391 252.066 279.929 251.17 279.344C250.988 279.225 250.797 279.101 250.597 278.971C249.462 278.237 248.124 277.411 246.533 276.74C163.105 241.526 78.7314 253.416 32.0769 276.773C31.1729 277.226 30.235 277.785 29.3373 278.321C29.0899 278.468 28.8456 278.614 28.6059 278.755C27.4598 279.43 26.3936 280.017 25.3946 280.38C24.3954 280.743 23.5905 280.834 22.926 280.662C22.3326 280.507 21.6816 280.099 21.0296 279.106V244.235C21.0296 242.798 21.8614 241.498 23.1566 240.914Z"
                                 fill="white"
-                                stroke="black"
                                 strokeWidth="2.4577"
+                                className={`stroke-team-${color}-plaque-border`}
                             />
                         </g>
                     )}
@@ -226,8 +238,8 @@ export default function TeamPatch({
                                 id="solid white background"
                                 d="M23.2416 245.772H254.756C256.792 245.772 258.443 247.422 258.443 249.458V286.181C257.137 284.985 255.777 284.098 254.197 283.487C252.132 282.689 249.786 282.399 246.86 282.399H31.4842C27.5414 282.399 23.2354 283.383 19.555 286.382V249.458C19.555 247.422 21.2055 245.772 23.2416 245.772Z"
                                 fill="white"
-                                stroke="#40396E"
                                 strokeWidth="2.4577"
+                                className={`stroke-team-${color}-plaque-border`}
                             />
                         </g>
                     )}
@@ -256,10 +268,10 @@ export default function TeamPatch({
                             <path
                                 id="Rectangle 138"
                                 d="M23.1566 240.914C95.3745 208.334 181.331 207.803 254.838 240.915C256.135 241.499 256.968 242.8 256.968 244.237V279.091C256.153 280.3 255.53 280.761 255.084 280.923C254.67 281.073 254.193 281.041 253.437 280.695C252.775 280.391 252.066 279.929 251.17 279.344C250.988 279.225 250.797 279.101 250.597 278.971C249.462 278.237 248.124 277.411 246.533 276.74C163.105 241.526 78.7314 253.416 32.0769 276.773C31.1729 277.226 30.235 277.785 29.3373 278.321C29.0899 278.468 28.8456 278.614 28.6059 278.755C27.4598 279.43 26.3936 280.017 25.3946 280.38C24.3954 280.743 23.5905 280.834 22.926 280.662C22.3326 280.507 21.6816 280.099 21.0296 279.106V244.235C21.0296 242.798 21.8614 241.498 23.1566 240.914Z"
-                                fill="#FFCD81"
                                 fillOpacity="0.8"
-                                stroke="black"
                                 strokeWidth="2.4577"
+                                className={`fill-team-${color}-plaque-bg stroke-team-${color}-plaque-border`}
+
                             />
                             <path
                                 id="curved-name"
@@ -292,6 +304,7 @@ export default function TeamPatch({
 
                             <g id="team name">
                               <TeamName
+                                fill={textColor}
                                 textColor={textColor}
                                 textShadow={textShadow}
                                 textAnchor="middle"
@@ -318,7 +331,7 @@ export default function TeamPatch({
 
                         <TeamName
                           name={name}
-                          fill="#1E2F46"
+                          fill={textColor}
                           textColor={textColor}
                           textShadow={textShadow}
                           href="name-wavy"
@@ -330,33 +343,43 @@ export default function TeamPatch({
                     )}
                     {plaque === 'stepped' && (
                       <g id="stepped marquee">
-                      <rect id="stepped - mid" x="212.522" y="208.685" width="40.7904" height="47.6707"
-                        rx="2.9487" fill="white" stroke="#1E2F46" stroke-width="3.9316" />
-                      <rect id="stepped - mid_2" x="26.2588" y="208.685" width="40.5447" height="47.6707"
-                        rx="2.9487" fill="white" stroke="#1E2F46" stroke-width="3.9316" />
-                      <path id="Vector 186"
-                        d="M66.3112 234.613H49.5969C49.1718 234.613 48.9472 235.116 49.231 235.433L67.0538 255.308C67.6557 255.979 68.7684 255.553 68.7684 254.652V237.071C68.7684 235.713 67.6683 234.613 66.3112 234.613Z"
-                        fill="white" stroke="#1E2F46" stroke-width="3.9316" />
-                      <path id="Vector 187"
-                        d="M213.007 234.613H229.721C230.147 234.613 230.371 235.116 230.087 235.433L212.265 255.308C211.663 255.979 210.55 255.553 210.55 254.652V237.071C210.55 235.713 211.65 234.613 213.007 234.613Z"
-                        fill="white" stroke="#1E2F46" stroke-width="3.9316" />
-                      <g id="Rectangle 218" filter="url(#filter0_b_2806_100)">
-                        <rect x="46" y="186" width="186.505" height="51.6023" rx="4.91451" fill="white"
-                          fill-opacity="0.8" />
-                        <rect x="47.9658" y="187.966" width="182.574" height="47.6707" rx="2.9487"
-                          stroke="#1E2F46" stroke-width="3.9316" />
+                        <rect id="stepped - mid" x="212.522" y="208.685" width="40.7904" height="47.6707"
+                          rx="2.9487" fill="white" stroke-width="3.9316" 
+                          className={`stroke-team-${color}-plaque-border`}
+                        />
+                        <rect id="stepped - mid_2" x="26.2588" y="208.685" width="40.5447" height="47.6707"
+                          rx="2.9487" fill="white" stroke-width="3.9316" 
+                          className={`stroke-team-${color}-plaque-border`}
+                        />
+                        <path id="Vector 186"
+                          d="M66.3112 234.613H49.5969C49.1718 234.613 48.9472 235.116 49.231 235.433L67.0538 255.308C67.6557 255.979 68.7684 255.553 68.7684 254.652V237.071C68.7684 235.713 67.6683 234.613 66.3112 234.613Z"
+                          fill="white" stroke-width="3.9316" 
+                          className={`stroke-team-${color}-plaque-border`}
+                        />
+                        <path id="Vector 187"
+                          d="M213.007 234.613H229.721C230.147 234.613 230.371 235.116 230.087 235.433L212.265 255.308C211.663 255.979 210.55 255.553 210.55 254.652V237.071C210.55 235.713 211.65 234.613 213.007 234.613Z"
+                          fill="white" stroke-width="3.9316" 
+                          className={`stroke-team-${color}-plaque-border`}
+                        />
+                        <g id="Rectangle 218" filter="url(#filter0_b_2806_100)">
+                          <rect x="46" y="186" width="186.505" height="51.6023" rx="4.91451" fill="white"
+                            fill-opacity="0.8" />
+                          <rect x="47.9658" y="187.966" width="182.574" height="47.6707" rx="2.9487"
+                             stroke-width="3.9316" 
+                             className={`stroke-team-${color}-plaque-border`}
+                            />
+                        </g>
+                        <TeamName
+                            id="stepped-name"
+                            fill={textColor}
+                            textColor={textColor}
+                            textShadow={textShadow}
+                            textAnchor="middle"
+                            x="139.2529" 
+                          >
+                              <tspan y="220.463">{name}</tspan>
+                          </TeamName>
                       </g>
-                      <TeamName
-                          id="stepped-name"
-                          fill="#1E2F46"
-                          textColor={textColor}
-                          textShadow={textShadow}
-                          textAnchor="middle"
-                          x="139.2529" 
-                        >
-                            <tspan y="220.463">{name}</tspan>
-                        </TeamName>
-                    </g>
                     )}
                     {plaque === 'downward-curve' && (
                       <>

@@ -72,38 +72,48 @@ module.exports = {
             white: '#fff',
             yellow: '#F7A501',
 
-            'team-purple-border': '#3C3154',
-            'team-purple-bg': '#E2D6FF',
+            // frame-bg
+            // frame-border
+            // plaque-bg
+            // plaque-border
+            // plaque-shadow-bg
+
+            'team-purple-frame-border': '#3C3154',
+            'team-purple-frame-bg': '#E2D6FF',
             'team-purple-plaque-bg': '#40396E',
+            'team-purple-plaque-border': '#3C3154',
+            'team-purple-plaque-shadow-bg': '#47416C',
             'team-purple-plaque-bg-dark': '#625E7E',
-            'team-purple-plaque-shadow': '#47416C',
 
-            'team-yellow-border': '#6D5838',
-            'team-yellow-bg': '#F6DEB9',
+            'team-yellow-frame-border': '#6D5838',
+            'team-yellow-frame-bg': '#F6DEB9',
             'team-yellow-plaque-bg': '#FFCD81',
+            'team-yellow-plaque-border': '#6D5838',
+            'team-yellow-plaque-shadow-bg': '#EDA840',
             'team-yellow-plaque-bg-dark': '#FFCD81',
-            'team-yellow-plaque-shadow': '#EDA840',
 
-            'team-green-border': '#34796F',
-            'team-green-bg': '#6BC0B3',
+            'team-green-frame-border': '#34796F',
+            'team-green-frame-bg': '#6BC0B3',
             'team-green-plaque-bg': '#F87A4C',
             'team-green-plaque-border': '#C03300',
+            'team-green-plaque-shadow-bg': '#F87A4C',
             'team-green-plaque-bg-dark': '#BD4012',
 
-            'team-orange-border': '#8E2600',
-            'team-orange-bg': '#DF6133',
-            'team-orange-plaque-border': '#C03300',
-            'team-orange-plaque-shadow-bg': '#BD4012',
+            'team-orange-frame-border': '#8E2600',
+            'team-orange-frame-bg': '#DF6133',
+            'team-orange-plaque-bg': '#fff',
+            'team-orange-plaque-border': '#1E2F46',
+            'team-orange-plaque-shadow-bg': '#fff',
 
             'team-white-plaque-bg': '#fff',
             'team-white-plaque-border': '#1E2F46',
-            'team-white-plaque-shadow': '#fff',
+            'team-white-plaque-shadow-bg': '#fff',
 
-            'team-pink-border': '#8C0D3B',
-            'team-pink-bg': '#E34C6F',
-            'team-pink-plaque-shadow': '#FF8EB7',
-            'team-pink-plaque-bg': '#FF8EB7',
-            'team-pink-plaque-border': '#E73E57',
+            'team-pink-frame-border': '#8C0D3B',
+            'team-pink-frame-bg': '#E34C6F',
+            'team-pink-plaque-bg': '#fff',
+            'team-pink-plaque-border': '#1E2F46',
+            'team-pink-plaque-shadow-bg': '#fff',
 
             
             'button-shadow': '#CD8407',
