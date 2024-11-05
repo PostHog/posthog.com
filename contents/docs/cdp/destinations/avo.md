@@ -1,5 +1,5 @@
 ---
-title: Send data to Avo
+title: Send PostHog analytics to Avo
 templateId: template-avo
 ---
 

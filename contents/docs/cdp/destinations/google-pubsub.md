@@ -1,5 +1,5 @@
 ---
-title: Send data to Google Pub/Sub
+title: Send PostHog analytics to Google Pub/Sub
 templateId: template-google-pubsub
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Send data to Braze
+title: Send PostHog analytics to Braze
 templateId: template-braze
 ---
 

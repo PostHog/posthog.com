@@ -1,5 +1,5 @@
 ---
-title: Send conversion events to Google Ads
+title: Send PostHog conversion events to Google Ads
 templateId: template-google-ads
 ---
 

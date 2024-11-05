@@ -1,5 +1,5 @@
 ---
-title: Send data to ActiveCampaign
+title: Send PostHog analytics to ActiveCampaign
 templateId: template-activecampaign
 ---
 

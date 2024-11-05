@@ -1,5 +1,5 @@
 ---
-title: Send data to Intercom
+title: Send PostHog analytics to Intercom
 templateId: template-intercom
 ---
 

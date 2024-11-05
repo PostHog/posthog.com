@@ -1,5 +1,5 @@
 ---
-title: Send data to RudderStack
+title: Send PostHog analytics to RudderStack
 templateId: template-rudderstack
 ---
 

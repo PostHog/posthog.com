@@ -1,5 +1,5 @@
 ---
-title: Postgres destination for batch exports
+title: Postgres destination for analytics batch exports
 sidebar: Docs
 showTitle: true
 availability:

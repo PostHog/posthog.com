@@ -1,5 +1,5 @@
 ---
-title: Batch exports
+title: Analytics batch exports
 sidebar: Docs
 showTitle: true
 availability:

@@ -1,5 +1,5 @@
 ---
-title: Send data to Zapier
+title: Send PostHog analytics to Zapier
 templateId: template-zapier
 ---
 

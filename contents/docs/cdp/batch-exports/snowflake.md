@@ -1,5 +1,5 @@
 ---
-title: Snowflake destination for batch exports
+title: Snowflake destination for analytics batch exports
 sidebar: Docs
 showTitle: true
 availability:

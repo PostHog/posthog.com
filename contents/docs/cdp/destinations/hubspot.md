@@ -1,5 +1,5 @@
 ---
-title: Send data to Hubspot
+title: Send PostHog person data to Hubspot
 templateId: template-hubspot
 ---
 

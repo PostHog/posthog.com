@@ -1,5 +1,5 @@
 ---
-title: Send data to Customer.io
+title: Send PostHog analytics to Customer.io
 templateId: template-customerio
 ---
 

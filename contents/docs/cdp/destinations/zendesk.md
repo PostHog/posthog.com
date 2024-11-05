@@ -1,5 +1,5 @@
 ---
-title: Send data to Zendesk
+title: Send PostHog person data to Zendesk
 templateId: template-zendesk
 ---
 

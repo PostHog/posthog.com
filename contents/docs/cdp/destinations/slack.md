@@ -1,5 +1,5 @@
 ---
-title: Send data to Slack webhooks
+title: Send PostHog analytics to Slack webhooks
 templateId: template-slack
 ---
 

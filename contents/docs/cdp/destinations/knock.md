@@ -1,5 +1,5 @@
 ---
-title: Send data to Knock
+title: Send PostHog analytics to Knock
 templateId: template-knock
 ---
 

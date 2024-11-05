@@ -1,5 +1,5 @@
 ---
-title: Send data to Engage
+title: Send PostHog analytics to Engage
 templateId: template-engage-so
 ---
 

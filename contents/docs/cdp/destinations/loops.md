@@ -1,5 +1,5 @@
 ---
-title: Send data to Loops
+title: Send PostHog person data to Loops
 templateId: template-loops
 ---
 

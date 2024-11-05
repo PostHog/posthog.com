@@ -1,5 +1,5 @@
 ---
-title: Send data to Gleap
+title: Send PostHog analytics to Gleap
 templateId: template-gleap
 ---
 

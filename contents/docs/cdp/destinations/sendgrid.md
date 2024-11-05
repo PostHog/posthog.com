@@ -1,5 +1,5 @@
 ---
-title: Send data to Sendgrid
+title: Send PostHog person data to Sendgrid
 templateId: template-sendgrid
 ---
 

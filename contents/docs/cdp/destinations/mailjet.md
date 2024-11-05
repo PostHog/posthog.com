@@ -1,5 +1,5 @@
 ---
-title: Send data to Mailjet
+title: Send PostHog person data to Mailjet
 templateId: template-mailjet-create-contact
 ---
 

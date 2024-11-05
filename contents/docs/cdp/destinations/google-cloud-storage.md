@@ -1,5 +1,5 @@
 ---
-title: Send data to Google Cloud Storage
+title: Send PostHog analytics to Google Cloud Storage
 templateId: template-google-cloud-storage
 ---
 
