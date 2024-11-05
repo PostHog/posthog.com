@@ -48,6 +48,7 @@ const Teams: React.FC = () => {
                     crestOptions {
                         textColor
                         textShadow
+                        fontSize
                         frame
                         frameColor
                         plaque
@@ -90,13 +91,14 @@ const Teams: React.FC = () => {
                                                 remove: /and/,
                                             })}`}
                                             key={id}
-                                            className="group relative mt-20 mb-12"
+                                            className="group relative mb-20"
                                         >
                                             <div className="hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px">
                                                 <TeamPatch
                                                     name={name}
                                                     imageUrl={crest?.data?.attributes?.url}
                                                     {...crestOptions}
+                                                    className="w-full"
                                                 />
                                             </div>
 

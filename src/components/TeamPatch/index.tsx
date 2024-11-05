@@ -2,20 +2,6 @@ import React from 'react'
 
 // source for this entire SVG lives here:
 // https://www.figma.com/design/QCYxjm4wVVVvs6UA27xRmz/Website-art?node-id=2806-100&t=OEHDCRsAlrgEUkV4-1
-interface TeamPatchProps {
-    name?: string
-    imageUrl: string
-    color: string
-    textColor?: string
-    textShadow?: string
-    frame: string
-    plaque: string
-    size?: string
-    imageXOffset?: number
-    imageYOffset?: number
-    imageScale?: number
-    className?: string
-}
 
 interface TeamNameProps {
   id?: string
@@ -53,11 +39,29 @@ const TeamName: React.FC<TeamNameProps> = ({ id, name, href, fill, textColor, te
   )
 }
 
+interface TeamPatchProps {
+  name?: string
+  imageUrl: string
+  color: string
+  textColor?: string
+  textShadow?: string
+  fontSize?: string
+  frameColor?: string
+  plaqueColor?: string
+  plaque?: string
+  size?: string
+  imageXOffset?: number
+  imageYOffset?: number
+  imageScale?: number
+  className?: string
+}
+
 export default function TeamPatch({
     name,
     imageUrl,
     textColor,
     textShadow,
+    fontSize,
     frame,
     frameColor,
     plaque,
@@ -65,7 +69,7 @@ export default function TeamPatch({
     imageScale,
     imageXOffset,
     imageYOffset,
-    className,
+    className = '',
 }: TeamPatchProps) {
     return (
         <svg
@@ -73,7 +77,7 @@ export default function TeamPatch({
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
-            className={`w-full ${className}`}
+            className={className}
         >
             <g id="all variants - slice">
                 <g id="marquees - background">
@@ -178,11 +182,11 @@ export default function TeamPatch({
 
                 {frame === 'half-round' && (
                     <path
-                        id="half-round"
-                        d="M237.548 140.827V303.035H38.9662V140.827C38.9662 85.9905 83.4202 41.5365 138.257 41.5365C193.094 41.5365 237.548 85.9905 237.548 140.827Z"
-                        strokeWidth="3.93231"
-                        className={`fill-${frameColor} stroke-${frameColor}-dark`}
-                    />
+                      id="half-round"
+                      d="M237.548 130.827V293.035H38.9662V130.827C38.9662 75.9905 83.4202 31.5365 138.257 31.5365C193.094 31.5365 237.548 75.9905 237.548 130.827Z"
+                      strokeWidth="3.93231"
+                      className={`fill-${frameColor} stroke-${frameColor}-dark`}
+                  />
                 )}
                 {frame === 'rectangle' && (
                     <rect
@@ -338,6 +342,7 @@ export default function TeamPatch({
                                 fill={textColor}
                                 textColor={textColor}
                                 textShadow={textShadow}
+                                textSize={fontSize}
                                 textAnchor="middle"
                                 x="138" 
                               >

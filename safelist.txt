@@ -372,6 +372,7 @@ text-[#43B6E7]
 text-[#681291]
 text-[#8B0DC8]
 text-[#C170E8]
+text-[1.4rem]
 text-[1.65rem]
 text-aqua
 text-black

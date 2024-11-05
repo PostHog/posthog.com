@@ -244,7 +244,7 @@ export default function Team({
                     <TeamPatch
                         name={teamName}
                         imageUrl={crest?.data?.attributes?.url}
-                        className="mt-8"
+                        className="h-48 md:h-80 -mt-2 md:-mt-6 mb-2 md:mb-0"
                         {...crestOptions}
                     />
                     <div className="max-w-xl w-full">
@@ -589,6 +589,7 @@ export const query = graphql`
             crestOptions {
                 textColor
                 textShadow
+                fontSize
                 frame
                 frameColor
                 plaque

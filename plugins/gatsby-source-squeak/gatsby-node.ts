@@ -331,6 +331,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         type SqueakCrestOption {
             textColor: String
             textShadow: String
+            fontSize: String
             frame: String
             frameColor: String
             plaque: String
