@@ -155,9 +155,8 @@ You’re the quarterback of the deal and, just like a quarterback, building rela
 
 Being single-threaded into the customer leads to two potential failure modes here:
 
-Your stakeholder may love you, but someone internal quickly “no, buts” the deal without considering it.
-
-Your stakeholder may be unreliable, or acting more interested than they really are out of kindness.
+1. Your stakeholder may love you, but someone internal quickly “no, buts” the deal without considering it.
+2. Your stakeholder may be unreliable, or acting more interested than they really are out of kindness.
 
 If you can, figure out when more people need to get involved:
 
