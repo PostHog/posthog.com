@@ -219,6 +219,16 @@ grid-rows-1
 grid-rows-2
 grid-rows-3
 grid-rows-4
+group-hover:animate-delay-[100ms]
+group-hover:animate-delay-[200ms]
+group-hover:animate-delay-[300ms]
+group-hover:animate-delay-[400ms]
+group-hover:animate-delay-[500ms]
+group-hover:animate-delay-[600ms]
+group-hover:animate-delay-[700ms]
+group-hover:animate-delay-[800ms]
+group-hover:animate-delay-[900ms]
+group-hover:animate-delay-[1000ms]
 h-full
 hover:border-bg-dark/50
 hover:border-blue
@@ -233,6 +243,7 @@ hover:border-seagreen
 hover:border-sky-blue
 hover:border-teal
 hover:border-yellow
+hover:scale-125
 justify-start
 justify-start
 left-16

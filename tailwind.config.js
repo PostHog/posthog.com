@@ -279,5 +279,6 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@headlessui/tailwindcss'),
         require('@tailwindcss/container-queries'),
+        require('tailwindcss-animated'),
     ],
 }

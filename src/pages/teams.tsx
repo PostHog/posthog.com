@@ -91,9 +91,9 @@ const Teams: React.FC = () => {
                                                 remove: /and/,
                                             })}`}
                                             key={id}
-                                            className="group relative mb-20"
+                                            className="group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px"
                                         >
-                                            <div className="hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] active:top-px">
+                                            <div className="">
                                                 <TeamPatch
                                                     name={name}
                                                     imageUrl={crest?.data?.attributes?.url}
@@ -102,7 +102,7 @@ const Teams: React.FC = () => {
                                                 />
                                             </div>
 
-                                            <div className="absolute top-[calc(100%+1rem)] left-0 right-0 justify-center -mr-3 transform group-hover:scale-125 transition-all duration-100">
+                                            <div className="absolute -bottom-4 left-0 right-0 justify-center -mr-3 transform transition-all duration-100">
                                                 <div className="flex flex-wrap justify-center" dir="rtl">
                                                     {profiles.data
                                                         .slice()
@@ -133,19 +133,19 @@ const Teams: React.FC = () => {
                                                                 return (
                                                                     <span
                                                                         key={`${name}-${index}`}
-                                                                        className="cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark"
+                                                                        className={`cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark animate-jump-out transform scale-[0%] group-hover:animate-jump-in group-hover:animate-once group-hover:animate-duration-500 group-hover:animate-delay-[${(profiles.data.length - index - 1) * 100}ms]`}
                                                                     >
                                                                         <Tooltip
                                                                             content={`${name} ${
                                                                                 isTeamLead ? '(Team lead)' : ''
                                                                             }`}
-                                                                            placement="top"
+                                                                            placement="bottom"
                                                                         >
                                                                             <img
                                                                                 src={avatar?.data?.attributes?.url}
                                                                                 className={`size-10 rounded-full bg-${
-                                                                                    color ?? 'white dark:bg-accent-dark'
-                                                                                } border border-light dark:border-dark`}
+                                                                                    color ?? 'accent dark:bg-accent-dark'
+                                                                                } border border-light dark:border-dark transform scale-100 hover:scale-125 transition-all`}
                                                                                 alt={name}
                                                                             />
                                                                         </Tooltip>
