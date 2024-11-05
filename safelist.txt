@@ -201,6 +201,7 @@ pr-32
 rotate-180
 rotate-45
 rotate-90
+scale-90
 scale-105
 scale-110
 sm:hidden
@@ -229,6 +230,7 @@ text-sky-blue
 text-[#8B0DC8]
 text-[#C170E8]
 text-[#681291]
+text-[1.65rem]
 to-tan/0
 via-tan/85
 w-2/12
@@ -243,7 +245,7 @@ w-[calc(100%_+_3px)]
 w-full
 
 fill-white
-text-[#1E2F46]
+text-navy
 
 stroke-team-purple-frame-border
 fill-team-purple-frame-bg
@@ -258,6 +260,27 @@ fill-team-yellow-plaque-bg
 stroke-team-yellow-plaque-border
 fill-team-yellow-plaque-shadow-bg
 fill-team-yellow-plaque-bg-dark
+
+stroke-team-cream-frame-border
+fill-team-cream-frame-bg
+fill-team-cream-plaque-bg
+stroke-team-cream-plaque-border
+fill-team-cream-plaque-shadow-bg
+fill-team-cream-plaque-bg-dark
+
+stroke-team-light-blue-frame-border
+fill-team-light-blue-frame-bg
+fill-team-light-blue-plaque-bg
+stroke-team-light-blue-plaque-border
+fill-team-light-blue-plaque-shadow-bg
+fill-team-light-blue-plaque-bg-dark
+
+stroke-team-blue-frame-border
+fill-team-blue-frame-bg
+fill-team-blue-plaque-bg
+stroke-team-blue-plaque-border
+fill-team-blue-plaque-shadow-bg
+fill-team-blue-plaque-bg-dark
 
 stroke-team-green-frame-border
 fill-team-green-frame-bg

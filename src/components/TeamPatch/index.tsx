@@ -24,6 +24,7 @@ interface TeamNameProps {
   fill?: string
   textColor?: string
   textShadow?: string
+  textSize?: string
   children?: React.ReactNode
   startOffset?: string
   textAnchor?: string
@@ -31,7 +32,7 @@ interface TeamNameProps {
   x?: string
 }
 
-const TeamName: React.FC<TeamNameProps> = ({ id, name, href, fill, textColor, textShadow, children, startOffset, textAnchor, tracking, x }) => {
+const TeamName: React.FC<TeamNameProps> = ({ id, name, href, fill, textColor, textShadow, textSize, children, startOffset, textAnchor, tracking, x }) => {
   return (
     <text
       {...(id ? { id: id } : {})}
@@ -40,7 +41,7 @@ const TeamName: React.FC<TeamNameProps> = ({ id, name, href, fill, textColor, te
       {...(x ? { x: x } : {})}
       textAnchor={textAnchor}
       
-      className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-3xl 
+      className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-${textSize ? textSize : '3xl'} 
         fill-${textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'} 
         ${ textShadow === 'light' ? '[text-shadow:0_-1px_0_rgba(255,255,255,.5)]' : textShadow === 'dark' ? '[text-shadow:0_-1px_0_rgba(0,0,0,.5)]' : '' }
         ${tracking ? 'tracking-' + tracking : ''}
@@ -325,7 +326,7 @@ export default function TeamPatch({
                         </g>
                         <path id="name-wavy"
                           pathLength="1"
-                          d="M30 235.5C30 235.5 49.1306 230.5 71 230.5C92.8694 230.5 120.131 243.5 142 243.5C163.869 243.5 191.131 230.5 213 230.5C234.869 230.5 254 235.5 254 235.5"
+                          d="M30 236.5C30 236.5 49.1306 231.5 71 231.5C92.8694 231.5 120.131 244.5 142 244.5C163.869 244.5 191.131 231.5 213 231.5C234.869 231.5 254 236.5 254 236.5"
                           stroke="none" 
                         />
 
@@ -333,6 +334,7 @@ export default function TeamPatch({
                           name={name}
                           fill={textColor}
                           textColor={textColor}
+                          textSize="[1.65rem]"
                           textShadow={textShadow}
                           href="name-wavy"
                           startOffset="50%"
