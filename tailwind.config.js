@@ -101,7 +101,11 @@ module.exports = {
 
             'team-pink-border': '#8C0D3B',
             'team-pink-bg': '#E34C6F',
+            'team-pink-plaque-shadow': '#FF8EB7',
+            'team-pink-plaque-bg': '#FF8EB7',
+            'team-pink-plaque-border': '#E73E57',
 
+            
             'button-shadow': '#CD8407',
             'button-border': '#B17816',
             'button-shadow-dark': '#99660E',

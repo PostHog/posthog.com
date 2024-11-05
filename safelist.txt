@@ -269,13 +269,16 @@ stroke-team-green-plaque-border
 fill-team-green-plaque-shadow
 
 stroke-team-orange-border
-stroke-team-orange-plague-border
+stroke-team-orange-plaque-border
 fill-team-orange-bg
-fill-team-orange-plaque-shadow-bg
+fill-team-orange-plaque-shadow
 
 fill-team-white-plaque-bg
 stroke-team-white-plaque-border
 fill-team-white-plaque-shadow
 
 stroke-team-pink-border
+fill-team-pink-plaque-shadow
 fill-team-pink-bg
+fill-team-pink-plaque-bg
+stroke-team-pink-plaque-border
