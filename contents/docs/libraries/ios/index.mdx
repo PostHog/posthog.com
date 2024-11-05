@@ -45,10 +45,13 @@ PostHog autocapture automatically tracks the following events for you:
 -   **Application Installed** - when the app is installed.
 -   **Application Updated** - when the app is updated.
 -   **$screen** - when the user navigates (if using `UIViewController`)
+-   **$autocapture** - interactions with elements in a screen (if using `UIKit`)
+
+> 🚧 **Note:** `$autocapture` is currently supported only in UIKit and remains in an experimental state, with the feature disabled by default. SwiftUI support is planned for an upcoming release.
 
 ### Autocapture configuration
 
-You can enable or disable screen and application lifecycle autocapture through the `PostHogConfig` object.
+You can enable or disable Autocapture through the `PostHogConfig` object.
 
 ```swift
 let POSTHOG_API_KEY = "<ph_project_api_key>"
@@ -61,6 +64,16 @@ let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
 config.captureScreenViews = true 
 // capture application lifecycle events
 config.captureApplicationLifecycleEvents = true
+// enable $autocapture events
+config.autocapture = true // TIP: This is false by default
+// for $autocapture events, capture text input changes and edits
+config.autocaptureConfig.captureTextEdits = true 
+// for $autocapture events, capture gestures such as swipes and taps
+config.autocaptureConfig.captureGestures = true
+// for $autocapture events, capture control actions such as button presses
+config.autocaptureConfig.captureControlActions = true
+// for $autocapture events, capture control values or text (title for UIButton, text for UITextField, etc.)
+config.autocaptureConfig.captureValues = true 
 
 PostHogSDK.shared.setup(config)
 ```
@@ -101,50 +114,23 @@ struct HomeView: View {
 
 *In SwiftUI, views can range from entire screens to small UI components. Unlike UIKit, SwiftUI doesn’t clearly distinguish between these levels, which makes automatic tracking of full-screen views harder.*
 
-## Autocapture interactions
+### Disabling autocapture
 
-> 🚧 **Note:** Autocapturing element interactions are currently only supported in `UIKit` and are in an experimental state (disabled by default). SwiftUI support will be coming soon.
+To disable Autocapture, set `config.autocapture` to `false` in the configuration.
 
-If enabled, PostHog will automatically track interactions with elements in a screen and track them as the following event: 
-
--   **$autocapture** - interactions with elements in a screen (if using `UIKit`)
-
-### Autocapture interactions configuration
-
-You can enable or disable this feature through the `configuration.autocapture` property and customize it using the `configuration.autocaptureConfig` object.
-
-```swift
-let POSTHOG_API_KEY = "<ph_project_api_key>"
-// usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-let POSTHOG_HOST = "https://us.i.posthog.com"
-
-let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
-
-// enable $autocapture events
-config.autocapture = true // TIP: This is false by default
-// capture text input changes and edits
-config.autocaptureConfig.captureTextEdits = true 
-// capture gestures such as swipes and taps
-config.autocaptureConfig.captureGestures = true
-// capture action events such as button presses
-config.autocaptureConfig.captureControlActions = true
-// captures values or text from controls such as text views and buttons
-config.autocaptureConfig.captureValues = true 
-
-PostHogSDK.shared.setup(config)
-```
+> **Note:** Disabling `$autocapture` will *not* prevent the collection of screen view and application lifecycle events. To disable these specific events, use `config.captureScreenViews` and `config.captureApplicationLifecycleEvents` in the configuration.
 
 ## Preventing sensitive data capture
 
-If there are UI elements you don't want to be captured, you can add `ph-no-capture` as an `accessibilityLabel` or `accessibilityIdentifier`. If this label or identifier are found anywhere up the view hierarchy, the autocapture event will be ignored:
+To exclude specific UI elements from Autocapture, add `ph-no-capture` as either an `accessibilityLabel` or `accessibilityIdentifier`. When Autocapture detects this label or identifier anywhere in the view hierarchy, the event will be ignored:
 
 ```swift
-// This will be ignored
+// This view will be excluded from Autocapture
 let view = UIView()
 view.accessibilityLabel = "ph-no-capture"
 ```
 
-> **Note:** PostHog will automatically skip any fields that can detect as sensitive by default, even without the `ph-no-capture` tag. These include password fields, credit card fields, OTP fields and any other field that relates to Personal Identifiable Information (PII).
+> **Important:** By default, PostHog automatically excludes fields detected as sensitive, even without the `ph-no-capture` tag. These include password fields, credit card fields, OTP fields, and any other fields related to Personally Identifiable Information (PII).
 
 ## Identifying users
 
