@@ -1400,6 +1400,10 @@ export const docsMenu = {
                             url: '/docs/libraries/webflow',
                         },
                         {
+                            name: 'WooCommerce',
+                            url: '/docs/libraries/woocommerce',
+                        },
+                        {
                             name: 'WordPress',
                             url: '/docs/libraries/wordpress',
                         },
