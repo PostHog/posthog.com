@@ -371,22 +371,18 @@ export default function TeamPatch({
     </g>
                       <path id="downward-curve-name"
       d="M31 254.5C31 254.5 83 230.5 139.5 230.5C196 230.5 248 254.5 248 254.5" stroke="none" />
-      <text
-                          fill="#1E2F46"
-                          className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-3xl text-${
-                              textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'
-                          } ${
-                              textShadow === 'light'
-                                  ? '0_1px_0_rgba(255,255,255,.5)'
-                                  : textShadow === 'dark'
-                                  ? '0_1px_0_rgba(0,0,0,.5)'
-                                  : ''
-                          }`}
-                      >
-                          <textPath href="#downward-curve-name" startOffset="50%" textAnchor="middle">
-                              {name}
-                          </textPath>
-                      </text>
+
+                      <TeamName
+                        textColor={textColor}
+                        fill={textColor}
+                        textShadow={textShadow}
+                        textAnchor="middle"
+                        href="downward-curve-name"
+                        startOffset="50%"
+                        name={name}
+                      />
+
+
       </>
                     )}
                 </g>
