@@ -46,14 +46,15 @@ const Teams: React.FC = () => {
                         }
                     }
                     crestOptions {
-                        color
                         textColor
                         textShadow
                         frame
+                        frameColor
                         plaque
+                        plaqueColor
+                        imageScale
                         imageXOffset
                         imageYOffset
-                        imageScale
                     }
                 }
             }

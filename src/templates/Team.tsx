@@ -587,12 +587,15 @@ export const query = graphql`
                 }
             }
             crestOptions {
-                color
                 textColor
                 textShadow
                 frame
+                frameColor
                 plaque
+                plaqueColor
                 imageScale
+                imageXOffset
+                imageYOffset
             }
             roadmaps {
                 squeakId
