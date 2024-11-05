@@ -724,6 +724,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/billing',
                     },
                     {
+                        name: 'Trials',
+                        url: '/handbook/growth/sales/trials',
+                    },
+                    {
                         name: 'Refunds',
                         url: '/handbook/growth/sales/refunds',
                     },
