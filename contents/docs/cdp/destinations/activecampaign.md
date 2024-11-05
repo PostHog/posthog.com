@@ -1,5 +1,5 @@
 ---
-title: Send PostHog analytics to ActiveCampaign
+title: Send PostHog person data to ActiveCampaign
 templateId: template-activecampaign
 ---
 
