@@ -21,6 +21,7 @@ export interface IMenu {
     name: string
     url?: string
     children?: IMenu[]
+    internal?: IMenu[]
     className?: string
     handleLinkClick?: ({
         name,

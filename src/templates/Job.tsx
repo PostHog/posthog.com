@@ -109,10 +109,7 @@ export default function Job({
     const [jobTitle] = title.split(' - ')
 
     return (
-        <Layout
-            parent={companyMenu}
-            activeInternalMenu={companyMenu.children.find(({ name }) => name.toLowerCase() === 'careers')}
-        >
+        <Layout parent={companyMenu}>
             <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
             <div className="">
                 <PostLayout
@@ -172,10 +169,7 @@ export default function Job({
                                             </Link>
                                         </p>
                                         <div className="mb-6">
-                                            <CompensationCalculator
-                                                hideRole
-                                                initialJob={salaryRole}
-                                            />
+                                            <CompensationCalculator hideRole initialJob={salaryRole} />
                                         </div>
                                     </Accordion>
                                 )}
@@ -253,7 +247,10 @@ export default function Job({
                                 )}
                                 <Accordion title="Interview process" id="interview-process">
                                     <div className="mb-6">
-                                        <p>We do 2-3 short interviews, then pay you to do some real-life (or close to real-life) work.</p>
+                                        <p>
+                                            We do 2-3 short interviews, then pay you to do some real-life (or close to
+                                            real-life) work.
+                                        </p>
                                         <InterviewProcess role={title} inApplicationProcess />
                                     </div>
                                 </Accordion>

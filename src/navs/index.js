@@ -1,3 +1,6 @@
+import { roadmapMenu } from './roadmap'
+import newCompanyMenu from './company'
+
 export const handbookSidebar = [
     {
         name: 'Handbook',
@@ -982,7 +985,7 @@ export const sexyLegalMenu = {
 export const companyMenu = {
     name: 'Company',
     url: '/about',
-    icon: 'IconLogomark',
+    location: 'left',
     children: [
         { name: 'About', icon: 'IconLogomark', url: '/about' },
         {
@@ -3112,7 +3115,7 @@ export const docsMenu = {
 export const pricingMenu = {
     name: 'Pricing',
     url: '/pricing',
-    icon: 'IconReceipt',
+    location: 'left',
     children: [
         {
             name: 'PostHog Cloud',
@@ -3148,39 +3151,1346 @@ export const pricingMenu = {
 }
 
 // delete once top nav is removed
+
 const menu = [
     {
         name: 'Why PostHog?',
         url: '/why',
         icon: 'IconLightBulb',
         color: 'yellow',
+        location: 'top',
     },
     {
         name: "Who it's for",
         url: '/for',
         icon: 'IconLightBulb',
         color: 'yellow',
+        location: 'top',
     },
     {
         name: 'What it costs',
         url: '/pricing',
         icon: 'IconLightBulb',
         color: 'yellow',
+        location: 'top',
     },
     {
         name: 'News',
         url: '/community',
         icon: 'IconLightBulb',
         color: 'yellow',
+        location: 'top',
     },
     {
         name: 'Who we are',
         url: '/about',
         icon: 'IconLightBulb',
         color: 'yellow',
+        location: 'top',
     },
-    docsMenu,
-    companyMenu,
+    {
+        name: 'Docs',
+        url: '/docs',
+        icon: 'IconBook',
+        location: 'top',
+    },
+    {
+        name: 'Company',
+        url: '/about',
+        icon: 'IconLogomark',
+        location: 'top',
+    },
+    {
+        name: 'Products',
+        url: '/product-analytics',
+        location: 'left',
+        children: [
+            {
+                name: 'Product analytics',
+                icon: 'IconGraph',
+                color: 'blue',
+                url: '/product-analytics',
+                children: [
+                    {
+                        name: 'Features',
+                        url: '/product-analytics',
+                    },
+                    {
+                        name: 'Pricing',
+                        url: '/product-analytics/pricing',
+                    },
+                    {
+                        name: 'Compare',
+                        url: '/product-analytics/compare',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/docs/product-analytics',
+                        internal: [
+                            {
+                                name: 'Product analytics',
+                            },
+                            {
+                                name: 'Overview',
+                                url: '/docs/product-analytics',
+                                icon: 'IconHome',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Installation',
+                                url: '/docs/product-analytics/installation',
+                                icon: 'IconBook',
+                                color: 'blue',
+                                featured: true,
+                            },
+                            {
+                                name: 'Capturing events',
+                                url: '/docs/product-analytics/capture-events',
+                                icon: 'IconSend',
+                                color: 'orange',
+                            },
+                            {
+                                name: 'Creating insights',
+                                url: '/docs/product-analytics/insights',
+                                icon: 'IconGraph',
+                                color: 'red',
+                            },
+                            {
+                                name: 'Identifying users',
+                                url: '/docs/product-analytics/identify',
+                                icon: 'IconPerson',
+                                color: 'purple',
+                            },
+                            {
+                                name: 'Setting person properties',
+                                url: '/docs/product-analytics/person-properties',
+                                icon: 'IconProfile',
+                                color: 'seagreen',
+                                featured: true,
+                            },
+                            {
+                                name: 'Group analytics',
+                                url: '/docs/product-analytics/group-analytics',
+                                icon: 'IconPeople',
+                                color: 'orange',
+                            },
+                            {
+                                name: 'Troubleshooting and FAQs',
+                                url: '/docs/product-analytics/troubleshooting',
+                                icon: 'IconQuestion',
+                                color: 'blue',
+                            },
+                            {
+                                name: 'Tutorials and guides',
+                                url: '/docs/product-analytics/tutorials',
+                                icon: 'IconGraduationCap',
+                                color: 'red',
+                                featured: true,
+                            },
+                            {
+                                name: 'Cutting costs',
+                                url: '/docs/product-analytics/cutting-costs',
+                                icon: 'IconPiggyBank',
+                                color: 'purple',
+                            },
+                            {
+                                name: 'Analysis views',
+                            },
+                            {
+                                name: 'Trends',
+                                url: '/docs/product-analytics/trends/overview',
+                                icon: 'IconGraph',
+                                color: 'blue',
+                                children: [
+                                    {
+                                        name: 'Getting started',
+                                        url: '/docs/product-analytics/trends/overview',
+                                    },
+                                    {
+                                        name: 'Charts',
+                                        url: '/docs/product-analytics/trends/charts',
+                                    },
+                                    {
+                                        name: 'Filters',
+                                        url: '/docs/product-analytics/trends/filters',
+                                    },
+                                    {
+                                        name: 'Aggregations',
+                                        url: '/docs/product-analytics/trends/aggregations',
+                                    },
+                                    {
+                                        name: 'Breakdowns',
+                                        url: '/docs/product-analytics/trends/breakdowns',
+                                    },
+                                    {
+                                        name: 'Formulas',
+                                        url: '/docs/product-analytics/trends/formulas',
+                                    },
+                                    {
+                                        name: 'Tips',
+                                        url: '/docs/product-analytics/trends/tips',
+                                    },
+                                ],
+                            },
+                            {
+                                name: 'Funnels',
+                                url: '/docs/product-analytics/funnels',
+                                icon: 'IconFunnels',
+                                color: 'yellow',
+                            },
+                            {
+                                name: 'Dashboards',
+                                url: '/docs/product-analytics/dashboards',
+                                icon: 'IconDashboard',
+                                color: 'purple',
+                            },
+                            {
+                                name: 'User paths',
+                                url: '/docs/product-analytics/paths',
+                                icon: 'IconUserPaths',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Stickiness',
+                                url: '/docs/product-analytics/stickiness',
+                                icon: 'IconStickiness',
+                                color: 'red',
+                            },
+                            {
+                                name: 'Correlation analysis',
+                                url: '/docs/product-analytics/correlation',
+                                color: 'blue',
+                                icon: 'IconArrowUpRight',
+                            },
+                            {
+                                name: 'Retention',
+                                url: '/docs/product-analytics/retention',
+                                icon: 'IconRetention',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Lifecycle',
+                                url: '/docs/product-analytics/lifecycle',
+                                icon: 'IconLifecycle',
+                                color: 'yellow',
+                            },
+                            {
+                                name: 'SQL',
+                                url: '/docs/product-analytics/sql',
+                                icon: 'IconHogQL',
+                                color: 'purple',
+                                badge: {
+                                    title: 'Beta',
+                                    className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                                },
+                            },
+                            {
+                                name: 'Tools',
+                            },
+                            {
+                                name: 'LLM insights',
+                                url: '/docs/ai-engineering/llms',
+                                icon: 'IconAIText',
+                                color: 'yellow',
+                                badge: {
+                                    title: 'Beta',
+                                    className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                                },
+                            },
+                            {
+                                name: 'Autocapture',
+                                url: '/docs/product-analytics/autocapture',
+                                icon: 'IconBolt',
+                                color: 'red',
+                            },
+                            {
+                                name: 'Web vitals',
+                                url: '/docs/product-analytics/web-vitals',
+                                icon: 'IconWrench',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Data management',
+                                url: '/docs/data',
+                                icon: 'IconDatabase',
+                                color: 'blue',
+                            },
+                            {
+                                name: 'Sharing & embedding',
+                                url: '/docs/product-analytics/sharing',
+                                icon: 'IconShare',
+                                color: 'purple',
+                            },
+                            {
+                                name: 'Subscriptions',
+                                url: '/docs/product-analytics/subscriptions',
+                                icon: 'IconBell',
+                                color: 'red',
+                            },
+                            {
+                                name: 'Sampling',
+                                url: '/docs/product-analytics/sampling',
+                                icon: 'IconSampling',
+                                color: 'purple',
+                                badge: {
+                                    title: 'Beta',
+                                    className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Tutorials',
+                        url: '/tutorials/product-analytics',
+                    },
+                    {
+                        name: 'Questions?',
+                        url: '/questions/product-analytics',
+                    },
+                ],
+            },
+            {
+                name: 'Web analytics',
+                icon: 'IconPieChart',
+                color: '[#36C46F]',
+                url: '/web-analytics',
+                children: [
+                    {
+                        name: 'Features',
+                        url: '/web-analytics',
+                    },
+                    {
+                        name: 'Pricing',
+                        url: '/web-analytics/pricing',
+                    },
+                    {
+                        name: 'Compare',
+                        url: '/web-analytics/compare',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/docs/web-analytics',
+                        internal: [
+                            {
+                                name: 'Web analytics',
+                            },
+                            {
+                                name: 'Overview',
+                                url: '/docs/web-analytics',
+                                icon: 'IconHome',
+                                color: 'seagreen',
+                                featured: true,
+                            },
+                            {
+                                name: 'Dashboard',
+                                url: '/docs/web-analytics/dashboard',
+                                icon: 'IconDashboard',
+                                color: 'orange',
+                            },
+                            {
+                                name: 'FAQ',
+                                url: '/docs/web-analytics/faq',
+                                icon: 'IconQuestion',
+                                color: 'blue',
+                                featured: true,
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Tutorials',
+                        url: '/tutorials/web-analytics',
+                    },
+                    {
+                        name: 'Questions?',
+                        url: '/questions/web-analytics',
+                    },
+                ],
+            },
+            {
+                name: 'Session replay',
+                icon: 'IconRewindPlay',
+                color: 'yellow',
+                url: '/session-replay',
+                children: [
+                    {
+                        name: 'Features',
+                        url: '/session-replay',
+                    },
+                    {
+                        name: 'Pricing',
+                        url: '/session-replay/pricing',
+                    },
+                    {
+                        name: 'Compare',
+                        url: '/session-replay/compare',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/docs/session-replay',
+                        internal: [
+                            {
+                                name: 'Session replay',
+                            },
+                            {
+                                name: 'Overview',
+                                url: '/docs/session-replay',
+                                icon: 'IconHome',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Installation',
+                                url: '/docs/session-replay/installation',
+                                icon: 'IconBook',
+                                color: 'blue',
+                                featured: true,
+                            },
+                            {
+                                name: 'Watching recordings',
+                                url: '/docs/session-replay/how-to-watch-recordings',
+                                icon: 'IconApp',
+                                color: 'orange',
+                                featured: true,
+                            },
+                            {
+                                name: 'Controlling which sessions you record',
+                                url: '/docs/session-replay/how-to-control-which-sessions-you-record',
+                                icon: 'IconToggle',
+                                color: 'red',
+                            },
+                            {
+                                name: 'Troubleshooting and FAQs',
+                                url: '/docs/session-replay/troubleshooting',
+                                icon: 'IconQuestion',
+                                color: 'purple',
+                            },
+                            {
+                                name: 'Tutorials and guides',
+                                url: '/docs/session-replay/tutorials',
+                                icon: 'IconGraduationCap',
+                                color: 'blue',
+                                featured: true,
+                            },
+                            {
+                                name: 'Cutting costs',
+                                url: '/docs/session-replay/cutting-costs',
+                                icon: 'IconPiggyBank',
+                                color: 'yellow',
+                            },
+                            {
+                                name: 'Features',
+                            },
+                            {
+                                name: 'Network performance',
+                                url: '/docs/session-replay/network-recording',
+                                icon: 'IconDashboard',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Mobile session replay',
+                                url: '/docs/session-replay/mobile',
+                                icon: 'IconPhone',
+                                color: 'blue',
+                                featured: true,
+                                badge: {
+                                    title: 'Beta',
+                                    className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                                },
+                                children: [
+                                    {
+                                        name: 'Overview',
+                                        url: '/docs/session-replay/mobile',
+                                    },
+                                    {
+                                        name: 'Android',
+                                        url: '/docs/session-replay/android',
+                                    },
+                                    {
+                                        name: 'iOS',
+                                        url: '/docs/session-replay/ios',
+                                    },
+                                    {
+                                        name: 'React Native',
+                                        url: '/docs/session-replay/react-native',
+                                    },
+                                ],
+                            },
+                            {
+                                name: 'Privacy controls',
+                                url: '/docs/session-replay/privacy',
+                                icon: 'IconShield',
+                                color: 'orange',
+                            },
+                            {
+                                name: 'Sharing & embedding',
+                                url: '/docs/session-replay/sharing',
+                                icon: 'IconShare',
+                                color: 'purple',
+                            },
+                            {
+                                name: 'Data retention',
+                                url: '/docs/session-replay/data-retention',
+                                icon: 'IconCalendar',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Iframe recording',
+                                url: '/docs/session-replay/iframes',
+                                icon: 'IconCode',
+                                color: 'salmon',
+                            },
+                            {
+                                name: 'Console log recording',
+                                url: '/docs/session-replay/console-log-recording',
+                                icon: 'IconCode',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Canvas recording',
+                                url: '/docs/session-replay/canvas-recording',
+                                icon: 'IconPalette',
+                                color: 'blue',
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Tutorials',
+                        url: '/tutorials/session-replay',
+                    },
+                    {
+                        name: 'Questions?',
+                        url: '/questions/session-replay',
+                    },
+                ],
+            },
+            {
+                name: 'Feature flags',
+                icon: 'IconToggle',
+                color: 'seagreen',
+                url: '/feature-flags',
+                children: [
+                    {
+                        name: 'Features',
+                        url: '/feature-flags',
+                    },
+                    {
+                        name: 'Pricing',
+                        url: '/feature-flags/pricing',
+                    },
+                    {
+                        name: 'Compare',
+                        url: '/feature-flags/compare',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/docs/feature-flags',
+                        internal: [
+                            {
+                                name: 'Feature flags',
+                            },
+                            {
+                                name: 'Overview',
+                                url: '/docs/feature-flags',
+                                icon: 'IconHome',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Installation',
+                                url: '/docs/feature-flags/installation',
+                                icon: 'IconBook',
+                                color: 'blue',
+                                featured: true,
+                            },
+                            {
+                                name: 'Creating feature flags',
+                                url: '/docs/feature-flags/creating-feature-flags',
+                                icon: 'IconFlag',
+                                color: 'orange',
+                                featured: true,
+                            },
+                            {
+                                name: 'Adding your code',
+                                url: '/docs/feature-flags/adding-feature-flag-code',
+                                icon: 'IconCode',
+                                color: 'salmon',
+                            },
+                            {
+                                name: 'Testing your flag',
+                                url: '/docs/feature-flags/testing',
+                                icon: 'IconTestTube',
+                                color: 'purple',
+                                featured: true,
+                            },
+                            {
+                                name: 'Troubleshooting and FAQs',
+                                url: '/docs/feature-flags/common-questions',
+                                icon: 'IconQuestion',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Tutorials and guides',
+                                url: '/docs/feature-flags/tutorials',
+                                icon: 'IconGraduationCap',
+                                color: 'blue',
+                                featured: true,
+                            },
+                            {
+                                name: 'Cutting costs',
+                                url: '/docs/feature-flags/cutting-costs',
+                                icon: 'IconPiggyBank',
+                                color: 'yellow',
+                            },
+                            {
+                                name: 'Features',
+                            },
+                            {
+                                name: 'Server-side local evaluation',
+                                url: '/docs/feature-flags/local-evaluation',
+                                icon: 'IconBolt',
+                                color: 'orange',
+                            },
+                            {
+                                name: 'Client-side bootstrapping',
+                                url: '/docs/feature-flags/bootstrapping',
+                                icon: 'IconLaptop',
+                                color: 'salmon',
+                            },
+                            {
+                                name: 'Early access feature management',
+                                url: '/docs/feature-flags/early-access-feature-management',
+                                icon: 'IconFeatures',
+                                color: 'purple',
+                            },
+                            {
+                                name: 'Multi-project feature flags',
+                                url: '/docs/feature-flags/multi-project-feature-flags',
+                                icon: 'IconStack',
+                                color: 'blue',
+                            },
+                            {
+                                name: 'Scheduled flag changes',
+                                url: '/docs/feature-flags/scheduled-flag-changes',
+                                icon: 'IconClock',
+                                color: 'seagreen',
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Tutorials',
+                        url: '/tutorials/feature-flags',
+                    },
+                    {
+                        name: 'Questions?',
+                        url: '/questions/feature-flags',
+                    },
+                ],
+            },
+            {
+                name: 'Experiments',
+                icon: 'IconFlask',
+                color: 'purple',
+                url: '/experiments',
+                children: [
+                    {
+                        name: 'Features',
+                        url: '/experiments',
+                    },
+                    {
+                        name: 'Pricing',
+                        url: '/experiments/pricing',
+                    },
+                    {
+                        name: 'Compare',
+                        url: '/experiments/compare',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/docs/experiments',
+                        internal: [
+                            {
+                                name: 'Experiments',
+                            },
+                            {
+                                name: 'Overview',
+                                url: '/docs/experiments',
+                                icon: 'IconHome',
+                                color: 'seagreen',
+                            },
+                            /*
+                                {
+                                    name: 'Getting started',
+                                    url: '/docs/experiments/start',
+                                    icon: 'IconGraduationCap',
+                                    color: 'red',
+                                },
+                                */
+                            {
+                                name: 'Installation',
+                                url: '/docs/experiments/installation',
+                                icon: 'IconBook',
+                                color: 'blue',
+                                featured: true,
+                            },
+                            {
+                                name: 'Creating an experiment',
+                                url: '/docs/experiments/creating-an-experiment',
+                                icon: 'IconTarget',
+                                color: 'orange',
+                                featured: true,
+                            },
+                            {
+                                name: 'Adding your code',
+                                url: '/docs/experiments/adding-experiment-code',
+                                icon: 'IconCode',
+                                color: 'salmon',
+                            },
+                            {
+                                name: 'Testing and launching',
+                                url: '/docs/experiments/testing-and-launching',
+                                icon: 'IconRocket',
+                                color: 'purple',
+                                featured: true,
+                            },
+                            {
+                                name: 'Troubleshooting and FAQs',
+                                url: '/docs/experiments/common-questions',
+                                icon: 'IconQuestion',
+                                color: 'seagreen',
+                                featured: true,
+                            },
+                            {
+                                name: 'Tutorials and guides',
+                                url: '/docs/experiments/tutorials',
+                                icon: 'IconGraduationCap',
+                                color: 'blue',
+                            },
+                            {
+                                name: 'Methodology',
+                            },
+                            {
+                                name: 'Traffic allocation',
+                                url: '/docs/experiments/traffic-allocation',
+                                icon: 'IconPeople',
+                                color: 'orange',
+                            },
+                            {
+                                name: 'Sample size and running time',
+                                url: '/docs/experiments/sample-size-running-time',
+                                icon: 'IconDashboard',
+                                color: 'blue',
+                            },
+                            {
+                                name: 'Experiment significance',
+                                url: '/docs/experiments/experiment-significance',
+                                icon: 'IconMagicWand',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Features',
+                            },
+                            {
+                                name: 'Experiments without feature flags',
+                                url: '/docs/experiments/running-experiments-without-feature-flags',
+                                icon: 'IconFlag',
+                                color: 'yellow',
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Tutorials',
+                        url: '/tutorials/experiments',
+                    },
+                    {
+                        name: 'Questions?',
+                        url: '/questions/experiments',
+                    },
+                ],
+            },
+            {
+                name: 'Surveys',
+                icon: 'IconMessage',
+                color: 'salmon',
+                url: '/surveys',
+                children: [
+                    {
+                        name: 'Features',
+                        url: '/surveys',
+                    },
+                    {
+                        name: 'Pricing',
+                        url: '/surveys/pricing',
+                    },
+                    {
+                        name: 'Compare',
+                        url: '/surveys/compare',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/docs/surveys',
+                        internal: [
+                            {
+                                name: 'Surveys',
+                            },
+                            {
+                                name: 'Overview',
+                                url: '/docs/surveys',
+                                icon: 'IconHome',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Installation',
+                                url: '/docs/surveys/installation',
+                                icon: 'IconBook',
+                                color: 'blue',
+                                featured: true,
+                            },
+                            {
+                                name: 'Creating a survey',
+                                url: '/docs/surveys/creating-surveys',
+                                icon: 'IconTarget',
+                                color: 'yellow',
+                                featured: true,
+                            },
+                            {
+                                name: 'Implementing custom surveys',
+                                url: '/docs/surveys/implementing-custom-surveys',
+                                icon: 'IconCode',
+                                color: 'salmon',
+                            },
+                            {
+                                name: 'Viewing results',
+                                url: '/docs/surveys/viewing-results',
+                                icon: 'IconGraph',
+                                color: 'purple',
+                            },
+                            {
+                                name: 'Troubleshooting and FAQs',
+                                url: '/docs/surveys/troubleshooting',
+                                icon: 'IconQuestion',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Tutorials and guides',
+                                url: '/docs/surveys/tutorials',
+                                icon: 'IconGraduationCap',
+                                color: 'blue',
+                                featured: true,
+                            },
+                            {
+                                name: 'Features',
+                            },
+                            {
+                                name: 'Webhook',
+                                url: '/docs/surveys/webhook',
+                                icon: 'IconLaptop',
+                                color: 'orange',
+                            },
+                            {
+                                name: 'Conditional questions',
+                                url: '/docs/surveys/conditional-questions',
+                                icon: 'IconUserPaths',
+                                color: 'blue',
+                                featured: true,
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Tutorials',
+                        url: '/tutorials/surveys',
+                    },
+                    {
+                        name: 'Questions?',
+                        url: '/questions/surveys',
+                    },
+                ],
+            },
+            {
+                name: 'CDP',
+                icon: 'IconPlug',
+                color: 'sky-blue',
+                url: '/cdp',
+                children: [
+                    {
+                        name: 'Features',
+                        url: '/cdp',
+                    },
+                    {
+                        name: 'Pricing',
+                        url: '/cdp/pricing',
+                    },
+                    {
+                        name: 'Compare',
+                        url: '/cdp/compare',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/docs/cdp',
+                        internal: [
+                            {
+                                name: 'Customer data platform',
+                            },
+                            {
+                                name: 'Overview',
+                                url: '/docs/cdp',
+                                icon: 'IconHome',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Realtime destinations',
+                                url: '/docs/cdp/destinations',
+                                badge: {
+                                    title: 'Beta',
+                                    className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                                },
+                                icon: 'IconLive',
+                                color: 'salmon',
+                                featured: true,
+                                children: [
+                                    {
+                                        name: 'Overview',
+                                        url: '/docs/cdp/destinations',
+                                    },
+                                    {
+                                        name: 'Destinations',
+                                    },
+                                    {
+                                        name: 'Slack',
+                                        url: '/docs/cdp/destinations/slack',
+                                    },
+                                    {
+                                        name: 'Webhook',
+                                        url: '/docs/cdp/destinations/webhook',
+                                    },
+                                    {
+                                        name: 'ActiveCampaign',
+                                        url: '/docs/cdp/destinations/activecampaign',
+                                    },
+                                    {
+                                        name: 'Avo',
+                                        url: '/docs/cdp/destinations/avo',
+                                    },
+                                    {
+                                        name: 'AWS Kinesis',
+                                        url: '/docs/cdp/destinations/aws-kinesis',
+                                    },
+                                    {
+                                        name: 'Braze',
+                                        url: '/docs/cdp/destinations/braze',
+                                    },
+                                    {
+                                        name: 'Customer.io',
+                                        url: '/docs/cdp/destinations/customerio',
+                                    },
+                                    {
+                                        name: 'Engage.so',
+                                        url: '/docs/cdp/destinations/engage',
+                                    },
+                                    {
+                                        name: 'Gleap',
+                                        url: '/docs/cdp/destinations/gleap',
+                                    },
+                                    {
+                                        name: 'Google Cloud Storage',
+                                        url: '/docs/cdp/destinations/google-cloud-storage',
+                                    },
+                                    {
+                                        name: 'Google Pub/Sub',
+                                        url: '/docs/cdp/destinations/google-pubsub',
+                                    },
+                                    {
+                                        name: 'Hubspot',
+                                        url: '/docs/cdp/destinations/hubspot',
+                                    },
+                                    {
+                                        name: 'Intercom',
+                                        url: '/docs/cdp/destinations/intercom',
+                                    },
+                                    {
+                                        name: 'Knock',
+                                        url: '/docs/cdp/destinations/knock',
+                                    },
+                                    {
+                                        name: 'Loops',
+                                        url: '/docs/cdp/destinations/loops',
+                                    },
+                                    {
+                                        name: 'Mailgun',
+                                        url: '/docs/cdp/destinations/mailgun',
+                                    },
+                                    {
+                                        name: 'Mailjet',
+                                        url: '/docs/cdp/destinations/mailjet',
+                                    },
+                                    {
+                                        name: 'RudderStack',
+                                        url: '/docs/cdp/destinations/rudderstack',
+                                    },
+                                    {
+                                        name: 'Salesforce',
+                                        url: '/docs/cdp/destinations/salesforce',
+                                    },
+                                    {
+                                        name: 'Sendgrid',
+                                        url: '/docs/cdp/destinations/sendgrid',
+                                    },
+                                    {
+                                        name: 'Zapier',
+                                        url: '/docs/cdp/destinations/zapier',
+                                    },
+                                    {
+                                        name: 'Zendesk',
+                                        url: '/docs/cdp/destinations/zendesk',
+                                    },
+                                ],
+                            },
+                            {
+                                name: 'Batch exports',
+                                url: '/docs/cdp/batch-exports',
+                                badge: {
+                                    title: 'Beta',
+                                    className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                                },
+                                icon: 'IconShare',
+                                color: 'purple',
+                                featured: true,
+                                children: [
+                                    {
+                                        name: 'Amazon S3',
+                                        url: '/docs/cdp/batch-exports/s3',
+                                    },
+                                    {
+                                        name: 'Snowflake',
+                                        url: '/docs/cdp/batch-exports/snowflake',
+                                    },
+                                    {
+                                        name: 'BigQuery',
+                                        url: '/docs/cdp/batch-exports/bigquery',
+                                    },
+                                    {
+                                        name: 'Postgres',
+                                        url: '/docs/cdp/batch-exports/postgres',
+                                    },
+                                    {
+                                        name: 'Redshift',
+                                        url: '/docs/cdp/batch-exports/redshift',
+                                    },
+                                ],
+                            },
+                            {
+                                name: 'Transformations',
+                                url: '/docs/cdp/geoip-enrichment',
+                                icon: 'IconWrench',
+                                color: 'yellow',
+                                featured: true,
+                                children: [
+                                    {
+                                        url: '/docs/cdp/geoip-enrichment',
+                                        name: 'GeoIP Enricher',
+                                    },
+                                    {
+                                        url: '/docs/cdp/timestamp-parser',
+                                        name: 'Timestamp Parser',
+                                    },
+                                    {
+                                        url: '/docs/cdp/url-normalizer',
+                                        name: 'URL Normalizer',
+                                    },
+                                    {
+                                        url: '/docs/cdp/user-agent-populator',
+                                        name: 'User Agent Populator',
+                                    },
+                                    {
+                                        url: '/docs/cdp/event-sequence-timer',
+                                        name: 'Event Sequence Timer',
+                                    },
+                                    {
+                                        url: '/docs/cdp/property-filter',
+                                        name: 'Property Filter',
+                                    },
+                                    {
+                                        url: '/docs/cdp/taxonomy-standardizer',
+                                        name: 'Taxonomy Standardizer',
+                                    },
+                                    {
+                                        url: '/docs/cdp/downsampling',
+                                        name: 'Downsampler',
+                                    },
+                                    {
+                                        url: '/docs/cdp/filter-out',
+                                        name: 'Filter Out',
+                                    },
+                                    {
+                                        url: '/docs/cdp/schema-enforcer',
+                                        name: 'Schema Enforcer',
+                                    },
+                                ],
+                            },
+                            {
+                                name: 'Troubleshooting and FAQs',
+                                url: '/docs/cdp/common-questions',
+                                icon: 'IconQuestion',
+                                color: 'blue',
+                                featured: true,
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Tutorials',
+                        url: '/tutorials/cdp',
+                    },
+                    {
+                        name: 'Questions?',
+                        url: '/questions/cdp',
+                    },
+                ],
+            },
+            {
+                name: 'Data warehouse',
+                icon: 'IconDatabase',
+                color: 'lilac',
+                url: '/data-warehouse',
+                children: [
+                    {
+                        name: 'Features',
+                        url: '/data-warehouse',
+                    },
+                    {
+                        name: 'Pricing',
+                        url: '/data-warehouse/pricing',
+                    },
+                    {
+                        name: 'Compare',
+                        url: '/data-warehouse/compare',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/docs/data-warehouse',
+                        internal: [
+                            {
+                                name: 'Data warehouse',
+                            },
+                            {
+                                name: 'Overview',
+                                url: '/docs/data-warehouse',
+                                icon: 'IconHome',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'Link a source',
+                                url: '/docs/data-warehouse/setup',
+                                icon: 'IconBook',
+                                color: 'blue',
+                                featured: true,
+                                children: [
+                                    {
+                                        name: 'Overview',
+                                        url: '/docs/data-warehouse/setup',
+                                    },
+                                    {
+                                        name: 'Managed',
+                                    },
+                                    {
+                                        name: 'Stripe',
+                                        url: '/docs/data-warehouse/setup/stripe',
+                                    },
+                                    {
+                                        name: 'Hubspot',
+                                        url: '/docs/data-warehouse/setup/hubspot',
+                                    },
+                                    {
+                                        name: 'Zendesk',
+                                        url: '/docs/data-warehouse/setup/zendesk',
+                                    },
+                                    {
+                                        name: 'Postgres',
+                                        url: '/docs/data-warehouse/setup/postgres',
+                                    },
+                                    {
+                                        name: 'Salesforce',
+                                        url: '/docs/data-warehouse/setup/salesforce',
+                                    },
+                                    {
+                                        name: 'MySQL',
+                                        url: '/docs/data-warehouse/setup/mysql',
+                                    },
+                                    {
+                                        name: 'Azure SQL Server',
+                                        url: '/docs/data-warehouse/setup/azure-db',
+                                    },
+                                    {
+                                        name: 'Snowflake',
+                                        url: '/docs/data-warehouse/setup/snowflake',
+                                    },
+                                    {
+                                        name: 'Vitally',
+                                        url: '/docs/data-warehouse/setup/vitally',
+                                    },
+                                    {
+                                        name: 'Self-managed',
+                                    },
+                                    {
+                                        name: 'S3',
+                                        url: '/docs/data-warehouse/setup/s3',
+                                    },
+                                    {
+                                        name: 'Azure Blob',
+                                        url: '/docs/data-warehouse/setup/azure-blob',
+                                    },
+                                    {
+                                        name: 'Cloudflare R2',
+                                        url: '/docs/data-warehouse/setup/r2',
+                                    },
+                                    {
+                                        name: 'Google Cloud Storage',
+                                        url: '/docs/data-warehouse/setup/gcs',
+                                    },
+                                ],
+                            },
+                            {
+                                name: 'Creating insights from sources',
+                                url: '/docs/data-warehouse/query',
+                                icon: 'IconHogQL',
+                                color: 'purple',
+                            },
+                            {
+                                name: 'Joining data',
+                                url: '/docs/data-warehouse/join',
+                                icon: 'IconList',
+                                color: 'orange',
+                                featured: true,
+                            },
+                            {
+                                name: 'Save views',
+                                url: '/docs/data-warehouse/views',
+                                icon: 'IconCalculator',
+                                color: 'salmon',
+                                featured: true,
+                            },
+                            {
+                                name: 'Under the hood',
+                                url: '/docs/data-warehouse/under-the-hood',
+                                icon: 'IconMagicWand',
+                                color: 'seagreen',
+                                featured: true,
+                            },
+                            {
+                                name: 'Tutorials and guides',
+                                url: '/docs/data-warehouse/tutorials',
+                                icon: 'IconGraduationCap',
+                                color: 'blue',
+                                featured: true,
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Tutorials',
+                        url: '/tutorials/data-warehouse',
+                    },
+                    {
+                        name: 'Questions?',
+                        url: '/questions/data-warehouse',
+                    },
+                ],
+            },
+            {
+                name: 'AI engineering',
+                url: '/docs/ai-engineering',
+                color: '[#681291]',
+                icon: 'IconAI',
+                children: [
+                    {
+                        name: 'Features',
+                        url: '/ai-engineering',
+                    },
+                    {
+                        name: 'Pricing',
+                        url: '/ai-engineering/pricing',
+                    },
+                    {
+                        name: 'Compare',
+                        url: '/ai-engineering/compare',
+                    },
+                    {
+                        name: 'Docs',
+                        url: '/docs/ai-engineering',
+                        internal: [
+                            {
+                                name: 'AI engineering',
+                                badge: {
+                                    title: 'Beta',
+                                    className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                                },
+                            },
+                            {
+                                name: 'Overview',
+                                url: '/docs/ai-engineering',
+                                icon: 'IconHome',
+                                color: 'seagreen',
+                            },
+                            {
+                                name: 'LLM insights',
+                                url: '/docs/ai-engineering/llm-insights',
+                                icon: 'IconAIText',
+                                color: 'blue',
+                                featured: true,
+                            },
+                            {
+                                name: 'Tutorials and guides',
+                                url: '/docs/ai-engineering/tutorials',
+                                icon: 'IconGraduationCap',
+                                color: 'yellow',
+                                featured: true,
+                            },
+                            {
+                                name: 'Integrations',
+                            },
+                            {
+                                name: 'Helicone',
+                                url: '/docs/ai-engineering/helicone-posthog',
+                                icon: 'IconWrench',
+                                color: 'green',
+                            },
+                            {
+                                name: 'Keywords AI',
+                                url: '/docs/ai-engineering/keywords-ai-posthog',
+                                icon: 'IconWrench',
+                                color: 'blue',
+                            },
+                            {
+                                name: 'Langfuse',
+                                url: '/docs/ai-engineering/langfuse-posthog',
+                                icon: 'IconWrench',
+                                color: 'red',
+                            },
+                            {
+                                name: 'Traceloop',
+                                url: '/docs/ai-engineering/traceloop-posthog',
+                                icon: 'IconWrench',
+                                color: 'purple',
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Tutorials',
+                        url: '/tutorials/ai-engineering',
+                    },
+                    {
+                        name: 'Questions?',
+                        url: '/questions/ai-engineering',
+                    },
+                ],
+            },
+            {
+                name: 'Product OS',
+                icon: 'IconStack',
+                color: 'blue',
+                url: '/product-os',
+            },
+        ],
+    },
+    pricingMenu,
+    roadmapMenu,
+    // communityMenu,
+    newCompanyMenu,
 ]
 
 export default menu

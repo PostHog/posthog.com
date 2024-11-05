@@ -21,7 +21,7 @@ export default function New() {
     }, [])
     return (
         !loading && (
-            <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
+            <Layout parent={communityMenu}>
                 <SEO title="New post - PostHog" noindex />
                 <section className="px-5">
                     <NewPost />

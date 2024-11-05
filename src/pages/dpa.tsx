@@ -203,11 +203,7 @@ function DpaGenerator() {
     }
 
     return (
-        <Layout
-            headerBlur={false}
-            parent={sexyLegalMenu}
-            activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'dpa generator')}
-        >
+        <Layout headerBlur={false} parent={sexyLegalMenu}>
             <SEO
                 title="DPA generator"
                 description="PostHog's cutting-edge data processing agreement (DPA) generator"

@@ -63,10 +63,7 @@ function Terms() {
     }, [])
 
     return (
-        <Layout
-            parent={sexyLegalMenu}
-            activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'terms')}
-        >
+        <Layout parent={sexyLegalMenu}>
             <SEO title="Terms, PostHog style" description="Terms, PostHog style" image={`/images/og/terms.png`} />
             <div>
                 <div className="max-w-2xl mx-auto py-8 px-4 md:px-8">
@@ -680,8 +677,8 @@ function Terms() {
                             notice to Customer (which may be sent by email). If Customer believes that PostHog has
                             billed Customer incorrectly, Customer must contact PostHog no later than 60 days after the
                             closing date on the first billing statement in which the error or problem appeared, in order
-                            to receive an adjustment or credit. Inquiries should be submitted via 
-                            an in-app support ticket to the Company's customer success department.
+                            to receive an adjustment or credit. Inquiries should be submitted via an in-app support
+                            ticket to the Company's customer success department.
                         </p>
                     </div>
                     <div className="md:pt-10">

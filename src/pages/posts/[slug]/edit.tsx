@@ -21,7 +21,7 @@ export default function Edit({ location: { state } }) {
     }, [])
     return (
         !loading && (
-            <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[0]}>
+            <Layout parent={communityMenu}>
                 <SEO title="Edit post - PostHog" noindex />
                 <section className="px-5">
                     <NewPost initialValues={state.initialValues} id={state.id} />

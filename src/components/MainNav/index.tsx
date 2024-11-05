@@ -175,10 +175,11 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${open
-                        ? 'border-primary/50 dark:border-primary-dark/50'
-                        : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
-                        }`}
+                    className={`ml-2 flex items-center rounded-full border border-light dark:border-dark relative active:scale-[.99] ${
+                        open
+                            ? 'border-primary/50 dark:border-primary-dark/50'
+                            : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
+                    }`}
                 >
                     {children}
                 </button>
@@ -186,8 +187,9 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`ml-2 flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${open ? 'bg-border dark:bg-border-dark' : ' hover:scale-[1.05]'
-                        }`}
+                    className={`ml-2 flex items-center p-2 rounded hover:bg-border dark:hover:bg-border-dark relative active:top-[1px] active:scale-[.99] ${
+                        open ? 'bg-border dark:bg-border-dark' : ' hover:scale-[1.05]'
+                    }`}
                 >
                     {children}
                 </button>
@@ -220,14 +222,16 @@ const ActiveBackground = ({ mobile = false }) => {
         <span
             className={`bg-light dark:bg-dark absolute w-full h-[calc(100%+1px)] left-0 inset-0
                 before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
-                after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:right-0 after:bg-accent dark:after:bg-accent-dark ${mobile
-                    ? 'before:rounded-tr-lg after:rounded-tl-lg top-[-1px] before:border-t after:border-t'
-                    : 'before:rounded-br-lg after:rounded-bl-lg before:border-b after:border-b'
+                after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:right-0 after:bg-accent dark:after:bg-accent-dark ${
+                    mobile
+                        ? 'before:rounded-tr-lg after:rounded-tl-lg top-[-1px] before:border-t after:border-t'
+                        : 'before:rounded-br-lg after:rounded-bl-lg before:border-b after:border-b'
                 }`}
         >
             <span
-                className={`absolute ${mobile ? 'top-0' : 'bottom-0'
-                    } left-0 border-b border-bg-light dark:border-bg-dark w-full`}
+                className={`absolute ${
+                    mobile ? 'top-0' : 'bottom-0'
+                } left-0 border-b border-bg-light dark:border-bg-dark w-full`}
             />
         </span>
     )
@@ -334,30 +338,34 @@ export const Main = () => {
             <MediaUploadModal open={mediaModalOpen} setOpen={setMediaModalOpen} />
             <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark">
                 <div
-                    className={`flex mx-auto px-2 md:px-0 justify-between transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
-                        }`}
+                    className={`flex mx-auto px-2 md:px-0 justify-between transition-all ${
+                        fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
+                    }`}
                 >
                     <ul className="md:flex hidden list-none m-0 p-0">
-                        {menu.map((menuItem) => {
-                            const active = menuItem.name === parent?.name
-                            const { name, url } = menuItem
-                            return (
-                                <li className="h-full" key={name}>
-                                    <Link
-                                        to={url}
-                                        className={`text-[13.5px] font-medium flex h-full items-center relative px-3 py-4 mdlg:p-4 ${active
-                                            ? 'px-[calc(.75rem_+_10px)] mdlg:px-[calc(1rem_+_10px)] mx-[-10px]'
-                                            : 'opacity-70 hover:opacity-100'
+                        {menu
+                            .filter((item) => item.location === 'top')
+                            .map((menuItem) => {
+                                const active = menuItem.name === parent?.name
+                                const { name, url } = menuItem
+                                return (
+                                    <li className="h-full" key={name}>
+                                        <Link
+                                            to={url}
+                                            className={`text-[13.5px] font-medium flex h-full items-center relative px-3 py-4 mdlg:p-4 ${
+                                                active
+                                                    ? 'px-[calc(.75rem_+_10px)] mdlg:px-[calc(1rem_+_10px)] mx-[-10px]'
+                                                    : 'opacity-70 hover:opacity-100'
                                             }`}
-                                    >
-                                        {active && <ActiveBackground />}
-                                        <span className="relative">
-                                            {enterpriseMode ? enterpiseModeNames[name] : name}
-                                        </span>
-                                    </Link>
-                                </li>
-                            )
-                        })}
+                                        >
+                                            {active && <ActiveBackground />}
+                                            <span className="relative">
+                                                {enterpriseMode ? enterpiseModeNames[name] : name}
+                                            </span>
+                                        </Link>
+                                    </li>
+                                )
+                            })}
                     </ul>
                     <div className="flex items-center justify-end flex-1">
                         {posthogInstance ? (
@@ -555,8 +563,9 @@ export const Main = () => {
                                 <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex relative">
                                     <Avatar
                                         src={getAvatarURL(user?.profile)}
-                                        className={`w-9 h-9 inline-block bg-${user.profile.color ?? 'white dark:bg-dark'
-                                            } rounded-full`}
+                                        className={`w-9 h-9 inline-block bg-${
+                                            user.profile.color ?? 'white dark:bg-dark'
+                                        } rounded-full`}
                                     />
                                     <div className="absolute bottom-0 right-0 translate-x-1/2">
                                         <Notifications />
@@ -585,7 +594,6 @@ export const Mobile = () => {
 
     return (
         <div className="fixed bottom-0 w-full md:hidden z-[9999998] print:hidden">
-
             <ul className="grid grid-cols-5 gap-[2px] list-none m-0 px-2 bg-accent dark:bg-accent-dark border-t border-border dark:border-dark">
                 {menu.map((menuItem) => {
                     const active = menuItem.name === parent?.name
@@ -595,15 +603,18 @@ export const Mobile = () => {
                         <li className="h-full" key={name}>
                             <Link
                                 to={url}
-                                className={`text-[12.5px] font-medium relative px-4 py-4 flex flex-col space-y-1 items-center ${active
-                                    ? 'bg-light dark:bg-dark font-bold px-[calc(1rem_+_10px)] mx-[-10px]'
-                                    : 'opacity-70 hover:opacity-100'
-                                    }`}
+                                className={`text-[12.5px] font-medium relative px-4 py-4 flex flex-col space-y-1 items-center ${
+                                    active
+                                        ? 'bg-light dark:bg-dark font-bold px-[calc(1rem_+_10px)] mx-[-10px]'
+                                        : 'opacity-70 hover:opacity-100'
+                                }`}
                             >
                                 {active && <ActiveBackground mobile />}
-                                <span className={`w-5 h-5 inline-block relative !m-0`}>
-                                    <Icon />
-                                </span>
+                                {Icon && (
+                                    <span className={`w-5 h-5 inline-block relative !m-0`}>
+                                        <Icon />
+                                    </span>
+                                )}
                                 <span className="relative">{enterpriseMode ? enterpiseModeNames[name] : name}</span>
                             </Link>
                         </li>

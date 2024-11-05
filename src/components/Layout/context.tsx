@@ -8,22 +8,17 @@ import { layoutLogic } from 'logic/layoutLogic'
 
 export const Context = createContext<any>(undefined)
 
-function recursiveSearch(array, value) {
+function recursiveSearch(array, value, onMatch) {
     for (let i = 0; i < array?.length || 0; i++) {
         const element = array[i]
-
-        if (typeof element === 'string' && element.split('?')[0] === value) {
+        if (
+            element.url.split('?')[0] === value ||
+            (element.children && recursiveSearch(element.children || element.internal, value, onMatch))
+        ) {
+            onMatch(element)
             return true
         }
-
-        if (typeof element === 'object' && element !== null) {
-            const found = recursiveSearch(Object.values(element), value)
-            if (found) {
-                return true
-            }
-        }
     }
-
     return false
 }
 
@@ -43,21 +38,22 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
     const [enterpriseMode, setEnterpriseMode] = useState(false)
     const [theoMode, setTheoMode] = useState(false)
     const [post, setPost] = useState<boolean>(false)
+    let activeInternalMenu = other.activeInternalMenu
     const parent =
         other.parent ??
         menu.find(({ children, url }) => {
             const currentURL = pathname
-            return currentURL === url.split('?')[0] || recursiveSearch(children, currentURL)
+            return (
+                currentURL === url.split('?')[0] ||
+                recursiveSearch(children, currentURL, (match) => {
+                    if (!activeInternalMenu) {
+                        activeInternalMenu = match.children || match.internal
+                    }
+                })
+            )
         })
 
     const internalMenu = parent?.children
-
-    const activeInternalMenu =
-        other.activeInternalMenu ??
-        internalMenu?.find((menuItem) => {
-            const currentURL = pathname
-            return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
-        })
 
     useEffect(() => {
         localStorage.setItem('full-width-content', fullWidthContent + '')

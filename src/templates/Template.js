@@ -23,7 +23,7 @@ export default function Template({ data }) {
     const { type } = filters
 
     return (
-        <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[2]}>
+        <Layout parent={communityMenu}>
             <SEO
                 image={`/images/templates/${slug.split('/')[2]}.png`}
                 title={`${title} template - PostHog`}

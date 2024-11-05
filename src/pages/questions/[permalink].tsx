@@ -43,10 +43,7 @@ export default function QuestionPage(props: QuestionPageProps) {
     const askMax = props?.location?.state?.askMax
 
     return (
-        <Layout
-            parent={communityMenu}
-            activeInternalMenu={communityMenu.children.find(({ name }) => name.toLowerCase() === 'questions')}
-        >
+        <Layout parent={communityMenu}>
             <SEO
                 title={isLoading ? 'Community question - PostHog' : `${question?.attributes?.subject} - PostHog`}
                 noindex={question?.attributes.archived}
@@ -113,8 +110,9 @@ export default function QuestionPage(props: QuestionPageProps) {
                             </div>
                         </div>
                         <div
-                            className={`grid gap-x-4 mt-4 border-t divide-x divide-border dark:divide-border-dark border-light dark:border-dark ${question.attributes.zendeskTicketID ? 'grid-cols-2' : ''
-                                }`}
+                            className={`grid gap-x-4 mt-4 border-t divide-x divide-border dark:divide-border-dark border-light dark:border-dark ${
+                                question.attributes.zendeskTicketID ? 'grid-cols-2' : ''
+                            }`}
                         >
                             <ZendeskTicket mutateQuestion={mutate} question={question} questionID={question.id} />
                             <div className={`pt-4 ${question.attributes.zendeskTicketID ? 'pl-4' : ''}`}>

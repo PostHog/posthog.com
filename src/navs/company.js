@@ -1,6 +1,7 @@
 export const companyMenu = {
     name: 'Company',
     url: '/company',
+    location: 'left',
     children: [
         { name: 'About', icon: 'IconLogomark', url: '/about' },
         {

@@ -47,11 +47,7 @@ export default function TeamUpdates() {
     const roadmapID = params.get('id')
 
     return (
-        <CommunityLayout
-            parent={companyMenu}
-            activeInternalMenu={companyMenu.children.find(({ name }) => name.toLowerCase() === 'wip')}
-            title="WIP"
-        >
+        <CommunityLayout parent={companyMenu} title="WIP">
             <section>
                 <div className="relative mb-6">
                     <div className="flex gap-4 items-center">

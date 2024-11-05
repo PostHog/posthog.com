@@ -67,10 +67,7 @@ function Privacy() {
     }, [])
 
     return (
-        <Layout
-            parent={sexyLegalMenu}
-            activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'privacy')}
-        >
+        <Layout parent={sexyLegalMenu}>
             <SEO
                 title="Privacy policy, PostHog style"
                 description="Privacy policy, but PostHog style"

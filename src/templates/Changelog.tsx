@@ -31,10 +31,11 @@ const Select = ({ onChange, values, ...other }) => {
                 {({ open }) => (
                     <>
                         <Listbox.Button
-                            className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${open
-                                ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
-                                : 'border-transparent'
-                                }`}
+                            className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
+                                open
+                                    ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
+                                    : 'border-transparent'
+                            }`}
                         >
                             {({ value }) => (
                                 <>
@@ -49,10 +50,11 @@ const Select = ({ onChange, values, ...other }) => {
                                     {({ selected }) => {
                                         return (
                                             <li
-                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${(other.value ? value.label === other.value : selected)
-                                                    ? 'font-bold'
-                                                    : ''
-                                                    }`}
+                                                className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap ${
+                                                    (other.value ? value.label === other.value : selected)
+                                                        ? 'font-bold'
+                                                        : ''
+                                                }`}
                                             >
                                                 {value.label}
                                             </li>
@@ -195,11 +197,11 @@ export default function Changelog({ pageContext }) {
             filterKeys.length <= 0
                 ? initialRoadmaps
                 : initialRoadmaps.filter((roadmap) =>
-                    filterKeys.every((filter) => {
-                        const { value, field } = filters[filter]
-                        return get(roadmap, field) === value
-                    })
-                )
+                      filterKeys.every((filter) => {
+                          const { value, field } = filters[filter]
+                          return get(roadmap, field) === value
+                      })
+                  )
         setRoadmaps(newRoadmaps)
     }, [filters])
 
@@ -218,12 +220,7 @@ export default function Changelog({ pageContext }) {
     const isModerator = user?.role?.type === 'moderator'
 
     return (
-        <CommunityLayout
-            parent={companyMenu}
-            activeInternalMenu={companyMenu.children.find((child) => child.name.toLowerCase() === 'changelog')}
-            title="Changelog"
-            tableOfContents={tableOfContents}
-        >
+        <CommunityLayout parent={companyMenu} title="Changelog" tableOfContents={tableOfContents}>
             <section className="mb-4 flex justify-between md:items-center md:flex-row flex-col md:space-y-0 space-y-4">
                 <div>
                     <div className="flex gap-4 items-center">

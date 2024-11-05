@@ -7,10 +7,10 @@ import * as icons from '@posthog/icons'
 import { useLocation } from '@reach/router'
 import { useLayoutData } from 'components/Layout/hooks'
 import React, { useEffect, useState } from 'react'
-import topLevelNav from '../../navs/topLevelNav'
+import topLevelNav from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
 
-const MenuItem = ({ name, children, url, icon, color, depth = 0 }: IMenu & { depth?: number }) => {
+const MenuItem = ({ name, children, internal, url, icon, color, depth = 0 }: IMenu & { depth?: number }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isActive, setIsActive] = useState(false)
     const { pathname } = useLocation()
@@ -22,12 +22,13 @@ const MenuItem = ({ name, children, url, icon, color, depth = 0 }: IMenu & { dep
             return (
                 children &&
                 children.some((child: IMenu) => {
-                    return child.url === pathname || isOpen(child.children)
+                    return child.url === pathname || isOpen(child.children || child.internal)
                 })
             )
         }
-        setIsOpen(url === pathname || (children && isOpen(children)) || false)
-        setIsActive(url?.split('?')[0] === pathname)
+        const open = url === pathname || isOpen(children || internal) || false
+        setIsOpen(open)
+        setIsActive(url?.split('?')[0] === pathname || open)
     }, [pathname])
 
     return (
@@ -98,7 +99,7 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
             <div className="relative flex flex-col h-screen max-h-screen">
                 <Link
                     className="flex justify-center m-2 pt-1.5 pb-2 px-1 rounded hover:bg-accent dark:hover:bg-accent-dark grow-0 shrink-0 basis-[auto] dark:text-primary-dark relative mb-2 border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px]"
-                to="/"
+                    to="/"
                 >
                     {enterpriseMode ? (
                         <CloudinaryImage
@@ -107,16 +108,18 @@ const Navigation: React.FC<{ className?: string }> = ({ className }) => {
                         />
                     ) : (
                         <Logo
-                        color={websiteTheme === 'dark' && 'white'}
-                        className="h-[24px] fill-current relative px-2 box-content"
-                    />
+                            color={websiteTheme === 'dark' && 'white'}
+                            className="h-[24px] fill-current relative px-2 box-content"
+                        />
                     )}
                 </Link>
 
                 <ul className="px-0 py-px m-0 list-none flex-1 overflow-y-auto overflow-x-hidden">
-                    {topLevelNav.map((item) => (
-                        <MenuItem key={`${item.name}-${item.url}`} {...item} />
-                    ))}
+                    {topLevelNav
+                        .filter((item) => item.location === 'left')
+                        .map((item) => (
+                            <MenuItem key={`${item.name}-${item.url}`} {...item} />
+                        ))}
                 </ul>
                 <div className="absolute top-0 right-0 bottom-0 bg-border dark:bg-border-dark w-px"></div>
             </div>

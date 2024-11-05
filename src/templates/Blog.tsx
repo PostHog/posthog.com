@@ -16,7 +16,7 @@ const BlogCategory = ({
     pageContext: { numPages, currentPage, base },
 }) => {
     return (
-        <Layout parent={companyMenu} activeInternalMenu={companyMenu.children[5]}>
+        <Layout parent={companyMenu}>
             <SEO title={`All posts - PostHog`} />
 
             <PostLayout
