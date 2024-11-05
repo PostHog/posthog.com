@@ -248,6 +248,7 @@ w-full
 
 fill-white
 text-navy
+text-brown
 
 stroke-team-purple-frame-border
 fill-team-purple-frame-bg

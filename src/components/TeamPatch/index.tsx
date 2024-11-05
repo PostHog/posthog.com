@@ -227,6 +227,11 @@ export default function TeamPatch({
                     />
 
                 )}
+                {frame === 'square' && (
+                  <rect id="square" x="44.9662" y="41.9662" width="198.068" height="261.068" rx="6.03384" stroke-width="3.93231"
+                    className={`fill-team-${color}-frame-bg stroke-team-${color}-frame-border`}
+                  />
+                )}
                 {frame === 'squareish' && (
                   <path id="squareish"
                   d="M62.5725 38.9658H215.905C228.39 38.9658 238.512 49.0872 238.512 61.5725V277.811C238.512 290.296 228.39 300.417 215.905 300.417H62.5725C50.0872 300.417 39.9658 290.296 39.9658 277.811V61.5726C39.9658 49.0872 50.0872 38.9658 62.5725 38.9658Z"
