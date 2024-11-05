@@ -164,6 +164,6 @@ Be honest about your availability up front – and, if you can, be available wit
 
 _Words by James Temperton, who hates LinkedIn._
 
-[^1]: Being a great human doesn’t mean being an effervescent personality – you don’t need to be the life and soul of the party. Being reliable and easy to work with is way less common than you might imagine. If you struggle getting referrals from former colleagues, be really honest about why that could be. More companies don’t have a culture of direct, honest feedback, which can obscure problems. It’s why we[ value trust and feedback](https://posthog.com/handbook/values#4-trust-and-feedback-over-process) so much.
+[^1]: Being a great human doesn’t mean being an effervescent personality – you don’t need to be the life and soul of the party. Being reliable and easy to work with is way less common than you might imagine. If you struggle getting referrals from former colleagues, be really honest about why that could be. More companies don’t have a culture of direct, honest [feedback](/newsletter/how-to-give-feedback), which can obscure problems. It’s why we[ value trust and feedback](https://posthog.com/handbook/values#4-trust-and-feedback-over-process) so much.
 
 <NewsletterForm />
