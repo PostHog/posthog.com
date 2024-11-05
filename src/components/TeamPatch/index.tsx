@@ -1,6 +1,6 @@
 import React from 'react'
 interface TeamPatchProps {
-    name: string
+    name?: string
     imageUrl: string
     color: string
     textColor?: string
@@ -12,6 +12,41 @@ interface TeamPatchProps {
     imageYOffset?: number
     imageScale?: number
     className?: string
+}
+
+interface TeamNameProps {
+  id?: string
+  name?: string
+  href?: string
+  fill?: string
+  textColor?: string
+  textShadow?: string
+  children?: React.ReactNode
+  startOffset?: string
+  textAnchor?: string
+  tracking?: string
+  x?: string
+}
+
+const TeamName: React.FC<TeamNameProps> = ({ id, name, href, fill, textColor, textShadow, children, startOffset, textAnchor, tracking, x }) => {
+  return (
+    <text
+      {...(id ? { id: id } : {})}
+      fill={fill}
+      xmlSpace="preserve"
+      {...(x ? { x: x } : {})}
+      textAnchor={textAnchor}
+      
+      className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-3xl 
+        fill-${textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'} 
+        ${ textShadow === 'light' ? '[text-shadow:0_-1px_0_rgba(255,255,255,.5)]' : textShadow === 'dark' ? '[text-shadow:0_-1px_0_rgba(0,0,0,.5)]' : '' }
+        ${tracking && 'tracking-' + tracking}
+      `}>
+        {children ? children : <textPath href={`#${href}`} startOffset={startOffset}>
+            {name}
+        </textPath>}
+    </text>
+  )
 }
 
 export default function TeamPatch({
@@ -292,22 +327,16 @@ export default function TeamPatch({
                           stroke="none" 
                         />
 
-                        <text
+                        <TeamName
+                          name={name}
                           fill="#1E2F46"
-                          className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-3xl text-${
-                              textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'
-                          } ${
-                              textShadow === 'light'
-                                  ? '0_1px_0_rgba(255,255,255,.5)'
-                                  : textShadow === 'dark'
-                                  ? '0_1px_0_rgba(0,0,0,.5)'
-                                  : ''
-                          }`}
-                      >
-                          <textPath href="#name-wavy" startOffset="50%" textAnchor="middle">
-                              {name}
-                          </textPath>
-                      </text>
+                          textColor={textColor}
+                          textShadow={textShadow}
+                          href="name-wavy"
+                          startOffset="50%"
+                          textAnchor="middle"
+                          tracking="wider"
+                        />
                       </>
                     )}
                     {plaque === 'stepped' && (
@@ -328,24 +357,16 @@ export default function TeamPatch({
                         <rect x="47.9658" y="187.966" width="182.574" height="47.6707" rx="2.9487"
                           stroke="#1E2F46" stroke-width="3.9316" />
                       </g>
-                      <text 
-                        id="stepped-name" 
-                        fill="#1E2F46" 
-                        xmlSpace="preserve" 
-                        textAnchor="middle" 
-                        x="139.2529" 
-                        className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-3xl text-${
-          textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'
-      } ${
-          textShadow === 'light'
-              ? '0_1px_0_rgba(255,255,255,.5)'
-              : textShadow === 'dark'
-              ? '0_1px_0_rgba(0,0,0,.5)'
-              : ''
-      }`}
-                      >
-                        <tspan y="220.463">{name}</tspan>
-                      </text>
+                      <TeamName
+                          id="stepped-name"
+                          fill="#1E2F46"
+                          textColor={textColor}
+                          textShadow={textShadow}
+                          textAnchor="middle"
+                          x="139.2529" 
+                        >
+                            <tspan y="220.463">{name}</tspan>
+                        </TeamName>
                     </g>
                     )}
                     {plaque === 'downward-curve' && (
