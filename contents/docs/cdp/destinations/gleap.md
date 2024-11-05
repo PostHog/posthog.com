@@ -1,13 +1,11 @@
 ---
-title: Send PostHog analytics to Gleap
+title: Send PostHog person data to Gleap
 templateId: template-gleap
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send person data from PostHog into Gleap.
 
 <Requirements />
 

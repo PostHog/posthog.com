@@ -1,13 +1,11 @@
 ---
-title: Send PostHog analytics to Google Cloud Storage
+title: Send PostHog event data to Google Cloud Storage
 templateId: template-google-cloud-storage
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send event data from PostHog to Google Cloud Storage.
 
 <Requirements />
 

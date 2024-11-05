@@ -7,8 +7,6 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-Send conversion events from PostHog to Google Ads.
-
 <Requirements />
 
 You'll also need access to the relevant Google Cloud, Google Ads and Google Ads Manager account.

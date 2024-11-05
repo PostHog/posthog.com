@@ -1,5 +1,5 @@
 ---
-title: Send PostHog analytics to any webhook
+title: Send PostHog event data to any webhook
 templateId: template-webhook
 ---
 

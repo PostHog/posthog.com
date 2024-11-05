@@ -7,7 +7,7 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-Send person data from PostHog into Sendgrid. You can also send person properties to custom fields in Sendgrid.
+You can also send person properties to custom fields in Sendgrid.
 
 <Requirements />
 
