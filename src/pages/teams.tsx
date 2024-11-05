@@ -133,7 +133,9 @@ const Teams: React.FC = () => {
                                                                 return (
                                                                     <span
                                                                         key={`${name}-${index}`}
-                                                                        className={`cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark animate-jump-out transform scale-[0%] group-hover:animate-jump-in group-hover:animate-once group-hover:animate-duration-500 group-hover:animate-delay-[${(profiles.data.length - index - 1) * 100}ms]`}
+                                                                        className={`invisible group-hover:visible cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent dark:border-accent-dark animate-jump-out transform scale-[0%] group-hover:animate-jump-in group-hover:animate-once group-hover:animate-duration-500 group-hover:animate-delay-[${
+                                                                            (profiles.data.length - index - 1) * 100
+                                                                        }ms]`}
                                                                     >
                                                                         <Tooltip
                                                                             content={`${name} ${
@@ -144,7 +146,8 @@ const Teams: React.FC = () => {
                                                                             <img
                                                                                 src={avatar?.data?.attributes?.url}
                                                                                 className={`size-10 rounded-full bg-${
-                                                                                    color ?? 'accent dark:bg-accent-dark'
+                                                                                    color ??
+                                                                                    'accent dark:bg-accent-dark'
                                                                                 } border border-light dark:border-dark transform scale-100 hover:scale-125 transition-all`}
                                                                                 alt={name}
                                                                             />
