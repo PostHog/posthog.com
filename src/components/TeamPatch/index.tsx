@@ -40,7 +40,7 @@ const TeamName: React.FC<TeamNameProps> = ({ id, name, href, fill, textColor, te
       className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-3xl 
         fill-${textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'} 
         ${ textShadow === 'light' ? '[text-shadow:0_-1px_0_rgba(255,255,255,.5)]' : textShadow === 'dark' ? '[text-shadow:0_-1px_0_rgba(0,0,0,.5)]' : '' }
-        ${tracking && 'tracking-' + tracking}
+        ${tracking ? 'tracking-' + tracking : ''}
       `}>
         {children ? children : <textPath href={`#${href}`} startOffset={startOffset}>
             {name}
@@ -290,26 +290,16 @@ export default function TeamPatch({
                                 strokeWidth="2.4577"
                                 className={`fill-team-${color}-plaque-bg stroke-team-${color}-plaque-border`}
                             />
-                            <g id="team name" filter="url(#filter0_i_2806_100)">
-                                <text
-                                    className={`leading-none uppercase font-bold font-squeak [font-variant:none] text-3xl text-${
-                                        textColor ? textColor : 'white [text-shadow:0_1px_0_rgba(0,0,0,.5)]'
-                                    } ${
-                                        textShadow === 'light'
-                                            ? '0_1px_0_rgba(255,255,255,.5)'
-                                            : textShadow === 'dark'
-                                            ? '0_1px_0_rgba(0,0,0,.5)'
-                                            : ''
-                                    }`}
-                                    fill="#FDE3EC"
-                                    xmlSpace="preserve"
-                                    style={{ whiteSpace: 'pre' }}
-                                    letterSpacing="0em"
-                                    textAnchor="middle"
-                                    x="140"
-                                >
-                                    <tspan y="273.218">{name}</tspan>
-                                </text>
+
+                            <g id="team name">
+                              <TeamName
+                                textColor={textColor}
+                                textShadow={textShadow}
+                                textAnchor="middle"
+                                x="140" 
+                              >
+                                  <tspan y="273.218">{name}</tspan>
+                              </TeamName>
                             </g>
                         </g>
                     )}
