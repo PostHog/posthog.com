@@ -1,5 +1,5 @@
 ---
-title: Redshift destination for analytics batch exports
+title: Redshift destination for batch exports
 sidebar: Docs
 showTitle: true
 availability:

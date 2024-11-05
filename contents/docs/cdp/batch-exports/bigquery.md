@@ -1,5 +1,5 @@
 ---
-title: BigQuery destination for analytics batch exports
+title: BigQuery destination for batch exports
 sidebar: Docs
 showTitle: true
 availability:
