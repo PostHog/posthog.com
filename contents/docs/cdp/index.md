@@ -1,5 +1,5 @@
 ---
-title: "Data pipelines: PostHog customer data platform"
+title: "Data pipelines: your customer data platform"
 showTitle: true
 ---
 
