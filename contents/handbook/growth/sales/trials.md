@@ -23,3 +23,16 @@ Process for giving a customer a free trial:
 5. Click `Save`
 6. The next time that Customer visits PostHog, their `AvailableFeatures` will be updated to reflect the standard premium features (they might have to refresh their page to properly sync the new billing information).
 7. Once this date passes their `AvailableFeatures` will be reset to the free plan unless they have subscribed within this time.
+
+Additional steps for existing customers with paid subscriptions
+For customers with existing paid subscriptions we need to complete additional steps to make sure they are billed correctly. 
+
+**Important: Ask Mine to update Stripe and billing admin so she can make sure revenue numbers are unaffected and customer isn't billed while on trial.**
+
+1. Follow the steps above to create a trial.
+2. Remove Stripe Subscription ID in the Billing Admin (keep the Stripe Customer ID).
+3. Set all products in the product map to a free status.
+4. Cancel subscription in stripe: Ensure the subscription is canceled in Stripe so they are not billed during the trial.
+5. Create new subscription before trial ends and update Billing Admin so customer experience isn't affected when transitioning back to a paid plan.
+   
+
