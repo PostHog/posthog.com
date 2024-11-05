@@ -20,7 +20,7 @@ PostHog will now be capturing pageviews, button clicks, and more. You can also e
 
 ## Tracking conversions in WooCommerce
 
-One of the most important metrics for an ecommerce site is conversions like adding an item to your cart and completing the checkout.
+One of the most important metrics for an ecommerce site is conversion, like adding an item to your cart and completing the checkout.
 
 PostHog has multiple tools to help you track and measure conversions. To do this without code, you can create an action using the toolbar. To do this:
 
