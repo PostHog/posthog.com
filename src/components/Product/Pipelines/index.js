@@ -714,7 +714,7 @@ function PipelinesPage({ location }) {
                 <p className="mt-0 text-opacity-70 text-center">
                     Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                 </p>
-                <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'cdp').children} />
+                <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'data pipelines').children} />
             </section>
 
             <section
