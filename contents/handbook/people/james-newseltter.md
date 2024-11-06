@@ -94,7 +94,7 @@ PM job should be: How can I give the engineers all the information they need to 
 
 1. They create all the input needed to make informed decisions and give these to the engineers – e.g. data insights, competitor research, user research. Whats going on in the wider market. What are the competitor features we need to be aware of. Identify opportunites for the team (e.g. ltos of churn now, here's the data. How can we fix) etc.. Stop giving them tickets, FFS.
 2. Dont outsource everything though. Engineers should still [talk to users](), and xyz.
-3. Course correction. They track the output so you know if the team is on the right track. If not, present the findings to yoru team and let your engineers decide what to do next.
+3. Course correction. They track the output so you know if the team is on the right track. If not, present the findings to yoru team and let your engineers decide what to do next. (more on how to do this exactly later)
 
 Why?
 Something along the lines of enabling insteaf of controlling?
@@ -102,7 +102,7 @@ This empowers team to make the right decisions and reduces filtering.
 
 ### Solution 2: Become radically transparent
 
-// MAYBE REMOVE THIS SECTION?
+// MAYBE REMOVE THIS SECTION? But we should add a bit to it above
 
 james says: core this is trust. Signal yo udont have trust is you have process
 
@@ -179,7 +179,7 @@ The most important we've ever built at PostHog comes from letting engineers deci
 - HogQL
 
  
-### What can you do as exec?
+#### What can you do as exec?
 
 At an exec level, we sharing finance, funding. Nice for people to know. Sets the tone for the company. Builds trust.
 profit and loss
@@ -197,50 +197,88 @@ GitHub for tracking development. The goal is to minimize distraction and keep en
 
 ### ..something on trust?
 
-If you can't trust your team to make decisions, what are you doing?
-When companies have a lack of trust, they add a ton of process. 
-most companies default to this
-Needs come top down. Im hiring people taht are good enough to make decisions.
 
-Symptom of this is too much process. You end up needing a product manager to manage all these processes, so that the engineering team is unblocked
+## 4.Trust your engineers
 
-"Im an idiot. My team are smart. I should listen to them."
+> "I'm an idiot. My team is smart. I should listen to them."
+>
+> Me, Co-founder and CEO of PostHog, 10 times a day.
 
-⚡ 3. 𝐀𝐮𝐭𝐨𝐧𝐨𝐦𝐲 > 𝐏𝐫𝐨𝐜𝐞𝐬𝐬
-James’s view is simple: Choose trust or process. Never both.
+Letting your engineers decide what to build requires a high level of trust. This is easier said than done, since you don't want to blindly give them control and expect them to make good decisions. 
 
-## 4.Trust your engineers..
+Most companies try to do this by adding more checks and processes. But this is a anti-pattern. You slow the team down and the team ends up with less autonomy, not more. And then you end up needing a product manager to manage all these processes. Lots of process is a sign of low trust, not high.
 
-All this requires a high level of trust in your engineers and their competency. Easier said than done. How do you do this?
+![Things in the way of an engineering team](https://res.cloudinary.com/dmukukwp6/image/upload/pm_approva_c1ad9be668.png)
 
-BUt how to do this? Easier said than done.
+So how do you do this?
 
-## 4. Goal planning
+Two things you need to do:
+- Effective goal planning
+- Growth reviews
 
-@ 16:45
+### 1. Plan the goals together, but let the engineers drive
 
-We used to do classic OKRs, output based metrics like increase activation,
-We started doing this. This is too difficult for engineer to set. We used to have increased retention
+(hedhgehogs in a car, driver is an engineer. Product manager and CEO are in the backseat. Another engineer in the front seat)
+<alt: [get in loser memee](https://i.pinimg.com/originals/97/c5/d2/97c5d2bad1db9d03bb450ccffb08c9ea.jpg) with hedgehogs. engineers in front, PM in the back) "Get in loser, we're going planning")
 
-We delibrately dont call it OKRs. We call it goals, which are things you are going to ship
-We have metings to validate assumptions. This is 
+We used to do OKRs and metric-based goals at goals. But we ran into two problems with it:
 
-your goals are literally a things youre going to build
- I will make assumption with you that these are correct
- and if over the quarter we see activation or retention gets worse. We change them.
+1. Engineers found it difficult to determine what's the right metric to focus on.
+2. Engineers ended up focusing too much on moving the metric and small quick wins, rather than actually building what our users wanted.
+3. ....
 
- Doesnt create existential dread on improving single metric. Instead they can focus on building the thing?
+So we abandoned it. Instead, the outcome of our planning sessions a list of things the team is going build. We deliberately don't call it OKRs because we don't want to imply that we expect them to be output-based.
 
- Sprint planning default. Async meetings. How last week went, how next week going to be. Gives a high level overview of the pulse of the team
+Our quarterly planning goes something like this:
 
- We do "growth reviews" where we go through all the metrics. Once a month. PM puts it together. Engineering that leads the team joins. 
- Then we assess if you build it
+1. Execs talk through the company's goals and what we're trying to achieve. For example, "we need to increase top of funnel adoption", or "we want to become an all-in-one tool, so we need to build more products", " we need to increase retention".
+2. Driven by the engineers, The engineers discuss and decide what they need to build to achieve this, if needed, they get advice/guidance from the execs as needed/requested. As an exec, I make an assumption that these are correct.
+3. The meeting ends with a list of what the team is going to build.
 
- Every piece of feedback is led. Brand mentions, churn survey,
+This works because everyone is clear what the team is going to build. The engineers don't need to needlessly fret about a specific metric, we already decided _together_ what we're going to do. and they're more excited to build since they're the ones who decided on their work. So all they need to focus on is working through their list.
+
+But how do you actually track if what you're doing is working? Enter the growth review:
+
+### 2. Do a monthly growth review
+
+Now that you've decided what to build, the you need to review that htings are actually going well. The purpose of this to review the products or features that the team is responsbile for. The purpose of this meeting is for the team to check and see if they're on the right track.
+
+We run these meetings with the engineering team lead, PM, and CEO.
+
+It's the PMs job to make you sure have all the information you need. Gather any information on the teams output.
+First, gather any signal you may have on this (usually collected by the product manager). We find the following signals useful:
+
+- Revenue metrics: MRR, month-on-month growth, revenue churn rate, total paying customers count
+- Usage metrics: Active users, user growth rate, orginization growth rate (if B2B), user retention rate
+- User feedback: NPS score, customer interviews, support tickets, any other requests.
+
+This is essentially the output of the team's work
+We review this information together in the meeting. Then, it's up to the engineering team lead to decide how they think the teams doing, and, if given the data, whether anything needs to be done about. For example, they could decide that some recent user feedback is concerning and we're heading in the wrong direciton. In this case we can abandon the goals from the planning and change course. ALternatively, they can reprioritze, or decide that the team is on the right track and do nothing.
+
+<wonder if need an example here> 
 
 ## 4. The right tooling for the job
 
-<Hedgehog thanos meme with infitinity stones. Each stone represents a different tool e.g no meetings, >
+<Hedgehog thanos meme with infitinity stones. Each stone represents a different tool e.g no meetings, biweekly 1-1s, no design by default, feature flag rollouts, transparent communication >
+
+Now that we've covered the high-level strategy, here are tactical tips to help your engineering team move fast and build the best product
+
+### 1. Communicate publicly : 
+
+Communicate publicly - <somewhere in this blog include screenshot of Cory telling everyone to post publicly>
+ 
+
+PostHog eliminated 1:1s almost entirely because they’re a breeding ground for silos and politics. Instead, they stick to three core communication channels:
+All-Hands for company-wide updates. Slack for real-time communication.
+GitHub for tracking development. The goal is to minimize distraction and keep engineers in building mode. 🏗️
+
+Communication hierarchy:
+
+<graphic of PRs > issues > public slack channels > DMs > email > fax > tapping someone on the shoulder and saying "hey, you got a minute?">
+
+
+
+### 2. feature flag rollouts
 
 Most human beings arent as magical as product as steve jobs. They dont just "know" what to build or have a grand vision.
 
@@ -258,7 +296,7 @@ Good quote: Implication: It’s not about controlling, it’s about enabling. If
 
 Maybe add HogQL story here
 
-## No design by default
+### 3. No design by default
 
 You remove blocker, dependency on designer. To be clear we stil have designers. Engineers can go away and design their own stuff.
 They can go talk to product designer and ak for help like "hey, im struggling with the UX of this thing, or Im getting "
@@ -268,131 +306,10 @@ The engineer is the driver of the car! not the passenger
 
 Reminder: communication quality still matters
 
-<somewhere in this blog include screenshot of Cory telling everyone to post publicly>
-
-## 4. Maybe Speak to your users?
-
-<graphic on information bottleneck>
-![Information bottleneck](https://res.cloudinary.com/dmukukwp6/image/upload/v1713894881/posthog.com/contents/images/newsletter/talk-to-users/bottleneck3.png)
-
-
-Actionable tip: If you're engineer, start speaking to your users.
-
-We have a simple theory about building successful products: the people building them should be as close to people using them as possible.
-
-You might think you already know what users want. Someone spoke to users, turned those insights into tickets, and it's on you to build them. That’s all you need.
-
-The process probably looks something like this:
-https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa61c95bd-04e1-4f03-9388-750f760cc377_1251x665.png
-source: https://newsletter.posthog.com/p/talk-to-users
-
-Engineers in this scenario get a sanitized version of the truth. They miss out on the context and depth users can provide, and they’re subject to the preferences and biases of the person doing the talking.
-
-Worse still, often that person won’t understand the options and constraints as well as you do. Sometimes, only an engineer can understand the full context of a problem and ask the right questions to find a good solution.
-
-Not convinced? Think of user interviews like automated tests. Like automated tests, talking to users is a short-term investment in your long-term productivity. They both enable you to iterate faster by providing rapid feedback on whether what you've built is working, even if you’re not shipping code.
-
 ## HogQL story
 
 @35 min - https://www.youtube.com/watch?v=iOWDm-pr0jE&ab_channel=ProductMasterclass 
 
-#### Other notes on transparency
+Need to include session replay story !!!
 
-Share you strategy and progress against it:
-mission
-company metrics + board meeting slides and notes
-
-i) We make clear what we're trying to achieve.
-To do this, we have a clear, simple mission and strategy. We communicate this repeatedly through our public handbook, during everyone's onboarding, repeatedly in our all hands, and when we plan each quarter of work.
-https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7bd984dc-90af-48e6-878e-f85ae033210c_3447x2934.png
-From https://newsletter.posthog.com/p/how-to-design-your-company-for-speed 
-
-
-On product:
-quarterly goals
-every team’s planning sessions
-sprint plans
-every metric (revenue/usage/support)
-every piece of feedback
-
-
-remove the politics by sharing the following: 
-
-On finance/fundraising:
-before - philosophy
-during - how it’s going
-after - everyone does this
-p&l / revenue etc
-
-On people:
-pay structure
-hiring/not hiring/firing
-vacations
-personal readmes
-
-
-maybe something on how we're transparent when people let go for perofmrnace reason
-
-
-One more thing:
-you can share almost all this stuff publicly
-
-ii) We share all our metrics
-We constantly update everyone on our progress towards these goals (for each product and in total), financial information, fundraising progress (before, during and after it happens), and pretty much anything else people ask for.
-
-
-PostHog eliminated 1:1s almost entirely because they’re a breeding ground for silos and politics. Instead, they stick to three core communication channels:
-All-Hands for company-wide updates. Slack for real-time communication.
-GitHub for tracking development. The goal is to minimize distraction and keep engineers in building mode. 🏗️
-
-## 4. Communicate like your life depends on it
-
-You still need to be a good communicator
-What does good communication look like?
-
-## 5. Maybe.. how to align teams?
-
-## 5. Maybe... hiring?
-Hire people that thrive with autonomy:
-
-more / broader experience
-‘engineers’ -> ‘product engineers’
-decide what to build
-ship
-iterate
-
-How do you do this?
-
-good quote: “Hire smart people who can thrive with autonomy, then get out of their way
-
-
-
-
-
-## TODO:
-- More research on how to create autonomous engineering teams 
-- Have I just ended up back at Small Teams newsletter??? Reread it 
-
----
-
-
-## 1. Radical transparency / share everything
-## 2. Trust over control/process 
-## 3. Small teams
-
-
-## 4. Refactor the product manager
-## 5. Communicate like your life depends on it
-
-Maybe something on async here
-6. 
-
----
-https://newsletter.posthog.com/p/the-magic-of-small-engineering-teams 
-
-
-Other good newseltters to draw:
-https://newsletter.posthog.com/p/how-we-work-asynchronously
-https://newsletter.posthog.com/p/how-we-decide-what-to-build
-https://newsletter.posthog.com/p/talk-to-users
-https://newsletter.posthog.com/p/doing-support-makes-you-a-better
+What about hogql, or rewriting insights in hogql story?
