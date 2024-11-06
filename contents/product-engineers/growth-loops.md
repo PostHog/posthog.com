@@ -172,12 +172,12 @@ Companies often use both:
 
 Network effects focus on users. With network effects, the value of a product increases as more users join. A network effect can be a part of a growth loop, but it doesn’t have to be.
 
-Growth loops focus on the product or business. They don't necessarily have relate to users. For example, sales or organic content growth loops focus on internal processses. This makes growth loops more strategic and planned than network effects are. 
+Growth loops focus on the product or business. They don't necessarily have to relate to users. For example, sales or organic content growth loops focus on internal processes. This makes growth loops more strategic and planned than network effects are. 
 
 ## Further reading
 
 - [How to write great product survey questions (with examples)](/product-engineers/product-survey-questions)
-- [How to start a growth team (as an engineer)](/product-engineers/how-to-start-a-growth-team)
+- [How to do startup sales with no experience](/founders/startup-sales-strategy)
 - [The most useful product health metrics](/product-engineers/product-health-metrics)
 
 <NewsletterForm />
