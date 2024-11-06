@@ -106,8 +106,8 @@ export const handbookSidebar = [
                         url: '/handbook/company/goal-setting',
                     },
                     {
-                        name: 'Diversity and inclusion',
-                        url: '/handbook/company/diversity',
+                        name: 'A grown-up company',
+                        url: '/handbook/company/grown-ups',
                     },
                     {
                         name: 'Communication',
