@@ -16,7 +16,7 @@ crosspost:
   - Blog
 ---
 
-Activation AKA your product's "ah-ha" moment and the second A in the [AARRR pirate funnel framework](/product-engineers/aarrr-pirate-funnel). It's the thing that lets you know if your users are going to find success with your product.
+Activation AKA your product's "ah-ha" moment is the second A in the [AARRR pirate funnel framework](/product-engineers/aarrr-pirate-funnel). It's the thing that lets you know if your users are going to find success with your product.
 
 In a word, it's _important_, but it's also really difficult to define.
 
@@ -24,25 +24,25 @@ We have 8+ products and users get activated into _each_ separately. Each also ha
 
 This means we spent a lot of time figuring out how to _figure out_ what our activation metrics are. Lucky for you, we did this all inside of PostHog, so we figured we'd share it with you, so you can do the same!
 
-But before we jump in... what even _is_ activation?
+But before we jump in... what is activation _really_?
 
 ## What is an activation metric?
 
-An activation metric is a set of actions a user performs that are correlated with greater retention.
+An activation metric is a set of actions a user performs that are correlated with greater retention after a user first starts using the product.
 
 In other words, imagine you have actions A through Z. If doing actions D, K, and L make users more likely to use your platform down the line, then D, K, and L combined are your activation metric. We might think that actions B, F, and G are good things for them to do, but if they aren't correlated with retention, then they aren't part of your activation metric.
 
-At PostHog, we look for a set of actions that mean someone is much more likely to be using the product 3 months later. In the case of [session replay](/session-replay), after analyzing multiple potential metrics, we found that these were watching 5 or more replays and setting a replay filter at least once.
+At PostHog, we look for a set of actions that mean someone is much more likely to be using the product 3 months after starting. In the case of [session replay](/session-replay), after analyzing multiple potential metrics, we found that these were watching 5 or more replays and setting a replay filter at least once.
 
-This definition solves the trickiest part of defining an activation metric: it could be _anything_. Does a pageview mean someone is activated? Does completing onboarding? What about creating their first object? Depending on your product, any of these could be it. Their impact on retention makes it clear. 
+This definition solves the trickiest part of defining an activation metric: it could be _anything_. Does a pageview mean someone is activated? Does completing onboarding? What about creating their first object? Depending on your product, any of these could be it. Looking at their impact on retention, however, makes it clear what helps your users succeed. 
 
-## How did we find _our_ activation metric?
+## How we found our activation metric?
 
 How did we settle on `watching 5 or more replays and setting a replay filter at least once`? We tested a lot of different metrics by:
 
 1. Creating a big list of events that we thought might "hook" users into using our product.
 
-2. Creating groups of 3-5 events that you can test together. We aimed for 5-10 different groupings, including the number of times the event occurs (e.g. watched 5 replays vs. watched 1 replay). Sometimes users have to do something more than once to reach their "ah-ha" moment.
+2. Creating groups of 3-5 events that we could test together. We aimed for 5-10 different groupings, including the number of times the event occurs (e.g. watched 5 replays vs. watched 1 replay). Sometimes users have to do something more than once to reach their "ah-ha" moment.
 
 3. Writing a query to test how the event groupings improve retention (see below).
 
@@ -87,7 +87,7 @@ WITH starting_groups AS (
 
 ### Part 2: Define and filter for your potential activation events
 
-Next, filter for your one grouping of potential activation events.
+Next, filter for one grouping of potential activation events.
 
 ```sql
 downfunnel AS (
