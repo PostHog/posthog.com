@@ -810,10 +810,10 @@ export const DataPipeline = () => {
         <Slide
             bgColor="[#43B6E7]"
             textColor="primary"
-            title="Customer data platform"
+            title="Data pipelines"
             flag="Beta"
             flagColor="yellow"
-            description="Import data from your warehouse and send to 25+ destinations."
+            description="Build your customer data platform: Import data from your warehouse and send to 25+ destinations."
             features={features}
             featureListClasses="sm:grid grid-cols-2 mdlg:flex"
             imageColumn="flex items-center justify-center pl-8 py-4 md:col-span-9 lg:col-span-10"

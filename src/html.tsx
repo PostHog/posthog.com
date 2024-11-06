@@ -30,7 +30,20 @@ export default function HTML(props: HTMLProps): JSX.Element {
                     href="//d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQItalicVF.woff2"
                     crossOrigin="anonymous"
                 />
-
+                <link
+                    rel="preload"
+                    as="font"
+                    type="font/woff2"
+                    href="/fonts/squeak-bold-webfont.woff2"
+                    crossOrigin="anonymous"
+                />
+                <link
+                    rel="preload"
+                    as="font"
+                    type="font/woff"
+                    href="/fonts/squeak-bold-webfont.woff"
+                    crossOrigin="anonymous"
+                />
                 {process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST && (
                     <script
                         dangerouslySetInnerHTML={{

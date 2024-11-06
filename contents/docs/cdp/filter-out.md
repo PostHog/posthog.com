@@ -1,5 +1,5 @@
 ---
-title: Filter Out
+title: Filter ingested data
 github: 'https://github.com/PostHog/posthog-filter-out-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Filter%Out%20Plugin'
 thumbnail: >-

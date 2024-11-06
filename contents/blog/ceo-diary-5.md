@@ -61,7 +61,7 @@ Don't they just dictate what to build to our team, thus annoying our team, and p
 At our first offsite in 2020, we ran a [full team feedback session](../handbook/people/feedback#full-team-feedback-sessions). This is a unique experience:
 
 - Everyone sits around a table. Ok, you've probably done that before.
-- The person who's turn it is, gets feedback from everyone else in the team
+- The person who's turn it is, gets [feedback from everyone else in the team](/newsletter/how-to-give-feedback)
 - This feedback is moderated to be 70% [constructive and as specific as possible](../handbook/people/feedback#how-to-give-good-feedback)
 
 Tim and I were both given the feedback that we've seen product done badly in our previous careers, and as a result, we aren't building this discipline at all into the company. We were just a bunch of engineers building what we felt users wanted - which was probably the right choice in the first few months, but not the path to building a world-class experience.
