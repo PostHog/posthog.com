@@ -140,7 +140,7 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
   - For example, if you have 90% logo retention, you get 0% of bonus. For 95% retention, it's 50% bonus, and for 100% retention, it's 100% bonus. 
 - Bonuses are paid out quarterly, and in any case after an invoice is paid
   - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
-- We count a customer as having been retained in your book if they are still spending > $1,000/month with us, so if for example you have a customer that was spending $20k+ annually who then scales down to $10/year, they obviously won't count as retained even if they are technically still spending money!
+- We count a customer as having been retained in your book if they are still spending > $500/month with us, so if for example you have a customer that was spending $20k+ annually who then scales down to $10/year, they obviously won't count as retained even if they are technically still spending money!
 
 ## Travel to see customers
 
