@@ -1,5 +1,5 @@
 ---
-title: Send data to AWS Kinesis
+title: Send PostHog event data to AWS Kinesis
 templateId: template-aws-kinesis
 ---
 

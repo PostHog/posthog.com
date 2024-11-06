@@ -98,6 +98,10 @@ export const handbookSidebar = [
                         url: '/handbook/getting-started/meetings',
                     },
                     {
+                        name: 'Using GitHub',
+                        url: '/handbook/company/new-to-github',
+                    },
+                    {
                         name: 'Goal setting',
                         url: '/handbook/company/goal-setting',
                     },
@@ -720,6 +724,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/billing',
                     },
                     {
+                        name: 'Trials',
+                        url: '/handbook/growth/sales/trials',
+                    },
+                    {
                         name: 'Refunds',
                         url: '/handbook/growth/sales/refunds',
                     },
@@ -1003,10 +1011,10 @@ export const companyMenu = {
             color: 'red',
             url: '/changelog/2024',
         },
-        { name: 'People', icon: 'IconProfile', color: 'blue', url: '/people' },
+        { name: 'People', icon: 'IconPeople', color: 'blue', url: '/people' },
         {
             name: 'Teams',
-            icon: 'IconPeople',
+            icon: 'IconShieldPeople',
             color: 'purple',
             url: '/teams',
             children: [
@@ -1394,6 +1402,10 @@ export const docsMenu = {
                         {
                             name: 'Webflow',
                             url: '/docs/libraries/webflow',
+                        },
+                        {
+                            name: 'WooCommerce',
+                            url: '/docs/libraries/woocommerce',
                         },
                         {
                             name: 'WordPress',
@@ -2296,6 +2308,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Web vs product analytics',
+                    url: '/docs/web-analytics/web-vs-product-analytics',
+                    icon: 'IconGraph',
+                    color: 'purple',
+                },
+                {
                     name: 'FAQ',
                     url: '/docs/web-analytics/faq',
                     icon: 'IconQuestion',
@@ -2683,7 +2701,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'CDP',
+            name: 'Data pipelines',
             url: '/docs/cdp',
             color: 'sky-blue',
             icon: 'IconPlug',
@@ -3184,7 +3202,7 @@ const menu = [
                 url: '/surveys',
             },
             {
-                name: 'CDP',
+                name: 'Data pipelines',
                 icon: 'IconPlug',
                 color: 'sky-blue',
                 url: '/cdp',

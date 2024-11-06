@@ -10,9 +10,9 @@ import Link from 'components/Link'
 import List from 'components/List'
 
 type QuickLinks = {
-    name: string;
-    to: string;
-}[];
+    name: string
+    to: string
+}[]
 
 export const quickLinks: QuickLinks = [
     {
@@ -106,6 +106,10 @@ export const quickLinks: QuickLinks = [
     {
         name: 'Webflow',
         to: '/docs/libraries/webflow',
+    },
+    {
+        name: 'WooCommerce',
+        to: '/docs/libraries/woocommerce',
     },
     {
         name: 'WordPress',

@@ -1,13 +1,11 @@
 ---
-title: Send data to Mailjet
+title: Send PostHog person data to Mailjet
 templateId: template-mailjet-create-contact
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send person data from PostHog into Mailjet.
 
 <Requirements />
 

@@ -1,13 +1,11 @@
 ---
-title: Send conversion events to Google Ads
+title: Send PostHog conversion events to Google Ads
 templateId: template-google-ads
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send conversion events from PostHog to Google Ads.
 
 <Requirements />
 
