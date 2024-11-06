@@ -1,13 +1,11 @@
 ---
-title: Send data to Mailgun
+title: Send PostHog person data to Mailgun
 templateId: template-mailgun-send-email
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send person data from PostHog into Mailgun.
 
 <Requirements />
 

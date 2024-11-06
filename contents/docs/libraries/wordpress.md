@@ -16,7 +16,7 @@ All of them require you to [signup for PostHog](https://us.posthog.com/signup), 
 
 The first option is to use a plugin. These enable you to easily add custom code to your site's header which we can use to add the PostHog snippet. 
 
-For **WordPress.com** users, this is also the only option. This is because you don't have access to the `header.php` or `functions.php` files. Using plugins does require their **Business** or **Commerce** plans.
+For **WordPress.com** users, this is also the only option. This is because you don't have access to the `header.php` or `functions.php` files. Using plugins does require their **Business** or **Commerce** plans. We also recommend this option for [WooCommerce](/docs/libraries/woocommerce) sites.
 
 Two plugin options include:
 

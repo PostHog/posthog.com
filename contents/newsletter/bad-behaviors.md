@@ -34,7 +34,7 @@ Most people don’t nail their jobs every day. Make a habit of recognizing those
 
 This isn’t a contradiction.
 
-It’s important to praise people when they do good work, but a lack of constructive feedback is corrosive.
+It’s important to praise people when they do good work, but a [lack of constructive feedback](/newsletter/how-to-give-feedback) is corrosive.
 
 Remember, it’s human nature to avoid difficult conversations, but our anticipation of them is much worse than the reality. 
 

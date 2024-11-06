@@ -142,6 +142,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     fields: 'id',
                 },
                 crest: true,
+                crestOptions: true,
                 miniCrest: true,
                 teamImage: {
                     populate: {
@@ -327,13 +328,25 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             slug: String!
             label: String!
         }
-
+        type SqueakCrestOption {
+            textColor: String
+            textShadow: String
+            fontSize: String
+            frame: String
+            frameColor: String
+            plaque: String
+            plaqueColor: String
+            imageScale: Int
+            imageXOffset: Int
+            imageYOffset: Int
+        }
         type SqueakTeam implements Node {
             id: ID!
             squeakId: Int!
             name: String!
             roadmaps: [SqueakRoadmap!] @link(by: "id", from: "roadmaps.id")
             emojis: [SlackEmoji] @link(by: "name", from: "emojis")
+            crestOptions: SqueakCrestOption
         }
 
         type SqueakRoadmap implements Node {
