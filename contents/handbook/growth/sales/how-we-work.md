@@ -22,6 +22,8 @@ Other metrics we generally care about:
 
 Each AE is assigned ~10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 20 accounts, so staying extremely focused is important. 
 
+Each CSM is assigned ~50 existing customer accounts to work with.
+
 Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
 
 ### Handing-off customers from AE to CSM
@@ -54,11 +56,11 @@ The reason for structuring the review in this way is that we find it is much mor
 
 The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - [you should not let your team mates fail](/culture#dont-let-others-fail). 
 
-## New AE hire ramp up
+## New sales team hire ramp up
 - Day 1
   - Read the whole sales playbook (and updating it throughout as you learn more)
   - Get using PostHog - start making insights and dashboards
-  - Assigned your account list of 10-20 customers
+  - Assigned your customers
 - Week 1
   - Reviewed your account list and prioritized/asked questions about them internally 
   - Delivered a standard demo to the PostHog team and got feedback
@@ -67,21 +69,22 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - Week 2
   - Contributed to customer calls with backup from an existing team member
   - Understand how to work PandaDoc, HubSpot, Vitally, Stripe, Metabase (ie. contracts, billing, reporting)
-  - Built a plan for which monthly customers to target for annual plans and/or cross-sell
+  - Built a plan for which customers to prioritize
   - Completed 1-1s with anyone relevant at PostHog
 - Month 1
   - Leading customer calls and demos on your own
-  - Have evaluations in flight with support from team if needed
+  - Have evaluations in flight with support from team if needed (AE)
   - Had contact with _everyone_ in your book of business in some form
+  - Starting to solve technical problems for your book with occasional help (CSM)
 - Month 2
-  - Closed your first Medium annual deal (new or conversion to annual)
-  - Leading evaluations on your own
-  - Identified some opportunities to add to your book from self-serve signups who aren't paying yet
+  - Closed your first Medium annual deal (new or conversion to annual) (AE)
+  - Leading evaluations on your own (AE)
+  - Identified some opportunities to add to your book from self-serve signups who aren't paying yet (AE)
 - Month 3-4
-  - Closed multiple contracts by this point (either new or expansion/renewal) through the whole process
-  - Closed at least one Large annual deal (new or conversion to annual)
+  - Closed multiple contracts by this point (either new or expansion/renewal) through the whole process (AE)
+  - Independently working with your entire book to solve tricky technical problems with minimal assistant (CSM)
  
-## How commission works
+## How commission works - AEs
 
 **General principles**
 
@@ -122,7 +125,22 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did. 
 - In your first 3 months you will not have a set quota but are expected to retain your existing book and have closed at least one Medium deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE for this period.
 
-> Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota. 
+> Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
+
+## How contractual bonus works - CSMs
+
+CSMs are responsible for ensuring that a larger book of existing customers - both annual and monthly - continue to use PostHog successfully. They nurture customers and are product experts - this isn't a role of just going back and forth between customers and support engineers, or collecting feedback. 
+
+> This plan will _also_ almost certainly change as we scale up the size and complexity of our sales machine! As above, we will always ensure folks are treated fairly when we make changes.
+
+**Variables**
+
+- Your OTE comprises a 90/10 split between base and contractual bonus.
+- Bonus is paid based on logo retention above 90%, and is capped at 100%.
+  - For example, if you have 90% logo retention, you get 0% of bonus. For 95% retention, it's 50% bonus, and for 100% retention, it's 100% bonus. 
+- Bonuses are paid out quarterly, and in any case after an invoice is paid
+  - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
+- We count a customer as having been retained in your book if they are still spending > $1,000/month with us, so if for example you have a customer that was spending $20k+ annually who then scales down to $10/year, they obviously won't count as retained even if they are technically still spending money!
 
 ## Travel to see customers
 
