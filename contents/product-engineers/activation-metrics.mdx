@@ -56,13 +56,13 @@ How can you recreate this process for yourself? Creating the grouping of potenti
 
 To help you out, we've included the exact query we used below. If you use PostHog, you can use our same exact query to explore your data and find your activation metric. First, I'll break the query into parts to explain what's happening, then I'll provide the whole thing in one chunk at the end.
 
-> **Note:** This query gets retention at the **organization** level using [group analytics](/docs/product-analytics/group-analytics). If you want to get retention at the **person** level, you can use the same query but replace organization references with person ones like changing `group_id` to `distinct_id`.
+> **Note:** This query gets retention at the **group** level using [group analytics](/docs/product-analytics/group-analytics). This means that anyone in the group (eg. customer, organization [what we use], work unit - whatever your groups are) can perform the event and it counts towards activation. If you want to get retention at the **person** level, you can use the same query but replace group references with person ones like changing `group_id` to `distinct_id`.
 
-### Part 1: Get the organizations who started with your product, broken down by month
+### Part 1: Get the groups who started with your product, broken down by month
 
-Start with an event that represents when an organization starts with your product. For many products, this is simply when they first signed up. 
+Start with an event that represents when an group starts with your product. For many products, this is simply when they first signed up. 
 
-We use this event to get all the organizations who started with our product, broken down by month. We'll use the `group_id` values throughout the rest of the query.
+We use this event to get all the groups who started with our product, broken down by month. We'll use the `group_id` values throughout the rest of the query.
 
 ```sql
 WITH starting_groups AS (
@@ -131,7 +131,7 @@ successful_groups AS (
 
 ### Part 4: Calculate retention for successful groups
 
-To identify if our potential activation metrics are good ones, we calculate retention for successful organizations 3 months later. The retention events are likely different from the activation events, but can be the same. It can be as simple as someone logging in or creating new things in your product. Whatever tells you they are an active user.
+To identify if our potential activation metrics are good ones, we calculate retention for successful groups 3 months later. The retention events are likely different from the activation events, but can be the same. It can be as simple as someone logging in or creating new things in your product. Whatever tells you they are an active user.
 
 If the retention rate is higher than average, our grouping of events is a good activation metric. You can find your average retention rate with a [retention insight](/docs/product-analytics/retention).
 
@@ -169,7 +169,7 @@ ORDER BY starting_groups.start_month
 
 ### Part 6. Repeat with each potential activation metric
 
-Run the query for each of your potential activation metric groupings. Save the results so you can compare. Your best retention metric is the one with the most organizations with the highest final retention.
+Run the query for each of your potential activation metric groupings. Save the results so you can compare. Your best retention metric is the one with the most starting groups with the highest final retention.
 
 If none of your groupings work, try playing with the number of times things happen (part 3). Sometimes users need to do something many times before it becomes a habit. 
 
