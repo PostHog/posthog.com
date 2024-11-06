@@ -56,26 +56,26 @@ How can you recreate this process for yourself? Creating the grouping of potenti
 
 To help you out, we've included the exact query we used below. If you use PostHog, you can use our same exact query to explore your data and find your activation metric. First, I'll break the query into parts to explain what's happening, then I'll provide the whole thing in one chunk at the end.
 
-> **Note:** This query gets retention at the **organization** level using [group analytics](/docs/product-analytics/group-analytics). If you want to get retention at the **person** level, you can use the same query but replace organization references with person ones like changing `organization_id` to `distinct_id`.
+> **Note:** This query gets retention at the **organization** level using [group analytics](/docs/product-analytics/group-analytics). If you want to get retention at the **person** level, you can use the same query but replace organization references with person ones like changing `group_id` to `distinct_id`.
 
 ### Part 1: Get the organizations who started with your product, broken down by month
 
 Start with an event that represents when an organization starts with your product. For many products, this is simply when they first signed up. 
 
-We use this event to get all the organizations who started with our product, broken down by month. We'll use the `organization_id` values throughout the rest of the query.
+We use this event to get all the organizations who started with our product, broken down by month. We'll use the `group_id` values throughout the rest of the query.
 
 ```sql
-WITH starting_orgs AS (
+WITH starting_groups AS (
    SELECT
-      organization_id,
+      group_id,
       start_date,
       start_month
    FROM (
       SELECT
-         person.properties.organization_id as organization_id, -- some unique id for the group
+         person.properties.group_id as group_id, -- some unique id for the group
          toDate(timestamp) as start_date,
          toStartOfMonth(toDate(timestamp)) as start_month,
-         ROW_NUMBER() OVER(PARTITION BY person.properties.organization_id ORDER BY toDate(timestamp)) as rn
+         ROW_NUMBER() OVER(PARTITION BY person.properties.group_id ORDER BY toDate(timestamp)) as rn
       FROM events
       WHERE toDate(timestamp) >= now() - interval 6 month
       event = 'user signed up' -- the event that defines the start of the funnel
@@ -92,7 +92,7 @@ Next, filter for your one grouping of potential activation events.
 ```sql
 downfunnel AS (
   SELECT
-    person.properties.organization_id as organization_id, -- again, the unique id for the group
+    person.properties.group_id as group_id, -- again, the unique id for the group
     toDate(timestamp) as date_str,
     toStartOfMonth(toDate(timestamp)) as event_month,
     -- below, the events that might make up an activation metric. Anywhere from 2-5 events usually.
@@ -107,18 +107,18 @@ downfunnel AS (
 ),
 ```
 
-### Part 3: Filter for successful organizations
+### Part 3: Filter for successful groups
 
-Successful organizations are ones who meet all the criteria for your potential activation metric. This means they both completed all the events within a certain time and did so the correct number of times (such as watching > 5 replays).
+Successful groups are ones who meet all the criteria for your potential activation metric. This means they both completed all the events within a certain time and did so the correct number of times (such as watching > 5 replays).
 
 ```sql
-successful_orgs AS (
+successful_groups AS (
   SELECT
-    starting_orgs.organization_id
-  from starting_orgs
-  join downfunnel on starting_orgs.organization_id = downfunnel.organization_id
-  where downfunnel.date_str >= starting_orgs.start_date
-  and downfunnel.date_str <= starting_orgs.start_date + interval 30 day -- this interval is the amount of time someone has to complete all the activation events. you can try moving it up or down.
+    starting_groups.group_id
+  from starting_groups
+  join downfunnel on starting_groups.group_id = downfunnel.group_id
+  where downfunnel.date_str >= starting_groups.start_date
+  and downfunnel.date_str <= starting_groups.start_date + interval 30 day -- this interval is the amount of time someone has to complete all the activation events. you can try moving it up or down.
   group by 1
   -- below, define the number of times you want each event to happen. Sometimes people have to do an event 2 or 3 times before they "get it."
   having sum(coalesce(downfunnel.event_1, 0)) >= 1 AS event_1
@@ -127,9 +127,9 @@ successful_orgs AS (
 ),
 ```
 
-> **Note:** Make sure there are enough users in each retention cohort to generate good results. If only 2 organizations "succeeded" and did all the activation steps, the retention rate isn't going to be trustworthy.
+> **Note:** Make sure there are enough users in each retention cohort to generate good results. If only 2 groups "succeeded" and did all the activation steps, the retention rate isn't going to be trustworthy.
 
-### Part 4: Calculate retention for successful organizations
+### Part 4: Calculate retention for successful groups
 
 To identify if our potential activation metrics are good ones, we calculate retention for successful organizations 3 months later. The retention events are likely different from the activation events, but can be the same. It can be as simple as someone logging in or creating new things in your product. Whatever tells you they are an active user.
 
@@ -138,11 +138,11 @@ If the retention rate is higher than average, our grouping of events is a good a
 ```sql
 retained AS (
   SELECT
-    DISTINCT e.person.properties.organization_id as organization_id
+    DISTINCT e.person.properties.group_id as group_id
   FROM events e
-  JOIN starting_orgs ON e.person.properties.organization_id = starting_orgs.organization_id
-  WHERE toDate(timestamp) >= starting_orgs.start_date + interval 3 month
-  and toDate(timestamp) <= starting_orgs.start_date + interval 4 month
+  JOIN starting_groups ON e.person.properties.group_id = starting_groups.group_id
+  WHERE toDate(timestamp) >= starting_groups.start_date + interval 3 month
+  and toDate(timestamp) <= starting_groups.start_date + interval 4 month
   -- below, any events that tell you that the user/group is still using the product 3 months later
   AND event IN ('certain page viewed', 'thing saved to db', 'button clicked', 'logged in')
 )
@@ -154,17 +154,17 @@ The final `SELECT` statement gathers up all the info, does some calcs across it,
 
 ```sql
 SELECT
-    starting_orgs.start_month,
-    COUNT(DISTINCT starting_orgs.organization_id) as total_starting_orgs,
-    COUNT(DISTINCT successful_orgs.organization_id) as total_orgs_activated,
-    round((COUNT(DISTINCT successful_orgs.organization_id) * 100.0 / coalesce(COUNT(DISTINCT starting_orgs.organization_id), 0)), 2) as activation_percentage,
-    COUNT(DISTINCT CASE WHEN retained.organization_id IS NOT NULL THEN successful_orgs.organization_id else null END) as total_activated_orgs_survived,
-    round((COUNT(DISTINCT retained.organization_id) * 100.0 / coalesce(COUNT(DISTINCT successful_orgs.organization_id), 0)), 2) as retained_percentage_of_activated
-FROM starting_orgs
-LEFT JOIN successful_orgs ON starting_orgs.organization_id = successful_orgs.organization_id
-LEFT JOIN retained ON successful_orgs.organization_id = retained.organization_id
-GROUP BY starting_orgs.start_month
-ORDER BY starting_orgs.start_month
+    starting_groups.start_month,
+    COUNT(DISTINCT starting_groups.group_id) as total_starting_groups,
+    COUNT(DISTINCT successful_groups.group_id) as total_groups_activated,
+    round((COUNT(DISTINCT successful_groups.group_id) * 100.0 / coalesce(COUNT(DISTINCT starting_groups.group_id), 0)), 2) as activation_percentage,
+    COUNT(DISTINCT CASE WHEN retained.group_id IS NOT NULL THEN successful_groups.group_id else null END) as total_activated_groups_survived,
+    round((COUNT(DISTINCT retained.group_id) * 100.0 / coalesce(COUNT(DISTINCT successful_groups.group_id), 0)), 2) as retained_percentage_of_activated
+FROM starting_groups
+LEFT JOIN successful_groups ON starting_groups.group_id = successful_groups.group_id
+LEFT JOIN retained ON successful_groups.group_id = retained.group_id
+GROUP BY starting_groups.start_month
+ORDER BY starting_groups.start_month
 ```
 
 ### Part 6. Repeat with each potential activation metric
@@ -181,17 +181,17 @@ If this doesn't work, you might have too few users coming in or not enough consi
 ### The final combined query
 
 ```sql
-WITH starting_orgs AS (
+WITH starting_groups AS (
    SELECT
-      organization_id,
+      group_id,
       start_date,
       start_month
    FROM (
       SELECT
-         person.properties.organization_id as organization_id, -- some unique id for the group
+         person.properties.group_id as group_id, -- some unique id for the group
          toDate(timestamp) as start_date,
          toStartOfMonth(toDate(timestamp)) as start_month,
-         ROW_NUMBER() OVER(PARTITION BY person.properties.organization_id ORDER BY toDate(timestamp)) as rn
+         ROW_NUMBER() OVER(PARTITION BY person.properties.group_id ORDER BY toDate(timestamp)) as rn
       FROM events
       WHERE toDate(timestamp) >= now() - interval 6 month
       event = 'user signed up' -- the event that defines the start of the funnel
@@ -200,7 +200,7 @@ WITH starting_orgs AS (
    WHERE sub.rn = 1
 ), downfunnel AS (
   SELECT
-    person.properties.organization_id as organization_id, -- again, the unique id for the group
+    person.properties.group_id as group_id, -- again, the unique id for the group
     toDate(timestamp) as date_str,
     toStartOfMonth(toDate(timestamp)) as event_month,
     -- below, the events that might make up an activation metric. Anywhere from 2-5 events usually.
@@ -212,13 +212,13 @@ WITH starting_orgs AS (
   -- filter by the events here
   AND event IN ('important button clicked', 'thing saved to db', 'team member invited')
   GROUP BY 1,2
-), successful_orgs AS (
+), successful_groups AS (
   SELECT
-    starting_orgs.organization_id
-  from starting_orgs
-  join downfunnel on starting_orgs.organization_id = downfunnel.organization_id
-  where downfunnel.date_str >= starting_orgs.start_date
-  and downfunnel.date_str <= starting_orgs.start_date + interval 30 day -- this interval is the amount of time someone has to complete all the activation events. you can try moving it up or down.
+    starting_groups.group_id
+  from starting_groups
+  join downfunnel on starting_groups.group_id = downfunnel.group_id
+  where downfunnel.date_str >= starting_groups.start_date
+  and downfunnel.date_str <= starting_groups.start_date + interval 30 day -- this interval is the amount of time someone has to complete all the activation events. you can try moving it up or down.
   group by 1
   -- below, define the number of times you want each event to happen. Sometimes people have to do an event 2 or 3 times before they "get it."
   having sum(coalesce(downfunnel.event_1, 0)) >= 1 AS event_1
@@ -227,26 +227,26 @@ WITH starting_orgs AS (
 ),
 retained AS (
   SELECT
-    DISTINCT e.person.properties.organization_id as organization_id
+    DISTINCT e.person.properties.group_id as group_id
   FROM events e
-  JOIN starting_orgs ON e.person.properties.organization_id = starting_orgs.organization_id
-  WHERE toDate(timestamp) >= starting_orgs.start_date + interval 3 month
-  and toDate(timestamp) <= starting_orgs.start_date + interval 4 month
+  JOIN starting_groups ON e.person.properties.group_id = starting_groups.group_id
+  WHERE toDate(timestamp) >= starting_groups.start_date + interval 3 month
+  and toDate(timestamp) <= starting_groups.start_date + interval 4 month
   -- below, any events that tell you that the user/group is still using the product 3 months later
   AND event IN ('certain page viewed', 'thing saved to db', 'button clicked', 'logged in')
 )
 SELECT
-    starting_orgs.start_month,
-    COUNT(DISTINCT starting_orgs.organization_id) as total_starting_orgs,
-    COUNT(DISTINCT successful_orgs.organization_id) as total_orgs_activated,
-    round((COUNT(DISTINCT successful_orgs.organization_id) * 100.0 / coalesce(COUNT(DISTINCT starting_orgs.organization_id), 0)), 2) as activation_percentage,
-    COUNT(DISTINCT CASE WHEN retained.organization_id IS NOT NULL THEN successful_orgs.organization_id else null END) as total_activated_orgs_survived,
-    round((COUNT(DISTINCT retained.organization_id) * 100.0 / coalesce(COUNT(DISTINCT successful_orgs.organization_id), 0)), 2) as retained_percentage_of_activated
-FROM starting_orgs
-LEFT JOIN successful_orgs ON starting_orgs.organization_id = successful_orgs.organization_id
-LEFT JOIN retained ON successful_orgs.organization_id = retained.organization_id
-GROUP BY starting_orgs.start_month
-ORDER BY starting_orgs.start_month
+    starting_groups.start_month,
+    COUNT(DISTINCT starting_groups.group_id) as total_starting_groups,
+    COUNT(DISTINCT successful_groups.group_id) as total_groups_activated,
+    round((COUNT(DISTINCT successful_groups.group_id) * 100.0 / coalesce(COUNT(DISTINCT starting_groups.group_id), 0)), 2) as activation_percentage,
+    COUNT(DISTINCT CASE WHEN retained.group_id IS NOT NULL THEN successful_groups.group_id else null END) as total_activated_groups_survived,
+    round((COUNT(DISTINCT retained.group_id) * 100.0 / coalesce(COUNT(DISTINCT successful_groups.group_id), 0)), 2) as retained_percentage_of_activated
+FROM starting_groups
+LEFT JOIN successful_groups ON starting_groups.group_id = successful_groups.group_id
+LEFT JOIN retained ON successful_groups.group_id = retained.group_id
+GROUP BY starting_groups.start_month
+ORDER BY starting_groups.start_month
 ```
 
 ## What do I do with the activation metric once I find it?
