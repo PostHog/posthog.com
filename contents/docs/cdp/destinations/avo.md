@@ -1,13 +1,11 @@
 ---
-title: Send data to Avo
+title: Send PostHog event data to Avo
 templateId: template-avo
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send event data from PostHog into Avo.
 
 <Requirements />
 

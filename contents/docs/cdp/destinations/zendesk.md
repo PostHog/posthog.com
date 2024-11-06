@@ -1,5 +1,5 @@
 ---
-title: Send data to Zendesk
+title: Send PostHog person data to Zendesk
 templateId: template-zendesk
 ---
 
@@ -7,7 +7,7 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-Send person data from PostHog into Zendesk. You can also send person properties to User fields in Zendesk.
+You can also send person properties to User fields in Zendesk.
 
 <Requirements />
 
