@@ -1,5 +1,5 @@
 ---
-title: Realtime destinations
+title: Realtime analytics data exports
 showTitle: true
 ---
 

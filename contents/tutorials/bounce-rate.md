@@ -81,14 +81,14 @@ SELECT
         WHEN (raw_session_replay_events.click_count = 0 AND raw_session_replay_events.active_milliseconds < 60000) 
         THEN raw_session_replay_events.session_id 
         ELSE NULL 
-    END) * 100.0) / COUNT(DISTINCT properties.$session_id) AS bounce_rate
+    END) * 100.0) / COUNT(DISTINCT events.properties.$session_id) AS bounce_rate
 FROM 
     events
 INNER JOIN 
     raw_session_replay_events ON events.properties.$session_id = raw_session_replay_events.session_id
 WHERE 
-    created_at >= now() - INTERVAL 7 DAY 
-    AND properties.$current_url = 'https://posthog.com/'
+    events.created_at >= now() - INTERVAL 7 DAY 
+    AND events.properties.$current_url = 'https://posthog.com/'
 ```
 
 This gives a bounce rate percentage for our homepage, and you can edit it for any specific page you want.

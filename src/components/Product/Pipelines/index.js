@@ -472,8 +472,8 @@ function PipelinesPage({ location }) {
 
     const product = {
         slug: 'cdp',
-        lowercase: 'cdp',
-        capitalized: 'CDP',
+        lowercase: 'data pipelines',
+        capitalized: 'Data pipelines',
         freeTier: '10m rows',
     }
 
@@ -538,7 +538,7 @@ function PipelinesPage({ location }) {
                     icon={<IconPlug />}
                     product={product.capitalized}
                     title="Ingest, transform, and send data between 25+ tools"
-                    description="Pre-built recipes make it easy to import data from a warehouse, sync with PostHog event data, and send to other products in your stack."
+                    description="PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with event data, and export to other products in your stack."
                     beta
                 />
 
@@ -714,7 +714,7 @@ function PipelinesPage({ location }) {
                 <p className="mt-0 text-opacity-70 text-center">
                     Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                 </p>
-                <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'cdp').children} />
+                <DocLinks menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'data pipelines').children} />
             </section>
 
             <section
