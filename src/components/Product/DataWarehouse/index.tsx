@@ -42,22 +42,48 @@ const features = [
     {
         title: 'Sync from Stripe',
         description: 'Combine financial and product data to see how usage turns into growth.',
-        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png" width={428} placeholder="none" />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png"
+                width={428}
+                placeholder="none"
+            />
+        ),
     },
     {
         title: 'Sync from Hubspot',
         description: 'Bring your CRM into the mix and track your sales funnel directly in PostHog.',
-        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/hubspot.png" width={428} height={312} placeholder="none" />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/hubspot.png"
+                width={428}
+                height={312}
+                placeholder="none"
+            />
+        ),
     },
     {
         title: 'Sync from Zendesk',
         description: 'See how ticket volumes and SLA breaches impact sign-ups and churn.',
-        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/zendesk.png" width={428} placeholder="none" />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/zendesk.png"
+                width={428}
+                placeholder="none"
+            />
+        ),
     },
     {
         title: 'Sync from anywhere',
         description: 'Adwords? Salesforce? Grab anything you want using custom sources.',
-        image: <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png" width={428} height={312} placeholder="none" />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png"
+                width={428}
+                height={312}
+                placeholder="none"
+            />
+        ),
     },
 ]
 
@@ -120,7 +146,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -279,7 +305,12 @@ export const ProductDataWarehouse = () => {
                 </div>
             </section>
 
-            <section id="tutorials" className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-0 md:-mt-12 pb-0`}>
+            <section
+                id="tutorials"
+                className={`${
+                    fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'
+                } px-5 py-10 md:pt-0 md:-mt-12 pb-0`}
+            >
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
                     <p className="mt-0 text-opacity-75 text-center mb-6">
@@ -317,7 +348,10 @@ export const ProductDataWarehouse = () => {
         </section>
         */}
 
-            <section id="docs" className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+            <section
+                id="docs"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
                 <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
                 <p className="mt-0 text-opacity-70 text-center">
                     Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
@@ -327,7 +361,10 @@ export const ProductDataWarehouse = () => {
                 />
             </section>
 
-            <section id="team" className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+            <section
+                id="team"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                     <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
 
@@ -339,7 +376,10 @@ export const ProductDataWarehouse = () => {
                 </div>
             </section>
 
-            <section id="roadmap" className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+            <section
+                id="roadmap"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
 
@@ -358,7 +398,10 @@ export const ProductDataWarehouse = () => {
                 </div>
             </section>
 
-            <section id="questions" className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
+            <section
+                id="questions"
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
+            >
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
                     <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
 
