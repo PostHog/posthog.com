@@ -1,10 +1,6 @@
 ---
-date: 2024-10-31
-title: The exact query we used to find our activation metric
-rootPage: /blog
-sidebar: Blog
-showTitle: true
-hideAnchor: true
+date: 2024-11-05
+title: How we found our activation metric (and how you can too)
 author:
   - raquel-m-smith
 featuredImage: >-
@@ -15,15 +11,18 @@ tags:
   - Product analytics
   - Product engineers
   - Growth
+  - Inside PostHog
+crosspost:
+  - Blog
 ---
 
-Activation gets talked about a lot. It's the second A in the pirate metrics framework. It's the thing that defines the "ah-ha" moment for your users. It's the thing that lets you know if your users are going to find success with your product.
+Activation AKA your product's "ah-ha" moment and the second A in the [AARRR pirate funnel framework](/product-engineers/aarrr-pirate-funnel). It's the thing that lets you know if your users are going to find success with your product.
 
-In a word, it's _important_.
+In a word, it's _important_, but it's also really difficult to define.
 
-But it's also really difficult to define.
+We have 8+ products and users get activated into _each_ separately. Each also has 10+ events that we could use as an activation metric. 
 
-We have 8+ products, and _each_ of them needs to get activated into separately. So we spent a lot of time figuring out how to _figure out_ what our activation metrics are. And because we did this all inside of PostHog, we figured we'd share it with you, so you can do the same!
+This means we spent a lot of time figuring out how to _figure out_ what our activation metrics are. Lucky for you, we did this all inside of PostHog, so we figured we'd share it with you, so you can do the same!
 
 But before we jump in... what even _is_ activation?
 
@@ -31,48 +30,39 @@ But before we jump in... what even _is_ activation?
 
 An activation metric is a set of actions a user performs that are correlated with greater retention.
 
-In other words, imagine you have actions A through Z. If users who do actions D, K, and L are more likely to still be using your platform at some point down the line, then D, K, and L combined are your activation metric. We might think that actions B, F, and G are good things for them to do, but if they aren't correlated with retention, then they aren't part of your activation metric.
+In other words, imagine you have actions A through Z. If doing actions D, K, and L make users more likely to use your platform down the line, then D, K, and L combined are your activation metric. We might think that actions B, F, and G are good things for them to do, but if they aren't correlated with retention, then they aren't part of your activation metric.
 
-### What is PostHog's activation metric?
+At PostHog, we look for a set of actions that mean someone is much more likely to be using the product 3 months later. In the case of [session replay](/session-replay), after analyzing multiple potential metrics, we found that these were watching 5 or more replays and setting a replay filter at least once.
 
-We can look at session replay. Based on our analysis, users who:
+This definition solves the trickiest part of defining an activation metric: it could be _anything_. Does a pageview mean someone is activated? Does completing onboarding? What about creating their first object? Depending on your product, any of these could be it. Their impact on retention makes it clear. 
 
-- Watch 5 session replays
-- Set replay filters > 0 times
+## How did we find _our_ activation metric?
 
-are much more likely to still be using session replay in 3 months time than people who didn't do those things.
+How did we settle on `watching 5 or more replays and setting a replay filter at least once`? We tested a lot of different metrics by:
 
-## What do I do with the activation metric?
+1. Creating a big list of events that we thought might "hook" users into using our product.
 
-You push for it, of course! If you know you need people to do actions D, K, and L, you can email them about those things, track it in your metrics, run experiments to get more people using it, etc.
+2. Creating groups of 3-5 events that you can test together. We aimed for 5-10 different groupings, including the number of times the event occurs (e.g. watched 5 replays vs. watched 1 replay). Sometimes users have to do something more than once to reach their "ah-ha" moment.
 
-For session replay, we email people pretty soon off the bat if they've shown interest in the product but haven't activated.
+3. Writing a query to test how the event groupings improve retention (see below).
 
-## How do I find my activation metric?
+4. Comparing each group of events against our average retention rate for all users. We looked for a retention percentage that's nominally higher than our average retention rate.
 
-Fortunately, by using the query in this article, finding your activation metric should be relatively easy.
+After testing multiple groupings, we found that `watching 5 or more replays and setting a replay filter at least once` was the set of events that resulted in the highest retention rate, meaning it was our activation metric.
 
-Step 1: Create a list of events that you think might "hook" your user into using your product.
+## Our query for testing potential activation metrics
 
-Step 2: Create groups of 3-5 events that you can test together. Aim for 5-10 different groupings, including the number of times the event occurs - sometimes users have to do something more than once to reach their "ah-ha" moment.
+How can you recreate this process for yourself? Creating the grouping of potential activation events is easy, but the retention testing query is the tricky part. 
 
-Step 3: Use the query below to test the metric for retention. You're looking for a retention percentage that's nominally higher than your average retention rate for all users.
+To help you out, we've included the exact query we used below. If you use PostHog, you can use our same exact query to explore your data and find your activation metric. First, I'll break the query into parts to explain what's happening, then I'll provide the whole thing in one chunk at the end.
 
-- Make sure there are enough users in each month's cohort to generate good results. If only 2 groups did all the activation steps, their retention rate isn't going to be very trustworthy.
+> **Note:** This query gets retention at the **organization** level using [group analytics](/docs/product-analytics/group-analytics). If you want to get retention at the **person** level, you can use the same query but replace organization references with person ones like changing `organization_id` to `distinct_id`.
 
-Remember: retention is your guide. Your activation metric is a reflection of your retention rate - because people who activate are more likely to continue using your product.
+### Part 1: Get the organizations who started with your product, broken down by month
 
-### Activation query
+Start with an event that represents when an organization starts with your product. For many products, this is simply when they first signed up. 
 
-If you use PostHog, you can use our same exact query to explore your data and find your activation metric.
-
-First, I'll break the query down into bits to explain what's happening, then I'll provide the whole thing in one chunk at the end.
-
-#### Step 1. Get all the orgs who started with your product, broken down by month
-
-Find an event that represents when a user starts with your product. For many products, this can simply be when the user first signed up. Because this is querying off the events table directly, you can't use an action for this (or any of the events in the query) - it must be a "manually" collected event (i.e. one defined in your codebase).
-
-Use that event in this step of the query, which then breaks the users apart by month that they started. If you use groups, you'll also need to include the group ID so that you're filtering everything else down the funnel by group ID.
+We use this event to get all the organizations who started with our product, broken down by month. We'll use the `organization_id` values throughout the rest of the query.
 
 ```sql
 WITH starting_orgs AS (
@@ -95,9 +85,9 @@ WITH starting_orgs AS (
 ),
 ```
 
-#### Step 2. Gather up all the events that are important for activation in the downfunnel
+### Part 2: Define and filter for your potential activation events
 
-Take your events that you identified in step 1 above (NOTE TO EDITOR: having multiple sets of steps here is confusing, maybe we should combine it all into one list) and filter for them in this part of the query:
+Next, filter for your one grouping of potential activation events.
 
 ```sql
 downfunnel AS (
@@ -117,9 +107,9 @@ downfunnel AS (
 ),
 ```
 
-#### Step 3. Calculate which groups were successful after they started in the funnel
+### Part 3: Filter for successful organizations
 
-"Successful" groups are ones who meet all the criteria from one of the event groupings you identified in step 2 (the first step two). You can check that they did the event at all (`>= 0`), or that they did it multiple times (`>= N-times`).
+Successful organizations are ones who meet all the criteria for your potential activation metric. This means they both completed all the events within a certain time and did so the correct number of times (such as watching > 5 replays).
 
 ```sql
 successful_orgs AS (
@@ -137,11 +127,13 @@ successful_orgs AS (
 ),
 ```
 
-#### Step 4. For the groups that were successful, calculate their retention 3 months later
+> **Note:** Make sure there are enough users in each retention cohort to generate good results. If only 2 organizations "succeeded" and did all the activation steps, the retention rate isn't going to be trustworthy.
 
-This is how we identify if our activation metric is good - did we see a higher retention 3 months later than we see on average for all users?
+### Part 4: Calculate retention for successful organizations
 
-The retention events are possibly different, but maybe the same, as the activation events. It can be as simple as someone logging in, or actually creating new things in your product, or a list of potential activities. Whatever tells you they are an active user.
+To identify if our potential activation metrics are good ones, we calculate retention for successful organizations 3 months later. The retention events are likely different from the activation events, but can be the same. It can be as simple as someone logging in or creating new things in your product. Whatever tells you they are an active user.
+
+If the retention rate is higher than average, our grouping of events is a good activation metric. You can find your average retention rate with a [retention insight](/docs/product-analytics/retention).
 
 ```sql
 retained AS (
@@ -156,9 +148,9 @@ retained AS (
 )
 ```
 
-#### Step 5. Put it all together
+### Part 5. Put it all together
 
-The final `SELECT` statement then just gathers up all the info, does some calcs across it, and presents it to you in a nice table from oldest to newest month.
+The final `SELECT` statement gathers up all the info, does some calcs across it, and presents it to you in a nice table from oldest to newest month.
 
 ```sql
 SELECT
@@ -175,11 +167,18 @@ GROUP BY starting_orgs.start_month
 ORDER BY starting_orgs.start_month
 ```
 
-### Step 6. Run the query for each potential activation metric you've listed
+### Part 6. Repeat with each potential activation metric
 
-Earlier you wrote out 5-10 potential groupings of metrics that could indicate successful activation. Run the query for each of those groupings, saving the resulting table somewhere so you can compare across groupings. Find the grouping that has the most users with the highest final retention. If you can't identify one, try playing with the number of times things happen - sometimes people need to do something quite a few times before it becomes a habit.
+Run the query for each of your potential activation metric groupings. Save the results so you can compare. Your best retention metric is the one with the most organizations with the highest final retention.
 
-#### The final query
+If none of your groupings work, try playing with the number of times things happen (part 3). Sometimes users need to do something many times before it becomes a habit. 
+
+If this doesn't work, you might have too few users coming in or not enough consistency in their behaviors. You might need to:
+
+1. Focus more on [acquisition](/product-engineers/aarrr-pirate-funnel#1-acquisition).
+2. Do qualitative analysis via [surveys](/docs/surveys) or [user interviews](/tutorials/feedback-interviews-site-apps). Figure out what people are coming to you for, when they first found success, and why did they leave.
+
+### The final combined query
 
 ```sql
 WITH starting_orgs AS (
@@ -250,16 +249,10 @@ GROUP BY starting_orgs.start_month
 ORDER BY starting_orgs.start_month
 ```
 
-If you're not using PostHog, you can use the above query as a guide for writing your query for another platform.
+## What do I do with the activation metric once I find it?
 
-## What if I don't find a good metric?
+You push for it, of course! If you know you need people to do actions D, K, and L, you can email them about those things, track it in your metrics, run [experiments](/docs/experiments) to get more people using it, etc.
 
-It's possible you have too few users coming in, or not enough consistency in their behaviors. This is a good opportunity to do some qualitative analysis via surveys or user interviews - what are people coming to you for? When did they first find success? Why did they leave?
+For example, for session replay, we [email users pretty quickly](/blog/how-we-built-email-onboarding) if they've shown interest in the product but haven't activated.
 
-## Should I drop all my other plans to focus on activation?
-
-Definitely not. If you've built a good product, people will likely find a way to use it. First, focus on finding PMF for your product, and use activation as an optimization layer on top of a solid product.
-
-## Conclusion
-
-One of the most challenging metrics to figure out is your activation metric. But it's also incredibly important. A good activation metric will help you understand what your users need to do in their first few days with you as a user in order to find success and stick with you for the long run.
+One thing to **not do** is drop all other plans to focus on activation. If you've built a good product, people will find a way to use it. First, focus on [finding PMF](/founders/product-market-fit-game) for your product, and then use activation as an optimization layer on top of a solid product.

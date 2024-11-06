@@ -186,7 +186,7 @@ Closing the loop above is the way to cement your product-market fit because:
 
   1. Activate your users manually. The classic example is the founders of Stripe, who [used to visit their first users in person](http://paulgraham.com/ds.html#Manual) to set up their product for them. Do things that don't scale. You'll develop a closer relationship doing this, which helps you get more feedback.
   
-  2. Make your activation/onboarding simpler. Can you make it 10x simpler?
+  2. Make your [activation/onboarding](/product-engineers/activation-metrics) simpler. Can you make it 10x simpler?
 
 * **You are getting conflicting feedback on what to build.** Go to level 5, this will help clarify which users are your Ideal Customer Profile, and which aren't. This provides a clearer direction.
  
