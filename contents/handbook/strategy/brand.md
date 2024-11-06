@@ -17,7 +17,7 @@ When it comes to attention on the internet, you are competing with cat videos an
 
 It is thus encouraged to be rogue / sarcastic / meme-y / unhinged / weird.
 
-Our competitors are (i) more defensive and self0interested in their approach (focused on optimizing revenue growth), and (ii) more boring. Let's keep it that way. If we have fun, we'll stick it out longer and will win in the long term.
+Our competitors are (i) more defensive and self-interested in their approach (focused on optimizing revenue growth), and (ii) more boring. Let's keep it that way. If we have fun, we'll stick it out longer and will win in the long term.
 
 ## Brand first
 
@@ -27,7 +27,7 @@ For example, we should [refund](/handbook/growth/sales/refunds) customers when t
 
 ## Pavlovian merch response
 
-[Give it out](/handbook/company/merch-store#how-do-we-give-away-merch-for-free) to people who are nice about us. That'll create an army of developer warriers fighting for PostHog on the internet!
+[Give it out](/handbook/company/merch-store#how-do-we-give-away-merch-for-free) to people who say nice things about us. That'll create an army of developer warriors fighting for PostHog on the internet!
 
 ## Breaking bad news
 
@@ -35,11 +35,11 @@ Sometimes you may need to tell customers something they don't want to hear - e.g
 
 ## Karma
 
-Be helpful to other companies - we are here to increase the number of successful companies in the world. Especially those with high potential that are putting in the work, like YC current batch ones. For example, if a YC company reaches out, take them seriously and buy their product (if it's genuinely valuable and safe to do so) or give direct feedback if not.
+Be helpful to other companies. We are here to increase the number of successful companies in the world – especially those with high potential that are putting in the work, like YC current batch ones. For example, if a YC company reaches out, take them seriously and buy their product (if it's genuinely valuable and safe to do so) or give direct feedback if not.
 
-## Hacker News pre mortem
+## Hacker News premortem
 
-Hacker News is a very intensely logical and critical place - in a good and bad way. If you are doing something think "how would this go down on Hacker News?" If the answer is "poorly" then change it. This rule of thumb applies to everything, not just stuff literally getting posted there.
+Hacker News is a very intensely logical and critical place – in a good and bad way. If you are doing something think, "How would this go down on Hacker News?" If the answer is "poorly" then change it. This rule of thumb applies to everything, not just stuff literally getting posted there.
 
 ## Brand assets
 
