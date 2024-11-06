@@ -40,17 +40,19 @@ At PostHog, we look for a set of actions where someone is much more likely to us
 
 ## How we found our activation metric?
 
-How did we settle on `watching 5 or more replays and setting a replay filter at least once`? We tested a lot of different metrics by:
+How did we settle on watching 5 or more replays and setting a replay filter at least once? We tested a lot of different metrics by:
 
 1. Creating a big list of events that we thought might "hook" users into using our product.
 
 2. Creating groups of 3-5 events to test together. We aimed for 5-10 different groups, including the number of times the event occurs (e.g. watched 5 replays vs. watched 1 replay). Sometimes users have to do something more than once to reach their "ah-ha" moment.
 
+![Event groups](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_11_36_20_2x_89a95ebdf3.png)
+
 3. Writing a query to test how the event groups improve retention (see below).
 
 4. Comparing each event group against our average retention rate for all users. We looked for a retention percentage that's nominally higher than our average retention rate.
 
-After testing multiple event groups, we found that `watching 5 or more replays and setting a replay filter at least once` was the set of events that resulted in the highest retention rate, meaning it was our activation metric.
+After testing multiple event groups, we found that watching 5 or more replays and setting a replay filter at least once was the set of events that resulted in the highest retention rate, meaning it was our activation metric.
 
 ## Our query for testing potential activation metrics
 
@@ -58,7 +60,8 @@ How can you recreate this process for yourself? Creating the groups of potential
 
 To help you out, we've included the exact query we used below. If you use PostHog, you can use our same exact query to explore your data and find your activation metric. First, I'll break the query into parts to explain what's happening, then I'll provide the whole thing in one chunk at the end.
 
-> **Note:** This query gets retention at the **company** level using [group analytics](/docs/product-analytics/group-analytics). This means that anyone in the group (e.g. customer, organization (what we use), work unit - whatever your groups are) can perform the event and it counts towards activation. 
+> **Note:** This query gets retention at the **company** level using [group analytics](/docs/product-analytics/group-analytics). This means that anyone in the group (e.g. customer, organization (what we use), work unit - whatever your groups are) can perform the event and it counts towards activation.
+> 
 > If you want to get retention at the **person** level, you can use the same query but replace company references with person ones like changing `company_id` to `distinct_id`.
 
 ### Part 1: Get the companies who started with your product, broken down by month
@@ -81,7 +84,7 @@ WITH starting_companies AS (
          ROW_NUMBER() OVER(PARTITION BY person.properties.company_id ORDER BY toDate(timestamp)) as rn
       FROM events
       WHERE toDate(timestamp) >= now() - interval 6 month
-      event = 'user signed up' -- the event that defines the start of the funnel
+      AND event = 'user signed up' -- the event that defines the start of the funnel
       AND properties.some_prop = 'my_prop' -- any properties you want to filter on
    ) sub
    WHERE sub.rn = 1
@@ -90,7 +93,7 @@ WITH starting_companies AS (
 
 ### Part 2: Define and filter for your potential activation events
 
-Next, filter for one group of potential activation events.
+Next, filter for one group of potential activation events. In this case, these are `important button clicked`, `thing saved to db`, and `team member invited`.
 
 ```sql
 downfunnel AS (
@@ -183,6 +186,9 @@ If this doesn't work, you might have too few users coming in or not enough consi
 
 ### The final combined query
 
+<details>
+<summary>Click to see the final combined query</summary>
+
 ```sql
 WITH starting_companies AS (
    SELECT
@@ -251,6 +257,7 @@ LEFT JOIN retained ON successful_companies.company_id = retained.company_id
 GROUP BY starting_companies.start_month
 ORDER BY starting_companies.start_month
 ```
+</details>
 
 ## What do I do with the activation metric once I find it?
 
