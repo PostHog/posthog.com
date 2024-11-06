@@ -1,5 +1,5 @@
 ---
-title: Downsampler
+title: Downsample ingested data
 github: 'https://github.com/PostHog/downsampling-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Downsampling'
 thumbnail: >-

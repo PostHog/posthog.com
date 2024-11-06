@@ -1,6 +1,6 @@
 > 🚧 **NOTE:** Android is considered `beta` and is free while in beta. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
 
-## Step 1: Add PostHog to your app
+## Step one: Add PostHog to your app
 
 import AndroidInstall from "../../integrate/_snippets/install-android.mdx"
 
@@ -8,7 +8,7 @@ import AndroidInstall from "../../integrate/_snippets/install-android.mdx"
 
 > Session replay requires PostHog Android SDK version >= [3.4.0](https://github.com/PostHog/posthog-android/releases), and it's recommended to always use the latest version.
 
-## Step 2: Configure replay settings
+## Step two: Configure replay settings
 
 Add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
 
@@ -19,12 +19,10 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
     sessionReplay = true
 
     // Whether text inputs are masked. Default is true.
-    // This isn't supported for Jetpack Compose views.
     // Password inputs are always masked regardless
     sessionReplayConfig.maskAllTextInputs = true
 
     // Whether images are masked. Default is true.
-    // This isn't supported for Jetpack Compose views.
     sessionReplayConfig.maskAllImages = true
 
     // Capture logs automatically. Default is true.
@@ -35,18 +33,17 @@ val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
     // The screenshot may contain sensitive information, so use with caution
     sessionReplayConfig.screenshot = false
 
-    // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 500ms
-    sessionReplayConfig.debouncerDelayMs = 500
+    // Deboucer delay used to reduce the number of snapshots captured and reduce performance impact. Default is 1000ms
+    // Ps: it was 500ms (0.5s) by default until version 3.8.2
+    sessionReplayConfig.debouncerDelayMs = 1000
 }
 ```
 
-## Additional options
+### Limitations
 
-### Capture network telemetry
-
-See [network performance](/docs/session-replay/network-recording?tab=Android) for more information.
-
-### Masking and redacting
-
-See [privacy controls](/docs/session-replay/privacy?tab=Android) for more information.
-
+- Requires Android API >= 26.
+- Jetpack Compose is only supported if `screenshotMode` is enabled.
+- Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
+- WebView is not supported. A placeholder will be shown.
+- Keyboard is not supported. A placeholder will be shown.
+- Flutter for Android isn't supported.

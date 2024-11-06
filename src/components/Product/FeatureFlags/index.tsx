@@ -214,7 +214,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -351,6 +351,7 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description:
             "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
@@ -358,12 +359,14 @@ const PairsWithArray = [
     },
     {
         icon: <IconUserPaths />,
+        color: 'primary dark:text-primary-dark',
         product: 'User paths',
         description: 'See how a flag’s value influenced an intended outcome',
         url: '/product-analytics',
     },
     {
         icon: <IconRewindPlay />,
+        color: 'yellow',
         product: 'Session replay',
         description: 'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
         url: '/session-replay',
@@ -496,7 +499,12 @@ export const ProductFeatureFlags = () => {
                     </div>
 
                     <div className="md:w-96">
-                        <CloudinaryImage placeholder="none" quality={100} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/feature-flags-hog.png" alt="" />
+                        <CloudinaryImage
+                            placeholder="none"
+                            quality={100}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/feature-flags-hog.png"
+                            alt=""
+                        />
                     </div>
                 </div>
 

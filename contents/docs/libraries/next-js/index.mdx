@@ -127,6 +127,8 @@ No. Even though the PostHog provider is a client component, since we pass the `c
 
 The [`use client` reference](https://react.dev/reference/rsc/use-client) says that it "defines the boundary between server and client code on the module dependency tree, not the render tree." It also says that "During render, the framework will server-render the root component and continue through the render tree, opting-out of evaluating any code imported from client-marked code."
 
+Pages router components are client components by default.
+
 ### What does wrapping my app in the PostHog provider do?
 
 On top of the standard features like autocapture, custom events, session recording, and more, wrapping your app in the PostHog provider gives you:

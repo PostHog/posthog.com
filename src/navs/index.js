@@ -98,12 +98,16 @@ export const handbookSidebar = [
                         url: '/handbook/getting-started/meetings',
                     },
                     {
+                        name: 'Using GitHub',
+                        url: '/handbook/company/new-to-github',
+                    },
+                    {
                         name: 'Goal setting',
                         url: '/handbook/company/goal-setting',
                     },
                     {
-                        name: 'Diversity and inclusion',
-                        url: '/handbook/company/diversity',
+                        name: 'A grown-up company',
+                        url: '/handbook/company/grown-ups',
                     },
                     {
                         name: 'Communication',
@@ -720,6 +724,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/billing',
                     },
                     {
+                        name: 'Trials',
+                        url: '/handbook/growth/sales/trials',
+                    },
+                    {
                         name: 'Refunds',
                         url: '/handbook/growth/sales/refunds',
                     },
@@ -1003,10 +1011,10 @@ export const companyMenu = {
             color: 'red',
             url: '/changelog/2024',
         },
-        { name: 'People', icon: 'IconProfile', color: 'blue', url: '/people' },
+        { name: 'People', icon: 'IconPeople', color: 'blue', url: '/people' },
         {
             name: 'Teams',
-            icon: 'IconPeople',
+            icon: 'IconShieldPeople',
             color: 'purple',
             url: '/teams',
             children: [
@@ -1396,6 +1404,10 @@ export const docsMenu = {
                             url: '/docs/libraries/webflow',
                         },
                         {
+                            name: 'WooCommerce',
+                            url: '/docs/libraries/woocommerce',
+                        },
+                        {
                             name: 'WordPress',
                             url: '/docs/libraries/wordpress',
                         },
@@ -1727,6 +1739,10 @@ export const docsMenu = {
                         {
                             name: 'Early access features',
                             url: '/docs/api/early-access-feature',
+                        },
+                        {
+                            name: 'Environments',
+                            url: '/docs/api/environments',
                         },
                         {
                             name: 'Event definitions',
@@ -2292,6 +2308,12 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Web vs product analytics',
+                    url: '/docs/web-analytics/web-vs-product-analytics',
+                    icon: 'IconGraph',
+                    color: 'purple',
+                },
+                {
                     name: 'FAQ',
                     url: '/docs/web-analytics/faq',
                     icon: 'IconQuestion',
@@ -2679,7 +2701,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'CDP',
+            name: 'Data pipelines',
             url: '/docs/cdp',
             color: 'sky-blue',
             icon: 'IconPlug',
@@ -2725,6 +2747,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations/activecampaign',
                         },
                         {
+                            name: 'Airtable',
+                            url: '/docs/cdp/destinations/airtable',
+                        },
+                        {
                             name: 'Avo',
                             url: '/docs/cdp/destinations/avo',
                         },
@@ -2747,6 +2773,10 @@ export const docsMenu = {
                         {
                             name: 'Gleap',
                             url: '/docs/cdp/destinations/gleap',
+                        },
+                        {
+                            name: 'Google Ads Conversions',
+                            url: '/docs/cdp/destinations/google-ads',
                         },
                         {
                             name: 'Google Cloud Storage',
@@ -2960,6 +2990,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/vitally',
                         },
                         {
+                            name: 'Chargebee',
+                            url: '/docs/data-warehouse/setup/chargebee',
+                        },
+                        {
                             name: 'Self-managed',
                         },
                         {
@@ -3168,7 +3202,7 @@ const menu = [
                 url: '/surveys',
             },
             {
-                name: 'CDP',
+                name: 'Data pipelines',
                 icon: 'IconPlug',
                 color: 'sky-blue',
                 url: '/cdp',

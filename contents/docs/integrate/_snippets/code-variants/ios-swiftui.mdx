@@ -1,0 +1,28 @@
+```swift
+import SwiftUI
+import PostHog
+
+@main
+struct YourGreatApp: App {
+    
+    // Add PostHog to your app's initializer.
+    // If using UIApplicationDelegateAdaptor, see the UIKit tab.
+
+    init() {
+        
+        let POSTHOG_API_KEY = "<ph_project_api_key>"
+        // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+        let POSTHOG_HOST = "<ph_client_api_host>"
+        
+        let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST) // TIP: host is optional if you use https://us.i.posthog.com
+        PostHogSDK.shared.setup(config)
+        
+    }
+    
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
