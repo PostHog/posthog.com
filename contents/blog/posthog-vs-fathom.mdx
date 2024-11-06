@@ -13,36 +13,29 @@ import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-## Inbox Notes
+PostHog and Fathom Analtyics are both [alternatives to Google Analytics](/blog/ga4-alternatives). In fact, both of them mention it on their marketing pages.
 
-- Real-time?
-- Tracking multiple sites?
-- Data retention: 7 years vs. forever
-- Integrations
-  https://usefathom.com/docs/integrations
-- Double check bundle sizes
-  - https://bundlephobia.com/package/posthog-js@1.181.0
-  - https://cdn.usefathom.com/script.js
-- Fathom requires a credit card for the trial.
-- PostHog is free to 1M data points. Fathom starts at $15/month for the lowest tier (100K data points). Or $60/month for 1M data points.
-- Both services are privacy minded.
-- "Switch to a better Google Analytics alternative"
-- links
-  https://posthog.com/blog/best-fathom-alternatives
+> "Switch to a better Google Analytics alternative" Fathom Analytics
+
+> "Web analytics for people who really liked GA3" PostHog's [Web Analytics](/web-analytics) marketing page
+
+But what makes them different? And what are the similarities between the two products?
 
 ## How is PostHog different?
 
-### 1. PostHog offers many tools beyond web analytics
+### 1. PostHog offers web analytics, and a _lot_ more
 
-[Web analytics](/web-analytics) is a core feature of PostHog, but we offer many more tools to help you analyze, test, observe, and deploy your site and app.
+[Web analytics](/web-analytics) is a core feature of PostHog, but we offer many more tools to help you analyze, test, and observe your site and your product.
 
 These include [product analytics](/product-analytics), [session replay](/session-replay), [surveys](/surveys), [experiments](/experiments), [feature flags](/feature-flags), a [data warehouse](/data-warehouse), and more.
 
-### 2. PostHog is free forever
+### 2. PostHog has a generous free tier
 
-PostHog's ["ridiculously cheap" tier](/pricing) includes all of the features of PostHog for free with an allowance of 1M events per month. For Fathom, the pricing for up to 1M data points is $60 monthly.
+PostHog's ["ridiculously cheap" tier](/pricing) includes all of the features of PostHog for free with an allowance of 1M events per month. For Fathom, the pricing for up to 1M data points is $60 per month.
 
-Beyond PostHog's free tier, we try to be as cheap as possible and transparent. Want to know how much we'll charge? See our [pricing calculator](/pricing).
+Beyond PostHog's free tier, we try to be as cheap as possible and [transparent](/docs/billing/estimating-usage-costs). Want to know how much we'll charge? See our [pricing calculator](/pricing#calculator).
+
+PostHog also does not require a credit card to sign up and try the free tier.
 
 ## Web analytics
 
@@ -81,8 +74,6 @@ Teams rely on [product analytics](/product-analytics) when they need more custom
   <ComparisonRow column1={true} column2={false} feature="SQL" description="Query your data with SQL" />
 </ComparisonTable>
 
-> 💡 **Good to know:** Many of Fathom's product analytics features, like custom properties and [funnels](/docs/product-analytics/funnels), are on its more expensive "Business" plan. It's roughly twice the price of the Growth plan and includes up to 10 team members and priority support.
-
 ## Platform
 
 Beyond web analytics is where PostHog really shines. We provide all of the tools developers need to build a successful product (and they all work together).
@@ -100,10 +91,6 @@ Beyond web analytics is where PostHog really shines. We provide all of the tools
   <ComparisonRow column1={true} column2={false} feature="Mobile SDKs" description="Capture events and use features from Android, iOS, and more" />
   <ComparisonRow column1={true} column2="Partial" feature="API" description="Capture events, get stats, and make changes via API" />
 </ComparisonTable>
-
-> 💡 **Good to know:**
-
-...
 
 ## Integrations
 
@@ -193,5 +180,19 @@ Our [install snippet](/docs/getting-started/install?tab=snippet) is also only a 
 ```
 
 Our users range from [individual indie hackers](/customers/headshot-pro) to [YC-backed startups](/customers/mintlify) to [massive enterprises](/customers/researchgate).
+
+## Inbox Notes
+
+- Fathom is a GA competitor that's specifically focused on simplicity and privacy.
+- Real-time?
+- Tracking multiple sites:
+- Data retention: 7 years vs. forever
+- Double check bundle sizes
+  - https://bundlephobia.com/package/posthog-js@1.181.0
+  - https://cdn.usefathom.com/script.js
+
+## Further Reading
+
+- [Best Fathom Alternatives](https://posthog.com/blog/best-fathom-alternatives)
 
 <ArrayCTA />
