@@ -1,5 +1,5 @@
 ---
-title: Send data to custom webhooks
+title: Send PostHog event data to any webhook
 templateId: template-webhook
 ---
 

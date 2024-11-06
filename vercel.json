@@ -339,6 +339,7 @@
         { "source": "/kikisbytes", "destination": "/?utm_source=kikisbytes&utm_campaign=kikisbytes" },
         { "source": "/raroque", "destination": "/?utm_source=raroque&utm_campaign=raroque" },
         { "source": "/ashishps", "destination": "/?utm_source=ashishps&utm_campaign=ashishps" },
+        { "source": "/codesource", "destination": "/?utm_source=codesource&utm_campaign=codesource" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
@@ -587,6 +588,7 @@
         },
         { "source": "/eu-cloud", "destination": "/eu" },
         { "source": "/handbook/strategy/roadmap", "destination": "/roadmap" },
+        { "source": "/handbook/strategy/diversity", "destination": "/handbook/company/grown-ups" },
         {
             "source": "/docs/architecture/ingestion-pipeline",
             "destination": "/docs/how-posthog-works/ingestion-pipeline"
@@ -1322,6 +1324,12 @@
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },
         { "source": "/docs/webhooks/discord", "destination": "/docs/cdp/destinations/webhook" },
-        { "source": "/teams/website-docs", "destination": "/teams/website-vibes" }
+        { "source": "/teams/website-docs", "destination": "/teams/website-vibes" },
+        { "source": "/docs/session-replay/android", "destination": "/docs/session-replay/installation?tab=Android" },
+        { "source": "/docs/session-replay/ios", "destination": "/docs/session-replay/installation?tab=iOS" },
+        {
+            "source": "/docs/session-replay/react-native",
+            "destination": "/docs/session-replay/installation?tab=React+Native"
+        }
     ]
 }

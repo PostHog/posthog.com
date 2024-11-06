@@ -257,6 +257,28 @@ Adding the `:ticket:` emoji reaction will cause Pylon to add a couple of replies
 
 ZenDesk tickets created this way will normally be marked as high priority tickets. You can respond to them either in Zendesk or Slack, as there is a two-way sync.
 
+### Adding new teams to Zendesk.
+
+When we've added a new [team](/teams), or 🪓 split an existing team into two or more, we'll need to get them set up in Zendesk. Here's an overview of the steps:
+
+- [Create a new group in Zendesk](https://support.zendesk.com/hc/en-us/articles/4408894175130-Creating-groups)
+- [Add team members to the group](https://support.zendesk.com/hc/en-us/articles/4408821536794-Adding-and-removing-team-members-from-groups#topic_skt_qrs_4nb) 
+- [Add triggers](https://support.zendesk.com/hc/en-us/articles/4408843730458-Triggers-resources) to the `Routing for internal teams` category (Tip: Clone an existing trigger, rename it, and tweak it)
+- [Add views](https://support.zendesk.com/hc/en-us/articles/4408888828570-Creating-views-to-build-customized-lists-of-tickets) (Tip: Clone an existing view, rename it, and tweak it.)
+- Add Slack notification [triggers](https://posthoghelp.zendesk.com/admin/objects-rules/rules/triggers) (Tip: Clone an existing trigger, yada, yada)
+- Add SLA breach alerts
+	- [Create a webhook endpoint in slack](https://api.slack.com/messaging/webhooks)
+		- [Create a Slack app](https://api.slack.com/apps/new)
+		- [Enable incoming webhooks](https://api.slack.com/messaging/webhooks#enable_webhooks)
+		- [Create a webhook to the channel](https://api.slack.com/messaging/webhooks#create_a_webhook), copy the url
+	- [Create a webhook in zendesk](https://support.zendesk.com/hc/en-us/articles/4408839108378-Creating-webhooks-to-interact-with-third-party-systems) (Tip: Refer to existing webhooks for common settings)
+		- Choose "Trigger or automation"
+		- Paste the endpoint url you copied from the Slack app
+		  (Note: The built-in tool for testing webhooks in ZD has been flakey while the UI has been changing lately. Failed tests don't always mean the hook won't work. 🫤)
+	- [Create an automation in zendesk](https://support.zendesk.com/hc/en-us/articles/4408832701850-About-automations-and-how-they-work?Z2_EN-US%5Bquery%5D=a) (Tip: Clone an existing automation, blah, blah, blah)
+- If you've split a team, sort the tickets to the new groups as needed, then disable the triggers, automations, and views related to the old team.
+- Carry on
+
 ### Community questions
 
 At the end of every page in the docs and handbook is a form where visitors can ask questions about the content of that page. (These questions also appear in the relevant category in the [PostHog community](/questions).)

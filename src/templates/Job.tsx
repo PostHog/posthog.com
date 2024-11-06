@@ -109,8 +109,15 @@ export default function Job({
     const [jobTitle] = title.split(' - ')
 
     return (
-        <Layout parent={companyMenu}>
-            <SEO title={`${title} - PostHog`} image={`/og-images/${slug.replace(/\//g, '')}.jpeg`} />
+        <Layout
+            parent={companyMenu}
+            activeInternalMenu={companyMenu.children.find(({ name }) => name.toLowerCase() === 'careers')}
+        >
+            <SEO
+                title={`${title} - PostHog`}
+                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${slug.replace(/\//g, '')}.jpeg`}
+                imageType="absolute"
+            />
             <div className="">
                 <PostLayout
                     tableOfContents={[

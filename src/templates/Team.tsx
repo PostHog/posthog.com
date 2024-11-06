@@ -22,7 +22,7 @@ import getAvatarURL from 'components/Squeak/util/getAvatar'
 import Markdown from 'markdown-to-jsx'
 import { AddTeamMember } from 'components/TeamMembers'
 import useTeam from 'hooks/useTeam'
-import { IconInfo, IconX } from '@posthog/icons'
+import { IconArrowLeft, IconInfo, IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
@@ -31,6 +31,7 @@ import usePostHog from '../hooks/usePostHog'
 import { companyMenu } from '../navs'
 import { PrivateLink } from 'components/PrivateLink'
 import Stickers from 'components/ProfileStickers'
+import TeamPatch from 'components/TeamPatch'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -159,7 +160,7 @@ export default function Team({
     data: {
         mdx: { body },
         allSlackEmoji: { totalCount: totalSlackEmojis },
-        team: { crest, name, roadmaps, teamImage, ...other },
+        team: { crest, crestOptions, name, roadmaps, teamImage, ...other },
         objectives,
     },
     pageContext,
@@ -171,7 +172,7 @@ export default function Team({
     const description = team?.attributes?.description
     const profiles = team?.attributes?.profiles
     const leadProfiles = team?.attributes?.leadProfiles
-    const teamName = `${name} Team`
+    const teamName = name
     const teamLength = profiles?.data?.length
     const pineapplePercentage =
         teamLength &&
@@ -237,9 +238,21 @@ export default function Team({
             </SideModal>
             <Section className="mb-6">
                 <div className="flex flex-col md:flex-row space-x-4 items-center">
-                    <GatsbyImage image={getImage(crest)} alt={teamName} />
+                    <TeamPatch
+                        name={teamName}
+                        imageUrl={crest?.data?.attributes?.url}
+                        className="h-48 md:h-80 -mt-2 md:-mt-6 mb-2 md:mb-0"
+                        {...crestOptions}
+                    />
                     <div className="max-w-xl w-full">
-                        <h1 className="m-0">{teamName}</h1>
+                        <Link
+                            href="/teams"
+                            className="-ml-2 mb-1 inline-flex items-center gap-1 text-sm text-primary/50 dark:text-primary-dark/50 hover:text-primary dark:hover:text-primary-dark relative px-2 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                        >
+                            <IconArrowLeft className="size-5" />
+                            <span>Teams</span>
+                        </Link>
+                        <h1 className="m-0">{teamName} Team</h1>
                         {editingDescription ? (
                             <DescriptionForm
                                 initialValues={{ description }}
@@ -564,7 +577,23 @@ export const query = graphql`
                 gatsbyImageData(width: 380)
             }
             crest {
-                gatsbyImageData(width: 227)
+                data {
+                    attributes {
+                        url
+                    }
+                }
+            }
+            crestOptions {
+                textColor
+                textShadow
+                fontSize
+                frame
+                frameColor
+                plaque
+                plaqueColor
+                imageScale
+                imageXOffset
+                imageYOffset
             }
             roadmaps {
                 squeakId

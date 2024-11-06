@@ -1,13 +1,11 @@
 ---
-title: Send data to ActiveCampaign
+title: Send PostHog person data to ActiveCampaign
 templateId: template-activecampaign
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send person data from PostHog into ActiveCampaign.
 
 <Requirements />
 

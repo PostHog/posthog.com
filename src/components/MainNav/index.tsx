@@ -270,7 +270,7 @@ const TheoTooltip = () => {
                 <p className="text-sm m-0">
                     <Link
                         className="text-red dark:text-yellow font-bold cursor-pointer"
-                        to="https://www.x.com/t3dotgg"
+                        to="https://www.x.com/theo"
                         externalNoIcon
                     >
                         Theo - t3.gg

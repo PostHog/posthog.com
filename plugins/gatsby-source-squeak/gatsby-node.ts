@@ -69,89 +69,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         page++
     }
 
-    // Fetch all questions
-    page = 1
-    while (true) {
-        let questionQuery = qs.stringify({
-            pagination: {
-                page,
-                pageSize: 100,
-            },
-            populate: {
-                profile: {
-                    fields: ['id'],
-                },
-                replies: {
-                    populate: {
-                        profile: {
-                            fields: ['id'],
-                        },
-                    },
-                },
-                topics: {
-                    fields: ['id'],
-                },
-                resolvedBy: {
-                    fields: ['id'],
-                },
-            },
-        })
-
-        const questions = await fetch(`${apiHost}/api/questions?${questionQuery}`).then((res) => res.json())
-
-        for (let question of questions.data) {
-            const { topics, replies, profile, resolvedBy, ...rest } = question.attributes
-
-            if (!profile.data?.id) {
-                console.warn(`Question ${question.id} has no profile`)
-                continue
-            }
-
-            const filteredReplies = replies.data.filter((reply) => reply.attributes.profile.data?.id)
-
-            createNode({
-                type: `SqueakQuestion`,
-                id: createNodeId(`squeak-question-${question.id}`),
-                squeakId: question.id,
-                internal: {
-                    contentDigest: createContentDigest(question),
-                    type: `SqueakQuestion`,
-                },
-                ...(profile.data && { profile: { id: createNodeId(`squeak-profile-${profile.data.id}`) } }),
-                replies: filteredReplies.map((reply) => ({
-                    id: createNodeId(`squeak-reply-${reply.id}`),
-                })),
-                topics: topics.data.map((topic) => ({
-                    id: createNodeId(`squeak-topic-${topic.id}`),
-                })),
-                ...rest,
-                resolvedBy: createNodeId(`squeak-reply-${resolvedBy?.data?.id}`),
-            })
-
-            for (let reply of filteredReplies) {
-                const { profile, ...replyData } = reply.attributes
-
-                createNode({
-                    type: `SqueakReply`,
-                    id: createNodeId(`squeak-reply-${reply.id}`),
-                    squeakId: reply.id,
-                    internal: {
-                        contentDigest: createContentDigest(replyData.body),
-                        type: `SqueakReply`,
-                        content: replyData.body,
-                    },
-                    ...(profile.data && { profile: { id: createNodeId(`squeak-profile-${profile.data.id}`) } }),
-                    ...replyData,
-                })
-            }
-        }
-
-        if (questions.meta.pagination.page >= questions.meta.pagination.pageCount) {
-            break
-        }
-        page++
-    }
-
     // Fetch all topic groups
     let query = qs.stringify({
         populate: {
@@ -225,6 +142,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
                     fields: 'id',
                 },
                 crest: true,
+                crestOptions: true,
                 miniCrest: true,
                 teamImage: {
                     populate: {
@@ -396,26 +314,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             color: String
         }
 
-        type SqueakQuestion implements Node {
-            id: ID!
-            squeakId: Int!
-            body: String!
-            createdAt: Date! @dateformat
-            profile: SqueakProfile! @link(by: "id", from: "profile.id")
-            replies: [SqueakReply!] @link(by: "id", from: "replies.id")
-            topics: [SqueakTopic!] @link(by: "id", from: "topics.id")
-            resolvedBy: SqueakReply @link(by: "id")
-        }
-
-        type SqueakReply implements Node {
-            id: ID!
-            squeakId: Int!
-            body: String!
-            createdAt: Date! @dateformat
-            profile: SqueakProfile! @link(by: "id", from: "profile.id")
-            question: SqueakQuestion! @link(from: "id", to: "question")
-        }
-
         type SqueakTopicGroup implements Node {
             id: ID!
             squeakId: Int!
@@ -430,13 +328,25 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             slug: String!
             label: String!
         }
-
+        type SqueakCrestOption {
+            textColor: String
+            textShadow: String
+            fontSize: String
+            frame: String
+            frameColor: String
+            plaque: String
+            plaqueColor: String
+            imageScale: Int
+            imageXOffset: Int
+            imageYOffset: Int
+        }
         type SqueakTeam implements Node {
             id: ID!
             squeakId: Int!
             name: String!
             roadmaps: [SqueakRoadmap!] @link(by: "id", from: "roadmaps.id")
             emojis: [SlackEmoji] @link(by: "name", from: "emojis")
+            crestOptions: SqueakCrestOption
         }
 
         type SqueakRoadmap implements Node {
