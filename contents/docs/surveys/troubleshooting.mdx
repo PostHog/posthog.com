@@ -55,15 +55,13 @@ You can call `getActiveMatchingSurveys` in your browser console to see which sur
 posthog.getActiveMatchingSurveys(surveys => console.log(surveys))
 ```
 
-### I set a survey to be activated based on an event, but it shows up to users who haven't sent that event.
+### I set a survey activate based on an event, why does it show up to users who haven't sent that event?
 
-Check the version of posthog-js in use in your application, If its lower than `v1.143.0`,
-please upgrade your installation of `posthog-js` to the latest to support event based surveys.
+Check your `posthog-js` version. If its lower than `v1.143.0`, please upgrade your installation of `posthog-js` to the latest to support event based surveys.
 
-### I set a survey to be activated based on an Action, but it shows up to users who haven't performed that action.
+### I set a survey to be activated based on an action. Why does it shows up to users who haven't performed that action?
 
-Check the version of posthog-js in use in your application, If its lower than `v1.151.0`,
-please upgrade your installation of `posthog-js` to the latest to support event based surveys.
+Check your `posthog-js` version.  If its lower than `v1.151.0`, please upgrade your installation of `posthog-js` to the latest to support action based surveys.
 
 ### Why am I getting a feature flags error on my survey?
 
