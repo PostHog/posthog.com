@@ -86,7 +86,7 @@ You can tweak how autocapture works by passing custom options.
     ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
     customLabelProp: "ph-label",
     noCaptureProp: "ph-no-capture",
-    propsToCapture = ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
+    propsToCapture: ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
 
     navigation: {
         // By default, only the screen name is tracked but it is possible to track the
@@ -95,7 +95,7 @@ You can tweak how autocapture works by passing custom options.
             if (params.id) return `${name}/${params.id}`
             return name
         },
-        routeToParams: (name, params) => {
+        routeToProperties: (name, params) => {
             if (name === "SensitiveScreen") return undefined
             return params
         },

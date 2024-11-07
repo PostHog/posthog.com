@@ -1,5 +1,5 @@
 ---
-title: Schema Enforcer
+title: Enforce a schema on ingested events
 github: 'https://github.com/PostHog/schema-enforcer-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=Schema%20Enforcer'
 thumbnail: >-

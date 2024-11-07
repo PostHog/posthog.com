@@ -1,5 +1,5 @@
 ---
-title: URL query parameter converter
+title: Convert URL query parameters to event properties
 github: 'https://github.com/PostHog/posthog-app-url-parameters-to-event-properties'
 installUrl: 'https://app.posthog.com/project/apps?name=url-query-parameter-converter'
 thumbnail: >-

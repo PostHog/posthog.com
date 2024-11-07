@@ -1,13 +1,11 @@
 ---
-title: Send data to RudderStack
+title: Send PostHog event data to RudderStack
 templateId: template-rudderstack
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send events from PostHog into RudderStack.
 
 <Requirements />
 

@@ -98,12 +98,16 @@ export const handbookSidebar = [
                         url: '/handbook/getting-started/meetings',
                     },
                     {
+                        name: 'Using GitHub',
+                        url: '/handbook/company/new-to-github',
+                    },
+                    {
                         name: 'Goal setting',
                         url: '/handbook/company/goal-setting',
                     },
                     {
-                        name: 'Diversity and inclusion',
-                        url: '/handbook/company/diversity',
+                        name: 'A grown-up company',
+                        url: '/handbook/company/grown-ups',
                     },
                     {
                         name: 'Communication',
@@ -720,6 +724,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/billing',
                     },
                     {
+                        name: 'Trials',
+                        url: '/handbook/growth/sales/trials',
+                    },
+                    {
                         name: 'Refunds',
                         url: '/handbook/growth/sales/refunds',
                     },
@@ -1003,10 +1011,10 @@ export const companyMenu = {
             color: 'red',
             url: '/changelog/2024',
         },
-        { name: 'People', icon: 'IconProfile', color: 'blue', url: '/people' },
+        { name: 'People', icon: 'IconPeople', color: 'blue', url: '/people' },
         {
             name: 'Teams',
-            icon: 'IconPeople',
+            icon: 'IconShieldPeople',
             color: 'purple',
             url: '/teams',
             children: [
@@ -1394,6 +1402,10 @@ export const docsMenu = {
                         {
                             name: 'Webflow',
                             url: '/docs/libraries/webflow',
+                        },
+                        {
+                            name: 'WooCommerce',
+                            url: '/docs/libraries/woocommerce',
                         },
                         {
                             name: 'WordPress',
@@ -2296,6 +2308,19 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Conversion goals',
+                    url: '/docs/web-analytics/conversion-goals',
+                    icon: 'IconFunnels',
+                    color: 'purple',
+                },
+                {
+
+                    name: 'Web vs product analytics',
+                    url: '/docs/web-analytics/web-vs-product-analytics',
+                    icon: 'IconGraph',
+                    color: 'red',
+                },
+                {
                     name: 'FAQ',
                     url: '/docs/web-analytics/faq',
                     icon: 'IconQuestion',
@@ -2683,7 +2708,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'CDP',
+            name: 'Data pipelines',
             url: '/docs/cdp',
             color: 'sky-blue',
             icon: 'IconPlug',
@@ -2972,6 +2997,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/setup/vitally',
                         },
                         {
+                            name: 'Chargebee',
+                            url: '/docs/data-warehouse/setup/chargebee',
+                        },
+                        {
                             name: 'Self-managed',
                         },
                         {
@@ -3180,7 +3209,7 @@ const menu = [
                 url: '/surveys',
             },
             {
-                name: 'CDP',
+                name: 'Data pipelines',
                 icon: 'IconPlug',
                 color: 'sky-blue',
                 url: '/cdp',
