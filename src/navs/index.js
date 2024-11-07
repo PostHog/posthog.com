@@ -2308,10 +2308,17 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Conversion goals',
+                    url: '/docs/web-analytics/conversion-goals',
+                    icon: 'IconFunnels',
+                    color: 'purple',
+                },
+                {
+
                     name: 'Web vs product analytics',
                     url: '/docs/web-analytics/web-vs-product-analytics',
                     icon: 'IconGraph',
-                    color: 'purple',
+                    color: 'red',
                 },
                 {
                     name: 'FAQ',
