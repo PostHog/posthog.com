@@ -364,7 +364,7 @@ export const ProductSessionReplay = () => {
             netdata: mdx(slug: { eq: "customers/netdata" }) {
                 ...ProductCustomerFragment
             }
-            pry: mdx(slug: { eq: "customers/swype" }) {
+            swype: mdx(slug: { eq: "customers/swype" }) {
                 ...ProductCustomerFragment
             }
         }
