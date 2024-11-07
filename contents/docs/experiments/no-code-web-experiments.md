@@ -1,5 +1,5 @@
 ---
-title: Running no-code web experiments
+title: Creating a no-code web experiment
 sidebar: Docs
 showTitle: true
 author:
@@ -9,9 +9,6 @@ tags:
   - experimentation
   - feature flags
 ---
-
-- **Level:** Medium 🦔🦔
-- **Estimated reading time:** 10 minutes ☕️☕️
 
 PostHog's no-code web experiments allow you to test experiments that modify your website without writing a single line of code.  
 Verify your web experiment without launching it by using the **preview variant** button and confirm that everything works as expected.
@@ -39,15 +36,13 @@ The **experiment type** setting allows you to choose how your experiment will be
    - Choose this option to define variants on your website without writing code.
    - This setup leverages the PostHog toolbar, allowing you to make adjustments effortlessly.
 
-![New web experiment](https://res.cloudinary.com/dmukukwp6/image/upload/create_web_exp_ca7eb06c0b.png)
-
 We will select the **no-code web experiment** option for our experiment.
 
 ---
 
 #### Modifying your website
 
-Once you've created the web experiment, you will find a new option in the **implementation** section of your experiment on PostHog.  
+Once you've created the web experiment, you will find a new option in the **Implementation** section of your experiment on PostHog.  
 You can define variant changes directly on your website using the PostHog toolbar. This allows you to select elements and apply transformations for each variant in your experiment.
 
 ![Implement web experiment](https://res.cloudinary.com/dmukukwp6/image/upload/web_exp_implementation_ddd1848103.png)
