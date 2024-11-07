@@ -502,11 +502,6 @@ export const ProductAbTesting = () => {
 
                     <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20 mx-5 md:mx-0">
                         <TutorialCard
-                            title="Running no-code web experiments"
-                            description="Optimizing the initial experience of new users is critical for turning them into existing users. Products have a limited amount of time and attention from new users before they leave and churn."
-                            url="/tutorials/new-user-experiments"
-                        />
-                        <TutorialCard
                             title="Running experiments on new users"
                             description="Optimizing the initial experience of new users is critical for turning them into existing users. Products have a limited amount of time and attention from new users before they leave and churn."
                             url="/tutorials/new-user-experiments"

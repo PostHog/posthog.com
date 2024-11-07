@@ -2556,6 +2556,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Creating a no-code experiment',
+                    url: '/docs/experiments/no-code-web-experiments',
+                    icon: 'IconTarget',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Adding your code',
                     url: '/docs/experiments/adding-experiment-code',
                     icon: 'IconCode',
