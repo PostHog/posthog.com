@@ -1,6 +1,7 @@
 import SettingProperties from "./setting-properties-text.mdx" 
 import NamingTip from "./naming-tip.mdx" 
 import Intro from "./intro.mdx" 
+import IOSAutocapture from "../../../libraries/ios/_snippets/autocapture.mdx"
 
 <Intro />
 
@@ -15,3 +16,7 @@ PostHogSDK.shared.capture("user_signed_up")
 ```swift
 PostHogSDK.shared.capture("user_signed_up", properties: ["login_type": "email"], userProperties: ["is_free_trial": true])
 ```
+
+## Autocapture
+
+<IOSAutocapture />
