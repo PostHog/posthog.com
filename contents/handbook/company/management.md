@@ -22,6 +22,8 @@ A manager at PostHog is _not_ responsible for:
 7. Anything legal-related, e.g. someone wants to quit or thinks they did something illegal - route this to the exec team
 8. Deciding to hire or fire people - the exec team do this
 
+This guidance applies to all teams, irrespective of whether you manage an engineering or non-engineering team. 
+
 ### Part-time managers
 
 Because of the relatively short list of tasks that managers have, management at PostHog is a part-time job. That means everyone, including the founders, still spend the majority of their time on practising what they do best - for most managers, this isn't actually management!
@@ -103,7 +105,7 @@ We also run a monthly, totally optional discussion group for managers, which Cha
 Rules:
 - Assume everything is confidential by default - if you want to raise something outside of the meeting, get permission from the relevant person first. For this reason, we don't take notes - take your own personal notes if you want to remember something. 
 - Make sure everyone gets a chance to speak. If we talked about your topic last time, consider not raising one this time. 
-- The session is about helping you to be a better manager - if you want to solve company-wide/cross-functional problems, there will likely be a better venue for this, e.g. an Issue, Slack, or tech leads meeting. 
+- The session is about helping you to be a better manager - if you want to solve company-wide/cross-functional problems, there will likely be a better venue for this, e.g. an Issue, Slack, or tech leads meeting.
 
 ## Recommended reading
 
