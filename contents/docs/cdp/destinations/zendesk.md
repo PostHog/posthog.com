@@ -1,5 +1,5 @@
 ---
-title: Zendesk
+title: Send PostHog person data to Zendesk
 templateId: template-zendesk
 ---
 
@@ -7,7 +7,7 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-Send person data from PostHog into Zendesk. You can also send person properties to User fields in Zendesk.
+You can also send person properties to User fields in Zendesk.
 
 <Requirements />
 
@@ -20,6 +20,8 @@ You'll also need access to the relevant Zendesk account.
 3. Search for 'Zendesk' and select the destination.
 4. Add your Zendesk subdomain, user email, and API token at the configuration step.
 5. Press 'Create & Enable' and watch your 'Customer' list get populated in Zendesk!
+
+<HideOnCDPIndex>
 
 ## Configuration
 
@@ -34,3 +36,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

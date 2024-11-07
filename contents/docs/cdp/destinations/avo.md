@@ -1,13 +1,11 @@
 ---
-title: Avo
+title: Send PostHog event data to Avo
 templateId: template-avo
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send event data from PostHog into Avo.
 
 <Requirements />
 
@@ -20,6 +18,8 @@ You'll also need access to the relevant Avo account.
 3. Search for 'Avo' and select the destination.
 4. Add your Avo access token at the configuration step.
 5. Press 'Create & Enable' and watch your 'Events' list get populated in Avo!
+
+<HideOnCDPIndex>
 
 ## Configuration
 
@@ -34,3 +34,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

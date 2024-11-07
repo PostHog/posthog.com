@@ -1,13 +1,11 @@
 ---
-title: Mailgun
+title: Send PostHog person data to Mailgun
 templateId: template-mailgun-send-email
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send person data from PostHog into Mailgun.
 
 <Requirements />
 
@@ -20,6 +18,8 @@ You'll also need access to the relevant Mailgun account.
 3. Search for 'Mailgun' and select the destination.
 4. Add your Mailgun API Key at the configuration step.
 5. Press 'Create & Enable' and watch your 'Contacts' list get populated in Mailgun!
+
+<HideOnCDPIndex>
 
 ## Configuration
 
@@ -34,3 +34,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

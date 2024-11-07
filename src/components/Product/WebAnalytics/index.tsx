@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -11,6 +12,8 @@ import {
     IconPassword,
     IconGraph,
     IconFlask,
+    IconMessage,
+    IconRewindPlay,
     IconToggle,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
@@ -58,31 +61,31 @@ const features = [
     {
         title: 'Top paths',
         description: 'See the most visited pages on your site',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/top-paths.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/top-paths.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Top referrers',
         description: 'Discover where traffic is coming from',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/top-referrers.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/top-referrers.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Device types',
         description: 'Break down traffic by device',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/device-types.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/device-types.jpg" width={420} />,
         border: true,
     },
     {
         title: 'World map',
         description: 'Visualize users across planet earth',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/world-map.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/world-map.jpg" width={420} />,
         border: true,
     },
     {
         title: 'Retention cohorts',
         description: 'Analyze retention by week',
-        image: <StaticImage src="../../../../static/images/products/web-analytics/retention-cohorts.jpg" width={420} />,
+        image: <img src="/images/products/web-analytics/retention-cohorts.jpg" width={420} />,
         border: true,
     },
 ]
@@ -163,7 +166,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -276,19 +279,22 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description: 'Need to go deeper than a dashboard? Building your own insights and HogQL queries from scratch!',
         url: '/product-analytics',
     },
     {
-        icon: <IconToggle />,
-        product: 'Session replays',
+        icon: <IconRewindPlay />,
+        color: 'yellow',
+        product: 'Session replay',
         description:
-            "Get more context by watching what users actually do on your site. It's not creepy if you have permission.",
+            "Get more context by watching what users actually do on your site. Spot the nuances that quantifiable data doesn't tell you.",
         url: '/session-replays',
     },
     {
-        icon: <IconFlask />,
+        icon: <IconMessage />,
+        color: 'salmon',
         product: 'Surveys',
         description:
             'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
@@ -341,8 +347,8 @@ export const ProductWebAnalytics = () => {
                 />
 
                 <div className="text-center -mb-24">
-                    <StaticImage
-                        src="../../../../static/images/products/web-analytics/screenshot-web-analytics.png"
+                    <img
+                        src="/images/products/web-analytics/screenshot-web-analytics.png"
                         alt="Screenshot of web analytics in PostHog"
                         className="w-full max-w-[1440px]"
                         placeholder="none"
@@ -431,7 +437,7 @@ export const ProductWebAnalytics = () => {
                         </p>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/session-replay-hog.png" alt="" />
+                        <CloudinaryImage placeholder="none" quality={100} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/session-replay-hog.png" alt="" />
                     </div>
                 </div>
 
@@ -462,8 +468,8 @@ export const ProductWebAnalytics = () => {
                             <VsCompetitor
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-sr.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-sr.png"
                                         className="max-w-[167px]"
                                     />
                                 }

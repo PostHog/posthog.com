@@ -1,13 +1,11 @@
 ---
-title: Knock
+title: Send PostHog event data to Knock
 templateId: template-knock
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send event data from PostHog into Knock.
 
 <Requirements />
 
@@ -20,6 +18,8 @@ You'll also need access to the relevant Knock account.
 3. Search for 'Knock' and select the destination.
 4. Add your Knock.app webhook destination URL at the configuration step.
 5. Press 'Create & Enable' and watch your 'Audience' list get populated in Knock!
+
+<HideOnCDPIndex>
 
 ## Configuration
 
@@ -34,3 +34,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

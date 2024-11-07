@@ -206,13 +206,14 @@ On Linux you often have separate packages: `postgres` for the tools, `postgres-s
 
 #### 3. Prepare plugin server
 
-Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all required packages. You'll also need to install the `brotli` compression library and `rust` stable via `rustup`:
+1. Install the `brotli` compression library and `rust` stable via `rustup`:
 
 - On macOS:
     ```bash
     brew install brotli rustup
     rustup default stable
     rustup-init
+    # Select 1 to proceed with default installation
     ```
 - On Debian-based Linux:
     ```bash
@@ -220,8 +221,7 @@ Assuming Node.js is installed, run `pnpm i --dir plugin-server` to install all r
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     # Select 1 to proceed with default installation
     ```
-
-We'll run the plugin server in a later step.
+2. Run `pnpm i --dir plugin-server` to install all required packages. We'll actually run the plugin server in a later step.
 
 > Note: If you face an error like `ld: symbol(s) not found for architecture arm64`, most probably your openssl build flags are coming from the wrong place. To fix this, run:
 ```bash
@@ -396,7 +396,7 @@ To see debug logs (such as ClickHouse queries), add argument `--log-cli-level=DE
 
 ### End-to-end
 
-For Cypress end-to-end tests, run `bin/e2e-test-runner`. This will spin up a test instance of PostHog and show you the Cypress interface, from which you'll manually choose tests to run. Once you're done, terminate the command with Cmd + C.
+For Cypress end-to-end tests, run `bin/e2e-test-runner`. This will spin up a test instance of PostHog and show you the Cypress interface, from which you'll manually choose tests to run. You'll need `uv` installed (the Python package manager), which you can do so with `brew install uv`. Once you're done, terminate the command with Cmd + C.
 
 ## Extra: Working with feature flags
 

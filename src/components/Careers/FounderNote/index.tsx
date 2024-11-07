@@ -90,7 +90,7 @@ export const FounderNote = () => {
                             </li>
                             <li>lots of deep work time</li>
                             <li>we will raise feedback constructively and will encourage crazy ideas</li>
-                            <li>lots of weird in jokes</li>
+                            <li>lots of weird inside jokes</li>
                         </ul>
                     </Tweet>
 

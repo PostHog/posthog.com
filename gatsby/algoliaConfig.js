@@ -102,39 +102,6 @@ module.exports = {
                 },
             },
             {
-                query: `
-                            {
-                              questions: allSqueakQuestion(filter: {permalink: {ne: null}, archived: {ne: true}}) {
-                                nodes {
-                                  id
-                                  title: subject
-                                  body
-                                  resolvedBy {
-                                    body
-                                  }
-                                  resolved
-                                  permalink
-                                  internal {
-                                    contentDigest
-                                  }
-                                }
-                              }
-                            }
-                        `,
-                transformer: ({ data }) => {
-                    return data.questions.nodes.map(({ body, permalink, resolvedBy, ...question }) => {
-                        return {
-                            ...question,
-                            excerpt: body,
-                            slug: `questions/${permalink || ''}`,
-                            type: 'question',
-                            path_ranking: 5,
-                            resolutionBody: resolvedBy?.body,
-                        }
-                    })
-                },
-            },
-            {
                 query: `{ query: sitePage { id } }`,
                 transformer: () => {
                     return [

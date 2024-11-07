@@ -1,13 +1,11 @@
 ---
-title: Customer.io
+title: Send PostHog event data to Customer.io
 templateId: template-customerio
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send event data from PostHog into Customer.io.
 
 <Requirements />
 
@@ -20,6 +18,8 @@ You'll also need access to the relevant Customer.io account.
 3. Search for 'Customer.io' and select the destination.
 4. Add your Customer.io site ID and API Key at the configuration step.
 5. Press 'Create & Enable' and watch your 'People' list get populated in Customer.io!
+
+<HideOnCDPIndex>
 
 ## Configuration
 
@@ -34,3 +34,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

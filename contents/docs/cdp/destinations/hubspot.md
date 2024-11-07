@@ -1,13 +1,11 @@
 ---
-title: Hubspot
+title: Send PostHog person data to Hubspot
 templateId: template-hubspot
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send person data from PostHog into Hubspot.
 
 <Requirements />
 
@@ -20,6 +18,8 @@ You'll also need access to the relevant Hubspot account.
 3. Search for 'Hubspot' and select the destination.
 4. Connect your Hubspot account at the configuration step.
 5. Press 'Create & Enable' and watch your 'Contacts' list get populated in Hubspot!
+
+<HideOnCDPIndex>
 
 ## Configuration
 
@@ -34,3 +34,5 @@ PostHog is open-source and so are all the destination on the platform. The [sour
 <PostHogMaintained />
 
 <FeedbackQuestions />
+
+</HideOnCDPIndex>

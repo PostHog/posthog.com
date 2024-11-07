@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import GitHubButton from 'react-github-btn'
@@ -43,8 +44,8 @@ export const AboutStory = () => {
                     <YCBadge className="w-[95px] h-[63px] md:mr-12 lg:top-0" />
                 </div>
                 <div className="flex justify-end relative">
-                    <StaticImage
-                        src="./images/hn-screenshot.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/About/AboutStory/images/hn-screenshot.png"
                         width={620}
                         height={397.5}
                         alt="PostHog launches on HackerNews"
@@ -54,10 +55,10 @@ export const AboutStory = () => {
                     <div className="bg-gradient-to-b from-transparent to-tan dark:to-dark absolute w-full h-[60%] md:h-full md:top-12 lg:top-[initial] lg:h-[60%] bottom-0" />
                 </div>
                 <div className="absolute -bottom-8 lg:-bottom-16 left-4 md:-left-4 lg:-left-4">
-                    <StaticImage
+                    <CloudinaryImage
                         breakpoints={[750, 1080, 1366, 1920]}
-                        src="./images/james.png"
-                        width={385.5}
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/About/AboutStory/images/james.png"
+                        width={386}
                         height={366}
                         quality={100}
                         alt="James Hawkins, CEO, Co-founder"
@@ -72,9 +73,9 @@ export const AboutStory = () => {
                     <span className="block text-sm">CEO, Co-founder</span>
                 </div>
                 <div className="absolute bottom-0 lg:-bottom-2 right-0 sm:right-12 lg:right-8">
-                    <StaticImage
+                    <CloudinaryImage
                         breakpoints={[750, 1080, 1366, 1920]}
-                        src="./images/tim.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/About/AboutStory/images/tim.png"
                         width={285}
                         height={320}
                         quality={100}

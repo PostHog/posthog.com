@@ -1,14 +1,30 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { LazyHog } from 'components/About/AboutHero'
 import { CallToAction } from 'components/CallToAction'
 import { StaticImage } from 'gatsby-plugin-image'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Lottie from 'react-lottie'
 
 export default function CommunityCTA() {
-    const [hog1Data, setHog1Data] = React.useState<any | null>(null)
+    const [hog1Data, setHog1Data] = useState<any | null>(null)
 
     useEffect(() => {
-        import('../../../static/lotties/about-hog-1.json').then((data) => setHog1Data(data.default))
+        // Define the URL as a constant
+        const HOG_ANIMATION_URL = 'https://res.cloudinary.com/dmukukwp6/raw/upload/about_hog_1_1731825e07.json'
+
+        // Use async/await for cleaner code
+        const fetchHogAnimation = async () => {
+            try {
+                const response = await fetch(HOG_ANIMATION_URL)
+                const data = await response.json()
+                setHog1Data(data)
+            } catch (error) {
+                console.error('Failed to load hog animation:', error)
+                // Handle the error appropriately (e.g., set a fallback image)
+            }
+        }
+
+        fetchHogAnimation()
     }, [])
 
     return (
@@ -24,7 +40,7 @@ export default function CommunityCTA() {
                         }}
                     />
                 ) : (
-                    <StaticImage width={300} src="../../images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
+                    <CloudinaryImage width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
                 )}
             </div>
             <div className="max-w-[400px]">

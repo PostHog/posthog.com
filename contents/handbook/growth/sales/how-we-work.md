@@ -22,6 +22,8 @@ Other metrics we generally care about:
 
 Each AE is assigned ~10 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 20 accounts, so staying extremely focused is important. 
 
+Each CSM is assigned ~50 existing customer accounts to work with.
+
 Simon and Charles will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense. 
 
 ### Handing-off customers from AE to CSM
@@ -54,11 +56,11 @@ The reason for structuring the review in this way is that we find it is much mor
 
 The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - [you should not let your team mates fail](/culture#dont-let-others-fail). 
 
-## New AE hire ramp up
+## New sales team hire ramp up
 - Day 1
   - Read the whole sales playbook (and updating it throughout as you learn more)
   - Get using PostHog - start making insights and dashboards
-  - Assigned your account list of 10-20 customers
+  - Assigned your customers
 - Week 1
   - Reviewed your account list and prioritized/asked questions about them internally 
   - Delivered a standard demo to the PostHog team and got feedback
@@ -67,21 +69,22 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - Week 2
   - Contributed to customer calls with backup from an existing team member
   - Understand how to work PandaDoc, HubSpot, Vitally, Stripe, Metabase (ie. contracts, billing, reporting)
-  - Built a plan for which monthly customers to target for annual plans and/or cross-sell
+  - Built a plan for which customers to prioritize
   - Completed 1-1s with anyone relevant at PostHog
 - Month 1
   - Leading customer calls and demos on your own
-  - Have evaluations in flight with support from team if needed
+  - Have evaluations in flight with support from team if needed (AE)
   - Had contact with _everyone_ in your book of business in some form
+  - Starting to solve technical problems for your book with occasional help (CSM)
 - Month 2
-  - Closed your first Medium annual deal (new or conversion to annual)
-  - Leading evaluations on your own
-  - Identified some opportunities to add to your book from self-serve signups who aren't paying yet
+  - Closed your first Medium annual deal (new or conversion to annual) (AE)
+  - Leading evaluations on your own (AE)
+  - Identified some opportunities to add to your book from self-serve signups who aren't paying yet (AE)
 - Month 3-4
-  - Closed multiple contracts by this point (either new or expansion/renewal) through the whole process
-  - Closed at least one Large annual deal (new or conversion to annual)
+  - Closed multiple contracts by this point (either new or expansion/renewal) through the whole process (AE)
+  - Independently working with your entire book to solve tricky technical problems with minimal assistant (CSM)
  
-## How commission works
+## How commission works - AEs
 
 **General principles**
 
@@ -95,31 +98,49 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 **Variables**
 
-- Your quota is based on the _total ARR of your book of business (new and existing customers)_ - ie. any revenue counts.
+- Your quota is set as _the additional $ you are expected to add to your book of business_ - ie. any new revenue counts.
+  - For example, if you start a quarter with $700k in ARR and are set a target to grow this by $200k ARR, your commission is based on your attainment towards the $200k figure. 
 - This means you can hit quota by a combo of bringing in new business and expanding existing. 
 - It also means that you are less likely to totally neglect existing customers because if they churn, it hurts your overall ARR figure.
-- Commission is uncapped and paid out based on:
+- Commission is _uncapped_ and paid out based on:
   - X% of ARR for new annual deals sold
-  - X% of ARR for renewed annual deals sold
+  - X% of ARR for expanded annual deals sold
     - This stops overselling in the first year
-    - We’ll adjust your quota to account for the fact that a big chunk of the quota will be met by the renewal itself
-  - 0.5X% of ARR for monthly customers
-    - Some customers will just self serve or happily stay on month-to-month
-    - We want to incentivize conversion to annual contracts _but_ we don’t want you to force people into annual where it doesn’t make sense, hence a smaller % still paid out
+    - Your quota is based on expansion potential here, not the whole contract
+  - X% of ARR for monthly customers
+    - We'll factor in your overall change in monthly accounts
+  - X% of ARR for monthly customers that convert to annual
+    - The % is taken of the whole annual contract
   - 0% of ARR on any overages at the end of an annual contract
     - This is because we don’t do overages in our current model
   - Your specific commission % will depend on your OTE and quota size
 - Commission is paid out quarterly, and in any case after an invoice is paid
   - This incentivises securing upfront payment, not just annual contracts with monthly payment every time.
+    - If you close an annual contract with monthly/quarterly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
   - We also don't want AEs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
   - For monthly customers, commission is only paid after the first 2 invoices have been paid (ie. you don't get commission due to a random spike)
     - To clarify, this means the first 2 invoices the customer has ever paid, ie. you still get commission from 'your' month 1 if you inherit a paying monthly customer
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
-  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter
-- In your first 3 months you will not have a set quota but are expected to retain your existing book and have closed at least one Medium deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE for this period
+  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did. 
+- In your first 3 months you will not have a set quota but are expected to retain your existing book and have closed at least one Medium deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE for this period.
 
-> Your quota and assigned customers are likely to change slightly from quarter to quarter, e.g. a customer may not have long term expansion potential, or maybe they turn out to be Very Large. In any case, each quarter your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. 
+> Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
+
+## How contractual bonus works - CSMs
+
+CSMs are responsible for ensuring that a larger book of existing customers - both annual and monthly - continue to use PostHog successfully. They nurture customers and are product experts - this isn't a role of just going back and forth between customers and support engineers, or collecting feedback. 
+
+> This plan will _also_ almost certainly change as we scale up the size and complexity of our sales machine! As above, we will always ensure folks are treated fairly when we make changes.
+
+**Variables**
+
+- Your OTE comprises a 90/10 split between base and contractual bonus.
+- Bonus is paid based on logo retention above 90%, and is capped at 100%.
+  - For example, if you have 90% logo retention, you get 0% of bonus. For 95% retention, it's 50% bonus, and for 100% retention, it's 100% bonus. 
+- Bonuses are paid out quarterly, and in any case after an invoice is paid
+  - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
+- We count a customer as having been retained in your book if they are still spending > $500/month with us, so if for example you have a customer that was spending $20k+ annually who then scales down to $10/year, they obviously won't count as retained even if they are technically still spending money!
 
 ## Travel to see customers
 

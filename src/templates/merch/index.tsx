@@ -94,10 +94,14 @@ export const query = graphql`
                     status
                     imageProducts {
                         handle
-                        featuredImage {
-                            width
-                            height
-                            originalSrc
+                        featuredMedia {
+                            preview {
+                                image {
+                                    width
+                                    height
+                                    originalSrc
+                                }
+                            }
                         }
                     }
                     featuredMedia {

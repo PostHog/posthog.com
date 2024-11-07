@@ -1,5 +1,5 @@
 ---
-title: URL Normalizer
+title: Normalize URLs
 github: 'https://github.com/PostHog/posthog-url-normalizer-plugin'
 installUrl: 'https://app.posthog.com/project/apps?name=URL%20Normalizer'
 thumbnail: >-

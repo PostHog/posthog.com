@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState, createContext, useEffect, useContext, useMemo, useRef } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
@@ -169,8 +170,8 @@ const EscalateButton = ({ escalate, escalated }) => {
                                     Response will come from Max, the support hog
                                 </p>
                                 <div className="flex space-x-2 items-start mb-6">
-                                    <StaticImage
-                                        src="../images/max.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Squeak/images/max.png"
                                         width={40}
                                         height={40}
                                         className="rounded-full flex-shrink-0 bg-light dark:bg-dark border border-border dark:border-dark"
@@ -439,7 +440,7 @@ export const Question = (props: QuestionProps) => {
     }
 
     if (!questionData) {
-        return <div>Question not found</div>
+        return null
     }
 
     const handleReply = async (_values, _formData, data) => {
@@ -525,7 +526,7 @@ export const Question = (props: QuestionProps) => {
                     </div>
 
                     <div className={archived ? 'opacity-50' : ''}>
-                        <div className="ml-5 pl-[30px] border-l border-light dark:border-dark">
+                        <div className="ml-5 pl-[30px] pb-4 border-l border-light dark:border-dark">
                             {questionData.attributes.subject && (
                                 <h3 className="text-base font-semibold !m-0 pb-1 leading-5">
                                     <Link

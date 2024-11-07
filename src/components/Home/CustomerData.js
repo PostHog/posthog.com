@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
@@ -87,7 +88,7 @@ export default function CustomerData() {
                             </div>
                         </div>
                     </div>
-                    <StaticImage src="./images/host-hogs.png" className="w-full" imgClassName="w-full" />
+                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/host-hogs.png" className="w-full" imgClassName="w-full" />
                 </div>
             </div>
         </section>

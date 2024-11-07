@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -49,19 +50,34 @@ const features = [
     {
         title: 'Customizable goals',
         description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance',
-        image: <StaticImage src="./images/goals.png" width={428} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png"
+                width={428}
+            />
+        ),
         border: true,
     },
     {
         title: 'Targeting & exclusion rules',
         description: 'Set criteria for user location, person property, cohort, or group',
-        image: <StaticImage src="./images/targeting-ab.png" width={428} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/targeting-ab.png"
+                width={428}
+            />
+        ),
         border: true,
     },
     {
         title: 'Recommendations',
         description: 'Automatic suggestions for duration, sample size, and confidence threshold in a winning variant',
-        image: <StaticImage src="./images/recommendations.png" width={428} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/recommendations.png"
+                width={428}
+            />
+        ),
         border: true,
     },
 ]
@@ -125,7 +141,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -232,12 +248,14 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description: 'Run analysis based on the value of a test, or build a cohort of users from a test variant',
         url: '/product-analytics',
     },
     {
         icon: <IconRewindPlay />,
+        color: 'yellow',
         product: 'Session replay',
         description:
             'Watch recordings of users in a variant to discover nuances in why they did or didn’t complete the goal',
@@ -245,6 +263,7 @@ const PairsWithArray = [
     },
     {
         icon: <IconToggle />,
+        color: 'seagreen',
         product: 'Feature flags',
         description: 'Make changes to the feature flag the experiment uses - including JSON payload for each variant',
         url: '/feature-flags',
@@ -300,8 +319,8 @@ export const ProductAbTesting = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
-                        src="./images/screenshot-ab-testing.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/screenshot-ab-testing.png"
                         alt="Screenshot of managing an A/B test in PostHog"
                         className="w-full max-w-[1361px]"
                         placeholder="none"
@@ -378,7 +397,12 @@ export const ProductAbTesting = () => {
                         </div>
                     </div>
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/ab-testing-hog.png" alt="" />
+                        <CloudinaryImage
+                            placeholder="none"
+                            quality={100}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png"
+                            alt=""
+                        />
                     </div>
                 </div>
 
@@ -408,8 +432,8 @@ export const ProductAbTesting = () => {
                             <VsCompetitor
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-ab.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ab.png"
                                         className="max-w-[189px]"
                                     />
                                 }

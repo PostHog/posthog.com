@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -60,33 +61,58 @@ const features = [
     {
         title: 'Release conditions',
         description: 'Customize your rollout strategy by user or group properties, cohort, or traffic percentage',
-        image: <StaticImage src="./images/release-conditions.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/release-conditions.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Multivariate feature flags',
         description: 'Simultaneously test multiple versions against a control group',
-        image: <StaticImage src="./images/multivariate.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Test changes without touching your codebase',
         description:
             'JSON payloads let you change text, visuals, or entire blocks of code without subsequent deployments',
-        image: <StaticImage src="./images/payloads.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/payloads.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Developer-friendly automation',
         description:
             'Automated usage reports, IP address resolution (for location-based targeting), and recall person properties to avoid passing them manually every time',
-        image: <StaticImage src="./images/reports.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/reports.png"
+                width={420}
+            />
+        ),
         border: true,
     },
     {
         title: 'Early access feature opt-in widget',
         description: 'Allow users to opt in to (or out of) specified features. Or use the API to build your own UI.',
-        image: <StaticImage src="./images/early-access.png" width={420} />,
+        image: (
+            <CloudinaryImage
+                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/early-access.png"
+                width={420}
+            />
+        ),
         border: true,
     },
 ]
@@ -188,7 +214,7 @@ const faqs = [
     {
         question: 'Do you offer a discount for non-profits?',
         children:
-            'Yes in most cases - 50% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
+            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
     },
     {
         question: 'Are there any minimums or annual commitments?',
@@ -325,6 +351,7 @@ const pairsWithItemCount = 3
 const PairsWithArray = [
     {
         icon: <IconGraph />,
+        color: 'blue',
         product: 'Product analytics',
         description:
             "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
@@ -332,12 +359,14 @@ const PairsWithArray = [
     },
     {
         icon: <IconUserPaths />,
+        color: 'primary dark:text-primary-dark',
         product: 'User paths',
         description: 'See how a flag’s value influenced an intended outcome',
         url: '/product-analytics',
     },
     {
         icon: <IconRewindPlay />,
+        color: 'yellow',
         product: 'Session replay',
         description: 'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
         url: '/session-replay',
@@ -392,8 +421,8 @@ export const ProductFeatureFlags = () => {
                 />
 
                 <div className="text-center">
-                    <StaticImage
-                        src="./images/screenshot-feature-flags.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/screenshot-feature-flags.png"
                         alt="Screenshot of a feature flag in PostHog"
                         className="w-full max-w-[1361px]"
                         placeholder="none"
@@ -470,7 +499,12 @@ export const ProductFeatureFlags = () => {
                     </div>
 
                     <div className="md:w-96">
-                        <StaticImage placeholder="none" quality={100} src="../hogs/feature-flags-hog.png" alt="" />
+                        <CloudinaryImage
+                            placeholder="none"
+                            quality={100}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/feature-flags-hog.png"
+                            alt=""
+                        />
                     </div>
                 </div>
 
@@ -500,8 +534,8 @@ export const ProductFeatureFlags = () => {
                             <VsCompetitor
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
-                                    <StaticImage
-                                        src="../../../images/products/competitors-ff.png"
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-ff.png"
                                         className="max-w-[176px]"
                                     />
                                 }

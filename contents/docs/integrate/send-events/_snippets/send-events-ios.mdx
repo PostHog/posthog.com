@@ -35,3 +35,29 @@ If you want to manually send a new screen capture event, use the `screen` functi
 ```swift
 PostHogSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])
 ```
+
+> **Important:** Please note that `captureScreenViews` configuration is intented for `UIKit` use. For `SwiftUI` screen captures, please see the following section.
+
+### Capturing screen views in SwiftUI
+
+To track a screen view in `SwiftUI`, apply the `postHogScreenView` modifier to your full-screen views. The PostHog iOS SDK will infer a screen name based on the view’s type, but you can provide a custom name and event properties if needed.
+
+```swift 
+// This will trigger a screen view event with $screen_name: "HomeViewContent"
+struct HomeView: View {
+    var body: some View {
+        HomeViewContent()
+            .postHogScreenView()
+    }
+}
+
+// This will trigger a screen view event with $screen_name: "My Home View" and an additional event property from_button: "start"
+struct HomeView: View {
+    var body: some View {
+        HomeViewContent()
+            .postHogScreenView("My Home View", ["from_button": "start"])
+    }
+}
+```
+
+In SwiftUI, views can range from entire screens to small UI components. Unlike UIKit, SwiftUI doesn’t clearly distinguish between these levels, which makes automatic tracking of full-screen views harder. 

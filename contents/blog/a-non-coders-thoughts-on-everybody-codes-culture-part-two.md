@@ -40,7 +40,7 @@ The reason mistakes are so important is, I think, because coding isn’t a presc
 Breaking things is a great way to learn about how to fix them. PostHog recently rebranded plugins to apps and, as part of that, we launched a new apps library. I broke a bunch of things while working on that project — but that's OK because I managed to fix most of them (with occasional help from Eli) and carried those lessons over to the ShuffleHog project.
 
 ### Take it offline
-Something I’ve loved about becoming more confident with code is that I’ve been able to follow this passion outside of work. This creates a feedback loop where I get even more excited about what I’m learning and what I’m able to do, so I bring that energy back into work…where I _also_ learn and do more. It’s very satisfying. 
+Something I’ve loved about becoming more confident with code is that I’ve been able to follow this passion outside of work. This creates a [feedback loop](/newsletter/how-to-give-feedback) where I get even more excited about what I’m learning and what I’m able to do, so I bring that energy back into work…where I _also_ learn and do more. It’s very satisfying. 
 
 ![Joe's Open Source Arcade](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/non-coders-thoughts/arcade_open_source.png)
 

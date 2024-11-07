@@ -9,7 +9,7 @@ import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
 import Logomark from 'components/Home/images/Logomark'
 import { CallToAction } from 'components/CallToAction'
-import { IconInfo, IconThumbsDown, IconThumbsUp } from '@posthog/icons'
+import { IconArchive, IconCheck, IconInfo, IconThumbsDown, IconThumbsUp, IconTrash } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import { IconFeatures } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
@@ -168,9 +168,8 @@ const AIDisclaimer = ({ replyID, mutate, topic, confidence, resolvable }) => {
                         return (
                             <li className="ml-2 mt-2" key={label}>
                                 <button
-                                    className={`click px-3 py-1 bg-white dark:bg-dark rounded-full text-sm font-semibold border ${
-                                        helpful ? 'border-green' : 'border-red'
-                                    }`}
+                                    className={`click px-3 py-1 bg-white dark:bg-dark rounded-full text-sm font-semibold border ${helpful ? 'border-green' : 'border-red'
+                                        }`}
                                     onClick={() => handleHelpful(helpful, label)}
                                 >
                                     {label}
@@ -269,9 +268,8 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     >
                         <div className="mr-2 relative ml-[-2px]">
                             <Avatar
-                                className={`w-[25px] h-[25px] rounded-full ${
-                                    profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
-                                }`}
+                                className={`w-[25px] h-[25px] rounded-full ${profile?.data.attributes.color ? `bg-${profile.data.attributes.color}` : ''
+                                    }`}
                                 image={getAvatarURL(profile?.data?.attributes)}
                                 color={profile?.data.attributes.color}
                             />
@@ -349,29 +347,45 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     </div>
                 )}
 
-                <div className="flex space-x-2 mb-4 relative -top-2 empty:hidden">
-                    {resolvable && (
-                        <button
-                            onClick={() => handleResolve(true, id)}
-                            className="text-red dark:text-yellow font-semibold text-sm"
-                        >
-                            Mark as solution
-                        </button>
-                    )}
-                    {isModerator && (
-                        <button
-                            onClick={() => handlePublishReply(!!publishedAt, id)}
-                            className="text-red dark:text-yellow font-semibold text-sm"
-                        >
-                            {publishedAt ? 'Unpublish' : 'Publish'}
-                        </button>
-                    )}
-                    {isModerator && (
-                        <button onClick={handleDelete} className="text-[red] font-semibold text-sm">
-                            {confirmDelete ? 'Click again to confirm' : 'Delete'}
-                        </button>
-                    )}
-                </div>
+                {(isModerator || resolvable) && (
+                    <div className={`flex ${isModerator ? 'justify-end border-t border-light dark:border-dark' : ''}  mt-4 -mb-4 pt-1 pb-2`}>
+                        {!isModerator && resolvable && (
+                            <div className="-mt-4 -ml-1">
+                                <button
+                                    onClick={() => handleResolve(true, id)}
+                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                >
+                                    <IconCheck className="size-4 mr-1 text-green inline-block" />
+                                    Mark as solution
+                                </button>
+                            </div>
+                        )}
+                        {isModerator && (
+                            <div className="inline-flex space-x-1 bg-light dark:bg-dark px-1 mr-4 -mt-5">
+                                {resolvable && (
+                                    <button
+                                        onClick={() => handleResolve(true, id)}
+                                        className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                    >
+                                        <IconCheck className="size-4 mr-1 text-green inline-block" />
+                                        Mark as solution
+                                    </button>
+                                )}
+                                <button
+                                    onClick={() => handlePublishReply(!!publishedAt, id)}
+                                    className="text-red dark:text-yellow font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50"
+                                >
+                                    <IconArchive className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
+                                    {publishedAt ? 'Unpublish' : 'Publish'}
+                                </button>
+                                <button onClick={handleDelete} className="text-red font-semibold text-sm flex items-center py-1 px-1.5 rounded hover:bg-accent dark:hover:bg-border-dark/50">
+                                    <IconTrash className="size-4 mr-1 text-primary/50 dark:text-primary-dark/50 inline-block" />
+                                    {confirmDelete ? 'Click again to confirm' : 'Delete'}
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     ) : null

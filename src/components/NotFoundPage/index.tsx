@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useEffect, useState } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { CallToAction } from '../CallToAction'
@@ -11,22 +12,30 @@ export default function NotFoundPage(): JSX.Element {
     const [hogData, setHogData] = useState<any | null>(null)
 
     useEffect(() => {
-        import('../../../static/lotties/astrohog.json').then((data) => setHogData(data.default))
-        posthog?.capture('page_404')
-    }, [])
+        // Fetch the JSON file from the external domain
+        fetch('https://res.cloudinary.com/dmukukwp6/raw/upload/astrohog_a46fc15855.json')
+            .then(response => response.json())
+            .then(data => setHogData(data))
+            .catch(error => console.error('Error loading animation data:', error))
+
+        // Capture the event only if posthog is available
+        if (posthog) {
+            posthog.capture('page_404')
+        }
+    }, [posthog])
 
     return (
         <Layout className="not-found-page-container">
             <div className="bg-black -mt-1">
                 <div className="max-w-6xl px-4 lg:px-8 xl:px-0 mx-auto py-24 text-white relative overflow-hidden">
-                    <StaticImage
-                        src="../../images/galaxy-1.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/galaxy-1.png"
                         alt="The stars in the sky"
                         placeholder="blurred"
                         className="!absolute top-0 -left-24 max-h-full"
                     />
-                    <StaticImage
-                        src="../../images/galaxy-2.png"
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/galaxy-2.png"
                         alt="More stars in the sky"
                         placeholder="blurred"
                         className="!absolute top-0 -right-8 max-h-full"
@@ -42,10 +51,9 @@ export default function NotFoundPage(): JSX.Element {
                                 }}
                             />
                         ) : (
-                            <StaticImage
-                                src="../../images/astrohog.gif"
+                            <img
+                                src="/images/astrohog.gif"
                                 alt="Space hog"
-                                placeholder="blurred"
                                 className="w-[250px] sm:w-[500px] rotate-12"
                             />
                         )}

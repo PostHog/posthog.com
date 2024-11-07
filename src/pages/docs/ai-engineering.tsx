@@ -1,3 +1,4 @@
+import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -50,13 +51,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="How to set up LLM analytics for Cohere"
                         description="Track your Cohere usage, costs, and latency."
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
                         url="/tutorials/cohere-analytics"
@@ -66,13 +67,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="How to set up LLM analytics for Anthropic's Claude"
                         description="Monitor costs per model, user, and more."
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
                         url="/tutorials/anthropic-analytics"
@@ -82,13 +83,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="How to set up LLM analytics for ChatGPT"
                         description="Track API usage, cost, and latency."
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="../../components/Home/Slider/images/product-analytics-hog.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                             />
                         }
                         url="/tutorials/chatgpt-analytics"
@@ -117,13 +118,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Langfuse"
                         description="Bring Langfuse tracing information into PostHog and track essential metrics"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/template-product-analytics.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-product-analytics.png"
                             />
                         }
                         url="/docs/ai-engineering/langfuse-posthog"
@@ -132,13 +133,13 @@ export const Content = ({ quickLinks = false }) => {
                         title="Helicone"
                         description="Integrate with Helicone and export data to a convenient dashboard"
                         Image={
-                            <StaticImage
+                            <CloudinaryImage
                                 alt=""
                                 className="h-full"
                                 placeholder="none"
                                 objectFit="contain"
                                 quality={100}
-                                src="./images/template-website-traffic.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages/docs/images/template-website-traffic.png"
                             />
                         }
                         url="/docs/ai-engineering/helicone-posthog"
