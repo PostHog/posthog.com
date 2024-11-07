@@ -96,6 +96,22 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         type="Guide"
+                        title="Running no-code web experiments"
+                        description="Test changes to your websites without writing any code"
+                        Image={
+                            <CloudinaryImage
+                                alt=""
+                                placeholder="none"
+                                objectFit="contain"
+                                className="h-full"
+                                quality={100}
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/experiment-hog.png"
+                            />
+                        }
+                        url="/tutorials/no-code-web-experiments"
+                    />
+                    <ResourceItem
+                        type="Guide"
                         title="Running experiments on new users"
                         description="Test changes to signup and onboarding flows"
                         Image={
