@@ -44,12 +44,8 @@ const linklist: IProps[] = [
                 url: '/cdp',
             },
             {
-                title: 'Customer stories',
-                url: '/customers',
-            },
-            {
-                title: 'PostHog vs...',
-                url: '/blog/tags/comparisons',
+                title: 'Mobile replay',
+                url: '/docs/session-replay/mobile',
             },
             {
                 title: 'For startups',
@@ -58,10 +54,6 @@ const linklist: IProps[] = [
             {
                 title: 'Pricing',
                 url: '/pricing',
-            },
-            {
-                title: 'How we do "sales"',
-                url: '/sales',
             },
         ],
     },
@@ -96,7 +88,7 @@ const linklist: IProps[] = [
             {
                 title: 'API',
                 url: '/docs/api',
-            }
+            },
         ],
     },
     {
@@ -139,6 +131,10 @@ const linklist: IProps[] = [
                 title: 'Migrate',
                 url: '/docs/migrate',
             },
+            {
+                title: 'PostHog vs...',
+                url: '/blog/tags/comparisons',
+            },
         ],
     },
     {
@@ -172,6 +168,10 @@ const linklist: IProps[] = [
             {
                 title: 'Tracks',
                 url: '/tracks',
+            },
+            {
+                title: 'Customer stories',
+                url: '/customers',
             },
             {
                 title: 'Merch',
@@ -238,6 +238,10 @@ const linklist: IProps[] = [
             {
                 title: 'Marketing',
                 url: '/handbook/growth/marketing',
+            },
+            {
+                title: 'How we do "sales"',
+                url: '/sales',
             },
         ],
     },
