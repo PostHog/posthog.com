@@ -1,13 +1,11 @@
 ---
-title: Send data to Braze
+title: Send PostHog event data to Braze
 templateId: template-braze
 ---
 
 import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
-
-Send event data from PostHog into Braze.
 
 <Requirements />
 

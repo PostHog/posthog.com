@@ -61,7 +61,7 @@ With the toolbar open, select the action tab, then **Select element**, and then 
 
 > **Tip:** The [toolbar](/docs/toolbar) also provides access to heatmaps, clickmaps, and scrollmaps.
 
-Once created, we can then use it in funnels or trends, to target surveys, or as a conversion goal in our web analytics dashboard. To do this, go to the [web analytics dashboard](https://us.posthog.com/web), click **Add conversion goal** near the top, and then select your action. This enables you to get a quick view of your website stats and conversions on one page.
+Once created, we can then use it in funnels or trends, to target surveys, or as a [conversion goal](/docs/web-analytics/conversion-goals) in our web analytics dashboard. To do this, go to the [web analytics dashboard](https://us.posthog.com/web), click **Add conversion goal** near the top, and then select your action. This enables you to get a quick view of your website stats and conversions on one page.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_23_at_09_13_35_2x_4bea48f51f.png"

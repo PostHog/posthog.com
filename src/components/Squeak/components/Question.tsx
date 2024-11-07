@@ -110,8 +110,9 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
                                             return (
                                                 <Listbox.Option key={topic.id} value={topic}>
                                                     <div
-                                                        className={`${active ? 'font-semibold' : ''
-                                                            } py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-black/50 dark:text-primary-dark`}
+                                                        className={`${
+                                                            active ? 'font-semibold' : ''
+                                                        } py-1 px-2 text-sm cursor-pointer transition-all whitespace-nowrap flex items-center space-x-2 bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-black/50 dark:text-primary-dark`}
                                                     >
                                                         <span className="flex-shrink-0 w-3">
                                                             {active && <Check2 />}
@@ -307,8 +308,9 @@ const AskMaxLoading = () => {
                         <strong>Hang tight, checking to see if we can find an answer for you...</strong>
                     </p>
                     <p
-                        className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${fadeState === 'out' ? 'opacity-0' : 'opacity-100'
-                            }`}
+                        className={`text-primary/75 dark:text-primary-dark/75 !mb-0 !pb-1 transition-opacity duration-500 ${
+                            fadeState === 'out' ? 'opacity-0' : 'opacity-100'
+                        }`}
                     >
                         {messages[currentMessageIndex]}
                     </p>
@@ -438,7 +440,7 @@ export const Question = (props: QuestionProps) => {
     }
 
     if (!questionData) {
-        return <div>Question not found</div>
+        return null
     }
 
     const handleReply = async (_values, _formData, data) => {
@@ -564,8 +566,9 @@ export const Question = (props: QuestionProps) => {
                         })}
                     </div>
                     <div
-                        className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${archived ? 'opacity-25' : ''
-                            }`}
+                        className={`ml-5 pr-5 pb-1 pl-8 relative w-full squeak-left-border ${
+                            archived ? 'opacity-25' : ''
+                        }`}
                     >
                         <QuestionForm
                             archived={archived}

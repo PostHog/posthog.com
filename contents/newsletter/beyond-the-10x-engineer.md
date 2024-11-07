@@ -127,7 +127,7 @@ The opposite of this is people who are heavily self-promoting and ego-driven. Jo
 
 As an example of what being easy to work with looks like, the best sort of communication at PostHog is a pull request. Other companies encourage piling tasks on other people’s plates. We try to figure it out ourselves and open a PR if possible (even if it is wrong). It is a lot easier to tweak a PR than make a change from scratch, helping us ship faster.
 
-Because we work closely and give each other a lot of feedback, being difficult to work with would create a lot of tension and could have a massive negative impact on many.
+Because we work closely and give each other a lot of [feedback](/newsletter/how-to-give-feedback), being difficult to work with would create a lot of tension and could have a massive negative impact on many.
 
 > **What to look for:** Referrals, lack of excuses and complaints from past roles, gels well with team, proactive during the interview process.
 
