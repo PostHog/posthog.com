@@ -108,7 +108,7 @@ You need Support specialist level access to Stripe, ask Simon for access.
 6. For partial refunds, you can view the partial refund amount by hovering over the 'Partial refund' box that now displays against the payment.
 
 ### Spotting suspicious stuff - watch out for:
-- Multiple accounts that seem connected
+- Multiple accounts that seem connected - easiest way to spot this is to look up user profile in Vitally and check connected accounts. If one email is connected to multiple accounts it is good to check previous requests and refunds on all related accounts as well.
 - High refunds notice in Stripe (This will appear as a yellow box notification next to the customer's name on the customer page in Stripe)
 - Usage that doesn't make sense for customer size, or business details don't add up
 
