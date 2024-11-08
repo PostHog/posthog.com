@@ -37,11 +37,11 @@ Tomás is currently focused on tracking typical user interactions and uses [funn
 
 <BorderWrapper>
 <Quote
-    imageSource="/images/customers/significa-tomas.jpg"
+    imageSource="/images/james.png"
     size="md"
-    name="Tomás Gouveia"
-    title="Digital Marketer at Significa"
-    quote={`“PostHog gives me all the same information Plausible used to give us, and a lot more. It’s way more powerful and insightful than Plausible.”`}
+    name="Me, James Hawkins"
+    title="CEO of PostHog"
+    quote={`“I'm an idiot. My team is smart. I should listen to them more.”`}
 />
 </BorderWrapper>
 
