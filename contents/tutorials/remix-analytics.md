@@ -4,9 +4,9 @@ date: 2023-11-22
 author:
   - ian-vanagas
 tags:
-  - configuration
+  - product analytics
+  - web analytics
   - feature flags
-  - events
 ---
 
 Remix is a full stack web framework built on [React](/docs/libraries/react) with a specific focus on following web standards. 

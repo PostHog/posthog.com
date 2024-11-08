@@ -6,7 +6,6 @@ author:
 tags:
   - experimentation
   - feature flags
-  - actions
 ---
 
 [A/B tests](/experiments) are a way to make sure the content of your Next.js app performs as well as possible. They compare two or more variations on their impact on a goal.
