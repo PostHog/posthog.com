@@ -117,6 +117,7 @@ module.exports = {
                 'red-2-dark': '#C03300',
                 salmon: '#F35454',
                 seagreen: '#30ABC6',
+                'sky-blue': '#2EA2D3',
                 tan: '#EEEFE9',
                 teal: '#29DBBB',
                 'teal-2': '#6BC0B3',
