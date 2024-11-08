@@ -4,6 +4,7 @@ date: 2024-11-07
 author:
  - ian-vanagas
 featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/choosetech_c01bfb0582.png
 featuredImageType: full
 tags:
   - Engineering
