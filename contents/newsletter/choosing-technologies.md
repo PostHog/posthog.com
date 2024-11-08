@@ -32,7 +32,7 @@ Technology is a tool to help us move fast and build something people want. This 
 
 Although we can't tell you what the right technologies are or the perfect way to pick them, we **can** share the lessons we've learned at PostHog and hope it helps.
 
-## Start with a hair-on-fire problem
+## Start with a hair-on-fire problem then find an extinguisher
 
 Adopting new technologies is hard and expensive, so "nice to have" is not enough. We look for hair-on-fire problems, which typically means one of three things:
 
@@ -42,11 +42,7 @@ Adopting new technologies is hard and expensive, so "nice to have" is not enough
 
 3. **Customers.** For example, customers demand a new feature other companies have like reliable and resumable data exports.
 
-> **Related:** [How we decide what to build](https://newsletter.posthog.com/p/how-we-decide-what-to-build)
-
-## Find a fire-extinguishing solution to that problem
-
-The goal of technology is to solve that hair-on-fire problem. We find potential technologies that do this in one of two ways: 
+The goal of technology is to solve this hair-on-fire problem. We find potential technologies that do this in one of two ways: 
 
 1. **What are other people using to solve the problem?** Technologies are by definition tools or services other people have used to solve problems. For example, part of the reason [we chose ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion) was that Cloudflare used it.
 
@@ -110,11 +106,11 @@ If someone goes through all of this work, the expected answer for adopting a tec
 
 - **The evaluation goes against our expectations significantly.** For example, a test ends up being much more significant than expected.
 
-### Why we didn't adopt EFS
-
 An example of this last one is our decision **not** to adopt Amazon's Elastic File System (EFS).
 
 The problem we had was that rebalances in our session replay service required pods to re-process historic data. This slowed throughput dramatically, which triggered more rebalancing, and created a negative cycle that caused multiple incidents.
+
+![LAG](https://res.cloudinary.com/dmukukwp6/image/upload/lag_7f80ed90ac.png)
 
 By providing a persistent file system all pods could access, EFS eliminated the need to re-process data during rebalances. New pods could pick up where the last one left off reading from the shared disk.
 
