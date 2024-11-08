@@ -130,4 +130,3 @@ Before launching, ensure the following:
 
 1. **Test thoroughly**: Verify that all variants display and function as expected across devices and browsers. See our [testing feature flags doc](/docs/feature-flags/testing) for more details.
 2. **Document changes**: Record the modifications made to each variant and their goals.
-3. **Set a clear objective**: Define success criteria (e.g., click-through rate, sign-ups) before launching.
