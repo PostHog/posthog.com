@@ -2558,8 +2558,8 @@ export const docsMenu = {
                 {
                     name: 'Creating a no-code experiment',
                     url: '/docs/experiments/no-code-web-experiments',
-                    icon: 'IconTarget',
-                    color: 'orange',
+                    icon: 'IconApp',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
