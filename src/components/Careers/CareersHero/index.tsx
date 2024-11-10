@@ -375,7 +375,7 @@ export const CareersHero = () => {
                                 <TeamMembers profiles={selectedTeam.profiles} />
                             </div>
 
-                            <div className="inline-flex mx-auto gap-2">
+                            <div className="inline-flex items-center mx-auto gap-2">
                                 {pineapplePercentage > 50 ? (
                                     <>
                                         <StickerPineappleYes className="size-12" />
