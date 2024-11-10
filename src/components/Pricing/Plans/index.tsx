@@ -429,8 +429,10 @@ export default function Plans({
             return (
                 <div className="grid gap-y-2 min-w-[450px] mb-20" key={type}>
                     <div className="">
+                        
+                        <div className="space-y-4">
                         {plans.some(({ free_allocation }) => free_allocation) ? (
-                            <div className="mb-4">
+                            <>
                                 <Row className="!items-end border-b border-light dark:border-dark pb-2">
                                     <div className="flex-grow">
                                         <h4 className="text-lg mb-0 font-bold">{showTitle ? planNames[name] || name : 'Pricing' }</h4>
@@ -487,7 +489,7 @@ export default function Plans({
                                         </div>
                                     </Row>
                                 </div>
-                            </div>
+                            </>
                         ) : (
                             <div>
                                 <Row className="mb-2">
@@ -497,7 +499,7 @@ export default function Plans({
                                 </Row>
                             </div>
                         )}
-                        <div className="space-y-4">
+                        
                             <div>
                                 <Row className="mb-0 !pb-0">
                                     <Subtitle title="Features" />

@@ -75,7 +75,7 @@ export const ProductProductAnalyticsPricing = () => {
                   <ProductCTA />
 
 
-                    <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
+                    <div className="@lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
                         <div className="flex-grow overflow-auto px-5 md:px-0">
                             <Plans showHeaders={false} showCTA={false} groupsToShow={['product_analytics']} />
                         </div>
