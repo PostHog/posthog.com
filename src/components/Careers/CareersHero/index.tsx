@@ -367,7 +367,7 @@ export const CareersHero = () => {
                                         name={selectedTeam.name}
                                         imageUrl={selectedTeam.crest?.data?.attributes?.url}
                                         {...selectedTeam.crestOptions}
-                                        className="w-full"
+                                        className="w-full -mt-4"
                                     />
                                 </Link>
                             </div>
