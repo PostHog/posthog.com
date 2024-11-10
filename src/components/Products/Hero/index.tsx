@@ -1,43 +1,34 @@
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
-import { CallToAction } from 'components/CallToAction'
-import { IconRewindPlay, IconTrends } from '@posthog/icons'
+import { ProductHeader } from 'components/Products/ProductHeader'
+import { useLayoutData } from 'components/Layout/hooks'
 
-interface HeroProps {
-    icon: string
-    beta?: boolean
-    product: string
-    title: string
-    description: string
-    image: any
+
+interface ProductHeroProps {
+    header: React.ReactNode
+    image: React.ReactNode
+    customers: React.ReactNode
     className?: string
+    children: React.ReactNode
 }
 
-export const Hero = ({ color, icon, beta, product, title, description, className }: HeroProps): JSX.Element => {
-    return (
-        <section>
-            <div className={`flex gap-1.5 items-center mb-3 @4xl:mb-6 py-2 border-b border-light dark:border-dark px-4 @4xl:px-8 @4xl:py-2`}>
-                <span className={`w-6 h-6 text-${color}`}>{icon}</span>
-                <span className="text-[15px] font-semibold text-opacity-60">{product}</span>
-                {beta && (
-                    <span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">
-                        Beta
-                    </span>
-                )}
-            </div>
-            <h1 className={`text-3xl md:text-4xl mb-1 px-4 @4xl:px-8 ${className}`} dangerouslySetInnerHTML={{ __html: title }} />
-            <p
-                className={`font-semibold text-primary/75 dark:text-primary-dark/75 mb-3 px-4 @4xl:px-8 ${className}`}
-                dangerouslySetInnerHTML={{ __html: description }}
-            />
-            <div className={`flex gap-2 mb-8 px-4 @4xl:px-8 ${className}`}>
-                <CallToAction href="https://app.posthog.com/signup" type="primary" size="sm">
-                    Get started - free
-                </CallToAction>
-                <CallToAction href="/talk-to-a-human" type="secondary" size="sm">
-                    Talk to a human
-                </CallToAction>
-            </div>
-        </section>
-    )
+export const ProductHero = ({ className, header, image, customers, children }: ProductHeroProps): JSX.Element => {
+  const { fullWidthContent } = useLayoutData()
+
+  return (
+    <div className="@container">
+        {header}
+
+        <div className={`flex flex-col @7xl:flex-row items-start gap-8 @5xl:gap-12 transition-all px-4 @5xl:px-8 mb-8 ${fullWidthContent ? 'max-w-full @7xl:items-center' : 'max-w-7xl @7xl:items-start'}`}>
+            {image}
+
+            <section id="customers" className={`@container w-full @7xl:basis-96`}>
+                <ul className="list-none p-0 grid grid-cols-1 @sm:grid-cols-2 2xl:@sm:grid-cols-1 @2xl:grid-cols-3 @7xl:grid-cols-1 gap-8 @7xl:gap-4">
+                    {customers}
+                </ul>
+            </section>
+        </div>
+    </div>
+  )
 }
+
+export default ProductHero

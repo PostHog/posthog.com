@@ -19,7 +19,7 @@ import {
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { TutorialCard } from 'components/Products/TutorialCard'
-import { Hero } from 'components/Products/Hero'
+import { ProductHeader } from 'components/Products/ProductHeader'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { Marquee } from 'components/Products/Marquee'
@@ -46,6 +46,7 @@ import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 import { Screenshot } from 'components/Products/Screenshot'
+import ProductHero from 'components/Products/Hero'
 
 const product = {
     slug: 'web-analytics',
@@ -337,8 +338,8 @@ export const ProductWebAnalytics = () => {
                 description="It's like Google Analytics 3, but it still exists..."
                 image={`/images/og/web-analytics.jpg`}
             />
-            <div className="@container">
-                <Hero
+            <ProductHero
+                header={<ProductHeader
                     color="[#36C46F]"
                     icon={<IconPieChart />}
                     product={product.capitalized}
@@ -346,47 +347,32 @@ export const ProductWebAnalytics = () => {
                     description="Web analytics for people who really liked GA3..."
                     className={fullWidthContent ? 'max-w-full' : 'max-w-7xl'}
                 />
-
-
-                <div className={`flex flex-col @7xl:flex-row items-start @7xl:items-center gap-8 @5xl:gap-12 transition-all px-4 @5xl:px-8 mb-8 ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
-                    <Screenshot 
-                        product={product.capitalized} 
-                        slug={product.slug} 
-                        icon={<IconPieChart />} 
-                        order={1}
-                        className={``} 
+                }
+                image={<Screenshot 
+                    product={product.capitalized} 
+                    slug={product.slug} 
+                    icon={<IconPieChart />} 
+                    order={1}
+                    className={``} 
+                />}
+                customers={<>
+                    <CustomerCard
+                        outcome="gets 30% more data than with GA4"
+                        quote="Other platforms we looked at dropped data due to ad blockers and third-party cookies."
+                        customer={ycombinator}
                     />
-{/* 
-                    <div className={`flex-1 transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'}`}>
-                        <img
-                            src="/images/products/web-analytics/screenshot-web-analytics.png"
-                            alt="Screenshot of web analytics in PostHog"
-                            className="w-full max-w-[1440px]"
-                            placeholder="none"
-                        />
-                    </div> */}
-
-                    <section id="customers" className={`@container w-full @7xl:basis-96`}>
-                        <ul className="list-none p-0 grid grid-cols-1 @sm:grid-cols-2 2xl:@sm:grid-cols-1 @2xl:grid-cols-3 @7xl:grid-cols-1 gap-8 @7xl:gap-4">
-                            <CustomerCard
-                                outcome="gets 30% more data than with GA4"
-                                quote="Other platforms we looked at dropped data due to ad blockers and third-party cookies."
-                                customer={ycombinator}
-                            />
-                            <CustomerCard
-                                outcome="switched from Plausible"
-                                quote="PostHog is way more powerful and insightful than Plausible. We have more info than we used to have."
-                                customer={significa}
-                            />
-                            <CustomerCard
-                                outcome="switched from Google Analytics"
-                                quote="Web analytics gives us all the metrics we really care about. It is so much better than GA4."
-                                customer={creatify}
-                            />
-                        </ul>
-                    </section>
-                </div>
-            </div>
+                    <CustomerCard
+                        outcome="switched from Plausible"
+                        quote="PostHog is way more powerful and insightful than Plausible. We have more info than we used to have."
+                        customer={significa}
+                    />
+                    <CustomerCard
+                        outcome="switched from Google Analytics"
+                        quote="Web analytics gives us all the metrics we really care about. It is so much better than GA4."
+                        customer={creatify}
+                    />
+                </>}    
+            />
 
             <SmoothScroll exclude={['Installation', 'Meet the team']} />
 
