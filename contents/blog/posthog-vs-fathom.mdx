@@ -1,6 +1,6 @@
 ---
 title: "In-depth: PostHog vs Fathom"
-date: 2024-11-11
+date: 2024-11-08
 author:
  - bijan-boustani
 rootpage: /blog
@@ -16,11 +16,10 @@ import { ComparisonTable } from 'components/ComparisonTable'
 import { ComparisonHeader } from 'components/ComparisonTable/header'
 import { ComparisonRow } from 'components/ComparisonTable/row'
 
-PostHog and Fathom Analtyics both provide alternatives to Google Analytics. In fact, both explicitly mention it with marketing copy like "Switch to a better Google Analytics alternative."
+PostHog and Fathom Analytics are both alternatives to Google Analytics. In fact, both explicitly call this out on their websites with marketing copy like "Switch to a better Google Analytics alternative."
 
-Both products feature web analytics dashboards with an emphasis on simplicity and privacy. They're ideal choices for customers that want to analyze and understand web traffic but find Google Analytics to be needlessly complicated.
+Both products have web analytics dashboards with an emphasis on simplicity and privacy. They're ideal choices for customers that want to analyze and understand web traffic but find Google Analytics to be too complicated.
 
-But what makes them different?
 
 ## How is PostHog different?
 
@@ -32,11 +31,9 @@ These include [product analytics](/product-analytics), [session replay](/session
 
 ### 2. PostHog has a generous free tier
 
-PostHog's ["ridiculously cheap" tier](/pricing) includes all of the features of PostHog for free with an allowance of 1M events per month. For Fathom, the pricing for up to 1M data points is $60 per month or 100K data points for $15 per month.
+PostHog's ["ridiculously cheap" tier](/pricing) includes all of our features for free with an allowance of 1M events per month. For Fathom, pricing starts at $15 per month for 100K data points, increases to $60 per month for 1M data points, and more from there.
 
-Beyond PostHog's free tier, we try to be as cheap as possible and [transparent](/docs/billing/estimating-usage-costs). Want to know how much we'll charge? See our [pricing calculator](/pricing#calculator).
-
-PostHog also does not require a credit card to sign up and try the free tier.
+Beyond PostHog's free tier, we try to be as cheap as possible and [transparent](/docs/billing/estimating-usage-costs). Want to know how much we'll charge? See our [pricing calculator](/pricing#calculator). PostHog also does not require a credit card to sign up and try the free tier.
 
 ### Is Fathom simpler than PostHog?
 
@@ -69,12 +66,12 @@ Both Fathom and PostHog are [Google Analytics alternatives](/blog/ga4-alternativ
   <ComparisonRow column1={true} column2={true} feature="Cookieless tracking" description="Track users without cookies" />
   <ComparisonRow column1={true} column2={true} feature="Snippet install" description="Install HTML snippet" />
   <ComparisonRow column1={true} column2={true} feature="Migration" description="Migrate data from Google Analytics" />
-  <ComparisonRow column1={"50.6 kb"} column2={"~1 kB"} feature="Script size" description="Size of the script that runs on your site" />
+  <ComparisonRow column1={"50.6 kb"} column2={"<2 kB"} feature="Script size" description="Size of the script that runs on your site" />
 </ComparisonTable>
 
 ## Product analytics
 
-Teams rely on [product analytics](/product-analytics) when they need more customization in both capturing and analyzing date. Although not a focus of Fathom, it does have offer some basic product analytics features with event tracking.
+Teams rely on [product analytics](/product-analytics) when they need more customization in both capturing and analyzing data. Although not a focus of Fathom, it does have offer some basic product analytics features with event tracking.
 
 <ComparisonTable column1="PostHog" column2="Fathom">
   <ComparisonRow column1={true} column2={true} feature="Custom events" description="Capture and analyze any type of event" />
@@ -123,7 +120,7 @@ Beyond web analytics is where PostHog really shines. We provide all of the tools
   <ComparisonRow column1={true} column2={false} feature="Zapier" description="Trigger Zapier automations" />
   <ComparisonRow column1={true} column2={false} feature="Zendesk" description="Import organizations, tickets, users, and more" />
   <ComparisonRow column1={true} column2={false} feature="Sentry" description="Send and receive error data with Sentry" />
-  <ComparisonRow column1={true} column2={true} feature="WordPress" description="Send and receive error data with Sentry" />
+  <ComparisonRow column1={true} column2={true} feature="WordPress" description="Easily capture data from your Wordpress site" />
 </ComparisonTable>
 
 ## Security, compliance, privacy
@@ -145,7 +142,7 @@ Fathom prides itself on being privacy-friendly, but PostHog stands toe-to-toe wi
 
 ### How much do PostHog and Fathom cost?
 
-Fathom is a monthly subscription based on usage. Plans start at $15 per month for 100k data points. The pricing for up to 1M data points is $60 per month.
+Fathom is a monthly subscription based on usage. Plans start at $15 per month for 100k data points. 1M data points is $60 per month. Price maxes out at $470 per month for 25M data points, beyond which you need to contact them.
 
 PostHog is [entirely usage-based](/pricing). Its free tier includes:
 
