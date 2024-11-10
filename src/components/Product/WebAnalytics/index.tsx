@@ -386,11 +386,13 @@ export const ProductWebAnalytics = () => {
                 })}
                 subfeaturesItemCount={subfeaturesItemCount}
                 marquee={<Marquee product={product.capitalized}>
-                {questions.map((question, index) => {
-                    return <Question {...question} key={index} />
-                })}
-            </Marquee>}
+                    {questions.map((question, index) => {
+                        return <Question {...question} key={index} />
+                    })}
+                    </Marquee>}
             />
+
+            <h2>Below comes out</h2>
 
             <section
                 id="pricing"

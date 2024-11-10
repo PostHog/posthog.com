@@ -83,7 +83,7 @@ export default function Slider() {
 
     return (
         <div className="-mt-8 md:mt-0 hidden md:block">
-            <div className="hidden md:block px-8 lg:px-[50px] xl:px-4">
+            <div className="hidden md:block">
                 <ul className="m-0 grid grid-cols-9 list-none max-w-full lg:max-w-7xl xl:mx-auto xl:max-w-screen-2xl p-0 mb-8">
                     {slideButtons.map((slide, index) => {
                         return (

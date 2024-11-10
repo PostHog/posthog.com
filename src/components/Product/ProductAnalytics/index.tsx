@@ -45,6 +45,10 @@ import MobileSlides from 'components/Products/MobileSlides'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
+import { Screenshot } from 'components/Products/Screenshot'
+import { ProductHeader } from 'components/Products/ProductHeader'
+import ProductHero from 'components/Products/Hero'
+import ProductFeatures from 'components/Products/Features'
 
 const product = {
     slug: 'product-analytics',
@@ -768,75 +772,69 @@ export const ProductProductAnalytics = () => {
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/product-analytics.jpg`}
             />
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
-                <Hero
-                    color="blue"
-                    icon={<IconGraph />}
-                    product={product.capitalized}
-                    title="Product analytics with autocapture"
-                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/experiments'>experiments</a>, and <a href='/surveys'>surveys</a>."
-                />
 
-                <div className="text-center">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
-                        alt="Screenshot of PostHog Product Analytics"
-                        className="w-full max-w-[1360px]]"
-                        placeholder="none"
+
+
+                <ProductHero
+                    header={<ProductHeader
+                        color="blue"
+                        icon={<IconGraph />}
+                        product={product.capitalized}
+                        title="Product analytics with autocapture"
+                        description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/experiments'>experiments</a>, and <a href='/surveys'>surveys</a>."
                     />
-                </div>
-
-                <section id="customers" className="-mt-36 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
-                        <CustomerCard
+                }
+                image={<Screenshot 
+                    product={product.capitalized} 
+                    slug={product.slug} 
+                    icon={<IconPieChart />} 
+                    order={1}
+                    className={``} 
+                />}
+                customers={<>
+                    <CustomerCard
                             outcome="gathers 30% more data than with Google Analytics"
                             quote="We could autocapture... events using the JS snippet and... configure custom events."
                             customer={ycombinator}
-                        />
-                        <CustomerCard
-                            outcome="improved conversion rates by 10-20%"
-                            quote="we observed drop-offs at very particular stages of our onboarding flow."
-                            customer={hasura}
-                        />
-                        <CustomerCard
-                            outcome="increased registrations by 30%"
-                            quote="From [funnels], we could easily jump to session replays to see the drop-off point."
-                            customer={contra}
-                        />
-                        <CustomerCard
-                            outcome="manages features and developer relations"
-                            quote="...top-to-bottom view of conversion rates and user paths, without... extra setup time."
-                            customer={speakeasy}
-                        />
-                    </ul>
-                </section>
-            </div>
-
+                    />
+                    <CustomerCard
+                        outcome="improved conversion rates by 10-20%"
+                        quote="we observed drop-offs at very particular stages of our onboarding flow."
+                        customer={hasura}
+                    />
+                    {/* <CustomerCard
+                        outcome="increased registrations by 30%"
+                        quote="From [funnels], we could easily jump to session replays to see the drop-off point."
+                        customer={contra}
+                    /> */}
+                    <CustomerCard
+                        outcome="manages features and developer relations"
+                        quote="...top-to-bottom view of conversion rates and user paths, without... extra setup time."
+                        customer={speakeasy}
+                    />
+                </>}    
+            />
+            
             <SmoothScroll />
-            <div id="features">
-                <section className="mx-auto px-5 mb-10 md:mb-20">
-                    <h3 className="text-3xl text-center mb-8">Features</h3>
 
-                    <Slider />
-                    <MobileSlides />
+            <ProductFeatures
+                subfeaturesArray={subfeatures.map((subfeature, index) => {
+                    return <Subfeature {...subfeature} key={index} />
+                })}
+                subfeaturesItemCount={subfeaturesItemCount}
+                marquee={<Marquee product={product.capitalized}>
+                    {questions.map((question, index) => {
+                        return <Question {...question} key={index} />
+                    })}
+                    </Marquee>}
+            >
+                <Slider />
+                <MobileSlides />
+            </ProductFeatures>
 
-                    <div className="max-w-7xl mx-auto">
-                        <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
-                            {subfeatures.map((subfeature, index) => {
-                                return <Subfeature {...subfeature} key={index} />
-                            })}
-                        </ul>
-                    </div>
-                </section>
+            <h2>Below comes out</h2>
 
-                <section className="bg-accent dark:bg-accent-dark">
-                    <Marquee product={product.capitalized}>
-                        {questions.map((question, index) => {
-                            return <Question {...question} key={index} />
-                        })}
-                    </Marquee>
-                </section>
-            </div>
+            
             <section
                 id="pricing"
                 className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
