@@ -1,13 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import Tooltip from 'components/Tooltip'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 import TeamPatch from 'components/TeamPatch'
+import CloudinaryImage from 'components/CloudinaryImage'
+import { CallToAction } from 'components/CallToAction'
+import { useUser } from 'hooks/useUser'
+
+async function createTeam({ name, jwt }: { name: string; jwt: string | null }) {
+    if (!jwt) return
+    return fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams`, {
+        method: 'POST',
+        body: JSON.stringify({ data: { name, publishedAt: null } }),
+        headers: {
+            Authorization: `Bearer ${jwt}`,
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((res) => res.json())
+        .catch((err) => console.error(err))
+}
+
+const NewTeamButton = () => {
+    const [name, setName] = useState('')
+    const { getJwt } = useUser()
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        await createTeam({ name, jwt: await getJwt() })
+        navigate(`/teams/new`, { state: { name } })
+    }
+
+    return (
+        <form
+            onSubmit={handleSubmit}
+            className="click rounded-md flex items-center justify-center font-bold p-2 flex-col space-y-1 m-0"
+        >
+            <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                placeholder="Team name"
+                className="p-2 rounded-md bg-white dark:bg-accent-dark border border-border dark:border-dark w-full text-sm"
+            />
+            <CallToAction size="sm" width="full">
+                + Create new team
+            </CallToAction>
+        </form>
+    )
+}
 
 const Teams: React.FC = () => {
     const { allTeams } = useStaticQuery(graphql`
@@ -68,7 +114,6 @@ const Teams: React.FC = () => {
                 description="We're organized into multi-disciplinary small teams."
                 image={`/images/small-teams.png`}
             />
-
             <PostLayout article={false} title={'Handbook'} hideSidebar hideSurvey>
                 <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
@@ -160,6 +205,7 @@ const Teams: React.FC = () => {
                                             </div>
                                         </Link>
                                     ))}
+                                <NewTeamButton />
                             </div>
                         </div>
                     </div>

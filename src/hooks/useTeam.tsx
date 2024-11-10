@@ -10,7 +10,15 @@ const teamQuery = (name: string) =>
                     $eqi: name,
                 },
             },
-            populate: ['profiles.avatar', 'profiles.leadTeams.name', 'leadProfiles'],
+            publicationState: 'preview',
+            populate: [
+                'profiles.avatar',
+                'profiles.leadTeams.name',
+                'leadProfiles',
+                'crest',
+                'crestOptions',
+                'teamImage.image',
+            ],
         },
         { encodeValuesOnly: true }
     )
@@ -104,9 +112,23 @@ export default function useTeam({ teamName }: { teamName: string }) {
         fetchTeam()
     }
 
+    const updateTeam = async (update: any) => {
+        const jwt = await getJwt()
+        const body = JSON.stringify({ data: { ...update } })
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams/${team?.id}`, {
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+                'content-type': 'application/json',
+            },
+            method: 'PUT',
+            body,
+        })
+        fetchTeam()
+    }
+
     useEffect(() => {
         fetchTeam().then(() => setLoading(false))
     }, [])
 
-    return { loading, fetchTeam, team, addTeamMember, removeTeamMember, handleTeamLead, updateDescription }
+    return { loading, fetchTeam, team, addTeamMember, removeTeamMember, handleTeamLead, updateDescription, updateTeam }
 }

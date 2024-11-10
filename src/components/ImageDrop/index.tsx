@@ -11,10 +11,12 @@ export default function ImageDrop({
     image,
     onDrop,
     onRemove,
+    className = '',
 }: {
     image?: Image
     onDrop: (image: Image) => void
     onRemove: () => void
+    className?: string
 }): JSX.Element {
     const handleDrop = useCallback(
         async (acceptedFiles) => {
@@ -36,7 +38,7 @@ export default function ImageDrop({
     })
 
     return (
-        <div className="relative h-[200px] w-full bg-border/20 group" {...getRootProps()}>
+        <div className={`relative h-[200px] w-full bg-border/20 group ${className}`} {...getRootProps()}>
             <input className="hidden" {...getInputProps()} />
             <button className="w-full h-full flex justify-center items-center" type="button" onClick={() => open()}>
                 {image ? (

@@ -13,9 +13,7 @@ export default function useTeamUpdates({ teamName, filters }: { teamName: string
     const [teamID, setTeamID] = useState()
     const [updates, setUpdates] = useState([])
     const fetchUpdates = async () => {
-        const {
-            data: [{ id: teamID }],
-        } = await fetch(
+        const { data: teamData } = await fetch(
             `${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${qs.stringify(
                 {
                     filters: {
@@ -27,7 +25,7 @@ export default function useTeamUpdates({ teamName, filters }: { teamName: string
                 { encodeValuesOnly: true }
             )}`
         ).then((res) => res.json())
-        setTeamID(teamID)
+        setTeamID(teamData[0]?.id)
         const { data } = await fetch(
             `${process.env.GATSBY_SQUEAK_API_HOST}/api/team-updates?${qs.stringify(
                 {
