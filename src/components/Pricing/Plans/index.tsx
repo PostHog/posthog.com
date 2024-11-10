@@ -431,7 +431,7 @@ export default function Plans({
                     <div className="">
                         {plans.some(({ free_allocation }) => free_allocation) ? (
                             <div className="mb-4">
-                                <Row className="mb-2 !items-end border-b border-light dark:border-dark pb-2">
+                                <Row className="!items-end border-b border-light dark:border-dark pb-2">
                                     <div className="flex-grow">
                                         <h4 className="text-lg mb-0 font-bold">{showTitle ? planNames[name] || name : 'Pricing' }</h4>
                                     </div>
@@ -451,26 +451,42 @@ export default function Plans({
                                         )
                                     })}
                                 </Row>
-                                <Row>
-                                    <Title className="flex-grow" title={capitalize(`${unit}s`)} />
-                                    {plans.map(({ free_allocation, plan_key }) => {
-                                        return (
-                                            <p
-                                                key={`${type}-${plan_key}`}
-                                                className="m-0 text-base opacity-70 max-w-[25%] w-full min-w-[105px]"
-                                            >
-                                                {free_allocation ? (
-                                                    <>
-                                                        <strong>{free_allocation.toLocaleString()}</strong>
-                                                        <span className="text-xs">/mo</span>
-                                                    </>
-                                                ) : (
-                                                    <strong>Unlimited</strong>
-                                                )}
-                                            </p>
-                                        )
-                                    })}
-                                </Row>
+                                <div className="divide-y divide-light dark:divide-dark">
+                                    <Row>
+                                        <Title className="flex-grow" title={capitalize(`${unit}s`)} />
+                                        {plans.map(({ free_allocation, plan_key }) => {
+                                            return (
+                                                <p
+                                                    key={`${type}-${plan_key}`}
+                                                    className="m-0 text-base opacity-70 max-w-[25%] w-full min-w-[105px]"
+                                                >
+                                                    {free_allocation ? (
+                                                        <>
+                                                            <strong>{free_allocation.toLocaleString()}</strong>
+                                                            <span className="text-xs">/mo</span>
+                                                        </>
+                                                    ) : (
+                                                        <strong>Unlimited</strong>
+                                                    )}
+                                                </p>
+                                            )
+                                        })}
+                                    </Row>
+                                    <Row className="!items-start">
+                                        <Title title="Per-event pricing" className="m-0 text-sm flex-grow" />
+                                        <p className="max-w-[25%] w-full min-w-[105px]">
+                                            <strong className="text-green">Free</strong>
+                                        </p>
+                                        <div className="max-w-[25%] w-full min-w-[105px]">
+
+                                            {inclusion_only ? (
+                                                <InclusionOnlyRow plans={plans} />
+                                            ) : (
+                                                <PricingTiers plans={plans} unit={unit} type={type} />
+                                            )}
+                                        </div>
+                                    </Row>
+                                </div>
                             </div>
                         ) : (
                             <div>
@@ -569,21 +585,8 @@ export default function Plans({
                                 })}
                             </div>)}
                         </div>
-
-                        test
-                        <div>
-                            <Row className="bg-accent dark:bg-accent-dark my-2">
-                                <Heading title="Monthly pricing" />
-                            </Row>
-                            <div>
-                                {inclusion_only ? (
-                                    <InclusionOnlyRow plans={plans} />
-                                ) : (
-                                    <PricingTiers plans={plans} unit={unit} type={type} />
-                                )}
-                            </div>
-                        </div>
                     </div>
+
                     <Row>
                         <div className="flex-grow" />
                         {plans.map((plan, index) => (
