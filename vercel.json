@@ -588,7 +588,7 @@
         },
         { "source": "/eu-cloud", "destination": "/eu" },
         { "source": "/handbook/strategy/roadmap", "destination": "/roadmap" },
-        { "source": "/handbook/strategy/diversity", "destination": "/handbook/company/grown-ups" },
+        { "source": "/handbook/company/diversity", "destination": "/handbook/company/grown-ups" },
         {
             "source": "/docs/architecture/ingestion-pipeline",
             "destination": "/docs/how-posthog-works/ingestion-pipeline"
@@ -1320,6 +1320,7 @@
         { "source": "/docs/cdp/outfunnel-exporter", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/cdp/route-censor", "destination": "/docs/cdp" },
         { "source": "/docs/cdp/semver-flattener", "destination": "/docs/cdp" },
+        { "source": "/handbook/product/in-app-prompts", "destination": "/docs/surveys" },
         { "source": "/docs/webhooks", "destination": "/docs/cdp/destinations" },
         { "source": "/docs/webhooks/slack", "destination": "/docs/cdp/destinations/slack" },
         { "source": "/docs/webhooks/microsoft-teams", "destination": "/docs/cdp/destinations/webhook" },

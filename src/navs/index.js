@@ -109,8 +109,8 @@ export const handbookSidebar = [
                         url: '/handbook/company/goal-setting',
                     },
                     {
-                        name: 'Diversity and inclusion',
-                        url: '/handbook/company/diversity',
+                        name: 'A grown-up company',
+                        url: '/handbook/company/grown-ups',
                     },
                     {
                         name: 'Communication',
@@ -629,10 +629,6 @@ export const handbookSidebar = [
             {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
-            },
-            {
-                name: 'In-app prompts',
-                url: '/handbook/product/in-app-prompts',
             },
         ],
     },
@@ -2314,10 +2310,17 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Conversion goals',
+                    url: '/docs/web-analytics/conversion-goals',
+                    icon: 'IconFunnels',
+                    color: 'purple',
+                },
+                {
+
                     name: 'Web vs product analytics',
                     url: '/docs/web-analytics/web-vs-product-analytics',
                     icon: 'IconGraph',
-                    color: 'purple',
+                    color: 'red',
                 },
                 {
                     name: 'FAQ',
@@ -2573,6 +2576,13 @@ export const docsMenu = {
                     url: '/docs/experiments/creating-an-experiment',
                     icon: 'IconTarget',
                     color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Creating a no-code experiment',
+                    url: '/docs/experiments/no-code-web-experiments',
+                    icon: 'IconApp',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
