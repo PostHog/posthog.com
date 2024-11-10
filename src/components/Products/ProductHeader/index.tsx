@@ -2,7 +2,7 @@ import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import { IconRewindPlay, IconTrends } from '@posthog/icons'
-
+import ProductCTA from '../CTA'
 interface ProductHeaderProps {
     icon: string
     beta?: boolean
@@ -30,14 +30,7 @@ export const ProductHeader = ({ color, icon, beta, product, title, description, 
                 className={`font-semibold text-primary/75 dark:text-primary-dark/75 mb-3 px-4 @4xl:px-8 ${className}`}
                 dangerouslySetInnerHTML={{ __html: description }}
             />
-            <div className={`flex gap-2 mb-8 px-4 @4xl:px-8 ${className}`}>
-                <CallToAction href="https://app.posthog.com/signup" type="primary" size="sm">
-                    Get started - free
-                </CallToAction>
-                <CallToAction href="/talk-to-a-human" type="secondary" size="sm">
-                    Talk to a human
-                </CallToAction>
-            </div>
+            <ProductCTA className="px-4 @4xl:px-8" />
         </section>
     )
 }
