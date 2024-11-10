@@ -9,6 +9,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 import ProductCTA from 'components/Products/CTA'
 import { IconCheck } from '@posthog/icons'
+import ProductBar from 'components/Products/ProductBar'
 
 const product = {
     slug: 'product-analytics',
@@ -19,6 +20,18 @@ const product = {
 
 const team = 'Product Analytics'
 const teamSlug = '/teams/product-analytics'
+
+import {
+    IconBolt,
+    IconGraph,
+    IconFlask,
+    IconToggle,
+    IconPieChart,
+    IconPeople,
+    IconNotification,
+    IconRewindPlay,
+    IconAI,
+} from '@posthog/icons'
 
 const faqs = [
     {
@@ -66,6 +79,14 @@ export const ProductProductAnalyticsPricing = () => {
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/product-analytics.jpg`}
             />
+
+                <ProductBar
+                    color="blue"
+                    icon={<IconGraph />}
+                    product={product.capitalized}
+                    beta={false}
+                />
+
                 <section
                     id="pricing"
                     className={`@container ${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl px-5'} py-8 transition-all`}

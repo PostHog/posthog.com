@@ -121,7 +121,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
             {tiers.map(({ up_to, unit_amount_usd, eventsInThisTier, tierCost }, index) => {
                 return compact && parseFloat(unit_amount_usd) <= 0 ? null : (
                     <Row
-                        className={`!py-1 justify-between ${compact ? '!px-0 !space-x-0' : ''} ${
+                        className={`!py-0.5 justify-between ${compact ? '!px-0 !space-x-0' : ''} ${
                             showSubtotal ? 'grid grid-cols-12' : ''
                         }`}
                         key={`type-${index}`}
