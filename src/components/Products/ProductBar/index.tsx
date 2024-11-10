@@ -8,7 +8,7 @@ interface ProductHeaderProps {
 
 export const ProductBar = ({ color, icon, beta, product }: ProductHeaderProps): JSX.Element => {
     return (
-            <div className={`flex gap-1.5 items-center mb-3 @4xl:mb-6 py-2 border-b border-light dark:border-dark px-4 @4xl:px-8 @4xl:py-2`}>
+            <div className={`flex gap-1.5 items-center py-2 border-b border-light dark:border-dark px-4 @2xl:px-6 @4xl:px-8 @4xl:py-2`}>
                 <span className={`w-6 h-6 text-${color}`}>{icon}</span>
                 <span className="text-[15px] font-semibold text-opacity-60">{product}</span>
                 {beta && (

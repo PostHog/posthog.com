@@ -18,7 +18,7 @@ export const ProductHero = ({ className, header, image, customers, children }: P
     <div className="@container bg-white/50 dark:bg-dark pb-8">
         {header}
 
-        <div className={`flex flex-col @7xl:flex-row items-start gap-8 @5xl:gap-12 transition-all px-4 @5xl:px-8 mb-8 ${fullWidthContent ? 'max-w-full @7xl:items-center' : 'max-w-7xl @7xl:items-start'}`}>
+        <div className={`flex flex-col @7xl:flex-row items-start gap-8 @5xl:gap-12 transition-all px-4 @2xl:px-6 @4xl:px-8 mb-8 ${fullWidthContent ? 'max-w-full @7xl:items-center' : 'max-w-7xl @7xl:items-start'}`}>
             {image}
 
             <section id="customers" className={`@container w-full @7xl:basis-96`}>

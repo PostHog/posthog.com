@@ -120,7 +120,7 @@ h2 {
 }
 
 h3 {
-    @apply text-2xl leading-tight;
+    @apply text-2xl leading-tight font-bold;
     letter-spacing: -0.01em;
 
     code {

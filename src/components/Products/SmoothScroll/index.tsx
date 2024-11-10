@@ -32,7 +32,7 @@ export const SmoothScroll = ({ exclude = [], ...other }: { menuItems: MenuItem[]
     const [activeTab, setActiveTab] = useState(0)
     return (
         <div className="@container hidden md:block sticky top-[-1px] reasonable:top-[52px] z-[50] bg-accent dark:bg-accent-dark mb-12">
-            <section className="px-4 @5xl:px-8 border-t border-light dark:border-dark pt-px">
+            <section className="px-4 @2xl:px-6 @4xl:px-8 border-t border-light dark:border-dark pt-px">
                 <Slider className="list-none flex gap-4 pt-0.5 ![justify-content:_safe_start] ">
                     {(other?.menuItems ?? menuItems)
                         .filter(({ label }) => !exclude.includes(label))

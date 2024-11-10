@@ -15,7 +15,7 @@ export const ProductFeatures = ({ children, featuresArray, subfeaturesArray, sub
 
   return (
     <div id="features" className="@container bg-white/50 dark:bg-dark">
-        <section className={`transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'} px-4 @5xl:px-8 mb-10 md:mb-20`}>
+        <section className={`transition-all ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'} px-4 @2xl:px-6 @4xl:px-8 mb-10 md:mb-20`}>
             {/* <h3 className="text-2xl mb-4">Features</h3> */}
             {children}
 

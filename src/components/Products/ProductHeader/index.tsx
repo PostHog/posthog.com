@@ -25,12 +25,14 @@ export const ProductHeader = ({ color, icon, beta, product, title, description, 
                 beta={beta}
                 product={product}
             />
-            <h1 className={`text-3xl md:text-4xl mb-1 px-4 @4xl:px-8 ${className}`} dangerouslySetInnerHTML={{ __html: title }} />
-            <p
-                className={`font-semibold text-primary/75 dark:text-primary-dark/75 mb-3 px-4 @4xl:px-8 ${className}`}
-                dangerouslySetInnerHTML={{ __html: description }}
-            />
-            <ProductCTA className="px-4 @4xl:px-8" />
+            <div className="pt-6 @4xl:pt-8">
+                <h1 className={`text-3xl md:text-4xl mb-1 px-4 @2xl:px-6 @4xl:px-8 ${className}`} dangerouslySetInnerHTML={{ __html: title }} />
+                <p
+                    className={`font-semibold text-primary/75 dark:text-primary-dark/75 mb-3 px-4 @2xl:px-6 @4xl:px-8 ${className}`}
+                    dangerouslySetInnerHTML={{ __html: description }}
+                />
+                <ProductCTA className="px-4 @2xl:px-6 @4xl:px-8" />
+            </div>
         </section>
     )
 }
