@@ -45,7 +45,7 @@ const Article = ({
 
     return (
         <div className="flex">
-            <Navigation className="shrink-0 h-screen sticky top-0 flex-[0_0_220px]" />
+            <Navigation className="shrink-0 h-screen sticky top-0 hidden md:block flex-[0_0_220px]" />
             <div className={`${className} flex-1`}>
                 {/* <Banner /> */}
                 {compact ? (

@@ -375,7 +375,7 @@ export const ProductWebAnalytics = () => {
                 </>}    
             />
 
-            <SmoothScroll exclude={['Installation', 'Meet the team']} />
+            {/* <SmoothScroll exclude={['Installation', 'Meet the team']} /> */}
 
             <ProductFeatures
                 featuresArray={features.map((feature, index) => {
@@ -392,208 +392,215 @@ export const ProductWebAnalytics = () => {
                     </Marquee>}
             />
 
-            <h2>Below comes out</h2>
+            <h2>Clean this up</h2>
 
-            <section
-                id="pricing"
-                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-20 pb-10`}
-            >
-                <h2 className="text-3xl md:text-4xl text-center">Usage-based pricing</h2>
-                <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
-                    <p className="mb-2">
-                        Web analytics is currently bundled with <Link to="/product-analytics">product analytics</Link>.
-                    </p>
-                    <ul className="mb-2">
-                        <li>
-                            <strong>First 1 million events every month:</strong> Free (get access to both products)
-                        </li>
-                        <li>
-                            <strong>After 1 million events/mo:</strong> Usage is billed through product analytics. Get
-                            access to web analytics at no additional cost.
-                        </li>
-                    </ul>
-                    <p className="mb-2">
-                        Web analytics is designed to work well with{' '}
-                        <Link to={'/blog/analytics-pricing'}>anonymous events</Link>.
-                    </p>
-                </div>
 
-                {/*}
-                <div className="flex flex-col-reverse md:flex-row md:gap-12">
-                    <div className="flex-1">
-                        <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
-                        <p className="">
-                            Use {product.lowercase} free. Or enter a credit card for advanced features.{' '}
-                            <br className="hidden lg:block" />
-                            Either way, your first {product.freeTier} are free – every month.
-                        </p>
-                    </div>
-                    <div className="md:w-96">
-                        <CloudinaryImage placeholder="none" quality={100} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/session-replay-hog.png" alt="" />
-                    </div>
-                </div>
 
-                <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
-                    <div className="flex-grow overflow-auto px-5 md:px-0">
-                        <Plans showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
-                    </div>
-                    <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
-                        <h4 className="text-3xl">FAQs</h4>
-                        {faqs.map((faq, index) => {
-                            return <FAQ {...faq} key={index} />
-                        })}
-                    </div>
-                </div>
-                */}
-            </section>
-
-            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto mt-12 `}>
-                <div id="posthog-vs">
-                    <section>
-                        <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                        <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
-                    </section>
-
-                    <section className="mb-20">
-                        <h3 className="text-center mb-8">So, what's best for you?</h3>
-                        <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
-                            <VsCompetitor
-                                title="Reasons a competitor may be best for you (for now...)"
-                                image={
-                                    <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-sr.png"
-                                        className="max-w-[167px]"
-                                    />
-                                }
-                            >
-                                <ul>
-                                    <li>
-                                        You <em>only</em> need web analytics, nothing else
-                                    </li>
-                                    <li>You don’t need any integrations other than with Google</li>
-                                    <li>You need to migrate data from GA4</li>
-                                    <li>You actually really like GA4 😱</li>
-                                </ul>
-                            </VsCompetitor>
-                            <VsPostHog>
-                                <ul>
-                                    <li>You want to do more than just web analytics</li>
-                                    <li>You don't want to spend weeks setting up dashboards</li>
-                                    <li>You need to comply with HIPAA</li>
-                                    <li>It's not GA4</li>
-                                </ul>
-                            </VsPostHog>
-                        </div>
-
-                        <p className="text-center text-sm font-medium">
-                            Have questions about PostHog? <br className="md:hidden" />
-                            <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                            <Link to="/talk-to-a-human">book a demo</Link>.
-                        </p>
-                    </section>
-                </div>
-
-                <section id="tutorials">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
-                    <p className="mt-0 text-opacity-75 text-center mb-6">
-                        Visit the <Link to="/tutorials">tutorials</Link> section for more.
-                    </p>
-
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
-                        <TutorialCard
-                            title="How to create a broken link (404) checker"
-                            description="This tutorial shows you how to create a broken link checker for a Next.js app that sends a notification in Slack when a user visits a page that doesn’t exist."
-                            url="/tutorials/broken-link-checker"
-                        />
-                        <TutorialCard
-                            title="How to use PostHog without cookie banners"
-                            description="Normally, PostHog collects information about your users and stores it in a cookie in the users’ browser. This tutorial explains how to use page memory instead."
-                            url="/tutorials/cookieless-tracking"
-                        />
-                        <TutorialCard
-                            title="An introduction to identifying users"
-                            description="Many of the most valuable insights require an accurate understanding of the user using your product. This tutorial goes over the different ways to identify users and recommendations on how to do it better."
-                            url="/tutorials/identifying-users-guide"
-                        />
-                        <TutorialCard
-                            title="A non-technical guide to PostHog data"
-                            description="You don’t need to be an engineer, but knowing the formatting and structure of your data, for example, is key to getting the most out of PostHog as a non-technical user."
-                            url="/tutorials/non-technical-guide-to-data"
-                        />
-                    </ul>
-                </section>
-
-                {/*
-
-                <section id="installation" className="mb-20 px-5 md:px-0">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
-                    <p className="mt-0 opacity-50 text-center mb-12">
-                        Here are some ways you can fine tune how you implement {product.lowercase}.
-                    </p>
-
-                    <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...SessionReplay]} />
-                </section>
-
-                */}
-
-                <section id="docs" className="mb-20 px-5 md:px-0">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
-                    <p className="mt-0 text-opacity-70 text-center">
-                        Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
-                    </p>
-                    <DocLinks
-                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'web analytics').children}
-                    />
-                </section>
-
-                {/*
-                <section id="team" className="mb-20 px-5">
-                    <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
-
-                    <p className="text-center mb-2">
-                        PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
-                        building {product.lowercase}.
-                    </p>
-                    <TeamMembers teamName={team} />
-                </section>
-                */}
-
-                <section id="roadmap" className="mb-20 px-5">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
-
-                    <p className="text-center mb-8">Here’s what the team is up to.</p>
-
-                    <div className="grid md:grid-cols-2 gap-12">
-                        <div>
-                            <RecentChange team={team} />
-                        </div>
-
-                        <div>
-                            <h4 className="opacity-60 text-base">Up next</h4>
-                            <TeamRoadmap team={team} />
-                        </div>
-                    </div>
-                </section>
-
-                <section id="questions" className="mb-20 px-5">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
-
-                    <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
-
-                    <div className="text-center mb-8">
-                        <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
-                            View {product.lowercase} questions
-                        </CallToAction>
-                    </div>
-
-                    <Questions topicIds={[348]} />
-                </section>
-
-                <PairsWith items={pairsWithItemCount}>
+            <PairsWith items={pairsWithItemCount}>
                     {PairsWithArray.map((card, index) => {
                         return <PairsWithItem {...card} key={index} />
                     })}
                 </PairsWith>
+
+
+            <div className="hidden">
+                <h2>Below comes out</h2>
+
+                <section
+                    id="pricing"
+                    className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-20 pb-10`}
+                >
+                    <h2 className="text-3xl md:text-4xl text-center">Usage-based pricing</h2>
+                    <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
+                        <p className="mb-2">
+                            Web analytics is currently bundled with <Link to="/product-analytics">product analytics</Link>.
+                        </p>
+                        <ul className="mb-2">
+                            <li>
+                                <strong>First 1 million events every month:</strong> Free (get access to both products)
+                            </li>
+                            <li>
+                                <strong>After 1 million events/mo:</strong> Usage is billed through product analytics. Get
+                                access to web analytics at no additional cost.
+                            </li>
+                        </ul>
+                        <p className="mb-2">
+                            Web analytics is designed to work well with{' '}
+                            <Link to={'/blog/analytics-pricing'}>anonymous events</Link>.
+                        </p>
+                    </div>
+
+                    {/*}
+                    <div className="flex flex-col-reverse md:flex-row md:gap-12">
+                        <div className="flex-1">
+                            <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
+                            <p className="">
+                                Use {product.lowercase} free. Or enter a credit card for advanced features.{' '}
+                                <br className="hidden lg:block" />
+                                Either way, your first {product.freeTier} are free – every month.
+                            </p>
+                        </div>
+                        <div className="md:w-96">
+                            <CloudinaryImage placeholder="none" quality={100} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/session-replay-hog.png" alt="" />
+                        </div>
+                    </div>
+
+                    <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
+                        <div className="flex-grow overflow-auto px-5 md:px-0">
+                            <Plans showHeaders={false} showCTA={false} groupsToShow={['session_replay']} />
+                        </div>
+                        <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
+                            <h4 className="text-3xl">FAQs</h4>
+                            {faqs.map((faq, index) => {
+                                return <FAQ {...faq} key={index} />
+                            })}
+                        </div>
+                    </div>
+                    */}
+                </section>
+
+                <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto mt-12 `}>
+                    <div id="posthog-vs">
+                        <section>
+                            <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
+                            <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
+                        </section>
+
+                        <section className="mb-20">
+                            <h3 className="text-center mb-8">So, what's best for you?</h3>
+                            <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
+                                <VsCompetitor
+                                    title="Reasons a competitor may be best for you (for now...)"
+                                    image={
+                                        <CloudinaryImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-sr.png"
+                                            className="max-w-[167px]"
+                                        />
+                                    }
+                                >
+                                    <ul>
+                                        <li>
+                                            You <em>only</em> need web analytics, nothing else
+                                        </li>
+                                        <li>You don’t need any integrations other than with Google</li>
+                                        <li>You need to migrate data from GA4</li>
+                                        <li>You actually really like GA4 😱</li>
+                                    </ul>
+                                </VsCompetitor>
+                                <VsPostHog>
+                                    <ul>
+                                        <li>You want to do more than just web analytics</li>
+                                        <li>You don't want to spend weeks setting up dashboards</li>
+                                        <li>You need to comply with HIPAA</li>
+                                        <li>It's not GA4</li>
+                                    </ul>
+                                </VsPostHog>
+                            </div>
+
+                            <p className="text-center text-sm font-medium">
+                                Have questions about PostHog? <br className="md:hidden" />
+                                <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
+                                <Link to="/talk-to-a-human">book a demo</Link>.
+                            </p>
+                        </section>
+                    </div>
+
+                    <section id="tutorials">
+                        <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                        <p className="mt-0 text-opacity-75 text-center mb-6">
+                            Visit the <Link to="/tutorials">tutorials</Link> section for more.
+                        </p>
+
+                        <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
+                            <TutorialCard
+                                title="How to create a broken link (404) checker"
+                                description="This tutorial shows you how to create a broken link checker for a Next.js app that sends a notification in Slack when a user visits a page that doesn’t exist."
+                                url="/tutorials/broken-link-checker"
+                            />
+                            <TutorialCard
+                                title="How to use PostHog without cookie banners"
+                                description="Normally, PostHog collects information about your users and stores it in a cookie in the users’ browser. This tutorial explains how to use page memory instead."
+                                url="/tutorials/cookieless-tracking"
+                            />
+                            <TutorialCard
+                                title="An introduction to identifying users"
+                                description="Many of the most valuable insights require an accurate understanding of the user using your product. This tutorial goes over the different ways to identify users and recommendations on how to do it better."
+                                url="/tutorials/identifying-users-guide"
+                            />
+                            <TutorialCard
+                                title="A non-technical guide to PostHog data"
+                                description="You don’t need to be an engineer, but knowing the formatting and structure of your data, for example, is key to getting the most out of PostHog as a non-technical user."
+                                url="/tutorials/non-technical-guide-to-data"
+                            />
+                        </ul>
+                    </section>
+
+                    {/*
+
+                    <section id="installation" className="mb-20 px-5 md:px-0">
+                        <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
+                        <p className="mt-0 opacity-50 text-center mb-12">
+                            Here are some ways you can fine tune how you implement {product.lowercase}.
+                        </p>
+
+                        <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...SessionReplay]} />
+                    </section>
+
+                    */}
+
+                    <section id="docs" className="mb-20 px-5 md:px-0">
+                        <h3 className="text-3xl lg:text-4xl text-center mb-2">Explore the docs</h3>
+                        <p className="mt-0 text-opacity-70 text-center">
+                            Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
+                        </p>
+                        <DocLinks
+                            menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'web analytics').children}
+                        />
+                    </section>
+
+                    {/*
+                    <section id="team" className="mb-20 px-5">
+                        <h3 className="text-3xl lg:text-4xl text-center">Meet the team</h3>
+
+                        <p className="text-center mb-2">
+                            PostHog works in small teams. The <Link to={teamSlug}>{team}</Link> team is responsible for
+                            building {product.lowercase}.
+                        </p>
+                        <TeamMembers teamName={team} />
+                    </section>
+                    */}
+
+                    <section id="roadmap" className="mb-20 px-5">
+                        <h3 className="text-3xl lg:text-4xl text-center mb-2">Roadmap &amp; changelog</h3>
+
+                        <p className="text-center mb-8">Here’s what the team is up to.</p>
+
+                        <div className="grid md:grid-cols-2 gap-12">
+                            <div>
+                                <RecentChange team={team} />
+                            </div>
+
+                            <div>
+                                <h4 className="opacity-60 text-base">Up next</h4>
+                                <TeamRoadmap team={team} />
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="questions" className="mb-20 px-5">
+                        <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
+
+                        <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
+
+                        <div className="text-center mb-8">
+                            <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
+                                View {product.lowercase} questions
+                            </CallToAction>
+                        </div>
+
+                        <Questions topicIds={[348]} />
+                    </section>
+                </div>
             </div>
             <div className="max-w-7xl mx-auto relative">
                 <section className="mb-20">
