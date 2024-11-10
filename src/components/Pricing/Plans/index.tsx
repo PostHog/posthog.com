@@ -15,7 +15,7 @@ import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
         <div className={className}>
-            <h4 className="m-0 text-base opacity-70">
+            <h4 className="m-0 font-bold text-base">
                 {title}
                 {title !== "Free" && (<Tooltip placement="top" content={() => <div className="max-w-xs">
                     <p className="mb-2 text-[15px]">Get all features on these plans:</p>
@@ -44,7 +44,7 @@ const Row = ({ children, className = '' }: { children: React.ReactNode; classNam
 const Feature = ({ feature }: { feature: BillingV2FeatureType }) => {
     return feature ? (
         feature?.limit || feature?.note ? (
-            <p className="m-0 text-base opacity-70">
+            <p className="m-0 text-sm opacity-70">
                 {feature.note || `${feature.limit.toLocaleString()} ${feature.unit}`}
             </p>
         ) : (
@@ -66,17 +66,17 @@ const Title = ({ title, className = '' }: { title: string; className?: string })
 }
 
 const Subtitle = ({ title, className = '' }: { title: string; className?: string }) => {
-    return <h5 className={`m-0 pb-2 border-b border-light dark:border-dark w-full font-bold ${className}`}>{title}</h5>
+    return <h5 className={`m-0 w-full font-bold ${className}`}>{title}</h5>
 }
 
 export const InclusionOnlyRow = ({ plans }) => (
     <Row className="!py-1">
-        <div className="flex-grow" />
+        <div className="key-classes border-t border-light dark:border-dark py-1" />
         {plans.map(({ included_if, plan_key }, index) => (
             <Title
                 key={`inclusion-only-${plan_key}-${index}`}
                 title={included_if === 'no_active_subscription' ? 'Free' : 'Paid'}
-                className="font-bold max-w-[25%] w-full min-w-[105px]"
+                className="font-semibold text-[13px]"
             />
         ))}
     </Row>
@@ -121,13 +121,13 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
             {tiers.map(({ up_to, unit_amount_usd, eventsInThisTier, tierCost }, index) => {
                 return compact && parseFloat(unit_amount_usd) <= 0 ? null : (
                     <Row
-                        className={`!py-1 ${compact ? '!px-0 !space-x-0' : ''} ${
+                        className={`!py-1 justify-between ${compact ? '!px-0 !space-x-0' : ''} ${
                             showSubtotal ? 'grid grid-cols-12' : ''
                         }`}
                         key={`type-${index}`}
                     >
                         <Title
-                            className={`${compact ? 'text-sm' : ''} ${showSubtotal ? 'col-span-3' : 'flex-grow'}`}
+                            className={`${compact ? 'text-sm' : ''} ${showSubtotal ? 'col-span-3' : 'key-classes'}`}
                             title={
                                 index === 0
                                     ? `First ${formatCompactNumber(up_to)} ${unit}s`
@@ -144,7 +144,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                             className={
                                 showSubtotal
                                     ? `col-span-4`
-                                    : `flex ${test ? 'shrink-0' : 'max-w-[25%] w-full min-w-[105px]'}`
+                                    : `flex ${test ? 'shrink-0' : 'value-classes flex flex-col justify-center text-sm'}`
                             }
                         >
                             <Title
@@ -412,6 +412,8 @@ const planNames = {
     'Product analytics + data stack': 'Product analytics',
 }
 
+const subtitleClasses = "mb-2"
+
 export default function Plans({
     groupsToShow,
     showTitle,
@@ -430,11 +432,11 @@ export default function Plans({
                 <div className="grid gap-y-2 min-w-[450px] mb-20" key={type}>
                     <div className="">
                         
-                        <div className="space-y-4">
-                        {plans.some(({ free_allocation }) => free_allocation) ? (
-                            <>
-                                <Row className="!items-end border-b border-light dark:border-dark pb-2">
-                                    <div className="flex-grow">
+                        <div className="grid grid-cols-3 pr-5 [&_>:nth-child(3n+2)]:px-4">
+                            {plans.some(({ free_allocation }) => free_allocation) ? (
+                                <>
+                                    
+                                    <div className={`key-classes py-1 self-end !mb-1 ${subtitleClasses}`}>
                                         <h4 className="text-lg mb-0 font-bold">{showTitle ? planNames[name] || name : 'Pricing' }</h4>
                                     </div>
 
@@ -447,71 +449,61 @@ export default function Plans({
                                                         ? 'No credit card required'
                                                         : 'All features, no limitations'
                                                 }
-                                                className="max-w-[25%] w-full min-w-[105px]"
+                                                className={`text-base ${subtitleClasses}`}
                                                 key={plan_key}
                                             />
                                         )
                                     })}
-                                </Row>
-                                <div className="divide-y divide-light dark:divide-dark">
-                                    <Row>
-                                        <Title className="flex-grow" title={capitalize(`${unit}s`)} />
-                                        {plans.map(({ free_allocation, plan_key }) => {
-                                            return (
-                                                <p
-                                                    key={`${type}-${plan_key}`}
-                                                    className="m-0 text-base opacity-70 max-w-[25%] w-full min-w-[105px]"
-                                                >
-                                                    {free_allocation ? (
-                                                        <>
-                                                            <strong>{free_allocation.toLocaleString()}</strong>
-                                                            <span className="text-xs">/mo</span>
-                                                        </>
-                                                    ) : (
-                                                        <strong>Unlimited</strong>
-                                                    )}
-                                                </p>
-                                            )
-                                        })}
-                                    </Row>
-                                    <Row className="!items-start">
-                                        <Title title="Per-event pricing" className="m-0 text-sm flex-grow" />
-                                        <p className="max-w-[25%] w-full min-w-[105px]">
-                                            <strong className="text-green">Free</strong>
-                                        </p>
-                                        <div className="max-w-[25%] w-full min-w-[105px]">
 
-                                            {inclusion_only ? (
-                                                <InclusionOnlyRow plans={plans} />
-                                            ) : (
-                                                <PricingTiers plans={plans} unit={unit} type={type} />
-                                            )}
+                                            <Title className="key-classes border-t border-light dark:border-dark py-1" title={capitalize(`${unit}s`)} />
+                                            {plans.map(({ free_allocation, plan_key }) => {
+                                                return (
+                                                    <p
+                                                        key={`${type}-${plan_key}`}
+                                                        className="m-0 value-classes flex items-baseline border-t border-light dark:border-dark py-1 text-sm"
+                                                    >
+                                                        {free_allocation ? (
+                                                            <>
+                                                                <strong>{free_allocation.toLocaleString()}</strong>
+                                                                <span className="text-xs">/mo</span>
+                                                            </>
+                                                        ) : (
+                                                            <strong>Unlimited</strong>
+                                                        )}
+                                                    </p>
+                                                )
+                                            })}
+
+                                            <Title title="Per-event pricing" className="m-0 text-sm key-classes border-t border-light dark:border-dark py-1" />
+                                            <p className="value-classes flex flex-col justify-start pt-1 border-t border-light dark:border-dark py-1 text-sm">
+                                                <strong className="text-green">Free</strong>
+                                            </p>
+                                            <div className="value-classes flex flex-col justify-center border-t border-light dark:border-dark py-1 text-sm">
+
+                                                {inclusion_only ? (
+                                                    <InclusionOnlyRow plans={plans} />
+                                                ) : (
+                                                    <PricingTiers plans={plans} unit={unit} type={type} />
+                                                )}
+                                            </div>
+                                </>
+                            ) : (
+                                <div>
+                                    <Row className="mb-2">
+                                        <div className="key-classes border-t border-light dark:border-dark py-1">
+                                            {showTitle && <h4 className="text-lg mb-0">{planNames[name] || name}</h4>}
                                         </div>
                                     </Row>
                                 </div>
-                            </>
-                        ) : (
-                            <div>
-                                <Row className="mb-2">
-                                    <div className="flex-grow">
-                                        {showTitle && <h4 className="text-lg mb-0">{planNames[name] || name}</h4>}
-                                    </div>
-                                </Row>
-                            </div>
-                        )}
-                        
-                            <div>
-                                <Row className="mb-0 !pb-0">
-                                    <Subtitle title="Features" />
-                                </Row>
-                                <div className="divide-y divide-light dark:divide-dark">
+                            )}
+                            
+                                    <Subtitle title="Features" className={subtitleClasses} />
+                                    <div className={subtitleClasses} />
+                                    <div className={subtitleClasses} />
                                     {plans[plans.length - 1].features.map((feature, index) => {
                                         return (
-                                            <Row
-                                                className="hover:bg-accent/60 dark:hover:bg-accent-dark/70"
-                                                key={`${type}-${feature.key}`}
-                                            >
-                                                <div className="flex-grow">
+                                            <React.Fragment key={`${type}-${feature.key}`}>
+                                                <div className="key-classes border-t border-light dark:border-dark py-1">
                                                     <Tooltip
                                                         placement="right"
                                                         content={() => (
@@ -532,27 +524,26 @@ export default function Plans({
                                                 {plans.map((plan, i) => (
                                                     <div
                                                         key={`${feature.key}-${type}-${i}`}
-                                                        className="max-w-[25%] w-full min-w-[105px]"
+                                                        className="value-classes flex flex-col justify-center border-t border-light dark:border-dark py-1 text-sm"
                                                     >
                                                         <Feature
                                                             feature={plan.features?.find(({ key }) => key === feature.key)}
                                                         />
                                                     </div>
                                                 ))}
-                                            </Row>
+                                            </React.Fragment>
                                         )
                                     })}
-                                </div>
-                            </div>
 
-                            {addons.length > 0 && (<div>
-                                <Row className="">
-                                    <Subtitle title="Add-ons" />
-                                </Row>
+                            {addons.length > 0 && (<>
+                                <Subtitle title="Add-ons" className={`${subtitleClasses} mt-4`} />
+                                <div className={`${subtitleClasses} mt-4`} />
+                                <div className={`${subtitleClasses} mt-4`} />
+
                                 {addons.map((addon: BillingProductV2Type) => {
                                     return (
-                                        <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={addon.type}>
-                                            <div className="flex-grow">
+                                        <React.Fragment key={addon.type}>
+                                            <div className="key-classes border-t border-light dark:border-dark py-1">
                                                 <AddonTooltip addon={addon} parentProductName={name}>
                                                     <Title
                                                         className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
@@ -564,7 +555,7 @@ export default function Plans({
                                             {plans.map((plan, i) => {
                                                 return (
                                                     <div
-                                                        className="max-w-[25%] w-full min-w-[105px]"
+                                                        className="value-classes flex flex-col justify-center border-t border-light dark:border-dark py-1 text-sm"
                                                         key={`${addon.type}-${plan.plan_key}`}
                                                     >
                                                         {plan.free_allocation && !plan.included_if ? (
@@ -582,21 +573,19 @@ export default function Plans({
                                                     </div>
                                                 )
                                             })}
-                                        </Row>
+                                        </React.Fragment>
                                     )
                                 })}
-                            </div>)}
+                            </>)}
+
+                            <div className="key-classes py-2" />
+                            {plans.map((plan, index) => (
+                                <div className="value-classes flex flex-col justify-center py-2 text-sm" key={`cta-${plan.product_key}-${index}`}>
+                                    <CTA />
+                                </div>
+                            ))}
                         </div>
                     </div>
-
-                    <Row>
-                        <div className="flex-grow" />
-                        {plans.map((plan, index) => (
-                            <div className="max-w-[25%] w-full min-w-[105px]" key={`cta-${plan.product_key}-${index}`}>
-                                <CTA />
-                            </div>
-                        ))}
-                    </Row>
                 </div>
             )
         }

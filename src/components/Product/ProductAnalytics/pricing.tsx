@@ -68,20 +68,20 @@ export const ProductProductAnalyticsPricing = () => {
             />
                 <section
                     id="pricing"
-                    className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl px-5'} py-8 transition-all`}
+                    className={`@container ${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl px-5'} py-8 transition-all`}
                 >
-                  <h1 className="mb-2">First 1,000,000 events/mo free</h1>
-                  <p className="mb-4">After that, it's $0.00005/event (or cheaper).</p>
+                  <h1 className="mb-2">First 1,000,000 events <span className="text-green">free – <em>every month</em></span></h1>
+                  <p className="mb-4 text-[15px]">After that, pricing starts at <strong className="font-semibold">$0.00005</strong>/event.</p>
                   <ProductCTA />
 
 
-                    <div className="@lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
-                        <div className="flex-grow overflow-auto px-5 md:px-0">
+                    <div className="@5xl:flex justify-between items-start gap-8 @6xl:gap-12 -mx-5 md:mx-0">
+                        <div className="flex-1 px-5 md:px-0">
                             <Plans showHeaders={false} showCTA={false} groupsToShow={['product_analytics']} />
                         </div>
-                        <div className="px-5 md:px-0 lg:w-96 lg:mt-4 flex flex-col gap-8">
+                        <div className="px-5 md:px-0 lg:mt-4 flex flex-col @3xl:flex-row @5xl:flex-col @5xl:flex-[0_0_300px] @6xl:flex-[0_0_350px] gap-8">
 
-                          <div>
+                          <div className="@3xl:flex-[0_0_300px] @5xl:flex-[0_0_auto]">
                             <h4>Things you should know</h4>
                             <ul className="list-none p-0 space-y-1 [&_li]:text-[15px]">
                               <li className="relative pl-6">
