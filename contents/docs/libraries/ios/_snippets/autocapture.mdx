@@ -66,9 +66,3 @@ struct HomeView: View {
 ```
 
 In SwiftUI, views can range from entire screens to small UI components. Unlike UIKit, SwiftUI doesn’t clearly distinguish between these levels, which makes automatic tracking of full-screen views harder.
-
-### Disabling autocapture
-
-To disable autocapture, set `config.autocapture` to `false` in the configuration.
-
-> **Note:** Disabling `$autocapture` will *not* prevent the collection of screen view and application lifecycle events. To disable these specific events, use `config.captureScreenViews` and `config.captureApplicationLifecycleEvents` in the configuration.
