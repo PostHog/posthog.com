@@ -510,7 +510,7 @@ const Header = ({
 }
 
 export default function Team({ body, name, roadmaps, objectives, emojis, newTeam }) {
-    const { team, addTeamMember, removeTeamMember, handleTeamLead, updateTeam } = useTeam({
+    const { team, updateTeam } = useTeam({
         teamName: name,
     })
 
@@ -549,8 +549,19 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                 imageXOffset: '0',
                 imageYOffset: '0',
             },
+            teamMembers: team?.attributes?.profiles?.data || [],
+            teamLeads: team?.attributes?.leadProfiles?.data || [],
         },
-        onSubmit: async ({ name, description, teamImageCaption, crestImage, crestOptions, ...other }) => {
+        onSubmit: async ({
+            name,
+            description,
+            teamImageCaption,
+            crestImage,
+            crestOptions,
+            teamMembers,
+            teamLeads,
+            ...other
+        }) => {
             const jwt = await getJwt()
             const profileID = user?.profile?.id
             if (!profileID || !jwt) return
@@ -562,8 +573,8 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                     type: 'api::profile.profile',
                 }))
             const uploadedCrestImage =
-                values?.crestImage?.file &&
-                (await uploadImage(values.crestImage.file, jwt, {
+                crestImage?.file &&
+                (await uploadImage(crestImage.file, jwt, {
                     field: 'images',
                     id: profileID,
                     type: 'api::profile.profile',
@@ -579,8 +590,10 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                         : teamImage?.image?.data?.id,
                     caption: teamImageCaption,
                 },
-                crestOptions: values.crestOptions,
+                crestOptions,
                 ...(uploadedCrestImage ? { crest: uploadedCrestImage.id } : {}),
+                ...(teamMembers ? { profiles: teamMembers.map(({ id }) => ({ id })) } : {}),
+                ...(teamLeads ? { leadProfiles: teamLeads.map(({ id }) => ({ id })) } : {}),
             }
             await updateTeam(updatedTeam)
             setEditing(false)
@@ -624,7 +637,29 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
     })
 
     function isTeamLead(id) {
-        return leadProfiles?.data?.some(({ id: leadID }) => leadID === id)
+        return editing
+            ? values.teamLeads?.some(({ id: leadID }) => leadID === id)
+            : leadProfiles?.data?.some(({ id: leadID }) => leadID === id)
+    }
+
+    const addTeamMember = (profile) => {
+        setFieldValue('teamMembers', [...values.teamMembers, { id: profile.id, attributes: profile }])
+    }
+
+    const removeTeamMember = (profileID) => {
+        const teamMembers = values.teamMembers.filter((teamMember) => teamMember.id !== profileID)
+        setFieldValue('teamMembers', teamMembers)
+    }
+
+    const handleTeamLead = (profileID, isTeamLead) => {
+        if (isTeamLead) {
+            setFieldValue(
+                'teamLeads',
+                values.teamLeads.filter((teamLead) => teamLead.id !== profileID)
+            )
+        } else {
+            setFieldValue('teamLeads', [...values.teamLeads, { id: profileID }])
+        }
     }
 
     const hasUnderConsideration = underConsideration?.length > 0
@@ -705,8 +740,8 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                 <div className="lg:flex lg:space-x-12 space-y-12 lg:space-y-0">
                     <div className="@container flex-1">
                         <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
-                            {profiles?.data
-                                ? [...profiles.data]
+                            {profiles?.data || values.teamMembers
+                                ? [...(editing ? values.teamMembers : profiles.data)]
                                       .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
                                       .map((profile) => {
                                           const {
@@ -755,7 +790,7 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                                                                   isTeamLead={isTeamLead(id)}
                                                                   pineappleOnPizza={pineappleOnPizza}
                                                                   handleTeamLead={handleTeamLead}
-                                                                  isModerator={isModerator}
+                                                                  editing={editing}
                                                                   id={id}
                                                               />
                                                           </div>
@@ -764,13 +799,14 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                                                           <img
                                                               src={
                                                                   avatar?.data?.attributes?.url ||
+                                                                  avatar?.url ||
                                                                   'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
                                                               }
                                                               className="w-[165px]"
                                                           />
                                                       </div>
                                                   </button>
-                                                  {isModerator && (
+                                                  {editing && (
                                                       <button
                                                           onClick={() => removeTeamMember(id)}
                                                           className="w-7 h-7 rounded-full border border-border dark:border-dark absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent dark:bg-accent-dark"
@@ -789,7 +825,7 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                                       </li>
                                   ))}
                         </ul>
-                        {isModerator && <AddTeamMember handleChange={(user) => addTeamMember(user.profile.id)} />}
+                        {editing && <AddTeamMember handleChange={(user) => addTeamMember(user.profile)} />}
                     </div>
 
                     {profiles?.data?.length > 0 && (
