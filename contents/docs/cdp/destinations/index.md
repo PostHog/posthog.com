@@ -141,6 +141,8 @@ The key metrics that we observe to determine poor performance are:
 1. Errors thrown within the code (for example if you try to access a property that doesn't exist).
 2. Repeatedly slow responses from the destination. Some slow HTTP calls are fine but if you send thousands of events and the destination can't keep up, we will eventually disable it to protect ourselves and the destination.
 
+We **do not** consider 4xx HTTP codes to be poor performance. Some destinations utilize these responses to determine if a follow up HTTP call is required (for example a 409 conflict indicating a record already exists). Non "OK" statuses will however be logged in order to help debugging potential issues.
+
 ### How do you handle retries?
 
 By default, all HTTP calls (`fetch` calls in Hog) are expected to return a 2xx response. If we get a non-OK response we will retry up to 3 times depending on the error codes. We may modify this logic as we make improvements to try and balance reliability and speed.
