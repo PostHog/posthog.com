@@ -458,14 +458,14 @@ const handleCookieConsent = (consent) => {
 
 ## Amending events before they are captured
 
-When initializing the SDK you can provide a `beforeSend` function. 
+When initializing the SDK you can provide a `before_send` function. 
 This can be used to amend or reject events before they are sent to PostHog.
 
 > **Note:** amending and rejecting events should be done with care. It can cause unexpected results in parts of PostHog.
 
-### Not all events are processed by `beforeSend`.
+### Not all events are processed by `before_send`.
 
-Events which are to do with billing or where sampling/editing would break the PostHog feature are never processed by `beforeSend`
+Events which are to do with billing or where sampling/editing would break the PostHog feature are never processed by `before_send`
 
 * $web_experiment_applied
 * $$client_ingestion_warning
@@ -481,13 +481,13 @@ Events which are to do with billing or where sampling/editing would break the Po
 
 ### Redacting information in events
 
-`beforeSend` gives you one place to edit or redact information before it is sent to PostHog.
+`before_send` gives you one place to edit or redact information before it is sent to PostHog.
 
 #### Redact URLs in event properties
 
 ```
 posthog.init('my_token', {
-    beforeSend: (event): event | null => {
+    before_send: (event): event | null => {
         const redactedProperties = {}
         for (const [key, value] of Object.entries(event.properties || {})) {
             if (key.includes(url)) {
@@ -507,7 +507,7 @@ posthog.init('my_token', {
 
 ```
 posthog.init('my_token', {
-    beforeSend: (event): event | null => {
+    before_send: (event): event | null => {
         event.$set = {
             ...event.$set,
             homeAddress: '******'
@@ -527,7 +527,7 @@ posthog.init('my_token', {
 
 ```
 posthog.init('my_token', {
-    beforeSend: (event): event | null => {
+    before_send: (event): event | null => {
         if (event.event !== '$heatmap') {
             const redactedHeatmapData = {}
             
@@ -556,7 +556,7 @@ You can import this or copy it from our repo.
 ```
 posthog.init('my_token', {
     // capture only half of dead click and web vitals events
-    beforeCapture: sampleByEvent(['$dead_click', '$web_vitals'], 50)
+    before_send: sampleByEvent(['$dead_click', '$web_vitals'], 50)
 })
 ```
 
@@ -564,7 +564,7 @@ posthog.init('my_token', {
 
 ```
 posthog.init('my_token', {
-    beforeSend: (event) => {
+    before_send: (event) => {
         let sampleRate = 1.0 // default to always returning the event
         if (event.event === '$heatmap) {
             sampleRate = 0.1
@@ -586,7 +586,7 @@ A particular distinct id will always either send all events or no events.
 
 ```
 posthog.init('my_token', {
-    beforeCapture: sampleByDistinctId(40)
+    before_send: sampleByDistinctId(40)
 })
 ```
 
@@ -599,7 +599,7 @@ A particular session id will always either send all events or no events.
 
 ```
 posthog.init('my_token', {
-    beforeCapture: sampleBySessionId(25)
+    before_send: sampleBySessionId(25)
 })
 ```
 
