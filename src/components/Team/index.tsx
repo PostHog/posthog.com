@@ -235,24 +235,6 @@ const Crest = ({ crest, crestOptions, teamName, editing, setFieldValue, values, 
         setFieldValue('crestImage', image)
     }
 
-    const handleSaveCrest = async () => {
-        const jwt = await getJwt()
-        const profileID = user?.profile?.id
-        if (!profileID || !jwt) return
-        const uploadedCrestImage =
-            values?.crestImage?.file &&
-            (await uploadImage(values.crestImage.file, jwt, {
-                field: 'images',
-                id: profileID,
-                type: 'api::profile.profile',
-            }))
-        await updateTeam({
-            crestOptions: values.crestOptions,
-            ...(uploadedCrestImage ? { crest: uploadedCrestImage.id } : {}),
-        })
-        setCrestBuilderOpen(false)
-    }
-
     return (
         <>
             <Modal open={crestBuilderOpen} setOpen={setCrestBuilderOpen}>
@@ -439,7 +421,7 @@ const Crest = ({ crest, crestOptions, teamName, editing, setFieldValue, values, 
                                 </div>
                                 <button
                                     type="button"
-                                    onClick={handleSaveCrest}
+                                    onClick={() => setCrestBuilderOpen(false)}
                                     className={button('primary', 'full', undefined, 'md')}
                                 >
                                     Save
@@ -450,13 +432,13 @@ const Crest = ({ crest, crestOptions, teamName, editing, setFieldValue, values, 
                 </div>
             </Modal>
 
-            {crest?.data ? (
+            {values.crestOptions ? (
                 <div className="flex flex-col gap-2">
                     <TeamPatch
                         name={teamName}
-                        imageUrl={crest?.data?.attributes?.url}
+                        imageUrl={values.crestImage?.objectURL}
                         className="h-48 md:h-80 -mt-2 md:-mt-6 mb-2 md:mb-0"
-                        {...crestOptions}
+                        {...values.crestOptions}
                     />
                     {editing && (
                         <CallToAction onClick={() => setCrestBuilderOpen(true)} size="sm" type="secondary">
@@ -579,6 +561,13 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                     id: profileID,
                     type: 'api::profile.profile',
                 }))
+            const uploadedCrestImage =
+                values?.crestImage?.file &&
+                (await uploadImage(values.crestImage.file, jwt, {
+                    field: 'images',
+                    id: profileID,
+                    type: 'api::profile.profile',
+                }))
             const updatedTeam = {
                 name,
                 description,
@@ -590,6 +579,8 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                         : teamImage?.image?.data?.id,
                     caption: teamImageCaption,
                 },
+                crestOptions: values.crestOptions,
+                ...(uploadedCrestImage ? { crest: uploadedCrestImage.id } : {}),
             }
             await updateTeam(updatedTeam)
             setEditing(false)
