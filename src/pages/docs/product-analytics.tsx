@@ -13,7 +13,6 @@ import List from 'components/List'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
-import slugify from 'slugify'
 
 type ProductAnalyticsProps = {
     data: {
@@ -138,7 +137,7 @@ const articles = [
 
 
 export const Intro = () => (
-    <header className="pb-8">
+    <header className="pb-2">
         <h1 className="text-4xl mt-0 mb-2">Product analytics</h1>
         <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
         New to PostHog analytics? Here are some good places to start.
@@ -203,7 +202,10 @@ export const Content = ({ quickLinks = false }) => {
             </div>
 
             {articles.map((group, i) => (
-                <div id={group.role?.toLowerCase().replace(/\s+/g, '-')} key={i}>
+                <div id={group.role ? 
+                    group.role.toLowerCase().replace(/\s+/g, '-') : 
+                    group.subtitle.toLowerCase().replace(/\s+/g, '-')
+                } key={i}>
                     <h3 className="mb-2">{group.subtitle} {group.role && <span className="text-red dark:text-yellow font-bold">{group.role}</span>}</h3>
                     <ul className="space-y-1 text-sm mb-6">
                         {group.pages.map((page, j) => (
