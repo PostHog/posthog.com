@@ -5,7 +5,7 @@ import CTA from 'components/Home/CTA'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import ProductCTA from 'components/Products/CTA'
-import { IconCheck, IconX } from '@posthog/icons'
+import { IconArrowRightDown, IconCheck, IconX } from '@posthog/icons'
 import ProductBar from 'components/Products/ProductBar'
 
 const product = {
@@ -507,6 +507,20 @@ const comparison = [
     },
 ]
 
+const TwoColumns = ({ title, children }) => {
+    return (
+        <div className="grid @2xl:grid-cols-3 @2xl:gap-8 mb-8">
+            <div className="col-span-1">
+                <h3 className="text-xl mb-2">{title}</h3>
+            </div>
+            <div className="col-span-2">
+                {children}
+            </div>
+        </div>
+    )
+}
+
+
 export const ProductProductAnalyticsCompare = () => {
     const { fullWidthContent } = useLayoutData()
     return (
@@ -532,11 +546,15 @@ export const ProductProductAnalyticsCompare = () => {
                     <p className="mb-0 text-[15px]">At a minimum, PostHog aims for feature parity with other analytics products. If you don't see what you're looking for, <Link href="/roadmap">vote on our roadmap</Link> or <Link href="https://github.com/posthog/posthog/issues">request a feature</Link>.</p>
                   </blockquote>
 
-                  <div className="border-b border-light dark:border-dark pb-4 mb-8">
+                  
                     <h2 className="text-2xl mb-1">Is PostHog right for you? Here's the tl;dr:</h2>
                     <p>(We've summarized the main reasons to choose PostHog or somebody else so you don't have to read pages of marketing speak.)</p>
+
+                    <div className="mb-4">
+                        Or <button className="font-semibold text-red dark:text-yellow text-[15px]">jump to the feature comparison <IconArrowRightDown className="size-4 inline-block text-red dark:text-yellow" /></button>
+                    </div>
             
-                      <div className="mb-8 grid @4xl:md:grid-cols-2 gap-4">
+                      <div className="mb-8 grid @4xl:md:grid-cols-2 gap-12 @4xl:gap-4">
                           <VsCompetitor
                               title="Reasons a competitor may be best for you (for now...)"
                               image={
@@ -563,7 +581,7 @@ export const ProductProductAnalyticsCompare = () => {
                               </ul>
                           </VsCompetitor>
                           <VsPostHog>
-                              <ul  className="pl-4 space-y-2 [&_*]:text-[15px] [&_li]:leading-snug">
+                              <ul className="pl-4 space-y-2 [&_*]:text-[15px] [&_li]:leading-snug">
                                   <li>
                                       Linking between analytics and other features, so you can jump from a graph to a
                                       relevant recording
@@ -582,48 +600,48 @@ export const ProductProductAnalyticsCompare = () => {
                           <Link to="/talk-to-a-human">book a demo</Link>.
                       </p>
 
-                  </div>
+                <div className="border-y border-light dark:border-dark pt-8 my-8">
 
-                  <h3>But it's more than just features</h3>
-                  <p><strong>PostHog is fundamentally different in a few ways.</strong></p>
+                  <h2 className="text-2xl mb-1">But it's more than just features</h2>
+                  <p>PostHog is fundamentally different in a few ways.</p>
 
-                  <h3>Built for engineers</h3>
-                  <p className="mb-2">What does this mean?</p>
+                  <TwoColumns title="Built for engineers">
+                    <p className="pt-1 mb-2">What does this mean?</p>
+                    <ul className="mb-0 pl-4">
+                        <li>
+                            <Link href="#">We ship fast</Link> and iterate based on user feedback.
+                        </li>
+                        <li>
+                        Engineers do support – all product teams have <Link href="#">a weekly support hero</Link>.
+                        </li>
+                        <li>
+                        We have extensive <Link href="#">public and private API endpoints</Link>, and <Link href="#">a powerful SQL query builder</Link>.
+                        </li>
+                        <li>
+                        We built <Link href="#">SDKs</Link> for all popular (and many unpopular) client-side, backend, and mobile languages and frameworks.
+                        </li>
+                        <li>
+                        We make it easy to <Link href="#">test in production</Link>, conduct <Link href="#">phased rollouts</Link>, <Link href="#">run beta programs</Link>, and so much more.
+                        </li>
+                    </ul>
+                  </TwoColumns>
 
-                  <ul className="mb-6">
-                    <li>
-                      <Link href="#">We ship fast</Link> and iterate based on user feedback.
-                    </li>
-                    <li>
-                      Engineers do support – all product teams have <Link href="#">a weekly support hero</Link>.
-                    </li>
-                    <li>
-                      We have extensive <Link href="#">public and private API endpoints</Link>, and <Link href="#">a powerful SQL query builder</Link>.
-                    </li>
-                    <li>
-                      We built <Link href="#">SDKs</Link> for all popular (and many unpopular) client-side, backend, and mobile languages and frameworks.
-                    </li>
-                    <li>
-                      We make it easy to <Link href="#">test in production</Link>, conduct <Link href="#">phased rollouts</Link>, <Link href="#">run beta programs</Link>, and so much more.
-                    </li>
-                  </ul>
+                  <TwoColumns title="All-in-one platform">
+                    <p className="mb-2">Most product we're typically compared to only offer a subset of products. This means you need to adopt additional tools for things like feature management, experiments, and surveys. They're all built into PostHog – we even have a built-in data warehouse that <Link href="#">integrates with Stripe</Link> and <Link href="#">Hubspot</Link>.</p>
+                    <p className="mb-0"><strong>You can replace half a dozen tools with PostHog, save money, and get more from your data.</strong></p>
+                  </TwoColumns>
 
-                  <h3>All-in-one platform</h3>
-                  <p className="mb-2">Most product we're typically compared to only offer a subset of products. This means you need to adopt additional tools for things like feature management, experiments, and surveys. They're all built into PostHog – we even have a built-in data warehouse that <Link href="#">integrates with Stripe</Link> and <Link href="#">Hubspot</Link>.</p>
-
-                  <p><strong>You can replace half a dozen tools with PostHog, save money, and get more from your data.</strong></p>
-
-                  <h3>We're totally transparent</h3>
-                  <ul className="mb-6">
-                    <li>How much will PostHog cost? <Link href="#">Use our pricing calculator.</Link></li>
-                    <li>What are we working on? It's on <Link href="#">our public roadmap</Link>.</li>
-                    <li>How does sales work? We have <Link href="#">a whole page on it</Link>.</li>
-                    <li>What do we care about? We explain everything <Link href="#">in our public company handbook</Link>.</li>
-                    <li>How do we make money? That's <Link href="#">in the handbook, too</Link>.</li>
-                    <li>We're open source, too. You can <Link href="#">peek at our code on GitHub</Link>.</li>
-                  </ul>
-
-                  
+                  <TwoColumns title="We're totally transparent">
+                    <ul className="mb-0 pl-4">
+                        <li>How much will PostHog cost? <Link href="#">Use our pricing calculator.</Link></li>
+                        <li>What are we working on? It's on <Link href="#">our public roadmap</Link>.</li>
+                        <li>How does sales work? We have <Link href="#">a whole page on it</Link>.</li>
+                        <li>What do we care about? We explain everything <Link href="#">in our public company handbook</Link>.</li>
+                        <li>How do we make money? That's <Link href="#">in the handbook, too</Link>.</li>
+                        <li>We're open source, too. You can <Link href="#">peek at our code on GitHub</Link>.</li>
+                    </ul>
+                  </TwoColumns>
+                </div>
 
                   <h3 className="mb-1">Compare features</h3>
                   <p>Explore how PostHog compares for platform benefits, product analytics features, and other products.</p>
