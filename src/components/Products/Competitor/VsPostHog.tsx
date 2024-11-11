@@ -16,8 +16,8 @@ export const VsPostHog = ({ children }) => {
                 />
             </div>
             <div className="flex-1 mb-auto">
-                <h4 className="leading-tight flex items-end gap-2">
-                    <span>Reasons to choose</span> <Logo className="w-32" />
+                <h4 className="leading-tight gap-2">
+                    <span className="inline-block mr-1">Reasons to choose</span> <Logo className="w-32 inline-block -mt-2" />
                 </h4>
                 {children}
             </div>

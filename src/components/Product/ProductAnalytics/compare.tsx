@@ -525,10 +525,66 @@ export const ProductProductAnalyticsCompare = () => {
                 />
 
                 <section
-                    className={`@container ${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl px-5'} py-8 transition-all`}
+                    className={`@container ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'} py-8 px-4 @2xl:px-6 @4xl:px-8 transition-all`}
                 >
-                  <h1 className="mb-2">PostHog vs...</h1>
-                  <p className="mb-4 text-[15px]">At minimum, PostHog aims for feature parity with other analytics products. If you don't see what you're looking for, <Link href="/roadmap">vote on our roadmap</Link> or <Link href="https://github.com/posthog/posthog/issues">request a feature</Link>.</p>
+                  <h1 className="text-3xl md:text-4xl mb-4">PostHog vs...</h1>
+                  <blockquote className="px-6 py-4 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-6">
+                    <p className="mb-0 text-[15px]">At a minimum, PostHog aims for feature parity with other analytics products. If you don't see what you're looking for, <Link href="/roadmap">vote on our roadmap</Link> or <Link href="https://github.com/posthog/posthog/issues">request a feature</Link>.</p>
+                  </blockquote>
+
+                  <div className="border-b border-light dark:border-dark pb-4 mb-8">
+                    <h2 className="text-2xl mb-1">Is PostHog right for you? Here's the tl;dr:</h2>
+                    <p>(We've summarized the main reasons to choose PostHog or somebody else so you don't have to read pages of marketing speak.)</p>
+            
+                      <div className="mb-8 grid @4xl:md:grid-cols-2 gap-4">
+                          <VsCompetitor
+                              title="Reasons a competitor may be best for you (for now...)"
+                              image={
+                                  <CloudinaryImage
+                                      src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-pa.png"
+                                      className="max-w-[171px]"
+                                  />
+                              }
+                          >
+                              <ul className="pl-4 space-y-2 [&_*]:text-[15px] [&_li]:leading-snug">
+                                  <li>
+                                      Time-based analysis for web analytics (e.g. time on page)
+                                      – <em>we're <Link to="/teams/web-analytics">working on this</Link>!</em>
+                                  </li>
+                                  <li>
+                                    Natural language processing for creating insights
+                                    – <em><Link to="#">this too</Link>!</em>
+                                    </li>
+                                  <li>
+                                    Alerting for when events move beyond set thresholds
+                                    – <em><Link to="#">also this</Link>!</em>
+                                  </li>
+                                  <li>Predictive analytics for extrapolating events into the future</li>
+                              </ul>
+                          </VsCompetitor>
+                          <VsPostHog>
+                              <ul  className="pl-4 space-y-2 [&_*]:text-[15px] [&_li]:leading-snug">
+                                  <li>
+                                      Linking between analytics and other features, so you can jump from a graph to a
+                                      relevant recording
+                                  </li>
+                                  <li>Wide range of insight types for analyzing data</li>
+                                  <li>Formula mode and SQL access to enable deeper analysis</li>
+                                  <li>Automatic correlation analysis to find significant events</li>
+                                  <li>Group analytics for teams with B2B customers</li>
+                              </ul>
+                          </VsPostHog>
+                      </div>
+
+                      <p className="text-center text-sm font-medium">
+                          Have questions about PostHog? <br className="md:hidden" />
+                          <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
+                          <Link to="/talk-to-a-human">book a demo</Link>.
+                      </p>
+
+                  </div>
+
+                  <h3>But it's more than just features</h3>
                   <p><strong>PostHog is fundamentally different in a few ways.</strong></p>
 
                   <h3>Built for engineers</h3>
@@ -567,56 +623,7 @@ export const ProductProductAnalyticsCompare = () => {
                     <li>We're open source, too. You can <Link href="#">peek at our code on GitHub</Link>.</li>
                   </ul>
 
-                  <div className="border-y border-light dark:border-dark py-4 mb-8">
-                    <h3>Is PostHog right for you?</h3>
-                    <p>Rather than forcing you to try to parse through marketing-speak, we've summarized the main reasons to choose PostHog or somebody else.</p>
-
-            
-                      <div className="mb-8 mx-5 md:mx-0 grid md:grid-cols-2 gap-4">
-                          <VsCompetitor
-                              title="Reasons a competitor may be best for you (for now...)"
-                              image={
-                                  <CloudinaryImage
-                                      src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-pa.png"
-                                      className="max-w-[171px]"
-                                  />
-                              }
-                          >
-                              <ul>
-                                  <li>
-                                      Time-based analysis for web analytics (e.g. time on page)
-                                      <ul className="pl-6">
-                                          <li className="text-sm">
-                                              (We're <Link to="/teams/web-analytics">working on this</Link>!)
-                                          </li>
-                                      </ul>
-                                  </li>
-                                  <li>Natural language processing for creating insights</li>
-                                  <li>Predictive analytics for extrapolating events into the future</li>
-                                  <li>Alerting for when events move beyond set thresholds</li>
-                              </ul>
-                          </VsCompetitor>
-                          <VsPostHog>
-                              <ul>
-                                  <li>
-                                      Linking between analytics and other features, so you can jump from a graph to a
-                                      relevant recording
-                                  </li>
-                                  <li>Wide range of insight types for analyzing data</li>
-                                  <li>Formula mode and SQL access to enable deeper analysis</li>
-                                  <li>Automatic correlation analysis to find significant events</li>
-                                  <li>Group analytics for teams with B2B customers</li>
-                              </ul>
-                          </VsPostHog>
-                      </div>
-
-                      <p className="text-center text-sm font-medium">
-                          Have questions about PostHog? <br className="md:hidden" />
-                          <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                          <Link to="/talk-to-a-human">book a demo</Link>.
-                      </p>
-
-                  </div>
+                  
 
                   <h3 className="mb-1">Compare features</h3>
                   <p>Explore how PostHog compares for platform benefits, product analytics features, and other products.</p>
