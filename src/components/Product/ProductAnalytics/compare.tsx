@@ -531,129 +531,133 @@ export const ProductProductAnalyticsCompare = () => {
                 image={`/images/og/product-analytics.jpg`}
             />
 
-                <ProductBar
-                    color="blue"
-                    icon={<IconGraph />}
-                    product={product.capitalized}
-                    beta={false}
-                />
+                <div className="@container bg-white/50 dark:bg-dark pb-8">
 
-                <section
-                    className={`@container ${fullWidthContent ? 'max-w-full' : 'max-w-7xl'} py-8 px-4 @2xl:px-6 @4xl:px-8 transition-all`}
-                >
-                  <h1 className="text-3xl md:text-4xl mb-4">PostHog vs...</h1>
-                  <blockquote className="px-6 py-4 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-6">
-                    <p className="mb-0 text-[15px]">At a minimum, PostHog aims for feature parity with other analytics products. If you don't see what you're looking for, <Link href="/roadmap">vote on our roadmap</Link> or <Link href="https://github.com/posthog/posthog/issues">request a feature</Link>.</p>
-                  </blockquote>
 
-                  
-                    <h2 className="text-2xl mb-1">Is PostHog right for you? Here's the tl;dr:</h2>
-                    <p>(We've summarized the main reasons to choose PostHog or somebody else so you don't have to read pages of marketing speak.)</p>
+                    <ProductBar
+                        color="blue"
+                        icon={<IconGraph />}
+                        product={product.capitalized}
+                        beta={false}
+                    />
 
-                    <div className="mb-4">
-                        Or <button className="font-semibold text-red dark:text-yellow text-[15px]">jump to the feature comparison <IconArrowRightDown className="size-4 inline-block text-red dark:text-yellow" /></button>
-                    </div>
-            
-                      <div className="mb-8 grid @4xl:md:grid-cols-2 gap-12 @4xl:gap-4">
-                          <VsCompetitor
-                              title="Reasons a competitor may be best for you (for now...)"
-                              image={
-                                  <CloudinaryImage
-                                      src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-pa.png"
-                                      className="max-w-[171px]"
-                                  />
-                              }
-                          >
-                              <ul className="pl-4 space-y-2 [&_*]:text-[15px] [&_li]:leading-snug">
-                                  <li>
-                                      Time-based analysis for web analytics (e.g. time on page)
-                                      – <em>we're <Link to="/teams/web-analytics">working on this</Link>!</em>
-                                  </li>
-                                  <li>
-                                    Natural language processing for creating insights
-                                    – <em><Link to="#">this too</Link>!</em>
-                                    </li>
-                                  <li>
-                                    Alerting for when events move beyond set thresholds
-                                    – <em><Link to="#">also this</Link>!</em>
-                                  </li>
-                                  <li>Predictive analytics for extrapolating events into the future</li>
-                              </ul>
-                          </VsCompetitor>
-                          <VsPostHog>
-                              <ul className="pl-4 space-y-2 [&_*]:text-[15px] [&_li]:leading-snug">
-                                  <li>
-                                      Linking between analytics and other features, so you can jump from a graph to a
-                                      relevant recording
-                                  </li>
-                                  <li>Wide range of insight types for analyzing data</li>
-                                  <li>Formula mode and SQL access to enable deeper analysis</li>
-                                  <li>Automatic correlation analysis to find significant events</li>
-                                  <li>Group analytics for teams with B2B customers</li>
-                              </ul>
-                          </VsPostHog>
-                      </div>
+                    <section
+                        className={`${fullWidthContent ? 'max-w-full' : 'max-w-7xl'} py-8 px-4 @2xl:px-6 @4xl:px-8 transition-all`}
+                    >
+                    <h1 className="text-3xl md:text-4xl mb-4">PostHog vs...</h1>
+                    <blockquote className="px-6 py-4 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark mb-6">
+                        <p className="mb-0 text-[15px]">At a minimum, PostHog aims for feature parity with other analytics products. If you don't see what you're looking for, <Link href="/roadmap">vote on our roadmap</Link> or <Link href="https://github.com/posthog/posthog/issues">request a feature</Link>.</p>
+                    </blockquote>
 
-                      <p className="text-center text-sm font-medium">
-                          Have questions about PostHog? <br className="md:hidden" />
-                          <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
-                          <Link to="/talk-to-a-human">book a demo</Link>.
-                      </p>
-
-                <div className="border-y border-light dark:border-dark pt-8 my-8">
-
-                  <h2 className="text-2xl mb-1">But it's more than just features</h2>
-                  <p>PostHog is fundamentally different in a few ways.</p>
-
-                  <TwoColumns title="Built for engineers">
-                    <p className="pt-1 mb-2">What does this mean?</p>
-                    <ul className="mb-0 pl-4">
-                        <li>
-                            <Link href="#">We ship fast</Link> and iterate based on user feedback.
-                        </li>
-                        <li>
-                        Engineers do support – all product teams have <Link href="#">a weekly support hero</Link>.
-                        </li>
-                        <li>
-                        We have extensive <Link href="#">public and private API endpoints</Link>, and <Link href="#">a powerful SQL query builder</Link>.
-                        </li>
-                        <li>
-                        We built <Link href="#">SDKs</Link> for all popular (and many unpopular) client-side, backend, and mobile languages and frameworks.
-                        </li>
-                        <li>
-                        We make it easy to <Link href="#">test in production</Link>, conduct <Link href="#">phased rollouts</Link>, <Link href="#">run beta programs</Link>, and so much more.
-                        </li>
-                    </ul>
-                  </TwoColumns>
-
-                  <TwoColumns title="All-in-one platform">
-                    <p className="mb-2">Most product we're typically compared to only offer a subset of products. This means you need to adopt additional tools for things like feature management, experiments, and surveys. They're all built into PostHog – we even have a built-in data warehouse that <Link href="#">integrates with Stripe</Link> and <Link href="#">Hubspot</Link>.</p>
-                    <p className="mb-0"><strong>You can replace half a dozen tools with PostHog, save money, and get more from your data.</strong></p>
-                  </TwoColumns>
-
-                  <TwoColumns title="We're totally transparent">
-                    <ul className="mb-0 pl-4">
-                        <li>How much will PostHog cost? <Link href="#">Use our pricing calculator.</Link></li>
-                        <li>What are we working on? It's on <Link href="#">our public roadmap</Link>.</li>
-                        <li>How does sales work? We have <Link href="#">a whole page on it</Link>.</li>
-                        <li>What do we care about? We explain everything <Link href="#">in our public company handbook</Link>.</li>
-                        <li>How do we make money? That's <Link href="#">in the handbook, too</Link>.</li>
-                        <li>We're open source, too. You can <Link href="#">peek at our code on GitHub</Link>.</li>
-                    </ul>
-                  </TwoColumns>
-                </div>
-
-                  <h3 className="mb-1">Compare features</h3>
-                  <p>Explore how PostHog compares for platform benefits, product analytics features, and other products.</p>
-
-                  <Comparison comparison={comparison} columnCount={comparisonColumnCount} truncate />
                     
-                </section>
+                        <h2 className="text-2xl mb-1">Is PostHog right for you? Here's the tl;dr:</h2>
+                        <p>(We've summarized the main reasons to choose PostHog or somebody else so you don't have to read pages of marketing speak.)</p>
 
-            <div className="max-w-7xl mx-auto relative">
-                <section className="mb-20">
-                    <CTA />
-                </section>
+                        <div className="mb-4">
+                            Or <button className="font-semibold text-red dark:text-yellow text-[15px]">jump to the feature comparison <IconArrowRightDown className="size-4 inline-block text-red dark:text-yellow" /></button>
+                        </div>
+                
+                        <div className="mb-8 grid @4xl:md:grid-cols-2 gap-12 @4xl:gap-4">
+                            <VsCompetitor
+                                title="Reasons a competitor may be best for you (for now...)"
+                                image={
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-pa.png"
+                                        className="max-w-[171px]"
+                                    />
+                                }
+                            >
+                                <ul className="pl-4 space-y-2 [&_*]:text-[15px] [&_li]:leading-snug">
+                                    <li>
+                                        Time-based analysis for web analytics (e.g. time on page)
+                                        – <em>we're <Link to="/teams/web-analytics">working on this</Link>!</em>
+                                    </li>
+                                    <li>
+                                        Natural language processing for creating insights
+                                        – <em><Link to="#">this too</Link>!</em>
+                                        </li>
+                                    <li>
+                                        Alerting for when events move beyond set thresholds
+                                        – <em><Link to="#">also this</Link>!</em>
+                                    </li>
+                                    <li>Predictive analytics for extrapolating events into the future</li>
+                                </ul>
+                            </VsCompetitor>
+                            <VsPostHog>
+                                <ul className="pl-4 space-y-2 [&_*]:text-[15px] [&_li]:leading-snug">
+                                    <li>
+                                        Linking between analytics and other features, so you can jump from a graph to a
+                                        relevant recording
+                                    </li>
+                                    <li>Wide range of insight types for analyzing data</li>
+                                    <li>Formula mode and SQL access to enable deeper analysis</li>
+                                    <li>Automatic correlation analysis to find significant events</li>
+                                    <li>Group analytics for teams with B2B customers</li>
+                                </ul>
+                            </VsPostHog>
+                        </div>
+
+                        <p className="text-center text-sm font-medium">
+                            Have questions about PostHog? <br className="md:hidden" />
+                            <Link to={`/questions/${product.slug}`}>Ask the community</Link> or{' '}
+                            <Link to="/talk-to-a-human">book a demo</Link>.
+                        </p>
+
+                    <div className="border-y border-light dark:border-dark pt-8 my-8">
+
+                    <h2 className="text-2xl mb-1">But it's more than just features</h2>
+                    <p>PostHog is fundamentally different in a few ways.</p>
+
+                    <TwoColumns title="Built for engineers">
+                        <p className="pt-1 mb-2">What does this mean?</p>
+                        <ul className="mb-0 pl-4">
+                            <li>
+                                <Link href="#">We ship fast</Link> and iterate based on user feedback.
+                            </li>
+                            <li>
+                            Engineers do support – all product teams have <Link href="#">a weekly support hero</Link>.
+                            </li>
+                            <li>
+                            We have extensive <Link href="#">public and private API endpoints</Link>, and <Link href="#">a powerful SQL query builder</Link>.
+                            </li>
+                            <li>
+                            We built <Link href="#">SDKs</Link> for all popular (and many unpopular) client-side, backend, and mobile languages and frameworks.
+                            </li>
+                            <li>
+                            We make it easy to <Link href="#">test in production</Link>, conduct <Link href="#">phased rollouts</Link>, <Link href="#">run beta programs</Link>, and so much more.
+                            </li>
+                        </ul>
+                    </TwoColumns>
+
+                    <TwoColumns title="All-in-one platform">
+                        <p className="mb-2">Most product we're typically compared to only offer a subset of products. This means you need to adopt additional tools for things like feature management, experiments, and surveys. They're all built into PostHog – we even have a built-in data warehouse that <Link href="#">integrates with Stripe</Link> and <Link href="#">Hubspot</Link>.</p>
+                        <p className="mb-0"><strong>You can replace half a dozen tools with PostHog, save money, and get more from your data.</strong></p>
+                    </TwoColumns>
+
+                    <TwoColumns title="We're totally transparent">
+                        <ul className="mb-0 pl-4">
+                            <li>How much will PostHog cost? <Link href="#">Use our pricing calculator.</Link></li>
+                            <li>What are we working on? It's on <Link href="#">our public roadmap</Link>.</li>
+                            <li>How does sales work? We have <Link href="#">a whole page on it</Link>.</li>
+                            <li>What do we care about? We explain everything <Link href="#">in our public company handbook</Link>.</li>
+                            <li>How do we make money? That's <Link href="#">in the handbook, too</Link>.</li>
+                            <li>We're open source, too. You can <Link href="#">peek at our code on GitHub</Link>.</li>
+                        </ul>
+                    </TwoColumns>
+                    </div>
+
+                    <h3 className="mb-1">Compare features</h3>
+                    <p>Explore how PostHog compares for platform benefits, product analytics features, and other products.</p>
+
+                    <Comparison comparison={comparison} columnCount={comparisonColumnCount} truncate />
+                        
+                    </section>
+
+                <div className="max-w-7xl mx-auto relative">
+                    <section className="mb-20">
+                        <CTA />
+                    </section>
+                </div>
             </div>
         </>
     )

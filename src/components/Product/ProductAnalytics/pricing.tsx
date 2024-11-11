@@ -80,6 +80,8 @@ export const ProductProductAnalyticsPricing = () => {
                 image={`/images/og/product-analytics.jpg`}
             />
 
+            <div className="@container bg-white/50 dark:bg-dark pb-8">
+
                 <ProductBar
                     color="blue"
                     icon={<IconGraph />}
@@ -89,7 +91,7 @@ export const ProductProductAnalyticsPricing = () => {
 
                 <section
                     id="pricing"
-                    className={`@container ${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl px-5'} py-8 transition-all`}
+                    className={`${fullWidthContent ? 'max-w-full' : 'max-w-7xl'} py-8 px-4 @2xl:px-6 @4xl:px-8 transition-all`}
                 >
                   <h1 className="mb-2">First 1,000,000 events <span className="text-green">free – <em>every month</em></span></h1>
                   <p className="mb-4 text-[15px]">After that, pricing starts at <strong className="font-semibold">$0.00005</strong>/event.</p>
@@ -134,6 +136,7 @@ export const ProductProductAnalyticsPricing = () => {
                 <section className="mb-20">
                     <CTA />
                 </section>
+            </div>
             </div>
         </>
     )
