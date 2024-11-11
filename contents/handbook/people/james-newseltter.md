@@ -153,43 +153,33 @@ We get it, lots of things can go wrong during a launch. There could be scaling i
 
 An easy way to derisk all of these is to run [phased rollouts](https://posthog.com/tutorials/phased-rollout) with feature flags. 
 
-We give our engineers the following guidelines (but not strict rules!) on launching new features:
+We give our engineers the following guidelines on launching new features:
 
 1. **Hacky / most basic version:** Released to a handful of friendly customers.
 2. **80% of feature complete:** Public opt-in beta.
 3. **MVP launch:** Release to 10% of users first, monitor performance and feedback for a few days, then 100% rollout.
 
+Be careful about being too strict with how teams need to do their rollouts though. The key here is ensure processes are enabling teams and not controlling them, so give them their own freedom to decide.
 
-HERE!
+### 3. No designer by default
 
-If you go with this approach, be careful about being too strict with how teams need to do their rollouts. Give them their own freedom to decide. The key here is ensure processes are enabling teams, not controlling them.
+The fewer dependencies and processes a project has, the faster it moves. Design is no exception to this rule, so we have no expectation that projects should start by running through design _first_.
 
-### 3. No design by default / no product design within teams
+Instead, we encourage engineers to identify the goals of their project and the stage that they're at, and then decide how much design help they need. It looks something like this:
 
-We find that the more dependencies or processes a project has, the faster it moves. Design is no exception. We have no expectation that projects should start by running through design _first_.
+- **Feature parity with competitors**:
+   - **🥅 Goal:** Match an existing competitor's feature.
+   - **🎨 Design involvement:** No need to loop in a designer if there's a clear path toward how the product should work or look.
 
-Instead, we encourage engineers to identify the stage and goals of the project and then make a call if and how much design help they want. We've also put a [design system](https://storybook.posthog.net/?path=/docs/exporter-exporter--docs) in place, so enigneers can self-serve their needs
+- **Entirely new feature (MVP)**:
+   - **🥅 Goal:** Determine if users even care about the new feature.
+   - **🎨 Design involvement:** Light recommendations to improve UX if needed, although you should prioritize releasing without delay to get feedback asap.
 
-Engineers can also design their own wireframes, mocks. Or pair with a product designer to brainstorm a flow, add UX love and polish after you've built something 
+- **Improve an existing feature**:
+   - **🥅 Goal:** Significantly improve an existing feature's UX to outshine competitors.
+   - **🎨 Design involvement:** Close collaboration with design recommended.
 
-It looks something like this:
-
-1. v0.1: If we're attempting to reach parity on a product or feature with other competitors in the space – and there's a clear path toward how a product should work or look – there's no need to loop in a designe
-2. MVP: If you're shipping an entirely new feature, then you should prioritize figuring out if any users even care (!), which usually means creating an MVP and releasing it behind a feature flag to some friendly users. During both of the above approaches, designers are happy to provide light recommendations that will improve the user experience without becoming a blocker to shipping.
-3. V2: If you're improving an existing feature that is popular, you are probably creating v2. it's worth working closely with design to figure out how we can 10x our product vs. competitors. However you're building, please communicate to product design what your expectations are!
-
-We generally hire full stack engineers, but some people think more like designers than others. This is fine - you should play to your strengths.
-The less strong you are at design, the more we'd encourage you to involve a product designer.
-
+We've also put together a [design system](https://storybook.posthog.net/?path=/docs/exporter-exporter--docs) to help engineers self-serve their design needs.
 
 ----
 Words by James Hawkins, whose an idiot and should listen to his team more.
-
----
-Hey, I thought of one other example... a very recent one. We had the quarterly planning for CDP. Everyone in the team wanted to polish the CDP and build a great product... Tim effectively blocked us and said we need to work on building the messaging product instead. So we spent a month on it. Now 11labs is asking "why is your CDP shit?" and we're switching priorities back to whole-assing the CDP instead of running around between projects.
-9:49
-the bigger picture takeaway from this is that every time "the execs" have stormed in and changed the priorities of the team (for whichever team I'm on), the end result is that we end up doing what we wanted to do anyway
-
-we effectively got the CDP into "it works, let's start testing with real users"... and during this quarter's planning, when we wanted to take it from 80% to 100%, we were told to bring another project to 50% instead
----
-
