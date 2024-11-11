@@ -4,9 +4,9 @@ date: 2023-11-28
 author:
   - ian-vanagas
 tags:
-  - configuration
   - feature flags
-  - events
+  - product analytics
+  - web analytics
 ---
 
 [Astro](https://astro.build/) is a frontend JavaScript framework focused on performance and simplifying the creation of content-based sites. It has seen a rapid increase in interest and usage since its release in 2022.
