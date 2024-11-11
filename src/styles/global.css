@@ -330,6 +330,10 @@ h4 {
         > summary {
             @apply cursor-pointer text-red dark:text-yellow rounded border border-transparent hover:border-light hover:dark:border-dark font-semibold list-none p-4 pl-8 relative before:absolute before:left-3 before:top-6 before:w-[10px] before:h-[7px];
 
+            &::-webkit-details-marker {
+                @apply hidden;
+            }
+
             &:before {
                 @apply bg-dark dark:bg-accent;
 
