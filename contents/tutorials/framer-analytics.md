@@ -115,3 +115,5 @@ When we save this and publish the site again, the button is still there. When we
 - [How to run A/B tests in Framer](/tutorials/framer-ab-tests)
 - [How to create surveys in Framer](/tutorials/framer-surveys)
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
+
+<NewsletterForm />

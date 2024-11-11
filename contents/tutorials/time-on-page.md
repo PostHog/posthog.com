@@ -225,3 +225,5 @@ ORDER BY time_on_page DESC
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
 - [How to do time-based breakdowns (hour, minute, real time)](/tutorials/time-breakdowns)
 - [Using HogQL for advanced time and date filters](/tutorials/hogql-date-time-filters)
+
+<NewsletterForm />

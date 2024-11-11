@@ -347,3 +347,5 @@ Once done, you have a basic Ruby on Rails app with many of the key features of P
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [How to set up A/B tests in Ruby on Rails](/tutorials/ruby-on-rails-ab-tests)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
+
+<NewsletterForm />

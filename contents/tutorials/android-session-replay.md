@@ -265,3 +265,5 @@ Now, the welcome messages shows up in replays like this:
 - [How to run A/B tests in Android](/tutorials/android-ab-tests)
 - [How to set up analytics in Android](/tutorials/android-analytics)
 - [How to set up feature flags in Android](/tutorials/android-feature-flags)
+
+<NewsletterForm />

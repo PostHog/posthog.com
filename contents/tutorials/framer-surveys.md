@@ -59,3 +59,5 @@ If you capture identified events, you can also filter these results based on [pe
 - [How to set up Framer analytics and session recordings](/tutorials/framer-analytics)
 - [How to run A/B tests in Framer](/tutorials/framer-ab-tests)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+
+<NewsletterForm />

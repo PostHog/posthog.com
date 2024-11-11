@@ -108,3 +108,5 @@ The ultimate goal of performance marketing is to help you make more money and gr
 - [Building an AARRR pirate funnel (how and why)](/blog/aarrr-pirate-funnel)
 - [How to calculate and lower churn rate](/tutorials/churn-rate)
 - [The complete guide to event tracking](/tutorials/event-tracking-guide)
+
+<NewsletterForm />

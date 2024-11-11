@@ -60,3 +60,5 @@ You can also [set up up the Slack destination](/docs/cdp/destinations/slack) to 
 - [How to capture events from Calendly webhooks](/tutorials/calendly-webhooks)
 - [How to capture new RSS items in PostHog (releases, blogs, status)](/tutorials/rss-item-capture)
 - [Using the PostHog API to capture events](/tutorials/api-capture-events)
+
+<NewsletterForm />

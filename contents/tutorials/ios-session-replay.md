@@ -247,3 +247,5 @@ Now, the welcome messages shows up like this in replays:
 - [How to run A/B tests in iOS](/tutorials/ios-ab-tests)
 - [How to set up analytics in iOS](/tutorials/ios-analytics)
 - [How to set up feature flags in iOS](/tutorials/ios-feature-flags)
+
+<NewsletterForm />

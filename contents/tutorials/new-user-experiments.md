@@ -194,3 +194,5 @@ Once results start to show up in PostHog, we can say we’ve successfully set up
 If you’re looking to learn more about feature flags, check out our [product manual](/manual/experimentation) to learn all about their features.
 
 You can also learn about how to run Experiments without feature flags in [this tutorial](/docs/experiments/running-experiments-without-feature-flags).
+
+<NewsletterForm />
