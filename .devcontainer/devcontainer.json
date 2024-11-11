@@ -4,6 +4,5 @@
     "ghcr.io/devcontainers/features/node:1": {
       "version": "18"
     }
-  },
-  "postCreateCommand": "nvm use 18"
+  }
 }
