@@ -456,6 +456,153 @@ const handleCookieConsent = (consent) => {
 
 - If you don't want PostHog to store anything on the user's browser (e.g. if you want to rely on your own identification mechanism only or want completely anonymous users), you can set `disable_persistence: true` in PostHog's config. If you do this, remember to call [`posthog.identify`](#identifying-users) **every time** your app loads. If you don't, every page refresh is treated as a new and different user.
 
+## Amending events before they are captured
+
+When initializing the SDK you can provide a `beforeSend` function. 
+This can be used to amend or reject events before they are sent to PostHog.
+
+> **Note:** amending and rejecting events should be done with care. It can cause unexpected results in parts of PostHog.
+
+### Not all events are processed by `beforeSend`.
+
+Events whic are to do with billing or where sampling/editing would break the PostHog feature are never processed by `beforeSend`
+
+* $web_experiment_applied
+* $$client_ingestion_warning
+* $feature_enrollment_update
+* $feature_flag_called
+* survey dismissed
+* survey sent
+* survey shown
+* $snapshot
+* $identify
+* $groupidentify
+* $create_alias
+
+### Redacting information in events
+
+`beforeSend` gives you one place to edit or redact information before it is sent to PostHog.
+
+#### Redact URLs in event properties
+
+```
+posthog.init('my_token', {
+    beforeSend: (event): event | null => {
+        const redactedProperties = {}
+        for (const [key, value] of Object.entries(event.properties || {})) {
+            if (key.includes(url)) {
+                redactedProperties[key] = value.replace(/customer_id/\d+/, 'customer_id/1234567')
+            } else {
+                redactedProperties[key] = value
+            }
+        }
+        event.properties = redactedProperties
+        
+        return event
+    }
+})
+```
+
+#### Redact person properties in $set or $set_once
+
+```
+posthog.init('my_token', {
+    beforeSend: (event): event | null => {
+        event.$set = {
+            ...event.$set,
+            homeAddress: '******'
+        }
+        event.$set_once = {
+            ...event.$set,
+            // TODO should these two account for initial / current prefixes?
+            homeAddress: '******'
+        }
+
+        return event
+    }
+})
+```
+
+#### Redact URLs in heatmap data
+
+```
+posthog.init('my_token', {
+    beforeSend: (event): event | null => {
+        if (event.event !== '$heatmap') {
+            const redactedHeatmapData = {}
+            
+            for(const [url, data] of Object.entries(event.properties.$heatmap_data)) {
+                redactedHeatmapData[url.replace(/private_id\/\d+/, 'private_id/1234567')] = data
+            }
+            event.properties.$heatmap_data = redactedHeatmapData
+        }
+        
+        return event
+    }
+})
+```
+
+### Sampling events
+
+Sampling lets you choose to send only a percentage of events to PostHog. It is a good way to control your costs without having to completely turn off features of the SDK.
+
+Some functions of PostHog - for example much of web analytics - relies on receiving all events. Sampling $pageview or $pageleave events in particular can cause unexpected results.
+
+#### Sampling events using our provided customization
+
+If you're using NPM we offer a pre-built function to sample by event name. 
+You can import this or copy it from our repo.
+
+```
+posthog.init('my_token', {
+    // capture only half of dead click and web vitals events
+    beforeCapture: sampleByEvent(['$dead_click', '$web_vitals'], 50)
+})
+```
+
+#### Sampling events using a custom function
+
+```
+posthog.init('my_token', {
+    beforeSend: (event) => {
+        let sampleRate = 1.1 // default to always returning the event
+        if (event.event === '$heatmap) {
+            sampleRate = 0.1
+        }
+        if (event.event === '$dead_click') {
+            sampleRate = 0.01
+        }
+        return Math.random() <= sampleRate ? event : null
+    }
+})
+```
+
+#### Sampling to receive only 40% of events by person distinct id
+
+If you're using NPM we offer a pre-built function to sample by distinct id. 
+You can import this or copy it from our repo.
+
+A particular distinct id will always either send all events or no events.
+
+```
+posthog.init('my_token', {
+    beforeCapture: sampleByDistinctId(40)
+})
+```
+
+#### Sampling to receive only 25% of events by session id
+
+If you're using NPM we offer a pre-built function to sample by distinct id. 
+You can import this or copy it from our repo.
+
+A particular session id will always either send all events or no events.
+
+```
+posthog.init('my_token', {
+    beforeCapture: sampleBySessionId(25)
+})
+```
+
 ## Config
 
 When calling `posthog.init`, there are various configuration options you can set in addition to `loaded` and `api_host`.
