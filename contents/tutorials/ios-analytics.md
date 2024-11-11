@@ -4,7 +4,8 @@ date: 2024-02-27
 author:
   - lior-neu-ner
 tags:
-  - feature flags
+  - product analytics
+  - web analytics
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
