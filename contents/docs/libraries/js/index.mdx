@@ -572,7 +572,7 @@ posthog.init('my_token', {
         if (event.event === '$dead_click') {
             sampleRate = 0.01
         }
-        return Math.random() <= sampleRate ? event : null
+        return Math.random() < sampleRate ? event : null
     }
 })
 ```
