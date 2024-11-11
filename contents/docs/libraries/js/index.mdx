@@ -565,7 +565,7 @@ posthog.init('my_token', {
 ```
 posthog.init('my_token', {
     beforeSend: (event) => {
-        let sampleRate = 1.1 // default to always returning the event
+        let sampleRate = 1.0 // default to always returning the event
         if (event.event === '$heatmap) {
             sampleRate = 0.1
         }
