@@ -104,7 +104,7 @@ const subfeatures = [
     },
     {
         title: 'Web or mobile session recording',
-        description: 'Watch users on your app or website. Available for web, Android, and iOS.',
+        description: 'Watch users on your app or website. Available for web, Android, iOS and React Native (beta).',
         icon: <IconPhone />,
     },
     {
