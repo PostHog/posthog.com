@@ -4,7 +4,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 export const VsCompetitor = ({ title, children, image }) => {
     return (
         <div
-            className={`pt-4 pr-4`}
+            className={`p-4 border border-light dark:border-dark`}
         >
             <h4 className="leading-tight">{title}</h4>
             <div className="flex flex-col-reverse md:flex-row gap-4">

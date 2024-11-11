@@ -1,5 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
+import Link from 'gatsby-link'
+import { Link as ScrollLink } from 'react-scroll'
 import { StaticImage } from 'gatsby-plugin-image'
 
 import Layout from 'components/Layout'
@@ -11,6 +13,7 @@ import List from 'components/List'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
+import slugify from 'slugify'
 
 type ProductAnalyticsProps = {
     data: {
@@ -22,11 +25,123 @@ type ProductAnalyticsProps = {
     }
 }
 
+const articles = [
+    {
+      "subtitle": "PostHog 101",
+      "pages": [
+        {
+          "title": "Complete guide to event tracking",
+          "path": "#"
+        },
+        {
+          "title": "An introductory guide to identifying users in PostHog",
+          "path": "#"
+        },
+        {
+          "title": "What to do after installing PostHog in 5 steps",
+          "path": "#"
+        },
+        {
+          "title": "A non-technical guide to understanding data in PostHog",
+          "path": "#"
+        },
+        {
+          "title": "The basics of using regex in PostHog",
+          "path": "#"
+        },
+      ]
+    },
+    {
+      "subtitle": "PostHog for",
+      "role": "product engineers",
+      "pages": [
+        {
+          "title": "How to build your own app in PostHog",
+          "path": "#"
+        },
+        {
+          "title": "Canary releases with feature flags",
+          "path": "#"
+        },
+        {
+          "title": "How to use session replays to get a deeper understanding of user behavior",
+          "path": "#"
+        },
+        {
+          "title": "How to discover features that drive user retention",
+          "path": "#"
+        },
+        {
+          "title": "Multiple environments (dev, staging, prod)",
+          "path": "#"
+        },
+        {
+          "title": "Running experiments on new users",
+          "path": "#"
+        },
+        {
+          "title": "Correlate errors with product performance using Sentry",
+          "path": "#"
+        },
+      ]
+    },
+    {
+      "subtitle": "PostHog for",
+      "role": "product managers",
+      "pages": [
+        {
+          "title": "How to calculate and lower churn with PostHog",
+          "path": "#"
+        },
+        {
+          "title": "How to use session replays to get a deeper understanding of user behavior",
+          "path": "#"
+        },
+        {
+          "title": "How to discover features that drive user retention",
+          "path": "#"
+        },
+        {
+          "title": "Get feedback and book user interviews with surveys",
+          "path": "#"
+        },
+      ]
+    },
+    {
+      "subtitle": "PostHog for",
+      "role": "front end developers",
+      "pages": [
+        {
+          "title": "How to build a site app",
+          "path": "#"
+        },
+        {
+          "title": "Cookieless tracking with PostHog",
+          "path": "#"
+        },
+        {
+          "title": "How to add popups to your React app with feature flags",
+          "path": "#"
+        },
+        {
+          "title": "Testing front-end feature flags with React, Jest, & PostHog",
+          "path": "#"
+        },
+        {
+          "title": "Building a Vue cookie consent banner",
+          "path": "#"
+        },
+      ]
+    },
+]
+
+
+
 export const Intro = () => (
     <header className="pb-8">
         <h1 className="text-4xl mt-0 mb-2">Product analytics</h1>
         <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
-            Learn how to use product analytics to understand your users.
+        New to PostHog analytics? Here are some good places to start.
         </h3>
     </header>
 )
@@ -36,11 +151,82 @@ export const Content = ({ quickLinks = false }) => {
     return (
         <>
             <Intro />
+
+            <div className="bg-accent dark:bg-accent-dark p-4 mb-4 rounded-md border border-light dark:border-dark">
+                <p className="mb-2 opacity-70">Table of contents</p>
+                <ol>
+                    <li>
+                        <ScrollLink
+                            to="posthog-101"
+                            smooth={true}
+                            duration={300}
+                            offset={-100}
+                            className="cursor-pointer"
+                        >
+                            PostHog 101
+                        </ScrollLink>
+                    </li>
+                    <li>
+                        <ScrollLink
+                            to="product-engineers"
+                            smooth={true}
+                            duration={300}
+                            offset={-100}
+                            className="cursor-pointer"
+                        >
+                            PostHog for <span className="text-red dark:text-yellow font-semibold">product engineers</span>
+                        </ScrollLink>
+                    </li>
+                    <li>
+                        <ScrollLink
+                            to="product-managers"
+                            smooth={true}
+                            duration={300}
+                            offset={-100}
+                            className="cursor-pointer"
+                        >
+                            PostHog for <span className="text-red dark:text-yellow font-semibold">product managers</span>
+                        </ScrollLink>
+                    </li>
+                    <li>
+                        <ScrollLink
+                            to="front-end-developers"
+                            smooth={true}
+                            duration={300}
+                            offset={-100}
+                            className="cursor-pointer"
+                        >
+                            PostHog for <span className="text-red dark:text-yellow font-semibold">front end developers</span>
+                        </ScrollLink>
+                    </li>
+                </ol>
+            </div>
+
+            {articles.map((group, i) => (
+                <div id={group.role?.toLowerCase().replace(/\s+/g, '-')} key={i}>
+                    <h3 className="mb-2">{group.subtitle} {group.role && <span className="text-red dark:text-yellow font-bold">{group.role}</span>}</h3>
+                    <ul className="space-y-1 text-sm mb-6">
+                        {group.pages.map((page, j) => (
+                        <li key={j} className="first:font-bold first:text-base">
+                            <Link
+                                href={page.path}
+                                className="text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow border-b border-dark dark:border-light hover:border-red dark:hover:border-yellow"
+                            >
+                            {page.title}
+                            </Link>
+                        </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+
             {(quickLinks || compact) && (
                 <QuickLinks
                     items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'product analytics')?.children}
                 />
             )}
+
+            
             <section className="mb-12">
                 <h3 className="mb-1 text-xl">Resources</h3>
                 <p className="text-[15px]">Real-world use cases to get you started</p>
