@@ -187,6 +187,14 @@ The "Opportunity Notes" section is to track key actions and next steps to manage
 - Next Steps: Add actions or tasks required to move the opportunity forward. Be clear and concise to ensure anyone reviewing the opportunity understands what needs to happen next.
 - Next Step Date: Enter the date by which the next step should be completed. This helps in maintaining timelines and keeping follow-ups on track.
 
+### Opportunity Closure Details
+This section is to add additional information for opportunities that are won or lost to capture context and details to setup customer account correctly:
+- Loss Reason: A required field for any opportunity marked as "Closed - Lost." Pick the most appropriate option from the dropdown to help identify patterns.
+- Additional Loss Context: Optional field to add further insights into the loss. It's great to include specific customer feedback if available.
+- Contract Start Date: Especially important for correct account setup and tracking renewals.
+- Products: Select the products discussed/planned to be used as part of the opportunity. Make sure to include all addons so RevOps can ensure the customer’s subscription is set up correctly.
+- Contract Link: Link to the contract in PandaDoc for easy access and reference.
+
 ### Self-Serve Opportunities
 If you feel like a customer doesn't fit a hands-on flow, then you mark the lead or opportunity as self serve. There are two ways to do this:
 
