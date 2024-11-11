@@ -38,10 +38,10 @@ PostHog supports the following Apple platforms:
 
 ## Preventing sensitive data capture
 
-To exclude specific UI elements from Autocapture, add `ph-no-capture` as either an `accessibilityLabel` or `accessibilityIdentifier`. When Autocapture detects this label or identifier anywhere in the view hierarchy, the event will be ignored:
+To exclude specific UI elements from autocapture, add `ph-no-capture` as either an `accessibilityLabel` or `accessibilityIdentifier`. When autocapture detects this label or identifier anywhere in the view hierarchy, the event will be ignored:
 
 ```swift
-// This view will be excluded from Autocapture
+// This view will be excluded from autocapture
 let view = UIView()
 view.accessibilityLabel = "ph-no-capture"
 ```
@@ -307,7 +307,7 @@ configuration.sessionReplay = false
 configuration.sessionReplayConfig = .init()
 
 /**
- * Enable Enable Autocapture. (off/false by default)
+ * Enable autocapture (off/false by default).
  * Experimental support
  */
 configuration.autocapture = false
