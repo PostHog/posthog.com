@@ -50,7 +50,7 @@ Refresh the page and verify the content doesn't display. If you see a white scre
 
 Next, you'll need to ensure the page is displayed once the feature flags are evaluated.
 
-If your experiment changes the contents of the page, you'll want to add the following JavaScript immediately before the closing `</body>` tag:
+Add the following code before the closing `</body>` tag:
 
 ```html
 <script>
