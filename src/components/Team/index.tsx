@@ -678,7 +678,7 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
     const posthog = usePostHog()
 
     return (
-        <>
+        <div className="relative">
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 <Profile {...activeProfile} />
             </SideModal>
@@ -741,7 +741,7 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                     <div className="@container flex-1">
                         <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
                             {profiles?.data || values.teamMembers
-                                ? [...(editing ? values.teamMembers : profiles.data)]
+                                ? [...((editing ? values.teamMembers : profiles?.data) || [])]
                                       .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
                                       .map((profile) => {
                                           const {
@@ -958,25 +958,27 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                     </div>
                 </Section>
             )}
-            <div className="flex justify-end space-x-2 fixed bottom-4 right-4 z-50">
-                <CallToAction
-                    size="sm"
-                    onClick={() => {
-                        if (editing) {
-                            submitForm()
-                        } else {
-                            setEditing(true)
-                        }
-                    }}
-                >
-                    {editing ? 'Save' : 'Edit'}
-                </CallToAction>
-                {editing && (
-                    <CallToAction type="secondary" size="sm" onClick={() => setEditing(false)}>
-                        Cancel
+            {isModerator && (
+                <div className="flex justify-end space-x-2 sticky bottom-4 mr-4 mb-4 z-50">
+                    <CallToAction
+                        size="sm"
+                        onClick={() => {
+                            if (editing) {
+                                submitForm()
+                            } else {
+                                setEditing(true)
+                            }
+                        }}
+                    >
+                        {editing ? 'Save' : 'Edit'}
                     </CallToAction>
-                )}
-            </div>
-        </>
+                    {editing && (
+                        <CallToAction type="secondary" size="sm" onClick={() => setEditing(false)}>
+                            Cancel
+                        </CallToAction>
+                    )}
+                </div>
+            )}
+        </div>
     )
 }
