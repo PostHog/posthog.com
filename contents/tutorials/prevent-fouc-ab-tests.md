@@ -24,13 +24,14 @@ Before the `</head>` tag, add the following CSS definition:
 
 ```html
 <style>
+/* Used to prevent flickering while posthog.js loads */
 .ph-hide-element {
     opacity: 0 !important;
 }
 </style>
 ```
 
-This code snippet defines a new CSS rule that applies 0 opacity to any element with a `ph-hide-element` class. You might want to add it after the PostHog web snippet so you remember why it's there.
+This code snippet defines a new CSS rule that applies 0 opacity to any element with a `ph-hide-element` class.
 
 Then add the class to the element you want to hide:
 ```html
@@ -56,6 +57,7 @@ Add the following code before the closing `</body>` tag:
 
 ```html
 <script>
+// Renders the content after posthog.js loads
 posthog.onFeatureFlags(() => {
     var variant = posthog.getFeatureFlag('your_experiment_feature_flag')
     if ( 'test' === variant ) {
