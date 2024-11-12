@@ -1,9 +1,9 @@
 ---
-title: "Data pipelines: your customer data platform"
+title: "PostHog CDP integrations"
 showTitle: true
 ---
 
-PostHog's customer data platform (CDP) provides full-service data pipelines for ingesting, transforming, and sending data to destinations. Transformations extend PostHog's functionality by filtering and transforming analytics data. Destinations send PostHog data to other sources in [realtime](/docs/cdp/destinations) or as [batch exports](/docs/cdp/batch-exports) which reliably send data to a destination on a schedule.
+PostHog's customer data platform (CDP) provides full-service integrations for ingesting, transforming, and sending data to destinations. Transformations extend PostHog's functionality by filtering and transforming analytics data. Sources let you [ingest data](/docs/cdp/sources) from your existing systems. Destinations send PostHog data to other sources in [realtime](/docs/cdp/destinations) or as [batch exports](/docs/cdp/batch-exports) which reliably send data to a destination on a schedule.
 
 Destinations require the data pipeline add-on in [your billing settings](https://us.posthog.com/organization/billing).
 
