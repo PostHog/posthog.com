@@ -46,7 +46,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
         >
             <div className="text-center hidden md:block">
                 <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/swole-hog.png"
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
                     objectFit="contain"
                     className="w-full h-full max-w-[200px] md:max-w-[250px] mx-auto flex-shrink-0"
                 />
