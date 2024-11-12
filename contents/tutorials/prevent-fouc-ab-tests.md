@@ -67,4 +67,4 @@ posthog.onFeatureFlags(() => {
 ```
 
 
-Refresh the page and verify the content now displays after a brief pause. If you end up with the 'test' variant on the first load, go buy a lottery ticket! Otherwise, you can run `posthog.featureFlags.override({'ahhhh-fouc-test': 'test'})` in your Developer Console and refresh the page.
+Refresh the page and verify the content now displays after a brief pause.
