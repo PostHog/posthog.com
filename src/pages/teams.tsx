@@ -164,7 +164,7 @@ const Teams: React.FC = () => {
                                 {isModerator && (
                                     <div className="flex justify-center items-center">
                                         <CallToAction to="/teams/new" size="md">
-                                            + New team
+                                            New team
                                         </CallToAction>
                                     </div>
                                 )}
