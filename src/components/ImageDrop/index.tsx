@@ -2,7 +2,7 @@ import { IconX } from '@posthog/icons'
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-type Image = {
+export type Image = {
     file: File
     objectURL: string
 }
