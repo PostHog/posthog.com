@@ -57,10 +57,8 @@ If your experiment changes the contents of the page, you'll want to add the foll
 posthog.onFeatureFlags(() => {
     var variant = posthog.getFeatureFlag('ahhhh-fouc-test')
     if ( 'test' === variant ) {
-        var headings = document.querySelectorAll('h1');
-        if ( headings && headings[0] ) {
-            headings[0].innerText = "Here's Max!"
-        }
+        // if needed, update your page for the test variant. 
+        // this is not needed if you update your code elsewhere.
     }
     // Need to make sure we always display the page.
     document.body.classList.remove('ph-hide-element');
