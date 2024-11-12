@@ -21,3 +21,4 @@ As we have a low price point and can help replace a number of disparate tools th
 
  - We are competitive for each of our individual products
  - You only need to pay for 1 Teams or Enterprise plan versus 5 or 6
+ - We make it easy to buy from us, and once you're done you don't need to run multiple vendor procurement processes for additional tools
