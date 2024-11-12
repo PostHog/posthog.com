@@ -66,6 +66,5 @@ posthog.onFeatureFlags(() => {
 </script>
 ```
 
-This code snippet modifies the text of the first `<h1>` to "Here's Max!" when the visitor is assigned to the 'test' variant of the 'ahhhh-fouc-test' experiment. Make sure to replace 'ahhhh-fouc-test' with whatever alphanumeric slug you've assigned to your experiment.
 
 Refresh the page and verify the content now displays after a brief pause. If you end up with the 'test' variant on the first load, go buy a lottery ticket! Otherwise, you can run `posthog.featureFlags.override({'ahhhh-fouc-test': 'test'})` in your Developer Console and refresh the page.
