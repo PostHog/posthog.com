@@ -2711,14 +2711,14 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Data pipelines',
+            name: 'Integrations',
             url: '/docs/cdp',
             color: 'sky-blue',
             icon: 'IconPlug',
             description: 'Collect, enrich, and send data to your destinations.',
             children: [
                 {
-                    name: 'Customer data platform',
+                    name: 'CDP Integrations',
                 },
                 {
                     name: 'Overview',
@@ -3212,7 +3212,7 @@ const menu = [
                 url: '/surveys',
             },
             {
-                name: 'Data pipelines',
+                name: 'Integrations',
                 icon: 'IconPlug',
                 color: 'sky-blue',
                 url: '/cdp',
