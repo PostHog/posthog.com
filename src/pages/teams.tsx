@@ -8,22 +8,10 @@ import { graphql, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 import TeamPatch from 'components/TeamPatch'
 import { CallToAction } from 'components/CallToAction'
-
-async function createTeam({ name, jwt }: { name: string; jwt: string | null }) {
-    if (!jwt) return
-    return fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams`, {
-        method: 'POST',
-        body: JSON.stringify({ data: { name, publishedAt: null } }),
-        headers: {
-            Authorization: `Bearer ${jwt}`,
-            'Content-Type': 'application/json',
-        },
-    })
-        .then((res) => res.json())
-        .catch((err) => console.error(err))
-}
+import { useUser } from 'hooks/useUser'
 
 const Teams: React.FC = () => {
+    const { isModerator } = useUser()
     const { allTeams } = useStaticQuery(graphql`
         {
             allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
@@ -173,11 +161,13 @@ const Teams: React.FC = () => {
                                             </div>
                                         </Link>
                                     ))}
-                                <div className="flex justify-center items-center">
-                                    <CallToAction to="/teams/new" size="md">
-                                        + New team
-                                    </CallToAction>
-                                </div>
+                                {isModerator && (
+                                    <div className="flex justify-center items-center">
+                                        <CallToAction to="/teams/new" size="md">
+                                            + New team
+                                        </CallToAction>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

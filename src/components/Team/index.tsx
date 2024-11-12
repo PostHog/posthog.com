@@ -531,7 +531,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
         }
     `)
     const [editing, setEditing] = useState(newTeam)
-    const { handleChange, values, submitForm, setFieldValue, errors, handleSubmit } = useFormik({
+    const { handleChange, values, submitForm, setFieldValue, errors, resetForm } = useFormik({
         enableReinitialize: true,
         validateOnMount: true,
         validationSchema: yup.object({
@@ -1023,8 +1023,15 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                             'Edit'
                         )}
                     </CallToAction>
-                    {editing && (
-                        <CallToAction type="secondary" size="sm" onClick={() => setEditing(false)}>
+                    {!newTeam && editing && (
+                        <CallToAction
+                            type="secondary"
+                            size="sm"
+                            onClick={() => {
+                                setEditing(false)
+                                resetForm()
+                            }}
+                        >
                             Cancel
                         </CallToAction>
                     )}

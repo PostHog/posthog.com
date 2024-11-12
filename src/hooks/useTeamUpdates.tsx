@@ -13,6 +13,7 @@ export default function useTeamUpdates({ teamName, filters }: { teamName: string
     const [teamID, setTeamID] = useState()
     const [updates, setUpdates] = useState([])
     const fetchUpdates = async () => {
+        if (!teamName) return
         const { data: teamData } = await fetch(
             `${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${qs.stringify(
                 {
@@ -25,7 +26,8 @@ export default function useTeamUpdates({ teamName, filters }: { teamName: string
                 { encodeValuesOnly: true }
             )}`
         ).then((res) => res.json())
-        setTeamID(teamData[0]?.id)
+        const teamID = teamData[0]?.id
+        setTeamID(teamID)
         const { data } = await fetch(
             `${process.env.GATSBY_SQUEAK_API_HOST}/api/team-updates?${qs.stringify(
                 {
@@ -52,7 +54,7 @@ export default function useTeamUpdates({ teamName, filters }: { teamName: string
             return {
                 thingOfTheWeek,
                 roadmap: roadmap?.data?.id,
-                question: question?.data.id,
+                question: question?.data?.id,
                 team: team?.data?.id,
             }
         })
@@ -61,7 +63,7 @@ export default function useTeamUpdates({ teamName, filters }: { teamName: string
 
     useEffect(() => {
         fetchUpdates()
-    }, [])
+    }, [teamName])
 
     return { updates, teamID }
 }
