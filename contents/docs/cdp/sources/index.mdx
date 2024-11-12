@@ -47,7 +47,7 @@ The data warehouse can link to data in your object storage system. To do this, y
 3. Add data to the bucket (potentially using a tool like Airbyte, Fivetran, Stitch, or others)
 4. Link the table in PostHog
 
-See an example in our [S3 setup docs](/docs/data-warehouse/setup/s3).
+See an example in our [S3 setup docs](/docs/cdp/sources/s3).
 
 ## Incremental vs full table
 
@@ -72,7 +72,7 @@ This reloads the whole table on every sync. This is great for tables with common
 
 ## Syncing
 
-Once you add a source, you can see its status, sync frequency, and last successful run in the [data warehouse sources page](https://us.posthog.com/pipeline/sources). You can also reload or delete sources here.
+Once you add a source, you can see its status, sync frequency, and last successful run in the [sources page](https://us.posthog.com/pipeline/sources). You can also reload or delete sources here.
 
 When you expand each source, you can see:
 
