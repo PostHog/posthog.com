@@ -36,19 +36,19 @@ Although we can't tell you what the right technologies are or the perfect way to
 
 Adopting new technologies is hard and expensive, so "nice to have" is not enough. We look for hair-on-fire problems, which typically means one of three things:
 
-1. **Costs.** For example, our Infrastructure team does a quarterly review of AWS costs, evaluates where spend is going, and identifies areas to improve it. When costs rise above standard benchmarks, it is time to look into solutions. 
+1. **Costs.** Our infrastructure team does a quarterly review of AWS costs, evaluates where spend is going, and identifies areas to improve it. Costs rising above standard benchmarks is a trigger to look for solutions. 
 
-2. **Infrastructure.** For example, reaching scaling limits for our current infrastructure. When adding "more boxes" won't fix the issue, it's time to look for another solution. 
+2. **Infrastructure.** When we reach scaling limits for our current infrastructure, and adding "more boxes" won't fix the issue, it's time to look for another solution. 
 
-3. **Customers.** For example, customers demand a new feature other companies have like reliable and resumable data exports.
+3. **Customers.** When customers demand a new feature, like reliable and resumable data exports, we need to consider whether we build or buy.
 
 The goal of technology is to solve this hair-on-fire problem. We find potential technologies that do this in one of two ways: 
 
-1. **What are other people using to solve the problem?** Technologies are by definition tools or services other people have used to solve problems. For example, part of the reason [we chose ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion) was that Cloudflare used it.
+1. **What are other people using to solve the problem?** Technologies are by definition tools or services other people have used to solve problems. One reason [we chose ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion), for example, was that Cloudflare used it.
 
 2. **How have YOU solved this problem in the past?** Pitfalls are often avoidable if you already fell in them once. This means we often rely on our teams' experience with a technology to guide our evaluation.
 
-Realistically, the evaluation process happens at the same time as figuring out the options. This is because some options can be written off immediately as they don't fit our requirements. For example, when we were looking for [scalable replacements for Postgres](/blog/how-we-turned-clickhouse-into-our-eventmansion) in our early days, we knew we needed it to be open source and self-hostable. This immediately cut down our list. 
+Realistically, the evaluation process happens at the same time as figuring out the options. This is because some options can be written off immediately as they don't fit our requirements. When we were looking for [scalable replacements for Postgres](/blog/how-we-turned-clickhouse-into-our-eventmansion) in our early days, for example, we knew we needed it to be open source and self-hostable. This immediately cut down our list. 
 
 ## Evaluate solutions autonomously
 
@@ -68,7 +68,7 @@ Testing technologies is often a non-trivial part of teams' development process. 
 
 Although every problem has its own set of evaluation criteria, there are some recurring themes:
 
-- **Performance:** We ingest and query massive amounts of data and this will only grow. We need technology that can keep up and scale to 100x where we are today. 
+- **Performance:** We ingest billions of events per day and this will only grow. We need technology that can keep up and scale to 100x where we are today. 
 
 - **Cost:** A principle of our pricing is [being the cheapest option](/handbook/how-we-make-money#be-the-cheapest-for-each-individual-product). This means costs are always on our mind and we always need to be searching for ways to reduce them.
 
@@ -82,7 +82,7 @@ You'll notice that some of these are business factors and others are technical. 
 
 ## Make a decision asynchronously
 
-Although individuals are empowered to test and evaluate new technologies, for decisions affecting multiple teams, the final decision is made through a **request for comments** (RFC). These help us get buy-in, gather feedback on a decision, and stay transparent. The process of writing them all forces our team to clearly articulate their thoughts in a structured way.
+Although individuals are empowered to test and evaluate new technologies, decisions affecting multiple teams are made through a **request for comments** (RFC). These help us get buy-in, gather feedback on a decision, and stay transparent. The process of writing them also forces our teams to clearly articulate their thoughts in a structured way.
 
 An RFC outlines the "why" behind a technology decision and helps facilitate input. The specific parts of an vary, but broadly include the following parts:
 
@@ -90,7 +90,7 @@ An RFC outlines the "why" behind a technology decision and helps facilitate inpu
 - What are the options you considered?
 - Based on your evaluation, which one do you recommend?
 
-This isn't just a box to tick, it is a core part of helping us choose the right technologies. For example, our RFC for adopting [Temporal at PostHog](https://github.com/PostHog/meta/pull/99) had 2,594 words, roughly 1/4 of the company as reviewers, 46 comments, and quite a bit of disagreement before finally being adopted. It's now happily in use for [batch exports](/blog/temporal-exports) and [warehouse syncs](/docs/data-warehouse/setup).
+This isn't just a box to tick, it is a core part of helping us choose the right technologies. Our RFC for adopting [Temporal at PostHog](https://github.com/PostHog/meta/pull/99) had 2,594 words, roughly 1/4 of the company as reviewers, 46 comments, and quite a bit of disagreement before finally being adopted. It's now happily in use for [batch exports](/blog/temporal-exports) and [warehouse syncs](/docs/data-warehouse/setup).
 
 Whatever happens, the final decision usually rests on the team implementing and maintaining the technology. Even if an agreement isn't reached, if they feel confident it is the right solution, they have leeway to go ahead with adoption.
 
@@ -132,11 +132,11 @@ Because technologies have such a big impact in the long run, we often spend sign
 - Goals for the planning phase
 - Next steps
 
-We even evaluate our most cherished technologies to ensure they are the right long-term choice. For example, we have long been big advocates of ClickHouse, but that doesn't stop us from considering and testing other technologies, such as ByConity and Apache Iceberg. 
+We even evaluate our most cherished technologies to ensure they are the right long-term choice. We've long been big advocates of ClickHouse, but that doesn't stop us from considering and testing other technologies, such as ByConity and Apache Iceberg. 
 
 We do this because we want to build a technology stack that supports our long-term strategy:
 
-- **Provide every tool needed to build successful products.** For example, this requires separation of compute and storage (this is tightly coupled in ClickHouse), flexibility in query optimization, and interoperability with future technologies.
+- **Provide every tool needed to build successful products.** This requires separation of compute and storage (this is tightly coupled in ClickHouse), flexibility in query optimization, and interoperability with future technologies.
 
 - **Be the source of truth for customer and product data.** We want to build towards handling exabytes of data stored and petabytes of data queried per day. This means managing different schemas, improving offline storage, support for formats like Iceberg and Parquet, and more.
 
