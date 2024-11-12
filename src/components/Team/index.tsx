@@ -71,7 +71,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
     const [saving, setSaving] = useState(false)
     const [editing, setEditing] = useState(newTeam || false)
     const [activeProfile, setActiveProfile] = useState<boolean | ProfileData>(false)
-    const { team, updateTeam } = useTeam({
+    const { team, updateTeam, loading } = useTeam({
         slug,
     })
 
@@ -278,6 +278,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                 {activeProfile && <Profile {...activeProfile} />}
             </SideModal>
             <Header
+                loading={loading}
                 teamName={values.name}
                 description={description}
                 teamImage={teamImage}
@@ -331,7 +332,13 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                 <div className="lg:flex lg:space-x-12 space-y-12 lg:space-y-0">
                     <div className="@container flex-1">
                         <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
-                            {profiles?.data || values.teamMembers
+                            {loading
+                                ? new Array(4).fill(0).map((_, i) => (
+                                      <li key={i}>
+                                          <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                      </li>
+                                  ))
+                                : profiles?.data || values.teamMembers
                                 ? [...((editing ? values.teamMembers : profiles?.data) || [])]
                                       .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
                                       .map((profile) => {
