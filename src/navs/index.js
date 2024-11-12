@@ -2718,7 +2718,7 @@ export const docsMenu = {
             description: 'Collect, enrich, and send data to your destinations.',
             children: [
                 {
-                    name: 'CDP Integrations',
+                    name: 'CDP integrations',
                 },
                 {
                     name: 'Overview',
