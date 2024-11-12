@@ -4,7 +4,7 @@ title: How we found our activation metric (and how you can too)
 author:
   - raquel-m-smith
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
 category: Engineering
 tags:
@@ -18,9 +18,9 @@ crosspost:
 
 People are signing up for your product. Great! But before you start planning your IPO, you need to make sure they actually become users. This is the goal of **activation**, AKA the "ah-ha" moment of your product.
 
-The trouble with activation is that it is a lot harder to define than a user signing up. For example, we have 8+ products and each requires a separate activation metric. Each also has 10+ events that we could use as an activation metric.
+The trouble with activation is that it is a lot harder to define than a user signing up. For example, we have 8+ products and each requires a separate activation metric. On top of that, each product also has 10+ events that could be part of its activation metric.
 
-This means we spent a lot of time figuring out the best way to repeatedly discover a product's activation metric. We're  sharing our process here to help you do the same.
+This means we spent a lot of time figuring out the best way to repeatedly discover a product's activation metric. We're sharing our process here to help you do the same.
 
 But before we jump in... what is activation _really_?
 
@@ -28,17 +28,15 @@ But before we jump in... what is activation _really_?
 
 An activation metric is a set of actions a user performs that are correlated with greater retention after a user first starts using the product.
 
-Imagine you have actions A through Z. If doing actions L, M, and P make users more likely to use your product down the line, then L, M, and P combined are your activation metric. We might know actions B, C, and F are good for them to do, but if they aren't correlated with retention, they aren't part of your activation metric.
-
-![Figuring out activation metrics](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_10_32_38_2x_b39f41573f.png)
-
-This definition solves the trickiest part of defining an activation metric: it could be _anything_. Does a pageview mean someone is activated? Does completing onboarding? What about creating their first object? Depending on your product, any of these could be it. Looking at their impact on retention, however, makes it clear what helps your users succeed.
+Focusing on retention solves the trickiest part of defining an activation metric: it could be _anything_. Does a pageview mean someone is activated? Does completing onboarding? What about creating their first object? Depending on your product, any of these could be it. Looking at their impact on retention, however, makes it clear what helps your users succeed.
 
 At PostHog, we look for a set of actions where someone is much more likely to use the product 3 months after starting. For [session replay](/session-replay), after analyzing multiple potential metrics, we found that these were watching 5 or more replays and setting a replay filter at least once.
 
 ![Session replay activation metric](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_10_40_35_2x_a07c5ba4fd.png)
 
-## How we found our activation metric?
+Actions that don't make it into your activation metric can still be good, but they don't help you predict retention. For example, we want users to capture replays, but we found that doing so doesn't mean they stick around, so optimizing this isn't the best use of our time.
+
+## How we found our activation metric
 
 How did we settle on watching 5 or more replays and setting a replay filter at least once? We tested a lot of different metrics by:
 
@@ -58,7 +56,7 @@ After testing multiple event groups, we found that watching 5 or more replays an
 
 How can you recreate this process for yourself? Creating the groups of potential activation events is easy, but the retention testing query is the tricky part. 
 
-To help you out, we've included the exact query we used below. If you use PostHog, you can use our same exact query to explore your data and find your activation metric. First, I'll break the query into parts to explain what's happening, then I'll provide the whole thing in one chunk at the end.
+To help you out, we've included the exact query we used below. If you use PostHog, you can create a [new SQL insight](https://us.posthog.com/insights/new) and use our same exact query to explore your data and find your activation metric. First, I'll break the query into parts to explain what's happening, then I'll provide the whole thing in one chunk [at the end](#the-final-combined-query).
 
 > **Note:** This query gets retention at the **company** level using [group analytics](/docs/product-analytics/group-analytics). This means that anyone in the group (e.g. customer, organization (what we use), work unit - whatever your groups are) can perform the event and it counts towards activation.
 > 
@@ -66,9 +64,9 @@ To help you out, we've included the exact query we used below. If you use PostHo
 
 ### Part 1: Get the companies who started with your product, broken down by month
 
-Start with an event that represents when an company starts with your product. For many products, this is simply when they first signed up.
+Start with an event that represents when a company starts with your product. For many products, this is simply when they first signed up.
 
-We use this event to get all the companies who started with our product, broken down by month. We'll use the `company_id` values throughout the rest of the query.
+We use this event to select all the companies who started with our product, broken down by month. We'll use the `company_id` values throughout the rest of the query.
 
 ```sql
 WITH starting_companies AS (
@@ -90,6 +88,8 @@ WITH starting_companies AS (
    WHERE sub.rn = 1
 ),
 ```
+
+> **New to SQL?** Check our guide to [the basics of SQL for analytics](/product-engineers/sql-for-analytics) and our [SQL docs](/docs/product-analytics/sql) for more.
 
 ### Part 2: Define and filter for your potential activation events
 
@@ -261,8 +261,22 @@ ORDER BY starting_companies.start_month
 
 ## What do I do with the activation metric once I find it?
 
-You push for it, of course! If you know you need people to do actions D, K, and L, you can email them about those things, track it in your metrics, run [experiments](/docs/experiments) to get more people using it, etc.
+You push for it, of course! If you know you the actions you want people to do, you can:
 
-For example, for session replay, we [email users pretty quickly](/blog/how-we-built-email-onboarding) if they've shown interest in the product but haven't activated.
+- Email them about it
+- Track signup to activation conversion with [funnels](/docs/product-analytics/funnels)
+- Run an [experiment](/docs/experiments) with your action as a goal metric
+- Launch [surveys](/docs/surveys) asking people why they don't do it
+- Connect activation to sales or revenue data with our [data warehouse](/docs/data-warehouse)
+
+For example, for session replay, we:
+
+- [Email users pretty quickly](/blog/how-we-built-email-onboarding) if they've shown interest in the product but haven't activated.
+
+- Added [replay templates](https://us.posthog.com/replay/templates) to set users up with useful filters easily.
+
+- Keep a close eye on monthly growth in the number of companies that analyze replays.
+
+- Run an [NPS survey](/templates/nps-survey) for replay with an optional feedback box. 
 
 One thing to **not do** is drop all other plans to focus on activation. If you've built a good product, people will find a way to use it. First, focus on [finding PMF](/founders/product-market-fit-game) for your product, and then use activation as an optimization layer on top of a solid product.
