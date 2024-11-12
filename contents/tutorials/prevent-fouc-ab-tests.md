@@ -62,11 +62,13 @@ posthog.onFeatureFlags(() => {
         // if needed, update your page for the test variant. 
         // this is not needed if you update your code elsewhere.
     }
-    // Need to make sure we always display the page.
-    document.body.classList.remove('ph-hide-element');
+    // Need to make sure we always display the hidden element.
+    var elements = document.querySelectorAll('.ph-hide-element');
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.remove('ph-hide-element');
+    }
 });
 </script>
 ```
-
 
 Refresh the page and verify the content now displays after a brief pause.
