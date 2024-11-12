@@ -1,5 +1,5 @@
 ---
-title: How to prevent Flash of Unstyled Content (FOUC) during A/B tests
+title: How to prevent flashing of content during A/B tests
 date: 2024-11-08
 author:
   - daniel-bachhuber
