@@ -1,14 +1,12 @@
-import { button, CallToAction } from 'components/CallToAction'
+import { button, CallToAction, container } from 'components/CallToAction'
 import { PineappleText } from 'components/Job/Sidebar'
-import Layout from 'components/Layout'
 import Link from 'components/Link'
 import { InProgress } from 'components/Roadmap/InProgress'
 import { Question } from 'components/Squeak'
 import useTeamUpdates from 'hooks/useTeamUpdates'
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { kebabCase } from 'lib/utils'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
 import { Change } from '../../templates/Changelog'
 import { MDXProvider } from '@mdx-js/react'
@@ -22,23 +20,22 @@ import getAvatarURL from 'components/Squeak/util/getAvatar'
 import Markdown from 'markdown-to-jsx'
 import { AddTeamMember } from 'components/TeamMembers'
 import useTeam from 'hooks/useTeam'
-import { IconArrowLeft, IconInfo, IconX } from '@posthog/icons'
+import { IconArrowLeft, IconInfo, IconSpinner, IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
-import { RenderInClient } from 'components/RenderInClient'
 import usePostHog from '../../hooks/usePostHog'
-import { companyMenu } from '../navs'
 import { PrivateLink } from 'components/PrivateLink'
 import Stickers from 'components/ProfileStickers'
 import TeamPatch from 'components/TeamPatch'
 import CloudinaryImage from 'components/CloudinaryImage'
 import AutosizeInput from 'react-input-autosize'
-import { useDropzone } from 'react-dropzone'
 import ImageDrop from 'components/ImageDrop'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import Modal from 'components/Modal'
 import Select from 'components/Select'
+import slugify from 'slugify'
+import * as yup from 'yup'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -240,12 +237,18 @@ const Crest = ({ crest, crestOptions, teamName, editing, setFieldValue, values, 
             <Modal open={crestBuilderOpen} setOpen={setCrestBuilderOpen}>
                 <div
                     onClick={() => setCrestBuilderOpen(false)}
-                    className="flex flex-start justify-center absolute w-full p-4"
+                    className="flex flex-start justify-center items-center absolute w-full h-full p-4"
                 >
                     <div
                         className="max-w-2xl w-full bg-white dark:bg-dark rounded-md border border-border dark:border-dark relative p-4 grid grid-cols-2 gap-4"
                         onClick={(e) => e.stopPropagation()}
                     >
+                        <button
+                            onClick={() => setCrestBuilderOpen(false)}
+                            className="absolute top-0 right-0 translate-x-[33%] -translate-y-[33%] bg-white dark:bg-dark rounded-full border border-border dark:border-dark p-2"
+                        >
+                            <IconX className="size-4 opacity-60" />
+                        </button>
                         <div className="flex items-center justify-center relative group">
                             <TeamPatch
                                 name={teamName}
@@ -422,9 +425,9 @@ const Crest = ({ crest, crestOptions, teamName, editing, setFieldValue, values, 
                                 <button
                                     type="button"
                                     onClick={() => setCrestBuilderOpen(false)}
-                                    className={button('primary', 'full', undefined, 'md')}
+                                    className={`${container('primary', 'md', 'full')} mt-2`}
                                 >
-                                    Save
+                                    <span className={button('primary', 'full', 'block', 'md')}>Save</span>
                                 </button>
                             </form>
                         </div>
@@ -509,12 +512,13 @@ const Header = ({
     )
 }
 
-export default function Team({ body, name, roadmaps, objectives, emojis, newTeam }) {
+export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug }) {
+    const [saving, setSaving] = useState(false)
     const { team, updateTeam } = useTeam({
-        teamName: name,
+        slug,
     })
 
-    const { crest, crestOptions, description, profiles, leadProfiles, teamImage } = team?.attributes || {}
+    const { name, crest, crestOptions, description, profiles, leadProfiles, teamImage } = team?.attributes || {}
     const { user, getJwt } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const {
@@ -527,8 +531,12 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
         }
     `)
     const [editing, setEditing] = useState(newTeam)
-    const { handleChange, values, submitForm, setFieldValue, handleSubmit } = useFormik({
+    const { handleChange, values, submitForm, setFieldValue, errors, handleSubmit } = useFormik({
         enableReinitialize: true,
+        validateOnMount: true,
+        validationSchema: yup.object({
+            name: yup.string().required('Name is required'),
+        }),
         initialValues: {
             name,
             description,
@@ -565,6 +573,7 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
             const jwt = await getJwt()
             const profileID = user?.profile?.id
             if (!profileID || !jwt) return
+            setSaving(true)
             const uploadedTeamImage =
                 other.teamImage?.file &&
                 (await uploadImage(other.teamImage.file, jwt, {
@@ -595,7 +604,12 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                 ...(teamMembers ? { profiles: teamMembers.map(({ id }) => ({ id })) } : {}),
                 ...(teamLeads ? { leadProfiles: teamLeads.map(({ id }) => ({ id })) } : {}),
             }
-            await updateTeam(updatedTeam)
+            if (!team) {
+                await createTeam(updatedTeam)
+            } else {
+                await updateTeam(updatedTeam)
+            }
+            setSaving(false)
             setEditing(false)
         },
     })
@@ -635,6 +649,25 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
             },
         },
     })
+
+    const createTeam = async (team: any) => {
+        const jwt = await getJwt()
+        const body = JSON.stringify({ data: { ...team, slug: slugify(team.name, { lower: true, remove: /and/ }) } })
+        const {
+            data: {
+                attributes: { slug },
+            },
+        } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams`, {
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+                'content-type': 'application/json',
+            },
+            method: 'POST',
+            body,
+        }).then((res) => res.json())
+
+        navigate(`/teams/${slug}`)
+    }
 
     function isTeamLead(id) {
         return editing
@@ -679,11 +712,18 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
 
     return (
         <div className="relative">
+            {name && (
+                <SEO
+                    title={`${name} - PostHog`}
+                    description="We're organized into multi-disciplinary small teams."
+                    image={`/images/small-teams.png`}
+                />
+            )}
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 <Profile {...activeProfile} />
             </SideModal>
             <Header
-                teamName={teamName}
+                teamName={values.name}
                 crest={crest}
                 crestOptions={crestOptions}
                 description={description}
@@ -718,7 +758,7 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                               },
                           ]
                         : []),
-                    ...(objectives?.body
+                    ...(objectives
                         ? [
                               {
                                   label: 'Goals',
@@ -940,11 +980,11 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                     </Section>
                 )}
             </div>
-            {objectives?.body && (
+            {objectives && (
                 <Section title="Goals" id="goals">
                     <div className="article-content max-w-2xl team-page-content">
                         <MDXProvider components={{}}>
-                            <MDXRenderer>{objectives?.body}</MDXRenderer>
+                            <MDXRenderer>{objectives}</MDXRenderer>
                         </MDXProvider>
                     </div>
                 </Section>
@@ -961,6 +1001,7 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
             {isModerator && (
                 <div className="flex justify-end space-x-2 sticky bottom-4 mr-4 mb-4 z-50">
                     <CallToAction
+                        disabled={saving || !!errors.name}
                         size="sm"
                         onClick={() => {
                             if (editing) {
@@ -970,7 +1011,17 @@ export default function Team({ body, name, roadmaps, objectives, emojis, newTeam
                             }
                         }}
                     >
-                        {editing ? 'Save' : 'Edit'}
+                        {saving ? (
+                            <IconSpinner className="size-5 animate-spin" />
+                        ) : editing ? (
+                            newTeam ? (
+                                'Save & publish'
+                            ) : (
+                                'Save'
+                            )
+                        ) : (
+                            'Edit'
+                        )}
                     </CallToAction>
                     {editing && (
                         <CallToAction type="secondary" size="sm" onClick={() => setEditing(false)}>

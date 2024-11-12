@@ -14,7 +14,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import SideModal from 'components/Modal/SideModal'
-import { Profile } from '../../templates/Team'
+import { Profile } from 'components/Team'
 
 export const TeamMember = (props) => {
     const { avatar, lastName, firstName, companyRole, country, squeakId, location, biography, setActiveProfile } = props

@@ -4,8 +4,7 @@ import Team from 'components/Team'
 import { companyMenu } from '../../../navs'
 import React from 'react'
 
-export default function NewTeam({ location }: { location: { state: { name: string } } }) {
-    const { name } = location.state
+export default function NewTeam() {
     return (
         <Layout
             parent={companyMenu}
@@ -16,7 +15,7 @@ export default function NewTeam({ location }: { location: { state: { name: strin
                 description="We're organized into multi-disciplinary small teams."
                 image={`/images/small-teams.png`}
             />
-            <Team name={name} newTeam={true} />
+            <Team newTeam />
         </Layout>
     )
 }

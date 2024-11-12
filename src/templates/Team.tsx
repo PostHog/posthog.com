@@ -4,7 +4,6 @@ import React from 'react'
 import SEO from 'components/seo'
 import { companyMenu } from '../navs'
 import Team from 'components/Team'
-import useTeam from 'hooks/useTeam'
 
 export default function TeamPage({
     data: {
@@ -12,10 +11,8 @@ export default function TeamPage({
         team: { name, roadmaps, ...other },
         objectives,
     },
+    pageContext: { slug },
 }) {
-    const { team, addTeamMember, removeTeamMember, handleTeamLead, updateDescription, updateTeam } = useTeam({
-        teamName: name,
-    })
     return (
         <Layout
             parent={companyMenu}
@@ -29,23 +26,18 @@ export default function TeamPage({
             <Team
                 body={body}
                 name={name}
+                slug={slug.split('/').pop()}
                 roadmaps={roadmaps}
                 objectives={objectives}
                 emojis={other.emojis}
-                addTeamMember={addTeamMember}
-                removeTeamMember={removeTeamMember}
-                handleTeamLead={handleTeamLead}
-                updateDescription={updateDescription}
-                updateTeam={updateTeam}
-                {...(team?.attributes || {})}
             />
         </Layout>
     )
 }
 
 export const query = graphql`
-    query TeamTemplateQuery($id: String!, $teamName: String!, $objectives: String) {
-        mdx: mdx(id: { eq: $id }) {
+    query TeamTemplateQuery($slug: String!, $teamName: String!, $objectives: String) {
+        mdx: mdx(fields: { slug: { eq: $slug } }) {
             frontmatter {
                 title
             }

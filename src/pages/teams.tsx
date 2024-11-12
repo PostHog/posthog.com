@@ -1,16 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
 import Tooltip from 'components/Tooltip'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import slugify from 'slugify'
 import TeamPatch from 'components/TeamPatch'
-import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
-import { useUser } from 'hooks/useUser'
 
 async function createTeam({ name, jwt }: { name: string; jwt: string | null }) {
     if (!jwt) return
@@ -24,35 +21,6 @@ async function createTeam({ name, jwt }: { name: string; jwt: string | null }) {
     })
         .then((res) => res.json())
         .catch((err) => console.error(err))
-}
-
-const NewTeamButton = () => {
-    const [name, setName] = useState('')
-    const { getJwt } = useUser()
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        await createTeam({ name, jwt: await getJwt() })
-        navigate(`/teams/new`, { state: { name } })
-    }
-
-    return (
-        <form
-            onSubmit={handleSubmit}
-            className="click rounded-md flex items-center justify-center font-bold p-2 flex-col space-y-1 m-0"
-        >
-            <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                type="text"
-                placeholder="Team name"
-                className="p-2 rounded-md bg-white dark:bg-accent-dark border border-border dark:border-dark w-full text-sm"
-            />
-            <CallToAction size="sm" width="full">
-                + Create new team
-            </CallToAction>
-        </form>
-    )
 }
 
 const Teams: React.FC = () => {
@@ -205,7 +173,11 @@ const Teams: React.FC = () => {
                                             </div>
                                         </Link>
                                     ))}
-                                <NewTeamButton />
+                                <div className="flex justify-center items-center">
+                                    <CallToAction to="/teams/new" size="md">
+                                        + New team
+                                    </CallToAction>
+                                </div>
                             </div>
                         </div>
                     </div>
