@@ -32,8 +32,12 @@ Before the `</head>` tag, add the following CSS definition:
 
 This code snippet defines a new CSS rule that applies 0 opacity to any element with a `ph-hide-element` class. You might want to add it after the PostHog web snippet so you remember why it's there.
 
-Then, immediately after the `<body>` tag, add the following JavaScript:
+Then add the class to the element you want to hide:
+```html
+<div class="ph-hide-element">
+```
 
+Alternatively, you can hide the entire page by adding the class to the `<body>` element. If you don't have direct access to this element, you can add the below JavaScript:
 ```html
 <script>
 (function() {
@@ -42,9 +46,7 @@ Then, immediately after the `<body>` tag, add the following JavaScript:
 </script>
 ```
 
-This code snippet applies the `ph-hide-element` class to the `<body>` element, thus hiding the entire contents of the page. If you have direct access to the `<body>` element, you can also simply add the `ph-hide-element` class to the element and avoid the JavaScript.
-
-Refresh the page and verify the content doesn't display. If you see a white screen of joy, you have successfully completed this first step.
+Refresh the page and verify the content doesn't display. If you see a blank element, or an entire white screen of joy, you have successfully completed this first step.
 
 ## 2. Display the page once the feature flags are loaded
 
