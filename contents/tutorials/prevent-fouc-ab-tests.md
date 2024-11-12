@@ -9,7 +9,6 @@ tags:
   - experimentation
 ---
 
-It's cruel enough to subject your visitors to an A/B test, but it's even worse if they know about it!
 
 The "Flash of Unstyled Content" (FOUC) happens when users briefly see the control variant before the test variant loads. It's a common issue when running experiments on website building platforms, and happens when the control variant briefly renders before the test variant loads.
 
