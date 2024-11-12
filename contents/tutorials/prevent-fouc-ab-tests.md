@@ -55,7 +55,7 @@ Add the following code before the closing `</body>` tag:
 ```html
 <script>
 posthog.onFeatureFlags(() => {
-    var variant = posthog.getFeatureFlag('ahhhh-fouc-test')
+    var variant = posthog.getFeatureFlag('your_experiment_feature_flag')
     if ( 'test' === variant ) {
         // if needed, update your page for the test variant. 
         // this is not needed if you update your code elsewhere.
