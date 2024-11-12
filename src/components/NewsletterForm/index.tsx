@@ -64,8 +64,8 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                         <p className="!text-sm opacity-50 !m-0">Subscribe to our newsletter</p>
                         <h4 className="relative !text-2xl !m-0 !leading-tight">Product for Engineers</h4>
                         <p className="!m-0 !text-sm md:!text-[15px] !leading-normal !pt-1">
-                            Helping you become a better engineer and build successful products. Read by 25,000+ founders
-                            and engineers.
+                            Sharing what we learn about building successful products. Read by 25,000+ founders and
+                            developers.
                         </p>
                         <div className="">
                             <form
