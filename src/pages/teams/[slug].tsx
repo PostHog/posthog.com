@@ -92,7 +92,7 @@ export default function TeamPage(props: TeamPageProps) {
                 roadmaps={team?.roadmaps}
                 objectives={objectives}
                 body={body}
-                slug={slug.split('/').pop()}
+                slug={slug?.split('/').pop() || ''}
             />
         </Layout>
     )
