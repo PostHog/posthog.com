@@ -580,6 +580,19 @@ posthog.init('my_token', {
 })
 ```
 
+### Or send no events while developing
+
+When working locally it can be useful to see what posthog would do, without actually sending the data to PostHog
+
+```
+posthog.init('my_token', {
+    before_send: (event: CaptureResult): CaptureResult | null {
+        console.log('posthog event: ' + event.event, event)
+        return null
+    }
+})
+```
+
 ## Config
 
 When calling `posthog.init`, there are various configuration options you can set in addition to `loaded` and `api_host`.
