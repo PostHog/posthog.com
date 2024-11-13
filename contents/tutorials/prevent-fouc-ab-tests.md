@@ -1,6 +1,6 @@
 ---
 title: How to prevent flashing of content during A/B tests
-date: 2024-11-08
+date: 2024-11-13
 author:
   - daniel-bachhuber
 showTitle: true
