@@ -11,7 +11,7 @@ tags:
 
 Flashing of content (also known as [FOUC – Flash of unstyled content](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)) happens when users briefly see the control variant before the test variant loads. It's a common issue when running experiments on the frontend.
 
-If you're unable to [bootstrap the feature flags into the document](/docs/feature-flags/bootstrapping), which generally requires access to server-side code, the best thing you can do is briefly delay the page from displaying until the experiment code executes.
+If you're unable to [bootstrap feature flags in your app](/docs/feature-flags/bootstrapping), which generally requires access to server-side code, the best thing you can do is briefly delay the page from displaying until the experiment code executes.
 
 Here's a short example as to how you might do this.
 
