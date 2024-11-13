@@ -1,5 +1,5 @@
 ---
-date: 2024-11-06
+date: 2024-11-13
 title: How we found our activation metric (and how you can too)
 author:
   - raquel-m-smith
@@ -16,25 +16,29 @@ crosspost:
   - Blog
 ---
 
-People are signing up for your product. Great! But before you start planning your IPO, you need to make sure they actually become users. This is the goal of **activation**, AKA the "ah-ha" moment of your product.
+People are signing up for your product. Great! But before you start planning your IPO, you need to make sure they actually stick around. This is the goal of **activation**.
 
-The trouble with activation is that it is a lot harder to define than a user signing up. For example, we have 8+ products and each requires a separate activation metric. On top of that, each product also has 10+ events that could be part of its activation metric.
+The trouble with activation is that it is hard to define. Many say it is when a user reaches the "aha" moment of your product, but this is vague and different for everyone.
 
-This means we spent a lot of time figuring out the best way to repeatedly discover a product's activation metric. We're sharing our process here to help you do the same.
+For example, we have 8+ products and each has a different set of activation metrics from launching a survey to inviting a teammate to creating two or more dashboards. What made finding activation metrics tricky was that each product had 10+ events that **could** be part of its activation metric.
+
+This means we spent a lot of time discovering our products' activation metrics. We're sharing our process here to help you do the same.
 
 But before we jump in... what is activation _really_?
 
 ## What is an activation metric?
 
-An activation metric is a set of actions a user performs that are correlated with greater retention after a user first starts using the product.
+Activation metrics are a set of actions a new user performs that are correlated with greater retention.
 
-Focusing on retention solves the trickiest part of defining an activation metric: it could be _anything_. Does a pageview mean someone is activated? Does completing onboarding? What about creating their first object? Depending on your product, any of these could be it. Looking at their impact on retention, however, makes it clear what helps your users succeed.
+Focusing on retention solves the trickiest part of defining an activation metric: it could be _anything_. Does a pageview count as activation? How about inviting a teammate? Creating their first object? Depending on your product, any or all of these could be an activation metric. It is **retention** that makes it clear.
 
-At PostHog, we look for a set of actions where someone is much more likely to use the product 3 months after starting. For [session replay](/session-replay), after analyzing multiple potential metrics, we found that these were watching 5 or more replays and setting a replay filter at least once.
+At PostHog, we define activation metrics as a set of actions where a company is much more likely to be using the product 3 months after starting. For [session replay](/session-replay), after analyzing multiple potential metrics, we found that watching 5 or more replays and setting a replay filter at least once were the actions that resulted in the highest retention rate.
 
 ![Session replay activation metric](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_10_40_35_2x_a07c5ba4fd.png)
 
-Actions that don't make it into your activation metric can still be good, but they don't help you predict retention. For example, we want users to capture replays, but we found that doing so doesn't mean they stick around, so optimizing this isn't the best use of our time.
+Actions that don't make it into your activation metric can still be good, but they don't help you predict retention. For example, we want users to invite teammates, but we found that doing so doesn't mean they stick around, so optimizing this isn't the best use of our time.
+
+![Product analytics activation](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_13_at_09_53_01_2x_2c8bc81896.png)
 
 ## How we found our activation metric
 
@@ -46,7 +50,7 @@ How did we settle on watching 5 or more replays and setting a replay filter at l
 
 ![Event groups](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_11_36_20_2x_89a95ebdf3.png)
 
-3. Writing a query to test how the event groups improve retention (see below).
+3. Writing a query to test how the event groups correlate with retention (see below).
 
 4. Comparing each event group against our average retention rate for all users. We looked for a retention percentage that's nominally higher than our average retention rate.
 
@@ -263,7 +267,7 @@ ORDER BY starting_companies.start_month
 
 You push for it, of course! If you know you the actions you want people to do, you can:
 
-- Email them about it
+- Create email campaigns around them
 - Track signup to activation conversion with [funnels](/docs/product-analytics/funnels)
 - Run an [experiment](/docs/experiments) with your action as a goal metric
 - Launch [surveys](/docs/surveys) asking people why they don't do it
