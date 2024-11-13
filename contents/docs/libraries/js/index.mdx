@@ -460,23 +460,23 @@ const handleCookieConsent = (consent) => {
 
 When initializing the SDK, you can provide a `before_send` function.  This can be used to amend or reject events before they are sent to PostHog.
 
-> **Note:** amending and rejecting events should be done with care. It can cause unexpected results in parts of PostHog.
+> **Note:** Amending and rejecting events should be done with care. It can cause unexpected results in parts of PostHog.
 
 ### Not all events are processed by `before_send`.
 
-Events which are to do with billing or where sampling/editing would break the PostHog feature are never processed by `before_send`
+Events which relate to billing or where sampling/editing would break the PostHog feature are never processed by `before_send`. Our SDK ignores attempts to try to amend these events. These include:
 
-* $web_experiment_applied
-* $$client_ingestion_warning
-* $feature_enrollment_update
-* $feature_flag_called
-* survey dismissed
-* survey sent
-* survey shown
-* $snapshot
-* $identify
-* $groupidentify
-* $create_alias
+* `$web_experiment_applied`
+* `$$client_ingestion_warning`
+* `$feature_enrollment_update`
+* `$feature_flag_called`
+* `survey dismissed`
+* `survey sent`
+* `survey shown`
+* `$snapshot`
+* `$identify`
+* `$groupidentify`
+* `$create_alias`
 
 ### Redacting information in events
 
@@ -545,12 +545,11 @@ posthog.init('my_token', {
 
 Sampling lets you choose to send only a percentage of events to PostHog. It is a good way to control your costs without having to completely turn off features of the SDK.
 
-Some functions of PostHog - for example much of web analytics - relies on receiving all events. Sampling $pageview or $pageleave events in particular can cause unexpected results.
+Some functions of PostHog - for example much of web analytics - relies on receiving all events. Sampling `$pageview `or `$pageleave` events in particular can cause unexpected results.
 
 #### Sampling events using our provided customization
 
-If you're using NPM we offer a pre-built function to sample by event name. 
-You can import this or copy it from our repo.
+If you're using NPM we offer a pre-built function to sample by event name. You can import this or copy it from our repo.
 
 ```
 posthog.init('my_token', {
@@ -576,12 +575,11 @@ posthog.init('my_token', {
 })
 ```
 
-#### Sampling to receive only 40% of events by person distinct id
+#### Sampling to receive only 40% of events by person distinct ID
 
-If you're using NPM we offer a pre-built function to sample by distinct id. 
-You can import this or copy it from our repo.
+If you're using NPM we offer a pre-built function to sample by distinct ID.  You can import this or copy it from our repo.
 
-A particular distinct id will always either send all events or no events.
+A particular distinct ID will always either send all events or no events.
 
 ```
 posthog.init('my_token', {
@@ -589,12 +587,11 @@ posthog.init('my_token', {
 })
 ```
 
-#### Sampling to receive only 25% of events by session id
+#### Sampling to receive only 25% of events by session ID
 
-If you're using NPM we offer a pre-built function to sample by distinct id. 
-You can import this or copy it from our repo.
+If you're using NPM we offer a pre-built function to sample by session ID. You can import this or copy it from our repo.
 
-A particular session id will always either send all events or no events.
+A particular session ID will always either send all events or no events.
 
 ```
 posthog.init('my_token', {
