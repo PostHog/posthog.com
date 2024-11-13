@@ -458,25 +458,9 @@ const handleCookieConsent = (consent) => {
 
 ## Amending events before they are captured
 
-When initializing the SDK, you can provide a `before_send` function.  This can be used to amend or reject events before they are sent to PostHog.
+When initializing the SDK, you can provide a `before_send` function.  This can be used to amend or reject events before they are sent to PostHog. 
 
-> **Note:** Amending and rejecting events should be done with care. It can cause unexpected results in parts of PostHog.
-
-### Not all events are processed by `before_send`.
-
-Events which relate to billing or where sampling/editing would break the PostHog feature are never processed by `before_send`. Our SDK ignores attempts to try to amend these events. These include:
-
-* `$web_experiment_applied`
-* `$$client_ingestion_warning`
-* `$feature_enrollment_update`
-* `$feature_flag_called`
-* `survey dismissed`
-* `survey sent`
-* `survey shown`
-* `$snapshot`
-* `$identify`
-* `$groupidentify`
-* `$create_alias`
+> **Note:** Amending and rejecting events is advanced functionality and should be done with care. It can cause unexpected results in parts of PostHog.
 
 ### Redacting information in events
 
@@ -486,17 +470,34 @@ Events which relate to billing or where sampling/editing would break the PostHog
 
 ```
 posthog.init('my_token', {
-    before_send: (event): event | null => {
-        const redactedProperties = {}
-        for (const [key, value] of Object.entries(event.properties || {})) {
-            if (key.includes(url)) {
-                redactedProperties[key] = value.replace(/customer_id/\d+/, 'customer_id/1234567')
-            } else {
-                redactedProperties[key] = value
-            }
+    before_send: (event: CaptureResult): CaptureResult | null => {
+        // redacting URLs will be specific to your site structure
+        function redactUrl(value: string): string {
+            return value.replace(/project\/\d+/, 'project/1234567');
         }
+
+        function redactObject(objectToRedact: Record<string, any>): Record<string, any> {
+            return Object.entries(objectToRedact).reduce((acc, [key, value]) => {
+                const redactedValue = key.includes("url") && typeof value === "string" ? redactUrl(value) : value;
+                acc[redactUrl(key)] = redactedValue;
+                return acc;
+            }, {});
+        }
+
+        const redactedProperties = redactObject(event.properties || {});
         event.properties = redactedProperties
-        
+
+        if (event.event === '$$heatmap') {
+            // $heatmap data is keyed by url
+            event.properties.$heatmap_data = redactObject(event.properties.$heatmap_data || {});
+        }
+
+        const redactedSet = redactObject(event.$set || {});
+        event.$set = redactedSet
+
+        const redactedSetOnce = redactObject(event.$set_once || {});
+        event.$set_once = redactedSetOnce
+
         return event
     }
 })
@@ -506,36 +507,16 @@ posthog.init('my_token', {
 
 ```
 posthog.init('my_token', {
-    before_send: (event): event | null => {
+    before_send: (event: CaptureResult): CaptureResult | null => {
         event.$set = {
             ...event.$set,
-            homeAddress: '******'
+            name: 'secret name'
         }
         event.$set_once = {
-            ...event.$set,
-            // TODO should these two account for initial / current prefixes?
-            homeAddress: '******'
+            ...event.$set_once,
+            initial_name: 'secret name'
         }
 
-        return event
-    }
-})
-```
-
-#### Redact URLs in heatmap data
-
-```
-posthog.init('my_token', {
-    before_send: (event): event | null => {
-        if (event.event !== '$heatmap') {
-            const redactedHeatmapData = {}
-            
-            for(const [url, data] of Object.entries(event.properties.$heatmap_data)) {
-                redactedHeatmapData[url.replace(/private_id\/\d+/, 'private_id/1234567')] = data
-            }
-            event.properties.$heatmap_data = redactedHeatmapData
-        }
-        
         return event
     }
 })
@@ -562,7 +543,7 @@ posthog.init('my_token', {
 
 ```
 posthog.init('my_token', {
-    before_send: (event) => {
+    before_send: (event CaptureResult): CaptureResult | null => {
         let sampleRate = 1.0 // default to always returning the event
         if (event.event === '$heatmap) {
             sampleRate = 0.1
