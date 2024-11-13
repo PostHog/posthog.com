@@ -1,6 +1,6 @@
 ---
 title: What we've learned about choosing technologies
-date: 2024-11-07
+date: 2024-11-12
 author:
  - ian-vanagas
 featuredImage: >-
@@ -70,7 +70,7 @@ Although every problem has its own set of evaluation criteria, there are some re
 
 - **Performance:** We ingest billions of events per day and this will only grow. We need technology that can keep up and scale to 100x where we are today. 
 
-- **Cost:** A principle of our pricing is [being the cheapest option](/handbook/how-we-make-money#be-the-cheapest-for-each-individual-product). This means costs are always on our mind and we always need to be searching for ways to reduce them.
+- **Cost:** A principle of our pricing is [being the cheapest option](/handbook/how-we-make-money#be-the-cheapest-for-each-individual-product). This means costs are always on our mind and we always need to be searching for ways to reduce them like using S3 for replay storage instead of ClickHouse which helped us [make them drastically cheaper](/blog/session-replay-pricing).
 
 - **Reliability:** Companies rely on us to handle business-critical data. We need to maintain a high uptime and availability. Technologies we choose need to prove they are reliable and handle failures gracefully.
 
@@ -98,13 +98,15 @@ Whatever happens, the final decision usually rests on the team implementing and 
 
 ## When do we say NO to technologies?
 
-If someone goes through all of this work, the expected answer for adopting a technology is yes. What has happened in when that wasn't the case?
+If someone goes through the work to research and write an RFC recommending we adopt a technology, you'd expect them to get the go-ahead, right? Unfortunately, this regularly isn't the case, but why?
 
-- **Different perspectives on the evaluation criteria.** For example, the benefit of adopting a new technology for another team is not as valuable as expected, ruining the overall benefit.
+- **It's not mature enough.** If we choose to adopt a technology and not build it ourselves, we need to be confident it is stable, reliable, and has the features we need.
 
-- **Additional more important criteria surface.** For example, features needed for another team to adopt the technology are missing.
+- **Different opinions on the evaluation criteria.** What works for one team doesn't always work for another. Because we have multiple products, we need technologies that work for multiple use cases. Getting input from other teams may prove a technology isn't the right fit.
 
-- **The evaluation goes against our expectations significantly.** For example, a test ends up being much more significant than expected.
+- **Additional more important criteria surface.** We rely on our teams experience to guide our evaluations. An RFC might miss important criteria someone has firsthand experience with which causes us to reconsider.
+
+- **The evaluation goes against our expectations significantly.** Research can give us a good idea of what to expect, but it isn't perfect. Evaluating as close as possible to the real world is critical.
 
 An example of this last one is our decision **not** to adopt Amazon's Elastic File System (EFS).
 
