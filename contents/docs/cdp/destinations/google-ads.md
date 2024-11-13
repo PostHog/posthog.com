@@ -32,7 +32,7 @@ You'll also need access to the relevant Google Cloud, Google Ads and Google Ads 
 ![Goal settings](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_01_at_13_38_50_d9c811bebd.png)
 
 8. Create a conversion action inside Google Ads
-   1. Under [Goals > Conversions > Summary](https://ads.google.com/aw/conversions), you'll need to create a conversion goal
+   1. Under [Goals > Conversions > Summary](https://ads.google.com/aw/conversions), you'll need to create a conversion action
    2. Click **New conversion action**
    3. Select **Import**
    4. Click **CRMs, files, or other data sources** and **Track conversions from clicks**
