@@ -14,7 +14,9 @@ crosspost:
   - Blog
 ---
 
-I'll get this out of the way immediately: there's no perfect way to choose technologies. Some adopt everything possible, others build everything themselves. Like many, we are somewhere in the middle. Over the past year, we've:
+There's no perfect way to choose technologies. Some adopt everything possible, others build everything themselves. 
+
+Like many, we are somewhere in the middle. Over the past year, we've:
 
 - Expanded our usage of Temporal to power warehouse syncs.
 
@@ -34,7 +36,7 @@ A core value of PostHog is **trust and feedback over process**. This means the  
 
 Although we can't tell you what the right technologies are or the perfect way to pick them, we **can** share how and why we rely on autonomy to choose them.
 
-## Start with a hair-on-fire problem then find an extinguisher
+## We prioritize hair-on-fire problems
 
 Adopting new technologies is hard and expensive, so "nice to have" is not enough. We look for hair-on-fire problems, which typically means one of three things:
 
@@ -54,7 +56,7 @@ Realistically, the evaluation process happens at the same time as figuring out t
 
 ## Evaluate solutions autonomously
 
-The big advantage of PostHog is that we bias for action. [Small teams](https://newsletter.posthog.com/p/the-magic-of-small-engineering-teams) have the autonomy to choose and test technologies. We don't have an elaborate planning and procurement process.
+At PostHog, we bias for action. This means individual [small teams](https://newsletter.posthog.com/p/the-magic-of-small-engineering-teams) have the autonomy to choose and test technologies. We don't have an elaborate planning and procurement process.
 
 Instead of filling out paperwork, our team evaluates technologies as close to the real world as possible. This means [testing in production (safely)](/product-engineers/testing-in-production), mimicking the real world, and building a proof of concept. 
 
@@ -66,7 +68,7 @@ Another example is how we evaluated Warpstream. Because it was triggered by the 
 
 Testing technologies is often a non-trivial part of teams' development process. It is common to see tests or proofs of concept as a quarterly team goal. For example, building out a Warpstream proof of concept was a Q3 goal for the Pipeline team.
 
-## Our most common evaluation criteria
+## We evaluate technical AND business factors
 
 Although every problem has its own set of evaluation criteria, there are some recurring themes:
 
@@ -82,7 +84,7 @@ Although every problem has its own set of evaluation criteria, there are some re
 
 You'll notice that some of these are business factors and others are technical. Many engineering teams would purely focus on the technical factors and rely on product or procurement teams to help evaluate business factors. Our team of [product engineers](/blog/what-is-a-product-engineer) are able to move faster by having the broader business context.
 
-## Make a decision asynchronously
+## We make a decisions asynchronously
 
 Although individuals are empowered to test and evaluate new technologies, decisions affecting multiple teams are made through a **request for comments** (RFC). These help us get buy-in, gather feedback on a decision, and stay transparent. The process of writing them also forces our teams to clearly articulate their thoughts in a structured way.
 
@@ -124,9 +126,9 @@ In our test with real data, rebalances had little effect on throughput and small
 
 Later, when testing Warpstream, we found a simpler solution: changing how we commit offsets to Kafka. Rather than pushing commit messages (which could trigger rebalances if timed wrong), we declaratively told Kafka which offsets to commit. This made rebalances a non-issue; when a pod needs to restart, other partitions continue processing normally instead of getting caught in a restart loop.
 
-## Continuously evaluate for the long-term
+## We continuously evaluate for the long-term
 
-Finally choosing a technology does not mean you are done. Technologies have ongoing costs in terms of maintenance, support, recruitment, speed, and more. Why shouldn't your evaluation be ongoing also?
+Finally, choosing a technology does not mean you are done. Technologies have ongoing costs in terms of maintenance, support, recruitment, speed, and more. Why shouldn't your evaluation be ongoing also?
 
 Because technologies have such a big impact in the long run, we often spend significant amounts of time doing planning related to our most important features such as pipeline, data storage, and product roadmap. These plans include:
 
