@@ -46,23 +46,23 @@ All these differences make it more likely that you'll misinterpret your data. Im
 - send
 ```
 
-- For event names, use the `category:object_action` framework:
+- For event names, use the **category:object_action** framework to make it easier to find a specific event within a long list:
 
-  - `category` describes the context the event took place in – e.g., `account_settings` or `signup_flow` .
+  - **category** describes the context the event took place in – e.g., `account_settings` or `signup_flow`.
 
-  - `object` is a noun that refers to the component or location the event took place in, like `forgot_password_button` or `pricing_page`.
+  - **object** is a noun that refers to the component or location the event took place in – e.g., `forgot_password_button` or `pricing_page`.
 
-  - `action` is a verb that describes what happened, like `click`, `submit`, or `create`.
+  - **action** is a verb that describes what happened – e.g., `click`, `submit`, or `create`.
 
-  - Putting all of these together, you get `account_settings:forgot_password_button_click` or `signup_flow:pricing_page_view` – The order is important as it makes it easier to find a specific event within a long list.
+  - Putting all of these together, you get `account_settings:forgot_password_button_click` or `signup_flow:pricing_page_view`.
 
 - For property names:
 
-  - Use the `object_adjective` pattern. For instance: `user_id`, `item_price`, or `member_count`.
+  - Use the **object_adjective** pattern – e.g., `user_id`, `item_price`, or `member_count`.
 
-  - Use `is/has` prefixes for boolean properties. For example: `is_subscribed`, `has_seen_upsell`.
+  - Use **is/has** prefixes for boolean properties – e.g., `is_subscribed`, `has_seen_upsell`.
 
-  - If the property's value is a date or timestamp, include _date or _timestamp at the end. For example, `user_creation_date`, `last_login_timestamp`.
+  - If the property's value is a date or timestamp, include **_date** or **_timestamp** at the end – e.g., `user_creation_date`, `last_login_timestamp`.
 
 ## 3. Version your events
 
@@ -102,3 +102,12 @@ There are a few ways to do this:
 
 See our guide on [how to filter out internal users](/tutorials/filter-internal-users) for more details on how to do this in PostHog.
 
+## 6. Use the same project for your website and app
+
+We recommend to track both your marketing site and app in the same [project](/docs/settings/organizations-and-projects#projects). This enables you to do the following:
+
+1. Track complete user journeys from first website visit through to product usage
+2. Understand which marketing channels and content lead to the most engaged product users
+3. Calculate accurate customer acquisition costs (CAC) and lifetime value (LTV)
+4. Analyze how marketing activities impact product metrics like retention and churn
+5. Create cross-platform funnels (e.g., from blog post → signup → feature usage)
