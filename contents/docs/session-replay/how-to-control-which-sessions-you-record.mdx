@@ -31,9 +31,29 @@ posthog.init('<ph_project_api_key>', {
 
 3. Manually start recording by calling `posthog.startSessionRecording()`. Similarly, you can stop the recording at any point by calling `posthog.stopSessionRecording()`.
 
-## With URL trigger conditions
+## With event or URL trigger conditions
 
-You can opt to only start recordings once your user visits a certain page. After the URL matches, the recording continues even after they leave the matching page.  
+You can opt to only start recordings once your user visits a certain page, or when an event is triggered.  
+After the condition matches, the recording continues until their session ends.  
+The client keeps a short buffer in-memory, so you'll still be able to see how they have arrived at the page.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_light_bc6130e3d0.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_dark_9c6ebb6c37.png"
+    alt="Adding URL trigger to control session recordings" 
+    classes="rounded"
+/>
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/replay_event_trigger_light_f1dc560667.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/replay_event_trigger_dark_c8b2729731.png"
+    alt="Adding event trigger to control session recordings" 
+    classes="rounded"
+/>
+
+## With event trigger conditions
+
+You can opt to only start recordings once a specific event happens. After the event is triggered, the recording continues even after they leave the matching page.  
 The client keeps a short buffer in-memory, so you'll still be able to see how they have arrived at the page.
 
 <ProductScreenshot
