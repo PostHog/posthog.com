@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-## 1. Only include users affected by the change
+## 1. Only include affected users
 
-Including users who aren't affected by the change being tested can lead to unreliable results. For example, if you're testing a new onboarding flow, you don't want to include users who have already completed the flow.
+Including users who aren't affected by the experiment can lead to unreliable results. For example, if you're testing a new onboarding flow, you don't want to include users who have already completed the flow.
 
 To avoid including unaffected users, make sure to first filter out ineligible users in your code before checking your feature flag code. For example:
 
@@ -45,7 +45,7 @@ function showNewChanges(user) {
 
 ## 2. Test your experiment
 
-Sometimes we're so eager to get results from our experiments, we jump straight to running them with all our users. This may be okay if everything is set up correctly, but if you've made a mistake, you may be unable to rerun your experiment. To understand why, let's look at an example:
+Sometimes we're so eager to get results from our experiments, we jump straight to running them with all our users. This is okay if everything is set up correctly, but if you've made a mistake, you may be unable to rerun your experiment. To understand why, let's look at an example:
 
 Imagine you're running an experiment with a 50/50 split between control and test. You roll out the experiment to all your users, but a day after launch, you notice that your change is causing the app to crash for all test users. You immediately stop the experiment and fix the root cause of the crash. However, restarting the experiment now will produce unreliable results since many users have already seen your change.
 
@@ -62,13 +62,12 @@ Here is a list of what to check during your test rollout:
 
 A good hypothesis focuses your testing and guides your decision-making. It should include your goal metric, how you think your change will improve it, and any other important context. For example:
 
-
 > Showing a short tutorial video during onboarding will help users understand how to use our product. As a result, we expect to see more successful interactions with the app, fewer customer support queries, and reduced churn (our primary goal) among tested users.
 
 This is a good hypothesis because it enables you to break down which metrics you'll focus on in your test:
 
 - How many users watch the video
-- What portion of the video did they view
+- What portion of the video they viewed
 - Successful interactions with the app features
 - The number of customer support queries
 - Churn rate
@@ -77,7 +76,7 @@ Then, once you've collected data with your test, you can use these metrics to an
 
 ## 4. Predetermine your test duration
 
-Starting an experiment without deciding how long it should last can cause issues. You may fall victim to the [peeking problem](https://gopractice.io/data/peeking-problem/): when you check the intermediate results for statistical significance, make decisions based on them, and end your experiment too early. Without determining how long your experiment should run, you cannot differentiate between intermediate and final results.
+Starting an experiment without deciding how long it should last can cause you to fall victim to the [peeking problem](/product-engineers/ab-testing-mistakes#3-conducting-an-experiment-without-a-predetermined-duration/). This is when you check the intermediate results for statistical significance, make decisions based on them, and end your experiment too early. Without determining how long your experiment should run, you cannot differentiate between intermediate and final results.
 
 Alternatively, if you don't have enough statistical power (i.e., not enough users to obtain a significant result), you'll potentially waste weeks waiting for results. This is especially common in [group-targeted experiments](/blog/running-group-targeted-ab-tests).
 
