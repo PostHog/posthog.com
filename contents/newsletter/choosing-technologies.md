@@ -1,5 +1,5 @@
 ---
-title: What we've learned about choosing technologies
+title: How we choose technologies
 date: 2024-11-12
 author:
  - ian-vanagas
@@ -28,9 +28,11 @@ I'll get this out of the way immediately: there's no perfect way to choose techn
 
 We've done all this while shipping multiple new products like web analytics, mobile session replay, and surveys as well as adding features to existing ones. Each of these comes with its own set of technologies to maintain and improve.
 
-Technology is a tool to help us move fast and build something people want. This relies on choosing the **right** technologies as it sets the guidelines of what we can and cannot do.
+Technology is a tool to help us build something people want. This relies on balancing choosing the **right** technology with shipping fast. Many companies focus too much on the first part and become bogged down in process.
 
-Although we can't tell you what the right technologies are or the perfect way to pick them, we **can** share the lessons we've learned at PostHog and hope it helps.
+A core value of PostHog is **trust and feedback over process**. This means the  path we take to adopt a technology looks different each time. What stays the same is our reliance on our small teams and their expertise. 
+
+Although we can't tell you what the right technologies are or the perfect way to pick them, we **can** share how and why we rely on autonomy to choose them.
 
 ## Start with a hair-on-fire problem then find an extinguisher
 
@@ -42,13 +44,13 @@ Adopting new technologies is hard and expensive, so "nice to have" is not enough
 
 3. **Customers.** When customers demand a new feature, like reliable and resumable data exports, we need to consider whether we build or buy.
 
-The goal of technology is to solve this hair-on-fire problem. We find potential technologies that do this in one of two ways: 
+The goal of technology is to solve this specific hair-on-fire problem. We find potential technologies that do this in one of two ways: 
 
 1. **What are other people using to solve the problem?** Technologies are by definition tools or services other people have used to solve problems. One reason [we chose ClickHouse](/blog/how-we-turned-clickhouse-into-our-eventmansion), for example, was that Cloudflare used it.
 
 2. **How have YOU solved this problem in the past?** Pitfalls are often avoidable if you already fell in them once. This means we often rely on our teams' experience with a technology to guide our evaluation.
 
-Realistically, the evaluation process happens at the same time as figuring out the options. This is because some options can be written off immediately as they don't fit our requirements. When we were looking for [scalable replacements for Postgres](/blog/how-we-turned-clickhouse-into-our-eventmansion) in our early days, for example, we knew we needed it to be open source and self-hostable. This immediately cut down our list. 
+Realistically, the evaluation process happens at the same time as figuring out the options. This is because our team knows some options can be written off immediately as they don't fit our requirements. When we were looking for [scalable replacements for Postgres](/blog/how-we-turned-clickhouse-into-our-eventmansion) in our early days, for example, we knew we needed it to be open source and self-hostable. This immediately cut down our list. 
 
 ## Evaluate solutions autonomously
 
@@ -60,9 +62,9 @@ For example, when Michael was looking for a [fix to our slow SQL parsing](https:
 
 ![Speedy C++](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_10_28_at_15_56_51_2x_68f0cca985.png)
 
-Another example is how we evaluated Warpstream. Because it was triggered by the high cost of Kafka, cost was top of mind for the infrastructure team. The best way to get an accurate projection of cost was to mirror traffic from our capture service. This provided the added benefit of being able to test its deployment process, provisioning, performance, and scalability.
+Another example is how we evaluated Warpstream. Because it was triggered by the high cost of Kafka, cost was top of mind for the Infrastructure team. The best way to get an accurate projection of cost was to mirror traffic from our capture service. This provided the added benefit of being able to test its deployment process, provisioning, performance, and scalability.
 
-Testing technologies is often a non-trivial part of teams' development process. It is common to see tests or proofs of concept as a quarterly team goal. For example, building out a Warpstream proof of concept was a Q3 goal for the pipeline team.
+Testing technologies is often a non-trivial part of teams' development process. It is common to see tests or proofs of concept as a quarterly team goal. For example, building out a Warpstream proof of concept was a Q3 goal for the Pipeline team.
 
 ## Our most common evaluation criteria
 
@@ -78,7 +80,7 @@ Although every problem has its own set of evaluation criteria, there are some re
 
 - **Flexibility:** Because we plan to ship many products beyond what we have today, we need technologies that are interoperable and can be easily adapted to new use cases.
 
-You'll notice that some of these are business factors and others are technical. Where some software engineers would purely focus on the technical factors, our team of [product engineers](/blog/what-is-a-product-engineer) know they need to consider both.
+You'll notice that some of these are business factors and others are technical. Many engineering teams would purely focus on the technical factors and rely on product or procurement teams to help evaluate business factors. Our team of [product engineers](/blog/what-is-a-product-engineer) are able to move faster by having the broader business context.
 
 ## Make a decision asynchronously
 
@@ -102,11 +104,11 @@ If someone goes through the work to research and write an RFC recommending we ad
 
 - **It's not mature enough.** If we choose to adopt a technology and not build it ourselves, we need to be confident it is stable, reliable, and has the features we need.
 
-- **Different opinions on the evaluation criteria.** What works for one team doesn't always work for another. Because we have multiple products, we need technologies that work for multiple use cases. Getting input from other teams may prove a technology isn't the right fit.
+- **Different opinions on the evaluation criteria.** What works for one team doesn't always work for another. Because we have multiple products, we need technologies that work for multiple use cases. Getting input from other teams may prove a technology isn't the right fit for all of them.
 
 - **Additional more important criteria surface.** We rely on our teams experience to guide our evaluations. An RFC might miss important criteria someone has firsthand experience with which causes us to reconsider.
 
-- **The evaluation goes against our expectations significantly.** Research can give us a good idea of what to expect, but it isn't perfect. Evaluating as close as possible to the real world is critical.
+- **The evaluation goes against our expectations significantly.** Research can show us what to expect, but it isn't perfect. Evaluating as close as possible to the real world is critical.
 
 An example of this last one is our decision **not** to adopt Amazon's Elastic File System (EFS).
 
