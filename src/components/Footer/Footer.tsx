@@ -96,7 +96,7 @@ const linklist: IProps[] = [
             {
                 title: 'API',
                 url: '/docs/api',
-            }
+            },
         ],
     },
     {
@@ -154,8 +154,8 @@ const linklist: IProps[] = [
                 url: '/tutorials',
             },
             {
-                title: 'Apps',
-                url: '/apps',
+                title: 'Integrations',
+                url: '/cdp',
             },
             {
                 title: 'Dashboard templates',
