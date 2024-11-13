@@ -1333,6 +1333,6 @@
             "source": "/docs/session-replay/react-native",
             "destination": "/docs/session-replay/installation?tab=React+Native"
         },
-        { "source": "/apps", "destination": "/cdp", "statusCode": 302, "permanent": false }
+        { "source": "/apps", "destination": "/cdp", "statusCode": 302 }
     ]
 }
