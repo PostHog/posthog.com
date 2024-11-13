@@ -1,6 +1,6 @@
 ---
 title: How we choose technologies
-date: 2024-11-12
+date: 2024-11-13
 author:
  - ian-vanagas
 featuredImage: >-
@@ -54,7 +54,7 @@ The goal of technology is to solve this specific hair-on-fire problem. We find p
 
 Realistically, the evaluation process happens at the same time as figuring out the options. This is because our team knows some options can be written off immediately as they don't fit our requirements. When we were looking for [scalable replacements for Postgres](/blog/how-we-turned-clickhouse-into-our-eventmansion) in our early days, for example, we knew we needed it to be open source and self-hostable. This immediately cut down our list. 
 
-## Evaluate solutions autonomously
+## We evaluate as close to reality as possible
 
 At PostHog, we bias for action. This means individual [small teams](https://newsletter.posthog.com/p/the-magic-of-small-engineering-teams) have the autonomy to choose and test technologies. We don't have an elaborate planning and procurement process.
 
@@ -82,9 +82,9 @@ Although every problem has its own set of evaluation criteria, there are some re
 
 - **Flexibility:** Because we plan to ship many products beyond what we have today, we need technologies that are interoperable and can be easily adapted to new use cases.
 
-You'll notice that some of these are business factors and others are technical. Many engineering teams would purely focus on the technical factors and rely on product or procurement teams to help evaluate business factors. Our team of [product engineers](/blog/what-is-a-product-engineer) are able to move faster by having the broader business context.
+You'll notice that some of these are business factors and others are technical. Many engineering teams would purely focus on the technical factors and rely on product or procurement teams to help evaluate business factors. Our team of [product engineers](/blog/what-is-a-product-engineer) are able to move faster by knowing the broader business context.
 
-## We make a decisions asynchronously
+## We make decisions asynchronously
 
 Although individuals are empowered to test and evaluate new technologies, decisions affecting multiple teams are made through a **request for comments** (RFC). These help us get buy-in, gather feedback on a decision, and stay transparent. The process of writing them also forces our teams to clearly articulate their thoughts in a structured way.
 
@@ -96,13 +96,15 @@ An RFC outlines the "why" behind a technology decision and helps facilitate inpu
 
 This isn't just a box to tick, it is a core part of helping us choose the right technologies. Our RFC for adopting [Temporal at PostHog](https://github.com/PostHog/meta/pull/99) had 2,594 words, roughly 1/4 of the company as reviewers, 46 comments, and quite a bit of disagreement before finally being adopted. It's now happily in use for [batch exports](/blog/temporal-exports) and [warehouse syncs](/docs/data-warehouse/setup).
 
+![Temporal RFC](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_13_at_10_11_37_2x_7396779231.png)
+
 Whatever happens, the final decision usually rests on the team implementing and maintaining the technology. Even if an agreement isn't reached, if they feel confident it is the right solution, they have leeway to go ahead with adoption.
 
 > **Related:** [How we work asynchronously](https://newsletter.posthog.com/p/how-we-work-asynchronously)
 
-## When do we say NO to technologies?
+### When do we say NO to technologies?
 
-If someone goes through the work to research and write an RFC recommending we adopt a technology, you'd expect them to get the go-ahead, right? Unfortunately, this regularly isn't the case, but why?
+If someone goes through all of this work, the expected answer for adopting a technology is yes. What has happened in when that wasn't the case?
 
 - **It's not mature enough.** If we choose to adopt a technology and not build it ourselves, we need to be confident it is stable, reliable, and has the features we need.
 
