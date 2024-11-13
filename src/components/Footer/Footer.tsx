@@ -132,10 +132,6 @@ const linklist: IProps[] = [
                 url: '/docs/data-warehouse',
             },
             {
-                title: 'Build an app',
-                url: '/docs/apps/build',
-            },
-            {
                 title: 'Migrate',
                 url: '/docs/migrate',
             },
