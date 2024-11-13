@@ -68,6 +68,8 @@ In these cases, the process is:
   - Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
   - Have the new team member book travel as usual
 
+> You should generally avoid combining in-person onboarding with [small team offsites](/handbook/company/offsites#small-team-offsites) - they serve quite different purposes. The focus of onboarding should be to get the new team member up and running, but offsites feature things like hackathons and 360 feedback which aren't usually helpful for this and detract from useful onboarding time.
+
 ### Engineering
 
 We hire engineers on a regular basis, running in-person onboarding practically every time. Over the years, we've learned a lot about doing this efficiently and there's much to gain from sharing the knowledge between teams.
