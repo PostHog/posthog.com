@@ -700,6 +700,8 @@ Piwik PRO's main differentiators are enterprise level support and the integratio
 
 [Fathom](/blog/best-fathom-alternatives) is another leading privacy-focused analytics tool that's similar in scope to Plausible. It's ideal for small and medium-size marketing websites, but it lacks the deeper features typical Google Analytics users will demand.
 
+For a deep dive, check out [PostHog vs Fathom Analytics](/blog/posthog-vs-fathom) too.
+
 #### Fathom vs Google Analytics 4
 
 <OverflowXSection>

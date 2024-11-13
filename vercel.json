@@ -340,6 +340,7 @@
         { "source": "/raroque", "destination": "/?utm_source=raroque&utm_campaign=raroque" },
         { "source": "/ashishps", "destination": "/?utm_source=ashishps&utm_campaign=ashishps" },
         { "source": "/codesource", "destination": "/?utm_source=codesource&utm_campaign=codesource" },
+        { "source": "/bytegrad", "destination": "/?utm_source=bytegrad&utm_campaign=bytegrad" },
         { "source": "/blog/the-posthog-array-1-36-1", "destination": "/blog/the-posthog-array-1-36-0" },
         { "source": "/tutorials/b2b", "destination": "/blog/b2b-saas-product-metrics" },
         { "source": "/docs/self-host/migrate-to-cloud", "destination": "/docs/migrate/migrate-to-cloud" },
@@ -1328,6 +1329,14 @@
         { "source": "/teams/website-docs", "destination": "/teams/website-vibes" },
         { "source": "/docs/session-replay/android", "destination": "/docs/session-replay/installation?tab=Android" },
         { "source": "/docs/session-replay/ios", "destination": "/docs/session-replay/installation?tab=iOS" },
+        {
+            "source": "/questions/best-practices-naming-convention-for-event-names-and-properties",
+            "destination": "/docs/product-analytics/best-practices"
+        },
+        {
+            "source": "/product-engineers/5-ways-to-improve-analytics-data",
+            "destination": "/docs/product-analytics/best-practices"
+        },
         {
             "source": "/docs/session-replay/react-native",
             "destination": "/docs/session-replay/installation?tab=React+Native"
