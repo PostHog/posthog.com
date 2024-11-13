@@ -3,7 +3,7 @@ title: Feature flags best practices
 sidebar: Docs
 showTitle: true
 ---
-## 1. Call your flag in as a few places as possible
+## 1. Call your flag in as few places as possible
 
 It should be easy to understand how feature flags affect your code. The more locations a flag is, the more likely it is to cause problems. For example, a developer could remove the flag in one place but forget to remove it in another.
 
@@ -23,7 +23,7 @@ Because PostHog evaluates flags based on the user's distinct ID, having differen
 
 Evaluating feature flags requires making a request to PostHog for each flag. However, you can improve performance by evaluating flags locally. Instead of making a request for each flag, PostHog will periodically request and store feature flag definitions locally, enabling you to evaluate flags without making additional requests.
 
-Evaluating flags locally when possible, since this enables you to resolve flags faster and with fewer API calls. See our docs on [local evaluation](/docs/feature-flags/local-evaluation) for more details.
+Evaluate flags locally when possible, since this enables you to resolve flags faster and with fewer API calls. See our docs on [local evaluation](/docs/feature-flags/local-evaluation) for more details.
 
 ## 4. Bootstrap flags on the client to make them available immediately
 
