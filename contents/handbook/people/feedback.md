@@ -67,7 +67,7 @@ Here are a few tips to help you do this:
 
 At small team offsites we may also run readme sessions in addition to 360 feedback sessions. Typically we find it useful to run these readme sessions as early as possible during the offsite and before 360 feedback. This is so team members can share relevant information which may shape how feedback is delivered. 
 
-Readme sessions are an opportunity for you to help others understand more about your background, expertise, and ways of communicating, as well as to talk about interests which others may share. You can share as much or as little as you feel is appropriate and are comfortable sharing. 
+Readme sessions are an opportunity for you to help others understand more about your background, expertise, and ways of communicating, as well as to talk about interests which others may share. You can share as much or as little as you feel is appropriate. Nobody should share more than they are comfortable sharing. 
 
 Everyone is encouraged to take a turn speaking, but nobody is required to speak about anything specific. We generally advise individuals to speak for 3-5 minutes in order to keep things moving quickly and give everyone a chance to speak. 
 
