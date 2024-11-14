@@ -13,7 +13,7 @@ As PostHog data arrives, you can export it *immediately* to other tools. You can
 - Enriching customer data in your CRM
 - Triggering automations
 
-PostHog enables you to send realtime data to dozens of pre-configured destinations. Check out the Integrations tab and choose **destinations** to get moving.
+PostHog enables you to send realtime data to dozens of pre-configured destinations. Check out the [data pipeline tab](https://us.posthog.com/project/2/pipeline/overview) and choose **destinations** to get started.
 
 ![Destinations list in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/destinations_list_acc7e07ae7.png)
 
