@@ -12,7 +12,9 @@ For example, given this PostHog event:
 ```ts
 {
     event: {
-        name: "$pageview",
+        event: "$pageview",
+        distinct_id: "1234",
+        timestamp: "2024-01-01T12:00:00",
         properties: {
             $current_url: "https://posthog.com"
         }
@@ -31,7 +33,7 @@ For example, given this PostHog event:
 You can create a template like:
 
 ```
-{event.name} was triggered by {person.properties.first_name} {person.properties.last_name}
+{event.event} was triggered by {person.properties.first_name} {person.properties.last_name}
 
 // Outputs: $pageview was triggered by Max the Hedgehog
 ```
@@ -63,14 +65,14 @@ Below is the structure of the global variables available whenever templating a d
 {
     event: {
         uuid: string // The unique ID of the event
-        name: string // The event name (e.g. $pageview)
+        event: string // The event name (e.g. $pageview)
         distinct_id: string // The distinct_id of the identity that created the event
         properties: Record<string, any>
         timestamp: string
         url: string // A URL to view it in PostHog
     }
     person?: {
-        uuid: string // The UUID of the Person associated with the distinct_id of the event
+        id: string // The UUID of the Person associated with the distinct_id of the event
         name: string // Configured based on your "Display name" property in PostHog
         url: string  // A URL to view it in PostHog
         properties: Record<string, any>
