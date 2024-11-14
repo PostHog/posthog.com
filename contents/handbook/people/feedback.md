@@ -65,7 +65,7 @@ Here are a few tips to help you do this:
 
 ## README sessions
 
-At small team offsites we may also run READM sessions in addition to 360 feedback sessions. Typically we find it useful to run these README sessions as early as possible during the offsite and before 360 feedback, as they are a great way to get to know your team. 
+At small team offsites we may also run README sessions in addition to 360 feedback sessions. Typically we find it useful to run these README sessions as early as possible during the offsite and before 360 feedback, as they are a great way to get to know your team. 
 
 README sessions are an opportunity for you to help others understand more about your background, communication style, and interests. You can share as much or as little as you feel is appropriate. Some things which you may wish to consider include:
 
