@@ -1,6 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Link from 'components/Link'
+import Mobilelibraries from 'components/Products/Mobilelibraries'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
     IconRewindPlay,
@@ -90,7 +91,7 @@ const features = [
     },
 ]
 
-const subfeaturesItemCount = 5
+const subfeaturesItemCount = 4
 const subfeatures = [
     {
         title: 'Capture sessions without extra code',
@@ -101,11 +102,6 @@ const subfeatures = [
         title: 'Automatic playlists',
         description: 'Filter by user behavior or time',
         icon: <IconPlaylist />,
-    },
-    {
-        title: 'Web or mobile session recording',
-        description: 'Watch users on your app or website. Available for web, Android, iOS and React Native (beta).',
-        icon: <IconPhone />,
     },
     {
         title: 'Download recordings',
@@ -120,7 +116,6 @@ const subfeatures = [
 ]
 
 const questions = [
-    { question: 'Where do key events happen in my user’s sessions?' },
     {
         question: "How do I understand my users' behavior in funnels?",
         url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
@@ -136,7 +131,6 @@ const questions = [
     { question: 'How do I figure out how to lower churn?', url: '/tutorials/churn-rate#session-recordings' },
     { question: 'How do I improve my support experience?', url: '/tutorials/session-recordings-for-support' },
     { question: 'How do I see where errors happen?', url: '/tutorials/session-recordings-for-support' },
-    { question: 'How do I get bug recreation steps easily?' },
     {
         question: 'Why are users dropping off in my funnel?',
         url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
@@ -437,6 +431,10 @@ export const ProductSessionReplay = () => {
                             return <Subfeature {...subfeature} key={index} />
                         })}
                     </ul>
+                </section>
+
+                <section>
+                    <Mobilelibraries />
                 </section>
 
                 <section className="bg-accent dark:bg-accent-dark">
