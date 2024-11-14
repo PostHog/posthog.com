@@ -33,7 +33,7 @@ For example, given this PostHog event:
 You can create a template like:
 
 ```
-{event.name} was triggered by {person.properties.first_name} {person.properties.last_name}
+{event.event} was triggered by {person.properties.first_name} {person.properties.last_name}
 
 // Outputs: $pageview was triggered by Max the Hedgehog
 ```
