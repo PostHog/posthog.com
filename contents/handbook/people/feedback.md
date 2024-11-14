@@ -63,6 +63,25 @@ Here are a few tips to help you do this:
 
 - You do not have to accept all feedback! However, it's probably worth taking time to reflect on it, rather than reacting in the moment. There is a difference between acknowledging feedback and disagreeing with it.
 
+## Readme sessions
+
+At small team offsites we may also run readme sessions in addition to 360 feedback sessions. Typically we find it useful to run these readme sessions as early as possible during the offsite and before 360 feedback. This is so team members can share relevant information which may shape how feedback is delivered. 
+
+Readme sessions are an opportunity for you to help others understand more about your background, expertise, and ways of communicating, as well as to talk about interests which others may share. You can share as much or as little as you feel is appropriate and are comfortable sharing. 
+
+Everyone is encouraged to take a turn speaking, but nobody is required to speak about anything specific. We generally advise individuals to speak for 3-5 minutes in order to keep things moving quickly and give everyone a chance to speak. 
+
+Some things which are typically covered and which you may wish to consider may include:
+
+- Your professional background and areas of deep expertise or inexperience
+- Your communication preferences and how you prefer to be addressed by others
+- Your typical schedule and if there are times when you are often unavailable 
+- Your typical working style and how you approach problem-solving or decision-making
+- Your current focus for personal or professional development
+- Any personal interests or values which you want to share
+
+It's OK to ask short, clarifying questions when someone has finished speaking during a readme, but sessions shouldn't become Q&As. If you have many questions for someone, we suggest following up afterwards. 
+
 ## Team surveys
 
 We run team surveys every 6 months using the _Pulse Surveys by Deel_ Slack app. These are set up to run automatically, including reminder messages in Slack, so you don't need to chase people manually. Charles and Coua have admin access to the surveys in Slack. 
