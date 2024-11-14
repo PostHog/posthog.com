@@ -71,7 +71,7 @@ Readme sessions are an opportunity for you to help others understand more about 
 
 Everyone is encouraged to take a turn speaking, but nobody is required to speak about anything specific. We generally advise individuals to speak for 3-5 minutes in order to keep things moving quickly and give everyone a chance to speak. 
 
-Some things which are typically covered and which you may wish to consider may include:
+Some things which are typically covered and which you may wish to consider include:
 
 - Your professional background and areas of deep expertise or inexperience
 - Your communication preferences and how you prefer to be addressed by others
