@@ -68,4 +68,4 @@ We **do not** consider 4xx HTTP codes to be poor performance. Some destinations 
 
 ### How do you handle retries?
 
-By default, all HTTP calls (`fetch` calls in Hog) are expected to return a 2xx response. If we get a non-OK response we will retry up to 3 times depending on the error codes. We may modify this logic as we make improvements to try and balance reliability and speed.
+By default, all HTTP calls (`fetch` calls in Hog) are expected to return a 2xx response. If we get a non-OK response, we will retry up to 3 times depending on the error codes. We may modify this logic as we make improvements to try and balance reliability and speed.
