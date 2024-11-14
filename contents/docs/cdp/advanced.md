@@ -72,7 +72,7 @@ Below is the structure of the global variables available whenever templating a d
         url: string // A URL to view it in PostHog
     }
     person?: {
-        uuid: string // The UUID of the Person associated with the distinct_id of the event
+        id: string // The UUID of the Person associated with the distinct_id of the event
         name: string // Configured based on your "Display name" property in PostHog
         url: string  // A URL to view it in PostHog
         properties: Record<string, any>
