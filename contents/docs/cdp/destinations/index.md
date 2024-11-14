@@ -5,7 +5,6 @@ showTitle: true
 
 > Destinations require the data pipeline add-on in [your billing settings](https://us.posthog.com/organization/billing).
 
-## Using destinations
 
 As PostHog data arrives, you can export it *immediately* to other tools. You can use this for things like:
 
