@@ -130,4 +130,4 @@ For more details and inspiration, you can always view the source code of any of 
 
 - **Keep it short:** We have tight controls on execution time, memory usage.
 
-- **Do not perform more than two `fetch` calls:** The function will error if you do. If you need to do more than 2 calls, please [contact support](https://us.posthog.com/#panel=support%3Asupport%3Aapps%3A%3Atrue).
+- **Do not perform more than 5 `fetch` calls:** The function will error if you do. If you need to do more than 5 calls, please [contact support](https://us.posthog.com/#panel=support%3Asupport%3Aapps%3A%3Atrue).
