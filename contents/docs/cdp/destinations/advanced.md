@@ -99,7 +99,7 @@ Below is the structure of the global variables available whenever templating a d
 }
 ```
 
-## Going deeper with Hog
+## Modifying destinations with Hog
 
 For most cases, we recommend using one of the templates. These take care of most logic under the hood, exposing simple inputs for you to configure. 
 
