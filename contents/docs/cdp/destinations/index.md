@@ -32,7 +32,7 @@ Instead of the firehose of all your PostHog data, you can construct a query that
 
 The hardest part of integrating two services is making sure everything works as you expect. Every destination includes a built-in testing interface, enabling you to send real data from PostHog on-demand to your target service and debug any errors.
 
-![Destination testing UI](https://res.cloudinary.com/dmukukwp6/image/upload/destination_testing_ui_3fa41f99f2.png)
+![Destination testing UI](https://res.cloudinary.com/dmukukwp6/image/upload/destination_testing_ui_e95cff873b.png)
 
 ## Keep an eye on things
 
