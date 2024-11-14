@@ -413,6 +413,12 @@ This command automatically turns any feature flag ending in `_EXPERIMENT` as a m
 
 Backend side flags are only evaluated locally, which requires the `POSTHOG_PERSONAL_API_KEY` env var to be set. Generate the key in [your user settings](http://localhost:8000/settings/user#personal-api-keys).
 
+## Extra: Debugging with VS Code
+
+The PostHog repository includes [VS Code launch options for debugging](https://github.com/PostHog/posthog/blob/master/.vscode/launch.json). Simply go to the `Run and Debug` tab in VS Code, select the desired service you want to debug, and run it. Once it starts up, you can set breakpoints and step through code to see exactly what is happening. There are also debug launch options for frontend and backend tests if you're dealing with a tricky test failure.
+
+> **Note:** If you're running most of your PostHog services locally with `./bin/start`, and only want to debug the backend for example, make sure to comment out that service from the [start script temporarily](https://github.com/PostHog/posthog/blob/866fa4d63ca3e10d99f7b112ebc4ca2f689ccbaa/bin/start#L22). 
+
 ## Extra: Debugging the backend in PyCharm
 
 With PyCharm's built in support for Django, it's fairly easy to setup debugging in the backend. This is especially useful when you want to trace and debug a network request made from the client all the way back to the server. You can set breakpoints and step through code to see exactly what the backend is doing with your request.
