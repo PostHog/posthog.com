@@ -106,7 +106,7 @@ You can, however, modify any destination by clicking `show source code`. From he
 
 Destinations are written in our [Hog language](/docs/hog). Most destinations are wrappers around `fetch` - a function for safely performing async, retry-able HTTP calls.
 
-```rust
+```hog
 let res := fetch(inputs.url, {
   'headers': inputs.headers,
   'body': inputs.body,

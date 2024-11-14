@@ -231,6 +231,10 @@ const languageMap: LanguageMap = {
         language: 'dart',
         label: 'Flutter',
     },
+    hog: {
+        language: 'rust',
+        label: 'Hog',
+    },
 }
 
 export default languageMap
