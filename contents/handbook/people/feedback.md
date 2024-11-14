@@ -63,6 +63,20 @@ Here are a few tips to help you do this:
 
 - You do not have to accept all feedback! However, it's probably worth taking time to reflect on it, rather than reacting in the moment. There is a difference between acknowledging feedback and disagreeing with it.
 
+## README sessions
+
+At small team offsites we may also run README sessions in addition to 360 feedback sessions. Typically we find it useful to run these README sessions as early as possible during the offsite and before 360 feedback, as they are a great way to get to know your team. 
+
+README sessions are an opportunity for you to help others understand more about your background, communication style, and interests. You can share as much or as little as you feel is appropriate. Some things which you may wish to consider include:
+
+- What you’re good at
+- What you’re bad at
+- What you like
+- What you don’t like
+- How best to work with/help you
+
+It's OK to ask short, clarifying questions when someone has finished, but sessions shouldn't become Q&As. 
+
 ## Team surveys
 
 We run team surveys every 6 months using the _Pulse Surveys by Deel_ Slack app. These are set up to run automatically, including reminder messages in Slack, so you don't need to chase people manually. Charles and Coua have admin access to the surveys in Slack. 
