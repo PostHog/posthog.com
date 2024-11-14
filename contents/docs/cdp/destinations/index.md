@@ -19,7 +19,7 @@ PostHog enables you to send realtime data to dozens of pre-configured destinatio
 
 Missing a destination you need? Our [webhook destination](/docs/cdp/destinations/webhook) enables you to send events to any HTTP endpoint, using whatever request method, URL parameter values, and JSON payload structure your application requires. You can mix hard-coded keys and values with any person or event data. This integrates PostHog with yet more tools, or even your own internal services.
 
-Wherever your data is going, we’ve built destination templates to get you up and running with just a few minutes of effort.
+Wherever your data is going, we’ve built destinations for many popular tools to get you up and running with just a few minutes of effort.
 
 ## Filtering
 
