@@ -2747,8 +2747,8 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations',
                         },
                         {
-                            name: 'Advanced usage',
-                            url: '/docs/cdp/destinations/advanced',
+                            name: 'Customization',
+                            url: '/docs/cdp/destinations/customizing-destinations',
                         },
                         {
                             name: 'Destinations',
