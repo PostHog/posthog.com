@@ -121,7 +121,7 @@ if (res.status >= 400) {
 
 For more details and inspiration, you can always view the source code of any of any destination.
 
-### Guidelines
+### Guidelines for modifying a destination
 
 - **Start from an existing template:** Check out existing templates that are close to the problem you’re solving and work from there.
 
