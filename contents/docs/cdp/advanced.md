@@ -65,7 +65,7 @@ Below is the structure of the global variables available whenever templating a d
 {
     event: {
         uuid: string // The unique ID of the event
-        name: string // The event name (e.g. $pageview)
+        event: string // The event name (e.g. $pageview)
         distinct_id: string // The distinct_id of the identity that created the event
         properties: Record<string, any>
         timestamp: string
