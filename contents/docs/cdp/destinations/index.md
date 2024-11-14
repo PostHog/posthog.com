@@ -10,7 +10,7 @@ showTitle: true
 As PostHog data arrives, you can export it *immediately* to other tools. You can use this for things like:
 
 - Conversion tracking
-- Monitoring key events in your chat platform
+- Monitoring key events with your chat platform
 - Enriching customer data in your CRM
 - Triggering automations
 
