@@ -21,7 +21,7 @@ Go to your [project settings](https://us.posthog.com/settings/project#snippet) a
 
 With the JavaScript snippet copied, go to your Framer project and click the gear in the top right to go to your site settings. If you haven’t already, sign up for the "Mini" site plan. This enables you to add custom code.
 
-Once on a paid plan, go to the **General** tab in site settings and scroll down to the **Custom Code** section. Under **End of <head> tag**, paste your PostHog JavaScript snippet. Make sure to press **Save** next to the **Custom Code** heading. 
+Once on a paid plan, go to the **General** tab in site settings and scroll down to the **Custom Code** section. Under **End of `<head>` tag**, paste your PostHog JavaScript snippet. Make sure to press **Save** next to the **Custom Code** heading. 
 
 Finally, **publish** your site to have PostHog automatically start capturing events.
 

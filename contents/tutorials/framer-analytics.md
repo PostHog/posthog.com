@@ -31,7 +31,7 @@ First, [sign up to PostHog](https://us.posthog.com/signup) and copy your JavaScr
 
 With the JavaScript snippet copied, go to your Framer project and click the gear in the top right to go to your site settings. If you haven’t already, sign up for the "Mini" site plan. This enables you to add custom code.
 
-Once on a paid plan, go to the **General** tab in site settings and scroll down to the **Custom Code** section. Under **End of <head> tag**, paste your PostHog JavaScript snippet. Make sure to press **Save** next to the **Custom Code** heading. 
+Once on a paid plan, go to the **General** tab in site settings and scroll down to the **Custom Code** section. Under **End of `<head>` tag**, paste your PostHog JavaScript snippet. Make sure to press **Save** next to the **Custom Code** heading. 
 
 ![Installing the script](https://res.cloudinary.com/dmukukwp6/video/upload/framer_41ee7b77bf.mp4)
 
