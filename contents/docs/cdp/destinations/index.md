@@ -43,7 +43,7 @@ Once your destination is up and running, the **metrics** and **logs** tabs will 
 
 For complete control of your destination’s behavior, you can view and edit the underlying Hog code that drives it. Experiment with rewriting your destination’s implementation to better address your needs, if the pre-built templates don’t quite do the job.
 
-[Learn more about this in advanced usage](/docs/cdp/advanced).
+[Learn more about this in customizing destinations](/docs/cdp/destinations/advanced).
 
 ## Caveats
 

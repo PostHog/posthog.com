@@ -1,5 +1,5 @@
 ---
-title: "Destinations: advanced usage"
+title: "Customizing destinations"
 showTitle: true
 ---
 Although we recommend using one of our pre-built destinations, you can also customize them and build your own. 
