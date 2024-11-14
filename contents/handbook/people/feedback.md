@@ -63,24 +63,19 @@ Here are a few tips to help you do this:
 
 - You do not have to accept all feedback! However, it's probably worth taking time to reflect on it, rather than reacting in the moment. There is a difference between acknowledging feedback and disagreeing with it.
 
-## Readme sessions
+## README sessions
 
-At small team offsites we may also run readme sessions in addition to 360 feedback sessions. Typically we find it useful to run these readme sessions as early as possible during the offsite and before 360 feedback. This is so team members can share relevant information which may shape how feedback is delivered. 
+At small team offsites we may also run READM sessions in addition to 360 feedback sessions. Typically we find it useful to run these README sessions as early as possible during the offsite and before 360 feedback, as they are a great way to get to know your team. 
 
-Readme sessions are an opportunity for you to help others understand more about your background, expertise, and ways of communicating, as well as to talk about interests which others may share. You can share as much or as little as you feel is appropriate. Nobody should share more than they are comfortable sharing. 
+README sessions are an opportunity for you to help others understand more about your background, communication style, and interests. You can share as much or as little as you feel is appropriate. Some things which you may wish to consider include:
 
-Everyone is encouraged to take a turn speaking, but nobody is required to speak about anything specific. We generally advise individuals to speak for 3-5 minutes in order to keep things moving quickly and give everyone a chance to speak. 
+- What you’re good at
+- What you’re bad at
+- What you like
+- What you don’t like
+- How best to work with/help you
 
-Some things which are typically covered and which you may wish to consider include:
-
-- Your professional background and areas of deep expertise or inexperience
-- Your communication preferences and how you prefer to be addressed by others
-- Your typical schedule and if there are times when you are often unavailable 
-- Your typical working style and how you approach problem-solving or decision-making
-- Your current focus for personal or professional development
-- Any personal interests or values which you want to share
-
-It's OK to ask short, clarifying questions when someone has finished speaking during a readme, but sessions shouldn't become Q&As. If you have many questions for someone, we suggest following up afterwards. 
+It's OK to ask short, clarifying questions when someone has finished, but sessions shouldn't become Q&As. 
 
 ## Team surveys
 
