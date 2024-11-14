@@ -2,6 +2,7 @@
 title: "Destinations: advanced usage"
 showTitle: true
 ---
+Although we recommend using one of our pre-built destinations, you can also customize them and build your own. 
 
 ## Customizing payload
 
@@ -98,11 +99,11 @@ Below is the structure of the global variables available whenever templating a d
 }
 ```
 
-## Going deeper with Hog
+## Modifying destinations with Hog
 
 For most cases, we recommend using one of the templates. These take care of most logic under the hood, exposing simple inputs for you to configure. 
 
-You can, however, modify any destination by clicking `show source code`. From here you can modify the inputs – for example marking an input as secret so that it is encrypted as rest – or change the implementation of the destination itself.
+You can, however, modify any destination by clicking `show source code`. From here you can modify the inputs – for example marking an input as secret so that it is encrypted as rest – or changing the implementation of the destination itself.
 
 Destinations are written in our [Hog language](/docs/hog). Most destinations are wrappers around `fetch` - a function for safely performing async, retry-able HTTP calls.
 
@@ -120,7 +121,7 @@ if (res.status >= 400) {
 
 For more details and inspiration, you can always view the source code of any of any destination.
 
-### Guidelines
+### Guidelines for modifying a destination
 
 - **Start from an existing template:** Check out existing templates that are close to the problem you’re solving and work from there.
 
