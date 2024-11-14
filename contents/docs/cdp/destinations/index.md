@@ -64,7 +64,7 @@ The key metrics that we observe to determine poor performance are:
 1. Errors thrown within the code (for example if you try to access a property that doesn't exist).
 2. Repeatedly slow responses from the destination. Some slow HTTP calls are fine but if you send thousands of events and the destination can't keep up, we will eventually disable it to protect ourselves and the destination.
 
-We **do not** consider 4xx HTTP codes to be poor performance. Some destinations utilize these responses to determine if a follow up HTTP call is required (for example a 409 conflict indicating a record already exists). Non "OK" statuses will be logged in order to help you debug potential issues.
+We **do not** consider 4xx HTTP codes to be poor performance. Some destinations utilize these responses to determine if a follow up HTTP call is required (for example a 409 conflict indicating a record already exists). Non "OK" statuses are logged to help you debug potential issues.
 
 ### How do you handle retries?
 
