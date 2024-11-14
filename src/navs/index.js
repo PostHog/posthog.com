@@ -2732,12 +2732,6 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Advanced usage',
-                    url: '/docs/cdp/advanced',
-                    icon: 'IconCode',
-                    color: 'purple',
-                },
-                {
                     name: 'Realtime destinations',
                     url: '/docs/cdp/destinations',
                     badge: {
@@ -2751,6 +2745,10 @@ export const docsMenu = {
                         {
                             name: 'Overview',
                             url: '/docs/cdp/destinations',
+                        },
+                        {
+                            name: 'Advanced usage',
+                            url: '/docs/cdp/advanced',
                         },
                         {
                             name: 'Destinations',
