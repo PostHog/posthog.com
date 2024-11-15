@@ -2103,7 +2103,7 @@ export const docsMenu = {
                     color: 'purple',
                     children: [
                         {
-                            name: 'Resetting identify',
+                            name: 'Reset after logout',
                             url: '/docs/product-analytics/identify/reset',
                         },
                     ],
