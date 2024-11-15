@@ -14,7 +14,7 @@ If you choose to use a CSP it is important to ensure that PostHog domains are pe
 
 ## Content Security Policy directives needed
 
-Depending on how you have installed `posthog-js`, the SDK will dynamically load extra JavaScript assets as necesssary. For example the snippet is very small and just loads `array.js`. This requires the `script-src` directive.
+Depending on how you have installed `posthog-js`, the SDK will dynamically load extra JavaScript assets as necessary. For example, [the snippet](/docs/getting-started/install?tab=snippet) is very small and just loads `array.js`. This requires the `script-src` directive.
 
 Once loaded, the SDK will make API calls to the various endpoints for feature flags, analytics ingestion etc. This requires the `connect-src` directive. Additionally, if additional JavaScript assets are required such as the larger bundle for the Session Replay recorder, then they will be loaded via additional `<script/>` tags which in turn require the `script-src` directive.
 
