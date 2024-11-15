@@ -179,6 +179,25 @@ bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
 ```
 
+## Session replay
+
+When using the [JavaScript web library](/docs/libraries/js) for [session replay](/docs/session-replay) in an angular project, if you are manually starting session recording with `posthog.startSessionRecording()`, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). This avoids potential performance issues with Angular's change detection running at the same time as Posthog's session recording.
+
+```ts file=posthog-session-recording.service.ts
+import { Injectable } from '@angular/core';
+import posthog from 'posthog-js'
+
+@Injectable({ providedIn: 'root' })
+export class PostHogSessionRecordingService {
+  constructor(private ngZone: NgZone) {}
+  startSessionRecording() {
+    this.ngZone.runOutsideAngular(() => {
+      posthog.startSessionRecording()
+    })
+  }
+}
+```
+
 ## Next steps
 
 For any technical questions for how to integrate specific PostHog features into Angular (such as feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js).
