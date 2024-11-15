@@ -20,6 +20,45 @@ npm install --save posthog-js
 
 First, you'll need to pass the `POSTHOG_API_KEY` to your client through Remix. We recommend placing them on `window.ENV` by following [this guide](https://remix.run/docs/en/main/guides/envvars#browser-environment-variables). You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).
 
+
+```ts file=app/root.tsx
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "@remix-run/react";
+import type { LinksFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+
+//... other imports, links, etc.
+
+export const loader = () => {
+  return json({
+    ENV: {
+      POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
+    },
+  });
+};
+
+export default function App() {
+  const { ENV } = useLoaderData<typeof loader>();
+  return (
+    <html lang="en">
+      <head>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <Outlet />
+        <ScrollRestoration />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(ENV)}`,
+          }}
+        />
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+```
+
 Next, create a new PostHog context in `app/contexts/posthog-context.tsx`. This is necessary because of a [missing export statement](https://github.com/PostHog/posthog-js/issues/908) in `posthog-js`'s `package.json`. 
 
 ```ts file=app/contexts/posthog-context.tsx
