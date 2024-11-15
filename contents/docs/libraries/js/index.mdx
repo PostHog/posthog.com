@@ -580,6 +580,21 @@ posthog.init('my_token', {
 })
 ```
 
+### Providing more than one before_send function
+
+You can provide an array of functions to be called one after the other
+
+
+```
+posthog.init('my_token', {
+    before_send: [
+        sampleByDistinctId(0.5), // only half of people
+        sampleByEvent(['$web_vitals], 0.1), // and they capture all events except 10% of web vitals
+        sampleByEvent(['$$heatmap], 0.5), // and 50% of heatmaps
+    ]
+}
+```
+
 ### Or send no events while developing
 
 When working locally it can be useful to see what posthog would do, without actually sending the data to PostHog
