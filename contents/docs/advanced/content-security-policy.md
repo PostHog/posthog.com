@@ -42,9 +42,9 @@ Depending on your compliance needs you can either:
   default-src 'self'; 
   script-src 'self' https://*.posthog.com; 
   connect-src 'self' https://*.posthog.com;
-  img-src 'self' https://*.posthog.com data: blob:; 
+  img-src 'self' https://*.posthog.com; 
   style-src 'self' https://*.posthog.com; 
-  font-src https://*.posthog.com; 
+  font-src https://*.posthog.com;
   media-src https://*.posthog.com;
 ">
 ```
