@@ -115,8 +115,6 @@ With those principles in mind, here are some example product survey questions as
 
 This shows the diversity of questions, companies, and use cases for product surveys. Each of them utilized surveys to prioritize future development, monitor user satisfaction, and ultimately, make data-informed decisions to improve their product.
 
-<NewsletterForm />
-
 ## Using surveys to find product-market fit
 
 The companies above are tech giants with product-market fit, but surveys are also a critical tool for startups still searching for it.

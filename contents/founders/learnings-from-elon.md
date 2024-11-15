@@ -50,8 +50,6 @@ We didn’t enjoy the sales process, and we didn’t enjoy debugging other peopl
 
 > **Takeaway:** The easiest way to fail is to simply lose interest. When we made that decision, we optimized for what would keep us and our team motivated in the long term. We optimized for (meaningful) fun.
 
-<NewsletterForm />
-
 ## 3. When artificial deadlines do (and don’t) work
 
 Elon is famous for creating urgency by setting unrealistic artificial deadlines – e.g. moving the 500k unit target for the Model 3 forward by two years.
