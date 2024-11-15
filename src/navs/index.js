@@ -2751,6 +2751,10 @@ export const docsMenu = {
                             url: '/docs/cdp/destinations',
                         },
                         {
+                            name: 'Customization',
+                            url: '/docs/cdp/destinations/customizing-destinations',
+                        },
+                        {
                             name: 'Destinations',
                         },
                         {
