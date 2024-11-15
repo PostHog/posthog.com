@@ -119,7 +119,7 @@ if (res.status >= 400) {
 }
 ```
 
-For more details and inspiration, you can always view the source code of any of any destination.
+For more details and inspiration, you can always view the source code of any destination.
 
 ### Guidelines for modifying a destination
 
