@@ -213,7 +213,7 @@ get_entries_from_folder_and_capture(folder_name)
 
 This script may need modification depending on the structure of your Amplitude data, but it gives you a start.
 
-> **Why am I seeing "analytics-python queue is full"?** The default queue size for ingesting is 10,000. If you are importing more than 10,000 events call posthog.flush() every 5000 messages to block the thread until the queue empties out.
+> **Why am I seeing "analytics-python queue is full"?** The default queue size for ingesting is 10,000. If you are importing more than 10,000 events, call `posthog.flush()` every 5000 messages to block the thread until the queue empties out.
 
 > **Why are my event and DAU count lower in PostHog than Amplitude?** PostHog blocks bot traffic by default, while Amplitude doesn't. You can see a full list of the bots PostHog blocks [in our docs](/docs/product-analytics/troubleshooting#does-posthog-block-bots-by-default).
 
