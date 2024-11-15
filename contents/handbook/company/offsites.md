@@ -185,6 +185,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 - [ ] Unveil the final offsite guide to the team
 
 **1 day before**
+- [ ] Add your new timezone as a secondary timezone in Google Calendar and check the 'Ask to update my primary timezone to current location' option. **Don't** update your primary timezone to the new one, as this causes issues for interview scheduling.
 - [ ] We recommend that the offsite organizer consider arriving a day early to prep for the team's arrival
 - [ ] Shop for any miscellaneous supplies and groceries (onsite)
 - [ ] Print and organize a few paper copies of the itinerary (onsite)
