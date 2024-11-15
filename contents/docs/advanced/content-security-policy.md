@@ -43,7 +43,7 @@ Depending on your compliance needs you can either:
   script-src 'self' https://*.posthog.com; 
   connect-src 'self' https://*.posthog.com;
   img-src 'self' https://*.posthog.com data: blob:; 
-  style-src 'self' https://*.posthog.com 'unsafe-inline'; 
+  style-src 'self' https://*.posthog.com; 
   font-src https://*.posthog.com; 
   media-src https://*.posthog.com;
 ">
