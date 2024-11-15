@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Link from 'components/Link'
 import Particles from 'react-tsparticles'
 import { loadStarsPreset } from 'tsparticles-preset-stars'
@@ -7,49 +7,54 @@ import { layoutLogic } from 'logic/layoutLogic'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { useLottie } from 'lottie-react'
+import light from './lotties/light'
+import dark from './lotties/dark'
 
-const CommunityHogs = ({ name, className = '' }) => {
-    const [ready, setReady] = useState(false)
-    const [containerRef, inView] = useInView({ threshold: 0 })
-    const videoRef = useRef<HTMLVideoElement>(null)
-
-    useEffect(() => {
-        if (inView) {
-            videoRef?.current?.play()
-        } else {
-            videoRef?.current?.pause()
-        }
-    }, [inView, ready])
-
-    return (
-        <div className="w-[70vw] mx-auto absolute bottom-0 left-1/2 -translate-x-1/2" ref={containerRef}>
-            <video
-                ref={videoRef}
-                onCanPlay={() => {
-                    setReady(true)
-                }}
-                loop
-                playsInline
-                muted
-                preload="none"
-                className={`w-full ${className}`}
-            >
-                <source
-                    className="hidden"
-                    src={`${process.env.GATSBY_CLOUDFRONT_URL}/${name}.webm`}
-                    type="video/webm"
-                />
-                <source className="hidden" src={`${process.env.GATSBY_CLOUDFRONT_URL}/${name}.mp4`} type="video/mp4" />
-            </video>
-        </div>
-    )
-}
+const blocks = [
+    {
+        title: '240k+',
+        subtitle: 'Developer community',
+    },
+    {
+        title: '108k+',
+        subtitle: 'Companies installed',
+    },
+    {
+        title: '9.5m+',
+        subtitle: 'Monthly traffic',
+    },
+]
 
 const CommunityStat = ({ count, label, className }) => {
     return (
         <div className={`absolute text-center text-[#392116] dark:text-[#E7F1FF] ${className}`}>
             <h4 className="text-[2.5vw] lg:text-[2.75vw] xl:text-[3vw] leading-none mb-0.5">{count}</h4>
             <p className="text-[1.5vw] lg:text-[1.25vw] xl:text-[1vw] m-0 leading-tight whitespace-nowrap">{label}</p>
+        </div>
+    )
+}
+
+const CommunityHogs = () => {
+    const [containerRef, inView] = useInView({ threshold: 0 })
+    const { websiteTheme } = useValues(layoutLogic)
+    const { play, pause, View } = useLottie({
+        animationData: websiteTheme === 'dark' ? dark(blocks) : light(blocks),
+        loop: true,
+        autoPlay: false,
+    })
+
+    useEffect(() => {
+        if (inView) {
+            play()
+        } else {
+            pause()
+        }
+    }, [inView])
+
+    return (
+        <div ref={containerRef} className="w-[70vw] mx-auto absolute bottom-0 left-1/2 -translate-x-1/2">
+            {View}
         </div>
     )
 }
@@ -126,9 +131,7 @@ export default function Community() {
                         alt="campfire-dark"
                         className="hidden dark:block w-full"
                     />
-
-                    <CommunityHogs name="campfire-light" className="dark:hidden block" />
-                    <CommunityHogs name="campfire-dark" className="hidden dark:block" />
+                    <CommunityHogs />
                 </section>
             </div>
         </div>

@@ -89,6 +89,7 @@
         "lodash.get": "^4.4.2",
         "lodash.groupby": "^4.6.0",
         "lodash.uniqby": "^4.7.0",
+        "lottie-react": "^2.4.0",
         "markdown-link-extractor": "^4.0.1",
         "markdown-to-jsx": "^7.1.7",
         "md5": "^2.3.0",
