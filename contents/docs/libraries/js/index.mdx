@@ -535,7 +535,7 @@ If you're using NPM we offer a pre-built function to sample by event name. You c
 ```
 posthog.init('my_token', {
     // capture only half of dead click and web vitals events
-    before_send: sampleByEvent(['$dead_click', '$web_vitals'], 50)
+    before_send: sampleByEvent(['$dead_click', '$web_vitals'], 0.5)
 })
 ```
 
@@ -564,7 +564,7 @@ A particular distinct ID will always either send all events or no events.
 
 ```
 posthog.init('my_token', {
-    before_send: sampleByDistinctId(40)
+    before_send: sampleByDistinctId(0.4)
 })
 ```
 
@@ -576,7 +576,7 @@ A particular session ID will always either send all events or no events.
 
 ```
 posthog.init('my_token', {
-    before_send: sampleBySessionId(25)
+    before_send: sampleBySessionId(0.25)
 })
 ```
 
