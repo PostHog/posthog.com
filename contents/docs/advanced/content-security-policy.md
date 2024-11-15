@@ -67,3 +67,25 @@ Our client SDKs (where appropriate) will take care of selecting the correct doma
 | `us.posthog.com` | US PostHog app domain (used by the Toolbar) |
 | `app.posthog.com` | Legacy ingestion endpoint |
 
+
+## Troubleshooting / FAQ
+
+### What is the absolute bare minimum CSP I could have?
+
+If you really want to have a restrictive CSP with the absolute bare minimum changes, you can bundle all required `posthog-js` dependencies as part of your own application JavaScript, ensuring there is no need to load extra scripts at runtime.
+
+1. Follow the instructions [here](/docs/libraries/js#advanced-option---bundle-all-required-extensions) to install `posthog-js` via npm with all bundled dependencies that you require.
+2. Update your content security policy to only include the `connect-src` directive as below
+
+```html
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self'; 
+  connect-src 'self' https://*.posthog.com;
+">
+```
+
+**NOTE**: This will not work with the toolbar and generally means your initial bundled JavaScript will be much larger depending on the dependencies you are including. It also means you will need to keep your version of `posthog-js` up to date. 
+
+### What if I use a reverse proxy?
+
+Using a reverse proxy means you are sending data via a domain under your control. All you would have to do with your CSP in that case is ensure this domain is permitted rather than PostHog ones. 
