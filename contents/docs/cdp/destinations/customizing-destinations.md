@@ -125,7 +125,7 @@ For more details and inspiration, you can always view the source code of any of 
 
 - **Start from an existing template:** Check out existing templates that are close to the problem you’re solving and work from there.
 
-- **Rely on filters:** Offload as much as possible to the built in `filters` and `inputs`. This will make modifying your destination later much simpler (as well as being more performant)
+- **Rely on filters:** Offload as much as possible to the built in `filters` and `inputs`. This will make modifying your destination later much simpler (as well as being more performant).
 
 - **Use `inputs` wherever possible:** These are great for things like API credentials. You can even mark them as secret: they will not be returned to the UI in the future and will be stored encrypted.
 
