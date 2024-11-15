@@ -2316,7 +2316,6 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-
                     name: 'Web vs product analytics',
                     url: '/docs/web-analytics/web-vs-product-analytics',
                     icon: 'IconGraph',
@@ -3470,7 +3469,7 @@ const menu = [
                     },
                     {
                         name: 'Questions?',
-                        url: '/questions/product-analytics',
+                        url: '/questions/topic/product-analytics',
                     },
                 ],
             },
@@ -3527,7 +3526,7 @@ const menu = [
                     },
                     {
                         name: 'Questions?',
-                        url: '/questions/web-analytics',
+                        url: '/questions/topic/web-analytics',
                     },
                 ],
             },
@@ -3683,7 +3682,7 @@ const menu = [
                     },
                     {
                         name: 'Questions?',
-                        url: '/questions/session-replay',
+                        url: '/questions/topic/session-replay',
                     },
                 ],
             },
@@ -3805,7 +3804,7 @@ const menu = [
                     },
                     {
                         name: 'Questions?',
-                        url: '/questions/feature-flags',
+                        url: '/questions/topic/feature-flags',
                     },
                 ],
             },
@@ -3926,7 +3925,7 @@ const menu = [
                     },
                     {
                         name: 'Questions?',
-                        url: '/questions/experiments',
+                        url: '/questions/topic/experiments',
                     },
                 ],
             },
@@ -4024,7 +4023,7 @@ const menu = [
                     },
                     {
                         name: 'Questions?',
-                        url: '/questions/surveys',
+                        url: '/questions/topic/surveys',
                     },
                 ],
             },
@@ -4264,7 +4263,7 @@ const menu = [
                     },
                     {
                         name: 'Questions?',
-                        url: '/questions/cdp',
+                        url: '/questions/topic/cdp',
                     },
                 ],
             },
@@ -4412,7 +4411,7 @@ const menu = [
                     },
                     {
                         name: 'Questions?',
-                        url: '/questions/data-warehouse',
+                        url: '/questions/topic/data-warehouse',
                     },
                 ],
             },
@@ -4500,7 +4499,7 @@ const menu = [
                     },
                     {
                         name: 'Questions?',
-                        url: '/questions/ai-engineering',
+                        url: '/questions/topic/ai-engineering',
                     },
                 ],
             },
