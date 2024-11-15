@@ -177,6 +177,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 **2 Weeks Out**
 - [ ] Review and finalize session plans/presentations
   - We recommend having the offsite lead connect with session leads to review their plans and offer feedback before finalizing them - you want to make the most out of your sync time together
+- [ ] Block your calendar and recommend team members do the same, to avoid interviews and other meetings being booked during key sessions or at times incompatible with the new timezone
 
 **1 Week Out**
 - [ ] Final plan review 
