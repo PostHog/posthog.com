@@ -2101,6 +2101,12 @@ export const docsMenu = {
                     url: '/docs/product-analytics/identify',
                     icon: 'IconPerson',
                     color: 'purple',
+                    children: [
+                        {
+                            name: 'Resetting identify',
+                            url: '/docs/product-analytics/identify/reset',
+                        },
+                    ],
                 },
                 {
                     name: 'Setting person properties',
