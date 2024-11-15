@@ -177,6 +177,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 **2 Weeks Out**
 - [ ] Review and finalize session plans/presentations
   - We recommend having the offsite lead connect with session leads to review their plans and offer feedback before finalizing them - you want to make the most out of your sync time together
+- [ ] Block your calendar and recommend team members do the same, to avoid interviews and other meetings being booked during key sessions or at times incompatible with the new timezone. The offsite calendar event needs to be marked as "busy" to prevent others from booking over it, which means changing the default for all-day events.
 
 **1 Week Out**
 - [ ] Final plan review 
@@ -184,6 +185,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 - [ ] Unveil the final offsite guide to the team
 
 **1 day before**
+- [ ] Add your new timezone as a secondary timezone in Google Calendar and check the 'Ask to update my primary timezone to current location' option. **Don't** update your primary timezone to the new one, as this causes issues for interview scheduling.
 - [ ] We recommend that the offsite organizer consider arriving a day early to prep for the team's arrival
 - [ ] Shop for any miscellaneous supplies and groceries (onsite)
 - [ ] Print and organize a few paper copies of the itinerary (onsite)
