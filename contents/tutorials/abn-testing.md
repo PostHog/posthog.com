@@ -102,3 +102,5 @@ To do this, click the "stop" button on your experiment details page, go to your 
 - [How to do holdout testing](/tutorials/holdout-testing)
 - [How to do A/A testing](/tutorials/aa-testing)
 - [How to use Next.js middleware to bootstrap feature flags](/tutorials/nextjs-bootstrap-flags)
+
+<NewsletterForm />

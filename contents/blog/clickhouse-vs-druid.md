@@ -79,8 +79,6 @@ ClickHouse would stumble with this – ClickHouse doesn’t guarantee newly inge
 
 Remember that analogy between the mansion and master-plan community? For Druid, the query nodes are the roads, the data nodes are the houses, and storage is the sprawling, shared lake.
 
-<NewsletterForm />
-
 #### Cattle vs Pets
 
 Druid expects you to treat its nodes like cattle, constantly removing and adding nodes on a whim. You would never do that with ClickHouse instances since each ClickHouse instance likely plays a critical role in your application’s stability. 

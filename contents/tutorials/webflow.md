@@ -54,3 +54,5 @@ From here, you can analyze data from your Webflow site with our suite of product
 - [How to run A/B tests in Webflow](/tutorials/webflow-ab-tests)
 - [How to create surveys in Webflow](/tutorials/webflow-surveys)
 - [How to track performance marketing in PostHog](/tutorials/performance-marketing)
+
+<NewsletterForm />

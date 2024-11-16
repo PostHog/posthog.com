@@ -132,3 +132,5 @@ posthog.onFeatureFlags(() => {
 - [How to set up Bubble analytics, session replays, and more](/tutorials/bubble-analytics)
 - [How to create surveys in Bubble](/tutorials/bubble-surveys)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+
+<NewsletterForm />

@@ -51,3 +51,5 @@ You can then test the destination and it will start sending survey responses to 
 - [How to set up surveys in Next.js](/tutorials/nextjs-surveys)
 - [How to show a survey after a delay](/tutorials/delayed-survey)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+
+<NewsletterForm />

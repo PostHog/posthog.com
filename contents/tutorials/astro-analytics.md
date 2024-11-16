@@ -4,9 +4,9 @@ date: 2023-11-28
 author:
   - ian-vanagas
 tags:
-  - configuration
   - feature flags
-  - events
+  - product analytics
+  - web analytics
 ---
 
 [Astro](https://astro.build/) is a frontend JavaScript framework focused on performance and simplifying the creation of content-based sites. It has seen a rapid increase in interest and usage since its release in 2022.
@@ -423,3 +423,5 @@ Now when you refresh your page, your flag won’t flicker because the content is
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [How to set up A/B tests in Astro](/tutorials/astro-ab-tests)
 - [How to set up surveys in Astro](/tutorials/astro-surveys)
+
+<NewsletterForm />

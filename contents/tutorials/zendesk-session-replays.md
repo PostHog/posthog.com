@@ -229,3 +229,5 @@ Now, when you check your ticket in Zendesk, you'll see a session replay link to 
 - [How to use session replays to improve your support experience](/tutorials/session-recordings-for-support)
 - [How to use filters + session replays to understand user friction](/tutorials/filter-session-recordings)
 - [How to add session replays to Intercom](/tutorials/intercom-session-replays)
+
+<NewsletterForm />

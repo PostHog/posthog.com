@@ -287,3 +287,5 @@ analytics.track('event_name', {
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [5 ways to improve your product analytics data](/product-engineers/5-ways-to-improve-analytics-data)
 - [What engineers get wrong about analytics](/newsletter/misconceptions-about-analytics)
+
+<NewsletterForm />

@@ -486,3 +486,5 @@ You can also filter these results based on [person properties](/docs/product-ana
 - [How to set up A/B tests in Svelte](/tutorials/svelte-ab-tests)
 - [How to set up Svelte analytics, feature flags, and more](/tutorials/svelte-analytics)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+
+<NewsletterForm />

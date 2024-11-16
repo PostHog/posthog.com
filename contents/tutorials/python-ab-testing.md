@@ -220,3 +220,4 @@ This is a basic implementation of Python A/B testing in Flask set up. From here,
 - [How to set up analytics in Python and Flask](/tutorials/python-analytics)
 - [How to set up feature flags in Python and Flask](/tutorials/python-feature-flags)
 
+<NewsletterForm />

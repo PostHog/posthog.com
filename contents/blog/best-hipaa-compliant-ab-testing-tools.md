@@ -80,8 +80,6 @@ Kameleoon is an A/B testing and personalization platform. It supports A/B and [m
 
 Kameleoon doesn't publish pricing publicly, but conversion optimization consultants BrillMark [reports](https://www.brillmark.com/kameleoon-ab-testing-platform/#:~:text=The%20yearly%20licensing%20pricing%20for,pay%20for%20the%20annual%20license) pricing starts at $35,000 per year and scales based on traffic volume, making it a premium option.
 
-<NewsletterForm />
-
 ### 3. VWO
 
 ![vwo testing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/hipaa-compliant-ab-testing/vwo-testing.png)
@@ -145,3 +143,5 @@ This includes medical records, laboratory results, billing information, and any 
 There's no objective correct answer here. In theory, self-hosting is preferable as it means you don't share any data with third-parties (business associates), and thus you don't need to sign a BAA.
 
 But self-hosting also presents additional risks. You're wholly liable for ensuring your A/B testing infrastructure is secure, which can be challenging if you don't have the internal expertise to manage this. If this is the case, it may be better to rely on a HIPAA-compliant business associate who has experience hosting analytics at scale.
+
+<NewsletterForm />

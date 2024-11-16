@@ -285,3 +285,5 @@ export default defineEventHandler(async (event) => {
 - [How to set up feature flags in Nuxt](/tutorials/nuxt-feature-flags)
 - [How to set up A/B tests in Nuxt](/tutorials/nuxtjs-ab-tests)
 - [How to set up surveys in Nuxt](/tutorials/nuxt-surveys)
+
+<NewsletterForm />
