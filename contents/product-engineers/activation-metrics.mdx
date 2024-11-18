@@ -20,15 +20,13 @@ People are signing up for your product. Great! But before you start planning you
 
 The trouble with activation is that it is hard to define. Many say it is when a user reaches the "aha" moment of your product, but this is vague and different for everyone.
 
-For example, we have 8+ products and each has a different set of activation metrics from launching a survey to inviting a teammate to creating two or more dashboards. What made finding activation metrics tricky was that each product had 10+ events that **could** be part of its activation metric.
-
-This means we spent a lot of time discovering our products' activation metrics. We're sharing our process here to help you do the same.
+For example, we have 8+ products. Each product has 10+ events that **could** be part of its activation metric. This means we spent a lot of time discovering our products' activation metrics. We're sharing our process here to help you do the same.
 
 But before we jump in... what is activation _really_?
 
 ## What is an activation metric?
 
-Activation metrics are a set of actions a new user performs that are correlated with greater retention.
+Activation metrics are a set of actions a new user performs that correlate with greater retention.
 
 Focusing on retention solves the trickiest part of defining an activation metric: it could be _anything_. Does a pageview count as activation? How about inviting a teammate? Creating their first object? Depending on your product, any or all of these could be an activation metric. It is **retention** that makes it clear.
 
@@ -60,11 +58,13 @@ After testing multiple event groups, we found that watching 5 or more replays an
 
 How can you recreate this process for yourself? Creating the groups of potential activation events is easy, but the retention testing query is the tricky part. 
 
-To help you out, we've included the exact query we used below. If you use PostHog, you can create a [new SQL insight](https://us.posthog.com/insights/new) and use our same exact query to explore your data and find your activation metric. First, I'll break the query into parts to explain what's happening, then I'll provide the whole thing in one chunk [at the end](#the-final-combined-query).
+To help you out, we've included the exact query we used below. First, I'll break the query into parts to explain what's happening, then I'll provide the whole thing in one chunk [at the end](#the-final-combined-query).
 
-> **Note:** This query gets retention at the **company** level using [group analytics](/docs/product-analytics/group-analytics). This means that anyone in the group (e.g. customer, organization (what we use), work unit - whatever your groups are) can perform the event and it counts towards activation.
+If you use PostHog, you can create a [new SQL insight](https://us.posthog.com/insights/new) and use our same exact query to explore your data and find your activation metric
+
+> **Note:** Our example query gets retention at the **company level** using [group analytics](/docs/product-analytics/group-analytics). This means that anyone in the company can perform the event and it counts towards activation. This makes the most sense for B2B SaaS products like ours.
 > 
-> If you want to get retention at the **person** level, you can use the same query but replace company references with person ones like changing `company_id` to `distinct_id`.
+> If you want to get retention at the **person level**, you can use the same query but replace company references with person ones like changing `company_id` to `distinct_id`.
 
 ### Part 1: Get the companies who started with your product, broken down by month
 
