@@ -28,7 +28,7 @@ But before we jump in... what is activation _really_?
 
 Activation metrics are a set of actions a new user performs that correlate with greater retention.
 
-Focusing on retention solves the trickiest part of defining an activation metric: it could be _anything_. Does a pageview count as activation? How about inviting a teammate? Creating their first object? Depending on your product, any or all of these could be an activation metric. It is **retention** that makes it clear.
+Focusing on retention solves the trickiest part of defining an activation metric: it could be _anything_. Does completing onboarding count as activation? Creating their first object? How about inviting a teammate? Depending on your product, any or all of these could be an activation metric. It is **retention** that makes it clear.
 
 At PostHog, we define activation metrics as a set of actions where a company is much more likely to be using the product 3 months after starting. For [session replay](/session-replay), after analyzing multiple potential metrics, we found that watching 5 or more replays and setting a replay filter at least once were the actions that resulted in the highest retention rate.
 
@@ -46,7 +46,7 @@ How did we settle on watching 5 or more replays and setting a replay filter at l
 
 2. Creating groups of 3-5 events to test together. We aimed for 5-10 different groups, including the number of times the event occurs (e.g. watched 5 replays vs. watched 1 replay). Sometimes users have to do something more than once to reach their "ah-ha" moment.
 
-![Event groups](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_06_at_11_36_20_2x_89a95ebdf3.png)
+![Event groups](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_18_at_12_50_05_2x_c8dd1a75db.png)
 
 3. Writing a query to test how the event groups correlate with retention (see below).
 
