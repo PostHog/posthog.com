@@ -2,43 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
+import { DotLottiePlayer, PlayerEvents } from '@dotlottie/react-player'
 
 const WelderHog = () => {
-    const [ready, setReady] = useState(false)
-    const [containerRef, inView] = useInView({ threshold: 0 })
-    const videoRef = useRef(null)
-
-    useEffect(() => {
-        if (inView) {
-            videoRef?.current?.play()
-        } else {
-            videoRef?.current?.pause()
-        }
-    }, [inView, ready])
-
-    return (
-        <div ref={containerRef}>
-            <video
-                ref={videoRef}
-                onCanPlay={() => {
-                    setReady(true)
-                }}
-                onEnded={() => {
-                    if (videoRef?.current) {
-                        videoRef.current.currentTime = 3
-                        videoRef?.current?.play()
-                    }
-                }}
-                playsInline
-                muted
-                preload="none"
-                className="w-full"
-            >
-                <source src={`${process.env.GATSBY_CLOUDFRONT_URL}/welder-hog.webm`} type="video/webm" />
-                <source src={`${process.env.GATSBY_CLOUDFRONT_URL}/welder-hog.mp4`} type="video/mp4" />
-            </video>
-        </div>
-    )
+    return <DotLottiePlayer src={`/lotties/home/welder-hog.lottie`} autoplay loop />
 }
 
 const examples = [
