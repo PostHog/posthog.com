@@ -98,8 +98,6 @@ A great developer experience enables product engineers to ship fast and focus on
 
 > “Investing heavily in the developer experience: whether it’s metrics, logging, tracing and error tracking, or development workflow. Build times are blazing fast: our CI to deploy time is ~5m. Everyone uses a M1 Pro Macbook, and you have budget for other equipment should you need it.”
 
-<NewsletterForm />
-
 ## Product engineering skills
 
 From these characteristics, we can define the skills product engineers have, here’s a list:

@@ -69,3 +69,5 @@ Once created, we can then use it in funnels or trends, to target surveys, or as 
   alt="PostHog web analytics dashboard with conversion goal"
   classes="rounded"
 />
+
+<NewsletterForm />

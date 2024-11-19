@@ -221,3 +221,5 @@ Now PostHog is able to calculate our goal metric for our experiment results.
 
 - [How to set up Node.js (Express) analytics, feature flags, and more](/tutorials/node-express-analytics)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
+
+<NewsletterForm />

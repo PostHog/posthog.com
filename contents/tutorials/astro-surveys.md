@@ -612,3 +612,5 @@ If you capture identified events, you can also filter these results based on [pe
 - [How to set up A/B tests in Astro](/tutorials/astro-ab-tests)
 - [How to set up Astro analytics, feature flags, and more](/tutorials/astro-analytics)
 - [How to analyze surveys with ChatGPT](/tutorials/analyze-surveys-with-chatgpt)
+
+<NewsletterForm />

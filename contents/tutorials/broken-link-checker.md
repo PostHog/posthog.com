@@ -151,3 +151,5 @@ You can then test the destination and it will start sending 404s to Slack.
 - [How to set up Next.js monitoring](/tutorials/nextjs-monitoring)
 - [How to track new and returning users in PostHog](/tutorials/track-new-returning-users)
 - [How to improve web app performance using PostHog session replays](/tutorials/performance-metrics)
+
+<NewsletterForm />

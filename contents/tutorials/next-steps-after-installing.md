@@ -174,3 +174,5 @@ Read more about setting up and using experiments in [our product manual](/manual
 - [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
 - [Calculating average session duration, time on site, and other session-based metrics](/tutorials/session-metrics)
+
+<NewsletterForm />

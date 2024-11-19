@@ -68,3 +68,5 @@ You want to work **up** this list because it creates more accurate user stats. F
 
 - See our [docs on identifying users](/docs/integrate/identifying-users) for more details
 - [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics)
+
+<NewsletterForm />

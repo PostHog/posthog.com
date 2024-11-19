@@ -65,3 +65,5 @@ This brings you to your site with the toolbar active. From here, you can click b
 - [What to do after installing PostHog in 5 steps](/tutorials/next-steps-after-installing)
 - [How to track performance marketing in PostHog](/tutorials/performance-marketing)
 - [How to do cookieless tracking with PostHog](/tutorials/cookieless-tracking)
+
+<NewsletterForm />
