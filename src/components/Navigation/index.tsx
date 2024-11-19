@@ -9,6 +9,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import React, { useEffect, useState } from 'react'
 import topLevelNav from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
+import { navigate } from 'gatsby'
 
 const MenuItem = ({ name, children, internal, url, icon, color, depth = 0 }: IMenu & { depth?: number }) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -31,6 +32,14 @@ const MenuItem = ({ name, children, internal, url, icon, color, depth = 0 }: IMe
         setIsActive(url?.split('?')[0] === pathname || open)
     }, [pathname])
 
+    const handleParentButtonClick = () => {
+        setIsOpen(!isOpen)
+        const newURL = url || children?.find(({ url }) => !!url)?.url
+        if (newURL) {
+            navigate(newURL)
+        }
+    }
+
     return (
         <li
             className={`${depth === 1 ? 'ml-0' : depth === 2 ? 'pl-5' : ''} ${
@@ -49,7 +58,7 @@ const MenuItem = ({ name, children, internal, url, icon, color, depth = 0 }: IMe
                 {hasChildren ? (
                     // top-level accordion
                     <button
-                        onClick={() => setIsOpen(!isOpen)}
+                        onClick={handleParentButtonClick}
                         className={`flex items-center justify-between w-full p-1 hover:bg-accent dark:hover:bg-accent-dark rounded text-sm relative z-10 border border-b-2 border-transparent hover:border-light dark:hover:border-dark hover:-top-px active:top-[.5px] ${
                             depth === 0 && isActive ? 'font-bold' : ''
                         } ${depth === 2 && isActive ? ' hover:border-transparent' : 'font-semibold'}`}
