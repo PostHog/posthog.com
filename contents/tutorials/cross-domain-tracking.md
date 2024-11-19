@@ -1,6 +1,6 @@
 ---
 title: How to set up cross-domain tracking in PostHog
-date: 2024-11-18
+date: 2024-11-19
 author:
  - ian-vanagas
 tags:
@@ -57,7 +57,7 @@ export default FirstDomain
 
 On the second domain, we can check for the `session_id` and `distinct_id` in the URL hash and then bootstrap those values in our PostHog initialization.
 
-In our barebones React example, our `main.jsx` file would look like this:
+In our barebones React example, our second domain's `main.jsx` file would look like this:
 
 ```js
 import { StrictMode } from 'react'
