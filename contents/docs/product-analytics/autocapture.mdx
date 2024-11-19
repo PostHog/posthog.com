@@ -238,9 +238,13 @@ Clipboard autocapture respects other privacy settings. For example, won't captur
 
 ## Dead clicks autocapture
 
-A dead click (or slow click) is a click which isn't followed by a change to the page. They indicate that users are expecting to be able to interact with something but cannot. 
+A dead click (or slow click) is a click which isn't followed by a change to the page. 
 
-You can collect dead clicks with the Web SDK by enabling them in PostHog settings. Or by setting your config
+Dead clicks are a great way to identify opportunities to improve your UI. Showing you where your users expect to be able to interact with the page but cannot.
+
+You can collect dead clicks with the Web SDK by enabling them in PostHog settings. 
+
+Or by setting your config:
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
