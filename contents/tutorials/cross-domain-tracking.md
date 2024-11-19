@@ -16,7 +16,7 @@ We recommend using the same PostHog project across your product to ensure accura
 
 ## Cross subdomain tracking with automatic first-party cookies
 
-If you are using the JavaScript snippet or `posthog-js`, PostHog automatically sets a first-party cookie that works between subdomains. For example, the same cookie would work for `posthog.com`, `us.posthog.com`, and `merch.posthog.com`. If you use initialize `posthog-js` or the snippet with either `localStorage+cookie` (the default) or just `cookie`, you don’t need to do more work to make this happen.
+If you are using the [JavaScript snippet](/docs/getting-started/install?tab=snippet) or [`posthog-js`](/docs/libraries/js#option-2-install-via-package-manager), PostHog automatically sets a first-party cookie that works between subdomains. For example, the same cookie would work for `posthog.com`, `us.posthog.com`, and `merch.posthog.com`. If you use initialize `posthog-js` or the snippet with either `localStorage+cookie` (the default) or just `cookie`, you don’t need to do more work to make this happen.
 
 First-party cookies ensure you get the most data possible, as third-party cookies often get blocked or removed. Similarly, you can [set up a reverse proxy to send events from your domain](/docs/integrate/proxy) so they aren’t intercepted by tracking blockers.
 
