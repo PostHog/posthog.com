@@ -33,11 +33,13 @@ const MenuItem = ({ name, children, internal, url, icon, color, depth = 0 }: IMe
     }, [pathname])
 
     const handleParentButtonClick = () => {
-        setIsOpen(!isOpen)
-        const newURL = url || children?.find(({ url }) => !!url)?.url
-        if (newURL) {
-            navigate(newURL)
+        if (!isOpen) {
+            const newURL = url || children?.find(({ url }) => !!url)?.url
+            if (newURL) {
+                navigate(newURL)
+            }
         }
+        setIsOpen(!isOpen)
     }
 
     return (
