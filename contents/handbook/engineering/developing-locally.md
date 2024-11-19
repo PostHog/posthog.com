@@ -472,15 +472,7 @@ GRANT ALL PRIVILEGES ON posthog_dw_test.* TO 'posthog'@'%';
 FLUSH PRIVILEGES;
 ```
 
-Next, you'll need to install some MS SQL drivers for PostHog the application to connect to the MySQL database:
-
-```bash
-brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-release
-brew update
-HOMEBREW_ACCEPT_EULA=Y brew install msodbcsql18 mssql-tools18 FreeTDS
-```
-
-Without this, you'll get the following error when connecting a SQL database to data warehouse:
+Next, you'll need to install some MS SQL drivers for PostHog the application to connect to the MySQL database. Learn the entire process in [posthog/warehouse/README.md](https://github.com/PostHog/posthog/blob/master/posthog/warehouse/README.md). Without the drivers, you'll get the following error when connecting a SQL database to data warehouse:
 
 ```
 symbol not found in flat namespace '_bcp_batch'
