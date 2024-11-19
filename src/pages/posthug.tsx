@@ -12,7 +12,8 @@ const PostHugPage = () => {
                     <h1 className="text-5xl text-center">
                         Were you looking for
                         <div className="text-center my-8">
-                            <img src="/brand/posthog-logo.svg" className="w-full" />
+                            <img src="/brand/posthog-logo.svg" className="dark:hidden w-full" />
+                            <img src="/brand/posthog-logo-white.svg" className="hidden dark:block w-full" />
                         </div>
                     </h1>
 
