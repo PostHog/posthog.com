@@ -34,14 +34,14 @@ const MenuItem = ({ name, children, internal, url, icon, color, depth = 0 }: IMe
     return (
         <li
             className={`${depth === 1 ? 'ml-0' : depth === 2 ? 'pl-5' : ''} ${
-                depth === 2 && isActive
+                (depth === 2 && isActive) || (depth === 1 && isActive && !hasChildren)
                     ? 'bg-accent  dark:bg-accent-dark py-4 !-my-3.5  font-bold relative before:absolute before:top-0 before:-right-px before:w-full before:h-4 before:bg-light dark:before:bg-dark before:border-r before:border-b before:border-light dark:before:border-dark before:rounded-br-[10px] after:absolute after:bottom-0 after:-right-px after:w-full after:h-4 after:bg-light dark:after:bg-dark after:border-r after:border-t after:border-light dark:after:border-dark after:rounded-tr-[10px]'
                     : ''
             }`}
         >
             <div
                 className={`flex items-center px-1 ${
-                    depth === 2 && isActive
+                    (depth === 2 && isActive) || (depth === 1 && isActive && !hasChildren)
                         ? 'before:absolute before:bg-accent dark:before:bg-accent-dark before:top-[11px] before:bottom-[11px] before:rounded-tl-[11px] before:rounded-bl-[11px] before:right-px before:translate-x-full before:w-px before:z-10'
                         : ''
                 }`}
